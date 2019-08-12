@@ -1,0 +1,13 @@
+{
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.cache/**": true
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
+}

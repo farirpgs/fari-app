@@ -1,0 +1,24 @@
+body {
+  margin: 0 0 56px 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root,
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.route-box {
+  padding: 0 1rem;
+  width: 100%;
+}
