@@ -1,6 +1,6 @@
 import SaveIcon from "@material-ui/icons/Save";
-import kebabCase from "lodash/kebabCase";
 import React, { useState } from "react";
+import uuid from "uuid/v4";
 import { routerHistory } from "..";
 import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
@@ -34,7 +34,7 @@ export const CreateCharacter = props => {
   );
 
   async function save() {
-    const id = createId(kebabCase(character["name"]));
+    const id = uuid();
     await getCharactersDb(game).put({ ...character, _id: id }, {});
     routerHistory.push(`/game/${game.slug}/play/${id}?new=true`);
   }
