@@ -10,14 +10,15 @@ const FudgeTypes = {
 
 function useFudge() {
   const [value, setValue] = useState("");
-  const rollAnimationCount = 50;
+  const rollAnimationCount = 30;
   function roll(count = 0) {
     const number = Math.floor((Math.random() * 100) % 3);
     setValue(FudgeTypes[number]);
+
     if (count !== rollAnimationCount) {
       setTimeout(() => {
         roll(count + 1);
-      }, 25);
+      }, 50);
     }
   }
   function reset() {
@@ -38,30 +39,34 @@ export const FudgeDices = props => {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={async () => {
-          fudge1.roll();
-          fudge2.roll();
-          fudge3.roll();
-          fudge4.roll();
-        }}
-      >
-        Roll
-      </Button>
+      <div className="row center-xs">
+        <div className="col-xs-12">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={async () => {
+              fudge1.roll();
+              fudge2.roll();
+              fudge3.roll();
+              fudge4.roll();
+            }}
+          >
+            Roll
+          </Button>
+        </div>
+      </div>
 
-      <div className="row">
-        <div className="col-xs-1">
+      <div className="row center-xs">
+        <div className="col-md-1">
           <Dice size={1}>{fudge1.value}</Dice>
         </div>
-        <div className="col-xs-1">
+        <div className="col-md-1">
           <Dice size={1}>{fudge2.value}</Dice>
         </div>
-        <div className="col-xs-1">
+        <div className="col-md-1">
           <Dice size={1}>{fudge3.value}</Dice>
         </div>
-        <div className="col-xs-1">
+        <div className="col-md-1">
           <Dice size={1}>{fudge4.value}</Dice>
         </div>
       </div>

@@ -1,7 +1,8 @@
-import Fab from "@material-ui/core/Fab";
 import SaveIcon from "@material-ui/icons/Save";
 import kebabCase from "lodash/kebabCase";
 import React, { useState } from "react";
+import { routerHistory } from "..";
+import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
 import { charactersDb } from "../database/database";
 import { getGameBySlug } from "../games/games";
@@ -18,33 +19,25 @@ export const CreateCharacter = props => {
       <h2>
         <AppLink to={`/g/${game.slug}`}>All Characters</AppLink>
       </h2>
-      <Fab
-        color="secondary"
-        style={{
-          position: "fixed",
-          zIndex: 1,
-          bottom: "5rem",
-          right: "2rem"
-        }}
-        onClick={async () => {
-          const id = createId(kebabCase(character["name"]));
-          await charactersDb.put({ ...character, _id: id }, {});
-          location.href = `/g/${game.slug}/play/${id}`;
-        }}
-      >
+      <AppFab onClick={save}>
         <SaveIcon />
-      </Fab>
+      </AppFab>
 
       <br />
-      <br />
-      <br />
       <CharacterFields
-        fields={game.fields}
+        rows={game.rows}
         character={character}
         setCharacter={setCharacter}
+        onSubmit={save}
       />
     </div>
   );
+
+  async function save() {
+    const id = createId(kebabCase(character["name"]));
+    await charactersDb.put({ ...character, _id: id }, {});
+    routerHistory.push(`/g/${game.slug}/play/${id}`);
+  }
 };
 
 function createId(slug: string) {

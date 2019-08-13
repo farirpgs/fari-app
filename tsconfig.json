@@ -1,4 +1,5 @@
 {
+  // "extends": "tslint-react-hooks",
   "compilerOptions": {
     "target": "es5",
     "allowSyntheticDefaultImports": true,

@@ -3,20 +3,36 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, withRouter } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import "./index.css";
 import { AppBottomNavigation } from "./root/AppBottomNavigation";
 import { AppRouter } from "./root/AppRouter";
 import { theme } from "./theme";
 
+export let routerHistory = {} as any;
+
+export const History = withRouter(props => {
+  const {
+    history,
+    children,
+    location: { pathname }
+  } = props;
+  useEffect(() => {
+    routerHistory = history;
+  }, [pathname]);
+
+  return null;
+});
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <ScrollToTop />
+        <History />
         <AppBar position="static">
           <Toolbar
             style={{

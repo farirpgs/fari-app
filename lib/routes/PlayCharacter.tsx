@@ -1,5 +1,7 @@
-import Button from "@material-ui/core/Button";
-import React, { useEffect, useState } from "react";
+import Snackbar from "@material-ui/core/Snackbar";
+import SaveIcon from "@material-ui/icons/Save";
+import React, { useCallback, useEffect, useState } from "react";
+import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
 import { AppProgress } from "../components/AppProgress";
 import { charactersDb } from "../database/database";
@@ -13,13 +15,16 @@ export const PlayCharacter = props => {
   const [character, setCharacter] = useState({});
   const isLoading = Object.keys(character).length === 0;
 
+  const load = useCallback(async () => {
+    const result = await charactersDb.get<ICharacter>(characterId);
+    setCharacter(result);
+  }, [gameSlug, characterId]);
+
   useEffect(() => {
     load();
-    async function load() {
-      const result = await charactersDb.get<ICharacter>(characterId);
-      setCharacter(result);
-    }
-  }, [gameSlug, characterId]);
+  }, [load]);
+
+  const [snackOpened, setSnackOpened] = React.useState(false);
 
   return (
     <div>
@@ -29,30 +34,29 @@ export const PlayCharacter = props => {
         <h2>
           <AppLink to={`/g/${game.slug}`}>All Characters</AppLink>
         </h2>
+        <Snackbar
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={snackOpened}
+          onClose={() => setSnackOpened(false)}
+          message={<span id="message-id">Character Updated</span>}
+        />
 
         {!isLoading && (
           <div className="row">
             <div className="col-xs-12">
               <div>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={async () => {
-                    await charactersDb.put(character, {});
-                    location.reload();
-                  }}
-                >
-                  Update
-                </Button>
-                <br />
-                <br />
+                <AppFab onClick={save}>
+                  <SaveIcon />
+                </AppFab>
                 <br />
                 <CharacterFields
-                  fields={game.fields}
+                  rows={game.rows}
                   character={character}
                   setCharacter={async character => {
                     setCharacter(character);
                   }}
+                  onSubmit={save}
                 />
               </div>
             </div>
@@ -61,4 +65,10 @@ export const PlayCharacter = props => {
       </div>
     </div>
   );
+
+  async function save() {
+    await charactersDb.put(character, {});
+    await load();
+    setSnackOpened(true);
+  }
 };
