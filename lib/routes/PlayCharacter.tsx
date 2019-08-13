@@ -1,3 +1,4 @@
+import Divider from "@material-ui/core/Divider";
 import Snackbar from "@material-ui/core/Snackbar";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useCallback, useEffect, useState } from "react";
@@ -42,6 +43,7 @@ export const PlayCharacter = props => {
         <h2>
           <AppLink to={`/game/${game.slug}`}>All Characters</AppLink>
         </h2>
+        <Divider style={{ margin: "1rem 0" }} />
         <Snackbar
           autoHideDuration={2000}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}

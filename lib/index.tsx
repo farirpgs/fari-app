@@ -20,6 +20,7 @@ export const History = withRouter(props => {
     children,
     location: { pathname }
   } = props;
+  // tslint:disable-next-line: react-hooks-nesting
   useEffect(() => {
     routerHistory = history;
   }, [pathname]);

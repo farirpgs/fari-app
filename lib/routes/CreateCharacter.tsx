@@ -1,3 +1,4 @@
+import Divider from "@material-ui/core/Divider";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useState } from "react";
 import uuid from "uuid/v4";
@@ -19,6 +20,7 @@ export const CreateCharacter = props => {
       <h2>
         <AppLink to={`/game/${game.slug}`}>All Characters</AppLink>
       </h2>
+      <Divider style={{ margin: "1rem 0" }} />
       <AppFab onClick={save}>
         <SaveIcon />
       </AppFab>

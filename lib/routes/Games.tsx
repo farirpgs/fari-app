@@ -1,4 +1,5 @@
 import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -12,7 +13,7 @@ export const Games = props => {
   return (
     <div className="route-box">
       <h1>Games</h1>
-
+      <Divider style={{ margin: "1rem 0" }} />
       <div>
         <List component="nav">
           {games.map(game => (

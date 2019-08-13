@@ -63,8 +63,8 @@ export const Characters = props => {
       />
       <div className="route-box">
         <h1>Characters</h1>
-        <h2>{game.name}</h2>
-
+        <h2>Game: {game.name}</h2>
+        <Divider style={{ margin: "1rem 0" }} />
         <AppFab
           onClick={() => {
             routerHistory.push(`/game/${game.slug}/create`);
