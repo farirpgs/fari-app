@@ -4,7 +4,6 @@ export enum FieldType {
   Category,
   Number,
   Boolean,
-
   Paper
 }
 
@@ -12,9 +11,6 @@ export interface IField {
   label?: string;
   slug?: string;
   type: FieldType;
-
-  offet?: number;
-  column: number;
 
   min?: number;
   max?: number;

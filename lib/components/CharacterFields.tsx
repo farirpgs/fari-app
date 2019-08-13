@@ -56,44 +56,62 @@ export function CharacterFields<T>(props: {
         {Object.keys(tabs).map(tabName => (
           <Tab key={tabName} label={tabName} />
         ))}
+        {/* <Tab label={"Export"} /> */}
       </Tabs>
       <br />
       <div className="row">
-        <div className="col-xs-12">
-          {currentTagFieldsRows.map((row, index) => {
-            return (
-              <div
-                className="row"
-                key={index}
-                style={{
-                  marginBottom: "1rem"
-                }}
-              >
-                {row.fields.map(field => (
-                  <div
-                    key={`${field.slug}-${index}`}
-                    className={`col-md-${field.column} col-md-offset-${
-                      field.offet
-                    } col-xs-12`}
-                  >
-                    <FormControl style={{ width: "100%" }}>
-                      {renderTextField(field)}
-                      {renderBigTextField(field)}
-                      {renderNumber(field)}
-                      {renderBoolean(field)}
-                      {renderCategory(field)}
-                      {renderPaper(field)}
-                      <FormHelperText>{field.helper}</FormHelperText>
-                    </FormControl>
-                  </div>
-                ))}
-              </div>
-            );
-          })}
-        </div>
+        <div className="col-xs-12">{renderRows(currentTagFieldsRows)}</div>
       </div>
     </form>
   );
+
+  function renderRows(rows: Array<IRow>) {
+    {
+      return rows.map((row, index) => {
+        return (
+          <div
+            className="row"
+            key={index}
+            style={{
+              marginBottom: "1rem"
+            }}
+          >
+            {row.columns.map((column, index) => {
+              const shouldRenderSubRows =
+                !!column.rows && column.rows.length > 0;
+
+              const shouldRenderField = !!column.field;
+              return (
+                <div
+                  key={index}
+                  className={`col-md-${column.col} col-md-offset-${
+                    column.offet
+                  } col-xs-12`}
+                >
+                  {shouldRenderField && renderField(column.field)}
+                  {shouldRenderSubRows && renderRows(column.rows)}
+                </div>
+              );
+            })}
+          </div>
+        );
+      });
+    }
+  }
+
+  function renderField(field: IField) {
+    return (
+      <FormControl key={field.slug} style={{ width: "100%" }}>
+        {renderTextField(field)}
+        {renderBigTextField(field)}
+        {renderNumber(field)}
+        {renderBoolean(field)}
+        {renderCategory(field)}
+        {renderPaper(field)}
+        <FormHelperText>{field.helper}</FormHelperText>
+      </FormControl>
+    );
+  }
 
   function renderPaper(field: IField): React.ReactNode {
     return (
@@ -148,7 +166,7 @@ export function CharacterFields<T>(props: {
       field.type === FieldType.Number && (
         <TextField
           label={field.label}
-          value={character[field.slug] || field.default}
+          value={character[field.slug] || field.default || ""}
           type="number"
           variant="outlined"
           inputProps={{ min: field.min, max: field.max }}

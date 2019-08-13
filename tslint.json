@@ -1,4 +1,6 @@
 {
+  "extends": ["tslint-react-hooks"],
+
   "rules": {
     "no-var-keyword": true,
     "semicolon": [true, "always", "ignore-bound-class-methods"],
@@ -20,6 +22,7 @@
     "no-switch-case-fall-through": true,
     "no-unused-expression": true,
     "prefer-object-spread": true,
-    "eofline": true
+    "eofline": true,
+    "react-hooks-nesting": "error"
   }
 }

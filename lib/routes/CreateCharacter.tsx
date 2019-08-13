@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { routerHistory } from "..";
 import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
+import { CharacterFields } from "../components/CharacterFields";
 import { charactersDb } from "../database/database";
 import { getGameBySlug } from "../games/games";
-import { CharacterFields } from "./CharacterFields";
 
 export const CreateCharacter = props => {
   const { gameSlug } = props.match.params;
@@ -17,7 +17,7 @@ export const CreateCharacter = props => {
     <div className="route-box">
       <h1>Create Character</h1>
       <h2>
-        <AppLink to={`/g/${game.slug}`}>All Characters</AppLink>
+        <AppLink to={`/game/${game.slug}`}>All Characters</AppLink>
       </h2>
       <AppFab onClick={save}>
         <SaveIcon />
@@ -36,7 +36,7 @@ export const CreateCharacter = props => {
   async function save() {
     const id = createId(kebabCase(character["name"]));
     await charactersDb.put({ ...character, _id: id }, {});
-    routerHistory.push(`/g/${game.slug}/play/${id}`);
+    routerHistory.push(`/game/${game.slug}/play/${id}?new=true`);
   }
 };
 

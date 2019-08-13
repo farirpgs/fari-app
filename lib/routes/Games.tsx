@@ -16,7 +16,7 @@ export const Games = props => {
       <div>
         <List component="nav">
           {games.map(game => (
-            <AppLink to={`/g/${game.slug}`} key={game.slug}>
+            <AppLink to={`/game/${game.slug}`} key={game.slug}>
               <ListItem>
                 <ListItemAvatar>
                   <Avatar>

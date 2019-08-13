@@ -7,6 +7,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
+import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
@@ -24,6 +25,14 @@ export const Characters = props => {
   const game = getGameBySlug(gameSlug);
 
   const [characters, setCharacters] = useState<Array<ICharacter>>(undefined);
+  const [
+    characterDeletedSnackBar,
+    setCharacterDeletedSnackBar
+  ] = React.useState({ visible: false });
+
+  const isLoading = characters === undefined;
+  const hasItems = characters && characters.length > 0;
+  const shouldShowEmptyNotice = !isLoading && !hasItems;
 
   const load = useCallback(async () => {
     const result = await charactersDb.allDocs<ICharacter>({
@@ -32,9 +41,11 @@ export const Characters = props => {
     setCharacters(result.rows.map(row => row.doc));
   }, []);
 
-  const isLoading = characters === undefined;
-  const hasItems = characters && characters.length > 0;
-  const shouldShowEmptyNotice = !isLoading && !hasItems;
+  async function deleteCharacter(character) {
+    await charactersDb.remove(character._id, character._rev, {});
+    await load();
+    setCharacterDeletedSnackBar({ visible: true });
+  }
 
   useEffect(() => {
     load();
@@ -49,11 +60,18 @@ export const Characters = props => {
 
         <AppFab
           onClick={() => {
-            routerHistory.push(`/g/${game.slug}/create`);
+            routerHistory.push(`/game/${game.slug}/create`);
           }}
         >
           <AddIcon />
         </AppFab>
+        <Snackbar
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={characterDeletedSnackBar.visible}
+          onClose={() => setCharacterDeletedSnackBar({ visible: false })}
+          message={<span id="message-id">Character Deleted</span>}
+        />
         {shouldShowEmptyNotice && (
           <Paper style={{ padding: "2rem", background: "aliceblue" }}>
             It seems you don't have any characters created yet. Click on the add
@@ -63,11 +81,11 @@ export const Characters = props => {
         {hasItems && (
           <div>
             <div className="row">
-              <div className="col-xs-12 col-md-8">
+              <div className="col-xs-12 col-md-4">
                 <List component="nav">
                   {characters.map((character, index) => (
                     <AppLink
-                      to={`/g/${game.slug}/play/${character._id}`}
+                      to={`/game/${game.slug}/play/${character._id}`}
                       key={character._id}
                     >
                       <ListItem>
@@ -84,12 +102,7 @@ export const Characters = props => {
                               e.stopPropagation();
                               e.preventDefault();
 
-                              await charactersDb.remove(
-                                character._id,
-                                character._rev,
-                                {}
-                              );
-                              load();
+                              deleteCharacter(character);
                             }}
                           >
                             <DeleteIcon />

@@ -7,15 +7,25 @@ import { Games } from "../routes/Games";
 import { NotFoundRoute } from "../routes/NotFoundRoute";
 import { PlayCharacter } from "../routes/PlayCharacter";
 
+const Scenes: React.FC<{}> = props => {
+  return (
+    <div className="route-box">
+      <h1>Scenes</h1>
+    </div>
+  );
+};
+
 export const AppRouter = () => (
   <Switch>
     <Route exact path={"/"} component={Games} />
-    <Route exact path={"/g/:gameSlug"} component={Characters} />
-    <Route exact path={"/g/:gameSlug/create"} component={CreateCharacter} />
+    <Route exact path={"/games"} component={Games} />
+    <Route exact path={"/game/:gameSlug"} component={Characters} />
+    <Route exact path={"/game/:gameSlug/create"} component={CreateCharacter} />
     <Route exact path={"/dices"} component={Dices} />
+    <Route exact path={"/scenes"} component={Scenes} />
     <Route
       exact
-      path={"/g/:gameSlug/play/:characterId"}
+      path={"/game/:gameSlug/play/:characterId"}
       component={PlayCharacter}
     />
     <Route path="*" component={NotFoundRoute} status={404} />

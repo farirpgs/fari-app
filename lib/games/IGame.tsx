@@ -6,8 +6,19 @@ export interface IGame {
   rows: Array<IRow>;
 }
 
+export interface IColumn {
+  col: number;
+  offet?: number;
+  field?: IField;
+  rows?: Array<IRow>;
+}
+
 export interface IRow {
-  fields: Array<IField>;
+  columns?: Array<IColumn>;
+  tab?: string;
+}
+export interface ISubRow {
+  columns?: Array<IColumn>;
   tab?: string;
 }
 
