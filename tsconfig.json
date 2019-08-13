@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "jsx": "react",
     "module": "commonjs",
     "outDir": "./.tsc",

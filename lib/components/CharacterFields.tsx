@@ -12,7 +12,24 @@ import { FieldType, IField } from "../games/IField";
 import { IRow } from "../games/IGame";
 
 const converter = new showdown.Converter();
-
+export const selectors = {
+  rowsToTabs(rows: Array<IRow>): { [tabName: string]: Array<IRow> } {
+    return rows.reduce(
+      (tabs, row) => {
+        if (!row.tab) {
+          tabs["Default"].push(row);
+          return tabs;
+        }
+        if (!tabs[row.tab]) {
+          tabs[row.tab] = [];
+        }
+        tabs[row.tab].push(row);
+        return tabs;
+      },
+      { Default: [] }
+    );
+  }
+};
 export function CharacterFields<T>(props: {
   rows: Array<IRow>;
   character: T;
@@ -22,20 +39,7 @@ export function CharacterFields<T>(props: {
   const { rows, character, setCharacter } = props;
   const [currentTab, setCurrentTab] = useState(0);
 
-  const tabs: { [tabName: string]: Array<IRow> } = rows.reduce(
-    (tabs, row) => {
-      if (!row.tab) {
-        tabs["Default"].push(row);
-        return tabs;
-      }
-      if (!tabs[row.tab]) {
-        tabs[row.tab] = [];
-      }
-      tabs[row.tab].push(row);
-      return tabs;
-    },
-    { Default: [] }
-  );
+  const tabs = selectors.rowsToTabs(rows);
   const currentTabName = Object.keys(tabs)[currentTab];
   const currentTagFieldsRows = tabs[currentTabName];
 
