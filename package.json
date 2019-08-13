@@ -7,7 +7,7 @@
     "start": "parcel ./lib/index.html --target browser",
     "build": "tsc --noEmit && npm run test && parcel build ./lib/index.html --target browser",
     "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
-    "test": "jest --coverage packages"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@material-ui/core": "^4.3.1",
