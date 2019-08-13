@@ -124,7 +124,6 @@ export function CharacterFields<T>(props: {
     return (
       field.type === FieldType.Paper && (
         <div>
-          <h2>{field.label}</h2>
           <Paper style={{ padding: "1rem" }}>
             <div
               dangerouslySetInnerHTML={{

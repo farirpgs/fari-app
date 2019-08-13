@@ -76,7 +76,7 @@ Spend a fate point or free invoke. Choose one:
 
 Accept a complication for a fate point.
 
-- Event-based: You have \_**\_ aspectand are in \_\_** situation, so it makessense that, unfortunately, \_\_\_\_ wouldhappen to you. Damn your luck.
+- Event-based: You have \_**\_ aspect and are in \_\_** situation, so it makessense that, unfortunately, \_\_\_\_ would happen to you. Damn your luck.
 - Decision-based: You have \_**\_ aspect in \_\_** situation, so it makes sense that you’d decide to \_**\_. This goes wrong when \_\_** happens.
 
 # Refresh
@@ -86,10 +86,11 @@ At the start of a new session, you reset your fate points to your refresh rate. 
 # Spending Fate Points
 
 Spend fate points to:
--Invoke an aspect
--Power a stunt
--Refuse a compel
--Declare a story detail
+
+- Invoke an aspect
+- Power a stunt
+- Refuse a compel
+- Declare a story detail
 
 ---
 
@@ -100,11 +101,11 @@ Spend fate points to:
 
 # Contests
 
-- Contesting characters roll appropriateskills.
-- If you got the highest result, you scorea victory.
-- If you succeed with style and no oneelse does, then you get two victories.
-- If there’s a tie for the highest result, noone gets a victory, and an unexpectedtwist occurs.
-- The first participant to achieve threevictories wins the contest.
+- Contesting characters roll appropriate skills.
+- If you got the highest result, you score a victory.
+- If you succeed with style and no one else does, then you get two victories.
+- If there’s a tie for the highest result, no one gets a victory, and an unexpectedtwist occurs.
+- The first participant to achieve three victories wins the contest.
 
 # Conflicts
 
