@@ -19,7 +19,6 @@ const refresh: IField = {
   slug: "refresh",
   type: FieldType.Number,
   default: "3",
-
   min: 0
 };
 
@@ -27,7 +26,6 @@ const fatePoints: IField = {
   label: "Current Fate Points",
   slug: "fatePoints",
   type: FieldType.Number,
-
   min: 0
 };
 
@@ -42,14 +40,16 @@ const approachCategory: IField = {
   slug: "approaches",
   type: FieldType.Category
 };
+const skillsCategory: IField = {
+  label: "Skills",
+  slug: "skills",
+  type: FieldType.Category
+};
 
 const highConcept: IField = {
   label: "High Concept",
   slug: "aspect1",
-  type: FieldType.TextField,
-  helper: `This is a single phrase or sentence that
-           neatly sums up your character, saying who
-           you are, what you do, what your “deal” is`
+  type: FieldType.TextField
 };
 
 const careful: IField = {
@@ -64,11 +64,7 @@ const careful: IField = {
 const trouble: IField = {
   label: "Trouble",
   slug: "aspect2",
-  type: FieldType.TextField,
-  helper: `Decide on the thing that always gets you into trouble.
-          It could be a personal weakness, or a recurring enemy,
-          or an important obligation. Anything that makes your life
-          complicated`
+  type: FieldType.TextField
 };
 
 const clever: IField = {
@@ -83,12 +79,7 @@ const clever: IField = {
 const aspect3: IField = {
   label: "...",
   slug: "aspect3",
-  type: FieldType.TextField,
-  helper: `Think of something really important or
-          interesting about your character. Are
-          they the strongest person in their hometown?
-          Do they carry a mighty sword known through history?
-          Do they talk too much? Are they filthy rich?`
+  type: FieldType.TextField
 };
 
 const forceful: IField = {
@@ -141,19 +132,12 @@ const sneaky: IField = {
 const stunts: IField = {
   label: "Stunts",
   slug: "stunts",
-  type: FieldType.BigTextField,
-  helper: ` Stunt is a special trait that changes the way
-          an approach works for your character.
-          Generally, stunts give you a bonus (almost always +2)
-          to a certain approach when used with a particular
-          action under specific circumstances.
-
-          However, if this is your first time playing a Fate game,
-          you might find it easier to pick your first stunt after
-          you’ve had a chance to play a bit, to give you an idea
-          of what a good stunt might be.
-          Just add your stunt during or after your first game session.
-          `
+  type: FieldType.BigTextField
+};
+const extras: IField = {
+  label: "Extras",
+  slug: "extra",
+  type: FieldType.BigTextField
 };
 
 const stressCategory: IField = {
@@ -167,24 +151,61 @@ const consequenceCategory: IField = {
   type: FieldType.Category
 };
 
-const stress1: IField = {
-  label: "Stress #1",
-  slug: "stress1",
-  type: FieldType.Boolean
+const stress: IField = {
+  label: "Stress",
+  slug: "stress",
+  default: 0,
+  min: 0,
+  max: 3,
+  marks: [
+    { label: "None", value: 0 },
+    { label: "#1", value: 1 },
+    { label: "#2", value: 2 },
+    { label: "#3", value: 3 }
+  ],
+  type: FieldType.Slider
 };
-const stress2: IField = {
-  label: "Stress #2",
-  slug: "stress2",
-  type: FieldType.Boolean
+
+const physicalStress: IField = {
+  label: "Physical Stress",
+  slug: "physicalStress",
+  default: 0,
+  min: 0,
+  max: 4,
+  marks: [
+    { label: "None", value: 0 },
+    { label: "#1", value: 1 },
+    { label: "#2", value: 2 },
+    { label: "#3", value: 3 },
+    { label: "#4", value: 4 }
+  ],
+  type: FieldType.Slider
 };
-const stress3: IField = {
-  label: "Stress #3",
-  slug: "stress3",
-  type: FieldType.Boolean
+const mentalStress: IField = {
+  label: "Mental Stress",
+  slug: "mentalStress",
+  default: 0,
+  min: 0,
+  max: 4,
+  marks: [
+    { label: "None", value: 0 },
+    { label: "#1", value: 1 },
+    { label: "#2", value: 2 },
+    { label: "#3", value: 3 },
+    { label: "#4", value: 4 }
+  ],
+  type: FieldType.Slider
 };
+
 const mildConsequence: IField = {
   label: "Mild",
   slug: "mildConsequence",
+  type: FieldType.TextField
+};
+
+const mildConsequence2: IField = {
+  label: "Mild",
+  slug: "mildConsequence2",
   type: FieldType.TextField
 };
 
@@ -252,11 +273,7 @@ export const FateAccelerated: IGame = {
           field: stressCategory,
           rows: [
             {
-              columns: [
-                { col: 3, field: stress1 },
-                { col: 3, field: stress2 },
-                { col: 3, field: stress3 }
-              ]
+              columns: [{ col: 10, field: stress }]
             }
           ]
         },
@@ -267,6 +284,72 @@ export const FateAccelerated: IGame = {
             {
               columns: [
                 { col: 12, field: mildConsequence },
+                { col: 12, field: moderateConsequence },
+                { col: 12, field: severeConsequence }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    { tab: "Guide", columns: [{ col: 6, field: guide }] }
+  ]
+};
+
+export const FateCore: IGame = {
+  name: "Fate Core",
+  slug: "fate",
+  rows: [
+    { columns: [{ col: 6, field: name }] },
+    {
+      columns: [
+        { col: 6, field: description },
+        { col: 3, field: refresh },
+        { col: 3, field: fatePoints }
+      ]
+    },
+    {
+      columns: [
+        {
+          col: 6,
+          rows: [
+            { columns: [{ col: 12, field: aspectCategory }] },
+            { columns: [{ col: 12, field: highConcept }] },
+            { columns: [{ col: 12, field: trouble }] },
+            { columns: [{ col: 12, field: aspect3 }] },
+            { columns: [{ col: 12, field: aspect4 }] },
+            { columns: [{ col: 12, field: aspect5 }] }
+          ]
+        },
+        {
+          col: 6,
+          rows: [{ columns: [{ col: 12, field: skillsCategory }] }]
+        }
+      ]
+    },
+    { columns: [{ col: 6, field: extras }, { col: 6, field: stunts }] },
+    {
+      columns: [
+        {
+          col: 6,
+          field: stressCategory,
+          rows: [
+            {
+              columns: [{ col: 10, field: physicalStress }]
+            },
+            {
+              columns: [{ col: 10, field: mentalStress }]
+            }
+          ]
+        },
+        {
+          col: 6,
+          field: consequenceCategory,
+          rows: [
+            {
+              columns: [
+                { col: 6, field: mildConsequence },
+                { col: 6, field: mildConsequence2 },
                 { col: 12, field: moderateConsequence },
                 { col: 12, field: severeConsequence }
               ]

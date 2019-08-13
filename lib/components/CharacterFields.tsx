@@ -3,9 +3,11 @@ import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Paper from "@material-ui/core/Paper";
+import Slider from "@material-ui/core/Slider";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import showdown from "showdown";
 import { FieldType, IField } from "../games/IField";
@@ -111,6 +113,7 @@ export function CharacterFields<T>(props: {
         {renderNumber(field)}
         {renderBoolean(field)}
         {renderCategory(field)}
+        {renderSlider(field)}
         {renderPaper(field)}
         <FormHelperText>{field.helper}</FormHelperText>
       </FormControl>
@@ -144,6 +147,35 @@ export function CharacterFields<T>(props: {
     );
   }
 
+  function renderSlider(field: IField): React.ReactNode {
+    return (
+      field.type === FieldType.Slider && (
+        <>
+          <Typography id="discrete-slider-restrict" gutterBottom>
+            {field.label}
+          </Typography>
+          <Slider
+            defaultValue={field.default as number}
+            valueLabelFormat={(value: number) => {
+              return field.marks.findIndex(mark => mark.value === value) + 1;
+            }}
+            step={null}
+            valueLabelDisplay="auto"
+            value={character[field.slug] || field.default}
+            min={field.min}
+            max={field.max}
+            onChange={(e, value) => {
+              setCharacter({
+                ...character,
+                [field.slug]: value
+              });
+            }}
+            marks={field.marks}
+          />
+        </>
+      )
+    );
+  }
   function renderBoolean(field: IField): React.ReactNode {
     return (
       field.type === FieldType.Boolean && (
@@ -166,11 +198,17 @@ export function CharacterFields<T>(props: {
   }
 
   function renderNumber(field: IField): React.ReactNode {
+    const shouldRenderDefaultValue =
+      character[field.slug] === undefined && field.default !== undefined;
     return (
       field.type === FieldType.Number && (
         <TextField
           label={field.label}
-          value={character[field.slug] || field.default || ""}
+          value={
+            shouldRenderDefaultValue
+              ? field.default
+              : character[field.slug] || ""
+          }
           type="number"
           variant="outlined"
           inputProps={{ min: field.min, max: field.max }}
@@ -189,11 +227,17 @@ export function CharacterFields<T>(props: {
   }
 
   function renderBigTextField(field: IField): React.ReactNode {
+    const shouldRenderDefaultValue =
+      character[field.slug] === undefined && field.default !== undefined;
     return (
       field.type === FieldType.BigTextField && (
         <TextField
           label={field.label}
-          value={character[field.slug] || ""}
+          value={
+            shouldRenderDefaultValue
+              ? field.default
+              : character[field.slug] || ""
+          }
           multiline
           rows="5"
           style={{
@@ -212,11 +256,18 @@ export function CharacterFields<T>(props: {
   }
 
   function renderTextField(field: IField): React.ReactNode {
+    const shouldRenderDefaultValue =
+      character[field.slug] === undefined && field.default !== undefined;
+
     return (
       field.type === FieldType.TextField && (
         <TextField
           label={field.label}
-          value={character[field.slug] || ""}
+          value={
+            shouldRenderDefaultValue
+              ? field.default
+              : character[field.slug] || ""
+          }
           variant="outlined"
           style={{
             width: "100%"

@@ -4,6 +4,7 @@ export enum FieldType {
   Category,
   Number,
   Boolean,
+  Slider,
   Paper
 }
 
@@ -14,8 +15,9 @@ export interface IField {
 
   min?: number;
   max?: number;
-  default?: string;
+  default?: string | number;
 
   helper?: string;
   content?: string;
+  marks?: Array<{ value: number; label: string }>;
 }
