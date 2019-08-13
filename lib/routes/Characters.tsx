@@ -16,7 +16,7 @@ import { routerHistory } from "..";
 import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
 import { AppProgress } from "../components/AppProgress";
-import { charactersDb } from "../database/database";
+import { getCharactersDb } from "../database/database";
 import { getGameBySlug } from "../games/games";
 import { ICharacter } from "../games/IGame";
 
@@ -35,14 +35,14 @@ export const Characters = props => {
   const shouldShowEmptyNotice = !isLoading && !hasItems;
 
   const load = useCallback(async () => {
-    const result = await charactersDb.allDocs<ICharacter>({
+    const result = await getCharactersDb(game).allDocs<ICharacter>({
       include_docs: true
     });
     setCharacters(result.rows.map(row => row.doc));
   }, []);
 
   async function deleteCharacter(character) {
-    await charactersDb.remove(character._id, character._rev, {});
+    await getCharactersDb(game).remove(character._id, character._rev, {});
     await load();
     setCharacterDeletedSnackBar({ visible: true });
   }

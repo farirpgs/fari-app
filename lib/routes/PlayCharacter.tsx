@@ -5,7 +5,7 @@ import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
 import { AppProgress } from "../components/AppProgress";
 import { CharacterFields } from "../components/CharacterFields";
-import { charactersDb } from "../database/database";
+import { getCharactersDb } from "../database/database";
 import { getGameBySlug } from "../games/games";
 import { ICharacter } from "../games/IGame";
 
@@ -16,7 +16,7 @@ export const PlayCharacter = props => {
   const isLoading = Object.keys(character).length === 0;
 
   const load = useCallback(async () => {
-    const result = await charactersDb.get<ICharacter>(characterId);
+    const result = await getCharactersDb(game).get<ICharacter>(characterId);
     setCharacter(result);
   }, [gameSlug, characterId]);
 
@@ -82,7 +82,7 @@ export const PlayCharacter = props => {
   );
 
   async function save() {
-    await charactersDb.put(character, {});
+    await getCharactersDb(game).put(character, {});
     await load();
     setCharacterUpdatedSnackBar({ visible: true });
   }

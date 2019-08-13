@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import { FieldType, IField } from "./IField";
 import { IGame } from "./IGame";
 
@@ -199,23 +200,9 @@ const severeConsequence: IField = {
   type: FieldType.TextField
 };
 
-const ladderGuide: IField = {
+const guide: IField = {
   type: FieldType.Paper,
-
-  content: `
-# The Ladder
-- +8	Legendary
-- +7	Epic
-- +6	Fantastic
-- +5	Superb
-- +4	Great
-- +3	Good
-- +2	Fair
-- +1	Average
-- 0	Mediocre
-- -1	Poor
-- -2	Terrible
-`
+  content: readFileSync(__dirname + "/Fate.md", "utf-8")
 };
 
 export const FateAccelerated: IGame = {
@@ -288,6 +275,6 @@ export const FateAccelerated: IGame = {
         }
       ]
     },
-    { tab: "Guide", columns: [{ col: 12, field: ladderGuide }] }
+    { tab: "Guide", columns: [{ col: 6, field: guide }] }
   ]
 };

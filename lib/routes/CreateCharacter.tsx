@@ -5,7 +5,7 @@ import { routerHistory } from "..";
 import { AppFab } from "../components/AppFab";
 import { AppLink } from "../components/AppLink";
 import { CharacterFields } from "../components/CharacterFields";
-import { charactersDb } from "../database/database";
+import { getCharactersDb } from "../database/database";
 import { getGameBySlug } from "../games/games";
 
 export const CreateCharacter = props => {
@@ -35,7 +35,7 @@ export const CreateCharacter = props => {
 
   async function save() {
     const id = createId(kebabCase(character["name"]));
-    await charactersDb.put({ ...character, _id: id }, {});
+    await getCharactersDb(game).put({ ...character, _id: id }, {});
     routerHistory.push(`/game/${game.slug}/play/${id}?new=true`);
   }
 };

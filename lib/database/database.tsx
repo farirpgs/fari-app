@@ -1,3 +1,6 @@
 import PouchDB from "pouchdb";
+import { IGame } from "../games/IGame";
 
-export const charactersDb = new PouchDB("character");
+export function getCharactersDb(game: IGame) {
+  return new PouchDB(`characters-${game.slug}`);
+}
