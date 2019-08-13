@@ -54,6 +54,13 @@ export const Characters = props => {
   return (
     <div>
       {isLoading && <AppProgress />}
+      <Snackbar
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={characterDeletedSnackBar.visible}
+        onClose={() => setCharacterDeletedSnackBar({ visible: false })}
+        message={<span id="message-id">Character Deleted</span>}
+      />
       <div className="route-box">
         <h1>Characters</h1>
         <h2>{game.name}</h2>
@@ -65,13 +72,7 @@ export const Characters = props => {
         >
           <AddIcon />
         </AppFab>
-        <Snackbar
-          autoHideDuration={2000}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={characterDeletedSnackBar.visible}
-          onClose={() => setCharacterDeletedSnackBar({ visible: false })}
-          message={<span id="message-id">Character Deleted</span>}
-        />
+
         {shouldShowEmptyNotice && (
           <Paper style={{ padding: "2rem", background: "aliceblue" }}>
             It seems you don't have any characters created yet. Click on the add

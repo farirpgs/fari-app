@@ -64,7 +64,7 @@ export const PlayCharacter = props => {
                 <AppFab onClick={save}>
                   <SaveIcon />
                 </AppFab>
-                <br />
+
                 <CharacterFields
                   rows={game.rows}
                   character={character}
