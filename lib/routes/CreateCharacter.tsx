@@ -1,4 +1,3 @@
-import Divider from "@material-ui/core/Divider";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useState } from "react";
 import uuid from "uuid/v4";
@@ -6,21 +5,20 @@ import { routerHistory } from "..";
 import { AppFab } from "../components/AppFab/AppFab";
 import { AppLink } from "../components/AppLink/AppLink";
 import { CharacterFields } from "../components/CharacterFields/CharacterFields";
+import { Page } from "../components/Page/Page";
 import { getCharactersDb } from "../database/database";
 import { getGameBySlug } from "../games/games";
 
 export const CreateCharacter = props => {
   const { gameSlug } = props.match.params;
   const game = getGameBySlug(gameSlug);
-  const [character, setCharacter] = useState({});
+  const [character, setCharacter] = useState<Object>({});
 
   return (
-    <div className="route-box">
-      <h1>Create Character</h1>
-      <h2>
-        <AppLink to={`/game/${game.slug}`}>All Characters</AppLink>
-      </h2>
-      <Divider style={{ margin: "1rem 0" }} />
+    <Page
+      h1="Create Your Character"
+      h2={<AppLink to={`/game/${game.slug}`}>All Characters</AppLink>}
+    >
       <AppFab onClick={save}>
         <SaveIcon />
       </AppFab>
@@ -32,7 +30,7 @@ export const CreateCharacter = props => {
         setCharacter={setCharacter}
         onSubmit={save}
       />
-    </div>
+    </Page>
   );
 
   async function save() {
