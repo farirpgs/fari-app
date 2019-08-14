@@ -16,7 +16,12 @@ import { theme } from "./theme";
 let deferredPrompt: any;
 
 window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  console.log("beforeinstallprompt Event fired");
+
   deferredPrompt = e;
+
+  return false;
 });
 
 export let routerHistory = {} as any;
@@ -63,9 +68,9 @@ function App() {
                   // Wait for the user to respond to the prompt
                   const choiceResult = await deferredPrompt.userChoice;
                   if (choiceResult.outcome === "accepted") {
-                    console.log("User accepted the A2HS prompt");
+                    console.log("User accepted home screen installation");
                   } else {
-                    console.log("User dismissed the A2HS prompt");
+                    console.log("User dismissed home screen installation");
                   }
                   deferredPrompt = null;
                 }}
