@@ -126,7 +126,7 @@ export const Scene: React.FC<{
               );
             })}
           </div>
-          {/* <Divider style={{ margin: "1rem 0" }} /> */}
+
           <div className="row">
             {(scene.postIts || []).map((postIt, postItIndex) => (
               <div className="col-xs-4" key={postItIndex}>
@@ -142,7 +142,7 @@ export const Scene: React.FC<{
               </div>
             ))}
           </div>
-          {/* <Divider style={{ margin: "1rem 0" }} /> */}
+
           <div className="row">
             <div className="col-xs-12">
               <Typography variant="body1">Images</Typography>
