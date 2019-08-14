@@ -8,10 +8,10 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import showdown from "showdown";
 import { FieldType, IField } from "../../games/IField";
-import { IRow } from "../../games/IGame";
+import { ICharacter, IRow } from "../../games/IGame";
 
 const converter = new showdown.Converter();
 export const selectors = {
@@ -32,10 +32,11 @@ export const selectors = {
     );
   }
 };
-export function CharacterFields<T>(props: {
+
+export function CharacterFields(props: {
   rows: Array<IRow>;
-  character: T;
-  setCharacter: (state: T) => void;
+  character: ICharacter;
+  setCharacter: (state: ICharacter) => void;
   onSubmit: () => void;
 }) {
   const { rows, character, setCharacter } = props;
@@ -109,7 +110,6 @@ export function CharacterFields<T>(props: {
     return (
       <FormControl key={field.slug} style={{ width: "100%" }}>
         {renderTextField(field)}
-        {renderBigTextField(field)}
         {renderNumber(field)}
         {renderBoolean(field)}
         {renderCategory(field)}
@@ -225,56 +225,19 @@ export function CharacterFields<T>(props: {
     );
   }
 
-  function renderBigTextField(field: IField): React.ReactNode {
-    const shouldRenderDefaultValue =
-      character[field.slug] === undefined && field.default !== undefined;
-    return (
-      field.type === FieldType.BigTextField && (
-        <TextField
-          label={field.label}
-          value={
-            shouldRenderDefaultValue
-              ? field.default
-              : character[field.slug] || ""
-          }
-          multiline
-          rows="5"
-          style={{
-            width: "100%"
-          }}
-          variant="outlined"
-          onChange={e => {
-            setCharacter({
-              ...character,
-              [field.slug]: e.target.value
-            });
-          }}
-        />
-      )
-    );
-  }
-
   function renderTextField(field: IField): React.ReactNode {
-    const shouldRenderDefaultValue =
-      character[field.slug] === undefined && field.default !== undefined;
-
+    const isMultiline = field.type === FieldType.BigTextField;
     return (
-      field.type === FieldType.TextField && (
-        <TextField
-          label={field.label}
-          value={
-            shouldRenderDefaultValue
-              ? field.default
-              : character[field.slug] || ""
-          }
-          variant="outlined"
-          style={{
-            width: "100%"
-          }}
-          onChange={e => {
+      (field.type === FieldType.TextField ||
+        field.type === FieldType.BigTextField) && (
+        <OptimizedTextField
+          field={field}
+          character={character}
+          multiline={isMultiline}
+          onReady={value => {
             setCharacter({
               ...character,
-              [field.slug]: e.target.value
+              [field.slug]: value
             });
           }}
         />
@@ -282,3 +245,41 @@ export function CharacterFields<T>(props: {
     );
   }
 }
+
+const OptimizedTextField: React.FC<{
+  character: ICharacter;
+  field: IField;
+  multiline: boolean;
+  onReady: (event: Event) => void;
+}> = ({ character, field, onReady: onReady, multiline }) => {
+  const [value, setValue] = useState(character[field.slug]);
+  const timeout = useRef(undefined);
+  const shouldRenderDefaultValue =
+    value === undefined && field.default !== undefined;
+
+  const multilineProps = multiline ? { multiline: true, rows: "5" } : {};
+  return (
+    <>
+      <TextField
+        label={field.label}
+        value={shouldRenderDefaultValue ? field.default : value || ""}
+        variant="outlined"
+        style={{
+          width: "100%"
+        }}
+        onChange={e => {
+          clearTimeout(timeout.current);
+          setValue(e.target.value);
+
+          timeout.current = setTimeout(() => {
+            onReady(value);
+          }, 200);
+        }}
+        onBlur={e => {
+          onReady(value);
+        }}
+        {...multilineProps}
+      />
+    </>
+  );
+};

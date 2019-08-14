@@ -52,7 +52,11 @@ export const Characters = props => {
   }, [gameSlug, load]);
 
   return (
-    <Page isLoading={isLoading} h1="Characters" h2={`Game: ${game.name}`}>
+    <Page
+      isLoading={isLoading}
+      h1={`Characters of ${game.name}`}
+      h2={<AppLink to="/games">All Games</AppLink>}
+    >
       <Snackbar
         autoHideDuration={2000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}

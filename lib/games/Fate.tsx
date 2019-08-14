@@ -151,50 +151,62 @@ const consequenceCategory: IField = {
   type: FieldType.Category
 };
 
-const stress: IField = {
-  label: "Stress",
-  slug: "stress",
-  default: 0,
-  min: 0,
-  max: 3,
-  marks: [
-    { label: "None", value: 0 },
-    { label: "#1", value: 1 },
-    { label: "#2", value: 2 },
-    { label: "#3", value: 3 }
-  ],
-  type: FieldType.Slider
+const stress1: IField = {
+  label: "Stress #1",
+  slug: "stress1",
+  type: FieldType.Boolean
+};
+const stress2: IField = {
+  label: "Stress #2",
+  slug: "stress2",
+  type: FieldType.Boolean
+};
+const stress3: IField = {
+  label: "Stress #3",
+  slug: "stress3",
+  type: FieldType.Boolean
 };
 
-const physicalStress: IField = {
-  label: "Physical Stress",
-  slug: "physicalStress",
-  default: 0,
-  min: 0,
-  max: 4,
-  marks: [
-    { label: "None", value: 0 },
-    { label: "#1", value: 1 },
-    { label: "#2", value: 2 },
-    { label: "#3", value: 3 },
-    { label: "#4", value: 4 }
-  ],
-  type: FieldType.Slider
+const physicalStress1: IField = {
+  label: "Physical #1",
+  slug: "physicalStress1",
+  type: FieldType.Boolean
 };
-const mentalStress: IField = {
-  label: "Mental Stress",
-  slug: "mentalStress",
-  default: 0,
-  min: 0,
-  max: 4,
-  marks: [
-    { label: "None", value: 0 },
-    { label: "#1", value: 1 },
-    { label: "#2", value: 2 },
-    { label: "#3", value: 3 },
-    { label: "#4", value: 4 }
-  ],
-  type: FieldType.Slider
+const physicalStress2: IField = {
+  label: "Physical #2",
+  slug: "physicalStress2",
+  type: FieldType.Boolean
+};
+const physicalStress3: IField = {
+  label: "Physical #3",
+  slug: "physicalStress3",
+  type: FieldType.Boolean
+};
+const physicalStress4: IField = {
+  label: "Physical #4",
+  slug: "physicalStress4",
+  type: FieldType.Boolean
+};
+
+const mentalStress1: IField = {
+  label: "Mental #1",
+  slug: "mentalStress1",
+  type: FieldType.Boolean
+};
+const mentalStress2: IField = {
+  label: "Mental #2",
+  slug: "mentalStress2",
+  type: FieldType.Boolean
+};
+const mentalStress3: IField = {
+  label: "Mental #3",
+  slug: "mentalStress3",
+  type: FieldType.Boolean
+};
+const mentalStress4: IField = {
+  label: "Mental #4",
+  slug: "mentalStress4",
+  type: FieldType.Boolean
 };
 
 const mildConsequence: IField = {
@@ -227,7 +239,7 @@ const guide: IField = {
 };
 
 export const FateAccelerated: IGame = {
-  name: "Fate Accelerated (FAE)",
+  name: "Fate Accelerated",
   slug: "fae",
   rows: [
     { columns: [{ col: 12, field: name }] },
@@ -273,7 +285,11 @@ export const FateAccelerated: IGame = {
           field: stressCategory,
           rows: [
             {
-              columns: [{ col: 10, field: stress }]
+              columns: [
+                { col: 4, field: stress1 },
+                { col: 4, field: stress2 },
+                { col: 4, field: stress3 }
+              ]
             }
           ]
         },
@@ -335,10 +351,20 @@ export const FateCore: IGame = {
           field: stressCategory,
           rows: [
             {
-              columns: [{ col: 10, field: physicalStress }]
+              columns: [
+                { col: 3, field: physicalStress1 },
+                { col: 3, field: physicalStress2 },
+                { col: 3, field: physicalStress3 },
+                { col: 3, field: physicalStress4 }
+              ]
             },
             {
-              columns: [{ col: 10, field: mentalStress }]
+              columns: [
+                { col: 3, field: mentalStress1 },
+                { col: 3, field: mentalStress2 },
+                { col: 3, field: mentalStress3 },
+                { col: 3, field: mentalStress4 }
+              ]
             }
           ]
         },
