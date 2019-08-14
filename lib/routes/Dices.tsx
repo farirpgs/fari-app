@@ -1,8 +1,8 @@
 import Divider from "@material-ui/core/Divider";
 import React from "react";
-import { DnDDices } from "../components/dice/DnDDices";
-import { DungeonWorldDices } from "../components/dice/DungeonWorldDices";
-import { FudgeDices } from "../components/dice/FudgeDices";
+import { DnDDices } from "../components/Dice/DnDDices";
+import { DungeonWorldDices } from "../components/Dice/DungeonWorldDices";
+import { FudgeDices } from "../components/Dice/FudgeDices";
 
 export const Dices = () => {
   return (

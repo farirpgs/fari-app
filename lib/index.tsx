@@ -6,7 +6,7 @@ import "flexboxgrid";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, withRouter } from "react-router-dom";
-import { ScrollToTop } from "./components/ScrollToTop";
+import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";
 import { AppBottomNavigation } from "./root/AppBottomNavigation";
 import { AppRouter } from "./root/AppRouter";

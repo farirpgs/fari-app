@@ -14,8 +14,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import LayersIcon from "@material-ui/icons/Layers";
 import React, { useCallback, useEffect, useState } from "react";
 import uuid from "uuid/v4";
-import { AppLink } from "../components/AppLink";
-import { AppProgress } from "../components/AppProgress";
+import { AppLink } from "../components/AppLink/AppLink";
+import { AppProgress } from "../components/AppProgress/AppProgress";
 import { getScenesDb } from "../database/database";
 import { IScene } from "../root/AppRouter";
 

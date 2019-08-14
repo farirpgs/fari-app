@@ -1,35 +1,31 @@
 import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import GamesIcons from "@material-ui/icons/Games";
 import React from "react";
-import { AppLink } from "../components/AppLink";
+import { AppLink } from "../components/AppLink/AppLink";
+import { Page } from "../components/Page/Page";
 import { games } from "../games/games";
 
 export const Games = props => {
   return (
-    <div className="route-box">
-      <h1>Games</h1>
-      <Divider style={{ margin: "1rem 0" }} />
-      <div>
-        <List component="nav">
-          {games.map(game => (
-            <AppLink to={`/game/${game.slug}`} key={game.slug}>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <GamesIcons />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={game.name} />
-              </ListItem>
-            </AppLink>
-          ))}
-        </List>
-      </div>
-    </div>
+    <Page h1="Games">
+      <List component="nav">
+        {games.map(game => (
+          <AppLink to={`/game/${game.slug}`} key={game.slug}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <GamesIcons />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={game.name} />
+            </ListItem>
+          </AppLink>
+        ))}
+      </List>
+    </Page>
   );
 };

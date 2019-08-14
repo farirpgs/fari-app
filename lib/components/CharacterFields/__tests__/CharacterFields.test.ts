@@ -1,4 +1,4 @@
-import { FateAccelerated } from "../../games/Fate";
+import { FateAccelerated } from "../../../games/Fate";
 import { selectors } from "../CharacterFields";
 
 describe("selectors.rowsToTabs", () => {

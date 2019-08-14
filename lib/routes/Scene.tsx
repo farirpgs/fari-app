@@ -6,10 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useCallback, useEffect, useState } from "react";
-import { AppFab } from "../components/AppFab";
-import { AppLink } from "../components/AppLink";
-import { AppProgress } from "../components/AppProgress";
-import { PostIt } from "../components/PostIt";
+import { AppFab } from "../components/AppFab/AppFab";
+import { AppLink } from "../components/AppLink/AppLink";
+import { AppProgress } from "../components/AppProgress/AppProgress";
+import { PostIt } from "../components/Aspect/PostIt";
 import { getScenesDb } from "../database/database";
 import { IScene } from "../root/AppRouter";
 export const Scene: React.FC<{
