@@ -1,0 +1,15 @@
+{
+  "short_name": "Fari",
+  "name": "Fari - Roll Playing Game Companion",
+  "icons": [
+    {
+      "src": "../images/logo.png",
+      "sizes": "1200x1200",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#000",
+  "theme_color": "#536878",
+  "display": "standalone"
+}

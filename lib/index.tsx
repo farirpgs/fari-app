@@ -1,6 +1,3 @@
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
 import React, { useEffect } from "react";
@@ -34,7 +31,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <History />
-        <AppBar position="static">
+        {/* <AppBar position="static">
           <Toolbar
             style={{
               margin: "0 auto",
@@ -45,7 +42,7 @@ function App() {
           >
             <Typography variant="h6">Characters</Typography>
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
         <div
           style={{
             maxWidth: "1200px",

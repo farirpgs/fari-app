@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Fari - Roll Playing Game Companion</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
@@ -14,9 +16,22 @@
         font-family: "Roboto", sans-serif;
       }
     </style>
+    <meta name="theme-color" content="#2196f3" />
   </head>
   <body>
     <div id="root"></div>
     <script src="./index.tsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then(function(reg) {
+            console.log("Service Worker Registered");
+          })
+          .catch(function(err) {
+            console.error("Service Worker Registration Failure ", err);
+          });
+      }
+    </script>
   </body>
 </html>
