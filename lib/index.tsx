@@ -5,25 +5,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, withRouter } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { usePWA } from "./hooks/usePWA";
 import "./index.css";
 import { AppBottomNavigation } from "./root/AppBottomNavigation";
 import { AppRouter } from "./root/AppRouter";
 import { AppTheme } from "./theme";
-
-let deferredPrompt: any;
-
-window.addEventListener("beforeinstallprompt", e => {
-  e.preventDefault();
-  console.log("beforeinstallprompt Event fired");
-
-  deferredPrompt = e;
-
-  return false;
-});
 
 export let routerHistory = {} as any;
 
@@ -42,7 +32,8 @@ export const History = withRouter(props => {
 });
 
 function App() {
-  const [isInstalled, setIsInstalled] = useState(false);
+  const pwa = usePWA();
+
   return (
     <ThemeProvider theme={AppTheme}>
       <BrowserRouter>
@@ -60,21 +51,8 @@ function App() {
             }}
           >
             <Typography variant="h6">Fari</Typography>
-            {!!deferredPrompt && (
-              <Button
-                color="inherit"
-                onClick={async () => {
-                  deferredPrompt.prompt();
-                  // Wait for the user to respond to the prompt
-                  const choiceResult = await deferredPrompt.userChoice;
-                  if (choiceResult.outcome === "accepted") {
-                    console.log("User accepted home screen installation");
-                  } else {
-                    console.log("User dismissed home screen installation");
-                  }
-                  deferredPrompt = null;
-                }}
-              >
+            {pwa.shouldSuggestInstallation && (
+              <Button color="inherit" onClick={pwa.prompt}>
                 Install
               </Button>
             )}

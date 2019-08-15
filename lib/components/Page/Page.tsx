@@ -1,4 +1,5 @@
 import Divider from "@material-ui/core/Divider";
+import Fade from "@material-ui/core/Fade";
 import React from "react";
 import { AppProgress } from "../AppProgress/AppProgress";
 
@@ -11,15 +12,25 @@ export const Page: React.FC<{
   const { isLoading, h1, h2, outside, children } = props;
   return (
     <div>
-      {isLoading && <AppProgress />}
+      {isLoading && (
+        <Fade in>
+          <AppProgress />
+        </Fade>
+      )}
       {outside}
       <div className="route-box">
-        {!!h1 && <h1>{h1}</h1>}
-        {!!h2 && <h2>{h2}</h2>}
+        {!isLoading && (
+          <Fade in>
+            <div>
+              {!!h1 && <h1>{h1}</h1>}
+              {!!h2 && <h2>{h2}</h2>}
 
-        {!!h1 && <Divider style={{ margin: "1rem 0" }} />}
+              {!!h1 && <Divider style={{ margin: "1rem 0" }} />}
 
-        {!isLoading && children}
+              {children}
+            </div>
+          </Fade>
+        )}
       </div>
     </div>
   );
