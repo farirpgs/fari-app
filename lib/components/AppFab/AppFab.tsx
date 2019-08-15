@@ -4,7 +4,7 @@ import React from "react";
 export const AppFab: React.FC<{ onClick: () => void }> = props => {
   return (
     <Fab
-      color="secondary"
+      color="primary"
       style={{
         position: "fixed",
         zIndex: 1,

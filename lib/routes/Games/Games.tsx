@@ -5,9 +5,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import GamesIcons from "@material-ui/icons/Games";
 import React from "react";
-import { AppLink } from "../components/AppLink/AppLink";
-import { Page } from "../components/Page/Page";
-import { games } from "../games/games";
+import { AppLink } from "../../components/AppLink/AppLink";
+import { Page } from "../../components/Page/Page";
+import { games } from "../../games/games";
 
 export const Games = props => {
   return (

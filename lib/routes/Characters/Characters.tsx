@@ -12,13 +12,13 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
 import React, { useCallback, useEffect, useState } from "react";
-import { routerHistory } from "..";
-import { AppFab } from "../components/AppFab/AppFab";
-import { AppLink } from "../components/AppLink/AppLink";
-import { Page } from "../components/Page/Page";
-import { getCharactersDb } from "../database/database";
-import { getGameBySlug } from "../games/games";
-import { ICharacter } from "../games/IGame";
+import { routerHistory } from "../..";
+import { AppFab } from "../../components/AppFab/AppFab";
+import { AppLink } from "../../components/AppLink/AppLink";
+import { Page } from "../../components/Page/Page";
+import { getCharactersDb } from "../../database/database";
+import { getGameBySlug } from "../../games/games";
+import { ICharacter } from "../../games/IGame";
 
 export const Characters = props => {
   const { gameSlug } = props.match.params;
@@ -30,15 +30,16 @@ export const Characters = props => {
     setCharacterDeletedSnackBar
   ] = React.useState({ visible: false });
 
-  const isLoading = characters === undefined;
+  const [isLoading, setIsLoading] = useState(true);
   const hasItems = characters && characters.length > 0;
-  const shouldShowEmptyNotice = !isLoading && !hasItems;
 
   const load = useCallback(async () => {
+    setIsLoading(true);
     const result = await getCharactersDb(game).allDocs<ICharacter>({
       include_docs: true
     });
     setCharacters(result.rows.map(row => row.doc));
+    setIsLoading(false);
   }, []);
 
   async function deleteCharacter(character) {
@@ -72,7 +73,7 @@ export const Characters = props => {
         <AddIcon />
       </AppFab>
 
-      {shouldShowEmptyNotice && (
+      {!hasItems && (
         <Paper style={{ padding: "2rem", background: "aliceblue" }}>
           It seems you don't have any characters created yet. Click on the add
           icon at the bottom right corner of a screen to create one now

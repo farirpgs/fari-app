@@ -1,13 +1,13 @@
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useState } from "react";
 import uuid from "uuid/v4";
-import { routerHistory } from "..";
-import { AppFab } from "../components/AppFab/AppFab";
-import { AppLink } from "../components/AppLink/AppLink";
-import { CharacterFields } from "../components/CharacterFields/CharacterFields";
-import { Page } from "../components/Page/Page";
-import { getCharactersDb } from "../database/database";
-import { getGameBySlug } from "../games/games";
+import { routerHistory } from "../..";
+import { AppFab } from "../../components/AppFab/AppFab";
+import { AppLink } from "../../components/AppLink/AppLink";
+import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
+import { Page } from "../../components/Page/Page";
+import { getCharactersDb } from "../../database/database";
+import { getGameBySlug } from "../../games/games";
 
 export const CreateCharacter = props => {
   const { gameSlug } = props.match.params;

@@ -1,5 +1,4 @@
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -9,22 +8,24 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
-import TextField from "@material-ui/core/TextField";
+import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LayersIcon from "@material-ui/icons/Layers";
 import React, { useCallback, useEffect, useState } from "react";
 import uuid from "uuid/v4";
-import { AppLink } from "../components/AppLink/AppLink";
-import { Page } from "../components/Page/Page";
-import { getScenesDb } from "../database/database";
-import { IScene } from "../root/AppRouter";
+import { routerHistory } from "../..";
+import { AppFab } from "../../components/AppFab/AppFab";
+import { AppLink } from "../../components/AppLink/AppLink";
+import { Page } from "../../components/Page/Page";
+import { getScenesDb } from "../../database/database";
+import { IScene } from "../../root/AppRouter";
 
 export const Scenes: React.FC<{}> = props => {
   const [newSceneName, setSceneName] = useState("");
   const [scenes, setScenes] = useState<Array<IScene>>(undefined);
-  const isLoading = scenes === undefined;
+  const [isLoading, setIsLoading] = useState(true);
   const hasItems = scenes && scenes.length > 0;
-  const shouldShowEmptyNotice = !isLoading && !hasItems;
+
   const [sceneAddedSnackBar, setSceneAddedSnackBar] = React.useState({
     visible: false
   });
@@ -32,10 +33,12 @@ export const Scenes: React.FC<{}> = props => {
     visible: false
   });
   const loadScenes = useCallback(async () => {
+    setIsLoading(true);
     const result = await getScenesDb().allDocs({
       include_docs: true
     });
     setScenes((result.rows.map(row => row.doc) as unknown) as Array<IScene>);
+    setIsLoading(false);
   }, []);
   const addScene = async (sceneName: string) => {
     await getScenesDb().put({
@@ -70,33 +73,15 @@ export const Scenes: React.FC<{}> = props => {
         message={<span id="message-id">Scene Deleted</span>}
       />
 
-      <div className="row">
-        <div className="col-xs">
-          <TextField
-            value={newSceneName}
-            label="Add a new scene"
-            variant="outlined"
-            style={{
-              width: "100%"
-            }}
-            onChange={e => {
-              setSceneName(e.target.value);
-            }}
-          />
-        </div>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            addScene(newSceneName);
-          }}
-        >
-          Add
-        </Button>
-      </div>
-      <br />
+      <AppFab
+        onClick={() => {
+          routerHistory.push("/scenes/create");
+        }}
+      >
+        <AddIcon />
+      </AppFab>
 
-      {shouldShowEmptyNotice && (
+      {!hasItems && (
         <Paper style={{ padding: "2rem", background: "aliceblue" }}>
           It seems you don't have any scenes created yet.
         </Paper>

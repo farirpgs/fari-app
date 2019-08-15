@@ -1,23 +1,25 @@
 import Snackbar from "@material-ui/core/Snackbar";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useCallback, useEffect, useState } from "react";
-import { AppFab } from "../components/AppFab/AppFab";
-import { AppLink } from "../components/AppLink/AppLink";
-import { CharacterFields } from "../components/CharacterFields/CharacterFields";
-import { Page } from "../components/Page/Page";
-import { getCharactersDb } from "../database/database";
-import { getGameBySlug } from "../games/games";
-import { ICharacter } from "../games/IGame";
+import { AppFab } from "../../components/AppFab/AppFab";
+import { AppLink } from "../../components/AppLink/AppLink";
+import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
+import { Page } from "../../components/Page/Page";
+import { getCharactersDb } from "../../database/database";
+import { getGameBySlug } from "../../games/games";
+import { ICharacter } from "../../games/IGame";
 
 export const PlayCharacter = props => {
   const { gameSlug, characterId } = props.match.params;
   const game = getGameBySlug(gameSlug);
   const [character, setCharacter] = useState({});
-  const isLoading = Object.keys(character).length === 0;
+  const [isLoading, setIsLoading] = useState(true);
 
   const load = useCallback(async () => {
+    setIsLoading(true);
     const result = await getCharactersDb(game).get<ICharacter>(characterId);
     setCharacter(result);
+    setIsLoading(false);
   }, [gameSlug, characterId]);
 
   useEffect(() => {
@@ -54,26 +56,24 @@ export const PlayCharacter = props => {
         onClose={() => setCharacterUpdatedSnackBar({ visible: false })}
         message={<span id="message-id">Character Updated</span>}
       />
-      {!isLoading && (
-        <div className="row">
-          <div className="col-xs-12">
-            <div>
-              <AppFab onClick={save}>
-                <SaveIcon />
-              </AppFab>
+      <div className="row">
+        <div className="col-xs-12">
+          <div>
+            <AppFab onClick={save}>
+              <SaveIcon />
+            </AppFab>
 
-              <CharacterFields
-                rows={game.rows}
-                character={character}
-                setCharacter={async character => {
-                  setCharacter(character);
-                }}
-                onSubmit={save}
-              />
-            </div>
+            <CharacterFields
+              rows={game.rows}
+              character={character}
+              setCharacter={async character => {
+                setCharacter(character);
+              }}
+              onSubmit={save}
+            />
           </div>
         </div>
-      )}
+      </div>
     </Page>
   );
 

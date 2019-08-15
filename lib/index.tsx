@@ -12,7 +12,7 @@ import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";
 import { AppBottomNavigation } from "./root/AppBottomNavigation";
 import { AppRouter } from "./root/AppRouter";
-import { theme } from "./theme";
+import { AppTheme } from "./theme";
 
 let deferredPrompt: any;
 
@@ -44,7 +44,7 @@ export const History = withRouter(props => {
 function App() {
   const [isInstalled, setIsInstalled] = useState(false);
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={AppTheme}>
       <BrowserRouter>
         <ScrollToTop />
         <CssBaseline />
