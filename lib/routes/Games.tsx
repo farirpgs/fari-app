@@ -12,6 +12,9 @@ import { games } from "../games/games";
 export const Games = props => {
   return (
     <Page h1="Games">
+      <p>
+        To create characters, select one of our supported game system below.
+      </p>
       <List component="nav">
         {games.map(game => (
           <AppLink to={`/game/${game.slug}`} key={game.slug}>

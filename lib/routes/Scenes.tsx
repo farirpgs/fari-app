@@ -15,7 +15,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import React, { useCallback, useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { AppLink } from "../components/AppLink/AppLink";
-import { AppProgress } from "../components/AppProgress/AppProgress";
+import { Page } from "../components/Page/Page";
 import { getScenesDb } from "../database/database";
 import { IScene } from "../root/AppRouter";
 
@@ -54,8 +54,7 @@ export const Scenes: React.FC<{}> = props => {
     loadScenes();
   }, [loadScenes]);
   return (
-    <div>
-      {isLoading && <AppProgress />}
+    <Page isLoading={isLoading} h1="Scenes">
       <Snackbar
         autoHideDuration={2000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -70,77 +69,74 @@ export const Scenes: React.FC<{}> = props => {
         onClose={() => setSceneDeletedSnackBar({ visible: false })}
         message={<span id="message-id">Scene Deleted</span>}
       />
-      <div className="route-box">
-        <h1>Scenes</h1>
-        <Divider style={{ margin: "1rem 0" }} />
-        <div className="row">
-          <div className="col-xs-6">
-            <TextField
-              value={newSceneName}
-              label="Add a new scene"
-              variant="outlined"
-              style={{
-                width: "100%"
-              }}
-              onChange={e => {
-                setSceneName(e.target.value);
-              }}
-            />
-          </div>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => {
-              addScene(newSceneName);
+
+      <div className="row">
+        <div className="col-xs">
+          <TextField
+            value={newSceneName}
+            label="Add a new scene"
+            variant="outlined"
+            style={{
+              width: "100%"
             }}
-          >
-            Add
-          </Button>
+            onChange={e => {
+              setSceneName(e.target.value);
+            }}
+          />
         </div>
-        <br />
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => {
+            addScene(newSceneName);
+          }}
+        >
+          Add
+        </Button>
+      </div>
+      <br />
 
-        {shouldShowEmptyNotice && (
-          <Paper style={{ padding: "2rem", background: "aliceblue" }}>
-            It seems you don't have any scenes created yet.
-          </Paper>
-        )}
+      {shouldShowEmptyNotice && (
+        <Paper style={{ padding: "2rem", background: "aliceblue" }}>
+          It seems you don't have any scenes created yet.
+        </Paper>
+      )}
 
-        {hasItems && (
-          <div>
-            <div className="row">
-              <div className="col-xs-12 col-md-4">
-                <List component="nav">
-                  {scenes.map((scene, index) => (
-                    <AppLink to={`/scenes/${scene._id}`} key={scene._id}>
-                      <ListItem>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <LayersIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={scene["name"]} />
-                        <ListItemSecondaryAction>
-                          <IconButton
-                            edge="end"
-                            onClick={async e => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              deleteCharacter(scene);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                      {index !== scenes.length - 1 && <Divider />}
-                    </AppLink>
-                  ))}
-                </List>
-              </div>
+      {hasItems && (
+        <div>
+          <div className="row">
+            <div className="col-xs-12 col-md-4">
+              <List component="nav">
+                {scenes.map((scene, index) => (
+                  <AppLink to={`/scenes/${scene._id}`} key={scene._id}>
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <LayersIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={scene["name"]} />
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="end"
+                          onClick={async e => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            deleteCharacter(scene);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    {index !== scenes.length - 1 && <Divider />}
+                  </AppLink>
+                ))}
+              </List>
             </div>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </Page>
   );
 };

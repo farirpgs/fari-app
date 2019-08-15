@@ -4,6 +4,7 @@ import { Characters } from "../routes/Characters";
 import { CreateCharacter } from "../routes/CreateCharacter";
 import { Dices } from "../routes/Dices";
 import { Games } from "../routes/Games";
+import { Home } from "../routes/Home";
 import { NotFoundRoute } from "../routes/NotFoundRoute";
 import { PlayCharacter } from "../routes/PlayCharacter";
 import { Scene } from "../routes/Scene";
@@ -19,6 +20,7 @@ export interface IScene {
 export const AppRouter = () => (
   <Switch>
     <Route exact path={"/"} component={Games} />
+    <Route exact path={"/home"} component={Home} />
     <Route exact path={"/games"} component={Games} />
     <Route exact path={"/game/:gameSlug"} component={Characters} />
     <Route exact path={"/game/:gameSlug/create"} component={CreateCharacter} />

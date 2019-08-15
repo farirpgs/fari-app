@@ -3,11 +3,25 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import CropSquareIcon from "@material-ui/icons/CropSquare";
 import LayersIcon from "@material-ui/icons/Layers";
 import PersonIcon from "@material-ui/icons/Person";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 
-export const AppBottomNavigation = () => {
+const _AppBottomNavigation: React.FC<{
+  location: { pathname: string };
+}> = props => {
   const [nav, setNav] = useState(0);
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/game")) {
+      return setNav(0);
+    }
+    if (location.pathname.startsWith("/scene")) {
+      return setNav(1);
+    }
+    if (location.pathname.startsWith("/dices")) {
+      return setNav(2);
+    }
+  }, [location.pathname]);
   return (
     <BottomNavigation
       value={nav}
@@ -46,3 +60,5 @@ export const AppBottomNavigation = () => {
     </BottomNavigation>
   );
 };
+
+export const AppBottomNavigation = withRouter(_AppBottomNavigation as any);

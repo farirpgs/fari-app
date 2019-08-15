@@ -54,7 +54,7 @@ export const Characters = props => {
   return (
     <Page
       isLoading={isLoading}
-      h1={`Characters of ${game.name}`}
+      h1={`Characters`}
       h2={<AppLink to="/games">All Games</AppLink>}
     >
       <Snackbar
