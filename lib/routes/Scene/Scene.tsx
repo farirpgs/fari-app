@@ -307,7 +307,7 @@ export const Scene: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div className="col-xs-4" key={aspectIndex}>
+            <div className="col-md-4" key={aspectIndex}>
               <PostIt
                 value={aspect}
                 onChange={event => {
