@@ -92,13 +92,6 @@ export const Scene: React.FC<{
     });
   };
 
-  const openPresentationMode = () => {
-    window.open(`/scenes/${sceneId}/present`);
-  };
-  const goBackToUpdateMode = () => {
-    routerHistory.push(`/scenes/${sceneId}`);
-  };
-
   useEffect(() => {
     loadScenes();
   }, [loadScenes]);
@@ -132,9 +125,11 @@ export const Scene: React.FC<{
 
   function renderPresentationModeUpdateFab() {
     return (
-      <AppFab onClick={goBackToUpdateMode}>
-        <ArrowBack />
-      </AppFab>
+      <AppLink to={`/scenes/${sceneId}`}>
+        <AppFab>
+          <ArrowBack />
+        </AppFab>
+      </AppLink>
     );
   }
 
@@ -166,13 +161,10 @@ export const Scene: React.FC<{
       <Box margin="2rem 0">
         <div className="row center-xs">
           <div className="col-xs">
-            <Button
-              color="secondary"
-              onClick={openPresentationMode}
-              variant="outlined"
-              size="large"
-            >
-              Open Presentation Mode
+            <Button color="secondary" variant="outlined" size="large">
+              <AppLink to={`/scenes/${sceneId}/present`}>
+                Presentation Mode
+              </AppLink>
             </Button>
           </div>
           <div className="col-xs">
@@ -269,7 +261,7 @@ export const Scene: React.FC<{
                 const imageLink = line.trim();
                 return (
                   <div
-                    className="col-md-4"
+                    className="col-xs-12 col-md-4"
                     key={lineIndex}
                     style={{ margin: "2rem 0" }}
                   >
@@ -307,7 +299,7 @@ export const Scene: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div className="col-md-4" key={aspectIndex}>
+            <div className="col-xs-12 col-md-4" key={aspectIndex}>
               <PostIt
                 value={aspect}
                 onChange={event => {
@@ -329,7 +321,7 @@ export const Scene: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div className="col-xs-4" key={aspectIndex}>
+            <div className="col-xs-12 col-md-4" key={aspectIndex}>
               <Paper
                 style={{
                   minHeight: "4rem",
