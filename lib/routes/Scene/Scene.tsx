@@ -99,7 +99,7 @@ export const Scene: React.FC<{
   return (
     <Page
       isLoading={isLoading}
-      h1={sceneName}
+      h1={sceneName || "..."}
       h2={
         presentModeEnabled ? "" : <AppLink to={`/scenes`}>All Scenes</AppLink>
       }
@@ -114,7 +114,7 @@ export const Scene: React.FC<{
       {!presentModeEnabled && (
         <>
           {renderSnackBarsAndFab()}
-          {renderPresentationButtonBox()}
+          {!!scene._id && renderPresentationButtonBox()}
           {renderSceneNameFieldBox()}
           {renderSceneDescriptionFieldBox()}
           {renderAspectsBox()}
