@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
 import React, { useEffect } from "react";
@@ -52,7 +53,8 @@ function App() {
           >
             <Typography variant="h6">Fari</Typography>
             {pwa.shouldSuggestInstallation && (
-              <Button color="inherit" onClick={pwa.prompt}>
+              <Button color="inherit" onClick={pwa.prompt} variant="outlined">
+                <CloudDownloadIcon style={{ marginRight: "1rem" }} />
                 Install
               </Button>
             )}
