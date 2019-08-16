@@ -36,10 +36,11 @@ export const PlayCharacter = props => {
     setCharacterUpdatedSnackBar
   ] = React.useState({ visible: false });
 
+  const characterName = character["name"] || "";
   return (
     <Page
       isLoading={isLoading}
-      h1="Play"
+      h1={characterName}
       h2={<AppLink to={`/game/${game.slug}`}>All Characters</AppLink>}
     >
       <Snackbar
