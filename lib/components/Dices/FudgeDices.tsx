@@ -1,35 +1,7 @@
 import Button from "@material-ui/core/Button";
-import React, { useState } from "react";
+import React from "react";
+import { useFudge } from "../../hooks/useFudge";
 import { Dice } from "./Dice";
-
-const FudgeTypes = {
-  0: "",
-  1: "+",
-  2: "-"
-};
-
-function useFudge() {
-  const [value, setValue] = useState("");
-  const rollAnimationCount = 30;
-  function roll(count = 0) {
-    const number = Math.floor((Math.random() * 100) % 3);
-    setValue(FudgeTypes[number]);
-
-    if (count !== rollAnimationCount) {
-      setTimeout(() => {
-        roll(count + 1);
-      }, 50);
-    }
-  }
-  function reset() {
-    setValue("");
-  }
-  return {
-    value,
-    reset,
-    roll
-  };
-}
 
 export const FudgeDices = props => {
   const fudge1 = useFudge();
