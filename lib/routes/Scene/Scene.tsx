@@ -37,6 +37,7 @@ export const Scene: React.FC<{
 
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
+  const isInCreateMode = !scene._id;
 
   const loadScenes = useCallback(async () => {
     if (sceneId) {
@@ -99,7 +100,7 @@ export const Scene: React.FC<{
   return (
     <Page
       isLoading={isLoading}
-      h1={sceneName || "..."}
+      h1={sceneName}
       h2={
         presentModeEnabled ? "" : <AppLink to={`/scenes`}>All Scenes</AppLink>
       }
@@ -114,7 +115,7 @@ export const Scene: React.FC<{
       {!presentModeEnabled && (
         <>
           {renderSnackBarsAndFab()}
-          {!!scene._id && renderPresentationButtonBox()}
+          {!isInCreateMode && renderPresentationButtonBox()}
           {renderSceneNameFieldBox()}
           {renderSceneDescriptionFieldBox()}
           {renderAspectsBox()}
