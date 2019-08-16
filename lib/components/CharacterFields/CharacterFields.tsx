@@ -250,7 +250,7 @@ const OptimizedTextField: React.FC<{
   character: Object;
   field: IField;
   multiline: boolean;
-  onReady: (event: Event) => void;
+  onReady: (value: string) => void;
 }> = ({ character, field, onReady: onReady, multiline }) => {
   const [value, setValue] = useState(character[field.slug]);
   const timeout = useRef(undefined);
@@ -268,15 +268,16 @@ const OptimizedTextField: React.FC<{
           width: "100%"
         }}
         onChange={e => {
+          const value = e.target.value;
           clearTimeout(timeout.current);
-          setValue(e.target.value);
+          setValue(value);
 
           timeout.current = setTimeout(() => {
             onReady(value);
           }, 200);
         }}
         onBlur={e => {
-          onReady(value);
+          onReady(e.target.value);
         }}
         {...multilineProps}
       />
