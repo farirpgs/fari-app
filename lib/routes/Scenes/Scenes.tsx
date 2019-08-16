@@ -1,5 +1,4 @@
 import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -12,7 +11,6 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LayersIcon from "@material-ui/icons/Layers";
 import React, { useCallback, useEffect, useState } from "react";
-import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
@@ -20,11 +18,16 @@ import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
 import { IScene } from "../../root/AppRouter";
 
+export interface IGroupedScenes {
+  Default?: Array<IScene>;
+  [arcName: string]: Array<IScene>;
+}
+const defaultArcName = "Default";
+
 export const Scenes: React.FC<{}> = props => {
-  const [newSceneName, setSceneName] = useState("");
-  const [scenes, setScenes] = useState<Array<IScene>>(undefined);
+  const [groupedScenes, setGroupedScenes] = useState<IGroupedScenes>({});
   const [isLoading, setIsLoading] = useState(true);
-  const hasItems = scenes && scenes.length > 0;
+  const hasItems = Object.keys(groupedScenes).length > 0;
 
   const [sceneAddedSnackBar, setSceneAddedSnackBar] = React.useState({
     visible: false
@@ -37,18 +40,35 @@ export const Scenes: React.FC<{}> = props => {
     const result = await getScenesDb().allDocs({
       include_docs: true
     });
-    setScenes((result.rows.map(row => row.doc) as unknown) as Array<IScene>);
+    const scenes = (result.rows.map(row => row.doc) as unknown) as Array<
+      IScene
+    >;
+    const groupedScenes = scenes.reduce(
+      (groupedScenes, scene) => {
+        const [arc, sceneName] = scene.name.split("/");
+        const hasAnArc = !!sceneName;
+
+        if (hasAnArc) {
+          const previousArcScenes = groupedScenes[arc.trim()] || [];
+          groupedScenes[arc.trim()] = [
+            ...previousArcScenes,
+            { ...scene, name: sceneName.trim() }
+          ].sort((a, b) => a.name.localeCompare(b.name));
+        } else {
+          const previousArcScenes = groupedScenes[defaultArcName] || [];
+          groupedScenes[defaultArcName] = [...previousArcScenes, scene];
+        }
+        return groupedScenes;
+      },
+      {} as IGroupedScenes
+    );
+
+    setGroupedScenes(groupedScenes);
+
     setIsLoading(false);
   }, []);
-  const addScene = async (sceneName: string) => {
-    await getScenesDb().put({
-      _id: uuid(),
-      name: newSceneName
-    });
-    await loadScenes();
-    setSceneAddedSnackBar({ visible: true });
-  };
-  const deleteCharacter = async (scene: IScene) => {
+
+  const deleteScene = async (scene: IScene) => {
     await getScenesDb().remove(scene._id, scene._rev, {});
     await loadScenes();
     setSceneDeletedSnackBar({ visible: true });
@@ -92,30 +112,45 @@ export const Scenes: React.FC<{}> = props => {
           <div className="row">
             <div className="col-xs-12 col-md-4">
               <List component="nav">
-                {scenes.map((scene, index) => (
-                  <AppLink to={`/scenes/${scene._id}`} key={scene._id}>
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <LayersIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={scene["name"]} />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          onClick={async e => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            deleteCharacter(scene);
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    {index !== scenes.length - 1 && <Divider />}
-                  </AppLink>
+                {Object.keys(groupedScenes).map((arcName, index) => (
+                  <div key={index}>
+                    {arcName !== defaultArcName && (
+                      <div
+                        style={{
+                          fontSize: "1.5rem"
+                        }}
+                      >
+                        {arcName}
+                      </div>
+                    )}
+
+                    {groupedScenes[arcName].map(scene => {
+                      return (
+                        <AppLink to={`/scenes/${scene._id}`} key={scene._id}>
+                          <ListItem>
+                            <ListItemAvatar>
+                              <Avatar>
+                                <LayersIcon />
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={scene.name} />
+                            <ListItemSecondaryAction>
+                              <IconButton
+                                edge="end"
+                                onClick={async e => {
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  deleteScene(scene);
+                                }}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          </ListItem>
+                        </AppLink>
+                      );
+                    })}
+                  </div>
                 ))}
               </List>
             </div>
