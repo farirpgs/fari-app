@@ -44,9 +44,7 @@ export const Scenes: React.FC<{}> = props => {
 
     setGroupedScenes(groupedScenes);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
+    setIsLoading(false);
   }, []);
 
   const deleteScene = async (scene: IScene) => {
