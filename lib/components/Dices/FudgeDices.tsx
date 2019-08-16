@@ -16,6 +16,7 @@ export const FudgeDices = props => {
           <Button
             variant="contained"
             color="primary"
+            disabled={fudge1.isRolling}
             onClick={async () => {
               fudge1.roll();
               fudge2.roll();

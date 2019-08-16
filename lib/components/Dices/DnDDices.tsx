@@ -22,13 +22,17 @@ export const DnDDices = props => {
     </div>
   );
 
-  function renderDice(label: string, dice) {
+  function renderDice(
+    label: string,
+    dice: { value: any; isRolling?: boolean; roll: any }
+  ) {
     return (
       <div className="row center-xs">
         <div className="col-xs-12">
           <Button
             variant="contained"
             color="primary"
+            disabled={dice.isRolling}
             onClick={async () => {
               dice.roll();
             }}

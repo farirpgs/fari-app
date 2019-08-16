@@ -1,13 +1,13 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 export function useNumber(max: number) {
   const [value, setValue] = useState<number>(undefined);
-  const isRolling = useRef(false);
+  const [isRolling, setIsRolling] = useState(false);
   const rollAnimationCount = 30;
   function roll(count = 0) {
-    if (isRolling.current && count === 0) {
+    if (isRolling && count === 0) {
       return;
     }
-    isRolling.current = true;
+    setIsRolling(true);
     const number = getRandomNumber();
     setValue(number);
     if (count !== rollAnimationCount) {
@@ -15,7 +15,7 @@ export function useNumber(max: number) {
         roll(count + 1);
       }, 50);
     } else {
-      isRolling.current = false;
+      setIsRolling(false);
     }
   }
   function getRandomNumber() {
@@ -23,6 +23,7 @@ export function useNumber(max: number) {
   }
   return {
     value,
+    isRolling,
     roll
   };
 }

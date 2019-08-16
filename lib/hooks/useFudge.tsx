@@ -1,14 +1,14 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export function useFudge() {
   const [value, setValue] = useState("");
   const rollAnimationCount = 30;
-  const isRolling = useRef(false);
+  const [isRolling, setIsRolling] = useState(false);
   function roll(count = 0) {
-    if (isRolling.current && count === 0) {
+    if (isRolling && count === 0) {
       return;
     }
-    isRolling.current = true;
+    setIsRolling(true);
     const number = Math.floor((Math.random() * 100) % 3);
     setValue(FudgeTypes[number]);
     if (count !== rollAnimationCount) {
@@ -16,15 +16,13 @@ export function useFudge() {
         roll(count + 1);
       }, 50);
     } else {
-      isRolling.current = false;
+      setIsRolling(false);
     }
   }
-  function reset() {
-    setValue("");
-  }
+
   return {
     value,
-    reset,
+    isRolling,
     roll
   };
 }

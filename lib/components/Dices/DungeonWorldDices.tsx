@@ -13,6 +13,7 @@ export const DungeonWorldDices = props => {
           <Button
             variant="contained"
             color="primary"
+            disabled={firstD6.isRolling}
             onClick={async () => {
               firstD6.roll();
               secondD6.roll();
