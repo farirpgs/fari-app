@@ -17,12 +17,9 @@ import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
 import { IScene } from "../../root/AppRouter";
-
-export interface IGroupedScenes {
-  Default?: Array<IScene>;
-  [arcName: string]: Array<IScene>;
-}
-const defaultArcName = "Default";
+import { defaultArcName } from "./defaultArcName";
+import { IGroupedScenes } from "./IGroupedScenes";
+import * as selectors from "./sceneSelectors";
 
 export const Scenes: React.FC<{}> = props => {
   const [groupedScenes, setGroupedScenes] = useState<IGroupedScenes>({});
@@ -43,29 +40,13 @@ export const Scenes: React.FC<{}> = props => {
     const scenes = (result.rows.map(row => row.doc) as unknown) as Array<
       IScene
     >;
-    const groupedScenes = scenes.reduce(
-      (groupedScenes, scene) => {
-        const [arc, sceneName] = scene.name.split("/");
-        const hasAnArc = !!sceneName;
-
-        if (hasAnArc) {
-          const previousArcScenes = groupedScenes[arc.trim()] || [];
-          groupedScenes[arc.trim()] = [
-            ...previousArcScenes,
-            { ...scene, name: sceneName.trim() }
-          ].sort((a, b) => a.name.localeCompare(b.name));
-        } else {
-          const previousArcScenes = groupedScenes[defaultArcName] || [];
-          groupedScenes[defaultArcName] = [...previousArcScenes, scene];
-        }
-        return groupedScenes;
-      },
-      {} as IGroupedScenes
-    );
+    const groupedScenes = selectors.groupScenesByArc(scenes);
 
     setGroupedScenes(groupedScenes);
 
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
   }, []);
 
   const deleteScene = async (scene: IScene) => {

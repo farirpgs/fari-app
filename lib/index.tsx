@@ -1,6 +1,7 @@
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Fade from "@material-ui/core/Fade";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
@@ -48,15 +49,18 @@ function App() {
               maxWidth: "1200px",
               width: "100%",
               padding: "1rem",
+              minHeight: "4.25rem",
               justifyContent: "space-between"
             }}
           >
             <Typography variant="h6">Fari</Typography>
             {pwa.shouldSuggestInstallation && (
-              <Button color="inherit" onClick={pwa.prompt} variant="outlined">
-                <CloudDownloadIcon style={{ marginRight: "1rem" }} />
-                Install
-              </Button>
+              <Fade in>
+                <Button color="inherit" onClick={pwa.prompt} variant="outlined">
+                  <CloudDownloadIcon style={{ marginRight: "1rem" }} />
+                  Install
+                </Button>
+              </Fade>
             )}
           </Toolbar>
         </AppBar>

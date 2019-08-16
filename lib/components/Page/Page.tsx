@@ -2,6 +2,7 @@ import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import React from "react";
 import { AppProgress } from "../AppProgress/AppProgress";
+import { useDelayedIsLoading } from "./useDelayedIsLoading";
 
 export const Page: React.FC<{
   isLoading?: boolean;
@@ -10,11 +11,15 @@ export const Page: React.FC<{
   outside?: JSX.Element | string;
 }> = props => {
   const { isLoading, h1, h2, outside, children } = props;
+  const isReallyLoading = useDelayedIsLoading(isLoading);
+
   return (
     <div>
-      {isLoading && (
+      {isReallyLoading && (
         <Fade in>
-          <AppProgress />
+          <div>
+            <AppProgress />
+          </div>
         </Fade>
       )}
       {outside}
