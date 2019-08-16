@@ -25,7 +25,7 @@ export const Page: React.FC<{
       {outside}
       <div className="route-box">
         {!isLoading && (
-          <Fade in>
+          <Fade in timeout={250}>
             <div>
               {!!h1 && <h1>{h1}</h1>}
               {!!h2 && <h2>{h2}</h2>}
