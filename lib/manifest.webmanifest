@@ -4,7 +4,7 @@
   "icons": [
     {
       "src": "../images/app-icon.png",
-      "sizes": "500x500",
+      "sizes": "512x512",
       "type": "image/png"
     },
     {
@@ -14,7 +14,7 @@
     }
   ],
   "start_url": "/?utm_source=homescreen",
-  "background_color": "#000",
-  "theme_color": "#536878",
+  "background_color": "#3f51b5",
+  "theme_color": "#3f51b5",
   "display": "standalone"
 }
