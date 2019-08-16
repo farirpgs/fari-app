@@ -3,12 +3,12 @@
   "name": "Fari",
   "icons": [
     {
-      "src": "../images/logo.png",
+      "src": "../images/logo_transparent.png",
       "sizes": "500x500",
       "type": "image/png"
     },
     {
-      "src": "../images/logo.png",
+      "src": "../images/logo_transparent.png",
       "sizes": "192x192",
       "type": "image/png"
     }
