@@ -17,12 +17,13 @@ export const PostIt: React.FC<{
         marginBottom: "1rem"
       }}
     >
-      <div className="row">
-        <div className="col-xs">
+      <div className="row middle-xs">
+        <div className="col-xs-11">
           <TextField
             type="text"
             value={props.value}
             onChange={props.onChange}
+            placeholder="Name of your aspect"
             multiline={true}
             margin="normal"
             variant="outlined"
@@ -35,10 +36,7 @@ export const PostIt: React.FC<{
             InputProps={{ style: { border: "none" } }}
           />
         </div>
-      </div>
-
-      <div className="row end-xs">
-        <div className="col-xs">
+        <div className="col-xs-1">
           <IconButton edge="end" onClick={props.onDelete}>
             <DeleteIcon />
           </IconButton>
