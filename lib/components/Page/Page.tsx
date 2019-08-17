@@ -89,10 +89,19 @@ export const Page: React.FC<{
               variant="h6"
               component="h1"
               style={{
-                flex: "1 0 auto"
+                flex: "1 1 auto"
               }}
             >
-              {h1}
+              <div
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "25rem"
+                }}
+              >
+                {h1}
+              </div>
             </Typography>
 
             {appBarActions}
