@@ -1,10 +1,12 @@
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import ArrowBack from "@material-ui/icons/ArrowBack";
+import AddIcon from "@material-ui/icons/Add";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useCallback, useEffect, useState } from "react";
 import uuid from "uuid/v4";
@@ -73,6 +75,9 @@ export const Scene: React.FC<{
       ...scene,
       aspects: [...(scene.aspects || []), ""]
     });
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 0);
   };
 
   const setAspect = (content: string, index: number) => {
@@ -104,6 +109,29 @@ export const Scene: React.FC<{
       h2={
         presentModeEnabled ? "" : <AppLink to={`/scenes`}>All Scenes</AppLink>
       }
+      appBarActions={
+        <>
+          {!isInCreateMode && !presentModeEnabled && (
+            <IconButton
+              edge="end"
+              color="inherit"
+              style={{
+                marginRight: "1rem"
+              }}
+              onClick={() => {
+                routerHistory.push(`/scenes/${sceneId}/present`);
+              }}
+            >
+              <PresentToAllIcon />
+            </IconButton>
+          )}
+          {!presentModeEnabled && (
+            <IconButton edge="end" onClick={saveScene} color="inherit">
+              <SaveIcon />
+            </IconButton>
+          )}
+        </>
+      }
     >
       {presentModeEnabled && (
         <>
@@ -115,7 +143,7 @@ export const Scene: React.FC<{
       {!presentModeEnabled && (
         <>
           {renderSnackBarsAndFab()}
-          {!isInCreateMode && renderPresentationButtonBox()}
+
           {renderSceneNameFieldBox()}
           {renderSceneDescriptionFieldBox()}
           {renderAspectsBox()}
@@ -128,7 +156,7 @@ export const Scene: React.FC<{
     return (
       <AppLink to={`/scenes/${sceneId}`}>
         <AppFab>
-          <ArrowBack />
+          <ArrowBackIcon />
         </AppFab>
       </AppLink>
     );
@@ -151,35 +179,10 @@ export const Scene: React.FC<{
           onClose={() => setSceneCreatedSnackBar({ visible: false })}
           message={<span id="message-id">Scene Created</span>}
         />
-        <AppFab onClick={saveScene}>
-          <SaveIcon />
+        <AppFab onClick={addAspect}>
+          <AddIcon />
         </AppFab>
       </>
-    );
-  }
-  function renderPresentationButtonBox() {
-    return (
-      <Box margin="2rem 0">
-        <div className="row center-xs">
-          <div className="col-xs">
-            <Button color="secondary" variant="outlined" size="large">
-              <AppLink to={`/scenes/${sceneId}/present`}>
-                Presentation Mode
-              </AppLink>
-            </Button>
-          </div>
-          <div className="col-xs">
-            <Button
-              color="secondary"
-              onClick={addAspect}
-              variant="outlined"
-              size="large"
-            >
-              Add a Scene Aspect
-            </Button>
-          </div>
-        </div>
-      </Box>
     );
   }
 
