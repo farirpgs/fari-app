@@ -11,8 +11,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import InfoIcon from "@material-ui/icons/Info";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
+import { routerHistory } from "../..";
 import { usePWA } from "../../hooks/usePWA";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { useDelayedIsLoading } from "./useDelayedIsLoading";
@@ -132,13 +134,31 @@ const MenuDrawer: React.FC<{ open: boolean; onClose: () => void }> = props => {
       <Divider />
       <List>
         {pwa.shouldSuggestInstallation && (
-          <ListItem button key={"Install"} onClick={pwa.prompt}>
+          <ListItem
+            button
+            onClick={() => {
+              pwa.prompt();
+              props.onClose();
+            }}
+          >
             <ListItemIcon>
               <CloudDownloadIcon />
             </ListItemIcon>
             <ListItemText primary={"Install"} />
           </ListItem>
         )}
+        <ListItem
+          button
+          onClick={() => {
+            props.onClose();
+            routerHistory.push("/about");
+          }}
+        >
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary={"About"} />
+        </ListItem>
       </List>
     </Drawer>
   );

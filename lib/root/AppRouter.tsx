@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { About } from "../routes/About/About";
 import { Characters } from "../routes/Characters/Characters";
 import { CreateCharacter } from "../routes/CreateCharacter/CreateCharacter";
 import { Dices } from "../routes/Dices/Dices";
@@ -30,6 +31,7 @@ export const AppRouter = () => (
     <Route exact path={"/scenes"} component={Scenes} />
     <Route exact path={"/scenes/create"} component={Scene} />
     <Route exact path={"/scenes/:sceneId"} component={Scene} />
+    <Route exact path={"/about"} component={About} />
     <Route
       exact
       path={"/scenes/:sceneId/present"}
