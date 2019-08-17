@@ -13,13 +13,15 @@ const _AppBottomNavigation: React.FC<{
 
   useEffect(() => {
     if (location.pathname.startsWith("/game")) {
-      return setNav(0);
-    }
-    if (location.pathname.startsWith("/scene")) {
       return setNav(1);
     }
-    if (location.pathname.startsWith("/dices")) {
+    if (location.pathname.startsWith("/scene")) {
       return setNav(2);
+    }
+    if (location.pathname.startsWith("/dices")) {
+      return setNav(3);
+    } else {
+      return setNav(0);
     }
   }, [location.pathname]);
   return (
@@ -39,6 +41,13 @@ const _AppBottomNavigation: React.FC<{
           "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)"
       }}
     >
+      <BottomNavigationAction
+        label=""
+        component={Link}
+        to="/"
+        style={{ display: "none" }}
+        icon={<PersonIcon />}
+      />
       <BottomNavigationAction
         label="Characters"
         component={Link}
