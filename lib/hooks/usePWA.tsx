@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IPWAEvent {
   prompt: () => void;
@@ -7,27 +7,31 @@ interface IPWAEvent {
   }>;
 }
 
+let shouldSuggestInstallationSingleton = false;
+let pwaPromptSingleton: IPWAEvent = undefined;
+
 export function usePWA(
   onInstall = () => undefined,
   onCancelInstall = () => undefined
 ) {
-  const pwaPrompt = useRef<IPWAEvent>(undefined);
   const [shouldSuggestInstallation, setShouldSuggestInstallation] = useState(
-    false
+    shouldSuggestInstallationSingleton
   );
   useEffect(() => {
     const beforeInstallPrompt = (event: any) => {
-      pwaPrompt.current = event;
+      pwaPromptSingleton = event;
       setShouldSuggestInstallation(true);
+      shouldSuggestInstallationSingleton = true;
     };
     window.addEventListener("beforeinstallprompt", beforeInstallPrompt);
     return () => {
       window.removeEventListener("beforeinstallprompt", beforeInstallPrompt);
     };
   }, []);
+
   const prompt = async () => {
-    pwaPrompt.current.prompt();
-    const choiceResult = await pwaPrompt.current.userChoice;
+    pwaPromptSingleton.prompt();
+    const choiceResult = await pwaPromptSingleton.userChoice;
     if (choiceResult.outcome === "accepted") {
       onInstall();
     } else {
