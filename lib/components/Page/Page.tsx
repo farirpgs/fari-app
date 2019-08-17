@@ -1,11 +1,18 @@
 import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
-import React from "react";
+import MenuIcon from "@material-ui/icons/Menu";
+import React, { useState } from "react";
 import { usePWA } from "../../hooks/usePWA";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { useDelayedIsLoading } from "./useDelayedIsLoading";
@@ -15,39 +22,39 @@ export const Page: React.FC<{
   isLoading?: boolean;
   h1?: JSX.Element | string;
   h2?: JSX.Element | string;
+  appBarActions?: JSX.Element;
 }> = props => {
-  const { isLoading, h1, h2, children } = props;
+  const { isLoading, h1, h2, children, appBarActions } = props;
   const isReallyLoading = useDelayedIsLoading(isLoading);
-  const pwa = usePWA();
-
+  const [isDrawerOpened, setIsDrawerOpened] = useState(false);
   return (
-    <div>
+    <>
       {renderHeader()}
       {!isLoading && renderContent()}
-    </div>
+      <MenuDrawer
+        open={isDrawerOpened}
+        onClose={() => {
+          setIsDrawerOpened(false);
+        }}
+      />
+    </>
   );
 
   function renderContent() {
     return (
-      <div className="route-box">
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: `${headerHeightREM + 2}rem auto 0 auto`,
-            display: "flex",
-            flex: "1 0 auto",
-            width: "100%",
-            marginBottom: "10rem"
-          }}
-        >
-          <Fade in timeout={250}>
-            <div style={{ width: "100%" }}>
-              {!!h2 && <h2>{h2}</h2>}
-              {!!h2 && <Divider style={{ margin: "1rem 0" }} />}
-              {children}
-            </div>
-          </Fade>
-        </div>
+      <div
+        className="route-box"
+        onClick={() => {
+          setIsDrawerOpened(false);
+        }}
+      >
+        <Fade in timeout={250}>
+          <div style={{ width: "100%" }}>
+            {!!h2 && <h2>{h2}</h2>}
+            {!!h2 && <Divider style={{ margin: "1rem 0" }} />}
+            {children}
+          </div>
+        </Fade>
       </div>
     );
   }
@@ -62,31 +69,31 @@ export const Page: React.FC<{
               maxWidth: "1200px",
               width: "100%",
               padding: "1rem",
-              height: `${headerHeightREM}rem`,
-              justifyContent: "space-between"
+              height: `${headerHeightREM}rem`
             }}
           >
-            <div className="row between-xs" style={{ width: "100%" }}>
-              <div className="col-xs">
-                <Typography variant="h6" component="h1">
-                  {h1}
-                </Typography>
-              </div>
-            </div>
-            {pwa.shouldSuggestInstallation && (
-              <div className="col-xs">
-                <Fade in>
-                  <Button
-                    color="inherit"
-                    onClick={pwa.prompt}
-                    variant="outlined"
-                  >
-                    <CloudDownloadIcon style={{ marginRight: "1rem" }} />
-                    Install
-                  </Button>
-                </Fade>
-              </div>
-            )}
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => {
+                setIsDrawerOpened(!isDrawerOpened);
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <Typography
+              variant="h6"
+              component="h1"
+              style={{
+                flex: "1 0 auto"
+              }}
+            >
+              {h1}
+            </Typography>
+
+            {appBarActions}
           </Toolbar>
         </AppBar>
         {isReallyLoading && (
@@ -99,4 +106,40 @@ export const Page: React.FC<{
       </>
     );
   }
+};
+
+const MenuDrawer: React.FC<{ open: boolean; onClose: () => void }> = props => {
+  const pwa = usePWA();
+
+  return (
+    <Drawer
+      variant="persistent"
+      anchor="left"
+      open={props.open}
+      PaperProps={{
+        style: {
+          width: "240px"
+        }
+      }}
+    >
+      <div className="row end-xs">
+        <div className="col-xs">
+          <IconButton onClick={props.onClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+      </div>
+      <Divider />
+      <List>
+        {pwa.shouldSuggestInstallation && (
+          <ListItem button key={"Install"} onClick={pwa.prompt}>
+            <ListItemIcon>
+              <CloudDownloadIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Install"} />
+          </ListItem>
+        )}
+      </List>
+    </Drawer>
+  );
 };
