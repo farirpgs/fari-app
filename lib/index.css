@@ -2,6 +2,13 @@ html {
   overflow-y: scroll;
 }
 
+html,
+body,
+#root {
+  min-height: 100vh;
+  height: auto;
+}
+
 h1 {
   margin: 24px 0 16px;
   font-size: 2.5rem;
@@ -22,5 +29,14 @@ h2 {
 
 .route-box {
   padding: 0 1rem;
+  height: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 6.25rem; /* Top Nav size 4.25; + 2*/
+  margin-bottom: 56px; /* Bottom Nav Size*/
+
+  display: flex;
+  flex: 1 0 auto;
   width: 100%;
 }
