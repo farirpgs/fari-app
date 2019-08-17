@@ -9,7 +9,7 @@ export const AppFab: React.FC<{ onClick?: () => void }> = props => {
         position: "fixed",
         zIndex: 1,
         bottom: "5rem",
-        right: "2rem"
+        right: "1rem"
       }}
       {...props}
     />
