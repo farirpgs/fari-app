@@ -56,7 +56,9 @@ export const Characters = props => {
     <Page
       isLoading={isLoading}
       h1={`Characters`}
-      h2={<AppLink to="/games">All Games</AppLink>}
+      backFunction={() => {
+        routerHistory.push(`/games`);
+      }}
     >
       <Snackbar
         autoHideDuration={2000}

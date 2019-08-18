@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
-import { AppLink } from "../../components/AppLink/AppLink";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
 import { Page } from "../../components/Page/Page";
 import { getCharactersDb } from "../../database/database";
@@ -17,7 +16,9 @@ export const CreateCharacter = props => {
   return (
     <Page
       h1="Create Your Character"
-      h2={<AppLink to={`/game/${game.slug}`}>All Characters</AppLink>}
+      backFunction={() => {
+        routerHistory.push(`/game/${game.slug}`);
+      }}
     >
       <AppFab onClick={save}>
         <SaveIcon />

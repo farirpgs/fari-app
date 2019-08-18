@@ -5,14 +5,12 @@ import Snackbar from "@material-ui/core/Snackbar";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useCallback, useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
-import { AppLink } from "../../components/AppLink/AppLink";
 import { PostIt } from "../../components/Aspect/PostIt";
 import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
@@ -106,9 +104,13 @@ export const Scene: React.FC<{
     <Page
       isLoading={isLoading}
       h1={presentModeEnabled ? "" : sceneName}
-      h2={
-        presentModeEnabled ? "" : <AppLink to={`/scenes`}>All Scenes</AppLink>
-      }
+      backFunction={() => {
+        if (presentModeEnabled) {
+          routerHistory.push(`/scenes/${sceneId}`);
+        } else {
+          routerHistory.push(`/scenes`);
+        }
+      }}
       appBarActions={
         <>
           {!isInCreateMode && !presentModeEnabled && (
@@ -135,7 +137,6 @@ export const Scene: React.FC<{
     >
       {presentModeEnabled && (
         <>
-          {renderPresentationModeUpdateFab()}
           {renderTitlePresentationBox()}
           {renderAspectsPresentationBox()}
           {renderSceneDescriptionPresentationBox()}
@@ -152,16 +153,6 @@ export const Scene: React.FC<{
       )}
     </Page>
   );
-
-  function renderPresentationModeUpdateFab() {
-    return (
-      <AppLink to={`/scenes/${sceneId}`}>
-        <AppFab>
-          <ArrowBackIcon />
-        </AppFab>
-      </AppLink>
-    );
-  }
 
   function renderSnackBarsAndFab() {
     return (

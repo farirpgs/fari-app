@@ -1,8 +1,8 @@
 import Snackbar from "@material-ui/core/Snackbar";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useCallback, useEffect, useState } from "react";
+import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
-import { AppLink } from "../../components/AppLink/AppLink";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
 import { Page } from "../../components/Page/Page";
 import { getCharactersDb } from "../../database/database";
@@ -41,7 +41,9 @@ export const PlayCharacter = props => {
     <Page
       isLoading={isLoading}
       h1={characterName}
-      h2={<AppLink to={`/game/${game.slug}`}>All Characters</AppLink>}
+      backFunction={() => {
+        routerHistory.push(`/game/${game.slug}`);
+      }}
     >
       <Snackbar
         autoHideDuration={2000}
