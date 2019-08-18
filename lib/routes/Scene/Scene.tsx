@@ -105,7 +105,7 @@ export const Scene: React.FC<{
   return (
     <Page
       isLoading={isLoading}
-      h1={sceneName}
+      h1={presentModeEnabled ? "" : sceneName}
       h2={
         presentModeEnabled ? "" : <AppLink to={`/scenes`}>All Scenes</AppLink>
       }
@@ -136,6 +136,7 @@ export const Scene: React.FC<{
       {presentModeEnabled && (
         <>
           {renderPresentationModeUpdateFab()}
+          {renderTitlePresentationBox()}
           {renderAspectsPresentationBox()}
           {renderSceneDescriptionPresentationBox()}
         </>
@@ -269,6 +270,7 @@ export const Scene: React.FC<{
           <div className="row center-xs">
             {sceneDescription.split("\n").map((line, lineIndex) => {
               const isLink = line.startsWith("http");
+              const isEmpty = line.trim().length === 0;
               if (isLink) {
                 const imageLink = line.trim();
                 return (
@@ -285,6 +287,14 @@ export const Scene: React.FC<{
                       }}
                     />
                   </div>
+                );
+              } else if (isEmpty) {
+                return (
+                  <div
+                    className="col-xs-12"
+                    key={lineIndex}
+                    style={{ height: "1rem" }}
+                  />
                 );
               } else {
                 return (
@@ -328,21 +338,38 @@ export const Scene: React.FC<{
     );
   }
 
+  function renderTitlePresentationBox() {
+    return (
+      <Box margin="1rem 0">
+        <div className="row center-xs">
+          <div className="col-xs">
+            <h1>{sceneName}</h1>
+          </div>
+        </div>
+      </Box>
+    );
+  }
+
   function renderAspectsPresentationBox() {
     return (
       <Box margin="1rem 0">
         <div className="row">
           {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div className="col-xs-12 col-md-4" key={aspectIndex}>
+            <div
+              className="col-xs-6 col-md-4"
+              key={aspectIndex}
+              style={{ display: "flex" }}
+            >
               <Paper
                 style={{
                   minHeight: "4rem",
+                  width: "100%",
                   padding: "1rem",
                   marginBottom: "1rem",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  fontSize: "3rem"
+                  fontSize: "2rem"
                 }}
               >
                 <div className="row">
