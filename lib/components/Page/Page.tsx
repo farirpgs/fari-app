@@ -1,12 +1,12 @@
 import AppBar from "@material-ui/core/AppBar";
 import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -35,6 +35,9 @@ export const Page: React.FC<{
       {!isLoading && renderContent()}
       <MenuDrawer
         open={isDrawerOpened}
+        onOpen={() => {
+          setIsDrawerOpened(true);
+        }}
         onClose={() => {
           setIsDrawerOpened(false);
         }}
@@ -119,11 +122,17 @@ export const Page: React.FC<{
   }
 };
 
-const MenuDrawer: React.FC<{ open: boolean; onClose: () => void }> = props => {
+const MenuDrawer: React.FC<{
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}> = props => {
   const pwa = usePWA();
 
   return (
-    <Drawer
+    <SwipeableDrawer
+      onOpen={props.onOpen}
+      onClose={props.onClose}
       variant="persistent"
       anchor="left"
       open={props.open}
@@ -169,6 +178,6 @@ const MenuDrawer: React.FC<{ open: boolean; onClose: () => void }> = props => {
           <ListItemText primary={"About"} />
         </ListItem>
       </List>
-    </Drawer>
+    </SwipeableDrawer>
   );
 };
