@@ -12,12 +12,12 @@ export const DnDDices = props => {
   return (
     <div>
       <div className="row ">
-        <div className="col-xs-4 col-sm-3">{renderDice("Roll D4", d4)}</div>
-        <div className="col-xs-4 col-sm-3">{renderDice("Roll D6", d6)}</div>
-        <div className="col-xs-4 col-sm-3">{renderDice("Roll D8", d8)}</div>
-        <div className="col-xs-4 col-sm-3">{renderDice("Roll D10", d10)}</div>
-        <div className="col-xs-4 col-sm-3">{renderDice("Roll D12", d12)}</div>
-        <div className="col-xs-4 col-sm-3">{renderDice("Roll D20", d20)}</div>
+        <div className="col-xs-6 col-sm-3">{renderDice("Roll D4", d4)}</div>
+        <div className="col-xs-6 col-sm-3">{renderDice("Roll D6", d6)}</div>
+        <div className="col-xs-6 col-sm-3">{renderDice("Roll D8", d8)}</div>
+        <div className="col-xs-6 col-sm-3">{renderDice("Roll D10", d10)}</div>
+        <div className="col-xs-6 col-sm-3">{renderDice("Roll D12", d12)}</div>
+        <div className="col-xs-6 col-sm-3">{renderDice("Roll D20", d20)}</div>
       </div>
     </div>
   );
