@@ -37,6 +37,7 @@ h2 {
   margin-bottom: 56px; /* Bottom Nav Size*/
   min-height: calc(100vh - 56px);
   display: flex;
+  position: relative;
   flex: 1 0 auto;
   width: 100%;
 }

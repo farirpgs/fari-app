@@ -6,9 +6,9 @@ export const AppFab: React.FC<{ onClick?: () => void }> = props => {
     <Fab
       color="primary"
       style={{
-        position: "fixed",
+        position: "absolute",
         zIndex: 1,
-        bottom: "5rem",
+        bottom: "2rem",
         right: "1rem"
       }}
       {...props}
