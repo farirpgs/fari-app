@@ -30,16 +30,16 @@ export const FudgeDices = props => {
       </div>
 
       <div className="row center-xs">
-        <div className="col-xs col-md-1">
+        <div className="col-xs col-sm-3">
           <Dice size={1}>{fudge1.value}</Dice>
         </div>
-        <div className="col-xs col-md-1">
+        <div className="col-xs col-sm-3">
           <Dice size={1}>{fudge2.value}</Dice>
         </div>
-        <div className="col-xs col-md-1">
+        <div className="col-xs col-sm-3">
           <Dice size={1}>{fudge3.value}</Dice>
         </div>
-        <div className="col-xs col-md-1">
+        <div className="col-xs col-sm-3">
           <Dice size={1}>{fudge4.value}</Dice>
         </div>
       </div>

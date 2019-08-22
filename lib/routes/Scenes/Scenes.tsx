@@ -89,7 +89,7 @@ export const Scenes: React.FC<{}> = props => {
       {hasItems && (
         <div>
           <div className="row">
-            <div className="col-xs-12 col-md-4">
+            <div className="col-xs-12 col-md-6">
               <List component="nav">
                 {Object.keys(groupedScenes).map((arcName, index) => (
                   <div key={index}>

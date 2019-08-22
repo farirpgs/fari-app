@@ -201,12 +201,6 @@ export const Scene: React.FC<{
             </div>
           </div>
         </Box>
-        <Box margin="1rem 0">
-          <p>
-            Enter the name of your scene. You can also use a "/" to group it
-            with an arc. e.g. Star Wars Adventures / 1. In A Galaxy Far Far Away
-          </p>
-        </Box>
       </>
     );
   }
@@ -235,14 +229,6 @@ export const Scene: React.FC<{
               />
             </div>
           </div>
-        </Box>
-        <Box margin="1rem 0">
-          <p>
-            Establish what’s going on, where everyone is, and what the
-            environment is like. Who is the opposition? The GM should write a
-            couple of situation aspects on sticky notes or index cards and place
-            them on the table. Players can suggest situation aspects, too
-          </p>
         </Box>
       </>
     );
@@ -312,7 +298,7 @@ export const Scene: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div className="col-xs-12 col-md-4" key={aspectIndex}>
+            <div className="col-xs-12 col-md-6" key={aspectIndex}>
               <PostIt
                 value={aspect}
                 onChange={event => {

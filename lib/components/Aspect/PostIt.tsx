@@ -17,8 +17,8 @@ export const PostIt: React.FC<{
         marginBottom: "1rem"
       }}
     >
-      <div className="row middle-xs">
-        <div className="col-xs-11">
+      <div className="row middle-xs between-xs end-xs">
+        <div className="col-xs">
           <TextField
             type="text"
             value={props.value}
@@ -36,7 +36,7 @@ export const PostIt: React.FC<{
             InputProps={{ style: { border: "none" } }}
           />
         </div>
-        <div className="col-xs-1">
+        <div className="col-xs-2">
           <IconButton edge="end" onClick={props.onDelete}>
             <DeleteIcon />
           </IconButton>

@@ -59,23 +59,19 @@ export const PlayCharacter = props => {
         onClose={() => setCharacterUpdatedSnackBar({ visible: false })}
         message={<span id="message-id">Character Updated</span>}
       />
-      <div className="row">
-        <div className="col-xs-12">
-          <div>
-            <AppFab onClick={save}>
-              <SaveIcon />
-            </AppFab>
+      <div>
+        <AppFab onClick={save}>
+          <SaveIcon />
+        </AppFab>
 
-            <CharacterFields
-              rows={game.rows}
-              character={character}
-              setCharacter={async character => {
-                setCharacter(character);
-              }}
-              onSubmit={save}
-            />
-          </div>
-        </div>
+        <CharacterFields
+          rows={game.rows}
+          character={character}
+          setCharacter={async character => {
+            setCharacter(character);
+          }}
+          onSubmit={save}
+        />
       </div>
     </Page>
   );
