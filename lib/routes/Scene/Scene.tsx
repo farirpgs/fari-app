@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import SaveIcon from "@material-ui/icons/Save";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
@@ -39,7 +39,7 @@ export const Scene: React.FC<{
   const sceneDescription = scene.description || "";
   const isInCreateMode = !scene._id;
 
-  const loadScenes = useCallback(async () => {
+  const loadScenes = async (sceneId: string) => {
     if (sceneId) {
       setIsLoading(true);
       const result = await getScenesDb().get<IScene>(sceneId);
@@ -48,12 +48,12 @@ export const Scene: React.FC<{
     } else {
       setIsLoading(false);
     }
-  }, [sceneId]);
+  };
 
   const saveScene = async () => {
     if (!!scene._id) {
       await getScenesDb().put<IScene>(scene);
-      await loadScenes();
+      await loadScenes(scene._id);
       setSceneUpdatedSnackBar({ visible: true });
     } else {
       const newId = uuid();
@@ -97,8 +97,8 @@ export const Scene: React.FC<{
   };
 
   useEffect(() => {
-    loadScenes();
-  }, [loadScenes]);
+    loadScenes(sceneId);
+  }, [sceneId]);
 
   return (
     <Page

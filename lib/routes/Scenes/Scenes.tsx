@@ -10,7 +10,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LayersIcon from "@material-ui/icons/Layers";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
@@ -32,7 +32,7 @@ export const Scenes: React.FC<{}> = props => {
   const [sceneDeletedSnackBar, setSceneDeletedSnackBar] = React.useState({
     visible: false
   });
-  const loadScenes = useCallback(async () => {
+  const loadScenes = async () => {
     setIsLoading(true);
     const result = await getScenesDb().allDocs({
       include_docs: true
@@ -45,7 +45,7 @@ export const Scenes: React.FC<{}> = props => {
     setGroupedScenes(groupedScenes);
 
     setIsLoading(false);
-  }, []);
+  };
 
   const deleteScene = async (scene: IScene) => {
     await getScenesDb().remove(scene._id, scene._rev, {});
@@ -54,7 +54,7 @@ export const Scenes: React.FC<{}> = props => {
   };
   useEffect(() => {
     loadScenes();
-  }, [loadScenes]);
+  }, []);
   return (
     <Page isLoading={isLoading} h1="Scenes">
       <Snackbar

@@ -11,7 +11,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
@@ -33,14 +33,14 @@ export const Characters = props => {
   const [isLoading, setIsLoading] = useState(true);
   const hasItems = characters && characters.length > 0;
 
-  const load = useCallback(async () => {
+  const load = async () => {
     setIsLoading(true);
     const result = await getCharactersDb(game).allDocs<ICharacter>({
       include_docs: true
     });
     setCharacters(result.rows.map(row => row.doc));
     setIsLoading(false);
-  }, []);
+  };
 
   async function deleteCharacter(character) {
     await getCharactersDb(game).remove(character._id, character._rev, {});
@@ -50,7 +50,7 @@ export const Characters = props => {
 
   useEffect(() => {
     load();
-  }, [gameSlug, load]);
+  }, [gameSlug]);
 
   return (
     <Page

@@ -1,6 +1,6 @@
 import Snackbar from "@material-ui/core/Snackbar";
 import SaveIcon from "@material-ui/icons/Save";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
@@ -15,16 +15,22 @@ export const PlayCharacter = props => {
   const [character, setCharacter] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const load = useCallback(async () => {
+  const load = async (characterId: string) => {
     setIsLoading(true);
     const result = await getCharactersDb(game).get<ICharacter>(characterId);
     setCharacter(result);
     setIsLoading(false);
-  }, [gameSlug, characterId]);
+  };
+
+  async function save() {
+    await getCharactersDb(game).put(character, {});
+    await load(characterId);
+    setCharacterUpdatedSnackBar({ visible: true });
+  }
 
   useEffect(() => {
-    load();
-  }, [load]);
+    load(characterId);
+  }, [gameSlug, characterId]);
 
   const characterWasJustCreated = location.search.indexOf("new=true") !== -1;
   const [
@@ -75,10 +81,4 @@ export const PlayCharacter = props => {
       </div>
     </Page>
   );
-
-  async function save() {
-    await getCharactersDb(game).put(character, {});
-    await load();
-    setCharacterUpdatedSnackBar({ visible: true });
-  }
 };
