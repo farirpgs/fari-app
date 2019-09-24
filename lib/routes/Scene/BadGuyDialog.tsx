@@ -7,7 +7,7 @@ import {
   DialogTitle,
   TextField
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IBadGuy } from "../../typings/IBadGuy";
 export const BadGuyDialog: React.FC<{
   open: boolean;
@@ -16,11 +16,12 @@ export const BadGuyDialog: React.FC<{
 }> = props => {
   const badGuy: IBadGuy = props.badGuy || ({} as any);
   const id = badGuy.id || undefined;
-  const [name, setName] = useState(badGuy.name || "");
-  const [aspects, setAspects] = useState(badGuy.aspects || "");
-  const [skilledAt, setSkilledAt] = useState(badGuy.skilledAt || "");
-  const [badAt, setBadAt] = useState(badGuy.badAt || "");
-  const [stress, setStress] = useState(badGuy.stress || "2");
+  const [name, setName] = useState("");
+  const [aspects, setAspects] = useState("");
+  const [skilledAt, setSkilledAt] = useState("");
+  const [badAt, setBadAt] = useState("");
+  const [stress, setStress] = useState("2");
+  const [consequences, setConsequences] = useState("0");
 
   const resetForm = () => {
     setName("");
@@ -28,7 +29,19 @@ export const BadGuyDialog: React.FC<{
     setSkilledAt("");
     setBadAt("");
     setStress("2");
+    setConsequences("0");
   };
+
+  useEffect(() => {
+    if (!!props.badGuy) {
+      setName(badGuy.name);
+      setAspects(badGuy.aspects);
+      setSkilledAt(badGuy.skilledAt);
+      setBadAt(badGuy.badAt);
+      setStress(badGuy.stress);
+      setConsequences(badGuy.consequences);
+    }
+  }, [props.badGuy]);
 
   return (
     <Dialog
@@ -103,12 +116,24 @@ export const BadGuyDialog: React.FC<{
           variant="filled"
           margin="normal"
           type="number"
-          InputProps={{}}
           style={{
             width: "100%"
           }}
           onChange={e => {
             setStress(e.target.value);
+          }}
+        />
+        <TextField
+          value={consequences}
+          label="Consequences Counter"
+          variant="filled"
+          margin="normal"
+          type="number"
+          style={{
+            width: "100%"
+          }}
+          onChange={e => {
+            setConsequences(e.target.value);
           }}
         />
       </DialogContent>
@@ -128,14 +153,18 @@ export const BadGuyDialog: React.FC<{
         <Button
           onClick={() => {
             resetForm();
-            props.handleClose({
-              id: id,
-              name,
-              aspects,
-              skilledAt,
-              badAt,
-              stress
-            });
+            props.handleClose(
+              badGuyFactory(
+                id,
+                name,
+                aspects,
+                skilledAt,
+                badAt,
+                stress,
+                badGuy,
+                consequences
+              )
+            );
           }}
           variant="contained"
           color="primary"
@@ -146,3 +175,26 @@ export const BadGuyDialog: React.FC<{
     </Dialog>
   );
 };
+
+function badGuyFactory(
+  id: string,
+  name: string,
+  aspects: string,
+  skilledAt: string,
+  badAt: string,
+  stress: string,
+  badGuy: IBadGuy,
+  consequences: string
+): IBadGuy {
+  return {
+    id: id,
+    name,
+    aspects,
+    skilledAt,
+    badAt,
+    stress: stress || "0",
+    stressValues: badGuy.stressValues || {},
+    consequences: consequences || "0",
+    consequencesValues: badGuy.consequencesValues || {}
+  };
+}

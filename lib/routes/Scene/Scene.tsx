@@ -1,7 +1,11 @@
 import {
   Box,
   Button,
+  Checkbox,
+  Divider,
+  FormControlLabel,
   IconButton,
+  Paper,
   Snackbar,
   TextField
 } from "@material-ui/core";
@@ -35,12 +39,12 @@ export const Scene: React.FC<{
   const [sceneUpdatedSnackBar, setSceneUpdatedSnackBar] = React.useState({
     visible: false
   });
-  const [isCreatingBadGuy, setIsCreatingBadGuy] = useState(false);
-  const [badGuyToEdit, setBadGuyToEdit] = useState<IBadGuy>(undefined);
+  const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
+  const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
 
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
-  console.log(scene.badGuys);
+
   const loadScenes = async (sceneId: string) => {
     if (sceneId) {
       setIsLoading(true);
@@ -99,28 +103,46 @@ export const Scene: React.FC<{
   };
 
   const handleBadGuyUpdate = (updatedBadGuy?: IBadGuy) => {
-    setIsCreatingBadGuy(false);
     const shouldUpdateScene = !!updatedBadGuy;
 
     if (shouldUpdateScene) {
       const isNew = !updatedBadGuy.id;
       if (isNew) {
-        setScene({
-          ...scene,
-          badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
-        });
+        addBadGuy(updatedBadGuy);
       } else {
-        setScene({
-          ...scene,
-          badGuys: scene.badGuys.map(badGuy => {
-            if (updatedBadGuy.id === badGuy.id) {
-              return updatedBadGuy;
-            }
-            return badGuy;
-          })
-        });
+        updateBadGuy(updatedBadGuy);
       }
     }
+    setIsBadGuyModalOpened(false);
+    setBadGuyToModify(undefined);
+  };
+
+  const addBadGuy = (updatedBadGuy: IBadGuy) => {
+    setScene({
+      ...scene,
+      badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
+    });
+  };
+
+  const updateBadGuy = (updatedBadGuy: IBadGuy) => {
+    setScene({
+      ...scene,
+      badGuys: scene.badGuys.map(badGuy => {
+        if (updatedBadGuy.id === badGuy.id) {
+          return updatedBadGuy;
+        }
+        return badGuy;
+      })
+    });
+  };
+
+  const removeBadGuy = (updatedBadGuy: IBadGuy) => {
+    setScene({
+      ...scene,
+      badGuys: scene.badGuys.filter(badGuy => {
+        return badGuy.id !== updatedBadGuy.id;
+      })
+    });
   };
 
   useEffect(() => {
@@ -144,13 +166,14 @@ export const Scene: React.FC<{
       {renderSceneActions()}
 
       <BadGuyDialog
-        open={isCreatingBadGuy}
+        open={isBadGuyModalOpened}
         handleClose={handleBadGuyUpdate}
-        badGuy={badGuyToEdit}
+        badGuy={badGuyToModify}
       ></BadGuyDialog>
 
       {renderSceneNameFieldBox()}
       {renderSceneDescriptionFieldBox()}
+      {renderBadGuyBox()}
       {renderAspectsBox()}
     </Page>
   );
@@ -239,11 +262,153 @@ export const Scene: React.FC<{
     );
   }
 
+  function renderBadGuyBox() {
+    return (
+      <Box margin="1rem 0">
+        <div className="row">
+          {(scene.badGuys || []).map(badGuy => {
+            const stressCount = parseInt(badGuy.stress);
+            const consequenceCount = parseInt(badGuy.consequences);
+
+            return (
+              <div className="col-xs-12 col-sm-6 col-md-6" key={badGuy.id}>
+                <Paper
+                  style={{
+                    minHeight: "4rem",
+                    padding: "1rem 1.5rem 1rem 1.5rem",
+                    marginBottom: "1rem"
+                  }}
+                >
+                  <div className="row center-xs">
+                    <div className="col-xs-12">
+                      <div
+                        style={{
+                          textTransform: "uppercase",
+                          fontSize: "1.5rem"
+                        }}
+                      >
+                        {badGuy.name}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row center-xs">
+                    <div className="col-xs-12">
+                      <div
+                        style={{
+                          fontStyle: "italic",
+                          fontSize: "1.2rem",
+                          marginBottom: "1rem"
+                        }}
+                      >
+                        {badGuy.aspects}
+                      </div>
+                    </div>
+                  </div>
+                  <Divider style={{ marginBottom: "1rem" }}></Divider>
+                  <div>
+                    <b>Skilled (+2) at:</b> {badGuy.skilledAt}
+                  </div>
+                  <div>
+                    <b>Bad (-2) at:</b> {badGuy.badAt}
+                  </div>
+                  <div>
+                    <div className="row">
+                      {[...new Array(stressCount)].map((u, stressIndex) => {
+                        return (
+                          <div className="col-xs-3" key={stressIndex}>
+                            <FormControlLabel
+                              label={`Stress #${stressIndex + 1}`}
+                              control={
+                                <Checkbox
+                                  checked={
+                                    badGuy.stressValues[stressIndex] || false
+                                  }
+                                  onChange={e => {
+                                    updateBadGuy({
+                                      ...badGuy,
+                                      stressValues: {
+                                        ...badGuy.stressValues,
+                                        [stressIndex]: e.target.checked
+                                      }
+                                    });
+                                  }}
+                                />
+                              }
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div>
+                      <div className="row">
+                        {[...new Array(consequenceCount)].map(
+                          (u, consequenceIndex) => {
+                            const consequenceShift = (consequenceIndex + 1) * 2;
+                            return (
+                              <div className="col-xs-12" key={consequenceIndex}>
+                                <TextField
+                                  value={
+                                    badGuy.consequencesValues[
+                                      consequenceIndex
+                                    ] || ""
+                                  }
+                                  label={`Consequence (${consequenceShift})`}
+                                  variant="filled"
+                                  margin="normal"
+                                  style={{
+                                    width: "100%"
+                                  }}
+                                  onChange={e => {
+                                    updateBadGuy({
+                                      ...badGuy,
+                                      consequencesValues: {
+                                        ...badGuy.consequencesValues,
+                                        [consequenceIndex]: e.target.value
+                                      }
+                                    });
+                                  }}
+                                />
+                              </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row end-xs">
+                    <Button
+                      onClick={() => {
+                        removeBadGuy(badGuy);
+                      }}
+                      color="secondary"
+                    >
+                      Remove
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setBadGuyToModify(badGuy);
+                        setIsBadGuyModalOpened(true);
+                      }}
+                      color="secondary"
+                    >
+                      Modify
+                    </Button>
+                  </div>
+                </Paper>
+              </div>
+            );
+          })}
+        </div>
+      </Box>
+    );
+  }
+
   function renderAspectsBox() {
     return (
       <Box margin="1rem 0">
         <div className="row">
-          {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
+          {(scene.aspects || []).map((aspect, aspectIndex) => (
             <div className="col-xs-12 col-sm-6 col-md-6" key={aspectIndex}>
               <PostIt
                 value={aspect}
@@ -267,8 +432,8 @@ export const Scene: React.FC<{
         <div className="col-xs">
           <Button
             onClick={() => {
-              setIsCreatingBadGuy(true);
-              setBadGuyToEdit(undefined);
+              setIsBadGuyModalOpened(true);
+              setBadGuyToModify(undefined);
             }}
             color="secondary"
           >

@@ -7,7 +7,7 @@
     "no-debugger": true,
     "member-access": true,
     "no-invalid-this": true,
-    "cyclomatic-complexity": [true, 10],
+    "cyclomatic-complexity": [true, 20],
     "indent": [true, "spaces", 2],
     "no-default-export": true,
     "no-duplicate-imports": true,
