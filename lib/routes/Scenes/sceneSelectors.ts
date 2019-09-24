@@ -6,7 +6,7 @@ function sortSceneAlphabetically(array: Array<IScene>) {
   return [...array].sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export function groupScenesByArc(scenes: Array<IScene>) {
+export function groupScenesByCampaign(scenes: Array<IScene>) {
   const groupedScenes = scenes.reduce(
     (groupedScenes, scene) => {
       const [arcName, sceneName] = scene.name.split("/");

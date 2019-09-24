@@ -17,7 +17,7 @@ import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { PostIt } from "../../components/Aspect/PostIt";
 import { Page } from "../../components/Page/Page";
-import { getScenesDb } from "../../database/database";
+import { SceneService } from "../../services/scene-service/SceneService";
 import { IBadGuy } from "../../types/IBadGuy";
 import { IScene } from "../../types/IScene";
 import { BadGuyDialog } from "./BadGuyDialog";
@@ -45,11 +45,11 @@ export const Scene: React.FC<{
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
 
-  const loadScenes = async (sceneId: string) => {
+  const loadScene = async (sceneId: string) => {
     if (sceneId) {
       setIsLoading(true);
-      const result = await getScenesDb().get<IScene>(sceneId);
-      setScene(result);
+      const result = await new SceneService().get(sceneId);
+      setScene({ ...result, badGuys: !!result.badGuys ? result.badGuys : [] });
       setIsLoading(false);
     } else {
       setIsLoading(false);
@@ -58,19 +58,17 @@ export const Scene: React.FC<{
 
   const saveScene = async () => {
     if (!!scene._id) {
-      await getScenesDb().put<IScene>(scene);
-      await loadScenes(scene._id);
+      await new SceneService().update(scene);
+
+      await loadScene(scene._id);
       setSceneUpdatedSnackBar({ visible: true });
     } else {
-      const newId = uuid();
-      await getScenesDb().put<IScene>({
-        _id: newId,
-        ...scene
-      });
+      const id = await new SceneService().add(scene);
+
       setSceneCreatedSnackBar({
         visible: true
       });
-      routerHistory.push(`/scenes/${newId}`);
+      routerHistory.push(`/scenes/${id}`);
     }
   };
 
@@ -146,7 +144,7 @@ export const Scene: React.FC<{
   };
 
   useEffect(() => {
-    loadScenes(sceneId);
+    loadScene(sceneId);
   }, [sceneId]);
 
   return (

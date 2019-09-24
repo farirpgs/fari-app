@@ -15,7 +15,7 @@ import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
-import { getScenesDb } from "../../database/database";
+import { SceneService } from "../../services/scene-service/SceneService";
 import { IScene } from "../../types/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
@@ -34,13 +34,8 @@ export const Scenes: React.FC<{}> = props => {
   });
   const loadScenes = async () => {
     setIsLoading(true);
-    const result = await getScenesDb().allDocs({
-      include_docs: true
-    });
-    const scenes = (result.rows.map(row => row.doc) as unknown) as Array<
-      IScene
-    >;
-    const groupedScenes = selectors.groupScenesByArc(scenes);
+    const scenes = await new SceneService().getAll();
+    const groupedScenes = selectors.groupScenesByCampaign(scenes);
 
     setGroupedScenes(groupedScenes);
 
@@ -48,10 +43,11 @@ export const Scenes: React.FC<{}> = props => {
   };
 
   const deleteScene = async (scene: IScene) => {
-    await getScenesDb().remove(scene._id, scene._rev, {});
+    new SceneService().remove(scene);
     await loadScenes();
     setSceneDeletedSnackBar({ visible: true });
   };
+
   useEffect(() => {
     loadScenes();
   }, []);

@@ -2,7 +2,7 @@ import { IScene } from "../../../types/IScene";
 import { defaultArcName } from "../defaultArcName";
 import * as selectors from "../sceneSelectors";
 describe("sceneSelectors", () => {
-  describe("groupScenesByArc", () => {
+  describe("groupScenesByCampaign", () => {
     it("should map stories without arc inside the default group", () => {
       // PREPARE
       const scenes: Array<IScene> = [
@@ -11,7 +11,7 @@ describe("sceneSelectors", () => {
         { name: "third" }
       ];
       // EXECUTE
-      const result = selectors.groupScenesByArc(scenes);
+      const result = selectors.groupScenesByCampaign(scenes);
 
       // VALIDATE
       expect(result[defaultArcName].length).toEqual(3);
@@ -27,7 +27,7 @@ describe("sceneSelectors", () => {
         { name: "Avatar / Book Three: Fire" }
       ];
       // EXECUTE
-      const result = selectors.groupScenesByArc(scenes);
+      const result = selectors.groupScenesByCampaign(scenes);
 
       // VALIDATE
       expect(result[defaultArcName].length).toEqual(3);
@@ -42,7 +42,7 @@ describe("sceneSelectors", () => {
         { name: "D) End Game" }
       ];
       // EXECUTE
-      const result = selectors.groupScenesByArc(scenes);
+      const result = selectors.groupScenesByCampaign(scenes);
 
       // VALIDATE
       expect(result[defaultArcName]).toEqual([
@@ -60,7 +60,7 @@ describe("sceneSelectors", () => {
         { name: "Avatar / 2. Book Two: Earth" }
       ];
       // EXECUTE
-      const result = selectors.groupScenesByArc(scenes);
+      const result = selectors.groupScenesByCampaign(scenes);
 
       // VALIDATE
       expect(result["Avatar"]).toEqual([
