@@ -20,7 +20,15 @@ export const BadGuyDialog: React.FC<{
   const [aspects, setAspects] = useState(badGuy.aspects || "");
   const [skilledAt, setSkilledAt] = useState(badGuy.skilledAt || "");
   const [badAt, setBadAt] = useState(badGuy.badAt || "");
-  const [stress, setStress] = useState(badGuy.stress || 2);
+  const [stress, setStress] = useState(badGuy.stress || "2");
+
+  const resetForm = () => {
+    setName("");
+    setAspects("");
+    setSkilledAt("");
+    setBadAt("");
+    setStress(2);
+  };
 
   return (
     <Dialog
@@ -100,7 +108,7 @@ export const BadGuyDialog: React.FC<{
             width: "100%"
           }}
           onChange={e => {
-            setStress(parseInt(e.target.value));
+            setStress(e.target.value);
           }}
         />
       </DialogContent>
@@ -119,6 +127,7 @@ export const BadGuyDialog: React.FC<{
         </Button>
         <Button
           onClick={() => {
+            resetForm();
             props.handleClose({
               id: id,
               name,

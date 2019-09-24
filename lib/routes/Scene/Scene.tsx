@@ -105,7 +105,7 @@ export const Scene: React.FC<{
     if (isNew) {
       setScene({
         ...scene,
-        badGuys: [...scene.badGuys, updatedBadGuy]
+        badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
       });
     } else {
       setScene({
