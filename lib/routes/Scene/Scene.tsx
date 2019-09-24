@@ -304,18 +304,19 @@ export const Scene: React.FC<{
                       </div>
                     </div>
                   </div>
-                  <Divider style={{ marginBottom: "1rem" }}></Divider>
+                  <Divider style={{ margin: "1rem 0" }}></Divider>
                   <div>
                     <b>Skilled (+2) at:</b> {badGuy.skilledAt}
                   </div>
                   <div>
                     <b>Bad (-2) at:</b> {badGuy.badAt}
                   </div>
+                  <Divider style={{ margin: "1rem 0" }}></Divider>
                   <div>
                     <div className="row">
                       {[...new Array(stressCount)].map((u, stressIndex) => {
                         return (
-                          <div className="col-xs-3" key={stressIndex}>
+                          <div className="col-xs-4" key={stressIndex}>
                             <FormControlLabel
                               label={`Stress #${stressIndex + 1}`}
                               control={
@@ -339,6 +340,7 @@ export const Scene: React.FC<{
                         );
                       })}
                     </div>
+                    <Divider style={{ margin: "1rem 0" }}></Divider>
                     <div>
                       <div className="row">
                         {[...new Array(consequenceCount)].map(
@@ -375,7 +377,7 @@ export const Scene: React.FC<{
                       </div>
                     </div>
                   </div>
-
+                  <Divider style={{ margin: "1rem 0" }}></Divider>
                   <div className="row end-xs">
                     <Button
                       onClick={() => {
