@@ -100,23 +100,26 @@ export const Scene: React.FC<{
 
   const handleBadGuyUpdate = (updatedBadGuy?: IBadGuy) => {
     setIsCreatingBadGuy(false);
-    const isNew = !updatedBadGuy.id;
+    const shouldUpdateScene = !!updatedBadGuy;
 
-    if (isNew) {
-      setScene({
-        ...scene,
-        badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
-      });
-    } else {
-      setScene({
-        ...scene,
-        badGuys: scene.badGuys.map(badGuy => {
-          if (updatedBadGuy.id === badGuy.id) {
-            return updatedBadGuy;
-          }
-          return badGuy;
-        })
-      });
+    if (shouldUpdateScene) {
+      const isNew = !updatedBadGuy.id;
+      if (isNew) {
+        setScene({
+          ...scene,
+          badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
+        });
+      } else {
+        setScene({
+          ...scene,
+          badGuys: scene.badGuys.map(badGuy => {
+            if (updatedBadGuy.id === badGuy.id) {
+              return updatedBadGuy;
+            }
+            return badGuy;
+          })
+        });
+      }
     }
   };
 

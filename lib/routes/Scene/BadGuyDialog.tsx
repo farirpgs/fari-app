@@ -27,7 +27,7 @@ export const BadGuyDialog: React.FC<{
     setAspects("");
     setSkilledAt("");
     setBadAt("");
-    setStress(2);
+    setStress("2");
   };
 
   return (
