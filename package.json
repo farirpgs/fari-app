@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
     "build": "npm run validate && parcel build ./lib/index.html --target browser",
-    "validate": "tsc --noEmit && npm run test && tslint --project tsconfig.json",
+    "validate": "tsc --noEmit --project tsconfig.json && npm run test && tslint --project tsconfig.json",
     "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
     "test": "jest --coverage"
   },
