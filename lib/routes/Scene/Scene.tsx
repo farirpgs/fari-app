@@ -1,11 +1,11 @@
-import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
-import Paper from "@material-ui/core/Paper";
-import Snackbar from "@material-ui/core/Snackbar";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import {
+  Box,
+  Button,
+  IconButton,
+  Snackbar,
+  TextField
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import PresentToAllIcon from "@material-ui/icons/PresentToAll";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
@@ -14,10 +14,11 @@ import { AppFab } from "../../components/AppFab/AppFab";
 import { PostIt } from "../../components/Aspect/PostIt";
 import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
-import { IScene } from "../../root/AppRouter";
+import { IBadGuy } from "../../typings/IBadGuy";
+import { IScene } from "../../typings/IScene";
+import { BadGuyDialog } from "./BadGuyDialog";
 
 export const Scene: React.FC<{
-  presentModeEnabled?: boolean;
   match: {
     params: {
       sceneId: string;
@@ -25,20 +26,21 @@ export const Scene: React.FC<{
   };
 }> = props => {
   const { sceneId } = props.match.params;
-  const { presentModeEnabled = false } = props;
+
   const [isLoading, setIsLoading] = useState(true);
-  const [scene, setScene] = useState<IScene>({});
+  const [scene, setScene] = useState<IScene>({ badGuys: [] });
   const [sceneCreatedSnackBar, setSceneCreatedSnackBar] = React.useState({
     visible: false
   });
   const [sceneUpdatedSnackBar, setSceneUpdatedSnackBar] = React.useState({
     visible: false
   });
+  const [isCreatingBadGuy, setIsCreatingBadGuy] = useState(false);
+  const [badGuyToEdit, setBadGuyToEdit] = useState<IBadGuy>(undefined);
 
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
-  const isInCreateMode = !scene._id;
-
+  console.log(scene.badGuys);
   const loadScenes = async (sceneId: string) => {
     if (sceneId) {
       setIsLoading(true);
@@ -96,6 +98,28 @@ export const Scene: React.FC<{
     });
   };
 
+  const handleBadGuyUpdate = (updatedBadGuy?: IBadGuy) => {
+    setIsCreatingBadGuy(false);
+    const isNew = !updatedBadGuy.id;
+
+    if (isNew) {
+      setScene({
+        ...scene,
+        badGuys: [...scene.badGuys, updatedBadGuy]
+      });
+    } else {
+      setScene({
+        ...scene,
+        badGuys: scene.badGuys.map(badGuy => {
+          if (updatedBadGuy.id === badGuy.id) {
+            return updatedBadGuy;
+          }
+          return badGuy;
+        })
+      });
+    }
+  };
+
   useEffect(() => {
     loadScenes(sceneId);
   }, [sceneId]);
@@ -103,54 +127,28 @@ export const Scene: React.FC<{
   return (
     <Page
       isLoading={isLoading}
-      h1={presentModeEnabled ? "" : sceneName}
+      h1={sceneName}
       backFunction={() => {
-        if (presentModeEnabled) {
-          routerHistory.push(`/scenes/${sceneId}`);
-        } else {
-          routerHistory.push(`/scenes`);
-        }
+        routerHistory.push(`/scenes`);
       }}
       appBarActions={
-        <>
-          {!isInCreateMode && !presentModeEnabled && (
-            <IconButton
-              edge="end"
-              color="inherit"
-              style={{
-                marginRight: "1rem"
-              }}
-              onClick={() => {
-                routerHistory.push(`/scenes/${sceneId}/present`);
-              }}
-            >
-              <PresentToAllIcon />
-            </IconButton>
-          )}
-          {!presentModeEnabled && (
-            <IconButton edge="end" onClick={saveScene} color="inherit">
-              <SaveIcon />
-            </IconButton>
-          )}
-        </>
+        <IconButton edge="end" onClick={saveScene} color="inherit">
+          <SaveIcon />
+        </IconButton>
       }
     >
-      {presentModeEnabled && (
-        <>
-          {renderTitlePresentationBox()}
-          {renderAspectsPresentationBox()}
-          {renderSceneDescriptionPresentationBox()}
-        </>
-      )}
-      {!presentModeEnabled && (
-        <>
-          {renderSnackBarsAndFab()}
+      {renderSnackBarsAndFab()}
+      {renderSceneActions()}
 
-          {renderSceneNameFieldBox()}
-          {renderSceneDescriptionFieldBox()}
-          {renderAspectsBox()}
-        </>
-      )}
+      <BadGuyDialog
+        open={isCreatingBadGuy}
+        handleClose={handleBadGuyUpdate}
+        badGuy={badGuyToEdit}
+      ></BadGuyDialog>
+
+      {renderSceneNameFieldBox()}
+      {renderSceneDescriptionFieldBox()}
+      {renderAspectsBox()}
     </Page>
   );
 
@@ -171,8 +169,9 @@ export const Scene: React.FC<{
           onClose={() => setSceneCreatedSnackBar({ visible: false })}
           message={<span id="message-id">Scene Created</span>}
         />
-        <AppFab onClick={addAspect}>
-          <AddIcon />
+        <AppFab onClick={addAspect} variant="extended">
+          <AddIcon style={{ marginRight: " .5rem" }} />
+          Add an aspect
         </AppFab>
       </>
     );
@@ -186,11 +185,13 @@ export const Scene: React.FC<{
             <div className="col-xs-12">
               <TextField
                 value={sceneName}
-                label="Name of your scene"
-                variant="outlined"
+                label="Where are you ?"
+                placeholder="In the middle of the woods"
+                variant="filled"
                 style={{
                   width: "100%"
                 }}
+                autoFocus
                 onChange={e => {
                   setScene({
                     ...scene,
@@ -213,10 +214,11 @@ export const Scene: React.FC<{
             <div className="col-xs-12">
               <TextField
                 value={sceneDescription}
-                rows={10}
+                rows={5}
                 multiline
-                label="Description"
-                variant="outlined"
+                label="What is hapenning ?"
+                placeholder="The sun is set and you can hear the sounds of the night waking up..."
+                variant="filled"
                 style={{
                   width: "100%"
                 }}
@@ -234,71 +236,12 @@ export const Scene: React.FC<{
     );
   }
 
-  function renderSceneDescriptionPresentationBox() {
-    return (
-      <Box margin="1rem 0">
-        <Typography
-          variant="body1"
-          component="div"
-          style={{
-            fontSize: "1.3rem"
-          }}
-        >
-          <div className="row center-xs">
-            {sceneDescription.split("\n").map((line, lineIndex) => {
-              const isLink = line.startsWith("http");
-              const isEmpty = line.trim().length === 0;
-              if (isLink) {
-                const imageLink = line.trim();
-                return (
-                  <div
-                    className="col-xs-12 col-md"
-                    key={lineIndex}
-                    style={{ margin: "2rem 0" }}
-                  >
-                    <img
-                      src={imageLink}
-                      style={{
-                        width: "100%",
-                        height: "auto"
-                      }}
-                    />
-                  </div>
-                );
-              } else if (isEmpty) {
-                return (
-                  <div
-                    className="col-xs-12"
-                    key={lineIndex}
-                    style={{ height: "1rem" }}
-                  />
-                );
-              } else {
-                return (
-                  <div
-                    className="col-xs-12"
-                    key={lineIndex}
-                    style={{
-                      textAlign: "left"
-                    }}
-                  >
-                    {line}
-                  </div>
-                );
-              }
-            })}
-          </div>
-        </Typography>
-      </Box>
-    );
-  }
-
   function renderAspectsBox() {
     return (
       <Box margin="1rem 0">
         <div className="row">
           {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div className="col-xs-12 col-md-6" key={aspectIndex}>
+            <div className="col-xs-12 col-sm-6 col-md-6" key={aspectIndex}>
               <PostIt
                 value={aspect}
                 onChange={event => {
@@ -315,50 +258,21 @@ export const Scene: React.FC<{
     );
   }
 
-  function renderTitlePresentationBox() {
+  function renderSceneActions() {
     return (
-      <Box margin="1rem 0">
-        <div className="row center-xs">
-          <div className="col-xs">
-            <h1>{sceneName}</h1>
-          </div>
+      <div className="row end-xs">
+        <div className="col-xs">
+          <Button
+            onClick={() => {
+              setIsCreatingBadGuy(true);
+              setBadGuyToEdit(undefined);
+            }}
+            color="secondary"
+          >
+            Add a bad guy
+          </Button>
         </div>
-      </Box>
-    );
-  }
-
-  function renderAspectsPresentationBox() {
-    return (
-      <Box margin="1rem 0">
-        <div className="row">
-          {((scene && scene.aspects) || []).map((aspect, aspectIndex) => (
-            <div
-              className="col-xs-6 col-md-4"
-              key={aspectIndex}
-              style={{ display: "flex" }}
-            >
-              <Paper
-                style={{
-                  minHeight: "4rem",
-                  width: "100%",
-                  padding: "1rem",
-                  marginBottom: "1rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: "2rem"
-                }}
-              >
-                <div className="row">
-                  <div className="col-xs">
-                    <div style={{ textAlign: "center" }}>{aspect}</div>
-                  </div>
-                </div>
-              </Paper>
-            </div>
-          ))}
-        </div>
-      </Box>
+      </div>
     );
   }
 };

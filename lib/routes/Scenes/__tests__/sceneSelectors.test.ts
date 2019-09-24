@@ -1,4 +1,4 @@
-import { IScene } from "../../../root/AppRouter";
+import { IScene } from "../../../typings/IScene";
 import { defaultArcName } from "../defaultArcName";
 import * as selectors from "../sceneSelectors";
 describe("sceneSelectors", () => {

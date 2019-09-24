@@ -1,4 +1,4 @@
-import { IScene } from "../../root/AppRouter";
+import { IScene } from "../../typings/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
 

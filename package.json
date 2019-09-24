@@ -13,9 +13,13 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
+    "@mdx-js/parcel-plugin-mdx": "^1.4.0",
+    "@mdx-js/react": "^1.4.0",
     "axios": "^0.19.0",
     "flexboxgrid": "^6.3.1",
+    "github-markdown-css": "^3.0.1",
     "pouchdb": "^7.1.1",
+    "pouchdb-find": "^7.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",

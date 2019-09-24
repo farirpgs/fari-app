@@ -11,15 +11,6 @@ import { PlayCharacter } from "../routes/PlayCharacter/PlayCharacter";
 import { Scene } from "../routes/Scene/Scene";
 import { Scenes } from "../routes/Scenes/Scenes";
 
-export interface IScene {
-  _id?: string;
-  _rev?: string;
-  name?: string;
-  description?: string;
-  images?: string;
-  aspects?: Array<string>;
-}
-
 export const AppRouter = () => (
   <Switch>
     <Route exact path={"/"} component={Games} />

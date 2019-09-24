@@ -17,13 +17,13 @@ export const PlayCharacter = props => {
 
   const load = async (characterId: string) => {
     setIsLoading(true);
-    const result = await getCharactersDb(game).get<ICharacter>(characterId);
+    const result = await getCharactersDb().get<ICharacter>(characterId);
     setCharacter(result);
     setIsLoading(false);
   };
 
   async function save() {
-    await getCharactersDb(game).put(character, {});
+    await getCharactersDb().put(character, {});
     await load(characterId);
     setCharacterUpdatedSnackBar({ visible: true });
   }

@@ -1,6 +1,7 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
+import "github-markdown-css/github-markdown.css";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, withRouter } from "react-router-dom";

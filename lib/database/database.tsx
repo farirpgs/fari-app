@@ -1,10 +1,13 @@
 import PouchDB from "pouchdb";
-import { IGame } from "../games/IGame";
+import find from "pouchdb-find";
+PouchDB.plugin(find);
 
-export function getCharactersDb(game: IGame) {
-  return new PouchDB(`characters-${game.slug}`);
+export function getCharactersDb() {
+  const db = new PouchDB(`characters`);
+  return db;
 }
 
 export function getScenesDb() {
-  return new PouchDB(`scenes`);
+  const db = new PouchDB(`scenes`);
+  return db;
 }

@@ -19,7 +19,7 @@ h1 {
 }
 
 h2 {
-  margin: 0 0 40px;
+  margin: 0;
   font-size: 1.5rem;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
@@ -34,7 +34,7 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   padding-top: 6.25rem; /* Top Nav size 4.25; + 2*/
-  margin-bottom: 56px; /* Bottom Nav Size*/
+  margin-bottom: 112px; /* Bottom Nav Size * 2*/
   min-height: calc(100vh - 56px);
   display: flex;
   position: relative;

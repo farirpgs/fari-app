@@ -36,6 +36,9 @@ export const FudgeDices = props => {
         <div className="col-xs col-sm-3">
           <Dice size={1}>{fudge2.value}</Dice>
         </div>
+      </div>
+
+      <div className="row center-xs">
         <div className="col-xs col-sm-3">
           <Dice size={1}>{fudge3.value}</Dice>
         </div>

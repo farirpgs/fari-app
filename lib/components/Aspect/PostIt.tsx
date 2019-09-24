@@ -13,30 +13,29 @@ export const PostIt: React.FC<{
     <Paper
       style={{
         minHeight: "4rem",
-        padding: "1rem",
+        padding: "1rem 1.5rem 1rem 1.5rem",
         marginBottom: "1rem"
       }}
     >
-      <div className="row middle-xs between-xs end-xs">
-        <div className="col-xs">
+      <div className="row top-xs">
+        <div className="col-xs" style={{ flex: "1 " }}>
           <TextField
             type="text"
             value={props.value}
             onChange={props.onChange}
-            placeholder="Name of your aspect"
+            label="Aspect"
             multiline={true}
-            margin="normal"
-            variant="outlined"
+            // margin="normal"
+            // variant="filled"
             style={{
               width: "100%",
               height: "100%",
-              fontSize: "2rem",
               outline: "none"
             }}
-            InputProps={{ style: { border: "none" } }}
+            margin="none"
           />
         </div>
-        <div className="col-xs-2">
+        <div className="col-xs" style={{ flex: "0" }}>
           <IconButton edge="end" onClick={props.onDelete}>
             <DeleteIcon />
           </IconButton>

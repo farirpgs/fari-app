@@ -77,7 +77,7 @@ const clever: IField = {
 };
 
 const aspect3: IField = {
-  label: "...",
+  label: "Aspect #3",
   slug: "aspect3",
   type: FieldType.TextField
 };
@@ -92,7 +92,7 @@ const forceful: IField = {
 };
 
 const aspect4: IField = {
-  label: "...",
+  label: "Aspect #4",
   slug: "aspect4",
   type: FieldType.TextField
 };
@@ -106,7 +106,7 @@ const flashy: IField = {
 };
 
 const aspect5: IField = {
-  label: "...",
+  label: "Aspect #5",
   slug: "aspect5",
   type: FieldType.TextField
 };
@@ -168,67 +168,67 @@ const stress3: IField = {
 };
 
 const physicalStress1: IField = {
-  label: "Physical #1",
+  label: "Physical Stress #1",
   slug: "physicalStress1",
   type: FieldType.Boolean
 };
 const physicalStress2: IField = {
-  label: "Physical #2",
+  label: "Physical Stress #2",
   slug: "physicalStress2",
   type: FieldType.Boolean
 };
 const physicalStress3: IField = {
-  label: "Physical #3",
+  label: "Physical Stress #3",
   slug: "physicalStress3",
   type: FieldType.Boolean
 };
 const physicalStress4: IField = {
-  label: "Physical #4",
+  label: "Physical Stress #4",
   slug: "physicalStress4",
   type: FieldType.Boolean
 };
 
 const mentalStress1: IField = {
-  label: "Mental #1",
+  label: "Mental Stress #1",
   slug: "mentalStress1",
   type: FieldType.Boolean
 };
 const mentalStress2: IField = {
-  label: "Mental #2",
+  label: "Mental Stress #2",
   slug: "mentalStress2",
   type: FieldType.Boolean
 };
 const mentalStress3: IField = {
-  label: "Mental #3",
+  label: "Mental Stress #3",
   slug: "mentalStress3",
   type: FieldType.Boolean
 };
 const mentalStress4: IField = {
-  label: "Mental #4",
+  label: "Mental Stress #4",
   slug: "mentalStress4",
   type: FieldType.Boolean
 };
 
 const mildConsequence: IField = {
-  label: "Mild",
+  label: "Mild Consequence",
   slug: "mildConsequence",
   type: FieldType.TextField
 };
 
 const mildConsequence2: IField = {
-  label: "Mild",
+  label: "Second Mild Consequence",
   slug: "mildConsequence2",
   type: FieldType.TextField
 };
 
 const moderateConsequence: IField = {
-  label: "Moderate",
+  label: "Moderate Consequence",
   slug: "moderateConsequence",
   type: FieldType.TextField
 };
 
 const severeConsequence: IField = {
-  label: "Severe",
+  label: "Severe Consequence",
   slug: "severeConsequence",
   type: FieldType.TextField
 };
@@ -339,7 +339,18 @@ export const FateCore: IGame = {
         },
         {
           col: 6,
-          rows: [{ columns: [{ col: 12, field: skillsCategory }] }]
+          rows: [
+            {
+              columns: [
+                // Super +5 - 0
+                // Great +4 - 1
+                // Good +3 - 2
+                // Fair +2 - 3
+                // Average +1 - 4
+                { col: 12, field: skillsCategory }
+              ]
+            }
+          ]
         }
       ]
     },

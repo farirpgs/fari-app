@@ -1,4 +1,4 @@
-import { IScene } from "../../root/AppRouter";
+import { IScene } from "../../typings/IScene";
 
 export interface IGroupedScenes {
   Default?: Array<IScene>;

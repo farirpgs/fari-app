@@ -35,15 +35,23 @@ export const Characters = props => {
 
   const load = async () => {
     setIsLoading(true);
-    const result = await getCharactersDb(game).allDocs<ICharacter>({
-      include_docs: true
+    const db = getCharactersDb();
+    await db.createIndex({
+      index: { fields: ["game"] }
     });
-    setCharacters(result.rows.map(row => row.doc));
+
+    const result = await db.find({
+      selector: {
+        game: { $eq: game.slug }
+      }
+    });
+
+    setCharacters(result.docs);
     setIsLoading(false);
   };
 
   async function deleteCharacter(character) {
-    await getCharactersDb(game).remove(character._id, character._rev, {});
+    await getCharactersDb().remove(character._id, character._rev, {});
     await load();
     setCharacterDeletedSnackBar({ visible: true });
   }
@@ -55,7 +63,7 @@ export const Characters = props => {
   return (
     <Page
       isLoading={isLoading}
-      h1={`Characters`}
+      h1={`Characters - ${game.name}`}
       backFunction={() => {
         routerHistory.push(`/games`);
       }}
@@ -77,8 +85,11 @@ export const Characters = props => {
 
       {!hasItems && (
         <Paper style={{ padding: "2rem", background: "aliceblue" }}>
-          It seems you don't have any characters created yet. Click on the add
-          icon at the bottom right corner of a screen to create one now
+          <p>You didn't create any characters yet.</p>
+          <p>
+            Click on the '+' button at the bottom right corner of the screen to
+            get started!
+          </p>
         </Paper>
       )}
       {hasItems && (

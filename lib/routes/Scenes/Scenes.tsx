@@ -16,7 +16,7 @@ import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
-import { IScene } from "../../root/AppRouter";
+import { IScene } from "../../typings/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
 import * as selectors from "./sceneSelectors";
@@ -82,7 +82,11 @@ export const Scenes: React.FC<{}> = props => {
 
       {!hasItems && (
         <Paper style={{ padding: "2rem", background: "aliceblue" }}>
-          It seems you don't have any scenes created yet.
+          <p>You didn't create any scenes yet.</p>
+          <p>
+            Click on the '+' button at the bottom right corner of the screen to
+            get started!
+          </p>
         </Paper>
       )}
 

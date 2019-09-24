@@ -36,7 +36,7 @@ export const CreateCharacter = props => {
 
   async function save() {
     const id = uuid();
-    await getCharactersDb(game).put({ ...character, _id: id }, {});
+    await getCharactersDb().put({ ...character, _id: id, game: game.slug }, {});
     routerHistory.push(`/game/${game.slug}/play/${id}?new=true`);
   }
 };
