@@ -49,6 +49,7 @@ export const Scene: React.FC<{
     if (sceneId) {
       setIsLoading(true);
       const result = await new SceneService().get(sceneId);
+      // TODO: Remove badguys backward compatible logic
       setScene({ ...result, badGuys: !!result.badGuys ? result.badGuys : [] });
       setIsLoading(false);
     } else {
