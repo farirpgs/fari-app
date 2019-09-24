@@ -252,7 +252,7 @@ export const Scene: React.FC<{
                 const imageLink = line.trim();
                 return (
                   <div
-                    className="col-xs-12 col-md-4"
+                    className="col-xs-12 col-md"
                     key={lineIndex}
                     style={{ margin: "2rem 0" }}
                   >
