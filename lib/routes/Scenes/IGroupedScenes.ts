@@ -1,4 +1,4 @@
-import { IScene } from "../../typings/IScene";
+import { IScene } from "../../types/IScene";
 
 export interface IGroupedScenes {
   Default?: Array<IScene>;

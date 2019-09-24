@@ -16,7 +16,7 @@ import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
-import { IScene } from "../../typings/IScene";
+import { IScene } from "../../types/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
 import * as selectors from "./sceneSelectors";

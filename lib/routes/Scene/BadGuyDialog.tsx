@@ -8,7 +8,7 @@ import {
   TextField
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { IBadGuy } from "../../typings/IBadGuy";
+import { IBadGuy } from "../../types/IBadGuy";
 export const BadGuyDialog: React.FC<{
   open: boolean;
   handleClose: (badGuy?: IBadGuy) => void;

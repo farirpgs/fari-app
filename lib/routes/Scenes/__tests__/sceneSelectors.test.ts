@@ -1,4 +1,4 @@
-import { IScene } from "../../../typings/IScene";
+import { IScene } from "../../../types/IScene";
 import { defaultArcName } from "../defaultArcName";
 import * as selectors from "../sceneSelectors";
 describe("sceneSelectors", () => {

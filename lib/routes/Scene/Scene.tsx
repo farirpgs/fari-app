@@ -18,8 +18,8 @@ import { AppFab } from "../../components/AppFab/AppFab";
 import { PostIt } from "../../components/Aspect/PostIt";
 import { Page } from "../../components/Page/Page";
 import { getScenesDb } from "../../database/database";
-import { IBadGuy } from "../../typings/IBadGuy";
-import { IScene } from "../../typings/IScene";
+import { IBadGuy } from "../../types/IBadGuy";
+import { IScene } from "../../types/IScene";
 import { BadGuyDialog } from "./BadGuyDialog";
 
 export const Scene: React.FC<{
