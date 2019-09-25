@@ -1,7 +1,6 @@
-import IconButton from "@material-ui/core/IconButton";
+import { Button, Divider } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import DeleteIcon from "@material-ui/icons/Delete";
 import React, { ChangeEventHandler } from "react";
 
 export const PostIt: React.FC<{
@@ -18,31 +17,28 @@ export const PostIt: React.FC<{
         background: "#ffffcf"
       }}
     >
-      <div className="row top-xs">
-        <div className="col-xs" style={{ flex: "1 " }}>
-          <TextField
-            type="text"
-            value={props.value}
-            onChange={props.onChange}
-            multiline={true}
-            style={{
-              width: "100%",
-              height: "100%",
-              outline: "none"
-            }}
-            InputProps={{
-              style: {
-                fontSize: "1.5rem"
-              }
-            }}
-            margin="none"
-          />
-        </div>
-        <div className="col-xs" style={{ flex: "0" }}>
-          <IconButton edge="end" onClick={props.onDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </div>
+      <TextField
+        type="text"
+        value={props.value}
+        onChange={props.onChange}
+        multiline={true}
+        style={{
+          width: "100%",
+          height: "100%",
+          outline: "none"
+        }}
+        InputProps={{
+          style: {
+            fontSize: "1.5rem"
+          }
+        }}
+        margin="none"
+      />
+      <Divider style={{ margin: "1rem 0", height: "0" }}></Divider>
+      <div className="row end-xs">
+        <Button onClick={props.onDelete} color="secondary">
+          Remove
+        </Button>
       </div>
     </Paper>
   );
