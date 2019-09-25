@@ -1,3 +1,4 @@
+import { Fab } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -5,15 +6,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LayersIcon from "@material-ui/icons/Layers";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { routerHistory } from "../..";
-import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
+import { AppPaper } from "../../components/AppPaper/AppPaper";
+import { Banner } from "../../components/Banner/Banner";
 import { Page } from "../../components/Page/Page";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IScene } from "../../types/IScene";
@@ -68,31 +70,41 @@ export const Scenes: React.FC<{}> = props => {
         message={<span id="message-id">Scene Deleted</span>}
       />
 
-      <AppFab
-        onClick={() => {
-          routerHistory.push("/scenes/create");
-        }}
-      >
-        <AddIcon />
-      </AppFab>
-
       {!hasItems && (
-        <Paper style={{ padding: "2rem", background: "aliceblue" }}>
-          <p>You didn't create any scenes yet.</p>
-          <p>
-            Click on the '+' button at the bottom right corner of the screen to
-            get started!
-          </p>
-        </Paper>
+        <Banner
+          variant="info"
+          message={
+            <div>
+              You didn't create any scenes yet.
+              <br />
+              Click on button below to add a get started!
+            </div>
+          }
+        ></Banner>
       )}
 
+      <div className="row center-xs margin-1">
+        <div className="col-xs">
+          <Fab
+            onClick={() => {
+              routerHistory.push("/scenes/create");
+            }}
+            variant="extended"
+            color="primary"
+          >
+            <AddIcon style={{ marginRight: " .5rem" }} />
+            Add a scene
+          </Fab>
+        </div>
+      </div>
+
       {hasItems && (
-        <div>
+        <AppPaper>
           <div className="row">
-            <div className="col-xs-12 col-md-6">
+            <div className="col-xs-12">
               <List component="nav">
                 {Object.keys(groupedScenes).map((arcName, index) => (
-                  <div key={index}>
+                  <div key={index} className="margin-1">
                     {arcName !== defaultArcName && (
                       <div
                         style={{
@@ -104,15 +116,29 @@ export const Scenes: React.FC<{}> = props => {
                     )}
 
                     {groupedScenes[arcName].map(scene => {
+                      const truncatedDescription = _.truncate(
+                        scene.description,
+                        {
+                          length: 50
+                        }
+                      );
                       return (
                         <AppLink to={`/scenes/${scene._id}`} key={scene._id}>
-                          <ListItem>
+                          <ListItem
+                            button
+                            style={{
+                              zoom: "1.2"
+                            }}
+                          >
                             <ListItemAvatar>
                               <Avatar>
                                 <LayersIcon />
                               </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={scene.name} />
+                            <ListItemText
+                              primary={scene.name}
+                              secondary={truncatedDescription}
+                            />
                             <ListItemSecondaryAction>
                               <IconButton
                                 edge="end"
@@ -134,7 +160,7 @@ export const Scenes: React.FC<{}> = props => {
               </List>
             </div>
           </div>
-        </div>
+        </AppPaper>
       )}
     </Page>
   );

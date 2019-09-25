@@ -3,7 +3,13 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 export const AppLink: React.FC<{ to: string }> = props => (
-  <Link component={RouterLink} to={props.to}>
+  <Link
+    component={RouterLink}
+    to={props.to}
+    style={{
+      textDecoration: "none"
+    }}
+  >
     {props.children}
   </Link>
 );

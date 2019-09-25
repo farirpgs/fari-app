@@ -1,3 +1,4 @@
+import { Fab } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,15 +7,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { routerHistory } from "../..";
-import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
+import { AppPaper } from "../../components/AppPaper/AppPaper";
+import { Banner } from "../../components/Banner/Banner";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/games";
 import { ICharacter } from "../../games/IGame";
@@ -65,61 +67,89 @@ export const Characters = props => {
         onClose={() => setCharacterDeletedSnackBar({ visible: false })}
         message={<span id="message-id">Character Deleted</span>}
       />
-      <AppFab
-        onClick={() => {
-          routerHistory.push(`/game/${game.slug}/create`);
-        }}
-      >
-        <AddIcon />
-      </AppFab>
 
       {!hasItems && (
-        <Paper style={{ padding: "2rem", background: "aliceblue" }}>
-          <p>You didn't create any characters yet.</p>
-          <p>
-            Click on the '+' button at the bottom right corner of the screen to
-            get started!
-          </p>
-        </Paper>
+        <Banner
+          variant="info"
+          message={
+            <div>
+              You didn't create any characters yet.
+              <br />
+              Click on button below to add a get started!
+            </div>
+          }
+        ></Banner>
       )}
-      {hasItems && (
-        <div>
-          <div className="row">
-            <div className="col-xs-12 col-md-6">
-              <List component="nav">
-                {characters.map((character, index) => (
-                  <AppLink
-                    to={`/game/${game.slug}/play/${character._id}`}
-                    key={character._id}
-                  >
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <PersonIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={character["name"]} />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          onClick={async e => {
-                            e.stopPropagation();
-                            e.preventDefault();
 
-                            deleteCharacter(character);
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    {index !== characters.length - 1 && <Divider />}
-                  </AppLink>
-                ))}
+      <div className="row center-xs margin-1">
+        <div className="col-xs">
+          <Fab
+            onClick={() => {
+              routerHistory.push(`/game/${game.slug}/create`);
+            }}
+            variant="extended"
+            color="primary"
+          >
+            <AddIcon style={{ marginRight: " .5rem" }} />
+            Add a Character
+          </Fab>
+        </div>
+      </div>
+
+      {hasItems && (
+        <AppPaper>
+          <div className="row">
+            <div className="col-xs-12">
+              <List component="nav">
+                {characters.map((character, index) => {
+                  const truncatedDescription = _.truncate(
+                    character["description"],
+                    {
+                      length: 50
+                    }
+                  );
+                  return (
+                    <AppLink
+                      to={`/game/${game.slug}/play/${character._id}`}
+                      key={character._id}
+                    >
+                      <ListItem
+                        button
+                        style={{
+                          zoom: "1.2"
+                        }}
+                      >
+                        <ListItemAvatar>
+                          <Avatar>
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={character["name"]}
+                          secondary={truncatedDescription}
+                        />
+
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            onClick={async e => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              deleteCharacter(character);
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                      {index !== characters.length - 1 && <Divider />}
+                    </AppLink>
+                  );
+                })}
               </List>
             </div>
           </div>
-        </div>
+        </AppPaper>
       )}
     </Page>
   );

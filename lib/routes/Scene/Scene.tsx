@@ -3,6 +3,7 @@ import {
   Button,
   Checkbox,
   Divider,
+  Fab,
   FormControlLabel,
   IconButton,
   Paper,
@@ -14,7 +15,6 @@ import SaveIcon from "@material-ui/icons/Save";
 import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { routerHistory } from "../..";
-import { AppFab } from "../../components/AppFab/AppFab";
 import { PostIt } from "../../components/Aspect/PostIt";
 import { Page } from "../../components/Page/Page";
 import { SceneService } from "../../services/scene-service/SceneService";
@@ -161,8 +161,7 @@ export const Scene: React.FC<{
         </IconButton>
       }
     >
-      {renderSnackBarsAndFab()}
-      {renderSceneActions()}
+      {renderSnackBars()}
 
       <BadGuyDialog
         open={isBadGuyModalOpened}
@@ -172,12 +171,13 @@ export const Scene: React.FC<{
 
       {renderSceneNameFieldBox()}
       {renderSceneDescriptionFieldBox()}
+      {renderSceneActions()}
       {renderBadGuyBox()}
       {renderAspectsBox()}
     </Page>
   );
 
-  function renderSnackBarsAndFab() {
+  function renderSnackBars() {
     return (
       <>
         <Snackbar
@@ -194,10 +194,6 @@ export const Scene: React.FC<{
           onClose={() => setSceneCreatedSnackBar({ visible: false })}
           message={<span id="message-id">Scene Created</span>}
         />
-        <AppFab onClick={addAspect} variant="extended">
-          <AddIcon style={{ marginRight: " .5rem" }} />
-          Add an aspect
-        </AppFab>
       </>
     );
   }
@@ -257,6 +253,32 @@ export const Scene: React.FC<{
           </div>
         </Box>
       </>
+    );
+  }
+
+  function renderSceneActions() {
+    return (
+      <div className="row center-xs">
+        <div className="col-xs">
+          <Fab onClick={addAspect} variant="extended" color="primary">
+            <AddIcon style={{ marginRight: " .5rem" }} />
+            Add an aspect
+          </Fab>
+        </div>
+        <div className="col-xs">
+          <Fab
+            onClick={() => {
+              setBadGuyToModify(undefined);
+              setIsBadGuyModalOpened(true);
+            }}
+            color="primary"
+            variant="extended"
+          >
+            <AddIcon style={{ marginRight: " .5rem" }} />
+            Add a bad buy
+          </Fab>
+        </div>
+      </div>
     );
   }
 
@@ -428,24 +450,6 @@ export const Scene: React.FC<{
           ))}
         </div>
       </Box>
-    );
-  }
-
-  function renderSceneActions() {
-    return (
-      <div className="row end-xs">
-        <div className="col-xs">
-          <Button
-            onClick={() => {
-              setIsBadGuyModalOpened(true);
-              setBadGuyToModify(undefined);
-            }}
-            color="secondary"
-          >
-            Add a bad guy
-          </Button>
-        </div>
-      </div>
     );
   }
 };

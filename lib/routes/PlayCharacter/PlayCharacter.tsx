@@ -1,8 +1,8 @@
+import { IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useEffect, useState } from "react";
 import { routerHistory } from "../..";
-import { AppFab } from "../../components/AppFab/AppFab";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/games";
@@ -51,6 +51,13 @@ export const PlayCharacter = props => {
       backFunction={() => {
         routerHistory.push(`/game/${game.slug}`);
       }}
+      appBarActions={
+        <div>
+          <IconButton edge="end" onClick={save} color="inherit">
+            <SaveIcon />
+          </IconButton>
+        </div>
+      }
     >
       <Snackbar
         autoHideDuration={2000}
@@ -67,10 +74,6 @@ export const PlayCharacter = props => {
         message={<span id="message-id">Character Updated</span>}
       />
       <div>
-        <AppFab onClick={save}>
-          <SaveIcon />
-        </AppFab>
-
         <CharacterFields
           rows={game.rows}
           character={character}

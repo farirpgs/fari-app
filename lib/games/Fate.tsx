@@ -313,10 +313,10 @@ export const FateAccelerated: IGame = {
 };
 
 export const FateCore: IGame = {
-  name: "Fate Core",
+  name: "Fate Core (Work in Progress)",
   slug: "fate",
   rows: [
-    { columns: [{ col: 6, field: name }] },
+    { columns: [{ col: 12, field: name }] },
     {
       columns: [
         { col: 6, field: description },
@@ -358,7 +358,7 @@ export const FateCore: IGame = {
     {
       columns: [
         {
-          col: 6,
+          col: 12,
           field: stressCategory,
           rows: [
             {
@@ -380,7 +380,7 @@ export const FateCore: IGame = {
           ]
         },
         {
-          col: 6,
+          col: 12,
           field: consequenceCategory,
           rows: [
             {

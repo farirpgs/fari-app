@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { IScene } from "../../types/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
@@ -6,10 +7,12 @@ function sortSceneAlphabetically(array: Array<IScene>) {
   return [...array].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+const splitByDashOrSlashRegex = /[-|\/]+/g;
+
 export function groupScenesByCampaign(scenes: Array<IScene>) {
   const groupedScenes = scenes.reduce(
     (groupedScenes, scene) => {
-      const [arcName, sceneName] = scene.name.split("/");
+      const [arcName, sceneName] = _.split(scene.name, splitByDashOrSlashRegex);
       const hasAnArc = !!sceneName;
 
       if (hasAnArc) {

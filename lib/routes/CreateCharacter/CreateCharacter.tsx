@@ -1,7 +1,7 @@
+import { IconButton } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useState } from "react";
 import { routerHistory } from "../..";
-import { AppFab } from "../../components/AppFab/AppFab";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/games";
@@ -19,11 +19,14 @@ export const CreateCharacter = props => {
       backFunction={() => {
         routerHistory.push(`/game/${game.slug}`);
       }}
+      appBarActions={
+        <div>
+          <IconButton edge="end" onClick={save} color="inherit">
+            <SaveIcon />
+          </IconButton>
+        </div>
+      }
     >
-      <AppFab onClick={save}>
-        <SaveIcon />
-      </AppFab>
-
       <br />
       <CharacterFields
         rows={game.rows}
