@@ -1,17 +1,17 @@
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useState } from "react";
-import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
 import { Page } from "../../components/Page/Page";
-import { getCharactersDb } from "../../database/database";
 import { getGameBySlug } from "../../games/games";
+import { ICharacter } from "../../games/IGame";
+import { CharacterService } from "../../services/character-service/CharacterService";
 
 export const CreateCharacter = props => {
   const { gameSlug } = props.match.params;
   const game = getGameBySlug(gameSlug);
-  const [character, setCharacter] = useState<Object>({});
+  const [character, setCharacter] = useState<ICharacter>({} as any);
 
   return (
     <Page
@@ -35,8 +35,7 @@ export const CreateCharacter = props => {
   );
 
   async function save() {
-    const id = uuid();
-    await getCharactersDb().put({ ...character, _id: id, game: game.slug }, {});
+    const id = await new CharacterService().add(character, game.slug);
     routerHistory.push(`/game/${game.slug}/play/${id}?new=true`);
   }
 };

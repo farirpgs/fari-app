@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import React, { useRef, useState } from "react";
 import showdown from "showdown";
 import { FieldType, IField } from "../../games/IField";
-import { IRow } from "../../games/IGame";
+import { ICharacter, IRow } from "../../games/IGame";
 
 const converter = new showdown.Converter();
 export const selectors = {
@@ -35,8 +35,8 @@ export const selectors = {
 
 export function CharacterFields(props: {
   rows: Array<IRow>;
-  character: Object;
-  setCharacter: (state: Object) => void;
+  character: ICharacter;
+  setCharacter: (state: ICharacter) => void;
   onSubmit: () => void;
 }) {
   const { rows, character, setCharacter } = props;

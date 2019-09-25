@@ -16,9 +16,9 @@ import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
-import { getCharactersDb } from "../../database/database";
 import { getGameBySlug } from "../../games/games";
 import { ICharacter } from "../../games/IGame";
+import { CharacterService } from "../../services/character-service/CharacterService";
 
 export const Characters = props => {
   const { gameSlug } = props.match.params;
@@ -35,23 +35,13 @@ export const Characters = props => {
 
   const load = async () => {
     setIsLoading(true);
-    const db = getCharactersDb();
-    await db.createIndex({
-      index: { fields: ["game"] }
-    });
-
-    const result = await db.find({
-      selector: {
-        game: { $eq: game.slug }
-      }
-    });
-
-    setCharacters(result.docs);
+    const characters = await new CharacterService().getAll(game.slug);
+    setCharacters(characters);
     setIsLoading(false);
   };
 
   async function deleteCharacter(character) {
-    await getCharactersDb().remove(character._id, character._rev, {});
+    await new CharacterService().remove(character);
     await load();
     setCharacterDeletedSnackBar({ visible: true });
   }

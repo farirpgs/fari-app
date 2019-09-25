@@ -5,25 +5,26 @@ import { routerHistory } from "../..";
 import { AppFab } from "../../components/AppFab/AppFab";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
 import { Page } from "../../components/Page/Page";
-import { getCharactersDb } from "../../database/database";
 import { getGameBySlug } from "../../games/games";
 import { ICharacter } from "../../games/IGame";
+import { CharacterService } from "../../services/character-service/CharacterService";
 
 export const PlayCharacter = props => {
   const { gameSlug, characterId } = props.match.params;
   const game = getGameBySlug(gameSlug);
-  const [character, setCharacter] = useState({});
+  const [character, setCharacter] = useState<ICharacter>({} as any);
   const [isLoading, setIsLoading] = useState(true);
 
   const load = async (characterId: string) => {
     setIsLoading(true);
-    const result = await getCharactersDb().get<ICharacter>(characterId);
+    const result = await new CharacterService().get(characterId);
     setCharacter(result);
     setIsLoading(false);
   };
 
   async function save() {
-    await getCharactersDb().put(character, {});
+    await new CharacterService().update(character);
+
     await load(characterId);
     setCharacterUpdatedSnackBar({ visible: true });
   }
