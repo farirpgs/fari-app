@@ -142,7 +142,18 @@ const extras: IField = {
 
 const stressCategory: IField = {
   label: "Stress",
-  slug: "stress",
+  slug: "stressCategory",
+  type: FieldType.Category
+};
+
+const physicalStressCategory: IField = {
+  label: "Physical Stress",
+  slug: "physicalStressCategory",
+  type: FieldType.Category
+};
+const mentalStressCategory: IField = {
+  label: "Mental Stress",
+  slug: "mentalStressCategory",
   type: FieldType.Category
 };
 const consequenceCategory: IField = {
@@ -152,59 +163,59 @@ const consequenceCategory: IField = {
 };
 
 const stress1: IField = {
-  label: "Stress #1",
+  label: "1",
   slug: "stress1",
   type: FieldType.Boolean
 };
 const stress2: IField = {
-  label: "Stress #2",
+  label: "2",
   slug: "stress2",
   type: FieldType.Boolean
 };
 const stress3: IField = {
-  label: "Stress #3",
+  label: "3",
   slug: "stress3",
   type: FieldType.Boolean
 };
 
 const physicalStress1: IField = {
-  label: "Physical Stress #1",
+  label: "1",
   slug: "physicalStress1",
   type: FieldType.Boolean
 };
 const physicalStress2: IField = {
-  label: "Physical Stress #2",
+  label: "2",
   slug: "physicalStress2",
   type: FieldType.Boolean
 };
 const physicalStress3: IField = {
-  label: "Physical Stress #3",
+  label: "3",
   slug: "physicalStress3",
   type: FieldType.Boolean
 };
 const physicalStress4: IField = {
-  label: "Physical Stress #4",
+  label: "4",
   slug: "physicalStress4",
   type: FieldType.Boolean
 };
 
 const mentalStress1: IField = {
-  label: "Mental Stress #1",
+  label: "1",
   slug: "mentalStress1",
   type: FieldType.Boolean
 };
 const mentalStress2: IField = {
-  label: "Mental Stress #2",
+  label: "2",
   slug: "mentalStress2",
   type: FieldType.Boolean
 };
 const mentalStress3: IField = {
-  label: "Mental Stress #3",
+  label: "3",
   slug: "mentalStress3",
   type: FieldType.Boolean
 };
 const mentalStress4: IField = {
-  label: "Mental Stress #4",
+  label: "4",
   slug: "mentalStress4",
   type: FieldType.Boolean
 };
@@ -327,7 +338,7 @@ export const FateCore: IGame = {
     {
       columns: [
         {
-          col: 6,
+          col: 12,
           rows: [
             { columns: [{ col: 12, field: aspectCategory }] },
             { columns: [{ col: 12, field: highConcept }] },
@@ -359,7 +370,7 @@ export const FateCore: IGame = {
       columns: [
         {
           col: 12,
-          field: stressCategory,
+          field: physicalStressCategory,
           rows: [
             {
               columns: [
@@ -368,7 +379,13 @@ export const FateCore: IGame = {
                 { col: 3, field: physicalStress3 },
                 { col: 3, field: physicalStress4 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          col: 12,
+          field: mentalStressCategory,
+          rows: [
             {
               columns: [
                 { col: 3, field: mentalStress1 },
