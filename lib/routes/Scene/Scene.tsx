@@ -310,7 +310,9 @@ export const Scene: React.FC<{
                   <div>
                     <b>Bad (-2) at:</b> {badGuy.badAt}
                   </div>
-                  <Divider style={{ margin: "1rem 0" }}></Divider>
+                  {!!stressCount && (
+                    <Divider style={{ margin: "1rem 0" }}></Divider>
+                  )}
                   <div>
                     <div className="row">
                       {[...new Array(stressCount)].map((u, stressIndex) => {
@@ -339,7 +341,10 @@ export const Scene: React.FC<{
                         );
                       })}
                     </div>
-                    <Divider style={{ margin: "1rem 0" }}></Divider>
+
+                    {!!consequenceCount && (
+                      <Divider style={{ margin: "1rem 0" }}></Divider>
+                    )}
                     <div>
                       <div className="row">
                         {[...new Array(consequenceCount)].map(
