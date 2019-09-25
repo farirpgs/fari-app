@@ -216,7 +216,6 @@ export const Scene: React.FC<{
                 style={{
                   width: "100%"
                 }}
-                autoFocus
                 onChange={e => {
                   setScene({
                     ...scene,

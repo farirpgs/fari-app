@@ -69,7 +69,7 @@ export const BadGuyDialog: React.FC<{
           onChange={e => {
             setName(e.target.value);
           }}
-          autoFocus
+          autoFocus={!props.badGuy}
         />
         <TextField
           value={aspects}
