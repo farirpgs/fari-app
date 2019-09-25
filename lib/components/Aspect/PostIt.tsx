@@ -14,7 +14,8 @@ export const PostIt: React.FC<{
       style={{
         minHeight: "4rem",
         padding: "1rem 1.5rem 1rem 1.5rem",
-        marginBottom: "1rem"
+        marginBottom: "1rem",
+        background: "#ffffcf"
       }}
     >
       <div className="row top-xs">
@@ -23,14 +24,16 @@ export const PostIt: React.FC<{
             type="text"
             value={props.value}
             onChange={props.onChange}
-            label="Aspect"
             multiline={true}
-            // margin="normal"
-            // variant="filled"
             style={{
               width: "100%",
               height: "100%",
               outline: "none"
+            }}
+            InputProps={{
+              style: {
+                fontSize: "1.5rem"
+              }
             }}
             margin="none"
           />
