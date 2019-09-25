@@ -6,7 +6,7 @@ export const About: React.FC<{}> = props => {
     <Page h1="About">
       <p>
         Fari is a role playing game companion application developed by René-Pier
-        Deshaies-Gélinas and Gabriel Lemires
+        Deshaies-Gélinas
       </p>
 
       <p>Made with love from Québec, Canada</p>
