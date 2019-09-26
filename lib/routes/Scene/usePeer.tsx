@@ -11,7 +11,6 @@ export function usePeer<T>(
   const [connectionsToPlayers, setConnectionsToPlayers] = useState<
     Array<Peer.DataConnection>
   >([]);
-  const [numberOfConnectedPlayers, setNumberOfConnectedPlayers] = useState(0);
   const peer = useRef<Peer>(undefined);
   if (!peer.current) {
     peer.current = new Peer();
@@ -35,7 +34,7 @@ export function usePeer<T>(
       });
     }
 
-    const onPeerOpenCallback = id => {
+    const onPeerOpenCallback = (id: string) => {
       setPeerId(id);
     };
 
