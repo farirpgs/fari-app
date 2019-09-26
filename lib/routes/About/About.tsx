@@ -25,9 +25,9 @@ export const About: React.FC<{}> = props => {
 
       <p>
         Fari would not exist without the help of some awesome libraries and
-        framework. You can donate to help them to:
+        framework.
       </p>
-
+      <p>You can donate to help them too:</p>
       <ul>
         <li>
           <a href="https://opencollective.com/peer" target="_blank">
