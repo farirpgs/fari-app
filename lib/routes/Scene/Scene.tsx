@@ -1,15 +1,10 @@
 import {
   Box,
-  Button,
-  Checkbox,
-  Divider,
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
   Fab,
-  FormControlLabel,
   IconButton,
-  Paper,
   Snackbar,
   TextField
 } from "@material-ui/core";
@@ -27,6 +22,7 @@ import { Page } from "../../components/Page/Page";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IBadGuy } from "../../types/IBadGuy";
 import { IScene } from "../../types/IScene";
+import { BadGuyCard } from "./BadGuyCard";
 import { BadGuyDialog } from "./BadGuyDialog";
 import { usePeer } from "./usePeer";
 
@@ -200,7 +196,13 @@ export const Scene: React.FC<{
             </div>
           )}
           {isGM && (
-            <IconButton edge="end" onClick={saveScene} color="inherit">
+            <IconButton
+              edge="end"
+              onClick={() => {
+                saveScene();
+              }}
+              color="inherit"
+            >
               <SaveIcon />
             </IconButton>
           )}
@@ -349,7 +351,13 @@ export const Scene: React.FC<{
       <div>
         <div className="row center-xs">
           <div className="col-xs-12 col-sm-6 margin-1">
-            <Fab onClick={addAspect} variant="extended" color="primary">
+            <Fab
+              onClick={() => {
+                addAspect();
+              }}
+              variant="extended"
+              color="primary"
+            >
               <AddIcon style={{ marginRight: " .5rem" }} />
               Add an aspect
             </Fab>
@@ -377,147 +385,21 @@ export const Scene: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {(scene.badGuys || []).map(badGuy => {
-            const stressCount = parseInt(badGuy.stress);
-            const consequenceCount = parseInt(badGuy.consequences);
-
             return (
               <div className="col-xs-12 col-sm-6 col-md-6" key={badGuy.id}>
-                <Paper
-                  style={{
-                    minHeight: "4rem",
-                    padding: "1rem 1.5rem 1rem 1.5rem",
-                    marginBottom: "1rem"
+                <BadGuyCard
+                  badGuy={badGuy}
+                  onUpdate={badGuy => {
+                    updateBadGuy(badGuy);
                   }}
-                >
-                  <div className="row center-xs">
-                    <div className="col-xs-12">
-                      <div
-                        style={{
-                          textTransform: "uppercase",
-                          fontSize: "1.5rem"
-                        }}
-                      >
-                        {badGuy.name}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row center-xs">
-                    <div className="col-xs-12">
-                      <div
-                        style={{
-                          fontStyle: "italic",
-                          fontSize: "1.2rem",
-                          marginBottom: "1rem"
-                        }}
-                      >
-                        {badGuy.aspects}
-                      </div>
-                    </div>
-                  </div>
-                  <Divider style={{ margin: "1rem 0" }}></Divider>
-                  <div>
-                    <b>Skilled (+2) at:</b> {badGuy.skilledAt}
-                  </div>
-                  <div>
-                    <b>Bad (-2) at:</b> {badGuy.badAt}
-                  </div>
-                  {!!stressCount && (
-                    <Divider style={{ margin: "1rem 0" }}></Divider>
-                  )}
-                  <div>
-                    <div className="row">
-                      <div className="col-xs">
-                        <div className="h2 margin-1">Stress</div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      {[...new Array(stressCount)].map((u, stressIndex) => {
-                        return (
-                          <div className="col-xs-4" key={stressIndex}>
-                            <FormControlLabel
-                              label={`#${stressIndex + 1}`}
-                              control={
-                                <Checkbox
-                                  checked={
-                                    badGuy.stressValues[stressIndex] || false
-                                  }
-                                  onChange={e => {
-                                    updateBadGuy({
-                                      ...badGuy,
-                                      stressValues: {
-                                        ...badGuy.stressValues,
-                                        [stressIndex]: e.target.checked
-                                      }
-                                    });
-                                  }}
-                                />
-                              }
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {!!consequenceCount && (
-                      <Divider style={{ margin: "1rem 0" }}></Divider>
-                    )}
-                    <div>
-                      <div className="row">
-                        {[...new Array(consequenceCount)].map(
-                          (u, consequenceIndex) => {
-                            const consequenceShift = (consequenceIndex + 1) * 2;
-                            return (
-                              <div className="col-xs-12" key={consequenceIndex}>
-                                <TextField
-                                  value={
-                                    badGuy.consequencesValues[
-                                      consequenceIndex
-                                    ] || ""
-                                  }
-                                  label={`Consequence (${consequenceShift})`}
-                                  variant="filled"
-                                  margin="normal"
-                                  style={{
-                                    width: "100%"
-                                  }}
-                                  onChange={e => {
-                                    updateBadGuy({
-                                      ...badGuy,
-                                      consequencesValues: {
-                                        ...badGuy.consequencesValues,
-                                        [consequenceIndex]: e.target.value
-                                      }
-                                    });
-                                  }}
-                                />
-                              </div>
-                            );
-                          }
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <Divider style={{ margin: "1rem 0" }}></Divider>
-                  <div className="row end-xs">
-                    <Button
-                      onClick={() => {
-                        removeBadGuy(badGuy);
-                      }}
-                      color="secondary"
-                    >
-                      Remove
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setBadGuyToModify(badGuy);
-                        setIsBadGuyModalOpened(true);
-                      }}
-                      color="secondary"
-                    >
-                      Modify
-                    </Button>
-                  </div>
-                </Paper>
+                  onModify={badGuy => {
+                    setBadGuyToModify(badGuy);
+                    setIsBadGuyModalOpened(true);
+                  }}
+                  onRemove={badGuy => {
+                    removeBadGuy(badGuy);
+                  }}
+                ></BadGuyCard>
               </div>
             );
           })}
