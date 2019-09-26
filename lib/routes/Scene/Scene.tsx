@@ -1,19 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
-  Fab,
-  FormControlLabel,
-  IconButton,
-  Paper,
-  Snackbar,
-  TextField,
-  Typography
-} from "@material-ui/core";
+import { Box, Button, Checkbox, Divider, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Fab, FormControlLabel, IconButton, Paper, Snackbar, TextField, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SaveIcon from "@material-ui/icons/Save";
@@ -22,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { PostIt } from "../../components/Aspect/PostIt";
+import { Banner } from "../../components/Banner/Banner";
 import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
 import { SceneService } from "../../services/scene-service/SceneService";
@@ -42,7 +28,6 @@ export const Scene: React.FC<{
 
   const [isLoading, setIsLoading] = useState(true);
   const [scene, setScene] = useState<IScene>({ badGuys: [] });
-
   const [sceneCreatedSnackBar, setSceneCreatedSnackBar] = React.useState({
     visible: false
   });
@@ -51,7 +36,7 @@ export const Scene: React.FC<{
   });
   const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
   const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
-
+  const [isSceneNotFound, setIsSceneNotFound] = useState(false);
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
   const isGM = !peerIdFromParams;
@@ -61,11 +46,15 @@ export const Scene: React.FC<{
       setIsLoading(true);
       if (isGM) {
         const result = await new SceneService().get(sceneId);
-        // TODO: Remove badguys backward compatible logic
-        setScene({
-          ...result,
-          badGuys: !!result.badGuys ? result.badGuys : []
-        });
+
+        if (!result) {
+          setIsSceneNotFound(true);
+        } else {
+          setScene({
+            ...result,
+            badGuys: !!result.badGuys ? result.badGuys : []
+          });
+        }
         setIsLoading(false);
       }
     } else {
@@ -198,6 +187,18 @@ export const Scene: React.FC<{
             </IconButton>
           )}
         </>
+        }
+          notFound={
+            isSceneNotFound && (
+              <Banner
+                variant="warning"
+                message={
+                  <div>The scene you are trying to access doesn't exists.
+                    <br/>
+                  Are you sure you have the right url ?
+                  </div>
+                }
+              ></Banner>
       }
     >
       {renderSnackBars()}
@@ -233,6 +234,8 @@ export const Scene: React.FC<{
           onClose={() => setSceneCreatedSnackBar({ visible: false })}
           message={<span id="message-id">Scene Created</span>}
         />
+
+        
       </>
     );
   }

@@ -14,11 +14,18 @@ const headerHeightREM = 4.25;
 export const Page: React.FC<{
   isLoading?: boolean;
   h1?: JSX.Element | string;
-
+  notFound?: JSX.Element;
   appBarActions?: JSX.Element;
   backFunction?: () => void;
 }> = props => {
-  const { isLoading, h1, children, appBarActions, backFunction } = props;
+  const {
+    isLoading,
+    h1,
+    children,
+    appBarActions,
+    backFunction,
+    notFound
+  } = props;
 
   const isReallyLoading = useDelayedIsLoading(isLoading);
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
@@ -47,7 +54,9 @@ export const Page: React.FC<{
         }}
       >
         <Fade in timeout={250}>
-          <div style={{ width: "100%" }}>{children}</div>
+          <div style={{ width: "100%" }}>
+            {!!notFound ? notFound : children}
+          </div>
         </Fade>
       </div>
     );

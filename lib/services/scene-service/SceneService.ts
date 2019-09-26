@@ -4,7 +4,15 @@ import { IScene } from "../../types/IScene";
 
 export class SceneService {
   public async get(id: string): Promise<IScene> {
-    return getScenesDb().get<IScene>(id);
+    try {
+      const result = await getScenesDb().get<IScene>(id);
+      return result;
+    } catch (error) {
+      if (error.name === "not_found") {
+        return undefined;
+      }
+      throw error;
+    }
   }
 
   public async getAll(): Promise<Array<IScene>> {
