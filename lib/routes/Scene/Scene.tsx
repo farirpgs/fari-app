@@ -3,36 +3,46 @@ import {
   Button,
   Checkbox,
   Divider,
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
   Fab,
   FormControlLabel,
   IconButton,
   Paper,
   Snackbar,
-  TextField
+  TextField,
+  Typography
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SaveIcon from "@material-ui/icons/Save";
+import ShareIcon from "@material-ui/icons/Share";
 import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { routerHistory } from "../..";
 import { PostIt } from "../../components/Aspect/PostIt";
+import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IBadGuy } from "../../types/IBadGuy";
 import { IScene } from "../../types/IScene";
 import { BadGuyDialog } from "./BadGuyDialog";
+import { usePeer } from "./usePeer";
 
 export const Scene: React.FC<{
   match: {
     params: {
       sceneId: string;
+      peerId: string;
     };
   };
 }> = props => {
-  const { sceneId } = props.match.params;
+  const { sceneId, peerId: peerIdFromParams } = props.match.params;
 
   const [isLoading, setIsLoading] = useState(true);
   const [scene, setScene] = useState<IScene>({ badGuys: [] });
+
   const [sceneCreatedSnackBar, setSceneCreatedSnackBar] = React.useState({
     visible: false
   });
@@ -44,14 +54,20 @@ export const Scene: React.FC<{
 
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
+  const isGM = !peerIdFromParams;
 
   const loadScene = async (sceneId: string) => {
     if (sceneId) {
       setIsLoading(true);
-      const result = await new SceneService().get(sceneId);
-      // TODO: Remove badguys backward compatible logic
-      setScene({ ...result, badGuys: !!result.badGuys ? result.badGuys : [] });
-      setIsLoading(false);
+      if (isGM) {
+        const result = await new SceneService().get(sceneId);
+        // TODO: Remove badguys backward compatible logic
+        setScene({
+          ...result,
+          badGuys: !!result.badGuys ? result.badGuys : []
+        });
+        setIsLoading(false);
+      }
     } else {
       setIsLoading(false);
     }
@@ -144,6 +160,20 @@ export const Scene: React.FC<{
     });
   };
 
+  const onPlayerSceneUpdate = (scene: IScene) => {
+    setScene(scene);
+    setIsLoading(false);
+  };
+
+  const { peerId, numberOfConnectedPlayers } = usePeer(
+    peerIdFromParams,
+    scene,
+    onPlayerSceneUpdate
+  );
+  const playerLink = isGM
+    ? `${location.origin}/scenes/${sceneId}/${peerId}`
+    : "";
+
   useEffect(() => {
     loadScene(sceneId);
   }, [sceneId]);
@@ -156,9 +186,18 @@ export const Scene: React.FC<{
         routerHistory.push(`/scenes`);
       }}
       appBarActions={
-        <IconButton edge="end" onClick={saveScene} color="inherit">
-          <SaveIcon />
-        </IconButton>
+        <>
+          {isGM && (
+            <Typography variant="h6">
+              <span>{numberOfConnectedPlayers} Players connected</span>
+            </Typography>
+          )}
+          {isGM && (
+            <IconButton edge="end" onClick={saveScene} color="inherit">
+              <SaveIcon />
+            </IconButton>
+          )}
+        </>
       }
     >
       {renderSnackBars()}
@@ -168,7 +207,7 @@ export const Scene: React.FC<{
         handleClose={handleBadGuyUpdate}
         badGuy={badGuyToModify}
       ></BadGuyDialog>
-
+      {renderPlayerLink()}
       {renderSceneNameFieldBox()}
       {renderSceneDescriptionFieldBox()}
       {renderSceneActions()}
@@ -256,27 +295,59 @@ export const Scene: React.FC<{
     );
   }
 
+  function renderPlayerLink() {
+    return (
+      <div>
+        {isGM && (
+          <div className="row center-xs margin-1">
+            <div className="col-xs">
+              <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
+                  <Typography>Player Link</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <div style={{ width: "100%" }}>
+                    <div className="row">
+                      <div className="col-xs">
+                        <Typography>
+                          Share the following link to the players
+                        </Typography>
+                        <LinkShare link={playerLink}></LinkShare>
+                      </div>
+                    </div>
+                  </div>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
   function renderSceneActions() {
     return (
-      <div className="row center-xs">
-        <div className="col-xs">
-          <Fab onClick={addAspect} variant="extended" color="primary">
-            <AddIcon style={{ marginRight: " .5rem" }} />
-            Add an aspect
-          </Fab>
-        </div>
-        <div className="col-xs">
-          <Fab
-            onClick={() => {
-              setBadGuyToModify(undefined);
-              setIsBadGuyModalOpened(true);
-            }}
-            color="primary"
-            variant="extended"
-          >
-            <AddIcon style={{ marginRight: " .5rem" }} />
-            Add a bad buy
-          </Fab>
+      <div>
+        <div className="row center-xs">
+          <div className="col-xs-12 col-sm-6 margin-1">
+            <Fab onClick={addAspect} variant="extended" color="primary">
+              <AddIcon style={{ marginRight: " .5rem" }} />
+              Add an aspect
+            </Fab>
+          </div>
+          <div className="col-xs-12 col-sm-6 margin-1">
+            <Fab
+              onClick={() => {
+                setBadGuyToModify(undefined);
+                setIsBadGuyModalOpened(true);
+              }}
+              color="primary"
+              variant="extended"
+            >
+              <AddIcon style={{ marginRight: " .5rem" }} />
+              Add a bad buy
+            </Fab>
+          </div>
         </div>
       </div>
     );
