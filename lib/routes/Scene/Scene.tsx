@@ -1,4 +1,18 @@
-import { Box, Button, Checkbox, Divider, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Fab, FormControlLabel, IconButton, Paper, Snackbar, TextField, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  Fab,
+  FormControlLabel,
+  IconButton,
+  Paper,
+  Snackbar,
+  TextField
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SaveIcon from "@material-ui/icons/Save";
@@ -25,7 +39,6 @@ export const Scene: React.FC<{
   };
 }> = props => {
   const { sceneId, peerId: peerIdFromParams } = props.match.params;
-
   const [isLoading, setIsLoading] = useState(true);
   const [scene, setScene] = useState<IScene>({ badGuys: [] });
   const [sceneCreatedSnackBar, setSceneCreatedSnackBar] = React.useState({
@@ -37,11 +50,20 @@ export const Scene: React.FC<{
   const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
   const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
   const [isSceneNotFound, setIsSceneNotFound] = useState(false);
+  const { peerId, numberOfConnectedPlayers } = usePeer(
+    peerIdFromParams,
+    scene,
+    onPlayerSceneUpdate
+  );
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
   const isGM = !peerIdFromParams;
+  const isConntected = !!peerId;
+  const playerLink = isGM
+    ? `${location.origin}/scenes/${sceneId}/${peerId}`
+    : "";
 
-  const loadScene = async (sceneId: string) => {
+  async function loadScene(sceneId: string) {
     if (sceneId) {
       setIsLoading(true);
       if (isGM) {
@@ -60,9 +82,9 @@ export const Scene: React.FC<{
     } else {
       setIsLoading(false);
     }
-  };
+  }
 
-  const saveScene = async () => {
+  async function saveScene() {
     if (!!scene._id) {
       await new SceneService().update(scene);
 
@@ -76,9 +98,9 @@ export const Scene: React.FC<{
       });
       routerHistory.push(`/scenes/${id}`);
     }
-  };
+  }
 
-  const addAspect = () => {
+  function addAspect() {
     setScene({
       ...scene,
       aspects: [...(scene.aspects || []), ""]
@@ -86,27 +108,27 @@ export const Scene: React.FC<{
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 0);
-  };
+  }
 
-  const setAspect = (content: string, index: number) => {
+  function setAspect(content: string, index: number) {
     const aspectCopy = [...(scene.aspects || [])];
     aspectCopy[index] = content;
     setScene({
       ...scene,
       aspects: aspectCopy
     });
-  };
+  }
 
-  const removeAspect = (indexToRemove: number) => {
+  function removeAspect(indexToRemove: number) {
     setScene({
       ...scene,
       aspects: scene.aspects.filter(
         (element, currentIndex) => currentIndex !== indexToRemove
       )
     });
-  };
+  }
 
-  const handleBadGuyUpdate = (updatedBadGuy?: IBadGuy) => {
+  function handleBadGuyUpdate(updatedBadGuy?: IBadGuy) {
     const shouldUpdateScene = !!updatedBadGuy;
 
     if (shouldUpdateScene) {
@@ -119,16 +141,16 @@ export const Scene: React.FC<{
     }
     setIsBadGuyModalOpened(false);
     setBadGuyToModify(undefined);
-  };
+  }
 
-  const addBadGuy = (updatedBadGuy: IBadGuy) => {
+  function addBadGuy(updatedBadGuy: IBadGuy) {
     setScene({
       ...scene,
       badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
     });
-  };
+  }
 
-  const updateBadGuy = (updatedBadGuy: IBadGuy) => {
+  function updateBadGuy(updatedBadGuy: IBadGuy) {
     setScene({
       ...scene,
       badGuys: scene.badGuys.map(badGuy => {
@@ -138,30 +160,21 @@ export const Scene: React.FC<{
         return badGuy;
       })
     });
-  };
+  }
 
-  const removeBadGuy = (updatedBadGuy: IBadGuy) => {
+  function removeBadGuy(updatedBadGuy: IBadGuy) {
     setScene({
       ...scene,
       badGuys: scene.badGuys.filter(badGuy => {
         return badGuy.id !== updatedBadGuy.id;
       })
     });
-  };
+  }
 
-  const onPlayerSceneUpdate = (scene: IScene) => {
+  function onPlayerSceneUpdate(scene: IScene) {
     setScene(scene);
     setIsLoading(false);
-  };
-
-  const { peerId, numberOfConnectedPlayers } = usePeer(
-    peerIdFromParams,
-    scene,
-    onPlayerSceneUpdate
-  );
-  const playerLink = isGM
-    ? `${location.origin}/scenes/${sceneId}/${peerId}`
-    : "";
+  }
 
   useEffect(() => {
     loadScene(sceneId);
@@ -176,10 +189,15 @@ export const Scene: React.FC<{
       }}
       appBarActions={
         <>
-          {isGM && (
-            <Typography variant="h6">
+          {isGM && isConntected && (
+            <div className="h6">
               <span>{numberOfConnectedPlayers} Players connected</span>
-            </Typography>
+            </div>
+          )}
+          {isGM && !isConntected && (
+            <div className="h6">
+              <span>Offline</span>
+            </div>
           )}
           {isGM && (
             <IconButton edge="end" onClick={saveScene} color="inherit">
@@ -187,18 +205,20 @@ export const Scene: React.FC<{
             </IconButton>
           )}
         </>
-        }
-          notFound={
-            isSceneNotFound && (
-              <Banner
-                variant="warning"
-                message={
-                  <div>The scene you are trying to access doesn't exists.
-                    <br/>
-                  Are you sure you have the right url ?
-                  </div>
-                }
-              ></Banner>
+      }
+      notFound={
+        isSceneNotFound && (
+          <Banner
+            variant="warning"
+            message={
+              <div>
+                The scene you are trying to access doesn't exists.
+                <br />
+                Are you sure you have the right url ?
+              </div>
+            }
+          ></Banner>
+        )
       }
     >
       {renderSnackBars()}
@@ -234,8 +254,6 @@ export const Scene: React.FC<{
           onClose={() => setSceneCreatedSnackBar({ visible: false })}
           message={<span id="message-id">Scene Created</span>}
         />
-
-        
       </>
     );
   }
@@ -301,21 +319,19 @@ export const Scene: React.FC<{
   function renderPlayerLink() {
     return (
       <div>
-        {isGM && (
+        {isGM && isConntected && (
           <div className="row center-xs margin-1">
             <div className="col-xs">
               <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                   <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
-                  <Typography>Player Link</Typography>
+                  <span>Player Link</span>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                   <div style={{ width: "100%" }}>
                     <div className="row">
                       <div className="col-xs">
-                        <Typography>
-                          Share the following link to the players
-                        </Typography>
+                        <span>Share the following link to the players</span>
                         <LinkShare link={playerLink}></LinkShare>
                       </div>
                     </div>
@@ -410,11 +426,16 @@ export const Scene: React.FC<{
                   )}
                   <div>
                     <div className="row">
+                      <div className="col-xs">
+                        <div className="h2 margin-1">Stress</div>
+                      </div>
+                    </div>
+                    <div className="row">
                       {[...new Array(stressCount)].map((u, stressIndex) => {
                         return (
                           <div className="col-xs-4" key={stressIndex}>
                             <FormControlLabel
-                              label={`Stress #${stressIndex + 1}`}
+                              label={`#${stressIndex + 1}`}
                               control={
                                 <Checkbox
                                   checked={
