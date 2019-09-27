@@ -18,7 +18,7 @@ const _AppBottomNavigation: React.FC<{
     if (location.pathname.startsWith("/scene")) {
       return setNav(2);
     }
-    if (location.pathname.startsWith("/dices")) {
+    if (location.pathname.startsWith("/dice")) {
       return setNav(3);
     } else {
       return setNav(0);
@@ -62,9 +62,9 @@ const _AppBottomNavigation: React.FC<{
         icon={<LayersIcon />}
       />
       <BottomNavigationAction
-        label="Dices"
+        label="Dice"
         component={Link}
-        to="/dices"
+        to="/dice"
         icon={<CropSquareIcon />}
       />
     </BottomNavigation>

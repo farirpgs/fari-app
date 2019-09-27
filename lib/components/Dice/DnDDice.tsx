@@ -3,7 +3,7 @@ import React from "react";
 import { useNumber } from "../../hooks/useNumber";
 import { Dice } from "./Dice";
 
-export const DnDDices: React.FC<{}> = props => {
+export const DnDDice: React.FC<{}> = props => {
   const d4 = useNumber(4);
   const d6 = useNumber(6);
   const d8 = useNumber(8);

@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { About } from "../../routes/About/About";
 import { Characters } from "../../routes/Characters/Characters";
 import { CreateCharacter } from "../../routes/CreateCharacter/CreateCharacter";
-import { Dices } from "../../routes/Dices/Dices";
+import { Dice } from "../../routes/Dice/Dice";
 import { Games } from "../../routes/Games/Games";
 import { Home } from "../../routes/Home/Home";
 import { NotFoundRoute } from "../../routes/NotFoundRoute/NotFoundRoute";
@@ -18,7 +18,7 @@ export const AppRouter = () => (
     <Route exact path={"/games"} component={Games} />
     <Route exact path={"/game/:gameSlug"} component={Characters} />
     <Route exact path={"/game/:gameSlug/create"} component={CreateCharacter} />
-    <Route exact path={"/dices"} component={Dices} />
+    <Route exact path={"/dice"} component={Dice} />
     <Route exact path={"/scenes"} component={Scenes} />
     <Route exact path={"/scenes/create"} component={Scene} />
     <Route exact path={"/scenes/:sceneId"} component={Scene} />
