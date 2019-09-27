@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { IBadGuy } from "../../types/IBadGuy";
+
 export const BadGuyDialog: React.FC<{
   open: boolean;
   handleClose: (badGuy?: IBadGuy) => void;
@@ -110,6 +111,7 @@ export const BadGuyDialog: React.FC<{
             setBadAt(e.target.value);
           }}
         />
+        {/* TODO: Use Select !!! */}
         <TextField
           value={stress}
           label="Stress Counters"
