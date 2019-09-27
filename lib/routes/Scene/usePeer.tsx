@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export function usePeer<T>(
   peerIdFromParams: string | undefined,
   dataToSend: any,
-  handleDataReceive: (data: T) => void
+  handleDataReceiveFromGM: (data: T) => void
 ) {
   const [peerId, setPeerId] = useState<string>(peerIdFromParams);
   const [, setConnectionToGM] = useState<Peer.DataConnection>(undefined);
@@ -23,26 +23,29 @@ export function usePeer<T>(
   };
 
   useEffect(() => {
-    const isReceiver = !!peerIdFromParams;
-    if (isReceiver) {
+    const isPlayer = !!peerIdFromParams;
+    if (isPlayer) {
       const connection = peer.current.connect(peerIdFromParams);
       connection.on("open", function() {
         setConnectionToGM(connection);
       });
       connection.on("data", function(data) {
-        handleDataReceive(data);
+        handleDataReceiveFromGM(data);
       });
     }
 
-    const onPeerOpenCallback = (id: string) => {
+    function onPeerOpenCallback(id: string) {
       setPeerId(id);
-    };
+    }
 
-    const onConnectionCallback = (connection: Peer.DataConnection) => {
+    function handleDataReceiveFromPlayer(data: any) {
+      console.log("character", data);
+    }
+
+    function onConnectionCallback(connection: Peer.DataConnection) {
       setConnectionsToPlayers([...connectionsToPlayers, connection]);
       connection.on("data", data => {
-        console.log("got data from players");
-        console.log(data);
+        handleDataReceiveFromPlayer(data);
       });
       connection.on("close", () => {
         setConnectionsToPlayers(allConnections => {
@@ -53,19 +56,19 @@ export function usePeer<T>(
           });
         });
       });
-    };
+    }
 
-    const onPeerDisconnectedCallback = () => {
+    function onPeerDisconnectedCallback() {
       console.log("Connection lost. Please reconnect");
-    };
+    }
 
-    const onPeerCloseCallback = () => {
+    function onPeerCloseCallback() {
       console.log("Connection destroyed");
-    };
+    }
 
-    const onPeerErrorCallback = err => {
-      console.log(err);
-    };
+    function onPeerErrorCallback(error) {
+      console.log(error);
+    }
 
     peer.current.on("open", onPeerOpenCallback);
     peer.current.on("connection", onConnectionCallback);
