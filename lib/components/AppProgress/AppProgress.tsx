@@ -6,7 +6,7 @@ export const AppProgress: React.FC<{}> = props => {
     <LinearProgress
       style={{
         position: "absolute",
-        top: "4rem",
+        top: "4.2rem",
         left: "0",
         height: "0.4rem",
         width: "100%"
