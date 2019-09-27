@@ -2,13 +2,15 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import { useNumber } from "../../hooks/useNumber";
 import { Dice } from "./Dice";
-export const DnDDices = props => {
+
+export const DnDDices: React.FC<{}> = props => {
   const d4 = useNumber(4);
   const d6 = useNumber(6);
   const d8 = useNumber(8);
   const d10 = useNumber(10);
   const d12 = useNumber(12);
   const d20 = useNumber(20);
+
   return (
     <div>
       <div className="row ">

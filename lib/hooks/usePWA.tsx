@@ -17,6 +17,7 @@ export function usePWA(
   const [shouldSuggestInstallation, setShouldSuggestInstallation] = useState(
     shouldSuggestInstallationSingleton
   );
+
   useEffect(() => {
     const beforeInstallPrompt = (event: any) => {
       pwaPromptSingleton = event;
@@ -38,5 +39,6 @@ export function usePWA(
       onCancelInstall();
     }
   };
+
   return { shouldSuggestInstallation, prompt };
 }

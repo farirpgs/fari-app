@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { About } from "../routes/About/About";
-import { Characters } from "../routes/Characters/Characters";
-import { CreateCharacter } from "../routes/CreateCharacter/CreateCharacter";
-import { Dices } from "../routes/Dices/Dices";
-import { Games } from "../routes/Games/Games";
-import { Home } from "../routes/Home/Home";
-import { NotFoundRoute } from "../routes/NotFoundRoute/NotFoundRoute";
-import { PlayCharacter } from "../routes/PlayCharacter/PlayCharacter";
-import { Scene } from "../routes/Scene/Scene";
-import { Scenes } from "../routes/Scenes/Scenes";
+import { About } from "../../routes/About/About";
+import { Characters } from "../../routes/Characters/Characters";
+import { CreateCharacter } from "../../routes/CreateCharacter/CreateCharacter";
+import { Dices } from "../../routes/Dices/Dices";
+import { Games } from "../../routes/Games/Games";
+import { Home } from "../../routes/Home/Home";
+import { NotFoundRoute } from "../../routes/NotFoundRoute/NotFoundRoute";
+import { PlayCharacter } from "../../routes/PlayCharacter/PlayCharacter";
+import { Scene } from "../../routes/Scene/Scene";
+import { Scenes } from "../../routes/Scenes/Scenes";
 
 export const AppRouter = () => (
   <Switch>

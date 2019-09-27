@@ -1,6 +1,6 @@
 import ListItem from "@material-ui/core/ListItem";
 import React from "react";
 
-export function ListItemLink(props) {
+export const ListItemLink: React.FC<{}> = props => {
   return <ListItem button component="a" {...props} />;
-}
+};

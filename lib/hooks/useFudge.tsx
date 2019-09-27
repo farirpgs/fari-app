@@ -4,6 +4,7 @@ export function useFudge() {
   const [value, setValue] = useState("");
   const rollAnimationCount = 30;
   const [isRolling, setIsRolling] = useState(false);
+
   function roll(count = 0) {
     if (isRolling && count === 0) {
       return;

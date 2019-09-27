@@ -2,12 +2,12 @@ import { IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useEffect, useState } from "react";
-import { routerHistory } from "../..";
 import { CharacterFields } from "../../components/CharacterFields/CharacterFields";
+import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
-import { getGameBySlug } from "../../games/games";
-import { ICharacter } from "../../games/IGame";
+import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
+import { ICharacter } from "../../types/IGame";
 
 export const PlayCharacter = props => {
   const { gameSlug, characterId } = props.match.params;

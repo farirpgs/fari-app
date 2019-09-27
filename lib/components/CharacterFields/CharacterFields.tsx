@@ -10,10 +10,11 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import React, { useRef, useState } from "react";
 import showdown from "showdown";
-import { FieldType, IField } from "../../games/IField";
-import { ICharacter, IRow } from "../../games/IGame";
+import { FieldType, IField } from "../../types/IField";
+import { ICharacter, IRow } from "../../types/IGame";
 
 const converter = new showdown.Converter();
+
 export const selectors = {
   rowsToTabs(rows: Array<IRow>): { [tabName: string]: Array<IRow> } {
     return rows.reduce(

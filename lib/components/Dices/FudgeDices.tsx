@@ -3,7 +3,7 @@ import React from "react";
 import { useFudge } from "../../hooks/useFudge";
 import { Dice } from "./Dice";
 
-export const FudgeDices = props => {
+export const FudgeDices: React.FC<{}> = props => {
   const fudge1 = useFudge();
   const fudge2 = useFudge();
   const fudge3 = useFudge();

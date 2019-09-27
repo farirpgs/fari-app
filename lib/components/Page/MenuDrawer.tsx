@@ -9,8 +9,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import InfoIcon from "@material-ui/icons/Info";
 import React from "react";
-import { routerHistory } from "../..";
 import { usePWA } from "../../hooks/usePWA";
+import { routerHistory } from "../History/History";
 
 export const MenuDrawer: React.FC<{
   open: boolean;
@@ -18,6 +18,7 @@ export const MenuDrawer: React.FC<{
   onClose: () => void;
 }> = props => {
   const pwa = usePWA();
+
   return (
     <SwipeableDrawer
       onOpen={props.onOpen}

@@ -4,13 +4,13 @@ import React, { useRef, useState } from "react";
 export const LinkShare: React.FC<{ link: string }> = props => {
   const textFieldRef = useRef(undefined);
   const [hasClicked, setHasClicked] = useState(false);
-  const copyLink = () => {
+  function copyLink() {
     const input = textFieldRef.current.querySelector("input");
     input.select();
     input.setSelectionRange(0, 99999);
     document.execCommand("copy");
     setHasClicked(true);
-  };
+  }
 
   return (
     <div>

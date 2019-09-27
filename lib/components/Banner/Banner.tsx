@@ -51,8 +51,14 @@ export interface Props {
 }
 
 export const Banner: React.FC<Props> = props => {
+  const {
+    className: classNameFromProps,
+    message,
+    onClose,
+    variant,
+    ...restOfProps
+  } = props;
   const classes = useStyles(props);
-  const { className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -61,8 +67,8 @@ export const Banner: React.FC<Props> = props => {
         <div
           className={`${classes.notificationContainer} ${
             classes[variant]
-          } margin-2 ${className || ""}`}
-          {...other}
+          } margin-2 ${classNameFromProps || ""}`}
+          {...restOfProps}
         >
           <div
             style={{

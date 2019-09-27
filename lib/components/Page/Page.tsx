@@ -6,11 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
+import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { MenuDrawer } from "./MenuDrawer";
-import { useDelayedIsLoading } from "./useDelayedIsLoading";
 
 const headerHeightREM = 4.25;
+
 export const Page: React.FC<{
   isLoading?: boolean;
   h1?: JSX.Element | string;
@@ -29,6 +30,7 @@ export const Page: React.FC<{
 
   const isReallyLoading = useDelayedIsLoading(isLoading);
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+
   return (
     <>
       {renderHeader()}

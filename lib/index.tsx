@@ -1,30 +1,15 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, withRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { AppBottomNavigation } from "./components/AppBottomNavigation/AppBottomNavigation";
+import { AppRouter } from "./components/AppRouter/AppRouter";
+import { History } from "./components/History/History";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";
-import { AppBottomNavigation } from "./root/AppBottomNavigation";
-import { AppRouter } from "./root/AppRouter";
 import { AppTheme } from "./theme";
-
-export let routerHistory = {} as any;
-
-export const History = withRouter(props => {
-  const {
-    history,
-    children,
-    location: { pathname }
-  } = props;
-  // tslint:disable-next-line: react-hooks-nesting
-  useEffect(() => {
-    routerHistory = history;
-  }, [pathname]);
-
-  return null;
-});
 
 function App() {
   return (
@@ -33,7 +18,6 @@ function App() {
         <ScrollToTop />
         <CssBaseline />
         <History />
-
         <AppRouter />
         <AppBottomNavigation />
       </BrowserRouter>

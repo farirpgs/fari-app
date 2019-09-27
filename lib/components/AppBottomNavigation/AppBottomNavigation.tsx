@@ -24,6 +24,7 @@ const _AppBottomNavigation: React.FC<{
       return setNav(0);
     }
   }, [location.pathname]);
+
   return (
     <BottomNavigation
       value={nav}

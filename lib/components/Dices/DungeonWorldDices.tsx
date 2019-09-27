@@ -3,9 +3,10 @@ import React from "react";
 import { useNumber } from "../../hooks/useNumber";
 import { Dice } from "./Dice";
 
-export const DungeonWorldDices = props => {
+export const DungeonWorldDices: React.FC<{}> = props => {
   const firstD6 = useNumber(6);
   const secondD6 = useNumber(6);
+
   return (
     <div>
       <div className="row center-xs">

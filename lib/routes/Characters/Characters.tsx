@@ -13,14 +13,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import { routerHistory } from "../..";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { AppPaper } from "../../components/AppPaper/AppPaper";
 import { Banner } from "../../components/Banner/Banner";
+import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
-import { getGameBySlug } from "../../games/games";
-import { ICharacter } from "../../games/IGame";
+import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
+import { ICharacter } from "../../types/IGame";
 
 export const Characters = props => {
   const { gameSlug } = props.match.params;

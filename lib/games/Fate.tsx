@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
-import { FieldType, IField } from "./IField";
-import { IGame } from "./IGame";
+import { FieldType, IField } from "../types/IField";
+import { IGame } from "../types/IGame";
 
 const name: IField = {
   label: "Character Name",
