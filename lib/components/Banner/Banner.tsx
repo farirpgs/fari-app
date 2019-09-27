@@ -1,3 +1,4 @@
+import { Paper } from "@material-ui/core";
 import { amber, green } from "@material-ui/core/colors";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
@@ -46,6 +47,7 @@ export interface Props {
   variant: keyof typeof variantIcon;
   className?: string;
   onClose?: () => void;
+  paper?: boolean;
 }
 
 export const Banner: React.FC<Props> = props => {
@@ -77,7 +79,9 @@ export const Banner: React.FC<Props> = props => {
               <Icon className={`${classes.icon} ${classes.iconVariant}`} />
             </div>
             <div>
-              <div className={classes.message}>{props.children}</div>
+              <div className={classes.message}>
+                <Paper style={{ padding: "2rem" }}>{props.children}</Paper>
+              </div>
             </div>
           </div>
         </div>
