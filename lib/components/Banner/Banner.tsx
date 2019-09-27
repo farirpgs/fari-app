@@ -35,8 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#fff"
   },
   iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing(1)
+    opacity: 0.9
   },
   message: {
     color: "#fff"
@@ -45,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface Props {
   variant: keyof typeof variantIcon;
-  message: JSX.Element;
   className?: string;
   onClose?: () => void;
 }
@@ -53,7 +51,6 @@ export interface Props {
 export const Banner: React.FC<Props> = props => {
   const {
     className: classNameFromProps,
-    message,
     onClose,
     variant,
     ...restOfProps
@@ -80,7 +77,7 @@ export const Banner: React.FC<Props> = props => {
               <Icon className={`${classes.icon} ${classes.iconVariant}`} />
             </div>
             <div>
-              <div className={classes.message}>{message}</div>
+              <div className={classes.message}>{props.children}</div>
             </div>
           </div>
         </div>
