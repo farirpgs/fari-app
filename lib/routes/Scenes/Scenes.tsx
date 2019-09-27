@@ -71,16 +71,13 @@ export const Scenes: React.FC<{}> = props => {
       />
 
       {!hasItems && (
-        <Banner
-          variant="info"
-          message={
-            <div>
-              You didn't create any scenes yet.
-              <br />
-              Click on button below to add a get started!
-            </div>
-          }
-        ></Banner>
+        <Banner variant="info">
+          <div>
+            You didn't create any scenes yet.
+            <br />
+            Click on button below to add a get started!
+          </div>
+        </Banner>
       )}
 
       <div className="row center-xs margin-1">
