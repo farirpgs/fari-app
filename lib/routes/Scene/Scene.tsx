@@ -33,8 +33,8 @@ import { usePeer } from "./usePeer";
 export const Scene: React.FC<{
   match: {
     params: {
-      sceneId: string;
-      peerId: string;
+      sceneId?: string;
+      peerId?: string;
     };
   };
 }> = props => {
@@ -58,9 +58,9 @@ export const Scene: React.FC<{
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
   const isGM = !peerIdFromParams;
-  const isConntected = !!peerId;
+  const isConnected = !!peerId;
   const playerLink = isGM
-    ? `${location.origin}/scenes/${sceneId}/${peerId}`
+    ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
     : "";
 
   async function loadScene(sceneId: string) {
@@ -189,7 +189,7 @@ export const Scene: React.FC<{
       }}
       appBarActions={
         <>
-          {isGM && isConntected && (
+          {isGM && isConnected && (
             <div style={{ display: "flex", alignItems: "center" }}>
               <span className="h6" style={{ marginRight: ".5rem" }}>
                 {numberOfConnectedPlayers}
@@ -197,7 +197,7 @@ export const Scene: React.FC<{
               <WifiIcon style={{ color: green[400] }} />
             </div>
           )}
-          {isGM && !isConntected && (
+          {isGM && !isConnected && (
             <div style={{ display: "flex", alignItems: "center" }}>
               <WifiOffIcon style={{ color: red[400] }} />
             </div>
@@ -217,16 +217,13 @@ export const Scene: React.FC<{
       }
       notFound={
         isSceneNotFound && (
-          <Banner
-            variant="warning"
-            message={
-              <div>
-                The scene you are trying to access doesn't exists.
-                <br />
-                Are you sure you have the right url ?
-              </div>
-            }
-          ></Banner>
+          <Banner variant="warning">
+            <div>
+              The scene you are trying to access doesn't exists.
+              <br />
+              Are you sure you have the right url ?
+            </div>
+          </Banner>
         )
       }
     >
@@ -348,7 +345,7 @@ export const Scene: React.FC<{
   function renderPlayerLink() {
     return (
       <div>
-        {isGM && isConntected && (
+        {isGM && isConnected && (
           <div className="row center-xs margin-1">
             <div className="col-xs">
               <ExpansionPanel>

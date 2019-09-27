@@ -22,7 +22,7 @@ export const AppRouter = () => (
     <Route exact path={"/scenes"} component={Scenes} />
     <Route exact path={"/scenes/create"} component={Scene} />
     <Route exact path={"/scenes/:sceneId"} component={Scene} />
-    <Route exact path={"/scenes/:sceneId/:peerId"} component={Scene} />
+    <Route exact path={"/scenes/play/:sceneId/:peerId"} component={Scene} />
     <Route exact path={"/about"} component={About} />
     <Route
       exact
