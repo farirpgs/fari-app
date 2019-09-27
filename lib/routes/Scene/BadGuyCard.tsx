@@ -52,14 +52,14 @@ export const BadGuyCard: React.FC<{
           </div>
         </div>
       </div>
-      <Divider className="margin-1"></Divider>
+      <Divider style={{ margin: "1rem 0" }}></Divider>
       <div>
         <b>Skilled (+2) at:</b> {badGuy.skilledAt}
       </div>
       <div>
         <b>Bad (-2) at:</b> {badGuy.badAt}
       </div>
-      {!!stressCount && <Divider className="margin-1"></Divider>}
+      {!!stressCount && <Divider style={{ margin: "1rem 0" }}></Divider>}
       <div>
         <div className="row">
           <div className="col-xs">
@@ -92,7 +92,7 @@ export const BadGuyCard: React.FC<{
           })}
         </div>
 
-        {!!consequenceCount && <Divider className="margin-1"></Divider>}
+        {!!consequenceCount && <Divider style={{ margin: "1rem 0" }}></Divider>}
         <div>
           <div className="row">
             {[...new Array(consequenceCount)].map((u, consequenceIndex) => {
@@ -123,7 +123,7 @@ export const BadGuyCard: React.FC<{
           </div>
         </div>
       </div>
-      <Divider className="margin-1"></Divider>
+      <Divider style={{ margin: "1rem 0" }}></Divider>
       <div className="row end-xs">
         <Button
           onClick={() => {
