@@ -8,10 +8,13 @@ import {
   Snackbar,
   TextField
 } from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SaveIcon from "@material-ui/icons/Save";
 import ShareIcon from "@material-ui/icons/Share";
+import WifiIcon from "@material-ui/icons/Wifi";
+import WifiOffIcon from "@material-ui/icons/WifiOff";
 import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { Banner } from "../../components/Banner/Banner";
@@ -186,13 +189,16 @@ export const Scene: React.FC<{
       appBarActions={
         <>
           {isGM && isConntected && (
-            <div className="h6">
-              <span>{numberOfConnectedPlayers} Players connected</span>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span className="h6" style={{ marginRight: ".5rem" }}>
+                {numberOfConnectedPlayers}
+              </span>
+              <WifiIcon style={{ color: green[400] }} />
             </div>
           )}
           {isGM && !isConntected && (
-            <div className="h6">
-              <span>Offline</span>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <WifiOffIcon style={{ color: red[400] }} />
             </div>
           )}
           {isGM && (

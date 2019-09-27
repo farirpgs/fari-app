@@ -52,18 +52,18 @@ h2,
   width: 100%;
 }
 
-body .margin-1 {
+.margin-1 {
   margin-bottom: 1rem;
 }
-body .margin-2 {
+.margin-2 {
   margin-bottom: 2rem;
 }
-body .margin-3 {
+.margin-3 {
   margin-bottom: 3rem;
 }
-body .margin-4 {
+.margin-4 {
   margin-bottom: 4rem;
 }
-body .margin-5 {
+.margin-5 {
   margin-bottom: 5rem;
 }
