@@ -24,11 +24,7 @@ export const AppRouter = () => (
     <Route exact path={"/scenes/:sceneId"} component={Scene} />
     <Route exact path={"/scenes/play/:sceneId/:peerId"} component={Scene} />
     <Route exact path={"/about"} component={About} />
-    <Route
-      exact
-      path={"/scenes/:sceneId/present"}
-      component={props => <Scene {...props} presentModeEnabled />}
-    />
+
     <Route
       exact
       path={"/game/:gameSlug/play/:characterId"}

@@ -20,7 +20,7 @@ import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
-import { ICharacter } from "../../types/IGame";
+import { ICharacter } from "../../types/ICharacter";
 
 export const Characters = props => {
   const { gameSlug } = props.match.params;

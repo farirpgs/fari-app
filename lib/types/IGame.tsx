@@ -21,8 +21,3 @@ export interface ISubRow {
   columns?: Array<IColumn>;
   tab?: string;
 }
-
-export interface ICharacter {
-  _id: string;
-  _rev: string;
-}

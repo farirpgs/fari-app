@@ -1,13 +1,16 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
+import { IPeerAction } from "./IPeerAction";
 
-export function usePeer<T>(
+export function usePeer(
   peerIdFromParams: string | undefined,
-  dataToSend: any,
-  handleDataReceiveFromGM: (data: T) => void
+  handleDataReceiveFromGM: (action: IPeerAction) => void,
+  handleDataReceiveFromPlayer: (action: IPeerAction) => void
 ) {
   const [peerId, setPeerId] = useState<string>(peerIdFromParams);
-  const [, setConnectionToGM] = useState<Peer.DataConnection>(undefined);
+  const [connectionToGM, setConnectionToGM] = useState<Peer.DataConnection>(
+    undefined
+  );
   const [connectionsToPlayers, setConnectionsToPlayers] = useState<
     Array<Peer.DataConnection>
   >([]);
@@ -16,11 +19,15 @@ export function usePeer<T>(
     peer.current = new Peer();
   }
 
-  const sendToAllPlayers = (data: any) => {
+  function sendToAllPlayers(action: IPeerAction) {
     connectionsToPlayers.forEach(connection => {
-      connection.send(data);
+      connection.send(action);
     });
-  };
+  }
+
+  function sendToGM(action: IPeerAction) {
+    connectionToGM.send(action);
+  }
 
   useEffect(() => {
     const isPlayer = !!peerIdFromParams;
@@ -38,15 +45,12 @@ export function usePeer<T>(
       setPeerId(id);
     }
 
-    function handleDataReceiveFromPlayer(data: any) {
-      console.log("character", data);
-    }
-
     function onConnectionCallback(connection: Peer.DataConnection) {
       setConnectionsToPlayers([...connectionsToPlayers, connection]);
       connection.on("data", data => {
         handleDataReceiveFromPlayer(data);
       });
+
       connection.on("close", () => {
         setConnectionsToPlayers(allConnections => {
           return allConnections.filter(c => {
@@ -90,18 +94,10 @@ export function usePeer<T>(
     setPeerId
   ]);
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      sendToAllPlayers(dataToSend);
-    }, 1000);
-    return () => {
-      clearInterval(id);
-    };
-  }, [connectionsToPlayers, dataToSend]);
-
   return {
     peerId,
     numberOfConnectedPlayers: connectionsToPlayers.length,
-    sendToAllPlayers
+    sendToAllPlayers,
+    sendToGM
   };
 }

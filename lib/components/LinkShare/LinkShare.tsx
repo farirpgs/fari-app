@@ -24,7 +24,7 @@ export const LinkShare: React.FC<{ link: string }> = props => {
         }}
       ></TextField>
       <Button variant="contained" color="secondary" onClick={copyLink}>
-        {hasClicked ? "Copied" : "Copy"}
+        {hasClicked ? "Copied!" : "Copy"}
       </Button>
     </div>
   );

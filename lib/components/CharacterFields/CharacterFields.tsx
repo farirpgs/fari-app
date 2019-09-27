@@ -10,8 +10,9 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import React, { useRef, useState } from "react";
 import showdown from "showdown";
+import { ICharacter } from "../../types/ICharacter";
 import { FieldType, IField } from "../../types/IField";
-import { ICharacter, IRow } from "../../types/IGame";
+import { IRow } from "../../types/IGame";
 
 const converter = new showdown.Converter();
 

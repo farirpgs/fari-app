@@ -12,7 +12,7 @@ import { IBadGuy } from "../../types/IBadGuy";
 
 export const BadGuyDialog: React.FC<{
   open: boolean;
-  handleClose: (badGuy?: IBadGuy) => void;
+  onClose: (badGuy?: IBadGuy) => void;
   badGuy?: IBadGuy;
 }> = props => {
   const badGuy: IBadGuy = props.badGuy || ({} as any);
@@ -47,7 +47,7 @@ export const BadGuyDialog: React.FC<{
   return (
     <Dialog
       open={props.open}
-      onClose={props.handleClose}
+      onClose={props.onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
       fullWidth
@@ -146,7 +146,7 @@ export const BadGuyDialog: React.FC<{
       >
         <Button
           onClick={() => {
-            props.handleClose();
+            props.onClose();
           }}
           color="secondary"
         >
@@ -155,7 +155,7 @@ export const BadGuyDialog: React.FC<{
         <Button
           onClick={() => {
             resetForm();
-            props.handleClose(
+            props.onClose(
               badGuyFactory(
                 id,
                 name,

@@ -25,9 +25,11 @@ import { Page } from "../../components/Page/Page";
 import { PostIt } from "../../components/PostIt/PostIt";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IBadGuy } from "../../types/IBadGuy";
+import { ICharacter } from "../../types/ICharacter";
 import { IScene } from "../../types/IScene";
 import { BadGuyCard } from "./BadGuyCard";
 import { BadGuyDialog } from "./BadGuyDialog";
+import { IPeerAction } from "./IPeerAction";
 import { usePeer } from "./usePeer";
 
 export const Scene: React.FC<{
@@ -50,10 +52,15 @@ export const Scene: React.FC<{
   const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
   const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
   const [isSceneNotFound, setIsSceneNotFound] = useState(false);
-  const { peerId, numberOfConnectedPlayers } = usePeer(
+  const {
+    peerId,
+    numberOfConnectedPlayers,
+    sendToAllPlayers,
+    sendToGM
+  } = usePeer(
     peerIdFromParams,
-    scene,
-    onPlayerSceneUpdate
+    handleDataReceiveFromGM,
+    handleDataReceiveFromPlayer
   );
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
@@ -74,7 +81,8 @@ export const Scene: React.FC<{
         } else {
           setScene({
             ...result,
-            badGuys: !!result.badGuys ? result.badGuys : []
+            badGuys: !!result.badGuys ? result.badGuys : [],
+            characters: !!result.characters ? result.characters : {}
           });
         }
         setIsLoading(false);
@@ -128,7 +136,7 @@ export const Scene: React.FC<{
     });
   }
 
-  function handleBadGuyUpdate(updatedBadGuy?: IBadGuy) {
+  function onBadGuyDialogClose(updatedBadGuy?: IBadGuy) {
     const shouldUpdateScene = !!updatedBadGuy;
 
     if (shouldUpdateScene) {
@@ -171,14 +179,68 @@ export const Scene: React.FC<{
     });
   }
 
-  function onPlayerSceneUpdate(scene: IScene) {
-    setScene(scene);
-    setIsLoading(false);
+  function setCharacter(character: ICharacter) {
+    setScene({
+      ...scene,
+      characters: {
+        ...scene.characters,
+        [character._id]: character
+      }
+    });
+  }
+
+  function handleDataReceiveFromGM(action: IPeerAction) {
+    console.log("GOT ACTION FROM GM", action);
+    const reducer = {
+      UPDATE_SCENE_IN_PLAYER_SCREEN: () => {
+        setScene(action.payload.scene);
+        setIsLoading(false);
+      }
+    };
+    reducer[action.type]();
+  }
+
+  function handleDataReceiveFromPlayer(action: IPeerAction) {
+    const reducer = {
+      UPDATE_CHARACTER_IN_GM_SCREEN: () => {
+        setCharacter(action.payload.character);
+      }
+    };
+    reducer[action.type]();
+  }
+
+  function sendCharacterToGM(character: ICharacter) {
+    sendToGM({
+      type: "UPDATE_CHARACTER_IN_GM_SCREEN",
+      payload: { character: character }
+    });
   }
 
   useEffect(() => {
     loadScene(sceneId);
+
+    // setTimeout(() => {
+    //   if (!isGM) {
+    //     sendCharacterToGM({ test: "LOL" } as any);
+    //   }
+    // }, 5000);
   }, [sceneId]);
+
+  useEffect(() => {
+    let id = undefined;
+    if (isGM) {
+      id = setInterval(() => {
+        console.log("poking player", scene);
+        sendToAllPlayers({
+          type: "UPDATE_SCENE_IN_PLAYER_SCREEN",
+          payload: { scene: scene }
+        });
+      }, 1000);
+    }
+    return () => {
+      clearInterval(id);
+    };
+  }, [numberOfConnectedPlayers, scene]);
 
   return (
     <Page
@@ -231,7 +293,7 @@ export const Scene: React.FC<{
 
       <BadGuyDialog
         open={isBadGuyModalOpened}
-        handleClose={handleBadGuyUpdate}
+        onClose={onBadGuyDialogClose}
         badGuy={badGuyToModify}
       ></BadGuyDialog>
       {renderPlayerLink()}
@@ -345,28 +407,29 @@ export const Scene: React.FC<{
   function renderPlayerLink() {
     return (
       <div>
-        {isGM && isConnected && (
-          <div className="row center-xs margin-1">
-            <div className="col-xs">
-              <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                  <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
-                  <span>Player Link</span>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <div style={{ width: "100%" }}>
-                    <div className="row">
-                      <div className="col-xs">
-                        <span>Share the following link to the players</span>
-                        <LinkShare link={playerLink}></LinkShare>
-                      </div>
+        <div className="row center-xs margin-1">
+          <div className="col-xs">
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                disabled={!isGM || !isConnected}
+              >
+                <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
+                <span>Player Link</span>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div style={{ width: "100%" }}>
+                  <div className="row">
+                    <div className="col-xs">
+                      <span>Share the following link to the players</span>
+                      <LinkShare link={playerLink}></LinkShare>
                     </div>
                   </div>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            </div>
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
           </div>
-        )}
+        </div>
       </div>
     );
   }

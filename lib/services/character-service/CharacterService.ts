@@ -1,6 +1,6 @@
 import uuid from "uuid/v4";
 import { getCharactersDb } from "../../database/database";
-import { ICharacter } from "../../types/IGame";
+import { ICharacter } from "../../types/ICharacter";
 
 export class CharacterService {
   public async get(id: string): Promise<ICharacter> {
@@ -17,7 +17,7 @@ export class CharacterService {
         game: { $eq: gameSlug }
       }
     });
-    return result.docs;
+    return result.docs as Array<ICharacter>;
   }
 
   public async add(character: ICharacter, gameSlug: string): Promise<string> {
