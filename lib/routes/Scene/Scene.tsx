@@ -18,6 +18,7 @@ import WifiOffIcon from "@material-ui/icons/WifiOff";
 import React, { useEffect, useState } from "react";
 import uuid from "uuid/v4";
 import { Banner } from "../../components/Banner/Banner";
+import { FudgeDice } from "../../components/Dice/FudgeDice";
 import { routerHistory } from "../../components/History/History";
 import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
@@ -239,6 +240,7 @@ export const Scene: React.FC<{
       {renderPlayerLink()}
       {renderSceneNameFieldBox()}
       {renderSceneDescriptionFieldBox()}
+      {renderDice()}
       {renderSceneActions()}
       {renderBadGuyBox()}
       {renderAspectsBox()}
@@ -321,6 +323,25 @@ export const Scene: React.FC<{
           </div>
         </Box>
       </>
+    );
+  }
+
+  function renderDice() {
+    return (
+      <div className="row center-xs margin-1">
+        <div className="col-xs">
+          <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <span>Dice</span>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <div style={{ width: "100%" }}>
+                <FudgeDice></FudgeDice>
+              </div>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        </div>
+      </div>
     );
   }
 
