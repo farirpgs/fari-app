@@ -32,6 +32,8 @@ import { BadGuyDialog } from "./BadGuyDialog";
 import { IPeerAction } from "./IPeerAction";
 import { usePeer } from "./usePeer";
 
+const defaultScene = { badGuys: [], characters: {} };
+
 export const Scene: React.FC<{
   match: {
     params: {
@@ -42,7 +44,7 @@ export const Scene: React.FC<{
 }> = props => {
   const { sceneId, peerId: peerIdFromParams } = props.match.params;
   const [isLoading, setIsLoading] = useState(true);
-  const [scene, setScene] = useState<IScene>({ badGuys: [] });
+  const [scene, setScene] = useState<IScene>(defaultScene);
   const [sceneCreatedSnackBar, setSceneCreatedSnackBar] = React.useState({
     visible: false
   });
@@ -54,6 +56,7 @@ export const Scene: React.FC<{
   const [isSceneNotFound, setIsSceneNotFound] = useState(false);
   const {
     peerId,
+    isConnectedToGM,
     numberOfConnectedPlayers,
     sendToAllPlayers,
     sendToGM
@@ -65,6 +68,7 @@ export const Scene: React.FC<{
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
   const isGM = !peerIdFromParams;
+  const isPlayer = !isGM;
   const isConnected = !!peerId;
   const playerLink = isGM
     ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
@@ -190,7 +194,6 @@ export const Scene: React.FC<{
   }
 
   function handleDataReceiveFromGM(action: IPeerAction) {
-    console.log("GOT ACTION FROM GM", action);
     const reducer = {
       UPDATE_SCENE_IN_PLAYER_SCREEN: () => {
         setScene(action.payload.scene);
@@ -219,18 +222,17 @@ export const Scene: React.FC<{
   useEffect(() => {
     loadScene(sceneId);
 
-    // setTimeout(() => {
-    //   if (!isGM) {
-    //     sendCharacterToGM({ test: "LOL" } as any);
-    //   }
-    // }, 5000);
+    setTimeout(() => {
+      if (isPlayer) {
+        // sendCharacterToGM({ test: "LOL" } as any);
+      }
+    }, 5000);
   }, [sceneId]);
 
   useEffect(() => {
     let id = undefined;
     if (isGM) {
       id = setInterval(() => {
-        console.log("poking player", scene);
         sendToAllPlayers({
           type: "UPDATE_SCENE_IN_PLAYER_SCREEN",
           payload: { scene: scene }
@@ -254,12 +256,25 @@ export const Scene: React.FC<{
           {isGM && isConnected && (
             <div style={{ display: "flex", alignItems: "center" }}>
               <span className="h6" style={{ marginRight: ".5rem" }}>
-                {numberOfConnectedPlayers}
+                {numberOfConnectedPlayers}P
               </span>
               <WifiIcon style={{ color: green[400] }} />
             </div>
           )}
           {isGM && !isConnected && (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <WifiOffIcon style={{ color: red[400] }} />
+            </div>
+          )}
+          {isPlayer && isConnectedToGM && (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span className="h6" style={{ marginRight: ".5rem" }}>
+                GM
+              </span>
+              <WifiIcon style={{ color: green[400] }} />
+            </div>
+          )}
+          {isPlayer && !isConnectedToGM && (
             <div style={{ display: "flex", alignItems: "center" }}>
               <WifiOffIcon style={{ color: red[400] }} />
             </div>
@@ -301,7 +316,8 @@ export const Scene: React.FC<{
       {renderSceneDescriptionFieldBox()}
       {renderDice()}
       {renderSceneActions()}
-      {renderBadGuyBox()}
+      {renderBadGuyBoxes()}
+      {renderCharacterBoxes()}
       {renderAspectsBox()}
     </Page>
   );
@@ -412,7 +428,7 @@ export const Scene: React.FC<{
             <ExpansionPanel>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
-                disabled={!isGM || !isConnected}
+                disabled={isPlayer || !isConnected}
               >
                 <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
                 <span>Player Link</span>
@@ -467,7 +483,7 @@ export const Scene: React.FC<{
     );
   }
 
-  function renderBadGuyBox() {
+  function renderBadGuyBoxes() {
     return (
       <Box margin="1rem 0">
         <div className="row">
@@ -487,6 +503,21 @@ export const Scene: React.FC<{
                     removeBadGuy(badGuy);
                   }}
                 ></BadGuyCard>
+              </div>
+            );
+          })}
+        </div>
+      </Box>
+    );
+  }
+  function renderCharacterBoxes() {
+    return (
+      <Box margin="1rem 0">
+        <div className="row">
+          {Object.keys(scene.characters).map(characterId => {
+            return (
+              <div className="col-xs-12 col-sm-6 col-md-6" key={characterId}>
+                {characterId}
               </div>
             );
           })}

@@ -36,6 +36,9 @@ export function usePeer(
       connection.on("open", function() {
         setConnectionToGM(connection);
       });
+      connection.on("close", function() {
+        setConnectionToGM(undefined);
+      });
       connection.on("data", function(data) {
         handleDataReceiveFromGM(data);
       });
@@ -96,6 +99,7 @@ export function usePeer(
 
   return {
     peerId,
+    isConnectedToGM: !!connectionToGM,
     numberOfConnectedPlayers: connectionsToPlayers.length,
     sendToAllPlayers,
     sendToGM
