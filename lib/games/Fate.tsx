@@ -40,6 +40,7 @@ const approachCategory: IField = {
   slug: "approaches",
   type: FieldType.Category
 };
+
 const skillsCategory: IField = {
   label: "Skills",
   slug: "skills",
@@ -96,6 +97,7 @@ const aspect4: IField = {
   slug: "aspect4",
   type: FieldType.TextField
 };
+
 const flashy: IField = {
   label: "Flashy",
   slug: "flashy",
@@ -110,6 +112,7 @@ const aspect5: IField = {
   slug: "aspect5",
   type: FieldType.TextField
 };
+
 const quick: IField = {
   label: "Quick",
   slug: "quick",
@@ -122,7 +125,6 @@ const quick: IField = {
 const sneaky: IField = {
   label: "Sneaky",
   slug: "sneaky",
-
   type: FieldType.Number,
   min: 0,
   max: 3,
@@ -134,6 +136,7 @@ const stunts: IField = {
   slug: "stunts",
   type: FieldType.BigTextField
 };
+
 const extras: IField = {
   label: "Extras",
   slug: "extra",
@@ -151,11 +154,13 @@ const physicalStressCategory: IField = {
   slug: "physicalStressCategory",
   type: FieldType.Category
 };
+
 const mentalStressCategory: IField = {
   label: "Mental Stress",
   slug: "mentalStressCategory",
   type: FieldType.Category
 };
+
 const consequenceCategory: IField = {
   label: "Consequences",
   slug: "consequences",
@@ -167,11 +172,13 @@ const stress1: IField = {
   slug: "stress1",
   type: FieldType.Boolean
 };
+
 const stress2: IField = {
   label: "2",
   slug: "stress2",
   type: FieldType.Boolean
 };
+
 const stress3: IField = {
   label: "3",
   slug: "stress3",
@@ -183,16 +190,19 @@ const physicalStress1: IField = {
   slug: "physicalStress1",
   type: FieldType.Boolean
 };
+
 const physicalStress2: IField = {
   label: "2",
   slug: "physicalStress2",
   type: FieldType.Boolean
 };
+
 const physicalStress3: IField = {
   label: "3",
   slug: "physicalStress3",
   type: FieldType.Boolean
 };
+
 const physicalStress4: IField = {
   label: "4",
   slug: "physicalStress4",
@@ -204,16 +214,19 @@ const mentalStress1: IField = {
   slug: "mentalStress1",
   type: FieldType.Boolean
 };
+
 const mentalStress2: IField = {
   label: "2",
   slug: "mentalStress2",
   type: FieldType.Boolean
 };
+
 const mentalStress3: IField = {
   label: "3",
   slug: "mentalStress3",
   type: FieldType.Boolean
 };
+
 const mentalStress4: IField = {
   label: "4",
   slug: "mentalStress4",

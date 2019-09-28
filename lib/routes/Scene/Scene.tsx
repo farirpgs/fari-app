@@ -23,16 +23,20 @@ import { routerHistory } from "../../components/History/History";
 import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
 import { PostIt } from "../../components/PostIt/PostIt";
+import { CharacterService } from "../../services/character-service/CharacterService";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IBadGuy } from "../../types/IBadGuy";
 import { ICharacter } from "../../types/ICharacter";
 import { IScene } from "../../types/IScene";
 import { BadGuyCard } from "./BadGuyCard";
 import { BadGuyDialog } from "./BadGuyDialog";
+import { CharacterCard } from "./CharacterCard";
 import { IPeerAction } from "./IPeerAction";
 import { usePeer } from "./usePeer";
 
 const defaultScene = { badGuys: [], characters: {} };
+
+const REFRESH_PLAYER_INFO_EVERY_MS = 1000;
 
 export const Scene: React.FC<{
   match: {
@@ -69,7 +73,7 @@ export const Scene: React.FC<{
   const sceneDescription = scene.description || "";
   const isGM = !peerIdFromParams;
   const isPlayer = !isGM;
-  const isConnected = !!peerId;
+  const hasPeerId = !!peerId;
   const playerLink = isGM
     ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
     : "";
@@ -222,9 +226,10 @@ export const Scene: React.FC<{
   useEffect(() => {
     loadScene(sceneId);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       if (isPlayer) {
-        // sendCharacterToGM({ test: "LOL" } as any);
+        const [first] = await new CharacterService().getAll("fae");
+        sendCharacterToGM(first);
       }
     }, 5000);
   }, [sceneId]);
@@ -237,7 +242,7 @@ export const Scene: React.FC<{
           type: "UPDATE_SCENE_IN_PLAYER_SCREEN",
           payload: { scene: scene }
         });
-      }, 1000);
+      }, REFRESH_PLAYER_INFO_EVERY_MS);
     }
     return () => {
       clearInterval(id);
@@ -251,58 +256,8 @@ export const Scene: React.FC<{
       backFunction={() => {
         routerHistory.push(`/scenes`);
       }}
-      appBarActions={
-        <>
-          {isGM && isConnected && (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <span className="h6" style={{ marginRight: ".5rem" }}>
-                {numberOfConnectedPlayers}P
-              </span>
-              <WifiIcon style={{ color: green[400] }} />
-            </div>
-          )}
-          {isGM && !isConnected && (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <WifiOffIcon style={{ color: red[400] }} />
-            </div>
-          )}
-          {isPlayer && isConnectedToGM && (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <span className="h6" style={{ marginRight: ".5rem" }}>
-                GM
-              </span>
-              <WifiIcon style={{ color: green[400] }} />
-            </div>
-          )}
-          {isPlayer && !isConnectedToGM && (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <WifiOffIcon style={{ color: red[400] }} />
-            </div>
-          )}
-          {isGM && (
-            <IconButton
-              edge="end"
-              onClick={() => {
-                saveScene();
-              }}
-              color="inherit"
-            >
-              <SaveIcon />
-            </IconButton>
-          )}
-        </>
-      }
-      notFound={
-        isSceneNotFound && (
-          <Banner variant="warning">
-            <div>
-              The scene you are trying to access doesn't exists.
-              <br />
-              Are you sure you have the right url ?
-            </div>
-          </Banner>
-        )
-      }
+      appBarActions={renderAppBarStatus()}
+      notFound={renderNotFound()}
     >
       {renderSnackBars()}
 
@@ -322,6 +277,75 @@ export const Scene: React.FC<{
     </Page>
   );
 
+  function renderAppBarStatus() {
+    return (
+      <>
+        {isGM && hasPeerId && (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span className="h6" style={{ marginRight: ".5rem" }}>
+              {numberOfConnectedPlayers}P
+            </span>
+            <WifiIcon style={{ color: green[400] }} />
+          </div>
+        )}
+        {isGM && !hasPeerId && (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              onClick={() => {
+                location.reload();
+              }}
+            >
+              <WifiOffIcon style={{ color: red[400] }} />
+            </IconButton>
+          </div>
+        )}
+        {isPlayer && isConnectedToGM && (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span className="h6" style={{ marginRight: ".5rem" }}>
+              GM
+            </span>
+            <WifiIcon style={{ color: green[400] }} />
+          </div>
+        )}
+        {isPlayer && !isConnectedToGM && (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              onClick={() => {
+                location.reload();
+              }}
+            >
+              <WifiOffIcon style={{ color: red[400] }} />
+            </IconButton>
+          </div>
+        )}
+        {isGM && (
+          <IconButton
+            edge="end"
+            onClick={() => {
+              saveScene();
+            }}
+            color="inherit"
+          >
+            <SaveIcon />
+          </IconButton>
+        )}
+      </>
+    );
+  }
+
+  function renderNotFound() {
+    return (
+      isSceneNotFound && (
+        <Banner variant="warning">
+          <div>
+            The scene you are trying to access doesn't exists.
+            <br />
+            Are you sure you have the right url ?
+          </div>
+        </Banner>
+      )
+    );
+  }
   function renderSnackBars() {
     return (
       <>
@@ -428,7 +452,7 @@ export const Scene: React.FC<{
             <ExpansionPanel>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
-                disabled={isPlayer || !isConnected}
+                disabled={isPlayer || !hasPeerId}
               >
                 <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
                 <span>Player Link</span>
@@ -510,6 +534,7 @@ export const Scene: React.FC<{
       </Box>
     );
   }
+
   function renderCharacterBoxes() {
     return (
       <Box margin="1rem 0">
@@ -517,7 +542,11 @@ export const Scene: React.FC<{
           {Object.keys(scene.characters).map(characterId => {
             return (
               <div className="col-xs-12 col-sm-6 col-md-6" key={characterId}>
-                {characterId}
+                <CharacterCard
+                  character={scene.characters[characterId]}
+                  onUpdate={character => {}}
+                  onRemove={character => {}}
+                ></CharacterCard>
               </div>
             );
           })}
@@ -548,3 +577,5 @@ export const Scene: React.FC<{
     );
   }
 };
+
+Scene.displayName = "Scene";
