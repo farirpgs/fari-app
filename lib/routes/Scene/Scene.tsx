@@ -572,8 +572,12 @@ export const Scene: React.FC<{
               <div className="col-xs-12 col-sm-6 col-md-6" key={characterId}>
                 <CharacterCard
                   character={scene.characters[characterId]}
-                  onUpdate={character => {}}
-                  onRemove={character => {}}
+                  onUpdate={character => {
+                    console.log(character);
+                  }}
+                  onRemove={character => {
+                    console.log(character);
+                  }}
                 ></CharacterCard>
               </div>
             );
