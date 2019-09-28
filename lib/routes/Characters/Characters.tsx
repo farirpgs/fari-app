@@ -37,7 +37,7 @@ export const Characters = props => {
 
   const load = async () => {
     setIsLoading(true);
-    const characters = await new CharacterService().getAll(game.slug);
+    const characters = await new CharacterService().getAllByGame(game.slug);
     setCharacters(characters);
     setIsLoading(false);
   };

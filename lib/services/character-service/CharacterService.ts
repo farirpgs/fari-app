@@ -7,7 +7,7 @@ export class CharacterService {
     return getCharactersDb().get<ICharacter>(id);
   }
 
-  public async getAll(gameSlug: string): Promise<Array<ICharacter>> {
+  public async getAllByGame(gameSlug: string): Promise<Array<ICharacter>> {
     await getCharactersDb().createIndex({
       index: { fields: ["game"] }
     });

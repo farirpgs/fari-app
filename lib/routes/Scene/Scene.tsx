@@ -30,6 +30,7 @@ import { IScene } from "../../types/IScene";
 import { BadGuyCard } from "./BadGuyCard";
 import { BadGuyDialog } from "./BadGuyDialog";
 import { CharacterCard } from "./CharacterCard";
+import { CharacterSelectDialog } from "./CharacterSelectDialog";
 import { IPeerAction } from "./IPeerAction";
 import { usePeer } from "./usePeer";
 
@@ -55,6 +56,7 @@ export const Scene: React.FC<{
     visible: false
   });
   const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
+  const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
   const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
   const [isSceneNotFound, setIsSceneNotFound] = useState(false);
   const {
@@ -76,8 +78,7 @@ export const Scene: React.FC<{
   const playerLink = isGM
     ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
     : "";
-  console.log("table characters");
-  console.table(scene.characters);
+
   async function loadScene(sceneId: string) {
     if (sceneId) {
       setIsLoading(true);
@@ -159,6 +160,13 @@ export const Scene: React.FC<{
     setBadGuyToModify(undefined);
   }
 
+  function onCharacterSelectClose(character?: ICharacter) {
+    if (!!character) {
+      sendCharacterToGM(character);
+    }
+    setIsCharacterModalOpened(false);
+  }
+
   function addBadGuy(updatedBadGuy: IBadGuy) {
     setScene({
       ...scene,
@@ -188,12 +196,14 @@ export const Scene: React.FC<{
   }
 
   function setCharacter(character: ICharacter) {
-    setScene({
-      ...scene,
-      characters: {
-        ...scene.characters,
-        [character._id]: character
-      }
+    setScene(scene => {
+      return {
+        ...scene,
+        characters: {
+          ...scene.characters,
+          [character._id]: character
+        }
+      };
     });
   }
 
@@ -259,6 +269,12 @@ export const Scene: React.FC<{
         onClose={onBadGuyDialogClose}
         badGuy={badGuyToModify}
       ></BadGuyDialog>
+
+      <CharacterSelectDialog
+        open={isCharacterModalOpened}
+        onClose={onCharacterSelectClose}
+      ></CharacterSelectDialog>
+
       {renderPlayerLink()}
       {renderSceneNameFieldBox()}
       {renderSceneDescriptionFieldBox()}
@@ -339,6 +355,7 @@ export const Scene: React.FC<{
       )
     );
   }
+
   function renderSnackBars() {
     return (
       <>
@@ -470,31 +487,49 @@ export const Scene: React.FC<{
     return (
       <div>
         <div className="row center-xs">
-          <div className="col-xs-12 col-sm-6 margin-1">
-            <Fab
-              onClick={() => {
-                addAspect();
-              }}
-              variant="extended"
-              color="primary"
-            >
-              <AddIcon style={{ marginRight: " .5rem" }} />
-              Add an aspect
-            </Fab>
-          </div>
-          <div className="col-xs-12 col-sm-6 margin-1">
-            <Fab
-              onClick={() => {
-                setBadGuyToModify(undefined);
-                setIsBadGuyModalOpened(true);
-              }}
-              color="primary"
-              variant="extended"
-            >
-              <AddIcon style={{ marginRight: " .5rem" }} />
-              Add a bad buy
-            </Fab>
-          </div>
+          {isGM && (
+            <div className="col-xs-12 col-sm-6 margin-1">
+              <Fab
+                onClick={() => {
+                  addAspect();
+                }}
+                variant="extended"
+                color="primary"
+              >
+                <AddIcon style={{ marginRight: " .5rem" }} />
+                Add an aspect
+              </Fab>
+            </div>
+          )}
+          {isGM && (
+            <div className="col-xs-12 col-sm-6 margin-1">
+              <Fab
+                onClick={() => {
+                  setBadGuyToModify(undefined);
+                  setIsBadGuyModalOpened(true);
+                }}
+                color="primary"
+                variant="extended"
+              >
+                <AddIcon style={{ marginRight: " .5rem" }} />
+                Add a bad buy
+              </Fab>
+            </div>
+          )}
+          {isPlayer && (
+            <div className="col-xs-12 col-sm-6 margin-1">
+              <Fab
+                onClick={() => {
+                  setIsCharacterModalOpened(true);
+                }}
+                color="primary"
+                variant="extended"
+              >
+                <AddIcon style={{ marginRight: " .5rem" }} />
+                Send a character to the GM
+              </Fab>
+            </div>
+          )}
         </div>
       </div>
     );

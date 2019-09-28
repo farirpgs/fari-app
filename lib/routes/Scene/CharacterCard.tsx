@@ -80,7 +80,7 @@ export const CharacterCard: React.FC<{
                   label={`#${stressIndex + 1}`}
                   control={
                     <Checkbox
-                      checked={character.stressValues[stressIndex] || false}
+                      checked={character[`stress${stressIndex + 1}`] || false}
                       onChange={e => {
                         props.onUpdate({
                           ...character,
@@ -102,7 +102,7 @@ export const CharacterCard: React.FC<{
               const consequenceShift = (consequenceIndex + 1) * 2;
               return (
                 <div className="col-xs-12" key={consequenceIndex}>
-                  <TextField
+                  {/* <TextField
                     value={character.consequencesValues[consequenceIndex] || ""}
                     label={`Consequence (${consequenceShift})`}
                     variant="filled"
@@ -120,7 +120,7 @@ export const CharacterCard: React.FC<{
                         // }
                       });
                     }}
-                  />
+                  /> */}
                 </div>
               );
             })}

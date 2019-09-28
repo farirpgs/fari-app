@@ -6,8 +6,5 @@
   },
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  }
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
