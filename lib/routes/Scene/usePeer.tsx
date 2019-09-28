@@ -113,7 +113,6 @@ export function usePeer(
     isConnectedToGM: !!connectionToGM,
     numberOfConnectedPlayers: connectionsToPlayers.length,
     sendToAllPlayers: (action: IPeerAction) => {
-      console.log("ALL", connectionsToPlayers.length);
       connectionsToPlayers.forEach(connection => {
         connection.send(action);
       });
