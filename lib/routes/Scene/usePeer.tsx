@@ -90,7 +90,6 @@ export function usePeer(
       setConnectionToGM(undefined);
     });
     connection.on("data", function(data) {
-      console.log("DUDE DATA");
       handleDataReceiveFromGM(data);
     });
   }

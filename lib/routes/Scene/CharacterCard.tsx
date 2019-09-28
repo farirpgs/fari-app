@@ -84,7 +84,7 @@ export const CharacterCard: React.FC<{
                       onChange={e => {
                         props.onUpdate({
                           ...character,
-                          [`stress${stressIndex}`]: e.target.checked
+                          [`stress${stressIndex + 1}`]: e.target.checked
                         });
                       }}
                     />

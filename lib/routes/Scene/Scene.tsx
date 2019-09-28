@@ -23,7 +23,6 @@ import { routerHistory } from "../../components/History/History";
 import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
 import { PostIt } from "../../components/PostIt/PostIt";
-import { CharacterService } from "../../services/character-service/CharacterService";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IBadGuy } from "../../types/IBadGuy";
 import { ICharacter } from "../../types/ICharacter";
@@ -77,7 +76,8 @@ export const Scene: React.FC<{
   const playerLink = isGM
     ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
     : "";
-
+  console.log("table characters");
+  console.table(scene.characters);
   async function loadScene(sceneId: string) {
     if (sceneId) {
       setIsLoading(true);
@@ -225,13 +225,6 @@ export const Scene: React.FC<{
 
   useEffect(() => {
     loadScene(sceneId);
-
-    setTimeout(async () => {
-      if (isPlayer) {
-        const [first] = await new CharacterService().getAll("fae");
-        sendCharacterToGM(first);
-      }
-    }, 5000);
   }, [sceneId]);
 
   useEffect(() => {
