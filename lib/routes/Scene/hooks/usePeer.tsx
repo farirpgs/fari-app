@@ -80,6 +80,7 @@ export function usePeer(
     peer.current.off("disconnected", onPeerDisconnectedCallback);
     peer.current.off("close", onPeerCloseCallback);
     peer.current.off("error", onPeerErrorCallback);
+    peer.current.destroy();
   }
 
   function connectPlayerToGM() {
