@@ -34,7 +34,7 @@ import { CharacterSelectDialog } from "./CharacterSelectDialog";
 import { IPeerAction } from "./IPeerAction";
 import { usePeer } from "./usePeer";
 
-const defaultScene = { badGuys: [], characters: {} };
+const defaultScene = { badGuys: [], characters: [] };
 
 const REFRESH_PLAYER_INFO_EVERY_MS = 1000;
 
@@ -74,6 +74,7 @@ export const Scene: React.FC<{
   const sceneDescription = scene.description || "";
   const isGM = !peerIdFromParams;
   const isPlayer = !isGM;
+  const isCreatingScene = !sceneId;
   const hasPeerId = !!peerId;
   const playerLink = isGM
     ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
@@ -91,7 +92,7 @@ export const Scene: React.FC<{
           setScene({
             ...result,
             badGuys: !!result.badGuys ? result.badGuys : [],
-            characters: !!result.characters ? result.characters : {}
+            characters: !!result.characters ? result.characters : []
           });
         }
         setIsLoading(false);
@@ -195,14 +196,27 @@ export const Scene: React.FC<{
     });
   }
 
-  function setCharacter(character: ICharacter) {
+  function updateCharacter(character: ICharacter) {
     setScene(scene => {
       return {
         ...scene,
-        characters: {
-          ...scene.characters,
-          [character._id]: character
-        }
+        characters: scene.characters.map(c => {
+          if (c._id === character._id) {
+            return character;
+          }
+          return c;
+        })
+      };
+    });
+  }
+
+  function removeCharacter(character: ICharacter) {
+    setScene(scene => {
+      return {
+        ...scene,
+        characters: scene.characters.filter(c => {
+          return c._id !== character.id;
+        })
       };
     });
   }
@@ -220,7 +234,7 @@ export const Scene: React.FC<{
   function handleDataReceiveFromPlayer(action: IPeerAction) {
     const reducer = {
       UPDATE_CHARACTER_IN_GM_SCREEN: () => {
-        setCharacter(action.payload.character);
+        updateCharacter(action.payload.character);
       }
     };
     reducer[action.type]();
@@ -289,7 +303,7 @@ export const Scene: React.FC<{
   function renderAppBarStatus() {
     return (
       <>
-        {isGM && hasPeerId && (
+        {!isCreatingScene && isGM && hasPeerId && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <span className="h6" style={{ marginRight: ".5rem" }}>
               {numberOfConnectedPlayers}P
@@ -297,7 +311,7 @@ export const Scene: React.FC<{
             <WifiIcon style={{ color: green[400] }} />
           </div>
         )}
-        {isGM && !hasPeerId && (
+        {!isCreatingScene && isGM && !hasPeerId && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton
               onClick={() => {
@@ -308,7 +322,7 @@ export const Scene: React.FC<{
             </IconButton>
           </div>
         )}
-        {isPlayer && isConnectedToGM && (
+        {!isCreatingScene && isPlayer && isConnectedToGM && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <span className="h6" style={{ marginRight: ".5rem" }}>
               GM
@@ -316,7 +330,7 @@ export const Scene: React.FC<{
             <WifiIcon style={{ color: green[400] }} />
           </div>
         )}
-        {isPlayer && !isConnectedToGM && (
+        {!isCreatingScene && isPlayer && !isConnectedToGM && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton
               onClick={() => {
@@ -436,6 +450,9 @@ export const Scene: React.FC<{
   }
 
   function renderDice() {
+    if (isCreatingScene) {
+      return null;
+    }
     return (
       <div className="row center-xs margin-1">
         <div className="col-xs">
@@ -455,6 +472,9 @@ export const Scene: React.FC<{
   }
 
   function renderPlayerLink() {
+    if (isCreatingScene || isPlayer) {
+      return null;
+    }
     return (
       <div>
         <div className="row center-xs margin-1">
@@ -567,11 +587,11 @@ export const Scene: React.FC<{
     return (
       <Box margin="1rem 0">
         <div className="row">
-          {Object.keys(scene.characters).map(characterId => {
+          {scene.characters.map(character => {
             return (
-              <div className="col-xs-12 col-sm-6 col-md-6" key={characterId}>
+              <div className="col-xs-12 col-sm-6 col-md-6" key={character._id}>
                 <CharacterCard
-                  character={scene.characters[characterId]}
+                  character={scene.characters[character._id]}
                   onUpdate={character => {
                     console.log(character);
                   }}

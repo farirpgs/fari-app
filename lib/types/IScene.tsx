@@ -9,5 +9,5 @@ export interface IScene {
   images?: string;
   aspects?: Array<string>;
   badGuys?: Array<IBadGuy>;
-  characters?: { [id: string]: ICharacter };
+  characters?: Array<ICharacter>;
 }
