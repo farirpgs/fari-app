@@ -1,12 +1,13 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import { IPeerAction } from "./IPeerAction";
+import { IPeerAction } from "../types/IPeerAction";
+import { IPeerManager } from "../types/IPeerManager";
 
 export function usePeer(
   peerIdFromParams: string | undefined,
   handleDataReceiveFromGM: (action: IPeerAction) => void,
   handleDataReceiveFromPlayer: (action: IPeerAction) => void
-) {
+): IPeerManager {
   const [peerId, setPeerId] = useState<string>(peerIdFromParams);
   const [connectionToGM, setConnectionToGM] = useState<Peer.DataConnection>(
     undefined

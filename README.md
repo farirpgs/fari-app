@@ -2,6 +2,7 @@
 
 ## TODO
 
-- Character Peer Management ???
-  - Select Game, Select Character
-  - Update Stress, Consequences (fieldToUpdate = list + update them)
+- Only player can edit their charscters
+- A player sync its character with the GM every second
+- Better Character select
+- Add unit tests. Bunches and bunches

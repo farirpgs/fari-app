@@ -16,7 +16,6 @@ import ShareIcon from "@material-ui/icons/Share";
 import WifiIcon from "@material-ui/icons/Wifi";
 import WifiOffIcon from "@material-ui/icons/WifiOff";
 import React, { useEffect, useState } from "react";
-import uuid from "uuid/v4";
 import { Banner } from "../../components/Banner/Banner";
 import { FudgeDice } from "../../components/Dice/FudgeDice";
 import { routerHistory } from "../../components/History/History";
@@ -24,15 +23,17 @@ import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
 import { PostIt } from "../../components/PostIt/PostIt";
 import { SceneService } from "../../services/scene-service/SceneService";
-import { IBadGuy } from "../../types/IBadGuy";
-import { ICharacter } from "../../types/ICharacter";
 import { IScene } from "../../types/IScene";
 import { BadGuyCard } from "./BadGuyCard";
 import { BadGuyDialog } from "./BadGuyDialog";
 import { CharacterCard } from "./CharacterCard";
 import { CharacterSelectDialog } from "./CharacterSelectDialog";
-import { IPeerAction } from "./IPeerAction";
-import { usePeer } from "./usePeer";
+import { useAspects } from "./hooks/useAspects";
+import { useBadGuys } from "./hooks/useBadGuys";
+import { useCharacters } from "./hooks/useCharacters";
+import { usePeer } from "./hooks/usePeer";
+import { IPeerAction } from "./types/IPeerAction";
+import { addLiveLink } from "../../singletons/liveLinks";
 
 const defaultScene = { badGuys: [], characters: [] };
 
@@ -55,48 +56,42 @@ export const Scene: React.FC<{
   const [sceneUpdatedSnackBar, setSceneUpdatedSnackBar] = React.useState({
     visible: false
   });
-  const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
-  const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
-  const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
   const [isSceneNotFound, setIsSceneNotFound] = useState(false);
-  const {
-    peerId,
-    isConnectedToGM,
-    numberOfConnectedPlayers,
-    sendToAllPlayers,
-    sendToGM
-  } = usePeer(
+
+  const peerManager = usePeer(
     peerIdFromParams,
     handleDataReceiveFromGM,
     handleDataReceiveFromPlayer
   );
+  const aspectsManager = useAspects(setScene);
+  const badGuyManager = useBadGuys(setScene);
+  const characterManager = useCharacters(setScene, peerManager);
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
+
   const isGM = !peerIdFromParams;
   const isPlayer = !isGM;
   const isCreatingScene = !sceneId;
-  const hasPeerId = !!peerId;
+  const hasPeerId = !!peerManager.peerId;
   const playerLink = isGM
-    ? `${location.origin}/scenes/play/${sceneId}/${peerId}`
+    ? `${location.origin}/scenes/play/${sceneId}/${peerManager.peerId}`
     : "";
 
   async function loadScene(sceneId: string) {
     if (sceneId) {
       setIsLoading(true);
-      if (isGM) {
-        const result = await new SceneService().get(sceneId);
+      const result = await new SceneService().get(sceneId);
 
-        if (!result) {
-          setIsSceneNotFound(true);
-        } else {
-          setScene({
-            ...result,
-            badGuys: !!result.badGuys ? result.badGuys : [],
-            characters: !!result.characters ? result.characters : []
-          });
-        }
-        setIsLoading(false);
+      if (!result) {
+        setIsSceneNotFound(true);
+      } else {
+        setScene({
+          ...result,
+          badGuys: !!result.badGuys ? result.badGuys : [],
+          characters: !!result.characters ? result.characters : []
+        });
       }
+      setIsLoading(false);
     } else {
       setIsLoading(false);
     }
@@ -118,109 +113,6 @@ export const Scene: React.FC<{
     }
   }
 
-  function addAspect() {
-    setScene({
-      ...scene,
-      aspects: [...(scene.aspects || []), ""]
-    });
-    setTimeout(() => {
-      window.scrollTo(0, document.body.scrollHeight);
-    }, 0);
-  }
-
-  function setAspect(content: string, index: number) {
-    const aspectCopy = [...(scene.aspects || [])];
-    aspectCopy[index] = content;
-    setScene({
-      ...scene,
-      aspects: aspectCopy
-    });
-  }
-
-  function removeAspect(indexToRemove: number) {
-    setScene({
-      ...scene,
-      aspects: scene.aspects.filter(
-        (element, currentIndex) => currentIndex !== indexToRemove
-      )
-    });
-  }
-
-  function onBadGuyDialogClose(updatedBadGuy?: IBadGuy) {
-    const shouldUpdateScene = !!updatedBadGuy;
-
-    if (shouldUpdateScene) {
-      const isNew = !updatedBadGuy.id;
-      if (isNew) {
-        addBadGuy(updatedBadGuy);
-      } else {
-        updateBadGuy(updatedBadGuy);
-      }
-    }
-    setIsBadGuyModalOpened(false);
-    setBadGuyToModify(undefined);
-  }
-
-  function onCharacterSelectClose(character?: ICharacter) {
-    if (!!character) {
-      sendCharacterToGM(character);
-    }
-    setIsCharacterModalOpened(false);
-  }
-
-  function addBadGuy(updatedBadGuy: IBadGuy) {
-    setScene({
-      ...scene,
-      badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
-    });
-  }
-
-  function updateBadGuy(updatedBadGuy: IBadGuy) {
-    setScene({
-      ...scene,
-      badGuys: scene.badGuys.map(badGuy => {
-        if (updatedBadGuy.id === badGuy.id) {
-          return updatedBadGuy;
-        }
-        return badGuy;
-      })
-    });
-  }
-
-  function removeBadGuy(updatedBadGuy: IBadGuy) {
-    setScene({
-      ...scene,
-      badGuys: scene.badGuys.filter(badGuy => {
-        return badGuy.id !== updatedBadGuy.id;
-      })
-    });
-  }
-
-  function updateCharacter(character: ICharacter) {
-    setScene(scene => {
-      return {
-        ...scene,
-        characters: scene.characters.map(c => {
-          if (c._id === character._id) {
-            return character;
-          }
-          return c;
-        })
-      };
-    });
-  }
-
-  function removeCharacter(character: ICharacter) {
-    setScene(scene => {
-      return {
-        ...scene,
-        characters: scene.characters.filter(c => {
-          return c._id !== character.id;
-        })
-      };
-    });
-  }
-
   function handleDataReceiveFromGM(action: IPeerAction) {
     const reducer = {
       UPDATE_SCENE_IN_PLAYER_SCREEN: () => {
@@ -234,37 +126,35 @@ export const Scene: React.FC<{
   function handleDataReceiveFromPlayer(action: IPeerAction) {
     const reducer = {
       UPDATE_CHARACTER_IN_GM_SCREEN: () => {
-        updateCharacter(action.payload.character);
+        characterManager.updateCharacter(action.payload.character);
       }
     };
     reducer[action.type]();
   }
 
-  function sendCharacterToGM(character: ICharacter) {
-    sendToGM({
-      type: "UPDATE_CHARACTER_IN_GM_SCREEN",
-      payload: { character: character }
-    });
-  }
-
   useEffect(() => {
-    loadScene(sceneId);
+    if (isGM) {
+      loadScene(sceneId);
+    }
   }, [sceneId]);
 
   useEffect(() => {
     let id = undefined;
     if (isGM) {
       id = setInterval(() => {
-        sendToAllPlayers({
+        peerManager.sendToAllPlayers({
           type: "UPDATE_SCENE_IN_PLAYER_SCREEN",
           payload: { scene: scene }
         });
       }, REFRESH_PLAYER_INFO_EVERY_MS);
     }
+    if (isPlayer && scene) {
+      addLiveLink(scene.name, scene.description, location.pathname);
+    }
     return () => {
       clearInterval(id);
     };
-  }, [numberOfConnectedPlayers, scene]);
+  }, [peerManager.numberOfConnectedPlayers, scene]);
 
   return (
     <Page
@@ -279,14 +169,14 @@ export const Scene: React.FC<{
       {renderSnackBars()}
 
       <BadGuyDialog
-        open={isBadGuyModalOpened}
-        onClose={onBadGuyDialogClose}
-        badGuy={badGuyToModify}
+        open={badGuyManager.isBadGuyModalOpened}
+        onClose={badGuyManager.onBadGuyDialogClose}
+        badGuy={badGuyManager.badGuyToModify}
       ></BadGuyDialog>
 
       <CharacterSelectDialog
-        open={isCharacterModalOpened}
-        onClose={onCharacterSelectClose}
+        open={characterManager.isCharacterModalOpened}
+        onClose={characterManager.onCharacterSelectClose}
       ></CharacterSelectDialog>
 
       {renderPlayerLink()}
@@ -306,7 +196,7 @@ export const Scene: React.FC<{
         {!isCreatingScene && isGM && hasPeerId && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <span className="h6" style={{ marginRight: ".5rem" }}>
-              {numberOfConnectedPlayers}P
+              {peerManager.numberOfConnectedPlayers}P
             </span>
             <WifiIcon style={{ color: green[400] }} />
           </div>
@@ -322,7 +212,7 @@ export const Scene: React.FC<{
             </IconButton>
           </div>
         )}
-        {!isCreatingScene && isPlayer && isConnectedToGM && (
+        {!isCreatingScene && isPlayer && peerManager.isConnectedToGM && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <span className="h6" style={{ marginRight: ".5rem" }}>
               GM
@@ -330,7 +220,7 @@ export const Scene: React.FC<{
             <WifiIcon style={{ color: green[400] }} />
           </div>
         )}
-        {!isCreatingScene && isPlayer && !isConnectedToGM && (
+        {!isCreatingScene && isPlayer && !peerManager.isConnectedToGM && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton
               onClick={() => {
@@ -401,6 +291,9 @@ export const Scene: React.FC<{
                 value={sceneName}
                 label="Where are you ?"
                 placeholder="In the middle of the woods"
+                InputProps={{
+                  readOnly: isPlayer
+                }}
                 variant="filled"
                 style={{
                   width: "100%"
@@ -432,6 +325,9 @@ export const Scene: React.FC<{
                 label="What is hapenning ?"
                 placeholder="The sun is set and you can hear the sounds of the night waking up..."
                 variant="filled"
+                InputProps={{
+                  readOnly: isPlayer
+                }}
                 style={{
                   width: "100%"
                 }}
@@ -511,7 +407,7 @@ export const Scene: React.FC<{
             <div className="col-xs-12 col-sm-6 margin-1">
               <Fab
                 onClick={() => {
-                  addAspect();
+                  aspectsManager.addAspect();
                 }}
                 variant="extended"
                 color="primary"
@@ -525,8 +421,7 @@ export const Scene: React.FC<{
             <div className="col-xs-12 col-sm-6 margin-1">
               <Fab
                 onClick={() => {
-                  setBadGuyToModify(undefined);
-                  setIsBadGuyModalOpened(true);
+                  badGuyManager.onAddBadBuyButtonClick();
                 }}
                 color="primary"
                 variant="extended"
@@ -540,7 +435,7 @@ export const Scene: React.FC<{
             <div className="col-xs-12 col-sm-6 margin-1">
               <Fab
                 onClick={() => {
-                  setIsCharacterModalOpened(true);
+                  characterManager.onSendCharacterToGMButtonClick();
                 }}
                 color="primary"
                 variant="extended"
@@ -564,15 +459,15 @@ export const Scene: React.FC<{
               <div className="col-xs-12 col-sm-6 col-md-6" key={badGuy.id}>
                 <BadGuyCard
                   badGuy={badGuy}
+                  readOnly={isPlayer}
                   onUpdate={badGuy => {
-                    updateBadGuy(badGuy);
+                    badGuyManager.updateBadGuy(badGuy);
                   }}
                   onModify={badGuy => {
-                    setBadGuyToModify(badGuy);
-                    setIsBadGuyModalOpened(true);
+                    badGuyManager.onModifyBadBuyButtonClick(badGuy);
                   }}
                   onRemove={badGuy => {
-                    removeBadGuy(badGuy);
+                    badGuyManager.removeBadGuy(badGuy);
                   }}
                 ></BadGuyCard>
               </div>
@@ -615,11 +510,12 @@ export const Scene: React.FC<{
             <div className="col-xs-12 col-sm-6 col-md-6" key={aspectIndex}>
               <PostIt
                 value={aspect}
+                readOnly={isPlayer}
                 onChange={event => {
-                  setAspect(event.target.value, aspectIndex);
+                  aspectsManager.setAspect(event.target.value, aspectIndex);
                 }}
                 onDelete={() => {
-                  removeAspect(aspectIndex);
+                  aspectsManager.removeAspect(aspectIndex);
                 }}
               />
             </div>

@@ -11,6 +11,7 @@ import { IBadGuy } from "../../types/IBadGuy";
 
 export const BadGuyCard: React.FC<{
   badGuy: IBadGuy;
+  readOnly?: boolean;
   onUpdate: (badGuy: IBadGuy) => void;
   onModify: (badGuy: IBadGuy) => void;
   onRemove: (badGuy: IBadGuy) => void;
@@ -75,6 +76,7 @@ export const BadGuyCard: React.FC<{
                   control={
                     <Checkbox
                       checked={badGuy.stressValues[stressIndex] || false}
+                      disabled={props.readOnly}
                       onChange={e => {
                         props.onUpdate({
                           ...badGuy,
@@ -106,6 +108,9 @@ export const BadGuyCard: React.FC<{
                     margin="normal"
                     style={{
                       width: "100%"
+                    }}
+                    InputProps={{
+                      readOnly: props.readOnly
                     }}
                     onChange={e => {
                       props.onUpdate({

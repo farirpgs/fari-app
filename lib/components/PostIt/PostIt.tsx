@@ -5,6 +5,7 @@ import React, { ChangeEventHandler } from "react";
 
 export const PostIt: React.FC<{
   value: string;
+  readOnly?: boolean;
   onChange: ChangeEventHandler<any>;
   onDelete: () => void;
 }> = props => {
@@ -28,6 +29,7 @@ export const PostIt: React.FC<{
           outline: "none"
         }}
         InputProps={{
+          readOnly: props.readOnly,
           style: {
             fontSize: "1.5rem"
           }

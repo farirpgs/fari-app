@@ -8,6 +8,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
+import WifiIcon from "@material-ui/icons/Wifi";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LayersIcon from "@material-ui/icons/Layers";
 import _ from "lodash";
@@ -22,25 +23,28 @@ import { IScene } from "../../types/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
 import * as selectors from "./sceneSelectors";
+import { liveLinks } from "../../singletons/liveLinks";
+import { green } from "@material-ui/core/colors";
 
 export const Scenes: React.FC<{}> = props => {
   const [groupedScenes, setGroupedScenes] = useState<IGroupedScenes>({});
   const [isLoading, setIsLoading] = useState(true);
-  const hasItems = Object.keys(groupedScenes).length > 0;
-
   const [sceneAddedSnackBar, setSceneAddedSnackBar] = React.useState({
     visible: false
   });
   const [sceneDeletedSnackBar, setSceneDeletedSnackBar] = React.useState({
     visible: false
   });
+
+  const hasItems = Object.keys(groupedScenes).length > 0;
+  const hasLiveLinks = liveLinks.length !== 0;
+
   const loadScenes = async () => {
     setIsLoading(true);
     const scenes = await new SceneService().getAll();
     const groupedScenes = selectors.groupScenesByCampaign(scenes);
 
     setGroupedScenes(groupedScenes);
-
     setIsLoading(false);
   };
 
@@ -53,6 +57,7 @@ export const Scenes: React.FC<{}> = props => {
   useEffect(() => {
     loadScenes();
   }, []);
+
   return (
     <Page isLoading={isLoading} h1="Scenes">
       <Snackbar
@@ -69,6 +74,44 @@ export const Scenes: React.FC<{}> = props => {
         onClose={() => setSceneDeletedSnackBar({ visible: false })}
         message={<span id="message-id">Scene Deleted</span>}
       />
+
+      {hasLiveLinks && (
+        <div className="margin-1">
+          <AppPaper>
+            <div className="row">
+              <div className="col-xs-12">
+                <List component="nav">
+                  {liveLinks.map(link => {
+                    const truncatedDescription = _.truncate(link.description, {
+                      length: 50
+                    });
+                    return (
+                      <AppLink to={link.url} key={link.url}>
+                        <ListItem
+                          button
+                          style={{
+                            zoom: "1.2"
+                          }}
+                        >
+                          <ListItemAvatar>
+                            <Avatar style={{ background: green[400] }}>
+                              <WifiIcon />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={link.label}
+                            secondary={truncatedDescription}
+                          />
+                        </ListItem>
+                      </AppLink>
+                    );
+                  })}
+                </List>
+              </div>
+            </div>
+          </AppPaper>
+        </div>
+      )}
 
       {!hasItems && (
         <Banner variant="info">
