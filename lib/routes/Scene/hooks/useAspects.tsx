@@ -3,7 +3,7 @@ import { IScene } from "../../../types/IScene";
 export function useAspects(
   setScene: React.Dispatch<React.SetStateAction<IScene>>
 ) {
-  function addAspect() {
+  function addAspectToScene() {
     setScene((scene: IScene) => {
       return {
         ...scene,
@@ -15,7 +15,7 @@ export function useAspects(
     }, 0);
   }
 
-  function setAspect(content: string, index: number) {
+  function updateAspectInScene(content: string, index: number) {
     setScene((scene: IScene) => {
       const aspectCopy = [...(scene.aspects || [])];
       aspectCopy[index] = content;
@@ -26,7 +26,7 @@ export function useAspects(
     });
   }
 
-  function removeAspect(indexToRemove: number) {
+  function removeAspectFromScene(indexToRemove: number) {
     setScene((scene: IScene) => {
       return {
         ...scene,
@@ -38,8 +38,8 @@ export function useAspects(
   }
 
   return {
-    addAspect,
-    setAspect,
-    removeAspect
+    addAspectToScene,
+    updateAspectInScene,
+    removeAspectFromScene
   };
 }

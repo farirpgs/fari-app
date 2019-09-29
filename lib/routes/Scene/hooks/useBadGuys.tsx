@@ -9,7 +9,7 @@ export function useBadGuys(
   const [isBadGuyModalOpened, setIsBadGuyModalOpened] = useState(false);
   const [badGuyToModify, setBadGuyToModify] = useState<IBadGuy>(undefined);
 
-  function addBadGuy(updatedBadGuy: IBadGuy) {
+  function addBadGuyToScene(updatedBadGuy: IBadGuy) {
     setScene(scene => {
       return {
         ...scene,
@@ -18,7 +18,7 @@ export function useBadGuys(
     });
   }
 
-  function updateBadGuy(updatedBadGuy: IBadGuy) {
+  function updateBadGuyInScene(updatedBadGuy: IBadGuy) {
     setScene(scene => {
       return {
         ...scene,
@@ -32,7 +32,7 @@ export function useBadGuys(
     });
   }
 
-  function removeBadGuy(updatedBadGuy: IBadGuy) {
+  function removeBadGuyFromScene(updatedBadGuy: IBadGuy) {
     setScene(scene => {
       return {
         ...scene,
@@ -48,9 +48,9 @@ export function useBadGuys(
     if (shouldUpdateScene) {
       const isNew = !updatedBadGuy.id;
       if (isNew) {
-        addBadGuy(updatedBadGuy);
+        addBadGuyToScene(updatedBadGuy);
       } else {
-        updateBadGuy(updatedBadGuy);
+        updateBadGuyInScene(updatedBadGuy);
       }
     }
     setIsBadGuyModalOpened(false);
@@ -73,8 +73,7 @@ export function useBadGuys(
     onAddBadBuyButtonClick,
     onModifyBadBuyButtonClick,
     onBadGuyDialogClose,
-    addBadGuy,
-    updateBadGuy,
-    removeBadGuy
+    updateBadGuyInScene,
+    removeBadGuyFromScene
   };
 }

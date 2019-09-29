@@ -126,7 +126,9 @@ export const Scene: React.FC<{
   function handleDataReceiveFromPlayer(action: IPeerAction) {
     const reducer = {
       UPDATE_CHARACTER_IN_GM_SCREEN: () => {
-        characterManager.updateCharacter(action.payload.character);
+        characterManager.addOrUpdateCharacterFromScene(
+          action.payload.character
+        );
       }
     };
     reducer[action.type]();
@@ -407,7 +409,7 @@ export const Scene: React.FC<{
             <div className="col-xs-12 col-sm-6 margin-1">
               <Fab
                 onClick={() => {
-                  aspectsManager.addAspect();
+                  aspectsManager.addAspectToScene();
                 }}
                 variant="extended"
                 color="primary"
@@ -461,13 +463,13 @@ export const Scene: React.FC<{
                   badGuy={badGuy}
                   readOnly={isPlayer}
                   onUpdate={badGuy => {
-                    badGuyManager.updateBadGuy(badGuy);
+                    badGuyManager.updateBadGuyInScene(badGuy);
                   }}
                   onModify={badGuy => {
                     badGuyManager.onModifyBadBuyButtonClick(badGuy);
                   }}
                   onRemove={badGuy => {
-                    badGuyManager.removeBadGuy(badGuy);
+                    badGuyManager.removeBadGuyFromScene(badGuy);
                   }}
                 ></BadGuyCard>
               </div>
@@ -486,12 +488,15 @@ export const Scene: React.FC<{
             return (
               <div className="col-xs-12 col-sm-6 col-md-6" key={character._id}>
                 <CharacterCard
-                  character={scene.characters[character._id]}
+                  character={character}
                   onUpdate={character => {
+                    if (isPlayer) {
+                      // TODO: TBD
+                    }
                     console.log(character);
                   }}
                   onRemove={character => {
-                    console.log(character);
+                    characterManager.removeCharacterFromScene(character);
                   }}
                 ></CharacterCard>
               </div>
@@ -512,10 +517,13 @@ export const Scene: React.FC<{
                 value={aspect}
                 readOnly={isPlayer}
                 onChange={event => {
-                  aspectsManager.setAspect(event.target.value, aspectIndex);
+                  aspectsManager.updateAspectInScene(
+                    event.target.value,
+                    aspectIndex
+                  );
                 }}
                 onDelete={() => {
-                  aspectsManager.removeAspect(aspectIndex);
+                  aspectsManager.removeAspectFromScene(aspectIndex);
                 }}
               />
             </div>
