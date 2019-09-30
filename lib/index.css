@@ -29,6 +29,15 @@ h2,
   letter-spacing: 0em;
 }
 
+.h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0em;
+}
+
 .h6 {
   font-size: 1.25rem;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;

@@ -234,25 +234,25 @@ const mentalStress4: IField = {
 };
 
 const mildConsequence: IField = {
-  label: "Mild Consequence",
+  label: "Mild Consequence (2)",
   slug: "mildConsequence",
   type: FieldType.TextField
 };
 
 const mildConsequence2: IField = {
-  label: "Second Mild Consequence",
+  label: "Second Mild Consequence (2)",
   slug: "mildConsequence2",
   type: FieldType.TextField
 };
 
 const moderateConsequence: IField = {
-  label: "Moderate Consequence",
+  label: "Moderate Consequence (4)",
   slug: "moderateConsequence",
   type: FieldType.TextField
 };
 
 const severeConsequence: IField = {
-  label: "Severe Consequence",
+  label: "Severe Consequence (6)",
   slug: "severeConsequence",
   type: FieldType.TextField
 };
@@ -428,3 +428,28 @@ export const FateCore: IGame = {
     { tab: "Guide", columns: [{ col: 6, field: guide }] }
   ]
 };
+
+export const FateAcceleratedStress = [stress1, stress2, stress3];
+export const FateCorePhysicalStress = [
+  physicalStress1,
+  physicalStress2,
+  physicalStress3,
+  physicalStress4
+];
+export const FateCoreMentalStress = [
+  mentalStress1,
+  mentalStress2,
+  mentalStress3,
+  mentalStress4
+];
+export const FateAcceleratedConsequences = [
+  mildConsequence,
+  moderateConsequence,
+  severeConsequence
+];
+export const FateCoreConsequences = [
+  mildConsequence,
+  mildConsequence2,
+  moderateConsequence,
+  severeConsequence
+];

@@ -6,7 +6,6 @@ export interface IScene {
   _rev?: string;
   name?: string;
   description?: string;
-  images?: string;
   aspects?: Array<string>;
   badGuys?: Array<IBadGuy>;
   characters?: Array<ICharacter>;

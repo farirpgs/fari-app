@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { IBadGuy } from "../../types/IBadGuy";
+import { red } from "@material-ui/core/colors";
 
 export const BadGuyCard: React.FC<{
   badGuy: IBadGuy;
@@ -25,6 +26,7 @@ export const BadGuyCard: React.FC<{
       style={{
         minHeight: "4rem",
         padding: "1rem 1.5rem 1rem 1.5rem",
+        background: red[50],
         marginBottom: "1rem"
       }}
     >
@@ -109,9 +111,7 @@ export const BadGuyCard: React.FC<{
                     style={{
                       width: "100%"
                     }}
-                    InputProps={{
-                      readOnly: props.readOnly
-                    }}
+                    disabled={props.readOnly}
                     onChange={e => {
                       props.onUpdate({
                         ...badGuy,
@@ -128,25 +128,29 @@ export const BadGuyCard: React.FC<{
           </div>
         </div>
       </div>
-      <Divider style={{ margin: "1rem 0" }}></Divider>
-      <div className="row end-xs">
-        <Button
-          onClick={() => {
-            props.onRemove(badGuy);
-          }}
-          color="secondary"
-        >
-          Remove
-        </Button>
-        <Button
-          onClick={() => {
-            props.onModify(badGuy);
-          }}
-          color="secondary"
-        >
-          Modify
-        </Button>
-      </div>
+      {!props.readOnly && (
+        <>
+          <Divider style={{ margin: "1rem 0" }}></Divider>
+          <div className="row end-xs">
+            <Button
+              onClick={() => {
+                props.onRemove(badGuy);
+              }}
+              color="secondary"
+            >
+              Remove
+            </Button>
+            <Button
+              onClick={() => {
+                props.onModify(badGuy);
+              }}
+              color="secondary"
+            >
+              Modify
+            </Button>
+          </div>
+        </>
+      )}
     </Paper>
   );
 };

@@ -1,10 +1,6 @@
-import {
-  addDecorator,
-  addParameters,
-  configure,
-  storiesOf
-} from "@storybook/react";
-import React from "react";
+import { addParameters, configure } from "@storybook/react";
+import { characterCardStories } from "./stories/components/characterCardStories";
+import { sceneStories } from "./stories/pages/sceneStories";
 
 addParameters({
   options: {
@@ -17,9 +13,6 @@ configure(() => {
 }, module);
 
 function loadStoriesInAlphabeticalOrder() {
-  storiesOf("Pages | Scene", module)
-    // .addDecorator(withKnobs)
-    .add("Basic", () => {
-      return <h1>ALLO</h1>;
-    });
+  sceneStories();
+  characterCardStories();
 }
