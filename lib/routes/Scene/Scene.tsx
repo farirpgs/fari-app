@@ -41,7 +41,7 @@ export const Scene: React.FC<{
   );
   const aspectsManager = useAspects(setScene);
   const badGuyManager = useBadGuys(setScene);
-  const characterManager = useCharacters(setScene, peerManager);
+  const characterManager = useCharacters(peerManager);
 
   const isGM = !peerIdFromParams;
 
@@ -55,8 +55,7 @@ export const Scene: React.FC<{
       } else {
         setScene({
           ...result,
-          badGuys: !!result.badGuys ? result.badGuys : [],
-          characters: !!result.characters ? result.characters : []
+          badGuys: !!result.badGuys ? result.badGuys : []
         });
       }
       setIsLoading(false);
@@ -85,6 +84,7 @@ export const Scene: React.FC<{
     const reducer = {
       UPDATE_SCENE_IN_PLAYER_SCREEN: () => {
         setScene(action.payload.scene);
+        characterManager.global.setSceneCharacters(action.payload.characters);
         setIsLoading(false);
       }
     };
@@ -94,7 +94,9 @@ export const Scene: React.FC<{
   function handleDataReceiveFromPlayer(action: IPeerAction) {
     const reducer = {
       UPDATE_CHARACTER_IN_GM_SCREEN: () => {
-        characterManager.addOrUpdateCharacterInScene(action.payload.character);
+        characterManager.gm.addOrUpdateCharacterInScene(
+          action.payload.character
+        );
       }
     };
     reducer[action.type]();
@@ -112,7 +114,10 @@ export const Scene: React.FC<{
       id = setInterval(() => {
         peerManager.sendToAllPlayers({
           type: "UPDATE_SCENE_IN_PLAYER_SCREEN",
-          payload: { scene: scene }
+          payload: {
+            scene: scene,
+            characters: characterManager.global.sceneCharacters
+          }
         });
       }, REFRESH_PLAYER_INFO_EVERY_MS);
     }
@@ -122,7 +127,11 @@ export const Scene: React.FC<{
     return () => {
       clearInterval(id);
     };
-  }, [peerManager.numberOfConnectedPlayers, scene]);
+  }, [
+    peerManager.numberOfConnectedPlayers,
+    scene,
+    characterManager.global.sceneCharacters
+  ]);
 
   return (
     <>

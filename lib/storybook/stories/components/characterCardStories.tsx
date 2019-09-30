@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react";
-import { CharacterCard } from "../../../routes/Scene/CharacterCard";
+import { CharacterCard } from "../../../routes/Scene/cards/CharacterCard";
 import React from "react";
 import { BaseStory } from "../BaseStory";
 import { ICharacter } from "../../../types/ICharacter";
@@ -16,18 +16,18 @@ export function characterCardStories() {
           <div className="row">
             <div className="col-xs-12 col-sm-6 col-md-6">
               <CharacterCard
-                readOnly={false}
+                isGM={false}
                 character={getFaeCharacter()}
                 onRemove={action("onRemove")}
-                onModify={action("onModify")}
+                onSync={action("onSync")}
               ></CharacterCard>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-6">
               <CharacterCard
-                readOnly={false}
+                isGM={false}
                 character={getFateCoreCharacter()}
                 onRemove={action("onRemove")}
-                onModify={action("onModify")}
+                onSync={action("onSync")}
               ></CharacterCard>
             </div>
           </div>

@@ -1,20 +1,36 @@
-import { IScene } from "../../../types/IScene";
 import { ICharacter } from "../../../types/ICharacter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IPeerManager } from "../types/IPeerManager";
 import { CharacterService } from "../../../services/character-service/CharacterService";
 import _ from "lodash";
 
-const REFRESH_CHARACTER_INFO_EVERY_MS = 5000;
-
-export function useCharacters(
-  setScene: React.Dispatch<React.SetStateAction<IScene>>,
-  peerManager: IPeerManager
-) {
-  const [chosenCharacters, setChosenCharacters] = useState<Array<ICharacter>>(
-    []
-  );
+export function useCharacters(peerManager: IPeerManager) {
+  const [sceneCharacters, setSceneCharacters] = useState<Array<ICharacter>>([]);
   const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
+
+  function addOrUpdateCharacterInScene(character: ICharacter) {
+    setSceneCharacters(characters => {
+      const exists = !!characters.find(c => c._id === character._id);
+
+      const updatedList = exists
+        ? characters.map(c => {
+            if (c._id === character._id) {
+              return character;
+            }
+            return c;
+          })
+        : [...characters, character];
+      return updatedList;
+    });
+  }
+
+  function removeCharacterFromScene(character: ICharacter) {
+    setSceneCharacters(characters => {
+      return characters.filter(c => {
+        return c._id !== character._id;
+      });
+    });
+  }
 
   function sendCharacterToGM(character: ICharacter) {
     peerManager.sendToGM({
@@ -23,68 +39,36 @@ export function useCharacters(
     });
   }
 
+  async function syncCharacter(character: ICharacter) {
+    sendCharacterToGM(character);
+    await new CharacterService().update(character);
+  }
+
   function onCharacterSelectClose(character?: ICharacter) {
     if (!!character) {
       sendCharacterToGM(character);
-      const newList = [...chosenCharacters, character];
-      const uniqList = _.uniqBy(newList, c => c._id);
-      setChosenCharacters(uniqList);
     }
     setIsCharacterModalOpened(false);
-  }
-
-  function addOrUpdateCharacterInScene(character: ICharacter) {
-    setScene(scene => {
-      const exists = !!scene.characters.find(c => c._id === character._id);
-
-      const characters = exists
-        ? scene.characters.map(c => {
-            if (c._id === character._id) {
-              return character;
-            }
-            return c;
-          })
-        : [...scene.characters, character];
-
-      return {
-        ...scene,
-        characters: characters
-      };
-    });
-  }
-
-  function removeCharacterFromScene(character: ICharacter) {
-    setScene(scene => {
-      return {
-        ...scene,
-        characters: scene.characters.filter(c => {
-          return c._id !== character._id;
-        })
-      };
-    });
   }
 
   function onSendCharacterToGMButtonClick() {
     setIsCharacterModalOpened(true);
   }
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      chosenCharacters.forEach(async c => {
-        const updatedCharacter = await new CharacterService().get(c._id);
-        sendCharacterToGM(updatedCharacter);
-      });
-    }, REFRESH_CHARACTER_INFO_EVERY_MS);
-    return () => {
-      clearInterval(id);
-    };
-  }, [chosenCharacters]);
-
   return {
-    isCharacterModalOpened,
-    onSendCharacterToGMButtonClick,
-    onCharacterSelectClose,
-    addOrUpdateCharacterInScene,
-    removeCharacterFromScene
+    global: {
+      sceneCharacters,
+      setSceneCharacters
+    },
+    player: {
+      isCharacterModalOpened,
+      onSendCharacterToGMButtonClick,
+      onCharacterSelectClose,
+      syncCharacter
+    },
+    gm: {
+      addOrUpdateCharacterInScene,
+      removeCharacterFromScene
+    }
   };
 }

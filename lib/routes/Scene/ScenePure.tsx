@@ -22,10 +22,10 @@ import { LinkShare } from "../../components/LinkShare/LinkShare";
 import { Page } from "../../components/Page/Page";
 import { PostIt } from "../../components/PostIt/PostIt";
 import { IScene } from "../../types/IScene";
-import { BadGuyCard } from "./BadGuyCard";
-import { BadGuyDialog } from "./BadGuyDialog";
-import { CharacterCard } from "./CharacterCard";
-import { CharacterSelectDialog } from "./CharacterSelectDialog";
+import { BadGuyCard } from "./cards/BadGuyCard";
+import { BadGuyDialog } from "./dialogs/BadGuyDialog";
+import { CharacterCard } from "./cards/CharacterCard";
+import { CharacterSelectDialog } from "./dialogs/CharacterSelectDialog";
 import { useAspects } from "./hooks/useAspects";
 import { useBadGuys } from "./hooks/useBadGuys";
 import { usePeer } from "./hooks/usePeer";
@@ -88,8 +88,8 @@ export const ScenePure: React.FC<{
       ></BadGuyDialog>
 
       <CharacterSelectDialog
-        open={characterManager.isCharacterModalOpened}
-        onClose={characterManager.onCharacterSelectClose}
+        open={characterManager.player.isCharacterModalOpened}
+        onClose={characterManager.player.onCharacterSelectClose}
       ></CharacterSelectDialog>
 
       {renderPlayerLink()}
@@ -324,16 +324,16 @@ export const ScenePure: React.FC<{
             </div>
           )}
           {isPlayer && (
-            <div className="col-xs-12 col-sm-6 margin-1">
+            <div className="col-xs margin-1">
               <Fab
                 onClick={() => {
-                  characterManager.onSendCharacterToGMButtonClick();
+                  characterManager.player.onSendCharacterToGMButtonClick();
                 }}
                 color="primary"
                 variant="extended"
               >
                 <AddIcon style={{ marginRight: " .5rem" }} />
-                Add or sync a character to the scene
+                Add a character to the scene
               </Fab>
             </div>
           )}
@@ -374,20 +374,17 @@ export const ScenePure: React.FC<{
     return (
       <Box margin="1rem 0">
         <div className="row">
-          {scene.characters.map(character => {
+          {characterManager.global.sceneCharacters.map(character => {
             return (
               <div className="col-xs-12 col-sm-6 col-md-6" key={character._id}>
                 <CharacterCard
                   character={character}
-                  readOnly={isGM}
-                  onModify={character => {
-                    if (isPlayer) {
-                      // TODO: TBD
-                    }
-                    console.log(character);
+                  isGM={isGM}
+                  onSync={character => {
+                    characterManager.player.syncCharacter(character);
                   }}
                   onRemove={character => {
-                    characterManager.removeCharacterFromScene(character);
+                    characterManager.gm.removeCharacterFromScene(character);
                   }}
                 ></CharacterCard>
               </div>

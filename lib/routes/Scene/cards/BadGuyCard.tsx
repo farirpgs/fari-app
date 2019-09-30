@@ -7,7 +7,7 @@ import {
   TextField
 } from "@material-ui/core";
 import React from "react";
-import { IBadGuy } from "../../types/IBadGuy";
+import { IBadGuy } from "../../../types/IBadGuy";
 import { red } from "@material-ui/core/colors";
 
 export const BadGuyCard: React.FC<{

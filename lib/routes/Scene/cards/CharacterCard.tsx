@@ -7,7 +7,7 @@ import {
   TextField
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { ICharacter } from "../../types/ICharacter";
+import { ICharacter } from "../../../types/ICharacter";
 import {
   FateAccelerated,
   FateCoreConsequences,
@@ -15,13 +15,13 @@ import {
   FateCorePhysicalStress,
   FateCoreMentalStress,
   FateAcceleratedConsequences
-} from "../../games/Fate";
+} from "../../../games/Fate";
 import { green } from "@material-ui/core/colors";
 
 export const CharacterCard: React.FC<{
   character: ICharacter;
-  readOnly: boolean;
-  onModify: (character: ICharacter) => void;
+  isGM: boolean;
+  onSync: (character: ICharacter) => void;
   onRemove: (character: ICharacter) => void;
 }> = props => {
   const { character: characterFromProps } = props;
@@ -118,7 +118,7 @@ export const CharacterCard: React.FC<{
                   control={
                     <Checkbox
                       checked={character[field.slug] || false}
-                      disabled={props.readOnly}
+                      disabled={props.isGM}
                       onChange={e => {
                         setCharacter({
                           ...character,
@@ -148,7 +148,7 @@ export const CharacterCard: React.FC<{
                       control={
                         <Checkbox
                           checked={character[field.slug] || false}
-                          disabled={props.readOnly}
+                          disabled={props.isGM}
                           onChange={e => {
                             setCharacter({
                               ...character,
@@ -175,7 +175,7 @@ export const CharacterCard: React.FC<{
                     <TextField
                       value={character[field.slug] || ""}
                       label={field.label}
-                      disabled={props.readOnly}
+                      disabled={props.isGM}
                       variant="filled"
                       margin="normal"
                       style={{
@@ -195,9 +195,9 @@ export const CharacterCard: React.FC<{
           </div>
         </div>
       </div>
-      {!props.readOnly && (
+      <Divider style={{ margin: "1rem 0" }}></Divider>
+      {props.isGM && (
         <>
-          <Divider style={{ margin: "1rem 0" }}></Divider>
           <div className="row end-xs">
             <Button
               onClick={() => {
@@ -207,13 +207,19 @@ export const CharacterCard: React.FC<{
             >
               Remove
             </Button>
+          </div>
+        </>
+      )}
+      {!props.isGM && (
+        <>
+          <div className="row end-xs">
             <Button
               onClick={() => {
-                props.onModify(character);
+                props.onSync(character);
               }}
               color="secondary"
             >
-              Modify
+              Sync
             </Button>
           </div>
         </>

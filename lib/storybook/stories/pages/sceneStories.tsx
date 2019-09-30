@@ -31,11 +31,20 @@ const peerManagerMock: ReturnType<typeof usePeer> = {
 };
 
 const characterManagerMock: ReturnType<typeof useCharacters> = {
-  addOrUpdateCharacterInScene: action("addOrUpdateCharacterInScene"),
-  isCharacterModalOpened: false,
-  onCharacterSelectClose: action("onCharacterSelectClose"),
-  onSendCharacterToGMButtonClick: action("onSendCharacterToGMButtonClick"),
-  removeCharacterFromScene: action("removeCharacterFromScene")
+  global: {
+    sceneCharacters: [],
+    setSceneCharacters: action("setSceneCharacters")
+  },
+  gm: {
+    addOrUpdateCharacterInScene: action("addOrUpdateCharacterInScene"),
+    removeCharacterFromScene: action("removeCharacterFromScene")
+  },
+  player: {
+    isCharacterModalOpened: false,
+    onCharacterSelectClose: action("onCharacterSelectClose"),
+    onSendCharacterToGMButtonClick: action("onSendCharacterToGMButtonClick"),
+    syncCharacter: action("syncCharacter") as any
+  }
 };
 
 const aspectsManagerMock: ReturnType<typeof useAspects> = {
@@ -46,6 +55,11 @@ const aspectsManagerMock: ReturnType<typeof useAspects> = {
 
 const defaultSceneMock: IScene = { badGuys: [], characters: [] };
 const scenePlayMock: IScene = {
+  name: "Ba Sing Se",
+  description: `Ba Sing Se is the capital of the Earth Kingdom as well as one of its constituent states, encompassing a large portion of the nation's northeastern corner. 
+
+After the Surrender of Omashu, the city became the last great Earth 
+Kingdom stronghold during the Hundred Year War.`,
   badGuys: [
     {
       id: "1",

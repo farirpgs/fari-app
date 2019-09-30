@@ -8,5 +8,4 @@ export interface IScene {
   description?: string;
   aspects?: Array<string>;
   badGuys?: Array<IBadGuy>;
-  characters?: Array<ICharacter>;
 }

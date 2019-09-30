@@ -6,6 +6,7 @@ import { AppTheme } from "../../theme";
 
 import "flexboxgrid";
 import "../../index.css";
+
 export const BaseStory: React.FC<{}> = props => {
   return (
     <ThemeProvider theme={AppTheme}>

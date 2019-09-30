@@ -14,8 +14,8 @@ import {
 import PersonIcon from "@material-ui/icons/Person";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import { CharacterService } from "../../services/character-service/CharacterService";
-import { ICharacter } from "../../types/ICharacter";
+import { CharacterService } from "../../../services/character-service/CharacterService";
+import { ICharacter } from "../../../types/ICharacter";
 
 export const CharacterSelectDialog: React.FC<{
   open: boolean;
