@@ -6,8 +6,14 @@
     {
       "type": "npm",
       "script": "validate",
-      "group": "build",
-      "problemMatcher": ["$tsc", "$tslint5"]
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$tsc",
+        "$tslint5"
+      ]
     }
   ]
 }
