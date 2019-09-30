@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
     "build": "npm run validate && parcel build ./lib/index.html --target browser",
+    "storybook": "concurrently -n preview,manager \"parcel lib/storybook/storybook.html  --target browser\" \"start-storybook --port 5000 --preview-url=http://localhost:1234/\"",
     "validate": "tsc --noEmit --project tsconfig.json && npm run test && tslint --project tsconfig.json",
     "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
     "test": "jest --coverage"
@@ -28,6 +29,9 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.2.1",
+    "@storybook/addon-knobs": "^5.2.1",
+    "@storybook/react": "^5.2.1",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.138",
     "@types/pouchdb": "^6.4.0",
@@ -36,6 +40,7 @@
     "@types/react-router-dom": "^4.3.5",
     "@types/showdown": "^1.9.3",
     "@types/uuid": "^3.4.5",
+    "concurrently": "^4.1.2",
     "jest": "^24.9.0",
     "parcel": "^1.12.3",
     "ts-jest": "^24.0.2",

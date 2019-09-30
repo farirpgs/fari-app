@@ -126,9 +126,7 @@ export const Scene: React.FC<{
   function handleDataReceiveFromPlayer(action: IPeerAction) {
     const reducer = {
       UPDATE_CHARACTER_IN_GM_SCREEN: () => {
-        characterManager.addOrUpdateCharacterInScene(
-          action.payload.character
-        );
+        characterManager.addOrUpdateCharacterInScene(action.payload.character);
       }
     };
     reducer[action.type]();
@@ -443,7 +441,7 @@ export const Scene: React.FC<{
                 variant="extended"
               >
                 <AddIcon style={{ marginRight: " .5rem" }} />
-                Send a character to the GM
+                Add or sync a character to the scene
               </Fab>
             </div>
           )}

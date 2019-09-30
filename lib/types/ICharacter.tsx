@@ -3,5 +3,5 @@ export interface ICharacter {
   _rev: string;
   name: string;
   description: string;
-  // [property: string]: any;
+  game: string;
 }
