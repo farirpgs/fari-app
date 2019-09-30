@@ -17,6 +17,7 @@ import {
   FateAcceleratedConsequences
 } from "../../../games/Fate";
 import { green } from "@material-ui/core/colors";
+import _ from "lodash";
 
 export const CharacterCard: React.FC<{
   character: ICharacter;
@@ -26,9 +27,12 @@ export const CharacterCard: React.FC<{
 }> = props => {
   const { character: characterFromProps } = props;
   const [character, setCharacter] = useState(characterFromProps);
+  const [isDirty, setIsDirty] = useState(false);
 
   useEffect(() => {
-    setCharacter(character);
+    if (!isDirty) {
+      setCharacter(characterFromProps);
+    }
   }, [characterFromProps]);
 
   const isAccelerated = character.game === FateAccelerated.slug;
@@ -120,6 +124,7 @@ export const CharacterCard: React.FC<{
                       checked={character[field.slug] || false}
                       disabled={props.isGM}
                       onChange={e => {
+                        setIsDirty(true);
                         setCharacter({
                           ...character,
                           [field.slug]: e.target.checked
@@ -150,6 +155,7 @@ export const CharacterCard: React.FC<{
                           checked={character[field.slug] || false}
                           disabled={props.isGM}
                           onChange={e => {
+                            setIsDirty(true);
                             setCharacter({
                               ...character,
                               [field.slug]: e.target.checked
@@ -182,6 +188,7 @@ export const CharacterCard: React.FC<{
                         width: "100%"
                       }}
                       onChange={e => {
+                        setIsDirty(true);
                         setCharacter({
                           ...character,
                           [field.slug]: e.target.value

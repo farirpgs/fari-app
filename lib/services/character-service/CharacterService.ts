@@ -31,7 +31,9 @@ export class CharacterService {
   }
 
   public async update(character: ICharacter): Promise<void> {
-    await getCharactersDb().put<ICharacter>(character);
+    await getCharactersDb().put<ICharacter>(character, {
+      force: true
+    });
   }
 
   public async remove(character: ICharacter): Promise<void> {
