@@ -17,6 +17,7 @@ export function characterCardStories() {
             <div className="col-xs-12 col-sm-6 col-md-6">
               <CharacterCard
                 isGM={false}
+                readOnly={false}
                 character={getFaeCharacter()}
                 onRemove={action("onRemove")}
                 onSync={action("onSync")}
@@ -25,6 +26,7 @@ export function characterCardStories() {
             <div className="col-xs-12 col-sm-6 col-md-6">
               <CharacterCard
                 isGM={false}
+                readOnly={false}
                 character={getFateCoreCharacter()}
                 onRemove={action("onRemove")}
                 onSync={action("onSync")}
