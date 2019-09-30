@@ -375,13 +375,18 @@ export const ScenePure: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {characterManager.global.sceneCharacters.map(character => {
+            const isForPlayer =
+              characterManager.player.playerCharactersId.indexOf(
+                character._id
+              ) !== -1;
             return (
               <div className="col-xs-12 col-sm-6 col-md-6" key={character._id}>
                 <CharacterCard
                   character={character}
+                  readOnly={!isForPlayer || isGM}
                   isGM={isGM}
                   onSync={character => {
-                    characterManager.player.syncCharacter(character);
+                    characterManager.player.syncACharacter(character);
                   }}
                   onRemove={character => {
                     characterManager.gm.removeCharacterFromScene(character);

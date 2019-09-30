@@ -21,6 +21,7 @@ import _ from "lodash";
 
 export const CharacterCard: React.FC<{
   character: ICharacter;
+  readOnly: boolean;
   isGM: boolean;
   onSync: (character: ICharacter) => void;
   onRemove: (character: ICharacter) => void;
@@ -122,7 +123,7 @@ export const CharacterCard: React.FC<{
                   control={
                     <Checkbox
                       checked={character[field.slug] || false}
-                      disabled={props.isGM}
+                      disabled={props.readOnly}
                       onChange={e => {
                         setIsDirty(true);
                         setCharacter({
@@ -153,7 +154,7 @@ export const CharacterCard: React.FC<{
                       control={
                         <Checkbox
                           checked={character[field.slug] || false}
-                          disabled={props.isGM}
+                          disabled={props.readOnly}
                           onChange={e => {
                             setIsDirty(true);
                             setCharacter({
@@ -181,7 +182,7 @@ export const CharacterCard: React.FC<{
                     <TextField
                       value={character[field.slug] || ""}
                       label={field.label}
-                      disabled={props.isGM}
+                      disabled={props.readOnly}
                       variant="filled"
                       margin="normal"
                       style={{

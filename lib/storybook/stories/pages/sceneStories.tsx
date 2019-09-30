@@ -32,7 +32,7 @@ const peerManagerMock: ReturnType<typeof usePeer> = {
 
 const characterManagerMock: ReturnType<typeof useCharacters> = {
   global: {
-    sceneCharacters: [],
+    sceneCharacters: [getFateCoreCharacter("2"), getFateCoreCharacter("1")],
     setSceneCharacters: action("setSceneCharacters")
   },
   gm: {
@@ -40,10 +40,11 @@ const characterManagerMock: ReturnType<typeof useCharacters> = {
     removeCharacterFromScene: action("removeCharacterFromScene")
   },
   player: {
+    playerCharactersId: ["1"],
     isCharacterModalOpened: false,
     onCharacterSelectClose: action("onCharacterSelectClose"),
     onSendCharacterToGMButtonClick: action("onSendCharacterToGMButtonClick"),
-    syncCharacter: action("syncCharacter") as any
+    syncACharacter: action("syncACharacter") as any
   }
 };
 
@@ -53,7 +54,7 @@ const aspectsManagerMock: ReturnType<typeof useAspects> = {
   updateAspectInScene: action("updateAspectInScene")
 };
 
-const defaultSceneMock: IScene = { badGuys: [], characters: [] };
+const defaultSceneMock: IScene = { badGuys: [] };
 const scenePlayMock: IScene = {
   name: "Ba Sing Se",
   description: `Ba Sing Se is the capital of the Earth Kingdom as well as one of its constituent states, encompassing a large portion of the nation's northeastern corner. 
@@ -72,8 +73,19 @@ Kingdom stronghold during the Hundred Year War.`,
       consequences: "2",
       consequencesValues: {}
     }
-  ],
-  characters: [getFateCoreCharacter()]
+  ]
+};
+
+const characterManagerPlayMock: ReturnType<typeof useCharacters> = {
+  ...characterManagerMock,
+  global: {
+    ...characterManagerMock.global,
+    sceneCharacters: []
+  },
+  player: {
+    ...characterManagerMock.player,
+    playerCharactersId: []
+  }
 };
 
 export function sceneStories() {
@@ -223,10 +235,10 @@ export function sceneStories() {
     });
 }
 
-function getFateCoreCharacter(): ICharacter {
+function getFateCoreCharacter(id: string): ICharacter {
   const character = {
-    _id: "1",
-    _rev: "1",
+    _id: id,
+    _rev: id,
     description:
       "Zuko is a firebending master, born as a prince in the Fire Nation Royal Family, who reigned as Fire Lord from 100 AG until his abdication in 167 AG",
     game: FateCore.slug,

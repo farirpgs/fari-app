@@ -6,6 +6,9 @@ import _ from "lodash";
 
 export function useCharacters(peerManager: IPeerManager) {
   const [sceneCharacters, setSceneCharacters] = useState<Array<ICharacter>>([]);
+  const [playerCharactersId, setPlayerCharactersIds] = useState<Array<string>>(
+    []
+  );
   const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
 
   function addOrUpdateCharacterInScene(character: ICharacter) {
@@ -24,6 +27,16 @@ export function useCharacters(peerManager: IPeerManager) {
     });
   }
 
+  function addOrUpdateCharacterForPlayer(character: ICharacter) {
+    setPlayerCharactersIds(ids => {
+      const exists = ids.indexOf(character._id) !== -1;
+      if (exists) {
+        return ids;
+      }
+      return [...ids, character._id];
+    });
+  }
+
   function removeCharacterFromScene(character: ICharacter) {
     setSceneCharacters(characters => {
       return characters.filter(c => {
@@ -39,8 +52,9 @@ export function useCharacters(peerManager: IPeerManager) {
     });
   }
 
-  async function syncCharacter(character: ICharacter) {
+  async function syncACharacter(character: ICharacter) {
     sendCharacterToGM(character);
+    addOrUpdateCharacterForPlayer(character);
     await new CharacterService().update(character);
   }
 
@@ -61,10 +75,11 @@ export function useCharacters(peerManager: IPeerManager) {
       setSceneCharacters
     },
     player: {
+      playerCharactersId,
       isCharacterModalOpened,
       onSendCharacterToGMButtonClick,
       onCharacterSelectClose,
-      syncCharacter
+      syncACharacter
     },
     gm: {
       addOrUpdateCharacterInScene,
