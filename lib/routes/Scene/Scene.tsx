@@ -126,7 +126,7 @@ export const Scene: React.FC<{
   function handleDataReceiveFromPlayer(action: IPeerAction) {
     const reducer = {
       UPDATE_CHARACTER_IN_GM_SCREEN: () => {
-        characterManager.addOrUpdateCharacterFromScene(
+        characterManager.addOrUpdateCharacterInScene(
           action.payload.character
         );
       }

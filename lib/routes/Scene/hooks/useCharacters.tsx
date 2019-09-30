@@ -33,9 +33,9 @@ export function useCharacters(
     setIsCharacterModalOpened(false);
   }
 
-  function addOrUpdateCharacterFromScene(character: ICharacter) {
+  function addOrUpdateCharacterInScene(character: ICharacter) {
     setScene(scene => {
-      const exists = !!scene.characters.find(c => c.id === character.id);
+      const exists = !!scene.characters.find(c => c._id === character._id);
 
       const characters = exists
         ? scene.characters.map(c => {
@@ -58,7 +58,7 @@ export function useCharacters(
       return {
         ...scene,
         characters: scene.characters.filter(c => {
-          return c._id !== character.id;
+          return c._id !== character._id;
         })
       };
     });
@@ -84,7 +84,7 @@ export function useCharacters(
     isCharacterModalOpened,
     onSendCharacterToGMButtonClick,
     onCharacterSelectClose,
-    addOrUpdateCharacterFromScene,
+    addOrUpdateCharacterInScene,
     removeCharacterFromScene
   };
 }
