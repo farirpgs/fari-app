@@ -6,7 +6,7 @@ import _ from "lodash";
 
 export function useCharacters(peerManager: IPeerManager) {
   const [sceneCharacters, setSceneCharacters] = useState<Array<ICharacter>>([]);
-  const [playerCharactersId, setPlayerCharactersIds] = useState<Array<string>>(
+  const [playerCharactersIds, setPlayerCharactersIds] = useState<Array<string>>(
     []
   );
   const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
@@ -61,6 +61,7 @@ export function useCharacters(peerManager: IPeerManager) {
   function onCharacterSelectClose(character?: ICharacter) {
     if (!!character) {
       sendCharacterToGM(character);
+      addOrUpdateCharacterForPlayer(character);
     }
     setIsCharacterModalOpened(false);
   }
@@ -75,7 +76,7 @@ export function useCharacters(peerManager: IPeerManager) {
       setSceneCharacters
     },
     player: {
-      playerCharactersId,
+      playerCharactersIds,
       isCharacterModalOpened,
       onSendCharacterToGMButtonClick,
       onCharacterSelectClose,

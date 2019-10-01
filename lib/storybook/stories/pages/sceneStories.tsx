@@ -40,7 +40,7 @@ const characterManagerMock: ReturnType<typeof useCharacters> = {
     removeCharacterFromScene: action("removeCharacterFromScene")
   },
   player: {
-    playerCharactersId: ["1"],
+    playerCharactersIds: ["1"],
     isCharacterModalOpened: false,
     onCharacterSelectClose: action("onCharacterSelectClose"),
     onSendCharacterToGMButtonClick: action("onSendCharacterToGMButtonClick"),
@@ -84,7 +84,7 @@ const characterManagerPlayMock: ReturnType<typeof useCharacters> = {
   },
   player: {
     ...characterManagerMock.player,
-    playerCharactersId: []
+    playerCharactersIds: []
   }
 };
 

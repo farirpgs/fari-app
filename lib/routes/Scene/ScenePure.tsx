@@ -376,9 +376,10 @@ export const ScenePure: React.FC<{
         <div className="row">
           {characterManager.global.sceneCharacters.map(character => {
             const isForPlayer =
-              characterManager.player.playerCharactersId.indexOf(
+              characterManager.player.playerCharactersIds.indexOf(
                 character._id
               ) !== -1;
+
             return (
               <div className="col-xs-12 col-sm-6 col-md-6" key={character._id}>
                 <CharacterCard
