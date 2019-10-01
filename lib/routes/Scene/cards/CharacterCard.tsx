@@ -218,7 +218,7 @@ export const CharacterCard: React.FC<{
           </div>
         </>
       )}
-      {!props.isGM && (
+      {!props.isGM && !props.readOnly && (
         <>
           <div className="row end-xs">
             <Button
