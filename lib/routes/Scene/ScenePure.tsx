@@ -23,13 +23,13 @@ import { Page } from "../../components/Page/Page";
 import { PostIt } from "../../components/PostIt/PostIt";
 import { IScene } from "../../types/IScene";
 import { BadGuyCard } from "./cards/BadGuyCard";
-import { BadGuyDialog } from "./dialogs/BadGuyDialog";
 import { CharacterCard } from "./cards/CharacterCard";
+import { BadGuyDialog } from "./dialogs/BadGuyDialog";
 import { CharacterSelectDialog } from "./dialogs/CharacterSelectDialog";
-import { useAspects } from "./hooks/useAspects";
-import { useBadGuys } from "./hooks/useBadGuys";
-import { usePeer } from "./hooks/usePeer";
-import { useCharacters } from "./hooks/useCharacters";
+import { IAspectsManager } from "./hooks/useAspects";
+import { ICharactersManager } from "./hooks/useCharacters";
+import { IPeerManager } from "./hooks/usePeer";
+import { IBadGuysManager } from "./hooks/useBadGuys";
 
 export const ScenePure: React.FC<{
   sceneId: string;
@@ -39,10 +39,10 @@ export const ScenePure: React.FC<{
   isGM: boolean;
   setScene: any;
   saveScene: () => Promise<void>;
-  aspectsManager: ReturnType<typeof useAspects>;
-  characterManager: ReturnType<typeof useCharacters>;
-  peerManager: ReturnType<typeof usePeer>;
-  badGuyManager: ReturnType<typeof useBadGuys>;
+  aspectsManager: IAspectsManager;
+  characterManager: ICharactersManager;
+  peerManager: IPeerManager;
+  badGuyManager: IBadGuysManager;
 }> = props => {
   const {
     // model

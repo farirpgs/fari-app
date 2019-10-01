@@ -3,6 +3,8 @@ import { IBadGuy } from "../../../types/IBadGuy";
 import uuid from "uuid/v4";
 import { useState } from "react";
 
+export type IBadGuysManager = ReturnType<typeof useBadGuys>;
+
 export function useBadGuys(
   setScene: React.Dispatch<React.SetStateAction<IScene>>
 ) {

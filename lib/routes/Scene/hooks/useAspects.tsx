@@ -1,5 +1,7 @@
 import { IScene } from "../../../types/IScene";
 
+export type IAspectsManager = ReturnType<typeof useAspects>;
+
 export function useAspects(
   setScene: React.Dispatch<React.SetStateAction<IScene>>
 ) {

@@ -6,14 +6,17 @@ import { addLiveLink } from "../../singletons/liveLinks";
 import { IScene } from "../../types/IScene";
 import { useAspects } from "./hooks/useAspects";
 import { useBadGuys } from "./hooks/useBadGuys";
-import { useCharacters } from "./hooks/useCharacters";
+import { makeUseCharacters } from "./hooks/useCharacters";
 import { usePeer } from "./hooks/usePeer";
 import { ScenePure } from "./ScenePure";
 import { IPeerAction } from "./types/IPeerAction";
+import { CharacterService } from "../../services/character-service/CharacterService";
 
 const defaultScene = { badGuys: [], characters: [] };
 
 const REFRESH_PLAYER_INFO_EVERY_MS = 1000;
+
+const useCharacters = makeUseCharacters(new CharacterService());
 
 export const Scene: React.FC<{
   match: {
@@ -84,7 +87,7 @@ export const Scene: React.FC<{
     const reducer = {
       UPDATE_SCENE_IN_PLAYER_SCREEN: () => {
         setScene(action.payload.scene);
-        characterManager.global.setSceneCharacters(action.payload.characters);
+        characterManager.player.setSceneCharacters(action.payload.characters);
         setIsLoading(false);
       }
     };

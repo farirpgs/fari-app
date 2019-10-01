@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { useAspects } from "../../../routes/Scene/hooks/useAspects";
 import { useBadGuys } from "../../../routes/Scene/hooks/useBadGuys";
-import { useCharacters } from "../../../routes/Scene/hooks/useCharacters";
+import { ICharactersManager } from "../../../routes/Scene/hooks/useCharacters";
 import { usePeer } from "../../../routes/Scene/hooks/usePeer";
 import { ScenePure } from "../../../routes/Scene/ScenePure";
 import { BaseStory } from "../BaseStory";
@@ -30,16 +30,16 @@ const peerManagerMock: ReturnType<typeof usePeer> = {
   sendToGM: action("sendToGM")
 };
 
-const characterManagerMock: ReturnType<typeof useCharacters> = {
+const characterManagerMock: ICharactersManager = {
   global: {
-    sceneCharacters: [getFateCoreCharacter("2"), getFateCoreCharacter("1")],
-    setSceneCharacters: action("setSceneCharacters")
+    sceneCharacters: [getFateCoreCharacter("2"), getFateCoreCharacter("1")]
   },
   gm: {
     addOrUpdateCharacterInScene: action("addOrUpdateCharacterInScene"),
     removeCharacterFromScene: action("removeCharacterFromScene")
   },
   player: {
+    setSceneCharacters: action("setSceneCharacters"),
     playerCharactersIds: ["1"],
     isCharacterModalOpened: false,
     onCharacterSelectClose: action("onCharacterSelectClose"),
@@ -76,7 +76,7 @@ Kingdom stronghold during the Hundred Year War.`,
   ]
 };
 
-const characterManagerPlayMock: ReturnType<typeof useCharacters> = {
+const characterManagerPlayMock: ICharactersManager = {
   ...characterManagerMock,
   global: {
     ...characterManagerMock.global,

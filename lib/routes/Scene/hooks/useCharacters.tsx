@@ -1,90 +1,97 @@
 import { ICharacter } from "../../../types/ICharacter";
 import { useState } from "react";
-import { IPeerManager } from "../types/IPeerManager";
 import { CharacterService } from "../../../services/character-service/CharacterService";
 import _ from "lodash";
+import { IPeerManager } from "./usePeer";
 
-export function useCharacters(peerManager: IPeerManager) {
-  const [sceneCharacters, setSceneCharacters] = useState<Array<ICharacter>>([]);
-  const [playerCharactersIds, setPlayerCharactersIds] = useState<Array<string>>(
-    []
-  );
-  const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
+export type ICharactersManager = ReturnType<
+  ReturnType<typeof makeUseCharacters>
+>;
 
-  function addOrUpdateCharacterInScene(character: ICharacter) {
-    setSceneCharacters(characters => {
-      const exists = !!characters.find(c => c._id === character._id);
+export function makeUseCharacters(characterService: CharacterService) {
+  return function useCharacters(peerManager: IPeerManager) {
+    const [sceneCharacters, setSceneCharacters] = useState<Array<ICharacter>>(
+      []
+    );
+    const [playerCharactersIds, setPlayerCharactersIds] = useState<
+      Array<string>
+    >([]);
+    const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
 
-      const updatedList = exists
-        ? characters.map(c => {
-            if (c._id === character._id) {
-              return character;
-            }
-            return c;
-          })
-        : [...characters, character];
-      return updatedList;
-    });
-  }
+    function addOrUpdateCharacterInScene(character: ICharacter) {
+      setSceneCharacters(characters => {
+        const exists = !!characters.find(c => c._id === character._id);
 
-  function addOrUpdateCharacterForPlayer(character: ICharacter) {
-    setPlayerCharactersIds(ids => {
-      const exists = ids.indexOf(character._id) !== -1;
-      if (exists) {
-        return ids;
-      }
-      return [...ids, character._id];
-    });
-  }
-
-  function removeCharacterFromScene(character: ICharacter) {
-    setSceneCharacters(characters => {
-      return characters.filter(c => {
-        return c._id !== character._id;
+        const updatedList = exists
+          ? characters.map(c => {
+              if (c._id === character._id) {
+                return character;
+              }
+              return c;
+            })
+          : [...characters, character];
+        return updatedList;
       });
-    });
-  }
+    }
 
-  function sendCharacterToGM(character: ICharacter) {
-    peerManager.sendToGM({
-      type: "UPDATE_CHARACTER_IN_GM_SCREEN",
-      payload: { character: character }
-    });
-  }
+    function removeCharacterFromScene(character: ICharacter) {
+      setSceneCharacters(characters => {
+        return characters.filter(c => {
+          return c._id !== character._id;
+        });
+      });
+    }
 
-  async function syncACharacter(character: ICharacter) {
-    sendCharacterToGM(character);
-    addOrUpdateCharacterForPlayer(character);
-    await new CharacterService().update(character);
-  }
-
-  function onCharacterSelectClose(character?: ICharacter) {
-    if (!!character) {
+    async function syncACharacter(character: ICharacter) {
       sendCharacterToGM(character);
-      addOrUpdateCharacterForPlayer(character);
+      characterService.update(character);
     }
-    setIsCharacterModalOpened(false);
-  }
 
-  function onSendCharacterToGMButtonClick() {
-    setIsCharacterModalOpened(true);
-  }
-
-  return {
-    global: {
-      sceneCharacters,
-      setSceneCharacters
-    },
-    player: {
-      playerCharactersIds,
-      isCharacterModalOpened,
-      onSendCharacterToGMButtonClick,
-      onCharacterSelectClose,
-      syncACharacter
-    },
-    gm: {
-      addOrUpdateCharacterInScene,
-      removeCharacterFromScene
+    function onCharacterSelectClose(character?: ICharacter) {
+      if (!!character) {
+        sendCharacterToGM(character);
+        addOrUpdateCharacterForPlayer(character);
+      }
+      setIsCharacterModalOpened(false);
     }
+
+    function onSendCharacterToGMButtonClick() {
+      setIsCharacterModalOpened(true);
+    }
+
+    function addOrUpdateCharacterForPlayer(character: ICharacter) {
+      setPlayerCharactersIds(ids => {
+        const idAlreadyExists = ids.indexOf(character._id) !== -1;
+        if (idAlreadyExists) {
+          return ids;
+        }
+        return [...ids, character._id];
+      });
+    }
+
+    function sendCharacterToGM(character: ICharacter) {
+      peerManager.sendToGM({
+        type: "UPDATE_CHARACTER_IN_GM_SCREEN",
+        payload: { character: character }
+      });
+    }
+
+    return {
+      global: {
+        sceneCharacters
+      },
+      player: {
+        playerCharactersIds,
+        isCharacterModalOpened,
+        onSendCharacterToGMButtonClick,
+        onCharacterSelectClose,
+        syncACharacter,
+        setSceneCharacters
+      },
+      gm: {
+        addOrUpdateCharacterInScene,
+        removeCharacterFromScene
+      }
+    };
   };
 }
