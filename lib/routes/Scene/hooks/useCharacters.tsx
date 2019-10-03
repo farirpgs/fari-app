@@ -16,7 +16,9 @@ export function makeUseCharacters(characterService: CharacterService) {
     const [playerCharactersIds, setPlayerCharactersIds] = useState<
       Array<string>
     >([]);
-    const [isCharacterModalOpened, setIsCharacterModalOpened] = useState(false);
+    const [isCharacterModalOpened, _setIsCharacterModalOpened] = useState(
+      false
+    );
 
     function addOrUpdateCharacterInScene(character: ICharacter) {
       setSceneCharacters(characters => {
@@ -43,23 +45,23 @@ export function makeUseCharacters(characterService: CharacterService) {
     }
 
     async function syncACharacter(character: ICharacter) {
-      sendCharacterToGM(character);
+      _sendCharacterToGM(character);
       characterService.update(character);
     }
 
     function onCharacterSelectClose(character?: ICharacter) {
       if (!!character) {
-        sendCharacterToGM(character);
-        addOrUpdateCharacterForPlayer(character);
+        _sendCharacterToGM(character);
+        _addOrUpdateCharacterForPlayer(character);
       }
-      setIsCharacterModalOpened(false);
+      _setIsCharacterModalOpened(false);
     }
 
     function onSendCharacterToGMButtonClick() {
-      setIsCharacterModalOpened(true);
+      _setIsCharacterModalOpened(true);
     }
 
-    function addOrUpdateCharacterForPlayer(character: ICharacter) {
+    function _addOrUpdateCharacterForPlayer(character: ICharacter) {
       setPlayerCharactersIds(ids => {
         const idAlreadyExists = ids.indexOf(character._id) !== -1;
         if (idAlreadyExists) {
@@ -69,7 +71,7 @@ export function makeUseCharacters(characterService: CharacterService) {
       });
     }
 
-    function sendCharacterToGM(character: ICharacter) {
+    function _sendCharacterToGM(character: ICharacter) {
       peerManager.sendToGM({
         type: "UPDATE_CHARACTER_IN_GM_SCREEN",
         payload: { character: character }

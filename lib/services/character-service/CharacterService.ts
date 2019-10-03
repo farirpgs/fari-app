@@ -13,9 +13,7 @@ export class CharacterService {
     });
 
     const result = await getCharactersDb().find({
-      selector: {
-        game: { $eq: gameSlug }
-      }
+      selector: { _id: { $exists: true } }
     });
     return result.docs as Array<ICharacter>;
   }
@@ -31,9 +29,13 @@ export class CharacterService {
   }
 
   public async update(character: ICharacter): Promise<void> {
-    await getCharactersDb().put<ICharacter>(character, {
-      force: true
-    });
+    const { _rev } = await getCharactersDb().get(character._id);
+
+    const newCharacter: ICharacter = {
+      ...character,
+      _rev
+    };
+    await getCharactersDb().put<ICharacter>(newCharacter);
   }
 
   public async remove(character: ICharacter): Promise<void> {

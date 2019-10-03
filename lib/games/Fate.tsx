@@ -337,7 +337,7 @@ export const FateAccelerated: IGame = {
 };
 
 export const FateCore: IGame = {
-  name: "Fate Core (Work in Progress)",
+  name: "Fate Core",
   slug: "fate",
   rows: [
     { columns: [{ col: 12, field: name }] },

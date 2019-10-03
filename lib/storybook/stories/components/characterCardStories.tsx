@@ -8,7 +8,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 export function characterCardStories() {
-  storiesOf("Components | Characters", module)
+  storiesOf("Components | Character Card", module)
     .addDecorator(withKnobs)
     .add("Default", () => {
       return (

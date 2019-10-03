@@ -35,7 +35,13 @@ export class SceneService {
   }
 
   public async update(scene: IScene): Promise<void> {
-    await getScenesDb().put<IScene>(scene);
+    const { _rev } = await getScenesDb().get(scene._id);
+
+    const newScene: IScene = {
+      ...scene,
+      _rev
+    };
+    await getScenesDb().put<IScene>(newScene);
   }
 
   public async remove(scene: IScene): Promise<void> {

@@ -45,29 +45,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface Props {
   variant: keyof typeof variantIcon;
-  className?: string;
   onClose?: () => void;
   paper?: boolean;
 }
 
 export const Banner: React.FC<Props> = props => {
-  const {
-    className: classNameFromProps,
-    onClose,
-    variant,
-    ...restOfProps
-  } = props;
   const classes = useStyles(props);
-  const Icon = variantIcon[variant];
+  const Icon = variantIcon[props.variant];
 
   return (
     <div className="row center-xs">
       <div className="col-xs">
         <div
           className={`${classes.notificationContainer} ${
-            classes[variant]
-          } margin-2 ${classNameFromProps || ""}`}
-          {...restOfProps}
+            classes[props.variant]
+          } margin-2`}
         >
           <div
             style={{
@@ -80,7 +72,11 @@ export const Banner: React.FC<Props> = props => {
             </div>
             <div>
               <div className={classes.message}>
-                <Paper style={{ padding: "2rem" }}>{props.children}</Paper>
+                {props.paper ? (
+                  <Paper style={{ padding: "2rem" }}>{props.children}</Paper>
+                ) : (
+                  props.children
+                )}
               </div>
             </div>
           </div>

@@ -2,17 +2,18 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import { FateCore, FateAccelerated } from "../../../games/Fate";
 import { useAspects } from "../../../routes/Scene/hooks/useAspects";
-import { useBadGuys } from "../../../routes/Scene/hooks/useBadGuys";
+import { IBadGuysManager } from "../../../routes/Scene/hooks/useBadGuys";
 import { ICharactersManager } from "../../../routes/Scene/hooks/useCharacters";
-import { usePeer } from "../../../routes/Scene/hooks/usePeer";
+import { IPeerManager } from "../../../routes/Scene/hooks/usePeer";
 import { ScenePure } from "../../../routes/Scene/ScenePure";
-import { BaseStory } from "../BaseStory";
-import { IScene } from "../../../types/IScene";
 import { ICharacter } from "../../../types/ICharacter";
-import { FateCore } from "../../../games/Fate";
+import { IScene } from "../../../types/IScene";
+import { BaseStory } from "../BaseStory";
+import { CharacterSelectDialogPure } from "../../../routes/Scene/dialogs/CharacterSelectDialogPure";
 
-const badGuyManagerMock: ReturnType<typeof useBadGuys> = {
+const badGuyManagerMock: IBadGuysManager = {
   badGuyToModify: undefined,
   isBadGuyModalOpened: false,
   onAddBadBuyButtonClick: action("onAddBadBuyButtonClick"),
@@ -22,7 +23,7 @@ const badGuyManagerMock: ReturnType<typeof useBadGuys> = {
   updateBadGuyInScene: action("updateBadGuyInScene")
 };
 
-const peerManagerMock: ReturnType<typeof usePeer> = {
+const peerManagerMock: IPeerManager = {
   isConnectedToGM: false,
   numberOfConnectedPlayers: 3,
   peerId: "123123",
@@ -30,6 +31,23 @@ const peerManagerMock: ReturnType<typeof usePeer> = {
   sendToGM: action("sendToGM")
 };
 
+const characterManagerMockEmpty: ICharactersManager = {
+  global: {
+    sceneCharacters: []
+  },
+  gm: {
+    addOrUpdateCharacterInScene: action("addOrUpdateCharacterInScene"),
+    removeCharacterFromScene: action("removeCharacterFromScene")
+  },
+  player: {
+    setSceneCharacters: action("setSceneCharacters"),
+    playerCharactersIds: [],
+    isCharacterModalOpened: false,
+    onCharacterSelectClose: action("onCharacterSelectClose"),
+    onSendCharacterToGMButtonClick: action("onSendCharacterToGMButtonClick"),
+    syncACharacter: action("syncACharacter") as any
+  }
+};
 const characterManagerMock: ICharactersManager = {
   global: {
     sceneCharacters: [getFateCoreCharacter("2"), getFateCoreCharacter("1")]
@@ -145,7 +163,7 @@ export function sceneStories() {
             setScene={action("setScene")}
             saveScene={action("saveScene") as any}
             aspectsManager={aspectsManagerMock}
-            characterManager={characterManagerMock}
+            characterManager={characterManagerMockEmpty}
             peerManager={peerManagerMock}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
@@ -232,6 +250,48 @@ export function sceneStories() {
           >
         </BaseStory>
       );
+    })
+    .add("Character Dialog Loading", () => {
+      return (
+        <BaseStory>
+          <CharacterSelectDialogPure
+            characters={[]}
+            open={true}
+            isLoading={true}
+            onClose={action("onClose")}
+          ></CharacterSelectDialogPure>
+        </BaseStory>
+      );
+    })
+    .add("Character Dialog Empty", () => {
+      return (
+        <BaseStory>
+          <CharacterSelectDialogPure
+            characters={[]}
+            open={true}
+            isLoading={false}
+            onClose={action("onClose")}
+          ></CharacterSelectDialogPure>
+        </BaseStory>
+      );
+    })
+    .add("Character Dialog with Characters", () => {
+      return (
+        <BaseStory>
+          <CharacterSelectDialogPure
+            characters={[
+              getFateCoreCharacter("1"),
+              getFateCoreCharacter("2"),
+              getFateCoreCharacter("2"),
+              getFateCoreCharacter("2"),
+              getFateCoreCharacter("2")
+            ]}
+            open={true}
+            isLoading={false}
+            onClose={action("onClose")}
+          ></CharacterSelectDialogPure>
+        </BaseStory>
+      );
     });
 }
 
@@ -241,7 +301,7 @@ function getFateCoreCharacter(id: string): ICharacter {
     _rev: id,
     description:
       "Zuko is a firebending master, born as a prince in the Fire Nation Royal Family, who reigned as Fire Lord from 100 AG until his abdication in 167 AG",
-    game: FateCore.slug,
+    game: FateAccelerated.slug,
     name: "Zuko"
   };
   character["aspect1"] = "Prince of the Fire Nation";
