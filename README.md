@@ -1,11 +1,19 @@
 # Fari - WIP
 
-## TODO
+## Features
 
-- Better Character select..(sort/filter)
-- Add unit tests. Bunches and bunches
-- More storybook
+- [ ] Share peer session in singleton
+- [ ] Characters stats in card (approaches and skills)
+- [ ] Bigger UI
+- [ ] Export JSON
+- [ ] Plus large sur desktop
+- [ ] Dirty warning
 
-## BUDS
+## BUGS
 
-- Stale data when clicking on "SYNC" button
+- [ ] ...
+
+## Tech Debt
+
+- [ ] More unit tests
+- [ ] More Stories

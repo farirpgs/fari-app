@@ -65,7 +65,6 @@ export function CharacterFields(props: {
         {Object.keys(tabs).map(tabName => (
           <Tab key={tabName} label={tabName} />
         ))}
-        {/* <Tab label={"Export"} /> */}
       </Tabs>
       <br />
       <div className="row">

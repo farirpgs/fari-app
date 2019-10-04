@@ -453,3 +453,12 @@ export const FateCoreConsequences = [
   moderateConsequence,
   severeConsequence
 ];
+
+export const FateAcceleratedApproaches = [
+  careful,
+  clever,
+  forceful,
+  flashy,
+  quick,
+  sneaky
+];

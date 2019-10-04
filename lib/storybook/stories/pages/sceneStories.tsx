@@ -79,6 +79,8 @@ const scenePlayMock: IScene = {
 
 After the Surrender of Omashu, the city became the last great Earth 
 Kingdom stronghold during the Hundred Year War.`,
+
+  aspects: ["The city is on fire", "My cabbages"],
   badGuys: [
     {
       id: "1",
@@ -125,7 +127,6 @@ export function sceneStories() {
             peerManager={peerManagerMock}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -147,7 +148,6 @@ export function sceneStories() {
             peerManager={peerManagerMock}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -167,7 +167,6 @@ export function sceneStories() {
             peerManager={peerManagerMock}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -187,7 +186,6 @@ export function sceneStories() {
             peerManager={peerManagerMock}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -207,7 +205,6 @@ export function sceneStories() {
             peerManager={{ ...peerManagerMock, peerId: undefined }}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -227,7 +224,6 @@ export function sceneStories() {
             peerManager={{ ...peerManagerMock, isConnectedToGM: true }}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -247,7 +243,6 @@ export function sceneStories() {
             peerManager={{ ...peerManagerMock, isConnectedToGM: false }}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
-          >
         </BaseStory>
       );
     })
@@ -282,9 +277,9 @@ export function sceneStories() {
             characters={[
               getFateCoreCharacter("1"),
               getFateCoreCharacter("2"),
-              getFateCoreCharacter("2"),
-              getFateCoreCharacter("2"),
-              getFateCoreCharacter("2")
+              getFateCoreCharacter("3"),
+              getFateCoreCharacter("4"),
+              getFateCoreCharacter("5")
             ]}
             open={true}
             isLoading={false}
@@ -296,15 +291,21 @@ export function sceneStories() {
 }
 
 function getFateCoreCharacter(id: string): ICharacter {
-  const character = {
+  const character: ICharacter = {
     _id: id,
-    _rev: id,
+    _rev: "1",
     description:
       "Zuko is a firebending master, born as a prince in the Fire Nation Royal Family, who reigned as Fire Lord from 100 AG until his abdication in 167 AG",
     game: FateAccelerated.slug,
-    name: "Zuko"
+    name: "Zuko",
+    aspect1: "Prince of the Fire Nation",
+    aspect2: "All for my honor",
+    careful: "1",
+    clever: "0",
+    forceful: "3",
+    flashy: "2",
+    quick: "2",
+    sneaky: "1"
   };
-  character["aspect1"] = "Prince of the Fire Nation";
-  character["aspect2"] = "All for my honor";
   return character;
 }

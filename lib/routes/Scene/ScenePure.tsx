@@ -5,7 +5,11 @@ import {
   ExpansionPanelSummary,
   Fab,
   IconButton,
-  TextField
+  TextField,
+  Typography,
+  Tabs,
+  Tab,
+  Fade
 } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import AddIcon from "@material-ui/icons/Add";
@@ -14,7 +18,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import ShareIcon from "@material-ui/icons/Share";
 import WifiIcon from "@material-ui/icons/Wifi";
 import WifiOffIcon from "@material-ui/icons/WifiOff";
-import React from "react";
+import React, { useState } from "react";
 import { Banner } from "../../components/Banner/Banner";
 import { FudgeDice } from "../../components/Dice/FudgeDice";
 import { routerHistory } from "../../components/History/History";
@@ -63,7 +67,9 @@ export const ScenePure: React.FC<{
 
   const sceneName = scene.name || "";
   const sceneDescription = scene.description || "";
+  const [currentTab, setCurrentTab] = useState(0);
 
+  const tabs = ["Scene", "Characters", "Bad Guys"];
   const isPlayer = !isGM;
   const isCreatingScene = !sceneId;
   const hasPeerId = !!peerManager.peerId;
@@ -93,13 +99,52 @@ export const ScenePure: React.FC<{
       ></CharacterSelectDialog>
 
       {renderPlayerLink()}
-      {renderSceneNameFieldBox()}
-      {renderSceneDescriptionFieldBox()}
       {renderDice()}
-      {renderSceneActions()}
-      {renderBadGuyBoxes()}
-      {renderCharacterBoxes()}
-      {renderAspectsBox()}
+
+      <Tabs
+        value={currentTab}
+        indicatorColor="primary"
+        className="margin-2"
+        textColor="primary"
+        variant="fullWidth"
+        style={{
+          background: "#f5f5f5"
+        }}
+        onChange={(e, clickedTab) => {
+          setCurrentTab(clickedTab);
+        }}
+      >
+        {tabs.map((tabName: string) => (
+          <Tab key={tabName} label={tabName} />
+        ))}
+      </Tabs>
+
+      {currentTab === 0 && (
+        <Fade in timeout={250}>
+          <div>
+            {renderSceneNameFieldBox()}
+            {renderSceneDescriptionFieldBox()}
+            {renderSceneActions()}
+            {renderAspectsBox()}
+          </div>
+        </Fade>
+      )}
+      {currentTab === 1 && (
+        <Fade in timeout={250}>
+          <div>
+            {renderCharactersActions()}
+            {renderCharacterBoxes()}
+          </div>
+        </Fade>
+      )}
+      {currentTab === 2 && (
+        <Fade in timeout={250}>
+          <div>
+            {renderBadGuysActions()}
+            {renderBadGuyBoxes()}
+          </div>
+        </Fade>
+      )}
     </Page>
   );
 
@@ -175,10 +220,10 @@ export const ScenePure: React.FC<{
 
   function renderSceneNameFieldBox() {
     return (
-      <>
-        <Box margin="1rem 0">
-          <div className="row">
-            <div className="col-xs-12">
+      <Box margin="1rem 0">
+        <div className="row">
+          <div className="col-xs-12">
+            {isGM ? (
               <TextField
                 value={sceneName}
                 label="Where are you ?"
@@ -197,10 +242,12 @@ export const ScenePure: React.FC<{
                   });
                 }}
               />
-            </div>
+            ) : (
+              <div className="h1">{sceneName}</div>
+            )}
           </div>
-        </Box>
-      </>
+        </div>
+      </Box>
     );
   }
 
@@ -210,26 +257,32 @@ export const ScenePure: React.FC<{
         <Box margin="1rem 0">
           <div className="row">
             <div className="col-xs-12">
-              <TextField
-                value={sceneDescription}
-                rows={5}
-                multiline
-                label="What is hapenning ?"
-                placeholder="The sun is set and you can hear the sounds of the night waking up..."
-                variant="filled"
-                InputProps={{
-                  readOnly: isPlayer
-                }}
-                style={{
-                  width: "100%"
-                }}
-                onChange={e => {
-                  setScene({
-                    ...scene,
-                    description: e.target.value
-                  });
-                }}
-              />
+              {isGM ? (
+                <TextField
+                  value={sceneDescription}
+                  rows={5}
+                  multiline
+                  label="What is hapenning ?"
+                  placeholder="The sun is set and you can hear the sounds of the night waking up..."
+                  variant="filled"
+                  InputProps={{
+                    readOnly: isPlayer
+                  }}
+                  style={{
+                    width: "100%"
+                  }}
+                  onChange={e => {
+                    setScene({
+                      ...scene,
+                      description: e.target.value
+                    });
+                  }}
+                />
+              ) : (
+                <div style={{ fontSize: "1.5em", lineHeight: "1.7em" }}>
+                  {sceneDescription}
+                </div>
+              )}
             </div>
           </div>
         </Box>
@@ -291,6 +344,7 @@ export const ScenePure: React.FC<{
       </div>
     );
   }
+
   function renderSceneActions() {
     return (
       <div>
@@ -309,20 +363,14 @@ export const ScenePure: React.FC<{
               </Fab>
             </div>
           )}
-          {isGM && (
-            <div className="col-xs-12 col-sm-6 margin-1">
-              <Fab
-                onClick={() => {
-                  badGuyManager.onAddBadBuyButtonClick();
-                }}
-                color="primary"
-                variant="extended"
-              >
-                <AddIcon style={{ marginRight: " .5rem" }} />
-                Add a bad buy
-              </Fab>
-            </div>
-          )}
+        </div>
+      </div>
+    );
+  }
+  function renderCharactersActions() {
+    return (
+      <div>
+        <div className="row center-xs">
           {isPlayer && (
             <div className="col-xs margin-1">
               <Fab
@@ -334,6 +382,28 @@ export const ScenePure: React.FC<{
               >
                 <AddIcon style={{ marginRight: " .5rem" }} />
                 Add a character to the scene
+              </Fab>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+  function renderBadGuysActions() {
+    return (
+      <div>
+        <div className="row center-xs">
+          {isGM && (
+            <div className="col-xs-12 col-sm-6 margin-1">
+              <Fab
+                onClick={() => {
+                  badGuyManager.onAddBadBuyButtonClick();
+                }}
+                color="primary"
+                variant="extended"
+              >
+                <AddIcon style={{ marginRight: " .5rem" }} />
+                Add a bad buy
               </Fab>
             </div>
           )}

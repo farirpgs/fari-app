@@ -39,29 +39,36 @@ export function characterCardStories() {
 }
 
 function getFaeCharacter(): ICharacter {
-  const character = {
+  const character: ICharacter = {
     _id: "1",
     _rev: "1",
     description:
       "Zuko is a firebending master, born as a prince in the Fire Nation Royal Family, who reigned as Fire Lord from 100 AG until his abdication in 167 AG",
     game: FateAccelerated.slug,
-    name: "Zuko"
+    name: "Zuko",
+    aspect1: "Prince of the Fire Nation",
+    aspect2: "All for my honor",
+    careful: "1",
+    clever: "0",
+    forceful: "3",
+    flashy: "2",
+    quick: "2",
+    sneaky: "1"
   };
-  character["aspect1"] = "Prince of the Fire Nation";
-  character["aspect2"] = "All for my honor";
   return character;
 }
 
 function getFateCoreCharacter(): ICharacter {
-  const character = {
+  const character: ICharacter = {
     _id: "1",
     _rev: "1",
     description:
       "Zuko is a firebending master, born as a prince in the Fire Nation Royal Family, who reigned as Fire Lord from 100 AG until his abdication in 167 AG",
     game: FateCore.slug,
-    name: "Zuko"
+    name: "Zuko",
+    aspect1: "Prince of the Fire Nation",
+    aspect2: "All for my honor",
+    skillSuperb: ".."
   };
-  character["aspect1"] = "Prince of the Fire Nation";
-  character["aspect2"] = "All for my honor";
   return character;
 }

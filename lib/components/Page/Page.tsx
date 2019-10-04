@@ -71,7 +71,7 @@ export const Page: React.FC<{
           <Toolbar
             style={{
               margin: "0 auto",
-              maxWidth: "800px",
+              maxWidth: "1024px",
               width: "100%",
               padding: "1rem",
               height: `${headerHeightREM}rem`

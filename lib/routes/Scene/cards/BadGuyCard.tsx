@@ -72,9 +72,9 @@ export const BadGuyCard: React.FC<{
         <div className="row">
           {[...new Array(stressCount)].map((u, stressIndex) => {
             return (
-              <div className="col-xs-4" key={stressIndex}>
+              <div className="col-xs" key={stressIndex} style={{ flex: 0 }}>
                 <FormControlLabel
-                  label={`#${stressIndex + 1}`}
+                  label={`${stressIndex + 1}`}
                   control={
                     <Checkbox
                       checked={badGuy.stressValues[stressIndex] || false}

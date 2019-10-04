@@ -12,8 +12,8 @@ export const PostIt: React.FC<{
   return (
     <Paper
       style={{
-        minHeight: "4rem",
-        padding: "1rem 1.5rem 1rem 1.5rem",
+        minHeight: "5rem",
+        padding: "2rem 1.5rem 2rem 1.5rem",
         marginBottom: "1rem",
         background: "#ffffcf"
       }}
@@ -22,6 +22,7 @@ export const PostIt: React.FC<{
         type="text"
         value={props.value}
         onChange={props.onChange}
+        className="margin-1"
         multiline={true}
         style={{
           width: "100%",
@@ -36,12 +37,13 @@ export const PostIt: React.FC<{
         }}
         margin="none"
       />
-      <Divider style={{ margin: "1rem 0", height: "0" }}></Divider>
-      <div className="row end-xs">
-        <Button onClick={props.onDelete} color="secondary">
-          Remove
-        </Button>
-      </div>
+      {!props.readOnly && (
+        <div className="row end-xs">
+          <Button onClick={props.onDelete} color="secondary">
+            Remove
+          </Button>
+        </div>
+      )}
     </Paper>
   );
 };
