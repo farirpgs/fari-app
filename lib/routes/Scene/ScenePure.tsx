@@ -370,6 +370,14 @@ export const ScenePure: React.FC<{
   function renderCharactersActions() {
     return (
       <div>
+        {characterManager.global.sceneCharacters.length === 0 && (
+          <Banner variant="info" paper={false}>
+            <div className="margin-2">
+              There is no characters in that scene yet
+            </div>
+          </Banner>
+        )}
+
         <div className="row center-xs">
           {isPlayer && (
             <div className="col-xs margin-1">
@@ -392,6 +400,14 @@ export const ScenePure: React.FC<{
   function renderBadGuysActions() {
     return (
       <div>
+        {scene.badGuys.length === 0 && (
+          <Banner variant="info" paper={false}>
+            <div className="margin-2">
+              There is no bad guys in that scene yet
+            </div>
+          </Banner>
+        )}
+
         <div className="row center-xs">
           {isGM && (
             <div className="col-xs-12 col-sm-6 margin-1">
@@ -476,7 +492,7 @@ export const ScenePure: React.FC<{
       <Box margin="1rem 0">
         <div className="row">
           {(scene.aspects || []).map((aspect, aspectIndex) => (
-            <div className="col-xs-12 col-sm-6 col-md-6" key={aspectIndex}>
+            <div className="col-xs-12 col-sm-6 col-md-4" key={aspectIndex}>
               <PostIt
                 value={aspect}
                 readOnly={isPlayer}
