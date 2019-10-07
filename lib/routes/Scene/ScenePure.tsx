@@ -69,7 +69,11 @@ export const ScenePure: React.FC<{
   const sceneDescription = scene.description || "";
   const [currentTab, setCurrentTab] = useState(0);
 
-  const tabs = ["Scene", "Characters", "Bad Guys"];
+  const tabs = [
+    "Scene",
+    `Characters (${characterManager.global.sceneCharacters.length})`,
+    `Bad Guys (${scene.badGuys.length})`
+  ];
   const isPlayer = !isGM;
   const isCreatingScene = !sceneId;
   const hasPeerId = !!peerManager.peerId;
