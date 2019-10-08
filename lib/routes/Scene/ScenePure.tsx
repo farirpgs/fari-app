@@ -34,6 +34,7 @@ import { IAspectsManager } from "./hooks/useAspects";
 import { ICharactersManager } from "./hooks/useCharacters";
 import { IPeerManager } from "./hooks/usePeer";
 import { IBadGuysManager } from "./hooks/useBadGuys";
+import { FateCheatSheet } from "../../games/Fate";
 
 export const ScenePure: React.FC<{
   sceneId: string;
@@ -72,7 +73,8 @@ export const ScenePure: React.FC<{
   const tabs = [
     "Scene",
     `Characters (${characterManager.global.sceneCharacters.length})`,
-    `Bad Guys (${scene.badGuys.length})`
+    `Bad Guys (${scene.badGuys.length})`,
+    "Cheatsheet"
   ];
   const isPlayer = !isGM;
   const isCreatingScene = !sceneId;
@@ -112,7 +114,7 @@ export const ScenePure: React.FC<{
         textColor="primary"
         variant="fullWidth"
         style={{
-          background: "#f5f5f5"
+          background: "rgba(64, 81, 181, 0.16)"
         }}
         onChange={(e, clickedTab) => {
           setCurrentTab(clickedTab);
@@ -147,6 +149,15 @@ export const ScenePure: React.FC<{
             {renderBadGuysActions()}
             {renderBadGuyBoxes()}
           </div>
+        </Fade>
+      )}
+      {currentTab === 3 && (
+        <Fade in timeout={250}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: FateCheatSheet
+            }}
+          ></div>
         </Fade>
       )}
     </Page>

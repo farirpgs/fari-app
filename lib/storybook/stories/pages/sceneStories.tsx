@@ -208,6 +208,28 @@ export function sceneStories() {
         </BaseStory>
       );
     })
+    .add("GM Play Empty", () => {
+      return (
+        <BaseStory>
+          <ScenePure
+            sceneId={"existing-uid"}
+            scene={{ ...scenePlayMock, badGuys: [] }}
+            isLoading={false}
+            isGM={true}
+            isSceneNotFound={false}
+            setScene={action("setScene")}
+            saveScene={action("saveScene") as any}
+            aspectsManager={aspectsManagerMock}
+            characterManager={{
+              ...characterManagerMock,
+              global: { ...characterManagerMock.global, sceneCharacters: [] }
+            }}
+            peerManager={peerManagerMock}
+            badGuyManager={badGuyManagerMock}
+          ></ScenePure>
+        </BaseStory>
+      );
+    })
     .add("Player Play (Connected)", () => {
       return (
         <BaseStory>
@@ -241,6 +263,28 @@ export function sceneStories() {
             aspectsManager={aspectsManagerMock}
             characterManager={characterManagerMock}
             peerManager={{ ...peerManagerMock, isConnectedToGM: false }}
+            badGuyManager={badGuyManagerMock}
+          ></ScenePure>
+        </BaseStory>
+      );
+    })
+    .add("Player Play Empty", () => {
+      return (
+        <BaseStory>
+          <ScenePure
+            sceneId={"existing-uid"}
+            scene={{ ...scenePlayMock, badGuys: [] }}
+            isLoading={false}
+            isGM={false}
+            isSceneNotFound={false}
+            setScene={action("setScene")}
+            saveScene={action("saveScene") as any}
+            aspectsManager={aspectsManagerMock}
+            characterManager={{
+              ...characterManagerMock,
+              global: { ...characterManagerMock.global, sceneCharacters: [] }
+            }}
+            peerManager={{ ...peerManagerMock, isConnectedToGM: true }}
             badGuyManager={badGuyManagerMock}
           ></ScenePure>
         </BaseStory>

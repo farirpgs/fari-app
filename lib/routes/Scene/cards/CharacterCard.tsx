@@ -51,7 +51,8 @@ export const CharacterCard: React.FC<{
       style={{
         minHeight: "4rem",
         padding: "1rem 1.5rem 1rem 1.5rem",
-        marginBottom: "1rem"
+        marginBottom: "1rem",
+        background: !props.readOnly ? "hsla(231, 48%, 48%, 0.16)" : "#fff"
       }}
     >
       {renderHeader()}

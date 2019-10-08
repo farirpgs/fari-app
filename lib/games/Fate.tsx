@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import { FieldType, IField } from "../types/IField";
 import { IGame } from "../types/IGame";
+import showdown from "showdown";
 
 const name: IField = {
   label: "Character Name",
@@ -257,9 +258,13 @@ const severeConsequence: IField = {
   type: FieldType.TextField
 };
 
+const cheatsheet = readFileSync(__dirname + "/Fate.md", "utf-8");
+const converter = new showdown.Converter();
+export const FateCheatSheet = converter.makeHtml(cheatsheet);
+
 const guide: IField = {
   type: FieldType.Paper,
-  content: readFileSync(__dirname + "/Fate.md", "utf-8")
+  content: cheatsheet
 };
 
 export const FateAccelerated: IGame = {
