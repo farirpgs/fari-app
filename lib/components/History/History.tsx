@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 
 export let routerHistory = {} as any;
 
+declare const window: Window & { ga: Function };
+
 export const History = withRouter(props => {
   const {
     history,
@@ -12,6 +14,12 @@ export const History = withRouter(props => {
   // tslint:disable-next-line: react-hooks-nesting
   useEffect(() => {
     routerHistory = history;
+    try {
+      window.ga("set", "page", location.pathname + location.search);
+      window.ga("send", "pageview");
+    } catch (error) {
+      // ...
+    }
   }, [pathname]);
   return null;
 });
