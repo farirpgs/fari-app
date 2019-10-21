@@ -23,8 +23,8 @@ import { IScene } from "../../types/IScene";
 import { defaultArcName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
 import * as selectors from "./sceneSelectors";
-import { liveLinks } from "../../singletons/liveLinks";
 import { green } from "@material-ui/core/colors";
+import { useStoreContext } from "../../context/store";
 
 export const Scenes: React.FC<{}> = props => {
   const [groupedScenes, setGroupedScenes] = useState<IGroupedScenes>({});
@@ -35,9 +35,9 @@ export const Scenes: React.FC<{}> = props => {
   const [sceneDeletedSnackBar, setSceneDeletedSnackBar] = React.useState({
     visible: false
   });
-
+  const store = useStoreContext();
   const hasItems = Object.keys(groupedScenes).length > 0;
-  const hasLiveLinks = liveLinks.length !== 0;
+  const hasLiveLinks = Object.keys(store.session.liveSessions).length !== 0;
 
   const loadScenes = async () => {
     setIsLoading(true);
@@ -81,12 +81,16 @@ export const Scenes: React.FC<{}> = props => {
             <div className="row">
               <div className="col-xs-12">
                 <List component="nav">
-                  {liveLinks.map(link => {
-                    const truncatedDescription = _.truncate(link.description, {
-                      length: 50
-                    });
+                  {Object.keys(store.session.liveSessions).map(link => {
+                    const session = store.session.liveSessions[link];
+                    const truncatedDescription = _.truncate(
+                      session.description,
+                      {
+                        length: 50
+                      }
+                    );
                     return (
-                      <AppLink to={link.url} key={link.url}>
+                      <AppLink to={link} key={link}>
                         <ListItem
                           button
                           style={{
@@ -99,7 +103,7 @@ export const Scenes: React.FC<{}> = props => {
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                            primary={link.label}
+                            primary={session.label}
                             secondary={truncatedDescription}
                           />
                         </ListItem>
@@ -144,7 +148,7 @@ export const Scenes: React.FC<{}> = props => {
             <div className="col-xs-12">
               <List component="nav">
                 {Object.keys(groupedScenes).map((arcName, index) => (
-                  <div key={index} className="margin-1">
+                  <div key={index}>
                     {arcName !== defaultArcName && (
                       <div
                         style={{

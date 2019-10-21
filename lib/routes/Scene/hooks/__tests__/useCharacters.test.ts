@@ -1,7 +1,8 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import { makeUseCharacters } from "../useCharacters";
-import { usePeer } from "../usePeer";
+import {} from "../usePeerHost";
 import { CharacterService } from "../../../../services/character-service/CharacterService";
+import { IPeerConnectionManager } from "../usePeerConnection";
 
 // tslint:disable: react-hooks-nesting
 describe("useCharacters", () => {
@@ -9,10 +10,10 @@ describe("useCharacters", () => {
   describe("GM ", () => {
     describe("Adding a character", () => {
       it("should add a character to the scene if it doesnt exist and update it if it does", () => {
-        const peerManagerMock = getPeerManagerMock();
+        const peerConnectionMock = getPeerConnectionManagerMock();
         const characterSerivceMock = getCharacterServiceMock();
         const useCharacters = makeUseCharacters(characterSerivceMock);
-        const { result } = renderHook(() => useCharacters(peerManagerMock));
+        const { result } = renderHook(() => useCharacters(peerConnectionMock));
 
         act(() => {
           // GM receives initial character from player
@@ -68,10 +69,10 @@ describe("useCharacters", () => {
 
     describe("Removing character", () => {
       it("should remove a character from the scene", () => {
-        const peerManagerMock = getPeerManagerMock();
+        const peerConnectionMock = getPeerConnectionManagerMock();
         const characterSerivceMock = getCharacterServiceMock();
         const useCharacters = makeUseCharacters(characterSerivceMock);
-        const { result } = renderHook(() => useCharacters(peerManagerMock));
+        const { result } = renderHook(() => useCharacters(peerConnectionMock));
 
         // GM receives initial character from player
         act(() => {
@@ -103,10 +104,10 @@ describe("useCharacters", () => {
   describe("Player", () => {
     describe("Adding a character using the character selection modal", () => {
       it("should add it to the list of ids and send it to the gm", () => {
-        const peerManagerMock = getPeerManagerMock();
+        const peerConnectionMock = getPeerConnectionManagerMock();
         const characterSerivceMock = getCharacterServiceMock();
         const useCharacters = makeUseCharacters(characterSerivceMock);
-        const { result } = renderHook(() => useCharacters(peerManagerMock));
+        const { result } = renderHook(() => useCharacters(peerConnectionMock));
         const characterToSend = {
           _id: "1",
           _rev: "",
@@ -124,7 +125,7 @@ describe("useCharacters", () => {
           result.current.player.onCharacterSelectClose(characterToSend);
         });
         expect(result.current.player.isCharacterModalOpened).toEqual(false);
-        expect(peerManagerMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
           payload: { character: characterToSend },
           type: "UPDATE_CHARACTER_IN_GM_SCREEN"
         });
@@ -141,7 +142,7 @@ describe("useCharacters", () => {
         act(() => {
           result.current.player.syncACharacter(updatedCharacter);
         });
-        expect(peerManagerMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
           payload: { character: updatedCharacter },
           type: "UPDATE_CHARACTER_IN_GM_SCREEN"
         });
@@ -165,7 +166,7 @@ describe("useCharacters", () => {
           result.current.player.onCharacterSelectClose(anotherCharacter);
         });
         expect(result.current.player.isCharacterModalOpened).toEqual(false);
-        expect(peerManagerMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
           payload: { character: anotherCharacter },
           type: "UPDATE_CHARACTER_IN_GM_SCREEN"
         });
@@ -181,7 +182,7 @@ describe("useCharacters", () => {
           result.current.player.onCharacterSelectClose(anotherCharacter);
         });
         expect(result.current.player.isCharacterModalOpened).toEqual(false);
-        expect(peerManagerMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
           payload: { character: anotherCharacter },
           type: "UPDATE_CHARACTER_IN_GM_SCREEN"
         });
@@ -191,10 +192,10 @@ describe("useCharacters", () => {
 
     describe("Canceling the character selection modal", () => {
       it("should hide the character selection modal", () => {
-        const peerManagerMock = getPeerManagerMock();
+        const peerConnectionMock = getPeerConnectionManagerMock();
         const characterSerivceMock = getCharacterServiceMock();
         const useCharacters = makeUseCharacters(characterSerivceMock);
-        const { result } = renderHook(() => useCharacters(peerManagerMock));
+        const { result } = renderHook(() => useCharacters(peerConnectionMock));
 
         // Opening dialog
         act(() => {
@@ -212,12 +213,9 @@ describe("useCharacters", () => {
   });
 });
 
-function getPeerManagerMock(): ReturnType<typeof usePeer> {
+function getPeerConnectionManagerMock(): IPeerConnectionManager {
   return {
-    isConnectedToGM: false,
-    numberOfConnectedPlayers: 0,
-    peerId: "",
-    sendToAllPlayers: jest.fn(),
+    isConnectedToHost: false,
     sendToGM: jest.fn()
   };
 }
