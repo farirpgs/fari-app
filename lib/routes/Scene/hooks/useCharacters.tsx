@@ -2,14 +2,15 @@ import { ICharacter } from "../../../types/ICharacter";
 import { useState } from "react";
 import { CharacterService } from "../../../services/character-service/CharacterService";
 import _ from "lodash";
-import { IPeerManager } from "./usePeer";
+import { IPeerHostManager } from "./usePeerHost";
+import { IPeerConnectionManager } from "./usePeerConnection";
 
 export type ICharactersManager = ReturnType<
   ReturnType<typeof makeUseCharacters>
 >;
 
 export function makeUseCharacters(characterService: CharacterService) {
-  return function useCharacters(peerManager: IPeerManager) {
+  return function useCharacters(peerConnectionManager: IPeerConnectionManager) {
     const [sceneCharacters, setSceneCharacters] = useState<Array<ICharacter>>(
       []
     );
@@ -72,7 +73,7 @@ export function makeUseCharacters(characterService: CharacterService) {
     }
 
     function _sendCharacterToGM(character: ICharacter) {
-      peerManager.sendToGM({
+      peerConnectionManager.sendToGM({
         type: "UPDATE_CHARACTER_IN_GM_SCREEN",
         payload: { character: character }
       });

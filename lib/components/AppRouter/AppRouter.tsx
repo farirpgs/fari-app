@@ -10,6 +10,7 @@ import { NotFoundRoute } from "../../routes/NotFoundRoute/NotFoundRoute";
 import { PlayCharacter } from "../../routes/PlayCharacter/PlayCharacter";
 import { Scene } from "../../routes/Scene/Scene";
 import { Scenes } from "../../routes/Scenes/Scenes";
+import { Session } from "../../routes/Session/Session";
 
 export const AppRouter = () => (
   <Switch>
@@ -22,7 +23,12 @@ export const AppRouter = () => (
     <Route exact path={"/scenes"} component={Scenes} />
     <Route exact path={"/scenes/create"} component={Scene} />
     <Route exact path={"/scenes/:sceneId"} component={Scene} />
-    <Route exact path={"/scenes/play/:sceneId/:peerId"} component={Scene} />
+    <Route exact path={"/session/gm/:sceneId"} component={Session} />
+    <Route
+      exact
+      path={"/session/player/:sceneId/:peerId"}
+      component={Session}
+    />
     <Route exact path={"/about"} component={About} />
 
     <Route

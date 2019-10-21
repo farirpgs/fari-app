@@ -119,6 +119,7 @@ const CharacterListItem: React.FC<{ character: ICharacter }> = props => {
         <ListItemText
           primary={character["name"]}
           secondary={
+            // TODO: validateDOMNesting THIS IS A <p>
             <div>
               <div style={{ zoom: 0.8 }}>
                 <b>{game.name}</b>

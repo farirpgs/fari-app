@@ -10,17 +10,22 @@ import { History } from "./components/History/History";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";
 import { AppTheme } from "./theme";
+import { _useStore, StoreContext } from "./context/store";
 
 function App() {
+  const store = _useStore();
+
   return (
     <ThemeProvider theme={AppTheme}>
-      <BrowserRouter>
-        <ScrollToTop />
-        <CssBaseline />
-        <History />
-        <AppRouter />
-        <AppBottomNavigation />
-      </BrowserRouter>
+      <StoreContext.Provider value={store}>
+        <BrowserRouter>
+          <ScrollToTop />
+          <CssBaseline />
+          <History />
+          <AppRouter />
+          <AppBottomNavigation />
+        </BrowserRouter>
+      </StoreContext.Provider>
     </ThemeProvider>
   );
 }
