@@ -20,7 +20,7 @@ import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
 import { SceneService } from "../../services/scene-service/SceneService";
 import { IScene } from "../../types/IScene";
-import { defaultArcName } from "./defaultArcName";
+import { defaultArcName as defaultCampaignName } from "./defaultArcName";
 import { IGroupedScenes } from "./IGroupedScenes";
 import * as selectors from "./sceneSelectors";
 import { green } from "@material-ui/core/colors";
@@ -147,25 +147,26 @@ export const Scenes: React.FC<{}> = props => {
           <div className="row">
             <div className="col-xs-12">
               <List component="nav">
-                {Object.keys(groupedScenes).map((arcName, index) => (
+                {Object.keys(groupedScenes).map((campaignName, index) => (
                   <div key={index}>
-                    {arcName !== defaultArcName && (
+                    {campaignName !== defaultCampaignName && (
                       <div
                         style={{
-                          fontSize: "1.5rem"
+                          fontSize: "1.5rem",
+                          margin: "1rem 0"
                         }}
                       >
-                        {arcName}
+                        {campaignName.trim()}
                       </div>
                     )}
 
-                    {groupedScenes[arcName].map(scene => {
+                    {groupedScenes[campaignName].map(scene => {
                       const truncatedDescription = _.truncate(
                         scene.description,
                         {
                           length: 50
                         }
-                      );
+                      ).trim();
                       return (
                         <AppLink to={`/scenes/${scene._id}`} key={scene._id}>
                           <ListItem
@@ -180,7 +181,7 @@ export const Scenes: React.FC<{}> = props => {
                               </Avatar>
                             </ListItemAvatar>
                             <ListItemText
-                              primary={scene.name}
+                              primary={scene.name.trim()}
                               secondary={truncatedDescription}
                             />
                             <ListItemSecondaryAction>
