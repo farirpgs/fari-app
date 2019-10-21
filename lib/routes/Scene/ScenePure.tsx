@@ -55,6 +55,9 @@ export const ScenePure: React.FC<{
     <Page
       isLoading={isLoading}
       h1={sceneName}
+      backFunction={() => {
+        routerHistory.push(`/scenes`);
+      }}
       appBarActions={
         <IconButton
           edge="end"
