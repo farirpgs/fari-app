@@ -13,7 +13,7 @@ export class CharacterService {
     });
 
     const result = await getCharactersDb().find({
-      selector: { _id: { $exists: true } }
+      selector: { _id: { $exists: true }, game: { $eq: gameSlug } }
     });
     return result.docs as Array<ICharacter>;
   }
