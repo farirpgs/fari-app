@@ -12,7 +12,7 @@ export const CharacterSelectDialog: React.FC<{
 
   async function loadCharacters() {
     setIsLoading(true);
-    const result = await new CharacterService().getAllByGame("fae");
+    const result = await new CharacterService().getAll();
     setCharacters(result);
     setIsLoading(false);
   }
