@@ -27,6 +27,7 @@ const fatePoints: IField = {
   label: "Current Fate Points",
   slug: "fatePoints",
   type: FieldType.Number,
+  default: "3",
   min: 0
 };
 
@@ -48,89 +49,32 @@ const skillsCategory: IField = {
   type: FieldType.Category
 };
 
-const highConcept: IField = {
-  label: "High Concept",
-  slug: "aspect1",
-  type: FieldType.TextField
-};
+function makeAspect(label: string, slug: string): IField {
+  return {
+    label,
+    slug,
+    type: FieldType.TextField
+  };
+}
 
-const careful: IField = {
-  label: "Careful",
-  slug: "careful",
-  type: FieldType.Number,
-  min: 0,
-  max: 3,
-  default: "0"
-};
+function makeApproach(label: string, slug: string): IField {
+  return {
+    label,
+    slug,
+    type: FieldType.Number,
+    min: 0,
+    max: 3,
+    default: "0"
+  };
+}
 
-const trouble: IField = {
-  label: "Trouble",
-  slug: "aspect2",
-  type: FieldType.TextField
-};
-
-const clever: IField = {
-  label: "Clever",
-  slug: "clever",
-  type: FieldType.Number,
-  min: 0,
-  max: 3,
-  default: "0"
-};
-
-const aspect3: IField = {
-  label: "Aspect #3",
-  slug: "aspect3",
-  type: FieldType.TextField
-};
-
-const forceful: IField = {
-  label: "Forceful",
-  slug: "forceful",
-  type: FieldType.Number,
-  min: 0,
-  max: 3,
-  default: "0"
-};
-
-const aspect4: IField = {
-  label: "Aspect #4",
-  slug: "aspect4",
-  type: FieldType.TextField
-};
-
-const flashy: IField = {
-  label: "Flashy",
-  slug: "flashy",
-  type: FieldType.Number,
-  min: 0,
-  max: 3,
-  default: "0"
-};
-
-const aspect5: IField = {
-  label: "Aspect #5",
-  slug: "aspect5",
-  type: FieldType.TextField
-};
-
-const quick: IField = {
-  label: "Quick",
-  slug: "quick",
-  type: FieldType.Number,
-  min: 0,
-  max: 3,
-  default: "0"
-};
-
-const sneaky: IField = {
-  label: "Sneaky",
-  slug: "sneaky",
-  type: FieldType.Number,
-  min: 0,
-  max: 3,
-  default: "0"
-};
+function makeSkill(label: string, slug: string): IField {
+  return {
+    label,
+    slug,
+    type: FieldType.TextField
+  };
+}
 
 const stunts: IField = {
   label: "Stunts",
@@ -267,6 +211,44 @@ const guide: IField = {
   content: cheatsheet
 };
 
+export const FateAcceleratedStress = [stress1, stress2, stress3];
+
+export const FateCorePhysicalStress = [
+  physicalStress1,
+  physicalStress2,
+  physicalStress3,
+  physicalStress4
+];
+
+export const FateCoreMentalStress = [
+  mentalStress1,
+  mentalStress2,
+  mentalStress3,
+  mentalStress4
+];
+
+export const FateAcceleratedConsequences = [
+  mildConsequence,
+  moderateConsequence,
+  severeConsequence
+];
+
+export const FateCoreConsequences = [
+  mildConsequence,
+  mildConsequence2,
+  moderateConsequence,
+  severeConsequence
+];
+
+export const FateAcceleratedApproaches = [
+  makeApproach("Careful", "careful"),
+  makeApproach("Clever", "clever"),
+  makeApproach("Forceful", "forceful"),
+  makeApproach("Flashy", "flashy"),
+  makeApproach("Quick", "quick"),
+  makeApproach("Sneaky", "sneaky")
+];
+
 export const FateAccelerated: IGame = {
   name: "Fate Accelerated",
   slug: "fae",
@@ -285,23 +267,33 @@ export const FateAccelerated: IGame = {
           col: 6,
           rows: [
             { columns: [{ col: 12, field: aspectCategory }] },
-            { columns: [{ col: 12, field: highConcept }] },
-            { columns: [{ col: 12, field: trouble }] },
-            { columns: [{ col: 12, field: aspect3 }] },
-            { columns: [{ col: 12, field: aspect4 }] },
-            { columns: [{ col: 12, field: aspect5 }] }
+            {
+              columns: [
+                { col: 12, field: makeAspect("High Concept", "aspect1") }
+              ]
+            },
+            { columns: [{ col: 12, field: makeAspect("Trouble", "aspect2") }] },
+            {
+              columns: [{ col: 12, field: makeAspect("Aspect #3", "aspect3") }]
+            },
+            {
+              columns: [{ col: 12, field: makeAspect("Aspect #4", "aspect4") }]
+            },
+            {
+              columns: [{ col: 12, field: makeAspect("Aspect #5", "aspect5") }]
+            }
           ]
         },
         {
           col: 6,
           rows: [
             { columns: [{ col: 12, field: approachCategory }] },
-            { columns: [{ col: 12, field: careful }] },
-            { columns: [{ col: 12, field: clever }] },
-            { columns: [{ col: 12, field: forceful }] },
-            { columns: [{ col: 12, field: flashy }] },
-            { columns: [{ col: 12, field: quick }] },
-            { columns: [{ col: 12, field: sneaky }] }
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[0] }] },
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[1] }] },
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[2] }] },
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[3] }] },
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[4] }] },
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[5] }] }
           ]
         }
       ]
@@ -337,7 +329,7 @@ export const FateAccelerated: IGame = {
         }
       ]
     },
-    { tab: "Guide", columns: [{ col: 6, field: guide }] }
+    { tab: "Guide", columns: [{ col: 12, field: guide }] }
   ]
 };
 
@@ -356,14 +348,24 @@ export const FateCore: IGame = {
     {
       columns: [
         {
-          col: 12,
+          col: 6,
           rows: [
             { columns: [{ col: 12, field: aspectCategory }] },
-            { columns: [{ col: 12, field: highConcept }] },
-            { columns: [{ col: 12, field: trouble }] },
-            { columns: [{ col: 12, field: aspect3 }] },
-            { columns: [{ col: 12, field: aspect4 }] },
-            { columns: [{ col: 12, field: aspect5 }] }
+            {
+              columns: [
+                { col: 12, field: makeAspect("High Concept", "aspect1") }
+              ]
+            },
+            { columns: [{ col: 12, field: makeAspect("Trouble", "aspect2") }] },
+            {
+              columns: [{ col: 12, field: makeAspect("Aspect #3", "aspect3") }]
+            },
+            {
+              columns: [{ col: 12, field: makeAspect("Aspect #4", "aspect4") }]
+            },
+            {
+              columns: [{ col: 12, field: makeAspect("Aspect #5", "aspect5") }]
+            }
           ]
         },
         {
@@ -371,12 +373,12 @@ export const FateCore: IGame = {
           rows: [
             {
               columns: [
-                // Super +5 - 0
-                // Great +4 - 1
-                // Good +3 - 2
-                // Fair +2 - 3
-                // Average +1 - 4
-                { col: 12, field: skillsCategory }
+                { col: 12, field: skillsCategory },
+                { col: 12, field: makeSkill("Super (+5)", "super") },
+                { col: 12, field: makeSkill("Great (+4) 1", "great") },
+                { col: 12, field: makeSkill("Good (+3) 2", "good") },
+                { col: 12, field: makeSkill("Fair (+2) 3", "fair") },
+                { col: 12, field: makeSkill("Average (+1) 4", "average") }
               ]
             }
           ]
@@ -387,7 +389,7 @@ export const FateCore: IGame = {
     {
       columns: [
         {
-          col: 12,
+          col: 6,
           field: physicalStressCategory,
           rows: [
             {
@@ -401,7 +403,7 @@ export const FateCore: IGame = {
           ]
         },
         {
-          col: 12,
+          col: 6,
           field: mentalStressCategory,
           rows: [
             {
@@ -433,37 +435,3 @@ export const FateCore: IGame = {
     { tab: "Guide", columns: [{ col: 6, field: guide }] }
   ]
 };
-
-export const FateAcceleratedStress = [stress1, stress2, stress3];
-export const FateCorePhysicalStress = [
-  physicalStress1,
-  physicalStress2,
-  physicalStress3,
-  physicalStress4
-];
-export const FateCoreMentalStress = [
-  mentalStress1,
-  mentalStress2,
-  mentalStress3,
-  mentalStress4
-];
-export const FateAcceleratedConsequences = [
-  mildConsequence,
-  moderateConsequence,
-  severeConsequence
-];
-export const FateCoreConsequences = [
-  mildConsequence,
-  mildConsequence2,
-  moderateConsequence,
-  severeConsequence
-];
-
-export const FateAcceleratedApproaches = [
-  careful,
-  clever,
-  forceful,
-  flashy,
-  quick,
-  sneaky
-];

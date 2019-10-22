@@ -77,13 +77,7 @@ export function CharacterFields(props: {
     {
       return rows.map((row, index) => {
         return (
-          <div
-            className="row"
-            key={index}
-            style={{
-              marginBottom: "1rem"
-            }}
-          >
+          <div className="row" key={index}>
             {row.columns.map((column, index) => {
               const shouldRenderSubRows =
                 !!column.rows && column.rows.length > 0;
