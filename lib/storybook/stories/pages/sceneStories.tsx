@@ -315,12 +315,12 @@ function getFateCoreCharacter(id: string): ICharacter {
     name: "Zuko",
     aspect1: "Prince of the Fire Nation",
     aspect2: "All for my honor",
-    careful: "1",
-    clever: "0",
-    forceful: "3",
-    flashy: "2",
-    quick: "2",
-    sneaky: "1"
+    approachCareful: "1",
+    approachClever: "0",
+    approachForceful: "3",
+    approachFlashy: "2",
+    approachQuick: "2",
+    approachSneaky: "1"
   };
   return character;
 }

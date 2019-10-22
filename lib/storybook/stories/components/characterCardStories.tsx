@@ -48,12 +48,15 @@ function getFaeCharacter(): ICharacter {
     name: "Zuko",
     aspect1: "Prince of the Fire Nation",
     aspect2: "All for my honor",
-    careful: "1",
-    clever: "0",
-    forceful: "3",
-    flashy: "2",
-    quick: "2",
-    sneaky: "1"
+    aspect3: "...",
+    aspect4: "...",
+    aspect5: "...",
+    approachCareful: "1",
+    approachClever: "0",
+    approachForceful: "3",
+    approachFlashy: "2",
+    approachQuick: "2",
+    approachSneaky: "1"
   };
   return character;
 }
@@ -68,7 +71,14 @@ function getFateCoreCharacter(): ICharacter {
     name: "Zuko",
     aspect1: "Prince of the Fire Nation",
     aspect2: "All for my honor",
-    skillSuperb: ".."
+    aspect3: "...",
+    aspect4: "...",
+    aspect5: "...",
+    skillSuperb: "",
+    skillGreat: "Drive",
+    skillGood: "Fight, Physique",
+    skillFair: "Rapport, Will",
+    skillAverage: "Investigate, Contacts, Burglary, Notice"
   };
   return character;
 }

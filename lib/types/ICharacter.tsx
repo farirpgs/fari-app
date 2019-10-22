@@ -12,13 +12,13 @@ export type ICharacter = {
 } & (IFateAcceleratedCharacter | IFateCoreCharacter);
 
 type IFateAcceleratedCharacter = {
-  careful?: string;
-  clever?: string;
+  approachCareful?: string;
+  approachClever?: string;
   aspect3?: string;
-  forceful?: string;
-  flashy?: string;
-  quick?: string;
-  sneaky?: string;
+  approachForceful?: string;
+  approachFlashy?: string;
+  approachQuick?: string;
+  approachSneaky?: string;
 };
 
 type IFateCoreCharacter = {

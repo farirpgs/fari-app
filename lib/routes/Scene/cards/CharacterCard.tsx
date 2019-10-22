@@ -15,7 +15,9 @@ import {
   FateCorePhysicalStress,
   FateCoreMentalStress,
   FateAcceleratedConsequences,
-  FateAcceleratedApproaches
+  FateAcceleratedApproaches,
+  FateCoreSkills,
+  FateCore
 } from "../../../games/Fate";
 import { green } from "@material-ui/core/colors";
 import _ from "lodash";
@@ -118,21 +120,36 @@ export const CharacterCard: React.FC<{
         }}
       >
         <div className="row center-xs middle-xs">
-          {FateAcceleratedApproaches.map(approach => {
-            return (
-              <div
-                className="col-xs-2"
-                style={{
-                  alignItems: "baseline"
-                }}
-              >
-                <div style={{ fontSize: "2em" }}>
-                  {character[approach.slug]}
+          {character.game === FateAccelerated.slug &&
+            FateAcceleratedApproaches.map(approach => {
+              return (
+                <div
+                  className="col-xs-4 col-sm-2"
+                  style={{
+                    alignItems: "baseline"
+                  }}
+                >
+                  <div style={{ fontSize: "2em" }}>
+                    {character[approach.slug] || "0"}
+                  </div>
+                  <div>{approach.label}</div>
                 </div>
-                <div>{approach.label}</div>
-              </div>
-            );
-          })}
+              );
+            })}
+          {character.game === FateCore.slug &&
+            FateCoreSkills.map(skill => {
+              return (
+                <div
+                  className="col-xs-6"
+                  style={{
+                    alignItems: "baseline"
+                  }}
+                >
+                  <div style={{ fontWeight: "bold" }}>{skill.label}</div>
+                  <div>{character[skill.slug] || "..."}</div>
+                </div>
+              );
+            })}
         </div>
       </div>
     );
@@ -140,7 +157,7 @@ export const CharacterCard: React.FC<{
 
   function renderOtherAspects() {
     return (
-      <>
+      <div className="margin-1">
         {character["aspect3"] && (
           <div>
             <b>Aspect #3:</b> {character["aspect3"]}
@@ -156,7 +173,7 @@ export const CharacterCard: React.FC<{
             <b>Aspect #5:</b> {character["aspect5"]}
           </div>
         )}
-      </>
+      </div>
     );
   }
 

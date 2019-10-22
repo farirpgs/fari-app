@@ -68,11 +68,12 @@ function makeApproach(label: string, slug: string): IField {
   };
 }
 
-function makeSkill(label: string, slug: string): IField {
+function makeSkill(label: string, slug: string, helper: string): IField {
   return {
     label,
     slug,
-    type: FieldType.TextField
+    type: FieldType.TextField,
+    helper
   };
 }
 
@@ -240,13 +241,29 @@ export const FateCoreConsequences = [
   severeConsequence
 ];
 
+export const Aspects = [
+  makeAspect("High Concept", "aspect1"),
+  makeAspect("Trouble", "aspect2"),
+  makeAspect("Aspect #3", "aspect3"),
+  makeAspect("Aspect #4", "aspect4"),
+  makeAspect("Aspect #5", "aspect5")
+];
+
 export const FateAcceleratedApproaches = [
-  makeApproach("Careful", "careful"),
-  makeApproach("Clever", "clever"),
-  makeApproach("Forceful", "forceful"),
-  makeApproach("Flashy", "flashy"),
-  makeApproach("Quick", "quick"),
-  makeApproach("Sneaky", "sneaky")
+  makeApproach("Careful", "approachCareful"),
+  makeApproach("Clever", "approachClever"),
+  makeApproach("Forceful", "approachForceful"),
+  makeApproach("Flashy", "approachFlashy"),
+  makeApproach("Quick", "approachQuick"),
+  makeApproach("Sneaky", "approachSneaky")
+];
+
+export const FateCoreSkills = [
+  makeSkill("Superb (+5)", "skillSuperb", ""),
+  makeSkill("Great (+4)", "skillGreat", "You should have 1 of those"),
+  makeSkill("Good (+3)", "skillGood", "You should have 2 of those"),
+  makeSkill("Fair (+2)", "skillFair", "You should have 3 of those"),
+  makeSkill("Average (+1)", "skillAverage", "You should have 4 of those")
 ];
 
 export const FateAccelerated: IGame = {
@@ -267,21 +284,11 @@ export const FateAccelerated: IGame = {
           col: 6,
           rows: [
             { columns: [{ col: 12, field: aspectCategory }] },
-            {
-              columns: [
-                { col: 12, field: makeAspect("High Concept", "aspect1") }
-              ]
-            },
-            { columns: [{ col: 12, field: makeAspect("Trouble", "aspect2") }] },
-            {
-              columns: [{ col: 12, field: makeAspect("Aspect #3", "aspect3") }]
-            },
-            {
-              columns: [{ col: 12, field: makeAspect("Aspect #4", "aspect4") }]
-            },
-            {
-              columns: [{ col: 12, field: makeAspect("Aspect #5", "aspect5") }]
-            }
+            { columns: [{ col: 12, field: Aspects[0] }] },
+            { columns: [{ col: 12, field: Aspects[1] }] },
+            { columns: [{ col: 12, field: Aspects[2] }] },
+            { columns: [{ col: 12, field: Aspects[3] }] },
+            { columns: [{ col: 12, field: Aspects[4] }] }
           ]
         },
         {
@@ -351,21 +358,11 @@ export const FateCore: IGame = {
           col: 6,
           rows: [
             { columns: [{ col: 12, field: aspectCategory }] },
-            {
-              columns: [
-                { col: 12, field: makeAspect("High Concept", "aspect1") }
-              ]
-            },
-            { columns: [{ col: 12, field: makeAspect("Trouble", "aspect2") }] },
-            {
-              columns: [{ col: 12, field: makeAspect("Aspect #3", "aspect3") }]
-            },
-            {
-              columns: [{ col: 12, field: makeAspect("Aspect #4", "aspect4") }]
-            },
-            {
-              columns: [{ col: 12, field: makeAspect("Aspect #5", "aspect5") }]
-            }
+            { columns: [{ col: 12, field: Aspects[0] }] },
+            { columns: [{ col: 12, field: Aspects[1] }] },
+            { columns: [{ col: 12, field: Aspects[2] }] },
+            { columns: [{ col: 12, field: Aspects[3] }] },
+            { columns: [{ col: 12, field: Aspects[4] }] }
           ]
         },
         {
@@ -374,11 +371,11 @@ export const FateCore: IGame = {
             {
               columns: [
                 { col: 12, field: skillsCategory },
-                { col: 12, field: makeSkill("Super (+5)", "super") },
-                { col: 12, field: makeSkill("Great (+4) 1", "great") },
-                { col: 12, field: makeSkill("Good (+3) 2", "good") },
-                { col: 12, field: makeSkill("Fair (+2) 3", "fair") },
-                { col: 12, field: makeSkill("Average (+1) 4", "average") }
+                { col: 12, field: FateCoreSkills[0] },
+                { col: 12, field: FateCoreSkills[1] },
+                { col: 12, field: FateCoreSkills[2] },
+                { col: 12, field: FateCoreSkills[3] },
+                { col: 12, field: FateCoreSkills[4] }
               ]
             }
           ]

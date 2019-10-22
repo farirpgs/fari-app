@@ -86,7 +86,7 @@ export function CharacterFields(props: {
               return (
                 <div
                   key={index}
-                  className={`col-md-${column.col} col-md-offset-${column.offet} col-xs-12`}
+                  className={`col-md-${column.col} col-md-offset-${column.offet} col-xs-12 margin-1`}
                 >
                   {shouldRenderField && renderField(column.field)}
                   {shouldRenderSubRows && renderRows(column.rows)}
