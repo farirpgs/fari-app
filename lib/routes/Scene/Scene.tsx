@@ -31,11 +31,12 @@ export const Scene: React.FC<{
   const aspectsManager = useAspects(setScene);
   const badGuyManager = useBadGuys(setScene);
 
-  const isGM = !peerIdFromParams;
-
   async function loadScene(sceneId: string) {
     if (sceneId) {
-      setIsLoading(true);
+      if (!scene._id) {
+        setIsLoading(true);
+      }
+
       const result = await new SceneService().get(sceneId);
 
       if (!result) {
@@ -69,9 +70,7 @@ export const Scene: React.FC<{
   }
 
   useEffect(() => {
-    if (isGM) {
-      loadScene(sceneId);
-    }
+    loadScene(sceneId);
   }, [sceneId]);
 
   return (

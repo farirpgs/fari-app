@@ -16,7 +16,9 @@ export const PlayCharacter = props => {
   const [isLoading, setIsLoading] = useState(true);
 
   const load = async (characterId: string) => {
-    setIsLoading(true);
+    if (!character._id) {
+      setIsLoading(true);
+    }
     const result = await new CharacterService().get(characterId);
     setCharacter(result);
     setIsLoading(false);
@@ -24,7 +26,6 @@ export const PlayCharacter = props => {
 
   async function save() {
     await new CharacterService().update(character);
-
     await load(characterId);
     setCharacterUpdatedSnackBar({ visible: true });
   }
