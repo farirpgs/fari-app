@@ -2,9 +2,9 @@
 
 ## Features
 
-- [ ] Share peer session in singleton
+- [x] Share peer session in singleton
 - [x] Characters stats in card (approaches and skills)
-- [ ] FATE CORE Characters stats in card (approaches and skills)
+- [x] FATE CORE Characters stats in card (approaches and skills)
 - [ ] FATE Game Creation (Peer ???)
 - [x] Bigger UI
 - [ ] Export JSON
