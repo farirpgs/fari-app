@@ -263,7 +263,7 @@ export const CharacterCard: React.FC<{
                       label={field.label}
                       disabled={props.readOnly}
                       margin="normal"
-                      variant="outlined"
+                      variant="filled"
                       style={{
                         width: "100%"
                       }}
