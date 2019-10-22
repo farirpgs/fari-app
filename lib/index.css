@@ -76,3 +76,7 @@ h2,
 .margin-5 {
   margin-bottom: 5rem !important;
 }
+
+a {
+  text-decoration: none;
+}
