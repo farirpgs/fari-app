@@ -9,7 +9,7 @@ export function NotFoundRoute(props) {
         <Banner variant="warning" paper>
           <div className="h2">There is no war in Ba Sing Se</div>
 
-          <p>The page you are trying to access doesn't exist.</p>
+          <p>The page you are trying to access doesn&apos;t exist.</p>
           <Divider className="margin-1"></Divider>
           <p>Use the bottom menu to get out of the woods</p>
         </Banner>

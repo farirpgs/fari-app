@@ -2,7 +2,6 @@ import { ICharacter } from "../../../types/ICharacter";
 import { useState } from "react";
 import { CharacterService } from "../../../services/character-service/CharacterService";
 import _ from "lodash";
-import { IPeerHostManager } from "./usePeerHost";
 import { IPeerConnectionManager } from "./usePeerConnection";
 
 export type ICharactersManager = ReturnType<

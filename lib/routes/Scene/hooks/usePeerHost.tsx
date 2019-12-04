@@ -1,7 +1,6 @@
 import Peer from "peerjs";
-import { useEffect, useRef, useState, useDebugValue } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IPeerAction } from "../types/IPeerAction";
-import { getSafe } from "./getSafe";
 
 export type IPeerHostManager = ReturnType<ReturnType<typeof makeUsePeerHost>>;
 
@@ -13,9 +12,7 @@ function makeUsePeerHost() {
     handleDataReceiveFromPlayer: (action: IPeerAction) => void,
     options: { disabled: boolean }
   ) {
-    const [peerId, setPeerId] = useState<string>(
-      getSafe(() => peerSingleton.id)
-    );
+    const [peerId, setPeerId] = useState<string>(peerSingleton?.id);
     const [connections, setConnections] = useState<Array<Peer.DataConnection>>(
       connectionsSingleton
     );

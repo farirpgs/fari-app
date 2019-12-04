@@ -314,9 +314,9 @@ export const FateAccelerated: IGame = {
           rows: [
             {
               columns: [
-                { col: 4, field: stress1 },
-                { col: 4, field: stress2 },
-                { col: 4, field: stress3 }
+                { col: "initial", field: stress1 },
+                { col: "initial", field: stress2 },
+                { col: "initial", field: stress3 }
               ]
             }
           ]
@@ -382,7 +382,12 @@ export const FateCore: IGame = {
         }
       ]
     },
-    { columns: [{ col: 6, field: extras }, { col: 6, field: stunts }] },
+    {
+      columns: [
+        { col: 6, field: extras },
+        { col: 6, field: stunts }
+      ]
+    },
     {
       columns: [
         {
@@ -391,10 +396,10 @@ export const FateCore: IGame = {
           rows: [
             {
               columns: [
-                { col: 3, field: physicalStress1 },
-                { col: 3, field: physicalStress2 },
-                { col: 3, field: physicalStress3 },
-                { col: 3, field: physicalStress4 }
+                { col: "initial", field: physicalStress1 },
+                { col: "initial", field: physicalStress2 },
+                { col: "initial", field: physicalStress3 },
+                { col: "initial", field: physicalStress4 }
               ]
             }
           ]
@@ -405,10 +410,10 @@ export const FateCore: IGame = {
           rows: [
             {
               columns: [
-                { col: 3, field: mentalStress1 },
-                { col: 3, field: mentalStress2 },
-                { col: 3, field: mentalStress3 },
-                { col: 3, field: mentalStress4 }
+                { col: "initial", field: mentalStress1 },
+                { col: "initial", field: mentalStress2 },
+                { col: "initial", field: mentalStress3 },
+                { col: "initial", field: mentalStress4 }
               ]
             }
           ]

@@ -121,9 +121,10 @@ export const CharacterCard: React.FC<{
       >
         <div className="row center-xs middle-xs">
           {character.game === FateAccelerated.slug &&
-            FateAcceleratedApproaches.map(approach => {
+            FateAcceleratedApproaches.map((approach, index) => {
               return (
                 <div
+                  key={index}
                   className="col-xs-4 col-sm-2"
                   style={{
                     alignItems: "baseline"
@@ -137,9 +138,10 @@ export const CharacterCard: React.FC<{
               );
             })}
           {character.game === FateCore.slug &&
-            FateCoreSkills.map(skill => {
+            FateCoreSkills.map((skill, index) => {
               return (
                 <div
+                  key={index}
                   className="col-xs-6"
                   style={{
                     alignItems: "baseline"

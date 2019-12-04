@@ -57,7 +57,7 @@ export const Characters = props => {
       isLoading={isLoading}
       h1={`Characters - ${game.name}`}
       backFunction={() => {
-        routerHistory.push(`/games`);
+        routerHistory.push("/games");
       }}
     >
       <Snackbar
@@ -71,7 +71,7 @@ export const Characters = props => {
       {!hasItems && (
         <Banner variant="info">
           <div>
-            You didn't create any characters yet.
+            You didn&apos;t create any characters yet.
             <br />
             Click on button below to add a get started!
           </div>

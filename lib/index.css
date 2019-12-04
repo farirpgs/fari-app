@@ -80,3 +80,7 @@ h2,
 a {
   text-decoration: none;
 }
+
+.col-initial {
+  flex: initial;
+}

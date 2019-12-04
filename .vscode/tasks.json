@@ -10,10 +10,7 @@
         "kind": "build",
         "isDefault": true
       },
-      "problemMatcher": [
-        "$tsc",
-        "$tslint5"
-      ]
+      "problemMatcher": ["$tsc", "$eslint-stylish"]
     }
   ]
 }

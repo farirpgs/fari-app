@@ -47,13 +47,13 @@ export const CharacterSelectDialogPure: React.FC<{
         {!props.isLoading && props.characters.length === 0 && (
           <Banner variant="info" paper={false}>
             <div className="margin-2">
-              You didn't create any characters yet.
+              You didn&apos;t create any characters yet.
               <br />
               Click on button below to add a get started!
             </div>
             <Fab
               onClick={() => {
-                routerHistory.push(`/games`);
+                routerHistory.push("/games");
               }}
               variant="extended"
               color="default"

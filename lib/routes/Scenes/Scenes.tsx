@@ -120,7 +120,7 @@ export const Scenes: React.FC<{}> = props => {
       {!hasItems && (
         <Banner variant="info">
           <div>
-            You didn't create any scenes yet.
+            You didn&apos;t create any scenes yet.
             <br />
             Click on button below to add a get started!
           </div>

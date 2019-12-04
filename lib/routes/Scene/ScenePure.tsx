@@ -56,7 +56,7 @@ export const ScenePure: React.FC<{
       isLoading={isLoading}
       h1={sceneName}
       backFunction={() => {
-        routerHistory.push(`/scenes`);
+        routerHistory.push("/scenes");
       }}
       appBarActions={
         <IconButton
@@ -122,7 +122,7 @@ export const ScenePure: React.FC<{
       isSceneNotFound && (
         <Banner variant="warning">
           <div>
-            The scene you are trying to access doesn't exists.
+            The scene you are trying to access doesn&apos;t exists.
             <br />
             Are you sure you have the right url ?
           </div>

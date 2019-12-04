@@ -224,6 +224,7 @@ function getCharacterServiceMock(): CharacterService {
   return {
     add: jest.fn(),
     get: jest.fn(),
+    getAll: jest.fn(),
     getAllByGame: jest.fn(),
     remove: jest.fn(),
     update: jest.fn()

@@ -7,7 +7,7 @@ export interface IGame {
 }
 
 export interface IColumn {
-  col: number;
+  col: number | "initial";
   offet?: number;
   field?: IField;
   rows?: Array<IRow>;

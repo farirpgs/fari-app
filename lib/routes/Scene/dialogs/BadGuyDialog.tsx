@@ -52,10 +52,12 @@ export const BadGuyDialog: React.FC<{
       aria-describedby="alert-dialog-description"
       fullWidth
     >
-      <DialogTitle id="alert-dialog-title">Who's the bad guy ?</DialogTitle>
+      <DialogTitle id="alert-dialog-title">
+        Who&apos;s the bad guy ?
+      </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Let's create a bad guy
+          Let&apos;s create a bad guy
         </DialogContentText>
 
         <TextField
