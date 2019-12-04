@@ -83,11 +83,18 @@ export function CharacterFields(props: {
                 !!column.rows && column.rows.length > 0;
 
               const shouldRenderField = !!column.field;
+              let className = "margin-1 ";
+              className +=
+                column.offet !== undefined
+                  ? `col-md-offset-${column.offet} `
+                  : "";
+              className +=
+                column.col === "initial"
+                  ? `col-xs col-initial `
+                  : "col-xs-12 col-md-${column.col} ";
+
               return (
-                <div
-                  key={index}
-                  className={`col-md-${column.col} col-md-offset-${column.offet} col-xs-12 margin-1`}
-                >
+                <div key={index} className={className}>
                   {shouldRenderField && renderField(column.field)}
                   {shouldRenderSubRows && renderRows(column.rows)}
                 </div>
