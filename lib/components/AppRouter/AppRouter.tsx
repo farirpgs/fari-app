@@ -14,8 +14,7 @@ import { Session } from "../../routes/Session/Session";
 
 export const AppRouter = () => (
   <Switch>
-    <Route exact path={"/"} component={Games} />
-    <Route exact path={"/home"} component={Home} />
+    <Route exact path={"/"} component={Home} />
     <Route exact path={"/games"} component={Games} />
     <Route exact path={"/game/:gameSlug"} component={Characters} />
     <Route exact path={"/game/:gameSlug/create"} component={CreateCharacter} />

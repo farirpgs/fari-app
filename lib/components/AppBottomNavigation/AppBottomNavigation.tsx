@@ -5,6 +5,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import PersonIcon from "@material-ui/icons/Person";
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { _useStore, useStoreContext } from "../../context/store";
 
 const _AppBottomNavigation: React.FC<{
   location: { pathname: string };
@@ -24,7 +25,11 @@ const _AppBottomNavigation: React.FC<{
       return setNav(0);
     }
   }, [location.pathname]);
+  const store = useStoreContext();
 
+  if (store.location.pathname === "/") {
+    return null;
+  }
   return (
     <BottomNavigation
       value={nav}

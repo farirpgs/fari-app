@@ -53,7 +53,7 @@ h2,
   margin-left: auto;
   margin-right: auto;
   padding-top: 6.25rem; /* Top Nav size 4.25; + 2*/
-  margin-bottom: 112px; /* Bottom Nav Size * 2*/
+  padding-bottom: 56px; /* Bottom Nav Size */
   min-height: calc(100vh - 56px);
   display: flex;
   position: relative;

@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
 import React from "react";
 import { usePWA } from "../../hooks/usePWA";
@@ -55,6 +56,18 @@ export const MenuDrawer: React.FC<{
             <ListItemText primary={"Install"} />
           </ListItem>
         )}
+        <ListItem
+          button
+          onClick={() => {
+            props.onClose();
+            routerHistory.push("/");
+          }}
+        >
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Home"} />
+        </ListItem>
         <ListItem
           button
           onClick={() => {

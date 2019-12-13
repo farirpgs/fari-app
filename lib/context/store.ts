@@ -15,6 +15,7 @@ export function _useStore() {
   const [liveSessions, setLiveSessions] = useState<{
     [url: string]: ILiveSession;
   }>({});
+  const [pathname, setPathname] = useState("");
 
   function addLiveSession(session: {
     label: string;
@@ -31,8 +32,13 @@ export function _useStore() {
       };
     });
   }
+  console.log("path", pathname);
 
   return {
+    location: {
+      pathname,
+      setPathname
+    },
     session: {
       liveSessions,
       addLiveSession
