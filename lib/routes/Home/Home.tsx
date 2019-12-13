@@ -8,12 +8,6 @@ import { makeStyles, Paper } from "@material-ui/core";
 import { AppLink } from "../../components/AppLink/AppLink";
 
 const useStyle = makeStyles({
-  logos: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    flexWrap: "wrap"
-  },
   logo: {
     display: "flex",
     flexDirection: "column",
@@ -23,17 +17,36 @@ const useStyle = makeStyles({
     fontSize: "1.2rem"
   },
   icon: {
-    width: "6rem",
-    height: "6rem"
+    width: "4rem",
+    height: "4rem"
   }
 });
 
 export const Home: React.FC<{}> = props => {
-  const classes = useStyle(props);
   return (
     <Page>
-      <div className={classes.logos}>
-        <Paper className="margin-2">
+      <h1
+        style={{
+          textAlign: "center",
+          background: "#3f50b5",
+          color: "#fff",
+          margin: "-2rem -2rem 2rem -2rem",
+          padding: "2rem"
+        }}
+      >
+        Fari
+      </h1>
+      <HomeLogos></HomeLogos>
+    </Page>
+  );
+};
+
+export const HomeLogos: React.FC<{}> = props => {
+  const classes = useStyle(props);
+  return (
+    <div className="row around-xs">
+      <div className="col-xs-4 col-md-4 margin-2">
+        <Paper>
           <AppLink to="/games">
             <div className={classes.logo}>
               <div>
@@ -43,7 +56,9 @@ export const Home: React.FC<{}> = props => {
             </div>
           </AppLink>
         </Paper>
-        <Paper className="margin-2">
+      </div>
+      <div className="col-xs-4 col-md-4 margin-2">
+        <Paper>
           <AppLink to="/scenes">
             <div className={classes.logo}>
               <div>
@@ -53,7 +68,9 @@ export const Home: React.FC<{}> = props => {
             </div>
           </AppLink>
         </Paper>
-        <Paper className="margin-2">
+      </div>
+      <div className="col-xs-4 col-md-4 margin-2">
+        <Paper>
           <AppLink to="/dice">
             <div className={classes.logo}>
               <div>
@@ -64,6 +81,6 @@ export const Home: React.FC<{}> = props => {
           </AppLink>
         </Paper>
       </div>
-    </Page>
+    </div>
   );
 };

@@ -1,11 +1,12 @@
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import CropSquareIcon from "@material-ui/icons/CropSquare";
-import LayersIcon from "@material-ui/icons/Layers";
+
+import LandscapeIcon from "@material-ui/icons/Landscape";
 import PersonIcon from "@material-ui/icons/Person";
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { _useStore, useStoreContext } from "../../context/store";
+import CasinoIcon from "@material-ui/icons/Casino";
 
 const _AppBottomNavigation: React.FC<{
   location: { pathname: string };
@@ -64,13 +65,13 @@ const _AppBottomNavigation: React.FC<{
         label="Scenes"
         component={Link}
         to="/scenes"
-        icon={<LayersIcon />}
+        icon={<LandscapeIcon />}
       />
       <BottomNavigationAction
         label="Dice"
         component={Link}
         to="/dice"
-        icon={<CropSquareIcon />}
+        icon={<CasinoIcon />}
       />
     </BottomNavigation>
   );
