@@ -11,23 +11,27 @@ import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";
 import { AppTheme } from "./theme";
 import { _useStore, StoreContext } from "./context/store";
+import { SentryService } from "./services/sentry/SentryService";
+import { ExampleBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 
 function App() {
   const store = _useStore();
-
   return (
-    <ThemeProvider theme={AppTheme}>
-      <StoreContext.Provider value={store}>
-        <BrowserRouter>
-          <ScrollToTop />
-          <CssBaseline />
-          <History />
-          <AppRouter />
-          <AppBottomNavigation />
-        </BrowserRouter>
-      </StoreContext.Provider>
-    </ThemeProvider>
+    <ExampleBoundary>
+      <ThemeProvider theme={AppTheme}>
+        <StoreContext.Provider value={store}>
+          <BrowserRouter>
+            <ScrollToTop />
+            <CssBaseline />
+            <History />
+            <AppRouter />
+            <AppBottomNavigation />
+          </BrowserRouter>
+        </StoreContext.Provider>
+      </ThemeProvider>
+    </ExampleBoundary>
   );
 }
 
+SentryService.initializeSentry();
 ReactDOM.render(<App />, document.getElementById("root"));
