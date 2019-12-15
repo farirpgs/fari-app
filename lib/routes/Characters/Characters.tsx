@@ -73,7 +73,7 @@ export const Characters = props => {
           <div>
             You didn&apos;t create any characters yet.
             <br />
-            Click on button below to add a get started!
+            Click on the button to get started!
           </div>
         </Banner>
       )}

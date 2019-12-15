@@ -122,7 +122,7 @@ export const Scenes: React.FC<{}> = props => {
           <div>
             You didn&apos;t create any scenes yet.
             <br />
-            Click on button below to add a get started!
+            Click on the button to get started!
           </div>
         </Banner>
       )}
