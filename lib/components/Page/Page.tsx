@@ -58,7 +58,7 @@ export const Page: React.FC<{
           textAlign: "center",
           background: "#3f50b5",
           color: "#fff",
-          padding: "2rem"
+          padding: "1.5rem"
         }}
       >
         {props.banner}
