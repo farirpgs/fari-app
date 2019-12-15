@@ -144,7 +144,7 @@ export const ScenePure: React.FC<{
               style={{
                 width: "100%"
               }}
-              helperText={`Pro Tip: Use "-", "/" or "|" to group your scenes in a campaign. E.g. "Book 1 / The Boy in the Iceberg"`}
+              helperText={`Protip: Use "-", "/" or "|" to group your scenes in a campaign. E.g. "Book 1 / The Boy in the Iceberg"`}
               onChange={e => {
                 setScene({
                   ...scene,
