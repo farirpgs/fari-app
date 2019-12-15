@@ -17,6 +17,7 @@ export const Page: React.FC<{
   h1?: JSX.Element | string;
   notFound?: JSX.Element;
   appBarActions?: JSX.Element;
+  banner?: JSX.Element;
   backFunction?: () => void;
 }> = props => {
   const {
@@ -47,17 +48,39 @@ export const Page: React.FC<{
     </>
   );
 
+  function renderBanner() {
+    if (!props.banner) {
+      return null;
+    }
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          background: "#3f50b5",
+          color: "#fff",
+          padding: "2rem"
+        }}
+      >
+        {props.banner}
+      </div>
+    );
+  }
+
   function renderContent() {
     return (
       <div
-        className="route-box"
         onClick={() => {
           setIsDrawerOpened(false);
         }}
       >
         <Fade in timeout={250}>
-          <div style={{ width: "100%" }}>
-            {!!notFound ? notFound : children}
+          <div className="route-box">
+            {renderBanner()}
+            {!!notFound ? (
+              notFound
+            ) : (
+              <div className="route-box-content">{children}</div>
+            )}
           </div>
         </Fade>
       </div>

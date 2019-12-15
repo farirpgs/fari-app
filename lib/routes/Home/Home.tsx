@@ -14,7 +14,12 @@ const useStyle = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     padding: "2rem",
-    fontSize: "1.2rem"
+    fontSize: "1.2rem",
+    fontWeight: "bold",
+    transition: "background-color 0.1s ease",
+    "&:hover": {
+      backgroundColor: "#eaedff"
+    }
   },
   icon: {
     width: "4rem",
@@ -24,18 +29,14 @@ const useStyle = makeStyles({
 
 export const Home: React.FC<{}> = props => {
   return (
-    <Page>
-      <h1
-        style={{
-          textAlign: "center",
-          background: "#3f50b5",
-          color: "#fff",
-          margin: "-2rem -2rem 2rem -2rem",
-          padding: "2rem"
-        }}
-      >
-        Fari
-      </h1>
+    <Page
+      banner={
+        <div>
+          <h1 style={{ margin: "0 0 1rem 0" }}>Fari</h1>
+          <h2>The Role-Playing Game Companion</h2>
+        </div>
+      }
+    >
       <HomeLogos></HomeLogos>
     </Page>
   );
@@ -45,7 +46,7 @@ export const HomeLogos: React.FC<{}> = props => {
   const classes = useStyle(props);
   return (
     <div className="row around-xs">
-      <div className="col-xs-4 col-md-4 margin-2">
+      <div className="col-xs-6 col-sm-4 margin-2">
         <Paper>
           <AppLink to="/games">
             <div className={classes.logo}>
@@ -57,7 +58,7 @@ export const HomeLogos: React.FC<{}> = props => {
           </AppLink>
         </Paper>
       </div>
-      <div className="col-xs-4 col-md-4 margin-2">
+      <div className="col-xs-6 col-sm-4 margin-2">
         <Paper>
           <AppLink to="/scenes">
             <div className={classes.logo}>
@@ -69,7 +70,7 @@ export const HomeLogos: React.FC<{}> = props => {
           </AppLink>
         </Paper>
       </div>
-      <div className="col-xs-4 col-md-4 margin-2">
+      <div className="col-xs-6 col-sm-4 margin-2">
         <Paper>
           <AppLink to="/dice">
             <div className={classes.logo}>

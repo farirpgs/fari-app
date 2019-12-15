@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import HomeIcon from "@material-ui/icons/Home";
@@ -67,6 +68,18 @@ export const MenuDrawer: React.FC<{
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary={"Home"} />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => {
+            props.onClose();
+            window.open("https://ko-fi.com/rpdeshaies");
+          }}
+        >
+          <ListItemIcon>
+            <LocalCafeIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Support Fari"} />
         </ListItem>
         <ListItem
           button

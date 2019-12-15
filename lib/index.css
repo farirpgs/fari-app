@@ -47,18 +47,21 @@ h2,
 }
 
 .route-box {
-  padding: 0 1rem;
   height: 100%;
+  padding-top: 4.25rem; /* Top Nav size 4.25; + 2*/
+  padding-bottom: 56px; /* Bottom Nav Size */
+  min-height: calc(100vh - 56px);
+  position: relative;
+  flex: 1 0 auto;
+}
+
+.route-box-content {
   max-width: 1024px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 6.25rem; /* Top Nav size 4.25; + 2*/
-  padding-bottom: 56px; /* Bottom Nav Size */
-  min-height: calc(100vh - 56px);
-  display: flex;
-  position: relative;
-  flex: 1 0 auto;
+  margin-top: 2rem;
   width: 100%;
+  padding: 0 1rem;
 }
 
 .margin-1 {
