@@ -181,7 +181,7 @@ export const Scenes: React.FC<{}> = props => {
                               </Avatar>
                             </ListItemAvatar>
                             <ListItemText
-                              primary={scene.name.trim()}
+                              primary={scene.name?.trim() ?? ""}
                               secondary={truncatedDescription}
                             />
                             <ListItemSecondaryAction>
