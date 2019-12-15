@@ -39,13 +39,13 @@ const aspectCategory: IField = {
 
 const approachCategory: IField = {
   label: "Approaches",
-  slug: "approaches",
+  slug: "approachesCategory",
   type: FieldType.Category
 };
 
 const skillsCategory: IField = {
   label: "Skills",
-  slug: "skills",
+  slug: "skillsCategory",
   type: FieldType.Category
 };
 
