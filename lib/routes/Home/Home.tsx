@@ -77,7 +77,7 @@ export const HomeLogos: React.FC<{}> = props => {
               <div>
                 <CasinoIcon className={classes.icon}></CasinoIcon>
               </div>
-              <div>Dices</div>
+              <div>Dice</div>
             </div>
           </AppLink>
         </Paper>
