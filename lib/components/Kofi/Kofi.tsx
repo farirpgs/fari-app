@@ -3,7 +3,11 @@ import React from "react";
 export const Kofi: React.FC<{}> = props => {
   return (
     <>
-      <a href="https://ko-fi.com/B0B4AHLJ" target="_blank">
+      <a
+        href="https://ko-fi.com/B0B4AHLJ"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           height="36"
           style={{ border: "0px", height: "36px" }}
