@@ -3,7 +3,6 @@
 ## Features
 
 - [ ] Keeping character Ids in Sync if change tab
-- [ ] Scrollable tabs
 
 ## BUGS
 
