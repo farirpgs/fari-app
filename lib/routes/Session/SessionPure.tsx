@@ -113,7 +113,8 @@ export const SessionPure: React.FC<{
         indicatorColor="primary"
         className="margin-2"
         textColor="primary"
-        variant="fullWidth"
+        variant="scrollable"
+        scrollButtons="auto"
         style={{
           background: "rgba(64, 81, 181, 0.16)"
         }}

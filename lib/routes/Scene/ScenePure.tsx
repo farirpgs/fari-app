@@ -76,7 +76,6 @@ export const ScenePure: React.FC<{
         onClose={badGuyManager.onBadGuyDialogClose}
         badGuy={badGuyManager.badGuyToModify}
       ></BadGuyDialog>
-
       {renderStartSessionCTA()}
 
       <Tabs
@@ -84,7 +83,8 @@ export const ScenePure: React.FC<{
         indicatorColor="primary"
         className="margin-2"
         textColor="primary"
-        variant="fullWidth"
+        variant="scrollable"
+        scrollButtons="auto"
         style={{
           background: "rgba(64, 81, 181, 0.16)"
         }}
@@ -151,7 +151,6 @@ export const ScenePure: React.FC<{
                 });
               }}
             />
-            )
           </div>
         </div>
       </Box>
