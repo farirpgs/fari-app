@@ -338,13 +338,13 @@ export const SessionPure: React.FC<{
                 disabled={isPlayer || !hasPeerId}
               >
                 <ShareIcon style={{ marginRight: "1rem" }}></ShareIcon>
-                <span>Player Link</span>
+                <span>Game Session Link</span>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <div style={{ width: "100%" }}>
                   <div className="row">
                     <div className="col-xs">
-                      <span>Share the following link to the players</span>
+                      <span>Share the following link with the players</span>
                       <LinkShare link={playerLink}></LinkShare>
                     </div>
                   </div>
