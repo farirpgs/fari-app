@@ -2,6 +2,7 @@ import { IScene } from "../../../types/IScene";
 import { IBadGuy } from "../../../types/IBadGuy";
 import uuid from "uuid/v4";
 import { useState } from "react";
+import { googleAnalyticsService } from "../../../services/injections";
 
 export type IBadGuysManager = ReturnType<typeof useBadGuys>;
 
@@ -18,6 +19,10 @@ export function useBadGuys(
         badGuys: [...scene.badGuys, { ...updatedBadGuy, id: uuid() }]
       };
     });
+    googleAnalyticsService.sendEvent({
+      category: "SceneBadGuy",
+      action: "Create"
+    });
   }
 
   function updateBadGuyInScene(updatedBadGuy: IBadGuy) {
@@ -32,6 +37,10 @@ export function useBadGuys(
         })
       };
     });
+    googleAnalyticsService.sendEvent({
+      category: "SceneBadGuy",
+      action: "Update"
+    });
   }
 
   function removeBadGuyFromScene(updatedBadGuy: IBadGuy) {
@@ -42,6 +51,10 @@ export function useBadGuys(
           return badGuy.id !== updatedBadGuy.id;
         })
       };
+    });
+    googleAnalyticsService.sendEvent({
+      category: "SceneBadGuy",
+      action: "Delete"
     });
   }
 

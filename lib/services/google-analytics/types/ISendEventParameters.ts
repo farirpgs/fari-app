@@ -7,6 +7,7 @@ type ICategories =
   | "SceneAspect"
   | "SceneCharacter"
   | "SceneBadGuy";
+
 type IActions =
   | "Install"
   | "Support"
@@ -15,6 +16,8 @@ type IActions =
   | "Create"
   | "Update"
   | "Delete"
+  | "CreateOrUpdate"
+  | "Sync"
   | "Open"
   | "Roll";
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CharacterService } from "../../../services/character-service/CharacterService";
 import _ from "lodash";
 import { IPeerConnectionManager } from "./usePeerConnection";
+import { googleAnalyticsService } from "../../../services/injections";
 
 export type ICharactersManager = ReturnType<
   ReturnType<typeof makeUseCharacters>
@@ -34,6 +35,10 @@ export function makeUseCharacters(characterService: CharacterService) {
           : [...characters, character];
         return updatedList;
       });
+      googleAnalyticsService.sendEvent({
+        category: "SceneCharacter",
+        action: "CreateOrUpdate"
+      });
     }
 
     function removeCharacterFromScene(character: ICharacter) {
@@ -42,11 +47,19 @@ export function makeUseCharacters(characterService: CharacterService) {
           return c._id !== character._id;
         });
       });
+      googleAnalyticsService.sendEvent({
+        category: "SceneCharacter",
+        action: "Delete"
+      });
     }
 
     async function syncACharacter(character: ICharacter) {
       _sendCharacterToGM(character);
       characterService.update(character);
+      googleAnalyticsService.sendEvent({
+        category: "SceneCharacter",
+        action: "Sync"
+      });
     }
 
     function onCharacterSelectClose(character?: ICharacter) {
