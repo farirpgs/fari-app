@@ -305,7 +305,12 @@ export const FateAccelerated: IGame = {
         }
       ]
     },
-    { columns: [{ col: 12, field: stunts }] },
+    {
+      columns: [
+        { col: 6, field: extras },
+        { col: 6, field: stunts }
+      ]
+    },
     {
       columns: [
         {
