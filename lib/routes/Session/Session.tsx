@@ -12,6 +12,7 @@ import { useBadGuys } from "../Scene/hooks/useBadGuys";
 import { IPeerAction } from "../Scene/types/IPeerAction";
 import { useStoreContext } from "../../context/store";
 import { usePeerConnection } from "../Scene/hooks/usePeerConnection";
+import { googleAnalyticsService } from "../../services/injections";
 
 const defaultScene = { badGuys: [], characters: [] };
 const REFRESH_PLAYER_INFO_EVERY_MS = 1000;
@@ -48,11 +49,7 @@ export const Session: React.FC<{
   const characterManager = useCharacters(peerConnectionManager);
 
   async function loadScene(sceneId: string) {
-    if (!scene._id) {
-      setIsLoading(true);
-    }
     const result = await new SceneService().get(sceneId);
-
     if (!result) {
       setIsSceneNotFound(true);
     } else {
@@ -60,13 +57,21 @@ export const Session: React.FC<{
         ...result,
         badGuys: !!result.badGuys ? result.badGuys : []
       });
+      googleAnalyticsService.sendEvent({
+        category: "SceneSession",
+        action: "Get",
+        label: "GM"
+      });
     }
     setIsLoading(false);
   }
 
   async function saveScene() {
     await new SceneService().update(scene);
-
+    googleAnalyticsService.sendEvent({
+      category: "SceneSession",
+      action: "Update"
+    });
     await loadScene(scene._id);
     setSceneUpdatedSnackBar({ visible: true });
   }
@@ -96,6 +101,12 @@ export const Session: React.FC<{
   useEffect(() => {
     if (isGM) {
       loadScene(sceneId);
+    } else {
+      googleAnalyticsService.sendEvent({
+        category: "SceneSession",
+        action: "Get",
+        label: "Player"
+      });
     }
   }, [sceneId]);
 

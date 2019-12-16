@@ -32,7 +32,6 @@ export function _useStore() {
       };
     });
   }
-  console.log("path", pathname);
 
   return {
     location: {

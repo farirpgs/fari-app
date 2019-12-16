@@ -8,6 +8,7 @@ import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
 import { ICharacter } from "../../types/ICharacter";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const PlayCharacter = props => {
   const { gameSlug, characterId } = props.match.params;
@@ -20,12 +21,22 @@ export const PlayCharacter = props => {
       setIsLoading(true);
     }
     const result = await new CharacterService().get(characterId);
+    googleAnalyticsService.sendEvent({
+      category: "Character",
+      action: "Get",
+      label: game.slug
+    });
     setCharacter(result);
     setIsLoading(false);
   };
 
   async function save() {
     await new CharacterService().update(character);
+    googleAnalyticsService.sendEvent({
+      category: "Character",
+      action: "Update",
+      label: game.slug
+    });
     await load(characterId);
     setCharacterUpdatedSnackBar({ visible: true });
   }

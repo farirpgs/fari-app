@@ -21,6 +21,7 @@ import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
 import { ICharacter } from "../../types/ICharacter";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const Characters = props => {
   const { gameSlug } = props.match.params;
@@ -38,12 +39,23 @@ export const Characters = props => {
   const load = async () => {
     setIsLoading(true);
     const characters = await new CharacterService().getAllByGame(game.slug);
+    googleAnalyticsService.sendEvent({
+      category: "Character",
+      action: "GetAll",
+      value: characters?.length ?? 0,
+      label: game.slug
+    });
     setCharacters(characters);
     setIsLoading(false);
   };
 
   async function deleteCharacter(character) {
     await new CharacterService().remove(character);
+    googleAnalyticsService.sendEvent({
+      category: "Character",
+      action: "Delete",
+      label: game.slug
+    });
     await load();
     setCharacterDeletedSnackBar({ visible: true });
   }

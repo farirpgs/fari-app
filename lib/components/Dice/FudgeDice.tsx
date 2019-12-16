@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import { useFudge } from "../../hooks/useFudge";
 import { Dice } from "./Dice";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const FudgeDice: React.FC<{}> = props => {
   const fudge1 = useFudge();
@@ -22,6 +23,10 @@ export const FudgeDice: React.FC<{}> = props => {
               fudge2.roll();
               fudge3.roll();
               fudge4.roll();
+              googleAnalyticsService.sendEvent({
+                category: "Dice",
+                action: "Roll"
+              });
             }}
           >
             Roll

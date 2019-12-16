@@ -13,6 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import React from "react";
 import { usePWA } from "../../hooks/usePWA";
 import { routerHistory } from "../History/History";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const MenuDrawer: React.FC<{
   open: boolean;
@@ -73,6 +74,10 @@ export const MenuDrawer: React.FC<{
           button
           onClick={() => {
             props.onClose();
+            googleAnalyticsService.sendEvent({
+              category: "Fari",
+              action: "Support"
+            });
             window.open("https://ko-fi.com/rpdeshaies");
           }}
         >

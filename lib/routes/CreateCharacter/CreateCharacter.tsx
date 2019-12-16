@@ -7,6 +7,7 @@ import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
 import { ICharacter } from "../../types/ICharacter";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const CreateCharacter = props => {
   const { gameSlug } = props.match.params;
@@ -39,15 +40,11 @@ export const CreateCharacter = props => {
 
   async function save() {
     const id = await new CharacterService().add(character, game.slug);
+    googleAnalyticsService.sendEvent({
+      category: "Character",
+      action: "Create",
+      label: game.slug
+    });
     routerHistory.push(`/game/${game.slug}/play/${id}?new=true`);
   }
 };
-
-function createId(slug: string) {
-  const fourRandomDigits = `${getRandomDigit()}${getRandomDigit()}${getRandomDigit()}${getRandomDigit()}`;
-  return `${slug}-${fourRandomDigits}`;
-}
-
-function getRandomDigit(): any {
-  return Math.floor(Math.random() * 100) % 10;
-}
