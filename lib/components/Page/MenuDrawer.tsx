@@ -10,6 +10,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import React from "react";
 import { usePWA } from "../../hooks/usePWA";
 import { routerHistory } from "../History/History";
@@ -97,6 +98,18 @@ export const MenuDrawer: React.FC<{
             <InfoIcon />
           </ListItemIcon>
           <ListItemText primary={"About"} />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => {
+            props.onClose();
+            window.open("https://twitter.com/rpdeshaies");
+          }}
+        >
+          <ListItemIcon>
+            <ContactSupportIcon></ContactSupportIcon>
+          </ListItemIcon>
+          <ListItemText primary={"Support"} />
         </ListItem>
       </List>
     </SwipeableDrawer>
