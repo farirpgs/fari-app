@@ -18,8 +18,8 @@ export const BadGuyCard: React.FC<{
   onRemove: (badGuy: IBadGuy) => void;
 }> = props => {
   const { badGuy } = props;
-  const stressCount = parseInt(badGuy.stress);
-  const consequenceCount = parseInt(badGuy.consequences);
+  const stressCount = getStressCount(badGuy);
+  const consequenceCount = getConsequenceCount(badGuy);
 
   return (
     <Paper
@@ -154,3 +154,13 @@ export const BadGuyCard: React.FC<{
     </Paper>
   );
 };
+
+function getConsequenceCount(badGuy: Partial<IBadGuy>) {
+  return parseInt(badGuy.consequences) || 0;
+}
+
+function getStressCount(badGuy: Partial<IBadGuy>) {
+  return parseInt(badGuy.stress) || 0;
+}
+
+export const selectors = { getConsequenceCount, getStressCount };
