@@ -91,7 +91,7 @@ export function CharacterFields(props: {
               className +=
                 column.col === "initial"
                   ? `col-xs col-initial `
-                  : "col-xs-12 col-md-${column.col} ";
+                  : `col-xs-12 col-md-${column.col} `;
 
               return (
                 <div key={index} className={className}>
