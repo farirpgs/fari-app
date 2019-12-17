@@ -31,10 +31,6 @@ export function useAspects(
         aspects: aspectCopy
       };
     });
-    googleAnalyticsService.sendEvent({
-      category: "SceneAspect",
-      action: "Update"
-    });
   }
 
   function removeAspectFromScene(indexToRemove: number) {

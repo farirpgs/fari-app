@@ -37,10 +37,6 @@ export function useBadGuys(
         })
       };
     });
-    googleAnalyticsService.sendEvent({
-      category: "SceneBadGuy",
-      action: "Update"
-    });
   }
 
   function removeBadGuyFromScene(updatedBadGuy: IBadGuy) {
