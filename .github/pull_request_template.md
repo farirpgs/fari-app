@@ -8,6 +8,8 @@
 
 <!-- Provide more context around why this pull requests was created -->
 
+...
+
 # 🔒Checklist
 
 #### ✅ OR ⬜
@@ -17,3 +19,5 @@
 # 💅 Examples
 
 <!-- Give examples or screenshots detailing the new behaviors of the application -->
+
+...
