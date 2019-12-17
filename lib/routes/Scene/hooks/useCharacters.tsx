@@ -35,10 +35,6 @@ export function makeUseCharacters(characterService: CharacterService) {
           : [...characters, character];
         return updatedList;
       });
-      googleAnalyticsService.sendEvent({
-        category: "SceneCharacter",
-        action: "CreateOrUpdate"
-      });
     }
 
     function removeCharacterFromScene(character: ICharacter) {
@@ -67,6 +63,10 @@ export function makeUseCharacters(characterService: CharacterService) {
         _sendCharacterToGM(character);
         _addOrUpdateCharacterForPlayer(character);
       }
+      googleAnalyticsService.sendEvent({
+        category: "SceneCharacter",
+        action: "Create"
+      });
       _setIsCharacterModalOpened(false);
     }
 
