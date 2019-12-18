@@ -6,6 +6,7 @@ import { IScene } from "../../types/IScene";
 import { useAspects } from "./hooks/useAspects";
 import { useBadGuys } from "./hooks/useBadGuys";
 import { ScenePure } from "./ScenePure";
+import { googleAnalyticsService } from "../../services/injections";
 
 const defaultScene = { badGuys: [], characters: [] };
 
@@ -46,6 +47,10 @@ export const Scene: React.FC<{
           ...result,
           badGuys: !!result.badGuys ? result.badGuys : []
         });
+        googleAnalyticsService.sendEvent({
+          category: "Scene",
+          action: "Get"
+        });
       }
       setIsLoading(false);
     } else {
@@ -56,11 +61,19 @@ export const Scene: React.FC<{
   async function saveScene() {
     if (!!scene._id) {
       await new SceneService().update(scene);
+      googleAnalyticsService.sendEvent({
+        category: "Scene",
+        action: "Update"
+      });
 
       await loadScene(scene._id);
       setSceneUpdatedSnackBar({ visible: true });
     } else {
       const id = await new SceneService().add(scene);
+      googleAnalyticsService.sendEvent({
+        category: "Scene",
+        action: "Create"
+      });
 
       setSceneCreatedSnackBar({
         visible: true

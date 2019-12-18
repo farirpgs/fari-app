@@ -1,4 +1,5 @@
 import { IScene } from "../../../types/IScene";
+import { googleAnalyticsService } from "../../../services/injections";
 
 export type IAspectsManager = ReturnType<typeof useAspects>;
 
@@ -15,6 +16,10 @@ export function useAspects(
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 0);
+    googleAnalyticsService.sendEvent({
+      category: "SceneAspect",
+      action: "Create"
+    });
   }
 
   function updateAspectInScene(content: string, index: number) {
@@ -36,6 +41,10 @@ export function useAspects(
           (element, currentIndex) => currentIndex !== indexToRemove
         )
       };
+    });
+    googleAnalyticsService.sendEvent({
+      category: "SceneAspect",
+      action: "Delete"
     });
   }
 

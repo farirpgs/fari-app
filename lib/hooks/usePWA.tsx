@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { googleAnalyticsService } from "../services/injections";
 
 interface IPWAEvent {
   prompt: () => void;
@@ -35,6 +36,10 @@ export function usePWA(
     const choiceResult = await pwaPromptSingleton.userChoice;
     if (choiceResult.outcome === "accepted") {
       onInstall();
+      googleAnalyticsService.sendEvent({
+        category: "Fari",
+        action: "Install"
+      });
     } else {
       onCancelInstall();
     }

@@ -10,9 +10,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import React from "react";
 import { usePWA } from "../../hooks/usePWA";
 import { routerHistory } from "../History/History";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const MenuDrawer: React.FC<{
   open: boolean;
@@ -73,6 +75,10 @@ export const MenuDrawer: React.FC<{
           button
           onClick={() => {
             props.onClose();
+            googleAnalyticsService.sendEvent({
+              category: "Fari",
+              action: "Support"
+            });
             window.open("https://ko-fi.com/rpdeshaies");
           }}
         >
@@ -92,6 +98,18 @@ export const MenuDrawer: React.FC<{
             <InfoIcon />
           </ListItemIcon>
           <ListItemText primary={"About"} />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => {
+            props.onClose();
+            window.open("https://twitter.com/rpdeshaies");
+          }}
+        >
+          <ListItemIcon>
+            <ContactSupportIcon></ContactSupportIcon>
+          </ListItemIcon>
+          <ListItemText primary={"Support"} />
         </ListItem>
       </List>
     </SwipeableDrawer>

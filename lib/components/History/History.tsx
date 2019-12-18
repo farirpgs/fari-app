@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import ReactGA from "react-ga";
 import { useStoreContext } from "../../context/store";
+import { googleAnalyticsService } from "../../services/injections";
 ReactGA.initialize("UA-150306816-1");
 
 export let routerHistory = {} as any;
@@ -18,7 +19,7 @@ export const History = withRouter(function HistoryComponent(props) {
   useEffect(() => {
     routerHistory = history;
     store.location.setPathname(history.location.pathname);
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    googleAnalyticsService.sendPageView();
   }, [pathname]);
   return null;
 });

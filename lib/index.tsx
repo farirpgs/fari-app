@@ -33,5 +33,4 @@ function App() {
   );
 }
 
-SentryService.initializeSentry();
 ReactDOM.render(<App />, document.getElementById("root"));

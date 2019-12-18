@@ -25,6 +25,7 @@ import { IGroupedScenes } from "./IGroupedScenes";
 import * as selectors from "./sceneSelectors";
 import { green } from "@material-ui/core/colors";
 import { useStoreContext } from "../../context/store";
+import { googleAnalyticsService } from "../../services/injections";
 
 export const Scenes: React.FC<{}> = props => {
   const [groupedScenes, setGroupedScenes] = useState<IGroupedScenes>({});
@@ -42,6 +43,11 @@ export const Scenes: React.FC<{}> = props => {
   const loadScenes = async () => {
     setIsLoading(true);
     const scenes = await new SceneService().getAll();
+    googleAnalyticsService.sendEvent({
+      category: "Scene",
+      action: "GetAll",
+      value: scenes?.length ?? 0
+    });
     const groupedScenes = selectors.groupScenesByCampaign(scenes);
 
     setGroupedScenes(groupedScenes);
@@ -50,6 +56,10 @@ export const Scenes: React.FC<{}> = props => {
 
   const deleteScene = async (scene: IScene) => {
     new SceneService().remove(scene);
+    googleAnalyticsService.sendEvent({
+      category: "Scene",
+      action: "Delete"
+    });
     await loadScenes();
     setSceneDeletedSnackBar({ visible: true });
   };
