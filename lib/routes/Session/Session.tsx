@@ -93,7 +93,8 @@ export const Session: React.FC<{
         characterManager.gm.addOrUpdateCharacterInScene(
           action.payload.character
         );
-      }
+      },
+      RECEIVE_CHAT_MESSAGE: () => {}
     };
     reducer[action.type]();
   }

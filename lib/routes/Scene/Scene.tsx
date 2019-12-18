@@ -7,6 +7,7 @@ import { useAspects } from "./hooks/useAspects";
 import { useBadGuys } from "./hooks/useBadGuys";
 import { ScenePure } from "./ScenePure";
 import { googleAnalyticsService } from "../../services/injections";
+import { Chat } from "./Chat";
 
 const defaultScene = { badGuys: [], characters: [] };
 
@@ -98,6 +99,7 @@ export const Scene: React.FC<{
         aspectsManager={aspectsManager}
         badGuyManager={badGuyManager}
       ></ScenePure>
+      <Chat></Chat>
       {renderSnackBars()}
     </>
   );
