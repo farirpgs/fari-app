@@ -96,7 +96,9 @@ export const Session: React.FC<{
           action.payload.character
         );
       },
-      RECEIVE_CHAT_MESSAGE: () => {}
+      SEND_MESSAGE_TO_GM: () => {
+        sceneChatManager.add(action.payload.message);
+      }
     };
     reducer[action.type]();
   }
