@@ -99,7 +99,6 @@ export const Scene: React.FC<{
         aspectsManager={aspectsManager}
         badGuyManager={badGuyManager}
       ></ScenePure>
-      <Chat></Chat>
       {renderSnackBars()}
     </>
   );

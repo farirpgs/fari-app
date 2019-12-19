@@ -13,6 +13,7 @@ import { IPeerAction } from "../Scene/types/IPeerAction";
 import { useStoreContext } from "../../context/store";
 import { usePeerConnection } from "../Scene/hooks/usePeerConnection";
 import { googleAnalyticsService } from "../../services/injections";
+import { Chat, useSceneChat } from "../Scene/Chat";
 
 const defaultScene = { badGuys: [], characters: [] };
 const REFRESH_PLAYER_INFO_EVERY_MS = 1000;
@@ -47,6 +48,7 @@ export const Session: React.FC<{
   const aspectsManager = useAspects(setScene);
   const badGuyManager = useBadGuys(setScene);
   const characterManager = useCharacters(peerConnectionManager);
+  const sceneChatManager = useSceneChat();
 
   async function loadScene(sceneId: string) {
     const result = await new SceneService().get(sceneId);
@@ -160,6 +162,19 @@ export const Session: React.FC<{
         peerConnectionManager={peerConnectionManager}
         badGuyManager={badGuyManager}
       ></SessionPure>
+      <Chat
+        messages={sceneChatManager.messages}
+        onMessageSend={message => {
+          if (isGM) {
+            sceneChatManager.add(message);
+          } else {
+            peerConnectionManager.sendToGM({
+              type: "",
+              payload: { message: message }
+            });
+          }
+        }}
+      ></Chat>
       {renderSnackBars()}
     </>
   );
