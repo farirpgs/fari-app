@@ -25,3 +25,6 @@
 - [ ] Making rolls done with the dice tool public to all players and GM. Maybe like a notification style thing, where if someone - [ ] rolls, it would state who rolled, why they rolled, and the result of the roll.
 - [ ] A more robust dice tool that can add skill modifiers to the roll.
 - [ ] Autofill for the skills boxes, using the basic Fate Core skills list.
+- [ ] Character Portaits
+- [ ] Renaming FAE approches
+- [ ] Addionnal Stress Tracks
