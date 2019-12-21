@@ -125,9 +125,9 @@ describe("useCharacters", () => {
           result.current.player.onCharacterSelectClose(characterToSend);
         });
         expect(result.current.player.isCharacterModalOpened).toEqual(false);
-        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToHost).toHaveBeenCalledWith({
           payload: { character: characterToSend },
-          type: "UPDATE_CHARACTER_IN_GM_SCREEN"
+          type: "UPDATE_CHARACTER"
         });
         expect(result.current.player.playerCharactersIds.length).toEqual(1);
 
@@ -142,9 +142,9 @@ describe("useCharacters", () => {
         act(() => {
           result.current.player.syncACharacter(updatedCharacter);
         });
-        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToHost).toHaveBeenCalledWith({
           payload: { character: updatedCharacter },
-          type: "UPDATE_CHARACTER_IN_GM_SCREEN"
+          type: "UPDATE_CHARACTER"
         });
         expect(characterSerivceMock.update).toHaveBeenCalledWith(
           updatedCharacter
@@ -166,9 +166,9 @@ describe("useCharacters", () => {
           result.current.player.onCharacterSelectClose(anotherCharacter);
         });
         expect(result.current.player.isCharacterModalOpened).toEqual(false);
-        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToHost).toHaveBeenCalledWith({
           payload: { character: anotherCharacter },
-          type: "UPDATE_CHARACTER_IN_GM_SCREEN"
+          type: "UPDATE_CHARACTER"
         });
         expect(result.current.player.playerCharactersIds.length).toEqual(2);
 
@@ -182,9 +182,9 @@ describe("useCharacters", () => {
           result.current.player.onCharacterSelectClose(anotherCharacter);
         });
         expect(result.current.player.isCharacterModalOpened).toEqual(false);
-        expect(peerConnectionMock.sendToGM).toHaveBeenCalledWith({
+        expect(peerConnectionMock.sendToHost).toHaveBeenCalledWith({
           payload: { character: anotherCharacter },
-          type: "UPDATE_CHARACTER_IN_GM_SCREEN"
+          type: "UPDATE_CHARACTER"
         });
         expect(result.current.player.playerCharactersIds.length).toEqual(2);
       });
@@ -216,7 +216,7 @@ describe("useCharacters", () => {
 function getPeerConnectionManagerMock(): IPeerConnectionManager {
   return {
     isConnectedToHost: false,
-    sendToGM: jest.fn()
+    sendToHost: jest.fn()
   };
 }
 

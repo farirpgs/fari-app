@@ -9,14 +9,15 @@ import { usePeerHost } from "../Scene/hooks/usePeerHost";
 
 import { useAspects } from "../Scene/hooks/useAspects";
 import { useBadGuys } from "../Scene/hooks/useBadGuys";
-import { IPeerAction } from "../Scene/types/IPeerAction";
+import { IPeerAction, ISendToPlayersActions } from "../Scene/types/IPeerAction";
 import { useStoreContext } from "../../context/store";
 import { usePeerConnection } from "../Scene/hooks/usePeerConnection";
 import { googleAnalyticsService } from "../../services/injections";
-import { Chat, useSceneChat } from "../Scene/Chat";
+import { Chat } from "../Scene/Chat";
+import { useSceneChat } from "../Scene/hooks/useSceneChat";
 
 const defaultScene = { badGuys: [], characters: [] };
-const REFRESH_PLAYER_INFO_EVERY_MS = 1000;
+const REFRESH_PLAYER_INFO_EVERY_MS = 200;
 const useCharacters = makeUseCharacters(new CharacterService());
 
 export const Session: React.FC<{
@@ -37,12 +38,12 @@ export const Session: React.FC<{
     visible: false
   });
   const [isSceneNotFound, setIsSceneNotFound] = useState(false);
-  const peerHostManager = usePeerHost(handleDataReceiveFromPlayer, {
+  const peerHostManager = usePeerHost(handleDataReceiveFromConnections, {
     disabled: isPlayer
   });
   const peerConnectionManager = usePeerConnection(
     peerIdFromParams,
-    handleDataReceiveFromGM,
+    handleDataReceiveFromHost,
     { disabled: isGM }
   );
   const aspectsManager = useAspects(setScene);
@@ -78,29 +79,30 @@ export const Session: React.FC<{
     setSceneUpdatedSnackBar({ visible: true });
   }
 
-  function handleDataReceiveFromGM(action: IPeerAction) {
-    const reducer = {
-      UPDATE_SCENE_IN_PLAYER_SCREEN: () => {
+  function handleDataReceiveFromHost(action: IPeerAction) {
+    const reducer: { [action in ISendToPlayersActions]: Function } = {
+      SYNC_SCENE: () => {
         setScene(action.payload.scene);
         characterManager.player.setSceneCharacters(action.payload.characters);
+        sceneChatManager.setMessages(action.payload.messages);
         setIsLoading(false);
       }
     };
     reducer[action.type]();
   }
 
-  function handleDataReceiveFromPlayer(action: IPeerAction) {
+  function handleDataReceiveFromConnections(action: IPeerAction) {
     const reducer = {
-      UPDATE_CHARACTER_IN_GM_SCREEN: () => {
+      UPDATE_CHARACTER: () => {
         characterManager.gm.addOrUpdateCharacterInScene(
           action.payload.character
         );
       },
-      SEND_MESSAGE_TO_GM: () => {
-        sceneChatManager.add(action.payload.message);
+      SEND_MESSAGE: () => {
+        sceneChatManager.addMessage(action.payload.message);
       }
     };
-    reducer[action.type]();
+    reducer[action.type]?.();
   }
 
   useEffect(() => {
@@ -120,10 +122,11 @@ export const Session: React.FC<{
     if (isGM) {
       id = setInterval(() => {
         peerHostManager.sendToAllPlayers({
-          type: "UPDATE_SCENE_IN_PLAYER_SCREEN",
+          type: "SYNC_SCENE",
           payload: {
             scene: scene,
-            characters: characterManager.global.sceneCharacters
+            characters: characterManager.global.sceneCharacters,
+            messages: sceneChatManager.messages
           }
         });
       }, REFRESH_PLAYER_INFO_EVERY_MS);
@@ -168,10 +171,10 @@ export const Session: React.FC<{
         messages={sceneChatManager.messages}
         onMessageSend={message => {
           if (isGM) {
-            sceneChatManager.add(message);
+            sceneChatManager.addMessage(message);
           } else {
-            peerConnectionManager.sendToGM({
-              type: "",
+            peerConnectionManager.sendToHost({
+              type: "SEND_MESSAGE",
               payload: { message: message }
             });
           }

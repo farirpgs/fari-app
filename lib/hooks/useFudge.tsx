@@ -28,7 +28,7 @@ export function useFudge() {
   };
 }
 
-const FudgeTypes = {
+export const FudgeTypes = {
   0: "",
   1: "+",
   2: "-"

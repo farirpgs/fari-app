@@ -32,7 +32,7 @@ const peerHostManagerMock: IPeerHostManager = {
 
 const peerConnectionManagerMock: IPeerConnectionManager = {
   isConnectedToHost: false,
-  sendToGM: action("sendToGM")
+  sendToHost: action("sendToGM")
 };
 
 const characterManagerMockEmpty: ICharactersManager = {

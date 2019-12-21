@@ -42,7 +42,7 @@ export function usePeerConnection(
 
   return {
     isConnectedToHost: !!connectionToHost,
-    sendToGM: (action: IPeerAction) => {
+    sendToHost: (action: IPeerAction) => {
       if (!!connectionToHost) {
         connectionToHost.send(action);
       }

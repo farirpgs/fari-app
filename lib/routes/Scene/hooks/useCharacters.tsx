@@ -85,8 +85,8 @@ export function makeUseCharacters(characterService: CharacterService) {
     }
 
     function _sendCharacterToGM(character: ICharacter) {
-      peerConnectionManager.sendToGM({
-        type: "UPDATE_CHARACTER_IN_GM_SCREEN",
+      peerConnectionManager.sendToHost({
+        type: "UPDATE_CHARACTER",
         payload: { character: character }
       });
     }

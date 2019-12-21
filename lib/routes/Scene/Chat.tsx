@@ -24,21 +24,6 @@ export function useChat() {
   };
 }
 
-export function useSceneChat() {
-  const [messages, setMessages] = useState<Array<IMessage>>([]);
-
-  function addMessage(message: IMessage) {
-    setMessages(items => {
-      return [...items, message];
-    });
-  }
-
-  return {
-    messages: messages,
-    add: addMessage
-  };
-}
-
 const chatContainer = css({
   position: "fixed",
   zIndex: 1,
@@ -100,8 +85,8 @@ const input = css`
   }
 `;
 
-interface IMessage {
-  message: string;
+export interface IMessage {
+  text: string;
   from: string;
   timestamp: number;
 }
@@ -122,8 +107,9 @@ export const Chat: React.FC<IProps> = props => {
       chatManager.saveName(inputValue);
     } else {
       const now = new Date().getTime();
+      const text = getText(inputValue);
       props.onMessageSend?.({
-        message: inputValue,
+        text: text,
         from: chatManager.name,
         timestamp: now
       });
@@ -142,10 +128,14 @@ export const Chat: React.FC<IProps> = props => {
         <ExpansionPanelDetails className={expansionPanelDetails}>
           <div className={chatDetailsContainer}>
             <div className={chatDetailsMessages}>
-              <div>
-                <b>Nick:</b>{" "}
-                <span>Oh hello ! I think that's a pretty cool thing</span>
-              </div>
+              {props.messages.map((message, i) => {
+                return (
+                  <div key={i}>
+                    <b>{message.from}: </b>
+                    <span>{message.text}</span>
+                  </div>
+                );
+              })}
             </div>
             <div className={chatDetailsControls}>
               <form onSubmit={onSubmit}>
@@ -187,3 +177,25 @@ export const Chat: React.FC<IProps> = props => {
 };
 
 Chat.displayName = "Chat";
+
+function getText(inputValue: string) {
+  if (inputValue === "roll") {
+    const first = Math.floor((Math.random() * 100) % 3);
+    const second = Math.floor((Math.random() * 100) % 3);
+    const third = Math.floor((Math.random() * 100) % 3);
+    const fourth = Math.floor((Math.random() * 100) % 3);
+
+    const firstText = FudgeText[first];
+    const secondText = FudgeText[second];
+    const thirdText = FudgeText[third];
+    const fourthText = FudgeText[fourth];
+    return `${firstText}-${secondText}-${thirdText}-${fourthText}`;
+  }
+  return inputValue;
+}
+
+const FudgeText = {
+  0: "-1",
+  1: "+0",
+  2: "+1"
+};
