@@ -1,5 +1,5 @@
 [build]
-  command = "BUILD_ID=$BUILD_ID COMMIT_REF=$COMMIT_REF CONTEXT=$CONTEXT npm install && npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
 
 [[redirects]]
