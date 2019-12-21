@@ -9,7 +9,7 @@ interface IState {
   eventId: string;
 }
 
-export class ExampleBoundary extends Component<IProps, IState> {
+export class ErrorBoundary extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = { eventId: null };
