@@ -13,11 +13,11 @@ import { IPeerAction, ISendToPlayersActions } from "../Scene/types/IPeerAction";
 import { useStoreContext } from "../../context/store";
 import { usePeerConnection } from "../Scene/hooks/usePeerConnection";
 import { googleAnalyticsService } from "../../services/injections";
-import { Chat } from "../Scene/Chat";
+import { Chat } from "../../components/Chat/Chat";
 import { useSceneChat } from "../Scene/hooks/useSceneChat";
 
 const defaultScene = { badGuys: [], characters: [] };
-const REFRESH_PLAYER_INFO_EVERY_MS = 200;
+const REFRESH_PLAYER_INFO_EVERY_MS = 2000;
 const useCharacters = makeUseCharacters(new CharacterService());
 
 export const Session: React.FC<{
@@ -120,6 +120,14 @@ export const Session: React.FC<{
   useEffect(() => {
     let id = undefined;
     if (isGM) {
+      peerHostManager.sendToAllPlayers({
+        type: "SYNC_SCENE",
+        payload: {
+          scene: scene,
+          characters: characterManager.global.sceneCharacters,
+          messages: sceneChatManager.messages
+        }
+      });
       id = setInterval(() => {
         peerHostManager.sendToAllPlayers({
           type: "SYNC_SCENE",
@@ -137,10 +145,12 @@ export const Session: React.FC<{
   }, [
     peerHostManager.numberOfConnections,
     scene,
-    characterManager.global.sceneCharacters
+    characterManager.global.sceneCharacters,
+    sceneChatManager.messages
   ]);
 
   const store = useStoreContext();
+
   useEffect(() => {
     if (!!scene.name && isPlayer) {
       store.session.addLiveSession({

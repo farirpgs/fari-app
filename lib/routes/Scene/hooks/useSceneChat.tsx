@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IMessage } from "../Chat";
+import { IMessage } from "../../../components/Chat/IMessage";
 
 const MAX_NUMBER_OF_MESSAGES = 100;
 

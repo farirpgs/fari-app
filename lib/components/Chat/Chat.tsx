@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import { css } from "emotion";
 import SendIcon from "@material-ui/icons/Send";
+import { MessageType } from "./MessageType";
+import { IMessage } from "./IMessage";
 
 export function useChat() {
   const cachedName = undefined;
@@ -85,11 +87,21 @@ const input = css`
   }
 `;
 
-export interface IMessage {
-  text: string;
-  from: string;
-  timestamp: number;
-}
+const chatMessage = css`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+`;
+const chatMessageFrom = css`
+  margin-right: 0.5rem;
+`;
+const chatMessageCode = css`
+  color: #e01e5a;
+  border: 1px solid #1d1c1d21;
+  background: #f6f6f6;
+  padding: 0.3rem;
+  display: inline-block;
+`;
 
 interface IProps {
   messages: Array<IMessage>;
@@ -107,9 +119,10 @@ export const Chat: React.FC<IProps> = props => {
       chatManager.saveName(inputValue);
     } else {
       const now = new Date().getTime();
-      const text = getText(inputValue);
+      const { text, type } = getText(inputValue);
       props.onMessageSend?.({
         text: text,
+        type: type,
         from: chatManager.name,
         timestamp: now
       });
@@ -130,9 +143,15 @@ export const Chat: React.FC<IProps> = props => {
             <div className={chatDetailsMessages}>
               {props.messages.map((message, i) => {
                 return (
-                  <div key={i}>
-                    <b>{message.from}: </b>
-                    <span>{message.text}</span>
+                  <div key={i} className={chatMessage}>
+                    <b className={chatMessageFrom}>
+                      {message.from}:{"  "}
+                    </b>
+                    {message.type === MessageType.Normal ? (
+                      <span>{message.text}</span>
+                    ) : (
+                      <code className={chatMessageCode}>{message.text}</code>
+                    )}
                   </div>
                 );
               })}
@@ -178,20 +197,27 @@ export const Chat: React.FC<IProps> = props => {
 
 Chat.displayName = "Chat";
 
-function getText(inputValue: string) {
+function getText(inputValue: string): { text: string; type: MessageType } {
   if (inputValue === "roll") {
     const first = Math.floor((Math.random() * 100) % 3);
     const second = Math.floor((Math.random() * 100) % 3);
     const third = Math.floor((Math.random() * 100) % 3);
     const fourth = Math.floor((Math.random() * 100) % 3);
 
-    const firstText = FudgeText[first];
-    const secondText = FudgeText[second];
-    const thirdText = FudgeText[third];
-    const fourthText = FudgeText[fourth];
-    return `${firstText}-${secondText}-${thirdText}-${fourthText}`;
+    const firstText: string = FudgeText[first];
+    const secondText: string = FudgeText[second];
+    const thirdText: string = FudgeText[third];
+    const fourthText: string = FudgeText[fourth];
+    const formattedFirstText = firstText
+      .split("")
+      .slice(1)
+      .join("");
+    const text = `${formattedFirstText}${secondText}${thirdText}${fourthText}`
+      .split("")
+      .join(" ");
+    return { text, type: MessageType.Code };
   }
-  return inputValue;
+  return { text: inputValue, type: MessageType.Normal };
 }
 
 const FudgeText = {

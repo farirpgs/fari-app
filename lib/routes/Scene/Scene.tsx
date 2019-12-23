@@ -7,7 +7,7 @@ import { useAspects } from "./hooks/useAspects";
 import { useBadGuys } from "./hooks/useBadGuys";
 import { ScenePure } from "./ScenePure";
 import { googleAnalyticsService } from "../../services/injections";
-import { Chat } from "./Chat";
+import { Chat } from "../../components/Chat/Chat";
 
 const defaultScene = { badGuys: [], characters: [] };
 
