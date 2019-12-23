@@ -178,7 +178,7 @@ export const Chat: React.FC<IProps> = props => {
                       className={input}
                       size="small"
                       value={inputValue}
-                      onChange={e => setInputValue(e.target.value)}
+                      onChange={e => setInputValue(e.target.value.trim())}
                       placeholder={
                         isNameEmpty
                           ? "What's your name ?"
