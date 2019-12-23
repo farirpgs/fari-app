@@ -26,27 +26,28 @@ export function useChat() {
   };
 }
 
-const chatContainer = css({
-  position: "fixed",
-  zIndex: 1,
-  bottom: "3.4rem",
-  maxWidth: "100%",
-  height: "auto",
-  width: "300px",
-  right: "2rem"
-});
+const chatContainer = css`
+  position: fixed;
+  z-index: 1;
+  bottom: 3.4rem;
+  max-width: 100%;
+  height: auto;
+  width: 300px;
+  right: 2rem;
+`;
 
-const expansionPanelSummary = css({
-  boxShadow: "0 2px 1px rgba(0, 0, 0, .1)"
-});
-const expansionPanelDetails = css({
-  padding: "1rem"
-});
-const chatDetailsContainer = css({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%"
-});
+const expansionPanelSummary = css`
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+`;
+const expansionPanelDetails = css`
+  padding: 1rem;
+`;
+
+const chatDetailsContainer = css`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 const chatDetailsMessages = css({
   flex: "1 0 auto",
   height: "14rem",
@@ -55,15 +56,13 @@ const chatDetailsMessages = css({
   padding: ".5rem 1rem .5rem 1rem",
   background: "#fafafa"
 });
-const chatDetailsControls = css({
-  flex: "0",
-  borderTop: "1px solid rgba(0, 0, 0, .1)",
-  padding: "0.5rem 1rem 0.2rem 1rem"
-});
-
+const chatDetailsControls = css`
+  flex: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem 0.2rem 1rem;
+`;
 const expansionPanel = css`
   padding-bottom: 0.2rem;
-
   & .MuiExpansionPanelSummary-root,
   & .MuiExpansionPanelSummary-root.Mui-expanded {
     min-height: 2.5rem;
@@ -80,13 +79,11 @@ const expansionPanel = css`
     padding: 0;
   }
 `;
-
 const input = css`
   &.MuiFormControl-root {
     width: 100%;
   }
 `;
-
 const chatMessage = css`
   display: flex;
   flex-direction: row;
