@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useRef, useEffect } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {
   ExpansionPanel,
@@ -11,6 +11,7 @@ import { css } from "emotion";
 import SendIcon from "@material-ui/icons/Send";
 import { MessageType } from "./MessageType";
 import { IMessage } from "./IMessage";
+import { getText } from "./selectors";
 
 export function useChat() {
   const cachedName = undefined;
@@ -87,7 +88,7 @@ const input = css`
 const chatMessage = css`
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: baseline;
 `;
 const chatMessageFrom = css`
   margin-right: 0.5rem;
@@ -108,8 +109,23 @@ interface IProps {
 export const Chat: React.FC<IProps> = props => {
   const chatManager = useChat();
   const [inputValue, setInputValue] = useState("");
-  const isNameEmpty = chatManager.name === "";
+  const scrollableableArea = useRef(null);
 
+  const scrollPosition = scrollableableArea.current?.scrollTop;
+  const totalScrollHeight =
+    scrollableableArea.current?.scrollHeight -
+    scrollableableArea.current?.offsetHeight;
+  const atBottomOfScrollBar = totalScrollHeight === scrollPosition;
+
+  useEffect(() => {
+    if (atBottomOfScrollBar) {
+      scrollableableArea.current.scrollTop =
+        scrollableableArea.current.scrollHeight -
+        scrollableableArea.current.offsetHeight;
+    }
+  }, [props.messages]);
+
+  const isNameEmpty = chatManager.name === "";
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isNameEmpty) {
@@ -126,6 +142,7 @@ export const Chat: React.FC<IProps> = props => {
     }
     setInputValue("");
   };
+
   return (
     <div className={chatContainer}>
       <ExpansionPanel className={expansionPanel}>
@@ -137,7 +154,7 @@ export const Chat: React.FC<IProps> = props => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={expansionPanelDetails}>
           <div className={chatDetailsContainer}>
-            <div className={chatDetailsMessages}>
+            <div className={chatDetailsMessages} ref={scrollableableArea}>
               {props.messages.map((message, i) => {
                 return (
                   <div key={i} className={chatMessage}>
@@ -193,32 +210,3 @@ export const Chat: React.FC<IProps> = props => {
 };
 
 Chat.displayName = "Chat";
-
-function getText(inputValue: string): { text: string; type: MessageType } {
-  if (inputValue === "roll") {
-    const first = Math.floor((Math.random() * 100) % 3);
-    const second = Math.floor((Math.random() * 100) % 3);
-    const third = Math.floor((Math.random() * 100) % 3);
-    const fourth = Math.floor((Math.random() * 100) % 3);
-
-    const firstText: string = FudgeText[first];
-    const secondText: string = FudgeText[second];
-    const thirdText: string = FudgeText[third];
-    const fourthText: string = FudgeText[fourth];
-    const formattedFirstText = firstText
-      .split("")
-      .slice(1)
-      .join("");
-    const text = `${formattedFirstText}${secondText}${thirdText}${fourthText}`
-      .split("")
-      .join(" ");
-    return { text, type: MessageType.Code };
-  }
-  return { text: inputValue, type: MessageType.Normal };
-}
-
-const FudgeText = {
-  0: "-1",
-  1: "+0",
-  2: "+1"
-};

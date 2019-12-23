@@ -6,6 +6,7 @@ type ICategories =
   | "Dice"
   | "SceneAspect"
   | "SceneCharacter"
+  | "Chat"
   | "SceneBadGuy";
 
 type IActions =
@@ -15,6 +16,7 @@ type IActions =
   | "GetAll"
   | "Create"
   | "Update"
+  | "Send"
   | "Delete"
   | "CreateOrUpdate"
   | "Sync"
