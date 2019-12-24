@@ -139,6 +139,11 @@ export const CharacterCard: React.FC<{
             })}
           {character.game === FateCore.slug &&
             FateCoreSkills.map((skill, index) => {
+              const skillValue = character[skill.slug];
+
+              let formattedSkillValue = Array.isArray(skillValue)
+                ? skillValue.join(", ")
+                : skillValue;
               return (
                 <div
                   key={index}
@@ -148,7 +153,7 @@ export const CharacterCard: React.FC<{
                   }}
                 >
                   <div style={{ fontWeight: "bold" }}>{skill.label}</div>
-                  <div>{character[skill.slug] || "..."}</div>
+                  <div>{formattedSkillValue || "..."}</div>
                 </div>
               );
             })}

@@ -72,7 +72,27 @@ function makeSkill(label: string, slug: string, helper: string): IField {
   return {
     label,
     slug,
-    type: FieldType.TextField,
+    type: FieldType.AutoComplete,
+    possibleValues: [
+      "Athletics",
+      "Burglary",
+      "Contacts",
+      "Crafts",
+      "Deceive",
+      "Drive",
+      "Empathy",
+      "Fight",
+      "Investigate",
+      "Lore",
+      "Notice",
+      "Physique",
+      "Provoke",
+      "Rapport",
+      "Resources",
+      "Shoot",
+      "Stealth",
+      "Will"
+    ],
     helper
   };
 }

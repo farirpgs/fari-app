@@ -20,6 +20,7 @@ type IActions =
   | "Delete"
   | "CreateOrUpdate"
   | "Sync"
+  | "Migration"
   | "Open"
   | "Roll";
 

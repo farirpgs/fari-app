@@ -13,6 +13,9 @@ import showdown from "showdown";
 import { ICharacter } from "../../types/ICharacter";
 import { FieldType, IField } from "../../types/IField";
 import { IRow } from "../../types/IGame";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Chip } from "@material-ui/core";
+import { googleAnalyticsService } from "../../services/injections";
 
 const converter = new showdown.Converter();
 
@@ -110,6 +113,7 @@ export function CharacterFields(props: {
     return (
       <FormControl key={field.slug} style={{ width: "100%" }}>
         {renderTextField(field)}
+        {renderAutoComplete(field)}
         {renderNumber(field)}
         {renderBoolean(field)}
         {renderCategory(field)}
@@ -240,6 +244,46 @@ export function CharacterFields(props: {
               [field.slug]: value
             });
           }}
+        />
+      )
+    );
+  }
+  function renderAutoComplete(field: IField): React.ReactNode {
+    const isValueFromOldControl = typeof character[field.slug] === "string";
+    const value = isValueFromOldControl
+      ? [character[field.slug]]
+      : character[field.slug];
+    return (
+      field.type === FieldType.AutoComplete && (
+        <Autocomplete
+          multiple
+          options={field.possibleValues}
+          freeSolo
+          value={value}
+          onChange={(event, value) => {
+            setCharacter({
+              ...character,
+              [field.slug]: value
+            });
+          }}
+          renderTags={(values: Array<string>, getTagProps) =>
+            values.map((option: string, index: number) => (
+              <Chip
+                variant="outlined"
+                label={option}
+                style={{ margin: ".5rem" }}
+                {...getTagProps({ index })}
+              />
+            ))
+          }
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="filled"
+              style={{ width: "100%" }}
+              label={field.label}
+            />
+          )}
         />
       )
     );
