@@ -237,9 +237,7 @@ export const ScenePure: React.FC<{
       <div>
         {scene.badGuys.length === 0 && (
           <Banner variant="info" paper={false}>
-            <div className="margin-2">
-              There is no bad guys in that scene yet
-            </div>
+            <div className="">There is no bad guys in that scene yet</div>
           </Banner>
         )}
 
