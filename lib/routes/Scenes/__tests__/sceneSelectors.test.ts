@@ -69,5 +69,20 @@ describe("sceneSelectors", () => {
         { name: "3. Book Three: Fire" }
       ]);
     });
+    it("should handle stories without name", () => {
+      // PREPARE
+      const scenes: Array<IScene> = [
+        { name: undefined },
+        { name: undefined },
+        { name: undefined }
+      ];
+      // EXECUTE
+      const result = selectors.groupScenesByCampaign(scenes);
+
+      // VALIDATE
+      expect(result).toEqual({
+        Default: [{ name: undefined }, { name: undefined }, { name: undefined }]
+      });
+    });
   });
 });
