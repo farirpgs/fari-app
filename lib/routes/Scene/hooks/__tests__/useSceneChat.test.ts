@@ -1,7 +1,9 @@
 import { useSceneChat } from "../useSceneChat";
 import { renderHook, act } from "@testing-library/react-hooks";
+import { IMessage } from "../../../../components/Chat/IMessage";
+import { MessageType } from "../../../../components/Chat/MessageType";
 
-describe.skip("useSceneChat", () => {
+describe("useSceneChat", () => {
   describe("init", () => {
     it("Initialize with empty array of messages", () => {
       const { result } = renderHook(() => useSceneChat());
@@ -11,16 +13,18 @@ describe.skip("useSceneChat", () => {
   describe("set messages", () => {
     it("should set the messages", () => {
       const { result } = renderHook(() => useSceneChat());
-      const dataToSet = [
+      const dataToSet: Array<IMessage> = [
         {
           from: "Robert",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         },
         {
           from: "Julia",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         }
       ];
       act(() => {
@@ -37,7 +41,8 @@ describe.skip("useSceneChat", () => {
         result.current.addMessage({
           from: "Robert",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         });
       });
       expect(result.current.messages).toEqual([
@@ -52,7 +57,8 @@ describe.skip("useSceneChat", () => {
         result.current.addMessage({
           from: "Julia",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         });
       });
       expect(result.current.messages).toEqual([
@@ -77,7 +83,8 @@ describe.skip("useSceneChat", () => {
             return {
               from: "Robert",
               text: "",
-              timestamp: 0
+              timestamp: 0,
+              type: MessageType.Normal
             };
           })
         );
@@ -88,7 +95,8 @@ describe.skip("useSceneChat", () => {
         result.current.addMessage({
           from: "Julia",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         });
       });
       expect(result.current.messages.length).toEqual(100);
