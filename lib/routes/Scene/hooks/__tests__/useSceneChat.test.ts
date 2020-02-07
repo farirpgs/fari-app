@@ -49,7 +49,8 @@ describe("useSceneChat", () => {
         {
           from: "Robert",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         }
       ]);
 
@@ -65,12 +66,14 @@ describe("useSceneChat", () => {
         {
           from: "Robert",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         },
         {
           from: "Julia",
           text: "",
-          timestamp: 0
+          timestamp: 0,
+          type: MessageType.Normal
         }
       ]);
     });
@@ -105,7 +108,8 @@ describe("useSceneChat", () => {
       ).toEqual({
         from: "Julia",
         text: "",
-        timestamp: 0
+        timestamp: 0,
+        type: MessageType.Normal
       });
     });
   });

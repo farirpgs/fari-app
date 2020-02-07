@@ -269,6 +269,7 @@ export function CharacterFields(props: {
           renderTags={(values: Array<string>, getTagProps) =>
             values.map((option: string, index: number) => (
               <Chip
+                key={index}
                 variant="outlined"
                 label={option}
                 style={{ margin: ".5rem" }}
