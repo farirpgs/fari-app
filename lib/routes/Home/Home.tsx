@@ -1,11 +1,10 @@
-import React from "react";
-import { Page } from "../../components/Page/Page";
-
-import LandscapeIcon from "@material-ui/icons/Landscape";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import CasinoIcon from "@material-ui/icons/Casino";
 import { makeStyles, Paper } from "@material-ui/core";
+import CasinoIcon from "@material-ui/icons/Casino";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import LandscapeIcon from "@material-ui/icons/Landscape";
+import React from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
+import { Page } from "../../components/Page/Page";
 
 const useStyle = makeStyles({
   logo: {
@@ -18,16 +17,16 @@ const useStyle = makeStyles({
     fontWeight: "bold",
     transition: "background-color 0.1s ease",
     "&:hover": {
-      backgroundColor: "#eaedff"
-    }
+      backgroundColor: "#eaedff",
+    },
   },
   icon: {
     width: "4rem",
-    height: "4rem"
-  }
+    height: "4rem",
+  },
 });
 
-export const Home: React.FC<{}> = props => {
+export const Home: React.FC<{}> = (props) => {
   return (
     <Page
       banner={
@@ -42,7 +41,7 @@ export const Home: React.FC<{}> = props => {
   );
 };
 
-export const HomeLogos: React.FC<{}> = props => {
+export const HomeLogos: React.FC<{}> = (props) => {
   const classes = useStyle(props);
   return (
     <div className="row around-xs">
@@ -60,12 +59,12 @@ export const HomeLogos: React.FC<{}> = props => {
       </div>
       <div className="col-xs-6 col-sm-4 margin-2">
         <Paper>
-          <AppLink to="/scenes">
+          <AppLink to="/play">
             <div className={classes.logo}>
               <div>
                 <LandscapeIcon className={classes.icon}></LandscapeIcon>
               </div>
-              <div>Scenes</div>
+              <div>Play</div>
             </div>
           </AppLink>
         </Paper>

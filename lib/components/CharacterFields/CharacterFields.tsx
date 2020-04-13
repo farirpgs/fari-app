@@ -13,6 +13,9 @@ import showdown from "showdown";
 import { ICharacter } from "../../types/ICharacter";
 import { FieldType, IField } from "../../types/IField";
 import { IRow } from "../../types/IGame";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Chip } from "@material-ui/core";
+import { googleAnalyticsService } from "../../services/injections";
 
 const converter = new showdown.Converter();
 
@@ -32,7 +35,7 @@ export const selectors = {
       },
       { Default: [] }
     );
-  }
+  },
 };
 
 export function CharacterFields(props: {
@@ -56,13 +59,13 @@ export function CharacterFields(props: {
         textColor="primary"
         variant="fullWidth"
         style={{
-          background: "#f5f5f5"
+          background: "#f5f5f5",
         }}
         onChange={(e, clickedTab) => {
           setCurrentTab(clickedTab);
         }}
       >
-        {Object.keys(tabs).map(tabName => (
+        {Object.keys(tabs).map((tabName) => (
           <Tab key={tabName} label={tabName} />
         ))}
       </Tabs>
@@ -110,6 +113,7 @@ export function CharacterFields(props: {
     return (
       <FormControl key={field.slug} style={{ width: "100%" }}>
         {renderTextField(field)}
+        {renderAutoComplete(field)}
         {renderNumber(field)}
         {renderBoolean(field)}
         {renderCategory(field)}
@@ -127,7 +131,7 @@ export function CharacterFields(props: {
           <Paper style={{ padding: "1rem" }}>
             <div
               dangerouslySetInnerHTML={{
-                __html: converter.makeHtml(field.content)
+                __html: converter.makeHtml(field.content),
               }}
             />
           </Paper>
@@ -156,7 +160,7 @@ export function CharacterFields(props: {
           <Slider
             defaultValue={field.default as number}
             valueLabelFormat={(value: number) => {
-              return field.marks.findIndex(mark => mark.value === value) + 1;
+              return field.marks.findIndex((mark) => mark.value === value) + 1;
             }}
             step={null}
             valueLabelDisplay="auto"
@@ -166,7 +170,7 @@ export function CharacterFields(props: {
             onChange={(e, value) => {
               setCharacter({
                 ...character,
-                [field.slug]: value
+                [field.slug]: value,
               });
             }}
             marks={field.marks}
@@ -182,10 +186,10 @@ export function CharacterFields(props: {
           control={
             <Checkbox
               checked={character[field.slug] || false}
-              onChange={e => {
+              onChange={(e) => {
                 setCharacter({
                   ...character,
-                  [field.slug]: e.target.checked
+                  [field.slug]: e.target.checked,
                 });
               }}
             />
@@ -212,12 +216,12 @@ export function CharacterFields(props: {
           variant="filled"
           inputProps={{ min: field.min, max: field.max }}
           style={{
-            width: "100%"
+            width: "100%",
           }}
-          onChange={e => {
+          onChange={(e) => {
             setCharacter({
               ...character,
-              [field.slug]: e.target.value
+              [field.slug]: e.target.value,
             });
           }}
         />
@@ -234,12 +238,54 @@ export function CharacterFields(props: {
           field={field}
           character={character}
           multiline={isMultiline}
-          onReady={value => {
+          onReady={(value) => {
             setCharacter({
               ...character,
-              [field.slug]: value
+              [field.slug]: value,
             });
           }}
+        />
+      )
+    );
+  }
+
+  function renderAutoComplete(field: IField): React.ReactNode {
+    const isValueFromOldControl = typeof character[field.slug] === "string";
+    const value = isValueFromOldControl
+      ? [character[field.slug]]
+      : character[field.slug];
+    return (
+      field.type === FieldType.AutoComplete && (
+        <Autocomplete
+          multiple
+          options={field.possibleValues}
+          freeSolo
+          value={value}
+          onChange={(event, value) => {
+            setCharacter({
+              ...character,
+              [field.slug]: value,
+            });
+          }}
+          renderTags={(values: Array<string>, getTagProps) =>
+            values.map((option: string, index: number) => (
+              <Chip
+                key={index}
+                variant="outlined"
+                label={option}
+                style={{ margin: ".5rem" }}
+                {...getTagProps({ index })}
+              />
+            ))
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="filled"
+              style={{ width: "100%" }}
+              label={field.label}
+            />
+          )}
         />
       )
     );
@@ -265,9 +311,9 @@ const OptimizedTextField: React.FC<{
         value={shouldRenderDefaultValue ? field.default : value || ""}
         variant="filled"
         style={{
-          width: "100%"
+          width: "100%",
         }}
-        onChange={e => {
+        onChange={(e) => {
           const value = e.target.value;
           clearTimeout(timeout.current);
           setValue(value);
@@ -276,7 +322,7 @@ const OptimizedTextField: React.FC<{
             onReady(value);
           }, 200);
         }}
-        onBlur={e => {
+        onBlur={(e) => {
           onReady(e.target.value);
         }}
         {...multilineProps}

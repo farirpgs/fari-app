@@ -1,8 +1,8 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import { IPeerAction } from "../types/IPeerAction";
 
 export type IPeerHostManager = ReturnType<ReturnType<typeof makeUsePeerHost>>;
+export type IPeerConnectionManager = ReturnType<typeof usePeerConnection>;
 
 function makeUsePeerHost() {
   let peerSingleton: Peer = undefined;
@@ -63,11 +63,11 @@ function makeUsePeerHost() {
       const id = setInterval(() => {
         if (!!peer.current) {
           const activeConnections = Object.keys(peer.current.connections)
-            .map(id => {
+            .map((id) => {
               const [connection] = peer.current.connections[id];
               return connection;
             })
-            .filter(c => c !== undefined);
+            .filter((c) => c !== undefined);
 
           setConnections(activeConnections);
           connectionsSingleton = activeConnections;
@@ -83,9 +83,9 @@ function makeUsePeerHost() {
       if (options.disabled) {
         return;
       }
-      connections.forEach(c => c.on("data", handleDataReceiveFromPlayer));
+      connections.forEach((c) => c.on("data", handleDataReceiveFromPlayer));
       return () => {
-        connections.forEach(c => c.off("data", handleDataReceiveFromPlayer));
+        connections.forEach((c) => c.off("data", handleDataReceiveFromPlayer));
       };
     }, [connections]);
 
@@ -93,12 +93,58 @@ function makeUsePeerHost() {
       peerId,
       numberOfConnections: connections.length,
       sendToAllPlayers: (action: IPeerAction) => {
-        connections.forEach(connection => {
+        connections.forEach((connection) => {
           connection.send(action);
         });
-      }
+      },
     };
   };
 }
 
 export const usePeerHost = makeUsePeerHost();
+
+export function usePeerConnection(
+  peedId: string,
+  handleDataReceiveFromHost: (action: IPeerAction) => void,
+  options: { disabled: boolean }
+) {
+  const [connectionToHost, setConnectionToHost] = useState<Peer.DataConnection>(
+    undefined
+  );
+  const peer = useRef<Peer>(undefined);
+  if (!peer.current && !options.disabled) {
+    peer.current = new Peer();
+  }
+  useEffect(() => {
+    if (options.disabled) {
+      return;
+    }
+    const connection = peer.current.connect(peedId);
+    function onConnectionOpen() {
+      setConnectionToHost(connection);
+    }
+    function onConnectionClose() {
+      setConnectionToHost(undefined);
+    }
+    function onConnectionData(data) {
+      handleDataReceiveFromHost(data);
+    }
+    connection.on("open", onConnectionOpen);
+    connection.on("close", onConnectionClose);
+    connection.on("data", onConnectionData);
+    return () => {
+      connection.off("open", onConnectionOpen);
+      connection.off("close", onConnectionClose);
+      connection.off("data", onConnectionData);
+    };
+  }, [peedId]);
+
+  return {
+    isConnectedToHost: !!connectionToHost,
+    sendToGM: (action: IPeerAction) => {
+      if (!!connectionToHost) {
+        connectionToHost.send(action);
+      }
+    },
+  };
+}

@@ -5,7 +5,8 @@ export enum FieldType {
   Number,
   Boolean,
   Slider,
-  Paper
+  Paper,
+  AutoComplete,
 }
 
 export interface IField {
@@ -20,4 +21,6 @@ export interface IField {
   helper?: string;
   content?: string;
   marks?: Array<{ value: number; label: string }>;
+
+  possibleValues?: Array<string>;
 }

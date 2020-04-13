@@ -25,7 +25,6 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-ga": "2.7.0",
-    "react-helmet": "6.0.0",
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
     "showdown": "^1.9.1",

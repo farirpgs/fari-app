@@ -448,6 +448,5 @@ export const FateCore: IGame = {
         },
       ],
     },
-    { tab: "Guide", columns: [{ col: 6, field: guide }] },
   ],
 };

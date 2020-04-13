@@ -6,14 +6,20 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { AppBottomNavigation } from "./components/AppBottomNavigation/AppBottomNavigation";
 import { AppRouter } from "./components/AppRouter/AppRouter";
+import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { History } from "./components/History/History";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { StoreContext, _useStore } from "./context/store";
 import "./index.css";
 import { AppTheme } from "./theme";
-import { _useStore, StoreContext } from "./context/store";
-import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
-import Helmet from "react-helmet";
-import { env } from "./services/injections";
+
+/* <Helmet
+  htmlAttributes={{
+    "client-build-number": env.buildNumber,
+    "client-hash": env.hash,
+    "client-context": env.context
+  }}
+></Helmet> */
 
 function App() {
   const store = _useStore();
@@ -23,13 +29,7 @@ function App() {
         <StoreContext.Provider value={store}>
           <BrowserRouter>
             <ScrollToTop />
-            <Helmet
-              htmlAttributes={{
-                "client-build-number": env.buildNumber,
-                "client-hash": env.hash,
-                "client-context": env.context
-              }}
-            ></Helmet>
+
             <CssBaseline />
             <History />
             <AppRouter />

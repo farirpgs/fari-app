@@ -46,6 +46,6 @@ export function usePeerConnection(
       if (!!connectionToHost) {
         connectionToHost.send(action);
       }
-    }
+    },
   };
 }
