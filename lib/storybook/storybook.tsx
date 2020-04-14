@@ -1,5 +1,4 @@
 import { addParameters, configure } from "@storybook/react";
-import { characterCardStories } from "./stories/components/characterCardStories";
 import { gameStories } from "./stories/pages/gamesStories";
 
 addParameters({
@@ -14,5 +13,4 @@ configure(() => {
 
 function loadStoriesInAlphabeticalOrder() {
   gameStories();
-  characterCardStories();
 }

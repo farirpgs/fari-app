@@ -1,4 +1,12 @@
-import { Box, Button, CircularProgress, Grid, TextField, Typography, useTheme } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+  useTheme,
+} from "@material-ui/core";
 import { css } from "emotion";
 import produce from "immer";
 import Peer from "peerjs";
@@ -101,7 +109,7 @@ export const Play: React.FC<{
         const id = uuidV4();
         draft.aspects[id] = {
           title: "",
-          content: "<br/><br/><br/>",
+          content: "<br/>",
           checkboxes: [],
           consequences: [],
         };
