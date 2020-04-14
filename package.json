@@ -7,9 +7,11 @@
     "start": "parcel ./lib/index.html --target browser",
     "build": "yarn run validate && parcel build ./lib/index.html --target browser",
     "storybook": "concurrently -n preview,manager \"parcel lib/storybook/storybook.html  --target browser\" \"start-storybook --port 5000 --preview-url=http://localhost:1234/\"",
-    "validate": "tsc --noEmit --project tsconfig.json && eslint 'lib/**' && yarn run test",
-    "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
-    "test": "jest --coverage"
+    "tsc": "tsc --noEmit --project tsconfig.json",
+    "lint": "eslint 'lib/**'",
+    "test": "jest --coverage",
+    "validate": "yarn tsc && yarn lint && yarn test",
+    "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch"
   },
   "dependencies": {
     "@material-ui/core": "4.9.10",
