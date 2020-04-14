@@ -56,7 +56,6 @@ export function usePeerHost(options: {
     },
     actions: {
       sendToConnections(action: any) {
-        debugger;
         connections.forEach((connection) => {
           connection.send(action);
         });
