@@ -1,6 +1,5 @@
 import { makeStyles, Paper } from "@material-ui/core";
 import CasinoIcon from "@material-ui/icons/Casino";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import LandscapeIcon from "@material-ui/icons/Landscape";
 import React from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
@@ -45,18 +44,6 @@ export const HomeLogos: React.FC<{}> = (props) => {
   const classes = useStyle(props);
   return (
     <div className="row around-xs">
-      <div className="col-xs-6 col-sm-4 margin-2">
-        <Paper>
-          <AppLink to="/games">
-            <div className={classes.logo}>
-              <div>
-                <GroupAddIcon className={classes.icon}></GroupAddIcon>
-              </div>
-              <div>Characters</div>
-            </div>
-          </AppLink>
-        </Paper>
-      </div>
       <div className="col-xs-6 col-sm-4 margin-2">
         <Paper>
           <AppLink to="/play">

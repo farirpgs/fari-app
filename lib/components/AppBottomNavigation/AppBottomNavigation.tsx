@@ -2,7 +2,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import CasinoIcon from "@material-ui/icons/Casino";
 import LandscapeIcon from "@material-ui/icons/Landscape";
-import PersonIcon from "@material-ui/icons/Person";
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useStoreContext } from "../../context/store";
@@ -16,7 +15,7 @@ const _AppBottomNavigation: React.FC<{
     if (location.pathname.startsWith("/game")) {
       return setNav(1);
     }
-    if (location.pathname.startsWith("/scene")) {
+    if (location.pathname.startsWith("/play")) {
       return setNav(2);
     }
     if (location.pathname.startsWith("/dice")) {
@@ -47,19 +46,6 @@ const _AppBottomNavigation: React.FC<{
           "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
       }}
     >
-      <BottomNavigationAction
-        label=""
-        component={Link}
-        to="/"
-        style={{ display: "none" }}
-        icon={<PersonIcon />}
-      />
-      <BottomNavigationAction
-        label="Characters"
-        component={Link}
-        to="/games"
-        icon={<PersonIcon />}
-      />
       <BottomNavigationAction
         label="Play"
         component={Link}

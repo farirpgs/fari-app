@@ -16,6 +16,7 @@
     "@material-ui/icons": "4.9.1",
     "@material-ui/lab": "4.0.0-alpha.49",
     "@sentry/browser": "5.15.4",
+    "immer": "6.0.3",
     "axios": "0.19.2",
     "emotion": "10.0.27",
     "flexboxgrid": "6.3.1",
