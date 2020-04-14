@@ -1,5 +1,5 @@
 import { css } from "emotion";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 export const ContentEditable: React.FC<{
   value: string;
@@ -7,18 +7,22 @@ export const ContentEditable: React.FC<{
   disabled?: boolean;
   autoFocus?: boolean;
 }> = (props) => {
-  const [html, setHtml] = useState(props.value);
   const $ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    setHtml(html);
+    if ($ref.current.innerHTML !== props.value) {
+      $ref.current.innerHTML = props.value;
+    }
   }, [props.value]);
 
   useEffect(() => {
-    if ($ref.current && props.autoFocus) {
-      $ref.current.focus();
+    function focusOnLoad() {
+      if ($ref.current && props.autoFocus) {
+        $ref.current.focus();
+      }
     }
-  }, [props.autoFocus]);
+    focusOnLoad();
+  }, []);
 
   function onChange() {
     if ($ref.current) {
@@ -26,7 +30,6 @@ export const ContentEditable: React.FC<{
     }
   }
 
-  const htmlForDiv = props.disabled ? props.value : html;
   return (
     <div
       className={css({
@@ -40,7 +43,6 @@ export const ContentEditable: React.FC<{
         onChange();
       }}
       contentEditable={!props.disabled}
-      dangerouslySetInnerHTML={{ __html: htmlForDiv }}
     ></div>
   );
 };

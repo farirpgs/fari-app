@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  TextField,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { Box, Button, CircularProgress, Grid, TextField, Typography, useTheme } from "@material-ui/core";
 import { css } from "emotion";
 import produce from "immer";
 import Peer from "peerjs";
@@ -26,7 +18,15 @@ const debug = false;
 
 interface IScene {
   name: string;
-  aspects: Record<string, { title: string; content: string }>;
+  aspects: Record<
+    string,
+    {
+      title: string;
+      content: string;
+      checkboxes: Array<boolean>;
+      consequences: Array<string>;
+    }
+  >;
   gm: {
     roll?: number;
   };
@@ -62,7 +62,7 @@ export const Play: React.FC<{
 
   // ROUTE
   const [scene, setScene] = useState<IScene>({
-    name: "",
+    name: "Scene Name",
     aspects: {},
     gm: {},
     players: [],
@@ -79,6 +79,14 @@ export const Play: React.FC<{
     }
   }, [hostManager.state.connections]);
 
+  function resetScene() {
+    setScene(
+      produce((draft) => {
+        draft.name = "Scene Name";
+        draft.aspects = {};
+      })
+    );
+  }
   function setSceneName(name: string) {
     setScene(
       produce((draft) => {
@@ -94,7 +102,17 @@ export const Play: React.FC<{
         draft.aspects[id] = {
           title: "",
           content: "<br/><br/><br/>",
+          checkboxes: [],
+          consequences: [],
         };
+      })
+    );
+  }
+
+  function removeSceneAspect(id: string) {
+    setScene(
+      produce((draft) => {
+        delete draft.aspects[id];
       })
     );
   }
@@ -111,6 +129,50 @@ export const Play: React.FC<{
     setScene(
       produce((draft) => {
         draft.aspects[id].content = content;
+      })
+    );
+  }
+
+  function addSceneAspectCheckboxes(id: string, amount: number) {
+    setScene(
+      produce((draft) => {
+        for (let i = 0; i < amount; i++) {
+          draft.aspects[id].checkboxes.push(false);
+        }
+      })
+    );
+  }
+
+  function updateSceneAspectCheckbox(
+    id: string,
+    index: number,
+    value: boolean
+  ) {
+    setScene(
+      produce((draft) => {
+        draft.aspects[id].checkboxes[index] = value;
+      })
+    );
+  }
+
+  function addSceneAspectConsequence(id: string, amount: number) {
+    setScene(
+      produce((draft) => {
+        for (let i = 0; i < amount; i++) {
+          draft.aspects[id].consequences.push("");
+        }
+      })
+    );
+  }
+
+  function updateSceneAspectConsequence(
+    id: string,
+    index: number,
+    value: string
+  ) {
+    setScene(
+      produce((draft) => {
+        draft.aspects[id].consequences[index] = value;
       })
     );
   }
@@ -253,7 +315,7 @@ export const Play: React.FC<{
 
   function renderSidePanel() {
     return (
-      <Box>
+      <Box display="flex" flexDirection="column" height="100%">
         <Box
           className={css({
             backgroundColor: theme.palette.primary.main,
@@ -297,7 +359,7 @@ export const Play: React.FC<{
           </Box>
         </Box>
 
-        <Box bgcolor="#fff" minHeight="10rem">
+        <Box bgcolor="#fff" minHeight="10rem" flex="1 0 auto">
           <Box pt=".5rem" px=".5rem">
             <Typography
               variant="overline"
@@ -340,7 +402,7 @@ export const Play: React.FC<{
           justify="space-between"
           alignItems="baseline"
         >
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <Box>
               <Typography
                 variant="h4"
@@ -349,7 +411,7 @@ export const Play: React.FC<{
                 })}
               >
                 <ContentEditable
-                  value={scene.name || "Scene Name"}
+                  value={scene.name}
                   disabled={!isGM}
                   onChange={(value) => {
                     setSceneName(value);
@@ -358,7 +420,7 @@ export const Play: React.FC<{
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             {isGM ? (
               <Box display="flex">
                 <Button
@@ -381,6 +443,13 @@ export const Play: React.FC<{
                   }}
                 >
                   Copy Share Link
+                </Button>
+                <Button
+                  onClick={() => {
+                    resetScene();
+                  }}
+                >
+                  Reset
                 </Button>
               </Box>
             ) : (
@@ -406,12 +475,29 @@ export const Play: React.FC<{
                   <IndexCard
                     title={scene.aspects[aspectId].title}
                     content={scene.aspects[aspectId].content}
+                    checkboxes={scene.aspects[aspectId].checkboxes}
+                    consequences={scene.aspects[aspectId].consequences}
                     disabled={!isGM}
+                    onRemove={() => {
+                      removeSceneAspect(aspectId);
+                    }}
                     onTitleChange={(value) => {
                       updateSceneAspectTitle(aspectId, value);
                     }}
                     onContentChange={(value) => {
                       updateSceneAspectContent(aspectId, value);
+                    }}
+                    onCheckboxChange={(index, value) => {
+                      updateSceneAspectCheckbox(aspectId, index, value);
+                    }}
+                    onConsequenceChange={(index, value) => {
+                      updateSceneAspectConsequence(aspectId, index, value);
+                    }}
+                    onAddCheckbox={(amount) => {
+                      addSceneAspectCheckboxes(aspectId, amount);
+                    }}
+                    onAddConsequence={(amount) => {
+                      addSceneAspectConsequence(aspectId, amount);
                     }}
                   ></IndexCard>
                 </Grid>
