@@ -2,7 +2,7 @@ import Peer from "peerjs";
 import { useEffect, useState } from "react";
 
 export function usePeerHost(options: {
-  onConnectionDataReceive: (data: any) => void;
+  onConnectionDataReceive: (id: string, data: any) => void;
   peer: Peer;
   debug?: boolean;
 }) {
@@ -19,7 +19,7 @@ export function usePeerHost(options: {
         currentConnection: Peer.DataConnection
       ) {
         currentConnection.on("data", (data) => {
-          console.log(data);
+          options.onConnectionDataReceive(currentConnection.label, data);
         });
         currentConnection.on("open", () => {
           setConnections((connections) => {
@@ -38,26 +38,15 @@ export function usePeerHost(options: {
     return listenForConnections();
   }, []);
 
-  useEffect(() => {
-    function subscribeConnectionDataReceive() {
-      connections.forEach((c) => c.on("data", options.onConnectionDataReceive));
-      return () => {
-        connections.forEach((c) =>
-          c.off("data", options.onConnectionDataReceive)
-        );
-      };
-    }
-    return subscribeConnectionDataReceive();
-  }, [connections]);
-
   return {
     state: {
       numberOfConnections: connections.length,
+      connections: connections,
     },
     actions: {
-      sendToConnections(action: any) {
+      sendToConnections(data: any) {
         connections.forEach((connection) => {
-          connection.send(action);
+          connection.send(data);
         });
       },
     },

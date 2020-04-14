@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer>(undefined);
   const [hostId, setHostId] = useState<string>(undefined);
+  const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
     peer.current = new Peer(undefined, { debug: options.debug ? 3 : 0 });
@@ -30,14 +31,17 @@ export function usePeerJS(options: { debug?: boolean }) {
       }
       function onPeerDisconnectedCallback() {
         setHostId(undefined);
+        setError("disconnected");
         console.debug("PeerJS: Connection lost. Please reconnect");
       }
       function onPeerCloseCallback() {
         setHostId(undefined);
+        setError("close");
         console.debug("PeerJS: Connection destroyed");
       }
       function onPeerErrorCallback(error: any) {
         setHostId(undefined);
+        setError(error);
         console.debug("PeerJS: Error", error);
       }
     }
@@ -45,5 +49,5 @@ export function usePeerJS(options: { debug?: boolean }) {
     return setupPeer();
   }, []);
 
-  return { state: { peer: peer.current, hostId } };
+  return { state: { peer: peer.current, hostId, error } };
 }

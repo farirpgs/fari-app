@@ -5,7 +5,7 @@ import { SentryService } from "./sentry/SentryService";
 
 const buildNumber = process.env.BUILD_ID ?? "0";
 const hash = process.env.COMMIT_REF ?? "0";
-const context = process.env.CONTEXT ?? "localhost";
+const context: "localhost" | string = process.env.CONTEXT ?? "localhost";
 
 export const env = { buildNumber, hash, context };
 

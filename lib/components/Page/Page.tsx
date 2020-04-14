@@ -19,14 +19,14 @@ export const Page: React.FC<{
   appBarActions?: JSX.Element;
   banner?: JSX.Element;
   backFunction?: () => void;
-}> = props => {
+}> = (props) => {
   const {
     isLoading,
     h1,
     children,
     appBarActions,
     backFunction,
-    notFound
+    notFound,
   } = props;
 
   const isReallyLoading = useDelayedIsLoading(isLoading);
@@ -58,7 +58,7 @@ export const Page: React.FC<{
           textAlign: "center",
           background: "#3f50b5",
           color: "#fff",
-          padding: "1.5rem"
+          padding: "1.5rem",
         }}
       >
         {props.banner}
@@ -94,10 +94,10 @@ export const Page: React.FC<{
           <Toolbar
             style={{
               margin: "0 auto",
-              maxWidth: "1024px",
+              maxWidth: "1440px",
               width: "100%",
               padding: "1rem",
-              height: `${headerHeightREM}rem`
+              height: `${headerHeightREM}rem`,
             }}
           >
             {!!backFunction ? (
@@ -120,7 +120,7 @@ export const Page: React.FC<{
               variant="h6"
               component="h1"
               style={{
-                flex: "1 1 auto"
+                flex: "1 1 auto",
               }}
             >
               <div
@@ -128,7 +128,7 @@ export const Page: React.FC<{
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  maxWidth: "25rem"
+                  maxWidth: "25rem",
                 }}
               >
                 {h1}
