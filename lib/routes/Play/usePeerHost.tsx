@@ -22,11 +22,19 @@ export function usePeerHost(options: {
           options.onConnectionDataReceive(currentConnection.label, data);
         });
         currentConnection.on("open", () => {
+          console.info(
+            "usePeerHost: Opened new connnection",
+            currentConnection.label
+          );
           setConnections((connections) => {
             return [...connections, currentConnection];
           });
         });
         currentConnection.on("close", () => {
+          console.info(
+            "usePeerHost: Close connection",
+            currentConnection.label
+          );
           setConnections((connections) => {
             return connections.filter(
               (c) => c.label !== currentConnection.label

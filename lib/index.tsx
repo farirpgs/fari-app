@@ -1,3 +1,4 @@
+import { StylesProvider } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import "flexboxgrid";
@@ -9,7 +10,6 @@ import { AppRouter } from "./components/AppRouter/AppRouter";
 import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { History } from "./components/History/History";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
-import { StoreContext, _useStore } from "./context/store";
 import "./index.css";
 import { AppTheme } from "./theme";
 
@@ -22,11 +22,10 @@ import { AppTheme } from "./theme";
 ></Helmet> */
 
 function App() {
-  const store = _useStore();
   return (
     <ErrorBoundary>
       <ThemeProvider theme={AppTheme}>
-        <StoreContext.Provider value={store}>
+        <StylesProvider injectFirst>
           <BrowserRouter>
             <ScrollToTop />
 
@@ -35,7 +34,7 @@ function App() {
             <AppRouter />
             <AppBottomNavigation />
           </BrowserRouter>
-        </StoreContext.Provider>
+        </StylesProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

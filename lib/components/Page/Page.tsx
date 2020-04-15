@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MenuIcon from "@material-ui/icons/Menu";
+import { css } from "emotion";
 import React, { useState } from "react";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading";
 import { AppProgress } from "../AppProgress/AppProgress";
@@ -68,22 +69,41 @@ export const Page: React.FC<{
 
   function renderContent() {
     return (
-      <div
-        onClick={() => {
-          setIsDrawerOpened(false);
-        }}
-      >
-        <Fade in timeout={250}>
-          <div className="route-box">
-            {renderBanner()}
-            {!!notFound ? (
-              notFound
-            ) : (
-              <div className="route-box-content">{children}</div>
-            )}
-          </div>
-        </Fade>
-      </div>
+      <Fade in timeout={250}>
+        <div
+          className={css({
+            height: "100%",
+            paddingTop: "4.25rem " /* Top Nav size 4.25 + 2*/,
+            paddingBottom: "56px " /* Bottom Nav Size */,
+            minHeight: "calc(100vh - 56px)",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+          })}
+          onClick={() => {
+            setIsDrawerOpened(false);
+          }}
+        >
+          {renderBanner()}
+          {!!notFound ? (
+            notFound
+          ) : (
+            <div
+              className={css({
+                maxWidth: "1440px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "2rem",
+                width: "100%",
+                padding: "0 1rem",
+                flex: "1 0 auto",
+              })}
+            >
+              {children}
+            </div>
+          )}
+        </div>
+      </Fade>
     );
   }
 

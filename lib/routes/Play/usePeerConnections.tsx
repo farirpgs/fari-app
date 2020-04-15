@@ -11,35 +11,54 @@ export function usePeerConnections(options: {
   const [connectionToHost, setConnectionToHost] = useState<Peer.DataConnection>(
     undefined
   );
+  const [connectingToHost, setConnectingToHost] = useState(false);
+  const [connectingToHostError, setConnectingToHostError] = useState(false);
 
   useEffect(() => {
-    if (connection.current) {
-      connection.current.off("open", onHostConnectionOpen);
-      connection.current.off("close", onHostConnectionClose);
-      connection.current.off("data", onHostDataReceive);
+    function subscribeForEvents() {
+      options.peer.on("error", onPeerErrorCallback);
+      return () => {
+        options.peer.off("error", onPeerErrorCallback);
+        connection.current?.off("open", onHostConnectionOpen);
+        connection.current?.off("close", onHostConnectionClose);
+        connection.current?.off("data", onHostDataReceive);
+      };
     }
+
+    return subscribeForEvents();
   }, []);
 
+  function onPeerErrorCallback(error: any) {
+    if (error.type === "peer-unavailable") {
+      setConnectingToHostError(true);
+      setConnectingToHost(false);
+    }
+  }
   function onHostConnectionOpen() {
     setConnectionToHost(connection.current);
-    console.debug("Connection: Connected To Host");
+    setConnectingToHost(false);
+    console.info("usePeerConnections: Connected To Host");
   }
   function onHostConnectionClose() {
     setConnectionToHost(undefined);
-    console.debug("Connection: Disconnected From Host");
+    setConnectingToHost(false);
+    console.info("usePeerConnections: Disconnected From Host");
   }
   function onHostDataReceive(data: any) {
     options.onHostDataReceive(data);
-    console.debug("Connection: Received Data", data);
   }
 
   return {
     state: {
       isConnectedToHost: !!connectionToHost,
+      connectingToHost,
+      connectingToHostError,
     },
     actions: {
       connect(id: string, metadata?: any) {
-        console.debug("Connection: Setup");
+        console.info("Connection: Setup");
+        setConnectingToHost(true);
+        setConnectingToHostError(false);
         connection.current = options.peer.connect(id, {
           reliable: true,
           label: uuidV4(),

@@ -26,6 +26,7 @@ export const IndexCard: React.FC<{
   onAddCheckbox(amount: number): void;
   onAddConsequence(amount: number): void;
   onRemove(): void;
+  onReset(): void;
 
   disabled?: boolean;
 }> = (props) => {
@@ -74,13 +75,6 @@ export const IndexCard: React.FC<{
                 >
                   <MenuItem
                     onClick={() => {
-                      props.onRemove();
-                    }}
-                  >
-                    Remove
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
                       props.onAddCheckbox(1);
                     }}
                   >
@@ -92,6 +86,22 @@ export const IndexCard: React.FC<{
                     }}
                   >
                     Add 1 consequence
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setMenuOpen(false);
+                      props.onRemove();
+                    }}
+                  >
+                    Remove
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setMenuOpen(false);
+                      props.onReset();
+                    }}
+                  >
+                    Reset
                   </MenuItem>
                 </Menu>
               </Grid>

@@ -5,22 +5,22 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
-import ContactSupportIcon from "@material-ui/icons/ContactSupport";
+import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import React from "react";
 import { usePWA } from "../../hooks/usePWA";
-import { routerHistory } from "../History/History";
 import { googleAnalyticsService } from "../../services/injections";
+import { routerHistory } from "../History/History";
 
 export const MenuDrawer: React.FC<{
   open: boolean;
   onOpen: () => void;
   onClose: () => void;
-}> = props => {
+}> = (props) => {
   const pwa = usePWA();
 
   return (
@@ -28,12 +28,11 @@ export const MenuDrawer: React.FC<{
       onOpen={props.onOpen}
       onClose={props.onClose}
       open={props.open}
-      variant="persistent"
       anchor="left"
       PaperProps={{
         style: {
-          width: "240px"
-        }
+          width: "240px",
+        },
       }}
     >
       <div className="row end-xs">
@@ -77,7 +76,7 @@ export const MenuDrawer: React.FC<{
             props.onClose();
             googleAnalyticsService.sendEvent({
               category: "Fari",
-              action: "Support"
+              action: "Support",
             });
             window.open("https://ko-fi.com/rpdeshaies");
           }}

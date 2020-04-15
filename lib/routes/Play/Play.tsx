@@ -2,7 +2,10 @@ import {
   Box,
   Button,
   CircularProgress,
+  Container,
   Grid,
+  InputLabel,
+  Paper,
   TextField,
   Typography,
   useTheme,
@@ -12,6 +15,7 @@ import produce from "immer";
 import Peer from "peerjs";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import logo from "../../../images/app-icon.png";
 import { Page } from "../../components/Page/Page";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -22,8 +26,16 @@ import { IndexCard } from "./IndexCard";
 import { usePeerConnections } from "./usePeerConnections";
 import { usePeerHost } from "./usePeerHost";
 import { usePeerJS } from "./usePeerJS";
-const debug = false;
 
+const debug = false;
+const defaultSceneName = "Name of your scene...";
+const defaultSceneAspect = {
+  title: "",
+  content: "<br/>",
+  checkboxes: [],
+  consequences: [],
+};
+const defaultAscpects = { [uuidV4()]: defaultSceneAspect };
 interface IScene {
   name: string;
   aspects: Record<
@@ -50,6 +62,7 @@ export const Play: React.FC<{
   const idFromProps = props.match.params.id;
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.primary.main);
+
   const peerManager = usePeerJS({
     debug: debug,
   });
@@ -70,8 +83,8 @@ export const Play: React.FC<{
 
   // ROUTE
   const [scene, setScene] = useState<IScene>({
-    name: "Scene Name",
-    aspects: {},
+    name: defaultSceneName,
+    aspects: defaultAscpects,
     gm: {},
     players: [],
   });
@@ -90,8 +103,8 @@ export const Play: React.FC<{
   function resetScene() {
     setScene(
       produce((draft) => {
-        draft.name = "Scene Name";
-        draft.aspects = {};
+        draft.name = defaultSceneName;
+        draft.aspects = defaultAscpects;
       })
     );
   }
@@ -107,12 +120,7 @@ export const Play: React.FC<{
     setScene(
       produce((draft) => {
         const id = uuidV4();
-        draft.aspects[id] = {
-          title: "",
-          content: "<br/>",
-          checkboxes: [],
-          consequences: [],
-        };
+        draft.aspects[id] = defaultSceneAspect;
       })
     );
   }
@@ -121,6 +129,14 @@ export const Play: React.FC<{
     setScene(
       produce((draft) => {
         delete draft.aspects[id];
+      })
+    );
+  }
+
+  function resetSceneAspect(id: string) {
+    setScene(
+      produce((draft) => {
+        draft.aspects[id] = defaultSceneAspect;
       })
     );
   }
@@ -202,6 +218,7 @@ export const Play: React.FC<{
       })
     );
   }
+
   function updatePlayerRoll(id: string, roll: number) {
     setScene(
       produce((draft) => {
@@ -271,34 +288,67 @@ export const Play: React.FC<{
   function renderPlayerPreScreen() {
     return (
       <Box>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            connectionsManager.actions.connect(idFromProps, {
-              playerName: playerName,
-            });
-          }}
-        >
-          <Box pb=".5rem">
-            <Typography variant="h5">Connect game: #{idFromProps}</Typography>
-          </Box>
-          <Grid container spacing={2} alignItems="flex-end">
-            <Grid item>
+        <Container maxWidth="xs">
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              connectionsManager.actions.connect(idFromProps, {
+                playerName: playerName,
+              });
+            }}
+          >
+            <Box pb="2rem" textAlign="center">
+              <img width="150px" src={logo} />
+            </Box>
+            <Box pb="2rem" textAlign="center">
+              <Typography variant="h4">Connect to a Game</Typography>
+            </Box>
+            <Box pb="2rem">
+              <InputLabel shrink>Character Name:</InputLabel>
               <TextField
-                label="What is your name?"
+                placeholder="Magnus Burnsides"
                 value={playerName}
                 onChange={(event) => {
                   setPlayerName(event.target.value);
                 }}
+                fullWidth
+                autoFocus
                 required
               ></TextField>
-            </Grid>
-            <Grid item>
-              <Button type="submit">Connect</Button>
-            </Grid>
-          </Grid>
-        </form>
+            </Box>
+            <Box pb="2rem">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                size="large"
+              >
+                Play!
+              </Button>
+            </Box>
+            {connectionsManager.state.connectingToHost && (
+              <Box pb="1rem">
+                <Box pb="3rem" display="flex" justifyContent="center">
+                  <Typography>
+                    {"That's an awesome name by the way!"}
+                  </Typography>
+                </Box>
+                <Box display="flex" justifyContent="center">
+                  <CircularProgress />
+                </Box>
+              </Box>
+            )}
+            {connectionsManager.state.connectingToHostError && (
+              <Box pb="1rem" textAlign="center">
+                <Typography color="error">
+                  It seems the game you are trying to join does not exists
+                </Typography>
+              </Box>
+            )}
+          </form>
+        </Container>
       </Box>
     );
   }
@@ -309,6 +359,7 @@ export const Play: React.FC<{
     }
     return (
       <Box>
+        {renderHeader()}
         <Grid container>
           <Grid item xs={3}>
             {renderSidePanel()}
@@ -367,43 +418,45 @@ export const Play: React.FC<{
           </Box>
         </Box>
 
-        <Box bgcolor="#fff" minHeight="10rem" flex="1 0 auto">
-          <Box pt=".5rem" px=".5rem">
-            <Typography
-              variant="overline"
-              color="primary"
-              className={css({
-                fontSize: "1.2rem",
-                lineHeight: Font.lineHeight(1.2),
-              })}
-            >
-              GM{scene.gm.roll !== undefined && `: rolled a ${scene.gm.roll}`}
-            </Typography>
+        <Paper>
+          <Box bgcolor="#fff" minHeight="10rem" flex="1 0 auto">
+            <Box pt=".5rem" px=".5rem">
+              <Typography
+                variant="overline"
+                color="primary"
+                className={css({
+                  fontSize: "1.2rem",
+                  lineHeight: Font.lineHeight(1.2),
+                })}
+              >
+                GM{scene.gm.roll !== undefined && `: rolled a ${scene.gm.roll}`}
+              </Typography>
+            </Box>
+            {scene.players.map((p) => {
+              return (
+                <Box key={p.id} px=".5rem">
+                  <Typography
+                    variant="overline"
+                    className={css({
+                      fontSize: "1.2rem",
+                      lineHeight: Font.lineHeight(1.2),
+                    })}
+                  >
+                    {p.playerName}
+                    {p.roll !== undefined && `: rolled a ${p.roll}`}
+                  </Typography>
+                </Box>
+              );
+            })}
           </Box>
-          {scene.players.map((p) => {
-            return (
-              <Box key={p.id} px=".5rem">
-                <Typography
-                  variant="overline"
-                  className={css({
-                    fontSize: "1.2rem",
-                    lineHeight: Font.lineHeight(1.2),
-                  })}
-                >
-                  {p.playerName}
-                  {p.roll !== undefined && `: rolled a ${p.roll}`}
-                </Typography>
-              </Box>
-            );
-          })}
-        </Box>
+        </Paper>
       </Box>
     );
   }
 
-  function renderMainContent() {
+  function renderHeader() {
     return (
-      <Box pl="1rem">
+      <Box pb="2rem">
         <Grid
           container
           spacing={2}
@@ -430,7 +483,7 @@ export const Play: React.FC<{
           </Grid>
           <Grid item xs={6}>
             {isGM ? (
-              <Box display="flex">
+              <Box display="flex" justifyContent="flex-end">
                 <Button
                   onClick={() => {
                     addSceneAspect();
@@ -473,9 +526,16 @@ export const Play: React.FC<{
             )}
           </Grid>
         </Grid>
+      </Box>
+    );
+  }
+
+  function renderMainContent() {
+    return (
+      <Box pl="1rem">
         <Box display="flex" justifyContent="flex-end"></Box>
 
-        <Box py="2rem">
+        <Box pb="2rem">
           <Grid container spacing={2}>
             {Object.keys(scene.aspects).map((aspectId) => {
               return (
@@ -488,6 +548,9 @@ export const Play: React.FC<{
                     disabled={!isGM}
                     onRemove={() => {
                       removeSceneAspect(aspectId);
+                    }}
+                    onReset={() => {
+                      resetSceneAspect(aspectId);
                     }}
                     onTitleChange={(value) => {
                       updateSceneAspectTitle(aspectId, value);

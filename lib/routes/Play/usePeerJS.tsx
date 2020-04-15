@@ -12,7 +12,7 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   useEffect(() => {
     function setupPeer() {
-      console.debug("PeerJS: Setup");
+      console.info("usePeerJS: Setup");
 
       peer.current.on("open", onPeerOpenCallback);
       peer.current.on("disconnected", onPeerDisconnectedCallback);
@@ -23,26 +23,27 @@ export function usePeerJS(options: { debug?: boolean }) {
         peer.current.off("open", onPeerOpenCallback);
         peer.current.off("disconnected", onPeerDisconnectedCallback);
         peer.current.off("close", onPeerCloseCallback);
+        peer.current.destroy();
       };
 
       function onPeerOpenCallback(id: string) {
         setHostId(id);
-        console.debug("PeerJS: Connection Established");
+        console.info("usePeerJS: Connection Opened");
       }
       function onPeerDisconnectedCallback() {
         setHostId(undefined);
-        setError("disconnected");
-        console.debug("PeerJS: Connection lost. Please reconnect");
+        peer.current.reconnect();
+        console.info("usePeerJS: Disconnected. Reconnecting");
       }
       function onPeerCloseCallback() {
         setHostId(undefined);
-        setError("close");
-        console.debug("PeerJS: Connection destroyed");
+        console.info("usePeerJS: Connection Closed");
       }
       function onPeerErrorCallback(error: any) {
-        setHostId(undefined);
-        setError(error);
-        console.debug("PeerJS: Error", error);
+        if (error.type === "server-error") {
+          setError(error);
+        }
+        console.info("usePeerJS: Error", error.type);
       }
     }
 

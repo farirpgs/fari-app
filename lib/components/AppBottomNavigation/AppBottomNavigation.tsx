@@ -4,7 +4,6 @@ import CasinoIcon from "@material-ui/icons/Casino";
 import LandscapeIcon from "@material-ui/icons/Landscape";
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { useStoreContext } from "../../context/store";
 
 const _AppBottomNavigation: React.FC<{
   location: { pathname: string };
@@ -24,9 +23,8 @@ const _AppBottomNavigation: React.FC<{
       return setNav(0);
     }
   }, [location.pathname]);
-  const store = useStoreContext();
 
-  if (store.location.pathname === "/") {
+  if (props.location.pathname === "/") {
     return null;
   }
   return (
