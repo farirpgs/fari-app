@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { googleAnalyticsService } from "../services/injections";
+import { googleAnalyticsService } from "../../services/injections";
 
 interface IPWAEvent {
   prompt: () => void;
@@ -38,7 +38,7 @@ export function usePWA(
       onInstall();
       googleAnalyticsService.sendEvent({
         category: "Fari",
-        action: "Install"
+        action: "Install",
       });
     } else {
       onCancelInstall();

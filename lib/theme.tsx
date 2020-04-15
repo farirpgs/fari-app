@@ -9,13 +9,13 @@ export const AppTheme = createMuiTheme({
   typography: {
     fontFamily: [
       "-apple-system",
+      "system-ui",
       "BlinkMacSystemFont",
-      "Segoe UI",
+      "'Segoe UI'",
       "Roboto",
-      "Noto Sans",
+      "'Helvetica Neue'",
       "Ubuntu",
-      "Droid Sans",
-      "Helvetica Neue",
+      "Arial",
       "sans-serif",
     ].join(","),
   },

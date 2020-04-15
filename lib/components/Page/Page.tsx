@@ -1,13 +1,19 @@
-import AppBar from "@material-ui/core/AppBar";
-import Fade from "@material-ui/core/Fade";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import {
+  AppBar,
+  Box,
+  Button,
+  Fade,
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
 import React, { useState } from "react";
-import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading";
+import { useHistory } from "react-router";
+import appIcon from "../../../images/app-icon.png";
+import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { MenuDrawer } from "./MenuDrawer";
 
@@ -21,22 +27,14 @@ export const Page: React.FC<{
   banner?: JSX.Element;
   backFunction?: () => void;
 }> = (props) => {
-  const {
-    isLoading,
-    h1,
-    children,
-    appBarActions,
-    backFunction,
-    notFound,
-  } = props;
-
-  const isReallyLoading = useDelayedIsLoading(isLoading);
+  const isReallyLoading = useDelayedIsLoading(props.isLoading);
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+  const history = useHistory();
 
   return (
     <>
       {renderHeader()}
-      {!isLoading && renderContent()}
+      {!props.isLoading && renderContent()}
       <MenuDrawer
         open={isDrawerOpened}
         onOpen={() => {
@@ -55,12 +53,12 @@ export const Page: React.FC<{
     }
     return (
       <div
-        style={{
+        className={css({
           textAlign: "center",
           background: "#3f50b5",
           color: "#fff",
           padding: "1.5rem",
-        }}
+        })}
       >
         {props.banner}
       </div>
@@ -85,8 +83,8 @@ export const Page: React.FC<{
           }}
         >
           {renderBanner()}
-          {!!notFound ? (
-            notFound
+          {!!props.notFound ? (
+            props.notFound
           ) : (
             <div
               className={css({
@@ -99,7 +97,7 @@ export const Page: React.FC<{
                 flex: "1 0 auto",
               })}
             >
-              {children}
+              {props.children}
             </div>
           )}
         </div>
@@ -109,53 +107,123 @@ export const Page: React.FC<{
 
   function renderHeader() {
     return (
-      <>
-        <AppBar position="fixed">
+      <Box bgcolor="#fff">
+        <AppBar position="fixed" color="inherit">
           <Toolbar
-            style={{
+            className={css({
               margin: "0 auto",
               maxWidth: "1440px",
               width: "100%",
               padding: "1rem",
               height: `${headerHeightREM}rem`,
-            }}
+            })}
           >
-            {!!backFunction ? (
-              <IconButton edge="start" color="inherit" onClick={backFunction}>
-                <ArrowBackIcon />
-              </IconButton>
-            ) : (
+            {!!props.backFunction ? (
               <IconButton
                 edge="start"
                 color="inherit"
-                onClick={() => {
-                  setIsDrawerOpened(!isDrawerOpened);
-                }}
+                onClick={props.backFunction}
               >
-                <MenuIcon />
+                <ArrowBackIcon />
               </IconButton>
-            )}
+            ) : null}
+
+            <img
+              className={css({
+                height: "100%",
+                paddingRight: "1rem",
+                cursor: "pointer",
+              })}
+              onClick={() => {
+                history.push("/");
+              }}
+              src={appIcon}
+            />
 
             <Typography
               variant="h6"
               component="h1"
-              style={{
-                flex: "1 1 auto",
+              className={css({
+                paddingRight: "1rem",
+                cursor: "pointer",
+                userSelect: "none",
+              })}
+              onClick={() => {
+                history.push("/");
               }}
             >
               <div
-                style={{
+                className={css({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   maxWidth: "25rem",
-                }}
+                })}
               >
-                {h1}
+                Fari
               </div>
             </Typography>
 
-            {appBarActions}
+            <Grid container spacing={2}>
+              <Grid item>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  Start Game
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    history.push("/dice");
+                  }}
+                >
+                  Dice
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    window.open("https://ko-fi.com/rpdeshaies");
+                  }}
+                >
+                  Support Fari
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    history.push("/about");
+                  }}
+                >
+                  About
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    window.open("https://twitter.com/rpdeshaies");
+                  }}
+                >
+                  Help
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Typography
+              className={css({
+                flex: "1 1 auto",
+              })}
+            ></Typography>
+
+            {props.appBarActions}
           </Toolbar>
         </AppBar>
         {isReallyLoading && (
@@ -165,7 +233,7 @@ export const Page: React.FC<{
             </div>
           </Fade>
         )}
-      </>
+      </Box>
     );
   }
 };

@@ -3,6 +3,7 @@ import {
   Checkbox,
   Grid,
   IconButton,
+  InputLabel,
   Menu,
   MenuItem,
   Paper,
@@ -11,7 +12,7 @@ import {
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
-import { ContentEditable } from "./ContentEditable";
+import { ContentEditable } from "../ContentEditable/ContentEditable";
 
 export const IndexCard: React.FC<{
   title: string;
@@ -135,33 +136,46 @@ export const IndexCard: React.FC<{
           >
             <Box p="1rem">
               <Box>
-                {props.checkboxes.map((value, index) => {
-                  return (
-                    <Checkbox
-                      key={index}
-                      checked={value}
-                      onChange={(event) => {
-                        props.onCheckboxChange(index, event.target.checked);
-                      }}
-                      color="default"
-                    />
-                  );
-                })}
+                <Grid container justify="flex-start">
+                  {props.checkboxes.map((value, index) => {
+                    return (
+                      <Grid item key={index} xs={2}>
+                        <Checkbox
+                          checked={value}
+                          onChange={(event) => {
+                            props.onCheckboxChange(index, event.target.checked);
+                          }}
+                          color="default"
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
               </Box>
               <Box>
-                {props.consequences.map((value, index) => {
-                  return (
-                    <Box py=".5rem" key={index}>
-                      <TextField
-                        fullWidth
-                        value={value}
-                        onChange={(event) => {
-                          props.onConsequenceChange(index, event.target.value);
-                        }}
-                      />
-                    </Box>
-                  );
-                })}
+                <Grid container justify="center">
+                  {props.consequences.map((value, index) => {
+                    return (
+                      <Grid key={index} item xs={12}>
+                        <Box py=".5rem">
+                          <InputLabel shrink>
+                            Consequence #{index + 1}
+                          </InputLabel>
+                          <TextField
+                            fullWidth
+                            value={value}
+                            onChange={(event) => {
+                              props.onConsequenceChange(
+                                index,
+                                event.target.value
+                              );
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
               </Box>
             </Box>
           </Box>

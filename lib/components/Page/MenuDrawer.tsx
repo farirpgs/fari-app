@@ -12,7 +12,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
 import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import React from "react";
-import { usePWA } from "../../hooks/usePWA";
+import { usePWA } from "../../hooks/usePWA/usePWA";
 import { googleAnalyticsService } from "../../services/injections";
 import { routerHistory } from "../History/History";
 

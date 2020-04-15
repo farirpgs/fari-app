@@ -8,6 +8,7 @@ import { Link, withRouter } from "react-router-dom";
 const _AppBottomNavigation: React.FC<{
   location: { pathname: string };
 }> = (props) => {
+  return null;
   const [nav, setNav] = useState(0);
 
   useEffect(() => {

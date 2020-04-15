@@ -1,7 +1,18 @@
 import React from "react";
+import showdown from "showdown";
 import { Page } from "../../components/Page/Page";
-// import AboutContent from "./About.mdx";
+import aboutMD from "./About.md";
+
+const html = new showdown.Converter().makeHtml(aboutMD);
 
 export const About: React.FC<{}> = (props) => {
-  return <Page h1="About">{/* <AboutContent></AboutContent> */}</Page>;
+  return (
+    <Page>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: html,
+        }}
+      ></div>
+    </Page>
+  );
 };
