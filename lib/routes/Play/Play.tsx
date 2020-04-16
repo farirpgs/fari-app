@@ -71,7 +71,7 @@ export const Play: React.FC<{
   }, [hostManager.state.connections]);
 
   useEffect(() => {
-    if (shareLinkToolTip) {
+    if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
         setShareLinkToolTip({ open: false });
       }, 1000);
