@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { css } from "emotion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { DevTool } from "../../components/DevTool/DevTool";
@@ -36,6 +36,7 @@ export const Play: React.FC<{
   const [userId] = useState(() => {
     return uuidV4();
   });
+  const shareLinkInputRef = useRef<HTMLInputElement>();
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.primary.main);
   const sceneManager = useScene(userId, idFromProps);
@@ -352,7 +353,7 @@ export const Play: React.FC<{
         </Box>
 
         <Box>
-          {isGM ? (
+          {isGM && (
             <Box
               display="flex"
               justifyContent="center"
@@ -373,9 +374,17 @@ export const Play: React.FC<{
               >
                 Add Aspect
               </Button>
-
+              <input
+                ref={shareLinkInputRef}
+                type="text"
+                value={shareLink}
+                readOnly
+                hidden
+              />
               <Button
                 onClick={() => {
+                  shareLinkInputRef.current.select();
+                  document.execCommand("copy");
                   navigator.clipboard.writeText(shareLink);
                 }}
               >
@@ -389,7 +398,7 @@ export const Play: React.FC<{
                 Reset Scene
               </Button>
             </Box>
-          ) : null}
+          )}
         </Box>
       </Box>
     );
