@@ -4,8 +4,6 @@ import React from "react";
 export const DevTool: React.FC<{
   data: any;
 }> = (props) => {
-  return null;
-
   return (
     <Box pt="0rem" pb="2rem">
       <Divider></Divider>

@@ -9,7 +9,8 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { css } from "emotion";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { DevTool } from "../../components/DevTool/DevTool";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
@@ -32,9 +33,12 @@ export const Play: React.FC<{
   };
 }> = (props) => {
   const idFromProps = props.match.params.id;
+  const [userId] = useState(() => {
+    return uuidV4();
+  });
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.primary.main);
-  const sceneManager = useScene();
+  const sceneManager = useScene(userId, idFromProps);
   const peerManager = usePeerJS({
     debug: debug,
   });
@@ -107,7 +111,7 @@ export const Play: React.FC<{
           connecting={connectionsManager.state.connectingToHost}
           error={connectionsManager.state.connectingToHostError}
           onSubmit={(playerName) => {
-            connectionsManager.actions.connect(idFromProps, {
+            connectionsManager.actions.connect(idFromProps, userId, {
               playerName: playerName,
             });
           }}
@@ -117,11 +121,11 @@ export const Play: React.FC<{
     return (
       <Box>
         {renderHeader()}
-        <Grid container>
-          <Grid item xs={3}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={3}>
             {renderSidePanel()}
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             {renderMainContent()}
           </Grid>
         </Grid>
@@ -131,7 +135,7 @@ export const Play: React.FC<{
 
   function renderSidePanel() {
     return (
-      <Box display="flex" flexDirection="column" height="100%">
+      <Box display="flex" flexDirection="column" height="100%" pb="1rem">
         <Box
           className={css({
             backgroundColor: theme.palette.primary.main,
@@ -202,7 +206,13 @@ export const Play: React.FC<{
         <Paper>
           <Box bgcolor="#fff" minHeight="10rem" flex="1 0 auto">
             {everyone.map((player) => {
-              return <PlayerRow key={player.id} player={player}></PlayerRow>;
+              return (
+                <PlayerRow
+                  key={player.id}
+                  highlight={userId === player.id}
+                  player={player}
+                ></PlayerRow>
+              );
             })}
           </Box>
         </Paper>
@@ -213,84 +223,106 @@ export const Play: React.FC<{
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     return (
-      <Box pl="1rem">
-        <Box display="flex" justifyContent="flex-end"></Box>
-
-        <Box pb="2rem">
-          <Grid container spacing={2}>
-            {aspectIds.length === 0 && (
-              <Grid item xs={12}>
-                <Box pt="6rem" textAlign="center">
-                  <Typography variant="h6">
-                    Click on the
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      className={css({
-                        margin: "0 .5rem",
-                      })}
-                      onClick={() => {
-                        sceneManager.actions.addAspect();
-                      }}
-                    >
-                      Add Aspect
-                    </Button>
-                    button to add a new Aspect to the Scene
-                  </Typography>
-                </Box>
+      <Box pb="2rem">
+        <Grid container spacing={2}>
+          {aspectIds.length === 0 && (
+            <Grid item xs={12}>
+              <Box pt="6rem" textAlign="center">
+                <Typography variant="h6">
+                  Click on the
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    className={css({
+                      margin: "0 .5rem",
+                    })}
+                    onClick={() => {
+                      sceneManager.actions.addAspect();
+                    }}
+                  >
+                    Add Aspect
+                  </Button>
+                  button to add a new Aspect to the Scene
+                </Typography>
+              </Box>
+            </Grid>
+          )}
+          {aspectIds.map((aspectId) => {
+            return (
+              <Grid item xs={12} sm={12} md={4} key={aspectId}>
+                <IndexCard
+                  title={sceneManager.state.scene.aspects[aspectId].title}
+                  readonly={!isGM}
+                  content={sceneManager.state.scene.aspects[aspectId].content}
+                  freeInvokes={
+                    sceneManager.state.scene.aspects[aspectId].freeInvokes
+                  }
+                  physicalStress={
+                    sceneManager.state.scene.aspects[aspectId].physicalStress
+                  }
+                  mentalStress={
+                    sceneManager.state.scene.aspects[aspectId].mentalStress
+                  }
+                  consequences={
+                    sceneManager.state.scene.aspects[aspectId].consequences
+                  }
+                  onRemove={() => {
+                    sceneManager.actions.removeAspect(aspectId);
+                  }}
+                  onReset={() => {
+                    sceneManager.actions.resetAspect(aspectId);
+                  }}
+                  onTitleChange={(value) => {
+                    sceneManager.actions.updateAspectTitle(aspectId, value);
+                  }}
+                  onContentChange={(value) => {
+                    sceneManager.actions.updateAspectContent(aspectId, value);
+                  }}
+                  onFreeInvokeChange={(index, value) => {
+                    sceneManager.actions.updateAspectFreeInvoke(
+                      aspectId,
+                      index,
+                      value
+                    );
+                  }}
+                  onPhysicalStressChange={(index, value) => {
+                    sceneManager.actions.updateAspectPhysicalStress(
+                      aspectId,
+                      index,
+                      value
+                    );
+                  }}
+                  onMentalStressChange={(index, value) => {
+                    sceneManager.actions.updateAspectMentalStress(
+                      aspectId,
+                      index,
+                      value
+                    );
+                  }}
+                  onConsequenceChange={(index, value) => {
+                    sceneManager.actions.updateAspectConsequence(
+                      aspectId,
+                      index,
+                      value
+                    );
+                  }}
+                  onAddAspectFreeInvoke={() => {
+                    sceneManager.actions.addAspectFreeInvoke(aspectId);
+                  }}
+                  onAddAspectPhysicalStress={() => {
+                    sceneManager.actions.addAspectPhysicalStress(aspectId);
+                  }}
+                  onAddAspectMentalStress={() => {
+                    sceneManager.actions.addAspectMentalStress(aspectId);
+                  }}
+                  onAddConsequence={() => {
+                    sceneManager.actions.addAspectConsequence(aspectId);
+                  }}
+                ></IndexCard>
               </Grid>
-            )}
-            {aspectIds.map((aspectId) => {
-              return (
-                <Grid item xs={4} key={aspectId}>
-                  <IndexCard
-                    title={sceneManager.state.scene.aspects[aspectId].title}
-                    content={sceneManager.state.scene.aspects[aspectId].content}
-                    checkboxes={
-                      sceneManager.state.scene.aspects[aspectId].checkboxes
-                    }
-                    consequences={
-                      sceneManager.state.scene.aspects[aspectId].consequences
-                    }
-                    disabled={!isGM}
-                    onRemove={() => {
-                      sceneManager.actions.removeAspect(aspectId);
-                    }}
-                    onReset={() => {
-                      sceneManager.actions.resetAspect(aspectId);
-                    }}
-                    onTitleChange={(value) => {
-                      sceneManager.actions.updateAspectTitle(aspectId, value);
-                    }}
-                    onContentChange={(value) => {
-                      sceneManager.actions.updateAspectContent(aspectId, value);
-                    }}
-                    onCheckboxChange={(index, value) => {
-                      sceneManager.actions.updateAspectCheckbox(
-                        aspectId,
-                        index,
-                        value
-                      );
-                    }}
-                    onConsequenceChange={(index, value) => {
-                      sceneManager.actions.updateAspectConsequence(
-                        aspectId,
-                        index,
-                        value
-                      );
-                    }}
-                    onAddCheckbox={(amount) => {
-                      sceneManager.actions.addAspectCheckbox(aspectId);
-                    }}
-                    onAddConsequence={(amount) => {
-                      sceneManager.actions.addAspectConsequence(aspectId);
-                    }}
-                  ></IndexCard>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
+            );
+          })}
+        </Grid>
       </Box>
     );
   }
@@ -309,7 +341,7 @@ export const Play: React.FC<{
             >
               <ContentEditable
                 value={sceneManager.state.scene.name}
-                disabled={!isGM}
+                readonly={!isGM}
                 onChange={(value) => {
                   sceneManager.actions.setName(value);
                 }}
@@ -323,9 +355,11 @@ export const Play: React.FC<{
             <Box
               display="flex"
               justifyContent="center"
+              flexWrap="wrap"
               className={css({
                 "& *": {
                   margin: "0 .5rem",
+                  flex: "0 1 auto",
                 },
               })}
             >
@@ -382,33 +416,3 @@ export const Play: React.FC<{
 };
 
 Play.displayName = "Play";
-
-{
-  /* <Box>
-          <Container maxWidth="sm" disableGutters>
-            <Paper>
-              <Box p={"1rem"}>
-                <Grid container spacing={2} justify="center">
-                  {everyone.map((player) => {
-                    return (
-                      <Grid item xs={4} key={player.id}>
-                        <Box
-                          className={css({
-                            textAlign: "center",
-                            textDecoration: "underline",
-                            textDecorationColor: "#ddd",
-                          })}
-                        >
-                          <Typography variant="button">
-                            {player.playerName}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </Box>
-            </Paper>
-          </Container>
-        </Box> */
-}

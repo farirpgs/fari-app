@@ -4,17 +4,18 @@ export interface IPlayer {
   rolls: Array<number>;
 }
 
+export interface IAspect {
+  title: string;
+  content: string;
+  freeInvokes: Array<boolean>;
+  physicalStress: Array<boolean>;
+  mentalStress: Array<boolean>;
+  consequences: Array<string>;
+}
+
 export interface IScene {
   name: string;
-  aspects: Record<
-    string,
-    {
-      title: string;
-      content: string;
-      checkboxes: Array<boolean>;
-      consequences: Array<string>;
-    }
-  >;
+  aspects: Record<string, IAspect>;
   gm: IPlayer;
   players: Array<IPlayer>;
 }

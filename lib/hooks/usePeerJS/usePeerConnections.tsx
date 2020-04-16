@@ -1,6 +1,5 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 
 export function usePeerConnections(options: {
   peer: Peer;
@@ -55,13 +54,13 @@ export function usePeerConnections(options: {
       connectingToHostError,
     },
     actions: {
-      connect(id: string, metadata?: any) {
+      connect(id: string, userId: string, metadata?: any) {
         console.info("Connection: Setup");
         setConnectingToHost(true);
         setConnectingToHostError(false);
         connection.current = options.peer.connect(id, {
           reliable: true,
-          label: uuidV4(),
+          label: userId,
           metadata: metadata,
         });
         connection.current.on("open", onHostConnectionOpen);

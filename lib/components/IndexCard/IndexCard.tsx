@@ -1,6 +1,7 @@
 import {
   Box,
   Checkbox,
+  Divider,
   Grid,
   IconButton,
   InputLabel,
@@ -8,6 +9,7 @@ import {
   MenuItem,
   Paper,
   TextField,
+  useTheme,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { css } from "emotion";
@@ -17,24 +19,30 @@ import { ContentEditable } from "../ContentEditable/ContentEditable";
 export const IndexCard: React.FC<{
   title: string;
   content: string;
-  checkboxes: Array<boolean>;
+  readonly: boolean;
+  freeInvokes: Array<boolean>;
+  physicalStress: Array<boolean>;
+  mentalStress: Array<boolean>;
   consequences: Array<string>;
 
   onTitleChange(value: string): void;
   onContentChange(value: string): void;
-  onCheckboxChange(index: number, value: boolean): void;
+  onFreeInvokeChange(index: number, value: boolean): void;
+  onPhysicalStressChange(index: number, value: boolean): void;
+  onMentalStressChange(index: number, value: boolean): void;
   onConsequenceChange(index: number, value: string): void;
-  onAddCheckbox(amount: number): void;
-  onAddConsequence(amount: number): void;
+  onAddAspectFreeInvoke(): void;
+  onAddAspectPhysicalStress(): void;
+  onAddAspectMentalStress(): void;
+  onAddConsequence(): void;
   onRemove(): void;
   onReset(): void;
-
-  disabled?: boolean;
 }> = (props) => {
+  const theme = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const $menu = useRef(undefined);
   const shouldRenderCheckboxesOrConsequences =
-    props.checkboxes.length > 0 || props.consequences.length > 0;
+    props.freeInvokes.length > 0 || props.consequences.length > 0;
   return (
     <Paper elevation={undefined}>
       <Box bgcolor="#fff">
@@ -51,7 +59,7 @@ export const IndexCard: React.FC<{
               <Grid item xs>
                 <ContentEditable
                   value={props.title}
-                  disabled={props.disabled}
+                  readonly={props.readonly}
                   autoFocus
                   onChange={props.onTitleChange}
                 ></ContentEditable>
@@ -76,18 +84,38 @@ export const IndexCard: React.FC<{
                 >
                   <MenuItem
                     onClick={() => {
-                      props.onAddCheckbox(1);
+                      props.onAddAspectFreeInvoke();
                     }}
                   >
-                    Add 1 checkboxe
+                    Add 1 Free Invoke
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      props.onAddConsequence(1);
+                      props.onAddAspectPhysicalStress();
+                    }}
+                  >
+                    Add 1 Physical Stress Box
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      props.onAddAspectMentalStress();
+                    }}
+                  >
+                    Add 1 Mental Stress Box
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      props.onAddConsequence();
                     }}
                   >
                     Add 1 consequence
                   </MenuItem>
+                  <Divider
+                    light
+                    className={css({
+                      margin: ".5rem 0",
+                    })}
+                  ></Divider>
                   <MenuItem
                     onClick={() => {
                       setMenuOpen(false);
@@ -121,7 +149,7 @@ export const IndexCard: React.FC<{
           <Box p="1rem">
             <ContentEditable
               value={props.content}
-              disabled={props.disabled}
+              readonly={props.readonly}
               onChange={props.onContentChange}
             ></ContentEditable>
           </Box>
@@ -136,16 +164,83 @@ export const IndexCard: React.FC<{
           >
             <Box p="1rem">
               <Box>
+                {props.freeInvokes.length > 0 && (
+                  <InputLabel shrink>Free Invokes</InputLabel>
+                )}
                 <Grid container justify="flex-start">
-                  {props.checkboxes.map((value, index) => {
+                  {props.freeInvokes.map((value, index) => {
                     return (
                       <Grid item key={index} xs={2}>
                         <Checkbox
                           checked={value}
                           onChange={(event) => {
-                            props.onCheckboxChange(index, event.target.checked);
+                            if (props.readonly) {
+                              return;
+                            }
+                            props.onFreeInvokeChange(
+                              index,
+                              event.target.checked
+                            );
                           }}
                           color="default"
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </Box>
+              <Box>
+                {props.physicalStress.length > 0 && (
+                  <InputLabel shrink>Physical Stress</InputLabel>
+                )}
+                <Grid container justify="flex-start">
+                  {props.physicalStress.map((value, index) => {
+                    return (
+                      <Grid item key={index} xs={2}>
+                        <Checkbox
+                          checked={value}
+                          onChange={(event) => {
+                            if (props.readonly) {
+                              return;
+                            }
+                            props.onPhysicalStressChange(
+                              index,
+                              event.target.checked
+                            );
+                          }}
+                          className={css({
+                            color: theme.palette.primary.main,
+                          })}
+                          color="primary"
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </Box>
+              <Box>
+                {props.mentalStress.length > 0 && (
+                  <InputLabel shrink>Mental Stress</InputLabel>
+                )}
+                <Grid container justify="flex-start">
+                  {props.mentalStress.map((value, index) => {
+                    return (
+                      <Grid item key={index} xs={2}>
+                        <Checkbox
+                          checked={value}
+                          onChange={(event) => {
+                            if (props.readonly) {
+                              return;
+                            }
+                            props.onMentalStressChange(
+                              index,
+                              event.target.checked
+                            );
+                          }}
+                          className={css({
+                            color: theme.palette.secondary.main,
+                          })}
+                          color="secondary"
                         />
                       </Grid>
                     );
@@ -159,12 +254,15 @@ export const IndexCard: React.FC<{
                       <Grid key={index} item xs={12}>
                         <Box py=".5rem">
                           <InputLabel shrink>
-                            Consequence #{index + 1}
+                            Consequence ({(index + 1) * 2})
                           </InputLabel>
                           <TextField
                             fullWidth
                             value={value}
                             onChange={(event) => {
+                              if (props.readonly) {
+                                return;
+                              }
                               props.onConsequenceChange(
                                 index,
                                 event.target.value

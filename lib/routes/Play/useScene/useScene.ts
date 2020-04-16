@@ -3,13 +3,17 @@ import Peer from "peerjs";
 import { useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { Dice } from "../../../domains/dice/Dice";
-import { IPlayer, IScene } from "./IScene";
+import { IAspect, IScene } from "./IScene";
 
-export function useScene() {
+export function useScene(userId: string, gameId: string) {
   const [scene, setScene] = useState<IScene>({
     name: defaultSceneName,
     aspects: defaultSceneAspects,
-    gm: defaultSceneGM,
+    gm: {
+      id: gameId ? undefined : userId,
+      playerName: "Game Master",
+      rolls: [],
+    },
     players: [],
   });
 
@@ -71,18 +75,52 @@ export function useScene() {
     );
   }
 
-  function addAspectCheckbox(id: string) {
+  function addAspectFreeInvoke(id: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].checkboxes.push(false);
+        draft.aspects[id].freeInvokes.push(false);
       })
     );
   }
 
-  function updateAspectCheckbox(id: string, index: number, value: boolean) {
+  function updateAspectFreeInvoke(id: string, index: number, value: boolean) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].checkboxes[index] = value;
+        draft.aspects[id].freeInvokes[index] = value;
+      })
+    );
+  }
+  function addAspectPhysicalStress(id: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].physicalStress.push(false);
+      })
+    );
+  }
+
+  function updateAspectPhysicalStress(
+    id: string,
+    index: number,
+    value: boolean
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].physicalStress[index] = value;
+      })
+    );
+  }
+  function addAspectMentalStress(id: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].mentalStress.push(false);
+      })
+    );
+  }
+
+  function updateAspectMentalStress(id: string, index: number, value: boolean) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].mentalStress[index] = value;
       })
     );
   }
@@ -144,8 +182,12 @@ export function useScene() {
       resetAspect,
       updateAspectTitle,
       updateAspectContent,
-      addAspectCheckbox,
-      updateAspectCheckbox,
+      addAspectFreeInvoke,
+      updateAspectFreeInvoke,
+      addAspectPhysicalStress,
+      updateAspectPhysicalStress,
+      addAspectMentalStress,
+      updateAspectMentalStress,
       addAspectConsequence,
       updateAspectConsequence,
       updatePlayers,
@@ -155,17 +197,13 @@ export function useScene() {
   };
 }
 
-const defaultSceneGM: IPlayer = {
-  id: uuidV4(),
-  playerName: "Game Master",
-  rolls: [],
-};
-
 const defaultSceneName = "Name of your scene...";
-const defaultSceneAspect = {
+const defaultSceneAspect: IAspect = {
   title: "",
   content: "<br/><br/>",
-  checkboxes: [],
+  freeInvokes: [],
+  physicalStress: [],
+  mentalStress: [],
   consequences: [],
 };
 const defaultSceneAspects = {};

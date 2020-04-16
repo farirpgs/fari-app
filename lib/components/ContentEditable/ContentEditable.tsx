@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 export const ContentEditable: React.FC<{
   value: string;
   onChange: (value: string) => void;
-  disabled?: boolean;
+  readonly?: boolean;
   autoFocus?: boolean;
 }> = (props) => {
   const $ref = useRef<HTMLDivElement>();
@@ -42,7 +42,7 @@ export const ContentEditable: React.FC<{
       onBlur={() => {
         onChange();
       }}
-      contentEditable={!props.disabled}
+      contentEditable={!props.readonly}
     ></div>
   );
 };

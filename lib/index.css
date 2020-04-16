@@ -1,5 +1,8 @@
 html {
+  min-width: 600px;
+  width: auto !important;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 html,

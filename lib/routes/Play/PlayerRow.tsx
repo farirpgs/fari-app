@@ -1,17 +1,27 @@
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid, lighten, Typography, useTheme } from "@material-ui/core";
 import { css } from "emotion";
 import React from "react";
 import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
+import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { IPlayer } from "./useScene/IScene";
 
 export const PlayerRow: React.FC<{
   player: IPlayer;
+  highlight: boolean;
 }> = (props) => {
+  const theme = useTheme();
   const diceManager = useFudgeDice(props.player.rolls);
+  const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
+  const textColor = useTextColors(highlightBackgroundColor);
 
   return (
-    <Box p=".5rem" borderBottom="1px solid #ddd">
+    <Box
+      p=".5rem"
+      borderBottom="1px solid #ddd"
+      bgcolor={props.highlight ? highlightBackgroundColor : "transparent"}
+      color={props.highlight ? textColor.primary : undefined}
+    >
       <Grid container spacing={2} justify="space-between" alignItems="flex-end">
         <Grid item xs={8}>
           <Typography

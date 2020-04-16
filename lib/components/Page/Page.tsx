@@ -17,8 +17,6 @@ import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedI
 import { AppProgress } from "../AppProgress/AppProgress";
 import { MenuDrawer } from "./MenuDrawer";
 
-const headerHeightREM = 4.25;
-
 export const Page: React.FC<{
   isLoading?: boolean;
   h1?: JSX.Element | string;
@@ -71,8 +69,7 @@ export const Page: React.FC<{
         <div
           className={css({
             height: "100%",
-            paddingTop: "4.25rem " /* Top Nav size 4.25 + 2*/,
-            paddingBottom: "56px " /* Bottom Nav Size */,
+            paddingBottom: "4rem",
             minHeight: "calc(100vh - 56px)",
             position: "relative",
             display: "flex",
@@ -108,14 +105,13 @@ export const Page: React.FC<{
   function renderHeader() {
     return (
       <Box bgcolor="#fff">
-        <AppBar position="fixed" color="inherit">
+        <AppBar color="inherit" position="relative">
           <Toolbar
             className={css({
               margin: "0 auto",
               maxWidth: "1440px",
               width: "100%",
               padding: "1rem",
-              height: `${headerHeightREM}rem`,
             })}
           >
             {!!props.backFunction ? (
@@ -130,7 +126,7 @@ export const Page: React.FC<{
 
             <img
               className={css({
-                height: "100%",
+                height: "2rem",
                 paddingRight: "1rem",
                 cursor: "pointer",
               })}
