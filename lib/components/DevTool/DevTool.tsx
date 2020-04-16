@@ -1,9 +1,14 @@
 import { Box, Divider } from "@material-ui/core";
 import React from "react";
+import { env } from "../../services/injections";
 
 export const DevTool: React.FC<{
   data: any;
 }> = (props) => {
+  if (env.context !== "localhost") {
+    return null;
+  }
+
   return (
     <Box pt="0rem" pb="2rem">
       <Divider></Divider>
