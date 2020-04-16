@@ -64,76 +64,78 @@ export const IndexCard: React.FC<{
                   onChange={props.onTitleChange}
                 ></ContentEditable>
               </Grid>
-              <Grid item>
-                <IconButton
-                  ref={$menu}
-                  size="small"
-                  onClick={() => {
-                    setMenuOpen(true);
-                  }}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  anchorEl={$menu.current}
-                  keepMounted
-                  open={menuOpen}
-                  onClose={() => {
-                    setMenuOpen(false);
-                  }}
-                >
-                  <MenuItem
+              {!props.readonly && (
+                <Grid item>
+                  <IconButton
+                    ref={$menu}
+                    size="small"
                     onClick={() => {
-                      props.onAddAspectFreeInvoke();
+                      setMenuOpen(true);
                     }}
                   >
-                    Add 1 Free Invoke
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      props.onAddAspectPhysicalStress();
-                    }}
-                  >
-                    Add 1 Physical Stress Box
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      props.onAddAspectMentalStress();
-                    }}
-                  >
-                    Add 1 Mental Stress Box
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      props.onAddConsequence();
-                    }}
-                  >
-                    Add 1 consequence
-                  </MenuItem>
-                  <Divider
-                    light
-                    className={css({
-                      margin: ".5rem 0",
-                    })}
-                  ></Divider>
-                  <MenuItem
-                    onClick={() => {
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    anchorEl={$menu.current}
+                    keepMounted
+                    open={menuOpen}
+                    onClose={() => {
                       setMenuOpen(false);
-                      props.onRemove();
                     }}
                   >
-                    Remove
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      setMenuOpen(false);
-                      props.onReset();
-                    }}
-                  >
-                    Reset
-                  </MenuItem>
-                </Menu>
-              </Grid>
+                    <MenuItem
+                      onClick={() => {
+                        props.onAddAspectFreeInvoke();
+                      }}
+                    >
+                      Add 1 Free Invoke
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        props.onAddAspectPhysicalStress();
+                      }}
+                    >
+                      Add 1 Physical Stress Box
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        props.onAddAspectMentalStress();
+                      }}
+                    >
+                      Add 1 Mental Stress Box
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        props.onAddConsequence();
+                      }}
+                    >
+                      Add 1 consequence
+                    </MenuItem>
+                    <Divider
+                      light
+                      className={css({
+                        margin: ".5rem 0",
+                      })}
+                    ></Divider>
+                    <MenuItem
+                      onClick={() => {
+                        setMenuOpen(false);
+                        props.onRemove();
+                      }}
+                    >
+                      Remove
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        setMenuOpen(false);
+                        props.onReset();
+                      }}
+                    >
+                      Reset
+                    </MenuItem>
+                  </Menu>
+                </Grid>
+              )}{" "}
             </Grid>
           </Box>
         </Box>

@@ -222,10 +222,11 @@ export const Play: React.FC<{
 
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
+    const shouldRenderEmptyAspectView = aspectIds.length === 0 && isGM;
     return (
       <Box pb="2rem">
         <Grid container spacing={2}>
-          {aspectIds.length === 0 && (
+          {shouldRenderEmptyAspectView && (
             <Grid item xs={12}>
               <Box pt="6rem" textAlign="center">
                 <Typography variant="h6">
