@@ -160,7 +160,7 @@ export const Page: React.FC<{
               </div>
             </Typography>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item>
                 <Button
                   color="inherit"
