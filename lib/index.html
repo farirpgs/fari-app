@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Fari - The Role-Playing Game Companion</title>
-    <link rel="manifest" href="./manifest.webmanifest" />
+    <title>Fari - Fate RPG Companion</title>
     <link rel="icon" type="image/png" href="../images/app-favicon.png" />
     <meta
       name="google-site-verification"
@@ -13,32 +12,11 @@
     />
     <!-- Refreshes app every 24h -->
     <meta http-equiv="refresh" content="86400" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
 
-    <style>
-      body {
-        font-family: "Roboto", sans-serif;
-      }
-    </style>
     <meta name="theme-color" content="#3f51b5" />
   </head>
   <body>
     <div id="root"></div>
     <script src="./index.tsx"></script>
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("service-worker.js")
-          .then(function(reg) {
-            console.log("Service Worker Registered");
-          })
-          .catch(function(err) {
-            console.error("Service Worker Registration Failure ", err);
-          });
-      }
-    </script>
   </body>
 </html>

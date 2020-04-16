@@ -11,6 +11,5 @@ describe("selectors.rowsToTabs", () => {
     const result = selectors.rowsToTabs(FateAccelerated.rows);
 
     expect(result["Default"].length).toEqual(5);
-    expect(result["Guide"].length).toEqual(1);
   });
 });

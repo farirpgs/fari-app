@@ -1,12 +1,4 @@
-type ICategories =
-  | "Fari"
-  | "Character"
-  | "Scene"
-  | "SceneSession"
-  | "Dice"
-  | "SceneAspect"
-  | "SceneCharacter"
-  | "SceneBadGuy";
+type ICategories = "Fari" | "Character" | "Dice";
 
 type IActions =
   | "Install"

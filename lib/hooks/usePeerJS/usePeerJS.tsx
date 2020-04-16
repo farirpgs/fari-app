@@ -1,0 +1,54 @@
+import Peer from "peerjs";
+import { useEffect, useRef, useState } from "react";
+
+export function usePeerJS(options: { debug?: boolean }) {
+  const peer = useRef<Peer>(undefined);
+  const [hostId, setHostId] = useState<string>(undefined);
+  const [error, setError] = useState<any>(undefined);
+
+  if (!peer.current) {
+    peer.current = new Peer(undefined, { debug: options.debug ? 3 : 0 });
+  }
+
+  useEffect(() => {
+    function setupPeer() {
+      console.info("usePeerJS: Setup");
+
+      peer.current.on("open", onPeerOpenCallback);
+      peer.current.on("disconnected", onPeerDisconnectedCallback);
+      peer.current.on("close", onPeerCloseCallback);
+      peer.current.on("error", onPeerErrorCallback);
+
+      return () => {
+        peer.current.off("open", onPeerOpenCallback);
+        peer.current.off("disconnected", onPeerDisconnectedCallback);
+        peer.current.off("close", onPeerCloseCallback);
+        peer.current.destroy();
+      };
+
+      function onPeerOpenCallback(id: string) {
+        setHostId(id);
+        console.info("usePeerJS: Connection Opened");
+      }
+      function onPeerDisconnectedCallback() {
+        setHostId(undefined);
+        peer.current.reconnect();
+        console.info("usePeerJS: Disconnected. Reconnecting");
+      }
+      function onPeerCloseCallback() {
+        setHostId(undefined);
+        console.info("usePeerJS: Connection Closed");
+      }
+      function onPeerErrorCallback(error: any) {
+        if (error.type === "server-error") {
+          setError(error);
+        }
+        console.info("usePeerJS: Error", error.type);
+      }
+    }
+
+    return setupPeer();
+  }, []);
+
+  return { state: { peer: peer.current, hostId, error } };
+}

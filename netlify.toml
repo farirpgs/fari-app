@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && npm run build"
+  command = "yarn && yarn run build"
   publish = "dist"
 
 [[redirects]]

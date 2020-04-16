@@ -1,18 +1,17 @@
 import { readFileSync } from "fs";
 import { FieldType, IField } from "../types/IField";
 import { IGame } from "../types/IGame";
-import showdown from "showdown";
 
 const name: IField = {
   label: "Character Name",
   slug: "name",
-  type: FieldType.TextField
+  type: FieldType.TextField,
 };
 
 const description: IField = {
   label: "Description",
   slug: "description",
-  type: FieldType.BigTextField
+  type: FieldType.BigTextField,
 };
 
 const refresh: IField = {
@@ -20,7 +19,7 @@ const refresh: IField = {
   slug: "refresh",
   type: FieldType.Number,
   default: "3",
-  min: 0
+  min: 0,
 };
 
 const fatePoints: IField = {
@@ -28,32 +27,32 @@ const fatePoints: IField = {
   slug: "fatePoints",
   type: FieldType.Number,
   default: "3",
-  min: 0
+  min: 0,
 };
 
 const aspectCategory: IField = {
   label: "Aspects",
   slug: "aspectsCategory",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 const approachCategory: IField = {
   label: "Approaches",
   slug: "approachesCategory",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 const skillsCategory: IField = {
   label: "Skills",
   slug: "skillsCategory",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 function makeAspect(label: string, slug: string): IField {
   return {
     label,
     slug,
-    type: FieldType.TextField
+    type: FieldType.TextField,
   };
 }
 
@@ -64,7 +63,7 @@ function makeApproach(label: string, slug: string): IField {
     type: FieldType.Number,
     min: 0,
     max: 3,
-    default: "0"
+    default: "0",
   };
 }
 
@@ -72,144 +71,155 @@ function makeSkill(label: string, slug: string, helper: string): IField {
   return {
     label,
     slug,
-    type: FieldType.TextField,
-    helper
+    type: FieldType.AutoComplete,
+    possibleValues: [
+      "Athletics",
+      "Burglary",
+      "Contacts",
+      "Crafts",
+      "Deceive",
+      "Drive",
+      "Empathy",
+      "Fight",
+      "Investigate",
+      "Lore",
+      "Notice",
+      "Physique",
+      "Provoke",
+      "Rapport",
+      "Resources",
+      "Shoot",
+      "Stealth",
+      "Will",
+    ],
+    helper,
   };
 }
 
 const stunts: IField = {
   label: "Stunts",
   slug: "stunts",
-  type: FieldType.BigTextField
+  type: FieldType.BigTextField,
 };
 
 const extras: IField = {
   label: "Extras",
   slug: "extra",
-  type: FieldType.BigTextField
+  type: FieldType.BigTextField,
 };
 
 const stressCategory: IField = {
   label: "Stress",
   slug: "stressCategory",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 const physicalStressCategory: IField = {
   label: "Physical Stress",
   slug: "physicalStressCategory",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 const mentalStressCategory: IField = {
   label: "Mental Stress",
   slug: "mentalStressCategory",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 const consequenceCategory: IField = {
   label: "Consequences",
   slug: "consequences",
-  type: FieldType.Category
+  type: FieldType.Category,
 };
 
 const stress1: IField = {
   label: "1",
   slug: "stress1",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const stress2: IField = {
   label: "2",
   slug: "stress2",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const stress3: IField = {
   label: "3",
   slug: "stress3",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const physicalStress1: IField = {
   label: "1",
   slug: "physicalStress1",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const physicalStress2: IField = {
   label: "2",
   slug: "physicalStress2",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const physicalStress3: IField = {
   label: "3",
   slug: "physicalStress3",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const physicalStress4: IField = {
   label: "4",
   slug: "physicalStress4",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const mentalStress1: IField = {
   label: "1",
   slug: "mentalStress1",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const mentalStress2: IField = {
   label: "2",
   slug: "mentalStress2",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const mentalStress3: IField = {
   label: "3",
   slug: "mentalStress3",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const mentalStress4: IField = {
   label: "4",
   slug: "mentalStress4",
-  type: FieldType.Boolean
+  type: FieldType.Boolean,
 };
 
 const mildConsequence: IField = {
   label: "Mild Consequence (2)",
   slug: "mildConsequence",
-  type: FieldType.TextField
+  type: FieldType.TextField,
 };
 
 const mildConsequence2: IField = {
   label: "Second Mild Consequence (2)",
   slug: "mildConsequence2",
-  type: FieldType.TextField
+  type: FieldType.TextField,
 };
 
 const moderateConsequence: IField = {
   label: "Moderate Consequence (4)",
   slug: "moderateConsequence",
-  type: FieldType.TextField
+  type: FieldType.TextField,
 };
 
 const severeConsequence: IField = {
   label: "Severe Consequence (6)",
   slug: "severeConsequence",
-  type: FieldType.TextField
-};
-
-const cheatsheet = readFileSync(__dirname + "/Fate.md", "utf-8");
-const converter = new showdown.Converter();
-export const FateCheatSheet = converter.makeHtml(cheatsheet);
-
-const guide: IField = {
-  type: FieldType.Paper,
-  content: cheatsheet
+  type: FieldType.TextField,
 };
 
 export const FateAcceleratedStress = [stress1, stress2, stress3];
@@ -218,27 +228,27 @@ export const FateCorePhysicalStress = [
   physicalStress1,
   physicalStress2,
   physicalStress3,
-  physicalStress4
+  physicalStress4,
 ];
 
 export const FateCoreMentalStress = [
   mentalStress1,
   mentalStress2,
   mentalStress3,
-  mentalStress4
+  mentalStress4,
 ];
 
 export const FateAcceleratedConsequences = [
   mildConsequence,
   moderateConsequence,
-  severeConsequence
+  severeConsequence,
 ];
 
 export const FateCoreConsequences = [
   mildConsequence,
   mildConsequence2,
   moderateConsequence,
-  severeConsequence
+  severeConsequence,
 ];
 
 export const Aspects = [
@@ -246,7 +256,7 @@ export const Aspects = [
   makeAspect("Trouble", "aspect2"),
   makeAspect("Aspect #3", "aspect3"),
   makeAspect("Aspect #4", "aspect4"),
-  makeAspect("Aspect #5", "aspect5")
+  makeAspect("Aspect #5", "aspect5"),
 ];
 
 export const FateAcceleratedApproaches = [
@@ -255,7 +265,7 @@ export const FateAcceleratedApproaches = [
   makeApproach("Forceful", "approachForceful"),
   makeApproach("Flashy", "approachFlashy"),
   makeApproach("Quick", "approachQuick"),
-  makeApproach("Sneaky", "approachSneaky")
+  makeApproach("Sneaky", "approachSneaky"),
 ];
 
 export const FateCoreSkills = [
@@ -263,7 +273,7 @@ export const FateCoreSkills = [
   makeSkill("Great (+4)", "skillGreat", "You should have 1 of those"),
   makeSkill("Good (+3)", "skillGood", "You should have 2 of those"),
   makeSkill("Fair (+2)", "skillFair", "You should have 3 of those"),
-  makeSkill("Average (+1)", "skillAverage", "You should have 4 of those")
+  makeSkill("Average (+1)", "skillAverage", "You should have 4 of those"),
 ];
 
 export const FateAccelerated: IGame = {
@@ -275,8 +285,8 @@ export const FateAccelerated: IGame = {
       columns: [
         { col: 6, field: description },
         { col: 3, field: refresh },
-        { col: 3, field: fatePoints }
-      ]
+        { col: 3, field: fatePoints },
+      ],
     },
     {
       columns: [
@@ -288,8 +298,8 @@ export const FateAccelerated: IGame = {
             { columns: [{ col: 12, field: Aspects[1] }] },
             { columns: [{ col: 12, field: Aspects[2] }] },
             { columns: [{ col: 12, field: Aspects[3] }] },
-            { columns: [{ col: 12, field: Aspects[4] }] }
-          ]
+            { columns: [{ col: 12, field: Aspects[4] }] },
+          ],
         },
         {
           col: 6,
@@ -300,16 +310,16 @@ export const FateAccelerated: IGame = {
             { columns: [{ col: 12, field: FateAcceleratedApproaches[2] }] },
             { columns: [{ col: 12, field: FateAcceleratedApproaches[3] }] },
             { columns: [{ col: 12, field: FateAcceleratedApproaches[4] }] },
-            { columns: [{ col: 12, field: FateAcceleratedApproaches[5] }] }
-          ]
-        }
-      ]
+            { columns: [{ col: 12, field: FateAcceleratedApproaches[5] }] },
+          ],
+        },
+      ],
     },
     {
       columns: [
         { col: 6, field: extras },
-        { col: 6, field: stunts }
-      ]
+        { col: 6, field: stunts },
+      ],
     },
     {
       columns: [
@@ -321,10 +331,10 @@ export const FateAccelerated: IGame = {
               columns: [
                 { col: "initial", field: stress1 },
                 { col: "initial", field: stress2 },
-                { col: "initial", field: stress3 }
-              ]
-            }
-          ]
+                { col: "initial", field: stress3 },
+              ],
+            },
+          ],
         },
         {
           col: 6,
@@ -334,15 +344,14 @@ export const FateAccelerated: IGame = {
               columns: [
                 { col: 12, field: mildConsequence },
                 { col: 12, field: moderateConsequence },
-                { col: 12, field: severeConsequence }
-              ]
-            }
-          ]
-        }
-      ]
+                { col: 12, field: severeConsequence },
+              ],
+            },
+          ],
+        },
+      ],
     },
-    { tab: "Guide", columns: [{ col: 12, field: guide }] }
-  ]
+  ],
 };
 
 export const FateCore: IGame = {
@@ -354,8 +363,8 @@ export const FateCore: IGame = {
       columns: [
         { col: 6, field: description },
         { col: 3, field: refresh },
-        { col: 3, field: fatePoints }
-      ]
+        { col: 3, field: fatePoints },
+      ],
     },
     {
       columns: [
@@ -367,8 +376,8 @@ export const FateCore: IGame = {
             { columns: [{ col: 12, field: Aspects[1] }] },
             { columns: [{ col: 12, field: Aspects[2] }] },
             { columns: [{ col: 12, field: Aspects[3] }] },
-            { columns: [{ col: 12, field: Aspects[4] }] }
-          ]
+            { columns: [{ col: 12, field: Aspects[4] }] },
+          ],
         },
         {
           col: 6,
@@ -380,18 +389,18 @@ export const FateCore: IGame = {
                 { col: 12, field: FateCoreSkills[1] },
                 { col: 12, field: FateCoreSkills[2] },
                 { col: 12, field: FateCoreSkills[3] },
-                { col: 12, field: FateCoreSkills[4] }
-              ]
-            }
-          ]
-        }
-      ]
+                { col: 12, field: FateCoreSkills[4] },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       columns: [
         { col: 6, field: extras },
-        { col: 6, field: stunts }
-      ]
+        { col: 6, field: stunts },
+      ],
     },
     {
       columns: [
@@ -404,10 +413,10 @@ export const FateCore: IGame = {
                 { col: "initial", field: physicalStress1 },
                 { col: "initial", field: physicalStress2 },
                 { col: "initial", field: physicalStress3 },
-                { col: "initial", field: physicalStress4 }
-              ]
-            }
-          ]
+                { col: "initial", field: physicalStress4 },
+              ],
+            },
+          ],
         },
         {
           col: 6,
@@ -418,10 +427,10 @@ export const FateCore: IGame = {
                 { col: "initial", field: mentalStress1 },
                 { col: "initial", field: mentalStress2 },
                 { col: "initial", field: mentalStress3 },
-                { col: "initial", field: mentalStress4 }
-              ]
-            }
-          ]
+                { col: "initial", field: mentalStress4 },
+              ],
+            },
+          ],
         },
         {
           col: 12,
@@ -432,13 +441,12 @@ export const FateCore: IGame = {
                 { col: 6, field: mildConsequence },
                 { col: 6, field: mildConsequence2 },
                 { col: 12, field: moderateConsequence },
-                { col: 12, field: severeConsequence }
-              ]
-            }
-          ]
-        }
-      ]
+                { col: 12, field: severeConsequence },
+              ],
+            },
+          ],
+        },
+      ],
     },
-    { tab: "Guide", columns: [{ col: 6, field: guide }] }
-  ]
+  ],
 };
