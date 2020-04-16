@@ -5,6 +5,7 @@ import {
   Container,
   Grid,
   Paper,
+  Tooltip,
   Typography,
   useTheme,
 } from "@material-ui/core";
@@ -37,6 +38,7 @@ export const Play: React.FC<{
     return uuidV4();
   });
   const shareLinkInputRef = useRef<HTMLInputElement>();
+  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.primary.main);
   const sceneManager = useScene(userId, idFromProps);
@@ -67,6 +69,17 @@ export const Play: React.FC<{
       sceneManager.actions.updatePlayers(hostManager.state.connections);
     }
   }, [hostManager.state.connections]);
+
+  useEffect(() => {
+    if (shareLinkToolTip) {
+      const id = setTimeout(() => {
+        setShareLinkToolTip({ open: false });
+      }, 1000);
+      return () => {
+        clearTimeout(id);
+      };
+    }
+  }, [shareLinkToolTip]);
 
   const isGM = !idFromProps;
   const shareLink = `${location.origin}/play/${peerManager.state.hostId}`;
@@ -381,15 +394,23 @@ export const Play: React.FC<{
                 readOnly
                 hidden
               />
-              <Button
-                onClick={() => {
-                  shareLinkInputRef.current.select();
-                  document.execCommand("copy");
-                  navigator.clipboard.writeText(shareLink);
-                }}
+              <Tooltip
+                open={shareLinkToolTip.open}
+                title="Copied!"
+                placement="top"
               >
-                Copy Game Link
-              </Button>
+                <Button
+                  onClick={() => {
+                    shareLinkInputRef.current.select();
+                    document.execCommand("copy");
+                    navigator.clipboard.writeText(shareLink);
+                    setShareLinkToolTip({ open: true });
+                  }}
+                >
+                  Copy Game Link
+                </Button>
+              </Tooltip>
+
               <Button
                 onClick={() => {
                   sceneManager.actions.reset();
