@@ -5,11 +5,12 @@ import {
   Container,
   Grid,
   Paper,
+  Tooltip,
   Typography,
   useTheme,
 } from "@material-ui/core";
 import { css } from "emotion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { DevTool } from "../../components/DevTool/DevTool";
@@ -36,6 +37,8 @@ export const Play: React.FC<{
   const [userId] = useState(() => {
     return uuidV4();
   });
+  const shareLinkInputRef = useRef<HTMLInputElement>();
+  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.primary.main);
   const sceneManager = useScene(userId, idFromProps);
@@ -66,6 +69,17 @@ export const Play: React.FC<{
       sceneManager.actions.updatePlayers(hostManager.state.connections);
     }
   }, [hostManager.state.connections]);
+
+  useEffect(() => {
+    if (shareLinkToolTip.open) {
+      const id = setTimeout(() => {
+        setShareLinkToolTip({ open: false });
+      }, 1000);
+      return () => {
+        clearTimeout(id);
+      };
+    }
+  }, [shareLinkToolTip]);
 
   const isGM = !idFromProps;
   const shareLink = `${location.origin}/play/${peerManager.state.hostId}`;
@@ -352,7 +366,7 @@ export const Play: React.FC<{
         </Box>
 
         <Box>
-          {isGM ? (
+          {isGM && (
             <Box
               display="flex"
               justifyContent="center"
@@ -373,14 +387,30 @@ export const Play: React.FC<{
               >
                 Add Aspect
               </Button>
-
-              <Button
-                onClick={() => {
-                  navigator.clipboard.writeText(shareLink);
-                }}
+              <input
+                ref={shareLinkInputRef}
+                type="text"
+                value={shareLink}
+                readOnly
+                hidden
+              />
+              <Tooltip
+                open={shareLinkToolTip.open}
+                title="Copied!"
+                placement="top"
               >
-                Copy Game Link
-              </Button>
+                <Button
+                  onClick={() => {
+                    shareLinkInputRef.current.select();
+                    document.execCommand("copy");
+                    navigator.clipboard.writeText(shareLink);
+                    setShareLinkToolTip({ open: true });
+                  }}
+                >
+                  Copy Game Link
+                </Button>
+              </Tooltip>
+
               <Button
                 onClick={() => {
                   sceneManager.actions.reset();
@@ -389,7 +419,7 @@ export const Play: React.FC<{
                 Reset Scene
               </Button>
             </Box>
-          ) : null}
+          )}
         </Box>
       </Box>
     );

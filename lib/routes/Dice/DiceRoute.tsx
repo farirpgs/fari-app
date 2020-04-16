@@ -29,7 +29,7 @@ export const DiceRoute = () => {
               textAlign: "center",
             })}
           >
-            Press the Roll Button to re-roll
+            Press the button to re-roll
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center" pt="3rem">
