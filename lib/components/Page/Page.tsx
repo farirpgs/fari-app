@@ -2,20 +2,22 @@ import {
   AppBar,
   Box,
   Button,
+  Drawer,
   Fade,
   Grid,
+  Hidden,
   IconButton,
   Toolbar,
   Typography,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { AppProgress } from "../AppProgress/AppProgress";
-import { MenuDrawer } from "./MenuDrawer";
 
 export const Page: React.FC<{
   isLoading?: boolean;
@@ -26,22 +28,13 @@ export const Page: React.FC<{
   backFunction?: () => void;
 }> = (props) => {
   const isReallyLoading = useDelayedIsLoading(props.isLoading);
-  const [isDrawerOpened, setIsDrawerOpened] = useState(false);
   const history = useHistory();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       {renderHeader()}
-      {!props.isLoading && renderContent()}
-      <MenuDrawer
-        open={isDrawerOpened}
-        onOpen={() => {
-          setIsDrawerOpened(true);
-        }}
-        onClose={() => {
-          setIsDrawerOpened(false);
-        }}
-      />
+      {!props.isLoading && renderContent()}`
     </>
   );
 
@@ -75,9 +68,6 @@ export const Page: React.FC<{
             display: "flex",
             flexDirection: "column",
           })}
-          onClick={() => {
-            setIsDrawerOpened(false);
-          }}
         >
           {renderBanner()}
           {!!props.notFound ? (
@@ -159,66 +149,33 @@ export const Page: React.FC<{
                 Fari
               </div>
             </Typography>
+            <Hidden smDown>{renderMenu(false)}</Hidden>
 
-            <Grid container spacing={1}>
-              <Grid item>
-                <Button
-                  color="inherit"
+            <Hidden mdUp>
+              <Grid container>
+                <IconButton
                   onClick={() => {
-                    history.push("/");
+                    setMenuOpen(true);
                   }}
                 >
-                  Start Game
-                </Button>
+                  <MenuIcon></MenuIcon>
+                </IconButton>
               </Grid>
-              <Grid item>
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    history.push("/dice");
-                  }}
-                >
-                  Dice
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    window.open("https://ko-fi.com/rpdeshaies");
-                  }}
-                >
-                  Support Fari
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    history.push("/about");
-                  }}
-                >
-                  About
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    window.open("https://twitter.com/rpdeshaies");
-                  }}
-                >
-                  Help
-                </Button>
-              </Grid>
-            </Grid>
-
+            </Hidden>
+            <Drawer
+              anchor="bottom"
+              open={menuOpen}
+              onClose={() => {
+                setMenuOpen(false);
+              }}
+            >
+              <Box p="2rem">{renderMenu(true)}</Box>
+            </Drawer>
             <Typography
               className={css({
                 flex: "1 1 auto",
               })}
-            ></Typography>
-
+            />
             {props.appBarActions}
           </Toolbar>
         </AppBar>
@@ -230,6 +187,76 @@ export const Page: React.FC<{
           </Fade>
         )}
       </Box>
+    );
+  }
+
+  function renderMenu(mobile: boolean) {
+    const itemClass = mobile
+      ? css({ textAlign: "center" })
+      : css({ flex: "0 1 auto" });
+    return (
+      <Grid container spacing={1} justify={mobile ? "center" : undefined}>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              history.push("/");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            Start Game
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              history.push("/dice");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            Dice
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              window.open("https://ko-fi.com/rpdeshaies");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            Support Fari
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              history.push("/about");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            About
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              window.open("https://twitter.com/rpdeshaies");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            Help
+          </Button>
+        </Grid>
+      </Grid>
     );
   }
 };
