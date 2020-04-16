@@ -207,7 +207,7 @@ export const Play: React.FC<{
                   if (isGM) {
                     sceneManager.actions.updateGMRoll();
                   } else {
-                    connectionsManager.actions.sendToHost(Dice.runFudgeDice());
+                    connectionsManager.actions.sendToHost(Dice.rollFudgeDice());
                   }
                 }}
               >

@@ -154,7 +154,7 @@ export function useScene(userId: string, gameId: string) {
   function updateGMRoll() {
     setScene(
       produce((draft: IScene) => {
-        draft.gm.rolls = [Dice.runFudgeDice(), ...draft.gm.rolls];
+        draft.gm.rolls = [Dice.rollFudgeDice(), ...draft.gm.rolls];
       })
     );
   }

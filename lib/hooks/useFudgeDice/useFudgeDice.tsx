@@ -15,7 +15,7 @@ export function useFudgeDice(rolls: Array<number>) {
     if (realRoll !== undefined) {
       intervalId.current = setInterval(() => {
         if (refreshCount.current !== 50) {
-          const fakeRoll = Dice.runFudgeDice();
+          const fakeRoll = Dice.rollFudgeDice();
           refreshCount.current++;
           setRoll(fakeRoll);
         } else {
