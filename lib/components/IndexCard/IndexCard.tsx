@@ -42,7 +42,10 @@ export const IndexCard: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const $menu = useRef(undefined);
   const shouldRenderCheckboxesOrConsequences =
-    props.freeInvokes.length > 0 || props.consequences.length > 0;
+    props.freeInvokes.length > 0 ||
+    props.physicalStress.length > 0 ||
+    props.mentalStress.length > 0 ||
+    props.consequences.length > 0;
   return (
     <Paper elevation={undefined}>
       <Box bgcolor="#fff">
