@@ -10,7 +10,9 @@ export const ContentEditable: React.FC<{
   const $ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    if ($ref.current.innerHTML !== props.value) {
+    if (!props.value && props.readonly) {
+      $ref.current.innerHTML = "&nbsp;";
+    } else if ($ref.current.innerHTML !== props.value) {
       $ref.current.innerHTML = props.value;
     }
   }, [props.value]);

@@ -7,19 +7,19 @@ import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
 
 export const DiceRoute = () => {
-  const [rolls, setRolls] = useState<Array<number>>([Dice.runFudgeDice()]);
+  const [rolls, setRolls] = useState<Array<number>>([Dice.rollFudgeDice()]);
   const diceManager = useFudgeDice(rolls);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
 
   function roll() {
     setRolls((draft) => {
-      return [Dice.runFudgeDice(), ...draft];
+      return [Dice.rollFudgeDice(), ...draft];
     });
   }
 
   return (
-    <Page h1="Dice">
+    <Page>
       <Box>
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography

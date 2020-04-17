@@ -1,5 +1,5 @@
 export const Dice = {
-  runFudgeDice() {
+  rollFudgeDice() {
     const fudgeDice = [-1, -1, 0, 0, 1, 1];
     const result = rollDice(fudgeDice, 4);
     return result;

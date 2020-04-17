@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer>(undefined);
   const [hostId, setHostId] = useState<string>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
@@ -28,6 +29,7 @@ export function usePeerJS(options: { debug?: boolean }) {
 
       function onPeerOpenCallback(id: string) {
         setHostId(id);
+        setLoading(false);
         console.info("usePeerJS: Connection Opened");
       }
       function onPeerDisconnectedCallback() {
@@ -50,5 +52,5 @@ export function usePeerJS(options: { debug?: boolean }) {
     return setupPeer();
   }, []);
 
-  return { state: { peer: peer.current, hostId, error } };
+  return { peer: peer.current, hostId, loading, error };
 }

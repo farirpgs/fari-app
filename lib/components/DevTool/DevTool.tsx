@@ -10,7 +10,7 @@ export const DevTool: React.FC<{
   }
 
   return (
-    <Box pt="0rem" pb="2rem">
+    <Box pt="2rem" pb="2rem">
       <Divider></Divider>
       <pre>{JSON.stringify(props.data, null, 2)}</pre>
       <Box>{props.children}</Box>

@@ -7,15 +7,22 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import appIcon from "../../../images/app-icon.png";
+
+let playerNameSingleton = "";
 
 export const JoinAGame: React.FC<{
   onSubmit(playerName: string): void;
   connecting: boolean;
   error: any;
 }> = (props) => {
-  const [playerName, setPlayerName] = useState("");
+  const [playerName, setPlayerName] = useState(playerNameSingleton);
+
+  useEffect(() => {
+    playerNameSingleton = playerName;
+  }, [playerName]);
+
   return (
     <Box>
       <Container maxWidth="xs">

@@ -18,16 +18,14 @@ import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { Page } from "../../components/Page/Page";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
+import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
-import { usePeerJS } from "../../hooks/usePeerJS/usePeerJS";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { JoinAGame } from "./JoinAGame";
 import { PlayerRow } from "./PlayerRow";
 import { useScene } from "./useScene/useScene";
 
 const debug = false;
-
 export const Play: React.FC<{
   match: {
     params: { id: string };
@@ -42,18 +40,14 @@ export const Play: React.FC<{
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.primary.main);
   const sceneManager = useScene(userId, idFromProps);
-  const peerManager = usePeerJS({
-    debug: debug,
-  });
+
   const hostManager = usePeerHost({
-    peer: peerManager.state.peer,
     onConnectionDataReceive(id: string, roll: number) {
       sceneManager.actions.updatePlayerRoll(id, roll);
     },
     debug: debug,
   });
-  const connectionsManager = usePeerConnections({
-    peer: peerManager.state.peer,
+  const connectionsManager = usePeerConnection({
     onHostDataReceive(newScene) {
       sceneManager.actions.setScene(newScene);
     },
@@ -82,21 +76,21 @@ export const Play: React.FC<{
   }, [shareLinkToolTip]);
 
   const isGM = !idFromProps;
-  const shareLink = `${location.origin}/play/${peerManager.state.hostId}`;
+  const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
   const everyone = [
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
   return (
-    <Page appBarActions={<Box></Box>}>
-      {peerManager.state.error ? renderPageError() : renderPage()}
+    <Page gameId={idFromProps}>
+      {hostManager.state.error ? renderPageError() : renderPage()}
       <DevTool
         data={{
-          hostId: peerManager.state.hostId,
+          hostId: hostManager.state.hostId,
           href: shareLink,
           numberOfConnections: hostManager.state.numberOfConnections,
           isConnectedToHost: connectionsManager.state.isConnectedToHost,
-          error: peerManager.state.error,
+          error: hostManager.state.error,
           scene: sceneManager.state.scene,
         }}
       ></DevTool>
@@ -104,7 +98,7 @@ export const Play: React.FC<{
   );
 
   function renderPage() {
-    if (!peerManager.state.hostId) {
+    if (hostManager.state.loading || connectionsManager.state.loading) {
       return renderIsLoading();
     }
     return renderPageContent();
@@ -207,7 +201,7 @@ export const Play: React.FC<{
                   if (isGM) {
                     sceneManager.actions.updateGMRoll();
                   } else {
-                    connectionsManager.actions.sendToHost(Dice.runFudgeDice());
+                    connectionsManager.actions.sendToHost(Dice.rollFudgeDice());
                   }
                 }}
               >
@@ -428,17 +422,17 @@ export const Play: React.FC<{
   function renderPageError() {
     return (
       <Box>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" pb="2rem">
           <Typography variant="h4">Something wrong hapenned.</Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            We could not connect to the server to initialize the play session.
+            We could not connect to the server to initialize the game
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            Try to refresh the page to see if that fixes the issue.
+            Try refreshing the page to see if that fixes the issue.
           </Typography>
         </Box>
       </Box>

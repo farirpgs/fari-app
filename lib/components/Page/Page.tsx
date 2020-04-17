@@ -10,26 +10,34 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { AppProgress } from "../AppProgress/AppProgress";
 
+let gameIdSingleton: string = undefined;
+
 export const Page: React.FC<{
   isLoading?: boolean;
-  h1?: JSX.Element | string;
   notFound?: JSX.Element;
   appBarActions?: JSX.Element;
-  banner?: JSX.Element;
-  backFunction?: () => void;
+  gameId?: string;
 }> = (props) => {
   const isReallyLoading = useDelayedIsLoading(props.isLoading);
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [gameId, setGameId] = useState(gameIdSingleton);
+  const shouldDisplayRejoinButton = gameId && !props.gameId;
+
+  useEffect(() => {
+    if (props.gameId) {
+      setGameId(props.gameId);
+      gameIdSingleton = props.gameId;
+    }
+  }, [props.gameId]);
 
   return (
     <>
@@ -37,24 +45,6 @@ export const Page: React.FC<{
       {!props.isLoading && renderContent()}`
     </>
   );
-
-  function renderBanner() {
-    if (!props.banner) {
-      return null;
-    }
-    return (
-      <div
-        className={css({
-          textAlign: "center",
-          background: "#3f50b5",
-          color: "#fff",
-          padding: "1.5rem",
-        })}
-      >
-        {props.banner}
-      </div>
-    );
-  }
 
   function renderContent() {
     return (
@@ -69,7 +59,6 @@ export const Page: React.FC<{
             flexDirection: "column",
           })}
         >
-          {renderBanner()}
           {!!props.notFound ? (
             props.notFound
           ) : (
@@ -104,16 +93,6 @@ export const Page: React.FC<{
               padding: "1rem",
             })}
           >
-            {!!props.backFunction ? (
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={props.backFunction}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-            ) : null}
-
             <img
               className={css({
                 height: "2rem",
@@ -176,6 +155,17 @@ export const Page: React.FC<{
                 flex: "1 1 auto",
               })}
             />
+            {shouldDisplayRejoinButton && (
+              <Button
+                color="secondary"
+                onClick={() => {
+                  history.push(`/play/${gameId}`);
+                }}
+                variant={"outlined"}
+              >
+                Rejoin&nbsp;Game
+              </Button>
+            )}
             {props.appBarActions}
           </Toolbar>
         </AppBar>

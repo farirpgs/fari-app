@@ -1,19 +1,20 @@
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
+import { usePeerJS } from "./usePeerJS";
 
 export function usePeerHost(options: {
   onConnectionDataReceive: (id: string, data: any) => void;
-  peer: Peer;
   debug?: boolean;
 }) {
+  const { peer, hostId, error, loading } = usePeerJS({ debug: options.debug });
   const [connections, setConnections] = useState<Array<Peer.DataConnection>>(
     []
   );
   useEffect(() => {
     function listenForConnections() {
-      options.peer.on("connection", onPeerConnectionCallback);
+      peer.on("connection", onPeerConnectionCallback);
       return () => {
-        options.peer.off("connection", onPeerConnectionCallback);
+        peer.off("connection", onPeerConnectionCallback);
       };
       function onPeerConnectionCallback(
         currentConnection: Peer.DataConnection
@@ -48,6 +49,9 @@ export function usePeerHost(options: {
 
   return {
     state: {
+      hostId: hostId,
+      loading,
+      error: error,
       numberOfConnections: connections.length,
       connections: connections,
     },
