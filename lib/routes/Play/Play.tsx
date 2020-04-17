@@ -82,7 +82,7 @@ export const Play: React.FC<{
     ...sceneManager.state.scene.players,
   ];
   return (
-    <Page appBarActions={<Box></Box>}>
+    <Page gameId={idFromProps}>
       {hostManager.state.error ? renderPageError() : renderPage()}
       <DevTool
         data={{
