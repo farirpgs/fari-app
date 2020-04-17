@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import appIcon from "../../../images/app-icon.png";
 
 let playerNameSingleton = "";
+
 export const JoinAGame: React.FC<{
   onSubmit(playerName: string): void;
   connecting: boolean;

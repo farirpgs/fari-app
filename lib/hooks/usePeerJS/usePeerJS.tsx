@@ -50,5 +50,5 @@ export function usePeerJS(options: { debug?: boolean }) {
     return setupPeer();
   }, []);
 
-  return { state: { peer: peer.current, hostId, error } };
+  return { peer: peer.current, hostId, error };
 }
