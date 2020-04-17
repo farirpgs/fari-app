@@ -428,17 +428,17 @@ export const Play: React.FC<{
   function renderPageError() {
     return (
       <Box>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" pb="2rem">
           <Typography variant="h4">Something wrong hapenned.</Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            We could not connect to the server to initialize the play session.
+            We could not connect to the server to initialize the game
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            Try to refresh the page to see if that fixes the issue.
+            Try refreshing the page to see if that fixes the issue.
           </Typography>
         </Box>
       </Box>

@@ -5,17 +5,20 @@ import { v4 as uuidV4 } from "uuid";
 import { Dice } from "../../../domains/dice/Dice";
 import { IAspect, IScene } from "./IScene";
 
+const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
+
 export function useScene(userId: string, gameId: string) {
-  const [scene, setScene] = useState<IScene>({
+  const isGM = !gameId;
+  const [scene, setScene] = useState<IScene>(() => ({
     name: defaultSceneName,
     aspects: defaultSceneAspects,
     gm: {
-      id: gameId ? undefined : userId,
+      id: isGM ? userId : temporaryGMIdUntilFirstSync,
       playerName: "Game Master",
       rolls: [],
     },
     players: [],
-  });
+  }));
 
   function reset() {
     setScene(
