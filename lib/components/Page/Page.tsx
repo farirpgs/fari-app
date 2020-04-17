@@ -22,7 +22,6 @@ let gameIdSingleton: string = undefined;
 
 export const Page: React.FC<{
   isLoading?: boolean;
-  h1?: JSX.Element | string;
   notFound?: JSX.Element;
   appBarActions?: JSX.Element;
   gameId?: string;

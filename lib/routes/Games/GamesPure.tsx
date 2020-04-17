@@ -11,9 +11,9 @@ import { AppPaper } from "../../components/AppPaper/AppPaper";
 import { Page } from "../../components/Page/Page";
 import { IGame } from "../../types/IGame";
 
-export const GamesPure: React.FC<{ games: Array<IGame> }> = props => {
+export const GamesPure: React.FC<{ games: Array<IGame> }> = (props) => {
   return (
-    <Page h1="Games">
+    <Page>
       <AppPaper>
         <p>
           To create characters, select one of our supported game system below
@@ -26,7 +26,7 @@ export const GamesPure: React.FC<{ games: Array<IGame> }> = props => {
               <ListItem
                 button
                 style={{
-                  zoom: "1.2"
+                  zoom: "1.2",
                 }}
               >
                 <ListItemAvatar>

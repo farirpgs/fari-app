@@ -19,7 +19,7 @@ export const DiceRoute = () => {
   }
 
   return (
-    <Page h1="Dice">
+    <Page>
       <Box>
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography

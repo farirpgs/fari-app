@@ -20,17 +20,17 @@ import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
 import { CharacterService } from "../../services/character-service/CharacterService";
-import { ICharacter } from "../../types/ICharacter";
 import { googleAnalyticsService } from "../../services/injections";
+import { ICharacter } from "../../types/ICharacter";
 
-export const Characters = props => {
+export const Characters = (props) => {
   const { gameSlug } = props.match.params;
   const game = getGameBySlug(gameSlug);
 
   const [characters, setCharacters] = useState<Array<ICharacter>>(undefined);
   const [
     characterDeletedSnackBar,
-    setCharacterDeletedSnackBar
+    setCharacterDeletedSnackBar,
   ] = React.useState({ visible: false });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +43,7 @@ export const Characters = props => {
       category: "Character",
       action: "GetAll",
       value: characters?.length ?? 0,
-      label: game.slug
+      label: game.slug,
     });
     setCharacters(characters);
     setIsLoading(false);
@@ -54,7 +54,7 @@ export const Characters = props => {
     googleAnalyticsService.sendEvent({
       category: "Character",
       action: "Delete",
-      label: game.slug
+      label: game.slug,
     });
     await load();
     setCharacterDeletedSnackBar({ visible: true });
@@ -65,13 +65,7 @@ export const Characters = props => {
   }, [gameSlug]);
 
   return (
-    <Page
-      isLoading={isLoading}
-      h1={`Characters - ${game.name}`}
-      backFunction={() => {
-        routerHistory.push("/games");
-      }}
-    >
+    <Page isLoading={isLoading}>
       <Snackbar
         autoHideDuration={2000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -114,7 +108,7 @@ export const Characters = props => {
                   const truncatedDescription = _.truncate(
                     character["description"],
                     {
-                      length: 50
+                      length: 50,
                     }
                   );
                   return (
@@ -125,7 +119,7 @@ export const Characters = props => {
                       <ListItem
                         button
                         style={{
-                          zoom: "1.2"
+                          zoom: "1.2",
                         }}
                       >
                         <ListItemAvatar>
@@ -141,7 +135,7 @@ export const Characters = props => {
                         <ListItemSecondaryAction>
                           <IconButton
                             edge="end"
-                            onClick={async e => {
+                            onClick={async (e) => {
                               e.stopPropagation();
                               e.preventDefault();
                               deleteCharacter(character);
