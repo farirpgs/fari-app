@@ -6,7 +6,7 @@ export function usePeerConnections(options: {
   onHostDataReceive: (data: any) => void;
   debug?: boolean;
 }) {
-  const { peer } = usePeerJS({ debug: options.debug });
+  const { peer, loading } = usePeerJS({ debug: options.debug });
   const connection = useRef<Peer.DataConnection>(undefined);
   const [connectionToHost, setConnectionToHost] = useState<Peer.DataConnection>(
     undefined
@@ -52,6 +52,7 @@ export function usePeerConnections(options: {
     state: {
       isConnectedToHost: !!connectionToHost,
       connectingToHost,
+      loading,
       connectingToHostError,
     },
     actions: {

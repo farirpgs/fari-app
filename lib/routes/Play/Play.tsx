@@ -98,7 +98,8 @@ export const Play: React.FC<{
   );
 
   function renderPage() {
-    if (!hostManager.state.hostId) {
+    if (hostManager.state.loading || connectionsManager.state.loading) {
+      console.log("IS LOADING");
       return renderIsLoading();
     }
     return renderPageContent();
