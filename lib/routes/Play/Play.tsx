@@ -3,6 +3,7 @@ import {
   Button,
   CircularProgress,
   Container,
+  Fade,
   Grid,
   Paper,
   Tooltip,
@@ -16,6 +17,7 @@ import { ContentEditable } from "../../components/ContentEditable/ContentEditabl
 import { DevTool } from "../../components/DevTool/DevTool";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { Page } from "../../components/Page/Page";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
@@ -23,7 +25,7 @@ import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { JoinAGame } from "./JoinAGame";
 import { PlayerRow } from "./PlayerRow";
-import { useScene } from "./useScene/useScene";
+import { defaultSceneName, useScene } from "./useScene/useScene";
 
 const debug = false;
 export const Play: React.FC<{
@@ -81,8 +83,11 @@ export const Play: React.FC<{
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
+  const sceneName = sceneManager.state.scene.name;
+  const pageTitle = sceneName === defaultSceneName ? "" : sceneName;
   return (
     <Page gameId={idFromProps}>
+      <PageMeta title={pageTitle}></PageMeta>
       {hostManager.state.error ? renderPageError() : renderPage()}
       <DevTool
         data={{
@@ -127,17 +132,19 @@ export const Play: React.FC<{
       );
     }
     return (
-      <Box>
-        {renderHeader()}
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={3}>
-            {renderSidePanel()}
+      <Fade in>
+        <Box>
+          {renderHeader()}
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={3}>
+              {renderSidePanel()}
+            </Grid>
+            <Grid item xs={12} md={9}>
+              {renderMainContent()}
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={9}>
-            {renderMainContent()}
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </Fade>
     );
   }
 

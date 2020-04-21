@@ -1,7 +1,7 @@
-import React from "react";
 import * as Sentry from "@sentry/browser";
+import React from "react";
 
-export const ErrorReport: React.FC<{ eventId: string }> = props => {
+export const ErrorReport: React.FC<{ eventId: string }> = (props) => {
   return (
     <div
       style={{
@@ -10,12 +10,11 @@ export const ErrorReport: React.FC<{ eventId: string }> = props => {
         flexDirection: "column",
         alignItems: "center",
         height: "100%",
-        padding: "3rem"
+        padding: "3rem",
       }}
     >
       <div
-        style={{ textAlign: "center", fontSize: "2rem" }}
-        className="margin-2"
+        style={{ textAlign: "center", fontSize: "2rem", marginBottom: "2rem" }}
       >
         {"Ooops! Looks like something went wrong"}
       </div>
@@ -27,7 +26,7 @@ export const ErrorReport: React.FC<{ eventId: string }> = props => {
           fontSize: "1.2rem",
           color: "white",
           cursor: "pointer",
-          borderRadius: "4px"
+          borderRadius: "4px",
         }}
         onClick={() => Sentry.showReportDialog({ eventId: props.eventId })}
       >

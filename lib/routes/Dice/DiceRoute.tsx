@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@material-ui/core";
 import { css } from "emotion";
 import React, { useState } from "react";
 import { Page } from "../../components/Page/Page";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
@@ -20,6 +21,10 @@ export const DiceRoute = () => {
 
   return (
     <Page>
+      <PageMeta
+        title="Roll Fate Dice Online"
+        description="Roll Fate/Fudge dice online using this fair dice roller."
+      />
       <Box>
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography
