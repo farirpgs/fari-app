@@ -1,6 +1,6 @@
 ## What is Fari ?
 
-Fari is a <b>Fate RPG Companion</b> Application.
+Fari is a <b>Fate RPG Companion</b> Application created by René-Pier Deshaies-Gélinas.
 
 ## FAQ
 

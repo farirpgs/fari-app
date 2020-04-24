@@ -200,7 +200,7 @@ export function useScene(userId: string, gameId: string) {
   };
 }
 
-const defaultSceneName = "Name of your scene...";
+export const defaultSceneName = "Name of your scene...";
 const defaultSceneAspect: IAspect = {
   title: "",
   content: "<br/><br/>",
