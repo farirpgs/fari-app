@@ -161,7 +161,7 @@ export const IndexCard: React.FC<{
       >
         Add 1 consequence
       </MenuItem>,
-      <Divider key="aspectsMenuItemDivider" light></Divider>,
+      <Divider key="renderAspectMenuItemsDivider"></Divider>,
     ];
   }
 
@@ -185,7 +185,7 @@ export const IndexCard: React.FC<{
       >
         Reset
       </MenuItem>,
-
+      <Divider key="renderGlobalMenuItemsDivider" light></Divider>,
       <MenuItem
         key="onUpdateAspectColor"
         className={css({
