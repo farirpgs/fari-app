@@ -237,29 +237,35 @@ export const Play: React.FC<{
 
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
-    const shouldRenderEmptyAspectView = aspectIds.length === 0 && isGM;
+    const shouldRenderEmptyAspectView = aspectIds.length === 0;
     return (
       <Box pb="2rem">
         <Grid container spacing={2}>
           {shouldRenderEmptyAspectView && (
             <Grid item xs={12}>
               <Box pt="6rem" textAlign="center">
-                <Typography variant="h6">
-                  Click on the
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    className={css({
-                      margin: "0 .5rem",
-                    })}
-                    onClick={() => {
-                      sceneManager.actions.addAspect();
-                    }}
-                  >
-                    Add Aspect
-                  </Button>
-                  button to add a new Aspect to the Scene
-                </Typography>
+                {isGM ? (
+                  <Typography variant="h6">
+                    Click on the
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      className={css({
+                        margin: "0 .5rem",
+                      })}
+                      onClick={() => {
+                        sceneManager.actions.addAspect();
+                      }}
+                    >
+                      Add Aspect
+                    </Button>
+                    button to add a new Aspect to the Scene
+                  </Typography>
+                ) : (
+                  <Typography variant="h6">
+                    The GM did not add any Aspects to the Scene yet
+                  </Typography>
+                )}
               </Box>
             </Grid>
           )}
