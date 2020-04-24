@@ -203,7 +203,7 @@ export function useScene(userId: string, gameId: string) {
 export const defaultSceneName = "Name of your scene...";
 const defaultSceneAspect: IAspect = {
   title: "",
-  content: "<br/><br/>",
+  content: "<br/>",
   freeInvokes: [],
   physicalStress: [],
   mentalStress: [],
