@@ -1,3 +1,5 @@
+import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
+
 export interface IPlayer {
   id: string;
   playerName: string;
@@ -11,6 +13,8 @@ export interface IAspect {
   physicalStress: Array<boolean>;
   mentalStress: Array<boolean>;
   consequences: Array<string>;
+  color: IndexCardColor;
+  isBoost: boolean;
 }
 
 export interface IScene {

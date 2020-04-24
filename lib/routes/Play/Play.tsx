@@ -16,6 +16,7 @@ import { v4 as uuidV4 } from "uuid";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { DevTool } from "../../components/DevTool/DevTool";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
+import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
@@ -276,6 +277,8 @@ export const Play: React.FC<{
                   title={sceneManager.state.scene.aspects[aspectId].title}
                   readonly={!isGM}
                   content={sceneManager.state.scene.aspects[aspectId].content}
+                  color={sceneManager.state.scene.aspects[aspectId].color}
+                  isBoost={sceneManager.state.scene.aspects[aspectId].isBoost}
                   freeInvokes={
                     sceneManager.state.scene.aspects[aspectId].freeInvokes
                   }
@@ -340,6 +343,9 @@ export const Play: React.FC<{
                   onAddConsequence={() => {
                     sceneManager.actions.addAspectConsequence(aspectId);
                   }}
+                  onUpdateAspectColor={(color: IndexCardColor) => {
+                    sceneManager.actions.updateAspectColor(aspectId, color);
+                  }}
                 ></IndexCard>
               </Grid>
             );
@@ -393,6 +399,15 @@ export const Play: React.FC<{
                 color="secondary"
               >
                 Add Aspect
+              </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.addBoost();
+                }}
+                variant="outlined"
+                color="secondary"
+              >
+                Add Boost
               </Button>
               <input
                 ref={shareLinkInputRef}

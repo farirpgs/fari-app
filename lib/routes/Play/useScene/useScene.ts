@@ -2,6 +2,7 @@ import produce from "immer";
 import Peer from "peerjs";
 import { useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
 import { Dice } from "../../../domains/dice/Dice";
 import { IAspect, IScene } from "./IScene";
 
@@ -46,6 +47,15 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function addBoost() {
+    setScene(
+      produce((draft: IScene) => {
+        const id = uuidV4();
+        draft.aspects[id] = defaultSceneBoost;
+      })
+    );
+  }
+
   function removeAspect(id: string) {
     setScene(
       produce((draft: IScene) => {
@@ -57,7 +67,11 @@ export function useScene(userId: string, gameId: string) {
   function resetAspect(id: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id] = defaultSceneAspect;
+        if (draft.aspects[id].isBoost) {
+          draft.aspects[id] = defaultSceneBoost;
+        } else {
+          draft.aspects[id] = defaultSceneAspect;
+        }
       })
     );
   }
@@ -93,6 +107,15 @@ export function useScene(userId: string, gameId: string) {
       })
     );
   }
+
+  function updateAspectColor(id: string, color: IndexCardColor) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].color = color;
+      })
+    );
+  }
+
   function addAspectPhysicalStress(id: string) {
     setScene(
       produce((draft: IScene) => {
@@ -181,6 +204,7 @@ export function useScene(userId: string, gameId: string) {
       setScene,
       setName,
       addAspect,
+      addBoost,
       removeAspect,
       resetAspect,
       updateAspectTitle,
@@ -193,6 +217,7 @@ export function useScene(userId: string, gameId: string) {
       updateAspectMentalStress,
       addAspectConsequence,
       updateAspectConsequence,
+      updateAspectColor,
       updatePlayers,
       updateGMRoll,
       updatePlayerRoll,
@@ -208,5 +233,18 @@ const defaultSceneAspect: IAspect = {
   physicalStress: [],
   mentalStress: [],
   consequences: [],
+  color: IndexCardColor.White,
+  isBoost: false,
+};
+
+const defaultSceneBoost: IAspect = {
+  title: "",
+  content: "<br/>",
+  freeInvokes: [false],
+  physicalStress: [],
+  mentalStress: [],
+  consequences: [],
+  color: IndexCardColor.Blue,
+  isBoost: true,
 };
 const defaultSceneAspects = {};
