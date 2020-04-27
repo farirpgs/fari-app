@@ -1,13 +1,4 @@
-import {
-  Chip,
-  Grid,
-  IconButton,
-  lighten,
-  TableCell,
-  TableRow,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { Chip, Grid, IconButton, lighten, TableCell, TableRow, Typography, useTheme } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
@@ -46,7 +37,10 @@ export const PlayerRow: React.FC<{
             disabled={!props.isGM}
             size="small"
           >
-            <PlayArrowIcon htmlColor={playedInTurnOrderColor}></PlayArrowIcon>
+            <PlayArrowIcon
+              htmlColor={playedInTurnOrderColor}
+              className={css({ width: "1.2rem", height: "auto" })}
+            ></PlayArrowIcon>
           </IconButton>
         </TableCell>
         <TableCell className={css({ borderBottom: "none" })}>
@@ -74,7 +68,13 @@ export const PlayerRow: React.FC<{
       </TableRow>
       <TableRow className={cx(rowStyle, css({ borderTop: "none" }))}>
         <TableCell colSpan={3}>
-          <Grid container alignItems="center" justify="center" spacing={1}>
+          <Grid container alignItems="center" justify="flex-start" spacing={1}>
+          <Grid item>
+              <Chip
+                label={`Fate Points: ${props.player.fatePoints}`}
+                color="primary"
+              ></Chip>
+            </Grid>
             {props.isGM && (
               <Grid item>
                 <IconButton
@@ -93,9 +93,6 @@ export const PlayerRow: React.FC<{
                 </IconButton>
               </Grid>
             )}
-            <Grid item>
-              <Chip label={`Fate Points: ${props.player.fatePoints}`}></Chip>
-            </Grid>
             {props.isGM && (
               <Grid item>
                 <IconButton

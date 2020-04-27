@@ -17,7 +17,3 @@ a {
 .col-initial {
   flex: initial;
 }
-
-.MuiButton-root {
-  border-radius: 20px;
-}

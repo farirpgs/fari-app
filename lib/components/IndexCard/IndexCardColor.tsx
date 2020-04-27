@@ -1,13 +1,15 @@
 export enum IndexCardColorBright {
   White = "#fff",
   Red = "#ff0000",
+  Blue = "#00daff",
   Green = "#00ff4c",
-  Blue = "#0019ff",
+  Yellow = "#ffee00",
 }
 
 export enum IndexCardColor {
   White = "#fff",
-  Red = "#fff5f5",
-  Green = "#f5fff8",
-  Blue = "#f5f6ff",
+  Red = "#ffecec",
+  Blue = "#e9fcff",
+  Green = "#e8ffef",
+  Yellow = "#fffddb",
 }

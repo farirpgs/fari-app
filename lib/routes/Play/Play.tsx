@@ -3,8 +3,10 @@ import {
   Button,
   CircularProgress,
   Container,
+  Divider,
   Fade,
   Grid,
+  Hidden,
   Paper,
   Table,
   TableBody,
@@ -12,6 +14,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  ThemeProvider,
   Tooltip,
   Typography,
   useTheme,
@@ -27,6 +30,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
+import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -47,6 +51,7 @@ export const Play: React.FC<{
   const shareLinkInputRef = useRef<HTMLInputElement>();
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const theme = useTheme();
+  const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const sceneManager = useScene(userId, idFromProps);
 
@@ -437,76 +442,96 @@ export const Play: React.FC<{
 
         <Box>
           {isGM && (
-            <Box
-              display="flex"
-              justifyContent="center"
-              flexWrap="wrap"
-              className={css({
-                "& *": {
-                  margin: "0 .5rem",
-                  flex: "0 1 auto",
-                },
-              })}
-            >
-              <Button
-                onClick={() => {
-                  sceneManager.actions.addAspect();
-                }}
-                variant="outlined"
-                color="secondary"
-              >
-                Add Aspect
-              </Button>
-              <Button
-                onClick={() => {
-                  sceneManager.actions.addBoost();
-                }}
-                variant="outlined"
-                color="secondary"
-              >
-                Add Boost
-              </Button>
-              <Button
-                onClick={() => {
-                  sceneManager.actions.resetPlayerPlayedInTurnOrder();
-                }}
-                variant="outlined"
-                color="secondary"
-              >
-                Reset Turn Order
-              </Button>
-              <input
-                ref={shareLinkInputRef}
-                type="text"
-                value={shareLink}
-                readOnly
-                hidden
-              />
-              <Tooltip
-                open={shareLinkToolTip.open}
-                title="Copied!"
-                placement="top"
-              >
+            <Grid container spacing={1} justify="center">
+              <Grid item>
                 <Button
                   onClick={() => {
-                    shareLinkInputRef.current.select();
-                    document.execCommand("copy");
-                    navigator.clipboard.writeText(shareLink);
-                    setShareLinkToolTip({ open: true });
+                    sceneManager.actions.addAspect();
+                  }}
+                  variant="outlined"
+                  color="secondary"
+                >
+                  Add Aspect
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.addBoost();
+                  }}
+                  variant="outlined"
+                  color="secondary"
+                >
+                  Add Boost
+                  <input
+                    ref={shareLinkInputRef}
+                    type="text"
+                    value={shareLink}
+                    readOnly
+                    hidden
+                  />
+                </Button>
+              </Grid>
+              <Grid item>
+                <Tooltip
+                  open={shareLinkToolTip.open}
+                  title="Copied!"
+                  placement="top"
+                >
+                  <Button
+                    onClick={() => {
+                      shareLinkInputRef.current.select();
+                      document.execCommand("copy");
+                      navigator.clipboard.writeText(shareLink);
+                      setShareLinkToolTip({ open: true });
+                    }}
+                  >
+                    Copy Game Link
+                  </Button>
+                </Tooltip>
+              </Grid>
+              <Hidden smDown>
+                <Grid item className={css({ display: "flex" })}>
+                  <Divider orientation="vertical" flexItem />
+                </Grid>
+              </Hidden>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.resetPlayerPlayedInTurnOrder();
                   }}
                 >
-                  Copy Game Link
+                  Reset Turn Order
                 </Button>
-              </Tooltip>
+              </Grid>
+              <Grid item>
+                <ThemeProvider theme={errorTheme}>
+                  <Button
+                    onClick={() => {
+                      sceneManager.actions.reset();
+                    }}
+                    className={css({ borderRadius: "20px" })}
+                    variant="text"
+                    color="primary"
+                  >
+                    Reset Scene
+                  </Button>
+                </ThemeProvider>
+              </Grid>
+            </Grid>
+            // <Box
+            //   display="flex"
+            //   justifyContent="center"
+            //   flexWrap="wrap"
+            //   className={css({
+            //     "& *": {
+            //       margin: ".5rem",
+            //       flex: "0 1 auto",
+            //     },
+            //   })}
+            // >
 
-              <Button
-                onClick={() => {
-                  sceneManager.actions.reset();
-                }}
-              >
-                Reset Scene
-              </Button>
-            </Box>
+            // </Box>
           )}
         </Box>
       </Box>

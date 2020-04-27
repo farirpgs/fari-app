@@ -12,7 +12,7 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
-import FiberManualRecordOutlinedIcon from "@material-ui/icons/FiberManualRecordOutlined";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
@@ -47,7 +47,7 @@ export const IndexCard: React.FC<{
   const theme = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const $menu = useRef(undefined);
-  const colorPickerBackground = "#efefef";
+  const colorPickerBackground = theme.palette.primary.main;
 
   const shouldRenderCheckboxesOrConsequences =
     props.freeInvokes.length > 0 ||
@@ -67,7 +67,7 @@ export const IndexCard: React.FC<{
           })}
         >
           <Box p="1rem">
-            <Grid container spacing={2} justify="space-between">
+            <Grid container justify="space-between">
               <Grid item xs>
                 <Grid container>
                   {props.isBoost && (
@@ -75,10 +75,7 @@ export const IndexCard: React.FC<{
                       <Typography variant="overline">Boost</Typography>
                     </Grid>
                   )}
-                  <Grid
-                    item
-                    className={css({ flex: "1 0 auto", paddingLeft: ".5rem" })}
-                  >
+                  <Grid item className={css({ flex: "1 0 auto" })}>
                     <ContentEditable
                       value={props.title}
                       readonly={props.readonly}
@@ -211,13 +208,9 @@ export const IndexCard: React.FC<{
                     onMouseDown={(e) => e.stopPropagation()}
                     size="small"
                   >
-                    {IndexCardColorBright[colorName] === "#fff" ? (
-                      <FiberManualRecordOutlinedIcon></FiberManualRecordOutlinedIcon>
-                    ) : (
-                      <FiberManualRecordOutlinedIcon
-                        htmlColor={IndexCardColorBright[colorName]}
-                      ></FiberManualRecordOutlinedIcon>
-                    )}
+                    <FiberManualRecordIcon
+                      htmlColor={IndexCardColorBright[colorName]}
+                    ></FiberManualRecordIcon>
                   </IconButton>
                 </Grid>
               );
