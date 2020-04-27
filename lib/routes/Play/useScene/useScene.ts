@@ -17,6 +17,8 @@ export function useScene(userId: string, gameId: string) {
       id: isGM ? userId : temporaryGMIdUntilFirstSync,
       playerName: "Game Master",
       rolls: [],
+      playedInTurnOrder: false,
+      fatePoints: 3,
     },
     players: [],
   }));
@@ -24,8 +26,13 @@ export function useScene(userId: string, gameId: string) {
   function reset() {
     setScene(
       produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
         draft.aspects = defaultSceneAspects;
+        everyone.forEach((p) => {
+          p.fatePoints = 3;
+          p.playedInTurnOrder = false;
+        });
       })
     );
   }
@@ -171,7 +178,53 @@ export function useScene(userId: string, gameId: string) {
     setScene(
       produce((draft: IScene) => {
         draft.players = connections.map((c) => {
-          return { id: c.label, playerName: c.metadata.playerName, rolls: [] };
+          return {
+            id: c.label,
+            playerName: c.metadata.playerName,
+            rolls: [],
+            playedInTurnOrder: false,
+            fatePoints: 3,
+          };
+        });
+      })
+    );
+  }
+
+  function resetPlayerPlayedInTurnOrder() {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((p) => {
+          p.playedInTurnOrder = false;
+        });
+      })
+    );
+  }
+
+  function updatePlayerPlayedInTurnOrder(
+    id: string,
+    playedInTurnOrder: boolean
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.playedInTurnOrder = playedInTurnOrder;
+          }
+        });
+      })
+    );
+  }
+
+  function updatePlayerFatePoints(id: string, fatePoints: number) {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.fatePoints = fatePoints;
+          }
         });
       })
     );
@@ -219,6 +272,9 @@ export function useScene(userId: string, gameId: string) {
       updateAspectConsequence,
       updateAspectColor,
       updatePlayers,
+      updatePlayerFatePoints,
+      updatePlayerPlayedInTurnOrder,
+      resetPlayerPlayedInTurnOrder,
       updateGMRoll,
       updatePlayerRoll,
     },

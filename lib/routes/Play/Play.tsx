@@ -6,6 +6,12 @@ import {
   Fade,
   Grid,
   Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Tooltip,
   Typography,
   useTheme,
@@ -220,19 +226,70 @@ export const Play: React.FC<{
         </Box>
 
         <Paper>
-          <Box bgcolor="#fff" minHeight="10rem" flex="1 0 auto">
-            {everyone.map((player) => {
-              return (
-                <PlayerRow
-                  key={player.id}
-                  highlight={userId === player.id}
-                  player={player}
-                ></PlayerRow>
-              );
-            })}
-          </Box>
+          <TableContainer component={Paper}>
+            <Table
+              size="small"
+              className={css({
+                tableLayout: "fixed",
+              })}
+            >
+              <TableHead>{renderPlayerRowHeader()}</TableHead>
+              <TableBody>
+                {everyone.map((player) => {
+                  return (
+                    <PlayerRow
+                      key={player.id}
+                      isGM={isGM}
+                      highlight={userId === player.id}
+                      player={player}
+                      onPlayedInTurnOrderChange={(playedInTurnOrder) => {
+                        if (isGM) {
+                          sceneManager.actions.updatePlayerPlayedInTurnOrder(
+                            player.id,
+                            playedInTurnOrder
+                          );
+                        }
+                      }}
+                      onPlayerFatePointsChange={(playedInTurnOrder) => {
+                        if (isGM) {
+                          sceneManager.actions.updatePlayerFatePoints(
+                            player.id,
+                            playedInTurnOrder
+                          );
+                        }
+                      }}
+                    ></PlayerRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Paper>
       </Box>
+    );
+  }
+
+  function renderPlayerRowHeader() {
+    return (
+      <TableRow>
+        <TableCell className={css({ width: "25%" })}>
+          <Tooltip title="Turn Order">
+            <Typography variant="overline" noWrap>
+              T.O.
+            </Typography>
+          </Tooltip>
+        </TableCell>
+        <TableCell className={css({ width: "50%" })}>
+          <Typography variant="overline" noWrap>
+            Name
+          </Typography>
+        </TableCell>
+        <TableCell className={css({ width: "25%" })} align="right">
+          <Typography variant="overline" noWrap>
+            Dice
+          </Typography>
+        </TableCell>
+      </TableRow>
     );
   }
 
@@ -264,7 +321,7 @@ export const Play: React.FC<{
                   </Typography>
                 ) : (
                   <Typography variant="h6">
-                    The GM did not add any Aspects to the Scene yet
+                    There is not aspects on the scene yet
                   </Typography>
                 )}
               </Box>
@@ -408,6 +465,15 @@ export const Play: React.FC<{
                 color="secondary"
               >
                 Add Boost
+              </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.resetPlayerPlayedInTurnOrder();
+                }}
+                variant="outlined"
+                color="secondary"
+              >
+                Reset Turn Order
               </Button>
               <input
                 ref={shareLinkInputRef}

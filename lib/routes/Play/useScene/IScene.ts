@@ -4,6 +4,8 @@ export interface IPlayer {
   id: string;
   playerName: string;
   rolls: Array<number>;
+  playedInTurnOrder: boolean;
+  fatePoints: number;
 }
 
 export interface IAspect {
