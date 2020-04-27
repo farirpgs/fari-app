@@ -4,7 +4,7 @@ export interface IPlayer {
   id: string;
   playerName: string;
   rolls: Array<number>;
-  playedInTurnOrder: boolean;
+  playedDuringTurn: boolean;
   fatePoints: number;
 }
 

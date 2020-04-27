@@ -1,13 +1,26 @@
-import { Chip, Grid, IconButton, lighten, TableCell, TableRow, Typography, useTheme } from "@material-ui/core";
+import {
+  Badge,
+  Grid,
+  IconButton,
+  lighten,
+  TableCell,
+  TableRow,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import FlareIcon from "@material-ui/icons/Flare";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import { css, cx } from "emotion";
+import { css } from "emotion";
 import React from "react";
 import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { IPlayer } from "./useScene/IScene";
+
 export const PlayerRow: React.FC<{
   player: IPlayer;
   highlight: boolean;
@@ -19,31 +32,21 @@ export const PlayerRow: React.FC<{
   const diceManager = useFudgeDice(props.player.rolls);
   const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
   const textColor = useTextColors(highlightBackgroundColor);
+  const playedDuringTurnColor = props.player.playedDuringTurn
+    ? theme.palette.primary.main
+    : textColor.disabled;
   const rowStyle = css({
     backgroundColor: props.highlight ? highlightBackgroundColor : "transparent",
     color: props.highlight ? textColor.primary : undefined,
   });
-  const playedInTurnOrderColor = props.player.playedInTurnOrder
-    ? theme.palette.primary.main
-    : textColor.disabled;
+  const tableCellStyle = css({
+    padding: "1rem 1.5rem 1rem 1rem",
+    borderBottom: "none",
+  });
   return (
     <>
       <TableRow className={rowStyle}>
-        <TableCell className={css({ borderBottom: "none" })}>
-          <IconButton
-            onClick={() => {
-              props.onPlayedInTurnOrderChange(!props.player.playedInTurnOrder);
-            }}
-            disabled={!props.isGM}
-            size="small"
-          >
-            <PlayArrowIcon
-              htmlColor={playedInTurnOrderColor}
-              className={css({ width: "1.2rem", height: "auto" })}
-            ></PlayArrowIcon>
-          </IconButton>
-        </TableCell>
-        <TableCell className={css({ borderBottom: "none" })}>
+        <TableCell className={tableCellStyle}>
           <Typography
             noWrap
             className={css({
@@ -54,7 +57,43 @@ export const PlayerRow: React.FC<{
             {props.player.playerName}
           </Typography>
         </TableCell>
-        <TableCell align="right" className={css({ borderBottom: "none" })}>
+        <TableCell className={tableCellStyle}>
+          <IconButton
+            onClick={() => {
+              props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
+            }}
+            disabled={!props.isGM}
+            size="small"
+          >
+            <Tooltip
+              title={
+                props.player.playedDuringTurn
+                  ? "This player played"
+                  : "This player has not played"
+              }
+            >
+              {props.player.playedDuringTurn ? (
+                <DirectionsRunIcon
+                  htmlColor={playedDuringTurnColor}
+                  className={css({ width: "1.2rem", height: "auto" })}
+                ></DirectionsRunIcon>
+              ) : (
+                <EmojiPeopleIcon
+                  htmlColor={playedDuringTurnColor}
+                  className={css({ width: "1.2rem", height: "auto" })}
+                ></EmojiPeopleIcon>
+              )}
+            </Tooltip>
+          </IconButton>
+        </TableCell>
+        <TableCell align="right" className={tableCellStyle}>
+          <Tooltip title="Fate Points">
+            <Badge badgeContent={props.player.fatePoints} color="primary">
+              <FlareIcon width="2"></FlareIcon>
+            </Badge>
+          </Tooltip>
+        </TableCell>
+        <TableCell align="right" className={tableCellStyle}>
           <Typography
             className={css({
               fontSize: "1.2rem",
@@ -66,16 +105,10 @@ export const PlayerRow: React.FC<{
           </Typography>
         </TableCell>
       </TableRow>
-      <TableRow className={cx(rowStyle, css({ borderTop: "none" }))}>
-        <TableCell colSpan={3}>
-          <Grid container alignItems="center" justify="flex-start" spacing={1}>
-          <Grid item>
-              <Chip
-                label={`Fate Points: ${props.player.fatePoints}`}
-                color="primary"
-              ></Chip>
-            </Grid>
-            {props.isGM && (
+      {props.isGM && (
+        <TableRow className={rowStyle}>
+          <TableCell colSpan={4}>
+            <Grid container alignItems="center" justify="flex-end" spacing={1}>
               <Grid item>
                 <IconButton
                   size="small"
@@ -92,8 +125,7 @@ export const PlayerRow: React.FC<{
                   ></RemoveCircleOutlineOutlinedIcon>
                 </IconButton>
               </Grid>
-            )}
-            {props.isGM && (
+
               <Grid item>
                 <IconButton
                   size="small"
@@ -106,10 +138,10 @@ export const PlayerRow: React.FC<{
                   ></AddCircleOutlineOutlinedIcon>
                 </IconButton>
               </Grid>
-            )}
-          </Grid>
-        </TableCell>
-      </TableRow>
+            </Grid>
+          </TableCell>
+        </TableRow>
+      )}
     </>
   );
 };

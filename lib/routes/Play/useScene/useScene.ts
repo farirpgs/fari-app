@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
 import { Dice } from "../../../domains/dice/Dice";
-import { IAspect, IScene } from "./IScene";
+import { IAspect, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
@@ -17,7 +17,7 @@ export function useScene(userId: string, gameId: string) {
       id: isGM ? userId : temporaryGMIdUntilFirstSync,
       playerName: "Game Master",
       rolls: [],
-      playedInTurnOrder: false,
+      playedDuringTurn: false,
       fatePoints: 3,
     },
     players: [],
@@ -31,7 +31,7 @@ export function useScene(userId: string, gameId: string) {
         draft.aspects = defaultSceneAspects;
         everyone.forEach((p) => {
           p.fatePoints = 3;
-          p.playedInTurnOrder = false;
+          p.playedDuringTurn = false;
         });
       })
     );
@@ -182,35 +182,32 @@ export function useScene(userId: string, gameId: string) {
             id: c.label,
             playerName: c.metadata.playerName,
             rolls: [],
-            playedInTurnOrder: false,
+            playedDuringTurn: false,
             fatePoints: 3,
-          };
+          } as IPlayer;
         });
       })
     );
   }
 
-  function resetPlayerPlayedInTurnOrder() {
+  function resetPlayerPlayedStatus() {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
-          p.playedInTurnOrder = false;
+          p.playedDuringTurn = false;
         });
       })
     );
   }
 
-  function updatePlayerPlayedInTurnOrder(
-    id: string,
-    playedInTurnOrder: boolean
-  ) {
+  function updatePlayerPlayedStatus(id: string, playedInTurnOrder: boolean) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            p.playedInTurnOrder = playedInTurnOrder;
+            p.playedDuringTurn = playedInTurnOrder;
           }
         });
       })
@@ -273,8 +270,8 @@ export function useScene(userId: string, gameId: string) {
       updateAspectColor,
       updatePlayers,
       updatePlayerFatePoints,
-      updatePlayerPlayedInTurnOrder,
-      resetPlayerPlayedInTurnOrder,
+      updatePlayerPlayedStatus,
+      resetPlayerPlayedStatus,
       updateGMRoll,
       updatePlayerRoll,
     },

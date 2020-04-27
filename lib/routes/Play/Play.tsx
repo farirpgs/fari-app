@@ -19,7 +19,7 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { css } from "emotion";
+import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -249,7 +249,7 @@ export const Play: React.FC<{
                       player={player}
                       onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                         if (isGM) {
-                          sceneManager.actions.updatePlayerPlayedInTurnOrder(
+                          sceneManager.actions.updatePlayerPlayedStatus(
                             player.id,
                             playedInTurnOrder
                           );
@@ -275,21 +275,31 @@ export const Play: React.FC<{
   }
 
   function renderPlayerRowHeader() {
+    const tableCellStyle = css({ padding: ".375rem 1.5rem .375rem 1rem" });
+    const firstTableCellStyle = css({ width: "50%" });
+
     return (
       <TableRow>
-        <TableCell className={css({ width: "25%" })}>
-          <Tooltip title="Turn Order">
-            <Typography variant="overline" noWrap>
-              T.O.
-            </Typography>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={css({ width: "50%" })}>
+        <TableCell className={cx(tableCellStyle, firstTableCellStyle)}>
           <Typography variant="overline" noWrap>
             Name
           </Typography>
         </TableCell>
-        <TableCell className={css({ width: "25%" })} align="right">
+        <TableCell className={tableCellStyle}>
+          <Tooltip title="Initiative Tracker">
+            <Typography variant="overline" noWrap>
+              Init
+            </Typography>
+          </Tooltip>
+        </TableCell>
+        <TableCell className={tableCellStyle}>
+          <Tooltip title="Fate Points">
+            <Typography variant="overline" noWrap>
+              F.P.
+            </Typography>
+          </Tooltip>
+        </TableCell>
+        <TableCell className={tableCellStyle} align="right">
           <Typography variant="overline" noWrap>
             Dice
           </Typography>
@@ -498,7 +508,7 @@ export const Play: React.FC<{
               <Grid item>
                 <Button
                   onClick={() => {
-                    sceneManager.actions.resetPlayerPlayedInTurnOrder();
+                    sceneManager.actions.resetPlayerPlayedStatus();
                   }}
                 >
                   Reset Turn Order
