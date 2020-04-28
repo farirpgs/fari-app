@@ -160,6 +160,9 @@ export const Page: React.FC<{
                   history.push(`/play/${gameId}`);
                 }}
                 variant={"outlined"}
+                className={css({
+                  minWidth: "10rem",
+                })}
               >
                 <Typography variant="button" noWrap>
                   Rejoin&nbsp;Game

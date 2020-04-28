@@ -36,6 +36,7 @@ export const ContentEditable: React.FC<{
     <div
       className={css({
         outline: "none",
+        wordBreak: "break-word",
       })}
       ref={$ref}
       onInput={() => {

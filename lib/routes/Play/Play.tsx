@@ -148,10 +148,10 @@ export const Play: React.FC<{
         <Box>
           {renderHeader()}
           <Grid container spacing={4}>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={4}>
               {renderSidePanel()}
             </Grid>
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12} md={8}>
               {renderMainContent()}
             </Grid>
           </Grid>
@@ -275,24 +275,27 @@ export const Play: React.FC<{
   }
 
   function renderPlayerRowHeader() {
-    const tableCellStyle = css({ padding: ".375rem 1.5rem .375rem 1rem" });
+    const tableCellStyle = css({ padding: ".375rem 1rem .375rem 1rem" });
     const firstTableCellStyle = css({ width: "50%" });
 
     return (
       <TableRow>
-        <TableCell className={cx(tableCellStyle, firstTableCellStyle)}>
+        <TableCell
+          className={cx(tableCellStyle, firstTableCellStyle)}
+          align="left"
+        >
           <Typography variant="overline" noWrap>
             Name
           </Typography>
         </TableCell>
-        <TableCell className={tableCellStyle}>
+        <TableCell className={tableCellStyle} align="center">
           <Tooltip title="Initiative Tracker">
             <Typography variant="overline" noWrap>
               Init
             </Typography>
           </Tooltip>
         </TableCell>
-        <TableCell className={tableCellStyle}>
+        <TableCell className={tableCellStyle} align="center">
           <Tooltip title="Fate Points">
             <Typography variant="overline" noWrap>
               F.P.

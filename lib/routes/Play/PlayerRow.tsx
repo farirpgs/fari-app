@@ -14,7 +14,7 @@ import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import FlareIcon from "@material-ui/icons/Flare";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import { css } from "emotion";
+import { css, cx } from "emotion";
 import React from "react";
 import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
@@ -39,14 +39,17 @@ export const PlayerRow: React.FC<{
     backgroundColor: props.highlight ? highlightBackgroundColor : "transparent",
     color: props.highlight ? textColor.primary : undefined,
   });
-  const tableCellStyle = css({
-    padding: "1rem 1.5rem 1rem 1rem",
+  const firstRowTableCellStyle = css({
+    padding: "0.7rem",
     borderBottom: "none",
+  });
+  const secondRowTableCellStyle = css({
+    padding: "0 0.7rem",
   });
   return (
     <>
       <TableRow className={rowStyle}>
-        <TableCell className={tableCellStyle}>
+        <TableCell className={firstRowTableCellStyle} align="left">
           <Typography
             noWrap
             className={css({
@@ -57,7 +60,7 @@ export const PlayerRow: React.FC<{
             {props.player.playerName}
           </Typography>
         </TableCell>
-        <TableCell className={tableCellStyle}>
+        <TableCell className={firstRowTableCellStyle} align="center">
           <IconButton
             onClick={() => {
               props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
@@ -75,25 +78,23 @@ export const PlayerRow: React.FC<{
               {props.player.playedDuringTurn ? (
                 <DirectionsRunIcon
                   htmlColor={playedDuringTurnColor}
-                  className={css({ width: "1.2rem", height: "auto" })}
                 ></DirectionsRunIcon>
               ) : (
                 <EmojiPeopleIcon
                   htmlColor={playedDuringTurnColor}
-                  className={css({ width: "1.2rem", height: "auto" })}
                 ></EmojiPeopleIcon>
               )}
             </Tooltip>
           </IconButton>
         </TableCell>
-        <TableCell align="right" className={tableCellStyle}>
+        <TableCell className={cx(firstRowTableCellStyle)} align="center">
           <Tooltip title="Fate Points">
             <Badge badgeContent={props.player.fatePoints} color="primary">
               <FlareIcon width="2"></FlareIcon>
             </Badge>
           </Tooltip>
         </TableCell>
-        <TableCell align="right" className={tableCellStyle}>
+        <TableCell className={cx(firstRowTableCellStyle)} align="right">
           <Typography
             className={css({
               fontSize: "1.2rem",
@@ -106,7 +107,7 @@ export const PlayerRow: React.FC<{
         </TableCell>
       </TableRow>
       {props.isGM && (
-        <TableRow className={rowStyle}>
+        <TableRow className={cx(rowStyle, secondRowTableCellStyle)}>
           <TableCell colSpan={4}>
             <Grid container alignItems="center" justify="flex-end" spacing={1}>
               <Grid item>
@@ -146,10 +147,3 @@ export const PlayerRow: React.FC<{
   );
 };
 PlayerRow.displayName = "PlayerRow";
-
-// <Box
-//   p=".5rem"
-//   borderBottom="1px solid #ddd"
-//   bgcolor={props.highlight ? highlightBackgroundColor : "transparent"}
-//   color={props.highlight ? textColor.primary : undefined}
-// >

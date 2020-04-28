@@ -75,7 +75,13 @@ export const IndexCard: React.FC<{
                       <Typography variant="overline">Boost</Typography>
                     </Grid>
                   )}
-                  <Grid item className={css({ flex: "1 0 auto" })}>
+                  <Grid
+                    item
+                    className={css({
+                      flex: "1 1 auto",
+                      paddingLeft: props.isBoost ? ".5rem" : undefined,
+                    })}
+                  >
                     <ContentEditable
                       value={props.title}
                       readonly={props.readonly}
