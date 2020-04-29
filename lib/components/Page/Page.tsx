@@ -198,7 +198,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Start Game
+            Play
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>

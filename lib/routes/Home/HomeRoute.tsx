@@ -15,7 +15,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
         description="Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your imagination do the rest."
       ></PageMeta>
       <Box>
-        <Container maxWidth="md">
+        <Container maxWidth="xs">
           <Box pb="2rem" textAlign="center">
             <img width="150px" src={appIcon} />
           </Box>
@@ -35,13 +35,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
-                  Play Fate Online
+                  <b>Play Fate Online</b>
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
                   Use our <b>Online Game Manager</b> to create an interactive
-                  play session. Send a link to your friends, play your scenes
-                  and roll dice on the same user interface in real time.
+                  game session. Send a link to your friends and play Fate
+                  together, in real time.
                 </Typography>
                 <Box pt="2rem" textAlign="center" marginTop="auto">
                   <Button
@@ -61,15 +61,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
-                  Play Fate Offline
+                  <b>Play Fate Offline</b>
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
                   Rally up with your friends on Discord or else, share your
-                  screen and start a game with our <b>Game Manager</b>. Manage
-                  your scene, aspects, and more in a custom tailored user
-                  interface made to play Fate Core, Fate Accelerated or Fate
-                  Condensed.
+                  screen and start an Offline Game. Manage your scene, aspects,
+                  and more in a custom tailored user interface made to play Fate
+                  Core, Fate Accelerated or Fate Condensed.
                 </Typography>
                 <Box pt="2rem" textAlign="center" marginTop="auto">
                   <Button
