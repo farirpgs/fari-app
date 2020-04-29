@@ -66,30 +66,20 @@ export const IndexCard: React.FC<{
             borderBottom: "1px solid #f0a4a4",
           })}
         >
-          <Box p="1rem">
+          <Box p={props.isBoost ? "0 1rem 1rem 1rem" : "1rem"}>
+            {props.isBoost && (
+              <Grid item>
+                <Typography variant="overline">Boost</Typography>
+              </Grid>
+            )}
             <Grid container justify="space-between">
               <Grid item xs>
-                <Grid container>
-                  {props.isBoost && (
-                    <Grid item>
-                      <Typography variant="overline">Boost</Typography>
-                    </Grid>
-                  )}
-                  <Grid
-                    item
-                    className={css({
-                      flex: "1 1 auto",
-                      paddingLeft: props.isBoost ? ".5rem" : undefined,
-                    })}
-                  >
-                    <ContentEditable
-                      value={props.title}
-                      readonly={props.readonly}
-                      autoFocus
-                      onChange={props.onTitleChange}
-                    ></ContentEditable>
-                  </Grid>
-                </Grid>
+                <ContentEditable
+                  value={props.title}
+                  readonly={props.readonly}
+                  autoFocus
+                  onChange={props.onTitleChange}
+                ></ContentEditable>
               </Grid>
               {!props.readonly && (
                 <Grid item>
