@@ -88,4 +88,4 @@ export const DiceRoute = () => {
   );
 };
 
-DiceRoute.displayName = "Dice Route";
+DiceRoute.displayName = "DiceRoute";

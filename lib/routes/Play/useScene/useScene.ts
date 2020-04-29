@@ -190,6 +190,28 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function addOfflinePlayer(playerName: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.players.push({
+          id: uuidV4(),
+          playerName: playerName,
+          rolls: [],
+          playedDuringTurn: false,
+          fatePoints: 3,
+        });
+      })
+    );
+  }
+
+  function removeOfflinePlayer(id: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.players = draft.players.filter((p) => p.id !== id);
+      })
+    );
+  }
+
   function resetPlayerPlayedStatus() {
     setScene(
       produce((draft: IScene) => {
@@ -269,6 +291,8 @@ export function useScene(userId: string, gameId: string) {
       updateAspectConsequence,
       updateAspectColor,
       updatePlayers,
+      addOfflinePlayer,
+      removeOfflinePlayer,
       updatePlayerFatePoints,
       updatePlayerPlayedStatus,
       resetPlayerPlayedStatus,

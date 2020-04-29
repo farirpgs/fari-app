@@ -3,10 +3,15 @@ import {
   Button,
   CircularProgress,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Divider,
   Fade,
   Grid,
   Hidden,
+  InputLabel,
   Paper,
   Table,
   TableBody,
@@ -14,6 +19,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   ThemeProvider,
   Tooltip,
   Typography,
@@ -21,9 +27,7 @@ import {
 } from "@material-ui/core";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { DevTool } from "../../components/DevTool/DevTool";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { Page } from "../../components/Page/Page";
@@ -31,53 +35,31 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
-import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
-import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
+import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnection";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { JoinAGame } from "./JoinAGame";
-import { PlayerRow } from "./PlayerRow";
+import { JoinAGame } from "./components/JoinAGame";
+import { PlayerRow } from "./components/PlayerRow";
 import { defaultSceneName, useScene } from "./useScene/useScene";
 
-const debug = false;
-export const Play: React.FC<{
-  match: {
-    params: { id: string };
-  };
+export const PlayPage: React.FC<{
+  userId: string;
+  idFromParams: string;
+  isLoading: boolean;
+  error: any;
+  shareLink: string;
+  sceneManager: ReturnType<typeof useScene>;
+  connectionsManager?: ReturnType<typeof usePeerConnections>;
 }> = (props) => {
-  const idFromProps = props.match.params.id;
-  const [userId] = useState(() => {
-    return uuidV4();
-  });
-  const shareLinkInputRef = useRef<HTMLInputElement>();
-  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
+  const { sceneManager, connectionsManager } = props;
   const theme = useTheme();
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
-  const sceneManager = useScene(userId, idFromProps);
-
-  const hostManager = usePeerHost({
-    onConnectionDataReceive(id: string, roll: number) {
-      sceneManager.actions.updatePlayerRoll(id, roll);
-    },
-    debug: debug,
-  });
-  const connectionsManager = usePeerConnection({
-    onHostDataReceive(newScene) {
-      sceneManager.actions.setScene(newScene);
-    },
-    debug: debug,
-  });
-
-  useEffect(() => {
-    hostManager.actions.sendToConnections(sceneManager.state.scene);
-  }, [sceneManager.state.scene]);
-
-  useEffect(() => {
-    if (isGM) {
-      sceneManager.actions.updatePlayers(hostManager.state.connections);
-    }
-  }, [hostManager.state.connections]);
-
+  const shareLinkInputRef = useRef<HTMLInputElement>();
+  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
+  const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
+    false
+  );
+  const [offlineCharacterName, setOfflineCharacterName] = useState("");
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -89,33 +71,26 @@ export const Play: React.FC<{
     }
   }, [shareLinkToolTip]);
 
-  const isGM = !idFromProps;
-  const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
+  const isGM = !props.idFromParams;
+  const isOffline = !props.shareLink;
   const everyone = [
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sceneName === defaultSceneName ? "" : sceneName;
+  const shouldRenderPlayerJoinGameScreen =
+    !isGM && !connectionsManager.state.isConnectedToHost;
+
   return (
-    <Page gameId={idFromProps}>
+    <Page gameId={props.idFromParams}>
       <PageMeta title={pageTitle}></PageMeta>
-      {hostManager.state.error ? renderPageError() : renderPage()}
-      <DevTool
-        data={{
-          hostId: hostManager.state.hostId,
-          href: shareLink,
-          numberOfConnections: hostManager.state.numberOfConnections,
-          isConnectedToHost: connectionsManager.state.isConnectedToHost,
-          error: hostManager.state.error,
-          scene: sceneManager.state.scene,
-        }}
-      ></DevTool>
+      {props.error ? renderPageError() : renderPage()}
     </Page>
   );
 
   function renderPage() {
-    if (hostManager.state.loading || connectionsManager.state.loading) {
+    if (props.isLoading) {
       return renderIsLoading();
     }
     return renderPageContent();
@@ -130,15 +105,19 @@ export const Play: React.FC<{
   }
 
   function renderPageContent() {
-    if (!isGM && !connectionsManager.state.isConnectedToHost) {
+    if (shouldRenderPlayerJoinGameScreen) {
       return (
         <JoinAGame
           connecting={connectionsManager.state.connectingToHost}
           error={connectionsManager.state.connectingToHostError}
           onSubmit={(playerName) => {
-            connectionsManager.actions.connect(idFromProps, userId, {
-              playerName: playerName,
-            });
+            connectionsManager.actions.connect(
+              props.idFromParams,
+              props.userId,
+              {
+                playerName: playerName,
+              }
+            );
           }}
         ></JoinAGame>
       );
@@ -155,8 +134,60 @@ export const Play: React.FC<{
               {renderMainContent()}
             </Grid>
           </Grid>
+          {renderOfflineAddPlayerDialog()}
         </Box>
       </Fade>
+    );
+  }
+
+  function renderOfflineAddPlayerDialog() {
+    return (
+      <Dialog
+        fullWidth
+        maxWidth="xs"
+        open={offlineCharacterDialogOpen}
+        onClose={() => {
+          setOfflineCharacterDialogOpen(false);
+          setOfflineCharacterName("");
+        }}
+      >
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            sceneManager.actions.addOfflinePlayer(offlineCharacterName);
+            setOfflineCharacterDialogOpen(false);
+            setOfflineCharacterName("");
+          }}
+        >
+          <DialogTitle id="form-dialog-title">Add Character</DialogTitle>
+          <DialogContent>
+            <InputLabel shrink>Character Name:</InputLabel>
+            <TextField
+              autoFocus
+              value={offlineCharacterName}
+              onChange={(event) => {
+                setOfflineCharacterName(event.target.value);
+              }}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                setOfflineCharacterDialogOpen(false);
+                setOfflineCharacterName("");
+              }}
+              color="default"
+            >
+              Cancel
+            </Button>
+            <Button type="submit" color="primary">
+              Add Character
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     );
   }
 
@@ -245,8 +276,12 @@ export const Play: React.FC<{
                     <PlayerRow
                       key={player.id}
                       isGM={isGM}
-                      highlight={userId === player.id}
+                      highlight={props.userId === player.id}
                       player={player}
+                      offline={isOffline}
+                      onPlayerRemove={() => {
+                        sceneManager.actions.removeOfflinePlayer(player.id);
+                      }}
                       onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                         if (isGM) {
                           sceneManager.actions.updatePlayerPlayedStatus(
@@ -476,33 +511,48 @@ export const Play: React.FC<{
                   color="secondary"
                 >
                   Add Boost
+                </Button>
+              </Grid>
+              {isOffline && (
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      setOfflineCharacterDialogOpen(true);
+                    }}
+                    variant="outlined"
+                    color="secondary"
+                  >
+                    Add Character
+                  </Button>
+                </Grid>
+              )}
+              {props.shareLink && (
+                <Grid item>
                   <input
                     ref={shareLinkInputRef}
                     type="text"
-                    value={shareLink}
+                    value={props.shareLink}
                     readOnly
                     hidden
                   />
-                </Button>
-              </Grid>
-              <Grid item>
-                <Tooltip
-                  open={shareLinkToolTip.open}
-                  title="Copied!"
-                  placement="top"
-                >
-                  <Button
-                    onClick={() => {
-                      shareLinkInputRef.current.select();
-                      document.execCommand("copy");
-                      navigator.clipboard.writeText(shareLink);
-                      setShareLinkToolTip({ open: true });
-                    }}
+                  <Tooltip
+                    open={shareLinkToolTip.open}
+                    title="Copied!"
+                    placement="top"
                   >
-                    Copy Game Link
-                  </Button>
-                </Tooltip>
-              </Grid>
+                    <Button
+                      onClick={() => {
+                        shareLinkInputRef.current.select();
+                        document.execCommand("copy");
+                        navigator.clipboard.writeText(props.shareLink);
+                        setShareLinkToolTip({ open: true });
+                      }}
+                    >
+                      Copy Game Link
+                    </Button>
+                  </Tooltip>
+                </Grid>
+              )}
               <Hidden smDown>
                 <Grid item className={css({ display: "flex" })}>
                   <Divider orientation="vertical" flexItem />
@@ -532,19 +582,6 @@ export const Play: React.FC<{
                 </ThemeProvider>
               </Grid>
             </Grid>
-            // <Box
-            //   display="flex"
-            //   justifyContent="center"
-            //   flexWrap="wrap"
-            //   className={css({
-            //     "& *": {
-            //       margin: ".5rem",
-            //       flex: "0 1 auto",
-            //     },
-            //   })}
-            // >
-
-            // </Box>
           )}
         </Box>
       </Box>
@@ -564,7 +601,8 @@ export const Play: React.FC<{
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            Try refreshing the page to see if that fixes the issue.
+            Try refreshing the page to see if that fixes the issue or start an
+            offline game instead.
           </Typography>
         </Box>
       </Box>
@@ -572,4 +610,4 @@ export const Play: React.FC<{
   }
 };
 
-Play.displayName = "Play";
+PlayPage.displayName = "PlayPage";
