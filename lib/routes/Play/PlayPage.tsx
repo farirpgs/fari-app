@@ -41,15 +41,20 @@ import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { defaultSceneName, useScene } from "./useScene/useScene";
 
-export const PlayPage: React.FC<{
+type IOnlineProps = {
+  isLoading?: boolean;
+  error?: any;
+  shareLink?: string;
+  connectionsManager?: ReturnType<typeof usePeerConnections>;
+};
+
+type IProps = IOnlineProps & {
   userId: string;
   idFromParams: string;
-  isLoading: boolean;
-  error: any;
-  shareLink: string;
   sceneManager: ReturnType<typeof useScene>;
-  connectionsManager?: ReturnType<typeof usePeerConnections>;
-}> = (props) => {
+};
+
+export const PlayPage: React.FC<IProps> = (props) => {
   const { sceneManager, connectionsManager } = props;
   const theme = useTheme();
   const errorTheme = useButtonTheme(theme.palette.error.main);
