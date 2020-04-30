@@ -11,7 +11,7 @@ export const PageMeta: React.FC<{
   description?: string;
   noIndex?: boolean;
 }> = (props) => {
-  const title = `Fari | ${props.title || "Fate RPG Companion"}`;
+  const title = `Fari | ${props.title?.trim() || "Fate RPG Companion"}`;
   const metas = [];
   if (props.description) {
     metas.push({
