@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "^12.16.3"
+  },
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
     "build": "yarn run validate && parcel build ./lib/index.html --target browser",
