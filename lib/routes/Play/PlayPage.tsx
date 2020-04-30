@@ -83,7 +83,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
     ...sceneManager.state.scene.players,
   ];
   const sceneName = sceneManager.state.scene.name;
-  const pageTitle = sceneName === defaultSceneName ? "" : sceneName;
+  const pageTitle = getPageTitle(sceneName);
   const shouldRenderPlayerJoinGameScreen =
     !isGM && !connectionsManager.state.isConnectedToHost;
 
@@ -616,3 +616,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
 };
 
 PlayPage.displayName = "PlayPage";
+
+function getPageTitle(sceneName: string) {
+  return sceneName === defaultSceneName ? "" : sceneName.replace(/&nbsp;/g, "");
+}
