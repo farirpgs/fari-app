@@ -24,9 +24,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </Box>
           <Box pb="4rem" textAlign="center">
             <Typography variant="subtitle1">
-              Fari is the best Fate RPG companion application. Play scenes in
-              real-time with your friends, roll fudge dice and let your
-              imagination do the rest.
+              Fari is the best Fate RPG companion application.
+            </Typography>
+            <Typography variant="subtitle1">
+              Play scenes in real-time with your friends, roll fudge dice and
+              let your imagination do the rest.
             </Typography>
           </Box>
         </Container>
@@ -39,10 +41,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
-                  Use our <b>Online Game Manager</b> to create an interactive
-                  game session. Send a link to your friends and play Fate
-                  together, in real time.
+                  Use our Online Game Manager to create an interactive game
+                  session. Start by sending a game link to your friends and
+                  start playing Fate together, in real time.
                 </Typography>
+
                 <Box pt="2rem" textAlign="center" marginTop="auto">
                   <Button
                     type="submit"
