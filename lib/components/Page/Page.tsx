@@ -131,15 +131,13 @@ export const Page: React.FC<{
             <Hidden smDown>{renderMenu(false)}</Hidden>
 
             <Hidden mdUp>
-              <Grid container>
-                <IconButton
-                  onClick={() => {
-                    setMenuOpen(true);
-                  }}
-                >
-                  <MenuIcon></MenuIcon>
-                </IconButton>
-              </Grid>
+              <IconButton
+                onClick={() => {
+                  setMenuOpen(true);
+                }}
+              >
+                <MenuIcon></MenuIcon>
+              </IconButton>
             </Hidden>
             <Drawer
               anchor="bottom"
@@ -162,8 +160,13 @@ export const Page: React.FC<{
                   history.push(`/play/${gameId}`);
                 }}
                 variant={"outlined"}
+                className={css({
+                  minWidth: "10rem",
+                })}
               >
-                Rejoin&nbsp;Game
+                <Typography variant="button" noWrap>
+                  Rejoin&nbsp;Game
+                </Typography>
               </Button>
             )}
             {props.appBarActions}
@@ -195,7 +198,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Start Game
+            Play
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>

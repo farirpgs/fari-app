@@ -1,26 +1,83 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { About } from "../../routes/About/About";
+import { AboutRoute } from "../../routes/About/AboutRoute";
 import { Characters } from "../../routes/Characters/Characters";
 import { CreateCharacter } from "../../routes/CreateCharacter/CreateCharacter";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
 import { Games } from "../../routes/Games/Games";
-import { Home } from "../../routes/Home/Home";
-import { NotFoundRoute } from "../../routes/NotFoundRoute/NotFoundRoute";
-import { Play } from "../../routes/Play/Play";
+import { HomeRoute } from "../../routes/Home/HomeRoute";
+import { NotFoundRoute } from "../../routes/NotFound/NotFoundRoute";
+import { PlayOfflineRoute } from "../../routes/Play/PlayOfflineRoute";
+import { PlayRoute } from "../../routes/Play/PlayRoute";
 
 export const AppRouter = () => (
   <Switch>
-    <Route exact path={"/"} component={Home} />
-    <Route exact path={"/games"} component={Games} />
-    <Route exact path={"/game/:gameSlug"} component={Characters} />
-    <Route exact path={"/game/:gameSlug/create"} component={CreateCharacter} />
-    <Route exact path={"/dice"} component={DiceRoute} />
-    <Route exact path={"/play"} component={Play} />
-    <Route exact path={"/play/:id"} component={Play} />
-
-    <Route exact path={"/about"} component={About} />
-
-    <Route path="*" component={NotFoundRoute} status={404} />
+    <Route
+      exact
+      path={"/"}
+      render={(props) => {
+        return <HomeRoute />;
+      }}
+    />
+    <Route
+      exact
+      path={"/games"}
+      render={(props) => {
+        return <Games />;
+      }}
+    />
+    <Route
+      exact
+      path={"/game/:gameSlug"}
+      render={(props) => {
+        return <Characters />;
+      }}
+    />
+    <Route
+      exact
+      path={"/game/:gameSlug/create"}
+      render={(props) => {
+        return <CreateCharacter />;
+      }}
+    />
+    <Route
+      exact
+      path={"/dice"}
+      render={(props) => {
+        return <DiceRoute />;
+      }}
+    />
+    <Route
+      exact
+      path={"/play"}
+      render={(props) => {
+        return <PlayRoute {...props} />;
+      }}
+    />
+    <Route
+      exact
+      path={"/play/:id"}
+      render={(props) => {
+        return <PlayRoute {...props} />;
+      }}
+    />
+    <Route
+      exact
+      path={"/play-offline"}
+      render={(props) => <PlayOfflineRoute {...props} />}
+    />
+    <Route
+      exact
+      path={"/about"}
+      render={(props) => {
+        return <AboutRoute />;
+      }}
+    />
+    <Route
+      path="*"
+      render={(props) => {
+        return <NotFoundRoute {...props} />;
+      }}
+    />
   </Switch>
 );

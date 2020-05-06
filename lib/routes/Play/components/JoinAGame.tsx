@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import appIcon from "../../../images/app-icon.png";
+import appIcon from "../../../../images/app-icon.png";
 
 let playerNameSingleton = "";
 

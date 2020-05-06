@@ -8,7 +8,7 @@ export function NotFoundRoute(props) {
   return (
     <div>
       <Page isLoading={false}>
-        <PageMeta title="Page Not Found"></PageMeta>
+        <PageMeta title="Page Not Found" noIndex></PageMeta>
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography
             className={css({

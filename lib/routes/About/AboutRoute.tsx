@@ -6,7 +6,7 @@ import aboutMD from "./About.md";
 
 const html = new showdown.Converter().makeHtml(aboutMD);
 
-export const About: React.FC<{}> = (props) => {
+export const AboutRoute: React.FC<{}> = (props) => {
   return (
     <Page>
       <PageMeta
@@ -21,3 +21,4 @@ export const About: React.FC<{}> = (props) => {
     </Page>
   );
 };
+AboutRoute.displayName = "AboutRoute";

@@ -1,7 +1,7 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme, ThemeOptions } from "@material-ui/core";
 import { blue, indigo } from "@material-ui/core/colors";
 
-export const AppTheme = createMuiTheme({
+export const defaultThemeConfiguration: ThemeOptions = {
   palette: {
     primary: indigo,
     secondary: blue,
@@ -19,4 +19,12 @@ export const AppTheme = createMuiTheme({
       "sans-serif",
     ].join(","),
   },
-});
+  overrides: {
+    MuiButton: {
+      root: {
+        borderRadius: "20px",
+      },
+    },
+  },
+};
+export const AppTheme = createMuiTheme(defaultThemeConfiguration);

@@ -6,18 +6,25 @@ type Metas = React.DetailedHTMLProps<
   HTMLMetaElement
 >[];
 
-export const PageMeta: React.FC<{ title: string; description?: string }> = (
-  props
-) => {
-  const title = `Fari | ${props.title || "Fate RPG Companion"}`;
-  const metas: Metas = props.description
-    ? [
-        {
-          name: "description",
-          content: props.description,
-        },
-      ]
-    : [];
+export const PageMeta: React.FC<{
+  title: string;
+  description?: string;
+  noIndex?: boolean;
+}> = (props) => {
+  const title = `Fari | ${props.title?.trim() || "Fate RPG Companion"}`;
+  const metas = [];
+  if (props.description) {
+    metas.push({
+      name: "description",
+      content: props.description,
+    });
+  }
+  if (props.noIndex) {
+    metas.push({
+      name: "robots",
+      content: "noindex",
+    });
+  }
   return <Helmet title={title} meta={metas}></Helmet>;
 };
 
