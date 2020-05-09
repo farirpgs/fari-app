@@ -628,5 +628,15 @@ export const PlayPage: React.FC<IProps> = (props) => {
 PlayPage.displayName = "PlayPage";
 
 function getPageTitle(sceneName: string) {
-  return sceneName === defaultSceneName ? "" : sceneName.replace(/&nbsp;/g, "");
+  return sceneName === defaultSceneName
+    ? ""
+    : removeHTMLTags(removeNBSP(sceneName));
+}
+
+function removeNBSP(value: string) {
+  return value.replace(/&nbsp;/g, "");
+}
+
+function removeHTMLTags(value: string) {
+  return value.replace(/<\/?[^>]+(>|$)/g, "");
 }
