@@ -30,6 +30,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
+import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
@@ -131,7 +132,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
       <Fade in>
         <Box>
           {renderHeader()}
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
               {renderSidePanel()}
             </Grid>
@@ -354,41 +355,19 @@ export const PlayPage: React.FC<IProps> = (props) => {
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const shouldRenderEmptyAspectView = aspectIds.length === 0;
+    const gutterPx = 16;
     return (
       <Box pb="2rem">
-        <Grid container spacing={2}>
-          {shouldRenderEmptyAspectView && (
-            <Grid item xs={12}>
-              <Box pt="6rem" textAlign="center">
-                {isGM ? (
-                  <Typography variant="h6">
-                    Click on the
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      className={css({
-                        margin: "0 .5rem",
-                      })}
-                      onClick={() => {
-                        sceneManager.actions.addAspect();
-                      }}
-                    >
-                      Add Aspect
-                    </Button>
-                    button to add a new Aspect to the Scene
-                  </Typography>
-                ) : (
-                  <Typography variant="h6">
-                    There is not aspects on the scene yet
-                  </Typography>
-                )}
-              </Box>
-            </Grid>
-          )}
+        <MagicGridContainer items={aspectIds.length} gutterPx={gutterPx}>
           {aspectIds.map((aspectId) => {
             return (
-              <Grid item xs={12} sm={12} md={4} key={aspectId}>
+              <Box
+                key={aspectId}
+                className={css({ width: `calc(33% - ${gutterPx * 2}px)` })}
+              >
                 <IndexCard
+                  key={aspectId}
+                  className="grid-item"
                   title={sceneManager.state.scene.aspects[aspectId].title}
                   readonly={!isGM}
                   content={sceneManager.state.scene.aspects[aspectId].content}
@@ -462,10 +441,36 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     sceneManager.actions.updateAspectColor(aspectId, color);
                   }}
                 ></IndexCard>
-              </Grid>
+              </Box>
             );
           })}
-        </Grid>
+        </MagicGridContainer>
+        {shouldRenderEmptyAspectView && (
+          <Box pt="6rem" textAlign="center">
+            {isGM ? (
+              <Typography variant="h6">
+                Click on the
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={css({
+                    margin: "0 .5rem",
+                  })}
+                  onClick={() => {
+                    sceneManager.actions.addAspect();
+                  }}
+                >
+                  Add Aspect
+                </Button>
+                button to add a new Aspect to the Scene
+              </Typography>
+            ) : (
+              <Typography variant="h6">
+                There is not aspects on the scene yet
+              </Typography>
+            )}
+          </Box>
+        )}
       </Box>
     );
   }

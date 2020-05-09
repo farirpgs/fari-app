@@ -29,6 +29,7 @@ export const IndexCard: React.FC<{
   consequences: Array<string>;
   color: string;
   isBoost: boolean;
+  className?: string;
 
   onTitleChange(value: string): void;
   onContentChange(value: string): void;
@@ -56,7 +57,7 @@ export const IndexCard: React.FC<{
     props.consequences.length > 0;
 
   return (
-    <Paper elevation={undefined}>
+    <Paper elevation={undefined} className={props.className}>
       <Box bgcolor={props.color}>
         <Box
           className={css({
