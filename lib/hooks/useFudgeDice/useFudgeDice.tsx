@@ -10,6 +10,7 @@ export function useFudgeDice(rolls: Array<number>) {
   const [rolling, setRolling] = useState(false);
   const [color, setColor] = useState("inherit");
   const refreshCount = useRef(0);
+  const hasRolledOnce = roll !== undefined;
 
   useEffect(() => {
     let newColor = "inherit";
@@ -48,6 +49,8 @@ export function useFudgeDice(rolls: Array<number>) {
   return {
     state: {
       roll,
+      rolling,
+      hasRolledOnce,
       color,
     },
   };

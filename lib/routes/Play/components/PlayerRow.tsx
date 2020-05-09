@@ -1,5 +1,6 @@
 import {
   Badge,
+  Box,
   Grid,
   IconButton,
   lighten,
@@ -98,15 +99,30 @@ export const PlayerRow: React.FC<{
           </Tooltip>
         </TableCell>
         <TableCell className={cx(firstRowTableCellStyle)} align="right">
-          <Typography
-            className={css({
-              fontSize: "1.2rem",
-              lineHeight: Font.lineHeight(1.2),
-              color: diceManager.state.color,
-            })}
-          >
-            {diceManager.state.roll ?? <>-</>}
-          </Typography>
+          <Box display="flex" justifyContent="flex-end">
+            <Typography
+              className={css({
+                fontSize: "1.2rem",
+                lineHeight: Font.lineHeight(1.2),
+                color: diceManager.state.color,
+                border: `.1rem solid ${theme.palette.primary.main}`,
+                width: "2rem",
+                borderRadius: "4px",
+                height: "2rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                boxShadow:
+                  "2px 2px 2px 0px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+                animationName: diceManager.state.rolling ? "spin" : undefined,
+                animationDuration: "250ms",
+                animationIterationCount: "infinite",
+                animationTimingFunction: "linear",
+              })}
+            >
+              {diceManager.state.roll ?? <></>}
+            </Typography>
+          </Box>
         </TableCell>
       </TableRow>
       {props.isGM && (

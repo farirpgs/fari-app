@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@material-ui/core";
+import { Box, Button, lighten, Typography, useTheme } from "@material-ui/core";
 import { css } from "emotion";
 import React, { useState } from "react";
 import { Page } from "../../components/Page/Page";
@@ -12,6 +12,8 @@ export const DiceRoute = () => {
   const diceManager = useFudgeDice(rolls);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
+  const theme = useTheme();
+  const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
 
   function roll() {
     setRolls((draft) => {
@@ -55,7 +57,20 @@ export const DiceRoute = () => {
               fontSize: "5rem",
               lineHeight: Font.lineHeight(5),
               color: diceManager.state.color,
-              textAlign: "center",
+              background: highlightBackgroundColor,
+              border: `.5rem solid ${theme.palette.primary.main}`,
+              borderRadius: "4px",
+              width: "7rem",
+              height: "7rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              boxShadow:
+                "3px 5px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+              animationName: diceManager.state.rolling ? "spin" : undefined,
+              animationDuration: "250ms",
+              animationIterationCount: "infinite",
+              animationTimingFunction: "linear",
             })}
           >
             {diceManager.state.roll}
