@@ -27,6 +27,7 @@ import {
 } from "@material-ui/core";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
+import { Prompt } from "react-router";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
@@ -90,6 +91,10 @@ export const PlayPage: React.FC<IProps> = (props) => {
 
   return (
     <Page gameId={props.idFromParams}>
+      <Prompt
+        when={isGM || isOffline}
+        message="Are you sure you want to leave and reset your scene ?"
+      />
       <PageMeta title={pageTitle}></PageMeta>
       {props.error ? renderPageError() : renderPage()}
     </Page>
