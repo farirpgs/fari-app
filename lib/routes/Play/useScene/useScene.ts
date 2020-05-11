@@ -31,7 +31,6 @@ export function useScene(userId: string, gameId: string) {
         draft.name = defaultSceneName;
         draft.aspects = defaultSceneAspects;
         everyone.forEach((p) => {
-          p.fatePoints = 3;
           p.playedDuringTurn = false;
         });
       })
