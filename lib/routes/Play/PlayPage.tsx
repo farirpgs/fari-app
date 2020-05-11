@@ -635,13 +635,13 @@ PlayPage.displayName = "PlayPage";
 function getPageTitle(sceneName: string) {
   return sceneName === defaultSceneName
     ? ""
-    : removeHTMLTags(removeNBSP(sceneName));
+    : removeHTMLTags(removeNBSP(sceneName)).trim();
 }
 
 function removeNBSP(value: string) {
-  return value.replace(/&nbsp;/g, "");
+  return value.replace(/&nbsp;/g, " ");
 }
 
 function removeHTMLTags(value: string) {
-  return value.replace(/<\/?[^>]+(>|$)/g, "");
+  return value.replace(/<\/?[^>]+(>|$)/g, " ");
 }
