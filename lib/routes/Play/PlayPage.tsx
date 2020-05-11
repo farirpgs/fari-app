@@ -23,6 +23,7 @@ import {
   ThemeProvider,
   Tooltip,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@material-ui/core";
 import { css, cx } from "emotion";
@@ -59,6 +60,7 @@ type IProps = IOnlineProps & {
 export const PlayPage: React.FC<IProps> = (props) => {
   const { sceneManager, connectionsManager } = props;
   const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const shareLinkInputRef = useRef<HTMLInputElement>();
@@ -360,19 +362,22 @@ export const PlayPage: React.FC<IProps> = (props) => {
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const shouldRenderEmptyAspectView = aspectIds.length === 0;
-    const gutterPx = 16;
     return (
       <Box pb="2rem">
-        <MagicGridContainer items={aspectIds.length} gutterPx={gutterPx}>
+        <MagicGridContainer items={aspectIds.length}>
           {aspectIds.map((aspectId) => {
             return (
               <Box
                 key={aspectId}
-                className={css({ width: `calc(33% - ${gutterPx * 2}px)` })}
+                className={cx(
+                  css({
+                    width: isSmall ? "100%" : "33%",
+                    padding: "0 .5rem 1.5rem .5rem",
+                  })
+                )}
               >
                 <IndexCard
                   key={aspectId}
-                  className="grid-item"
                   title={sceneManager.state.scene.aspects[aspectId].title}
                   readonly={!isGM}
                   content={sceneManager.state.scene.aspects[aspectId].content}
