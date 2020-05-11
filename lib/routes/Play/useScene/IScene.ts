@@ -1,9 +1,10 @@
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
+import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 
 export interface IPlayer {
   id: string;
   playerName: string;
-  rolls: Array<number>;
+  rolls: Array<IDiceRoll>;
   playedDuringTurn: boolean;
   fatePoints: number;
 }

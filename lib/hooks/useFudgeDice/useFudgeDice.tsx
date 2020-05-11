@@ -1,24 +1,38 @@
 import { useTheme } from "@material-ui/core";
 import { useEffect, useRef, useState } from "react";
 import { Dice } from "../../domains/dice/Dice";
+import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
-export function useFudgeDice(rolls: Array<number>) {
+const diceMap = {
+  "-1": "-",
+  "0": "o",
+  "1": "+",
+};
+export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const [realRoll] = rolls;
 
   const theme = useTheme();
-  const [roll, setRoll] = useState<number>(undefined);
+  const [roll, setRoll] = useState<IDiceRoll>(undefined);
   const [rolling, setRolling] = useState(false);
   const [color, setColor] = useState("inherit");
   const refreshCount = useRef(0);
   const hasRolledOnce = roll !== undefined;
 
+  const label = roll?.total ?? "";
+  const rollSigns = roll?.rolls
+    .map((r) => {
+      return diceMap[r];
+    })
+    .join(" ");
+  const tooltip = rolling ? "" : rollSigns ?? "";
+
   useEffect(() => {
     let newColor = "inherit";
     if (rolling) {
       newColor = "inherit";
-    } else if (realRoll >= 3) {
+    } else if (realRoll?.total >= 3) {
       newColor = theme.palette.success.main;
-    } else if (realRoll <= -3) {
+    } else if (realRoll?.total <= -3) {
       newColor = theme.palette.error.main;
     }
     setColor(newColor);
@@ -30,7 +44,7 @@ export function useFudgeDice(rolls: Array<number>) {
       setRolling(true);
       intervalId = setInterval(() => {
         if (refreshCount.current !== 50) {
-          const fakeRoll = Dice.rollFudgeDice();
+          const fakeRoll = Dice.roll4DF();
           refreshCount.current++;
           setRoll(fakeRoll);
         } else {
@@ -48,7 +62,8 @@ export function useFudgeDice(rolls: Array<number>) {
 
   return {
     state: {
-      roll,
+      label,
+      tooltip,
       rolling,
       hasRolledOnce,
       color,

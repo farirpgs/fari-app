@@ -264,7 +264,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   if (isGM) {
                     sceneManager.actions.updateGMRoll();
                   } else {
-                    connectionsManager.actions.sendToHost(Dice.rollFudgeDice());
+                    connectionsManager.actions.sendToHost(Dice.roll4DF());
                   }
                 }}
               >
