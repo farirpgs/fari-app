@@ -2,8 +2,8 @@ import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
 export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
-  "common.language.en": `...`,
-  "common.language.pt": `...`,
+  "common.language.en": `English`,
+  "common.language.pt": `Portuguese WIP`,
   "home.meta.title": `...`,
   "home.meta.description": `...`,
   "home.welcome": `...`,

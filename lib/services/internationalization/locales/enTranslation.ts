@@ -1,7 +1,7 @@
 /*eslint quotes: ["error", "backtick"]*/
 export const enTranslation = {
   "common.language.en": `English`,
-  "common.language.pt": `Portuguese`,
+  "common.language.pt": `Portuguese WIP`,
   "home.meta.title": `Fate RPG Companion`,
   "home.meta.description": `Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your imagination do the rest.˝`,
   "home.welcome": `Welcome to Fari`,
