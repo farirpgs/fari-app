@@ -1,7 +1,9 @@
 {
-  "name": "characters",
+  "name": "fari",
   "version": "2.1.0",
-  "description": "",
+  "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
+  "author": "René-Pier Deshaies-Gélinas",
+  "license": "SEE LICENSE IN LICENSE.md",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
@@ -59,12 +61,10 @@
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "3.0.0",
     "jest": "25.3.0",
-    "marked": "^0.8.2",
+    "marked": "^1.0.0",
     "parcel": "1.12.4",
     "react-test-renderer": "16.13.1",
     "ts-jest": "25.3.1",
     "typescript": "3.8.3"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }

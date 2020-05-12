@@ -6,9 +6,8 @@
 - feat: dice Animations
 - feat: prompt before leaving a scene
 - feat: translation framework proof of concept
-
-### Bugs
-
+- doc: new CHANGELOG file
+- doc: new LICENSE file
 - fix: nbsp and tags in title of the page
 
 ## 2.0.0 (May 18, 2020)
