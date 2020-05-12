@@ -14,6 +14,7 @@ import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DiceRoute = () => {
   const [rolls, setRolls] = useState<Array<IDiceRoll>>([Dice.roll4DF()]);
@@ -22,6 +23,7 @@ export const DiceRoute = () => {
   const fiveLatestRolls = archivedRolls.slice(0, 5);
   const theme = useTheme();
   const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
+  const { t } = useTranslate();
 
   function roll() {
     setRolls((draft) => {
@@ -44,7 +46,7 @@ export const DiceRoute = () => {
               textAlign: "center",
             })}
           >
-            Press the button to re-roll
+            {t("dice-route.title")}
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center" pt="3rem">
@@ -56,7 +58,7 @@ export const DiceRoute = () => {
             variant="contained"
             color="primary"
           >
-            Roll
+            {t("dice-route.button")}
           </Button>
         </Box>
         <Box display="flex" justifyContent="center" pt="3rem">

@@ -1,7 +1,7 @@
 import { Box, Button, Snackbar } from "@material-ui/core";
 import { css } from "emotion";
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 const cookieConsentLocalStorageKey = "cookie-consent";
 
@@ -12,7 +12,7 @@ export const CookieConsent: React.FC<{}> = (props) => {
   ) as ICookieConsent;
 
   const [consent, setConsent] = useState<ICookieConsent>(valueFromStorage);
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const open = consent !== "true";
 
   function handleClose() {

@@ -16,10 +16,12 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { env } from "../../services/injections";
+import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 
@@ -36,7 +38,8 @@ export const Page: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslate();
+
   useEffect(() => {
     if (props.gameId) {
       setGameId(props.gameId);
@@ -109,11 +112,17 @@ export const Page: React.FC<{
                 }}
               >
                 {Object.keys(i18n.options.resources).map((language) => {
-                  return (
-                    <MenuItem key={language} value={language}>
-                      {t(`common.language.${language}`)}
-                    </MenuItem>
-                  );
+                  const shouldRenderDev =
+                    language === "dev" && env.context === "localhost";
+                  if (language !== "dev" || shouldRenderDev) {
+                    return (
+                      <MenuItem key={language} value={language}>
+                        {t(
+                          `common.language.${language}` as IPossibleTranslationKeys
+                        )}
+                      </MenuItem>
+                    );
+                  }
                 })}
               </Select>
             </Grid>
@@ -240,7 +249,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Play
+            {t("menu.play")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -252,7 +261,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Dice
+            {t("menu.dice")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -264,7 +273,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            About
+            {t("menu.about")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -276,7 +285,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Support Fari
+            {t("menu.support")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -288,7 +297,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Help
+            {t("menu.help")}
           </Button>
         </Grid>
       </Grid>

@@ -40,6 +40,7 @@ import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnection";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { defaultSceneName, useScene } from "./useScene/useScene";
@@ -63,6 +64,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
+  const { t } = useTranslate();
   const shareLinkInputRef = useRef<HTMLInputElement>();
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
@@ -93,10 +95,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
 
   return (
     <Page gameId={props.idFromParams}>
-      <Prompt
-        when={isGM || isOffline}
-        message="Are you sure you want to leave and reset your scene ?"
-      />
+      <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
       <PageMeta title={pageTitle}></PageMeta>
       {props.error ? renderPageError() : renderPage()}
     </Page>
@@ -173,9 +172,11 @@ export const PlayPage: React.FC<IProps> = (props) => {
             setOfflineCharacterName("");
           }}
         >
-          <DialogTitle id="form-dialog-title">Add Character</DialogTitle>
+          <DialogTitle id="form-dialog-title">
+            {t("play-route.add-character")}
+          </DialogTitle>
           <DialogContent>
-            <InputLabel shrink>Character Name:</InputLabel>
+            <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
             <TextField
               autoFocus
               value={offlineCharacterName}
@@ -193,10 +194,10 @@ export const PlayPage: React.FC<IProps> = (props) => {
               }}
               color="default"
             >
-              Cancel
+              {t("play-route.cancel")}
             </Button>
             <Button type="submit" color="primary">
-              Add Character
+              {t("play-route.add-character")}
             </Button>
           </DialogActions>
         </form>
@@ -232,7 +233,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   fontWeight: "bold",
                 })}
               >
-                Players:
+                {t("play-route.players")}
               </Typography>
               <Box>
                 <Typography
@@ -252,7 +253,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   })}
                 >
                   {" "}
-                  connected
+                  {t("play-route.connected")}
                 </Typography>
               </Box>
             </Grid>
@@ -268,7 +269,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   }
                 }}
               >
-                Roll 4DF
+                {t("play-route.roll-4-d-f")}
               </Button>
             </Grid>
           </Grid>
@@ -333,26 +334,26 @@ export const PlayPage: React.FC<IProps> = (props) => {
           align="left"
         >
           <Typography variant="overline" noWrap>
-            Name
+            {t("play-route.name")}
           </Typography>
         </TableCell>
         <TableCell className={tableCellStyle} align="center">
-          <Tooltip title="Initiative Tracker">
+          <Tooltip title={t("play-route.initiative-tracker")}>
             <Typography variant="overline" noWrap>
-              Init
+              {t("play-route.init")}
             </Typography>
           </Tooltip>
         </TableCell>
         <TableCell className={tableCellStyle} align="center">
-          <Tooltip title="Fate Points">
+          <Tooltip title={t("play-route.fate-points")}>
             <Typography variant="overline" noWrap>
-              F.P.
+              {t("play-route.fp")}
             </Typography>
           </Tooltip>
         </TableCell>
         <TableCell className={tableCellStyle} align="right">
           <Typography variant="overline" noWrap>
-            Dice
+            {t("play-route.dice")}
           </Typography>
         </TableCell>
       </TableRow>
@@ -459,7 +460,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
           <Box pt="6rem" textAlign="center">
             {isGM ? (
               <Typography variant="h6">
-                Click on the
+                {t("play-route.click-on-the-")}
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -470,14 +471,12 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     sceneManager.actions.addAspect();
                   }}
                 >
-                  Add Aspect
+                  {t("play-route.click-on-the-add-aspect-")}
                 </Button>
-                button to add a new Aspect to the Scene
+                {t("play-route.click-on-the-add-aspect-button")}
               </Typography>
             ) : (
-              <Typography variant="h6">
-                There is not aspects on the scene yet
-              </Typography>
+              <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
             )}
           </Box>
         )}
@@ -519,7 +518,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   variant="outlined"
                   color="secondary"
                 >
-                  Add Aspect
+                  {t("play-route.add-aspect")}
                 </Button>
               </Grid>
               <Grid item>
@@ -530,7 +529,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   variant="outlined"
                   color="secondary"
                 >
-                  Add Boost
+                  {t("play-route.add-boost")}
                 </Button>
               </Grid>
               {isOffline && (
@@ -542,7 +541,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     variant="outlined"
                     color="secondary"
                   >
-                    Add Character
+                    {t("play-route.add-character")}
                   </Button>
                 </Grid>
               )}
@@ -568,7 +567,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         setShareLinkToolTip({ open: true });
                       }}
                     >
-                      Copy Game Link
+                      {t("play-route.copy-game-link")}
                     </Button>
                   </Tooltip>
                 </Grid>
@@ -584,7 +583,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     sceneManager.actions.resetPlayerPlayedStatus();
                   }}
                 >
-                  Reset Turn Order
+                  {t("play-route.reset-turn-order")}
                 </Button>
               </Grid>
               <Grid item>
@@ -597,7 +596,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     variant="text"
                     color="primary"
                   >
-                    Reset Scene
+                    {t("play-route.reset-scene")}
                   </Button>
                 </ThemeProvider>
               </Grid>
@@ -612,17 +611,16 @@ export const PlayPage: React.FC<IProps> = (props) => {
     return (
       <Box>
         <Box display="flex" justifyContent="center" pb="2rem">
-          <Typography variant="h4">Something wrong hapenned.</Typography>
+          <Typography variant="h4">{t("play-route.error.title")}</Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            We could not connect to the server to initialize the game
+            {t("play-route.error.description1")}
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            Try refreshing the page to see if that fixes the issue or start an
-            offline game instead.
+            {t("play-route.error.description2")}
           </Typography>
         </Box>
       </Box>

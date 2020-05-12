@@ -1,19 +1,20 @@
 import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
-  const { t } = useTranslation();
+  const { t } = useTranslate();
+
   return (
     <Page>
       <PageMeta
-        title={t("home.meta.title")}
-        description={t("home.meta.description")}
+        title={t("home-route.meta.title")}
+        description={t("home-route.meta.description")}
       ></PageMeta>
       <Box>
         <Container maxWidth="xs">
@@ -21,11 +22,15 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <img width="150px" src={appIcon} />
           </Box>
           <Box pb="2rem" textAlign="center">
-            <Typography variant="h4">{t("home.welcome")}</Typography>
+            <Typography variant="h4">{t("home-route.welcome")}</Typography>
           </Box>
           <Box pb="4rem" textAlign="center">
-            <Typography variant="subtitle1">{t("home.subtitle1")}</Typography>
-            <Typography variant="subtitle1">{t("home.subtitle2")}</Typography>
+            <Typography variant="subtitle1">
+              {t("home-route.subtitle1")}
+            </Typography>
+            <Typography variant="subtitle1">
+              {t("home-route.subtitle2")}
+            </Typography>
           </Box>
         </Container>
         <Container maxWidth="lg">
@@ -33,11 +38,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
-                  <b>{t("home.play-online.title")}</b>
+                  <b>{t("home-route.play-online.title")}</b>
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
-                  {t("home.play-online.description")}
+                  {t("home-route.play-online.description")}
                 </Typography>
 
                 <Box pt="2rem" textAlign="center" marginTop="auto">
@@ -50,7 +55,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       history.push("/play");
                     }}
                   >
-                    {t("home.play-online.button")}
+                    {t("home-route.play-online.button")}
                   </Button>
                 </Box>
               </Box>
@@ -58,11 +63,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
-                  <b>{t("home.play-offline.title")}</b>
+                  <b>{t("home-route.play-offline.title")}</b>
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
-                  {t("home.play-offline.description")}
+                  {t("home-route.play-offline.description")}
                 </Typography>
                 <Box pt="2rem" textAlign="center" marginTop="auto">
                   <Button
@@ -74,7 +79,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       history.push("/play-offline");
                     }}
                   >
-                    {t("home.play-offline.button")}
+                    {t("home-route.play-offline.button")}
                   </Button>
                 </Box>
               </Box>

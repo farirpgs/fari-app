@@ -1,5 +1,6 @@
 import i18next, { i18n } from "i18next";
 import { initReactI18next } from "react-i18next";
+import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { ptTranslation } from "./locales/ptTranslation";
 
@@ -19,6 +20,9 @@ export class InternationalizationService {
         },
         pt: {
           translation: ptTranslation,
+        },
+        dev: {
+          translation: devTranslation,
         },
       },
       lng: "en",
