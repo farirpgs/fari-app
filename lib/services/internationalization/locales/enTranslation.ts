@@ -66,5 +66,8 @@ export const enTranslation = {
   "player-row.remove-fate-point": `Remove Fate Point`,
   "player-row.add-fate-point": `Add Fate Point`,
   "player-row.remove-character": `Remove Character`,
+  "player-row.fate-points": `Fate Points`,
+  "player-row.played": `Has played`,
+  "player-row.not-played": `Has not played`,
   "Game Master": `Game Master`,
 } as const;

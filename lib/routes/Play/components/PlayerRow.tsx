@@ -44,10 +44,11 @@ export const PlayerRow: React.FC<{
     : textColor.disabled;
   const shouldRenderOfflinePlayerRemoveButton =
     props.offline && !props.highlight;
-  const shouldRenderDiceButton = !props.offline || props.highlight;
+  const shouldRenderDiceResult = !props.offline || props.highlight;
+  const shouldHighlight = props.highlight && !props.offline;
   const rowStyle = css({
-    backgroundColor: props.highlight ? highlightBackgroundColor : "transparent",
-    color: props.highlight ? textColor.primary : undefined,
+    backgroundColor: shouldHighlight ? highlightBackgroundColor : "transparent",
+    color: shouldHighlight ? textColor.primary : undefined,
   });
   const firstRowTableCellStyle = css({
     padding: "0.7rem",
@@ -73,7 +74,9 @@ export const PlayerRow: React.FC<{
         <TableCell className={firstRowTableCellStyle} align="center">
           <Tooltip
             title={
-              props.player.playedDuringTurn ? "Has played" : "Has not played"
+              props.player.playedDuringTurn
+                ? t("player-row.played")
+                : t("player-row.not-played")
             }
           >
             <span>
@@ -100,14 +103,14 @@ export const PlayerRow: React.FC<{
           </Tooltip>
         </TableCell>
         <TableCell className={cx(firstRowTableCellStyle)} align="center">
-          <Tooltip title="Fate Points">
+          <Tooltip title={t("player-row.fate-points")}>
             <Badge badgeContent={props.player.fatePoints} color="primary">
               <FlareIcon width="2"></FlareIcon>
             </Badge>
           </Tooltip>
         </TableCell>
         <TableCell className={cx(firstRowTableCellStyle)} align="right">
-          {shouldRenderDiceButton && (
+          {shouldRenderDiceResult && (
             <Box display="flex" justifyContent="flex-end">
               <Tooltip title={diceManager.state.tooltip}>
                 <Typography
