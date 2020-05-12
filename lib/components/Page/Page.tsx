@@ -259,24 +259,24 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              window.open("https://ko-fi.com/rpdeshaies");
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            Support Fari
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
               history.push("/about");
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
             About
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              window.open("https://ko-fi.com/rpdeshaies");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            Support Fari
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
