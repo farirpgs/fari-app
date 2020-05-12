@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../../images/app-icon.png";
+import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 
 let playerNameSingleton = "";
 
@@ -18,6 +19,7 @@ export const JoinAGame: React.FC<{
   connecting: boolean;
   error: any;
 }> = (props) => {
+  const { t } = useTranslate();
   const [playerName, setPlayerName] = useState(playerNameSingleton);
 
   useEffect(() => {
@@ -39,10 +41,12 @@ export const JoinAGame: React.FC<{
               <img width="150px" src={appIcon} />
             </Box>
             <Box pb="2rem" textAlign="center">
-              <Typography variant="h4">Connect to a Game</Typography>
+              <Typography variant="h4">
+                {t("play-route.connect-to-game")}
+              </Typography>
             </Box>
             <Box pb="2rem">
-              <InputLabel shrink>Character Name:</InputLabel>
+              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
               <TextField
                 placeholder="Magnus Burnsides"
                 value={playerName}
@@ -65,15 +69,13 @@ export const JoinAGame: React.FC<{
                 fullWidth
                 size="large"
               >
-                Play!
+                {t("play-route.play")}
               </Button>
             </Box>
             {props.connecting && (
               <Box pb="1rem">
                 <Box pb="3rem" display="flex" justifyContent="center">
-                  <Typography>
-                    {"That's an awesome name by the way!"}
-                  </Typography>
+                  <Typography>{t("play-route.awesome-name")}</Typography>
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <CircularProgress />
@@ -83,7 +85,7 @@ export const JoinAGame: React.FC<{
             {props.error && (
               <Box pb="1rem" textAlign="center">
                 <Typography color="error">
-                  The game you are trying to join does not exist
+                  {t("play-route.join-error")}
                 </Typography>
               </Box>
             )}
