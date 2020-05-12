@@ -23,9 +23,9 @@ The peer to peer connection is closed if you close your browser's tab.
 
 ### This app is pretty cool, what can I do to help ?
 
-You can [buy me a coffee](https://ko-fi.com/rpdeshaies) if you want.
+You can [buy me a coffee](https://ko-fi.com/rpdeshaies) or help me build Fari by contributing on [Github](https://github.com/RPDeshaies/fari)
 
-I work on this in my free time and any donation is highly appreciated.
+I work on this in my free time and any donation is highly appreciated 😊
 
 ### Anything else ?
 
