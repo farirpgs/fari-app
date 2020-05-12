@@ -1,19 +1,19 @@
-# ✅ Changes
+## ✅ Changes
 
 <!-- Use prefixes: **chore**, **docs**, **feat**, **fix**, **refactor**, **style** or **test** -->
 
 -
 
-# 🌄 Context
+## 🌄 Context
 
 <!-- Provide more context around why this pull requests was created -->
 
-# 🔒Checklist
+## 🔒Checklist
 
 #### ✅ OR ⬜
 
 - I tested my work on the feature environment: ⬜
 
-# 💅 Examples
+## 💅 Examples
 
 <!-- Give examples or screenshots detailing the new behaviors of the application -->
