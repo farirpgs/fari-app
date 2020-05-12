@@ -21,6 +21,7 @@ import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { AppProgress } from "../AppProgress/AppProgress";
+import { CookieConsent } from "../CookieConsent/CookieConsent";
 
 let gameIdSingleton: string = undefined;
 
@@ -97,6 +98,7 @@ export const Page: React.FC<{
           borderTop: "1px solid #e0e0e0",
         })}
       >
+        <CookieConsent></CookieConsent>
         <Container>
           <Grid container justify="flex-end">
             <Grid item>

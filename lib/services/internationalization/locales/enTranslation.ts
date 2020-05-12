@@ -13,4 +13,6 @@ export const enTranslation = {
   "home.play-offline.title": `Play Fate Offline`,
   "home.play-offline.description": `Rally up with your friends on Discord or else, share your screen and start an Offline Game. Manage your scene, aspects, and more in a custom tailored user interface made to play Fate Core, Fate Accelerated or Fate Condensed.`,
   "home.play-offline.button": `Start Offline Game`,
+  "cookie-consent.description": `This site uses cookies to provide you with a great user experience. By using Fari, you accept our use of cookies.`,
+  "cookie-consent.button": `I accept`,
 } as const;
