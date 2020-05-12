@@ -2,17 +2,21 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
   Drawer,
   Fade,
   Grid,
   Hidden,
   IconButton,
+  MenuItem,
+  Select,
   Toolbar,
   Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
@@ -31,7 +35,7 @@ export const Page: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
-
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     if (props.gameId) {
       setGameId(props.gameId);
@@ -49,35 +53,62 @@ export const Page: React.FC<{
   function renderContent() {
     return (
       <Fade in timeout={250}>
-        <div
-          className={css({
-            height: "100%",
-            paddingBottom: "4rem",
-            minHeight: "calc(100vh - 56px)",
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-          })}
-        >
-          {!!props.notFound ? (
-            props.notFound
-          ) : (
-            <div
-              className={css({
-                maxWidth: "1440px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "2rem",
-                width: "100%",
-                padding: "0 1rem",
-                flex: "1 0 auto",
-              })}
-            >
-              {props.children}
-            </div>
-          )}
+        <div>
+          <div
+            className={css({
+              height: "100%",
+              paddingBottom: "4rem",
+              minHeight: "calc(100vh - 56px)",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+            })}
+          >
+            {!!props.notFound ? (
+              props.notFound
+            ) : (
+              <div
+                className={css({
+                  maxWidth: "1440px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  marginTop: "2rem",
+                  width: "100%",
+                  padding: "0 1rem",
+                  flex: "1 0 auto",
+                })}
+              >
+                {props.children}
+              </div>
+            )}
+          </div>
+
+          {renderFooter()}
         </div>
       </Fade>
+    );
+  }
+
+  function renderFooter() {
+    return (
+      <Box>
+        <Container>
+          <Select
+            value={i18n.language}
+            onChange={(e) => {
+              i18n.changeLanguage(e.target.value as string);
+            }}
+          >
+            {Object.keys(i18n.options.resources).map((language) => {
+              return (
+                <MenuItem key={language} value={language}>
+                  {t(`common.language.${language}`)}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </Container>
+      </Box>
     );
   }
 

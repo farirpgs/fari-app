@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { Page } from "../../components/Page/Page";
@@ -7,12 +8,12 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
-
+  const { t } = useTranslation();
   return (
     <Page>
       <PageMeta
-        title="Fate RPG Companion"
-        description="Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your imagination do the rest."
+        title={t("home.meta.title")}
+        description={t("home.meta.description")}
       ></PageMeta>
       <Box>
         <Container maxWidth="xs">
@@ -20,16 +21,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <img width="150px" src={appIcon} />
           </Box>
           <Box pb="2rem" textAlign="center">
-            <Typography variant="h4">Welcome to Fari</Typography>
+            <Typography variant="h4">{t("home.welcome")}</Typography>
           </Box>
           <Box pb="4rem" textAlign="center">
-            <Typography variant="subtitle1">
-              Fari is the best Fate RPG companion application.
-            </Typography>
-            <Typography variant="subtitle1">
-              Play scenes in real-time with your friends, roll fudge dice and
-              let your imagination do the rest.
-            </Typography>
+            <Typography variant="subtitle1">{t("home.subtitle1")}</Typography>
+            <Typography variant="subtitle1">{t("home.subtitle2")}</Typography>
           </Box>
         </Container>
         <Container maxWidth="lg">
@@ -37,13 +33,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
-                  <b>Play Fate Online</b>
+                  <b>{t("home.play-online.title")}</b>
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
-                  Use our Online Game Manager to create an interactive game
-                  session. Start by sending a game link to your friends and
-                  start playing Fate together, in real time.
+                  {t("home.play-online.description")}
                 </Typography>
 
                 <Box pt="2rem" textAlign="center" marginTop="auto">
@@ -56,7 +50,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       history.push("/play");
                     }}
                   >
-                    Start Online Game (Beta)
+                    {t("home.play-online.button")}
                   </Button>
                 </Box>
               </Box>
@@ -64,14 +58,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
-                  <b>Play Fate Offline</b>
+                  <b>{t("home.play-offline.title")}</b>
                 </Typography>
                 <br />
                 <Typography variant="body1" align="center">
-                  Rally up with your friends on Discord or else, share your
-                  screen and start an Offline Game. Manage your scene, aspects,
-                  and more in a custom tailored user interface made to play Fate
-                  Core, Fate Accelerated or Fate Condensed.
+                  {t("home.play-offline.description")}
                 </Typography>
                 <Box pt="2rem" textAlign="center" marginTop="auto">
                   <Button
@@ -83,7 +74,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       history.push("/play-offline");
                     }}
                   >
-                    Start Offline Game
+                    {t("home.play-offline.button")}
                   </Button>
                 </Box>
               </Box>

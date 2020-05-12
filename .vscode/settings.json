@@ -2,7 +2,8 @@
   "search.exclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,
-    "**/.cache/**": true
+    "**/.cache/**": true,
+    "yarn.lock": true
   },
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,

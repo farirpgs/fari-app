@@ -18,7 +18,7 @@ import { Banner } from "../../components/Banner/Banner";
 import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
-import { CharacterService } from "../../services/character-service/CharacterService";
+import { CharacterService } from "../../services/character/CharacterService";
 import { googleAnalyticsService } from "../../services/injections";
 import { ICharacter } from "../../types/ICharacter";
 
