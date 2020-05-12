@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { PlayPage } from "./PlayPage";
@@ -17,7 +18,7 @@ export const PlayRoute: React.FC<{
   const sceneManager = useScene(userId, idFromParams);
 
   const hostManager = usePeerHost({
-    onConnectionDataReceive(id: string, roll: number) {
+    onConnectionDataReceive(id: string, roll: IDiceRoll) {
       sceneManager.actions.updatePlayerRoll(id, roll);
     },
     debug: debug,
