@@ -21,6 +21,8 @@ import React from "react";
 import { Font } from "../../../domains/font/Font";
 import { useFudgeDice } from "../../../hooks/useFudgeDice/useFudgeDice";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
+import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { IPlayer } from "../useScene/IScene";
 
 export const PlayerRow: React.FC<{
@@ -33,6 +35,7 @@ export const PlayerRow: React.FC<{
   onPlayerRemove(): void;
 }> = (props) => {
   const theme = useTheme();
+  const { t } = useTranslate();
   const diceManager = useFudgeDice(props.player.rolls);
   const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
   const textColor = useTextColors(highlightBackgroundColor);
@@ -64,7 +67,7 @@ export const PlayerRow: React.FC<{
               lineHeight: Font.lineHeight(1.2),
             })}
           >
-            {props.player.playerName}
+            {t(props.player.playerName as IPossibleTranslationKeys)}
           </Typography>
         </TableCell>
         <TableCell className={firstRowTableCellStyle} align="center">
@@ -73,23 +76,27 @@ export const PlayerRow: React.FC<{
               props.player.playedDuringTurn ? "Has played" : "Has not played"
             }
           >
-            <IconButton
-              onClick={() => {
-                props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
-              }}
-              disabled={!props.isGM}
-              size="small"
-            >
-              {props.player.playedDuringTurn ? (
-                <DirectionsRunIcon
-                  htmlColor={playedDuringTurnColor}
-                ></DirectionsRunIcon>
-              ) : (
-                <EmojiPeopleIcon
-                  htmlColor={playedDuringTurnColor}
-                ></EmojiPeopleIcon>
-              )}
-            </IconButton>
+            <span>
+              <IconButton
+                onClick={() => {
+                  props.onPlayedInTurnOrderChange(
+                    !props.player.playedDuringTurn
+                  );
+                }}
+                disabled={!props.isGM}
+                size="small"
+              >
+                {props.player.playedDuringTurn ? (
+                  <DirectionsRunIcon
+                    htmlColor={playedDuringTurnColor}
+                  ></DirectionsRunIcon>
+                ) : (
+                  <EmojiPeopleIcon
+                    htmlColor={playedDuringTurnColor}
+                  ></EmojiPeopleIcon>
+                )}
+              </IconButton>
+            </span>
           </Tooltip>
         </TableCell>
         <TableCell className={cx(firstRowTableCellStyle)} align="center">
@@ -137,26 +144,28 @@ export const PlayerRow: React.FC<{
           <TableCell colSpan={4}>
             <Grid container alignItems="center" justify="flex-end" spacing={1}>
               <Grid item>
-                <Tooltip title="Remove Fate Point">
-                  <IconButton
-                    size="small"
-                    disabled={props.player.fatePoints === 0}
-                    onClick={() => {
-                      const fatePointsMinusOne = props.player.fatePoints - 1;
-                      const newValue =
-                        fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
-                      props.onPlayerFatePointsChange(newValue);
-                    }}
-                  >
-                    <RemoveCircleOutlineOutlinedIcon
-                      className={css({ width: "1.2rem", height: "auto" })}
-                    ></RemoveCircleOutlineOutlinedIcon>
-                  </IconButton>
+                <Tooltip title={t("player-row.remove-fate-point")}>
+                  <span>
+                    <IconButton
+                      size="small"
+                      disabled={props.player.fatePoints === 0}
+                      onClick={() => {
+                        const fatePointsMinusOne = props.player.fatePoints - 1;
+                        const newValue =
+                          fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
+                        props.onPlayerFatePointsChange(newValue);
+                      }}
+                    >
+                      <RemoveCircleOutlineOutlinedIcon
+                        className={css({ width: "1.2rem", height: "auto" })}
+                      ></RemoveCircleOutlineOutlinedIcon>
+                    </IconButton>
+                  </span>
                 </Tooltip>
               </Grid>
 
               <Grid item>
-                <Tooltip title="Add Fate Point">
+                <Tooltip title={t("player-row.add-fate-point")}>
                   <IconButton
                     size="small"
                     onClick={() => {
@@ -173,7 +182,7 @@ export const PlayerRow: React.FC<{
               </Grid>
               {shouldRenderOfflinePlayerRemoveButton && (
                 <Grid item>
-                  <Tooltip title="Remove Character">
+                  <Tooltip title={t("player-row.remove-character")}>
                     <IconButton
                       size="small"
                       onClick={() => {

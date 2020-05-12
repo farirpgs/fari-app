@@ -34,8 +34,8 @@ export const DiceRoute = () => {
   return (
     <Page>
       <PageMeta
-        title="Roll Fate Dice Online"
-        description="Roll Fate/Fudge dice online using this fair dice roller."
+        title={t("dice-route.meta.title")}
+        description={t("dice-route.meta.description")}
       />
       <Box>
         <Box display="flex" justifyContent="center" pt="3rem">

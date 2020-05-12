@@ -16,6 +16,7 @@ import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardColor, IndexCardColorBright } from "./IndexCardColor";
 
@@ -46,10 +47,10 @@ export const IndexCard: React.FC<{
   onReset(): void;
 }> = (props) => {
   const theme = useTheme();
+  const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
   const $menu = useRef(undefined);
   const colorPickerBackground = theme.palette.primary.main;
-
   const shouldRenderCheckboxesOrConsequences =
     props.freeInvokes.length > 0 ||
     props.physicalStress.length > 0 ||
@@ -70,7 +71,9 @@ export const IndexCard: React.FC<{
           <Box p={props.isBoost ? "0 1rem 1rem 1rem" : "1rem"}>
             {props.isBoost && (
               <Grid item>
-                <Typography variant="overline">Boost</Typography>
+                <Typography variant="overline">
+                  {t("index-card.boost")}
+                </Typography>
               </Grid>
             )}
             <Grid container justify="space-between">
@@ -129,7 +132,7 @@ export const IndexCard: React.FC<{
           props.onAddAspectFreeInvoke();
         }}
       >
-        Add 1 Free Invoke
+        {t("index-card.add-1-free-invoke")}
       </MenuItem>,
       <MenuItem
         key="onAddAspectPhysicalStress"
@@ -137,7 +140,7 @@ export const IndexCard: React.FC<{
           props.onAddAspectPhysicalStress();
         }}
       >
-        Add 1 Physical Stress Box
+        {t("index-card.add-1-physical-stress-box")}
       </MenuItem>,
       <MenuItem
         key="onAddAspectMentalStress"
@@ -145,7 +148,7 @@ export const IndexCard: React.FC<{
           props.onAddAspectMentalStress();
         }}
       >
-        Add 1 Mental Stress Box
+        {t("index-card.add-1-mental-stress-box")}
       </MenuItem>,
       <MenuItem
         key="onAddConsequence"
@@ -153,7 +156,7 @@ export const IndexCard: React.FC<{
           props.onAddConsequence();
         }}
       >
-        Add 1 consequence
+        {t("index-card.add-1-consequence")}
       </MenuItem>,
       <Divider key="renderAspectMenuItemsDivider"></Divider>,
     ];
@@ -168,7 +171,7 @@ export const IndexCard: React.FC<{
           props.onRemove();
         }}
       >
-        Remove
+        {t("index-card.remove")}
       </MenuItem>,
       <MenuItem
         key="onReset"
@@ -177,14 +180,14 @@ export const IndexCard: React.FC<{
           props.onReset();
         }}
       >
-        Reset
+        {t("index-card.reset")}
       </MenuItem>,
       <Divider key="renderGlobalMenuItemsDivider" light></Divider>,
       <MenuItem
         key="onUpdateAspectColor"
         className={css({
-          backgroundColor: colorPickerBackground,
-          cursor: "inherit",
+          "backgroundColor": colorPickerBackground,
+          "cursor": "inherit",
           "&:hover": {
             backgroundColor: colorPickerBackground,
           },
@@ -252,7 +255,7 @@ export const IndexCard: React.FC<{
         <Box p="1rem">
           <Box>
             {props.freeInvokes.length > 0 && (
-              <InputLabel shrink>Free Invokes</InputLabel>
+              <InputLabel shrink>{t("index-card.free-invokes")}</InputLabel>
             )}
             <Grid container justify="flex-start">
               {props.freeInvokes.map((value, index) => {
@@ -275,7 +278,7 @@ export const IndexCard: React.FC<{
           </Box>
           <Box>
             {props.physicalStress.length > 0 && (
-              <InputLabel shrink>Physical Stress</InputLabel>
+              <InputLabel shrink>{t("index-card.physical-stress")}</InputLabel>
             )}
             <Grid container justify="flex-start">
               {props.physicalStress.map((value, index) => {
@@ -304,7 +307,7 @@ export const IndexCard: React.FC<{
           </Box>
           <Box>
             {props.mentalStress.length > 0 && (
-              <InputLabel shrink>Mental Stress</InputLabel>
+              <InputLabel shrink>{t("index-card.mental-stress")}</InputLabel>
             )}
             <Grid container justify="flex-start">
               {props.mentalStress.map((value, index) => {
@@ -335,7 +338,7 @@ export const IndexCard: React.FC<{
                   <Grid key={index} item xs={12}>
                     <Box py=".5rem">
                       <InputLabel shrink>
-                        Consequence ({(index + 1) * 2})
+                        {t("index-card.consequence")} ({(index + 1) * 2})
                       </InputLabel>
                       <TextField
                         fullWidth

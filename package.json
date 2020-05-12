@@ -24,6 +24,7 @@
     "emotion": "10.0.27",
     "flexboxgrid": "6.3.1",
     "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^4.1.1",
     "immer": "6.0.3",
     "magic-grid": "^3.2.4",
     "peerjs": "1.2.0",
