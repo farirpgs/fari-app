@@ -91,22 +91,31 @@ export const Page: React.FC<{
 
   function renderFooter() {
     return (
-      <Box>
+      <Box
+        className={css({
+          paddingTop: "1rem",
+          borderTop: "1px solid #e0e0e0",
+        })}
+      >
         <Container>
-          <Select
-            value={i18n.language}
-            onChange={(e) => {
-              i18n.changeLanguage(e.target.value as string);
-            }}
-          >
-            {Object.keys(i18n.options.resources).map((language) => {
-              return (
-                <MenuItem key={language} value={language}>
-                  {t(`common.language.${language}`)}
-                </MenuItem>
-              );
-            })}
-          </Select>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Select
+                value={i18n.language}
+                onChange={(e) => {
+                  i18n.changeLanguage(e.target.value as string);
+                }}
+              >
+                {Object.keys(i18n.options.resources).map((language) => {
+                  return (
+                    <MenuItem key={language} value={language}>
+                      {t(`common.language.${language}`)}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     );
