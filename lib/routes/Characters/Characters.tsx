@@ -14,12 +14,11 @@ import PersonIcon from "@material-ui/icons/Person";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
-import { AppPaper } from "../../components/AppPaper/AppPaper";
 import { Banner } from "../../components/Banner/Banner";
 import { routerHistory } from "../../components/History/History";
 import { Page } from "../../components/Page/Page";
 import { getGameBySlug } from "../../games/getGameBySlug";
-import { CharacterService } from "../../services/character-service/CharacterService";
+import { CharacterService } from "../../services/character/CharacterService";
 import { googleAnalyticsService } from "../../services/injections";
 import { ICharacter } from "../../types/ICharacter";
 
@@ -100,59 +99,57 @@ export const Characters = (props) => {
       </div>
 
       {hasItems && (
-        <AppPaper>
-          <div className="row">
-            <div className="col-xs-12">
-              <List component="nav">
-                {characters.map((character, index) => {
-                  const truncatedDescription = _.truncate(
-                    character["description"],
-                    {
-                      length: 50,
-                    }
-                  );
-                  return (
-                    <AppLink
-                      to={`/game/${game.slug}/play/${character._id}`}
-                      key={character._id}
+        <div className="row">
+          <div className="col-xs-12">
+            <List component="nav">
+              {characters.map((character, index) => {
+                const truncatedDescription = _.truncate(
+                  character["description"],
+                  {
+                    length: 50,
+                  }
+                );
+                return (
+                  <AppLink
+                    to={`/game/${game.slug}/play/${character._id}`}
+                    key={character._id}
+                  >
+                    <ListItem
+                      button
+                      style={{
+                        zoom: "1.2",
+                      }}
                     >
-                      <ListItem
-                        button
-                        style={{
-                          zoom: "1.2",
-                        }}
-                      >
-                        <ListItemAvatar>
-                          <Avatar>
-                            <PersonIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={character["name"]}
-                          secondary={truncatedDescription}
-                        />
+                      <ListItemAvatar>
+                        <Avatar>
+                          <PersonIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={character["name"]}
+                        secondary={truncatedDescription}
+                      />
 
-                        <ListItemSecondaryAction>
-                          <IconButton
-                            edge="end"
-                            onClick={async (e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              deleteCharacter(character);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                      {index !== characters.length - 1 && <Divider />}
-                    </AppLink>
-                  );
-                })}
-              </List>
-            </div>
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="end"
+                          onClick={async (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            deleteCharacter(character);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    {index !== characters.length - 1 && <Divider />}
+                  </AppLink>
+                );
+              })}
+            </List>
           </div>
-        </AppPaper>
+        </div>
       )}
     </Page>
   );

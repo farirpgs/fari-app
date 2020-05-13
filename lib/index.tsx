@@ -6,7 +6,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
-import { AppBottomNavigation } from "./components/AppBottomNavigation/AppBottomNavigation";
 import { AppRouter } from "./components/AppRouter/AppRouter";
 import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { History } from "./components/History/History";
@@ -34,7 +33,6 @@ function App() {
               <ScrollToTop />
               <History />
               <AppRouter />
-              <AppBottomNavigation />
             </BrowserRouter>
           </HelmetProvider>
         </ErrorBoundary>

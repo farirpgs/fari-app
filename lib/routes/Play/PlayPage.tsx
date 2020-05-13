@@ -23,13 +23,16 @@ import {
   ThemeProvider,
   Tooltip,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@material-ui/core";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
+import { Prompt } from "react-router";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
+import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Dice } from "../../domains/dice/Dice";
@@ -37,6 +40,7 @@ import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnection";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { defaultSceneName, useScene } from "./useScene/useScene";
@@ -57,8 +61,10 @@ type IProps = IOnlineProps & {
 export const PlayPage: React.FC<IProps> = (props) => {
   const { sceneManager, connectionsManager } = props;
   const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
+  const { t } = useTranslate();
   const shareLinkInputRef = useRef<HTMLInputElement>();
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
@@ -89,6 +95,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
 
   return (
     <Page gameId={props.idFromParams}>
+      <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
       <PageMeta title={pageTitle}></PageMeta>
       {props.error ? renderPageError() : renderPage()}
     </Page>
@@ -131,7 +138,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
       <Fade in>
         <Box>
           {renderHeader()}
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
               {renderSidePanel()}
             </Grid>
@@ -165,9 +172,11 @@ export const PlayPage: React.FC<IProps> = (props) => {
             setOfflineCharacterName("");
           }}
         >
-          <DialogTitle id="form-dialog-title">Add Character</DialogTitle>
+          <DialogTitle id="form-dialog-title">
+            {t("play-route.add-character")}
+          </DialogTitle>
           <DialogContent>
-            <InputLabel shrink>Character Name:</InputLabel>
+            <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
             <TextField
               autoFocus
               value={offlineCharacterName}
@@ -185,10 +194,10 @@ export const PlayPage: React.FC<IProps> = (props) => {
               }}
               color="default"
             >
-              Cancel
+              {t("play-route.cancel")}
             </Button>
             <Button type="submit" color="primary">
-              Add Character
+              {t("play-route.add-character")}
             </Button>
           </DialogActions>
         </form>
@@ -224,7 +233,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   fontWeight: "bold",
                 })}
               >
-                Players:
+                {t("play-route.players")}
               </Typography>
               <Box>
                 <Typography
@@ -244,7 +253,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   })}
                 >
                   {" "}
-                  connected
+                  {t("play-route.connected")}
                 </Typography>
               </Box>
             </Grid>
@@ -256,11 +265,11 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   if (isGM) {
                     sceneManager.actions.updateGMRoll();
                   } else {
-                    connectionsManager.actions.sendToHost(Dice.rollFudgeDice());
+                    connectionsManager.actions.sendToHost(Dice.roll4DF());
                   }
                 }}
               >
-                Roll 4DF
+                {t("play-route.roll-4-d-f")}
               </Button>
             </Grid>
           </Grid>
@@ -325,26 +334,26 @@ export const PlayPage: React.FC<IProps> = (props) => {
           align="left"
         >
           <Typography variant="overline" noWrap>
-            Name
+            {t("play-route.name")}
           </Typography>
         </TableCell>
         <TableCell className={tableCellStyle} align="center">
-          <Tooltip title="Initiative Tracker">
+          <Tooltip title={t("play-route.initiative-tracker")}>
             <Typography variant="overline" noWrap>
-              Init
+              {t("play-route.init")}
             </Typography>
           </Tooltip>
         </TableCell>
         <TableCell className={tableCellStyle} align="center">
-          <Tooltip title="Fate Points">
+          <Tooltip title={t("play-route.fate-points")}>
             <Typography variant="overline" noWrap>
-              F.P.
+              {t("play-route.fp")}
             </Typography>
           </Tooltip>
         </TableCell>
         <TableCell className={tableCellStyle} align="right">
           <Typography variant="overline" noWrap>
-            Dice
+            {t("play-route.dice")}
           </Typography>
         </TableCell>
       </TableRow>
@@ -356,39 +365,20 @@ export const PlayPage: React.FC<IProps> = (props) => {
     const shouldRenderEmptyAspectView = aspectIds.length === 0;
     return (
       <Box pb="2rem">
-        <Grid container spacing={2}>
-          {shouldRenderEmptyAspectView && (
-            <Grid item xs={12}>
-              <Box pt="6rem" textAlign="center">
-                {isGM ? (
-                  <Typography variant="h6">
-                    Click on the
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      className={css({
-                        margin: "0 .5rem",
-                      })}
-                      onClick={() => {
-                        sceneManager.actions.addAspect();
-                      }}
-                    >
-                      Add Aspect
-                    </Button>
-                    button to add a new Aspect to the Scene
-                  </Typography>
-                ) : (
-                  <Typography variant="h6">
-                    There is not aspects on the scene yet
-                  </Typography>
-                )}
-              </Box>
-            </Grid>
-          )}
+        <MagicGridContainer items={aspectIds.length}>
           {aspectIds.map((aspectId) => {
             return (
-              <Grid item xs={12} sm={12} md={4} key={aspectId}>
+              <Box
+                key={aspectId}
+                className={cx(
+                  css({
+                    width: isSmall ? "100%" : "33%",
+                    padding: "0 .5rem 1.5rem .5rem",
+                  })
+                )}
+              >
                 <IndexCard
+                  key={aspectId}
                   title={sceneManager.state.scene.aspects[aspectId].title}
                   readonly={!isGM}
                   content={sceneManager.state.scene.aspects[aspectId].content}
@@ -462,10 +452,34 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     sceneManager.actions.updateAspectColor(aspectId, color);
                   }}
                 ></IndexCard>
-              </Grid>
+              </Box>
             );
           })}
-        </Grid>
+        </MagicGridContainer>
+        {shouldRenderEmptyAspectView && (
+          <Box pt="6rem" textAlign="center">
+            {isGM ? (
+              <Typography variant="h6">
+                {t("play-route.click-on-the-")}
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={css({
+                    margin: "0 .5rem",
+                  })}
+                  onClick={() => {
+                    sceneManager.actions.addAspect();
+                  }}
+                >
+                  {t("play-route.click-on-the-add-aspect-")}
+                </Button>
+                {t("play-route.click-on-the-add-aspect-button")}
+              </Typography>
+            ) : (
+              <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
+            )}
+          </Box>
+        )}
       </Box>
     );
   }
@@ -504,7 +518,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   variant="outlined"
                   color="secondary"
                 >
-                  Add Aspect
+                  {t("play-route.add-aspect")}
                 </Button>
               </Grid>
               <Grid item>
@@ -515,7 +529,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   variant="outlined"
                   color="secondary"
                 >
-                  Add Boost
+                  {t("play-route.add-boost")}
                 </Button>
               </Grid>
               {isOffline && (
@@ -527,7 +541,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     variant="outlined"
                     color="secondary"
                   >
-                    Add Character
+                    {t("play-route.add-character")}
                   </Button>
                 </Grid>
               )}
@@ -553,7 +567,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         setShareLinkToolTip({ open: true });
                       }}
                     >
-                      Copy Game Link
+                      {t("play-route.copy-game-link")}
                     </Button>
                   </Tooltip>
                 </Grid>
@@ -569,7 +583,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     sceneManager.actions.resetPlayerPlayedStatus();
                   }}
                 >
-                  Reset Turn Order
+                  {t("play-route.reset-turn-order")}
                 </Button>
               </Grid>
               <Grid item>
@@ -582,7 +596,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     variant="text"
                     color="primary"
                   >
-                    Reset Scene
+                    {t("play-route.reset-scene")}
                   </Button>
                 </ThemeProvider>
               </Grid>
@@ -597,17 +611,16 @@ export const PlayPage: React.FC<IProps> = (props) => {
     return (
       <Box>
         <Box display="flex" justifyContent="center" pb="2rem">
-          <Typography variant="h4">Something wrong hapenned.</Typography>
+          <Typography variant="h4">{t("play-route.error.title")}</Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            We could not connect to the server to initialize the game
+            {t("play-route.error.description1")}
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="h6">
-            Try refreshing the page to see if that fixes the issue or start an
-            offline game instead.
+            {t("play-route.error.description2")}
           </Typography>
         </Box>
       </Box>
@@ -618,5 +631,15 @@ export const PlayPage: React.FC<IProps> = (props) => {
 PlayPage.displayName = "PlayPage";
 
 function getPageTitle(sceneName: string) {
-  return sceneName === defaultSceneName ? "" : sceneName.replace(/&nbsp;/g, "");
+  return sceneName === defaultSceneName
+    ? ""
+    : removeHTMLTags(removeNBSP(sceneName)).trim();
+}
+
+function removeNBSP(value: string) {
+  return value.replace(/&nbsp;/g, " ");
+}
+
+function removeHTMLTags(value: string) {
+  return value.replace(/<\/?[^>]+(>|$)/g, " ");
 }

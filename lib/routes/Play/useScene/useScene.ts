@@ -4,6 +4,7 @@ import { useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
 import { Dice } from "../../../domains/dice/Dice";
+import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
@@ -30,7 +31,6 @@ export function useScene(userId: string, gameId: string) {
         draft.name = defaultSceneName;
         draft.aspects = defaultSceneAspects;
         everyone.forEach((p) => {
-          p.fatePoints = 3;
           p.playedDuringTurn = false;
         });
       })
@@ -252,12 +252,12 @@ export function useScene(userId: string, gameId: string) {
   function updateGMRoll() {
     setScene(
       produce((draft: IScene) => {
-        draft.gm.rolls = [Dice.rollFudgeDice(), ...draft.gm.rolls];
+        draft.gm.rolls = [Dice.roll4DF(), ...draft.gm.rolls];
       })
     );
   }
 
-  function updatePlayerRoll(id: string, roll: number) {
+  function updatePlayerRoll(id: string, roll: IDiceRoll) {
     setScene(
       produce((draft: IScene) => {
         draft.players.forEach((player) => {

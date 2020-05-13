@@ -2,11 +2,14 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
   Drawer,
   Fade,
   Grid,
   Hidden,
   IconButton,
+  MenuItem,
+  Select,
   Toolbar,
   Typography,
 } from "@material-ui/core";
@@ -16,7 +19,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { env } from "../../services/injections";
+import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppProgress } from "../AppProgress/AppProgress";
+import { CookieConsent } from "../CookieConsent/CookieConsent";
 
 let gameIdSingleton: string = undefined;
 
@@ -31,6 +38,7 @@ export const Page: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
+  const { t, i18n } = useTranslate();
 
   useEffect(() => {
     if (props.gameId) {
@@ -49,35 +57,78 @@ export const Page: React.FC<{
   function renderContent() {
     return (
       <Fade in timeout={250}>
-        <div
-          className={css({
-            height: "100%",
-            paddingBottom: "4rem",
-            minHeight: "calc(100vh - 56px)",
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-          })}
-        >
-          {!!props.notFound ? (
-            props.notFound
-          ) : (
-            <div
-              className={css({
-                maxWidth: "1440px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "2rem",
-                width: "100%",
-                padding: "0 1rem",
-                flex: "1 0 auto",
-              })}
-            >
-              {props.children}
-            </div>
-          )}
+        <div>
+          <div
+            className={css({
+              height: "100%",
+              paddingBottom: "4rem",
+              minHeight: "calc(100vh - 56px)",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+            })}
+          >
+            {!!props.notFound ? (
+              props.notFound
+            ) : (
+              <div
+                className={css({
+                  maxWidth: "1440px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  marginTop: "2rem",
+                  width: "100%",
+                  padding: "0 1rem",
+                  flex: "1 0 auto",
+                })}
+              >
+                {props.children}
+              </div>
+            )}
+          </div>
+
+          {renderFooter()}
         </div>
       </Fade>
+    );
+  }
+
+  function renderFooter() {
+    return (
+      <Box
+        className={css({
+          paddingTop: "1rem",
+          borderTop: "1px solid #e0e0e0",
+        })}
+      >
+        <CookieConsent></CookieConsent>
+        <Container>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Select
+                value={i18n.language}
+                onChange={(e) => {
+                  i18n.changeLanguage(e.target.value as string);
+                }}
+              >
+                {Object.keys(i18n.options.resources).map((language) => {
+                  const shouldRenderDev =
+                    language === "dev" && env.context === "localhost";
+                  if (language !== "dev" || shouldRenderDev) {
+                    return (
+                      <MenuItem key={language} value={language}>
+                        {t(
+                          `common.language.${language}` as IPossibleTranslationKeys
+                        )}
+                      </MenuItem>
+                    );
+                  }
+                })}
+              </Select>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     );
   }
 
@@ -198,7 +249,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Play
+            {t("menu.play")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -210,19 +261,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Dice
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              window.open("https://ko-fi.com/rpdeshaies");
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            Support Fari
+            {t("menu.dice")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -234,7 +273,19 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            About
+            {t("menu.about")}
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              window.open("https://ko-fi.com/rpdeshaies");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            {t("menu.support")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -246,7 +297,7 @@ export const Page: React.FC<{
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
-            Help
+            {t("menu.help")}
           </Button>
         </Grid>
       </Grid>

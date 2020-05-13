@@ -1,6 +1,6 @@
 import ReactGA from "react-ga";
+import { LoggerService } from "../logger/LoggerService";
 import { ISendEventParameters } from "./types/ISendEventParameters";
-import { LoggerService } from "../logger/LoggerSerivce";
 
 export class GoogleAnalyticsService {
   private readonly newProperty = "UA-150306816-1";
@@ -25,7 +25,7 @@ export class GoogleAnalyticsService {
       category: parameters.category,
       action: parameters.action,
       label: parameters.label,
-      value: parameters.value
+      value: parameters.value,
     };
     ReactGA.event(event);
 

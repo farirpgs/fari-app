@@ -1,7 +1,7 @@
 import { Dice } from "../Dice";
 
 describe("Dice", () => {
-  describe("rollFudgeDice", () => {
+  describe("roll4DF", () => {
     for (let i = 0; i < 10; i++) {
       it("should be fair", () => {
         fudgeDiceShouldBeFair();
@@ -15,9 +15,9 @@ function fudgeDiceShouldBeFair() {
   const numberOfTests = 10000;
 
   for (let i = 0; i < numberOfTests; i++) {
-    const roll = Dice.rollFudgeDice();
-    const currentCount = results[roll] ?? 0;
-    results[roll] = currentCount + 1;
+    const diceRoll = Dice.roll4DF();
+    const currentCount = results[diceRoll.total] ?? 0;
+    results[diceRoll.total] = currentCount + 1;
   }
 
   const fourProbability = (1 / 81) * 100;

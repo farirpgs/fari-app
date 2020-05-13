@@ -1,23 +1,28 @@
+import { IDiceRoll } from "./IDiceRoll";
+
+const fudgeDie = [-1, -1, 0, 0, 1, 1];
+
 export const Dice = {
-  rollFudgeDice() {
-    const fudgeDice = [-1, -1, 0, 0, 1, 1];
-    const result = rollDice(fudgeDice, 4);
+  roll4DF(): IDiceRoll {
+    const result = rollDie(fudgeDie, 4);
     return result;
   },
 };
 
-function rollDice(dice: Array<number>, times: number) {
+function rollDie(die: Array<number>, times: number): IDiceRoll {
   let total = 0;
+  const rolls = [];
   for (let i = 0; i < times; i++) {
-    const side = getRandomDiceSide(dice.length);
-    const roll = dice[side];
-    total += roll;
+    const side = getRandomDieSide(die.length);
+    const result = die[side];
+    rolls.push(result);
+    total += result;
   }
 
-  return total;
+  return { total, rolls };
 }
 
-function getRandomDiceSide(numberOfSides: number) {
+function getRandomDieSide(numberOfSides: number) {
   const randomNumber = Math.round(Math.random() * 100);
   const side = randomNumber % numberOfSides;
   return side;
