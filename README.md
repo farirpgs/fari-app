@@ -1,5 +1,7 @@
 # Fari
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/534c856a-7d30-4fdd-ad4a-9845ccdefd08/deploy-status)](https://app.netlify.com/sites/fari/deploys)
+
 [Fari](https://fari.app), is the best Fate RPG companion application.
 
 This repo contains the source code that powers that application.
@@ -30,6 +32,14 @@ If you want to make a contribution to Fari, you will need to clone this repo and
 ### Running the application
 
 Run `yarn start` and then the app should be running on http://localhost:1234
+
+## Special Thanks
+
+<a href="https://www.netlify.com">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+</a>
+
+[Netlify](https://netlify.com/) for providing hosting for Fari.
 
 ## Contributing - Work in Progress
 
