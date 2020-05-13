@@ -1,6 +1,6 @@
 # Fari
 
-Fari is a <b>Fate RPG Companion</b> Application created by René-Pier Deshaies-Gélinas available on [Github](https://github.com/RPDeshaies/fari) as a [GNU AGPLv3](https://choosealicense.com/licenses/agpl-3.0/) project.
+Fari is a <b>Fate RPG Companion</b> Application created by René-Pier Deshaies-Gélinas available on [Github](https://github.com/RPDeshaies/fari) released under the [AGPL-v3 License](https://choosealicense.com/licenses/agpl-3.0/) .
 
 ## FAQ
 

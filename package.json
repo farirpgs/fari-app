@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "AGPL-3.0",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
