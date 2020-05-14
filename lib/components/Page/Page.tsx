@@ -13,6 +13,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
 import React, { useEffect, useState } from "react";
@@ -299,6 +300,20 @@ export const Page: React.FC<{
           >
             {t("menu.help")}
           </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <IconButton
+            color="inherit"
+            size="small"
+            className={css({
+              padding: "6px 8px",
+            })}
+            onClick={() => {
+              window.open("https://github.com/RPDeshaies/fari");
+            }}
+          >
+            <GitHubIcon></GitHubIcon>
+          </IconButton>
         </Grid>
       </Grid>
     );
