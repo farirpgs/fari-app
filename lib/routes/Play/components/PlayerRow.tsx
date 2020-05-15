@@ -50,17 +50,37 @@ export const PlayerRow: React.FC<{
     backgroundColor: shouldHighlight ? highlightBackgroundColor : "transparent",
     color: shouldHighlight ? textColor.primary : undefined,
   });
-  const firstRowTableCellStyle = css({
+  const playerInfoRowStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
   });
-  const secondRowTableCellStyle = css({
+  const controlsRowStyle = css({
     padding: "0 0.5rem",
+  });
+  const diceStyle = css({
+    fontSize: "1.2rem",
+    lineHeight: Font.lineHeight(1.2),
+    color: diceManager.state.color,
+    border: `.1rem solid ${theme.palette.primary.main}`,
+    width: "2rem",
+    borderRadius: "4px",
+    height: "2rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxShadow:
+      "2px 2px 2px 0px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+  });
+  const diceRollingAnimationStyle = css({
+    animationName: "spin",
+    animationDuration: "250ms",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear",
   });
   return (
     <>
       <TableRow className={rowStyle}>
-        <TableCell className={firstRowTableCellStyle} align="left">
+        <TableCell className={playerInfoRowStyle} align="left">
           <Typography
             noWrap
             className={css({
@@ -71,7 +91,7 @@ export const PlayerRow: React.FC<{
             {t(props.player.playerName as IPossibleTranslationKeys)}
           </Typography>
         </TableCell>
-        <TableCell className={firstRowTableCellStyle} align="center">
+        <TableCell className={playerInfoRowStyle} align="center">
           <Tooltip
             title={
               props.player.playedDuringTurn
@@ -102,37 +122,20 @@ export const PlayerRow: React.FC<{
             </span>
           </Tooltip>
         </TableCell>
-        <TableCell className={cx(firstRowTableCellStyle)} align="center">
+        <TableCell className={cx(playerInfoRowStyle)} align="center">
           <Tooltip title={t("player-row.fate-points")}>
             <Badge badgeContent={props.player.fatePoints} color="primary">
               <FlareIcon width="2"></FlareIcon>
             </Badge>
           </Tooltip>
         </TableCell>
-        <TableCell className={cx(firstRowTableCellStyle)} align="right">
+        <TableCell className={cx(playerInfoRowStyle)} align="right">
           {shouldRenderDiceResult && (
             <Box display="flex" justifyContent="flex-end">
               <Tooltip title={diceManager.state.tooltip}>
                 <Typography
-                  className={css({
-                    fontSize: "1.2rem",
-                    lineHeight: Font.lineHeight(1.2),
-                    color: diceManager.state.color,
-                    border: `.1rem solid ${theme.palette.primary.main}`,
-                    width: "2rem",
-                    borderRadius: "4px",
-                    height: "2rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    boxShadow:
-                      "2px 2px 2px 0px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-                    animationName: diceManager.state.rolling
-                      ? "spin"
-                      : undefined,
-                    animationDuration: "250ms",
-                    animationIterationCount: "infinite",
-                    animationTimingFunction: "linear",
+                  className={cx(diceStyle, {
+                    [diceRollingAnimationStyle]: diceManager.state.rolling,
                   })}
                 >
                   {diceManager.state.label}
@@ -143,7 +146,7 @@ export const PlayerRow: React.FC<{
         </TableCell>
       </TableRow>
       {props.isGM && (
-        <TableRow className={cx(rowStyle, secondRowTableCellStyle)}>
+        <TableRow className={cx(rowStyle, controlsRowStyle)}>
           <TableCell colSpan={4}>
             <Grid container alignItems="center" justify="flex-end" spacing={1}>
               <Grid item>
