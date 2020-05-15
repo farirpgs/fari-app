@@ -10,9 +10,7 @@
 
 ## 🔒Checklist
 
-#### ✅ OR ⬜
-
-- I tested my work on the feature environment: ⬜
+- I tested my work on the feature environment
 
 ## 💅 Examples
 
