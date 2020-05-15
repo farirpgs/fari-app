@@ -293,7 +293,9 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              window.open("https://twitter.com/rpdeshaies");
+              window.open(
+                "https://github.com/RPDeshaies/fari/issues/new/choose"
+              );
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
