@@ -50,7 +50,7 @@ export const enTranslation = {
   "play-route.add-aspect": `Add Aspect`,
   "play-route.add-boost": `Add Boost`,
   "play-route.copy-game-link": `Copy Game Link`,
-  "play-route.reset-turn-order": `Reset Turn Order`,
+  "play-route.reset-initiative": `Reset Initiative`,
   "play-route.reset-scene": `Reset Scene`,
   "play-route.error.title": `Something wrong hapenned.`,
   "play-route.error.description1": `We could not connect to the server to initialize the game`,

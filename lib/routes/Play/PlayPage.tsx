@@ -613,7 +613,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     sceneManager.actions.resetPlayerPlayedStatus();
                   }}
                 >
-                  {t("play-route.reset-turn-order")}
+                  {t("play-route.reset-initiative")}
                 </Button>
               </Grid>
               <Grid item>
@@ -638,7 +638,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <Grid item>
                 <Button
                   onClick={() => {
-                    sceneManager.actions.fireGoodConfettis();
+                    sceneManager.actions.fireGoodConfetti();
                   }}
                   variant="text"
                   color="primary"
@@ -649,7 +649,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <Grid item>
                 <Button
                   onClick={() => {
-                    sceneManager.actions.fireBadConfettis();
+                    sceneManager.actions.fireBadConfetti();
                   }}
                   variant="text"
                   color="primary"

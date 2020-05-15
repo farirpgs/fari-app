@@ -3,7 +3,7 @@ import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
-import { Confettis } from "../../../domains/confettis/Confettis";
+import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -22,20 +22,21 @@ export function useScene(userId: string, gameId: string) {
       fatePoints: 3,
     },
     players: [],
-    goodConfettis: 0,
-    badConfettis: 0,
+    goodConfetti: 0,
+    badConfetti: 0,
   }));
 
   useEffect(() => {
-    if (scene.goodConfettis > 0) {
-      Confettis.fireConfettis(true);
+    if (scene.goodConfetti > 0) {
+      Confetti.fireConfetti();
     }
-  }, [scene.goodConfettis]);
+  }, [scene.goodConfetti]);
+
   useEffect(() => {
-    if (scene.badConfettis > 0) {
-      Confettis.fireCannon();
+    if (scene.badConfetti > 0) {
+      Confetti.fireCannon();
     }
-  }, [scene.badConfettis]);
+  }, [scene.badConfetti]);
 
   function reset() {
     setScene(
@@ -275,17 +276,17 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
-  function fireGoodConfettis() {
+  function fireGoodConfetti() {
     setScene(
       produce((draft: IScene) => {
-        draft.goodConfettis++;
+        draft.goodConfetti++;
       })
     );
   }
-  function fireBadConfettis() {
+  function fireBadConfetti() {
     setScene(
       produce((draft: IScene) => {
-        draft.badConfettis++;
+        draft.badConfetti++;
       })
     );
   }
@@ -318,8 +319,8 @@ export function useScene(userId: string, gameId: string) {
       updatePlayerPlayedStatus,
       resetPlayerPlayedStatus,
       updatePlayerRoll,
-      fireGoodConfettis,
-      fireBadConfettis,
+      fireGoodConfetti,
+      fireBadConfetti,
     },
   };
 }

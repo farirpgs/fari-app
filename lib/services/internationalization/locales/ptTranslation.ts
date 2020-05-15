@@ -52,7 +52,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.add-aspect": undefined,
   "play-route.add-boost": undefined,
   "play-route.copy-game-link": undefined,
-  "play-route.reset-turn-order": undefined,
+  "play-route.reset-initiative": undefined,
   "play-route.reset-scene": undefined,
   "play-route.error.title": undefined,
   "play-route.error.description1": undefined,

@@ -1,7 +1,7 @@
-import confetti from "canvas-confetti";
 import { throttle } from "lodash";
-export const Confettis = {
-  fireConfettis() {
+import confetti from "./node_modules/canvas-confetti";
+export const Confetti = {
+  fireConfetti() {
     try {
       fireCone();
     } catch (error) {

@@ -25,6 +25,6 @@ export interface IScene {
   aspects: Record<string, IAspect>;
   gm: IPlayer;
   players: Array<IPlayer>;
-  goodConfettis: number;
-  badConfettis: number;
+  goodConfetti: number;
+  badConfetti: number;
 }
