@@ -16,6 +16,8 @@ Please take the time to add as much details to your issues as possible.
 
 ## Development
 
+ttt
+
 If you want to make a contribution to Fari, you will need to clone this repo and follow the following steps to run the app locally.
 
 ### Prerequisites
