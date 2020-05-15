@@ -11,7 +11,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
-import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Banner } from "../../components/Banner/Banner";

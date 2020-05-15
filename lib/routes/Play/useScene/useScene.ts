@@ -1,8 +1,9 @@
 import produce from "immer";
 import Peer from "peerjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
+import { Confettis } from "../../../domains/confettis/Confettis";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -21,7 +22,20 @@ export function useScene(userId: string, gameId: string) {
       fatePoints: 3,
     },
     players: [],
+    goodConfettis: 0,
+    badConfettis: 0,
   }));
+
+  useEffect(() => {
+    if (scene.goodConfettis > 0) {
+      Confettis.fireConfettis(true);
+    }
+  }, [scene.goodConfettis]);
+  useEffect(() => {
+    if (scene.badConfettis > 0) {
+      Confettis.fireCannon();
+    }
+  }, [scene.badConfettis]);
 
   function reset() {
     setScene(
@@ -261,6 +275,21 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function fireGoodConfettis() {
+    setScene(
+      produce((draft: IScene) => {
+        draft.goodConfettis++;
+      })
+    );
+  }
+  function fireBadConfettis() {
+    setScene(
+      produce((draft: IScene) => {
+        draft.badConfettis++;
+      })
+    );
+  }
+
   return {
     state: { scene },
     actions: {
@@ -289,6 +318,8 @@ export function useScene(userId: string, gameId: string) {
       updatePlayerPlayedStatus,
       resetPlayerPlayedStatus,
       updatePlayerRoll,
+      fireGoodConfettis,
+      fireBadConfettis,
     },
   };
 }

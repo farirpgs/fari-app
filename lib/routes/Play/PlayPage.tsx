@@ -630,6 +630,33 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   </Button>
                 </ThemeProvider>
               </Grid>
+              <Hidden smDown>
+                <Grid item className={css({ display: "flex" })}>
+                  <Divider orientation="vertical" flexItem />
+                </Grid>
+              </Hidden>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.fireGoodConfettis();
+                  }}
+                  variant="text"
+                  color="primary"
+                >
+                  {"👍"}
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.fireBadConfettis();
+                  }}
+                  variant="text"
+                  color="primary"
+                >
+                  {"👎"}
+                </Button>
+              </Grid>
             </Grid>
           )}
         </Box>
