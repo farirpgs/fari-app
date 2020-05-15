@@ -6,7 +6,7 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { css } from "emotion";
+import { css, cx } from "emotion";
 import React, { useState } from "react";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -31,6 +31,27 @@ export const DiceRoute = () => {
     });
   }
 
+  const diceStyle = css({
+    fontSize: "5rem",
+    lineHeight: Font.lineHeight(5),
+    color: diceManager.state.color,
+    background: highlightBackgroundColor,
+    border: `.5rem solid ${theme.palette.primary.main}`,
+    borderRadius: "4px",
+    width: "7rem",
+    height: "7rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxShadow:
+      "3px 5px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+  });
+  const diceRollingAnimationStyle = css({
+    animationName: "spin",
+    animationDuration: "250ms",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear",
+  });
   return (
     <Page>
       <PageMeta
@@ -64,24 +85,8 @@ export const DiceRoute = () => {
         <Box display="flex" justifyContent="center" pt="3rem">
           <Tooltip title={diceManager.state.tooltip}>
             <Typography
-              className={css({
-                fontSize: "5rem",
-                lineHeight: Font.lineHeight(5),
-                color: diceManager.state.color,
-                background: highlightBackgroundColor,
-                border: `.5rem solid ${theme.palette.primary.main}`,
-                borderRadius: "4px",
-                width: "7rem",
-                height: "7rem",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                boxShadow:
-                  "3px 5px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-                animationName: diceManager.state.rolling ? "spin" : undefined,
-                animationDuration: "250ms",
-                animationIterationCount: "infinite",
-                animationTimingFunction: "linear",
+              className={cx(diceStyle, {
+                [diceRollingAnimationStyle]: diceManager.state.rolling,
               })}
             >
               {diceManager.state.label}
