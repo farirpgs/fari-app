@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonBase,
   lighten,
   Tooltip,
   Typography,
@@ -84,13 +85,22 @@ export const DiceRoute = () => {
         </Box>
         <Box display="flex" justifyContent="center" pt="3rem">
           <Tooltip title={diceManager.state.tooltip}>
-            <Typography
-              className={cx(diceStyle, {
-                [diceRollingAnimationStyle]: diceManager.state.rolling,
+            <ButtonBase
+              className={css({
+                borderRadius: "50%",
               })}
+              onClick={() => {
+                roll();
+              }}
             >
-              {diceManager.state.label}
-            </Typography>
+              <Typography
+                className={cx(diceStyle, {
+                  [diceRollingAnimationStyle]: diceManager.state.rolling,
+                })}
+              >
+                {diceManager.state.label}
+              </Typography>
+            </ButtonBase>
           </Tooltip>
         </Box>
         <Box

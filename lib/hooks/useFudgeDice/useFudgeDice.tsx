@@ -1,4 +1,5 @@
 import { useTheme } from "@material-ui/core";
+import confetti from "canvas-confetti";
 import { useEffect, useRef, useState } from "react";
 import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
@@ -52,6 +53,11 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
           setRolling(false);
           refreshCount.current = 0;
           setRoll(realRoll);
+          if (realRoll?.total >= 3) {
+            fireConfetti(true);
+          } else if (!rolling && realRoll?.total <= -3) {
+            fireConfetti(false);
+          }
         }
       }, 25);
     }
@@ -69,4 +75,56 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
       color,
     },
   };
+}
+
+function fireConfetti(good: boolean) {
+  try {
+    const colors = good ? undefined : ["#bb0000"];
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+      colors: colors,
+    });
+    fire(0.2, {
+      spread: 60,
+      colors: colors,
+    });
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      colors: colors,
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      colors: colors,
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+      colors: colors,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function fire(
+  particleRatio: number,
+  options: {
+    colors: Array<string>;
+    spread: number;
+    startVelocity?: number;
+    decay?: number;
+  }
+) {
+  /**
+   * https://www.kirilv.com/canvas-confetti/
+   */
+  confetti({
+    origin: { y: 0.7 },
+    particleCount: Math.floor(200 * particleRatio),
+    ...options,
+  });
 }

@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
+import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
 
 export function usePeerConnections(options: {
@@ -69,8 +70,10 @@ export function usePeerConnections(options: {
         connection.current.on("close", onHostConnectionClose);
         connection.current.on("data", onHostDataReceive);
       },
-      sendToHost(data: any) {
-        connectionToHost.send(data);
+      sendToHost<TPeerAction extends IPeerAction<string, unknown>>(
+        request: TPeerAction
+      ) {
+        connectionToHost.send(request);
       },
     },
   };

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
+import { IPeerActions } from "./IPeerActions";
 import { PlayPage } from "./PlayPage";
 import { useScene } from "./useScene/useScene";
 import { useUserId } from "./useUserId/useUserId";
@@ -18,8 +18,16 @@ export const PlayRoute: React.FC<{
   const sceneManager = useScene(userId, idFromParams);
 
   const hostManager = usePeerHost({
-    onConnectionDataReceive(id: string, roll: IDiceRoll) {
-      sceneManager.actions.updatePlayerRoll(id, roll);
+    onConnectionDataReceive(id: string, peerAction: IPeerActions) {
+      if (peerAction.action === "roll") {
+        sceneManager.actions.updatePlayerRoll(id, peerAction.payload);
+      }
+      if (peerAction.action === "update-fate-point") {
+        sceneManager.actions.updatePlayerFatePoints(id, peerAction.payload);
+      }
+      if (peerAction.action === "played-in-turn-order") {
+        sceneManager.actions.updatePlayerPlayedStatus(id, peerAction.payload);
+      }
     },
     debug: debug,
   });

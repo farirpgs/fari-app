@@ -43,6 +43,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
+import { IPeerActions } from "./IPeerActions";
 import { defaultSceneName, useScene } from "./useScene/useScene";
 
 type IOnlineProps = {
@@ -263,9 +264,15 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 color="secondary"
                 onClick={() => {
                   if (isGM) {
-                    sceneManager.actions.updateGMRoll();
+                    sceneManager.actions.updatePlayerRoll(
+                      sceneManager.state.scene.gm.id,
+                      Dice.roll4DF()
+                    );
                   } else {
-                    connectionsManager.actions.sendToHost(Dice.roll4DF());
+                    connectionsManager.actions.sendToHost<IPeerActions>({
+                      action: "roll",
+                      payload: Dice.roll4DF(),
+                    });
                   }
                 }}
               >
@@ -290,11 +297,24 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     <PlayerRow
                       key={player.id}
                       isGM={isGM}
-                      highlight={props.userId === player.id}
+                      isMe={props.userId === player.id}
                       player={player}
                       offline={isOffline}
                       onPlayerRemove={() => {
                         sceneManager.actions.removeOfflinePlayer(player.id);
+                      }}
+                      onDiceRoll={() => {
+                        if (isGM) {
+                          sceneManager.actions.updatePlayerRoll(
+                            player.id,
+                            Dice.roll4DF()
+                          );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "roll",
+                            payload: Dice.roll4DF(),
+                          });
+                        }
                       }}
                       onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                         if (isGM) {
@@ -302,14 +322,24 @@ export const PlayPage: React.FC<IProps> = (props) => {
                             player.id,
                             playedInTurnOrder
                           );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "played-in-turn-order",
+                            payload: playedInTurnOrder,
+                          });
                         }
                       }}
-                      onPlayerFatePointsChange={(playedInTurnOrder) => {
+                      onFatePointsChange={(fatePoints) => {
                         if (isGM) {
                           sceneManager.actions.updatePlayerFatePoints(
                             player.id,
-                            playedInTurnOrder
+                            fatePoints
                           );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "update-fate-point",
+                            payload: fatePoints,
+                          });
                         }
                       }}
                     ></PlayerRow>

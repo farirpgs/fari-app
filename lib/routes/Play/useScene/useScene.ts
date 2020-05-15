@@ -3,7 +3,6 @@ import Peer from "peerjs";
 import { useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
-import { Dice } from "../../../domains/dice/Dice";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -242,17 +241,9 @@ export function useScene(userId: string, gameId: string) {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            p.fatePoints = fatePoints;
+            p.fatePoints = fatePoints >= 0 ? fatePoints : 0;
           }
         });
-      })
-    );
-  }
-
-  function updateGMRoll() {
-    setScene(
-      produce((draft: IScene) => {
-        draft.gm.rolls = [Dice.roll4DF(), ...draft.gm.rolls];
       })
     );
   }
@@ -260,7 +251,8 @@ export function useScene(userId: string, gameId: string) {
   function updatePlayerRoll(id: string, roll: IDiceRoll) {
     setScene(
       produce((draft: IScene) => {
-        draft.players.forEach((player) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((player) => {
           if (player.id === id) {
             player.rolls = [roll, ...player.rolls];
           }
@@ -296,7 +288,6 @@ export function useScene(userId: string, gameId: string) {
       updatePlayerFatePoints,
       updatePlayerPlayedStatus,
       resetPlayerPlayedStatus,
-      updateGMRoll,
       updatePlayerRoll,
     },
   };
