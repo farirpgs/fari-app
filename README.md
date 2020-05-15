@@ -10,7 +10,7 @@ If you are here because
 1. you want to ask a question
 1. you have a feature suggestion
 
-you can fill an issue by [clicking here](https://github.com/RPDeshaies/fari/issues/new/choose) and choosing the appriopriate type of issue.
+you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue.
 
 Please take the time to add as much details to your issues as possible.
 

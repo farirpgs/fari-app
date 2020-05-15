@@ -293,9 +293,7 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              window.open(
-                "https://github.com/RPDeshaies/fari/issues/new/choose"
-              );
+              window.open("https://github.com/fariapp/fari/issues/new/choose");
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
@@ -311,7 +309,7 @@ export const Page: React.FC<{
               padding: "6px 8px",
             })}
             onClick={() => {
-              window.open("https://github.com/RPDeshaies/fari");
+              window.open("https://github.com/fariapp/fari");
             }}
           >
             <GitHubIcon></GitHubIcon>
