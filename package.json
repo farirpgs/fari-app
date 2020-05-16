@@ -26,6 +26,7 @@
     "i18next": "^19.4.4",
     "i18next-browser-languagedetector": "^4.1.1",
     "immer": "6.0.3",
+    "jest-junit": "^10.0.0",
     "magic-grid": "^3.2.4",
     "peerjs": "1.2.0",
     "pouchdb": "7.2.1",
@@ -67,5 +68,11 @@
     "react-test-renderer": "16.13.1",
     "ts-jest": "25.3.1",
     "typescript": "3.8.3"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
   }
 }
