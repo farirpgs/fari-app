@@ -26,6 +26,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import ErrorIcon from "@material-ui/icons/Error";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
@@ -392,101 +394,103 @@ export const PlayPage: React.FC<IProps> = (props) => {
 
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
-    const shouldRenderEmptyAspectView = aspectIds.length === 0;
+    const hasAspects = aspectIds.length > 0;
     return (
       <Box pb="2rem">
-        <MagicGridContainer items={aspectIds.length}>
-          {aspectIds.map((aspectId) => {
-            return (
-              <Box
-                key={aspectId}
-                className={cx(
-                  css({
-                    width: isSmall ? "100%" : "33%",
-                    padding: "0 .5rem 1.5rem .5rem",
-                  })
-                )}
-              >
-                <IndexCard
+        {hasAspects && (
+          <MagicGridContainer items={aspectIds.length}>
+            {aspectIds.map((aspectId) => {
+              return (
+                <Box
                   key={aspectId}
-                  title={sceneManager.state.scene.aspects[aspectId].title}
-                  readonly={!isGM}
-                  content={sceneManager.state.scene.aspects[aspectId].content}
-                  color={sceneManager.state.scene.aspects[aspectId].color}
-                  isBoost={sceneManager.state.scene.aspects[aspectId].isBoost}
-                  freeInvokes={
-                    sceneManager.state.scene.aspects[aspectId].freeInvokes
-                  }
-                  physicalStress={
-                    sceneManager.state.scene.aspects[aspectId].physicalStress
-                  }
-                  mentalStress={
-                    sceneManager.state.scene.aspects[aspectId].mentalStress
-                  }
-                  consequences={
-                    sceneManager.state.scene.aspects[aspectId].consequences
-                  }
-                  onRemove={() => {
-                    sceneManager.actions.removeAspect(aspectId);
-                  }}
-                  onReset={() => {
-                    sceneManager.actions.resetAspect(aspectId);
-                  }}
-                  onTitleChange={(value) => {
-                    sceneManager.actions.updateAspectTitle(aspectId, value);
-                  }}
-                  onContentChange={(value) => {
-                    sceneManager.actions.updateAspectContent(aspectId, value);
-                  }}
-                  onFreeInvokeChange={(index, value) => {
-                    sceneManager.actions.updateAspectFreeInvoke(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onPhysicalStressChange={(index, value) => {
-                    sceneManager.actions.updateAspectPhysicalStress(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onMentalStressChange={(index, value) => {
-                    sceneManager.actions.updateAspectMentalStress(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onConsequenceChange={(index, value) => {
-                    sceneManager.actions.updateAspectConsequence(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onAddAspectFreeInvoke={() => {
-                    sceneManager.actions.addAspectFreeInvoke(aspectId);
-                  }}
-                  onAddAspectPhysicalStress={() => {
-                    sceneManager.actions.addAspectPhysicalStress(aspectId);
-                  }}
-                  onAddAspectMentalStress={() => {
-                    sceneManager.actions.addAspectMentalStress(aspectId);
-                  }}
-                  onAddConsequence={() => {
-                    sceneManager.actions.addAspectConsequence(aspectId);
-                  }}
-                  onUpdateAspectColor={(color: IndexCardColor) => {
-                    sceneManager.actions.updateAspectColor(aspectId, color);
-                  }}
-                ></IndexCard>
-              </Box>
-            );
-          })}
-        </MagicGridContainer>
-        {shouldRenderEmptyAspectView && (
+                  className={cx(
+                    css({
+                      width: isSmall ? "100%" : "33%",
+                      padding: "0 .5rem 1.5rem .5rem",
+                    })
+                  )}
+                >
+                  <IndexCard
+                    key={aspectId}
+                    title={sceneManager.state.scene.aspects[aspectId].title}
+                    readonly={!isGM}
+                    content={sceneManager.state.scene.aspects[aspectId].content}
+                    color={sceneManager.state.scene.aspects[aspectId].color}
+                    isBoost={sceneManager.state.scene.aspects[aspectId].isBoost}
+                    freeInvokes={
+                      sceneManager.state.scene.aspects[aspectId].freeInvokes
+                    }
+                    physicalStress={
+                      sceneManager.state.scene.aspects[aspectId].physicalStress
+                    }
+                    mentalStress={
+                      sceneManager.state.scene.aspects[aspectId].mentalStress
+                    }
+                    consequences={
+                      sceneManager.state.scene.aspects[aspectId].consequences
+                    }
+                    onRemove={() => {
+                      sceneManager.actions.removeAspect(aspectId);
+                    }}
+                    onReset={() => {
+                      sceneManager.actions.resetAspect(aspectId);
+                    }}
+                    onTitleChange={(value) => {
+                      sceneManager.actions.updateAspectTitle(aspectId, value);
+                    }}
+                    onContentChange={(value) => {
+                      sceneManager.actions.updateAspectContent(aspectId, value);
+                    }}
+                    onFreeInvokeChange={(index, value) => {
+                      sceneManager.actions.updateAspectFreeInvoke(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onPhysicalStressChange={(index, value) => {
+                      sceneManager.actions.updateAspectPhysicalStress(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onMentalStressChange={(index, value) => {
+                      sceneManager.actions.updateAspectMentalStress(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onConsequenceChange={(index, value) => {
+                      sceneManager.actions.updateAspectConsequence(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onAddAspectFreeInvoke={() => {
+                      sceneManager.actions.addAspectFreeInvoke(aspectId);
+                    }}
+                    onAddAspectPhysicalStress={() => {
+                      sceneManager.actions.addAspectPhysicalStress(aspectId);
+                    }}
+                    onAddAspectMentalStress={() => {
+                      sceneManager.actions.addAspectMentalStress(aspectId);
+                    }}
+                    onAddConsequence={() => {
+                      sceneManager.actions.addAspectConsequence(aspectId);
+                    }}
+                    onUpdateAspectColor={(color: IndexCardColor) => {
+                      sceneManager.actions.updateAspectColor(aspectId, color);
+                    }}
+                  ></IndexCard>
+                </Box>
+              );
+            })}
+          </MagicGridContainer>
+        )}
+        {!hasAspects && (
           <Box pt="6rem" textAlign="center">
             {isGM ? (
               <Typography variant="h6">
@@ -612,6 +616,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.resetPlayerPlayedStatus();
                   }}
+                  endIcon={<EmojiPeopleIcon></EmojiPeopleIcon>}
                 >
                   {t("play-route.reset-initiative")}
                 </Button>
@@ -620,11 +625,17 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 <ThemeProvider theme={errorTheme}>
                   <Button
                     onClick={() => {
-                      sceneManager.actions.reset();
+                      const confirmed = confirm(
+                        t("play-route.reset-scene-confirmation")
+                      );
+                      if (confirmed) {
+                        sceneManager.actions.reset();
+                      }
                     }}
                     className={css({ borderRadius: "20px" })}
                     variant="text"
                     color="primary"
+                    endIcon={<ErrorIcon></ErrorIcon>}
                   >
                     {t("play-route.reset-scene")}
                   </Button>

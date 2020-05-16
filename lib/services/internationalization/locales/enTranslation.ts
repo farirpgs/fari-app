@@ -52,6 +52,7 @@ export const enTranslation = {
   "play-route.copy-game-link": `Copy Game Link`,
   "play-route.reset-initiative": `Reset Initiative`,
   "play-route.reset-scene": `Reset Scene`,
+  "play-route.reset-scene-confirmation": `Are you sure you want to reset your scene and remove all your current aspects?`,
   "play-route.error.title": `Something wrong hapenned.`,
   "play-route.error.description1": `We could not connect to the server to initialize the game`,
   "play-route.error.description2": `Try refreshing the page to see if that fixes the issue or start an offline game instead.`,
