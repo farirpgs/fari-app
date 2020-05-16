@@ -4,6 +4,7 @@ import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "common.language.en": undefined,
   "common.language.pt": undefined,
+  "common.language.es": undefined,
   "common.language.dev": undefined,
   "menu.play": undefined,
   "menu.dice": undefined,
