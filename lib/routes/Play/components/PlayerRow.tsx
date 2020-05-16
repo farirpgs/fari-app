@@ -58,10 +58,13 @@ export const PlayerRow: React.FC<{
   const controlsRowStyle = css({
     padding: "0 0.5rem",
   });
+
+  const diceTextColors = useTextColors(highlightBackgroundColor);
   const diceStyle = css({
     fontSize: "1.2rem",
     lineHeight: Font.lineHeight(1.2),
     color: diceManager.state.color,
+    background: highlightBackgroundColor,
     border: `.1rem solid ${theme.palette.primary.main}`,
     width: "2rem",
     borderRadius: "4px",
@@ -158,6 +161,7 @@ export const PlayerRow: React.FC<{
                 <ButtonBase
                   className={css({
                     borderRadius: "4px%",
+                    color: diceTextColors.primary,
                   })}
                   disabled={!canControl}
                   onClick={() => {
