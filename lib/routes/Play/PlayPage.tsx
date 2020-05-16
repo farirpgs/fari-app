@@ -28,6 +28,12 @@ import {
 } from "@material-ui/core";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import LoupeIcon from "@material-ui/icons/Loupe";
+import NoteIcon from "@material-ui/icons/Note";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
@@ -221,13 +227,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
             padding: ".5rem",
           })}
         >
-          <Grid
-            container
-            spacing={2}
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
+          <Grid container spacing={2} alignItems="center">
+            <Grid
+              item
+              className={css({
+                flex: "1 0 auto",
+              })}
+            >
               <Typography
                 variant="overline"
                 className={css({
@@ -260,6 +266,20 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 </Typography>
               </Box>
             </Grid>
+            {isGM && (
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.resetPlayerPlayedStatus();
+                  }}
+                  variant="contained"
+                  color="secondary"
+                  endIcon={<EmojiPeopleIcon></EmojiPeopleIcon>}
+                >
+                  {t("play-route.reset-initiative")}
+                </Button>
+              </Grid>
+            )}
             <Grid item>
               <Button
                 variant="contained"
@@ -278,7 +298,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   }
                 }}
               >
-                {t("play-route.roll-4-d-f")}
+                {t("play-route.roll")}
               </Button>
             </Grid>
           </Grid>
@@ -496,7 +516,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <Typography variant="h6">
                 {t("play-route.click-on-the-")}
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   color="secondary"
                   className={css({
                     margin: "0 .5rem",
@@ -504,6 +524,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addAspect();
                   }}
+                  endIcon={<NoteIcon></NoteIcon>}
                 >
                   {t("play-route.click-on-the-add-aspect-")}
                 </Button>
@@ -549,8 +570,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addAspect();
                   }}
-                  variant="outlined"
+                  variant="contained"
                   color="secondary"
+                  endIcon={<NoteIcon></NoteIcon>}
                 >
                   {t("play-route.add-aspect")}
                 </Button>
@@ -560,8 +582,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addBoost();
                   }}
-                  variant="outlined"
+                  variant="contained"
                   color="secondary"
+                  endIcon={<LoupeIcon></LoupeIcon>}
                 >
                   {t("play-route.add-boost")}
                 </Button>
@@ -572,8 +595,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     onClick={() => {
                       setOfflineCharacterDialogOpen(true);
                     }}
-                    variant="outlined"
+                    variant="contained"
                     color="secondary"
+                    endIcon={<PersonAddIcon></PersonAddIcon>}
                   >
                     {t("play-route.add-character")}
                   </Button>
@@ -600,6 +624,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         navigator.clipboard.writeText(props.shareLink);
                         setShareLinkToolTip({ open: true });
                       }}
+                      endIcon={<FileCopyIcon></FileCopyIcon>}
                     >
                       {t("play-route.copy-game-link")}
                     </Button>
@@ -611,16 +636,6 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   <Divider orientation="vertical" flexItem />
                 </Grid>
               </Hidden>
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.resetPlayerPlayedStatus();
-                  }}
-                  endIcon={<EmojiPeopleIcon></EmojiPeopleIcon>}
-                >
-                  {t("play-route.reset-initiative")}
-                </Button>
-              </Grid>
               <Grid item>
                 <ThemeProvider theme={errorTheme}>
                   <Button
@@ -654,7 +669,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   variant="text"
                   color="primary"
                 >
-                  {"👍"}
+                  <ThumbUpIcon></ThumbUpIcon>
                 </Button>
               </Grid>
               <Grid item>
@@ -665,7 +680,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   variant="text"
                   color="primary"
                 >
-                  {"👎"}
+                  <ThumbDownIcon></ThumbDownIcon>
                 </Button>
               </Grid>
             </Grid>

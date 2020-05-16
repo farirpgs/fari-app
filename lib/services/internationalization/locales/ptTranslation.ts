@@ -38,7 +38,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.cancel": undefined,
   "play-route.players": undefined,
   "play-route.connected": undefined,
-  "play-route.roll-4-d-f": undefined,
+  "play-route.roll": undefined,
   "play-route.name": undefined,
   "play-route.initiative-tracker": undefined,
   "play-route.init": undefined,

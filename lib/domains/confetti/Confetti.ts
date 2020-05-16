@@ -1,5 +1,6 @@
 import confetti from "canvas-confetti";
 import { throttle } from "lodash";
+
 export const Confetti = {
   fireConfetti() {
     try {
