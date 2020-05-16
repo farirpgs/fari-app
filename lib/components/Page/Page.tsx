@@ -104,7 +104,15 @@ export const Page: React.FC<{
       >
         <CookieConsent></CookieConsent>
         <Container>
-          <Grid container justify="flex-end">
+          <Grid container justify="flex-end" spacing={4} alignItems="center">
+            <Grid item>
+              <a href="https://www.netlify.com">
+                <img
+                  src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"
+                  alt="Deploys by Netlify"
+                />
+              </a>
+            </Grid>
             <Grid item>
               <Select
                 value={i18n.language}
