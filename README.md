@@ -1,16 +1,14 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
-[![Live Netlify Status](https://api.netlify.com/api/v1/badges/534c856a-7d30-4fdd-ad4a-9845ccdefd08/deploy-status)](https://app.netlify.com/sites/fari/deploys)
-![Next Version Build](https://dev.azure.com/rpdeshaies/fari/_apis/build/status/fariapp.fari?branchName=next)
-![Current Version Build](https://dev.azure.com/rpdeshaies/fari/_apis/build/status/fariapp.fari?branchName=master)
+![Current Version](https://dev.azure.com/rpdeshaies/fari/_apis/build/status/fariapp.fari?branchName=master)
 
 This repo contains the source code that powers Fari.
 
 If you are here because
 
 1. you have an encountered issue with Fari
-1. you want to ask a question
-1. you have a feature suggestion
+2. you want to ask a question
+3. you have a feature suggestion
 
 you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue.
 
