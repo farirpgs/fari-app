@@ -55,6 +55,7 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.copy-game-link": undefined,
   "play-route.reset-initiative": undefined,
   "play-route.reset-scene": undefined,
+  "play-route.reset-scene-confirmation": undefined,
   "play-route.error.title": undefined,
   "play-route.error.description1": undefined,
   "play-route.error.description2": undefined,
