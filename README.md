@@ -1,6 +1,8 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/534c856a-7d30-4fdd-ad4a-9845ccdefd08/deploy-status)](https://app.netlify.com/sites/fari/deploys)
+[![Live Netlify Status](https://api.netlify.com/api/v1/badges/534c856a-7d30-4fdd-ad4a-9845ccdefd08/deploy-status)](https://app.netlify.com/sites/fari/deploys)
+![Next Version Build](https://dev.azure.com/rpdeshaies/rpdeshaies/_apis/build/status/fariapp.fari?branchName=next)
+![Current Version Build](https://dev.azure.com/rpdeshaies/rpdeshaies/_apis/build/status/fariapp.fari?branchName=master)
 
 This repo contains the source code that powers Fari.
 
