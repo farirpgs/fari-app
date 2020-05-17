@@ -232,7 +232,7 @@ export const IndexCard: React.FC<{
           borderBottom: "1px solid #ddd",
         })}
       >
-        <Box p="1rem">
+        <Box p="0 1rem">
           <ContentEditable
             value={props.content}
             readonly={props.readonly}
@@ -252,7 +252,7 @@ export const IndexCard: React.FC<{
           borderBottom: "1px solid #ddd",
         })}
       >
-        <Box p="1rem">
+        <Box p=".5rem 1rem">
           <Box>
             {props.freeInvokes.length > 0 && (
               <InputLabel shrink>{t("index-card.free-invokes")}</InputLabel>

@@ -1,9 +1,13 @@
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
+import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
 
 export function usePeerHost(options: {
-  onConnectionDataReceive: (id: string, data: any) => void;
+  onConnectionDataReceive: (
+    id: string,
+    data: IPeerAction<string, unknown>
+  ) => void;
   debug?: boolean;
 }) {
   const { peer, hostId, error, loading } = usePeerJS({ debug: options.debug });

@@ -1,6 +1,6 @@
 {
   "name": "fari",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
@@ -21,6 +21,7 @@
     "@material-ui/lab": "4.0.0-alpha.49",
     "@sentry/browser": "5.15.4",
     "axios": "0.19.2",
+    "canvas-confetti": "^1.2.0",
     "emotion": "10.0.27",
     "flexboxgrid": "6.3.1",
     "i18next": "^19.4.4",

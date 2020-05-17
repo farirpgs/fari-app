@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.2.0
+
+- feat: players can control their own initiative
+- feat: players can consume their own fate points
+- feat: gm and players can click on a dice to roll it
+- feat: the dice page supports clicking on the dice to roll it
+- feat: confetti 🎉 on >= 3 or <= -3
+
 ## 2.1.0
 
 - feat: grid System for Index Cards
