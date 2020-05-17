@@ -25,7 +25,7 @@ export const PlayRoute: React.FC<{
   });
   const connectionsManager = usePeerConnection({
     onHostDataReceive(newScene) {
-      sceneManager.actions.setScene(newScene);
+      sceneManager.actions.safeSetScene(newScene);
     },
     debug: debug,
   });

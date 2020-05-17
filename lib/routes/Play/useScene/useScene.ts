@@ -24,6 +24,12 @@ export function useScene(userId: string, gameId: string) {
     players: [],
   }));
 
+  function safeSetScene(scene: IScene) {
+    if (scene) {
+      setScene(scene);
+    }
+  }
+
   function reset() {
     setScene(
       produce((draft: IScene) => {
@@ -273,7 +279,7 @@ export function useScene(userId: string, gameId: string) {
     state: { scene },
     actions: {
       reset,
-      setScene,
+      safeSetScene,
       setName,
       addAspect,
       addBoost,
