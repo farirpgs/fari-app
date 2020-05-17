@@ -39,12 +39,12 @@ steps:
       yarn run build
     displayName: "yarn build"
 
-  # - script: |
-  #     yarn run deploy:preview --auth ${NETLIFY_AUTH_TOKEN}
-  #   displayName: "deploy preview"
-  #   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+  - script: |
+      yarn run deploy:preview --auth ${NETLIFY_AUTH_TOKEN}
+    displayName: "deploy preview"
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-  # - script: |
-  #     yarn run deploy:preview --auth ${NETLIFY_AUTH_TOKEN}
-  #   displayName: "deploy prod"
-  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  - script: |
+      yarn run deploy:preview --auth ${NETLIFY_AUTH_TOKEN}
+    displayName: "deploy prod"
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
