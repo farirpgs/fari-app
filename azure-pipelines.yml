@@ -10,13 +10,30 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - task: NodeTool@0
+  - displayName: "Install Node.js"
+    task: NodeTool@0
     inputs:
       versionSpec: "10.x"
-    displayName: "Install Node.js"
 
-  - script: |
+  - displayName: "yarn install"
+    script: |
       yarn install
-      yarn run validate
       yarn run build
-    displayName: "yarn install and build"
+
+  - displayName: "yarn validate"
+    script: |
+      yarn run build
+
+  - displayName: "yarn build"
+    script: |
+      yarn run build
+
+  - displayName: "deploy preview"
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+    script: |
+      yarn run deploy:preview
+
+  - displayName: "deploy prod"
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    script: |
+      yarn run deploy
