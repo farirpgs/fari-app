@@ -1,7 +1,7 @@
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
-export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
+export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "common.language.en": undefined,
   "common.language.pt": undefined,
   "common.language.es": undefined,

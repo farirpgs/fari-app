@@ -2,6 +2,7 @@
 export const enTranslation = {
   "common.language.en": `English`,
   "common.language.pt": `Portuguese WIP`,
+  "common.language.es": `Spanish WIP`,
   "common.language.dev": `Development`,
   "menu.play": `Play`,
   "menu.dice": `Dice`,
