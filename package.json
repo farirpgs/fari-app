@@ -14,8 +14,8 @@
     "test": "jest --coverage",
     "validate": "yarn tsc && yarn lint && yarn test",
     "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
-    "deploy:preview": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08",
-    "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod"
+    "deploy:preview": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --auth $NETLIFY_AUTH_TOKEN",
+    "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --auth $NETLIFY_AUTH_TOKEN --prod"
   },
   "dependencies": {
     "@material-ui/core": "4.9.10",
