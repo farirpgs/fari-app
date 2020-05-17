@@ -12,33 +12,28 @@ pool:
 steps:
   - task: NodeTool@0
     displayName: "Install Node.js"
-    task: NodeTool@0
     inputs:
       versionSpec: "10.x"
 
-  - task: NodeTool@0
-    displayName: "yarn install"
-    script: |
+  - script: |
       yarn install
       yarn run build
+    displayName: "yarn install"
 
-  - task: NodeTool@0
+  - script: |
+      yarn run build
     displayName: "yarn validate"
-    script: |
-      yarn run build
 
-  - task: NodeTool@0
+  - script: |
+      yarn run build
     displayName: "yarn build"
-    script: |
-      yarn run build
 
-  - task: NodeTool@0
+  - script: |
+      yarn run deploy:preview
     displayName: "deploy preview"
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-    script: |
-      yarn run deploy:preview
 
-  - displayName: "deploy prod"
+  - script: |
+      yarn run deploy:preview
+    displayName: "deploy prod"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    script: |
-      yarn run deploy
