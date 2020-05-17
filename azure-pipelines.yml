@@ -17,11 +17,10 @@ steps:
 
   - script: |
       yarn install
-      yarn run build
     displayName: "yarn install"
 
   - script: |
-      yarn run build
+      yarn run validate
     displayName: "yarn validate"
 
   - script: |
