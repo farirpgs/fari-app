@@ -5,11 +5,11 @@ First of all, thank you for considering contributing to this project. Any help i
 You can help in multiple ways.
 
 - **Marketing**: Talk about Fari on Twitter, Reddit, your personal blog, etc.
-- **Bug Reports**: File [bug reports](https://github.com/RPDeshaies/fari/issues) with detailed information to help us make Fari more reliable.
+- **Bug Reports**: File [bug reports](https://github.com/fariapp/fari/issues) with detailed information to help us make Fari more reliable.
 - **Feature Requests**: Tell us what you want. Showing that you care about certain issues or features help us triage them.
 - **Programming**: If you have a software engineering background, you can help us build the future of Fari.
 - **Financing**: By clicking the "❤️ Sponsor" button on Github, you give us the ability to spend more time enhancing Fari.
-- **Localization**: You can help us [translate Fari](https://github.com/RPDeshaies/fari/tree/master/lib/services/internationalization/locales) so that we can reach people from all around the world.
+- **Localization**: You can help us [translate Fari](https://github.com/fariapp/fari/tree/master/lib/services/internationalization/locales) so that we can reach people from all around the world.
 
 ## Fari's Mission
 

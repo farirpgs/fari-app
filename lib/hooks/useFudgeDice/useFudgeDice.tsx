@@ -1,5 +1,6 @@
 import { useTheme } from "@material-ui/core";
 import { useEffect, useRef, useState } from "react";
+import { Confetti } from "../../domains/confetti/Confetti";
 import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
@@ -52,6 +53,11 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
           setRolling(false);
           refreshCount.current = 0;
           setRoll(realRoll);
+          if (realRoll?.total >= 3) {
+            Confetti.fireConfetti();
+          } else if (!rolling && realRoll?.total <= -3) {
+            Confetti.fireCannon();
+          }
         }
       }, 25);
     }

@@ -1,9 +1,9 @@
 import produce from "immer";
 import Peer from "peerjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
-import { Dice } from "../../../domains/dice/Dice";
+import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -22,7 +22,27 @@ export function useScene(userId: string, gameId: string) {
       fatePoints: 3,
     },
     players: [],
+    goodConfetti: 0,
+    badConfetti: 0,
   }));
+
+  useEffect(() => {
+    if (scene.goodConfetti > 0) {
+      Confetti.fireConfetti();
+    }
+  }, [scene.goodConfetti]);
+
+  useEffect(() => {
+    if (scene.badConfetti > 0) {
+      Confetti.fireCannon();
+    }
+  }, [scene.badConfetti]);
+
+  function safeSetScene(scene: IScene) {
+    if (scene) {
+      setScene(scene);
+    }
+  }
 
   function reset() {
     setScene(
@@ -242,17 +262,9 @@ export function useScene(userId: string, gameId: string) {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            p.fatePoints = fatePoints;
+            p.fatePoints = fatePoints >= 0 ? fatePoints : 0;
           }
         });
-      })
-    );
-  }
-
-  function updateGMRoll() {
-    setScene(
-      produce((draft: IScene) => {
-        draft.gm.rolls = [Dice.roll4DF(), ...draft.gm.rolls];
       })
     );
   }
@@ -260,7 +272,8 @@ export function useScene(userId: string, gameId: string) {
   function updatePlayerRoll(id: string, roll: IDiceRoll) {
     setScene(
       produce((draft: IScene) => {
-        draft.players.forEach((player) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((player) => {
           if (player.id === id) {
             player.rolls = [roll, ...player.rolls];
           }
@@ -269,11 +282,26 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function fireGoodConfetti() {
+    setScene(
+      produce((draft: IScene) => {
+        draft.goodConfetti++;
+      })
+    );
+  }
+  function fireBadConfetti() {
+    setScene(
+      produce((draft: IScene) => {
+        draft.badConfetti++;
+      })
+    );
+  }
+
   return {
     state: { scene },
     actions: {
       reset,
-      setScene,
+      safeSetScene,
       setName,
       addAspect,
       addBoost,
@@ -296,8 +324,9 @@ export function useScene(userId: string, gameId: string) {
       updatePlayerFatePoints,
       updatePlayerPlayedStatus,
       resetPlayerPlayedStatus,
-      updateGMRoll,
       updatePlayerRoll,
+      fireGoodConfetti,
+      fireBadConfetti,
     },
   };
 }

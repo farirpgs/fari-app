@@ -1,6 +1,7 @@
 import {
-  Badge,
+  Avatar,
   Box,
+  ButtonBase,
   Grid,
   IconButton,
   lighten,
@@ -13,7 +14,6 @@ import {
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import FlareIcon from "@material-ui/icons/Flare";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
@@ -27,25 +27,26 @@ import { IPlayer } from "../useScene/IScene";
 
 export const PlayerRow: React.FC<{
   player: IPlayer;
-  highlight: boolean;
+  isMe: boolean;
   isGM: boolean;
   offline: boolean;
+  onDiceRoll(): void;
   onPlayedInTurnOrderChange(playedInTurnOrder: boolean): void;
-  onPlayerFatePointsChange(fatePoints: number): void;
+  onFatePointsChange(fatePoints: number): void;
   onPlayerRemove(): void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const diceManager = useFudgeDice(props.player.rolls);
+
+  const shouldRenderOfflinePlayerRemoveButton = props.offline && !props.isMe;
+  const shouldHighlight = props.isMe && !props.offline;
+  const canControl = props.isGM || props.isMe;
   const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
   const textColor = useTextColors(highlightBackgroundColor);
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
     : textColor.disabled;
-  const shouldRenderOfflinePlayerRemoveButton =
-    props.offline && !props.highlight;
-  const shouldRenderDiceResult = !props.offline || props.highlight;
-  const shouldHighlight = props.highlight && !props.offline;
   const rowStyle = css({
     backgroundColor: shouldHighlight ? highlightBackgroundColor : "transparent",
     color: shouldHighlight ? textColor.primary : undefined,
@@ -57,10 +58,13 @@ export const PlayerRow: React.FC<{
   const controlsRowStyle = css({
     padding: "0 0.5rem",
   });
+
+  const diceTextColors = useTextColors(highlightBackgroundColor);
   const diceStyle = css({
     fontSize: "1.2rem",
     lineHeight: Font.lineHeight(1.2),
     color: diceManager.state.color,
+    background: highlightBackgroundColor,
     border: `.1rem solid ${theme.palette.primary.main}`,
     width: "2rem",
     borderRadius: "4px",
@@ -77,6 +81,7 @@ export const PlayerRow: React.FC<{
     animationIterationCount: "infinite",
     animationTimingFunction: "linear",
   });
+
   return (
     <>
       <TableRow className={rowStyle}>
@@ -106,7 +111,7 @@ export const PlayerRow: React.FC<{
                     !props.player.playedDuringTurn
                   );
                 }}
-                disabled={!props.isGM}
+                disabled={!canControl}
                 size="small"
               >
                 {props.player.playedDuringTurn ? (
@@ -124,90 +129,123 @@ export const PlayerRow: React.FC<{
         </TableCell>
         <TableCell className={cx(playerInfoRowStyle)} align="center">
           <Tooltip title={t("player-row.fate-points")}>
-            <Badge badgeContent={props.player.fatePoints} color="primary">
-              <FlareIcon width="2"></FlareIcon>
-            </Badge>
+            <span>
+              <ButtonBase
+                className={css({
+                  borderRadius: "50%",
+                })}
+                disabled={!canControl}
+                onClick={() => {
+                  props.onFatePointsChange(props.player.fatePoints - 1);
+                }}
+              >
+                <Avatar
+                  className={css({
+                    background: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    width: "2rem",
+                    height: "2rem",
+                    margin: "0 auto",
+                  })}
+                >
+                  {props.player.fatePoints}
+                </Avatar>
+              </ButtonBase>
+            </span>
           </Tooltip>
         </TableCell>
         <TableCell className={cx(playerInfoRowStyle)} align="right">
-          {shouldRenderDiceResult && (
-            <Box display="flex" justifyContent="flex-end">
-              <Tooltip title={diceManager.state.tooltip}>
-                <Typography
-                  className={cx(diceStyle, {
-                    [diceRollingAnimationStyle]: diceManager.state.rolling,
+          <Box display="flex" justifyContent="flex-end">
+            <Tooltip title={diceManager.state.tooltip}>
+              <span>
+                <ButtonBase
+                  className={css({
+                    borderRadius: "4px%",
+                    color: diceTextColors.primary,
                   })}
+                  disabled={!canControl}
+                  onClick={() => {
+                    props.onDiceRoll();
+                  }}
                 >
-                  {diceManager.state.label}
-                </Typography>
-              </Tooltip>
-            </Box>
-          )}
+                  <Typography
+                    className={cx(diceStyle, {
+                      [diceRollingAnimationStyle]: diceManager.state.rolling,
+                    })}
+                  >
+                    {diceManager.state.label}
+                  </Typography>
+                </ButtonBase>
+              </span>
+            </Tooltip>
+          </Box>
         </TableCell>
       </TableRow>
-      {props.isGM && (
-        <TableRow className={cx(rowStyle, controlsRowStyle)}>
-          <TableCell colSpan={4}>
-            <Grid container alignItems="center" justify="flex-end" spacing={1}>
-              <Grid item>
-                <Tooltip title={t("player-row.remove-fate-point")}>
-                  <span>
-                    <IconButton
-                      size="small"
-                      disabled={props.player.fatePoints === 0}
-                      onClick={() => {
-                        const fatePointsMinusOne = props.player.fatePoints - 1;
-                        const newValue =
-                          fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
-                        props.onPlayerFatePointsChange(newValue);
-                      }}
-                    >
-                      <RemoveCircleOutlineOutlinedIcon
-                        className={css({ width: "1.2rem", height: "auto" })}
-                      ></RemoveCircleOutlineOutlinedIcon>
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Grid>
+      {props.isGM && renderGMControls()}
+    </>
+  );
 
+  function renderGMControls() {
+    return (
+      <TableRow className={cx(rowStyle, controlsRowStyle)}>
+        <TableCell colSpan={4}>
+          <Grid container alignItems="center" justify="flex-end" spacing={1}>
+            <Grid item>
+              <Tooltip title={t("player-row.remove-fate-point")}>
+                <span>
+                  <IconButton
+                    size="small"
+                    disabled={props.player.fatePoints === 0}
+                    onClick={() => {
+                      const fatePointsMinusOne = props.player.fatePoints - 1;
+                      const newValue =
+                        fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
+                      props.onFatePointsChange(newValue);
+                    }}
+                  >
+                    <RemoveCircleOutlineOutlinedIcon
+                      className={css({ width: "1.2rem", height: "auto" })}
+                    ></RemoveCircleOutlineOutlinedIcon>
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </Grid>
+
+            <Grid item>
+              <Tooltip title={t("player-row.add-fate-point")}>
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    props.onFatePointsChange(props.player.fatePoints + 1);
+                  }}
+                >
+                  <AddCircleOutlineOutlinedIcon
+                    className={css({ width: "1.2rem", height: "auto" })}
+                  ></AddCircleOutlineOutlinedIcon>
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            {shouldRenderOfflinePlayerRemoveButton && (
               <Grid item>
-                <Tooltip title={t("player-row.add-fate-point")}>
+                <Tooltip title={t("player-row.remove-character")}>
                   <IconButton
                     size="small"
                     onClick={() => {
-                      props.onPlayerFatePointsChange(
-                        props.player.fatePoints + 1
-                      );
+                      props.onPlayerRemove();
                     }}
                   >
-                    <AddCircleOutlineOutlinedIcon
+                    <HighlightOffIcon
+                      color="error"
                       className={css({ width: "1.2rem", height: "auto" })}
-                    ></AddCircleOutlineOutlinedIcon>
+                    ></HighlightOffIcon>
                   </IconButton>
                 </Tooltip>
               </Grid>
-              {shouldRenderOfflinePlayerRemoveButton && (
-                <Grid item>
-                  <Tooltip title={t("player-row.remove-character")}>
-                    <IconButton
-                      size="small"
-                      onClick={() => {
-                        props.onPlayerRemove();
-                      }}
-                    >
-                      <HighlightOffIcon
-                        color="error"
-                        className={css({ width: "1.2rem", height: "auto" })}
-                      ></HighlightOffIcon>
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
-            </Grid>
-          </TableCell>
-        </TableRow>
-      )}
-    </>
-  );
+            )}
+          </Grid>
+        </TableCell>
+      </TableRow>
+    );
+  }
 };
 PlayerRow.displayName = "PlayerRow";

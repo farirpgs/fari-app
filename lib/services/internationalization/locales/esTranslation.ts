@@ -1,7 +1,7 @@
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
-export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
+export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "common.language.en": undefined,
   "common.language.pt": undefined,
   "common.language.es": undefined,
@@ -39,7 +39,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.cancel": undefined,
   "play-route.players": undefined,
   "play-route.connected": undefined,
-  "play-route.roll": undefined,
+  "play-route.roll-4-d-f": undefined,
   "play-route.name": undefined,
   "play-route.initiative-tracker": undefined,
   "play-route.init": undefined,
@@ -53,9 +53,8 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.add-aspect": undefined,
   "play-route.add-boost": undefined,
   "play-route.copy-game-link": undefined,
-  "play-route.reset-initiative": undefined,
+  "play-route.reset-turn-order": undefined,
   "play-route.reset-scene": undefined,
-  "play-route.reset-scene-confirmation": undefined,
   "play-route.error.title": undefined,
   "play-route.error.description1": undefined,
   "play-route.error.description2": undefined,
