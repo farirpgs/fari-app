@@ -19,7 +19,7 @@ export const enTranslation = {
   "home-route.play-offline.title": `Play Fate Offline`,
   "home-route.play-offline.description": `Meet up with your friends in person, cast your screen on a shared TV screen and enjoy playing Fate!`,
   "home-route.play-offline.button": `Start Offline Game`,
-  "cookie-consent.description": `This site requires cookies to provide you with a great user experience. By using Fari, you accept our use of cookies.`,
+  "cookie-consent.description": `This site uses cookies to provide you with a great user experience. By using Fari, you accept our use of cookies.`,
   "cookie-consent.button": `I accept`,
   "dice-route.meta.title": `Roll Fate Dice Online`,
   "dice-route.meta.description": `Roll Fate/Fudge dice online using this fair dice roller.`,
