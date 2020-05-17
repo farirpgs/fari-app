@@ -37,6 +37,10 @@ export const ContentEditable: React.FC<{
       className={css({
         outline: "none",
         wordBreak: "break-word",
+        img: {
+          width: "100%",
+          padding: ".5rem 0",
+        },
       })}
       ref={$ref}
       onInput={() => {

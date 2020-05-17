@@ -26,6 +26,14 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import ErrorIcon from "@material-ui/icons/Error";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import LoupeIcon from "@material-ui/icons/Loupe";
+import NoteIcon from "@material-ui/icons/Note";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
@@ -43,6 +51,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
+import { IPeerActions } from "./IPeerActions";
 import { defaultSceneName, useScene } from "./useScene/useScene";
 
 type IOnlineProps = {
@@ -218,13 +227,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
             padding: ".5rem",
           })}
         >
-          <Grid
-            container
-            spacing={2}
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
+          <Grid container spacing={2} alignItems="center">
+            <Grid
+              item
+              className={css({
+                flex: "1 0 auto",
+              })}
+            >
               <Typography
                 variant="overline"
                 className={css({
@@ -257,19 +266,39 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 </Typography>
               </Box>
             </Grid>
+            {isGM && (
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.resetPlayerPlayedStatus();
+                  }}
+                  variant="contained"
+                  color="secondary"
+                  endIcon={<EmojiPeopleIcon></EmojiPeopleIcon>}
+                >
+                  {t("play-route.reset-initiative")}
+                </Button>
+              </Grid>
+            )}
             <Grid item>
               <Button
                 variant="contained"
                 color="secondary"
                 onClick={() => {
                   if (isGM) {
-                    sceneManager.actions.updateGMRoll();
+                    sceneManager.actions.updatePlayerRoll(
+                      sceneManager.state.scene.gm.id,
+                      Dice.roll4DF()
+                    );
                   } else {
-                    connectionsManager.actions.sendToHost(Dice.roll4DF());
+                    connectionsManager.actions.sendToHost<IPeerActions>({
+                      action: "roll",
+                      payload: Dice.roll4DF(),
+                    });
                   }
                 }}
               >
-                {t("play-route.roll-4-d-f")}
+                {t("play-route.roll")}
               </Button>
             </Grid>
           </Grid>
@@ -290,11 +319,24 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     <PlayerRow
                       key={player.id}
                       isGM={isGM}
-                      highlight={props.userId === player.id}
+                      isMe={props.userId === player.id}
                       player={player}
                       offline={isOffline}
                       onPlayerRemove={() => {
                         sceneManager.actions.removeOfflinePlayer(player.id);
+                      }}
+                      onDiceRoll={() => {
+                        if (isGM) {
+                          sceneManager.actions.updatePlayerRoll(
+                            player.id,
+                            Dice.roll4DF()
+                          );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "roll",
+                            payload: Dice.roll4DF(),
+                          });
+                        }
                       }}
                       onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                         if (isGM) {
@@ -302,14 +344,24 @@ export const PlayPage: React.FC<IProps> = (props) => {
                             player.id,
                             playedInTurnOrder
                           );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "played-in-turn-order",
+                            payload: playedInTurnOrder,
+                          });
                         }
                       }}
-                      onPlayerFatePointsChange={(playedInTurnOrder) => {
+                      onFatePointsChange={(fatePoints) => {
                         if (isGM) {
                           sceneManager.actions.updatePlayerFatePoints(
                             player.id,
-                            playedInTurnOrder
+                            fatePoints
                           );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "update-fate-point",
+                            payload: fatePoints,
+                          });
                         }
                       }}
                     ></PlayerRow>
@@ -362,107 +414,109 @@ export const PlayPage: React.FC<IProps> = (props) => {
 
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
-    const shouldRenderEmptyAspectView = aspectIds.length === 0;
+    const hasAspects = aspectIds.length > 0;
     return (
       <Box pb="2rem">
-        <MagicGridContainer items={aspectIds.length}>
-          {aspectIds.map((aspectId) => {
-            return (
-              <Box
-                key={aspectId}
-                className={cx(
-                  css({
-                    width: isSmall ? "100%" : "33%",
-                    padding: "0 .5rem 1.5rem .5rem",
-                  })
-                )}
-              >
-                <IndexCard
+        {hasAspects && (
+          <MagicGridContainer items={aspectIds.length}>
+            {aspectIds.map((aspectId) => {
+              return (
+                <Box
                   key={aspectId}
-                  title={sceneManager.state.scene.aspects[aspectId].title}
-                  readonly={!isGM}
-                  content={sceneManager.state.scene.aspects[aspectId].content}
-                  color={sceneManager.state.scene.aspects[aspectId].color}
-                  isBoost={sceneManager.state.scene.aspects[aspectId].isBoost}
-                  freeInvokes={
-                    sceneManager.state.scene.aspects[aspectId].freeInvokes
-                  }
-                  physicalStress={
-                    sceneManager.state.scene.aspects[aspectId].physicalStress
-                  }
-                  mentalStress={
-                    sceneManager.state.scene.aspects[aspectId].mentalStress
-                  }
-                  consequences={
-                    sceneManager.state.scene.aspects[aspectId].consequences
-                  }
-                  onRemove={() => {
-                    sceneManager.actions.removeAspect(aspectId);
-                  }}
-                  onReset={() => {
-                    sceneManager.actions.resetAspect(aspectId);
-                  }}
-                  onTitleChange={(value) => {
-                    sceneManager.actions.updateAspectTitle(aspectId, value);
-                  }}
-                  onContentChange={(value) => {
-                    sceneManager.actions.updateAspectContent(aspectId, value);
-                  }}
-                  onFreeInvokeChange={(index, value) => {
-                    sceneManager.actions.updateAspectFreeInvoke(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onPhysicalStressChange={(index, value) => {
-                    sceneManager.actions.updateAspectPhysicalStress(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onMentalStressChange={(index, value) => {
-                    sceneManager.actions.updateAspectMentalStress(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onConsequenceChange={(index, value) => {
-                    sceneManager.actions.updateAspectConsequence(
-                      aspectId,
-                      index,
-                      value
-                    );
-                  }}
-                  onAddAspectFreeInvoke={() => {
-                    sceneManager.actions.addAspectFreeInvoke(aspectId);
-                  }}
-                  onAddAspectPhysicalStress={() => {
-                    sceneManager.actions.addAspectPhysicalStress(aspectId);
-                  }}
-                  onAddAspectMentalStress={() => {
-                    sceneManager.actions.addAspectMentalStress(aspectId);
-                  }}
-                  onAddConsequence={() => {
-                    sceneManager.actions.addAspectConsequence(aspectId);
-                  }}
-                  onUpdateAspectColor={(color: IndexCardColor) => {
-                    sceneManager.actions.updateAspectColor(aspectId, color);
-                  }}
-                ></IndexCard>
-              </Box>
-            );
-          })}
-        </MagicGridContainer>
-        {shouldRenderEmptyAspectView && (
+                  className={cx(
+                    css({
+                      width: isSmall ? "100%" : "33%",
+                      padding: "0 .5rem 1.5rem .5rem",
+                    })
+                  )}
+                >
+                  <IndexCard
+                    key={aspectId}
+                    title={sceneManager.state.scene.aspects[aspectId].title}
+                    readonly={!isGM}
+                    content={sceneManager.state.scene.aspects[aspectId].content}
+                    color={sceneManager.state.scene.aspects[aspectId].color}
+                    isBoost={sceneManager.state.scene.aspects[aspectId].isBoost}
+                    freeInvokes={
+                      sceneManager.state.scene.aspects[aspectId].freeInvokes
+                    }
+                    physicalStress={
+                      sceneManager.state.scene.aspects[aspectId].physicalStress
+                    }
+                    mentalStress={
+                      sceneManager.state.scene.aspects[aspectId].mentalStress
+                    }
+                    consequences={
+                      sceneManager.state.scene.aspects[aspectId].consequences
+                    }
+                    onRemove={() => {
+                      sceneManager.actions.removeAspect(aspectId);
+                    }}
+                    onReset={() => {
+                      sceneManager.actions.resetAspect(aspectId);
+                    }}
+                    onTitleChange={(value) => {
+                      sceneManager.actions.updateAspectTitle(aspectId, value);
+                    }}
+                    onContentChange={(value) => {
+                      sceneManager.actions.updateAspectContent(aspectId, value);
+                    }}
+                    onFreeInvokeChange={(index, value) => {
+                      sceneManager.actions.updateAspectFreeInvoke(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onPhysicalStressChange={(index, value) => {
+                      sceneManager.actions.updateAspectPhysicalStress(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onMentalStressChange={(index, value) => {
+                      sceneManager.actions.updateAspectMentalStress(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onConsequenceChange={(index, value) => {
+                      sceneManager.actions.updateAspectConsequence(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
+                    onAddAspectFreeInvoke={() => {
+                      sceneManager.actions.addAspectFreeInvoke(aspectId);
+                    }}
+                    onAddAspectPhysicalStress={() => {
+                      sceneManager.actions.addAspectPhysicalStress(aspectId);
+                    }}
+                    onAddAspectMentalStress={() => {
+                      sceneManager.actions.addAspectMentalStress(aspectId);
+                    }}
+                    onAddConsequence={() => {
+                      sceneManager.actions.addAspectConsequence(aspectId);
+                    }}
+                    onUpdateAspectColor={(color: IndexCardColor) => {
+                      sceneManager.actions.updateAspectColor(aspectId, color);
+                    }}
+                  ></IndexCard>
+                </Box>
+              );
+            })}
+          </MagicGridContainer>
+        )}
+        {!hasAspects && (
           <Box pt="6rem" textAlign="center">
             {isGM ? (
               <Typography variant="h6">
                 {t("play-route.click-on-the-")}
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   color="secondary"
                   className={css({
                     margin: "0 .5rem",
@@ -470,6 +524,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addAspect();
                   }}
+                  endIcon={<NoteIcon></NoteIcon>}
                 >
                   {t("play-route.click-on-the-add-aspect-")}
                 </Button>
@@ -515,8 +570,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addAspect();
                   }}
-                  variant="outlined"
+                  variant="contained"
                   color="secondary"
+                  endIcon={<NoteIcon></NoteIcon>}
                 >
                   {t("play-route.add-aspect")}
                 </Button>
@@ -526,8 +582,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addBoost();
                   }}
-                  variant="outlined"
+                  variant="contained"
                   color="secondary"
+                  endIcon={<LoupeIcon></LoupeIcon>}
                 >
                   {t("play-route.add-boost")}
                 </Button>
@@ -538,8 +595,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     onClick={() => {
                       setOfflineCharacterDialogOpen(true);
                     }}
-                    variant="outlined"
+                    variant="contained"
                     color="secondary"
+                    endIcon={<PersonAddIcon></PersonAddIcon>}
                   >
                     {t("play-route.add-character")}
                   </Button>
@@ -566,6 +624,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         navigator.clipboard.writeText(props.shareLink);
                         setShareLinkToolTip({ open: true });
                       }}
+                      endIcon={<FileCopyIcon></FileCopyIcon>}
                     >
                       {t("play-route.copy-game-link")}
                     </Button>
@@ -578,27 +637,51 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 </Grid>
               </Hidden>
               <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.resetPlayerPlayedStatus();
-                  }}
-                >
-                  {t("play-route.reset-turn-order")}
-                </Button>
-              </Grid>
-              <Grid item>
                 <ThemeProvider theme={errorTheme}>
                   <Button
                     onClick={() => {
-                      sceneManager.actions.reset();
+                      const confirmed = confirm(
+                        t("play-route.reset-scene-confirmation")
+                      );
+                      if (confirmed) {
+                        sceneManager.actions.reset();
+                      }
                     }}
                     className={css({ borderRadius: "20px" })}
                     variant="text"
                     color="primary"
+                    endIcon={<ErrorIcon></ErrorIcon>}
                   >
                     {t("play-route.reset-scene")}
                   </Button>
                 </ThemeProvider>
+              </Grid>
+              <Hidden smDown>
+                <Grid item className={css({ display: "flex" })}>
+                  <Divider orientation="vertical" flexItem />
+                </Grid>
+              </Hidden>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.fireGoodConfetti();
+                  }}
+                  variant="text"
+                  color="primary"
+                >
+                  <ThumbUpIcon></ThumbUpIcon>
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    sceneManager.actions.fireBadConfetti();
+                  }}
+                  variant="text"
+                  color="primary"
+                >
+                  <ThumbDownIcon></ThumbDownIcon>
+                </Button>
               </Grid>
             </Grid>
           )}

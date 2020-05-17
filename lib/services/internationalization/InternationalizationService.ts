@@ -3,6 +3,7 @@ import detector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
+import { esTranslation } from "./locales/esTranslation";
 import { ptTranslation } from "./locales/ptTranslation";
 
 export class InternationalizationService {
@@ -24,6 +25,9 @@ export class InternationalizationService {
           },
           pt: {
             translation: ptTranslation,
+          },
+          es: {
+            translation: esTranslation,
           },
           dev: {
             translation: devTranslation,

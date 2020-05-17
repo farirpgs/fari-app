@@ -6,4 +6,5 @@ module.exports = {
       isolatedModules: true,
     },
   },
+  reporters: ["default", "jest-junit"],
 };
