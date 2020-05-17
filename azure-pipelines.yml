@@ -45,6 +45,6 @@ steps:
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
   - script: |
-      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
     displayName: "deploy prod"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
