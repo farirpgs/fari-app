@@ -9,6 +9,7 @@ import {
   MenuItem,
   Paper,
   TextField,
+  Tooltip,
   Typography,
   useTheme,
 } from "@material-ui/core";
@@ -284,22 +285,24 @@ export const IndexCard: React.FC<{
               {props.physicalStress.map((value, index) => {
                 return (
                   <Grid item key={index} xs={2}>
-                    <Checkbox
-                      checked={value}
-                      onChange={(event) => {
-                        if (props.readonly) {
-                          return;
-                        }
-                        props.onPhysicalStressChange(
-                          index,
-                          event.target.checked
-                        );
-                      }}
-                      className={css({
-                        color: theme.palette.primary.main,
-                      })}
-                      color="primary"
-                    />
+                    <Tooltip title={index + 1}>
+                      <Checkbox
+                        checked={value}
+                        onChange={(event) => {
+                          if (props.readonly) {
+                            return;
+                          }
+                          props.onPhysicalStressChange(
+                            index,
+                            event.target.checked
+                          );
+                        }}
+                        className={css({
+                          color: theme.palette.primary.main,
+                        })}
+                        color="primary"
+                      />
+                    </Tooltip>
                   </Grid>
                 );
               })}
@@ -313,19 +316,24 @@ export const IndexCard: React.FC<{
               {props.mentalStress.map((value, index) => {
                 return (
                   <Grid item key={index} xs={2}>
-                    <Checkbox
-                      checked={value}
-                      onChange={(event) => {
-                        if (props.readonly) {
-                          return;
-                        }
-                        props.onMentalStressChange(index, event.target.checked);
-                      }}
-                      className={css({
-                        color: theme.palette.secondary.main,
-                      })}
-                      color="secondary"
-                    />
+                    <Tooltip title={index + 1}>
+                      <Checkbox
+                        checked={value}
+                        onChange={(event) => {
+                          if (props.readonly) {
+                            return;
+                          }
+                          props.onMentalStressChange(
+                            index,
+                            event.target.checked
+                          );
+                        }}
+                        className={css({
+                          color: theme.palette.secondary.main,
+                        })}
+                        color="secondary"
+                      />
+                    </Tooltip>
                   </Grid>
                 );
               })}
