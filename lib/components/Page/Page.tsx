@@ -106,7 +106,12 @@ export const Page: React.FC<{
         <CookieConsent></CookieConsent>
         <Container>
           <Grid container justify="flex-end" spacing={4} alignItems="center">
-            <Grid item>
+            <Grid
+              item
+              className={css({
+                flex: "1 0 auto",
+              })}
+            >
               <Typography>
                 <Link href="https://www.netlify.com">
                   This site is powered by Netlify
