@@ -6,17 +6,45 @@
 trigger:
   - master
 
+
+variables:
+  YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
+
 pool:
   vmImage: "ubuntu-latest"
 
 steps:
   - task: NodeTool@0
+    displayName: "Install Node.js"
     inputs:
       versionSpec: "10.x"
-    displayName: "Install Node.js"
+
+  - task: Cache@2
+    inputs:
+      key: 'yarn | "$(Agent.OS)" | yarn.lock'
+      restoreKeys: |
+          yarn | "$(Agent.OS)"
+      path: $(YARN_CACHE_FOLDER)
+    displayName: cache yarn packages
 
   - script: |
       yarn install
+    displayName: "yarn install"
+
+  - script: |
       yarn run validate
+    displayName: "yarn validate"
+
+  - script: |
       yarn run build
-    displayName: "yarn install and build"
+    displayName: "yarn build"
+
+  - script: |
+      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+    displayName: "deploy preview"
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - script: |
+      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
+    displayName: "deploy prod"
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))

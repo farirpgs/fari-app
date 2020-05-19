@@ -27,11 +27,11 @@ import { IPlayer } from "../useScene/IScene";
 
 export const PlayerRow: React.FC<{
   player: IPlayer;
-  isMe: boolean;
   isGM: boolean;
+  isMe: boolean;
   offline: boolean;
   onDiceRoll(): void;
-  onPlayedInTurnOrderChange(playedInTurnOrder: boolean): void;
+  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onFatePointsChange(fatePoints: number): void;
   onPlayerRemove(): void;
 }> = (props) => {
@@ -82,6 +82,17 @@ export const PlayerRow: React.FC<{
     animationTimingFunction: "linear",
   });
 
+  const fatePointsStyle = css({
+    background:
+      props.player.fatePoints === 0
+        ? textColor.disabled
+        : theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    transition: theme.transitions.create("background"),
+    width: "2rem",
+    height: "2rem",
+    margin: "0 auto",
+  });
   return (
     <>
       <TableRow className={rowStyle}>
@@ -93,7 +104,9 @@ export const PlayerRow: React.FC<{
               lineHeight: Font.lineHeight(1.2),
             })}
           >
-            {t(props.player.playerName as IPossibleTranslationKeys)}
+            {props.isGM
+              ? t(props.player.playerName as IPossibleTranslationKeys)
+              : props.player.playerName}
           </Typography>
         </TableCell>
         <TableCell className={playerInfoRowStyle} align="center">
@@ -139,15 +152,7 @@ export const PlayerRow: React.FC<{
                   props.onFatePointsChange(props.player.fatePoints - 1);
                 }}
               >
-                <Avatar
-                  className={css({
-                    background: theme.palette.primary.main,
-                    color: theme.palette.primary.contrastText,
-                    width: "2rem",
-                    height: "2rem",
-                    margin: "0 auto",
-                  })}
-                >
+                <Avatar className={fatePointsStyle}>
                   {props.player.fatePoints}
                 </Avatar>
               </ButtonBase>

@@ -8,6 +8,10 @@ Fari is a <b>Fate RPG Companion</b> Application created by René-Pier Deshaies-G
 
 It is! You can contribute to the project on [Github](https://github.com/fariapp/fari)
 
+### Is there a changelog ?
+
+Yes, [here you go](/changelog).
+
 ### Is the Dice Roller fair ?
 
 It is! The fairness of the Dice Roller is validated every time a code modification is done using automated tests that execute 50,000 dice rolls.

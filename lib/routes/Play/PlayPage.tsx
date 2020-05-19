@@ -26,12 +26,15 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+import BugReportIcon from "@material-ui/icons/BugReport";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
+import FaceIcon from "@material-ui/icons/Face";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { css, cx } from "emotion";
@@ -43,6 +46,7 @@ import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
@@ -52,6 +56,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { IPeerActions } from "./IPeerActions";
+import { AspectType } from "./useScene/AspectType";
 import { defaultSceneName, useScene } from "./useScene/useScene";
 
 type IOnlineProps = {
@@ -270,7 +275,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <Grid item>
                 <Button
                   onClick={() => {
-                    sceneManager.actions.resetPlayerPlayedStatus();
+                    sceneManager.actions.resetInitiative();
                   }}
                   variant="contained"
                   color="secondary"
@@ -340,7 +345,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                         if (isGM) {
-                          sceneManager.actions.updatePlayerPlayedStatus(
+                          sceneManager.actions.updatePlayerPlayedDuringTurn(
                             player.id,
                             playedInTurnOrder
                           );
@@ -415,11 +420,18 @@ export const PlayPage: React.FC<IProps> = (props) => {
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const hasAspects = aspectIds.length > 0;
+    const sortedAspectIds = arraySort(aspectIds, [
+      (id) => {
+        const aspect = sceneManager.state.scene.aspects[id];
+        return { value: aspect.type, direction: "asc" };
+      },
+    ]);
+    const aspects = sceneManager.state.scene.sort ? sortedAspectIds : aspectIds;
     return (
       <Box pb="2rem">
         {hasAspects && (
           <MagicGridContainer items={aspectIds.length}>
-            {aspectIds.map((aspectId) => {
+            {aspects.map((aspectId) => {
               return (
                 <Box
                   key={aspectId}
@@ -432,23 +444,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 >
                   <IndexCard
                     key={aspectId}
-                    title={sceneManager.state.scene.aspects[aspectId].title}
+                    aspect={sceneManager.state.scene.aspects[aspectId]}
                     readonly={!isGM}
-                    content={sceneManager.state.scene.aspects[aspectId].content}
-                    color={sceneManager.state.scene.aspects[aspectId].color}
-                    isBoost={sceneManager.state.scene.aspects[aspectId].isBoost}
-                    freeInvokes={
-                      sceneManager.state.scene.aspects[aspectId].freeInvokes
-                    }
-                    physicalStress={
-                      sceneManager.state.scene.aspects[aspectId].physicalStress
-                    }
-                    mentalStress={
-                      sceneManager.state.scene.aspects[aspectId].mentalStress
-                    }
-                    consequences={
-                      sceneManager.state.scene.aspects[aspectId].consequences
-                    }
                     onRemove={() => {
                       sceneManager.actions.removeAspect(aspectId);
                     }}
@@ -504,6 +501,12 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     onUpdateAspectColor={(color: IndexCardColor) => {
                       sceneManager.actions.updateAspectColor(aspectId, color);
                     }}
+                    onPlayedInTurnOrderChange={(playedDuringTurn) => {
+                      sceneManager.actions.updateAspectPlayerDuringTurn(
+                        aspectId,
+                        playedDuringTurn
+                      );
+                    }}
                   ></IndexCard>
                 </Box>
               );
@@ -522,7 +525,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     margin: "0 .5rem",
                   })}
                   onClick={() => {
-                    sceneManager.actions.addAspect();
+                    sceneManager.actions.addAspect(AspectType.Aspect);
                   }}
                   endIcon={<NoteIcon></NoteIcon>}
                 >
@@ -564,126 +567,169 @@ export const PlayPage: React.FC<IProps> = (props) => {
 
         <Box>
           {isGM && (
-            <Grid container spacing={1} justify="center">
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.addAspect();
-                  }}
-                  variant="contained"
-                  color="secondary"
-                  endIcon={<NoteIcon></NoteIcon>}
-                >
-                  {t("play-route.add-aspect")}
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.addBoost();
-                  }}
-                  variant="contained"
-                  color="secondary"
-                  endIcon={<LoupeIcon></LoupeIcon>}
-                >
-                  {t("play-route.add-boost")}
-                </Button>
-              </Grid>
-              {isOffline && (
-                <Grid item>
-                  <Button
-                    onClick={() => {
-                      setOfflineCharacterDialogOpen(true);
-                    }}
-                    variant="contained"
-                    color="secondary"
-                    endIcon={<PersonAddIcon></PersonAddIcon>}
-                  >
-                    {t("play-route.add-character")}
-                  </Button>
-                </Grid>
-              )}
-              {props.shareLink && (
-                <Grid item>
-                  <input
-                    ref={shareLinkInputRef}
-                    type="text"
-                    value={props.shareLink}
-                    readOnly
-                    hidden
-                  />
-                  <Tooltip
-                    open={shareLinkToolTip.open}
-                    title="Copied!"
-                    placement="top"
-                  >
+            <>
+              <Box pb="1rem">
+                <Grid container spacing={1} justify="center">
+                  <Grid item>
                     <Button
                       onClick={() => {
-                        shareLinkInputRef.current.select();
-                        document.execCommand("copy");
-                        navigator.clipboard.writeText(props.shareLink);
-                        setShareLinkToolTip({ open: true });
+                        sceneManager.actions.addAspect(AspectType.Aspect);
                       }}
-                      endIcon={<FileCopyIcon></FileCopyIcon>}
+                      variant="contained"
+                      color="secondary"
+                      endIcon={<NoteIcon></NoteIcon>}
                     >
-                      {t("play-route.copy-game-link")}
+                      {t("play-route.add-aspect")}
                     </Button>
-                  </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        sceneManager.actions.addAspect(AspectType.Boost);
+                      }}
+                      variant="contained"
+                      color="secondary"
+                      endIcon={<LoupeIcon></LoupeIcon>}
+                    >
+                      {t("play-route.add-boost")}
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        sceneManager.actions.addAspect(AspectType.NPC);
+                      }}
+                      variant="contained"
+                      color="secondary"
+                      endIcon={<FaceIcon></FaceIcon>}
+                    >
+                      {t("play-route.add-npc")}
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        sceneManager.actions.addAspect(AspectType.BadGuy);
+                      }}
+                      variant="contained"
+                      color="secondary"
+                      endIcon={<BugReportIcon></BugReportIcon>}
+                    >
+                      {t("play-route.add-bad-guy")}
+                    </Button>
+                  </Grid>
                 </Grid>
-              )}
-              <Hidden smDown>
-                <Grid item className={css({ display: "flex" })}>
-                  <Divider orientation="vertical" flexItem />
-                </Grid>
-              </Hidden>
-              <Grid item>
-                <ThemeProvider theme={errorTheme}>
+              </Box>
+              <Grid container spacing={1} justify="center">
+                <Grid item>
                   <Button
                     onClick={() => {
-                      const confirmed = confirm(
-                        t("play-route.reset-scene-confirmation")
-                      );
-                      if (confirmed) {
-                        sceneManager.actions.reset();
-                      }
+                      sceneManager.actions.fireGoodConfetti();
                     }}
-                    className={css({ borderRadius: "20px" })}
                     variant="text"
                     color="primary"
-                    endIcon={<ErrorIcon></ErrorIcon>}
                   >
-                    {t("play-route.reset-scene")}
+                    <ThumbUpIcon></ThumbUpIcon>
                   </Button>
-                </ThemeProvider>
-              </Grid>
-              <Hidden smDown>
-                <Grid item className={css({ display: "flex" })}>
-                  <Divider orientation="vertical" flexItem />
                 </Grid>
-              </Hidden>
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.fireGoodConfetti();
-                  }}
-                  variant="text"
-                  color="primary"
-                >
-                  <ThumbUpIcon></ThumbUpIcon>
-                </Button>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      sceneManager.actions.fireBadConfetti();
+                    }}
+                    variant="text"
+                    color="primary"
+                  >
+                    <ThumbDownIcon></ThumbDownIcon>
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      props.sceneManager.actions.toggleSort();
+                    }}
+                    variant="outlined"
+                    color={
+                      props.sceneManager.state.scene.sort
+                        ? "secondary"
+                        : "default"
+                    }
+                    endIcon={<SortIcon></SortIcon>}
+                  >
+                    {t("play-route.sort")}
+                  </Button>
+                </Grid>
+                {isOffline && (
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        setOfflineCharacterDialogOpen(true);
+                      }}
+                      variant="outlined"
+                      color="default"
+                      endIcon={<PersonAddIcon></PersonAddIcon>}
+                    >
+                      {t("play-route.add-character")}
+                    </Button>
+                  </Grid>
+                )}
+                {props.shareLink && (
+                  <Grid item>
+                    <input
+                      ref={shareLinkInputRef}
+                      type="text"
+                      value={props.shareLink}
+                      readOnly
+                      hidden
+                    />
+                    <Tooltip
+                      open={shareLinkToolTip.open}
+                      title="Copied!"
+                      placement="top"
+                    >
+                      <Button
+                        onClick={() => {
+                          shareLinkInputRef.current.select();
+                          document.execCommand("copy");
+                          navigator.clipboard.writeText(props.shareLink);
+                          setShareLinkToolTip({ open: true });
+                        }}
+                        variant="outlined"
+                        color="default"
+                        endIcon={<FileCopyIcon></FileCopyIcon>}
+                      >
+                        {t("play-route.copy-game-link")}
+                      </Button>
+                    </Tooltip>
+                  </Grid>
+                )}
+                <Hidden smDown>
+                  <Grid item className={css({ display: "flex" })}>
+                    <Divider orientation="vertical" flexItem />
+                  </Grid>
+                </Hidden>
+                <Grid item>
+                  <ThemeProvider theme={errorTheme}>
+                    <Button
+                      onClick={() => {
+                        const confirmed = confirm(
+                          t("play-route.reset-scene-confirmation")
+                        );
+                        if (confirmed) {
+                          sceneManager.actions.reset();
+                        }
+                      }}
+                      className={css({ borderRadius: "20px" })}
+                      variant="text"
+                      color="primary"
+                      endIcon={<ErrorIcon></ErrorIcon>}
+                    >
+                      {t("play-route.reset-scene")}
+                    </Button>
+                  </ThemeProvider>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.fireBadConfetti();
-                  }}
-                  variant="text"
-                  color="primary"
-                >
-                  <ThumbDownIcon></ThumbDownIcon>
-                </Button>
-              </Grid>
-            </Grid>
+            </>
           )}
         </Box>
       </Box>
