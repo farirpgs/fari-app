@@ -649,7 +649,11 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       props.sceneManager.actions.toggleSort();
                     }}
                     variant="outlined"
-                    color="default"
+                    color={
+                      props.sceneManager.state.scene.sort
+                        ? "secondary"
+                        : "default"
+                    }
                     endIcon={<SortIcon></SortIcon>}
                   >
                     {t("play-route.sort")}

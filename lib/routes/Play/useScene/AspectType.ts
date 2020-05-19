@@ -1,6 +1,6 @@
 export enum AspectType {
-  Aspect = 1,
-  Boost = 2,
+  Aspect = 2,
+  Boost = 3,
   BadGuy = 0,
-  NPC = 3,
+  NPC = 1,
 }
