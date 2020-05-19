@@ -1,6 +1,6 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
-## 2.2.0 (May 19, 2020)
+## 2.2.x (May 19, 2020)
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
@@ -16,7 +16,7 @@
 - feat: aspect initiative tracker
 - fix: reset scene button prompt
 
-## 2.1.0 (May 15, 2020)
+## 2.1.x (May 15, 2020)
 
 - feat: grid System for Index Cards
 - feat: dice Animations
@@ -26,7 +26,7 @@
 - doc: new LICENSE file
 - fix: nbsp and tags in title of the page
 
-## 2.0.0 (May 8, 2020)
+## 2.0.x (May 8, 2020)
 
 - feat: real-Time Modifications (The GM controls the scene, players see modifications in real-time)
 - feat: index Cards (Aspects, Boost, Colorization, Invokes and Stress & Consequences for bad guys)
@@ -36,7 +36,7 @@
 
 https://www.reddit.com/r/FATErpg/comments/gg00pr/announcing_fari_20_the_best_fate_rpg_companion/
 
-## 1.0.0 (Dec 15, 2019)
+## 1.0.x (Dec 15, 2019)
 
 - feat: initial proof of concept
 
