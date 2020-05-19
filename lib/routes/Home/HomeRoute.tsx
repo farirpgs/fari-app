@@ -17,17 +17,19 @@ export const HomeRoute: React.FC<{}> = (props) => {
         description={t("home-route.meta.description")}
       ></PageMeta>
       <Box>
-        <Container maxWidth="xs">
+        <Container maxWidth="sm">
           <Box pb="2rem" textAlign="center">
             <img width="150px" src={appIcon} />
           </Box>
           <Box pb="2rem" textAlign="center">
             <Typography variant="h4">{t("home-route.welcome")}</Typography>
           </Box>
-          <Box pb="4rem" textAlign="center">
+          <Box pb="1rem" textAlign="center">
             <Typography variant="subtitle1">
               {t("home-route.subtitle1")}
             </Typography>
+          </Box>
+          <Box pb="4rem" textAlign="center">
             <Typography variant="subtitle1">
               {t("home-route.subtitle2")}
             </Typography>
