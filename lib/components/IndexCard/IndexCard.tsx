@@ -159,7 +159,7 @@ export const IndexCard: React.FC<{
               onClick={() => {
                 props.onPlayedInTurnOrderChange(!props.aspect.playedDuringTurn);
               }}
-              // disabled={props.readonly}
+              disabled={props.readonly}
               size="small"
             >
               {props.aspect.playedDuringTurn ? (
