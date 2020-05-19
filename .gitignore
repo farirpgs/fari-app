@@ -95,6 +95,9 @@ typings/
 # End of https://www.gitignore.io/api/node
 
 dist
+
 # Local Netlify folder
 .netlify
+
+# junit test results
 junit.xml
