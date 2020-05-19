@@ -5,6 +5,7 @@ import { v4 as uuidV4 } from "uuid";
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
@@ -65,20 +66,11 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
-  function addAspect() {
+  function addAspect(type: AspectType) {
     setScene(
       produce((draft: IScene) => {
         const id = uuidV4();
-        draft.aspects[id] = defaultSceneAspect;
-      })
-    );
-  }
-
-  function addBoost() {
-    setScene(
-      produce((draft: IScene) => {
-        const id = uuidV4();
-        draft.aspects[id] = defaultSceneBoost;
+        draft.aspects[id] = defaultAspects[type];
       })
     );
   }
@@ -94,11 +86,7 @@ export function useScene(userId: string, gameId: string) {
   function resetAspect(id: string) {
     setScene(
       produce((draft: IScene) => {
-        if (draft.aspects[id].isBoost) {
-          draft.aspects[id] = defaultSceneBoost;
-        } else {
-          draft.aspects[id] = defaultSceneAspect;
-        }
+        draft.aspects[id] = defaultAspects[draft.aspects[id].type];
       })
     );
   }
@@ -304,7 +292,6 @@ export function useScene(userId: string, gameId: string) {
       safeSetScene,
       setName,
       addAspect,
-      addBoost,
       removeAspect,
       resetAspect,
       updateAspectTitle,
@@ -332,7 +319,8 @@ export function useScene(userId: string, gameId: string) {
 }
 
 export const defaultSceneName = "Name of your scene...";
-const defaultSceneAspect: IAspect = {
+
+const defaultAspect: IAspect = {
   title: "",
   content: "<br/>",
   freeInvokes: [],
@@ -340,10 +328,10 @@ const defaultSceneAspect: IAspect = {
   mentalStress: [],
   consequences: [],
   color: IndexCardColor.White,
-  isBoost: false,
+  type: AspectType.Aspect,
 };
 
-const defaultSceneBoost: IAspect = {
+const defaultBoost: IAspect = {
   title: "",
   content: "<br/>",
   freeInvokes: [false],
@@ -351,6 +339,36 @@ const defaultSceneBoost: IAspect = {
   mentalStress: [],
   consequences: [],
   color: IndexCardColor.Blue,
-  isBoost: true,
+  type: AspectType.Boost,
 };
+
+const defaultNPC: IAspect = {
+  title: "",
+  content: "<br/>",
+  freeInvokes: [],
+  physicalStress: [],
+  mentalStress: [],
+  consequences: [],
+  color: IndexCardColor.Green,
+  type: AspectType.NPC,
+};
+
+const defaultBadGuy: IAspect = {
+  title: "",
+  content: "<br/>",
+  freeInvokes: [],
+  physicalStress: [],
+  mentalStress: [],
+  consequences: [],
+  color: IndexCardColor.Red,
+  type: AspectType.BadGuy,
+};
+
+const defaultAspects: Record<AspectType, IAspect> = {
+  [AspectType.Aspect]: defaultAspect,
+  [AspectType.Boost]: defaultBoost,
+  [AspectType.NPC]: defaultNPC,
+  [AspectType.BadGuy]: defaultBadGuy,
+};
+
 const defaultSceneAspects = {};

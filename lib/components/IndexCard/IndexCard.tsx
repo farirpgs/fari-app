@@ -18,19 +18,14 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { AspectType } from "../../routes/Play/useScene/AspectType";
+import { IAspect } from "../../routes/Play/useScene/IScene";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardColor, IndexCardColorBright } from "./IndexCardColor";
 
 export const IndexCard: React.FC<{
-  title: string;
-  content: string;
+  aspect: IAspect;
   readonly: boolean;
-  freeInvokes: Array<boolean>;
-  physicalStress: Array<boolean>;
-  mentalStress: Array<boolean>;
-  consequences: Array<string>;
-  color: string;
-  isBoost: boolean;
   className?: string;
 
   onTitleChange(value: string): void;
@@ -53,14 +48,17 @@ export const IndexCard: React.FC<{
   const $menu = useRef(undefined);
   const colorPickerBackground = theme.palette.primary.main;
   const shouldRenderCheckboxesOrConsequences =
-    props.freeInvokes.length > 0 ||
-    props.physicalStress.length > 0 ||
-    props.mentalStress.length > 0 ||
-    props.consequences.length > 0;
+    props.aspect.freeInvokes.length > 0 ||
+    props.aspect.physicalStress.length > 0 ||
+    props.aspect.mentalStress.length > 0 ||
+    props.aspect.consequences.length > 0;
 
+  const shouldRenderAspectMenuItems = props.aspect.type !== AspectType.Boost;
+  const shouldRenderContent = props.aspect.type !== AspectType.Boost;
+  const isNotAspect = props.aspect.type !== AspectType.Aspect;
   return (
     <Paper elevation={undefined} className={props.className}>
-      <Box bgcolor={props.color}>
+      <Box bgcolor={props.aspect.color}>
         <Box
           className={css({
             fontSize: "1.5rem",
@@ -69,22 +67,28 @@ export const IndexCard: React.FC<{
             borderBottom: "1px solid #f0a4a4",
           })}
         >
-          <Box p={props.isBoost ? "0 1rem 1rem 1rem" : "1rem"}>
-            {props.isBoost && (
+          <Box p={"0 1rem 1rem 1rem"}>
+            <Grid
+              container
+              justify="space-between"
+              alignItems="center"
+              spacing={2}
+            >
               <Grid item>
                 <Typography variant="overline">
-                  {t("index-card.boost")}
+                  {props.aspect.type === AspectType.Aspect && (
+                    <>{t("index-card.aspect")}</>
+                  )}
+                  {props.aspect.type === AspectType.Boost && (
+                    <>{t("index-card.boost")}</>
+                  )}
+                  {props.aspect.type === AspectType.NPC && (
+                    <>{t("index-card.npc")}</>
+                  )}
+                  {props.aspect.type === AspectType.BadGuy && (
+                    <>{t("index-card.bad-guy")}</>
+                  )}
                 </Typography>
-              </Grid>
-            )}
-            <Grid container justify="space-between">
-              <Grid item xs>
-                <ContentEditable
-                  value={props.title}
-                  readonly={props.readonly}
-                  autoFocus
-                  onChange={props.onTitleChange}
-                ></ContentEditable>
               </Grid>
               {!props.readonly && (
                 <Grid item>
@@ -110,15 +114,43 @@ export const IndexCard: React.FC<{
                       setMenuOpen(false);
                     }}
                   >
-                    {!props.isBoost && renderAspectMenuItems()}
+                    {shouldRenderAspectMenuItems && renderAspectMenuItems()}
                     {renderGlobalMenuItems()}
                   </Menu>
                 </Grid>
               )}
+              {/* <Grid item>
+                  {props.aspect.type === AspectType.Boost && (
+                    <>
+                      <LoupeIcon></LoupeIcon>
+                    </>
+                  )}
+                  {props.aspect.type === AspectType.NPC && (
+                    <>
+                      <FaceIcon></FaceIcon>
+                    </>
+                  )}
+                  {props.aspect.type === AspectType.BadGuy && (
+                    <>
+                      <BugReportIcon></BugReportIcon>
+                    </>
+                  )}
+                </Grid> */}
+            </Grid>
+
+            <Grid container justify="space-between">
+              <Grid item xs>
+                <ContentEditable
+                  value={props.aspect.title}
+                  readonly={props.readonly}
+                  autoFocus
+                  onChange={props.onTitleChange}
+                ></ContentEditable>
+              </Grid>
             </Grid>
           </Box>
         </Box>
-        {!props.isBoost && renderContent()}
+        {shouldRenderContent && renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
       </Box>
@@ -235,7 +267,7 @@ export const IndexCard: React.FC<{
       >
         <Box p="0 1rem">
           <ContentEditable
-            value={props.content}
+            value={props.aspect.content}
             readonly={props.readonly}
             onChange={props.onContentChange}
           ></ContentEditable>
@@ -255,11 +287,11 @@ export const IndexCard: React.FC<{
       >
         <Box p=".5rem 1rem">
           <Box>
-            {props.freeInvokes.length > 0 && (
+            {props.aspect.freeInvokes.length > 0 && (
               <InputLabel shrink>{t("index-card.free-invokes")}</InputLabel>
             )}
             <Grid container justify="flex-start">
-              {props.freeInvokes.map((value, index) => {
+              {props.aspect.freeInvokes.map((value, index) => {
                 return (
                   <Grid item key={index} xs={2}>
                     <Checkbox
@@ -278,11 +310,11 @@ export const IndexCard: React.FC<{
             </Grid>
           </Box>
           <Box>
-            {props.physicalStress.length > 0 && (
+            {props.aspect.physicalStress.length > 0 && (
               <InputLabel shrink>{t("index-card.physical-stress")}</InputLabel>
             )}
             <Grid container justify="flex-start">
-              {props.physicalStress.map((value, index) => {
+              {props.aspect.physicalStress.map((value, index) => {
                 return (
                   <Grid item key={index} xs={2}>
                     <Tooltip title={index + 1}>
@@ -309,11 +341,11 @@ export const IndexCard: React.FC<{
             </Grid>
           </Box>
           <Box>
-            {props.mentalStress.length > 0 && (
+            {props.aspect.mentalStress.length > 0 && (
               <InputLabel shrink>{t("index-card.mental-stress")}</InputLabel>
             )}
             <Grid container justify="flex-start">
-              {props.mentalStress.map((value, index) => {
+              {props.aspect.mentalStress.map((value, index) => {
                 return (
                   <Grid item key={index} xs={2}>
                     <Tooltip title={index + 1}>
@@ -341,7 +373,7 @@ export const IndexCard: React.FC<{
           </Box>
           <Box>
             <Grid container justify="center">
-              {props.consequences.map((value, index) => {
+              {props.aspect.consequences.map((value, index) => {
                 return (
                   <Grid key={index} item xs={12}>
                     <Box py=".5rem">

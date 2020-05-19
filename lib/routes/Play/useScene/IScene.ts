@@ -1,5 +1,6 @@
 import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { AspectType } from "./AspectType";
 
 export interface IPlayer {
   id: string;
@@ -17,7 +18,7 @@ export interface IAspect {
   mentalStress: Array<boolean>;
   consequences: Array<string>;
   color: IndexCardColor;
-  isBoost: boolean;
+  type: AspectType;
 }
 
 export interface IScene {
