@@ -7,8 +7,9 @@ import { SentryService } from "./sentry/SentryService";
 const buildNumber = process.env.BUILD_ID ?? "0";
 const hash = process.env.COMMIT_REF ?? "0";
 const context: "localhost" | string = process.env.CONTEXT ?? "localhost";
+const version = process.env.npm_package_version;
 
-export const env = { buildNumber, hash, context };
+export const env = { buildNumber, hash, context, version };
 export const internationalizationService = new InternationalizationService();
 export const logger = new LoggerService();
 export const sentryService = new SentryService();

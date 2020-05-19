@@ -414,3 +414,17 @@ const defaultAspects: Record<AspectType, IAspect> = {
 };
 
 const defaultSceneAspects = {};
+
+export function sanitizeSceneName(sceneName: string) {
+  return sceneName === defaultSceneName
+    ? ""
+    : removeHTMLTags(removeNBSP(sceneName)).trim();
+}
+
+function removeNBSP(value: string) {
+  return value.replace(/&nbsp;/g, " ");
+}
+
+function removeHTMLTags(value: string) {
+  return value.replace(/<\/?[^>]+(>|$)/g, " ");
+}

@@ -24,6 +24,7 @@ import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedI
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { AppLink } from "../AppLink/AppLink";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 
@@ -113,9 +114,14 @@ export const Page: React.FC<{
               })}
             >
               <Typography>
-                <Link href="https://www.netlify.com">
+                <Link href="https://www.netlify.com" target="_blank">
                   This site is powered by Netlify
                 </Link>
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography>
+                <AppLink to="/changelog">{`v${env.version}`}</AppLink>
               </Typography>
             </Grid>
             <Grid item>

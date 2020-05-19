@@ -6,7 +6,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import content from "./About.md";
 
-const html = new showdown.Converter().makeHtml(content);
+const aboutHTML = new showdown.Converter().makeHtml(content);
 
 export const AboutRoute: React.FC<{}> = (props) => {
   const { t } = useTranslate();
@@ -19,7 +19,7 @@ export const AboutRoute: React.FC<{}> = (props) => {
       <Container maxWidth="md">
         <div
           dangerouslySetInnerHTML={{
-            __html: html,
+            __html: aboutHTML,
           }}
         ></div>
       </Container>
