@@ -55,6 +55,7 @@ export const enTranslation = {
   "play-route.add-npc": `Add NPC`,
   "play-route.add-bad-guy": `Add Bad Guy`,
   "play-route.copy-game-link": `Copy Game Link`,
+  "play-route.sort": `Sort`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene": `Reset Scene`,
   "play-route.reset-scene-confirmation": `Are you sure you want to reset your scene and remove all your current aspects?`,

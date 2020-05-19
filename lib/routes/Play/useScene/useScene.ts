@@ -25,6 +25,7 @@ export function useScene(userId: string, gameId: string) {
     players: [],
     goodConfetti: 0,
     badConfetti: 0,
+    sort: false,
   }));
 
   useEffect(() => {
@@ -230,18 +231,26 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
-  function resetPlayerPlayedStatus() {
+  function resetInitiative() {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
         });
+
+        const aspectIds = Object.keys(draft.aspects);
+        aspectIds.forEach((id) => {
+          draft.aspects[id].playedDuringTurn = false;
+        });
       })
     );
   }
 
-  function updatePlayerPlayedStatus(id: string, playedInTurnOrder: boolean) {
+  function updatePlayerPlayedDuringTurn(
+    id: string,
+    playedInTurnOrder: boolean
+  ) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
@@ -296,6 +305,22 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function updateAspectPlayerDuringTurn(id: string, playedDuringTurn: boolean) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].playedDuringTurn = playedDuringTurn;
+      })
+    );
+  }
+
+  function toggleSort() {
+    setScene(
+      produce((draft: IScene) => {
+        draft.sort = !draft.sort;
+      })
+    );
+  }
+
   return {
     state: { scene },
     actions: {
@@ -315,16 +340,18 @@ export function useScene(userId: string, gameId: string) {
       updateAspectMentalStress,
       addAspectConsequence,
       updateAspectConsequence,
+      updateAspectPlayerDuringTurn,
       updateAspectColor,
       updatePlayers,
       addOfflinePlayer,
       removeOfflinePlayer,
       updatePlayerFatePoints,
-      updatePlayerPlayedStatus,
-      resetPlayerPlayedStatus,
+      updatePlayerPlayedDuringTurn,
+      resetInitiative,
       updatePlayerRoll,
       fireGoodConfetti,
       fireBadConfetti,
+      toggleSort,
     },
   };
 }
@@ -340,6 +367,7 @@ const defaultAspect: IAspect = {
   consequences: [],
   color: IndexCardColor.White,
   type: AspectType.Aspect,
+  playedDuringTurn: false,
 };
 
 const defaultBoost: IAspect = {
@@ -351,6 +379,7 @@ const defaultBoost: IAspect = {
   consequences: [],
   color: IndexCardColor.Blue,
   type: AspectType.Boost,
+  playedDuringTurn: false,
 };
 
 const defaultNPC: IAspect = {
@@ -362,6 +391,7 @@ const defaultNPC: IAspect = {
   consequences: [],
   color: IndexCardColor.Green,
   type: AspectType.NPC,
+  playedDuringTurn: false,
 };
 
 const defaultBadGuy: IAspect = {
@@ -373,6 +403,7 @@ const defaultBadGuy: IAspect = {
   consequences: [],
   color: IndexCardColor.Red,
   type: AspectType.BadGuy,
+  playedDuringTurn: false,
 };
 
 const defaultAspects: Record<AspectType, IAspect> = {

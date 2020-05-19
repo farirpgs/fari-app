@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   InputLabel,
+  lighten,
   Menu,
   MenuItem,
   Paper,
@@ -13,10 +14,13 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
+import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
+import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectType } from "../../routes/Play/useScene/AspectType";
 import { IAspect } from "../../routes/Play/useScene/IScene";
@@ -39,6 +43,7 @@ export const IndexCard: React.FC<{
   onAddAspectMentalStress(): void;
   onAddConsequence(): void;
   onUpdateAspectColor(color: string): void;
+  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onRemove(): void;
   onReset(): void;
 }> = (props) => {
@@ -55,7 +60,15 @@ export const IndexCard: React.FC<{
 
   const shouldRenderAspectMenuItems = props.aspect.type !== AspectType.Boost;
   const shouldRenderContent = props.aspect.type !== AspectType.Boost;
-  const isNotAspect = props.aspect.type !== AspectType.Aspect;
+  const shouldRenderPlayedDuringTurnIcon =
+    props.aspect.type === AspectType.NPC ||
+    props.aspect.type === AspectType.BadGuy;
+  const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
+  const textColor = useTextColors(highlightBackgroundColor);
+  const playedDuringTurnColor = props.aspect.playedDuringTurn
+    ? theme.palette.primary.main
+    : textColor.disabled;
+
   return (
     <Paper elevation={undefined} className={props.className}>
       <Box bgcolor={props.aspect.color}>
@@ -68,86 +81,8 @@ export const IndexCard: React.FC<{
           })}
         >
           <Box p={"0 1rem 1rem 1rem"}>
-            <Grid
-              container
-              justify="space-between"
-              alignItems="center"
-              spacing={2}
-            >
-              <Grid item>
-                <Typography variant="overline">
-                  {props.aspect.type === AspectType.Aspect && (
-                    <>{t("index-card.aspect")}</>
-                  )}
-                  {props.aspect.type === AspectType.Boost && (
-                    <>{t("index-card.boost")}</>
-                  )}
-                  {props.aspect.type === AspectType.NPC && (
-                    <>{t("index-card.npc")}</>
-                  )}
-                  {props.aspect.type === AspectType.BadGuy && (
-                    <>{t("index-card.bad-guy")}</>
-                  )}
-                </Typography>
-              </Grid>
-              {!props.readonly && (
-                <Grid item>
-                  <IconButton
-                    ref={$menu}
-                    size="small"
-                    onClick={() => {
-                      setMenuOpen(true);
-                    }}
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
-                  <Menu
-                    classes={{
-                      list: css({
-                        paddingBottom: 0,
-                      }),
-                    }}
-                    anchorEl={$menu.current}
-                    keepMounted
-                    open={menuOpen}
-                    onClose={() => {
-                      setMenuOpen(false);
-                    }}
-                  >
-                    {shouldRenderAspectMenuItems && renderAspectMenuItems()}
-                    {renderGlobalMenuItems()}
-                  </Menu>
-                </Grid>
-              )}
-              {/* <Grid item>
-                  {props.aspect.type === AspectType.Boost && (
-                    <>
-                      <LoupeIcon></LoupeIcon>
-                    </>
-                  )}
-                  {props.aspect.type === AspectType.NPC && (
-                    <>
-                      <FaceIcon></FaceIcon>
-                    </>
-                  )}
-                  {props.aspect.type === AspectType.BadGuy && (
-                    <>
-                      <BugReportIcon></BugReportIcon>
-                    </>
-                  )}
-                </Grid> */}
-            </Grid>
-
-            <Grid container justify="space-between">
-              <Grid item xs>
-                <ContentEditable
-                  value={props.aspect.title}
-                  readonly={props.readonly}
-                  autoFocus
-                  onChange={props.onTitleChange}
-                ></ContentEditable>
-              </Grid>
-            </Grid>
+            {renderHeader()}
+            {renderTitle()}
           </Box>
         </Box>
         {shouldRenderContent && renderContent()}
@@ -156,6 +91,92 @@ export const IndexCard: React.FC<{
       </Box>
     </Paper>
   );
+
+  function renderHeader() {
+    return (
+      <Grid container justify="space-between" alignItems="center" spacing={2}>
+        <Grid item>
+          <Typography variant="overline">
+            {props.aspect.type === AspectType.Aspect && (
+              <>{t("index-card.aspect")}</>
+            )}
+            {props.aspect.type === AspectType.Boost && (
+              <>{t("index-card.boost")}</>
+            )}
+            {props.aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
+            {props.aspect.type === AspectType.BadGuy && (
+              <>{t("index-card.bad-guy")}</>
+            )}
+          </Typography>
+        </Grid>
+        {!props.readonly && (
+          <Grid item>
+            <IconButton
+              ref={$menu}
+              size="small"
+              onClick={() => {
+                setMenuOpen(true);
+              }}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              classes={{
+                list: css({
+                  paddingBottom: 0,
+                }),
+              }}
+              anchorEl={$menu.current}
+              keepMounted
+              open={menuOpen}
+              onClose={() => {
+                setMenuOpen(false);
+              }}
+            >
+              {shouldRenderAspectMenuItems && renderAspectMenuItems()}
+              {renderGlobalMenuItems()}
+            </Menu>
+          </Grid>
+        )}
+      </Grid>
+    );
+  }
+
+  function renderTitle() {
+    return (
+      <Grid container justify="space-between" alignItems="center" spacing={2}>
+        <Grid item xs>
+          <ContentEditable
+            value={props.aspect.title}
+            readonly={props.readonly}
+            autoFocus
+            onChange={props.onTitleChange}
+          ></ContentEditable>
+        </Grid>
+        <Grid item>
+          {shouldRenderPlayedDuringTurnIcon && (
+            <IconButton
+              onClick={() => {
+                props.onPlayedInTurnOrderChange(!props.aspect.playedDuringTurn);
+              }}
+              // disabled={props.readonly}
+              size="small"
+            >
+              {props.aspect.playedDuringTurn ? (
+                <DirectionsRunIcon
+                  htmlColor={playedDuringTurnColor}
+                ></DirectionsRunIcon>
+              ) : (
+                <EmojiPeopleIcon
+                  htmlColor={playedDuringTurnColor}
+                ></EmojiPeopleIcon>
+              )}
+            </IconButton>
+          )}
+        </Grid>
+      </Grid>
+    );
+  }
 
   function renderAspectMenuItems() {
     return [

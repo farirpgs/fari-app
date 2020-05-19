@@ -34,6 +34,7 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { css, cx } from "emotion";
@@ -45,6 +46,7 @@ import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
@@ -273,7 +275,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <Grid item>
                 <Button
                   onClick={() => {
-                    sceneManager.actions.resetPlayerPlayedStatus();
+                    sceneManager.actions.resetInitiative();
                   }}
                   variant="contained"
                   color="secondary"
@@ -343,7 +345,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                         if (isGM) {
-                          sceneManager.actions.updatePlayerPlayedStatus(
+                          sceneManager.actions.updatePlayerPlayedDuringTurn(
                             player.id,
                             playedInTurnOrder
                           );
@@ -418,11 +420,18 @@ export const PlayPage: React.FC<IProps> = (props) => {
   function renderMainContent() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const hasAspects = aspectIds.length > 0;
+    const sortedAspectIds = arraySort(aspectIds, [
+      (id) => {
+        const aspect = sceneManager.state.scene.aspects[id];
+        return { value: aspect.type, direction: "asc" };
+      },
+    ]);
+    const aspects = sceneManager.state.scene.sort ? sortedAspectIds : aspectIds;
     return (
       <Box pb="2rem">
         {hasAspects && (
           <MagicGridContainer items={aspectIds.length}>
-            {aspectIds.map((aspectId) => {
+            {aspects.map((aspectId) => {
               return (
                 <Box
                   key={aspectId}
@@ -491,6 +500,12 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     }}
                     onUpdateAspectColor={(color: IndexCardColor) => {
                       sceneManager.actions.updateAspectColor(aspectId, color);
+                    }}
+                    onPlayedInTurnOrderChange={(playedDuringTurn) => {
+                      sceneManager.actions.updateAspectPlayerDuringTurn(
+                        aspectId,
+                        playedDuringTurn
+                      );
                     }}
                   ></IndexCard>
                 </Box>
@@ -628,7 +643,18 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     <ThumbDownIcon></ThumbDownIcon>
                   </Button>
                 </Grid>
-
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      props.sceneManager.actions.toggleSort();
+                    }}
+                    variant="outlined"
+                    color="default"
+                    endIcon={<SortIcon></SortIcon>}
+                  >
+                    {t("play-route.sort")}
+                  </Button>
+                </Grid>
                 {isOffline && (
                   <Grid item>
                     <Button
@@ -636,7 +662,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         setOfflineCharacterDialogOpen(true);
                       }}
                       variant="outlined"
-                      color="secondary"
+                      color="default"
                       endIcon={<PersonAddIcon></PersonAddIcon>}
                     >
                       {t("play-route.add-character")}
@@ -664,6 +690,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
                           navigator.clipboard.writeText(props.shareLink);
                           setShareLinkToolTip({ open: true });
                         }}
+                        variant="outlined"
+                        color="default"
                         endIcon={<FileCopyIcon></FileCopyIcon>}
                       >
                         {t("play-route.copy-game-link")}

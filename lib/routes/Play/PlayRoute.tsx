@@ -26,7 +26,10 @@ export const PlayRoute: React.FC<{
         sceneManager.actions.updatePlayerFatePoints(id, peerAction.payload);
       }
       if (peerAction.action === "played-in-turn-order") {
-        sceneManager.actions.updatePlayerPlayedStatus(id, peerAction.payload);
+        sceneManager.actions.updatePlayerPlayedDuringTurn(
+          id,
+          peerAction.payload
+        );
       }
     },
     debug: debug,

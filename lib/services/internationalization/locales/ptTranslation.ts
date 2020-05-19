@@ -57,6 +57,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.add-npc": undefined,
   "play-route.add-bad-guy": undefined,
   "play-route.copy-game-link": undefined,
+  "play-route.sort": undefined,
   "play-route.reset-initiative": undefined,
   "play-route.reset-scene": undefined,
   "play-route.reset-scene-confirmation": undefined,

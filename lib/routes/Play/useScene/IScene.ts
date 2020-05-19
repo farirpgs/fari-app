@@ -18,6 +18,7 @@ export interface IAspect {
   mentalStress: Array<boolean>;
   consequences: Array<string>;
   color: IndexCardColor;
+  playedDuringTurn: boolean;
   type: AspectType;
 }
 
@@ -28,4 +29,5 @@ export interface IScene {
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;
+  sort: boolean;
 }

@@ -31,7 +31,7 @@ export const PlayerRow: React.FC<{
   isMe: boolean;
   offline: boolean;
   onDiceRoll(): void;
-  onPlayedInTurnOrderChange(playedInTurnOrder: boolean): void;
+  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onFatePointsChange(fatePoints: number): void;
   onPlayerRemove(): void;
 }> = (props) => {
