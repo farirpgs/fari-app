@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AboutRoute } from "../../routes/About/AboutRoute";
+import { ChangelogRoute } from "../../routes/ChangeLog/ChangeLogRoute";
 import { Characters } from "../../routes/Characters/Characters";
 import { CreateCharacter } from "../../routes/CreateCharacter/CreateCharacter";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
@@ -71,6 +72,13 @@ export const AppRouter = () => (
       path={"/about"}
       render={(props) => {
         return <AboutRoute />;
+      }}
+    />
+    <Route
+      exact
+      path={"/changelog"}
+      render={(props) => {
+        return <ChangelogRoute />;
       }}
     />
     <Route

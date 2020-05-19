@@ -28,6 +28,8 @@ export const enTranslation = {
   "dice-route.button": `Roll`,
   "about-route.meta.title": `About`,
   "about-route.meta.description": `Fari is a Fate RPG Companion Application created by René-Pier Deshaies-Gélinas`,
+  "changelog-route.meta.title": `Changelog`,
+  "changelog-route.meta.description": `Changelog for Fari`,
   "play-route.play": `Play!`,
   "play-route.awesome-name": `That's an awesome name by the way!`,
   "play-route.join-error": `The game you are trying to join does not exist`,

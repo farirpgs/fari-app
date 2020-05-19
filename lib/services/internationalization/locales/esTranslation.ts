@@ -30,6 +30,8 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "dice-route.button": undefined,
   "about-route.meta.title": undefined,
   "about-route.meta.description": undefined,
+  "changelog-route.meta.title": undefined,
+  "changelog-route.meta.description": undefined,
   "play-route.play": undefined,
   "play-route.awesome-name": undefined,
   "play-route.join-error": undefined,

@@ -1,13 +1,17 @@
 # CHANGELOG
 
-## 2.2.0
+## 2.2.0 (...)
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
 - feat: gm and players can click on a dice to roll it
 - feat: the dice page supports clicking on the dice to roll it
 - feat: confetti 🎉 on >= 3 or <= -3
+- feat: confetti buttons
 - feat: index cards tooltip on stress track checkboxes
+- feat: scene button re-arrangement and icons
+- feat: scene "add npc" button
+- feat: scene "add bad guy" button
 
 ## 2.1.0 (May 15, 2020)
 
