@@ -104,7 +104,9 @@ export const PlayerRow: React.FC<{
               lineHeight: Font.lineHeight(1.2),
             })}
           >
-            {t(props.player.playerName as IPossibleTranslationKeys)}
+            {props.isGM
+              ? t(props.player.playerName as IPossibleTranslationKeys)
+              : props.player.playerName}
           </Typography>
         </TableCell>
         <TableCell className={playerInfoRowStyle} align="center">
