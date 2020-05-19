@@ -30,18 +30,28 @@ export function useScene(userId: string, gameId: string) {
   useEffect(() => {
     if (scene.goodConfetti > 0) {
       Confetti.fireConfetti();
+      setScene(
+        produce((draft: IScene) => {
+          draft.goodConfetti = 0;
+        })
+      );
     }
   }, [scene.goodConfetti]);
 
   useEffect(() => {
     if (scene.badConfetti > 0) {
       Confetti.fireCannon();
+      setScene(
+        produce((draft: IScene) => {
+          draft.badConfetti = 0;
+        })
+      );
     }
   }, [scene.badConfetti]);
 
-  function safeSetScene(scene: IScene) {
-    if (scene) {
-      setScene(scene);
+  function safeSetScene(newScene: IScene) {
+    if (newScene) {
+      setScene(newScene);
     }
   }
 
@@ -277,6 +287,7 @@ export function useScene(userId: string, gameId: string) {
       })
     );
   }
+
   function fireBadConfetti() {
     setScene(
       produce((draft: IScene) => {
