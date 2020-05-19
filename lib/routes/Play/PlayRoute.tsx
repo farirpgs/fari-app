@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPeerActions } from "./IPeerActions";
 import { PlayPage } from "./PlayPage";
-import { useScene } from "./useScene/useScene";
+import { sanitizeSceneName, useScene } from "./useScene/useScene";
 import { useUserId } from "./useUserId/useUserId";
 
 const debug = false;
@@ -16,6 +18,9 @@ export const PlayRoute: React.FC<{
   const idFromParams = props.match.params.id;
   const userId = useUserId();
   const sceneManager = useScene(userId, idFromParams);
+  const sceneName = sceneManager.state.scene.name;
+  const pageTitle = sanitizeSceneName(sceneName);
+  const { t } = useTranslate();
 
   const hostManager = usePeerHost({
     onConnectionDataReceive(id: string, peerAction: IPeerActions) {
@@ -55,15 +60,24 @@ export const PlayRoute: React.FC<{
   const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
 
   return (
-    <PlayPage
-      sceneManager={sceneManager}
-      connectionsManager={connectionsManager}
-      isLoading={hostManager.state.loading || connectionsManager.state.loading}
-      idFromParams={idFromParams}
-      shareLink={shareLink}
-      userId={userId}
-      error={hostManager.state.error}
-    ></PlayPage>
+    <>
+      <PageMeta
+        title={pageTitle || t("home-route.play-online.title")}
+        description={t("home-route.play-online.description")}
+      ></PageMeta>
+
+      <PlayPage
+        sceneManager={sceneManager}
+        connectionsManager={connectionsManager}
+        isLoading={
+          hostManager.state.loading || connectionsManager.state.loading
+        }
+        idFromParams={idFromParams}
+        shareLink={shareLink}
+        userId={userId}
+        error={hostManager.state.error}
+      ></PlayPage>
+    </>
   );
 };
 

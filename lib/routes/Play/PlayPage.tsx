@@ -1,31 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  Fade,
-  Grid,
-  Hidden,
-  InputLabel,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  ThemeProvider,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { Box, Button, CircularProgress, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fade, Grid, Hidden, InputLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -45,7 +18,6 @@ import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -57,7 +29,7 @@ import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { IPeerActions } from "./IPeerActions";
 import { AspectType } from "./useScene/AspectType";
-import { defaultSceneName, useScene } from "./useScene/useScene";
+import { useScene } from "./useScene/useScene";
 
 type IOnlineProps = {
   isLoading?: boolean;
@@ -102,15 +74,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
-  const sceneName = sceneManager.state.scene.name;
-  const pageTitle = getPageTitle(sceneName);
+
   const shouldRenderPlayerJoinGameScreen =
     !isGM && !connectionsManager.state.isConnectedToHost;
 
   return (
     <Page gameId={props.idFromParams}>
       <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
-      <PageMeta title={pageTitle}></PageMeta>
       {props.error ? renderPageError() : renderPage()}
     </Page>
   );
@@ -758,17 +728,3 @@ export const PlayPage: React.FC<IProps> = (props) => {
 };
 
 PlayPage.displayName = "PlayPage";
-
-function getPageTitle(sceneName: string) {
-  return sceneName === defaultSceneName
-    ? ""
-    : removeHTMLTags(removeNBSP(sceneName)).trim();
-}
-
-function removeNBSP(value: string) {
-  return value.replace(/&nbsp;/g, " ");
-}
-
-function removeHTMLTags(value: string) {
-  return value.replace(/<\/?[^>]+(>|$)/g, " ");
-}
