@@ -1,6 +1,6 @@
-# CHANGELOG
+# [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
-## 2.2.0 (...)
+## 2.2.0 (May 19, 2020)
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
@@ -12,6 +12,9 @@
 - feat: scene button re-arrangement and icons
 - feat: scene "add npc" button
 - feat: scene "add bad guy" button
+- feat: scene aspects sort
+- feat: aspect initiative tracker
+- fix: reset scene button prompt
 
 ## 2.1.0 (May 15, 2020)
 
