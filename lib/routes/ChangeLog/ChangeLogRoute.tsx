@@ -6,20 +6,21 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-const html = new showdown.Converter().makeHtml(content);
+const changelogHTML = new showdown.Converter().makeHtml(content);
+const latestVersionText = getLatestVersionInfo(changelogHTML);
 
 export const ChangelogRoute: React.FC<{}> = (props) => {
   const { t } = useTranslate();
   return (
     <Page>
       <PageMeta
-        title={t("changelog-route.meta.title")}
+        title={`${t("changelog-route.meta.title")} v${latestVersionText}`}
         description={t("changelog-route.meta.description")}
       />
       <Container maxWidth="md">
         <div
           dangerouslySetInnerHTML={{
-            __html: html,
+            __html: changelogHTML,
           }}
         ></div>
       </Container>
@@ -27,3 +28,11 @@ export const ChangelogRoute: React.FC<{}> = (props) => {
   );
 };
 ChangelogRoute.displayName = "ChangelogRoute";
+
+function getLatestVersionInfo(changelogHTML: string) {
+  const parser = new DOMParser();
+  const htmlDoc = parser.parseFromString(changelogHTML, "text/html");
+  const latestVersion = htmlDoc.querySelector("h2");
+  const latestVersionText = latestVersion.textContent;
+  return latestVersionText;
+}
