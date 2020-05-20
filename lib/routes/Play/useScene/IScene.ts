@@ -1,4 +1,4 @@
-import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
+import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 
@@ -17,7 +17,7 @@ export interface IAspect {
   physicalStress: Array<boolean>;
   mentalStress: Array<boolean>;
   consequences: Array<string>;
-  color: IndexCardColor;
+  color: IndexCardColorTypes;
   playedDuringTurn: boolean;
   type: AspectType;
 }

@@ -14,12 +14,15 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
+import { StoreContext } from "../../contexts/StoreContext";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
@@ -42,6 +45,7 @@ export const Page: React.FC<{
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n } = useTranslate();
+  const store = useContext(StoreContext);
 
   useEffect(() => {
     if (props.gameId) {
@@ -332,6 +336,24 @@ export const Page: React.FC<{
             }}
           >
             <GitHubIcon></GitHubIcon>
+          </IconButton>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <IconButton
+            color="inherit"
+            size="small"
+            className={css({
+              padding: "6px 8px",
+            })}
+            onClick={() => {
+              store.actions.setDarkMode(!store.state.darkMode);
+            }}
+          >
+            {store.state.darkMode ? (
+              <Brightness4Icon></Brightness4Icon>
+            ) : (
+              <Brightness7Icon></Brightness7Icon>
+            )}
           </IconButton>
         </Grid>
       </Grid>

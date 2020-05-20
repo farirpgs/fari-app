@@ -5,7 +5,6 @@ import {
   Grid,
   IconButton,
   InputLabel,
-  lighten,
   Menu,
   MenuItem,
   Paper,
@@ -25,7 +24,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectType } from "../../routes/Play/useScene/AspectType";
 import { IAspect } from "../../routes/Play/useScene/IScene";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { IndexCardColor, IndexCardColorBright } from "./IndexCardColor";
+import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
 export const IndexCard: React.FC<{
   aspect: IAspect;
@@ -42,7 +41,7 @@ export const IndexCard: React.FC<{
   onAddAspectPhysicalStress(): void;
   onAddAspectMentalStress(): void;
   onAddConsequence(): void;
-  onUpdateAspectColor(color: string): void;
+  onUpdateAspectColor(color: IndexCardColorTypes): void;
   onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onRemove(): void;
   onReset(): void;
@@ -63,15 +62,19 @@ export const IndexCard: React.FC<{
   const shouldRenderPlayedDuringTurnIcon =
     props.aspect.type === AspectType.NPC ||
     props.aspect.type === AspectType.BadGuy;
-  const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
-  const textColor = useTextColors(highlightBackgroundColor);
+
+  const isDark = theme.palette.type === "dark";
+
+  const paperBackground = isDark
+    ? IndexCardColor[props.aspect.color].dark
+    : IndexCardColor[props.aspect.color].light;
+  const paperColor = useTextColors(paperBackground);
   const playedDuringTurnColor = props.aspect.playedDuringTurn
     ? theme.palette.primary.main
-    : textColor.disabled;
-
+    : paperColor.disabled;
   return (
     <Paper elevation={undefined} className={props.className}>
-      <Box bgcolor={props.aspect.color}>
+      <Box bgcolor={paperBackground} color={paperColor.primary}>
         <Box
           className={css({
             fontSize: "1.5rem",
@@ -250,26 +253,24 @@ export const IndexCard: React.FC<{
         disableTouchRipple
       >
         <Grid container justify="center">
-          {Object.keys(IndexCardColorBright).map(
-            (colorName: IndexCardColorBright) => {
-              return (
-                <Grid item key={colorName}>
-                  <IconButton
-                    onClick={(e) => {
-                      props.onUpdateAspectColor(IndexCardColor[colorName]);
-                      e.stopPropagation();
-                    }}
-                    onMouseDown={(e) => e.stopPropagation()}
-                    size="small"
-                  >
-                    <FiberManualRecordIcon
-                      htmlColor={IndexCardColorBright[colorName]}
-                    ></FiberManualRecordIcon>
-                  </IconButton>
-                </Grid>
-              );
-            }
-          )}
+          {Object.keys(IndexCardColor).map((colorName: IndexCardColorTypes) => {
+            return (
+              <Grid item key={colorName}>
+                <IconButton
+                  onClick={(e) => {
+                    props.onUpdateAspectColor(colorName);
+                    e.stopPropagation();
+                  }}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  size="small"
+                >
+                  <FiberManualRecordIcon
+                    htmlColor={IndexCardColor[colorName].chip}
+                  ></FiberManualRecordIcon>
+                </IconButton>
+              </Grid>
+            );
+          })}
         </Grid>
       </MenuItem>,
     ];

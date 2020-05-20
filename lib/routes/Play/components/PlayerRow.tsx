@@ -43,7 +43,7 @@ export const PlayerRow: React.FC<{
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
   const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
-  const textColor = useTextColors(highlightBackgroundColor);
+  const textColor = useTextColors(theme.palette.background.default);
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
     : textColor.disabled;

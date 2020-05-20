@@ -1,4 +1,31 @@
-import { Box, Button, CircularProgress, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fade, Grid, Hidden, InputLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Fade,
+  Grid,
+  Hidden,
+  InputLabel,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -15,7 +42,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
-import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
+import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
 import { arraySort } from "../../domains/array/arraySort";
@@ -468,7 +495,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     onAddConsequence={() => {
                       sceneManager.actions.addAspectConsequence(aspectId);
                     }}
-                    onUpdateAspectColor={(color: IndexCardColor) => {
+                    onUpdateAspectColor={(color: IndexCardColorTypes) => {
                       sceneManager.actions.updateAspectColor(aspectId, color);
                     }}
                     onPlayedInTurnOrderChange={(playedDuringTurn) => {
