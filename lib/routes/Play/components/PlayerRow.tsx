@@ -59,12 +59,12 @@ export const PlayerRow: React.FC<{
     padding: "0 0.5rem",
   });
 
-  const diceTextColors = useTextColors(highlightBackgroundColor);
+  const diceTextColors = useTextColors(theme.palette.background.default);
   const diceStyle = css({
     fontSize: "1.2rem",
     lineHeight: Font.lineHeight(1.2),
     color: diceManager.state.color,
-    background: highlightBackgroundColor,
+    background: theme.palette.background.default,
     border: `.1rem solid ${theme.palette.primary.main}`,
     width: "2rem",
     borderRadius: "4px",

@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   ButtonBase,
-  lighten,
   Tooltip,
   Typography,
   useTheme,
@@ -24,8 +23,7 @@ export const DiceRoute = () => {
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
   const theme = useTheme();
-  const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
-  const diceTextColors = useTextColors(highlightBackgroundColor);
+  const diceTextColors = useTextColors(theme.palette.background.paper);
   const { t } = useTranslate();
 
   function roll() {
@@ -38,7 +36,7 @@ export const DiceRoute = () => {
     fontSize: "5rem",
     lineHeight: Font.lineHeight(5),
     color: diceManager.state.color,
-    background: highlightBackgroundColor,
+    background: theme.palette.background.paper,
     border: `.5rem solid ${theme.palette.primary.main}`,
     borderRadius: "4px",
     width: "7rem",

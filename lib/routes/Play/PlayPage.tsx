@@ -547,7 +547,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
             <Typography
               variant="h4"
               className={css({
-                borderBottom: "1px solid #ddd",
+                borderBottom: `1px solid ${theme.palette.divider}`,
                 textAlign: "center",
               })}
             >

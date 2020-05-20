@@ -15,6 +15,7 @@
 - feat: scene aspects sort
 - feat: aspect initiative tracker
 - fix: reset scene button prompt
+- feat: dark theme ⛅️
 
 ## 2.1.x (May 15, 2020)
 

@@ -9,7 +9,7 @@ export type IndexCardColorTypes = "white" | "red" | "blue" | "green" | "yellow";
 export const IndexCardColor: Record<IndexCardColorTypes, Colors> = {
   white: {
     chip: "#fff",
-    dark: "#1c1c21",
+    dark: "#424242",
     light: "#fff",
   },
   red: {

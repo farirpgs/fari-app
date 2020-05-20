@@ -284,7 +284,7 @@ export const IndexCard: React.FC<{
           lineHeight: "1.7rem",
           padding: "0.5rem 0",
           width: "100%",
-          borderBottom: "1px solid #ddd",
+          borderBottom: `1px solid ${theme.palette.divider}`,
         })}
       >
         <Box p="0 1rem">
@@ -304,7 +304,7 @@ export const IndexCard: React.FC<{
         className={css({
           padding: "0.5rem 0",
           width: "100%",
-          borderBottom: "1px solid #ddd",
+          borderBottom: `1px solid ${theme.palette.divider}`,
         })}
       >
         <Box p=".5rem 1rem">
