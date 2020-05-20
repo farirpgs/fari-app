@@ -6,13 +6,13 @@
 - feat: players can consume their own fate points
 - feat: gm and players can click on a dice to roll it
 - feat: the dice page supports clicking on the dice to roll it
-- feat: confetti 🎉 on >= 3 or <= -3
-- feat: confetti buttons
+- feat: confetti 🎉 on >= 3 or <= -3 rolls
+- feat: confetti buttons in scene
 - feat: index cards tooltip on stress track checkboxes
-- feat: scene button re-arrangement and icons
+- feat: scene buttons re-arrangement and icons for each action
 - feat: scene "add npc" button
 - feat: scene "add bad guy" button
-- feat: scene aspects sort
+- feat: scene aspects sort button
 - feat: aspect initiative tracker
 - fix: reset scene button prompt
 - feat: dark theme ⛅️
