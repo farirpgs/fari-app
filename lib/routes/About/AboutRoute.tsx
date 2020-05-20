@@ -1,6 +1,7 @@
 import { Container } from "@material-ui/core";
 import React from "react";
 import showdown from "showdown";
+import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -17,11 +18,7 @@ export const AboutRoute: React.FC<{}> = (props) => {
         description={t("about-route.meta.description")}
       />
       <Container maxWidth="md">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: aboutHTML,
-          }}
-        ></div>
+        <MarkdownElement renderedMarkdown={aboutHTML}></MarkdownElement>
       </Container>
     </Page>
   );
