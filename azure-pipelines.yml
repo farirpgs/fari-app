@@ -48,3 +48,9 @@ steps:
       yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
     displayName: "deploy prod"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - task: PublishTestResults@2  
+    inputs:
+      testRunner: JUnit
+      testResultsFiles: 'junit.xml'
+
