@@ -37,4 +37,4 @@ Sure ! Fari would not exist without the help of some awesome libraries and frame
 
 You can donate to help them too:
 
-- [PeerJS](https://opencollective.com/peer) - What helps you play with your friend using peer to peer connections
+- [PeerJS](https://opencollective.com/peer) - What helps you play with your friend using peer to peer connections.
