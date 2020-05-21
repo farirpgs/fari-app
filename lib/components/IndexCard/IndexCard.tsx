@@ -15,8 +15,9 @@ import {
 } from "@material-ui/core";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -25,7 +26,6 @@ import { AspectType } from "../../routes/Play/useScene/AspectType";
 import { IAspect } from "../../routes/Play/useScene/IScene";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
-
 export const IndexCard: React.FC<{
   aspect: IAspect;
   readonly: boolean;
@@ -50,7 +50,7 @@ export const IndexCard: React.FC<{
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
   const $menu = useRef(undefined);
-  const colorPickerBackground = theme.palette.primary.main;
+  const colorPickerBackground = theme.palette.primary.dark;
   const shouldRenderCheckboxesOrConsequences =
     props.aspect.freeInvokes.length > 0 ||
     props.aspect.physicalStress.length > 0 ||
@@ -264,9 +264,19 @@ export const IndexCard: React.FC<{
                   onMouseDown={(e) => e.stopPropagation()}
                   size="small"
                 >
-                  <FiberManualRecordIcon
-                    htmlColor={IndexCardColor[colorName].chip}
-                  ></FiberManualRecordIcon>
+                  {colorName === props.aspect.color ? (
+                    <RadioButtonCheckedIcon
+                      htmlColor={IndexCardColor[colorName].chip}
+                    ></RadioButtonCheckedIcon>
+                  ) : (
+                    <RadioButtonUncheckedIcon
+                      htmlColor={IndexCardColor[colorName].chip}
+                    ></RadioButtonUncheckedIcon>
+                  )}
+
+                  {/* <FiberManualRecordIcon
+                  
+                  ></FiberManualRecordIcon> */}
                 </IconButton>
               </Grid>
             );
