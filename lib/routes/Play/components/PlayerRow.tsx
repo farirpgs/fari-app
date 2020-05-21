@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   ButtonBase,
+  darken,
   Grid,
   IconButton,
   lighten,
@@ -42,23 +43,27 @@ export const PlayerRow: React.FC<{
   const shouldRenderOfflinePlayerRemoveButton = props.offline && !props.isMe;
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
-  const highlightBackgroundColor = lighten(theme.palette.primary.main, 0.95);
   const textColor = useTextColors(theme.palette.background.default);
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
     : textColor.disabled;
-  const rowStyle = css({
-    backgroundColor: shouldHighlight ? highlightBackgroundColor : "transparent",
-    color: shouldHighlight ? textColor.primary : undefined,
-  });
-  const playerInfoRowStyle = css({
+
+  const selectedRowStyle = css(
+    theme.palette.type === "light"
+      ? {
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        }
+      : {
+          backgroundColor: darken(theme.palette.secondary.dark, 0.75),
+        }
+  );
+  const playerInfoCellStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
   });
   const controlsRowStyle = css({
     padding: "0 0.5rem",
   });
-
   const diceTextColors = useTextColors(theme.palette.background.default);
   const diceStyle = css({
     fontSize: "1.2rem",
@@ -95,10 +100,16 @@ export const PlayerRow: React.FC<{
   });
   return (
     <>
-      <TableRow className={rowStyle}>
-        <TableCell className={playerInfoRowStyle} align="left">
+      <TableRow
+        selected={false}
+        className={cx({
+          [selectedRowStyle]: shouldHighlight,
+        })}
+      >
+        <TableCell className={playerInfoCellStyle} align="left">
           <Typography
             noWrap
+            color="inherit"
             className={css({
               fontSize: "1.2rem",
               lineHeight: Font.lineHeight(1.2),
@@ -109,7 +120,7 @@ export const PlayerRow: React.FC<{
               : props.player.playerName}
           </Typography>
         </TableCell>
-        <TableCell className={playerInfoRowStyle} align="center">
+        <TableCell className={playerInfoCellStyle} align="center">
           <Tooltip
             title={
               props.player.playedDuringTurn
@@ -140,7 +151,7 @@ export const PlayerRow: React.FC<{
             </span>
           </Tooltip>
         </TableCell>
-        <TableCell className={cx(playerInfoRowStyle)} align="center">
+        <TableCell className={cx(playerInfoCellStyle)} align="center">
           <Tooltip title={t("player-row.fate-points")}>
             <span>
               <ButtonBase
@@ -159,7 +170,7 @@ export const PlayerRow: React.FC<{
             </span>
           </Tooltip>
         </TableCell>
-        <TableCell className={cx(playerInfoRowStyle)} align="right">
+        <TableCell className={cx(playerInfoCellStyle)} align="right">
           <Box display="flex" justifyContent="flex-end">
             <Tooltip title={diceManager.state.tooltip}>
               <span>
@@ -192,7 +203,12 @@ export const PlayerRow: React.FC<{
 
   function renderGMControls() {
     return (
-      <TableRow className={cx(rowStyle, controlsRowStyle)}>
+      <TableRow
+        selected={false}
+        className={cx(controlsRowStyle, {
+          [selectedRowStyle]: shouldHighlight,
+        })}
+      >
         <TableCell colSpan={4}>
           <Grid container alignItems="center" justify="flex-end" spacing={1}>
             <Grid item>
