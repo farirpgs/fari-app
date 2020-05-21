@@ -16,6 +16,7 @@
 - feat: aspect initiative tracker
 - fix: reset scene button prompt
 - feat: dark theme ⛅️
+- fix: fairer dice [#57](https://github.com/fariapp/fari/pull/57) 👏 [@ConDar15](https://github.com/ConDar15)
 
 ## 2.1.x (May 15, 2020) - Index Cards Arrangement, Dice Animations and Internationalization
 
