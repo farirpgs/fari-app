@@ -2,10 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AboutRoute } from "../../routes/About/AboutRoute";
 import { ChangelogRoute } from "../../routes/ChangeLog/ChangeLogRoute";
-import { Characters } from "../../routes/Characters/Characters";
 import { CreateCharacter } from "../../routes/CreateCharacter/CreateCharacter";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
-import { Games } from "../../routes/Games/Games";
 import { HomeRoute } from "../../routes/Home/HomeRoute";
 import { NotFoundRoute } from "../../routes/NotFound/NotFoundRoute";
 import { PlayOfflineRoute } from "../../routes/Play/PlayOfflineRoute";
@@ -18,20 +16,6 @@ export const AppRouter = () => (
       path={"/"}
       render={(props) => {
         return <HomeRoute />;
-      }}
-    />
-    <Route
-      exact
-      path={"/games"}
-      render={(props) => {
-        return <Games />;
-      }}
-    />
-    <Route
-      exact
-      path={"/game/:gameSlug"}
-      render={(props) => {
-        return <Characters />;
       }}
     />
     <Route
