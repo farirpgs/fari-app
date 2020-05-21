@@ -40,12 +40,12 @@ steps:
     displayName: "yarn build"
 
   - script: |
-      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceVersionMessage)"
+      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceBranch)"
     displayName: "deploy preview"
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
   - script: |
-      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceVersionMessage)"
+      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceBranch)"
     displayName: "deploy prod"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
@@ -56,6 +56,7 @@ steps:
 
   - task: PublishCodeCoverageResults@1
     inputs: 
-      codeCoverageTool: Cobertura
+      codeCoverageTool: Cobertura # or JaCoCo
       summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/cobertura-coverage.xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/**/coverage'
 
