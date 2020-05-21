@@ -350,9 +350,9 @@ export const Page: React.FC<{
             }}
           >
             {store.state.darkMode ? (
-              <Brightness4Icon></Brightness4Icon>
-            ) : (
               <Brightness7Icon></Brightness7Icon>
+            ) : (
+              <Brightness4Icon></Brightness4Icon>
             )}
           </IconButton>
         </Grid>
