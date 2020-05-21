@@ -1,15 +1,35 @@
-export enum IndexCardColorBright {
-  White = "#fff",
-  Red = "#ff0000",
-  Blue = "#00daff",
-  Green = "#00ff4c",
-  Yellow = "#ffee00",
+interface Colors {
+  chip: string;
+  dark: string;
+  light: string;
 }
 
-export enum IndexCardColor {
-  White = "#fff",
-  Red = "#ffecec",
-  Blue = "#e9fcff",
-  Green = "#e8ffef",
-  Yellow = "#fffddb",
-}
+export type IndexCardColorTypes = "white" | "red" | "blue" | "green" | "yellow";
+
+export const IndexCardColor: Record<IndexCardColorTypes, Colors> = {
+  white: {
+    chip: "#fff",
+    dark: "#424242",
+    light: "#fff",
+  },
+  red: {
+    chip: "#ff0000",
+    dark: "#390e0f",
+    light: "#ffecec",
+  },
+  blue: {
+    chip: "#00daff",
+    dark: "#0f333a",
+    light: "#e9fcff",
+  },
+  green: {
+    chip: "#00ff4c",
+    dark: "#103d1d",
+    light: "#e8ffef",
+  },
+  yellow: {
+    chip: "#ffee00",
+    dark: "#664b00",
+    light: "#fffddb",
+  },
+} as const;

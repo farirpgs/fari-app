@@ -2,10 +2,6 @@ import { createMuiTheme, ThemeOptions } from "@material-ui/core";
 import { blue, indigo } from "@material-ui/core/colors";
 
 export const defaultThemeConfiguration: ThemeOptions = {
-  palette: {
-    primary: indigo,
-    secondary: blue,
-  },
   typography: {
     fontFamily: [
       "-apple-system",
@@ -27,4 +23,24 @@ export const defaultThemeConfiguration: ThemeOptions = {
     },
   },
 };
-export const AppTheme = createMuiTheme(defaultThemeConfiguration);
+
+export const AppLightTheme = createMuiTheme({
+  ...defaultThemeConfiguration,
+  palette: {
+    primary: indigo,
+    secondary: blue,
+  },
+});
+
+export const AppDarkTheme = createMuiTheme({
+  ...defaultThemeConfiguration,
+  palette: {
+    type: "dark",
+    primary: {
+      main: indigo[200],
+    },
+    secondary: {
+      main: blue[200],
+    },
+  },
+});

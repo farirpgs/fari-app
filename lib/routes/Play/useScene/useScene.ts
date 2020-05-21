@@ -2,7 +2,7 @@ import produce from "immer";
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { IndexCardColor } from "../../../components/IndexCard/IndexCardColor";
+import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
@@ -134,7 +134,7 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
-  function updateAspectColor(id: string, color: IndexCardColor) {
+  function updateAspectColor(id: string, color: IndexCardColorTypes) {
     setScene(
       produce((draft: IScene) => {
         draft.aspects[id].color = color;
@@ -365,7 +365,7 @@ const defaultAspect: IAspect = {
   physicalStress: [],
   mentalStress: [],
   consequences: [],
-  color: IndexCardColor.White,
+  color: "white",
   type: AspectType.Aspect,
   playedDuringTurn: false,
 };
@@ -377,7 +377,7 @@ const defaultBoost: IAspect = {
   physicalStress: [],
   mentalStress: [],
   consequences: [],
-  color: IndexCardColor.Blue,
+  color: "blue",
   type: AspectType.Boost,
   playedDuringTurn: false,
 };
@@ -389,7 +389,7 @@ const defaultNPC: IAspect = {
   physicalStress: [],
   mentalStress: [],
   consequences: [],
-  color: IndexCardColor.Green,
+  color: "green",
   type: AspectType.NPC,
   playedDuringTurn: false,
 };
@@ -401,7 +401,7 @@ const defaultBadGuy: IAspect = {
   physicalStress: [],
   mentalStress: [],
   consequences: [],
-  color: IndexCardColor.Red,
+  color: "red",
   type: AspectType.BadGuy,
   playedDuringTurn: false,
 };

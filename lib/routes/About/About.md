@@ -6,7 +6,7 @@ Fari is a <b>Fate RPG Companion</b> Application created by René-Pier Deshaies-G
 
 ### Is the application Open Source ?
 
-It is! You can contribute to the project on [Github](https://github.com/fariapp/fari)
+It is! You can contribute to the project on [Github](https://github.com/fariapp/fari).
 
 ### Is there a changelog ?
 
@@ -37,4 +37,4 @@ Sure ! Fari would not exist without the help of some awesome libraries and frame
 
 You can donate to help them too:
 
-- [PeerJS](https://opencollective.com/peer) - What helps you play with your friend using peer to peer connections
+- [PeerJS](https://opencollective.com/peer) - What helps you play with your friend using peer to peer connections.

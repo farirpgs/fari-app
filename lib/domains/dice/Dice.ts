@@ -22,8 +22,6 @@ function rollDie(die: Array<number>, times: number): IDiceRoll {
   return { total, rolls };
 }
 
-function getRandomDieSide(numberOfSides: number) {
-  const randomNumber = Math.round(Math.random() * 100);
-  const side = randomNumber % numberOfSides;
-  return side;
+function getRandomDieSide(numberOfSides: number): number {
+  return Math.trunc(Math.random() * numberOfSides);
 }

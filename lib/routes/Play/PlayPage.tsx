@@ -15,7 +15,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
-import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
+import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
 import { arraySort } from "../../domains/array/arraySort";
@@ -468,7 +468,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     onAddConsequence={() => {
                       sceneManager.actions.addAspectConsequence(aspectId);
                     }}
-                    onUpdateAspectColor={(color: IndexCardColor) => {
+                    onUpdateAspectColor={(color: IndexCardColorTypes) => {
                       sceneManager.actions.updateAspectColor(aspectId, color);
                     }}
                     onPlayedInTurnOrderChange={(playedDuringTurn) => {
@@ -520,7 +520,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
             <Typography
               variant="h4"
               className={css({
-                borderBottom: "1px solid #ddd",
+                borderBottom: `1px solid ${theme.palette.divider}`,
                 textAlign: "center",
               })}
             >
