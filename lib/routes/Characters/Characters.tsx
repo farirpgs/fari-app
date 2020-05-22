@@ -1,156 +1,149 @@
-import { Fab } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Snackbar from "@material-ui/core/Snackbar";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
-import PersonIcon from "@material-ui/icons/Person";
-import { truncate } from "lodash";
-import React, { useEffect, useState } from "react";
-import { AppLink } from "../../components/AppLink/AppLink";
-import { Banner } from "../../components/Banner/Banner";
-import { routerHistory } from "../../components/History/History";
+import {
+  Box,
+  Button,
+  Grid,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { css, cx } from "emotion";
+import React from "react";
+import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
-import { getGameBySlug } from "../../games/getGameBySlug";
-import { CharacterService } from "../../services/character/CharacterService";
-import { googleAnalyticsService } from "../../services/injections";
-import { ICharacter } from "../../types/ICharacter";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ICharacter } from "../Play/useScene/IScene";
+import { CharacterDialog } from "./CharacterDialog";
+import { useCharacters } from "./useCharacters";
 
-export const Characters = (props) => {
-  const { gameSlug } = props.match.params;
-  const game = getGameBySlug(gameSlug);
-
-  const [characters, setCharacters] = useState<Array<ICharacter>>(undefined);
-  const [
-    characterDeletedSnackBar,
-    setCharacterDeletedSnackBar,
-  ] = React.useState({ visible: false });
-
-  const [isLoading, setIsLoading] = useState(true);
-  const hasItems = characters && characters.length > 0;
-
-  const load = async () => {
-    setIsLoading(true);
-    const characters = await new CharacterService().getAllByGame(game.slug);
-    googleAnalyticsService.sendEvent({
-      category: "Character",
-      action: "GetAll",
-      value: characters?.length ?? 0,
-      label: game.slug,
-    });
-    setCharacters(characters);
-    setIsLoading(false);
-  };
-
-  async function deleteCharacter(character) {
-    await new CharacterService().remove(character);
-    googleAnalyticsService.sendEvent({
-      category: "Character",
-      action: "Delete",
-      label: game.slug,
-    });
-    await load();
-    setCharacterDeletedSnackBar({ visible: true });
-  }
-
-  useEffect(() => {
-    load();
-  }, [gameSlug]);
+export const CharactersRoute: React.FC<{}> = (props) => {
+  const { t } = useTranslate();
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const charactersManager = useCharacters();
 
   return (
-    <Page isLoading={isLoading}>
-      <Snackbar
-        autoHideDuration={2000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={characterDeletedSnackBar.visible}
-        onClose={() => setCharacterDeletedSnackBar({ visible: false })}
-        message={<span id="message-id">Character Deleted</span>}
-      />
+    <>
+      <PageMeta
+        title={t("characters-route.title")}
+        description={t("characters-route.description")}
+      ></PageMeta>
 
-      {!hasItems && (
-        <Banner variant="info">
-          <div>
-            You didn&apos;t create any characters yet.
-            <br />
-            Click on the button to get started!
-          </div>
-        </Banner>
-      )}
+      <Page>
+        <CharacterDialog
+          character={charactersManager.state.selectedCharacter}
+          onSave={(newCharacter) => {
+            charactersManager.actions.close();
+            charactersManager.actions.update(newCharacter);
+          }}
+          onDelete={() => {
+            const confirmed = confirm("Are you sure ?");
+            if (confirmed) {
+              charactersManager.actions.close();
+              charactersManager.actions.remove(
+                charactersManager.state.selectedCharacter.id
+              );
+            }
+          }}
+          onClose={() => {
+            charactersManager.actions.close();
+          }}
+        ></CharacterDialog>
 
-      <div className="row center-xs margin-1">
-        <div className="col-xs">
-          <Fab
-            onClick={() => {
-              routerHistory.push(`/game/${game.slug}/create`);
-            }}
-            variant="extended"
-            color="primary"
-          >
-            <AddIcon style={{ marginRight: " .5rem" }} />
-            Add a Character
-          </Fab>
-        </div>
-      </div>
-
-      {hasItems && (
-        <div className="row">
-          <div className="col-xs-12">
-            <List component="nav">
-              {characters.map((character, index) => {
-                const truncatedDescription = truncate(
-                  character["description"],
-                  {
-                    length: 50,
-                  }
-                );
-                return (
-                  <AppLink
-                    to={`/game/${game.slug}/play/${character._id}`}
-                    key={character._id}
-                  >
-                    <ListItem
-                      button
-                      style={{
-                        zoom: "1.2",
-                      }}
-                    >
-                      <ListItemAvatar>
-                        <Avatar>
-                          <PersonIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={character["name"]}
-                        secondary={truncatedDescription}
-                      />
-
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            deleteCharacter(character);
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    {index !== characters.length - 1 && <Divider />}
-                  </AppLink>
-                );
-              })}
-            </List>
-          </div>
-        </div>
-      )}
-    </Page>
+        <Typography variant="h4">{"Characters"}</Typography>
+        <Box py="1rem">
+          <Grid container spacing={1} justify="center">
+            <Grid item>
+              <Button
+                onClick={() => {
+                  charactersManager.actions.add();
+                }}
+                variant="contained"
+                color="secondary"
+                endIcon={<PersonAddIcon></PersonAddIcon>}
+              >
+                {"Add Character"}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box py="1rem">
+          <MagicGridContainer items={charactersManager.state.characters.length}>
+            {charactersManager.state.characters.map((character) => {
+              return renderCharacterCard(character);
+            })}
+          </MagicGridContainer>
+        </Box>
+      </Page>
+    </>
   );
+
+  function renderCharacterCard(character: ICharacter) {
+    return (
+      <Box
+        key={character.id}
+        className={cx(
+          css({
+            width: isSmall ? "100%" : "33%",
+            padding: "0 .5rem 1.5rem .5rem",
+          })
+        )}
+      >
+        <Paper
+          elevation={undefined}
+          onClick={() => {
+            charactersManager.actions.select(character);
+          }}
+          className={css({
+            "cursor": "pointer",
+            "&:hover": {
+              background: theme.palette.action.hover,
+            },
+          })}
+        >
+          <Box>
+            <Box
+              className={css({
+                fontSize: "1.5rem",
+                width: "100%",
+                padding: "0.5rem 0",
+                borderBottom: "1px solid #f0a4a4",
+              })}
+            >
+              <Box
+                p={"1rem 1rem 1rem 1rem"}
+                display="flex"
+                justifyContent="center"
+              >
+                <ContentEditable
+                  value={character.name}
+                  readonly
+                ></ContentEditable>
+              </Box>
+            </Box>
+            <Box
+              className={css({
+                fontSize: "1.1rem",
+                lineHeight: "1.7rem",
+                padding: "0.5rem 0",
+                width: "100%",
+                borderBottom: `1px solid ${theme.palette.divider}`,
+              })}
+            >
+              <Box p="0 1rem" display="flex" justifyContent="center">
+                <Typography>
+                  <i>{character.highConcept || "..."}</i>
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
+    );
+  }
 };
+
+CharactersRoute.displayName = "CharactersRoute";

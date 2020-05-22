@@ -3,9 +3,10 @@ import React, { useEffect, useRef } from "react";
 
 export const ContentEditable: React.FC<{
   value: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   readonly?: boolean;
   autoFocus?: boolean;
+  inline?: boolean;
 }> = (props) => {
   const $ref = useRef<HTMLDivElement>();
 
@@ -37,6 +38,7 @@ export const ContentEditable: React.FC<{
       className={css({
         outline: "none",
         wordBreak: "break-word",
+        display: props.inline ? "inline" : "block",
         img: {
           width: "100%",
           padding: ".5rem 0",
@@ -54,3 +56,15 @@ export const ContentEditable: React.FC<{
   );
 };
 ContentEditable.displayName = "ContentEditable";
+
+export function sanitizeContentEditable(value: string) {
+  return removeHTMLTags(removeNBSP(value)).trim();
+}
+
+function removeNBSP(value: string) {
+  return value.replace(/&nbsp;/g, " ");
+}
+
+function removeHTMLTags(value: string) {
+  return value.replace(/<\/?[^>]+(>|$)/g, " ");
+}

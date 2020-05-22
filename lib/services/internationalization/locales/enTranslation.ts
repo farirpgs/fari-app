@@ -84,4 +84,7 @@ export const enTranslation = {
   "player-row.played": `Has played`,
   "player-row.not-played": `Has not played`,
   "Game Master": `Game Master`,
+  "characters-route.title": `Manage your Characters`,
+  "characters-route.description": `...`,
+  "menu.characters": `Characters`,
 } as const;

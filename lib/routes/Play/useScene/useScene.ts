@@ -2,6 +2,7 @@ import produce from "immer";
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
@@ -418,13 +419,5 @@ const defaultSceneAspects = {};
 export function sanitizeSceneName(sceneName: string) {
   return sceneName === defaultSceneName
     ? ""
-    : removeHTMLTags(removeNBSP(sceneName)).trim();
-}
-
-function removeNBSP(value: string) {
-  return value.replace(/&nbsp;/g, " ");
-}
-
-function removeHTMLTags(value: string) {
-  return value.replace(/<\/?[^>]+(>|$)/g, " ");
+    : sanitizeContentEditable(sceneName);
 }

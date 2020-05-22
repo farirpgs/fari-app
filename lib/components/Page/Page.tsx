@@ -280,6 +280,18 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
+              history.push("/characters");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            {t("menu.characters")}
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
               history.push("/dice");
             }}
             variant={mobile ? "outlined" : undefined}
