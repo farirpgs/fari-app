@@ -148,7 +148,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
             className={css({
               "& path": {
                 fill: "none",
-                strokeWidth: "3.5px",
+                strokeWidth: "5px",
                 stroke: textColors.secondary,
                 strokeLinejoin: "round",
                 strokeLinecap: "round",
@@ -168,11 +168,12 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
 DrawArea.displayName = "DrawArea";
 
 export const DrawingLine: React.FC<{ line: ILine }> = (props) => {
-  const pathData = `M ${props.line
+  const lineData = props.line
     .map((p) => {
       return `${p.percentX} ${p.percentY}`;
     })
-    .join(" L ")}`;
+    .join(" L ");
+  const pathData = `M ${lineData}`;
   return <path d={pathData} vectorEffect="non-scaling-stroke" />;
 };
 
