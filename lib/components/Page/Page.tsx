@@ -17,7 +17,6 @@ import {
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import MenuIcon from "@material-ui/icons/Menu";
 import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
@@ -309,7 +308,6 @@ export const Page: React.FC<{
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
-            endIcon={<LocalCafeIcon></LocalCafeIcon>}
           >
             {t("menu.support")}
           </Button>

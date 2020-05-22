@@ -139,25 +139,27 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
           ></GestureIcon>
         </Fade>
       ) : (
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className={css({
-            "& path": {
-              fill: "none",
-              strokeWidth: "3.5px",
-              stroke: textColors.secondary,
-              strokeLinejoin: "round",
-              strokeLinecap: "round",
-            },
-          })}
-        >
-          {lines.map((line, index) => (
-            <DrawingLine key={index} line={line} />
-          ))}
-        </svg>
+        <Fade in>
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className={css({
+              "& path": {
+                fill: "none",
+                strokeWidth: "3.5px",
+                stroke: textColors.secondary,
+                strokeLinejoin: "round",
+                strokeLinecap: "round",
+              },
+            })}
+          >
+            {lines.map((line, index) => (
+              <DrawingLine key={index} line={line} />
+            ))}
+          </svg>
+        </Fade>
       )}
     </div>
   );
