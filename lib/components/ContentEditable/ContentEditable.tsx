@@ -1,3 +1,4 @@
+import { useTheme } from "@material-ui/core";
 import { css } from "emotion";
 import React, { useEffect, useRef } from "react";
 
@@ -7,7 +8,10 @@ export const ContentEditable: React.FC<{
   readonly?: boolean;
   autoFocus?: boolean;
   inline?: boolean;
+  border?: boolean;
+  fullWidth?: boolean;
 }> = (props) => {
+  const theme = useTheme();
   const $ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -33,12 +37,17 @@ export const ContentEditable: React.FC<{
     }
   }
 
+  const Component = props.inline ? "span" : "div";
   return (
-    <div
+    <Component
       className={css({
         outline: "none",
         wordBreak: "break-word",
-        display: props.inline ? "inline" : "block",
+        display: props.inline ? "inline-block" : "block",
+        width: props.fullWidth ? "100%" : undefined,
+        borderBottom: props.border
+          ? `1px solid ${theme.palette.divider}`
+          : undefined,
         img: {
           width: "100%",
           padding: ".5rem 0",
@@ -52,7 +61,7 @@ export const ContentEditable: React.FC<{
         onChange();
       }}
       contentEditable={!props.readonly}
-    ></div>
+    ></Component>
   );
 };
 ContentEditable.displayName = "ContentEditable";

@@ -5,9 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  // Variant,
   Grid,
-  TextField,
   Typography,
   useTheme,
 } from "@material-ui/core";
@@ -20,7 +18,7 @@ import {
   sanitizeContentEditable,
 } from "../../components/ContentEditable/ContentEditable";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { ICharacter } from "../Play/useScene/IScene";
+import { ICharacter } from "./useCharacters";
 
 export const FateLabel: React.FC<{
   className?: string;
@@ -60,6 +58,50 @@ export const CharacterDialog: React.FC<{
     setCharacter(props.character);
   }, [props.character]);
 
+  function setCharacterName(value: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.name = value;
+      })
+    );
+  }
+
+  function setCharacterAspectName(index: number, newAspectName: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.aspects = Object.keys(draft.aspects).reduce((acc, curr, i) => {
+          const name = index === i ? newAspectName : curr;
+          return {
+            ...acc,
+            [name]: draft.aspects[curr],
+          };
+        }, {} as Record<string, string>);
+      })
+    );
+  }
+
+  function setCharacterAspect(index: number, newAspectValue: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.aspects = Object.keys(draft.aspects).reduce((acc, curr, i) => {
+          const value = index === i ? newAspectValue : draft.aspects[curr];
+          return {
+            ...acc,
+            [curr]: value,
+          };
+        }, {} as Record<string, string>);
+      })
+    );
+  }
+
+  function setCharacterStunt(value: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.stunts = value;
+      })
+    );
+  }
+
   function onSave() {
     const updatedCharacter = produce(character, (draft) => {
       draft.name = sanitizeContentEditable(character.name);
@@ -71,11 +113,13 @@ export const CharacterDialog: React.FC<{
   const headerStyle = css({
     background: headerTextColors.primary,
     color: theme.palette.background.paper,
+    padding: ".5rem 1.5rem",
   });
 
   if (!character) {
     return null;
   }
+
   return (
     <Dialog
       open={!!props.character}
@@ -90,25 +134,7 @@ export const CharacterDialog: React.FC<{
           onSave();
         }}
       >
-        <DialogTitle>
-          <FateLabel
-            className={css({ paddingRight: ".5rem" })}
-            display="inline"
-          >
-            {"Name"}
-          </FateLabel>
-          <ContentEditable
-            value={character.name}
-            inline
-            onChange={(value) => {
-              setCharacter(
-                produce((draft: ICharacter) => {
-                  draft.name = value;
-                })
-              );
-            }}
-          ></ContentEditable>
-        </DialogTitle>
+        <DialogTitle>{renderCharacterName()}</DialogTitle>
         <DialogContent className={css({ padding: "0" })}>
           <Grid container>
             <Grid
@@ -118,63 +144,10 @@ export const CharacterDialog: React.FC<{
                 borderRight: `2px solid ${headerTextColors.primary}`,
               })}
             >
-              <FateLabel className={headerStyle}>
-                <Box padding=".5rem 1.5rem">{"Aspects"}</Box>
-              </FateLabel>
-              <Box padding=".5rem 1.5rem">
-                <Box pb=".5rem">
-                  <FateLabel display="inline">{"High Concept"}</FateLabel>
-                  <TextField
-                    value={character.highConcept}
-                    fullWidth
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setCharacter(
-                        produce((draft: ICharacter) => {
-                          draft.highConcept = value;
-                        })
-                      );
-                    }}
-                  />
-                </Box>
-                <Box pb=".5rem">
-                  <FateLabel display="inline">{"Trouble"}</FateLabel>
-                  <TextField
-                    value={character.trouble}
-                    fullWidth
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setCharacter(
-                        produce((draft: ICharacter) => {
-                          draft.trouble = value;
-                        })
-                      );
-                    }}
-                  />
-                </Box>
-                <Box pb=".5rem">
-                  <FateLabel display="inline">{"Other Aspects"}</FateLabel>
-                  <TextField
-                    value={character.otherAspects}
-                    fullWidth
-                    multiline
-                    rows={10}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setCharacter(
-                        produce((draft: ICharacter) => {
-                          draft.otherAspects = value;
-                        })
-                      );
-                    }}
-                  />
-                </Box>
-              </Box>
+              {renderCharacterAspects()}
             </Grid>
             <Grid item xs={6}>
-              <FateLabel className={headerStyle}>
-                <Box padding=".5rem 1.5rem">{"Vitals"}</Box>
-              </FateLabel>
+              <FateLabel className={headerStyle}>{"Vitals"}</FateLabel>
             </Grid>
           </Grid>
           <Grid container>
@@ -185,32 +158,10 @@ export const CharacterDialog: React.FC<{
                 borderRight: `2px solid ${headerTextColors.primary}`,
               })}
             >
-              <FateLabel className={headerStyle}>
-                <Box padding=".5rem 1.5rem">{"Stunts"}</Box>
-              </FateLabel>
-              <Box padding=".5rem 1.5rem">
-                <Box pb=".5rem">
-                  <TextField
-                    value={character.stunts}
-                    fullWidth
-                    multiline
-                    rows={10}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setCharacter(
-                        produce((draft: ICharacter) => {
-                          draft.stunts = value;
-                        })
-                      );
-                    }}
-                  />
-                </Box>
-              </Box>
+              {renderCharacterStunts()}
             </Grid>
             <Grid item xs={6}>
-              <FateLabel className={headerStyle}>
-                <Box padding=".5rem 1.5rem">{"Skills"}</Box>
-              </FateLabel>
+              <FateLabel className={headerStyle}>{"Skills"}</FateLabel>
             </Grid>
           </Grid>
         </DialogContent>
@@ -224,5 +175,88 @@ export const CharacterDialog: React.FC<{
       </form>
     </Dialog>
   );
+
+  function renderCharacterName() {
+    return (
+      <>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>
+            <FateLabel>{"Name"}</FateLabel>
+          </Grid>
+          <Grid item className={css({ flex: "1 0 auto" })}>
+            <ContentEditable
+              border
+              value={character.name}
+              onChange={(value) => {
+                setCharacterName(value);
+              }}
+            ></ContentEditable>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
+
+  function renderCharacterAspects() {
+    return (
+      <>
+        <FateLabel className={headerStyle}>{"Aspects"}</FateLabel>
+
+        <Box padding=".5rem 1.5rem">
+          {Object.keys(character.aspects).map((aspectName, index) => {
+            return (
+              <Box key={index} py=".5rem">
+                <Box pb=".5rem">
+                  <FateLabel display="inline">
+                    <ContentEditable
+                      value={aspectName}
+                      inline
+                      onChange={(value) => {
+                        setCharacterAspectName(index, value);
+                      }}
+                    />
+                  </FateLabel>
+                </Box>
+                <Box>
+                  <Typography>
+                    <ContentEditable
+                      border
+                      inline
+                      fullWidth
+                      value={character.aspects[aspectName]}
+                      onChange={(value) => {
+                        setCharacterAspect(index, value);
+                      }}
+                    />
+                  </Typography>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
+      </>
+    );
+  }
+
+  function renderCharacterStunts() {
+    return (
+      <>
+        <FateLabel className={headerStyle}>{"Stunts"}</FateLabel>
+        <Box padding=".5rem 1.5rem">
+          <Typography>
+            <ContentEditable
+              border
+              inline
+              fullWidth
+              value={character.stunts}
+              onChange={(value) => {
+                setCharacterStunt(value);
+              }}
+            ></ContentEditable>
+          </Typography>
+        </Box>
+      </>
+    );
+  }
 };
 CharacterDialog.displayName = "CharacterDialog";

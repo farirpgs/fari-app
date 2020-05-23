@@ -31,16 +31,3 @@ export interface IScene {
   badConfetti: number;
   sort: boolean;
 }
-
-export interface ICharacter {
-  id: string;
-  name: string;
-  highConcept: string;
-  trouble: string;
-  otherAspects: string;
-  stunts: string;
-  physicalStress: Array<boolean>;
-  mentalStress: Array<boolean>;
-  consequences: Array<string>;
-  version: number;
-}

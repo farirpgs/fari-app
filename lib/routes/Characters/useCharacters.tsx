@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { ICharacter } from "../Play/useScene/IScene";
-// approachCareful?: string;
-// approachClever?: string;
-// approachForceful?: string;
-// approachFlashy?: string;
-// approachQuick?: string;
-// approachSneaky?: string;
-// skillSuperb?: string;
-// skillGreat?: string;
-// skillGood?: string;
-// skillFair?: string;
-// skillAverage?: string;
 
 export function useCharacters() {
   const key = "fari-characters";
@@ -45,7 +33,7 @@ export function useCharacters() {
 
   function add() {
     const newCharacter = {
-      ...defaultCharacter,
+      ...defaultCondensedCharacter,
       id: uuidV4(),
     };
     setCharacters((draft: Array<ICharacter>) => {
@@ -94,15 +82,87 @@ export function useCharacters() {
   };
 }
 
-const defaultCharacter: ICharacter = {
+const defaultCondensedCharacter: ICharacter = {
   id: undefined,
   name: "Character Name...",
-  highConcept: "",
-  trouble: "",
-  otherAspects: "",
-  stunts: "",
-  physicalStress: [],
-  mentalStress: [],
-  consequences: [],
+  aspects: {
+    "High Concept": "",
+    "Trouble": "",
+    "Relationship": "",
+    "Other Aspect #1": "",
+    "Other Aspect #2": "",
+  },
+  stunts: "<br/><br/><br/><br/>",
+  skills: {
+    Academics: "",
+    Athelics: "",
+    Burglary: "",
+    Contacts: "",
+    Crafts: "",
+    Deceive: "",
+    Drive: "",
+    Empathy: "",
+    Fight: "",
+    Investigate: "",
+    Lore: "",
+    Notice: "",
+    Physique: "",
+    Provoke: "",
+    Rapport: "",
+    Resources: "",
+    Shoot: "",
+    Stealth: "",
+    Will: "",
+  },
+  stress: {
+    Physical: [false, false, false],
+    Mental: [false, false, false],
+  },
+  consequences: {
+    Mild: "",
+    Moderate: "",
+    Severe: "",
+  },
   version: 1,
 };
+
+const defaultAcceleratedCharacter: ICharacter = {
+  id: undefined,
+  name: "Character Name...",
+  aspects: {
+    "High Concept": "",
+    "Trouble": "",
+    "Relationship": "",
+    "Other Aspect #1": "",
+    "Other Aspect #2": "",
+  },
+  stunts: "<br/><br/><br/><br/>",
+  skills: {
+    Careful: "",
+    Clever: "",
+    Forceful: "",
+    Flashy: "",
+    Quick: "",
+    Sneaky: "",
+  },
+  stress: {
+    Stress: [],
+  },
+  consequences: {
+    Mild: "",
+    Moderate: "",
+    Severe: "",
+  },
+  version: 1,
+};
+
+export interface ICharacter {
+  id: string;
+  name: string;
+  aspects: Record<string, string>;
+  skills: Record<string, string>;
+  stunts: string;
+  stress: Record<string, Array<boolean>>;
+  consequences: Record<string, string>;
+  version: number;
+}
