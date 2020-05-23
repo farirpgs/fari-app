@@ -94,6 +94,34 @@ export const CharacterDialog: React.FC<{
     );
   }
 
+  function setCharacterSkillName(index: number, newSkillName: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.skills = Object.keys(draft.skills).reduce((acc, curr, i) => {
+          const name = index === i ? newSkillName : curr;
+          return {
+            ...acc,
+            [name]: draft.skills[curr],
+          };
+        }, {} as Record<string, string>);
+      })
+    );
+  }
+
+  function setCharacterSkill(index: number, newSkillValue: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.skills = Object.keys(draft.skills).reduce((acc, curr, i) => {
+          const value = index === i ? newSkillValue : draft.skills[curr];
+          return {
+            ...acc,
+            [curr]: value,
+          };
+        }, {} as Record<string, string>);
+      })
+    );
+  }
+
   function setCharacterStunt(value: string) {
     setCharacter(
       produce((draft: ICharacter) => {
@@ -134,7 +162,10 @@ export const CharacterDialog: React.FC<{
           onSave();
         }}
       >
-        <DialogTitle>{renderCharacterName()}</DialogTitle>
+        <DialogTitle className={css({ paddingBottom: "0" })}>
+          {renderCharacterName()}
+        </DialogTitle>
+        {renderActions()}
         <DialogContent className={css({ padding: "0" })}>
           <Grid container>
             <Grid
@@ -161,20 +192,26 @@ export const CharacterDialog: React.FC<{
               {renderCharacterStunts()}
             </Grid>
             <Grid item xs={6}>
-              <FateLabel className={headerStyle}>{"Skills"}</FateLabel>
+              {renderCharacterSkills()}
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={props.onDelete}>{"Delete"}</Button>
-          <Button onClick={props.onClose}>{"Close"}</Button>
-          <Button onClick={onSave} type="submit">
-            {"Save"}
-          </Button>
-        </DialogActions>
+        {renderActions()}
       </form>
     </Dialog>
   );
+
+  function renderActions() {
+    return (
+      <DialogActions>
+        <Button onClick={props.onDelete}>{"Delete"}</Button>
+        <Button onClick={props.onClose}>{"Close"}</Button>
+        <Button onClick={onSave} type="submit">
+          {"Save"}
+        </Button>
+      </DialogActions>
+    );
+  }
 
   function renderCharacterName() {
     return (
@@ -230,6 +267,50 @@ export const CharacterDialog: React.FC<{
                     />
                   </Typography>
                 </Box>
+              </Box>
+            );
+          })}
+        </Box>
+      </>
+    );
+  }
+  function renderCharacterSkills() {
+    return (
+      <>
+        <FateLabel className={headerStyle}>{"Skills"}</FateLabel>
+
+        <Box padding=".5rem 1.5rem">
+          {Object.keys(character.skills).map((skillName, index) => {
+            return (
+              <Box pb=".5rem" key={index}>
+                <Grid container spacing={2} alignItems="flex-end">
+                  <Grid item xs={1}>
+                    <FateLabel display="inline">{"+"}</FateLabel>
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Typography align="center">
+                      <ContentEditable
+                        border
+                        inline
+                        fullWidth
+                        value={character.skills[skillName]}
+                        onChange={(value) => {
+                          setCharacterSkill(index, value);
+                        }}
+                      />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} className={css({ marginLeft: "auto" })}>
+                    <FateLabel display="inline">
+                      <ContentEditable
+                        value={skillName}
+                        onChange={(value) => {
+                          setCharacterSkillName(index, value);
+                        }}
+                      />
+                    </FateLabel>
+                  </Grid>
+                </Grid>
               </Box>
             );
           })}

@@ -15,9 +15,8 @@ import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGri
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { ICharacter } from "../Play/useScene/IScene";
 import { CharacterDialog } from "./CharacterDialog";
-import { useCharacters } from "./useCharacters";
+import { CharacterType, ICharacter, useCharacters } from "./useCharacters";
 
 export const CharactersRoute: React.FC<{}> = (props) => {
   const { t } = useTranslate();
@@ -59,13 +58,25 @@ export const CharactersRoute: React.FC<{}> = (props) => {
             <Grid item>
               <Button
                 onClick={() => {
-                  charactersManager.actions.add();
+                  charactersManager.actions.add(CharacterType.CoreCondensed);
                 }}
                 variant="contained"
                 color="secondary"
                 endIcon={<PersonAddIcon></PersonAddIcon>}
               >
-                {"Add Character"}
+                {"Add Core Character"}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  charactersManager.actions.add(CharacterType.Accelerated);
+                }}
+                variant="contained"
+                color="secondary"
+                endIcon={<PersonAddIcon></PersonAddIcon>}
+              >
+                {"Add Accelerated Character"}
               </Button>
             </Grid>
           </Grid>
@@ -82,6 +93,7 @@ export const CharactersRoute: React.FC<{}> = (props) => {
   );
 
   function renderCharacterCard(character: ICharacter) {
+    const [firstAspectName] = Object.keys(character);
     return (
       <Box
         key={character.id}
@@ -135,7 +147,7 @@ export const CharactersRoute: React.FC<{}> = (props) => {
             >
               <Box p="0 1rem" display="flex" justifyContent="center">
                 <Typography>
-                  <i>{character.highConcept || "..."}</i>
+                  <i>{character.aspects[firstAspectName] || "..."}</i>
                 </Typography>
               </Box>
             </Box>

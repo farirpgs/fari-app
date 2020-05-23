@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 
+export enum CharacterType {
+  CoreCondensed,
+  Accelerated,
+}
 export function useCharacters() {
   const key = "fari-characters";
   const [characters, setCharacters] = useState<Array<ICharacter>>([]);
@@ -31,9 +35,13 @@ export function useCharacters() {
     }
   }, [characters]);
 
-  function add() {
+  function add(type: CharacterType) {
+    const defaultCharacter =
+      type === CharacterType.CoreCondensed
+        ? defaultCondensedCharacter
+        : defaultAcceleratedCharacter;
     const newCharacter = {
-      ...defaultCondensedCharacter,
+      ...defaultCharacter,
       id: uuidV4(),
     };
     setCharacters((draft: Array<ICharacter>) => {
