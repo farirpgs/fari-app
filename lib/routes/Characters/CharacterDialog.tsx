@@ -27,6 +27,7 @@ import {
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "./hooks/useCharacter";
 import { ICharacter } from "./hooks/useCharacters";
 
@@ -38,6 +39,7 @@ export const CharacterDialog: React.FC<{
   onSave?(newCharacter: ICharacter): void;
   onDelete?(): void;
 }> = (props) => {
+  const { t } = useTranslate();
   const theme = useTheme();
   const characterManager = useCharacter(props.character);
 
@@ -118,7 +120,7 @@ export const CharacterDialog: React.FC<{
                     variant="outlined"
                     onClick={props.onDelete}
                   >
-                    {"Delete"}
+                    {t("character-dialog.delete")}
                   </Button>
                 </ThemeProvider>
               </Grid>
@@ -131,7 +133,7 @@ export const CharacterDialog: React.FC<{
                   type="submit"
                   onClick={onSave}
                 >
-                  {"Save"}
+                  {t("character-dialog.save")}
                 </Button>
               </Grid>
             )}
@@ -146,7 +148,7 @@ export const CharacterDialog: React.FC<{
       <>
         <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
           <Grid item>
-            <FateLabel>{"Name"}</FateLabel>
+            <FateLabel>{t("character-dialog.name")}</FateLabel>
           </Grid>
           <Grid item className={css({ flex: "1 0 auto" })}>
             <ContentEditable
@@ -201,7 +203,10 @@ export const CharacterDialog: React.FC<{
   function renderAspects() {
     return (
       <>
-        {renderSheetHeader("Aspects", characterManager.actions.addAspect)}
+        {renderSheetHeader(
+          t("character-dialog.aspects"),
+          characterManager.actions.addAspect
+        )}
 
         <Box className={sheetContentStyle}>
           {characterManager.state.character.aspects.map((aspect, index) => {
@@ -270,7 +275,10 @@ export const CharacterDialog: React.FC<{
   function renderSkills() {
     return (
       <>
-        {renderSheetHeader("Skills", characterManager.actions.addSkill)}
+        {renderSheetHeader(
+          t("character-dialog.skills"),
+          characterManager.actions.addSkill
+        )}
 
         <Box className={sheetContentStyle}>
           {characterManager.state.character.skills.map((skill, index) => {
@@ -333,7 +341,7 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         {renderSheetHeader(
-          "Stunts & Extras",
+          t("character-dialog.stunts-extras"),
           characterManager.actions.addStunt
         )}
         <Box className={sheetContentStyle}>
@@ -398,10 +406,13 @@ export const CharacterDialog: React.FC<{
   function renderVitals() {
     return (
       <>
-        {renderSheetHeader("Stress", characterManager.actions.addStressTrack)}
+        {renderSheetHeader(
+          t("character-dialog.stress"),
+          characterManager.actions.addStressTrack
+        )}
         <Box className={sheetContentStyle}>{renderStressTracks()}</Box>
         {renderSheetHeader(
-          "Consequences",
+          t("character-dialog.consequences"),
           characterManager.actions.addConsequence
         )}
         <Box className={sheetContentStyle}>{renderConsequences()}</Box>

@@ -5,7 +5,7 @@ import { arraySort } from "../../../domains/array/arraySort";
 export enum CharacterType {
   CoreCondensed,
   Accelerated,
-  Blank,
+  Custom,
 }
 export function useCharacters() {
   const key = "fari-characters";
@@ -180,7 +180,7 @@ const defaultAcceleratedCharacter: ICharacter = {
   version: 1,
 };
 
-const defaultBlankCharacter: ICharacter = {
+const defaultCustomCharacter: ICharacter = {
   id: undefined,
   name: "",
   aspects: [{ name: "Aspect", value: "" }],
@@ -194,7 +194,7 @@ const defaultBlankCharacter: ICharacter = {
 const defaultCharactersByType = {
   [CharacterType.CoreCondensed]: defaultCondensedCharacter,
   [CharacterType.Accelerated]: defaultAcceleratedCharacter,
-  [CharacterType.Blank]: defaultBlankCharacter,
+  [CharacterType.Custom]: defaultCustomCharacter,
 } as const;
 
 export interface ICharacter {

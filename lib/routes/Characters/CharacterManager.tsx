@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   Grid,
+  Menu,
+  MenuItem,
   Paper,
   Typography,
   useMediaQuery,
@@ -9,9 +11,10 @@ import {
 } from "@material-ui/core";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { css, cx } from "emotion";
-import React from "react";
+import React, { useState } from "react";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./CharacterDialog";
 import {
   CharacterType,
@@ -20,11 +23,17 @@ import {
 } from "./hooks/useCharacters";
 
 export const CharacterManager: React.FC<{
-  onSelection(character: ICharacter): void;
+  onSelection?(character: ICharacter): void;
 }> = (props) => {
+  const { t } = useTranslate();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const charactersManager = useCharacters();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const onCharacterMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <CharacterDialog
@@ -36,7 +45,7 @@ export const CharacterManager: React.FC<{
         }}
         onDelete={() => {
           const confirmed = confirm(
-            "Are you sure you want to delete this character ?"
+            t("characters-route.delete-character-confirmation")
           );
           if (confirmed) {
             charactersManager.actions.close();
@@ -50,46 +59,28 @@ export const CharacterManager: React.FC<{
         }}
       ></CharacterDialog>
 
-      <Typography variant="h4">{"Characters"}</Typography>
       <Box py="1rem">
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={4} wrap="nowrap" alignItems="flex-end">
           <Grid item>
-            <Button
-              onClick={() => {
-                charactersManager.actions.add(CharacterType.CoreCondensed);
-              }}
-              variant="contained"
-              color="secondary"
-              endIcon={<PersonAddIcon></PersonAddIcon>}
-            >
-              {"Add Core Character"}
-            </Button>
+            <Typography variant="h4">{t("characters-route.title")}</Typography>
           </Grid>
           <Grid item>
             <Button
-              onClick={() => {
-                charactersManager.actions.add(CharacterType.Accelerated);
-              }}
+              color="secondary"
               variant="contained"
-              color="secondary"
-              endIcon={<PersonAddIcon></PersonAddIcon>}
-            >
-              {"Add Accelerated Character"}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                charactersManager.actions.add(CharacterType.Blank);
+              onClick={(event) => {
+                setAnchorEl(event.currentTarget);
               }}
-              variant="text"
-              color="secondary"
               endIcon={<PersonAddIcon></PersonAddIcon>}
             >
-              {"Add Blank Character"}
+              {t("characters-route.create-character")}
             </Button>
+            {renderAddCharacterMenu()}
           </Grid>
         </Grid>
+        <Box>
+          <Typography></Typography>
+        </Box>
       </Box>
       <Box py="1rem">
         <MagicGridContainer items={charactersManager.state.characters.length}>
@@ -100,6 +91,42 @@ export const CharacterManager: React.FC<{
       </Box>
     </>
   );
+
+  function renderAddCharacterMenu() {
+    return (
+      <Menu
+        keepMounted
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={onCharacterMenuClose}
+      >
+        <MenuItem
+          onClick={() => {
+            charactersManager.actions.add(CharacterType.CoreCondensed);
+            onCharacterMenuClose();
+          }}
+        >
+          {t("characters-route.character-type.core-condensed")}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            charactersManager.actions.add(CharacterType.Accelerated);
+            onCharacterMenuClose();
+          }}
+        >
+          {t("characters-route.character-type.accelerated")}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            charactersManager.actions.add(CharacterType.Custom);
+            onCharacterMenuClose();
+          }}
+        >
+          {t("characters-route.character-type.custom")}
+        </MenuItem>
+      </Menu>
+    );
+  }
 
   function renderCharacterCard(character: ICharacter) {
     const [firstAspect] = character.aspects;
