@@ -1,3 +1,4 @@
+import { ILines } from "../../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { ICharacter } from "../../Characters/hooks/useCharacters";
@@ -32,4 +33,5 @@ export interface IScene {
   goodConfetti: number;
   badConfetti: number;
   sort: boolean;
+  drawAreaLines: ILines;
 }

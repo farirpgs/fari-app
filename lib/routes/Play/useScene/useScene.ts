@@ -3,6 +3,7 @@ import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { ILines } from "../../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
@@ -32,6 +33,7 @@ export function useScene(userId: string, gameId: string) {
     goodConfetti: 0,
     badConfetti: 0,
     sort: false,
+    drawAreaLines: [],
   }));
 
   useEffect(() => {
@@ -361,6 +363,14 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function setDrawAreaLines(lines: ILines) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.drawAreaLines = lines;
+      })
+    );
+  }
+
   return {
     state: { scene },
     actions: {
@@ -394,6 +404,7 @@ export function useScene(userId: string, gameId: string) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
+      setDrawAreaLines,
     },
   };
 }

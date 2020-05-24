@@ -1,9 +1,40 @@
-import { Box, Button, CircularProgress, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fade, Grid, Hidden, InputLabel, List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Fade,
+  Grid,
+  Hidden,
+  InputLabel,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FaceIcon from "@material-ui/icons/Face";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import GestureIcon from "@material-ui/icons/Gesture";
 import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -14,6 +45,7 @@ import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { DrawArea, IDrawAreaHandles } from "../../components/DrawArea/DrawArea";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
@@ -59,6 +91,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
     false
   );
+  const $drawArea = useRef<IDrawAreaHandles>(undefined);
+
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -81,6 +115,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const shouldRenderPlayerJoinGameScreen =
     !isGM && !connectionsManager.state.isConnectedToHost;
 
+  const paperStyle = css({ borderRadius: "0px" });
   return (
     <Page gameId={props.idFromParams}>
       <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
@@ -320,8 +355,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
           </Grid>
         </Box>
 
-        <Paper>
-          <TableContainer component={Paper}>
+        <Paper className={paperStyle}>
+          <TableContainer>
             <Table
               size="small"
               className={css({
@@ -380,7 +415,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                           });
                         }
                       }}
-                      onCharacterUpdate={(character)=>{
+                      onCharacterUpdate={(character) => {
                         if (isGM) {
                           sceneManager.actions.updatePlayerCharacter(
                             player.id,
@@ -399,6 +434,33 @@ export const PlayPage: React.FC<IProps> = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
+        </Paper>
+        <Paper className={paperStyle}>
+          <Divider light></Divider>
+          <Box width="100%" height="400px">
+            <DrawArea
+              ref={$drawArea}
+              lines={sceneManager.state.scene.drawAreaLines}
+              readonly={!isGM}
+              onChange={(lines) => {
+                sceneManager.actions.setDrawAreaLines(lines);
+              }}
+            ></DrawArea>
+          </Box>
+          <Divider></Divider>
+          <Box p="1rem" display="flex" justifyContent="flex-end">
+            <Button
+              onClick={() => {
+                if ($drawArea.current) {
+                  $drawArea.current.clear();
+                  sceneManager.actions.setDrawAreaLines([]);
+                }
+              }}
+              endIcon={<GestureIcon></GestureIcon>}
+            >
+              {"Clear"}
+            </Button>
+          </Box>
         </Paper>
       </Box>
     );
