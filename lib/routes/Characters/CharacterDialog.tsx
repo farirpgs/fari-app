@@ -6,43 +6,26 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  IconButton,
+  ThemeProvider,
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { Variant } from "@material-ui/core/styles/createTypography";
-import { css, cx } from "emotion";
+import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
+import RemoveIcon from "@material-ui/icons/Remove";
+import { css } from "emotion";
 import produce from "immer";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ContentEditable,
   sanitizeContentEditable,
 } from "../../components/ContentEditable/ContentEditable";
+import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { FateLabel } from "./FateLabel";
+import { useCharacter } from "./useCharacter";
 import { ICharacter } from "./useCharacters";
-
-export const FateLabel: React.FC<{
-  className?: string;
-  variant?: Variant;
-  display?: "initial" | "block" | "inline";
-}> = (props) => {
-  return (
-    <Typography
-      variant={props.variant}
-      className={cx(
-        css({
-          textTransform: "uppercase",
-          fontWeight: 900,
-        }),
-        props.className
-      )}
-      display={props.display}
-    >
-      {props.children}
-    </Typography>
-  );
-};
-
-FateLabel.displayName = "FateLabel";
 
 export const CharacterDialog: React.FC<{
   character: ICharacter;
@@ -52,99 +35,35 @@ export const CharacterDialog: React.FC<{
   readonly?: boolean;
 }> = (props) => {
   const theme = useTheme();
-  const [character, setCharacter] = useState<ICharacter>(props.character);
-
-  useEffect(() => {
-    setCharacter(props.character);
-  }, [props.character]);
-
-  function setCharacterName(value: string) {
-    setCharacter(
-      produce((draft: ICharacter) => {
-        draft.name = value;
-      })
-    );
-  }
-
-  function setCharacterAspectName(index: number, newAspectName: string) {
-    setCharacter(
-      produce((draft: ICharacter) => {
-        draft.aspects = Object.keys(draft.aspects).reduce((acc, curr, i) => {
-          const name = index === i ? newAspectName : curr;
-          return {
-            ...acc,
-            [name]: draft.aspects[curr],
-          };
-        }, {} as Record<string, string>);
-      })
-    );
-  }
-
-  function setCharacterAspect(index: number, newAspectValue: string) {
-    setCharacter(
-      produce((draft: ICharacter) => {
-        draft.aspects = Object.keys(draft.aspects).reduce((acc, curr, i) => {
-          const value = index === i ? newAspectValue : draft.aspects[curr];
-          return {
-            ...acc,
-            [curr]: value,
-          };
-        }, {} as Record<string, string>);
-      })
-    );
-  }
-
-  function setCharacterSkillName(index: number, newSkillName: string) {
-    setCharacter(
-      produce((draft: ICharacter) => {
-        draft.skills = Object.keys(draft.skills).reduce((acc, curr, i) => {
-          const name = index === i ? newSkillName : curr;
-          return {
-            ...acc,
-            [name]: draft.skills[curr],
-          };
-        }, {} as Record<string, string>);
-      })
-    );
-  }
-
-  function setCharacterSkill(index: number, newSkillValue: string) {
-    setCharacter(
-      produce((draft: ICharacter) => {
-        draft.skills = Object.keys(draft.skills).reduce((acc, curr, i) => {
-          const value = index === i ? newSkillValue : draft.skills[curr];
-          return {
-            ...acc,
-            [curr]: value,
-          };
-        }, {} as Record<string, string>);
-      })
-    );
-  }
-
-  function setCharacterStunt(value: string) {
-    setCharacter(
-      produce((draft: ICharacter) => {
-        draft.stunts = value;
-      })
-    );
-  }
+  const characterManager = useCharacter(props.character);
 
   function onSave() {
-    const updatedCharacter = produce(character, (draft) => {
-      draft.name = sanitizeContentEditable(character.name);
-    });
+    const updatedCharacter = produce(
+      characterManager.state.character,
+      (draft) => {
+        draft.name = sanitizeContentEditable(draft.name);
+      }
+    );
     props.onSave(updatedCharacter);
   }
 
-  const headerTextColors = useTextColors(theme.palette.background.paper);
-  const headerStyle = css({
-    background: headerTextColors.primary,
-    color: theme.palette.background.paper,
+  const errorTheme = useButtonTheme(theme.palette.error.main);
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const sheetHeader = css({
+    background: headerBackgroundColors.primary,
+    color: headerColor,
+    width: "100%",
     padding: ".5rem 1.5rem",
   });
-
-  if (!character) {
+  const sheetContentStyle = css({
+    width: "100%",
+    padding: ".5rem 1.5rem",
+  });
+  const smallIconButtonStyle = css({
+    padding: "0",
+  });
+  if (!characterManager.state.character) {
     return null;
   }
 
@@ -153,62 +72,80 @@ export const CharacterDialog: React.FC<{
       open={!!props.character}
       fullWidth
       maxWidth="sm"
+      scroll="paper"
       onClose={props.onClose}
     >
-      <form
+      {/* <form
         onSubmit={(e) => {
           e.stopPropagation();
           e.preventDefault();
           onSave();
         }}
-      >
-        <DialogTitle className={css({ paddingBottom: "0" })}>
-          {renderCharacterName()}
-        </DialogTitle>
-        {renderActions()}
-        <DialogContent className={css({ padding: "0" })}>
-          <Grid container>
-            <Grid
-              item
-              xs={6}
-              className={css({
-                borderRight: `2px solid ${headerTextColors.primary}`,
-              })}
-            >
-              {renderCharacterAspects()}
-            </Grid>
-            <Grid item xs={6}>
-              <FateLabel className={headerStyle}>{"Vitals"}</FateLabel>
-            </Grid>
+      > */}
+      <DialogTitle>{renderCharacterName()}</DialogTitle>
+      <DialogContent className={css({ padding: "0" })} dividers>
+        <Grid container>
+          <Grid
+            item
+            xs={6}
+            className={css({
+              borderRight: `2px solid ${headerBackgroundColors.primary}`,
+            })}
+          >
+            {renderCharacterAspects()}
           </Grid>
-          <Grid container>
-            <Grid
-              item
-              xs={6}
-              className={css({
-                borderRight: `2px solid ${headerTextColors.primary}`,
-              })}
-            >
-              {renderCharacterStunts()}
-            </Grid>
-            <Grid item xs={6}>
-              {renderCharacterSkills()}
-            </Grid>
+          <Grid item xs={6}>
+            <FateLabel className={sheetHeader}>{"Vitals"}</FateLabel>
           </Grid>
-        </DialogContent>
-        {renderActions()}
-      </form>
+        </Grid>
+        <Grid container>
+          <Grid
+            item
+            xs={6}
+            className={css({
+              borderRight: `2px solid ${headerBackgroundColors.primary}`,
+            })}
+          >
+            {renderCharacterStunts()}
+          </Grid>
+          <Grid item xs={6}>
+            {renderCharacterSkills()}
+          </Grid>
+        </Grid>
+      </DialogContent>
+      {renderActions()}
+      {/* </form> */}
     </Dialog>
   );
 
   function renderActions() {
     return (
-      <DialogActions>
-        <Button onClick={props.onDelete}>{"Delete"}</Button>
-        <Button onClick={props.onClose}>{"Close"}</Button>
-        <Button onClick={onSave} type="submit">
-          {"Save"}
-        </Button>
+      <DialogActions className={css({ padding: "0" })}>
+        <Box className={sheetContentStyle}>
+          <Grid container wrap="nowrap" justify="space-between">
+            <Grid item>
+              <ThemeProvider theme={errorTheme}>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  onClick={props.onDelete}
+                >
+                  {"Delete"}
+                </Button>
+              </ThemeProvider>
+            </Grid>
+            <Grid item>
+              <Button
+                color="primary"
+                variant="outlined"
+                type="submit"
+                onClick={onSave}
+              >
+                {"Save"}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
       </DialogActions>
     );
   }
@@ -216,43 +153,95 @@ export const CharacterDialog: React.FC<{
   function renderCharacterName() {
     return (
       <>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
           <Grid item>
             <FateLabel>{"Name"}</FateLabel>
           </Grid>
           <Grid item className={css({ flex: "1 0 auto" })}>
             <ContentEditable
               border
-              value={character.name}
+              autoFocus
+              value={characterManager.state.character.name}
               onChange={(value) => {
-                setCharacterName(value);
+                characterManager.actions.setName(value);
               }}
             ></ContentEditable>
+          </Grid>
+          <Grid item>
+            <IconButton size="small" onClick={props.onClose}>
+              <CloseIcon />
+            </IconButton>
           </Grid>
         </Grid>
       </>
     );
   }
 
+  function renderSheetHeader(label: string, onAdd: () => void) {
+    return (
+      <Box className={sheetHeader}>
+        <Grid container justify="space-between" wrap="nowrap">
+          <Grid item>
+            <FateLabel>{label}</FateLabel>
+          </Grid>
+          <Grid item>
+            <IconButton
+              size="small"
+              className={smallIconButtonStyle}
+              onClick={() => {
+                onAdd();
+              }}
+            >
+              <AddIcon htmlColor={headerColor}></AddIcon>
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
+
   function renderCharacterAspects() {
     return (
       <>
-        <FateLabel className={headerStyle}>{"Aspects"}</FateLabel>
+        {renderSheetHeader("Aspects", characterManager.actions.addAspect)}
 
-        <Box padding=".5rem 1.5rem">
-          {Object.keys(character.aspects).map((aspectName, index) => {
+        <Box className={sheetContentStyle}>
+          {characterManager.state.character.aspects.map((aspect, index) => {
             return (
               <Box key={index} py=".5rem">
                 <Box pb=".5rem">
-                  <FateLabel display="inline">
-                    <ContentEditable
-                      value={aspectName}
-                      inline
-                      onChange={(value) => {
-                        setCharacterAspectName(index, value);
-                      }}
-                    />
-                  </FateLabel>
+                  <Grid
+                    container
+                    spacing={2}
+                    justify="space-between"
+                    wrap="nowrap"
+                  >
+                    <Grid item xs={10}>
+                      <FateLabel display="inline">
+                        <ContentEditable
+                          value={aspect.name}
+                          inline
+                          onChange={(value) => {
+                            characterManager.actions.setAspectName(
+                              index,
+                              value
+                            );
+                          }}
+                        />
+                      </FateLabel>
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        size="small"
+                        className={smallIconButtonStyle}
+                        onClick={() => {
+                          characterManager.actions.removeAspect(index);
+                        }}
+                      >
+                        <RemoveIcon></RemoveIcon>
+                      </IconButton>
+                    </Grid>
+                  </Grid>
                 </Box>
                 <Box>
                   <Typography>
@@ -260,9 +249,9 @@ export const CharacterDialog: React.FC<{
                       border
                       inline
                       fullWidth
-                      value={character.aspects[aspectName]}
+                      value={aspect.value}
                       onChange={(value) => {
-                        setCharacterAspect(index, value);
+                        characterManager.actions.setAspect(index, value);
                       }}
                     />
                   </Typography>
@@ -274,41 +263,54 @@ export const CharacterDialog: React.FC<{
       </>
     );
   }
+
   function renderCharacterSkills() {
     return (
       <>
-        <FateLabel className={headerStyle}>{"Skills"}</FateLabel>
+        {renderSheetHeader("Skills", characterManager.actions.addSkill)}
 
-        <Box padding=".5rem 1.5rem">
-          {Object.keys(character.skills).map((skillName, index) => {
+        <Box className={sheetContentStyle}>
+          {characterManager.state.character.skills.map((skill, index) => {
             return (
-              <Box pb=".5rem" key={index}>
-                <Grid container spacing={2} alignItems="flex-end">
+              <Box py=".5rem" key={index}>
+                <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
                   <Grid item xs={1}>
                     <FateLabel display="inline">{"+"}</FateLabel>
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={3}>
                     <Typography align="center">
                       <ContentEditable
                         border
                         inline
                         fullWidth
-                        value={character.skills[skillName]}
+                        value={skill.value}
                         onChange={(value) => {
-                          setCharacterSkill(index, value);
+                          characterManager.actions.setSkill(index, value);
                         }}
                       />
                     </Typography>
                   </Grid>
-                  <Grid item xs={6} className={css({ marginLeft: "auto" })}>
+                  <Grid item>
                     <FateLabel display="inline">
                       <ContentEditable
-                        value={skillName}
+                        value={skill.name}
+                        inline
                         onChange={(value) => {
-                          setCharacterSkillName(index, value);
+                          characterManager.actions.setSkillName(index, value);
                         }}
                       />
                     </FateLabel>
+                  </Grid>
+                  <Grid item className={css({ marginLeft: "auto" })}>
+                    <IconButton
+                      size="small"
+                      className={smallIconButtonStyle}
+                      onClick={() => {
+                        characterManager.actions.removeSkill(index);
+                      }}
+                    >
+                      <RemoveIcon></RemoveIcon>
+                    </IconButton>
                   </Grid>
                 </Grid>
               </Box>
@@ -322,19 +324,59 @@ export const CharacterDialog: React.FC<{
   function renderCharacterStunts() {
     return (
       <>
-        <FateLabel className={headerStyle}>{"Stunts"}</FateLabel>
-        <Box padding=".5rem 1.5rem">
-          <Typography>
-            <ContentEditable
-              border
-              inline
-              fullWidth
-              value={character.stunts}
-              onChange={(value) => {
-                setCharacterStunt(value);
-              }}
-            ></ContentEditable>
-          </Typography>
+        {renderSheetHeader(
+          "Stunts & Extras",
+          characterManager.actions.addStunt
+        )}
+        <Box className={sheetContentStyle}>
+          {characterManager.state.character.stunts.map((stunt, index) => {
+            return (
+              <Box py=".5rem" key={index}>
+                <Box pb=".5rem">
+                  <Grid
+                    container
+                    spacing={2}
+                    justify="space-between"
+                    wrap="nowrap"
+                  >
+                    <Grid item xs={10}>
+                      <FateLabel display="inline">
+                        <ContentEditable
+                          value={stunt.name}
+                          inline
+                          onChange={(value) => {
+                            characterManager.actions.setStuntName(index, value);
+                          }}
+                        />
+                      </FateLabel>
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        size="small"
+                        className={smallIconButtonStyle}
+                        onClick={() => {
+                          characterManager.actions.removeStunt(index);
+                        }}
+                      >
+                        <RemoveIcon></RemoveIcon>
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Typography>
+                  <ContentEditable
+                    border
+                    inline
+                    fullWidth
+                    value={stunt.value}
+                    onChange={(value) => {
+                      characterManager.actions.setStunt(index, value);
+                    }}
+                  />
+                </Typography>
+              </Box>
+            );
+          })}
         </Box>
       </>
     );

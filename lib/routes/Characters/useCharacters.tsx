@@ -92,85 +92,93 @@ export function useCharacters() {
 
 const defaultCondensedCharacter: ICharacter = {
   id: undefined,
-  name: "Character Name...",
-  aspects: {
-    "High Concept": "",
-    "Trouble": "",
-    "Relationship": "",
-    "Other Aspect #1": "",
-    "Other Aspect #2": "",
-  },
-  stunts: "<br/><br/><br/><br/>",
-  skills: {
-    Academics: "",
-    Athelics: "",
-    Burglary: "",
-    Contacts: "",
-    Crafts: "",
-    Deceive: "",
-    Drive: "",
-    Empathy: "",
-    Fight: "",
-    Investigate: "",
-    Lore: "",
-    Notice: "",
-    Physique: "",
-    Provoke: "",
-    Rapport: "",
-    Resources: "",
-    Shoot: "",
-    Stealth: "",
-    Will: "",
-  },
-  stress: {
-    Physical: [false, false, false],
-    Mental: [false, false, false],
-  },
-  consequences: {
-    Mild: "",
-    Moderate: "",
-    Severe: "",
-  },
+  name: "",
+  aspects: [
+    { name: "High Concept", value: "" },
+    { name: "Trouble", value: "" },
+    { name: "Relationship", value: "" },
+    { name: "Other Aspect", value: "" },
+    { name: "Other Aspect", value: "" },
+  ],
+  stunts: [
+    { name: "Stunt", value: "" },
+    { name: "Stunt", value: "" },
+    { name: "Stunt", value: "" },
+  ],
+  skills: [
+    { name: "Academics", value: "" },
+    { name: "Athelics", value: "" },
+    { name: "Burglary", value: "" },
+    { name: "Contacts", value: "" },
+    { name: "Crafts", value: "" },
+    { name: "Deceive", value: "" },
+    { name: "Drive", value: "" },
+    { name: "Empathy", value: "" },
+    { name: "Fight", value: "" },
+    { name: "Investigate", value: "" },
+    { name: "Lore", value: "" },
+    { name: "Notice", value: "" },
+    { name: "Physique", value: "" },
+    { name: "Provoke", value: "" },
+    { name: "Rapport", value: "" },
+    { name: "Resources", value: "" },
+    { name: "Shoot", value: "" },
+    { name: "Stealth", value: "" },
+    { name: "Will", value: "" },
+  ],
+  stressTracks: [
+    { name: "Physical", value: [false, false, false] },
+    { name: "Mental", value: [false, false, false] },
+  ],
+  consequences: [
+    { name: "Mild", value: "" },
+    { name: "Moderate", value: "" },
+    { name: "Severe", value: "" },
+  ],
   version: 1,
 };
 
 const defaultAcceleratedCharacter: ICharacter = {
   id: undefined,
-  name: "Character Name...",
-  aspects: {
-    "High Concept": "",
-    "Trouble": "",
-    "Relationship": "",
-    "Other Aspect #1": "",
-    "Other Aspect #2": "",
-  },
-  stunts: "<br/><br/><br/><br/>",
-  skills: {
-    Careful: "",
-    Clever: "",
-    Forceful: "",
-    Flashy: "",
-    Quick: "",
-    Sneaky: "",
-  },
-  stress: {
-    Stress: [],
-  },
-  consequences: {
-    Mild: "",
-    Moderate: "",
-    Severe: "",
-  },
+  name: "",
+  aspects: [
+    { name: "High Concept", value: "" },
+    { name: "Trouble", value: "" },
+    { name: "Relationship", value: "" },
+    { name: "Other Aspect", value: "" },
+    { name: "Other Aspect", value: "" },
+  ],
+  stunts: [
+    { name: "Stunt", value: "" },
+    { name: "Stunt", value: "" },
+    { name: "Stunt", value: "" },
+  ],
+  skills: [
+    { name: "Careful", value: "" },
+    { name: "Clever", value: "" },
+    { name: "Forceful", value: "" },
+    { name: "Flashy", value: "" },
+    { name: "Quick", value: "" },
+    { name: "Sneaky", value: "" },
+  ],
+  stressTracks: [{ name: "Stress", value: [false, false, false] }],
+  consequences: [
+    { name: "Mild", value: "" },
+    { name: "Moderate", value: "" },
+    { name: "Severe", value: "" },
+  ],
   version: 1,
 };
 
 export interface ICharacter {
   id: string;
   name: string;
-  aspects: Record<string, string>;
-  skills: Record<string, string>;
-  stunts: string;
-  stress: Record<string, Array<boolean>>;
-  consequences: Record<string, string>;
+  aspects: ICharacterCustomField<string>;
+  skills: ICharacterCustomField<string>;
+  stunts: ICharacterCustomField<string>;
+  stressTracks: ICharacterCustomField<Array<boolean>>;
+  consequences: ICharacterCustomField<string>;
   version: number;
 }
+
+export type ICharacterCustomField<T> = Array<{ name: string; value: T }>;

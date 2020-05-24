@@ -39,7 +39,9 @@ export const CharactersRoute: React.FC<{}> = (props) => {
             charactersManager.actions.update(newCharacter);
           }}
           onDelete={() => {
-            const confirmed = confirm("Are you sure ?");
+            const confirmed = confirm(
+              "Are you sure you want to delete this character ?"
+            );
             if (confirmed) {
               charactersManager.actions.close();
               charactersManager.actions.remove(
@@ -93,7 +95,7 @@ export const CharactersRoute: React.FC<{}> = (props) => {
   );
 
   function renderCharacterCard(character: ICharacter) {
-    const [firstAspectName] = Object.keys(character);
+    const [firstAspect] = character.aspects;
     return (
       <Box
         key={character.id}
@@ -147,7 +149,7 @@ export const CharactersRoute: React.FC<{}> = (props) => {
             >
               <Box p="0 1rem" display="flex" justifyContent="center">
                 <Typography>
-                  <i>{character.aspects[firstAspectName] || "..."}</i>
+                  <i>{firstAspect?.value || "..."}</i>
                 </Typography>
               </Box>
             </Box>
