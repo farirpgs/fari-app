@@ -81,6 +81,18 @@ export const CharactersRoute: React.FC<{}> = (props) => {
                 {"Add Accelerated Character"}
               </Button>
             </Grid>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  charactersManager.actions.add(CharacterType.Blank);
+                }}
+                variant="text"
+                color="secondary"
+                endIcon={<PersonAddIcon></PersonAddIcon>}
+              >
+                {"Add Blank Character"}
+              </Button>
+            </Grid>
           </Grid>
         </Box>
         <Box py="1rem">

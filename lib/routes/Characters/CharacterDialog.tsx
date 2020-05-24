@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
@@ -12,8 +13,10 @@ import {
   useTheme,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CloseIcon from "@material-ui/icons/Close";
 import RemoveIcon from "@material-ui/icons/Remove";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
 import produce from "immer";
 import React from "react";
@@ -75,14 +78,7 @@ export const CharacterDialog: React.FC<{
       scroll="paper"
       onClose={props.onClose}
     >
-      {/* <form
-        onSubmit={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          onSave();
-        }}
-      > */}
-      <DialogTitle>{renderCharacterName()}</DialogTitle>
+      <DialogTitle>{renderName()}</DialogTitle>
       <DialogContent className={css({ padding: "0" })} dividers>
         <Grid container>
           <Grid
@@ -92,29 +88,16 @@ export const CharacterDialog: React.FC<{
               borderRight: `2px solid ${headerBackgroundColors.primary}`,
             })}
           >
-            {renderCharacterAspects()}
+            {renderAspects()}
+            {renderStunts()}
           </Grid>
           <Grid item xs={6}>
-            <FateLabel className={sheetHeader}>{"Vitals"}</FateLabel>
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Grid
-            item
-            xs={6}
-            className={css({
-              borderRight: `2px solid ${headerBackgroundColors.primary}`,
-            })}
-          >
-            {renderCharacterStunts()}
-          </Grid>
-          <Grid item xs={6}>
-            {renderCharacterSkills()}
+            {renderVitals()}
+            {renderSkills()}
           </Grid>
         </Grid>
       </DialogContent>
       {renderActions()}
-      {/* </form> */}
     </Dialog>
   );
 
@@ -150,7 +133,7 @@ export const CharacterDialog: React.FC<{
     );
   }
 
-  function renderCharacterName() {
+  function renderName() {
     return (
       <>
         <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
@@ -161,6 +144,7 @@ export const CharacterDialog: React.FC<{
             <ContentEditable
               border
               autoFocus
+              fullWidth
               value={characterManager.state.character.name}
               onChange={(value) => {
                 characterManager.actions.setName(value);
@@ -177,30 +161,32 @@ export const CharacterDialog: React.FC<{
     );
   }
 
-  function renderSheetHeader(label: string, onAdd: () => void) {
+  function renderSheetHeader(label: string, onAdd?: () => void) {
     return (
       <Box className={sheetHeader}>
         <Grid container justify="space-between" wrap="nowrap">
           <Grid item>
             <FateLabel>{label}</FateLabel>
           </Grid>
-          <Grid item>
-            <IconButton
-              size="small"
-              className={smallIconButtonStyle}
-              onClick={() => {
-                onAdd();
-              }}
-            >
-              <AddIcon htmlColor={headerColor}></AddIcon>
-            </IconButton>
-          </Grid>
+          {onAdd && (
+            <Grid item>
+              <IconButton
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={() => {
+                  onAdd();
+                }}
+              >
+                <AddIcon htmlColor={headerColor}></AddIcon>
+              </IconButton>
+            </Grid>
+          )}
         </Grid>
       </Box>
     );
   }
 
-  function renderCharacterAspects() {
+  function renderAspects() {
     return (
       <>
         {renderSheetHeader("Aspects", characterManager.actions.addAspect)}
@@ -219,8 +205,9 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
-                          value={aspect.name}
                           inline
+                          fullWidth
+                          value={aspect.name}
                           onChange={(value) => {
                             characterManager.actions.setAspectName(
                               index,
@@ -264,7 +251,7 @@ export const CharacterDialog: React.FC<{
     );
   }
 
-  function renderCharacterSkills() {
+  function renderSkills() {
     return (
       <>
         {renderSheetHeader("Skills", characterManager.actions.addSkill)}
@@ -293,8 +280,9 @@ export const CharacterDialog: React.FC<{
                   <Grid item>
                     <FateLabel display="inline">
                       <ContentEditable
-                        value={skill.name}
                         inline
+                        fullWidth
+                        value={skill.name}
                         onChange={(value) => {
                           characterManager.actions.setSkillName(index, value);
                         }}
@@ -321,7 +309,7 @@ export const CharacterDialog: React.FC<{
     );
   }
 
-  function renderCharacterStunts() {
+  function renderStunts() {
     return (
       <>
         {renderSheetHeader(
@@ -342,8 +330,9 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
-                          value={stunt.name}
                           inline
+                          fullWidth
+                          value={stunt.name}
                           onChange={(value) => {
                             characterManager.actions.setStuntName(index, value);
                           }}
@@ -379,6 +368,160 @@ export const CharacterDialog: React.FC<{
           })}
         </Box>
       </>
+    );
+  }
+
+  function renderVitals() {
+    return (
+      <>
+        {renderSheetHeader("Stress", characterManager.actions.addStressTrack)}
+        <Box className={sheetContentStyle}>{renderStressTracks()}</Box>
+        {renderSheetHeader(
+          "Consequences",
+          characterManager.actions.addConsequence
+        )}
+        <Box className={sheetContentStyle}>{renderConsequences()}</Box>
+      </>
+    );
+  }
+
+  function renderStressTracks() {
+    return (
+      <Box>
+        {characterManager.state.character.stressTracks.map(
+          (stressTrack, index) => {
+            return (
+              <Box pb=".5rem" key={index}>
+                <Grid container justify="space-between" wrap="nowrap">
+                  <Grid item xs={6}>
+                    <FateLabel display="inline">
+                      <ContentEditable
+                        inline
+                        fullWidth
+                        value={stressTrack.name}
+                        onChange={(value) => {
+                          characterManager.actions.setStressTrackName(
+                            index,
+                            value
+                          );
+                        }}
+                      />
+                    </FateLabel>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.removeStressBox(index);
+                      }}
+                    >
+                      <RemoveCircleOutlineIcon></RemoveCircleOutlineIcon>
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.addStressBox(index);
+                      }}
+                    >
+                      <AddCircleOutlineIcon></AddCircleOutlineIcon>
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.removeStressTrack(index);
+                      }}
+                    >
+                      <RemoveIcon></RemoveIcon>
+                    </IconButton>
+                  </Grid>
+                </Grid>
+
+                <Grid container justify="flex-start">
+                  {stressTrack.value.map((stressBox, boxIndex) => {
+                    return (
+                      <Grid item key={boxIndex} xs={2}>
+                        <Checkbox
+                          color="default"
+                          checked={stressBox}
+                          onChange={(event) => {
+                            characterManager.actions.toggleStressBox(
+                              index,
+                              boxIndex
+                            );
+                          }}
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </Box>
+            );
+          }
+        )}
+      </Box>
+    );
+  }
+
+  function renderConsequences() {
+    return (
+      <Box>
+        {characterManager.state.character.consequences.map(
+          (consequence, index) => {
+            return (
+              <Box py=".5rem" key={index}>
+                <Box pb=".5rem" key={index}>
+                  <Grid container justify="space-between" wrap="nowrap">
+                    <Grid item>
+                      {" "}
+                      <FateLabel display="inline">
+                        <ContentEditable
+                          inline
+                          fullWidth
+                          value={consequence.name}
+                          onChange={(value) => {
+                            characterManager.actions.setConsequenceName(
+                              index,
+                              value
+                            );
+                          }}
+                        />
+                      </FateLabel>
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        size="small"
+                        className={smallIconButtonStyle}
+                        onClick={() => {
+                          characterManager.actions.removeConsequence(index);
+                        }}
+                      >
+                        <RemoveIcon></RemoveIcon>
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <Box>
+                  <Typography>
+                    <ContentEditable
+                      border
+                      inline
+                      fullWidth
+                      value={consequence.value}
+                      onChange={(value) => {
+                        characterManager.actions.setConsequence(index, value);
+                      }}
+                    />
+                  </Typography>
+                </Box>
+              </Box>
+            );
+          }
+        )}
+      </Box>
     );
   }
 };

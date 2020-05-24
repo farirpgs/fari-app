@@ -4,6 +4,7 @@ import { v4 as uuidV4 } from "uuid";
 export enum CharacterType {
   CoreCondensed,
   Accelerated,
+  Blank,
 }
 export function useCharacters() {
   const key = "fari-characters";
@@ -36,10 +37,7 @@ export function useCharacters() {
   }, [characters]);
 
   function add(type: CharacterType) {
-    const defaultCharacter =
-      type === CharacterType.CoreCondensed
-        ? defaultCondensedCharacter
-        : defaultAcceleratedCharacter;
+    const defaultCharacter = defaultCharactersByType[type];
     const newCharacter = {
       ...defaultCharacter,
       id: uuidV4(),
@@ -101,9 +99,9 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Other Aspect", value: "" },
   ],
   stunts: [
-    { name: "Stunt", value: "" },
-    { name: "Stunt", value: "" },
-    { name: "Stunt", value: "" },
+    { name: "Stunt #1", value: "" },
+    { name: "Stunt #2", value: "" },
+    { name: "Stunt #3", value: "" },
   ],
   skills: [
     { name: "Academics", value: "" },
@@ -149,9 +147,9 @@ const defaultAcceleratedCharacter: ICharacter = {
     { name: "Other Aspect", value: "" },
   ],
   stunts: [
-    { name: "Stunt", value: "" },
-    { name: "Stunt", value: "" },
-    { name: "Stunt", value: "" },
+    { name: "Stunt #1", value: "" },
+    { name: "Stunt #2", value: "" },
+    { name: "Stunt #3", value: "" },
   ],
   skills: [
     { name: "Careful", value: "" },
@@ -169,6 +167,23 @@ const defaultAcceleratedCharacter: ICharacter = {
   ],
   version: 1,
 };
+
+const defaultBlankCharacter: ICharacter = {
+  id: undefined,
+  name: "",
+  aspects: [{ name: "Aspect", value: "" }],
+  stunts: [{ name: "Stunt", value: "" }],
+  skills: [{ name: "Skill", value: "" }],
+  stressTracks: [{ name: "Stress", value: [false] }],
+  consequences: [{ name: "Consequence", value: "" }],
+  version: 1,
+};
+
+const defaultCharactersByType = {
+  [CharacterType.CoreCondensed]: defaultCondensedCharacter,
+  [CharacterType.Accelerated]: defaultAcceleratedCharacter,
+  [CharacterType.Blank]: defaultBlankCharacter,
+} as const;
 
 export interface ICharacter {
   id: string;

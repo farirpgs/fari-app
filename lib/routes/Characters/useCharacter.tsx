@@ -20,7 +20,7 @@ export function useCharacter(c: ICharacter) {
     setCharacter(
       produce((draft: ICharacter) => {
         draft.aspects.push({
-          name: `Other Aspect`,
+          name: `Aspect`,
           value: "",
         });
       })
@@ -36,10 +36,12 @@ export function useCharacter(c: ICharacter) {
       })
     );
   }
-  function removeAspect(index: number) {
+  function removeAspect(indexToRemove: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        delete draft.aspects[index];
+        draft.aspects = draft.aspects.filter((aspect, index) => {
+          return index !== indexToRemove;
+        });
       })
     );
   }
@@ -72,10 +74,12 @@ export function useCharacter(c: ICharacter) {
       })
     );
   }
-  function removeSkill(index: number) {
+  function removeSkill(indexToRemove: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        delete draft.skills[index];
+        draft.skills = draft.skills.filter((skill, index) => {
+          return index !== indexToRemove;
+        });
       })
     );
   }
@@ -103,10 +107,12 @@ export function useCharacter(c: ICharacter) {
       })
     );
   }
-  function removeStunt(index: number) {
+  function removeStunt(indexToRemove: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        delete draft.stunts[index];
+        draft.stunts = draft.stunts.filter((stunt, index) => {
+          return index !== indexToRemove;
+        });
       })
     );
   }
@@ -138,7 +144,11 @@ export function useCharacter(c: ICharacter) {
     setCharacter(
       produce((draft: ICharacter) => {
         const numberOfBoxes = draft.stressTracks[index].value.length;
-        delete draft.stressTracks[index].value[numberOfBoxes - 1];
+        draft.stressTracks[index].value = draft.stressTracks[
+          index
+        ].value.filter((value, index) => {
+          return index !== numberOfBoxes - 1;
+        });
       })
     );
   }
@@ -150,10 +160,12 @@ export function useCharacter(c: ICharacter) {
       })
     );
   }
-  function removeStressTrack(index: number) {
+  function removeStressTrack(indexToRemove: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        delete draft.stressTracks[index];
+        draft.stressTracks = draft.stressTracks.filter((track, index) => {
+          return index !== indexToRemove;
+        });
       })
     );
   }
@@ -181,10 +193,12 @@ export function useCharacter(c: ICharacter) {
       })
     );
   }
-  function removeConsequence(index: number) {
+  function removeConsequence(indexToRemove: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        delete draft.consequences[index];
+        draft.consequences = draft.consequences.filter((consequence, index) => {
+          return index !== indexToRemove;
+        });
       })
     );
   }
