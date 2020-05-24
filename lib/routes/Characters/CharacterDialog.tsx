@@ -24,11 +24,11 @@ import {
   ContentEditable,
   sanitizeContentEditable,
 } from "../../components/ContentEditable/ContentEditable";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { FateLabel } from "./FateLabel";
-import { useCharacter } from "./useCharacter";
-import { ICharacter } from "./useCharacters";
+import { useCharacter } from "./hooks/useCharacter";
+import { ICharacter } from "./hooks/useCharacters";
 
 export const CharacterDialog: React.FC<{
   character: ICharacter;
