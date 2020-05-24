@@ -584,6 +584,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               })}
             >
               <ContentEditable
+                autoFocus
                 value={sceneManager.state.scene.name}
                 readonly={!isGM}
                 onChange={(value) => {
