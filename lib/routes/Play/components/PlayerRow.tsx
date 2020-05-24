@@ -18,12 +18,12 @@ import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
-import React from "react";
+import React, { useState } from "react";
 import { Font } from "../../../domains/font/Font";
 import { useFudgeDice } from "../../../hooks/useFudgeDice/useFudgeDice";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
+import { CharacterDialog } from "../../Characters/CharacterDialog";
 import { IPlayer } from "../useScene/IScene";
 
 export const PlayerRow: React.FC<{
@@ -39,7 +39,6 @@ export const PlayerRow: React.FC<{
   const theme = useTheme();
   const { t } = useTranslate();
   const diceManager = useFudgeDice(props.player.rolls);
-
   const shouldRenderOfflinePlayerRemoveButton = props.offline && !props.isMe;
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
@@ -47,6 +46,10 @@ export const PlayerRow: React.FC<{
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
     : textColor.disabled;
+
+  const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
+  const [hover, setHover] = useState(false);
+  const name = props.player.playerName || props.player.character.name;
 
   const selectedRowStyle = css(
     theme.palette.type === "light"
@@ -57,6 +60,12 @@ export const PlayerRow: React.FC<{
           backgroundColor: darken(theme.palette.secondary.dark, 0.75),
         }
   );
+  const clickableRowStyle = css({
+    cursor: "pointer",
+  });
+  const hoveredRowStyle = css({
+    background: theme.palette.action.hover,
+  });
   const playerInfoCellStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
@@ -100,11 +109,32 @@ export const PlayerRow: React.FC<{
   });
   return (
     <>
+      <CharacterDialog
+        readonly
+        open={characterDialogOpen}
+        character={props.player.character}
+        onClose={() => {
+          setCharacterDialogOpen(false);
+        }}
+      ></CharacterDialog>
       <TableRow
         selected={false}
         className={cx({
           [selectedRowStyle]: shouldHighlight,
+          [clickableRowStyle]: !!props.player.character,
+          [hoveredRowStyle]: hover,
         })}
+        onMouseEnter={() => {
+          if (props.player.character) {
+            setHover(true);
+          }
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+        onClick={() => {
+          setCharacterDialogOpen(true);
+        }}
       >
         <TableCell className={playerInfoCellStyle} align="left">
           <Typography
@@ -115,9 +145,7 @@ export const PlayerRow: React.FC<{
               lineHeight: Font.lineHeight(1.2),
             })}
           >
-            {props.isGM
-              ? t(props.player.playerName as IPossibleTranslationKeys)
-              : props.player.playerName}
+            {name}
           </Typography>
         </TableCell>
         <TableCell className={playerInfoCellStyle} align="center">
@@ -207,7 +235,20 @@ export const PlayerRow: React.FC<{
         selected={false}
         className={cx(controlsRowStyle, {
           [selectedRowStyle]: shouldHighlight,
+          [clickableRowStyle]: !!props.player.character,
+          [hoveredRowStyle]: hover,
         })}
+        onMouseEnter={() => {
+          if (props.player.character) {
+            setHover(true);
+          }
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+        onClick={() => {
+          setCharacterDialogOpen(true);
+        }}
       >
         <TableCell colSpan={4}>
           <Grid container alignItems="center" justify="flex-end" spacing={1}>

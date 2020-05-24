@@ -3,6 +3,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useCharacters } from "../Characters/hooks/useCharacters";
 import { IPeerActions } from "./IPeerActions";
 import { PlayPage } from "./PlayPage";
 import { sanitizeSceneName, useScene } from "./useScene/useScene";
@@ -20,6 +21,7 @@ export const PlayRoute: React.FC<{
   const sceneManager = useScene(userId, idFromParams);
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
+  const characterManager = useCharacters();
   const { t } = useTranslate();
 
   const hostManager = usePeerHost({
@@ -68,6 +70,7 @@ export const PlayRoute: React.FC<{
 
       <PlayPage
         sceneManager={sceneManager}
+        characterManager={characterManager}
         connectionsManager={connectionsManager}
         isLoading={
           hostManager.state.loading || connectionsManager.state.loading

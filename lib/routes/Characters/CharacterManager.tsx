@@ -19,13 +19,16 @@ import {
   useCharacters,
 } from "./hooks/useCharacters";
 
-export const CharacterManager: React.FC<{}> = (props) => {
+export const CharacterManager: React.FC<{
+  onSelection(character: ICharacter): void;
+}> = (props) => {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const charactersManager = useCharacters();
   return (
     <>
       <CharacterDialog
+        open={!!charactersManager.state.selectedCharacter}
         character={charactersManager.state.selectedCharacter}
         onSave={(newCharacter) => {
           charactersManager.actions.close();
@@ -113,7 +116,11 @@ export const CharacterManager: React.FC<{}> = (props) => {
         <Paper
           elevation={undefined}
           onClick={() => {
-            charactersManager.actions.select(character);
+            if (props.onSelection) {
+              props.onSelection(character);
+            } else {
+              charactersManager.actions.select(character);
+            }
           }}
           className={css({
             "cursor": "pointer",

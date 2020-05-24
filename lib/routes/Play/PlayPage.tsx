@@ -12,6 +12,9 @@ import {
   Grid,
   Hidden,
   InputLabel,
+  List,
+  ListItem,
+  ListItemText,
   Paper,
   Table,
   TableBody,
@@ -52,11 +55,12 @@ import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnection";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useCharacters } from "../Characters/hooks/useCharacters";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { IPeerActions } from "./IPeerActions";
 import { AspectType } from "./useScene/AspectType";
-import { useScene } from "./useScene/useScene";
+import { IPeerMeta, useScene } from "./useScene/useScene";
 
 type IOnlineProps = {
   isLoading?: boolean;
@@ -69,10 +73,12 @@ type IProps = IOnlineProps & {
   userId: string;
   idFromParams: string;
   sceneManager: ReturnType<typeof useScene>;
+  characterManager: ReturnType<typeof useCharacters>;
 };
 
 export const PlayPage: React.FC<IProps> = (props) => {
-  const { sceneManager, connectionsManager } = props;
+  const { sceneManager, connectionsManager, characterManager } = props;
+
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
@@ -133,8 +139,17 @@ export const PlayPage: React.FC<IProps> = (props) => {
         <JoinAGame
           connecting={connectionsManager.state.connectingToHost}
           error={connectionsManager.state.connectingToHostError}
-          onSubmit={(playerName) => {
-            connectionsManager.actions.connect(
+          onSubmitCharacter={(character) => {
+            connectionsManager.actions.connect<IPeerMeta>(
+              props.idFromParams,
+              props.userId,
+              {
+                character: character,
+              }
+            );
+          }}
+          onSubmitPlayerName={(playerName) => {
+            connectionsManager.actions.connect<IPeerMeta>(
               props.idFromParams,
               props.userId,
               {
@@ -196,6 +211,35 @@ export const PlayPage: React.FC<IProps> = (props) => {
               }}
               fullWidth
             />
+            {characterManager.state.characters.length !== 0 && (
+              <>
+                <Box py="1rem">
+                  <Typography variant="h6" align="center">
+                    {"OR"}
+                  </Typography>
+                </Box>
+                <List>
+                  {characterManager.state.characters.map((character, index) => {
+                    const [firstAspect] = character.aspects;
+                    return (
+                      <ListItem
+                        button
+                        key={index}
+                        onClick={() => {
+                          sceneManager.actions.addOfflineCharacter(character);
+                          setOfflineCharacterDialogOpen(false);
+                        }}
+                      >
+                        <ListItemText
+                          primary={character.name}
+                          secondary={firstAspect?.value || "..."}
+                        />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </>
+            )}
           </DialogContent>
           <DialogActions>
             <Button

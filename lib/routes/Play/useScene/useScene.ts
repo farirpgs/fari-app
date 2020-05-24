@@ -6,6 +6,7 @@ import { sanitizeContentEditable } from "../../../components/ContentEditable/Con
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { ICharacter } from "../../Characters/hooks/useCharacters";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -198,9 +199,11 @@ export function useScene(userId: string, gameId: string) {
     setScene(
       produce((draft: IScene) => {
         draft.players = connections.map((c) => {
+          const meta: IPeerMeta = c.metadata;
           return {
             id: c.label,
-            playerName: c.metadata.playerName,
+            playerName: meta.playerName,
+            character: meta.character,
             rolls: [],
             playedDuringTurn: false,
             fatePoints: 3,
@@ -216,6 +219,21 @@ export function useScene(userId: string, gameId: string) {
         draft.players.push({
           id: uuidV4(),
           playerName: playerName,
+          character: undefined,
+          rolls: [],
+          playedDuringTurn: false,
+          fatePoints: 3,
+        });
+      })
+    );
+  }
+  function addOfflineCharacter(character: ICharacter) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.players.push({
+          id: uuidV4(),
+          playerName: "",
+          character: character,
           rolls: [],
           playedDuringTurn: false,
           fatePoints: 3,
@@ -345,6 +363,7 @@ export function useScene(userId: string, gameId: string) {
       updateAspectColor,
       updatePlayers,
       addOfflinePlayer,
+      addOfflineCharacter,
       removeOfflinePlayer,
       updatePlayerFatePoints,
       updatePlayerPlayedDuringTurn,
@@ -420,4 +439,9 @@ export function sanitizeSceneName(sceneName: string) {
   return sceneName === defaultSceneName
     ? ""
     : sanitizeContentEditable(sceneName);
+}
+
+export interface IPeerMeta {
+  playerName?: string;
+  character?: ICharacter;
 }

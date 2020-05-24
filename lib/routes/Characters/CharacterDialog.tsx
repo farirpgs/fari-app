@@ -31,11 +31,12 @@ import { useCharacter } from "./hooks/useCharacter";
 import { ICharacter } from "./hooks/useCharacters";
 
 export const CharacterDialog: React.FC<{
+  open: boolean;
   character: ICharacter;
-  onSave(newCharacter: ICharacter): void;
-  onDelete(): void;
-  onClose(): void;
   readonly?: boolean;
+  onClose(): void;
+  onSave?(newCharacter: ICharacter): void;
+  onDelete?(): void;
 }> = (props) => {
   const theme = useTheme();
   const characterManager = useCharacter(props.character);
@@ -72,7 +73,7 @@ export const CharacterDialog: React.FC<{
 
   return (
     <Dialog
-      open={!!props.character}
+      open={props.open}
       fullWidth
       maxWidth="sm"
       scroll="paper"
@@ -102,34 +103,38 @@ export const CharacterDialog: React.FC<{
   );
 
   function renderActions() {
-    if (!props.readonly) {
+    if (!props.onDelete && !props.onSave) {
       return null;
     }
     return (
       <DialogActions className={css({ padding: "0" })}>
         <Box className={sheetContentStyle}>
           <Grid container wrap="nowrap" justify="space-between">
-            <Grid item>
-              <ThemeProvider theme={errorTheme}>
+            {props.onDelete && (
+              <Grid item>
+                <ThemeProvider theme={errorTheme}>
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={props.onDelete}
+                  >
+                    {"Delete"}
+                  </Button>
+                </ThemeProvider>
+              </Grid>
+            )}
+            {props.onSave && (
+              <Grid item>
                 <Button
                   color="primary"
                   variant="outlined"
-                  onClick={props.onDelete}
+                  type="submit"
+                  onClick={onSave}
                 >
-                  {"Delete"}
+                  {"Save"}
                 </Button>
-              </ThemeProvider>
-            </Grid>
-            <Grid item>
-              <Button
-                color="primary"
-                variant="outlined"
-                type="submit"
-                onClick={onSave}
-              >
-                {"Save"}
-              </Button>
-            </Grid>
+              </Grid>
+            )}
           </Grid>
         </Box>
       </DialogActions>
@@ -155,7 +160,7 @@ export const CharacterDialog: React.FC<{
               }}
             ></ContentEditable>
           </Grid>
-          {!!props.readonly && (
+          {!props.readonly && (
             <Grid item>
               <IconButton size="small" onClick={props.onClose}>
                 <CloseIcon />
@@ -168,7 +173,7 @@ export const CharacterDialog: React.FC<{
   }
 
   function renderSheetHeader(label: string, onAdd?: () => void) {
-    const shouldRenderAddButton = onAdd && !!props.readonly;
+    const shouldRenderAddButton = onAdd && !props.readonly;
     return (
       <Box className={sheetHeader}>
         <Grid container justify="space-between" wrap="nowrap">
@@ -225,7 +230,7 @@ export const CharacterDialog: React.FC<{
                         />
                       </FateLabel>
                     </Grid>
-                    {!!props.readonly && (
+                    {!props.readonly && (
                       <Grid item>
                         <IconButton
                           size="small"
@@ -302,7 +307,7 @@ export const CharacterDialog: React.FC<{
                       />
                     </FateLabel>
                   </Grid>
-                  {!!props.readonly && (
+                  {!props.readonly && (
                     <Grid item className={css({ marginLeft: "auto" })}>
                       <IconButton
                         size="small"
@@ -355,7 +360,7 @@ export const CharacterDialog: React.FC<{
                         />
                       </FateLabel>
                     </Grid>
-                    {!!props.readonly && (
+                    {!props.readonly && (
                       <Grid item>
                         <IconButton
                           size="small"
@@ -428,7 +433,7 @@ export const CharacterDialog: React.FC<{
                       />
                     </FateLabel>
                   </Grid>
-                  {!!props.readonly && (
+                  {!props.readonly && (
                     <Grid item>
                       <IconButton
                         size="small"
@@ -440,7 +445,7 @@ export const CharacterDialog: React.FC<{
                       </IconButton>
                     </Grid>
                   )}
-                  {!!props.readonly && (
+                  {!props.readonly && (
                     <Grid item>
                       <IconButton
                         size="small"
@@ -452,7 +457,7 @@ export const CharacterDialog: React.FC<{
                       </IconButton>
                     </Grid>
                   )}
-                  {!!props.readonly && (
+                  {!props.readonly && (
                     <Grid item>
                       <IconButton
                         size="small"
@@ -521,7 +526,7 @@ export const CharacterDialog: React.FC<{
                         />
                       </FateLabel>
                     </Grid>
-                    {!!props.readonly && (
+                    {!props.readonly && (
                       <Grid item>
                         <IconButton
                           size="small"

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { arraySort } from "../../../domains/array/arraySort";
 
 export enum CharacterType {
   CoreCondensed,
@@ -12,6 +13,10 @@ export function useCharacters() {
   const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(
     undefined
   );
+
+  const sortedCharacters = arraySort(characters, [
+    (c) => ({ value: c.lastUpdated, direction: "desc" }),
+  ]);
 
   useEffect(() => {
     // load from local storage
@@ -41,7 +46,8 @@ export function useCharacters() {
     const newCharacter = {
       ...defaultCharacter,
       id: uuidV4(),
-    };
+      lastUpdated: new Date().getTime(),
+    } as ICharacter;
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
     });
@@ -52,7 +58,10 @@ export function useCharacters() {
     setCharacters((draft: Array<ICharacter>) => {
       return draft.map((c) => {
         if (c.id === character.id) {
-          return character;
+          return {
+            ...character,
+            lastUpdated: new Date().getTime(),
+          };
         }
         return c;
       });
@@ -75,7 +84,7 @@ export function useCharacters() {
 
   return {
     state: {
-      characters,
+      characters: sortedCharacters,
       selectedCharacter,
     },
     actions: {
@@ -194,6 +203,7 @@ export interface ICharacter {
   stressTracks: ICharacterCustomField<Array<boolean>>;
   consequences: ICharacterCustomField<string>;
   version: number;
+  lastUpdated?: number;
 }
 
 export type ICharacterCustomField<T> = Array<{ name: string; value: T }>;
