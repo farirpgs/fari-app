@@ -111,7 +111,7 @@ export const CharacterDialog: React.FC<{
     return (
       <DialogActions className={css({ padding: "0" })}>
         <Box className={sheetContentStyle}>
-          <Grid container wrap="nowrap" justify="space-between">
+          <Grid container wrap="nowrap">
             {props.onDelete && (
               <Grid item>
                 <ThemeProvider theme={errorTheme}>
@@ -126,7 +126,7 @@ export const CharacterDialog: React.FC<{
               </Grid>
             )}
             {props.onSave && (
-              <Grid item>
+              <Grid item className={css({ marginLeft: "auto" })}>
                 <Button
                   color="primary"
                   variant="outlined"

@@ -300,6 +300,7 @@ export function useScene(userId: string, gameId: string) {
         });
       })
     );
+    charactersManager.actions.update(character);
   }
 
   function updatePlayerFatePoints(id: string, fatePoints: number) {

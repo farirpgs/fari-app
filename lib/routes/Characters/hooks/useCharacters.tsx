@@ -33,11 +33,13 @@ export function useCharacters() {
 
   useEffect(() => {
     // sync local storage
-    try {
-      const serialized = JSON.stringify(characters);
-      localStorage.setItem(key, serialized);
-    } catch (error) {
-      console.error(error);
+    if (characters.length > 0) {
+      try {
+        const serialized = JSON.stringify(characters);
+        localStorage.setItem(key, serialized);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [characters]);
 
