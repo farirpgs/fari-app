@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Checkbox,
@@ -93,6 +94,7 @@ export const CharacterDialog: React.FC<{
           >
             {renderAspects()}
             {renderStunts()}
+            {renderRefresh()}
           </Grid>
           <Grid item xs={6}>
             {renderVitals()}
@@ -398,6 +400,40 @@ export const CharacterDialog: React.FC<{
               </Box>
             );
           })}
+        </Box>
+      </>
+    );
+  }
+
+  function renderRefresh() {
+    return (
+      <>
+        {renderSheetHeader(t("character-dialog.refresh"))}
+        <Box className={sheetContentStyle}>
+          <Grid container justify="center">
+            <Grid item>
+              <Avatar
+                className={css({
+                  color: headerBackgroundColors.primary,
+                  background: theme.palette.background.paper,
+                  border: `3px solid ${headerBackgroundColors.primary}`,
+                  width: "5rem",
+                  height: "5rem",
+                  fontSize: "2rem",
+                })}
+              >
+                <ContentEditable
+                  value={characterManager.state.character.refresh.toString()}
+                  onChange={(value, e) => {
+                    const intValue = parseInt(value);
+                    if (!isNaN(intValue)) {
+                      characterManager.actions.udpateRefresh(intValue);
+                    }
+                  }}
+                ></ContentEditable>
+              </Avatar>
+            </Grid>
+          </Grid>
         </Box>
       </>
     );

@@ -54,7 +54,7 @@ import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnection";
+import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useCharacters } from "../Characters/hooks/useCharacters";
@@ -220,12 +220,16 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <>
                 <Box py="1rem">
                   <Typography variant="h6" align="center">
-                    {"OR"}
+                    {t("play-route-or-pick-existing")}
                   </Typography>
                 </Box>
                 <List>
                   {characterManager.state.characters.map((character, index) => {
                     const [firstAspect] = character.aspects;
+                    console.log(
+                      "characterManager.state.characters",
+                      characterManager.state.characters
+                    );
                     return (
                       <ListItem
                         button
@@ -237,7 +241,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       >
                         <ListItemText
                           primary={character.name}
-                          secondary={firstAspect?.value || "..."}
+                          secondary={
+                            <ContentEditable
+                              readonly
+                              inline
+                              value={firstAspect?.value || "..."}
+                            ></ContentEditable>
+                          }
                         />
                       </ListItem>
                     );

@@ -202,6 +202,15 @@ export function useCharacter(c: ICharacter) {
       })
     );
   }
+
+  function udpateRefresh(value: number) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.refresh = value;
+      })
+    );
+  }
+
   return {
     state: { character },
     actions: {
@@ -228,6 +237,7 @@ export function useCharacter(c: ICharacter) {
       setConsequenceName,
       setConsequence,
       removeConsequence,
+      udpateRefresh,
     },
   };
 }

@@ -15,11 +15,11 @@ export const PlayOfflineRoute: React.FC<{
 }> = (props) => {
   const idFromParams = props.match.params.id;
   const userId = useUserId();
-  const sceneManager = useScene(userId, idFromParams);
+  const characterManager = useCharacters();
+  const sceneManager = useScene(userId, idFromParams, characterManager);
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
 
-  const characterManager = useCharacters();
   const { t } = useTranslate();
 
   return (

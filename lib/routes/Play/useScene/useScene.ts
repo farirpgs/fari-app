@@ -16,9 +16,12 @@ import { IAspect, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
-export function useScene(userId: string, gameId: string) {
+export function useScene(
+  userId: string,
+  gameId: string,
+  charactersManager: ReturnType<typeof useCharacters>
+) {
   const isGM = !gameId;
-  const charactersManager = useCharacters();
   const [scene, setScene] = useState<IScene>(() => ({
     name: defaultSceneName,
     aspects: defaultSceneAspects,
@@ -215,7 +218,7 @@ export function useScene(userId: string, gameId: string) {
             character: meta.character,
             rolls: [],
             playedDuringTurn: false,
-            fatePoints: 3,
+            fatePoints: meta.character.refresh ?? 3,
           } as IPlayer;
         });
       })
@@ -236,6 +239,7 @@ export function useScene(userId: string, gameId: string) {
       })
     );
   }
+
   function addOfflineCharacter(character: ICharacter) {
     setScene(
       produce((draft: IScene) => {
@@ -245,7 +249,7 @@ export function useScene(userId: string, gameId: string) {
           character: character,
           rolls: [],
           playedDuringTurn: false,
-          fatePoints: 3,
+          fatePoints: character.refresh,
         });
       })
     );

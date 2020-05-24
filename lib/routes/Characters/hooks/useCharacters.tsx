@@ -147,6 +147,7 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Moderate", value: "" },
     { name: "Severe", value: "" },
   ],
+  refresh: 3,
   version: 1,
 };
 
@@ -179,6 +180,7 @@ const defaultAcceleratedCharacter: ICharacter = {
     { name: "Moderate", value: "" },
     { name: "Severe", value: "" },
   ],
+  refresh: 3,
   version: 1,
 };
 
@@ -190,6 +192,7 @@ const defaultCustomCharacter: ICharacter = {
   skills: [{ name: "Skill", value: "" }],
   stressTracks: [{ name: "Stress", value: [false] }],
   consequences: [{ name: "Consequence", value: "" }],
+  refresh: 3,
   version: 1,
 };
 
@@ -209,6 +212,7 @@ export interface ICharacter {
   consequences: ICharacterCustomField<string>;
   version: number;
   lastUpdated?: number;
+  refresh: number;
 }
 
 export type ICharacterCustomField<T> = Array<{ name: string; value: T }>;

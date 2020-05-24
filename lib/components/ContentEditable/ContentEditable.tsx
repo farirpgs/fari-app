@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 
 export const ContentEditable: React.FC<{
   value: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
   readonly?: boolean;
   autoFocus?: boolean;
   inline?: boolean;
@@ -31,9 +31,9 @@ export const ContentEditable: React.FC<{
     focusOnLoad();
   }, []);
 
-  function onChange() {
+  function onChange(e) {
     if ($ref.current) {
-      props.onChange($ref.current.innerHTML);
+      props.onChange($ref.current.innerHTML, e);
     }
   }
 
@@ -54,11 +54,11 @@ export const ContentEditable: React.FC<{
         },
       })}
       ref={$ref}
-      onInput={() => {
-        onChange();
+      onInput={(e) => {
+        onChange(e);
       }}
-      onBlur={() => {
-        onChange();
+      onBlur={(e) => {
+        onChange(e);
       }}
       contentEditable={!props.readonly}
     ></Component>

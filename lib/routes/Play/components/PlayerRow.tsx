@@ -164,7 +164,8 @@ export const PlayerRow: React.FC<{
           >
             <span>
               <IconButton
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   props.onPlayedInTurnOrderChange(
                     !props.player.playedDuringTurn
                   );
@@ -193,7 +194,8 @@ export const PlayerRow: React.FC<{
                   borderRadius: "50%",
                 })}
                 disabled={!canControl}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   props.onFatePointsChange(props.player.fatePoints - 1);
                 }}
               >
@@ -214,7 +216,8 @@ export const PlayerRow: React.FC<{
                     color: diceTextColors.primary,
                   })}
                   disabled={!canControl}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     props.onDiceRoll();
                   }}
                 >
@@ -264,7 +267,8 @@ export const PlayerRow: React.FC<{
                   <IconButton
                     size="small"
                     disabled={props.player.fatePoints === 0}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       const fatePointsMinusOne = props.player.fatePoints - 1;
                       const newValue =
                         fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
@@ -283,7 +287,8 @@ export const PlayerRow: React.FC<{
               <Tooltip title={t("player-row.add-fate-point")}>
                 <IconButton
                   size="small"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     props.onFatePointsChange(props.player.fatePoints + 1);
                   }}
                 >
@@ -298,7 +303,8 @@ export const PlayerRow: React.FC<{
                 <Tooltip title={t("player-row.remove-character")}>
                   <IconButton
                     size="small"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       props.onPlayerRemove();
                     }}
                   >

@@ -26,11 +26,11 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement>(undefined);
 
-  useEffect(() => {
-    if (props.lines && props.readonly) {
-      setLines(props.lines);
-    }
-  }, [props.lines, props.readonly]);
+  // useEffect(() => {
+  //   if (props.lines && props.readonly) {
+  //     setLines(props.lines);
+  //   }
+  // }, [props.lines, props.readonly]);
 
   useImperativeHandle(ref, () => {
     return {
@@ -57,7 +57,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   function handleMouseDown(
     mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) {
-    if (mouseEvent.button !== 0) {
+    if (mouseEvent.button !== 0 || props.readonly) {
       return;
     }
 
@@ -119,7 +119,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
         alignItems: "center",
         width: "100%",
         height: "100%",
-        cursor: "crosshair",
+        cursor: props.readonly ? "inherit" : "crosshair",
       })}
       ref={$container}
       onMouseDown={handleMouseDown}

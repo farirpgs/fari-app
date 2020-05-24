@@ -63,6 +63,7 @@ export const enTranslation = {
   "play-route.error.description1": `We could not connect you to the server in order to initialize the game`,
   "play-route.error.description2": `Try refreshing the page to see if that fixes the issue. You can start an offline game instead.`,
   "play-route.connect-to-game": `Connect to a Game`,
+  "play-route-or-pick-existing": `Or pick and existing Character`,
   "index-card.add-1-free-invoke": `+ Free Invoke`,
   "index-card.add-1-physical-stress-box": `+  Physical Stress`,
   "index-card.add-1-mental-stress-box": `+  Mental Stress`,
@@ -99,4 +100,5 @@ export const enTranslation = {
   "character-dialog.consequences": `Consequences`,
   "character-dialog.stunts-extras": `Stunts & Extras`,
   "character-dialog.skills": `Skills`,
+  "character-dialog.refresh": `Refresh`,
 } as const;

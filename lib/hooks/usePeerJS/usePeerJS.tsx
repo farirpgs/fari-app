@@ -9,7 +9,8 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
-    peer.current = new Peer(uuidV4(), { debug: options.debug ? 3 : 0 });
+    const id = uuidV4();
+    peer.current = new Peer(id, { debug: options.debug ? 3 : 0 });
   }
 
   useEffect(() => {

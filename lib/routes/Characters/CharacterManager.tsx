@@ -13,6 +13,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { css, cx } from "emotion";
 import React, { useState } from "react";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./CharacterDialog";
@@ -59,14 +60,22 @@ export const CharacterManager: React.FC<{
         }}
       ></CharacterDialog>
 
-      <Box py="1rem">
-        <Grid container spacing={4} wrap="nowrap" alignItems="flex-end">
-          <Grid item>
-            <Typography variant="h4">{t("characters-route.title")}</Typography>
-          </Grid>
+      <Box pb="1rem">
+        <Typography variant="h4" align="center">
+          {t("characters-route.title")}
+        </Typography>
+      </Box>
+      <Box pb="1rem">
+        <Grid
+          container
+          spacing={4}
+          wrap="nowrap"
+          justify="center"
+          alignItems="flex-end"
+        >
           <Grid item>
             <Button
-              color="secondary"
+              color="primary"
               variant="contained"
               onClick={(event) => {
                 setAnchorEl(event.currentTarget);
@@ -78,9 +87,6 @@ export const CharacterManager: React.FC<{
             {renderAddCharacterMenu()}
           </Grid>
         </Grid>
-        <Box>
-          <Typography></Typography>
-        </Box>
       </Box>
       <Box py="1rem">
         <MagicGridContainer items={charactersManager.state.characters.length}>
@@ -170,10 +176,18 @@ export const CharacterManager: React.FC<{
                 display="flex"
                 justifyContent="center"
               >
-                <ContentEditable
-                  value={character.name}
-                  readonly
-                ></ContentEditable>
+                <Grid container spacing={2} wrap="nowrap" alignItems="baseline">
+                  <Grid item>
+                    <FateLabel>{t("character-dialog.name")}:</FateLabel>
+                  </Grid>
+                  <Grid item>
+                    <ContentEditable
+                      inline
+                      readonly
+                      value={character.name}
+                    ></ContentEditable>
+                  </Grid>
+                </Grid>
               </Box>
             </Box>
             <Box
@@ -185,10 +199,20 @@ export const CharacterManager: React.FC<{
                 borderBottom: `1px solid ${theme.palette.divider}`,
               })}
             >
-              <Box p="0 1rem" display="flex" justifyContent="center">
-                <Typography>
-                  <i>{firstAspect?.value || "..."}</i>
-                </Typography>
+              <Box p="1rem">
+                {character.aspects.slice(0, 3).map((a, index) => {
+                  return (
+                    <Box pb="1rem" key={index}>
+                      <Box>
+                        <FateLabel>{a.name}</FateLabel>
+                      </Box>
+                      <ContentEditable
+                        readonly
+                        value={a.value}
+                      ></ContentEditable>
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
           </Box>

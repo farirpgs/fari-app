@@ -65,6 +65,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.error.description1": undefined,
   "play-route.error.description2": undefined,
   "play-route.connect-to-game": undefined,
+  "play-route-or-pick-existing": undefined,
   "index-card.add-1-free-invoke": undefined,
   "index-card.add-1-physical-stress-box": undefined,
   "index-card.add-1-mental-stress-box": undefined,
