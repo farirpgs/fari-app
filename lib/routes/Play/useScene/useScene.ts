@@ -6,7 +6,10 @@ import { sanitizeContentEditable } from "../../../components/ContentEditable/Con
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
-import { ICharacter } from "../../Characters/hooks/useCharacters";
+import {
+  ICharacter,
+  useCharacters,
+} from "../../Characters/hooks/useCharacters";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -14,6 +17,7 @@ const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
 export function useScene(userId: string, gameId: string) {
   const isGM = !gameId;
+  const charactersManager = useCharacters();
   const [scene, setScene] = useState<IScene>(() => ({
     name: defaultSceneName,
     aspects: defaultSceneAspects,
@@ -55,6 +59,9 @@ export function useScene(userId: string, gameId: string) {
   function safeSetScene(newScene: IScene) {
     if (newScene) {
       setScene(newScene);
+      newScene.players.forEach((p) => {
+        charactersManager.actions.update(p.character);
+      });
     }
   }
 
@@ -282,6 +289,19 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function updatePlayerCharacter(id: string, character: ICharacter) {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.character = character;
+          }
+        });
+      })
+    );
+  }
+
   function updatePlayerFatePoints(id: string, fatePoints: number) {
     setScene(
       produce((draft: IScene) => {
@@ -372,6 +392,7 @@ export function useScene(userId: string, gameId: string) {
       fireGoodConfetti,
       fireBadConfetti,
       toggleSort,
+      updatePlayerCharacter,
     },
   };
 }

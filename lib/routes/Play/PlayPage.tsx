@@ -1,34 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  Fade,
-  Grid,
-  Hidden,
-  InputLabel,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  ThemeProvider,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { Box, Button, CircularProgress, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fade, Grid, Hidden, InputLabel, List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -407,6 +377,19 @@ export const PlayPage: React.FC<IProps> = (props) => {
                           connectionsManager.actions.sendToHost<IPeerActions>({
                             action: "update-fate-point",
                             payload: fatePoints,
+                          });
+                        }
+                      }}
+                      onCharacterUpdate={(character)=>{
+                        if (isGM) {
+                          sceneManager.actions.updatePlayerCharacter(
+                            player.id,
+                            character
+                          );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "update-character",
+                            payload: character,
                           });
                         }
                       }}

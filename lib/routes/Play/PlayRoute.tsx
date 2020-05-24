@@ -38,6 +38,9 @@ export const PlayRoute: React.FC<{
           peerAction.payload
         );
       }
+      if (peerAction.action === "update-character") {
+        sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
+      }
     },
     debug: debug,
   });

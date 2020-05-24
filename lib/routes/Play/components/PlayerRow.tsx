@@ -24,6 +24,7 @@ import { useFudgeDice } from "../../../hooks/useFudgeDice/useFudgeDice";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "../../Characters/CharacterDialog";
+import { ICharacter } from "../../Characters/hooks/useCharacters";
 import { IPlayer } from "../useScene/IScene";
 
 export const PlayerRow: React.FC<{
@@ -35,6 +36,7 @@ export const PlayerRow: React.FC<{
   onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onFatePointsChange(fatePoints: number): void;
   onPlayerRemove(): void;
+  onCharacterUpdate(character: ICharacter): void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
@@ -110,9 +112,10 @@ export const PlayerRow: React.FC<{
   return (
     <>
       <CharacterDialog
-        readonly
+        readonly={!canControl}
         open={characterDialogOpen}
         character={props.player.character}
+        onSave={(updatedCharacter) => {}}
         onClose={() => {
           setCharacterDialogOpen(false);
         }}

@@ -55,6 +55,9 @@ export function useCharacters() {
   }
 
   function update(character: ICharacter) {
+    if (!character) {
+      return;
+    }
     setCharacters((draft: Array<ICharacter>) => {
       return draft.map((c) => {
         if (c.id === character.id) {
