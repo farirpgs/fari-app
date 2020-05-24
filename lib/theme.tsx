@@ -20,6 +20,12 @@ export const defaultThemeConfiguration: ThemeOptions = {
       root: {
         borderRadius: "20px",
       },
+      contained: {
+        fontWeight: 700,
+      },
+      outlined: {
+        fontWeight: 700,
+      },
     },
   },
 };
