@@ -102,4 +102,5 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "character-dialog.consequences": undefined,
   "character-dialog.stunts-extras": undefined,
   "character-dialog.skills": undefined,
+  "character-dialog.refresh": undefined,
 };
