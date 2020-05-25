@@ -41,6 +41,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import UndoIcon from "@material-ui/icons/Undo";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
@@ -220,16 +221,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
               <>
                 <Box py="1rem">
                   <Typography variant="h6" align="center">
-                    {t("play-route-or-pick-existing")}
+                    {t("play-route.or-pick-existing")}
                   </Typography>
                 </Box>
                 <List>
                   {characterManager.state.characters.map((character, index) => {
                     const [firstAspect] = character.aspects;
-                    console.log(
-                      "characterManager.state.characters",
-                      characterManager.state.characters
-                    );
+
                     return (
                       <ListItem
                         button
@@ -458,18 +456,33 @@ export const PlayPage: React.FC<IProps> = (props) => {
             ></DrawArea>
           </Box>
           <Divider></Divider>
-          <Box p="1rem" display="flex" justifyContent="flex-end">
-            <Button
-              onClick={() => {
-                if ($drawArea.current) {
-                  $drawArea.current.clear();
-                  sceneManager.actions.setDrawAreaLines([]);
-                }
-              }}
-              endIcon={<GestureIcon></GestureIcon>}
-            >
-              {"Clear"}
-            </Button>
+          <Box p="1rem">
+            <Grid container justify="space-between">
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    if ($drawArea.current) {
+                      $drawArea.current.clear();
+                    }
+                  }}
+                  endIcon={<GestureIcon></GestureIcon>}
+                >
+                  {t("play-route.clear-drawing")}
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    if ($drawArea.current) {
+                      $drawArea.current.undo();
+                    }
+                  }}
+                  endIcon={<UndoIcon></UndoIcon>}
+                >
+                  {t("play-route.undo-drawing")}
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </Paper>
       </Box>

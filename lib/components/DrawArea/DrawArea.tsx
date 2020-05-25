@@ -14,6 +14,7 @@ interface IProps {
 
 interface IHandles {
   clear(): void;
+  undo(): void;
 }
 
 export type IDrawAreaHandles = IHandles;
@@ -26,16 +27,21 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement>(undefined);
 
-  // useEffect(() => {
-  //   if (props.lines && props.readonly) {
-  //     setLines(props.lines);
-  //   }
-  // }, [props.lines, props.readonly]);
-
   useImperativeHandle(ref, () => {
     return {
       clear() {
         setLines([]);
+        props.onChange?.([]);
+      },
+      undo() {
+        setLines((draft) => {
+          const lastElementIndex = draft.length - 1;
+          const newLines = draft.filter((line, index) => {
+            return index !== lastElementIndex;
+          });
+          props.onChange?.(newLines);
+          return newLines;
+        });
       },
     };
   });
