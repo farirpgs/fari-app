@@ -1,4 +1,12 @@
-import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+} from "@material-ui/core";
+import { css } from "emotion";
 import React from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
@@ -46,8 +54,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 <Typography variant="body1" align="center">
                   {t("home-route.play-online.description")}
                 </Typography>
-
-                <Box pt="2rem" textAlign="center" marginTop="auto">
+                <Box py="2rem" textAlign="center" marginTop="auto">
                   <Button
                     type="submit"
                     variant="contained"
@@ -71,7 +78,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 <Typography variant="body1" align="center">
                   {t("home-route.play-offline.description")}
                 </Typography>
-                <Box pt="2rem" textAlign="center" marginTop="auto">
+                <Box py="2rem" textAlign="center" marginTop="auto">
                   <Button
                     type="submit"
                     variant="outlined"
@@ -87,6 +94,31 @@ export const HomeRoute: React.FC<{}> = (props) => {
               </Box>
             </Grid>
           </Grid>
+          <Box py="1rem">
+            <Divider></Divider>
+          </Box>
+        </Container>
+        <Container maxWidth="sm">
+          <Typography variant="h5" align="center" color="error">
+            <b>{"home-route.instabilities-1"}</b>
+          </Typography>
+          <br />
+          <Typography variant="body1" align="center" color="textSecondary">
+            {"home-route.instabilities-2"}
+          </Typography>
+          <br />
+          <Typography
+            variant="body1"
+            align="center"
+            color="textSecondary"
+            className={css({ fontWeight: "bold" })}
+          >
+            {"home-route.instabilities-3"}
+          </Typography>
+          <br />
+          <Typography variant="body1" align="center" color="textSecondary">
+            {"home-route.instabilities-4"}
+          </Typography>
         </Container>
       </Box>
     </Page>
