@@ -43,7 +43,7 @@ export function useCharacters() {
     }
   }, [characters]);
 
-  function add(type: CharacterType) {
+  function add(type: CharacterType): ICharacter {
     const defaultCharacter = defaultCharactersByType[type];
     const newCharacter = {
       ...defaultCharacter,
@@ -54,6 +54,7 @@ export function useCharacters() {
       return [newCharacter, ...draft];
     });
     setSelectedCharacter(newCharacter);
+    return newCharacter;
   }
 
   function update(character: ICharacter) {

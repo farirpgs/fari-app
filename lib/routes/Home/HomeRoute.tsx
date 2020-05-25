@@ -100,11 +100,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </Container>
         <Container maxWidth="sm">
           <Typography variant="h5" align="center" color="error">
-            <b>{"home-route.instabilities-1"}</b>
+            <b>{t("home-route.instabilities-1")}</b>
           </Typography>
           <br />
           <Typography variant="body1" align="center" color="textSecondary">
-            {"home-route.instabilities-2"}
+            {t("home-route.instabilities-2")}
           </Typography>
           <br />
           <Typography
@@ -113,11 +113,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
             color="textSecondary"
             className={css({ fontWeight: "bold" })}
           >
-            {"home-route.instabilities-3"}
+            {t("home-route.instabilities-3")}
           </Typography>
           <br />
           <Typography variant="body1" align="center" color="textSecondary">
-            {"home-route.instabilities-4"}
+            {t("home-route.instabilities-4")}
           </Typography>
         </Container>
       </Box>
