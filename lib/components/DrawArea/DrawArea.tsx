@@ -14,6 +14,7 @@ interface IProps {
 
 interface IHandles {
   clear(): void;
+  undo(): void;
 }
 
 export type IDrawAreaHandles = IHandles;
@@ -26,16 +27,21 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement>(undefined);
 
-  useEffect(() => {
-    if (props.lines && props.readonly) {
-      setLines(props.lines);
-    }
-  }, [props.lines, props.readonly]);
-
   useImperativeHandle(ref, () => {
     return {
       clear() {
         setLines([]);
+        props.onChange?.([]);
+      },
+      undo() {
+        setLines((draft) => {
+          const lastElementIndex = draft.length - 1;
+          const newLines = draft.filter((line, index) => {
+            return index !== lastElementIndex;
+          });
+          props.onChange?.(newLines);
+          return newLines;
+        });
       },
     };
   });
@@ -57,7 +63,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   function handleMouseDown(
     mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) {
-    if (mouseEvent.button !== 0) {
+    if (mouseEvent.button !== 0 || props.readonly) {
       return;
     }
 
@@ -119,7 +125,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
         alignItems: "center",
         width: "100%",
         height: "100%",
-        cursor: "crosshair",
+        cursor: props.readonly ? "inherit" : "crosshair",
       })}
       ref={$container}
       onMouseDown={handleMouseDown}

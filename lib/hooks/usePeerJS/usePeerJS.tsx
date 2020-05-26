@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
 
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer>(undefined);
@@ -8,7 +9,8 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
-    peer.current = new Peer(undefined, { debug: options.debug ? 3 : 0 });
+    const id = uuidV4();
+    peer.current = new Peer(id, { debug: options.debug ? 3 : 0 });
   }
 
   useEffect(() => {

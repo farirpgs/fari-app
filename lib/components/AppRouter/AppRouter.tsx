@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AboutRoute } from "../../routes/About/AboutRoute";
 import { ChangelogRoute } from "../../routes/ChangeLog/ChangeLogRoute";
-import { CreateCharacter } from "../../routes/CreateCharacter/CreateCharacter";
+import { CharactersRoute } from "../../routes/Characters/Characters";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
 import { HomeRoute } from "../../routes/Home/HomeRoute";
 import { NotFoundRoute } from "../../routes/NotFound/NotFoundRoute";
@@ -20,9 +20,9 @@ export const AppRouter = () => (
     />
     <Route
       exact
-      path={"/game/:gameSlug/create"}
+      path={"/characters"}
       render={(props) => {
-        return <CreateCharacter />;
+        return <CharactersRoute />;
       }}
     />
     <Route

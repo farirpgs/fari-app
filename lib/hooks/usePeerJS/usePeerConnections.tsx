@@ -57,7 +57,7 @@ export function usePeerConnections(options: {
       connectingToHostError,
     },
     actions: {
-      connect(id: string, userId: string, metadata?: any) {
+      connect<T>(id: string, userId: string, metadata?: T) {
         console.info("Connection: Setup");
         setConnectingToHost(true);
         setConnectingToHostError(false);

@@ -35,7 +35,7 @@ export class InternationalizationService {
         },
         lng: "en",
         fallbackLng: "en",
-        debug: true,
+        debug: false,
         keySeparator: false,
         interpolation: {
           escapeValue: false,
