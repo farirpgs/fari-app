@@ -6,7 +6,7 @@
   "license": "AGPL-3.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel ./lib/index.html --target browser & yarn netlify dev --port 88888",
+    "start": "parcel ./lib/index.html --target browser & nodemon wks-peer-server/fari-peer-server",
     "build": "parcel build ./lib/index.html --target browser",
     "tsc": "tsc --noEmit --project tsconfig.json",
     "lint": "eslint 'lib/**'",
