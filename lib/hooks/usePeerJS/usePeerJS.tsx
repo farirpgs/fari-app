@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
+import { env } from "../../services/injections";
 
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer>(undefined);
@@ -8,7 +9,18 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
-    peer.current = new Peer(undefined, { debug: options.debug ? 3 : 0 });
+    if (env.context === "localhost") {
+      peer.current = new Peer(undefined, {
+        host: "localhost",
+        port: 9000,
+        path: "/",
+        debug: options.debug ? 3 : 0,
+      });
+    } else {
+      peer.current = new Peer(undefined, {
+        debug: options.debug ? 3 : 0,
+      });
+    }
   }
 
   useEffect(() => {
