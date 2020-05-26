@@ -1,10 +1,19 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
+## 2.3.x (...) - Character Sheets, Zones and better Peer-to-Peer
+
+- feat: new [Characters](https://fari.app/characters) page to manage your characters sheets and save them in your browser's storage [#61](https://github.com/fariapp/fari/issues/61)
+- feat: character sheets can be sent to a scene.
+- feat: character sheets can be edited by it's player or the GM
+- feat: GM can draw zones in a drawing pad when playing a scene [#58](https://github.com/fariapp/fari/issues/58)
+- feat: Performance and stability improvement over peer to peer communications by using a brand new _Fari Peer Server_ [#65](https://github.com/fariapp/fari/issues/65)
+- fix: Scene name placeholder [#59](https://github.com/fariapp/fari/issues/59)
+
 ## 2.2.x (May 19, 2020) - Player Controls, Confetti and Dark Theme
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
-- feat: gm and players can click on a dice to roll it
+- feat: GM and players can click on a dice to roll it
 - feat: the dice page supports clicking on the dice to roll it
 - feat: confetti 🎉 on >= 3 or <= -3 rolls
 - feat: confetti buttons in scene
