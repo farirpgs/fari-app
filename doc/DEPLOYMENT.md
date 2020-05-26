@@ -1,7 +1,7 @@
 # Deployment
 
 Netlify: https://app.netlify.com/sites/fari/overview
-Azure Devops: https://dev.azure.com/rpdeshaies/fari/_build?definitionId=1&_a=summary
+Azure Devops: https://dev.azure.com/fari-app/fari
 
 ## Fari
 
