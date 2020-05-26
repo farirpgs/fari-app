@@ -60,9 +60,9 @@ export const CharacterManager: React.FC<{
         }}
       ></CharacterDialog>
 
-      <Box pb="1rem">
+      <Box pb="2rem">
         <Typography variant="h4" align="center">
-          {t("characters-route.title")}
+          {!props.onSelection && t("characters-route.title")}
         </Typography>
       </Box>
       <Box pb="1rem">

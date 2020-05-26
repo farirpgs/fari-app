@@ -1,20 +1,9 @@
 import React from "react";
 
-export const Kofi: React.FC<{}> = props => {
-  return (
-    <>
-      <a
-        href="https://ko-fi.com/B0B4AHLJ"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          height="36"
-          style={{ border: "0px", height: "36px" }}
-          src="https://az743702.vo.msecnd.net/cdn/kofi1.png?v=2"
-          alt="Buy Me a Coffee at ko-fi.com"
-        />
-      </a>
-    </>
-  );
+export const Kofi: React.FC<{}> = (props) => {
+  const kofiwidget2 = window["kofiwidget2"];
+  kofiwidget2.init("Support Fari on Ko-fi", "#3f51b5", "B0B4AHLJ");
+  const html = kofiwidget2.getHTML();
+
+  return <div dangerouslySetInnerHTML={{ __html: html }}></div>;
 };

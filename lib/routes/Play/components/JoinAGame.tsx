@@ -1,4 +1,13 @@
-import { Box, Button, CircularProgress, Container, Fade, InputLabel, TextField, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Fade,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../../images/app-icon.png";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
@@ -9,7 +18,7 @@ let playerNameSingleton = "";
 
 export const JoinAGame: React.FC<{
   onSubmitPlayerName(playerName: string): void;
-  onSubmitCharacter(character:ICharacter):void;
+  onSubmitCharacter(character: ICharacter): void;
   connecting: boolean;
   error: any;
 }> = (props) => {
@@ -85,10 +94,17 @@ export const JoinAGame: React.FC<{
             )}
           </form>
         </Container>
+        <Box>
+          <Typography variant="h6" align="center">
+            {t("play-route.or-pick-existing")}
+          </Typography>
+        </Box>
         <Container>
-          <CharacterManager onSelection={(c)=>{
-            props.onSubmitCharacter(c)
-          }}></CharacterManager>
+          <CharacterManager
+            onSelection={(c) => {
+              props.onSubmitCharacter(c);
+            }}
+          ></CharacterManager>
         </Container>
       </Box>
     </Fade>

@@ -10,6 +10,7 @@ import { css } from "emotion";
 import React from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
+import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -19,7 +20,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   const { t } = useTranslate();
 
   return (
-    <Page>
+    <Page kofi={false}>
       <PageMeta
         title={t("home-route.meta.title")}
         description={t("home-route.meta.description")}
@@ -37,7 +38,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
               {t("home-route.subtitle1")}
             </Typography>
           </Box>
-          <Box pb="4rem" textAlign="center">
+          <Box pb="1rem" textAlign="center">
             <Typography variant="subtitle1">
               {t("home-route.subtitle2")}
             </Typography>
@@ -99,26 +100,29 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </Box>
         </Container>
         <Container maxWidth="sm">
-          <Typography variant="h5" align="center" color="error">
-            <b>{t("home-route.instabilities-1")}</b>
-          </Typography>
-          <br />
-          <Typography variant="body1" align="center" color="textSecondary">
-            {t("home-route.instabilities-2")}
+          <Typography
+            variant="h5"
+            align="center"
+            color="primary"
+            className={css({ fontWeight: "bold" })}
+          >
+            {t("home-route.support-fari.title")}
           </Typography>
           <br />
           <Typography
             variant="body1"
             align="center"
-            color="textSecondary"
-            className={css({ fontWeight: "bold" })}
+            className={css({ whiteSpace: "pre-line" })}
           >
-            {t("home-route.instabilities-3")}
+            {t("home-route.support-fari.description")}
           </Typography>
-          <br />
-          <Typography variant="body1" align="center" color="textSecondary">
-            {t("home-route.instabilities-4")}
-          </Typography>
+          <Box py="2rem">
+            <Grid container justify="center">
+              <Grid item>
+                <Kofi></Kofi>
+              </Grid>
+            </Grid>
+          </Box>
         </Container>
       </Box>
     </Page>
