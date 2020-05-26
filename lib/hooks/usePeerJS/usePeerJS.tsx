@@ -1,6 +1,7 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { env } from "../../services/injections";
 
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer>(undefined);
@@ -10,7 +11,21 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   if (!peer.current) {
     const id = uuidV4();
-    peer.current = new Peer(id, { debug: options.debug ? 3 : 0 });
+    if (env.context === "localhost") {
+      peer.current = new Peer(id, {
+        host: "fari-peer-server-staging.herokuapp.com",
+        secure: true,
+        path: "/peer/connect",
+        debug: options.debug ? 3 : 0,
+      });
+    } else {
+      peer.current = new Peer(id, {
+        host: "fari-peer-server.herokuapp.com",
+        secure: true,
+        path: "/peer/connect",
+        debug: options.debug ? 3 : 0,
+      });
+    }
   }
 
   useEffect(() => {

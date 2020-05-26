@@ -218,7 +218,7 @@ export function useScene(
             character: meta.character,
             rolls: [],
             playedDuringTurn: false,
-            fatePoints: meta.character.refresh ?? 3,
+            fatePoints: meta?.character?.refresh ?? 3,
           } as IPlayer;
         });
       })

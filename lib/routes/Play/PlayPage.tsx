@@ -456,34 +456,36 @@ export const PlayPage: React.FC<IProps> = (props) => {
             ></DrawArea>
           </Box>
           <Divider></Divider>
-          <Box p="1rem">
-            <Grid container justify="space-between">
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    if ($drawArea.current) {
-                      $drawArea.current.clear();
-                    }
-                  }}
-                  endIcon={<GestureIcon></GestureIcon>}
-                >
-                  {t("play-route.clear-drawing")}
-                </Button>
+          {isGM && (
+            <Box p="1rem">
+              <Grid container justify="space-between">
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      if ($drawArea.current) {
+                        $drawArea.current.clear();
+                      }
+                    }}
+                    endIcon={<GestureIcon></GestureIcon>}
+                  >
+                    {t("play-route.clear-drawing")}
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      if ($drawArea.current) {
+                        $drawArea.current.undo();
+                      }
+                    }}
+                    endIcon={<UndoIcon></UndoIcon>}
+                  >
+                    {t("play-route.undo-drawing")}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    if ($drawArea.current) {
-                      $drawArea.current.undo();
-                    }
-                  }}
-                  endIcon={<UndoIcon></UndoIcon>}
-                >
-                  {t("play-route.undo-drawing")}
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          )}
         </Paper>
       </Box>
     );

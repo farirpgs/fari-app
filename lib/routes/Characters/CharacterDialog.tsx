@@ -107,7 +107,7 @@ export const CharacterDialog: React.FC<{
   );
 
   function renderActions() {
-    if (!props.onDelete && !props.onSave) {
+    if (props.readonly || (!props.onDelete && !props.onSave)) {
       return null;
     }
     return (
