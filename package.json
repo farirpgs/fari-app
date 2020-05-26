@@ -61,7 +61,6 @@
     "eslint-plugin-react-hooks": "^4.0.2",
     "jest": "^26.0.1",
     "marked": "^1.0.0",
-    "nodemon": "^2.0.4",
     "parcel": "^1.12.4",
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^26.0.0",

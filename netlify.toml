@@ -1,7 +1,6 @@
 [build]
   command = "yarn && yarn run build"
   publish = "dist"
-  functions = "./functions/"
 
 [[redirects]]
   from = "/*"
