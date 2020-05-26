@@ -27,6 +27,12 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement>(undefined);
 
+  useEffect(() => {
+    if (props.lines && props.readonly) {
+      setLines(props.lines);
+    }
+  }, [props.lines, props.readonly]);
+
   useImperativeHandle(ref, () => {
     return {
       clear() {
