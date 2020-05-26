@@ -20,6 +20,9 @@ export function usePeerJS(options: { debug?: boolean }) {
       });
     } else {
       peer.current = new Peer(id, {
+        // host: "localhost",
+        // port: 8443,
+        // path: "/.netlify/functions/fari-peer-server/peerjs",
         debug: options.debug ? 3 : 0,
       });
     }

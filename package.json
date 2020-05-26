@@ -6,7 +6,7 @@
   "license": "AGPL-3.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel ./lib/index.html --target browser & nodemon functions/fari-peer-server",
+    "start": "parcel ./lib/index.html --target browser & yarn netlify dev --port 88888",
     "build": "parcel build ./lib/index.html --target browser",
     "tsc": "tsc --noEmit --project tsconfig.json",
     "lint": "eslint 'lib/**'",
@@ -23,7 +23,6 @@
     "axios": "^0.19.2",
     "canvas-confetti": "^1.2.0",
     "emotion": "^10.0.27",
-    "express": "^4.17.1",
     "flexboxgrid": "^6.3.1",
     "i18next": "^19.4.4",
     "i18next-browser-languagedetector": "^4.1.1",
@@ -40,7 +39,6 @@
     "react-i18next": "^11.4.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "serverless-http": "^2.5.0",
     "showdown": "^1.9.1",
     "uuid": "^8.1.0"
   },
