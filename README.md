@@ -6,7 +6,7 @@ This repo contains the source code that powers Fari.
 
 If you are here because
 
-1. you have an encountered issue with Fari
+1. you have encountered issue with Fari
 2. you want to ask a question
 3. you have a feature suggestion
 

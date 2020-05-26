@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { usePeerConnections as usePeerConnection } from "../../hooks/usePeerJS/usePeerConnection";
+import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useCharacters } from "../Characters/hooks/useCharacters";
 import { IPeerActions } from "./IPeerActions";
 import { PlayPage } from "./PlayPage";
 import { sanitizeSceneName, useScene } from "./useScene/useScene";
 import { useUserId } from "./useUserId/useUserId";
 
-const debug = false;
+const debug = true;
 
 export const PlayRoute: React.FC<{
   match: {
@@ -17,7 +18,8 @@ export const PlayRoute: React.FC<{
 }> = (props) => {
   const idFromParams = props.match.params.id;
   const userId = useUserId();
-  const sceneManager = useScene(userId, idFromParams);
+  const characterManager = useCharacters();
+  const sceneManager = useScene(userId, idFromParams, characterManager);
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
   const { t } = useTranslate();
@@ -36,10 +38,13 @@ export const PlayRoute: React.FC<{
           peerAction.payload
         );
       }
+      if (peerAction.action === "update-character") {
+        sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
+      }
     },
     debug: debug,
   });
-  const connectionsManager = usePeerConnection({
+  const connectionsManager = usePeerConnections({
     onHostDataReceive(newScene) {
       sceneManager.actions.safeSetScene(newScene);
     },
@@ -68,6 +73,7 @@ export const PlayRoute: React.FC<{
 
       <PlayPage
         sceneManager={sceneManager}
+        characterManager={characterManager}
         connectionsManager={connectionsManager}
         isLoading={
           hostManager.state.loading || connectionsManager.state.loading

@@ -1,10 +1,13 @@
+import { ILines } from "../../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { ICharacter } from "../../Characters/hooks/useCharacters";
 import { AspectType } from "./AspectType";
 
 export interface IPlayer {
   id: string;
-  playerName: string;
+  playerName?: string;
+  character?: ICharacter;
   rolls: Array<IDiceRoll>;
   playedDuringTurn: boolean;
   fatePoints: number;
@@ -30,4 +33,5 @@ export interface IScene {
   goodConfetti: number;
   badConfetti: number;
   sort: boolean;
+  drawAreaLines: ILines;
 }

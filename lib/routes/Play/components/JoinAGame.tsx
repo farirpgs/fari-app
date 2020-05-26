@@ -1,21 +1,15 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Fade,
-  InputLabel,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, CircularProgress, Container, Fade, InputLabel, TextField, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../../images/app-icon.png";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
+import { CharacterManager } from "../../Characters/CharacterManager";
+import { ICharacter } from "../../Characters/hooks/useCharacters";
 
 let playerNameSingleton = "";
 
 export const JoinAGame: React.FC<{
-  onSubmit(playerName: string): void;
+  onSubmitPlayerName(playerName: string): void;
+  onSubmitCharacter(character:ICharacter):void;
   connecting: boolean;
   error: any;
 }> = (props) => {
@@ -34,7 +28,7 @@ export const JoinAGame: React.FC<{
             onSubmit={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              props.onSubmit(playerName);
+              props.onSubmitPlayerName(playerName);
             }}
           >
             <Box pb="2rem" textAlign="center">
@@ -90,6 +84,11 @@ export const JoinAGame: React.FC<{
               </Box>
             )}
           </form>
+        </Container>
+        <Container>
+          <CharacterManager onSelection={(c)=>{
+            props.onSubmitCharacter(c)
+          }}></CharacterManager>
         </Container>
       </Box>
     </Fade>

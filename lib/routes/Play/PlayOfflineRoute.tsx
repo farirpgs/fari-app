@@ -1,6 +1,7 @@
 import React from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useCharacters } from "../Characters/hooks/useCharacters";
 import { PlayPage } from "./PlayPage";
 import { sanitizeSceneName, useScene } from "./useScene/useScene";
 import { useUserId } from "./useUserId/useUserId";
@@ -14,9 +15,11 @@ export const PlayOfflineRoute: React.FC<{
 }> = (props) => {
   const idFromParams = props.match.params.id;
   const userId = useUserId();
-  const sceneManager = useScene(userId, idFromParams);
+  const characterManager = useCharacters();
+  const sceneManager = useScene(userId, idFromParams, characterManager);
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
+
   const { t } = useTranslate();
 
   return (
@@ -27,6 +30,7 @@ export const PlayOfflineRoute: React.FC<{
       ></PageMeta>
       <PlayPage
         sceneManager={sceneManager}
+        characterManager={characterManager}
         isLoading={false}
         idFromParams={idFromParams}
         shareLink={undefined}

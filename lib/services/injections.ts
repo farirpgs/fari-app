@@ -1,4 +1,3 @@
-import { CharacterService } from "./character/CharacterService";
 import { GoogleAnalyticsService } from "./google-analytics/GoogleAnalyticsService";
 import { InternationalizationService } from "./internationalization/InternationalizationService";
 import { LoggerService } from "./logger/LoggerService";
@@ -14,4 +13,3 @@ export const internationalizationService = new InternationalizationService();
 export const logger = new LoggerService();
 export const sentryService = new SentryService();
 export const googleAnalyticsService = new GoogleAnalyticsService(logger);
-export const characterService = new CharacterService();
