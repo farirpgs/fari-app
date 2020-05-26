@@ -10,7 +10,6 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
-
     const id = uuidV4();
     if (env.context === "localhost") {
       peer.current = new Peer(id, {
@@ -24,6 +23,7 @@ export function usePeerJS(options: { debug?: boolean }) {
         debug: options.debug ? 3 : 0,
       });
     }
+  }
 
   useEffect(() => {
     function setupPeer() {
