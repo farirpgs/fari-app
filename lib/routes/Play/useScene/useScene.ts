@@ -2,15 +2,25 @@ import produce from "immer";
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { ILines } from "../../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import {
+  ICharacter,
+  useCharacters,
+} from "../../Characters/hooks/useCharacters";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
-export function useScene(userId: string, gameId: string) {
+export function useScene(
+  userId: string,
+  gameId: string,
+  charactersManager: ReturnType<typeof useCharacters>
+) {
   const isGM = !gameId;
   const [scene, setScene] = useState<IScene>(() => ({
     name: defaultSceneName,
@@ -26,6 +36,7 @@ export function useScene(userId: string, gameId: string) {
     goodConfetti: 0,
     badConfetti: 0,
     sort: false,
+    drawAreaLines: [],
   }));
 
   useEffect(() => {
@@ -53,6 +64,9 @@ export function useScene(userId: string, gameId: string) {
   function safeSetScene(newScene: IScene) {
     if (newScene) {
       setScene(newScene);
+      newScene.players.forEach((p) => {
+        charactersManager.actions.update(p.character);
+      });
     }
   }
 
@@ -197,12 +211,14 @@ export function useScene(userId: string, gameId: string) {
     setScene(
       produce((draft: IScene) => {
         draft.players = connections.map((c) => {
+          const meta: IPeerMeta = c.metadata;
           return {
             id: c.label,
-            playerName: c.metadata.playerName,
+            playerName: meta.playerName,
+            character: meta.character,
             rolls: [],
             playedDuringTurn: false,
-            fatePoints: 3,
+            fatePoints: meta?.character?.refresh ?? 3,
           } as IPlayer;
         });
       })
@@ -215,9 +231,25 @@ export function useScene(userId: string, gameId: string) {
         draft.players.push({
           id: uuidV4(),
           playerName: playerName,
+          character: undefined,
           rolls: [],
           playedDuringTurn: false,
           fatePoints: 3,
+        });
+      })
+    );
+  }
+
+  function addOfflineCharacter(character: ICharacter) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.players.push({
+          id: uuidV4(),
+          playerName: "",
+          character: character,
+          rolls: [],
+          playedDuringTurn: false,
+          fatePoints: character.refresh,
         });
       })
     );
@@ -261,6 +293,20 @@ export function useScene(userId: string, gameId: string) {
         });
       })
     );
+  }
+
+  function updatePlayerCharacter(id: string, character: ICharacter) {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.character = character;
+          }
+        });
+      })
+    );
+    charactersManager.actions.update(character);
   }
 
   function updatePlayerFatePoints(id: string, fatePoints: number) {
@@ -321,6 +367,14 @@ export function useScene(userId: string, gameId: string) {
     );
   }
 
+  function setDrawAreaLines(lines: ILines) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.drawAreaLines = lines;
+      })
+    );
+  }
+
   return {
     state: { scene },
     actions: {
@@ -344,6 +398,7 @@ export function useScene(userId: string, gameId: string) {
       updateAspectColor,
       updatePlayers,
       addOfflinePlayer,
+      addOfflineCharacter,
       removeOfflinePlayer,
       updatePlayerFatePoints,
       updatePlayerPlayedDuringTurn,
@@ -352,11 +407,13 @@ export function useScene(userId: string, gameId: string) {
       fireGoodConfetti,
       fireBadConfetti,
       toggleSort,
+      updatePlayerCharacter,
+      setDrawAreaLines,
     },
   };
 }
 
-export const defaultSceneName = "Name of your scene...";
+export const defaultSceneName = "";
 
 const defaultAspect: IAspect = {
   title: "",
@@ -418,13 +475,10 @@ const defaultSceneAspects = {};
 export function sanitizeSceneName(sceneName: string) {
   return sceneName === defaultSceneName
     ? ""
-    : removeHTMLTags(removeNBSP(sceneName)).trim();
+    : sanitizeContentEditable(sceneName);
 }
 
-function removeNBSP(value: string) {
-  return value.replace(/&nbsp;/g, " ");
-}
-
-function removeHTMLTags(value: string) {
-  return value.replace(/<\/?[^>]+(>|$)/g, " ");
+export interface IPeerMeta {
+  playerName?: string;
+  character?: ICharacter;
 }

@@ -30,6 +30,7 @@ import { IPossibleTranslationKeys } from "../../services/internationalization/IP
 import { AppLink } from "../AppLink/AppLink";
 import { AppProgress } from "../AppProgress/AppProgress";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
+import { Kofi } from "../Kofi/Kofi";
 
 let gameIdSingleton: string = undefined;
 
@@ -38,9 +39,11 @@ export const Page: React.FC<{
   notFound?: JSX.Element;
   appBarActions?: JSX.Element;
   gameId?: string;
+  kofi?: boolean;
 }> = (props) => {
   const isReallyLoading = useDelayedIsLoading(props.isLoading);
   const history = useHistory();
+  const { kofi = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -123,6 +126,11 @@ export const Page: React.FC<{
                 </Link>
               </Typography>
             </Grid>
+            {kofi && (
+              <Grid item>
+                <Kofi />
+              </Grid>
+            )}
             <Grid item>
               <Typography>
                 <AppLink to="/changelog">{`v${env.version}`}</AppLink>
@@ -164,6 +172,7 @@ export const Page: React.FC<{
             className={css({
               margin: "0 auto",
               maxWidth: "1440px",
+              minHeight: "72px",
               width: "100%",
               padding: "1rem",
             })}
@@ -228,6 +237,7 @@ export const Page: React.FC<{
                 flex: "1 1 auto",
               })}
             />
+            {kofi && !shouldDisplayRejoinButton && <Kofi />}
             {shouldDisplayRejoinButton && (
               <Button
                 color="secondary"
@@ -280,6 +290,18 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
+              history.push("/characters");
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            {t("menu.characters")}
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
               history.push("/dice");
             }}
             variant={mobile ? "outlined" : undefined}
@@ -298,18 +320,6 @@ export const Page: React.FC<{
             fullWidth={mobile}
           >
             {t("menu.about")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              window.open("https://ko-fi.com/rpdeshaies");
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.support")}
           </Button>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>

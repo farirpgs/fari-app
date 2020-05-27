@@ -1,12 +1,17 @@
+import { useTheme } from "@material-ui/core";
 import { css } from "emotion";
 import React, { useEffect, useRef } from "react";
 
 export const ContentEditable: React.FC<{
   value: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
   readonly?: boolean;
   autoFocus?: boolean;
+  inline?: boolean;
+  border?: boolean;
+  fullWidth?: boolean;
 }> = (props) => {
+  const theme = useTheme();
   const $ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -26,31 +31,49 @@ export const ContentEditable: React.FC<{
     focusOnLoad();
   }, []);
 
-  function onChange() {
+  function onChange(e) {
     if ($ref.current) {
-      props.onChange($ref.current.innerHTML);
+      props.onChange($ref.current.innerHTML, e);
     }
   }
 
+  const Component = props.inline ? "span" : "div";
   return (
-    <div
+    <Component
       className={css({
         outline: "none",
         wordBreak: "break-word",
+        display: props.inline ? "inline-block" : "block",
+        width: props.fullWidth ? "100%" : undefined,
+        borderBottom: props.border
+          ? `1px solid ${theme.palette.divider}`
+          : undefined,
         img: {
           width: "100%",
           padding: ".5rem 0",
         },
       })}
       ref={$ref}
-      onInput={() => {
-        onChange();
+      onInput={(e) => {
+        onChange(e);
       }}
-      onBlur={() => {
-        onChange();
+      onBlur={(e) => {
+        onChange(e);
       }}
       contentEditable={!props.readonly}
-    ></div>
+    ></Component>
   );
 };
 ContentEditable.displayName = "ContentEditable";
+
+export function sanitizeContentEditable(value: string) {
+  return removeHTMLTags(removeNBSP(value)).trim();
+}
+
+function removeNBSP(value: string) {
+  return value.replace(/&nbsp;/g, " ");
+}
+
+function removeHTMLTags(value: string) {
+  return value.replace(/<\/?[^>]+(>|$)/g, " ");
+}

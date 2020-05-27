@@ -1,19 +1,52 @@
-import { Box, Button, CircularProgress, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fade, Grid, Hidden, InputLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Fade,
+  Grid,
+  Hidden,
+  InputLabel,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FaceIcon from "@material-ui/icons/Face";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import GestureIcon from "@material-ui/icons/Gesture";
 import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import UndoIcon from "@material-ui/icons/Undo";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { DrawArea, IDrawAreaHandles } from "../../components/DrawArea/DrawArea";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
@@ -22,14 +55,15 @@ import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnection";
+import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useCharacters } from "../Characters/hooks/useCharacters";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { IPeerActions } from "./IPeerActions";
 import { AspectType } from "./useScene/AspectType";
-import { useScene } from "./useScene/useScene";
+import { IPeerMeta, useScene } from "./useScene/useScene";
 
 type IOnlineProps = {
   isLoading?: boolean;
@@ -42,10 +76,12 @@ type IProps = IOnlineProps & {
   userId: string;
   idFromParams: string;
   sceneManager: ReturnType<typeof useScene>;
+  characterManager: ReturnType<typeof useCharacters>;
 };
 
 export const PlayPage: React.FC<IProps> = (props) => {
-  const { sceneManager, connectionsManager } = props;
+  const { sceneManager, connectionsManager, characterManager } = props;
+
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
@@ -56,6 +92,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
     false
   );
+  const $drawArea = useRef<IDrawAreaHandles>(undefined);
+
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -78,6 +116,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const shouldRenderPlayerJoinGameScreen =
     !isGM && !connectionsManager.state.isConnectedToHost;
 
+  const paperStyle = css({ borderRadius: "0px" });
   return (
     <Page gameId={props.idFromParams}>
       <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
@@ -106,8 +145,17 @@ export const PlayPage: React.FC<IProps> = (props) => {
         <JoinAGame
           connecting={connectionsManager.state.connectingToHost}
           error={connectionsManager.state.connectingToHostError}
-          onSubmit={(playerName) => {
-            connectionsManager.actions.connect(
+          onSubmitCharacter={(character) => {
+            connectionsManager.actions.connect<IPeerMeta>(
+              props.idFromParams,
+              props.userId,
+              {
+                character: character,
+              }
+            );
+          }}
+          onSubmitPlayerName={(playerName) => {
+            connectionsManager.actions.connect<IPeerMeta>(
               props.idFromParams,
               props.userId,
               {
@@ -169,6 +217,42 @@ export const PlayPage: React.FC<IProps> = (props) => {
               }}
               fullWidth
             />
+            {characterManager.state.characters.length !== 0 && (
+              <>
+                <Box py="1rem">
+                  <Typography variant="h6" align="center">
+                    {t("play-route.or-pick-existing")}
+                  </Typography>
+                </Box>
+                <List>
+                  {characterManager.state.characters.map((character, index) => {
+                    const [firstAspect] = character.aspects;
+
+                    return (
+                      <ListItem
+                        button
+                        key={index}
+                        onClick={() => {
+                          sceneManager.actions.addOfflineCharacter(character);
+                          setOfflineCharacterDialogOpen(false);
+                        }}
+                      >
+                        <ListItemText
+                          primary={character.name}
+                          secondary={
+                            <ContentEditable
+                              readonly
+                              inline
+                              value={firstAspect?.value || "..."}
+                            ></ContentEditable>
+                          }
+                        />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </>
+            )}
           </DialogContent>
           <DialogActions>
             <Button
@@ -279,8 +363,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
           </Grid>
         </Box>
 
-        <Paper>
-          <TableContainer component={Paper}>
+        <Paper className={paperStyle}>
+          <TableContainer>
             <Table
               size="small"
               className={css({
@@ -339,12 +423,69 @@ export const PlayPage: React.FC<IProps> = (props) => {
                           });
                         }
                       }}
+                      onCharacterUpdate={(character) => {
+                        if (isGM) {
+                          sceneManager.actions.updatePlayerCharacter(
+                            player.id,
+                            character
+                          );
+                        } else {
+                          connectionsManager.actions.sendToHost<IPeerActions>({
+                            action: "update-character",
+                            payload: character,
+                          });
+                        }
+                      }}
                     ></PlayerRow>
                   );
                 })}
               </TableBody>
             </Table>
           </TableContainer>
+        </Paper>
+        <Paper className={paperStyle}>
+          <Divider light></Divider>
+          <Box width="100%" height="400px">
+            <DrawArea
+              ref={$drawArea}
+              lines={sceneManager.state.scene.drawAreaLines}
+              readonly={!isGM}
+              onChange={(lines) => {
+                sceneManager.actions.setDrawAreaLines(lines);
+              }}
+            ></DrawArea>
+          </Box>
+          <Divider></Divider>
+          {isGM && (
+            <Box p="1rem">
+              <Grid container justify="space-between">
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      if ($drawArea.current) {
+                        $drawArea.current.clear();
+                      }
+                    }}
+                    endIcon={<GestureIcon></GestureIcon>}
+                  >
+                    {t("play-route.clear-drawing")}
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      if ($drawArea.current) {
+                        $drawArea.current.undo();
+                      }
+                    }}
+                    endIcon={<UndoIcon></UndoIcon>}
+                  >
+                    {t("play-route.undo-drawing")}
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          )}
         </Paper>
       </Box>
     );
@@ -525,6 +666,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               })}
             >
               <ContentEditable
+                autoFocus
                 value={sceneManager.state.scene.name}
                 readonly={!isGM}
                 onChange={(value) => {
