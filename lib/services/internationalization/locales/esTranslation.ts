@@ -107,4 +107,5 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "character-dialog.stunts-extras": undefined,
   "character-dialog.skills": undefined,
   "character-dialog.refresh": undefined,
+  "character-dialog.close-confirmation": undefined,
 };

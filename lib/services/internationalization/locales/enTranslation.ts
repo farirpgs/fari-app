@@ -105,4 +105,5 @@ export const enTranslation = {
   "character-dialog.stunts-extras": `Stunts & Extras`,
   "character-dialog.skills": `Skills`,
   "character-dialog.refresh": `Refresh`,
+  "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose are your changes ?`,
 } as const;

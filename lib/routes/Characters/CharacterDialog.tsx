@@ -20,7 +20,8 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
 import produce from "immer";
-import React from "react";
+import isEqual from "lodash/isEqual";
+import React, { useMemo } from "react";
 import {
   ContentEditable,
   sanitizeContentEditable,
@@ -44,6 +45,10 @@ export const CharacterDialog: React.FC<{
   const theme = useTheme();
   const characterManager = useCharacter(props.character);
 
+  const isDirty = useMemo(() => {
+    return !isEqual(props.character, characterManager.state.character);
+  }, [props.character, characterManager.state.character]);
+
   function onSave() {
     const updatedCharacter = produce(
       characterManager.state.character,
@@ -52,6 +57,17 @@ export const CharacterDialog: React.FC<{
       }
     );
     props.onSave(updatedCharacter);
+  }
+
+  function onClose() {
+    if (isDirty) {
+      const confirmed = confirm(t("character-dialog.close-confirmation"));
+      if (confirmed) {
+        props.onClose();
+      }
+    } else {
+      props.onClose();
+    }
   }
 
   const errorTheme = useButtonTheme(theme.palette.error.main);
@@ -80,14 +96,15 @@ export const CharacterDialog: React.FC<{
       fullWidth
       maxWidth="sm"
       scroll="paper"
-      onClose={props.onClose}
+      onClose={onClose}
     >
       <DialogTitle>{renderName()}</DialogTitle>
       <DialogContent className={css({ padding: "0" })} dividers>
         <Grid container>
           <Grid
             item
-            xs={6}
+            xs={12}
+            md={6}
             className={css({
               borderRight: `2px solid ${headerBackgroundColors.primary}`,
             })}
@@ -96,7 +113,7 @@ export const CharacterDialog: React.FC<{
             {renderStunts()}
             {renderRefresh()}
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             {renderVitals()}
             {renderSkills()}
           </Grid>
@@ -131,7 +148,7 @@ export const CharacterDialog: React.FC<{
               <Grid item className={css({ marginLeft: "auto" })}>
                 <Button
                   color="primary"
-                  variant="outlined"
+                  variant={isDirty ? "contained" : "outlined"}
                   type="submit"
                   onClick={onSave}
                 >
@@ -166,7 +183,7 @@ export const CharacterDialog: React.FC<{
           </Grid>
           {!props.readonly && (
             <Grid item>
-              <IconButton size="small" onClick={props.onClose}>
+              <IconButton size="small" onClick={onClose}>
                 <CloseIcon />
               </IconButton>
             </Grid>
@@ -423,6 +440,7 @@ export const CharacterDialog: React.FC<{
                 })}
               >
                 <ContentEditable
+                  readonly={props.readonly}
                   value={characterManager.state.character.refresh.toString()}
                   onChange={(value, e) => {
                     const intValue = parseInt(value);
