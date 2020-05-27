@@ -481,8 +481,13 @@ export const CharacterDialog: React.FC<{
           (stressTrack, index) => {
             return (
               <Box pb=".5rem" key={index}>
-                <Grid container justify="space-between" wrap="nowrap">
-                  <Grid item xs={6}>
+                <Grid
+                  container
+                  justify="space-between"
+                  wrap="nowrap"
+                  spacing={2}
+                >
+                  <Grid item className={css({ flex: "1 0 auto" })}>
                     <FateLabel display="inline">
                       <ContentEditable
                         inline
@@ -536,23 +541,42 @@ export const CharacterDialog: React.FC<{
                   )}
                 </Grid>
 
-                <Grid container justify="flex-start">
+                <Grid container justify="flex-start" spacing={2}>
                   {stressTrack.value.map((stressBox, boxIndex) => {
                     return (
-                      <Grid item key={boxIndex} xs={2}>
-                        <Checkbox
-                          color="default"
-                          checked={stressBox}
-                          onChange={(event) => {
-                            if (props.readonly) {
-                              return;
-                            }
-                            characterManager.actions.toggleStressBox(
-                              index,
-                              boxIndex
-                            );
-                          }}
-                        />
+                      <Grid item key={boxIndex}>
+                        <Box>
+                          <Checkbox
+                            color="default"
+                            checked={stressBox.checked}
+                            onChange={(event) => {
+                              if (props.readonly) {
+                                return;
+                              }
+                              characterManager.actions.toggleStressBox(
+                                index,
+                                boxIndex
+                              );
+                            }}
+                          />
+                        </Box>
+                        <Box>
+                          <FateLabel className={css({ textAlign: "center" })}>
+                            <ContentEditable
+                              inline
+                              fullWidth
+                              readonly={props.readonly}
+                              value={stressBox.label}
+                              onChange={(value) => {
+                                characterManager.actions.setStressBoxLabel(
+                                  index,
+                                  boxIndex,
+                                  value
+                                );
+                              }}
+                            ></ContentEditable>
+                          </FateLabel>
+                        </Box>
                       </Grid>
                     );
                   })}

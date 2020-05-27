@@ -121,7 +121,11 @@ export function useCharacter(c: ICharacter) {
       produce((draft: ICharacter) => {
         draft.stressTracks.push({
           name: "Stress",
-          value: [false, false, false],
+          value: [
+            { checked: false, label: "1" },
+            { checked: false, label: "2" },
+            { checked: false, label: "3" },
+          ],
         });
       })
     );
@@ -136,7 +140,11 @@ export function useCharacter(c: ICharacter) {
   function addStressBox(index: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        draft.stressTracks[index].value.push(false);
+        const numberOfBoxes = draft.stressTracks[index].value.length;
+        draft.stressTracks[index].value.push({
+          checked: false,
+          label: `${numberOfBoxes + 1}`,
+        });
       })
     );
   }
@@ -155,8 +163,15 @@ export function useCharacter(c: ICharacter) {
   function toggleStressBox(index: number, boxIndex: number) {
     setCharacter(
       produce((draft: ICharacter) => {
-        const oldValue = draft.stressTracks[index].value[boxIndex];
-        draft.stressTracks[index].value[boxIndex] = !oldValue;
+        const oldValue = draft.stressTracks[index].value[boxIndex].checked;
+        draft.stressTracks[index].value[boxIndex].checked = !oldValue;
+      })
+    );
+  }
+  function setStressBoxLabel(index: number, boxIndex: number, label: string) {
+    setCharacter(
+      produce((draft: ICharacter) => {
+        draft.stressTracks[index].value[boxIndex].label = label;
       })
     );
   }
@@ -232,6 +247,7 @@ export function useCharacter(c: ICharacter) {
       addStressBox,
       removeStressBox,
       toggleStressBox,
+      setStressBoxLabel,
       removeStressTrack,
       addConsequence,
       setConsequenceName,
