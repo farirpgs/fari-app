@@ -1,3 +1,4 @@
+import produce from "immer";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { arraySort } from "../../../domains/array/arraySort";
@@ -24,7 +25,8 @@ export function useCharacters() {
       const localStorageCharacters = localStorage.getItem(key);
       if (localStorageCharacters) {
         const parsed = JSON.parse(localStorageCharacters);
-        setCharacters(parsed);
+        const migrated = migrateCharacters(parsed);
+        setCharacters(migrated);
       }
     } catch (error) {
       console.error(error);
@@ -138,8 +140,22 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Will", value: "" },
   ],
   stressTracks: [
-    { name: "Physical", value: [false, false, false] },
-    { name: "Mental", value: [false, false, false] },
+    {
+      name: "Physical",
+      value: [
+        { checked: false, label: "1" },
+        { checked: false, label: "2" },
+        { checked: false, label: "3" },
+      ],
+    },
+    {
+      name: "Mental",
+      value: [
+        { checked: false, label: "1" },
+        { checked: false, label: "2" },
+        { checked: false, label: "3" },
+      ],
+    },
   ],
   consequences: [
     { name: "Mild", value: "" },
@@ -147,7 +163,7 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
-  version: 1,
+  version: 2,
 };
 
 const defaultAcceleratedCharacter: ICharacter = {
@@ -173,14 +189,23 @@ const defaultAcceleratedCharacter: ICharacter = {
     { name: "Quick", value: "" },
     { name: "Sneaky", value: "" },
   ],
-  stressTracks: [{ name: "Stress", value: [false, false, false] }],
+  stressTracks: [
+    {
+      name: "Stress",
+      value: [
+        { checked: false, label: "1" },
+        { checked: false, label: "2" },
+        { checked: false, label: "3" },
+      ],
+    },
+  ],
   consequences: [
     { name: "Mild", value: "" },
     { name: "Moderate", value: "" },
     { name: "Severe", value: "" },
   ],
   refresh: 3,
-  version: 1,
+  version: 2,
 };
 
 const defaultCustomCharacter: ICharacter = {
@@ -189,10 +214,19 @@ const defaultCustomCharacter: ICharacter = {
   aspects: [{ name: "Aspect", value: "" }],
   stunts: [{ name: "Stunt", value: "" }],
   skills: [{ name: "Skill", value: "" }],
-  stressTracks: [{ name: "Stress", value: [false] }],
+  stressTracks: [
+    {
+      name: "Stress",
+      value: [
+        { checked: false, label: "1" },
+        { checked: false, label: "2" },
+        { checked: false, label: "3" },
+      ],
+    },
+  ],
   consequences: [{ name: "Consequence", value: "" }],
   refresh: 3,
-  version: 1,
+  version: 2,
 };
 
 const defaultCharactersByType = {
@@ -207,11 +241,35 @@ export interface ICharacter {
   aspects: ICharacterCustomField<string>;
   skills: ICharacterCustomField<string>;
   stunts: ICharacterCustomField<string>;
-  stressTracks: ICharacterCustomField<Array<boolean>>;
+  stressTracks: ICharacterCustomField<
+    Array<{ checked?: boolean; label: string }>
+  >;
   consequences: ICharacterCustomField<string>;
   version: number;
   lastUpdated?: number;
   refresh: number;
 }
 
-export type ICharacterCustomField<T> = Array<{ name: string; value: T }>;
+export type ICharacterCustomField<TValue> = Array<{
+  name: string;
+  value: TValue;
+}>;
+
+export function migrateCharacters(characters: Array<ICharacter>) {
+  return produce(characters, (draft) => {
+    draft.forEach((c) => {
+      if (c.version === 1) {
+        // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
+        c.stressTracks.forEach((s) => {
+          s.value = s.value.map((box, index) => {
+            return {
+              checked: (box as unknown) as boolean,
+              label: `${index + 1}`,
+            };
+          });
+        });
+        c.version = 2;
+      }
+    });
+  });
+}
