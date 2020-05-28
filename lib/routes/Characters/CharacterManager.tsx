@@ -182,7 +182,6 @@ export const CharacterManager: React.FC<{
                   </Grid>
                   <Grid item>
                     <ContentEditable
-                      inline
                       readonly
                       value={character.name}
                     ></ContentEditable>
@@ -204,7 +203,12 @@ export const CharacterManager: React.FC<{
                   return (
                     <Box pb="1rem" key={index}>
                       <Box>
-                        <FateLabel>{a.name}</FateLabel>
+                        <FateLabel>
+                          <ContentEditable
+                            readonly
+                            value={a.name}
+                          ></ContentEditable>
+                        </FateLabel>
                       </Box>
                       <ContentEditable
                         readonly
