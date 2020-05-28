@@ -50,7 +50,7 @@ export const enTranslation = {
   "play-route.click-on-the-": `Click on the`,
   "play-route.click-on-the-add-aspect-": `Add Aspect`,
   "play-route.click-on-the-add-aspect-button": `button to add a new Aspect to the Scene`,
-  "play-route.no-aspects": `There is not aspects on the scene yet`,
+  "play-route.no-aspects": `The scene doesn't have any aspects yet.`,
   "play-route.add-aspect": `Add Aspect`,
   "play-route.add-boost": `Add Boost`,
   "play-route.add-npc": `Add NPC`,
@@ -105,5 +105,5 @@ export const enTranslation = {
   "character-dialog.stunts-extras": `Stunts & Extras`,
   "character-dialog.skills": `Skills`,
   "character-dialog.refresh": `Refresh`,
-  "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose are your changes ?`,
+  "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
 } as const;
