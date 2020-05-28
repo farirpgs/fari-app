@@ -120,7 +120,7 @@ const defaultCondensedCharacter: ICharacter = {
   ],
   skills: [
     { name: "Academics", value: "" },
-    { name: "Athelics", value: "" },
+    { name: "Athletics", value: "" },
     { name: "Burglary", value: "" },
     { name: "Contacts", value: "" },
     { name: "Crafts", value: "" },
