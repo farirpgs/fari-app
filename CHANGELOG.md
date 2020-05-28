@@ -6,8 +6,9 @@
 - feat: character sheets can be sent to a scene.
 - feat: character sheets can be edited by it's player or the GM
 - feat: GM can draw zones in a drawing pad when playing a scene [#58](https://github.com/fariapp/fari/issues/58)
-- feat: Performance and stability improvement over peer to peer communications by using a brand new _Fari Peer Server_ [#65](https://github.com/fariapp/fari/issues/65)
-- fix: Scene name placeholder [#59](https://github.com/fariapp/fari/issues/59)
+- feat: performance and stability improvement over peer to peer communications by using a brand new _Fari Peer Server_ [#65](https://github.com/fariapp/fari/issues/65)
+- fix: scene name placeholder [#59](https://github.com/fariapp/fari/issues/59)
+- feat: spanish translations [#71](https://github.com/fariapp/fari/issues/71) 👏 [Erynus](https://github.com/Erynus)
 
 ## 2.2.x (May 19, 2020) - Player Controls, Confetti and Dark Theme
 
