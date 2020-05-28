@@ -51,6 +51,7 @@ import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
 import { Page } from "../../components/Page/Page";
+import { useCharacters } from "../../contexts/CharactersContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -58,7 +59,6 @@ import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useCharacters } from "../Characters/hooks/useCharacters";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
 import { IPeerActions } from "./IPeerActions";
@@ -76,11 +76,15 @@ type IProps = IOnlineProps & {
   userId: string;
   idFromParams: string;
   sceneManager: ReturnType<typeof useScene>;
-  characterManager: ReturnType<typeof useCharacters>;
+  charactersManager: ReturnType<typeof useCharacters>;
 };
 
 export const PlayPage: React.FC<IProps> = (props) => {
-  const { sceneManager, connectionsManager, characterManager } = props;
+  const {
+    sceneManager,
+    connectionsManager,
+    charactersManager: characterManager,
+  } = props;
 
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
@@ -238,11 +242,15 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         }}
                       >
                         <ListItemText
-                          primary={character.name}
+                          primary={
+                            <ContentEditable
+                              readonly
+                              value={character.name}
+                            ></ContentEditable>
+                          }
                           secondary={
                             <ContentEditable
                               readonly
-                              inline
                               value={firstAspect?.value || "..."}
                             ></ContentEditable>
                           }

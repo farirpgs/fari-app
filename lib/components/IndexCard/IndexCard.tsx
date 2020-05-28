@@ -150,9 +150,9 @@ export const IndexCard: React.FC<{
       <Grid container justify="space-between" alignItems="center" spacing={2}>
         <Grid item xs>
           <ContentEditable
+            autoFocus
             value={props.aspect.title}
             readonly={props.readonly}
-            autoFocus
             onChange={props.onTitleChange}
           ></ContentEditable>
         </Grid>
@@ -299,8 +299,8 @@ export const IndexCard: React.FC<{
       >
         <Box p="0 1rem">
           <ContentEditable
-            value={props.aspect.content}
             readonly={props.readonly}
+            value={props.aspect.content}
             onChange={props.onContentChange}
           ></ContentEditable>
         </Box>

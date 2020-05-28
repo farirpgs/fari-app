@@ -19,12 +19,12 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
 import React, { useState } from "react";
+import { ICharacter } from "../../../contexts/CharactersContext";
 import { Font } from "../../../domains/font/Font";
 import { useFudgeDice } from "../../../hooks/useFudgeDice/useFudgeDice";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "../../Characters/CharacterDialog";
-import { ICharacter } from "../../Characters/hooks/useCharacters";
 import { IPlayer } from "../useScene/IScene";
 
 export const PlayerRow: React.FC<{
@@ -51,7 +51,7 @@ export const PlayerRow: React.FC<{
 
   const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
   const [hover, setHover] = useState(false);
-  const name = props.player.playerName || props.player.character.name;
+  const name = props.player?.playerName || props.player?.character?.name || "";
 
   const selectedRowStyle = css(
     theme.palette.type === "light"

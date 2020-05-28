@@ -1,6 +1,11 @@
 import { useTheme } from "@material-ui/core";
+import DOMPurify from "dompurify";
 import { css } from "emotion";
 import React, { useEffect, useRef } from "react";
+
+const DOMPurifyOptions = {
+  ALLOWED_TAGS: ["br", "img"],
+};
 
 export const ContentEditable: React.FC<{
   value: string;
@@ -9,7 +14,6 @@ export const ContentEditable: React.FC<{
   autoFocus?: boolean;
   inline?: boolean;
   border?: boolean;
-  fullWidth?: boolean;
 }> = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLDivElement>();
@@ -18,7 +22,8 @@ export const ContentEditable: React.FC<{
     if (!props.value && props.readonly) {
       $ref.current.innerHTML = "&nbsp;";
     } else if ($ref.current.innerHTML !== props.value) {
-      $ref.current.innerHTML = props.value;
+      const cleanHTML = DOMPurify.sanitize(props.value, DOMPurifyOptions);
+      $ref.current.innerHTML = cleanHTML;
     }
   }, [props.value]);
 
@@ -33,24 +38,29 @@ export const ContentEditable: React.FC<{
 
   function onChange(e) {
     if ($ref.current) {
-      props.onChange($ref.current.innerHTML, e);
+      const cleanHTML = DOMPurify.sanitize(
+        $ref.current.innerHTML,
+        DOMPurifyOptions
+      );
+      props.onChange(cleanHTML, e);
     }
   }
 
-  const Component = props.inline ? "span" : "div";
   return (
-    <Component
+    <span
       className={css({
         outline: "none",
         wordBreak: "break-word",
-        display: props.inline ? "inline-block" : "block",
-        width: props.fullWidth ? "100%" : undefined,
+        display: "inline-block",
+        width: "100%",
         borderBottom: props.border
           ? `1px solid ${theme.palette.divider}`
           : undefined,
         img: {
-          width: "100%",
-          padding: ".5rem 0",
+          maxWidth: "75%",
+          padding: ".5rem",
+          margin: "0 auto",
+          display: "flex",
         },
       })}
       ref={$ref}
@@ -61,7 +71,7 @@ export const ContentEditable: React.FC<{
         onChange(e);
       }}
       contentEditable={!props.readonly}
-    ></Component>
+    ></span>
   );
 };
 ContentEditable.displayName = "ContentEditable";

@@ -64,7 +64,7 @@ export const enTranslation = {
   "play-route.error.description1": `We could not connect you to the server in order to initialize the game`,
   "play-route.error.description2": `Try refreshing the page to see if that fixes the issue. You can start an offline game instead.`,
   "play-route.connect-to-game": `Connect to a Game`,
-  "play-route.or-pick-existing": `Or pick and existing Character`,
+  "play-route.or-pick-existing": `Or pick an existing Character`,
   "play-route.clear-drawing": `Clear`,
   "play-route.undo-drawing": `Undo`,
   "index-card.add-1-free-invoke": `+ Free Invoke`,

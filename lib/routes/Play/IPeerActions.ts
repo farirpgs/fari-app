@@ -1,6 +1,6 @@
+import { ICharacter } from "../../contexts/CharactersContext";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { IPeerAction } from "../../hooks/usePeerJS/IPeerAction";
-import { ICharacter } from "../Characters/hooks/useCharacters";
 
 export type IPeerActions =
   | IRollPeerAction

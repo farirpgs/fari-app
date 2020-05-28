@@ -27,11 +27,11 @@ import {
   sanitizeContentEditable,
 } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { ICharacter } from "../../contexts/CharactersContext";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "./hooks/useCharacter";
-import { ICharacter } from "./hooks/useCharacters";
 
 export const CharacterDialog: React.FC<{
   open: boolean;
@@ -166,14 +166,13 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
-          <Grid item>
+          <Grid item className={css({ flex: "0 0 auto" })}>
             <FateLabel>{t("character-dialog.name")}</FateLabel>
           </Grid>
-          <Grid item className={css({ flex: "1 0 auto" })}>
+          <Grid item className={css({ flex: "1 1 auto" })}>
             <ContentEditable
               border
               autoFocus
-              fullWidth
               readonly={props.readonly}
               value={characterManager.state.character.name}
               onChange={(value) => {
@@ -181,13 +180,11 @@ export const CharacterDialog: React.FC<{
               }}
             ></ContentEditable>
           </Grid>
-          {!props.readonly && (
-            <Grid item>
-              <IconButton size="small" onClick={onClose}>
-                <CloseIcon />
-              </IconButton>
-            </Grid>
-          )}
+          <Grid item>
+            <IconButton size="small" onClick={onClose}>
+              <CloseIcon />
+            </IconButton>
+          </Grid>
         </Grid>
       </>
     );
@@ -241,8 +238,6 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
-                          inline
-                          fullWidth
                           readonly={props.readonly}
                           value={aspect.name}
                           onChange={(value) => {
@@ -273,8 +268,6 @@ export const CharacterDialog: React.FC<{
                   <Typography>
                     <ContentEditable
                       border
-                      inline
-                      fullWidth
                       readonly={props.readonly}
                       value={aspect.value}
                       onChange={(value) => {
@@ -311,8 +304,6 @@ export const CharacterDialog: React.FC<{
                     <Typography align="center">
                       <ContentEditable
                         border
-                        inline
-                        fullWidth
                         readonly={props.readonly}
                         value={skill.value}
                         onChange={(value) => {
@@ -321,11 +312,9 @@ export const CharacterDialog: React.FC<{
                       />
                     </Typography>
                   </Grid>
-                  <Grid item>
+                  <Grid item xs={6}>
                     <FateLabel display="inline">
                       <ContentEditable
-                        inline
-                        fullWidth
                         readonly={props.readonly}
                         value={skill.name}
                         onChange={(value) => {
@@ -335,7 +324,7 @@ export const CharacterDialog: React.FC<{
                     </FateLabel>
                   </Grid>
                   {!props.readonly && (
-                    <Grid item className={css({ marginLeft: "auto" })}>
+                    <Grid item className={css({ marginLeft: "auto" })} xs={2}>
                       <IconButton
                         size="small"
                         className={smallIconButtonStyle}
@@ -377,8 +366,6 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
-                          inline
-                          fullWidth
                           readonly={props.readonly}
                           value={stunt.name}
                           onChange={(value) => {
@@ -405,8 +392,6 @@ export const CharacterDialog: React.FC<{
                 <Typography>
                   <ContentEditable
                     border
-                    inline
-                    fullWidth
                     readonly={props.readonly}
                     value={stunt.value}
                     onChange={(value) => {
@@ -437,6 +422,7 @@ export const CharacterDialog: React.FC<{
                   width: "5rem",
                   height: "5rem",
                   fontSize: "2rem",
+                  textAlign: "center",
                 })}
               >
                 <ContentEditable
@@ -490,8 +476,6 @@ export const CharacterDialog: React.FC<{
                   <Grid item className={css({ flex: "1 0 auto" })}>
                     <FateLabel display="inline">
                       <ContentEditable
-                        inline
-                        fullWidth
                         readonly={props.readonly}
                         value={stressTrack.name}
                         onChange={(value) => {
@@ -544,10 +528,16 @@ export const CharacterDialog: React.FC<{
                 <Grid container justify="flex-start" spacing={2}>
                   {stressTrack.value.map((stressBox, boxIndex) => {
                     return (
-                      <Grid item key={boxIndex}>
-                        <Box>
+                      <Grid item key={boxIndex} xs={2}>
+                        <Box
+                          className={css({
+                            display: "flex",
+                            justifyContent: "center",
+                          })}
+                        >
                           <Checkbox
                             color="default"
+                            size="small"
                             checked={stressBox.checked}
                             onChange={(event) => {
                               if (props.readonly) {
@@ -563,8 +553,6 @@ export const CharacterDialog: React.FC<{
                         <Box>
                           <FateLabel className={css({ textAlign: "center" })}>
                             <ContentEditable
-                              inline
-                              fullWidth
                               readonly={props.readonly}
                               value={stressBox.label}
                               onChange={(value) => {
@@ -598,12 +586,10 @@ export const CharacterDialog: React.FC<{
               <Box py=".5rem" key={index}>
                 <Box pb=".5rem" key={index}>
                   <Grid container justify="space-between" wrap="nowrap">
-                    <Grid item>
+                    <Grid item xs={10}>
                       {" "}
                       <FateLabel display="inline">
                         <ContentEditable
-                          inline
-                          fullWidth
                           readonly={props.readonly}
                           value={consequence.name}
                           onChange={(value) => {
@@ -634,8 +620,6 @@ export const CharacterDialog: React.FC<{
                   <Typography>
                     <ContentEditable
                       border
-                      inline
-                      fullWidth
                       readonly={props.readonly}
                       value={consequence.value}
                       onChange={(value) => {

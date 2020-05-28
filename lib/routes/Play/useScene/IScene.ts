@@ -1,7 +1,7 @@
 import { ILines } from "../../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
+import { ICharacter } from "../../../contexts/CharactersContext";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
-import { ICharacter } from "../../Characters/hooks/useCharacters";
 import { AspectType } from "./AspectType";
 
 export interface IPlayer {
