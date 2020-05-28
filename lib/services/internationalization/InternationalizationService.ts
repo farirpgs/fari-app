@@ -4,7 +4,6 @@ import { initReactI18next } from "react-i18next";
 import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
-import { ptTranslation } from "./locales/ptTranslation";
 
 export class InternationalizationService {
   public i18next: i18n = undefined;
@@ -22,9 +21,6 @@ export class InternationalizationService {
         resources: {
           en: {
             translation: enTranslation,
-          },
-          pt: {
-            translation: ptTranslation,
           },
           es: {
             translation: esTranslation,
