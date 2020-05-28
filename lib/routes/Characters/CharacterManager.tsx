@@ -11,17 +11,17 @@ import {
 } from "@material-ui/core";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { css, cx } from "emotion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "./CharacterDialog";
 import {
+  CharactersContext,
   CharacterType,
   ICharacter,
-  useCharacters,
-} from "./hooks/useCharacters";
+} from "../../contexts/CharactersContext";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { CharacterDialog } from "./CharacterDialog";
 
 export const CharacterManager: React.FC<{
   onSelection?(character: ICharacter): void;
@@ -29,7 +29,7 @@ export const CharacterManager: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  const charactersManager = useCharacters();
+  const charactersManager = useContext(CharactersContext);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const onCharacterMenuClose = () => {

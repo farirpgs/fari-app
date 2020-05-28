@@ -27,11 +27,11 @@ import {
   sanitizeContentEditable,
 } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { ICharacter } from "../../contexts/CharactersContext";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "./hooks/useCharacter";
-import { ICharacter } from "./hooks/useCharacters";
 
 export const CharacterDialog: React.FC<{
   open: boolean;

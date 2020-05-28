@@ -10,24 +10,27 @@ import { AppRouter } from "./components/AppRouter/AppRouter";
 import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { History } from "./components/History/History";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
-import { StoreContext, useStoreInternal } from "./contexts/StoreContext";
+import { CharactersContext, useCharacters } from "./contexts/CharactersContext";
+import { DarkModeContext, useDarkMode } from "./contexts/DarkModeContext";
 import "./index.css";
 import { env } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";
-
 const App: React.FC<{}> = () => {
-  const store = useStoreInternal();
+  const darkModeManager = useDarkMode();
+  const charactersManager = useCharacters();
+
   return (
-    <StoreContext.Provider value={store}>
-      <AppProvider></AppProvider>
-    </StoreContext.Provider>
+    <DarkModeContext.Provider value={darkModeManager}>
+      <CharactersContext.Provider value={charactersManager}>
+        <AppProvider></AppProvider>
+      </CharactersContext.Provider>
+    </DarkModeContext.Provider>
   );
 };
 App.displayName = "App";
 
 export const AppProvider: React.FC<{}> = (props) => {
-  const store = useContext(StoreContext);
-
+  const store = useContext(DarkModeContext);
   return (
     <ThemeProvider theme={store.state.darkMode ? AppDarkTheme : AppLightTheme}>
       <StylesProvider injectFirst>

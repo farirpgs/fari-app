@@ -1,16 +1,34 @@
 import produce from "immer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { arraySort } from "../../../domains/array/arraySort";
+import { arraySort } from "../domains/array/arraySort";
 
 export enum CharacterType {
   CoreCondensed,
   Accelerated,
   Custom,
 }
+
+export const CharactersContext = React.createContext<
+  ReturnType<typeof useCharacters>
+>(undefined);
+
 export function useCharacters() {
   const key = "fari-characters";
-  const [characters, setCharacters] = useState<Array<ICharacter>>([]);
+  const [characters, setCharacters] = useState<Array<ICharacter>>(() => {
+    // load from local storage
+    try {
+      const localStorageCharacters = localStorage.getItem(key);
+      if (localStorageCharacters) {
+        const parsed = JSON.parse(localStorageCharacters);
+        const migrated = migrateCharacters(parsed);
+        return migrated;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    return [];
+  });
   const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(
     undefined
   );
@@ -18,20 +36,6 @@ export function useCharacters() {
   const sortedCharacters = arraySort(characters, [
     (c) => ({ value: c.lastUpdated, direction: "desc" }),
   ]);
-
-  useEffect(() => {
-    // load from local storage
-    try {
-      const localStorageCharacters = localStorage.getItem(key);
-      if (localStorageCharacters) {
-        const parsed = JSON.parse(localStorageCharacters);
-        const migrated = migrateCharacters(parsed);
-        setCharacters(migrated);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
 
   useEffect(() => {
     // sync local storage

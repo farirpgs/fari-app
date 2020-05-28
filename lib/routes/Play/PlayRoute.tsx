@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { CharactersContext } from "../../contexts/CharactersContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useCharacters } from "../Characters/hooks/useCharacters";
 import { IPeerActions } from "./IPeerActions";
 import { PlayPage } from "./PlayPage";
 import { sanitizeSceneName, useScene } from "./useScene/useScene";
@@ -18,8 +18,9 @@ export const PlayRoute: React.FC<{
 }> = (props) => {
   const idFromParams = props.match.params.id;
   const userId = useUserId();
-  const characterManager = useCharacters();
-  const sceneManager = useScene(userId, idFromParams, characterManager);
+  const charactersManager = useContext(CharactersContext);
+
+  const sceneManager = useScene(userId, idFromParams, charactersManager);
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
   const { t } = useTranslate();
@@ -73,7 +74,7 @@ export const PlayRoute: React.FC<{
 
       <PlayPage
         sceneManager={sceneManager}
-        characterManager={characterManager}
+        charactersManager={charactersManager}
         connectionsManager={connectionsManager}
         isLoading={
           hostManager.state.loading || connectionsManager.state.loading

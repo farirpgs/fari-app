@@ -1,4 +1,4 @@
-import { ICharacter, migrateCharacters } from "../useCharacters";
+import { ICharacter, migrateCharacters } from "../CharactersContext";
 
 describe("migrateCharacters", () => {
   describe("v1", () => {

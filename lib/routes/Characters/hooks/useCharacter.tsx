@@ -1,6 +1,6 @@
 import produce from "immer";
 import { useEffect, useState } from "react";
-import { ICharacter } from "./useCharacters";
+import { ICharacter } from "../../../contexts/CharactersContext";
 
 export function useCharacter(c: ICharacter) {
   const [character, setCharacter] = useState<ICharacter>(c);

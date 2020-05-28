@@ -22,7 +22,7 @@ import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
-import { StoreContext } from "../../contexts/StoreContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext";
 import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
@@ -48,7 +48,7 @@ export const Page: React.FC<{
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n } = useTranslate();
-  const store = useContext(StoreContext);
+  const darkModeManager = useContext(DarkModeContext);
 
   useEffect(() => {
     if (props.gameId) {
@@ -356,10 +356,12 @@ export const Page: React.FC<{
               padding: "6px 8px",
             })}
             onClick={() => {
-              store.actions.setDarkMode(!store.state.darkMode);
+              darkModeManager.actions.setDarkMode(
+                !darkModeManager.state.darkMode
+              );
             }}
           >
-            {store.state.darkMode ? (
+            {darkModeManager.state.darkMode ? (
               <Brightness7Icon></Brightness7Icon>
             ) : (
               <Brightness4Icon></Brightness4Icon>

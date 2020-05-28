@@ -10,9 +10,9 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../../images/app-icon.png";
+import { ICharacter } from "../../../contexts/CharactersContext";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { CharacterManager } from "../../Characters/CharacterManager";
-import { ICharacter } from "../../Characters/hooks/useCharacters";
 
 let playerNameSingleton = "";
 
