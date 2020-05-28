@@ -238,11 +238,15 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         }}
                       >
                         <ListItemText
-                          primary={character.name}
+                          primary={
+                            <ContentEditable
+                              readonly
+                              value={character.name}
+                            ></ContentEditable>
+                          }
                           secondary={
                             <ContentEditable
                               readonly
-                              inline
                               value={firstAspect?.value || "..."}
                             ></ContentEditable>
                           }
