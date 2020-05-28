@@ -51,7 +51,7 @@ export const PlayerRow: React.FC<{
 
   const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
   const [hover, setHover] = useState(false);
-  const name = props.player.playerName || props.player.character.name;
+  const name = props.player?.playerName || props.player?.character?.name || "";
 
   const selectedRowStyle = css(
     theme.palette.type === "light"
