@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/browser";
 import React from "react";
 
 export const ErrorReport: React.FC<{ eventId: string }> = (props) => {
@@ -18,7 +17,30 @@ export const ErrorReport: React.FC<{ eventId: string }> = (props) => {
       >
         {"Ooops! Looks like something went wrong"}
       </div>
-      <button
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "1.5rem",
+          marginBottom: "2rem",
+        }}
+      >
+        {"Try refreshing the page or going page to the"}{" "}
+        <a href="/"> {"home page"}</a>
+        {"."}
+      </div>
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "1.5rem",
+          marginBottom: "2rem",
+        }}
+      >
+        {"If the problem persists, please report it on Github."}
+      </div>
+      <a
+        href="https://github.com/fariapp/fari/issues/new/choose"
+        target="_blank"
+        rel="noreferrer"
         style={{
           padding: "1rem",
           background: "#3f50b5",
@@ -28,10 +50,9 @@ export const ErrorReport: React.FC<{ eventId: string }> = (props) => {
           cursor: "pointer",
           borderRadius: "4px",
         }}
-        onClick={() => Sentry.showReportDialog({ eventId: props.eventId })}
       >
-        Report feedback
-      </button>
+        Report Issue on Github
+      </a>
     </div>
   );
 };

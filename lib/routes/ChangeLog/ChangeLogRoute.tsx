@@ -1,35 +1,49 @@
 import { Container } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import showdown from "showdown";
-import content from "../../../CHANGELOG.md";
+import changeLogMarkdown from "../../../CHANGELOG.md";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-const changelogHTML = new showdown.Converter().makeHtml(content);
-const latestVersionText = getLatestVersionInfo(changelogHTML);
-
 export const ChangelogRoute: React.FC<{}> = (props) => {
   const { t } = useTranslate();
+  const [latestVersion, setLatestVersion] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    async function loadChangelog() {
+      const changelog = getChangeLog(changeLogMarkdown);
+      setContent(changelog.html);
+      setLatestVersion(changelog.latestVersion);
+    }
+    loadChangelog();
+  }, []);
+
   return (
     <Page>
       <PageMeta
-        title={`${t("changelog-route.meta.title")} v${latestVersionText}`}
+        title={`${t("changelog-route.meta.title")} v${latestVersion}`}
         description={t("changelog-route.meta.description")}
       />
       <Container maxWidth="md">
-        <MarkdownElement renderedMarkdown={changelogHTML}></MarkdownElement>
+        <MarkdownElement renderedMarkdown={content}></MarkdownElement>
       </Container>
     </Page>
   );
 };
 ChangelogRoute.displayName = "ChangelogRoute";
 
-function getLatestVersionInfo(changelogHTML: string) {
-  const parser = new DOMParser();
-  const htmlDoc = parser.parseFromString(changelogHTML, "text/html");
-  const latestVersion = htmlDoc.querySelector("h2");
-  const latestVersionText = latestVersion.textContent;
-  return latestVersionText;
+function getChangeLog(mardown: string) {
+  try {
+    const html = new showdown.Converter().makeHtml(mardown);
+    const parser = new DOMParser();
+    const htmlDoc = parser.parseFromString(html, "text/html");
+    const latestVersionTag = htmlDoc.querySelector("h2");
+    const latestVersion = latestVersionTag.textContent;
+    return { html: html, latestVersion: latestVersion };
+  } catch (e) {
+    return { html: "", latestVersion: "" };
+  }
 }
