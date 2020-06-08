@@ -1,12 +1,22 @@
 import produce from "immer";
-import { useEffect, useState } from "react";
+import isEqual from "lodash/isEqual";
+import { useEffect, useMemo, useState } from "react";
+import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { ICharacter } from "../../../contexts/CharactersContext";
 
 export function useCharacter(c: ICharacter) {
   const [character, setCharacter] = useState<ICharacter>(c);
 
+  const isDirty = useMemo(() => {
+    return !isEqual(c, character);
+  }, [c, character]);
+
   useEffect(() => {
-    setCharacter(c);
+    const isDifferent = c?.id !== character?.id;
+    const isMoreRecent = c?.lastUpdated > character?.lastUpdated;
+    if (isDifferent || isMoreRecent) {
+      setCharacter(c);
+    }
   }, [c]);
 
   function setName(value: string) {
@@ -226,8 +236,16 @@ export function useCharacter(c: ICharacter) {
     );
   }
 
+  function sanitizeCharacter() {
+    const updatedCharacter = produce(character, (draft) => {
+      draft.name = sanitizeContentEditable(draft.name);
+      draft.lastUpdated = new Date().getTime();
+    });
+    return updatedCharacter;
+  }
+
   return {
-    state: { character },
+    state: { character, isDirty },
     actions: {
       setName,
       addAspect,
@@ -254,6 +272,7 @@ export function useCharacter(c: ICharacter) {
       setConsequence,
       removeConsequence,
       udpateRefresh,
+      sanitizeCharacter,
     },
   };
 }
