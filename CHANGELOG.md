@@ -9,6 +9,7 @@
 - feat: performance and stability improvement over peer to peer communications by using a brand new _Fari Peer Server_ [#65](https://github.com/fariapp/fari/issues/65)
 - fix: scene name placeholder [#59](https://github.com/fariapp/fari/issues/59)
 - feat: spanish translations [#71](https://github.com/fariapp/fari/issues/71) 👏 [Erynus](https://github.com/Erynus)
+- fix: [#76](https://github.com/fariapp/fari/issues/76)
 
 ## 2.2 (May 19, 2020) - Player Controls, Confetti and Dark Theme
 

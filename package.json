@@ -1,6 +1,6 @@
 {
   "name": "fari",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
     "build": "parcel build ./lib/index.html --target browser",
-    "tsc": "tsc --noEmit --project tsconfig.json",
+    "tsc": "tsc --project tsconfig.json --incremental --outDir ./dist/tsc",
     "lint": "eslint 'lib/**'",
     "test": "jest --coverage",
     "validate": "yarn tsc && yarn lint && yarn test",

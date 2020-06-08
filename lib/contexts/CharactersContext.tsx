@@ -68,10 +68,7 @@ export function useCharacters() {
     setCharacters((draft: Array<ICharacter>) => {
       return draft.map((c) => {
         if (c.id === character.id) {
-          return {
-            ...character,
-            lastUpdated: new Date().getTime(),
-          };
+          return character;
         }
         return c;
       });

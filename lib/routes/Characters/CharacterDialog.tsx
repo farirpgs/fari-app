@@ -19,13 +19,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
-import produce from "immer";
-import isEqual from "lodash/isEqual";
-import React, { useMemo } from "react";
-import {
-  ContentEditable,
-  sanitizeContentEditable,
-} from "../../components/ContentEditable/ContentEditable";
+import React from "react";
+import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { ICharacter } from "../../contexts/CharactersContext";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
@@ -45,22 +40,13 @@ export const CharacterDialog: React.FC<{
   const theme = useTheme();
   const characterManager = useCharacter(props.character);
 
-  const isDirty = useMemo(() => {
-    return !isEqual(props.character, characterManager.state.character);
-  }, [props.character, characterManager.state.character]);
-
   function onSave() {
-    const updatedCharacter = produce(
-      characterManager.state.character,
-      (draft) => {
-        draft.name = sanitizeContentEditable(draft.name);
-      }
-    );
+    const updatedCharacter = characterManager.actions.sanitizeCharacter();
     props.onSave(updatedCharacter);
   }
 
   function onClose() {
-    if (isDirty) {
+    if (characterManager.state.isDirty) {
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
         props.onClose();
@@ -148,7 +134,9 @@ export const CharacterDialog: React.FC<{
               <Grid item className={css({ marginLeft: "auto" })}>
                 <Button
                   color="primary"
-                  variant={isDirty ? "contained" : "outlined"}
+                  variant={
+                    characterManager.state.isDirty ? "contained" : "outlined"
+                  }
                   type="submit"
                   onClick={onSave}
                 >
