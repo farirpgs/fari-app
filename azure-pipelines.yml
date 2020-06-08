@@ -36,7 +36,7 @@ steps:
     displayName: "yarn validate"
 
   - script: |
-      yarn run build
+      CONTEXT=PIPELINE BUILD_NUMBER=$(Build.BuildNumber) COMMIT_ID=$(Build.SourceVersion) yarn run build
     displayName: "yarn build"
 
   - script: |
