@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
 import { useCharacters } from "../../../../contexts/CharactersContext";
+import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
 
@@ -55,6 +56,171 @@ describe("useScene", () => {
       expect(result.current.state.scene.name).toEqual("New Name");
     });
   });
+
+  describe("aspects", () => {
+    it("should be able to manage aspects", () => {
+      // GIVEN
+      const userId = "111";
+      const gameId = undefined;
+      const useCharactersMock = mockUseCharacters();
+
+      // WHEN initial render
+      const { result } = renderHook(() => {
+        const charactersManager = useCharactersMock();
+        return useScene(userId, gameId, charactersManager);
+      });
+      act(() => {
+        // WHEN adding an aspect
+        result.current.actions.addAspect(AspectType.Aspect);
+      });
+      // THEN aspect exists
+      const [firstAspectId] = Object.keys(result.current.state.scene.aspects);
+      expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
+        color: "white",
+        consequences: [],
+        content: "<br/>",
+        freeInvokes: [],
+        mentalStress: [],
+        physicalStress: [],
+        playedDuringTurn: false,
+        title: "",
+        type: 2,
+      });
+      act(() => {
+        // WHEN updating the title
+        result.current.actions.updateAspectTitle(firstAspectId, "new title");
+      });
+      // THEN
+      expect(result.current.state.scene.aspects[firstAspectId].title).toEqual(
+        "new title"
+      );
+      act(() => {
+        // WHEN updating the content
+        result.current.actions.updateAspectContent(
+          firstAspectId,
+          "new content"
+        );
+      });
+      // THEN
+      expect(result.current.state.scene.aspects[firstAspectId].content).toEqual(
+        "new content"
+      );
+      act(() => {
+        // WHEN adding free invoke
+        result.current.actions.addAspectFreeInvoke(firstAspectId);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].freeInvokes
+      ).toEqual([false]);
+      act(() => {
+        // WHEN updating free invoke
+        result.current.actions.updateAspectFreeInvoke(firstAspectId, 0, true);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].freeInvokes
+      ).toEqual([true]);
+      act(() => {
+        // WHEN adding physical stress
+        result.current.actions.addAspectPhysicalStress(firstAspectId);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].physicalStress
+      ).toEqual([false]);
+      act(() => {
+        // WHEN updating physical stress
+        result.current.actions.updateAspectPhysicalStress(
+          firstAspectId,
+          0,
+          true
+        );
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].physicalStress
+      ).toEqual([true]);
+      act(() => {
+        // WHEN adding mental stress
+        result.current.actions.addAspectMentalStress(firstAspectId);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].mentalStress
+      ).toEqual([false]);
+      act(() => {
+        // WHEN updating mental stress
+        result.current.actions.updateAspectMentalStress(firstAspectId, 0, true);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].mentalStress
+      ).toEqual([true]);
+      act(() => {
+        // WHEN adding consequence
+        result.current.actions.addAspectConsequence(firstAspectId);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].consequences
+      ).toEqual([""]);
+      act(() => {
+        // WHEN updating consequence
+        result.current.actions.updateAspectConsequence(
+          firstAspectId,
+          0,
+          "new consequence"
+        );
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].consequences
+      ).toEqual(["new consequence"]);
+      act(() => {
+        // WHEN updating initiative
+        result.current.actions.updateAspectPlayerDuringTurn(
+          firstAspectId,
+          true
+        );
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].playedDuringTurn
+      ).toEqual(true);
+      act(() => {
+        // WHEN updating color
+        result.current.actions.updateAspectColor(firstAspectId, "blue");
+      });
+      // THEN
+      expect(result.current.state.scene.aspects[firstAspectId].color).toEqual(
+        "blue"
+      );
+      act(() => {
+        // WHEN reseting aspect
+        result.current.actions.resetAspect(firstAspectId);
+      });
+      // THEN
+      expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
+        color: "white",
+        consequences: [],
+        content: "<br/>",
+        freeInvokes: [],
+        mentalStress: [],
+        physicalStress: [],
+        playedDuringTurn: false,
+        title: "",
+        type: 2,
+      });
+      act(() => {
+        // WHEN removing aspect
+        result.current.actions.removeAspect(firstAspectId);
+      });
+      // THEN
+      expect(result.current.state.scene.aspects).toEqual({});
+    });
+  });
+
   describe("updatePlayers", () => {
     it("should map connections to players", () => {
       // GIVEN
@@ -174,21 +340,6 @@ function mockUseCharacters() {
 }
 // reset,
 // safeSetScene,
-// addAspect,
-// removeAspect,
-// resetAspect,
-// updateAspectTitle,
-// updateAspectContent,
-// addAspectFreeInvoke,
-// updateAspectFreeInvoke,
-// addAspectPhysicalStress,
-// updateAspectPhysicalStress,
-// addAspectMentalStress,
-// updateAspectMentalStress,
-// addAspectConsequence,
-// updateAspectConsequence,
-// updateAspectPlayerDuringTurn,
-// updateAspectColor,
 // addOfflinePlayer,
 // addOfflineCharacter,
 // removeOfflinePlayer,
