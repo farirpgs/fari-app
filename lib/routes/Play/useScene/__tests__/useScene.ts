@@ -1,0 +1,5 @@
+describe("useScene", () => {
+  it("constructor", () => {
+    //
+  });
+});
