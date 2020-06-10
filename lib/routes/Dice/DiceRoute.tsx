@@ -47,12 +47,12 @@ export const DiceRoute = () => {
     boxShadow:
       "3px 5px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
   });
-  // const diceRollingAnimationStyle = css({
-  //   animationName: "spin",
-  //   animationDuration: "250ms",
-  //   animationIterationCount: "infinite",
-  //   animationTimingFunction: "linear",
-  // });
+  const diceRollingAnimationStyle = css({
+    animationName: "spin",
+    animationDuration: "250ms",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear",
+  });
   return (
     <Page>
       <PageMeta
@@ -96,7 +96,7 @@ export const DiceRoute = () => {
             >
               <Typography
                 className={cx(diceStyle, {
-                  // [diceRollingAnimationStyle]: diceManager.state.rolling,
+                  [diceRollingAnimationStyle]: diceManager.state.rolling,
                 })}
               >
                 {diceManager.state.label}

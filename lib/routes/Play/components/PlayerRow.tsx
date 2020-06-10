@@ -91,12 +91,12 @@ export const PlayerRow: React.FC<{
     boxShadow:
       "2px 2px 2px 0px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
   });
-  // const diceRollingAnimationStyle = css({
-  //   animationName: "spin",
-  //   animationDuration: "250ms",
-  //   animationIterationCount: "infinite",
-  //   animationTimingFunction: "linear",
-  // });
+  const diceRollingAnimationStyle = css({
+    animationName: "spin",
+    animationDuration: "250ms",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear",
+  });
 
   const fatePointsStyle = css({
     background:
@@ -223,7 +223,7 @@ export const PlayerRow: React.FC<{
                 >
                   <Typography
                     className={cx(diceStyle, {
-                      // [diceRollingAnimationStyle]: diceManager.state.rolling,
+                      [diceRollingAnimationStyle]: diceManager.state.rolling,
                     })}
                   >
                     {diceManager.state.label}

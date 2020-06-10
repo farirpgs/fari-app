@@ -1,7 +1,6 @@
 import { useTheme } from "@material-ui/core";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
-import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
 const diceMap = {
@@ -9,6 +8,9 @@ const diceMap = {
   "0": "o",
   "1": "+",
 };
+
+const rollingDelay = 1000;
+
 export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const [realRoll] = rolls;
 
@@ -39,30 +41,31 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
     setColor(newColor);
   }, [rolling, realRoll]);
 
+  function setRollingState() {
+    setRolling(true);
+    setRoll(undefined);
+  }
+
+  function setFinalResult() {
+    setRolling(false);
+    setRoll(realRoll);
+    if (realRoll?.total === 4) {
+      Confetti.fireConfetti();
+    } else if (realRoll?.total === -4) {
+      Confetti.fireCannon();
+    }
+  }
+
   useEffect(() => {
-    let intervalId: NodeJS.Timer = undefined;
+    let timeout: NodeJS.Timer = undefined;
     if (realRoll !== undefined) {
-      setRolling(true);
-      intervalId = setInterval(() => {
-        if (refreshCount.current !== 50) {
-          const fakeRoll = Dice.roll4DF();
-          refreshCount.current++;
-          setRoll(fakeRoll);
-        } else {
-          clearInterval(intervalId);
-          setRolling(false);
-          refreshCount.current = 0;
-          setRoll(realRoll);
-          if (realRoll?.total >= 3) {
-            Confetti.fireConfetti();
-          } else if (!rolling && realRoll?.total <= -3) {
-            Confetti.fireCannon();
-          }
-        }
-      }, 25);
+      setRollingState();
+      timeout = setTimeout(() => {
+        setFinalResult();
+      }, rollingDelay);
     }
     return () => {
-      clearInterval(intervalId);
+      clearTimeout(timeout);
     };
   }, [rolls.length]);
 
