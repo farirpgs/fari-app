@@ -209,16 +209,20 @@ export function useScene(
       produce((draft: IScene) => {
         draft.players = connections.map((c) => {
           const meta: IPeerMeta = c.metadata;
+          const refresh = meta?.character?.refresh ?? 3;
+
           const playerMatch = draft.players.find((p) => p.id === c.label);
-          const currentFatePoints = playerMatch?.fatePoints;
-          const refresh = meta?.character?.refresh;
-          const fatePoints = currentFatePoints ?? refresh ?? 3;
+
+          const rolls = playerMatch?.rolls ?? [];
+          const fatePoints = playerMatch?.fatePoints ?? refresh;
+          const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
+
           return {
             id: c.label,
             playerName: meta.playerName,
             character: meta.character,
-            rolls: [],
-            playedDuringTurn: false,
+            rolls: rolls,
+            playedDuringTurn: playedDuringTurn,
             fatePoints: fatePoints,
           } as IPlayer;
         });
