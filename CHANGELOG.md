@@ -12,6 +12,7 @@
 - fix: [#76](https://github.com/fariapp/fari/issues/76)
 - fix: player re-initialization when a new player joins a session
 - fix: dice rolls gettings stuck during animation
+- feat: sticky dark mode
 
 ## 2.2 (May 19, 2020) - Player Controls, Confetti and Dark Theme
 
