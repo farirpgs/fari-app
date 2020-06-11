@@ -1,6 +1,7 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
-[![Build Status](https://dev.azure.com/fariapp/fari/_apis/build/status/fariapp.fari?branchName=master)](https://dev.azure.com/fariapp/fari/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/fariapp/fari/_apis/build/status/fariapp.fari?branchName=master)](https://dev.azure.com/fariapp/fari/_build?definitionId=1&_a=summary&view=branches)
+
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B4AHLJ)
 
 This repo contains the source code that powers Fari.
