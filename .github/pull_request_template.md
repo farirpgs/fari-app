@@ -6,7 +6,7 @@
 
 ## 🌄 Context
 
-<!-- Provide more context around why this pull requests was created -->
+<!-- Provide more context around why this pull request was created -->
 
 ## 🔒Checklist
 
