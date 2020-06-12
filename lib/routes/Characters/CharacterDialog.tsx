@@ -46,7 +46,7 @@ export const CharacterDialog: React.FC<{
   }
 
   function onClose() {
-    if (characterManager.state.isDirty) {
+    if (characterManager.state.isDirty && !props.readonly) {
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
         props.onClose();
