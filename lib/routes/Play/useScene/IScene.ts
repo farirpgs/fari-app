@@ -17,6 +17,7 @@ export interface IAspect {
   title: string;
   content: string;
   freeInvokes: Array<boolean>;
+  countdown: Array<boolean>;
   physicalStress: Array<boolean>;
   mentalStress: Array<boolean>;
   consequences: Array<string>;

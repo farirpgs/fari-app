@@ -36,10 +36,13 @@ export const IndexCard: React.FC<{
   onFreeInvokeChange(index: number, value: boolean): void;
   onPhysicalStressChange(index: number, value: boolean): void;
   onMentalStressChange(index: number, value: boolean): void;
+  onCountdownChange(index: number, value: boolean): void;
+
   onConsequenceChange(index: number, value: string): void;
   onAddAspectFreeInvoke(): void;
   onAddAspectPhysicalStress(): void;
   onAddAspectMentalStress(): void;
+  onAddCountdown(): void;
   onAddConsequence(): void;
   onUpdateAspectColor(color: IndexCardColorTypes): void;
   onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
@@ -55,6 +58,7 @@ export const IndexCard: React.FC<{
     props.aspect.freeInvokes.length > 0 ||
     props.aspect.physicalStress.length > 0 ||
     props.aspect.mentalStress.length > 0 ||
+    props.aspect.countdown.length > 0 ||
     props.aspect.consequences.length > 0;
 
   const shouldRenderAspectMenuItems = props.aspect.type !== AspectType.Boost;
@@ -214,6 +218,14 @@ export const IndexCard: React.FC<{
         }}
       >
         {t("index-card.add-1-consequence")}
+      </MenuItem>,
+      <MenuItem
+        key="onAddCountdown"
+        onClick={() => {
+          props.onAddCountdown();
+        }}
+      >
+        {t("index-card.add-1-countdown")}
       </MenuItem>,
       <Divider key="renderAspectMenuItemsDivider"></Divider>,
     ];
@@ -396,6 +408,31 @@ export const IndexCard: React.FC<{
                           color: theme.palette.secondary.main,
                         })}
                         color="secondary"
+                      />
+                    </Tooltip>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Box>
+          <Box>
+            {props.aspect.countdown.length > 0 && (
+              <InputLabel shrink>{t("index-card.countdown")}</InputLabel>
+            )}
+            <Grid container justify="flex-start">
+              {props.aspect.countdown.map((value, index) => {
+                return (
+                  <Grid item key={index} xs={2}>
+                    <Tooltip title={index + 1}>
+                      <Checkbox
+                        checked={value}
+                        onChange={(event) => {
+                          if (props.readonly) {
+                            return;
+                          }
+                          props.onCountdownChange(index, event.target.checked);
+                        }}
+                        color="default"
                       />
                     </Tooltip>
                   </Grid>

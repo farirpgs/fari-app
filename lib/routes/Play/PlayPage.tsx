@@ -37,6 +37,7 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import GestureIcon from "@material-ui/icons/Gesture";
 import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
+import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -598,6 +599,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         value
                       );
                     }}
+                    onCountdownChange={(index, value) => {
+                      sceneManager.actions.updateAspectCountdown(
+                        aspectId,
+                        index,
+                        value
+                      );
+                    }}
                     onConsequenceChange={(index, value) => {
                       sceneManager.actions.updateAspectConsequence(
                         aspectId,
@@ -613,6 +621,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     }}
                     onAddAspectMentalStress={() => {
                       sceneManager.actions.addAspectMentalStress(aspectId);
+                    }}
+                    onAddCountdown={() => {
+                      sceneManager.actions.addAspectCountdown(aspectId);
                     }}
                     onAddConsequence={() => {
                       sceneManager.actions.addAspectConsequence(aspectId);
@@ -736,6 +747,18 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       endIcon={<BugReportIcon></BugReportIcon>}
                     >
                       {t("play-route.add-bad-guy")}
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        sceneManager.actions.addAspect(AspectType.IndexCard);
+                      }}
+                      variant="contained"
+                      color="secondary"
+                      endIcon={<NoteOutlinedIcon></NoteOutlinedIcon>}
+                    >
+                      {t("play-route.add-index-card")}
                     </Button>
                   </Grid>
                 </Grid>
