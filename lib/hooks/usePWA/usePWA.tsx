@@ -8,7 +8,7 @@ interface IPWAEvent {
 }
 
 let shouldSuggestInstallationSingleton = false;
-let pwaPromptSingleton: IPWAEvent = undefined;
+let pwaPromptSingleton: IPWAEvent | undefined = undefined;
 
 export function usePWA(
   onInstall = () => undefined,
@@ -31,12 +31,14 @@ export function usePWA(
   }, []);
 
   const prompt = async () => {
-    pwaPromptSingleton.prompt();
-    const choiceResult = await pwaPromptSingleton.userChoice;
-    if (choiceResult.outcome === "accepted") {
-      onInstall();
-    } else {
-      onCancelInstall();
+    if (pwaPromptSingleton) {
+      pwaPromptSingleton.prompt();
+      const choiceResult = await pwaPromptSingleton.userChoice;
+      if (choiceResult.outcome === "accepted") {
+        onInstall();
+      } else {
+        onCancelInstall();
+      }
     }
   };
 

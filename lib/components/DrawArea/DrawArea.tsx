@@ -25,7 +25,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
 
   const [lines, setLines] = useState<ILines>([]);
   const [isDrawing, setDrawing] = useState(false);
-  const $container = useRef<HTMLDivElement>(undefined);
+  const $container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (props.lines && props.readonly) {
@@ -74,10 +74,12 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
 
     const newPoint = relativeCoordinatesForEvent(mouseEvent);
-    setLines((lines) => {
-      return [...lines, [newPoint]];
-    });
-    setDrawing(true);
+    if (newPoint) {
+      setLines((lines) => {
+        return [...lines, [newPoint]];
+      });
+      setDrawing(true);
+    }
   }
 
   function handleMouseMove(
@@ -88,16 +90,18 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
 
     const newPoint = relativeCoordinatesForEvent(mouseEvent);
-    setLines((lines) => {
-      const lastLineIndex = lines.length - 1;
-      return lines.map((line, index) => {
-        if (index !== lastLineIndex) {
-          return line;
-        }
-        const updatedLine = [...line, newPoint];
-        return updatedLine;
+    if (newPoint) {
+      setLines((lines) => {
+        const lastLineIndex = lines.length - 1;
+        return lines.map((line, index) => {
+          if (index !== lastLineIndex) {
+            return line;
+          }
+          const updatedLine = [...line, newPoint];
+          return updatedLine;
+        });
       });
-    });
+    }
   }
 
   function handleDoubleClick() {
@@ -110,17 +114,19 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
 
   function relativeCoordinatesForEvent(
     mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): IPoint {
-    const boundingRect = $container.current.getBoundingClientRect();
-    const x = mouseEvent.clientX - boundingRect.left;
-    const y = mouseEvent.clientY - boundingRect.top;
-    const point = {
-      x: x,
-      y: y,
-      percentX: (x / boundingRect.width) * 100,
-      percentY: (y / boundingRect.height) * 100,
-    } as IPoint;
-    return point;
+  ): IPoint | undefined {
+    if ($container.current) {
+      const boundingRect = $container.current.getBoundingClientRect();
+      const x = mouseEvent.clientX - boundingRect.left;
+      const y = mouseEvent.clientY - boundingRect.top;
+      const point = {
+        x: x,
+        y: y,
+        percentX: (x / boundingRect.width) * 100,
+        percentY: (y / boundingRect.height) * 100,
+      } as IPoint;
+      return point;
+    }
   }
 
   return (
@@ -148,7 +154,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
               }),
             }}
             htmlColor={textColors.disabled}
-          ></GestureIcon>
+          />
         </Fade>
       ) : (
         <Fade in>

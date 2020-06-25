@@ -1,7 +1,10 @@
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
-export const esTranslation: Record<IPossibleTranslationKeys, string> = {
+export const esTranslation: Record<
+  IPossibleTranslationKeys,
+  string | undefined
+> = {
   "common.language.en": `Inglés`,
   "common.language.pt": `Portugués WIP`,
   "common.language.es": `Español`,
@@ -57,6 +60,7 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.add-boost": `Añadir Impulso`,
   "play-route.add-npc": `Añadir PnJ`,
   "play-route.add-bad-guy": `Añadir Adversario`,
+  "play-route.add-index-card": undefined,
   "play-route.copy-game-link": `Copiar enlace a la partida`,
   "play-route.sort": `Ordenar`,
   "play-route.reset-initiative": `Reiniciar`,
@@ -73,11 +77,13 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "index-card.add-1-physical-stress-box": `+  Estrés Físico`,
   "index-card.add-1-mental-stress-box": `+  Estrés Mental`,
   "index-card.add-1-consequence": `+ Consecuencia`,
+  "index-card.add-1-countdown": undefined,
   "index-card.remove": `Quitar`,
   "index-card.reset": `Reiniciar`,
   "index-card.free-invokes": `Invocaciones Gratuitas`,
   "index-card.physical-stress": `Estrés Físico`,
   "index-card.mental-stress": `Estrés Mental`,
+  "index-card.countdown": undefined,
   "index-card.consequence": `Consecuencias`,
   "index-card.aspect": `Aspecto`,
   "index-card.boost": `Impulso`,
@@ -100,6 +106,7 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "characters-route.character-type.custom": `Personalizado`,
   "character-dialog.name": `Nombre`,
   "character-dialog.save": `Guardar`,
+  "character-dialog.advanced": undefined,
   "character-dialog.delete": `Borrar`,
   "character-dialog.aspects": `Aspectos`,
   "character-dialog.stress": `Estrés`,

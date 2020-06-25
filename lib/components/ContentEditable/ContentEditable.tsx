@@ -16,14 +16,16 @@ export const ContentEditable: React.FC<{
   border?: boolean;
 }> = (props) => {
   const theme = useTheme();
-  const $ref = useRef<HTMLDivElement>();
+  const $ref = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
-    if (!props.value && props.readonly) {
-      $ref.current.innerHTML = "&nbsp;";
-    } else if ($ref.current.innerHTML !== props.value) {
-      const cleanHTML = DOMPurify.sanitize(props.value, DOMPurifyOptions);
-      $ref.current.innerHTML = cleanHTML;
+    if ($ref.current) {
+      if (!props.value && props.readonly) {
+        $ref.current.innerHTML = "&nbsp;";
+      } else if ($ref.current.innerHTML !== props.value) {
+        const cleanHTML = DOMPurify.sanitize(props.value, DOMPurifyOptions);
+        $ref.current.innerHTML = cleanHTML;
+      }
     }
   }, [props.value]);
 
@@ -36,13 +38,13 @@ export const ContentEditable: React.FC<{
     focusOnLoad();
   }, []);
 
-  function onChange(e) {
+  function onChange(e: any) {
     if ($ref.current) {
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
         DOMPurifyOptions
       );
-      props.onChange(cleanHTML, e);
+      props.onChange?.(cleanHTML, e);
     }
   }
 
@@ -71,7 +73,7 @@ export const ContentEditable: React.FC<{
         onChange(e);
       }}
       contentEditable={!props.readonly}
-    ></span>
+    />
   );
 };
 ContentEditable.displayName = "ContentEditable";

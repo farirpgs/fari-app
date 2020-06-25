@@ -92,12 +92,12 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
-  const shareLinkInputRef = useRef<HTMLInputElement>();
+  const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
     false
   );
-  const $drawArea = useRef<IDrawAreaHandles>(undefined);
+  const $drawArea = useRef<IDrawAreaHandles | null>(null);
 
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
   useEffect(() => {
@@ -119,7 +119,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
   ];
 
   const shouldRenderPlayerJoinGameScreen =
-    !isGM && !connectionsManager.state.isConnectedToHost;
+    !isGM && !connectionsManager!.state.isConnectedToHost;
 
   const paperStyle = css({ borderRadius: "0px" });
   return (
@@ -139,7 +139,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
   function renderIsLoading() {
     return (
       <Box display="flex" justifyContent="center">
-        <CircularProgress></CircularProgress>
+        <CircularProgress />
       </Box>
     );
   }
@@ -148,10 +148,10 @@ export const PlayPage: React.FC<IProps> = (props) => {
     if (shouldRenderPlayerJoinGameScreen) {
       return (
         <JoinAGame
-          connecting={connectionsManager.state.connectingToHost}
-          error={connectionsManager.state.connectingToHostError}
+          connecting={connectionsManager?.state.connectingToHost ?? false}
+          error={connectionsManager?.state.connectingToHostError}
           onSubmitCharacter={(character) => {
-            connectionsManager.actions.connect<IPeerMeta>(
+            connectionsManager?.actions.connect<IPeerMeta>(
               props.idFromParams,
               props.userId,
               {
@@ -160,7 +160,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
             );
           }}
           onSubmitPlayerName={(playerName) => {
-            connectionsManager.actions.connect<IPeerMeta>(
+            connectionsManager?.actions.connect<IPeerMeta>(
               props.idFromParams,
               props.userId,
               {
@@ -168,7 +168,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               }
             );
           }}
-        ></JoinAGame>
+        />
       );
     }
     return (
@@ -244,16 +244,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       >
                         <ListItemText
                           primary={
-                            <ContentEditable
-                              readonly
-                              value={character.name}
-                            ></ContentEditable>
+                            <ContentEditable readonly value={character.name} />
                           }
                           secondary={
                             <ContentEditable
                               readonly
                               value={firstAspect?.value || "..."}
-                            ></ContentEditable>
+                            />
                           }
                         />
                       </ListItem>
@@ -342,7 +339,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   }}
                   variant="contained"
                   color="secondary"
-                  endIcon={<EmojiPeopleIcon></EmojiPeopleIcon>}
+                  endIcon={<EmojiPeopleIcon />}
                 >
                   {t("play-route.reset-initiative")}
                 </Button>
@@ -359,7 +356,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       Dice.roll4DF()
                     );
                   } else {
-                    connectionsManager.actions.sendToHost<IPeerActions>({
+                    connectionsManager?.actions.sendToHost<IPeerActions>({
                       action: "roll",
                       payload: Dice.roll4DF(),
                     });
@@ -400,7 +397,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                             Dice.roll4DF()
                           );
                         } else {
-                          connectionsManager.actions.sendToHost<IPeerActions>({
+                          connectionsManager?.actions.sendToHost<IPeerActions>({
                             action: "roll",
                             payload: Dice.roll4DF(),
                           });
@@ -413,7 +410,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                             playedInTurnOrder
                           );
                         } else {
-                          connectionsManager.actions.sendToHost<IPeerActions>({
+                          connectionsManager?.actions.sendToHost<IPeerActions>({
                             action: "played-in-turn-order",
                             payload: playedInTurnOrder,
                           });
@@ -426,7 +423,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                             fatePoints
                           );
                         } else {
-                          connectionsManager.actions.sendToHost<IPeerActions>({
+                          connectionsManager?.actions.sendToHost<IPeerActions>({
                             action: "update-fate-point",
                             payload: fatePoints,
                           });
@@ -439,13 +436,13 @@ export const PlayPage: React.FC<IProps> = (props) => {
                             character
                           );
                         } else {
-                          connectionsManager.actions.sendToHost<IPeerActions>({
+                          connectionsManager?.actions.sendToHost<IPeerActions>({
                             action: "update-character",
                             payload: character,
                           });
                         }
                       }}
-                    ></PlayerRow>
+                    />
                   );
                 })}
               </TableBody>
@@ -453,7 +450,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
           </TableContainer>
         </Paper>
         <Paper className={paperStyle}>
-          <Divider light></Divider>
+          <Divider light />
           <Box width="100%" height="400px">
             <DrawArea
               ref={$drawArea}
@@ -462,9 +459,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
               onChange={(lines) => {
                 sceneManager.actions.setDrawAreaLines(lines);
               }}
-            ></DrawArea>
+            />
           </Box>
-          <Divider></Divider>
+          <Divider />
           {isGM && (
             <Box p="1rem">
               <Grid container justify="space-between">
@@ -475,7 +472,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         $drawArea.current.clear();
                       }
                     }}
-                    endIcon={<GestureIcon></GestureIcon>}
+                    endIcon={<GestureIcon />}
                   >
                     {t("play-route.clear-drawing")}
                   </Button>
@@ -487,7 +484,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         $drawArea.current.undo();
                       }
                     }}
-                    endIcon={<UndoIcon></UndoIcon>}
+                    endIcon={<UndoIcon />}
                   >
                     {t("play-route.undo-drawing")}
                   </Button>
@@ -637,7 +634,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         playedDuringTurn
                       );
                     }}
-                  ></IndexCard>
+                  />
                 </Box>
               );
             })}
@@ -657,7 +654,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addAspect(AspectType.Aspect);
                   }}
-                  endIcon={<NoteIcon></NoteIcon>}
+                  endIcon={<NoteIcon />}
                 >
                   {t("play-route.click-on-the-add-aspect-")}
                 </Button>
@@ -691,7 +688,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 onChange={(value) => {
                   sceneManager.actions.setName(value);
                 }}
-              ></ContentEditable>
+              />
             </Typography>
           </Container>
         </Box>
@@ -708,7 +705,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       variant="contained"
                       color="secondary"
-                      endIcon={<NoteIcon></NoteIcon>}
+                      endIcon={<NoteIcon />}
                     >
                       {t("play-route.add-aspect")}
                     </Button>
@@ -720,7 +717,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       variant="contained"
                       color="secondary"
-                      endIcon={<LoupeIcon></LoupeIcon>}
+                      endIcon={<LoupeIcon />}
                     >
                       {t("play-route.add-boost")}
                     </Button>
@@ -732,7 +729,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       variant="contained"
                       color="secondary"
-                      endIcon={<FaceIcon></FaceIcon>}
+                      endIcon={<FaceIcon />}
                     >
                       {t("play-route.add-npc")}
                     </Button>
@@ -744,7 +741,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       variant="contained"
                       color="secondary"
-                      endIcon={<BugReportIcon></BugReportIcon>}
+                      endIcon={<BugReportIcon />}
                     >
                       {t("play-route.add-bad-guy")}
                     </Button>
@@ -756,7 +753,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       variant="contained"
                       color="secondary"
-                      endIcon={<NoteOutlinedIcon></NoteOutlinedIcon>}
+                      endIcon={<NoteOutlinedIcon />}
                     >
                       {t("play-route.add-index-card")}
                     </Button>
@@ -772,7 +769,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     variant="text"
                     color="primary"
                   >
-                    <ThumbUpIcon></ThumbUpIcon>
+                    <ThumbUpIcon />
                   </Button>
                 </Grid>
                 <Grid item>
@@ -783,7 +780,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     variant="text"
                     color="primary"
                   >
-                    <ThumbDownIcon></ThumbDownIcon>
+                    <ThumbDownIcon />
                   </Button>
                 </Grid>
                 <Grid item>
@@ -797,7 +794,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         ? "secondary"
                         : "default"
                     }
-                    endIcon={<SortIcon></SortIcon>}
+                    endIcon={<SortIcon />}
                   >
                     {t("play-route.sort")}
                   </Button>
@@ -810,7 +807,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       }}
                       variant="outlined"
                       color="default"
-                      endIcon={<PersonAddIcon></PersonAddIcon>}
+                      endIcon={<PersonAddIcon />}
                     >
                       {t("play-route.add-character")}
                     </Button>
@@ -819,7 +816,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 {props.shareLink && (
                   <Grid item>
                     <input
-                      ref={shareLinkInputRef}
+                      ref={$shareLinkInputRef}
                       type="text"
                       value={props.shareLink}
                       readOnly
@@ -832,14 +829,16 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     >
                       <Button
                         onClick={() => {
-                          shareLinkInputRef.current.select();
-                          document.execCommand("copy");
-                          navigator.clipboard.writeText(props.shareLink);
-                          setShareLinkToolTip({ open: true });
+                          if (props.shareLink && $shareLinkInputRef.current) {
+                            $shareLinkInputRef.current.select();
+                            document.execCommand("copy");
+                            navigator.clipboard.writeText(props.shareLink);
+                            setShareLinkToolTip({ open: true });
+                          }
                         }}
                         variant="outlined"
                         color="default"
-                        endIcon={<FileCopyIcon></FileCopyIcon>}
+                        endIcon={<FileCopyIcon />}
                       >
                         {t("play-route.copy-game-link")}
                       </Button>
@@ -865,7 +864,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                       className={css({ borderRadius: "20px" })}
                       variant="text"
                       color="primary"
-                      endIcon={<ErrorIcon></ErrorIcon>}
+                      endIcon={<ErrorIcon />}
                     >
                       {t("play-route.reset-scene")}
                     </Button>

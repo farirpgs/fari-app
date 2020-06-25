@@ -16,7 +16,7 @@ export function useStyles<
     (result, definitionName) => {
       const label = `${componentDisplayName}-${definitionName}`;
       const emotionClassHash = css({
-        ...styleDefinitions[definitionName],
+        ...((styleDefinitions as unknown) as any)[definitionName],
         label: label,
       });
       return { ...result, [definitionName]: emotionClassHash };

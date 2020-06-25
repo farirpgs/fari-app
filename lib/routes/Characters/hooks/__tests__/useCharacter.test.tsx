@@ -6,7 +6,7 @@ describe("useCharacter", () => {
   describe("sync props with state", () => {
     it("should not crash if characters in props in undefined", async () => {
       // GIVEN
-      const initialRenderCharacter = undefined as ICharacter;
+      const initialRenderCharacter = (undefined as unknown) as ICharacter;
       // WHEN
       const { result, rerender } = renderHook(
         (props) => {

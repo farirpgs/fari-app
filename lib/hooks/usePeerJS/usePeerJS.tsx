@@ -4,8 +4,8 @@ import { v4 as uuidV4 } from "uuid";
 import { env } from "../../services/injections";
 
 export function usePeerJS(options: { debug?: boolean }) {
-  const peer = useRef<Peer>(undefined);
-  const [hostId, setHostId] = useState<string>(undefined);
+  const peer = useRef<Peer | undefined>(undefined);
+  const [hostId, setHostId] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(undefined);
 
@@ -32,16 +32,16 @@ export function usePeerJS(options: { debug?: boolean }) {
     function setupPeer() {
       console.info("usePeerJS: Setup");
 
-      peer.current.on("open", onPeerOpenCallback);
-      peer.current.on("disconnected", onPeerDisconnectedCallback);
-      peer.current.on("close", onPeerCloseCallback);
-      peer.current.on("error", onPeerErrorCallback);
+      peer.current?.on("open", onPeerOpenCallback);
+      peer.current?.on("disconnected", onPeerDisconnectedCallback);
+      peer.current?.on("close", onPeerCloseCallback);
+      peer.current?.on("error", onPeerErrorCallback);
 
       return () => {
-        peer.current.off("open", onPeerOpenCallback);
-        peer.current.off("disconnected", onPeerDisconnectedCallback);
-        peer.current.off("close", onPeerCloseCallback);
-        peer.current.destroy();
+        peer.current?.off("open", onPeerOpenCallback);
+        peer.current?.off("disconnected", onPeerDisconnectedCallback);
+        peer.current?.off("close", onPeerCloseCallback);
+        peer.current?.destroy();
       };
 
       function onPeerOpenCallback(id: string) {
@@ -51,7 +51,7 @@ export function usePeerJS(options: { debug?: boolean }) {
       }
       function onPeerDisconnectedCallback() {
         setHostId(undefined);
-        peer.current.reconnect();
+        peer.current?.reconnect();
         console.info("usePeerJS: Disconnected. Reconnecting");
       }
       function onPeerCloseCallback() {

@@ -30,35 +30,37 @@ export const CharacterManager: React.FC<{
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const charactersManager = useContext(CharactersContext);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const onCharacterMenuClose = () => {
     setAnchorEl(null);
   };
   return (
     <>
-      <CharacterDialog
-        open={!!charactersManager.state.selectedCharacter}
-        character={charactersManager.state.selectedCharacter}
-        onSave={(newCharacter) => {
-          charactersManager.actions.close();
-          charactersManager.actions.update(newCharacter);
-        }}
-        onDelete={() => {
-          const confirmed = confirm(
-            t("characters-route.delete-character-confirmation")
-          );
-          if (confirmed) {
+      {charactersManager.state.selectedCharacter && (
+        <CharacterDialog
+          open={!!charactersManager.state.selectedCharacter}
+          character={charactersManager.state.selectedCharacter}
+          onSave={(newCharacter) => {
             charactersManager.actions.close();
-            charactersManager.actions.remove(
-              charactersManager.state.selectedCharacter.id
+            charactersManager.actions.update(newCharacter);
+          }}
+          onDelete={() => {
+            const confirmed = confirm(
+              t("characters-route.delete-character-confirmation")
             );
-          }
-        }}
-        onClose={() => {
-          charactersManager.actions.close();
-        }}
-      ></CharacterDialog>
+            if (confirmed) {
+              charactersManager.actions.close();
+              charactersManager.actions.remove(
+                charactersManager.state.selectedCharacter!.id
+              );
+            }
+          }}
+          onClose={() => {
+            charactersManager.actions.close();
+          }}
+        />
+      )}
 
       <Box pb="2rem">
         <Typography variant="h4" align="center">
@@ -80,7 +82,7 @@ export const CharacterManager: React.FC<{
               onClick={(event) => {
                 setAnchorEl(event.currentTarget);
               }}
-              endIcon={<PersonAddIcon></PersonAddIcon>}
+              endIcon={<PersonAddIcon />}
             >
               {t("characters-route.create-character")}
             </Button>
@@ -181,10 +183,7 @@ export const CharacterManager: React.FC<{
                     <FateLabel>{t("character-dialog.name")}:</FateLabel>
                   </Grid>
                   <Grid item>
-                    <ContentEditable
-                      readonly
-                      value={character.name}
-                    ></ContentEditable>
+                    <ContentEditable readonly value={character.name} />
                   </Grid>
                 </Grid>
               </Box>
@@ -204,16 +203,10 @@ export const CharacterManager: React.FC<{
                     <Box pb="1rem" key={index}>
                       <Box>
                         <FateLabel>
-                          <ContentEditable
-                            readonly
-                            value={a.name}
-                          ></ContentEditable>
+                          <ContentEditable readonly value={a.name} />
                         </FateLabel>
                       </Box>
-                      <ContentEditable
-                        readonly
-                        value={a.value}
-                      ></ContentEditable>
+                      <ContentEditable readonly value={a.value} />
                     </Box>
                   );
                 })}

@@ -22,7 +22,7 @@ const App: React.FC<{}> = () => {
   return (
     <DarkModeContext.Provider value={darkModeManager}>
       <CharactersContext.Provider value={charactersManager}>
-        <AppProvider></AppProvider>
+        <AppProvider />
       </CharactersContext.Provider>
     </DarkModeContext.Provider>
   );
@@ -44,7 +44,7 @@ export const AppProvider: React.FC<{}> = (props) => {
                   "client-hash": env.hash,
                   "client-context": env.context,
                 }}
-              ></Helmet>
+              />
               <ScrollToTop />
               <History />
               <AppRouter />

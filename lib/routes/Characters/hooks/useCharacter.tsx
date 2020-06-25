@@ -13,7 +13,7 @@ export function useCharacter(c: ICharacter) {
 
   useEffect(() => {
     const isDifferent = c?.id !== character?.id;
-    const isMoreRecent = c?.lastUpdated > character?.lastUpdated;
+    const isMoreRecent = c.lastUpdated > character.lastUpdated;
     if (isDifferent || isMoreRecent) {
       setCharacter(c);
     }

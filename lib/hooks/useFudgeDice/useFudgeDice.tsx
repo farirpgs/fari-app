@@ -1,13 +1,13 @@
 import { useTheme } from "@material-ui/core";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
-const diceMap = {
+const diceMap: Record<string, string> = {
   "-1": "-",
   "0": "o",
   "1": "+",
-};
+} as const;
 
 const rollingDelay = 1000;
 
@@ -15,10 +15,9 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const [realRoll] = rolls;
 
   const theme = useTheme();
-  const [roll, setRoll] = useState<IDiceRoll>(undefined);
+  const [roll, setRoll] = useState<IDiceRoll | undefined>(undefined);
   const [rolling, setRolling] = useState(false);
   const [color, setColor] = useState("inherit");
-  const refreshCount = useRef(0);
   const hasRolledOnce = roll !== undefined;
 
   const label = roll?.total ?? "";
@@ -57,7 +56,7 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   }
 
   useEffect(() => {
-    let timeout: NodeJS.Timer = undefined;
+    let timeout: NodeJS.Timer | undefined = undefined;
     if (realRoll !== undefined) {
       setRollingState();
       timeout = setTimeout(() => {
@@ -65,7 +64,9 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
       }, rollingDelay);
     }
     return () => {
-      clearTimeout(timeout);
+      if (timeout) {
+        clearTimeout(timeout);
+      }
     };
   }, [rolls.length]);
 

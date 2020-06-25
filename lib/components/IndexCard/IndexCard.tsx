@@ -52,7 +52,7 @@ export const IndexCard: React.FC<{
   const theme = useTheme();
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const $menu = useRef(undefined);
+  const $menu = useRef(null);
   const colorPickerBackground = theme.palette.primary.dark;
   const shouldRenderCheckboxesOrConsequences =
     props.aspect.freeInvokes.length > 0 ||
@@ -158,7 +158,7 @@ export const IndexCard: React.FC<{
             value={props.aspect.title}
             readonly={props.readonly}
             onChange={props.onTitleChange}
-          ></ContentEditable>
+          />
         </Grid>
         <Grid item>
           {shouldRenderPlayedDuringTurnIcon && (
@@ -170,13 +170,9 @@ export const IndexCard: React.FC<{
               size="small"
             >
               {props.aspect.playedDuringTurn ? (
-                <DirectionsRunIcon
-                  htmlColor={playedDuringTurnColor}
-                ></DirectionsRunIcon>
+                <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
               ) : (
-                <EmojiPeopleIcon
-                  htmlColor={playedDuringTurnColor}
-                ></EmojiPeopleIcon>
+                <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
               )}
             </IconButton>
           )}
@@ -227,7 +223,7 @@ export const IndexCard: React.FC<{
       >
         {t("index-card.add-1-countdown")}
       </MenuItem>,
-      <Divider key="renderAspectMenuItemsDivider"></Divider>,
+      <Divider key="renderAspectMenuItemsDivider" />,
     ];
   }
 
@@ -251,7 +247,7 @@ export const IndexCard: React.FC<{
       >
         {t("index-card.reset")}
       </MenuItem>,
-      <Divider key="renderGlobalMenuItemsDivider" light></Divider>,
+      <Divider key="renderGlobalMenuItemsDivider" light />,
       <MenuItem
         key="onUpdateAspectColor"
         className={css({
@@ -265,7 +261,8 @@ export const IndexCard: React.FC<{
         disableTouchRipple
       >
         <Grid container justify="center">
-          {Object.keys(IndexCardColor).map((colorName: IndexCardColorTypes) => {
+          {Object.keys(IndexCardColor).map((c: string) => {
+            const colorName = c as IndexCardColorTypes;
             return (
               <Grid item key={colorName}>
                 <IconButton
@@ -279,11 +276,11 @@ export const IndexCard: React.FC<{
                   {colorName === props.aspect.color ? (
                     <RadioButtonCheckedIcon
                       htmlColor={IndexCardColor[colorName].chip}
-                    ></RadioButtonCheckedIcon>
+                    />
                   ) : (
                     <RadioButtonUncheckedIcon
                       htmlColor={IndexCardColor[colorName].chip}
-                    ></RadioButtonUncheckedIcon>
+                    />
                   )}
 
                   {/* <FiberManualRecordIcon
@@ -314,7 +311,7 @@ export const IndexCard: React.FC<{
             readonly={props.readonly}
             value={props.aspect.content}
             onChange={props.onContentChange}
-          ></ContentEditable>
+          />
         </Box>
       </Box>
     );

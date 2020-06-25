@@ -1,7 +1,7 @@
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
-export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
+export const ptTranslation: Record<IPossibleTranslationKeys, any> = {
   "common.language.en": undefined,
   "common.language.pt": undefined,
   "common.language.es": undefined,
@@ -57,6 +57,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.add-boost": undefined,
   "play-route.add-npc": undefined,
   "play-route.add-bad-guy": undefined,
+  "play-route.add-index-card": undefined,
   "play-route.copy-game-link": undefined,
   "play-route.sort": undefined,
   "play-route.reset-initiative": undefined,
@@ -73,11 +74,13 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "index-card.add-1-physical-stress-box": undefined,
   "index-card.add-1-mental-stress-box": undefined,
   "index-card.add-1-consequence": undefined,
+  "index-card.add-1-countdown": undefined,
   "index-card.remove": undefined,
   "index-card.reset": undefined,
   "index-card.free-invokes": undefined,
   "index-card.physical-stress": undefined,
   "index-card.mental-stress": undefined,
+  "index-card.countdown": undefined,
   "index-card.consequence": undefined,
   "index-card.aspect": undefined,
   "index-card.boost": undefined,
@@ -100,6 +103,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, string> = {
   "characters-route.character-type.custom": undefined,
   "character-dialog.name": undefined,
   "character-dialog.save": undefined,
+  "character-dialog.advanced": undefined,
   "character-dialog.delete": undefined,
   "character-dialog.aspects": undefined,
   "character-dialog.stress": undefined,

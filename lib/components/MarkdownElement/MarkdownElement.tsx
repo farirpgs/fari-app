@@ -1,6 +1,5 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 import React from "react";
 
 const styles = (theme: Theme) => ({
@@ -224,10 +223,5 @@ const MarkdownElement = React.forwardRef<
     />
   );
 });
-
-MarkdownElement.propTypes = {
-  className: PropTypes.string,
-  renderedMarkdown: PropTypes.string,
-};
 
 export default MarkdownElement;

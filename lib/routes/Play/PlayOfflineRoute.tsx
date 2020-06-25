@@ -27,7 +27,7 @@ export const PlayOfflineRoute: React.FC<{
       <PageMeta
         title={pageTitle || t("home-route.play-offline.title")}
         description={t("home-route.play-offline.description")}
-      ></PageMeta>
+      />
       <PlayPage
         sceneManager={sceneManager}
         charactersManager={charactersManager}
@@ -36,7 +36,7 @@ export const PlayOfflineRoute: React.FC<{
         shareLink={undefined}
         userId={userId}
         error={undefined}
-      ></PlayPage>
+      />
     </>
   );
 };

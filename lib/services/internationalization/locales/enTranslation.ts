@@ -101,6 +101,7 @@ export const enTranslation = {
   "characters-route.character-type.custom": `Custom`,
   "character-dialog.name": `Name`,
   "character-dialog.save": `Save`,
+  "character-dialog.advanced": `Advanced`,
   "character-dialog.delete": `Delete`,
   "character-dialog.aspects": `Aspects`,
   "character-dialog.stress": `Stress`,

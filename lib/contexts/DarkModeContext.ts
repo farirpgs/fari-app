@@ -1,4 +1,3 @@
-import { useMediaQuery } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 const key = "prefers-dark-mode";
@@ -19,4 +18,4 @@ export function useDarkMode() {
 
 export const DarkModeContext = React.createContext<
   ReturnType<typeof useDarkMode>
->(undefined);
+>(undefined as any);

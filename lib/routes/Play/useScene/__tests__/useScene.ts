@@ -325,7 +325,7 @@ function mockUseCharacters() {
   return () => {
     return {
       state: {
-        characters: undefined,
+        characters: [],
         selectedCharacter: undefined,
       },
       actions: {

@@ -4,11 +4,12 @@ import React from "react";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Font } from "../../domains/font/Font";
-export function NotFoundRoute(props) {
+
+export const NotFoundRoute: React.FC<{}> = (props) => {
   return (
     <div>
-      <Page isLoading={false}>
-        <PageMeta title="Page Not Found" noIndex></PageMeta>
+      <Page>
+        <PageMeta title="Page Not Found" noIndex />
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography
             className={css({
@@ -34,4 +35,6 @@ export function NotFoundRoute(props) {
       </Page>
     </div>
   );
-}
+};
+
+NotFoundRoute.displayName = "NotFoundRoute";

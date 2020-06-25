@@ -16,10 +16,11 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CloseIcon from "@material-ui/icons/Close";
+import CreateIcon from "@material-ui/icons/Create";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
-import React from "react";
+import React, { useState } from "react";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { ICharacter } from "../../contexts/CharactersContext";
@@ -39,10 +40,15 @@ export const CharacterDialog: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const characterManager = useCharacter(props.character);
+  const [advanced, setAdvanced] = useState(false);
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
-    props.onSave(updatedCharacter);
+    props.onSave?.(updatedCharacter);
+  }
+
+  function onAdvanced() {
+    setAdvanced((prev) => !prev);
   }
 
   function onClose() {
@@ -130,8 +136,21 @@ export const CharacterDialog: React.FC<{
                 </ThemeProvider>
               </Grid>
             )}
-            {props.onSave && (
+            {!props.readonly && (
               <Grid item className={css({ marginLeft: "auto" })}>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  type="submit"
+                  startIcon={<CreateIcon />}
+                  onClick={onAdvanced}
+                >
+                  {t("character-dialog.advanced")}
+                </Button>
+              </Grid>
+            )}
+            {props.onSave && (
+              <Grid item>
                 <Button
                   color="primary"
                   variant={
@@ -166,7 +185,7 @@ export const CharacterDialog: React.FC<{
               onChange={(value) => {
                 characterManager.actions.setName(value);
               }}
-            ></ContentEditable>
+            />
           </Grid>
           <Grid item>
             <IconButton size="small" onClick={onClose}>
@@ -179,7 +198,7 @@ export const CharacterDialog: React.FC<{
   }
 
   function renderSheetHeader(label: string, onAdd?: () => void) {
-    const shouldRenderAddButton = onAdd && !props.readonly;
+    const shouldRenderAddButton = onAdd && advanced;
     return (
       <Box className={sheetHeader}>
         <Grid container justify="space-between" wrap="nowrap">
@@ -192,10 +211,10 @@ export const CharacterDialog: React.FC<{
                 size="small"
                 className={smallIconButtonStyle}
                 onClick={() => {
-                  onAdd();
+                  onAdd!();
                 }}
               >
-                <AddIcon htmlColor={headerColor}></AddIcon>
+                <AddIcon htmlColor={headerColor} />
               </IconButton>
             </Grid>
           )}
@@ -226,7 +245,7 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
-                          readonly={props.readonly}
+                          readonly={!advanced}
                           value={aspect.name}
                           onChange={(value) => {
                             characterManager.actions.setAspectName(
@@ -237,7 +256,7 @@ export const CharacterDialog: React.FC<{
                         />
                       </FateLabel>
                     </Grid>
-                    {!props.readonly && (
+                    {advanced && (
                       <Grid item>
                         <IconButton
                           size="small"
@@ -246,7 +265,7 @@ export const CharacterDialog: React.FC<{
                             characterManager.actions.removeAspect(index);
                           }}
                         >
-                          <RemoveIcon></RemoveIcon>
+                          <RemoveIcon />
                         </IconButton>
                       </Grid>
                     )}
@@ -303,7 +322,7 @@ export const CharacterDialog: React.FC<{
                   <Grid item xs={6}>
                     <FateLabel display="inline">
                       <ContentEditable
-                        readonly={props.readonly}
+                        readonly={!advanced}
                         value={skill.name}
                         onChange={(value) => {
                           characterManager.actions.setSkillName(index, value);
@@ -311,7 +330,7 @@ export const CharacterDialog: React.FC<{
                       />
                     </FateLabel>
                   </Grid>
-                  {!props.readonly && (
+                  {advanced && (
                     <Grid item className={css({ marginLeft: "auto" })} xs={2}>
                       <IconButton
                         size="small"
@@ -320,7 +339,7 @@ export const CharacterDialog: React.FC<{
                           characterManager.actions.removeSkill(index);
                         }}
                       >
-                        <RemoveIcon></RemoveIcon>
+                        <RemoveIcon />
                       </IconButton>
                     </Grid>
                   )}
@@ -354,7 +373,7 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
-                          readonly={props.readonly}
+                          readonly={!advanced}
                           value={stunt.name}
                           onChange={(value) => {
                             characterManager.actions.setStuntName(index, value);
@@ -362,7 +381,7 @@ export const CharacterDialog: React.FC<{
                         />
                       </FateLabel>
                     </Grid>
-                    {!props.readonly && (
+                    {advanced && (
                       <Grid item>
                         <IconButton
                           size="small"
@@ -371,7 +390,7 @@ export const CharacterDialog: React.FC<{
                             characterManager.actions.removeStunt(index);
                           }}
                         >
-                          <RemoveIcon></RemoveIcon>
+                          <RemoveIcon />
                         </IconButton>
                       </Grid>
                     )}
@@ -422,7 +441,7 @@ export const CharacterDialog: React.FC<{
                       characterManager.actions.udpateRefresh(intValue);
                     }
                   }}
-                ></ContentEditable>
+                />
               </Avatar>
             </Grid>
           </Grid>
@@ -464,7 +483,7 @@ export const CharacterDialog: React.FC<{
                   <Grid item className={css({ flex: "1 0 auto" })}>
                     <FateLabel display="inline">
                       <ContentEditable
-                        readonly={props.readonly}
+                        readonly={!advanced}
                         value={stressTrack.name}
                         onChange={(value) => {
                           characterManager.actions.setStressTrackName(
@@ -475,7 +494,7 @@ export const CharacterDialog: React.FC<{
                       />
                     </FateLabel>
                   </Grid>
-                  {!props.readonly && (
+                  {advanced && (
                     <Grid item>
                       <IconButton
                         size="small"
@@ -483,11 +502,11 @@ export const CharacterDialog: React.FC<{
                           characterManager.actions.removeStressBox(index);
                         }}
                       >
-                        <RemoveCircleOutlineIcon></RemoveCircleOutlineIcon>
+                        <RemoveCircleOutlineIcon />
                       </IconButton>
                     </Grid>
                   )}
-                  {!props.readonly && (
+                  {advanced && (
                     <Grid item>
                       <IconButton
                         size="small"
@@ -495,11 +514,11 @@ export const CharacterDialog: React.FC<{
                           characterManager.actions.addStressBox(index);
                         }}
                       >
-                        <AddCircleOutlineIcon></AddCircleOutlineIcon>
+                        <AddCircleOutlineIcon />
                       </IconButton>
                     </Grid>
                   )}
-                  {!props.readonly && (
+                  {advanced && (
                     <Grid item>
                       <IconButton
                         size="small"
@@ -507,7 +526,7 @@ export const CharacterDialog: React.FC<{
                           characterManager.actions.removeStressTrack(index);
                         }}
                       >
-                        <RemoveIcon></RemoveIcon>
+                        <RemoveIcon />
                       </IconButton>
                     </Grid>
                   )}
@@ -541,7 +560,7 @@ export const CharacterDialog: React.FC<{
                         <Box>
                           <FateLabel className={css({ textAlign: "center" })}>
                             <ContentEditable
-                              readonly={props.readonly}
+                              readonly={!advanced}
                               value={stressBox.label}
                               onChange={(value) => {
                                 characterManager.actions.setStressBoxLabel(
@@ -550,7 +569,7 @@ export const CharacterDialog: React.FC<{
                                   value
                                 );
                               }}
-                            ></ContentEditable>
+                            />
                           </FateLabel>
                         </Box>
                       </Grid>
@@ -578,7 +597,7 @@ export const CharacterDialog: React.FC<{
                       {" "}
                       <FateLabel display="inline">
                         <ContentEditable
-                          readonly={props.readonly}
+                          readonly={!advanced}
                           value={consequence.name}
                           onChange={(value) => {
                             characterManager.actions.setConsequenceName(
@@ -589,7 +608,7 @@ export const CharacterDialog: React.FC<{
                         />
                       </FateLabel>
                     </Grid>
-                    {!props.readonly && (
+                    {advanced && (
                       <Grid item>
                         <IconButton
                           size="small"
@@ -598,7 +617,7 @@ export const CharacterDialog: React.FC<{
                             characterManager.actions.removeConsequence(index);
                           }}
                         >
-                          <RemoveIcon></RemoveIcon>
+                          <RemoveIcon />
                         </IconButton>
                       </Grid>
                     )}

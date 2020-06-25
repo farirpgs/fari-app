@@ -11,7 +11,7 @@ export enum CharacterType {
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
->(undefined);
+>(undefined as any);
 
 export function useCharacters() {
   const key = "fari-characters";
@@ -29,9 +29,9 @@ export function useCharacters() {
     }
     return [];
   });
-  const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(
-    undefined
-  );
+  const [selectedCharacter, setSelectedCharacter] = useState<
+    ICharacter | undefined
+  >(undefined);
 
   const sortedCharacters = arraySort(characters, [
     (c) => ({ value: c.lastUpdated, direction: "desc" }),
@@ -61,7 +61,7 @@ export function useCharacters() {
     return newCharacter;
   }
 
-  function update(character: ICharacter) {
+  function update(character: ICharacter | undefined) {
     if (!character) {
       return;
     }
@@ -75,7 +75,7 @@ export function useCharacters() {
     });
   }
 
-  function remove(id: string) {
+  function remove(id: string | undefined) {
     setCharacters((draft: Array<ICharacter>) => {
       return draft.filter((c) => c.id !== id);
     });
@@ -165,6 +165,7 @@ const defaultCondensedCharacter: ICharacter = {
   ],
   refresh: 3,
   version: 2,
+  lastUpdated: new Date().getTime(),
 };
 
 const defaultAcceleratedCharacter: ICharacter = {
@@ -207,6 +208,7 @@ const defaultAcceleratedCharacter: ICharacter = {
   ],
   refresh: 3,
   version: 2,
+  lastUpdated: new Date().getTime(),
 };
 
 const defaultCustomCharacter: ICharacter = {
@@ -228,6 +230,7 @@ const defaultCustomCharacter: ICharacter = {
   consequences: [{ name: "Consequence", value: "" }],
   refresh: 3,
   version: 2,
+  lastUpdated: new Date().getTime(),
 };
 
 const defaultCharactersByType = {
@@ -237,7 +240,7 @@ const defaultCharactersByType = {
 } as const;
 
 export interface ICharacter {
-  id: string;
+  id?: string;
   name: string;
   aspects: ICharacterCustomField<string>;
   skills: ICharacterCustomField<string>;
@@ -247,7 +250,7 @@ export interface ICharacter {
   >;
   consequences: ICharacterCustomField<string>;
   version: number;
-  lastUpdated?: number;
+  lastUpdated: number;
   refresh: number;
 }
 

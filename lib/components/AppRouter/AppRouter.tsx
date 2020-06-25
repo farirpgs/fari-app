@@ -68,7 +68,7 @@ export const AppRouter = () => (
     <Route
       path="*"
       render={(props) => {
-        return <NotFoundRoute {...props} />;
+        return <NotFoundRoute />;
       }}
     />
   </Switch>

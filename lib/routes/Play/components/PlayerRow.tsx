@@ -111,18 +111,20 @@ export const PlayerRow: React.FC<{
   });
   return (
     <>
-      <CharacterDialog
-        readonly={!canControl}
-        open={characterDialogOpen}
-        character={props.player.character}
-        onSave={(updatedCharacter) => {
-          props.onCharacterUpdate(updatedCharacter);
-          setCharacterDialogOpen(false);
-        }}
-        onClose={() => {
-          setCharacterDialogOpen(false);
-        }}
-      ></CharacterDialog>
+      {props.player.character && (
+        <CharacterDialog
+          readonly={!canControl}
+          open={characterDialogOpen}
+          character={props.player.character}
+          onSave={(updatedCharacter) => {
+            props.onCharacterUpdate(updatedCharacter);
+            setCharacterDialogOpen(false);
+          }}
+          onClose={() => {
+            setCharacterDialogOpen(false);
+          }}
+        />
+      )}
       <TableRow
         selected={false}
         className={cx({
@@ -174,13 +176,9 @@ export const PlayerRow: React.FC<{
                 size="small"
               >
                 {props.player.playedDuringTurn ? (
-                  <DirectionsRunIcon
-                    htmlColor={playedDuringTurnColor}
-                  ></DirectionsRunIcon>
+                  <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
                 ) : (
-                  <EmojiPeopleIcon
-                    htmlColor={playedDuringTurnColor}
-                  ></EmojiPeopleIcon>
+                  <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
                 )}
               </IconButton>
             </span>
@@ -277,7 +275,7 @@ export const PlayerRow: React.FC<{
                   >
                     <RemoveCircleOutlineOutlinedIcon
                       className={css({ width: "1.2rem", height: "auto" })}
-                    ></RemoveCircleOutlineOutlinedIcon>
+                    />
                   </IconButton>
                 </span>
               </Tooltip>
@@ -294,7 +292,7 @@ export const PlayerRow: React.FC<{
                 >
                   <AddCircleOutlineOutlinedIcon
                     className={css({ width: "1.2rem", height: "auto" })}
-                  ></AddCircleOutlineOutlinedIcon>
+                  />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -311,7 +309,7 @@ export const PlayerRow: React.FC<{
                     <HighlightOffIcon
                       color="error"
                       className={css({ width: "1.2rem", height: "auto" })}
-                    ></HighlightOffIcon>
+                    />
                   </IconButton>
                 </Tooltip>
               </Grid>

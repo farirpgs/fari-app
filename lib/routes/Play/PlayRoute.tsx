@@ -70,7 +70,7 @@ export const PlayRoute: React.FC<{
       <PageMeta
         title={pageTitle || t("home-route.play-online.title")}
         description={t("home-route.play-online.description")}
-      ></PageMeta>
+      />
 
       <PlayPage
         sceneManager={sceneManager}
@@ -83,7 +83,7 @@ export const PlayRoute: React.FC<{
         shareLink={shareLink}
         userId={userId}
         error={hostManager.state.error}
-      ></PlayPage>
+      />
     </>
   );
 };

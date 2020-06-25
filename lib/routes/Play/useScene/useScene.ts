@@ -15,7 +15,7 @@ const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
 export function useScene(
   userId: string,
-  gameId: string,
+  gameId: string | undefined,
   charactersManager: ReturnType<typeof useCharacters>
 ) {
   const isGM = !gameId;
