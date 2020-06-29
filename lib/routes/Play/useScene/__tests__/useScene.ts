@@ -78,13 +78,14 @@ describe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
+        countdown: [],
         content: "<br/>",
         freeInvokes: [],
         mentalStress: [],
         physicalStress: [],
         playedDuringTurn: false,
         title: "",
-        type: 2,
+        type: AspectType.Aspect,
       });
       act(() => {
         // WHEN updating the title
@@ -204,13 +205,14 @@ describe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
+        countdown: [],
         content: "<br/>",
         freeInvokes: [],
         mentalStress: [],
         physicalStress: [],
         playedDuringTurn: false,
         title: "",
-        type: 2,
+        type: AspectType.Aspect,
       });
       act(() => {
         // WHEN removing aspect

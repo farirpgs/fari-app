@@ -25,7 +25,7 @@ export const PageMeta: React.FC<{
       content: "noindex",
     });
   }
-  return <Helmet title={title} meta={metas}></Helmet>;
+  return <Helmet title={title} meta={metas} />;
 };
 
 PageMeta.displayName = "PageMeta";

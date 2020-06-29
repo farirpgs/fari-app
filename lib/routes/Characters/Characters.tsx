@@ -11,10 +11,10 @@ export const CharactersRoute: React.FC<{}> = (props) => {
       <PageMeta
         title={t("characters-route.title")}
         description={t("characters-route.description")}
-      ></PageMeta>
+      />
 
       <Page>
-        <CharacterManager></CharacterManager>
+        <CharacterManager />
       </Page>
     </>
   );
