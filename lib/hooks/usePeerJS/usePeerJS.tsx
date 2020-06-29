@@ -13,7 +13,9 @@ export function usePeerJS(options: { debug?: boolean }) {
     const id = uuidV4();
     if (env.context === "localhost") {
       peer.current = new Peer(id, {
-        host: "fari-peer-server-staging.herokuapp.com",
+        // ONLY USE IF NEEDED BECAUSE $$$
+        // host: "fari-peer-server-staging.herokuapp.com",
+        host: "fari-peer-server.herokuapp.com",
         secure: true,
         path: "/peer/connect",
         debug: options.debug ? 3 : 0,
