@@ -56,9 +56,11 @@ export const CharacterDialog: React.FC<{
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
         props.onClose();
+        setAdvanced(false);
       }
     } else {
       props.onClose();
+      setAdvanced(false);
     }
   }
 
@@ -86,7 +88,7 @@ export const CharacterDialog: React.FC<{
     <Dialog
       open={props.open}
       fullWidth
-      maxWidth="sm"
+      maxWidth="md"
       scroll="paper"
       onClose={onClose}
     >
@@ -122,7 +124,7 @@ export const CharacterDialog: React.FC<{
     return (
       <DialogActions className={css({ padding: "0" })}>
         <Box className={sheetContentStyle}>
-          <Grid container wrap="nowrap">
+          <Grid container wrap="nowrap" spacing={2}>
             {props.onDelete && (
               <Grid item>
                 <ThemeProvider theme={errorTheme}>
@@ -140,7 +142,7 @@ export const CharacterDialog: React.FC<{
               <Grid item className={css({ marginLeft: "auto" })}>
                 <Button
                   color="primary"
-                  variant="outlined"
+                  variant={advanced ? "contained" : "outlined"}
                   type="submit"
                   startIcon={<CreateIcon />}
                   onClick={onAdvanced}
@@ -307,7 +309,7 @@ export const CharacterDialog: React.FC<{
                   <Grid item xs={1}>
                     <FateLabel display="inline">{"+"}</FateLabel>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={2}>
                     <Typography align="center">
                       <ContentEditable
                         border
@@ -319,7 +321,7 @@ export const CharacterDialog: React.FC<{
                       />
                     </Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item>
                     <FateLabel display="inline">
                       <ContentEditable
                         readonly={!advanced}
@@ -331,7 +333,15 @@ export const CharacterDialog: React.FC<{
                     </FateLabel>
                   </Grid>
                   {advanced && (
-                    <Grid item className={css({ marginLeft: "auto" })} xs={2}>
+                    <Grid
+                      item
+                      xs={2}
+                      className={css({
+                        marginLeft: "auto",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      })}
+                    >
                       <IconButton
                         size="small"
                         className={smallIconButtonStyle}
@@ -433,7 +443,7 @@ export const CharacterDialog: React.FC<{
                 })}
               >
                 <ContentEditable
-                  readonly={props.readonly}
+                  readonly={!advanced}
                   value={characterManager.state.character.refresh.toString()}
                   onChange={(value, e) => {
                     const intValue = parseInt(value);
@@ -535,7 +545,7 @@ export const CharacterDialog: React.FC<{
                 <Grid container justify="flex-start" spacing={2}>
                   {stressTrack.value.map((stressBox, boxIndex) => {
                     return (
-                      <Grid item key={boxIndex} xs={2}>
+                      <Grid item key={boxIndex}>
                         <Box
                           className={css({
                             display: "flex",
