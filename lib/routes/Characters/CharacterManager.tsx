@@ -137,7 +137,6 @@ export const CharacterManager: React.FC<{
   }
 
   function renderCharacterCard(character: ICharacter) {
-    const [firstAspect] = character.aspects;
     return (
       <Box
         key={character.id}
