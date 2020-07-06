@@ -859,6 +859,9 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         );
                         if (confirmed) {
                           sceneManager.actions.reset();
+                          if ($drawArea.current) {
+                            $drawArea.current.clear();
+                          }
                         }
                       }}
                       className={css({ borderRadius: "20px" })}
