@@ -15,7 +15,7 @@ export const enTranslation = {
   "home-route.subtitle2": `It facilitates describing scenes, keeping an eye on the characters and their fate points, tracking aspects and even more. Conceive clever solutions to get your characters out of precarious situations the fudge dice (or the GM) forced them in, let your collective imagination run wild and weave memorable stories together!`,
   "home-route.play-online.title": `Play Fate Online`,
   "home-route.play-online.description": `Remotely meet with your friends using your favourite video chat platform, send them a game link and enjoy playing Fate!`,
-  "home-route.play-online.button": `Start Online Game (Beta)`,
+  "home-route.play-online.button": `Start Online Game`,
   "home-route.play-offline.title": `Play Fate Offline`,
   "home-route.play-offline.description": `Meet up with your friends in person or with a video call, cast your screen and enjoy playing Fate!`,
   "home-route.play-offline.button": `Start Offline Game`,
@@ -101,7 +101,7 @@ export const enTranslation = {
   "characters-route.character-type.custom": `Custom`,
   "character-dialog.name": `Name`,
   "character-dialog.save": `Save`,
-  "character-dialog.advanced": `Advanced`,
+  "character-dialog.advanced": `Toggle Advanced Mode`,
   "character-dialog.delete": `Delete`,
   "character-dialog.aspects": `Aspects`,
   "character-dialog.stress": `Stress`,
@@ -110,4 +110,61 @@ export const enTranslation = {
   "character-dialog.skills": `Skills`,
   "character-dialog.refresh": `Refresh`,
   "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
+
+  // // Aspects
+  // "High Concept": ``,
+  // "Trouble": ``,
+  // "Relationship": ``,
+  // "Other Aspect": ``,
+
+  // // Skills
+  // "Academics": ``,
+  // "Athletics": ``,
+  // "Burglary": ``,
+  // "Contacts": ``,
+  // "Crafts": ``,
+  // "Deceive": ``,
+  // "Drive": ``,
+  // "Empathy": ``,
+  // "Fight": ``,
+  // "Investigate": ``,
+  // "Lore": ``,
+  // "Notice": ``,
+  // "Physique": ``,
+  // "Provoke": ``,
+  // "Rapport": ``,
+  // "Resources": ``,
+  // "Shoot": ``,
+  // "Stealth": ``,
+  // "Will": ``,
+
+  // // Stunts
+  // "Stunt #1": ``,
+  // "Stunt #2": ``,
+  // "Stunt #3": ``,
+
+  // // Stress
+  // "Physical": ``,
+  // "Mental": ``,
+
+  // // FAE Stress
+  // "Stress": ``,
+
+  // // Consequences
+  // "Mild": ``,
+  // "Moderate": ``,
+  // "Severe": ``,
+
+  // // FAE Approaches
+  // "Careful": ``,
+  // "Clever": ``,
+  // "Forceful": ``,
+  // "Flashy": ``,
+  // "Quick": ``,
+  // "Sneaky": ``,
+
+  // // Custom Character
+  // "Aspect": ``,
+  // "Stunt": ``,
+  // "Skill": ``,
 } as const;

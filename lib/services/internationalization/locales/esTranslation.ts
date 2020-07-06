@@ -20,7 +20,7 @@ export const esTranslation: Record<
   "home-route.subtitle2": `Facilita describir escenas, tener a la vista los personajes y sus puntos Fate, llevar registro de los aspectos y mucho más. Pensad en astutas soluciones para sacar a vuestros personajes de las precarias situaciones en las que los dados (o el Director de Juego) les haya puesto y ¡dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!`,
   "home-route.play-online.title": `Jugar a Fate Online`,
   "home-route.play-online.description": `Reúnete con tus amigos de forma remota usando vuestra plataforma de videochat favorita, envíales el enlace a la partida y ¡disfrutad jugando a Fate!`,
-  "home-route.play-online.button": `Iniciar Partida Online (Beta)`,
+  "home-route.play-online.button": `Iniciar Partida Online`,
   "home-route.play-offline.title": `Jugar a Fate Offline`,
   "home-route.play-offline.description": `Reúnete con tus amigos en persona o por videollamada, comparte tu pantalla y ¡disfrutad jugando a Fate!`,
   "home-route.play-offline.button": `Iniciar Partida Offline`,
