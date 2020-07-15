@@ -1,5 +1,11 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
+## 2.3.8 (Jul 6, 2020) - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
+
+- feat: it is now possible to add a "blank" index card
+- feat: it is now possible to add a "Countdown" track to any index card
+- feat: character sheets now have an "advanced" mode which gives you the ability to add,remove or rename pretty much everything
+
 ## 2.3 (May 27, 2020) - Character Sheets, Zones and better Peer-to-Peer
 
 - feat: new [Characters](https://fari.app/characters) page to manage your characters sheets and save them in your browser's storage [#61](https://github.com/fariapp/fari/issues/61)

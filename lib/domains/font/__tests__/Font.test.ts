@@ -14,6 +14,7 @@ describe("Font", () => {
       // GIVEN
       const fontSize = undefined;
       // WHEN
+      //@ts-expect-error
       const result = Font.lineHeight(fontSize);
       // THEN
       expect(result).toEqual(`1rem`);

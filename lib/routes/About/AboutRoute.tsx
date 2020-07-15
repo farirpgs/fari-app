@@ -18,7 +18,7 @@ export const AboutRoute: React.FC<{}> = (props) => {
         description={t("about-route.meta.description")}
       />
       <Container maxWidth="md">
-        <MarkdownElement renderedMarkdown={aboutHTML}></MarkdownElement>
+        <MarkdownElement renderedMarkdown={aboutHTML} />
       </Container>
     </Page>
   );

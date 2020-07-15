@@ -94,6 +94,7 @@ describe("arraySort", () => {
     // GIVEN
     const list = [1, 2, undefined, 3];
     // WHEN
+    //@ts-expect-error
     const result = arraySort(list, [() => undefined]);
     // THEN
     expect(result).toEqual([1, 2, 3, undefined]);
@@ -103,6 +104,7 @@ describe("arraySort", () => {
     // GIVEN
     const list = ["a", "b", undefined, "c"];
     // WHEN
+    //@ts-expect-error
     const result = arraySort(list, [() => undefined]);
     // THEN
     expect(result).toEqual(["a", "b", "c", undefined]);
@@ -112,6 +114,7 @@ describe("arraySort", () => {
     // GIVEN
     const list = ["a", "b", undefined, "c"];
     // WHEN
+    //@ts-expect-error
     const result = arraySort(list, [undefined]);
     // THEN
     expect(result).toEqual(["a", "b", "c", undefined]);
@@ -120,6 +123,7 @@ describe("arraySort", () => {
     // GIVEN
     const list = undefined;
     // WHEN
+    //@ts-expect-error
     const result = arraySort(list, [
       (it) => ({ value: it, direction: "desc" }),
     ]);

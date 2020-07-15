@@ -8,10 +8,10 @@ export function usePeerConnections(options: {
   debug?: boolean;
 }) {
   const { peer, loading } = usePeerJS({ debug: options.debug });
-  const connection = useRef<Peer.DataConnection>(undefined);
-  const [connectionToHost, setConnectionToHost] = useState<Peer.DataConnection>(
-    undefined
-  );
+  const connection = useRef<Peer.DataConnection | undefined>(undefined);
+  const [connectionToHost, setConnectionToHost] = useState<
+    Peer.DataConnection | undefined
+  >(undefined);
   const [connectingToHost, setConnectingToHost] = useState(false);
   const [connectingToHostError, setConnectingToHostError] = useState(false);
 
@@ -73,7 +73,7 @@ export function usePeerConnections(options: {
       sendToHost<TPeerAction extends IPeerAction<string, unknown>>(
         request: TPeerAction
       ) {
-        connectionToHost.send(request);
+        connectionToHost?.send(request);
       },
     },
   };

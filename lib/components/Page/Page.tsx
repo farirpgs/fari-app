@@ -23,25 +23,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-import { useDelayedIsLoading } from "../../hooks/useDelayedIsLoading/useDelayedIsLoading";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppLink } from "../AppLink/AppLink";
-import { AppProgress } from "../AppProgress/AppProgress";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 
-let gameIdSingleton: string = undefined;
+let gameIdSingleton: string | undefined = undefined;
 
 export const Page: React.FC<{
-  isLoading?: boolean;
   notFound?: JSX.Element;
   appBarActions?: JSX.Element;
   gameId?: string;
   kofi?: boolean;
 }> = (props) => {
-  const isReallyLoading = useDelayedIsLoading(props.isLoading);
   const history = useHistory();
   const { kofi = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,7 +56,7 @@ export const Page: React.FC<{
   return (
     <>
       {renderHeader()}
-      {!props.isLoading && renderContent()}`
+      {renderContent()}`
     </>
   );
 
@@ -111,7 +107,7 @@ export const Page: React.FC<{
           borderTop: "1px solid #e0e0e0",
         })}
       >
-        <CookieConsent></CookieConsent>
+        <CookieConsent />
         <Container>
           <Grid container justify="flex-end" spacing={4} alignItems="center">
             <Grid
@@ -143,7 +139,7 @@ export const Page: React.FC<{
                   i18n.changeLanguage(e.target.value as string);
                 }}
               >
-                {Object.keys(i18n.options.resources).map((language) => {
+                {Object.keys(i18n.options.resources!).map((language) => {
                   const shouldRenderDev =
                     language === "dev" && env.context === "localhost";
                   if (language !== "dev" || shouldRenderDev) {
@@ -220,7 +216,7 @@ export const Page: React.FC<{
                   setMenuOpen(true);
                 }}
               >
-                <MenuIcon></MenuIcon>
+                <MenuIcon />
               </IconButton>
             </Hidden>
             <Drawer
@@ -257,13 +253,6 @@ export const Page: React.FC<{
             {props.appBarActions}
           </Toolbar>
         </AppBar>
-        {isReallyLoading && (
-          <Fade in>
-            <div>
-              <AppProgress />
-            </div>
-          </Fade>
-        )}
       </Box>
     );
   }
@@ -345,7 +334,7 @@ export const Page: React.FC<{
               window.open("https://github.com/fariapp/fari");
             }}
           >
-            <GitHubIcon></GitHubIcon>
+            <GitHubIcon />
           </IconButton>
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
@@ -362,9 +351,9 @@ export const Page: React.FC<{
             }}
           >
             {darkModeManager.state.darkMode ? (
-              <Brightness7Icon></Brightness7Icon>
+              <Brightness7Icon />
             ) : (
-              <Brightness4Icon></Brightness4Icon>
+              <Brightness4Icon />
             )}
           </IconButton>
         </Grid>

@@ -8,15 +8,15 @@ export const MagicGridContainer: React.FC<{
   items: number;
   gutterPx?: number;
 }> = (props) => {
-  const $gridContainer = useRef();
+  const $gridContainer = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const magicGrid = { current: null };
-    const timeout = { current: null };
+    const magicGrid: { current: MagicGrid | null } = { current: null };
+    const timeout: { current: NodeJS.Timeout | null } = { current: null };
 
     if (!magicGrid.current && props.items !== 0) {
       magicGrid.current = new MagicGrid({
-        container: $gridContainer.current,
+        container: $gridContainer.current!,
         items: props.items,
         gutter: props.gutterPx ?? defaultMagicGridGutter,
       });

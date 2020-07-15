@@ -15,7 +15,7 @@ const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
 export function useScene(
   userId: string,
-  gameId: string,
+  gameId: string | undefined,
   charactersManager: ReturnType<typeof useCharacters>
 ) {
   const isGM = !gameId;
@@ -141,6 +141,22 @@ export function useScene(
     setScene(
       produce((draft: IScene) => {
         draft.aspects[id].freeInvokes[index] = value;
+      })
+    );
+  }
+
+  function addAspectCountdown(id: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].countdown.push(false);
+      })
+    );
+  }
+
+  function updateAspectCountdown(id: string, index: number, value: boolean) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].countdown[index] = value;
       })
     );
   }
@@ -392,6 +408,8 @@ export function useScene(
       updateAspectTitle,
       updateAspectContent,
       addAspectFreeInvoke,
+      addAspectCountdown,
+      updateAspectCountdown,
       updateAspectFreeInvoke,
       addAspectPhysicalStress,
       updateAspectPhysicalStress,
@@ -424,6 +442,7 @@ const defaultAspect: IAspect = {
   title: "",
   content: "<br/>",
   freeInvokes: [],
+  countdown: [],
   physicalStress: [],
   mentalStress: [],
   consequences: [],
@@ -431,11 +450,24 @@ const defaultAspect: IAspect = {
   type: AspectType.Aspect,
   playedDuringTurn: false,
 };
+const defaultIndexCard: IAspect = {
+  title: "",
+  content: "<br/>",
+  freeInvokes: [],
+  countdown: [],
+  physicalStress: [],
+  mentalStress: [],
+  consequences: [],
+  color: "white",
+  type: AspectType.IndexCard,
+  playedDuringTurn: false,
+};
 
 const defaultBoost: IAspect = {
   title: "",
   content: "<br/>",
   freeInvokes: [false],
+  countdown: [],
   physicalStress: [],
   mentalStress: [],
   consequences: [],
@@ -448,6 +480,7 @@ const defaultNPC: IAspect = {
   title: "",
   content: "<br/>",
   freeInvokes: [],
+  countdown: [],
   physicalStress: [],
   mentalStress: [],
   consequences: [],
@@ -460,6 +493,7 @@ const defaultBadGuy: IAspect = {
   title: "",
   content: "<br/>",
   freeInvokes: [],
+  countdown: [],
   physicalStress: [],
   mentalStress: [],
   consequences: [],
@@ -473,6 +507,7 @@ const defaultAspects: Record<AspectType, IAspect> = {
   [AspectType.Boost]: defaultBoost,
   [AspectType.NPC]: defaultNPC,
   [AspectType.BadGuy]: defaultBadGuy,
+  [AspectType.IndexCard]: defaultIndexCard,
 };
 
 const defaultSceneAspects = {};

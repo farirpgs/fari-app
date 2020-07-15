@@ -1,7 +1,10 @@
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
-export const esTranslation: Record<IPossibleTranslationKeys, string> = {
+export const esTranslation: Record<
+  IPossibleTranslationKeys,
+  string | undefined
+> = {
   "common.language.en": `Inglés`,
   "common.language.pt": `Portugués WIP`,
   "common.language.es": `Español`,
@@ -17,7 +20,7 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "home-route.subtitle2": `Facilita describir escenas, tener a la vista los personajes y sus puntos Fate, llevar registro de los aspectos y mucho más. Pensad en astutas soluciones para sacar a vuestros personajes de las precarias situaciones en las que los dados (o el Director de Juego) les haya puesto y ¡dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!`,
   "home-route.play-online.title": `Jugar a Fate Online`,
   "home-route.play-online.description": `Reúnete con tus amigos de forma remota usando vuestra plataforma de videochat favorita, envíales el enlace a la partida y ¡disfrutad jugando a Fate!`,
-  "home-route.play-online.button": `Iniciar Partida Online (Beta)`,
+  "home-route.play-online.button": `Iniciar Partida Online`,
   "home-route.play-offline.title": `Jugar a Fate Offline`,
   "home-route.play-offline.description": `Reúnete con tus amigos en persona o por videollamada, comparte tu pantalla y ¡disfrutad jugando a Fate!`,
   "home-route.play-offline.button": `Iniciar Partida Offline`,
@@ -57,6 +60,7 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "play-route.add-boost": `Añadir Impulso`,
   "play-route.add-npc": `Añadir PnJ`,
   "play-route.add-bad-guy": `Añadir Adversario`,
+  "play-route.add-index-card": `Añadir Tarjeta`,
   "play-route.copy-game-link": `Copiar enlace a la partida`,
   "play-route.sort": `Ordenar`,
   "play-route.reset-initiative": `Reiniciar`,
@@ -73,11 +77,13 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "index-card.add-1-physical-stress-box": `+  Estrés Físico`,
   "index-card.add-1-mental-stress-box": `+  Estrés Mental`,
   "index-card.add-1-consequence": `+ Consecuencia`,
+  "index-card.add-1-countdown": `+ Cuenta Atras`,
   "index-card.remove": `Quitar`,
   "index-card.reset": `Reiniciar`,
   "index-card.free-invokes": `Invocaciones Gratuitas`,
   "index-card.physical-stress": `Estrés Físico`,
   "index-card.mental-stress": `Estrés Mental`,
+  "index-card.countdown": `Cuenta Atras`,
   "index-card.consequence": `Consecuencias`,
   "index-card.aspect": `Aspecto`,
   "index-card.boost": `Impulso`,
@@ -100,6 +106,7 @@ export const esTranslation: Record<IPossibleTranslationKeys, string> = {
   "characters-route.character-type.custom": `Personalizado`,
   "character-dialog.name": `Nombre`,
   "character-dialog.save": `Guardar`,
+  "character-dialog.advanced": `Modo Avanzado`,
   "character-dialog.delete": `Borrar`,
   "character-dialog.aspects": `Aspectos`,
   "character-dialog.stress": `Estrés`,

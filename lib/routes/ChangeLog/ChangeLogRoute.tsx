@@ -9,7 +9,9 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const ChangelogRoute: React.FC<{}> = (props) => {
   const { t } = useTranslate();
-  const [latestVersion, setLatestVersion] = useState("");
+  const [latestVersion, setLatestVersion] = useState<string | null | undefined>(
+    ""
+  );
   const [content, setContent] = useState("");
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export const ChangelogRoute: React.FC<{}> = (props) => {
         description={t("changelog-route.meta.description")}
       />
       <Container maxWidth="md">
-        <MarkdownElement renderedMarkdown={content}></MarkdownElement>
+        <MarkdownElement renderedMarkdown={content} />
       </Container>
     </Page>
   );
@@ -41,7 +43,7 @@ function getChangeLog(mardown: string) {
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(html, "text/html");
     const latestVersionTag = htmlDoc.querySelector("h2");
-    const latestVersion = latestVersionTag.textContent;
+    const latestVersion = latestVersionTag?.textContent;
     return { html: html, latestVersion: latestVersion };
   } catch (e) {
     return { html: "", latestVersion: "" };

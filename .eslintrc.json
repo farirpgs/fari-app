@@ -25,7 +25,14 @@
   "rules": {
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "react/self-closing-comp": [
+      "warn",
+      {
+        "component": true,
+        "html": true
+      }
+    ]
   },
   "settings": {
     "react": {

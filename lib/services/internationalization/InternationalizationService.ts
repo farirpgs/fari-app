@@ -6,7 +6,7 @@ import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
 
 export class InternationalizationService {
-  public i18next: i18n = undefined;
+  public i18next: i18n;
 
   constructor() {
     this.i18next = i18next;

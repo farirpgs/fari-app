@@ -32,7 +32,7 @@ export const CookieConsent: React.FC<{}> = (props) => {
           </Button>
         </Box>
       }
-    ></Snackbar>
+    />
   );
 };
 

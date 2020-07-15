@@ -20,6 +20,7 @@ describe("migrateCharacters", () => {
           consequences: [],
           refresh: 3,
           version: 1,
+          lastUpdated: 0,
         };
         // WHEN
         const result = migrateCharacters([v1Char]);

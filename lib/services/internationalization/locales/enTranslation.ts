@@ -15,7 +15,7 @@ export const enTranslation = {
   "home-route.subtitle2": `It facilitates describing scenes, keeping an eye on the characters and their fate points, tracking aspects and even more. Conceive clever solutions to get your characters out of precarious situations the fudge dice (or the GM) forced them in, let your collective imagination run wild and weave memorable stories together!`,
   "home-route.play-online.title": `Play Fate Online`,
   "home-route.play-online.description": `Remotely meet with your friends using your favourite video chat platform, send them a game link and enjoy playing Fate!`,
-  "home-route.play-online.button": `Start Online Game (Beta)`,
+  "home-route.play-online.button": `Start Online Game`,
   "home-route.play-offline.title": `Play Fate Offline`,
   "home-route.play-offline.description": `Meet up with your friends in person or with a video call, cast your screen and enjoy playing Fate!`,
   "home-route.play-offline.button": `Start Offline Game`,
@@ -55,6 +55,7 @@ export const enTranslation = {
   "play-route.add-boost": `Add Boost`,
   "play-route.add-npc": `Add NPC`,
   "play-route.add-bad-guy": `Add Bad Guy`,
+  "play-route.add-index-card": `Add Index Card`,
   "play-route.copy-game-link": `Copy Game Link`,
   "play-route.sort": `Sort`,
   "play-route.reset-initiative": `Reset`,
@@ -71,11 +72,13 @@ export const enTranslation = {
   "index-card.add-1-physical-stress-box": `+  Physical Stress`,
   "index-card.add-1-mental-stress-box": `+  Mental Stress`,
   "index-card.add-1-consequence": `+ Consequence`,
+  "index-card.add-1-countdown": `+ Countdown`,
   "index-card.remove": `Remove`,
   "index-card.reset": `Reset`,
   "index-card.free-invokes": `Free Invokes`,
   "index-card.physical-stress": `Physical Stress`,
   "index-card.mental-stress": `Mental Stress`,
+  "index-card.countdown": `Countdown`,
   "index-card.consequence": `Consequence`,
   "index-card.aspect": `Aspect`,
   "index-card.boost": `Boost`,
@@ -98,6 +101,7 @@ export const enTranslation = {
   "characters-route.character-type.custom": `Custom`,
   "character-dialog.name": `Name`,
   "character-dialog.save": `Save`,
+  "character-dialog.advanced": `Toggle Advanced Mode`,
   "character-dialog.delete": `Delete`,
   "character-dialog.aspects": `Aspects`,
   "character-dialog.stress": `Stress`,
@@ -106,4 +110,61 @@ export const enTranslation = {
   "character-dialog.skills": `Skills`,
   "character-dialog.refresh": `Refresh`,
   "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
+
+  // // Aspects
+  // "High Concept": ``,
+  // "Trouble": ``,
+  // "Relationship": ``,
+  // "Other Aspect": ``,
+
+  // // Skills
+  // "Academics": ``,
+  // "Athletics": ``,
+  // "Burglary": ``,
+  // "Contacts": ``,
+  // "Crafts": ``,
+  // "Deceive": ``,
+  // "Drive": ``,
+  // "Empathy": ``,
+  // "Fight": ``,
+  // "Investigate": ``,
+  // "Lore": ``,
+  // "Notice": ``,
+  // "Physique": ``,
+  // "Provoke": ``,
+  // "Rapport": ``,
+  // "Resources": ``,
+  // "Shoot": ``,
+  // "Stealth": ``,
+  // "Will": ``,
+
+  // // Stunts
+  // "Stunt #1": ``,
+  // "Stunt #2": ``,
+  // "Stunt #3": ``,
+
+  // // Stress
+  // "Physical": ``,
+  // "Mental": ``,
+
+  // // FAE Stress
+  // "Stress": ``,
+
+  // // Consequences
+  // "Mild": ``,
+  // "Moderate": ``,
+  // "Severe": ``,
+
+  // // FAE Approaches
+  // "Careful": ``,
+  // "Clever": ``,
+  // "Forceful": ``,
+  // "Flashy": ``,
+  // "Quick": ``,
+  // "Sneaky": ``,
+
+  // // Custom Character
+  // "Aspect": ``,
+  // "Stunt": ``,
+  // "Skill": ``,
 } as const;

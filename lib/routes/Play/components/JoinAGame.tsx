@@ -62,7 +62,7 @@ export const JoinAGame: React.FC<{
                 fullWidth
                 autoFocus
                 required
-              ></TextField>
+              />
             </Box>
             <Box pb="2rem">
               <Button
@@ -104,7 +104,7 @@ export const JoinAGame: React.FC<{
             onSelection={(c) => {
               props.onSubmitCharacter(c);
             }}
-          ></CharacterManager>
+          />
         </Container>
       </Box>
     </Fade>
