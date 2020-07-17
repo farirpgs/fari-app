@@ -2,8 +2,10 @@ import {
   Box,
   Button,
   CircularProgress,
+  Collapse,
   Container,
   Fade,
+  Grid,
   InputLabel,
   TextField,
   Typography,
@@ -32,69 +34,76 @@ export const JoinAGame: React.FC<{
   return (
     <Fade in>
       <Box>
-        <Container maxWidth="xs">
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              props.onSubmitPlayerName(playerName);
-            }}
-          >
-            <Box pb="2rem" textAlign="center">
-              <img width="150px" src={appIcon} />
-            </Box>
-            <Box pb="2rem" textAlign="center">
-              <Typography variant="h4">
-                {t("play-route.connect-to-game")}
-              </Typography>
-            </Box>
-            <Box pb="2rem">
-              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
-              <TextField
-                placeholder="Magnus Burnsides"
-                value={playerName}
-                onChange={(event) => {
-                  setPlayerName(event.target.value);
-                }}
-                inputProps={{
-                  maxLength: "50",
-                }}
-                fullWidth
-                autoFocus
-                required
-              />
-            </Box>
-            <Box pb="2rem">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                size="large"
-              >
-                {t("play-route.play")}
-              </Button>
-            </Box>
-            {props.connecting && (
-              <Box pb="1rem">
-                <Box pb="3rem" display="flex" justifyContent="center">
-                  <Typography>{t("play-route.awesome-name")}</Typography>
-                </Box>
-                <Box display="flex" justifyContent="center">
-                  <CircularProgress />
-                </Box>
+        <Box pb="3rem">
+          <Container maxWidth="xs">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                props.onSubmitPlayerName(playerName);
+              }}
+            >
+              <Box pb="2rem" textAlign="center">
+                <img width="150px" src={appIcon} />
               </Box>
-            )}
-            {props.error && (
-              <Box pb="1rem" textAlign="center">
-                <Typography color="error">
-                  {t("play-route.join-error")}
+              <Box pb="2rem" textAlign="center">
+                <Typography variant="h4">
+                  {t("play-route.connect-to-game")}
                 </Typography>
               </Box>
-            )}
-          </form>
-        </Container>
-        <Box>
+              <Box pb="1rem">
+                <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+                <TextField
+                  placeholder="Magnus Burnsides"
+                  value={playerName}
+                  onChange={(event) => {
+                    setPlayerName(event.target.value);
+                  }}
+                  inputProps={{
+                    maxLength: "50",
+                  }}
+                  fullWidth
+                  autoFocus
+                  required
+                />
+              </Box>
+              <Box pb="2rem">
+                <Grid container justify="center">
+                  <Grid item>
+                    <Button
+                      type="submit"
+                      variant={playerName ? "contained" : "outlined"}
+                      color="primary"
+                    >
+                      {playerName
+                        ? t("play-route.join-as", { playerName: playerName })
+                        : t("play-route.join")}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Collapse in={props.connecting}>
+                <Box pb="1rem">
+                  <Box pb="3rem" display="flex" justifyContent="center">
+                    <Typography>{t("play-route.awesome-name")}</Typography>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <CircularProgress />
+                  </Box>
+                </Box>
+              </Collapse>
+
+              <Collapse in={props.error}>
+                <Box pb="1rem" textAlign="center">
+                  <Typography color="error">
+                    {t("play-route.join-error")}
+                  </Typography>
+                </Box>
+              </Collapse>
+            </form>
+          </Container>
+        </Box>
+        <Box pb="5rem">
           <Typography variant="h6" align="center">
             {t("play-route.or-pick-existing")}
           </Typography>

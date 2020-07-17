@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Container,
   Grid,
   Menu,
   MenuItem,
@@ -10,6 +11,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useContext, useState } from "react";
 import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -61,12 +63,8 @@ export const CharacterManager: React.FC<{
           }}
         />
       )}
+      {renderHeader()}
 
-      <Box pb="2rem">
-        <Typography variant="h4" align="center">
-          {!props.onSelection && t("characters-route.title")}
-        </Typography>
-      </Box>
       <Box pb="1rem">
         <Grid
           container
@@ -78,7 +76,7 @@ export const CharacterManager: React.FC<{
           <Grid item>
             <Button
               color="primary"
-              variant="contained"
+              variant={props.onSelection ? "outlined" : "contained"}
               onClick={(event) => {
                 setAnchorEl(event.currentTarget);
               }}
@@ -99,6 +97,30 @@ export const CharacterManager: React.FC<{
       </Box>
     </>
   );
+
+  function renderHeader() {
+    if (props.onSelection) {
+      return null;
+    }
+
+    return (
+      <Container maxWidth="sm">
+        <Box pb="1rem">
+          <Typography variant="h4" align="center">
+            {t("characters-route.title")}
+          </Typography>
+        </Box>
+        <Box pb="3rem">
+          <Alert severity="info">
+            <AlertTitle>{t("Character Storage")}</AlertTitle>
+            {t(
+              "You Characters are saved in your browser's storage. That means that if you use a different device than the one you are using now or if you reinstall your browser, you will loose your characters."
+            )}
+          </Alert>
+        </Box>
+      </Container>
+    );
+  }
 
   function renderAddCharacterMenu() {
     return (
