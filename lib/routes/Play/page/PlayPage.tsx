@@ -16,6 +16,7 @@ import {
   ListItem,
   ListItemText,
   Paper,
+  Snackbar,
   Table,
   TableBody,
   TableCell,
@@ -45,6 +46,7 @@ import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import UndoIcon from "@material-ui/icons/Undo";
+import { Alert } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
@@ -69,9 +71,9 @@ import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { AspectType } from "../hooks/useScene/AspectType";
 import { IPeerMeta, useScene } from "../hooks/useScene/useScene";
 import { IPeerActions } from "../types/IPeerActions";
-import { JoinAGame } from "./components/JoinAGame";
-import { PlayerRow } from "./components/PlayerRow";
-import { ScenesManager } from "./components/ScenesManager";
+import { JoinAGame } from "./components/JoinAGame/JoinAGame";
+import { PlayerRow } from "./components/PlayerRow/PlayerRow";
+import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 
 type IOnlineProps = {
   isLoading?: boolean;
@@ -108,6 +110,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
   );
   const $drawArea = useRef<IDrawAreaHandles | null>(null);
   const [scenesManagerOpen, setScenesManagerOpen] = useState(false);
+  const [savedSceneOpen, setSavedSceneOpen] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -135,6 +138,22 @@ export const PlayPage: React.FC<IProps> = (props) => {
   return (
     <Page gameId={props.idFromParams}>
       <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
+      <Snackbar
+        open={savedSceneOpen}
+        autoHideDuration={6000}
+        onClose={() => {
+          setSavedSceneOpen(false);
+        }}
+      >
+        <Alert
+          onClose={() => {
+            setSavedSceneOpen(false);
+          }}
+          severity="success"
+        >
+          {t("play-route.scene-saved")}
+        </Alert>
+      </Snackbar>
       <ScenesManager
         open={scenesManagerOpen}
         onLoad={(sceneToLoad) => {
@@ -888,6 +907,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
                         scenesManager.actions.addOrUpdate(
                           sceneManager.state.scene
                         );
+                        setSavedSceneOpen(true);
                       }}
                       color="default"
                       variant="outlined"

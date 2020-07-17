@@ -59,7 +59,7 @@ export function useScenes() {
       name: scene.name,
       aspects: scene.aspects,
       version: scene.version,
-      lastUpdated: scene.lastUpdated,
+      lastUpdated: new Date().getTime(),
     };
     setScenes((draft: Array<ISavableScene>) => {
       return [newScene, ...draft];
@@ -75,7 +75,7 @@ export function useScenes() {
       name: scene.name,
       aspects: scene.aspects,
       version: scene.version,
-      lastUpdated: scene.lastUpdated,
+      lastUpdated: new Date().getTime(),
     };
 
     setScenes((draft: Array<ISavableScene>) => {

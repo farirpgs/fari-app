@@ -18,5 +18,17 @@
     "source.fixAll": true,
     "source.organizeImports": true
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "vsicons.associations.folders": [
+    {
+      "icon": "services",
+      "extensions": ["hooks"],
+      "format": "svg"
+    },
+    {
+      "icon": "services",
+      "extensions": ["domains"],
+      "format": "svg"
+    }
+  ]
 }
