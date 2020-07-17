@@ -16,17 +16,17 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import PersonIcon from "@material-ui/icons/Person";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
 import React, { useState } from "react";
-import { ICharacter } from "../../../contexts/CharactersContext";
-import { Font } from "../../../domains/font/Font";
-import { useFudgeDice } from "../../../hooks/useFudgeDice/useFudgeDice";
-import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "../../Characters/CharacterDialog";
-import { IPlayer } from "../useScene/IScene";
-
+import { ICharacter } from "../../../../contexts/CharactersContext";
+import { Font } from "../../../../domains/font/Font";
+import { useFudgeDice } from "../../../../hooks/useFudgeDice/useFudgeDice";
+import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { CharacterDialog } from "../../../Characters/components/CharacterDialog";
+import { IPlayer } from "../../hooks/useScene/IScene";
 export const PlayerRow: React.FC<{
   player: IPlayer;
   isGM: boolean;
@@ -52,6 +52,7 @@ export const PlayerRow: React.FC<{
   const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const name = props.player?.playerName || props.player?.character?.name || "";
+  const hasCharacterSheet = !!props.player.character;
 
   const selectedRowStyle = css(
     theme.palette.type === "light"
@@ -73,9 +74,11 @@ export const PlayerRow: React.FC<{
     borderBottom: "none",
   });
   const controlsRowStyle = css({
-    padding: "0 0.5rem",
+    // padding: "0 0.5rem",
   });
   const diceTextColors = useTextColors(theme.palette.background.default);
+  const defaultTableCellStyle = css({ border: "none" });
+  const borderTableCellStyle = css({ padding: "0" });
   const diceStyle = css({
     fontSize: "1.2rem",
     lineHeight: Font.lineHeight(1.2),
@@ -109,6 +112,13 @@ export const PlayerRow: React.FC<{
     height: "2rem",
     margin: "0 auto",
   });
+
+  function roll() {
+    if (diceManager.state.rolling) {
+      return;
+    }
+    props.onDiceRoll();
+  }
   return (
     <>
       {props.player.character && (
@@ -129,7 +139,7 @@ export const PlayerRow: React.FC<{
         selected={false}
         className={cx({
           [selectedRowStyle]: shouldHighlight,
-          [clickableRowStyle]: !!props.player.character,
+          [clickableRowStyle]: hasCharacterSheet,
           [hoveredRowStyle]: hover,
         })}
         onMouseEnter={() => {
@@ -151,9 +161,10 @@ export const PlayerRow: React.FC<{
             className={css({
               fontSize: "1.2rem",
               lineHeight: Font.lineHeight(1.2),
+              fontWeight: props.isMe ? "bold" : "normal",
             })}
           >
-            {name}
+            {props.isMe ? `✨ ${name}` : name}
           </Typography>
         </TableCell>
         <TableCell className={playerInfoCellStyle} align="center">
@@ -213,10 +224,10 @@ export const PlayerRow: React.FC<{
                     borderRadius: "4px%",
                     color: diceTextColors.primary,
                   })}
-                  disabled={!canControl}
+                  disabled={!canControl || diceManager.state.rolling}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onDiceRoll();
+                    roll();
                   }}
                 >
                   <Typography
@@ -232,17 +243,18 @@ export const PlayerRow: React.FC<{
           </Box>
         </TableCell>
       </TableRow>
-      {props.isGM && renderGMControls()}
+      {renderControls()}
+      {renderGMControls()}
+      {renderBorder()}
     </>
   );
 
-  function renderGMControls() {
+  function renderControls() {
     return (
       <TableRow
-        selected={false}
         className={cx(controlsRowStyle, {
           [selectedRowStyle]: shouldHighlight,
-          [clickableRowStyle]: !!props.player.character,
+          [clickableRowStyle]: hasCharacterSheet,
           [hoveredRowStyle]: hover,
         })}
         onMouseEnter={() => {
@@ -257,7 +269,63 @@ export const PlayerRow: React.FC<{
           setCharacterDialogOpen(true);
         }}
       >
-        <TableCell colSpan={4}>
+        <TableCell colSpan={4} className={defaultTableCellStyle}>
+          <Grid container alignItems="center" justify="flex-end" spacing={1}>
+            <Grid item>
+              <Tooltip
+                title={
+                  hasCharacterSheet
+                    ? t("player-row.open-character-sheet")
+                    : t("player-row.has-no-character-sheet")
+                }
+              >
+                <span>
+                  <IconButton
+                    size="small"
+                    disabled={!hasCharacterSheet}
+                    onClick={(e) => {
+                      setCharacterDialogOpen(true);
+                    }}
+                  >
+                    <PersonIcon
+                      className={css({ width: "1.2rem", height: "auto" })}
+                    />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        </TableCell>
+      </TableRow>
+    );
+  }
+
+  function renderGMControls() {
+    if (!props.isGM) {
+      return null;
+    }
+
+    return (
+      <TableRow
+        selected={false}
+        className={cx(controlsRowStyle, {
+          [selectedRowStyle]: shouldHighlight,
+          [clickableRowStyle]: hasCharacterSheet,
+          [hoveredRowStyle]: hover,
+        })}
+        onMouseEnter={() => {
+          if (props.player.character) {
+            setHover(true);
+          }
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+        onClick={() => {
+          setCharacterDialogOpen(true);
+        }}
+      >
+        <TableCell colSpan={4} className={defaultTableCellStyle}>
           <Grid container alignItems="center" justify="flex-end" spacing={1}>
             <Grid item>
               <Tooltip title={t("player-row.remove-fate-point")}>
@@ -316,6 +384,14 @@ export const PlayerRow: React.FC<{
             )}
           </Grid>
         </TableCell>
+      </TableRow>
+    );
+  }
+
+  function renderBorder() {
+    return (
+      <TableRow>
+        <TableCell colSpan={4} className={borderTableCellStyle} />
       </TableRow>
     );
   }

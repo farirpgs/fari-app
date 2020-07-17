@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext";
+import { ScenesContext } from "../../contexts/ScenesContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPeerActions } from "./IPeerActions";
-import { PlayPage } from "./PlayPage";
-import { sanitizeSceneName, useScene } from "./useScene/useScene";
-import { useUserId } from "./useUserId/useUserId";
+import { sanitizeSceneName, useScene } from "./hooks/useScene/useScene";
+import { useUserId } from "./hooks/useUserId/useUserId";
+import { PlayPage } from "./page/PlayPage";
+import { IPeerActions } from "./types/IPeerActions";
 
 const debug = true;
 
@@ -19,6 +20,7 @@ export const PlayRoute: React.FC<{
   const idFromParams = props.match.params.id;
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
+  const scenesManager = useContext(ScenesContext);
 
   const sceneManager = useScene(userId, idFromParams, charactersManager);
   const sceneName = sceneManager.state.scene.name;
@@ -74,6 +76,7 @@ export const PlayRoute: React.FC<{
 
       <PlayPage
         sceneManager={sceneManager}
+        scenesManager={scenesManager}
         charactersManager={charactersManager}
         connectionsManager={connectionsManager}
         isLoading={

@@ -12,17 +12,21 @@ import { History } from "./components/History/History";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { CharactersContext, useCharacters } from "./contexts/CharactersContext";
 import { DarkModeContext, useDarkMode } from "./contexts/DarkModeContext";
+import { ScenesContext, useScenes } from "./contexts/ScenesContext";
 import "./index.css";
 import { env } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";
+
 const App: React.FC<{}> = () => {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
-
+  const scenesManager = useScenes();
   return (
     <DarkModeContext.Provider value={darkModeManager}>
       <CharactersContext.Provider value={charactersManager}>
-        <AppProvider />
+        <ScenesContext.Provider value={scenesManager}>
+          <AppProvider />
+        </ScenesContext.Provider>
       </CharactersContext.Provider>
     </DarkModeContext.Provider>
   );

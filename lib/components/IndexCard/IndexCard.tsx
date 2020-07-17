@@ -22,8 +22,8 @@ import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { AspectType } from "../../routes/Play/useScene/AspectType";
-import { IAspect } from "../../routes/Play/useScene/IScene";
+import { AspectType } from "../../routes/Play/hooks/useScene/AspectType";
+import { IAspect } from "../../routes/Play/hooks/useScene/IScene";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 export const IndexCard: React.FC<{

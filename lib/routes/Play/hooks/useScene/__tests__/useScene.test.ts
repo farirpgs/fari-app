@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
-import { useCharacters } from "../../../../contexts/CharactersContext";
+import { useCharacters } from "../../../../../contexts/CharactersContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
@@ -27,6 +27,9 @@ describe("useScene", () => {
       name: "",
       players: [],
       sort: false,
+      version: 1,
+      id: "id",
+      lastUpdated: new Date().getTime(),
     };
     // WHEN
     const { result } = renderHook(() => {

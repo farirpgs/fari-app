@@ -14,15 +14,15 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useContext, useState } from "react";
-import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../components/FateLabel/FateLabel";
-import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
+import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { FateLabel } from "../../../components/FateLabel/FateLabel";
+import { MagicGridContainer } from "../../../components/MagicGridContainer/MagicGridContainer";
 import {
   CharactersContext,
   CharacterType,
   ICharacter,
-} from "../../contexts/CharactersContext";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+} from "../../../contexts/CharactersContext";
+import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./CharacterDialog";
 
 export const CharacterManager: React.FC<{
@@ -112,10 +112,8 @@ export const CharacterManager: React.FC<{
         </Box>
         <Box pb="3rem">
           <Alert severity="info">
-            <AlertTitle>{t("Character Storage")}</AlertTitle>
-            {t(
-              "You Characters are saved in your browser's storage. That means that if you use a different device than the one you are using now or if you reinstall your browser, you will loose your characters."
-            )}
+            <AlertTitle>{t("charaters-route.storage.title")}</AlertTitle>
+            {t("charaters-route.storage.description")}
           </Alert>
         </Box>
       </Container>

@@ -2,12 +2,16 @@ import produce from "immer";
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
-import { ILines } from "../../../components/DrawArea/DrawArea";
-import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
-import { ICharacter, useCharacters } from "../../../contexts/CharactersContext";
-import { Confetti } from "../../../domains/confetti/Confetti";
-import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { sanitizeContentEditable } from "../../../../components/ContentEditable/ContentEditable";
+import { ILines } from "../../../../components/DrawArea/DrawArea";
+import { IndexCardColorTypes } from "../../../../components/IndexCard/IndexCardColor";
+import {
+  ICharacter,
+  useCharacters,
+} from "../../../../contexts/CharactersContext";
+import { ISavableScene } from "../../../../contexts/ScenesContext";
+import { Confetti } from "../../../../domains/confetti/Confetti";
+import { IDiceRoll } from "../../../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -20,6 +24,7 @@ export function useScene(
 ) {
   const isGM = !gameId;
   const [scene, setScene] = useState<IScene>(() => ({
+    id: uuidV4(),
     name: defaultSceneName,
     aspects: defaultSceneAspects,
     gm: {
@@ -34,6 +39,8 @@ export function useScene(
     badConfetti: 0,
     sort: false,
     drawAreaLines: [],
+    version: 1,
+    lastUpdated: new Date().getTime(),
   }));
 
   useEffect(() => {
@@ -64,6 +71,20 @@ export function useScene(
       newScene.players.forEach((p) => {
         charactersManager.actions.update(p.character);
       });
+    }
+  }
+
+  function loadScene(newScene: ISavableScene) {
+    if (newScene) {
+      setScene(
+        produce((draft: IScene) => {
+          draft.id = newScene.id;
+          draft.name = newScene.name;
+          draft.aspects = newScene.aspects;
+          draft.version = newScene.version;
+          draft.lastUpdated = newScene.lastUpdated;
+        })
+      );
     }
   }
 
@@ -400,6 +421,7 @@ export function useScene(
     state: { scene },
     actions: {
       reset,
+      loadScene,
       safeSetScene,
       setName,
       addAspect,

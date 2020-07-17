@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext";
+import { ScenesContext } from "../../contexts/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { PlayPage } from "./PlayPage";
-import { sanitizeSceneName, useScene } from "./useScene/useScene";
-import { useUserId } from "./useUserId/useUserId";
+import { sanitizeSceneName, useScene } from "./hooks/useScene/useScene";
+import { useUserId } from "./hooks/useUserId/useUserId";
+import { PlayPage } from "./page/PlayPage";
 
 const debug = false;
 
@@ -16,6 +17,7 @@ export const PlayOfflineRoute: React.FC<{
   const idFromParams = props.match.params.id;
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
+  const scenesManager = useContext(ScenesContext);
   const sceneManager = useScene(userId, idFromParams, charactersManager);
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
@@ -30,6 +32,7 @@ export const PlayOfflineRoute: React.FC<{
       />
       <PlayPage
         sceneManager={sceneManager}
+        scenesManager={scenesManager}
         charactersManager={charactersManager}
         isLoading={false}
         idFromParams={idFromParams}

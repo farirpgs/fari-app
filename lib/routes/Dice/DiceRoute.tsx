@@ -27,6 +27,9 @@ export const DiceRoute = () => {
   const { t } = useTranslate();
 
   function roll() {
+    if (diceManager.state.rolling) {
+      return;
+    }
     setRolls((draft) => {
       return [Dice.roll4DF(), ...draft];
     });

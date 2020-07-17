@@ -39,6 +39,8 @@ import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
 import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import ReplayIcon from "@material-ui/icons/Replay";
+import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
@@ -46,25 +48,30 @@ import UndoIcon from "@material-ui/icons/Undo";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
-import { ContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { DrawArea, IDrawAreaHandles } from "../../components/DrawArea/DrawArea";
-import { IndexCard } from "../../components/IndexCard/IndexCard";
-import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import { MagicGridContainer } from "../../components/MagicGridContainer/MagicGridContainer";
-import { Page } from "../../components/Page/Page";
-import { useCharacters } from "../../contexts/CharactersContext";
-import { arraySort } from "../../domains/array/arraySort";
-import { Dice } from "../../domains/dice/Dice";
-import { Font } from "../../domains/font/Font";
-import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
-import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import {
+  DrawArea,
+  IDrawAreaHandles,
+} from "../../../components/DrawArea/DrawArea";
+import { IndexCard } from "../../../components/IndexCard/IndexCard";
+import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
+import { MagicGridContainer } from "../../../components/MagicGridContainer/MagicGridContainer";
+import { Page } from "../../../components/Page/Page";
+import { useCharacters } from "../../../contexts/CharactersContext";
+import { useScenes } from "../../../contexts/ScenesContext";
+import { arraySort } from "../../../domains/array/arraySort";
+import { Dice } from "../../../domains/dice/Dice";
+import { Font } from "../../../domains/font/Font";
+import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
+import { usePeerConnections } from "../../../hooks/usePeerJS/usePeerConnections";
+import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
+import { AspectType } from "../hooks/useScene/AspectType";
+import { IPeerMeta, useScene } from "../hooks/useScene/useScene";
+import { IPeerActions } from "../types/IPeerActions";
 import { JoinAGame } from "./components/JoinAGame";
 import { PlayerRow } from "./components/PlayerRow";
-import { IPeerActions } from "./IPeerActions";
-import { AspectType } from "./useScene/AspectType";
-import { IPeerMeta, useScene } from "./useScene/useScene";
+import { ScenesManager } from "./components/ScenesManager";
 
 type IOnlineProps = {
   isLoading?: boolean;
@@ -77,6 +84,7 @@ type IProps = IOnlineProps & {
   userId: string;
   idFromParams: string;
   sceneManager: ReturnType<typeof useScene>;
+  scenesManager: ReturnType<typeof useScenes>;
   charactersManager: ReturnType<typeof useCharacters>;
 };
 
@@ -84,7 +92,8 @@ export const PlayPage: React.FC<IProps> = (props) => {
   const {
     sceneManager,
     connectionsManager,
-    charactersManager: characterManager,
+    scenesManager,
+    charactersManager: charactersManager,
   } = props;
 
   const theme = useTheme();
@@ -98,7 +107,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
     false
   );
   const $drawArea = useRef<IDrawAreaHandles | null>(null);
-
+  const [scenesManagerOpen, setScenesManagerOpen] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -122,9 +131,20 @@ export const PlayPage: React.FC<IProps> = (props) => {
     !isGM && !connectionsManager!.state.isConnectedToHost;
 
   const paperStyle = css({ borderRadius: "0px" });
+
   return (
     <Page gameId={props.idFromParams}>
       <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
+      <ScenesManager
+        open={scenesManagerOpen}
+        onLoad={(sceneToLoad) => {
+          sceneManager.actions.loadScene(sceneToLoad);
+          setScenesManagerOpen(false);
+        }}
+        onClose={() => {
+          setScenesManagerOpen(false);
+        }}
+      />
       {props.error ? renderPageError() : renderPage()}
     </Page>
   );
@@ -222,7 +242,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
               }}
               fullWidth
             />
-            {characterManager.state.characters.length !== 0 && (
+            {charactersManager.state.characters.length !== 0 && (
               <>
                 <Box py="1rem">
                   <Typography variant="h6" align="center">
@@ -230,32 +250,37 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   </Typography>
                 </Box>
                 <List>
-                  {characterManager.state.characters.map((character, index) => {
-                    const [firstAspect] = character.aspects;
+                  {charactersManager.state.characters.map(
+                    (character, index) => {
+                      const [firstAspect] = character.aspects;
 
-                    return (
-                      <ListItem
-                        button
-                        key={index}
-                        onClick={() => {
-                          sceneManager.actions.addOfflineCharacter(character);
-                          setOfflineCharacterDialogOpen(false);
-                        }}
-                      >
-                        <ListItemText
-                          primary={
-                            <ContentEditable readonly value={character.name} />
-                          }
-                          secondary={
-                            <ContentEditable
-                              readonly
-                              value={firstAspect?.value || "..."}
-                            />
-                          }
-                        />
-                      </ListItem>
-                    );
-                  })}
+                      return (
+                        <ListItem
+                          button
+                          key={index}
+                          onClick={() => {
+                            sceneManager.actions.addOfflineCharacter(character);
+                            setOfflineCharacterDialogOpen(false);
+                          }}
+                        >
+                          <ListItemText
+                            primary={
+                              <ContentEditable
+                                readonly
+                                value={character.name}
+                              />
+                            }
+                            secondary={
+                              <ContentEditable
+                                readonly
+                                value={firstAspect?.value || "..."}
+                              />
+                            }
+                          />
+                        </ListItem>
+                      );
+                    }
+                  )}
                 </List>
               </>
             )}
@@ -345,27 +370,6 @@ export const PlayPage: React.FC<IProps> = (props) => {
                 </Button>
               </Grid>
             )}
-            <Grid item>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                  if (isGM) {
-                    sceneManager.actions.updatePlayerRoll(
-                      sceneManager.state.scene.gm.id,
-                      Dice.roll4DF()
-                    );
-                  } else {
-                    connectionsManager?.actions.sendToHost<IPeerActions>({
-                      action: "roll",
-                      payload: Dice.roll4DF(),
-                    });
-                  }
-                }}
-              >
-                {t("play-route.roll")}
-              </Button>
-            </Grid>
           </Grid>
         </Box>
 
@@ -760,120 +764,152 @@ export const PlayPage: React.FC<IProps> = (props) => {
                   </Grid>
                 </Grid>
               </Box>
-              <Grid container spacing={1} justify="center">
-                <Grid item>
-                  <Button
-                    onClick={() => {
-                      sceneManager.actions.fireGoodConfetti();
-                    }}
-                    variant="text"
-                    color="primary"
-                  >
-                    <ThumbUpIcon />
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                    onClick={() => {
-                      sceneManager.actions.fireBadConfetti();
-                    }}
-                    variant="text"
-                    color="primary"
-                  >
-                    <ThumbDownIcon />
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                    onClick={() => {
-                      props.sceneManager.actions.toggleSort();
-                    }}
-                    variant="outlined"
-                    color={
-                      props.sceneManager.state.scene.sort
-                        ? "secondary"
-                        : "default"
-                    }
-                    endIcon={<SortIcon />}
-                  >
-                    {t("play-route.sort")}
-                  </Button>
-                </Grid>
-                {isOffline && (
+              <Box pb="1rem">
+                <Grid container spacing={1} justify="center">
                   <Grid item>
                     <Button
                       onClick={() => {
-                        setOfflineCharacterDialogOpen(true);
+                        sceneManager.actions.fireGoodConfetti();
                       }}
-                      variant="outlined"
-                      color="default"
-                      endIcon={<PersonAddIcon />}
+                      variant="text"
+                      color="primary"
                     >
-                      {t("play-route.add-character")}
+                      <ThumbUpIcon />
                     </Button>
                   </Grid>
-                )}
-                {props.shareLink && (
                   <Grid item>
-                    <input
-                      ref={$shareLinkInputRef}
-                      type="text"
-                      value={props.shareLink}
-                      readOnly
-                      hidden
-                    />
-                    <Tooltip
-                      open={shareLinkToolTip.open}
-                      title="Copied!"
-                      placement="top"
+                    <Button
+                      onClick={() => {
+                        sceneManager.actions.fireBadConfetti();
+                      }}
+                      variant="text"
+                      color="primary"
                     >
+                      <ThumbDownIcon />
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        props.sceneManager.actions.toggleSort();
+                      }}
+                      variant="outlined"
+                      color={
+                        props.sceneManager.state.scene.sort
+                          ? "secondary"
+                          : "default"
+                      }
+                      endIcon={<SortIcon />}
+                    >
+                      {t("play-route.sort")}
+                    </Button>
+                  </Grid>
+                  {isOffline && (
+                    <Grid item>
                       <Button
                         onClick={() => {
-                          if (props.shareLink && $shareLinkInputRef.current) {
-                            $shareLinkInputRef.current.select();
-                            document.execCommand("copy");
-                            navigator.clipboard.writeText(props.shareLink);
-                            setShareLinkToolTip({ open: true });
-                          }
+                          setOfflineCharacterDialogOpen(true);
                         }}
                         variant="outlined"
                         color="default"
-                        endIcon={<FileCopyIcon />}
+                        endIcon={<PersonAddIcon />}
                       >
-                        {t("play-route.copy-game-link")}
+                        {t("play-route.add-character")}
                       </Button>
-                    </Tooltip>
+                    </Grid>
+                  )}
+                  {props.shareLink && (
+                    <Grid item>
+                      <input
+                        ref={$shareLinkInputRef}
+                        type="text"
+                        value={props.shareLink}
+                        readOnly
+                        hidden
+                      />
+                      <Tooltip
+                        open={shareLinkToolTip.open}
+                        title="Copied!"
+                        placement="top"
+                      >
+                        <Button
+                          onClick={() => {
+                            if (props.shareLink && $shareLinkInputRef.current) {
+                              $shareLinkInputRef.current.select();
+                              document.execCommand("copy");
+                              navigator.clipboard.writeText(props.shareLink);
+                              setShareLinkToolTip({ open: true });
+                            }
+                          }}
+                          variant="outlined"
+                          color="default"
+                          endIcon={<FileCopyIcon />}
+                        >
+                          {t("play-route.copy-game-link")}
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                  <Hidden smDown>
+                    <Grid item className={css({ display: "flex" })}>
+                      <Divider orientation="vertical" flexItem />
+                    </Grid>
+                  </Hidden>
+                  <Grid item>
+                    <ThemeProvider theme={errorTheme}>
+                      <Button
+                        onClick={() => {
+                          const confirmed = confirm(
+                            t("play-route.reset-scene-confirmation")
+                          );
+                          if (confirmed) {
+                            sceneManager.actions.reset();
+                            if ($drawArea.current) {
+                              $drawArea.current.clear();
+                            }
+                          }
+                        }}
+                        className={css({ borderRadius: "20px" })}
+                        variant="text"
+                        color="primary"
+                        endIcon={<ErrorIcon />}
+                      >
+                        {t("play-route.reset-scene")}
+                      </Button>
+                    </ThemeProvider>
                   </Grid>
-                )}
-                <Hidden smDown>
-                  <Grid item className={css({ display: "flex" })}>
-                    <Divider orientation="vertical" flexItem />
-                  </Grid>
-                </Hidden>
-                <Grid item>
-                  <ThemeProvider theme={errorTheme}>
+                </Grid>
+              </Box>
+              <Box>
+                <Grid container spacing={1} justify="center">
+                  <Grid item>
                     <Button
                       onClick={() => {
-                        const confirmed = confirm(
-                          t("play-route.reset-scene-confirmation")
+                        scenesManager.actions.addOrUpdate(
+                          sceneManager.state.scene
                         );
-                        if (confirmed) {
-                          sceneManager.actions.reset();
-                          if ($drawArea.current) {
-                            $drawArea.current.clear();
-                          }
-                        }
                       }}
-                      className={css({ borderRadius: "20px" })}
-                      variant="text"
-                      color="primary"
-                      endIcon={<ErrorIcon />}
+                      color="default"
+                      variant="outlined"
+                      endIcon={<SaveIcon />}
                     >
-                      {t("play-route.reset-scene")}
+                      {t("play-route.save-scene")}
                     </Button>
-                  </ThemeProvider>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => {
+                        setScenesManagerOpen(true);
+                      }}
+                      color="default"
+                      variant="outlined"
+                      endIcon={<ReplayIcon />}
+                    >
+                      {t("play-route.load-scene")}
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </Box>
             </>
           )}
         </Box>

@@ -1,7 +1,7 @@
-import { ILines } from "../../../components/DrawArea/DrawArea";
-import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
-import { ICharacter } from "../../../contexts/CharactersContext";
-import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { ILines } from "../../../../components/DrawArea/DrawArea";
+import { IndexCardColorTypes } from "../../../../components/IndexCard/IndexCardColor";
+import { ICharacter } from "../../../../contexts/CharactersContext";
+import { IDiceRoll } from "../../../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 
 export interface IPlayer {
@@ -27,6 +27,7 @@ export interface IAspect {
 }
 
 export interface IScene {
+  id: string;
   name: string;
   aspects: Record<string, IAspect>;
   gm: IPlayer;
@@ -35,4 +36,6 @@ export interface IScene {
   badConfetti: number;
   sort: boolean;
   drawAreaLines: ILines;
+  version: number;
+  lastUpdated: number;
 }
