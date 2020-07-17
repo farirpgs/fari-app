@@ -19,6 +19,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@sentry/browser": "^5.15.4",
     "axios": "^0.19.2",
     "canvas-confetti": "^1.2.0",
