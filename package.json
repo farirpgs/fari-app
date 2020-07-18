@@ -29,7 +29,7 @@
     "i18next-browser-languagedetector": "^4.1.1",
     "immer": "^6.0.3",
     "jest-junit": "^10.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "magic-grid": "^3.2.4",
     "netlify-cli": "^2.51.0",
     "peerjs": "^1.2.0",
