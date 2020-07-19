@@ -20,13 +20,13 @@ import PersonIcon from "@material-ui/icons/Person";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
 import React, { useState } from "react";
-import { ICharacter } from "../../../../../contexts/CharactersContext";
-import { Font } from "../../../../../domains/font/Font";
-import { useFudgeDice } from "../../../../../hooks/useFudgeDice/useFudgeDice";
-import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "../../../../Characters/components/CharacterDialog";
-import { IPlayer } from "../../../hooks/useScene/IScene";
+import { ICharacter } from "../../../../contexts/CharactersContext";
+import { Font } from "../../../../domains/font/Font";
+import { useFudgeDice } from "../../../../hooks/useFudgeDice/useFudgeDice";
+import { IPlayer } from "../../../../hooks/useScene/IScene";
+import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { CharacterDialog } from "../../../../routes/Character/components/CharacterDialog";
 export const PlayerRow: React.FC<{
   player: IPlayer;
   isGM: boolean;
@@ -121,20 +121,19 @@ export const PlayerRow: React.FC<{
   }
   return (
     <>
-      {props.player.character && (
-        <CharacterDialog
-          readonly={!canControl}
-          open={characterDialogOpen}
-          character={props.player.character}
-          onSave={(updatedCharacter) => {
-            props.onCharacterUpdate(updatedCharacter);
-            setCharacterDialogOpen(false);
-          }}
-          onClose={() => {
-            setCharacterDialogOpen(false);
-          }}
-        />
-      )}
+      <CharacterDialog
+        readonly={!canControl}
+        open={characterDialogOpen}
+        character={props.player.character}
+        onSave={(updatedCharacter) => {
+          props.onCharacterUpdate(updatedCharacter);
+          setCharacterDialogOpen(false);
+        }}
+        onClose={() => {
+          setCharacterDialogOpen(false);
+        }}
+      />
+
       <TableRow
         selected={false}
         className={cx({

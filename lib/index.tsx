@@ -7,8 +7,10 @@ import ReactDOM from "react-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./components/AppRouter/AppRouter";
+import { CharactersManager } from "./components/CharactersManager/CharactersManager";
 import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { History } from "./components/History/History";
+import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { CharactersContext, useCharacters } from "./contexts/CharactersContext";
 import { DarkModeContext, useDarkMode } from "./contexts/DarkModeContext";
@@ -35,6 +37,7 @@ App.displayName = "App";
 
 export const AppProvider: React.FC<{}> = (props) => {
   const store = useContext(DarkModeContext);
+
   return (
     <ThemeProvider theme={store.state.darkMode ? AppDarkTheme : AppLightTheme}>
       <StylesProvider injectFirst>
@@ -51,6 +54,8 @@ export const AppProvider: React.FC<{}> = (props) => {
               />
               <ScrollToTop />
               <History />
+              <ScenesManager />
+              <CharactersManager />
               <AppRouter />
             </BrowserRouter>
           </HelmetProvider>

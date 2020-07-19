@@ -2,16 +2,18 @@ import produce from "immer";
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { sanitizeContentEditable } from "../../../../components/ContentEditable/ContentEditable";
-import { ILines } from "../../../../components/DrawArea/DrawArea";
-import { IndexCardColorTypes } from "../../../../components/IndexCard/IndexCardColor";
+import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { ILines } from "../../components/DrawArea/DrawArea";
+import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
+import { ICharacter, useCharacters } from "../../contexts/CharactersContext";
 import {
-  ICharacter,
-  useCharacters,
-} from "../../../../contexts/CharactersContext";
-import { ISavableScene } from "../../../../contexts/ScenesContext";
-import { Confetti } from "../../../../domains/confetti/Confetti";
-import { IDiceRoll } from "../../../../domains/dice/IDiceRoll";
+  defaultSceneAspects,
+  defaultSceneName,
+  defaultSceneVersion,
+  ISavableScene,
+} from "../../contexts/ScenesContext";
+import { Confetti } from "../../domains/confetti/Confetti";
+import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -39,7 +41,7 @@ export function useScene(
     badConfetti: 0,
     sort: false,
     drawAreaLines: [],
-    version: 1,
+    version: defaultSceneVersion,
     lastUpdated: new Date().getTime(),
   }));
 
@@ -69,7 +71,7 @@ export function useScene(
     if (newScene) {
       setScene(newScene);
       newScene.players.forEach((p) => {
-        charactersManager.actions.update(p.character);
+        charactersManager.actions.upsert(p.character);
       });
     }
   }
@@ -88,7 +90,24 @@ export function useScene(
     }
   }
 
-  function reset() {
+  function newScene() {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        draft.id = uuidV4();
+        draft.name = defaultSceneName;
+        draft.aspects = defaultSceneAspects;
+        draft.version = defaultSceneVersion;
+        draft.lastUpdated = new Date().getTime();
+
+        everyone.forEach((p) => {
+          p.playedDuringTurn = false;
+        });
+      })
+    );
+  }
+
+  function resetScene() {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
@@ -348,7 +367,7 @@ export function useScene(
         });
       })
     );
-    charactersManager.actions.update(character);
+    charactersManager.actions.upsert(character);
   }
 
   function updatePlayerFatePoints(id: string, fatePoints: number) {
@@ -420,8 +439,9 @@ export function useScene(
   return {
     state: { scene },
     actions: {
-      reset,
+      resetScene,
       loadScene,
+      newScene,
       safeSetScene,
       setName,
       addAspect,
@@ -457,8 +477,6 @@ export function useScene(
     },
   };
 }
-
-export const defaultSceneName = "";
 
 const defaultAspect: IAspect = {
   title: "",
@@ -531,8 +549,6 @@ const defaultAspects: Record<AspectType, IAspect> = {
   [AspectType.BadGuy]: defaultBadGuy,
   [AspectType.IndexCard]: defaultIndexCard,
 };
-
-const defaultSceneAspects = {};
 
 export function sanitizeSceneName(sceneName: string) {
   return sceneName === defaultSceneName

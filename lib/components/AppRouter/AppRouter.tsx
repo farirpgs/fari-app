@@ -2,12 +2,13 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AboutRoute } from "../../routes/About/AboutRoute";
 import { ChangelogRoute } from "../../routes/ChangeLog/ChangeLogRoute";
-import { CharactersRoute } from "../../routes/Characters/Characters";
+import { CharacterRoute } from "../../routes/Character/CharacterRoute";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
 import { HomeRoute } from "../../routes/Home/HomeRoute";
 import { NotFoundRoute } from "../../routes/NotFound/NotFoundRoute";
 import { PlayOfflineRoute } from "../../routes/Play/PlayOfflineRoute";
 import { PlayRoute } from "../../routes/Play/PlayRoute";
+import { SceneRoute } from "../../routes/Scene/SceneRoute";
 
 export const AppRouter = () => (
   <Switch>
@@ -20,9 +21,9 @@ export const AppRouter = () => (
     />
     <Route
       exact
-      path={"/characters"}
+      path={"/characters/:id"}
       render={(props) => {
-        return <CharactersRoute />;
+        return <CharacterRoute {...props} />;
       }}
     />
     <Route
@@ -50,6 +51,11 @@ export const AppRouter = () => (
       exact
       path={"/play-offline"}
       render={(props) => <PlayOfflineRoute {...props} />}
+    />
+    <Route
+      exact
+      path={"/scenes/:id"}
+      render={(props) => <SceneRoute {...props} />}
     />
     <Route
       exact

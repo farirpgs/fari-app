@@ -1,6 +1,9 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
-import { useCharacters } from "../../../../../contexts/CharactersContext";
+import {
+  CharactersManagerMode,
+  useCharacters,
+} from "../../../contexts/CharactersContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
@@ -331,14 +334,17 @@ function mockUseCharacters() {
     return {
       state: {
         characters: [],
+        mode: CharactersManagerMode.Close,
         selectedCharacter: undefined,
       },
       actions: {
         add: jest.fn(),
-        update: jest.fn(),
+        upsert: jest.fn(),
         remove: jest.fn(),
         select: jest.fn(),
         close: jest.fn(),
+        closeManager: jest.fn(),
+        openManager: jest.fn(),
       },
     } as ReturnType<typeof useCharacters>;
   };

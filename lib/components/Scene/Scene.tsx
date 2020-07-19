@@ -50,47 +50,67 @@ import { Alert } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
-import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
-import {
-  DrawArea,
-  IDrawAreaHandles,
-} from "../../../components/DrawArea/DrawArea";
-import { IndexCard } from "../../../components/IndexCard/IndexCard";
-import { IndexCardColorTypes } from "../../../components/IndexCard/IndexCardColor";
-import { MagicGridContainer } from "../../../components/MagicGridContainer/MagicGridContainer";
-import { Page } from "../../../components/Page/Page";
-import { useCharacters } from "../../../contexts/CharactersContext";
-import { useScenes } from "../../../contexts/ScenesContext";
-import { arraySort } from "../../../domains/array/arraySort";
-import { Dice } from "../../../domains/dice/Dice";
-import { Font } from "../../../domains/font/Font";
-import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
-import { usePeerConnections } from "../../../hooks/usePeerJS/usePeerConnections";
-import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
-import { AspectType } from "../hooks/useScene/AspectType";
-import { IPeerMeta, useScene } from "../hooks/useScene/useScene";
-import { IPeerActions } from "../types/IPeerActions";
-import { JoinAGame } from "./components/JoinAGame/JoinAGame";
+import { useCharacters } from "../../contexts/CharactersContext";
+import { ScenesManagerMode, useScenes } from "../../contexts/ScenesContext";
+import { arraySort } from "../../domains/array/arraySort";
+import { Dice } from "../../domains/dice/Dice";
+import { Font } from "../../domains/font/Font";
+import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
+import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
+import { AspectType } from "../../hooks/useScene/AspectType";
+import { useScene } from "../../hooks/useScene/useScene";
+import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { IPeerActions } from "../../routes/Play/types/IPeerActions";
+import { ContentEditable } from "../ContentEditable/ContentEditable";
+import { DrawArea, IDrawAreaHandles } from "../DrawArea/DrawArea";
+import { IndexCard } from "../IndexCard/IndexCard";
+import { IndexCardColorTypes } from "../IndexCard/IndexCardColor";
+import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
+import { Page } from "../Page/Page";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
-import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 
-type IOnlineProps = {
-  isLoading?: boolean;
-  error?: any;
-  shareLink?: string;
-  connectionsManager?: ReturnType<typeof usePeerConnections>;
-};
+export enum SceneMode {
+  PlayOnline,
+  PlayOffline,
+  Manage,
+}
 
-type IProps = IOnlineProps & {
-  userId: string;
-  idFromParams: string;
-  sceneManager: ReturnType<typeof useScene>;
-  scenesManager: ReturnType<typeof useScenes>;
-  charactersManager: ReturnType<typeof useCharacters>;
-};
+type IProps =
+  | {
+      mode: SceneMode.Manage;
+      sceneManager: ReturnType<typeof useScene>;
+      scenesManager: ReturnType<typeof useScenes>;
+      charactersManager: ReturnType<typeof useCharacters>;
+      connectionsManager?: undefined;
+      idFromParams?: undefined;
+      isLoading?: undefined;
+      error?: undefined;
+    }
+  | {
+      mode: SceneMode.PlayOnline;
+      sceneManager: ReturnType<typeof useScene>;
+      scenesManager: ReturnType<typeof useScenes>;
+      charactersManager: ReturnType<typeof useCharacters>;
+      connectionsManager: ReturnType<typeof usePeerConnections>;
+      userId: string;
+      isLoading: boolean;
+      error: any;
+      shareLink: string;
+      idFromParams?: string;
+    }
+  | {
+      mode: SceneMode.PlayOffline;
+      sceneManager: ReturnType<typeof useScene>;
+      scenesManager: ReturnType<typeof useScenes>;
+      charactersManager: ReturnType<typeof useCharacters>;
+      connectionsManager?: undefined;
+      idFromParams?: undefined;
+      isLoading?: undefined;
+      error?: undefined;
+    };
 
-export const PlayPage: React.FC<IProps> = (props) => {
+export const Scene: React.FC<IProps> = (props) => {
   const {
     sceneManager,
     connectionsManager,
@@ -109,9 +129,16 @@ export const PlayPage: React.FC<IProps> = (props) => {
     false
   );
   const $drawArea = useRef<IDrawAreaHandles | null>(null);
-  const [scenesManagerOpen, setScenesManagerOpen] = useState(false);
-  const [savedSceneOpen, setSavedSceneOpen] = useState(false);
+
+  const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
+
+  useEffect(() => {
+    if (scenesManager.state.selectedScene) {
+      sceneManager.actions.loadScene(scenesManager.state.selectedScene);
+    }
+  }, [scenesManager.state.selectedScene]);
+
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -124,46 +151,36 @@ export const PlayPage: React.FC<IProps> = (props) => {
   }, [shareLinkToolTip]);
 
   const isGM = !props.idFromParams;
-  const isOffline = !props.shareLink;
+  const isOffline = props.mode === SceneMode.PlayOffline;
   const everyone = [
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
 
-  const shouldRenderPlayerJoinGameScreen =
-    !isGM && !connectionsManager!.state.isConnectedToHost;
-
   const paperStyle = css({ borderRadius: "0px" });
 
   return (
     <Page gameId={props.idFromParams}>
-      <Prompt when={isGM || isOffline} message={t("play-route.leave-prompt")} />
+      <Prompt
+        when={props.mode !== SceneMode.Manage}
+        message={t("play-route.leave-prompt")}
+      />
       <Snackbar
-        open={savedSceneOpen}
+        open={savedSnack}
         autoHideDuration={6000}
         onClose={() => {
-          setSavedSceneOpen(false);
+          setSavedSnack(false);
         }}
       >
         <Alert
-          onClose={() => {
-            setSavedSceneOpen(false);
-          }}
           severity="success"
+          onClose={() => {
+            setSavedSnack(false);
+          }}
         >
           {t("play-route.scene-saved")}
         </Alert>
       </Snackbar>
-      <ScenesManager
-        open={scenesManagerOpen}
-        onLoad={(sceneToLoad) => {
-          sceneManager.actions.loadScene(sceneToLoad);
-          setScenesManagerOpen(false);
-        }}
-        onClose={() => {
-          setScenesManagerOpen(false);
-        }}
-      />
       {props.error ? renderPageError() : renderPage()}
     </Page>
   );
@@ -184,44 +201,27 @@ export const PlayPage: React.FC<IProps> = (props) => {
   }
 
   function renderPageContent() {
-    if (shouldRenderPlayerJoinGameScreen) {
-      return (
-        <JoinAGame
-          connecting={connectionsManager?.state.connectingToHost ?? false}
-          error={connectionsManager?.state.connectingToHostError}
-          onSubmitCharacter={(character) => {
-            connectionsManager?.actions.connect<IPeerMeta>(
-              props.idFromParams,
-              props.userId,
-              {
-                character: character,
-              }
-            );
-          }}
-          onSubmitPlayerName={(playerName) => {
-            connectionsManager?.actions.connect<IPeerMeta>(
-              props.idFromParams,
-              props.userId,
-              {
-                playerName: playerName,
-              }
-            );
-          }}
-        />
-      );
-    }
     return (
       <Fade in>
         <Box>
           {renderHeader()}
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              {renderSidePanel()}
+          {props.mode === SceneMode.Manage ? (
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                {renderAspects()}
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={8}>
-              {renderMainContent()}
+          ) : (
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={4}>
+                {renderSidePanel()}
+              </Grid>
+              <Grid item xs={12} md={8}>
+                {renderAspects()}
+              </Grid>
             </Grid>
-          </Grid>
+          )}
+
           {renderOfflineAddPlayerDialog()}
         </Box>
       </Fade>
@@ -370,7 +370,6 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     lineHeight: Font.lineHeight(0.8),
                   })}
                 >
-                  {" "}
                   {t("play-route.connected")}
                 </Typography>
               </Box>
@@ -407,7 +406,10 @@ export const PlayPage: React.FC<IProps> = (props) => {
                     <PlayerRow
                       key={player.id}
                       isGM={isGM}
-                      isMe={props.userId === player.id}
+                      isMe={
+                        props.mode === SceneMode.PlayOnline &&
+                        props.userId === player.id
+                      }
                       player={player}
                       offline={isOffline}
                       onPlayerRemove={() => {
@@ -557,7 +559,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderMainContent() {
+  function renderAspects() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const hasAspects = aspectIds.length > 0;
     const sortedAspectIds = arraySort(aspectIds, [
@@ -696,6 +698,7 @@ export const PlayPage: React.FC<IProps> = (props) => {
     return (
       <Box pb="2rem">
         <Box pb="2rem">
+          <Box pb="1rem">{renderManagementActions()}</Box>
           <Container maxWidth="sm">
             <Typography
               variant="h4"
@@ -717,222 +720,246 @@ export const PlayPage: React.FC<IProps> = (props) => {
         </Box>
 
         <Box>
-          {isGM && (
+          {renderGMAspectActions()}
+          {renderGMSceneActions()}
+        </Box>
+      </Box>
+    );
+  }
+
+  function renderGMAspectActions() {
+    if (!isGM) {
+      return null;
+    }
+    return (
+      <Box pb="1rem">
+        <Grid container spacing={1} justify="center">
+          <Grid item>
+            <Button
+              onClick={() => {
+                sceneManager.actions.addAspect(AspectType.Aspect);
+              }}
+              variant="contained"
+              color="secondary"
+              endIcon={<NoteIcon />}
+            >
+              {t("play-route.add-aspect")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => {
+                sceneManager.actions.addAspect(AspectType.Boost);
+              }}
+              variant="contained"
+              color="secondary"
+              endIcon={<LoupeIcon />}
+            >
+              {t("play-route.add-boost")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => {
+                sceneManager.actions.addAspect(AspectType.NPC);
+              }}
+              variant="contained"
+              color="secondary"
+              endIcon={<FaceIcon />}
+            >
+              {t("play-route.add-npc")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => {
+                sceneManager.actions.addAspect(AspectType.BadGuy);
+              }}
+              variant="contained"
+              color="secondary"
+              endIcon={<BugReportIcon />}
+            >
+              {t("play-route.add-bad-guy")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => {
+                sceneManager.actions.addAspect(AspectType.IndexCard);
+              }}
+              variant="contained"
+              color="secondary"
+              endIcon={<NoteOutlinedIcon />}
+            >
+              {t("play-route.add-index-card")}
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
+  function renderGMSceneActions() {
+    if (!isGM) {
+      return null;
+    }
+    return (
+      <Box pb="1rem">
+        <Grid container spacing={1} justify="center">
+          {props.mode === SceneMode.PlayOnline && (
+            <Grid item>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.fireGoodConfetti();
+                }}
+                variant="text"
+                color="primary"
+              >
+                <ThumbUpIcon />
+              </Button>
+            </Grid>
+          )}
+          {props.mode === SceneMode.PlayOnline && (
+            <Grid item>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.fireBadConfetti();
+                }}
+                variant="text"
+                color="primary"
+              >
+                <ThumbDownIcon />
+              </Button>
+            </Grid>
+          )}
+          <Grid item>
+            <Button
+              onClick={() => {
+                props.sceneManager.actions.toggleSort();
+              }}
+              variant="outlined"
+              color={
+                props.sceneManager.state.scene.sort ? "secondary" : "default"
+              }
+              endIcon={<SortIcon />}
+            >
+              {t("play-route.sort")}
+            </Button>
+          </Grid>
+          {props.mode === SceneMode.PlayOffline && (
+            <Grid item>
+              <Button
+                onClick={() => {
+                  setOfflineCharacterDialogOpen(true);
+                }}
+                variant="outlined"
+                color="default"
+                endIcon={<PersonAddIcon />}
+              >
+                {t("play-route.add-character")}
+              </Button>
+            </Grid>
+          )}
+          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+            <Grid item>
+              <input
+                ref={$shareLinkInputRef}
+                type="text"
+                value={props.shareLink}
+                readOnly
+                hidden
+              />
+              <Tooltip
+                open={shareLinkToolTip.open}
+                title="Copied!"
+                placement="top"
+              >
+                <Button
+                  onClick={() => {
+                    if (props.shareLink && $shareLinkInputRef.current) {
+                      $shareLinkInputRef.current.select();
+                      document.execCommand("copy");
+                      navigator.clipboard.writeText(props.shareLink);
+                      setShareLinkToolTip({ open: true });
+                    }
+                  }}
+                  variant="outlined"
+                  color="default"
+                  endIcon={<FileCopyIcon />}
+                >
+                  {t("play-route.copy-game-link")}
+                </Button>
+              </Tooltip>
+            </Grid>
+          )}
+          {props.mode !== SceneMode.Manage && (
             <>
-              <Box pb="1rem">
-                <Grid container spacing={1} justify="center">
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.addAspect(AspectType.Aspect);
-                      }}
-                      variant="contained"
-                      color="secondary"
-                      endIcon={<NoteIcon />}
-                    >
-                      {t("play-route.add-aspect")}
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.addAspect(AspectType.Boost);
-                      }}
-                      variant="contained"
-                      color="secondary"
-                      endIcon={<LoupeIcon />}
-                    >
-                      {t("play-route.add-boost")}
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.addAspect(AspectType.NPC);
-                      }}
-                      variant="contained"
-                      color="secondary"
-                      endIcon={<FaceIcon />}
-                    >
-                      {t("play-route.add-npc")}
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.addAspect(AspectType.BadGuy);
-                      }}
-                      variant="contained"
-                      color="secondary"
-                      endIcon={<BugReportIcon />}
-                    >
-                      {t("play-route.add-bad-guy")}
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.addAspect(AspectType.IndexCard);
-                      }}
-                      variant="contained"
-                      color="secondary"
-                      endIcon={<NoteOutlinedIcon />}
-                    >
-                      {t("play-route.add-index-card")}
-                    </Button>
-                  </Grid>
+              <Hidden smDown>
+                <Grid item className={css({ display: "flex" })}>
+                  <Divider orientation="vertical" flexItem />
                 </Grid>
-              </Box>
-              <Box pb="1rem">
-                <Grid container spacing={1} justify="center">
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.fireGoodConfetti();
-                      }}
-                      variant="text"
-                      color="primary"
-                    >
-                      <ThumbUpIcon />
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        sceneManager.actions.fireBadConfetti();
-                      }}
-                      variant="text"
-                      color="primary"
-                    >
-                      <ThumbDownIcon />
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        props.sceneManager.actions.toggleSort();
-                      }}
-                      variant="outlined"
-                      color={
-                        props.sceneManager.state.scene.sort
-                          ? "secondary"
-                          : "default"
+              </Hidden>
+              <Grid item>
+                <ThemeProvider theme={errorTheme}>
+                  <Button
+                    onClick={() => {
+                      const confirmed = confirm(
+                        t("play-route.reset-scene-confirmation")
+                      );
+                      if (confirmed) {
+                        sceneManager.actions.resetScene();
+                        if ($drawArea.current) {
+                          $drawArea.current.clear();
+                        }
                       }
-                      endIcon={<SortIcon />}
-                    >
-                      {t("play-route.sort")}
-                    </Button>
-                  </Grid>
-                  {isOffline && (
-                    <Grid item>
-                      <Button
-                        onClick={() => {
-                          setOfflineCharacterDialogOpen(true);
-                        }}
-                        variant="outlined"
-                        color="default"
-                        endIcon={<PersonAddIcon />}
-                      >
-                        {t("play-route.add-character")}
-                      </Button>
-                    </Grid>
-                  )}
-                  {props.shareLink && (
-                    <Grid item>
-                      <input
-                        ref={$shareLinkInputRef}
-                        type="text"
-                        value={props.shareLink}
-                        readOnly
-                        hidden
-                      />
-                      <Tooltip
-                        open={shareLinkToolTip.open}
-                        title="Copied!"
-                        placement="top"
-                      >
-                        <Button
-                          onClick={() => {
-                            if (props.shareLink && $shareLinkInputRef.current) {
-                              $shareLinkInputRef.current.select();
-                              document.execCommand("copy");
-                              navigator.clipboard.writeText(props.shareLink);
-                              setShareLinkToolTip({ open: true });
-                            }
-                          }}
-                          variant="outlined"
-                          color="default"
-                          endIcon={<FileCopyIcon />}
-                        >
-                          {t("play-route.copy-game-link")}
-                        </Button>
-                      </Tooltip>
-                    </Grid>
-                  )}
-                  <Hidden smDown>
-                    <Grid item className={css({ display: "flex" })}>
-                      <Divider orientation="vertical" flexItem />
-                    </Grid>
-                  </Hidden>
-                  <Grid item>
-                    <ThemeProvider theme={errorTheme}>
-                      <Button
-                        onClick={() => {
-                          const confirmed = confirm(
-                            t("play-route.reset-scene-confirmation")
-                          );
-                          if (confirmed) {
-                            sceneManager.actions.reset();
-                            if ($drawArea.current) {
-                              $drawArea.current.clear();
-                            }
-                          }
-                        }}
-                        className={css({ borderRadius: "20px" })}
-                        variant="text"
-                        color="primary"
-                        endIcon={<ErrorIcon />}
-                      >
-                        {t("play-route.reset-scene")}
-                      </Button>
-                    </ThemeProvider>
-                  </Grid>
-                </Grid>
-              </Box>
-              <Box>
-                <Grid container spacing={1} justify="center">
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        scenesManager.actions.addOrUpdate(
-                          sceneManager.state.scene
-                        );
-                        setSavedSceneOpen(true);
-                      }}
-                      color="default"
-                      variant="outlined"
-                      endIcon={<SaveIcon />}
-                    >
-                      {t("play-route.save-scene")}
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={() => {
-                        setScenesManagerOpen(true);
-                      }}
-                      color="default"
-                      variant="outlined"
-                      endIcon={<ReplayIcon />}
-                    >
-                      {t("play-route.load-scene")}
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Box>
+                    }}
+                    className={css({ borderRadius: "20px" })}
+                    variant="text"
+                    color="primary"
+                    endIcon={<ErrorIcon />}
+                  >
+                    {t("play-route.reset-scene")}
+                  </Button>
+                </ThemeProvider>
+              </Grid>
             </>
           )}
-        </Box>
+        </Grid>
+      </Box>
+    );
+  }
+
+  function renderManagementActions() {
+    return (
+      <Box>
+        <Grid container spacing={1} justify="center">
+          <Grid item>
+            <Button
+              onClick={() => {
+                scenesManager.actions.upsert(sceneManager.state.scene);
+                setSavedSnack(true);
+              }}
+              color="primary"
+              variant="outlined"
+              endIcon={<SaveIcon />}
+            >
+              {t("play-route.save-scene")}
+            </Button>
+          </Grid>
+          {props.mode !== SceneMode.Manage && (
+            <Grid item>
+              <Button
+                onClick={() => {
+                  scenesManager.actions.openManager(ScenesManagerMode.Use);
+                }}
+                color="default"
+                variant="outlined"
+                endIcon={<ReplayIcon />}
+              >
+                {t("play-route.load-scene")}
+              </Button>
+            </Grid>
+          )}
+        </Grid>
       </Box>
     );
   }
@@ -958,4 +985,4 @@ export const PlayPage: React.FC<IProps> = (props) => {
   }
 };
 
-PlayPage.displayName = "PlayPage";
+Scene.displayName = "PlayPage";

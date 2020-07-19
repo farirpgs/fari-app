@@ -4,17 +4,20 @@ import {
   CircularProgress,
   Collapse,
   Container,
-  Fade,
   Grid,
   InputLabel,
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import { ICharacter } from "../../../../../contexts/CharactersContext";
-import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import appIcon from "../../../../../images/app-icon.png";
-import { CharacterManager } from "../../../../Characters/components/CharacterManager";
+import React, { useContext, useEffect, useState } from "react";
+import appIcon from "../../../images/app-icon.png";
+import { Page } from "../../components/Page/Page";
+import {
+  CharactersContext,
+  CharactersManagerMode,
+  ICharacter,
+} from "../../contexts/CharactersContext";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 let playerNameSingleton = "";
 
@@ -26,13 +29,20 @@ export const JoinAGame: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const [playerName, setPlayerName] = useState(playerNameSingleton);
+  const charactersManager = useContext(CharactersContext);
+
+  useEffect(() => {
+    if (charactersManager.state.selectedCharacter) {
+      props.onSubmitCharacter(charactersManager.state.selectedCharacter);
+    }
+  }, [charactersManager.state.selectedCharacter]);
 
   useEffect(() => {
     playerNameSingleton = playerName;
   }, [playerName]);
 
   return (
-    <Fade in>
+    <Page>
       <Box>
         <Box pb="3rem">
           <Container maxWidth="xs">
@@ -104,19 +114,17 @@ export const JoinAGame: React.FC<{
           </Container>
         </Box>
         <Box pb="5rem">
-          <Typography variant="h6" align="center">
-            {t("play-route.or-pick-existing")}
-          </Typography>
-        </Box>
-        <Container>
-          <CharacterManager
-            onSelection={(c) => {
-              props.onSubmitCharacter(c);
+          <Button
+            color="primary"
+            onClick={() => {
+              charactersManager.actions.openManager(CharactersManagerMode.Use);
             }}
-          />
-        </Container>
+          >
+            {t("play-route.or-pick-existing")}
+          </Button>
+        </Box>
       </Box>
-    </Fade>
+    </Page>
   );
 };
 

@@ -9,42 +9,52 @@ import {
   DialogTitle,
   Grid,
   IconButton,
-  ThemeProvider,
+  Slide,
+  Snackbar,
   Typography,
   useTheme,
 } from "@material-ui/core";
+import { TransitionProps } from "@material-ui/core/transitions";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import { Alert } from "@material-ui/lab";
 import { css } from "emotion";
 import React, { useState } from "react";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { ICharacter } from "../../../contexts/CharactersContext";
-import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../hooks/useCharacter";
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export const CharacterDialog: React.FC<{
   open: boolean;
-  character: ICharacter;
+  character: ICharacter | undefined;
   readonly?: boolean;
   onClose(): void;
   onSave?(newCharacter: ICharacter): void;
-  onDelete?(): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
+  const [savedSnack, setSavedSnack] = useState(false);
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
     props.onSave?.(updatedCharacter);
+    setSavedSnack(true);
   }
 
   function onAdvanced() {
@@ -64,7 +74,6 @@ export const CharacterDialog: React.FC<{
     }
   }
 
-  const errorTheme = useButtonTheme(theme.palette.error.main);
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
   const sheetHeader = css({
@@ -85,59 +94,66 @@ export const CharacterDialog: React.FC<{
   }
 
   return (
-    <Dialog
-      open={props.open}
-      fullWidth
-      maxWidth="md"
-      scroll="paper"
-      onClose={onClose}
-    >
-      <DialogTitle>{renderName()}</DialogTitle>
-      <DialogContent className={css({ padding: "0" })} dividers>
-        <Grid container>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            className={css({
-              borderRight: `2px solid ${headerBackgroundColors.primary}`,
-            })}
-          >
-            {renderAspects()}
-            {renderStunts()}
-            {renderRefresh()}
+    <>
+      <Snackbar
+        open={savedSnack}
+        autoHideDuration={6000}
+        onClose={() => {
+          setSavedSnack(false);
+        }}
+      >
+        <Alert
+          severity="success"
+          onClose={() => {
+            setSavedSnack(false);
+          }}
+        >
+          {t("character-dialog.saved")}
+        </Alert>
+      </Snackbar>
+      <Dialog
+        open={props.open}
+        fullWidth
+        maxWidth="md"
+        scroll="paper"
+        onClose={onClose}
+        fullScreen
+        TransitionComponent={Transition}
+      >
+        <DialogTitle>{renderName()}</DialogTitle>
+        <DialogContent className={css({ padding: "0" })} dividers>
+          <Grid container>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              className={css({
+                borderRight: `2px solid ${headerBackgroundColors.primary}`,
+              })}
+            >
+              {renderAspects()}
+              {renderStunts()}
+              {renderRefresh()}
+            </Grid>
+            <Grid item xs={12} md={6}>
+              {renderVitals()}
+              {renderSkills()}
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            {renderVitals()}
-            {renderSkills()}
-          </Grid>
-        </Grid>
-      </DialogContent>
-      {renderActions()}
-    </Dialog>
+        </DialogContent>
+        {renderActions()}
+      </Dialog>
+    </>
   );
 
   function renderActions() {
-    if (props.readonly || (!props.onDelete && !props.onSave)) {
+    if (props.readonly || !props.onSave) {
       return null;
     }
     return (
       <DialogActions className={css({ padding: "0" })}>
         <Box className={sheetContentStyle}>
           <Grid container wrap="nowrap" spacing={2}>
-            {props.onDelete && (
-              <Grid item>
-                <ThemeProvider theme={errorTheme}>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    onClick={props.onDelete}
-                  >
-                    {t("character-dialog.delete")}
-                  </Button>
-                </ThemeProvider>
-              </Grid>
-            )}
             {!props.readonly && (
               <Grid item className={css({ marginLeft: "auto" })}>
                 <Button

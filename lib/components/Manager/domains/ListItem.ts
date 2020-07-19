@@ -1,4 +1,4 @@
-export const SceneListItem = {
+export const listItem = {
   formatDate(timestamp: number) {
     if (!timestamp) {
       return "";

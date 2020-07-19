@@ -22,7 +22,12 @@ import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
+import {
+  CharactersContext,
+  CharactersManagerMode,
+} from "../../contexts/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { ScenesContext, ScenesManagerMode } from "../../contexts/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
@@ -45,6 +50,8 @@ export const Page: React.FC<{
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
+  const scenesManager = useContext(ScenesContext);
+  const charactersManager = useContext(CharactersContext);
 
   useEffect(() => {
     if (props.gameId) {
@@ -279,7 +286,21 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              history.push("/characters");
+              scenesManager.actions.openManager(ScenesManagerMode.Redirect);
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            {t("menu.scenes")}
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              charactersManager.actions.openManager(
+                CharactersManagerMode.Redirect
+              );
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}

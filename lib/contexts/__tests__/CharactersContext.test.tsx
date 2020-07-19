@@ -6,7 +6,7 @@ describe("migrateCharacters", () => {
       it("should migrate characters from v1 `stressTracks` to v2 `stressTracks`", () => {
         // GIVEN
         const v1Char: ICharacter = {
-          id: undefined,
+          id: "",
           name: "",
           aspects: [],
           stunts: [],

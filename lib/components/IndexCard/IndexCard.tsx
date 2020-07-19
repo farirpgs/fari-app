@@ -20,10 +20,10 @@ import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
+import { AspectType } from "../../hooks/useScene/AspectType";
+import { IAspect } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { AspectType } from "../../routes/Play/hooks/useScene/AspectType";
-import { IAspect } from "../../routes/Play/hooks/useScene/IScene";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 export const IndexCard: React.FC<{

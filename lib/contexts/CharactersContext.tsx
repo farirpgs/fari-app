@@ -8,6 +8,11 @@ export enum CharacterType {
   Accelerated,
   Custom,
 }
+export enum CharactersManagerMode {
+  Redirect,
+  Use,
+  Close,
+}
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
@@ -15,6 +20,9 @@ export const CharactersContext = React.createContext<
 
 export function useCharacters() {
   const key = "fari-characters";
+
+  const [mode, setMode] = useState(CharactersManagerMode.Close);
+
   const [characters, setCharacters] = useState<Array<ICharacter>>(() => {
     // load from local storage
     try {
@@ -47,6 +55,14 @@ export function useCharacters() {
     }
   }, [characters]);
 
+  function openManager(newMode: CharactersManagerMode) {
+    setMode(newMode);
+  }
+
+  function closeManager() {
+    setMode(CharactersManagerMode.Close);
+  }
+
   function add(type: CharacterType): ICharacter {
     const defaultCharacter = defaultCharactersByType[type];
     const newCharacter = {
@@ -61,18 +77,27 @@ export function useCharacters() {
     return newCharacter;
   }
 
-  function update(character: ICharacter | undefined) {
+  function upsert(character: ICharacter | undefined) {
     if (!character) {
       return;
     }
-    setCharacters((draft: Array<ICharacter>) => {
-      return draft.map((c) => {
-        if (c.id === character.id) {
-          return character;
-        }
-        return c;
+
+    const exists = characters.find((s) => s.id === character.id);
+
+    if (!exists) {
+      setCharacters((draft: Array<ICharacter>) => {
+        return [character, ...draft];
       });
-    });
+    } else {
+      setCharacters((draft: Array<ICharacter>) => {
+        return draft.map((c) => {
+          if (c.id === character.id) {
+            return character;
+          }
+          return c;
+        });
+      });
+    }
   }
 
   function remove(id: string | undefined) {
@@ -91,12 +116,15 @@ export function useCharacters() {
 
   return {
     state: {
+      mode,
       characters: sortedCharacters,
       selectedCharacter,
     },
     actions: {
+      openManager,
+      closeManager,
       add,
-      update,
+      upsert: upsert,
       remove,
       select,
       close,
@@ -105,7 +133,7 @@ export function useCharacters() {
 }
 
 const defaultCondensedCharacter: ICharacter = {
-  id: undefined,
+  id: "",
   name: "",
   aspects: [
     { name: "High Concept", value: "" },
@@ -169,7 +197,7 @@ const defaultCondensedCharacter: ICharacter = {
 };
 
 const defaultAcceleratedCharacter: ICharacter = {
-  id: undefined,
+  id: "",
   name: "",
   aspects: [
     { name: "High Concept", value: "" },
@@ -212,7 +240,7 @@ const defaultAcceleratedCharacter: ICharacter = {
 };
 
 const defaultCustomCharacter: ICharacter = {
-  id: undefined,
+  id: "",
   name: "",
   aspects: [{ name: "Aspect", value: "" }],
   stunts: [{ name: "Stunt", value: "" }],
@@ -240,7 +268,7 @@ const defaultCharactersByType = {
 } as const;
 
 export interface ICharacter {
-  id?: string;
+  id: string;
   name: string;
   aspects: ICharacterCustomField<string>;
   skills: ICharacterCustomField<string>;

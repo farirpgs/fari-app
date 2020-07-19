@@ -1,13 +1,18 @@
 import React, { useContext, useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext";
 import { ScenesContext } from "../../contexts/ScenesContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
+import {
+  IPeerMeta,
+  sanitizeSceneName,
+  useScene,
+} from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { sanitizeSceneName, useScene } from "./hooks/useScene/useScene";
-import { useUserId } from "./hooks/useUserId/useUserId";
-import { PlayPage } from "./page/PlayPage";
+import { useUserId } from "../../hooks/useUserId/useUserId";
+import { JoinAGame } from "./JoinAGameRoute";
 import { IPeerActions } from "./types/IPeerActions";
 
 const debug = true;
@@ -66,6 +71,8 @@ export const PlayRoute: React.FC<{
 
   const isGM = !idFromParams;
   const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
+  const shouldRenderPlayerJoinGameScreen =
+    !isGM && !connectionsManager!.state.isConnectedToHost;
 
   return (
     <>
@@ -73,20 +80,45 @@ export const PlayRoute: React.FC<{
         title={pageTitle || t("home-route.play-online.title")}
         description={t("home-route.play-online.description")}
       />
-
-      <PlayPage
-        sceneManager={sceneManager}
-        scenesManager={scenesManager}
-        charactersManager={charactersManager}
-        connectionsManager={connectionsManager}
-        isLoading={
-          hostManager.state.loading || connectionsManager.state.loading
-        }
-        idFromParams={idFromParams}
-        shareLink={shareLink}
-        userId={userId}
-        error={hostManager.state.error}
-      />
+      {shouldRenderPlayerJoinGameScreen ? (
+        <JoinAGame
+          connecting={connectionsManager?.state.connectingToHost ?? false}
+          error={connectionsManager?.state.connectingToHostError}
+          onSubmitCharacter={(character) => {
+            connectionsManager?.actions.connect<IPeerMeta>(
+              idFromParams,
+              userId,
+              {
+                character: character,
+              }
+            );
+          }}
+          onSubmitPlayerName={(playerName) => {
+            connectionsManager?.actions.connect<IPeerMeta>(
+              idFromParams,
+              userId,
+              {
+                playerName: playerName,
+              }
+            );
+          }}
+        />
+      ) : (
+        <Scene
+          mode={SceneMode.PlayOnline}
+          sceneManager={sceneManager}
+          scenesManager={scenesManager}
+          charactersManager={charactersManager}
+          connectionsManager={connectionsManager}
+          isLoading={
+            hostManager.state.loading || connectionsManager.state.loading
+          }
+          idFromParams={idFromParams}
+          shareLink={shareLink}
+          userId={userId}
+          error={hostManager.state.error}
+        />
+      )}
     </>
   );
 };

@@ -1,7 +1,8 @@
 import produce from "immer";
 import React, { useEffect, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
 import { arraySort } from "../domains/array/arraySort";
-import { IScene } from "../routes/Play/hooks/useScene/IScene";
+import { IScene } from "../hooks/useScene/IScene";
 
 export type ISavableScene = Pick<
   IScene,
@@ -12,8 +13,19 @@ export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
   undefined as any
 );
 
+export enum ScenesManagerMode {
+  Redirect,
+  Use,
+  Close,
+}
+
 export function useScenes() {
   const key = "fari-scenes";
+  const [mode, setMode] = useState(ScenesManagerMode.Close);
+  const [selectedScene, select] = useState<ISavableScene | undefined>(
+    undefined
+  );
+
   const [scenes, setScenes] = useState<Array<ISavableScene>>(() => {
     // load from local storage
     try {
@@ -43,33 +55,28 @@ export function useScenes() {
     }
   }, [scenes]);
 
-  function addOrUpdate(scene: IScene) {
-    const exists = scenes.find((s) => s.id === scene.id);
-
-    if (!exists) {
-      add(scene);
-    } else {
-      update(scene);
-    }
+  function openManager(newMode: ScenesManagerMode) {
+    setMode(newMode);
   }
 
-  function add(scene: IScene) {
-    const newScene: ISavableScene = {
-      id: scene.id,
-      name: scene.name,
-      aspects: scene.aspects,
-      version: scene.version,
-      lastUpdated: new Date().getTime(),
-    };
+  function closeManager() {
+    setMode(ScenesManagerMode.Close);
+  }
+
+  function add() {
+    const newScene: ISavableScene = makeDefaultSavableScene();
     setScenes((draft: Array<ISavableScene>) => {
       return [newScene, ...draft];
     });
+    return newScene;
   }
 
-  function update(scene: IScene | undefined) {
+  function upsert(scene: IScene | ISavableScene | undefined) {
     if (!scene) {
       return;
     }
+    const exists = scenes.find((s) => s.id === scene.id);
+
     const newScene: ISavableScene = {
       id: scene.id,
       name: scene.name,
@@ -77,15 +84,20 @@ export function useScenes() {
       version: scene.version,
       lastUpdated: new Date().getTime(),
     };
-
-    setScenes((draft: Array<ISavableScene>) => {
-      return draft.map((c) => {
-        if (c.id === scene.id) {
-          return newScene;
-        }
-        return c;
+    if (!exists) {
+      setScenes((draft: Array<ISavableScene>) => {
+        return [newScene, ...draft];
       });
-    });
+    } else {
+      setScenes((draft: Array<ISavableScene>) => {
+        return draft.map((c) => {
+          if (c.id === scene.id) {
+            return newScene;
+          }
+          return c;
+        });
+      });
+    }
   }
 
   function remove(id: string | undefined) {
@@ -96,12 +108,28 @@ export function useScenes() {
 
   return {
     state: {
+      mode: mode,
+      selectedScene,
       scenes: sortedScenes,
     },
     actions: {
-      addOrUpdate,
+      openManager,
+      closeManager,
+      select: select,
+      add,
+      upsert,
       remove,
     },
+  };
+}
+
+function makeDefaultSavableScene(): ISavableScene {
+  return {
+    id: uuidV4(),
+    name: defaultSceneName,
+    aspects: defaultSceneAspects,
+    version: defaultSceneVersion,
+    lastUpdated: new Date().getTime(),
   };
 }
 
@@ -110,3 +138,7 @@ export function migrateScenes(characters: Array<ISavableScene>) {
     draft.forEach((c) => {});
   });
 }
+
+export const defaultSceneName = "";
+export const defaultSceneAspects = {};
+export const defaultSceneVersion = 1;

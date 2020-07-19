@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { ICharacter } from "../../../contexts/CharactersContext";
 
-export function useCharacter(c: ICharacter) {
-  const [character, setCharacter] = useState<ICharacter>(c);
+export function useCharacter(c: ICharacter | undefined) {
+  const [character, setCharacter] = useState<ICharacter>(c as ICharacter);
 
   const isDirty = useMemo(() => {
     return !isEqual(c, character);
