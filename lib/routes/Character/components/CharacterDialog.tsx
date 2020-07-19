@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
@@ -42,7 +43,8 @@ export const CharacterDialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
   readonly?: boolean;
-  onClose(): void;
+  dialog: boolean;
+  onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
 }> = (props) => {
   const { t } = useTranslate();
@@ -53,7 +55,7 @@ export const CharacterDialog: React.FC<{
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
-    props.onSave?.(updatedCharacter);
+    props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
   }
 
@@ -65,11 +67,11 @@ export const CharacterDialog: React.FC<{
     if (characterManager.state.isDirty && !props.readonly) {
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
-        props.onClose();
+        props.onClose?.();
         setAdvanced(false);
       }
     } else {
-      props.onClose();
+      props.onClose?.();
       setAdvanced(false);
     }
   }
@@ -89,6 +91,7 @@ export const CharacterDialog: React.FC<{
   const smallIconButtonStyle = css({
     padding: "0",
   });
+
   if (!characterManager.state.character) {
     return null;
   }
@@ -111,40 +114,71 @@ export const CharacterDialog: React.FC<{
           {t("character-dialog.saved")}
         </Alert>
       </Snackbar>
-      <Dialog
-        open={props.open}
-        fullWidth
-        maxWidth="md"
-        scroll="paper"
-        onClose={onClose}
-        fullScreen
-        TransitionComponent={Transition}
-      >
-        <DialogTitle>{renderName()}</DialogTitle>
-        <DialogContent className={css({ padding: "0" })} dividers>
-          <Grid container>
-            <Grid
-              item
-              xs={12}
-              md={6}
-              className={css({
-                borderRight: `2px solid ${headerBackgroundColors.primary}`,
-              })}
-            >
-              {renderAspects()}
-              {renderStunts()}
-              {renderRefresh()}
-            </Grid>
-            <Grid item xs={12} md={6}>
-              {renderVitals()}
-              {renderSkills()}
-            </Grid>
-          </Grid>
-        </DialogContent>
-        {renderActions()}
-      </Dialog>
+      {renderDialog()}
     </>
   );
+
+  function renderDialog() {
+    if (props.dialog && characterManager.state.character) {
+      return (
+        <Dialog
+          open={props.open}
+          fullWidth
+          maxWidth="md"
+          scroll="paper"
+          onClose={onClose}
+          fullScreen
+          TransitionComponent={Transition}
+        >
+          <DialogTitle>{renderName()}</DialogTitle>
+          <DialogContent className={css({ padding: "0" })} dividers>
+            {renderContent()}
+          </DialogContent>
+          <Box className={sheetContentStyle}>{renderActions()}</Box>
+        </Dialog>
+      );
+    }
+
+    return (
+      <>
+        <Container maxWidth="md">
+          <Box className={sheetContentStyle}>{renderActions()}</Box>
+          <Box className={sheetContentStyle}>{renderName()}</Box>
+          <Box className={sheetContentStyle}>{renderContent()}</Box>
+        </Container>
+      </>
+    );
+  }
+
+  function renderContent() {
+    return (
+      <Grid container>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className={css({
+            border: `2px solid ${headerBackgroundColors.primary}`,
+          })}
+        >
+          {renderAspects()}
+          {renderStunts()}
+          {renderRefresh()}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className={css({
+            border: `2px solid ${headerBackgroundColors.primary}`,
+          })}
+        >
+          {renderVitals()}
+          {renderSkills()}
+        </Grid>
+      </Grid>
+    );
+  }
 
   function renderActions() {
     if (props.readonly || !props.onSave) {
@@ -152,37 +186,35 @@ export const CharacterDialog: React.FC<{
     }
     return (
       <DialogActions className={css({ padding: "0" })}>
-        <Box className={sheetContentStyle}>
-          <Grid container wrap="nowrap" spacing={2}>
-            {!props.readonly && (
-              <Grid item className={css({ marginLeft: "auto" })}>
-                <Button
-                  color="primary"
-                  variant={advanced ? "contained" : "outlined"}
-                  type="submit"
-                  startIcon={<CreateIcon />}
-                  onClick={onAdvanced}
-                >
-                  {t("character-dialog.advanced")}
-                </Button>
-              </Grid>
-            )}
-            {props.onSave && (
-              <Grid item>
-                <Button
-                  color="primary"
-                  variant={
-                    characterManager.state.isDirty ? "contained" : "outlined"
-                  }
-                  type="submit"
-                  onClick={onSave}
-                >
-                  {t("character-dialog.save")}
-                </Button>
-              </Grid>
-            )}
-          </Grid>
-        </Box>
+        <Grid container wrap="nowrap" spacing={2} justify="space-between">
+          {!props.readonly && (
+            <Grid item>
+              <Button
+                color="primary"
+                variant={advanced ? "contained" : "outlined"}
+                type="submit"
+                startIcon={<CreateIcon />}
+                onClick={onAdvanced}
+              >
+                {t("character-dialog.advanced")}
+              </Button>
+            </Grid>
+          )}
+          {props.onSave && (
+            <Grid item>
+              <Button
+                color="primary"
+                variant={
+                  characterManager.state.isDirty ? "contained" : "outlined"
+                }
+                type="submit"
+                onClick={onSave}
+              >
+                {t("character-dialog.save")}
+              </Button>
+            </Grid>
+          )}
+        </Grid>
       </DialogActions>
     );
   }
@@ -190,27 +222,33 @@ export const CharacterDialog: React.FC<{
   function renderName() {
     return (
       <>
-        <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
-          <Grid item className={css({ flex: "0 0 auto" })}>
-            <FateLabel>{t("character-dialog.name")}</FateLabel>
+        <Box>
+          <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
+            <Grid item className={css({ flex: "0 0 auto" })}>
+              <FateLabel>{t("character-dialog.name")}</FateLabel>
+            </Grid>
+            <Grid item className={css({ flex: "1 1 auto" })}>
+              <Box fontSize="1.25rem">
+                <ContentEditable
+                  border
+                  autoFocus
+                  readonly={props.readonly}
+                  value={characterManager.state.character!.name}
+                  onChange={(value) => {
+                    characterManager.actions.setName(value);
+                  }}
+                />
+              </Box>
+            </Grid>
+            {props.dialog && (
+              <Grid item>
+                <IconButton size="small" onClick={onClose}>
+                  <CloseIcon />
+                </IconButton>
+              </Grid>
+            )}
           </Grid>
-          <Grid item className={css({ flex: "1 1 auto" })}>
-            <ContentEditable
-              border
-              autoFocus
-              readonly={props.readonly}
-              value={characterManager.state.character.name}
-              onChange={(value) => {
-                characterManager.actions.setName(value);
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <IconButton size="small" onClick={onClose}>
-              <CloseIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
+        </Box>
       </>
     );
   }
@@ -250,7 +288,7 @@ export const CharacterDialog: React.FC<{
         )}
 
         <Box className={sheetContentStyle}>
-          {characterManager.state.character.aspects.map((aspect, index) => {
+          {characterManager.state.character!.aspects.map((aspect, index) => {
             return (
               <Box key={index} py=".5rem">
                 <Box pb=".5rem">
@@ -318,7 +356,7 @@ export const CharacterDialog: React.FC<{
         )}
 
         <Box className={sheetContentStyle}>
-          {characterManager.state.character.skills.map((skill, index) => {
+          {characterManager.state.character!.skills.map((skill, index) => {
             return (
               <Box py=".5rem" key={index}>
                 <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
@@ -386,7 +424,7 @@ export const CharacterDialog: React.FC<{
           characterManager.actions.addStunt
         )}
         <Box className={sheetContentStyle}>
-          {characterManager.state.character.stunts.map((stunt, index) => {
+          {characterManager.state.character!.stunts.map((stunt, index) => {
             return (
               <Box py=".5rem" key={index}>
                 <Box pb=".5rem">
@@ -460,7 +498,7 @@ export const CharacterDialog: React.FC<{
               >
                 <ContentEditable
                   readonly={!advanced}
-                  value={characterManager.state.character.refresh.toString()}
+                  value={characterManager.state.character!.refresh.toString()}
                   onChange={(value, e) => {
                     const intValue = parseInt(value);
                     if (!isNaN(intValue)) {
@@ -496,7 +534,7 @@ export const CharacterDialog: React.FC<{
   function renderStressTracks() {
     return (
       <Box>
-        {characterManager.state.character.stressTracks.map(
+        {characterManager.state.character!.stressTracks.map(
           (stressTrack, index) => {
             return (
               <Box pb=".5rem" key={index}>
@@ -613,7 +651,7 @@ export const CharacterDialog: React.FC<{
   function renderConsequences() {
     return (
       <Box>
-        {characterManager.state.character.consequences.map(
+        {characterManager.state.character!.consequences.map(
           (consequence, index) => {
             return (
               <Box py=".5rem" key={index}>

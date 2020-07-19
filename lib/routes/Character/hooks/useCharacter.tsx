@@ -5,7 +5,7 @@ import { sanitizeContentEditable } from "../../../components/ContentEditable/Con
 import { ICharacter } from "../../../contexts/CharactersContext";
 
 export function useCharacter(c: ICharacter | undefined) {
-  const [character, setCharacter] = useState<ICharacter>(c as ICharacter);
+  const [character, setCharacter] = useState<ICharacter | undefined>(c);
 
   const isDirty = useMemo(() => {
     return !isEqual(c, character);
@@ -13,7 +13,7 @@ export function useCharacter(c: ICharacter | undefined) {
 
   useEffect(() => {
     const isDifferent = c?.id !== character?.id;
-    const isMoreRecent = c?.lastUpdated > character?.lastUpdated;
+    const isMoreRecent = (c?.lastUpdated ?? 0) > (character?.lastUpdated ?? 0);
     if (isDifferent || isMoreRecent) {
       setCharacter(c);
     }
@@ -21,14 +21,20 @@ export function useCharacter(c: ICharacter | undefined) {
 
   function setName(value: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.name = value;
       })
     );
   }
   function addAspect() {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.aspects.push({
           name: `Aspect`,
           value: "",
@@ -38,7 +44,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function addSkill() {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.skills.push({
           name: `Skill`,
           value: "",
@@ -48,7 +57,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function removeAspect(indexToRemove: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.aspects = draft.aspects.filter((aspect, index) => {
           return index !== indexToRemove;
         });
@@ -58,35 +70,50 @@ export function useCharacter(c: ICharacter | undefined) {
 
   function setAspectName(index: number, newAspectName: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.aspects[index].name = newAspectName;
       })
     );
   }
   function setAspect(index: number, newAspectValue: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.aspects[index].value = newAspectValue;
       })
     );
   }
   function setSkillName(index: number, newSkillName: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.skills[index].name = newSkillName;
       })
     );
   }
   function setSkill(index: number, newSkillValue: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.skills[index].value = newSkillValue;
       })
     );
   }
   function removeSkill(indexToRemove: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.skills = draft.skills.filter((skill, index) => {
           return index !== indexToRemove;
         });
@@ -95,7 +122,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function addStunt() {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stunts.push({
           name: "Stunt",
           value: "",
@@ -105,21 +135,30 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function setStuntName(index: number, newStuntName: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stunts[index].name = newStuntName;
       })
     );
   }
   function setStunt(index: number, newStuntValue: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stunts[index].value = newStuntValue;
       })
     );
   }
   function removeStunt(indexToRemove: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stunts = draft.stunts.filter((stunt, index) => {
           return index !== indexToRemove;
         });
@@ -128,7 +167,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function addStressTrack() {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stressTracks.push({
           name: "Stress",
           value: [
@@ -142,14 +184,20 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function setStressTrackName(index: number, newStressTrackName: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stressTracks[index].name = newStressTrackName;
       })
     );
   }
   function addStressBox(index: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         const numberOfBoxes = draft.stressTracks[index].value.length;
         draft.stressTracks[index].value.push({
           checked: false,
@@ -160,7 +208,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function removeStressBox(index: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         const numberOfBoxes = draft.stressTracks[index].value.length;
         draft.stressTracks[index].value = draft.stressTracks[
           index
@@ -172,7 +223,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function toggleStressBox(index: number, boxIndex: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         const oldValue = draft.stressTracks[index].value[boxIndex].checked;
         draft.stressTracks[index].value[boxIndex].checked = !oldValue;
       })
@@ -180,14 +234,20 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function setStressBoxLabel(index: number, boxIndex: number, label: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stressTracks[index].value[boxIndex].label = label;
       })
     );
   }
   function removeStressTrack(indexToRemove: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.stressTracks = draft.stressTracks.filter((track, index) => {
           return index !== indexToRemove;
         });
@@ -196,7 +256,10 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function addConsequence() {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.consequences.push({
           name: `Consequence`,
           value: "",
@@ -206,21 +269,30 @@ export function useCharacter(c: ICharacter | undefined) {
   }
   function setConsequenceName(index: number, newConsequenceName: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.consequences[index].name = newConsequenceName;
       })
     );
   }
   function setConsequence(index: number, newConsequenceValue: string) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.consequences[index].value = newConsequenceValue;
       })
     );
   }
   function removeConsequence(indexToRemove: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.consequences = draft.consequences.filter((consequence, index) => {
           return index !== indexToRemove;
         });
@@ -230,14 +302,17 @@ export function useCharacter(c: ICharacter | undefined) {
 
   function udpateRefresh(value: number) {
     setCharacter(
-      produce((draft: ICharacter) => {
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
         draft.refresh = value;
       })
     );
   }
 
   function sanitizeCharacter() {
-    const updatedCharacter = produce(character, (draft) => {
+    const updatedCharacter = produce(character!, (draft) => {
       draft.name = sanitizeContentEditable(draft.name);
       draft.lastUpdated = new Date().getTime();
     });

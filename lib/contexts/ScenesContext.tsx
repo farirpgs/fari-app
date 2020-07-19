@@ -22,7 +22,7 @@ export enum ScenesManagerMode {
 export function useScenes() {
   const key = "fari-scenes";
   const [mode, setMode] = useState(ScenesManagerMode.Close);
-  const [selectedScene, select] = useState<ISavableScene | undefined>(
+  const [selectedScene, setSelectedScene] = useState<ISavableScene | undefined>(
     undefined
   );
 
@@ -106,6 +106,14 @@ export function useScenes() {
     });
   }
 
+  function select(scene: ISavableScene) {
+    setSelectedScene(scene);
+  }
+
+  function clearSelected() {
+    setSelectedScene(undefined);
+  }
+
   return {
     state: {
       mode: mode,
@@ -115,7 +123,8 @@ export function useScenes() {
     actions: {
       openManager,
       closeManager,
-      select: select,
+      select,
+      clearSelected,
       add,
       upsert,
       remove,

@@ -44,7 +44,7 @@ export const JoinAGame: React.FC<{
   return (
     <Page>
       <Box>
-        <Box pb="3rem">
+        <Box pb="1rem">
           <Container maxWidth="xs">
             <form
               onSubmit={(event) => {
@@ -113,15 +113,21 @@ export const JoinAGame: React.FC<{
             </form>
           </Container>
         </Box>
-        <Box pb="5rem">
-          <Button
-            color="primary"
-            onClick={() => {
-              charactersManager.actions.openManager(CharactersManagerMode.Use);
-            }}
-          >
-            {t("play-route.or-pick-existing")}
-          </Button>
+        <Box>
+          <Grid container justify="center">
+            <Grid item>
+              <Button
+                color="primary"
+                onClick={() => {
+                  charactersManager.actions.openManager(
+                    CharactersManagerMode.Use
+                  );
+                }}
+              >
+                {t("play-route.or-pick-existing")}
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Page>

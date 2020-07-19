@@ -12,7 +12,7 @@ import {
   ListItemText,
   Snackbar,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Alert } from "@material-ui/lab";
@@ -52,6 +52,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
     if (deletedObject) {
       props.onUndo(deletedObject);
       setDeletedObject(undefined);
+      setDeletedSnack(false);
     }
   }
 

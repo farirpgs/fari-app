@@ -6,6 +6,7 @@ import {
   CharactersContext,
   CharactersManagerMode,
 } from "../../contexts/CharactersContext";
+import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./components/CharacterDialog";
 
@@ -31,6 +32,7 @@ export const CharacterRoute: React.FC<{
     }
   }, [props.match.params.id]);
 
+  const query = useQuery<"dialog">();
   return (
     <>
       <PageMeta
@@ -42,15 +44,9 @@ export const CharacterRoute: React.FC<{
         <CharacterDialog
           open={!!charactersManager.state.selectedCharacter}
           character={charactersManager.state.selectedCharacter}
+          dialog={!!query.dialog === true || false}
           onSave={(newCharacter) => {
             charactersManager.actions.upsert(newCharacter);
-          }}
-          onClose={() => {
-            history.replace("/");
-            charactersManager.actions.close();
-            charactersManager.actions.openManager(
-              CharactersManagerMode.Redirect
-            );
           }}
         />
       </Page>

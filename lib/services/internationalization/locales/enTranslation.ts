@@ -123,7 +123,7 @@ export const enTranslation = {
   "character-dialog.skills": `Skills`,
   "character-dialog.refresh": `Refresh`,
   "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
-
+  "character-dialog.saved": `Saved`,
   "manager.undo": `Undo`,
   "manager.deleted": `Deleted`,
   "manager.new": `New`,

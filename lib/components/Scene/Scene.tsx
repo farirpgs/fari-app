@@ -12,9 +12,6 @@ import {
   Grid,
   Hidden,
   InputLabel,
-  List,
-  ListItem,
-  ListItemText,
   Paper,
   Snackbar,
   Table,
@@ -261,48 +258,6 @@ export const Scene: React.FC<IProps> = (props) => {
               }}
               fullWidth
             />
-            {charactersManager.state.characters.length !== 0 && (
-              <>
-                <Box py="1rem">
-                  <Typography variant="h6" align="center">
-                    {t("play-route.or-pick-existing")}
-                  </Typography>
-                </Box>
-                <List>
-                  {charactersManager.state.characters.map(
-                    (character, index) => {
-                      const [firstAspect] = character.aspects;
-
-                      return (
-                        <ListItem
-                          button
-                          key={index}
-                          onClick={() => {
-                            sceneManager.actions.addOfflineCharacter(character);
-                            setOfflineCharacterDialogOpen(false);
-                          }}
-                        >
-                          <ListItemText
-                            primary={
-                              <ContentEditable
-                                readonly
-                                value={character.name}
-                              />
-                            }
-                            secondary={
-                              <ContentEditable
-                                readonly
-                                value={firstAspect?.value || "..."}
-                              />
-                            }
-                          />
-                        </ListItem>
-                      );
-                    }
-                  )}
-                </List>
-              </>
-            )}
           </DialogContent>
           <DialogActions>
             <Button
@@ -362,6 +317,15 @@ export const Scene: React.FC<IProps> = (props) => {
                   })}
                 >
                   {sceneManager.state.scene.players.length + 1}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  className={css({
+                    fontSize: ".8rem",
+                    lineHeight: Font.lineHeight(0.8),
+                  })}
+                >
+                  {" "}
                 </Typography>
                 <Typography
                   variant="caption"

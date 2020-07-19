@@ -125,6 +125,7 @@ export const PlayerRow: React.FC<{
         readonly={!canControl}
         open={characterDialogOpen}
         character={props.player.character}
+        dialog={true}
         onSave={(updatedCharacter) => {
           props.onCharacterUpdate(updatedCharacter);
           setCharacterDialogOpen(false);

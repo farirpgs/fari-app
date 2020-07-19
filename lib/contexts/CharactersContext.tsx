@@ -110,7 +110,7 @@ export function useCharacters() {
     setSelectedCharacter(character);
   }
 
-  function close() {
+  function clearSelected() {
     setSelectedCharacter(undefined);
   }
 
@@ -124,10 +124,10 @@ export function useCharacters() {
       openManager,
       closeManager,
       add,
-      upsert: upsert,
+      upsert,
       remove,
       select,
-      close,
+      clearSelected,
     },
   };
 }

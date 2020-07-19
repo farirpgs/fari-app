@@ -342,7 +342,7 @@ function mockUseCharacters() {
         upsert: jest.fn(),
         remove: jest.fn(),
         select: jest.fn(),
-        close: jest.fn(),
+        clearSelected: jest.fn(),
         closeManager: jest.fn(),
         openManager: jest.fn(),
       },
