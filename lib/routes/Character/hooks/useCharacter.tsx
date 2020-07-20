@@ -7,7 +7,7 @@ import { ICharacter } from "../../../contexts/CharactersContext";
 export function useCharacter(c: ICharacter | undefined) {
   const [character, setCharacter] = useState<ICharacter | undefined>(c);
 
-  const isDirty = useMemo(() => {
+  const dirty = useMemo(() => {
     return !isEqual(c, character);
   }, [c, character]);
 
@@ -320,7 +320,7 @@ export function useCharacter(c: ICharacter | undefined) {
   }
 
   return {
-    state: { character, isDirty },
+    state: { character, dirty },
     actions: {
       setName,
       addAspect,

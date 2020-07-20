@@ -6,6 +6,5 @@ export function useQuery<T extends string>() {
     T,
     string
   >;
-  console.log(query);
   return query;
 }

@@ -30,7 +30,7 @@ export const CharacterRoute: React.FC<{
       history.replace("/");
       charactersManager.actions.openManager(CharactersManagerMode.Redirect);
     }
-  }, [props.match.params.id]);
+  }, [props.match.params.id, charactersManager.state.characters]);
 
   const query = useQuery<"dialog">();
   return (

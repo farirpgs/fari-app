@@ -27,7 +27,12 @@ export const PlayRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
 
-  const sceneManager = useScene(userId, idFromParams, charactersManager);
+  const sceneManager = useScene({
+    userId: userId,
+    gameId: idFromParams,
+    charactersManager: charactersManager,
+    sceneToLoad: scenesManager.state.selectedScene,
+  });
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
   const { t } = useTranslate();

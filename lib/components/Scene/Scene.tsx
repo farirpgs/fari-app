@@ -130,11 +130,11 @@ export const Scene: React.FC<IProps> = (props) => {
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
 
-  useEffect(() => {
-    if (scenesManager.state.selectedScene) {
-      sceneManager.actions.loadScene(scenesManager.state.selectedScene);
-    }
-  }, [scenesManager.state.selectedScene]);
+  // useEffect(() => {
+  //   if (scenesManager.state.selectedScene) {
+  //     sceneManager.actions.loadScene(scenesManager.state.selectedScene);
+  //   }
+  // }, [scenesManager.state.selectedScene]);
 
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -903,7 +903,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 setSavedSnack(true);
               }}
               color="primary"
-              variant="outlined"
+              variant={sceneManager.state.dirty ? "contained" : "outlined"}
               endIcon={<SaveIcon />}
             >
               {t("play-route.save-scene")}

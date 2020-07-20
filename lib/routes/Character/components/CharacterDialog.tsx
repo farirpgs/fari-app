@@ -64,7 +64,7 @@ export const CharacterDialog: React.FC<{
   }
 
   function onClose() {
-    if (characterManager.state.isDirty && !props.readonly) {
+    if (characterManager.state.dirty && !props.readonly) {
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
         props.onClose?.();
@@ -205,7 +205,7 @@ export const CharacterDialog: React.FC<{
               <Button
                 color="primary"
                 variant={
-                  characterManager.state.isDirty ? "contained" : "outlined"
+                  characterManager.state.dirty ? "contained" : "outlined"
                 }
                 type="submit"
                 onClick={onSave}

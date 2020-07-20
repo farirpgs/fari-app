@@ -1,6 +1,7 @@
 import produce from "immer";
+import { isEqual } from "lodash";
 import Peer from "peerjs";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { ILines } from "../../components/DrawArea/DrawArea";
@@ -19,11 +20,15 @@ import { IAspect, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
-export function useScene(
-  userId: string,
-  gameId: string | undefined,
-  charactersManager: ReturnType<typeof useCharacters>
-) {
+type IProps = {
+  userId: string;
+  gameId?: string;
+  charactersManager: ReturnType<typeof useCharacters>;
+  sceneToLoad?: ISavableScene;
+};
+
+export function useScene(props: IProps) {
+  const { userId, gameId, charactersManager, sceneToLoad } = props;
   const isGM = !gameId;
   const [scene, setScene] = useState<IScene>(() => ({
     id: uuidV4(),
@@ -44,6 +49,36 @@ export function useScene(
     version: defaultSceneVersion,
     lastUpdated: new Date().getTime(),
   }));
+
+  const dirty = useMemo(() => {
+    if (!sceneToLoad) {
+      return false;
+    }
+
+    const current: ISavableScene = {
+      id: scene.id,
+      name: scene.name,
+      aspects: scene.aspects,
+      version: scene.version,
+      lastUpdated: scene.lastUpdated,
+    };
+    return !isEqual(sceneToLoad, current);
+  }, [scene, sceneToLoad]);
+
+  useEffect(() => {
+    if (sceneToLoad) {
+      // setLoadedScene(sceneToLoad)
+      setScene(
+        produce((draft: IScene) => {
+          draft.id = sceneToLoad.id;
+          draft.name = sceneToLoad.name;
+          draft.aspects = sceneToLoad.aspects;
+          draft.version = sceneToLoad.version;
+          draft.lastUpdated = sceneToLoad.lastUpdated;
+        })
+      );
+    }
+  }, [sceneToLoad]);
 
   useEffect(() => {
     if (scene.goodConfetti > 0) {
@@ -73,20 +108,6 @@ export function useScene(
       newScene.players.forEach((p) => {
         charactersManager.actions.upsert(p.character);
       });
-    }
-  }
-
-  function loadScene(newScene: ISavableScene) {
-    if (newScene) {
-      setScene(
-        produce((draft: IScene) => {
-          draft.id = newScene.id;
-          draft.name = newScene.name;
-          draft.aspects = newScene.aspects;
-          draft.version = newScene.version;
-          draft.lastUpdated = newScene.lastUpdated;
-        })
-      );
     }
   }
 
@@ -437,10 +458,9 @@ export function useScene(
   }
 
   return {
-    state: { scene },
+    state: { scene, dirty },
     actions: {
       resetScene,
-      loadScene,
       newScene,
       safeSetScene,
       setName,

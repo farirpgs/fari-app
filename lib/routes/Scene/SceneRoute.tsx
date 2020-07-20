@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import { throttle } from "lodash";
+import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext";
 import { ScenesContext, ScenesManagerMode } from "../../contexts/ScenesContext";
+import { IScene } from "../../hooks/useScene/IScene";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useUserId } from "../../hooks/useUserId/useUserId";
@@ -16,7 +18,11 @@ export const SceneRoute: React.FC<{
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
-  const sceneManager = useScene(userId, undefined, charactersManager);
+  const sceneManager = useScene({
+    userId: userId,
+    charactersManager: charactersManager,
+    sceneToLoad: scenesManager.state.selectedScene,
+  });
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
   const history = useHistory();
@@ -28,12 +34,18 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad);
+      scenesManager.actions.select(sceneToLoad);
     } else {
       history.replace("/");
       scenesManager.actions.openManager(ScenesManagerMode.Redirect);
     }
-  }, [props.match.params.id]);
+  }, [props.match.params.id, scenesManager.state.scenes]);
+
+  const updateScene = useRef(
+    throttle((scene: IScene) => {
+      scenesManager.actions.upsert(scene);
+    }, 3000)
+  );
 
   return (
     <>
