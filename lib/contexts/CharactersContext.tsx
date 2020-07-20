@@ -98,6 +98,7 @@ export function useCharacters() {
         });
       });
     }
+    select(character)
   }
 
   function remove(id: string | undefined) {

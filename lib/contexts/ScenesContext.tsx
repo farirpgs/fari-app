@@ -98,6 +98,7 @@ export function useScenes() {
         });
       });
     }
+    select(newScene);
   }
 
   function remove(id: string | undefined) {
