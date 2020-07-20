@@ -8,39 +8,44 @@ import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
 
-describe("useScene", () => {
+fdescribe("useScene", () => {
   it("constructor", () => {
     // GIVEN
     const userId = "111";
     const gameId = undefined;
     const useCharactersMock = mockUseCharacters();
 
-    const defaultScene: IScene = {
+    const expectDefaultScene: IScene = {
+      id: expect.anything(),
+      name: "",
       aspects: {},
-      badConfetti: 0,
-      drawAreaLines: [],
       gm: {
-        fatePoints: 3,
         id: "111",
-        playedDuringTurn: false,
         playerName: "Game Master",
         rolls: [],
+        playedDuringTurn: false,
+        fatePoints: 3,
       },
-      goodConfetti: 0,
-      name: "",
       players: [],
+      goodConfetti: 0,
+      badConfetti: 0,
       sort: false,
+      drawAreaLines: [],
       version: 1,
-      id: "id",
-      lastUpdated: new Date().getTime(),
+      lastUpdated: expect.anything(),
     };
     // WHEN
     const { result } = renderHook(() => {
       const charactersManager = useCharactersMock();
-      return useScene(userId, gameId, charactersManager);
+      return useScene({
+        userId,
+        gameId,
+        charactersManager,
+        sceneToLoad: undefined,
+      });
     });
     // THEN
-    expect(result.current.state.scene).toEqual(defaultScene);
+    expect(result.current.state.scene).toEqual(expectDefaultScene);
   });
 
   describe("setName", () => {
@@ -53,7 +58,12 @@ describe("useScene", () => {
       // WHEN
       const { result } = renderHook(() => {
         const charactersManager = useCharactersMock();
-        return useScene(userId, gameId, charactersManager);
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+          sceneToLoad: undefined,
+        });
       });
       act(() => {
         result.current.actions.setName("New Name");
@@ -73,7 +83,12 @@ describe("useScene", () => {
       // WHEN initial render
       const { result } = renderHook(() => {
         const charactersManager = useCharactersMock();
-        return useScene(userId, gameId, charactersManager);
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+          sceneToLoad: undefined,
+        });
       });
       act(() => {
         // WHEN adding an aspect
@@ -81,17 +96,18 @@ describe("useScene", () => {
       });
       // THEN aspect exists
       const [firstAspectId] = Object.keys(result.current.state.scene.aspects);
+
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
-        countdown: [],
         content: "<br/>",
+        countdown: [],
         freeInvokes: [],
         mentalStress: [],
         physicalStress: [],
         playedDuringTurn: false,
         title: "",
-        type: AspectType.Aspect,
+        type: 0,
       });
       act(() => {
         // WHEN updating the title
@@ -239,7 +255,12 @@ describe("useScene", () => {
       // WHEN initial render
       const { result } = renderHook(() => {
         const charactersManager = useCharactersMock();
-        return useScene(userId, gameId, charactersManager);
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+          sceneToLoad: undefined,
+        });
       });
       // WHEN initial connection with a player
       act(() => {

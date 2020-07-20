@@ -8,4 +8,5 @@ module.exports = {
   },
   reporters: ["default", "jest-junit"],
   coverageReporters: ["text", "cobertura"],
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 };
