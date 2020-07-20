@@ -4,6 +4,7 @@ import {
   CharactersManagerMode,
   useCharacters,
 } from "../../../contexts/CharactersContext";
+import { ISavableScene } from "../../../contexts/ScenesContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
@@ -48,6 +49,108 @@ fdescribe("useScene", () => {
     expect(result.current.state.scene).toEqual(expectDefaultScene);
   });
 
+  describe("dirty", () => {
+    it("should set the name", () => {
+      // GIVEN
+      const userId = "111";
+      const gameId = undefined;
+      const useCharactersMock = mockUseCharacters();
+
+      // WHEN
+      const { result, rerender } = renderHook(
+        (props) => {
+          const charactersManager = useCharactersMock();
+          return useScene({
+            userId,
+            gameId,
+            charactersManager,
+            sceneToLoad: props.sceneToLoad,
+          });
+        },
+        {
+          initialProps: {
+            sceneToLoad: (undefined as unknown) as ISavableScene,
+          },
+        }
+      );
+
+      // THEN
+      expect(result.current.state.scene.name).toEqual("");
+      expect(result.current.state.dirty).toEqual(false);
+
+      // WHEN
+      rerender({
+        sceneToLoad: {
+          id: "new-id",
+          aspects: { "aspect-id": { toto: 3 } as any },
+          lastUpdated: 111,
+          name: "new name",
+          version: 3,
+        },
+      });
+
+      // THEN
+      expect(result.current.state.scene).toEqual({
+        aspects: { "aspect-id": { toto: 3 } },
+        badConfetti: 0,
+        drawAreaLines: [],
+        gm: {
+          fatePoints: 3,
+          id: "111",
+          playedDuringTurn: false,
+          playerName: "Game Master",
+          rolls: [],
+        },
+        goodConfetti: 0,
+        id: "new-id",
+        lastUpdated: 111,
+        name: "new name",
+        players: [],
+        sort: false,
+        version: 3,
+      });
+
+      // WHEN name is different
+      act(() => {
+        result.current.actions.setName("New Name from input");
+      });
+      // THEN dirty is true
+      expect(result.current.state.dirty).toEqual(true);
+
+      // WHEN reload
+      rerender({
+        sceneToLoad: {
+          id: "new-id",
+          aspects: { "aspect-id": { toto: 3 } as any },
+          lastUpdated: 111,
+          name: "new name",
+          version: 3,
+        },
+      });
+      // THEN dirty is false
+      expect(result.current.state.dirty).toEqual(false);
+
+      // WHEN name is different
+      act(() => {
+        result.current.actions.addAspect(AspectType.Aspect);
+      });
+      // THEN dirty is true
+      expect(result.current.state.dirty).toEqual(true);
+
+      // WHEN reload
+      rerender({
+        sceneToLoad: {
+          id: "new-id",
+          aspects: { "aspect-id": { toto: 3 } as any },
+          lastUpdated: 111,
+          name: "new name",
+          version: 3,
+        },
+      });
+      // THEN dirty is false
+      expect(result.current.state.dirty).toEqual(false);
+    });
+  });
   describe("setName", () => {
     it("should set the name", () => {
       // GIVEN
@@ -70,6 +173,7 @@ fdescribe("useScene", () => {
       });
       // THEN
       expect(result.current.state.scene.name).toEqual("New Name");
+      expect(result.current.state.dirty).toEqual(false);
     });
   });
 
