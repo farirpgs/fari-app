@@ -150,12 +150,20 @@ export function useScene(props: IProps) {
   }
 
   function addAspect(type: AspectType) {
+    const id = uuidV4();
     setScene(
       produce((draft: IScene) => {
-        const id = uuidV4();
         draft.aspects[id] = defaultAspects[type];
       })
     );
+    setTimeout(() => {
+      const indexCard: HTMLSpanElement | null = document.querySelector(
+        `#index-card-${id}`
+      );
+      if (indexCard) {
+        indexCard.focus();
+      }
+    });
   }
 
   function removeAspect(id: string) {

@@ -26,11 +26,12 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
 export const IndexCard: React.FC<{
   aspect: IAspect;
   readonly: boolean;
   className?: string;
-
+  id?: string;
   onTitleChange(value: string): void;
   onContentChange(value: string): void;
   onFreeInvokeChange(index: number, value: boolean): void;
@@ -154,7 +155,7 @@ export const IndexCard: React.FC<{
       <Grid container justify="space-between" alignItems="center" spacing={2}>
         <Grid item xs>
           <ContentEditable
-            autoFocus
+            id={props.id}
             value={props.aspect.title}
             readonly={props.readonly}
             onChange={props.onTitleChange}

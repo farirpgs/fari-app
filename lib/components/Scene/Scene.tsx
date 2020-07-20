@@ -550,6 +550,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 >
                   <IndexCard
                     key={aspectId}
+                    id={`index-card-${aspectId}`}
                     aspect={sceneManager.state.scene.aspects[aspectId]}
                     readonly={!isGM}
                     onRemove={() => {

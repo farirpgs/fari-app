@@ -14,6 +14,7 @@ export const ContentEditable: React.FC<{
   autoFocus?: boolean;
   inline?: boolean;
   border?: boolean;
+  id?: string;
 }> = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLSpanElement | null>(null);
@@ -65,6 +66,7 @@ export const ContentEditable: React.FC<{
           display: "flex",
         },
       })}
+      id={props.id}
       ref={$ref}
       onInput={(e) => {
         onChange(e);
