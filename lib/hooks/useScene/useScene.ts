@@ -198,34 +198,97 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addAspectFreeInvoke(id: string) {
+  function addAspectTrack(id: string, name: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].freeInvokes.push(false);
+        draft.aspects[id].tracks.push({
+          name: name,
+          value: [{ checked: false, label: "1" }],
+        });
       })
     );
   }
 
-  function updateAspectFreeInvoke(id: string, index: number, value: boolean) {
+  function removeAspectTrack(id: string, indexToRemove: number) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].freeInvokes[index] = value;
+        draft.aspects[id].tracks = draft.aspects[id].tracks.filter(
+          (track, index) => {
+            return index !== indexToRemove;
+          }
+        );
       })
     );
   }
 
-  function addAspectCountdown(id: string) {
+  function setAspectTrackName(
+    id: string,
+    index: number,
+    newStressTrackName: string
+  ) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].countdown.push(false);
+        draft.aspects[id].tracks[index].name = newStressTrackName;
       })
     );
   }
 
-  function updateAspectCountdown(id: string, index: number, value: boolean) {
+  function addAspectTrackBox(id: string, index: number) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].countdown[index] = value;
+        const numberOfBoxes = draft.aspects[id].tracks[index].value.length;
+        draft.aspects[id].tracks[index].value.push({
+          checked: false,
+          label: `${numberOfBoxes + 1}`,
+        });
+      })
+    );
+  }
+
+  function removeAspectTrackBox(id: string, index: number) {
+    setScene(
+      produce((draft: IScene) => {
+        const numberOfBoxes = draft.aspects[id].tracks[index].value.length;
+        draft.aspects[id].tracks[index].value = draft.aspects[id].tracks[
+          index
+        ].value.filter((value, index) => {
+          return index !== numberOfBoxes - 1;
+        });
+      })
+    );
+  }
+
+  function toggleAspectTrackBox(id: string, index: number, boxIndex: number) {
+    setScene(
+      produce((draft: IScene) => {
+        const oldValue =
+          draft.aspects[id].tracks[index].value[boxIndex].checked;
+        draft.aspects[id].tracks[index].value[boxIndex].checked = !oldValue;
+      })
+    );
+  }
+
+  function setStressBoxLabel(
+    id: string,
+    index: number,
+    boxIndex: number,
+    label: string
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].tracks[index].value[boxIndex].label = label;
+      })
+    );
+  }
+
+  function removeStressTrack(id: string, indexToRemove: number) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[id].tracks = draft.aspects[id].tracks.filter(
+          (track, index) => {
+            return index !== indexToRemove;
+          }
+        );
       })
     );
   }
@@ -234,41 +297,6 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         draft.aspects[id].color = color;
-      })
-    );
-  }
-
-  function addAspectPhysicalStress(id: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[id].physicalStress.push(false);
-      })
-    );
-  }
-
-  function updateAspectPhysicalStress(
-    id: string,
-    index: number,
-    value: boolean
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[id].physicalStress[index] = value;
-      })
-    );
-  }
-  function addAspectMentalStress(id: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[id].mentalStress.push(false);
-      })
-    );
-  }
-
-  function updateAspectMentalStress(id: string, index: number, value: boolean) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[id].mentalStress[index] = value;
       })
     );
   }
@@ -477,14 +505,14 @@ export function useScene(props: IProps) {
       resetAspect,
       updateAspectTitle,
       updateAspectContent,
-      addAspectFreeInvoke,
-      addAspectCountdown,
-      updateAspectCountdown,
-      updateAspectFreeInvoke,
-      addAspectPhysicalStress,
-      updateAspectPhysicalStress,
-      addAspectMentalStress,
-      updateAspectMentalStress,
+      addAspectTrack,
+      removeAspectTrack,
+      setAspectTrackName,
+      addAspectTrackBox,
+      removeAspectTrackBox,
+      toggleAspectTrackBox,
+      setStressBoxLabel,
+      removeStressTrack,
       addAspectConsequence,
       updateAspectConsequence,
       updateAspectPlayerDuringTurn,
@@ -509,10 +537,7 @@ export function useScene(props: IProps) {
 const defaultAspect: IAspect = {
   title: "",
   content: "<br/>",
-  freeInvokes: [],
-  countdown: [],
-  physicalStress: [],
-  mentalStress: [],
+  tracks: [],
   consequences: [],
   color: "white",
   type: AspectType.Aspect,
@@ -521,10 +546,7 @@ const defaultAspect: IAspect = {
 const defaultIndexCard: IAspect = {
   title: "",
   content: "<br/>",
-  freeInvokes: [],
-  countdown: [],
-  physicalStress: [],
-  mentalStress: [],
+  tracks: [],
   consequences: [],
   color: "white",
   type: AspectType.IndexCard,
@@ -534,10 +556,7 @@ const defaultIndexCard: IAspect = {
 const defaultBoost: IAspect = {
   title: "",
   content: "<br/>",
-  freeInvokes: [false],
-  countdown: [],
-  physicalStress: [],
-  mentalStress: [],
+  tracks: [{ name: "Free Invoke", value: [{ label: "", checked: false }] }],
   consequences: [],
   color: "blue",
   type: AspectType.Boost,
@@ -547,10 +566,7 @@ const defaultBoost: IAspect = {
 const defaultNPC: IAspect = {
   title: "",
   content: "<br/>",
-  freeInvokes: [],
-  countdown: [],
-  physicalStress: [],
-  mentalStress: [],
+  tracks: [],
   consequences: [],
   color: "green",
   type: AspectType.NPC,
@@ -560,10 +576,7 @@ const defaultNPC: IAspect = {
 const defaultBadGuy: IAspect = {
   title: "",
   content: "<br/>",
-  freeInvokes: [],
-  countdown: [],
-  physicalStress: [],
-  mentalStress: [],
+  tracks: [],
   consequences: [],
   color: "red",
   type: AspectType.BadGuy,

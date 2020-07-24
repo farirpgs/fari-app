@@ -9,15 +9,17 @@ import {
   MenuItem,
   Paper,
   TextField,
-  Tooltip,
   Typography,
   useTheme,
 } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import RemoveIcon from "@material-ui/icons/Remove";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
 import { AspectType } from "../../hooks/useScene/AspectType";
@@ -25,6 +27,7 @@ import { IAspect } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
 export const IndexCard: React.FC<{
@@ -34,16 +37,16 @@ export const IndexCard: React.FC<{
   id?: string;
   onTitleChange(value: string): void;
   onContentChange(value: string): void;
-  onFreeInvokeChange(index: number, value: boolean): void;
-  onPhysicalStressChange(index: number, value: boolean): void;
-  onMentalStressChange(index: number, value: boolean): void;
-  onCountdownChange(index: number, value: boolean): void;
+
+  onAddAspectTrack(name: string): void;
+  onRemoveAspectTrack(id: string): void;
+  onSetAspectTrackName(index: number, newStressTrackName: string): void;
+  onAddAspectTrackBox(index: number): void;
+  onRemoveAspectTrackBox(index: number): void;
+  onToggleAspectTrackBox(index: number, boxIndex: number): void;
+  onSetStressBoxLabel(index: number, boxIndex: number, label: string): void;
 
   onConsequenceChange(index: number, value: string): void;
-  onAddAspectFreeInvoke(): void;
-  onAddAspectPhysicalStress(): void;
-  onAddAspectMentalStress(): void;
-  onAddCountdown(): void;
   onAddConsequence(): void;
   onUpdateAspectColor(color: IndexCardColorTypes): void;
   onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
@@ -56,11 +59,7 @@ export const IndexCard: React.FC<{
   const $menu = useRef(null);
   const colorPickerBackground = theme.palette.primary.dark;
   const shouldRenderCheckboxesOrConsequences =
-    props.aspect.freeInvokes.length > 0 ||
-    props.aspect.physicalStress.length > 0 ||
-    props.aspect.mentalStress.length > 0 ||
-    props.aspect.countdown.length > 0 ||
-    props.aspect.consequences.length > 0;
+    props.aspect.tracks.length > 0 || props.aspect.consequences.length > 0;
 
   const shouldRenderAspectMenuItems = props.aspect.type !== AspectType.Boost;
   const shouldRenderContent = props.aspect.type !== AspectType.Boost;
@@ -187,26 +186,26 @@ export const IndexCard: React.FC<{
       <MenuItem
         key="onAddAspectFreeInvoke"
         onClick={() => {
-          props.onAddAspectFreeInvoke();
+          props.onAddAspectTrack("Free Invokes");
         }}
       >
-        {t("index-card.add-1-free-invoke")}
+        {t("index-card.add-free-invokes-track")}
       </MenuItem>,
       <MenuItem
         key="onAddAspectPhysicalStress"
         onClick={() => {
-          props.onAddAspectPhysicalStress();
+          props.onAddAspectTrack("Physical Stress");
         }}
       >
-        {t("index-card.add-1-physical-stress-box")}
+        {t("index-card.add-physical-stress-track")}
       </MenuItem>,
       <MenuItem
         key="onAddAspectMentalStress"
         onClick={() => {
-          props.onAddAspectMentalStress();
+          props.onAddAspectTrack("Mental Stress");
         }}
       >
-        {t("index-card.add-1-mental-stress-box")}
+        {t("index-card.add-mental-stress-track")}
       </MenuItem>,
       <MenuItem
         key="onAddConsequence"
@@ -219,10 +218,10 @@ export const IndexCard: React.FC<{
       <MenuItem
         key="onAddCountdown"
         onClick={() => {
-          props.onAddCountdown();
+          props.onAddAspectTrack("Track");
         }}
       >
-        {t("index-card.add-1-countdown")}
+        {t("index-card.add-track")}
       </MenuItem>,
       <Divider key="renderAspectMenuItemsDivider" />,
     ];
@@ -328,116 +327,42 @@ export const IndexCard: React.FC<{
         })}
       >
         <Box p=".5rem 1rem">
-          <Box>
-            {props.aspect.freeInvokes.length > 0 && (
-              <InputLabel shrink>{t("index-card.free-invokes")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.freeInvokes.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Checkbox
-                      checked={value}
-                      onChange={(event) => {
-                        if (props.readonly) {
-                          return;
-                        }
-                        props.onFreeInvokeChange(index, event.target.checked);
+          {renderTracks()}
+          {/* {props.aspect.tracks.map((track, trackIndex) => {
+            return (
+              <Box key={trackIndex}>
+                {track.value.length > 0 && (
+                  <InputLabel shrink>
+                    <ContentEditable
+                      value={track.name}
+                      readonly={props.readonly}
+                      onChange={(newTrackName) => {
+                        props.onSetAspectTrackName(trackIndex, newTrackName);
                       }}
-                      color="default"
                     />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            {props.aspect.physicalStress.length > 0 && (
-              <InputLabel shrink>{t("index-card.physical-stress")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.physicalStress.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Tooltip title={index + 1}>
-                      <Checkbox
-                        checked={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onPhysicalStressChange(
-                            index,
-                            event.target.checked
-                          );
-                        }}
-                        className={css({
-                          color: theme.palette.primary.main,
-                        })}
-                        color="primary"
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            {props.aspect.mentalStress.length > 0 && (
-              <InputLabel shrink>{t("index-card.mental-stress")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.mentalStress.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Tooltip title={index + 1}>
-                      <Checkbox
-                        checked={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onMentalStressChange(
-                            index,
-                            event.target.checked
-                          );
-                        }}
-                        className={css({
-                          color: theme.palette.secondary.main,
-                        })}
-                        color="secondary"
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            {props.aspect.countdown.length > 0 && (
-              <InputLabel shrink>{t("index-card.countdown")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.countdown.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Tooltip title={index + 1}>
-                      <Checkbox
-                        checked={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onCountdownChange(index, event.target.checked);
-                        }}
-                        color="default"
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
+                  </InputLabel>
+                )}
+                <Grid container justify="flex-start">
+                  {track.value.map((value, boxIndex) => {
+                    return (
+                      <Grid item key={boxIndex} xs={2}>
+                        <Checkbox
+                          checked={value.checked}
+                          onChange={(event) => {
+                            if (props.readonly) {
+                              return;
+                            }
+                            props.onToggleAspectTrackBox(trackIndex, boxIndex);
+                          }}
+                          color="default"
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </Box>
+            );
+          })} */}
           <Box>
             <Grid container justify="center">
               {props.aspect.consequences.map((value, index) => {
@@ -467,5 +392,108 @@ export const IndexCard: React.FC<{
       </Box>
     );
   }
+
+  function renderTracks() {
+    return (
+      <Box>
+        {props.aspect.tracks.map((stressTrack, trackIndex) => {
+          return (
+            <Box pb=".5rem" key={trackIndex}>
+              <Grid container justify="space-between" wrap="nowrap" spacing={2}>
+                <Grid item className={css({ flex: "1 0 auto" })}>
+                  <FateLabel display="inline">
+                    <ContentEditable
+                      value={stressTrack.name}
+                      readonly={props.readonly}
+                      onChange={(newTrackName) => {
+                        props.onSetAspectTrackName(trackIndex, newTrackName);
+                      }}
+                    />
+                  </FateLabel>
+                </Grid>
+                {!props.readonly && (
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        props.onRemoveAspectTrackBox(trackIndex);
+                      }}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  </Grid>
+                )}
+                {!props.readonly && (
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        props.onAddAspectTrackBox(trackIndex);
+                      }}
+                    >
+                      <AddCircleOutlineIcon />
+                    </IconButton>
+                  </Grid>
+                )}
+                {!props.readonly && (
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        props.onRemoveAspectTrack(trackIndex);
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Grid>
+                )}
+              </Grid>
+
+              <Grid container justify="flex-start" spacing={2}>
+                {stressTrack.value.map((stressBox, boxIndex) => {
+                  return (
+                    <Grid item key={boxIndex}>
+                      <Box
+                        className={css({
+                          display: "flex",
+                          justifyContent: "center",
+                        })}
+                      >
+                        <Checkbox
+                          color="default"
+                          size="small"
+                          checked={stressBox.checked}
+                          onChange={(event) => {
+                            if (props.readonly) {
+                              return;
+                            }
+                            props.onToggleAspectTrackBox(trackIndex, boxIndex);
+                          }}
+                        />
+                      </Box>
+                      <Box>
+                        <FateLabel className={css({ textAlign: "center" })}>
+                          <ContentEditable
+                            readonly={props.readonly}
+                            value={stressBox.label}
+                            onChange={(value) => {
+                              props.onSetStressBoxLabel(
+                                trackIndex,
+                                boxIndex,
+                                value
+                              );
+                            }}
+                          />
+                        </FateLabel>
+                      </Box>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Box>
+          );
+        })}
+      </Box>
+    );
+  }
 };
-IndexCard.displayName = "IndexCard";

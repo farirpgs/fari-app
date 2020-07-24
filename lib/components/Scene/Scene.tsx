@@ -565,32 +565,51 @@ export const Scene: React.FC<IProps> = (props) => {
                     onContentChange={(value) => {
                       sceneManager.actions.updateAspectContent(aspectId, value);
                     }}
-                    onFreeInvokeChange={(index, value) => {
-                      sceneManager.actions.updateAspectFreeInvoke(
+                    onAddAspectTrack={(name: string) => {
+                      sceneManager.actions.addAspectTrack(aspectId, name);
+                    }}
+                    onRemoveAspectTrack={(index) => {
+                      sceneManager.actions.removeAspectTrack(aspectId, index);
+                    }}
+                    onSetAspectTrackName={(
+                      index: number,
+                      newStressTrackName: string
+                    ) => {
+                      sceneManager.actions.setAspectTrackName(
                         aspectId,
                         index,
-                        value
+                        newStressTrackName
                       );
                     }}
-                    onPhysicalStressChange={(index, value) => {
-                      sceneManager.actions.updateAspectPhysicalStress(
+                    onAddAspectTrackBox={(index: number) => {
+                      sceneManager.actions.addAspectTrackBox(aspectId, index);
+                    }}
+                    onRemoveAspectTrackBox={(index: number) => {
+                      sceneManager.actions.removeAspectTrackBox(
                         aspectId,
-                        index,
-                        value
+                        index
                       );
                     }}
-                    onMentalStressChange={(index, value) => {
-                      sceneManager.actions.updateAspectMentalStress(
+                    onToggleAspectTrackBox={(
+                      index: number,
+                      boxIndex: number
+                    ) => {
+                      sceneManager.actions.toggleAspectTrackBox(
                         aspectId,
                         index,
-                        value
+                        boxIndex
                       );
                     }}
-                    onCountdownChange={(index, value) => {
-                      sceneManager.actions.updateAspectCountdown(
+                    onSetStressBoxLabel={(
+                      index: number,
+                      boxIndex: number,
+                      label: string
+                    ) => {
+                      sceneManager.actions.setStressBoxLabel(
                         aspectId,
                         index,
-                        value
+                        boxIndex,
+                        label
                       );
                     }}
                     onConsequenceChange={(index, value) => {
@@ -599,18 +618,6 @@ export const Scene: React.FC<IProps> = (props) => {
                         index,
                         value
                       );
-                    }}
-                    onAddAspectFreeInvoke={() => {
-                      sceneManager.actions.addAspectFreeInvoke(aspectId);
-                    }}
-                    onAddAspectPhysicalStress={() => {
-                      sceneManager.actions.addAspectPhysicalStress(aspectId);
-                    }}
-                    onAddAspectMentalStress={() => {
-                      sceneManager.actions.addAspectMentalStress(aspectId);
-                    }}
-                    onAddCountdown={() => {
-                      sceneManager.actions.addAspectCountdown(aspectId);
                     }}
                     onAddConsequence={() => {
                       sceneManager.actions.addAspectConsequence(aspectId);

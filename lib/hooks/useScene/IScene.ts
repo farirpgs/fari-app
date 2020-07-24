@@ -16,10 +16,10 @@ export interface IPlayer {
 export interface IAspect {
   title: string;
   content: string;
-  freeInvokes: Array<boolean>;
-  countdown: Array<boolean>;
-  physicalStress: Array<boolean>;
-  mentalStress: Array<boolean>;
+  tracks: Array<{
+    name: string;
+    value: Array<{ checked?: boolean; label: string }>;
+  }>;
   consequences: Array<string>;
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;

@@ -59,6 +59,7 @@ export const ContentEditable: React.FC<{
         borderBottom: props.border
           ? `1px solid ${theme.palette.divider}`
           : undefined,
+        cursor: "text",
         img: {
           maxWidth: "75%",
           padding: ".5rem",
