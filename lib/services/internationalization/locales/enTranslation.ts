@@ -76,11 +76,11 @@ export const enTranslation = {
   "play-route.new-scene": `New Scene`,
   "play-route.scene-saved": `Saved Scene`,
   "play-route.load-scene": `Load Scene`,
-  "index-card.add-1-free-invoke": `+ Free Invoke`,
-  "index-card.add-1-physical-stress-box": `+  Physical Stress`,
-  "index-card.add-1-mental-stress-box": `+  Mental Stress`,
+  "index-card.add-free-invokes-track": `+ Free Invokes Track`,
+  "index-card.add-physical-stress-track": `+ Physical Stress Track`,
+  "index-card.add-mental-stress-track": `+ Mental Stress Track`,
   "index-card.add-1-consequence": `+ Consequence`,
-  "index-card.add-1-countdown": `+ Countdown`,
+  "index-card.add-track": `+ Track`,
   "index-card.remove": `Remove`,
   "index-card.reset": `Reset`,
   "index-card.free-invokes": `Free Invokes`,
@@ -128,60 +128,60 @@ export const enTranslation = {
   "manager.deleted": `Deleted`,
   "manager.new": `New`,
   "manager.no-items": `There's nothing here yet`,
-  // // Aspects
-  // "High Concept": ``,
-  // "Trouble": ``,
-  // "Relationship": ``,
-  // "Other Aspect": ``,
+  // Aspects
+  "High Concept": `High Concept`,
+  "Trouble": `Trouble`,
+  "Relationship": `Relationship`,
+  "Other Aspect": `Other Aspect`,
 
-  // // Skills
-  // "Academics": ``,
-  // "Athletics": ``,
-  // "Burglary": ``,
-  // "Contacts": ``,
-  // "Crafts": ``,
-  // "Deceive": ``,
-  // "Drive": ``,
-  // "Empathy": ``,
-  // "Fight": ``,
-  // "Investigate": ``,
-  // "Lore": ``,
-  // "Notice": ``,
-  // "Physique": ``,
-  // "Provoke": ``,
-  // "Rapport": ``,
-  // "Resources": ``,
-  // "Shoot": ``,
-  // "Stealth": ``,
-  // "Will": ``,
+  // Skills
+  "Academics": `Academics`,
+  "Athletics": `Athletics`,
+  "Burglary": `Burglary`,
+  "Contacts": `Contacts`,
+  "Crafts": `Crafts`,
+  "Deceive": `Deceive`,
+  "Drive": `Drive`,
+  "Empathy": `Empathy`,
+  "Fight": `Fight`,
+  "Investigate": `Investigate`,
+  "Lore": `Lore`,
+  "Notice": `Notice`,
+  "Physique": `Physique`,
+  "Provoke": `Provoke`,
+  "Rapport": `Rapport`,
+  "Resources": `Resources`,
+  "Shoot": `Shoot`,
+  "Stealth": `Stealth`,
+  "Will": `Will`,
 
-  // // Stunts
-  // "Stunt #1": ``,
-  // "Stunt #2": ``,
-  // "Stunt #3": ``,
+  // Stunts
+  "Stunt #1": `Stunt #1`,
+  "Stunt #2": `Stunt #2`,
+  "Stunt #3": `Stunt #3`,
 
-  // // Stress
-  // "Physical": ``,
-  // "Mental": ``,
+  // Stress
+  "Physical": `Physical`,
+  "Mental": `Mental`,
 
-  // // FAE Stress
-  // "Stress": ``,
+  // FAE Stress
+  "Stress": `Stress`,
 
-  // // Consequences
-  // "Mild": ``,
-  // "Moderate": ``,
-  // "Severe": ``,
+  // Consequences
+  "Mild": `Mild`,
+  "Moderate": `Moderate`,
+  "Severe": `Severe`,
 
-  // // FAE Approaches
-  // "Careful": ``,
-  // "Clever": ``,
-  // "Forceful": ``,
-  // "Flashy": ``,
-  // "Quick": ``,
-  // "Sneaky": ``,
+  // FAE Approaches
+  "Careful": `Careful`,
+  "Clever": `Clever`,
+  "Forceful": `Forceful`,
+  "Flashy": `Flashy`,
+  "Quick": `Quick`,
+  "Sneaky": `Sneaky`,
 
-  // // Custom Character
-  // "Aspect": ``,
-  // "Stunt": ``,
-  // "Skill": ``,
+  // Custom Character
+  "Aspect": `Aspect`,
+  "Stunt": `Stunt`,
+  "Skill": `Skill`,
 } as const;

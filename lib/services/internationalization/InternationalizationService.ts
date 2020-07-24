@@ -5,6 +5,8 @@ import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
 
+export type IPossibleLanguages = "en" | "es" | "dev";
+
 export class InternationalizationService {
   public i18next: i18n;
 
