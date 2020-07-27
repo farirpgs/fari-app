@@ -33,6 +33,7 @@ export const CharacterRoute: React.FC<{
   }, [props.match.params.id, charactersManager.state.characters]);
 
   const query = useQuery<"dialog">();
+  const dialogMode = query.get("dialog") === "true";
   return (
     <>
       <PageMeta
@@ -44,7 +45,7 @@ export const CharacterRoute: React.FC<{
         <CharacterDialog
           open={!!charactersManager.state.selectedCharacter}
           character={charactersManager.state.selectedCharacter}
-          dialog={!!query.dialog === true || false}
+          dialog={dialogMode || false}
           onSave={(newCharacter) => {
             charactersManager.actions.upsert(newCharacter);
           }}

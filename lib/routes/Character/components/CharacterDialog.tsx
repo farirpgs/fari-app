@@ -132,26 +132,33 @@ export const CharacterDialog: React.FC<{
           maxWidth="md"
           scroll="paper"
           onClose={onClose}
-          fullScreen
           TransitionComponent={Transition}
         >
-          <DialogTitle>{renderName()}</DialogTitle>
+          <DialogTitle className={css({ padding: "0" })}>
+            <Container maxWidth="md">
+              <Box className={sheetContentStyle}>{renderName()}</Box>
+            </Container>
+          </DialogTitle>
           <DialogContent className={css({ padding: "0" })} dividers>
-            {renderContent()}
+            <Container maxWidth="md">
+              <Box className={sheetContentStyle}>{renderContent()}</Box>
+            </Container>
           </DialogContent>
-          <Box className={sheetContentStyle}>{renderActions()}</Box>
+          <DialogActions className={css({ padding: "0" })}>
+            <Container maxWidth="md">
+              <Box className={sheetContentStyle}>{renderActions()}</Box>
+            </Container>
+          </DialogActions>
         </Dialog>
       );
     }
 
     return (
-      <>
-        <Container maxWidth="md">
-          <Box className={sheetContentStyle}>{renderActions()}</Box>
-          <Box className={sheetContentStyle}>{renderName()}</Box>
-          <Box className={sheetContentStyle}>{renderContent()}</Box>
-        </Container>
-      </>
+      <Container maxWidth="md">
+        <Box className={sheetContentStyle}>{renderActions()}</Box>
+        <Box className={sheetContentStyle}>{renderName()}</Box>
+        <Box className={sheetContentStyle}>{renderContent()}</Box>
+      </Container>
     );
   }
 
@@ -189,38 +196,35 @@ export const CharacterDialog: React.FC<{
     if (props.readonly || !props.onSave) {
       return null;
     }
+
     return (
-      <DialogActions className={css({ padding: "0" })}>
-        <Grid container wrap="nowrap" spacing={2} justify="space-between">
-          {!props.readonly && (
-            <Grid item>
-              <Button
-                color="primary"
-                variant={advanced ? "contained" : "outlined"}
-                type="submit"
-                startIcon={<CreateIcon />}
-                onClick={onAdvanced}
-              >
-                {t("character-dialog.advanced")}
-              </Button>
-            </Grid>
-          )}
-          {props.onSave && (
-            <Grid item>
-              <Button
-                color="primary"
-                variant={
-                  characterManager.state.dirty ? "contained" : "outlined"
-                }
-                type="submit"
-                onClick={onSave}
-              >
-                {t("character-dialog.save")}
-              </Button>
-            </Grid>
-          )}
-        </Grid>
-      </DialogActions>
+      <Grid container wrap="nowrap" spacing={2} justify="space-between">
+        {!props.readonly && (
+          <Grid item>
+            <Button
+              color="primary"
+              variant={advanced ? "contained" : "outlined"}
+              type="submit"
+              startIcon={<CreateIcon />}
+              onClick={onAdvanced}
+            >
+              {t("character-dialog.advanced")}
+            </Button>
+          </Grid>
+        )}
+        {props.onSave && (
+          <Grid item>
+            <Button
+              color="primary"
+              variant={characterManager.state.dirty ? "contained" : "outlined"}
+              type="submit"
+              onClick={onSave}
+            >
+              {t("character-dialog.save")}
+            </Button>
+          </Grid>
+        )}
+      </Grid>
     );
   }
 
@@ -549,7 +553,7 @@ export const CharacterDialog: React.FC<{
                   wrap="nowrap"
                   spacing={2}
                 >
-                  <Grid item className={css({ flex: "1 0 auto" })}>
+                  <Grid item className={css({ flex: "1 1 auto" })}>
                     <FateLabel display="inline">
                       <ContentEditable
                         readonly={!advanced}

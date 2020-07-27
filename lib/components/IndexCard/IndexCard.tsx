@@ -334,41 +334,7 @@ export const IndexCard: React.FC<{
       >
         <Box p=".5rem 1rem">
           {renderTracks()}
-          {/* {aspect.tracks.map((track, trackIndex) => {
-            return (
-              <Box key={trackIndex}>
-                {track.value.length > 0 && (
-                  <InputLabel shrink>
-                    <ContentEditable
-                      value={track.name}
-                      readonly={props.readonly}
-                      onChange={(newTrackName) => {
-                        props.onSetAspectTrackName(trackIndex, newTrackName);
-                      }}
-                    />
-                  </InputLabel>
-                )}
-                <Grid container justify="flex-start">
-                  {track.value.map((value, boxIndex) => {
-                    return (
-                      <Grid item key={boxIndex} xs={2}>
-                        <Checkbox
-                          checked={value.checked}
-                          onChange={(event) => {
-                            if (props.readonly) {
-                              return;
-                            }
-                            props.onToggleAspectTrackBox(trackIndex, boxIndex);
-                          }}
-                          color="default"
-                        />
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </Box>
-            );
-          })} */}
+
           <Box>
             <Grid container justify="center">
               {aspect.consequences.map((value, consequenceIndex) => {
@@ -410,8 +376,8 @@ export const IndexCard: React.FC<{
         {aspect.tracks.map((stressTrack, trackIndex) => {
           return (
             <Box pb=".5rem" key={trackIndex}>
-              <Grid container justify="space-between" wrap="nowrap" spacing={2}>
-                <Grid item className={css({ flex: "1 0 auto" })}>
+              <Grid container justify="space-between" wrap="nowrap" spacing={1}>
+                <Grid item className={css({ flex: "1 1 auto" })}>
                   <FateLabel display="inline">
                     <ContentEditable
                       value={stressTrack.name}
