@@ -157,12 +157,14 @@ export function useScene(props: IProps) {
       })
     );
     setTimeout(() => {
-      const indexCard: HTMLSpanElement | null = document.querySelector(
-        `#index-card-${id}`
-      );
-      if (indexCard) {
-        indexCard.focus();
-      }
+      try {
+        const indexCard: HTMLSpanElement | null = document.querySelector(
+          `#index-card-${id}`
+        );
+        if (indexCard) {
+          indexCard.focus();
+        }
+      } catch (error) {}
     });
   }
 

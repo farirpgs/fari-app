@@ -38,14 +38,14 @@ describe("useCharacter", () => {
       act(() => {
         result.current.actions.setName(newName);
       });
-      expect(result.current.state.character.name).toEqual(newName);
+      expect(result.current.state.character!.name).toEqual(newName);
 
       // GM SYNC SCENE WITH PLAYER WITH OUTDATED CHARACTER
       rerender({
         character: { name: "Luke", lastUpdated: 4 } as ICharacter,
       });
       // THEN
-      expect(result.current.state.character.name).toEqual("Luke Skywalker");
+      expect(result.current.state.character!.name).toEqual("Luke Skywalker");
     });
     it("should update state if character in props lastTimeUpdated is older than current state but id is different", async () => {
       // GIVEN
@@ -67,7 +67,7 @@ describe("useCharacter", () => {
       act(() => {
         result.current.actions.setName(newName);
       });
-      expect(result.current.state.character.name).toEqual(newName);
+      expect(result.current.state.character!.name).toEqual(newName);
 
       rerender({
         character: {
@@ -77,7 +77,7 @@ describe("useCharacter", () => {
         } as ICharacter,
       });
       // THEN
-      expect(result.current.state.character.name).toEqual("Chewie");
+      expect(result.current.state.character!.name).toEqual("Chewie");
     });
     it("should not update state if character in props lastUpdatedTime is same as current state", async () => {
       // GIVEN
@@ -99,14 +99,14 @@ describe("useCharacter", () => {
       act(() => {
         result.current.actions.setName(newName);
       });
-      expect(result.current.state.character.name).toEqual(newName);
+      expect(result.current.state.character!.name).toEqual(newName);
 
       // GM SYNC SCENE WITH PLAYER WITH OUTDATED CHARACTER
       rerender({
         character: { name: "Luke", lastUpdated: 5 } as ICharacter,
       });
       // THEN
-      expect(result.current.state.character.name).toEqual("Luke Skywalker");
+      expect(result.current.state.character!.name).toEqual("Luke Skywalker");
     });
     it("should update state if character in props is newer than current state", async () => {
       // GIVEN
@@ -128,14 +128,14 @@ describe("useCharacter", () => {
       act(() => {
         result.current.actions.setName(newName);
       });
-      expect(result.current.state.character.name).toEqual(newName);
+      expect(result.current.state.character!.name).toEqual(newName);
 
       // GM SYNC SCENE WITH PLAYER WITH NEW VERSION CHARACTER
       rerender({
         character: { name: "Leia", lastUpdated: 6 } as ICharacter,
       });
       // THEN
-      expect(result.current.state.character.name).toEqual("Leia");
+      expect(result.current.state.character!.name).toEqual("Leia");
     });
   });
 });

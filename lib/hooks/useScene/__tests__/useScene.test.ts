@@ -205,10 +205,7 @@ fdescribe("useScene", () => {
         color: "white",
         consequences: [],
         content: "<br/>",
-        countdown: [],
-        freeInvokes: [],
-        mentalStress: [],
-        physicalStress: [],
+        tracks: [],
         playedDuringTurn: false,
         title: "",
         type: 0,
@@ -234,56 +231,77 @@ fdescribe("useScene", () => {
       );
       act(() => {
         // WHEN adding free invoke
-        result.current.actions.addAspectFreeInvoke(firstAspectId);
+        result.current.actions.addAspectTrack(firstAspectId, "Free Invokes");
       });
       // THEN
       expect(
-        result.current.state.scene.aspects[firstAspectId].freeInvokes
-      ).toEqual([false]);
+        result.current.state.scene.aspects[firstAspectId].tracks[0]
+      ).toEqual({
+        name: "Free Invokes",
+        value: [{ checked: false, label: "1" }],
+      });
       act(() => {
-        // WHEN updating free invoke
-        result.current.actions.updateAspectFreeInvoke(firstAspectId, 0, true);
+        // WHEN adding a track box
+        result.current.actions.addAspectTrackBox(firstAspectId, 0);
       });
       // THEN
       expect(
-        result.current.state.scene.aspects[firstAspectId].freeInvokes
-      ).toEqual([true]);
+        result.current.state.scene.aspects[firstAspectId].tracks[0]
+      ).toEqual({
+        name: "Free Invokes",
+        value: [
+          { checked: false, label: "1" },
+          { checked: false, label: "2" },
+        ],
+      });
       act(() => {
-        // WHEN adding physical stress
-        result.current.actions.addAspectPhysicalStress(firstAspectId);
+        // WHEN toggling a track box
+        result.current.actions.toggleAspectTrackBox(firstAspectId, 0, 1);
       });
       // THEN
       expect(
-        result.current.state.scene.aspects[firstAspectId].physicalStress
-      ).toEqual([false]);
+        result.current.state.scene.aspects[firstAspectId].tracks[0]
+      ).toEqual({
+        name: "Free Invokes",
+        value: [
+          { checked: false, label: "1" },
+          { checked: true, label: "2" },
+        ],
+      });
       act(() => {
-        // WHEN updating physical stress
-        result.current.actions.updateAspectPhysicalStress(
+        // WHEN removing a track box
+        result.current.actions.removeAspectTrackBox(firstAspectId, 0);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].tracks[0]
+      ).toEqual({
+        name: "Free Invokes",
+        value: [{ checked: false, label: "1" }],
+      });
+      act(() => {
+        // WHEN renaming a track
+        result.current.actions.updateAspectTrackName(
           firstAspectId,
           0,
-          true
+          "Countdown"
         );
       });
       // THEN
       expect(
-        result.current.state.scene.aspects[firstAspectId].physicalStress
-      ).toEqual([true]);
+        result.current.state.scene.aspects[firstAspectId].tracks[0]
+      ).toEqual({
+        name: "Countdown",
+        value: [{ checked: false, label: "1" }],
+      });
       act(() => {
-        // WHEN adding mental stress
-        result.current.actions.addAspectMentalStress(firstAspectId);
+        // WHEN removing a track
+        result.current.actions.removeAspectTrack(firstAspectId, 0);
       });
       // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].mentalStress
-      ).toEqual([false]);
-      act(() => {
-        // WHEN updating mental stress
-        result.current.actions.updateAspectMentalStress(firstAspectId, 0, true);
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].mentalStress
-      ).toEqual([true]);
+      expect(result.current.state.scene.aspects[firstAspectId].tracks).toEqual(
+        []
+      );
       act(() => {
         // WHEN adding consequence
         result.current.actions.addAspectConsequence(firstAspectId);
@@ -331,11 +349,8 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
-        countdown: [],
         content: "<br/>",
-        freeInvokes: [],
-        mentalStress: [],
-        physicalStress: [],
+        tracks: [],
         playedDuringTurn: false,
         title: "",
         type: AspectType.Aspect,
