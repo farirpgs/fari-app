@@ -6,6 +6,7 @@ module.exports = {
       isolatedModules: true,
     },
   },
+  globalSetup: "./jest-setup.js",
   reporters: ["default", "jest-junit"],
   coverageReporters: ["text", "cobertura"],
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],

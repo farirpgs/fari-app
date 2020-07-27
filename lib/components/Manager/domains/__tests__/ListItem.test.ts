@@ -34,7 +34,7 @@ describe("istItem", () => {
       // WHEN
       const result = listItem.formatDate(timestamp);
       // THEN
-      expect(result).toEqual("Friday, July 17, 2020, 3:00 PM");
+      expect(result).toEqual("Friday, July 17, 2020, 7:00 PM");
     });
   });
   describe("getColor", () => {
