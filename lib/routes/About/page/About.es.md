@@ -1,40 +1,39 @@
 # Fari
 
-Fari is a <b>Fate RPG Companion</b> Application created by René-Pier Deshaies-Gélinas available on [Github](https://github.com/fariapp/fari) released under the [AGPL-v3 License](https://choosealicense.com/licenses/agpl-3.0/) .
+Fari es una aplicación <b>Asistente para Fate RPG</b> Creada por René-Pier Deshaies-Gélinas, disponible en [Github](https://github.com/fariapp/fari) y liberada bajo [Licencia AGPL-v3](https://choosealicense.com/licenses/agpl-3.0/) .
 
 ## FAQ
 
-### Es la aplicación Open Source ?
+### ¿ Es una aplicación Open Source ?
 
-It is! You can contribute to the project on [Github](https://github.com/fariapp/fari).
+Si, lo es. Puedes contribuir al proyecto en [Github](https://github.com/fariapp/fari).
 
-### Is there a changelog ?
+### ¿ Existe un changelog ?
 
-Yes, [here you go](/changelog).
+Si, [aquí lo tienes](/changelog).
 
-### Is the Dice Roller fair ?
+### ¿ El Lanzador de Dados es justo ?
 
-It is! The fairness of the Dice Roller is validated every time a code modification is done using automated tests that execute 50,000 dice rolls.
+¡Por supuesto! El Lanzador de Dados se valida cada vez que se introduce una modificación en el código, usando pruebas automatizadas que ejecutan 50.000 tiradas, para asegurar que es justo.
 
-### Where is my data stored ?
+### ¿Donde se almacenan mis datos ?
 
-All your data is saved locally on the device you are accessing Fari from.
-Fari doesn't use any cloud databases but we do use Google Analytis.
+Toda la información se guarda localmente en el dispositivo desde el que accedes a Fari
+Fari no usa ninguna base de datos en la nube, pero si usamos Google Analytics
 
-Your data can also be shared with others using peer to peer connections when you start or join a game.
+La información también se puede compartir con otros a través de conexiones peer to peer cuando se crean o se unen a partidas.
+La conexión peer to peer finaliza tan pronto como se cierre la pestaña del navegador.
 
-The peer to peer connection is closed if you close your browser's tab.
+### Esta app mola, ¿Qué puedo hacer para ayudar?
 
-### This app is pretty cool, what can I do to help ?
+Puedes [invitarme a un café](https://ko-fi.com/rpdeshaies) o ayudarme a construir Fari contribuyendo en [Github](https://github.com/fariapp/fari)
 
-You can [buy me a coffee](https://ko-fi.com/rpdeshaies) or help me build Fari by contributing on [Github](https://github.com/fariapp/fari)
+Trabajo en esto en mi tiempo libre y cualquier donación es enormemente apreciada. (emoji)
 
-I work on this in my free time and any donation is highly appreciated 😊
+### ¿ Algo más ?
 
-### Anything else ?
+¡Claro! Fari no podría existir sin la ayuda de algunas maravillosas librerías y frameworks
 
-Sure ! Fari would not exist without the help of some awesome libraries and framework.
+Puedes donar para ayudarles a ellos también:
 
-You can donate to help them too:
-
-- [PeerJS](https://opencollective.com/peer) - What helps you play with your friend using peer to peer connections.
+- [PeerJS](https://opencollective.com/peer) - Que te ayuda a jugar con tus amigos a través de conexiones peer to peer.
