@@ -141,7 +141,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function setName(name: string) {
+  function updateName(name: string) {
     setScene(
       produce((draft: IScene) => {
         draft.name = name;
@@ -221,7 +221,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function setAspectTrackName(
+  function updateAspectTrackName(
     id: string,
     index: number,
     newStressTrackName: string
@@ -268,7 +268,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function setStressBoxLabel(
+  function updateStressBoxLabel(
     id: string,
     index: number,
     boxIndex: number,
@@ -485,7 +485,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function setDrawAreaLines(lines: ILines) {
+  function updateDrawAreaLines(lines: ILines) {
     setScene(
       produce((draft: IScene) => {
         draft.drawAreaLines = lines;
@@ -494,12 +494,15 @@ export function useScene(props: IProps) {
   }
 
   return {
-    state: { scene, dirty },
+    state: {
+      scene,
+      dirty,
+    },
     actions: {
       resetScene,
       newScene,
       safeSetScene,
-      setName,
+      updateName,
       addAspect,
       removeAspect,
       resetAspect,
@@ -507,11 +510,11 @@ export function useScene(props: IProps) {
       updateAspectContent,
       addAspectTrack,
       removeAspectTrack,
-      setAspectTrackName,
+      updateAspectTrackName,
       addAspectTrackBox,
       removeAspectTrackBox,
       toggleAspectTrackBox,
-      setStressBoxLabel,
+      updateStressBoxLabel,
       removeStressTrack,
       addAspectConsequence,
       updateAspectConsequence,
@@ -529,7 +532,7 @@ export function useScene(props: IProps) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
-      setDrawAreaLines,
+      updateDrawAreaLines,
     },
   };
 }

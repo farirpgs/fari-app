@@ -62,7 +62,6 @@ import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea, IDrawAreaHandles } from "../DrawArea/DrawArea";
 import { IndexCard } from "../IndexCard/IndexCard";
-import { IndexCardColorTypes } from "../IndexCard/IndexCardColor";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { Page } from "../Page/Page";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
@@ -160,7 +159,11 @@ export const Scene: React.FC<IProps> = (props) => {
     <Page gameId={props.idFromParams}>
       <Prompt
         when={props.mode !== SceneMode.Manage}
-        message={t("play-route.leave-prompt")}
+        message={t("manager.leave-without-saving")}
+      />
+      <Prompt
+        when={props.mode === SceneMode.Manage && sceneManager.state.dirty}
+        message={t("manager.leave-without-saving")}
       />
       <Snackbar
         open={savedSnack}
@@ -446,7 +449,7 @@ export const Scene: React.FC<IProps> = (props) => {
               lines={sceneManager.state.scene.drawAreaLines}
               readonly={!isGM}
               onChange={(lines) => {
-                sceneManager.actions.setDrawAreaLines(lines);
+                sceneManager.actions.updateDrawAreaLines(lines);
               }}
             />
           </Box>
@@ -551,86 +554,9 @@ export const Scene: React.FC<IProps> = (props) => {
                   <IndexCard
                     key={aspectId}
                     id={`index-card-${aspectId}`}
-                    aspect={sceneManager.state.scene.aspects[aspectId]}
+                    aspectId={aspectId}
                     readonly={!isGM}
-                    onRemove={() => {
-                      sceneManager.actions.removeAspect(aspectId);
-                    }}
-                    onReset={() => {
-                      sceneManager.actions.resetAspect(aspectId);
-                    }}
-                    onTitleChange={(value) => {
-                      sceneManager.actions.updateAspectTitle(aspectId, value);
-                    }}
-                    onContentChange={(value) => {
-                      sceneManager.actions.updateAspectContent(aspectId, value);
-                    }}
-                    onAddAspectTrack={(name: string) => {
-                      sceneManager.actions.addAspectTrack(aspectId, name);
-                    }}
-                    onRemoveAspectTrack={(index) => {
-                      sceneManager.actions.removeAspectTrack(aspectId, index);
-                    }}
-                    onSetAspectTrackName={(
-                      index: number,
-                      newStressTrackName: string
-                    ) => {
-                      sceneManager.actions.setAspectTrackName(
-                        aspectId,
-                        index,
-                        newStressTrackName
-                      );
-                    }}
-                    onAddAspectTrackBox={(index: number) => {
-                      sceneManager.actions.addAspectTrackBox(aspectId, index);
-                    }}
-                    onRemoveAspectTrackBox={(index: number) => {
-                      sceneManager.actions.removeAspectTrackBox(
-                        aspectId,
-                        index
-                      );
-                    }}
-                    onToggleAspectTrackBox={(
-                      index: number,
-                      boxIndex: number
-                    ) => {
-                      sceneManager.actions.toggleAspectTrackBox(
-                        aspectId,
-                        index,
-                        boxIndex
-                      );
-                    }}
-                    onSetStressBoxLabel={(
-                      index: number,
-                      boxIndex: number,
-                      label: string
-                    ) => {
-                      sceneManager.actions.setStressBoxLabel(
-                        aspectId,
-                        index,
-                        boxIndex,
-                        label
-                      );
-                    }}
-                    onConsequenceChange={(index, value) => {
-                      sceneManager.actions.updateAspectConsequence(
-                        aspectId,
-                        index,
-                        value
-                      );
-                    }}
-                    onAddConsequence={() => {
-                      sceneManager.actions.addAspectConsequence(aspectId);
-                    }}
-                    onUpdateAspectColor={(color: IndexCardColorTypes) => {
-                      sceneManager.actions.updateAspectColor(aspectId, color);
-                    }}
-                    onPlayedInTurnOrderChange={(playedDuringTurn) => {
-                      sceneManager.actions.updateAspectPlayerDuringTurn(
-                        aspectId,
-                        playedDuringTurn
-                      );
-                    }}
+                    sceneManager={sceneManager}
                   />
                 </Box>
               );
@@ -684,7 +610,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 value={sceneManager.state.scene.name}
                 readonly={!isGM}
                 onChange={(value) => {
-                  sceneManager.actions.setName(value);
+                  sceneManager.actions.updateName(value);
                 }}
               />
             </Typography>
@@ -848,10 +774,14 @@ export const Scene: React.FC<IProps> = (props) => {
                 <Button
                   onClick={() => {
                     if (props.shareLink && $shareLinkInputRef.current) {
-                      $shareLinkInputRef.current.select();
-                      document.execCommand("copy");
-                      navigator.clipboard.writeText(props.shareLink);
-                      setShareLinkToolTip({ open: true });
+                      try {
+                        $shareLinkInputRef.current.select();
+                        document.execCommand("copy");
+                        navigator.clipboard.writeText(props.shareLink);
+                        setShareLinkToolTip({ open: true });
+                      } catch (error) {
+                        window.open(props.shareLink, "_blank");
+                      }
                     }
                   }}
                   variant="outlined"

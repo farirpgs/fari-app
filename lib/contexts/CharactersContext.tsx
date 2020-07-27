@@ -98,7 +98,7 @@ export function useCharacters() {
         });
       });
     }
-    select(character)
+    select(character);
   }
 
   function remove(id: string | undefined) {

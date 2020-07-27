@@ -112,7 +112,7 @@ fdescribe("useScene", () => {
 
       // WHEN name is different
       act(() => {
-        result.current.actions.setName("New Name from input");
+        result.current.actions.updateName("New Name from input");
       });
       // THEN dirty is true
       expect(result.current.state.dirty).toEqual(true);
@@ -169,7 +169,7 @@ fdescribe("useScene", () => {
         });
       });
       act(() => {
-        result.current.actions.setName("New Name");
+        result.current.actions.updateName("New Name");
       });
       // THEN
       expect(result.current.state.scene.name).toEqual("New Name");

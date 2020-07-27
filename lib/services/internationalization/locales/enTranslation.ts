@@ -128,6 +128,8 @@ export const enTranslation = {
   "manager.deleted": `Deleted`,
   "manager.new": `New`,
   "manager.no-items": `There's nothing here yet`,
+  "manager.leave-without-saving": `Are you sure you want to leave without saving ?`,
+
   // Aspects
   "High Concept": `High Concept`,
   "Trouble": `Trouble`,

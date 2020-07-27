@@ -25,6 +25,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { Alert } from "@material-ui/lab";
 import { css } from "emotion";
 import React, { useState } from "react";
+import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { ICharacter } from "../../../contexts/CharactersContext";
@@ -98,6 +99,10 @@ export const CharacterDialog: React.FC<{
 
   return (
     <>
+      <Prompt
+        when={characterManager.state.dirty}
+        message={t("manager.leave-without-saving")}
+      />
       <Snackbar
         open={savedSnack}
         autoHideDuration={6000}
