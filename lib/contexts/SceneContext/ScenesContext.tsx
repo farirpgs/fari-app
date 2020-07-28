@@ -19,7 +19,8 @@ export enum ScenesManagerMode {
   Close,
 }
 
-export function useScenes() {
+export function useScenes(props?: { localStorage: Storage }) {
+  const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-scenes";
   const [mode, setMode] = useState(ScenesManagerMode.Close);
   const [selectedScene, setSelectedScene] = useState<ISavableScene | undefined>(
@@ -36,7 +37,9 @@ export function useScenes() {
         return migrated;
       }
     } catch (error) {
-      console.error(error);
+      if (!process.env.IS_JEST) {
+        console.error(error);
+      }
     }
     return [];
   });
@@ -99,6 +102,7 @@ export function useScenes() {
       });
     }
     select(newScene);
+    return newScene;
   }
 
   function remove(id: string | undefined) {

@@ -18,7 +18,8 @@ export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
 >(undefined as any);
 
-export function useCharacters() {
+export function useCharacters(props?: { localStorage: Storage }) {
+  const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-characters";
 
   const [mode, setMode] = useState(CharactersManagerMode.Close);
@@ -33,7 +34,9 @@ export function useCharacters() {
         return migrated;
       }
     } catch (error) {
-      console.error(error);
+      if (!process.env.IS_JEST) {
+        console.error(error);
+      }
     }
     return [];
   });
@@ -99,6 +102,7 @@ export function useCharacters() {
       });
     }
     select(character);
+    return character;
   }
 
   function remove(id: string | undefined) {
