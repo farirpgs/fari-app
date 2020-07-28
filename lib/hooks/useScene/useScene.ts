@@ -168,55 +168,55 @@ export function useScene(props: IProps) {
     });
   }
 
-  function removeAspect(id: string) {
+  function removeAspect(aspectId: string) {
     setScene(
       produce((draft: IScene) => {
-        delete draft.aspects[id];
+        delete draft.aspects[aspectId];
       })
     );
   }
 
-  function resetAspect(id: string) {
+  function resetAspect(aspectId: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id] = defaultAspects[draft.aspects[id].type];
+        draft.aspects[aspectId] = defaultAspects[draft.aspects[aspectId].type];
       })
     );
   }
 
-  function updateAspectTitle(id: string, title: string) {
+  function updateAspectTitle(aspectId: string, title: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].title = title;
+        draft.aspects[aspectId].title = title;
       })
     );
   }
 
-  function updateAspectContent(id: string, content: string) {
+  function updateAspectContent(aspectId: string, content: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].content = content;
+        draft.aspects[aspectId].content = content;
       })
     );
   }
 
-  function addAspectTrack(id: string, name: string) {
+  function addAspectTrack(aspectId: string, trackName: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].tracks.push({
-          name: name,
+        draft.aspects[aspectId].tracks.push({
+          name: trackName,
           value: [{ checked: false, label: "1" }],
         });
       })
     );
   }
 
-  function removeAspectTrack(id: string, indexToRemove: number) {
+  function removeAspectTrack(aspectId: string, trackIndex: number) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].tracks = draft.aspects[id].tracks.filter(
+        draft.aspects[aspectId].tracks = draft.aspects[aspectId].tracks.filter(
           (track, index) => {
-            return index !== indexToRemove;
+            return index !== trackIndex;
           }
         );
       })
@@ -224,22 +224,23 @@ export function useScene(props: IProps) {
   }
 
   function updateAspectTrackName(
-    id: string,
-    index: number,
-    newStressTrackName: string
+    aspectId: string,
+    trackIndex: number,
+    trackName: string
   ) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].tracks[index].name = newStressTrackName;
+        draft.aspects[aspectId].tracks[trackIndex].name = trackName;
       })
     );
   }
 
-  function addAspectTrackBox(id: string, index: number) {
+  function addAspectTrackBox(aspectId: string, trackIndex: number) {
     setScene(
       produce((draft: IScene) => {
-        const numberOfBoxes = draft.aspects[id].tracks[index].value.length;
-        draft.aspects[id].tracks[index].value.push({
+        const numberOfBoxes =
+          draft.aspects[aspectId].tracks[trackIndex].value.length;
+        draft.aspects[aspectId].tracks[trackIndex].value.push({
           checked: false,
           label: `${numberOfBoxes + 1}`,
         });
@@ -260,61 +261,97 @@ export function useScene(props: IProps) {
     );
   }
 
-  function toggleAspectTrackBox(id: string, index: number, boxIndex: number) {
+  function toggleAspectTrackBox(
+    aspectId: string,
+    trackIndex: number,
+    boxIndex: number
+  ) {
     setScene(
       produce((draft: IScene) => {
         const oldValue =
-          draft.aspects[id].tracks[index].value[boxIndex].checked;
-        draft.aspects[id].tracks[index].value[boxIndex].checked = !oldValue;
+          draft.aspects[aspectId].tracks[trackIndex].value[boxIndex].checked;
+        draft.aspects[aspectId].tracks[trackIndex].value[
+          boxIndex
+        ].checked = !oldValue;
       })
     );
   }
 
   function updateStressBoxLabel(
-    id: string,
-    index: number,
+    aspectId: string,
+    trackIndex: number,
     boxIndex: number,
-    label: string
+    boxLabel: string
   ) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].tracks[index].value[boxIndex].label = label;
+        draft.aspects[aspectId].tracks[trackIndex].value[
+          boxIndex
+        ].label = boxLabel;
       })
     );
   }
 
-  function removeStressTrack(id: string, indexToRemove: number) {
+  function removeStressTrack(aspectId: string, trackIndex: number) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].tracks = draft.aspects[id].tracks.filter(
+        draft.aspects[aspectId].tracks = draft.aspects[aspectId].tracks.filter(
           (track, index) => {
-            return index !== indexToRemove;
+            return index !== trackIndex;
           }
         );
       })
     );
   }
 
-  function updateAspectColor(id: string, color: IndexCardColorTypes) {
+  function updateAspectColor(aspectId: string, color: IndexCardColorTypes) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].color = color;
+        draft.aspects[aspectId].color = color;
       })
     );
   }
 
-  function addAspectConsequence(id: string) {
+  function addAspectConsequence(aspectId: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].consequences.push("");
+        draft.aspects[aspectId].consequences.push({ name: "", value: "" });
       })
     );
   }
 
-  function updateAspectConsequence(id: string, index: number, value: string) {
+  function updateAspectConsequenceName(
+    aspectId: string,
+    consequenceIndex: number,
+    name: string
+  ) {
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id].consequences[index] = value;
+        draft.aspects[aspectId].consequences[consequenceIndex].name = name;
+      })
+    );
+  }
+
+  function updateAspectConsequenceValue(
+    aspectId: string,
+    consequenceIndex: number,
+    value: string
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].consequences[consequenceIndex].value = value;
+      })
+    );
+  }
+
+  function removeAspectConsequence(aspectId: string, consequenceIndex: number) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].consequences = draft.aspects[
+          aspectId
+        ].consequences.filter((track, index) => {
+          return index !== consequenceIndex;
+        });
       })
     );
   }
@@ -519,7 +556,9 @@ export function useScene(props: IProps) {
       updateStressBoxLabel,
       removeStressTrack,
       addAspectConsequence,
-      updateAspectConsequence,
+      updateAspectConsequenceName,
+      updateAspectConsequenceValue,
+      removeAspectConsequence,
       updateAspectPlayerDuringTurn,
       updateAspectColor,
       updatePlayers,

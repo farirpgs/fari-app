@@ -7,6 +7,10 @@ export const FateLabel: React.FC<{
   className?: string;
   variant?: Variant;
   display?: "initial" | "block" | "inline";
+  /**
+   * @default "medium"
+   */
+  size?: "medium" | "small";
 }> = (props) => {
   return (
     <Typography
@@ -15,6 +19,7 @@ export const FateLabel: React.FC<{
         css({
           textTransform: "uppercase",
           fontWeight: 900,
+          fontSize: props.size === "small" ? ".8rem" : "1rem",
         }),
         props.className
       )}

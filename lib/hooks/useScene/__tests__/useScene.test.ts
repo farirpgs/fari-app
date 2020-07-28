@@ -312,7 +312,7 @@ fdescribe("useScene", () => {
       ).toEqual([""]);
       act(() => {
         // WHEN updating consequence
-        result.current.actions.updateAspectConsequence(
+        result.current.actions.updateAspectConsequenceValue(
           firstAspectId,
           0,
           "new consequence"

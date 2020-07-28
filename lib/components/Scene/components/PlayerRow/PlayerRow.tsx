@@ -164,7 +164,7 @@ export const PlayerRow: React.FC<{
               fontWeight: props.isMe ? "bold" : "normal",
             })}
           >
-            {props.isMe ? `✨ ${name}` : name}
+            {name}
           </Typography>
         </TableCell>
         <TableCell className={playerInfoCellStyle} align="center">
@@ -288,7 +288,7 @@ export const PlayerRow: React.FC<{
                     }}
                   >
                     <PersonIcon
-                      className={css({ width: "1.2rem", height: "auto" })}
+                      className={css({ width: "1rem", height: "1rem" })}
                     />
                   </IconButton>
                 </span>
@@ -342,7 +342,7 @@ export const PlayerRow: React.FC<{
                     }}
                   >
                     <RemoveCircleOutlineOutlinedIcon
-                      className={css({ width: "1.2rem", height: "auto" })}
+                      className={css({ width: "1rem", height: "1rem" })}
                     />
                   </IconButton>
                 </span>
@@ -359,7 +359,7 @@ export const PlayerRow: React.FC<{
                   }}
                 >
                   <AddCircleOutlineOutlinedIcon
-                    className={css({ width: "1.2rem", height: "auto" })}
+                    className={css({ width: "1rem", height: "1rem" })}
                   />
                 </IconButton>
               </Tooltip>
@@ -376,7 +376,7 @@ export const PlayerRow: React.FC<{
                   >
                     <HighlightOffIcon
                       color="error"
-                      className={css({ width: "1.2rem", height: "auto" })}
+                      className={css({ width: "1rem", height: "1rem" })}
                     />
                   </IconButton>
                 </Tooltip>

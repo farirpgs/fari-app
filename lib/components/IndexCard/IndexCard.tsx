@@ -4,7 +4,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  InputLabel,
   Menu,
   MenuItem,
   Paper,
@@ -177,7 +176,7 @@ export const IndexCard: React.FC<{
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(
             props.aspectId,
-            "Free Invokes"
+            t("index-card.free-invokes")
           );
         }}
       >
@@ -188,7 +187,7 @@ export const IndexCard: React.FC<{
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(
             props.aspectId,
-            "Physical Stress"
+            t("index-card.physical-stress")
           );
         }}
       >
@@ -199,7 +198,7 @@ export const IndexCard: React.FC<{
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(
             props.aspectId,
-            "Mental Stress"
+            t("index-card.mental-stress")
           );
         }}
       >
@@ -283,10 +282,6 @@ export const IndexCard: React.FC<{
                       htmlColor={IndexCardColor[colorName].chip}
                     />
                   )}
-
-                  {/* <FiberManualRecordIcon
-                  
-                  ></FiberManualRecordIcon> */}
                 </IconButton>
               </Grid>
             );
@@ -335,36 +330,7 @@ export const IndexCard: React.FC<{
         <Box p=".5rem 1rem">
           {renderTracks()}
 
-          <Box>
-            <Grid container justify="center">
-              {aspect.consequences.map((value, consequenceIndex) => {
-                return (
-                  <Grid key={consequenceIndex} item xs={12}>
-                    <Box py=".5rem">
-                      <InputLabel shrink>
-                        {t("index-card.consequence")} (
-                        {(consequenceIndex + 1) * 2})
-                      </InputLabel>
-                      <TextField
-                        fullWidth
-                        value={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.sceneManager.actions.updateAspectConsequence(
-                            props.aspectId,
-                            consequenceIndex,
-                            event.target.value
-                          );
-                        }}
-                      />
-                    </Box>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
+          {renderConsequences()}
         </Box>
       </Box>
     );
@@ -378,7 +344,7 @@ export const IndexCard: React.FC<{
             <Box pb=".5rem" key={trackIndex}>
               <Grid container justify="space-between" wrap="nowrap" spacing={1}>
                 <Grid item className={css({ flex: "1 1 auto" })}>
-                  <FateLabel display="inline">
+                  <FateLabel display="inline" size="small">
                     <ContentEditable
                       value={stressTrack.name}
                       readonly={props.readonly}
@@ -403,7 +369,12 @@ export const IndexCard: React.FC<{
                         );
                       }}
                     >
-                      <RemoveCircleOutlineIcon />
+                      <RemoveCircleOutlineIcon
+                        className={css({
+                          width: "1rem",
+                          height: "1rem",
+                        })}
+                      />
                     </IconButton>
                   </Grid>
                 )}
@@ -418,7 +389,12 @@ export const IndexCard: React.FC<{
                         );
                       }}
                     >
-                      <AddCircleOutlineIcon />
+                      <AddCircleOutlineIcon
+                        className={css({
+                          width: "1rem",
+                          height: "1rem",
+                        })}
+                      />
                     </IconButton>
                   </Grid>
                 )}
@@ -433,7 +409,12 @@ export const IndexCard: React.FC<{
                         );
                       }}
                     >
-                      <RemoveIcon />
+                      <RemoveIcon
+                        className={css({
+                          width: "1rem",
+                          height: "1rem",
+                        })}
+                      />
                     </IconButton>
                   </Grid>
                 )}
@@ -466,7 +447,10 @@ export const IndexCard: React.FC<{
                         />
                       </Box>
                       <Box>
-                        <FateLabel className={css({ textAlign: "center" })}>
+                        <FateLabel
+                          className={css({ textAlign: "center" })}
+                          size="small"
+                        >
                           <ContentEditable
                             readonly={props.readonly}
                             value={stressBox.label}
@@ -488,6 +472,77 @@ export const IndexCard: React.FC<{
             </Box>
           );
         })}
+      </Box>
+    );
+  }
+
+  function renderConsequences() {
+    return (
+      <Box>
+        <Grid container justify="center">
+          {aspect.consequences.map((consequence, consequenceIndex) => {
+            const name =
+              consequence.name ||
+              `${t("index-card.consequence")}  (${(consequenceIndex + 1) * 2})`;
+            const value = consequence.value;
+
+            return (
+              <Grid key={consequenceIndex} item xs={12}>
+                <Box py=".5rem">
+                  <Grid container>
+                    <Grid item className={css({ flex: "1 1 auto" })}>
+                      <FateLabel size="small">
+                        <ContentEditable
+                          value={name}
+                          readonly={props.readonly}
+                          onChange={(newName) => {
+                            props.sceneManager.actions.updateAspectConsequenceName(
+                              props.aspectId,
+                              consequenceIndex,
+                              newName
+                            );
+                          }}
+                        />
+                      </FateLabel>
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        size="small"
+                        onClick={() => {
+                          props.sceneManager.actions.removeAspectConsequence(
+                            props.aspectId,
+                            consequenceIndex
+                          );
+                        }}
+                      >
+                        <RemoveIcon
+                          className={css({
+                            width: "1rem",
+                            height: "1rem",
+                          })}
+                        />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                  <TextField
+                    fullWidth
+                    value={value}
+                    onChange={(event) => {
+                      if (props.readonly) {
+                        return;
+                      }
+                      props.sceneManager.actions.updateAspectConsequenceValue(
+                        props.aspectId,
+                        consequenceIndex,
+                        event.target.value
+                      );
+                    }}
+                  />
+                </Box>
+              </Grid>
+            );
+          })}
+        </Grid>
       </Box>
     );
   }

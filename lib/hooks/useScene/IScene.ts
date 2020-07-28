@@ -20,7 +20,7 @@ export interface IAspect {
     name: string;
     value: Array<{ checked?: boolean; label: string }>;
   }>;
-  consequences: Array<string>;
+  consequences: Array<{ name: string; value: string }>;
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
   type: AspectType;
