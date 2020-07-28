@@ -269,6 +269,25 @@ fdescribe("useScene", () => {
         ],
       });
       act(() => {
+        // WHEN setting a box label
+        result.current.actions.updateStressBoxLabel(
+          firstAspectId,
+          0,
+          1,
+          "my custom label"
+        );
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].tracks[0]
+      ).toEqual({
+        name: "Free Invokes",
+        value: [
+          { checked: false, label: "1" },
+          { checked: true, label: "my custom label" },
+        ],
+      });
+      act(() => {
         // WHEN removing a track box
         result.current.actions.removeAspectTrackBox(firstAspectId, 0);
       });
@@ -309,7 +328,7 @@ fdescribe("useScene", () => {
       // THEN
       expect(
         result.current.state.scene.aspects[firstAspectId].consequences
-      ).toEqual([""]);
+      ).toEqual([{ name: "", value: "" }]);
       act(() => {
         // WHEN updating consequence
         result.current.actions.updateAspectConsequenceValue(
@@ -321,7 +340,37 @@ fdescribe("useScene", () => {
       // THEN
       expect(
         result.current.state.scene.aspects[firstAspectId].consequences
-      ).toEqual(["new consequence"]);
+      ).toEqual([
+        {
+          name: "",
+          value: "new consequence",
+        },
+      ]);
+      act(() => {
+        // WHEN updating consequence name
+        result.current.actions.updateAspectConsequenceName(
+          firstAspectId,
+          0,
+          "Physical Stress"
+        );
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].consequences
+      ).toEqual([
+        {
+          name: "Physical Stress",
+          value: "new consequence",
+        },
+      ]);
+      act(() => {
+        // WHEN removing consequence
+        result.current.actions.removeAspectConsequence(firstAspectId, 0);
+      });
+      // THEN
+      expect(
+        result.current.state.scene.aspects[firstAspectId].consequences
+      ).toEqual([]);
       act(() => {
         // WHEN updating initiative
         result.current.actions.updateAspectPlayerDuringTurn(
@@ -329,10 +378,18 @@ fdescribe("useScene", () => {
           true
         );
       });
+
       // THEN
       expect(
         result.current.state.scene.aspects[firstAspectId].playedDuringTurn
       ).toEqual(true);
+      act(() => {
+        // WHEN reseting initiative
+        result.current.actions.resetInitiative();
+      });
+      expect(
+        result.current.state.scene.aspects[firstAspectId].playedDuringTurn
+      ).toEqual(false);
       act(() => {
         // WHEN updating color
         result.current.actions.updateAspectColor(firstAspectId, "blue");
@@ -364,7 +421,7 @@ fdescribe("useScene", () => {
     });
   });
 
-  describe("updatePlayers", () => {
+  describe("players", () => {
     it("should map connections to players", () => {
       // GIVEN
       const userId = "111";
@@ -409,13 +466,34 @@ fdescribe("useScene", () => {
           total: 4,
         });
         result.current.actions.updatePlayerFatePoints("1", 1);
+        result.current.actions.updatePlayerCharacter("1", ({
+          myCharacter: "myCharacter",
+        } as unknown) as any);
       });
       // THEN connection mappings reflects that
       expect(result.current.state.scene.players[0]).toEqual({
-        character: undefined,
+        character: { myCharacter: "myCharacter" },
         fatePoints: 1,
         id: "1",
         playedDuringTurn: true,
+        playerName: "RP",
+        rolls: [
+          {
+            rolls: [1, 1, 1, 1],
+            total: 4,
+          },
+        ],
+      });
+      act(() => {
+        // WHEN reseting initiative
+        result.current.actions.resetInitiative();
+      });
+      // THEN
+      expect(result.current.state.scene.players[0]).toEqual({
+        character: { myCharacter: "myCharacter" },
+        fatePoints: 1,
+        id: "1",
+        playedDuringTurn: false,
         playerName: "RP",
         rolls: [
           {
@@ -448,7 +526,7 @@ fdescribe("useScene", () => {
         character: undefined,
         fatePoints: 1,
         id: "1",
-        playedDuringTurn: true,
+        playedDuringTurn: false,
         playerName: "RP",
         rolls: [
           {
@@ -465,6 +543,231 @@ fdescribe("useScene", () => {
         playerName: undefined,
         rolls: [],
       });
+    });
+  });
+
+  describe("sort", () => {
+    // GIVEN
+    const userId = "111";
+    const gameId = undefined;
+    const useCharactersMock = mockUseCharacters();
+
+    // WHEN initial render
+    const { result } = renderHook(() => {
+      const charactersManager = useCharactersMock();
+      return useScene({
+        userId,
+        gameId,
+        charactersManager,
+        sceneToLoad: undefined,
+      });
+    });
+    expect(result.current.state.scene.sort).toEqual(false);
+    // WHEN toggle sort
+    act(() => {
+      result.current.actions.toggleSort();
+    });
+    // THEN
+    expect(result.current.state.scene.sort).toEqual(true);
+    // WHEN toggle sort
+    act(() => {
+      result.current.actions.toggleSort();
+    });
+    // THEN
+    expect(result.current.state.scene.sort).toEqual(false);
+  });
+  describe("draw area", () => {
+    // GIVEN
+    const userId = "111";
+    const gameId = undefined;
+    const useCharactersMock = mockUseCharacters();
+
+    // WHEN initial render
+    const { result } = renderHook(() => {
+      const charactersManager = useCharactersMock();
+      return useScene({
+        userId,
+        gameId,
+        charactersManager,
+        sceneToLoad: undefined,
+      });
+    });
+    expect(result.current.state.scene.drawAreaLines).toEqual([]);
+    // WHEN drawing
+    act(() => {
+      result.current.actions.updateDrawAreaLines([
+        [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
+      ]);
+    });
+    // THEN
+    expect(result.current.state.scene.drawAreaLines).toEqual([
+      [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
+    ]);
+  });
+  describe("confetti", () => {
+    // GIVEN
+    const userId = "111";
+    const gameId = undefined;
+    const useCharactersMock = mockUseCharacters();
+
+    // WHEN initial render
+    const { result } = renderHook(() => {
+      const charactersManager = useCharactersMock();
+      return useScene({
+        userId,
+        gameId,
+        charactersManager,
+        sceneToLoad: undefined,
+      });
+    });
+    expect(result.current.state.scene.goodConfetti).toEqual(0);
+    expect(result.current.state.scene.badConfetti).toEqual(0);
+
+    // WHEN good confetti
+    act(() => {
+      result.current.actions.fireGoodConfetti();
+    });
+    // THEN
+    expect(result.current.state.scene.goodConfetti).toEqual(0);
+    expect(result.current.state.scene.badConfetti).toEqual(0);
+    // WHEN bad confetti
+    act(() => {
+      result.current.actions.fireBadConfetti();
+    });
+    // THEN
+    expect(result.current.state.scene.goodConfetti).toEqual(0);
+    expect(result.current.state.scene.badConfetti).toEqual(0);
+  });
+
+  describe("resetScene,", () => {
+    it("should reset a scene", () => {
+      // GIVEN
+      const userId = "111";
+      const gameId = undefined;
+      const useCharactersMock = mockUseCharacters();
+
+      // WHEN initial render
+      const { result } = renderHook(() => {
+        const charactersManager = useCharactersMock();
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+          sceneToLoad: undefined,
+        });
+      });
+
+      // WHEN setuping scene
+      let playerId = "";
+      act(() => {
+        result.current.actions.updateName("NAME");
+        result.current.actions.addAspect(AspectType.Aspect);
+        playerId = result.current.actions.addOfflinePlayer("OFFLINE PLAYER");
+        result.current.actions.updatePlayerPlayedDuringTurn(playerId, true);
+      });
+      // THEN
+      expect(result.current.state.scene.name).toEqual("NAME");
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
+      expect(result.current.state.scene.players).toEqual([
+        {
+          character: undefined,
+          fatePoints: 3,
+          id: playerId,
+          playedDuringTurn: true,
+          playerName: "OFFLINE PLAYER",
+          rolls: [],
+        },
+      ]);
+      // WHEN reseting
+      act(() => {
+        result.current.actions.resetScene();
+      });
+      expect(result.current.state.scene.name).toEqual("");
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(0);
+      expect(result.current.state.scene.players).toEqual([
+        {
+          character: undefined,
+          fatePoints: 3,
+          id: playerId,
+          playedDuringTurn: false,
+          playerName: "OFFLINE PLAYER",
+          rolls: [],
+        },
+      ]);
+    });
+  });
+  describe("safeSetScene", () => {
+    // GIVEN
+    const userId = "111";
+    const gameId = undefined;
+    const useCharactersMock = mockUseCharacters();
+
+    // WHEN initial render
+    const { result } = renderHook(() => {
+      const charactersManager = useCharactersMock();
+      return {
+        useScene: useScene({
+          userId,
+          gameId,
+          charactersManager,
+          sceneToLoad: undefined,
+        }),
+        useCharacters: charactersManager,
+      };
+    });
+    // WHEN safeSet with nothing
+    act(() => {
+      result.current.useScene.actions.safeSetScene(
+        (undefined as unknown) as any
+      );
+    });
+    // WHEN safeSet
+    act(() => {
+      result.current.useScene.actions.safeSetScene(({
+        players: [{}],
+      } as unknown) as any);
+    });
+    // THEN
+    expect(result.current.useScene.state.scene).toEqual({ players: [{}] });
+    // expect(result.current.useCharacters.actions.upsert).toHaveBeenCalled();
+  });
+  describe("o", () => {
+    const userId = "111";
+    const gameId = undefined;
+    const useCharactersMock = mockUseCharacters();
+
+    // WHEN initial render
+    const { result } = renderHook(() => {
+      const charactersManager = useCharactersMock();
+      return useScene({
+        userId,
+        gameId,
+        charactersManager,
+        sceneToLoad: undefined,
+      });
+    });
+    expect(result.current.state.scene.sort).toEqual(false);
+    // WHEN adding an offline character
+    let playerId = "";
+    act(() => {
+      playerId = result.current.actions.addOfflineCharacter(
+        ({} as unknown) as any
+      );
+    });
+    // THEN
+    expect(result.current.state.scene.players).toEqual([
+      {
+        character: {},
+        fatePoints: undefined,
+        id: playerId,
+        playedDuringTurn: false,
+        playerName: "",
+        rolls: [],
+      },
+    ]);
+    // WHEN removing an offline player
+    act(() => {
+      result.current.actions.removeOfflinePlayer(playerId);
     });
   });
 });
@@ -489,18 +792,34 @@ function mockUseCharacters() {
     } as ReturnType<typeof useCharacters>;
   };
 }
-// reset,
-// safeSetScene,
-// addOfflinePlayer,
-// addOfflineCharacter,
-// removeOfflinePlayer,
-// updatePlayerFatePoints,
-// updatePlayerPlayedDuringTurn,
-// resetInitiative,
-// updatePlayerRoll,
-// fireGoodConfetti,
-// fireBadConfetti,
-// toggleSort,
-// updatePlayerCharacter,
-// setDrawAreaLines,
-// ,
+
+/*
+
+
+
+// GIVEN
+const userId = "111";
+const gameId = undefined;
+const useCharactersMock = mockUseCharacters();
+
+// WHEN initial render
+const { result } = renderHook(() => {
+  const charactersManager = useCharactersMock();
+  return useScene({
+    userId,
+    gameId,
+    charactersManager,
+    sceneToLoad: undefined,
+  });
+});
+expect(result.current.state.scene.sort).toEqual(false);
+// WHEN toggle sort
+act(() => {
+  result.current.actions.toggleSort();
+});
+// THEN
+expect(result.current.state.scene.sort).toEqual(true);
+
+
+
+*/

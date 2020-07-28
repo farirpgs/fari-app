@@ -111,23 +111,6 @@ export function useScene(props: IProps) {
     }
   }
 
-  function newScene() {
-    setScene(
-      produce((draft: IScene) => {
-        const everyone = [draft.gm, ...draft.players];
-        draft.id = uuidV4();
-        draft.name = defaultSceneName;
-        draft.aspects = defaultSceneAspects;
-        draft.version = defaultSceneVersion;
-        draft.lastUpdated = new Date().getTime();
-
-        everyone.forEach((p) => {
-          p.playedDuringTurn = false;
-        });
-      })
-    );
-  }
-
   function resetScene() {
     setScene(
       produce((draft: IScene) => {
@@ -292,18 +275,6 @@ export function useScene(props: IProps) {
     );
   }
 
-  function removeStressTrack(aspectId: string, trackIndex: number) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].tracks = draft.aspects[aspectId].tracks.filter(
-          (track, index) => {
-            return index !== trackIndex;
-          }
-        );
-      })
-    );
-  }
-
   function updateAspectColor(aspectId: string, color: IndexCardColorTypes) {
     setScene(
       produce((draft: IScene) => {
@@ -383,10 +354,11 @@ export function useScene(props: IProps) {
   }
 
   function addOfflinePlayer(playerName: string) {
+    const id = uuidV4();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({
-          id: uuidV4(),
+          id: id,
           playerName: playerName,
           character: undefined,
           rolls: [],
@@ -395,13 +367,15 @@ export function useScene(props: IProps) {
         });
       })
     );
+    return id;
   }
 
   function addOfflineCharacter(character: ICharacter) {
+    const id = uuidV4();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({
-          id: uuidV4(),
+          id: id,
           playerName: "",
           character: character,
           rolls: [],
@@ -410,6 +384,7 @@ export function useScene(props: IProps) {
         });
       })
     );
+    return id;
   }
 
   function removeOfflinePlayer(id: string) {
@@ -539,7 +514,6 @@ export function useScene(props: IProps) {
     },
     actions: {
       resetScene,
-      newScene,
       safeSetScene,
       updateName,
       addAspect,
@@ -554,7 +528,6 @@ export function useScene(props: IProps) {
       removeAspectTrackBox,
       toggleAspectTrackBox,
       updateStressBoxLabel,
-      removeStressTrack,
       addAspectConsequence,
       updateAspectConsequenceName,
       updateAspectConsequenceValue,

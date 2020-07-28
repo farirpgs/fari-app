@@ -8,6 +8,6 @@ module.exports = {
   },
   globalSetup: "./jest-setup.js",
   reporters: ["default", "jest-junit"],
-  coverageReporters: ["text", "cobertura"],
+  coverageReporters: ["text", "cobertura", "lcov"],
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 };
