@@ -47,8 +47,11 @@ import { Alert } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
-import { useCharacters } from "../../contexts/CharactersContext";
-import { ScenesManagerMode, useScenes } from "../../contexts/ScenesContext";
+import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
+import {
+  ScenesManagerMode,
+  useScenes,
+} from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";

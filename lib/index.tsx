@@ -12,9 +12,18 @@ import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
-import { CharactersContext, useCharacters } from "./contexts/CharactersContext";
-import { DarkModeContext, useDarkMode } from "./contexts/DarkModeContext";
-import { ScenesContext, useScenes } from "./contexts/ScenesContext";
+import {
+  CharactersContext,
+  useCharacters,
+} from "./contexts/CharactersContext/CharactersContext";
+import {
+  DarkModeContext,
+  useDarkMode,
+} from "./contexts/DarkModeContext/DarkModeContext";
+import {
+  ScenesContext,
+  useScenes,
+} from "./contexts/SceneContext/ScenesContext";
 import "./index.css";
 import { env } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";

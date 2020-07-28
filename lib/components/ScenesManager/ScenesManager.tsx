@@ -5,7 +5,7 @@ import {
   ISavableScene,
   ScenesContext,
   ScenesManagerMode,
-} from "../../contexts/ScenesContext";
+} from "../../contexts/SceneContext/ScenesContext";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};

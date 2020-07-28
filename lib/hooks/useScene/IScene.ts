@@ -1,6 +1,6 @@
 import { ILines } from "../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import { ICharacter } from "../../contexts/CharactersContext";
+import { ICharacter } from "../../contexts/CharactersContext/CharactersContext";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 

@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import ReactGA from "react-ga";
 import { withRouter } from "react-router-dom";
-import { CharactersContext } from "../../contexts/CharactersContext";
-import { ScenesContext } from "../../contexts/ScenesContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { googleAnalyticsService } from "../../services/injections";
 
 ReactGA.initialize("UA-150306816-1");

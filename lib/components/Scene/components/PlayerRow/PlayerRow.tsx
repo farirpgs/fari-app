@@ -20,7 +20,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
 import React, { useState } from "react";
-import { ICharacter } from "../../../../contexts/CharactersContext";
+import { ICharacter } from "../../../../contexts/CharactersContext/CharactersContext";
 import { Font } from "../../../../domains/font/Font";
 import { useFudgeDice } from "../../../../hooks/useFudgeDice/useFudgeDice";
 import { IPlayer } from "../../../../hooks/useScene/IScene";

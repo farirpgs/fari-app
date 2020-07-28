@@ -3,8 +3,11 @@ import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
-import { CharactersContext } from "../../contexts/CharactersContext";
-import { ScenesContext, ScenesManagerMode } from "../../contexts/ScenesContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import {
+  ScenesContext,
+  ScenesManagerMode,
+} from "../../contexts/SceneContext/ScenesContext";
 import { IScene } from "../../hooks/useScene/IScene";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";

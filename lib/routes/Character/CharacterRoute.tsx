@@ -5,7 +5,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import {
   CharactersContext,
   CharactersManagerMode,
-} from "../../contexts/CharactersContext";
+} from "../../contexts/CharactersContext/CharactersContext";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./components/CharacterDialog";

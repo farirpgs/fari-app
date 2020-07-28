@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
-import { CharactersContext } from "../../contexts/CharactersContext";
-import { ScenesContext } from "../../contexts/ScenesContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import {

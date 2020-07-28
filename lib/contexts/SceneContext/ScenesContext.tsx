@@ -1,8 +1,8 @@
 import produce from "immer";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { arraySort } from "../domains/array/arraySort";
-import { IScene } from "../hooks/useScene/IScene";
+import { arraySort } from "../../domains/array/arraySort";
+import { IScene } from "../../hooks/useScene/IScene";
 
 export type ISavableScene = Pick<
   IScene,

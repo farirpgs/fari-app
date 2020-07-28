@@ -2,7 +2,7 @@ import produce from "immer";
 import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
-import { ICharacter } from "../../../contexts/CharactersContext";
+import { ICharacter } from "../../../contexts/CharactersContext/CharactersContext";
 
 export function useCharacter(c: ICharacter | undefined) {
   const [character, setCharacter] = useState<ICharacter | undefined>(c);

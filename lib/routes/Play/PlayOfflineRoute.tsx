@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
-import { CharactersContext } from "../../contexts/CharactersContext";
-import { ScenesContext } from "../../contexts/ScenesContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useUserId } from "../../hooks/useUserId/useUserId";

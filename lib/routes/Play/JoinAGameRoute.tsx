@@ -16,7 +16,7 @@ import {
   CharactersContext,
   CharactersManagerMode,
   ICharacter,
-} from "../../contexts/CharactersContext";
+} from "../../contexts/CharactersContext/CharactersContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 let playerNameSingleton = "";

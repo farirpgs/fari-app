@@ -25,9 +25,12 @@ import appIcon from "../../../images/app-icon.png";
 import {
   CharactersContext,
   CharactersManagerMode,
-} from "../../contexts/CharactersContext";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
-import { ScenesContext, ScenesManagerMode } from "../../contexts/ScenesContext";
+} from "../../contexts/CharactersContext/CharactersContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import {
+  ScenesContext,
+  ScenesManagerMode,
+} from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";

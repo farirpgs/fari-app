@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { ICharacter } from "../../../../contexts/CharactersContext";
+import { ICharacter } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useCharacter } from "../useCharacter";
 
 describe("useCharacter", () => {

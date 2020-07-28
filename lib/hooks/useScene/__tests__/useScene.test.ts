@@ -3,8 +3,8 @@ import Peer from "peerjs";
 import {
   CharactersManagerMode,
   useCharacters,
-} from "../../../contexts/CharactersContext";
-import { ISavableScene } from "../../../contexts/ScenesContext";
+} from "../../../contexts/CharactersContext/CharactersContext";
+import { ISavableScene } from "../../../contexts/SceneContext/ScenesContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";

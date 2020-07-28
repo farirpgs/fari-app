@@ -1,7 +1,7 @@
 import produce from "immer";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { arraySort } from "../domains/array/arraySort";
+import { arraySort } from "../../domains/array/arraySort";
 
 export enum CharacterType {
   CoreCondensed,

@@ -6,7 +6,7 @@ import {
   CharactersManagerMode,
   CharacterType,
   ICharacter,
-} from "../../contexts/CharactersContext";
+} from "../../contexts/CharactersContext/CharactersContext";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};

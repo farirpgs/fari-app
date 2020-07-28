@@ -6,13 +6,16 @@ import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { ILines } from "../../components/DrawArea/DrawArea";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import { ICharacter, useCharacters } from "../../contexts/CharactersContext";
+import {
+  ICharacter,
+  useCharacters,
+} from "../../contexts/CharactersContext/CharactersContext";
 import {
   defaultSceneAspects,
   defaultSceneName,
   defaultSceneVersion,
   ISavableScene,
-} from "../../contexts/ScenesContext";
+} from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
