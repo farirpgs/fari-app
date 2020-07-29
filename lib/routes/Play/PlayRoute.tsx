@@ -31,7 +31,6 @@ export const PlayRoute: React.FC<{
     userId: userId,
     gameId: idFromParams,
     charactersManager: charactersManager,
-    sceneToLoad: scenesManager.state.selectedScene,
   });
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);

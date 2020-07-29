@@ -1,5 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { ISavableScene, ScenesManagerMode, useScenes } from "../ScenesContext";
+import { ManagerMode } from "../../../components/Manager/Manager";
+import { ISavableScene, useScenes } from "../ScenesContext";
 
 describe("useScenes", () => {
   describe("local storage load", () => {
@@ -78,13 +79,7 @@ describe("useScenes", () => {
         } as any);
       });
       // THEN the scene is updated
-      expect(result.current.state.selectedScene).toEqual({
-        aspects: {},
-        id: newScene!.id,
-        lastUpdated: newScene!.lastUpdated,
-        name: "UPDATED NAME",
-        version: 1,
-      });
+
       expect(result.current.state.scenes).toEqual([
         {
           aspects: {},
@@ -101,12 +96,6 @@ describe("useScenes", () => {
           newScene!.lastUpdated
         }}]`
       );
-      act(() => {
-        // WHEN I close the scene
-        result.current.actions.clearSelected();
-      });
-      // THEN the selected scene is undefined
-      expect(result.current.state.selectedScene).toEqual(undefined);
 
       let playingScene: ISavableScene | undefined = undefined;
       act(() => {
@@ -185,16 +174,16 @@ describe("useScenes", () => {
       );
       act(() => {
         // WHEN I open the manager
-        result.current.actions.openManager(ScenesManagerMode.Use);
+        result.current.actions.openManager(ManagerMode.Use);
       });
       // THEN the manager is opened
-      expect(result.current.state.mode).toEqual(ScenesManagerMode.Use);
+      expect(result.current.state.mode).toEqual(ManagerMode.Use);
       act(() => {
         // WHEN I close the manager
         result.current.actions.closeManager();
       });
       // THEN the manager is closed
-      expect(result.current.state.mode).toEqual(ScenesManagerMode.Close);
+      expect(result.current.state.mode).toEqual(ManagerMode.Close);
     });
   });
 });

@@ -11,10 +11,10 @@ import {
 } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import appIcon from "../../../images/app-icon.png";
+import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import {
   CharactersContext,
-  CharactersManagerMode,
   ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -31,11 +31,13 @@ export const JoinAGame: React.FC<{
   const [playerName, setPlayerName] = useState(playerNameSingleton);
   const charactersManager = useContext(CharactersContext);
 
-  useEffect(() => {
-    if (charactersManager.state.selectedCharacter) {
-      props.onSubmitCharacter(charactersManager.state.selectedCharacter);
-    }
-  }, [charactersManager.state.selectedCharacter]);
+  function onSubmitPlayerName(playerName: string) {
+    props.onSubmitPlayerName(playerName);
+  }
+
+  function onSubmitCharacter(character: ICharacter) {
+    props.onSubmitCharacter(character);
+  }
 
   useEffect(() => {
     playerNameSingleton = playerName;
@@ -50,7 +52,7 @@ export const JoinAGame: React.FC<{
               onSubmit={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                props.onSubmitPlayerName(playerName);
+                onSubmitPlayerName(playerName);
               }}
             >
               <Box pb="2rem" textAlign="center">
@@ -120,7 +122,8 @@ export const JoinAGame: React.FC<{
                 color="primary"
                 onClick={() => {
                   charactersManager.actions.openManager(
-                    CharactersManagerMode.Use
+                    ManagerMode.Use,
+                    onSubmitCharacter
                   );
                 }}
               >

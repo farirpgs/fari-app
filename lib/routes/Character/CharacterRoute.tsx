@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import {
   CharactersContext,
-  CharactersManagerMode,
+  ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -18,6 +19,9 @@ export const CharacterRoute: React.FC<{
   const { t } = useTranslate();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
+  const [selectedCharacter, setSelectedCharacter] = useState<
+    ICharacter | undefined
+  >(undefined);
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(
@@ -25,10 +29,10 @@ export const CharacterRoute: React.FC<{
     );
 
     if (characterToLoad) {
-      charactersManager.actions.select(characterToLoad);
+      setSelectedCharacter(characterToLoad);
     } else {
       history.replace("/");
-      charactersManager.actions.openManager(CharactersManagerMode.Redirect);
+      charactersManager.actions.openManager(ManagerMode.Manage);
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
@@ -43,8 +47,8 @@ export const CharacterRoute: React.FC<{
 
       <Page>
         <CharacterDialog
-          open={!!charactersManager.state.selectedCharacter}
-          character={charactersManager.state.selectedCharacter}
+          open={!!selectedCharacter}
+          character={selectedCharacter}
           dialog={dialogMode || false}
           onSave={(newCharacter) => {
             charactersManager.actions.upsert(newCharacter);

@@ -12,7 +12,7 @@ import {
   ListItemText,
   Snackbar,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Alert } from "@material-ui/lab";
@@ -21,11 +21,17 @@ import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { listItem } from "./domains/ListItem";
 
+export enum ManagerMode {
+  Manage,
+  Use,
+  Close,
+}
+
 type IBaseItem = {};
 
 type IProps<T extends IBaseItem> = {
   list: Array<T>;
-  open: boolean;
+  mode: ManagerMode;
   getViewModel(item: T): { id: string; name: string; lastUpdated: number };
   onClose(): void;
   onItemClick(item: T): void;
@@ -44,6 +50,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   function onAdd() {
     props.onAdd();
   }
+
   function onItemClick(item: T) {
     props.onItemClick(item);
   }
@@ -65,7 +72,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   return (
     <Drawer
       anchor={"left"}
-      open={props.open}
+      open={props.mode !== ManagerMode.Close}
       onClose={props.onClose}
       className={css({
         width: isSmall ? "100%" : "30%",
@@ -101,6 +108,9 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   );
 
   function renderActions() {
+    if (props.mode !== ManagerMode.Manage) {
+      return null;
+    }
     return (
       <Grid container spacing={1} justify="center">
         <Grid item>
@@ -159,16 +169,18 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                 primary={itemVM.name}
                 secondary={listItem.formatDate(itemVM.lastUpdated)}
               />
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  onClick={() => {
-                    onDelete(item);
-                  }}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
+              {props.mode === ManagerMode.Manage && (
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    onClick={() => {
+                      onDelete(item);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              )}
             </ListItem>
           );
         })}

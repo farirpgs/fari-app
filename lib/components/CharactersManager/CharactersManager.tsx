@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import {
   CharactersContext,
-  CharactersManagerMode,
   CharacterType,
   ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
@@ -26,11 +25,12 @@ export const CharactersManager: React.FC<IProps> = (props) => {
   }
 
   function onItemClick(character: ICharacter) {
-    if (charactersManager.state.mode === CharactersManagerMode.Redirect) {
-      history.push(`/characters/${character.id}`);
+    if (charactersManager.state.managerCallback) {
+      charactersManager.state.managerCallback(character);
     } else {
-      charactersManager.actions.select(character);
+      history.push(`/characters/${character.id}`);
     }
+
     charactersManager.actions.closeManager();
   }
 
@@ -50,7 +50,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
         name: c.name,
         lastUpdated: c.lastUpdated,
       })}
-      open={charactersManager.state.mode !== CharactersManagerMode.Close}
+      mode={charactersManager.state.mode}
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}

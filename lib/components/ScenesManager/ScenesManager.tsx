@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import {
   ISavableScene,
   ScenesContext,
-  ScenesManagerMode,
 } from "../../contexts/SceneContext/ScenesContext";
 import { Manager } from "../Manager/Manager";
 
@@ -23,11 +22,12 @@ export const ScenesManager: React.FC<IProps> = (props) => {
   }
 
   function onItemClick(scene: ISavableScene) {
-    if (scenesManager.state.mode === ScenesManagerMode.Redirect) {
-      history.push(`/scenes/${scene.id}`);
+    if (scenesManager.state.managerCallback) {
+      scenesManager.state.managerCallback(scene);
     } else {
-      scenesManager.actions.select(scene);
+      history.push(`/scenes/${scene.id}`);
     }
+
     scenesManager.actions.closeManager();
   }
 
@@ -42,12 +42,12 @@ export const ScenesManager: React.FC<IProps> = (props) => {
   return (
     <Manager
       list={scenesManager.state.scenes}
-      open={scenesManager.state.mode !== ScenesManagerMode.Close}
       getViewModel={(s) => ({
         id: s.id,
         name: s.name,
         lastUpdated: s.lastUpdated,
       })}
+      mode={scenesManager.state.mode}
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}

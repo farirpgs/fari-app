@@ -47,9 +47,12 @@ import { Alert } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
-import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
-  ScenesManagerMode,
+  ICharacter,
+  useCharacters,
+} from "../../contexts/CharactersContext/CharactersContext";
+import {
+  ISavableScene,
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
@@ -66,6 +69,7 @@ import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea, IDrawAreaHandles } from "../DrawArea/DrawArea";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
+import { ManagerMode } from "../Manager/Manager";
 import { Page } from "../Page/Page";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 
@@ -132,12 +136,6 @@ export const Scene: React.FC<IProps> = (props) => {
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
 
-  // useEffect(() => {
-  //   if (scenesManager.state.selectedScene) {
-  //     sceneManager.actions.loadScene(scenesManager.state.selectedScene);
-  //   }
-  // }, [scenesManager.state.selectedScene]);
-
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -157,6 +155,14 @@ export const Scene: React.FC<IProps> = (props) => {
   ];
 
   const paperStyle = css({ borderRadius: "0px" });
+
+  function onLoadScene(newScene: ISavableScene) {
+    sceneManager.actions.loadScene(newScene);
+  }
+
+  function onAddOfflineCharacter(character: ICharacter) {
+    sceneManager.actions.addOfflineCharacter(character);
+  }
 
   return (
     <Page gameId={props.idFromParams}>
@@ -255,15 +261,35 @@ export const Scene: React.FC<IProps> = (props) => {
             {t("play-route.add-character")}
           </DialogTitle>
           <DialogContent>
-            <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
-            <TextField
-              autoFocus
-              value={offlineCharacterName}
-              onChange={(event) => {
-                setOfflineCharacterName(event.target.value);
-              }}
-              fullWidth
-            />
+            <Box pb="1rem">
+              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+              <TextField
+                autoFocus
+                value={offlineCharacterName}
+                onChange={(event) => {
+                  setOfflineCharacterName(event.target.value);
+                }}
+                fullWidth
+              />
+            </Box>
+            <Box>
+              <Grid container justify="center">
+                <Grid item>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      setOfflineCharacterDialogOpen(false);
+                      charactersManager.actions.openManager(
+                        ManagerMode.Use,
+                        onAddOfflineCharacter
+                      );
+                    }}
+                  >
+                    {t("play-route.or-pick-existing")}
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
           </DialogContent>
           <DialogActions>
             <Button
@@ -275,7 +301,7 @@ export const Scene: React.FC<IProps> = (props) => {
             >
               {t("play-route.cancel")}
             </Button>
-            <Button type="submit" color="primary">
+            <Button type="submit" color="primary" variant="contained">
               {t("play-route.add-character")}
             </Button>
           </DialogActions>
@@ -599,7 +625,7 @@ export const Scene: React.FC<IProps> = (props) => {
     return (
       <Box pb="2rem">
         <Box pb="2rem">
-          <Box pb="1rem">{renderManagementActions()}</Box>
+          {renderManagementActions()}
           <Container maxWidth="sm">
             <Typography
               variant="h4"
@@ -834,8 +860,11 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderManagementActions() {
+    if (!isGM) {
+      return null;
+    }
     return (
-      <Box>
+      <Box pb="1rem">
         <Grid container spacing={1} justify="center">
           <Grid item>
             <Button
@@ -854,7 +883,10 @@ export const Scene: React.FC<IProps> = (props) => {
             <Grid item>
               <Button
                 onClick={() => {
-                  scenesManager.actions.openManager(ScenesManagerMode.Use);
+                  scenesManager.actions.openManager(
+                    ManagerMode.Use,
+                    onLoadScene
+                  );
                 }}
                 color="default"
                 variant="outlined"

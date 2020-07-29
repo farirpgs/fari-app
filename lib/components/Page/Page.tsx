@@ -22,21 +22,16 @@ import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
-import {
-  CharactersContext,
-  CharactersManagerMode,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
-import {
-  ScenesContext,
-  ScenesManagerMode,
-} from "../../contexts/SceneContext/ScenesContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppLink } from "../AppLink/AppLink";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
+import { ManagerMode } from "../Manager/Manager";
 
 let gameIdSingleton: string | undefined = undefined;
 
@@ -289,7 +284,7 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              scenesManager.actions.openManager(ScenesManagerMode.Redirect);
+              scenesManager.actions.openManager(ManagerMode.Manage);
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
@@ -301,9 +296,7 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              charactersManager.actions.openManager(
-                CharactersManagerMode.Redirect
-              );
+              charactersManager.actions.openManager(ManagerMode.Manage);
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}

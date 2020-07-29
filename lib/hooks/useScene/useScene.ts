@@ -27,11 +27,10 @@ type IProps = {
   userId: string;
   gameId?: string;
   charactersManager: ReturnType<typeof useCharacters>;
-  sceneToLoad?: ISavableScene;
 };
 
 export function useScene(props: IProps) {
-  const { userId, gameId, charactersManager, sceneToLoad } = props;
+  const { userId, gameId, charactersManager } = props;
   const isGM = !gameId;
   const [scene, setScene] = useState<IScene>(() => ({
     id: uuidV4(),
@@ -53,6 +52,10 @@ export function useScene(props: IProps) {
     lastUpdated: new Date().getTime(),
   }));
 
+  const [sceneToLoad, setSceneToLoad] = useState<ISavableScene | undefined>(
+    undefined
+  );
+
   const dirty = useMemo(() => {
     if (!sceneToLoad) {
       return false;
@@ -70,7 +73,6 @@ export function useScene(props: IProps) {
 
   useEffect(() => {
     if (sceneToLoad) {
-      // setLoadedScene(sceneToLoad)
       setScene(
         produce((draft: IScene) => {
           draft.id = sceneToLoad.id;
@@ -111,6 +113,12 @@ export function useScene(props: IProps) {
       newScene.players.forEach((p) => {
         charactersManager.actions.upsert(p.character);
       });
+    }
+  }
+
+  function loadScene(newScene: ISavableScene) {
+    if (newScene) {
+      setSceneToLoad(newScene);
     }
   }
 
@@ -518,6 +526,7 @@ export function useScene(props: IProps) {
     actions: {
       resetScene,
       safeSetScene,
+      loadScene,
       updateName,
       addAspect,
       removeAspect,

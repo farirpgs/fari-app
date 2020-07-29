@@ -17,10 +17,10 @@ export const PlayOfflineRoute: React.FC<{
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
+
   const sceneManager = useScene({
     userId: userId,
     charactersManager: charactersManager,
-    sceneToLoad: scenesManager.state.selectedScene,
   });
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);

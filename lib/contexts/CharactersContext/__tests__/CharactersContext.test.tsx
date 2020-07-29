@@ -1,10 +1,10 @@
 import { act, renderHook } from "@testing-library/react-hooks";
+import { ManagerMode } from "../../../components/Manager/Manager";
 import {
-  CharactersManagerMode,
   CharacterType,
   ICharacter,
   migrateCharacters,
-  useCharacters,
+  useCharacters
 } from "../CharactersContext";
 
 describe("migrateCharacters", () => {
@@ -174,20 +174,6 @@ describe("useCharacters", () => {
           name: "UPDATED NAME",
         } as any);
       });
-      // THEN the character is updated
-      expect(result.current.state.selectedCharacter).toEqual(
-        expect.objectContaining({
-          id: newCharacter!.id,
-          lastUpdated: newCharacter!.lastUpdated,
-          name: "UPDATED NAME",
-        })
-      );
-      act(() => {
-        // WHEN I close the character
-        result.current.actions.clearSelected();
-      });
-      // THEN the selected character is undefined
-      expect(result.current.state.selectedCharacter).toEqual(undefined);
 
       let playingCharacter: ICharacter | undefined = undefined;
       act(() => {
@@ -238,16 +224,16 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I open the manager
-        result.current.actions.openManager(CharactersManagerMode.Use);
+        result.current.actions.openManager(ManagerMode.Use);
       });
       // THEN the manager is opened
-      expect(result.current.state.mode).toEqual(CharactersManagerMode.Use);
+      expect(result.current.state.mode).toEqual(ManagerMode.Use);
       act(() => {
         // WHEN I close the manager
         result.current.actions.closeManager();
       });
       // THEN the manager is closed
-      expect(result.current.state.mode).toEqual(CharactersManagerMode.Close);
+      expect(result.current.state.mode).toEqual(ManagerMode.Close);
     });
   });
 });

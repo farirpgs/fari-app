@@ -22,8 +22,6 @@ export const History = withRouter(function HistoryComponent(props) {
   useEffect(() => {
     routerHistory = history;
     googleAnalyticsService.sendPageView();
-    charactersManager.actions.clearSelected();
-    scenesManager.actions.clearSelected();
   }, [pathname]);
   return null;
 });

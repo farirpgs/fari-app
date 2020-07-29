@@ -1,6 +1,7 @@
 import produce from "immer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { IScene } from "../../hooks/useScene/IScene";
 
@@ -9,23 +10,17 @@ export type ISavableScene = Pick<
   "id" | "name" | "aspects" | "version" | "lastUpdated"
 >;
 
+type IManagerCallback = (scene: ISavableScene) => void | undefined;
+
 export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
   undefined as any
 );
 
-export enum ScenesManagerMode {
-  Redirect,
-  Use,
-  Close,
-}
-
 export function useScenes(props?: { localStorage: Storage }) {
   const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-scenes";
-  const [mode, setMode] = useState(ScenesManagerMode.Close);
-  const [selectedScene, setSelectedScene] = useState<ISavableScene | undefined>(
-    undefined
-  );
+  const [mode, setMode] = useState(ManagerMode.Close);
+  const managerCallback = useRef<IManagerCallback | undefined>(undefined);
 
   const [scenes, setScenes] = useState<Array<ISavableScene>>(() => {
     // load from local storage
@@ -58,12 +53,14 @@ export function useScenes(props?: { localStorage: Storage }) {
     }
   }, [scenes]);
 
-  function openManager(newMode: ScenesManagerMode) {
+  function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
     setMode(newMode);
+    managerCallback.current = callback;
   }
 
   function closeManager() {
-    setMode(ScenesManagerMode.Close);
+    setMode(ManagerMode.Close);
+    managerCallback.current = undefined;
   }
 
   function add() {
@@ -101,7 +98,6 @@ export function useScenes(props?: { localStorage: Storage }) {
         });
       });
     }
-    select(newScene);
     return newScene;
   }
 
@@ -111,25 +107,15 @@ export function useScenes(props?: { localStorage: Storage }) {
     });
   }
 
-  function select(scene: ISavableScene) {
-    setSelectedScene(scene);
-  }
-
-  function clearSelected() {
-    setSelectedScene(undefined);
-  }
-
   return {
     state: {
       mode: mode,
-      selectedScene,
       scenes: sortedScenes,
+      managerCallback: managerCallback.current,
     },
     actions: {
       openManager,
       closeManager,
-      select,
-      clearSelected,
       add,
       upsert,
       remove,

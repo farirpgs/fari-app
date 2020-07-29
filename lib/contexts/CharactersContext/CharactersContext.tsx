@@ -1,6 +1,7 @@
 import produce from "immer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 
 export enum CharacterType {
@@ -8,11 +9,7 @@ export enum CharacterType {
   Accelerated,
   Custom,
 }
-export enum CharactersManagerMode {
-  Redirect,
-  Use,
-  Close,
-}
+type IManagerCallback = (character: ICharacter) => void;
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
@@ -22,8 +19,8 @@ export function useCharacters(props?: { localStorage: Storage }) {
   const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-characters";
 
-  const [mode, setMode] = useState(CharactersManagerMode.Close);
-
+  const [mode, setMode] = useState(ManagerMode.Close);
+  const managerCallback = useRef<IManagerCallback | undefined>(undefined);
   const [characters, setCharacters] = useState<Array<ICharacter>>(() => {
     // load from local storage
     try {
@@ -40,9 +37,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
     }
     return [];
   });
-  const [selectedCharacter, setSelectedCharacter] = useState<
-    ICharacter | undefined
-  >(undefined);
 
   const sortedCharacters = arraySort(characters, [
     (c) => ({ value: c.lastUpdated, direction: "desc" }),
@@ -58,12 +52,14 @@ export function useCharacters(props?: { localStorage: Storage }) {
     }
   }, [characters]);
 
-  function openManager(newMode: CharactersManagerMode) {
+  function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
     setMode(newMode);
+    managerCallback.current = callback;
   }
 
   function closeManager() {
-    setMode(CharactersManagerMode.Close);
+    setMode(ManagerMode.Close);
+    managerCallback.current = undefined;
   }
 
   function add(type: CharacterType): ICharacter {
@@ -76,7 +72,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
     });
-    setSelectedCharacter(newCharacter);
     return newCharacter;
   }
 
@@ -101,7 +96,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
         });
       });
     }
-    select(character);
     return character;
   }
 
@@ -111,19 +105,11 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
-  function select(character: ICharacter) {
-    setSelectedCharacter(character);
-  }
-
-  function clearSelected() {
-    setSelectedCharacter(undefined);
-  }
-
   return {
     state: {
       mode,
       characters: sortedCharacters,
-      selectedCharacter,
+      managerCallback: managerCallback.current,
     },
     actions: {
       openManager,
@@ -131,8 +117,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
       add,
       upsert,
       remove,
-      select,
-      clearSelected,
     },
   };
 }

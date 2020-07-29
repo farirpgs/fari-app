@@ -1,9 +1,7 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
-import {
-  CharactersManagerMode,
-  useCharacters,
-} from "../../../contexts/CharactersContext/CharactersContext";
+import { ManagerMode } from "../../../components/Manager/Manager";
+import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { ISavableScene } from "../../../contexts/SceneContext/ScenesContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
@@ -42,7 +40,6 @@ fdescribe("useScene", () => {
         userId,
         gameId,
         charactersManager,
-        sceneToLoad: undefined,
       });
     });
     // THEN
@@ -64,7 +61,6 @@ fdescribe("useScene", () => {
             userId,
             gameId,
             charactersManager,
-            sceneToLoad: props.sceneToLoad,
           });
         },
         {
@@ -165,7 +161,6 @@ fdescribe("useScene", () => {
           userId,
           gameId,
           charactersManager,
-          sceneToLoad: undefined,
         });
       });
       act(() => {
@@ -191,7 +186,6 @@ fdescribe("useScene", () => {
           userId,
           gameId,
           charactersManager,
-          sceneToLoad: undefined,
         });
       });
       act(() => {
@@ -435,7 +429,6 @@ fdescribe("useScene", () => {
           userId,
           gameId,
           charactersManager,
-          sceneToLoad: undefined,
         });
       });
       // WHEN initial connection with a player
@@ -559,7 +552,6 @@ fdescribe("useScene", () => {
         userId,
         gameId,
         charactersManager,
-        sceneToLoad: undefined,
       });
     });
     expect(result.current.state.scene.sort).toEqual(false);
@@ -589,7 +581,6 @@ fdescribe("useScene", () => {
         userId,
         gameId,
         charactersManager,
-        sceneToLoad: undefined,
       });
     });
     expect(result.current.state.scene.drawAreaLines).toEqual([]);
@@ -617,7 +608,6 @@ fdescribe("useScene", () => {
         userId,
         gameId,
         charactersManager,
-        sceneToLoad: undefined,
       });
     });
     expect(result.current.state.scene.goodConfetti).toEqual(0);
@@ -653,7 +643,6 @@ fdescribe("useScene", () => {
           userId,
           gameId,
           charactersManager,
-          sceneToLoad: undefined,
         });
       });
 
@@ -710,7 +699,6 @@ fdescribe("useScene", () => {
           userId,
           gameId,
           charactersManager,
-          sceneToLoad: undefined,
         }),
         useCharacters: charactersManager,
       };
@@ -743,7 +731,6 @@ fdescribe("useScene", () => {
         userId,
         gameId,
         charactersManager,
-        sceneToLoad: undefined,
       });
     });
     expect(result.current.state.scene.sort).toEqual(false);
@@ -777,8 +764,8 @@ function mockUseCharacters() {
     return {
       state: {
         characters: [],
-        mode: CharactersManagerMode.Close,
-        selectedCharacter: undefined,
+        mode: ManagerMode.Close,
+        managerCallback: undefined,
       },
       actions: {
         add: jest.fn(),
@@ -809,7 +796,7 @@ const { result } = renderHook(() => {
     userId,
     gameId,
     charactersManager,
-    sceneToLoad: undefined,
+    
   });
 });
 expect(result.current.state.scene.sort).toEqual(false);
