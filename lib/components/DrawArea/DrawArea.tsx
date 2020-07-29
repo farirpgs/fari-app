@@ -104,10 +104,6 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }
 
-  function handleDoubleClick() {
-    setLines([]);
-  }
-
   function handleMouseUp() {
     setDrawing(false);
   }
@@ -142,7 +138,6 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
       ref={$container}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
-      onDoubleClick={handleDoubleClick}
     >
       {lines.length === 0 ? (
         <Fade in>
