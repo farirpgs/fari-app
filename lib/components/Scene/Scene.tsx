@@ -70,7 +70,7 @@ import { DrawArea, IDrawAreaHandles } from "../DrawArea/DrawArea";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
-import { Page } from "../Page/Page";
+import { LiveMode, Page } from "../Page/Page";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 
 export enum SceneMode {
@@ -149,6 +149,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const isGM = !props.idFromParams;
   const isOffline = props.mode === SceneMode.PlayOffline;
+
   const everyone = [
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
@@ -164,8 +165,14 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.addOfflineCharacter(character);
   }
 
+  const liveMode = getLiveMode();
+
   return (
-    <Page gameId={props.idFromParams}>
+    <Page
+      gameId={props.idFromParams}
+      live={liveMode}
+      liveLabel={sceneManager.state.scene.name}
+    >
       <Prompt
         when={props.mode !== SceneMode.Manage}
         message={t("manager.leave-without-saving")}
@@ -919,6 +926,16 @@ export const Scene: React.FC<IProps> = (props) => {
         </Box>
       </Box>
     );
+  }
+
+  function getLiveMode() {
+    if (!connectionsManager || props.mode === SceneMode.Manage) {
+      return undefined;
+    }
+    if (props.isLoading) {
+      return LiveMode.Connecting;
+    }
+    return LiveMode.Live;
   }
 };
 

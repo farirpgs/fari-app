@@ -81,7 +81,10 @@ export const ContentEditable: React.FC<{
 };
 ContentEditable.displayName = "ContentEditable";
 
-export function sanitizeContentEditable(value: string) {
+export function sanitizeContentEditable(value: string | undefined) {
+  if (!value) {
+    return "";
+  }
   return removeHTMLTags(removeNBSP(value)).trim();
 }
 

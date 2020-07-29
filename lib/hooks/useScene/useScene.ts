@@ -585,7 +585,7 @@ const defaultIndexCard: IAspect = {
 const defaultBoost: IAspect = {
   title: "",
   content: "<br/>",
-  tracks: [{ name: "Free Invoke", value: [{ label: "", checked: false }] }],
+  tracks: [{ name: "Free Invoke", value: [{ label: "1", checked: false }] }],
   consequences: [],
   color: "blue",
   type: AspectType.Boost,

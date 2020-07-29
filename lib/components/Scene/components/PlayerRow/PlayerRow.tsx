@@ -63,13 +63,12 @@ export const PlayerRow: React.FC<{
           backgroundColor: darken(theme.palette.secondary.dark, 0.75),
         }
   );
-
   const playerInfoCellStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
   });
   const controlsRowStyle = css({
-    // padding: "0 0.5rem",
+    padding: "0 0.7rem",
   });
   const diceTextColors = useTextColors(theme.palette.background.default);
   const defaultTableCellStyle = css({ border: "none" });
