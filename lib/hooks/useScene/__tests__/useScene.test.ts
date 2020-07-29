@@ -2,7 +2,6 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
-import { ISavableScene } from "../../../contexts/SceneContext/ScenesContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
@@ -54,35 +53,28 @@ fdescribe("useScene", () => {
       const useCharactersMock = mockUseCharacters();
 
       // WHEN
-      const { result, rerender } = renderHook(
-        (props) => {
-          const charactersManager = useCharactersMock();
-          return useScene({
-            userId,
-            gameId,
-            charactersManager,
-          });
-        },
-        {
-          initialProps: {
-            sceneToLoad: (undefined as unknown) as ISavableScene,
-          },
-        }
-      );
+      const { result, rerender } = renderHook((props) => {
+        const charactersManager = useCharactersMock();
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+        });
+      });
 
       // THEN
       expect(result.current.state.scene.name).toEqual("");
       expect(result.current.state.dirty).toEqual(false);
 
       // WHEN
-      rerender({
-        sceneToLoad: {
+      act(() => {
+        result.current.actions.loadScene({
           id: "new-id",
           aspects: { "aspect-id": { toto: 3 } as any },
           lastUpdated: 111,
           name: "new name",
           version: 3,
-        },
+        });
       });
 
       // THEN
@@ -114,15 +106,16 @@ fdescribe("useScene", () => {
       expect(result.current.state.dirty).toEqual(true);
 
       // WHEN reload
-      rerender({
-        sceneToLoad: {
+      act(() => {
+        result.current.actions.loadScene({
           id: "new-id",
           aspects: { "aspect-id": { toto: 3 } as any },
           lastUpdated: 111,
           name: "new name",
           version: 3,
-        },
+        });
       });
+
       // THEN dirty is false
       expect(result.current.state.dirty).toEqual(false);
 
@@ -134,14 +127,14 @@ fdescribe("useScene", () => {
       expect(result.current.state.dirty).toEqual(true);
 
       // WHEN reload
-      rerender({
-        sceneToLoad: {
+      act(() => {
+        result.current.actions.loadScene({
           id: "new-id",
           aspects: { "aspect-id": { toto: 3 } as any },
           lastUpdated: 111,
           name: "new name",
           version: 3,
-        },
+        });
       });
       // THEN dirty is false
       expect(result.current.state.dirty).toEqual(false);
