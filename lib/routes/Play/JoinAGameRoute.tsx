@@ -22,6 +22,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 let playerNameSingleton = "";
 
 export const JoinAGame: React.FC<{
+  idFromParams: string;
   onSubmitPlayerName(playerName: string): void;
   onSubmitCharacter(character: ICharacter): void;
   connecting: boolean;
@@ -44,7 +45,7 @@ export const JoinAGame: React.FC<{
   }, [playerName]);
 
   return (
-    <Page>
+    <Page gameId={props.idFromParams}>
       <Box>
         <Box pb="1rem">
           <Container maxWidth="xs">

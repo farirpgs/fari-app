@@ -86,6 +86,7 @@ export const PlayRoute: React.FC<{
       />
       {shouldRenderPlayerJoinGameScreen ? (
         <JoinAGame
+          idFromParams={idFromParams}
           connecting={connectionsManager?.state.connectingToHost ?? false}
           error={connectionsManager?.state.connectingToHostError}
           onSubmitCharacter={(character) => {

@@ -207,17 +207,21 @@ export const Page: React.FC<{
               padding: "1rem",
             })}
           >
-            <img
+            <RouterLink
+              to="/"
               className={css({
-                height: "2rem",
-                paddingRight: "1rem",
-                cursor: "pointer",
+                textDecoration: "none",
               })}
-              onClick={() => {
-                history.push("/");
-              }}
-              src={appIcon}
-            />
+            >
+              <img
+                className={css({
+                  height: "2rem",
+                  paddingRight: "1rem",
+                  cursor: "pointer",
+                })}
+                src={appIcon}
+              />
+            </RouterLink>
 
             <Typography
               variant="h6"

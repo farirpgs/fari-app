@@ -929,7 +929,10 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function getLiveMode() {
-    if (!connectionsManager || props.mode === SceneMode.Manage) {
+    if (props.mode === SceneMode.PlayOffline) {
+      return LiveMode.Live;
+    }
+    if (props.mode === SceneMode.Manage) {
       return undefined;
     }
     if (props.isLoading) {
