@@ -250,7 +250,7 @@ const defaultCustomCharacter: ICharacter = {
   lastUpdated: new Date().getTime(),
 };
 
-const defaultCharactersByType = {
+export const defaultCharactersByType = {
   [CharacterType.CoreCondensed]: defaultCondensedCharacter,
   [CharacterType.Accelerated]: defaultAcceleratedCharacter,
   [CharacterType.Custom]: defaultCustomCharacter,

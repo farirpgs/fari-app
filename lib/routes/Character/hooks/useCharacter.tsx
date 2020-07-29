@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { ICharacter } from "../../../contexts/CharactersContext/CharactersContext";
 
-export function useCharacter(c: ICharacter | undefined) {
+export function useCharacter(c?: ICharacter | undefined) {
   const [character, setCharacter] = useState<ICharacter | undefined>(c);
 
   const dirty = useMemo(() => {
@@ -19,16 +19,17 @@ export function useCharacter(c: ICharacter | undefined) {
     }
   }, [c]);
 
-  function setName(value: string) {
+  function setName(newName: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.name = value;
+        draft.name = newName;
       })
     );
   }
+
   function addAspect() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -42,6 +43,7 @@ export function useCharacter(c: ICharacter | undefined) {
       })
     );
   }
+
   function addSkill() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -55,71 +57,77 @@ export function useCharacter(c: ICharacter | undefined) {
       })
     );
   }
-  function removeAspect(indexToRemove: number) {
+
+  function removeAspect(aspectIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.aspects = draft.aspects.filter((aspect, index) => {
-          return index !== indexToRemove;
+          return index !== aspectIndex;
         });
       })
     );
   }
 
-  function setAspectName(index: number, newAspectName: string) {
+  function setAspectName(aspectIndex: number, newName: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.aspects[index].name = newAspectName;
+        draft.aspects[aspectIndex].name = newName;
       })
     );
   }
-  function setAspect(index: number, newAspectValue: string) {
+
+  function setAspect(aspectIndex: number, newValue: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.aspects[index].value = newAspectValue;
+        draft.aspects[aspectIndex].value = newValue;
       })
     );
   }
-  function setSkillName(index: number, newSkillName: string) {
+
+  function setSkillName(aspectIndex: number, newName: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.skills[index].name = newSkillName;
+        draft.skills[aspectIndex].name = newName;
       })
     );
   }
-  function setSkill(index: number, newSkillValue: string) {
+
+  function setSkill(aspectIndex: number, newValue: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.skills[index].value = newSkillValue;
+        draft.skills[aspectIndex].value = newValue;
       })
     );
   }
-  function removeSkill(indexToRemove: number) {
+
+  function removeSkill(aspectIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.skills = draft.skills.filter((skill, index) => {
-          return index !== indexToRemove;
+          return index !== aspectIndex;
         });
       })
     );
   }
+
   function addStunt() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -133,38 +141,42 @@ export function useCharacter(c: ICharacter | undefined) {
       })
     );
   }
-  function setStuntName(index: number, newStuntName: string) {
+
+  function setStuntName(stuntIndex: number, newName: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.stunts[index].name = newStuntName;
+        draft.stunts[stuntIndex].name = newName;
       })
     );
   }
-  function setStunt(index: number, newStuntValue: string) {
+
+  function setStunt(stuntIndex: number, newValue: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.stunts[index].value = newStuntValue;
+        draft.stunts[stuntIndex].value = newValue;
       })
     );
   }
-  function removeStunt(indexToRemove: number) {
+
+  function removeStunt(stuntIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.stunts = draft.stunts.filter((stunt, index) => {
-          return index !== indexToRemove;
+          return index !== stuntIndex;
         });
       })
     );
   }
+
   function addStressTrack() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -182,78 +194,88 @@ export function useCharacter(c: ICharacter | undefined) {
       })
     );
   }
-  function setStressTrackName(index: number, newStressTrackName: string) {
+  function setStressTrackName(trackIndex: number, newName: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.stressTracks[index].name = newStressTrackName;
+        draft.stressTracks[trackIndex].name = newName;
       })
     );
   }
-  function addStressBox(index: number) {
+
+  function addStressBox(trackIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const numberOfBoxes = draft.stressTracks[index].value.length;
-        draft.stressTracks[index].value.push({
+        const numberOfBoxes = draft.stressTracks[trackIndex].value.length;
+        draft.stressTracks[trackIndex].value.push({
           checked: false,
           label: `${numberOfBoxes + 1}`,
         });
       })
     );
   }
-  function removeStressBox(index: number) {
+
+  function removeStressBox(trackIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const numberOfBoxes = draft.stressTracks[index].value.length;
-        draft.stressTracks[index].value = draft.stressTracks[
-          index
+        const numberOfBoxes = draft.stressTracks[trackIndex].value.length;
+        draft.stressTracks[trackIndex].value = draft.stressTracks[
+          trackIndex
         ].value.filter((value, index) => {
           return index !== numberOfBoxes - 1;
         });
       })
     );
   }
-  function toggleStressBox(index: number, boxIndex: number) {
+
+  function toggleStressBox(trackIndex: number, boxIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const oldValue = draft.stressTracks[index].value[boxIndex].checked;
-        draft.stressTracks[index].value[boxIndex].checked = !oldValue;
+        const oldValue = draft.stressTracks[trackIndex].value[boxIndex].checked;
+        draft.stressTracks[trackIndex].value[boxIndex].checked = !oldValue;
       })
     );
   }
-  function setStressBoxLabel(index: number, boxIndex: number, label: string) {
+
+  function setStressBoxLabel(
+    trackIndex: number,
+    boxIndex: number,
+    newLabel: string
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.stressTracks[index].value[boxIndex].label = label;
+        draft.stressTracks[trackIndex].value[boxIndex].label = newLabel;
       })
     );
   }
-  function removeStressTrack(indexToRemove: number) {
+
+  function removeStressTrack(trackIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.stressTracks = draft.stressTracks.filter((track, index) => {
-          return index !== indexToRemove;
+          return index !== trackIndex;
         });
       })
     );
   }
+
   function addConsequence() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -267,52 +289,58 @@ export function useCharacter(c: ICharacter | undefined) {
       })
     );
   }
-  function setConsequenceName(index: number, newConsequenceName: string) {
+
+  function setConsequenceName(consequenceIndex: number, newName: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.consequences[index].name = newConsequenceName;
+        draft.consequences[consequenceIndex].name = newName;
       })
     );
   }
-  function setConsequence(index: number, newConsequenceValue: string) {
+
+  function setConsequence(consequenceIndex: number, newValue: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.consequences[index].value = newConsequenceValue;
+        draft.consequences[consequenceIndex].value = newValue;
       })
     );
   }
-  function removeConsequence(indexToRemove: number) {
+
+  function removeConsequence(consequenceIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.consequences = draft.consequences.filter((consequence, index) => {
-          return index !== indexToRemove;
+          return index !== consequenceIndex;
         });
       })
     );
   }
 
-  function udpateRefresh(value: number) {
+  function udpateRefresh(newRefresh: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.refresh = value;
+        draft.refresh = newRefresh;
       })
     );
   }
 
   function sanitizeCharacter() {
     const updatedCharacter = produce(character!, (draft) => {
+      if (!draft) {
+        return;
+      }
       draft.name = sanitizeContentEditable(draft.name);
       draft.lastUpdated = new Date().getTime();
     });
@@ -324,10 +352,10 @@ export function useCharacter(c: ICharacter | undefined) {
     actions: {
       setName,
       addAspect,
-      addSkill,
       removeAspect,
       setAspectName,
       setAspect,
+      addSkill,
       setSkillName,
       setSkill,
       removeSkill,
