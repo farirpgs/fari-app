@@ -27,6 +27,7 @@ import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "../../../../routes/Character/components/CharacterDialog";
+
 export const PlayerRow: React.FC<{
   player: IPlayer;
   isGM: boolean;
@@ -50,7 +51,6 @@ export const PlayerRow: React.FC<{
     : textColor.disabled;
 
   const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
-  const [hover, setHover] = useState(false);
   const name = props.player?.playerName || props.player?.character?.name || "";
   const hasCharacterSheet = !!props.player.character;
 
@@ -63,12 +63,7 @@ export const PlayerRow: React.FC<{
           backgroundColor: darken(theme.palette.secondary.dark, 0.75),
         }
   );
-  const clickableRowStyle = css({
-    cursor: "pointer",
-  });
-  const hoveredRowStyle = css({
-    background: theme.palette.action.hover,
-  });
+
   const playerInfoCellStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
@@ -139,20 +134,7 @@ export const PlayerRow: React.FC<{
         selected={false}
         className={cx({
           [selectedRowStyle]: shouldHighlight,
-          [clickableRowStyle]: hasCharacterSheet,
-          [hoveredRowStyle]: hover,
         })}
-        onMouseEnter={() => {
-          if (props.player.character) {
-            setHover(true);
-          }
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-        onClick={() => {
-          setCharacterDialogOpen(true);
-        }}
       >
         <TableCell className={playerInfoCellStyle} align="left">
           <Typography
@@ -254,20 +236,7 @@ export const PlayerRow: React.FC<{
       <TableRow
         className={cx(controlsRowStyle, {
           [selectedRowStyle]: shouldHighlight,
-          [clickableRowStyle]: hasCharacterSheet,
-          [hoveredRowStyle]: hover,
         })}
-        onMouseEnter={() => {
-          if (props.player.character) {
-            setHover(true);
-          }
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-        onClick={() => {
-          setCharacterDialogOpen(true);
-        }}
       >
         <TableCell colSpan={4} className={defaultTableCellStyle}>
           <Grid container alignItems="center" justify="flex-end" spacing={1}>
@@ -288,7 +257,7 @@ export const PlayerRow: React.FC<{
                     }}
                   >
                     <PersonIcon
-                      className={css({ width: "1rem", height: "1rem" })}
+                      className={css({ width: "1.5rem", height: "1.5rem" })}
                     />
                   </IconButton>
                 </span>
@@ -310,20 +279,7 @@ export const PlayerRow: React.FC<{
         selected={false}
         className={cx(controlsRowStyle, {
           [selectedRowStyle]: shouldHighlight,
-          [clickableRowStyle]: hasCharacterSheet,
-          [hoveredRowStyle]: hover,
         })}
-        onMouseEnter={() => {
-          if (props.player.character) {
-            setHover(true);
-          }
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-        onClick={() => {
-          setCharacterDialogOpen(true);
-        }}
       >
         <TableCell colSpan={4} className={defaultTableCellStyle}>
           <Grid container alignItems="center" justify="flex-end" spacing={1}>
