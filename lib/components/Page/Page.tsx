@@ -276,14 +276,16 @@ export const Page: React.FC<{
             )}
             <Hidden smDown>{renderMenu(false)}</Hidden>
             <Hidden mdUp>
-              <IconButton
-                color="inherit"
-                onClick={() => {
-                  setMenuOpen(true);
-                }}
-              >
-                <MenuIcon color="inherit" />
-              </IconButton>
+              {!isLive && (
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    setMenuOpen(true);
+                  }}
+                >
+                  <MenuIcon color="inherit" />
+                </IconButton>
+              )}
             </Hidden>
             <Drawer
               anchor="bottom"
@@ -299,8 +301,9 @@ export const Page: React.FC<{
                 flex: "1 1 auto",
               })}
             />
-
-            {kofi && !shouldDisplayRejoinButton && <Kofi />}
+            <Hidden smDown>
+              {kofi && !shouldDisplayRejoinButton && <Kofi />}
+            </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
                 color="secondary"
