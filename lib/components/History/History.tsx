@@ -19,6 +19,7 @@ export const History = withRouter(function HistoryComponent(props) {
     history,
     location: { pathname },
   } = props;
+
   useEffect(() => {
     routerHistory = history;
     googleAnalyticsService.sendPageView();

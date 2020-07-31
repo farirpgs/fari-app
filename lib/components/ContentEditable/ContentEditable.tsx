@@ -28,7 +28,7 @@ export const ContentEditable: React.FC<{
         $ref.current.innerHTML = cleanHTML;
       }
     }
-  }, [props.value]);
+  }, [props.value, props.readonly]);
 
   useEffect(() => {
     function focusOnLoad() {

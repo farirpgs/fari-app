@@ -25,6 +25,7 @@
   "rules": {
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "prefer-template": "error",
     "react/self-closing-comp": [
       "warn",
