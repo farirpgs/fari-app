@@ -2,7 +2,11 @@ import produce from "immer";
 import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
-import { ICharacter } from "../../../contexts/CharactersContext/CharactersContext";
+import {
+  CharacterType,
+  defaultCharactersByType,
+  ICharacter,
+} from "../../../contexts/CharactersContext/CharactersContext";
 
 export function useCharacter(c?: ICharacter | undefined) {
   const [character, setCharacter] = useState<ICharacter | undefined>(c);
@@ -18,6 +22,26 @@ export function useCharacter(c?: ICharacter | undefined) {
       setCharacter(c);
     }
   }, [c]);
+
+  function loadTemplate(type: CharacterType) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const oldId = draft.id;
+        const oldName = draft.name;
+        const defaultCharacter = defaultCharactersByType[type];
+
+        return {
+          ...defaultCharacter,
+          id: oldId,
+          name: oldName,
+          lastUpdated: new Date().getTime(),
+        };
+      })
+    );
+  }
 
   function setName(newName: string) {
     setCharacter(
@@ -350,6 +374,7 @@ export function useCharacter(c?: ICharacter | undefined) {
   return {
     state: { character, dirty },
     actions: {
+      loadTemplate,
       setName,
       addAspect,
       removeAspect,

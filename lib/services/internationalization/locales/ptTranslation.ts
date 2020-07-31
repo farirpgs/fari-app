@@ -26,8 +26,6 @@ export const ptTranslation: Record<IPossibleTranslationKeys, any> = {
   "characters-route.description": undefined,
   "characters-route.title-select": undefined,
   "characters-route.title": undefined,
-  "charaters-route.storage.description": undefined,
-  "charaters-route.storage.title": undefined,
   "common.language.dev": undefined,
   "common.language.en": undefined,
   "common.language.es": undefined,

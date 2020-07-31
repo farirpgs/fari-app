@@ -5,10 +5,11 @@ import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 
 export enum CharacterType {
-  CoreCondensed,
-  Accelerated,
-  Custom,
+  CoreCondensed = "CoreCondensed",
+  Accelerated = "Accelerated",
+  Custom = "Custom",
 }
+
 type IManagerCallback = (character: ICharacter) => void;
 
 export const CharactersContext = React.createContext<

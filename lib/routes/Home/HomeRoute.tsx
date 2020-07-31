@@ -57,7 +57,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Typography>
                 <Box py="2rem" textAlign="center" marginTop="auto">
                   <Button
-                    type="submit"
                     variant="contained"
                     color="primary"
                     size="large"
@@ -81,7 +80,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Typography>
                 <Box py="2rem" textAlign="center" marginTop="auto">
                   <Button
-                    type="submit"
                     variant="outlined"
                     color="primary"
                     size="large"

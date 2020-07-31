@@ -4,7 +4,7 @@ import {
   CharacterType,
   ICharacter,
   migrateCharacters,
-  useCharacters
+  useCharacters,
 } from "../CharactersContext";
 
 describe("migrateCharacters", () => {

@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Collapse,
   Container,
   Dialog,
   DialogActions,
@@ -10,6 +11,8 @@ import {
   DialogTitle,
   Grid,
   IconButton,
+  MenuItem,
+  Select,
   Slide,
   Snackbar,
   Typography,
@@ -18,19 +21,25 @@ import {
 import { TransitionProps } from "@material-ui/core/transitions";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import SaveIcon from "@material-ui/icons/Save";
 import { Alert } from "@material-ui/lab";
 import { css } from "emotion";
 import React, { useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
-import { ICharacter } from "../../../contexts/CharactersContext/CharactersContext";
+import {
+  CharacterType,
+  ICharacter,
+} from "../../../contexts/CharactersContext/CharactersContext";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
+import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
 
 const Transition = React.forwardRef(function Transition(
@@ -53,7 +62,7 @@ export const CharacterDialog: React.FC<{
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
-
+  const [template, setTemplate] = useState(CharacterType.CoreCondensed);
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
     props.onSave?.(updatedCharacter!);
@@ -62,6 +71,18 @@ export const CharacterDialog: React.FC<{
 
   function onAdvanced() {
     setAdvanced((prev) => !prev);
+  }
+
+  function onTemplateChange(newTemplate: CharacterType) {
+    setTemplate(newTemplate);
+  }
+
+  function onLoadTemplate() {
+    const confirmed = confirm(t("character-dialog.load-template-confirmation"));
+
+    if (confirmed) {
+      characterManager.actions.loadTemplate(template);
+    }
   }
 
   function onClose() {
@@ -155,10 +176,50 @@ export const CharacterDialog: React.FC<{
 
     return (
       <Container maxWidth="md">
+        <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
         <Box className={sheetContentStyle}>{renderActions()}</Box>
         <Box className={sheetContentStyle}>{renderName()}</Box>
         <Box className={sheetContentStyle}>{renderContent()}</Box>
       </Container>
+    );
+  }
+
+  function renderManagementActions() {
+    return (
+      <Collapse in={advanced}>
+        <Box>
+          <Grid container wrap="nowrap" spacing={2} justify="center">
+            <Grid item>
+              <Select
+                value={template}
+                onChange={(event) =>
+                  onTemplateChange(event.target.value as CharacterType)
+                }
+              >
+                {Object.keys(CharacterType).map((type) => {
+                  return (
+                    <MenuItem key={type} value={type}>
+                      {t(
+                        `character-dialog.template.${type}` as IPossibleTranslationKeys
+                      )}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </Grid>
+            <Grid item>
+              <Button
+                color="primary"
+                variant="text"
+                endIcon={<AssignmentIndIcon />}
+                onClick={onLoadTemplate}
+              >
+                {t("character-dialog.load-template")}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Collapse>
     );
   }
 
@@ -204,8 +265,7 @@ export const CharacterDialog: React.FC<{
             <Button
               color="primary"
               variant={advanced ? "contained" : "outlined"}
-              type="submit"
-              startIcon={<CreateIcon />}
+              endIcon={<CreateIcon />}
               onClick={onAdvanced}
             >
               {t("character-dialog.advanced")}
@@ -218,6 +278,7 @@ export const CharacterDialog: React.FC<{
               color="primary"
               variant={characterManager.state.dirty ? "contained" : "outlined"}
               type="submit"
+              endIcon={<SaveIcon />}
               onClick={onSave}
             >
               {t("character-dialog.save")}
