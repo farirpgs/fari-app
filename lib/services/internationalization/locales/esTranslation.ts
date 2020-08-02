@@ -74,6 +74,7 @@ export const esTranslation: Record<
   "index-card.remove": `Quitar`,
   "index-card.reset": `Reiniciar`,
   "manager.deleted": undefined,
+  "manager.import": undefined,
   "manager.leave-without-saving": undefined,
   "manager.new": undefined,
   "manager.no-items": undefined,
