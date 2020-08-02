@@ -69,6 +69,7 @@ export const enTranslation = {
   "index-card.remove": `Remove`,
   "index-card.reset": `Reset`,
   "manager.deleted": `Deleted`,
+  "manager.import": `Import`,
   "manager.leave-without-saving": `Are you sure you want to leave without saving ?`,
   "manager.new": `New`,
   "manager.no-items": `There's nothing here yet`,

@@ -12,9 +12,10 @@ import {
   ListItemText,
   Snackbar,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ExportIcon from "@material-ui/icons/GetApp";
 import { Alert } from "@material-ui/lab";
 import { css } from "emotion";
 import React, { useState } from "react";
@@ -38,6 +39,8 @@ type IProps<T extends IBaseItem> = {
   onAdd(): void;
   onDelete(item: T): void;
   onUndo(item: T): void;
+  onImport(importPaths: FileList | null): void;
+  onExport(item: T): void;
 };
 
 export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
@@ -67,6 +70,16 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
     setDeletedObject(item);
     setDeletedSnack(true);
     props.onDelete(item);
+  }
+
+  function onImport(itemsToImport: FileList | null) {
+    if (itemsToImport) {
+      props.onImport(itemsToImport);
+    }
+  }
+
+  function onExport(item: T) {
+    props.onExport(item);
   }
 
   return (
@@ -117,6 +130,10 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
           <Button color="primary" variant="outlined" onClick={onAdd}>
             {t("manager.new")}
           </Button>
+          <Button color="primary" variant="outlined" component="label">
+            {t("manager.import")}
+            <input type="file" accept=".json" style={{ display: "none" }} onChange={(event) => onImport(event.target.files)} />
+          </Button>
         </Grid>
       </Grid>
     );
@@ -154,6 +171,9 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               onClick={() => {
                 onItemClick(item);
               }}
+              className={css({
+                paddingRight: "102px"
+              })}
             >
               <ListItemAvatar>
                 <Avatar
@@ -171,6 +191,14 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               />
               {props.mode === ManagerMode.Manage && (
                 <ListItemSecondaryAction>
+                  <IconButton
+                    edge="start"
+                    onClick={() => {
+                      onExport(item);
+                    }}
+                  >
+                    <ExportIcon />
+                  </IconButton>
                   <IconButton
                     edge="end"
                     onClick={() => {

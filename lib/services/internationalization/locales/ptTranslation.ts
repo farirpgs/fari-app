@@ -71,6 +71,7 @@ export const ptTranslation: Record<IPossibleTranslationKeys, any> = {
   "index-card.remove": undefined,
   "index-card.reset": undefined,
   "manager.deleted": undefined,
+  "manager.import": undefined,
   "manager.leave-without-saving": undefined,
   "manager.new": undefined,
   "manager.no-items": undefined,
