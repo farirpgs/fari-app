@@ -278,20 +278,24 @@ export type ICharacterCustomField<TValue> = Array<{
 }>;
 
 export function migrateCharacters(characters: Array<ICharacter>) {
-  return produce(characters, (draft) => {
-    draft.forEach((c) => {
-      if (c.version === 1) {
-        // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
-        c.stressTracks.forEach((s) => {
-          s.value = s.value.map((box, index) => {
-            return {
-              checked: (box as unknown) as boolean,
-              label: `${index + 1}`,
-            };
-          });
+  return characters.map((c) => {
+    return migrateCharacter(c);
+  });
+}
+
+export function migrateCharacter(c: ICharacter) {
+  return produce(c, (draft) => {
+    if (draft.version === 1) {
+      // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
+      draft.stressTracks.forEach((s) => {
+        s.value = s.value.map((box, index) => {
+          return {
+            checked: (box as unknown) as boolean,
+            label: `${index + 1}`,
+          };
         });
-        c.version = 2;
-      }
-    });
+      });
+      draft.version = 2;
+    }
   });
 }

@@ -133,9 +133,15 @@ function makeDefaultSavableScene(): ISavableScene {
   };
 }
 
-export function migrateScenes(characters: Array<ISavableScene>) {
-  return produce(characters, (draft) => {
-    draft.forEach((c) => {});
+export function migrateScenes(scenes: Array<ISavableScene>) {
+  return scenes.map((s) => {
+    return migrateScene(s);
+  });
+}
+
+export function migrateScene(scene: ISavableScene) {
+  return produce(scene, (draft) => {
+    // todo...
   });
 }
 

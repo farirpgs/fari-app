@@ -1,11 +1,14 @@
 import { useTheme } from "@material-ui/core";
+import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { v4 as uuidV4 } from "uuid";
 import {
   ISavableScene,
-  ScenesContext
+  migrateScene,
+  ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
+import { FariEntity } from "../../domains/FariEntity/FariEntity";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -40,30 +43,26 @@ export const ScenesManager: React.FC<IProps> = (props) => {
     scenesManager.actions.remove(scene.id);
   }
 
-  function onImport(scenesToImport: FileList | null) {
-    if (scenesToImport) {
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        if (event.target) {
-          if (event.target.result) {
-            var importingScene = JSON.parse(event.target.result.toString()) as ISavableScene;
-            importingScene.id = uuidV4();
-            scenesManager.actions.upsert(importingScene);
-          }
-        }
-      }
-      reader.readAsText(scenesToImport[0]);
-    }
+  function onImport(sceneToImport: FileList | null) {
+    FariEntity.import<ISavableScene>({
+      filesToImport: sceneToImport,
+      fariType: "scene",
+      onImport: (s) => {
+        const sceneWithNewId = produce(s, (draft) => {
+          draft.id = uuidV4();
+        });
+        const migratedScene = migrateScene(sceneWithNewId);
+        scenesManager.actions.upsert(migratedScene);
+      },
+    });
   }
 
   function onExport(scene: ISavableScene) {
-    var sceneDataAsString = JSON.stringify(scene);
-    var sceneDataAsBlob = new Blob([sceneDataAsString], { type: "text/plain" });
-    var downloadURL = URL.createObjectURL(sceneDataAsBlob);
-    var secretLink = document.createElement("a");
-    secretLink.href = downloadURL;
-    secretLink.download = scene.name + "_data.json";
-    secretLink.click();
+    FariEntity.export({
+      element: scene,
+      fariType: "scene",
+      name: scene.name,
+    });
   }
 
   return (

@@ -1,12 +1,15 @@
 import { useTheme } from "@material-ui/core";
+import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { v4 as uuidV4 } from "uuid";
 import {
   CharactersContext,
   CharacterType,
-  ICharacter
+  ICharacter,
+  migrateCharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { FariEntity } from "../../domains/FariEntity/FariEntity";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -44,30 +47,25 @@ export const CharactersManager: React.FC<IProps> = (props) => {
   }
 
   function onImport(charactersToImport: FileList | null) {
-    if (charactersToImport) {
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        if (event.target) {
-          if (event.target.result) {
-            var importingChar = JSON.parse(event.target.result.toString()) as ICharacter;
-            importingChar.id = uuidV4();
-            charactersManager.actions.upsert(importingChar);
-          }
-        }
-
-      };
-      reader.readAsText(charactersToImport[0]);
-    }
+    FariEntity.import<ICharacter>({
+      filesToImport: charactersToImport,
+      fariType: "character",
+      onImport: (c) => {
+        const characterWithNewId = produce(c, (draft) => {
+          draft.id = uuidV4();
+        });
+        const migratedCharacter = migrateCharacter(characterWithNewId);
+        charactersManager.actions.upsert(migratedCharacter);
+      },
+    });
   }
 
   function onExport(character: ICharacter) {
-    var characterDataAsString = JSON.stringify(character);
-    var characterDataAsBlob = new Blob([characterDataAsString], { type: "text/plain" });
-    var downloadURL = URL.createObjectURL(characterDataAsBlob);
-    var secretLink = document.createElement("a");
-    secretLink.href = downloadURL;
-    secretLink.download = character.name + "_data.json";
-    secretLink.click();
+    FariEntity.export({
+      element: character,
+      fariType: "character",
+      name: character.name,
+    });
   }
 
   return (

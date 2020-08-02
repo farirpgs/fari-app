@@ -7,9 +7,9 @@ export const listItem = {
       const options: Intl.DateTimeFormatOptions = {
         hour: "numeric",
         minute: "numeric",
-        weekday: "short",
+        weekday: "long",
         day: "numeric",
-        month: "short",
+        month: "long",
         year: "numeric",
       };
       const formattedDate = new Date(timestamp).toLocaleDateString(

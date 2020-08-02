@@ -12,7 +12,7 @@ import {
   ListItemText,
   Snackbar,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExportIcon from "@material-ui/icons/GetApp";
@@ -48,6 +48,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [deletedSnack, setDeletedSnack] = useState(false);
   const [deletedObject, setDeletedObject] = useState<T | undefined>(undefined);
+  const [importCounter, setImportCounter] = useState(0);
   const { t } = useTranslate();
 
   function onAdd() {
@@ -73,9 +74,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   }
 
   function onImport(itemsToImport: FileList | null) {
-    if (itemsToImport) {
-      props.onImport(itemsToImport);
-    }
+    props.onImport(itemsToImport);
   }
 
   function onExport(item: T) {
@@ -130,9 +129,22 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
           <Button color="primary" variant="outlined" onClick={onAdd}>
             {t("manager.new")}
           </Button>
+        </Grid>
+        <Grid item>
           <Button color="primary" variant="outlined" component="label">
             {t("manager.import")}
-            <input type="file" accept=".json" style={{ display: "none" }} onChange={(event) => onImport(event.target.files)} />
+            <input
+              type="file"
+              accept=".json"
+              key={`import-input-${importCounter}`}
+              className={css({
+                display: "none",
+              })}
+              onChange={(event) => {
+                onImport(event.target.files);
+                setImportCounter((prev) => prev + 1);
+              }}
+            />
           </Button>
         </Grid>
       </Grid>
@@ -172,7 +184,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                 onItemClick(item);
               }}
               className={css({
-                paddingRight: "102px"
+                paddingRight: "102px",
               })}
             >
               <ListItemAvatar>
