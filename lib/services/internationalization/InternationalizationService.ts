@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
+import { frTranslation } from "./locales/frTranslation";
 
 export type IPossibleLanguages = "en" | "es" | "dev";
 
@@ -26,6 +27,9 @@ export class InternationalizationService {
           },
           es: {
             translation: esTranslation,
+          },
+          fr: {
+            translation: frTranslation,
           },
           dev: {
             translation: devTranslation,
