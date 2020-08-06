@@ -76,7 +76,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
       window.addEventListener("touchstart", handleScrolling, { 'passive': false });
     }
     else {
-      window.removeEventListener("touchstart", handleScrolling, { 'passive': false });
+      window.removeEventListener("touchstart", handleScrolling);
     }
   }, [isDrawing]);
 
