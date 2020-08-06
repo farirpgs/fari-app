@@ -26,11 +26,11 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [lines, setLines] = useState<ILines>([]);
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement | null>(null);
-  const [scrollEnabled, setScrollEnabled] = useState(true);
+
   const handleScrolling = useCallback(() => {
     event?.preventDefault();
 
-  }, [setScrollEnabled]);
+  }, []);
 
   useEffect(() => {
     if (props.lines && props.readonly) {
@@ -58,10 +58,10 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   });
 
   useEffect(() => {
-    document.addEventListener("pointerup", handleMouseUp);
+    document.addEventListener("pointerup", handlePointerUp);
 
     return () => {
-      document.removeEventListener("pointerup", handleMouseUp);
+      document.removeEventListener("pointerup", handlePointerUp);
     };
   }, []);
 
@@ -80,15 +80,15 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }, [isDrawing]);
 
-  function handleMouseDown(
-    mouseEvent: React.PointerEvent<HTMLDivElement>
+  function handlePointerDown(
+    pointerEvent: React.PointerEvent<HTMLDivElement>
   ) {
 
-    if (mouseEvent.button !== 0 || props.readonly) {
+    if (pointerEvent.button !== 0 || props.readonly) {
       return;
     }
 
-    const newPoint = relativeCoordinatesForEvent(mouseEvent);
+    const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
       setLines((lines) => {
         return [...lines, [newPoint]];
@@ -97,14 +97,14 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }
 
-  function handleMouseMove(
-    mouseEvent: React.PointerEvent<HTMLDivElement>
+  function handlePointerMove(
+    pointerEvent: React.PointerEvent<HTMLDivElement>
   ) {
     if (!isDrawing) {
       return;
     }
 
-    const newPoint = relativeCoordinatesForEvent(mouseEvent);
+    const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
       setLines((lines) => {
         const lastLineIndex = lines.length - 1;
@@ -119,17 +119,17 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }
 
-  function handleMouseUp() {
+  function handlePointerUp() {
     setDrawing(false);
   }
 
   function relativeCoordinatesForEvent(
-    mouseEvent: React.PointerEvent<HTMLDivElement>
+    pointerEvent: React.PointerEvent<HTMLDivElement>
   ): IPoint | undefined {
     if ($container.current) {
       const boundingRect = $container.current.getBoundingClientRect();
-      const x = mouseEvent.clientX - boundingRect.left;
-      const y = mouseEvent.clientY - boundingRect.top;
+      const x = pointerEvent.clientX - boundingRect.left;
+      const y = pointerEvent.clientY - boundingRect.top;
       const point = {
         x: x,
         y: y,
@@ -151,9 +151,9 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
         cursor: props.readonly ? "inherit" : "crosshair",
       })}
       ref={$container}
-      onPointerDown={handleMouseDown}
-      onPointerMove={handleMouseMove}
-      onPointerUp={handleMouseUp}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
     >
       {lines.length === 0 ? (
         <Fade in>
@@ -194,7 +194,6 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   );
 });
 
-DrawArea.displayName = "DrawArea";
 
 export const DrawingLine: React.FC<{ line: ILine }> = (props) => {
   const lineData = props.line
