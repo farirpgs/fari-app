@@ -1,24 +1,22 @@
 {
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll"],
   "search.exclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,
     "**/.cache/**": true,
     "yarn.lock": true
   },
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true
-  },
-  "editor.tabSize": 2,
   "vsicons.associations.folders": [
     {
       "icon": "services",
