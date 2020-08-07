@@ -27,7 +27,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement | null>(null);
 
-  const handleScrolling = useCallback(() => {
+  const handleScrolling = useCallback((event) => {
     event?.preventDefault();
 
   }, []);
@@ -194,6 +194,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   );
 });
 
+DrawArea.displayName = "DrawArea";
 
 export const DrawingLine: React.FC<{ line: ILine }> = (props) => {
   const lineData = props.line
