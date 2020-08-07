@@ -104,10 +104,11 @@ fdescribe("useScene", () => {
       act(() => {
         result.current.actions.updateName("New Name from input");
       });
+
       // THEN dirty is true
       expect(result.current.state.dirty).toEqual(true);
 
-      // WHEN reload
+      // WHEN reload the same scene
       act(() => {
         result.current.actions.loadScene(sceneToLoad);
       });

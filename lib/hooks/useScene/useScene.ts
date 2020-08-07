@@ -82,7 +82,7 @@ export function useScene(props: IProps) {
           draft.lastUpdated = sceneToLoad.lastUpdated;
         })
       );
-      setSceneToLoad(undefined);
+      // setSceneToLoad(undefined);
     }
   }, [sceneToLoad]);
 
@@ -119,7 +119,8 @@ export function useScene(props: IProps) {
 
   function loadScene(newScene: ISavableScene) {
     if (newScene) {
-      setSceneToLoad(newScene);
+      const clonedNewScene = { ...newScene };
+      setSceneToLoad(clonedNewScene);
     }
   }
 
