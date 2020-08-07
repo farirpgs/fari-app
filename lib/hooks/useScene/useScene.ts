@@ -82,6 +82,7 @@ export function useScene(props: IProps) {
           draft.lastUpdated = sceneToLoad.lastUpdated;
         })
       );
+      setSceneToLoad(undefined);
     }
   }, [sceneToLoad]);
 

@@ -66,15 +66,17 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene.name).toEqual("");
       expect(result.current.state.dirty).toEqual(false);
 
+      // GIVEN
+      const sceneToLoad = {
+        id: "new-id",
+        aspects: { "aspect-id": { toto: 3 } as any },
+        lastUpdated: 111,
+        name: "new name",
+        version: 3,
+      };
       // WHEN
       act(() => {
-        result.current.actions.loadScene({
-          id: "new-id",
-          aspects: { "aspect-id": { toto: 3 } as any },
-          lastUpdated: 111,
-          name: "new name",
-          version: 3,
-        });
+        result.current.actions.loadScene(sceneToLoad);
       });
 
       // THEN
@@ -107,13 +109,7 @@ fdescribe("useScene", () => {
 
       // WHEN reload
       act(() => {
-        result.current.actions.loadScene({
-          id: "new-id",
-          aspects: { "aspect-id": { toto: 3 } as any },
-          lastUpdated: 111,
-          name: "new name",
-          version: 3,
-        });
+        result.current.actions.loadScene(sceneToLoad);
       });
 
       // THEN dirty is false
