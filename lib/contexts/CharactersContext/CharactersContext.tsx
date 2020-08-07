@@ -182,6 +182,12 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
+  aspectsLabel: undefined,
+  skillsLabel: undefined,
+  stuntsLabel: undefined,
+  stressTracksLabel: undefined,
+  consequencesLabel: undefined,
+  refreshLabel: undefined,
   version: 2,
   lastUpdated: new Date().getTime(),
 };
@@ -225,6 +231,12 @@ const defaultAcceleratedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
+  aspectsLabel: undefined,
+  skillsLabel: undefined,
+  stuntsLabel: undefined,
+  stressTracksLabel: undefined,
+  consequencesLabel: undefined,
+  refreshLabel: undefined,
   version: 2,
   lastUpdated: new Date().getTime(),
 };
@@ -247,6 +259,12 @@ const defaultCustomCharacter: ICharacter = {
   ],
   consequences: [{ name: "Consequence", value: "" }],
   refresh: 3,
+  aspectsLabel: undefined,
+  skillsLabel: undefined,
+  stuntsLabel: undefined,
+  stressTracksLabel: undefined,
+  consequencesLabel: undefined,
+  refreshLabel: undefined,
   version: 2,
   lastUpdated: new Date().getTime(),
 };
@@ -267,9 +285,15 @@ export interface ICharacter {
     Array<{ checked?: boolean; label: string }>
   >;
   consequences: ICharacterCustomField<string>;
+  aspectsLabel: string | undefined;
+  skillsLabel: string | undefined;
+  stuntsLabel: string | undefined;
+  stressTracksLabel: string | undefined;
+  consequencesLabel: string | undefined;
+  refreshLabel: string | undefined;
+  refresh: number;
   version: number;
   lastUpdated: number;
-  refresh: number;
 }
 
 export type ICharacterCustomField<TValue> = Array<{

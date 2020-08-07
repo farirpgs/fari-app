@@ -360,6 +360,72 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
+  function setAspectsLabel(newAspectsLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.aspectsLabel = newAspectsLabel;
+      })
+    );
+  }
+
+  function setSkillsLabel(newSkillsLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.skillsLabel = newSkillsLabel;
+      })
+    );
+  }
+
+  function setStuntsLabel(newStuntsLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.stuntsLabel = newStuntsLabel;
+      })
+    );
+  }
+
+  function setStressTracksLabel(newStressTracksLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.stressTracksLabel = newStressTracksLabel;
+      })
+    );
+  }
+
+  function setConsequencesLabel(newConsequencesLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.consequencesLabel = newConsequencesLabel;
+      })
+    );
+  }
+
+  function setRefreshLabel(newRefreshLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.refreshLabel = newRefreshLabel;
+      })
+    );
+  }
+
   function sanitizeCharacter() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
@@ -400,6 +466,12 @@ export function useCharacter(c?: ICharacter | undefined) {
       setConsequence,
       removeConsequence,
       udpateRefresh,
+      setAspectsLabel,
+      setSkillsLabel,
+      setStuntsLabel,
+      setStressTracksLabel,
+      setConsequencesLabel,
+      setRefreshLabel,
       sanitizeCharacter,
     },
   };

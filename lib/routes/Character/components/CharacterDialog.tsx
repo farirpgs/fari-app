@@ -323,13 +323,25 @@ export const CharacterDialog: React.FC<{
     );
   }
 
-  function renderSheetHeader(label: string, onAdd?: () => void) {
+  function renderSheetHeader(
+    label: string,
+    onLabelChange: (newLabel: string) => void,
+    onAdd?: () => void
+  ) {
     const shouldRenderAddButton = onAdd && advanced;
     return (
       <Box className={sheetHeader}>
         <Grid container justify="space-between" wrap="nowrap">
           <Grid item>
-            <FateLabel>{label}</FateLabel>
+            <FateLabel>
+              <ContentEditable
+                readonly={!advanced}
+                value={label}
+                onChange={(newLabel) => {
+                  onLabelChange(newLabel);
+                }}
+              />
+            </FateLabel>
           </Grid>
           {shouldRenderAddButton && (
             <Grid item>
@@ -353,7 +365,9 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         {renderSheetHeader(
-          t("character-dialog.aspects"),
+          characterManager.state.character?.aspectsLabel ??
+            t("character-dialog.aspects"),
+          characterManager.actions.setAspectsLabel,
           characterManager.actions.addAspect
         )}
 
@@ -421,7 +435,9 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         {renderSheetHeader(
-          t("character-dialog.skills"),
+          characterManager.state.character?.skillsLabel ??
+            t("character-dialog.skills"),
+          characterManager.actions.setSkillsLabel,
           characterManager.actions.addSkill
         )}
 
@@ -490,7 +506,9 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         {renderSheetHeader(
-          t("character-dialog.stunts-extras"),
+          characterManager.state.character?.stuntsLabel ??
+            t("character-dialog.stunts-extras"),
+          characterManager.actions.setStuntsLabel,
           characterManager.actions.addStunt
         )}
         <Box className={sheetContentStyle}>
@@ -551,7 +569,11 @@ export const CharacterDialog: React.FC<{
   function renderRefresh() {
     return (
       <>
-        {renderSheetHeader(t("character-dialog.refresh"))}
+        {renderSheetHeader(
+          characterManager.state.character?.refreshLabel ??
+            t("character-dialog.refresh"),
+          characterManager.actions.setRefreshLabel
+        )}
         <Box className={sheetContentStyle}>
           <Grid container justify="center">
             <Grid item>
@@ -588,12 +610,17 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         {renderSheetHeader(
-          t("character-dialog.stress"),
+          characterManager.state.character?.stressTracksLabel ??
+            t("character-dialog.stress"),
+          characterManager.actions.setStressTracksLabel,
           characterManager.actions.addStressTrack
         )}
         <Box className={sheetContentStyle}>{renderStressTracks()}</Box>
         {renderSheetHeader(
-          t("character-dialog.consequences"),
+          characterManager.state.character?.consequencesLabel ??
+            t("character-dialog.consequences"),
+          characterManager.actions.setConsequencesLabel,
+
           characterManager.actions.addConsequence
         )}
         <Box className={sheetContentStyle}>{renderConsequences()}</Box>

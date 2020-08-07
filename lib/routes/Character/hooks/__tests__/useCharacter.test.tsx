@@ -533,6 +533,12 @@ describe("useCharacter", () => {
       result.current.actions.removeConsequence(0);
       result.current.actions.udpateRefresh(5);
       result.current.actions.loadTemplate(CharacterType.Accelerated);
+      result.current.actions.setAspectsLabel("new label");
+      result.current.actions.setSkillsLabel("new label");
+      result.current.actions.setStuntsLabel("new label");
+      result.current.actions.setStressTracksLabel("new label");
+      result.current.actions.setConsequencesLabel("new label");
+      result.current.actions.setRefreshLabel("new label");
       result.current.actions.sanitizeCharacter();
     });
   });
@@ -745,5 +751,74 @@ describe("useCharacter", () => {
         version: 2,
       });
     });
+  });
+
+  describe("labels", () => {
+    // GIVEN
+    const character = {
+      ...defaultCharactersByType[CharacterType.CoreCondensed],
+      id: "1",
+      lastUpdated: 1,
+    };
+    // WHEN
+    const { result, rerender } = renderHook(
+      (props) => {
+        return useCharacter(character);
+      },
+      {
+        initialProps: { character: character },
+      }
+    );
+    // THEN
+    expect(result.current.state.character).toEqual(character);
+
+    // WHEN the aspects label is updated
+    act(() => {
+      result.current.actions.setAspectsLabel("Les aspects");
+    });
+    // THEN
+    expect(result.current.state.character?.aspectsLabel).toEqual("Les aspects");
+
+    // WHEN the skills label is updated
+    act(() => {
+      result.current.actions.setSkillsLabel("Les talents");
+    });
+    // THEN
+    expect(result.current.state.character?.skillsLabel).toEqual("Les talents");
+
+    // WHEN the stunts label is updated
+    act(() => {
+      result.current.actions.setStuntsLabel("Les pouvoirs");
+    });
+    // THEN
+    expect(result.current.state.character?.stuntsLabel).toEqual("Les pouvoirs");
+
+    // WHEN the stress_tracks label is updated
+    act(() => {
+      result.current.actions.setStressTracksLabel("Le stress");
+    });
+    // THEN
+    expect(result.current.state.character?.stressTracksLabel).toEqual(
+      "Le stress"
+    );
+
+    // WHEN the consequences label is updated
+    act(() => {
+      result.current.actions.setConsequencesLabel("Les consequences");
+    });
+    // THEN
+    expect(result.current.state.character?.consequencesLabel).toEqual(
+      "Les consequences"
+    );
+
+    // WHEN the refresh label is updated
+    act(() => {
+      result.current.actions.setRefreshLabel("Les points Fate");
+    });
+
+    // THEN
+    expect(result.current.state.character?.refreshLabel).toEqual(
+      "Les points Fate"
+    );
   });
 });
