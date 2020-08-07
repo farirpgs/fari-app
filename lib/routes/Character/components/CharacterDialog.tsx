@@ -332,7 +332,12 @@ export const CharacterDialog: React.FC<{
     return (
       <Box className={sheetHeader}>
         <Grid container justify="space-between" wrap="nowrap">
-          <Grid item>
+          <Grid
+            item
+            className={css({
+              flex: "1 1 auto",
+            })}
+          >
             <FateLabel>
               <ContentEditable
                 readonly={!advanced}
