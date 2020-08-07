@@ -24,8 +24,15 @@ describe("migrateCharacters", () => {
               value: [false, true, false] as any,
             },
           ],
+
           consequences: [],
           refresh: 3,
+          aspectsLabel: undefined,
+          skillsLabel: undefined,
+          stuntsLabel: undefined,
+          stressTracksLabel: undefined,
+          consequencesLabel: undefined,
+          refreshLabel: undefined,
           version: 1,
           lastUpdated: 0,
         };
