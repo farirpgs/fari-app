@@ -64,7 +64,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     if (!isDrawing) {
       props.onChange?.(lines);
     }
-  }, [isDrawing, lines, props.onChange]);
+  }, [isDrawing]);
 
   function handleMouseDown(
     mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
