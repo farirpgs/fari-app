@@ -1,7 +1,7 @@
 import { Fade, useTheme } from "@material-ui/core";
 import GestureIcon from "@material-ui/icons/Gesture";
 import { css } from "emotion";
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 
 export type ILines = Array<ILine>;
@@ -27,10 +27,10 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement | null>(null);
 
-  const handleScrolling = useCallback((event) => {
-    event?.preventDefault();
+  // const handleScrolling = useCallback((event) => {
+  //   event?.preventDefault();
 
-  }, []);
+  // }, []);
 
   useEffect(() => {
     if (props.lines && props.readonly) {
@@ -58,27 +58,19 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   });
 
   useEffect(() => {
-    document.addEventListener("pointerup", handlePointerUp);
-
-    return () => {
-      document.removeEventListener("pointerup", handlePointerUp);
-    };
-  }, []);
-
-  useEffect(() => {
     if (!isDrawing) {
       props.onChange?.(lines);
     }
-  }, [isDrawing, lines, props.onChange]);
-
-  useEffect(() => {
-    if (isDrawing) {
-      window.addEventListener("touchstart", handleScrolling, { 'passive': false });
-    }
-    else {
-      window.removeEventListener("touchstart", handleScrolling);
-    }
   }, [isDrawing]);
+
+  // useEffect(() => {
+  //   if (isDrawing) {
+  //     window.addEventListener("touchstart", handleScrolling, { 'passive': false });
+  //   }
+  //   else {
+  //     window.removeEventListener("touchstart", handleScrolling);
+  //   }
+  // }, [isDrawing]);
 
   function handlePointerDown(
     pointerEvent: React.PointerEvent<HTMLDivElement>
@@ -87,6 +79,9 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     if (pointerEvent.button !== 0 || props.readonly) {
       return;
     }
+
+    pointerEvent.preventDefault();
+    pointerEvent.stopPropagation();
 
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
@@ -119,8 +114,19 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }
 
-  function handlePointerUp() {
-    setDrawing(false);
+  function handlePointerUp(
+    pointerEvent: React.PointerEvent<HTMLDivElement>
+  ) {
+    if (pointerEvent.pointerType == "mouse") {
+      setDrawing(false);
+    }
+  }
+
+  function handleBlur(
+    blurEvent: React.FocusEvent<HTMLDivElement>
+  ) {
+    if (isDrawing)
+      setDrawing(false);
   }
 
   function relativeCoordinatesForEvent(
@@ -149,11 +155,13 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
         width: "100%",
         height: "100%",
         cursor: props.readonly ? "inherit" : "crosshair",
+        touchAction: isDrawing ? "none" : "auto",
       })}
       ref={$container}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
+      onBlur={handleBlur}
     >
       {lines.length === 0 ? (
         <Fade in>
