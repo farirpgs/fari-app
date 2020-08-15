@@ -27,11 +27,6 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   const [isDrawing, setDrawing] = useState(false);
   const $container = useRef<HTMLDivElement | null>(null);
 
-  // const handleScrolling = useCallback((event) => {
-  //   event?.preventDefault();
-
-  // }, []);
-
   useEffect(() => {
     if (props.lines && props.readonly) {
       setLines(props.lines);
@@ -62,15 +57,6 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
       props.onChange?.(lines);
     }
   }, [isDrawing]);
-
-  // useEffect(() => {
-  //   if (isDrawing) {
-  //     window.addEventListener("touchstart", handleScrolling, { 'passive': false });
-  //   }
-  //   else {
-  //     window.removeEventListener("touchstart", handleScrolling);
-  //   }
-  // }, [isDrawing]);
 
   function handlePointerDown(
     pointerEvent: React.PointerEvent<HTMLDivElement>
