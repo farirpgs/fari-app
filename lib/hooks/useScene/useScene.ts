@@ -61,14 +61,14 @@ export function useScene(props: IProps) {
       return false;
     }
 
-    const current: ISavableScene = {
+    const currentScene: ISavableScene = {
       id: scene.id,
       name: scene.name,
       aspects: scene.aspects,
       version: scene.version,
       lastUpdated: scene.lastUpdated,
     };
-    return !isEqual(sceneToLoad, current);
+    return !isEqual(sceneToLoad, currentScene);
   }, [scene, sceneToLoad]);
 
   useEffect(() => {
@@ -82,7 +82,6 @@ export function useScene(props: IProps) {
           draft.lastUpdated = sceneToLoad.lastUpdated;
         })
       );
-      // setSceneToLoad(undefined);
     }
   }, [sceneToLoad]);
 
@@ -119,8 +118,22 @@ export function useScene(props: IProps) {
 
   function loadScene(newScene: ISavableScene) {
     if (newScene) {
-      const clonedNewScene = { ...newScene };
-      setSceneToLoad(clonedNewScene);
+      setSceneToLoad({
+        id: newScene.id,
+        name: newScene.name,
+        aspects: newScene.aspects,
+        lastUpdated: newScene.lastUpdated,
+        version: newScene.version,
+      });
+    }
+  }
+
+  function cloneAndLoadScene(newScene: ISavableScene) {
+    if (newScene) {
+      const clonedNewScene = produce(newScene, (draft) => {
+        draft.id = uuidV4();
+      });
+      loadScene(clonedNewScene);
     }
   }
 
@@ -529,6 +542,7 @@ export function useScene(props: IProps) {
       resetScene,
       safeSetScene,
       loadScene,
+      cloneAndLoadScene,
       updateName,
       addAspect,
       removeAspect,

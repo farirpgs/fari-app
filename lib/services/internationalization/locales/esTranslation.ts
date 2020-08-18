@@ -112,6 +112,7 @@ export const esTranslation: Record<
   "play-route.join": `Unirse`,
   "play-route.leave-prompt": `¿Está seguro de que desea salir y resetear la escena?`,
   "play-route.load-scene": `Escena de carga`,
+  "play-route.load-scene-as-template": `Cargar escena como plantilla`,
   "play-route.name": `Nombre`,
   "play-route.new-scene": `Escena nueva`,
   "play-route.no-aspects": `Aún no hay aspectos en la escena`,

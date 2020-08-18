@@ -37,7 +37,6 @@ import LoupeIcon from "@material-ui/icons/Loupe";
 import NoteIcon from "@material-ui/icons/Note";
 import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import ReplayIcon from "@material-ui/icons/Replay";
 import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -71,6 +70,7 @@ import { IndexCard } from "../IndexCard/IndexCard";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
+import { SplitButton } from "../SplitButton/SplitButton";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 
 export enum SceneMode {
@@ -159,6 +159,10 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function onLoadScene(newScene: ISavableScene) {
     sceneManager.actions.loadScene(newScene);
+  }
+
+  function onLoadTemplateScene(newScene: ISavableScene) {
+    sceneManager.actions.cloneAndLoadScene(newScene);
   }
 
   function onAddOfflineCharacter(character: ICharacter) {
@@ -877,6 +881,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <Button
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
+                sceneManager.actions.loadScene(sceneManager.state.scene);
                 setSavedSnack(true);
               }}
               color="primary"
@@ -888,19 +893,30 @@ export const Scene: React.FC<IProps> = (props) => {
           </Grid>
           {props.mode !== SceneMode.Manage && (
             <Grid item>
-              <Button
-                onClick={() => {
-                  scenesManager.actions.openManager(
-                    ManagerMode.Use,
-                    onLoadScene
-                  );
-                }}
+              <SplitButton
                 color="default"
                 variant="outlined"
-                endIcon={<ReplayIcon />}
-              >
-                {t("play-route.load-scene")}
-              </Button>
+                options={[
+                  {
+                    label: t("play-route.load-scene"),
+                    onClick: () => {
+                      scenesManager.actions.openManager(
+                        ManagerMode.Use,
+                        onLoadScene
+                      );
+                    },
+                  },
+                  {
+                    label: t("play-route.load-scene-as-template"),
+                    onClick: () => {
+                      scenesManager.actions.openManager(
+                        ManagerMode.Use,
+                        onLoadTemplateScene
+                      );
+                    },
+                  },
+                ]}
+              />
             </Grid>
           )}
         </Grid>

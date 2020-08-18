@@ -107,6 +107,7 @@ export const enTranslation = {
   "play-route.join": `Join`,
   "play-route.leave-prompt": `Are you sure you want to leave and reset your scene ?`,
   "play-route.load-scene": `Load Scene`,
+  "play-route.load-scene-as-template": `Load Scene as Template`,
   "play-route.name": `Name`,
   "play-route.new-scene": `New Scene`,
   "play-route.no-aspects": `The scene doesn't have any aspects yet.`,

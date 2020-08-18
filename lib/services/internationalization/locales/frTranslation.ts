@@ -107,6 +107,7 @@ export const frTranslation = {
   "play-route.join": `Joindre`,
   "play-route.leave-prompt": `Etes-vous sûr de vouloir quitter et réinitialiser votre scène?`,
   "play-route.load-scene": `Charger une scène`,
+  "play-route.load-scene-as-template": `Charger une scène comme gabarit`,
   "play-route.name": `Nom`,
   "play-route.new-scene": `Nouvelle Scène`,
   "play-route.no-aspects": `La scène n'a pas encore d'aspects.`,
