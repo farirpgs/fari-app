@@ -397,8 +397,7 @@ export const Page: React.FC<{
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
-            to="https://github.com/fariapp/fari/issues/new/choose"
-            component={RouterLink}
+            href="https://github.com/fariapp/fari/discussions"
             target="_blank"
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
@@ -409,8 +408,7 @@ export const Page: React.FC<{
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
             color="inherit"
-            to="https://github.com/fariapp/fari"
-            component={RouterLink}
+            href="https://github.com/fariapp/fari"
             target="_blank"
             rel="noreferrer"
             size="small"
