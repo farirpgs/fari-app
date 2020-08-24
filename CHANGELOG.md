@@ -1,17 +1,19 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
-## 3.0.0 (TBD) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
+## 3.0.0 (Aug 24, 2020) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
 
 - feat: Scenes can now be prepared in advance, saved and then loaded directly during a play session.
 - feat: Index Cards are now more flexible. You can now add, remove or rename tracks or consequences as you wish.
 - feat: Scenes and Characters can now be exported from a device and imported on another one 👏 [nfregoso](https://github.com/nfregoso)
 - feat: The game session screen is now more focused on the current game and removes unnecessary menus.
 - feat: The game session join screen has an updated design.
+- feat: Load scene templates during a game
 - doc: More spanish translations 👏 [Erynus](https://github.com/Erynus).
 - tests: thanks you guys for the prerelease testing!
   - [Erynus](https://github.com/Erynus)
   - [nottsknight](https://github.com/nottsknight)
   - [nfregoso](https://github.com/nfregoso)
+  - [roypenrod-ohn](https://github.com/roypenrod-ohn)
 
 ## v2.3.8 (Jul 6, 2020) - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
 
