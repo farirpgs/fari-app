@@ -38,7 +38,7 @@ export const ErrorReport: React.FC<{ eventId: string }> = (props) => {
         {"If the problem persists, please report it on Github."}
       </div>
       <a
-        href="https://github.com/fariapp/fari/issues/new/choose"
+        href="https://github.com/fariapp/fari/discussions"
         target="_blank"
         rel="noreferrer"
         style={{
