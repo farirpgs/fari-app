@@ -53,27 +53,23 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   });
 
   useEffect(() => {
-    document.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, []);
-
-  useEffect(() => {
     if (!isDrawing) {
       props.onChange?.(lines);
     }
   }, [isDrawing]);
 
-  function handleMouseDown(
-    mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
+  function handlePointerDown(
+    pointerEvent: React.PointerEvent<HTMLDivElement>
   ) {
-    if (mouseEvent.button !== 0 || props.readonly) {
+
+    if (pointerEvent.button !== 0 || props.readonly) {
       return;
     }
 
-    const newPoint = relativeCoordinatesForEvent(mouseEvent);
+    pointerEvent.preventDefault();
+    pointerEvent.stopPropagation();
+
+    const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
       setLines((lines) => {
         return [...lines, [newPoint]];
@@ -82,14 +78,14 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }
 
-  function handleMouseMove(
-    mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
+  function handlePointerMove(
+    pointerEvent: React.PointerEvent<HTMLDivElement>
   ) {
     if (!isDrawing) {
       return;
     }
 
-    const newPoint = relativeCoordinatesForEvent(mouseEvent);
+    const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
       setLines((lines) => {
         const lastLineIndex = lines.length - 1;
@@ -104,21 +100,28 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }
 
-  function handleDoubleClick() {
-    setLines([]);
+  function handlePointerUp(
+    pointerEvent: React.PointerEvent<HTMLDivElement>
+  ) {
+    if (pointerEvent.pointerType == "mouse") {
+      setDrawing(false);
+    }
   }
 
-  function handleMouseUp() {
-    setDrawing(false);
+  function handleBlur(
+    blurEvent: React.FocusEvent<HTMLDivElement>
+  ) {
+    if (isDrawing)
+      setDrawing(false);
   }
 
   function relativeCoordinatesForEvent(
-    mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent>
+    pointerEvent: React.PointerEvent<HTMLDivElement>
   ): IPoint | undefined {
     if ($container.current) {
       const boundingRect = $container.current.getBoundingClientRect();
-      const x = mouseEvent.clientX - boundingRect.left;
-      const y = mouseEvent.clientY - boundingRect.top;
+      const x = pointerEvent.clientX - boundingRect.left;
+      const y = pointerEvent.clientY - boundingRect.top;
       const point = {
         x: x,
         y: y,
@@ -138,11 +141,13 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
         width: "100%",
         height: "100%",
         cursor: props.readonly ? "inherit" : "crosshair",
+        touchAction: isDrawing ? "none" : "auto",
       })}
       ref={$container}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onDoubleClick={handleDoubleClick}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onBlur={handleBlur}
     >
       {lines.length === 0 ? (
         <Fade in>
@@ -157,28 +162,28 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
           />
         </Fade>
       ) : (
-        <Fade in>
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            className={css({
-              "& path": {
-                fill: "none",
-                strokeWidth: "5px",
-                stroke: textColors.secondary,
-                strokeLinejoin: "round",
-                strokeLinecap: "round",
-              },
-            })}
-          >
-            {lines.map((line, index) => (
-              <DrawingLine key={index} line={line} />
-            ))}
-          </svg>
-        </Fade>
-      )}
+          <Fade in>
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              className={css({
+                "& path": {
+                  fill: "none",
+                  strokeWidth: "5px",
+                  stroke: textColors.secondary,
+                  strokeLinejoin: "round",
+                  strokeLinecap: "round",
+                },
+              })}
+            >
+              {lines.map((line, index) => (
+                <DrawingLine key={index} line={line} />
+              ))}
+            </svg>
+          </Fade>
+        )}
     </div>
   );
 });

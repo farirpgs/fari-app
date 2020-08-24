@@ -23,7 +23,7 @@ export function useTextColors(backgroundColor: string) {
       secondary: fade(color, 0.6),
       disabled: fade(color, 0.38),
     };
-  }, [backgroundColor]);
+  }, [theme, backgroundColor]);
 
   return textColors;
 }

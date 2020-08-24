@@ -14,6 +14,7 @@ export const ContentEditable: React.FC<{
   autoFocus?: boolean;
   inline?: boolean;
   border?: boolean;
+  id?: string;
 }> = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLSpanElement | null>(null);
@@ -27,7 +28,7 @@ export const ContentEditable: React.FC<{
         $ref.current.innerHTML = cleanHTML;
       }
     }
-  }, [props.value]);
+  }, [props.value, props.readonly]);
 
   useEffect(() => {
     function focusOnLoad() {
@@ -58,6 +59,7 @@ export const ContentEditable: React.FC<{
         borderBottom: props.border
           ? `1px solid ${theme.palette.divider}`
           : undefined,
+        cursor: "text",
         img: {
           maxWidth: "75%",
           padding: ".5rem",
@@ -65,6 +67,7 @@ export const ContentEditable: React.FC<{
           display: "flex",
         },
       })}
+      id={props.id}
       ref={$ref}
       onInput={(e) => {
         onChange(e);
@@ -78,7 +81,10 @@ export const ContentEditable: React.FC<{
 };
 ContentEditable.displayName = "ContentEditable";
 
-export function sanitizeContentEditable(value: string) {
+export function sanitizeContentEditable(value: string | undefined) {
+  if (!value) {
+    return "";
+  }
   return removeHTMLTags(removeNBSP(value)).trim();
 }
 

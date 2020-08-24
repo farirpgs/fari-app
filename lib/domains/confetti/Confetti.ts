@@ -5,12 +5,12 @@ export const Confetti = {
   fireConfetti() {
     try {
       fireCone();
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   },
   fireCannon() {
-    fireCanon(2000, ["#bb0000"]);
+    try {
+      fireCanon(2000, ["#bb0000"]);
+    } catch (error) {}
   },
 };
 

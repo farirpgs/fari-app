@@ -4,78 +4,62 @@ import {
   Divider,
   Grid,
   IconButton,
-  InputLabel,
   Menu,
   MenuItem,
   Paper,
   TextField,
-  Tooltip,
   Typography,
   useTheme,
 } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import RemoveIcon from "@material-ui/icons/Remove";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
+import { AspectType } from "../../hooks/useScene/AspectType";
+import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { AspectType } from "../../routes/Play/useScene/AspectType";
-import { IAspect } from "../../routes/Play/useScene/IScene";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
 export const IndexCard: React.FC<{
-  aspect: IAspect;
   readonly: boolean;
   className?: string;
-
-  onTitleChange(value: string): void;
-  onContentChange(value: string): void;
-  onFreeInvokeChange(index: number, value: boolean): void;
-  onPhysicalStressChange(index: number, value: boolean): void;
-  onMentalStressChange(index: number, value: boolean): void;
-  onCountdownChange(index: number, value: boolean): void;
-
-  onConsequenceChange(index: number, value: string): void;
-  onAddAspectFreeInvoke(): void;
-  onAddAspectPhysicalStress(): void;
-  onAddAspectMentalStress(): void;
-  onAddCountdown(): void;
-  onAddConsequence(): void;
-  onUpdateAspectColor(color: IndexCardColorTypes): void;
-  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
-  onRemove(): void;
-  onReset(): void;
+  id?: string;
+  aspectId: string;
+  sceneManager: ReturnType<typeof useScene>;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
   const $menu = useRef(null);
   const colorPickerBackground = theme.palette.primary.dark;
+  const aspect = props.sceneManager.state.scene.aspects[props.aspectId];
   const shouldRenderCheckboxesOrConsequences =
-    props.aspect.freeInvokes.length > 0 ||
-    props.aspect.physicalStress.length > 0 ||
-    props.aspect.mentalStress.length > 0 ||
-    props.aspect.countdown.length > 0 ||
-    props.aspect.consequences.length > 0;
+    aspect.tracks.length > 0 || aspect.consequences.length > 0;
 
-  const shouldRenderAspectMenuItems = props.aspect.type !== AspectType.Boost;
-  const shouldRenderContent = props.aspect.type !== AspectType.Boost;
+  const shouldRenderAspectMenuItems = aspect.type !== AspectType.Boost;
+  const shouldRenderContent = aspect.type !== AspectType.Boost;
   const shouldRenderPlayedDuringTurnIcon =
-    props.aspect.type === AspectType.NPC ||
-    props.aspect.type === AspectType.BadGuy;
+    aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
 
   const isDark = theme.palette.type === "dark";
 
   const paperBackground = isDark
-    ? IndexCardColor[props.aspect.color].dark
-    : IndexCardColor[props.aspect.color].light;
+    ? IndexCardColor[aspect.color].dark
+    : IndexCardColor[aspect.color].light;
   const paperColor = useTextColors(paperBackground);
-  const playedDuringTurnColor = props.aspect.playedDuringTurn
+  const playedDuringTurnColor = aspect.playedDuringTurn
     ? theme.palette.primary.main
     : paperColor.disabled;
+
   return (
     <Paper elevation={undefined} className={props.className}>
       <Box bgcolor={paperBackground} color={paperColor.primary}>
@@ -104,14 +88,10 @@ export const IndexCard: React.FC<{
       <Grid container justify="space-between" alignItems="center" spacing={2}>
         <Grid item>
           <Typography variant="overline">
-            {props.aspect.type === AspectType.Aspect && (
-              <>{t("index-card.aspect")}</>
-            )}
-            {props.aspect.type === AspectType.Boost && (
-              <>{t("index-card.boost")}</>
-            )}
-            {props.aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
-            {props.aspect.type === AspectType.BadGuy && (
+            {aspect.type === AspectType.Aspect && <>{t("index-card.aspect")}</>}
+            {aspect.type === AspectType.Boost && <>{t("index-card.boost")}</>}
+            {aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
+            {aspect.type === AspectType.BadGuy && (
               <>{t("index-card.bad-guy")}</>
             )}
           </Typography>
@@ -154,22 +134,30 @@ export const IndexCard: React.FC<{
       <Grid container justify="space-between" alignItems="center" spacing={2}>
         <Grid item xs>
           <ContentEditable
-            autoFocus
-            value={props.aspect.title}
+            id={props.id}
+            value={aspect.title}
             readonly={props.readonly}
-            onChange={props.onTitleChange}
+            onChange={(newTitle) => {
+              props.sceneManager.actions.updateAspectTitle(
+                props.aspectId,
+                newTitle
+              );
+            }}
           />
         </Grid>
         <Grid item>
           {shouldRenderPlayedDuringTurnIcon && (
             <IconButton
               onClick={() => {
-                props.onPlayedInTurnOrderChange(!props.aspect.playedDuringTurn);
+                props.sceneManager.actions.updateAspectPlayerDuringTurn(
+                  props.aspectId,
+                  !aspect.playedDuringTurn
+                );
               }}
               disabled={props.readonly}
               size="small"
             >
-              {props.aspect.playedDuringTurn ? (
+              {aspect.playedDuringTurn ? (
                 <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
               ) : (
                 <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
@@ -186,31 +174,40 @@ export const IndexCard: React.FC<{
       <MenuItem
         key="onAddAspectFreeInvoke"
         onClick={() => {
-          props.onAddAspectFreeInvoke();
+          props.sceneManager.actions.addAspectTrack(
+            props.aspectId,
+            t("index-card.free-invokes")
+          );
         }}
       >
-        {t("index-card.add-1-free-invoke")}
+        {t("index-card.add-free-invokes-track")}
       </MenuItem>,
       <MenuItem
         key="onAddAspectPhysicalStress"
         onClick={() => {
-          props.onAddAspectPhysicalStress();
+          props.sceneManager.actions.addAspectTrack(
+            props.aspectId,
+            t("index-card.physical-stress")
+          );
         }}
       >
-        {t("index-card.add-1-physical-stress-box")}
+        {t("index-card.add-physical-stress-track")}
       </MenuItem>,
       <MenuItem
         key="onAddAspectMentalStress"
         onClick={() => {
-          props.onAddAspectMentalStress();
+          props.sceneManager.actions.addAspectTrack(
+            props.aspectId,
+            t("index-card.mental-stress")
+          );
         }}
       >
-        {t("index-card.add-1-mental-stress-box")}
+        {t("index-card.add-mental-stress-track")}
       </MenuItem>,
       <MenuItem
         key="onAddConsequence"
         onClick={() => {
-          props.onAddConsequence();
+          props.sceneManager.actions.addAspectConsequence(props.aspectId);
         }}
       >
         {t("index-card.add-1-consequence")}
@@ -218,10 +215,10 @@ export const IndexCard: React.FC<{
       <MenuItem
         key="onAddCountdown"
         onClick={() => {
-          props.onAddCountdown();
+          props.sceneManager.actions.addAspectTrack(props.aspectId, "...");
         }}
       >
-        {t("index-card.add-1-countdown")}
+        {t("index-card.add-track")}
       </MenuItem>,
       <Divider key="renderAspectMenuItemsDivider" />,
     ];
@@ -233,7 +230,7 @@ export const IndexCard: React.FC<{
         key="onRemove"
         onClick={() => {
           setMenuOpen(false);
-          props.onRemove();
+          props.sceneManager.actions.removeAspect(props.aspectId);
         }}
       >
         {t("index-card.remove")}
@@ -242,7 +239,7 @@ export const IndexCard: React.FC<{
         key="onReset"
         onClick={() => {
           setMenuOpen(false);
-          props.onReset();
+          props.sceneManager.actions.resetAspect(props.aspectId);
         }}
       >
         {t("index-card.reset")}
@@ -267,13 +264,16 @@ export const IndexCard: React.FC<{
               <Grid item key={colorName}>
                 <IconButton
                   onClick={(e) => {
-                    props.onUpdateAspectColor(colorName);
+                    props.sceneManager.actions.updateAspectColor(
+                      props.aspectId,
+                      colorName
+                    );
                     e.stopPropagation();
                   }}
                   onMouseDown={(e) => e.stopPropagation()}
                   size="small"
                 >
-                  {colorName === props.aspect.color ? (
+                  {colorName === aspect.color ? (
                     <RadioButtonCheckedIcon
                       htmlColor={IndexCardColor[colorName].chip}
                     />
@@ -282,10 +282,6 @@ export const IndexCard: React.FC<{
                       htmlColor={IndexCardColor[colorName].chip}
                     />
                   )}
-
-                  {/* <FiberManualRecordIcon
-                  
-                  ></FiberManualRecordIcon> */}
                 </IconButton>
               </Grid>
             );
@@ -309,8 +305,13 @@ export const IndexCard: React.FC<{
         <Box p="0 1rem">
           <ContentEditable
             readonly={props.readonly}
-            value={props.aspect.content}
-            onChange={props.onContentChange}
+            value={aspect.content}
+            onChange={(newContent) => {
+              props.sceneManager.actions.updateAspectContent(
+                props.aspectId,
+                newContent
+              );
+            }}
           />
         </Box>
       </Box>
@@ -327,144 +328,222 @@ export const IndexCard: React.FC<{
         })}
       >
         <Box p=".5rem 1rem">
-          <Box>
-            {props.aspect.freeInvokes.length > 0 && (
-              <InputLabel shrink>{t("index-card.free-invokes")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.freeInvokes.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Checkbox
-                      checked={value}
-                      onChange={(event) => {
-                        if (props.readonly) {
-                          return;
-                        }
-                        props.onFreeInvokeChange(index, event.target.checked);
-                      }}
-                      color="default"
-                    />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            {props.aspect.physicalStress.length > 0 && (
-              <InputLabel shrink>{t("index-card.physical-stress")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.physicalStress.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Tooltip title={index + 1}>
-                      <Checkbox
-                        checked={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onPhysicalStressChange(
-                            index,
-                            event.target.checked
-                          );
-                        }}
-                        className={css({
-                          color: theme.palette.primary.main,
-                        })}
-                        color="primary"
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            {props.aspect.mentalStress.length > 0 && (
-              <InputLabel shrink>{t("index-card.mental-stress")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.mentalStress.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Tooltip title={index + 1}>
-                      <Checkbox
-                        checked={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onMentalStressChange(
-                            index,
-                            event.target.checked
-                          );
-                        }}
-                        className={css({
-                          color: theme.palette.secondary.main,
-                        })}
-                        color="secondary"
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            {props.aspect.countdown.length > 0 && (
-              <InputLabel shrink>{t("index-card.countdown")}</InputLabel>
-            )}
-            <Grid container justify="flex-start">
-              {props.aspect.countdown.map((value, index) => {
-                return (
-                  <Grid item key={index} xs={2}>
-                    <Tooltip title={index + 1}>
-                      <Checkbox
-                        checked={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onCountdownChange(index, event.target.checked);
-                        }}
-                        color="default"
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-          <Box>
-            <Grid container justify="center">
-              {props.aspect.consequences.map((value, index) => {
-                return (
-                  <Grid key={index} item xs={12}>
-                    <Box py=".5rem">
-                      <InputLabel shrink>
-                        {t("index-card.consequence")} ({(index + 1) * 2})
-                      </InputLabel>
-                      <TextField
-                        fullWidth
-                        value={value}
-                        onChange={(event) => {
-                          if (props.readonly) {
-                            return;
-                          }
-                          props.onConsequenceChange(index, event.target.value);
-                        }}
-                      />
-                    </Box>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
+          {renderTracks()}
+
+          {renderConsequences()}
         </Box>
       </Box>
     );
   }
+
+  function renderTracks() {
+    return (
+      <Box>
+        {aspect.tracks.map((stressTrack, trackIndex) => {
+          return (
+            <Box pb=".5rem" key={trackIndex}>
+              <Grid container justify="space-between" wrap="nowrap" spacing={1}>
+                <Grid item className={css({ flex: "1 1 auto" })}>
+                  <FateLabel display="inline" size="small">
+                    <ContentEditable
+                      value={stressTrack.name}
+                      readonly={props.readonly}
+                      onChange={(newTrackName) => {
+                        props.sceneManager.actions.updateAspectTrackName(
+                          props.aspectId,
+                          trackIndex,
+                          newTrackName
+                        );
+                      }}
+                    />
+                  </FateLabel>
+                </Grid>
+                {!props.readonly && (
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        props.sceneManager.actions.removeAspectTrackBox(
+                          props.aspectId,
+                          trackIndex
+                        );
+                      }}
+                    >
+                      <RemoveCircleOutlineIcon
+                        className={css({
+                          width: "1rem",
+                          height: "1rem",
+                        })}
+                      />
+                    </IconButton>
+                  </Grid>
+                )}
+                {!props.readonly && (
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        props.sceneManager.actions.addAspectTrackBox(
+                          props.aspectId,
+                          trackIndex
+                        );
+                      }}
+                    >
+                      <AddCircleOutlineIcon
+                        className={css({
+                          width: "1rem",
+                          height: "1rem",
+                        })}
+                      />
+                    </IconButton>
+                  </Grid>
+                )}
+                {!props.readonly && (
+                  <Grid item>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        props.sceneManager.actions.removeAspectTrack(
+                          props.aspectId,
+                          trackIndex
+                        );
+                      }}
+                    >
+                      <RemoveIcon
+                        className={css({
+                          width: "1rem",
+                          height: "1rem",
+                        })}
+                      />
+                    </IconButton>
+                  </Grid>
+                )}
+              </Grid>
+
+              <Grid container justify="flex-start" spacing={2}>
+                {stressTrack.value.map((stressBox, boxIndex) => {
+                  return (
+                    <Grid item key={boxIndex}>
+                      <Box
+                        className={css({
+                          display: "flex",
+                          justifyContent: "center",
+                        })}
+                      >
+                        <Checkbox
+                          color="default"
+                          size="small"
+                          checked={stressBox.checked}
+                          onChange={(event) => {
+                            if (props.readonly) {
+                              return;
+                            }
+                            props.sceneManager.actions.toggleAspectTrackBox(
+                              props.aspectId,
+                              trackIndex,
+                              boxIndex
+                            );
+                          }}
+                        />
+                      </Box>
+                      <Box>
+                        <FateLabel
+                          className={css({ textAlign: "center" })}
+                          size="small"
+                        >
+                          <ContentEditable
+                            readonly={props.readonly}
+                            value={stressBox.label}
+                            onChange={(newBoxLabel) => {
+                              props.sceneManager.actions.updateStressBoxLabel(
+                                props.aspectId,
+                                trackIndex,
+                                boxIndex,
+                                newBoxLabel
+                              );
+                            }}
+                          />
+                        </FateLabel>
+                      </Box>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Box>
+          );
+        })}
+      </Box>
+    );
+  }
+
+  function renderConsequences() {
+    return (
+      <Box>
+        <Grid container justify="center">
+          {aspect.consequences.map((consequence, consequenceIndex) => {
+            const name =
+              consequence.name ||
+              `${t("index-card.consequence")}  (${(consequenceIndex + 1) * 2})`;
+            const value = consequence.value;
+
+            return (
+              <Grid key={consequenceIndex} item xs={12}>
+                <Box py=".5rem">
+                  <Grid container>
+                    <Grid item className={css({ flex: "1 1 auto" })}>
+                      <FateLabel size="small">
+                        <ContentEditable
+                          value={name}
+                          readonly={props.readonly}
+                          onChange={(newName) => {
+                            props.sceneManager.actions.updateAspectConsequenceName(
+                              props.aspectId,
+                              consequenceIndex,
+                              newName
+                            );
+                          }}
+                        />
+                      </FateLabel>
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        size="small"
+                        onClick={() => {
+                          props.sceneManager.actions.removeAspectConsequence(
+                            props.aspectId,
+                            consequenceIndex
+                          );
+                        }}
+                      >
+                        <RemoveIcon
+                          className={css({
+                            width: "1rem",
+                            height: "1rem",
+                          })}
+                        />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                  <TextField
+                    fullWidth
+                    value={value}
+                    onChange={(event) => {
+                      if (props.readonly) {
+                        return;
+                      }
+                      props.sceneManager.actions.updateAspectConsequenceValue(
+                        props.aspectId,
+                        consequenceIndex,
+                        event.target.value
+                      );
+                    }}
+                  />
+                </Box>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    );
+  }
 };
-IndexCard.displayName = "IndexCard";

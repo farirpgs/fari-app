@@ -24,7 +24,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
       <PageMeta
         title={t("home-route.meta.title")}
         description={t("home-route.meta.description")}
-      ></PageMeta>
+      />
       <Box>
         <Container maxWidth="sm">
           <Box pb="2rem" textAlign="center">
@@ -57,7 +57,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Typography>
                 <Box py="2rem" textAlign="center" marginTop="auto">
                   <Button
-                    type="submit"
                     variant="contained"
                     color="primary"
                     size="large"
@@ -81,7 +80,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Typography>
                 <Box py="2rem" textAlign="center" marginTop="auto">
                   <Button
-                    type="submit"
                     variant="outlined"
                     color="primary"
                     size="large"
@@ -96,7 +94,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             </Grid>
           </Grid>
           <Box py="1rem">
-            <Divider></Divider>
+            <Divider />
           </Box>
         </Container>
         <Container maxWidth="sm">
@@ -119,7 +117,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <Box py="2rem">
             <Grid container justify="center">
               <Grid item>
-                <Kofi></Kofi>
+                <Kofi />
               </Grid>
             </Grid>
           </Box>

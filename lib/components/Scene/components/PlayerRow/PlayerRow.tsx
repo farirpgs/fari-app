@@ -1,0 +1,354 @@
+import {
+  Avatar,
+  Box,
+  ButtonBase,
+  darken,
+  Grid,
+  IconButton,
+  lighten,
+  TableCell,
+  TableRow,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@material-ui/core";
+import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
+import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import PersonIcon from "@material-ui/icons/Person";
+import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
+import { css, cx } from "emotion";
+import React, { useState } from "react";
+import { ICharacter } from "../../../../contexts/CharactersContext/CharactersContext";
+import { Font } from "../../../../domains/font/Font";
+import { useFudgeDice } from "../../../../hooks/useFudgeDice/useFudgeDice";
+import { IPlayer } from "../../../../hooks/useScene/IScene";
+import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { CharacterDialog } from "../../../../routes/Character/components/CharacterDialog";
+
+export const PlayerRow: React.FC<{
+  player: IPlayer;
+  isGM: boolean;
+  isMe: boolean;
+  offline: boolean;
+  onDiceRoll(): void;
+  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
+  onFatePointsChange(fatePoints: number): void;
+  onPlayerRemove(): void;
+  onCharacterUpdate(character: ICharacter): void;
+}> = (props) => {
+  const theme = useTheme();
+  const { t } = useTranslate();
+  const diceManager = useFudgeDice(props.player.rolls);
+  const shouldRenderOfflinePlayerRemoveButton = props.offline && !props.isMe;
+  const shouldHighlight = props.isMe && !props.offline;
+  const canControl = props.isGM || props.isMe;
+  const textColor = useTextColors(theme.palette.background.default);
+  const playedDuringTurnColor = props.player.playedDuringTurn
+    ? theme.palette.primary.main
+    : textColor.disabled;
+
+  const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
+  const name = props.player?.playerName || props.player?.character?.name || "";
+  const hasCharacterSheet = !!props.player.character;
+
+  const selectedRowStyle = css(
+    theme.palette.type === "light"
+      ? {
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        }
+      : {
+          backgroundColor: darken(theme.palette.secondary.dark, 0.75),
+        }
+  );
+  const playerInfoCellStyle = css({
+    padding: "0.7rem",
+    borderBottom: "none",
+  });
+  const controlsRowStyle = css({
+    padding: "0 0.7rem",
+  });
+  const diceTextColors = useTextColors(theme.palette.background.default);
+  const defaultTableCellStyle = css({ border: "none" });
+  const borderTableCellStyle = css({ padding: "0" });
+  const diceStyle = css({
+    fontSize: "1.2rem",
+    lineHeight: Font.lineHeight(1.2),
+    color: diceManager.state.color,
+    background: theme.palette.background.default,
+    border: `.1rem solid ${theme.palette.primary.main}`,
+    width: "2rem",
+    borderRadius: "4px",
+    height: "2rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxShadow:
+      "2px 2px 2px 0px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+  });
+  const diceRollingAnimationStyle = css({
+    animationName: "spin",
+    animationDuration: "250ms",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear",
+  });
+
+  const fatePointsStyle = css({
+    background:
+      props.player.fatePoints === 0
+        ? textColor.disabled
+        : theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    transition: theme.transitions.create("background"),
+    width: "2rem",
+    height: "2rem",
+    margin: "0 auto",
+  });
+
+  function roll() {
+    if (diceManager.state.rolling) {
+      return;
+    }
+    props.onDiceRoll();
+  }
+  return (
+    <>
+      <CharacterDialog
+        readonly={!canControl}
+        open={characterDialogOpen}
+        character={props.player.character}
+        dialog={true}
+        onSave={(updatedCharacter) => {
+          props.onCharacterUpdate(updatedCharacter);
+          setCharacterDialogOpen(false);
+        }}
+        onClose={() => {
+          setCharacterDialogOpen(false);
+        }}
+      />
+
+      <TableRow
+        selected={false}
+        className={cx({
+          [selectedRowStyle]: shouldHighlight,
+        })}
+      >
+        <TableCell className={playerInfoCellStyle} align="left">
+          <Typography
+            noWrap
+            color="inherit"
+            className={css({
+              fontSize: "1.2rem",
+              lineHeight: Font.lineHeight(1.2),
+              fontWeight: props.isMe ? "bold" : "normal",
+            })}
+          >
+            {name}
+          </Typography>
+        </TableCell>
+        <TableCell className={playerInfoCellStyle} align="center">
+          <Tooltip
+            title={
+              props.player.playedDuringTurn
+                ? t("player-row.played")
+                : t("player-row.not-played")
+            }
+          >
+            <span>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onPlayedInTurnOrderChange(
+                    !props.player.playedDuringTurn
+                  );
+                }}
+                disabled={!canControl}
+                size="small"
+              >
+                {props.player.playedDuringTurn ? (
+                  <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
+                ) : (
+                  <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
+                )}
+              </IconButton>
+            </span>
+          </Tooltip>
+        </TableCell>
+        <TableCell className={cx(playerInfoCellStyle)} align="center">
+          <Tooltip title={t("player-row.fate-points")}>
+            <span>
+              <ButtonBase
+                className={css({
+                  borderRadius: "50%",
+                })}
+                disabled={!canControl}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onFatePointsChange(props.player.fatePoints - 1);
+                }}
+              >
+                <Avatar className={fatePointsStyle}>
+                  {props.player.fatePoints}
+                </Avatar>
+              </ButtonBase>
+            </span>
+          </Tooltip>
+        </TableCell>
+        <TableCell className={cx(playerInfoCellStyle)} align="right">
+          <Box display="flex" justifyContent="flex-end">
+            <Tooltip title={diceManager.state.tooltip}>
+              <span>
+                <ButtonBase
+                  className={css({
+                    borderRadius: "4px%",
+                    color: diceTextColors.primary,
+                  })}
+                  disabled={!canControl || diceManager.state.rolling}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    roll();
+                  }}
+                >
+                  <Typography
+                    className={cx(diceStyle, {
+                      [diceRollingAnimationStyle]: diceManager.state.rolling,
+                    })}
+                  >
+                    {diceManager.state.label}
+                  </Typography>
+                </ButtonBase>
+              </span>
+            </Tooltip>
+          </Box>
+        </TableCell>
+      </TableRow>
+      {renderControls()}
+      {renderGMControls()}
+      {renderBorder()}
+    </>
+  );
+
+  function renderControls() {
+    return (
+      <TableRow
+        className={cx(controlsRowStyle, {
+          [selectedRowStyle]: shouldHighlight,
+        })}
+      >
+        <TableCell colSpan={4} className={defaultTableCellStyle}>
+          <Grid container alignItems="center" justify="flex-end" spacing={1}>
+            <Grid item>
+              <Tooltip
+                title={
+                  hasCharacterSheet
+                    ? t("player-row.open-character-sheet")
+                    : t("player-row.has-no-character-sheet")
+                }
+              >
+                <span>
+                  <IconButton
+                    size="small"
+                    disabled={!hasCharacterSheet}
+                    onClick={(e) => {
+                      setCharacterDialogOpen(true);
+                    }}
+                  >
+                    <PersonIcon
+                      className={css({ width: "1.5rem", height: "1.5rem" })}
+                    />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        </TableCell>
+      </TableRow>
+    );
+  }
+
+  function renderGMControls() {
+    if (!props.isGM) {
+      return null;
+    }
+
+    return (
+      <TableRow
+        selected={false}
+        className={cx(controlsRowStyle, {
+          [selectedRowStyle]: shouldHighlight,
+        })}
+      >
+        <TableCell colSpan={4} className={defaultTableCellStyle}>
+          <Grid container alignItems="center" justify="flex-end" spacing={1}>
+            <Grid item>
+              <Tooltip title={t("player-row.remove-fate-point")}>
+                <span>
+                  <IconButton
+                    size="small"
+                    disabled={props.player.fatePoints === 0}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const fatePointsMinusOne = props.player.fatePoints - 1;
+                      const newValue =
+                        fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
+                      props.onFatePointsChange(newValue);
+                    }}
+                  >
+                    <RemoveCircleOutlineOutlinedIcon
+                      className={css({ width: "1rem", height: "1rem" })}
+                    />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </Grid>
+
+            <Grid item>
+              <Tooltip title={t("player-row.add-fate-point")}>
+                <IconButton
+                  size="small"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    props.onFatePointsChange(props.player.fatePoints + 1);
+                  }}
+                >
+                  <AddCircleOutlineOutlinedIcon
+                    className={css({ width: "1rem", height: "1rem" })}
+                  />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            {shouldRenderOfflinePlayerRemoveButton && (
+              <Grid item>
+                <Tooltip title={t("player-row.remove-character")}>
+                  <IconButton
+                    size="small"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      props.onPlayerRemove();
+                    }}
+                  >
+                    <HighlightOffIcon
+                      color="error"
+                      className={css({ width: "1rem", height: "1rem" })}
+                    />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            )}
+          </Grid>
+        </TableCell>
+      </TableRow>
+    );
+  }
+
+  function renderBorder() {
+    return (
+      <TableRow>
+        <TableCell colSpan={4} className={borderTableCellStyle} />
+      </TableRow>
+    );
+  }
+};
+PlayerRow.displayName = "PlayerRow";

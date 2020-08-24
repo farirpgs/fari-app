@@ -13,30 +13,44 @@ import {
   Select,
   Toolbar,
   Typography,
+  useTheme,
 } from "@material-ui/core";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
+import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
+import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
 import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/app-icon.png";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppLink } from "../AppLink/AppLink";
+import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
+import { ManagerMode } from "../Manager/Manager";
 
 let gameIdSingleton: string | undefined = undefined;
 
+export enum LiveMode {
+  Connecting,
+  Live,
+}
+
 export const Page: React.FC<{
   notFound?: JSX.Element;
-  appBarActions?: JSX.Element;
   gameId?: string;
   kofi?: boolean;
+  live?: LiveMode;
+  liveLabel?: string;
 }> = (props) => {
   const history = useHistory();
   const { kofi = true } = props;
@@ -45,7 +59,11 @@ export const Page: React.FC<{
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
+  const scenesManager = useContext(ScenesContext);
+  const charactersManager = useContext(CharactersContext);
+  const theme = useTheme();
 
+  const isLive = props.live !== undefined;
   useEffect(() => {
     if (props.gameId) {
       setGameId(props.gameId);
@@ -56,7 +74,7 @@ export const Page: React.FC<{
   return (
     <>
       {renderHeader()}
-      {renderContent()}`
+      {renderContent()}
     </>
   );
 
@@ -161,9 +179,25 @@ export const Page: React.FC<{
   }
 
   function renderHeader() {
+    const background = isLive
+      ? theme.palette.primary.main
+      : theme.palette.background.paper;
+    const color = theme.palette.getContrastText(background);
     return (
-      <Box bgcolor="#fff">
-        <AppBar color="inherit" position="relative">
+      <Box
+        className={css({
+          color: color,
+          background: background,
+          transition: theme.transitions.create(["color", "background"]),
+        })}
+      >
+        <AppBar
+          position="relative"
+          className={css({
+            color: "inherit",
+            background: "inherit",
+          })}
+        >
           <Toolbar
             className={css({
               margin: "0 auto",
@@ -173,17 +207,21 @@ export const Page: React.FC<{
               padding: "1rem",
             })}
           >
-            <img
+            <RouterLink
+              to="/"
               className={css({
-                height: "2rem",
-                paddingRight: "1rem",
-                cursor: "pointer",
+                textDecoration: "none",
               })}
-              onClick={() => {
-                history.push("/");
-              }}
-              src={appIcon}
-            />
+            >
+              <img
+                className={css({
+                  height: "2rem",
+                  paddingRight: "1rem",
+                  cursor: "pointer",
+                })}
+                src={appIcon}
+              />
+            </RouterLink>
 
             <Typography
               variant="h6"
@@ -193,9 +231,6 @@ export const Page: React.FC<{
                 cursor: "pointer",
                 userSelect: "none",
               })}
-              onClick={() => {
-                history.push("/");
-              }}
             >
               <div
                 className={css({
@@ -205,19 +240,52 @@ export const Page: React.FC<{
                   maxWidth: "25rem",
                 })}
               >
-                Fari
+                <RouterLink
+                  to="/"
+                  className={css({
+                    color: "inherit",
+                    textDecoration: "none",
+                  })}
+                >
+                  Fari
+                </RouterLink>
               </div>
             </Typography>
+            {isLive && (
+              <Box px=".25rem">
+                <Grid container alignItems="center" spacing={1}>
+                  <Grid item>
+                    {props.live === LiveMode.Connecting && (
+                      <SignalWifi0BarIcon />
+                    )}
+                    {props.live === LiveMode.Live && (
+                      <SignalWifi4BarLockIcon
+                        className={css({
+                          color: "#69e22d",
+                        })}
+                      />
+                    )}
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      {sanitizeContentEditable(props.liveLabel)}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            )}
             <Hidden smDown>{renderMenu(false)}</Hidden>
-
             <Hidden mdUp>
-              <IconButton
-                onClick={() => {
-                  setMenuOpen(true);
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
+              {!isLive && (
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    setMenuOpen(true);
+                  }}
+                >
+                  <MenuIcon color="inherit" />
+                </IconButton>
+              )}
             </Hidden>
             <Drawer
               anchor="bottom"
@@ -233,7 +301,9 @@ export const Page: React.FC<{
                 flex: "1 1 auto",
               })}
             />
-            {kofi && !shouldDisplayRejoinButton && <Kofi />}
+            <Hidden smDown>
+              {kofi && !shouldDisplayRejoinButton && <Kofi />}
+            </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
                 color="secondary"
@@ -250,7 +320,6 @@ export const Page: React.FC<{
                 </Typography>
               </Button>
             )}
-            {props.appBarActions}
           </Toolbar>
         </AppBar>
       </Box>
@@ -261,14 +330,18 @@ export const Page: React.FC<{
     const itemClass = mobile
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
+
+    if (isLive) {
+      return null;
+    }
+
     return (
       <Grid container spacing={1} justify={mobile ? "center" : undefined}>
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
-            onClick={() => {
-              history.push("/");
-            }}
+            to="/"
+            component={RouterLink}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
@@ -279,7 +352,19 @@ export const Page: React.FC<{
           <Button
             color="inherit"
             onClick={() => {
-              history.push("/characters");
+              scenesManager.actions.openManager(ManagerMode.Manage);
+            }}
+            variant={mobile ? "outlined" : undefined}
+            fullWidth={mobile}
+          >
+            {t("menu.scenes")}
+          </Button>
+        </Grid>
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              charactersManager.actions.openManager(ManagerMode.Manage);
             }}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
@@ -290,9 +375,8 @@ export const Page: React.FC<{
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
-            onClick={() => {
-              history.push("/dice");
-            }}
+            to="/dice"
+            component={RouterLink}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
@@ -302,9 +386,8 @@ export const Page: React.FC<{
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
-            onClick={() => {
-              history.push("/about");
-            }}
+            to="/about"
+            component={RouterLink}
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
@@ -314,9 +397,9 @@ export const Page: React.FC<{
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
-            onClick={() => {
-              window.open("https://github.com/fariapp/fari/issues/new/choose");
-            }}
+            to="https://github.com/fariapp/fari/issues/new/choose"
+            component={RouterLink}
+            target="_blank"
             variant={mobile ? "outlined" : undefined}
             fullWidth={mobile}
           >
@@ -326,13 +409,14 @@ export const Page: React.FC<{
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
             color="inherit"
+            to="https://github.com/fariapp/fari"
+            component={RouterLink}
+            target="_blank"
+            rel="noreferrer"
             size="small"
             className={css({
               padding: "6px 8px",
             })}
-            onClick={() => {
-              window.open("https://github.com/fariapp/fari");
-            }}
           >
             <GitHubIcon />
           </IconButton>

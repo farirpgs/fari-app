@@ -1,12 +1,25 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
-## 2.3.8 (Jul 6, 2020) - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
+## 3.0.0 (TBD) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
+
+- feat: Scenes can now be prepared in advance, saved and then loaded directly during a play session.
+- feat: Index Cards are now more flexible. You can now add, remove or rename tracks or consequences as you wish.
+- feat: Scenes and Characters can now be exported from a device and imported on another one 👏 [nfregoso](https://github.com/nfregoso)
+- feat: The game session screen is now more focused on the current game and removes unnecessary menus.
+- feat: The game session join screen has an updated design.
+- doc: More spanish translations 👏 [Erynus](https://github.com/Erynus).
+- tests: thanks you guys for the prerelease testing!
+  - [Erynus](https://github.com/Erynus)
+  - [nottsknight](https://github.com/nottsknight)
+  - [nfregoso](https://github.com/nfregoso)
+
+## v2.3.8 (Jul 6, 2020) - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
 
 - feat: it is now possible to add a "blank" index card
 - feat: it is now possible to add a "Countdown" track to any index card
 - feat: character sheets now have an "advanced" mode which gives you the ability to add,remove or rename pretty much everything
 
-## 2.3 (May 27, 2020) - Character Sheets, Zones and better Peer-to-Peer
+## v2.3 (May 27, 2020) - Character Sheets, Zones and better Peer-to-Peer
 
 - feat: new [Characters](https://fari.app/characters) page to manage your characters sheets and save them in your browser's storage [#61](https://github.com/fariapp/fari/issues/61)
 - feat: character sheets can be sent to a scene.
@@ -20,7 +33,7 @@
 - fix: dice rolls gettings stuck during animation
 - feat: sticky dark mode
 
-## 2.2 (May 19, 2020) - Player Controls, Confetti and Dark Theme
+## v2.2 (May 19, 2020) - Player Controls, Confetti and Dark Theme
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
@@ -38,7 +51,7 @@
 - feat: dark theme ⛅️
 - fix: fairer dice [#57](https://github.com/fariapp/fari/pull/57) 👏 [@ConDar15](https://github.com/ConDar15)
 
-## 2.1 (May 15, 2020) - Index Cards Arrangement, Dice Animations and Internationalization
+## v2.1 (May 15, 2020) - Index Cards Arrangement, Dice Animations and Internationalization
 
 - feat: grid System for Index Cards
 - feat: dice Animations
@@ -48,7 +61,7 @@
 - doc: new LICENSE file
 - fix: nbsp and tags in title of the page
 
-## 2.0 (May 8, 2020) - Revamped Scene Management
+## v2.0 (May 8, 2020) - Revamped Scene Management
 
 - feat: real-Time Modifications (The GM controls the scene, players see modifications in real-time)
 - feat: index Cards (Aspects, Boost, Colorization, Invokes and Stress & Consequences for bad guys)
@@ -58,7 +71,7 @@
 
 https://www.reddit.com/r/FATErpg/comments/gg00pr/announcing_fari_20_the_best_fate_rpg_companion/
 
-## 1.0 (Dec 15, 2019) - Initial POC
+## v1.0 (Dec 15, 2019) - Initial POC
 
 - feat: initial proof of concept
 

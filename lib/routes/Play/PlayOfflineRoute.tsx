@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { CharactersContext } from "../../contexts/CharactersContext";
+import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { PlayPage } from "./PlayPage";
-import { sanitizeSceneName, useScene } from "./useScene/useScene";
-import { useUserId } from "./useUserId/useUserId";
+import { useUserId } from "../../hooks/useUserId/useUserId";
 
 const debug = false;
 
@@ -13,10 +14,14 @@ export const PlayOfflineRoute: React.FC<{
     params: { id: string };
   };
 }> = (props) => {
-  const idFromParams = props.match.params.id;
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
-  const sceneManager = useScene(userId, idFromParams, charactersManager);
+  const scenesManager = useContext(ScenesContext);
+
+  const sceneManager = useScene({
+    userId: userId,
+    charactersManager: charactersManager,
+  });
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
 
@@ -28,14 +33,11 @@ export const PlayOfflineRoute: React.FC<{
         title={pageTitle || t("home-route.play-offline.title")}
         description={t("home-route.play-offline.description")}
       />
-      <PlayPage
+      <Scene
+        mode={SceneMode.PlayOffline}
         sceneManager={sceneManager}
+        scenesManager={scenesManager}
         charactersManager={charactersManager}
-        isLoading={false}
-        idFromParams={idFromParams}
-        shareLink={undefined}
-        userId={userId}
-        error={undefined}
       />
     </>
   );
