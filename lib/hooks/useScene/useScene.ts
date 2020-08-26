@@ -111,7 +111,7 @@ export function useScene(props: IProps) {
     if (newScene) {
       setScene(newScene);
       newScene.players.forEach((p) => {
-        charactersManager.actions.upsert(p.character);
+        charactersManager.actions.updateIfExists(p.character);
       });
     }
   }
@@ -464,7 +464,7 @@ export function useScene(props: IProps) {
         });
       })
     );
-    charactersManager.actions.upsert(character);
+    charactersManager.actions.updateIfExists(character);
   }
 
   function updatePlayerFatePoints(id: string, fatePoints: number) {

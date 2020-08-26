@@ -100,6 +100,20 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return character;
   }
 
+  function updateIfExists(character: ICharacter | undefined) {
+    if (!character) {
+      return;
+    }
+    setCharacters((draft: Array<ICharacter>) => {
+      return draft.map((c) => {
+        if (c.id === character.id) {
+          return character;
+        }
+        return c;
+      });
+    });
+  }
+
   function remove(id: string | undefined) {
     setCharacters((draft: Array<ICharacter>) => {
       return draft.filter((c) => c.id !== id);
@@ -117,6 +131,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       closeManager,
       add,
       upsert,
+      updateIfExists,
       remove,
     },
   };
