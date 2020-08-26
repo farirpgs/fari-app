@@ -702,12 +702,16 @@ fdescribe("useScene", () => {
     // WHEN safeSet
     act(() => {
       result.current.useScene.actions.safeSetScene(({
-        players: [{}],
+        players: [{ character: {} }, { character: {} }],
       } as unknown) as any);
     });
     // THEN
-    expect(result.current.useScene.state.scene).toEqual({ players: [{}] });
-    // expect(result.current.useCharacters.actions.upsert).toHaveBeenCalled();
+    expect(result.current.useScene.state.scene).toEqual({
+      players: [{ character: {} }, { character: {} }],
+    });
+    expect(
+      result.current.useCharacters.actions.updateIfExists
+    ).toHaveBeenCalledTimes(2);
   });
   describe("o", () => {
     const userId = "111";
@@ -750,23 +754,25 @@ fdescribe("useScene", () => {
 });
 
 function mockUseCharacters() {
+  const result = {
+    state: {
+      characters: [],
+      mode: ManagerMode.Close,
+      managerCallback: undefined,
+    },
+    actions: {
+      add: jest.fn(),
+      upsert: jest.fn(),
+      updateIfExists: jest.fn(),
+      remove: jest.fn(),
+      select: jest.fn(),
+      clearSelected: jest.fn(),
+      closeManager: jest.fn(),
+      openManager: jest.fn(),
+    },
+  } as ReturnType<typeof useCharacters>;
   return () => {
-    return {
-      state: {
-        characters: [],
-        mode: ManagerMode.Close,
-        managerCallback: undefined,
-      },
-      actions: {
-        add: jest.fn(),
-        upsert: jest.fn(),
-        remove: jest.fn(),
-        select: jest.fn(),
-        clearSelected: jest.fn(),
-        closeManager: jest.fn(),
-        openManager: jest.fn(),
-      },
-    } as ReturnType<typeof useCharacters>;
+    return result;
   };
 }
 

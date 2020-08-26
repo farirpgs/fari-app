@@ -179,7 +179,7 @@ describe("useCharacters", () => {
         newCharacter = result.current.actions.upsert({
           ...newCharacter,
           name: "UPDATED NAME",
-        } as any);
+        } as ICharacter);
       });
 
       let playingCharacter: ICharacter | undefined = undefined;
@@ -187,7 +187,7 @@ describe("useCharacters", () => {
         // WHEN I save a character I'm already playing
         playingCharacter = result.current.actions.upsert({
           id: "an id from a live session",
-        } as any);
+        } as ICharacter);
       });
       // THEN the new character has been added and is properly sorted
       expect(result.current.state.characters[0]).toEqual(
@@ -226,6 +226,53 @@ describe("useCharacters", () => {
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
           name: "UPDATED NAME",
+        })
+      );
+
+      act(() => {
+        // WHEN I update an undefined character
+        result.current.actions.updateIfExists(undefined as any);
+      });
+      // THEN nothing happens
+      expect(result.current.state.characters[0]).toEqual(
+        expect.objectContaining({
+          id: newCharacter!.id,
+          lastUpdated: newCharacter!.lastUpdated,
+          name: "UPDATED NAME",
+        })
+      );
+
+      act(() => {
+        // WHEN I update a character that is not in the DB
+        result.current.actions.updateIfExists({
+          id: "id-that-is-not-in-the-db",
+          name: "A NEW NAME",
+        } as ICharacter);
+      });
+      // THEN nothing happens
+      expect(result.current.state.characters.length).toEqual(1);
+      expect(result.current.state.characters[0]).toEqual(
+        expect.objectContaining({
+          id: newCharacter!.id,
+          lastUpdated: newCharacter!.lastUpdated,
+          name: "UPDATED NAME",
+        })
+      );
+
+      act(() => {
+        // WHEN I update a character that is in the DB
+        result.current.actions.updateIfExists({
+          ...newCharacter,
+          name: "A NEW NAME",
+        } as ICharacter);
+      });
+      // THEN the character is updated
+      expect(result.current.state.characters.length).toEqual(1);
+      expect(result.current.state.characters[0]).toEqual(
+        expect.objectContaining({
+          id: newCharacter!.id,
+          lastUpdated: newCharacter!.lastUpdated,
+          name: "A NEW NAME",
         })
       );
 
