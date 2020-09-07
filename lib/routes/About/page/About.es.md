@@ -1,12 +1,12 @@
 # Fari
 
-Fari es una aplicación <b>Asistente para Fate RPG</b> Creada por René-Pier Deshaies-Gélinas, disponible en [Github](https://github.com/fariapp/fari) y liberada bajo [Licencia AGPL-v3](https://choosealicense.com/licenses/agpl-3.0/) .
+Fari es una aplicación <b>Asistente para Fate RPG</b> Creada por René-Pier Deshaies-Gélinas, disponible en [GitHub](https://github.com/fariapp/fari) y liberada bajo [Licencia AGPL-v3](https://choosealicense.com/licenses/agpl-3.0/) .
 
 ## FAQ
 
 ### ¿ Es una aplicación Open Source ?
 
-Si, lo es. Puedes contribuir al proyecto en [Github](https://github.com/fariapp/fari).
+Si, lo es. Puedes contribuir al proyecto en [GitHub](https://github.com/fariapp/fari).
 
 ### ¿ Existe un changelog ?
 
@@ -26,7 +26,7 @@ La conexión peer to peer finaliza tan pronto como se cierre la pestaña del nav
 
 ### Esta app mola, ¿Qué puedo hacer para ayudar?
 
-Puedes [invitarme a un café](https://ko-fi.com/rpdeshaies) o ayudarme a construir Fari contribuyendo en [Github](https://github.com/fariapp/fari)
+Puedes [invitarme a un café](https://ko-fi.com/rpdeshaies) o ayudarme a construir Fari contribuyendo en [GitHub](https://github.com/fariapp/fari)
 
 Trabajo en esto en mi tiempo libre y cualquier donación es enormemente apreciada. (emoji)
 
