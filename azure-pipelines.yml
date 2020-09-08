@@ -6,7 +6,6 @@
 trigger:
   - master
 
-
 variables:
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
 
@@ -23,7 +22,7 @@ steps:
     inputs:
       key: 'yarn | "$(Agent.OS)" | yarn.lock'
       restoreKeys: |
-          yarn | "$(Agent.OS)"
+        yarn | "$(Agent.OS)"
       path: $(YARN_CACHE_FOLDER)
     displayName: cache yarn packages
 
@@ -40,23 +39,22 @@ steps:
     displayName: "yarn build"
 
   - script: |
-      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceBranch)"
+      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
     displayName: "deploy preview"
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
   - script: |
-      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceBranch)"
+      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
     displayName: "deploy prod"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-  - task: PublishTestResults@2  
+  - task: PublishTestResults@2
     inputs:
       testRunner: JUnit
-      testResultsFiles: 'junit.xml'
+      testResultsFiles: "junit.xml"
 
   - task: PublishCodeCoverageResults@1
-    inputs: 
+    inputs:
       codeCoverageTool: Cobertura # or JaCoCo
-      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/cobertura-coverage.xml'
-      reportDirectory: '$(System.DefaultWorkingDirectory)/**/coverage'
-
+      summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/cobertura-coverage.xml"
+      reportDirectory: "$(System.DefaultWorkingDirectory)/**/coverage"
