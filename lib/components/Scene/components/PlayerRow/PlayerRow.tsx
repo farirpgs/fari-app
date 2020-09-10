@@ -42,7 +42,8 @@ export const PlayerRow: React.FC<{
   const theme = useTheme();
   const { t } = useTranslate();
   const diceManager = useFudgeDice(props.player.rolls);
-  const shouldRenderOfflinePlayerRemoveButton = props.offline && !props.isMe;
+  const shouldRenderOfflinePlayerRemoveButton =
+    props.isGM && props.player.offline && !props.isMe;
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
   const textColor = useTextColors(theme.palette.background.default);

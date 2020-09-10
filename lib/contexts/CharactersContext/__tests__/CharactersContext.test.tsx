@@ -33,6 +33,8 @@ describe("migrateCharacters", () => {
           stressTracksLabel: undefined,
           consequencesLabel: undefined,
           refreshLabel: undefined,
+          fatePoints: undefined,
+          playedDuringTurn: undefined,
           version: 1,
           lastUpdated: 0,
         };

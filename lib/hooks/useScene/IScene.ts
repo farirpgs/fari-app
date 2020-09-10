@@ -11,6 +11,7 @@ export interface IPlayer {
   rolls: Array<IDiceRoll>;
   playedDuringTurn: boolean;
   fatePoints: number;
+  offline: boolean;
 }
 
 export interface IAspect {

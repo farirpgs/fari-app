@@ -42,6 +42,7 @@ export function useScene(props: IProps) {
       rolls: [],
       playedDuringTurn: false,
       fatePoints: 3,
+      offline: true,
     },
     players: [],
     goodConfetti: 0,
@@ -356,15 +357,19 @@ export function useScene(props: IProps) {
   function updatePlayers(connections: Array<Peer.DataConnection>) {
     setScene(
       produce((draft: IScene) => {
+        const offlinePlayers = draft.players.filter((p) => p.offline);
         draft.players = connections.map((c) => {
           const meta: IPeerMeta = c.metadata;
-          const refresh = meta?.character?.refresh ?? 3;
-
+          const characterFatePoints =
+            meta?.character?.fatePoints ?? meta?.character?.refresh ?? 3;
+          const characterPlayedDuringTurn =
+            meta?.character?.playedDuringTurn ?? false;
           const playerMatch = draft.players.find((p) => p.id === c.label);
 
           const rolls = playerMatch?.rolls ?? [];
-          const fatePoints = playerMatch?.fatePoints ?? refresh;
-          const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
+          const fatePoints = playerMatch?.fatePoints ?? characterFatePoints;
+          const playedDuringTurn =
+            playerMatch?.playedDuringTurn ?? characterPlayedDuringTurn;
 
           return {
             id: c.label,
@@ -373,8 +378,10 @@ export function useScene(props: IProps) {
             rolls: rolls,
             playedDuringTurn: playedDuringTurn,
             fatePoints: fatePoints,
+            offline: false,
           } as IPlayer;
         });
+        draft.players = [...draft.players, ...offlinePlayers];
       })
     );
   }
@@ -390,6 +397,7 @@ export function useScene(props: IProps) {
           rolls: [],
           playedDuringTurn: false,
           fatePoints: 3,
+          offline: true,
         });
       })
     );
@@ -407,6 +415,7 @@ export function useScene(props: IProps) {
           rolls: [],
           playedDuringTurn: false,
           fatePoints: character.refresh,
+          offline: true,
         });
       })
     );
@@ -447,6 +456,10 @@ export function useScene(props: IProps) {
         everyone.forEach((p) => {
           if (p.id === id) {
             p.playedDuringTurn = playedInTurnOrder;
+
+            if (p.character) {
+              p.character.playedDuringTurn = playedInTurnOrder;
+            }
           }
         });
       })
@@ -473,7 +486,12 @@ export function useScene(props: IProps) {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            p.fatePoints = fatePoints >= 0 ? fatePoints : 0;
+            const newFatePointsAmount = fatePoints >= 0 ? fatePoints : 0;
+            p.fatePoints = newFatePointsAmount;
+
+            if (p.character) {
+              p.character.fatePoints = newFatePointsAmount;
+            }
           }
         });
       })

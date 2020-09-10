@@ -4,7 +4,11 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll"],
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.format",
+    "source.fixAll.eslint"
+  ],
   "search.exclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,

@@ -783,20 +783,18 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.sort")}
             </Button>
           </Grid>
-          {props.mode === SceneMode.PlayOffline && (
-            <Grid item>
-              <Button
-                onClick={() => {
-                  setOfflineCharacterDialogOpen(true);
-                }}
-                variant="outlined"
-                color="default"
-                endIcon={<PersonAddIcon />}
-              >
-                {t("play-route.add-character")}
-              </Button>
-            </Grid>
-          )}
+          <Grid item>
+            <Button
+              onClick={() => {
+                setOfflineCharacterDialogOpen(true);
+              }}
+              variant="outlined"
+              color="default"
+              endIcon={<PersonAddIcon />}
+            >
+              {t("play-route.add-character")}
+            </Button>
+          </Grid>
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>
               <input
