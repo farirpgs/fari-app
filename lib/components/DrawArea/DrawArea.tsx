@@ -1,10 +1,51 @@
-import { Fade, useTheme } from "@material-ui/core";
+import { Box, Fade, Grid, IconButton, useTheme } from "@material-ui/core";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import GestureIcon from "@material-ui/icons/Gesture";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { css } from "emotion";
-import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { IRoughSVG, rough } from "./rough";
 
-export type ILines = Array<ILine>;
+enum ObjectType {
+  Line,
+  Rectangle,
+  Ellipse,
+}
+
+export type ILines = Array<IObject>;
+
+type IObject =
+  | {
+      type: ObjectType.Line;
+      points: Array<IPoint>;
+    }
+  | {
+      type: ObjectType.Rectangle;
+      form: IForm;
+    }
+  | {
+      type: ObjectType.Ellipse;
+      form: IForm;
+    };
+
+type IPoint = {
+  x: number;
+  y: number;
+  percentX: number;
+  percentY: number;
+};
+
+type IForm = {
+  start: IPoint;
+  end: IPoint;
+};
 
 interface IProps {
   lines?: ILines;
@@ -25,7 +66,15 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
 
   const [lines, setLines] = useState<ILines>([]);
   const [isDrawing, setDrawing] = useState(false);
+  const [drawingTool, setDrawingTool] = useState(ObjectType.Line);
   const $container = useRef<HTMLDivElement | null>(null);
+  const $svgElement = useRef<SVGSVGElement | null>(null);
+
+  const roughSVG = useMemo(() => {
+    if ($svgElement.current) {
+      return rough.svg($svgElement.current);
+    }
+  }, [$svgElement.current]);
 
   useEffect(() => {
     if (props.lines && props.readonly) {
@@ -58,10 +107,7 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
     }
   }, [isDrawing]);
 
-  function handlePointerDown(
-    pointerEvent: React.PointerEvent<HTMLDivElement>
-  ) {
-
+  function handlePointerDown(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (pointerEvent.button !== 0 || props.readonly) {
       return;
     }
@@ -71,16 +117,49 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
 
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
-      setLines((lines) => {
-        return [...lines, [newPoint]];
-      });
+      if (drawingTool === ObjectType.Rectangle) {
+        setLines((lines) => {
+          return [
+            ...lines,
+            {
+              type: ObjectType.Rectangle,
+              form: {
+                start: newPoint,
+                end: newPoint,
+              },
+            },
+          ];
+        });
+      } else if (drawingTool === ObjectType.Ellipse) {
+        setLines((lines) => {
+          return [
+            ...lines,
+            {
+              type: ObjectType.Ellipse,
+              form: {
+                start: newPoint,
+                end: newPoint,
+              },
+            },
+          ];
+        });
+      } else {
+        setLines((lines) => {
+          return [
+            ...lines,
+            {
+              type: ObjectType.Line,
+              points: [newPoint],
+            },
+          ];
+        });
+      }
+
       setDrawing(true);
     }
   }
 
-  function handlePointerMove(
-    pointerEvent: React.PointerEvent<HTMLDivElement>
-  ) {
+  function handlePointerMove(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (!isDrawing) {
       return;
     }
@@ -90,29 +169,48 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
       setLines((lines) => {
         const lastLineIndex = lines.length - 1;
         return lines.map((line, index) => {
-          if (index !== lastLineIndex) {
+          const shouldUpdate = index === lastLineIndex;
+          if (!shouldUpdate) {
             return line;
           }
-          const updatedLine = [...line, newPoint];
-          return updatedLine;
+
+          if (line.type === ObjectType.Rectangle) {
+            return {
+              type: ObjectType.Rectangle,
+              form: {
+                start: line.form.start,
+                end: newPoint,
+              },
+            };
+          }
+
+          if (line.type === ObjectType.Ellipse) {
+            return {
+              type: ObjectType.Ellipse,
+              form: {
+                start: line.form.start,
+                end: newPoint,
+              },
+            };
+          }
+
+          return {
+            type: ObjectType.Line,
+            points: [...line.points, newPoint],
+          };
         });
       });
     }
   }
 
-  function handlePointerUp(
-    pointerEvent: React.PointerEvent<HTMLDivElement>
-  ) {
+  function handlePointerUp(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (pointerEvent.pointerType == "mouse") {
       setDrawing(false);
     }
   }
 
-  function handleBlur(
-    blurEvent: React.FocusEvent<HTMLDivElement>
-  ) {
-    if (isDrawing)
-      setDrawing(false);
+  function handleBlur(blurEvent: React.FocusEvent<HTMLDivElement>) {
+    if (isDrawing) setDrawing(false);
   }
 
   function relativeCoordinatesForEvent(
@@ -133,80 +231,152 @@ export const DrawArea = React.forwardRef<IHandles, IProps>((props, ref) => {
   }
 
   return (
-    <div
-      className={css({
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        cursor: props.readonly ? "inherit" : "crosshair",
-        touchAction: isDrawing ? "none" : "auto",
-      })}
-      ref={$container}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onBlur={handleBlur}
-    >
-      {lines.length === 0 ? (
-        <Fade in>
-          <GestureIcon
-            classes={{
-              root: css({
-                width: "7rem",
-                height: "7rem",
-              }),
-            }}
-            htmlColor={textColors.disabled}
-          />
-        </Fade>
-      ) : (
-          <Fade in>
+    <Box display="flex" flexDirection="column" minHeight="100%">
+      <Box width="100%" height="400px">
+        <div
+          className={css({
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            cursor: props.readonly ? "inherit" : "crosshair",
+            touchAction: isDrawing ? "none" : "auto",
+          })}
+          ref={$container}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onBlur={handleBlur}
+        >
+          <Fade in={lines.length === 0}>
+            <GestureIcon
+              classes={{
+                root: css({
+                  width: "7rem",
+                  height: "7rem",
+                  display: lines.length === 0 ? "block" : "none",
+                }),
+              }}
+              htmlColor={textColors.disabled}
+            />
+          </Fade>
+          <Fade in={lines.length > 0}>
             <svg
+              ref={$svgElement}
               width="100%"
               height="100%"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
               className={css({
-                "& path": {
-                  fill: "none",
-                  strokeWidth: "5px",
-                  stroke: textColors.secondary,
-                  strokeLinejoin: "round",
-                  strokeLinecap: "round",
-                },
+                display: lines.length > 0 ? "block" : "none",
               })}
             >
-              {lines.map((line, index) => (
-                <DrawingLine key={index} line={line} />
-              ))}
+              {lines.map((object, index) => {
+                return (
+                  <DrawObject key={index} object={object} roughSVG={roughSVG} />
+                );
+              })}
             </svg>
           </Fade>
-        )}
-    </div>
+        </div>
+      </Box>
+      <Box flex="0 1 auto" py=".5rem">
+        <Grid container spacing={1}>
+          <Grid item>
+            <IconButton
+              color={drawingTool === ObjectType.Line ? "primary" : "default"}
+              onClick={() => {
+                setDrawingTool(ObjectType.Line);
+              }}
+            >
+              <GestureIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton
+              color={
+                drawingTool === ObjectType.Rectangle ? "primary" : "default"
+              }
+              onClick={() => {
+                setDrawingTool(ObjectType.Rectangle);
+              }}
+            >
+              <CheckBoxOutlineBlankIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton
+              color={drawingTool === ObjectType.Ellipse ? "primary" : "default"}
+              onClick={() => {
+                setDrawingTool(ObjectType.Ellipse);
+              }}
+            >
+              <RadioButtonUncheckedIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 });
 
 DrawArea.displayName = "DrawArea";
 
-export const DrawingLine: React.FC<{ line: ILine }> = (props) => {
-  const lineData = props.line
-    .map((p) => {
-      return `${p.percentX} ${p.percentY}`;
-    })
-    .join(" L ");
-  const pathData = `M ${lineData}`;
-  return <path d={pathData} vectorEffect="non-scaling-stroke" />;
-};
+export const DrawObject: React.FC<{
+  roughSVG: IRoughSVG | undefined;
+  object: IObject;
+}> = React.memo((props) => {
+  const theme = useTheme();
+  const [seed] = useState(() => Math.random() * 100);
 
-DrawingLine.displayName = "DrawingLine";
+  if (!props.roughSVG) {
+    return null;
+  }
 
-type ILine = Array<IPoint>;
+  if (props.object.type === ObjectType.Rectangle) {
+    const formData = props.roughSVG.rectangle(
+      props.object.form.start.percentX,
+      props.object.form.start.percentY,
+      props.object.form.end.percentX - props.object.form.start.percentX,
+      props.object.form.end.percentY - props.object.form.start.percentY,
+      {
+        strokeWidth: 0.8,
+        roughness: 0.3,
+        seed: seed,
+        fill: theme.palette.primary.light,
+        fillStyle: "solid",
+      }
+    );
+    return <g dangerouslySetInnerHTML={{ __html: formData.innerHTML }} />;
+  }
+  if (props.object.type === ObjectType.Ellipse) {
+    const formData = props.roughSVG.ellipse(
+      (props.object.form.start.percentX + props.object.form.end.percentX) / 2,
+      (props.object.form.start.percentY + props.object.form.end.percentY) / 2,
+      props.object.form.end.percentX - props.object.form.start.percentX,
+      props.object.form.end.percentY - props.object.form.start.percentY,
+      {
+        strokeWidth: 0.8,
+        roughness: 0.3,
+        seed: seed,
+        fill: theme.palette.primary.light,
+        fillStyle: "solid",
+      }
+    );
+    return <g dangerouslySetInnerHTML={{ __html: formData.innerHTML }} />;
+  }
 
-type IPoint = {
-  x: number;
-  y: number;
-  percentX: number;
-  percentY: number;
-};
+  const line = props.roughSVG.linearPath(
+    props.object.points.map((p) => [p.percentX, p.percentY]),
+    {
+      strokeWidth: 0.8,
+      roughness: 0.3,
+      seed: seed,
+    }
+  );
+
+  return <g dangerouslySetInnerHTML={{ __html: line.innerHTML }} />;
+});
+
+DrawObject.displayName = "DrawObject";

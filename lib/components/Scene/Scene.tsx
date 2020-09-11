@@ -499,7 +499,7 @@ export const Scene: React.FC<IProps> = (props) => {
         </Paper>
         <Paper className={paperStyle}>
           <Divider light />
-          <Box width="100%" height="400px">
+          <Box>
             <DrawArea
               ref={$drawArea}
               lines={sceneManager.state.scene.drawAreaLines}

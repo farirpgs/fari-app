@@ -331,69 +331,69 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
-    if (isLive) {
-      return null;
-    }
-
     return (
       <Grid container spacing={1} justify={mobile ? "center" : undefined}>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            to="/"
-            component={RouterLink}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.play")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              scenesManager.actions.openManager(ManagerMode.Manage);
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.scenes")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              charactersManager.actions.openManager(ManagerMode.Manage);
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.characters")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            to="/dice"
-            component={RouterLink}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.dice")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            to="/about"
-            component={RouterLink}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.about")}
-          </Button>
-        </Grid>
+        {!isLive && (
+          <>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.play")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  scenesManager.actions.openManager(ManagerMode.Manage);
+                }}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.scenes")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  charactersManager.actions.openManager(ManagerMode.Manage);
+                }}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.characters")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/dice"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.dice")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/about"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.about")}
+              </Button>
+            </Grid>
+          </>
+        )}
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
