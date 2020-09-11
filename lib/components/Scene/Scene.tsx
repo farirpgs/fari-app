@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   CircularProgress,
   Container,
   Dialog,
@@ -27,15 +28,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import BugReportIcon from "@material-ui/icons/BugReport";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
-import FaceIcon from "@material-ui/icons/Face";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import GestureIcon from "@material-ui/icons/Gesture";
-import LoupeIcon from "@material-ui/icons/Loupe";
-import NoteIcon from "@material-ui/icons/Note";
-import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
@@ -382,18 +379,37 @@ export const Scene: React.FC<IProps> = (props) => {
               </Box>
             </Grid>
             {isGM && (
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    sceneManager.actions.resetInitiative();
-                  }}
-                  variant="contained"
-                  color="secondary"
-                  endIcon={<EmojiPeopleIcon />}
-                >
-                  {t("play-route.reset-initiative")}
-                </Button>
-              </Grid>
+              <>
+                <Grid item>
+                  <Grid container spacing={1}>
+                    <Grid item>
+                      <Button
+                        onClick={() => {
+                          sceneManager.actions.resetInitiative();
+                        }}
+                        variant="contained"
+                        color="secondary"
+                        endIcon={<EmojiPeopleIcon />}
+                      >
+                        {t("play-route.reset-initiative")}
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title={t("play-route.add-character")}>
+                        <Button
+                          onClick={() => {
+                            setOfflineCharacterDialogOpen(true);
+                          }}
+                          variant="contained"
+                          color="secondary"
+                        >
+                          <PersonAddIcon />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </>
             )}
           </Grid>
         </Box>
@@ -617,7 +633,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onClick={() => {
                     sceneManager.actions.addAspect(AspectType.Aspect);
                   }}
-                  endIcon={<NoteIcon />}
+                  endIcon={<AddCircleOutlineIcon />}
                 >
                   {t("play-route.click-on-the-add-aspect-")}
                 </Button>
@@ -673,64 +689,52 @@ export const Scene: React.FC<IProps> = (props) => {
       <Box pb="1rem">
         <Grid container spacing={1} justify="center">
           <Grid item>
-            <Button
-              onClick={() => {
-                sceneManager.actions.addAspect(AspectType.Aspect);
-              }}
-              variant="contained"
+            <ButtonGroup
               color="secondary"
-              endIcon={<NoteIcon />}
-            >
-              {t("play-route.add-aspect")}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                sceneManager.actions.addAspect(AspectType.Boost);
-              }}
               variant="contained"
-              color="secondary"
-              endIcon={<LoupeIcon />}
+              orientation={isSmall ? "vertical" : "horizontal"}
             >
-              {t("play-route.add-boost")}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                sceneManager.actions.addAspect(AspectType.NPC);
-              }}
-              variant="contained"
-              color="secondary"
-              endIcon={<FaceIcon />}
-            >
-              {t("play-route.add-npc")}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                sceneManager.actions.addAspect(AspectType.BadGuy);
-              }}
-              variant="contained"
-              color="secondary"
-              endIcon={<BugReportIcon />}
-            >
-              {t("play-route.add-bad-guy")}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                sceneManager.actions.addAspect(AspectType.IndexCard);
-              }}
-              variant="contained"
-              color="secondary"
-              endIcon={<NoteOutlinedIcon />}
-            >
-              {t("play-route.add-index-card")}
-            </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.addAspect(AspectType.Aspect);
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-aspect")}
+              </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.addAspect(AspectType.Boost);
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-boost")}
+              </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.addAspect(AspectType.NPC);
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-npc")}
+              </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.addAspect(AspectType.BadGuy);
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-bad-guy")}
+              </Button>
+              <Button
+                onClick={() => {
+                  sceneManager.actions.addAspect(AspectType.IndexCard);
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-index-card")}
+              </Button>
+            </ButtonGroup>
           </Grid>
         </Grid>
       </Box>
@@ -783,18 +787,6 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.sort")}
             </Button>
           </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                setOfflineCharacterDialogOpen(true);
-              }}
-              variant="outlined"
-              color="default"
-              endIcon={<PersonAddIcon />}
-            >
-              {t("play-route.add-character")}
-            </Button>
-          </Grid>
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>
               <input
@@ -831,38 +823,6 @@ export const Scene: React.FC<IProps> = (props) => {
               </Tooltip>
             </Grid>
           )}
-          {props.mode !== SceneMode.Manage && (
-            <>
-              <Hidden smDown>
-                <Grid item className={css({ display: "flex" })}>
-                  <Divider orientation="vertical" flexItem />
-                </Grid>
-              </Hidden>
-              <Grid item>
-                <ThemeProvider theme={errorTheme}>
-                  <Button
-                    onClick={() => {
-                      const confirmed = confirm(
-                        t("play-route.reset-scene-confirmation")
-                      );
-                      if (confirmed) {
-                        sceneManager.actions.resetScene();
-                        if ($drawArea.current) {
-                          $drawArea.current.clear();
-                        }
-                      }
-                    }}
-                    className={css({ borderRadius: "20px" })}
-                    variant="text"
-                    color="primary"
-                    endIcon={<ErrorIcon />}
-                  >
-                    {t("play-route.reset-scene")}
-                  </Button>
-                </ThemeProvider>
-              </Grid>
-            </>
-          )}
         </Grid>
       </Box>
     );
@@ -877,45 +837,75 @@ export const Scene: React.FC<IProps> = (props) => {
         <Grid container spacing={1} justify="center">
           <Grid item>
             <Button
+              color="primary"
+              endIcon={<SaveIcon />}
+              variant={sceneManager.state.dirty ? "contained" : "outlined"}
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(sceneManager.state.scene);
                 setSavedSnack(true);
               }}
-              color="primary"
-              variant={sceneManager.state.dirty ? "contained" : "outlined"}
-              endIcon={<SaveIcon />}
             >
               {t("play-route.save-scene")}
             </Button>
           </Grid>
           {props.mode !== SceneMode.Manage && (
-            <Grid item>
-              <SplitButton
-                color="default"
-                variant="outlined"
-                options={[
-                  {
-                    label: t("play-route.load-scene"),
-                    onClick: () => {
-                      scenesManager.actions.openManager(
-                        ManagerMode.Use,
-                        onLoadScene
-                      );
+            <>
+              <Grid item>
+                <SplitButton
+                  color="default"
+                  variant="outlined"
+                  options={[
+                    {
+                      label: t("play-route.load-scene"),
+                      onClick: () => {
+                        scenesManager.actions.openManager(
+                          ManagerMode.Use,
+                          onLoadScene
+                        );
+                      },
                     },
-                  },
-                  {
-                    label: t("play-route.load-scene-as-template"),
-                    onClick: () => {
-                      scenesManager.actions.openManager(
-                        ManagerMode.Use,
-                        onLoadTemplateScene
-                      );
+                    {
+                      label: t("play-route.load-scene-as-template"),
+                      onClick: () => {
+                        scenesManager.actions.openManager(
+                          ManagerMode.Use,
+                          onLoadTemplateScene
+                        );
+                      },
                     },
-                  },
-                ]}
-              />
-            </Grid>
+                  ]}
+                />
+              </Grid>
+              <Hidden smDown>
+                <Grid item className={css({ display: "flex" })}>
+                  <Divider orientation="vertical" flexItem />
+                </Grid>
+              </Hidden>
+              <Grid item>
+                <ThemeProvider theme={errorTheme}>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    endIcon={<ErrorIcon />}
+                    className={css({ borderRadius: "20px" })}
+                    onClick={() => {
+                      const confirmed = confirm(
+                        t("play-route.reset-scene-confirmation")
+                      );
+                      if (confirmed) {
+                        sceneManager.actions.resetScene();
+                        if ($drawArea.current) {
+                          $drawArea.current.clear();
+                        }
+                      }
+                    }}
+                  >
+                    {t("play-route.reset-scene")}
+                  </Button>
+                </ThemeProvider>
+              </Grid>
+            </>
           )}
         </Grid>
       </Box>

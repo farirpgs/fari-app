@@ -27,6 +27,11 @@ export const defaultThemeConfiguration: ThemeOptions = {
         fontWeight: 700,
       },
     },
+    MuiButtonGroup: {
+      root: {
+        borderRadius: "20px",
+      },
+    },
   },
 };
 
