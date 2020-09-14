@@ -5,9 +5,6 @@
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
   "main": "index.js",
-  "alias": {
-    "roughjs-custom": "node_modules/roughjs/bundled/rough.esm.js"
-  },
   "scripts": {
     "start": "parcel ./lib/index.html --target browser",
     "build": "parcel build ./lib/index.html --target browser",
@@ -24,7 +21,6 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@sentry/browser": "^5.20.1",
-    "axios": "^0.19.2",
     "canvas-confetti": "^1.2.0",
     "dompurify": "^2.0.11",
     "emotion": "^10.0.27",
@@ -38,6 +34,7 @@
     "netlify-cli": "^2.51.0",
     "peerjs": "^1.2.0",
     "react": "^16.13.1",
+    "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
     "react-helmet-async": "^1.0.5",
@@ -46,7 +43,8 @@
     "react-router-dom": "^5.1.2",
     "roughjs": "^4.3.1",
     "showdown": "^1.9.1",
-    "uuid": "^8.1.0"
+    "uuid": "^8.1.0",
+    "yarn": "^1.22.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -57,6 +55,7 @@
     "@types/lodash": "^4.14.149",
     "@types/pouchdb": "^6.4.0",
     "@types/react": "^16.9.34",
+    "@types/react-color": "^3.0.4",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.4",
     "@types/uuid": "^8.0.0",
