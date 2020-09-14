@@ -32,13 +32,11 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import GestureIcon from "@material-ui/icons/Gesture";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import UndoIcon from "@material-ui/icons/Undo";
 import { Alert } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
@@ -62,7 +60,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { DrawArea, IDrawAreaHandles } from "../DrawArea/DrawArea";
+import { DrawArea } from "../DrawArea/DrawArea";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
@@ -128,7 +126,6 @@ export const Scene: React.FC<IProps> = (props) => {
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
     false
   );
-  const $drawArea = useRef<IDrawAreaHandles | null>(null);
 
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
@@ -501,7 +498,6 @@ export const Scene: React.FC<IProps> = (props) => {
           <Divider light />
           <Box>
             <DrawArea
-              ref={$drawArea}
               lines={sceneManager.state.scene.drawAreaLines}
               readonly={!isGM}
               onChange={(lines) => {
@@ -509,37 +505,6 @@ export const Scene: React.FC<IProps> = (props) => {
               }}
             />
           </Box>
-          <Divider />
-          {isGM && (
-            <Box p="1rem">
-              <Grid container justify="space-between">
-                <Grid item>
-                  <Button
-                    onClick={() => {
-                      if ($drawArea.current) {
-                        $drawArea.current.clear();
-                      }
-                    }}
-                    endIcon={<GestureIcon />}
-                  >
-                    {t("play-route.clear-drawing")}
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                    onClick={() => {
-                      if ($drawArea.current) {
-                        $drawArea.current.undo();
-                      }
-                    }}
-                    endIcon={<UndoIcon />}
-                  >
-                    {t("play-route.undo-drawing")}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Box>
-          )}
         </Paper>
       </Box>
     );

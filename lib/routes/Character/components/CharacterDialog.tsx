@@ -13,12 +13,10 @@ import {
   IconButton,
   MenuItem,
   Select,
-  Slide,
   Snackbar,
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { TransitionProps } from "@material-ui/core/transitions";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
@@ -33,6 +31,7 @@ import React, { useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
+import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import {
   CharacterType,
   ICharacter,
@@ -41,13 +40,6 @@ import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export const CharacterDialog: React.FC<{
   open: boolean;
@@ -153,7 +145,7 @@ export const CharacterDialog: React.FC<{
           maxWidth="md"
           scroll="paper"
           onClose={onClose}
-          TransitionComponent={Transition}
+          TransitionComponent={SlideUpTransition}
         >
           <DialogTitle className={css({ padding: "0" })}>
             <Container maxWidth="md">
