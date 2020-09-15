@@ -5,7 +5,7 @@ import {
   IPoint,
   IRectangleObject,
   ObjectType,
-} from "../useDrawing";
+} from "../hooks/useDrawing";
 
 export class DrawObject {
   static startRectangle(props: { point: IPoint; color: string }): IObject {

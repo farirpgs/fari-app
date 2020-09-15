@@ -1,7 +1,7 @@
 import { useTheme } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
-import { IRoughSVG } from "./rough";
-import { DrawingTool, IObject, ObjectType } from "./useDrawing";
+import { IRoughSVG } from "./domains/rough";
+import { DrawingTool, IObject, ObjectType } from "./hooks/useDrawing";
 
 export const DrawObject: React.FC<{
   roughSVG: IRoughSVG | undefined;

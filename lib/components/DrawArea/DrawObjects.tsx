@@ -23,8 +23,9 @@ import { TwitterPicker } from "react-color";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
+import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
-import { DrawingTool, IObjects, useDrawing } from "./useDrawing";
+import { DrawingTool, IObjects, useDrawing } from "./hooks/useDrawing";
 
 interface IProps {
   objects: IObjects;
@@ -117,6 +118,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             className={css({
+              border: props.fullScreen ? "1px solid  grey" : "none",
               display:
                 drawingManager.state.objects.length > 0 ? "block" : "none",
             })}
@@ -183,14 +185,8 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     horizontal: "center",
                   }}
                 >
-                  <TwitterPicker
-                    width="19.5rem"
-                    triangle="hide"
-                    color={drawingManager.state.color}
-                    colors={pickerColors}
-                    className={css({
-                      boxShadow: "none",
-                    })}
+                  <ColorPicker
+                    value={drawingManager.state.color}
                     onChange={(color) => {
                       drawingManager.actions.setColor(color.hex);
                       drawingManager.actions.setColorPickerButton(undefined);
@@ -333,16 +329,27 @@ export const DrawObjects: React.FC<IProps> = (props) => {
 
 DrawObjects.displayName = "DrawObjects";
 
-const pickerColors = [
-  "#000000",
-  "#FF6900",
-  "#FCB900",
-  "#7BDCB5",
-  "#00D084",
-  "#8ED1FC",
-  "#0693E3",
-  "#ABB8C3",
-  "#EB144C",
-  "#F78DA7",
-  "#9900EF",
-];
+export const ColorPicker: React.FC<{
+  value: string;
+  onChange: (color: string) => void;
+}> = (props) => {
+  return (
+    <TwitterPicker
+      width="10.5rem"
+      triangle="hide"
+      styles={{
+        default: {
+          hash: { clear: "both" },
+        },
+      }}
+      color={props.color}
+      colors={pickerColors}
+      className={css({
+        boxShadow: "none",
+      })}
+      onChange={props.onChange}
+    />
+  );
+};
+
+ColorPicker.displayName = "ColorPicker";

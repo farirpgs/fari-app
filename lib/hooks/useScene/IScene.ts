@@ -1,4 +1,4 @@
-import { IObjects } from "../../components/DrawArea/useDrawing";
+import { IObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { ICharacter } from "../../contexts/CharactersContext/CharactersContext";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";

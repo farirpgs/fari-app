@@ -2,7 +2,7 @@ import { Dialog } from "@material-ui/core";
 import React, { useState } from "react";
 import { SlideUpTransition } from "../SlideUpTransition/SlideUpTransition";
 import { DrawObjects } from "./DrawObjects";
-import { IObjects } from "./useDrawing";
+import { IObjects } from "./hooks/useDrawing";
 
 interface IProps {
   objects: IObjects;

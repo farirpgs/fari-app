@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { DrawObject } from "./domains/DrawObject";
-import { rough } from "./rough";
+import { DrawObject } from "../domains/DrawObject";
+import { rough } from "../domains/rough";
 
 export enum DrawingTool {
   Line,
