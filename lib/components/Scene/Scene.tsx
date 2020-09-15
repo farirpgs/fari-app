@@ -498,10 +498,10 @@ export const Scene: React.FC<IProps> = (props) => {
           <Divider light />
           <Box>
             <DrawArea
-              lines={sceneManager.state.scene.drawAreaLines}
+              objects={sceneManager.state.scene.drawAreaObjects}
               readonly={!isGM}
               onChange={(lines) => {
-                sceneManager.actions.updateDrawAreaLines(lines);
+                sceneManager.actions.updateDrawAreaObjects(lines);
               }}
             />
           </Box>
@@ -860,9 +860,6 @@ export const Scene: React.FC<IProps> = (props) => {
                       );
                       if (confirmed) {
                         sceneManager.actions.resetScene();
-                        if ($drawArea.current) {
-                          $drawArea.current.clear();
-                        }
                       }
                     }}
                   >

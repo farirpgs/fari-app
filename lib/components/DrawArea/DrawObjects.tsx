@@ -24,23 +24,23 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
 import { DrawObject } from "./DrawObject";
-import { DrawingTool, ILines, useDrawing } from "./useDrawing";
+import { DrawingTool, IObjects, useDrawing } from "./useDrawing";
 
 interface IProps {
-  lines: ILines;
+  objects: IObjects;
   readonly: boolean;
   fullScreen: boolean;
   onFullScreenChange: (fullScreen: boolean) => void;
-  onChange(lines: ILines): void;
+  onChange(lines: IObjects): void;
   controls: "bottom" | "top";
 }
 
-export const DrawLines: React.FC<IProps> = (props) => {
+export const DrawObjects: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.background.paper);
   const drawingManager = useDrawing({
-    lines: props.lines,
+    objects: props.objects,
     readonly: props.readonly,
     onChange: props.onChange,
   });
@@ -88,13 +88,15 @@ export const DrawLines: React.FC<IProps> = (props) => {
           touchAction: drawingManager.state.isDrawing ? "none" : "auto",
         })}
       >
-        <Fade in={drawingManager.state.lines.length === 0}>
+        <Fade in={drawingManager.state.objects.length === 0}>
           <Box
             width="100%"
             height="100%"
             justifyContent="center"
             alignItems="center"
-            display={drawingManager.state.lines.length === 0 ? "flex" : "none"}
+            display={
+              drawingManager.state.objects.length === 0 ? "flex" : "none"
+            }
           >
             <GestureIcon
               classes={{
@@ -107,7 +109,7 @@ export const DrawLines: React.FC<IProps> = (props) => {
             />
           </Box>
         </Fade>
-        <Fade in={drawingManager.state.lines.length > 0}>
+        <Fade in={drawingManager.state.objects.length > 0}>
           <svg
             ref={drawingManager.state.$svgElement}
             width="100%"
@@ -115,10 +117,11 @@ export const DrawLines: React.FC<IProps> = (props) => {
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             className={css({
-              display: drawingManager.state.lines.length > 0 ? "block" : "none",
+              display:
+                drawingManager.state.objects.length > 0 ? "block" : "none",
             })}
           >
-            {drawingManager.state.lines.map((object, index) => {
+            {drawingManager.state.objects.map((object, index) => {
               return (
                 <DrawObject
                   key={index}
@@ -328,7 +331,7 @@ export const DrawLines: React.FC<IProps> = (props) => {
   }
 };
 
-DrawLines.displayName = "DrawLines";
+DrawObjects.displayName = "DrawObjects";
 
 const pickerColors = [
   "#000000",

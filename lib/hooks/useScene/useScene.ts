@@ -4,7 +4,7 @@ import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { ILines } from "../../components/DrawArea/DrawArea";
+import { IObjects } from "../../components/DrawArea/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import {
   ICharacter,
@@ -48,7 +48,7 @@ export function useScene(props: IProps) {
     goodConfetti: 0,
     badConfetti: 0,
     sort: false,
-    drawAreaLines: [],
+    drawAreaObjects: [],
     version: defaultSceneVersion,
     lastUpdated: new Date().getTime(),
   }));
@@ -144,6 +144,7 @@ export function useScene(props: IProps) {
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
         draft.aspects = defaultSceneAspects;
+        draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
         });
@@ -543,10 +544,10 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updateDrawAreaLines(lines: ILines) {
+  function updateDrawAreaObjects(objects: IObjects) {
     setScene(
       produce((draft: IScene) => {
-        draft.drawAreaLines = lines;
+        draft.drawAreaObjects = objects;
       })
     );
   }
@@ -592,7 +593,7 @@ export function useScene(props: IProps) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
-      updateDrawAreaLines,
+      updateDrawAreaObjects,
     },
   };
 }

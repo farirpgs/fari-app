@@ -57,10 +57,12 @@ export const DrawObject: React.FC<{
     cursor: cursor,
     onPointerDown: (event: React.PointerEvent<SVGGElement>) => {
       if (props.drawingTool === DrawingTool.Move) {
+        event.stopPropagation();
         event.persist();
         startEvent.current = event.nativeEvent;
         setMoving(true);
       } else if (props.drawingTool === DrawingTool.Remove) {
+        event.stopPropagation();
         props.onRemove();
       }
     },

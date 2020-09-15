@@ -1,13 +1,13 @@
 import { Dialog } from "@material-ui/core";
 import React, { useState } from "react";
 import { SlideUpTransition } from "../SlideUpTransition/SlideUpTransition";
-import { DrawLines } from "./DrawLines";
-import { ILines } from "./useDrawing";
+import { DrawObjects } from "./DrawObjects";
+import { IObjects } from "./useDrawing";
 
 interface IProps {
-  lines: ILines;
+  objects: IObjects;
   readonly: boolean;
-  onChange(lines: ILines): void;
+  onChange(lines: IObjects): void;
 }
 
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
@@ -15,8 +15,8 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
 
   return (
     <>
-      <DrawLines
-        lines={props.lines}
+      <DrawObjects
+        objects={props.objects}
         readonly={props.readonly}
         fullScreen={fullScreen}
         onChange={props.onChange}
@@ -31,8 +31,8 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
         }}
         TransitionComponent={SlideUpTransition}
       >
-        <DrawLines
-          lines={props.lines}
+        <DrawObjects
+          objects={props.objects}
           readonly={props.readonly}
           fullScreen={fullScreen}
           onChange={props.onChange}

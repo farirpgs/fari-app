@@ -28,7 +28,7 @@ fdescribe("useScene", () => {
       goodConfetti: 0,
       badConfetti: 0,
       sort: false,
-      drawAreaLines: [],
+      drawAreaObjects: [],
       version: 1,
       lastUpdated: expect.anything(),
     };
@@ -573,15 +573,15 @@ fdescribe("useScene", () => {
         charactersManager,
       });
     });
-    expect(result.current.state.scene.drawAreaLines).toEqual([]);
+    expect(result.current.state.scene.drawAreaObjects).toEqual([]);
     // WHEN drawing
     act(() => {
-      result.current.actions.updateDrawAreaLines([
-        [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
+      result.current.actions.updateDrawAreaObjects([
+        [{ percentX: 0, percentY: 0 }],
       ]);
     });
     // THEN
-    expect(result.current.state.scene.drawAreaLines).toEqual([
+    expect(result.current.state.scene.drawAreaObjects).toEqual([
       [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
     ]);
   });
