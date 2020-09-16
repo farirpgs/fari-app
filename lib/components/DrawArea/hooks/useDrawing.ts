@@ -16,7 +16,7 @@ export enum ObjectType {
   Ellipse,
 }
 
-export type IObjects = Array<IObject>;
+export type IDrawAreaObjects = Array<IObject>;
 
 export type IObject = ILineObject | IRectangleObject | IEllipseObject;
 
@@ -51,11 +51,11 @@ export type IForm = {
 const ON_CHANGE_DELAY = 500;
 
 export function useDrawing(props: {
-  objects: IObjects;
+  objects: IDrawAreaObjects;
   readonly: boolean;
-  onChange(objects: IObjects): void;
+  onChange(objects: IDrawAreaObjects): void;
 }) {
-  const [objects, setObjects] = useState<IObjects>([]);
+  const [objects, setObjects] = useState<IDrawAreaObjects>([]);
   const [drawing, setDrawing] = useState(false);
   const [drawingTool, setDrawingTool] = useState(DrawingTool.Line);
 
@@ -85,7 +85,7 @@ export function useDrawing(props: {
     changeWithDelay(objects);
   }, [objects]);
 
-  function changeWithDelay(objects: IObjects) {
+  function changeWithDelay(objects: IDrawAreaObjects) {
     clearTimeout(onChangeTimeout.current);
     onChangeTimeout.current = setTimeout(() => {
       props.onChange(objects);

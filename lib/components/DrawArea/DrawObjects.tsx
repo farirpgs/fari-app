@@ -25,14 +25,14 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
-import { DrawingTool, IObjects, useDrawing } from "./hooks/useDrawing";
+import { DrawingTool, IDrawAreaObjects, useDrawing } from "./hooks/useDrawing";
 
 interface IProps {
-  objects: IObjects;
+  objects: IDrawAreaObjects;
   readonly: boolean;
   fullScreen: boolean;
   onFullScreenChange: (fullScreen: boolean) => void;
-  onChange(lines: IObjects): void;
+  onChange(lines: IDrawAreaObjects): void;
   controls: "bottom" | "top";
 }
 

@@ -4,7 +4,7 @@ import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { IObjects } from "../../components/DrawArea/hooks/useDrawing";
+import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import {
   ICharacter,
@@ -218,6 +218,25 @@ export function useScene(props: IProps) {
           name: trackName,
           value: [{ checked: false, label: "1" }],
         });
+      })
+    );
+  }
+
+  function addAspectDrawArea(aspectId: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].drawAreaObjects = [];
+      })
+    );
+  }
+
+  function setAspectDrawAreaObjects(
+    aspectId: string,
+    objects: IDrawAreaObjects
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].drawAreaObjects = objects;
       })
     );
   }
@@ -544,7 +563,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updateDrawAreaObjects(objects: IObjects) {
+  function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setScene(
       produce((draft: IScene) => {
         draft.drawAreaObjects = objects;
@@ -569,6 +588,8 @@ export function useScene(props: IProps) {
       updateAspectTitle,
       updateAspectContent,
       addAspectTrack,
+      addAspectDrawArea,
+      setAspectDrawAreaObjects,
       removeAspectTrack,
       updateAspectTrackName,
       addAspectTrackBox,
