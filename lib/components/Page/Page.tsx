@@ -253,7 +253,7 @@ export const Page: React.FC<{
             </Typography>
             {isLive && (
               <Box px=".25rem">
-                <Grid container alignItems="center" spacing={1}>
+                <Grid container alignItems="center" spacing={1} wrap="nowrap">
                   <Grid item>
                     {props.live === LiveMode.Connecting && (
                       <SignalWifi0BarIcon />
