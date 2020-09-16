@@ -5,7 +5,6 @@
   "editor.formatOnPaste": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.suggest.localityBonus": true,
-  "editor.suggestSelection": "recentlyUsed",
   "editor.codeActionsOnSave": [
     "source.addMissingImports",
     "source.organizeImports",
