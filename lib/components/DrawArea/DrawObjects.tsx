@@ -188,7 +188,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   <ColorPicker
                     value={drawingManager.state.color}
                     onChange={(color) => {
-                      drawingManager.actions.setColor(color.hex);
+                      drawingManager.actions.setColor(color);
                       drawingManager.actions.setColorPickerButton(undefined);
                     }}
                   />
@@ -342,12 +342,12 @@ export const ColorPicker: React.FC<{
           hash: { clear: "both" },
         },
       }}
-      color={props.color}
+      color={props.value}
       colors={pickerColors}
       className={css({
         boxShadow: "none",
       })}
-      onChange={props.onChange}
+      onChange={(color) => props.onChange(color.hex)}
     />
   );
 };

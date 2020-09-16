@@ -1,5 +1,9 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
+import {
+  ILineObject,
+  ObjectType,
+} from "../../../components/DrawArea/hooks/useDrawing";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { AspectType } from "../AspectType";
@@ -23,6 +27,7 @@ fdescribe("useScene", () => {
         rolls: [],
         playedDuringTurn: false,
         fatePoints: 3,
+        offline: false,
       },
       players: [],
       goodConfetti: 0,
@@ -577,12 +582,12 @@ fdescribe("useScene", () => {
     // WHEN drawing
     act(() => {
       result.current.actions.updateDrawAreaObjects([
-        [{ percentX: 0, percentY: 0 }],
+        { color: "", points: [], type: ObjectType.Line } as ILineObject,
       ]);
     });
     // THEN
     expect(result.current.state.scene.drawAreaObjects).toEqual([
-      [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
+      [{ color: "", points: [], type: ObjectType.Line }],
     ]);
   });
   describe("confetti", () => {

@@ -72,7 +72,7 @@ export function useDrawing(props: {
     if ($svgElement.current) {
       return rough.svg($svgElement.current);
     }
-  }, [$svgElement.current]);
+  }, []);
 
   useEffect(() => {
     const shouldUpdateLocalState = props.objects.length !== objects.length;
