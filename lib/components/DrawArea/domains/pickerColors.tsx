@@ -1,4 +1,20 @@
-export const twitterColors = [
+/**
+ * Source:
+ *  https://www.nature.com/articles/nmeth.1618
+ *  https://www.nature.com/articles/nmeth.1618/figures/2
+ */
+const colorBlindFriendlyColors = [
+  "#000000",
+  "#e69f00",
+  "#56b4e9",
+  "#019e73",
+  "#f0e442",
+  "#0072b2",
+  "#d55e01",
+  "#cc79a7",
+];
+
+const twitterColors = [
   "#000000",
   "#FF6900",
   "#FCB900",
@@ -12,7 +28,7 @@ export const twitterColors = [
   "#9900EF",
 ];
 
-const fariColors = [
+const excalidrawColors = [
   "#000000",
   "#343a40",
   "#495057",
@@ -29,5 +45,5 @@ const fariColors = [
   "#e67700",
   "#d9480f",
 ];
-// export const pickerColors = twitterColors;
-export const pickerColors = fariColors;
+
+export const pickerColors = colorBlindFriendlyColors;

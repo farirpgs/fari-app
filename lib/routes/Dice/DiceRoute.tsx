@@ -4,7 +4,7 @@ import {
   ButtonBase,
   Tooltip,
   Typography,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import { css, cx } from "emotion";
 import React, { useState } from "react";

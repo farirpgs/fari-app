@@ -384,6 +384,17 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                to="/draw"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.draw")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
                 to="/about"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}

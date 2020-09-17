@@ -4,10 +4,15 @@ import {
   IObject,
   IPoint,
   IRectangleObject,
+  ITokenObject,
   ObjectType,
 } from "../hooks/useDrawing";
 
-export class DrawObject {
+export class DrawObjectFactory {
+  public static TokenSize = {
+    width: 8,
+    height: 8,
+  };
   static startRectangle(props: { point: IPoint; color: string }): IObject {
     return {
       type: ObjectType.Rectangle,
@@ -41,12 +46,12 @@ export class DrawObject {
       ...props.object,
       form: {
         start: {
-          percentX: props.object.form.start.percentX + props.x,
-          percentY: props.object.form.start.percentY + props.y,
+          x: props.object.form.start.x + props.x,
+          y: props.object.form.start.y + props.y,
         },
         end: {
-          percentX: props.object.form.end.percentX + props.x,
-          percentY: props.object.form.end.percentY + props.y,
+          x: props.object.form.end.x + props.x,
+          y: props.object.form.end.y + props.y,
         },
       },
     };
@@ -85,12 +90,12 @@ export class DrawObject {
       ...props.object,
       form: {
         start: {
-          percentX: props.object.form.start.percentX + props.x,
-          percentY: props.object.form.start.percentY + props.y,
+          x: props.object.form.start.x + props.x,
+          y: props.object.form.start.y + props.y,
         },
         end: {
-          percentX: props.object.form.end.percentX + props.x,
-          percentY: props.object.form.end.percentY + props.y,
+          x: props.object.form.end.x + props.x,
+          y: props.object.form.end.y + props.y,
         },
       },
     };
@@ -120,10 +125,35 @@ export class DrawObject {
       ...props.object,
       points: props.object.points.map((p) => {
         return {
-          percentX: p.percentX + props.x,
-          percentY: p.percentY + props.y,
+          x: p.x + props.x,
+          y: p.y + props.y,
         };
       }),
+    };
+  }
+
+  static startToken(props: { point: IPoint; color: string }): IObject {
+    return {
+      type: ObjectType.Token,
+      color: props.color,
+      point: {
+        x: props.point.x - this.TokenSize.width / 2,
+        y: props.point.y - this.TokenSize.height / 2,
+      },
+    };
+  }
+
+  static moveToken(props: {
+    object: ITokenObject;
+    x: number;
+    y: number;
+  }): IObject {
+    return {
+      ...props.object,
+      point: {
+        x: props.object.point.x + props.x,
+        y: props.object.point.y + props.y,
+      },
     };
   }
 }

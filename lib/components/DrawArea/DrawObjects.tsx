@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   Fade,
   Grid,
@@ -9,14 +8,16 @@ import {
   useTheme,
 } from "@material-ui/core";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FullscreenIcon from "@material-ui/icons/Fullscreen";
-import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
-import GestureIcon from "@material-ui/icons/Gesture";
-import PaletteIcon from "@material-ui/icons/Palette";
-import PanToolIcon from "@material-ui/icons/PanTool";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import UndoIcon from "@material-ui/icons/Undo";
+import ClearAllTwoToneIcon from "@material-ui/icons/ClearAllTwoTone";
+import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
+import FaceTwoToneIcon from "@material-ui/icons/FaceTwoTone";
+import FullscreenExitTwoToneIcon from "@material-ui/icons/FullscreenExitTwoTone";
+import FullscreenTwoToneIcon from "@material-ui/icons/FullscreenTwoTone";
+import GestureTwoToneIcon from "@material-ui/icons/GestureTwoTone";
+import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
+import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
+import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
+import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import { css } from "emotion";
 import React from "react";
 import { TwitterPicker } from "react-color";
@@ -26,13 +27,12 @@ import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
 import { DrawingTool, IDrawAreaObjects, useDrawing } from "./hooks/useDrawing";
-
 interface IProps {
-  objects: IDrawAreaObjects;
-  readonly: boolean;
-  fullScreen: boolean;
-  onFullScreenChange: (fullScreen: boolean) => void;
-  onChange(lines: IDrawAreaObjects): void;
+  objects?: IDrawAreaObjects;
+  readonly?: boolean;
+  fullScreen?: boolean;
+  onFullScreenChange?: (fullScreen: boolean) => void;
+  onChange?(lines: IDrawAreaObjects): void;
   controls: "bottom" | "top";
 }
 
@@ -75,9 +75,9 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     return (
       <div
         ref={drawingManager.state.$container}
-        onPointerDown={drawingManager.handlers.onPointerDown}
-        onPointerMove={drawingManager.handlers.onPointerMove}
-        onPointerUp={drawingManager.handlers.onPointerUp}
+        onPointerDown={drawingManager.handlers.onStartDrawing}
+        onPointerMove={drawingManager.handlers.onDrawing}
+        onPointerUp={drawingManager.handlers.onStopDrawing}
         onBlur={drawingManager.handlers.onBlur}
         className={css({
           display: "flex",
@@ -87,6 +87,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
           height: "100%",
           cursor: props.readonly ? "inherit" : "crosshair",
           touchAction: drawingManager.state.isDrawing ? "none" : "auto",
+          border: props.fullScreen ? "1px solid  grey" : "none",
         })}
       >
         <Fade in={drawingManager.state.objects.length === 0}>
@@ -99,7 +100,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               drawingManager.state.objects.length === 0 ? "flex" : "none"
             }
           >
-            <GestureIcon
+            <GestureTwoToneIcon
               classes={{
                 root: css({
                   width: "7rem",
@@ -118,7 +119,6 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             className={css({
-              border: props.fullScreen ? "1px solid  grey" : "none",
               display:
                 drawingManager.state.objects.length > 0 ? "block" : "none",
             })}
@@ -161,14 +161,23 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             <Grid container spacing={1}>
               <Grid item>
                 <IconButton
-                  color={colorPickerOpen ? "primary" : "default"}
+                  size="small"
+                  className={css({
+                    color: "#000000",
+                  })}
                   onClick={(event) => {
                     drawingManager.actions.setColorPickerButton(
                       event.currentTarget
                     );
                   }}
                 >
-                  <PaletteIcon />
+                  <PaletteTwoToneIcon
+                    className={css({
+                      "&:nth-child(1)": {
+                        color: drawingManager.state.color,
+                      },
+                    })}
+                  />
                 </IconButton>
                 <Popover
                   open={colorPickerOpen}
@@ -196,30 +205,34 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
-                  color={
-                    drawingManager.state.drawingTool === DrawingTool.Move
-                      ? "primary"
-                      : "default"
-                  }
+                  size="small"
+                  className={css({
+                    color:
+                      drawingManager.state.drawingTool === DrawingTool.Move
+                        ? theme.palette.primary.main
+                        : "#000000",
+                  })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Move);
                   }}
                 >
-                  <PanToolIcon />
+                  <PanToolTwoToneIcon />
                 </IconButton>
               </Grid>
               <Grid item>
                 <IconButton
-                  color={
-                    drawingManager.state.drawingTool === DrawingTool.Remove
-                      ? "primary"
-                      : "default"
-                  }
+                  size="small"
+                  className={css({
+                    color:
+                      drawingManager.state.drawingTool === DrawingTool.Remove
+                        ? theme.palette.primary.main
+                        : "#000000",
+                  })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Remove);
                   }}
                 >
-                  <DeleteIcon />
+                  <DeleteTwoToneIcon />
                 </IconButton>
               </Grid>
             </Grid>
@@ -228,25 +241,29 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             <Grid container spacing={1}>
               <Grid item>
                 <IconButton
-                  color={
-                    drawingManager.state.drawingTool === DrawingTool.Line
-                      ? "primary"
-                      : "default"
-                  }
+                  size="small"
+                  className={css({
+                    color:
+                      drawingManager.state.drawingTool === DrawingTool.Line
+                        ? theme.palette.primary.main
+                        : "#000000",
+                  })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Line);
                   }}
                 >
-                  <GestureIcon />
+                  <GestureTwoToneIcon />
                 </IconButton>
               </Grid>
               <Grid item>
                 <IconButton
-                  color={
-                    drawingManager.state.drawingTool === DrawingTool.Rectangle
-                      ? "primary"
-                      : "default"
-                  }
+                  size="small"
+                  className={css({
+                    color:
+                      drawingManager.state.drawingTool === DrawingTool.Rectangle
+                        ? theme.palette.primary.main
+                        : "#000000",
+                  })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(
                       DrawingTool.Rectangle
@@ -258,16 +275,34 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
-                  color={
-                    drawingManager.state.drawingTool === DrawingTool.Ellipse
-                      ? "primary"
-                      : "default"
-                  }
+                  size="small"
+                  className={css({
+                    color:
+                      drawingManager.state.drawingTool === DrawingTool.Ellipse
+                        ? theme.palette.primary.main
+                        : "#000000",
+                  })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Ellipse);
                   }}
                 >
-                  <RadioButtonUncheckedIcon />
+                  <RadioButtonUncheckedTwoToneIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  size="small"
+                  className={css({
+                    color:
+                      drawingManager.state.drawingTool === DrawingTool.Token
+                        ? theme.palette.primary.main
+                        : "#000000",
+                  })}
+                  onClick={() => {
+                    drawingManager.actions.setDrawingTool(DrawingTool.Token);
+                  }}
+                >
+                  <FaceTwoToneIcon />
                 </IconButton>
               </Grid>
             </Grid>
@@ -281,45 +316,57 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     return (
       <>
         <Divider />
-
-        <Box p="1rem">
-          <Grid container justify="space-between">
+        <Box p="0.5rem">
+          <Grid container justify="flex-start" alignItems="center" spacing={1}>
             {!props.readonly && (
               <>
                 <Grid item>
-                  <Button
+                  <IconButton
+                    size="small"
+                    className={css({
+                      color: "#000000",
+                    })}
                     onClick={() => {
                       drawingManager.actions.clear();
                     }}
-                    endIcon={<GestureIcon />}
                   >
-                    {t("play-route.clear-drawing")}
-                  </Button>
+                    <ClearAllTwoToneIcon />
+                  </IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton
+                    size="small"
+                    className={css({
+                      color: "#000000",
+                    })}
                     onClick={() => {
                       drawingManager.actions.undo();
                     }}
                   >
-                    <UndoIcon />
+                    <UndoTwoToneIcon />
                   </IconButton>
                 </Grid>
               </>
             )}
-            <Grid item>
-              <IconButton
-                onClick={() => {
-                  props.onFullScreenChange(!props.fullScreen);
-                }}
-              >
-                {!props.fullScreen ? (
-                  <FullscreenIcon />
-                ) : (
-                  <FullscreenExitIcon />
-                )}
-              </IconButton>
-            </Grid>
+            {props.onFullScreenChange && (
+              <Grid item>
+                <IconButton
+                  size="small"
+                  className={css({
+                    color: "#000000",
+                  })}
+                  onClick={() => {
+                    props.onFullScreenChange?.(!props.fullScreen);
+                  }}
+                >
+                  {!props.fullScreen ? (
+                    <FullscreenTwoToneIcon />
+                  ) : (
+                    <FullscreenExitTwoToneIcon />
+                  )}
+                </IconButton>
+              </Grid>
+            )}
           </Grid>
         </Box>
       </>

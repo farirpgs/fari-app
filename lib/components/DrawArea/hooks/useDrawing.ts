@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { DrawObject } from "../domains/DrawObject";
+import React, { useEffect, useRef, useState } from "react";
+import { DrawObjectFactory } from "../domains/DrawObjectFactory";
+import { pickerColors } from "../domains/pickerColors";
 import { rough } from "../domains/rough";
 
 export enum DrawingTool {
@@ -8,17 +9,29 @@ export enum DrawingTool {
   Remove,
   Rectangle,
   Ellipse,
+  Token,
 }
 
 export enum ObjectType {
   Line,
   Rectangle,
   Ellipse,
+  Token,
 }
 
 export type IDrawAreaObjects = Array<IObject>;
 
-export type IObject = ILineObject | IRectangleObject | IEllipseObject;
+export type IObject =
+  | ILineObject
+  | ITokenObject
+  | IRectangleObject
+  | IEllipseObject;
+
+export type ITokenObject = {
+  type: ObjectType.Token;
+  color: string;
+  point: IPoint;
+};
 
 export type ILineObject = {
   type: ObjectType.Line;
@@ -39,8 +52,8 @@ export type IEllipseObject = {
 };
 
 export type IPoint = {
-  percentX: number;
-  percentY: number;
+  x: number;
+  y: number;
 };
 
 export type IForm = {
@@ -51,9 +64,9 @@ export type IForm = {
 const ON_CHANGE_DELAY = 500;
 
 export function useDrawing(props: {
-  objects: IDrawAreaObjects;
-  readonly: boolean;
-  onChange(objects: IDrawAreaObjects): void;
+  objects?: IDrawAreaObjects;
+  readonly?: boolean;
+  onChange?(objects: IDrawAreaObjects): void;
 }) {
   const [objects, setObjects] = useState<IDrawAreaObjects>([]);
   const [drawing, setDrawing] = useState(false);
@@ -64,20 +77,18 @@ export function useDrawing(props: {
   >(undefined);
 
   const [color, setColor] = useState("#000000");
+  const [tokenColorIndex, setTokenColorIndex] = useState(0);
   const $container = useRef<HTMLDivElement | null>(null);
   const $svgElement = useRef<SVGSVGElement | null>(null);
   const onChangeTimeout = useRef<any | undefined>(undefined);
 
-  const roughSVG = useMemo(() => {
-    if ($svgElement.current) {
-      return rough.svg($svgElement.current);
-    }
-  }, []);
+  const roughSVG = $svgElement.current && rough.svg($svgElement.current);
 
   useEffect(() => {
-    const shouldUpdateLocalState = props.objects.length !== objects.length;
+    const shouldUpdateLocalState =
+      props.objects && props.objects.length !== objects.length;
     if (shouldUpdateLocalState) {
-      setObjects(props.objects);
+      setObjects(props.objects as IDrawAreaObjects);
     }
   }, [props.objects]);
 
@@ -88,11 +99,11 @@ export function useDrawing(props: {
   function changeWithDelay(objects: IDrawAreaObjects) {
     clearTimeout(onChangeTimeout.current);
     onChangeTimeout.current = setTimeout(() => {
-      props.onChange(objects);
+      props.onChange?.(objects);
     }, ON_CHANGE_DELAY);
   }
 
-  function onPointerDown(pointerEvent: React.PointerEvent<HTMLDivElement>) {
+  function onStartDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (pointerEvent.button !== 0 || props.readonly) {
       return;
     }
@@ -112,7 +123,7 @@ export function useDrawing(props: {
         setObjects((objects) => {
           return [
             ...objects,
-            DrawObject.startRectangle({ color: color, point: newPoint }),
+            DrawObjectFactory.startRectangle({ color: color, point: newPoint }),
           ];
         });
         break;
@@ -121,7 +132,27 @@ export function useDrawing(props: {
         setObjects((objects) => {
           return [
             ...objects,
-            DrawObject.startEllipse({ color: color, point: newPoint }),
+            DrawObjectFactory.startEllipse({ color: color, point: newPoint }),
+          ];
+        });
+        break;
+      }
+      case DrawingTool.Token: {
+        const tokenColor = pickerColors[tokenColorIndex];
+        setTokenColorIndex((prevIndex) => {
+          const shouldResetIndex = prevIndex === pickerColors.length - 1;
+          if (shouldResetIndex) {
+            return 0;
+          }
+          return prevIndex + 1;
+        });
+        setObjects((objects) => {
+          return [
+            ...objects,
+            DrawObjectFactory.startToken({
+              color: tokenColor,
+              point: newPoint,
+            }),
           ];
         });
         break;
@@ -130,7 +161,7 @@ export function useDrawing(props: {
         setObjects((objects) => {
           return [
             ...objects,
-            DrawObject.startLine({ color: color, point: newPoint }),
+            DrawObjectFactory.startLine({ color: color, point: newPoint }),
           ];
         });
         break;
@@ -138,7 +169,7 @@ export function useDrawing(props: {
     }
   }
 
-  function onPointerMove(pointerEvent: React.PointerEvent<HTMLDivElement>) {
+  function onDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (!drawing) {
       return;
     }
@@ -172,11 +203,14 @@ export function useDrawing(props: {
                 },
               };
             }
-            default: {
+            case ObjectType.Line: {
               return {
                 ...object,
                 points: [...object.points, newPoint],
               };
+            }
+            default: {
+              return object;
             }
           }
         });
@@ -184,7 +218,7 @@ export function useDrawing(props: {
     }
   }
 
-  function onPointerUp(pointerEvent: React.PointerEvent<HTMLDivElement>) {
+  function onStopDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (pointerEvent.pointerType == "mouse") {
       setDrawing(false);
     }
@@ -197,8 +231,8 @@ export function useDrawing(props: {
   ) {
     const startPoint = relativeCoordinatesForEvent(startEvent);
     const movePoint = relativeCoordinatesForEvent(moveEvent);
-    const diffX = movePoint.percentX - startPoint.percentX;
-    const diffY = movePoint.percentY - startPoint.percentY;
+    const diffX = movePoint.x - startPoint.x;
+    const diffY = movePoint.y - startPoint.y;
 
     setObjects((objects) => {
       return objects.map((object, index) => {
@@ -209,21 +243,28 @@ export function useDrawing(props: {
 
         switch (object.type) {
           case ObjectType.Rectangle: {
-            return DrawObject.moveRectangle({
+            return DrawObjectFactory.moveRectangle({
               object: object,
               x: diffX,
               y: diffY,
             });
           }
           case ObjectType.Ellipse: {
-            return DrawObject.moveEllipse({
+            return DrawObjectFactory.moveEllipse({
+              object: object,
+              x: diffX,
+              y: diffY,
+            });
+          }
+          case ObjectType.Token: {
+            return DrawObjectFactory.moveToken({
               object: object,
               x: diffX,
               y: diffY,
             });
           }
           default: {
-            return DrawObject.moveLine({
+            return DrawObjectFactory.moveLine({
               object: object,
               x: diffX,
               y: diffY,
@@ -256,14 +297,14 @@ export function useDrawing(props: {
       const x = pointerEvent.clientX - boundingRect.left;
       const y = pointerEvent.clientY - boundingRect.top;
       const point = {
-        percentX: (x / boundingRect.width) * 100,
-        percentY: (y / boundingRect.height) * 100,
+        x: (x / boundingRect.width) * 100,
+        y: (y / boundingRect.height) * 100,
       } as IPoint;
       return point;
     }
     return {
-      percentX: 0,
-      percentY: 0,
+      x: 0,
+      y: 0,
     };
   }
 
@@ -300,9 +341,9 @@ export function useDrawing(props: {
       setDrawingTool,
     },
     handlers: {
-      onPointerDown,
-      onPointerMove,
-      onPointerUp,
+      onStartDrawing: onStartDrawing,
+      onDrawing: onDrawing,
+      onStopDrawing: onStopDrawing,
       onBlur,
       onObjectMove,
       onObjectRemove,

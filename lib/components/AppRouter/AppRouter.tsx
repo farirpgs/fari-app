@@ -4,6 +4,7 @@ import { AboutRoute } from "../../routes/About/AboutRoute";
 import { ChangelogRoute } from "../../routes/ChangeLog/ChangeLogRoute";
 import { CharacterRoute } from "../../routes/Character/CharacterRoute";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
+import { DrawRoute } from "../../routes/Draw/DrawRoute";
 import { HomeRoute } from "../../routes/Home/HomeRoute";
 import { NotFoundRoute } from "../../routes/NotFound/NotFoundRoute";
 import { PlayOfflineRoute } from "../../routes/Play/PlayOfflineRoute";
@@ -31,6 +32,13 @@ export const AppRouter = () => (
       path={"/dice"}
       render={(props) => {
         return <DiceRoute />;
+      }}
+    />
+    <Route
+      exact
+      path={"/draw"}
+      render={(props) => {
+        return <DrawRoute />;
       }}
     />
     <Route

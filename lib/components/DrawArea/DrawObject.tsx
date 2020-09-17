@@ -1,10 +1,12 @@
 import { useTheme } from "@material-ui/core";
+import FaceTwoToneIcon from "@material-ui/icons/FaceTwoTone";
 import React, { useEffect, useRef, useState } from "react";
+import { DrawObjectFactory } from "./domains/DrawObjectFactory";
 import { IRoughSVG } from "./domains/rough";
 import { DrawingTool, IObject, ObjectType } from "./hooks/useDrawing";
 
 export const DrawObject: React.FC<{
-  roughSVG: IRoughSVG | undefined;
+  roughSVG: IRoughSVG | undefined | null;
   object: IObject;
   drawingTool: DrawingTool;
   onMove: (startEvent: PointerEvent, event: PointerEvent) => void;
@@ -79,10 +81,10 @@ export const DrawObject: React.FC<{
   switch (props.object.type) {
     case ObjectType.Rectangle: {
       const formData = props.roughSVG!.rectangle(
-        props.object.form.start.percentX,
-        props.object.form.start.percentY,
-        props.object.form.end.percentX - props.object.form.start.percentX,
-        props.object.form.end.percentY - props.object.form.start.percentY,
+        props.object.form.start.x,
+        props.object.form.start.y,
+        props.object.form.end.x - props.object.form.start.x,
+        props.object.form.end.y - props.object.form.start.y,
         {
           strokeWidth: strokeWidth,
           roughness: roughness,
@@ -100,10 +102,10 @@ export const DrawObject: React.FC<{
     }
     case ObjectType.Ellipse: {
       const formData = props.roughSVG.ellipse(
-        (props.object.form.start.percentX + props.object.form.end.percentX) / 2,
-        (props.object.form.start.percentY + props.object.form.end.percentY) / 2,
-        props.object.form.end.percentX - props.object.form.start.percentX,
-        props.object.form.end.percentY - props.object.form.start.percentY,
+        (props.object.form.start.x + props.object.form.end.x) / 2,
+        (props.object.form.start.y + props.object.form.end.y) / 2,
+        props.object.form.end.x - props.object.form.start.x,
+        props.object.form.end.y - props.object.form.start.y,
         {
           strokeWidth: strokeWidth,
           roughness: roughness,
@@ -119,9 +121,21 @@ export const DrawObject: React.FC<{
         />
       );
     }
+    case ObjectType.Token: {
+      return (
+        <g {...eventProps} color={props.object.color}>
+          <FaceTwoToneIcon
+            width={DrawObjectFactory.TokenSize.width}
+            height={DrawObjectFactory.TokenSize.height}
+            x={props.object.point.x}
+            y={props.object.point.y}
+          />
+        </g>
+      );
+    }
     case ObjectType.Line: {
       const line = props.roughSVG.linearPath(
-        props.object.points.map((p) => [p.percentX, p.percentY]),
+        props.object.points.map((p) => [p.x, p.y]),
         {
           strokeWidth: strokeWidth,
           roughness: roughness,
