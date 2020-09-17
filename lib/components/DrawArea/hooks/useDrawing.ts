@@ -4,6 +4,7 @@ import { pickerColors } from "../domains/pickerColors";
 import { rough } from "../domains/rough";
 
 export enum DrawingTool {
+  ColorPicker,
   Line,
   Move,
   Remove,
@@ -71,10 +72,6 @@ export function useDrawing(props: {
   const [objects, setObjects] = useState<IDrawAreaObjects>([]);
   const [drawing, setDrawing] = useState(false);
   const [drawingTool, setDrawingTool] = useState(DrawingTool.Line);
-
-  const [colorPickerButton, setColorPickerButton] = useState<
-    HTMLButtonElement | undefined
-  >(undefined);
 
   const [color, setColor] = useState("#000000");
   const [tokenColorIndex, setTokenColorIndex] = useState(0);
@@ -326,7 +323,6 @@ export function useDrawing(props: {
     state: {
       objects: objects,
       isDrawing: drawing,
-      colorPickerButton,
       $container,
       $svgElement,
       roughSVG,
@@ -337,7 +333,6 @@ export function useDrawing(props: {
       clear,
       undo,
       setColor,
-      setColorPickerButton,
       setDrawingTool,
     },
     handlers: {

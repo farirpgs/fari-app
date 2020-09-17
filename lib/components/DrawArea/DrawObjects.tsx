@@ -19,7 +19,7 @@ import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import { css } from "emotion";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -40,11 +40,24 @@ export const DrawObjects: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
   const textColors = useTextColors(theme.palette.background.paper);
+  const [
+    drawingToolBeforeColorPicker,
+    setDrawingToolBeforeColorPicker,
+  ] = useState<DrawingTool | undefined>(undefined);
+  const $paletteButton = useRef<HTMLButtonElement | null>(null);
+
   const drawingManager = useDrawing({
     objects: props.objects,
     readonly: props.readonly,
     onChange: props.onChange,
   });
+
+  function resetDrawingTool() {
+    if (drawingToolBeforeColorPicker) {
+      drawingManager.actions.setDrawingTool(drawingToolBeforeColorPicker);
+    }
+    setDrawingToolBeforeColorPicker(undefined);
+  }
 
   if (props.controls === "bottom") {
     return (
@@ -150,7 +163,8 @@ export const DrawObjects: React.FC<IProps> = (props) => {
   }
 
   function renderActions() {
-    const colorPickerOpen = !!drawingManager.state.colorPickerButton;
+    const colorPickerOpen =
+      drawingManager.state.drawingTool === DrawingTool.ColorPicker;
     if (props.readonly) {
       return null;
     }
@@ -162,12 +176,16 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  ref={$paletteButton}
                   className={css({
                     color: "#000000",
                   })}
                   onClick={(event) => {
-                    drawingManager.actions.setColorPickerButton(
-                      event.currentTarget
+                    setDrawingToolBeforeColorPicker(
+                      drawingManager.state.drawingTool
+                    );
+                    drawingManager.actions.setDrawingTool(
+                      DrawingTool.ColorPicker
                     );
                   }}
                 >
@@ -181,9 +199,9 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                 </IconButton>
                 <Popover
                   open={colorPickerOpen}
-                  anchorEl={drawingManager.state.colorPickerButton}
+                  anchorEl={$paletteButton.current}
                   onClose={() => {
-                    drawingManager.actions.setColorPickerButton(undefined);
+                    resetDrawingTool();
                   }}
                   anchorOrigin={{
                     vertical: "bottom",
@@ -198,7 +216,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     value={drawingManager.state.color}
                     onChange={(color) => {
                       drawingManager.actions.setColor(color);
-                      drawingManager.actions.setColorPickerButton(undefined);
+                      resetDrawingTool();
                     }}
                   />
                 </Popover>
