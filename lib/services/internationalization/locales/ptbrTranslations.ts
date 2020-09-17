@@ -39,6 +39,8 @@ export const ptbrTranslation = {
   "dice-route.meta.description": `Role dados Fate/Fudge online usando este rolador de dados.`,
   "dice-route.meta.title": `Role dados Fate Online`,
   "dice-route.title": `Pressione o botão para re-rolar`,
+  "draw-route.meta.description": undefined,
+  "draw-route.meta.title": undefined,
   "home-route.meta.description": `Fari é a melhor aplicação pra auxiliar sua mesa de Fate. Jogue por cenas em tempo real com seus amigos. Role dados fugde, deixe a imaginação coletiva correr solta e construa histórias memoráveis juntos!`,
   "home-route.meta.title": `Auxiliar para RPG Fate`,
   "home-route.play-offline.button": `Inicie um Jogo Offline`,
@@ -79,6 +81,8 @@ export const ptbrTranslation = {
   "menu.help": `Ajuda`,
   "menu.play": `Jogar`,
   "menu.scenes": `Cenas`,
+
+  "menu.draw": `Draw`,
   "play-route.add-aspect": `Aspecto`,
   "play-route.add-bad-guy": `Inimigo`,
   "play-route.add-boost": `Impulso`,
