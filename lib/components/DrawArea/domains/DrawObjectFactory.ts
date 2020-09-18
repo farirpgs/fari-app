@@ -1,3 +1,4 @@
+import { SvgIconProps } from "@material-ui/core";
 import {
   IEllipseObject,
   ILineObject,
@@ -132,10 +133,15 @@ export class DrawObjectFactory {
     };
   }
 
-  static startToken(props: { point: IPoint; color: string }): IObject {
+  static startToken(props: {
+    point: IPoint;
+    color: string;
+    Token: React.FC<SvgIconProps>;
+  }): IObject {
     return {
       type: ObjectType.Token,
       color: props.color,
+      Token: props.Token,
       point: {
         x: props.point.x - this.TokenSize.width / 2,
         y: props.point.y - this.TokenSize.height / 2,
