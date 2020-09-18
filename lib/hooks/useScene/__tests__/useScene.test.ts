@@ -443,6 +443,7 @@ fdescribe("useScene", () => {
         fatePoints: 3,
         id: "1",
         playedDuringTurn: false,
+        offline: false,
         playerName: "RP",
         rolls: [],
       });
@@ -587,7 +588,7 @@ fdescribe("useScene", () => {
     });
     // THEN
     expect(result.current.state.scene.drawAreaObjects).toEqual([
-      [{ color: "", points: [], type: ObjectType.Line }],
+      { color: "", points: [], type: ObjectType.Line },
     ]);
   });
   describe("confetti", () => {
@@ -658,6 +659,7 @@ fdescribe("useScene", () => {
           fatePoints: 3,
           id: playerId,
           playedDuringTurn: true,
+          offline: true,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
@@ -674,6 +676,7 @@ fdescribe("useScene", () => {
           fatePoints: 3,
           id: playerId,
           playedDuringTurn: false,
+          offline: true,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
@@ -747,6 +750,7 @@ fdescribe("useScene", () => {
         fatePoints: undefined,
         id: playerId,
         playedDuringTurn: false,
+        offline: true,
         playerName: "",
         rolls: [],
       },

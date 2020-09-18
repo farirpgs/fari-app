@@ -42,7 +42,7 @@ export const frTranslation = {
   "draw-route.meta.description": undefined,
   "draw-route.meta.title": undefined,
   "home-route.meta.description": `Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.`,
-  "home-route.meta.title": `RPG Companion sort`,
+  "home-route.meta.title": `RPG Companion`,
   "home-route.play-offline.button": `Commencer une partie hors ligne`,
   "home-route.play-offline.description": `Rendez-vous avec vos amis en personne ou avec un appel vidéo, diffusez votre écran et jouer à Fate!`,
   "home-route.play-offline.title": `Jouer à Fate hors ligne`,
