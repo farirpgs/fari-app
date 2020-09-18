@@ -10,7 +10,7 @@ Oui! Vous pouvez contribuer au projet sur [Github](https://github.com/fariapp/fa
 
 ### Y a-t-il un changelog?
 
-Oui, [ici](/changelog).
+Oui, [içi](/changelog).
 
 ### Le Dice Roller est-il juste?
 
@@ -19,9 +19,9 @@ Oui! L'équité du Dice Roller est validée à chaque fois qu'une modification d
 ### Où mes données sont-elles stockées?
 
 Toutes vos données sont enregistrées localement sur l'appareil à partir duquel vous accédez à Fari.
-Fari n'utilise aucune base de données cloud, mais nous utilisons Google Analytis.
+Fari n'utilise aucune base de données cloud, mais nous utilisons Google Analytics.
 
-Vos données peuvent également être partagées avec d'autres personnes à l'aide de connexions d'égal à égal lorsque vous démarrez ou rejoignez une partie.
+Vos données peuvent également être partagées avec d'autres personnes à l'aide de connexions peer to peer lorsque vous démarrez ou rejoignez une partie.
 
 La connexion peer to peer est fermée si vous fermez l'onglet de votre navigateur.
 
@@ -33,7 +33,7 @@ J'y travaille pendant mon temps libre et tout don est très apprécié 😊
 
 ### Rien d'autre ?
 
-Sûr ! Fari n'existerait pas sans l'aide de quelques bibliothèques et frameworks impressionnants.
+Absolument ! Fari n'existerait pas sans l'aide de quelques bibliothèques et frameworks impressionnants.
 
 Vous pouvez également faire un don pour les aider:
 
