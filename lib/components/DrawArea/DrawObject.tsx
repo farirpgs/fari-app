@@ -1,4 +1,5 @@
-import { useTheme } from "@material-ui/core";
+import { Box, Paper, Popper, Typography, useTheme } from "@material-ui/core";
+import { css } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "./domains/DrawObjectFactory";
 import { IRoughSVG } from "./domains/rough";
@@ -8,6 +9,7 @@ export const DrawObject: React.FC<{
   roughSVG: IRoughSVG | undefined | null;
   object: IObject;
   drawingTool: DrawingTool;
+  title?: string;
   onMove: (startEvent: PointerEvent, event: PointerEvent) => void;
   onRemove: () => void;
 }> = React.memo((props) => {
@@ -31,6 +33,7 @@ export const DrawObject: React.FC<{
   const fillStyle = "solid";
   const isBlack = props.object.color === "#000000";
   const fill = isBlack ? theme.palette.background.default : props.object.color;
+  const $tokenRef = useRef<SVGGElement | null>(null);
 
   function onPointerMove(event: PointerEvent) {
     if (startEvent.current) {
@@ -123,19 +126,32 @@ export const DrawObject: React.FC<{
     case ObjectType.Token: {
       const Token = props.object.Token;
       return (
-        <g {...eventProps} color={props.object.color}>
+        <g {...eventProps} ref={$tokenRef} color={props.object.color}>
           <Token
             width={DrawObjectFactory.TokenSize.width}
             height={DrawObjectFactory.TokenSize.height}
             x={props.object.point.x}
             y={props.object.point.y}
           />
-          {/* <FaceTwoToneIcon
-            width={DrawObjectFactory.TokenSize.width}
-            height={DrawObjectFactory.TokenSize.height}
-            x={props.object.point.x}
-            y={props.object.point.y}
-          /> */}
+          {props.title && (
+            <Popper
+              className={css({
+                pointerEvents: "none",
+                marginLeft: ".5rem",
+                marginTop: "-2rem",
+                zIndex: theme.zIndex.tooltip,
+              })}
+              open={true}
+              anchorEl={$tokenRef.current}
+              placement="right-start"
+            >
+              <Paper elevation={8}>
+                <Box p=".5rem">
+                  <Typography>{props.title}</Typography>
+                </Box>
+              </Paper>
+            </Popper>
+          )}
         </g>
       );
     }

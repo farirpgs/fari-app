@@ -26,14 +26,21 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
-import { DrawingTool, IDrawAreaObjects, useDrawing } from "./hooks/useDrawing";
+import {
+  DrawingTool,
+  IDrawAreaObjects,
+  ObjectType,
+  useDrawing,
+} from "./hooks/useDrawing";
+
 interface IProps {
   objects?: IDrawAreaObjects;
   readonly?: boolean;
   fullScreen?: boolean;
+  controls: "bottom" | "top";
+  tokenTitles?: Array<string>;
   onFullScreenChange?: (fullScreen: boolean) => void;
   onChange?(lines: IDrawAreaObjects): void;
-  controls: "bottom" | "top";
 }
 
 export const DrawObjects: React.FC<IProps> = (props) => {
@@ -45,12 +52,12 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     setDrawingToolBeforeColorPicker,
   ] = useState<DrawingTool | undefined>(undefined);
   const $paletteButton = useRef<HTMLButtonElement | null>(null);
-
   const drawingManager = useDrawing({
     objects: props.objects,
     readonly: props.readonly,
     onChange: props.onChange,
   });
+  let tokenIndex = 0;
 
   function resetDrawingTool() {
     if (drawingToolBeforeColorPicker) {
@@ -137,12 +144,20 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             })}
           >
             {drawingManager.state.objects.map((object, index) => {
+              const hasTokenTitle = object.type === ObjectType.Token;
+              const titleIndex = hasTokenTitle ? tokenIndex++ : undefined;
+              const title =
+                titleIndex !== undefined
+                  ? props.tokenTitles?.[titleIndex]
+                  : undefined;
+
               return (
                 <DrawObject
                   key={index}
                   object={object}
                   roughSVG={drawingManager.state.roughSVG}
                   drawingTool={drawingManager.state.drawingTool}
+                  title={title}
                   onMove={(startEvent, moveEvent) => {
                     drawingManager.handlers.onObjectMove(
                       index,

@@ -143,6 +143,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const isGM = !props.idFromParams;
   const isOffline = props.mode === SceneMode.PlayOffline;
+  const tokenTitles = sceneManager.state.scene.players.map((p) => p.playerName);
 
   const everyone = [
     sceneManager.state.scene.gm,
@@ -500,6 +501,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <DrawArea
               objects={sceneManager.state.scene.drawAreaObjects}
               readonly={!isGM}
+              tokenTitles={tokenTitles}
               onChange={(lines) => {
                 sceneManager.actions.updateDrawAreaObjects(lines);
               }}
