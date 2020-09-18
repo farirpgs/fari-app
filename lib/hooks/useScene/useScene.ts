@@ -42,7 +42,7 @@ export function useScene(props: IProps) {
       rolls: [],
       playedDuringTurn: false,
       fatePoints: 3,
-      offline: true,
+      offline: false,
     },
     players: [],
     goodConfetti: 0,

@@ -88,13 +88,14 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene).toEqual({
         aspects: { "aspect-id": { toto: 3 } },
         badConfetti: 0,
-        drawAreaLines: [],
+        drawAreaObjects: [],
         gm: {
           fatePoints: 3,
           id: "111",
           playedDuringTurn: false,
           playerName: "Game Master",
           rolls: [],
+          offline: false,
         },
         goodConfetti: 0,
         id: "new-id",
@@ -465,6 +466,7 @@ fdescribe("useScene", () => {
         fatePoints: 1,
         id: "1",
         playedDuringTurn: true,
+        offline: false,
         playerName: "RP",
         rolls: [
           {
@@ -483,6 +485,7 @@ fdescribe("useScene", () => {
         fatePoints: 1,
         id: "1",
         playedDuringTurn: false,
+        offline: false,
         playerName: "RP",
         rolls: [
           {
@@ -516,6 +519,7 @@ fdescribe("useScene", () => {
         fatePoints: 1,
         id: "1",
         playedDuringTurn: false,
+        offline: false,
         playerName: "RP",
         rolls: [
           {
@@ -529,6 +533,7 @@ fdescribe("useScene", () => {
         fatePoints: 15,
         id: "2",
         playedDuringTurn: false,
+        offline: false,
         playerName: undefined,
         rolls: [],
       });
