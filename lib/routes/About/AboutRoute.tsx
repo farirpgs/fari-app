@@ -8,12 +8,14 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleLanguages } from "../../services/internationalization/InternationalizationService";
 import AboutEnMarkdown from "./page/About.en.md";
 import AboutEsMarkdown from "./page/About.es.md";
+import AboutFrMarkdown from "./page/About.fr.md";
 
 const converter = new showdown.Converter();
 
 const html: Record<IPossibleLanguages, string> = {
   en: converter.makeHtml(AboutEnMarkdown),
   es: converter.makeHtml(AboutEsMarkdown),
+  fr: converter.makeHtml(AboutFrMarkdown),
   dev: converter.makeHtml(AboutEnMarkdown),
 };
 

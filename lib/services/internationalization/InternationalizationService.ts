@@ -7,7 +7,7 @@ import { esTranslation } from "./locales/esTranslation";
 import { frTranslation } from "./locales/frTranslation";
 import { ptbrTranslation } from "./locales/ptbrTranslations";
 
-export type IPossibleLanguages = "en" | "es" | "dev";
+export type IPossibleLanguages = "en" | "es" | "fr" | "dev";
 
 export class InternationalizationService {
   public i18next: i18n;
