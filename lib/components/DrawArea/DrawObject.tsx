@@ -33,8 +33,8 @@ export const DrawObject: React.FC<{
   const fillStyle = "solid";
   const isBlack = props.object.color === "#000000";
   const fill = isBlack ? theme.palette.background.default : props.object.color;
-  const $tokenRef = useRef<SVGGElement | null>(null);
-
+  const [$tokenRef, $setTokenRef] = useState<SVGGElement | null>(null);
+  const [refCounter, setRefCounter] = useState(0);
   function onPointerMove(event: PointerEvent) {
     if (startEvent.current) {
       props.onMove(startEvent.current, event);
@@ -125,15 +125,25 @@ export const DrawObject: React.FC<{
     }
     case ObjectType.Token: {
       const Token = props.object.Token;
+      const shouldRenderPopper = props.title && $tokenRef;
       return (
-        <g {...eventProps} ref={$tokenRef} color={props.object.color}>
+        <g
+          {...eventProps}
+          ref={(ref) => {
+            console.log("ref re render", ref);
+            $setTokenRef(ref);
+            // setRefCounter((counter) => counter + 1);
+          }}
+          color={props.object.color}
+        >
           <Token
             width={DrawObjectFactory.TokenSize.width}
             height={DrawObjectFactory.TokenSize.height}
             x={props.object.point.x}
             y={props.object.point.y}
           />
-          {props.title && (
+
+          {shouldRenderPopper && (
             <Popper
               className={css({
                 pointerEvents: "none",
@@ -141,8 +151,9 @@ export const DrawObject: React.FC<{
                 marginTop: "-2rem",
                 zIndex: theme.zIndex.tooltip,
               })}
+              key={refCounter}
               open={true}
-              anchorEl={$tokenRef.current}
+              anchorEl={$tokenRef}
               placement="right-start"
             >
               <Paper elevation={8}>

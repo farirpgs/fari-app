@@ -501,7 +501,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <DrawArea
               objects={sceneManager.state.scene.drawAreaObjects}
               readonly={!isGM}
-              tokenTitles={tokenTitles}
+              tokenTitles={["TEST", tokenTitles]}
               onChange={(lines) => {
                 sceneManager.actions.updateDrawAreaObjects(lines);
               }}
