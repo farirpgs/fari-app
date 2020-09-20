@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/react";
 import { env } from "../injections";
 
 export class SentryService {
@@ -11,7 +11,7 @@ export class SentryService {
       Sentry.init({
         release: `fari@${env.hash}`,
         environment: env.context,
-        dsn: "https://94aa4f0e7f754d1e92a2fb12fd92be22@sentry.io/1856588"
+        dsn: "https://94aa4f0e7f754d1e92a2fb12fd92be22@sentry.io/1856588",
       });
     }
   }

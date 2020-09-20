@@ -1,6 +1,7 @@
 import { StylesProvider } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
+import * as Sentry from "@sentry/react";
 import "flexboxgrid";
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
@@ -8,7 +9,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./components/AppRouter/AppRouter";
 import { CharactersManager } from "./components/CharactersManager/CharactersManager";
-import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
+import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
@@ -51,7 +52,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     <ThemeProvider theme={store.state.darkMode ? AppDarkTheme : AppLightTheme}>
       <StylesProvider injectFirst>
         <CssBaseline />
-        <ErrorBoundary>
+        <Sentry.ErrorBoundary fallback={ErrorReport} showDialog>
           <HelmetProvider>
             <BrowserRouter>
               <Helmet
@@ -68,7 +69,7 @@ export const AppProvider: React.FC<{}> = (props) => {
               <AppRouter />
             </BrowserRouter>
           </HelmetProvider>
-        </ErrorBoundary>
+        </Sentry.ErrorBoundary>
       </StylesProvider>
     </ThemeProvider>
   );
