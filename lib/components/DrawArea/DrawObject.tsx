@@ -1,5 +1,4 @@
 import { useTheme } from "@material-ui/core";
-import FaceTwoToneIcon from "@material-ui/icons/FaceTwoTone";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "./domains/DrawObjectFactory";
 import { IRoughSVG } from "./domains/rough";
@@ -122,14 +121,21 @@ export const DrawObject: React.FC<{
       );
     }
     case ObjectType.Token: {
+      const Token = props.object.Token;
       return (
         <g {...eventProps} color={props.object.color}>
-          <FaceTwoToneIcon
+          <Token
             width={DrawObjectFactory.TokenSize.width}
             height={DrawObjectFactory.TokenSize.height}
             x={props.object.point.x}
             y={props.object.point.y}
           />
+          {/* <FaceTwoToneIcon
+            width={DrawObjectFactory.TokenSize.width}
+            height={DrawObjectFactory.TokenSize.height}
+            x={props.object.point.x}
+            y={props.object.point.y}
+          /> */}
         </g>
       );
     }

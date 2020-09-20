@@ -1,7 +1,9 @@
+import { SvgIconProps } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "../domains/DrawObjectFactory";
 import { pickerColors } from "../domains/pickerColors";
 import { rough } from "../domains/rough";
+import { AllTokens } from "../tokens/tokens";
 
 export enum DrawingTool {
   ColorPicker,
@@ -30,6 +32,7 @@ export type IObject =
 
 export type ITokenObject = {
   type: ObjectType.Token;
+  Token: React.FC<SvgIconProps>;
   color: string;
   point: IPoint;
 };
@@ -74,7 +77,7 @@ export function useDrawing(props: {
   const [drawingTool, setDrawingTool] = useState(DrawingTool.Line);
 
   const [color, setColor] = useState("#000000");
-  const [tokenColorIndex, setTokenColorIndex] = useState(0);
+  const [tokenIndex, setTokenIndex] = useState(0);
   const $container = useRef<HTMLDivElement | null>(null);
   const $svgElement = useRef<SVGSVGElement | null>(null);
   const onChangeTimeout = useRef<any | undefined>(undefined);
@@ -135,8 +138,10 @@ export function useDrawing(props: {
         break;
       }
       case DrawingTool.Token: {
-        const tokenColor = pickerColors[tokenColorIndex];
-        setTokenColorIndex((prevIndex) => {
+        const tokenColor = pickerColors[tokenIndex];
+        const Token = AllTokens[tokenIndex];
+
+        setTokenIndex((prevIndex) => {
           const shouldResetIndex = prevIndex === pickerColors.length - 1;
           if (shouldResetIndex) {
             return 0;
@@ -148,6 +153,7 @@ export function useDrawing(props: {
             ...objects,
             DrawObjectFactory.startToken({
               color: tokenColor,
+              Token: Token,
               point: newPoint,
             }),
           ];
