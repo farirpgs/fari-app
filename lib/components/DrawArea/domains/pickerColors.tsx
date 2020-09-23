@@ -12,6 +12,8 @@ const colorBlindFriendlyColors = [
   "#0072b2",
   "#d55e01",
   "#cc79a7",
+  // test ...?
+  "#EB144C",
 ];
 
 const twitterColors = [
