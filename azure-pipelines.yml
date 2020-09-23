@@ -38,10 +38,12 @@ steps:
       CONTEXT=PIPELINE BUILD_NUMBER=$(Build.BuildNumber) COMMIT_ID=$(Build.SourceVersion) yarn run build
     displayName: "yarn build"
 
+  # Disabled for forks because: "By default with GitHub repositories, secret variables associated with your pipeline aren't made available to pull request builds of forks"
+  #   https://docs.microsoft.com/fr-fr/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#contributions-from-forks
   - script: |
       yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
     displayName: "deploy preview"
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'), ne(variables['System.PullRequest.IsFork'], 'True'))
 
   - script: |
       yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
