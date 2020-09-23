@@ -8,7 +8,7 @@ interface IProps {
   objects: IDrawAreaObjects | undefined;
   readonly: boolean;
   onChange(lines: IDrawAreaObjects): void;
-  tokenTitles?: Array<string | undefined>;
+  tokenTitles?: Array<string>;
 }
 
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
