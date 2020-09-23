@@ -26,6 +26,29 @@ export function makeIcon(options: { svg: JSX.Element; name: string }) {
   return IconComponent;
 }
 
+export const Zero = makeIcon({
+  name: "Zero",
+  svg: (
+    <svg width={24} height={24} viewBox="0 0 6.35 6.35">
+      <g stroke="#000">
+        <path
+          d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
+          opacity={0.996}
+          fill="#fff"
+          fillRule="evenodd"
+          strokeWidth={0.52918332}
+          strokeLinecap="round"
+          paintOrder="markers fill stroke"
+        />
+        <path
+          d="M3.175.925v4.5M1.837 1.837h2.676v2.676H1.837z"
+          fill="none"
+          strokeWidth={0.661}
+        />
+      </g>
+    </svg>
+  ),
+});
 export const One = makeIcon({
   name: "One",
   svg: (
@@ -90,25 +113,6 @@ export const Four = makeIcon({
   name: "Four",
   svg: (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
-      <path
-        d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
-        opacity={0.996}
-        fill="#fff"
-        fillRule="evenodd"
-        stroke="#000"
-        strokeWidth={0.52918332}
-        strokeLinecap="round"
-        paintOrder="markers fill stroke"
-      />
-      <path d="M1.694 4.656C2.887 2.35 4.656 1.694 4.656 1.694c-1.65 1.889-2.962 2.962-2.962 2.962zM2.593 5.556C3.787 3.25 5.556 2.593 5.556 2.593c-1.65 1.89-2.963 2.963-2.963 2.963zM.794 3.757C1.987 1.45 3.757.794 3.757.794 2.107 2.683.794 3.757.794 3.757z" />
-    </svg>
-  ),
-});
-
-export const Five = makeIcon({
-  name: "Five",
-  svg: (
-    <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
@@ -124,8 +128,8 @@ export const Five = makeIcon({
   ),
 });
 
-export const Six = makeIcon({
-  name: "Six",
+export const Five = makeIcon({
+  name: "Five",
   svg: (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
@@ -142,27 +146,30 @@ export const Six = makeIcon({
   ),
 });
 
-export const Seven = makeIcon({
-  name: "Seven",
+export const Six = makeIcon({
+  name: "Six",
   svg: (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
-      <g fillRule="evenodd" paintOrder="markers fill stroke">
+      <g stroke="#000" strokeLinecap="round" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
           fill="#fff"
-          stroke="#000"
+          fillRule="evenodd"
           strokeWidth={0.52918332}
-          strokeLinecap="round"
         />
-        <path d="M3.175 5.273l-.993-1.72-.993-1.72h3.972l-.993 1.72zm0-1.42l.788-.91.695-.772H1.704l.683.773z" />
+        <path
+          d="M5.008 3.175l-.46.793-.456.794-.917-.001-.917.001-.456-.794-.46-.793.46-.793.456-.795.917.002.917-.002.456.795z"
+          fill="none"
+          strokeWidth={0.794}
+        />
       </g>
     </svg>
   ),
 });
 
-export const Eight = makeIcon({
-  name: "Eight",
+export const Seven = makeIcon({
+  name: "Seven",
   svg: (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g opacity={0.996} fillRule="evenodd" paintOrder="markers fill stroke">
@@ -182,4 +189,23 @@ export const Eight = makeIcon({
   ),
 });
 
-export const AllTokens = [One, Two, Three, Four, Five, Six, Seven, Eight];
+export const Eight = makeIcon({
+  name: "Eight",
+  svg: (
+    <svg width={24} height={24} viewBox="0 0 6.35 6.35">
+      <g fillRule="evenodd" paintOrder="markers fill stroke">
+        <path
+          d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
+          opacity={0.996}
+          fill="#fff"
+          stroke="#000"
+          strokeWidth={0.52918332}
+          strokeLinecap="round"
+        />
+        <path d="M3.175 5.273l-.993-1.72-.993-1.72h3.972l-.993 1.72zm0-1.42l.788-.91.695-.772H1.704l.683.773z" />
+      </g>
+    </svg>
+  ),
+});
+
+export const AllTokens = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight];

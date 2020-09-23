@@ -5,6 +5,10 @@ import { pickerColors } from "../domains/pickerColors";
 import { rough } from "../domains/rough";
 import { AllTokens } from "../tokens/tokens";
 
+if (pickerColors.length !== AllTokens.length) {
+  throw "useDrawing: pickerColors.length and AllTokens.length don't match";
+}
+
 export enum DrawingTool {
   ColorPicker,
   Line,
@@ -313,6 +317,7 @@ export function useDrawing(props: {
 
   function clear() {
     setObjects([]);
+    setTokenIndex(0);
   }
 
   function undo() {

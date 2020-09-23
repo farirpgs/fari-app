@@ -8,6 +8,7 @@ interface IProps {
   objects: IDrawAreaObjects | undefined;
   readonly: boolean;
   onChange(lines: IDrawAreaObjects): void;
+  tokenTitles?: Array<string>;
 }
 
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
@@ -17,14 +18,17 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
   }
   return (
     <>
-      <DrawObjects
-        objects={props.objects}
-        readonly={props.readonly}
-        fullScreen={fullScreen}
-        onChange={props.onChange}
-        onFullScreenChange={setFullScreen}
-        controls="bottom"
-      />
+      {!fullScreen && (
+        <DrawObjects
+          objects={props.objects}
+          readonly={props.readonly}
+          fullScreen={fullScreen}
+          onChange={props.onChange}
+          onFullScreenChange={setFullScreen}
+          controls="bottom"
+          tokenTitles={props.tokenTitles}
+        />
+      )}
       <Dialog
         open={fullScreen}
         fullScreen
@@ -40,6 +44,7 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
           onChange={props.onChange}
           onFullScreenChange={setFullScreen}
           controls="top"
+          tokenTitles={props.tokenTitles}
         />
       </Dialog>
     </>
