@@ -102,6 +102,7 @@ export const frTranslation = {
   "play-route.error.description1": `Nous ne pouvons pas vous connecter au serveur afin d'initialiser le jeu`,
   "play-route.error.description2": `Essayez d'actualiser la page pour voir si cela résout le problème. Vous pouvez commencer une partie hors ligne à la place.`,
   "play-route.error.title": `Quelque chose s'est mal passé.`,
+  "play-route.error.webRTC": `Le navigateur que vous utilisez actuellement n'est pas pris en charge par Fari pour utiliser ses fonctionnalités en ligne. Veuillez choisir un autre navigateur comme Google Chrome ou Firefox.`,
   "play-route.fate-points": `Points Fate`,
   "play-route.fp": `P.F.`,
   "play-route.init": `Init`,

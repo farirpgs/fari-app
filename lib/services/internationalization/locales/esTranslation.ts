@@ -107,6 +107,7 @@ export const esTranslation: Record<
   "play-route.error.description1": `No se ha podido conectar al servidor para inicializar la partida.`,
   "play-route.error.description2": `Intente refrescar la página para intentar resolver el problema. También puede iniciar una partida offline en su lugar.`,
   "play-route.error.title": `Algo malo ha ocurrido.`,
+  "play-route.error.webRTC": `Fari no admite el navegador que está utilizando actualmente para utilizar sus funcionalidades en línea. Elija un navegador diferente como Google Chrome o Firefox.`,
   "play-route.fate-points": `Puntos Fate`,
   "play-route.fp": `P.F.`,
   "play-route.init": `Inic`,

@@ -102,6 +102,7 @@ export const enTranslation = {
   "play-route.error.description1": `We could not connect you to the server in order to initialize the game`,
   "play-route.error.description2": `Try refreshing the page to see if that fixes the issue. You can start an offline game instead.`,
   "play-route.error.title": `Something wrong happened.`,
+  "play-route.error.webRTC": `The browser you are currently using is not supported by Fari to use its online functionalities. Please choose a different browser like Google Chrome or Firefox.`,
   "play-route.fate-points": `Fate Points`,
   "play-route.fp": `F.P.`,
   "play-route.init": `Init`,
