@@ -214,9 +214,10 @@ export const Page: React.FC<{
               })}
             >
               <img
+                alt="Fari"
                 className={css({
-                  height: "2rem",
-                  paddingRight: "1rem",
+                  height: "2.5rem",
+                  marginRight: "1rem",
                   cursor: "pointer",
                 })}
                 src={appIcon}
