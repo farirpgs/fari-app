@@ -21,7 +21,7 @@ export function useTranslate() {
   function getCurrentLanguage() {
     const [sanitizedLanguage] = i18n.language.split("-");
 
-    return PossibleLanguages.includes(i18n.language)
+    return PossibleLanguages.includes(i18n.language as IPossibleLanguages)
       ? (i18n.language as IPossibleLanguages)
       : (sanitizedLanguage as IPossibleLanguages);
   }
