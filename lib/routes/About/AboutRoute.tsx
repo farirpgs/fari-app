@@ -13,17 +13,17 @@ import AboutFrMarkdown from "./page/About.fr.md";
 const converter = new showdown.Converter();
 
 const html: Record<IPossibleLanguages, string> = {
-  en: converter.makeHtml(AboutEnMarkdown),
-  es: converter.makeHtml(AboutEsMarkdown),
-  fr: converter.makeHtml(AboutFrMarkdown),
-  dev: converter.makeHtml(AboutEnMarkdown),
+  "en": converter.makeHtml(AboutEnMarkdown),
+  "pt-BR": converter.makeHtml(AboutEnMarkdown),
+  "es": converter.makeHtml(AboutEsMarkdown),
+  "fr": converter.makeHtml(AboutFrMarkdown),
+  "dev": converter.makeHtml(AboutEnMarkdown),
 };
 
 export const AboutRoute: React.FC<{}> = (props) => {
-  const { t, i18n } = useTranslate();
-  const currentLanguage = i18n.language as IPossibleLanguages;
-
+  const { t, currentLanguage } = useTranslate();
   const aboutPage = html[currentLanguage];
+
   return (
     <Page>
       <PageMeta

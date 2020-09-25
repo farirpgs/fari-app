@@ -57,7 +57,7 @@ export const Page: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
-  const { t, i18n } = useTranslate();
+  const { t, i18n, currentLanguage } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
@@ -152,7 +152,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item>
               <Select
-                value={i18n.language}
+                value={currentLanguage}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value as string);
                 }}

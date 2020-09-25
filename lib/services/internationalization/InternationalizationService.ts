@@ -7,7 +7,8 @@ import { esTranslation } from "./locales/esTranslation";
 import { frTranslation } from "./locales/frTranslation";
 import { ptbrTranslation } from "./locales/ptbrTranslations";
 
-export type IPossibleLanguages = "en" | "es" | "fr" | "dev";
+export const PossibleLanguages = ["en", "es", "pt-BR", "fr", "dev"] as const;
+export type IPossibleLanguages = typeof PossibleLanguages[number];
 
 export class InternationalizationService {
   public i18next: i18n;
@@ -39,7 +40,6 @@ export class InternationalizationService {
             translation: devTranslation,
           },
         },
-        fallbackLng: "en",
         debug: false,
         keySeparator: false,
         interpolation: {
