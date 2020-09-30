@@ -34,7 +34,7 @@ export const DrawObject: React.FC<{
   const isBlack = props.object.color === "#000000";
   const fill = isBlack ? theme.palette.background.default : props.object.color;
   const [$tokenRef, $setTokenRef] = useState<SVGGElement | null>(null);
-  const [refCounter, setRefCounter] = useState(0);
+
   function onPointerMove(event: PointerEvent) {
     if (startEvent.current) {
       props.onMove(startEvent.current, event);
@@ -130,9 +130,7 @@ export const DrawObject: React.FC<{
         <g
           {...eventProps}
           ref={(ref) => {
-            console.log("ref re render", ref);
             $setTokenRef(ref);
-            // setRefCounter((counter) => counter + 1);
           }}
           color={props.object.color}
         >
@@ -151,7 +149,6 @@ export const DrawObject: React.FC<{
                 marginTop: "-2rem",
                 zIndex: theme.zIndex.tooltip,
               })}
-              key={refCounter}
               open={true}
               anchorEl={$tokenRef}
               placement="right-start"
