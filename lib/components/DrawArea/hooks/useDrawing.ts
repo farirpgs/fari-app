@@ -1,4 +1,3 @@
-import { SvgIconProps } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "../domains/DrawObjectFactory";
 import { pickerColors } from "../domains/pickerColors";
@@ -36,7 +35,7 @@ export type IObject =
 
 export type ITokenObject = {
   type: ObjectType.Token;
-  Token: React.FC<SvgIconProps>;
+  tokenIndex: number;
   color: string;
   point: IPoint;
 };
@@ -157,7 +156,7 @@ export function useDrawing(props: {
             ...objects,
             DrawObjectFactory.startToken({
               color: tokenColor,
-              Token: Token,
+              tokenIndex: tokenIndex,
               point: newPoint,
             }),
           ];

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "./domains/DrawObjectFactory";
 import { IRoughSVG } from "./domains/rough";
 import { DrawingTool, IObject, ObjectType } from "./hooks/useDrawing";
+import { AllTokens } from "./tokens/tokens";
 
 export const DrawObject: React.FC<{
   roughSVG: IRoughSVG | undefined | null;
@@ -13,6 +14,7 @@ export const DrawObject: React.FC<{
   onMove: (startEvent: PointerEvent, event: PointerEvent) => void;
   onRemove: () => void;
 }> = React.memo((props) => {
+  console.log("rerender DrawObjects");
   type IStartEvent = PointerEvent | undefined;
 
   const theme = useTheme();
@@ -50,7 +52,6 @@ export const DrawObject: React.FC<{
   useEffect(() => {
     document.addEventListener("pointermove", onPointerMove);
     document.addEventListener("pointerup", onPointerUp);
-
     return () => {
       document.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("pointerup", onPointerUp);
@@ -124,7 +125,8 @@ export const DrawObject: React.FC<{
       );
     }
     case ObjectType.Token: {
-      const Token = props.object.Token;
+      const tokenIndex = props.object.tokenIndex;
+      const Token = AllTokens[tokenIndex];
       const shouldRenderPopper = props.title && $tokenRef;
       return (
         <g
