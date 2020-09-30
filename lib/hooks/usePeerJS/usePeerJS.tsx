@@ -75,6 +75,5 @@ export function usePeerJS(options: { debug?: boolean }) {
 }
 
 export function isWebRTCSupported() {
-  return false;
   return RTCPeerConnection !== undefined;
 }
