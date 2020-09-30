@@ -14,7 +14,6 @@ export const DrawObject: React.FC<{
   onMove: (startEvent: PointerEvent, event: PointerEvent) => void;
   onRemove: () => void;
 }> = React.memo((props) => {
-  console.log("rerender DrawObjects");
   type IStartEvent = PointerEvent | undefined;
 
   const theme = useTheme();
@@ -22,6 +21,7 @@ export const DrawObject: React.FC<{
   const [seed] = useState(() => Math.random() * 100);
   const startEvent = useRef<IStartEvent>(undefined);
   const [moving, setMoving] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const movableCursor = moving ? "grabbing" : "grab";
   const cursor =
@@ -60,6 +60,12 @@ export const DrawObject: React.FC<{
 
   const eventProps = {
     cursor: cursor,
+    onPointerEnter: () => {
+      setHover(true);
+    },
+    onPointerLeave: () => {
+      setHover(false);
+    },
     onPointerDown: (event: React.PointerEvent<SVGGElement>) => {
       if (props.drawingTool === DrawingTool.Move) {
         event.stopPropagation();
@@ -127,7 +133,8 @@ export const DrawObject: React.FC<{
     case ObjectType.Token: {
       const tokenIndex = props.object.tokenIndex;
       const Token = AllTokens[tokenIndex];
-      const shouldRenderPopper = props.title && $tokenRef;
+      const shouldRenderPopper = props.title && hover;
+
       return (
         <g
           {...eventProps}
