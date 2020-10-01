@@ -122,10 +122,9 @@ export function useDrawing(props: {
       return;
     }
 
-    setDrawing(true);
-
     switch (drawingTool) {
       case DrawingTool.Rectangle: {
+        setDrawing(true);
         setObjects((objects) => {
           return [
             ...objects,
@@ -135,6 +134,7 @@ export function useDrawing(props: {
         break;
       }
       case DrawingTool.Ellipse: {
+        setDrawing(true);
         setObjects((objects) => {
           return [
             ...objects,
@@ -144,11 +144,12 @@ export function useDrawing(props: {
         break;
       }
       case DrawingTool.Token: {
+        setDrawing(true);
         const tokenColor = pickerColors[tokenIndex];
         const Token = AllTokens[tokenIndex];
 
         setTokenIndex((prevIndex) => {
-          const shouldResetIndex = prevIndex === pickerColors.length - 1;
+          const shouldResetIndex = prevIndex === pickerColors.length;
           if (shouldResetIndex) {
             return 0;
           }
@@ -167,6 +168,7 @@ export function useDrawing(props: {
         break;
       }
       case DrawingTool.Line: {
+        setDrawing(true);
         setObjects((objects) => {
           return [
             ...objects,
