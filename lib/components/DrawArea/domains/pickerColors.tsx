@@ -13,6 +13,7 @@ const colorBlindFriendlyColors = [
   "#d55e01",
   "#cc79a7",
 ];
+
 export const colorBlindFriendlyColorsForTokens = [
   "#000000",
   "#e69f00",
