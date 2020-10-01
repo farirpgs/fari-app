@@ -150,17 +150,18 @@ export const Six = makeIcon({
   name: "Six",
   svg: (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
-      <g stroke="#000" strokeLinecap="round" paintOrder="markers fill stroke">
+      <g strokeLinecap="round" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
           fill="#fff"
+          stroke="#000"
           fillRule="evenodd"
           strokeWidth={0.52918332}
         />
         <path
           d="M5.008 3.175l-.46.793-.456.794-.917-.001-.917.001-.456-.794-.46-.793.46-.793.456-.795.917.002.917-.002.456.795z"
-          fill="none"
+          // fill="none"
           strokeWidth={0.794}
         />
       </g>

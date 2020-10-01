@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "../domains/DrawObjectFactory";
-import { pickerColors } from "../domains/pickerColors";
+import {
+  colorBlindFriendlyColorsForTokens,
+  pickerColors,
+} from "../domains/pickerColors";
 import { rough } from "../domains/rough";
 import { AllTokens } from "../tokens/tokens";
 
-if (pickerColors.length !== AllTokens.length) {
-  throw "useDrawing: pickerColors.length and AllTokens.length don't match";
+if (colorBlindFriendlyColorsForTokens.length !== AllTokens.length) {
+  throw "useDrawing: colorBlindFriendlyColorsForTokens.length and AllTokens.length don't match";
 }
 
 export enum DrawingTool {
