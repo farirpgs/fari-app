@@ -85,7 +85,7 @@ export function useDrawing(props: {
   useEffect(() => {
     const shouldUpdateLocalState =
       props.objects && props.objects.length !== objects.length;
-    if (shouldUpdateLocalState) {
+    if (shouldUpdateLocalState || props.readonly) {
       setObjects(props.objects as IDrawAreaObjects);
     }
   }, [props.objects]);
