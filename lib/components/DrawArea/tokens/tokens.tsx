@@ -30,7 +30,7 @@ export const Zero = makeIcon({
   name: "Zero",
   svg: (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
-      <g stroke="#000">
+      <g stroke="#000000">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
@@ -43,6 +43,7 @@ export const Zero = makeIcon({
         <path
           d="M3.175.925v4.5M1.837 1.837h2.676v2.676H1.837z"
           fill="none"
+          stroke="currentColor"
           strokeWidth={0.661}
         />
       </g>
