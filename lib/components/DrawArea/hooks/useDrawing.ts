@@ -1,15 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "../domains/DrawObjectFactory";
-import {
-  colorBlindFriendlyColorsForTokens,
-  pickerColors,
-} from "../domains/pickerColors";
+import { tokenColors } from "../domains/pickerColors";
 import { rough } from "../domains/rough";
-import { AllTokens } from "../tokens/tokens";
-
-if (colorBlindFriendlyColorsForTokens.length !== AllTokens.length) {
-  throw "useDrawing: colorBlindFriendlyColorsForTokens.length and AllTokens.length don't match";
-}
 
 export enum DrawingTool {
   ColorPicker,
@@ -145,14 +137,11 @@ export function useDrawing(props: {
       }
       case DrawingTool.Token: {
         setDrawing(true);
-        const tokenColor = pickerColors[tokenIndex];
-        const Token = AllTokens[tokenIndex];
+        const numberOfColors = tokenColors.length;
+        const newColorIndex = tokenIndex % numberOfColors;
+        const tokenColor = tokenColors[newColorIndex];
 
         setTokenIndex((prevIndex) => {
-          const shouldResetIndex = prevIndex === pickerColors.length;
-          if (shouldResetIndex) {
-            return 0;
-          }
           return prevIndex + 1;
         });
         setObjects((objects) => {

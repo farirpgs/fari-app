@@ -132,7 +132,8 @@ export const DrawObject: React.FC<{
       );
     }
     case ObjectType.Token: {
-      const tokenIndex = props.object.tokenIndex;
+      const numberOfTokens = AllTokens.length;
+      const tokenIndex = props.object.tokenIndex % numberOfTokens;
       const Token = AllTokens[tokenIndex];
       const shouldRenderPopper = props.title && hover;
 

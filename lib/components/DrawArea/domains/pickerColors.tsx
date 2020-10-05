@@ -14,7 +14,7 @@ const colorBlindFriendlyColors = [
   "#cc79a7",
 ];
 
-export const colorBlindFriendlyColorsForTokens = [
+export const tokenColors = [
   "#000000",
   "#e69f00",
   "#56b4e9",
@@ -23,7 +23,6 @@ export const colorBlindFriendlyColorsForTokens = [
   "#0072b2",
   "#d55e01",
   "#cc79a7",
-  "#EB144C",
 ];
 
 const twitterColors = [
