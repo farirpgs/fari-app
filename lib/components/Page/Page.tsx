@@ -26,11 +26,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/app-icon.png";
+import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppLink } from "../AppLink/AppLink";
 import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
@@ -62,6 +63,7 @@ export const Page: React.FC<{
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
   const theme = useTheme();
+  const logger = useLogger();
 
   const isLive = props.live !== undefined;
   useEffect(() => {
@@ -442,6 +444,11 @@ export const Page: React.FC<{
               darkModeManager.actions.setDarkMode(
                 !darkModeManager.state.darkMode
               );
+              if (darkModeManager.state.darkMode) {
+                logger.info("Page.toggleLightMode");
+              } else {
+                logger.info("Page.toggleDarkMode");
+              }
             }}
           >
             {darkModeManager.state.darkMode ? (

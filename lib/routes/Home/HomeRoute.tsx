@@ -13,12 +13,14 @@ import appIcon from "../../../images/app-icon.png";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
+  const logger = useLogger();
 
   return (
     <Page kofi={false}>
@@ -64,6 +66,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       size="large"
                       onClick={() => {
                         history.push("/play");
+                        logger.info("HomeRoute:startOnlineGame");
                       }}
                     >
                       {t("home-route.play-online.button")}
@@ -88,6 +91,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     size="large"
                     onClick={() => {
                       history.push("/play-offline");
+                      logger.info("HomeRoute:startOfflineGame");
                     }}
                   >
                     {t("home-route.play-offline.button")}

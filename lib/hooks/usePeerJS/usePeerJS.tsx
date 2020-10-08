@@ -1,7 +1,7 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { env } from "../../services/injections";
+import { env } from "../../constants/env";
 
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer | undefined>(undefined);

@@ -1,6 +1,6 @@
 import { Box, Divider } from "@material-ui/core";
 import React from "react";
-import { env } from "../../services/injections";
+import { env } from "../../constants/env";
 
 export const DevTool: React.FC<{
   data: any;

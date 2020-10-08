@@ -4,12 +4,13 @@ import {
   ButtonBase,
   Tooltip,
   Typography,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import { css, cx } from "emotion";
 import React, { useState } from "react";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";
@@ -25,13 +26,15 @@ export const DiceRoute = () => {
   const theme = useTheme();
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const { t } = useTranslate();
-
+  const logger = useLogger();
   function roll() {
     if (diceManager.state.rolling) {
       return;
     }
     setRolls((draft) => {
-      return [Dice.roll4DF(), ...draft];
+      const newRoll = Dice.roll4DF();
+      logger.info("DiceRoute:Roll", { roll: newRoll });
+      return [newRoll, ...draft];
     });
   }
 

@@ -1,4 +1,3 @@
-import { useTheme } from "@material-ui/core";
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
@@ -9,6 +8,7 @@ import {
   ICharacter,
   migrateCharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { FariEntity } from "../../domains/FariEntity/FariEntity";
 import { Manager } from "../Manager/Manager";
 
@@ -18,7 +18,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
 
-  const theme = useTheme();
+  const logger = useLogger();
 
   function onAdd() {
     const newCharacter = charactersManager.actions.add(
@@ -26,6 +26,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     );
     history.push(`/characters/${newCharacter.id}`);
     charactersManager.actions.closeManager();
+    logger.info("CharactersManager:onAdd");
   }
 
   function onItemClick(character: ICharacter) {
@@ -36,14 +37,17 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     }
 
     charactersManager.actions.closeManager();
+    logger.info("CharactersManager:onItemClick");
   }
 
-  function onUndo(character: ICharacter) {
+  function onUndoDelete(character: ICharacter) {
     charactersManager.actions.upsert(character);
+    logger.info("CharactersManager:onUndoDelete");
   }
 
   function onDelete(character: ICharacter) {
     charactersManager.actions.remove(character.id);
+    logger.info("CharactersManager:onDelete");
   }
 
   function onImport(charactersToImport: FileList | null) {
@@ -58,6 +62,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
         charactersManager.actions.upsert(migratedCharacter);
       },
     });
+    logger.info("CharactersManager:onImport");
   }
 
   function onExport(character: ICharacter) {
@@ -66,6 +71,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       fariType: "character",
       name: character.name,
     });
+    logger.info("CharactersManager:onExport");
   }
 
   return (
@@ -80,7 +86,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
-      onUndo={onUndo}
+      onUndo={onUndoDelete}
       onClose={charactersManager.actions.closeManager}
       onImport={onImport}
       onExport={onExport}

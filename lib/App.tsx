@@ -11,6 +11,7 @@ import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { env } from "./constants/env";
 import {
   CharactersContext,
   useCharacters,
@@ -23,7 +24,6 @@ import {
   ScenesContext,
   useScenes,
 } from "./contexts/SceneContext/ScenesContext";
-import { env } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";
 
 export const App: React.FC<{}> = () => {
