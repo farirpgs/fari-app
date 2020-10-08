@@ -9,7 +9,7 @@
     "start": "parcel ./lib/index.html --target browser",
     "build": "parcel build ./lib/index.html --target browser",
     "tsc": "tsc --project tsconfig.json --incremental --outDir ./dist/tsc",
-    "lint": "eslint 'lib/**'",
+    "lint": "eslint 'lib/**' --cache",
     "test": "jest --coverage",
     "validate": "yarn tsc && yarn lint && yarn test",
     "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
