@@ -45,6 +45,7 @@ import {
   ICharacter,
   useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
   useScenes,
@@ -117,6 +118,7 @@ export const Scene: React.FC<IProps> = (props) => {
   } = props;
 
   const theme = useTheme();
+  const logger = useLogger();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
@@ -263,6 +265,7 @@ export const Scene: React.FC<IProps> = (props) => {
             sceneManager.actions.addOfflinePlayer(offlineCharacterName);
             setOfflineCharacterDialogOpen(false);
             setOfflineCharacterName("");
+            logger.info("Scene:OfflineCharacterDialog:onAdd");
           }}
         >
           <DialogTitle id="form-dialog-title">
@@ -291,6 +294,9 @@ export const Scene: React.FC<IProps> = (props) => {
                         ManagerMode.Use,
                         onAddOfflineCharacter
                       );
+                      logger.info(
+                        "Scene:OfflineCharacterDialog:onPickExisting"
+                      );
                     }}
                   >
                     {t("play-route.or-pick-existing")}
@@ -304,6 +310,7 @@ export const Scene: React.FC<IProps> = (props) => {
               onClick={() => {
                 setOfflineCharacterDialogOpen(false);
                 setOfflineCharacterName("");
+                logger.info("Scene:OfflineCharacterDialog:onCancel");
               }}
               color="default"
             >
@@ -386,6 +393,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       <Button
                         onClick={() => {
                           sceneManager.actions.resetInitiative();
+                          logger.info("Scene:onResetInitiative");
                         }}
                         variant="contained"
                         color="secondary"
@@ -399,6 +407,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         <Button
                           onClick={() => {
                             setOfflineCharacterDialogOpen(true);
+                            logger.info("Scene:onAddOfflineCharacter");
                           }}
                           variant="contained"
                           color="secondary"
@@ -601,6 +610,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     sceneManager.actions.addAspect(AspectType.Aspect);
+                    logger.info("Scene:addAspectEmpty");
                   }}
                   endIcon={<AddCircleOutlineIcon />}
                 >
@@ -666,6 +676,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.Aspect);
+                  logger.info("Scene:onAddCard:Aspect");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
               >
@@ -674,6 +685,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.Boost);
+                  logger.info("Scene:onAddCard:Boost");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
               >
@@ -682,6 +694,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.NPC);
+                  logger.info("Scene:onAddCard:NPC");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
               >
@@ -690,6 +703,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.BadGuy);
+                  logger.info("Scene:onAddCard:BadGuy");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
               >
@@ -698,6 +712,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.IndexCard);
+                  logger.info("Scene:onAddCard:IndexCard");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
               >
@@ -721,6 +736,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.fireGoodConfetti();
+                  logger.info("Scene:onFireGoodConfetti");
                 }}
                 variant="text"
                 color="primary"
@@ -734,6 +750,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 onClick={() => {
                   sceneManager.actions.fireBadConfetti();
+                  logger.info("Scene:onFireBadConfetti");
                 }}
                 variant="text"
                 color="primary"
@@ -746,6 +763,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <Button
               onClick={() => {
                 props.sceneManager.actions.toggleSort();
+                logger.info("Scene:onSort");
               }}
               variant="outlined"
               color={
@@ -781,6 +799,8 @@ export const Scene: React.FC<IProps> = (props) => {
                       } catch (error) {
                         window.open(props.shareLink, "_blank");
                       }
+
+                      logger.info("Scene:onCopyGameLink");
                     }
                   }}
                   variant="outlined"
@@ -813,6 +833,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(sceneManager.state.scene);
                 setSavedSnack(true);
+                logger.info("Scene:onSave");
               }}
             >
               {t("play-route.save-scene")}
@@ -832,6 +853,7 @@ export const Scene: React.FC<IProps> = (props) => {
                           ManagerMode.Use,
                           onLoadScene
                         );
+                        logger.info("Scene:onLoadScene");
                       },
                     },
                     {
@@ -841,6 +863,7 @@ export const Scene: React.FC<IProps> = (props) => {
                           ManagerMode.Use,
                           onLoadTemplateScene
                         );
+                        logger.info("Scene:onLoadSceneTemplate");
                       },
                     },
                   ]}
@@ -864,6 +887,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       );
                       if (confirmed) {
                         sceneManager.actions.resetScene();
+                        logger.info("Scene:onReset");
                       }
                     }}
                   >
