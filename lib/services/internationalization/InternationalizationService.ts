@@ -41,6 +41,8 @@ export class InternationalizationService {
             translation: devTranslation,
           },
         },
+        supportedLngs: [...PossibleLanguages],
+        fallbackLng: "en",
         debug: false,
         keySeparator: false,
         interpolation: {
