@@ -21,6 +21,7 @@ import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import { css } from "emotion";
 import React, { useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
@@ -46,6 +47,8 @@ interface IProps {
 export const DrawObjects: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
+  const logger = useLogger();
+
   const textColors = useTextColors(theme.palette.background.paper);
   const [
     drawingToolBeforeColorPicker,
@@ -202,6 +205,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     drawingManager.actions.setDrawingTool(
                       DrawingTool.ColorPicker
                     );
+                    logger.info("DrawArea:onSetDrawingTool:ColorPicker");
                   }}
                 >
                   <PaletteTwoToneIcon
@@ -232,6 +236,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     onChange={(color) => {
                       drawingManager.actions.setColor(color);
                       resetDrawingTool();
+                      logger.info("DrawArea:onSetColor");
                     }}
                   />
                 </Popover>
@@ -247,6 +252,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Move);
+                    logger.info("DrawArea:onSetDrawingTool:Move");
                   }}
                 >
                   <PanToolTwoToneIcon />
@@ -263,6 +269,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Remove);
+                    logger.info("DrawArea:onSetDrawingTool:Remove");
                   }}
                 >
                   <DeleteTwoToneIcon />
@@ -283,6 +290,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Line);
+                    logger.info("DrawArea:onSetDrawingTool:Line");
                   }}
                 >
                   <GestureTwoToneIcon />
@@ -301,6 +309,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     drawingManager.actions.setDrawingTool(
                       DrawingTool.Rectangle
                     );
+                    logger.info("DrawArea:onSetDrawingTool:Rectangle");
                   }}
                 >
                   <CheckBoxOutlineBlankIcon />
@@ -317,6 +326,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Ellipse);
+                    logger.info("DrawArea:onSetDrawingTool:Ellipse");
                   }}
                 >
                   <RadioButtonUncheckedTwoToneIcon />
@@ -333,6 +343,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Token);
+                    logger.info("DrawArea:onSetDrawingTool:Token");
                   }}
                 >
                   <FaceTwoToneIcon />
@@ -361,6 +372,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     })}
                     onClick={() => {
                       drawingManager.actions.clear();
+                      logger.info("DrawArea:onClear");
                     }}
                   >
                     <ClearAllTwoToneIcon />
@@ -374,6 +386,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     })}
                     onClick={() => {
                       drawingManager.actions.undo();
+                      logger.info("DrawArea:onUndo");
                     }}
                   >
                     <UndoTwoToneIcon />
@@ -390,6 +403,11 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   })}
                   onClick={() => {
                     props.onFullScreenChange?.(!props.fullScreen);
+                    if (!props.fullScreen) {
+                      logger.info("DrawArea:onOpenFullScreen");
+                    } else {
+                      logger.info("DrawArea:onCloseFullScreen");
+                    }
                   }}
                 >
                   {!props.fullScreen ? (

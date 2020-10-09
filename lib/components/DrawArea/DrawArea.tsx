@@ -13,9 +13,11 @@ interface IProps {
 
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
   const [fullScreen, setFullScreen] = useState(false);
+
   if (!props.objects) {
     return null;
   }
+
   return (
     <>
       {!fullScreen && (
