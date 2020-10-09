@@ -1,6 +1,7 @@
 import i18next, { i18n } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
+import { ILogger } from "../logger/makeLogger";
 import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
@@ -13,13 +14,13 @@ export type IPossibleLanguages = typeof PossibleLanguages[number];
 export class InternationalizationService {
   public i18next: i18n;
 
-  constructor() {
+  constructor(private logger: ILogger) {
     this.i18next = i18next;
     this.init();
   }
 
   private async init() {
-    await i18next
+    await this.i18next
       .use(LanguageDetector)
       .use(initReactI18next)
       .init({
@@ -46,5 +47,9 @@ export class InternationalizationService {
           escapeValue: false,
         },
       });
+    this.logger.info(`I18n:onDetect:${this.i18next.language}`, {
+      language: this.i18next.language,
+      languages: this.i18next.languages,
+    });
   }
 }
