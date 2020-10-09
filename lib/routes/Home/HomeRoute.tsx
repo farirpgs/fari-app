@@ -66,7 +66,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       size="large"
                       onClick={() => {
                         history.push("/play");
-                        logger.info("HomeRoute:startOnlineGame");
+                        logger.info("HomeRoute:onStartOnlineGame");
                       }}
                     >
                       {t("home-route.play-online.button")}
@@ -91,7 +91,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     size="large"
                     onClick={() => {
                       history.push("/play-offline");
-                      logger.info("HomeRoute:startOfflineGame");
+                      logger.info("HomeRoute:onStartOfflineGame");
                     }}
                   >
                     {t("home-route.play-offline.button")}
