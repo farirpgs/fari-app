@@ -21,6 +21,7 @@ import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutl
 import { css, cx } from "emotion";
 import React, { useState } from "react";
 import { ICharacter } from "../../../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { Font } from "../../../../domains/font/Font";
 import { useFudgeDice } from "../../../../hooks/useFudgeDice/useFudgeDice";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
@@ -41,6 +42,7 @@ export const PlayerRow: React.FC<{
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
+  const logger = useLogger();
   const diceManager = useFudgeDice(props.player.rolls);
   const shouldRenderOfflinePlayerRemoveButton =
     props.isGM && props.player.offline && !props.isMe;
@@ -113,6 +115,7 @@ export const PlayerRow: React.FC<{
       return;
     }
     props.onDiceRoll();
+    logger.info("ScenePlayer:onDiceRoll");
   }
   return (
     <>
@@ -164,6 +167,9 @@ export const PlayerRow: React.FC<{
                   props.onPlayedInTurnOrderChange(
                     !props.player.playedDuringTurn
                   );
+                  logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
+                    playedDuringTurn: !props.player.playedDuringTurn,
+                  });
                 }}
                 disabled={!canControl}
                 size="small"
@@ -188,6 +194,7 @@ export const PlayerRow: React.FC<{
                 onClick={(e) => {
                   e.stopPropagation();
                   props.onFatePointsChange(props.player.fatePoints - 1);
+                  logger.info("ScenePlayer:onConsumeFatePoints");
                 }}
               >
                 <Avatar className={fatePointsStyle}>
@@ -254,6 +261,7 @@ export const PlayerRow: React.FC<{
                     disabled={!hasCharacterSheet}
                     onClick={(e) => {
                       setCharacterDialogOpen(true);
+                      logger.info("ScenePlayer:onCharacterDialogOpen");
                     }}
                   >
                     <PersonIcon
@@ -295,6 +303,7 @@ export const PlayerRow: React.FC<{
                       const newValue =
                         fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
                       props.onFatePointsChange(newValue);
+                      logger.info("ScenePlayer:onGMConsumeFatePoint");
                     }}
                   >
                     <RemoveCircleOutlineOutlinedIcon
@@ -312,6 +321,7 @@ export const PlayerRow: React.FC<{
                   onClick={(e) => {
                     e.stopPropagation();
                     props.onFatePointsChange(props.player.fatePoints + 1);
+                    logger.info("ScenePlayer:onGMRefreshFatePoint");
                   }}
                 >
                   <AddCircleOutlineOutlinedIcon
@@ -328,6 +338,7 @@ export const PlayerRow: React.FC<{
                     onClick={(e) => {
                       e.stopPropagation();
                       props.onPlayerRemove();
+                      logger.info("ScenePlayer:onPlayerRemove");
                     }}
                   >
                     <HighlightOffIcon
