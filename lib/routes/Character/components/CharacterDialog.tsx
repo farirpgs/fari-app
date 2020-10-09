@@ -36,6 +36,7 @@ import {
   CharacterType,
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
@@ -51,22 +52,29 @@ export const CharacterDialog: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
+  const logger = useLogger();
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const [template, setTemplate] = useState(CharacterType.CoreCondensed);
+
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
+    logger.info(`CharacterDialog:onSave`);
   }
 
-  function onAdvanced() {
+  function onToggleAdvanced() {
     setAdvanced((prev) => !prev);
+    logger.info(`CharacterDialog:onToggleAdvanced`);
   }
 
   function onTemplateChange(newTemplate: CharacterType) {
     setTemplate(newTemplate);
+    logger.info(
+      `CharacterDialog:onTemplateChange:${CharacterType[newTemplate]}`
+    );
   }
 
   function onLoadTemplate() {
@@ -74,6 +82,7 @@ export const CharacterDialog: React.FC<{
 
     if (confirmed) {
       characterManager.actions.loadTemplate(template);
+      logger.info(`CharacterDialog:onLoadTemplate:${CharacterType[template]}`);
     }
   }
 
@@ -258,7 +267,7 @@ export const CharacterDialog: React.FC<{
               color="primary"
               variant={advanced ? "contained" : "outlined"}
               endIcon={<CreateIcon />}
-              onClick={onAdvanced}
+              onClick={onToggleAdvanced}
             >
               {t("character-dialog.advanced")}
             </Button>
