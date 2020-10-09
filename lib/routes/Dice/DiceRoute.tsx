@@ -27,13 +27,14 @@ export const DiceRoute = () => {
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const { t } = useTranslate();
   const logger = useLogger();
+
   function roll() {
     if (diceManager.state.rolling) {
       return;
     }
     setRolls((draft) => {
       const newRoll = Dice.roll4DF();
-      logger.info("DiceRoute:Roll", { roll: newRoll });
+      logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });
   }
