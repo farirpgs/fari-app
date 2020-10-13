@@ -196,7 +196,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   size="small"
                   ref={$paletteButton}
                   className={css({
-                    color: "#000000",
+                    color: theme.palette.text.primary,
                   })}
                   onClick={(event) => {
                     setDrawingToolBeforeColorPicker(
@@ -211,7 +211,10 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   <PaletteTwoToneIcon
                     className={css({
                       "&:nth-child(1)": {
-                        color: drawingManager.state.color,
+                        color:
+                          drawingManager.state.color === "#000000"
+                            ? theme.palette.text.primary
+                            : drawingManager.state.color,
                       },
                     })}
                   />
@@ -248,7 +251,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Move
                         ? theme.palette.primary.main
-                        : "#000000",
+                        : theme.palette.text.primary,
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Move);
@@ -265,7 +268,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Remove
                         ? theme.palette.primary.main
-                        : "#000000",
+                        : theme.palette.text.primary,
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Remove);
@@ -286,7 +289,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Line
                         ? theme.palette.primary.main
-                        : "#000000",
+                        : theme.palette.text.primary,
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Line);
@@ -303,7 +306,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Rectangle
                         ? theme.palette.primary.main
-                        : "#000000",
+                        : theme.palette.text.primary,
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(
@@ -322,7 +325,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Ellipse
                         ? theme.palette.primary.main
-                        : "#000000",
+                        : theme.palette.text.primary,
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Ellipse);
@@ -339,7 +342,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Token
                         ? theme.palette.primary.main
-                        : "#000000",
+                        : theme.palette.text.primary,
                   })}
                   onClick={() => {
                     drawingManager.actions.setDrawingTool(DrawingTool.Token);
@@ -368,7 +371,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   <IconButton
                     size="small"
                     className={css({
-                      color: "#000000",
+                      color: theme.palette.text.primary,
                     })}
                     onClick={() => {
                       drawingManager.actions.clear();
@@ -382,7 +385,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   <IconButton
                     size="small"
                     className={css({
-                      color: "#000000",
+                      color: theme.palette.text.primary,
                     })}
                     onClick={() => {
                       drawingManager.actions.undo();
@@ -399,7 +402,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                 <IconButton
                   size="small"
                   className={css({
-                    color: "#000000",
+                    color: theme.palette.text.primary,
                   })}
                   onClick={() => {
                     props.onFullScreenChange?.(!props.fullScreen);

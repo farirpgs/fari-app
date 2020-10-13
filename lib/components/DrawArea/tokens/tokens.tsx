@@ -1,11 +1,21 @@
+/* eslint-disable react/display-name */
 /**
  * Converted tokens using: https://react-svgr.com/playground/
  */
 
-import { makeStyles, SvgIcon, SvgIconProps } from "@material-ui/core";
+import {
+  makeStyles,
+  SvgIcon,
+  SvgIconProps,
+  Theme,
+  useTheme,
+} from "@material-ui/core";
 import React from "react";
 
-export function makeIcon(options: { svg: JSX.Element; name: string }) {
+export function makeIcon(options: {
+  svg: (theme: Theme) => JSX.Element;
+  name: string;
+}) {
   type IProps = SvgIconProps & {};
 
   const useStyles = makeStyles({}, { name: `Atoms.Icons.${options.name}` });
@@ -14,9 +24,11 @@ export function makeIcon(options: { svg: JSX.Element; name: string }) {
     (props, ref) => {
       const { className, rotate, ...rest } = props;
       const classes = useStyles(props);
+      const theme = useTheme();
+
       return (
         <SvgIcon className={className} {...rest} ref={ref}>
-          {options.svg}
+          {options.svg(theme)}
         </SvgIcon>
       );
     }
@@ -28,13 +40,13 @@ export function makeIcon(options: { svg: JSX.Element; name: string }) {
 
 export const Zero = makeIcon({
   name: "Zero",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
-      <g stroke="#000000">
+      <g stroke={theme.palette.text.primary}>
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
+          fill={theme.palette.background.paper}
           fillRule="evenodd"
           strokeWidth={0.52918332}
           strokeLinecap="round"
@@ -52,14 +64,14 @@ export const Zero = makeIcon({
 });
 export const One = makeIcon({
   name: "One",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />
@@ -70,14 +82,14 @@ export const One = makeIcon({
 });
 export const Two = makeIcon({
   name: "Two",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />
@@ -89,14 +101,14 @@ export const Two = makeIcon({
 
 export const Three = makeIcon({
   name: "Three",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />
@@ -112,14 +124,14 @@ export const Three = makeIcon({
 
 export const Four = makeIcon({
   name: "Four",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />
@@ -131,13 +143,13 @@ export const Four = makeIcon({
 
 export const Five = makeIcon({
   name: "Five",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />
@@ -149,14 +161,14 @@ export const Five = makeIcon({
 
 export const Six = makeIcon({
   name: "Six",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g strokeLinecap="round" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           fillRule="evenodd"
           strokeWidth={0.52918332}
         />
@@ -172,13 +184,13 @@ export const Six = makeIcon({
 
 export const Seven = makeIcon({
   name: "Seven",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g opacity={0.996} fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />
@@ -193,14 +205,14 @@ export const Seven = makeIcon({
 
 export const Eight = makeIcon({
   name: "Eight",
-  svg: (
+  svg: (theme: Theme) => (
     <svg width={24} height={24} viewBox="0 0 6.35 6.35">
       <g fillRule="evenodd" paintOrder="markers fill stroke">
         <path
           d="M6.082 4.38l-.849.853-.854.849-1.204.003-1.204-.003-.854-.849-.849-.854-.003-1.204.003-1.204.849-.854.854-.849L3.175.265l1.204.003.854.849.849.854.003 1.204z"
           opacity={0.996}
-          fill="#fff"
-          stroke="#000"
+          fill={theme.palette.background.paper}
+          stroke={theme.palette.text.primary}
           strokeWidth={0.52918332}
           strokeLinecap="round"
         />

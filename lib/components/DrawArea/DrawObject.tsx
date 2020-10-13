@@ -96,10 +96,11 @@ export const DrawObject: React.FC<{
         props.object.form.end.x - props.object.form.start.x,
         props.object.form.end.y - props.object.form.start.y,
         {
+          fill: fill,
+          stroke: theme.palette.text.primary,
           strokeWidth: strokeWidth,
           roughness: roughness,
           seed: seed,
-          fill: fill,
           fillStyle: fillStyle,
         }
       );
@@ -117,10 +118,11 @@ export const DrawObject: React.FC<{
         props.object.form.end.x - props.object.form.start.x,
         props.object.form.end.y - props.object.form.start.y,
         {
+          fill: fill,
+          stroke: theme.palette.text.primary,
           strokeWidth: strokeWidth,
           roughness: roughness,
           seed: seed,
-          fill: fill,
           fillStyle: fillStyle,
         }
       );
@@ -137,13 +139,17 @@ export const DrawObject: React.FC<{
       const Token = AllTokens[tokenIndex];
       const shouldRenderPopper = props.title && hover;
 
+      const color =
+        props.object.color === "#000000"
+          ? theme.palette.text.primary
+          : props.object.color;
       return (
         <g
           {...eventProps}
           ref={(ref) => {
             $setTokenRef(ref);
           }}
-          color={props.object.color}
+          color={color}
         >
           <Token
             width={DrawObjectFactory.TokenSize.width}
@@ -175,13 +181,18 @@ export const DrawObject: React.FC<{
       );
     }
     case ObjectType.Line: {
+      const color =
+        props.object.color === "#000000"
+          ? theme.palette.text.primary
+          : props.object.color;
+
       const line = props.roughSVG.linearPath(
         props.object.points.map((p) => [p.x, p.y]),
         {
+          stroke: color,
           strokeWidth: strokeWidth,
           roughness: roughness,
           seed: seed,
-          stroke: props.object.color,
         }
       );
 
