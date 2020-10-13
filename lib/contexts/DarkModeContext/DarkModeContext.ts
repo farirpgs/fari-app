@@ -8,7 +8,7 @@ export function useDarkMode() {
   const [darkMode, setDarkMode] = useState(prefersDarkThemeFromStorage);
 
   useEffect(() => {
-    localStorage.setItem(key, darkMode.toString());
+    localStorage?.setItem(key, darkMode.toString());
   }, [darkMode]);
 
   return {
