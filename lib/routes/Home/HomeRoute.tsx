@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { css } from "emotion";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { Kofi } from "../../components/Kofi/Kofi";
@@ -21,6 +21,10 @@ export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
   const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:Home");
+  }, []);
 
   return (
     <Page kofi={false}>

@@ -7,6 +7,7 @@ import {
   CharactersContext,
   ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./components/CharacterDialog";
@@ -22,6 +23,11 @@ export const CharacterRoute: React.FC<{
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
+  const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:Character");
+  }, []);
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(

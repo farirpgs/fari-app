@@ -1,9 +1,10 @@
 import { Container } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import showdown from "showdown";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleLanguages } from "../../services/internationalization/InternationalizationService";
 import AboutEnMarkdown from "./page/About.en.md";
@@ -22,7 +23,12 @@ const html: Record<IPossibleLanguages, string> = {
 
 export const AboutRoute: React.FC<{}> = (props) => {
   const { t, currentLanguage } = useTranslate();
+  const logger = useLogger();
   const aboutPage = html[currentLanguage];
+
+  useEffect(() => {
+    logger.info("Route:About");
+  }, []);
 
   return (
     <Page>
