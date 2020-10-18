@@ -36,5 +36,5 @@ jobs:
         run: yarn validate
       # Deploy Preview
       - name: Deploy Preview
-        run: yarn deploy:preview --auth ${{NETLIFY_AUTH_TOKEN}}
+        run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
         if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
