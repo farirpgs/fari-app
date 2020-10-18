@@ -26,11 +26,15 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       # Install
-      - run: yarn install
+      - name: Install
+        run: yarn install
       # Build
-      - run: yarn build
+      - name: Build
+        run: yarn build
       # Validate
-      - run: yarn validate
+      - name: Validate
+        run: yarn validate
       # Deploy Preview
-      - run: yarn deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+      - name: Deploy Preview
+        run: yarn deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
         if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
