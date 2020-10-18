@@ -18,13 +18,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # CACHE
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Cache
+        uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       # CI
       - run: yarn install
       - run: yarn build
