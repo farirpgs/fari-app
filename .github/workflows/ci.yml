@@ -1,3 +1,4 @@
+# https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions
 name: CI
 
 on: [push]
@@ -11,23 +12,31 @@ jobs:
         node-version: [12.x]
 
     steps:
-      # SETUP
+      # Setup
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # CACHE
+      # Cache
       - name: Cache
         uses: actions/cache@v2
         with:
           path: |
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      # CI
+      # Install
+      - name: Install
       - run: yarn install
+      # Build
+      - name: Build
       - run: yarn build
+      # Validate
+      - name: Validate
       - run: yarn validate
-        # ENV Variables
-        env:
-          CI: true
+      # Deploy Preview
+      - run: yarn deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+        if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
+      # ENV Variables
+      env:
+        CI: true
