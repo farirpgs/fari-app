@@ -46,7 +46,7 @@ export const frTranslation = {
   "home-route.play-offline.button": `Commencer une partie hors ligne`,
   "home-route.play-offline.description": `Rendez-vous avec vos amis en personne ou avec un appel vidéo, diffusez votre écran et jouer à Fate!`,
   "home-route.play-offline.title": `Jouer à Fate hors ligne`,
-  "home-route.play-online.button": `Commecer une partie en ligne`,
+  "home-route.play-online.button": `Commencer une partie en ligne`,
   "home-route.play-online.description": `Rencontrez vos amis à distance en utilisant votre plate-forme de chat vidéo préféré, envoyez leurs un lien de jeu et jouez à Fate!`,
   "home-route.play-online.title": `Jouer à Fate en ligne`,
   "home-route.subtitle1": `Fari est une application qui est méticuleusement adapté pour jouer le jeu de role Fate en ligne(Core, Accelerated ou Condensed).`,
