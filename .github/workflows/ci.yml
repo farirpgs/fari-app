@@ -38,3 +38,7 @@ jobs:
       - name: Deploy Preview
         run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
         if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
+      # Deploy Production
+      - name: Deploy Production
+        run: yarn deploy:prod --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
+        if: github.repository == 'fariapp/fari' && github.ref == 'refs/heads/master'

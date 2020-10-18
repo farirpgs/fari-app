@@ -40,15 +40,15 @@ steps:
 
   # Disabled for forks because: "By default with GitHub repositories, secret variables associated with your pipeline aren't made available to pull request builds of forks"
   #   https://docs.microsoft.com/fr-fr/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#contributions-from-forks
-  - script: |
-      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
-    displayName: "deploy preview"
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'), ne(variables['System.PullRequest.IsFork'], 'True'))
+  # - script: |
+  #     yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+  #   displayName: "deploy preview"
+  #   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'), ne(variables['System.PullRequest.IsFork'], 'True'))
 
-  - script: |
-      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
-    displayName: "deploy prod"
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # - script: |
+  #     yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
+  #   displayName: "deploy prod"
+  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
   - task: PublishTestResults@2
     inputs:
