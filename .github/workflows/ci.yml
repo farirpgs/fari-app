@@ -29,13 +29,14 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       # Install
       - name: Install
-      - run: yarn install
+        run: yarn install
       # Build
       - name: Build
-      - run: yarn build
+        run: yarn build
       # Validate
       - name: Validate
-      - run: yarn validate
+        run: yarn validate
       # Deploy Preview
-      - run: yarn deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+      - name: Deploy Preview
+        run: yarn deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
         if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
