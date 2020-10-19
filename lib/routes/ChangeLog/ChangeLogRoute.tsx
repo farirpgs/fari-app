@@ -1,7 +1,7 @@
 import { Container } from "@material-ui/core";
+import changeLogMarkdown from "bundle-text:../../../CHANGELOG.md";
 import React, { useEffect, useState } from "react";
 import showdown from "showdown";
-import changeLogMarkdown from "../../../CHANGELOG.md";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";

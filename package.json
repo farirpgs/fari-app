@@ -6,8 +6,8 @@
   "license": "AGPL-3.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel ./lib/index.html --target browser",
-    "build": "parcel build ./lib/index.html --target browser",
+    "start": "parcel serve ./lib/index.html",
+    "build": "parcel build ./lib/index.html",
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
     "test": "jest --coverage",
@@ -68,7 +68,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "jest": "^26.5.3",
     "marked": "^1.0.0",
-    "parcel": "^1.12.4",
+    "parcel": "next",
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"

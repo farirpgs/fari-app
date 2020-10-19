@@ -25,7 +25,7 @@ import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import appIcon from "../../../images/app-icon.png";
+import appIcon from "url:../../../images/app-icon.png";
 import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";

@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
-import appIcon from "../../../images/app-icon.png";
+import appIcon from "url:../../../images/app-icon.png";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import {

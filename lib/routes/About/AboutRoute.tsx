@@ -1,4 +1,7 @@
 import { Container } from "@material-ui/core";
+import AboutEnMarkdown from "bundle-text:./page/About.en.md";
+import AboutEsMarkdown from "bundle-text:./page/About.es.md";
+import AboutFrMarkdown from "bundle-text:./page/About.fr.md";
 import React, { useEffect } from "react";
 import showdown from "showdown";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
@@ -7,9 +10,6 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleLanguages } from "../../services/internationalization/InternationalizationService";
-import AboutEnMarkdown from "./page/About.en.md";
-import AboutEsMarkdown from "./page/About.es.md";
-import AboutFrMarkdown from "./page/About.fr.md";
 
 const converter = new showdown.Converter();
 

@@ -9,7 +9,7 @@ import {
 import { css } from "emotion";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
-import appIcon from "../../../images/app-icon.png";
+import appIcon from "url:../../../images/app-icon.png";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
