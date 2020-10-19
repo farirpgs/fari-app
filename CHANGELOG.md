@@ -1,5 +1,17 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
+## 3.2.0 - Better drawing area, pt-br translations, automatic language detection
+
+- feat: better drawing area 
+- feat: PT-br translations [#109](https://github.com/fariapp/fari/issues/109) 👏 [pedrogsribeiro](https://github.com/pedrogsribeiro)
+- fix: automatic language detection
+- chore: rename github => Github [#110](https://github.com/fariapp/fari/pull/110) 👏  [technicalpickles](https://github.com/technicalpickles)
+- feat: fr translation for about page [#115](https://github.com/fariapp/fari/pull/115) 👏  [corrinachow](https://github.com/corrinachow)
+
+## 3.1.0 - (Oct 7, 2020)
+
+- fix: saving characters only if they exists
+
 ## 3.0.0 (Aug 24, 2020) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
 
 - feat: Scenes can now be prepared in advance, saved and then loaded directly during a play session.
