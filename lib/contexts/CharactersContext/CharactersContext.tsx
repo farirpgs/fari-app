@@ -203,6 +203,8 @@ const defaultCondensedCharacter: ICharacter = {
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  fatePoints: undefined,
+  playedDuringTurn: undefined,
   version: 2,
   lastUpdated: new Date().getTime(),
 };
@@ -252,6 +254,8 @@ const defaultAcceleratedCharacter: ICharacter = {
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  fatePoints: undefined,
+  playedDuringTurn: undefined,
   version: 2,
   lastUpdated: new Date().getTime(),
 };
@@ -280,6 +284,8 @@ const defaultCustomCharacter: ICharacter = {
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  fatePoints: undefined,
+  playedDuringTurn: undefined,
   version: 2,
   lastUpdated: new Date().getTime(),
 };
@@ -307,6 +313,9 @@ export interface ICharacter {
   consequencesLabel: string | undefined;
   refreshLabel: string | undefined;
   refresh: number;
+  // hidden
+  fatePoints: number | undefined;
+  playedDuringTurn: boolean | undefined;
   version: number;
   lastUpdated: number;
 }

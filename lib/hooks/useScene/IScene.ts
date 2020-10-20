@@ -1,4 +1,4 @@
-import { ILines } from "../../components/DrawArea/DrawArea";
+import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { ICharacter } from "../../contexts/CharactersContext/CharactersContext";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
@@ -11,6 +11,7 @@ export interface IPlayer {
   rolls: Array<IDiceRoll>;
   playedDuringTurn: boolean;
   fatePoints: number;
+  offline: boolean;
 }
 
 export interface IAspect {
@@ -23,6 +24,7 @@ export interface IAspect {
   consequences: Array<{ name: string; value: string }>;
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
+  drawAreaObjects?: IDrawAreaObjects;
   type: AspectType;
 }
 
@@ -35,7 +37,7 @@ export interface IScene {
   goodConfetti: number;
   badConfetti: number;
   sort: boolean;
-  drawAreaLines: ILines;
+  drawAreaObjects: IDrawAreaObjects;
   version: number;
   lastUpdated: number;
 }

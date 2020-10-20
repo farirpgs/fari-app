@@ -4,7 +4,7 @@ import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { ILines } from "../../components/DrawArea/DrawArea";
+import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import {
   ICharacter,
@@ -42,12 +42,13 @@ export function useScene(props: IProps) {
       rolls: [],
       playedDuringTurn: false,
       fatePoints: 3,
+      offline: false,
     },
     players: [],
     goodConfetti: 0,
     badConfetti: 0,
     sort: false,
-    drawAreaLines: [],
+    drawAreaObjects: [],
     version: defaultSceneVersion,
     lastUpdated: new Date().getTime(),
   }));
@@ -143,6 +144,7 @@ export function useScene(props: IProps) {
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
         draft.aspects = defaultSceneAspects;
+        draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
         });
@@ -216,6 +218,25 @@ export function useScene(props: IProps) {
           name: trackName,
           value: [{ checked: false, label: "1" }],
         });
+      })
+    );
+  }
+
+  function addAspectDrawArea(aspectId: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].drawAreaObjects = [];
+      })
+    );
+  }
+
+  function setAspectDrawAreaObjects(
+    aspectId: string,
+    objects: IDrawAreaObjects
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].drawAreaObjects = objects;
       })
     );
   }
@@ -356,15 +377,19 @@ export function useScene(props: IProps) {
   function updatePlayers(connections: Array<Peer.DataConnection>) {
     setScene(
       produce((draft: IScene) => {
+        const offlinePlayers = draft.players.filter((p) => p.offline);
         draft.players = connections.map((c) => {
           const meta: IPeerMeta = c.metadata;
-          const refresh = meta?.character?.refresh ?? 3;
-
+          const characterFatePoints =
+            meta?.character?.fatePoints ?? meta?.character?.refresh ?? 3;
+          const characterPlayedDuringTurn =
+            meta?.character?.playedDuringTurn ?? false;
           const playerMatch = draft.players.find((p) => p.id === c.label);
 
           const rolls = playerMatch?.rolls ?? [];
-          const fatePoints = playerMatch?.fatePoints ?? refresh;
-          const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
+          const fatePoints = playerMatch?.fatePoints ?? characterFatePoints;
+          const playedDuringTurn =
+            playerMatch?.playedDuringTurn ?? characterPlayedDuringTurn;
 
           return {
             id: c.label,
@@ -373,8 +398,10 @@ export function useScene(props: IProps) {
             rolls: rolls,
             playedDuringTurn: playedDuringTurn,
             fatePoints: fatePoints,
+            offline: false,
           } as IPlayer;
         });
+        draft.players = [...draft.players, ...offlinePlayers];
       })
     );
   }
@@ -390,6 +417,7 @@ export function useScene(props: IProps) {
           rolls: [],
           playedDuringTurn: false,
           fatePoints: 3,
+          offline: true,
         });
       })
     );
@@ -407,6 +435,7 @@ export function useScene(props: IProps) {
           rolls: [],
           playedDuringTurn: false,
           fatePoints: character.refresh,
+          offline: true,
         });
       })
     );
@@ -447,6 +476,10 @@ export function useScene(props: IProps) {
         everyone.forEach((p) => {
           if (p.id === id) {
             p.playedDuringTurn = playedInTurnOrder;
+
+            if (p.character) {
+              p.character.playedDuringTurn = playedInTurnOrder;
+            }
           }
         });
       })
@@ -473,7 +506,12 @@ export function useScene(props: IProps) {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            p.fatePoints = fatePoints >= 0 ? fatePoints : 0;
+            const newFatePointsAmount = fatePoints >= 0 ? fatePoints : 0;
+            p.fatePoints = newFatePointsAmount;
+
+            if (p.character) {
+              p.character.fatePoints = newFatePointsAmount;
+            }
           }
         });
       })
@@ -525,10 +563,10 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updateDrawAreaLines(lines: ILines) {
+  function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setScene(
       produce((draft: IScene) => {
-        draft.drawAreaLines = lines;
+        draft.drawAreaObjects = objects;
       })
     );
   }
@@ -550,6 +588,8 @@ export function useScene(props: IProps) {
       updateAspectTitle,
       updateAspectContent,
       addAspectTrack,
+      addAspectDrawArea,
+      setAspectDrawAreaObjects,
       removeAspectTrack,
       updateAspectTrackName,
       addAspectTrackBox,
@@ -574,7 +614,7 @@ export function useScene(props: IProps) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
-      updateDrawAreaLines,
+      updateDrawAreaObjects,
     },
   };
 }

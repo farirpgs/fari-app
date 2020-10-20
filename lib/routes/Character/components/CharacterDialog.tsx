@@ -13,12 +13,10 @@ import {
   IconButton,
   MenuItem,
   Select,
-  Slide,
   Snackbar,
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { TransitionProps } from "@material-ui/core/transitions";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
@@ -33,21 +31,16 @@ import React, { useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
+import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import {
   CharacterType,
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export const CharacterDialog: React.FC<{
   open: boolean;
@@ -59,22 +52,29 @@ export const CharacterDialog: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
+  const logger = useLogger();
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const [template, setTemplate] = useState(CharacterType.CoreCondensed);
+
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
+    logger.info(`CharacterDialog:onSave`);
   }
 
-  function onAdvanced() {
+  function onToggleAdvanced() {
     setAdvanced((prev) => !prev);
+    logger.info(`CharacterDialog:onToggleAdvanced`);
   }
 
   function onTemplateChange(newTemplate: CharacterType) {
     setTemplate(newTemplate);
+    logger.info(
+      `CharacterDialog:onTemplateChange:${CharacterType[newTemplate]}`
+    );
   }
 
   function onLoadTemplate() {
@@ -82,6 +82,7 @@ export const CharacterDialog: React.FC<{
 
     if (confirmed) {
       characterManager.actions.loadTemplate(template);
+      logger.info(`CharacterDialog:onLoadTemplate:${CharacterType[template]}`);
     }
   }
 
@@ -153,7 +154,7 @@ export const CharacterDialog: React.FC<{
           maxWidth="md"
           scroll="paper"
           onClose={onClose}
-          TransitionComponent={Transition}
+          TransitionComponent={SlideUpTransition}
         >
           <DialogTitle className={css({ padding: "0" })}>
             <Container maxWidth="md">
@@ -266,7 +267,7 @@ export const CharacterDialog: React.FC<{
               color="primary"
               variant={advanced ? "contained" : "outlined"}
               endIcon={<CreateIcon />}
-              onClick={onAdvanced}
+              onClick={onToggleAdvanced}
             >
               {t("character-dialog.advanced")}
             </Button>

@@ -5,6 +5,7 @@ import changeLogMarkdown from "../../../CHANGELOG.md";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const ChangelogRoute: React.FC<{}> = (props) => {
@@ -13,6 +14,11 @@ export const ChangelogRoute: React.FC<{}> = (props) => {
     ""
   );
   const [content, setContent] = useState("");
+  const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:ChangeLog");
+  }, []);
 
   useEffect(() => {
     async function loadChangelog() {

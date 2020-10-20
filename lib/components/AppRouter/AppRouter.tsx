@@ -1,9 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AboutRoute } from "../../routes/About/AboutRoute";
+import { BlogPostRoute } from "../../routes/BlogPost/BlogPostRoute";
+import { BlogPostsRoute } from "../../routes/BlogPosts/BlogPostsRoute";
 import { ChangelogRoute } from "../../routes/ChangeLog/ChangeLogRoute";
 import { CharacterRoute } from "../../routes/Character/CharacterRoute";
 import { DiceRoute } from "../../routes/Dice/DiceRoute";
+import { DrawRoute } from "../../routes/Draw/DrawRoute";
 import { HomeRoute } from "../../routes/Home/HomeRoute";
 import { NotFoundRoute } from "../../routes/NotFound/NotFoundRoute";
 import { PlayOfflineRoute } from "../../routes/Play/PlayOfflineRoute";
@@ -35,6 +38,13 @@ export const AppRouter = () => (
     />
     <Route
       exact
+      path={"/draw"}
+      render={(props) => {
+        return <DrawRoute />;
+      }}
+    />
+    <Route
+      exact
       path={"/play"}
       render={(props) => {
         return <PlayRoute {...props} />;
@@ -62,6 +72,20 @@ export const AppRouter = () => (
       path={"/about"}
       render={(props) => {
         return <AboutRoute />;
+      }}
+    />
+    <Route
+      exact
+      path={"/blog"}
+      render={(props) => {
+        return <BlogPostsRoute />;
+      }}
+    />
+    <Route
+      exact
+      path={"/blog/:slug"}
+      render={(props) => {
+        return <BlogPostRoute slug={props.match.params.slug} />;
       }}
     />
     <Route

@@ -26,11 +26,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/app-icon.png";
+import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { env } from "../../services/injections";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppLink } from "../AppLink/AppLink";
 import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
@@ -57,11 +58,12 @@ export const Page: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
-  const { t, i18n } = useTranslate();
+  const { t, i18n, currentLanguage } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
   const theme = useTheme();
+  const logger = useLogger();
 
   const isLive = props.live !== undefined;
   useEffect(() => {
@@ -152,7 +154,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item>
               <Select
-                value={i18n.language}
+                value={currentLanguage}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value as string);
                 }}
@@ -214,9 +216,10 @@ export const Page: React.FC<{
               })}
             >
               <img
+                alt="Fari"
                 className={css({
-                  height: "2rem",
-                  paddingRight: "1rem",
+                  height: "2.5rem",
+                  marginRight: "1rem",
                   cursor: "pointer",
                 })}
                 src={appIcon}
@@ -253,7 +256,7 @@ export const Page: React.FC<{
             </Typography>
             {isLive && (
               <Box px=".25rem">
-                <Grid container alignItems="center" spacing={1}>
+                <Grid container alignItems="center" spacing={1} wrap="nowrap">
                   <Grid item>
                     {props.live === LiveMode.Connecting && (
                       <SignalWifi0BarIcon />
@@ -331,69 +334,80 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
-    if (isLive) {
-      return null;
-    }
-
     return (
       <Grid container spacing={1} justify={mobile ? "center" : undefined}>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            to="/"
-            component={RouterLink}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.play")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              scenesManager.actions.openManager(ManagerMode.Manage);
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.scenes")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              charactersManager.actions.openManager(ManagerMode.Manage);
-            }}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.characters")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            to="/dice"
-            component={RouterLink}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.dice")}
-          </Button>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            to="/about"
-            component={RouterLink}
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.about")}
-          </Button>
-        </Grid>
+        {!isLive && (
+          <>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.play")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  scenesManager.actions.openManager(ManagerMode.Manage);
+                }}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.scenes")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  charactersManager.actions.openManager(ManagerMode.Manage);
+                }}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.characters")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/dice"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.dice")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/draw"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.draw")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
+                to="/about"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("menu.about")}
+              </Button>
+            </Grid>
+          </>
+        )}
         <Grid item xs={8} sm={8} className={itemClass}>
           <Button
             color="inherit"
@@ -430,6 +444,11 @@ export const Page: React.FC<{
               darkModeManager.actions.setDarkMode(
                 !darkModeManager.state.darkMode
               );
+              if (darkModeManager.state.darkMode) {
+                logger.info("Page.toggleLightMode");
+              } else {
+                logger.info("Page.toggleDarkMode");
+              }
             }}
           >
             {darkModeManager.state.darkMode ? (

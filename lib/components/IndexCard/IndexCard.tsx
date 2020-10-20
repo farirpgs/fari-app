@@ -1,6 +1,7 @@
 import {
   Box,
   Checkbox,
+  Collapse,
   Divider,
   Grid,
   IconButton,
@@ -26,6 +27,7 @@ import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
+import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
@@ -79,6 +81,20 @@ export const IndexCard: React.FC<{
         {shouldRenderContent && renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
+        <Collapse in={aspect.drawAreaObjects !== undefined}>
+          <Box>
+            <DrawArea
+              objects={aspect!.drawAreaObjects}
+              onChange={(objects) => {
+                props.sceneManager.actions.setAspectDrawAreaObjects(
+                  props.aspectId,
+                  objects
+                );
+              }}
+              readonly={props.readonly}
+            />
+          </Box>
+        </Collapse>
       </Box>
     </Paper>
   );
@@ -220,6 +236,14 @@ export const IndexCard: React.FC<{
       >
         {t("index-card.add-track")}
       </MenuItem>,
+      // <MenuItem
+      //   key="addAspectDrawArea"
+      //   onClick={() => {
+      //     props.sceneManager.actions.addAspectDrawArea(props.aspectId);
+      //   }}
+      // >
+      //   {t("index-card.add-draw-area")}
+      // </MenuItem>,
       <Divider key="renderAspectMenuItemsDivider" />,
     ];
   }
@@ -329,7 +353,6 @@ export const IndexCard: React.FC<{
       >
         <Box p=".5rem 1rem">
           {renderTracks()}
-
           {renderConsequences()}
         </Box>
       </Box>

@@ -7,17 +7,24 @@ import {
   Typography,
 } from "@material-ui/core";
 import { css } from "emotion";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/app-icon.png";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
+  const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:Home");
+  }, []);
 
   return (
     <Page kofi={false}>
@@ -46,29 +53,32 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </Container>
         <Container maxWidth="lg">
           <Grid container justify="center" spacing={6}>
-            <Grid item xs={12} md={4}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Typography variant="h5" align="center" color="primary">
-                  <b>{t("home-route.play-online.title")}</b>
-                </Typography>
-                <br />
-                <Typography variant="body1" align="center">
-                  {t("home-route.play-online.description")}
-                </Typography>
-                <Box py="2rem" textAlign="center" marginTop="auto">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    onClick={() => {
-                      history.push("/play");
-                    }}
-                  >
-                    {t("home-route.play-online.button")}
-                  </Button>
+            {isWebRTCSupported() && (
+              <Grid item xs={12} md={4}>
+                <Box height="100%" display="flex" flexDirection="column">
+                  <Typography variant="h5" align="center" color="primary">
+                    <b>{t("home-route.play-online.title")}</b>
+                  </Typography>
+                  <br />
+                  <Typography variant="body1" align="center">
+                    {t("home-route.play-online.description")}
+                  </Typography>
+                  <Box py="2rem" textAlign="center" marginTop="auto">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={() => {
+                        history.push("/play");
+                        logger.info("HomeRoute:onStartOnlineGame");
+                      }}
+                    >
+                      {t("home-route.play-online.button")}
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-            </Grid>
+              </Grid>
+            )}
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Typography variant="h5" align="center" color="primary">
@@ -85,6 +95,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     size="large"
                     onClick={() => {
                       history.push("/play-offline");
+                      logger.info("HomeRoute:onStartOfflineGame");
                     }}
                   >
                     {t("home-route.play-offline.button")}

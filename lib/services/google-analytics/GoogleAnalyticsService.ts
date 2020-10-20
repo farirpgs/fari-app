@@ -1,11 +1,11 @@
 import ReactGA from "react-ga";
-import { LoggerService } from "../logger/LoggerService";
+import { ILogger } from "../logger/makeLogger";
 import { ISendEventParameters } from "./types/ISendEventParameters";
 
 export class GoogleAnalyticsService {
   private readonly newProperty = "UA-150306816-1";
 
-  constructor(private logger: LoggerService) {
+  constructor(private logger: ILogger) {
     if (process.env.JEST_WORKER_ID !== undefined) {
       return;
     }
@@ -31,6 +31,6 @@ export class GoogleAnalyticsService {
 
     const loggerEvent = `${event.category}.${event.action}`;
     const loggerValue = event.value !== undefined ? `(${event.value})` : "";
-    this.logger.info(`Event: ${loggerEvent} ${loggerValue}`, event);
+    this.logger.info(`Event: ${loggerEvent} ${loggerValue}`, { event });
   }
 }

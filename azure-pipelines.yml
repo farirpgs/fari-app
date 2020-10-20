@@ -6,7 +6,6 @@
 trigger:
   - master
 
-
 variables:
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
 
@@ -23,7 +22,7 @@ steps:
     inputs:
       key: 'yarn | "$(Agent.OS)" | yarn.lock'
       restoreKeys: |
-          yarn | "$(Agent.OS)"
+        yarn | "$(Agent.OS)"
       path: $(YARN_CACHE_FOLDER)
     displayName: cache yarn packages
 
@@ -39,24 +38,25 @@ steps:
       CONTEXT=PIPELINE BUILD_NUMBER=$(Build.BuildNumber) COMMIT_ID=$(Build.SourceVersion) yarn run build
     displayName: "yarn build"
 
-  - script: |
-      yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceBranch)"
-    displayName: "deploy preview"
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # Disabled for forks because: "By default with GitHub repositories, secret variables associated with your pipeline aren't made available to pull request builds of forks"
+  #   https://docs.microsoft.com/fr-fr/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#contributions-from-forks
+  # - script: |
+  #     yarn run deploy:preview --auth $(NETLIFY_AUTH_TOKEN)
+  #   displayName: "deploy preview"
+  #   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'), ne(variables['System.PullRequest.IsFork'], 'True'))
 
-  - script: |
-      yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN) --message "$(Build.SourceBranch)"
-    displayName: "deploy prod"
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # - script: |
+  #     yarn run deploy:prod --auth $(NETLIFY_AUTH_TOKEN)
+  #   displayName: "deploy prod"
+  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-  - task: PublishTestResults@2  
+  - task: PublishTestResults@2
     inputs:
       testRunner: JUnit
-      testResultsFiles: 'junit.xml'
+      testResultsFiles: "junit.xml"
 
   - task: PublishCodeCoverageResults@1
-    inputs: 
+    inputs:
       codeCoverageTool: Cobertura # or JaCoCo
-      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/cobertura-coverage.xml'
-      reportDirectory: '$(System.DefaultWorkingDirectory)/**/coverage'
-
+      summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/cobertura-coverage.xml"
+      reportDirectory: "$(System.DefaultWorkingDirectory)/**/coverage"
