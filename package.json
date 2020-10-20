@@ -22,6 +22,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@sentry/react": "^5.24.2",
     "canvas-confetti": "^1.2.0",
+    "dayjs": "^1.9.3",
     "dompurify": "^2.0.11",
     "emotion": "^10.0.27",
     "flexboxgrid": "^6.3.1",
