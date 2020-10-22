@@ -54,8 +54,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return validGroups;
   }, [sortedCharacters]);
 
-  console.log("character groups", groups);
-
   useEffect(() => {
     // sync local storage
     try {

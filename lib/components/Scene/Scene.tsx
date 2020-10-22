@@ -628,10 +628,6 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderHeader() {
-    console.log(
-      "sceneManager.state.scene.group",
-      sceneManager.state.scene.group
-    );
     return (
       <Box pb="2rem">
         <Box pb="2rem">

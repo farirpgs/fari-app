@@ -67,7 +67,6 @@ export const DrawObject: React.FC<{
       setHover(false);
     },
     onPointerDown: (event: React.PointerEvent<SVGGElement>) => {
-      console.log("DrawingTool", DrawingTool[props.drawingTool]);
       if (props.drawingTool === DrawingTool.Move) {
         event.stopPropagation();
         event.persist();

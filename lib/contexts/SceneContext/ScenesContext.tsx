@@ -52,8 +52,6 @@ export function useScenes(props?: { localStorage: Storage }) {
     return validGroups;
   }, [sortedScenes]);
 
-  console.log("scene groups", groups);
-
   useEffect(() => {
     // sync local storage
     try {
