@@ -679,7 +679,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     className={css({
                       borderBottom: `1px solid ${theme.palette.divider}`,
                       textAlign: "center",
-                      width: "70%",
+                      width: "50%",
                       margin: "0 auto",
                       display: "flex",
                     })}
