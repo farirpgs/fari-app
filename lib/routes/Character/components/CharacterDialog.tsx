@@ -14,6 +14,7 @@ import {
   MenuItem,
   Select,
   Snackbar,
+  TextField,
   Typography,
   useTheme,
 } from "@material-ui/core";
@@ -25,14 +26,15 @@ import CreateIcon from "@material-ui/icons/Create";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
-import { Alert } from "@material-ui/lab";
+import { Alert, Autocomplete } from "@material-ui/lab";
 import { css } from "emotion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import {
+  CharactersContext,
   CharacterType,
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
@@ -57,6 +59,7 @@ export const CharacterDialog: React.FC<{
   const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const [template, setTemplate] = useState(CharacterType.CoreCondensed);
+  const charactersManager = useContext(CharactersContext);
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
@@ -298,7 +301,7 @@ export const CharacterDialog: React.FC<{
             <Grid item className={css({ flex: "0 0 auto" })}>
               <FateLabel>{t("character-dialog.name")}</FateLabel>
             </Grid>
-            <Grid item className={css({ flex: "1 1 auto" })}>
+            <Grid item xs>
               <Box fontSize="1.25rem">
                 <ContentEditable
                   border
@@ -308,6 +311,39 @@ export const CharacterDialog: React.FC<{
                   onChange={(value) => {
                     characterManager.actions.setName(value);
                   }}
+                />
+              </Box>
+            </Grid>
+            <Grid item className={css({ flex: "0 0 auto" })}>
+              <FateLabel>{t("character-dialog.group")}</FateLabel>
+            </Grid>
+            <Grid item xs>
+              <Box fontSize="1.25rem">
+                <Autocomplete
+                  freeSolo
+                  options={charactersManager.state.groups}
+                  value={characterManager.state.character!.group ?? ""}
+                  onChange={(event, newValue) => {
+                    characterManager.actions.setGroup(newValue);
+                  }}
+                  inputValue={characterManager.state.character!.group ?? ""}
+                  onInputChange={(event, newInputValue) => {
+                    characterManager.actions.setGroup(newInputValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="standard"
+                      InputProps={{
+                        ...params.InputProps,
+                        disableUnderline: true,
+                      }}
+                      disabled={props.readonly}
+                      className={css({
+                        borderBottom: `1px solid ${theme.palette.divider}`,
+                      })}
+                    />
+                  )}
                 />
               </Box>
             </Grid>

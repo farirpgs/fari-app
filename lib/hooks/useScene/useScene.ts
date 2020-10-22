@@ -35,6 +35,7 @@ export function useScene(props: IProps) {
   const [scene, setScene] = useState<IScene>(() => ({
     id: uuidV4(),
     name: defaultSceneName,
+    group: undefined,
     aspects: defaultSceneAspects,
     gm: {
       id: isGM ? userId : temporaryGMIdUntilFirstSync,
@@ -65,6 +66,7 @@ export function useScene(props: IProps) {
     const currentScene: ISavableScene = {
       id: scene.id,
       name: scene.name,
+      group: scene.group,
       aspects: scene.aspects,
       version: scene.version,
       lastUpdated: scene.lastUpdated,
@@ -78,6 +80,7 @@ export function useScene(props: IProps) {
         produce((draft: IScene) => {
           draft.id = sceneToLoad.id;
           draft.name = sceneToLoad.name;
+          draft.group = sceneToLoad.group;
           draft.aspects = sceneToLoad.aspects;
           draft.version = sceneToLoad.version;
           draft.lastUpdated = sceneToLoad.lastUpdated;
@@ -122,6 +125,7 @@ export function useScene(props: IProps) {
       setSceneToLoad({
         id: newScene.id,
         name: newScene.name,
+        group: newScene.group,
         aspects: newScene.aspects,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
@@ -156,6 +160,14 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         draft.name = name;
+      })
+    );
+  }
+
+  function setGroup(newGroup: string | null | undefined) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.group = newGroup as string | undefined;
       })
     );
   }
@@ -582,6 +594,7 @@ export function useScene(props: IProps) {
       loadScene,
       cloneAndLoadScene,
       updateName,
+      setGroup,
       addAspect,
       removeAspect,
       resetAspect,

@@ -1,5 +1,5 @@
 import produce from "immer";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
@@ -39,9 +39,22 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return [];
   });
 
-  const sortedCharacters = arraySort(characters, [
-    (c) => ({ value: c.lastUpdated, direction: "desc" }),
-  ]);
+  const sortedCharacters = useMemo(() => {
+    return arraySort(characters, [
+      (c) => ({ value: c.lastUpdated, direction: "desc" }),
+    ]);
+  }, [characters]);
+
+  const groups = useMemo(() => {
+    const sortedGroups = sortedCharacters.map((c) => c.group);
+    const uniqGroups = sortedGroups.filter(
+      (g, i) => sortedGroups.indexOf(g) === i
+    );
+    const validGroups = uniqGroups.filter((g) => !!g);
+    return validGroups;
+  }, [sortedCharacters]);
+
+  console.log("character groups", groups);
 
   useEffect(() => {
     // sync local storage
@@ -125,6 +138,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       mode,
       characters: sortedCharacters,
       managerCallback: managerCallback.current,
+      groups: groups,
     },
     actions: {
       openManager,
@@ -140,6 +154,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
 const defaultCondensedCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [
     { name: "High Concept", value: "" },
     { name: "Trouble", value: "" },
@@ -212,6 +227,7 @@ const defaultCondensedCharacter: ICharacter = {
 const defaultAcceleratedCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [
     { name: "High Concept", value: "" },
     { name: "Trouble", value: "" },
@@ -263,6 +279,7 @@ const defaultAcceleratedCharacter: ICharacter = {
 const defaultCustomCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [{ name: "Aspect", value: "" }],
   stunts: [{ name: "Stunt", value: "" }],
   skills: [{ name: "Skill", value: "" }],
@@ -313,6 +330,7 @@ export interface ICharacter {
   consequencesLabel: string | undefined;
   refreshLabel: string | undefined;
   refresh: number;
+  group: string | undefined;
   // hidden
   fatePoints: number | undefined;
   playedDuringTurn: boolean | undefined;

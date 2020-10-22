@@ -37,7 +37,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import { Alert } from "@material-ui/lab";
+import { Alert, Autocomplete } from "@material-ui/lab";
 import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
@@ -628,27 +628,69 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderHeader() {
+    console.log(
+      "sceneManager.state.scene.group",
+      sceneManager.state.scene.group
+    );
     return (
       <Box pb="2rem">
         <Box pb="2rem">
           {renderManagementActions()}
           <Container maxWidth="sm">
-            <Typography
-              variant="h4"
-              className={css({
-                borderBottom: `1px solid ${theme.palette.divider}`,
-                textAlign: "center",
-              })}
-            >
-              <ContentEditable
-                autoFocus
-                value={sceneManager.state.scene.name}
-                readonly={!isGM}
-                onChange={(value) => {
-                  sceneManager.actions.updateName(value);
+            <Box mb=".5rem">
+              <Typography
+                variant="h4"
+                className={css({
+                  borderBottom: `1px solid ${theme.palette.divider}`,
+                  textAlign: "center",
+                })}
+              >
+                <ContentEditable
+                  autoFocus
+                  value={sceneManager.state.scene.name}
+                  readonly={!isGM}
+                  onChange={(value) => {
+                    sceneManager.actions.updateName(value);
+                  }}
+                />
+              </Typography>
+            </Box>
+            <Box>
+              <Autocomplete
+                freeSolo
+                options={scenesManager.state.groups}
+                value={sceneManager.state.scene.group ?? ""}
+                onChange={(event, newValue) => {
+                  sceneManager.actions.setGroup(newValue);
                 }}
+                inputValue={sceneManager.state.scene.group ?? ""}
+                onInputChange={(event, newInputValue) => {
+                  sceneManager.actions.setGroup(newInputValue);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="standard"
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                    }}
+                    inputProps={{
+                      ...params.inputProps,
+                      className: css({ textAlign: "center" }),
+                    }}
+                    disabled={!isGM}
+                    className={css({
+                      borderBottom: `1px solid ${theme.palette.divider}`,
+                      textAlign: "center",
+                      width: "70%",
+                      margin: "0 auto",
+                      display: "flex",
+                    })}
+                  />
+                )}
               />
-            </Typography>
+            </Box>
           </Container>
         </Box>
 

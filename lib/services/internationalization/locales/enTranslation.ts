@@ -12,6 +12,7 @@ export const enTranslation = {
   "character-dialog.load-template-confirmation": `Are you sure you want to load this template and lose all your changes ?`,
   "character-dialog.load-template": `Load Template`,
   "character-dialog.name": `Name`,
+  "character-dialog.group": `Group`,
   "character-dialog.refresh": `Refresh`,
   "character-dialog.save": `Save`,
   "character-dialog.saved": `Saved`,

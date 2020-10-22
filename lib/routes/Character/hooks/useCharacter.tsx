@@ -54,6 +54,17 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
+  function setGroup(newGroup: string | null | undefined) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.group = newGroup as string | undefined;
+      })
+    );
+  }
+
   function addAspect() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -442,6 +453,7 @@ export function useCharacter(c?: ICharacter | undefined) {
     actions: {
       loadTemplate,
       setName,
+      setGroup,
       addAspect,
       removeAspect,
       setAspectName,
