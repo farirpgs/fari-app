@@ -31,6 +31,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
 
   const diceStyle = css({
     fontSize: props.fontSize,
+    fontFamily: Font.monospace,
     lineHeight: Font.lineHeight(5),
     color: diceManager.state.color,
     background: theme.palette.background.paper,
@@ -70,6 +71,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
       classes={{
         tooltip: css({
           fontSize: "1.2rem",
+          fontFamily: "monospace",
         }),
       }}
     >

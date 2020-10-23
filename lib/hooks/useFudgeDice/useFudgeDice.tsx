@@ -4,9 +4,9 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
 const diceMap: Record<string, string> = {
-  "-1": "-",
-  "0": "o",
-  "1": "+",
+  "-1": "[-]",
+  "0": "[ ]",
+  "1": "[+]",
 } as const;
 
 const rollingDelay = 1000;
@@ -30,9 +30,9 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const hasRolledOnce = roll !== undefined;
 
   const bonus = roll?.bonus ?? 0;
+  const bonusLabel = roll?.bonusLabel ?? "";
   const total = roll?.total ?? 0;
 
-  const hasBonus = !!roll?.bonusLabel;
   const rollsForSignes = roll?.rolls ?? [];
   const rollSigns = rollsForSignes
     .map((r) => {
@@ -40,10 +40,13 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
     })
     .join(" ");
 
-  const label = total + bonus ?? "";
-  const tooltipTitle = rolling ? "" : `${rollSigns} (${total})` ?? "";
+  const shouldDisplay = rolling || !roll;
+  const hasBonus = !!roll?.bonusLabel;
+
+  const label = shouldDisplay ? "" : formatNumber(total + bonus);
+  const tooltipTitle = shouldDisplay ? "" : `${rollSigns} (${total})` ?? "";
   const tooltipDescription =
-    rolling || !hasBonus ? "" : `${roll?.bonusLabel} (${roll?.bonus})`;
+    rolling || !hasBonus ? "" : `${bonusLabel} (${formatNumber(bonus)})`;
 
   useEffect(() => {
     let newColor = "inherit";
@@ -103,4 +106,11 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
       color,
     },
   };
+}
+
+function formatNumber(n: number) {
+  if (n > 0) {
+    return `+${n}`;
+  }
+  return n;
 }

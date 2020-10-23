@@ -11,7 +11,7 @@ import { Font } from "../../domains/font/Font";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DiceRoute = () => {
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([Dice.roll4DF({})]);
+  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
   const { t } = useTranslate();
@@ -19,6 +19,7 @@ export const DiceRoute = () => {
 
   useEffect(() => {
     logger.info("Route:Dice");
+    roll();
   }, []);
 
   function roll() {
@@ -60,15 +61,17 @@ export const DiceRoute = () => {
           </Button>
         </Box>
         <Box pt="3rem">
-          <DiceBox
-            rolls={rolls}
-            size="7rem"
-            fontSize="5rem"
-            borderSize=".5rem"
-            onClick={() => {
-              roll();
-            }}
-          />
+          <Box display="flex" justifyContent="center" pt="3rem">
+            <DiceBox
+              rolls={rolls}
+              size="7rem"
+              fontSize="5rem"
+              borderSize=".5rem"
+              onClick={() => {
+                roll();
+              }}
+            />
+          </Box>
         </Box>
         <Box
           display="flex"

@@ -18,6 +18,7 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
+import ButtonBase from "@material-ui/core/ButtonBase/ButtonBase";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
@@ -511,19 +512,26 @@ export const CharacterDialog: React.FC<{
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <FateLabel display="inline">
-                      <ContentEditable
-                        readonly={!advanced}
-                        value={skill.name}
-                        onClick={() => {
-                          const bonus = parseInt(skill.value) || 0;
-                          props.onRoll?.({ bonus, bonusLabel: skill.name });
-                        }}
-                        onChange={(value) => {
-                          characterManager.actions.setSkillName(index, value);
-                        }}
-                      />
-                    </FateLabel>
+                    <ButtonBase>
+                      <Box pt=".1rem" px=".1rem">
+                        <FateLabel display="inline">
+                          <ContentEditable
+                            readonly={!advanced}
+                            value={skill.name}
+                            onClick={() => {
+                              const bonus = parseInt(skill.value) || 0;
+                              props.onRoll?.({ bonus, bonusLabel: skill.name });
+                            }}
+                            onChange={(value) => {
+                              characterManager.actions.setSkillName(
+                                index,
+                                value
+                              );
+                            }}
+                          />
+                        </FateLabel>
+                      </Box>
+                    </ButtonBase>
                   </Grid>
                   {advanced && (
                     <Grid

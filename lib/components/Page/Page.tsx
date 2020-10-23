@@ -270,9 +270,11 @@ export const Page: React.FC<{
                     )}
                   </Grid>
                   <Grid item>
-                    <Typography variant="subtitle1">
-                      {sanitizeContentEditable(props.liveLabel)}
-                    </Typography>
+                    <Box maxWidth="150px">
+                      <Typography variant="subtitle1" noWrap>
+                        {sanitizeContentEditable(props.liveLabel)}
+                      </Typography>
+                    </Box>
                   </Grid>
                 </Grid>
               </Box>
