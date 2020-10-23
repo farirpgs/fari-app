@@ -68,6 +68,7 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   function setFinalResult() {
     setRolling(false);
     setRoll(realRoll);
+
     if (realRoll?.total === 4) {
       Confetti.fireConfetti();
     } else if (realRoll?.total === -4) {
@@ -108,9 +109,9 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   };
 }
 
-function formatNumber(n: number) {
+function formatNumber(n: number): string {
   if (n > 0) {
     return `+${n}`;
   }
-  return n;
+  return n.toString();
 }
