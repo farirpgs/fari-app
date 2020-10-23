@@ -14,6 +14,7 @@ export const enTranslation = {
   "character-dialog.name": `Name`,
   "character-dialog.group": `Group`,
   "character-dialog.refresh": `Refresh`,
+  "character-dialog.dice": `Dice`,
   "character-dialog.save": `Save`,
   "character-dialog.saved": `Saved`,
   "character-dialog.skills": `Skills`,

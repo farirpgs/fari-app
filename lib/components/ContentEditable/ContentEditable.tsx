@@ -9,6 +9,7 @@ const DOMPurifyOptions = {
 
 export const ContentEditable: React.FC<{
   value: string;
+  onClick?: () => void;
   onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
   readonly?: boolean;
   autoFocus?: boolean;
@@ -48,6 +49,7 @@ export const ContentEditable: React.FC<{
       props.onChange?.(cleanHTML, e);
     }
   }
+  const hasCursorPointer = props.readonly && props.onClick;
 
   return (
     <span
@@ -56,10 +58,10 @@ export const ContentEditable: React.FC<{
         wordBreak: "break-word",
         display: "inline-block",
         width: "100%",
+        cursor: hasCursorPointer ? "pointer" : "text",
         borderBottom: props.border
           ? `1px solid ${theme.palette.divider}`
           : undefined,
-        cursor: "text",
         img: {
           maxWidth: "75%",
           padding: ".5rem",
@@ -69,6 +71,11 @@ export const ContentEditable: React.FC<{
       })}
       id={props.id}
       ref={$ref}
+      onClick={() => {
+        if (props.readonly) {
+          props.onClick?.();
+        }
+      }}
       onInput={(e) => {
         onChange(e);
       }}

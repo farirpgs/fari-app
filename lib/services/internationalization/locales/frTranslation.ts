@@ -107,7 +107,7 @@ export const frTranslation = {
   "play-route.fp": `P.F.`,
   "play-route.init": `Init`,
   "play-route.initiative-tracker": `Initiative`,
-  "play-route.join-as": `Rejoingnez comme ✨ {{}} playername ✨`,
+  "play-route.join-as": `Rejoingnez comme ✨ {{playername}} ✨`,
   "play-route.join-error": `La partie que vous essayez de joindre n'existe pas`,
   "play-route.join": `Joindre`,
   "play-route.leave-prompt": `Etes-vous sûr de vouloir quitter et réinitialiser votre scène?`,

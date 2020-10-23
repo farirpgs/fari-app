@@ -31,6 +31,7 @@ import { css } from "emotion";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { DiceBox } from "../../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import {
@@ -39,6 +40,8 @@ import {
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
+import { IRollDiceOptions } from "../../../domains/dice/Dice";
+import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
@@ -49,6 +52,8 @@ export const CharacterDialog: React.FC<{
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
+  rolls?: Array<IDiceRoll>;
+  onRoll?(options: IRollDiceOptions): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
 }> = (props) => {
@@ -154,6 +159,7 @@ export const CharacterDialog: React.FC<{
         <Dialog
           open={props.open}
           fullWidth
+          keepMounted
           maxWidth="md"
           scroll="paper"
           onClose={onClose}
@@ -241,6 +247,7 @@ export const CharacterDialog: React.FC<{
           {renderAspects()}
           {renderStunts()}
           {renderRefresh()}
+          {renderDice()}
         </Grid>
         <Grid
           item
@@ -362,7 +369,7 @@ export const CharacterDialog: React.FC<{
 
   function renderSheetHeader(
     label: string,
-    onLabelChange: (newLabel: string) => void,
+    onLabelChange?: (newLabel: string) => void,
     onAdd?: () => void
   ) {
     const shouldRenderAddButton = onAdd && advanced;
@@ -380,7 +387,7 @@ export const CharacterDialog: React.FC<{
                 readonly={!advanced}
                 value={label}
                 onChange={(newLabel) => {
-                  onLabelChange(newLabel);
+                  onLabelChange?.(newLabel);
                 }}
               />
             </FateLabel>
@@ -508,6 +515,10 @@ export const CharacterDialog: React.FC<{
                       <ContentEditable
                         readonly={!advanced}
                         value={skill.name}
+                        onClick={() => {
+                          const bonus = parseInt(skill.value) || 0;
+                          props.onRoll?.({ bonus, bonusLabel: skill.name });
+                        }}
                         onChange={(value) => {
                           characterManager.actions.setSkillName(index, value);
                         }}
@@ -641,6 +652,32 @@ export const CharacterDialog: React.FC<{
                   }}
                 />
               </Avatar>
+            </Grid>
+          </Grid>
+        </Box>
+      </>
+    );
+  }
+
+  function renderDice() {
+    return (
+      <>
+        {renderSheetHeader(t("character-dialog.dice"))}
+        <Box className={sheetContentStyle}>
+          <Grid container justify="center">
+            <Grid item>
+              <Box pt="1rem">
+                <DiceBox
+                  rolls={props.rolls ?? []}
+                  size="5rem"
+                  fontSize="2rem"
+                  borderSize=".2rem"
+                  borderColor="#000000"
+                  onClick={() => {
+                    props.onRoll?.({});
+                  }}
+                />
+              </Box>
             </Grid>
           </Grid>
         </Box>

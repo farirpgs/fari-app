@@ -51,7 +51,7 @@ import {
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
-import { Dice } from "../../domains/dice/Dice";
+import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
@@ -447,16 +447,16 @@ export const Scene: React.FC<IProps> = (props) => {
                       onPlayerRemove={() => {
                         sceneManager.actions.removeOfflinePlayer(player.id);
                       }}
-                      onDiceRoll={() => {
+                      onDiceRoll={(options: IRollDiceOptions) => {
                         if (isGM) {
                           sceneManager.actions.updatePlayerRoll(
                             player.id,
-                            Dice.roll4DF()
+                            Dice.roll4DF(options)
                           );
                         } else {
                           connectionsManager?.actions.sendToHost<IPeerActions>({
                             action: "roll",
-                            payload: Dice.roll4DF(),
+                            payload: Dice.roll4DF(options),
                           });
                         }
                       }}
