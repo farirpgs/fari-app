@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Button,
+  ButtonBase,
   Checkbox,
   Collapse,
   Container,
@@ -18,7 +19,6 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
-import ButtonBase from "@material-ui/core/ButtonBase/ButtonBase";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
@@ -329,7 +329,12 @@ export const CharacterDialog: React.FC<{
               <Box fontSize="1.25rem">
                 <Autocomplete
                   freeSolo
-                  options={charactersManager.state.groups}
+                  options={charactersManager.state.groups.filter((g) => {
+                    const currentGroup =
+                      characterManager.state.character!.group?.toLowerCase() ??
+                      "";
+                    return g.toLowerCase().includes(currentGroup);
+                  })}
                   value={characterManager.state.character!.group ?? ""}
                   onChange={(event, newValue) => {
                     characterManager.actions.setGroup(newValue);
