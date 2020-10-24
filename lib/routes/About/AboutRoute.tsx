@@ -10,6 +10,7 @@ import { IPossibleLanguages } from "../../services/internationalization/Internat
 import AboutEnMarkdown from "./page/About.en.md";
 import AboutEsMarkdown from "./page/About.es.md";
 import AboutFrMarkdown from "./page/About.fr.md";
+import AboutRuMarkdown from "./page/About.ru.md";
 
 const converter = new showdown.Converter();
 
@@ -18,6 +19,7 @@ const html: Record<IPossibleLanguages, string> = {
   "pt-BR": converter.makeHtml(AboutEnMarkdown),
   "es": converter.makeHtml(AboutEsMarkdown),
   "fr": converter.makeHtml(AboutFrMarkdown),
+  "ru": converter.makeHtml(AboutRuMarkdown),
   "dev": converter.makeHtml(AboutEnMarkdown),
 };
 

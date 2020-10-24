@@ -1,5 +1,10 @@
+import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
+
 /*eslint quotes: ["error", "backtick"]*/
-export const frTranslation = {
+export const frTranslation: Record<
+  IPossibleTranslationKeys,
+  string | undefined
+> = {
   "about-route.meta.description": `Fari est une application pour jouer a jeu de rôle Fate, créée par René-Pier-Gélinas Deshaies`,
   "about-route.meta.title": `À propos`,
   "changelog-route.meta.description": `Journal des modifications pour Fari`,
@@ -34,6 +39,7 @@ export const frTranslation = {
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.ru": `Русский`,
   "common.language.pt-BR": `Português Brasileiro`,
   "cookie-consent.button": `J'accepte`,
   "cookie-consent.description": `Ce site utilise des cookies pour vous fournir une meilleur expérience utilisateur. En utilisant Fari, vous acceptez notre utilisation des cookies.`,
@@ -195,4 +201,4 @@ export const frTranslation = {
   // "Aspect": `Aspect`,
   // "Stunt": `Stunt`,
   // "Skill": `Skill`,
-} as const;
+};

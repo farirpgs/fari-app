@@ -1,5 +1,10 @@
+import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
+
 /*eslint quotes: ["error", "backtick"]*/
-export const ptbrTranslation = {
+export const ptbrTranslation: Record<
+  IPossibleTranslationKeys,
+  string | undefined
+> = {
   "about-route.meta.description": `Fari é uma aplicação auxiliar para o RPG Fate criado por René-Pier Deshaies-Gélinas`,
   "about-route.meta.title": `Sobre`,
   "changelog-route.meta.description": `Changelog para Fari`,
@@ -34,6 +39,7 @@ export const ptbrTranslation = {
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.ru": `Русский`,
   "common.language.pt-BR": `Português Brasileiro`,
   "cookie-consent.button": `Eu aceito`,
   "cookie-consent.description": `Este site usa cookies para prover uma ótima experiência de usuário. Usando Fare você aceita o uso de cookies.`,
@@ -195,4 +201,4 @@ export const ptbrTranslation = {
   // "Aspect": `Aspecto`,
   // "Stunt": `Façanha`,
   // "Skill": `Perícia`,
-} as const;
+};

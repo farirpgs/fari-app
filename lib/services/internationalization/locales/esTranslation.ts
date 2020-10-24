@@ -39,6 +39,7 @@ export const esTranslation: Record<
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.ru": `Русский`,
   "common.language.pt-BR": `Português Brasileiro`,
   "cookie-consent.button": `Acepto`,
   "cookie-consent.description": `Este sitio web usa cookies para proporcionar una mejor experiencia de uso. Al usar Fari, acepta el uso de cookies.`,
