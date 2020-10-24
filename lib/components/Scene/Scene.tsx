@@ -654,7 +654,10 @@ export const Scene: React.FC<IProps> = (props) => {
             <Box>
               <Autocomplete
                 freeSolo
-                options={scenesManager.state.groups}
+                options={scenesManager.state.groups.filter((g) => {
+                  const currentGroup = sceneManager.state.scene.group ?? "";
+                  return g.toLowerCase().includes(currentGroup);
+                })}
                 value={sceneManager.state.scene.group ?? ""}
                 onChange={(event, newValue) => {
                   sceneManager.actions.setGroup(newValue);

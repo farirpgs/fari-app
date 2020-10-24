@@ -48,7 +48,7 @@ export function useScenes(props?: { localStorage: Storage }) {
     const uniqGroups = sortedGroups.filter(
       (g, i) => sortedGroups.indexOf(g) === i
     );
-    const validGroups = uniqGroups.filter((g) => !!g);
+    const validGroups = uniqGroups.filter((g) => !!g) as Array<string>;
     return validGroups;
   }, [sortedScenes]);
 
