@@ -93,6 +93,29 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
+  function moveValueInList(
+    property: keyof Pick<
+      ICharacter,
+      "aspects" | "stressTracks" | "consequences" | "stunts" | "skills"
+    >,
+    index: number,
+    direction: "up" | "down"
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        if (direction === "up") {
+          draft[property] = moveUp(draft[property] as Array<any>, index);
+        }
+        if (direction === "down") {
+          draft[property] = moveDown(draft[property] as Array<any>, index);
+        }
+      })
+    );
+  }
+
   function removeAspect(aspectIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -484,7 +507,47 @@ export function useCharacter(c?: ICharacter | undefined) {
       setStressTracksLabel,
       setConsequencesLabel,
       setRefreshLabel,
+      moveValueInList,
       sanitizeCharacter,
     },
   };
+}
+
+function moveUp<T>(list: Array<T>, index: number) {
+  if (index === 0) {
+    return list;
+  }
+  const newIndex = index - 1;
+  const element = list[index];
+  const swap = list[newIndex];
+
+  return list.map((el, i) => {
+    if (i === index) {
+      return swap;
+    }
+    if (i === newIndex) {
+      return element;
+    }
+    return el;
+  });
+}
+
+function moveDown<T>(list: Array<T>, index: number) {
+  if (index === list.length - 1) {
+    return list;
+  }
+
+  const newIndex = index + 1;
+  const element = list[index];
+  const swap = list[newIndex];
+
+  return list.map((el, i) => {
+    if (i === index) {
+      return swap;
+    }
+    if (i === newIndex) {
+      return element;
+    }
+    return el;
+  });
 }

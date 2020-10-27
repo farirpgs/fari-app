@@ -21,6 +21,8 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
@@ -433,7 +435,7 @@ export const CharacterDialog: React.FC<{
                 <Box pb=".5rem">
                   <Grid
                     container
-                    spacing={2}
+                    spacing={1}
                     justify="space-between"
                     wrap="nowrap"
                   >
@@ -452,17 +454,49 @@ export const CharacterDialog: React.FC<{
                       </FateLabel>
                     </Grid>
                     {advanced && (
-                      <Grid item>
-                        <IconButton
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.removeAspect(index);
-                          }}
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                      </Grid>
+                      <>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveValueInList(
+                                "aspects",
+                                index,
+                                "down"
+                              );
+                            }}
+                          >
+                            <ArrowDownwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveValueInList(
+                                "aspects",
+                                index,
+                                "up"
+                              );
+                            }}
+                          >
+                            <ArrowUpwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.removeAspect(index);
+                            }}
+                          >
+                            <RemoveIcon />
+                          </IconButton>
+                        </Grid>
+                      </>
                     )}
                   </Grid>
                 </Box>
@@ -498,9 +532,26 @@ export const CharacterDialog: React.FC<{
 
         <Box className={sheetContentStyle}>
           {characterManager.state.character!.skills.map((skill, index) => {
+            const skillLabel = (
+              <Box pt=".1rem" px=".1rem">
+                <FateLabel display="inline">
+                  <ContentEditable
+                    readonly={!advanced}
+                    value={skill.name}
+                    onClick={() => {
+                      const bonus = parseInt(skill.value) || 0;
+                      props.onRoll?.({ bonus, bonusLabel: skill.name });
+                    }}
+                    onChange={(value) => {
+                      characterManager.actions.setSkillName(index, value);
+                    }}
+                  />
+                </FateLabel>
+              </Box>
+            );
             return (
               <Box py=".5rem" key={index}>
-                <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
+                <Grid container spacing={1} alignItems="flex-end" wrap="nowrap">
                   <Grid item xs={1}>
                     <FateLabel display="inline">{"+"}</FateLabel>
                   </Grid>
@@ -517,47 +568,63 @@ export const CharacterDialog: React.FC<{
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <ButtonBase>
-                      <Box pt=".1rem" px=".1rem">
-                        <FateLabel display="inline">
-                          <ContentEditable
-                            readonly={!advanced}
-                            value={skill.name}
-                            onClick={() => {
-                              const bonus = parseInt(skill.value) || 0;
-                              props.onRoll?.({ bonus, bonusLabel: skill.name });
-                            }}
-                            onChange={(value) => {
-                              characterManager.actions.setSkillName(
-                                index,
-                                value
-                              );
-                            }}
-                          />
-                        </FateLabel>
-                      </Box>
-                    </ButtonBase>
+                    {advanced ? (
+                      skillLabel
+                    ) : (
+                      <ButtonBase>{skillLabel}</ButtonBase>
+                    )}
                   </Grid>
                   {advanced && (
-                    <Grid
-                      item
-                      xs={2}
-                      className={css({
-                        marginLeft: "auto",
-                        display: "flex",
-                        justifyContent: "flex-end",
-                      })}
-                    >
-                      <IconButton
-                        size="small"
-                        className={smallIconButtonStyle}
-                        onClick={() => {
-                          characterManager.actions.removeSkill(index);
-                        }}
+                    <>
+                      <Grid
+                        item
+                        className={css({
+                          marginLeft: "auto",
+                          display: "flex",
+                          justifyContent: "flex-end",
+                        })}
                       >
-                        <RemoveIcon />
-                      </IconButton>
-                    </Grid>
+                        <IconButton
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.moveValueInList(
+                              "skills",
+                              index,
+                              "down"
+                            );
+                          }}
+                        >
+                          <ArrowDownwardIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.moveValueInList(
+                              "skills",
+                              index,
+                              "up"
+                            );
+                          }}
+                        >
+                          <ArrowUpwardIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.removeSkill(index);
+                          }}
+                        >
+                          <RemoveIcon />
+                        </IconButton>
+                      </Grid>{" "}
+                    </>
                   )}
                 </Grid>
               </Box>
@@ -584,7 +651,7 @@ export const CharacterDialog: React.FC<{
                 <Box pb=".5rem">
                   <Grid
                     container
-                    spacing={2}
+                    spacing={1}
                     justify="space-between"
                     wrap="nowrap"
                   >
@@ -600,17 +667,49 @@ export const CharacterDialog: React.FC<{
                       </FateLabel>
                     </Grid>
                     {advanced && (
-                      <Grid item>
-                        <IconButton
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.removeStunt(index);
-                          }}
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                      </Grid>
+                      <>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveValueInList(
+                                "stunts",
+                                index,
+                                "down"
+                              );
+                            }}
+                          >
+                            <ArrowDownwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveValueInList(
+                                "stunts",
+                                index,
+                                "up"
+                              );
+                            }}
+                          >
+                            <ArrowUpwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.removeStunt(index);
+                            }}
+                          >
+                            <RemoveIcon />
+                          </IconButton>
+                        </Grid>
+                      </>
                     )}
                   </Grid>
                 </Box>
@@ -731,7 +830,7 @@ export const CharacterDialog: React.FC<{
                   container
                   justify="space-between"
                   wrap="nowrap"
-                  spacing={2}
+                  spacing={1}
                 >
                   <Grid item className={css({ flex: "1 1 auto" })}>
                     <FateLabel display="inline">
@@ -748,40 +847,68 @@ export const CharacterDialog: React.FC<{
                     </FateLabel>
                   </Grid>
                   {advanced && (
-                    <Grid item>
-                      <IconButton
-                        size="small"
-                        onClick={() => {
-                          characterManager.actions.removeStressBox(index);
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    </Grid>
-                  )}
-                  {advanced && (
-                    <Grid item>
-                      <IconButton
-                        size="small"
-                        onClick={() => {
-                          characterManager.actions.addStressBox(index);
-                        }}
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </Grid>
-                  )}
-                  {advanced && (
-                    <Grid item>
-                      <IconButton
-                        size="small"
-                        onClick={() => {
-                          characterManager.actions.removeStressTrack(index);
-                        }}
-                      >
-                        <RemoveIcon />
-                      </IconButton>
-                    </Grid>
+                    <>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            characterManager.actions.removeStressBox(index);
+                          }}
+                        >
+                          <RemoveCircleOutlineIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            characterManager.actions.addStressBox(index);
+                          }}
+                        >
+                          <AddCircleOutlineIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.moveValueInList(
+                              "stressTracks",
+                              index,
+                              "down"
+                            );
+                          }}
+                        >
+                          <ArrowDownwardIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.moveValueInList(
+                              "stressTracks",
+                              index,
+                              "up"
+                            );
+                          }}
+                        >
+                          <ArrowUpwardIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            characterManager.actions.removeStressTrack(index);
+                          }}
+                        >
+                          <RemoveIcon />
+                        </IconButton>
+                      </Grid>
+                    </>
                   )}
                 </Grid>
 
@@ -845,9 +972,13 @@ export const CharacterDialog: React.FC<{
             return (
               <Box py=".5rem" key={index}>
                 <Box pb=".5rem" key={index}>
-                  <Grid container justify="space-between" wrap="nowrap">
+                  <Grid
+                    container
+                    justify="space-between"
+                    wrap="nowrap"
+                    spacing={1}
+                  >
                     <Grid item xs={10}>
-                      {" "}
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
@@ -862,17 +993,49 @@ export const CharacterDialog: React.FC<{
                       </FateLabel>
                     </Grid>
                     {advanced && (
-                      <Grid item>
-                        <IconButton
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.removeConsequence(index);
-                          }}
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                      </Grid>
+                      <>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveValueInList(
+                                "consequences",
+                                index,
+                                "down"
+                              );
+                            }}
+                          >
+                            <ArrowDownwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveValueInList(
+                                "consequences",
+                                index,
+                                "up"
+                              );
+                            }}
+                          >
+                            <ArrowUpwardIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.removeConsequence(index);
+                            }}
+                          >
+                            <RemoveIcon />
+                          </IconButton>
+                        </Grid>
+                      </>
                     )}
                   </Grid>
                 </Box>
