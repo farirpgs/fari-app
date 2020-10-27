@@ -3,6 +3,7 @@ import {
   Button,
   ButtonGroup,
   CircularProgress,
+  Collapse,
   Container,
   Dialog,
   DialogActions,
@@ -12,6 +13,7 @@ import {
   Fade,
   Grid,
   Hidden,
+  IconButton,
   InputLabel,
   Paper,
   Snackbar,
@@ -32,6 +34,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import PersonIcon from "@material-ui/icons/Person";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
@@ -39,6 +42,7 @@ import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { Alert, Autocomplete } from "@material-ui/lab";
 import { css, cx } from "emotion";
+import truncate from "lodash/truncate";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
@@ -56,12 +60,15 @@ import { Font } from "../../domains/font/Font";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
+import { IPlayer } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { CharacterDialog } from "../../routes/Character/components/CharacterDialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
@@ -74,6 +81,8 @@ export enum SceneMode {
   PlayOffline,
   Manage,
 }
+
+const paperStyle = css({ borderRadius: "0px" });
 
 type IProps =
   | {
@@ -128,6 +137,9 @@ export const Scene: React.FC<IProps> = (props) => {
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
     false
   );
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
 
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
@@ -154,8 +166,6 @@ export const Scene: React.FC<IProps> = (props) => {
     ...sceneManager.state.scene.players,
   ];
 
-  const paperStyle = css({ borderRadius: "0px" });
-
   function onLoadScene(newScene: ISavableScene) {
     sceneManager.actions.loadScene(newScene);
   }
@@ -166,6 +176,17 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function onAddOfflineCharacter(character: ICharacter) {
     sceneManager.actions.addOfflineCharacter(character);
+  }
+
+  function roll(player: IPlayer, options: IRollDiceOptions) {
+    if (isGM) {
+      sceneManager.actions.updatePlayerRoll(player.id, Dice.roll4DF(options));
+    } else {
+      connectionsManager?.actions.sendToHost<IPeerActions>({
+        action: "roll",
+        payload: Dice.roll4DF(options),
+      });
+    }
   }
 
   const liveMode = getLiveMode();
@@ -227,6 +248,7 @@ export const Scene: React.FC<IProps> = (props) => {
           {props.mode === SceneMode.Manage ? (
             <Grid container spacing={2}>
               <Grid item xs={12}>
+                {renderCharacterCards()}
                 {renderAspects()}
               </Grid>
             </Grid>
@@ -236,6 +258,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {renderSidePanel()}
               </Grid>
               <Grid item xs={12} md={8}>
+                {renderCharacterCards()}
                 {renderAspects()}
               </Grid>
             </Grid>
@@ -434,72 +457,88 @@ export const Scene: React.FC<IProps> = (props) => {
               <TableHead>{renderPlayerRowHeader()}</TableHead>
               <TableBody>
                 {everyone.map((player) => {
+                  const isMe =
+                    props.mode === SceneMode.PlayOnline &&
+                    props.userId === player.id;
+                  const canControl = isGM || isMe;
                   return (
-                    <PlayerRow
-                      key={player.id}
-                      isGM={isGM}
-                      isMe={
-                        props.mode === SceneMode.PlayOnline &&
-                        props.userId === player.id
-                      }
-                      player={player}
-                      offline={isOffline}
-                      onPlayerRemove={() => {
-                        sceneManager.actions.removeOfflinePlayer(player.id);
-                      }}
-                      onDiceRoll={(options: IRollDiceOptions) => {
-                        if (isGM) {
-                          sceneManager.actions.updatePlayerRoll(
-                            player.id,
-                            Dice.roll4DF(options)
-                          );
-                        } else {
-                          connectionsManager?.actions.sendToHost<IPeerActions>({
-                            action: "roll",
-                            payload: Dice.roll4DF(options),
-                          });
-                        }
-                      }}
-                      onPlayedInTurnOrderChange={(playedInTurnOrder) => {
-                        if (isGM) {
-                          sceneManager.actions.updatePlayerPlayedDuringTurn(
-                            player.id,
-                            playedInTurnOrder
-                          );
-                        } else {
-                          connectionsManager?.actions.sendToHost<IPeerActions>({
-                            action: "played-in-turn-order",
-                            payload: playedInTurnOrder,
-                          });
-                        }
-                      }}
-                      onFatePointsChange={(fatePoints) => {
-                        if (isGM) {
-                          sceneManager.actions.updatePlayerFatePoints(
-                            player.id,
-                            fatePoints
-                          );
-                        } else {
-                          connectionsManager?.actions.sendToHost<IPeerActions>({
-                            action: "update-fate-point",
-                            payload: fatePoints,
-                          });
-                        }
-                      }}
-                      onCharacterUpdate={(character) => {
-                        if (isGM) {
-                          sceneManager.actions.updatePlayerCharacter(
-                            player.id,
-                            character
-                          );
-                        } else {
-                          connectionsManager?.actions.sendToHost<IPeerActions>({
-                            action: "update-character",
-                            payload: character,
-                          });
-                        }
-                      }}
-                    />
+                    <React.Fragment key={player.id}>
+                      <CharacterDialog
+                        readonly={!canControl}
+                        open={characterDialogPlayerId === player.id}
+                        character={player.character}
+                        dialog={true}
+                        rolls={player.rolls}
+                        onRoll={(options) => {
+                          roll(player, options);
+                        }}
+                        onSave={(updatedCharacter) => {
+                          if (isGM) {
+                            sceneManager.actions.updatePlayerCharacter(
+                              player.id,
+                              updatedCharacter
+                            );
+                          } else {
+                            connectionsManager?.actions.sendToHost<
+                              IPeerActions
+                            >({
+                              action: "update-character",
+                              payload: updatedCharacter,
+                            });
+                          }
+                          setCharacterDialogPlayerId(undefined);
+                        }}
+                        onClose={() => {
+                          setCharacterDialogPlayerId(undefined);
+                        }}
+                      />
+                      <PlayerRow
+                        key={player.id}
+                        isGM={isGM}
+                        isMe={isMe}
+                        player={player}
+                        offline={isOffline}
+                        onPlayerRemove={() => {
+                          sceneManager.actions.removeOfflinePlayer(player.id);
+                        }}
+                        onCharacterDialogOpen={() => {
+                          setCharacterDialogPlayerId(player.id);
+                        }}
+                        onDiceRoll={(options: IRollDiceOptions) => {
+                          roll(player, options);
+                        }}
+                        onPlayedInTurnOrderChange={(playedInTurnOrder) => {
+                          if (isGM) {
+                            sceneManager.actions.updatePlayerPlayedDuringTurn(
+                              player.id,
+                              playedInTurnOrder
+                            );
+                          } else {
+                            connectionsManager?.actions.sendToHost<
+                              IPeerActions
+                            >({
+                              action: "played-in-turn-order",
+                              payload: playedInTurnOrder,
+                            });
+                          }
+                        }}
+                        onFatePointsChange={(fatePoints) => {
+                          if (isGM) {
+                            sceneManager.actions.updatePlayerFatePoints(
+                              player.id,
+                              fatePoints
+                            );
+                          } else {
+                            connectionsManager?.actions.sendToHost<
+                              IPeerActions
+                            >({
+                              action: "update-fate-point",
+                              payload: fatePoints,
+                            });
+                          }
+                        }}
+                      />
+                    </React.Fragment>
                   );
                 })}
               </TableBody>
@@ -557,6 +596,42 @@ export const Scene: React.FC<IProps> = (props) => {
           </Typography>
         </TableCell>
       </TableRow>
+    );
+  }
+
+  function renderCharacterCards() {
+    if (!sceneManager.state.scene.showCharacterCards) {
+      return null;
+    }
+
+    const playersWithCharacterSheets = sceneManager.state.scene.players.filter(
+      (player) => !!player.character
+    );
+    const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
+
+    return (
+      hasPlayersWithCharacterSheets && (
+        <>
+          <Box>
+            <MagicGridContainer items={playersWithCharacterSheets.length}>
+              {playersWithCharacterSheets.map((player, index) => {
+                return (
+                  <CharacterCard
+                    key={player?.id || index}
+                    characterSheet={player.character}
+                    onCharacterDialogOpen={() => {
+                      setCharacterDialogPlayerId(player.id);
+                    }}
+                  />
+                );
+              })}
+            </MagicGridContainer>
+          </Box>
+          <Box pt="1rem" pb="2rem">
+            <Divider />
+          </Box>
+        </>
+      )
     );
   }
 
@@ -651,45 +726,48 @@ export const Scene: React.FC<IProps> = (props) => {
                 />
               </Typography>
             </Box>
-            <Box>
-              <Autocomplete
-                freeSolo
-                options={scenesManager.state.groups.filter((g) => {
-                  const currentGroup = sceneManager.state.scene.group ?? "";
-                  return g.toLowerCase().includes(currentGroup);
-                })}
-                value={sceneManager.state.scene.group ?? ""}
-                onChange={(event, newValue) => {
-                  sceneManager.actions.setGroup(newValue);
-                }}
-                inputValue={sceneManager.state.scene.group ?? ""}
-                onInputChange={(event, newInputValue) => {
-                  sceneManager.actions.setGroup(newInputValue);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="standard"
-                    InputProps={{
-                      ...params.InputProps,
-                      disableUnderline: true,
-                    }}
-                    inputProps={{
-                      ...params.inputProps,
-                      className: css({ textAlign: "center" }),
-                    }}
-                    disabled={!isGM}
-                    className={css({
-                      borderBottom: `1px solid ${theme.palette.divider}`,
-                      textAlign: "center",
-                      width: "50%",
-                      margin: "0 auto",
-                      display: "flex",
-                    })}
-                  />
-                )}
-              />
-            </Box>
+            <Collapse in={!!sceneManager.state.scene.name}>
+              <Box>
+                <Autocomplete
+                  freeSolo
+                  options={scenesManager.state.groups.filter((g) => {
+                    const currentGroup = sceneManager.state.scene.group ?? "";
+                    return g.toLowerCase().includes(currentGroup);
+                  })}
+                  value={sceneManager.state.scene.group ?? ""}
+                  onChange={(event, newValue) => {
+                    sceneManager.actions.setGroup(newValue);
+                  }}
+                  inputValue={sceneManager.state.scene.group ?? ""}
+                  onInputChange={(event, newInputValue) => {
+                    sceneManager.actions.setGroup(newInputValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="standard"
+                      InputProps={{
+                        ...params.InputProps,
+                        disableUnderline: true,
+                      }}
+                      inputProps={{
+                        ...params.inputProps,
+                        className: css({ textAlign: "center" }),
+                      }}
+                      helperText={t("character-dialog.group")}
+                      disabled={!isGM}
+                      className={css({
+                        borderBottom: `1px solid ${theme.palette.divider}`,
+                        textAlign: "center",
+                        width: "50%",
+                        margin: "0 auto",
+                        display: "flex",
+                      })}
+                    />
+                  )}
+                />
+              </Box>
+            </Collapse>
           </Container>
         </Box>
 
@@ -813,6 +891,23 @@ export const Scene: React.FC<IProps> = (props) => {
               endIcon={<SortIcon />}
             >
               {t("play-route.sort")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => {
+                props.sceneManager.actions.toggleShowCharacterCards();
+                logger.info("Scene:onShowCharacterCards");
+              }}
+              variant="outlined"
+              color={
+                props.sceneManager.state.scene.showCharacterCards
+                  ? "secondary"
+                  : "default"
+              }
+              endIcon={<SortIcon />}
+            >
+              {t("play-route.show-character-cards")}
             </Button>
           </Grid>
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
@@ -978,3 +1073,91 @@ export const Scene: React.FC<IProps> = (props) => {
 };
 
 Scene.displayName = "PlayPage";
+
+export const CharacterCard: React.FC<{
+  characterSheet: ICharacter | undefined;
+  onCharacterDialogOpen(): void;
+}> = (props) => {
+  const { t } = useTranslate();
+  const theme = useTheme();
+  const logger = useLogger();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
+  if (!props.characterSheet) {
+    return null;
+  }
+
+  return (
+    <Box
+      className={cx(
+        css({
+          width: isSmall ? "100%" : "33%",
+          padding: "0 .5rem 1.5rem .5rem",
+        })
+      )}
+    >
+      <Paper className={paperStyle}>
+        <Box>
+          <Box
+            py="1rem"
+            className={css({
+              fontSize: "1.5rem",
+              width: "100%",
+              borderBottom: "1px solid #f0a4a4",
+            })}
+          >
+            <Box px="1rem">
+              <Grid
+                container
+                justify="space-between"
+                alignItems="center"
+                spacing={2}
+              >
+                <Grid item>
+                  <FateLabel>{props.characterSheet?.name}</FateLabel>
+                </Grid>
+                <Grid item>
+                  <Tooltip title={t("player-row.open-character-sheet")}>
+                    <span>
+                      <IconButton
+                        size="small"
+                        onClick={(e) => {
+                          props.onCharacterDialogOpen();
+                          logger.info("CharacterCard:onCharacterDialogOpen");
+                        }}
+                      >
+                        <PersonIcon
+                          className={css({ width: "1.5rem", height: "1.5rem" })}
+                        />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          <Box p="1rem">
+            {props.characterSheet?.aspects.map((aspect, aspectIndex) => {
+              if (!aspect.value) {
+                return null;
+              }
+
+              return (
+                <Box key={aspectIndex} pb=".5rem">
+                  <Box>
+                    <FateLabel>{aspect.name}</FateLabel>
+                  </Box>
+                  <Box>
+                    <Typography title={aspect.value}>
+                      {truncate(aspect.value, { length: 75 })}
+                    </Typography>
+                  </Box>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
+      </Paper>
+    </Box>
+  );
+};

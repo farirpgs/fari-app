@@ -34,6 +34,7 @@ fdescribe("useScene", () => {
       goodConfetti: 0,
       badConfetti: 0,
       sort: false,
+      showCharacterCards: undefined,
       drawAreaObjects: [],
       version: 1,
       lastUpdated: expect.anything(),

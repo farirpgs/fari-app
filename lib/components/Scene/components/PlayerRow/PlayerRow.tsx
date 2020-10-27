@@ -19,15 +19,13 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PersonIcon from "@material-ui/icons/Person";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
-import React, { useState } from "react";
-import { ICharacter } from "../../../../contexts/CharactersContext/CharactersContext";
+import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "../../../../routes/Character/components/CharacterDialog";
 import { DiceBox } from "../../../DiceBox/DiceBox";
 
 export const PlayerRow: React.FC<{
@@ -39,7 +37,7 @@ export const PlayerRow: React.FC<{
   onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onFatePointsChange(fatePoints: number): void;
   onPlayerRemove(): void;
-  onCharacterUpdate(character: ICharacter): void;
+  onCharacterDialogOpen(): void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
@@ -53,7 +51,6 @@ export const PlayerRow: React.FC<{
     ? theme.palette.primary.main
     : textColor.disabled;
 
-  const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
   const name = props.player?.playerName || props.player?.character?.name || "";
   const hasCharacterSheet = !!props.player.character;
 
@@ -95,24 +92,6 @@ export const PlayerRow: React.FC<{
 
   return (
     <>
-      <CharacterDialog
-        readonly={!canControl}
-        open={characterDialogOpen}
-        character={props.player.character}
-        dialog={true}
-        rolls={props.player.rolls}
-        onRoll={(options) => {
-          roll(options);
-        }}
-        onSave={(updatedCharacter) => {
-          props.onCharacterUpdate(updatedCharacter);
-          setCharacterDialogOpen(false);
-        }}
-        onClose={() => {
-          setCharacterDialogOpen(false);
-        }}
-      />
-
       <TableRow
         selected={false}
         className={cx({
@@ -227,7 +206,7 @@ export const PlayerRow: React.FC<{
                     size="small"
                     disabled={!hasCharacterSheet}
                     onClick={(e) => {
-                      setCharacterDialogOpen(true);
+                      props.onCharacterDialogOpen();
                       logger.info("ScenePlayer:onCharacterDialogOpen");
                     }}
                   >

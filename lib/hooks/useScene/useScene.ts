@@ -49,6 +49,7 @@ export function useScene(props: IProps) {
     goodConfetti: 0,
     badConfetti: 0,
     sort: false,
+    showCharacterCards: undefined,
     drawAreaObjects: [],
     version: defaultSceneVersion,
     lastUpdated: new Date().getTime(),
@@ -575,6 +576,14 @@ export function useScene(props: IProps) {
     );
   }
 
+  function toggleShowCharacterCards() {
+    setScene(
+      produce((draft: IScene) => {
+        draft.showCharacterCards = !draft.showCharacterCards;
+      })
+    );
+  }
+
   function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setScene(
       produce((draft: IScene) => {
@@ -626,6 +635,7 @@ export function useScene(props: IProps) {
       fireGoodConfetti,
       fireBadConfetti,
       toggleSort,
+      toggleShowCharacterCards,
       updatePlayerCharacter,
       updateDrawAreaObjects,
     },
