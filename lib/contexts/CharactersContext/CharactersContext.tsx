@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { useGroups } from "../../hooks/useGroups/useGroups";
 
 export enum CharacterType {
   CoreCondensed = "CoreCondensed",
@@ -45,14 +46,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     ]);
   }, [characters]);
 
-  const groups = useMemo(() => {
-    const sortedGroups = sortedCharacters.map((c) => c.group);
-    const uniqGroups = sortedGroups.filter(
-      (g, i) => sortedGroups.indexOf(g) === i
-    );
-    const validGroups = uniqGroups.filter((g) => !!g) as Array<string>;
-    return validGroups;
-  }, [sortedCharacters]);
+  const groups = useGroups(sortedCharacters, (c) => c.group);
 
   useEffect(() => {
     // sync local storage

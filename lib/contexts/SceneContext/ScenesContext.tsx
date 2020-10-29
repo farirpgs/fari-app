@@ -1,8 +1,9 @@
 import produce from "immer";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 
 export type ISavableScene = Pick<
@@ -43,14 +44,7 @@ export function useScenes(props?: { localStorage: Storage }) {
     (c) => ({ value: c.lastUpdated, direction: "desc" }),
   ]);
 
-  const groups = useMemo(() => {
-    const sortedGroups = sortedScenes.map((c) => c.group);
-    const uniqGroups = sortedGroups.filter(
-      (g, i) => sortedGroups.indexOf(g) === i
-    );
-    const validGroups = uniqGroups.filter((g) => !!g) as Array<string>;
-    return validGroups;
-  }, [sortedScenes]);
+  const groups = useGroups(sortedScenes, (s) => s.group);
 
   useEffect(() => {
     // sync local storage
