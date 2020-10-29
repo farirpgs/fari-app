@@ -727,44 +727,53 @@ export const Scene: React.FC<IProps> = (props) => {
             </Box>
             <Collapse in={!!sceneManager.state.scene.name}>
               <Box>
-                <Autocomplete
-                  freeSolo
-                  options={scenesManager.state.groups.filter((g) => {
-                    const currentGroup = sceneManager.state.scene.group ?? "";
-                    return g.toLowerCase().includes(currentGroup);
-                  })}
-                  value={sceneManager.state.scene.group ?? ""}
-                  onChange={(event, newValue) => {
-                    sceneManager.actions.setGroup(newValue);
-                  }}
-                  inputValue={sceneManager.state.scene.group ?? ""}
-                  onInputChange={(event, newInputValue) => {
-                    sceneManager.actions.setGroup(newInputValue);
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="standard"
-                      InputProps={{
-                        ...params.InputProps,
-                        disableUnderline: true,
-                      }}
-                      inputProps={{
-                        ...params.inputProps,
-                        className: css({ textAlign: "center" }),
-                      }}
-                      helperText={t("character-dialog.group")}
-                      disabled={!isGM}
-                      className={css({
-                        borderBottom: `1px solid ${theme.palette.divider}`,
-                        textAlign: "center",
-                        width: "50%",
-                        margin: "0 auto",
-                        display: "flex",
+                <Grid
+                  container
+                  spacing={2}
+                  wrap="nowrap"
+                  justify="center"
+                  alignItems="flex-end"
+                >
+                  <Grid item>
+                    <FateLabel>{t("play-route.group")}</FateLabel>
+                  </Grid>
+                  <Grid item>
+                    <Autocomplete
+                      freeSolo
+                      options={scenesManager.state.groups.filter((g) => {
+                        const currentGroup =
+                          sceneManager.state.scene.group ?? "";
+                        return g.toLowerCase().includes(currentGroup);
                       })}
+                      value={sceneManager.state.scene.group ?? ""}
+                      onChange={(event, newValue) => {
+                        sceneManager.actions.setGroup(newValue);
+                      }}
+                      inputValue={sceneManager.state.scene.group ?? ""}
+                      onInputChange={(event, newInputValue) => {
+                        sceneManager.actions.setGroup(newInputValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="standard"
+                          InputProps={{
+                            ...params.InputProps,
+                            disableUnderline: true,
+                          }}
+                          inputProps={{
+                            ...params.inputProps,
+                            className: css({ textAlign: "center" }),
+                          }}
+                          disabled={!isGM}
+                          className={css({
+                            borderBottom: `1px solid ${theme.palette.divider}`,
+                          })}
+                        />
+                      )}
                     />
-                  )}
-                />
+                  </Grid>
+                </Grid>
               </Box>
             </Collapse>
           </Container>
