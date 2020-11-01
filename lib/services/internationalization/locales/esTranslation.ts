@@ -18,6 +18,7 @@ export const esTranslation: Record<
   "character-dialog.load-template": `Cargar plantilla`,
   "character-dialog.name": `Nombre`,
   "character-dialog.refresh": `Recuperación`,
+  "character-dialog.notes": `Notas`,
   "character-dialog.save": `Guardar`,
   "character-dialog.saved": `Salvado`,
   "character-dialog.skills": `Habilidades`,

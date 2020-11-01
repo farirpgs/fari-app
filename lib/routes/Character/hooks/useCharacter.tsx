@@ -360,6 +360,17 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
+  function setNotes(newNotes: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.notes = newNotes;
+      })
+    );
+  }
+
   function setAspectsLabel(newAspectsLabel: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -426,6 +437,17 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
+  function setNotesLabel(newNotesLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.notesLabel = newNotesLabel;
+      })
+    );
+  }
+
   function sanitizeCharacter() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
@@ -466,12 +488,14 @@ export function useCharacter(c?: ICharacter | undefined) {
       setConsequence,
       removeConsequence,
       udpateRefresh,
+      setNotes,
       setAspectsLabel,
       setSkillsLabel,
       setStuntsLabel,
       setStressTracksLabel,
       setConsequencesLabel,
       setRefreshLabel,
+      setNotesLabel,
       sanitizeCharacter,
     },
   };

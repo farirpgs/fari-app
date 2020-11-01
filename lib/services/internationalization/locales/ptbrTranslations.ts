@@ -13,6 +13,7 @@ export const ptbrTranslation = {
   "character-dialog.load-template": `Carregar Template`,
   "character-dialog.name": `Nome`,
   "character-dialog.refresh": `Recarga`,
+  "character-dialog.notes": `Notas`,
   "character-dialog.save": `Salvar`,
   "character-dialog.saved": `Salvo`,
   "character-dialog.skills": `Perícias`,

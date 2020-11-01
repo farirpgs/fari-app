@@ -197,12 +197,14 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
+  notes: "",
   aspectsLabel: undefined,
   skillsLabel: undefined,
   stuntsLabel: undefined,
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  notesLabel: undefined,
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
@@ -248,12 +250,14 @@ const defaultAcceleratedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
+  notes: "",
   aspectsLabel: undefined,
   skillsLabel: undefined,
   stuntsLabel: undefined,
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  notesLabel: undefined,
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
@@ -278,12 +282,14 @@ const defaultCustomCharacter: ICharacter = {
   ],
   consequences: [{ name: "Consequence", value: "" }],
   refresh: 3,
+  notes: "",
   aspectsLabel: undefined,
   skillsLabel: undefined,
   stuntsLabel: undefined,
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  notesLabel: undefined,
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
@@ -312,7 +318,9 @@ export interface ICharacter {
   stressTracksLabel: string | undefined;
   consequencesLabel: string | undefined;
   refreshLabel: string | undefined;
+  notesLabel: string | undefined;
   refresh: number;
+  notes: string;
   // hidden
   fatePoints: number | undefined;
   playedDuringTurn: boolean | undefined;
