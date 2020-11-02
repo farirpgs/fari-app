@@ -127,10 +127,9 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const theme = useTheme();
   const logger = useLogger();
-  const isLG = useMediaQuery(theme.breakpoints.up("lg"));
+  const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  const isSM = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
@@ -647,7 +646,7 @@ export const Scene: React.FC<IProps> = (props) => {
       },
     ]);
     const aspects = sceneManager.state.scene.sort ? sortedAspectIds : aspectIds;
-    const width = isLG ? "25%" : isMD ? "33%" : isSM ? "50%" : "100%";
+    const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
     return (
       <Box pb="2rem">
         {hasAspects && (
@@ -802,7 +801,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <ButtonGroup
               color="secondary"
               variant="contained"
-              orientation={isSM ? "vertical" : "horizontal"}
+              orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
               <Button
                 onClick={() => {
