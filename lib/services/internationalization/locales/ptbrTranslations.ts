@@ -1,5 +1,10 @@
+import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
+
 /*eslint quotes: ["error", "backtick"]*/
-export const ptbrTranslation = {
+export const ptbrTranslation: Record<
+  IPossibleTranslationKeys,
+  string | undefined
+> = {
   "about-route.meta.description": `Fari é uma aplicação auxiliar para o RPG Fate criado por René-Pier Deshaies-Gélinas`,
   "about-route.meta.title": `Sobre`,
   "changelog-route.meta.description": `Changelog para Fari`,
@@ -9,6 +14,8 @@ export const ptbrTranslation = {
   "character-dialog.close-confirmation": `Você tem certeza que quer fechar sua ficha de personagem e perder todas as modificações?`,
   "character-dialog.consequences": `Consequências`,
   "character-dialog.delete": `Deletar`,
+  "character-dialog.dice": `Dados`,
+  "character-dialog.group": `Grupo`,
   "character-dialog.load-template-confirmation": `Você tem certeza que quer carregar esse template e perder todas as suas mudanças?`,
   "character-dialog.load-template": `Carregar Template`,
   "character-dialog.name": `Nome`,
@@ -34,6 +41,7 @@ export const ptbrTranslation = {
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
   "common.language.pt-BR": `Português Brasileiro`,
+  "common.language.ru": `Русский`,
   "cookie-consent.button": `Eu aceito`,
   "cookie-consent.description": `Este site usa cookies para prover uma ótima experiência de usuário. Usando Fare você aceita o uso de cookies.`,
   "dice-route.button": `Role`,
@@ -79,10 +87,10 @@ export const ptbrTranslation = {
   "menu.about": `Sobre`,
   "menu.characters": `Personagem`,
   "menu.dice": `Dados`,
+  "menu.draw": `Desenhar`,
   "menu.help": `Ajuda`,
   "menu.play": `Jogar`,
   "menu.scenes": `Cenas`,
-  "menu.draw": `Desenhar`,
   "play-route.add-aspect": `Aspecto`,
   "play-route.add-bad-guy": `Inimigo`,
   "play-route.add-boost": `Impulso`,
@@ -106,14 +114,15 @@ export const ptbrTranslation = {
   "play-route.error.webRTC": `O navegador que você está usando atualmente não é compatível com Fari para usar suas funcionalidades online. Escolha um navegador diferente, como Google Chrome ou Firefox.`,
   "play-route.fate-points": `Pontos de Destino`,
   "play-route.fp": `P.D.`,
+  "play-route.group": `Grupo`,
   "play-route.init": `Iniciativa`,
   "play-route.initiative-tracker": `Acompanhamento de Iniciativa`,
   "play-route.join-as": `Entrar como ✨ {{playerName}} ✨`,
   "play-route.join-error": `O jogo no qual você está tentando se conectar não existe`,
   "play-route.join": `Entrar`,
   "play-route.leave-prompt": `Você tem certeza que quer sair e resetar sua cena?`,
-  "play-route.load-scene": `Cena`,
   "play-route.load-scene-as-template": `Cena como Template`,
+  "play-route.load-scene": `Cena`,
   "play-route.name": `Nome`,
   "play-route.new-scene": `Nova Cena`,
   "play-route.no-aspects": `A cena não tem aspectos ainda.`,
@@ -125,6 +134,7 @@ export const ptbrTranslation = {
   "play-route.roll": `Rolar`,
   "play-route.save-scene": `Salvar`,
   "play-route.scene-saved": `Cena Salva`,
+  "play-route.show-character-cards": `Mostrar cartas de personagens`,
   "play-route.sort": `Organizar`,
   "play-route.undo-drawing": `Desfazer`,
   "player-row.add-fate-point": `Adicionar Ponto de Destino`,
@@ -194,4 +204,4 @@ export const ptbrTranslation = {
   // "Aspect": `Aspecto`,
   // "Stunt": `Façanha`,
   // "Skill": `Perícia`,
-} as const;
+};

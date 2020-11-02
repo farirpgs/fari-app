@@ -19,31 +19,29 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PersonIcon from "@material-ui/icons/Person";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
-import React, { useState } from "react";
-import { ICharacter } from "../../../../contexts/CharactersContext/CharactersContext";
+import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
-import { useFudgeDice } from "../../../../hooks/useFudgeDice/useFudgeDice";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "../../../../routes/Character/components/CharacterDialog";
+import { DiceBox } from "../../../DiceBox/DiceBox";
 
 export const PlayerRow: React.FC<{
   player: IPlayer;
   isGM: boolean;
   isMe: boolean;
   offline: boolean;
-  onDiceRoll(): void;
+  onDiceRoll(options: IRollDiceOptions): void;
   onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
   onFatePointsChange(fatePoints: number): void;
   onPlayerRemove(): void;
-  onCharacterUpdate(character: ICharacter): void;
+  onCharacterDialogOpen(): void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const diceManager = useFudgeDice(props.player.rolls);
   const shouldRenderOfflinePlayerRemoveButton =
     props.isGM && props.player.offline && !props.isMe;
   const shouldHighlight = props.isMe && !props.offline;
@@ -53,7 +51,6 @@ export const PlayerRow: React.FC<{
     ? theme.palette.primary.main
     : textColor.disabled;
 
-  const [characterDialogOpen, setCharacterDialogOpen] = useState(false);
   const name = props.player?.playerName || props.player?.character?.name || "";
   const hasCharacterSheet = !!props.player.character;
 
@@ -73,30 +70,8 @@ export const PlayerRow: React.FC<{
   const controlsRowStyle = css({
     padding: "0 0.7rem",
   });
-  const diceTextColors = useTextColors(theme.palette.background.default);
   const defaultTableCellStyle = css({ border: "none" });
   const borderTableCellStyle = css({ padding: "0" });
-  const diceStyle = css({
-    fontSize: "1.2rem",
-    lineHeight: Font.lineHeight(1.2),
-    color: diceManager.state.color,
-    background: theme.palette.background.default,
-    border: `.1rem solid ${theme.palette.primary.main}`,
-    width: "2rem",
-    borderRadius: "4px",
-    height: "2rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    boxShadow:
-      "2px 2px 2px 0px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-  });
-  const diceRollingAnimationStyle = css({
-    animationName: "spin",
-    animationDuration: "250ms",
-    animationIterationCount: "infinite",
-    animationTimingFunction: "linear",
-  });
 
   const fatePointsStyle = css({
     background:
@@ -110,29 +85,13 @@ export const PlayerRow: React.FC<{
     margin: "0 auto",
   });
 
-  function roll() {
-    if (diceManager.state.rolling) {
-      return;
-    }
-    props.onDiceRoll();
+  function roll(options: IRollDiceOptions) {
+    props.onDiceRoll(options);
     logger.info("ScenePlayer:onDiceRoll");
   }
+
   return (
     <>
-      <CharacterDialog
-        readonly={!canControl}
-        open={characterDialogOpen}
-        character={props.player.character}
-        dialog={true}
-        onSave={(updatedCharacter) => {
-          props.onCharacterUpdate(updatedCharacter);
-          setCharacterDialogOpen(false);
-        }}
-        onClose={() => {
-          setCharacterDialogOpen(false);
-        }}
-      />
-
       <TableRow
         selected={false}
         className={cx({
@@ -206,29 +165,16 @@ export const PlayerRow: React.FC<{
         </TableCell>
         <TableCell className={cx(playerInfoCellStyle)} align="right">
           <Box display="flex" justifyContent="flex-end">
-            <Tooltip title={diceManager.state.tooltip}>
-              <span>
-                <ButtonBase
-                  className={css({
-                    borderRadius: "4px%",
-                    color: diceTextColors.primary,
-                  })}
-                  disabled={!canControl || diceManager.state.rolling}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    roll();
-                  }}
-                >
-                  <Typography
-                    className={cx(diceStyle, {
-                      [diceRollingAnimationStyle]: diceManager.state.rolling,
-                    })}
-                  >
-                    {diceManager.state.label}
-                  </Typography>
-                </ButtonBase>
-              </span>
-            </Tooltip>
+            <DiceBox
+              rolls={props.player.rolls}
+              size="2rem"
+              fontSize="1.2rem"
+              borderSize=".15rem"
+              disabled={!canControl}
+              onClick={() => {
+                roll({});
+              }}
+            />
           </Box>
         </TableCell>
       </TableRow>
@@ -260,7 +206,7 @@ export const PlayerRow: React.FC<{
                     size="small"
                     disabled={!hasCharacterSheet}
                     onClick={(e) => {
-                      setCharacterDialogOpen(true);
+                      props.onCharacterDialogOpen();
                       logger.info("ScenePlayer:onCharacterDialogOpen");
                     }}
                   >

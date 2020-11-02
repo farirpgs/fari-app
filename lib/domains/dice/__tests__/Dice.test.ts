@@ -15,7 +15,7 @@ function fudgeDiceShouldBeFair() {
   const numberOfTests = 10000;
 
   for (let i = 0; i < numberOfTests; i++) {
-    const diceRoll = Dice.roll4DF();
+    const diceRoll = Dice.roll4DF({});
     const currentCount = results[diceRoll.total] ?? 0;
     results[diceRoll.total] = currentCount + 1;
   }

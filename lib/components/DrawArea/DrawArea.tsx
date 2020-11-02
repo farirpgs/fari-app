@@ -2,7 +2,7 @@ import { Dialog } from "@material-ui/core";
 import React, { useState } from "react";
 import { SlideUpTransition } from "../SlideUpTransition/SlideUpTransition";
 import { DrawObjects } from "./DrawObjects";
-import { IDrawAreaObjects } from "./hooks/useDrawing";
+import { IDrawAreaObjects, useDrawing } from "./hooks/useDrawing";
 
 interface IProps {
   objects: IDrawAreaObjects | undefined;
@@ -13,6 +13,11 @@ interface IProps {
 
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
   const [fullScreen, setFullScreen] = useState(false);
+  const drawingManager = useDrawing({
+    objects: props.objects,
+    readonly: props.readonly,
+    onChange: props.onChange,
+  });
 
   if (!props.objects) {
     return null;
@@ -22,7 +27,7 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
     <>
       {!fullScreen && (
         <DrawObjects
-          objects={props.objects}
+          drawingManager={drawingManager}
           readonly={props.readonly}
           fullScreen={fullScreen}
           onChange={props.onChange}
@@ -40,7 +45,7 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
         TransitionComponent={SlideUpTransition}
       >
         <DrawObjects
-          objects={props.objects}
+          drawingManager={drawingManager}
           readonly={props.readonly}
           fullScreen={fullScreen}
           onChange={props.onChange}

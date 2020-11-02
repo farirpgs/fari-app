@@ -1,69 +1,35 @@
-import {
-  Box,
-  Button,
-  ButtonBase,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
-import { css, cx } from "emotion";
+import { Box, Button, Typography } from "@material-ui/core";
+import { css } from "emotion";
 import React, { useEffect, useState } from "react";
+import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";
-import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
-import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DiceRoute = () => {
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([Dice.roll4DF()]);
-  const diceManager = useFudgeDice(rolls);
+  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
-  const theme = useTheme();
-  const diceTextColors = useTextColors(theme.palette.background.paper);
   const { t } = useTranslate();
   const logger = useLogger();
 
   useEffect(() => {
     logger.info("Route:Dice");
+    roll();
   }, []);
 
   function roll() {
-    if (diceManager.state.rolling) {
-      return;
-    }
     setRolls((draft) => {
-      const newRoll = Dice.roll4DF();
+      const newRoll = Dice.roll4DF({});
       logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });
   }
 
-  const diceStyle = css({
-    fontSize: "5rem",
-    lineHeight: Font.lineHeight(5),
-    color: diceManager.state.color,
-    background: theme.palette.background.paper,
-    border: `.5rem solid ${theme.palette.primary.main}`,
-    borderRadius: "4px",
-    width: "7rem",
-    height: "7rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    boxShadow:
-      "3px 5px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-  });
-  const diceRollingAnimationStyle = css({
-    animationName: "spin",
-    animationDuration: "250ms",
-    animationIterationCount: "infinite",
-    animationTimingFunction: "linear",
-  });
   return (
     <Page>
       <PageMeta
@@ -94,26 +60,18 @@ export const DiceRoute = () => {
             {t("dice-route.button")}
           </Button>
         </Box>
-        <Box display="flex" justifyContent="center" pt="3rem">
-          <Tooltip title={diceManager.state.tooltip}>
-            <ButtonBase
-              className={css({
-                borderRadius: "50%",
-                color: diceTextColors.primary,
-              })}
+        <Box pt="3rem">
+          <Box display="flex" justifyContent="center" pt="3rem">
+            <DiceBox
+              rolls={rolls}
+              size="7rem"
+              fontSize="5rem"
+              borderSize=".5rem"
               onClick={() => {
                 roll();
               }}
-            >
-              <Typography
-                className={cx(diceStyle, {
-                  [diceRollingAnimationStyle]: diceManager.state.rolling,
-                })}
-              >
-                {diceManager.state.label}
-              </Typography>
-            </ButtonBase>
-          </Tooltip>
+            />
+          </Box>
         </Box>
         <Box
           display="flex"

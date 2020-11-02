@@ -77,6 +77,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
         id: s.id,
         name: s.name,
         lastUpdated: s.lastUpdated,
+        group: s.group,
       })}
       mode={scenesManager.state.mode}
       onItemClick={onItemClick}

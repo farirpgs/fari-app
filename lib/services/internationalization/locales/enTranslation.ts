@@ -9,6 +9,8 @@ export const enTranslation = {
   "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
   "character-dialog.consequences": `Consequences`,
   "character-dialog.delete": `Delete`,
+  "character-dialog.dice": `Dice`,
+  "character-dialog.group": `Group`,
   "character-dialog.load-template-confirmation": `Are you sure you want to load this template and lose all your changes ?`,
   "character-dialog.load-template": `Load Template`,
   "character-dialog.name": `Name`,
@@ -34,6 +36,7 @@ export const enTranslation = {
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
   "common.language.pt-BR": `Português Brasileiro`,
+  "common.language.ru": `Русский`,
   "cookie-consent.button": `I accept`,
   "cookie-consent.description": `This site uses cookies to provide you with a great user experience. By using Fari, you accept our use of cookies.`,
   "dice-route.button": `Roll`,
@@ -106,6 +109,7 @@ export const enTranslation = {
   "play-route.error.webRTC": `The browser you are currently using is not supported by Fari to use its online functionalities. Please choose a different browser like Google Chrome or Firefox.`,
   "play-route.fate-points": `Fate Points`,
   "play-route.fp": `F.P.`,
+  "play-route.group": `Group`,
   "play-route.init": `Init`,
   "play-route.initiative-tracker": `Initiative Tracker`,
   "play-route.join-as": `Join as ✨ {{playerName}} ✨`,
@@ -125,6 +129,7 @@ export const enTranslation = {
   "play-route.roll": `Roll`,
   "play-route.save-scene": `Save`,
   "play-route.scene-saved": `Saved Scene`,
+  "play-route.show-character-cards": `Show Character Cards`,
   "play-route.sort": `Sort`,
   "play-route.undo-drawing": `Undo`,
   "player-row.add-fate-point": `Add Fate Point`,
@@ -194,4 +199,4 @@ export const enTranslation = {
   // "Aspect": `Aspect`,
   // "Stunt": `Stunt`,
   // "Skill": `Skill`,
-} as const;
+};

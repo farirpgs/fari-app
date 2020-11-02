@@ -1,8 +1,9 @@
 import produce from "immer";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { useGroups } from "../../hooks/useGroups/useGroups";
 
 export enum CharacterType {
   CoreCondensed = "CoreCondensed",
@@ -39,9 +40,13 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return [];
   });
 
-  const sortedCharacters = arraySort(characters, [
-    (c) => ({ value: c.lastUpdated, direction: "desc" }),
-  ]);
+  const sortedCharacters = useMemo(() => {
+    return arraySort(characters, [
+      (c) => ({ value: c.lastUpdated, direction: "desc" }),
+    ]);
+  }, [characters]);
+
+  const groups = useGroups(sortedCharacters, (c) => c.group);
 
   useEffect(() => {
     // sync local storage
@@ -125,6 +130,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       mode,
       characters: sortedCharacters,
       managerCallback: managerCallback.current,
+      groups: groups,
     },
     actions: {
       openManager,
@@ -140,6 +146,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
 const defaultCondensedCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [
     { name: "High Concept", value: "" },
     { name: "Trouble", value: "" },
@@ -214,6 +221,7 @@ const defaultCondensedCharacter: ICharacter = {
 const defaultAcceleratedCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [
     { name: "High Concept", value: "" },
     { name: "Trouble", value: "" },
@@ -267,6 +275,7 @@ const defaultAcceleratedCharacter: ICharacter = {
 const defaultCustomCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [{ name: "Aspect", value: "" }],
   stunts: [{ name: "Stunt", value: "" }],
   skills: [{ name: "Skill", value: "" }],
@@ -318,9 +327,10 @@ export interface ICharacter {
   stressTracksLabel: string | undefined;
   consequencesLabel: string | undefined;
   refreshLabel: string | undefined;
-  refresh: number;
   notesLabel: string | undefined;
   notes: string | undefined;
+  group: string | undefined;
+  refresh: number;
   // hidden
   fatePoints: number | undefined;
   playedDuringTurn: boolean | undefined;

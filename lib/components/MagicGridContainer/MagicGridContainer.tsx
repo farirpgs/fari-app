@@ -18,6 +18,8 @@ export const MagicGridContainer: React.FC<{
       magicGrid.current = new MagicGrid({
         container: $gridContainer.current!,
         items: props.items,
+        // maxColumns: 5, // Optional. Maximum number of columns. Default: Infinite.
+        // useMin: true, // Optional. Prioritize shorter columns when positioning items? Default: false.
         gutter: props.gutterPx ?? defaultMagicGridGutter,
       });
       magicGrid.current.positionItems();

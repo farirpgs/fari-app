@@ -1,5 +1,10 @@
+import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
+
 /*eslint quotes: ["error", "backtick"]*/
-export const frTranslation = {
+export const frTranslation: Record<
+  IPossibleTranslationKeys,
+  string | undefined
+> = {
   "about-route.meta.description": `Fari est une application pour jouer a jeu de rôle Fate, créée par René-Pier-Gélinas Deshaies`,
   "about-route.meta.title": `À propos`,
   "changelog-route.meta.description": `Journal des modifications pour Fari`,
@@ -9,6 +14,8 @@ export const frTranslation = {
   "character-dialog.close-confirmation": `Êtes-vous sûr de vouloir fermer votre fiche de personnage et perdre toutes vos modifications?`,
   "character-dialog.consequences": `Conséquences`,
   "character-dialog.delete": `Supprimer`,
+  "character-dialog.dice": `Dés`,
+  "character-dialog.group": `Groupe`,
   "character-dialog.load-template-confirmation": `Êtes-vous sûr que vous voulez charger ce gabarit et de perdre toutes vos modifications?`,
   "character-dialog.load-template": `Charger le gabarit`,
   "character-dialog.name": `Nom`,
@@ -34,6 +41,7 @@ export const frTranslation = {
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
   "common.language.pt-BR": `Português Brasileiro`,
+  "common.language.ru": `Русский`,
   "cookie-consent.button": `J'accepte`,
   "cookie-consent.description": `Ce site utilise des cookies pour vous fournir une meilleur expérience utilisateur. En utilisant Fari, vous acceptez notre utilisation des cookies.`,
   "dice-route.button": `Lancer`,
@@ -79,10 +87,10 @@ export const frTranslation = {
   "menu.about": `À propos`,
   "menu.characters": `Personnages`,
   "menu.dice": `Dé`,
+  "menu.draw": `Dessiner`,
   "menu.help": `Aide`,
   "menu.play": `Jouer`,
   "menu.scenes": `Scènes`,
-  "menu.draw": `Dessiner`,
   "play-route.add-aspect": `Aspect`,
   "play-route.add-bad-guy": `Adversaire`,
   "play-route.add-boost": `Boost`,
@@ -106,14 +114,15 @@ export const frTranslation = {
   "play-route.error.webRTC": `Le navigateur que vous utilisez actuellement n'est pas pris en charge par Fari pour utiliser ses fonctionnalités en ligne. Veuillez choisir un autre navigateur comme Google Chrome ou Firefox.`,
   "play-route.fate-points": `Points Fate`,
   "play-route.fp": `P.F.`,
+  "play-route.group": `Groupe`,
   "play-route.init": `Init`,
   "play-route.initiative-tracker": `Initiative`,
-  "play-route.join-as": `Rejoingnez comme ✨ {{}} playername ✨`,
+  "play-route.join-as": `Rejoingnez comme ✨ {{playername}} ✨`,
   "play-route.join-error": `La partie que vous essayez de joindre n'existe pas`,
   "play-route.join": `Joindre`,
   "play-route.leave-prompt": `Etes-vous sûr de vouloir quitter et réinitialiser votre scène?`,
-  "play-route.load-scene": `Charger`,
   "play-route.load-scene-as-template": `Charger comme gabarit`,
+  "play-route.load-scene": `Charger`,
   "play-route.name": `Nom`,
   "play-route.new-scene": `Nouvelle Scène`,
   "play-route.no-aspects": `La scène n'a pas encore d'aspects.`,
@@ -125,6 +134,7 @@ export const frTranslation = {
   "play-route.roll": `Lancer`,
   "play-route.save-scene": `Enregistrer`,
   "play-route.scene-saved": `Scène enregistré`,
+  "play-route.show-character-cards": `Afficher les cartes de personnages`,
   "play-route.sort": `Trier`,
   "play-route.undo-drawing": `Annuler`,
   "player-row.add-fate-point": `Ajouter un point Fate`,
@@ -194,4 +204,4 @@ export const frTranslation = {
   // "Aspect": `Aspect`,
   // "Stunt": `Stunt`,
   // "Skill": `Skill`,
-} as const;
+};

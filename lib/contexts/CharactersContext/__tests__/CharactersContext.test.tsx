@@ -15,6 +15,7 @@ describe("migrateCharacters", () => {
         const v1Char: ICharacter = {
           id: "",
           name: "",
+          group: undefined,
           aspects: [],
           stunts: [],
           skills: [],

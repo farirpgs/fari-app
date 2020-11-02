@@ -40,6 +40,7 @@ import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
 
 let gameIdSingleton: string | undefined = undefined;
+const FariMaxWidth = "1920px";
 
 export enum LiveMode {
   Connecting,
@@ -99,7 +100,7 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: "1440px",
+                  maxWidth: FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
                   marginTop: "2rem",
@@ -203,7 +204,7 @@ export const Page: React.FC<{
           <Toolbar
             className={css({
               margin: "0 auto",
-              maxWidth: "1440px",
+              maxWidth: FariMaxWidth,
               minHeight: "72px",
               width: "100%",
               padding: "1rem",
@@ -270,9 +271,11 @@ export const Page: React.FC<{
                     )}
                   </Grid>
                   <Grid item>
-                    <Typography variant="subtitle1">
-                      {sanitizeContentEditable(props.liveLabel)}
-                    </Typography>
+                    <Box maxWidth="150px">
+                      <Typography variant="subtitle1" noWrap>
+                        {sanitizeContentEditable(props.liveLabel)}
+                      </Typography>
+                    </Box>
                   </Grid>
                 </Grid>
               </Box>

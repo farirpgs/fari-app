@@ -1,5 +1,24 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
+## 3.3.0 (...) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+
+- feat: A new way to group Scenes or Character sheets by campaigns
+- feat: It's now possible to click on a skill to roll + skill modifier
+- feat: Russian Localizations #122 👏 [hattivatt](https://github.com/hattivatt)
+- feat: share draw area controls between fullscreen and normal mode #147
+- feat: support for bigger resolutions
+
+## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
+
+- feat: A brand new Drawing Area with support for multiple shapes, colors and even player tokens. 👏 [ddkn](https://github.com/ddkn) for the help with the player token designs
+- feat: Brazilian Portuguese translations. 👏 [pedrogsribeiro](https://github.com/pedrogsribeiro) for the translations
+- feat: French translations for the About page. 👏 [corrinachow](https://github.com/corrinachow) for the translations
+- fix: Various bug fixes and minor improvements
+- tests: thanks you guys for the prerelease testing!
+  - [handcraftedsource](https://github.com/handcraftedsource)
+  - [player-03](https://github.com/player-03)
+  - [ddkn](https://github.com/ddkn)
+
 ## 3.0.0 (Aug 24, 2020) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
 
 - feat: Scenes can now be prepared in advance, saved and then loaded directly during a play session.

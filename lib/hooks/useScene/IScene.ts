@@ -31,12 +31,14 @@ export interface IAspect {
 export interface IScene {
   id: string;
   name: string;
+  group: string | undefined;
   aspects: Record<string, IAspect>;
   gm: IPlayer;
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;
   sort: boolean;
+  showCharacterCards: boolean | undefined;
   drawAreaObjects: IDrawAreaObjects;
   version: number;
   lastUpdated: number;

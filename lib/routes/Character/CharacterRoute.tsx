@@ -8,6 +8,8 @@ import {
   ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./components/CharacterDialog";
@@ -20,10 +22,19 @@ export const CharacterRoute: React.FC<{
   const { t } = useTranslate();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
+  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
   const logger = useLogger();
+
+  function roll(options: IRollDiceOptions) {
+    setRolls((draft) => {
+      const newRoll = Dice.roll4DF(options);
+      logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
+      return [newRoll, ...draft];
+    });
+  }
 
   useEffect(() => {
     logger.info("Route:Character");
@@ -56,6 +67,10 @@ export const CharacterRoute: React.FC<{
           open={!!selectedCharacter}
           character={selectedCharacter}
           dialog={dialogMode || false}
+          rolls={rolls}
+          onRoll={(bonus) => {
+            roll(bonus);
+          }}
           onSave={(newCharacter) => {
             charactersManager.actions.upsert(newCharacter);
           }}
