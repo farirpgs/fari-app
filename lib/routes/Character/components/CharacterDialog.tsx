@@ -250,8 +250,8 @@ export const CharacterDialog: React.FC<{
           {renderAspects()}
           {renderStunts()}
           {renderRefresh()}
-          {renderNotes()}
           {renderDice()}
+          {renderNotes()}
         </Grid>
         <Grid
           item
@@ -444,6 +444,7 @@ export const CharacterDialog: React.FC<{
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
+                          border={advanced}
                           value={aspect.name}
                           onChange={(value) => {
                             characterManager.actions.setAspectName(
@@ -538,6 +539,7 @@ export const CharacterDialog: React.FC<{
                 <FateLabel display="inline">
                   <ContentEditable
                     readonly={!advanced}
+                    border={advanced}
                     value={skill.name}
                     onClick={() => {
                       const bonus = parseInt(skill.value) || 0;
@@ -568,7 +570,7 @@ export const CharacterDialog: React.FC<{
                       />
                     </Typography>
                   </Grid>
-                  <Grid item>
+                  <Grid item className={css({ flex: "1 0 auto" })}>
                     {advanced ? (
                       skillLabel
                     ) : (
@@ -660,6 +662,7 @@ export const CharacterDialog: React.FC<{
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
+                          border={advanced}
                           value={stunt.name}
                           onChange={(value) => {
                             characterManager.actions.setStuntName(index, value);
@@ -756,6 +759,7 @@ export const CharacterDialog: React.FC<{
               >
                 <ContentEditable
                   readonly={!advanced}
+                  border={advanced}
                   value={characterManager.state.character!.refresh.toString()}
                   onChange={(value, e) => {
                     const intValue = parseInt(value);
@@ -781,21 +785,23 @@ export const CharacterDialog: React.FC<{
           characterManager.actions.setNotesLabel
         )}
         <Box className={sheetContentStyle}>
-          <Typography>
-            <ContentEditable
-              border
-              readonly={props.readonly}
-              value={characterManager.state.notes || ""}
-              onChange={(value) => {
-                characterManager.actions.setNotes(value);
-              }}
-            />
-          </Typography>       
+          <Box py="1rem">
+            <Typography>
+              <ContentEditable
+                border
+                readonly={props.readonly}
+                value={characterManager.state.character?.notes || ""}
+                onChange={(value) => {
+                  characterManager.actions.setNotes(value);
+                }}
+              />
+            </Typography>
+          </Box>
         </Box>
       </>
     );
   }
-        
+
   function renderDice() {
     return (
       <>
@@ -803,9 +809,10 @@ export const CharacterDialog: React.FC<{
         <Box className={sheetContentStyle}>
           <Grid container justify="center">
             <Grid item>
-              <Box pt="1rem">
+              <Box py="1rem">
                 <DiceBox
                   rolls={props.rolls ?? []}
+                  showDetails
                   size="5rem"
                   fontSize="2rem"
                   borderSize=".2rem"
@@ -861,6 +868,7 @@ export const CharacterDialog: React.FC<{
                     <FateLabel display="inline">
                       <ContentEditable
                         readonly={!advanced}
+                        border={advanced}
                         value={stressTrack.name}
                         onChange={(value) => {
                           characterManager.actions.setStressTrackName(
@@ -966,6 +974,7 @@ export const CharacterDialog: React.FC<{
                           <FateLabel className={css({ textAlign: "center" })}>
                             <ContentEditable
                               readonly={!advanced}
+                              border={advanced}
                               value={stressBox.label}
                               onChange={(value) => {
                                 characterManager.actions.setStressBoxLabel(
@@ -1007,6 +1016,7 @@ export const CharacterDialog: React.FC<{
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
+                          border={advanced}
                           value={consequence.name}
                           onChange={(value) => {
                             characterManager.actions.setConsequenceName(
