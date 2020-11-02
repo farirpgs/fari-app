@@ -36,6 +36,8 @@ describe("migrateCharacters", () => {
           refreshLabel: undefined,
           fatePoints: undefined,
           playedDuringTurn: undefined,
+          notes: undefined,
+          notesLabel: undefined,
           version: 1,
           lastUpdated: 0,
         };

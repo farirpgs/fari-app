@@ -19,6 +19,7 @@ export const ruTranslation: Record<
   "character-dialog.load-template-confirmation": `Вы уверены, что хотите загрузить этот шаблон и потерять все изменения ?`,
   "character-dialog.load-template": `Загрузить Шаблон`,
   "character-dialog.name": `Имя`,
+  "character-dialog.notes": `Примечания`,
   "character-dialog.refresh": `Обновление`,
   "character-dialog.save": `Сохранить`,
   "character-dialog.saved": `Сохранено`,
