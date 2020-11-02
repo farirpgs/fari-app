@@ -626,7 +626,7 @@ export const CharacterDialog: React.FC<{
             <ContentEditable
               border
               readonly={props.readonly}
-              value="foobar"
+              value={characterManager.state.notes || ""}
               onChange={(value) => {
                 characterManager.actions.setNotes(value);
               }}
