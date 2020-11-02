@@ -1,4 +1,10 @@
-import { Box, ButtonBase, Tooltip, Typography } from "@material-ui/core";
+import {
+  Box,
+  ButtonBase,
+  Collapse,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
 import useTheme from "@material-ui/core/styles/useTheme";
 import { css, cx } from "emotion";
 import React from "react";
@@ -14,6 +20,7 @@ type IProps = {
   borderSize: string;
   borderColor?: string;
   disabled?: boolean;
+  showDetails?: boolean;
   onClick: () => void;
 };
 
@@ -54,27 +61,44 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
 
+  const tooltipContent = diceManager.state.tooltipTitle && (
+    <Box textAlign="center">
+      {diceManager.state.tooltipTitle && (
+        <Box>{diceManager.state.tooltipTitle}</Box>
+      )}
+      {diceManager.state.tooltipDescription && (
+        <Box>{diceManager.state.tooltipDescription}</Box>
+      )}
+    </Box>
+  );
+
+  if (props.showDetails) {
+    return (
+      <Box display="flex" flexDirection="column" alignItems="center">
+        {renderDice()}
+        {renderDetails()}
+      </Box>
+    );
+  }
+
   return (
-    <Tooltip
-      title={
-        diceManager.state.tooltipTitle && (
-          <Box textAlign="center">
-            {diceManager.state.tooltipTitle && (
-              <Box>{diceManager.state.tooltipTitle}</Box>
-            )}
-            {diceManager.state.tooltipDescription && (
-              <Box>{diceManager.state.tooltipDescription}</Box>
-            )}
-          </Box>
-        )
-      }
-      classes={{
-        tooltip: css({
-          fontSize: "1.2rem",
-          fontFamily: "monospace",
-        }),
-      }}
-    >
+    <Box display="flex" flexDirection="column" alignItems="center">
+      <Tooltip
+        title={tooltipContent}
+        classes={{
+          tooltip: css({
+            fontSize: "1.2rem",
+            fontFamily: "monospace",
+          }),
+        }}
+      >
+        {renderDice()}
+      </Tooltip>
+    </Box>
+  );
+
+  function renderDice() {
+    return (
       <span>
         <ButtonBase
           className={css({
@@ -96,6 +120,26 @@ export const DiceBox: React.FC<IProps> = (props) => {
           </Typography>
         </ButtonBase>
       </span>
-    </Tooltip>
-  );
+    );
+  }
+
+  function renderDetails() {
+    if (!props.showDetails) {
+      return null;
+    }
+
+    return (
+      <Collapse in={!!tooltipContent}>
+        <Box
+          pt="1rem"
+          className={css({
+            fontSize: "1.2rem",
+            fontFamily: "monospace",
+          })}
+        >
+          {tooltipContent}
+        </Box>
+      </Collapse>
+    );
+  }
 };

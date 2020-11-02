@@ -64,6 +64,7 @@ export const DiceRoute = () => {
           <Box display="flex" justifyContent="center" pt="3rem">
             <DiceBox
               rolls={rolls}
+              showDetails
               size="7rem"
               fontSize="5rem"
               borderSize=".5rem"
