@@ -127,7 +127,10 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const theme = useTheme();
   const logger = useLogger();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLG = useMediaQuery(theme.breakpoints.up("lg"));
+  const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isSM = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isXS = useMediaQuery(theme.breakpoints.down("xs"));
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
@@ -253,10 +256,10 @@ export const Scene: React.FC<IProps> = (props) => {
             </Grid>
           ) : (
             <Grid container spacing={2}>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={4} lg={3}>
                 {renderSidePanel()}
               </Grid>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={8} lg={9}>
                 {renderCharacterCards()}
                 {renderAspects()}
               </Grid>
@@ -644,6 +647,7 @@ export const Scene: React.FC<IProps> = (props) => {
       },
     ]);
     const aspects = sceneManager.state.scene.sort ? sortedAspectIds : aspectIds;
+    const width = isLG ? "25%" : isMD ? "33%" : isSM ? "50%" : "100%";
     return (
       <Box pb="2rem">
         {hasAspects && (
@@ -654,7 +658,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   key={aspectId}
                   className={cx(
                     css({
-                      width: isSmall ? "100%" : "33%",
+                      width: width,
                       padding: "0 .5rem 1.5rem .5rem",
                     })
                   )}
@@ -737,7 +741,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   <Grid item>
                     <FateLabel>{t("play-route.group")}</FateLabel>
                   </Grid>
-                  <Grid item>
+                  <Grid item xs={8} sm={4}>
                     <Autocomplete
                       freeSolo
                       options={scenesManager.state.groups.filter((g) => {
@@ -763,7 +767,7 @@ export const Scene: React.FC<IProps> = (props) => {
                           }}
                           inputProps={{
                             ...params.inputProps,
-                            className: css({ textAlign: "center" }),
+                            className: css({ padding: "2px" }),
                           }}
                           disabled={!isGM}
                           className={css({
@@ -798,7 +802,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <ButtonGroup
               color="secondary"
               variant="contained"
-              orientation={isSmall ? "vertical" : "horizontal"}
+              orientation={isSM ? "vertical" : "horizontal"}
             >
               <Button
                 onClick={() => {

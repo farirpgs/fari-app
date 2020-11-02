@@ -5,6 +5,8 @@
 - feat: A new way to group Scenes or Character sheets by campaigns
 - feat: It's now possible to click on a skill to roll + skill modifier
 - feat: Russian Localizations #122 👏 [hattivatt](https://github.com/hattivatt)
+- feat: share draw area controls between fullscreen and normal mode #147
+- feat: support for bigger resolutions
 
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
