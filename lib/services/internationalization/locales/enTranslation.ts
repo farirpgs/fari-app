@@ -15,6 +15,7 @@ export const enTranslation = {
   "character-dialog.load-template": `Load Template`,
   "character-dialog.name": `Name`,
   "character-dialog.refresh": `Refresh`,
+  "character-dialog.notes": `Notes`,
   "character-dialog.save": `Save`,
   "character-dialog.saved": `Saved`,
   "character-dialog.skills": `Skills`,

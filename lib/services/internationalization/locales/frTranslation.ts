@@ -20,6 +20,7 @@ export const frTranslation: Record<
   "character-dialog.load-template": `Charger le gabarit`,
   "character-dialog.name": `Nom`,
   "character-dialog.refresh": `Rafraîchir`,
+  "character-dialog.notes": `Notes`,
   "character-dialog.save": `Sauver`,
   "character-dialog.saved": `Enregistré`,
   "character-dialog.skills": `Compétences`,

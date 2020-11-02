@@ -250,6 +250,7 @@ export const CharacterDialog: React.FC<{
           {renderAspects()}
           {renderStunts()}
           {renderRefresh()}
+          {renderNotes()}
           {renderDice()}
         </Grid>
         <Grid
@@ -771,6 +772,30 @@ export const CharacterDialog: React.FC<{
     );
   }
 
+  function renderNotes() {
+    return (
+      <>
+        {renderSheetHeader(
+          characterManager.state.character?.notesLabel ??
+            t("character-dialog.notes"),
+          characterManager.actions.setNotesLabel
+        )}
+        <Box className={sheetContentStyle}>
+          <Typography>
+            <ContentEditable
+              border
+              readonly={props.readonly}
+              value={characterManager.state.notes || ""}
+              onChange={(value) => {
+                characterManager.actions.setNotes(value);
+              }}
+            />
+          </Typography>       
+        </Box>
+      </>
+    );
+  }
+        
   function renderDice() {
     return (
       <>
