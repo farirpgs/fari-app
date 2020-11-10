@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from "react";
 const DOMPurifyOptions = {
   ALLOWED_TAGS: ["br", "img"],
 };
+const ContentEditableDelay = 300;
 
 export const ContentEditable: React.FC<{
   value: string;
@@ -19,6 +20,14 @@ export const ContentEditable: React.FC<{
 }> = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLSpanElement | null>(null);
+  const timeout = useRef<any | undefined>(undefined);
+  const latestProps = useRef(props);
+
+  const hasCursorPointer = props.readonly && props.onClick;
+
+  useEffect(() => {
+    latestProps.current = props;
+  });
 
   useEffect(() => {
     if ($ref.current) {
@@ -42,14 +51,17 @@ export const ContentEditable: React.FC<{
 
   function onChange(e: any) {
     if ($ref.current) {
+      clearTimeout(timeout.current);
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
         DOMPurifyOptions
       );
-      props.onChange?.(cleanHTML, e);
+
+      timeout.current = setTimeout(() => {
+        latestProps.current.onChange?.(cleanHTML, e);
+      }, ContentEditableDelay);
     }
   }
-  const hasCursorPointer = props.readonly && props.onClick;
 
   return (
     <span
