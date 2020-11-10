@@ -1,5 +1,5 @@
 import produce from "immer";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
@@ -41,12 +41,14 @@ export function useScenes(props?: { localStorage: Storage }) {
     return [];
   });
 
-  const sortedScenes = arraySort(scenes, [
-    (s) => {
-      const lastUpdate = getUnixFrom(s.lastUpdated);
-      return { value: lastUpdate, direction: "desc" };
-    },
-  ]);
+  const sortedScenes = useMemo(() => {
+    return arraySort(scenes, [
+      (s) => {
+        const lastUpdate = getUnixFrom(s.lastUpdated);
+        return { value: lastUpdate, direction: "desc" };
+      },
+    ]);
+  }, [scenes]);
 
   const groups = useGroups(sortedScenes, (s) => s.group);
 
