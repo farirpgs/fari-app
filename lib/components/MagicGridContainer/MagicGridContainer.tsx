@@ -1,14 +1,16 @@
 import MagicGrid from "magic-grid";
 import React, { useEffect, useRef } from "react";
 
-const defaultMagicGridGutter = 0;
-const magicGridUpdateDebounceMS = 200;
+const DefaultMagicGridGutter = 0;
+const RefreshIntervalRate = 2000;
+const MagicGridUpdateDebounceMS = 200;
 
 export const MagicGridContainer: React.FC<{
   items: number;
   gutterPx?: number;
 }> = (props) => {
   const $gridContainer = useRef<HTMLDivElement | null>(null);
+  const refreshInterval = useRef<any | undefined>(undefined);
 
   useEffect(() => {
     const magicGrid: { current: MagicGrid | null } = { current: null };
@@ -18,20 +20,23 @@ export const MagicGridContainer: React.FC<{
       magicGrid.current = new MagicGrid({
         container: $gridContainer.current!,
         items: props.items,
-        // maxColumns: 5, // Optional. Maximum number of columns. Default: Infinite.
-        // useMin: true, // Optional. Prioritize shorter columns when positioning items? Default: false.
-        gutter: props.gutterPx ?? defaultMagicGridGutter,
+        gutter: props.gutterPx ?? DefaultMagicGridGutter,
       });
       magicGrid.current.positionItems();
       window.addEventListener("resize", resize);
     }
+
+    clearInterval(refreshInterval.current);
+    refreshInterval.current = setInterval(() => {
+      resize();
+    }, RefreshIntervalRate);
 
     function resize() {
       if (!timeout.current)
         timeout.current = setTimeout(() => {
           magicGrid.current?.positionItems();
           timeout.current = null;
-        }, magicGridUpdateDebounceMS);
+        }, MagicGridUpdateDebounceMS);
     }
 
     return () => {

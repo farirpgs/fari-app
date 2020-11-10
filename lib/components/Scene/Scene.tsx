@@ -13,7 +13,6 @@ import {
   Fade,
   Grid,
   Hidden,
-  IconButton,
   InputLabel,
   Paper,
   Snackbar,
@@ -34,7 +33,6 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import PersonIcon from "@material-ui/icons/Person";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
@@ -73,6 +71,7 @@ import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
+import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 
 export enum SceneMode {
@@ -81,7 +80,7 @@ export enum SceneMode {
   Manage,
 }
 
-const paperStyle = css({ borderRadius: "0px" });
+export const paperStyle = css({ borderRadius: "0px" });
 
 type IProps =
   | {
@@ -621,10 +620,18 @@ export const Scene: React.FC<IProps> = (props) => {
           <Box>
             <MagicGridContainer items={playersWithCharacterSheets.length}>
               {playersWithCharacterSheets.map((player, index) => {
+                const isMe =
+                  props.mode === SceneMode.PlayOnline &&
+                  props.userId === player.id;
+                const canControl = isGM || isMe;
                 return (
                   <CharacterCard
                     key={player?.id || index}
+                    readonly={!canControl}
                     characterSheet={player.character}
+                    onRoll={(options) => {
+                      roll(player, options);
+                    }}
                     onCharacterDialogOpen={() => {
                       setCharacterDialogPlayerId(player.id);
                     }}
@@ -1089,94 +1096,3 @@ export const Scene: React.FC<IProps> = (props) => {
 };
 
 Scene.displayName = "PlayPage";
-
-export const CharacterCard: React.FC<{
-  characterSheet: ICharacter | undefined;
-  onCharacterDialogOpen(): void;
-}> = (props) => {
-  const { t } = useTranslate();
-  const theme = useTheme();
-  const logger = useLogger();
-  const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
-
-  if (!props.characterSheet) {
-    return null;
-  }
-
-  return (
-    <Box
-      className={cx(
-        css({
-          width: width,
-          padding: "0 .5rem 1.5rem .5rem",
-        })
-      )}
-    >
-      <Paper className={paperStyle}>
-        <Box>
-          <Box
-            py="1rem"
-            className={css({
-              fontSize: "1.5rem",
-              width: "100%",
-              borderBottom: "1px solid #f0a4a4",
-            })}
-          >
-            <Box px="1rem">
-              <Grid
-                container
-                justify="space-between"
-                alignItems="center"
-                spacing={2}
-              >
-                <Grid item>
-                  <FateLabel>{props.characterSheet?.name}</FateLabel>
-                </Grid>
-                <Grid item>
-                  <Tooltip title={t("player-row.open-character-sheet")}>
-                    <span>
-                      <IconButton
-                        size="small"
-                        onClick={(e) => {
-                          props.onCharacterDialogOpen();
-                          logger.info("CharacterCard:onCharacterDialogOpen");
-                        }}
-                      >
-                        <PersonIcon
-                          className={css({ width: "1.5rem", height: "1.5rem" })}
-                        />
-                      </IconButton>
-                    </span>
-                  </Tooltip>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-          <Box p="1rem">
-            {props.characterSheet?.aspects.map((aspect, aspectIndex) => {
-              if (!aspect.value) {
-                return null;
-              }
-
-              return (
-                <Box key={aspectIndex} pb=".5rem">
-                  <Box>
-                    <FateLabel>{aspect.name}</FateLabel>
-                  </Box>
-                  <Box>
-                    <Typography title={aspect.value}>
-                      <ContentEditable readonly={true} value={aspect.value} />
-                    </Typography>
-                  </Box>
-                </Box>
-              );
-            })}
-          </Box>
-        </Box>
-      </Paper>
-    </Box>
-  );
-};
