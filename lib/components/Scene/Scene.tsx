@@ -297,21 +297,11 @@ export const Scene: React.FC<IProps> = (props) => {
           </DialogTitle>
           <DialogContent>
             <Box pb="1rem">
-              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
-              <TextField
-                autoFocus
-                value={offlineCharacterName}
-                onChange={(event) => {
-                  setOfflineCharacterName(event.target.value);
-                }}
-                fullWidth
-              />
-            </Box>
-            <Box>
               <Grid container justify="center">
                 <Grid item>
                   <Button
                     color="primary"
+                    variant="contained"
                     onClick={() => {
                       setOfflineCharacterDialogOpen(false);
                       charactersManager.actions.openManager(
@@ -328,6 +318,21 @@ export const Scene: React.FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Box>
+            <Box py="2rem">
+              <Typography variant="h6" align="center">
+                {t("play-route.or")}
+              </Typography>
+            </Box>
+            <Box>
+              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+              <TextField
+                value={offlineCharacterName}
+                onChange={(event) => {
+                  setOfflineCharacterName(event.target.value);
+                }}
+                fullWidth
+              />
+            </Box>
           </DialogContent>
           <DialogActions>
             <Button
@@ -340,7 +345,7 @@ export const Scene: React.FC<IProps> = (props) => {
             >
               {t("play-route.cancel")}
             </Button>
-            <Button type="submit" color="primary" variant="contained">
+            <Button type="submit" color="secondary" variant="outlined">
               {t("play-route.add-character")}
             </Button>
           </DialogActions>
@@ -1092,7 +1097,10 @@ export const CharacterCard: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
+  const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
   if (!props.characterSheet) {
     return null;
@@ -1102,7 +1110,7 @@ export const CharacterCard: React.FC<{
     <Box
       className={cx(
         css({
-          width: isSmall ? "100%" : "33%",
+          width: width,
           padding: "0 .5rem 1.5rem .5rem",
         })
       )}

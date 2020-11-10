@@ -105,8 +105,6 @@ export function useDrawing(props: {
   }
 
   function setSVG($newContainer: any, $newSVG: any) {
-    console.log("containerElement`", $newContainer);
-    console.log("svgElement", $newSVG);
     $container.current = $newContainer;
     roughSVG.current = rough.svg($newSVG);
   }

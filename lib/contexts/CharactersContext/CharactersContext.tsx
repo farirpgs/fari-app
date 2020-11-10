@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 
 export enum CharacterType {
@@ -42,7 +43,10 @@ export function useCharacters(props?: { localStorage: Storage }) {
 
   const sortedCharacters = useMemo(() => {
     return arraySort(characters, [
-      (c) => ({ value: c.lastUpdated, direction: "desc" }),
+      (c) => {
+        const lastUpdate = getUnixFrom(c.lastUpdated);
+        return { value: lastUpdate, direction: "desc" };
+      },
     ]);
   }, [characters]);
 
@@ -73,7 +77,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     const newCharacter = {
       ...defaultCharacter,
       id: uuidV4(),
-      lastUpdated: new Date().getTime(),
+      lastUpdated: getUnix(),
     } as ICharacter;
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
@@ -109,9 +113,15 @@ export function useCharacters(props?: { localStorage: Storage }) {
     if (!character) {
       return;
     }
+
     setCharacters((draft: Array<ICharacter>) => {
       return draft.map((c) => {
-        if (c.id === character.id) {
+        const currentCharacterLastUpdated = getUnixFrom(c.lastUpdated);
+        const characterLastUpdate = getUnixFrom(character?.lastUpdated ?? 0);
+
+        const shouldUpdate = characterLastUpdate >= currentCharacterLastUpdated;
+
+        if (c.id === character.id && shouldUpdate) {
           return character;
         }
         return c;
@@ -215,7 +225,7 @@ const defaultCondensedCharacter: ICharacter = {
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
-  lastUpdated: new Date().getTime(),
+  lastUpdated: getUnix(),
 };
 
 const defaultAcceleratedCharacter: ICharacter = {
@@ -269,7 +279,7 @@ const defaultAcceleratedCharacter: ICharacter = {
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
-  lastUpdated: new Date().getTime(),
+  lastUpdated: getUnix(),
 };
 
 const defaultCustomCharacter: ICharacter = {
@@ -302,7 +312,7 @@ const defaultCustomCharacter: ICharacter = {
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
-  lastUpdated: new Date().getTime(),
+  lastUpdated: getUnix(),
 };
 
 export const defaultCharactersByType = {

@@ -7,21 +7,31 @@ import {
   defaultCharactersByType,
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
+import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 
-export function useCharacter(c?: ICharacter | undefined) {
-  const [character, setCharacter] = useState<ICharacter | undefined>(c);
+export function useCharacter(characterFromProps?: ICharacter | undefined) {
+  const [character, setCharacter] = useState<ICharacter | undefined>(
+    characterFromProps
+  );
 
   const dirty = useMemo(() => {
-    return !isEqual(c, character);
-  }, [c, character]);
+    return !isEqual(characterFromProps, character);
+  }, [characterFromProps, character]);
 
   useEffect(() => {
-    const isDifferent = c?.id !== character?.id;
-    const isMoreRecent = (c?.lastUpdated ?? 0) > (character?.lastUpdated ?? 0);
-    if (isDifferent || isMoreRecent) {
-      setCharacter(c);
+    const isDifferentCharacter = characterFromProps?.id !== character?.id;
+    const characterFromPropsLastUpdated = getUnixFrom(
+      characterFromProps?.lastUpdated ?? 0
+    );
+    const currentCharacerLastUpdated = getUnixFrom(character?.lastUpdated ?? 0);
+
+    const isOutdated =
+      characterFromPropsLastUpdated > currentCharacerLastUpdated;
+
+    if (isDifferentCharacter || isOutdated) {
+      setCharacter(characterFromProps);
     }
-  }, [c]);
+  }, [characterFromProps]);
 
   function loadTemplate(type: CharacterType) {
     setCharacter(
@@ -37,7 +47,7 @@ export function useCharacter(c?: ICharacter | undefined) {
           ...defaultCharacter,
           id: oldId,
           name: oldName,
-          lastUpdated: new Date().getTime(),
+          lastUpdated: getUnix(),
         };
       })
     );
@@ -488,7 +498,7 @@ export function useCharacter(c?: ICharacter | undefined) {
         return;
       }
       draft.name = sanitizeContentEditable(draft.name);
-      draft.lastUpdated = new Date().getTime();
+      draft.lastUpdated = getUnix();
     });
     return updatedCharacter;
   }

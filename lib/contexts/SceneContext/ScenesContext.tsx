@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 
@@ -41,7 +42,10 @@ export function useScenes(props?: { localStorage: Storage }) {
   });
 
   const sortedScenes = arraySort(scenes, [
-    (c) => ({ value: c.lastUpdated, direction: "desc" }),
+    (s) => {
+      const lastUpdate = getUnixFrom(s.lastUpdated);
+      return { value: lastUpdate, direction: "desc" };
+    },
   ]);
 
   const groups = useGroups(sortedScenes, (s) => s.group);
@@ -86,7 +90,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       group: scene.group,
       aspects: scene.aspects,
       version: scene.version,
-      lastUpdated: new Date().getTime(),
+      lastUpdated: getUnix(),
     };
     if (!exists) {
       setScenes((draft: Array<ISavableScene>) => {
@@ -135,7 +139,7 @@ function makeDefaultSavableScene(): ISavableScene {
     group: undefined,
     aspects: defaultSceneAspects,
     version: defaultSceneVersion,
-    lastUpdated: new Date().getTime(),
+    lastUpdated: getUnix(),
   };
 }
 

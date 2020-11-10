@@ -17,6 +17,7 @@ import {
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
+import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
@@ -52,7 +53,7 @@ export function useScene(props: IProps) {
     showCharacterCards: undefined,
     drawAreaObjects: [],
     version: defaultSceneVersion,
-    lastUpdated: new Date().getTime(),
+    lastUpdated: getUnix(),
   }));
 
   const [sceneToLoad, setSceneToLoad] = useState<ISavableScene | undefined>(

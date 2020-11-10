@@ -43,6 +43,7 @@ import {
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
+import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import { IRollDiceOptions } from "../../../domains/dice/Dice";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
@@ -68,6 +69,7 @@ export const CharacterDialog: React.FC<{
   const [savedSnack, setSavedSnack] = useState(false);
   const [template, setTemplate] = useState(CharacterType.CoreCondensed);
   const charactersManager = useContext(CharactersContext);
+  const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
@@ -238,33 +240,42 @@ export const CharacterDialog: React.FC<{
 
   function renderContent() {
     return (
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          className={css({
-            border: `2px solid ${headerBackgroundColors.primary}`,
-          })}
-        >
-          {renderAspects()}
-          {renderStunts()}
-          {renderRefresh()}
-          {renderDice()}
-          {renderNotes()}
+      <Box>
+        <Grid container>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            className={css({
+              border: `2px solid ${headerBackgroundColors.primary}`,
+            })}
+          >
+            {renderAspects()}
+            {renderStunts()}
+            {renderRefresh()}
+            {renderDice()}
+            {renderNotes()}
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            className={css({
+              border: `2px solid ${headerBackgroundColors.primary}`,
+            })}
+          >
+            {renderVitals()}
+            {renderSkills()}
+          </Grid>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          className={css({
-            border: `2px solid ${headerBackgroundColors.primary}`,
-          })}
-        >
-          {renderVitals()}
-          {renderSkills()}
+        <Grid container justify="center">
+          <Grid item>
+            <Box pt=".5rem">
+              <Typography>{date.format("lll")}</Typography>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     );
   }
 

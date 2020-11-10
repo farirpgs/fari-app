@@ -39,7 +39,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const diceStyle = css({
     fontSize: props.fontSize,
     fontFamily: Font.monospace,
-    lineHeight: Font.lineHeight(5),
+    lineHeight: "normal",
     color: diceManager.state.color,
     background: theme.palette.background.paper,
     border: `${props.borderSize} solid ${
@@ -99,7 +99,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
 
   function renderDice() {
     return (
-      <span>
+      <div>
         <ButtonBase
           className={css({
             borderRadius: "50%",
@@ -112,6 +112,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
           }}
         >
           <Typography
+            component="span"
             className={cx(diceStyle, {
               [diceRollingAnimationStyle]: diceManager.state.rolling,
             })}
@@ -119,7 +120,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
             {diceManager.state.label}
           </Typography>
         </ButtonBase>
-      </span>
+      </div>
     );
   }
 
