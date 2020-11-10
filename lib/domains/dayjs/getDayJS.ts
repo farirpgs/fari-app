@@ -11,7 +11,7 @@ export function getUnix() {
   return dayjs().unix();
 }
 
-export function getUnixFrom(number: number) {
+export function getUnixFrom(number: number | undefined = 0) {
   const count = number.toString().length;
   const isMilliSeconds = count === 13;
 
