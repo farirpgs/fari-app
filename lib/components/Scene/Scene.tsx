@@ -165,6 +165,9 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
+  const playersWithCharacterSheets = sceneManager.state.scene.players.filter(
+    (player) => !!player.character
+  );
 
   function onLoadScene(newScene: ISavableScene) {
     sceneManager.actions.loadScene(newScene);
@@ -609,16 +612,20 @@ export const Scene: React.FC<IProps> = (props) => {
       return null;
     }
 
-    const playersWithCharacterSheets = sceneManager.state.scene.players.filter(
-      (player) => !!player.character
-    );
     const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
 
     return (
       hasPlayersWithCharacterSheets && (
         <>
           <Box>
-            <MagicGridContainer items={playersWithCharacterSheets.length}>
+            <MagicGridContainer
+              items={playersWithCharacterSheets.length}
+              deps={[
+                playersWithCharacterSheets.length,
+                Object.keys(sceneManager.state.scene.aspects).length,
+                sceneManager.state.scene.showCharacterCards,
+              ]}
+            >
               {playersWithCharacterSheets.map((player, index) => {
                 const isMe =
                   props.mode === SceneMode.PlayOnline &&
@@ -662,14 +669,21 @@ export const Scene: React.FC<IProps> = (props) => {
     return (
       <Box pb="2rem">
         {hasAspects && (
-          <MagicGridContainer items={aspectIds.length}>
+          <MagicGridContainer
+            items={aspectIds.length}
+            deps={[
+              playersWithCharacterSheets.length,
+              Object.keys(sceneManager.state.scene.aspects).length,
+              sceneManager.state.scene.showCharacterCards,
+            ]}
+          >
             {aspects.map((aspectId) => {
               return (
                 <Box
                   key={aspectId}
+                  width={width}
                   className={cx(
                     css({
-                      width: width,
                       padding: "0 .5rem 1.5rem .5rem",
                     })
                   )}

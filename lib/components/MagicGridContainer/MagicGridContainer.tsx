@@ -2,15 +2,14 @@ import MagicGrid from "magic-grid";
 import React, { useEffect, useRef } from "react";
 
 const DefaultMagicGridGutter = 0;
-const RefreshIntervalRate = 2000;
 const MagicGridUpdateDebounceMS = 200;
 
 export const MagicGridContainer: React.FC<{
   items: number;
   gutterPx?: number;
+  deps: Array<any>;
 }> = (props) => {
   const $gridContainer = useRef<HTMLDivElement | null>(null);
-  const refreshInterval = useRef<any | undefined>(undefined);
 
   useEffect(() => {
     const magicGrid: { current: MagicGrid | null } = { current: null };
@@ -22,14 +21,11 @@ export const MagicGridContainer: React.FC<{
         items: props.items,
         gutter: props.gutterPx ?? DefaultMagicGridGutter,
       });
-      magicGrid.current.positionItems();
       window.addEventListener("resize", resize);
+      setTimeout(() => {
+        resize();
+      });
     }
-
-    clearInterval(refreshInterval.current);
-    refreshInterval.current = setInterval(() => {
-      resize();
-    }, RefreshIntervalRate);
 
     function resize() {
       if (!timeout.current)
@@ -42,7 +38,7 @@ export const MagicGridContainer: React.FC<{
     return () => {
       window.removeEventListener("resize", resize);
     };
-  });
+  }, [props.items, props.gutterPx, ...props.deps]);
 
   return <div ref={$gridContainer}>{props.children}</div>;
 };

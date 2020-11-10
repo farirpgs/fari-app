@@ -136,9 +136,10 @@ export const CharacterCard: React.FC<{
 
   return (
     <Box
+      width={width}
       className={cx(
         css({
-          width: width,
+          // width: width,
           padding: "0 .5rem 1.5rem .5rem",
         })
       )}
