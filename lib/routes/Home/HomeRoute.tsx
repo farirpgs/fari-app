@@ -13,6 +13,7 @@ import appIcon from "../../../images/app-icon.png";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { Patreon } from "../../components/Patreon/Patreon";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -126,9 +127,12 @@ export const HomeRoute: React.FC<{}> = (props) => {
             {t("home-route.support-fari.description")}
           </Typography>
           <Box py="2rem">
-            <Grid container justify="center">
+            <Grid container justify="center" spacing={2} alignItems="center">
               <Grid item>
                 <Kofi />
+              </Grid>
+              <Grid item>
+                <Patreon />
               </Grid>
             </Grid>
           </Box>

@@ -1,15 +1,16 @@
 # [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
 
-## 3.3.0 (...) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+## 3.3.0 (Nov 10, 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
 - feat: More detailed dice roll
 - feat: new "Notes" field in character sheet [#145](https://github.com/fariapp/fari/issues/145) 👏 [tgirod](https://github.com/tgirod)
 - feat: Russian Localizations [#122](https://github.com/fariapp/fari/issues/122) 👏 [hattivatt](https://github.com/hattivatt)
-- feat: Support screens up to 1920px wide
+- feat: Support screens up to 1920px wide [#144](https://github.com/fariapp/fari/issues/144)
 - feat: Mini Character Sheets in scenes [#131](https://github.com/fariapp/fari/issues/131)
 - fix: share draw area controls between fullscreen and normal mode [#147](https://github.com/fariapp/fari/issues/147)
+- fix: character sheet synchronisation [#151](https://github.com/fariapp/fari/issues/151)
 
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
