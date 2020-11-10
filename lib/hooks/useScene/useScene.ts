@@ -1,5 +1,5 @@
 import produce from "immer";
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
