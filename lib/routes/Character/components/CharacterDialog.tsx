@@ -440,7 +440,14 @@ export const CharacterDialog: React.FC<{
           characterManager.actions.addAspect
         )}
 
-        <Box className={sheetContentStyle}>
+        <Box
+          className={css(sheetContentStyle, {
+            padding:
+              characterManager.state.character!.aspects.length === 0
+                ? "0"
+                : undefined,
+          })}
+        >
           {characterManager.state.character!.aspects.map((aspect, index) => {
             return (
               <Box key={index} py=".5rem">
@@ -543,7 +550,14 @@ export const CharacterDialog: React.FC<{
           characterManager.actions.addSkill
         )}
 
-        <Box className={sheetContentStyle}>
+        <Box
+          className={css(sheetContentStyle, {
+            padding:
+              characterManager.state.character!.skills.length === 0
+                ? "0"
+                : undefined,
+          })}
+        >
           {characterManager.state.character!.skills.map((skill, index) => {
             const skillLabel = (
               <Box pt=".1rem" px=".1rem">
@@ -658,7 +672,14 @@ export const CharacterDialog: React.FC<{
           characterManager.actions.setStuntsLabel,
           characterManager.actions.addStunt
         )}
-        <Box className={sheetContentStyle}>
+        <Box
+          className={css(sheetContentStyle, {
+            padding:
+              characterManager.state.character!.stunts.length === 0
+                ? "0"
+                : undefined,
+          })}
+        >
           {characterManager.state.character!.stunts.map((stunt, index) => {
             return (
               <Box py=".5rem" key={index}>
@@ -754,7 +775,14 @@ export const CharacterDialog: React.FC<{
             t("character-dialog.refresh"),
           characterManager.actions.setRefreshLabel
         )}
-        <Box className={sheetContentStyle}>
+        <Box
+          className={css(sheetContentStyle, {
+            padding:
+              characterManager.state.character!.refresh.length === 0
+                ? "0"
+                : undefined,
+          })}
+        >
           <Grid container justify="center">
             <Grid item>
               <Avatar
@@ -849,7 +877,16 @@ export const CharacterDialog: React.FC<{
           characterManager.actions.setStressTracksLabel,
           characterManager.actions.addStressTrack
         )}
-        <Box className={sheetContentStyle}>{renderStressTracks()}</Box>
+        <Box
+          className={css(sheetContentStyle, {
+            padding:
+              characterManager.state.character!.stressTracks.length === 0
+                ? "0"
+                : undefined,
+          })}
+        >
+          {renderStressTracks()}
+        </Box>
         {renderSheetHeader(
           characterManager.state.character?.consequencesLabel ??
             t("character-dialog.consequences"),
@@ -857,7 +894,16 @@ export const CharacterDialog: React.FC<{
 
           characterManager.actions.addConsequence
         )}
-        <Box className={sheetContentStyle}>{renderConsequences()}</Box>
+        <Box
+          className={css(sheetContentStyle, {
+            padding:
+              characterManager.state.character!.consequences.length === 0
+                ? "0"
+                : undefined,
+          })}
+        >
+          {renderConsequences()}
+        </Box>
       </>
     );
   }
