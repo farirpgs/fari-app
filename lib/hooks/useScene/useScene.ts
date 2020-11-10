@@ -577,14 +577,6 @@ export function useScene(props: IProps) {
     );
   }
 
-  function toggleShowCharacterCards() {
-    setScene(
-      produce((draft: IScene) => {
-        draft.showCharacterCards = !draft.showCharacterCards;
-      })
-    );
-  }
-
   function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setScene(
       produce((draft: IScene) => {
@@ -636,7 +628,6 @@ export function useScene(props: IProps) {
       fireGoodConfetti,
       fireBadConfetti,
       toggleSort,
-      toggleShowCharacterCards,
       updatePlayerCharacter,
       updateDrawAreaObjects,
     },

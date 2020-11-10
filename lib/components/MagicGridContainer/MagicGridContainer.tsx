@@ -21,10 +21,14 @@ export const MagicGridContainer: React.FC<{
         items: props.items,
         gutter: props.gutterPx ?? DefaultMagicGridGutter,
       });
-      window.addEventListener("resize", resize);
+
+      magicGrid.current.positionItems();
+
       setTimeout(() => {
-        resize();
+        magicGrid.current?.positionItems();
       });
+
+      window.addEventListener("resize", resize);
     }
 
     function resize() {
@@ -38,7 +42,7 @@ export const MagicGridContainer: React.FC<{
     return () => {
       window.removeEventListener("resize", resize);
     };
-  }, [props.items, props.gutterPx, ...props.deps]);
+  });
 
   return <div ref={$gridContainer}>{props.children}</div>;
 };

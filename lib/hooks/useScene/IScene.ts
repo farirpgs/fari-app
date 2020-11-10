@@ -38,7 +38,6 @@ export interface IScene {
   goodConfetti: number;
   badConfetti: number;
   sort: boolean;
-  showCharacterCards: boolean | undefined;
   drawAreaObjects: IDrawAreaObjects;
   version: number;
   lastUpdated: number;

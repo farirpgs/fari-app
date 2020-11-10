@@ -16,7 +16,6 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import PersonIcon from "@material-ui/icons/Person";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import { css, cx } from "emotion";
 import React from "react";
@@ -99,17 +98,33 @@ export const PlayerRow: React.FC<{
         })}
       >
         <TableCell className={playerInfoCellStyle} align="left">
-          <Typography
-            noWrap
-            color="inherit"
-            className={css({
-              fontSize: "1.2rem",
-              lineHeight: Font.lineHeight(1.2),
-              fontWeight: props.isMe ? "bold" : "normal",
-            })}
+          <Tooltip
+            title={
+              hasCharacterSheet
+                ? t("player-row.open-character-sheet")
+                : t("player-row.has-no-character-sheet")
+            }
           >
-            {name}
-          </Typography>
+            <ButtonBase
+              disabled={!hasCharacterSheet}
+              onClick={(e) => {
+                props.onCharacterDialogOpen();
+                logger.info("ScenePlayer:onCharacterDialogOpen");
+              }}
+            >
+              <Typography
+                noWrap
+                color="inherit"
+                className={css({
+                  fontSize: "1.2rem",
+                  lineHeight: Font.lineHeight(1.2),
+                  fontWeight: props.isMe ? "bold" : "normal",
+                })}
+              >
+                {name}
+              </Typography>
+            </ButtonBase>
+          </Tooltip>
         </TableCell>
         <TableCell className={playerInfoCellStyle} align="center">
           <Tooltip
@@ -178,50 +193,10 @@ export const PlayerRow: React.FC<{
           </Box>
         </TableCell>
       </TableRow>
-      {renderControls()}
       {renderGMControls()}
       {renderBorder()}
     </>
   );
-
-  function renderControls() {
-    return (
-      <TableRow
-        className={cx(controlsRowStyle, {
-          [selectedRowStyle]: shouldHighlight,
-        })}
-      >
-        <TableCell colSpan={4} className={defaultTableCellStyle}>
-          <Grid container alignItems="center" justify="flex-end" spacing={1}>
-            <Grid item>
-              <Tooltip
-                title={
-                  hasCharacterSheet
-                    ? t("player-row.open-character-sheet")
-                    : t("player-row.has-no-character-sheet")
-                }
-              >
-                <span>
-                  <IconButton
-                    size="small"
-                    disabled={!hasCharacterSheet}
-                    onClick={(e) => {
-                      props.onCharacterDialogOpen();
-                      logger.info("ScenePlayer:onCharacterDialogOpen");
-                    }}
-                  >
-                    <PersonIcon
-                      className={css({ width: "1.5rem", height: "1.5rem" })}
-                    />
-                  </IconButton>
-                </span>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        </TableCell>
-      </TableRow>
-    );
-  }
 
   function renderGMControls() {
     if (!props.isGM) {

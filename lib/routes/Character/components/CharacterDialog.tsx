@@ -775,14 +775,7 @@ export const CharacterDialog: React.FC<{
             t("character-dialog.refresh"),
           characterManager.actions.setRefreshLabel
         )}
-        <Box
-          className={css(sheetContentStyle, {
-            padding:
-              characterManager.state.character!.refresh.length === 0
-                ? "0"
-                : undefined,
-          })}
-        >
+        <Box className={css(sheetContentStyle)}>
           <Grid container justify="center">
             <Grid item>
               <Avatar

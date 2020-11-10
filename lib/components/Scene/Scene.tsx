@@ -140,6 +140,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
     string | undefined
   >(undefined);
+  const [showCharacterCards, setShowCharacterCards] = useState(true);
 
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
@@ -608,7 +609,7 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderCharacterCards() {
-    if (!sceneManager.state.scene.showCharacterCards) {
+    if (!showCharacterCards) {
       return null;
     }
 
@@ -623,7 +624,7 @@ export const Scene: React.FC<IProps> = (props) => {
               deps={[
                 playersWithCharacterSheets.length,
                 Object.keys(sceneManager.state.scene.aspects).length,
-                sceneManager.state.scene.showCharacterCards,
+                showCharacterCards,
               ]}
             >
               {playersWithCharacterSheets.map((player, index) => {
@@ -674,7 +675,7 @@ export const Scene: React.FC<IProps> = (props) => {
             deps={[
               playersWithCharacterSheets.length,
               Object.keys(sceneManager.state.scene.aspects).length,
-              sceneManager.state.scene.showCharacterCards,
+              showCharacterCards,
             ]}
           >
             {aspects.map((aspectId) => {
@@ -782,6 +783,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       onInputChange={(event, newInputValue) => {
                         sceneManager.actions.setGroup(newInputValue);
                       }}
+                      disabled={!isGM}
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -794,7 +796,6 @@ export const Scene: React.FC<IProps> = (props) => {
                             ...params.inputProps,
                             className: css({ padding: "2px" }),
                           }}
-                          disabled={!isGM}
                           className={css({
                             borderBottom: `1px solid ${theme.palette.divider}`,
                           })}
@@ -811,6 +812,7 @@ export const Scene: React.FC<IProps> = (props) => {
         <Box>
           {renderGMAspectActions()}
           {renderGMSceneActions()}
+          {renderPlayerSceneActions()}
         </Box>
       </Box>
     );
@@ -930,23 +932,21 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.sort")}
             </Button>
           </Grid>
-          <Grid item>
-            <Button
-              onClick={() => {
-                props.sceneManager.actions.toggleShowCharacterCards();
-                logger.info("Scene:onShowCharacterCards");
-              }}
-              variant="outlined"
-              color={
-                props.sceneManager.state.scene.showCharacterCards
-                  ? "secondary"
-                  : "default"
-              }
-              endIcon={<SortIcon />}
-            >
-              {t("play-route.show-character-cards")}
-            </Button>
-          </Grid>
+          {props.mode === SceneMode.PlayOnline && (
+            <Grid item>
+              <Button
+                onClick={() => {
+                  setShowCharacterCards((s) => !s);
+                  logger.info("Scene:onShowCharacterCards");
+                }}
+                variant="outlined"
+                color={showCharacterCards ? "secondary" : "default"}
+                endIcon={<SortIcon />}
+              >
+                {t("play-route.show-character-cards")}
+              </Button>
+            </Grid>
+          )}
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>
               <input
@@ -985,6 +985,31 @@ export const Scene: React.FC<IProps> = (props) => {
               </Tooltip>
             </Grid>
           )}
+        </Grid>
+      </Box>
+    );
+  }
+
+  function renderPlayerSceneActions() {
+    if (isGM) {
+      return null;
+    }
+    return (
+      <Box pb="1rem">
+        <Grid container spacing={1} justify="center">
+          <Grid item>
+            <Button
+              onClick={() => {
+                setShowCharacterCards((s) => !s);
+                logger.info("Scene:onShowCharacterCards");
+              }}
+              variant="outlined"
+              color={showCharacterCards ? "secondary" : "default"}
+              endIcon={<SortIcon />}
+            >
+              {t("play-route.show-character-cards")}
+            </Button>
+          </Grid>
         </Grid>
       </Box>
     );

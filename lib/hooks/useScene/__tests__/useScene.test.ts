@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
 import {
   ILineObject,
-  ObjectType,
+  ObjectType
 } from "../../../components/DrawArea/hooks/useDrawing";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
@@ -34,7 +34,6 @@ fdescribe("useScene", () => {
       goodConfetti: 0,
       badConfetti: 0,
       sort: false,
-      showCharacterCards: undefined,
       drawAreaObjects: [],
       version: 1,
       lastUpdated: expect.anything(),

@@ -61,4 +61,4 @@ export const SceneRoute: React.FC<{
   );
 };
 
-SceneRoute.displayName = "ScenesRoute";
+SceneRoute.displayName = "SceneRoute";

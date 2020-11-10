@@ -48,7 +48,7 @@ export const CharacterCard: React.FC<{
       };
     },
   ]);
-  const bestSkills = sortedSkills.slice(0, 5);
+  const bestSkills = sortedSkills.slice(0, 6);
 
   if (!props.characterSheet) {
     return null;
