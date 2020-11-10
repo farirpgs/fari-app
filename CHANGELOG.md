@@ -5,6 +5,7 @@
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
 - feat: More detailed dice roll
+- feat: Re order any field in the character sheet
 - feat: new "Notes" field in character sheet [#145](https://github.com/fariapp/fari/issues/145) 👏 [tgirod](https://github.com/tgirod)
 - feat: Russian Localizations [#122](https://github.com/fariapp/fari/issues/122) 👏 [hattivatt](https://github.com/hattivatt)
 - feat: Support screens up to 1920px wide [#144](https://github.com/fariapp/fari/issues/144)

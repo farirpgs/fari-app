@@ -13,6 +13,7 @@ This version includes:
 - The ability to group scenes or character sheets together (e.g. by campaigns)
 - The ability to roll the dice with a modifier by clicking on a character sheet skill label
 - Support for wider resolutions
+- Possiblity to re-order any field in the character sheet
 - A brand new "Notes" field in the character sheet [#145](https://github.com/fariapp/fari/issues/145) 👏 [tgirod](https://github.com/tgirod)
 - Russian Localizations [#122](https://github.com/fariapp/fari/issues/122) 👏 [hattivatt](https://github.com/hattivatt)
 - Various bug fixes and minor improvements like loosing context when opening the draw area in full screen or character syncronisation during gameplay.
