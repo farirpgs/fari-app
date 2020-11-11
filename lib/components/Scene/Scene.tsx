@@ -436,16 +436,18 @@ export const Scene: React.FC<IProps> = (props) => {
                     </Grid>
                     <Grid item>
                       <Tooltip title={t("play-route.add-character")}>
-                        <Button
-                          onClick={() => {
-                            setOfflineCharacterDialogOpen(true);
-                            logger.info("Scene:onAddOfflineCharacter");
-                          }}
-                          variant="contained"
-                          color="secondary"
-                        >
-                          <PersonAddIcon />
-                        </Button>
+                        <span>
+                          <Button
+                            onClick={() => {
+                              setOfflineCharacterDialogOpen(true);
+                              logger.info("Scene:onAddOfflineCharacter");
+                            }}
+                            variant="contained"
+                            color="secondary"
+                          >
+                            <PersonAddIcon />
+                          </Button>
+                        </span>
                       </Tooltip>
                     </Grid>
                   </Grid>
@@ -609,15 +611,11 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderCharacterCards() {
-    if (!showCharacterCards) {
-      return null;
-    }
-
     const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
 
     return (
-      hasPlayersWithCharacterSheets && (
-        <>
+      <>
+        <Collapse in={showCharacterCards && hasPlayersWithCharacterSheets}>
           <Box>
             <MagicGridContainer
               items={playersWithCharacterSheets.length}
@@ -651,8 +649,8 @@ export const Scene: React.FC<IProps> = (props) => {
           <Box pt="1rem" pb="2rem">
             <Divider />
           </Box>
-        </>
-      )
+        </Collapse>
+      </>
     );
   }
 
@@ -961,27 +959,29 @@ export const Scene: React.FC<IProps> = (props) => {
                 title="Copied!"
                 placement="top"
               >
-                <Button
-                  onClick={() => {
-                    if (props.shareLink && $shareLinkInputRef.current) {
-                      try {
-                        $shareLinkInputRef.current.select();
-                        document.execCommand("copy");
-                        navigator.clipboard.writeText(props.shareLink);
-                        setShareLinkToolTip({ open: true });
-                      } catch (error) {
-                        window.open(props.shareLink, "_blank");
-                      }
+                <span>
+                  <Button
+                    onClick={() => {
+                      if (props.shareLink && $shareLinkInputRef.current) {
+                        try {
+                          $shareLinkInputRef.current.select();
+                          document.execCommand("copy");
+                          navigator.clipboard.writeText(props.shareLink);
+                          setShareLinkToolTip({ open: true });
+                        } catch (error) {
+                          window.open(props.shareLink, "_blank");
+                        }
 
-                      logger.info("Scene:onCopyGameLink");
-                    }
-                  }}
-                  variant="outlined"
-                  color="default"
-                  endIcon={<FileCopyIcon />}
-                >
-                  {t("play-route.copy-game-link")}
-                </Button>
+                        logger.info("Scene:onCopyGameLink");
+                      }
+                    }}
+                    variant="outlined"
+                    color="default"
+                    endIcon={<FileCopyIcon />}
+                  >
+                    {t("play-route.copy-game-link")}
+                  </Button>
+                </span>
               </Tooltip>
             </Grid>
           )}

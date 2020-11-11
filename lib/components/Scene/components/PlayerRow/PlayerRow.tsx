@@ -105,25 +105,27 @@ export const PlayerRow: React.FC<{
                 : t("player-row.has-no-character-sheet")
             }
           >
-            <ButtonBase
-              disabled={!hasCharacterSheet}
-              onClick={(e) => {
-                props.onCharacterDialogOpen();
-                logger.info("ScenePlayer:onCharacterDialogOpen");
-              }}
-            >
-              <Typography
-                noWrap
-                color="inherit"
-                className={css({
-                  fontSize: "1.2rem",
-                  lineHeight: Font.lineHeight(1.2),
-                  fontWeight: props.isMe ? "bold" : "normal",
-                })}
+            <span>
+              <ButtonBase
+                disabled={!hasCharacterSheet}
+                onClick={(e) => {
+                  props.onCharacterDialogOpen();
+                  logger.info("ScenePlayer:onCharacterDialogOpen");
+                }}
               >
-                {name}
-              </Typography>
-            </ButtonBase>
+                <Typography
+                  noWrap
+                  color="inherit"
+                  className={css({
+                    fontSize: "1.2rem",
+                    lineHeight: Font.lineHeight(1.2),
+                    fontWeight: props.isMe ? "bold" : "normal",
+                  })}
+                >
+                  {name}
+                </Typography>
+              </ButtonBase>
+            </span>
           </Tooltip>
         </TableCell>
         <TableCell className={playerInfoCellStyle} align="center">
