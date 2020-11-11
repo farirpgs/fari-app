@@ -682,9 +682,9 @@ export const Scene: React.FC<IProps> = (props) => {
               return (
                 <Box
                   key={aspectId}
-                  width={width}
                   className={cx(
                     css({
+                      width: width,
                       padding: "0 .5rem 1.5rem .5rem",
                     })
                   )}
