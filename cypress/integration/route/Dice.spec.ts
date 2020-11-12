@@ -5,7 +5,7 @@ describe("Dice Route", () => {
       w.history.pushState({}, undefined, "/dice");
     });
 
-    cy.get("[data-cy=dice]").as("dice");
+    setAliases();
 
     isRolling();
     hasRolled();
@@ -16,6 +16,10 @@ describe("Dice Route", () => {
     hasRolled();
   });
 });
+
+function setAliases() {
+  cy.get("[data-cy=dice]").as("dice").click();
+}
 
 function roll() {
   cy.get("@dice").click();
@@ -29,7 +33,7 @@ function hasRolled() {
 }
 
 function isRolling() {
-  cy.get("[@dice]").then((e) => {
+  cy.get("@dice").then((e) => {
     const isRolling = e.attr("data-cy-rolling");
     expect(isRolling).eq("true");
   });
