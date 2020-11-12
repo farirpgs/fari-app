@@ -9,6 +9,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      # Cache
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      # Install
+      - name: Install
+        run: yarn install
       # Build
       - name: Build
         run: yarn build
