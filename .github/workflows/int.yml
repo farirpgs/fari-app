@@ -1,5 +1,5 @@
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions
-name: CI
+name: Integration Tests
 
 on: [push]
 
@@ -29,5 +29,5 @@ jobs:
       - name: Install
         run: yarn install
       # Integration Tests
-      - name: Integration Tests
+      - name: Run Integrations Tests
         run: yarn int
