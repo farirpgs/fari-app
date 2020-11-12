@@ -4,33 +4,12 @@ name: Integration Tests
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
+  cypress-run:
+    runs-on: ubuntu-16.04
     steps:
-      # Setup
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      # Cache
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      # Install
-      - name: Install
-        run: yarn install
-      # Rebuild
-      - name: Rebuild
-        run: yarn rebuild
-      # Integration Tests
-      - name: Run Integrations Tests
-        run: yarn int
+      - name: Checkout
+        uses: actions/checkout@v1
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
