@@ -28,6 +28,9 @@ jobs:
       # Install
       - name: Install
         run: yarn install
+      # Rebuild
+      - name: Rebuild
+        run: yarn rebuild
       # Integration Tests
       - name: Run Integrations Tests
         run: yarn int
