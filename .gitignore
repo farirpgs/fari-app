@@ -101,3 +101,7 @@ dist
 
 # junit test results
 junit.xml
+
+# Cypress
+cypress/videos
+cypress/screenshots

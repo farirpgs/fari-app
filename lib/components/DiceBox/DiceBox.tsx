@@ -113,6 +113,9 @@ export const DiceBox: React.FC<IProps> = (props) => {
         >
           <Typography
             component="span"
+            data-cy="dice"
+            data-cy-value={diceManager.state.label}
+            data-cy-rolling={diceManager.state.rolling}
             className={cx(diceStyle, {
               [diceRollingAnimationStyle]: diceManager.state.rolling,
             })}
