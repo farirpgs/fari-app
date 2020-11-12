@@ -6,4 +6,9 @@ export const Fari = {
   get(tag: string) {
     return cy.get(`[data-cy='${tag}']`);
   },
+  waitContentEditable() {
+    const contentEditableDelay = 300;
+
+    cy.wait(contentEditableDelay + 100);
+  },
 };

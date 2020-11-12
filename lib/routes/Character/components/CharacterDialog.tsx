@@ -17,7 +17,7 @@ import {
   Snackbar,
   TextField,
   Typography,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -40,7 +40,7 @@ import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUp
 import {
   CharactersContext,
   CharacterType,
-  ICharacter
+  ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
@@ -369,6 +369,7 @@ export const CharacterDialog: React.FC<{
                         ...params.InputProps,
                         disableUnderline: true,
                       }}
+                      data-cy={`character-dialog.group`}
                       disabled={props.readonly}
                       className={css({
                         borderBottom: `1px solid ${theme.palette.divider}`,
@@ -467,6 +468,7 @@ export const CharacterDialog: React.FC<{
                         <ContentEditable
                           readonly={!advanced}
                           border={advanced}
+                          data-cy={`character-dialog.aspect.${aspect.name}.label`}
                           value={aspect.name}
                           onChange={(value) => {
                             characterManager.actions.setAspectName(
@@ -528,6 +530,7 @@ export const CharacterDialog: React.FC<{
                   <Typography>
                     <ContentEditable
                       border
+                      data-cy={`character-dialog.aspect.${aspect.name}.value`}
                       readonly={props.readonly}
                       value={aspect.value}
                       onChange={(value) => {
@@ -567,6 +570,7 @@ export const CharacterDialog: React.FC<{
               <Box pt=".1rem" px=".1rem">
                 <FateLabel display="inline">
                   <ContentEditable
+                    data-cy={`character-dialog.skill.${skill.name}.label`}
                     readonly={!advanced}
                     border={advanced}
                     value={skill.name}
@@ -590,6 +594,7 @@ export const CharacterDialog: React.FC<{
                   <Grid item xs={2}>
                     <Typography align="center">
                       <ContentEditable
+                        data-cy={`character-dialog.skill.${skill.name}.value`}
                         border
                         readonly={props.readonly}
                         value={skill.value}
@@ -697,6 +702,7 @@ export const CharacterDialog: React.FC<{
                     <Grid item xs={10}>
                       <FateLabel display="inline">
                         <ContentEditable
+                          data-cy={`character-dialog.stunt.${stunt.name}.label`}
                           readonly={!advanced}
                           border={advanced}
                           value={stunt.name}
@@ -756,6 +762,7 @@ export const CharacterDialog: React.FC<{
                 <Typography>
                   <ContentEditable
                     border
+                    data-cy={`character-dialog.stunt.${stunt.name}.value`}
                     readonly={props.readonly}
                     value={stunt.value}
                     onChange={(value) => {
@@ -794,6 +801,7 @@ export const CharacterDialog: React.FC<{
                 })}
               >
                 <ContentEditable
+                  data-cy={`character-dialog.refresh`}
                   readonly={!advanced}
                   border={advanced}
                   value={characterManager.state.character!.refresh.toString()}
@@ -825,6 +833,7 @@ export const CharacterDialog: React.FC<{
             <Typography>
               <ContentEditable
                 border
+                data-cy={`character-dialog.notes`}
                 readonly={props.readonly}
                 value={characterManager.state.character?.notes || ""}
                 onChange={(value) => {
@@ -921,6 +930,7 @@ export const CharacterDialog: React.FC<{
                   <Grid item className={css({ flex: "1 1 auto" })}>
                     <FateLabel display="inline">
                       <ContentEditable
+                        data-cy={`character-dialog.stressTrack.${stressTrack.name}.label`}
                         readonly={!advanced}
                         border={advanced}
                         value={stressTrack.name}
@@ -1010,6 +1020,7 @@ export const CharacterDialog: React.FC<{
                           })}
                         >
                           <Checkbox
+                            data-cy={`character-dialog.stressTrack.${stressTrack.name}.box.${boxIndex}.value`}
                             color="default"
                             size="small"
                             checked={stressBox.checked}
@@ -1027,6 +1038,7 @@ export const CharacterDialog: React.FC<{
                         <Box>
                           <FateLabel className={css({ textAlign: "center" })}>
                             <ContentEditable
+                              data-cy={`character-dialog.stressTrack.${stressTrack.name}.box.${boxIndex}.label`}
                               readonly={!advanced}
                               border={advanced}
                               value={stressBox.label}
@@ -1072,6 +1084,7 @@ export const CharacterDialog: React.FC<{
                           readonly={!advanced}
                           border={advanced}
                           value={consequence.name}
+                          data-cy={`character-dialog.consequence.${consequence.name}.label`}
                           onChange={(value) => {
                             characterManager.actions.setConsequenceName(
                               index,
@@ -1132,6 +1145,7 @@ export const CharacterDialog: React.FC<{
                   <Typography>
                     <ContentEditable
                       border
+                      data-cy={`character-dialog.consequence.${consequence.name}.value`}
                       readonly={props.readonly}
                       value={consequence.value}
                       onChange={(value) => {
