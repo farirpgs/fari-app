@@ -345,6 +345,7 @@ export const Page: React.FC<{
               <Button
                 color="inherit"
                 to="/"
+                data-cy="page.menu.play"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}
@@ -367,6 +368,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                data-cy="page.menu.characters"
                 onClick={() => {
                   charactersManager.actions.openManager(ManagerMode.Manage);
                 }}
@@ -380,6 +382,7 @@ export const Page: React.FC<{
               <Button
                 color="inherit"
                 to="/dice"
+                data-cy="page.menu.dice"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}

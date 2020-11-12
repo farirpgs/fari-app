@@ -140,12 +140,22 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
     return (
       <Grid container spacing={1} justify="center">
         <Grid item>
-          <Button color="primary" variant="outlined" onClick={onAdd}>
+          <Button
+            color="primary"
+            variant="outlined"
+            data-cy="manager.new"
+            onClick={onAdd}
+          >
             {t("manager.new")}
           </Button>
         </Grid>
         <Grid item>
-          <Button color="primary" variant="outlined" component="label">
+          <Button
+            color="primary"
+            variant="outlined"
+            data-cy="manager.import"
+            component="label"
+          >
             {t("manager.import")}
             <input
               type="file"
@@ -246,6 +256,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                       <ListItemSecondaryAction>
                         <IconButton
                           edge="start"
+                          data-cy="manager.export"
                           onClick={() => {
                             onExport(item);
                           }}
@@ -254,6 +265,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                         </IconButton>
                         <IconButton
                           edge="end"
+                          data-cy="manager.delete"
                           onClick={() => {
                             onDelete(item);
                           }}

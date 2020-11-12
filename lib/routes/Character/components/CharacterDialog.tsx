@@ -17,7 +17,7 @@ import {
   Snackbar,
   TextField,
   Typography,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -40,7 +40,7 @@ import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUp
 import {
   CharactersContext,
   CharacterType,
-  ICharacter,
+  ICharacter
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
@@ -290,6 +290,7 @@ export const CharacterDialog: React.FC<{
           <Grid item>
             <Button
               color="primary"
+              data-cy="character-dialog.toggle-advanced"
               variant={advanced ? "contained" : "outlined"}
               endIcon={<CreateIcon />}
               onClick={onToggleAdvanced}
@@ -302,6 +303,8 @@ export const CharacterDialog: React.FC<{
           <Grid item>
             <Button
               color="primary"
+              data-cy="character-dialog.save"
+              data-cy-dirty={characterManager.state.dirty}
               variant={characterManager.state.dirty ? "contained" : "outlined"}
               type="submit"
               endIcon={<SaveIcon />}
@@ -328,6 +331,7 @@ export const CharacterDialog: React.FC<{
                 <ContentEditable
                   border
                   autoFocus
+                  data-cy="character-dialog.name"
                   readonly={props.readonly}
                   value={characterManager.state.character!.name}
                   onChange={(value) => {

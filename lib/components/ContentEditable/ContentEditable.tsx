@@ -9,14 +9,15 @@ const DOMPurifyOptions = {
 const ContentEditableDelay = 300;
 
 export const ContentEditable: React.FC<{
-  value: string;
-  onClick?: () => void;
-  onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
-  readonly?: boolean;
-  autoFocus?: boolean;
-  inline?: boolean;
-  border?: boolean;
-  id?: string;
+  "value": string;
+  "onClick"?: () => void;
+  "onChange"?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
+  "readonly"?: boolean;
+  "autoFocus"?: boolean;
+  "inline"?: boolean;
+  "border"?: boolean;
+  "id"?: string;
+  "data-cy"?: string;
 }> = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLSpanElement | null>(null);
@@ -65,6 +66,7 @@ export const ContentEditable: React.FC<{
 
   return (
     <span
+      data-cy={props["data-cy"]}
       className={css({
         outline: "none",
         wordBreak: "break-word",

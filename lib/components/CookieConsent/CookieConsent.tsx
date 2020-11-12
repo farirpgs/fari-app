@@ -25,7 +25,11 @@ export const CookieConsent: React.FC<{}> = (props) => {
       message={t("cookie-consent.description")}
       action={
         <Box>
-          <Button color="inherit" onClick={handleClose}>
+          <Button
+            color="inherit"
+            onClick={handleClose}
+            data-cy="cookie-consent"
+          >
             {t("cookie-consent.button")}
           </Button>
         </Box>
