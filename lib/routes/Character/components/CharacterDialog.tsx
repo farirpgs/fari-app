@@ -17,7 +17,7 @@ import {
   Snackbar,
   TextField,
   Typography,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -40,7 +40,7 @@ import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUp
 import {
   CharactersContext,
   CharacterType,
-  ICharacter,
+  ICharacter
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
@@ -206,6 +206,7 @@ export const CharacterDialog: React.FC<{
           <Grid container wrap="nowrap" spacing={2} justify="center">
             <Grid item>
               <Select
+                data-cy="character-dialog.template"
                 value={template}
                 onChange={(event) =>
                   onTemplateChange(event.target.value as CharacterType)
@@ -213,7 +214,11 @@ export const CharacterDialog: React.FC<{
               >
                 {Object.keys(CharacterType).map((type) => {
                   return (
-                    <MenuItem key={type} value={type}>
+                    <MenuItem
+                      key={type}
+                      data-cy={`character-dialog.template.${type}`}
+                      value={type}
+                    >
                       {t(
                         `character-dialog.template.${type}` as IPossibleTranslationKeys
                       )}
@@ -225,6 +230,7 @@ export const CharacterDialog: React.FC<{
             <Grid item>
               <Button
                 color="primary"
+                data-cy="character-dialog.load-template"
                 variant="text"
                 endIcon={<AssignmentIndIcon />}
                 onClick={onLoadTemplate}
@@ -483,6 +489,7 @@ export const CharacterDialog: React.FC<{
                       <>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.aspect.${aspect.name}.move-down`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -498,6 +505,7 @@ export const CharacterDialog: React.FC<{
                         </Grid>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.aspect.${aspect.name}.move-up`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -513,6 +521,7 @@ export const CharacterDialog: React.FC<{
                         </Grid>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.aspect.${aspect.name}.remove`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -622,6 +631,7 @@ export const CharacterDialog: React.FC<{
                         })}
                       >
                         <IconButton
+                          data-cy={`character-dialog.skill.${skill.name}.move-down`}
                           size="small"
                           className={smallIconButtonStyle}
                           onClick={() => {
@@ -637,6 +647,7 @@ export const CharacterDialog: React.FC<{
                       </Grid>
                       <Grid item>
                         <IconButton
+                          data-cy={`character-dialog.skill.${skill.name}.move-up`}
                           size="small"
                           className={smallIconButtonStyle}
                           onClick={() => {
@@ -652,6 +663,7 @@ export const CharacterDialog: React.FC<{
                       </Grid>
                       <Grid item>
                         <IconButton
+                          data-cy={`character-dialog.skill.${skill.name}.remove`}
                           size="small"
                           className={smallIconButtonStyle}
                           onClick={() => {
@@ -716,6 +728,7 @@ export const CharacterDialog: React.FC<{
                       <>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.stunt.${stunt.name}.move-down`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -731,6 +744,7 @@ export const CharacterDialog: React.FC<{
                         </Grid>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.stunt.${stunt.name}.move-up`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -746,6 +760,7 @@ export const CharacterDialog: React.FC<{
                         </Grid>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.stunt.${stunt.name}.remove`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -948,6 +963,7 @@ export const CharacterDialog: React.FC<{
                       <Grid item>
                         <IconButton
                           size="small"
+                          data-cy={`character-dialog.stressTrack.${stressTrack.name}.remove-box`}
                           onClick={() => {
                             characterManager.actions.removeStressBox(index);
                           }}
@@ -957,6 +973,7 @@ export const CharacterDialog: React.FC<{
                       </Grid>
                       <Grid item>
                         <IconButton
+                          data-cy={`character-dialog.stressTrack.${stressTrack.name}.add-box`}
                           size="small"
                           onClick={() => {
                             characterManager.actions.addStressBox(index);
@@ -967,6 +984,7 @@ export const CharacterDialog: React.FC<{
                       </Grid>
                       <Grid item>
                         <IconButton
+                          data-cy={`character-dialog.stressTrack.${stressTrack.name}.move-down`}
                           size="small"
                           className={smallIconButtonStyle}
                           onClick={() => {
@@ -982,6 +1000,7 @@ export const CharacterDialog: React.FC<{
                       </Grid>
                       <Grid item>
                         <IconButton
+                          data-cy={`character-dialog.stressTrack.${stressTrack.name}.move-up`}
                           size="small"
                           className={smallIconButtonStyle}
                           onClick={() => {
@@ -997,6 +1016,7 @@ export const CharacterDialog: React.FC<{
                       </Grid>
                       <Grid item>
                         <IconButton
+                          data-cy={`character-dialog.stressTrack.${stressTrack.name}.remove`}
                           size="small"
                           onClick={() => {
                             characterManager.actions.removeStressTrack(index);
@@ -1098,6 +1118,7 @@ export const CharacterDialog: React.FC<{
                       <>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.consequence.${consequence.name}.move-down`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -1113,6 +1134,7 @@ export const CharacterDialog: React.FC<{
                         </Grid>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.consequence.${consequence.name}.move-up`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -1128,6 +1150,7 @@ export const CharacterDialog: React.FC<{
                         </Grid>
                         <Grid item>
                           <IconButton
+                            data-cy={`character-dialog.consequence.${consequence.name}.remove`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
