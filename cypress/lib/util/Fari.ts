@@ -11,4 +11,7 @@ export const Fari = {
 
     cy.wait(contentEditableDelay + 100);
   },
+  closeBackdrop() {
+    cy.get(".MuiPopover-root").eq(0).click();
+  },
 };

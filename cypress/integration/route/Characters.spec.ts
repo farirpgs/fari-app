@@ -1,6 +1,6 @@
 import { Fari } from "lib/util/Fari";
 
-describe("Characters", () => {
+describe("/characters", () => {
   describe("Given I want to create a simple character sheet", () => {
     it("should support adding, filling up and removing a character", () => {
       Fari.start();
@@ -97,7 +97,7 @@ describe("Characters", () => {
     });
   });
 
-  describe.only("Given I want a to use a template", () => {
+  describe("Given I want a to use a template", () => {
     it("should let me do it", () => {
       Fari.start();
       cy.visit("/");

@@ -676,7 +676,7 @@ export const Scene: React.FC<IProps> = (props) => {
               showCharacterCards,
             ]}
           >
-            {aspects.map((aspectId) => {
+            {aspects.map((aspectId, index) => {
               return (
                 <Box
                   key={aspectId}
@@ -689,6 +689,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 >
                   <IndexCard
                     key={aspectId}
+                    data-cy={`scene.aspect.${index}`}
                     id={`index-card-${aspectId}`}
                     aspectId={aspectId}
                     readonly={!isGM}
@@ -745,6 +746,7 @@ export const Scene: React.FC<IProps> = (props) => {
               >
                 <ContentEditable
                   autoFocus
+                  data-cy="scene.name"
                   value={sceneManager.state.scene.name}
                   readonly={!isGM}
                   onChange={(value) => {
@@ -790,6 +792,7 @@ export const Scene: React.FC<IProps> = (props) => {
                             ...params.InputProps,
                             disableUnderline: true,
                           }}
+                          data-cy="scene.group"
                           inputProps={{
                             ...params.inputProps,
                             className: css({ padding: "2px" }),
@@ -830,6 +833,7 @@ export const Scene: React.FC<IProps> = (props) => {
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
               <Button
+                data-cy="scene.add-aspect"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.Aspect);
                   logger.info("Scene:onAddCard:Aspect");
@@ -839,6 +843,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {t("play-route.add-aspect")}
               </Button>
               <Button
+                data-cy="scene.add-boost"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.Boost);
                   logger.info("Scene:onAddCard:Boost");
@@ -848,6 +853,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {t("play-route.add-boost")}
               </Button>
               <Button
+                data-cy="scene.add-npc"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.NPC);
                   logger.info("Scene:onAddCard:NPC");
@@ -857,6 +863,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {t("play-route.add-npc")}
               </Button>
               <Button
+                data-cy="scene.add-bad-guy"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.BadGuy);
                   logger.info("Scene:onAddCard:BadGuy");
@@ -866,6 +873,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {t("play-route.add-bad-guy")}
               </Button>
               <Button
+                data-cy="scene.add-index-card"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.IndexCard);
                   logger.info("Scene:onAddCard:IndexCard");
@@ -917,6 +925,7 @@ export const Scene: React.FC<IProps> = (props) => {
           )}
           <Grid item>
             <Button
+              data-cy="scene.sort"
               onClick={() => {
                 props.sceneManager.actions.toggleSort();
                 logger.info("Scene:onSort");
@@ -1025,6 +1034,7 @@ export const Scene: React.FC<IProps> = (props) => {
           <Grid item>
             <Button
               color="primary"
+              data-cy="scene.save"
               endIcon={<SaveIcon />}
               variant={sceneManager.state.dirty ? "contained" : "outlined"}
               onClick={() => {

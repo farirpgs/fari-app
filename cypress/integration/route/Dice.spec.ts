@@ -1,6 +1,6 @@
 import { Fari } from "lib/util/Fari";
 
-describe("Dice Route", () => {
+describe("/dice", () => {
   it("Should roll dice", () => {
     Fari.start();
     Fari.get("page.menu.dice").click();

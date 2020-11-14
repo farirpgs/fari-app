@@ -356,6 +356,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
                 }}

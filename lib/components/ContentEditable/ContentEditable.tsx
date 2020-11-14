@@ -2,23 +2,25 @@ import { useTheme } from "@material-ui/core";
 import DOMPurify from "dompurify";
 import { css } from "emotion";
 import React, { useEffect, useRef } from "react";
+import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
 const DOMPurifyOptions = {
   ALLOWED_TAGS: ["br", "img"],
 };
 const ContentEditableDelay = 300;
 
-export const ContentEditable: React.FC<{
-  "value": string;
-  "onClick"?: () => void;
-  "onChange"?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
-  "readonly"?: boolean;
-  "autoFocus"?: boolean;
-  "inline"?: boolean;
-  "border"?: boolean;
-  "id"?: string;
-  "data-cy"?: string;
-}> = (props) => {
+export const ContentEditable: React.FC<
+  {
+    value: string;
+    onClick?: () => void;
+    onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
+    readonly?: boolean;
+    autoFocus?: boolean;
+    inline?: boolean;
+    border?: boolean;
+    id?: string;
+  } & IDataCyProps
+> = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLSpanElement | null>(null);
   const timeout = useRef<any | undefined>(undefined);
