@@ -38,6 +38,7 @@ import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
+import { Patreon } from "../Patreon/Patreon";
 
 let gameIdSingleton: string | undefined = undefined;
 const FariMaxWidth = "1920px";
@@ -50,12 +51,12 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  kofi?: boolean;
+  displayDonation?: boolean;
   live?: LiveMode;
   liveLabel?: string;
 }> = (props) => {
   const history = useHistory();
-  const { kofi = true } = props;
+  const { displayDonation = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -143,11 +144,6 @@ export const Page: React.FC<{
                 </Link>
               </Typography>
             </Grid>
-            {kofi && (
-              <Grid item>
-                <Kofi />
-              </Grid>
-            )}
             <Grid item>
               <Typography>
                 <AppLink to="/changelog">{`v${env.version}`}</AppLink>
@@ -176,6 +172,22 @@ export const Page: React.FC<{
               </Select>
             </Grid>
           </Grid>
+          {displayDonation && (
+            <Grid
+              container
+              justify="space-between"
+              spacing={4}
+              alignItems="center"
+            >
+              <Grid item sm>
+                <Kofi />
+              </Grid>
+
+              <Grid item>
+                <Patreon />
+              </Grid>
+            </Grid>
+          )}
         </Container>
       </Box>
     );
@@ -308,7 +320,7 @@ export const Page: React.FC<{
               })}
             />
             <Hidden smDown>
-              {kofi && !shouldDisplayRejoinButton && <Kofi />}
+              {displayDonation && !shouldDisplayRejoinButton && <Kofi />}
             </Hidden>
             {shouldDisplayRejoinButton && (
               <Button

@@ -186,7 +186,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   }
 
   return (
-    <Page kofi={false}>
+    <Page displayDonation={false}>
       <PageMeta
         title={t("home-route.meta.title")}
         description={t("home-route.meta.description")}
