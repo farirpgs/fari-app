@@ -19,7 +19,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-const Patrons = ["James Micu"];
+const Patrons = ["James Micu", "Randy Oest"];
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
