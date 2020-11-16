@@ -7,6 +7,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleLanguages } from "../../services/internationalization/InternationalizationService";
+import AboutDeMarkdown from "./page/About.de.md";
 import AboutEnMarkdown from "./page/About.en.md";
 import AboutEsMarkdown from "./page/About.es.md";
 import AboutFrMarkdown from "./page/About.fr.md";
@@ -20,6 +21,7 @@ const html: Record<IPossibleLanguages, string> = {
   "es": converter.makeHtml(AboutEsMarkdown),
   "fr": converter.makeHtml(AboutFrMarkdown),
   "ru": converter.makeHtml(AboutRuMarkdown),
+  "de": converter.makeHtml(AboutDeMarkdown),
   "dev": converter.makeHtml(AboutEnMarkdown),
 };
 
