@@ -31,6 +31,7 @@ export interface IAspect {
 export interface IScene {
   id: string;
   name: string;
+  group: string | undefined;
   aspects: Record<string, IAspect>;
   gm: IPlayer;
   players: Array<IPlayer>;

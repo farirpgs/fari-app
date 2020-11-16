@@ -22,6 +22,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
+import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -31,13 +32,15 @@ import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
-export const IndexCard: React.FC<{
-  readonly: boolean;
-  className?: string;
-  id?: string;
-  aspectId: string;
-  sceneManager: ReturnType<typeof useScene>;
-}> = (props) => {
+export const IndexCard: React.FC<
+  {
+    readonly: boolean;
+    className?: string;
+    id?: string;
+    aspectId: string;
+    sceneManager: ReturnType<typeof useScene>;
+  } & IDataCyProps
+> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -117,6 +120,7 @@ export const IndexCard: React.FC<{
             <IconButton
               ref={$menu}
               size="small"
+              data-cy={`${props["data-cy"]}.menu`}
               onClick={() => {
                 setMenuOpen(true);
               }}
@@ -151,6 +155,7 @@ export const IndexCard: React.FC<{
         <Grid item xs>
           <ContentEditable
             id={props.id}
+            data-cy={`${props["data-cy"]}.title`}
             value={aspect.title}
             readonly={props.readonly}
             onChange={(newTitle) => {
@@ -164,6 +169,7 @@ export const IndexCard: React.FC<{
         <Grid item>
           {shouldRenderPlayedDuringTurnIcon && (
             <IconButton
+              data-cy={`${props["data-cy"]}.initiative`}
               onClick={() => {
                 props.sceneManager.actions.updateAspectPlayerDuringTurn(
                   props.aspectId,
@@ -189,6 +195,7 @@ export const IndexCard: React.FC<{
     return [
       <MenuItem
         key="onAddAspectFreeInvoke"
+        data-cy={`${props["data-cy"]}.menu.free-invokes`}
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(
             props.aspectId,
@@ -200,6 +207,7 @@ export const IndexCard: React.FC<{
       </MenuItem>,
       <MenuItem
         key="onAddAspectPhysicalStress"
+        data-cy={`${props["data-cy"]}.menu.physical-stress`}
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(
             props.aspectId,
@@ -211,6 +219,7 @@ export const IndexCard: React.FC<{
       </MenuItem>,
       <MenuItem
         key="onAddAspectMentalStress"
+        data-cy={`${props["data-cy"]}.menu.mental-stress`}
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(
             props.aspectId,
@@ -222,6 +231,7 @@ export const IndexCard: React.FC<{
       </MenuItem>,
       <MenuItem
         key="onAddConsequence"
+        data-cy={`${props["data-cy"]}.menu.consequence`}
         onClick={() => {
           props.sceneManager.actions.addAspectConsequence(props.aspectId);
         }}
@@ -230,6 +240,7 @@ export const IndexCard: React.FC<{
       </MenuItem>,
       <MenuItem
         key="onAddCountdown"
+        data-cy={`${props["data-cy"]}.menu.track`}
         onClick={() => {
           props.sceneManager.actions.addAspectTrack(props.aspectId, "...");
         }}
@@ -251,6 +262,7 @@ export const IndexCard: React.FC<{
   function renderGlobalMenuItems() {
     return [
       <MenuItem
+        data-cy={`${props["data-cy"]}.menu.remove`}
         key="onRemove"
         onClick={() => {
           setMenuOpen(false);
@@ -260,6 +272,7 @@ export const IndexCard: React.FC<{
         {t("index-card.remove")}
       </MenuItem>,
       <MenuItem
+        data-cy={`${props["data-cy"]}.menu.reset`}
         key="onReset"
         onClick={() => {
           setMenuOpen(false);
@@ -287,6 +300,7 @@ export const IndexCard: React.FC<{
             return (
               <Grid item key={colorName}>
                 <IconButton
+                  data-cy={`${props["data-cy"]}.menu.color.${colorName}`}
                   onClick={(e) => {
                     props.sceneManager.actions.updateAspectColor(
                       props.aspectId,
@@ -328,6 +342,7 @@ export const IndexCard: React.FC<{
       >
         <Box p="0 1rem">
           <ContentEditable
+            data-cy={`${props["data-cy"]}.content`}
             readonly={props.readonly}
             value={aspect.content}
             onChange={(newContent) => {
@@ -369,6 +384,7 @@ export const IndexCard: React.FC<{
                 <Grid item className={css({ flex: "1 1 auto" })}>
                   <FateLabel display="inline" size="small">
                     <ContentEditable
+                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.name`}
                       value={stressTrack.name}
                       readonly={props.readonly}
                       onChange={(newTrackName) => {
@@ -385,6 +401,7 @@ export const IndexCard: React.FC<{
                   <Grid item>
                     <IconButton
                       size="small"
+                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.remove-box`}
                       onClick={() => {
                         props.sceneManager.actions.removeAspectTrackBox(
                           props.aspectId,
@@ -405,6 +422,7 @@ export const IndexCard: React.FC<{
                   <Grid item>
                     <IconButton
                       size="small"
+                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.add-box`}
                       onClick={() => {
                         props.sceneManager.actions.addAspectTrackBox(
                           props.aspectId,
@@ -425,6 +443,7 @@ export const IndexCard: React.FC<{
                   <Grid item>
                     <IconButton
                       size="small"
+                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.remove`}
                       onClick={() => {
                         props.sceneManager.actions.removeAspectTrack(
                           props.aspectId,
@@ -454,6 +473,7 @@ export const IndexCard: React.FC<{
                         })}
                       >
                         <Checkbox
+                          data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.box.${boxIndex}`}
                           color="default"
                           size="small"
                           checked={stressBox.checked}
@@ -516,6 +536,7 @@ export const IndexCard: React.FC<{
                     <Grid item className={css({ flex: "1 1 auto" })}>
                       <FateLabel size="small">
                         <ContentEditable
+                          data-cy={`${props["data-cy"]}.consequence.${name}.name`}
                           value={name}
                           readonly={props.readonly}
                           onChange={(newName) => {
@@ -531,6 +552,7 @@ export const IndexCard: React.FC<{
                     <Grid item>
                       <IconButton
                         size="small"
+                        data-cy={`${props["data-cy"]}.consequence.${name}.remove`}
                         onClick={() => {
                           props.sceneManager.actions.removeAspectConsequence(
                             props.aspectId,

@@ -1,25 +1,12 @@
+import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
+
 export const listItem = {
   formatDate(timestamp: number) {
     if (!timestamp) {
       return "";
     }
-    try {
-      const options: Intl.DateTimeFormatOptions = {
-        hour: "numeric",
-        minute: "numeric",
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      };
-      const formattedDate = new Date(timestamp).toLocaleDateString(
-        undefined,
-        options
-      );
-      return formattedDate;
-    } catch (error) {
-      return new Date(timestamp).toString();
-    }
+    const date = getDayJSFrom(timestamp);
+    return date.format("lll");
   },
 
   getColor(str: string) {

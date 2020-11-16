@@ -1,17 +1,26 @@
 import { useTheme } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
 const diceMap: Record<string, string> = {
-  "-1": "-",
-  "0": "o",
-  "1": "+",
+  "-1": "[-]",
+  "0": "[ ]",
+  "1": "[+]",
 } as const;
 
 const rollingDelay = 1000;
 
+function usePrevious<T>(value: T) {
+  const ref = useRef<T>(value);
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 export function useFudgeDice(rolls: Array<IDiceRoll>) {
+  const previousRolls = usePrevious(rolls);
   const [realRoll] = rolls;
 
   const theme = useTheme();
@@ -20,13 +29,24 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const [color, setColor] = useState("inherit");
   const hasRolledOnce = roll !== undefined;
 
-  const label = roll?.total ?? "";
-  const rollSigns = roll?.rolls
+  const bonus = roll?.bonus ?? 0;
+  const bonusLabel = roll?.bonusLabel ?? "";
+  const total = roll?.total ?? 0;
+
+  const rollsForSignes = roll?.rolls ?? [];
+  const rollSigns = rollsForSignes
     .map((r) => {
       return diceMap[r];
     })
     .join(" ");
-  const tooltip = rolling ? "" : rollSigns ?? "";
+
+  const shouldDisplay = rolling || !roll;
+  const hasBonus = !!roll?.bonusLabel;
+
+  const label = shouldDisplay ? "" : formatNumber(total + bonus);
+  const tooltipTitle = shouldDisplay ? "" : `${rollSigns} (${total})` ?? "";
+  const tooltipDescription =
+    rolling || !hasBonus ? "" : `${bonusLabel} (${formatNumber(bonus)})`;
 
   useEffect(() => {
     let newColor = "inherit";
@@ -48,6 +68,7 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   function setFinalResult() {
     setRolling(false);
     setRoll(realRoll);
+
     if (realRoll?.total === 4) {
       Confetti.fireConfetti();
     } else if (realRoll?.total === -4) {
@@ -57,6 +78,12 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
 
   useEffect(() => {
     let timeout: NodeJS.Timer | undefined = undefined;
+    const isFirstLoad = previousRolls?.length === rolls.length;
+
+    if (isFirstLoad) {
+      setFinalResult();
+      return;
+    }
     if (realRoll !== undefined) {
       setRollingState();
       timeout = setTimeout(() => {
@@ -73,10 +100,18 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   return {
     state: {
       label,
-      tooltip,
+      tooltipTitle: tooltipTitle,
+      tooltipDescription: tooltipDescription,
       rolling,
       hasRolledOnce,
       color,
     },
   };
+}
+
+function formatNumber(n: number): string {
+  if (n > 0) {
+    return `+${n}`;
+  }
+  return n.toString();
 }

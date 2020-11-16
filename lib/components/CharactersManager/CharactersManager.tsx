@@ -81,6 +81,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
         id: c.id,
         name: c.name,
         lastUpdated: c.lastUpdated,
+        group: c.group,
       })}
       mode={charactersManager.state.mode}
       onItemClick={onItemClick}

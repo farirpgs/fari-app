@@ -11,9 +11,11 @@ export function makeLogger(sentryService: SentryService) {
     },
     warn(message: string, context?: any) {
       sentryService.log(message, Severity.Warning, context);
+      console.warn(message, context);
     },
     error(message: string, context?: any) {
       sentryService.log(message, Severity.Error, context);
+      console.error(message, context);
     },
   };
 }

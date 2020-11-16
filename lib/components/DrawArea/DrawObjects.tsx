@@ -19,23 +19,22 @@ import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import { css } from "emotion";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
 import {
   DrawingTool,
   IDrawAreaObjects,
+  IDrawingManager,
   ObjectType,
-  useDrawing,
 } from "./hooks/useDrawing";
 
 interface IProps {
-  objects?: IDrawAreaObjects;
+  drawingManager: IDrawingManager;
   readonly?: boolean;
   fullScreen?: boolean;
   controls: "bottom" | "top";
@@ -45,22 +44,23 @@ interface IProps {
 }
 
 export const DrawObjects: React.FC<IProps> = (props) => {
-  const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-
   const textColors = useTextColors(theme.palette.background.paper);
   const [
     drawingToolBeforeColorPicker,
     setDrawingToolBeforeColorPicker,
   ] = useState<DrawingTool | undefined>(undefined);
   const $paletteButton = useRef<HTMLButtonElement | null>(null);
-  const drawingManager = useDrawing({
-    objects: props.objects,
-    readonly: props.readonly,
-    onChange: props.onChange,
-  });
+  const $svg = useRef<SVGSVGElement | null>(null);
+  const $container = useRef<HTMLDivElement | null>(null);
+
   let tokenIndex = 0;
+  const { drawingManager } = props;
+
+  useEffect(() => {
+    drawingManager.actions.setSVG($container.current, $svg.current);
+  }, []);
 
   function resetDrawingTool() {
     if (drawingToolBeforeColorPicker) {
@@ -97,7 +97,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
   function renderDrawArea() {
     return (
       <div
-        ref={drawingManager.state.$container}
+        ref={$container}
         onPointerDown={drawingManager.handlers.onStartDrawing}
         onPointerMove={drawingManager.handlers.onDrawing}
         onPointerUp={drawingManager.handlers.onStopDrawing}
@@ -136,7 +136,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
         </Fade>
         <Fade in={drawingManager.state.objects.length > 0}>
           <svg
-            ref={drawingManager.state.$svgElement}
+            ref={$svg}
             width="100%"
             height="100%"
             viewBox="0 0 100 100"

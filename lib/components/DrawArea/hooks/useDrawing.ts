@@ -77,10 +77,8 @@ export function useDrawing(props: {
   const [color, setColor] = useState("#000000");
   const [tokenIndex, setTokenIndex] = useState(0);
   const $container = useRef<HTMLDivElement | null>(null);
-  const $svgElement = useRef<SVGSVGElement | null>(null);
   const onChangeTimeout = useRef<any | undefined>(undefined);
-
-  const roughSVG = $svgElement.current && rough.svg($svgElement.current);
+  const roughSVG = useRef<ReturnType<typeof rough.svg> | undefined>(undefined);
 
   useEffect(() => {
     const shouldUpdateLocalState =
@@ -91,7 +89,12 @@ export function useDrawing(props: {
   }, [props.objects]);
 
   useEffect(() => {
-    changeWithDelay(objects);
+    const shouldCallOnChange =
+      props.objects && props.objects.length !== objects.length;
+
+    if (shouldCallOnChange) {
+      changeWithDelay(objects);
+    }
   }, [objects]);
 
   function changeWithDelay(objects: IDrawAreaObjects) {
@@ -99,6 +102,11 @@ export function useDrawing(props: {
     onChangeTimeout.current = setTimeout(() => {
       props.onChange?.(objects);
     }, ON_CHANGE_DELAY);
+  }
+
+  function setSVG($newContainer: any, $newSVG: any) {
+    $container.current = $newContainer;
+    roughSVG.current = rough.svg($newSVG);
   }
 
   function onStartDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
@@ -328,14 +336,14 @@ export function useDrawing(props: {
       objects: objects,
       isDrawing: drawing,
       $container,
-      $svgElement,
-      roughSVG,
+      roughSVG: roughSVG.current,
       drawingTool,
       color,
     },
     actions: {
       clear,
       undo,
+      setSVG,
       setColor,
       setDrawingTool,
     },
@@ -349,3 +357,5 @@ export function useDrawing(props: {
     },
   };
 }
+
+export type IDrawingManager = ReturnType<typeof useDrawing>;

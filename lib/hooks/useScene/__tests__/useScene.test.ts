@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
 import {
   ILineObject,
-  ObjectType,
+  ObjectType
 } from "../../../components/DrawArea/hooks/useDrawing";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
@@ -20,6 +20,7 @@ fdescribe("useScene", () => {
     const expectDefaultScene: IScene = {
       id: expect.anything(),
       name: "",
+      group: undefined,
       aspects: {},
       gm: {
         id: "111",
@@ -74,6 +75,7 @@ fdescribe("useScene", () => {
       // GIVEN
       const sceneToLoad = {
         id: "new-id",
+        group: undefined,
         aspects: { "aspect-id": { toto: 3 } as any },
         lastUpdated: 111,
         name: "new name",
@@ -133,6 +135,7 @@ fdescribe("useScene", () => {
       act(() => {
         result.current.actions.loadScene({
           id: "new-id",
+          group: undefined,
           aspects: { "aspect-id": { toto: 3 } as any },
           lastUpdated: 111,
           name: "new name",
@@ -771,6 +774,7 @@ function mockUseCharacters() {
   const result = {
     state: {
       characters: [],
+      groups: [],
       mode: ManagerMode.Close,
       managerCallback: undefined,
     },

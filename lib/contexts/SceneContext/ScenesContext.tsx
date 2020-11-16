@@ -1,13 +1,15 @@
 import produce from "immer";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 
 export type ISavableScene = Pick<
   IScene,
-  "id" | "name" | "aspects" | "version" | "lastUpdated"
+  "id" | "name" | "aspects" | "version" | "lastUpdated" | "group"
 >;
 
 type IManagerCallback = (scene: ISavableScene) => void | undefined;
@@ -39,9 +41,16 @@ export function useScenes(props?: { localStorage: Storage }) {
     return [];
   });
 
-  const sortedScenes = arraySort(scenes, [
-    (c) => ({ value: c.lastUpdated, direction: "desc" }),
-  ]);
+  const sortedScenes = useMemo(() => {
+    return arraySort(scenes, [
+      (s) => {
+        const lastUpdate = getUnixFrom(s.lastUpdated);
+        return { value: lastUpdate, direction: "desc" };
+      },
+    ]);
+  }, [scenes]);
+
+  const groups = useGroups(sortedScenes, (s) => s.group);
 
   useEffect(() => {
     // sync local storage
@@ -80,9 +89,10 @@ export function useScenes(props?: { localStorage: Storage }) {
     const newScene: ISavableScene = {
       id: scene.id,
       name: scene.name,
+      group: scene.group,
       aspects: scene.aspects,
       version: scene.version,
-      lastUpdated: new Date().getTime(),
+      lastUpdated: getUnix(),
     };
     if (!exists) {
       setScenes((draft: Array<ISavableScene>) => {
@@ -111,6 +121,7 @@ export function useScenes(props?: { localStorage: Storage }) {
     state: {
       mode: mode,
       scenes: sortedScenes,
+      groups: groups,
       managerCallback: managerCallback.current,
     },
     actions: {
@@ -127,9 +138,10 @@ function makeDefaultSavableScene(): ISavableScene {
   return {
     id: uuidV4(),
     name: defaultSceneName,
+    group: undefined,
     aspects: defaultSceneAspects,
     version: defaultSceneVersion,
-    lastUpdated: new Date().getTime(),
+    lastUpdated: getUnix(),
   };
 }
 

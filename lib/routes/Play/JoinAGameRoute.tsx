@@ -6,6 +6,7 @@ import {
   Container,
   Grid,
   InputLabel,
+  Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -89,59 +90,24 @@ export const JoinAGame: React.FC<{
             {t("play-route.connect-to-game")}
           </Typography>
         </Box>
-        <Box pb="1rem">
-          <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
-          <TextField
-            placeholder="Magnus Burnsides"
-            value={playerName}
-            onChange={(event) => {
-              setPlayerName(event.target.value);
-            }}
-            inputProps={{
-              maxLength: "50",
-            }}
-            fullWidth
-            autoFocus
-            required
-          />
-        </Box>
-        <Box pb="2rem">
-          <Grid container justify="center">
-            <Grid item>
-              <Button
-                type="submit"
-                variant={playerName ? "contained" : "outlined"}
-                color="primary"
-              >
-                {playerName
-                  ? t("play-route.join-as", { playerName: playerName })
-                  : t("play-route.join")}
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
         <Collapse in={props.connecting}>
-          <Box pb="1rem">
-            <Box pb="3rem" display="flex" justifyContent="center">
-              <Typography>{t("play-route.awesome-name")}</Typography>
-            </Box>
+          <Box pb="2rem">
             <Box display="flex" justifyContent="center">
               <CircularProgress />
             </Box>
           </Box>
         </Collapse>
-
         <Collapse in={props.error}>
-          <Box pb="1rem" textAlign="center">
+          <Box pb="2rem" textAlign="center">
             <Typography color="error">{t("play-route.join-error")}</Typography>
           </Box>
         </Collapse>
-
-        <Box>
+        <Box pb="1rem">
           <Grid container justify="center">
             <Grid item>
               <Button
                 color="primary"
+                variant="contained"
                 onClick={() => {
                   charactersManager.actions.openManager(
                     ManagerMode.Use,
@@ -153,6 +119,47 @@ export const JoinAGame: React.FC<{
               </Button>
             </Grid>
           </Grid>
+        </Box>
+        <Box py="3rem">
+          <Typography variant="h6" align="center">
+            {t("play-route.or")}
+          </Typography>
+        </Box>
+        <Box pb="1rem">
+          <Paper>
+            <Box p="1rem">
+              <Box pb="1rem">
+                <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+                <TextField
+                  placeholder="Magnus Burnsides"
+                  value={playerName}
+                  onChange={(event) => {
+                    setPlayerName(event.target.value);
+                  }}
+                  inputProps={{
+                    maxLength: "50",
+                  }}
+                  fullWidth
+                  required
+                />
+              </Box>
+              <Box>
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Button
+                      type="submit"
+                      variant={playerName ? "contained" : "outlined"}
+                      color="secondary"
+                    >
+                      {playerName
+                        ? t("play-route.join-as", { playerName: playerName })
+                        : t("play-route.join")}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </Paper>
         </Box>
       </form>
     );

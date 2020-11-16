@@ -1,5 +1,5 @@
 import produce from "immer";
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
@@ -17,6 +17,7 @@ import {
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
+import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
@@ -35,6 +36,7 @@ export function useScene(props: IProps) {
   const [scene, setScene] = useState<IScene>(() => ({
     id: uuidV4(),
     name: defaultSceneName,
+    group: undefined,
     aspects: defaultSceneAspects,
     gm: {
       id: isGM ? userId : temporaryGMIdUntilFirstSync,
@@ -48,9 +50,10 @@ export function useScene(props: IProps) {
     goodConfetti: 0,
     badConfetti: 0,
     sort: false,
+    showCharacterCards: undefined,
     drawAreaObjects: [],
     version: defaultSceneVersion,
-    lastUpdated: new Date().getTime(),
+    lastUpdated: getUnix(),
   }));
 
   const [sceneToLoad, setSceneToLoad] = useState<ISavableScene | undefined>(
@@ -65,6 +68,7 @@ export function useScene(props: IProps) {
     const currentScene: ISavableScene = {
       id: scene.id,
       name: scene.name,
+      group: scene.group,
       aspects: scene.aspects,
       version: scene.version,
       lastUpdated: scene.lastUpdated,
@@ -78,6 +82,7 @@ export function useScene(props: IProps) {
         produce((draft: IScene) => {
           draft.id = sceneToLoad.id;
           draft.name = sceneToLoad.name;
+          draft.group = sceneToLoad.group;
           draft.aspects = sceneToLoad.aspects;
           draft.version = sceneToLoad.version;
           draft.lastUpdated = sceneToLoad.lastUpdated;
@@ -122,6 +127,7 @@ export function useScene(props: IProps) {
       setSceneToLoad({
         id: newScene.id,
         name: newScene.name,
+        group: newScene.group,
         aspects: newScene.aspects,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
@@ -156,6 +162,14 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         draft.name = name;
+      })
+    );
+  }
+
+  function setGroup(newGroup: string | null | undefined) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.group = newGroup as string | undefined;
       })
     );
   }
@@ -582,6 +596,7 @@ export function useScene(props: IProps) {
       loadScene,
       cloneAndLoadScene,
       updateName,
+      setGroup,
       addAspect,
       removeAspect,
       resetAspect,

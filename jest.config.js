@@ -1,6 +1,11 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
+  // https://jestjs.io/docs/en/configuration#testmatch-arraystring
+  testMatch: [
+    "<rootDir>/lib/**/__tests__/**/*.[jt]s?(x)",
+    "<rootDir>/lib/**/?(*.)+(spec|test).[jt]s?(x)",
+  ],
   globals: {
     "ts-jest": {
       isolatedModules: true,
