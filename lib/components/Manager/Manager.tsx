@@ -13,7 +13,7 @@ import {
   ListSubheader,
   Snackbar,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExportIcon from "@material-ui/icons/GetApp";
@@ -217,7 +217,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               key={`${groupName}-${index}`}
               subheader={
                 <ListSubheader component="div">
-                  {groupName || "Ungrouped"}
+                  {groupName || t("manager.ungrouped")}
                 </ListSubheader>
               }
             >
