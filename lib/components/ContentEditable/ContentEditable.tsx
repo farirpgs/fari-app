@@ -7,7 +7,7 @@ import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 const DOMPurifyOptions = {
   ALLOWED_TAGS: ["br", "img"],
 };
-const ContentEditableDelay = 300;
+const ContentEditableDelay = 125;
 
 export const ContentEditable: React.FC<
   {
@@ -93,9 +93,6 @@ export const ContentEditable: React.FC<
         }
       }}
       onInput={(e) => {
-        onChange(e);
-      }}
-      onBlur={(e) => {
         onChange(e);
       }}
       contentEditable={!props.readonly}
