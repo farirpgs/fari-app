@@ -1,79 +1,10 @@
-<style>
-  hr {
-    margin-bottom: 16px;
-  }
-
-  .badges {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom: 16px
-  }
-
-  .badges > * {
-    margin: 0 8px;
-  }
-
-  .donations {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom: 16px
-  }
-
-  .donations > * {
-    margin: 0 8px;
-    text-decoration: none !important;
-    color:rgb(255, 255, 255) !important;
-    padding: 4px 16px;
-  }
-
-  .patreon {
-    background-color:rgb(255, 66, 77);
-    border-radius:9999px;
-    display:flex;
-    align-items:center;
-  }
-
-  .patreon img {
-    width:16px;
-    margin-right:4px;
-  }
-
-  .kofi {
-    background-color: #3f51b5;
-    border-radius: 7px;
-    display:flex;
-    align-items:center;
-  }
-
-  .kofi img {
-    width:22px ;
-    height:15px;
-    margin-right:4px;
-  }
-
-</style>
-
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
-<div class="donations">
-  <a class="patreon" href="https://www.patreon.com/bePatron?u=43408921" >
-    <img src="./images/services/patreon.png" >
-    Become a Patron!
-  </a>
-  <a  class="kofi" href="https://ko-fi.com/B0B4AHLJ">
-    <img src="https://storage.ko-fi.com/cdn/cup-border.png" >
-    Support me on Ko-Fi
-  </a>
-</div>
+[![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
+[![ko-fi](https://img.shields.io/static/v1?style=flat-square&logo=ko-fi&color=3f51b5&label=donate&message=Support%20me%20on%20Ko-Fi)](https://ko-fi.com/B0B4AHLJ)
 
-<hr />
-
-<div class="badges">
-  <img title="Continous Integration" src="https://github.com/fariapp/fari/workflows/CI/badge.svg">
-  <img title="Integration Tests" src="https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg">
-</div>
+![Continous Integration](https://github.com/fariapp/fari/workflows/CI/badge.svg)
+![Integration Tests](https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg)
 
 This repo contains the source code that powers Fari.
 
