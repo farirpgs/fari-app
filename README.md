@@ -1,8 +1,79 @@
+<style>
+  hr {
+    margin-bottom: 16px;
+  }
+
+  .badges {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom: 16px
+  }
+
+  .badges > * {
+    margin: 0 8px;
+  }
+
+  .donations {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom: 16px
+  }
+
+  .donations > * {
+    margin: 0 8px;
+    text-decoration: none !important;
+    color:rgb(255, 255, 255) !important;
+    padding: 4px 16px;
+  }
+
+  .patreon {
+    background-color:rgb(255, 66, 77);
+    border-radius:9999px;
+    display:flex;
+    align-items:center;
+  }
+
+  .patreon img {
+    width:16px;
+    margin-right:4px;
+  }
+
+  .kofi {
+    background-color: #3f51b5;
+    border-radius: 7px;
+    display:flex;
+    align-items:center;
+  }
+
+  .kofi img {
+    width:22px ;
+    height:15px;
+    margin-right:4px;
+  }
+
+</style>
+
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
-[![Build Status](https://dev.azure.com/fariapp/fari/_apis/build/status/fariapp.fari?branchName=master)](https://dev.azure.com/fariapp/fari/_build?definitionId=1&_a=summary&view=branches)
+<div class="donations">
+  <a class="patreon" href="https://www.patreon.com/bePatron?u=43408921" >
+    <img src="./images/services/patreon.png" >
+    Become a Patron!
+  </a>
+  <a  class="kofi" href="https://ko-fi.com/B0B4AHLJ">
+    <img src="https://storage.ko-fi.com/cdn/cup-border.png" >
+    Support me on Ko-Fi
+  </a>
+</div>
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B4AHLJ)
+<hr />
+
+<div class="badges">
+  <img title="Continous Integration" src="https://github.com/fariapp/fari/workflows/CI/badge.svg">
+  <img title="Integration Tests" src="https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg">
+</div>
 
 This repo contains the source code that powers Fari.
 
