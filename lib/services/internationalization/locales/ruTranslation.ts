@@ -86,7 +86,7 @@ export const ruTranslation: Record<
   "manager.new": `Создать`,
   "manager.no-items": `Пока что здесь ничего нет`,
   "manager.undo": `Отменить`,
-  "manager.ungrouped": "Ungrouped",
+  "manager.ungrouped": `Ungrouped`,
   "menu.about": `О Fari`,
   "menu.characters": `Персонажи`,
   "menu.dice": `Dice`,

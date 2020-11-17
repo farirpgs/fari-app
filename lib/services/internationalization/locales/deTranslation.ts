@@ -86,7 +86,7 @@ export const deTranslation: Record<
   "manager.new": `Neu`,
   "manager.no-items": `Hier gibt es noch nichts`,
   "manager.undo": `Rückgängig`,
-  "manager.ungrouped": "Nicht gruppiert",
+  "manager.ungrouped": `Nicht gruppiert`,
   "menu.about": `Über`,
   "menu.characters": `Charaktere`,
   "menu.dice": `Würfel`,
@@ -150,5 +150,5 @@ export const deTranslation: Record<
   "player-row.remove-character": `Charakter entfernen`,
   "player-row.remove-fate-point": `Fate Punkt entfernen`,
   "scenes-route.meta.description": `Fari ist die beste Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel. Spiele mit deinen Freunden Szenen in Echtzeit, würfle mit Fudge-Würfeln, lasse deiner kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!`,
-  "scenes-route.meta.title": `Verwalte deine Szenen`
+  "scenes-route.meta.title": `Verwalte deine Szenen`,
 };

@@ -86,7 +86,7 @@ export const esTranslation: Record<
   "manager.new": `Nuevo`,
   "manager.no-items": `No hay nada aquí todavía`,
   "manager.undo": `Deshacer`,
-  "manager.ungrouped": "Ungrouped",
+  "manager.ungrouped": `Ungrouped`,
   "menu.about": `Acerca de`,
   "menu.characters": `Personajes`,
   "menu.dice": `Dados`,

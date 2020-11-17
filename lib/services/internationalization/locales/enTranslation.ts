@@ -81,7 +81,7 @@ export const enTranslation = {
   "manager.new": `New`,
   "manager.no-items": `There's nothing here yet`,
   "manager.undo": `Undo`,
-  "manager.ungrouped": "Ungrouped",
+  "manager.ungrouped": `Ungrouped`,
   "menu.about": `About`,
   "menu.characters": `Characters`,
   "menu.dice": `Dice`,

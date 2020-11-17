@@ -86,7 +86,7 @@ export const ptbrTranslation: Record<
   "manager.new": `Novo`,
   "manager.no-items": `Não há nada aqui ainda`,
   "manager.undo": `Desfazer`,
-  "manager.ungrouped": "Ungrouped",
+  "manager.ungrouped": `Ungrouped`,
   "menu.about": `Sobre`,
   "menu.characters": `Personagem`,
   "menu.dice": `Dados`,
