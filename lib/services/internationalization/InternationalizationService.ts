@@ -2,6 +2,7 @@ import i18next, { i18n } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { ILogger } from "../logger/makeLogger";
+import { deTranslation } from "./locales/deTranslation";
 import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
@@ -15,8 +16,10 @@ export const PossibleLanguages = [
   "pt-BR",
   "fr",
   "ru",
+  "de",
   "dev",
 ] as const;
+
 export type IPossibleLanguages = typeof PossibleLanguages[number];
 
 export class InternationalizationService {
@@ -32,7 +35,7 @@ export class InternationalizationService {
       .use(LanguageDetector)
       .use(initReactI18next)
       .init({
-        resources: {
+        resources: {          
           "en": {
             translation: enTranslation,
           },
@@ -41,6 +44,9 @@ export class InternationalizationService {
           },
           "fr": {
             translation: frTranslation,
+          },
+          "de": {
+            translation: deTranslation,
           },
           "pt-BR": {
             translation: ptbrTranslation,

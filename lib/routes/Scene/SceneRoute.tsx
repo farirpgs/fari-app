@@ -38,7 +38,7 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad);
+      sceneManager.actions.loadScene(sceneToLoad, false);
     } else {
       history.replace("/");
       scenesManager.actions.openManager(ManagerMode.Manage);

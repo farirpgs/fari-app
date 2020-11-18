@@ -264,7 +264,6 @@ describe("/characters", () => {
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
 
-      return;
       // navigate away
       Fari.get("page.menu.play").click();
 

@@ -14,4 +14,7 @@ export const Fari = {
   closeBackdrop() {
     cy.get(".MuiPopover-root").eq(0).click();
   },
+  closeDrawer() {
+    cy.get(".MuiBackdrop-root").eq(0).click();
+  },
 };

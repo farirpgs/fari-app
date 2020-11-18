@@ -13,6 +13,7 @@ import {
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { css } from "emotion";
 import React from "react";
+import { zIndex } from "../../constants/zIndex";
 
 export type IOption = {
   label: string;
@@ -25,7 +26,6 @@ type IProps = {
 
 export const SplitButton: React.FC<IProps> = (props) => {
   const { options, ...buttonProps } = props;
-
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -65,6 +65,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
+          className={css({ zIndex: zIndex.splitButton })}
           transition
           disablePortal
         >

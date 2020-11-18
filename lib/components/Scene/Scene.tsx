@@ -171,11 +171,11 @@ export const Scene: React.FC<IProps> = (props) => {
   );
 
   function onLoadScene(newScene: ISavableScene) {
-    sceneManager.actions.loadScene(newScene);
+    sceneManager.actions.loadScene(newScene, true);
   }
 
-  function onLoadTemplateScene(newScene: ISavableScene) {
-    sceneManager.actions.cloneAndLoadScene(newScene);
+  function onCloneAndLoadScene(newScene: ISavableScene) {
+    sceneManager.actions.cloneAndLoadNewScene(newScene);
   }
 
   function onAddOfflineCharacter(character: ICharacter) {
@@ -939,7 +939,7 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.sort")}
             </Button>
           </Grid>
-          {props.mode === SceneMode.PlayOnline && (
+          {props.mode !== SceneMode.Manage && (
             <Grid item>
               <Button
                 onClick={() => {
@@ -1028,6 +1028,23 @@ export const Scene: React.FC<IProps> = (props) => {
     if (!isGM) {
       return null;
     }
+
+    const loadSceneOption = {
+      label: t("play-route.load-scene"),
+      onClick: () => {
+        scenesManager.actions.openManager(ManagerMode.Use, onLoadScene);
+        logger.info("Scene:onLoadScene");
+      },
+    };
+
+    const loadSceneAsCloneOption = {
+      label: t("play-route.clone-and-load-scene"),
+      onClick: () => {
+        scenesManager.actions.openManager(ManagerMode.Use, onCloneAndLoadScene);
+        logger.info("Scene:onCloneAndLoadScene");
+      },
+    };
+
     return (
       <Box pb="1rem">
         <Grid container spacing={1} justify="center">
@@ -1039,7 +1056,7 @@ export const Scene: React.FC<IProps> = (props) => {
               variant={sceneManager.state.dirty ? "contained" : "outlined"}
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
-                sceneManager.actions.loadScene(sceneManager.state.scene);
+                sceneManager.actions.loadScene(sceneManager.state.scene, true);
                 setSavedSnack(true);
                 logger.info("Scene:onSave");
               }}
@@ -1047,64 +1064,42 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.save-scene")}
             </Button>
           </Grid>
-          {props.mode !== SceneMode.Manage && (
-            <>
-              <Grid item>
-                <SplitButton
-                  color="default"
-                  variant="outlined"
-                  options={[
-                    {
-                      label: t("play-route.load-scene"),
-                      onClick: () => {
-                        scenesManager.actions.openManager(
-                          ManagerMode.Use,
-                          onLoadScene
-                        );
-                        logger.info("Scene:onLoadScene");
-                      },
-                    },
-                    {
-                      label: t("play-route.load-scene-as-template"),
-                      onClick: () => {
-                        scenesManager.actions.openManager(
-                          ManagerMode.Use,
-                          onLoadTemplateScene
-                        );
-                        logger.info("Scene:onLoadSceneTemplate");
-                      },
-                    },
-                  ]}
-                />
-              </Grid>
-              <Hidden smDown>
-                <Grid item className={css({ display: "flex" })}>
-                  <Divider orientation="vertical" flexItem />
-                </Grid>
-              </Hidden>
-              <Grid item>
-                <ThemeProvider theme={errorTheme}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    endIcon={<ErrorIcon />}
-                    className={css({ borderRadius: "20px" })}
-                    onClick={() => {
-                      const confirmed = confirm(
-                        t("play-route.reset-scene-confirmation")
-                      );
-                      if (confirmed) {
-                        sceneManager.actions.resetScene();
-                        logger.info("Scene:onReset");
-                      }
-                    }}
-                  >
-                    {t("play-route.reset-scene")}
-                  </Button>
-                </ThemeProvider>
-              </Grid>
-            </>
-          )}
+          <Grid item>
+            {props.mode !== SceneMode.Manage && (
+              <SplitButton
+                color="default"
+                variant="outlined"
+                options={[loadSceneOption, loadSceneAsCloneOption]}
+              />
+            )}
+          </Grid>
+          <Hidden smDown>
+            <Grid item className={css({ display: "flex" })}>
+              <Divider orientation="vertical" flexItem />
+            </Grid>
+          </Hidden>
+          <Grid item>
+            <ThemeProvider theme={errorTheme}>
+              <Button
+                variant="text"
+                color="primary"
+                data-cy="scene.reset"
+                endIcon={<ErrorIcon />}
+                className={css({ borderRadius: "20px" })}
+                onClick={() => {
+                  const confirmed = confirm(
+                    t("play-route.reset-scene-confirmation")
+                  );
+                  if (confirmed) {
+                    sceneManager.actions.resetScene();
+                    logger.info("Scene:onReset");
+                  }
+                }}
+              >
+                {t("play-route.reset-scene")}
+              </Button>
+            </ThemeProvider>
+          </Grid>
         </Grid>
       </Box>
     );
