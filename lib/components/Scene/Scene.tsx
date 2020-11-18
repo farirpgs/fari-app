@@ -27,7 +27,7 @@ import {
   Tooltip,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
@@ -44,12 +44,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
   ICharacter,
-  useCharacters,
+  useCharacters
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes,
+  useScenes
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
@@ -1072,6 +1072,7 @@ export const Scene: React.FC<IProps> = (props) => {
             {props.mode === SceneMode.Manage ? (
               <Button
                 color="default"
+                data-cy="scene.override"
                 variant="outlined"
                 onClick={() => {
                   scenesManager.actions.openManager(
@@ -1101,6 +1102,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 variant="text"
                 color="primary"
+                data-cy="scene.reset"
                 endIcon={<ErrorIcon />}
                 className={css({ borderRadius: "20px" })}
                 onClick={() => {

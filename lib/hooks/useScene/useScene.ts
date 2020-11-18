@@ -171,6 +171,7 @@ export function useScene(props: IProps) {
         const pinnedAspects = getPinnedAspects(draft);
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
+        draft.group = "";
         draft.aspects = { ...defaultSceneAspects, ...pinnedAspects };
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {

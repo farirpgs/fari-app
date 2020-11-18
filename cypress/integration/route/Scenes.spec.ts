@@ -38,6 +38,7 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.menu.color.red").click();
       Fari.get("scene.aspect.0.menu.color.white").click();
       Fari.get("scene.aspect.0.menu.color.yellow").click();
+
       // close backdrop
       Fari.closeBackdrop();
 
@@ -79,11 +80,22 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.2.initiative").click();
       Fari.get("scene.aspect.2.initiative").click();
 
+      // pin
+      Fari.get("scene.aspect.1.pin").click();
+
+      // reset
+      Fari.get("scene.reset").click();
+
+      // set fields again
+      Fari.get("scene.name").type("Ba Sing Se");
+      Fari.get("scene.group").type("Avatar");
+      Fari.get("scene.aspect.0.title").type("NPC after reset");
+
       // save
       Fari.waitContentEditable();
       Fari.get("scene.save").click();
 
-      // // delete
+      // delete
       Fari.get("page.menu.scenes").click();
       Fari.get("manager.delete").click();
 
@@ -93,10 +105,31 @@ describe("/scenes", () => {
       // should be back to home page
       cy.url().should("eq", "http://localhost:1234/");
 
-      // // undo
+      // undo
       cy.contains("Undo").click();
       cy.contains("Avatar");
       cy.contains("Ba Sing Se").click();
+
+      // new scene
+      Fari.get("page.menu.scenes").click();
+      Fari.get("manager.new").click();
+
+      // load ba sing se as template
+      Fari.get("scene.override").click();
+      cy.contains("Ba Sing Se").click();
+
+      // set new field
+      Fari.get("scene.name").clear().type("Lower Ring");
+
+      // save
+      Fari.waitContentEditable();
+      Fari.get("scene.save").click();
+
+      // test menu
+      Fari.get("page.menu.scenes").click();
+      cy.contains("Avatar");
+      cy.contains("Ba Sing Se");
+      cy.contains("Lower Ring");
     });
   });
 });
