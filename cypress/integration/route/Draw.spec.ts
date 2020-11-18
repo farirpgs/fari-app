@@ -13,7 +13,7 @@ describe("/draw", () => {
   describe("Given I want to draw my zones", () => {
     it("should draw my zones", () => {
       Fari.start();
-      cy.visit("/draw");
+      Fari.get("page.menu.draw").click();
       Fari.get("draw.palette").click();
 
       cy.get(`.data-cy-color-picker [title="#e69f00"]`).click();
@@ -59,12 +59,4 @@ function draw() {
     .trigger("pointerup", {
       button: 0,
     });
-}
-
-function point() {
-  Fari.get("draw.container").trigger("pointerdown", {
-    button: 0,
-    clientX: 492,
-    clientY: 217,
-  });
 }

@@ -407,6 +407,7 @@ export const Page: React.FC<{
               <Button
                 color="inherit"
                 to="/draw"
+                data-cy="page.menu.draw"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}
