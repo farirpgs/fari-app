@@ -126,7 +126,7 @@ export const esTranslation: Record<
   "play-route.join-error": `El juego al que intentas unirte no existe`,
   "play-route.join": `Unirse`,
   "play-route.leave-prompt": `¿Está seguro de que desea salir y resetear la escena?`,
-  "play-route.load-scene-as-template": `Cargar como plantilla`,
+  "play-route.clone-and-load-scene": `Clonar y cargar escena`,
   "play-route.load-scene": `Carga`,
   "play-route.name": `Nombre`,
   "play-route.new-scene": `Escena nueva`,

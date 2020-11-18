@@ -83,7 +83,7 @@ fdescribe("useScene", () => {
       };
       // WHEN
       act(() => {
-        result.current.actions.loadScene(sceneToLoad);
+        result.current.actions.loadScene(sceneToLoad, true);
       });
 
       // THEN
@@ -118,7 +118,7 @@ fdescribe("useScene", () => {
 
       // WHEN reload the same scene
       act(() => {
-        result.current.actions.loadScene(sceneToLoad);
+        result.current.actions.loadScene(sceneToLoad, true);
       });
 
       // THEN dirty is false
@@ -133,14 +133,17 @@ fdescribe("useScene", () => {
 
       // WHEN reload
       act(() => {
-        result.current.actions.loadScene({
-          id: "new-id",
-          group: undefined,
-          aspects: { "aspect-id": { toto: 3 } as any },
-          lastUpdated: 111,
-          name: "new name",
-          version: 3,
-        });
+        result.current.actions.loadScene(
+          {
+            id: "new-id",
+            group: undefined,
+            aspects: { "aspect-id": { toto: 3 } as any },
+            lastUpdated: 111,
+            name: "new name",
+            version: 3,
+          },
+          true
+        );
       });
       // THEN dirty is false
       expect(result.current.state.dirty).toEqual(false);

@@ -126,7 +126,7 @@ export const frTranslation: Record<
   "play-route.join-error": `La partie que vous essayez de joindre n'existe pas`,
   "play-route.join": `Joindre`,
   "play-route.leave-prompt": `Etes-vous sûr de vouloir quitter et réinitialiser votre scène?`,
-  "play-route.load-scene-as-template": `Charger comme gabarit`,
+  "play-route.clone-and-load-scene": `Cloner et charger la scène`,
   "play-route.load-scene": `Charger`,
   "play-route.name": `Nom`,
   "play-route.new-scene": `Nouvelle Scène`,

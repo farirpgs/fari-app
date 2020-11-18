@@ -27,7 +27,7 @@ import {
   Tooltip,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
@@ -44,12 +44,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
   ICharacter,
-  useCharacters
+  useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes
+  useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
@@ -171,10 +171,10 @@ export const Scene: React.FC<IProps> = (props) => {
   );
 
   function onLoadScene(newScene: ISavableScene) {
-    sceneManager.actions.loadScene(newScene);
+    sceneManager.actions.loadScene(newScene, true);
   }
 
-  function onLoadTemplateScene(newScene: ISavableScene) {
+  function onCloneAndLoadScene(newScene: ISavableScene) {
     sceneManager.actions.cloneAndLoadNewScene(newScene);
   }
 
@@ -1041,11 +1041,11 @@ export const Scene: React.FC<IProps> = (props) => {
       },
     };
 
-    const loadSceneAsTemplateOption = {
-      label: t("play-route.load-scene-as-template"),
+    const loadSceneAsCloneOption = {
+      label: t("play-route.clone-and-load-scene"),
       onClick: () => {
-        scenesManager.actions.openManager(ManagerMode.Use, onLoadTemplateScene);
-        logger.info("Scene:onLoadSceneTemplate");
+        scenesManager.actions.openManager(ManagerMode.Use, onCloneAndLoadScene);
+        logger.info("Scene:onCloneAndLoadScene");
       },
     };
 
@@ -1060,7 +1060,7 @@ export const Scene: React.FC<IProps> = (props) => {
               variant={sceneManager.state.dirty ? "contained" : "outlined"}
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
-                sceneManager.actions.loadScene(sceneManager.state.scene);
+                sceneManager.actions.loadScene(sceneManager.state.scene, true);
                 setSavedSnack(true);
                 logger.info("Scene:onSave");
               }}
@@ -1072,7 +1072,7 @@ export const Scene: React.FC<IProps> = (props) => {
             {props.mode === SceneMode.Manage ? (
               <Button
                 color="default"
-                data-cy="scene.override"
+                data-cy="scene.use-template"
                 variant="outlined"
                 onClick={() => {
                   scenesManager.actions.openManager(
@@ -1088,7 +1088,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <SplitButton
                 color="default"
                 variant="outlined"
-                options={[loadSceneOption, loadSceneAsTemplateOption]}
+                options={[loadSceneOption, loadSceneAsCloneOption]}
               />
             )}
           </Grid>

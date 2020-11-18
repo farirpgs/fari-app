@@ -114,9 +114,17 @@ describe("/scenes", () => {
       Fari.get("page.menu.scenes").click();
       Fari.get("manager.new").click();
 
-      // load ba sing se as template
-      Fari.get("scene.override").click();
+      // add badguy and pin it
+      Fari.get("scene.add-bad-guy").click();
+      Fari.get("scene.aspect.0.title").type("Dai Li");
+      Fari.get("scene.aspect.0.pin").click();
+
+      // use Ba Sing Se as Template
+      Fari.get("scene.use-template").click();
       cy.contains("Ba Sing Se").click();
+
+      // should have cleared bad guy even if pinned
+      cy.contains("Dai Li").should("not.exist");
 
       // set new field
       Fari.get("scene.name").clear().type("Lower Ring");
@@ -130,6 +138,9 @@ describe("/scenes", () => {
       cy.contains("Avatar");
       cy.contains("Ba Sing Se");
       cy.contains("Lower Ring");
+
+      // close menu
+      Fari.closeDrawer();
     });
   });
 });

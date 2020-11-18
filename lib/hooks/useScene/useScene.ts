@@ -122,13 +122,21 @@ export function useScene(props: IProps) {
     }
   }
 
-  function loadScene(newScene: ISavableScene) {
+  function loadScene(newScene: ISavableScene, keepPinned: boolean) {
     if (newScene) {
+      const pinnedAspects = getPinnedAspects(scene);
+      const aspects = keepPinned
+        ? {
+            ...pinnedAspects,
+            ...newScene.aspects,
+          }
+        : newScene.aspects;
+
       setSceneToLoad({
         id: newScene.id,
         name: newScene.name,
         group: newScene.group,
-        aspects: newScene.aspects,
+        aspects: aspects,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
       });
@@ -140,7 +148,17 @@ export function useScene(props: IProps) {
       const clonedNewScene = produce(newScene, (draft) => {
         draft.id = uuidV4();
       });
-      loadScene(clonedNewScene);
+      loadScene(clonedNewScene, true);
+      forceDirty();
+    }
+  }
+
+  function overrideSceneWith(newScene: ISavableScene) {
+    if (newScene) {
+      const clonedNewScene = produce(newScene, (draft) => {
+        draft.id = scene.id;
+      });
+      loadScene(clonedNewScene, false);
       forceDirty();
     }
   }
@@ -155,16 +173,6 @@ export function useScene(props: IProps) {
     });
   }
 
-  function overrideSceneWith(newScene: ISavableScene) {
-    if (newScene) {
-      const clonedNewScene = produce(newScene, (draft) => {
-        draft.id = scene.id;
-      });
-      loadScene(clonedNewScene);
-      forceDirty();
-    }
-  }
-
   function resetScene() {
     setScene(
       produce((draft: IScene) => {
@@ -172,7 +180,7 @@ export function useScene(props: IProps) {
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
         draft.group = "";
-        draft.aspects = { ...defaultSceneAspects, ...pinnedAspects };
+        draft.aspects = { ...pinnedAspects, ...defaultSceneAspects };
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;

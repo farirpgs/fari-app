@@ -126,7 +126,7 @@ export const ruTranslation: Record<
   "play-route.join-error": `Игры к которой вы пытаетесь присоединиться не существует`,
   "play-route.join": `Присоединиться`,
   "play-route.leave-prompt": `Вы уверены, что хотите выйти и сбросить вашу сцену ?`,
-  "play-route.load-scene-as-template": `Загрузить Сцену как Шаблон`,
+  "play-route.clone-and-load-scene": `Клонировать и загрузить сцену`,
   "play-route.load-scene": `Загрузить Сцену`,
   "play-route.name": `Имя`,
   "play-route.new-scene": `Новая Сцена`,

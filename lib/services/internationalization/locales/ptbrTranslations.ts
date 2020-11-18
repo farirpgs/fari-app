@@ -126,7 +126,7 @@ export const ptbrTranslation: Record<
   "play-route.join-error": `O jogo no qual você está tentando se conectar não existe`,
   "play-route.join": `Entrar`,
   "play-route.leave-prompt": `Você tem certeza que quer sair e resetar sua cena?`,
-  "play-route.load-scene-as-template": `Cena como Template`,
+  "play-route.clone-and-load-scene": `Clonar e carregar cena`,
   "play-route.load-scene": `Cena`,
   "play-route.name": `Nome`,
   "play-route.new-scene": `Nova Cena`,

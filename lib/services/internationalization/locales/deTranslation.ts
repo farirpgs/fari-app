@@ -126,7 +126,7 @@ export const deTranslation: Record<
   "play-route.join-error": `Das Spiel, an dem du versuchst teilzunehmen, existiert nicht`,
   "play-route.join": `Beitreten`,
   "play-route.leave-prompt": `Bist du sicher, dass du gehen und deine Szene zurücksetzen willst?`,
-  "play-route.load-scene-as-template": `Als Vorlage laden`,
+  "play-route.clone-and-load-scene": `Szene klonen und laden`,
   "play-route.load-scene": `Laden`,
   "play-route.name": `Name`,
   "play-route.new-scene": `Neue Szene`,

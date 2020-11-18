@@ -121,7 +121,7 @@ export const enTranslation = {
   "play-route.join-error": `The game you are trying to join does not exist`,
   "play-route.join": `Join`,
   "play-route.leave-prompt": `Are you sure you want to leave and reset your scene ?`,
-  "play-route.load-scene-as-template": `Load as Template`,
+  "play-route.clone-and-load-scene": `Clone and Load Scene`,
   "play-route.load-scene": `Load`,
   "play-route.name": `Name`,
   "play-route.new-scene": `New Scene`,
