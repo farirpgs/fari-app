@@ -18,7 +18,7 @@ import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
 import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
-import { css } from "emotion";
+import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -98,6 +98,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     return (
       <div
         ref={$container}
+        data-cy="draw.container"
         onPointerDown={drawingManager.handlers.onStartDrawing}
         onPointerMove={drawingManager.handlers.onDrawing}
         onPointerUp={drawingManager.handlers.onStopDrawing}
@@ -194,6 +195,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  data-cy="draw.palette"
                   ref={$paletteButton}
                   className={css({
                     color: theme.palette.text.primary,
@@ -246,6 +248,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
+                  data-cy="draw.move"
                   size="small"
                   className={css({
                     color:
@@ -263,6 +266,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
+                  data-cy="draw.remove"
                   size="small"
                   className={css({
                     color:
@@ -284,6 +288,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             <Grid container spacing={1}>
               <Grid item>
                 <IconButton
+                  data-cy="draw.line"
                   size="small"
                   className={css({
                     color:
@@ -302,6 +307,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  data-cy="draw.rectangle"
                   className={css({
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Rectangle
@@ -321,6 +327,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  data-cy="draw.ellipse"
                   className={css({
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Ellipse
@@ -337,6 +344,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
+                  data-cy="draw.token"
                   size="small"
                   className={css({
                     color:
@@ -369,6 +377,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <>
                 <Grid item>
                   <IconButton
+                    data-cy="draw.clear"
                     size="small"
                     className={css({
                       color: theme.palette.text.primary,
@@ -383,6 +392,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                 </Grid>
                 <Grid item>
                   <IconButton
+                    data-cy="draw.undo"
                     size="small"
                     className={css({
                       color: theme.palette.text.primary,
@@ -400,6 +410,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             {props.onFullScreenChange && (
               <Grid item>
                 <IconButton
+                  data-cy="draw.full-screen"
                   size="small"
                   className={css({
                     color: theme.palette.text.primary,
@@ -445,9 +456,12 @@ export const ColorPicker: React.FC<{
       }}
       color={props.value}
       colors={pickerColors}
-      className={css({
-        boxShadow: "none",
-      })}
+      className={cx(
+        "data-cy-color-picker",
+        css({
+          boxShadow: "none",
+        })
+      )}
       onChange={(color) => props.onChange(color.hex)}
     />
   );
