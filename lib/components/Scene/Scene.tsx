@@ -939,7 +939,7 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.sort")}
             </Button>
           </Grid>
-          {props.mode === SceneMode.PlayOnline && (
+          {props.mode !== SceneMode.Manage && (
             <Grid item>
               <Button
                 onClick={() => {
