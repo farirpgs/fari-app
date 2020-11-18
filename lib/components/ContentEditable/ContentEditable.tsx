@@ -1,6 +1,6 @@
+import { css } from "@emotion/css";
 import { useTheme } from "@material-ui/core";
 import DOMPurify from "dompurify";
-import { css } from "emotion";
 import React, { useEffect, useRef } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 

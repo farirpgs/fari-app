@@ -1,5 +1,5 @@
+import { css } from "@emotion/css";
 import { Box, Button, Typography } from "@material-ui/core";
-import { css } from "emotion";
 import React, { useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { Page } from "../../components/Page/Page";

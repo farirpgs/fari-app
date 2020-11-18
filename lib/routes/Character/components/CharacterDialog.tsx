@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import {
   Avatar,
   Box,
@@ -17,7 +18,7 @@ import {
   Snackbar,
   TextField,
   Typography,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -30,7 +31,6 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
 import { Alert, Autocomplete } from "@material-ui/lab";
-import { css } from "emotion";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
@@ -40,7 +40,7 @@ import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUp
 import {
   CharactersContext,
   CharacterType,
-  ICharacter
+  ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";

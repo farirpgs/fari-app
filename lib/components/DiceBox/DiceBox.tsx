@@ -1,3 +1,4 @@
+import { css, cx } from "@emotion/css";
 import {
   Box,
   ButtonBase,
@@ -6,7 +7,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import useTheme from "@material-ui/core/styles/useTheme";
-import { css, cx } from "emotion";
 import React from "react";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";

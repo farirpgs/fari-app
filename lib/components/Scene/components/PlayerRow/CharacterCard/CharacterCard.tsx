@@ -1,3 +1,4 @@
+import { css, cx } from "@emotion/css";
 import {
   Box,
   Grid,
@@ -10,7 +11,6 @@ import {
   useTheme,
 } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
-import { css, cx } from "emotion";
 import truncate from "lodash/truncate";
 import React from "react";
 import { ICharacter } from "../../../../../contexts/CharactersContext/CharactersContext";

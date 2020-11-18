@@ -1,6 +1,6 @@
+import { css, cx } from "@emotion/css";
 import { Typography } from "@material-ui/core";
 import { Variant } from "@material-ui/core/styles/createTypography";
-import { css, cx } from "emotion";
 import React from "react";
 
 export const FateLabel: React.FC<{

@@ -1,5 +1,5 @@
+import { css } from "@emotion/css";
 import { Box, Typography } from "@material-ui/core";
-import { css } from "emotion";
 import React, { useEffect } from "react";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
