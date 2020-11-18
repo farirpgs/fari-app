@@ -9,10 +9,13 @@ import {
   MenuItem,
   Paper,
   TextField,
+  Tooltip,
   Typography,
   useTheme,
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -66,7 +69,7 @@ export const IndexCard: React.FC<
     : paperColor.disabled;
 
   return (
-    <Paper elevation={undefined} className={props.className}>
+    <Paper elevation={aspect.pinned ? 8 : 1} className={props.className}>
       <Box bgcolor={paperBackground} color={paperColor.primary}>
         <Box
           className={css({
@@ -104,9 +107,15 @@ export const IndexCard: React.FC<
 
   function renderHeader() {
     return (
-      <Grid container justify="space-between" alignItems="center" spacing={2}>
-        <Grid item>
-          <Typography variant="overline">
+      <Grid container alignItems="center" spacing={2}>
+        <Grid item className={css({ flex: "1 0 auto" })}>
+          <Typography
+            variant="overline"
+            className={css({
+              fontWeight: aspect.pinned ? "bold" : "inherit",
+              transition: theme.transitions.create("font-weight"),
+            })}
+          >
             {aspect.type === AspectType.Aspect && <>{t("index-card.aspect")}</>}
             {aspect.type === AspectType.Boost && <>{t("index-card.boost")}</>}
             {aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
@@ -116,34 +125,56 @@ export const IndexCard: React.FC<
           </Typography>
         </Grid>
         {!props.readonly && (
-          <Grid item>
-            <IconButton
-              ref={$menu}
-              size="small"
-              data-cy={`${props["data-cy"]}.menu`}
-              onClick={() => {
-                setMenuOpen(true);
-              }}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              classes={{
-                list: css({
-                  paddingBottom: 0,
-                }),
-              }}
-              anchorEl={$menu.current}
-              keepMounted
-              open={menuOpen}
-              onClose={() => {
-                setMenuOpen(false);
-              }}
-            >
-              {shouldRenderAspectMenuItems && renderAspectMenuItems()}
-              {renderGlobalMenuItems()}
-            </Menu>
-          </Grid>
+          <>
+            <Grid item>
+              <Tooltip
+                title={
+                  aspect.pinned ? t("index-card.unpin") : t("index-card.pin")
+                }
+              >
+                <IconButton
+                  ref={$menu}
+                  size="small"
+                  data-cy={`${props["data-cy"]}.pin`}
+                  onClick={() => {
+                    props.sceneManager.actions.toggleAspectPinned(
+                      props.aspectId
+                    );
+                  }}
+                >
+                  {aspect.pinned ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <IconButton
+                ref={$menu}
+                size="small"
+                data-cy={`${props["data-cy"]}.menu`}
+                onClick={() => {
+                  setMenuOpen(true);
+                }}
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                classes={{
+                  list: css({
+                    paddingBottom: 0,
+                  }),
+                }}
+                anchorEl={$menu.current}
+                keepMounted
+                open={menuOpen}
+                onClose={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                {shouldRenderAspectMenuItems && renderAspectMenuItems()}
+                {renderGlobalMenuItems()}
+              </Menu>
+            </Grid>
+          </>
         )}
       </Grid>
     );

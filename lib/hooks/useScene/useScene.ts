@@ -135,21 +135,43 @@ export function useScene(props: IProps) {
     }
   }
 
-  function cloneAndLoadScene(newScene: ISavableScene) {
+  function cloneAndLoadNewScene(newScene: ISavableScene) {
     if (newScene) {
       const clonedNewScene = produce(newScene, (draft) => {
         draft.id = uuidV4();
       });
       loadScene(clonedNewScene);
+      forceDirty();
+    }
+  }
+
+  function forceDirty() {
+    setTimeout(() => {
+      setScene(
+        produce((draft: IScene) => {
+          draft.lastUpdated = getUnix();
+        })
+      );
+    });
+  }
+
+  function overrideSceneWith(newScene: ISavableScene) {
+    if (newScene) {
+      const clonedNewScene = produce(newScene, (draft) => {
+        draft.id = scene.id;
+      });
+      loadScene(clonedNewScene);
+      forceDirty();
     }
   }
 
   function resetScene() {
     setScene(
       produce((draft: IScene) => {
+        const pinnedAspects = getPinnedAspects(draft);
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
-        draft.aspects = defaultSceneAspects;
+        draft.aspects = { ...defaultSceneAspects, ...pinnedAspects };
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
@@ -191,6 +213,7 @@ export function useScene(props: IProps) {
         }
       } catch (error) {}
     });
+    return id;
   }
 
   function removeAspect(aspectId: string) {
@@ -251,6 +274,14 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         draft.aspects[aspectId].drawAreaObjects = objects;
+      })
+    );
+  }
+
+  function toggleAspectPinned(aspectId: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].pinned = !draft.aspects[aspectId].pinned;
       })
     );
   }
@@ -594,7 +625,8 @@ export function useScene(props: IProps) {
       resetScene,
       safeSetScene,
       loadScene,
-      cloneAndLoadScene,
+      cloneAndLoadNewScene,
+      overrideSceneWith,
       updateName,
       setGroup,
       addAspect,
@@ -630,6 +662,7 @@ export function useScene(props: IProps) {
       toggleSort,
       updatePlayerCharacter,
       updateDrawAreaObjects,
+      toggleAspectPinned,
     },
   };
 }
@@ -642,6 +675,7 @@ const defaultAspect: IAspect = {
   color: "white",
   type: AspectType.Aspect,
   playedDuringTurn: false,
+  pinned: false,
 };
 const defaultIndexCard: IAspect = {
   title: "",
@@ -651,6 +685,7 @@ const defaultIndexCard: IAspect = {
   color: "white",
   type: AspectType.IndexCard,
   playedDuringTurn: false,
+  pinned: false,
 };
 
 const defaultBoost: IAspect = {
@@ -661,6 +696,7 @@ const defaultBoost: IAspect = {
   color: "blue",
   type: AspectType.Boost,
   playedDuringTurn: false,
+  pinned: false,
 };
 
 const defaultNPC: IAspect = {
@@ -671,6 +707,7 @@ const defaultNPC: IAspect = {
   color: "green",
   type: AspectType.NPC,
   playedDuringTurn: false,
+  pinned: false,
 };
 
 const defaultBadGuy: IAspect = {
@@ -681,6 +718,7 @@ const defaultBadGuy: IAspect = {
   color: "red",
   type: AspectType.BadGuy,
   playedDuringTurn: false,
+  pinned: false,
 };
 
 const defaultAspects: Record<AspectType, IAspect> = {
@@ -690,6 +728,19 @@ const defaultAspects: Record<AspectType, IAspect> = {
   [AspectType.BadGuy]: defaultBadGuy,
   [AspectType.IndexCard]: defaultIndexCard,
 };
+
+function getPinnedAspects(scene: IScene) {
+  return Object.keys(scene.aspects).reduce((prev, curr) => {
+    const aspect = scene.aspects[curr];
+    if (aspect.pinned) {
+      return {
+        ...prev,
+        [curr]: aspect,
+      };
+    }
+    return prev;
+  }, {} as Record<string, IAspect>);
+}
 
 export function sanitizeSceneName(sceneName: string) {
   return sceneName === defaultSceneName

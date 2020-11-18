@@ -175,7 +175,11 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function onLoadTemplateScene(newScene: ISavableScene) {
-    sceneManager.actions.cloneAndLoadScene(newScene);
+    sceneManager.actions.cloneAndLoadNewScene(newScene);
+  }
+
+  function onOverrideScene(newScene: ISavableScene) {
+    sceneManager.actions.overrideSceneWith(newScene);
   }
 
   function onAddOfflineCharacter(character: ICharacter) {
@@ -1028,6 +1032,23 @@ export const Scene: React.FC<IProps> = (props) => {
     if (!isGM) {
       return null;
     }
+
+    const loadSceneOption = {
+      label: t("play-route.load-scene"),
+      onClick: () => {
+        scenesManager.actions.openManager(ManagerMode.Use, onLoadScene);
+        logger.info("Scene:onLoadScene");
+      },
+    };
+
+    const loadSceneAsTemplateOption = {
+      label: t("play-route.load-scene-as-template"),
+      onClick: () => {
+        scenesManager.actions.openManager(ManagerMode.Use, onLoadTemplateScene);
+        logger.info("Scene:onLoadSceneTemplate");
+      },
+    };
+
     return (
       <Box pb="1rem">
         <Grid container spacing={1} justify="center">
@@ -1047,64 +1068,55 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.save-scene")}
             </Button>
           </Grid>
-          {props.mode !== SceneMode.Manage && (
-            <>
-              <Grid item>
-                <SplitButton
-                  color="default"
-                  variant="outlined"
-                  options={[
-                    {
-                      label: t("play-route.load-scene"),
-                      onClick: () => {
-                        scenesManager.actions.openManager(
-                          ManagerMode.Use,
-                          onLoadScene
-                        );
-                        logger.info("Scene:onLoadScene");
-                      },
-                    },
-                    {
-                      label: t("play-route.load-scene-as-template"),
-                      onClick: () => {
-                        scenesManager.actions.openManager(
-                          ManagerMode.Use,
-                          onLoadTemplateScene
-                        );
-                        logger.info("Scene:onLoadSceneTemplate");
-                      },
-                    },
-                  ]}
-                />
-              </Grid>
-              <Hidden smDown>
-                <Grid item className={css({ display: "flex" })}>
-                  <Divider orientation="vertical" flexItem />
-                </Grid>
-              </Hidden>
-              <Grid item>
-                <ThemeProvider theme={errorTheme}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    endIcon={<ErrorIcon />}
-                    className={css({ borderRadius: "20px" })}
-                    onClick={() => {
-                      const confirmed = confirm(
-                        t("play-route.reset-scene-confirmation")
-                      );
-                      if (confirmed) {
-                        sceneManager.actions.resetScene();
-                        logger.info("Scene:onReset");
-                      }
-                    }}
-                  >
-                    {t("play-route.reset-scene")}
-                  </Button>
-                </ThemeProvider>
-              </Grid>
-            </>
-          )}
+          <Grid item>
+            {props.mode === SceneMode.Manage ? (
+              <Button
+                color="default"
+                variant="outlined"
+                onClick={() => {
+                  scenesManager.actions.openManager(
+                    ManagerMode.Use,
+                    onOverrideScene
+                  );
+                  logger.info("Scene:onOverrideScene");
+                }}
+              >
+                {t("play-route.use-template")}
+              </Button>
+            ) : (
+              <SplitButton
+                color="default"
+                variant="outlined"
+                options={[loadSceneOption, loadSceneAsTemplateOption]}
+              />
+            )}
+          </Grid>
+          <Hidden smDown>
+            <Grid item className={css({ display: "flex" })}>
+              <Divider orientation="vertical" flexItem />
+            </Grid>
+          </Hidden>
+          <Grid item>
+            <ThemeProvider theme={errorTheme}>
+              <Button
+                variant="text"
+                color="primary"
+                endIcon={<ErrorIcon />}
+                className={css({ borderRadius: "20px" })}
+                onClick={() => {
+                  const confirmed = confirm(
+                    t("play-route.reset-scene-confirmation")
+                  );
+                  if (confirmed) {
+                    sceneManager.actions.resetScene();
+                    logger.info("Scene:onReset");
+                  }
+                }}
+              >
+                {t("play-route.reset-scene")}
+              </Button>
+            </ThemeProvider>
+          </Grid>
         </Grid>
       </Box>
     );

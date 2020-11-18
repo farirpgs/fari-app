@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
 import {
   ILineObject,
-  ObjectType
+  ObjectType,
 } from "../../../components/DrawArea/hooks/useDrawing";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
@@ -200,6 +200,7 @@ fdescribe("useScene", () => {
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        pinned: false,
         title: "",
         type: 0,
       });
@@ -402,6 +403,7 @@ fdescribe("useScene", () => {
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        pinned: false,
         title: "",
         type: AspectType.Aspect,
       });
@@ -689,6 +691,39 @@ fdescribe("useScene", () => {
           rolls: [],
         },
       ]);
+    });
+    it("keep sticky aspects", () => {
+      // GIVEN
+      const userId = "111";
+      const gameId = undefined;
+      const useCharactersMock = mockUseCharacters();
+
+      // WHEN initial render
+      const { result } = renderHook(() => {
+        const charactersManager = useCharactersMock();
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+        });
+      });
+
+      // WHEN setuping scene
+      let npcAspectId = "";
+      act(() => {
+        npcAspectId = result.current.actions.addAspect(AspectType.NPC);
+        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.toggleAspectPinned(npcAspectId);
+      });
+      // THEN
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(2);
+
+      // WHEN reseting
+      act(() => {
+        result.current.actions.resetScene();
+      });
+      expect(result.current.state.scene.name).toEqual("");
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
     });
   });
   describe("safeSetScene", () => {

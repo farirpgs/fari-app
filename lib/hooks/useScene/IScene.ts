@@ -26,6 +26,7 @@ export interface IAspect {
   playedDuringTurn: boolean;
   drawAreaObjects?: IDrawAreaObjects;
   type: AspectType;
+  pinned: boolean | undefined;
 }
 
 export interface IScene {
