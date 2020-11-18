@@ -9,7 +9,6 @@ import {
   MenuList,
   Paper,
   Popper,
-  useTheme,
 } from "@material-ui/core";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { css } from "emotion";
@@ -27,7 +26,6 @@ type IProps = {
 
 export const SplitButton: React.FC<IProps> = (props) => {
   const { options, ...buttonProps } = props;
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
