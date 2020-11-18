@@ -143,7 +143,6 @@ export const frTranslation: Record<
   "play-route.show-character-cards": `Afficher les cartes de personnages`,
   "play-route.sort": `Trier`,
   "play-route.undo-drawing": `Annuler`,
-  "play-route.use-template": `Utiliser le gabarit`,
   "player-row.add-fate-point": `Ajouter un point Fate`,
   "player-row.fate-points": `Points Fate`,
   "player-row.has-no-character-sheet": `Aucune fiche de personnage`,

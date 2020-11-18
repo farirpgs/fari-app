@@ -143,7 +143,6 @@ export const ptbrTranslation: Record<
   "play-route.show-character-cards": `Mostrar cartas de personagens`,
   "play-route.sort": `Organizar`,
   "play-route.undo-drawing": `Desfazer`,
-  "play-route.use-template": `Usar modelo`,
   "player-row.add-fate-point": `Adicionar Ponto de Destino`,
   "player-row.fate-points": `Pontos de Destino`,
   "player-row.has-no-character-sheet": `Sem Ficha de Personagem`,

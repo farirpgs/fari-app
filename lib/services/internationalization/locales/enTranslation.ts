@@ -138,7 +138,6 @@ export const enTranslation = {
   "play-route.show-character-cards": `Show Character Cards`,
   "play-route.sort": `Sort`,
   "play-route.undo-drawing": `Undo`,
-  "play-route.use-template": `Use Template`,
   "player-row.add-fate-point": `Add Fate Point`,
   "player-row.fate-points": `Fate Points`,
   "player-row.has-no-character-sheet": `No Character Sheet`,

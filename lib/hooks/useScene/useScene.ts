@@ -153,16 +153,6 @@ export function useScene(props: IProps) {
     }
   }
 
-  function overrideSceneWith(newScene: ISavableScene) {
-    if (newScene) {
-      const clonedNewScene = produce(newScene, (draft) => {
-        draft.id = scene.id;
-      });
-      loadScene(clonedNewScene, false);
-      forceDirty();
-    }
-  }
-
   function forceDirty() {
     setTimeout(() => {
       setScene(
@@ -635,7 +625,7 @@ export function useScene(props: IProps) {
       safeSetScene,
       loadScene,
       cloneAndLoadNewScene,
-      overrideSceneWith,
+
       updateName,
       setGroup,
       addAspect,

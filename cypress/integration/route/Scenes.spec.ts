@@ -119,13 +119,6 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.title").type("Dai Li");
       Fari.get("scene.aspect.0.pin").click();
 
-      // use Ba Sing Se as Template
-      Fari.get("scene.use-template").click();
-      cy.contains("Ba Sing Se").click();
-
-      // should have cleared bad guy even if pinned
-      cy.contains("Dai Li").should("not.exist");
-
       // set new field
       Fari.get("scene.name").clear().type("Lower Ring");
 

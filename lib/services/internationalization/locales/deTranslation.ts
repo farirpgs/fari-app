@@ -143,7 +143,6 @@ export const deTranslation: Record<
   "play-route.show-character-cards": `Charakterkarten anzeigen`,
   "play-route.sort": `Sortieren`,
   "play-route.undo-drawing": `Rückgängig`,
-  "play-route.use-template": `Benutze Template`,
   "player-row.add-fate-point": `Fate Punkt hinzufügen`,
   "player-row.fate-points": `Fate Punkte`,
   "player-row.has-no-character-sheet": `Kein Charakterbogen`,

@@ -143,7 +143,6 @@ export const esTranslation: Record<
   "play-route.show-character-cards": `Mostrar cartas de personaje`,
   "play-route.sort": `Ordenar`,
   "play-route.undo-drawing": `Deshacer`,
-  "play-route.use-template": `Usar plantilla`,
   "player-row.add-fate-point": `Añadir Punto Fate`,
   "player-row.fate-points": `Puntos Fate`,
   "player-row.has-no-character-sheet": `No hay Hoja de Personaje`,

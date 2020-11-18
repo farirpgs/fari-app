@@ -178,10 +178,6 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.cloneAndLoadNewScene(newScene);
   }
 
-  function onOverrideScene(newScene: ISavableScene) {
-    sceneManager.actions.overrideSceneWith(newScene);
-  }
-
   function onAddOfflineCharacter(character: ICharacter) {
     sceneManager.actions.addOfflineCharacter(character);
   }
@@ -1069,22 +1065,7 @@ export const Scene: React.FC<IProps> = (props) => {
             </Button>
           </Grid>
           <Grid item>
-            {props.mode === SceneMode.Manage ? (
-              <Button
-                color="default"
-                data-cy="scene.use-template"
-                variant="outlined"
-                onClick={() => {
-                  scenesManager.actions.openManager(
-                    ManagerMode.Use,
-                    onOverrideScene
-                  );
-                  logger.info("Scene:onOverrideScene");
-                }}
-              >
-                {t("play-route.use-template")}
-              </Button>
-            ) : (
+            {props.mode !== SceneMode.Manage && (
               <SplitButton
                 color="default"
                 variant="outlined"

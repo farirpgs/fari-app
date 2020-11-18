@@ -143,7 +143,6 @@ export const ruTranslation: Record<
   "play-route.show-character-cards": `показать карты персонажей`,
   "play-route.sort": `Упорядочить`,
   "play-route.undo-drawing": `Отменить`,
-  "play-route.use-template": `Использовать шаблон`,
   "player-row.add-fate-point": `Добавить Жетон Судьбы`,
   "player-row.fate-points": `Жетоны Судьбы`,
   "player-row.has-no-character-sheet": `Отсутствует Лист Персонажа`,
