@@ -21,12 +21,12 @@ export const ChangelogRoute: React.FC<{}> = (props) => {
   }, []);
 
   useEffect(() => {
-    async function loadChangelog() {
+    async function load() {
       const changelog = getChangeLog(changeLogMarkdown);
       setContent(changelog.html);
       setLatestVersion(changelog.latestVersion);
     }
-    loadChangelog();
+    load();
   }, []);
 
   return (
