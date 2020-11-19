@@ -63,7 +63,7 @@ export const frTranslation: Record<
   "home-route.subtitle2": `Avec Fari, créer vos scèenes et vos feuilles de personnages et commencer une partie en ligne avec vos amies. Lors d'une partie, concevez des plans aux situations précaires que les dés (ou le MJ) vous font endurer. Laissez votre imagination collective s'épanouir et tissez des histoires mémorables ensemble!`,
   "home-route.support-fari.description": `Fari est libre de droit. Je crois en l'importance de créer des applications qui profite à la communauté. Cependant, le fait que l'application soit libre de droit rend le support de celle-ci plus compliqué. \n\n Le maintien et le développement de nouvelles fonctionnalités dans Fari prend beaucoup de temps, mais avec votre aide financière, je pourrais passer plus de temps pour rendre Fari encore plus incroyable. \n\n Tout don est fortement apprécié, mais si vous votre situation vous empêches d'aider financièrement le projet, vous pouvez toujours aider en passant le mot!`,
   "home-route.support-fari.title": `Envisager de soutenir Fari`,
-  "home-route.thanks-some-patrons": `Merci à quelques un de mes contributeurs`,
+  "home-route.thanks-some-patrons": `Merci à quelques-un de mes contributeurs`,
   "home-route.welcome": `Bienvenue sur Fari`,
   "index-card.add-1-consequence": `+ Consequence`,
   "index-card.add-free-invokes-track": `+ Piste d'invocations gratuites`,
