@@ -1,5 +1,9 @@
 import { Fari } from "lib/util/Fari";
 
+afterEach(() => {
+  cy.screenshot();
+});
+
 describe("/dice", () => {
   it("Should roll dice", () => {
     Fari.start();
