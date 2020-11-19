@@ -141,7 +141,10 @@ export const CharacterDialog: React.FC<{
       <Snackbar
         open={savedSnack}
         autoHideDuration={6000}
-        onClose={() => {
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
           setSavedSnack(false);
         }}
       >

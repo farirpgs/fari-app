@@ -212,7 +212,10 @@ export const Scene: React.FC<IProps> = (props) => {
       <Snackbar
         open={savedSnack}
         autoHideDuration={6000}
-        onClose={() => {
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
           setSavedSnack(false);
         }}
       >

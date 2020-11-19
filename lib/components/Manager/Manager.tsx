@@ -107,7 +107,10 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       <Snackbar
         open={deletedSnack}
         autoHideDuration={6000}
-        onClose={() => {
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
           setDeletedSnack(false);
         }}
       >

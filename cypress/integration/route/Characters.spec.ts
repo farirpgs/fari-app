@@ -55,6 +55,7 @@ describe("/characters", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.contains("Saved");
 
       // navigate away
       Fari.get("page.menu.play").click();
@@ -97,7 +98,7 @@ describe("/characters", () => {
     });
   });
 
-  describe("Given I want a to use a template", () => {
+  describe.on("Given I want a to use a template", () => {
     it("should let me do it", () => {
       Fari.start();
       cy.visit("/");
@@ -115,6 +116,7 @@ describe("/characters", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.contains("Saved");
     });
   });
 
@@ -263,6 +265,7 @@ describe("/characters", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.contains("Saved");
 
       // navigate away
       Fari.get("page.menu.play").click();

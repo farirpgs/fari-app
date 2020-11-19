@@ -125,6 +125,7 @@ describe("/scenes", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("scene.save").click();
+      cy.contains("Saved");
 
       // test menu
       Fari.get("page.menu.scenes").click();
