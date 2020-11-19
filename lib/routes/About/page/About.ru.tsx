@@ -1,3 +1,6 @@
+import { md } from "../../../tags/md";
+
+export const page = md/* md */ `
 # Fari
 
 Fari это Приложение Компаньон для <b>Fate RPG</b> созданное René-Pier Deshaies-Gélinas available on [Github](https://github.com/fariapp/fari) released under the [AGPL-v3 License](https://choosealicense.com/licenses/agpl-3.0/) .
@@ -38,3 +41,4 @@ Peer-to-peer соединение закроется если вы закрое�
 Вы можете сделать пожертвование и им тоже:
 
 - [PeerJS](https://opencollective.com/peer) - То, что помогает вам играть с друзьями, используя peer-to-peer соединение.
+`;
