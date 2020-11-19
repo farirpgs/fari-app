@@ -98,7 +98,7 @@ describe("/characters", () => {
     });
   });
 
-  describe.on("Given I want a to use a template", () => {
+  describe("Given I want a to use a template", () => {
     it("should let me do it", () => {
       Fari.start();
       cy.visit("/");
