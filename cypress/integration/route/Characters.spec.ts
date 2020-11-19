@@ -103,7 +103,7 @@ describe("/characters", () => {
   });
 
   describe("Given I want a to use a template", () => {
-    it("should let me do it", () => {
+    it("should let load a template", () => {
       Fari.start();
       cy.visit("/");
 
@@ -125,7 +125,7 @@ describe("/characters", () => {
   });
 
   describe("Given I want to customize my character sheet", () => {
-    it("should support adding, filling up and removing a character", () => {
+    it("should let me do it using the advanced mode", () => {
       Fari.start();
       cy.visit("/");
 
