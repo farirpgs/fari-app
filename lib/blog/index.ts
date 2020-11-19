@@ -1,4 +1,9 @@
-export const blogPosts = [
+export const blogPosts: Array<{
+  title: string;
+  slug: string;
+  date: string;
+  load: () => any;
+}> = [
   // {
   //   title: "New Drawing Area in Fari v3.2.0",
   //   slug: "2020-10-19-fari-3-2-0-drawing-area",
