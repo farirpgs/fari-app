@@ -49,6 +49,8 @@ export const frTranslation: Record<
   "dice-route.meta.description": `Jet de dés Fate / Fudge en ligne`,
   "dice-route.meta.title": `Lancer des dés Fate / Fudge en ligne`,
   "dice-route.title": `Appuyez sur le bouton pour relancer`,
+  "donation.kofi": `Soutenir Fari sur Ko-fi`,
+  "donation.patreon": `Devenez un contributeur!`,
   "draw-route.meta.description": `Dessinez et esquissez votre scène à l'aide du pad à dessin de Fari`,
   "draw-route.meta.title": `Dessiner`,
   "home-route.meta.description": `Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.`,

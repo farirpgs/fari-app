@@ -49,6 +49,8 @@ export const ruTranslation: Record<
   "dice-route.meta.description": `Бросить Fate/Fudge кубик онлайн с помощью этого справедливого кубомёта.`,
   "dice-route.meta.title": `Бросить Fate dice онлайн`,
   "dice-route.title": `Нажмите, чтобы перебросить`,
+  "donation.kofi": `Поддержите Fari на Ko-fi`,
+  "donation.patreon": `Станьте покровителем!`,
   "draw-route.meta.description": `Draw and sketch your scene using Fari's drawing pad`,
   "draw-route.meta.title": `Draw`,
   "home-route.meta.description": `Fari это лучшее приложение компаньон для Fate RPG. Отыгрывайте сцены с друзьями в реальном времени, бросайте fudge кубики и пусть ваше коллективное воображение разыграется, создав запоминающиеся истории вместе!.`,

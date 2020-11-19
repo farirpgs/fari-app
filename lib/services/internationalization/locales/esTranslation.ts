@@ -49,6 +49,8 @@ export const esTranslation: Record<
   "dice-route.meta.description": `Lanza dados Fate/Fudge online usando este lanzador justo.`,
   "dice-route.meta.title": `Lanzar Dados Fate Online`,
   "dice-route.title": `Presionar para volver a tirar`,
+  "donation.kofi": `Apoya a Fari en Ko-fi`,
+  "donation.patreon": `Conviértete en un patrón!`,
   "draw-route.meta.description": `Dibuja y dibuja tu escena con el panel de dibujo de Fari`,
   "draw-route.meta.title": `Dibujar`,
   "home-route.meta.description": `Fari es la mejor aplicación de asistencia para Fate RPG. ¡Juega escenas en tiempo real con tus amigos, lanzad los dados FUDGE y dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!`,

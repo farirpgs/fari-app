@@ -49,6 +49,8 @@ export const deTranslation: Record<
   "dice-route.meta.description": `Würfle online Fate/Fudge-Würfel mit diesem fairen Würfelgerät.`,
   "dice-route.meta.title": `Würfle Fate-Würfel online`,
   "dice-route.title": `Drücke den Button um neu zu würfeln`,
+  "donation.kofi": `Unterstütze Fari auf Ko-Fi`,
+  "donation.patreon": `Werde ein Patron!`,
   "draw-route.meta.description": `Zeichne und skizziere deine Szene mit Fari's Zeichenfläche`,
   "draw-route.meta.title": `Zeichnen`,
   "home-route.meta.description": `Fari ist die beste Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel. Spiele Szenen in Echtzeit mit deinen Freunden, würfle mit Fudge-Würfeln, lasst eurer kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!`,

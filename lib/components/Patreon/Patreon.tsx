@@ -3,8 +3,10 @@ import { Box } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid/Grid";
 import React from "react";
 import patreonImage from "../../../images/services/patreon.png";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const Patreon: React.FC = (props) => {
+  const { t } = useTranslate();
   return (
     <Box
       className={css({
@@ -28,7 +30,7 @@ export const Patreon: React.FC = (props) => {
             rel="noreferrer"
             href="https://www.patreon.com/bePatron?u=43408921"
           >
-            Become a patron!
+            {t("donation.patreon")}
           </a>
         </Grid>
       </Grid>
