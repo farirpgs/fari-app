@@ -16,7 +16,6 @@ const Pages: Record<IPossibleLanguages, Promise<{ page: string }>> = {
   "de": import("./page/About.de"),
   "dev": import("./page/About.en"),
 };
-
 export const AboutRoute: React.FC<{}> = (props) => {
   const { t, currentLanguage } = useTranslate();
   const logger = useLogger();
@@ -44,3 +43,4 @@ export const AboutRoute: React.FC<{}> = (props) => {
   );
 };
 AboutRoute.displayName = "AboutRoute";
+export default AboutRoute;

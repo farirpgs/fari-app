@@ -35,3 +35,5 @@ export const BlogPostsRoute: React.FC = (props) => {
     </Page>
   );
 };
+BlogPostsRoute.displayName = "BlogPostsRoute";
+export default BlogPostsRoute;

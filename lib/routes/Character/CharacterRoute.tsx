@@ -81,3 +81,4 @@ export const CharacterRoute: React.FC<{
 };
 
 CharacterRoute.displayName = "CharacterRoute";
+export default CharacterRoute;

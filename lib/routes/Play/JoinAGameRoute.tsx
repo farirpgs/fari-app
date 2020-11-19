@@ -83,7 +83,7 @@ export const JoinAGame: React.FC<{
         }}
       >
         <Box pb="2rem" textAlign="center">
-          <img width="150px" src={appIcon} />
+          <img alt="Fari" width="150px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
           <Typography variant="h4">

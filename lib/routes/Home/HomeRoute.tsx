@@ -166,7 +166,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Container maxWidth="sm">
         <Box pb="2rem" textAlign="center">
-          <img width="150px" src={appIcon} />
+          <img alt="Fari" width="150px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
           <Typography variant="h4">{t("home-route.welcome")}</Typography>
@@ -202,3 +202,4 @@ export const HomeRoute: React.FC<{}> = (props) => {
 };
 
 HomeRoute.displayName = "HomeRoute";
+export default HomeRoute;

@@ -28,3 +28,4 @@ export const DrawRoute: React.FC = (props) => {
 };
 
 DrawRoute.displayName = "DrawRoute";
+export default DrawRoute;

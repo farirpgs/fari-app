@@ -55,3 +55,5 @@ function getChangeLog(mardown: string) {
     return { html: "", latestVersion: "" };
   }
 }
+
+export default ChangelogRoute;

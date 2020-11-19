@@ -102,3 +102,4 @@ export const DiceRoute = () => {
 };
 
 DiceRoute.displayName = "DiceRoute";
+export default DiceRoute;

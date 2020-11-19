@@ -139,7 +139,11 @@ export const Page: React.FC<{
               })}
             >
               <Typography>
-                <Link href="https://www.netlify.com" target="_blank">
+                <Link
+                  href="https://www.netlify.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   This site is powered by Netlify
                 </Link>
               </Typography>

@@ -141,3 +141,4 @@ export const PlayRoute: React.FC<{
 };
 
 PlayRoute.displayName = "PlayRoute";
+export default PlayRoute;

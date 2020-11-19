@@ -45,3 +45,4 @@ export const NotFoundRoute: React.FC<{}> = (props) => {
 };
 
 NotFoundRoute.displayName = "NotFoundRoute";
+export default NotFoundRoute;

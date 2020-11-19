@@ -6,7 +6,6 @@ import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 
 const converter = new showdown.Converter();
-
 export const BlogPostRoute: React.FC<{ slug: string }> = (props) => {
   const [html, setHtml] = useState<string | undefined>();
 
@@ -39,3 +38,5 @@ export const BlogPostRoute: React.FC<{ slug: string }> = (props) => {
     );
   }
 };
+
+export default BlogPostRoute;
