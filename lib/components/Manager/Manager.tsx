@@ -141,40 +141,42 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       return null;
     }
     return (
-      <Grid container spacing={1} justify="center">
-        <Grid item>
-          <Button
-            color="primary"
-            variant="outlined"
-            data-cy="manager.new"
-            onClick={onAdd}
-          >
-            {t("manager.new")}
-          </Button>
+      <Box padding={0.5}>
+        <Grid container spacing={1} justify="center">
+          <Grid item>
+            <Button
+              color="primary"
+              variant="outlined"
+              data-cy="manager.new"
+              onClick={onAdd}
+            >
+              {t("manager.new")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              color="primary"
+              variant="outlined"
+              data-cy="manager.import"
+              component="label"
+            >
+              {t("manager.import")}
+              <input
+                type="file"
+                accept=".json"
+                key={`import-input-${importCounter}`}
+                className={css({
+                  display: "none",
+                })}
+                onChange={(event) => {
+                  onImport(event.target.files);
+                  setImportCounter((prev) => prev + 1);
+                }}
+              />
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button
-            color="primary"
-            variant="outlined"
-            data-cy="manager.import"
-            component="label"
-          >
-            {t("manager.import")}
-            <input
-              type="file"
-              accept=".json"
-              key={`import-input-${importCounter}`}
-              className={css({
-                display: "none",
-              })}
-              onChange={(event) => {
-                onImport(event.target.files);
-                setImportCounter((prev) => prev + 1);
-              }}
-            />
-          </Button>
-        </Grid>
-      </Grid>
+      </Box>
     );
   }
 
