@@ -39,7 +39,7 @@ export const LoadingRoute: React.FC = (props) => {
   useEffect(() => {
     timeout.current = setTimeout(() => {
       setFadeIn(true);
-    }, 300);
+    }, 400);
 
     return () => {
       clearTimeout(timeout.current);
