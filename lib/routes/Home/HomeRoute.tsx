@@ -142,6 +142,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                   variant="outlined"
                   color="primary"
                   size="large"
+                  data-cy="home.play-offline"
                   onClick={() => {
                     history.push("/play-offline");
                     logger.info("HomeRoute:onStartOfflineGame");

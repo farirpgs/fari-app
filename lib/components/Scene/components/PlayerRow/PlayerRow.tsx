@@ -17,6 +17,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
@@ -24,17 +25,19 @@ import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { DiceBox } from "../../../DiceBox/DiceBox";
 
-export const PlayerRow: React.FC<{
-  player: IPlayer;
-  isGM: boolean;
-  isMe: boolean;
-  offline: boolean;
-  onDiceRoll(options: IRollDiceOptions): void;
-  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
-  onFatePointsChange(fatePoints: number): void;
-  onPlayerRemove(): void;
-  onCharacterDialogOpen(): void;
-}> = (props) => {
+export const PlayerRow: React.FC<
+  {
+    player: IPlayer;
+    isGM: boolean;
+    isMe: boolean;
+    offline: boolean;
+    onDiceRoll(options: IRollDiceOptions): void;
+    onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
+    onFatePointsChange(fatePoints: number): void;
+    onPlayerRemove(): void;
+    onCharacterDialogOpen(): void;
+  } & IDataCyProps
+> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
@@ -87,6 +90,7 @@ export const PlayerRow: React.FC<{
   return (
     <>
       <TableRow
+        data-cy={props["data-cy"]}
         selected={false}
         className={cx({
           [selectedRowStyle]: shouldHighlight,
@@ -133,6 +137,7 @@ export const PlayerRow: React.FC<{
           >
             <span>
               <IconButton
+                data-cy={`${props["data-cy"]}.toggle-initiative`}
                 onClick={(e) => {
                   e.stopPropagation();
                   props.onPlayedInTurnOrderChange(
@@ -161,6 +166,7 @@ export const PlayerRow: React.FC<{
                 className={css({
                   borderRadius: "50%",
                 })}
+                data-cy={`${props["data-cy"]}.consume-fate-point`}
                 disabled={!canControl}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -213,6 +219,7 @@ export const PlayerRow: React.FC<{
               <Tooltip title={t("player-row.remove-fate-point")}>
                 <span>
                   <IconButton
+                    data-cy={`${props["data-cy"]}.consume-fate-point-gm`}
                     size="small"
                     disabled={props.player.fatePoints === 0}
                     onClick={(e) => {
@@ -235,6 +242,7 @@ export const PlayerRow: React.FC<{
             <Grid item>
               <Tooltip title={t("player-row.add-fate-point")}>
                 <IconButton
+                  data-cy={`${props["data-cy"]}.refresh-fate-point-gm`}
                   size="small"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -248,10 +256,11 @@ export const PlayerRow: React.FC<{
                 </IconButton>
               </Tooltip>
             </Grid>
-            {!props.isMe && (
+            {!props.player.isGM && (
               <Grid item>
                 <Tooltip title={t("player-row.remove-character")}>
                   <IconButton
+                    data-cy={`${props["data-cy"]}.remove`}
                     size="small"
                     onClick={(e) => {
                       e.stopPropagation();

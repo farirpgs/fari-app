@@ -332,6 +332,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
               <TextField
                 value={offlineCharacterName}
+                data-cy="scene.offline-character-dialog.name"
                 onChange={(event) => {
                   setOfflineCharacterName(event.target.value);
                 }}
@@ -341,6 +342,7 @@ export const Scene: React.FC<IProps> = (props) => {
           </DialogContent>
           <DialogActions>
             <Button
+              data-cy="scene.offline-character-dialog.cancel"
               onClick={() => {
                 setOfflineCharacterDialogOpen(false);
                 setOfflineCharacterName("");
@@ -350,7 +352,12 @@ export const Scene: React.FC<IProps> = (props) => {
             >
               {t("play-route.cancel")}
             </Button>
-            <Button type="submit" color="secondary" variant="outlined">
+            <Button
+              data-cy="scene.offline-character-dialog.add"
+              type="submit"
+              color="secondary"
+              variant="outlined"
+            >
               {t("play-route.add-character")}
             </Button>
           </DialogActions>
@@ -425,6 +432,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   <Grid container spacing={1}>
                     <Grid item>
                       <Button
+                        data-cy="scene.reset-initiative"
                         onClick={() => {
                           sceneManager.actions.resetInitiative();
                           logger.info("Scene:onResetInitiative");
@@ -440,6 +448,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       <Tooltip title={t("play-route.add-character")}>
                         <span>
                           <Button
+                            data-cy="scene.add-offline-character"
                             onClick={() => {
                               setOfflineCharacterDialogOpen(true);
                               logger.info("Scene:onAddOfflineCharacter");
@@ -469,7 +478,7 @@ export const Scene: React.FC<IProps> = (props) => {
             >
               <TableHead>{renderPlayerRowHeader()}</TableHead>
               <TableBody>
-                {everyone.map((player) => {
+                {everyone.map((player, playerRowIndex) => {
                   const isMe =
                     props.mode === SceneMode.PlayOnline &&
                     props.userId === player.id;
@@ -506,6 +515,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         }}
                       />
                       <PlayerRow
+                        data-cy={`scene.player-row.${playerRowIndex}`}
                         key={player.id}
                         isGM={isGM}
                         isMe={isMe}

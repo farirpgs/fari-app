@@ -45,6 +45,7 @@ export function useScene(props: IProps) {
       playedDuringTurn: false,
       fatePoints: 3,
       offline: false,
+      isGM: true,
     },
     players: [],
     goodConfetti: 0,
@@ -462,6 +463,7 @@ export function useScene(props: IProps) {
           playedDuringTurn: false,
           fatePoints: 3,
           offline: true,
+          isGM: false,
         });
       })
     );
@@ -480,6 +482,7 @@ export function useScene(props: IProps) {
           playedDuringTurn: false,
           fatePoints: character.refresh,
           offline: true,
+          isGM: false,
         });
       })
     );
