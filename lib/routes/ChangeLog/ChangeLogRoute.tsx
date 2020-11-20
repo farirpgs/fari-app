@@ -1,4 +1,4 @@
-import { Container } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 import React, { useEffect, useState } from "react";
 import showdown from "showdown";
 import changeLogMarkdown from "../../../CHANGELOG.md";

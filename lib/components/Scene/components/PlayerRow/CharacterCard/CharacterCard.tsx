@@ -1,15 +1,13 @@
 import { css, cx } from "@emotion/css";
-import {
-  Box,
-  Grid,
-  IconButton,
-  Link,
-  Paper,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersonIcon from "@material-ui/icons/Person";
 import truncate from "lodash/truncate";
 import React from "react";

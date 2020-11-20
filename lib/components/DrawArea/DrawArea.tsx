@@ -1,4 +1,4 @@
-import { Dialog } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
 import React, { useState } from "react";
 import { SlideUpTransition } from "../SlideUpTransition/SlideUpTransition";
 import { DrawObjects } from "./DrawObjects";

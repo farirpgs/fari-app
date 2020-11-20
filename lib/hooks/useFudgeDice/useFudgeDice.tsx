@@ -1,4 +1,4 @@
-import { useTheme } from "@material-ui/core";
+import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";

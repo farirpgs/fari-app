@@ -1,6 +1,6 @@
 import { css } from "@emotion/css";
-import { Box } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid/Grid";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import React from "react";
 import patreonImage from "../../../images/services/patreon.png";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";

@@ -1,15 +1,13 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Collapse,
-  Container,
-  Grid,
-  InputLabel,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Collapse from "@material-ui/core/Collapse";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import appIcon from "../../../images/app-icon.png";
 import { ManagerMode } from "../../components/Manager/Manager";

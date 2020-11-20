@@ -1,4 +1,4 @@
-import { Container } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 import { default as React, useEffect, useState } from "react";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";

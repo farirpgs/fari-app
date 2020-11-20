@@ -1,16 +1,13 @@
 import { css } from "@emotion/css";
-import {
-  Button,
-  ButtonGroup,
-  ButtonGroupProps,
-  ClickAwayListener,
-  Grid,
-  Grow,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import ButtonGroup, { ButtonGroupProps } from "@material-ui/core/ButtonGroup";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Grid from "@material-ui/core/Grid";
+import Grow from "@material-ui/core/Grow";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import React from "react";
 import { zIndex } from "../../constants/zIndex";

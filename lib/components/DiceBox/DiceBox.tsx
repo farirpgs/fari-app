@@ -1,12 +1,10 @@
 import { css, cx } from "@emotion/css";
-import {
-  Box,
-  ButtonBase,
-  Collapse,
-  Tooltip,
-  Typography,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Collapse from "@material-ui/core/Collapse";
 import useTheme from "@material-ui/core/styles/useTheme";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";

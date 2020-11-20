@@ -1,18 +1,15 @@
 import { css, cx } from "@emotion/css";
-import {
-  Avatar,
-  Box,
-  ButtonBase,
-  darken,
-  Grid,
-  IconButton,
-  lighten,
-  TableCell,
-  TableRow,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
+import useTheme from "@material-ui/core/styles/useTheme";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";

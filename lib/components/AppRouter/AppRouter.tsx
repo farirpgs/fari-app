@@ -1,4 +1,6 @@
-import { Box, CircularProgress, Container } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Container from "@material-ui/core/Container";
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Page } from "../Page/Page";

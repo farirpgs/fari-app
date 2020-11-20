@@ -1,4 +1,5 @@
-import { Box, CircularProgress } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React, { useEffect, useState } from "react";
 import showdown from "showdown";
 import { blogPosts } from "../../blog/index";

@@ -1,5 +1,5 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core";
 import { blue, indigo } from "@material-ui/core/colors";
+import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
 
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {

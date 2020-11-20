@@ -1,4 +1,5 @@
-import { fade, useTheme } from "@material-ui/core";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import useTheme from "@material-ui/core/styles/useTheme";
 import { useMemo } from "react";
 
 const whiteVariants = ["#fff", "#ffffff", "#FFF", "#FFFFFF", "white"];

@@ -3,13 +3,10 @@
  * Converted tokens using: https://react-svgr.com/playground/
  */
 
-import {
-  makeStyles,
-  SvgIcon,
-  SvgIconProps,
-  Theme,
-  useTheme,
-} from "@material-ui/core";
+import { Theme } from "@material-ui/core/styles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon/SvgIcon";
 import React from "react";
 
 export function makeIcon(options: {

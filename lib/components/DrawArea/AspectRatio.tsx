@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import React from "react";
 
 export const AspectRatio: React.FC<{ widthPercent: number; ratio: number }> = (
