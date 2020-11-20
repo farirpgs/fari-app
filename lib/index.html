@@ -53,8 +53,47 @@
     />
     <meta property="twitter:image" content="../images/logo.png" />
   </head>
+  <style>
+    .full-page-loader {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
+
+    .full-page-loader > img {
+      animation: 1.8s infinite heartbeat;
+    }
+
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(1.05);
+      }
+      50% {
+        transform: scale(1);
+      }
+      75% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="full-page-loader">
+        <img width="200" src="../images/app-icon.png" alt="Loading Fari" />
+      </div>
+    </div>
     <script
       type="text/javascript"
       src="https://ko-fi.com/widgets/widget_2.js"
