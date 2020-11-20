@@ -1,9 +1,5 @@
 import { Fari } from "lib/util/Fari";
 
-afterEach(() => {
-  cy.screenshot();
-});
-
 describe("/scenes", () => {
   describe("Given I want to create a scene", () => {
     it("should support adding, filling up and removing a scene", () => {

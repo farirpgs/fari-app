@@ -153,6 +153,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item>
               <Select
+                data-cy="page.languages"
                 value={currentLanguage}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value as string);
@@ -457,6 +458,7 @@ export const Page: React.FC<{
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
+            data-cy="page.toggle-dark-mode"
             color="inherit"
             size="small"
             className={css({

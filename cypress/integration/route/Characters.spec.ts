@@ -1,9 +1,5 @@
 import { Fari } from "lib/util/Fari";
 
-afterEach(() => {
-  cy.screenshot();
-});
-
 describe("/characters", () => {
   describe("Given I want to create a simple character sheet", () => {
     it("should support adding, filling up and removing a character", () => {

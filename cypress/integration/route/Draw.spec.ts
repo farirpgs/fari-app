@@ -9,10 +9,6 @@ import { Fari } from "lib/util/Fari";
 // "#d55e01",
 // "#cc79a7",
 
-afterEach(() => {
-  cy.screenshot();
-});
-
 describe("/draw", () => {
   describe("Given I want to draw my zones", () => {
     it("should draw my zones", () => {

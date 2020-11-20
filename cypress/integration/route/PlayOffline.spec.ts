@@ -1,10 +1,6 @@
 import { Fari } from "lib/util/Fari";
 
-afterEach(() => {
-  cy.screenshot();
-});
-
-describe("/dice", () => {
+describe("/play-offline", () => {
   it("Should roll dice", () => {
     Fari.start();
     Fari.get("home.play-offline").click();
