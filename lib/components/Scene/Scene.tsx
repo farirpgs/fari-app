@@ -512,7 +512,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         player={player}
                         offline={isOffline}
                         onPlayerRemove={() => {
-                          sceneManager.actions.removeOfflinePlayer(player.id);
+                          sceneManager.actions.removePlayer(player.id);
                         }}
                         onCharacterDialogOpen={() => {
                           setCharacterDialogPlayerId(player.id);

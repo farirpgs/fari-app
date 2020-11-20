@@ -803,7 +803,7 @@ fdescribe("useScene", () => {
     ]);
     // WHEN removing an offline player
     act(() => {
-      result.current.actions.removeOfflinePlayer(playerId);
+      result.current.actions.removePlayer(playerId);
     });
   });
 });

@@ -486,10 +486,12 @@ export function useScene(props: IProps) {
     return id;
   }
 
-  function removeOfflinePlayer(id: string) {
+  function removePlayer(id: string) {
     setScene(
       produce((draft: IScene) => {
-        draft.players = draft.players.filter((p) => p.id !== id);
+        draft.players = draft.players.filter((p) => {
+          return p.id !== id;
+        });
       })
     );
   }
@@ -651,7 +653,7 @@ export function useScene(props: IProps) {
       updatePlayers,
       addOfflinePlayer,
       addOfflineCharacter,
-      removeOfflinePlayer,
+      removePlayer,
       updatePlayerFatePoints,
       updatePlayerPlayedDuringTurn,
       resetInitiative,

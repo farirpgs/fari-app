@@ -38,8 +38,6 @@ export const PlayerRow: React.FC<{
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const shouldRenderOfflinePlayerRemoveButton =
-    props.isGM && props.player.offline && !props.isMe;
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
   const textColor = useTextColors(theme.palette.background.default);
@@ -250,7 +248,7 @@ export const PlayerRow: React.FC<{
                 </IconButton>
               </Tooltip>
             </Grid>
-            {shouldRenderOfflinePlayerRemoveButton && (
+            {!props.isMe && (
               <Grid item>
                 <Tooltip title={t("player-row.remove-character")}>
                   <IconButton
