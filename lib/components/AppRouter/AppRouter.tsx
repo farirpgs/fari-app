@@ -1,7 +1,8 @@
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
-import React, { Suspense } from "react";
+import Fade from "@material-ui/core/Fade";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Page } from "../Page/Page";
 
@@ -31,19 +32,36 @@ const PlayOfflineRoute = React.lazy(
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 
+export const LoadingRoute: React.FC = (props) => {
+  const [fadeIn, setFadeIn] = useState(false);
+  const timeout = useRef<any | undefined>(undefined);
+
+  useEffect(() => {
+    timeout.current = setTimeout(() => {
+      setFadeIn(true);
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout.current);
+    };
+  });
+
+  return (
+    <Page displayDonation={false}>
+      <Fade in={fadeIn}>
+        <Container maxWidth="md">
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        </Container>
+      </Fade>
+    </Page>
+  );
+};
+
 export const AppRouter = () => {
   return (
-    <Suspense
-      fallback={
-        <Page displayDonation={false}>
-          <Container maxWidth="md">
-            <Box display="flex" justifyContent="center">
-              <CircularProgress />
-            </Box>
-          </Container>
-        </Page>
-      }
-    >
+    <Suspense fallback={<LoadingRoute />}>
       <Switch>
         <Route
           exact
