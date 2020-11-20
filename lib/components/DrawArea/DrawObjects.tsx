@@ -20,7 +20,7 @@ import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import React, { useEffect, useRef, useState } from "react";
-import { TwitterPicker } from "react-color";
+import TwitterPicker from "react-color/lib/components/twitter/Twitter";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { AspectRatio } from "./AspectRatio";

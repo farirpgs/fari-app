@@ -18,7 +18,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExportIcon from "@material-ui/icons/GetApp";
-import { Alert } from "@material-ui/lab";
+import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { listItem } from "./domains/ListItem";
