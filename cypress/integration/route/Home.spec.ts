@@ -1,11 +1,6 @@
 import { Fari } from "lib/util/Fari";
 
 describe("/", () => {
-  it("should load the home page", () => {
-    Fari.start();
-    // cy.screenshot();
-  });
-
   describe("Given I want to change my theme", () => {
     it("should let me use the dark theme", () => {
       Fari.start();
