@@ -11,6 +11,7 @@ export function usePeerHost(options: {
   const [connections, setConnections] = useState<Array<Peer.DataConnection>>(
     []
   );
+
   useEffect(() => {
     function listenForConnections() {
       peer.on("connection", onPeerConnectionCallback);
@@ -35,6 +36,17 @@ export function usePeerHost(options: {
         currentConnection.on("close", () => {
           console.info(
             "usePeerHost: Close connection",
+            currentConnection.label
+          );
+          setConnections((connections) => {
+            return connections.filter(
+              (c) => c.label !== currentConnection.label
+            );
+          });
+        });
+        currentConnection.on("error", () => {
+          console.info(
+            "usePeerHost: Error connection",
             currentConnection.label
           );
           setConnections((connections) => {
