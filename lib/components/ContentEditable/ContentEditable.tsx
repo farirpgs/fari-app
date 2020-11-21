@@ -81,7 +81,7 @@ export const ContentEditable: React.FC<
         "cursor": hasCursorPointer ? "pointer" : "text",
         "color": updating ? "grey" : "inherit",
         "transition": !updating
-          ? theme.transitions.create("color", { duration: 1000 })
+          ? theme.transitions.create("color", { duration: 500 })
           : undefined,
         "borderBottom": props.border
           ? `1px solid ${theme.palette.divider}`
