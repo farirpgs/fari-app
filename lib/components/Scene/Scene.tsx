@@ -12,8 +12,12 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -32,7 +36,9 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -69,7 +75,6 @@ import { IndexCard } from "../IndexCard/IndexCard";
 import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
-import { SplitButton } from "../SplitButton/SplitButton";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 
@@ -131,6 +136,9 @@ export const Scene: React.FC<IProps> = (props) => {
   const errorTheme = useButtonTheme(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const $menu = useRef(null);
+
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
@@ -501,12 +509,12 @@ export const Scene: React.FC<IProps> = (props) => {
                               updatedCharacter
                             );
                           } else {
-                            connectionsManager?.actions.sendToHost<
-                              IPeerActions
-                            >({
-                              action: "update-character",
-                              payload: updatedCharacter,
-                            });
+                            connectionsManager?.actions.sendToHost<IPeerActions>(
+                              {
+                                action: "update-character",
+                                payload: updatedCharacter,
+                              }
+                            );
                           }
                           setCharacterDialogPlayerId(undefined);
                         }}
@@ -537,12 +545,12 @@ export const Scene: React.FC<IProps> = (props) => {
                               playedInTurnOrder
                             );
                           } else {
-                            connectionsManager?.actions.sendToHost<
-                              IPeerActions
-                            >({
-                              action: "played-in-turn-order",
-                              payload: playedInTurnOrder,
-                            });
+                            connectionsManager?.actions.sendToHost<IPeerActions>(
+                              {
+                                action: "played-in-turn-order",
+                                payload: playedInTurnOrder,
+                              }
+                            );
                           }
                         }}
                         onFatePointsChange={(fatePoints) => {
@@ -552,12 +560,12 @@ export const Scene: React.FC<IProps> = (props) => {
                               fatePoints
                             );
                           } else {
-                            connectionsManager?.actions.sendToHost<
-                              IPeerActions
-                            >({
-                              action: "update-fate-point",
-                              payload: fatePoints,
-                            });
+                            connectionsManager?.actions.sendToHost<IPeerActions>(
+                              {
+                                action: "update-fate-point",
+                                payload: fatePoints,
+                              }
+                            );
                           }
                         }}
                       />
@@ -719,7 +727,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {t("play-route.click-on-the-")}
                 <Button
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   className={css({
                     margin: "0 .5rem",
                   })}
@@ -840,7 +848,7 @@ export const Scene: React.FC<IProps> = (props) => {
         <Grid container spacing={1} justify="center">
           <Grid item>
             <ButtonGroup
-              color="secondary"
+              color="primary"
               variant="contained"
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
@@ -915,7 +923,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   logger.info("Scene:onFireGoodConfetti");
                 }}
                 variant="text"
-                color="primary"
+                color="secondary"
               >
                 <ThumbUpIcon />
               </Button>
@@ -929,7 +937,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   logger.info("Scene:onFireBadConfetti");
                 }}
                 variant="text"
-                color="primary"
+                color="secondary"
               >
                 <ThumbDownIcon />
               </Button>
@@ -997,7 +1005,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       }
                     }}
                     variant="outlined"
-                    color="default"
+                    color={shareLinkToolTip.open ? "secondary" : "default"}
                     endIcon={<FileCopyIcon />}
                   >
                     {t("play-route.copy-game-link")}
@@ -1041,25 +1049,9 @@ export const Scene: React.FC<IProps> = (props) => {
       return null;
     }
 
-    const loadSceneOption = {
-      label: t("play-route.load-scene"),
-      onClick: () => {
-        scenesManager.actions.openManager(ManagerMode.Use, onLoadScene);
-        logger.info("Scene:onLoadScene");
-      },
-    };
-
-    const loadSceneAsCloneOption = {
-      label: t("play-route.clone-and-load-scene"),
-      onClick: () => {
-        scenesManager.actions.openManager(ManagerMode.Use, onCloneAndLoadScene);
-        logger.info("Scene:onCloneAndLoadScene");
-      },
-    };
-
     return (
       <Box pb="1rem">
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={1} justify="center" alignItems="center">
           <Grid item>
             <Button
               color="primary"
@@ -1076,20 +1068,6 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.save-scene")}
             </Button>
           </Grid>
-          <Grid item>
-            {props.mode !== SceneMode.Manage && (
-              <SplitButton
-                color="default"
-                variant="outlined"
-                options={[loadSceneOption, loadSceneAsCloneOption]}
-              />
-            )}
-          </Grid>
-          <Hidden smDown>
-            <Grid item className={css({ display: "flex" })}>
-              <Divider orientation="vertical" flexItem />
-            </Grid>
-          </Hidden>
           <Grid item>
             <ThemeProvider theme={errorTheme}>
               <Button
@@ -1112,6 +1090,63 @@ export const Scene: React.FC<IProps> = (props) => {
               </Button>
             </ThemeProvider>
           </Grid>
+          {props.mode !== SceneMode.Manage && (
+            <Grid item>
+              <IconButton
+                ref={$menu}
+                size="small"
+                data-cy={`scene.menu`}
+                onClick={() => {
+                  setMenuOpen(true);
+                }}
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                anchorEl={$menu.current}
+                keepMounted
+                open={menuOpen}
+                onClose={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                <MenuItem
+                  data-cy="scene.load-scene"
+                  onClick={() => {
+                    scenesManager.actions.openManager(
+                      ManagerMode.Use,
+                      onLoadScene
+                    );
+                    setMenuOpen(false);
+                    logger.info("Scene:onLoadScene");
+                  }}
+                >
+                  <ListItemIcon className={css({ minWidth: "2rem" })}>
+                    <RotateLeftIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary={t("play-route.load-scene")} />
+                </MenuItem>
+                <MenuItem
+                  data-cy="scene.clone-and-load-scene"
+                  onClick={() => {
+                    scenesManager.actions.openManager(
+                      ManagerMode.Use,
+                      onCloneAndLoadScene
+                    );
+                    setMenuOpen(false);
+                    logger.info("Scene:onCloneAndLoadScene");
+                  }}
+                >
+                  <ListItemIcon className={css({ minWidth: "2rem" })}>
+                    <FileCopyIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={t("play-route.clone-and-load-scene")}
+                  />
+                </MenuItem>
+              </Menu>
+            </Grid>
+          )}
         </Grid>
       </Box>
     );
