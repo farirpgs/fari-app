@@ -45,6 +45,16 @@ export function arraySort<T>(
           return sortResult;
         }
       }
+      if (fieldType === "boolean") {
+        const aBoolean = getter(a).value as boolean;
+        const bBoolean = getter(b).value as boolean;
+
+        if (sortingType === "asc") {
+          return aBoolean === bBoolean ? 0 : aBoolean ? -1 : 1;
+        } else {
+          return aBoolean === bBoolean ? 0 : aBoolean ? 1 : -1;
+        }
+      }
     }
 
     return 0;

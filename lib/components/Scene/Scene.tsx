@@ -678,7 +678,11 @@ export const Scene: React.FC<IProps> = (props) => {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const hasAspects = aspectIds.length > 0;
     const sortedAspectIds = arraySort(aspectIds, [
-      (id) => {
+      function sortByPinned(id) {
+        const aspect = sceneManager.state.scene.aspects[id];
+        return { value: aspect.pinned, direction: "asc" };
+      },
+      function sortByType(id) {
         const aspect = sceneManager.state.scene.aspects[id];
         return { value: aspect.type, direction: "asc" };
       },
