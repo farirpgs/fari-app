@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
-import appIcon from "../../../images/app-icon.png";
+import appIcon from "../../../images/blue/app.png";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
@@ -31,14 +31,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSupport() {
     return (
       <Container maxWidth="sm">
-        <Typography
-          variant="h5"
-          align="center"
-          color="primary"
-          className={css({ fontWeight: "bold" })}
-        >
+        <FateLabel variant="h5" align="center" color="primary">
           {t("home-route.support-fari.title")}
-        </Typography>
+        </FateLabel>
         <br />
         <Typography
           variant="body1"
@@ -65,14 +60,10 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Container maxWidth="sm">
         <Box py="1rem" textAlign="center">
-          <Typography
-            variant="h5"
-            align="center"
-            color="primary"
-            className={css({ fontWeight: "bold" })}
-          >
+          <FateLabel variant="h5" align="center" color="primary">
             {t("home-route.thanks-some-patrons")}
-          </Typography>
+          </FateLabel>
+          <br />
           <Box py=".5rem">
             <Grid container spacing={1} justify="center">
               {Patrons.map((patron, i) => {
@@ -105,9 +96,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
           {isWebRTCSupported() && (
             <Grid item xs={12} md={4}>
               <Box height="100%" display="flex" flexDirection="column">
-                <Typography variant="h5" align="center" color="primary">
-                  <b>{t("home-route.play-online.title")}</b>
-                </Typography>
+                <FateLabel variant="h5" align="center" color="primary">
+                  {t("home-route.play-online.title")}
+                </FateLabel>
                 <br />
                 <Typography variant="body1" align="center">
                   {t("home-route.play-online.description")}
@@ -130,9 +121,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
           )}
           <Grid item xs={12} md={4}>
             <Box height="100%" display="flex" flexDirection="column">
-              <Typography variant="h5" align="center" color="primary">
-                <b>{t("home-route.play-offline.title")}</b>
-              </Typography>
+              <FateLabel variant="h5" align="center" color="primary">
+                {t("home-route.play-offline.title")}
+              </FateLabel>
               <br />
               <Typography variant="body1" align="center">
                 {t("home-route.play-offline.description")}
@@ -154,9 +145,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
             </Box>
           </Grid>
         </Grid>
-        <Box py="1rem">
-          <Divider />
-        </Box>
       </Container>
     );
   }
@@ -168,8 +156,20 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <img alt="Fari" width="150px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
-          <Typography variant="h4">{t("home-route.welcome")}</Typography>
+          <Typography variant="h4">
+            <FateLabel variant="h4" color="primary">
+              {t("home-route.heading")}
+            </FateLabel>
+          </Typography>
         </Box>
+      </Container>
+    );
+  }
+
+  function renderHeadingDescription() {
+    return null;
+    return (
+      <Container maxWidth="sm">
         <Box pb="1rem" textAlign="center">
           <Typography variant="subtitle1">
             {t("home-route.subtitle1")}
@@ -193,7 +193,18 @@ export const HomeRoute: React.FC<{}> = (props) => {
       <Box>
         {renderHeading()}
         {renderPlayButtons()}
+        {renderHeadingDescription()}
+        <Container maxWidth="sm">
+          <Box py="1rem">
+            <Divider />
+          </Box>
+        </Container>
         {renderSupport()}
+        <Container maxWidth="sm">
+          <Box py="1rem">
+            <Divider />
+          </Box>
+        </Container>
         {renderPatrons()}
       </Box>
     </Page>

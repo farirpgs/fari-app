@@ -8,32 +8,32 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 export const Patreon: React.FC = (props) => {
   const { t } = useTranslate();
   return (
-    <Box
+    <a
+      target="_blank"
+      rel="noreferrer"
+      href="https://www.patreon.com/bePatron?u=43408921"
       className={css({
-        "background": "rgb(255, 66, 77)",
-
-        "padding": "0.46875rem 1rem",
-        "fontSize": "0.875rem",
-        "borderRadius": "9999px",
-        "& a": {
-          color: "#fff !important",
-        },
+        color: "#fff !important",
       })}
     >
-      <Grid container wrap="nowrap" spacing={1} alignItems="center">
-        <Grid item>
-          <img width="16px" src={patreonImage} />
+      <Box
+        className={css({
+          "background": "rgb(255, 66, 77)",
+          "padding": "0.46875rem 1rem",
+          "fontSize": "0.875rem",
+          "borderRadius": "9999px",
+          "& a": {
+            color: "#fff !important",
+          },
+        })}
+      >
+        <Grid container wrap="nowrap" spacing={1} alignItems="center">
+          <Grid item>
+            <img width="16px" src={patreonImage} />
+          </Grid>
+          <Grid item>{t("donation.patreon")}</Grid>
         </Grid>
-        <Grid item>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.patreon.com/bePatron?u=43408921"
-          >
-            {t("donation.patreon")}
-          </a>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </a>
   );
 };

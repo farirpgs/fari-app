@@ -411,7 +411,7 @@ export const IndexCard: React.FC<
             <Box pb=".5rem" key={trackIndex}>
               <Grid container justify="space-between" wrap="nowrap" spacing={1}>
                 <Grid item className={css({ flex: "1 1 auto" })}>
-                  <FateLabel display="inline" size="small">
+                  <FateLabel display="inline" variant="caption">
                     <ContentEditable
                       data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.name`}
                       value={stressTrack.name}
@@ -520,8 +520,8 @@ export const IndexCard: React.FC<
                       </Box>
                       <Box>
                         <FateLabel
+                          variant="caption"
                           className={css({ textAlign: "center" })}
-                          size="small"
                         >
                           <ContentEditable
                             readonly={props.readonly}
@@ -563,7 +563,7 @@ export const IndexCard: React.FC<
                 <Box py=".5rem">
                   <Grid container>
                     <Grid item className={css({ flex: "1 1 auto" })}>
-                      <FateLabel size="small">
+                      <FateLabel variant="caption">
                         <ContentEditable
                           data-cy={`${props["data-cy"]}.consequence.${name}.name`}
                           value={name}

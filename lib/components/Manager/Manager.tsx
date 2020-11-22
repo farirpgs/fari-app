@@ -19,6 +19,7 @@ import ExportIcon from "@material-ui/icons/GetApp";
 import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { listItem } from "./domains/ListItem";
 
 export enum ManagerMode {
@@ -220,7 +221,9 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               key={`${groupName}-${index}`}
               subheader={
                 <ListSubheader component="div">
-                  {groupName || t("manager.ungrouped")}
+                  <FateLabel variant="caption">
+                    {groupName || t("manager.ungrouped")}
+                  </FateLabel>
                 </ListSubheader>
               }
             >
@@ -252,7 +255,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={vm.name}
+                      primary={<>{vm.name}</>}
                       secondary={listItem.formatDate(vm.lastUpdated)}
                     />
                     {props.mode === ManagerMode.Manage && (

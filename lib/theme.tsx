@@ -1,4 +1,3 @@
-import { blue, indigo } from "@material-ui/core/colors";
 import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
 
 export const defaultThemeConfiguration: ThemeOptions = {
@@ -38,8 +37,8 @@ export const defaultThemeConfiguration: ThemeOptions = {
 export const AppLightTheme = createMuiTheme({
   ...defaultThemeConfiguration,
   palette: {
-    primary: indigo,
-    secondary: blue,
+    primary: { main: "#415f9c" },
+    secondary: { main: "#415f9c" },
   },
 });
 
@@ -48,10 +47,10 @@ export const AppDarkTheme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: indigo[200],
+      main: "#a5c1ff",
     },
     secondary: {
-      main: blue[200],
+      main: "#a5c1ff",
     },
   },
 });
