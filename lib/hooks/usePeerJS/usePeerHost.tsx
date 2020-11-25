@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
+import { DataTransfer } from "../../domains/DataTransfer/DataTransfer";
 import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
 
@@ -71,7 +72,8 @@ export function usePeerHost(options: {
     actions: {
       sendToConnections(data: any) {
         connections.forEach((connection) => {
-          connection.send(data);
+          const encodedData = DataTransfer.encode(data);
+          connection.send(encodedData);
         });
       },
     },

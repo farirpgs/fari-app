@@ -630,7 +630,6 @@ export function useScene(props: IProps) {
       safeSetScene,
       loadScene,
       cloneAndLoadNewScene,
-
       updateName,
       setGroup,
       addAspect,
