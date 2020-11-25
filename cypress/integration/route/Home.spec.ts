@@ -13,7 +13,7 @@ describe("/", () => {
 
       Fari.changeLanguage("fr");
 
-      cy.contains("Bienvenue sur Fari");
+      cy.contains("Commencer une partie en ligne");
       Fari.get("page.menu.dice").click();
 
       cy.contains("Appuyez sur le bouton pour relancer");
