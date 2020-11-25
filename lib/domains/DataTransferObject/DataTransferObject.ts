@@ -1,4 +1,4 @@
-export const DataTransfer = {
+export const DataTransferObject = {
   encode(data: any) {
     return unescape(encodeURIComponent(JSON.stringify(data)));
   },
