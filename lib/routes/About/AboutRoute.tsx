@@ -1,5 +1,7 @@
+import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import { default as React, useEffect, useState } from "react";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -37,6 +39,17 @@ export const AboutRoute: React.FC<{}> = (props) => {
         description={t("about-route.meta.description")}
       />
       <Container maxWidth="md">
+        <Box
+          py="1rem"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <FateLabel variant="h4" align="center" color="primary">
+            {t("menu.about")}
+          </FateLabel>
+        </Box>
+
         <MarkdownElement renderedMarkdown={page} />
       </Container>
     </Page>
