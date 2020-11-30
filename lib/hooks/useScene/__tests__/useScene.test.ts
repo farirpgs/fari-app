@@ -207,6 +207,7 @@ fdescribe("useScene", () => {
         playedDuringTurn: false,
         pinned: false,
         title: "",
+        hasDrawArea: false,
         type: 0,
       });
       act(() => {
@@ -405,6 +406,7 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
+        hasDrawArea: false,
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,

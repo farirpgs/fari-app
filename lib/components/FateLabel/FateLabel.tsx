@@ -5,16 +5,19 @@ import React from "react";
 export const FateLabel: React.FC<
   {
     className?: string;
+    underline?: boolean;
   } & TypographyProps
 > = (props) => {
+  const { className, underline, ...rest } = props;
   return (
     <Typography
-      {...props}
+      {...rest}
       className={cx(
         props.className,
         css({
           textTransform: "uppercase",
           fontWeight: 900,
+          textDecoration: underline ? "underline" : undefined,
         })
       )}
     >

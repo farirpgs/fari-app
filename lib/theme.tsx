@@ -17,7 +17,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
   overrides: {
     MuiButton: {
       root: {
-        borderRadius: "20px",
+        borderRadius: "7px",
       },
       contained: {
         fontWeight: 700,

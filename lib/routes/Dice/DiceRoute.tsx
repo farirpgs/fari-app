@@ -68,7 +68,7 @@ export const DiceRoute = () => {
               rolls={rolls}
               showDetails
               size="7rem"
-              fontSize="5rem"
+              fontSize="4.5rem"
               borderSize=".5rem"
               onClick={() => {
                 roll();

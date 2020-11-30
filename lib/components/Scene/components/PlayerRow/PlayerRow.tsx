@@ -186,7 +186,7 @@ export const PlayerRow: React.FC<
             <DiceBox
               rolls={props.player.rolls}
               size="2rem"
-              fontSize="1.2rem"
+              fontSize="1.25rem"
               borderSize=".15rem"
               disabled={!canControl}
               onClick={() => {
