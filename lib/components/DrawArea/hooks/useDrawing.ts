@@ -1,3 +1,4 @@
+import isEqual from "lodash/isEqual";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "../domains/DrawObjectFactory";
 import { tokenColors } from "../domains/pickerColors";
@@ -82,19 +83,15 @@ export function useDrawing(props: {
 
   useEffect(() => {
     const shouldUpdateLocalState =
-      props.objects && props.objects.length !== objects.length;
-    if (shouldUpdateLocalState || props.readonly) {
+      !!props.objects && !isEqual(props.objects, objects);
+
+    if (shouldUpdateLocalState) {
       setObjects(props.objects as IDrawAreaObjects);
     }
   }, [props.objects]);
 
   useEffect(() => {
-    const shouldCallOnChange =
-      props.objects && props.objects.length !== objects.length;
-
-    if (shouldCallOnChange) {
-      changeWithDelay(objects);
-    }
+    changeWithDelay(objects);
   }, [objects]);
 
   function changeWithDelay(objects: IDrawAreaObjects) {

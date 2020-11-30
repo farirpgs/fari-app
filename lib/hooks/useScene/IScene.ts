@@ -26,6 +26,7 @@ export interface IAspect {
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
   drawAreaObjects?: IDrawAreaObjects;
+  hasDrawArea: boolean | undefined;
   type: AspectType;
   pinned: boolean | undefined;
 }

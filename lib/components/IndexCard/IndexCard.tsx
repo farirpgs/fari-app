@@ -85,7 +85,7 @@ export const IndexCard: React.FC<
         {shouldRenderContent && renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
-        <Collapse in={aspect.drawAreaObjects !== undefined}>
+        <Collapse in={aspect.hasDrawArea}>
           <Box>
             <DrawArea
               objects={aspect!.drawAreaObjects}

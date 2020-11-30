@@ -679,6 +679,7 @@ const defaultAspect: IAspect = {
   type: AspectType.Aspect,
   playedDuringTurn: false,
   pinned: false,
+  hasDrawArea: false,
 };
 const defaultIndexCard: IAspect = {
   title: "",
@@ -689,6 +690,7 @@ const defaultIndexCard: IAspect = {
   type: AspectType.IndexCard,
   playedDuringTurn: false,
   pinned: false,
+  hasDrawArea: false,
 };
 
 const defaultBoost: IAspect = {
@@ -700,6 +702,7 @@ const defaultBoost: IAspect = {
   type: AspectType.Boost,
   playedDuringTurn: false,
   pinned: false,
+  hasDrawArea: false,
 };
 
 const defaultNPC: IAspect = {
@@ -711,6 +714,7 @@ const defaultNPC: IAspect = {
   type: AspectType.NPC,
   playedDuringTurn: false,
   pinned: false,
+  hasDrawArea: false,
 };
 
 const defaultBadGuy: IAspect = {
@@ -722,6 +726,7 @@ const defaultBadGuy: IAspect = {
   type: AspectType.BadGuy,
   playedDuringTurn: false,
   pinned: false,
+  hasDrawArea: false,
 };
 
 const defaultAspects: Record<AspectType, IAspect> = {
