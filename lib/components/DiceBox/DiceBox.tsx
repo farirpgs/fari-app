@@ -5,7 +5,7 @@ import Collapse from "@material-ui/core/Collapse";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect } from "react";
+import React from "react";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";
 import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
@@ -21,12 +21,16 @@ type IProps = {
   showDetails?: boolean;
   onClick: () => void;
   onRolling?: (rolling: boolean) => void;
+  onFinalResult?: (realRoll: IDiceRoll) => void;
 };
 
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const diceTextColors = useTextColors(theme.palette.background.paper);
-  const diceManager = useFudgeDice(props.rolls);
+  const diceManager = useFudgeDice(props.rolls, {
+    onRolling: props.onRolling,
+    onFinalResult: props.onFinalResult,
+  });
 
   function onClick() {
     if (diceManager.state.rolling) {
@@ -34,10 +38,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
     props.onClick();
   }
-
-  useEffect(() => {
-    props.onRolling?.(diceManager.state.rolling);
-  }, [diceManager.state.rolling]);
 
   const diceStyle = css({
     fontSize: props.fontSize,

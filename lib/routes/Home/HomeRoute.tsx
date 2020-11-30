@@ -16,8 +16,8 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
-  BalanceIcon,
   DiceGameIcon,
+  EyeIcon,
   IllustrationIcon,
 } from "../../domains/Icons/Icons";
 import { makeIcon } from "../../domains/Icons/makeIcon";
@@ -228,14 +228,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4} className={sectionGridItem}>
               <Link to="/solo">
                 <Box height="100%" display="flex" flexDirection="column">
-                  {renderHeadingIcon(BalanceIcon)}
+                  {renderHeadingIcon(EyeIcon)}
                   <FateLabel
                     variant="h5"
                     align="center"
                     color="primary"
                     underline
                   >
-                    {"Play Solo"}
+                    {"Oracle"}
                   </FateLabel>
                 </Box>
               </Link>

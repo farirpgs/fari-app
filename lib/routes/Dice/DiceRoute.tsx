@@ -4,12 +4,14 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";
+import { DiceGameIcon } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DiceRoute = () => {
@@ -39,18 +41,19 @@ export const DiceRoute = () => {
         description={t("dice-route.meta.description")}
       />
       <Box>
-        <Box display="flex" justifyContent="center" pt="3rem">
-          <Typography
-            className={css({
-              fontSize: "2rem",
-              lineHeight: Font.lineHeight(2),
-              textAlign: "center",
-            })}
-          >
-            {t("dice-route.title")}
-          </Typography>
+        <Box
+          py="1rem"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <DiceGameIcon className={css({ fontSize: "3rem" })} color="primary" />
+          <FateLabel variant="h4" align="center" color="primary">
+            {"Dice"}
+          </FateLabel>
         </Box>
-        <Box display="flex" justifyContent="center" pt="3rem">
+
+        <Box display="flex" justifyContent="center" pt="1rem">
           <Button
             onClick={() => {
               roll();
@@ -63,7 +66,7 @@ export const DiceRoute = () => {
           </Button>
         </Box>
         <Box pt="3rem">
-          <Box display="flex" justifyContent="center" pt="3rem">
+          <Box display="flex" justifyContent="center" pt="1rem">
             <DiceBox
               rolls={rolls}
               showDetails

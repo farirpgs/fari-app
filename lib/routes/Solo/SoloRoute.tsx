@@ -9,6 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableFooter from "@material-ui/core/TableFooter";
 import TableRow from "@material-ui/core/TableRow";
+import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
@@ -18,6 +19,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Dice } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { EyeIcon } from "../../domains/Icons/Icons";
 import { formatDiceNumber } from "../../hooks/useFudgeDice/useFudgeDice";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -51,14 +53,18 @@ const Rolls: Array<IMatrixItem> = [
 ];
 
 export const SoloRoute = () => {
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
-  const [likeliness, setLikeliness] = useState<number>(0);
-  const [rolling, setRolling] = useState<boolean>(false);
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const latestRoll = rolls[0]?.total;
-  const finalResult = latestRoll + likeliness;
+
+  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
+  const [likeliness, setLikeliness] = useState<number>(0);
+  const [rolling, setRolling] = useState<boolean>(false);
+  const [finalRoll, setFinalRoll] = useState<IDiceRoll>();
+  const finalRollTotal = finalRoll?.total ?? 0;
+  const finalResult = finalRollTotal + likeliness;
+
+  const shouldDisplayFinalResult = !rolling && finalRoll?.total !== undefined;
 
   function roll() {
     setRolls((draft) => {
@@ -76,9 +82,15 @@ export const SoloRoute = () => {
       />
 
       <Box>
-        <Box py="1rem" display="flex" justifyContent="center">
+        <Box
+          py="1rem"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <EyeIcon className={css({ fontSize: "3rem" })} color="primary" />
           <FateLabel variant="h4" align="center" color="primary">
-            {"The Oracle"}
+            {"Oracle"}
           </FateLabel>
         </Box>
 
@@ -95,13 +107,10 @@ export const SoloRoute = () => {
             onRolling={(isRolling) => {
               setRolling(isRolling);
             }}
+            onFinalResult={(latestRoll) => {
+              setFinalRoll(latestRoll);
+            }}
           />
-        </Box>
-
-        <Box py="1rem">
-          <FateLabel variant="h5" align="center" color="primary">
-            {!isNaN(finalResult) && formatDiceNumber(finalResult)}
-          </FateLabel>
         </Box>
 
         <Container maxWidth="md">
@@ -122,6 +131,14 @@ export const SoloRoute = () => {
               </Box>
             </Box>
             <TableContainer component={Paper}>
+              <Toolbar className={css({ padding: "1rem" })}>
+                <FateLabel variant="h5" align="center" color="primary">
+                  Result:{" "}
+                  {shouldDisplayFinalResult
+                    ? formatDiceNumber(finalResult)
+                    : ""}
+                </FateLabel>
+              </Toolbar>
               <Table>
                 <TableBody>
                   {Likeliness.map((l) => {
@@ -154,23 +171,27 @@ export const SoloRoute = () => {
                           const cellValue = l.value + r.value;
                           const formattedValue = formatDiceNumber(cellValue);
 
-                          const isCurrentColumn = r.value === latestRoll;
+                          const isCurrentColumn = r.value === finalRollTotal;
 
                           const likelinessRow =
-                            isCurrentRow && r.value <= latestRoll;
+                            isCurrentRow && r.value <= finalRollTotal;
                           const rollColumn =
                             isCurrentColumn && l.value <= likeliness;
 
                           const shouldHighlightCell =
-                            !rolling && (likelinessRow || rollColumn);
+                            shouldDisplayFinalResult &&
+                            (likelinessRow || rollColumn);
 
-                          const isMatch = isCurrentColumn && isCurrentRow;
+                          const isMatch =
+                            shouldDisplayFinalResult &&
+                            isCurrentColumn &&
+                            isCurrentRow;
                           const highlightBackground = isMatch
                             ? theme.palette.primary.main
                             : theme.palette.primary.light;
                           return (
                             <TableCell
-                              key={r.label}
+                              key={`${l.label}-${r.label}`}
                               align="center"
                               width="50px"
                               className={css({
@@ -205,7 +226,8 @@ export const SoloRoute = () => {
                   <TableRow>
                     <TableCell />
                     {Rolls.map((r) => {
-                      const highlightValue = !rolling && latestRoll === r.value;
+                      const highlightValue =
+                        !rolling && finalRoll?.total === r.value;
 
                       return (
                         <TableCell
@@ -215,13 +237,7 @@ export const SoloRoute = () => {
                           className={css({
                             transition: theme.transitions.create([
                               "background",
-                              "border",
                             ]),
-                            border: `1px solid ${
-                              highlightValue
-                                ? theme.palette.primary.main
-                                : "transparent"
-                            }`,
                             color: highlightValue
                               ? theme.palette.primary.contrastText
                               : theme.palette.text.primary,

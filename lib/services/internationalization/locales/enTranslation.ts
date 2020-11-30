@@ -43,7 +43,6 @@ export const enTranslation = {
   "dice-route.button": `Roll`,
   "dice-route.meta.description": `Roll Fate/Fudge dice online using this fair dice roller.`,
   "dice-route.meta.title": `Roll Fate Dice Online`,
-  "dice-route.title": `Press the button to re-roll`,
   "donation.kofi": `Support Fari on Ko-fi`,
   "donation.patreon": `Become a patron!`,
   "draw-route.meta.description": `Draw and sketch your scene using Fari's drawing pad`,

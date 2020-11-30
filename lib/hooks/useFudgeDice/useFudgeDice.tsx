@@ -19,7 +19,13 @@ function usePrevious<T>(value: T) {
   return ref.current;
 }
 
-export function useFudgeDice(rolls: Array<IDiceRoll>) {
+export function useFudgeDice(
+  rolls: Array<IDiceRoll>,
+  options?: {
+    onRolling?(rolling: boolean): void;
+    onFinalResult?: (realRoll: IDiceRoll) => void;
+  }
+) {
   const previousRolls = usePrevious(rolls);
   const [realRoll] = rolls;
 
@@ -61,13 +67,16 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   }, [rolling, realRoll]);
 
   function setRollingState() {
+    options?.onRolling?.(true);
     setRolling(true);
     setRoll(undefined);
   }
 
   function setFinalResult() {
+    options?.onRolling?.(false);
     setRolling(false);
     setRoll(realRoll);
+    options?.onFinalResult?.(realRoll);
 
     if (realRoll?.total === 4) {
       Confetti.fireConfetti();
