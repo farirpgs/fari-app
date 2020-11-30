@@ -43,10 +43,10 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const shouldDisplay = rolling || !roll;
   const hasBonus = !!roll?.bonusLabel;
 
-  const label = shouldDisplay ? "" : formatNumber(total + bonus);
+  const label = shouldDisplay ? "" : formatDiceNumber(total + bonus);
   const tooltipTitle = shouldDisplay ? "" : `${rollSigns} (${total})` ?? "";
   const tooltipDescription =
-    rolling || !hasBonus ? "" : `${bonusLabel} (${formatNumber(bonus)})`;
+    rolling || !hasBonus ? "" : `${bonusLabel} (${formatDiceNumber(bonus)})`;
 
   useEffect(() => {
     let newColor = "inherit";
@@ -109,7 +109,7 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   };
 }
 
-function formatNumber(n: number): string {
+export function formatDiceNumber(n: number): string {
   if (n > 0) {
     return `+${n}`;
   }

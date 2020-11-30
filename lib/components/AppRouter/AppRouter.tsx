@@ -31,6 +31,7 @@ const PlayOfflineRoute = React.lazy(
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
+const SoloRoute = React.lazy(() => import("../../routes/Solo/SoloRoute"));
 
 export const LoadingRoute: React.FC = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -82,6 +83,13 @@ export const AppRouter = () => {
           path={"/dice"}
           render={(props) => {
             return <DiceRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/solo"}
+          render={(props) => {
+            return <SoloRoute />;
           }}
         />
         <Route
