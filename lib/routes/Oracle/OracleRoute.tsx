@@ -141,9 +141,9 @@ export const OracleRoute = () => {
                   className={css({ width: "100%" })}
                 >
                   {shouldDisplayFinalResult
-                    ? ` ${t(
+                    ? t(
                         `oracle.value.${oracleValue}` as IPossibleTranslationKeys
-                      )} (${formatDiceNumber(finalResult)})`
+                      )
                     : " ..."}
                 </FateLabel>
               </Toolbar>
