@@ -19,6 +19,7 @@ export const ContentEditable: React.FC<
     autoFocus?: boolean;
     inline?: boolean;
     border?: boolean;
+    underline?: boolean;
     id?: string;
   } & IDataCyProps
 > = (props) => {
@@ -80,6 +81,7 @@ export const ContentEditable: React.FC<
         "width": "100%",
         "cursor": hasCursorPointer ? "pointer" : "text",
         "color": updating ? "grey" : "inherit",
+        "textDecoration": props.underline ? "underline" : undefined,
         "transition": !updating
           ? theme.transitions.create("color", { duration: 500 })
           : undefined,

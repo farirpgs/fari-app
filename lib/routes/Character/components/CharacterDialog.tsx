@@ -602,23 +602,28 @@ export const CharacterDialog: React.FC<{
         >
           {characterManager.state.character!.skills.map((skill, index) => {
             const skillLabel = (
-              <Box pt=".1rem" px=".1rem">
-                <FateLabel display="inline">
-                  <ContentEditable
-                    data-cy={`character-dialog.skill.${skill.name}.label`}
-                    readonly={!advanced}
-                    border={advanced}
-                    value={skill.name}
-                    onClick={() => {
-                      const bonus = parseInt(skill.value) || 0;
-                      props.onRoll?.({ bonus, bonusLabel: skill.name });
-                    }}
-                    onChange={(value) => {
-                      characterManager.actions.setSkillName(index, value);
-                    }}
-                  />
-                </FateLabel>
-              </Box>
+              <FateLabel
+                display="inline"
+                className={css({
+                  borderBottom: !advanced
+                    ? `1px solid ${theme.palette.text.primary}`
+                    : undefined,
+                })}
+              >
+                <ContentEditable
+                  data-cy={`character-dialog.skill.${skill.name}.label`}
+                  readonly={!advanced}
+                  border={advanced}
+                  value={skill.name}
+                  onClick={() => {
+                    const bonus = parseInt(skill.value) || 0;
+                    props.onRoll?.({ bonus, bonusLabel: skill.name });
+                  }}
+                  onChange={(value) => {
+                    characterManager.actions.setSkillName(index, value);
+                  }}
+                />
+              </FateLabel>
             );
             return (
               <Box py=".5rem" key={index}>

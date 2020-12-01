@@ -280,7 +280,7 @@ export const Page: React.FC<{
                     {props.live === LiveMode.Live && (
                       <SignalWifi4BarLockIcon
                         className={css({
-                          color: "#69e22d",
+                          // color: theme.palette.primary,
                         })}
                       />
                     )}

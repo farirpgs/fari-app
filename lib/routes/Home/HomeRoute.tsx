@@ -113,7 +113,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderPlayButtons() {
     return (
       <Container maxWidth="lg">
-        <Box my=".5rem">
+        <Box my="1rem">
           <Grid container justify="center" spacing={6}>
             {isWebRTCSupported() && (
               <Grid item xs={12} md={4} className={sectionGridItem}>
@@ -134,7 +134,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                   <Typography variant="body1" align="center">
                     {t("home-route.play-online.description")}
                   </Typography>
-                  <Box py="2rem" textAlign="center" marginTop="auto">
+                  <Box py="1rem" textAlign="center" marginTop="auto">
                     <Button
                       variant="contained"
                       color="primary"
@@ -168,7 +168,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 <Typography variant="body1" align="center">
                   {t("home-route.play-offline.description")}
                 </Typography>
-                <Box py="2rem" textAlign="center" marginTop="auto">
+                <Box py="1rem" textAlign="center" marginTop="auto">
                   <Button
                     variant="outlined"
                     color="primary"
@@ -249,11 +249,16 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderHeading() {
     return (
       <Container maxWidth="sm">
-        <Box pb="2rem" textAlign="center">
-          <img alt="Fari" width="150px" src={appIcon} />
+        <Box textAlign="center">
+          <FateLabel variant="h4" color="primary">
+            {"Fari"}
+          </FateLabel>
+        </Box>
+        <Box pb=".5rem" textAlign="center">
+          <img alt="Fari" width="125px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
-          <FateLabel variant="h4" color="primary">
+          <FateLabel variant="h6" color="secondary">
             {t("home-route.heading")}
           </FateLabel>
         </Box>

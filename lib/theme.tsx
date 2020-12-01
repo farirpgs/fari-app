@@ -1,4 +1,5 @@
 import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
+import { lighten } from "@material-ui/core/styles/colorManipulator";
 
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
@@ -38,7 +39,7 @@ export const AppLightTheme = createMuiTheme({
   ...defaultThemeConfiguration,
   palette: {
     primary: { main: "#415f9c" },
-    secondary: { main: "#415f9c" },
+    secondary: { main: "#7a8cb4" },
   },
 });
 
@@ -47,10 +48,10 @@ export const AppDarkTheme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: "#a5c1ff",
+      main: lighten(AppLightTheme.palette.primary.main, 0.5),
     },
     secondary: {
-      main: "#a5c1ff",
+      main: lighten(AppLightTheme.palette.secondary.main, 0.2),
     },
   },
 });
