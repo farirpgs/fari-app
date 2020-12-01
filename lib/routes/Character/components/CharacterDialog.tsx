@@ -407,6 +407,7 @@ export const CharacterDialog: React.FC<{
             {props.dialog && (
               <IconButton
                 size="small"
+                data-cy="character-dialog.close"
                 className={css({
                   position: "absolute",
                   padding: ".5rem",

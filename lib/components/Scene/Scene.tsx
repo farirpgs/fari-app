@@ -315,6 +315,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   <Button
                     color="primary"
                     variant="contained"
+                    data-cy="scene.offline-character-dialog.pick-existing"
                     onClick={() => {
                       setOfflineCharacterDialogOpen(false);
                       charactersManager.actions.openManager(

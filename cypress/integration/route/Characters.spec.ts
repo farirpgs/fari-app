@@ -1,7 +1,7 @@
 import { Fari } from "lib/util/Fari";
 
 describe("/characters", () => {
-  describe("Given I want to create a simple character sheet", () => {
+  describe.only("Given I want to create a simple character sheet", () => {
     it("should support adding, filling up and removing a character", () => {
       Fari.start();
       cy.visit("/");
@@ -95,6 +95,36 @@ describe("/characters", () => {
       cy.contains("Undo").click();
       cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
+
+      // character card
+      Fari.get("page.menu.home").click();
+      Fari.get("home.play-offline").click();
+
+      Fari.get("scene.add-offline-character").click();
+      Fari.get("scene.offline-character-dialog.pick-existing").click();
+
+      cy.contains("Luke Skywalker").click();
+
+      Fari.get("character-card").contains("Luke Skywalker");
+      Fari.get("character-card.open-character-sheet").click();
+      Fari.get("character-dialog.close").click();
+
+      // character card roll skill
+      Fari.get("character-card.skill.Athletics").click();
+      Fari.get("scene.player-row.1")
+        .find('[data-cy="dice"]')
+        .invoke("attr", "data-cy-value")
+        .should("be.oneOf", [
+          "-1",
+          "0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "+5",
+          "+6",
+          "+7",
+        ]);
     });
   });
 

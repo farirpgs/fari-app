@@ -79,6 +79,7 @@ export const CharacterCard: React.FC<{
                           },
                         },
                       ])}
+                      data-cy={`character-card.skill.${skill.name}`}
                       onClick={() => {
                         if (props.readonly) {
                           return;
@@ -134,6 +135,7 @@ export const CharacterCard: React.FC<{
 
   return (
     <Box
+      data-cy="character-card"
       className={cx(
         css({
           width: width,
@@ -162,6 +164,7 @@ export const CharacterCard: React.FC<{
                     <span>
                       <IconButton
                         size="small"
+                        data-cy="character-card.open-character-sheet"
                         onClick={(e) => {
                           props.onCharacterDialogOpen();
                           logger.info("CharacterCard:onCharacterDialogOpen");

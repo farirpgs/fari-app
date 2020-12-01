@@ -227,6 +227,7 @@ export const Page: React.FC<{
           >
             <RouterLink
               to="/"
+              data-cy="page.menu.home"
               className={css({
                 textDecoration: "none",
               })}
