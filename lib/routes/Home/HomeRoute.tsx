@@ -226,7 +226,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
               </Link>
             </Grid>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link to="/solo">
+              <Link to="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
                   <FateLabel

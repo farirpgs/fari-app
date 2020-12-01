@@ -22,6 +22,8 @@ import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { EyeIcon } from "../../domains/Icons/Icons";
 import { formatDiceNumber } from "../../hooks/useFudgeDice/useFudgeDice";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { Oracle } from "./domains/Oracle";
 
 type IMatrixItem = {
   label: string;
@@ -52,7 +54,7 @@ const Rolls: Array<IMatrixItem> = [
   { label: "+4", value: 4 },
 ];
 
-export const SoloRoute = () => {
+export const OracleRoute = () => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
@@ -63,13 +65,13 @@ export const SoloRoute = () => {
   const [finalRoll, setFinalRoll] = useState<IDiceRoll>();
   const finalRollTotal = finalRoll?.total ?? 0;
   const finalResult = finalRollTotal + likeliness;
-
+  const oracleValue = Oracle.getValue(finalResult);
   const shouldDisplayFinalResult = !rolling && finalRoll?.total !== undefined;
 
   function roll() {
     setRolls((draft) => {
       const newRoll = Dice.roll4DF({});
-      logger.info("SoloRoute:onDiceRoll", { roll: newRoll });
+      logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });
   }
@@ -132,11 +134,17 @@ export const SoloRoute = () => {
             </Box>
             <TableContainer component={Paper}>
               <Toolbar className={css({ padding: "1rem" })}>
-                <FateLabel variant="h5" align="center" color="primary">
-                  Result:{" "}
+                <FateLabel
+                  variant="h5"
+                  align="center"
+                  color="primary"
+                  className={css({ width: "100%" })}
+                >
                   {shouldDisplayFinalResult
-                    ? formatDiceNumber(finalResult)
-                    : ""}
+                    ? ` ${t(
+                        `oracle.value.${oracleValue}` as IPossibleTranslationKeys
+                      )} (${formatDiceNumber(finalResult)})`
+                    : " ..."}
                 </FateLabel>
               </Toolbar>
               <Table>
@@ -270,5 +278,5 @@ export const SoloRoute = () => {
   );
 };
 
-SoloRoute.displayName = "SoloRoute";
-export default SoloRoute;
+OracleRoute.displayName = "OracleRoute";
+export default OracleRoute;
