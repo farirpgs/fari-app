@@ -113,7 +113,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderPlayButtons() {
     return (
       <Container maxWidth="lg">
-        <Box my="1rem">
+        <Box my=".5rem">
           <Grid container justify="center" spacing={6}>
             {isWebRTCSupported() && (
               <Grid item xs={12} md={4} className={sectionGridItem}>
@@ -193,9 +193,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSectionsButtons() {
     return (
       <Container maxWidth="lg">
-        <Box my="1rem">
+        <Box my=".5rem">
           <Grid container justify="center" spacing={6}>
-            <Grid item xs={12} md={4} className={sectionGridItem}>
+            <Grid item xs={12} md={3} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
                   {renderHeadingIcon(DiceGameIcon)}
@@ -210,7 +210,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} className={sectionGridItem}>
+            <Grid item xs={12} md={3} className={sectionGridItem}>
               <Link to="/draw">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(IllustrationIcon)}
@@ -225,7 +225,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Box>
               </Link>
             </Grid>
-            <Grid item xs={12} md={4} className={sectionGridItem}>
+            <Grid item xs={12} md={3} className={sectionGridItem}>
               <Link to="/solo">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
@@ -290,13 +290,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
         {renderSectionsButtons()}
         {false && renderHeadingDescription()}
         <Container maxWidth="lg">
-          <Box py="2rem">
+          <Box py="1.5rem">
             <Divider />
           </Box>
         </Container>
         {renderSupport()}
         <Container maxWidth="sm">
-          <Box py="2rem">
+          <Box py="1.5rem">
             <Divider />
           </Box>
         </Container>

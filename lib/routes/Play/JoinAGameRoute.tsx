@@ -118,7 +118,7 @@ export const JoinAGame: React.FC<{
             </Grid>
           </Grid>
         </Box>
-        <Box py="3rem">
+        <Box py="1rem">
           <Typography variant="h6" align="center">
             {t("play-route.or")}
           </Typography>
