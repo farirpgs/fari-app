@@ -215,6 +215,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(IllustrationIcon)}
                   <FateLabel
+                    data-cy="home.draw"
                     variant="h5"
                     align="center"
                     color="primary"
