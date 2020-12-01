@@ -153,14 +153,9 @@ export const CharacterCard: React.FC<{
             })}
           >
             <Box>
-              <Grid
-                container
-                justify="space-between"
-                alignItems="center"
-                spacing={2}
-              >
-                <Grid item>
-                  <FateLabel>{props.characterSheet?.name}</FateLabel>
+              <Grid container alignItems="baseline" spacing={2} wrap="nowrap">
+                <Grid item xs zeroMinWidth>
+                  <FateLabel noWrap>{props.characterSheet?.name}</FateLabel>
                 </Grid>
                 <Grid item>
                   <Tooltip title={t("player-row.open-character-sheet")}>

@@ -47,7 +47,7 @@ export const enTranslation = {
   "donation.patreon": `Become a patron!`,
   "draw-route.meta.description": `Draw and sketch your scene using Fari's drawing pad`,
   "draw-route.meta.title": `Draw`,
-  "home-route.heading": `The best Fate RPG companion application`,
+  "home-route.heading": `Fari, The Fate RPG companion application`,
   "home-route.meta.description": `Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your collective imagination run wild and weave memorable stories together!.`,
   "home-route.meta.title": `Fate RPG Companion`,
   "home-route.play-offline.button": `Start Offline Game`,

@@ -330,29 +330,45 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         <Box>
-          <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
-            <Grid item className={css({ flex: "0 0 auto" })}>
-              <FateLabel>{t("character-dialog.name")}</FateLabel>
+          <Grid container>
+            <Grid
+              item
+              container
+              sm={12}
+              md={6}
+              spacing={2}
+              alignItems="flex-end"
+            >
+              <Grid item className={css({ flex: "0 0 auto" })}>
+                <FateLabel>{t("character-dialog.name")}</FateLabel>
+              </Grid>
+              <Grid item xs>
+                <Box fontSize="1rem">
+                  <ContentEditable
+                    border
+                    autoFocus
+                    data-cy="character-dialog.name"
+                    readonly={props.readonly}
+                    value={characterManager.state.character!.name}
+                    onChange={(value) => {
+                      characterManager.actions.setName(value);
+                    }}
+                  />
+                </Box>
+              </Grid>
             </Grid>
-            <Grid item xs>
-              <Box fontSize="1.25rem">
-                <ContentEditable
-                  border
-                  autoFocus
-                  data-cy="character-dialog.name"
-                  readonly={props.readonly}
-                  value={characterManager.state.character!.name}
-                  onChange={(value) => {
-                    characterManager.actions.setName(value);
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item className={css({ flex: "0 0 auto" })}>
-              <FateLabel>{t("character-dialog.group")}</FateLabel>
-            </Grid>
-            <Grid item xs>
-              <Box fontSize="1.25rem">
+            <Grid
+              item
+              container
+              sm={12}
+              md={6}
+              spacing={2}
+              alignItems="flex-end"
+            >
+              <Grid item className={css({ flex: "0 0 auto" })}>
+                <FateLabel>{t("character-dialog.group")}</FateLabel>
+              </Grid>
+              <Grid item xs>
                 <Autocomplete
                   freeSolo
                   options={charactersManager.state.groups.filter((g) => {
@@ -385,14 +401,22 @@ export const CharacterDialog: React.FC<{
                     />
                   )}
                 />
-              </Box>
-            </Grid>
-            {props.dialog && (
-              <Grid item>
-                <IconButton size="small" onClick={onClose}>
-                  <CloseIcon />
-                </IconButton>
               </Grid>
+            </Grid>
+
+            {props.dialog && (
+              <IconButton
+                size="small"
+                className={css({
+                  position: "absolute",
+                  padding: ".5rem",
+                  top: ".5rem",
+                  right: ".5rem",
+                })}
+                onClick={onClose}
+              >
+                <CloseIcon />
+              </IconButton>
             )}
           </Grid>
         </Box>
@@ -471,7 +495,7 @@ export const CharacterDialog: React.FC<{
                     justify="space-between"
                     wrap="nowrap"
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs>
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
@@ -713,7 +737,7 @@ export const CharacterDialog: React.FC<{
                     justify="space-between"
                     wrap="nowrap"
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs>
                       <FateLabel display="inline">
                         <ContentEditable
                           data-cy={`character-dialog.stunt.${stunt.name}.label`}
@@ -1100,7 +1124,7 @@ export const CharacterDialog: React.FC<{
                     wrap="nowrap"
                     spacing={1}
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs>
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}

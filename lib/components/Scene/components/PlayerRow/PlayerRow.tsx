@@ -106,6 +106,9 @@ export const PlayerRow: React.FC<
           >
             <span>
               <ButtonBase
+                className={css({
+                  width: "100%",
+                })}
                 disabled={!hasCharacterSheet}
                 onClick={(e) => {
                   props.onCharacterDialogOpen();
@@ -116,6 +119,8 @@ export const PlayerRow: React.FC<
                   noWrap
                   color="inherit"
                   className={css({
+                    width: "100%",
+                    textAlign: "left",
                     fontSize: "1.2rem",
                     lineHeight: Font.lineHeight(1.2),
                     fontWeight: props.isMe ? "bold" : "normal",

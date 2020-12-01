@@ -331,7 +331,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Box>
-            <Box py="2rem">
+            <Box py=".5rem">
               <Typography variant="h6" align="center">
                 {t("play-route.or")}
               </Typography>
