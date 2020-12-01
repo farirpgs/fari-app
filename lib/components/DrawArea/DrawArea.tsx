@@ -30,7 +30,6 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
           drawingManager={drawingManager}
           readonly={props.readonly}
           fullScreen={fullScreen}
-          onChange={props.onChange}
           onFullScreenChange={setFullScreen}
           controls="bottom"
           tokenTitles={props.tokenTitles}
@@ -48,7 +47,6 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
           drawingManager={drawingManager}
           readonly={props.readonly}
           fullScreen={fullScreen}
-          onChange={props.onChange}
           onFullScreenChange={setFullScreen}
           controls="top"
           tokenTitles={props.tokenTitles}

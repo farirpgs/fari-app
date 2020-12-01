@@ -24,12 +24,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
-import {
-  DrawingTool,
-  IDrawAreaObjects,
-  IDrawingManager,
-  ObjectType,
-} from "./hooks/useDrawing";
+import { DrawingTool, IDrawingManager, ObjectType } from "./hooks/useDrawing";
 
 interface IProps {
   drawingManager: IDrawingManager;
@@ -38,7 +33,6 @@ interface IProps {
   controls: "bottom" | "top";
   tokenTitles?: Array<string>;
   onFullScreenChange?: (fullScreen: boolean) => void;
-  onChange?(lines: IDrawAreaObjects): void;
 }
 
 export const DrawObjects: React.FC<IProps> = (props) => {

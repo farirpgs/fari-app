@@ -55,6 +55,12 @@ export const ContentEditable: React.FC<
     focusOnLoad();
   }, []);
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeout.current);
+    };
+  }, []);
+
   function onChange(e: any) {
     if ($ref.current) {
       clearTimeout(timeout.current);

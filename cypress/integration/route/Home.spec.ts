@@ -16,7 +16,7 @@ describe("/", () => {
       cy.contains("Commencer une partie en ligne");
       Fari.get("page.menu.dice").click();
 
-      cy.contains("Appuyez sur le bouton pour relancer");
+      cy.contains("Lancer");
     });
   });
 });

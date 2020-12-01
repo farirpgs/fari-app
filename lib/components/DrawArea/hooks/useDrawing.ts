@@ -82,6 +82,12 @@ export function useDrawing(props: {
   const roughSVG = useRef<ReturnType<typeof rough.svg> | undefined>(undefined);
 
   useEffect(() => {
+    return () => {
+      clearTimeout(onChangeTimeout.current);
+    };
+  }, []);
+
+  useEffect(() => {
     const shouldUpdateLocalState =
       !!props.objects && !isEqual(props.objects, objects);
 
