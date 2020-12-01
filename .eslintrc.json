@@ -23,6 +23,18 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "@material-ui/core",
+        "message": "Use @material-ui/core/MyComponent instead"
+      },
+      {
+        "name": "@material-ui/lab",
+        "message": "Use @material-ui/lab/MyComponent instead"
+      },
+      { "name": "lodash", "message": "Use lodash/myFunction instead" }
+    ],
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
     // "react-hooks/exhaustive-deps": "warn",
