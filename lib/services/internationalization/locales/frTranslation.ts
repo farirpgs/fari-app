@@ -98,6 +98,8 @@ export const frTranslation: Record<
   "menu.help": `Aide`,
   "menu.play": `Jouer`,
   "menu.scenes": `Scènes`,
+  "oracle-route.meta.description": `Posez des questions sur votre monde et obtenez des réponses de l'Oracle`,
+  "oracle-route.meta.title": `Oracle`,
   "oracle.value.No": `No`,
   "oracle.value.NoAnd": `No and...`,
   "oracle.value.Yes": `Yes`,

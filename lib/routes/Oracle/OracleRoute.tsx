@@ -79,8 +79,8 @@ export const OracleRoute = () => {
   return (
     <Page>
       <PageMeta
-        title={t("dice-route.meta.title")}
-        description={t("dice-route.meta.description")}
+        title={t("oracle-route.meta.title")}
+        description={t("oracle-route.meta.description")}
       />
 
       <Box>
