@@ -16,7 +16,7 @@ export const FateLabel: React.FC<
         props.className,
         css({
           textTransform: "uppercase",
-          fontWeight: 900,
+          fontWeight: 800,
           textDecoration: underline ? "underline" : undefined,
         })
       )}
