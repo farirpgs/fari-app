@@ -218,6 +218,9 @@ export const OracleRoute = () => {
                               <Typography
                                 align="center"
                                 className={css({
+                                  transition: theme.transitions.create(
+                                    "fontWeight"
+                                  ),
                                   fontWeight: isMatch ? "bold" : "inherit",
                                 })}
                               >
