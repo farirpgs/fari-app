@@ -31,7 +31,7 @@ type IMatrixItem = {
 };
 
 const Likeliness: Array<IMatrixItem> = [
-  { label: "Almost Garanteed", value: 4 },
+  { label: "Almost Guaranteed", value: 4 },
   { label: "Very Likely", value: 3 },
   { label: "Likely", value: 2 },
   { label: "Possible", value: 1 },
@@ -135,6 +135,8 @@ export const OracleRoute = () => {
             <TableContainer component={Paper}>
               <Toolbar className={css({ padding: "1rem" })}>
                 <FateLabel
+                  data-cy="oracle.value"
+                  data-cy-value={shouldDisplayFinalResult && oracleValue}
                   variant="h5"
                   align="center"
                   color="primary"
@@ -166,6 +168,7 @@ export const OracleRoute = () => {
                               ? theme.palette.primary.main
                               : "inherit",
                           })}
+                          data-cy={`oracle.likeliness.${l.value}`}
                           onClick={() => {
                             setLikeliness(l.value);
                           }}
