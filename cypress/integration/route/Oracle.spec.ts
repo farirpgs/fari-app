@@ -2,7 +2,7 @@ import { Fari } from "lib/util/Fari";
 
 describe("/oracle", () => {
   describe("Given I want to ask a question to the oracle", () => {
-    it("should default to a 50/50 likeliness and ", () => {
+    it("should ask questions to the oracle ", () => {
       Fari.start();
       Fari.get("home.oracle").click();
 
