@@ -58,7 +58,7 @@ export const CharacterRoute: React.FC<{
   return (
     <>
       <PageMeta
-        title={t("characters-route.title")}
+        title={selectedCharacter?.name || t("characters-route.title")}
         description={t("characters-route.description")}
       />
 
