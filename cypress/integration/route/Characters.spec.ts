@@ -53,8 +53,10 @@ describe("/characters", () => {
       Fari.get("character-dialog.group").find("input").type("Star Wars");
 
       // save
+      cy.title().should("eq", "Manage your Characters | Fari");
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.title().should("eq", "Luke Skywalker | Fari");
       cy.contains("Saved");
 
       // navigate away
@@ -64,6 +66,7 @@ describe("/characters", () => {
       Fari.get("page.menu.characters").click();
       cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
+      cy.title().should("eq", "Luke Skywalker | Fari");
 
       // roll dice in sheet
       Fari.get("dice").click();
