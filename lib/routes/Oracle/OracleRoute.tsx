@@ -11,7 +11,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TableRow from "@material-ui/core/TableRow";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
@@ -75,6 +75,13 @@ export const OracleRoute = () => {
       return [newRoll, ...draft];
     });
   }
+
+  useEffect(() => {
+    if (shouldDisplayFinalResult) {
+      logger.info("OracleRoute:onResult", { oracleValue: oracleValue });
+      logger.info(`OracleRoute:onResult:value:${oracleValue}`);
+    }
+  }, [shouldDisplayFinalResult, oracleValue]);
 
   return (
     <Page>
@@ -171,6 +178,13 @@ export const OracleRoute = () => {
                           data-cy={`oracle.likeliness.${l.value}`}
                           onClick={() => {
                             setLikeliness(l.value);
+
+                            logger.info("OracleRoute:onLikelinessChange", {
+                              value: l.value,
+                            });
+                            logger.info(
+                              `OracleRoute:onLikelinessChange:value${l.value}`
+                            );
                           }}
                         >
                           <FateLabel className={css({ fontWeight: "bold" })}>
