@@ -10,7 +10,7 @@
     "start": "parcel ./lib/index.html --target browser",
     "build": "parcel build ./lib/index.html --target browser",
     "serve:build": "yarn serve dist -l 1234",
-    "build:serve": "yarn build && serve:build",
+    "build:serve": "yarn build && yarn serve:build",
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
     "test": "jest --coverage",

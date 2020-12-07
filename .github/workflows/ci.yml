@@ -30,7 +30,7 @@ jobs:
         run: yarn install
       # Build
       - name: Build
-        run: CONTEXT=production && yarn build
+        run: CONTEXT=production yarn build
       # Validate
       - name: Validate
         run: yarn validate
