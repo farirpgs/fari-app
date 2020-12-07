@@ -94,6 +94,7 @@ describe("/scenes", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("scene.save").click();
+      cy.title().should("eq", "Ba Sing Se | Fari");
 
       // delete
       Fari.get("page.menu.scenes").click();
@@ -125,6 +126,8 @@ describe("/scenes", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("scene.save").click();
+      cy.contains("Saved");
+      cy.title().should("eq", "Lower Ring | Fari");
 
       // test menu
       Fari.get("page.menu.scenes").click();

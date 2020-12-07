@@ -19,6 +19,24 @@ describe("arraySort", () => {
     // THEN
     expect(result).toEqual([5, 4, 3, 2, 1]);
   });
+  it("should boolean numbers ASC", () => {
+    // GIVEN
+    const list = [false, false, false, true, false];
+    // WHEN
+    const result = arraySort(list, [(it) => ({ value: it, direction: "asc" })]);
+    // THEN
+    expect(result).toEqual([true, false, false, false, false]);
+  });
+  it("should boolean numbers DESC", () => {
+    // GIVEN
+    const list = [true, true, true, false, true];
+    // WHEN
+    const result = arraySort(list, [
+      (it) => ({ value: it, direction: "desc" }),
+    ]);
+    // THEN
+    expect(result).toEqual([false, true, true, true, true]);
+  });
   it("should sort strings ASC", () => {
     // GIVEN
     const list = ["J", "A", "C", "J", "G", "R", "Y", "P", "J", "J"];

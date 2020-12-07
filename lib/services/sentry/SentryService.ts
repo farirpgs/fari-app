@@ -7,10 +7,6 @@ const isTests = process.env.JEST_WORKER_ID !== undefined;
 
 export class SentryService {
   constructor() {
-    if (process.env.JEST_WORKER_ID !== undefined) {
-      return;
-    }
-
     if (!isTests && !isLocalhost) {
       Sentry.init({
         release: `fari@v${env.version}`,

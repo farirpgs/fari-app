@@ -1,4 +1,4 @@
-import { Dialog } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
 import React, { useState } from "react";
 import { SlideUpTransition } from "../SlideUpTransition/SlideUpTransition";
 import { DrawObjects } from "./DrawObjects";
@@ -30,7 +30,6 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
           drawingManager={drawingManager}
           readonly={props.readonly}
           fullScreen={fullScreen}
-          onChange={props.onChange}
           onFullScreenChange={setFullScreen}
           controls="bottom"
           tokenTitles={props.tokenTitles}
@@ -48,7 +47,6 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
           drawingManager={drawingManager}
           readonly={props.readonly}
           fullScreen={fullScreen}
-          onChange={props.onChange}
           onFullScreenChange={setFullScreen}
           controls="top"
           tokenTitles={props.tokenTitles}

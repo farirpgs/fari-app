@@ -1,4 +1,4 @@
-import { useTheme } from "@material-ui/core";
+import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
@@ -19,7 +19,13 @@ function usePrevious<T>(value: T) {
   return ref.current;
 }
 
-export function useFudgeDice(rolls: Array<IDiceRoll>) {
+export function useFudgeDice(
+  rolls: Array<IDiceRoll>,
+  options?: {
+    onRolling?(rolling: boolean): void;
+    onFinalResult?: (realRoll: IDiceRoll) => void;
+  }
+) {
   const previousRolls = usePrevious(rolls);
   const [realRoll] = rolls;
 
@@ -43,10 +49,10 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   const shouldDisplay = rolling || !roll;
   const hasBonus = !!roll?.bonusLabel;
 
-  const label = shouldDisplay ? "" : formatNumber(total + bonus);
+  const label = shouldDisplay ? "" : formatDiceNumber(total + bonus);
   const tooltipTitle = shouldDisplay ? "" : `${rollSigns} (${total})` ?? "";
   const tooltipDescription =
-    rolling || !hasBonus ? "" : `${bonusLabel} (${formatNumber(bonus)})`;
+    rolling || !hasBonus ? "" : `${bonusLabel} (${formatDiceNumber(bonus)})`;
 
   useEffect(() => {
     let newColor = "inherit";
@@ -61,13 +67,16 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   }, [rolling, realRoll]);
 
   function setRollingState() {
+    options?.onRolling?.(true);
     setRolling(true);
     setRoll(undefined);
   }
 
   function setFinalResult() {
+    options?.onRolling?.(false);
     setRolling(false);
     setRoll(realRoll);
+    options?.onFinalResult?.(realRoll);
 
     if (realRoll?.total === 4) {
       Confetti.fireConfetti();
@@ -109,7 +118,7 @@ export function useFudgeDice(rolls: Array<IDiceRoll>) {
   };
 }
 
-function formatNumber(n: number): string {
+export function formatDiceNumber(n: number): string {
   if (n > 0) {
     return `+${n}`;
   }

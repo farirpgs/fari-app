@@ -1,12 +1,10 @@
-import {
-  Box,
-  ButtonBase,
-  Collapse,
-  Tooltip,
-  Typography,
-} from "@material-ui/core";
+import { css, cx } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Collapse from "@material-ui/core/Collapse";
 import useTheme from "@material-ui/core/styles/useTheme";
-import { css, cx } from "emotion";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { Font } from "../../domains/font/Font";
@@ -22,12 +20,17 @@ type IProps = {
   disabled?: boolean;
   showDetails?: boolean;
   onClick: () => void;
+  onRolling?: (rolling: boolean) => void;
+  onFinalResult?: (realRoll: IDiceRoll) => void;
 };
 
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const diceTextColors = useTextColors(theme.palette.background.paper);
-  const diceManager = useFudgeDice(props.rolls);
+  const diceManager = useFudgeDice(props.rolls, {
+    onRolling: props.onRolling,
+    onFinalResult: props.onFinalResult,
+  });
 
   function onClick() {
     if (diceManager.state.rolling) {

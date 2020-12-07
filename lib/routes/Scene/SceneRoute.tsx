@@ -62,3 +62,4 @@ export const SceneRoute: React.FC<{
 };
 
 SceneRoute.displayName = "SceneRoute";
+export default SceneRoute;

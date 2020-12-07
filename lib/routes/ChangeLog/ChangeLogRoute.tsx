@@ -1,7 +1,9 @@
-import { Container } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
 import React, { useEffect, useState } from "react";
 import showdown from "showdown";
 import changeLogMarkdown from "../../../CHANGELOG.md";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -21,12 +23,12 @@ export const ChangelogRoute: React.FC<{}> = (props) => {
   }, []);
 
   useEffect(() => {
-    async function loadChangelog() {
+    async function load() {
       const changelog = getChangeLog(changeLogMarkdown);
       setContent(changelog.html);
       setLatestVersion(changelog.latestVersion);
     }
-    loadChangelog();
+    load();
   }, []);
 
   return (
@@ -35,6 +37,18 @@ export const ChangelogRoute: React.FC<{}> = (props) => {
         title={`${t("changelog-route.meta.title")} v${latestVersion}`}
         description={t("changelog-route.meta.description")}
       />
+      <Box py="1rem" display="flex" flexDirection="column" alignItems="center">
+        <a
+          href="https://github.com/fariapp/fari/blob/master/CHANGELOG.md"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FateLabel variant="h4" align="center" color="primary" underline>
+            {t("changelog-route.meta.title")}
+          </FateLabel>
+        </a>
+      </Box>
+
       <Container maxWidth="md">
         <MarkdownElement renderedMarkdown={content} />
       </Container>
@@ -55,3 +69,5 @@ function getChangeLog(mardown: string) {
     return { html: "", latestVersion: "" };
   }
 }
+
+export default ChangelogRoute;

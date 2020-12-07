@@ -1,13 +1,13 @@
-import { css, ObjectInterpolation } from "emotion";
+import { css, CSSInterpolation } from "@emotion/css";
 
-export type IStyles = { [key: string]: ObjectInterpolation<undefined> };
+export type IStyles = { [key: string]: CSSInterpolation };
 
 export function useStyles<
-  TStyleDefinitions extends { [key: string]: ObjectInterpolation<undefined> },
+  TStyleDefinitions extends { [key: string]: CSSInterpolation },
   TStyleDefinitionNames extends keyof TStyleDefinitions
 >(
   styleDefinitions: {
-    [key in TStyleDefinitionNames]: ObjectInterpolation<undefined>;
+    [key in TStyleDefinitionNames]: CSSInterpolation;
   },
   componentDisplayName: string
 ): { [key in TStyleDefinitionNames]: string } {

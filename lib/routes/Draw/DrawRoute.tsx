@@ -1,9 +1,13 @@
+import { css } from "@emotion/css";
+import Box from "@material-ui/core/Box";
 import React, { useEffect } from "react";
 import { DrawObjects } from "../../components/DrawArea/DrawObjects";
 import { useDrawing } from "../../components/DrawArea/hooks/useDrawing";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { IllustrationIcon } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DrawRoute: React.FC = (props) => {
@@ -21,6 +25,15 @@ export const DrawRoute: React.FC = (props) => {
         title={t("draw-route.meta.title")}
         description={t("draw-route.meta.description")}
       />
+      <Box py="1rem" display="flex" flexDirection="column" alignItems="center">
+        <IllustrationIcon
+          className={css({ fontSize: "3rem" })}
+          color="primary"
+        />
+        <FateLabel variant="h4" align="center" color="primary">
+          {"Draw"}
+        </FateLabel>
+      </Box>
 
       <DrawObjects drawingManager={drawingManager} controls="top" fullScreen />
     </Page>
@@ -28,3 +41,4 @@ export const DrawRoute: React.FC = (props) => {
 };
 
 DrawRoute.displayName = "DrawRoute";
+export default DrawRoute;

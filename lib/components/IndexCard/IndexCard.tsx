@@ -1,18 +1,17 @@
-import {
-  Box,
-  Checkbox,
-  Collapse,
-  Divider,
-  Grid,
-  IconButton,
-  Menu,
-  MenuItem,
-  Paper,
-  TextField,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { css } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import Checkbox from "@material-ui/core/Checkbox";
+import Collapse from "@material-ui/core/Collapse";
+import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Paper from "@material-ui/core/Paper";
+import useTheme from "@material-ui/core/styles/useTheme";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
@@ -23,7 +22,6 @@ import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import { css } from "emotion";
 import { default as React, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { AspectType } from "../../hooks/useScene/AspectType";
@@ -87,7 +85,7 @@ export const IndexCard: React.FC<
         {shouldRenderContent && renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
-        <Collapse in={aspect.drawAreaObjects !== undefined}>
+        <Collapse in={aspect.hasDrawArea}>
           <Box>
             <DrawArea
               objects={aspect!.drawAreaObjects}
@@ -413,7 +411,7 @@ export const IndexCard: React.FC<
             <Box pb=".5rem" key={trackIndex}>
               <Grid container justify="space-between" wrap="nowrap" spacing={1}>
                 <Grid item className={css({ flex: "1 1 auto" })}>
-                  <FateLabel display="inline" size="small">
+                  <FateLabel display="inline" variant="caption">
                     <ContentEditable
                       data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.name`}
                       value={stressTrack.name}
@@ -522,8 +520,8 @@ export const IndexCard: React.FC<
                       </Box>
                       <Box>
                         <FateLabel
+                          variant="caption"
                           className={css({ textAlign: "center" })}
-                          size="small"
                         >
                           <ContentEditable
                             readonly={props.readonly}
@@ -565,7 +563,7 @@ export const IndexCard: React.FC<
                 <Box py=".5rem">
                   <Grid container>
                     <Grid item className={css({ flex: "1 1 auto" })}>
-                      <FateLabel size="small">
+                      <FateLabel variant="caption">
                         <ContentEditable
                           data-cy={`${props["data-cy"]}.consequence.${name}.name`}
                           value={name}

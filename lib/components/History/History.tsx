@@ -1,24 +1,20 @@
-import { useContext, useEffect } from "react";
-import ReactGA from "react-ga";
+import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
 
-ReactGA.initialize("UA-150306816-1");
-
-export let routerHistory = {} as any;
-
-declare const window: Window & { ga: Function };
+declare const window: Window & { ga: Function; gtag: Function };
 
 export const History = withRouter(function HistoryComponent(props) {
-  const { googleAnalyticsService } = useContext(InjectionsContext);
   const {
     history,
     location: { pathname },
   } = props;
 
   useEffect(() => {
-    routerHistory = history;
-    googleAnalyticsService.sendPageView();
+    const page = window.location.pathname + window.location.search;
+
+    if (window.gtag) {
+      window.gtag("config", "UA-150306816-1", { page_path: page });
+    }
   }, [pathname]);
   return null;
 });

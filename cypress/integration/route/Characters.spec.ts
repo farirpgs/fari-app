@@ -1,7 +1,7 @@
 import { Fari } from "lib/util/Fari";
 
 describe("/characters", () => {
-  describe("Given I want to create a simple character sheet", () => {
+  describe.only("Given I want to create a simple character sheet", () => {
     it("should support adding, filling up and removing a character", () => {
       Fari.start();
       cy.visit("/");
@@ -53,8 +53,11 @@ describe("/characters", () => {
       Fari.get("character-dialog.group").find("input").type("Star Wars");
 
       // save
+      cy.title().should("eq", "Manage your Characters | Fari");
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.title().should("eq", "Luke Skywalker | Fari");
+      cy.contains("Saved");
 
       // navigate away
       Fari.get("page.menu.play").click();
@@ -63,6 +66,7 @@ describe("/characters", () => {
       Fari.get("page.menu.characters").click();
       cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
+      cy.title().should("eq", "Luke Skywalker | Fari");
 
       // roll dice in sheet
       Fari.get("dice").click();
@@ -94,11 +98,41 @@ describe("/characters", () => {
       cy.contains("Undo").click();
       cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
+
+      // character card
+      Fari.get("page.menu.home").click();
+      Fari.get("home.play-offline").click();
+
+      Fari.get("scene.add-offline-character").click();
+      Fari.get("scene.offline-character-dialog.pick-existing").click();
+
+      cy.contains("Luke Skywalker").click();
+
+      Fari.get("character-card").contains("Luke Skywalker");
+      Fari.get("character-card.open-character-sheet").click();
+      Fari.get("character-dialog.close").click();
+
+      // character card roll skill
+      Fari.get("character-card.skill.Athletics").click();
+      Fari.get("scene.player-row.1")
+        .find('[data-cy="dice"]')
+        .invoke("attr", "data-cy-value")
+        .should("be.oneOf", [
+          "-1",
+          "0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "+5",
+          "+6",
+          "+7",
+        ]);
     });
   });
 
   describe("Given I want a to use a template", () => {
-    it("should let me do it", () => {
+    it("should let load a template", () => {
       Fari.start();
       cy.visit("/");
 
@@ -115,11 +149,12 @@ describe("/characters", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.contains("Saved");
     });
   });
 
   describe("Given I want to customize my character sheet", () => {
-    it("should support adding, filling up and removing a character", () => {
+    it("should let me do it using the advanced mode", () => {
       Fari.start();
       cy.visit("/");
 
@@ -263,6 +298,7 @@ describe("/characters", () => {
       // save
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
+      cy.contains("Saved");
 
       // navigate away
       Fari.get("page.menu.play").click();

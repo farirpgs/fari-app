@@ -1,4 +1,6 @@
-import { Box, Button, Snackbar } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 

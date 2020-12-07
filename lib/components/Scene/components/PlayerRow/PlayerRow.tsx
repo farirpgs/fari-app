@@ -1,25 +1,23 @@
-import {
-  Avatar,
-  Box,
-  ButtonBase,
-  darken,
-  Grid,
-  IconButton,
-  lighten,
-  TableCell,
-  TableRow,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { css, cx } from "@emotion/css";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
+import useTheme from "@material-ui/core/styles/useTheme";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import { css, cx } from "emotion";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
@@ -27,22 +25,22 @@ import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { DiceBox } from "../../../DiceBox/DiceBox";
 
-export const PlayerRow: React.FC<{
-  player: IPlayer;
-  isGM: boolean;
-  isMe: boolean;
-  offline: boolean;
-  onDiceRoll(options: IRollDiceOptions): void;
-  onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
-  onFatePointsChange(fatePoints: number): void;
-  onPlayerRemove(): void;
-  onCharacterDialogOpen(): void;
-}> = (props) => {
+export const PlayerRow: React.FC<
+  {
+    player: IPlayer;
+    isGM: boolean;
+    isMe: boolean;
+    offline: boolean;
+    onDiceRoll(options: IRollDiceOptions): void;
+    onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
+    onFatePointsChange(fatePoints: number): void;
+    onPlayerRemove(): void;
+    onCharacterDialogOpen(): void;
+  } & IDataCyProps
+> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const shouldRenderOfflinePlayerRemoveButton =
-    props.isGM && props.player.offline && !props.isMe;
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
   const textColor = useTextColors(theme.palette.background.default);
@@ -92,6 +90,7 @@ export const PlayerRow: React.FC<{
   return (
     <>
       <TableRow
+        data-cy={props["data-cy"]}
         selected={false}
         className={cx({
           [selectedRowStyle]: shouldHighlight,
@@ -107,6 +106,9 @@ export const PlayerRow: React.FC<{
           >
             <span>
               <ButtonBase
+                className={css({
+                  width: "100%",
+                })}
                 disabled={!hasCharacterSheet}
                 onClick={(e) => {
                   props.onCharacterDialogOpen();
@@ -117,6 +119,8 @@ export const PlayerRow: React.FC<{
                   noWrap
                   color="inherit"
                   className={css({
+                    width: "100%",
+                    textAlign: "left",
                     fontSize: "1.2rem",
                     lineHeight: Font.lineHeight(1.2),
                     fontWeight: props.isMe ? "bold" : "normal",
@@ -138,6 +142,7 @@ export const PlayerRow: React.FC<{
           >
             <span>
               <IconButton
+                data-cy={`${props["data-cy"]}.toggle-initiative`}
                 onClick={(e) => {
                   e.stopPropagation();
                   props.onPlayedInTurnOrderChange(
@@ -166,6 +171,7 @@ export const PlayerRow: React.FC<{
                 className={css({
                   borderRadius: "50%",
                 })}
+                data-cy={`${props["data-cy"]}.consume-fate-point`}
                 disabled={!canControl}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -185,7 +191,7 @@ export const PlayerRow: React.FC<{
             <DiceBox
               rolls={props.player.rolls}
               size="2rem"
-              fontSize="1.2rem"
+              fontSize="1.25rem"
               borderSize=".15rem"
               disabled={!canControl}
               onClick={() => {
@@ -218,6 +224,7 @@ export const PlayerRow: React.FC<{
               <Tooltip title={t("player-row.remove-fate-point")}>
                 <span>
                   <IconButton
+                    data-cy={`${props["data-cy"]}.consume-fate-point-gm`}
                     size="small"
                     disabled={props.player.fatePoints === 0}
                     onClick={(e) => {
@@ -240,6 +247,7 @@ export const PlayerRow: React.FC<{
             <Grid item>
               <Tooltip title={t("player-row.add-fate-point")}>
                 <IconButton
+                  data-cy={`${props["data-cy"]}.refresh-fate-point-gm`}
                   size="small"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -253,10 +261,11 @@ export const PlayerRow: React.FC<{
                 </IconButton>
               </Tooltip>
             </Grid>
-            {shouldRenderOfflinePlayerRemoveButton && (
+            {!props.player.isGM && (
               <Grid item>
                 <Tooltip title={t("player-row.remove-character")}>
                   <IconButton
+                    data-cy={`${props["data-cy"]}.remove`}
                     size="small"
                     onClick={(e) => {
                       e.stopPropagation();

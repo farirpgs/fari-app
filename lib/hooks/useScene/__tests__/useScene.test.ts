@@ -29,6 +29,7 @@ fdescribe("useScene", () => {
         playedDuringTurn: false,
         fatePoints: 3,
         offline: false,
+        isGM: true,
       },
       players: [],
       goodConfetti: 0,
@@ -98,6 +99,7 @@ fdescribe("useScene", () => {
           playerName: "Game Master",
           rolls: [],
           offline: false,
+          isGM: true,
         },
         goodConfetti: 0,
         id: "new-id",
@@ -205,6 +207,7 @@ fdescribe("useScene", () => {
         playedDuringTurn: false,
         pinned: false,
         title: "",
+        hasDrawArea: false,
         type: 0,
       });
       act(() => {
@@ -403,6 +406,7 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
+        hasDrawArea: false,
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
@@ -673,6 +677,7 @@ fdescribe("useScene", () => {
           id: playerId,
           playedDuringTurn: true,
           offline: true,
+          isGM: false,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
@@ -690,6 +695,7 @@ fdescribe("useScene", () => {
           id: playerId,
           playedDuringTurn: false,
           offline: true,
+          isGM: false,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
@@ -796,6 +802,7 @@ fdescribe("useScene", () => {
         fatePoints: undefined,
         id: playerId,
         playedDuringTurn: false,
+        isGM: false,
         offline: true,
         playerName: "",
         rolls: [],
@@ -803,7 +810,7 @@ fdescribe("useScene", () => {
     ]);
     // WHEN removing an offline player
     act(() => {
-      result.current.actions.removeOfflinePlayer(playerId);
+      result.current.actions.removePlayer(playerId);
     });
   });
 });

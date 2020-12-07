@@ -17,4 +17,11 @@ export const Fari = {
   closeDrawer() {
     cy.get(".MuiBackdrop-root").eq(0).click();
   },
+  toggleDarkMode() {
+    Fari.get("page.toggle-dark-mode").click();
+  },
+  changeLanguage(language: string) {
+    Fari.get("page.languages").click();
+    cy.get(`[data-value="${language}"]`).click();
+  },
 };

@@ -1,38 +1,36 @@
-import { Container } from "@material-ui/core";
-import React, { useEffect } from "react";
-import showdown from "showdown";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import { default as React, useEffect, useState } from "react";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleLanguages } from "../../services/internationalization/InternationalizationService";
-import AboutDeMarkdown from "./page/About.de.md";
-import AboutEnMarkdown from "./page/About.en.md";
-import AboutEsMarkdown from "./page/About.es.md";
-import AboutFrMarkdown from "./page/About.fr.md";
-import AboutRuMarkdown from "./page/About.ru.md";
 
-const converter = new showdown.Converter();
-
-const html: Record<IPossibleLanguages, string> = {
-  "en": converter.makeHtml(AboutEnMarkdown),
-  "pt-BR": converter.makeHtml(AboutEnMarkdown),
-  "es": converter.makeHtml(AboutEsMarkdown),
-  "fr": converter.makeHtml(AboutFrMarkdown),
-  "ru": converter.makeHtml(AboutRuMarkdown),
-  "de": converter.makeHtml(AboutDeMarkdown),
-  "dev": converter.makeHtml(AboutEnMarkdown),
+const Pages: Record<IPossibleLanguages, Promise<{ page: string }>> = {
+  "en": import("./page/About.en"),
+  "pt-BR": import("./page/About.en"),
+  "es": import("./page/About.es"),
+  "fr": import("./page/About.fr"),
+  "ru": import("./page/About.ru"),
+  "de": import("./page/About.de"),
+  "dev": import("./page/About.en"),
 };
-
 export const AboutRoute: React.FC<{}> = (props) => {
   const { t, currentLanguage } = useTranslate();
   const logger = useLogger();
-  const aboutPage = html[currentLanguage];
+  const [page, setPage] = useState<string>("");
 
   useEffect(() => {
-    logger.info("Route:About");
-  }, []);
+    async function load() {
+      logger.info("Route:About");
+      const htmlInPage = (await Pages[currentLanguage]).page;
+      setPage(htmlInPage);
+    }
+    load();
+  }, [currentLanguage]);
 
   return (
     <Page>
@@ -41,9 +39,21 @@ export const AboutRoute: React.FC<{}> = (props) => {
         description={t("about-route.meta.description")}
       />
       <Container maxWidth="md">
-        <MarkdownElement renderedMarkdown={aboutPage} />
+        <Box
+          py="1rem"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <FateLabel variant="h4" align="center" color="primary">
+            {t("menu.about")}
+          </FateLabel>
+        </Box>
+
+        <MarkdownElement renderedMarkdown={page} />
       </Container>
     </Page>
   );
 };
 AboutRoute.displayName = "AboutRoute";
+export default AboutRoute;

@@ -27,4 +27,16 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: yarn build:serve
+          start: yarn serve:build
+      - name: Upload Cypress Videos
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+      - name: Upload Cypress Screenshots
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

@@ -1,4 +1,7 @@
-import { Box, Divider, Link, Typography } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 import React from "react";
 import { blogPosts } from "../../blog/index";
@@ -35,3 +38,5 @@ export const BlogPostsRoute: React.FC = (props) => {
     </Page>
   );
 };
+BlogPostsRoute.displayName = "BlogPostsRoute";
+export default BlogPostsRoute;

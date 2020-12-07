@@ -1,12 +1,11 @@
-import {
-  Box,
-  Divider,
-  Fade,
-  Grid,
-  IconButton,
-  Popover,
-  useTheme,
-} from "@material-ui/core";
+import { css, cx } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import Popover from "@material-ui/core/Popover";
+import { useTheme } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import ClearAllTwoToneIcon from "@material-ui/icons/ClearAllTwoTone";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
@@ -18,20 +17,14 @@ import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
 import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
-import { css, cx } from "emotion";
 import React, { useEffect, useRef, useState } from "react";
-import { TwitterPicker } from "react-color";
+import TwitterPicker from "react-color/lib/components/twitter/Twitter";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
-import {
-  DrawingTool,
-  IDrawAreaObjects,
-  IDrawingManager,
-  ObjectType,
-} from "./hooks/useDrawing";
+import { DrawingTool, IDrawingManager, ObjectType } from "./hooks/useDrawing";
 
 interface IProps {
   drawingManager: IDrawingManager;
@@ -40,7 +33,6 @@ interface IProps {
   controls: "bottom" | "top";
   tokenTitles?: Array<string>;
   onFullScreenChange?: (fullScreen: boolean) => void;
-  onChange?(lines: IDrawAreaObjects): void;
 }
 
 export const DrawObjects: React.FC<IProps> = (props) => {

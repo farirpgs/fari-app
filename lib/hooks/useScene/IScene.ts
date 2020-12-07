@@ -12,6 +12,7 @@ export interface IPlayer {
   playedDuringTurn: boolean;
   fatePoints: number;
   offline: boolean;
+  isGM: boolean;
 }
 
 export interface IAspect {
@@ -25,6 +26,7 @@ export interface IAspect {
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
   drawAreaObjects?: IDrawAreaObjects;
+  hasDrawArea: boolean | undefined;
   type: AspectType;
   pinned: boolean | undefined;
 }

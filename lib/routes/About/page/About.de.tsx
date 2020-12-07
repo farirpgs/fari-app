@@ -1,3 +1,6 @@
+import { md } from "../../../tags/md";
+
+export const page = md/* md */ `
 # Fari
 
 Fari ist eine von René-Pier Deshaies-Gélinas entwickelte <b>Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel</b> verfügbar auf [GitHub](https://github.com/fariapp/fari) und veröffentlicht unter der [AGPL-v3 Lizenz](https://choosealicense.com/licenses/agpl-3.0/).
@@ -38,3 +41,4 @@ Aber sicher! Fari würde ohne die Hilfe einiger großartiger Bibliotheken und Fr
 Du kannst auch spenden, um ihnen zu helfen:
 
 - [PeerJS](https://opencollective.com/peer) - Was dir hilft, mit deinem Freund über Peer-to-Peer-Verbindungen zu spielen.
+`;

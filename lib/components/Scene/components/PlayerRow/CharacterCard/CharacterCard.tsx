@@ -1,16 +1,14 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  Link,
-  Paper,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { css, cx } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersonIcon from "@material-ui/icons/Person";
-import { css, cx } from "emotion";
 import truncate from "lodash/truncate";
 import React from "react";
 import { ICharacter } from "../../../../../contexts/CharactersContext/CharactersContext";
@@ -81,6 +79,7 @@ export const CharacterCard: React.FC<{
                           },
                         },
                       ])}
+                      data-cy={`character-card.skill.${skill.name}`}
                       onClick={() => {
                         if (props.readonly) {
                           return;
@@ -136,6 +135,7 @@ export const CharacterCard: React.FC<{
 
   return (
     <Box
+      data-cy="character-card"
       className={cx(
         css({
           width: width,
@@ -155,20 +155,16 @@ export const CharacterCard: React.FC<{
             })}
           >
             <Box>
-              <Grid
-                container
-                justify="space-between"
-                alignItems="center"
-                spacing={2}
-              >
-                <Grid item>
-                  <FateLabel>{props.characterSheet?.name}</FateLabel>
+              <Grid container alignItems="baseline" spacing={2} wrap="nowrap">
+                <Grid item xs zeroMinWidth>
+                  <FateLabel noWrap>{props.characterSheet?.name}</FateLabel>
                 </Grid>
                 <Grid item>
                   <Tooltip title={t("player-row.open-character-sheet")}>
                     <span>
                       <IconButton
                         size="small"
+                        data-cy="character-card.open-character-sheet"
                         onClick={(e) => {
                           props.onCharacterDialogOpen();
                           logger.info("CharacterCard:onCharacterDialogOpen");

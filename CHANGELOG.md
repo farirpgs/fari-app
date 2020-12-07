@@ -1,5 +1,3 @@
-# [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
-
 ## 3.3.0 (Nov 10, 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
 - feat: Group Scenes or Character sheets by campaigns

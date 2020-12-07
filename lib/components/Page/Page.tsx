@@ -1,31 +1,29 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Drawer,
-  Fade,
-  Grid,
-  Hidden,
-  IconButton,
-  Link,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { css } from "@emotion/css";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Drawer from "@material-ui/core/Drawer";
+import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
-import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import appIcon from "../../../images/app-icon.png";
+import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
@@ -139,7 +137,11 @@ export const Page: React.FC<{
               })}
             >
               <Typography>
-                <Link href="https://www.netlify.com" target="_blank">
+                <Link
+                  href="https://www.netlify.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   This site is powered by Netlify
                 </Link>
               </Typography>
@@ -151,6 +153,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item>
               <Select
+                data-cy="page.languages"
                 value={currentLanguage}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value as string);
@@ -224,6 +227,7 @@ export const Page: React.FC<{
           >
             <RouterLink
               to="/"
+              data-cy="page.menu.home"
               className={css({
                 textDecoration: "none",
               })}
@@ -277,7 +281,7 @@ export const Page: React.FC<{
                     {props.live === LiveMode.Live && (
                       <SignalWifi4BarLockIcon
                         className={css({
-                          color: "#69e22d",
+                          // color: theme.palette.primary,
                         })}
                       />
                     )}
@@ -406,18 +410,6 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
-                to="/draw"
-                data-cy="page.menu.draw"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.draw")}
-              </Button>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
                 to="/about"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
@@ -455,6 +447,7 @@ export const Page: React.FC<{
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
+            data-cy="page.toggle-dark-mode"
             color="inherit"
             size="small"
             className={css({

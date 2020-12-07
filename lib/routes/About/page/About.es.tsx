@@ -1,3 +1,6 @@
+import { md } from "../../../tags/md";
+
+export const page = md/* md */ `
 # Fari
 
 Fari es una aplicación <b>Asistente para Fate RPG</b> Creada por René-Pier Deshaies-Gélinas, disponible en [GitHub](https://github.com/fariapp/fari) y liberada bajo [Licencia AGPL-v3](https://choosealicense.com/licenses/agpl-3.0/) .
@@ -37,3 +40,4 @@ Trabajo en esto en mi tiempo libre y cualquier donación es enormemente apreciad
 Puedes donar para ayudarles a ellos también:
 
 - [PeerJS](https://opencollective.com/peer) - Que te ayuda a jugar con tus amigos a través de conexiones peer to peer.
+`;

@@ -1,24 +1,23 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonBase,
-  Checkbox,
-  Collapse,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  IconButton,
-  MenuItem,
-  Select,
-  Snackbar,
-  TextField,
-  Typography,
-  useTheme
-} from "@material-ui/core";
+import { css } from "@emotion/css";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Checkbox from "@material-ui/core/Checkbox";
+import Collapse from "@material-ui/core/Collapse";
+import Container from "@material-ui/core/Container";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Snackbar from "@material-ui/core/Snackbar";
+import useTheme from "@material-ui/core/styles/useTheme";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -29,8 +28,8 @@ import CreateIcon from "@material-ui/icons/Create";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
-import { Alert, Autocomplete } from "@material-ui/lab";
-import { css } from "emotion";
+import Alert from "@material-ui/lab/Alert";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
@@ -40,7 +39,7 @@ import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUp
 import {
   CharactersContext,
   CharacterType,
-  ICharacter
+  ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
@@ -141,7 +140,10 @@ export const CharacterDialog: React.FC<{
       <Snackbar
         open={savedSnack}
         autoHideDuration={6000}
-        onClose={() => {
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
           setSavedSnack(false);
         }}
       >
@@ -328,29 +330,45 @@ export const CharacterDialog: React.FC<{
     return (
       <>
         <Box>
-          <Grid container spacing={2} alignItems="flex-end" wrap="nowrap">
-            <Grid item className={css({ flex: "0 0 auto" })}>
-              <FateLabel>{t("character-dialog.name")}</FateLabel>
+          <Grid container>
+            <Grid
+              item
+              container
+              sm={12}
+              md={6}
+              spacing={2}
+              alignItems="flex-end"
+            >
+              <Grid item className={css({ flex: "0 0 auto" })}>
+                <FateLabel>{t("character-dialog.name")}</FateLabel>
+              </Grid>
+              <Grid item xs>
+                <Box fontSize="1rem">
+                  <ContentEditable
+                    border
+                    autoFocus
+                    data-cy="character-dialog.name"
+                    readonly={props.readonly}
+                    value={characterManager.state.character!.name}
+                    onChange={(value) => {
+                      characterManager.actions.setName(value);
+                    }}
+                  />
+                </Box>
+              </Grid>
             </Grid>
-            <Grid item xs>
-              <Box fontSize="1.25rem">
-                <ContentEditable
-                  border
-                  autoFocus
-                  data-cy="character-dialog.name"
-                  readonly={props.readonly}
-                  value={characterManager.state.character!.name}
-                  onChange={(value) => {
-                    characterManager.actions.setName(value);
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item className={css({ flex: "0 0 auto" })}>
-              <FateLabel>{t("character-dialog.group")}</FateLabel>
-            </Grid>
-            <Grid item xs>
-              <Box fontSize="1.25rem">
+            <Grid
+              item
+              container
+              sm={12}
+              md={6}
+              spacing={2}
+              alignItems="flex-end"
+            >
+              <Grid item className={css({ flex: "0 0 auto" })}>
+                <FateLabel>{t("character-dialog.group")}</FateLabel>
+              </Grid>
+              <Grid item xs>
                 <Autocomplete
                   freeSolo
                   options={charactersManager.state.groups.filter((g) => {
@@ -383,14 +401,23 @@ export const CharacterDialog: React.FC<{
                     />
                   )}
                 />
-              </Box>
-            </Grid>
-            {props.dialog && (
-              <Grid item>
-                <IconButton size="small" onClick={onClose}>
-                  <CloseIcon />
-                </IconButton>
               </Grid>
+            </Grid>
+
+            {props.dialog && (
+              <IconButton
+                size="small"
+                data-cy="character-dialog.close"
+                className={css({
+                  position: "absolute",
+                  padding: ".5rem",
+                  top: ".5rem",
+                  right: ".5rem",
+                })}
+                onClick={onClose}
+              >
+                <CloseIcon />
+              </IconButton>
             )}
           </Grid>
         </Box>
@@ -469,7 +496,7 @@ export const CharacterDialog: React.FC<{
                     justify="space-between"
                     wrap="nowrap"
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs>
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
@@ -576,23 +603,28 @@ export const CharacterDialog: React.FC<{
         >
           {characterManager.state.character!.skills.map((skill, index) => {
             const skillLabel = (
-              <Box pt=".1rem" px=".1rem">
-                <FateLabel display="inline">
-                  <ContentEditable
-                    data-cy={`character-dialog.skill.${skill.name}.label`}
-                    readonly={!advanced}
-                    border={advanced}
-                    value={skill.name}
-                    onClick={() => {
-                      const bonus = parseInt(skill.value) || 0;
-                      props.onRoll?.({ bonus, bonusLabel: skill.name });
-                    }}
-                    onChange={(value) => {
-                      characterManager.actions.setSkillName(index, value);
-                    }}
-                  />
-                </FateLabel>
-              </Box>
+              <FateLabel
+                display="inline"
+                className={css({
+                  borderBottom: !advanced
+                    ? `1px solid ${theme.palette.text.primary}`
+                    : undefined,
+                })}
+              >
+                <ContentEditable
+                  data-cy={`character-dialog.skill.${skill.name}.label`}
+                  readonly={!advanced}
+                  border={advanced}
+                  value={skill.name}
+                  onClick={() => {
+                    const bonus = parseInt(skill.value) || 0;
+                    props.onRoll?.({ bonus, bonusLabel: skill.name });
+                  }}
+                  onChange={(value) => {
+                    characterManager.actions.setSkillName(index, value);
+                  }}
+                />
+              </FateLabel>
             );
             return (
               <Box py=".5rem" key={index}>
@@ -711,7 +743,7 @@ export const CharacterDialog: React.FC<{
                     justify="space-between"
                     wrap="nowrap"
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs>
                       <FateLabel display="inline">
                         <ContentEditable
                           data-cy={`character-dialog.stunt.${stunt.name}.label`}
@@ -1098,7 +1130,7 @@ export const CharacterDialog: React.FC<{
                     wrap="nowrap"
                     spacing={1}
                   >
-                    <Grid item xs={10}>
+                    <Grid item xs>
                       <FateLabel display="inline">
                         <ContentEditable
                           readonly={!advanced}
