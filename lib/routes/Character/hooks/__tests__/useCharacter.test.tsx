@@ -452,7 +452,7 @@ describe("useCharacter", () => {
     expect(result.current.state.character).toEqual(character);
     // WHEN the refresh i updated
     act(() => {
-      result.current.actions.udpateRefresh(4);
+      result.current.actions.updateRefresh(4);
     });
     expect(result.current.state.character?.refresh).toEqual(4);
   });
@@ -531,7 +531,7 @@ describe("useCharacter", () => {
       result.current.actions.setConsequenceName(0, "Extreme");
       result.current.actions.setConsequence(0, "He is my father");
       result.current.actions.removeConsequence(0);
-      result.current.actions.udpateRefresh(5);
+      result.current.actions.updateRefresh(5);
       result.current.actions.loadTemplate(CharacterType.Accelerated);
       result.current.actions.setAspectsLabel("new label");
       result.current.actions.setSkillsLabel("new label");
