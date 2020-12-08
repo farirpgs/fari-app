@@ -3,16 +3,19 @@ import { ManagerMode } from "../../../components/Manager/Manager";
 import {
   CharacterType,
   ICharacter,
+  IV1Character,
   migrateCharacters,
   useCharacters,
 } from "../CharactersContext";
+import { ComplexCharacter } from "../mocks/ComplexCharacter";
+import { Warden } from "../mocks/WardenLeMagane";
 
 describe("migrateCharacters", () => {
   describe("v1", () => {
     describe("stressTracks", () => {
       it("should migrate characters from v1 `stressTracks` to v2 `stressTracks`", () => {
         // GIVEN
-        const v1Char: ICharacter = {
+        const v1Char: IV1Character = {
           id: "",
           name: "",
           group: undefined,
@@ -44,9 +47,12 @@ describe("migrateCharacters", () => {
         // WHEN
         const result = migrateCharacters([v1Char]);
         // THEN
-        expect(result[0].stressTracks).toEqual([
+
+        expect(
+          result[0].sections.find((s) => s.label === "Stress")?.fields
+        ).toEqual([
           {
-            name: "Physical",
+            label: "Physical",
             value: [
               { checked: false, label: "1" },
               { checked: true, label: "2" },
@@ -54,6 +60,207 @@ describe("migrateCharacters", () => {
             ],
           },
         ]);
+      });
+    });
+  });
+  describe("v2", () => {
+    it("should convert Warden le Magané", () => {
+      const result = migrateCharacters([Warden]);
+
+      expect(result[0]).toEqual({
+        id: "03dd15c8-5bed-40a5-b1e3-b0aa5e59e2e7",
+        name: "Warden Le Magané",
+        group: undefined,
+        lastUpdated: 1606783644,
+        sections: [
+          {
+            label: "Aspects",
+            position: 0,
+            type: 0,
+            fields: [
+              {
+                label: "High Concept",
+                value:
+                  "Survivant à l'apocalypse et à une rencontre contre la Mère des Sans-Visages",
+              },
+              {
+                label: "Trouble Aspect",
+                value:
+                  "Mon apparence affreuse traumatise quiconque me regarde (CORRUPTED)",
+              },
+              {
+                label: "RELATIONSHIP",
+                value: "J'ai survécu grâce à l'apocalypse Rodolf Salis",
+              },
+              {
+                label: "Other Aspect",
+                value: "Ancien chasseur de tête / Assassin",
+              },
+              { label: "OTHER ASPECT", value: "" },
+            ],
+          },
+          {
+            label: "Stunts & Extras",
+            position: 0,
+            type: 0,
+            fields: [
+              {
+                label: "The voices, they are telling me things...",
+                value: "Use Will instead of Notice (And +2)",
+              },
+              {
+                label: "Touched by the occult",
+                value:
+                  "Use Lore instead of Academics about occult, weird or creepy subjects",
+              },
+              {
+                label: "Armor of Fear",
+                value:
+                  "You can use Provoke to defend against Fight attacks, but only until the first time you’re dealt stress in a conflict. You can make your opponents hesitate to attack, but when someone shows them that you’re only human your advantage disappears.",
+              },
+            ],
+          },
+          {
+            label: "Other",
+            position: 0,
+            type: 0,
+            fields: [{ label: "Notes", value: "" }],
+          },
+          {
+            label: "Stress",
+            position: 1,
+            type: 2,
+            fields: [
+              {
+                label: "Physical",
+                value: [
+                  { checked: false, label: "1" },
+                  { checked: false, label: "2" },
+                  { checked: false, label: "3" },
+                  { checked: false, label: "4" },
+                ],
+              },
+              {
+                label: "Mental",
+                value: [
+                  { checked: false, label: "1" },
+                  { checked: false, label: "2" },
+                  { checked: false, label: "3" },
+                  { checked: false, label: "4" },
+                  { checked: false, label: "5" },
+                  { checked: false, label: "6" },
+                ],
+              },
+              {
+                label: "Corruption",
+                value: [
+                  { checked: false, label: "1" },
+                  { checked: false, label: "2" },
+                  { checked: false, label: "3" },
+                  { checked: false, label: "4" },
+                ],
+              },
+            ],
+          },
+          {
+            label: "Consequences",
+            position: 1,
+            type: 0,
+            fields: [
+              { label: "Mild", value: "" },
+              { label: "Moderate", value: "" },
+              { label: "Severe", value: "" },
+            ],
+          },
+          {
+            label: "Skills",
+            position: 1,
+            type: 1,
+            fields: [
+              { label: "Academics", value: "" },
+              { label: "Athletics", value: "2" },
+              { label: "Burglary", value: "" },
+              { label: "Contacts", value: "" },
+              { label: "Crafts", value: "" },
+              { label: "Deceive", value: "1" },
+              { label: "Drive", value: "" },
+              { label: "Empathy", value: "1" },
+              { label: "Fight", value: "" },
+              { label: "Investigate", value: "2" },
+              { label: "Lore", value: "3" },
+              { label: "Notice", value: "" },
+              { label: "Physique", value: "1" },
+              { label: "Provoke", value: "4" },
+              { label: "Rapport", value: "2" },
+              { label: "Resources", value: "" },
+              { label: "Shoot", value: "" },
+              { label: "Stealth", value: "1" },
+              { label: "Will", value: "3" },
+            ],
+          },
+        ],
+        version: 3,
+      });
+    });
+    it("should convert ComplexCharacter", () => {
+      const result = migrateCharacters([ComplexCharacter]);
+
+      expect(result[0]).toEqual({
+        id: "03dd15c8-5bed-40a5-b1e3-b0aa5e59e2e7",
+        name: "Compliqué",
+        group: "Le groupe des compliqués",
+        lastUpdated: 1606783644,
+        sections: [
+          {
+            fields: [{ label: "Grand Concept", value: "Mon grand concepte" }],
+            label: "Aspects",
+            position: 0,
+            type: 0,
+          },
+          {
+            label: "Pouvoirs",
+            position: 0,
+            type: 0,
+            fields: [
+              { label: "Mon super pouvoir", value: "Me permet de faire..." },
+            ],
+          },
+          {
+            label: "Les Notes",
+            position: 0,
+            type: 0,
+            fields: [{ label: "Notes", value: "Some notes..." }],
+          },
+          {
+            label: "Stresse",
+            position: 1,
+            type: 2,
+            fields: [
+              {
+                label: "Physique",
+                value: [
+                  { checked: false, label: "11" },
+                  { checked: true, label: "22" },
+                  { checked: false, label: "33" },
+                  { checked: true, label: "44" },
+                ],
+              },
+            ],
+          },
+          {
+            label: "Conséquences",
+            position: 1,
+            type: 0,
+            fields: [{ label: "Mild", value: "" }],
+          },
+          {
+            label: "Attributs",
+            position: 1,
+            type: 1,
+            fields: [{ label: "Tout", value: "8" }],
+          },
+        ],
+        version: 3,
       });
     });
   });
@@ -194,6 +401,7 @@ describe("useCharacters", () => {
           id: "an id from a live session",
         } as ICharacter);
       });
+
       return;
 
       // THEN the new character has been added and is properly sorted

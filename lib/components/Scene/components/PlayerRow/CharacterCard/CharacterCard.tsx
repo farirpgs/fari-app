@@ -11,7 +11,10 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersonIcon from "@material-ui/icons/Person";
 import truncate from "lodash/truncate";
 import React from "react";
-import { ICharacter } from "../../../../../contexts/CharactersContext/CharactersContext";
+import {
+  ICharacter,
+  ISection,
+} from "../../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../../../../domains/array/arraySort";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
@@ -33,8 +36,18 @@ export const CharacterCard: React.FC<{
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
+  const aspectsSection = props.characterSheet?.sections.find(
+    (s) => s.label === "Aspects"
+  ) as ISection<string>;
+  const skillsSection = props.characterSheet?.sections.find(
+    (s) => s.label === "Skills"
+  ) as ISection<string>;
+
+  const aspects = aspectsSection.fields;
+  const skills = skillsSection.fields;
+
   const skillsWithValue =
-    props.characterSheet?.skills.filter((s) => {
+    skills.filter((s) => {
       return !!s.value;
     }) ?? [];
   const sortedSkills = arraySort(skillsWithValue, [
@@ -79,7 +92,7 @@ export const CharacterCard: React.FC<{
                           },
                         },
                       ])}
-                      data-cy={`character-card.skill.${skill.name}`}
+                      data-cy={`character-card.skill.${skill.label}`}
                       onClick={() => {
                         if (props.readonly) {
                           return;
@@ -87,11 +100,11 @@ export const CharacterCard: React.FC<{
                         const bonus = parseInt(skill.value) || 0;
                         props.onRoll({
                           bonus: bonus,
-                          bonusLabel: skill.name,
+                          bonusLabel: skill.label,
                         });
                       }}
                     >
-                      {skill.name} ({skill.value})
+                      {skill.label} ({skill.value})
                     </Link>
                   </Grid>
                 );
@@ -106,7 +119,7 @@ export const CharacterCard: React.FC<{
   function renderAspects() {
     return (
       <Box py=".5rem" px="1rem">
-        {props.characterSheet?.aspects.map((aspect, aspectIndex) => {
+        {aspects.map((aspect, aspectIndex) => {
           const containsImage = aspect.value.includes("<img");
           const value = containsImage
             ? aspect.value
@@ -119,7 +132,7 @@ export const CharacterCard: React.FC<{
           return (
             <Box key={aspectIndex} pb=".5rem">
               <Box>
-                <FateLabel>{aspect.name}</FateLabel>
+                <FateLabel>{aspect.label}</FateLabel>
               </Box>
               <Box>
                 <Typography title={aspect.value}>

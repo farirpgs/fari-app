@@ -152,76 +152,112 @@ export function useCharacters(props?: { localStorage: Storage }) {
     },
   };
 }
+export enum SectionType {
+  Text,
+  Number,
+  // BigNumber,
+  Checkboxes,
+}
+
+export enum Position {
+  Left,
+  Right,
+}
 
 const defaultCondensedCharacter: ICharacter = {
   id: "",
   name: "",
   group: undefined,
-  aspects: [
-    { name: "High Concept", value: "" },
-    { name: "Trouble", value: "" },
-    { name: "Relationship", value: "" },
-    { name: "Other Aspect", value: "" },
-    { name: "Other Aspect", value: "" },
-  ],
-  stunts: [
-    { name: "Stunt #1", value: "" },
-    { name: "Stunt #2", value: "" },
-    { name: "Stunt #3", value: "" },
-  ],
-  skills: [
-    { name: "Academics", value: "" },
-    { name: "Athletics", value: "" },
-    { name: "Burglary", value: "" },
-    { name: "Contacts", value: "" },
-    { name: "Crafts", value: "" },
-    { name: "Deceive", value: "" },
-    { name: "Drive", value: "" },
-    { name: "Empathy", value: "" },
-    { name: "Fight", value: "" },
-    { name: "Investigate", value: "" },
-    { name: "Lore", value: "" },
-    { name: "Notice", value: "" },
-    { name: "Physique", value: "" },
-    { name: "Provoke", value: "" },
-    { name: "Rapport", value: "" },
-    { name: "Resources", value: "" },
-    { name: "Shoot", value: "" },
-    { name: "Stealth", value: "" },
-    { name: "Will", value: "" },
-  ],
-  stressTracks: [
+  sections: [
     {
-      name: "Physical",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
+      label: "Aspects",
+      type: SectionType.Text,
+      position: Position.Left,
+      fields: [
+        { label: "High Concept", value: "" },
+        { label: "Trouble", value: "" },
+        { label: "Relationship", value: "" },
+        { label: "Other Aspect", value: "" },
+        { label: "Other Aspect", value: "" },
       ],
     },
     {
-      name: "Mental",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
+      label: "Stunts & Extras",
+      type: SectionType.Text,
+      position: Position.Left,
+      fields: [
+        { label: "Stunt #1", value: "" },
+        { label: "Stunt #2", value: "" },
+        { label: "Stunt #3", value: "" },
       ],
     },
-  ],
-  consequences: [
-    { name: "Mild", value: "" },
-    { name: "Moderate", value: "" },
-    { name: "Severe", value: "" },
+    {
+      label: "Other",
+      type: SectionType.Text,
+      position: Position.Left,
+      fields: [{ label: "Notes", value: "" }],
+    },
+    {
+      label: "Stress",
+      type: SectionType.Checkboxes,
+      position: Position.Right,
+      fields: [
+        {
+          label: "Physical",
+          value: [
+            { checked: false, label: "1" },
+            { checked: false, label: "2" },
+            { checked: false, label: "3" },
+          ],
+        },
+        {
+          label: "Mental",
+          value: [
+            { checked: false, label: "1" },
+            { checked: false, label: "2" },
+            { checked: false, label: "3" },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Consequences",
+      type: SectionType.Text,
+      position: Position.Right,
+      fields: [
+        { label: "Mild", value: "" },
+        { label: "Moderate", value: "" },
+        { label: "Severe", value: "" },
+      ],
+    },
+    {
+      label: "Skills",
+      type: SectionType.Number,
+      position: Position.Right,
+      fields: [
+        { label: "Academics", value: "" },
+        { label: "Athletics", value: "" },
+        { label: "Burglary", value: "" },
+        { label: "Contacts", value: "" },
+        { label: "Crafts", value: "" },
+        { label: "Deceive", value: "" },
+        { label: "Drive", value: "" },
+        { label: "Empathy", value: "" },
+        { label: "Fight", value: "" },
+        { label: "Investigate", value: "" },
+        { label: "Lore", value: "" },
+        { label: "Notice", value: "" },
+        { label: "Physique", value: "" },
+        { label: "Provoke", value: "" },
+        { label: "Rapport", value: "" },
+        { label: "Resources", value: "" },
+        { label: "Shoot", value: "" },
+        { label: "Stealth", value: "" },
+        { label: "Will", value: "" },
+      ],
+    },
   ],
   refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
@@ -232,50 +268,75 @@ const defaultAcceleratedCharacter: ICharacter = {
   id: "",
   name: "",
   group: undefined,
-  aspects: [
-    { name: "High Concept", value: "" },
-    { name: "Trouble", value: "" },
-    { name: "Relationship", value: "" },
-    { name: "Other Aspect", value: "" },
-    { name: "Other Aspect", value: "" },
-  ],
-  stunts: [
-    { name: "Stunt #1", value: "" },
-    { name: "Stunt #2", value: "" },
-    { name: "Stunt #3", value: "" },
-  ],
-  skills: [
-    { name: "Careful", value: "" },
-    { name: "Clever", value: "" },
-    { name: "Forceful", value: "" },
-    { name: "Flashy", value: "" },
-    { name: "Quick", value: "" },
-    { name: "Sneaky", value: "" },
-  ],
-  stressTracks: [
+  sections: [
     {
-      name: "Stress",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
+      label: "Aspects",
+      type: SectionType.Text,
+      position: Position.Left,
+      fields: [
+        { label: "High Concept", value: "" },
+        { label: "Trouble", value: "" },
+        { label: "Relationship", value: "" },
+        { label: "Other Aspect", value: "" },
+        { label: "Other Aspect", value: "" },
+      ],
+    },
+    {
+      label: "Stunts & Extras",
+      type: SectionType.Text,
+      position: Position.Left,
+      fields: [
+        { label: "Stunt #1", value: "" },
+        { label: "Stunt #2", value: "" },
+        { label: "Stunt #3", value: "" },
+      ],
+    },
+    {
+      label: "Other",
+      type: SectionType.Text,
+      position: Position.Left,
+      fields: [{ label: "Notes", value: "" }],
+    },
+    {
+      label: "Stress",
+      type: SectionType.Checkboxes,
+      position: Position.Right,
+      fields: [
+        {
+          label: "Stress",
+          value: [
+            { checked: false, label: "1" },
+            { checked: false, label: "2" },
+            { checked: false, label: "3" },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Consequences",
+      type: SectionType.Text,
+      position: Position.Right,
+      fields: [
+        { label: "Mild", value: "" },
+        { label: "Moderate", value: "" },
+        { label: "Severe", value: "" },
+      ],
+    },
+    {
+      label: "Skills",
+      type: SectionType.Number,
+      position: Position.Right,
+      fields: [
+        { label: "Careful", value: "" },
+        { label: "Clever", value: "" },
+        { label: "Forceful", value: "" },
+        { label: "Flashy", value: "" },
+        { label: "Quick", value: "" },
+        { label: "Sneaky", value: "" },
       ],
     },
   ],
-  consequences: [
-    { name: "Mild", value: "" },
-    { name: "Moderate", value: "" },
-    { name: "Severe", value: "" },
-  ],
   refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
@@ -286,29 +347,8 @@ const defaultCustomCharacter: ICharacter = {
   id: "",
   name: "",
   group: undefined,
-  aspects: [{ name: "Aspect", value: "" }],
-  stunts: [{ name: "Stunt", value: "" }],
-  skills: [{ name: "Skill", value: "" }],
-  stressTracks: [
-    {
-      name: "Stress",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [{ name: "Consequence", value: "" }],
+  sections: [],
   refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
   fatePoints: undefined,
   playedDuringTurn: undefined,
   version: 2,
@@ -321,7 +361,32 @@ export const defaultCharactersByType = {
   [CharacterType.Custom]: defaultCustomCharacter,
 } as const;
 
-export interface ICharacter {
+export interface IV1Character {
+  id: string;
+  name: string;
+  aspects: ICharacterCustomField<string>;
+  skills: ICharacterCustomField<string>;
+  stunts: ICharacterCustomField<string>;
+  stressTracks: ICharacterCustomField<Array<boolean>>;
+  consequences: ICharacterCustomField<string>;
+  aspectsLabel: string | undefined;
+  skillsLabel: string | undefined;
+  stuntsLabel: string | undefined;
+  stressTracksLabel: string | undefined;
+  consequencesLabel: string | undefined;
+  refreshLabel: string | undefined;
+  notesLabel: string | undefined;
+  notes: string | undefined;
+  group: string | undefined;
+  refresh: number;
+  // hidden
+  fatePoints: number | undefined;
+  playedDuringTurn: boolean | undefined;
+  version: number;
+  lastUpdated: number;
+}
+
+export interface IV2Character {
   id: string;
   name: string;
   aspects: ICharacterCustomField<string>;
@@ -353,25 +418,152 @@ export type ICharacterCustomField<TValue> = Array<{
   value: TValue;
 }>;
 
-export function migrateCharacters(characters: Array<ICharacter>) {
+export type IField<T = any> = {
+  label: string;
+  value: T;
+};
+
+export type ISection<T = any> = {
+  label: string;
+  position: Position;
+  type: SectionType;
+  fields: Array<IField<T>>;
+};
+
+export type CheckboxesFieldValue = Array<{
+  label: string;
+  checked?: boolean;
+}>;
+
+export const DefaultFields: Record<SectionType, IField> = {
+  [SectionType.Text]: { label: "...", value: "" } as IField<string>,
+  [SectionType.Number]: { label: "...", value: "" } as IField<string>,
+  [SectionType.Checkboxes]: {
+    label: "...",
+    value: [{ label: "...", checked: false }],
+  } as IField<CheckboxesFieldValue>,
+};
+
+export interface ICharacter {
+  id: string;
+  name: string;
+  group: string | undefined;
+  refresh: number;
+  sections: Array<ISection>;
+
+  // hidden
+  version: number;
+  lastUpdated: number;
+
+  fatePoints: number | undefined;
+  playedDuringTurn: boolean | undefined;
+}
+
+export function migrateCharacters(characters: Array<any>) {
   return characters.map((c) => {
     return migrateCharacter(c);
   });
 }
 
-export function migrateCharacter(c: ICharacter) {
-  return produce(c, (draft) => {
-    if (draft.version === 1) {
-      // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
-      draft.stressTracks.forEach((s) => {
-        s.value = s.value.map((box, index) => {
-          return {
-            checked: (box as unknown) as boolean,
-            label: `${index + 1}`,
-          };
-        });
+export function migrateCharacter(c: any) {
+  const v2: IV2Character = migrateV1Character(c);
+  const v3: ICharacter = migrateV2Character(v2);
+  return v3;
+}
+
+export function migrateV1Character(v1: IV1Character): IV2Character {
+  if (v1.version !== 1) {
+    return (v1 as unknown) as IV2Character;
+  }
+
+  return (produce<IV1Character, IV2Character>(v1, (draft) => {
+    // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
+    draft.stressTracks.forEach((s) => {
+      s.value = s.value.map((box, index) => {
+        return {
+          checked: (box as unknown) as boolean,
+          label: `${index + 1}`,
+        };
       });
-      draft.version = 2;
-    }
+    });
+    draft.version = 2;
+  }) as unknown) as IV2Character;
+}
+
+export function migrateV2Character(v2: IV2Character): ICharacter {
+  if (v2.version !== 2) {
+    return (v2 as unknown) as ICharacter;
+  }
+
+  const sections: Array<ISection> = [];
+
+  // aspects
+  sections.push({
+    label: v2.aspectsLabel ?? "Aspects",
+    position: Position.Left,
+    type: SectionType.Text,
+    fields: v2.aspects.map((a) => {
+      return { label: a.name, value: a.value };
+    }),
   });
+
+  // stunts
+  sections.push({
+    label: v2.stuntsLabel ?? "Stunts & Extras",
+    position: Position.Left,
+    type: SectionType.Text,
+    fields: v2.stunts.map((a) => {
+      return { label: a.name, value: a.value };
+    }),
+  });
+
+  // notes
+  sections.push({
+    label: v2.notesLabel ?? "Other",
+    position: Position.Left,
+    type: SectionType.Text,
+    fields: [{ label: "Notes", value: v2.notes ?? "" }],
+  });
+
+  // stress
+  sections.push({
+    label: v2.stressTracksLabel ?? "Stress",
+    position: Position.Right,
+    type: SectionType.Checkboxes,
+    fields: v2.stressTracks.map((st) => {
+      return { label: st.name, value: st.value };
+    }),
+  });
+
+  // consequences
+  sections.push({
+    label: v2.consequencesLabel ?? "Consequences",
+    position: Position.Right,
+    type: SectionType.Text,
+    fields: v2.consequences.map((a) => {
+      return { label: a.name, value: a.value };
+    }),
+  });
+
+  // skills
+  sections.push({
+    label: v2.skillsLabel ?? "Skills",
+    position: Position.Right,
+    type: SectionType.Number,
+    fields: v2.skills.map((a) => {
+      return { label: a.name, value: a.value };
+    }),
+  });
+
+  return {
+    id: v2.id,
+    name: v2.name,
+    group: v2.group,
+    lastUpdated: v2.lastUpdated,
+    sections: sections,
+    fatePoints: v2.fatePoints,
+    playedDuringTurn: v2.playedDuringTurn,
+    refresh: v2.refresh,
+    version: 3,
+  };
 }

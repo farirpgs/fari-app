@@ -12,7 +12,7 @@ import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "./components/CharacterDialog";
+import { CharacterV3Dialog } from "./components/CharacterV3Dialog";
 
 export const CharacterRoute: React.FC<{
   match: {
@@ -63,7 +63,7 @@ export const CharacterRoute: React.FC<{
       />
 
       <Page>
-        <CharacterDialog
+        <CharacterV3Dialog
           open={!!selectedCharacter}
           character={selectedCharacter}
           dialog={dialogMode || false}

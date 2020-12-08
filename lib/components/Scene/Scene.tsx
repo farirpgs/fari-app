@@ -66,7 +66,7 @@ import { IPlayer } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "../../routes/Character/components/CharacterDialog";
+import { CharacterV3Dialog } from "../../routes/Character/components/CharacterV3Dialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
@@ -494,7 +494,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   const canControl = isGM || isMe;
                   return (
                     <React.Fragment key={player.id}>
-                      <CharacterDialog
+                      <CharacterV3Dialog
                         readonly={!canControl}
                         open={characterDialogPlayerId === player.id}
                         character={player.character}
