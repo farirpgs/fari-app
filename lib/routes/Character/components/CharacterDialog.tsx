@@ -855,7 +855,7 @@ export const CharacterDialog: React.FC<{
                   onChange={(value, e) => {
                     const intValue = parseInt(value);
                     if (!isNaN(intValue)) {
-                      characterManager.actions.udpateRefresh(intValue);
+                      characterManager.actions.updateRefresh(intValue);
                     }
                   }}
                 />

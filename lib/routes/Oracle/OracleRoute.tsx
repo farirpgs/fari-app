@@ -183,7 +183,7 @@ export const OracleRoute = () => {
                               value: l.value,
                             });
                             logger.info(
-                              `OracleRoute:onLikelinessChange:value${l.value}`
+                              `OracleRoute:onLikelinessChange:value:${l.value}`
                             );
                           }}
                         >

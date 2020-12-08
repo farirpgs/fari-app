@@ -119,6 +119,7 @@ export function useDrawing(props: {
 
     pointerEvent.preventDefault();
     pointerEvent.stopPropagation();
+    $container.current?.setPointerCapture(pointerEvent.pointerId);
 
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (!newPoint) {
@@ -185,6 +186,9 @@ export function useDrawing(props: {
       return;
     }
 
+    pointerEvent.preventDefault();
+    pointerEvent.stopPropagation();
+
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
       setObjects((objects) => {
@@ -230,8 +234,11 @@ export function useDrawing(props: {
   }
 
   function onStopDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
-    if (pointerEvent.pointerType == "mouse") {
+    const validPointerTypes = ["mouse", "touch"];
+
+    if (validPointerTypes.includes(pointerEvent.pointerType)) {
       setDrawing(false);
+      $container.current?.releasePointerCapture(pointerEvent.pointerId);
     }
   }
 
@@ -351,9 +358,9 @@ export function useDrawing(props: {
       setDrawingTool,
     },
     handlers: {
-      onStartDrawing: onStartDrawing,
-      onDrawing: onDrawing,
-      onStopDrawing: onStopDrawing,
+      onStartDrawing,
+      onDrawing,
+      onStopDrawing,
       onBlur,
       onObjectMove,
       onObjectRemove,

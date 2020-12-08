@@ -19,14 +19,16 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   }, [characterFromProps, character]);
 
   useEffect(() => {
-    const isDifferentCharacter = characterFromProps?.id !== character?.id;
     const characterFromPropsLastUpdated = getUnixFrom(
       characterFromProps?.lastUpdated ?? 0
     );
-    const currentCharacerLastUpdated = getUnixFrom(character?.lastUpdated ?? 0);
+    const currentCharacterLastUpdated = getUnixFrom(
+      character?.lastUpdated ?? 0
+    );
 
+    const isDifferentCharacter = characterFromProps?.id !== character?.id;
     const isOutdated =
-      characterFromPropsLastUpdated > currentCharacerLastUpdated;
+      characterFromPropsLastUpdated > currentCharacterLastUpdated;
 
     if (isDifferentCharacter || isOutdated) {
       setCharacter(characterFromProps);
@@ -393,7 +395,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function udpateRefresh(newRefresh: number) {
+  function updateRefresh(newRefresh: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
@@ -532,7 +534,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       setConsequenceName,
       setConsequence,
       removeConsequence,
-      udpateRefresh,
+      updateRefresh,
       setNotes,
       setAspectsLabel,
       setSkillsLabel,
