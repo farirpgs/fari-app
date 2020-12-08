@@ -34,6 +34,7 @@ describe("/draw", () => {
       for (let i = 0; i <= 8; i++) {
         Fari.get("draw.container").trigger("pointerdown", {
           button: 0,
+          pointerId: 1,
           clientX: 492 + i * 8,
           clientY: 217 + i * 8,
         });
@@ -48,15 +49,18 @@ function draw() {
   Fari.get("draw.container")
     .trigger("pointerdown", {
       button: 0,
+      pointerId: 1,
       clientX: 492,
       clientY: 217,
     })
     .trigger("pointermove", {
       button: 0,
+      pointerId: 1,
       clientX: 600,
       clientY: 300,
     })
     .trigger("pointerup", {
       button: 0,
+      pointerId: 1,
     });
 }
