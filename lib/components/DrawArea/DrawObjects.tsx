@@ -100,9 +100,9 @@ export const DrawObjects: React.FC<IProps> = (props) => {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
+          touchAction: "none",
           height: "100%",
           cursor: props.readonly ? "inherit" : "crosshair",
-          touchAction: drawingManager.state.isDrawing ? "none" : "auto",
           border: props.fullScreen ? "1px solid  grey" : "none",
         })}
       >
