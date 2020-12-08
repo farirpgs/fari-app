@@ -55,7 +55,6 @@ function draw() {
     })
     .trigger("pointermove", {
       button: 0,
-      pointerId: 1,
       clientX: 600,
       clientY: 300,
     })
