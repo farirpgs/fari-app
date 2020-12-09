@@ -194,7 +194,7 @@ export const CharacterCard: React.FC<{
             </Box>
           </Box>
           {renderSkills()}
-          {renderAspects()}{" "}
+          {renderAspects()}
         </Box>
       </Paper>
     </Box>

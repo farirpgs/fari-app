@@ -12,22 +12,29 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
+import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
+import Filter1Icon from "@material-ui/icons/Filter1";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
+import TextFieldsIcon from "@material-ui/icons/TextFields";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useContext, useState } from "react";
@@ -49,6 +56,7 @@ import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import { IRollDiceOptions } from "../../../domains/dice/Dice";
 import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
@@ -252,33 +260,43 @@ export const CharacterV3Dialog: React.FC<{
 
   function renderSections(
     sections: Array<ISection> | undefined,
-    predicate: (section: ISection) => boolean
+    position: Position
   ) {
     return (
       <>
-        {sections?.map((s, sectionIndex) => {
-          if (!predicate(s)) {
+        {sections?.map((section, sectionIndex) => {
+          if (section.position !== position) {
             return null;
           }
           return (
-            <Box key={sectionIndex + s.label}>
-              {renderSheetHeader(
-                s.label,
-                (newLabel) => {
-                  characterManager.actions.renameSection(
-                    sectionIndex,
-                    newLabel
-                  );
-                },
-                () => {
-                  characterManager.actions.addSectionField(sectionIndex);
-                }
-              )}
-              {s.type === SectionType.Text && renderTextFields(sectionIndex, s)}
-              {s.type === SectionType.Number &&
-                renderNumberFields(sectionIndex, s)}
-              {s.type === SectionType.Checkboxes &&
-                renderCheckboxesFields(sectionIndex, s)}
+            <Box key={sectionIndex + section.label}>
+              {renderSheetHeader(section.label, (newLabel) => {
+                characterManager.actions.renameSection(sectionIndex, newLabel);
+              })}
+              {section.type === SectionType.Text &&
+                renderTextFields(sectionIndex, section)}
+              {section.type === SectionType.Number &&
+                renderNumberFields(sectionIndex, section)}
+              {section.type === SectionType.Checkboxes &&
+                renderCheckboxesFields(sectionIndex, section)}
+              <Collapse in={advanced}>
+                <Box
+                  p=".5rem"
+                  mb=".5rem"
+                  justifyContent="center"
+                  display="flex"
+                >
+                  <Button
+                    color="default"
+                    variant="outlined"
+                    onClick={() => {
+                      characterManager.actions.addSectionField(sectionIndex);
+                    }}
+                  >
+                    {t("character-dialog.control.add-field")}
+                  </Button>
+                </Box>
+              </Collapse>
             </Box>
           );
         })}
@@ -300,10 +318,8 @@ export const CharacterV3Dialog: React.FC<{
           >
             {renderSections(
               characterManager.state.character?.sections,
-              (s) => s.position === Position.Left
+              Position.Left
             )}
-            {renderRefresh()}
-            {renderDice()}
           </Grid>
           <Grid
             item
@@ -315,10 +331,34 @@ export const CharacterV3Dialog: React.FC<{
           >
             {renderSections(
               characterManager.state.character?.sections,
-              (s) => s.position === Position.Right
+              Position.Right
             )}
           </Grid>
         </Grid>
+        <Collapse in={advanced}>
+          <Grid container justify="space-around">
+            <Grid item>
+              <AddSectionField
+                onAddSection={(sectionType) => {
+                  characterManager.actions.addSection(
+                    sectionType,
+                    Position.Left
+                  );
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <AddSectionField
+                onAddSection={(sectionType) => {
+                  characterManager.actions.addSection(
+                    sectionType,
+                    Position.Right
+                  );
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Collapse>
         <Grid container justify="center">
           <Grid item>
             <Box pt=".5rem">
@@ -470,10 +510,8 @@ export const CharacterV3Dialog: React.FC<{
 
   function renderSheetHeader(
     label: string,
-    onLabelChange?: (newLabel: string) => void,
-    onAdd?: () => void
+    onLabelChange?: (newLabel: string) => void
   ) {
-    const shouldRenderAddButton = onAdd && advanced;
     return (
       <Box className={sheetHeader}>
         <Grid container justify="space-between" wrap="nowrap">
@@ -493,19 +531,6 @@ export const CharacterV3Dialog: React.FC<{
               />
             </FateLabel>
           </Grid>
-          {shouldRenderAddButton && (
-            <Grid item>
-              <IconButton
-                size="small"
-                className={smallIconButtonStyle}
-                onClick={() => {
-                  onAdd!();
-                }}
-              >
-                <AddIcon htmlColor={headerColor} />
-              </IconButton>
-            </Grid>
-          )}
         </Grid>
       </Box>
     );
@@ -549,51 +574,63 @@ export const CharacterV3Dialog: React.FC<{
                     {advanced && (
                       <>
                         <Grid item>
-                          <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
-                            size="small"
-                            className={smallIconButtonStyle}
-                            onClick={() => {
-                              characterManager.actions.moveSectionField(
-                                sectionIndex,
-                                fieldIndex,
-                                "down"
-                              );
-                            }}
+                          <Tooltip
+                            title={t("character-dialog.control.move-down")}
                           >
-                            <ArrowDownwardIcon />
-                          </IconButton>
+                            <IconButton
+                              data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
+                              size="small"
+                              className={smallIconButtonStyle}
+                              onClick={() => {
+                                characterManager.actions.moveSectionField(
+                                  sectionIndex,
+                                  fieldIndex,
+                                  "down"
+                                );
+                              }}
+                            >
+                              <ArrowDownwardIcon />
+                            </IconButton>
+                          </Tooltip>
                         </Grid>
                         <Grid item>
-                          <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
-                            size="small"
-                            className={smallIconButtonStyle}
-                            onClick={() => {
-                              characterManager.actions.moveSectionField(
-                                sectionIndex,
-                                fieldIndex,
-                                "up"
-                              );
-                            }}
+                          <Tooltip
+                            title={t("character-dialog.control.move-up")}
                           >
-                            <ArrowUpwardIcon />
-                          </IconButton>
+                            <IconButton
+                              data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
+                              size="small"
+                              className={smallIconButtonStyle}
+                              onClick={() => {
+                                characterManager.actions.moveSectionField(
+                                  sectionIndex,
+                                  fieldIndex,
+                                  "up"
+                                );
+                              }}
+                            >
+                              <ArrowUpwardIcon />
+                            </IconButton>
+                          </Tooltip>
                         </Grid>
                         <Grid item>
-                          <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                            size="small"
-                            className={smallIconButtonStyle}
-                            onClick={() => {
-                              characterManager.actions.removeSectionField(
-                                sectionIndex,
-                                fieldIndex
-                              );
-                            }}
+                          <Tooltip
+                            title={t("character-dialog.control.remove-field")}
                           >
-                            <RemoveIcon />
-                          </IconButton>
+                            <IconButton
+                              data-cy={`character-dialog.${section.label}.${field.label}.remove`}
+                              size="small"
+                              className={smallIconButtonStyle}
+                              onClick={() => {
+                                characterManager.actions.removeSectionField(
+                                  sectionIndex,
+                                  fieldIndex
+                                );
+                              }}
+                            >
+                              <RemoveIcon />
+                            </IconButton>
+                          </Tooltip>
                         </Grid>
                       </>
                     )}
@@ -701,52 +738,62 @@ export const CharacterV3Dialog: React.FC<{
                           justifyContent: "flex-end",
                         })}
                       >
-                        <IconButton
-                          data-cy={`character-dialog.section.label.${field.label}.move-down`}
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.moveSectionField(
-                              sectionIndex,
-                              fieldIndex,
-                              "down"
-                            );
-                          }}
+                        <Tooltip
+                          title={t("character-dialog.control.move-down")}
                         >
-                          <ArrowDownwardIcon />
-                        </IconButton>
+                          <IconButton
+                            data-cy={`character-dialog.section.label.${field.label}.move-down`}
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveSectionField(
+                                sectionIndex,
+                                fieldIndex,
+                                "down"
+                              );
+                            }}
+                          >
+                            <ArrowDownwardIcon />
+                          </IconButton>
+                        </Tooltip>
                       </Grid>
                       <Grid item>
-                        <IconButton
-                          data-cy={`character-dialog.section.label.${field.label}.move-up`}
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.moveSectionField(
-                              sectionIndex,
-                              fieldIndex,
-                              "up"
-                            );
-                          }}
-                        >
-                          <ArrowUpwardIcon />
-                        </IconButton>
+                        <Tooltip title={t("character-dialog.control.move-up")}>
+                          <IconButton
+                            data-cy={`character-dialog.section.label.${field.label}.move-up`}
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.moveSectionField(
+                                sectionIndex,
+                                fieldIndex,
+                                "up"
+                              );
+                            }}
+                          >
+                            <ArrowUpwardIcon />
+                          </IconButton>
+                        </Tooltip>
                       </Grid>
                       <Grid item>
-                        <IconButton
-                          data-cy={`character-dialog.section.label.${field.label}.remove`}
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.removeSectionField(
-                              sectionIndex,
-                              fieldIndex
-                            );
-                          }}
+                        <Tooltip
+                          title={t("character-dialog.control.remove-field")}
                         >
-                          <RemoveIcon />
-                        </IconButton>
-                      </Grid>{" "}
+                          <IconButton
+                            data-cy={`character-dialog.section.label.${field.label}.remove`}
+                            size="small"
+                            className={smallIconButtonStyle}
+                            onClick={() => {
+                              characterManager.actions.removeSectionField(
+                                sectionIndex,
+                                fieldIndex
+                              );
+                            }}
+                          >
+                            <RemoveIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
                     </>
                   )}
                 </Grid>
@@ -857,78 +904,91 @@ export const CharacterV3Dialog: React.FC<{
                 {advanced && (
                   <>
                     <Grid item>
-                      <IconButton
-                        size="small"
-                        data-cy={`character-dialog.${section.label}.${field.label}.remove-box`}
-                        onClick={() => {
-                          characterManager.actions.removeCheckboxFieldValue(
-                            sectionIndex,
-                            fieldIndex
-                          );
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
+                      <Tooltip title={t("character-dialog.control.remove-box")}>
+                        <IconButton
+                          size="small"
+                          data-cy={`character-dialog.${section.label}.${field.label}.remove-box`}
+                          onClick={() => {
+                            characterManager.actions.removeCheckboxFieldValue(
+                              sectionIndex,
+                              fieldIndex
+                            );
+                          }}
+                        >
+                          <RemoveCircleOutlineIcon />
+                        </IconButton>
+                      </Tooltip>
                     </Grid>
                     <Grid item>
-                      <IconButton
-                        data-cy={`character-dialog.${section.label}.${field.label}.add-box`}
-                        size="small"
-                        onClick={() => {
-                          characterManager.actions.addCheckboxFieldValue(
-                            sectionIndex,
-                            fieldIndex
-                          );
-                        }}
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
+                      <Tooltip title={t("character-dialog.control.add-box")}>
+                        <IconButton
+                          data-cy={`character-dialog.${section.label}.${field.label}.add-box`}
+                          size="small"
+                          onClick={() => {
+                            characterManager.actions.addCheckboxFieldValue(
+                              sectionIndex,
+                              fieldIndex
+                            );
+                          }}
+                        >
+                          <AddCircleOutlineIcon />
+                        </IconButton>
+                      </Tooltip>
                     </Grid>
                     <Grid item>
-                      <IconButton
-                        data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
-                        size="small"
-                        className={smallIconButtonStyle}
-                        onClick={() => {
-                          characterManager.actions.moveSectionField(
-                            sectionIndex,
-                            fieldIndex,
-                            "down"
-                          );
-                        }}
-                      >
-                        <ArrowDownwardIcon />
-                      </IconButton>
+                      {" "}
+                      <Tooltip title={t("character-dialog.control.move-down")}>
+                        <IconButton
+                          data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.moveSectionField(
+                              sectionIndex,
+                              fieldIndex,
+                              "down"
+                            );
+                          }}
+                        >
+                          <ArrowDownwardIcon />
+                        </IconButton>
+                      </Tooltip>
                     </Grid>
                     <Grid item>
-                      <IconButton
-                        data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
-                        size="small"
-                        className={smallIconButtonStyle}
-                        onClick={() => {
-                          characterManager.actions.moveSectionField(
-                            sectionIndex,
-                            fieldIndex,
-                            "up"
-                          );
-                        }}
-                      >
-                        <ArrowUpwardIcon />
-                      </IconButton>
+                      <Tooltip title={t("character-dialog.control.move-up")}>
+                        <IconButton
+                          data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
+                          size="small"
+                          className={smallIconButtonStyle}
+                          onClick={() => {
+                            characterManager.actions.moveSectionField(
+                              sectionIndex,
+                              fieldIndex,
+                              "up"
+                            );
+                          }}
+                        >
+                          <ArrowUpwardIcon />
+                        </IconButton>
+                      </Tooltip>
                     </Grid>
                     <Grid item>
-                      <IconButton
-                        data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                        size="small"
-                        onClick={() => {
-                          characterManager.actions.removeSectionField(
-                            sectionIndex,
-                            fieldIndex
-                          );
-                        }}
+                      <Tooltip
+                        title={t("character-dialog.control.remove-field")}
                       >
-                        <RemoveIcon />
-                      </IconButton>
+                        <IconButton
+                          data-cy={`character-dialog.${section.label}.${field.label}.remove`}
+                          size="small"
+                          onClick={() => {
+                            characterManager.actions.removeSectionField(
+                              sectionIndex,
+                              fieldIndex
+                            );
+                          }}
+                        >
+                          <RemoveIcon />
+                        </IconButton>
+                      </Tooltip>
                     </Grid>
                   </>
                 )}
@@ -991,3 +1051,70 @@ export const CharacterV3Dialog: React.FC<{
   }
 };
 CharacterV3Dialog.displayName = "CharacterV3Dialog";
+
+export const AddSectionField: React.FC<{
+  onAddSection(section: SectionType): void;
+}> = (props) => {
+  const theme = useTheme();
+  const { t } = useTranslate();
+  const blackButtonTheme = useButtonTheme(theme.palette.text.primary);
+  const [addSectionAnchorEl, setAddSectionAnchorEl] = React.useState<any>();
+
+  return (
+    <Box p=".5rem" mb=".5rem" justifyContent="center" display="flex">
+      <ThemeProvider theme={blackButtonTheme}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={(e) => {
+            setAddSectionAnchorEl(e.currentTarget);
+          }}
+        >
+          {t("character-dialog.control.add-section")}
+        </Button>
+        <Menu
+          elevation={0}
+          anchorEl={addSectionAnchorEl}
+          open={!!addSectionAnchorEl}
+          onClose={() => {
+            setAddSectionAnchorEl(undefined);
+          }}
+        >
+          <MenuItem
+            onClick={() => {
+              props.onAddSection(SectionType.Text);
+              setAddSectionAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <TextFieldsIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Text Section" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddSection(SectionType.Checkboxes);
+              setAddSectionAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <CheckBoxIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Checkboxes Section" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddSection(SectionType.Number);
+              setAddSectionAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <Filter1Icon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Number Section" />
+          </MenuItem>
+        </Menu>
+      </ThemeProvider>
+    </Box>
+  );
+};

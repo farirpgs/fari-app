@@ -81,17 +81,19 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addSection(sectionType: SectionType) {
+  function addSection(sectionType: SectionType, position: Position) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
+        const defaultField = DefaultFields[sectionType];
+
         draft.sections.push({
           label: "Section",
-          position: Position.Left,
+          position: position,
           type: sectionType,
-          fields: [],
+          fields: [defaultField],
         });
       })
     );
