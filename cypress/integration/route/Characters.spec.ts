@@ -298,6 +298,47 @@ describe("/characters", () => {
       Fari.get("character-dialog.Stress.#Mental.remove-box").click();
       Fari.get("character-dialog.Stress.#Mental.remove-box").click();
       Fari.get("character-dialog.Stress.#Mental.remove-box").click();
+      Fari.get("character-dialog.Stress.#Mental.add-box").click();
+
+      // section labels
+      Fari.get("character-dialog.Aspects.label").clear().type("#Aspects");
+      Fari.get("character-dialog.Stunts & Extras.label")
+        .clear()
+        .type("#Stunts");
+      Fari.get("character-dialog.Other.label").clear().type("#Other");
+      Fari.get("character-dialog.Stress.label").clear().type("#Stress");
+      Fari.get("character-dialog.Consequences.label")
+        .clear()
+        .type("#Consequences");
+      Fari.get("character-dialog.Skills.label").clear().type("#Skills");
+
+      // section field
+      Fari.get("character-dialog.#Aspects.add-section-field").click();
+      Fari.get("character-dialog.#Stunts.add-section-field").click();
+      Fari.get("character-dialog.#Other.add-section-field").click();
+      Fari.get("character-dialog.#Stress.add-section-field").click();
+      Fari.get("character-dialog.#Consequences.add-section-field").click();
+      Fari.get("character-dialog.#Skills.add-section-field").click();
+
+      // move and remove new sections
+      Fari.get("character-dialog.#Aspects.move-up").click();
+      Fari.get("character-dialog.#Aspects.move-down").click();
+      Fari.get("character-dialog.#Aspects.remove").click();
+      Fari.get("character-dialog.#Stunts.move-up").click();
+      Fari.get("character-dialog.#Stunts.move-down").click();
+      Fari.get("character-dialog.#Stunts.remove").click();
+      Fari.get("character-dialog.#Other.move-up").click();
+      Fari.get("character-dialog.#Other.move-down").click();
+      Fari.get("character-dialog.#Other.remove").click();
+      Fari.get("character-dialog.#Stress.move-up").click();
+      Fari.get("character-dialog.#Stress.move-down").click();
+      Fari.get("character-dialog.#Stress.remove").click();
+      Fari.get("character-dialog.#Consequences.move-up").click();
+      Fari.get("character-dialog.#Consequences.move-down").click();
+      Fari.get("character-dialog.#Consequences.remove").click();
+      Fari.get("character-dialog.#Skills.move-up").click();
+      Fari.get("character-dialog.#Skills.move-down").click();
+      Fari.get("character-dialog.#Skills.remove").click();
 
       // save
       Fari.waitContentEditable();

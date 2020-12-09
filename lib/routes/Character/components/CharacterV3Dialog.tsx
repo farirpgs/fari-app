@@ -306,6 +306,7 @@ export const CharacterV3Dialog: React.FC<{
                 >
                   <Button
                     color="default"
+                    data-cy={`character-dialog.${section.label}.add-section-field`}
                     variant="outlined"
                     onClick={() => {
                       characterManager.actions.addSectionField(sectionIndex);
@@ -1136,6 +1137,7 @@ export const SheetHeader: React.FC<{
         <Grid item xs>
           <FateLabel>
             <ContentEditable
+              data-cy={`character-dialog.${props.label}.label`}
               readonly={!props.advanced || !props.onLabelChange}
               border={props.advanced && !!props.onLabelChange}
               borderColor={headerColor}
@@ -1180,9 +1182,9 @@ export const SheetHeader: React.FC<{
         )}
         {props.advanced && props.onRemove && (
           <Grid item>
-            <Tooltip title={t("character-dialog.control.move-up")}>
+            <Tooltip title={t("character-dialog.control.remove-section")}>
               <IconButton
-                data-cy={`character-dialog.${props.label}.move-up`}
+                data-cy={`character-dialog.${props.label}.remove`}
                 size="small"
                 className={smallIconButtonStyle}
                 onClick={() => {

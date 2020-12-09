@@ -9,6 +9,7 @@ export const enTranslation = {
   "character-dialog.control.add-section": `Add Section`,
   "character-dialog.control.move-up": `Move Up`,
   "character-dialog.control.move-down": `Move Down`,
+  "character-dialog.control.remove-section": `Remove Section`,
   "character-dialog.control.remove-field": `Remove Field`,
   "character-dialog.control.remove-box": `Remove Box`,
   "character-dialog.advanced": `Toggle Advanced Mode`,

@@ -437,7 +437,7 @@ export type CheckboxesFieldValue = Array<{
 
 export const DefaultFields: Record<SectionType, IField> = {
   [SectionType.Text]: { label: "Text", value: "" } as IField<string>,
-  [SectionType.Number]: { label: "Number", value: "0" } as IField<string>,
+  [SectionType.Number]: { label: "Text", value: "0" } as IField<string>,
   [SectionType.Checkboxes]: {
     label: "Checkboxes",
     value: [{ label: "1", checked: false }],
