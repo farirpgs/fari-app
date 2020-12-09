@@ -110,13 +110,28 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function moveSection(sectionIndex: number, position: Position) {
+  function repositionSection(sectionIndex: number, position: Position) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.sections[sectionIndex].position = position;
+      })
+    );
+  }
+
+  function moveSection(sectionIndex: number, direction: "up" | "down") {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.sections = moveValueInList(
+          draft.sections,
+          sectionIndex,
+          direction
+        );
       })
     );
   }
@@ -337,6 +352,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       addSection,
       renameSection,
       moveSection,
+      repositionSection,
       removeSection,
       addSectionField,
       renameSectionField,

@@ -62,6 +62,10 @@ import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
 
+const smallIconButtonStyle = css({
+  padding: "0",
+});
+
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
@@ -81,6 +85,14 @@ export const CharacterV3Dialog: React.FC<{
   const [template, setTemplate] = useState(CharacterType.CoreCondensed);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const sheetHeader = css({
+    background: headerBackgroundColors.primary,
+    color: headerColor,
+    width: "100%",
+    padding: ".5rem 1.5rem",
+  });
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
@@ -123,20 +135,9 @@ export const CharacterV3Dialog: React.FC<{
     }
   }
 
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const sheetHeader = css({
-    background: headerBackgroundColors.primary,
-    color: headerColor,
-    width: "100%",
-    padding: ".5rem 1.5rem",
-  });
   const sheetContentStyle = css({
     width: "100%",
     padding: ".5rem 1.5rem",
-  });
-  const smallIconButtonStyle = css({
-    padding: "0",
   });
 
   if (!characterManager.state.character) {
@@ -269,10 +270,27 @@ export const CharacterV3Dialog: React.FC<{
             return null;
           }
           return (
-            <Box key={sectionIndex + section.label}>
-              {renderSheetHeader(section.label, (newLabel) => {
-                characterManager.actions.renameSection(sectionIndex, newLabel);
-              })}
+            <Box key={sectionIndex}>
+              <SheetHeader
+                label={section.label}
+                advanced={advanced}
+                onLabelChange={(newLabel) => {
+                  characterManager.actions.renameSection(
+                    sectionIndex,
+                    newLabel
+                  );
+                }}
+                onMoveDown={() => {
+                  characterManager.actions.moveSection(sectionIndex, "down");
+                }}
+                onMoveUp={() => {
+                  characterManager.actions.moveSection(sectionIndex, "up");
+                }}
+                onRemove={() => {
+                  characterManager.actions.removeSection(sectionIndex);
+                }}
+              />
+
               {section.type === SectionType.Text &&
                 renderTextFields(sectionIndex, section)}
               {section.type === SectionType.Number &&
@@ -320,6 +338,8 @@ export const CharacterV3Dialog: React.FC<{
               characterManager.state.character?.sections,
               Position.Left
             )}
+            {renderDice()}
+            {renderRefresh()}
           </Grid>
           <Grid
             item
@@ -508,34 +528,6 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderSheetHeader(
-    label: string,
-    onLabelChange?: (newLabel: string) => void
-  ) {
-    return (
-      <Box className={sheetHeader}>
-        <Grid container justify="space-between" wrap="nowrap">
-          <Grid
-            item
-            className={css({
-              flex: "1 1 auto",
-            })}
-          >
-            <FateLabel>
-              <ContentEditable
-                readonly={!advanced}
-                value={label}
-                onChange={(newLabel) => {
-                  onLabelChange?.(newLabel);
-                }}
-              />
-            </FateLabel>
-          </Grid>
-        </Grid>
-      </Box>
-    );
-  }
-
   function renderTextFields(sectionIndex: number, section: ISection<string>) {
     return (
       <>
@@ -707,7 +699,7 @@ export const CharacterV3Dialog: React.FC<{
                   <Grid item xs={2}>
                     <Typography align="center">
                       <ContentEditable
-                        data-cy={`character-dialog.section.label.${field.label}.value`}
+                        data-cy={`character-dialog.${section.label}.${field.label}.value`}
                         border
                         readonly={props.readonly}
                         value={field.value}
@@ -742,7 +734,7 @@ export const CharacterV3Dialog: React.FC<{
                           title={t("character-dialog.control.move-down")}
                         >
                           <IconButton
-                            data-cy={`character-dialog.section.label.${field.label}.move-down`}
+                            data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -760,7 +752,7 @@ export const CharacterV3Dialog: React.FC<{
                       <Grid item>
                         <Tooltip title={t("character-dialog.control.move-up")}>
                           <IconButton
-                            data-cy={`character-dialog.section.label.${field.label}.move-up`}
+                            data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -780,7 +772,7 @@ export const CharacterV3Dialog: React.FC<{
                           title={t("character-dialog.control.remove-field")}
                         >
                           <IconButton
-                            data-cy={`character-dialog.section.label.${field.label}.remove`}
+                            data-cy={`character-dialog.${section.label}.${field.label}.remove`}
                             size="small"
                             className={smallIconButtonStyle}
                             onClick={() => {
@@ -808,11 +800,10 @@ export const CharacterV3Dialog: React.FC<{
   function renderRefresh() {
     return (
       <>
-        {/* {renderSheetHeader(
-          characterManager.state.character?.refreshLabel ??
-            t("character-dialog.refresh"),
-          characterManager.actions.setRefreshLabel
-        )} */}
+        <SheetHeader
+          label={t("character-dialog.refresh")}
+          advanced={advanced}
+        />
         <Box className={css(sheetContentStyle)}>
           <Grid container justify="center">
             <Grid item>
@@ -850,7 +841,7 @@ export const CharacterV3Dialog: React.FC<{
   function renderDice() {
     return (
       <>
-        {renderSheetHeader(t("character-dialog.dice"))}
+        <SheetHeader label={t("character-dialog.dice")} advanced={advanced} />
         <Box className={sheetContentStyle}>
           <Grid container justify="center">
             <Grid item>
@@ -1118,3 +1109,93 @@ export const AddSectionField: React.FC<{
     </Box>
   );
 };
+AddSectionField.displayName = "AddSectionField";
+
+export const SheetHeader: React.FC<{
+  label: string;
+  advanced: boolean;
+  onLabelChange?: (newLabel: string) => void;
+  onRemove?: () => void;
+  onMoveUp?: () => void;
+  onMoveDown?: () => void;
+}> = (props) => {
+  const theme = useTheme();
+  const { t } = useTranslate();
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const sheetHeader = css({
+    background: headerBackgroundColors.primary,
+    color: headerColor,
+    width: "100%",
+    padding: ".5rem 1.5rem",
+  });
+
+  return (
+    <Box className={sheetHeader}>
+      <Grid container justify="space-between" wrap="nowrap" spacing={1}>
+        <Grid item xs>
+          <FateLabel>
+            <ContentEditable
+              readonly={!props.advanced || !props.onLabelChange}
+              border={props.advanced && !!props.onLabelChange}
+              borderColor={headerColor}
+              value={props.label}
+              onChange={(newLabel) => {
+                props.onLabelChange?.(newLabel);
+              }}
+            />
+          </FateLabel>
+        </Grid>
+        {props.advanced && props.onMoveDown && (
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.move-down")}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.move-down`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={() => {
+                  props.onMoveDown?.();
+                }}
+              >
+                <ArrowDownwardIcon htmlColor={headerColor} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
+        {props.advanced && props.onMoveUp && (
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.move-up")}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.move-up`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={() => {
+                  props.onMoveUp?.();
+                }}
+              >
+                <ArrowUpwardIcon htmlColor={headerColor} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
+        {props.advanced && props.onRemove && (
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.move-up")}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.move-up`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={() => {
+                  props.onRemove?.();
+                }}
+              >
+                <RemoveIcon htmlColor={headerColor} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
+      </Grid>
+    </Box>
+  );
+};
+SheetHeader.displayName = "SheetHeader";

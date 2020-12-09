@@ -19,6 +19,7 @@ export const ContentEditable: React.FC<
     autoFocus?: boolean;
     inline?: boolean;
     border?: boolean;
+    borderColor?: string;
     underline?: boolean;
     id?: string;
   } & IDataCyProps
@@ -76,6 +77,7 @@ export const ContentEditable: React.FC<
       }, ContentEditableDelay);
     }
   }
+  const borderColor = props.borderColor ?? theme.palette.divider;
 
   return (
     <span
@@ -91,9 +93,7 @@ export const ContentEditable: React.FC<
         "transition": !updating
           ? theme.transitions.create("color", { duration: 500 })
           : undefined,
-        "borderBottom": props.border
-          ? `1px solid ${theme.palette.divider}`
-          : undefined,
+        "borderBottom": props.border ? `1px solid ${borderColor}` : undefined,
         "img": {
           maxWidth: "75%",
           padding: ".5rem",
