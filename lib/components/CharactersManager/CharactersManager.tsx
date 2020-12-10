@@ -1,7 +1,6 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidV4 } from "uuid";
 import {
   CharactersContext,
   CharacterType,
@@ -10,6 +9,7 @@ import {
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -56,7 +56,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       fariType: "character",
       onImport: (c) => {
         const characterWithNewId = produce(c, (draft) => {
-          draft.id = uuidV4();
+          draft.id = Id.get();
         });
         const migratedCharacter = migrateCharacter(characterWithNewId);
         charactersManager.actions.upsert(migratedCharacter);

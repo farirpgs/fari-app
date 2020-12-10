@@ -30,6 +30,7 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import Filter1Icon from "@material-ui/icons/Filter1";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
@@ -37,7 +38,8 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
+import { DropTargetMonitor, useDrag, useDrop, XYCoord } from "react-dnd";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { DiceBox } from "../../../components/DiceBox/DiceBox";
@@ -65,6 +67,110 @@ import { useCharacter } from "../hooks/useCharacter";
 const smallIconButtonStyle = css({
   padding: "0",
 });
+
+export const BetterDnd: React.FC<{
+  index: number;
+  type: string;
+  readonly?: boolean;
+  onDrag?(): void;
+  onDrop?(): void;
+  onMove?(dragIndex: number, hoverIndex: number): void;
+}> = (props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: props.type },
+    begin: () => {
+      props.onDrag?.();
+    },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
+  const [{ isOver }, drop] = useDrop({
+    accept: props.type,
+    drop: () => {
+      props.onDrop?.();
+    },
+    hover(item: any, monitor: DropTargetMonitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = props.index;
+
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+
+      // Get pixels to the top
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+
+      // Time to actually perform the action
+      props.onMove?.(dragIndex, hoverIndex);
+
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex;
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  });
+
+  drag(drop(ref));
+
+  return (
+    <div
+      ref={ref}
+      className={css({
+        opacity: isDragging ? 0 : 1,
+        position: "relative",
+      })}
+    >
+      <div ref={drop}>
+        {!props.readonly && (
+          <DragIndicatorIcon
+            className={css({
+              cursor: "move",
+              position: "absolute",
+              left: "-1.5rem",
+              top: "0.5rem",
+            })}
+          />
+        )}
+        {props.children}
+      </div>
+    </div>
+  );
+};
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
@@ -539,114 +645,88 @@ export const CharacterV3Dialog: React.FC<{
         >
           {section.fields.map((field, fieldIndex) => {
             return (
-              <Box key={fieldIndex} py=".5rem">
-                <Box pb=".5rem">
-                  <Grid
-                    container
-                    spacing={1}
-                    justify="space-between"
-                    wrap="nowrap"
-                  >
-                    <Grid item xs>
-                      <FateLabel display="inline">
-                        <ContentEditable
-                          readonly={!advanced}
-                          border={advanced}
-                          data-cy={`character-dialog.${section.label}.${field.label}.label`}
-                          value={field.label}
-                          onChange={(value) => {
-                            characterManager.actions.renameSectionField(
-                              sectionIndex,
-                              fieldIndex,
-                              value
-                            );
-                          }}
-                        />
-                      </FateLabel>
+              <BetterDnd
+                key={field.id}
+                index={fieldIndex}
+                type={section.label}
+                readonly={!advanced}
+                onMove={(dragIndex, hoverIndex) => {
+                  characterManager.actions.moveDnDSectionField(
+                    sectionIndex,
+                    dragIndex,
+                    hoverIndex
+                  );
+                }}
+              >
+                <Box key={fieldIndex} py=".5rem">
+                  <Box pb=".5rem">
+                    <Grid
+                      container
+                      spacing={1}
+                      justify="space-between"
+                      wrap="nowrap"
+                    >
+                      <Grid item xs>
+                        <FateLabel display="inline">
+                          <ContentEditable
+                            readonly={!advanced}
+                            border={advanced}
+                            data-cy={`character-dialog.${section.label}.${field.label}.label`}
+                            value={field.label}
+                            onChange={(value) => {
+                              characterManager.actions.renameSectionField(
+                                sectionIndex,
+                                fieldIndex,
+                                value
+                              );
+                            }}
+                          />
+                        </FateLabel>
+                      </Grid>
+                      {advanced && (
+                        <>
+                          <Grid item>
+                            <Tooltip
+                              title={t("character-dialog.control.remove-field")}
+                            >
+                              <IconButton
+                                data-cy={`character-dialog.${section.label}.${field.label}.remove`}
+                                size="small"
+                                className={smallIconButtonStyle}
+                                onClick={() => {
+                                  characterManager.actions.removeSectionField(
+                                    sectionIndex,
+                                    fieldIndex
+                                  );
+                                }}
+                              >
+                                <RemoveIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
+                        </>
+                      )}
                     </Grid>
-                    {advanced && (
-                      <>
-                        <Grid item>
-                          <Tooltip
-                            title={t("character-dialog.control.move-down")}
-                          >
-                            <IconButton
-                              data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
-                              size="small"
-                              className={smallIconButtonStyle}
-                              onClick={() => {
-                                characterManager.actions.moveSectionField(
-                                  sectionIndex,
-                                  fieldIndex,
-                                  "down"
-                                );
-                              }}
-                            >
-                              <ArrowDownwardIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                        <Grid item>
-                          <Tooltip
-                            title={t("character-dialog.control.move-up")}
-                          >
-                            <IconButton
-                              data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
-                              size="small"
-                              className={smallIconButtonStyle}
-                              onClick={() => {
-                                characterManager.actions.moveSectionField(
-                                  sectionIndex,
-                                  fieldIndex,
-                                  "up"
-                                );
-                              }}
-                            >
-                              <ArrowUpwardIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                        <Grid item>
-                          <Tooltip
-                            title={t("character-dialog.control.remove-field")}
-                          >
-                            <IconButton
-                              data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                              size="small"
-                              className={smallIconButtonStyle}
-                              onClick={() => {
-                                characterManager.actions.removeSectionField(
-                                  sectionIndex,
-                                  fieldIndex
-                                );
-                              }}
-                            >
-                              <RemoveIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                      </>
-                    )}
-                  </Grid>
+                  </Box>
+                  <Box>
+                    <Typography>
+                      <ContentEditable
+                        border
+                        data-cy={`character-dialog.${section.label}.${field.label}.value`}
+                        readonly={props.readonly}
+                        value={field.value}
+                        onChange={(value) => {
+                          characterManager.actions.setSectionFieldValue(
+                            sectionIndex,
+                            fieldIndex,
+                            value
+                          );
+                        }}
+                      />
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box>
-                  <Typography>
-                    <ContentEditable
-                      border
-                      data-cy={`character-dialog.${section.label}.${field.label}.value`}
-                      readonly={props.readonly}
-                      value={field.value}
-                      onChange={(value) => {
-                        characterManager.actions.setSectionFieldValue(
-                          sectionIndex,
-                          fieldIndex,
-                          value
-                        );
-                      }}
-                    />
-                  </Typography>
-                </Box>
-              </Box>
+              </BetterDnd>
             );
           })}
         </Box>
@@ -692,79 +772,163 @@ export const CharacterV3Dialog: React.FC<{
               </FateLabel>
             );
             return (
-              <Box py=".5rem" key={fieldIndex}>
-                <Grid container spacing={1} alignItems="flex-end" wrap="nowrap">
-                  <Grid item xs={1}>
-                    <FateLabel display="inline">{"•"}</FateLabel>
+              <BetterDnd
+                key={field.id}
+                index={fieldIndex}
+                type={section.label}
+                readonly={!advanced}
+                onMove={(dragIndex, hoverIndex) => {
+                  characterManager.actions.moveDnDSectionField(
+                    sectionIndex,
+                    dragIndex,
+                    hoverIndex
+                  );
+                }}
+              >
+                <Box py=".5rem">
+                  <Grid
+                    container
+                    spacing={1}
+                    alignItems="flex-end"
+                    wrap="nowrap"
+                  >
+                    <Grid item xs={1}>
+                      <FateLabel display="inline">{"•"}</FateLabel>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Typography align="center">
+                        <ContentEditable
+                          data-cy={`character-dialog.${section.label}.${field.label}.value`}
+                          border
+                          readonly={props.readonly}
+                          value={field.value}
+                          onChange={(value) => {
+                            characterManager.actions.setSectionFieldValue(
+                              sectionIndex,
+                              fieldIndex,
+                              value
+                            );
+                          }}
+                        />
+                      </Typography>
+                    </Grid>
+                    <Grid item className={css({ flex: "1 0 auto" })}>
+                      {advanced ? (
+                        skillLabel
+                      ) : (
+                        <ButtonBase>{skillLabel}</ButtonBase>
+                      )}
+                    </Grid>
+                    {advanced && (
+                      <>
+                        <Grid item>
+                          <Tooltip
+                            title={t("character-dialog.control.remove-field")}
+                          >
+                            <IconButton
+                              data-cy={`character-dialog.${section.label}.${field.label}.remove`}
+                              size="small"
+                              className={smallIconButtonStyle}
+                              onClick={() => {
+                                characterManager.actions.removeSectionField(
+                                  sectionIndex,
+                                  fieldIndex
+                                );
+                              }}
+                            >
+                              <RemoveIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
+                      </>
+                    )}
                   </Grid>
-                  <Grid item xs={2}>
-                    <Typography align="center">
+                </Box>
+              </BetterDnd>
+            );
+          })}
+        </Box>
+      </>
+    );
+  }
+  function renderCheckboxesFields(
+    sectionIndex: number,
+    section: ISection<CheckboxesFieldValue>
+  ) {
+    return (
+      <Box p=".5rem 1.5rem">
+        {section.fields.map((field, fieldIndex) => {
+          return (
+            <BetterDnd
+              key={field.id}
+              index={fieldIndex}
+              type={section.label}
+              readonly={!advanced}
+              onMove={(dragIndex, hoverIndex) => {
+                characterManager.actions.moveDnDSectionField(
+                  sectionIndex,
+                  dragIndex,
+                  hoverIndex
+                );
+              }}
+            >
+              <Box py=".5rem">
+                <Grid
+                  container
+                  justify="space-between"
+                  wrap="nowrap"
+                  spacing={1}
+                >
+                  <Grid item className={css({ flex: "1 1 auto" })}>
+                    <FateLabel display="inline">
                       <ContentEditable
-                        data-cy={`character-dialog.${section.label}.${field.label}.value`}
-                        border
-                        readonly={props.readonly}
-                        value={field.value}
+                        data-cy={`character-dialog.${section.label}.${field.label}.label`}
+                        readonly={!advanced}
+                        border={advanced}
+                        value={field.label}
                         onChange={(value) => {
-                          characterManager.actions.setSectionFieldValue(
+                          characterManager.actions.setSectionFieldLabel(
                             sectionIndex,
                             fieldIndex,
                             value
                           );
                         }}
                       />
-                    </Typography>
-                  </Grid>
-                  <Grid item className={css({ flex: "1 0 auto" })}>
-                    {advanced ? (
-                      skillLabel
-                    ) : (
-                      <ButtonBase>{skillLabel}</ButtonBase>
-                    )}
+                    </FateLabel>
                   </Grid>
                   {advanced && (
                     <>
-                      <Grid
-                        item
-                        className={css({
-                          marginLeft: "auto",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                        })}
-                      >
+                      <Grid item>
                         <Tooltip
-                          title={t("character-dialog.control.move-down")}
+                          title={t("character-dialog.control.remove-box")}
                         >
                           <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
                             size="small"
-                            className={smallIconButtonStyle}
+                            data-cy={`character-dialog.${section.label}.${field.label}.remove-box`}
                             onClick={() => {
-                              characterManager.actions.moveSectionField(
+                              characterManager.actions.removeCheckboxFieldValue(
                                 sectionIndex,
-                                fieldIndex,
-                                "down"
+                                fieldIndex
                               );
                             }}
                           >
-                            <ArrowDownwardIcon />
+                            <RemoveCircleOutlineIcon />
                           </IconButton>
                         </Tooltip>
                       </Grid>
                       <Grid item>
-                        <Tooltip title={t("character-dialog.control.move-up")}>
+                        <Tooltip title={t("character-dialog.control.add-box")}>
                           <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
+                            data-cy={`character-dialog.${section.label}.${field.label}.add-box`}
                             size="small"
-                            className={smallIconButtonStyle}
                             onClick={() => {
-                              characterManager.actions.moveSectionField(
+                              characterManager.actions.addCheckboxFieldValue(
                                 sectionIndex,
-                                fieldIndex,
-                                "up"
+                                fieldIndex
                               );
                             }}
                           >
-                            <ArrowUpwardIcon />
+                            <AddCircleOutlineIcon />
                           </IconButton>
                         </Tooltip>
                       </Grid>
@@ -775,7 +939,6 @@ export const CharacterV3Dialog: React.FC<{
                           <IconButton
                             data-cy={`character-dialog.${section.label}.${field.label}.remove`}
                             size="small"
-                            className={smallIconButtonStyle}
                             onClick={() => {
                               characterManager.actions.removeSectionField(
                                 sectionIndex,
@@ -790,14 +953,63 @@ export const CharacterV3Dialog: React.FC<{
                     </>
                   )}
                 </Grid>
+
+                <Grid container justify="flex-start" spacing={2}>
+                  {field.value.map((stressBox, boxIndex) => {
+                    return (
+                      <Grid item key={boxIndex}>
+                        <Box
+                          className={css({
+                            display: "flex",
+                            justifyContent: "center",
+                          })}
+                        >
+                          <Checkbox
+                            data-cy={`character-dialog.${section.label}.${field.label}.box.${boxIndex}.value`}
+                            color="default"
+                            size="small"
+                            checked={stressBox.checked}
+                            onChange={(event) => {
+                              if (props.readonly) {
+                                return;
+                              }
+                              characterManager.actions.toggleCheckboxFieldValue(
+                                sectionIndex,
+                                fieldIndex,
+                                boxIndex
+                              );
+                            }}
+                          />
+                        </Box>
+                        <Box>
+                          <FateLabel className={css({ textAlign: "center" })}>
+                            <ContentEditable
+                              data-cy={`character-dialog.${section.label}.${field.label}.box.${boxIndex}.label`}
+                              readonly={!advanced}
+                              border={advanced}
+                              value={stressBox.label}
+                              onChange={(value) => {
+                                characterManager.actions.renameCheckboxFieldValue(
+                                  sectionIndex,
+                                  fieldIndex,
+                                  boxIndex,
+                                  value
+                                );
+                              }}
+                            />
+                          </FateLabel>
+                        </Box>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
               </Box>
-            );
-          })}
-        </Box>
-      </>
+            </BetterDnd>
+          );
+        })}
+      </Box>
     );
   }
-
   function renderRefresh() {
     return (
       <>
@@ -863,182 +1075,6 @@ export const CharacterV3Dialog: React.FC<{
           </Grid>
         </Box>
       </>
-    );
-  }
-
-  function renderCheckboxesFields(
-    sectionIndex: number,
-    section: ISection<CheckboxesFieldValue>
-  ) {
-    return (
-      <Box p=".5rem 1.5rem">
-        {section.fields.map((field, fieldIndex) => {
-          return (
-            <Box pb=".5rem" key={fieldIndex}>
-              <Grid container justify="space-between" wrap="nowrap" spacing={1}>
-                <Grid item className={css({ flex: "1 1 auto" })}>
-                  <FateLabel display="inline">
-                    <ContentEditable
-                      data-cy={`character-dialog.${section.label}.${field.label}.label`}
-                      readonly={!advanced}
-                      border={advanced}
-                      value={field.label}
-                      onChange={(value) => {
-                        characterManager.actions.setSectionFieldLabel(
-                          sectionIndex,
-                          fieldIndex,
-                          value
-                        );
-                      }}
-                    />
-                  </FateLabel>
-                </Grid>
-                {advanced && (
-                  <>
-                    <Grid item>
-                      <Tooltip title={t("character-dialog.control.remove-box")}>
-                        <IconButton
-                          size="small"
-                          data-cy={`character-dialog.${section.label}.${field.label}.remove-box`}
-                          onClick={() => {
-                            characterManager.actions.removeCheckboxFieldValue(
-                              sectionIndex,
-                              fieldIndex
-                            );
-                          }}
-                        >
-                          <RemoveCircleOutlineIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Grid>
-                    <Grid item>
-                      <Tooltip title={t("character-dialog.control.add-box")}>
-                        <IconButton
-                          data-cy={`character-dialog.${section.label}.${field.label}.add-box`}
-                          size="small"
-                          onClick={() => {
-                            characterManager.actions.addCheckboxFieldValue(
-                              sectionIndex,
-                              fieldIndex
-                            );
-                          }}
-                        >
-                          <AddCircleOutlineIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Grid>
-                    <Grid item>
-                      {" "}
-                      <Tooltip title={t("character-dialog.control.move-down")}>
-                        <IconButton
-                          data-cy={`character-dialog.${section.label}.${field.label}.move-down`}
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.moveSectionField(
-                              sectionIndex,
-                              fieldIndex,
-                              "down"
-                            );
-                          }}
-                        >
-                          <ArrowDownwardIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Grid>
-                    <Grid item>
-                      <Tooltip title={t("character-dialog.control.move-up")}>
-                        <IconButton
-                          data-cy={`character-dialog.${section.label}.${field.label}.move-up`}
-                          size="small"
-                          className={smallIconButtonStyle}
-                          onClick={() => {
-                            characterManager.actions.moveSectionField(
-                              sectionIndex,
-                              fieldIndex,
-                              "up"
-                            );
-                          }}
-                        >
-                          <ArrowUpwardIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Grid>
-                    <Grid item>
-                      <Tooltip
-                        title={t("character-dialog.control.remove-field")}
-                      >
-                        <IconButton
-                          data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                          size="small"
-                          onClick={() => {
-                            characterManager.actions.removeSectionField(
-                              sectionIndex,
-                              fieldIndex
-                            );
-                          }}
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Grid>
-                  </>
-                )}
-              </Grid>
-
-              <Grid container justify="flex-start" spacing={2}>
-                {field.value.map((stressBox, boxIndex) => {
-                  return (
-                    <Grid item key={boxIndex}>
-                      <Box
-                        className={css({
-                          display: "flex",
-                          justifyContent: "center",
-                        })}
-                      >
-                        <Checkbox
-                          data-cy={`character-dialog.${section.label}.${field.label}.box.${boxIndex}.value`}
-                          color="default"
-                          size="small"
-                          checked={stressBox.checked}
-                          onChange={(event) => {
-                            if (props.readonly) {
-                              return;
-                            }
-                            characterManager.actions.toggleCheckboxFieldValue(
-                              sectionIndex,
-                              fieldIndex,
-                              boxIndex
-                            );
-                          }}
-                        />
-                      </Box>
-                      <Box>
-                        <FateLabel className={css({ textAlign: "center" })}>
-                          <ContentEditable
-                            data-cy={`character-dialog.${section.label}.${field.label}.box.${boxIndex}.label`}
-                            readonly={!advanced}
-                            border={advanced}
-                            value={stressBox.label}
-                            onChange={(value) => {
-                              characterManager.actions.renameCheckboxFieldValue(
-                                sectionIndex,
-                                fieldIndex,
-                                boxIndex,
-                                value
-                              );
-                            }}
-                          />
-                        </FateLabel>
-                      </Box>
-                    </Grid>
-                  );
-                })}
-              </Grid>
-            </Box>
-          );
-        })}
-      </Box>
     );
   }
 };

@@ -2,7 +2,6 @@ import produce from "immer";
 import isEqual from "lodash/isEqual";
 import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
@@ -19,6 +18,7 @@ import {
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { Id } from "../../domains/Id/Id";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -34,7 +34,7 @@ export function useScene(props: IProps) {
   const { userId, gameId, charactersManager } = props;
   const isGM = !gameId;
   const [scene, setScene] = useState<IScene>(() => ({
-    id: uuidV4(),
+    id: Id.get(),
     name: defaultSceneName,
     group: undefined,
     aspects: defaultSceneAspects,
@@ -74,6 +74,7 @@ export function useScene(props: IProps) {
       version: scene.version,
       lastUpdated: scene.lastUpdated,
     };
+    console.debug("diff", currentScene, sceneToLoad);
     return !isEqual(sceneToLoad, currentScene);
   }, [scene, sceneToLoad]);
 
@@ -147,7 +148,7 @@ export function useScene(props: IProps) {
   function cloneAndLoadNewScene(newScene: ISavableScene) {
     if (newScene) {
       const clonedNewScene = produce(newScene, (draft) => {
-        draft.id = uuidV4();
+        draft.id = Id.get();
       });
       loadScene(clonedNewScene, true);
       forceDirty();
@@ -197,7 +198,7 @@ export function useScene(props: IProps) {
   }
 
   function addAspect(type: AspectType) {
-    const id = uuidV4();
+    const id = Id.get();
     setScene(
       produce((draft: IScene) => {
         draft.aspects[id] = defaultAspects[type];
@@ -452,7 +453,7 @@ export function useScene(props: IProps) {
   }
 
   function addOfflinePlayer(playerName: string) {
-    const id = uuidV4();
+    const id = Id.get();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({
@@ -471,7 +472,7 @@ export function useScene(props: IProps) {
   }
 
   function addOfflineCharacter(character: ICharacter) {
-    const id = uuidV4();
+    const id = Id.get();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({

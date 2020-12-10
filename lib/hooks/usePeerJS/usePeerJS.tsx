@@ -1,7 +1,7 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { env } from "../../constants/env";
+import { Id } from "../../domains/Id/Id";
 
 /**
  * When running fariapp/fari-peer-server locally
@@ -35,7 +35,7 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
-    const id = uuidV4();
+    const id = Id.get();
     if (env.context === "localhost") {
       peer.current = new Peer(id, {
         path: "/peer/connect",

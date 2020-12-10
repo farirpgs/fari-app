@@ -12,6 +12,7 @@ import {
   SectionType,
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
+import { Id } from "../../../domains/Id/Id";
 
 export function useCharacter(characterFromProps?: ICharacter | undefined) {
   const [character, setCharacter] = useState<ICharacter | undefined>(
@@ -90,6 +91,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         const defaultField = DefaultFields[sectionType];
 
         draft.sections.push({
+          id: Id.get(),
           label: "Section",
           position: position,
           type: sectionType,
@@ -157,9 +159,10 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const type = draft.sections[sectionIndex].type;
         const defaultField = DefaultFields[type];
-        draft.sections[sectionIndex].fields.push(
-          (defaultField as unknown) as any
-        );
+        draft.sections[sectionIndex].fields.push({
+          id: Id.get(),
+          ...((defaultField as unknown) as any),
+        });
       })
     );
   }
@@ -195,6 +198,29 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           fieldIndex,
           direction
         );
+      })
+    );
+  }
+
+  function moveDnDSectionField(
+    sectionIndex: number,
+    dragIndex: number,
+    hoverIndex: number
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+
+        const dragItem = draft.sections[sectionIndex].fields[dragIndex];
+
+        draft.sections[sectionIndex].fields.splice(dragIndex, 1);
+        draft.sections[sectionIndex].fields.splice(hoverIndex, 0, dragItem);
       })
     );
   }
@@ -357,6 +383,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       addSectionField,
       renameSectionField,
       moveSectionField,
+      moveDnDSectionField,
       setSectionFieldValue,
       setSectionFieldLabel,
       removeSectionField,

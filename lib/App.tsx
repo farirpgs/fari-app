@@ -2,6 +2,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import * as Sentry from "@sentry/react";
 import React, { useContext } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./components/AppRouter/AppRouter";
@@ -29,14 +31,17 @@ export const App: React.FC<{}> = () => {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
+
   return (
-    <DarkModeContext.Provider value={darkModeManager}>
-      <CharactersContext.Provider value={charactersManager}>
-        <ScenesContext.Provider value={scenesManager}>
-          <AppProvider />
-        </ScenesContext.Provider>
-      </CharactersContext.Provider>
-    </DarkModeContext.Provider>
+    <DndProvider backend={HTML5Backend}>
+      <DarkModeContext.Provider value={darkModeManager}>
+        <CharactersContext.Provider value={charactersManager}>
+          <ScenesContext.Provider value={scenesManager}>
+            <AppProvider />
+          </ScenesContext.Provider>
+        </CharactersContext.Provider>
+      </DarkModeContext.Provider>
+    </DndProvider>
   );
 };
 App.displayName = "App";

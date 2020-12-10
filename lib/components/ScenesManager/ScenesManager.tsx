@@ -1,7 +1,6 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidV4 } from "uuid";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
@@ -9,6 +8,7 @@ import {
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
 import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -52,7 +52,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       fariType: "scene",
       onImport: (s) => {
         const sceneWithNewId = produce(s, (draft) => {
-          draft.id = uuidV4();
+          draft.id = Id.get();
         });
         const migratedScene = migrateScene(sceneWithNewId);
         scenesManager.actions.upsert(migratedScene);

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { v4 as uuidV4 } from "uuid";
+import { Id } from "../../domains/Id/Id";
 
 export function useUserId(): string {
   const [userId] = useState(() => {
-    return uuidV4();
+    return Id.get();
   });
   return userId;
 }

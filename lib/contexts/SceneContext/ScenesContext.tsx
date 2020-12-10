@@ -1,9 +1,9 @@
 import produce from "immer";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 
@@ -136,7 +136,7 @@ export function useScenes(props?: { localStorage: Storage }) {
 
 function makeDefaultSavableScene(): ISavableScene {
   return {
-    id: uuidV4(),
+    id: Id.get(),
     name: defaultSceneName,
     group: undefined,
     aspects: defaultSceneAspects,
