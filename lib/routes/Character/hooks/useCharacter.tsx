@@ -276,9 +276,12 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
+        const numberOfBoxes = (draft.sections[sectionIndex].fields[fieldIndex]
+          .value as CheckboxesFieldValue).length;
+
         (draft.sections[sectionIndex].fields[fieldIndex]
           .value as CheckboxesFieldValue).push({
-          label: "",
+          label: (numberOfBoxes + 1).toString(),
           checked: false,
         });
       })

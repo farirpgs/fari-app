@@ -456,7 +456,7 @@ export const DefaultFields: Record<SectionType, IField> = {
   [SectionType.Text]: { label: "Text", value: "" } as IField<string>,
   [SectionType.Number]: { label: "Text", value: "0" } as IField<string>,
   [SectionType.Checkboxes]: {
-    label: "Checkboxes",
+    label: "Text",
     value: [{ label: "1", checked: false }],
   } as IField<CheckboxesFieldValue>,
 };
