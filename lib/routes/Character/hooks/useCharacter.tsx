@@ -143,6 +143,19 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function toggleSectionVisibleOnCard(pageIndex: number, sectionIndex: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const oldValue =
+          draft.pages[pageIndex].sections[sectionIndex].visibleOnCard;
+        draft.pages[pageIndex].sections[sectionIndex].visibleOnCard = !oldValue;
+      })
+    );
+  }
+
   function repositionSection(
     pageIndex: number,
     sectionIndex: number,
@@ -454,6 +467,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       removePage,
       addSection,
       renameSection,
+      toggleSectionVisibleOnCard,
       moveSection,
       repositionSection,
       removeSection,

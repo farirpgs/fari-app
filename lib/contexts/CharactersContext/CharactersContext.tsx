@@ -73,7 +73,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }
 
   function add(type: CharacterType): ICharacter {
-    const defaultCharacter = defaultCharactersByType[type];
+    const defaultCharacter = makeCharacter(type);
     const newCharacter = {
       ...defaultCharacter,
       id: Id.get(),
@@ -468,6 +468,7 @@ export type ISection<T = any> = {
   position: Position;
   type: SectionType;
   fields: Array<IField<T>>;
+  visibleOnCard?: boolean;
 };
 
 export type CheckboxesFieldValue = Array<{
@@ -560,6 +561,7 @@ export function migrateV2Character(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.get(),
     label: v2.aspectsLabel ?? "Aspects",
+    visibleOnCard: true,
     position: Position.Left,
     type: SectionType.Text,
     fields: v2.aspects.map((a) => {
@@ -613,6 +615,7 @@ export function migrateV2Character(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.get(),
     label: v2.skillsLabel ?? "Skills",
+    visibleOnCard: true,
     position: Position.Right,
     type: SectionType.Number,
     fields: v2.skills.map((a) => {

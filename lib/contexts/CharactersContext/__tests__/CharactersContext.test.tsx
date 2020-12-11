@@ -49,7 +49,9 @@ describe("migrateCharacters", () => {
         // THEN
 
         expect(
-          result[0].sections.find((s) => s.label === "Stress")?.fields
+          result[0].pages
+            .flatMap((p) => p.sections)
+            .find((s) => s.label === "Stress")?.fields
         ).toEqual([
           {
             label: "Physical",

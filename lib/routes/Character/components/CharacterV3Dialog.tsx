@@ -37,6 +37,8 @@ import Filter1Icon from "@material-ui/icons/Filter1";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
+import StarIcon from "@material-ui/icons/Star";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -358,7 +360,7 @@ export const CharacterV3Dialog: React.FC<{
                                 characterManager.actions.removePage(pageIndex);
                               }}
                             >
-                              {"Remove Page"}
+                              {t("character-dialog.control.remove-page")}
                             </Button>
                           </ThemeProvider>
                         </Grid>
@@ -440,6 +442,13 @@ export const CharacterV3Dialog: React.FC<{
               <SheetHeader
                 label={section.label}
                 advanced={advanced}
+                visibleOnCard={section.visibleOnCard}
+                onToggleVisibleOnCard={() => {
+                  characterManager.actions.toggleSectionVisibleOnCard(
+                    pageIndex,
+                    sectionIndex
+                  );
+                }}
                 onLabelChange={(newLabel) => {
                   characterManager.actions.renameSection(
                     pageIndex,
@@ -884,7 +893,6 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     return (
       <Box p=".5rem 1.5rem">
-        console.debug('fieldid', field.id);
         {section.fields.map((field, fieldIndex) => {
           return (
             <BetterDnd
@@ -1200,6 +1208,8 @@ export const SheetHeader: React.FC<{
   onRemove?: () => void;
   onMoveUp?: () => void;
   onMoveDown?: () => void;
+  visibleOnCard?: boolean;
+  onToggleVisibleOnCard?: () => void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
@@ -1229,6 +1239,26 @@ export const SheetHeader: React.FC<{
             />
           </FateLabel>
         </Grid>
+        {props.advanced && props.onToggleVisibleOnCard && (
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.visible-on-card")}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.visible-on-card`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={() => {
+                  props.onToggleVisibleOnCard?.();
+                }}
+              >
+                {props.visibleOnCard ? (
+                  <StarIcon htmlColor={headerColor} />
+                ) : (
+                  <StarBorderIcon htmlColor={headerColor} />
+                )}
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
         {props.advanced && props.onMoveDown && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.move-down")}>

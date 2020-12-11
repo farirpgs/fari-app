@@ -14,6 +14,7 @@ import React from "react";
 import {
   ICharacter,
   ISection,
+  SectionType,
 } from "../../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../../../../domains/array/arraySort";
@@ -36,50 +37,44 @@ export const CharacterCard: React.FC<{
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
-  const aspectsSection = props.characterSheet?.sections.find(
-    (s) => s.label === "Aspects"
-  ) as ISection<string>;
-  const skillsSection = props.characterSheet?.sections.find(
-    (s) => s.label === "Skills"
-  ) as ISection<string>;
-
-  const aspects = aspectsSection.fields;
-  const skills = skillsSection.fields;
-
-  const skillsWithValue =
-    skills.filter((s) => {
-      return !!s.value;
-    }) ?? [];
-  const sortedSkills = arraySort(skillsWithValue, [
-    (skill) => {
-      const bonus = parseInt(skill.value) || 0;
-      return {
-        value: bonus,
-        direction: "desc",
-      };
-    },
-  ]);
-  const bestSkills = sortedSkills.slice(0, 6);
+  const sections = props.characterSheet?.pages.flatMap((p) => p.sections);
+  const visibleSections = sections?.filter((s) => s.visibleOnCard);
 
   if (!props.characterSheet) {
     return null;
   }
 
-  function renderSkills() {
-    if (bestSkills.length === 0) {
+  function renderNumberSection(section: ISection<string>) {
+    const fieldWithValues =
+      section.fields.filter((s) => {
+        return !!s.value;
+      }) ?? [];
+
+    const sortedFields = arraySort(fieldWithValues, [
+      (skill) => {
+        const bonus = parseInt(skill.value) || 0;
+        return {
+          value: bonus,
+          direction: "desc",
+        };
+      },
+    ]);
+    const bestFieldValues = sortedFields.slice(0, 6);
+
+    if (bestFieldValues.length === 0) {
       return null;
     }
     return (
       <Box py=".5rem" px="1rem">
         <Grid container spacing={1}>
           <Grid item xs={12}>
-            <FateLabel>{"Skills:"}</FateLabel>
+            <FateLabel>{section.label}</FateLabel>
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={1} alignItems="center">
-              {bestSkills.map((skill, skillIndex) => {
+              {bestFieldValues.map((field, fieldIndex) => {
                 return (
-                  <Grid item key={skillIndex}>
+                  <Grid item key={fieldIndex}>
                     <Link
                       className={css([
                         {
@@ -92,19 +87,19 @@ export const CharacterCard: React.FC<{
                           },
                         },
                       ])}
-                      data-cy={`character-card.skill.${skill.label}`}
+                      data-cy={`character-card.field.${field.label}`}
                       onClick={() => {
                         if (props.readonly) {
                           return;
                         }
-                        const bonus = parseInt(skill.value) || 0;
+                        const bonus = parseInt(field.value) || 0;
                         props.onRoll({
                           bonus: bonus,
-                          bonusLabel: skill.label,
+                          bonusLabel: field.label,
                         });
                       }}
                     >
-                      {skill.label} ({skill.value})
+                      {field.label} ({field.value})
                     </Link>
                   </Grid>
                 );
@@ -116,26 +111,26 @@ export const CharacterCard: React.FC<{
     );
   }
 
-  function renderAspects() {
+  function renderTextSection(section: ISection<string>) {
     return (
       <Box py=".5rem" px="1rem">
-        {aspects.map((aspect, aspectIndex) => {
-          const containsImage = aspect.value.includes("<img");
+        {section.fields.map((field, fieldIndex) => {
+          const containsImage = field.value.includes("<img");
           const value = containsImage
-            ? aspect.value
-            : truncate(aspect.value, { length: 50 });
+            ? field.value
+            : truncate(field.value, { length: 50 });
 
-          if (!aspect.value) {
+          if (!field.value) {
             return null;
           }
 
           return (
-            <Box key={aspectIndex} pb=".5rem">
+            <Box key={field.id} pb=".5rem">
               <Box>
-                <FateLabel>{aspect.label}</FateLabel>
+                <FateLabel>{field.label}</FateLabel>
               </Box>
               <Box>
-                <Typography title={aspect.value}>
+                <Typography title={field.value}>
                   <ContentEditable readonly={true} value={value} />
                 </Typography>
               </Box>
@@ -193,8 +188,14 @@ export const CharacterCard: React.FC<{
               </Grid>
             </Box>
           </Box>
-          {renderSkills()}
-          {renderAspects()}
+          {visibleSections?.map((s) => {
+            return (
+              <Box key={s.id}>
+                {s.type === SectionType.Text && renderTextSection(s)}
+                {s.type === SectionType.Number && renderNumberSection(s)}
+              </Box>
+            );
+          })}
         </Box>
       </Paper>
     </Box>
