@@ -28,6 +28,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     // load from local storage
     try {
       const localStorageCharacters = localStorage.getItem(key);
+      console.debug("localStorageCharacters", localStorageCharacters);
       if (localStorageCharacters) {
         const parsed = JSON.parse(localStorageCharacters);
         const migrated = migrateCharacters(parsed);
@@ -57,6 +58,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     try {
       const serialized = JSON.stringify(characters);
       localStorage.setItem(key, serialized);
+      console.debug("serialized", serialized);
     } catch (error) {
       console.error(error);
     }
@@ -73,12 +75,8 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }
 
   function add(type: CharacterType): ICharacter {
-    const defaultCharacter = makeCharacter(type);
-    const newCharacter = {
-      ...defaultCharacter,
-      id: Id.get(),
-      lastUpdated: getUnix(),
-    } as ICharacter;
+    const newCharacter = makeCharacter(type);
+
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
     });
@@ -167,6 +165,7 @@ export enum Position {
 function makeCondensedCharacter(): ICharacter {
   return {
     id: "",
+    version: 3,
     name: "",
     group: undefined,
     pages: [
@@ -176,6 +175,7 @@ function makeCondensedCharacter(): ICharacter {
           {
             id: Id.get(),
             label: "Aspects",
+            visibleOnCard: true,
             type: SectionType.Text,
             position: Position.Left,
             fields: [
@@ -244,6 +244,7 @@ function makeCondensedCharacter(): ICharacter {
           {
             id: Id.get(),
             label: "Skills",
+            visibleOnCard: true,
             type: SectionType.Number,
             position: Position.Right,
             fields: [
@@ -274,7 +275,7 @@ function makeCondensedCharacter(): ICharacter {
     refresh: 3,
     fatePoints: undefined,
     playedDuringTurn: undefined,
-    version: 2,
+
     lastUpdated: getUnix(),
   };
 }
@@ -282,6 +283,7 @@ function makeCondensedCharacter(): ICharacter {
 function makeAcceleratedCharacter(): ICharacter {
   return {
     id: "",
+    version: 3,
     name: "",
     group: undefined,
     pages: [
@@ -291,6 +293,7 @@ function makeAcceleratedCharacter(): ICharacter {
           {
             id: Id.get(),
             label: "Aspects",
+            visibleOnCard: true,
             type: SectionType.Text,
             position: Position.Left,
             fields: [
@@ -350,6 +353,7 @@ function makeAcceleratedCharacter(): ICharacter {
           {
             id: Id.get(),
             label: "Skills",
+            visibleOnCard: true,
             type: SectionType.Number,
             position: Position.Right,
             fields: [
@@ -367,7 +371,7 @@ function makeAcceleratedCharacter(): ICharacter {
     refresh: 3,
     fatePoints: undefined,
     playedDuringTurn: undefined,
-    version: 2,
+
     lastUpdated: getUnix(),
   };
 }
@@ -375,6 +379,7 @@ function makeAcceleratedCharacter(): ICharacter {
 function makeCustomCharacter(): ICharacter {
   return {
     id: "",
+    version: 3,
     name: "",
     group: undefined,
     pages: [
@@ -386,17 +391,23 @@ function makeCustomCharacter(): ICharacter {
     refresh: 3,
     fatePoints: undefined,
     playedDuringTurn: undefined,
-    version: 2,
+
     lastUpdated: getUnix(),
   };
 }
 
 export function makeCharacter(type: CharacterType) {
+  const newCharacter = {
+    [CharacterType.CoreCondensed]: makeCondensedCharacter,
+    [CharacterType.Accelerated]: makeAcceleratedCharacter,
+    [CharacterType.Custom]: makeCustomCharacter,
+  }[type]();
+
   return {
-    [CharacterType.CoreCondensed]: makeCondensedCharacter(),
-    [CharacterType.Accelerated]: makeAcceleratedCharacter(),
-    [CharacterType.Custom]: makeCustomCharacter(),
-  }[type];
+    ...newCharacter,
+    id: Id.get(),
+    lastUpdated: getUnix(),
+  };
 }
 
 export interface IV1Character {

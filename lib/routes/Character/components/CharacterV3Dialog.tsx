@@ -279,7 +279,6 @@ export const CharacterV3Dialog: React.FC<{
               borderBottom: advanced
                 ? "none"
                 : `2px solid ${headerBackgroundColors.primary}`,
-              padding: page.sections.length === 0 ? "1rem 0" : "inherit",
             });
             return (
               <Box key={page.id} position="relative" mb="3rem">
@@ -308,7 +307,7 @@ export const CharacterV3Dialog: React.FC<{
                           borderRight: `2px solid ${headerBackgroundColors.primary}`,
                         })}
                       >
-                        <AddSectionField
+                        <AddSection
                           onAddSection={(sectionType) => {
                             characterManager.actions.addSection(
                               pageIndex,
@@ -330,7 +329,7 @@ export const CharacterV3Dialog: React.FC<{
                           borderRight: `2px solid ${headerBackgroundColors.primary}`,
                         })}
                       >
-                        <AddSectionField
+                        <AddSection
                           onAddSection={(sectionType) => {
                             characterManager.actions.addSection(
                               pageIndex,
@@ -342,7 +341,7 @@ export const CharacterV3Dialog: React.FC<{
                       </Grid>
                     </Grid>
                     <Box
-                      py=".5rem"
+                      py="1rem"
                       className={css({
                         borderBottom: `2px solid ${headerBackgroundColors.primary}`,
                         borderLeft: `2px solid ${headerBackgroundColors.primary}`,
@@ -1132,7 +1131,7 @@ export const CharacterV3Dialog: React.FC<{
 };
 CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
-export const AddSectionField: React.FC<{
+export const AddSection: React.FC<{
   onAddSection(section: SectionType): void;
 }> = (props) => {
   const theme = useTheme();
@@ -1141,7 +1140,7 @@ export const AddSectionField: React.FC<{
   const [addSectionAnchorEl, setAddSectionAnchorEl] = React.useState<any>();
 
   return (
-    <Box p=".5rem" mb=".5rem" justifyContent="center" display="flex">
+    <Box p="1rem" justifyContent="center" display="flex">
       <ThemeProvider theme={blackButtonTheme}>
         <Button
           color="primary"
@@ -1199,7 +1198,7 @@ export const AddSectionField: React.FC<{
     </Box>
   );
 };
-AddSectionField.displayName = "AddSectionField";
+AddSection.displayName = "AddSection";
 
 export const SheetHeader: React.FC<{
   label: string;

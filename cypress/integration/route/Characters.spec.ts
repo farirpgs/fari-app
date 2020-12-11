@@ -113,7 +113,7 @@ describe("/characters", () => {
       Fari.get("character-dialog.close").click();
 
       // character card roll skill
-      Fari.get("character-card.skill.Athletics").click();
+      Fari.get("character-card.Skills.label.Athletics").click();
       Fari.get("scene.player-row.1")
         .find('[data-cy="dice"]')
         .invoke("attr", "data-cy-value")
@@ -153,7 +153,7 @@ describe("/characters", () => {
     });
   });
 
-  describe.only("Given I want to customize my character sheet", () => {
+  describe("Given I want to customize my character sheet", () => {
     it("should let me do it using the advanced mode", () => {
       Fari.start();
       cy.visit("/");
@@ -272,25 +272,11 @@ describe("/characters", () => {
         .type("#Stunt #3");
       Fari.get("character-dialog.refresh").clear().type("4");
 
-      // move up, move down, remove
-      Fari.get("character-dialog.Aspects.#High Concept.move-up").click();
-      Fari.get("character-dialog.Aspects.#High Concept.move-down").click();
+      // remove
       Fari.get("character-dialog.Aspects.#High Concept.remove").click();
-
-      Fari.get("character-dialog.Stunts & Extras.#Stunt #1.move-up").click();
-      Fari.get("character-dialog.Stunts & Extras.#Stunt #1.move-down").click();
       Fari.get("character-dialog.Stunts & Extras.#Stunt #1.remove").click();
-
-      Fari.get("character-dialog.Consequences.#Mild.move-up").click();
-      Fari.get("character-dialog.Consequences.#Moderate.move-down").click();
       Fari.get("character-dialog.Consequences.#Severe.remove").click();
-
-      Fari.get("character-dialog.Skills.#Academics.move-up").click();
-      Fari.get("character-dialog.Skills.#Academics.move-down").click();
       Fari.get("character-dialog.Skills.#Academics.remove").click();
-
-      Fari.get("character-dialog.Stress.#Physical.move-up").click();
-      Fari.get("character-dialog.Stress.#Physical.move-down").click();
       Fari.get("character-dialog.Stress.#Physical.remove").click();
 
       Fari.get("character-dialog.Stress.#Mental.add-box").click();

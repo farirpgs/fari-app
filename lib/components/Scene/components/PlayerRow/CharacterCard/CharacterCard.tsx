@@ -87,7 +87,7 @@ export const CharacterCard: React.FC<{
                           },
                         },
                       ])}
-                      data-cy={`character-card.field.${field.label}`}
+                      data-cy={`character-card.${section.label}.label.${field.label}`}
                       onClick={() => {
                         if (props.readonly) {
                           return;
