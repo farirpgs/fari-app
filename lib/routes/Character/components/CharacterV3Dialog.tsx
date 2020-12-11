@@ -10,6 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -23,6 +24,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
@@ -30,7 +32,7 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Filter1Icon from "@material-ui/icons/Filter1";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
@@ -38,8 +40,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, { useContext, useRef, useState } from "react";
-import { DropTargetMonitor, useDrag, useDrop, XYCoord } from "react-dnd";
+import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { DiceBox } from "../../../components/DiceBox/DiceBox";
@@ -50,6 +51,7 @@ import {
   CharacterType,
   CheckboxesFieldValue,
   ICharacter,
+  IPage,
   ISection,
   Position,
   SectionType,
@@ -63,114 +65,11 @@ import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
+import { BetterDnd } from "./BetterDnd";
 
 const smallIconButtonStyle = css({
   padding: "0",
 });
-
-export const BetterDnd: React.FC<{
-  index: number;
-  type: string;
-  readonly?: boolean;
-  onDrag?(): void;
-  onDrop?(): void;
-  onMove?(dragIndex: number, hoverIndex: number): void;
-}> = (props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: props.type },
-    begin: () => {
-      props.onDrag?.();
-    },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  });
-
-  const [{ isOver }, drop] = useDrop({
-    accept: props.type,
-    drop: () => {
-      props.onDrop?.();
-    },
-    hover(item: any, monitor: DropTargetMonitor) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
-      const hoverIndex = props.index;
-
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Determine rectangle on screen
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
-      // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-
-      // Get pixels to the top
-      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
-
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-
-      // Time to actually perform the action
-      props.onMove?.(dragIndex, hoverIndex);
-
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
-      item.index = hoverIndex;
-    },
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  });
-
-  drag(drop(ref));
-
-  return (
-    <div
-      ref={ref}
-      className={css({
-        opacity: isDragging ? 0 : 1,
-        position: "relative",
-      })}
-    >
-      <div ref={drop}>
-        {!props.readonly && (
-          <DragIndicatorIcon
-            className={css({
-              cursor: "move",
-              position: "absolute",
-              left: "-1.5rem",
-              top: "0.5rem",
-            })}
-          />
-        )}
-        {props.children}
-      </div>
-    </div>
-  );
-};
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
@@ -193,12 +92,9 @@ export const CharacterV3Dialog: React.FC<{
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const sheetHeader = css({
-    background: headerBackgroundColors.primary,
-    color: headerColor,
-    width: "100%",
-    padding: ".5rem 1.5rem",
-  });
+  const blackButtonTheme = useButtonTheme(theme.palette.text.primary);
+
+  const errorTheme = useButtonTheme(theme.palette.error.main);
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
@@ -298,7 +194,9 @@ export const CharacterV3Dialog: React.FC<{
           </DialogTitle>
           <DialogContent className={css({ padding: "0" })} dividers>
             <Container maxWidth="md">
-              <Box className={sheetContentStyle}>{renderContent()}</Box>
+              <Box className={sheetContentStyle}>
+                {renderPages(characterManager.state.character.pages)}
+              </Box>
             </Container>
           </DialogContent>
           <DialogActions className={css({ padding: "0" })}>
@@ -315,7 +213,9 @@ export const CharacterV3Dialog: React.FC<{
         <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
         <Box className={sheetContentStyle}>{renderActions()}</Box>
         <Box className={sheetContentStyle}>{renderName()}</Box>
-        <Box className={sheetContentStyle}>{renderContent()}</Box>
+        <Box className={sheetContentStyle}>
+          {renderPages(characterManager.state.character?.pages)}
+        </Box>
       </Container>
     );
   }
@@ -365,7 +265,166 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
+  function renderPages(pages: Array<IPage> | undefined) {
+    return (
+      <Box>
+        <Box>
+          {pages?.map((page, pageIndex) => {
+            const sectionStyle = css({
+              borderTop: `2px solid ${headerBackgroundColors.primary}`,
+              borderLeft: `2px solid ${headerBackgroundColors.primary}`,
+              borderRight: `2px solid ${headerBackgroundColors.primary}`,
+              borderBottom: advanced
+                ? "none"
+                : `2px solid ${headerBackgroundColors.primary}`,
+              padding: page.sections.length === 0 ? "1rem 0" : "inherit",
+            });
+            return (
+              <Box key={page.id} position="relative" mb="3rem">
+                <Grid container>
+                  <Grid item xs={12} md={6} className={sectionStyle}>
+                    {renderSections(pageIndex, page.sections, Position.Left)}
+                    {renderDice(pageIndex)}
+                    {renderRefresh(pageIndex)}
+                  </Grid>
+                  <Grid item xs={12} md={6} className={sectionStyle}>
+                    {renderSections(pageIndex, page.sections, Position.Right)}
+                  </Grid>
+                </Grid>
+                <Collapse in={advanced}>
+                  <Box>
+                    <Grid container>
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        md={6}
+                        justify="center"
+                        className={css({
+                          borderBottom: `2px solid ${headerBackgroundColors.primary}`,
+                          borderLeft: `2px solid ${headerBackgroundColors.primary}`,
+                          borderRight: `2px solid ${headerBackgroundColors.primary}`,
+                        })}
+                      >
+                        <AddSectionField
+                          onAddSection={(sectionType) => {
+                            characterManager.actions.addSection(
+                              pageIndex,
+                              sectionType,
+                              Position.Left
+                            );
+                          }}
+                        />
+                      </Grid>
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        md={6}
+                        justify="center"
+                        className={css({
+                          borderBottom: `2px solid ${headerBackgroundColors.primary}`,
+                          borderLeft: `2px solid ${headerBackgroundColors.primary}`,
+                          borderRight: `2px solid ${headerBackgroundColors.primary}`,
+                        })}
+                      >
+                        <AddSectionField
+                          onAddSection={(sectionType) => {
+                            characterManager.actions.addSection(
+                              pageIndex,
+                              sectionType,
+                              Position.Right
+                            );
+                          }}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Box
+                      py=".5rem"
+                      className={css({
+                        borderBottom: `2px solid ${headerBackgroundColors.primary}`,
+                        borderLeft: `2px solid ${headerBackgroundColors.primary}`,
+                        borderRight: `2px solid ${headerBackgroundColors.primary}`,
+                      })}
+                    >
+                      <Grid container>
+                        <Grid item container xs={12} justify="center">
+                          <ThemeProvider theme={errorTheme}>
+                            <Button
+                              variant="outlined"
+                              color="primary"
+                              endIcon={<DeleteIcon />}
+                              onClick={() => {
+                                characterManager.actions.removePage(pageIndex);
+                              }}
+                            >
+                              {"Remove Page"}
+                            </Button>
+                          </ThemeProvider>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  </Box>
+                </Collapse>
+                {renderAddPage(pageIndex)}
+              </Box>
+            );
+          })}
+        </Box>
+
+        {characterManager.state.character?.pages.length === 0 &&
+          renderAddPage(0)}
+
+        <Grid container justify="center">
+          <Grid item>
+            <Box pt=".5rem">
+              <Typography>{date.format("lll")}</Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
+
+  function renderAddPage(pageIndex: number) {
+    return (
+      <Collapse in={advanced}>
+        <Box pt="2rem">
+          <Grid
+            container
+            justify="space-around"
+            alignItems="center"
+            spacing={2}
+            wrap="nowrap"
+          >
+            <Grid item xs>
+              <Divider orientation="horizontal" />
+            </Grid>
+            <Grid item>
+              <ThemeProvider theme={blackButtonTheme}>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  endIcon={<AddIcon />}
+                  onClick={(e) => {
+                    characterManager.actions.addPage(pageIndex);
+                  }}
+                >
+                  {t("character-dialog.control.add-page")}
+                </Button>
+              </ThemeProvider>
+            </Grid>
+            <Grid item xs>
+              <Divider orientation="horizontal" />
+            </Grid>
+          </Grid>
+        </Box>
+      </Collapse>
+    );
+  }
+
   function renderSections(
+    pageIndex: number,
     sections: Array<ISection> | undefined,
     position: Position
   ) {
@@ -375,34 +434,47 @@ export const CharacterV3Dialog: React.FC<{
           if (section.position !== position) {
             return null;
           }
+
           return (
-            <Box key={sectionIndex}>
+            <Box key={section.id}>
               <SheetHeader
                 label={section.label}
                 advanced={advanced}
                 onLabelChange={(newLabel) => {
                   characterManager.actions.renameSection(
+                    pageIndex,
                     sectionIndex,
                     newLabel
                   );
                 }}
                 onMoveDown={() => {
-                  characterManager.actions.moveSection(sectionIndex, "down");
+                  characterManager.actions.moveSection(
+                    pageIndex,
+                    sectionIndex,
+                    "down"
+                  );
                 }}
                 onMoveUp={() => {
-                  characterManager.actions.moveSection(sectionIndex, "up");
+                  characterManager.actions.moveSection(
+                    pageIndex,
+                    sectionIndex,
+                    "up"
+                  );
                 }}
                 onRemove={() => {
-                  characterManager.actions.removeSection(sectionIndex);
+                  characterManager.actions.removeSection(
+                    pageIndex,
+                    sectionIndex
+                  );
                 }}
               />
 
               {section.type === SectionType.Text &&
-                renderTextFields(sectionIndex, section)}
+                renderTextFields(pageIndex, sectionIndex, section)}
               {section.type === SectionType.Number &&
-                renderNumberFields(sectionIndex, section)}
+                renderNumberFields(pageIndex, sectionIndex, section)}
               {section.type === SectionType.Checkboxes &&
-                renderCheckboxesFields(sectionIndex, section)}
+                renderCheckboxesFields(pageIndex, sectionIndex, section)}
               <Collapse in={advanced}>
                 <Box
                   p=".5rem"
@@ -414,8 +486,12 @@ export const CharacterV3Dialog: React.FC<{
                     color="default"
                     data-cy={`character-dialog.${section.label}.add-section-field`}
                     variant="outlined"
+                    endIcon={<AddIcon />}
                     onClick={() => {
-                      characterManager.actions.addSectionField(sectionIndex);
+                      characterManager.actions.addSectionField(
+                        pageIndex,
+                        sectionIndex
+                      );
                     }}
                   >
                     {t("character-dialog.control.add-field")}
@@ -426,74 +502,6 @@ export const CharacterV3Dialog: React.FC<{
           );
         })}
       </>
-    );
-  }
-
-  function renderContent() {
-    return (
-      <Box>
-        <Grid container>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            className={css({
-              border: `2px solid ${headerBackgroundColors.primary}`,
-            })}
-          >
-            {renderSections(
-              characterManager.state.character?.sections,
-              Position.Left
-            )}
-            {renderDice()}
-            {renderRefresh()}
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            className={css({
-              border: `2px solid ${headerBackgroundColors.primary}`,
-            })}
-          >
-            {renderSections(
-              characterManager.state.character?.sections,
-              Position.Right
-            )}
-          </Grid>
-        </Grid>
-        <Collapse in={advanced}>
-          <Grid container justify="space-around">
-            <Grid item>
-              <AddSectionField
-                onAddSection={(sectionType) => {
-                  characterManager.actions.addSection(
-                    sectionType,
-                    Position.Left
-                  );
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <AddSectionField
-                onAddSection={(sectionType) => {
-                  characterManager.actions.addSection(
-                    sectionType,
-                    Position.Right
-                  );
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Collapse>
-        <Grid container justify="center">
-          <Grid item>
-            <Box pt=".5rem">
-              <Typography>{date.format("lll")}</Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
     );
   }
 
@@ -635,7 +643,11 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderTextFields(sectionIndex: number, section: ISection<string>) {
+  function renderTextFields(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection<string>
+  ) {
     return (
       <>
         <Box
@@ -652,13 +664,14 @@ export const CharacterV3Dialog: React.FC<{
                 readonly={!advanced}
                 onMove={(dragIndex, hoverIndex) => {
                   characterManager.actions.moveDnDSectionField(
+                    pageIndex,
                     sectionIndex,
                     dragIndex,
                     hoverIndex
                   );
                 }}
               >
-                <Box key={fieldIndex} py=".5rem">
+                <Box py=".5rem">
                   <Box pb=".5rem">
                     <Grid
                       container
@@ -675,6 +688,7 @@ export const CharacterV3Dialog: React.FC<{
                             value={field.label}
                             onChange={(value) => {
                               characterManager.actions.renameSectionField(
+                                pageIndex,
                                 sectionIndex,
                                 fieldIndex,
                                 value
@@ -695,6 +709,7 @@ export const CharacterV3Dialog: React.FC<{
                                 className={smallIconButtonStyle}
                                 onClick={() => {
                                   characterManager.actions.removeSectionField(
+                                    pageIndex,
                                     sectionIndex,
                                     fieldIndex
                                   );
@@ -717,6 +732,7 @@ export const CharacterV3Dialog: React.FC<{
                         value={field.value}
                         onChange={(value) => {
                           characterManager.actions.setSectionFieldValue(
+                            pageIndex,
                             sectionIndex,
                             fieldIndex,
                             value
@@ -734,7 +750,11 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderNumberFields(sectionIndex: number, section: ISection<string>) {
+  function renderNumberFields(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection<string>
+  ) {
     return (
       <>
         <Box
@@ -763,6 +783,7 @@ export const CharacterV3Dialog: React.FC<{
                   }}
                   onChange={(value) => {
                     characterManager.actions.setSectionFieldLabel(
+                      pageIndex,
                       sectionIndex,
                       fieldIndex,
                       value
@@ -771,6 +792,7 @@ export const CharacterV3Dialog: React.FC<{
                 />
               </FateLabel>
             );
+            console.debug("fieldid", field.id);
             return (
               <BetterDnd
                 key={field.id}
@@ -779,6 +801,7 @@ export const CharacterV3Dialog: React.FC<{
                 readonly={!advanced}
                 onMove={(dragIndex, hoverIndex) => {
                   characterManager.actions.moveDnDSectionField(
+                    pageIndex,
                     sectionIndex,
                     dragIndex,
                     hoverIndex
@@ -804,6 +827,7 @@ export const CharacterV3Dialog: React.FC<{
                           value={field.value}
                           onChange={(value) => {
                             characterManager.actions.setSectionFieldValue(
+                              pageIndex,
                               sectionIndex,
                               fieldIndex,
                               value
@@ -831,6 +855,7 @@ export const CharacterV3Dialog: React.FC<{
                               className={smallIconButtonStyle}
                               onClick={() => {
                                 characterManager.actions.removeSectionField(
+                                  pageIndex,
                                   sectionIndex,
                                   fieldIndex
                                 );
@@ -851,12 +876,15 @@ export const CharacterV3Dialog: React.FC<{
       </>
     );
   }
+
   function renderCheckboxesFields(
+    pageIndex: number,
     sectionIndex: number,
     section: ISection<CheckboxesFieldValue>
   ) {
     return (
       <Box p=".5rem 1.5rem">
+        console.debug('fieldid', field.id);
         {section.fields.map((field, fieldIndex) => {
           return (
             <BetterDnd
@@ -866,6 +894,7 @@ export const CharacterV3Dialog: React.FC<{
               readonly={!advanced}
               onMove={(dragIndex, hoverIndex) => {
                 characterManager.actions.moveDnDSectionField(
+                  pageIndex,
                   sectionIndex,
                   dragIndex,
                   hoverIndex
@@ -888,6 +917,7 @@ export const CharacterV3Dialog: React.FC<{
                         value={field.label}
                         onChange={(value) => {
                           characterManager.actions.setSectionFieldLabel(
+                            pageIndex,
                             sectionIndex,
                             fieldIndex,
                             value
@@ -907,6 +937,7 @@ export const CharacterV3Dialog: React.FC<{
                             data-cy={`character-dialog.${section.label}.${field.label}.remove-box`}
                             onClick={() => {
                               characterManager.actions.removeCheckboxFieldValue(
+                                pageIndex,
                                 sectionIndex,
                                 fieldIndex
                               );
@@ -923,6 +954,7 @@ export const CharacterV3Dialog: React.FC<{
                             size="small"
                             onClick={() => {
                               characterManager.actions.addCheckboxFieldValue(
+                                pageIndex,
                                 sectionIndex,
                                 fieldIndex
                               );
@@ -941,6 +973,7 @@ export const CharacterV3Dialog: React.FC<{
                             size="small"
                             onClick={() => {
                               characterManager.actions.removeSectionField(
+                                pageIndex,
                                 sectionIndex,
                                 fieldIndex
                               );
@@ -974,6 +1007,7 @@ export const CharacterV3Dialog: React.FC<{
                                 return;
                               }
                               characterManager.actions.toggleCheckboxFieldValue(
+                                pageIndex,
                                 sectionIndex,
                                 fieldIndex,
                                 boxIndex
@@ -990,6 +1024,7 @@ export const CharacterV3Dialog: React.FC<{
                               value={stressBox.label}
                               onChange={(value) => {
                                 characterManager.actions.renameCheckboxFieldValue(
+                                  pageIndex,
                                   sectionIndex,
                                   fieldIndex,
                                   boxIndex,
@@ -1010,7 +1045,12 @@ export const CharacterV3Dialog: React.FC<{
       </Box>
     );
   }
-  function renderRefresh() {
+
+  function renderRefresh(pageIndex: number) {
+    if (pageIndex !== 0) {
+      return null;
+    }
+
     return (
       <>
         <SheetHeader
@@ -1051,7 +1091,11 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderDice() {
+  function renderDice(pageIndex: number) {
+    if (pageIndex !== 0) {
+      return null;
+    }
+
     return (
       <>
         <SheetHeader label={t("character-dialog.dice")} advanced={advanced} />
@@ -1094,6 +1138,7 @@ export const AddSectionField: React.FC<{
         <Button
           color="primary"
           variant="contained"
+          endIcon={<AddIcon />}
           onClick={(e) => {
             setAddSectionAnchorEl(e.currentTarget);
           }}

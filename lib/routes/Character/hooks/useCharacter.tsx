@@ -5,9 +5,9 @@ import { sanitizeContentEditable } from "../../../components/ContentEditable/Con
 import {
   CharacterType,
   CheckboxesFieldValue,
-  defaultCharactersByType,
-  DefaultFields,
   ICharacter,
+  makeCharacter,
+  makeField,
   Position,
   SectionType,
 } from "../../../contexts/CharactersContext/CharactersContext";
@@ -48,7 +48,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const oldId = draft.id;
         const oldName = draft.name;
-        const defaultCharacter = defaultCharactersByType[type];
+        const defaultCharacter = makeCharacter(type);
 
         return {
           ...defaultCharacter,
@@ -82,55 +82,94 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addSection(sectionType: SectionType, position: Position) {
+  function addPage(pageIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const defaultField = DefaultFields[sectionType];
-
-        draft.sections.push({
+        draft.pages.splice(pageIndex + 1, 0, {
           id: Id.get(),
-          label: "Section",
-          position: position,
-          type: sectionType,
-          fields: [defaultField],
+          sections: [],
         });
       })
     );
   }
 
-  function renameSection(sectionIndex: number, label: string) {
+  function removePage(pageIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].label = label;
+        draft.pages = draft.pages.filter((p, index) => index !== pageIndex);
       })
     );
   }
 
-  function repositionSection(sectionIndex: number, position: Position) {
+  function addSection(
+    pageIndex: number,
+    sectionType: SectionType,
+    position: Position
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].position = position;
+        draft.pages[pageIndex].sections.push({
+          id: Id.get(),
+          label: "Section",
+          position: position,
+          type: sectionType,
+          fields: [makeField(sectionType)],
+        });
       })
     );
   }
 
-  function moveSection(sectionIndex: number, direction: "up" | "down") {
+  function renameSection(
+    pageIndex: number,
+    sectionIndex: number,
+    label: string
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.sections = moveValueInList(
-          draft.sections,
+        draft.pages[pageIndex].sections[sectionIndex].label = label;
+      })
+    );
+  }
+
+  function repositionSection(
+    pageIndex: number,
+    sectionIndex: number,
+    position: Position
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[pageIndex].sections[sectionIndex].position = position;
+      })
+    );
+  }
+
+  function moveSection(
+    pageIndex: number,
+    sectionIndex: number,
+    direction: "up" | "down"
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[pageIndex].sections = moveValueInList(
+          draft.pages[pageIndex].sections,
           sectionIndex,
           direction
         );
@@ -138,36 +177,37 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function removeSection(sectionIndex: number) {
+  function removeSection(pageIndex: number, sectionIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.sections = draft.sections.filter((a, index) => {
+        draft.pages[pageIndex].sections = draft.pages[
+          pageIndex
+        ].sections.filter((a, index) => {
           return index !== sectionIndex;
         });
       })
     );
   }
 
-  function addSectionField(sectionIndex: number) {
+  function addSectionField(pageIndex: number, sectionIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const type = draft.sections[sectionIndex].type;
-        const defaultField = DefaultFields[type];
-        draft.sections[sectionIndex].fields.push({
-          id: Id.get(),
-          ...((defaultField as unknown) as any),
-        });
+        const type = draft.pages[pageIndex].sections[sectionIndex].type;
+        draft.pages[pageIndex].sections[sectionIndex].fields.push(
+          makeField(type)
+        );
       })
     );
   }
 
   function renameSectionField(
+    pageIndex: number,
     sectionIndex: number,
     fieldIndex: number,
     label: string
@@ -177,12 +217,15 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].fields[fieldIndex].label = label;
+        draft.pages[pageIndex].sections[sectionIndex].fields[
+          fieldIndex
+        ].label = label;
       })
     );
   }
 
   function moveSectionField(
+    pageIndex: number,
     sectionIndex: number,
     fieldIndex: number,
 
@@ -193,8 +236,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].fields = moveValueInList(
-          draft.sections[sectionIndex].fields,
+        draft.pages[pageIndex].sections[sectionIndex].fields = moveValueInList(
+          draft.pages[pageIndex].sections[sectionIndex].fields,
           fieldIndex,
           direction
         );
@@ -203,6 +246,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   }
 
   function moveDnDSectionField(
+    pageIndex: number,
     sectionIndex: number,
     dragIndex: number,
     hoverIndex: number
@@ -217,15 +261,24 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
 
-        const dragItem = draft.sections[sectionIndex].fields[dragIndex];
+        const dragItem =
+          draft.pages[pageIndex].sections[sectionIndex].fields[dragIndex];
 
-        draft.sections[sectionIndex].fields.splice(dragIndex, 1);
-        draft.sections[sectionIndex].fields.splice(hoverIndex, 0, dragItem);
+        draft.pages[pageIndex].sections[sectionIndex].fields.splice(
+          dragIndex,
+          1
+        );
+        draft.pages[pageIndex].sections[sectionIndex].fields.splice(
+          hoverIndex,
+          0,
+          dragItem
+        );
       })
     );
   }
 
   function setSectionFieldLabel(
+    pageIndex: number,
     sectionIndex: number,
     fieldIndex: number,
     label: any
@@ -235,12 +288,15 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].fields[fieldIndex].label = label;
+        draft.pages[pageIndex].sections[sectionIndex].fields[
+          fieldIndex
+        ].label = label;
       })
     );
   }
 
   function setSectionFieldValue(
+    pageIndex: number,
     sectionIndex: number,
     fieldIndex: number,
     value: any
@@ -250,36 +306,46 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].fields[fieldIndex].value = value;
+        draft.pages[pageIndex].sections[sectionIndex].fields[
+          fieldIndex
+        ].value = value;
       })
     );
   }
 
-  function removeSectionField(sectionIndex: number, fieldIndex: number) {
+  function removeSectionField(
+    pageIndex: number,
+    sectionIndex: number,
+    fieldIndex: number
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].fields = draft.sections[
-          sectionIndex
-        ].fields.filter((field, index) => {
+        draft.pages[pageIndex].sections[sectionIndex].fields = draft.pages[
+          pageIndex
+        ].sections[sectionIndex].fields.filter((field, index) => {
           return index !== fieldIndex;
         });
       })
     );
   }
 
-  function addCheckboxFieldValue(sectionIndex: number, fieldIndex: number) {
+  function addCheckboxFieldValue(
+    pageIndex: number,
+    sectionIndex: number,
+    fieldIndex: number
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const numberOfBoxes = (draft.sections[sectionIndex].fields[fieldIndex]
-          .value as CheckboxesFieldValue).length;
+        const numberOfBoxes = (draft.pages[pageIndex].sections[sectionIndex]
+          .fields[fieldIndex].value as CheckboxesFieldValue).length;
 
-        (draft.sections[sectionIndex].fields[fieldIndex]
+        (draft.pages[pageIndex].sections[sectionIndex].fields[fieldIndex]
           .value as CheckboxesFieldValue).push({
           label: (numberOfBoxes + 1).toString(),
           checked: false,
@@ -288,24 +354,29 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function removeCheckboxFieldValue(sectionIndex: number, fieldIndex: number) {
+  function removeCheckboxFieldValue(
+    pageIndex: number,
+    sectionIndex: number,
+    fieldIndex: number
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.sections[sectionIndex].fields[fieldIndex].value = (draft.sections[
-          sectionIndex
-        ].fields[fieldIndex].value as CheckboxesFieldValue).filter(
-          (box, boxIndex, boxes) => {
-            return boxIndex !== boxes.length - 1;
-          }
-        );
+        draft.pages[pageIndex].sections[sectionIndex].fields[
+          fieldIndex
+        ].value = (draft.pages[pageIndex].sections[sectionIndex].fields[
+          fieldIndex
+        ].value as CheckboxesFieldValue).filter((box, boxIndex, boxes) => {
+          return boxIndex !== boxes.length - 1;
+        });
       })
     );
   }
 
   function toggleCheckboxFieldValue(
+    pageIndex: number,
     sectionIndex: number,
     fieldIndex: number,
     boxIndexToToggle: number
@@ -315,10 +386,10 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        const currentValue = (draft.sections[sectionIndex].fields[fieldIndex]
-          .value as CheckboxesFieldValue)[boxIndexToToggle];
+        const currentValue = (draft.pages[pageIndex].sections[sectionIndex]
+          .fields[fieldIndex].value as CheckboxesFieldValue)[boxIndexToToggle];
 
-        (draft.sections[sectionIndex].fields[fieldIndex]
+        (draft.pages[pageIndex].sections[sectionIndex].fields[fieldIndex]
           .value as CheckboxesFieldValue)[boxIndexToToggle] = {
           label: currentValue.label,
           checked: !currentValue.checked,
@@ -328,6 +399,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   }
 
   function renameCheckboxFieldValue(
+    pageIndex: number,
     sectionIndex: number,
     fieldIndex: number,
     boxIndexToRename: number,
@@ -338,10 +410,10 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        const currentValue = (draft.sections[sectionIndex].fields[fieldIndex]
-          .value as CheckboxesFieldValue)[boxIndexToRename];
+        const currentValue = (draft.pages[pageIndex].sections[sectionIndex]
+          .fields[fieldIndex].value as CheckboxesFieldValue)[boxIndexToRename];
 
-        (draft.sections[sectionIndex].fields[fieldIndex]
+        (draft.pages[pageIndex].sections[sectionIndex].fields[fieldIndex]
           .value as CheckboxesFieldValue)[boxIndexToRename] = {
           label: label,
           checked: currentValue.checked,
@@ -378,6 +450,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       loadTemplate,
       setName,
       setGroup,
+      addPage,
+      removePage,
       addSection,
       renameSection,
       moveSection,

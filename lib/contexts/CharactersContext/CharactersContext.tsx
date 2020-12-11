@@ -164,217 +164,240 @@ export enum Position {
   Right,
 }
 
-const defaultCondensedCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  sections: [
-    {
-      id: Id.get(),
-      label: "Aspects",
-      type: SectionType.Text,
-      position: Position.Left,
-      fields: [
-        { id: Id.get(), label: "High Concept", value: "" },
-        { id: Id.get(), label: "Trouble", value: "" },
-        { id: Id.get(), label: "Relationship", value: "" },
-        { id: Id.get(), label: "Other Aspect", value: "" },
-        { id: Id.get(), label: "Other Aspect", value: "" },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Stunts & Extras",
-      type: SectionType.Text,
-      position: Position.Left,
-      fields: [
-        { id: Id.get(), label: "Stunt #1", value: "" },
-        { id: Id.get(), label: "Stunt #2", value: "" },
-        { id: Id.get(), label: "Stunt #3", value: "" },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Other",
-      type: SectionType.Text,
-      position: Position.Left,
-      fields: [{ id: Id.get(), label: "Notes", value: "" }],
-    },
-    {
-      id: Id.get(),
-      label: "Stress",
-      type: SectionType.Checkboxes,
-      position: Position.Right,
-      fields: [
-        {
-          id: Id.get(),
-          label: "Physical",
-          value: [
-            { checked: false, id: Id.get(), label: "1" },
-            { checked: false, id: Id.get(), label: "2" },
-            { checked: false, id: Id.get(), label: "3" },
-          ],
-        },
-        {
-          id: Id.get(),
-          label: "Mental",
-          value: [
-            { checked: false, id: Id.get(), label: "1" },
-            { checked: false, id: Id.get(), label: "2" },
-            { checked: false, id: Id.get(), label: "3" },
-          ],
-        },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Consequences",
-      type: SectionType.Text,
-      position: Position.Right,
-      fields: [
-        { id: Id.get(), label: "Mild", value: "" },
-        { id: Id.get(), label: "Moderate", value: "" },
-        { id: Id.get(), label: "Severe", value: "" },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Skills",
-      type: SectionType.Number,
-      position: Position.Right,
-      fields: [
-        { id: Id.get(), label: "Academics", value: "" },
-        { id: Id.get(), label: "Athletics", value: "" },
-        { id: Id.get(), label: "Burglary", value: "" },
-        { id: Id.get(), label: "Contacts", value: "" },
-        { id: Id.get(), label: "Crafts", value: "" },
-        { id: Id.get(), label: "Deceive", value: "" },
-        { id: Id.get(), label: "Drive", value: "" },
-        { id: Id.get(), label: "Empathy", value: "" },
-        { id: Id.get(), label: "Fight", value: "" },
-        { id: Id.get(), label: "Investigate", value: "" },
-        { id: Id.get(), label: "Lore", value: "" },
-        { id: Id.get(), label: "Notice", value: "" },
-        { id: Id.get(), label: "Physique", value: "" },
-        { id: Id.get(), label: "Provoke", value: "" },
-        { id: Id.get(), label: "Rapport", value: "" },
-        { id: Id.get(), label: "Resources", value: "" },
-        { id: Id.get(), label: "Shoot", value: "" },
-        { id: Id.get(), label: "Stealth", value: "" },
-        { id: Id.get(), label: "Will", value: "" },
-      ],
-    },
-  ],
-  refresh: 3,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
+function makeCondensedCharacter(): ICharacter {
+  return {
+    id: "",
+    name: "",
+    group: undefined,
+    pages: [
+      {
+        id: Id.get(),
+        sections: [
+          {
+            id: Id.get(),
+            label: "Aspects",
+            type: SectionType.Text,
+            position: Position.Left,
+            fields: [
+              { id: Id.get(), label: "High Concept", value: "" },
+              { id: Id.get(), label: "Trouble", value: "" },
+              { id: Id.get(), label: "Relationship", value: "" },
+              { id: Id.get(), label: "Other Aspect", value: "" },
+              { id: Id.get(), label: "Other Aspect", value: "" },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Stunts & Extras",
+            type: SectionType.Text,
+            position: Position.Left,
+            fields: [
+              { id: Id.get(), label: "Stunt #1", value: "" },
+              { id: Id.get(), label: "Stunt #2", value: "" },
+              { id: Id.get(), label: "Stunt #3", value: "" },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Other",
+            type: SectionType.Text,
+            position: Position.Left,
+            fields: [{ id: Id.get(), label: "Notes", value: "" }],
+          },
+          {
+            id: Id.get(),
+            label: "Stress",
+            type: SectionType.Checkboxes,
+            position: Position.Right,
+            fields: [
+              {
+                id: Id.get(),
+                label: "Physical",
+                value: [
+                  { checked: false, id: Id.get(), label: "1" },
+                  { checked: false, id: Id.get(), label: "2" },
+                  { checked: false, id: Id.get(), label: "3" },
+                ],
+              },
+              {
+                id: Id.get(),
+                label: "Mental",
+                value: [
+                  { checked: false, id: Id.get(), label: "1" },
+                  { checked: false, id: Id.get(), label: "2" },
+                  { checked: false, id: Id.get(), label: "3" },
+                ],
+              },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Consequences",
+            type: SectionType.Text,
+            position: Position.Right,
+            fields: [
+              { id: Id.get(), label: "Mild", value: "" },
+              { id: Id.get(), label: "Moderate", value: "" },
+              { id: Id.get(), label: "Severe", value: "" },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Skills",
+            type: SectionType.Number,
+            position: Position.Right,
+            fields: [
+              { id: Id.get(), label: "Academics", value: "" },
+              { id: Id.get(), label: "Athletics", value: "" },
+              { id: Id.get(), label: "Burglary", value: "" },
+              { id: Id.get(), label: "Contacts", value: "" },
+              { id: Id.get(), label: "Crafts", value: "" },
+              { id: Id.get(), label: "Deceive", value: "" },
+              { id: Id.get(), label: "Drive", value: "" },
+              { id: Id.get(), label: "Empathy", value: "" },
+              { id: Id.get(), label: "Fight", value: "" },
+              { id: Id.get(), label: "Investigate", value: "" },
+              { id: Id.get(), label: "Lore", value: "" },
+              { id: Id.get(), label: "Notice", value: "" },
+              { id: Id.get(), label: "Physique", value: "" },
+              { id: Id.get(), label: "Provoke", value: "" },
+              { id: Id.get(), label: "Rapport", value: "" },
+              { id: Id.get(), label: "Resources", value: "" },
+              { id: Id.get(), label: "Shoot", value: "" },
+              { id: Id.get(), label: "Stealth", value: "" },
+              { id: Id.get(), label: "Will", value: "" },
+            ],
+          },
+        ],
+      },
+    ],
+    refresh: 3,
+    fatePoints: undefined,
+    playedDuringTurn: undefined,
+    version: 2,
+    lastUpdated: getUnix(),
+  };
+}
 
-const defaultAcceleratedCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  sections: [
-    {
-      id: Id.get(),
-      label: "Aspects",
-      type: SectionType.Text,
-      position: Position.Left,
-      fields: [
-        { id: Id.get(), label: "High Concept", value: "" },
-        { id: Id.get(), label: "Trouble", value: "" },
-        { id: Id.get(), label: "Relationship", value: "" },
-        { id: Id.get(), label: "Other Aspect", value: "" },
-        { id: Id.get(), label: "Other Aspect", value: "" },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Stunts & Extras",
-      type: SectionType.Text,
-      position: Position.Left,
-      fields: [
-        { id: Id.get(), label: "Stunt #1", value: "" },
-        { id: Id.get(), label: "Stunt #2", value: "" },
-        { id: Id.get(), label: "Stunt #3", value: "" },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Other",
-      type: SectionType.Text,
-      position: Position.Left,
-      fields: [{ id: Id.get(), label: "Notes", value: "" }],
-    },
-    {
-      id: Id.get(),
-      label: "Stress",
-      type: SectionType.Checkboxes,
-      position: Position.Right,
-      fields: [
-        {
-          id: Id.get(),
-          label: "Stress",
-          value: [
-            { checked: false, id: Id.get(), label: "1" },
-            { checked: false, id: Id.get(), label: "2" },
-            { checked: false, id: Id.get(), label: "3" },
-          ],
-        },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Consequences",
-      type: SectionType.Text,
-      position: Position.Right,
-      fields: [
-        { id: Id.get(), label: "Mild", value: "" },
-        { id: Id.get(), label: "Moderate", value: "" },
-        { id: Id.get(), label: "Severe", value: "" },
-      ],
-    },
-    {
-      id: Id.get(),
-      label: "Skills",
-      type: SectionType.Number,
-      position: Position.Right,
-      fields: [
-        { id: Id.get(), label: "Careful", value: "" },
-        { id: Id.get(), label: "Clever", value: "" },
-        { id: Id.get(), label: "Forceful", value: "" },
-        { id: Id.get(), label: "Flashy", value: "" },
-        { id: Id.get(), label: "Quick", value: "" },
-        { id: Id.get(), label: "Sneaky", value: "" },
-      ],
-    },
-  ],
-  refresh: 3,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
+function makeAcceleratedCharacter(): ICharacter {
+  return {
+    id: "",
+    name: "",
+    group: undefined,
+    pages: [
+      {
+        id: Id.get(),
+        sections: [
+          {
+            id: Id.get(),
+            label: "Aspects",
+            type: SectionType.Text,
+            position: Position.Left,
+            fields: [
+              { id: Id.get(), label: "High Concept", value: "" },
+              { id: Id.get(), label: "Trouble", value: "" },
+              { id: Id.get(), label: "Relationship", value: "" },
+              { id: Id.get(), label: "Other Aspect", value: "" },
+              { id: Id.get(), label: "Other Aspect", value: "" },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Stunts & Extras",
+            type: SectionType.Text,
+            position: Position.Left,
+            fields: [
+              { id: Id.get(), label: "Stunt #1", value: "" },
+              { id: Id.get(), label: "Stunt #2", value: "" },
+              { id: Id.get(), label: "Stunt #3", value: "" },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Other",
+            type: SectionType.Text,
+            position: Position.Left,
+            fields: [{ id: Id.get(), label: "Notes", value: "" }],
+          },
+          {
+            id: Id.get(),
+            label: "Stress",
+            type: SectionType.Checkboxes,
+            position: Position.Right,
+            fields: [
+              {
+                id: Id.get(),
+                label: "Stress",
+                value: [
+                  { checked: false, id: Id.get(), label: "1" },
+                  { checked: false, id: Id.get(), label: "2" },
+                  { checked: false, id: Id.get(), label: "3" },
+                ],
+              },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Consequences",
+            type: SectionType.Text,
+            position: Position.Right,
+            fields: [
+              { id: Id.get(), label: "Mild", value: "" },
+              { id: Id.get(), label: "Moderate", value: "" },
+              { id: Id.get(), label: "Severe", value: "" },
+            ],
+          },
+          {
+            id: Id.get(),
+            label: "Skills",
+            type: SectionType.Number,
+            position: Position.Right,
+            fields: [
+              { id: Id.get(), label: "Careful", value: "" },
+              { id: Id.get(), label: "Clever", value: "" },
+              { id: Id.get(), label: "Forceful", value: "" },
+              { id: Id.get(), label: "Flashy", value: "" },
+              { id: Id.get(), label: "Quick", value: "" },
+              { id: Id.get(), label: "Sneaky", value: "" },
+            ],
+          },
+        ],
+      },
+    ],
+    refresh: 3,
+    fatePoints: undefined,
+    playedDuringTurn: undefined,
+    version: 2,
+    lastUpdated: getUnix(),
+  };
+}
 
-const defaultCustomCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  sections: [],
-  refresh: 3,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
+function makeCustomCharacter(): ICharacter {
+  return {
+    id: "",
+    name: "",
+    group: undefined,
+    pages: [
+      {
+        id: Id.get(),
+        sections: [],
+      },
+    ],
+    refresh: 3,
+    fatePoints: undefined,
+    playedDuringTurn: undefined,
+    version: 2,
+    lastUpdated: getUnix(),
+  };
+}
 
-export const defaultCharactersByType = {
-  [CharacterType.CoreCondensed]: defaultCondensedCharacter,
-  [CharacterType.Accelerated]: defaultAcceleratedCharacter,
-  [CharacterType.Custom]: defaultCustomCharacter,
-} as const;
+export function makeCharacter(type: CharacterType) {
+  return {
+    [CharacterType.CoreCondensed]: makeCondensedCharacter(),
+    [CharacterType.Accelerated]: makeAcceleratedCharacter(),
+    [CharacterType.Custom]: makeCustomCharacter(),
+  }[type];
+}
 
 export interface IV1Character {
   id: string;
@@ -452,21 +475,40 @@ export type CheckboxesFieldValue = Array<{
   checked?: boolean;
 }>;
 
-export const DefaultFields: Record<SectionType, IField> = {
-  [SectionType.Text]: { label: "Text", value: "" } as IField<string>,
-  [SectionType.Number]: { label: "Text", value: "0" } as IField<string>,
-  [SectionType.Checkboxes]: {
-    label: "Text",
-    value: [{ label: "1", checked: false }],
-  } as IField<CheckboxesFieldValue>,
-};
+export function makeField(type: SectionType) {
+  const fieldDefault: Record<SectionType, IField> = {
+    [SectionType.Text]: {
+      id: Id.get(),
+      label: "Text",
+      value: "",
+    } as IField<string>,
+    [SectionType.Number]: {
+      id: Id.get(),
+      label: "Text",
+      value: "0",
+    } as IField<string>,
+    [SectionType.Checkboxes]: {
+      id: Id.get(),
+      label: "Text",
+      value: [{ label: "1", checked: false }],
+    } as IField<CheckboxesFieldValue>,
+  };
+
+  return fieldDefault[type];
+}
+
+export interface IPage {
+  id: string;
+  sections: Array<ISection>;
+}
 
 export interface ICharacter {
   id: string;
   name: string;
   group: string | undefined;
   refresh: number;
-  sections: Array<ISection>;
+
+  pages: Array<IPage>;
 
   // hidden
   version: number;
@@ -583,7 +625,12 @@ export function migrateV2Character(v2: IV2Character): ICharacter {
     name: v2.name,
     group: v2.group,
     lastUpdated: v2.lastUpdated,
-    sections: sections,
+    pages: [
+      {
+        id: Id.get(),
+        sections: sections,
+      },
+    ],
     fatePoints: v2.fatePoints,
     playedDuringTurn: v2.playedDuringTurn,
     refresh: v2.refresh,
