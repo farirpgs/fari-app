@@ -801,7 +801,7 @@ export const CharacterV3Dialog: React.FC<{
                 />
               </FateLabel>
             );
-            console.debug("fieldid", field.id);
+
             return (
               <BetterDnd
                 key={field.id}

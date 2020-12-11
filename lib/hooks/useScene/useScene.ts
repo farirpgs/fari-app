@@ -74,7 +74,7 @@ export function useScene(props: IProps) {
       version: scene.version,
       lastUpdated: scene.lastUpdated,
     };
-    console.debug("diff", currentScene, sceneToLoad);
+
     return !isEqual(sceneToLoad, currentScene);
   }, [scene, sceneToLoad]);
 

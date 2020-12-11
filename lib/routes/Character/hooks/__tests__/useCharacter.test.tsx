@@ -1,8 +1,8 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import {
   CharacterType,
-  defaultCharactersByType,
   ICharacter,
+  makeCharacter,
 } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useCharacter } from "../useCharacter";
 
@@ -10,7 +10,7 @@ describe("useCharacter", () => {
   describe("refresh", () => {
     // GIVEN
     const character = {
-      ...defaultCharactersByType[CharacterType.CoreCondensed],
+      ...makeCharacter(CharacterType.CoreCondensed),
       id: "1",
       lastUpdated: 1,
     };
@@ -35,7 +35,7 @@ describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
     // GIVEN
     const character = {
-      ...defaultCharactersByType[CharacterType.CoreCondensed],
+      ...makeCharacter(CharacterType.CoreCondensed),
       id: "1",
       lastUpdated: 1,
     };
@@ -202,7 +202,7 @@ describe("useCharacter", () => {
     it("should load the new template but keep the id and the name as is", () => {
       // GIVEN
       const character = {
-        ...defaultCharactersByType[CharacterType.CoreCondensed],
+        ...makeCharacter(CharacterType.CoreCondensed),
         id: "1",
         name: "Luke Skywalker",
         lastUpdated: 1,
@@ -227,46 +227,182 @@ describe("useCharacter", () => {
         character.lastUpdated
       );
 
+      // id: "1", // kept ID
+      // name: "Luke Skywalker", // kept name
       expect(result.current.state.character).toEqual({
-        id: "1", // kept ID
-        name: "Luke Skywalker", // kept name
-        aspects: [
-          { name: "High Concept", value: "" },
-          { name: "Trouble", value: "" },
-          { name: "Relationship", value: "" },
-          { name: "Other Aspect", value: "" },
-          { name: "Other Aspect", value: "" },
-        ],
-        consequences: [
-          { name: "Mild", value: "" },
-          { name: "Moderate", value: "" },
-          { name: "Severe", value: "" },
-        ],
+        fatePoints: undefined,
+        group: undefined,
+        id: "1",
         lastUpdated: expect.anything(),
-        refresh: 3,
-        skills: [
-          { name: "Careful", value: "" },
-          { name: "Clever", value: "" },
-          { name: "Forceful", value: "" },
-          { name: "Flashy", value: "" },
-          { name: "Quick", value: "" },
-          { name: "Sneaky", value: "" },
-        ],
-        stressTracks: [
+        name: "Luke Skywalker",
+        pages: [
           {
-            name: "Stress",
-            value: [
-              { checked: false, label: "1" },
-              { checked: false, label: "2" },
-              { checked: false, label: "3" },
+            id: expect.anything(),
+            sections: [
+              {
+                fields: [
+                  {
+                    id: expect.anything(),
+                    label: "High Concept",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Trouble",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Relationship",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Other Aspect",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Other Aspect",
+                    value: "",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Aspects",
+                position: 0,
+                type: 0,
+              },
+              {
+                fields: [
+                  {
+                    id: expect.anything(),
+                    label: "Stunt #1",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Stunt #2",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Stunt #3",
+                    value: "",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Stunts & Extras",
+                position: 0,
+                type: 0,
+              },
+              {
+                fields: [
+                  {
+                    id: expect.anything(),
+                    label: "Notes",
+                    value: "",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Other",
+                position: 0,
+                type: 0,
+              },
+              {
+                fields: [
+                  {
+                    id: expect.anything(),
+                    label: "Stress",
+                    value: [
+                      {
+                        checked: false,
+                        id: expect.anything(),
+                        label: "1",
+                      },
+                      {
+                        checked: false,
+                        id: expect.anything(),
+                        label: "2",
+                      },
+                      {
+                        checked: false,
+                        id: expect.anything(),
+                        label: "3",
+                      },
+                    ],
+                  },
+                ],
+                id: expect.anything(),
+                label: "Stress",
+                position: 1,
+                type: 2,
+              },
+              {
+                fields: [
+                  {
+                    id: expect.anything(),
+                    label: "Mild",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Moderate",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Severe",
+                    value: "",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Consequences",
+                position: 1,
+                type: 0,
+              },
+              {
+                fields: [
+                  {
+                    id: expect.anything(),
+                    label: "Careful",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Clever",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Forceful",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Flashy",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Quick",
+                    value: "",
+                  },
+                  {
+                    id: expect.anything(),
+                    label: "Sneaky",
+                    value: "",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Skills",
+                position: 1,
+                type: 1,
+              },
             ],
           },
         ],
-        stunts: [
-          { name: "Stunt #1", value: "" },
-          { name: "Stunt #2", value: "" },
-          { name: "Stunt #3", value: "" },
-        ],
+        playedDuringTurn: undefined,
+        refresh: 3,
         version: 2,
       });
     });
