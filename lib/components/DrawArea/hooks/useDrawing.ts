@@ -119,7 +119,12 @@ export function useDrawing(props: {
 
     pointerEvent.preventDefault();
     pointerEvent.stopPropagation();
-    $container.current?.setPointerCapture(pointerEvent.pointerId);
+
+    try {
+      $container.current?.setPointerCapture(pointerEvent.pointerId);
+    } catch (error) {
+      // ignore
+    }
 
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (!newPoint) {
@@ -238,7 +243,12 @@ export function useDrawing(props: {
 
     if (validPointerTypes.includes(pointerEvent.pointerType)) {
       setDrawing(false);
-      $container.current?.releasePointerCapture(pointerEvent.pointerId);
+
+      try {
+        $container.current?.releasePointerCapture(pointerEvent.pointerId);
+      } catch (error) {
+        // ignore
+      }
     }
   }
 

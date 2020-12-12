@@ -1,5 +1,6 @@
 import MagicGrid from "magic-grid";
 import React, { useEffect, useRef } from "react";
+import { useMounted } from "../../hooks/useMounted/useMounted";
 
 const DefaultMagicGridGutter = 0;
 const MagicGridUpdateDebounceMS = 200;
@@ -9,6 +10,7 @@ export const MagicGridContainer: React.FC<{
   gutterPx?: number;
   deps: Array<any>;
 }> = (props) => {
+  const isMounted = useMounted();
   const $gridContainer = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -25,7 +27,9 @@ export const MagicGridContainer: React.FC<{
       magicGrid.current.positionItems();
 
       setTimeout(() => {
-        magicGrid.current?.positionItems();
+        if (isMounted) {
+          magicGrid.current?.positionItems();
+        }
       });
 
       window.addEventListener("resize", resize);
