@@ -25,6 +25,7 @@
 
 - fix: disable setAspectDrawArea to stop default isDirty on scene load
 - fix: add try-catch on useDrawing setPointerCapture for unsupported browsers
+- fix: only reposition index card if component is mounted
 
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
