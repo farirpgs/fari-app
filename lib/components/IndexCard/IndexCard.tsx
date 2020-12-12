@@ -90,6 +90,9 @@ export const IndexCard: React.FC<
             <DrawArea
               objects={aspect!.drawAreaObjects}
               onChange={(objects) => {
+                if (!aspect.hasDrawArea) {
+                  return;
+                }
                 props.sceneManager.actions.setAspectDrawAreaObjects(
                   props.aspectId,
                   objects
