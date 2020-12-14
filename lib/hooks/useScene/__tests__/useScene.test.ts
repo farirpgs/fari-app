@@ -1,5 +1,9 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import Peer from "peerjs";
+import {
+  ILineObject,
+  ObjectType,
+} from "../../../components/DrawArea/hooks/useDrawing";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { AspectType } from "../AspectType";
@@ -16,6 +20,7 @@ fdescribe("useScene", () => {
     const expectDefaultScene: IScene = {
       id: expect.anything(),
       name: "",
+      group: undefined,
       aspects: {},
       gm: {
         id: "111",
@@ -23,12 +28,14 @@ fdescribe("useScene", () => {
         rolls: [],
         playedDuringTurn: false,
         fatePoints: 3,
+        offline: false,
+        isGM: true,
       },
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
       sort: false,
-      drawAreaLines: [],
+      drawAreaObjects: [],
       version: 1,
       lastUpdated: expect.anything(),
     };
@@ -69,6 +76,7 @@ fdescribe("useScene", () => {
       // GIVEN
       const sceneToLoad = {
         id: "new-id",
+        group: undefined,
         aspects: { "aspect-id": { toto: 3 } as any },
         lastUpdated: 111,
         name: "new name",
@@ -76,20 +84,22 @@ fdescribe("useScene", () => {
       };
       // WHEN
       act(() => {
-        result.current.actions.loadScene(sceneToLoad);
+        result.current.actions.loadScene(sceneToLoad, true);
       });
 
       // THEN
       expect(result.current.state.scene).toEqual({
         aspects: { "aspect-id": { toto: 3 } },
         badConfetti: 0,
-        drawAreaLines: [],
+        drawAreaObjects: [],
         gm: {
           fatePoints: 3,
           id: "111",
           playedDuringTurn: false,
           playerName: "Game Master",
           rolls: [],
+          offline: false,
+          isGM: true,
         },
         goodConfetti: 0,
         id: "new-id",
@@ -110,7 +120,7 @@ fdescribe("useScene", () => {
 
       // WHEN reload the same scene
       act(() => {
-        result.current.actions.loadScene(sceneToLoad);
+        result.current.actions.loadScene(sceneToLoad, true);
       });
 
       // THEN dirty is false
@@ -125,13 +135,17 @@ fdescribe("useScene", () => {
 
       // WHEN reload
       act(() => {
-        result.current.actions.loadScene({
-          id: "new-id",
-          aspects: { "aspect-id": { toto: 3 } as any },
-          lastUpdated: 111,
-          name: "new name",
-          version: 3,
-        });
+        result.current.actions.loadScene(
+          {
+            id: "new-id",
+            group: undefined,
+            aspects: { "aspect-id": { toto: 3 } as any },
+            lastUpdated: 111,
+            name: "new name",
+            version: 3,
+          },
+          true
+        );
       });
       // THEN dirty is false
       expect(result.current.state.dirty).toEqual(false);
@@ -191,7 +205,9 @@ fdescribe("useScene", () => {
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        pinned: false,
         title: "",
+        hasDrawArea: false,
         type: 0,
       });
       act(() => {
@@ -390,9 +406,11 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
+        hasDrawArea: false,
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        pinned: false,
         title: "",
         type: AspectType.Aspect,
       });
@@ -438,6 +456,7 @@ fdescribe("useScene", () => {
         fatePoints: 3,
         id: "1",
         playedDuringTurn: false,
+        offline: false,
         playerName: "RP",
         rolls: [],
       });
@@ -459,6 +478,7 @@ fdescribe("useScene", () => {
         fatePoints: 1,
         id: "1",
         playedDuringTurn: true,
+        offline: false,
         playerName: "RP",
         rolls: [
           {
@@ -477,6 +497,7 @@ fdescribe("useScene", () => {
         fatePoints: 1,
         id: "1",
         playedDuringTurn: false,
+        offline: false,
         playerName: "RP",
         rolls: [
           {
@@ -510,6 +531,7 @@ fdescribe("useScene", () => {
         fatePoints: 1,
         id: "1",
         playedDuringTurn: false,
+        offline: false,
         playerName: "RP",
         rolls: [
           {
@@ -523,6 +545,7 @@ fdescribe("useScene", () => {
         fatePoints: 15,
         id: "2",
         playedDuringTurn: false,
+        offline: false,
         playerName: undefined,
         rolls: [],
       });
@@ -573,16 +596,16 @@ fdescribe("useScene", () => {
         charactersManager,
       });
     });
-    expect(result.current.state.scene.drawAreaLines).toEqual([]);
+    expect(result.current.state.scene.drawAreaObjects).toEqual([]);
     // WHEN drawing
     act(() => {
-      result.current.actions.updateDrawAreaLines([
-        [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
+      result.current.actions.updateDrawAreaObjects([
+        { color: "", points: [], type: ObjectType.Line } as ILineObject,
       ]);
     });
     // THEN
-    expect(result.current.state.scene.drawAreaLines).toEqual([
-      [{ x: 0, y: 0, percentX: 0, percentY: 0 }],
+    expect(result.current.state.scene.drawAreaObjects).toEqual([
+      { color: "", points: [], type: ObjectType.Line },
     ]);
   });
   describe("confetti", () => {
@@ -653,6 +676,8 @@ fdescribe("useScene", () => {
           fatePoints: 3,
           id: playerId,
           playedDuringTurn: true,
+          offline: true,
+          isGM: false,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
@@ -669,10 +694,45 @@ fdescribe("useScene", () => {
           fatePoints: 3,
           id: playerId,
           playedDuringTurn: false,
+          offline: true,
+          isGM: false,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
       ]);
+    });
+    it("keep sticky aspects", () => {
+      // GIVEN
+      const userId = "111";
+      const gameId = undefined;
+      const useCharactersMock = mockUseCharacters();
+
+      // WHEN initial render
+      const { result } = renderHook(() => {
+        const charactersManager = useCharactersMock();
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+        });
+      });
+
+      // WHEN setuping scene
+      let npcAspectId = "";
+      act(() => {
+        npcAspectId = result.current.actions.addAspect(AspectType.NPC);
+        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.toggleAspectPinned(npcAspectId);
+      });
+      // THEN
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(2);
+
+      // WHEN reseting
+      act(() => {
+        result.current.actions.resetScene();
+      });
+      expect(result.current.state.scene.name).toEqual("");
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
     });
   });
   describe("safeSetScene", () => {
@@ -742,13 +802,15 @@ fdescribe("useScene", () => {
         fatePoints: undefined,
         id: playerId,
         playedDuringTurn: false,
+        isGM: false,
+        offline: true,
         playerName: "",
         rolls: [],
       },
     ]);
     // WHEN removing an offline player
     act(() => {
-      result.current.actions.removeOfflinePlayer(playerId);
+      result.current.actions.removePlayer(playerId);
     });
   });
 });
@@ -757,6 +819,7 @@ function mockUseCharacters() {
   const result = {
     state: {
       characters: [],
+      groups: [],
       mode: ManagerMode.Close,
       managerCallback: undefined,
     },

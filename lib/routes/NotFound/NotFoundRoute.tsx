@@ -1,11 +1,19 @@
-import { Box, Typography } from "@material-ui/core";
-import { css } from "emotion";
-import React from "react";
+import { css } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import React, { useEffect } from "react";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Font } from "../../domains/font/Font";
 
 export const NotFoundRoute: React.FC<{}> = (props) => {
+  const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:NotFound");
+  }, []);
+
   return (
     <div>
       <Page>
@@ -38,3 +46,4 @@ export const NotFoundRoute: React.FC<{}> = (props) => {
 };
 
 NotFoundRoute.displayName = "NotFoundRoute";
+export default NotFoundRoute;

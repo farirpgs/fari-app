@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 const key = "prefers-dark-mode";
 
 export function useDarkMode() {
-  const prefersDarkThemeFromStorage = localStorage.getItem(key) === "true";
+  const prefersDarkThemeFromStorage =
+    localStorage?.getItem(key) === "true" ?? false;
   const [darkMode, setDarkMode] = useState(prefersDarkThemeFromStorage);
 
   useEffect(() => {
-    localStorage.setItem(key, darkMode.toString());
+    localStorage?.setItem(key, darkMode.toString());
   }, [darkMode]);
 
   return {

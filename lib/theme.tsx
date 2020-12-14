@@ -1,16 +1,32 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core";
-import { blue, indigo } from "@material-ui/core/colors";
+import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
+import { lighten } from "@material-ui/core/styles/colorManipulator";
+
+const systemFonts = [
+  "-apple-system",
+  "system-ui",
+  "BlinkMacSystemFont",
+  "'Segoe UI'",
+  "Roboto",
+  "'Helvetica Neue'",
+  "Ubuntu",
+  "Arial",
+  "sans-serif",
+];
 
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
+    // default 300
+    fontWeightLight: 300,
+    // default 400
+    fontWeightRegular: 400,
+    // default 500
+    fontWeightMedium: 500,
+    // default 700
+    fontWeightBold: 700,
     fontFamily: [
-      "-apple-system",
-      "system-ui",
-      "BlinkMacSystemFont",
-      "'Segoe UI'",
-      "Roboto",
-      "'Helvetica Neue'",
-      "Ubuntu",
+      "Inter",
+      "HelveticaNeue",
+      "Helvetica",
       "Arial",
       "sans-serif",
     ].join(","),
@@ -18,7 +34,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
   overrides: {
     MuiButton: {
       root: {
-        borderRadius: "20px",
+        borderRadius: "7px",
       },
       contained: {
         fontWeight: 700,
@@ -27,14 +43,19 @@ export const defaultThemeConfiguration: ThemeOptions = {
         fontWeight: 700,
       },
     },
+    MuiButtonGroup: {
+      root: {
+        borderRadius: "20px",
+      },
+    },
   },
 };
 
 export const AppLightTheme = createMuiTheme({
   ...defaultThemeConfiguration,
   palette: {
-    primary: indigo,
-    secondary: blue,
+    primary: { main: "#415f9c" },
+    secondary: { main: "#7a8cb4" },
   },
 });
 
@@ -43,10 +64,10 @@ export const AppDarkTheme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: indigo[200],
+      main: lighten(AppLightTheme.palette.primary.main, 0.5),
     },
     secondary: {
-      main: blue[200],
+      main: lighten(AppLightTheme.palette.secondary.main, 0.2),
     },
   },
 });

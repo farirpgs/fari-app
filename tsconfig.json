@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "module": "commonjs",
     "outDir": "./.tsc",
     "skipLibCheck": true,
     "lib": ["es2015", "es2016", "es2017", "dom"],
@@ -15,5 +16,5 @@
       }
     ]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cypress"]
 }

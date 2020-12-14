@@ -1,5 +1,6 @@
-import { Box, Button, Snackbar } from "@material-ui/core";
-import { css } from "emotion";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -19,15 +20,18 @@ export const CookieConsent: React.FC<{}> = (props) => {
     setConsent("true");
     localStorage.setItem(cookieConsentLocalStorageKey, "true");
   }
-
   return (
     <Snackbar
       open={open}
       autoHideDuration={null}
       message={t("cookie-consent.description")}
       action={
-        <Box className={css({ color: "#fff" })}>
-          <Button color="inherit" onClick={handleClose}>
+        <Box>
+          <Button
+            color="inherit"
+            onClick={handleClose}
+            data-cy="cookie-consent"
+          >
             {t("cookie-consent.button")}
           </Button>
         </Box>

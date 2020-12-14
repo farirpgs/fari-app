@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
@@ -22,6 +23,8 @@ export const PlayRoute: React.FC<{
     params: { id: string };
   };
 }> = (props) => {
+  const logger = useLogger();
+
   const idFromParams = props.match.params.id;
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
@@ -63,6 +66,11 @@ export const PlayRoute: React.FC<{
     debug: debug,
   });
 
+  const isGM = !idFromParams;
+  const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
+  const shouldRenderPlayerJoinGameScreen =
+    !isGM && !connectionsManager!.state.isConnectedToHost;
+
   useEffect(() => {
     hostManager.actions.sendToConnections(sceneManager.state.scene);
   }, [sceneManager.state.scene]);
@@ -73,11 +81,15 @@ export const PlayRoute: React.FC<{
     }
   }, [hostManager.state.connections]);
 
-  const isGM = !idFromParams;
-  const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
-  const shouldRenderPlayerJoinGameScreen =
-    !isGM && !connectionsManager!.state.isConnectedToHost;
-
+  useEffect(() => {
+    if (isGM) {
+      logger.info("Route:Play");
+      logger.info("Route:Play:GM");
+    } else {
+      logger.info("Route:Play");
+      logger.info("Route:Play:Player");
+    }
+  }, []);
   return (
     <>
       <PageMeta
@@ -129,3 +141,4 @@ export const PlayRoute: React.FC<{
 };
 
 PlayRoute.displayName = "PlayRoute";
+export default PlayRoute;

@@ -1,15 +1,13 @@
-import { GoogleAnalyticsService } from "./google-analytics/GoogleAnalyticsService";
 import { InternationalizationService } from "./internationalization/InternationalizationService";
-import { LoggerService } from "./logger/LoggerService";
+import { makeLogger } from "./logger/makeLogger";
 import { SentryService } from "./sentry/SentryService";
 
-const buildNumber = process.env.BUILD_NUMBER ?? "0";
-const hash = process.env.COMMIT_ID ?? "0";
-const context = process.env.CONTEXT ?? "localhost";
-const version = process.env.npm_package_version;
+const sentryService = new SentryService();
+const logger = makeLogger(sentryService);
+const internationalizationService = new InternationalizationService(logger);
 
-export const env = { buildNumber, hash, context, version };
-export const internationalizationService = new InternationalizationService();
-export const logger = new LoggerService();
-export const sentryService = new SentryService();
-export const googleAnalyticsService = new GoogleAnalyticsService(logger);
+export const injections = {
+  internationalizationService,
+  logger,
+  sentryService,
+};

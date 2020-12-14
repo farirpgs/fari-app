@@ -1,4 +1,42 @@
-# [CHANGELOG](https://github.com/fariapp/fari/blob/master/CHANGELOG.md)
+## 3.3.0-7 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+
+- feat: Group Scenes or Character sheets by campaigns
+- feat: Click on a skill to roll + skill modifier
+- feat: More detailed dice roll
+- feat: Re order any field in the character sheet
+- feat: new "Notes" field in character sheet [#145](https://github.com/fariapp/fari/issues/145) 👏 [tgirod](https://github.com/tgirod)
+- feat: Russian Localizations [#122](https://github.com/fariapp/fari/issues/122) 👏 [hattivatt](https://github.com/hattivatt)
+- feat: Support screens up to 1920px wide [#144](https://github.com/fariapp/fari/issues/144)
+- feat: Mini Character Sheets in scenes [#131](https://github.com/fariapp/fari/issues/131)
+- fix: share draw area controls between fullscreen and normal mode [#147](https://github.com/fariapp/fari/issues/147)
+- fix: character sheet synchronisation [#151](https://github.com/fariapp/fari/issues/151)
+
+**3.3.6**
+
+- chore: bump all dependencies
+- fix: emotion package import
+- feat: performance boost removing about page markdown (saves 1s on load time)
+- feat: brand update
+- fix: #160 encoding issues when transferring player names with emojis like 🐺
+- fix: #163 map not updating for players
+- fix: #119 more robust character sync
+
+**3.3.7**
+
+- fix: disable setAspectDrawArea to stop default isDirty on scene load
+- fix: add try-catch on useDrawing setPointerCapture for unsupported browsers
+- fix: only reposition index card if component is mounted
+
+## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
+
+- feat: A brand new Drawing Area with support for multiple shapes, colors and even player tokens. 👏 [ddkn](https://github.com/ddkn) for the help with the player token designs
+- feat: Brazilian Portuguese translations. 👏 [pedrogsribeiro](https://github.com/pedrogsribeiro) for the translations
+- feat: French translations for the About page. 👏 [corrinachow](https://github.com/corrinachow) for the translations
+- fix: Various bug fixes and minor improvements
+- tests: thanks you guys for the prerelease testing!
+  - [handcraftedsource](https://github.com/handcraftedsource)
+  - [player-03](https://github.com/player-03)
+  - [ddkn](https://github.com/ddkn)
 
 ## 3.0.0 (Aug 24, 2020) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
 

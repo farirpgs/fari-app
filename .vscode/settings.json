@@ -4,7 +4,13 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll"],
+  "editor.suggest.localityBonus": true,
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports",
+    "source.organizeImports",
+    "source.fixAll.format",
+    "source.fixAll.eslint"
+  ],
   "search.exclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,
@@ -28,5 +34,8 @@
       "extensions": ["domains"],
       "format": "svg"
     }
-  ]
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

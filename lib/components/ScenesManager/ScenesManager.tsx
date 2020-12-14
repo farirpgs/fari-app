@@ -1,8 +1,8 @@
-import { useTheme } from "@material-ui/core";
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { v4 as uuidV4 } from "uuid";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
   migrateScene,
@@ -16,13 +16,13 @@ type IProps = {};
 export const ScenesManager: React.FC<IProps> = (props) => {
   const history = useHistory();
   const scenesManager = useContext(ScenesContext);
-
-  const theme = useTheme();
+  const logger = useLogger();
 
   function onAdd() {
     const newScene = scenesManager.actions.add();
     history.push(`/scenes/${newScene.id}`);
     scenesManager.actions.closeManager();
+    logger.info("ScenesManager:onAdd");
   }
 
   function onItemClick(scene: ISavableScene) {
@@ -33,14 +33,17 @@ export const ScenesManager: React.FC<IProps> = (props) => {
     }
 
     scenesManager.actions.closeManager();
+    logger.info("ScenesManager:onItemClick");
   }
 
-  function onUndo(scene: ISavableScene) {
+  function onUndoDelete(scene: ISavableScene) {
     scenesManager.actions.upsert(scene);
+    logger.info("ScenesManager:onUndoDelete");
   }
 
   function onDelete(scene: ISavableScene) {
     scenesManager.actions.remove(scene.id);
+    logger.info("ScenesManager:onDelete");
   }
 
   function onImport(sceneToImport: FileList | null) {
@@ -55,6 +58,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
         scenesManager.actions.upsert(migratedScene);
       },
     });
+    logger.info("ScenesManager:onImport");
   }
 
   function onExport(scene: ISavableScene) {
@@ -63,6 +67,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       fariType: "scene",
       name: scene.name,
     });
+    logger.info("ScenesManager:onExport");
   }
 
   return (
@@ -72,12 +77,13 @@ export const ScenesManager: React.FC<IProps> = (props) => {
         id: s.id,
         name: s.name,
         lastUpdated: s.lastUpdated,
+        group: s.group,
       })}
       mode={scenesManager.state.mode}
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
-      onUndo={onUndo}
+      onUndo={onUndoDelete}
       onClose={scenesManager.actions.closeManager}
       onImport={onImport}
       onExport={onExport}

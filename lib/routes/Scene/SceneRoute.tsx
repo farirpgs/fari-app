@@ -4,6 +4,7 @@ import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -25,6 +26,11 @@ export const SceneRoute: React.FC<{
   const pageTitle = sanitizeSceneName(sceneName);
   const history = useHistory();
   const { t } = useTranslate();
+  const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:Scene");
+  }, []);
 
   useEffect(() => {
     const sceneToLoad = scenesManager.state.scenes.find(
@@ -32,7 +38,7 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad);
+      sceneManager.actions.loadScene(sceneToLoad, false);
     } else {
       history.replace("/");
       scenesManager.actions.openManager(ManagerMode.Manage);
@@ -55,4 +61,5 @@ export const SceneRoute: React.FC<{
   );
 };
 
-SceneRoute.displayName = "ScenesRoute";
+SceneRoute.displayName = "SceneRoute";
+export default SceneRoute;

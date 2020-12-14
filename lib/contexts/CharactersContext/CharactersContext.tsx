@@ -1,8 +1,10 @@
 import produce from "immer";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { useGroups } from "../../hooks/useGroups/useGroups";
 
 export enum CharacterType {
   CoreCondensed = "CoreCondensed",
@@ -39,9 +41,16 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return [];
   });
 
-  const sortedCharacters = arraySort(characters, [
-    (c) => ({ value: c.lastUpdated, direction: "desc" }),
-  ]);
+  const sortedCharacters = useMemo(() => {
+    return arraySort(characters, [
+      (c) => {
+        const lastUpdate = getUnixFrom(c.lastUpdated);
+        return { value: lastUpdate, direction: "desc" };
+      },
+    ]);
+  }, [characters]);
+
+  const groups = useGroups(sortedCharacters, (c) => c.group);
 
   useEffect(() => {
     // sync local storage
@@ -68,7 +77,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     const newCharacter = {
       ...defaultCharacter,
       id: uuidV4(),
-      lastUpdated: new Date().getTime(),
+      lastUpdated: getUnix(),
     } as ICharacter;
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
@@ -104,9 +113,15 @@ export function useCharacters(props?: { localStorage: Storage }) {
     if (!character) {
       return;
     }
+
     setCharacters((draft: Array<ICharacter>) => {
       return draft.map((c) => {
-        if (c.id === character.id) {
+        const currentCharacterLastUpdated = getUnixFrom(c.lastUpdated);
+        const characterLastUpdate = getUnixFrom(character?.lastUpdated ?? 0);
+
+        const shouldUpdate = characterLastUpdate >= currentCharacterLastUpdated;
+
+        if (c.id === character.id && shouldUpdate) {
           return character;
         }
         return c;
@@ -125,6 +140,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       mode,
       characters: sortedCharacters,
       managerCallback: managerCallback.current,
+      groups: groups,
     },
     actions: {
       openManager,
@@ -140,6 +156,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
 const defaultCondensedCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [
     { name: "High Concept", value: "" },
     { name: "Trouble", value: "" },
@@ -197,19 +214,24 @@ const defaultCondensedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
+  notes: undefined,
   aspectsLabel: undefined,
   skillsLabel: undefined,
   stuntsLabel: undefined,
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  notesLabel: undefined,
+  fatePoints: undefined,
+  playedDuringTurn: undefined,
   version: 2,
-  lastUpdated: new Date().getTime(),
+  lastUpdated: getUnix(),
 };
 
 const defaultAcceleratedCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [
     { name: "High Concept", value: "" },
     { name: "Trouble", value: "" },
@@ -246,19 +268,24 @@ const defaultAcceleratedCharacter: ICharacter = {
     { name: "Severe", value: "" },
   ],
   refresh: 3,
+  notes: undefined,
   aspectsLabel: undefined,
   skillsLabel: undefined,
   stuntsLabel: undefined,
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  notesLabel: undefined,
+  fatePoints: undefined,
+  playedDuringTurn: undefined,
   version: 2,
-  lastUpdated: new Date().getTime(),
+  lastUpdated: getUnix(),
 };
 
 const defaultCustomCharacter: ICharacter = {
   id: "",
   name: "",
+  group: undefined,
   aspects: [{ name: "Aspect", value: "" }],
   stunts: [{ name: "Stunt", value: "" }],
   skills: [{ name: "Skill", value: "" }],
@@ -274,14 +301,18 @@ const defaultCustomCharacter: ICharacter = {
   ],
   consequences: [{ name: "Consequence", value: "" }],
   refresh: 3,
+  notes: undefined,
   aspectsLabel: undefined,
   skillsLabel: undefined,
   stuntsLabel: undefined,
   stressTracksLabel: undefined,
   consequencesLabel: undefined,
   refreshLabel: undefined,
+  notesLabel: undefined,
+  fatePoints: undefined,
+  playedDuringTurn: undefined,
   version: 2,
-  lastUpdated: new Date().getTime(),
+  lastUpdated: getUnix(),
 };
 
 export const defaultCharactersByType = {
@@ -306,7 +337,13 @@ export interface ICharacter {
   stressTracksLabel: string | undefined;
   consequencesLabel: string | undefined;
   refreshLabel: string | undefined;
+  notesLabel: string | undefined;
+  notes: string | undefined;
+  group: string | undefined;
   refresh: number;
+  // hidden
+  fatePoints: number | undefined;
+  playedDuringTurn: boolean | undefined;
   version: number;
   lastUpdated: number;
 }

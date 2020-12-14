@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -24,6 +25,11 @@ export const PlayOfflineRoute: React.FC<{
   });
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
+  const logger = useLogger();
+
+  useEffect(() => {
+    logger.info("Route:PlayOffline");
+  }, []);
 
   const { t } = useTranslate();
 
@@ -44,3 +50,4 @@ export const PlayOfflineRoute: React.FC<{
 };
 
 PlayOfflineRoute.displayName = "PlayOfflineRoute";
+export default PlayOfflineRoute;
