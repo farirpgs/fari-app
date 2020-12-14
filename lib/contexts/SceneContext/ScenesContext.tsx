@@ -152,9 +152,14 @@ export function migrateScenes(scenes: Array<ISavableScene>) {
 }
 
 export function migrateScene(scene: ISavableScene) {
-  return produce(scene, (draft) => {
-    // todo...
-  });
+  try {
+    return produce(scene, (draft) => {
+      // todo...
+    });
+  } catch (error) {
+    console.error(error);
+    return scene;
+  }
 }
 
 export const defaultSceneName = "";

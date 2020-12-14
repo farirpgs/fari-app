@@ -28,7 +28,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     // load from local storage
     try {
       const localStorageCharacters = localStorage.getItem(key);
-      console.debug("localStorageCharacters", localStorageCharacters);
+
       if (localStorageCharacters) {
         const parsed = JSON.parse(localStorageCharacters);
         const migrated = migrateCharacters(parsed);
@@ -58,7 +58,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
     try {
       const serialized = JSON.stringify(characters);
       localStorage.setItem(key, serialized);
-      console.debug("serialized", serialized);
     } catch (error) {
       console.error(error);
     }
@@ -537,9 +536,14 @@ export function migrateCharacters(characters: Array<any>) {
 }
 
 export function migrateCharacter(c: any) {
-  const v2: IV2Character = migrateV1Character(c);
-  const v3: ICharacter = migrateV2Character(v2);
-  return v3;
+  try {
+    const v2: IV2Character = migrateV1Character(c);
+    const v3: ICharacter = migrateV2Character(v2);
+    return v3;
+  } catch (error) {
+    console.error(error);
+    return c;
+  }
 }
 
 export function migrateV1Character(v1: IV1Character): IV2Character {
