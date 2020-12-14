@@ -34,6 +34,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Filter1Icon from "@material-ui/icons/Filter1";
+import HelpIcon from "@material-ui/icons/Help";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
@@ -68,6 +69,7 @@ import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
 import { BetterDnd } from "./BetterDnd";
+import { FateSkillsDescriptions } from "./domains/FateSkillsDescriptions";
 
 const smallIconButtonStyle = css({
   padding: "0",
@@ -92,7 +94,7 @@ export const CharacterV3Dialog: React.FC<{
   const [template, setTemplate] = useState(CharacterType.CoreCondensed);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
-  const headerColor = theme.palette.background.paper;
+
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
   const blackButtonTheme = useButtonTheme(theme.palette.text.primary);
 
@@ -771,6 +773,8 @@ export const CharacterV3Dialog: React.FC<{
           })}
         >
           {section.fields.map((field, fieldIndex) => {
+            const skillDescription =
+              FateSkillsDescriptions[field.label.toLowerCase()] ?? "";
             const skillLabel = (
               <FateLabel
                 display="inline"
@@ -848,7 +852,47 @@ export const CharacterV3Dialog: React.FC<{
                       {advanced ? (
                         skillLabel
                       ) : (
-                        <ButtonBase>{skillLabel}</ButtonBase>
+                        <>
+                          <ButtonBase>{skillLabel}</ButtonBase>
+                          {skillDescription && (
+                            <>
+                              <Tooltip
+                                placement="right-start"
+                                classes={{
+                                  tooltip: css({
+                                    backgroundColor:
+                                      theme.palette.background.paper,
+                                    color: theme.palette.text.primary,
+                                    boxShadow: theme.shadows[1],
+                                    fontSize: "1rem",
+                                  }),
+                                }}
+                                title={
+                                  <>
+                                    <Typography
+                                      className={css({
+                                        fontWeight: "bold",
+                                        marginBottom: ".5rem",
+                                      })}
+                                    >
+                                      {skillDescription.quick}
+                                    </Typography>
+                                    <Typography>
+                                      {skillDescription.long}
+                                    </Typography>
+                                  </>
+                                }
+                              >
+                                <HelpIcon
+                                  className={css({
+                                    marginLeft: ".5rem",
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </Tooltip>
+                            </>
+                          )}
+                        </>
                       )}
                     </Grid>
                     {advanced && (
