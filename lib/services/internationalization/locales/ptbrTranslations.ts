@@ -105,6 +105,7 @@ export const ptbrTranslation: Record<
   "oracle.value.Yes": `Yes`,
   "oracle.value.YesAnd": `Yes and...`,
   "oracle.value.YesBut": `Yes but...`,
+  "page.privacy-policy": `Privacy Policy`,
   "play-route.add-aspect": `Aspecto`,
   "play-route.add-bad-guy": `Inimigo`,
   "play-route.add-boost": `Impulso`,

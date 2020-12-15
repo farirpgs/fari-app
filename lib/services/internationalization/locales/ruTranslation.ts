@@ -105,6 +105,7 @@ export const ruTranslation: Record<
   "oracle.value.Yes": `Yes`,
   "oracle.value.YesAnd": `Yes and...`,
   "oracle.value.YesBut": `Yes but...`,
+  "page.privacy-policy": `Privacy Policy`,
   "play-route.add-aspect": `Добавить Аспект`,
   "play-route.add-bad-guy": `Добавить Противника`,
   "play-route.add-boost": `Добавить Усиление`,
@@ -162,61 +163,4 @@ export const ruTranslation: Record<
   "player-row.remove-fate-point": `Забрать Жетон Судьбы`,
   "scenes-route.meta.description": `Fari это лучшее приложение компаньон для Fate RPG. Отыгрывайте сцены с друзьями в реальном времени, бросайте fudge кубики и пусть ваше коллективное воображение разыграется, создав запоминающиеся истории вместе!.`,
   "scenes-route.meta.title": `Управлять Сценами`,
-
-  // // Aspects
-  // "High Concept": `High Concept`,
-  // "Trouble": `Trouble`,
-  // "Relationship": `Relationship`,
-  // "Other Aspect": `Other Aspect`,
-
-  // // Skills
-  // "Academics": `Academics`,
-  // "Athletics": `Athletics`,
-  // "Burglary": `Burglary`,
-  // "Contacts": `Contacts`,
-  // "Crafts": `Crafts`,
-  // "Deceive": `Deceive`,
-  // "Drive": `Drive`,
-  // "Empathy": `Empathy`,
-  // "Fight": `Fight`,
-  // "Investigate": `Investigate`,
-  // "Lore": `Lore`,
-  // "Notice": `Notice`,
-  // "Physique": `Physique`,
-  // "Provoke": `Provoke`,
-  // "Rapport": `Rapport`,
-  // "Resources": `Resources`,
-  // "Shoot": `Shoot`,
-  // "Stealth": `Stealth`,
-  // "Will": `Will`,
-
-  // // Stunts
-  // "Stunt #1": `Stunt #1`,
-  // "Stunt #2": `Stunt #2`,
-  // "Stunt #3": `Stunt #3`,
-
-  // // Stress
-  // "Physical": `Physical`,
-  // "Mental": `Mental`,
-
-  // // FAE Stress
-  // "Stress": `Stress`,
-
-  // // Consequences
-  // "Mild": `Mild`,
-  // "Moderate": `Moderate`,
-  // "Severe": `Severe`,
-
-  // // FAE Approaches
-  // "Careful": `Careful`,
-  // "Clever": `Clever`,
-  // "Forceful": `Forceful`,
-  // "Flashy": `Flashy`,
-  // "Quick": `Quick`,
-  // "Sneaky": `Sneaky`,
-
-  // // Custom Character
-  // "Aspect": `Aspect`,
-  // "Stunt": `Stunt`,
-  // "Skill": `Skill`,
 };

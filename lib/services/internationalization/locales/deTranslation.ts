@@ -105,6 +105,7 @@ export const deTranslation: Record<
   "oracle.value.Yes": `Yes`,
   "oracle.value.YesAnd": `Yes and...`,
   "oracle.value.YesBut": `Yes but...`,
+  "page.privacy-policy": `Privacy Policy`,
   "play-route.add-aspect": `Aspekt`,
   "play-route.add-bad-guy": `Bösewicht`,
   "play-route.add-boost": `Schub`,
