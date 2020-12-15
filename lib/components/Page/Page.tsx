@@ -198,6 +198,7 @@ export const Page: React.FC<{
                   href="https://www.iubenda.com/privacy-policy/97549620"
                   target="_blank"
                   rel="noreferrer"
+                  data-cy="page.privacy-policy"
                 >
                   {t("page.privacy-policy")}
                 </Link>

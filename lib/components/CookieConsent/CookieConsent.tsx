@@ -39,6 +39,7 @@ export const CookieConsent: React.FC<{}> = (props) => {
             href="https://www.iubenda.com/privacy-policy/97549620"
             target="_blank"
             rel="noreferrer"
+            data-cy="cookie-consent.privacy-policy"
           >
             {t("page.privacy-policy")}
           </a>

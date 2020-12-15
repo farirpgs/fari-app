@@ -19,4 +19,11 @@ describe("/", () => {
       cy.contains("Lancer");
     });
   });
+  describe("Given I want to check the privacy policy", () => {
+    it("I should see the privacy policy link", () => {
+      Fari.startLeaveCookie();
+      Fari.get("page.privacy-policy").should("exist");
+      Fari.get("cookie-consent.privacy-policy").should("exist");
+    });
+  });
 });

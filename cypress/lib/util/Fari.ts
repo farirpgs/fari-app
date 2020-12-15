@@ -1,4 +1,7 @@
 export const Fari = {
+  startLeaveCookie() {
+    cy.visit("/");
+  },
   start() {
     cy.visit("/");
     this.get("cookie-consent").click();
