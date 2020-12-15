@@ -191,8 +191,26 @@ export const Page: React.FC<{
               </Grid>
             </Grid>
           )}
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Box mt=".5rem">
+                <Link
+                  href="https://www.iubenda.com/privacy-policy/97549620"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t("page.privacy-policy")}
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
           <Grid container justify="center">
             <Grid item xs>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This site is not affiliated with Evil Hat Productions, LLC.
+                </Typography>
+              </Box>
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
                   This work is based on Fate Core System and Fate Accelerated
