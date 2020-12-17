@@ -7,21 +7,33 @@ import {
   defaultCharactersByType,
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
+import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 
-export function useCharacter(c?: ICharacter | undefined) {
-  const [character, setCharacter] = useState<ICharacter | undefined>(c);
+export function useCharacter(characterFromProps?: ICharacter | undefined) {
+  const [character, setCharacter] = useState<ICharacter | undefined>(
+    characterFromProps
+  );
 
   const dirty = useMemo(() => {
-    return !isEqual(c, character);
-  }, [c, character]);
+    return !isEqual(characterFromProps, character);
+  }, [characterFromProps, character]);
 
   useEffect(() => {
-    const isDifferent = c?.id !== character?.id;
-    const isMoreRecent = (c?.lastUpdated ?? 0) > (character?.lastUpdated ?? 0);
-    if (isDifferent || isMoreRecent) {
-      setCharacter(c);
+    const characterFromPropsLastUpdated = getUnixFrom(
+      characterFromProps?.lastUpdated ?? 0
+    );
+    const currentCharacterLastUpdated = getUnixFrom(
+      character?.lastUpdated ?? 0
+    );
+
+    const isDifferentCharacter = characterFromProps?.id !== character?.id;
+    const isOutdated =
+      characterFromPropsLastUpdated > currentCharacterLastUpdated;
+
+    if (isDifferentCharacter || isOutdated) {
+      setCharacter(characterFromProps);
     }
-  }, [c]);
+  }, [characterFromProps]);
 
   function loadTemplate(type: CharacterType) {
     setCharacter(
@@ -37,7 +49,7 @@ export function useCharacter(c?: ICharacter | undefined) {
           ...defaultCharacter,
           id: oldId,
           name: oldName,
-          lastUpdated: new Date().getTime(),
+          lastUpdated: getUnix(),
         };
       })
     );
@@ -50,6 +62,17 @@ export function useCharacter(c?: ICharacter | undefined) {
           return;
         }
         draft.name = newName;
+      })
+    );
+  }
+
+  function setGroup(newGroup: string | null | undefined) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.group = newGroup as string | undefined;
       })
     );
   }
@@ -78,6 +101,29 @@ export function useCharacter(c?: ICharacter | undefined) {
           name: `Skill`,
           value: "",
         });
+      })
+    );
+  }
+
+  function moveValueInList(
+    property: keyof Pick<
+      ICharacter,
+      "aspects" | "stressTracks" | "consequences" | "stunts" | "skills"
+    >,
+    index: number,
+    direction: "up" | "down"
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        if (direction === "up") {
+          draft[property] = moveUp(draft[property] as Array<any>, index);
+        }
+        if (direction === "down") {
+          draft[property] = moveDown(draft[property] as Array<any>, index);
+        }
       })
     );
   }
@@ -349,13 +395,24 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
-  function udpateRefresh(newRefresh: number) {
+  function updateRefresh(newRefresh: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         draft.refresh = newRefresh;
+      })
+    );
+  }
+
+  function setNotes(newNotes: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.notes = newNotes;
       })
     );
   }
@@ -426,13 +483,24 @@ export function useCharacter(c?: ICharacter | undefined) {
     );
   }
 
+  function setNotesLabel(newNotesLabel: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.notesLabel = newNotesLabel;
+      })
+    );
+  }
+
   function sanitizeCharacter() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
         return;
       }
       draft.name = sanitizeContentEditable(draft.name);
-      draft.lastUpdated = new Date().getTime();
+      draft.lastUpdated = getUnix();
     });
     return updatedCharacter;
   }
@@ -442,6 +510,7 @@ export function useCharacter(c?: ICharacter | undefined) {
     actions: {
       loadTemplate,
       setName,
+      setGroup,
       addAspect,
       removeAspect,
       setAspectName,
@@ -465,14 +534,56 @@ export function useCharacter(c?: ICharacter | undefined) {
       setConsequenceName,
       setConsequence,
       removeConsequence,
-      udpateRefresh,
+      updateRefresh,
+      setNotes,
       setAspectsLabel,
       setSkillsLabel,
       setStuntsLabel,
       setStressTracksLabel,
       setConsequencesLabel,
       setRefreshLabel,
+      setNotesLabel,
+      moveValueInList,
       sanitizeCharacter,
     },
   };
+}
+
+function moveUp<T>(list: Array<T>, index: number) {
+  if (index === 0) {
+    return list;
+  }
+  const newIndex = index - 1;
+  const element = list[index];
+  const swap = list[newIndex];
+
+  return list.map((el, i) => {
+    if (i === index) {
+      return swap;
+    }
+    if (i === newIndex) {
+      return element;
+    }
+    return el;
+  });
+}
+
+function moveDown<T>(list: Array<T>, index: number) {
+  if (index === list.length - 1) {
+    return list;
+  }
+
+  const newIndex = index + 1;
+  const element = list[index];
+  const swap = list[newIndex];
+
+  return list.map((el, i) => {
+    if (i === index) {
+      return swap;
+    }
+    if (i === newIndex) {
+      return element;
+    }
+    return el;
+  });
 }

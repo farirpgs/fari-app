@@ -1,25 +1,25 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Drawer,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-  Snackbar,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { css } from "@emotion/css";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Drawer from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import Snackbar from "@material-ui/core/Snackbar";
+import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExportIcon from "@material-ui/icons/GetApp";
-import { Alert } from "@material-ui/lab";
-import { css } from "emotion";
+import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { listItem } from "./domains/ListItem";
 
 export enum ManagerMode {
@@ -30,10 +30,17 @@ export enum ManagerMode {
 
 type IBaseItem = {};
 
+type IManagerViewModel = {
+  id: string;
+  name: string;
+  lastUpdated: number;
+  group: string | undefined;
+};
+
 type IProps<T extends IBaseItem> = {
   list: Array<T>;
   mode: ManagerMode;
-  getViewModel(item: T): { id: string; name: string; lastUpdated: number };
+  getViewModel(item: T): IManagerViewModel;
   onClose(): void;
   onItemClick(item: T): void;
   onAdd(): void;
@@ -44,11 +51,17 @@ type IProps<T extends IBaseItem> = {
 };
 
 export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
+  type IGroupedItem = {
+    item: T;
+    vm: IManagerViewModel;
+  };
+
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [deletedSnack, setDeletedSnack] = useState(false);
   const [deletedObject, setDeletedObject] = useState<T | undefined>(undefined);
   const [importCounter, setImportCounter] = useState(0);
+
   const { t } = useTranslate();
 
   function onAdd() {
@@ -93,7 +106,10 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       <Snackbar
         open={deletedSnack}
         autoHideDuration={6000}
-        onClose={() => {
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
           setDeletedSnack(false);
         }}
       >
@@ -124,30 +140,42 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       return null;
     }
     return (
-      <Grid container spacing={1} justify="center">
-        <Grid item>
-          <Button color="primary" variant="outlined" onClick={onAdd}>
-            {t("manager.new")}
-          </Button>
+      <Box padding={0.5}>
+        <Grid container spacing={1} justify="center">
+          <Grid item>
+            <Button
+              color="primary"
+              variant="outlined"
+              data-cy="manager.new"
+              onClick={onAdd}
+            >
+              {t("manager.new")}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              color="primary"
+              variant="outlined"
+              data-cy="manager.import"
+              component="label"
+            >
+              {t("manager.import")}
+              <input
+                type="file"
+                accept=".json"
+                key={`import-input-${importCounter}`}
+                className={css({
+                  display: "none",
+                })}
+                onChange={(event) => {
+                  onImport(event.target.files);
+                  setImportCounter((prev) => prev + 1);
+                }}
+              />
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button color="primary" variant="outlined" component="label">
-            {t("manager.import")}
-            <input
-              type="file"
-              accept=".json"
-              key={`import-input-${importCounter}`}
-              className={css({
-                display: "none",
-              })}
-              onChange={(event) => {
-                onImport(event.target.files);
-                setImportCounter((prev) => prev + 1);
-              }}
-            />
-          </Button>
-        </Grid>
-      </Grid>
+      </Box>
     );
   }
 
@@ -168,63 +196,97 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       return null;
     }
 
+    const groups = props.list
+      .map(
+        (i): IGroupedItem => {
+          return { item: i, vm: props.getViewModel(i) };
+        }
+      )
+      .reduce((prev, curr) => {
+        const group = curr.vm.group || "";
+        const currentList = prev[group] ?? [];
+        return {
+          ...prev,
+          [group]: [...currentList, curr],
+        };
+      }, {} as Record<string, Array<IGroupedItem>>);
+
     return (
-      <List>
-        {props.list.map((item) => {
-          const itemVM = props.getViewModel(item);
-          const abrev = listItem.getAbreviation(itemVM.name);
-          const backgroundColor = listItem.getColor(abrev);
-          const color = theme.palette.getContrastText(backgroundColor);
+      <>
+        {Object.keys(groups).map((groupName, index) => {
+          const groupItems = groups[groupName];
 
           return (
-            <ListItem
-              button
-              key={itemVM.id}
-              onClick={() => {
-                onItemClick(item);
-              }}
-              className={css({
-                paddingRight: "102px",
-              })}
+            <List
+              key={`${groupName}-${index}`}
+              subheader={
+                <ListSubheader component="div">
+                  <FateLabel variant="caption">
+                    {groupName || t("manager.ungrouped")}
+                  </FateLabel>
+                </ListSubheader>
+              }
             >
-              <ListItemAvatar>
-                <Avatar
-                  className={css({
-                    color: color,
-                    backgroundColor: backgroundColor,
-                  })}
-                >
-                  {abrev}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={itemVM.name}
-                secondary={listItem.formatDate(itemVM.lastUpdated)}
-              />
-              {props.mode === ManagerMode.Manage && (
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="start"
+              {groupItems.map((element) => {
+                const { item, vm: vm } = element;
+                const abrev = listItem.getAbreviation(vm.name);
+                const backgroundColor = listItem.getColor(abrev);
+                const color = theme.palette.getContrastText(backgroundColor);
+
+                return (
+                  <ListItem
+                    button
+                    key={vm.id}
                     onClick={() => {
-                      onExport(item);
+                      onItemClick(item);
                     }}
+                    className={css({
+                      paddingRight: "102px",
+                    })}
                   >
-                    <ExportIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    onClick={() => {
-                      onDelete(item);
-                    }}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              )}
-            </ListItem>
+                    <ListItemAvatar>
+                      <Avatar
+                        className={css({
+                          color: color,
+                          backgroundColor: backgroundColor,
+                        })}
+                      >
+                        {abrev}
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={<>{vm.name}</>}
+                      secondary={listItem.formatDate(vm.lastUpdated)}
+                    />
+                    {props.mode === ManagerMode.Manage && (
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="start"
+                          data-cy="manager.export"
+                          onClick={() => {
+                            onExport(item);
+                          }}
+                        >
+                          <ExportIcon />
+                        </IconButton>
+                        <IconButton
+                          edge="end"
+                          data-cy="manager.delete"
+                          onClick={() => {
+                            onDelete(item);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    )}
+                  </ListItem>
+                );
+              })}
+            </List>
           );
         })}
-      </List>
+      </>
     );
   }
 };

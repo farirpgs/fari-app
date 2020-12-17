@@ -20,6 +20,7 @@ fdescribe("useScene", () => {
     const expectDefaultScene: IScene = {
       id: expect.anything(),
       name: "",
+      group: undefined,
       aspects: {},
       gm: {
         id: "111",
@@ -28,6 +29,7 @@ fdescribe("useScene", () => {
         playedDuringTurn: false,
         fatePoints: 3,
         offline: false,
+        isGM: true,
       },
       players: [],
       goodConfetti: 0,
@@ -74,6 +76,7 @@ fdescribe("useScene", () => {
       // GIVEN
       const sceneToLoad = {
         id: "new-id",
+        group: undefined,
         aspects: { "aspect-id": { toto: 3 } as any },
         lastUpdated: 111,
         name: "new name",
@@ -81,7 +84,7 @@ fdescribe("useScene", () => {
       };
       // WHEN
       act(() => {
-        result.current.actions.loadScene(sceneToLoad);
+        result.current.actions.loadScene(sceneToLoad, true);
       });
 
       // THEN
@@ -96,6 +99,7 @@ fdescribe("useScene", () => {
           playerName: "Game Master",
           rolls: [],
           offline: false,
+          isGM: true,
         },
         goodConfetti: 0,
         id: "new-id",
@@ -116,7 +120,7 @@ fdescribe("useScene", () => {
 
       // WHEN reload the same scene
       act(() => {
-        result.current.actions.loadScene(sceneToLoad);
+        result.current.actions.loadScene(sceneToLoad, true);
       });
 
       // THEN dirty is false
@@ -131,13 +135,17 @@ fdescribe("useScene", () => {
 
       // WHEN reload
       act(() => {
-        result.current.actions.loadScene({
-          id: "new-id",
-          aspects: { "aspect-id": { toto: 3 } as any },
-          lastUpdated: 111,
-          name: "new name",
-          version: 3,
-        });
+        result.current.actions.loadScene(
+          {
+            id: "new-id",
+            group: undefined,
+            aspects: { "aspect-id": { toto: 3 } as any },
+            lastUpdated: 111,
+            name: "new name",
+            version: 3,
+          },
+          true
+        );
       });
       // THEN dirty is false
       expect(result.current.state.dirty).toEqual(false);
@@ -197,7 +205,9 @@ fdescribe("useScene", () => {
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        pinned: false,
         title: "",
+        hasDrawArea: false,
         type: 0,
       });
       act(() => {
@@ -396,9 +406,11 @@ fdescribe("useScene", () => {
       expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
         color: "white",
         consequences: [],
+        hasDrawArea: false,
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        pinned: false,
         title: "",
         type: AspectType.Aspect,
       });
@@ -665,6 +677,7 @@ fdescribe("useScene", () => {
           id: playerId,
           playedDuringTurn: true,
           offline: true,
+          isGM: false,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
@@ -682,10 +695,44 @@ fdescribe("useScene", () => {
           id: playerId,
           playedDuringTurn: false,
           offline: true,
+          isGM: false,
           playerName: "OFFLINE PLAYER",
           rolls: [],
         },
       ]);
+    });
+    it("keep sticky aspects", () => {
+      // GIVEN
+      const userId = "111";
+      const gameId = undefined;
+      const useCharactersMock = mockUseCharacters();
+
+      // WHEN initial render
+      const { result } = renderHook(() => {
+        const charactersManager = useCharactersMock();
+        return useScene({
+          userId,
+          gameId,
+          charactersManager,
+        });
+      });
+
+      // WHEN setuping scene
+      let npcAspectId = "";
+      act(() => {
+        npcAspectId = result.current.actions.addAspect(AspectType.NPC);
+        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.toggleAspectPinned(npcAspectId);
+      });
+      // THEN
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(2);
+
+      // WHEN reseting
+      act(() => {
+        result.current.actions.resetScene();
+      });
+      expect(result.current.state.scene.name).toEqual("");
+      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
     });
   });
   describe("safeSetScene", () => {
@@ -755,6 +802,7 @@ fdescribe("useScene", () => {
         fatePoints: undefined,
         id: playerId,
         playedDuringTurn: false,
+        isGM: false,
         offline: true,
         playerName: "",
         rolls: [],
@@ -762,7 +810,7 @@ fdescribe("useScene", () => {
     ]);
     // WHEN removing an offline player
     act(() => {
-      result.current.actions.removeOfflinePlayer(playerId);
+      result.current.actions.removePlayer(playerId);
     });
   });
 });
@@ -771,6 +819,7 @@ function mockUseCharacters() {
   const result = {
     state: {
       characters: [],
+      groups: [],
       mode: ManagerMode.Close,
       managerCallback: undefined,
     },

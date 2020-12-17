@@ -1,5 +1,9 @@
-import { Box, Paper, Popper, Typography, useTheme } from "@material-ui/core";
-import { css } from "emotion";
+import { css } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "./domains/DrawObjectFactory";
 import { IRoughSVG } from "./domains/rough";
@@ -67,7 +71,6 @@ export const DrawObject: React.FC<{
       setHover(false);
     },
     onPointerDown: (event: React.PointerEvent<SVGGElement>) => {
-      console.log("DrawingTool", DrawingTool[props.drawingTool]);
       if (props.drawingTool === DrawingTool.Move) {
         event.stopPropagation();
         event.persist();

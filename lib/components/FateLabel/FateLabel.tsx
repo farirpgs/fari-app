@@ -1,29 +1,25 @@
-import { Typography } from "@material-ui/core";
-import { Variant } from "@material-ui/core/styles/createTypography";
-import { css, cx } from "emotion";
+import { css, cx } from "@emotion/css";
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React from "react";
 
-export const FateLabel: React.FC<{
-  className?: string;
-  variant?: Variant;
-  display?: "initial" | "block" | "inline";
-  /**
-   * @default "medium"
-   */
-  size?: "medium" | "small";
-}> = (props) => {
+export const FateLabel: React.FC<
+  {
+    className?: string;
+    underline?: boolean;
+  } & TypographyProps
+> = (props) => {
+  const { className, underline, ...rest } = props;
   return (
     <Typography
-      variant={props.variant}
+      {...rest}
       className={cx(
+        props.className,
         css({
           textTransform: "uppercase",
-          fontWeight: 900,
-          fontSize: props.size === "small" ? ".8rem" : "1rem",
-        }),
-        props.className
+          fontWeight: 800,
+          textDecoration: underline ? "underline" : undefined,
+        })
       )}
-      display={props.display}
     >
       {props.children}
     </Typography>

@@ -1,18 +1,16 @@
-import {
-  Button,
-  ButtonGroup,
-  ButtonGroupProps,
-  ClickAwayListener,
-  Grid,
-  Grow,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-} from "@material-ui/core";
+import { css } from "@emotion/css";
+import Button from "@material-ui/core/Button";
+import ButtonGroup, { ButtonGroupProps } from "@material-ui/core/ButtonGroup";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Grid from "@material-ui/core/Grid";
+import Grow from "@material-ui/core/Grow";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import { css } from "emotion";
 import React from "react";
+import { zIndex } from "../../constants/zIndex";
 
 export type IOption = {
   label: string;
@@ -25,7 +23,6 @@ type IProps = {
 
 export const SplitButton: React.FC<IProps> = (props) => {
   const { options, ...buttonProps } = props;
-
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -65,6 +62,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
+          className={css({ zIndex: zIndex.splitButton })}
           transition
           disablePortal
         >

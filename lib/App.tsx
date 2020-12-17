@@ -1,5 +1,5 @@
-import { StylesProvider } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { StylesProvider } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import * as Sentry from "@sentry/react";
 import React, { useContext } from "react";

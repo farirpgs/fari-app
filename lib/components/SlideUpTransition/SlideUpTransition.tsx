@@ -1,4 +1,4 @@
-import { Slide } from "@material-ui/core";
+import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import React from "react";
 

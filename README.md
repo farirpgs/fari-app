@@ -1,8 +1,10 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
-[![Build Status](https://dev.azure.com/fariapp/fari/_apis/build/status/fariapp.fari?branchName=master)](https://dev.azure.com/fariapp/fari/_build?definitionId=1&_a=summary&view=branches)
+[![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
+[![ko-fi](https://img.shields.io/static/v1?style=flat-square&logo=ko-fi&color=3f51b5&label=donate&message=Support%20me%20on%20Ko-Fi)](https://ko-fi.com/B0B4AHLJ)
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B4AHLJ)
+![Continous Integration](https://github.com/fariapp/fari/workflows/CI/badge.svg)
+![Integration Tests](https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg)
 
 This repo contains the source code that powers Fari.
 

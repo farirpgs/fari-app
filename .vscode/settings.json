@@ -34,5 +34,8 @@
       "extensions": ["domains"],
       "format": "svg"
     }
-  ]
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

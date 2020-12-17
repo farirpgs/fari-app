@@ -38,7 +38,7 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad);
+      sceneManager.actions.loadScene(sceneToLoad, false);
     } else {
       history.replace("/");
       scenesManager.actions.openManager(ManagerMode.Manage);
@@ -61,4 +61,5 @@ export const SceneRoute: React.FC<{
   );
 };
 
-SceneRoute.displayName = "ScenesRoute";
+SceneRoute.displayName = "SceneRoute";
+export default SceneRoute;

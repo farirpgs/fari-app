@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
+import { DataTransferObject } from "../../domains/DataTransferObject/DataTransferObject";
 import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
 
@@ -46,7 +47,8 @@ export function usePeerConnections(options: {
     console.info("usePeerConnections: Disconnected From Host");
   }
   function onHostDataReceive(data: any) {
-    options.onHostDataReceive(data);
+    const decodedData = DataTransferObject.decode(data);
+    options.onHostDataReceive(decodedData);
   }
 
   return {

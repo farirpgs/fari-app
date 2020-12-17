@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import produce from "immer";
 import { useMemo } from "react";
 import { defaultThemeConfiguration } from "../../theme";

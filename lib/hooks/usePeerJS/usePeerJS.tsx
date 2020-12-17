@@ -3,6 +3,31 @@ import { useEffect, useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { env } from "../../constants/env";
 
+/**
+ * When running fariapp/fari-peer-server locally
+ */
+const localhostConfig = {
+  host: "localhost",
+  port: 9000,
+  secure: false,
+};
+
+/**
+ * For testing peer-js versions
+ */
+const stagingConfig = {
+  host: "fari-peer-server-staging.herokuapp.com",
+  secure: true,
+};
+
+/**
+ * For production environment
+ */
+const prodConfig = {
+  host: "fari-peer-server.herokuapp.com",
+  secure: true,
+};
+
 export function usePeerJS(options: { debug?: boolean }) {
   const peer = useRef<Peer | undefined>(undefined);
   const [hostId, setHostId] = useState<string | undefined>(undefined);
@@ -13,12 +38,11 @@ export function usePeerJS(options: { debug?: boolean }) {
     const id = uuidV4();
     if (env.context === "localhost") {
       peer.current = new Peer(id, {
-        // ONLY USE IF NEEDED BECAUSE $$$
-        // host: "fari-peer-server-staging.herokuapp.com",
-        host: "fari-peer-server.herokuapp.com",
-        secure: true,
         path: "/peer/connect",
         debug: options.debug ? 3 : 0,
+        // ...localhostConfig,
+        // ...stagingConfig,
+        ...prodConfig,
       });
     } else {
       peer.current = new Peer(id, {
@@ -75,5 +99,5 @@ export function usePeerJS(options: { debug?: boolean }) {
 }
 
 export function isWebRTCSupported() {
-  return RTCPeerConnection !== undefined;
+  return window.RTCPeerConnection !== undefined;
 }

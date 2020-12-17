@@ -1,12 +1,11 @@
-import {
-  Box,
-  Divider,
-  Fade,
-  Grid,
-  IconButton,
-  Popover,
-  useTheme,
-} from "@material-ui/core";
+import { css, cx } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import Popover from "@material-ui/core/Popover";
+import { useTheme } from "@material-ui/core/styles";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import ClearAllTwoToneIcon from "@material-ui/icons/ClearAllTwoTone";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
@@ -18,49 +17,42 @@ import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
 import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
-import { css } from "emotion";
-import React, { useRef, useState } from "react";
-import { TwitterPicker } from "react-color";
+import React, { useEffect, useRef, useState } from "react";
+import TwitterPicker from "react-color/lib/components/twitter/Twitter";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AspectRatio } from "./AspectRatio";
 import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
-import {
-  DrawingTool,
-  IDrawAreaObjects,
-  ObjectType,
-  useDrawing,
-} from "./hooks/useDrawing";
+import { DrawingTool, IDrawingManager, ObjectType } from "./hooks/useDrawing";
 
 interface IProps {
-  objects?: IDrawAreaObjects;
+  drawingManager: IDrawingManager;
   readonly?: boolean;
   fullScreen?: boolean;
   controls: "bottom" | "top";
   tokenTitles?: Array<string>;
   onFullScreenChange?: (fullScreen: boolean) => void;
-  onChange?(lines: IDrawAreaObjects): void;
 }
 
 export const DrawObjects: React.FC<IProps> = (props) => {
-  const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-
   const textColors = useTextColors(theme.palette.background.paper);
   const [
     drawingToolBeforeColorPicker,
     setDrawingToolBeforeColorPicker,
   ] = useState<DrawingTool | undefined>(undefined);
   const $paletteButton = useRef<HTMLButtonElement | null>(null);
-  const drawingManager = useDrawing({
-    objects: props.objects,
-    readonly: props.readonly,
-    onChange: props.onChange,
-  });
+  const $svg = useRef<SVGSVGElement | null>(null);
+  const $container = useRef<HTMLDivElement | null>(null);
+
   let tokenIndex = 0;
+  const { drawingManager } = props;
+
+  useEffect(() => {
+    drawingManager.actions.setSVG($container.current, $svg.current);
+  }, []);
 
   function resetDrawingTool() {
     if (drawingToolBeforeColorPicker) {
@@ -97,7 +89,8 @@ export const DrawObjects: React.FC<IProps> = (props) => {
   function renderDrawArea() {
     return (
       <div
-        ref={drawingManager.state.$container}
+        ref={$container}
+        data-cy="draw.container"
         onPointerDown={drawingManager.handlers.onStartDrawing}
         onPointerMove={drawingManager.handlers.onDrawing}
         onPointerUp={drawingManager.handlers.onStopDrawing}
@@ -107,9 +100,9 @@ export const DrawObjects: React.FC<IProps> = (props) => {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
+          touchAction: "none",
           height: "100%",
           cursor: props.readonly ? "inherit" : "crosshair",
-          touchAction: drawingManager.state.isDrawing ? "none" : "auto",
           border: props.fullScreen ? "1px solid  grey" : "none",
         })}
       >
@@ -136,7 +129,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
         </Fade>
         <Fade in={drawingManager.state.objects.length > 0}>
           <svg
-            ref={drawingManager.state.$svgElement}
+            ref={$svg}
             width="100%"
             height="100%"
             viewBox="0 0 100 100"
@@ -194,6 +187,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  data-cy="draw.palette"
                   ref={$paletteButton}
                   className={css({
                     color: theme.palette.text.primary,
@@ -246,6 +240,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
+                  data-cy="draw.move"
                   size="small"
                   className={css({
                     color:
@@ -263,6 +258,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
+                  data-cy="draw.remove"
                   size="small"
                   className={css({
                     color:
@@ -284,6 +280,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             <Grid container spacing={1}>
               <Grid item>
                 <IconButton
+                  data-cy="draw.line"
                   size="small"
                   className={css({
                     color:
@@ -302,6 +299,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  data-cy="draw.rectangle"
                   className={css({
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Rectangle
@@ -321,6 +319,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <Grid item>
                 <IconButton
                   size="small"
+                  data-cy="draw.ellipse"
                   className={css({
                     color:
                       drawingManager.state.drawingTool === DrawingTool.Ellipse
@@ -337,6 +336,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item>
                 <IconButton
+                  data-cy="draw.token"
                   size="small"
                   className={css({
                     color:
@@ -369,6 +369,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               <>
                 <Grid item>
                   <IconButton
+                    data-cy="draw.clear"
                     size="small"
                     className={css({
                       color: theme.palette.text.primary,
@@ -383,6 +384,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                 </Grid>
                 <Grid item>
                   <IconButton
+                    data-cy="draw.undo"
                     size="small"
                     className={css({
                       color: theme.palette.text.primary,
@@ -400,6 +402,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
             {props.onFullScreenChange && (
               <Grid item>
                 <IconButton
+                  data-cy="draw.full-screen"
                   size="small"
                   className={css({
                     color: theme.palette.text.primary,
@@ -445,9 +448,12 @@ export const ColorPicker: React.FC<{
       }}
       color={props.value}
       colors={pickerColors}
-      className={css({
-        boxShadow: "none",
-      })}
+      className={cx(
+        "data-cy-color-picker",
+        css({
+          boxShadow: "none",
+        })
+      )}
       onChange={(color) => props.onChange(color.hex)}
     />
   );

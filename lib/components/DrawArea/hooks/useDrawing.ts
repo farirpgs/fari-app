@@ -1,3 +1,4 @@
+import isEqual from "lodash/isEqual";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "../domains/DrawObjectFactory";
 import { tokenColors } from "../domains/pickerColors";
@@ -77,15 +78,20 @@ export function useDrawing(props: {
   const [color, setColor] = useState("#000000");
   const [tokenIndex, setTokenIndex] = useState(0);
   const $container = useRef<HTMLDivElement | null>(null);
-  const $svgElement = useRef<SVGSVGElement | null>(null);
   const onChangeTimeout = useRef<any | undefined>(undefined);
+  const roughSVG = useRef<ReturnType<typeof rough.svg> | undefined>(undefined);
 
-  const roughSVG = $svgElement.current && rough.svg($svgElement.current);
+  useEffect(() => {
+    return () => {
+      clearTimeout(onChangeTimeout.current);
+    };
+  }, []);
 
   useEffect(() => {
     const shouldUpdateLocalState =
-      props.objects && props.objects.length !== objects.length;
-    if (shouldUpdateLocalState || props.readonly) {
+      !!props.objects && !isEqual(props.objects, objects);
+
+    if (shouldUpdateLocalState) {
       setObjects(props.objects as IDrawAreaObjects);
     }
   }, [props.objects]);
@@ -101,6 +107,11 @@ export function useDrawing(props: {
     }, ON_CHANGE_DELAY);
   }
 
+  function setSVG($newContainer: any, $newSVG: any) {
+    $container.current = $newContainer;
+    roughSVG.current = rough.svg($newSVG);
+  }
+
   function onStartDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
     if (pointerEvent.button !== 0 || props.readonly) {
       return;
@@ -108,6 +119,12 @@ export function useDrawing(props: {
 
     pointerEvent.preventDefault();
     pointerEvent.stopPropagation();
+
+    try {
+      $container.current?.setPointerCapture(pointerEvent.pointerId);
+    } catch (error) {
+      // ignore
+    }
 
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (!newPoint) {
@@ -174,6 +191,9 @@ export function useDrawing(props: {
       return;
     }
 
+    pointerEvent.preventDefault();
+    pointerEvent.stopPropagation();
+
     const newPoint = relativeCoordinatesForEvent(pointerEvent);
     if (newPoint) {
       setObjects((objects) => {
@@ -219,8 +239,16 @@ export function useDrawing(props: {
   }
 
   function onStopDrawing(pointerEvent: React.PointerEvent<HTMLDivElement>) {
-    if (pointerEvent.pointerType == "mouse") {
+    const validPointerTypes = ["mouse", "touch"];
+
+    if (validPointerTypes.includes(pointerEvent.pointerType)) {
       setDrawing(false);
+
+      try {
+        $container.current?.releasePointerCapture(pointerEvent.pointerId);
+      } catch (error) {
+        // ignore
+      }
     }
   }
 
@@ -328,24 +356,26 @@ export function useDrawing(props: {
       objects: objects,
       isDrawing: drawing,
       $container,
-      $svgElement,
-      roughSVG,
+      roughSVG: roughSVG.current,
       drawingTool,
       color,
     },
     actions: {
       clear,
       undo,
+      setSVG,
       setColor,
       setDrawingTool,
     },
     handlers: {
-      onStartDrawing: onStartDrawing,
-      onDrawing: onDrawing,
-      onStopDrawing: onStopDrawing,
+      onStartDrawing,
+      onDrawing,
+      onStopDrawing,
       onBlur,
       onObjectMove,
       onObjectRemove,
     },
   };
 }
+
+export type IDrawingManager = ReturnType<typeof useDrawing>;

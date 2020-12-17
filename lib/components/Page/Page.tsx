@@ -1,31 +1,29 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Drawer,
-  Fade,
-  Grid,
-  Hidden,
-  IconButton,
-  Link,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { css } from "@emotion/css";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Drawer from "@material-ui/core/Drawer";
+import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
-import { css } from "emotion";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import appIcon from "url:../../../images/app-icon.png";
+import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
@@ -38,8 +36,10 @@ import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
+import { Patreon } from "../Patreon/Patreon";
 
 let gameIdSingleton: string | undefined = undefined;
+const FariMaxWidth = "1920px";
 
 export enum LiveMode {
   Connecting,
@@ -49,12 +49,12 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  kofi?: boolean;
+  displayDonation?: boolean;
   live?: LiveMode;
   liveLabel?: string;
 }> = (props) => {
   const history = useHistory();
-  const { kofi = true } = props;
+  const { displayDonation = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -99,7 +99,7 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: "1440px",
+                  maxWidth: FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
                   marginTop: "2rem",
@@ -137,16 +137,15 @@ export const Page: React.FC<{
               })}
             >
               <Typography>
-                <Link href="https://www.netlify.com" target="_blank">
+                <Link
+                  href="https://www.netlify.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   This site is powered by Netlify
                 </Link>
               </Typography>
             </Grid>
-            {kofi && (
-              <Grid item>
-                <Kofi />
-              </Grid>
-            )}
             <Grid item>
               <Typography>
                 <AppLink to="/changelog">{`v${env.version}`}</AppLink>
@@ -154,6 +153,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item>
               <Select
+                data-cy="page.languages"
                 value={currentLanguage}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value as string);
@@ -173,6 +173,68 @@ export const Page: React.FC<{
                   }
                 })}
               </Select>
+            </Grid>
+          </Grid>
+          {displayDonation && (
+            <Grid
+              container
+              justify="space-between"
+              spacing={4}
+              alignItems="center"
+            >
+              <Grid item sm>
+                <Kofi />
+              </Grid>
+
+              <Grid item>
+                <Patreon />
+              </Grid>
+            </Grid>
+          )}
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Box mt=".5rem">
+                <Link
+                  href="https://www.iubenda.com/privacy-policy/97549620"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cy="page.privacy-policy"
+                >
+                  {t("page.privacy-policy")}
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container justify="center">
+            <Grid item xs>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This site is not affiliated with Evil Hat Productions, LLC.
+                </Typography>
+              </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This work is based on Fate Core System and Fate Accelerated
+                  Edition (found at http://www.faterpg.com/), products of Evil
+                  Hat Productions, LLC, developed, authored, and edited by
+                  Leonard Balsera, Brian Engard, Jeremy Keller, Ryan Macklin,
+                  Mike Olson, Clark Valentine, Amanda Valentine, Fred Hicks, and
+                  Rob Donoghue, and licensed for our use under the Creative
+                  Commons Attribution 3.0 Unported license
+                  (http://creativecommons.org/licenses/by/3.0/).
+                </Typography>
+              </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This work is based on Fate Condensed (found at
+                  http://www.faterpg.com/), a product of Evil Hat Productions,
+                  LLC, developed, authored, and edited by PK Sullivan, Lara
+                  Turner, Leonard Balsera, Fred Hicks, Richard Bellingham,
+                  Robert Hanz, Ryan Macklin, and Sophie Lagacé, and licensed for
+                  our use under the Creative Commons Attribution 3.0 Unported
+                  license (http://creativecommons.org/licenses/by/3.0/).
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
         </Container>
@@ -203,7 +265,7 @@ export const Page: React.FC<{
           <Toolbar
             className={css({
               margin: "0 auto",
-              maxWidth: "1440px",
+              maxWidth: FariMaxWidth,
               minHeight: "72px",
               width: "100%",
               padding: "1rem",
@@ -211,6 +273,7 @@ export const Page: React.FC<{
           >
             <RouterLink
               to="/"
+              data-cy="page.menu.home"
               className={css({
                 textDecoration: "none",
               })}
@@ -264,15 +327,17 @@ export const Page: React.FC<{
                     {props.live === LiveMode.Live && (
                       <SignalWifi4BarLockIcon
                         className={css({
-                          color: "#69e22d",
+                          // color: theme.palette.primary,
                         })}
                       />
                     )}
                   </Grid>
                   <Grid item>
-                    <Typography variant="subtitle1">
-                      {sanitizeContentEditable(props.liveLabel)}
-                    </Typography>
+                    <Box maxWidth="150px">
+                      <Typography variant="subtitle1" noWrap>
+                        {sanitizeContentEditable(props.liveLabel)}
+                      </Typography>
+                    </Box>
                   </Grid>
                 </Grid>
               </Box>
@@ -305,7 +370,7 @@ export const Page: React.FC<{
               })}
             />
             <Hidden smDown>
-              {kofi && !shouldDisplayRejoinButton && <Kofi />}
+              {displayDonation && !shouldDisplayRejoinButton && <Kofi />}
             </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
@@ -342,6 +407,7 @@ export const Page: React.FC<{
               <Button
                 color="inherit"
                 to="/"
+                data-cy="page.menu.play"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}
@@ -352,6 +418,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
                 }}
@@ -364,6 +431,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                data-cy="page.menu.characters"
                 onClick={() => {
                   charactersManager.actions.openManager(ManagerMode.Manage);
                 }}
@@ -377,22 +445,12 @@ export const Page: React.FC<{
               <Button
                 color="inherit"
                 to="/dice"
+                data-cy="page.menu.dice"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}
               >
                 {t("menu.dice")}
-              </Button>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                to="/draw"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.draw")}
               </Button>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
@@ -435,6 +493,7 @@ export const Page: React.FC<{
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
+            data-cy="page.toggle-dark-mode"
             color="inherit"
             size="small"
             className={css({
