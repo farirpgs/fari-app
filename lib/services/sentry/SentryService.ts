@@ -14,8 +14,6 @@ export class SentryService {
         dsn: "https://94aa4f0e7f754d1e92a2fb12fd92be22@sentry.io/1856588",
       });
     }
-
-    Sentry.captureMessage(message, { level: severity, extra: context });
   }
   public log(
     message: string,
