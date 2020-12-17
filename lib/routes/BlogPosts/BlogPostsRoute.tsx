@@ -1,10 +1,10 @@
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
-import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 import React from "react";
 import { blogPosts } from "../../blog/index";
+import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 
 export const BlogPostsRoute: React.FC = (props) => {
@@ -21,9 +21,9 @@ export const BlogPostsRoute: React.FC = (props) => {
           <Box key={blogPost.slug}>
             <Box>
               <Typography variant="h5">
-                <Link key={blogPost.title} href={`/blog/${blogPost.slug}`}>
+                <AppLink key={blogPost.title} to={`/blog/${blogPost.slug}`}>
                   {blogPost.title}
-                </Link>
+                </AppLink>
               </Typography>
             </Box>
             <Box pb=".5rem">
