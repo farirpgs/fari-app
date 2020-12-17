@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import appIcon from "../../../images/blue/app.png";
+import appIcon from "url:../../../images/blue/app.png";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";

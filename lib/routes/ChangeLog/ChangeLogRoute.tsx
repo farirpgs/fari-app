@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import React, { useEffect, useState } from "react";
 import showdown from "showdown";
-import changeLogMarkdown from "../../../CHANGELOG.md";
+import changeLogMarkdown from "url:../../../CHANGELOG.md";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";

@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
-import appIcon from "../../../images/blue/app.png";
+import appIcon from "url:../../../images/blue/app.png";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import {
