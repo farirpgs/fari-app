@@ -36,21 +36,23 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   if (!peer.current) {
     const id = uuidV4();
-    if (env.context === "localhost") {
-      peer.current = new Peer(id, {
-        path: "/peer/connect",
-        debug: options.debug ? 3 : 0,
-        // ...localhostConfig,
-        // ...stagingConfig,
-        ...prodConfig,
-      });
-    } else {
-      peer.current = new Peer(id, {
-        host: "fari-peer-server.herokuapp.com",
-        secure: true,
-        path: "/peer/connect",
-        debug: options.debug ? 3 : 0,
-      });
+    if (typeof window !== "undefined") {
+      if (env.context === "localhost") {
+        peer.current = new Peer(id, {
+          path: "/peer/connect",
+          debug: options.debug ? 3 : 0,
+          // ...localhostConfig,
+          // ...stagingConfig,
+          ...prodConfig,
+        });
+      } else {
+        peer.current = new Peer(id, {
+          host: "fari-peer-server.herokuapp.com",
+          secure: true,
+          path: "/peer/connect",
+          debug: options.debug ? 3 : 0,
+        });
+      }
     }
   }
 

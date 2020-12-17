@@ -2,7 +2,6 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
-import patreonImage from "../../../images/services/patreon.png";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const Patreon: React.FC = (props) => {
@@ -29,7 +28,7 @@ export const Patreon: React.FC = (props) => {
       >
         <Grid container wrap="nowrap" spacing={1} alignItems="center">
           <Grid item>
-            <img width="16px" src={patreonImage} />
+            <img width="16px" src={"/images/services/patreon.png"} />
           </Grid>
           <Grid item>{t("donation.patreon")}</Grid>
         </Grid>

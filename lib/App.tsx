@@ -3,11 +3,8 @@ import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import * as Sentry from "@sentry/react";
 import React, { useContext } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { BrowserRouter } from "react-router-dom";
-import { AppRouter } from "./components/AppRouter/AppRouter";
 import { CharactersManager } from "./components/CharactersManager/CharactersManager";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
-import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { env } from "./constants/env";
@@ -25,15 +22,16 @@ import {
 } from "./contexts/SceneContext/ScenesContext";
 import { AppDarkTheme, AppLightTheme } from "./theme";
 
-export const App: React.FC<{}> = () => {
+export const App: React.FC<{}> = (props) => {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
+
   return (
     <DarkModeContext.Provider value={darkModeManager}>
       <CharactersContext.Provider value={charactersManager}>
         <ScenesContext.Provider value={scenesManager}>
-          <AppProvider />
+          <AppProvider>{props.children}</AppProvider>
         </ScenesContext.Provider>
       </CharactersContext.Provider>
     </DarkModeContext.Provider>
@@ -50,20 +48,21 @@ export const AppProvider: React.FC<{}> = (props) => {
         <CssBaseline />
         <Sentry.ErrorBoundary fallback={ErrorReport} showDialog>
           <HelmetProvider>
-            <BrowserRouter>
-              <Helmet
-                htmlAttributes={{
-                  "client-build-number": env.buildNumber,
-                  "client-hash": env.hash,
-                  "client-context": env.context,
-                }}
-              />
-              <ScrollToTop />
-              <History />
-              <ScenesManager />
-              <CharactersManager />
-              <AppRouter />
-            </BrowserRouter>
+            {/* <BrowserRouter> */}
+            <Helmet
+              htmlAttributes={{
+                "client-build-number": env.buildNumber,
+                "client-hash": env.hash,
+                "client-context": env.context,
+              }}
+            />
+            <ScrollToTop />
+            {/* <History /> */}
+            <ScenesManager />
+            <CharactersManager />
+            {/* <AppRouter /> */}
+            {props.children}
+            {/* </BrowserRouter> */}
           </HelmetProvider>
         </Sentry.ErrorBoundary>
       </StylesProvider>

@@ -20,10 +20,9 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
+import RouterLink from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Link as RouterLink } from "react-router-dom";
-import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
@@ -272,7 +271,7 @@ export const Page: React.FC<{
             })}
           >
             <RouterLink
-              to="/"
+              href="/"
               data-cy="page.menu.home"
               className={css({
                 textDecoration: "none",
@@ -285,7 +284,7 @@ export const Page: React.FC<{
                   marginRight: "1rem",
                   cursor: "pointer",
                 })}
-                src={appIcon}
+                src={"/images/blue/app.png"}
               />
             </RouterLink>
 
@@ -307,7 +306,7 @@ export const Page: React.FC<{
                 })}
               >
                 <RouterLink
-                  to="/"
+                  href="/"
                   className={css({
                     color: "inherit",
                     textDecoration: "none",
@@ -406,7 +405,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
-                to="/"
+                href="/"
                 data-cy="page.menu.play"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
@@ -444,7 +443,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
-                to="/dice"
+                href="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
@@ -456,7 +455,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
-                to="/about"
+                href="/about"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}

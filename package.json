@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "ci": "yarn install && yarn build && yarn validate",
-    "start": "parcel ./lib/index.html --target browser",
+    "start": "NODE_OPTIONS='--inspect' next dev",
     "build": "parcel build ./lib/index.html --target browser",
     "serve:build": "yarn serve dist -l 1234",
     "build:serve": "yarn build && yarn serve:build",
@@ -73,6 +73,7 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
     "jest": "^26.5.3",
+    "next": "^10.0.3",
     "parcel": "^1.12.4",
     "parcel-plugin-bundle-visualiser": "^1.2.0",
     "react-test-renderer": "^17.0.1",

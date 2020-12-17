@@ -19,7 +19,6 @@ export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
 );
 
 export function useScenes(props?: { localStorage: Storage }) {
-  const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-scenes";
   const [mode, setMode] = useState(ManagerMode.Close);
   const managerCallback = useRef<IManagerCallback | undefined>(undefined);
@@ -27,6 +26,10 @@ export function useScenes(props?: { localStorage: Storage }) {
   const [scenes, setScenes] = useState<Array<ISavableScene>>(() => {
     // load from local storage
     try {
+      if (typeof window === "undefined") {
+        return [];
+      }
+      const localStorage = props?.localStorage ?? window.localStorage;
       const localStorageScenes = localStorage.getItem(key);
       if (localStorageScenes) {
         const parsed = JSON.parse(localStorageScenes);
@@ -56,6 +59,7 @@ export function useScenes(props?: { localStorage: Storage }) {
     // sync local storage
     try {
       const serialized = JSON.stringify(scenes);
+      const localStorage = props?.localStorage ?? window.localStorage;
       localStorage.setItem(key, serialized);
     } catch (error) {
       console.error(error);

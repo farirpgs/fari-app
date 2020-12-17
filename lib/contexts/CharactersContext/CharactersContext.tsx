@@ -19,7 +19,6 @@ export const CharactersContext = React.createContext<
 >(undefined as any);
 
 export function useCharacters(props?: { localStorage: Storage }) {
-  const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-characters";
 
   const [mode, setMode] = useState(ManagerMode.Close);
@@ -27,6 +26,10 @@ export function useCharacters(props?: { localStorage: Storage }) {
   const [characters, setCharacters] = useState<Array<ICharacter>>(() => {
     // load from local storage
     try {
+      if (typeof window === "undefined") {
+        return [];
+      }
+      const localStorage = props?.localStorage ?? window.localStorage;
       const localStorageCharacters = localStorage.getItem(key);
       if (localStorageCharacters) {
         const parsed = JSON.parse(localStorageCharacters);
@@ -56,6 +59,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     // sync local storage
     try {
       const serialized = JSON.stringify(characters);
+      const localStorage = props?.localStorage ?? window.localStorage;
       localStorage.setItem(key, serialized);
     } catch (error) {
       console.error(error);

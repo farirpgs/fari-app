@@ -5,10 +5,10 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
-import appIcon from "../../../images/blue/app.png";
+// import { Link } from "react-router-dom";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { Page } from "../../components/Page/Page";
@@ -119,7 +119,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
               <Grid item xs={12} md={4} className={sectionGridItem}>
                 <Box height="100%" display="flex" flexDirection="column">
                   <Box mb="1rem">
-                    <Link to="/play">
+                    <Link href="/play">
                       <FateLabel
                         variant="h5"
                         align="center"
@@ -153,7 +153,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Box mb="1rem">
-                  <Link to="/play-offline">
+                  <Link href="/play-offline">
                     <FateLabel
                       variant="h5"
                       align="center"
@@ -196,8 +196,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
         <Box my=".5rem">
           <Grid container justify="center" spacing={6}>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link to="/dice">
+              <Link href="/dice">
+                <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(DiceGameIcon)}
                   <FateLabel
                     variant="h5"
@@ -207,11 +207,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
                   >
                     {"Dice"}
                   </FateLabel>
-                </Link>
-              </Box>
+                </Box>
+              </Link>
             </Grid>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link to="/draw">
+              <Link href="/draw">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(IllustrationIcon)}
                   <FateLabel
@@ -227,7 +227,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
               </Link>
             </Grid>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link to="/oracle">
+              <Link href="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
                   <FateLabel
@@ -257,7 +257,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </FateLabel>
         </Box>
         <Box pb=".5rem" textAlign="center">
-          <img alt="Fari" width="125px" src={appIcon} />
+          <img alt="Fari" width="125px" src={"/images/blue/app.png"} />
         </Box>
         <Box pb="2rem" textAlign="center">
           <FateLabel variant="h6" color="secondary">

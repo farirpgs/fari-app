@@ -8,7 +8,7 @@ export const FateLabel: React.FC<
     underline?: boolean;
   } & TypographyProps
 > = (props) => {
-  const { className, underline, ...rest } = props;
+  const { className, underline, ref, ...rest } = props;
   return (
     <Typography
       {...rest}
