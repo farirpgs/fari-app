@@ -6,7 +6,7 @@
   "license": "AGPL-3.0",
   "main": "index.js",
   "scripts": {
-    "ci": "yarn install && yarn build && yarn validate",   
+    "ci": "yarn install && yarn build && yarn validate",
     "start": "parcel serve ./lib/index.html",
     "build": "parcel build ./lib/index.html",
     "serve:build": "yarn serve dist -l 1234",
@@ -73,8 +73,7 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
     "jest": "^26.5.3",
-    "parcel": "next",
-    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "parcel": "^2.0.0-beta.1",
     "react-test-renderer": "^17.0.1",
     "serve": "^11.3.2",
     "ts-jest": "^26.4.1",
