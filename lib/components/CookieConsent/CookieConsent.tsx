@@ -10,11 +10,13 @@ const cookieConsentLocalStorageKey = "cookie-consent";
 
 type ICookieConsent = "true" | undefined;
 export const CookieConsent: React.FC<{}> = (props) => {
-  const valueFromStorage = localStorage.getItem(
-    cookieConsentLocalStorageKey
-  ) as ICookieConsent;
-
-  const [consent, setConsent] = useState<ICookieConsent>(valueFromStorage);
+  const [consent, setConsent] = useState<ICookieConsent>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(
+        cookieConsentLocalStorageKey
+      ) as ICookieConsent;
+    }
+  });
   const { t } = useTranslate();
   const open = consent !== "true";
   const theme = useTheme();

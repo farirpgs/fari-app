@@ -5,7 +5,6 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Link from "next/link";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 // import { Link } from "react-router-dom";
@@ -15,11 +14,6 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import {
-  DiceGameIcon,
-  EyeIcon,
-  IllustrationIcon,
-} from "../../domains/Icons/Icons";
 import { makeIcon } from "../../domains/Icons/makeIcon";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -119,7 +113,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
               <Grid item xs={12} md={4} className={sectionGridItem}>
                 <Box height="100%" display="flex" flexDirection="column">
                   <Box mb="1rem">
-                    <Link href="/play">
+                    {/* <Link href="/play">
                       <FateLabel
                         variant="h5"
                         align="center"
@@ -128,7 +122,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                       >
                         {t("home-route.play-online.title")}
                       </FateLabel>
-                    </Link>
+                    </Link> */}
                   </Box>
 
                   <Typography variant="body1" align="center">
@@ -153,7 +147,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Box mb="1rem">
-                  <Link href="/play-offline">
+                  {/* <Link href="/play-offline">
                     <FateLabel
                       variant="h5"
                       align="center"
@@ -162,7 +156,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     >
                       {t("home-route.play-offline.title")}
                     </FateLabel>
-                  </Link>
+                  </Link> */}
                 </Box>
 
                 <Typography variant="body1" align="center">
@@ -196,7 +190,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
         <Box my=".5rem">
           <Grid container justify="center" spacing={6}>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link href="/dice">
+              {/* <Link href="/dice">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(DiceGameIcon)}
                   <FateLabel
@@ -208,10 +202,10 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     {"Dice"}
                   </FateLabel>
                 </Box>
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link href="/draw">
+              {/* <Link href="/draw">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(IllustrationIcon)}
                   <FateLabel
@@ -224,10 +218,10 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     {"Draw"}
                   </FateLabel>
                 </Box>
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link href="/oracle">
+              {/* <Link href="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
                   <FateLabel
@@ -240,7 +234,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     {"Oracle"}
                   </FateLabel>
                 </Box>
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
         </Box>

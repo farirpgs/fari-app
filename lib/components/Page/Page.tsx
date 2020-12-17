@@ -403,16 +403,16 @@ export const Page: React.FC<{
         {!isLive && (
           <>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                href="/"
-                data-cy="page.menu.play"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.play")}
-              </Button>
+              <RouterLink href="/">
+                <Button
+                  color="inherit"
+                  data-cy="page.menu.play"
+                  variant={mobile ? "outlined" : undefined}
+                  fullWidth={mobile}
+                >
+                  {t("menu.play")}
+                </Button>
+              </RouterLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
@@ -441,27 +441,29 @@ export const Page: React.FC<{
               </Button>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                href="/dice"
-                data-cy="page.menu.dice"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.dice")}
-              </Button>
+              <RouterLink href="/dice">
+                <Button
+                  color="inherit"
+                  href="/dice"
+                  data-cy="page.menu.dice"
+                  variant={mobile ? "outlined" : undefined}
+                  fullWidth={mobile}
+                >
+                  {t("menu.dice")}
+                </Button>
+              </RouterLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                href="/about"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.about")}
-              </Button>
+              <RouterLink href="/about">
+                <Button
+                  color="inherit"
+                  href="/about"
+                  variant={mobile ? "outlined" : undefined}
+                  fullWidth={mobile}
+                >
+                  {t("menu.about")}
+                </Button>
+              </RouterLink>
             </Grid>
           </>
         )}
