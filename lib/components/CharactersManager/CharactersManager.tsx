@@ -24,7 +24,13 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     const newCharacter = charactersManager.actions.add(
       CharacterType.CoreCondensed
     );
-    history.push(`/characters/${newCharacter.id}`);
+
+    if (charactersManager.state.managerCallback) {
+      charactersManager.state.managerCallback(newCharacter);
+    } else {
+      history.push(`/characters/${newCharacter.id}`);
+    }
+
     charactersManager.actions.closeManager();
     logger.info("CharactersManager:onAdd");
   }
@@ -58,11 +64,20 @@ export const CharactersManager: React.FC<IProps> = (props) => {
         const characterWithNewId = produce(c, (draft) => {
           draft.id = uuidV4();
         });
+
         const migratedCharacter = migrateCharacter(characterWithNewId);
+
         charactersManager.actions.upsert(migratedCharacter);
+
+        if (charactersManager.state.managerCallback) {
+          charactersManager.state.managerCallback(migratedCharacter);
+        } else {
+          history.push(`/characters/${migratedCharacter.id}`);
+        }
+        charactersManager.actions.closeManager();
+        logger.info("CharactersManager:onImport");
       },
     });
-    logger.info("CharactersManager:onImport");
   }
 
   function onExport(character: ICharacter) {
