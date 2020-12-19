@@ -59,6 +59,7 @@ import {
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
+import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
@@ -152,6 +153,12 @@ export const Scene: React.FC<IProps> = (props) => {
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
 
+  const shouldBlockLeaving =
+    props.mode !== SceneMode.Manage ||
+    (props.mode === SceneMode.Manage && sceneManager.state.dirty);
+
+  useBlockReload(shouldBlockLeaving);
+
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -209,11 +216,7 @@ export const Scene: React.FC<IProps> = (props) => {
       liveLabel={sceneManager.state.scene.name}
     >
       <Prompt
-        when={props.mode !== SceneMode.Manage}
-        message={t("manager.leave-without-saving")}
-      />
-      <Prompt
-        when={props.mode === SceneMode.Manage && sceneManager.state.dirty}
+        when={shouldBlockLeaving}
         message={t("manager.leave-without-saving")}
       />
       <Snackbar
@@ -678,6 +681,7 @@ export const Scene: React.FC<IProps> = (props) => {
   function renderAspects() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const hasAspects = aspectIds.length > 0;
+
     const sortedAspectIds = arraySort(aspectIds, [
       function sortByPinned(id) {
         const aspect = sceneManager.state.scene.aspects[id];
