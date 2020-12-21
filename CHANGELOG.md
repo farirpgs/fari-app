@@ -36,6 +36,7 @@
 - fix: block reload when playing a Scene [#178](https://github.com/fariapp/fari/issues/178)
 - fix: sort button [#177](https://github.com/fariapp/fari/issues/177)
 - feat: join a game using the Add or Import character buttons
+- feat: scene name help text
 
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
