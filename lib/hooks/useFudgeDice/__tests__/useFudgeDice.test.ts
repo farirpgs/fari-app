@@ -177,6 +177,7 @@ describe("useFudgeDice", () => {
   });
   it("should handle labels on load and after and going back to without labels", async () => {
     // GIVEN
+    jest.useFakeTimers();
     const rolls: Array<IDiceRoll> = [];
 
     // WHEN
@@ -205,7 +206,7 @@ describe("useFudgeDice", () => {
     expect(view.result.current.state.tooltipTitle).toEqual(
       "[ ] [ ] [+] [+] (2)"
     );
-    expect(view.result.current.state.tooltipDescription).toEqual("Notice (+2)");
+    expect(view.result.current.state.tooltipDescription).toEqual("NOTICE (+2)");
 
     // WHEN
     view.rerender({
@@ -225,7 +226,7 @@ describe("useFudgeDice", () => {
     expect(view.result.current.state.tooltipTitle).toEqual(
       "[+] [+] [+] [+] (4)"
     );
-    expect(view.result.current.state.tooltipDescription).toEqual("Shoot (+4)");
+    expect(view.result.current.state.tooltipDescription).toEqual("SHOOT (+4)");
 
     // WHEN
     view.rerender({

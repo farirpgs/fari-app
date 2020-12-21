@@ -74,7 +74,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }
 
   function add(type: CharacterType): ICharacter {
-    const newCharacter = makeCharacter(type);
+    const newCharacter = CharacterFactory.make(type);
 
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
@@ -164,7 +164,7 @@ export enum Position {
 function makeCondensedCharacter(): ICharacter {
   return {
     id: "",
-    version: 3,
+    version: CharacterFactory.latestVersion,
     name: "",
     group: undefined,
     pages: [
@@ -282,7 +282,7 @@ function makeCondensedCharacter(): ICharacter {
 function makeAcceleratedCharacter(): ICharacter {
   return {
     id: "",
-    version: 3,
+    version: CharacterFactory.latestVersion,
     name: "",
     group: undefined,
     pages: [
@@ -378,7 +378,7 @@ function makeAcceleratedCharacter(): ICharacter {
 function makeCustomCharacter(): ICharacter {
   return {
     id: "",
-    version: 3,
+    version: CharacterFactory.latestVersion,
     name: "",
     group: undefined,
     pages: [
@@ -395,20 +395,23 @@ function makeCustomCharacter(): ICharacter {
   };
 }
 
-export function makeCharacter(type: CharacterType) {
-  const newCharacter = {
-    [CharacterType.CoreCondensed]: makeCondensedCharacter,
-    [CharacterType.Accelerated]: makeAcceleratedCharacter,
-    [CharacterType.Custom]: makeCustomCharacter,
-  }[type]();
+export const CharacterFactory = {
+  latestVersion: 3,
+  make(type: CharacterType) {
+    const newCharacter = {
+      [CharacterType.CoreCondensed]: makeCondensedCharacter,
+      [CharacterType.Accelerated]: makeAcceleratedCharacter,
+      [CharacterType.Custom]: makeCustomCharacter,
+    }[type]();
 
-  return {
-    ...newCharacter,
-    id: Id.get(),
-    name: "",
-    lastUpdated: getUnix(),
-  };
-}
+    return {
+      ...newCharacter,
+      id: Id.get(),
+      name: "",
+      lastUpdated: getUnix(),
+    };
+  },
+};
 
 export interface IV1Character {
   id: string;
@@ -533,7 +536,7 @@ export interface ICharacter {
 export function migrateCharacters(characters: Array<any>) {
   return characters.map((c) => {
     return migrateCharacter(c);
-  });
+  }) as Array<ICharacter>;
 }
 
 export function migrateCharacter(c: any) {
@@ -653,6 +656,6 @@ export function migrateV2Character(v2: IV2Character): ICharacter {
     fatePoints: v2.fatePoints,
     playedDuringTurn: v2.playedDuringTurn,
     refresh: v2.refresh,
-    version: 3,
+    version: CharacterFactory.latestVersion,
   };
 }

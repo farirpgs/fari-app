@@ -1,8 +1,8 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import {
+  CharacterFactory,
   CharacterType,
   ICharacter,
-  makeCharacter,
 } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useCharacter } from "../useCharacter";
 
@@ -10,7 +10,7 @@ describe("useCharacter", () => {
   describe("refresh", () => {
     // GIVEN
     const character = {
-      ...makeCharacter(CharacterType.CoreCondensed),
+      ...CharacterFactory.make(CharacterType.CoreCondensed),
       id: "1",
       lastUpdated: 1,
     };
@@ -35,7 +35,7 @@ describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
     // GIVEN
     const character = {
-      ...makeCharacter(CharacterType.CoreCondensed),
+      ...CharacterFactory.make(CharacterType.CoreCondensed),
       id: "1",
       lastUpdated: 1,
     };
@@ -202,7 +202,7 @@ describe("useCharacter", () => {
     it("should load the new template but keep the id and the name as is", () => {
       // GIVEN
       const character = {
-        ...makeCharacter(CharacterType.CoreCondensed),
+        ...CharacterFactory.make(CharacterType.CoreCondensed),
         id: "1",
         name: "Luke Skywalker",
         lastUpdated: 1,
@@ -268,6 +268,7 @@ describe("useCharacter", () => {
                   },
                 ],
                 id: expect.anything(),
+                visibleOnCard: true,
                 label: "Aspects",
                 position: 0,
                 type: 0,
@@ -290,6 +291,7 @@ describe("useCharacter", () => {
                     value: "",
                   },
                 ],
+
                 id: expect.anything(),
                 label: "Stunts & Extras",
                 position: 0,
@@ -394,6 +396,7 @@ describe("useCharacter", () => {
                   },
                 ],
                 id: expect.anything(),
+                visibleOnCard: true,
                 label: "Skills",
                 position: 1,
                 type: 1,
@@ -403,7 +406,7 @@ describe("useCharacter", () => {
         ],
         playedDuringTurn: undefined,
         refresh: 3,
-        version: 2,
+        version: CharacterFactory.latestVersion,
       });
     });
   });

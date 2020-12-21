@@ -3,10 +3,10 @@ import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import {
+  CharacterFactory,
   CharacterType,
   CheckboxesFieldValue,
   ICharacter,
-  makeCharacter,
   makeField,
   Position,
   SectionType,
@@ -48,7 +48,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const oldId = draft.id;
         const oldName = draft.name;
-        const defaultCharacter = makeCharacter(type);
+        const defaultCharacter = CharacterFactory.make(type);
 
         return {
           ...defaultCharacter,
