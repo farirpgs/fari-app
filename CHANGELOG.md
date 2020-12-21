@@ -1,4 +1,4 @@
-## 3.3.0-7 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+## 3.3.0-10 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
@@ -37,6 +37,10 @@
 - fix: sort button [#177](https://github.com/fariapp/fari/issues/177)
 - feat: join a game using the Add or Import character buttons
 - feat: scene name help text
+
+**3.3.10**
+
+- fix: sentry errors on magic grid container
 
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
