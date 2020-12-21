@@ -42,6 +42,10 @@
 
 - fix: sentry errors on magic grid container
 
+**3.3.11**
+
+- fix: default character name in player row
+
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
 - feat: A brand new Drawing Area with support for multiple shapes, colors and even player tokens. 👏 [ddkn](https://github.com/ddkn) for the help with the player token designs

@@ -48,7 +48,10 @@ export const PlayerRow: React.FC<
     ? theme.palette.primary.main
     : textColor.disabled;
 
-  const name = props.player?.playerName || props.player?.character?.name || "";
+  const name =
+    props.player?.playerName ||
+    props.player?.character?.name ||
+    t("play-route.character-name");
   const hasCharacterSheet = !!props.player.character;
 
   const selectedRowStyle = css(
