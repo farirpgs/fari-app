@@ -60,14 +60,14 @@ describe("useScenes", () => {
           aspects: {},
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
-          name: "",
+          name: "Scene Name",
           version: 1,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"","aspects":{},"version":1,"lastUpdated":${
+        }","name":"Scene Name","aspects":{},"version":1,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
