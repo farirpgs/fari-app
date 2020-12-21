@@ -114,7 +114,7 @@ export const frTranslation: Record<
   "play-route.add-npc": `PNJ`,
   "play-route.awesome-name": `Ce nom est top!`,
   "play-route.cancel": `Annuler`,
-  "play-route.character-name": `Nom du personnage:`,
+  "play-route.character-name": `Nom du personnage`,
   "play-route.clear-drawing": `Réinitialiser`,
   "play-route.click-on-the-": `Cliquez sur le bouton`,
   "play-route.click-on-the-add-aspect-": `Aspect`,

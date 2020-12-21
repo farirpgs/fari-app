@@ -114,7 +114,7 @@ export const ruTranslation: Record<
   "play-route.add-npc": `Добавить NPC`,
   "play-route.awesome-name": `Кстати, классное имя!`,
   "play-route.cancel": `Отмена`,
-  "play-route.character-name": `Имя Персонажа:`,
+  "play-route.character-name": `Имя Персонажа`,
   "play-route.clear-drawing": `Очистить`,
   "play-route.click-on-the-": `Нажатие на`,
   "play-route.click-on-the-add-aspect-": `Добавить Аспект`,

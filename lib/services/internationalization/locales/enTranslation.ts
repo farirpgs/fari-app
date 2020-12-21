@@ -109,7 +109,7 @@ export const enTranslation = {
   "play-route.add-npc": `NPC`,
   "play-route.awesome-name": `That's an awesome name by the way!`,
   "play-route.cancel": `Cancel`,
-  "play-route.character-name": `Character Name:`,
+  "play-route.character-name": `Character Name`,
   "play-route.clear-drawing": `Clear`,
   "play-route.click-on-the-": `Click on the`,
   "play-route.click-on-the-add-aspect-": `Aspect`,

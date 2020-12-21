@@ -342,7 +342,10 @@ export const Scene: React.FC<IProps> = (props) => {
               </Typography>
             </Box>
             <Box>
-              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+              <InputLabel shrink>
+                {t("play-route.character-name")}
+                {":"}
+              </InputLabel>
               <TextField
                 value={offlineCharacterName}
                 data-cy="scene.offline-character-dialog.name"

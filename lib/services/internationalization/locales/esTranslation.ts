@@ -114,7 +114,7 @@ export const esTranslation: Record<
   "play-route.add-npc": `PnJ`,
   "play-route.awesome-name": `Por cierto, ¡es un nombre genial!`,
   "play-route.cancel": `Cancelar`,
-  "play-route.character-name": `Nombre del Personaje:`,
+  "play-route.character-name": `Nombre del Personaje`,
   "play-route.clear-drawing": `Limpiar`,
   "play-route.click-on-the-": `Pulse en el botón`,
   "play-route.click-on-the-add-aspect-": `Aspecto`,

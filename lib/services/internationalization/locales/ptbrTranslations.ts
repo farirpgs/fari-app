@@ -114,7 +114,7 @@ export const ptbrTranslation: Record<
   "play-route.add-npc": `PdN`,
   "play-route.awesome-name": `A propósito, é um ótimo nome!`,
   "play-route.cancel": `Cancelar`,
-  "play-route.character-name": `Nome do Personagem:`,
+  "play-route.character-name": `Nome do Personagem`,
   "play-route.clear-drawing": `Apagar`,
   "play-route.click-on-the-": `Clique no(a)`,
   "play-route.click-on-the-add-aspect-": `Aspecto`,

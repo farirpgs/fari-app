@@ -114,7 +114,7 @@ export const deTranslation: Record<
   "play-route.add-npc": `NSC`,
   "play-route.awesome-name": `Das ist übrigens ein fantastischer Name!`,
   "play-route.cancel": `Abbrechen`,
-  "play-route.character-name": `Charakter Name:`,
+  "play-route.character-name": `Charakter Name`,
   "play-route.clear-drawing": `Leeren`,
   "play-route.click-on-the-": `Klick auf`,
   "play-route.click-on-the-add-aspect-": `Aspekt`,
