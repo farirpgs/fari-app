@@ -85,6 +85,35 @@ describe("arraySort", () => {
       { age: 1, name: "A", title: "frontend" },
     ]);
   });
+  it("should handle having multiple getters for tiebrakers for booleans than numbers", () => {
+    // GIVEN
+    const list = [
+      { pinned: true, type: 0 },
+      { pinned: false, type: 0 },
+      { pinned: true, type: 0 },
+      { pinned: false, type: 0 },
+      { pinned: true, type: 1 },
+      { pinned: false, type: 1 },
+      { pinned: true, type: 1 },
+      { pinned: false, type: 1 },
+    ];
+    // WHEN
+    const result = arraySort(list, [
+      (it) => ({ value: it.pinned, direction: "asc" }),
+      (it) => ({ value: it.type, direction: "asc" }),
+    ]);
+    // THEN
+    expect(result).toEqual([
+      { pinned: true, type: 0 },
+      { pinned: true, type: 0 },
+      { pinned: true, type: 1 },
+      { pinned: true, type: 1 },
+      { pinned: false, type: 0 },
+      { pinned: false, type: 0 },
+      { pinned: false, type: 1 },
+      { pinned: false, type: 1 },
+    ]);
+  });
 
   it("should handle undefined values in number sort", () => {
     // GIVEN

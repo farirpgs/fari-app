@@ -136,9 +136,6 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   );
 
   function renderActions() {
-    if (props.mode !== ManagerMode.Manage) {
-      return null;
-    }
     return (
       <Box padding={0.5}>
         <Grid container spacing={1} justify="center">
@@ -258,28 +255,26 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                       primary={<>{vm.name}</>}
                       secondary={listItem.formatDate(vm.lastUpdated)}
                     />
-                    {props.mode === ManagerMode.Manage && (
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="start"
-                          data-cy="manager.export"
-                          onClick={() => {
-                            onExport(item);
-                          }}
-                        >
-                          <ExportIcon />
-                        </IconButton>
-                        <IconButton
-                          edge="end"
-                          data-cy="manager.delete"
-                          onClick={() => {
-                            onDelete(item);
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    )}
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge="start"
+                        data-cy="manager.export"
+                        onClick={() => {
+                          onExport(item);
+                        }}
+                      >
+                        <ExportIcon />
+                      </IconButton>
+                      <IconButton
+                        edge="end"
+                        data-cy="manager.delete"
+                        onClick={() => {
+                          onDelete(item);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
                   </ListItem>
                 );
               })}

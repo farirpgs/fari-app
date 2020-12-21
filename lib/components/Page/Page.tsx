@@ -122,6 +122,7 @@ export const Page: React.FC<{
   function renderFooter() {
     return (
       <Box
+        displayPrint="none"
         className={css({
           paddingTop: "1rem",
           borderTop: "1px solid #e0e0e0",
@@ -249,6 +250,7 @@ export const Page: React.FC<{
     const color = theme.palette.getContrastText(background);
     return (
       <Box
+        displayPrint="none"
         className={css({
           color: color,
           background: background,
