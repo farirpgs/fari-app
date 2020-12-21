@@ -122,6 +122,7 @@ export const Page: React.FC<{
   function renderFooter() {
     return (
       <Box
+        displayPrint="none"
         className={css({
           paddingTop: "1rem",
           borderTop: "1px solid #e0e0e0",
@@ -191,6 +192,52 @@ export const Page: React.FC<{
               </Grid>
             </Grid>
           )}
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Box mt=".5rem">
+                <Link
+                  href="https://www.iubenda.com/privacy-policy/97549620"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cy="page.privacy-policy"
+                >
+                  {t("page.privacy-policy")}
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container justify="center">
+            <Grid item xs>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This site is not affiliated with Evil Hat Productions, LLC.
+                </Typography>
+              </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This work is based on Fate Core System and Fate Accelerated
+                  Edition (found at http://www.faterpg.com/), products of Evil
+                  Hat Productions, LLC, developed, authored, and edited by
+                  Leonard Balsera, Brian Engard, Jeremy Keller, Ryan Macklin,
+                  Mike Olson, Clark Valentine, Amanda Valentine, Fred Hicks, and
+                  Rob Donoghue, and licensed for our use under the Creative
+                  Commons Attribution 3.0 Unported license
+                  (http://creativecommons.org/licenses/by/3.0/).
+                </Typography>
+              </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  This work is based on Fate Condensed (found at
+                  http://www.faterpg.com/), a product of Evil Hat Productions,
+                  LLC, developed, authored, and edited by PK Sullivan, Lara
+                  Turner, Leonard Balsera, Fred Hicks, Richard Bellingham,
+                  Robert Hanz, Ryan Macklin, and Sophie Lagacé, and licensed for
+                  our use under the Creative Commons Attribution 3.0 Unported
+                  license (http://creativecommons.org/licenses/by/3.0/).
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     );
@@ -203,6 +250,7 @@ export const Page: React.FC<{
     const color = theme.palette.getContrastText(background);
     return (
       <Box
+        displayPrint="none"
         className={css({
           color: color,
           background: background,

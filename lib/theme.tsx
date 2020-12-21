@@ -32,6 +32,18 @@ export const defaultThemeConfiguration: ThemeOptions = {
     ].join(","),
   },
   overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "@media print": {
+          "@page": {
+            size: "A2",
+          },
+          "body": {
+            minWidth: "1200px",
+          },
+        },
+      },
+    },
     MuiButton: {
       root: {
         borderRadius: "7px",

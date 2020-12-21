@@ -49,10 +49,12 @@ export function arraySort<T>(
         const aBoolean = getter(a).value as boolean;
         const bBoolean = getter(b).value as boolean;
 
-        if (sortingType === "asc") {
-          return aBoolean === bBoolean ? 0 : aBoolean ? -1 : 1;
-        } else {
-          return aBoolean === bBoolean ? 0 : aBoolean ? 1 : -1;
+        if (aBoolean !== bBoolean) {
+          if (sortingType === "asc") {
+            return aBoolean ? -1 : 1;
+          } else {
+            return aBoolean ? 1 : -1;
+          }
         }
       }
     }

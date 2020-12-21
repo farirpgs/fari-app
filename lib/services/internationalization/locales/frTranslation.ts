@@ -110,6 +110,7 @@ export const frTranslation: Record<
   "oracle.value.Yes": `Yes`,
   "oracle.value.YesAnd": `Yes and...`,
   "oracle.value.YesBut": `Yes but...`,
+  "page.privacy-policy": `Privacy Policy`,
   "play-route.add-aspect": `Aspect`,
   "play-route.add-bad-guy": `Adversaire`,
   "play-route.add-boost": `Boost`,
@@ -118,7 +119,7 @@ export const frTranslation: Record<
   "play-route.add-npc": `PNJ`,
   "play-route.awesome-name": `Ce nom est top!`,
   "play-route.cancel": `Annuler`,
-  "play-route.character-name": `Nom du personnage:`,
+  "play-route.character-name": `Nom du personnage`,
   "play-route.clear-drawing": `Réinitialiser`,
   "play-route.click-on-the-": `Cliquez sur le bouton`,
   "play-route.click-on-the-add-aspect-": `Aspect`,
@@ -153,6 +154,7 @@ export const frTranslation: Record<
   "play-route.reset-scene": `Réinitialiser`,
   "play-route.roll": `Lancer`,
   "play-route.save-scene": `Enregistrer`,
+  "play-route.scene-name": `Nom de la scène`,
   "play-route.scene-saved": `Scène enregistré`,
   "play-route.show-character-cards": `Afficher les cartes de personnages`,
   "play-route.sort": `Trier`,
@@ -167,61 +169,4 @@ export const frTranslation: Record<
   "player-row.remove-fate-point": `Retirer un point Fate`,
   "scenes-route.meta.description": `Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.`,
   "scenes-route.meta.title": `Gérer vos Scènes`,
-
-  // // Aspects
-  // "High Concept": `High Concept`,
-  // "Trouble": `Trouble`,
-  // "Relationship": `Relationship`,
-  // "Other Aspect": `Other Aspect`,
-
-  // // Skills
-  // "Academics": `Academics`,
-  // "Athletics": `Athletics`,
-  // "Burglary": `Burglary`,
-  // "Contacts": `Contacts`,
-  // "Crafts": `Crafts`,
-  // "Deceive": `Deceive`,
-  // "Drive": `Drive`,
-  // "Empathy": `Empathy`,
-  // "Fight": `Fight`,
-  // "Investigate": `Investigate`,
-  // "Lore": `Lore`,
-  // "Notice": `Notice`,
-  // "Physique": `Physique`,
-  // "Provoke": `Provoke`,
-  // "Rapport": `Rapport`,
-  // "Resources": `Resources`,
-  // "Shoot": `Shoot`,
-  // "Stealth": `Stealth`,
-  // "Will": `Will`,
-
-  // // Stunts
-  // "Stunt #1": `Stunt #1`,
-  // "Stunt #2": `Stunt #2`,
-  // "Stunt #3": `Stunt #3`,
-
-  // // Stress
-  // "Physical": `Physical`,
-  // "Mental": `Mental`,
-
-  // // FAE Stress
-  // "Stress": `Stress`,
-
-  // // Consequences
-  // "Mild": `Mild`,
-  // "Moderate": `Moderate`,
-  // "Severe": `Severe`,
-
-  // // FAE Approaches
-  // "Careful": `Careful`,
-  // "Clever": `Clever`,
-  // "Forceful": `Forceful`,
-  // "Flashy": `Flashy`,
-  // "Quick": `Quick`,
-  // "Sneaky": `Sneaky`,
-
-  // // Custom Character
-  // "Aspect": `Aspect`,
-  // "Stunt": `Stunt`,
-  // "Skill": `Skill`,
 };

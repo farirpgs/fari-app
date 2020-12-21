@@ -405,6 +405,7 @@ export function makeCharacter(type: CharacterType) {
   return {
     ...newCharacter,
     id: Id.get(),
+    name: "",
     lastUpdated: getUnix(),
   };
 }

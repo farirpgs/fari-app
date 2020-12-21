@@ -20,8 +20,14 @@ export const ScenesManager: React.FC<IProps> = (props) => {
 
   function onAdd() {
     const newScene = scenesManager.actions.add();
-    history.push(`/scenes/${newScene.id}`);
+    if (scenesManager.state.managerCallback) {
+      scenesManager.state.managerCallback(newScene);
+    } else {
+      history.push(`/scenes/${newScene.id}`);
+    }
+
     scenesManager.actions.closeManager();
+
     logger.info("ScenesManager:onAdd");
   }
 

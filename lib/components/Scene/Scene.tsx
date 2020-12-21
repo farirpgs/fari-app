@@ -11,6 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -59,6 +60,7 @@ import {
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
+import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
@@ -152,6 +154,12 @@ export const Scene: React.FC<IProps> = (props) => {
   const [savedSnack, setSavedSnack] = useState(false);
   const [offlineCharacterName, setOfflineCharacterName] = useState("");
 
+  const shouldBlockLeaving =
+    props.mode !== SceneMode.Manage ||
+    (props.mode === SceneMode.Manage && sceneManager.state.dirty);
+
+  useBlockReload(shouldBlockLeaving);
+
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -209,11 +217,7 @@ export const Scene: React.FC<IProps> = (props) => {
       liveLabel={sceneManager.state.scene.name}
     >
       <Prompt
-        when={props.mode !== SceneMode.Manage}
-        message={t("manager.leave-without-saving")}
-      />
-      <Prompt
-        when={props.mode === SceneMode.Manage && sceneManager.state.dirty}
+        when={shouldBlockLeaving}
         message={t("manager.leave-without-saving")}
       />
       <Snackbar
@@ -338,7 +342,10 @@ export const Scene: React.FC<IProps> = (props) => {
               </Typography>
             </Box>
             <Box>
-              <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+              <InputLabel shrink>
+                {t("play-route.character-name")}
+                {":"}
+              </InputLabel>
               <TextField
                 value={offlineCharacterName}
                 data-cy="scene.offline-character-dialog.name"
@@ -678,6 +685,7 @@ export const Scene: React.FC<IProps> = (props) => {
   function renderAspects() {
     const aspectIds = Object.keys(sceneManager.state.scene.aspects);
     const hasAspects = aspectIds.length > 0;
+
     const sortedAspectIds = arraySort(aspectIds, [
       function sortByPinned(id) {
         const aspect = sceneManager.state.scene.aspects[id];
@@ -762,7 +770,7 @@ export const Scene: React.FC<IProps> = (props) => {
           {renderManagementActions()}
           <Container maxWidth="sm">
             <Box mb=".5rem">
-              <Typography
+              <FateLabel
                 variant="h4"
                 className={css({
                   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -778,7 +786,10 @@ export const Scene: React.FC<IProps> = (props) => {
                     sceneManager.actions.updateName(value);
                   }}
                 />
-              </Typography>
+              </FateLabel>
+              <FormHelperText className={css({ textAlign: "right" })}>
+                {t("play-route.scene-name")}
+              </FormHelperText>
             </Box>
             <Collapse in={!!sceneManager.state.scene.name}>
               <Box>

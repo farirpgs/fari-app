@@ -27,6 +27,17 @@
 - fix: add try-catch on useDrawing setPointerCapture for unsupported browsers
 - fix: only reposition index card if component is mounted
 
+**3.3.8**
+
+- feat: add Fate License in footer
+
+**3.3.9**
+
+- fix: block reload when playing a Scene [#178](https://github.com/fariapp/fari/issues/178)
+- fix: sort button [#177](https://github.com/fariapp/fari/issues/177)
+- feat: join a game using the Add or Import character buttons
+- feat: scene name help text
+
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
 - feat: A brand new Drawing Area with support for multiple shapes, colors and even player tokens. 👏 [ddkn](https://github.com/ddkn) for the help with the player token designs

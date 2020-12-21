@@ -44,6 +44,66 @@ export const CharacterCard: React.FC<{
     return null;
   }
 
+  return (
+    <Box
+      data-cy="character-card"
+      className={cx(
+        css({
+          width: width,
+          padding: "0 .5rem 1.5rem .5rem",
+        })
+      )}
+    >
+      <Paper className={paperStyle}>
+        <Box>
+          <Box
+            py=".5rem"
+            px="1rem"
+            className={css({
+              fontSize: "1.5rem",
+              width: "100%",
+              borderBottom: "1px solid #f0a4a4",
+            })}
+          >
+            <Box>
+              <Grid container alignItems="baseline" spacing={2} wrap="nowrap">
+                <Grid item xs zeroMinWidth>
+                  <FateLabel noWrap>{props.characterSheet?.name}</FateLabel>
+                </Grid>
+                <Grid item>
+                  <Tooltip title={t("player-row.open-character-sheet")}>
+                    <span>
+                      <IconButton
+                        size="small"
+                        data-cy="character-card.open-character-sheet"
+                        onClick={(e) => {
+                          props.onCharacterDialogOpen();
+                          logger.info("CharacterCard:onCharacterDialogOpen");
+                        }}
+                      >
+                        <PersonIcon
+                          className={css({ width: "1.5rem", height: "1.5rem" })}
+                        />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          {visibleSections?.map((s) => {
+            return (
+              <Box key={s.id}>
+                {s.type === SectionType.Text && renderTextSection(s)}
+                {s.type === SectionType.Number && renderNumberSection(s)}
+              </Box>
+            );
+          })}
+        </Box>
+      </Paper>
+    </Box>
+  );
+
   function renderNumberSection(section: ISection<string>) {
     const fieldWithValues =
       section.fields.filter((s) => {
@@ -113,7 +173,7 @@ export const CharacterCard: React.FC<{
 
   function renderTextSection(section: ISection<string>) {
     return (
-      <Box py=".5rem" px="1rem">
+      <Box py="1rem" px="1rem">
         {section.fields.map((field, fieldIndex) => {
           const containsImage = field.value.includes("<img");
           const value = containsImage
@@ -140,64 +200,4 @@ export const CharacterCard: React.FC<{
       </Box>
     );
   }
-
-  return (
-    <Box
-      data-cy="character-card"
-      className={cx(
-        css({
-          width: width,
-          padding: "0 .5rem 1.5rem .5rem",
-        })
-      )}
-    >
-      <Paper className={paperStyle}>
-        <Box>
-          <Box
-            py=".5rem"
-            px="1rem"
-            className={css({
-              fontSize: "1.5rem",
-              width: "100%",
-              borderBottom: "1px solid #f0a4a4",
-            })}
-          >
-            <Box>
-              <Grid container alignItems="baseline" spacing={2} wrap="nowrap">
-                <Grid item xs zeroMinWidth>
-                  <FateLabel noWrap>{props.characterSheet?.name}</FateLabel>
-                </Grid>
-                <Grid item>
-                  <Tooltip title={t("player-row.open-character-sheet")}>
-                    <span>
-                      <IconButton
-                        size="small"
-                        data-cy="character-card.open-character-sheet"
-                        onClick={(e) => {
-                          props.onCharacterDialogOpen();
-                          logger.info("CharacterCard:onCharacterDialogOpen");
-                        }}
-                      >
-                        <PersonIcon
-                          className={css({ width: "1.5rem", height: "1.5rem" })}
-                        />
-                      </IconButton>
-                    </span>
-                  </Tooltip>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-          {visibleSections?.map((s) => {
-            return (
-              <Box key={s.id}>
-                {s.type === SectionType.Text && renderTextSection(s)}
-                {s.type === SectionType.Number && renderNumberSection(s)}
-              </Box>
-            );
-          })}
-        </Box>
-      </Paper>
-    </Box>
-  );
 };

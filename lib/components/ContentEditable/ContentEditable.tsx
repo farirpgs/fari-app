@@ -101,6 +101,7 @@ export const ContentEditable: React.FC<
           display: "flex",
         },
         "&:empty:before": {
+          color: "lightgrey",
           content: props.placeholder ? `"${props.placeholder}"` : undefined,
         },
       })}
