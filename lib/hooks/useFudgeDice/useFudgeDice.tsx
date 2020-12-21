@@ -1,5 +1,6 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
+import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { IDiceRoll } from "../../domains/dice/IDiceRoll";
 
@@ -52,7 +53,11 @@ export function useFudgeDice(
   const label = shouldDisplay ? "" : formatDiceNumber(total + bonus);
   const tooltipTitle = shouldDisplay ? "" : `${rollSigns} (${total})` ?? "";
   const tooltipDescription =
-    rolling || !hasBonus ? "" : `${bonusLabel} (${formatDiceNumber(bonus)})`;
+    rolling || !hasBonus
+      ? ""
+      : `${sanitizeContentEditable(
+          bonusLabel
+        ).toUpperCase()} (${formatDiceNumber(bonus)})`;
 
   useEffect(() => {
     let newColor = "inherit";
