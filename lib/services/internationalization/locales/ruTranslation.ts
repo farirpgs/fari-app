@@ -149,6 +149,7 @@ export const ruTranslation: Record<
   "play-route.reset-scene": `Сбросить Сцену`,
   "play-route.roll": `Бросок`,
   "play-route.save-scene": `Сохранить Сцену`,
+  "play-route.scene-name": `Название сцены`,
   "play-route.scene-saved": `Сцена сохранена`,
   "play-route.show-character-cards": `показать карты персонажей`,
   "play-route.sort": `Упорядочить`,

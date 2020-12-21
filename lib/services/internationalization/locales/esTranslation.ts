@@ -149,6 +149,7 @@ export const esTranslation: Record<
   "play-route.reset-scene": `Reiniciar`,
   "play-route.roll": `Lanzar`,
   "play-route.save-scene": `Guardar`,
+  "play-route.scene-name": `Nombre de la escena`,
   "play-route.scene-saved": `Escena Guardado`,
   "play-route.show-character-cards": `Mostrar cartas de personaje`,
   "play-route.sort": `Ordenar`,

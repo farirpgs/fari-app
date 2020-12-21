@@ -149,6 +149,7 @@ export const ptbrTranslation: Record<
   "play-route.reset-scene": `Resetar`,
   "play-route.roll": `Rolar`,
   "play-route.save-scene": `Salvar`,
+  "play-route.scene-name": `Nome da cena`,
   "play-route.scene-saved": `Cena Salva`,
   "play-route.show-character-cards": `Mostrar cartas de personagens`,
   "play-route.sort": `Organizar`,

@@ -149,6 +149,7 @@ export const deTranslation: Record<
   "play-route.reset-scene": `Zurücksetzen`,
   "play-route.roll": `Würfeln`,
   "play-route.save-scene": `Speichern`,
+  "play-route.scene-name": `Name der Szene`,
   "play-route.scene-saved": `Gespeicherte Szene`,
   "play-route.show-character-cards": `Charakterkarten anzeigen`,
   "play-route.sort": `Sortieren`,

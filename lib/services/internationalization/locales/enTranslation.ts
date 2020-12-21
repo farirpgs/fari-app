@@ -144,6 +144,7 @@ export const enTranslation = {
   "play-route.reset-scene": `Reset`,
   "play-route.roll": `Roll`,
   "play-route.save-scene": `Save`,
+  "play-route.scene-name": `Scene Name`,
   "play-route.scene-saved": `Saved Scene`,
   "play-route.show-character-cards": `Show Character Cards`,
   "play-route.sort": `Sort`,

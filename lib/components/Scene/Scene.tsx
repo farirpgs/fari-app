@@ -11,6 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -766,7 +767,7 @@ export const Scene: React.FC<IProps> = (props) => {
           {renderManagementActions()}
           <Container maxWidth="sm">
             <Box mb=".5rem">
-              <Typography
+              <FateLabel
                 variant="h4"
                 className={css({
                   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -782,7 +783,10 @@ export const Scene: React.FC<IProps> = (props) => {
                     sceneManager.actions.updateName(value);
                   }}
                 />
-              </Typography>
+              </FateLabel>
+              <FormHelperText className={css({ textAlign: "right" })}>
+                {t("play-route.scene-name")}
+              </FormHelperText>
             </Box>
             <Collapse in={!!sceneManager.state.scene.name}>
               <Box>

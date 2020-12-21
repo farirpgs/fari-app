@@ -149,6 +149,7 @@ export const frTranslation: Record<
   "play-route.reset-scene": `Réinitialiser`,
   "play-route.roll": `Lancer`,
   "play-route.save-scene": `Enregistrer`,
+  "play-route.scene-name": `Nom de la scène`,
   "play-route.scene-saved": `Scène enregistré`,
   "play-route.show-character-cards": `Afficher les cartes de personnages`,
   "play-route.sort": `Trier`,
