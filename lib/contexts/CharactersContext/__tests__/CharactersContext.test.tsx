@@ -130,7 +130,7 @@ describe("useCharacters", () => {
             { name: "Severe", value: "" },
           ],
 
-          name: "Character Name",
+          name: "",
           refresh: 3,
           skills: [
             { name: "Academics", value: "" },

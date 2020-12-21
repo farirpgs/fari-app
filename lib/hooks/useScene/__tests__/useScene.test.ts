@@ -6,6 +6,7 @@ import {
 } from "../../../components/DrawArea/hooks/useDrawing";
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
+import { defaultSceneName } from "../../../contexts/SceneContext/ScenesContext";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
@@ -19,7 +20,7 @@ fdescribe("useScene", () => {
 
     const expectDefaultScene: IScene = {
       id: expect.anything(),
-      name: "Scene Name",
+      name: defaultSceneName,
       group: undefined,
       aspects: {},
       gm: {
@@ -70,7 +71,7 @@ fdescribe("useScene", () => {
       });
 
       // THEN
-      expect(result.current.state.scene.name).toEqual("Scene Name");
+      expect(result.current.state.scene.name).toEqual(defaultSceneName);
       expect(result.current.state.dirty).toEqual(false);
 
       // GIVEN
@@ -686,7 +687,7 @@ fdescribe("useScene", () => {
       act(() => {
         result.current.actions.resetScene();
       });
-      expect(result.current.state.scene.name).toEqual("Scene Name");
+      expect(result.current.state.scene.name).toEqual(defaultSceneName);
       expect(Object.keys(result.current.state.scene.aspects).length).toEqual(0);
       expect(result.current.state.scene.players).toEqual([
         {
@@ -731,7 +732,7 @@ fdescribe("useScene", () => {
       act(() => {
         result.current.actions.resetScene();
       });
-      expect(result.current.state.scene.name).toEqual("Scene Name");
+      expect(result.current.state.scene.name).toEqual(defaultSceneName);
       expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
     });
   });

@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { ManagerMode } from "../../../components/Manager/Manager";
-import { ISavableScene, useScenes } from "../ScenesContext";
+import { defaultSceneName, ISavableScene, useScenes } from "../ScenesContext";
 
 describe("useScenes", () => {
   describe("local storage load", () => {
@@ -60,14 +60,14 @@ describe("useScenes", () => {
           aspects: {},
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
-          name: "Scene Name",
+          name: defaultSceneName,
           version: 1,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"Scene Name","aspects":{},"version":1,"lastUpdated":${
+        }","name":"${defaultSceneName}","aspects":{},"version":1,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );

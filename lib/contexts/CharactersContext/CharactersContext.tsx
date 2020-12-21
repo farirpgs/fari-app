@@ -78,7 +78,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       ...defaultCharacter,
       id: uuidV4(),
       lastUpdated: getUnix(),
-      name: "Character Name",
+      name: "",
     } as ICharacter;
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];

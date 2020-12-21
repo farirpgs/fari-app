@@ -157,6 +157,6 @@ export function migrateScene(scene: ISavableScene) {
   });
 }
 
-export const defaultSceneName = "Scene Name";
+export const defaultSceneName = "";
 export const defaultSceneAspects = {};
 export const defaultSceneVersion = 1;
