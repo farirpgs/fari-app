@@ -193,8 +193,12 @@ export const CharacterDialog: React.FC<{
 
     return (
       <Container maxWidth="md">
-        <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
-        <Box className={sheetContentStyle}>{renderActions()}</Box>
+        <Box className={sheetContentStyle} displayPrint="none">
+          {renderManagementActions()}
+        </Box>
+        <Box className={sheetContentStyle} displayPrint="none">
+          {renderActions()}
+        </Box>
         <Box className={sheetContentStyle}>{renderName()}</Box>
         <Box className={sheetContentStyle}>{renderContent()}</Box>
       </Container>
@@ -897,25 +901,27 @@ export const CharacterDialog: React.FC<{
   function renderDice() {
     return (
       <>
-        {renderSheetHeader(t("character-dialog.dice"))}
-        <Box className={sheetContentStyle}>
-          <Grid container justify="center">
-            <Grid item>
-              <Box py="1rem">
-                <DiceBox
-                  rolls={props.rolls ?? []}
-                  showDetails
-                  size="5rem"
-                  fontSize="2rem"
-                  borderSize=".2rem"
-                  borderColor="#000000"
-                  onClick={() => {
-                    props.onRoll?.({});
-                  }}
-                />
-              </Box>
+        <Box displayPrint="none">
+          {renderSheetHeader(t("character-dialog.dice"))}
+          <Box className={sheetContentStyle}>
+            <Grid container justify="center">
+              <Grid item>
+                <Box py="1rem">
+                  <DiceBox
+                    rolls={props.rolls ?? []}
+                    showDetails
+                    size="5rem"
+                    fontSize="2rem"
+                    borderSize=".2rem"
+                    borderColor="#000000"
+                    onClick={() => {
+                      props.onRoll?.({});
+                    }}
+                  />
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
       </>
     );

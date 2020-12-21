@@ -127,7 +127,10 @@ export const JoinAGame: React.FC<{
           <Paper>
             <Box p="1rem">
               <Box pb="1rem">
-                <InputLabel shrink>{t("play-route.character-name")}</InputLabel>
+                <InputLabel shrink>
+                  {t("play-route.character-name")}
+                  {":"}
+                </InputLabel>
                 <TextField
                   placeholder="Magnus Burnsides"
                   value={playerName}
