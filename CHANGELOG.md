@@ -48,7 +48,7 @@
 
 **3.3.12**
 
-- fix: default character name in player row
+- fix: en translation
 
 ## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
 
