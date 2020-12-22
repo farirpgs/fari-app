@@ -397,7 +397,7 @@ function makeCustomCharacter(): ICharacter {
 
 export const CharacterFactory = {
   latestVersion: 3,
-  make(type: CharacterType) {
+  make(type: CharacterType): ICharacter {
     const newCharacter = {
       [CharacterType.CoreCondensed]: makeCondensedCharacter,
       [CharacterType.Accelerated]: makeAcceleratedCharacter,

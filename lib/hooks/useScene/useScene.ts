@@ -12,8 +12,8 @@ import {
 import {
   defaultSceneAspects,
   defaultSceneName,
-  defaultSceneVersion,
   ISavableScene,
+  SceneFactory,
 } from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
@@ -33,29 +33,10 @@ type IProps = {
 export function useScene(props: IProps) {
   const { userId, gameId, charactersManager } = props;
   const isGM = !gameId;
-  const [scene, setScene] = useState<IScene>(() => ({
-    id: Id.get(),
-    name: defaultSceneName,
-    group: undefined,
-    aspects: defaultSceneAspects,
-    gm: {
-      id: isGM ? userId : temporaryGMIdUntilFirstSync,
-      playerName: "Game Master",
-      rolls: [],
-      playedDuringTurn: false,
-      fatePoints: 3,
-      offline: false,
-      isGM: true,
-    },
-    players: [],
-    goodConfetti: 0,
-    badConfetti: 0,
-    sort: false,
-    showCharacterCards: undefined,
-    drawAreaObjects: [],
-    version: defaultSceneVersion,
-    lastUpdated: getUnix(),
-  }));
+  const [scene, setScene] = useState<IScene>(() => {
+    const gmId = isGM ? userId : temporaryGMIdUntilFirstSync;
+    return SceneFactory.make(gmId);
+  });
 
   const [sceneToLoad, setSceneToLoad] = useState<ISavableScene | undefined>(
     undefined
