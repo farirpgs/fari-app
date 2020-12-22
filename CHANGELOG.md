@@ -1,4 +1,4 @@
-## 3.3.0-10 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+## 3.3 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
@@ -43,6 +43,10 @@
 - fix: sentry errors on magic grid container
 
 **3.3.11**
+
+- fix: default character name in player row
+
+**3.3.12**
 
 - fix: default character name in player row
 

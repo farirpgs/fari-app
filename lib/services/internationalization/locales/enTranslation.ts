@@ -136,7 +136,7 @@ export const enTranslation = {
   "play-route.name": `Name`,
   "play-route.new-scene": `New Scene`,
   "play-route.no-aspects": `The scene doesn't have any aspects yet.`,
-  "play-route.or-pick-existing": `Pick an existing Character`,
+  "play-route.or-pick-existing": `Pick a Character`,
   "play-route.or": `Or`,
   "play-route.players": `Players:`,
   "play-route.reset-initiative": `Reset`,
