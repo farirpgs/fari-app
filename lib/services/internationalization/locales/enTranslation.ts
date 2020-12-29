@@ -115,7 +115,7 @@ export const enTranslation = {
   "play-route.click-on-the-add-aspect-": `Aspect`,
   "play-route.click-on-the-add-aspect-button": `button to add a new Aspect to the Scene`,
   "play-route.clone-and-load-scene": `Clone and Load Scene`,
-  "play-route.connect-to-game": `Join the table`,
+  "play-route.connect-to-game": `Join the game`,
   "play-route.connected": `connected`,
   "play-route.copy-game-link": `Copy Game Link`,
   "play-route.dice": `Dice`,
