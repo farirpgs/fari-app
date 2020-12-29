@@ -109,7 +109,7 @@ export const ruTranslation: Record<
   "play-route.add-aspect": `Добавить Аспект`,
   "play-route.add-bad-guy": `Добавить Противника`,
   "play-route.add-boost": `Добавить Усиление`,
-  "play-route.add-character": `Добавить Персонажа`,
+  "play-route.add-character-sheet": `Добавить Персонажа`,
   "play-route.add-index-card": `Добавить Карточку`,
   "play-route.add-npc": `Добавить NPC`,
   "play-route.awesome-name": `Кстати, классное имя!`,

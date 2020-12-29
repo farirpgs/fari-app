@@ -1,6 +1,7 @@
 import { css, cx } from "@emotion/css";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,6 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
+import DescriptionIcon from "@material-ui/icons/Description";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -31,11 +33,13 @@ export const PlayerRow: React.FC<
     isGM: boolean;
     isMe: boolean;
     offline: boolean;
+
     onDiceRoll(options: IRollDiceOptions): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onFatePointsChange(fatePoints: number): void;
     onPlayerRemove(): void;
-    onCharacterDialogOpen(): void;
+    onCharacterSheetButtonPress(): void;
+    onCharacterSheetContextButtonPress(): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -49,9 +53,10 @@ export const PlayerRow: React.FC<
     : textColor.disabled;
 
   const name =
-    props.player?.playerName ||
     props.player?.character?.name ||
+    props.player?.playerName ||
     t("play-route.character-name");
+
   const hasCharacterSheet = !!props.player.character;
 
   const selectedRowStyle = css(
@@ -100,41 +105,33 @@ export const PlayerRow: React.FC<
         })}
       >
         <TableCell className={playerInfoCellStyle} align="left">
-          <Tooltip
-            title={
-              hasCharacterSheet
-                ? t("player-row.open-character-sheet")
-                : t("player-row.has-no-character-sheet")
-            }
-          >
-            <span>
-              <ButtonBase
-                className={css({
-                  width: "100%",
-                })}
-                disabled={!hasCharacterSheet}
-                onClick={(e) => {
-                  props.onCharacterDialogOpen();
-                  logger.info("ScenePlayer:onCharacterDialogOpen");
-                }}
-              >
-                <Typography
-                  noWrap
-                  color="inherit"
-                  className={css({
-                    width: "100%",
-                    textAlign: "left",
-                    fontSize: "1.2rem",
-                    lineHeight: Font.lineHeight(1.2),
-                    fontWeight: props.isMe ? "bold" : "normal",
-                  })}
-                >
-                  {name}
-                </Typography>
-              </ButtonBase>
-            </span>
-          </Tooltip>
+          {props.player.isGM ? (
+            <Typography
+              noWrap
+              color="inherit"
+              className={css({
+                width: "100%",
+                textAlign: "left",
+                fontSize: "1.2rem",
+                lineHeight: Font.lineHeight(1.2),
+                fontWeight: props.isMe ? "bold" : "normal",
+              })}
+            >
+              {name}
+            </Typography>
+          ) : (
+            <Tooltip
+              title={
+                hasCharacterSheet
+                  ? t("player-row.open-character-sheet")
+                  : t("play-route.add-character-sheet")
+              }
+            >
+              <span>{renderCharacterSheetButton()}</span>
+            </Tooltip>
+          )}
         </TableCell>
+
         <TableCell className={playerInfoCellStyle} align="center">
           <Tooltip
             title={
@@ -209,6 +206,48 @@ export const PlayerRow: React.FC<
     </>
   );
 
+  function renderCharacterSheetButton() {
+    return (
+      <Button
+        className={css({
+          width: "100%",
+          background: "transparent",
+          textTransform: "none",
+          color: hasCharacterSheet
+            ? theme.palette.text.primary
+            : theme.palette.text.secondary,
+          border: "none",
+        })}
+        size="small"
+        onClick={(e) => {
+          props.onCharacterSheetButtonPress();
+          logger.info("ScenePlayer:onCharacterSheetButtonPress");
+        }}
+        onContextMenu={(e) => {
+          if (props.isMe) {
+            e.preventDefault();
+            props.onCharacterSheetContextButtonPress();
+            logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+          }
+        }}
+        startIcon={<DescriptionIcon />}
+      >
+        <Typography
+          noWrap
+          color="inherit"
+          className={css({
+            width: "100%",
+            textAlign: "left",
+            fontSize: "1.2rem",
+            lineHeight: Font.lineHeight(1.2),
+            fontWeight: props.isMe ? "bold" : "normal",
+          })}
+        >
+          {name}
+        </Typography>
+      </Button>
+    );
+  }
   function renderGMControls() {
     if (!props.isGM) {
       return null;

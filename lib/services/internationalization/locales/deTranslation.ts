@@ -109,7 +109,7 @@ export const deTranslation: Record<
   "play-route.add-aspect": `Aspekt`,
   "play-route.add-bad-guy": `Bösewicht`,
   "play-route.add-boost": `Schub`,
-  "play-route.add-character": `Charakter hinzufügen`,
+  "play-route.add-character-sheet": `Charakter hinzufügen`,
   "play-route.add-index-card": `Karteikarte`,
   "play-route.add-npc": `NSC`,
   "play-route.awesome-name": `Das ist übrigens ein fantastischer Name!`,

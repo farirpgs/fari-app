@@ -109,7 +109,7 @@ export const esTranslation: Record<
   "play-route.add-aspect": `Aspecto`,
   "play-route.add-bad-guy": `Adversario`,
   "play-route.add-boost": `Impulso`,
-  "play-route.add-character": `Añadir Personaje`,
+  "play-route.add-character-sheet": `Añadir Personaje`,
   "play-route.add-index-card": `Tarjeta`,
   "play-route.add-npc": `PnJ`,
   "play-route.awesome-name": `Por cierto, ¡es un nombre genial!`,

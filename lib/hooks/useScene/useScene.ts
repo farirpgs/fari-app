@@ -114,6 +114,15 @@ export function useScene(props: IProps) {
     }
   }, [scene.badConfetti]);
 
+  const playersWithCharacterSheets = scene.players.filter(
+    (player) => !!player.character
+  );
+  const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
+
+  const userCharacterSheet = scene.players.find((p) => {
+    return p.id === userId;
+  });
+
   function safeSetScene(newScene: IScene) {
     if (newScene) {
       setScene(newScene);
@@ -621,6 +630,11 @@ export function useScene(props: IProps) {
   }
 
   return {
+    computed: {
+      playersWithCharacterSheets,
+      hasPlayersWithCharacterSheets,
+      userCharacterSheet,
+    },
     state: {
       scene,
       dirty,

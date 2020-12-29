@@ -1,4 +1,8 @@
-## 3.3 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+## 3.4 () - Join screen UX
+
+-
+
+## 3.3 (Nov 10, 2020 - Dec 29 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
