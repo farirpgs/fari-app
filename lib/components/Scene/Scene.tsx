@@ -29,7 +29,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import DescriptionIcon from "@material-ui/icons/Description";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
@@ -373,7 +372,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       <Tooltip title={t("play-route.add-character-sheet")}>
                         <span>
                           <Button
-                            data-cy="scene.add-offline-character"
+                            data-cy="scene.add-gm-character"
                             onClick={() => {
                               charactersManager.actions.openManager(
                                 ManagerMode.Use,
@@ -519,51 +518,6 @@ export const Scene: React.FC<IProps> = (props) => {
           </Box>
         </Paper>
       </Box>
-    );
-  }
-
-  function renderAddCharacterButton() {
-    return (
-      <Tooltip
-        arrow
-        placement="left"
-        title={t("play-route.add-character-sheet")}
-        classes={{
-          arrow: css({
-            "&:before": {
-              boxShadow: `1px solid ${theme.palette.text.primary}`,
-            },
-            "color": theme.palette.background.paper,
-          }),
-          tooltip: css({
-            backgroundColor: theme.palette.background.paper,
-            color: theme.palette.getContrastText(
-              theme.palette.background.paper
-            ),
-            boxShadow: `1px solid ${theme.palette.text.primary}`,
-            fontSize: ".8rem",
-          }),
-        }}
-      >
-        <span>
-          <IconButton
-            data-cy="scene.add-offline-character"
-            size="small"
-            onClick={() => {
-              if (isGM) {
-                charactersManager.actions.openManager(
-                  ManagerMode.Use,
-                  onGMAddCharacter
-                );
-                logger.info("Scene:addCharacter:GM");
-              }
-            }}
-            color="secondary"
-          >
-            <DescriptionIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
     );
   }
 

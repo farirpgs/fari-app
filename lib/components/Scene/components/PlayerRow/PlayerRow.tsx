@@ -233,6 +233,7 @@ export const PlayerRow: React.FC<
                   : theme.palette.text.secondary,
                 border: "none",
               })}
+              data-cy={`${props["data-cy"]}.open-character-sheet`}
               disabled={!props.player.character}
               size="small"
               onClick={(e) => {
