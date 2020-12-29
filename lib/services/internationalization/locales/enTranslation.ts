@@ -136,8 +136,6 @@ export const enTranslation = {
   "play-route.new-scene": `New Scene`,
   "play-route.no-aspects": `The scene doesn't have any aspects yet.`,
   "play-route.or-pick-existing": `Pick a Character`,
-
-  "play-route.what-is-your-name": `What's your name`,
   "play-route.players": `Players:`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene-confirmation": `Are you sure you want to reset your scene and remove all your current aspects?`,
@@ -149,6 +147,7 @@ export const enTranslation = {
   "play-route.show-character-cards": `Show Character Cards`,
   "play-route.sort": `Sort`,
   "play-route.undo-drawing": `Undo`,
+  "play-route.what-is-your-name": `What's your name`,
   "player-row.add-fate-point": `Add Fate Point`,
   "player-row.fate-points": `Fate Points`,
   "player-row.has-no-character-sheet": `No Character Sheet`,
@@ -157,6 +156,7 @@ export const enTranslation = {
   "player-row.played": `Has played`,
   "player-row.remove-character": `Remove Character`,
   "player-row.remove-fate-point": `Remove Fate Point`,
+  "player-row.swap-character-sheet": `Swap Character Sheet`,
   "scenes-route.meta.description": `Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your collective imagination run wild and weave memorable stories together!.`,
   "scenes-route.meta.title": `Manage your Scenes`,
 };

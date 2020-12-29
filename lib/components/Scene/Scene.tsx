@@ -453,17 +453,12 @@ export const Scene: React.FC<IProps> = (props) => {
                         onPlayerRemove={() => {
                           sceneManager.actions.removePlayer(player.id);
                         }}
-                        onCharacterSheetButtonPress={() => {
+                        onCharacterSheetOpen={() => {
                           if (player.character) {
                             setCharacterDialogPlayerId(player.id);
-                          } else {
-                            charactersManager.actions.openManager(
-                              ManagerMode.Use,
-                              onPlayerAddCharacter
-                            );
                           }
                         }}
-                        onCharacterSheetContextButtonPress={() => {
+                        onLoadCharacterSheet={() => {
                           charactersManager.actions.openManager(
                             ManagerMode.Use,
                             onPlayerAddCharacter
@@ -899,6 +894,7 @@ export const Scene: React.FC<IProps> = (props) => {
       </Box>
     );
   }
+
   function renderGMSceneActions() {
     if (!isGM) {
       return null;
@@ -965,66 +961,49 @@ export const Scene: React.FC<IProps> = (props) => {
               </Button>
             </Grid>
           )}
-          {props.mode !== SceneMode.Manage && (
-            <Grid item>
-              <Button
-                onClick={() => {
-                  setShowCharacterCards((s) => !s);
-                  logger.info("Scene:onShowCharacterCards");
-                }}
-                variant="outlined"
-                color={showCharacterCards ? "secondary" : "default"}
-                endIcon={<SortIcon />}
-              >
-                {t("play-route.show-character-cards")}
-              </Button>
-            </Grid>
-          )}
-          {props.mode === SceneMode.PlayOnline && props.shareLink && (
-            <Grid item>
-              <input
-                ref={$shareLinkInputRef}
-                type="text"
-                value={props.shareLink}
-                readOnly
-                hidden
-              />
-              <Tooltip
-                open={shareLinkToolTip.open}
-                title="Copied!"
-                placement="top"
-              >
-                <span>
-                  <Button
-                    onClick={() => {
-                      if (props.shareLink && $shareLinkInputRef.current) {
-                        try {
-                          $shareLinkInputRef.current.select();
-                          document.execCommand("copy");
-                          navigator.clipboard.writeText(props.shareLink);
-                          setShareLinkToolTip({ open: true });
-                        } catch (error) {
-                          window.open(props.shareLink, "_blank");
-                        }
-
-                        logger.info("Scene:onCopyGameLink");
-                      }
-                    }}
-                    variant="outlined"
-                    color={shareLinkToolTip.open ? "secondary" : "default"}
-                    endIcon={<FileCopyIcon />}
-                  >
-                    {t("play-route.copy-game-link")}
-                  </Button>
-                </span>
-              </Tooltip>
-            </Grid>
-          )}
         </Grid>
       </Box>
     );
   }
 
+  function renderCopyGameLink(link: string) {
+    return (
+      <>
+        <input
+          ref={$shareLinkInputRef}
+          type="text"
+          value={link}
+          readOnly
+          hidden
+        />
+        <Tooltip open={shareLinkToolTip.open} title="Copied!" placement="top">
+          <span>
+            <Button
+              onClick={() => {
+                if (link && $shareLinkInputRef.current) {
+                  try {
+                    $shareLinkInputRef.current.select();
+                    document.execCommand("copy");
+                    navigator.clipboard.writeText(link);
+                    setShareLinkToolTip({ open: true });
+                  } catch (error) {
+                    window.open(link, "_blank");
+                  }
+
+                  logger.info("Scene:onCopyGameLink");
+                }
+              }}
+              variant="outlined"
+              color={shareLinkToolTip.open ? "secondary" : "default"}
+              endIcon={<FileCopyIcon />}
+            >
+              {t("play-route.copy-game-link")}
+            </Button>
+          </span>
+        </Tooltip>
+      </>
+    );
+  }
   function renderPlayerSceneActions() {
     if (isGM) {
       return null;
@@ -1096,6 +1075,9 @@ export const Scene: React.FC<IProps> = (props) => {
               </Button>
             </ThemeProvider>
           </Grid>
+          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
+          )}
           {props.mode !== SceneMode.Manage && (
             <Grid item>
               <IconButton
