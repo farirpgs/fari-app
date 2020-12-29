@@ -104,7 +104,6 @@ describe("/characters", () => {
       Fari.get("home.play-offline").click();
 
       Fari.get("scene.add-offline-character").click();
-      Fari.get("scene.offline-character-dialog.pick-existing").click();
 
       cy.contains("Luke Skywalker").click();
 
