@@ -1,7 +1,7 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
@@ -63,6 +63,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/hattivatt"><img src="https://avatars1.githubusercontent.com/u/58445227?v=4" width="100px;" alt=""/><br /><sub><b>hattivatt</b></sub></a><br /><a href="#translation-hattivatt" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/pedrogsribeiro"><img src="https://avatars1.githubusercontent.com/u/70762456?v=4" width="100px;" alt=""/><br /><sub><b>pedrogsribeiro</b></sub></a><br /><a href="#translation-pedrogsribeiro" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/nfregoso"><img src="https://avatars1.githubusercontent.com/u/2292312?v=4" width="100px;" alt=""/><br /><sub><b>nfregoso</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=nfregoso" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ConDar15"><img src="https://avatars3.githubusercontent.com/u/5701626?v=4" width="100px;" alt=""/><br /><sub><b>ConDar15</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=ConDar15" title="Code">💻</a></td>
   </tr>
 </table>
 
