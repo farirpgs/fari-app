@@ -55,7 +55,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/RPDeshaies"><img src="https://avatars0.githubusercontent.com/u/6224111?v=4" width="100px;" alt=""/><br /><sub><b>rpdeshaies</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=RPDeshaies" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/RPDeshaies"><img src="https://avatars0.githubusercontent.com/u/6224111?v=4" width="100px;" alt=""/><br /><sub><b>rpdeshaies</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=RPDeshaies" title="Code">💻</a> <a href="#translation-RPDeshaies" title="Translation">🌍</a></td>
   </tr>
 </table>
 
