@@ -43,6 +43,7 @@ export const frTranslation: Record<
   "common.language.fr": `Français`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
+  "common.language.it": `Italiano`,
   "cookie-consent.button": `J'accepte`,
   "cookie-consent.description": `Ce site utilise des cookies pour vous fournir une meilleur expérience utilisateur. En utilisant Fari, vous acceptez notre utilisation des cookies.`,
   "dice-route.button": `Lancer`,

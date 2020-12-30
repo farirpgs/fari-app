@@ -38,6 +38,7 @@ export const enTranslation = {
   "common.language.fr": `Français`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
+  "common.language.it": `Italiano`,
   "cookie-consent.button": `I accept`,
   "cookie-consent.description": `This site uses cookies to provide you with a great user experience. By using Fari, you accept our use of cookies.`,
   "dice-route.button": `Roll`,
