@@ -1,6 +1,9 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
@@ -55,13 +58,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Redjaw"><img src="https://avatars1.githubusercontent.com/u/4438516?v=4" width="100px;" alt=""/><br /><sub><b>Davide Vernassa</b></sub></a><br /><a href="#translation-Redjaw" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/RPDeshaies"><img src="https://avatars0.githubusercontent.com/u/6224111?v=4" width="100px;" alt=""/><br /><sub><b>rpdeshaies</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=RPDeshaies" title="Code">💻</a> <a href="https://github.com/fariapp/fari/commits?author=RPDeshaies" title="Documentation">📖</a> <a href="#translation-RPDeshaies" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/Redjaw"><img src="https://avatars1.githubusercontent.com/u/4438516?v=4" width="100px;" alt=""/><br /><sub><b>Davide Vernassa</b></sub></a><br /><a href="#translation-Redjaw" title="Translation">🌍</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
