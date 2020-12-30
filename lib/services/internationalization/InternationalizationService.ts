@@ -7,6 +7,7 @@ import { devTranslation } from "./locales/devTranslation";
 import { enTranslation } from "./locales/enTranslation";
 import { esTranslation } from "./locales/esTranslation";
 import { frTranslation } from "./locales/frTranslation";
+import { itTranslation } from "./locales/itTranslation";
 import { ptbrTranslation } from "./locales/ptbrTranslations";
 import { ruTranslation } from "./locales/ruTranslation";
 
@@ -17,6 +18,7 @@ export const PossibleLanguages = [
   "fr",
   "ru",
   "de",
+  "it",
   "dev",
 ] as const;
 
@@ -53,6 +55,9 @@ export class InternationalizationService {
           },
           "ru": {
             translation: ruTranslation,
+          },
+          "it": {
+            translation: itTranslation,
           },
           "dev": {
             translation: devTranslation,

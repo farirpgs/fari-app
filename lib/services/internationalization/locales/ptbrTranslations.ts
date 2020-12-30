@@ -43,6 +43,7 @@ export const ptbrTranslation: Record<
   "common.language.fr": `Français`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
+  "common.language.it": `Italiano`,
   "cookie-consent.button": `Eu aceito`,
   "cookie-consent.description": `Este site usa cookies para prover uma ótima experiência de usuário. Usando Fare você aceita o uso de cookies.`,
   "dice-route.button": `Role`,
