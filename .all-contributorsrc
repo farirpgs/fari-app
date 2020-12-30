@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "RPDeshaies",
+      "name": "rpdeshaies",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6224111?v=4",
+      "profile": "https://github.com/RPDeshaies",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "fari",
+  "projectOwner": "fariapp",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
