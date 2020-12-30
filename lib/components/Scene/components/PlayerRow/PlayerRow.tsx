@@ -216,7 +216,10 @@ export const PlayerRow: React.FC<
                   logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
                 }}
               >
-                <IconButton size="small">
+                <IconButton
+                  size="small"
+                  color={hasCharacterSheet ? "secondary" : "primary"}
+                >
                   {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
                 </IconButton>
               </Tooltip>
