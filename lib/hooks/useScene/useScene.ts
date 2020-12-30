@@ -33,6 +33,7 @@ type IProps = {
 export function useScene(props: IProps) {
   const { userId, gameId, charactersManager } = props;
   const isGM = !gameId;
+  const [removedPlayers, setRemovedPlayers] = useState([]);
   const [scene, setScene] = useState<IScene>(() => ({
     id: uuidV4(),
     name: defaultSceneName,
@@ -428,34 +429,42 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayers(connections: Array<Peer.DataConnection>) {
+  function updatePlayersWithConnections(
+    connections: Array<Peer.DataConnection>
+  ) {
     setScene(
       produce((draft: IScene) => {
         const offlinePlayers = draft.players.filter((p) => p.offline);
+
         draft.players = connections.map((c) => {
           const meta: IPeerMeta = c.metadata;
-          const characterFatePoints =
-            meta?.character?.fatePoints ?? meta?.character?.refresh ?? 3;
-          const characterPlayedDuringTurn =
-            meta?.character?.playedDuringTurn ?? false;
-          const playerMatch = draft.players.find((p) => p.id === c.label);
+          const playerName = meta.playerName;
+          const peerJsId = c.label;
+
+          const playerMatch = draft.players.find((p) => p.id === peerJsId);
+          const playerCharacter = playerMatch?.character;
 
           const rolls = playerMatch?.rolls ?? [];
-          const fatePoints = playerMatch?.fatePoints ?? characterFatePoints;
-          const playedDuringTurn =
-            playerMatch?.playedDuringTurn ?? characterPlayedDuringTurn;
+          const fatePoints = playerMatch?.fatePoints ?? 3;
+          const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
 
           return {
             id: c.label,
-            playerName: meta.playerName,
-            character: meta.character,
+            playerName: playerName,
+            character: playerCharacter,
             rolls: rolls,
             playedDuringTurn: playedDuringTurn,
             fatePoints: fatePoints,
             offline: false,
           } as IPlayer;
         });
-        draft.players = [...draft.players, ...offlinePlayers];
+        const allPlayers = [...draft.players, ...offlinePlayers];
+        const allPlayersMinusRemovedPlayersFromStaleConnections = allPlayers.filter(
+          (p) => {
+            return removedPlayers.find((id) => id === p.id) === undefined;
+          }
+        );
+        draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
       })
     );
   }
@@ -499,6 +508,11 @@ export function useScene(props: IProps) {
   }
 
   function removePlayer(id: string) {
+    setRemovedPlayers(
+      produce((draft: Array<string>) => {
+        draft.push(id);
+      })
+    );
     setScene(
       produce((draft: IScene) => {
         draft.players = draft.players.filter((p) => {
@@ -524,6 +538,23 @@ export function useScene(props: IProps) {
     );
   }
 
+  function updatePlayerCharacter(id: string, character: ICharacter) {
+    setScene(
+      produce((draft: IScene) => {
+        const everyone = [draft.gm, ...draft.players];
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.character = character;
+            // update hidden character fields
+            p.fatePoints = character.fatePoints ?? 3;
+            p.playedDuringTurn = character.playedDuringTurn ?? false;
+          }
+        });
+      })
+    );
+    charactersManager.actions.updateIfExists(character);
+  }
+
   function updatePlayerPlayedDuringTurn(
     id: string,
     playedInTurnOrder: boolean
@@ -542,20 +573,6 @@ export function useScene(props: IProps) {
         });
       })
     );
-  }
-
-  function updatePlayerCharacter(id: string, character: ICharacter) {
-    setScene(
-      produce((draft: IScene) => {
-        const everyone = [draft.gm, ...draft.players];
-        everyone.forEach((p) => {
-          if (p.id === id) {
-            p.character = character;
-          }
-        });
-      })
-    );
-    charactersManager.actions.updateIfExists(character);
   }
 
   function updatePlayerFatePoints(id: string, fatePoints: number) {
@@ -666,7 +683,7 @@ export function useScene(props: IProps) {
       removeAspectConsequence,
       updateAspectPlayerDuringTurn,
       updateAspectColor,
-      updatePlayers,
+      updatePlayersWithConnections,
       addOfflinePlayer,
       addOfflineCharacter,
       removePlayer,
@@ -772,5 +789,4 @@ export function sanitizeSceneName(sceneName: string) {
 
 export interface IPeerMeta {
   playerName?: string;
-  character?: ICharacter;
 }

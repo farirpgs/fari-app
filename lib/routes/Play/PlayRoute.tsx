@@ -77,7 +77,9 @@ export const PlayRoute: React.FC<{
 
   useEffect(() => {
     if (isGM) {
-      sceneManager.actions.updatePlayers(hostManager.state.connections);
+      sceneManager.actions.updatePlayersWithConnections(
+        hostManager.state.connections
+      );
     }
   }, [hostManager.state.connections]);
 

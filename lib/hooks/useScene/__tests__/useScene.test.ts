@@ -442,7 +442,7 @@ fdescribe("useScene", () => {
       });
       // WHEN initial connection with a player
       act(() => {
-        result.current.actions.updatePlayers([
+        result.current.actions.updatePlayersWithConnections([
           {
             label: "1",
             metadata: {
@@ -509,7 +509,7 @@ fdescribe("useScene", () => {
       });
       // WHEN new player joins with high refresh
       act(() => {
-        result.current.actions.updatePlayers([
+        result.current.actions.updatePlayersWithConnections([
           {
             label: "1",
             metadata: {
