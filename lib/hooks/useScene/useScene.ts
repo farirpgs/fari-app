@@ -436,7 +436,7 @@ export function useScene(props: IProps) {
       produce((draft: IScene) => {
         const offlinePlayers = draft.players.filter((p) => p.offline);
 
-        draft.players = connections.map((c) => {
+        const mappedConnections = connections.map((c) => {
           const meta: IPeerMeta = c.metadata;
           const playerName = meta.playerName;
           const peerJsId = c.label;
@@ -458,12 +458,13 @@ export function useScene(props: IProps) {
             offline: false,
           } as IPlayer;
         });
-        const allPlayers = [...draft.players, ...offlinePlayers];
+        const allPlayers = [...mappedConnections, ...offlinePlayers];
         const allPlayersMinusRemovedPlayersFromStaleConnections = allPlayers.filter(
           (p) => {
             return removedPlayers.find((id) => id === p.id) === undefined;
           }
         );
+
         draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
       })
     );
@@ -697,6 +698,9 @@ export function useScene(props: IProps) {
       updatePlayerCharacter,
       updateDrawAreaObjects,
       toggleAspectPinned,
+    },
+    _: {
+      removedPlayers,
     },
   };
 }
