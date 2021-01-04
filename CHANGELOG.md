@@ -1,6 +1,9 @@
 ## 3.4 () - Join screen UX
 
--
+- feat: new join screen
+- feat: load character sheet in player row
+- feat: change character sheet in player row
+- feat: italian translations 👏 [#191](https://github.com/fariapp/fari/issues/191) @Redjaw
 
 ## 3.3 (Nov 10, 2020 - Dec 29 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
