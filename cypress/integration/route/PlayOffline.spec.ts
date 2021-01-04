@@ -5,40 +5,43 @@ describe("/play-offline", () => {
     Fari.start();
     Fari.get("home.play-offline").click();
 
-    // open then close offline character
-    Fari.get("scene.add-offline-character").click();
-    Fari.get("scene.offline-character-dialog.cancel").click();
+    // add luke
+    Fari.get("scene.add-gm-character").click();
+    Fari.get("manager.new").click();
+    Fari.get("scene.player-row.1.open-character-sheet").click();
+    Fari.get("character-dialog.name").type("Luke Skywalker");
+    Fari.waitContentEditable();
+    Fari.get("character-dialog.save").click();
 
-    // add offline character
-    Fari.get("scene.add-offline-character").click();
-    Fari.get("scene.offline-character-dialog.name").type("Luke Skywalker");
-    Fari.get("scene.offline-character-dialog.add").click();
-
-    Fari.get("scene.add-offline-character").click();
-    Fari.get("scene.offline-character-dialog.name").type("Leia Organa");
-    Fari.get("scene.offline-character-dialog.add").click();
+    // add leia
+    Fari.get("scene.add-gm-character").click();
+    Fari.get("manager.new").click();
+    Fari.get("scene.player-row.2.open-character-sheet").click();
+    Fari.get("character-dialog.name").type("Leia Organa");
+    Fari.waitContentEditable();
+    Fari.get("character-dialog.save").click();
 
     // play
-    Fari.get("scene.player-row.0.toggle-initiative").click();
     Fari.get("scene.player-row.1.toggle-initiative").click();
-
-    Fari.get("scene.player-row.0.consume-fate-point").click();
-    Fari.get("scene.player-row.0.consume-fate-point").click();
-    Fari.get("scene.player-row.0.consume-fate-point").click();
+    Fari.get("scene.player-row.2.toggle-initiative").click();
 
     Fari.get("scene.player-row.1.consume-fate-point").click();
     Fari.get("scene.player-row.1.consume-fate-point").click();
     Fari.get("scene.player-row.1.consume-fate-point").click();
 
-    Fari.get("scene.player-row.0").find("[data-cy='dice']").click();
+    Fari.get("scene.player-row.2.consume-fate-point").click();
+    Fari.get("scene.player-row.2.consume-fate-point").click();
+    Fari.get("scene.player-row.2.consume-fate-point").click();
+
     Fari.get("scene.player-row.1").find("[data-cy='dice']").click();
+    Fari.get("scene.player-row.2").find("[data-cy='dice']").click();
 
-    Fari.get("scene.player-row.0.refresh-fate-point-gm").click();
-    Fari.get("scene.player-row.0.refresh-fate-point-gm").click();
-    Fari.get("scene.player-row.0.refresh-fate-point-gm").click();
-    Fari.get("scene.player-row.0.refresh-fate-point-gm").click();
+    Fari.get("scene.player-row.1.refresh-fate-point-gm").click();
+    Fari.get("scene.player-row.1.refresh-fate-point-gm").click();
+    Fari.get("scene.player-row.1.refresh-fate-point-gm").click();
+    Fari.get("scene.player-row.1.refresh-fate-point-gm").click();
 
-    Fari.get("scene.player-row.0.consume-fate-point-gm").click();
+    Fari.get("scene.player-row.1.consume-fate-point-gm").click();
 
     Fari.get("scene.reset-initiative").click();
 

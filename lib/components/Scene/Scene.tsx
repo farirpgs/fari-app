@@ -5,16 +5,11 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
@@ -143,20 +138,24 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [offlineCharacterDialogOpen, setOfflineCharacterDialogOpen] = useState(
-    false
-  );
+
   const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
     string | undefined
   >(undefined);
   const [showCharacterCards, setShowCharacterCards] = useState(true);
 
   const [savedSnack, setSavedSnack] = useState(false);
-  const [offlineCharacterName, setOfflineCharacterName] = useState("");
+
+  const isGM = !props.idFromParams;
+  const isOffline = props.mode === SceneMode.PlayOffline;
+
+  const isGMHostingOnlineOrOfflineGame =
+    props.mode !== SceneMode.Manage && isGM;
+  const isGMEditingDirtyScene =
+    props.mode === SceneMode.Manage && sceneManager.state.dirty;
 
   const shouldBlockLeaving =
-    props.mode !== SceneMode.Manage ||
-    (props.mode === SceneMode.Manage && sceneManager.state.dirty);
+    isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
 
   useBlockReload(shouldBlockLeaving);
 
@@ -171,19 +170,14 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   }, [shareLinkToolTip]);
 
-  const isGM = !props.idFromParams;
-  const isOffline = props.mode === SceneMode.PlayOffline;
-  const tokenTitles = sceneManager.state.scene.players.map(
-    (p) => (p.character?.name ?? p.playerName) as string
-  );
+  const shouldRenderAddCharacterTooltip =
+    props.mode === SceneMode.PlayOnline &&
+    !!sceneManager.computed.userCharacterSheet;
 
   const everyone = [
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
-  const playersWithCharacterSheets = sceneManager.state.scene.players.filter(
-    (player) => !!player.character
-  );
 
   function onLoadScene(newScene: ISavableScene) {
     sceneManager.actions.loadScene(newScene, true);
@@ -193,8 +187,15 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.cloneAndLoadNewScene(newScene);
   }
 
-  function onAddOfflineCharacter(character: ICharacter) {
+  function onGMAddCharacter(character: ICharacter) {
     sceneManager.actions.addOfflineCharacter(character);
+  }
+
+  function onPlayerAddCharacter(character: ICharacter) {
+    connectionsManager?.actions.sendToHost<IPeerActions>({
+      action: "update-character",
+      payload: character,
+    });
   }
 
   function roll(player: IPlayer, options: IRollDiceOptions) {
@@ -214,32 +215,34 @@ export const Scene: React.FC<IProps> = (props) => {
     <Page
       gameId={props.idFromParams}
       live={liveMode}
-      liveLabel={sceneManager.state.scene.name}
+      liveLabel={sceneManager.state.scene.name.toUpperCase()}
     >
-      <Prompt
-        when={shouldBlockLeaving}
-        message={t("manager.leave-without-saving")}
-      />
-      <Snackbar
-        open={savedSnack}
-        autoHideDuration={6000}
-        onClose={(event, reason) => {
-          if (reason === "clickaway") {
-            return;
-          }
-          setSavedSnack(false);
-        }}
-      >
-        <Alert
-          severity="success"
-          onClose={() => {
+      <Box px="1rem">
+        <Prompt
+          when={shouldBlockLeaving}
+          message={t("manager.leave-without-saving")}
+        />
+        <Snackbar
+          open={savedSnack}
+          autoHideDuration={6000}
+          onClose={(event, reason) => {
+            if (reason === "clickaway") {
+              return;
+            }
             setSavedSnack(false);
           }}
         >
-          {t("play-route.scene-saved")}
-        </Alert>
-      </Snackbar>
-      {props.error ? renderPageError() : renderPage()}
+          <Alert
+            severity="success"
+            onClose={() => {
+              setSavedSnack(false);
+            }}
+          >
+            {t("play-route.scene-saved")}
+          </Alert>
+        </Snackbar>
+        {props.error ? renderPageError() : renderPage()}
+      </Box>
     </Page>
   );
 
@@ -272,117 +275,24 @@ export const Scene: React.FC<IProps> = (props) => {
             </Grid>
           ) : (
             <Grid container spacing={2}>
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={5} lg={3}>
                 {renderSidePanel()}
               </Grid>
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={7} lg={9}>
                 {renderCharacterCards()}
                 {renderAspects()}
               </Grid>
             </Grid>
           )}
-
-          {renderOfflineAddPlayerDialog()}
         </Box>
       </Fade>
     );
   }
 
-  function renderOfflineAddPlayerDialog() {
-    return (
-      <Dialog
-        fullWidth
-        maxWidth="xs"
-        open={offlineCharacterDialogOpen}
-        onClose={() => {
-          setOfflineCharacterDialogOpen(false);
-          setOfflineCharacterName("");
-        }}
-      >
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            sceneManager.actions.addOfflinePlayer(offlineCharacterName);
-            setOfflineCharacterDialogOpen(false);
-            setOfflineCharacterName("");
-            logger.info("Scene:OfflineCharacterDialog:onAdd");
-          }}
-        >
-          <DialogTitle id="form-dialog-title">
-            {t("play-route.add-character")}
-          </DialogTitle>
-          <DialogContent>
-            <Box pb="1rem">
-              <Grid container justify="center">
-                <Grid item>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    data-cy="scene.offline-character-dialog.pick-existing"
-                    onClick={() => {
-                      setOfflineCharacterDialogOpen(false);
-                      charactersManager.actions.openManager(
-                        ManagerMode.Use,
-                        onAddOfflineCharacter
-                      );
-                      logger.info(
-                        "Scene:OfflineCharacterDialog:onPickExisting"
-                      );
-                    }}
-                  >
-                    {t("play-route.or-pick-existing")}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Box>
-            <Box py=".5rem">
-              <Typography variant="h6" align="center">
-                {t("play-route.or")}
-              </Typography>
-            </Box>
-            <Box>
-              <InputLabel shrink>
-                {t("play-route.character-name")}
-                {":"}
-              </InputLabel>
-              <TextField
-                value={offlineCharacterName}
-                data-cy="scene.offline-character-dialog.name"
-                onChange={(event) => {
-                  setOfflineCharacterName(event.target.value);
-                }}
-                fullWidth
-              />
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              data-cy="scene.offline-character-dialog.cancel"
-              onClick={() => {
-                setOfflineCharacterDialogOpen(false);
-                setOfflineCharacterName("");
-                logger.info("Scene:OfflineCharacterDialog:onCancel");
-              }}
-              color="default"
-            >
-              {t("play-route.cancel")}
-            </Button>
-            <Button
-              data-cy="scene.offline-character-dialog.add"
-              type="submit"
-              color="secondary"
-              variant="outlined"
-            >
-              {t("play-route.add-character")}
-            </Button>
-          </DialogActions>
-        </form>
-      </Dialog>
-    );
-  }
-
   function renderSidePanel() {
+    const tokenTitles = sceneManager.state.scene.players.map(
+      (p) => (p.character?.name ?? p.playerName) as string
+    );
     return (
       <Box display="flex" flexDirection="column" height="100%" pb="1rem">
         <Box
@@ -442,10 +352,10 @@ export const Scene: React.FC<IProps> = (props) => {
                 </Typography>
               </Box>
             </Grid>
-            {isGM && (
-              <>
-                <Grid item>
-                  <Grid container spacing={1}>
+            <Grid item>
+              <Grid container spacing={1}>
+                {isGM && (
+                  <>
                     <Grid item>
                       <Button
                         data-cy="scene.reset-initiative"
@@ -461,26 +371,30 @@ export const Scene: React.FC<IProps> = (props) => {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Tooltip title={t("play-route.add-character")}>
+                      <Tooltip title={t("play-route.add-character-sheet")}>
                         <span>
                           <Button
-                            data-cy="scene.add-offline-character"
+                            data-cy="scene.add-gm-character"
                             onClick={() => {
-                              setOfflineCharacterDialogOpen(true);
-                              logger.info("Scene:onAddOfflineCharacter");
+                              charactersManager.actions.openManager(
+                                ManagerMode.Use,
+                                onGMAddCharacter
+                              );
+                              logger.info("Scene:addCharacter:GM");
                             }}
                             variant="contained"
                             color="secondary"
                           >
                             <PersonAddIcon />
+                            {/* <DescriptionIcon /> */}
                           </Button>
                         </span>
                       </Tooltip>
                     </Grid>
-                  </Grid>
-                </Grid>
-              </>
-            )}
+                  </>
+                )}
+              </Grid>
+            </Grid>
           </Grid>
         </Box>
 
@@ -540,8 +454,16 @@ export const Scene: React.FC<IProps> = (props) => {
                         onPlayerRemove={() => {
                           sceneManager.actions.removePlayer(player.id);
                         }}
-                        onCharacterDialogOpen={() => {
-                          setCharacterDialogPlayerId(player.id);
+                        onCharacterSheetOpen={() => {
+                          if (player.character) {
+                            setCharacterDialogPlayerId(player.id);
+                          }
+                        }}
+                        onLoadCharacterSheet={() => {
+                          charactersManager.actions.openManager(
+                            ManagerMode.Use,
+                            onPlayerAddCharacter
+                          );
                         }}
                         onDiceRoll={(options: IRollDiceOptions) => {
                           roll(player, options);
@@ -639,7 +561,10 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderCharacterCards() {
-    const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
+    const {
+      playersWithCharacterSheets,
+      hasPlayersWithCharacterSheets,
+    } = sceneManager.computed;
 
     return (
       <>
@@ -662,6 +587,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   <CharacterCard
                     key={player?.id || index}
                     readonly={!canControl}
+                    playerName={player.playerName}
                     characterSheet={player.character}
                     onRoll={(options) => {
                       roll(player, options);
@@ -704,7 +630,7 @@ export const Scene: React.FC<IProps> = (props) => {
           <MagicGridContainer
             items={aspectIds.length}
             deps={[
-              playersWithCharacterSheets.length,
+              sceneManager.computed.playersWithCharacterSheets.length,
               Object.keys(sceneManager.state.scene.aspects).length,
               showCharacterCards,
             ]}
@@ -924,6 +850,7 @@ export const Scene: React.FC<IProps> = (props) => {
       </Box>
     );
   }
+
   function renderGMSceneActions() {
     if (!isGM) {
       return null;
@@ -990,51 +917,49 @@ export const Scene: React.FC<IProps> = (props) => {
               </Button>
             </Grid>
           )}
-          {props.mode === SceneMode.PlayOnline && props.shareLink && (
-            <Grid item>
-              <input
-                ref={$shareLinkInputRef}
-                type="text"
-                value={props.shareLink}
-                readOnly
-                hidden
-              />
-              <Tooltip
-                open={shareLinkToolTip.open}
-                title="Copied!"
-                placement="top"
-              >
-                <span>
-                  <Button
-                    onClick={() => {
-                      if (props.shareLink && $shareLinkInputRef.current) {
-                        try {
-                          $shareLinkInputRef.current.select();
-                          document.execCommand("copy");
-                          navigator.clipboard.writeText(props.shareLink);
-                          setShareLinkToolTip({ open: true });
-                        } catch (error) {
-                          window.open(props.shareLink, "_blank");
-                        }
-
-                        logger.info("Scene:onCopyGameLink");
-                      }
-                    }}
-                    variant="outlined"
-                    color={shareLinkToolTip.open ? "secondary" : "default"}
-                    endIcon={<FileCopyIcon />}
-                  >
-                    {t("play-route.copy-game-link")}
-                  </Button>
-                </span>
-              </Tooltip>
-            </Grid>
-          )}
         </Grid>
       </Box>
     );
   }
 
+  function renderCopyGameLink(link: string) {
+    return (
+      <>
+        <input
+          ref={$shareLinkInputRef}
+          type="text"
+          value={link}
+          readOnly
+          hidden
+        />
+        <Tooltip open={shareLinkToolTip.open} title="Copied!" placement="top">
+          <span>
+            <Button
+              onClick={() => {
+                if (link && $shareLinkInputRef.current) {
+                  try {
+                    $shareLinkInputRef.current.select();
+                    document.execCommand("copy");
+                    navigator.clipboard.writeText(link);
+                    setShareLinkToolTip({ open: true });
+                  } catch (error) {
+                    window.open(link, "_blank");
+                  }
+
+                  logger.info("Scene:onCopyGameLink");
+                }
+              }}
+              variant="outlined"
+              color={shareLinkToolTip.open ? "secondary" : "default"}
+              endIcon={<FileCopyIcon />}
+            >
+              {t("play-route.copy-game-link")}
+            </Button>
+          </span>
+        </Tooltip>
+      </>
+    );
+  }
   function renderPlayerSceneActions() {
     if (isGM) {
       return null;
@@ -1106,6 +1031,9 @@ export const Scene: React.FC<IProps> = (props) => {
               </Button>
             </ThemeProvider>
           </Grid>
+          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
+          )}
           {props.mode !== SceneMode.Manage && (
             <Grid item>
               <IconButton
@@ -1202,4 +1130,4 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 };
 
-Scene.displayName = "PlayPage";
+Scene.displayName = "Scene";
