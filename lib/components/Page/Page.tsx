@@ -105,7 +105,6 @@ export const Page: React.FC<{
                   marginRight: "auto",
                   marginTop: "2rem",
                   width: "100%",
-                  // padding: "0 1rem",
                   flex: "1 0 auto",
                 })}
               >

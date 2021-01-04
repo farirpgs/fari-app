@@ -217,7 +217,7 @@ export const Scene: React.FC<IProps> = (props) => {
       live={liveMode}
       liveLabel={sceneManager.state.scene.name.toUpperCase()}
     >
-      <Container>
+      <Box px="1rem">
         <Prompt
           when={shouldBlockLeaving}
           message={t("manager.leave-without-saving")}
@@ -242,7 +242,7 @@ export const Scene: React.FC<IProps> = (props) => {
           </Alert>
         </Snackbar>
         {props.error ? renderPageError() : renderPage()}
-      </Container>
+      </Box>
     </Page>
   );
 
