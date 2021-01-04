@@ -4,7 +4,8 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { SrdImport } from "../../routes/SrdRoute/SrdImport";
+import { SrdImport } from "../../routes/SrdRoute/constants/SrdImport";
+import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -125,13 +126,14 @@ export const AppRouter = () => {
           path={"/scenes/:id"}
           render={(props) => <SceneRoute {...props} />}
         />
+        <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
         <Route
           exact
-          path={"/srd/condensed/:page?"}
+          path={"/srds/condensed/:page?"}
           render={(props) => (
             <SrdRoute
               {...props}
-              prefix="/srd/condensed"
+              prefix="/srds/condensed"
               title="Fate Condensed"
               loadFunction={SrdImport.Condensed}
             />
@@ -139,11 +141,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/srd/core/:page?"}
+          path={"/srds/core/:page?"}
           render={(props) => (
             <SrdRoute
               {...props}
-              prefix="/srd/core"
+              prefix="/srds/core"
               title="Fate Core"
               loadFunction={SrdImport.Core}
             />
@@ -151,11 +153,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/srd/accelerated/:page?"}
+          path={"/srds/accelerated/:page?"}
           render={(props) => (
             <SrdRoute
               {...props}
-              prefix="/srd/accelerated"
+              prefix="/srds/accelerated"
               title="Fate Accelerated"
               loadFunction={SrdImport.Accelerated}
             />

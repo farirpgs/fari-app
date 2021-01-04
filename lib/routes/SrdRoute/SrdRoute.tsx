@@ -15,158 +15,20 @@ import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import React, { useEffect, useMemo, useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
-import showdown from "showdown";
+import React from "react";
+import { useHistory, useParams } from "react-router";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import {
+  ILoadFunction,
+  ITocElement,
+  useMarkdownFile,
+} from "./hooks/useMarkdownFile";
+import { useMarkdownPage } from "./hooks/useMarkdownPage";
 
 const drawerWidth = "300px";
-
-const converter = new showdown.Converter();
-type ILoadFunction = () => Promise<string>;
-
-type IToc = Record<
-  string,
-  {
-    info: ITocElement;
-    level2: Array<ITocElement>;
-  }
->;
-
-type ITocElement = {
-  label: string;
-  level: number;
-  id: string;
-};
-function useMarkdownFile(loadFunction: ILoadFunction) {
-  const [html, setHtml] = useState<string | undefined>();
-  const [toc, setToc] = useState<IToc>({});
-  const [dom, setDom] = useState<HTMLDivElement>();
-  const location = useLocation();
-
-  useEffect(() => {
-    load();
-    async function load() {
-      if (loadFunction) {
-        const markdown = await loadFunction();
-
-        if (markdown) {
-          const html = converter.makeHtml(markdown);
-          const dom = document.createElement("div");
-          dom.innerHTML = html;
-
-          type IToc = Record<
-            string,
-            {
-              info: ITocElement;
-              level2: Array<ITocElement>;
-            }
-          >;
-
-          let newToc: IToc = {};
-
-          let latestH1Id: string | undefined = undefined;
-          dom.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((e) => {
-            // prepare TOC
-            const level = parseInt(e.tagName.replace("H", ""));
-            if (level === 1) {
-              latestH1Id = e.id;
-              newToc = {
-                ...newToc,
-                [e.id]: {
-                  info: {
-                    id: e.id,
-                    label: e.textContent ?? "",
-                    level: level,
-                  },
-                  level2: [],
-                },
-              };
-            }
-            if (latestH1Id && level === 2) {
-              newToc[latestH1Id].level2.push({
-                id: e.id,
-                label: e.textContent ?? "",
-                level: level,
-              });
-            }
-
-            // add anchor on header
-            const anchor = document.createElement("a");
-            anchor.className = "anchor";
-            anchor.href = `#${e.id}`;
-            e.append(anchor);
-          });
-
-          setHtml(dom.innerHTML);
-          setToc(newToc);
-          setDom(dom);
-        }
-      }
-    }
-  }, [loadFunction]);
-
-  useEffect(() => {
-    scrollToHeaderOnLoad();
-    function scrollToHeaderOnLoad() {
-      if (html && location.hash) {
-        const element = document.querySelector(location.hash);
-        const elementTop = element?.getBoundingClientRect().top ?? 0;
-        const topPos = elementTop + window.pageYOffset;
-        window.scrollTo({
-          top: topPos,
-          behavior: "smooth",
-        });
-      }
-    }
-  }, [html]);
-
-  return { html, toc, dom };
-}
-
-function useMarkdownPage(
-  page: string | undefined,
-  dom: HTMLDivElement | undefined
-) {
-  return useMemo(() => {
-    const allH1 =
-      dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
-
-    const currentH1 = dom?.querySelector(`#${page}`) ?? allH1[0];
-
-    if (!currentH1) {
-      return {
-        html: "",
-        currentH1: undefined,
-        previousH1: undefined,
-        nextH1: undefined,
-      };
-    }
-
-    let previousH1: Element | undefined;
-    let nextH1: Element | undefined;
-
-    allH1.forEach((h1, index) => {
-      if (h1.id === page) {
-        previousH1 = allH1[index - 1];
-        nextH1 = allH1[index + 1];
-      }
-    });
-
-    const arrayElement = nextUntil(currentH1, `#${nextH1?.id}`);
-
-    const newDom = document.createElement("div");
-    newDom.append(currentH1?.cloneNode(true)!);
-    arrayElement.forEach((e) => {
-      newDom.append(e.cloneNode(true));
-    });
-
-    return { html: newDom?.innerHTML, currentH1, previousH1, nextH1 };
-  }, [page, dom]);
-}
 
 export const SrdRoute: React.FC<{
   prefix: string;
@@ -366,32 +228,25 @@ SrdRoute.displayName = "SrdRoute";
 
 export default SrdRoute;
 
-function nextUntil(
+export function nextUntil(
   elem: Element | undefined | null,
   selector: string,
   filter?: string
 ) {
-  // Setup siblings array
   const siblings: Array<Element> = [];
 
-  // Get the next sibling element
   let currentElement = elem?.nextElementSibling;
 
-  // As long as a sibling exists
   while (currentElement) {
-    // If we've reached our match, bail
     if (currentElement.matches(selector)) break;
 
-    // If filtering by a selector, check if the sibling matches
     if (filter && !currentElement.matches(filter)) {
       currentElement = currentElement.nextElementSibling;
       continue;
     }
 
-    // Otherwise, push it to the siblings array
     siblings.push(currentElement);
 
-    // Get the next sibling element
     currentElement = currentElement.nextElementSibling;
   }
 
