@@ -89,13 +89,15 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
     scrollToHeaderOnLoad();
     function scrollToHeaderOnLoad() {
       if (html && location.hash) {
-        const element = document.querySelector(location.hash);
-        const elementTop = element?.getBoundingClientRect().top ?? 0;
-        const topPos = elementTop + window.pageYOffset;
-        window.scrollTo({
-          top: topPos,
-          behavior: "smooth",
-        });
+        setTimeout(() => {
+          const element = document.querySelector(location.hash);
+          const elementTop = element?.getBoundingClientRect().top ?? 0;
+          const topPos = elementTop + window.pageYOffset;
+          window.scrollTo({
+            top: topPos,
+            behavior: "smooth",
+          });
+        }, 300);
       }
     }
   }, [html]);

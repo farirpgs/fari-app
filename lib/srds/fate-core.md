@@ -265,13 +265,13 @@ This doesn’t mean they spend all their time wallowing in misery and pain, or t
 
 Any Fate game that you play should provide the potential and opportunity for drama among and between the characters, and give you a chance to relate to them as people. A game about adventurers mindlessly punching increasing numbers of bigger, badder bad guys is not Fate. A game about adventurersstruggling to lead normal lives despite being destined to fight ultimate evil is.
 
-## WHEN CREATING YOUR GAME:
-
-- **Setting:** Decide what the world that surrounds the protagonists is like.
-- **Scale:** Decide how epic or personal your story will be.
-- **Issues:** Decide what threats and pressures inherent to the setting will spur the protagonists to action.
-- **NPCs:** Decide who the important people and locations are.
-- **Skills and Stunts:** Decide what sorts of things characters in the setting are likely to want to do.
+> ### WHEN CREATING YOUR GAME:
+>
+> - **Setting:** Decide what the world that surrounds the protagonists is like.
+> - **Scale:** Decide how epic or personal your story will be.
+> - **Issues:** Decide what threats and pressures inherent to the setting will spur the protagonists to action.
+> - **NPCs:** Decide who the important people and locations are.
+> - **Skills and Stunts:** Decide what sorts of things characters in the setting are likely to want to do.
 
 ## Character Creation: Make the PCs.
 
@@ -400,17 +400,17 @@ You’ll want to keep good notes on this process. You can use the character shee
 
 Start by determining your character’s high concept and trouble. Then build your character’s backstory, a process that takes place over three phases. Once you have that figured out, flesh out your character’s skills and stunts. Then you’re ready to play!
 
-### WHEN CREATING YOUR CHARACTER:
-
-- **Aspects:** Come up with your character’s high concept and trouble aspects.
-- **Name:** Name your character.
-- **Phase One:** Describe your character’s first adventure.
-- **Phases Two and Three:** Describe how you’ve crossed paths with two other characters.
-- **Aspects:** Write down one aspect for each of these three experiences.
-- **Skills:** Pick and rate your skills.
-- **Stunts:** Pick or invent three to five stunts.
-- **Refresh:** Determine how many fate points you start play with.
-- **Stress and Consequences:** Determine how much of a beating your character can take.
+> ### WHEN CREATING YOUR CHARACTER:
+>
+> - **Aspects:** Come up with your character’s high concept and trouble aspects.
+> - **Name:** Name your character.
+> - **Phase One:** Describe your character’s first adventure.
+> - **Phases Two and Three:** Describe how you’ve crossed paths with two other characters.
+> - **Aspects:** Write down one aspect for each of these three experiences.
+> - **Skills:** Pick and rate your skills.
+> - **Stunts:** Pick or invent three to five stunts.
+> - **Refresh:** Determine how many fate points you start play with.
+> - **Stress and Consequences:** Determine how much of a beating your character can take.
 
 ### Your Character Idea
 

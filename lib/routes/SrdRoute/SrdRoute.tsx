@@ -49,31 +49,28 @@ export const SrdRoute: React.FC<{
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined}>
       <PageMeta title={props.title} />
-      <Box display="flex">
-        {renderToc()}
-
-        <Container className={css({ flexGrow: 1 })}>
-          <Box pb="2rem">{renderButtons()}</Box>
-          <FateLabel
-            className={css({
-              marginBottom: "-1rem",
-            })}
-          >
-            {props.title}
-          </FateLabel>
-          {html ? (
-            <>
-              <MarkdownElement renderedMarkdown={html} />
-              <Box mt="3rem" mb="1rem">
-                <Divider />
-              </Box>
-              {renderButtons()}
-            </>
-          ) : (
-            renderIsLoading()
-          )}
-        </Container>
-      </Box>
+      {html ? (
+        <Box display="flex">
+          {renderToc()}
+          <Container className={css({ flexGrow: 1 })}>
+            <Box pb="2rem">{renderButtons()}</Box>
+            <FateLabel
+              className={css({
+                marginBottom: "-1rem",
+              })}
+            >
+              {props.title}
+            </FateLabel>
+            <MarkdownElement renderedMarkdown={html} />
+            <Box mt="3rem" mb="1rem">
+              <Divider />
+            </Box>
+            {renderButtons()}
+          </Container>
+        </Box>
+      ) : (
+        renderIsLoading()
+      )}
     </Page>
   );
 

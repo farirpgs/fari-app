@@ -14,9 +14,9 @@ export function useMarkdownPage(
     if (!currentH1) {
       return {
         html: "",
-        currentH1: undefined,
+        currentH1: allH1[0],
         previousH1: undefined,
-        nextH1: undefined,
+        nextH1: allH1[1],
       };
     }
 
@@ -24,7 +24,7 @@ export function useMarkdownPage(
     let nextH1: Element | undefined;
 
     allH1.forEach((h1, index) => {
-      if (h1.id === page) {
+      if (h1.id === currentH1.id) {
         previousH1 = allH1[index - 1];
         nextH1 = allH1[index + 1];
       }
