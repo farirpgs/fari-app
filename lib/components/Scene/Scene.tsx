@@ -217,30 +217,32 @@ export const Scene: React.FC<IProps> = (props) => {
       live={liveMode}
       liveLabel={sceneManager.state.scene.name.toUpperCase()}
     >
-      <Prompt
-        when={shouldBlockLeaving}
-        message={t("manager.leave-without-saving")}
-      />
-      <Snackbar
-        open={savedSnack}
-        autoHideDuration={6000}
-        onClose={(event, reason) => {
-          if (reason === "clickaway") {
-            return;
-          }
-          setSavedSnack(false);
-        }}
-      >
-        <Alert
-          severity="success"
-          onClose={() => {
+      <Container>
+        <Prompt
+          when={shouldBlockLeaving}
+          message={t("manager.leave-without-saving")}
+        />
+        <Snackbar
+          open={savedSnack}
+          autoHideDuration={6000}
+          onClose={(event, reason) => {
+            if (reason === "clickaway") {
+              return;
+            }
             setSavedSnack(false);
           }}
         >
-          {t("play-route.scene-saved")}
-        </Alert>
-      </Snackbar>
-      {props.error ? renderPageError() : renderPage()}
+          <Alert
+            severity="success"
+            onClose={() => {
+              setSavedSnack(false);
+            }}
+          >
+            {t("play-route.scene-saved")}
+          </Alert>
+        </Snackbar>
+        {props.error ? renderPageError() : renderPage()}
+      </Container>
     </Page>
   );
 

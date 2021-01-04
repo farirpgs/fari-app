@@ -52,6 +52,7 @@ export const Page: React.FC<{
   displayDonation?: boolean;
   live?: LiveMode;
   liveLabel?: string;
+  drawerWidth?: string;
 }> = (props) => {
   const history = useHistory();
   const { displayDonation = true } = props;
@@ -104,7 +105,7 @@ export const Page: React.FC<{
                   marginRight: "auto",
                   marginTop: "2rem",
                   width: "100%",
-                  padding: "0 1rem",
+                  // padding: "0 1rem",
                   flex: "1 0 auto",
                 })}
               >
@@ -125,6 +126,7 @@ export const Page: React.FC<{
         displayPrint="none"
         className={css({
           paddingTop: "1rem",
+          marginLeft: props.drawerWidth ?? undefined,
           borderTop: "1px solid #e0e0e0",
         })}
       >
@@ -262,6 +264,7 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
+            zIndex: theme.zIndex.drawer + 1,
           })}
         >
           <Toolbar
