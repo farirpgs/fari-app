@@ -1,4 +1,4 @@
-## 3.4 () - Join screen UX
+## 3.4 (January 5th, 2021) - Join screen UX, Italian translations
 
 - feat: new join screen
 - feat: load character sheet in player row

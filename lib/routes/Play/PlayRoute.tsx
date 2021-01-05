@@ -56,6 +56,12 @@ export const PlayRoute: React.FC<{
       if (peerAction.action === "update-character") {
         sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
       }
+      if (peerAction.action === "load-character") {
+        sceneManager.actions.updatePlayerCharacterWithHiddenFields(
+          id,
+          peerAction.payload
+        );
+      }
     },
     debug: debug,
   });
