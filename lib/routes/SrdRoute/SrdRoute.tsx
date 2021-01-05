@@ -56,17 +56,10 @@ export const SrdRoute: React.FC<{
         <Box display="flex">
           {renderToc()}
           <Container className={css({ flexGrow: 1 })}>
-            <Box pb="2rem">
-              {renderAutoComplete()}
-              {renderNavigationButtons()}
+            <Box pb="1rem" mt="-1.5rem">
+              {renderHeader()}
             </Box>
-            <FateLabel
-              className={css({
-                marginBottom: "-1rem",
-              })}
-            >
-              {props.title}
-            </FateLabel>
+            <Box mx="-.5rem">{renderNavigationButtons()}</Box>
             <MarkdownElement renderedMarkdown={html} />
             <Box mt="3rem" mb="1rem">
               <Divider />
@@ -79,6 +72,21 @@ export const SrdRoute: React.FC<{
       )}
     </Page>
   );
+
+  function renderHeader() {
+    return (
+      <Box display="flex" justifyContent="space-between" alignItems="flex-end">
+        <Box>
+          <FateLabel>
+            <Link to="/srds">{"SRDs"}</Link>
+            {" / "}
+            {props.title}
+          </FateLabel>
+        </Box>
+        <Box>{renderAutoComplete()}</Box>
+      </Box>
+    );
+  }
 
   function renderNavigationButtons() {
     return (
@@ -141,7 +149,7 @@ export const SrdRoute: React.FC<{
             <TextField
               {...params}
               fullWidth
-              className={css({ width: "250px", margin: "0 0 1rem 0" })}
+              className={css({ width: "250px", margin: "0" })}
               label="Search"
               margin="normal"
             />
