@@ -1,6 +1,6 @@
 import Container from "@material-ui/core/Container";
 import React from "react";
-import { Link } from "react-router-dom";
+import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 
 export const SrdsRoute: React.FC = (props) => {
@@ -9,13 +9,13 @@ export const SrdsRoute: React.FC = (props) => {
       <Container>
         <ul>
           <li>
-            <Link to="/srds/condensed">Fate Condensed</Link>
+            <AppLink to="/srds/condensed">Fate Condensed</AppLink>
           </li>
           <li>
-            <Link to="/srds/core">Fate Core</Link>
+            <AppLink to="/srds/core">Fate Core</AppLink>
           </li>
           <li>
-            <Link to="/srds/accelerated">Fate Accelerated</Link>
+            <AppLink to="/srds/accelerated">Fate Accelerated</AppLink>
           </li>
         </ul>
       </Container>

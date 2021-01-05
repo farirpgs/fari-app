@@ -2,8 +2,11 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import React from "react";
 
-const anchorSvg =
-  "url(data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJsaW5rIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtbGluayBmYS13LTE2IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTMyNi42MTIgMTg1LjM5MWM1OS43NDcgNTkuODA5IDU4LjkyNyAxNTUuNjk4LjM2IDIxNC41OS0uMTEuMTItLjI0LjI1LS4zNi4zN2wtNjcuMiA2Ny4yYy01OS4yNyA1OS4yNy0xNTUuNjk5IDU5LjI2Mi0yMTQuOTYgMC01OS4yNy01OS4yNi01OS4yNy0xNTUuNyAwLTIxNC45NmwzNy4xMDYtMzcuMTA2YzkuODQtOS44NCAyNi43ODYtMy4zIDI3LjI5NCAxMC42MDYuNjQ4IDE3LjcyMiAzLjgyNiAzNS41MjcgOS42OSA1Mi43MjEgMS45ODYgNS44MjIuNTY3IDEyLjI2Mi0zLjc4MyAxNi42MTJsLTEzLjA4NyAxMy4wODdjLTI4LjAyNiAyOC4wMjYtMjguOTA1IDczLjY2LTEuMTU1IDEwMS45NiAyOC4wMjQgMjguNTc5IDc0LjA4NiAyOC43NDkgMTAyLjMyNS41MWw2Ny4yLTY3LjE5YzI4LjE5MS0yOC4xOTEgMjguMDczLTczLjc1NyAwLTEwMS44My0zLjcwMS0zLjY5NC03LjQyOS02LjU2NC0xMC4zNDEtOC41NjlhMTYuMDM3IDE2LjAzNyAwIDAgMS02Ljk0Ny0xMi42MDZjLS4zOTYtMTAuNTY3IDMuMzQ4LTIxLjQ1NiAxMS42OTgtMjkuODA2bDIxLjA1NC0yMS4wNTVjNS41MjEtNS41MjEgMTQuMTgyLTYuMTk5IDIwLjU4NC0xLjczMWExNTIuNDgyIDE1Mi40ODIgMCAwIDEgMjAuNTIyIDE3LjE5N3pNNDY3LjU0NyA0NC40NDljLTU5LjI2MS01OS4yNjItMTU1LjY5LTU5LjI3LTIxNC45NiAwbC02Ny4yIDY3LjJjLS4xMi4xMi0uMjUuMjUtLjM2LjM3LTU4LjU2NiA1OC44OTItNTkuMzg3IDE1NC43ODEuMzYgMjE0LjU5YTE1Mi40NTQgMTUyLjQ1NCAwIDAgMCAyMC41MjEgMTcuMTk2YzYuNDAyIDQuNDY4IDE1LjA2NCAzLjc4OSAyMC41ODQtMS43MzFsMjEuMDU0LTIxLjA1NWM4LjM1LTguMzUgMTIuMDk0LTE5LjIzOSAxMS42OTgtMjkuODA2YTE2LjAzNyAxNi4wMzcgMCAwIDAtNi45NDctMTIuNjA2Yy0yLjkxMi0yLjAwNS02LjY0LTQuODc1LTEwLjM0MS04LjU2OS0yOC4wNzMtMjguMDczLTI4LjE5MS03My42MzkgMC0xMDEuODNsNjcuMi02Ny4xOWMyOC4yMzktMjguMjM5IDc0LjMtMjguMDY5IDEwMi4zMjUuNTEgMjcuNzUgMjguMyAyNi44NzIgNzMuOTM0LTEuMTU1IDEwMS45NmwtMTMuMDg3IDEzLjA4N2MtNC4zNSA0LjM1LTUuNzY5IDEwLjc5LTMuNzgzIDE2LjYxMiA1Ljg2NCAxNy4xOTQgOS4wNDIgMzQuOTk5IDkuNjkgNTIuNzIxLjUwOSAxMy45MDYgMTcuNDU0IDIwLjQ0NiAyNy4yOTQgMTAuNjA2bDM3LjEwNi0zNy4xMDZjNTkuMjcxLTU5LjI1OSA1OS4yNzEtMTU1LjY5OS4wMDEtMjE0Ljk1OXoiPjwvcGF0aD48L3N2Zz4=)";
+const anchorSvgMaterialUI = `<svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg>`;
+
+function getAnchorSvg(color: string) {
+  return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' focusable='false' fill='${color}' viewBox='0 0 24 24' aria-hidden='true'%3E%3Cpath d='M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z'%3E%3C/path%3E%3C/svg%3E");`;
+}
 
 const styles = (theme: Theme) => {
   return {
@@ -216,10 +219,12 @@ const styles = (theme: Theme) => {
         boxShadow: "inset 0 -1px 0 #d1d5da",
       },
       "& .anchor": {
-        backgroundImage: anchorSvg,
-        marginLeft: ".5rem",
+        backgroundImage: getAnchorSvg(
+          theme.palette.type === "dark" ? "white" : "black"
+        ),
+        transform: "rotate(45deg)",
+        marginLeft: ".3rem",
         display: "inline-block",
-        opacity: ".3",
         backgroundRepeat: "no-repeat",
         cursor: "pointer",
       },

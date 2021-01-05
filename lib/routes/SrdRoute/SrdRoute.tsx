@@ -21,6 +21,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import React from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
@@ -90,7 +91,7 @@ export const SrdRoute: React.FC<{
       <Box display="flex" justifyContent="space-between" alignItems="flex-end">
         <Box>
           <FateLabel>
-            <Link to="/srds">{"SRDs"}</Link>
+            <AppLink to="/srds">{"SRDs"}</AppLink>
             {" / "}
             {props.title}
           </FateLabel>
