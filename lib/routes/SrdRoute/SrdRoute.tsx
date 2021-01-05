@@ -49,7 +49,7 @@ export const SrdRoute: React.FC<{
 
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined}>
-      <PageMeta title={props.title} />
+      <PageMeta title={`${currentH1?.textContent ?? ""} | ${props.title}`} />
       {html ? (
         <Box display="flex">
           {renderToc()}
