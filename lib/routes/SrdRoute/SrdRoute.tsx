@@ -6,6 +6,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
+import Fade from "@material-ui/core/Fade";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -62,20 +63,22 @@ export const SrdRoute: React.FC<{
     <Page drawerWidth={!isSmall ? drawerWidth : undefined}>
       <PageMeta title={`${currentH1?.textContent ?? ""} | ${props.title}`} />
       {html ? (
-        <Box display="flex">
-          {renderToc()}
-          <Container className={css({ flexGrow: 1 })}>
-            <Box pb="1rem" mt="-1.5rem">
-              {renderHeader()}
-            </Box>
-            <Box mx="-.5rem">{renderNavigationButtons()}</Box>
-            <MarkdownElement renderedMarkdown={html} />
-            <Box mt="3rem" mb="1rem">
-              <Divider />
-            </Box>
-            {renderNavigationButtons()}
-          </Container>
-        </Box>
+        <Fade in>
+          <Box display="flex">
+            {renderToc()}
+            <Container className={css({ flexGrow: 1 })}>
+              <Box pb="1rem" mt="-1.5rem">
+                {renderHeader()}
+              </Box>
+              <Box mx="-.5rem">{renderNavigationButtons()}</Box>
+              <MarkdownElement renderedMarkdown={html} />
+              <Box mt="3rem" mb="1rem">
+                <Divider />
+              </Box>
+              {renderNavigationButtons()}
+            </Container>
+          </Box>
+        </Fade>
       ) : (
         renderIsLoading()
       )}
