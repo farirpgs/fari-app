@@ -170,10 +170,6 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   }, [shareLinkToolTip]);
 
-  const shouldRenderAddCharacterTooltip =
-    props.mode === SceneMode.PlayOnline &&
-    !!sceneManager.computed.userCharacterSheet;
-
   const everyone = [
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
@@ -191,9 +187,9 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.addOfflineCharacter(character);
   }
 
-  function onPlayerAddCharacter(character: ICharacter) {
+  function onPlayerLoadCharacter(character: ICharacter) {
     connectionsManager?.actions.sendToHost<IPeerActions>({
-      action: "update-character",
+      action: "load-character",
       payload: character,
     });
   }
@@ -462,7 +458,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         onLoadCharacterSheet={() => {
                           charactersManager.actions.openManager(
                             ManagerMode.Use,
-                            onPlayerAddCharacter
+                            onPlayerLoadCharacter
                           );
                         }}
                         onDiceRoll={(options: IRollDiceOptions) => {

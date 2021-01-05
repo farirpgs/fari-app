@@ -539,21 +539,33 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerCharacter(id: string, character: ICharacter) {
+  function updatePlayerCharacter(
+    id: string,
+    character: ICharacter,
+    updateHiddenFields = false
+  ) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
             p.character = character;
-            // update hidden character fields
-            p.fatePoints = character.fatePoints ?? 3;
-            p.playedDuringTurn = character.playedDuringTurn ?? false;
+            if (updateHiddenFields) {
+              p.fatePoints = character.fatePoints ?? 3;
+              p.playedDuringTurn = character.playedDuringTurn ?? false;
+            }
           }
         });
       })
     );
     charactersManager.actions.updateIfExists(character);
+  }
+
+  function updatePlayerCharacterWithHiddenFields(
+    id: string,
+    character: ICharacter
+  ) {
+    updatePlayerCharacter(id, character, true);
   }
 
   function updatePlayerPlayedDuringTurn(
@@ -696,6 +708,7 @@ export function useScene(props: IProps) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
+      updatePlayerCharacterWithHiddenFields,
       updateDrawAreaObjects,
       toggleAspectPinned,
     },

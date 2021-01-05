@@ -10,6 +10,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
+import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../images/blue/app.png";
 import { Page } from "../../components/Page/Page";
@@ -30,21 +32,10 @@ export const JoinAGame: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const [playerName, setPlayerName] = useState(playerNameSingleton);
-  const [changeIcon, setChangeIcon] = useState(false);
 
   function onSubmitPlayerName(playerName: string) {
     props.onSubmitPlayerName(playerName);
   }
-
-  useEffect(() => {
-    const id = setTimeout(() => {
-      setChangeIcon(true);
-    }, 2000);
-
-    return () => {
-      clearTimeout(id);
-    };
-  }, []);
 
   useEffect(() => {
     playerNameSingleton = playerName;
@@ -116,6 +107,38 @@ export const JoinAGame: React.FC<{
           )}
         </Box>
         <Box pb="1rem">
+          <Alert severity="info">
+            <Box pb=".5rem" fontWeight="bold">
+              <Typography variant="inherit">
+                {"Oh, something is different?"}
+              </Typography>
+            </Box>
+            <Box pb=".5rem">
+              <Typography>
+                {
+                  "I made some changes to this page based on feedback I got from the community."
+                }
+              </Typography>
+            </Box>
+            <Box pb="1rem">
+              <Typography>
+                {
+                  "Just enter your real player name in the field below and you will be able to load your character sheet once you've joined the game."
+                }
+              </Typography>
+            </Box>
+            <Box pb=".5rem">
+              <Typography>
+                {"Once inside the game, simply click the"}
+                <Box display="inline-block" px=".5rem">
+                  <NoteAddIcon />
+                </Box>
+                {"button besides your name on the left."}
+              </Typography>
+            </Box>
+          </Alert>
+        </Box>
+        <Box pb="1rem">
           <Box pb="1rem">
             <Paper>
               <Box p="1rem">
@@ -152,7 +175,8 @@ export const JoinAGame: React.FC<{
                 </Box>
               </Box>
             </Paper>
-          </Box>{" "}
+          </Box>
+
           <Collapse in={props.connecting}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
