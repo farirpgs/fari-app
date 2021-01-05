@@ -17,6 +17,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import React from "react";
 import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
@@ -136,11 +137,8 @@ export const SrdRoute: React.FC<{
                   <ListItem
                     button
                     dense
-                    onClick={() => {
-                      if (h1.info.level === 1) {
-                        goTo(h1.info.id);
-                      }
-                    }}
+                    component={Link}
+                    to={`${props.prefix}/${h1.info.id}`}
                   >
                     {renderTocElement(h1.info)}
                   </ListItem>
@@ -151,10 +149,10 @@ export const SrdRoute: React.FC<{
                           button
                           dense
                           key={h2Index}
+                          component={Link}
+                          to={`#${h2.id}`}
                           onClick={() => {
-                            if (h1.info.level === 1) {
-                              window.location.hash = h2.id;
-                            }
+                            window.location.hash = h2.id;
                           }}
                         >
                           {renderTocElement(h2)}
