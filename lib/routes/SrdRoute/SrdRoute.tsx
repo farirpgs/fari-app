@@ -150,7 +150,7 @@ export const SrdRoute: React.FC<{
           onChange={(event, newValue) => {
             const header = allHeaders.find((h) => newValue === h.label);
 
-            if (!header?.parent) {
+            if (header?.level === 1) {
               history.push(`${props.prefix}/${header?.id}`);
             } else {
               history.push(
