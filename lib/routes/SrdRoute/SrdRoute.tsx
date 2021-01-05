@@ -11,10 +11,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import useTheme from "@material-ui/core/styles/useTheme";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import React from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -24,12 +26,21 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import {
   ILoadFunction,
-  ITocElement,
+  IMarkdownHeader,
   useMarkdownFile,
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 
 const drawerWidth = "300px";
+
+/**
+  /srds/condensed/getting-started#aspects
+  /srds/condensed/getting-started#stunts
+  /srds/condensed/getting-started#refresh
+  /srds/condensed/getting-started#stress-and-consequences
+  /srds/condensed/getting-started#skill-list
+  /srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice
+ */
 
 export const SrdRoute: React.FC<{
   prefix: string;
@@ -37,7 +48,7 @@ export const SrdRoute: React.FC<{
   loadFunction: ILoadFunction;
 }> = (props) => {
   const { page } = useParams<{ page?: string }>();
-  const { toc, dom } = useMarkdownFile(props.loadFunction);
+  const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
   const { html, nextH1, previousH1, currentH1 } = useMarkdownPage(page, dom);
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
@@ -54,19 +65,15 @@ export const SrdRoute: React.FC<{
         <Box display="flex">
           {renderToc()}
           <Container className={css({ flexGrow: 1 })}>
-            <Box pb="2rem">{renderButtons()}</Box>
-            <FateLabel
-              className={css({
-                marginBottom: "-1rem",
-              })}
-            >
-              {props.title}
-            </FateLabel>
+            <Box pb="1rem" mt="-1.5rem">
+              {renderHeader()}
+            </Box>
+            <Box mx="-.5rem">{renderNavigationButtons()}</Box>
             <MarkdownElement renderedMarkdown={html} />
             <Box mt="3rem" mb="1rem">
               <Divider />
             </Box>
-            {renderButtons()}
+            {renderNavigationButtons()}
           </Container>
         </Box>
       ) : (
@@ -75,7 +82,22 @@ export const SrdRoute: React.FC<{
     </Page>
   );
 
-  function renderButtons() {
+  function renderHeader() {
+    return (
+      <Box display="flex" justifyContent="space-between" alignItems="flex-end">
+        <Box>
+          <FateLabel>
+            <Link to="/srds">{"SRDs"}</Link>
+            {" / "}
+            {props.title}
+          </FateLabel>
+        </Box>
+        <Box>{renderAutoComplete()}</Box>
+      </Box>
+    );
+  }
+
+  function renderNavigationButtons() {
     return (
       <Box
         display="flex"
@@ -90,6 +112,7 @@ export const SrdRoute: React.FC<{
         {previousH1 && (
           <Button
             startIcon={<NavigateBeforeIcon />}
+            color="primary"
             onClick={() => {
               goTo(previousH1?.id);
             }}
@@ -97,9 +120,11 @@ export const SrdRoute: React.FC<{
             {previousH1?.textContent}
           </Button>
         )}
+
         {nextH1 && (
           <Button
             endIcon={<NavigateNextIcon />}
+            color="primary"
             onClick={() => {
               goTo(nextH1?.id);
             }}
@@ -107,6 +132,38 @@ export const SrdRoute: React.FC<{
             {nextH1?.textContent}
           </Button>
         )}
+      </Box>
+    );
+  }
+
+  function renderAutoComplete() {
+    return (
+      <Box>
+        <Autocomplete
+          freeSolo
+          size="small"
+          options={allHeaders.map((header) => header.label)}
+          onChange={(event, newValue) => {
+            const header = allHeaders.find((h) => newValue === h.label);
+
+            if (!header?.parent) {
+              history.push(`${props.prefix}/${header?.id}`);
+            } else {
+              history.push(
+                `${props.prefix}/${header?.parent?.id}#${header?.id}`
+              );
+            }
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              fullWidth
+              className={css({ width: "250px", margin: "0" })}
+              label="Search"
+              margin="normal"
+            />
+          )}
+        />
       </Box>
     );
   }
@@ -128,7 +185,7 @@ export const SrdRoute: React.FC<{
             }),
           }}
         >
-          <Box mt="5rem" />
+          <Box mt="4.9rem" />
           <Divider />
           <List>
             {Object.entries(toc).map(([, h1], index) => {
@@ -138,12 +195,12 @@ export const SrdRoute: React.FC<{
                     button
                     dense
                     component={Link}
-                    to={`${props.prefix}/${h1.info.id}`}
+                    to={`${props.prefix}/${h1.page.id}`}
                   >
-                    {renderTocElement(h1.info)}
+                    {renderTocElement(h1.page)}
                   </ListItem>
-                  <Collapse in={currentH1?.id === h1.info.id}>
-                    {h1.level2.map((h2, h2Index) => {
+                  <Collapse in={currentH1?.id === h1.page.id}>
+                    {h1.children.map((h2, h2Index) => {
                       return (
                         <ListItem
                           button
@@ -169,7 +226,7 @@ export const SrdRoute: React.FC<{
     );
   }
 
-  function renderTocElement(tocElement: ITocElement) {
+  function renderTocElement(tocElement: IMarkdownHeader) {
     return (
       <ListItemText
         primary={
