@@ -123,17 +123,19 @@ export const JoinAGame: React.FC<{
             <Box pb="1rem">
               <Typography>
                 {
-                  "Just enter your real player name in the field below and you will be able to load your character sheet once you've joined the game."
+                  "Just enter your name name in the field below and you will be able to load your character sheet once you've joined the game."
                 }
               </Typography>
             </Box>
             <Box pb=".5rem">
               <Typography>
-                {"Once inside the game, simply click the"}
+                {"Once inside, simply click the"}
                 <Box display="inline-block" px=".5rem">
                   <NoteAddIcon />
                 </Box>
-                {"button besides your name on the left."}
+                {
+                  "button besides your name on the left to load a character sheet."
+                }
               </Typography>
             </Box>
           </Alert>
