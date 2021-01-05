@@ -33,6 +33,15 @@ import { useMarkdownPage } from "./hooks/useMarkdownPage";
 
 const drawerWidth = "300px";
 
+/**
+  /srds/condensed/getting-started#aspects
+  /srds/condensed/getting-started#stunts
+  /srds/condensed/getting-started#refresh
+  /srds/condensed/getting-started#stress-and-consequences
+  /srds/condensed/getting-started#skill-list
+  /srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice
+ */
+
 export const SrdRoute: React.FC<{
   prefix: string;
   title: string;
