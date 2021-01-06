@@ -75,6 +75,18 @@ const smallIconButtonStyle = css({
   padding: "0",
 });
 
+const HelpLinks: Record<string, string> = {
+  "Aspects": "/srds/condensed/getting-started#aspects",
+  "Stunts & Extras": "/srds/condensed/getting-started#stunts",
+  "Refresh": "/srds/condensed/getting-started#refresh",
+  "Stress": "/srds/condensed/challenges-conflicts-and-contests#stress",
+  "Consequences":
+    "/srds/condensed/challenges-conflicts-and-contests#consequences-1",
+  "Skills": "/srds/condensed/getting-started#skill-list",
+  "Dice":
+    "/srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice",
+};
+
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
@@ -438,10 +450,13 @@ export const CharacterV3Dialog: React.FC<{
             return null;
           }
 
+          const helpLink = HelpLinks[section.label];
+
           return (
             <Box key={section.id}>
               <SheetHeader
                 label={section.label}
+                helpLink={helpLink}
                 advanced={advanced}
                 visibleOnCard={section.visibleOnCard}
                 onToggleVisibleOnCard={() => {
@@ -1106,6 +1121,7 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <SheetHeader
           label={t("character-dialog.refresh")}
+          helpLink={HelpLinks["Refresh"]}
           advanced={advanced}
         />
         <Box className={css(sheetContentStyle)}>
@@ -1149,7 +1165,11 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <>
-        <SheetHeader label={t("character-dialog.dice")} advanced={advanced} />
+        <SheetHeader
+          label={t("character-dialog.dice")}
+          helpLink={HelpLinks["Dice"]}
+          advanced={advanced}
+        />
         <Box className={sheetContentStyle}>
           <Grid container justify="center">
             <Grid item>
@@ -1246,6 +1266,7 @@ AddSection.displayName = "AddSection";
 
 export const SheetHeader: React.FC<{
   label: string;
+  helpLink: string | undefined;
   advanced: boolean;
   onLabelChange?: (newLabel: string) => void;
   onRemove?: () => void;
@@ -1268,6 +1289,19 @@ export const SheetHeader: React.FC<{
   return (
     <Box className={sheetHeader}>
       <Grid container justify="space-between" wrap="nowrap" spacing={1}>
+        {props.helpLink && (
+          <Grid item>
+            <IconButton
+              size="small"
+              className={smallIconButtonStyle}
+              onClick={() => {
+                window.open(props.helpLink);
+              }}
+            >
+              <HelpIcon htmlColor={headerColor} />
+            </IconButton>
+          </Grid>
+        )}
         <Grid item xs>
           <FateLabel>
             <ContentEditable

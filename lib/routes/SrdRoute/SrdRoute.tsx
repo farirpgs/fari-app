@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -34,15 +35,6 @@ import {
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 
 const drawerWidth = "300px";
-
-/**
-  /srds/condensed/getting-started#aspects
-  /srds/condensed/getting-started#stunts
-  /srds/condensed/getting-started#refresh
-  /srds/condensed/getting-started#stress-and-consequences
-  /srds/condensed/getting-started#skill-list
-  /srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice
- */
 
 export const SrdRoute: React.FC<{
   prefix: string;
@@ -88,16 +80,16 @@ export const SrdRoute: React.FC<{
 
   function renderHeader() {
     return (
-      <Box display="flex" justifyContent="space-between" alignItems="flex-end">
-        <Box>
+      <Grid container justify="space-between" alignItems="flex-end">
+        <Grid item sm={6} xs={12}>
           <FateLabel>
             <AppLink to="/srds">{"SRDs"}</AppLink>
             {" / "}
             {props.title}
           </FateLabel>
-        </Box>
-        <Box>{renderAutoComplete()}</Box>
-      </Box>
+        </Grid>
+        <Grid item>{renderAutoComplete()}</Grid>
+      </Grid>
     );
   }
 
