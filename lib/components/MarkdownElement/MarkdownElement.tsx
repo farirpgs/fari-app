@@ -203,7 +203,7 @@ const styles = (theme: Theme) => {
       },
       "& blockquote": {
         "borderLeft": `5px solid ${theme.palette.primary.main}`,
-
+        "boxShadow": theme.shadows[1],
         "backgroundColor": lightBackground,
         "padding": "4px 24px",
         "margin": "24px 0",
@@ -211,6 +211,7 @@ const styles = (theme: Theme) => {
           marginTop: "16px",
         },
         "& h1,h2,h3,h4,h5,h6": {
+          marginTop: "1rem",
           fontStyle: "normal",
           fontFamily: `'Work Sans', sans-serif`,
         },
