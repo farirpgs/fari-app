@@ -183,6 +183,7 @@ const styles = (theme: Theme) => {
       },
       "& blockquote": {
         "borderLeft": `5px solid ${theme.palette.primary.main}`,
+
         "backgroundColor": lightBackground,
         "padding": "4px 24px",
         "margin": "24px 0",
@@ -191,6 +192,7 @@ const styles = (theme: Theme) => {
         },
       },
       "& blockquote *": {
+        fontStyle: "italic",
         fontFamily: `'Work Sans', sans-serif`,
       },
       "& a, & a code": {
