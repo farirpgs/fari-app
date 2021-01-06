@@ -301,28 +301,3 @@ export const SrdRoute: React.FC<{
 SrdRoute.displayName = "SrdRoute";
 
 export default SrdRoute;
-
-export function nextUntil(
-  elem: Element | undefined | null,
-  selector: string,
-  filter?: string
-) {
-  const siblings: Array<Element> = [];
-
-  let currentElement = elem?.nextElementSibling;
-
-  while (currentElement) {
-    if (currentElement.matches(selector)) break;
-
-    if (filter && !currentElement.matches(filter)) {
-      currentElement = currentElement.nextElementSibling;
-      continue;
-    }
-
-    siblings.push(currentElement);
-
-    currentElement = currentElement.nextElementSibling;
-  }
-
-  return siblings;
-}
