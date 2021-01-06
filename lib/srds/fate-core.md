@@ -73,9 +73,11 @@ Both players and gamemasters also have a secondary job: make everyone around you
 
 ## The Character Sheet
 
-Players, your character sheet contains everything you need to know about your PC—abilities, personality, significant background elements, and any other resources that character has to use in the game. Here’s an example of a Fate character sheet, so we can show you all the components.
+Players, your character sheet contains everything you need to know about your PC—abilities, personality, significant background elements, and any other resources that character has to use in the game.
 
-{Insert your character sheet graphic here}
+<!-- Here’s an example of a Fate character sheet, so we can show you all the components. -->
+
+<!-- {Insert your character sheet graphic here} -->
 
 ### Aspects
 
