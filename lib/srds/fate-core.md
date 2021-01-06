@@ -1352,7 +1352,9 @@ Unlike skills, which are about the sort of things anyone can do in your campaign
 
 Having stunts in your game allows you to differentiate characters that have the same skills as one another.
 
-{example}
+> Landon and Cynere both have a high Fight skill, but Cynere also has the Warmaster stunt, which makes her better at creating advantages with the skill. This differentiates the two characters a great deal—Cynere has a unique capability to analyze and understand her enemies’ weaknesses in a way Landon doesn’t.
+>
+> One might imagine Cynere starting a fight by testing an enemy with moves and jabs, carefully assessing her opponent’s limits before moving in for a decisive strike, whereas Landon is happy to wade in and chop away.
 
 Landon and Cynere both have a high Fight skill, but Cynere also has the Warmaster stunt, which makes her better at creating advantages with the skill. This differentiates the two characters a great deal—Cynere has a unique capability to analyze and understand her enemies’ weaknesses in a way Landon doesn’t.
 
@@ -1378,14 +1380,13 @@ The most basic option for a stunt is to allow a skill to do something that it no
 
 Here are some new action stunts:
 
-{example}
+- Backstab. You can use Stealth to make physical attacks, provided your target isn’t already aware of your presence.
+- The Fight in the Dog. You can use Provoke to enter the kinds of contests that you’d normally need Physique for, whenever your ability to psych your opponent out with the force of your presence alone would be a factor.
+- You’re Never Safe. You can use Burglary to make mental attacks and create advantages against a target, by staging a heist in such a way as to shatter their confidence in their security.
 
-Backstab. You can use Stealth to make physical attacks, provided your target isn’t already aware of your presence.
-The Fight in the Dog. You can use Provoke to enter the kinds of contests that you’d normally need Physique for, whenever your ability to psych your opponent out with the force of your presence alone would be a factor.
-You’re Never Safe. You can use Burglary to make mental attacks and create advantages against a target, by staging a heist in such a way as to shatter their confidence in their security.
-Just because you have a stunt doesn’t mean you always have to use it when it becomes relevant. Using a stunt is always a choice, and you can opt not to use a stunt if you don’t think it would be appropriate or you just don’t want to.
-
-For example, you could have a stunt that allows you to use Fight in place of Athletics when defending against arrows and other missile attacks. Whenever you’re attacked by an archer, you can choose to use Fight—or simply use Athletics as anyone else would. It’s entirely your choice.
+> Just because you have a stunt doesn’t mean you always have to use it when it becomes relevant. Using a stunt is always a choice, and you can opt not to use a stunt if you don’t think it would be appropriate or you just don’t want to.
+>
+> For example, you could have a stunt that allows you to use Fight in place of Athletics when defending against arrows and other missile attacks. Whenever you’re attacked by an archer, you can choose to use Fight—or simply use Athletics as anyone else would. It’s entirely your choice.
 
 #### Adding A Bonus To An Action
 
@@ -1397,14 +1398,13 @@ You can also use this to establish any effect worth two shifts as an additional 
 
 Here are some examples of adding a bonus to an action:
 
-{example}
+- Arcane Expert. Gain a +2 bonus to create an advantage using Lore, whenever the situation has specifically to do with the supernatural or occult.
+- Lead in the Air. You really like emptying magazines. Any time you’re using a fully automatic weapon and you succeed at a Shoot attack, you automatically create a Fair (+2) opposition against movement in that zone until your next turn, because of all the lead in the air. (Normally, you’d need to take a separate action to set up this kind of interference, but with the stunt, it’s free.)
+- Child of the Court. Gain a +2 bonus to any attempt to overcome obstacles with Rapport when you’re at an aristocratic function, such as a royal ball.
 
-Arcane Expert. Gain a +2 bonus to create an advantage using Lore, whenever the situation has specifically to do with the supernatural or occult.
-Lead in the Air. You really like emptying magazines. Any time you’re using a fully automatic weapon and you succeed at a Shoot attack, you automatically create a Fair (+2) opposition against movement in that zone until your next turn, because of all the lead in the air. (Normally, you’d need to take a separate action to set up this kind of interference, but with the stunt, it’s free.)
-Child of the Court. Gain a +2 bonus to any attempt to overcome obstacles with Rapport when you’re at an aristocratic function, such as a royal ball.
-Players, when you’re building stunts that give an action bonus, look out for situations that seem like they’d only come up rarely in play. Like, the Arcane Expert stunt above would be inappropriate if your game doesn’t deal with the supernatural a lot, and Child of the Court will be useless if your campaign doesn’t deal with the nobility on a fairly regular basis. If you don’t think you’ll use the stunt at least twice in most of your game sessions, change the condition associated with the bonus.
-
-GMs, it’s on you to help the players make sure their stunts see use—look at the conditions they choose here as a “laundry list” of stuff that you want to trend toward in your sessions.
+> Players, when you’re building stunts that give an action bonus, look out for situations that seem like they’d only come up rarely in play. Like, the Arcane Expert stunt above would be inappropriate if your game doesn’t deal with the supernatural a lot, and Child of the Court will be useless if your campaign doesn’t deal with the nobility on a fairly regular basis. If you don’t think you’ll use the stunt at least twice in most of your game sessions, change the condition associated with the bonus.
+>
+> GMs, it’s on you to help the players make sure their stunts see use—look at the conditions they choose here as a “laundry list” of stuff that you want to trend toward in your sessions.
 
 #### Creating A Rules Exception
 
@@ -1414,12 +1414,12 @@ The only limit to this is that a stunt can’t change any of the basic rules for
 
 Here are some stunts that create rules exceptions:
 
-{example}
+- Ritualist. Use Lore in place of another skill during a challenge, allowing you to use Lore twice in the same challenge.
+- Hogtie. When you use Crafts to create a Hogtied (or similar) advantage on someone, you can always actively oppose any overcome rolls to escape the hogtie (also using Crafts), even if you’re not there. (Normally, if you weren’t there, the escaping character would roll against passive opposition, making it a lot easier to escape.)
+- Riposte. If you succeed with style on a Fight defense, you can choose to inflict a 2-shift hit rather than take a boost.
 
-Ritualist. Use Lore in place of another skill during a challenge, allowing you to use Lore twice in the same challenge.
-Hogtie. When you use Crafts to create a Hogtied (or similar) advantage on someone, you can always actively oppose any overcome rolls to escape the hogtie (also using Crafts), even if you’re not there. (Normally, if you weren’t there, the escaping character would roll against passive opposition, making it a lot easier to escape.)
-Riposte. If you succeed with style on a Fight defense, you can choose to inflict a 2-shift hit rather than take a boost.
-Balancing Stunt Utility
+#### Balancing Stunt Utility
+
 If you look at most of the example stunts, you’ll notice that the circumstances under which you can use them are pretty narrow compared to the base skills they modify. That’s the sweet spot you want to shoot for with your own stunts—you want them to be limited enough in scope that it feels special when you use them, but not so narrow that you never see them come up after you take them.
 
 If the stunt effectively takes over all of the skill’s base actions, it’s not limited enough. You don’t want a stunt replacing the skill it modifies.
@@ -1436,25 +1436,23 @@ Another way to restrict how often a stunt comes into play is to have it cost a f
 
 Our best advice for determining what really powerful means is that it either goes beyond the specified limits we gave above (so, if it adds a new action to a skill and a bonus), or significantly affects conflicts. Specifically, almost any stunt that allows you to do extra stress in a conflict should cost a fate point to use.
 
-{example}
-
-Lenny’s considering a stunt for Landon called “My Blade Strikes True.” He wants it to add two shifts to any successful Fight attack when he wields his personal, custom-forged family sword.
-
-Amanda thinks it over. It fulfills all the criteria for limitations, but there’s one problem—neither Amanda nor Lenny can envision very many situations where Landon wouldn’t be using his heirloom sword. So he’d basically be able to use that stunt every time he attacked someone, which would replace the normal use of the Fight skill. She decides that’s too much, and asks him to modify the stunt.
-
-Lenny thinks about it, and says, “Well, how about if it lets me do that whenever I’m fighting a member of a rival family with my heirloom sword?”
-
-Amanda asks, “Were we going to establish rival families to the Darkwoods in this game? I thought the point was for you guys to travel all over the place and get a bit lost in the world.”
-
-Lenny agrees that it probably wouldn’t come up often enough, and thinks some more.
-
-Then it comes to him. “How about this—what if, when someone uses their 2-point stress box to absorb one of my Fight attacks with the sword, I can make them use their mild consequence instead?”
-
-Amanda likes this, because it’ll come up in nearly every conflict Landon gets into, but it won’t be something he can take advantage of every exchange. She asks for a further restriction of one use per conflict, and they call it done.
-
-On Landon’s sheet, Lenny writes:
-
-My Blade Strikes True. Once per conflict, you can force the opponent to use a mild consequence instead of a 2-point stress box on a successful Fight attack with your heirloom sword.
+> Lenny’s considering a stunt for Landon called “My Blade Strikes True.” He wants it to add two shifts to any successful Fight attack when he wields his personal, custom-forged family sword.
+>
+> Amanda thinks it over. It fulfills all the criteria for limitations, but there’s one problem—neither Amanda nor Lenny can envision very many situations where Landon wouldn’t be using his heirloom sword. So he’d basically be able to use that stunt every time he attacked someone, which would replace the normal use of the Fight skill. She decides that’s too much, and asks him to modify the stunt.
+>
+> Lenny thinks about it, and says, “Well, how about if it lets me do that whenever I’m fighting a member of a rival family with my heirloom sword?”
+>
+> Amanda asks, “Were we going to establish rival families to the Darkwoods in this game? I thought the point was for you guys to travel all over the place and get a bit lost in the world.”
+>
+> Lenny agrees that it probably wouldn’t come up often enough, and thinks some more.
+>
+> Then it comes to him. “How about this—what if, when someone uses their 2-point stress box to absorb one of my Fight attacks with the sword, I can make them use their mild consequence instead?”
+>
+> Amanda likes this, because it’ll come up in nearly every conflict Landon gets into, but it won’t be something he can take advantage of every exchange. She asks for a further restriction of one use per conflict, and they call it done.
+>
+> On Landon’s sheet, Lenny writes:
+>
+> My Blade Strikes True. Once per conflict, you can force the opponent to use a mild consequence instead of a 2-point stress box on a successful Fight attack with your heirloom sword.
 
 #### Stunt Families
 
@@ -1476,11 +1474,9 @@ Keep in mind that the upgraded stunt effectively replaces the original. You can 
 
 Here are some stunts that stack:
 
-{example}
-
-Advanced Warmaster. (requires Warmaster.) When you’re fighting anyone who is armed with a sword, you get a further +2 bonus to creating an advantage using Warmaster.
-Scion of the Court. (requires Child of the Court.) When you overcome an obstacle with Child of the Court, you may additionally create a situation aspect that describes how the general attitude turns in your favor. If anyone wants to try and get rid of this aspect, they must overcome Fair (+2) opposition.
-Advanced Ritualist. (requires Ritualist.) You gain a +2 bonus when you use Lore in place of another skill during a challenge. This allows you to use Lore twice in the same challenge.
+- Advanced Warmaster. (requires Warmaster.) When you’re fighting anyone who is armed with a sword, you get a further +2 bonus to creating an advantage using Warmaster.
+- Scion of the Court. (requires Child of the Court.) When you overcome an obstacle with Child of the Court, you may additionally create a situation aspect that describes how the general attitude turns in your favor. If anyone wants to try and get rid of this aspect, they must overcome Fair (+2) opposition.
+- Advanced Ritualist. (requires Ritualist.) You gain a +2 bonus when you use Lore in place of another skill during a challenge. This allows you to use Lore twice in the same challenge.
 
 ##### Branching Effects
 
@@ -1494,9 +1490,7 @@ As an example of how this works, let’s take a look at the Deceive skill. If yo
 
 So let’s make our first stunt something like this:
 
-{example}
-
-Fast Talk. You get a +2 to overcome obstacles with Deceive, provided you don’t have to talk to the person you’re trying to deceive for more than a few sentences before blowing past them.
+- Fast Talk. You get a +2 to overcome obstacles with Deceive, provided you don’t have to talk to the person you’re trying to deceive for more than a few sentences before blowing past them.
 
 Here are some potential options for branching off of that stunt:
 
