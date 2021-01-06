@@ -1,3 +1,4 @@
+<!--
 # Declarations & Copyright
 
 ## Fate Core System
@@ -10,6 +11,8 @@ This book uses the OGL version of this text. License found at the end of this do
 >
 > **Please note**: I take no credit for the original design or creation of the SRD, such credit belongs to **Evil Hat Productions LLC**, no challenge is intended to any copyright. The **only** thing I have done with the SRD is remove some examples and format it using markdown.
 
+-->
+
 # THE BASICS
 
 ## Welcome to Fate!
@@ -20,17 +23,16 @@ It’s not all just conversation, though—sometimes you’ll use dice and the r
 
 Fate doesn’t come with a default setting, but it works best with any premise where the characters are proactive, capable people leading dramatic lives. We give more advice on how to bring that flavor to your games in the next chapter.
 
-### NEW TO FATE
+> ### New To Fate
+>
+> If you’re a new player, all you really need to know is in this chapter and on your character sheet—the GM will help you figure out the rest. You may want to check out the cheat sheet just to save your GM some effort, but otherwise, you should be good to go.
+> If you’re a new GM, this is just the tip of the iceberg for you. You should read and get familiar with the whole book.
 
-If you’re a new player, all you really need to know is in this chapter and on your character sheet—the GM will help you figure out the rest. You may want to check out the cheat sheet just to save your GM some effort, but otherwise, you should be good to go.
-
-If you’re a new GM, this is just the tip of the iceberg for you. You should read and get familiar with the whole book.
-
-### FOR VETERANS
-
-You might be reading this because you’re familiar with Fate from our other games, Spirit of the Century and The Dresden Files Roleplaying Game. Several other popular RPGs, like Galileo Games’ Bulldogs! and Cubicle 7’s Legends of Anglerre, also use the Fate system.
-
-This is a new version of Fate, which we developed to update and streamline the system. You’ll recognize some of what’s in here, but we’ve also changed some rules and some terminology. You can find a guide to all the changes we’ve made near the end of the book.
+> ### For Veterans
+>
+> You might be reading this because you’re familiar with Fate from our other games, Spirit of the Century and The Dresden Files Roleplaying Game. Several other popular RPGs, like Galileo Games’ Bulldogs! and Cubicle 7’s Legends of Anglerre, also use the Fate system.
+>
+> This is a new version of Fate, which we developed to update and streamline the system. You’ll recognize some of what’s in here, but we’ve also changed some rules and some terminology. You can find a guide to all the changes we’ve made near the end of the book.
 
 ## What You Need to Play
 
@@ -41,9 +43,12 @@ Getting into a game of Fate is very simple. You need:
 - **A character sheet**, one per player, and some extra paper for note-taking. We’ll talk about what’s on the character sheet below. (GMs, any important characters you play might have a character sheet also.)
 
 - **Fate dice**, at least four, preferably four per person. Fate dice are a special kind of six-sided dice that are marked on two sides with a plus symbol (+), two with a minus symbol (-), and two sides are blank (0). You can get these dice from many hobby and game stores, often under their original name, Fudge dice. (For Fate’s purposes we’ll continue to call them Fate dice, but call them whatever you like!) Evil Hat offer Fate dice for sale at www.evilhat.com.
-  ​ The Deck of Fate is an alternative to Fate dice that is available from Evil Hat. It’s a deck of cards that mimics the probability of Fate dice, and is designed to be used in the same way Fate dice are.
 
-  If you don’t want to use Fate dice, you don’t have to—any set of regular six-sided dice will work. If you’re using regular dice, you read 5 or 6 as +, 1 or 2 as -, and 3 or 4 as 0.
+> ### Alternatives to Fate Dice
+>
+> ​The Deck of Fate is an alternative to Fate dice that is available from Evil Hat. It’s a deck of cards that mimics the probability of Fate dice, and is designed to be used in the same way Fate dice are.
+>
+> If you don’t want to use Fate dice, you don’t have to—any set of regular six-sided dice will work. If you’re using regular dice, you read 5 or 6 as +, 1 or 2 as -, and 3 or 4 as 0.
 
 - **Tokens to represent fate points.** Poker chips, glass beads, or anything similar will work. You’ll want to have at least thirty or more of these on hand, just to make sure you have enough for any given game. You can use pencil marks on your character sheet in lieu of tokens, but physical tokens add a little more fun.
 - **Index cards.** These are optional, but we find they’re very handy for recording aspects during play.
@@ -58,13 +63,13 @@ If you’re a gamemaster, your primary job is to take responsibility for the wor
 
 Both players and gamemasters also have a secondary job: make everyone around you look awesome. Fate is best as a collaborative endeavor, with everyone sharing ideas and looking for opportunities to make the events as entertaining as possible.
 
-### THE EXAMPLE GAME
-
-All of our rules examples in this book refer to the same example game and setting. The name is ???, {insert description of example game}.
-
-The participants are {insert names of 4 participants}. ??? is the GM. ??? plays a ??? named ???. ??? plays the ???. ??? plays ???, a ???.
-
-Check out Game Creation to see how this game came about. We’ve included character sheets for the example PCs at the end of the book.
+> ### The Example Game
+>
+> All of the rules examples in this site refer to the same example game and setting. The name is Hearts of Steel, a tongue-in-cheek fantasy romp about a group of troubleshooters for hire. They traipse about the countryside and get into trouble at the behest of the various petty kings and fief lords who hire them.
+>
+> The participants are Lenny, Lily, Ryan, and Amanda. Amanda is the GM. Lenny plays a thuggish swordsman named Landon. Lily plays the nimble, dashing, and dangerous Cynere, who also happens to love swords. Ryan plays Zird the Arcane, a wizard who, by contrast, has absolutely no love for swords.
+>
+> Check out Game Creation to see how this game came about. There are character sheets for the example PCs for you to check out. (Currently no example character sheets. -Site Editor)
 
 ## The Character Sheet
 
@@ -78,7 +83,7 @@ Aspects are phrases that describe some significant detail about a character. The
 
 Aspects come into play in conjunction with fate points. When an aspect benefits you, you can spend fate points to invoke that aspect for a bonus. When your aspects complicate your character’s life, you gain fate points back—this is called accepting a compel.
 
-???’s character, ???, has the aspect ??? on their sheet, which describes ???.
+> Lily’s character, Cynere, has the aspect Tempted by Shiny Things on her sheet, which describes her general tendency to overvalue material goods and make bad decisions when gems and coin are involved. This adds an interesting, fun element to the character that gets her into a great deal of trouble, bringing a lot of personality to the game.
 
 Aspects can describe things that are beneficial or detrimental—in fact, the best aspects are both.
 
@@ -92,13 +97,13 @@ At the beginning of the game, the player characters have skills rated in steps f
 
 If for some reason you need to make a roll using a skill your character doesn’t have, you can always roll it at Mediocre (+0). There are a couple exceptions to this, like magic skills that most people don’t have at all. We’ll talk about skills in greater detail in their own chapter.
 
-??? has the ??? skill at Great (+4), which makes them ideally suited to ???. However they don't have the ??? skill, however, so when the game calls upon him to ???, that will be rolled at Mediocre (+0). Which could spell disaster for the character.
+> Zird the Arcane has the Lore skill at Great (+4), which makes him ideally suited to knowing a convenient, obscure fact and doing research. He does not have the Stealth skill, however, so when the game calls upon him to sneak up on someone (and Amanda will make sure it will), he’ll have to roll that at Mediocre (+0). Bad news for him.
 
 ### Stunts
 
 Stunts are special tricks that your character knows that allow you to get an extra benefit out of a skill or alter some other game rule to work in your favour. Stunts are like special moves in a video game, letting you do something unique or distinctive compared to other characters. Two characters can have the same rating in a skill, but their stunts might give them vastly different benefits.
 
-??? has a stunt called ??? It gives the character a bonus to ???
+> Landon has a stunt called Another Round? It gives him a bonus to get information from someone with his Rapport skill, provided that he is drinking with his target in a tavern.
 
 ### Stress
 
@@ -145,17 +150,19 @@ In Fate, we use a ladder of adjectives and numbers to rate the dice results, a c
 
 Here’s the ladder:
 
-+8 Legendary
-+7 ￼Epic
-￼+6 Fantastic
-+5 ￼Superb
-￼+4 Great
-￼+3 Good
-+2 ￼Fair
-￼+1 Average
-￼0 Mediocre
--1 ￼Poor
-￼-2 Terrible
+| Modifier | Adjective |
+| -------- | --------- |
+| +8       | Legendary |
+| +7       | Epic      |
+| +6       | Fantastic |
+| +5       | Superb    |
+| +4       | Great     |
+| +3       | Good      |
+| +2       | Fair      |
+| +1       | Average   |
+| 0        | Mediocre  |
+| -1       | Poor      |
+| -2       | Terrible  |
 
 It doesn’t really matter which side of the ladder you use—some people remember the words better, some people remember the numbers better, and some people like using both. So you could say, “I got a Great,” or “I got a +4,” and it means the same thing. As long as everyone understands what you’re communicating, you’re fine.
 
@@ -171,17 +178,17 @@ If you don’t beat the opposition, either you don’t succeed at your action, y
 
 When you beat a roll or a set obstacle, the difference between your opposition and your result is what we call shifts. When you roll equal to the opposition, you have zero shifts. Roll one over your opposition, and you have one shift. Two over means two shifts, and so on. Later in the book, we’ll talk about different instances where getting shifts on a roll benefits you.
 
-??? is trying to ???.
-
-???, the GM, says, {insert description of GM describing static opposition and the difficulty required}.
-
-??? says, “Well, I’ve got ??? at Good (+3), so I’ll try {description of how the PC attempts to bypass the obstacle or overcome it}.”
-
-??? takes up the dice and rolls, getting -+++, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
-
-??? says, {GM gives description of the PC just about overcoming the obstacle}.
-
-??? replies, {pithy quote from player} and ??? continues his trek through the catacombs.
+> Landon is trying to escape an ancient mechanical death trap he accidentally set off during a “routine” exploration of the Anthari Catacombs. Dozens of tiny (and some not-so-tiny) spears are shooting out of the walls in a certain hallway, and he needs to get past them to the other side.
+>
+> Amanda, the GM, says, “This is passive opposition, because it’s just a trap in your way. It’s opposing you at Great (+4). The Anthari really didn’t want anyone getting to their temple treasure.”
+>
+> Lenny sighs and says, “Well, I’ve got Athletics at Good (+3), so I’ll try dodging and weaving through them to cross the hall.”
+>
+> He takes up the dice and rolls, getting -+++, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
+>
+> Amanda says, “Well, it takes equal parts acrobatics and frantic stumbling, but you manage to make it through to the other side with only some cosmetic tears in your tunic to show for it. The mechanism shows no sign of stopping, though—you’ll still have to deal with it on your way out.”
+>
+> Lenny replies, “Just another day at the office,” and Landon continues his trek through the catacombs.
 
 ## Fate Points
 
@@ -199,7 +206,13 @@ You also have to explain or justify how the aspect is helpful in order to get th
 
 You can spend more than one fate point on a single roll, gaining another reroll or an additional +2, as long as each point you spend invokes a different aspect.
 
-??? is trying to {insert description of a PC making a roll and drawing level, then invoking an aspect to get the result that they want}.
+> Cynere is trying to covertly goad a merchant into describing the security features of his personal vault by posing as a visiting dignitary. The merchant is giving her passive opposition at Good (+3), and her Deceive skill is Fair (+2).
+>
+> Lily rolls. She breaks even, getting a 0. That leaves her result at Fair, not enough to get the information she wants.
+>
+> She looks at her character sheet, then to Amanda, and says, “You know, long years of being Tempted by Shiny Things has taught me a thing or two about what’s in a treasure hoard and what’s not. I’m going to impress this merchant by talking about the rarest, most prized elements of his collection.”
+>
+> Amanda grins and nods. Lily hands over a fate point to invoke the aspect, and gets to add +2 to her standing roll. This brings her result to a Great (+4), which exceeds the opposition. The duly impressed merchant starts to brag about his vault, and Cynere listens intently....
 
 ### Declaring a Story Detail
 
@@ -207,7 +220,13 @@ Sometimes, you want to add a detail that works to your character’s advantage i
 
 To do this, you’ll spend a fate point. You should try to justify your story details by relating them to your aspects. GMs, you have the right to veto any suggestions that seem out of scope or ask the player to revise them, especially if the rest of the group isn’t buying into it.
 
-{Insert description of a player using an aspect and a fate point to declare a story detail}.
+> Zird the Arcane gets captured with his friends by some tribesfolk from the Sagroth Wilds. The three heroes are unceremoniously dumped before the chieftain, and Amanda describes the chieftain addressing them in a strange, guttural tongue.
+>
+> Ryan looks at his sheet and says, “Hey, I have If I Haven’t Been There, I’ve Read About It on my sheet. Can I declare that I’ve studied this language at some point, so we can communicate?”
+>
+> Amanda thinks that’s perfectly reasonable to assume. Ryan tosses over a fate point and describes Zird answering in the chieftain’s own speech, which turns all eyes in the village (including those of his friends) on him in a moment of surprise.
+>
+> Ryan has Zird look at his friends and say, “Books. They’re good for you.”
 
 ### Compels
 
@@ -221,19 +240,31 @@ Players, you’re going to call for a compel when you want there to be a complic
 
 Anyone at the table is free to suggest when a compel might be appropriate for any character (including their own). GMs, you have the final word on whether or not a compel is valid. And speak up if you see that a compel happened naturally as a result of play, but no fate points were awarded.
 
-{Insert description of a compel being offered and accepted}
+> Landon has the aspect The Manners of a Goat. He is attending the annual Grand Ball in Ictherya with his friends, courtesy of the royal court.
+>
+> Amanda tells the players, “As you’re milling about, a sharply dressed young lady catches Landon sticking out of the crowd. She observes him for a while, then goes to engage him in conversation, obviously intrigued by how different he looks among all the stuffy nobles.” She turns to Lenny. “What do you do?”
+>
+> Lenny says, “Uh... well, I guess I’ll ask her to dance and play along, see what I can find out about her.”
+>
+> Amanda holds up a fate point and says, “And is that going to go wrong, given Landon’s excellent command of courtly etiquette?”
+>
+> Lenny chuckles and replies, “Yeah, I presume Landon will offend her pretty quickly, and that’ll get complicated. I’ll take the fate point.”
+>
+> Amanda and Lenny play a bit to figure out just how Landon puts his foot in his mouth, and then Amanda describes some of the royal guard showing up. One of them says, “You might want to watch how you speak to the High Duchess of Ictherya, outlander.”
+>
+> Lenny shakes his head. Amanda grins the grin of the devil.
 
 ## Start Playing!
 
 These are the basic things you need to know to play Fate. The following chapters go into greater detail on everything we’ve covered above, and will show you how to get your game off the ground.
 
-## WHERE TO GO FROM HERE
+## Where To Go From Here
 
 The Game Creation chapter takes you through the process of setting up your game, so that should probably be your next stop. Then Character Creation will show you how to make the characters you’ll play.
 Players, you’ll eventually want to read Actions and Outcomes and The Long Game, to help you get a better handle on the nuts and bolts of doing stuff and developing your character during play.
 GMs, you’re going to want to familiarize yourselves with the whole book, but Running the Game and Scenes, Sessions, and Scenarios are of particular importance to you.
 
-# GAME CREATION
+# Game Creation
 
 ## What Makes a Good Fate Game?
 
@@ -291,7 +322,9 @@ If you’re using a setting that already exists, from a movie, novel, or other g
 
 If you’re inventing a setting, you have more work cut out for you. It’s beyond the scope of this chapter to tell you how to make a setting; we’re assuming you already know how to do that if that’s what you’re choosing to do. (Besides, we live in a vast world of media. See tvtropes.org if you don’t believe us.) One word of advice, though—don’t try to invent too much up front. As you’ll see over the course of the chapter, you’re going to be generating a lot of ideas just through the process of game and character creation, so the details will come in time.
 
-{Insert description of the example players sitting down to decide what sort of game world/setting they want}
+> Amanda, Lenny, Lily, and Ryan sit down to talk about the setting. They’re all jonesing for a low fantasy game, as Lenny and Lily have recently read some of the Fafhrd and the Gray Mouser stories. So they pitch “two guys and a girl with swords.” The world is “vaguely medieval, Earth with the serial numbers filed off.”
+>
+> Ryan suggests “guy and girl with swords, and guy without a sword” so that there’s a difference between the two guys. Also, because he wants to play someone who is more bookish (for contrast). Everyone’s on board with this, and they move on.
 
 ### A Game’s Scale
 
@@ -301,7 +334,7 @@ The setting might be small or it might be vast, but where your stories take plac
 
 In a small-scale game, characters deal with problems in a city or region, they don’t travel a great deal, and the problems are local. A large-scale game involves dealing with problems that affect a world, a civilization, or even a galaxy if the genre you’re playing in can handle that kind of thing. (Sometimes, a small-scale game will turn into a large-scale one over time, as you’ve probably seen in long-running novel series or television shows.)
 
-{Insert description of sample character discussing the scale of the game}
+> Amanda likes the vibe of “guy and girl with sword,” and thinks it’ll shine as a small-scale game, where they might travel from town to town, but the problems they have to deal with are local—like a thieves’ guild or the regent’s vile machinations.
 
 ### The Setting’s Big Issues
 
@@ -322,23 +355,25 @@ The default number of issues in a Fate game is two:
 
 Either two current issues (for a story solely about trying to make the world a better place), two impending issues (for a story about striving to save people from threats), or one of each. The latter option is common in fiction: think about the stalwart heroes who work against some impending doom while already discontent with the world around them.
 
-#### CHANGING THE NUMBER OF ISSUES
+> #### Changing the number of issues
+>
+> Of course, you don’t have to use the default number of two issues if you don’t want to—one or three also works, but it will change the resulting game a bit. A game with one issue will revolve around just that issue—a quest to rid a city of evil, or to stop evil from happening. A game with three will show off a busy world, one where the characters’ resources are strained against multiple fronts. If you think you need to focus down or expand the scope of your game, talk it over with the group and start by tweaking the number of issues to best fit what you’re after.
 
-Of course, you don’t have to use the default number of two issues if you don’t want to—one or three also works, but it will change the resulting game a bit. A game with one issue will revolve around just that issue—a quest to rid a city of evil, or to stop evil from happening. A game with three will show off a busy world, one where the characters’ resources are strained against multiple fronts. If you think you need to focus down or expand the scope of your game, talk it over with the group and start by tweaking the number of issues to best fit what you’re after.
-
-{Insert description of example players discussing the issues in their campaign}
+> The group thinks about the sort of problems they want to deal with in the world. Ryan immediately says “organized crime,” and they flesh that out a little. They come up with the idea of “The Scar Triad,” a group of thugs who are known for thievery, extortion, and other nasty things that the world could do without. This is clearly a current issue.
+>
+> Lily wants the story to also be about something on the verge of happening, something Really Bad. They come up with an impending issue: a vile cult that seeks to summon something horrible into the world (which means they’re also saying that their setting includes horrible, Lovecraft-inspired things). Lenny calls it “The Doom that Is to Come,” and Ryan really likes this idea because it gives his bookish character a hook into things going on in the world.
 
 #### Making the Issues into Aspects
 
 As we said earlier, issues are aspects. Turn the ideas you have into aspects that you could conceivably use at different times in the story (often as compels to the protagonists or as invocations for foes, but clever players will always find other uses for aspects). Write them down, and then if you need to add a little bit to remember the context or some details, write those down alongside the aspects.
 
-{Description of sample players doing this}
+> Amanda writes down The Scar Triad and The Doom that Is to Come as two game aspects. She notes down next to The Scar Triad, “They’re into racketeering and other nasty stuff.” And with The Doom that Is to Come, “Led by the Cult of Tranquility.”
 
 If you’re new to making aspects, hold off on this for now. You’ll get quite a bit of practice making aspects for your characters. Once you’re done with character creation, turn these issue ideas into aspects.
 
-#### CHANGING ISSUES IN PLAY
-
-The Long Game chapter will talk about this in detail, but issues can change as the game progresses. Sometimes, the issue evolves into something new. Sometimes, the characters will successfully fight against it, and it’ll be gone. And sometimes, new issues will emerge. So the ones you make are just what you’re starting off with.
+> #### Changing Issues in Play
+>
+> The Long Game chapter will talk about this in detail, but issues can change as the game progresses. Sometimes, the issue evolves into something new. Sometimes, the characters will successfully fight against it, and it’ll be gone. And sometimes, new issues will emerge. So the ones you make are just what you’re starting off with.
 
 #### Drilling Down
 
@@ -346,7 +381,7 @@ You can also use issues to flesh out smaller, but nonetheless important pieces o
 
 We recommend you start by giving only one issue to each setting element, just to keep things from getting too bogged down, but you can always add more as the campaign progresses. Likewise, you don’t have to do this right now—if you find a setting element becoming more important later in the game, you can give it issues then.
 
-{Describe a setting element from the example group and how they assign an issue to it}
+> The Cult of Tranquility keeps popping up in pre-game discussions, so the group decides that it also needs an issue. After some discussion, the group decides it’d be interesting if there was some tension in the cult’s ranks, and makes a current issue called “Two Conflicting Prophecies”—different branches of the cult have different ideas of what the doom is going to be.
 
 ##### Faces and Places
 
@@ -362,9 +397,13 @@ The GM may flesh these characters and places out later, depending on their role 
 
 If there’s a piece of your setting that’s meant to be a mystery which the protagonists uncover, define it only in loose terms. The specifics can be detailed as they are revealed in play.
 
-After a few minutes of discussion, the group writes down:
-
-???
+> After a few minutes of discussion, the group writes down:
+>
+> - Hugo the Charitable, a lieutenant in the Scar Triad. His aspect is Everyone in Riverton Fears Me.
+> - Which brings us to a place, the city of Riverton. There are two rivers here, so it’s a hub for trade.
+> - Amanda comes up with a sympathetic character, Kale Westal, who owns a shop in Riverton. She isn’t cowed by Hugo’s extortion, and will likely fall victim to an “accident.” Her aspect is Stubborn Because I’m Right.
+> - The Primarch, the leader of the Cult of Tranquility, whose identity is a mystery. Because that part of the setting is a mystery, they aren’t going to come up with an aspect or otherwise go any further, leaving those details to Amanda to figure out in secret.
+>   They could go on, but they know they’ll have more ideas after character creation and as they play. That’s just enough to paint a picture of what’s going on at the very beginning of the story.
 
 ### Make Characters
 
@@ -376,13 +415,13 @@ It’s worth noting that the protagonists should have some connections to the fa
 
 When you’re making characters, you’ll also discover a bit more about the setting as people talk about who their characters know and what their characters do. If anything comes up that should be added to your game creation notes, do so before pushing forward with playing the game.
 
-### SKILLS AND YOUR SETTING
+### Skills And Your Setting
 
 A big part of your setting is what people can do in it. The various skills in Skills and Stunts cover many situations, but you’ll want to look over them to see if any don’t apply or if there’s a skill you need to add.
 
 Adding a skill is covered in more detail in the Extras chapter.
 
-# CHARACTER CREATION
+# Character Creation
 
 ## Character Creation Is Play
 
@@ -400,7 +439,7 @@ You’ll want to keep good notes on this process. You can use the character shee
 
 Start by determining your character’s high concept and trouble. Then build your character’s backstory, a process that takes place over three phases. Once you have that figured out, flesh out your character’s skills and stunts. Then you’re ready to play!
 
-> ### WHEN CREATING YOUR CHARACTER:
+> ### When Creating Your Character:
 >
 > - **Aspects:** Come up with your character’s high concept and trouble aspects.
 > - **Name:** Name your character.
@@ -420,7 +459,7 @@ Character creation starts with a concept for your character. It could be modeled
 
 Player characters should be exceptional and interesting. They could very easily find success in less exciting situations than those that come their way in play. You must figure out why your character is going to keep getting involved in these more dangerous things. If you don’t, the GM is under no obligation to go out of her way to make the game work for you—she’ll be too busy with other players who made characters that have a reason to participate.
 
-### KEEP BUILDING YOUR SETTING
+### Keep Building Your Setting
 
 As you’re making stuff up for your characters, you’ll also make stuff up about the world around them. You’ll end up talking about NPCs, organizations, places, things like that. That’s fantastic!
 
@@ -430,7 +469,7 @@ Because picking a high concept and trouble are linked, they’re grouped togethe
 
 That said, don’t worry too much—if your character idea evolves later on, that’s great! You can always go back and tinker with the early decisions.
 
-#### DIALS, DIALS EVERYWHERE
+#### Dials, Dials Everywhere
 
 Fate Core isn’t the be-all and end-all of Fate. It’s just a starting point—a set of default decisions that will work if you use it as-is.
 
@@ -450,7 +489,7 @@ You could mash two jobs or roles together that most people would find odd: Wizar
 You could play off of an important relationship to your family or an organization you’re deeply involved with (especially if the family or organization are well-connected or well-known): Black Sheep of the Thompson Family, Low-level Thug for the Syndicate, Scar Triad’s Patsy in Riverton.
 These aren’t the only ways to play with your high concept, but they’ll get you started. But don’t stress out over it—the worst thing you can do is make it into too big of a deal. You’ll come up with four other aspects after this one—you don’t have to get it all nailed right now.
 
-#### IF YOU GET STUMPED ON ASPECTS
+#### If You Get Stumped On Aspects
 
 The golden rule of making aspects in character creation: you can always change it later. If you’re struggling to make an aspect, write out the idea in as many words as you need to, in order to get it down on paper in the first place. If a specific phrase pops up after you write it down, great! If not, maybe someone else at the table can help you come up with an aspect. And if you’re still stuck, leave it for now—you’ll have plenty of time during play to refine it.
 
@@ -458,7 +497,13 @@ And if you really need to, it’s okay to leave some blank. Look at Quick Charac
 
 High concepts can have overlap among the characters, as long as you have something to distinguish how your character is different from the others. If high concepts must be similar among all the characters, such as if the GM pitches an all-swordsmen story, it’s crucial that the troubles differ.
 
-{examples}
+> Lenny and Lily settled on the “guy and girl with sword” idea, and Ryan’s going with “guy without sword.” But those are just starting ideas. Now it’s time to turn them into proper high concepts.
+>
+> Lenny latches onto the idea of tying his concept to an organization, and starts with “Disciple of…something.” He envisions a character who has trained in some mysterious martial art, and that involves rival schools and foes that want to learn those secrets. The group helps him come up with a suitably mysterious name: Disciple of the Ivory Shroud. (And now we’ve made a bit more setting: there’s an Ivory Shroud, mysterious martial arts, and all that implies.)
+>
+> Lily, on the other hand, doesn’t really know where to go from “girl with sword.” She’s not interested in the organization thing, so she’s thinking about adjectives. Eventually, she settles on Infamous Girl with Sword. (Keeping the “girl with sword” part makes her giggle, so she wants to say it often during the game.)
+>
+> Ryan’s idea of “bookish guy without sword” would be a pretty dull aspect. He thinks about what’s been declared so far: an evil cult who can summon Bad Things and a mysterious martial arts school. So he asks “hey, can I be a wizard?” They talk a bit about what that means, so that being a wizard doesn’t overshadow the swordsmen and isn’t a weak idea. After that, he writes down Wizard for Hire.
 
 ### Trouble
 
@@ -480,9 +525,13 @@ Troubles also shouldn’t be directly related to your high concept—if you have
 
 Before you go any further, talk with the GM about your character’s trouble. Make sure you’re both on the same page in terms of what it means. Both of you may want to find one way this aspect might be invoked or compelled to make sure you’re both seeing the same things—or to give each other ideas. The GM should come away from this conversation knowing what you want out of your trouble.
 
-{example}
+> Lenny wants to contrast the whole “I know an ancient martial art” vibe. He’s not playing an ascetic monk or anything like that. So he wants something that will get him into social trouble, something that has to do with him and not with any specific people or organizations. So he writes down The Manners of a Goat. His character will unconsciously make an ass of himself.
+>
+> Lily likes this idea of her character being her own worst enemy, so she’s also going for a personal struggle. She’s had the idea for a while of playing someone who can’t help but be Tempted by Shiny Things, so she writes that down.
+>
+> After seeing the other two go for personal struggles, Ryan wants to add a bit to the setting by having a problematic relationship trouble. He wants something that’s involved with his high concept, someone he can’t just fight openly against—he wants to see intrigue in his story. So he writes down Rivals in the Collegia Arcana (which also names a group of people in the setting, that Ryan’s character is a part of).
 
-#### THE “BRIGHT” SIDE OF TROUBLES
+#### The “Bright" Side Of Troubles
 
 Since your trouble is an aspect, it’s something you should also be able to invoke, right? Because we’ve been so focused on how this complicates your character’s life, it’s easy to miss how a trouble also helps your character.
 
@@ -494,7 +543,7 @@ With Lily’s Tempted by Shiny Things, we could reasonably say that Lily’s cha
 
 Ryan’s Rivals in the Collegia Arcana can come in handy when dealing with rivals he knows well—he knows what to expect from their tactics. He could also use this aspect to gain aid from people who share his rivals.
 
-#### INTRO TO CHOOSING ASPECTS
+#### Intro To Choosing Aspects
 
 A lot of character creation focuses on coming up with aspects—some are called high concepts, some are called troubles, but they basically all work the same way. Aspects are one of the most important parts of your character, since they define who she is, and they provide ways for you to generate fate points and to spend those fate points on bonuses. If you have time, you really might want to read the whole chapter we have dedicated to aspects before you go through the process of character creation.
 
@@ -518,7 +567,11 @@ Ultimately, it’s much better to leave an aspect slot blank than to pick one th
 
 If you haven’t already, it’s time to give your character a name!
 
-{example}
+> Lenny names his character “Landon,” a name that’s been in his head for years. He used it years ago for another roleplaying game, and decides to bring it back for nostalgia’s sake.
+>
+> Lily names her character “Cynere,” which is Greek for “thistle.” She sees Cynere as a beautiful plant, but one that’ll prick you if you get too close. That fits nicely.
+>
+> Ryan names his character “Zird,” because it just hit his mind as an appropriately ridiculous wizardly name. Then he pauses for a moment before adding “…the Arcane,” because he sees Zird as the sort of guy who would demand to be known as “Zird the Arcane.”
 
 ### The Phase Trio
 
@@ -533,7 +586,7 @@ This is an opportunity to tell a story about your characters. Each phase will as
 First, write a summary of what happened in that phase. A couple of sentences to a paragraph should suffice—you don’t want to establish too much detail up front, because you might have to adjust details in later phases.
 Second, write an aspect that reflects some part of that phase. The aspect can cover the general vibe from the summary, or it can focus on some piece of it that still resonates with your character in the present day.
 
-#### INTRO TO CHOOSING ASPECTS
+#### Intro To Choosing Aspects
 
 A lot of character creation focuses on coming up with aspects—some are called high concepts, some are called troubles, but they basically all work the same way. Aspects are one of the most important parts of your character, since they define who she is, and they provide ways for you to generate fate points and to spend those fate points on bonuses. If you have time, you really might want to read the whole chapter we have dedicated to aspects before you go through the process of character creation.
 
@@ -561,7 +614,7 @@ You need to think up and write down the basic details of this story for the phas
 
 If you find yourself stuck, look to your character’s high concept and trouble. Find a dilemma that has a chance of throwing those ideas into focus. What problem do you get roped into because of your high concept or trouble? How does the other aspect help or complicate your life?
 
-{example}
+> - I Owe Old Finn Everything
 
 Ask yourself the following story questions. If you have trouble answering them, talk to the other players and the GM for help.
 
@@ -574,9 +627,17 @@ Once you’ve come up with the adventure, write an aspect that relates to some p
 
 **A note on timing:** Because two other characters will be involved in the following phases, this adventure needs to be something that isn’t so early in your character’s life that he hasn’t met the other protagonists yet. If one of you has decided that you recently showed up in the story, then the adventures involving that person happened recently. If some of you have been friends (or old rivals!) for a long time, then those adventures can take place further in the past. Your best bet is to not make these adventures specific in time; you can figure out that part once you know who’s involved in your story.
 
-{example}
+> Lenny goes through Phase One. He looks at the story questions to help him figure out the events of the phase, and decides on the following:
+>
+> The bad thing was that Landon kept getting into scrapes at his local tavern. He grew up with no sense of discipline or demeanor and constantly picked fights with people larger and stronger than him.
+>
+> One thug Landon insulted at the tavern was connected to the Scar Triad, so some of the thug’s bandit buddies showed up and beat Landon to within an inch of his life.
+>
+> His bleeding body was then found by a veteran soldier named Finn who healed Landon’s wounds and encouraged him to join the town militia where he could learn some discipline and fight with honor.
+>
+> Now Lenny has to write down an aspect related to this story. He decides to take I Owe Old Finn Everything as his aspect, because he wants to keep the connection to Finn in his story and give Amanda a cool NPC to play.
 
-##### PHASES AND INDEX CARDS
+##### Phases And Index Cards
 
 In phase one, you each came up with your own adventure. In phases two and three, you’re going to trade those stories around as other players’ characters get involved. Figuring out how your character fits into someone else’s story can be hard to do if you’ve handed your character phase worksheet to another player, so we recommend that you use index cards (or whatever scraps of paper you have).
 
@@ -601,17 +662,36 @@ The idea is to be a bit self-serving here. You want to put a little spotlight on
 
 Finally, write the adventure idea and your character’s contribution down on your phase worksheet. This is important, because your character gets an aspect from the supporting role he played. The person whose adventure it is should also write down the contribution, if there’s room on his sheet.
 
-{example}
+> Lily has Landon’s starting adventure and needs to decide how she fits into it.
+>
+> She decides that Cynere helped solve the situation. After Landon ends up in the militia, he still has a grudge against the Triad members who ganged up on him. In fact, they robbed him of his heirloom sword in the process. Hearing Landon’s tale of woe, Cynere agrees to help steal the sword back.
+>
+> She takes the aspect A Sucker for a Sob Story, to reflect the reason why she got involved.
+> Landon gets into a bar fight with some of the Scar Triad. He is robbed of his sword and beaten severely. His life is saved by a veteran soldier named Old Finn. Finn helps to heal Landon, clean him up, and enlist him in the town militia.
+>
+> - I Owe Old Finn Everything
+>
+> When Landon tells Cynere his story, she takes pity on him and decides to help him recover his lost sword.
+>
+> - A Sucker for a Sob Story
 
 #### Phase Three: Crossing Paths Again
 
 Once everyone’s done with phase two, you’ll trade adventures with whatever method you chose before, so long as everyone has an adventure that isn’t theirs or the one they just contributed to. Then you’re ready for phase three, where you’ll contribute to this second adventure and determine your next aspect. Follow the directions from phase two.
 
-{example}
+> Lily gets Zird’s starting adventure, a pretty straightforward romp where Zird battles his Collegia rivals to obtain a magical artifact and return it to its rightful place.
+>
+> She decides that she complicates that situation, by wanting the shiny artifact for herself. Ryan already established that Zird gets the artifact back to where it belongs, so she only holds it temporarily.
+>
+> She decides to take I’ve Got Zird’s Back, as a way of reflecting her willingness to stick her neck out for Zird—the group doesn’t know what he did to earn such loyalty, but they figure they’ll find out eventually.
+>
+> Cynere steals Zird’s artifact. Eventually it returns to Zird’s hands and the two gain a mutual respect for each other.
+>
+> - I’ve Got Zird’s Back
 
 And with that, you have your five aspects and a good chunk of background!
 
-#### FEWER THAN THREE PLAYERS?
+#### Fewer Than Three Players?
 
 The phase trio assumes that you’ll have at least three players. If you have only two, consider the following ideas:
 
@@ -619,8 +699,6 @@ The phase trio assumes that you’ll have at least three players. If you have on
 - Come up with a third, joint-story together, and write about how you each feature in that one.
 - Have the GM also make a character. The GM won’t actually play this character alongside the PCs, though—it should just be an NPC. Such an NPC can be a great vehicle for kicking off a campaign—if a friend they’re tied to during character creation mysteriously disappears or even dies, that’s instant fuel for drama.
 - If you only have one player, skip phases two and three, leaving the aspects blank to be filled in during play.
-
-{example}
 
 #### Choosing Skills
 
@@ -633,7 +711,7 @@ Two Good (+3) skills
 Three Fair (+2) skills
 Four Average (+1) skills
 
-##### FOR VETERANS: WHY THE PYRAMID?
+##### For Veterans: Why The Pyramid?
 
 If you’ve played The Dresden Files RPG, you know that we use skill columns for that instead of the pyramid.
 
@@ -641,7 +719,7 @@ In this build of Fate, we wanted character creation to be as quick and accessibl
 
 Skill columns didn’t completely go away. It’s just reserved for advancement.
 
-##### THE SKILL CAP
+##### The Skill Cap
 
 By default, we make Great (+4) the highest rated skill PCs start with. As characters advance, they can improve beyond this cap, but it’s more difficult than improving skills rated below the cap (see Major Milestones).
 
@@ -661,7 +739,9 @@ Stunts change how skills work for your character. Picking and inventing stunts a
 
 You get three stunts for free, and you can take up to two more stunts at the cost of lowering your refresh by one each. (The gist is this: the more cool tricks you can do, the more you’ll need to accept compels to get fate points.) Figuring out stunts can take a while, so you may want to pick one for now and determine the rest of them during play.
 
-{example}
+> Lily decides to take the Warmaster stunt as one of her freebies: +2 to Fight rolls made to create an advantage against an opponent, provided the opponent has a fighting style or weakness she can exploit.
+>
+> For her remaining free stunts, she picks Second-Story Girl and Danger Sense. You can see the write-ups for these on her character sheet.
 
 ##### Adjusting Refresh
 
@@ -693,7 +773,13 @@ Note: if you’re playing in a setting with different skills, the skills that af
 
 You can add stress tracks if the characters in your game suffer unique kinds of harm, such as wealth stress in a very political game. Changing the number of boxes will slow down and draw out conflicts, which may be more appropriate for high-octane, pulpy genres where characters are expected to take a lot of hits.
 
-{example}
+> Landon has Good (+3) Physique, which nets him two more physical stress boxes. His Will, however, is only Average (+1), but that’s still good enough for one more mental stress box.
+>
+> Cynere’s Physique is Fair (+2), so she gets a third physical stress box. But her mental stress track remains at two boxes, thanks to her Mediocre (+0) Will.
+>
+> Zird the Arcane, being a rather bookish type, has Mediocre (+0) Physique, so he has only the default physical stress track of two boxes. His Fair (+2) Will, though, is good for one bonus mental stress box.
+>
+> Because none of these characters has Physique or Will rated at Superb (+5) or above, each has the default number of consequences: one mild, one moderate, and one severe.
 
 #### You’re All Set!
 

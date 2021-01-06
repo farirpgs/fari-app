@@ -1,4 +1,5 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import clsx from "clsx";
 import React from "react";
 
@@ -9,6 +10,11 @@ function getAnchorSvg(color: string) {
 }
 
 const styles = (theme: Theme) => {
+  const lightBackground =
+    theme.palette.type === "light"
+      ? lighten(theme.palette.secondary.light, 0.85)
+      : darken(theme.palette.secondary.light, 0.75);
+
   return {
     root: {
       ...theme.typography.body1,
@@ -176,13 +182,16 @@ const styles = (theme: Theme) => {
         padding: 16,
       },
       "& blockquote": {
-        "borderLeft": "5px solid #ffe564",
-        "backgroundColor": "rgba(255,229,100,0.2)",
+        "borderLeft": `5px solid ${theme.palette.primary.main}`,
+        "backgroundColor": lightBackground,
         "padding": "4px 24px",
         "margin": "24px 0",
         "& p": {
           marginTop: "16px",
         },
+      },
+      "& blockquote *": {
+        fontFamily: `'Work Sans', sans-serif`,
       },
       "& a, & a code": {
         // Style taken from the Link component
