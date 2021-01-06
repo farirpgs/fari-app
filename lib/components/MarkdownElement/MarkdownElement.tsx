@@ -210,11 +210,16 @@ const styles = (theme: Theme) => {
         "& p": {
           marginTop: "16px",
         },
+        "& h1,h2,h3,h4,h5,h6": {
+          fontStyle: "normal",
+          fontFamily: `'Work Sans', sans-serif`,
+        },
+        "& *": {
+          fontStyle: "italic",
+          fontFamily: `'Work Sans', sans-serif`,
+        },
       },
-      "& blockquote *": {
-        fontStyle: "italic",
-        fontFamily: `'Work Sans', sans-serif`,
-      },
+
       "& a, & a code": {
         // Style taken from the Link component
         "color": theme.palette.primary.main,
