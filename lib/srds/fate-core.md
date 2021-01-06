@@ -415,11 +415,11 @@ It’s worth noting that the protagonists should have some connections to the fa
 
 When you’re making characters, you’ll also discover a bit more about the setting as people talk about who their characters know and what their characters do. If anything comes up that should be added to your game creation notes, do so before pushing forward with playing the game.
 
-### Skills And Your Setting
-
-A big part of your setting is what people can do in it. The various skills in Skills and Stunts cover many situations, but you’ll want to look over them to see if any don’t apply or if there’s a skill you need to add.
-
-Adding a skill is covered in more detail in the Extras chapter.
+> ### Skills And Your Setting
+>
+> A big part of your setting is what people can do in it. The various skills in Skills and Stunts cover many situations, but you’ll want to look over them to see if any don’t apply or if there’s a skill you need to add.
+>
+> Adding a skill is covered in more detail in the Extras chapter.
 
 # Character Creation
 
@@ -459,23 +459,23 @@ Character creation starts with a concept for your character. It could be modeled
 
 Player characters should be exceptional and interesting. They could very easily find success in less exciting situations than those that come their way in play. You must figure out why your character is going to keep getting involved in these more dangerous things. If you don’t, the GM is under no obligation to go out of her way to make the game work for you—she’ll be too busy with other players who made characters that have a reason to participate.
 
-### Keep Building Your Setting
+> ### Keep Building Your Setting
+>
+> As you’re making stuff up for your characters, you’ll also make stuff up about the world around them. You’ll end up talking about NPCs, organizations, places, things like that. That’s fantastic!
+>
+> You might also come up with a character concept that adds something fundamental to the world, like saying “I want to play a wizard” when no one talked about magic yet. When that happens, discuss with the group if that’s a part of your setting and make any necessary adjustments.
+>
+> Because picking a high concept and trouble are linked, they’re grouped together. You’ll likely have more success coming up with a compelling character idea if you think about them as one big step rather than two separate steps. Only after you have that (and a name, of course!) can you move on to the rest of character creation.
+>
+> That said, don’t worry too much—if your character idea evolves later on, that’s great! You can always go back and tinker with the early decisions.
 
-As you’re making stuff up for your characters, you’ll also make stuff up about the world around them. You’ll end up talking about NPCs, organizations, places, things like that. That’s fantastic!
-
-You might also come up with a character concept that adds something fundamental to the world, like saying “I want to play a wizard” when no one talked about magic yet. When that happens, discuss with the group if that’s a part of your setting and make any necessary adjustments.
-
-Because picking a high concept and trouble are linked, they’re grouped together. You’ll likely have more success coming up with a compelling character idea if you think about them as one big step rather than two separate steps. Only after you have that (and a name, of course!) can you move on to the rest of character creation.
-
-That said, don’t worry too much—if your character idea evolves later on, that’s great! You can always go back and tinker with the early decisions.
-
-#### Dials Dials Everywhere
-
-Fate Core isn’t the be-all and end-all of Fate. It’s just a starting point—a set of default decisions that will work if you use it as-is.
-
-As you get more familiar with the system, you’ll be tempted to change things in order to suit your individual game or playstyle a little bit better. That’s totally okay. These defaults aren’t sacrosanct. We expect you to change them. In fact, throughout the book, we’re going to be pointing out where the dials are. The next book, the Fate System Toolkit, is all about how to change and configure the Fate system to meet your needs.
-
-So, tweak away. We don’t mind.
+> #### Dials Dials Everywhere
+>
+> Fate Core isn’t the be-all and end-all of Fate. It’s just a starting point—a set of default decisions that will work if you use it as-is.
+>
+> As you get more familiar with the system, you’ll be tempted to change things in order to suit your individual game or playstyle a little bit better. That’s totally okay. These defaults aren’t sacrosanct. We expect you to change them. In fact, throughout the book, we’re going to be pointing out where the dials are. The next book, the Fate System Toolkit, is all about how to change and configure the Fate system to meet your needs.
+>
+> So, tweak away. We don’t mind.
 
 ### High Concept
 
@@ -489,11 +489,11 @@ You could mash two jobs or roles together that most people would find odd: Wizar
 You could play off of an important relationship to your family or an organization you’re deeply involved with (especially if the family or organization are well-connected or well-known): Black Sheep of the Thompson Family, Low-level Thug for the Syndicate, Scar Triad’s Patsy in Riverton.
 These aren’t the only ways to play with your high concept, but they’ll get you started. But don’t stress out over it—the worst thing you can do is make it into too big of a deal. You’ll come up with four other aspects after this one—you don’t have to get it all nailed right now.
 
-#### If You Get Stumped On Aspects
-
-The golden rule of making aspects in character creation: you can always change it later. If you’re struggling to make an aspect, write out the idea in as many words as you need to, in order to get it down on paper in the first place. If a specific phrase pops up after you write it down, great! If not, maybe someone else at the table can help you come up with an aspect. And if you’re still stuck, leave it for now—you’ll have plenty of time during play to refine it.
-
-And if you really need to, it’s okay to leave some blank. Look at Quick Character Creation for more on leaving parts of your character sheet blank.
+> #### If You Get Stumped On Aspects
+>
+> The golden rule of making aspects in character creation: you can always change it later. If you’re struggling to make an aspect, write out the idea in as many words as you need to, in order to get it down on paper in the first place. If a specific phrase pops up after you write it down, great! If not, maybe someone else at the table can help you come up with an aspect. And if you’re still stuck, leave it for now—you’ll have plenty of time during play to refine it.
+>
+> And if you really need to, it’s okay to leave some blank. Look at Quick Character Creation for more on leaving parts of your character sheet blank.
 
 High concepts can have overlap among the characters, as long as you have something to distinguish how your character is different from the others. If high concepts must be similar among all the characters, such as if the GM pitches an all-swordsmen story, it’s crucial that the troubles differ.
 
@@ -531,37 +531,37 @@ Before you go any further, talk with the GM about your character’s trouble. Ma
 >
 > After seeing the other two go for personal struggles, Ryan wants to add a bit to the setting by having a problematic relationship trouble. He wants something that’s involved with his high concept, someone he can’t just fight openly against—he wants to see intrigue in his story. So he writes down Rivals in the Collegia Arcana (which also names a group of people in the setting, that Ryan’s character is a part of).
 
-#### The Bright Side Of Troubles
+> #### The Bright Side Of Troubles
+>
+> Since your trouble is an aspect, it’s something you should also be able to invoke, right? Because we’ve been so focused on how this complicates your character’s life, it’s easy to miss how a trouble also helps your character.
+>
+> In short, your experience with your trouble makes you a stronger person in that regard. Dealing with personal struggles leaves you vulnerable to being tempted or cajoled, but it can also give you a sense of inner strength, because you know the sort of person you want to be. Problematic relationships often cause trouble, but people do learn hard lessons from the troubles they deal with. They especially learn how to maneuver around many of the smaller issues their troubles present.
+>
+> Lenny’s The Manners of a Goat could be used to the group’s benefit. Maybe he turns that up intentionally, to draw attention away from Lily’s character sneaking around.
+>
+> With Lily’s Tempted by Shiny Things, we could reasonably say that Lily’s character is well-acquainted with the value of various shiny things (and well-acquainted with getting caught and locked in prison, so she knows a thing or two about escaping).
+>
+> Ryan’s Rivals in the Collegia Arcana can come in handy when dealing with rivals he knows well—he knows what to expect from their tactics. He could also use this aspect to gain aid from people who share his rivals.
 
-Since your trouble is an aspect, it’s something you should also be able to invoke, right? Because we’ve been so focused on how this complicates your character’s life, it’s easy to miss how a trouble also helps your character.
-
-In short, your experience with your trouble makes you a stronger person in that regard. Dealing with personal struggles leaves you vulnerable to being tempted or cajoled, but it can also give you a sense of inner strength, because you know the sort of person you want to be. Problematic relationships often cause trouble, but people do learn hard lessons from the troubles they deal with. They especially learn how to maneuver around many of the smaller issues their troubles present.
-
-Lenny’s The Manners of a Goat could be used to the group’s benefit. Maybe he turns that up intentionally, to draw attention away from Lily’s character sneaking around.
-
-With Lily’s Tempted by Shiny Things, we could reasonably say that Lily’s character is well-acquainted with the value of various shiny things (and well-acquainted with getting caught and locked in prison, so she knows a thing or two about escaping).
-
-Ryan’s Rivals in the Collegia Arcana can come in handy when dealing with rivals he knows well—he knows what to expect from their tactics. He could also use this aspect to gain aid from people who share his rivals.
-
-#### Intro To Choosing Aspects
-
-A lot of character creation focuses on coming up with aspects—some are called high concepts, some are called troubles, but they basically all work the same way. Aspects are one of the most important parts of your character, since they define who she is, and they provide ways for you to generate fate points and to spend those fate points on bonuses. If you have time, you really might want to read the whole chapter we have dedicated to aspects before you go through the process of character creation.
-
-In case you’re pressed for time, here are some guidelines for choosing aspects.
-
-Aspects which don’t help you tell a good story (by giving you success when you need it and by drawing you into danger and action when the story needs it) aren’t doing their job. The aspects which push you into conflict—and help you excel once you’re there—will be among your best and most-used.
-
-Aspects need to be both useful and dangerous—allowing you to help shape the story and generating lots of fate points—and they should never be boring. The best aspect suggests both ways to use it and ways it can complicate your situation. Aspects that cannot be used for either of those are likely to be dull indeed.
-
-Bottom line: if you want to maximize the power of your aspects, maximize their interest.
-
-When you’re told you need to come up with an aspect, you might experience brain freeze. If you feel stumped for decent ideas for aspects, there’s a big section focusing on several methods for coming up with good aspect ideas in Aspects and Fate Points.
-
-If your character doesn’t have many connections to the other characters, talk with the group about aspects that might tie your character in with theirs. This is the explicit purpose of Phases Two and Three—but that doesn’t mean you can’t do it elsewhere as well.
-
-If you ultimately can’t break the block by any means, don’t force it—leave it completely blank. You can always come back and fill out that aspect later, or let it develop during play—as with the Quick Character Creation rules.
-
-Ultimately, it’s much better to leave an aspect slot blank than to pick one that isn’t inspiring and evocative to play. If you’re picking aspects you’re not invested in, they’ll end up being noticeable drags on your fun.
+> #### Intro To Choosing Aspects
+>
+> A lot of character creation focuses on coming up with aspects—some are called high concepts, some are called troubles, but they basically all work the same way. Aspects are one of the most important parts of your character, since they define who she is, and they provide ways for you to generate fate points and to spend those fate points on bonuses. If you have time, you really might want to read the whole chapter we have dedicated to aspects before you go through the process of character creation.
+>
+> In case you’re pressed for time, here are some guidelines for choosing aspects.
+>
+> Aspects which don’t help you tell a good story (by giving you success when you need it and by drawing you into danger and action when the story needs it) aren’t doing their job. The aspects which push you into conflict—and help you excel once you’re there—will be among your best and most-used.
+>
+> Aspects need to be both useful and dangerous—allowing you to help shape the story and generating lots of fate points—and they should never be boring. The best aspect suggests both ways to use it and ways it can complicate your situation. Aspects that cannot be used for either of those are likely to be dull indeed.
+>
+> Bottom line: if you want to maximize the power of your aspects, maximize their interest.
+>
+> When you’re told you need to come up with an aspect, you might experience brain freeze. If you feel stumped for decent ideas for aspects, there’s a big section focusing on several methods for coming up with good aspect ideas in Aspects and Fate Points.
+>
+> If your character doesn’t have many connections to the other characters, talk with the group about aspects that might tie your character in with theirs. This is the explicit purpose of Phases Two and Three—but that doesn’t mean you can’t do it elsewhere as well.
+>
+> If you ultimately can’t break the block by any means, don’t force it—leave it completely blank. You can always come back and fill out that aspect later, or let it develop during play—as with the Quick Character Creation rules.
+>
+> Ultimately, it’s much better to leave an aspect slot blank than to pick one that isn’t inspiring and evocative to play. If you’re picking aspects you’re not invested in, they’ll end up being noticeable drags on your fun.
 
 ### Name
 
@@ -657,7 +657,8 @@ Your character has a supporting role in the story you’re holding, which you ge
 - **Solving a situation:** Your character somehow solves a complication that the main character in the adventure had to deal with, or your character aids the main character in the central conflict (which is an opportunity to involve your high concept aspect). When describing this, you don’t have to mention how the situation was created, just how your character takes care of it.
 - **Complicating and solving:** Here, your character either solves one situation but creates another, or creates a situation but later solves a different one. Mash up the two ideas, using the word “later” in between them.
 
-The default phase trio prioritizes connecting the characters together in a shared backstory. We like this, because it’s cooperative and gets you talking to one another. That’s not the only way to do it, though. You could make any significant trifecta of backstory details into a phase trio. Your past, your present, and your hope for the future is another set of trio elements. The Fate System Toolkit has more examples of phase work.
+> The default phase trio prioritizes connecting the characters together in a shared backstory. We like this, because it’s cooperative and gets you talking to one another. That’s not the only way to do it, though. You could make any significant trifecta of backstory details into a phase trio. Your past, your present, and your hope for the future is another set of trio elements. The Fate System Toolkit has more examples of phase work.
+
 The idea is to be a bit self-serving here. You want to put a little spotlight on your character in order to figure out a good aspect from it: something you’re known for, something you can do, something you own or have, and someone you have a relationship with (for good or ill).
 
 Finally, write the adventure idea and your character’s contribution down on your phase worksheet. This is important, because your character gets an aspect from the supporting role he played. The person whose adventure it is should also write down the contribution, if there’s room on his sheet.
@@ -691,14 +692,14 @@ Once everyone’s done with phase two, you’ll trade adventures with whatever m
 
 And with that, you have your five aspects and a good chunk of background!
 
-#### Fewer Than Three Players
-
-The phase trio assumes that you’ll have at least three players. If you have only two, consider the following ideas:
-
-- Skip phase three and just make up another aspect, either now or in play.
-- Come up with a third, joint-story together, and write about how you each feature in that one.
-- Have the GM also make a character. The GM won’t actually play this character alongside the PCs, though—it should just be an NPC. Such an NPC can be a great vehicle for kicking off a campaign—if a friend they’re tied to during character creation mysteriously disappears or even dies, that’s instant fuel for drama.
-- If you only have one player, skip phases two and three, leaving the aspects blank to be filled in during play.
+> #### Fewer Than Three Players
+>
+> The phase trio assumes that you’ll have at least three players. If you have only two, consider the following ideas:
+>
+> - Skip phase three and just make up another aspect, either now or in play.
+> - Come up with a third, joint-story together, and write about how you each feature in that one.
+> - Have the GM also make a character. The GM won’t actually play this character alongside the PCs, though—it should just be an NPC. Such an NPC can be a great vehicle for kicking off a campaign—if a friend they’re tied to during character creation mysteriously disappears or even dies, that’s instant fuel for drama.
+> - If you only have one player, skip phases two and three, leaving the aspects blank to be filled in during play.
 
 #### Choosing Skills
 
@@ -711,25 +712,25 @@ Two Good (+3) skills
 Three Fair (+2) skills
 Four Average (+1) skills
 
-##### For Veterans Why The Pyramid
+> ##### For Veterans: Why The Pyramid
+>
+> If you’ve played The Dresden Files RPG, you know that we use skill columns for that instead of the pyramid.
+>
+> In this build of Fate, we wanted character creation to be as quick and accessible as possible, so we went with the pyramid as standard. If you want to use the columns, go ahead—you get 20 skill points.
+>
+> Skill columns didn’t completely go away. It’s just reserved for advancement.
 
-If you’ve played The Dresden Files RPG, you know that we use skill columns for that instead of the pyramid.
-
-In this build of Fate, we wanted character creation to be as quick and accessible as possible, so we went with the pyramid as standard. If you want to use the columns, go ahead—you get 20 skill points.
-
-Skill columns didn’t completely go away. It’s just reserved for advancement.
-
-##### The Skill Cap
-
-By default, we make Great (+4) the highest rated skill PCs start with. As characters advance, they can improve beyond this cap, but it’s more difficult than improving skills rated below the cap (see Major Milestones).
-
-If you’re making a game about superheroes, pandimensional creatures, mythic gods or other beyond-human characters, feel free to set the tip of the skill pyramid—and thus the cap—at Superb (+5) or Fantastic (+6).
-
-The number of skills you get should be relative to the size of the skill list. Our default skill list has 18 skills, and the Great pyramid gives you a rating in 10 of them, which means every character has some capability in over half of the total number of things you can do, and there’s room for six PCs to peak (as in, to choose their three top skills) without overlap. You can tweak this for individual games, especially if you adjust the skill cap. Just keep in mind that bigger pyramids mean more overlap between characters, unless your game has a longer skill list.
-
-Mediocre (+0) is the default for any skill you do not take. Sometimes, a skill will state that it’s unavailable if a character didn’t take it; in those cases, it’s not even at Mediocre.
-
-Note: a few skills have special benefits, notably those skills that affect the number of stress boxes and consequences you have available. If you know you want a certain number of those, put those skills on the pyramid first.
+> ##### The Skill Cap
+>
+> By default, we make Great (+4) the highest rated skill PCs start with. As characters advance, they can improve beyond this cap, but it’s more difficult than improving skills rated below the cap (see Major Milestones).
+>
+> If you’re making a game about superheroes, pandimensional creatures, mythic gods or other beyond-human characters, feel free to set the tip of the skill pyramid—and thus the cap—at Superb (+5) or Fantastic (+6).
+>
+> The number of skills you get should be relative to the size of the skill list. Our default skill list has 18 skills, and the Great pyramid gives you a rating in 10 of them, which means every character has some capability in over half of the total number of things you can do, and there’s room for six PCs to peak (as in, to choose their three top skills) without overlap. You can tweak this for individual games, especially if you adjust the skill cap. Just keep in mind that bigger pyramids mean more overlap between characters, unless your game has a longer skill list.
+>
+> Mediocre (+0) is the default for any skill you do not take. Sometimes, a skill will state that it’s unavailable if a character didn’t take it; in those cases, it’s not even at Mediocre.
+>
+> Note: a few skills have special benefits, notably those skills that affect the number of stress boxes and consequences you have available. If you know you want a certain number of those, put those skills on the pyramid first.
 
 #### Stunts And Refresh
 
@@ -751,7 +752,7 @@ If you pick four stunts, your refresh is 2. If you pick five stunts, your refres
 
 Note: some Fate games will change this setup. Regardless of how stunts work in your game, you can never have a refresh lower than 1.
 
-You can adjust these defaults if you want to, and give out more free stunts if you want the PCs to have a lot of cool tricks and special bonuses. You can also change the default refresh rate—higher refresh means that the PCs won’t need to take compels as often (think 4-color superhero comics), and lower refresh means they’ll need to take several early in every session in order to have a decent supply (think Die Hard). Also, the higher your refresh, the more likely it is that players will buy stunts.
+> You can adjust these defaults if you want to, and give out more free stunts if you want the PCs to have a lot of cool tricks and special bonuses. You can also change the default refresh rate—higher refresh means that the PCs won’t need to take compels as often (think 4-color superhero comics), and lower refresh means they’ll need to take several early in every session in order to have a decent supply (think Die Hard). Also, the higher your refresh, the more likely it is that players will buy stunts.
 
 #### Stress And Consequences
 
@@ -771,7 +772,7 @@ Physique helps with physical stress, and Will helps with mental stress. Either s
 
 Note: if you’re playing in a setting with different skills, the skills that affect stress boxes and consequences may change. Take a note of those skill benefits when you’re making your character.
 
-You can add stress tracks if the characters in your game suffer unique kinds of harm, such as wealth stress in a very political game. Changing the number of boxes will slow down and draw out conflicts, which may be more appropriate for high-octane, pulpy genres where characters are expected to take a lot of hits.
+> You can add stress tracks if the characters in your game suffer unique kinds of harm, such as wealth stress in a very political game. Changing the number of boxes will slow down and draw out conflicts, which may be more appropriate for high-octane, pulpy genres where characters are expected to take a lot of hits.
 
 > Landon has Good (+3) Physique, which nets him two more physical stress boxes. His Will, however, is only Average (+1), but that’s still good enough for one more mental stress box.
 >
@@ -1973,105 +1974,99 @@ That’s when it’s time to take out the dice.
 
 - Choose the character’s skill that is appropriate to the action.
 - Roll four Fate dice.
-- Add together the symbols showing on the dice. A + is +1, a - is –1, and a 0 is 0.
+- Add together the symbols showing on the dice. A `+` is +1, a `-` is –1, and a `0` is 0.
 - Add your skill rating to the dice roll. The total is your result on the ladder.
 - If you invoke an aspect, add +2 to your result or reroll the dice.
 
-{example}
+> Cynere needs to bribe her way past the guards keeping her from entering the city of Thaalar. Amanda says she’ll do this as a straight-up overcome action, because the guards are nameless NPCs anyway and not really worth a conflict.
+>
+> Lily looks through Cynere’s skill list and picks Resources as her skill, hoping she can scrounge enough out of her coin purse to satisfy them. Her Resources skill is Average (+1), so she’ll add one to whatever result she gets from rolling the dice.
+>
+> She rolls and gets: +-0+
+>
+> Her total result is +2 (+1 from her dice and +1 from her skill of Average), which corresponds to a Fair on the ladder.
 
-Cynere needs to bribe her way past the guards keeping her from entering the city of Thaalar. Amanda says she’ll do this as a straight-up overcome action, because the guards are nameless NPCs anyway and not really worth a conflict.
-
-Lily looks through Cynere’s skill list and picks Resources as her skill, hoping she can scrounge enough out of her coin purse to satisfy them. Her Resources skill is Average (+1), so she’ll add one to whatever result she gets from rolling the dice.
-
-She rolls and gets: +-0+
-
-Her total result is +2 (+1 from her dice and +1 from her skill of Average), which corresponds to a Fair on the ladder.
-
-### Opposition
+## Opposition
 
 As we said in The Basics, whenever you roll the dice, you’re comparing your roll to your opposition. Opposition is either active, meaning it’s another person rolling dice against you, or passive, meaning that it’s just a set rating on the ladder which represents the influence of the environment or situation you’re in. GMs, it’s your job to decide what the most reasonable source of opposition is.
 
-{example}
+> Amanda decides to roll active opposition against Lily on behalf of the guards. She decides the most appropriate opposing skill is Will—they’re trying to resist the temptation of bribery, after all.
+>
+> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: ++0+
+>
+> ...for an incredibly lucky result of +3!
+>
+> That gives her a Good (+3) result, beating Lily’s roll by one.
 
-Amanda decides to roll active opposition against Lily on behalf of the guards. She decides the most appropriate opposing skill is Will—they’re trying to resist the temptation of bribery, after all.
+> ### For The GM: Active Or Passive
+>
+> If a PC or a named NPC can reasonably interfere with whatever the action is, then you should give them the opportunity to roll active opposition. This does not count as an action for the opposing character; it’s just a basic property of resolving actions. In other words, a player doesn’t have to do anything special to earn the right to actively oppose an action, as long as the character is present and can interfere. If there’s any doubt, having an appropriate situation aspect helps justify why a character gets to actively oppose someone else.
+>
+> If there is no character in the way, then look at your situation aspects in this scene to see if any of them justify some sort of obstacle, or consider the circumstances (like rough terrain, a complex lock, time running out, a situational complication, etc.). If something sounds interesting, choose passive opposition and set a rating on the ladder.
+>
+> Sometimes you’re going to run into edge cases, where something inanimate seems like it should provide active opposition (like an automated gun) or an NPC can’t provide proactive resistance (like if they’re unaware of what the PC is doing). Follow your gut—use the type of opposition that fits the circumstances or makes the scene more interesting.
 
-The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: ++0+
-
-...for an incredibly lucky result of +3!
-
-That gives her a Good (+3) result, beating Lily’s roll by one.
-
-#### For The Gm Active Or Passive
-
-If a PC or a named NPC can reasonably interfere with whatever the action is, then you should give them the opportunity to roll active opposition. This does not count as an action for the opposing character; it’s just a basic property of resolving actions. In other words, a player doesn’t have to do anything special to earn the right to actively oppose an action, as long as the character is present and can interfere. If there’s any doubt, having an appropriate situation aspect helps justify why a character gets to actively oppose someone else.
-
-If there is no character in the way, then look at your situation aspects in this scene to see if any of them justify some sort of obstacle, or consider the circumstances (like rough terrain, a complex lock, time running out, a situational complication, etc.). If something sounds interesting, choose passive opposition and set a rating on the ladder.
-
-Sometimes you’re going to run into edge cases, where something inanimate seems like it should provide active opposition (like an automated gun) or an NPC can’t provide proactive resistance (like if they’re unaware of what the PC is doing). Follow your gut—use the type of opposition that fits the circumstances or makes the scene more interesting.
-
-### The Four Outcomes
+## The Four Outcomes
 
 When you roll the dice, either you’re going to fail, tie, succeed, or succeed with style.
 
 Every roll you make in a Fate game results in one of four outcomes, generally speaking. The specifics may change a little depending on what kind of action you’re taking, but all the game actions fit this general pattern.
 
-#### Fail
+### Fail
 
 If you roll lower than your opposition, you fail.
 
 This means one of several things: you don’t get what you want, you get what you want at a serious cost, or you suffer some negative mechanical consequence. Sometimes, it means more than one of those. It’s the GM’s job to determine an appropriate cost. (See this box.)
 
-#### Tie
+### Tie
 
 If you roll the same as your opposition, you tie.
 
 This means you get what you want, but at a minor cost, or you get a lesser version of what you wanted.
 
-#### Succeed
+### Succeed
 
 If you roll higher than your opposition by 1 or 2 shifts, you succeed.
 
 This means you get what you want at no cost.
 
-#### Succeed With Style
+### Succeed With Style
 
 If you roll higher than your opposition by 3 or more shifts, you succeed with style.
 
 This means that you get what you want, but you also get an added benefit on top of that.
 
-##### For The Gm Serious Cost Vs Minor Cost
+> #### For The GM: Serious Cost Vs Minor Cost
+>
+> When you’re thinking about costs, think both about the story in play and the game mechanics to help you figure out what would be most appropriate.
+>
+> A serious cost should make the current situation worse somehow, either by creating a new problem or exacerbating an existing one. Bring in another source of opposition in this scene or the next one (such as a new opposing NPC or an obstacle to overcome), or ask the player to take a consequence at their lowest free level, or give someone who opposes the PC an advantage with a free invocation.
+>
+> A minor cost should add a story detail that’s problematic or bad for the PC, but doesn’t necessarily endanger progress. You could also ask the PC to take stress or give someone who opposes the PCs a boost.
+>
+> It’s okay if the minor cost is mainly a narrative detail, showing how the PC just barely scratched by. We give more advice about dealing with costs on in Running the Game.
 
-When you’re thinking about costs, think both about the story in play and the game mechanics to help you figure out what would be most appropriate.
+> #### For The GM: How Hard Should Skill Rolls Be
+>
+> For active opposition, you don’t really need to worry about how hard the roll is—just use the NPC’s skill level and roll the dice like the players do, letting the chips fall where they may. We have guidelines about NPC skill levels in Running the Game.
+>
+> For passive opposition, you have to decide what rank on the ladder the player has to beat. It’s more an art than a science, but we have some guidelines to help you.
+>
+> Anything that’s two or more steps higher than the PC’s skill level—Fair (+2) skill and Great (+4) opposition, for example— means that the player will probably fail or need to invoke aspects to succeed.
+>
+> Anything that’s two or more steps lower than the PC’s skill level—Fair (+2) skill and Mediocre (+0) opposition, for example—means that the player will probably not need to invoke aspects and have a good chance of succeeding with style.
+>
+> Between that range, there’s a roughly equal chance that they’ll tie or succeed, and a roughly equal chance that they will or won’t need to invoke aspects to do so.
+>
+> Therefore, low difficulties are best when you want to give the PCs a chance to show off and be awesome, difficulties near their skill levels are best when you want to provide tension but not overwhelm them, and high difficulties are best when you want to emphasize how dire or unusual the circumstances are and make them pull out all the stops.
+>
+> Finally, a couple of quick axioms:
+>
+> Average is called Average for a reason—if nothing about the opposition sticks out, then the difficulty doesn’t need more than a +1.
+>
+> If you can think of at least one reason why the opposition sticks out, but otherwise just can’t decide what the difficulty should be, pick Fair (+2). It’s in the middle of a PC’s range of skills, so it provides a decent challenge for every skill level except Great (+4), and you want to give PCs a chance to show off their peak skill anyway.
 
-A serious cost should make the current situation worse somehow, either by creating a new problem or exacerbating an existing one. Bring in another source of opposition in this scene or the next one (such as a new opposing NPC or an obstacle to overcome), or ask the player to take a consequence at their lowest free level, or give someone who opposes the PC an advantage with a free invocation.
-
-A minor cost should add a story detail that’s problematic or bad for the PC, but doesn’t necessarily endanger progress. You could also ask the PC to take stress or give someone who opposes the PCs a boost.
-
-It’s okay if the minor cost is mainly a narrative detail, showing how the PC just barely scratched by. We give more advice about dealing with costs on in Running the Game.
-
-##### For The Gm
-
-##### How Hard Should Skill Rolls Be
-
-For active opposition, you don’t really need to worry about how hard the roll is—just use the NPC’s skill level and roll the dice like the players do, letting the chips fall where they may. We have guidelines about NPC skill levels in Running the Game.
-
-For passive opposition, you have to decide what rank on the ladder the player has to beat. It’s more an art than a science, but we have some guidelines to help you.
-
-Anything that’s two or more steps higher than the PC’s skill level—Fair (+2) skill and Great (+4) opposition, for example— means that the player will probably fail or need to invoke aspects to succeed.
-
-Anything that’s two or more steps lower than the PC’s skill level—Fair (+2) skill and Mediocre (+0) opposition, for example—means that the player will probably not need to invoke aspects and have a good chance of succeeding with style.
-
-Between that range, there’s a roughly equal chance that they’ll tie or succeed, and a roughly equal chance that they will or won’t need to invoke aspects to do so.
-
-Therefore, low difficulties are best when you want to give the PCs a chance to show off and be awesome, difficulties near their skill levels are best when you want to provide tension but not overwhelm them, and high difficulties are best when you want to emphasize how dire or unusual the circumstances are and make them pull out all the stops.
-
-Finally, a couple of quick axioms:
-
-Average is called Average for a reason—if nothing about the opposition sticks out, then the difficulty doesn’t need more than a +1.
-
-If you can think of at least one reason why the opposition sticks out, but otherwise just can’t decide what the difficulty should be, pick Fair (+2). It’s in the middle of a PC’s range of skills, so it provides a decent challenge for every skill level except Great (+4), and you want to give PCs a chance to show off their peak skill anyway.
-
-### The Four Actions
+## The Four Actions
 
 When you make a skill roll, you’re taking one of four actions: overcome, create an advantage, attack, or defend.
 
@@ -2079,7 +2074,7 @@ There are four types of actions you can take in a game of Fate. When you make a 
 
 The four actions are: overcome, create advantage, attack, and defend.
 
-#### Overcome
+### Overcome
 
 Use the overcome action to achieve assorted goals appropriate to your skill.
 
@@ -2101,23 +2096,21 @@ You may occasionally run into situations where it seems appropriate to provide a
 
 For example, on the overcome action it says you get a boost in addition to success when you succeed with style. But if that overcome roll is going to end the scene, or you can’t think of a good boost, You may choose to offer a story detail as an extra benefit instead.
 
-{example}
+> Landon stalks around the siege tower of the Red Emperor’s fortress, trying to sabotage the ballistas. If he succeeds, the army who hired him has a much better chance in the field when they attack tomorrow morning.
+>
+> Amanda says, “Okay, so you make it to the top of the tower, and you start working. But then, you hear footsteps echoing below you in the tower—sounds like the next guard patrol got here just a bit early.”
+>
+> “Damn,” Lenny says. “Figures I’d get the one guard squad with real discipline. I need to disable these and get out—if they find me, General Ephon already told me he’d disavow my existence.”
+>
+> Amanda shrugs a bit and says, “Work fast? You’re looking at passive opposition here—crunched for time, and dealing with intricate machinery bits, so I’ll call that Great (+4).”
+>
+> Landon has the Crafts skill at Average (+1). Lenny grumbles and says, “Should have convinced Zird to do this.” He rolls, getting a +2, for a Good (+3) result. Not good enough.
+>
+> Landon chips in a fate point and says, “Well, you know what I always say... Smashing Is Always an Option,” referring to one of his aspects. Amanda chuckles and nods, and with the invocation, he manages a Superb (+5). That’s enough to succeed, but not enough to succeed with style, so Landon accomplishes his objective at no cost.
+>
+> He describes how he hastily dismantles the ballista, applying rather violent sabotage before diving for a hiding spot as the guards get closer...
 
-Landon stalks around the siege tower of the Red Emperor’s fortress, trying to sabotage the ballistas. If he succeeds, the army who hired him has a much better chance in the field when they attack tomorrow morning.
-
-Amanda says, “Okay, so you make it to the top of the tower, and you start working. But then, you hear footsteps echoing below you in the tower—sounds like the next guard patrol got here just a bit early.”
-
-“Damn,” Lenny says. “Figures I’d get the one guard squad with real discipline. I need to disable these and get out—if they find me, General Ephon already told me he’d disavow my existence.”
-
-Amanda shrugs a bit and says, “Work fast? You’re looking at passive opposition here—crunched for time, and dealing with intricate machinery bits, so I’ll call that Great (+4).”
-
-Landon has the Crafts skill at Average (+1). Lenny grumbles and says, “Should have convinced Zird to do this.” He rolls, getting a +2, for a Good (+3) result. Not good enough.
-
-Landon chips in a fate point and says, “Well, you know what I always say... Smashing Is Always an Option,” referring to one of his aspects. Amanda chuckles and nods, and with the invocation, he manages a Superb (+5). That’s enough to succeed, but not enough to succeed with style, so Landon accomplishes his objective at no cost.
-
-He describes how he hastily dismantles the ballista, applying rather violent sabotage before diving for a hiding spot as the guards get closer...
-
-#### Create An Advantage
+### Create An Advantage
 
 Use the create an advantage action to make a situation aspect that gives you a benefit, or to claim a benefit from any aspect you have access to.
 
@@ -2139,19 +2132,17 @@ When you succeed, you create a situation aspect with a free invocation.
 
 When you succeed with style, you get a situation aspect with two free invocations instead of one.
 
-{example}
-
-While deep in the Caverns of Yarzuruk, Cynere is in the unfortunate position of having to fight some animated temple golems.
-
-The first couple of exchanges have not gone well, and she’s taken a couple of big hits already. Lily says, “Amanda, you said there was a lot of filigree and furnishings and stuff laying around, right?”
-
-Amanda nods, and Lily asks, “Can I knock some of it over in order to trip these guys up a bit? I imagine if they’re big, clodhopping golems, they aren’t as agile as I am.”
-
-She says, “Sounds fine to me. Sounds like you’re trying to create an advantage with Athletics. One of the golems gets to roll a defend action against you, just because it’s close enough to get in your way.”
-
-Cynere has Athletics at Great (+4). Lily rolls and gets a +1, for a Superb (+5) result. The nearest golem rolls to defend and only gets a Fair (+2). Cynere succeeds with style! Lily places the aspect Cluttered Floor on the scene and notes that she can invoke that aspect twice for free.
-
-Amanda describes the golems’ difficulty with their footing, and now Cynere’s got a little bit of an advantage in the coming exchange...
+> While deep in the Caverns of Yarzuruk, Cynere is in the unfortunate position of having to fight some animated temple golems.
+>
+> The first couple of exchanges have not gone well, and she’s taken a couple of big hits already. Lily says, “Amanda, you said there was a lot of filigree and furnishings and stuff laying around, right?”
+>
+> Amanda nods, and Lily asks, “Can I knock some of it over in order to trip these guys up a bit? I imagine if they’re big, clodhopping golems, they aren’t as agile as I am.”
+>
+> She says, “Sounds fine to me. Sounds like you’re trying to create an advantage with Athletics. One of the golems gets to roll a defend action against you, just because it’s close enough to get in your way.”
+>
+> Cynere has Athletics at Great (+4). Lily rolls and gets a +1, for a Superb (+5) result. The nearest golem rolls to defend and only gets a Fair (+2). Cynere succeeds with style! Lily places the aspect Cluttered Floor on the scene and notes that she can invoke that aspect twice for free.
+>
+> Amanda describes the golems’ difficulty with their footing, and now Cynere’s got a little bit of an advantage in the coming exchange...
 
 If you’re using create an advantage on an existing aspect…
 
@@ -2161,27 +2152,25 @@ When you tie or succeed, you place a free invocation on the aspect.
 
 When you succeed with style, you place two free invocations on the aspect.
 
-{example}
+> Zird is approaching a local merchant he’s been hired to get close to (i.e. spy on) for the sultan of Wanir, in the famous bazaar of Wanir’s capital city.
+>
+> Ryan says, “I’m going to use Rapport to create an advantage, get this guy to open up to me. I don’t know what I’m looking for in terms of an aspect—just some juicy observation I can use later or pass on to Cynere.” He has the Friendly Liar stunt, so he can do this without needing Deceive, despite the fact that he’s hiding his real intent.
+>
+> Amanda says, “Works for me. He’s a merchant, so his Deceive’s pretty high. I’m going to say it’s passive opposition, though, because he’s not really suspicious of you. Try and beat a Great (+4).”
+>
+> Ryan rolls. His Rapport skill is Good (+3), and he manages a +1 on the dice, for a tie.
+>
+> Amanda looks at her notes, grins, and says, “Okay, here’s what you notice. This merchant is obviously a very social fellow, boisterously engaging other shop owners and potential customers as he makes his rounds. This geniality takes on more of a flirtatious, suggestive air any time he speaks to young men—he can’t seem to help that.”
+>
+> She slides an index card with the aspect Sucker for a Pretty Man written on it, to indicate that the merchant’s aspect is now public. Ryan notes that he has a free invocation on that aspect.
+>
+> “Pretty man, huh?” Ryan says. “Does he think I’m pretty?”
+>
+> Amanda grins. “He certainly thinks you’re friendly…”
+>
+> Ryan rolls his eyes. “The things I do for business...”
 
-Zird is approaching a local merchant he’s been hired to get close to (i.e. spy on) for the sultan of Wanir, in the famous bazaar of Wanir’s capital city.
-
-Ryan says, “I’m going to use Rapport to create an advantage, get this guy to open up to me. I don’t know what I’m looking for in terms of an aspect—just some juicy observation I can use later or pass on to Cynere.” He has the Friendly Liar stunt, so he can do this without needing Deceive, despite the fact that he’s hiding his real intent.
-
-Amanda says, “Works for me. He’s a merchant, so his Deceive’s pretty high. I’m going to say it’s passive opposition, though, because he’s not really suspicious of you. Try and beat a Great (+4).”
-
-Ryan rolls. His Rapport skill is Good (+3), and he manages a +1 on the dice, for a tie.
-
-Amanda looks at her notes, grins, and says, “Okay, here’s what you notice. This merchant is obviously a very social fellow, boisterously engaging other shop owners and potential customers as he makes his rounds. This geniality takes on more of a flirtatious, suggestive air any time he speaks to young men—he can’t seem to help that.”
-
-She slides an index card with the aspect Sucker for a Pretty Man written on it, to indicate that the merchant’s aspect is now public. Ryan notes that he has a free invocation on that aspect.
-
-“Pretty man, huh?” Ryan says. “Does he think I’m pretty?”
-
-Amanda grins. “He certainly thinks you’re friendly…”
-
-Ryan rolls his eyes. “The things I do for business...”
-
-#### Attack
+### Attack
 
 Use the attack action to harm someone in a conflict or take them out of a scene.
 
@@ -2199,21 +2188,19 @@ When you succeed on an attack, you inflict a hit on your target equal to the num
 
 When you succeed with style on an attack, it works like a normal success, but you also have the option to reduce the value of your hit by one to gain a boost as well.
 
-{example}
+> Cynere is locked in combat with Drisban, one of the famed Scarlet Twenty, the elite guard of Antharus. In her inimitable fashion, Cynere attempts to slice him open with her flashing blade.
+>
+> Cynere’s Fight skill is at Good (+3). Drisban defends with his Fight at Great (+4). Lily rolls and gets a +2, for a Superb (+5) attack.
+>
+> Amanda rolls for Drisban and gets a –1, bringing his total to Good (+3). Lily wins by two, inflicting a 2-shift hit.
+>
+> But she decides that isn’t good enough. “I’m also invoking Infamous Girl With Sword,” she says, “because for heaven’s sake, this is what I do, and I’m not letting this punk off easy.”
+>
+> Lily chips in her fate point, making her final result Epic (+7). She gets 4 shifts and succeeds with style, cutting into him with a flourish. She chooses to inflict a 4-shift hit, but she could also have inflicted a 3-shift hit and taken a boost, if she’d wanted to.
+>
+> Now Drisban needs to use stress or consequences to stay in the fight!
 
-Cynere is locked in combat with Drisban, one of the famed Scarlet Twenty, the elite guard of Antharus. In her inimitable fashion, Cynere attempts to slice him open with her flashing blade.
-
-Cynere’s Fight skill is at Good (+3). Drisban defends with his Fight at Great (+4). Lily rolls and gets a +2, for a Superb (+5) attack.
-
-Amanda rolls for Drisban and gets a –1, bringing his total to Good (+3). Lily wins by two, inflicting a 2-shift hit.
-
-But she decides that isn’t good enough. “I’m also invoking Infamous Girl With Sword,” she says, “because for heaven’s sake, this is what I do, and I’m not letting this punk off easy.”
-
-Lily chips in her fate point, making her final result Epic (+7). She gets 4 shifts and succeeds with style, cutting into him with a flourish. She chooses to inflict a 4-shift hit, but she could also have inflicted a 3-shift hit and taken a boost, if she’d wanted to.
-
-Now Drisban needs to use stress or consequences to stay in the fight!
-
-#### Defend
+### Defend
 
 Use the defend action to avoid an attack or prevent someone from creating an advantage against you.
 
@@ -2228,13 +2215,13 @@ When you tie a defense, you grant your opponent a boost.
 When you succeed at a defense, you successfully avoid the attack or the attempt to gain an advantage on you.
 When you succeed with style at a defense, it works like a normal success, but you also gain a boost as you turn the tables momentarily.
 
-##### Can I Defend Against Overcome Actions
+#### Can I Defend Against Overcome Actions
 
 Technically, no. The defend action is there to stop you from taking stress, consequences, or situation aspects—basically, to protect you against all the bad stuff we represent with mechanics.
 
 But! You can roll active opposition if you’re in the way of any action, as per the guidelines. So if someone’s doing an overcome action that might fail because you’re in the way, you should speak up and say, “Hey, I’m in the way!” and roll to oppose it. You don’t get any extra benefits like the defend action gives you, but you also don’t have to worry about the aforementioned bad stuff if you lose.
 
-##### No Stacked Effects
+#### No Stacked Effects
 
 You’ll notice that the defend action has outcomes that mirror some of the outcomes in attack and create an advantage. For example, it says that when you tie a defense, you grant your opponent a boost. Under attack, it says that when you tie, you receive a boost.
 
@@ -2244,17 +2231,15 @@ You’ll notice that the defend action has outcomes that mirror some of the outc
 
 That doesn’t mean the attacker gets two boosts—it’s the same result, just from two different points of view. We just wrote it that way so that the results were consistent when you looked up the rule, regardless of what action you took.
 
-{example}
+> Zird the Arcane is arguing a magical thesis before the council of the Collegia Arcana. But one of the adjutants on the council, an old rival named Vokus Skortch, has it in for Zird. He wants not only to see Zird fail, but to damage Zird’s self-confidence by forcing him to misstep and doubt himself. The group agrees that they know each other well enough that Skortch could affect him this way, so the conflict is on.
+>
+> As Zird finishes his opening argument, Amanda describes how Skortch uses Provoke as an attack, poking holes in Zird’s theories and forcing him to reevaluate. Skortch has a Provoke of Good (+3).
+>
+> Zird defends with Will, which he has at Fair (+2). Amanda rolls for Skortch and gets a +1, for a total of Great (+4). Ryan rolls for Zird and gets a +2, tying at Great (+4). Zird doesn’t have to deal with taking a hit, but he does grant Skortch a boost, which Amanda decides to call Momentarily Tripped Up.
 
-Zird the Arcane is arguing a magical thesis before the council of the Collegia Arcana. But one of the adjutants on the council, an old rival named Vokus Skortch, has it in for Zird. He wants not only to see Zird fail, but to damage Zird’s self-confidence by forcing him to misstep and doubt himself. The group agrees that they know each other well enough that Skortch could affect him this way, so the conflict is on.
+# Challenges, Contests And Conflicts
 
-As Zird finishes his opening argument, Amanda describes how Skortch uses Provoke as an attack, poking holes in Zird’s theories and forcing him to reevaluate. Skortch has a Provoke of Good (+3).
-
-Zird defends with Will, which he has at Fair (+2). Amanda rolls for Skortch and gets a +1, for a total of Great (+4). Ryan rolls for Zird and gets a +2, tying at Great (+4). Zird doesn’t have to deal with taking a hit, but he does grant Skortch a boost, which Amanda decides to call Momentarily Tripped Up.
-
-# Challenges Contests And Conflicts
-
-### Zooming In On The Action
+## Zooming In On The Action
 
 Most of the time, a single skill roll should be enough to decide how a particular situation in play resolves. You’re not obligated to describe actions in a particular timeframe or level of detail when you use a skill. Therefore, you could use a single Athletics roll to find out whether you can safely navigate a rock face that will take days to climb, or use that same single skill roll to find out whether you can safely avoid a swiftly falling tree that’s about to crush you.
 
@@ -2266,7 +2251,7 @@ We have three ways for you to zoom in on the action in Fate:
 - **Contests**, when two or more characters are competing for a goal
 - **Conflicts**, when two or more characters are trying to directly harm each other
 
-### Challenges
+## Challenges
 
 A single overcome action is sufficient to deal with a straightforward goal or obstacle—the hero needs to pick this lock, disarm this bomb, sift out a vital piece of information, and so on. It’s also useful when the details of how something gets done aren’t important or worth spending an intense amount of time on, when what you need to know is whether the character can get something done without any setbacks or costs.
 
@@ -2274,63 +2259,67 @@ Sometimes, however, things get complicated. It’s not enough to pick the lock, 
 
 A challenge is a series of overcome actions that you use to resolve an especially complicated or dynamic situation. Each overcome action uses a different skill to deal with one task or part of the situation, and you take the individual results as a whole to figure out how the situation resolves.
 
+### When To Call For A Challenge
+
 GMs, when you’re trying to figure out if it’s appropriate to call for a challenge, ask yourself the following questions:
 
 Is each separate task something that can generate tension and drama independently of the other tasks? If all the tasks are really part of the same overall goal, like “detaching the detonator,” “stopping the timer”, and “disposing of the explosive material” when you’re disarming a bomb, then that should be one overcome action, where you use those details to explain what happened if the roll goes wrong.
 
 Does the situation require different skills to deal with? Holding off the zombies (Fight) while pushing down a barricade (Physique) and fixing your broken wagon (Crafts) so that you can get away would be a good instance for a challenge.
 
+### Setting Up A Challenge
+
 To set up a challenge, simply identify the individual tasks or goals that make up the situation, and treat each one as a separate overcome roll. (Sometimes, only a certain sequence for the rolls will make sense to you; that’s okay too.) Depending on the situation, one character may be required to make several rolls, or multiple characters may be able to participate.
 
-{example}
+> Zird the Arcane is attempting to finish the consecration ritual of the Qirik in order to sanctify the ground of the roadside inn and grant it the protection of the Qirik gods. Normally, this wouldn’t be too interesting, except that he’s trying to get it done before a horde of slavering, flesh-hungry zombies he unwittingly set free earlier in the adventure overruns the inn.
+>
+> Amanda sees several different components to this scene. First there’s the ritual itself, then there’s keeping the inn boarded up, and finally there’s keeping the panicking inhabitants of the inn calm. That calls for Lore, Crafts, and some kind of social skill—Ryan immediately chooses Rapport.
+>
+> Thus, Ryan will be rolling all three of those skills separately, one for each component Amanda identified. She sets the opposition for each of these at Good (+3)—she wants him to have even chances, while leaving room for a variable outcome.
+>
+> Now they’re ready to start.
 
-Zird the Arcane is attempting to finish the consecration ritual of the Qirik in order to sanctify the ground of the roadside inn and grant it the protection of the Qirik gods. Normally, this wouldn’t be too interesting, except that he’s trying to get it done before a horde of slavering, flesh-hungry zombies he unwittingly set free earlier in the adventure overruns the inn.
-
-Amanda sees several different components to this scene. First there’s the ritual itself, then there’s keeping the inn boarded up, and finally there’s keeping the panicking inhabitants of the inn calm. That calls for Lore, Crafts, and some kind of social skill—Ryan immediately chooses Rapport.
-
-Thus, Ryan will be rolling all three of those skills separately, one for each component Amanda identified. She sets the opposition for each of these at Good (+3)—she wants him to have even chances, while leaving room for a variable outcome.
-
-Now they’re ready to start.
+### Conducting A Challenge
 
 To conduct a challenge, call for each overcome action in whichever order seems most interesting, but don’t decide anything about how the situation turns out until after you’ve collected all the results—you want to have the freedom to sequence the events of each roll in the order that makes the most sense and is the most entertaining. Players, if you get a boost on one of your rolls, feel free to use it on another roll in the challenge, provided you can justify it.
 
 GMs, after the rolls have been made, you’ll consider the successes, failures, and costs of each action as you interpret how the scene proceeds. It could be that the results lead you into another challenge, a contest, or even a conflict.
 
-{example}
-
-Ryan takes a deep breath and says, “All right, let’s do this.” He takes up the dice.
-
-He decides to tackle securing the inn first, so he rolls his Good (+3) Crafts skill and gets a 0 on the dice. That ties the roll, allowing him to achieve the goal at a minor cost. Amanda says, “I’m going to say that I get a boost called Hasty Work to use against you if I need it—you are working fast, after all.”
-
-Ryan sighs and nods, and then goes for the second goal in the challenge, which is calming the locals with his Good (+3) Rapport. He makes his roll and gets a terrible –3 on the dice! Now he has the option to fail or to succeed with a major cost. He goes for success, leaving Amanda to think of a good major cost.
-
-She thinks a moment. How to make calming the villagers costly? Then she grins. “So, this is a story thing more than a mechanics thing, but you know… you’re using Rapport, so you’re probably being pretty inspirational right now. I could see you inadvertently convincing some of these farmers and peasants that those zombies are no real threat, and that they totally can go out and fight with little consequence. Because your magic is keeping them safe, right?”
-
-Ryan says, “But they have to be in the inn for that to work!” Amanda is just grinning. Ryan sighs again. “Okay, fine. Some people get totally the wrong idea and are potentially going to get themselves killed. I can just hear them now… Zird, why did you let my husband die? Augh.”
-
-Amanda grins some more.
-
-Ryan goes for the final part of the challenge—the ritual itself, cast with his Great (+4) Lore. Amanda invokes the boost she got earlier and says, “Yeah, you totally have very distracting zombies chipping apart your barricades. Very distracting.” That pushes the difficulty for the final roll up to Superb (+5).
-
-He rolls a +2 and gets a Fantastic (+6), enough to succeed with no cost.
-
-Amanda nods and together they finish describing the scene—Zird finishes the ritual just in time, and the holy power of the Qirik descends on the inn. Some zombies on the verge of breaking in get sizzled by the holy aura, and Zird breathes a sigh of relief… until he hears the panicked screams of villagers outside the inn…
-
-But that’s next scene.
+> Ryan takes a deep breath and says, “All right, let’s do this.” He takes up the dice.
+>
+> He decides to tackle securing the inn first, so he rolls his Good (+3) Crafts skill and gets a 0 on the dice. That ties the roll, allowing him to achieve the goal at a minor cost. Amanda says, “I’m going to say that I get a boost called Hasty Work to use against you if I need it—you are working fast, after all.”
+>
+> Ryan sighs and nods, and then goes for the second goal in the challenge, which is calming the locals with his Good (+3) Rapport. He makes his roll and gets a terrible –3 on the dice! Now he has the option to fail or to succeed with a major cost. He goes for success, leaving Amanda to think of a good major cost.
+>
+> She thinks a moment. How to make calming the villagers costly? Then she grins. “So, this is a story thing more than a mechanics thing, but you know… you’re using Rapport, so you’re probably being pretty inspirational right now. I could see you inadvertently convincing some of these farmers and peasants that those zombies are no real threat, and that they totally can go out and fight with little consequence. Because your magic is keeping them safe, right?”
+>
+> Ryan says, “But they have to be in the inn for that to work!” Amanda is just grinning. Ryan sighs again. “Okay, fine. Some people get totally the wrong idea and are potentially going to get themselves killed. I can just hear them now… Zird, why did you let my husband die? Augh.”
+>
+> Amanda grins some more.
+>
+> Ryan goes for the final part of the challenge—the ritual itself, cast with his Great (+4) Lore. Amanda invokes the boost she got earlier and says, “Yeah, you totally have very distracting zombies chipping apart your barricades. Very distracting.” That pushes the difficulty for the final roll up to Superb (+5).
+>
+> He rolls a +2 and gets a Fantastic (+6), enough to succeed with no cost.
+>
+> Amanda nods and together they finish describing the scene—Zird finishes the ritual just in time, and the holy power of the Qirik descends on the inn. Some zombies on the verge of breaking in get sizzled by the holy aura, and Zird breathes a sigh of relief… until he hears the panicked screams of villagers outside the inn…
+>
+> But that’s next scene.
 
 If you have any boosts that went unused in the challenge, feel free to keep them for the rest of this scene or whatever scene you’re transitioning to, if the events of the challenge connect directly to the next scene.
 
-##### Advantages In A Challenge
+#### Advantages In A Challenge
 
 You can try to create an advantage during a challenge, for yourself or to help someone else out. Creating an advantage doesn’t count towards completing one of the challenge goals, but failing the roll could create a cost or problem that negatively impacts one of the other goals. Be careful using this tactic; advantages can help complete tasks more effectively and create momentum, but trying to create them is not without risk.
 
-##### Attacks In A Challenge
+#### Attacks In A Challenge
 
 Because you’re always up against passive opposition in a challenge, you’ll never use the attack action. If you’re in a situation where it seems reasonable to roll an attack, you should start setting up for a conflict.
 
-### Contests
+## Contests
 
 Whenever two or more characters have mutually exclusive goals, but they aren’t trying to harm each other directly, they’re in a contest. Arm wrestling matches, races or other sports competitions, and public debates are all good examples of contests.
+
+### Setting Up A Contest
 
 GMs, answer the following questions when you’re setting up a contest:
 
@@ -2339,53 +2328,48 @@ GMs, answer the following questions when you’re setting up a contest:
 - **How are the participants opposing each other?** Are they rolling against each other directly (like in a straight sprint race or a poker match), or are they trying to overcome something in the environment (like an obstacle course or a panel of judges)?
 - **What skills are appropriate for this contest?** Does everyone have to roll the same one, or do several apply?
 
-{example}
-
-Zird the Arcane has been felled in a battle with a shadowy group of assassins who ambushed him and Cynere just outside of town! Cynere finishes off the last of them, ending the conflict, then starts toward her fallen friend.
-
-That’s when the assassins’ leader, a cutpurse she knows well as Teran the Swift, blinks in with teleportation magic next to Zird’s unconscious form! He starts casting another teleportation spell, clearly intending to leave with Zird. Cynere breaks into a run. Can she get there before Teran finishes his spell?
-
-Amanda looks through the questions for setting up the contest.
-
-The previous conflict scene had a situation aspect of Muddy Ground, so she decides to keep that in play.
-
-Clearly, Teran and Cynere are directly opposing each other, so they’ll be providing active opposition.
-
-Teran’s going to be rolling his Lore skill for the contest, because he’s casting a spell. Because this is a pretty straightforward movement-related situation for Cynere, Amanda and Lily agree that Athletics is the most appropriate skill to roll.
+> Zird the Arcane has been felled in a battle with a shadowy group of assassins who ambushed him and Cynere just outside of town! Cynere finishes off the last of them, ending the conflict, then starts toward her fallen friend.
+>
+> That’s when the assassins’ leader, a cutpurse she knows well as Teran the Swift, blinks in with teleportation magic next to Zird’s unconscious form! He starts casting another teleportation spell, clearly intending to leave with Zird. Cynere breaks into a run. Can she get there before Teran finishes his spell?
+>
+> Amanda looks through the questions for setting up the contest.
+>
+> The previous conflict scene had a situation aspect of Muddy Ground, so she decides to keep that in play.
+>
+> Clearly, Teran and Cynere are directly opposing each other, so they’ll be providing active opposition.
+>
+> Teran’s going to be rolling his Lore skill for the contest, because he’s casting a spell. Because this is a pretty straightforward movement-related situation for Cynere, Amanda and Lily agree that Athletics is the most appropriate skill to roll.
 
 Now you can get started.
+
+### A Series of Exchanges
 
 A contest proceeds in a series of exchanges. In an exchange, every participant gets to make one skill roll to determine how well they do in that leg of the contest. This is basically an overcome action.
 
 Players, when you make a contest roll, compare your result to everyone else’s.
 
-If you got the highest result, you win the exchange. If you’re rolling directly against the other participants, then that means you got the highest rank on the ladder out of everyone. If you’re all rolling against something in the environment, it means you got the most shifts out of everyone.
+- If you got the highest result, you win the exchange. If you’re rolling directly against the other participants, then that means you got the highest rank on the ladder out of everyone. If you’re all rolling against something in the environment, it means you got the most shifts out of everyone. Winning the exchange means you score a victory (which you can just represent with a tally mark or check mark on scratch paper) and describe how you take the lead.
+- If you succeed with style and no one else does, then you get to mark two victories.
+- If there’s a tie for the highest result, no one gets a victory, and an unexpected twist occurs. This could mean several things depending on the situation—the terrain or environment shifts somehow, the parameters of the contest change, or an unanticipated variable shows up and affects all the participants. GMs, you should create a new situation aspect reflecting this change.
+- The first participant to achieve three victories wins the contest.
 
-Winning the exchange means you score a victory (which you can just represent with a tally mark or check mark on scratch paper) and describe how you take the lead.
+> ERRATA: The example below that features Cynere from the SRD is technically incorrect. See the official [Fate errata by Evil Hat](https://docs.google.com/document/d/1wvZasbKtQgmR-p8wvPcNw7jdy7QAftMmQxvMEz4gof4/edit). "We plan to rewrite this for the PDF at the least, but we were too slow to catch it before the book went to press. The example will show Cynere not succeeding with style in her second exchange, just succeeding normally; then everything proceeds as written, with her double-invoke getting a SWS result and a total of three victories."
 
-If you succeed with style and no one else does, then you get to mark two victories.
+> Cynere has Athletics at Great (+4). Teran has Lore at Good (+3).
+>
+> In the first exchange, Lily rolls poorly for Cynere and ends up with an Average (+1). Amanda rolls a 0 on the dice and stays at Good (+3). Amanda wins, so Teran wins the exchange and takes 1 victory. Amanda describes Teran completing the first major rune of the spell, raising a lambent green glow into the air.
+>
+> In the second exchange, Lily turns the tables, rolling exceptionally well and getting a Superb (+5), whereas Amanda only gets a Fair (+2) for Teran. That’s a success with style, so Lily picks up two victories and the lead. Lily describes Cynere in a full-on sprint, bearing down on Teran.
+>
+> In the third exchange, they tie at Good (+3)! Amanda now has to introduce an unexpected twist into the contest. She thinks about it for a moment, and says, “Okay, so it looks like some of the various magical reagents on Zird’s belt pouch are reacting weirdly with the magic of Teran’s spell, throwing Magical Distortions into the air.” She writes down that situation aspect on an index card and puts it on the table.
+>
+> In the fourth exchange, they tie again, this time at Great (+4). Lily says, “Forget this noise. I want to invoke two aspects—one, because I have I’ve Got Zird’s Back on my sheet, and Magical Distortions, because I figure that they’re going to interfere more with his spellcasting than my running.” She passes Amanda two fate points.
+>
+> That puts her final result at Legendary (+8), another success with style and another two victories. That gives her four victories to Teran’s one, and she wins the exchange and the contest!
+>
+> Amanda and Lily describe how she snatches Zird just before Teran finishes his spell, and he teleports away without his prize.
 
-If there’s a tie for the highest result, no one gets a victory, and an unexpected twist occurs. This could mean several things depending on the situation—the terrain or environment shifts somehow, the parameters of the contest change, or an unanticipated variable shows up and affects all the participants. GMs, you should create a new situation aspect reflecting this change.
-
-The first participant to achieve three victories wins the contest.
-
-{example}
-
-Cynere has Athletics at Great (+4). Teran has Lore at Good (+3).
-
-In the first exchange, Lily rolls poorly for Cynere and ends up with an Average (+1). Amanda rolls a 0 on the dice and stays at Good (+3). Amanda wins, so Teran wins the exchange and takes 1 victory. Amanda describes Teran completing the first major rune of the spell, raising a lambent green glow into the air.
-
-In the second exchange, Lily turns the tables, rolling exceptionally well and getting a Superb (+5), whereas Amanda only gets a Fair (+2) for Teran. That’s a success with style, so Lily picks up two victories and the lead. Lily describes Cynere in a full-on sprint, bearing down on Teran.
-
-In the third exchange, they tie at Good (+3)! Amanda now has to introduce an unexpected twist into the contest. She thinks about it for a moment, and says, “Okay, so it looks like some of the various magical reagents on Zird’s belt pouch are reacting weirdly with the magic of Teran’s spell, throwing Magical Distortions into the air.” She writes down that situation aspect on an index card and puts it on the table.
-
-In the fourth exchange, they tie again, this time at Great (+4). Lily says, “Forget this noise. I want to invoke two aspects—one, because I have I’ve Got Zird’s Back on my sheet, and Magical Distortions, because I figure that they’re going to interfere more with his spellcasting than my running.” She passes Amanda two fate points.
-
-That puts her final result at Legendary (+8), another success with style and another two victories. That gives her four victories to Teran’s one, and she wins the exchange and the contest!
-
-Amanda and Lily describe how she snatches Zird just before Teran finishes his spell, and he teleports away without his prize.
-
-##### Creating Advantages In A Contest
+#### Creating Advantages In A Contest
 
 During any exchange, you can try to create an advantage before you make your contest roll. If you’re targeting another participant, they get to defend normally. If someone can interfere with your attempt, they provide active opposition as normal.
 
@@ -2393,21 +2377,19 @@ Doing this carries an additional risk—failing to create an advantage means you
 
 If you’re providing a bonus via the Teamwork rules, failing to create an advantage means the lead character doesn’t benefit from your help this exchange.
 
-{example}
+> Cynere tries to throw mud in the eyes of Teran the Swift as she’s running to save Zird. Lily says she wants to create an advantage, with Teran as her target and a new aspect called Mud in the Eyes. (Imaginative, we know.)
+>
+> She rolls Athletics to create the advantage and gets a Great (+4). Teran rolls Athletics to defend and gets a Good (+3).
+>
+> Teran gets mud in his eyes as Cynere intended, and Lily marks that she has a free invocation on it.
+>
+> Because Lily didn’t fail, she gets to make her contest roll normally. Amanda decides that being semi-blinded isn’t going to stop Teran from continuing to cast, so he also gets to roll normally.
 
-Cynere tries to throw mud in the eyes of Teran the Swift as she’s running to save Zird. Lily says she wants to create an advantage, with Teran as her target and a new aspect called Mud in the Eyes. (Imaginative, we know.)
-
-She rolls Athletics to create the advantage and gets a Great (+4). Teran rolls Athletics to defend and gets a Good (+3).
-
-Teran gets mud in his eyes as Cynere intended, and Lily marks that she has a free invocation on it.
-
-Because Lily didn’t fail, she gets to make her contest roll normally. Amanda decides that being semi-blinded isn’t going to stop Teran from continuing to cast, so he also gets to roll normally.
-
-##### Attacks In A Contest
+#### Attacks In A Contest
 
 If someone tries to attack in a contest, then they’re doing direct harm, and it ceases to be a contest. You should immediately stop what you’re doing and start setting up for a conflict instead.
 
-### Conflicts
+## Conflicts
 
 In a conflict, characters are actively trying to harm one another. It could be a fist fight, a shootout, or a sword duel. It could also be a tough interrogation, a psychic assault, or a shouting match with a loved one.As long as the characters involved have both the intent and the ability to harm one another, then you’re in a conflict scene.
 
@@ -2424,7 +2406,7 @@ Setting up a conflict is a little more involved than setting up contests or chal
 
 You know the conflict is over when everyone on one of the sides has conceded or been taken out.
 
-#### Setting The Scene
+### Setting The Scene
 
 GMs and players, you should talk briefly before you start a conflict about the circumstances of the scene. This mainly involves coming up with quick answers to variations of the four W-questions, such as:
 
@@ -2436,13 +2418,11 @@ GMs and players, you should talk briefly before you start a conflict about the c
 
 GMs, you’re going to take this information and create situation aspects to help further define the arena of conflict.
 
-{example}
+> Landon, Zird, and Cynere are breaking into a dockside warehouse in order to find smuggled goods on behalf of their latest employer. Unfortunately, someone tipped the smuggler off. Now Og, one of his thug lieutenants, is at the warehouse waiting for them to show up, and he brought along four friends.
+>
+> The participants in the conflict are pretty obvious—the PCs, plus Og and four nameless enforcers, all NPCs under Amanda’s control. The warehouse is the environment, and the group takes a moment to talk about it—boxes and crates everywhere, large and open, there’s probably a second floor, and Amanda mentions the loading door is open because they’re waiting for a ship to come in.
 
-Landon, Zird, and Cynere are breaking into a dockside warehouse in order to find smuggled goods on behalf of their latest employer. Unfortunately, someone tipped the smuggler off. Now Og, one of his thug lieutenants, is at the warehouse waiting for them to show up, and he brought along four friends.
-
-The participants in the conflict are pretty obvious—the PCs, plus Og and four nameless enforcers, all NPCs under Amanda’s control. The warehouse is the environment, and the group takes a moment to talk about it—boxes and crates everywhere, large and open, there’s probably a second floor, and Amanda mentions the loading door is open because they’re waiting for a ship to come in.
-
-#### Situation Aspects
+### Situation Aspects
 
 GMs, when you’re setting the scene, keep an eye out for fun-sounding features of the environment to make into situation aspects, especially if you think someone might be able to take advantage of them in an interesting way in a conflict. Don’t overload it—find three to five evocative things about your conflict location and make them into aspects.
 
@@ -2454,21 +2434,19 @@ Good options for situation aspects include:
 - Things you can knock over, wreck, or use as improvised weapons—bookshelves, statues, etc.
 - Things that are flammable.
 
-##### Situation Aspects And Zones In Mental Conflicts
+#### Situation Aspects And Zones In Mental Conflicts
 
 In a mental conflict, it might not always make sense to use situation aspects and zones to describe a physical space. It’d make sense in an interrogation, for example, where the physical features of the space create fear, but not in a really violent argument with a loved one. Also, when people are trying to hurt each other emotionally, usually they’re using their target’s own weaknesses against them—in other words, their own aspects.
 
 So, you may not even need situation aspects or zones for a lot of mental conflicts. Don’t feel obligated to include them.
 
-{example}
+> Considering our warehouse again, Amanda thinks about what might make good situation aspects.
 
-Considering our warehouse again, Amanda thinks about what might make good situation aspects.
-
-She decides that there are enough crates in here to make free movement a potential problem, so she picks Heavy Crates and Cramped as aspects. The loading door is open, which means that there’s a large dock with water in it, so she also picks Open to the Water as a situation aspect, figuring that someone might try to knock someone in.
+> She decides that there are enough crates in here to make free movement a potential problem, so she picks Heavy Crates and Cramped as aspects. The loading door is open, which means that there’s a large dock with water in it, so she also picks Open to the Water as a situation aspect, figuring that someone might try to knock someone in.
 
 As the scene unfolds, players might suggest features of the environment that are perfect as aspects. If the GM described the scene as being poorly lit, a player should be able to invoke the Shadows to help on a Stealth roll even if she hadn’t previously established it as an aspect. If the feature would require some intervention on the part of the characters in the scene to become aspect-worthy, then that’s the purview of the create an advantage action. Usually the barn doesn’t catch On Fire! without someone kicking over the lantern. Usually.
 
-#### Zones
+### Zones
 
 GMs, if your conflict takes place over a large area, you may want to break it down into zones for easier reference.
 
@@ -2484,21 +2462,15 @@ If it’s separated by stairs, a ladder, a fence, or a wall, it could be divided
 
 When you’re setting up your zones, note any situation aspects that could make moving between those zones problematic. They’ll be important later, when people want to move from zone to zone. If that means you need more situation aspects, add them now.
 
-{example}
+> Amanda decides the warehouse needs to be multiple zones. The main floor is big enough, in her mind, for two zones, and the Heavy Crates she mentioned earlier make it hard to freely move between them.
+>
+> She knows there’s also a second floor ringing the inner walls, so she makes that an additional zone. She adds Ladder Access Only to the scene.
+>
+> If, for some reason, someone decides to run outside, she figures that can be a fourth zone, but she doesn’t think she needs any aspects for it.
+>
+> She sketches the rough map on an index card for everyone to see.
 
-Amanda decides the warehouse needs to be multiple zones. The main floor is big enough, in her mind, for two zones, and the Heavy Crates she mentioned earlier make it hard to freely move between them.
-
-She knows there’s also a second floor ringing the inner walls, so she makes that an additional zone. She adds Ladder Access Only to the scene.
-
-If, for some reason, someone decides to run outside, she figures that can be a fourth zone, but she doesn’t think she needs any aspects for it.
-
-She sketches the rough map on an index card for everyone to see.
-
-{example}
-
-[Your map here]
-
-#### Establishing Sides
+### Establishing Sides
 
 It’s important to know everyone’s goal in a conflict before you start. People fight for a reason, and if they’re willing to do harm, it’s usually an urgent reason.
 
@@ -2516,7 +2488,7 @@ Ryan asks Amanda about finding the smuggled goods, and Amanda replies, “If you
 
 The conflict starts with everyone on the main warehouse floor. Amanda decides that Og and one of his friends are going to go after Landon, two of the other thugs are going after Cynere, and the final one is going to chase after Zird.
 
-#### Turn Order
+### Turn Order
 
 Your turn order in a conflict is based on your skills. In a physical conflict, compare your Notice skill to the other participants. In a mental conflict, compare your Empathy skill. Whoever has the highest gets to go first, and then everyone else in descending order.
 
@@ -2524,41 +2496,37 @@ If there’s a tie, compare a secondary or tertiary skill. For physical conflict
 
 GMs, for a simple option, pick your most advantageous NPC to determine your place in the turn order, and let all your NPCs go at that time.
 
-{example}
+> Cynere has a Notice of Good (+3), higher than everyone else, so she goes first.
+>
+> Zird has a Notice of Average (+1), so he goes second.
+>
+> Landon and Og both lack the Notice skill. Landon has Athletics at Good (+3), and Og has it at Fair (+2), so Landon goes third and Og goes last.
 
-Cynere has a Notice of Good (+3), higher than everyone else, so she goes first.
-
-Zird has a Notice of Average (+1), so he goes second.
-
-Landon and Og both lack the Notice skill. Landon has Athletics at Good (+3), and Og has it at Fair (+2), so Landon goes third and Og goes last.
-
-#### The Exchange
+### The Exchange
 
 Exchanges in a conflict are a little more complicated than in contests. In an exchange, every character gets a turn to take an action. GMs, you get to go once for every NPC you control in the conflict.
 
 Most of the time, you’re going to be attacking another character or creating an advantage on your turn, because that’s the point of a conflict—take your opponent out, or set things up to make it easier to take your opponent out.
 
-GMs, if you have a lot of nameless NPCs in your scene, feel free to have them use passive opposition to keep your dice rolling down. Also, consider using mobs instead of individual NPCs to keep things simple.
+> GMs, if you have a lot of nameless NPCs in your scene, feel free to have them use passive opposition to keep your dice rolling down. Also, consider using mobs instead of individual NPCs to keep things simple.
 
 However, if you have a secondary objective in the conflict scene, you might need to roll an overcome action instead. You’ll encounter this most often if you want to move between zones but there’s a situation aspect in place making that problematic.
 
 Regardless, you only get to make one skill roll on your turn in an exchange, unless you’re defending against someone else’s action—you can do that as many times as you want. You can even make defend actions on behalf of others, so long as you fulfill two conditions: it has to be reasonable for you to interpose yourself between the attack and its target, and you have to suffer the effects of any failed rolls.
 
-##### Full Defense
+#### Full Defense
 
 If you want, you can forgo your action for the exchange to concentrate on defense. You don’t get to do anything proactive, but you do get to roll all defend actions for the exchange at a +2 bonus.
 
-{example}
+> In the first exchange of our warehouse fight, Cynere goes first. Lily has Cynere attack the thug that’s eyeing her. That’s her action for the exchange—she can still roll to defend whenever she needs to, but she can’t do anything else proactive until her next turn.
+>
+> On Ryan’s turn, he has Zird do a full defense—normally, he’d be able to defend and get an action this exchange, but instead, he gets a +2 to his defense rolls until his next turn.
+>
+> On Lenny’s turn, he has Landon create an advantage by placing an aspect on Og called Hemmed In, hoping to corner him between some crates. That’s his action for the exchange.
+>
+> Amanda goes last, and she just has all of her NPCs attack their chosen targets.
 
-In the first exchange of our warehouse fight, Cynere goes first. Lily has Cynere attack the thug that’s eyeing her. That’s her action for the exchange—she can still roll to defend whenever she needs to, but she can’t do anything else proactive until her next turn.
-
-On Ryan’s turn, he has Zird do a full defense—normally, he’d be able to defend and get an action this exchange, but instead, he gets a +2 to his defense rolls until his next turn.
-
-On Lenny’s turn, he has Landon create an advantage by placing an aspect on Og called Hemmed In, hoping to corner him between some crates. That’s his action for the exchange.
-
-Amanda goes last, and she just has all of her NPCs attack their chosen targets.
-
-#### Resolving Attacks
+### Resolving Attacks
 
 A successful attack lands a hit equivalent to its shift value on a target. So if you get three shifts on an attack, you land a 3-shift hit.
 
@@ -2566,11 +2534,11 @@ If you get hit by an attack, one of two things happen: either you absorb the hit
 
 Fortunately, you have two options for absorbing hits to stay in the fight—you can take stress and/or consequences. You can also concede a conflict before you’re taken out, in order to preserve some control over what happens to your character.
 
-If, for whatever reason, you want to forego your defense and take a hit (like, say, to interpose yourself in the path of an arrow that’s about to skewer your friend), you can.
+> If, for whatever reason, you want to forego your defense and take a hit (like, say, to interpose yourself in the path of an arrow that’s about to skewer your friend), you can.
 
 Because you’re not defending, the attacker’s rolling against Mediocre (+0) opposition, which means you’re probably going to take a bad hit.
 
-#### Stress
+### Stress
 
 One of your options to mitigate the effect of a hit is to take stress.
 
@@ -2590,27 +2558,23 @@ Remember that you have two sets of stress boxes! One of these is for physical st
 
 After a conflict, when you get a minute to breathe, any stress boxes you checked off become available for your use again.
 
-{example}
+> Og batters Landon with a whopping 3-shift hit on this exchange, wielding a giant club with spikes.
+>
+> Looking at his character sheet, Lenny sees that he’s only got two stress boxes left—a 2-point and a 4-point.
+>
+> Because his 3-point box is already checked, the hit must be absorbed by a higher-value box. He reluctantly checks off the 4-point box.
+>
+> Amanda and Lenny describe the outcome—Landon gets his sword up just in time to barely deflect a blow that shatters a nearby crate, peppering Landon’s face with splintered wood. One inch closer, and it might have been his face that got splintered.
+>
+> Landon has one more stress box on his sheet, a 2-shift box. That means his reserves are almost gone, and the next major hit he takes is going to hurt bad....
 
-Og batters Landon with a whopping 3-shift hit on this exchange, wielding a giant club with spikes.
-
-Looking at his character sheet, Lenny sees that he’s only got two stress boxes left—a 2-point and a 4-point.
-
-Because his 3-point box is already checked, the hit must be absorbed by a higher-value box. He reluctantly checks off the 4-point box.
-
-Amanda and Lenny describe the outcome—Landon gets his sword up just in time to barely deflect a blow that shatters a nearby crate, peppering Landon’s face with splintered wood. One inch closer, and it might have been his face that got splintered.
-
-Landon has one more stress box on his sheet, a 2-shift box. That means his reserves are almost gone, and the next major hit he takes is going to hurt bad....
-
-#### Consequences
+### Consequences
 
 The second option you have for mitigating a hit is taking a consequence. A consequence is more severe than stress—it represents some form of lasting injury or setback that you accrue from the conflict, something that’s going to be a problem for your character after the conflict is over.
 
 Consequences come in three levels of severity—mild, moderate, and severe. Each one has a different shift value: two, four, and six, respectively. On your character sheet, you have a number of available consequence slots, in this section:
 
-{example}
-
-[Your character sheet image here]
+{Your character sheet image here}
 
 When you use a consequence slot, you reduce the shift value of the attack by the shift value of the consequence. You can use more than one consequence at a time if they’re available. Any of the hit’s remaining shifts must be handled by a stress box to avoid being taken out.
 
@@ -2620,15 +2584,15 @@ Unlike stress, a consequence slot may take a long time to recover after the conf
 
 Still, it’s better than being taken out, right?
 
-Cynere gets teamed up on by three of the thugs during this exchange, and with the help of a huge die roll and some situation aspects, they manage to land a 6-shift attack on her. She’s escaped harm so far this fight, and still has all her stress boxes and consequences available.
+> Cynere gets teamed up on by three of the thugs during this exchange, and with the help of a huge die roll and some situation aspects, they manage to land a 6-shift attack on her. She’s escaped harm so far this fight, and still has all her stress boxes and consequences available.
+>
+> She has two ways to take the hit. She could take one severe consequence, which negates 6 stress. She could also take a moderate consequence (4 stress) and use her 2-point stress box.
+>
+> She decides that it’s not likely she’s going to get hit for that much again, so she takes the severe consequence to keep her stress track open for smaller hits.
+>
+> Amanda and Lily agree to call the severe consequence Nearly Gutted. Cynere takes a wicked slash from one of the thugs’ swords, gritting her teeth through the pain....
 
-She has two ways to take the hit. She could take one severe consequence, which negates 6 stress. She could also take a moderate consequence (4 stress) and use her 2-point stress box.
-
-She decides that it’s not likely she’s going to get hit for that much again, so she takes the severe consequence to keep her stress track open for smaller hits.
-
-Amanda and Lily agree to call the severe consequence Nearly Gutted. Cynere takes a wicked slash from one of the thugs’ swords, gritting her teeth through the pain....
-
-##### Naming A Consequence
+#### Naming A Consequence
 
 Here are some guidelines for choosing what to name a consequence:
 
@@ -2638,7 +2602,7 @@ Here are some guidelines for choosing what to name a consequence:
 
 **Severe consequences** go straight to the emergency room (or whatever the equivalent is in your game)—they’re extremely nasty and prevent you from doing a lot of things, and will lay you out for a while. On the mental side, they express things like serious trauma or relationship-changing harm. Examples: Second-Degree Burn, Compound Fracture, Guts Hanging Out, Crippling Shame, Trauma-Induced Phobia.
 
-##### What Skill Do I Use For Recovery
+#### What Skill Do I Use For Recovery
 
 {example}
 
@@ -2648,7 +2612,7 @@ If you want it to be easier to help people recover physically, you could add it 
 
 Likewise, if you want to restrict access to mental recovery, make it an Empathy or Rapport stunt, rather than having it built in to a skill.
 
-#### Recovering From A Consequence
+### Recovering From A Consequence
 
 In order to regain the use of a consequence slot, you have to recover from the consequence. That requires two things—succeeding at an action that allows you to justify recovery, and then waiting an appropriate amount of game time for that recovery to take place.
 
@@ -2668,23 +2632,21 @@ Then, you just have to wait the time.
 - For a moderate consequence, you have to wait one whole session after the recovery action (which means if you do the recovery action in the middle of a session, you should recover sometime in the middle of next session).
 - For a severe consequence, you have to wait one whole scenario after the recovery action.
 
-{example}
+> Cynere ended up with the severe consequence Nearly Gutted as the result of the fight.
+>
+> Back at the inn, Zird attempts to bandage up the cut. He has a stunt called, “Scholar, Healer” which allows him to use his Lore skill for recovery obstacles. He makes his Lore roll at a difficulty of Fantastic (+6) and succeeds.
+>
+> This allows Cynere’s Nearly Gutted aspect to be renamed Bandaged and start the recovery process. After the next whole scenario, she’ll be able to erase that aspect from her sheet and use her severe consequence again in a subsequent conflict.
 
-Cynere ended up with the severe consequence Nearly Gutted as the result of the fight.
+> #### Potions And Other Insta Healing
+>
+> Many genres have some sort of mechanism by which characters can quickly recover from injuries. Fantasy settings have the ubiquitous healing potion or spell. Sci-fi has superscience dermal regenerators or biogel. Usually, these mechanisms exists because many games express injuries in terms of a constant numerical penalty that drastically affects a character’s effectiveness.
+>
+> In Fate, however, a consequence is largely just like any other aspect. It only comes into play when someone pays a fate point to invoke it (after the initial free invoke, of course), or when it’s compelled.
+>
+> At best, powerful healing should simply eliminate the need to roll for a recovery action, or should reduce the severity of a consequence by one level or more. So, a healing potion might turn a severe consequence into a moderate one, making the recovery time much shorter. The PC should have to spend at least one scene where the consequence could affect things, before you let it go away.
 
-Back at the inn, Zird attempts to bandage up the cut. He has a stunt called, “Scholar, Healer” which allows him to use his Lore skill for recovery obstacles. He makes his Lore roll at a difficulty of Fantastic (+6) and succeeds.
-
-This allows Cynere’s Nearly Gutted aspect to be renamed Bandaged and start the recovery process. After the next whole scenario, she’ll be able to erase that aspect from her sheet and use her severe consequence again in a subsequent conflict.
-
-##### Potions And Other Insta Healing
-
-Many genres have some sort of mechanism by which characters can quickly recover from injuries. Fantasy settings have the ubiquitous healing potion or spell. Sci-fi has superscience dermal regenerators or biogel. Usually, these mechanisms exists because many games express injuries in terms of a constant numerical penalty that drastically affects a character’s effectiveness.
-
-In Fate, however, a consequence is largely just like any other aspect. It only comes into play when someone pays a fate point to invoke it (after the initial free invoke, of course), or when it’s compelled.
-
-At best, powerful healing should simply eliminate the need to roll for a recovery action, or should reduce the severity of a consequence by one level or more. So, a healing potion might turn a severe consequence into a moderate one, making the recovery time much shorter. The PC should have to spend at least one scene where the consequence could affect things, before you let it go away.
-
-#### Extreme Consequences
+### Extreme Consequences
 
 In addition to the normal set of mild, moderate, and severe consequences, every PC also gets one last-ditch option to stay in a fight—the extreme consequence. Between major milestones, you can only use this option once.
 
@@ -2692,7 +2654,7 @@ An extreme consequence will absorb up to 8-shifts of a hit, but at a very seriou
 
 Unlike other consequences, you can’t make a recovery action to diminish an extreme consequence—you’re stuck with it until your next major milestone. After that, you can rename the extreme consequence to reflect that you’re no longer vulnerable to the worst of it, as long as you don’t just switch it out for whatever your old aspect was. Taking an extreme consequence is a permanent character change; treat it as such.
 
-#### Conceding The Conflict
+### Conceding The Conflict
 
 When all else fails, you can also just give in. Maybe you’re worried that you can’t absorb another hit, or maybe you decide that continuing to fight is just not worth the punishment. Whatever the reason, you can interrupt any action at any time before the roll is made to declare that you concede the conflict. This is super-important—once dice hit the table, what happens happens, and you’re either taking more stress, suffering more consequences, or getting taken out.
 
@@ -2704,32 +2666,31 @@ Second of all, you get to avoid the worst parts of your fate. Yes, you lost, and
 
 That can make the difference between, say, being mistakenly left for dead and ending up in the enemy’s clutches, in shackles, without any of your stuff—the sort of thing that can happen if you’re taken out instead. That’s not nothing.
 
-{example}
+> Og proves to be too much for Landon to handle in the warehouse conflict, having hit with several devastating attacks in the course of the fight.
+>
+> Before Amanda’s next turn, Lenny says, “I concede. I don’t want to risk any more consequences.”
+>
+> Landon’s taken both a mild and a moderate consequence. He gets a fate point for conceding, as well as two more fate points for the two consequences he took, giving him three total.
+>
+> Amanda says, “So, what are you trying to avoid here?”
+>
+> Lenny says, “Well, I don’t want to get killed or captured, for starters.”
+>
+> Amanda chuckles and says, “Fair enough. So, we’ll say that Og knocks you out cold and doesn’t bother to finish you off, because he still has Cynere and Zird to deal with. He may even think you’re dead. I feel like the loss needs some more teeth, though. Hm...”
+>
+> Ryan pipes up with, “How about he takes your sword as a trophy?”
+>
+> Amanda nods. “Yeah, that’s good. He knocks you out, spits on you, and takes your sword.”
+>
+> Lenny says, “Bastard! I’m so getting him back for that one...”
 
-Og proves to be too much for Landon to handle in the warehouse conflict, having hit with several devastating attacks in the course of the fight.
+## Getting Taken Out
 
-Before Amanda’s next turn, Lenny says, “I concede. I don’t want to risk any more consequences.”
-
-Landon’s taken both a mild and a moderate consequence. He gets a fate point for conceding, as well as two more fate points for the two consequences he took, giving him three total.
-
-Amanda says, “So, what are you trying to avoid here?”
-
-Lenny says, “Well, I don’t want to get killed or captured, for starters.”
-
-Amanda chuckles and says, “Fair enough. So, we’ll say that Og knocks you out cold and doesn’t bother to finish you off, because he still has Cynere and Zird to deal with. He may even think you’re dead. I feel like the loss needs some more teeth, though. Hm...”
-
-Ryan pipes up with, “How about he takes your sword as a trophy?”
-
-Amanda nods. “Yeah, that’s good. He knocks you out, spits on you, and takes your sword.”
-
-Lenny says, “Bastard! I’m so getting him back for that one...”
-
-Getting Taken Out
 If you don’t have any stress or consequences left to buy off all the shifts of a hit, that means you’re taken out.
 
 Taken out is bad—it means not only that you can’t fight anymore, but that the person who took you out gets to decide what your loss looks like and what happens to you after the conflict. Obviously, they can’t narrate anything that’s out of scope for the conflict (like having you die from shame), but that still gives someone else a lot of power over your character that you can’t really do anything about.
 
-#### Character Death
+### Character Death
 
 So, if you think about it, there’s not a whole lot keeping someone from saying, after taking you out, that your character dies. If you’re talking about a physical conflict where people are using nasty sharp weapons, it certainly seems reasonable that one possible outcome of defeat is your character getting killed.
 
@@ -2743,7 +2704,7 @@ That doesn’t mean there’s no room for character death in the game, however. 
 
 At the very least, even if you’re in a hardcore group that invites the potential for character death on any taken out result, make sure that you telegraph the opponent’s lethal intent. GMs, this is especially important for you, so the players will know which NPCs really mean business, and can concede to keep their characters alive if need be.
 
-#### Movement
+### Movement
 
 In a conflict, it’s important to track where everyone is relative to one another, which is why we divide the environment where the conflict’s taking place into zones. Where you have zones, you have people trying to move around in them in order to get at one another or at a certain objective.
 
@@ -2755,33 +2716,31 @@ GMs, just as with other overcome rolls, you’ll set the difficulty. You might u
 
 If you fail that roll, whatever was impeding you keeps you from moving. If you tie, you get to move, but your opponent takes a temporary advantage of some kind. If you succeed, you move without consequence. If you succeed with style, you can claim a boost in addition to your movement.
 
-{example}
+> In our continuing warehouse conflict, Cynere wants to go after one of Og’s thugs, who has started shooting arrows down from the second floor. That requires her to cross one zone to get to the access ladder for the second floor, and then climb it, making her opponent two zones away.
+>
+> She’s currently mixing it up with a thug herself, whose Fight is at Fair (+2).
+>
+> Lily tells Amanda her intent, and Amanda says, “Okay, the thug you’re fighting is going to try and keep you from getting away, so he’s going to provide active opposition.”
+>
+> Cynere’s Athletics is Great (+4). She rolls and gets +0, for a Great result. The thug rolls his opposition, and rolls –1, for a result of Average (+1). That gives Cynere three shifts, and a success with style.
+>
+> Lily and Amanda describe Cynere faking out the thug, vaulting over a crate, and taking the ladder two rungs at a time to get up top. She takes a boost, which she calls Momentum.
+>
+> The thug up top swallows hard, bringing his crossbow to bear...
 
-In our continuing warehouse conflict, Cynere wants to go after one of Og’s thugs, who has started shooting arrows down from the second floor. That requires her to cross one zone to get to the access ladder for the second floor, and then climb it, making her opponent two zones away.
-
-She’s currently mixing it up with a thug herself, whose Fight is at Fair (+2).
-
-Lily tells Amanda her intent, and Amanda says, “Okay, the thug you’re fighting is going to try and keep you from getting away, so he’s going to provide active opposition.”
-
-Cynere’s Athletics is Great (+4). She rolls and gets +0, for a Great result. The thug rolls his opposition, and rolls –1, for a result of Average (+1). That gives Cynere three shifts, and a success with style.
-
-Lily and Amanda describe Cynere faking out the thug, vaulting over a crate, and taking the ladder two rungs at a time to get up top. She takes a boost, which she calls Momentum.
-
-The thug up top swallows hard, bringing his crossbow to bear...
-
-#### Advantages In A Conflict
+### Advantages In A Conflict
 
 Remember that aspects you create as advantages follow all the rules for situation aspects—the GM can use them to justify overcome actions, they last until they’re made irrelevant or the scene is over, and in some cases they represent as much a threat to you as an opponent.
 
 When you create an advantage in a conflict, think about how long you want that aspect to stick around and whom you want to have access to it. It’s difficult for anyone besides you and your friends to justify using an advantage you stick to a character, but it’s also easier to justify getting rid of it—one overcome action could undo it. It’s harder to justify getting rid of an aspect on the environment (seriously, who is going to move that Huge Bookcase you just knocked over?), but anyone in the scene could potentially find a reason to take advantage of it.
 
-##### Cover Fire And Other Impositions
-
-When you’re trying to prevent someone else from getting attacked, the main way to do it is by creating an advantage. You can pass your buddy the invocation and make it harder to hit them.
-
-You could also put yourself directly between the attack and the intended target, such that the bad guy has to get through you to get to your buddy. Then you’re just defending as normal and taking the stress and consequences yourself.
-
-If you want to defend other people without directly interposing yourself between them and the attack, you’ll need a stunt.
+> #### Cover Fire And Other Impositions
+>
+> When you’re trying to prevent someone else from getting attacked, the main way to do it is by creating an advantage. You can pass your buddy the invocation and make it harder to hit them.
+>
+> You could also put yourself directly between the attack and the intended target, such that the bad guy has to get through you to get to your buddy. Then you’re just defending as normal and taking the stress and consequences yourself.
+>
+> If you want to defend other people without directly interposing yourself between them and the attack, you’ll need a stunt.
 
 In terms of options for advantages, the sky’s the limit. Pretty much any situational modifier you can think of can be expressed as an advantage. If you’re stuck for an idea, here are some examples:
 
@@ -2792,61 +2751,55 @@ In terms of options for advantages, the sky’s the limit. Pretty much any situa
 - **Taking Cover**: You can use advantages to represent positions of cover and invoke them for your defense. This can be as general as Found Some Cover or as specific as Behind the Big Oak Bar.
 - **Altering the Environment**: You can use advantages to alter the environment to your benefit, creating barriers to movement by scattering Loose Junk everywhere, or setting things On Fire. That last one is a favorite in Fate.
 
-#### Other Actions In A Conflict
+### Other Actions In A Conflict
 
 As stated above, you may find yourself in a situation where you want to do something else while your friends are fighting. You might be disarming a death trap, searching for a piece of information, or checking for hidden assailants.
 
 In order to do this, GMs, set the player up with a modified form of challenge. One of the tasks is likely “defend yourself”—in any exchange where someone attacks you or tries to create an advantage on you, you must defend successfully in order to be able to take one of the other actions in the challenge. So long as no one has successfully attacked you or stuck an advantage on you, you can use your action to roll for one of the challenge goals.
 
-##### Free Actions
+> #### Free Actions
+>
+> Sometimes it just makes sense that your character is doing something else in conjunction with or as a step toward their action in an exchange. You quick-draw a weapon before you use it, you shout a warning before you kick in a door, or you quickly size up a room before you attack. These little bits of action are colorful description more than anything else, meant to add atmosphere to the scene.
+>
+> GMs, don’t fall into the trap of trying to police every little detail of a player’s description. Remember, if there’s no significant or interesting opposition, you shouldn’t require a roll—just let the players accomplish what they say they do. Reloading a gun or fishing for something in your backpack is part of performing the action. You shouldn’t require any mechanics to deal with that.
 
-Sometimes it just makes sense that your character is doing something else in conjunction with or as a step toward their action in an exchange. You quick-draw a weapon before you use it, you shout a warning before you kick in a door, or you quickly size up a room before you attack. These little bits of action are colorful description more than anything else, meant to add atmosphere to the scene.
+> Cynere is trying to get a door open so that she and her friends can escape into an ancient vault rather than fighting off endless hordes of temple guardians.
+>
+> Amanda says, “Well, let’s call it a Fair (+2) Crafts action to get the door open, and a Fair (+2) Physique roll to push it open enough to slide through, because it’s one of those heavy vault doors. The other action is defending yourself.”
+>
+> On that exchange, Cynere successfully defends against an attack, so she uses her action to pick the lock. She fails, and decides to succeed at a cost. Amanda figures the easiest thing is to hit her with a consequence because she’s in a fight. So she gets the door open, but not before one of the temple guardians gives her a Gouged Leg.
+>
+> On the next exchange, she fails to defend against an attack, so she doesn’t get to roll for the challenge.
+>
+> On the third exchange, she defends and succeeds with style at the Physique roll to get the door open. She signals to her friends and takes a Head Start boost, because it’s about to be a chase…
 
-GMs, don’t fall into the trap of trying to police every little detail of a player’s description. Remember, if there’s no significant or interesting opposition, you shouldn’t require a roll—just let the players accomplish what they say they do. Reloading a gun or fishing for something in your backpack is part of performing the action. You shouldn’t require any mechanics to deal with that.
-
-{example}
-
-Cynere is trying to get a door open so that she and her friends can escape into an ancient vault rather than fighting off endless hordes of temple guardians.
-
-Amanda says, “Well, let’s call it a Fair (+2) Crafts action to get the door open, and a Fair (+2) Physique roll to push it open enough to slide through, because it’s one of those heavy vault doors. The other action is defending yourself.”
-
-On that exchange, Cynere successfully defends against an attack, so she uses her action to pick the lock. She fails, and decides to succeed at a cost. Amanda figures the easiest thing is to hit her with a consequence because she’s in a fight. So she gets the door open, but not before one of the temple guardians gives her a Gouged Leg.
-
-On the next exchange, she fails to defend against an attack, so she doesn’t get to roll for the challenge.
-
-On the third exchange, she defends and succeeds with style at the Physique roll to get the door open. She signals to her friends and takes a Head Start boost, because it’s about to be a chase…
-
-#### Ending A Conflict
+### Ending A Conflict
 
 Under most circumstances, when all of the members of one side have either conceded the conflict or have been taken out, the conflict is over.
 
 GMs, once you know a conflict has definitively ended, you can pass out all the fate points earned from concession. Players, take the fate points for when your aspects were invoked against you, make a note of whatever consequences you suffered in the fight, and erase any checks in your stress boxes.
 
-{example}
+> After much struggle and insanity, the warehouse conflict is finally over. Amanda concedes the conflict on behalf of Og and his remaining thug, meaning that the PCs stay alive and can proceed to check out the smuggled goods they were interested in.
+>
+> Because it was a concession, Og gets away to fight another day. Because Lenny conceded to Amanda in an earlier example, Og also gets away with Landon’s sword as a personal trophy.
+>
+> Because Lenny conceded, he gets fate points. One for conceding, and another two for the mild and moderate consequences he took in the conflict. All the invocations used against him were free, so that’s all he gets. Three fate points.
+>
+> Ryan gets two fate points, because Amanda let one of the thugs invoke his Not the Face! twice against him during the conflict.
+>
+> Lily gets no fate points, because all the invocations against her were free, from advantages and boosts. Because she won, she doesn’t get awarded for the consequences she took.
 
-After much struggle and insanity, the warehouse conflict is finally over. Amanda concedes the conflict on behalf of Og and his remaining thug, meaning that the PCs stay alive and can proceed to check out the smuggled goods they were interested in.
-
-Because it was a concession, Og gets away to fight another day. Because Lenny conceded to Amanda in an earlier example, Og also gets away with Landon’s sword as a personal trophy.
-
-Because Lenny conceded, he gets fate points. One for conceding, and another two for the mild and moderate consequences he took in the conflict. All the invocations used against him were free, so that’s all he gets. Three fate points.
-
-Ryan gets two fate points, because Amanda let one of the thugs invoke his Not the Face! twice against him during the conflict.
-
-Lily gets no fate points, because all the invocations against her were free, from advantages and boosts. Because she won, she doesn’t get awarded for the consequences she took.
-
-#### Transitioning To A Contest Or Challenge
+### Transitioning To A Contest Or Challenge
 
 You may find yourself in a conflict scene where the participants are no longer interested in or willing to harm one another, because of some change in the circumstances. If that happens, and there’s still more to resolve, you can transition straight into a contest or challenge as you need. In that case, hold off on awarding the end-of-conflict fate points and whatnot until you’ve also resolved the contest or challenge.
 
-{example}
+> In an earlier example, Cynere managed to get a vault door open so the three PCs could escape an endless horde of temple guardians. They all decide to run and try to lose them.
+>
+> Now, the guardians and the PCs have mutually opposing goals but can’t harm one another, so now it’s a contest. Instead of running the next exchange, Amanda just starts setting up for the chase.
+>
+> Even though the PCs have some consequences and are due some fate points, they won’t get them until after we find out if they can get away, or if they get caught.
 
-In an earlier example, Cynere managed to get a vault door open so the three PCs could escape an endless horde of temple guardians. They all decide to run and try to lose them.
-
-Now, the guardians and the PCs have mutually opposing goals but can’t harm one another, so now it’s a contest. Instead of running the next exchange, Amanda just starts setting up for the chase.
-
-Even though the PCs have some consequences and are due some fate points, they won’t get them until after we find out if they can get away, or if they get caught.
-
-#### Teamwork
+### Teamwork
 
 Characters can help each other out on actions. There are two versions of helping in Fate—combining skills, for when you are all putting the same kind of effort into an action (like using Physique together to push over a crumbling wall), and stacking advantages, for when the group is setting a single person up to do well (like causing multiple distractions so one person can use Stealth to get into a fortress).
 
@@ -2854,21 +2807,19 @@ When you combine skills, figure out who has the highest skill level among the pa
 
 If you fail a roll to combine skills, all of the participants share in the potential costs—whatever complication affects one character affects all of them, or everyone has to take consequences. Alternatively, you can impose a cost that affects all the characters the same.
 
-{example}
-
-Continuing with our temple chase example, because it’s group vs. group, everyone decides it’d be easier to just combine skills.
-
-Of the three PCs, Cynere has the highest Athletics, at Great (+4). Landon has Good (+3) Athletics and Zird has Average (+1) Athletics, so they each contribute +1. Cynere rolls the contest on behalf of the PCs at Fantastic (+6).
-
-Amanda’s temple guardians only have Average (+1) Athletics, but there are five of them, so they roll Superb (+5) for the purposes of the contest.
+> Continuing with our temple chase example, because it’s group vs. group, everyone decides it’d be easier to just combine skills.
+>
+> Of the three PCs, Cynere has the highest Athletics, at Great (+4). Landon has Good (+3) Athletics and Zird has Average (+1) Athletics, so they each contribute +1. Cynere rolls the contest on behalf of the PCs at Fantastic (+6).
+>
+> Amanda’s temple guardians only have Average (+1) Athletics, but there are five of them, so they roll Superb (+5) for the purposes of the contest.
 
 When you stack advantages, each person takes a create an advantage action as usual, and gives whatever free invocations they get to a single character. Remember that multiple free invocations from the same aspect can stack.
 
-Zird and Cynere want to set Landon up for an extremely big hit on Tremendor, the much-feared giant of the Northern Wastes.
-
-Both Cynere and Zird roll to create an advantage on their turns, resulting in three free invocations on a Flashy Distraction they make from Zird’s magical fireworks (which succeeded to create the advantage) and Cynere’s glancing hits (which succeeded with style to add two more free invocations).
-
-They pass those to Landon, and on his turn, he uses them all for a gigantic +6 to his attack.
+> Zird and Cynere want to set Landon up for an extremely big hit on Tremendor, the much-feared giant of the Northern Wastes.
+>
+> Both Cynere and Zird roll to create an advantage on their turns, resulting in three free invocations on a Flashy Distraction they make from Zird’s magical fireworks (which succeeded to create the advantage) and Cynere’s glancing hits (which succeeded with style to add two more free invocations).
+>
+> They pass those to Landon, and on his turn, he uses them all for a gigantic +6 to his attack.
 
 # Running The Game
 
@@ -2886,13 +2837,13 @@ The players will sometimes help you with this, if they’re keen on getting to t
 
 We have more advice on starting and ending scenes in the next chapter, Scenes, Sessions, and Scenarios.
 
-#### Drama Is Better Than Realism
+> #### Drama Is Better Than Realism
+>
+> In Fate, don’t get too bogged down trying to maintain absolute consistency in the world or adhere to a draconian sense of realism. The game operates by the rules of drama and fiction; use that to your advantage. There should be very few moments in the game where the PCs are free of conflicts or problems to deal with, even if it’d be more “realistic” for them to get a long breather.
+>
+> When you’re trying to decide what happens, and the answer that makes the most sense is also kind of boring, go with something that’s more exciting than sensible! You can always find a way later on to justify something that doesn’t make immediate sense.
 
-In Fate, don’t get too bogged down trying to maintain absolute consistency in the world or adhere to a draconian sense of realism. The game operates by the rules of drama and fiction; use that to your advantage. There should be very few moments in the game where the PCs are free of conflicts or problems to deal with, even if it’d be more “realistic” for them to get a long breather.
-
-When you’re trying to decide what happens, and the answer that makes the most sense is also kind of boring, go with something that’s more exciting than sensible! You can always find a way later on to justify something that doesn’t make immediate sense.
-
-### Play The World And The Np Cs
+### Play The World And The NPCs
 
 As the gamemaster, it’s your job to decide how everyone and everything else in the world responds to what the PCs do, as well as what the PCs’ environment is like. If a PC botches a roll, you’re the one who gets to decide the consequences. When an NPC attempts to assassinate a PC’s friend, you’re the one who gets to decide how they go about it. When the PCs stroll up to a food vendor in a market, you get to decide what kind of day the vendor is having, what kind of personality he or she has, what’s on sale that day. You determine the weather when the PCs pull up to that dark cave.
 
@@ -2902,30 +2853,28 @@ The PCs’ aspects also help you decide how to make the world respond to them. A
 
 This facet of your job also means that when you have NPCs in a scene, you speak for and make decisions for them like the players do for their PCs—you decide when they’re taking an action that requires dice, and you follow the same rules the players do for determining how that turns out. Your NPCs are going to be a little different than the PCs, however, depending on how important they are to the story.
 
-#### Let The Players Help You
-
-You don’t have to shoulder the whole burden of making up world details yourself. Remember, the more collaborative you get, the more emotional investment the players are going to have in the result, because they shared in its creation.
-
-If a character has an aspect that connects them to someone or something in the world, make that player your resident “expert” on whatever the aspect refers to. So if someone has Scars from the Great War, poll that player for information whenever the Great War comes up in conversation. “You notice that this sergeant is wearing a veteran’s mark, which is a rare decoration from the War. What hardcore crap do you have to do to get one of those? Do you have one?” Some players will defer back to you, and that’s fine, but it’s important that you keep making the offer so as to foster a collaborative atmosphere.
-
-Also, one of the main uses of the create an advantage action is precisely to give players a way to add details to the world through their characters. Use that to your advantage when you draw a blank or simply want to delegate more control. One good way to do this during play is to answer the player’s question with a question, if they ask for information.
-
-{example}
-
-Ryan: “Is there a way to disrupt this magical construct without killing the subjects trapped in it?”
-
-Amanda: “Well, you know that it’s using their life force to power itself. If there were a way to do that, what do you think it’d look like? I mean, you’re the expert wizard, you tell me.”
-
-Ryan: “Hm... I think there’d be some kind of counter-incantation, like a failsafe mechanism in case things go horribly wrong.”
-
-Amanda: "Yeah, that sounds good. Roll Lore to see if that's there."
-
-Judge the Use of the Rules
-It’s also your job to make most of the moment-to-moment decisions about what’s legit and what’s not regarding the rules. Most often, you’re going to decide when something in the game deserves a roll, what type of action that is (overcome, attack, etc.) and how difficult that roll is. In conflicts, this can get a little more complicated, like determining if a situation aspect should force someone to make an overcome action, or deciding whether or not a player can justify a particular advantage they’re trying to create.
-
-You also judge the appropriateness of any invocations or compels that come up during play, like we talked about in the Aspects and Fate Points chapter, and make sure that everyone at the table is clear on what’s going on. With invocations, this is pretty easy—as long as the player can explain why the aspect is relevant, you’re good to go. With compels, it can get a little more complicated, because you need to articulate precisely what complication the player is agreeing to.
-
-We provide some more tips on judging the use of rules below.
+> #### Let The Players Help You
+>
+> You don’t have to shoulder the whole burden of making up world details yourself. Remember, the more collaborative you get, the more emotional investment the players are going to have in the result, because they shared in its creation.
+>
+> If a character has an aspect that connects them to someone or something in the world, make that player your resident “expert” on whatever the aspect refers to. So if someone has Scars from the Great War, poll that player for information whenever the Great War comes up in conversation. “You notice that this sergeant is wearing a veteran’s mark, which is a rare decoration from the War. What hardcore crap do you have to do to get one of those? Do you have one?” Some players will defer back to you, and that’s fine, but it’s important that you keep making the offer so as to foster a collaborative atmosphere.
+>
+> Also, one of the main uses of the create an advantage action is precisely to give players a way to add details to the world through their characters. Use that to your advantage when you draw a blank or simply want to delegate more control. One good way to do this during play is to answer the player’s question with a question, if they ask for information.
+>
+> Ryan: “Is there a way to disrupt this magical construct without killing the subjects trapped in it?”
+>
+> Amanda: “Well, you know that it’s using their life force to power itself. If there were a way to do that, what do you think it’d look like? I mean, you’re the expert wizard, you tell me.”
+>
+> Ryan: “Hm... I think there’d be some kind of counter-incantation, like a failsafe mechanism in case things go horribly wrong.”
+>
+> Amanda: "Yeah, that sounds good. Roll Lore to see if that's there."
+>
+> Judge the Use of the Rules
+> It’s also your job to make most of the moment-to-moment decisions about what’s legit and what’s not regarding the rules. Most often, you’re going to decide when something in the game deserves a roll, what type of action that is (overcome, attack, etc.) and how difficult that roll is. In conflicts, this can get a little more complicated, like determining if a situation aspect should force someone to make an overcome action, or deciding whether or not a player can justify a particular advantage they’re trying to create.
+>
+> You also judge the appropriateness of any invocations or compels that come up during play, like we talked about in the Aspects and Fate Points chapter, and make sure that everyone at the table is clear on what’s going on. With invocations, this is pretty easy—as long as the player can explain why the aspect is relevant, you’re good to go. With compels, it can get a little more complicated, because you need to articulate precisely what complication the player is agreeing to.
+>
+> We provide some more tips on judging the use of rules below.
 
 #### You Re The Chairman Not God
 
@@ -2995,39 +2944,37 @@ Most of the time, the very definition of an action makes this easy—any time yo
 
 But sometimes, you’re going to get into situations where it’s not immediately clear what type of action is the most appropriate. As a GM, don’t respond to these situations by forbidding the action. Instead, try to nail down a specific intent, in order to point more clearly to one (or more) of the basic game actions.
 
-#### The Silver Rule
+> #### The Silver Rule
+>
+> The corollary to the Golden Rule is as follows: Never let the rules get in the way of what makes narrative sense. If you or the players narrate something in the game and it makes sense to apply a certain rule outside of the normal circumstances where you would do so, go ahead and do it.
+>
+> The most common example of this has to do with consequences. The rules say that by default, a consequence is something a player chooses to take after getting hit by an attack in a conflict.
+>
+> But say you’re in a scene where a player decides that, as part of trying to intimidate his way past someone, his PC is going to punch through a glass-top table with a bare fist.
+>
+> Everyone likes the idea and thinks it’s cool, so no one’s interested in what happens if the PC fails the roll. However, everyone agrees that it also makes sense that the PC would injure his hand in the process (which is part of what makes it intimidating).
+>
+> It’s totally fine to assign a mild consequence of Glass in My Hand in that case, because it fits with the narration, even though there’s no conflict and nothing technically attacked the PC.
+>
+> As with the Golden Rule, make sure everyone’s on the same page before you do stuff like this.
 
-The corollary to the Golden Rule is as follows: Never let the rules get in the way of what makes narrative sense. If you or the players narrate something in the game and it makes sense to apply a certain rule outside of the normal circumstances where you would do so, go ahead and do it.
-
-The most common example of this has to do with consequences. The rules say that by default, a consequence is something a player chooses to take after getting hit by an attack in a conflict.
-
-But say you’re in a scene where a player decides that, as part of trying to intimidate his way past someone, his PC is going to punch through a glass-top table with a bare fist.
-
-Everyone likes the idea and thinks it’s cool, so no one’s interested in what happens if the PC fails the roll. However, everyone agrees that it also makes sense that the PC would injure his hand in the process (which is part of what makes it intimidating).
-
-It’s totally fine to assign a mild consequence of Glass in My Hand in that case, because it fits with the narration, even though there’s no conflict and nothing technically attacked the PC.
-
-As with the Golden Rule, make sure everyone’s on the same page before you do stuff like this.
-
-{example}
-
-Due to a failure on a previous roll, Cynere has accidentally set off a deadly magical trap while in pursuit of the Idol of Karlon-Kar, an ancient god of destruction. Amanda describes the hall as continually filled with fiery bolts of death, seemingly in a random configuration, with the pedestal holding the idol located on the far end of the hall from where Cynere’s currently standing.
-
-Lily says, “Well, there’s nothing for it. I’m going after the idol. I take off down the hall, keeping my eye out for fiery death bolts.”
-
-Amanda thinks, because she knows that dice are going to have to come out on this. If Cynere is moving through the hall, it looks most like an overcome action to do the movement. But with the fiery death bolts in the room, it seems more like Lily would need to defend herself. There are also two ways she could handle the trap—it’s technically just passive opposition against Lily to prevent her passing through the room safely, but because it can do damage, it seems more like an attack.
-
-So Amanda asks, “Lily, we need to go to dice, but what exactly do you want to accomplish here? Are you mainly trying to make sure you don’t get hit, or are you blasting through the hall to get to the idol?”
-
-Lily doesn’t hesitate. “Oh, the idol, for sure.”
-
-Amanda asks, “So you’re willing to take damage in the process?”
-
-Lily says, “Yeah. Throwing myself into danger as usual.”
-
-Amanda says, “Okay, so we can do it in one roll. Here’s how we’ll handle it. You roll Athletics against Fantastic (+6) opposition. If you make it, you’re through the trap and don’t take any harm. If you don’t make it, you’re stuck in the hallway and will have to try again to make it all the way through. We’re also going to treat that failure like a failed defense roll, so you’re going to take a hit as well. Because of all the fiery death and whatnot.”
-
-Lily winces, but nods and gathers up her dice.
+> Due to a failure on a previous roll, Cynere has accidentally set off a deadly magical trap while in pursuit of the Idol of Karlon-Kar, an ancient god of destruction. Amanda describes the hall as continually filled with fiery bolts of death, seemingly in a random configuration, with the pedestal holding the idol located on the far end of the hall from where Cynere’s currently standing.
+>
+> Lily says, “Well, there’s nothing for it. I’m going after the idol. I take off down the hall, keeping my eye out for fiery death bolts.”
+>
+> Amanda thinks, because she knows that dice are going to have to come out on this. If Cynere is moving through the hall, it looks most like an overcome action to do the movement. But with the fiery death bolts in the room, it seems more like Lily would need to defend herself. There are also two ways she could handle the trap—it’s technically just passive opposition against Lily to prevent her passing through the room safely, but because it can do damage, it seems more like an attack.
+>
+> So Amanda asks, “Lily, we need to go to dice, but what exactly do you want to accomplish here? Are you mainly trying to make sure you don’t get hit, or are you blasting through the hall to get to the idol?”
+>
+> Lily doesn’t hesitate. “Oh, the idol, for sure.”
+>
+> Amanda asks, “So you’re willing to take damage in the process?”
+>
+> Lily says, “Yeah. Throwing myself into danger as usual.”
+>
+> Amanda says, “Okay, so we can do it in one roll. Here’s how we’ll handle it. You roll Athletics against Fantastic (+6) opposition. If you make it, you’re through the trap and don’t take any harm. If you don’t make it, you’re stuck in the hallway and will have to try again to make it all the way through. We’re also going to treat that failure like a failed defense roll, so you’re going to take a hit as well. Because of all the fiery death and whatnot.”
+>
+> Lily winces, but nods and gathers up her dice.
 
 In this example, Amanda combined effects from overcome and defend to determine what happens to Cynere. This is totally okay, because it fits their intent and it makes sense given the situation they described. She might have decided to do both rolls separately, and that would have been fine too—she just wanted to get it all into one roll.
 
@@ -3043,11 +2990,11 @@ The worst, worst thing you can do is have a failed roll that means nothing happe
 
 If you can’t imagine an interesting outcome from both results, then don’t call for that roll. If failure is the uninteresting option, just give the PCs what they want and call for a roll later, when you can think of an interesting failure. If success is the boring option, then see if you can turn your idea for failure into a compel instead, using that moment as an opportunity to funnel fate points to the players.
 
-#### Situation Aspects Are Your Friend
-
-When you’re trying to figure out if there’s a good reason to ask the PCs to make an overcome roll, look at the aspects on your scene. If the existence of the aspect suggests some trouble or problem for the PC, call for an overcome roll. If not, and you can’t think of an interesting consequence for failure, don’t bother.
-
-For example, if a character is trying to sprint quickly across a room, and you have a situation aspect like Cluttered Floors, it makes sense to ask for a roll before they can move. If there is no such aspect, just let them make the move and get on to something more interesting.
+> #### Situation Aspects Are Your Friend
+>
+> When you’re trying to figure out if there’s a good reason to ask the PCs to make an overcome roll, look at the aspects on your scene. If the existence of the aspect suggests some trouble or problem for the PC, call for an overcome roll. If not, and you can’t think of an interesting consequence for failure, don’t bother.
+>
+> For example, if a character is trying to sprint quickly across a room, and you have a situation aspect like Cluttered Floors, it makes sense to ask for a roll before they can move. If there is no such aspect, just let them make the move and get on to something more interesting.
 
 #### Making Failure Awesome
 
@@ -3139,12 +3086,12 @@ We recognize two kinds of time in Fate: game time and story time.
 
 Game time is how we organize play in terms of the real players sitting at the table. Each unit of game time corresponds to a certain amount of real time. They are:
 
-Exchange: The amount of time it takes all participants in a conflict to take a turn, which includes doing an action and responding to any action taken against them. This usually doesn’t take longer than a few minutes.
-Scene: The amount of time it takes to resolve a conflict, deal with a single prominent situation, or accomplish a goal. Scenes vary in length, from a minute or two if it’s just a quick description and some dialogue, to a half hour or more in the case of a major setpiece battle against a main NPC.
-Session: The sum total of all the scenes you run through in a single sitting. A session ends when you and your friends pack it up for the night and go home. For most people, a session is about 2 to 4 hours, but there is no theoretical limit—if you have few obligations, then you’re only really limited by the need for food and sleep. A minor milestone usually occurs after a session.
-Scenario: One or more sessions of play, but usually no more than four. Most of the time, the sessions that make up a scenario will definitively resolve some kind of problem or dilemma presented by the GM, or wrap up a storyline (see Scenes, Sessions, and Scenarios for more on scenarios). A significant milestone usually occurs at the end of a scenario. You can look at this like an episode of a television show—the number of sessions it takes to tell one story.
-Arc: Several scenarios, usually between two and four. An arc typically culminates in an event that brings great change to the game world, building up from the resolution of the scenarios. You can look at an arc like a season of a television show, where individual episodes lead to a tumultuous climax. You’re not always guaranteed to have a recognizable arc, just like not all TV shows have a plotline that carries through the whole season—it’s possible to bounce from situation to situation without having a defined plot structure. Major milestones usually happen at the end of an arc.
-Campaign: The sum of all the time you’ve sat at a table playing this particular game of Fate—every session, every scenario, every arc. Technically, there’s no upper limit to how long a campaign can be. Some groups go for years; others get to the end of an arc and then stop. We presume that a typical group will go for a few arcs (or about ten scenarios) before having a grand finale and moving on to another game (hopefully another Fate game!). You might set up your campaign as a kind of “super-arc,” where there’s one massive conflict that everything else is a smaller part of, or it might simply consist of the smaller individual stories that you tell in your scenarios.
+- Exchange: The amount of time it takes all participants in a conflict to take a turn, which includes doing an action and responding to any action taken against them. This usually doesn’t take longer than a few minutes.
+- Scene: The amount of time it takes to resolve a conflict, deal with a single prominent situation, or accomplish a goal. Scenes vary in length, from a minute or two if it’s just a quick description and some dialogue, to a half hour or more in the case of a major setpiece battle against a main NPC.
+- Session: The sum total of all the scenes you run through in a single sitting. A session ends when you and your friends pack it up for the night and go home. For most people, a session is about 2 to 4 hours, but there is no theoretical limit—if you have few obligations, then you’re only really limited by the need for food and sleep. A minor milestone usually occurs after a session.
+- Scenario: One or more sessions of play, but usually no more than four. Most of the time, the sessions that make up a scenario will definitively resolve some kind of problem or dilemma presented by the GM, or wrap up a storyline (see Scenes, Sessions, and Scenarios for more on scenarios). A significant milestone usually occurs at the end of a scenario. You can look at this like an episode of a television show—the number of sessions it takes to tell one story.
+- Arc: Several scenarios, usually between two and four. An arc typically culminates in an event that brings great change to the game world, building up from the resolution of the scenarios. You can look at an arc like a season of a television show, where individual episodes lead to a tumultuous climax. You’re not always guaranteed to have a recognizable arc, just like not all TV shows have a plotline that carries through the whole season—it’s possible to bounce from situation to situation without having a defined plot structure. Major milestones usually happen at the end of an arc.
+- Campaign: The sum of all the time you’ve sat at a table playing this particular game of Fate—every session, every scenario, every arc. Technically, there’s no upper limit to how long a campaign can be. Some groups go for years; others get to the end of an arc and then stop. We presume that a typical group will go for a few arcs (or about ten scenarios) before having a grand finale and moving on to another game (hopefully another Fate game!). You might set up your campaign as a kind of “super-arc,” where there’s one massive conflict that everything else is a smaller part of, or it might simply consist of the smaller individual stories that you tell in your scenarios.
 
 #### Story Time
 
@@ -3174,19 +3121,19 @@ Likewise, reward extreme success by reducing the amount of time it takes to do s
 
 If time is a factor, you should also be able to use invocations and compels to manipulate time, to make things easier or more complicated respectively. (“Hey, I’m a Garage Bunny, so fixing this car shouldn’t take me that long, right?” “Oh, you know what? Your sheet says I Can’t Get Enough of the Fun and Games… doesn’t it make sense that if you’re looking for a guy in a casino, it’d be easy to get caught up in distractions? All those machines and stuff…”)
 
-##### How Much Time Is A Shift Worth
-
-Just like with any other roll, the number of shifts you get (or the amount you fail by) should serve as a barometer for just how severe the time jump is. So, how do you decide just how much to award or penalize?
-
-It really depends on how much time you decide the initial action is going to take. We usually express time in two parts: a specific or abstract measure of quantity, then a unit of time, such as “a few days,” “twenty seconds,” “three weeks,” and so on.
-
-We recommend you measure in the abstract and express all the game actions as half, one, a few, or several of a given unit of time. So if you imagine something taking six hours, think of it as “several hours.” If you imagine something taking twenty minutes, you can either call that “several minutes” or round up to “half an hour”, whichever feels closest.
-
-This gives you a starting point for moving up and down. Each shift is worth one jump from wherever your starting point is. So if your starting point is “several hours,” and it benefits the PCs to speed things up, then it works like this: one shift jumps the time down to “a few hours,” two shifts down to “one hour,” and three shifts down to “a half hour.”
-
-Going past either end of the spectrum moves you down to several increments of the next unit of time or up to half the next unit of time, depending on which direction you’re going. So four shifts on the aforementioned roll might jump you from “several hours” to “several minutes.” Failing by one, conversely, might jump you from “several hours” to “half a day.”
-
-This allows you to quickly deal with time jumps no matter where you’re starting from, whether the actions you have in mind are going to take moments or generations
+> ##### How Much Time Is A Shift Worth
+>
+> Just like with any other roll, the number of shifts you get (or the amount you fail by) should serve as a barometer for just how severe the time jump is. So, how do you decide just how much to award or penalize?
+>
+> It really depends on how much time you decide the initial action is going to take. We usually express time in two parts: a specific or abstract measure of quantity, then a unit of time, such as “a few days,” “twenty seconds,” “three weeks,” and so on.
+>
+> We recommend you measure in the abstract and express all the game actions as half, one, a few, or several of a given unit of time. So if you imagine something taking six hours, think of it as “several hours.” If you imagine something taking twenty minutes, you can either call that “several minutes” or round up to “half an hour”, whichever feels closest.
+>
+> This gives you a starting point for moving up and down. Each shift is worth one jump from wherever your starting point is. So if your starting point is “several hours,” and it benefits the PCs to speed things up, then it works like this: one shift jumps the time down to “a few hours,” two shifts down to “one hour,” and three shifts down to “a half hour.”
+>
+> Going past either end of the spectrum moves you down to several increments of the next unit of time or up to half the next unit of time, depending on which direction you’re going. So four shifts on the aforementioned roll might jump you from “several hours” to “several minutes.” Failing by one, conversely, might jump you from “several hours” to “half a day.”
+>
+> This allows you to quickly deal with time jumps no matter where you’re starting from, whether the actions you have in mind are going to take moments or generations
 
 #### Story Time And The Scope Of An Action
 
@@ -3200,45 +3147,41 @@ This is a great way to make long breaks in story time more interactive, rather t
 
 Remember that if you do this with a conflict or a contest, that you scale each exchange appropriately—if a conflict is taking place over the course of a year, then each exchange might be a month or two, and everyone should describe their actions and the results of their actions in that context.
 
-During a major milestone in the campaign, Landon shifted his high concept to Former Ivory Shroud Disciple, as a result of discovering a plot from within their ranks to take over a small kingdom as their own.
-
-{example}
-
-Amanda wants to jump the campaign six months forward, and she suggests that if Landon goes on the run, they’re going to try to hunt him down. She sees an opportunity to create material for the next part of the game, so she says, “I think we should find out if Landon starts the next scenario in their clutches or not.”
-
-They decide to do it as a conflict, with each exchange representing one confrontation between Landon and the Shroud’s trackers. It goes badly for him and he concedes, taking a moderate consequence into the next session. Amanda suggests that they want to bring Landon back into the fold rather than hurt or kill him, so Lenny decides to take I Don’t Know What’s Right Anymore, reflecting the seeds of doubt they’re planting in his mind.
-
-When we see Landon again, he’ll be in the clutches of the Ivory Shroud, struggling with his loyalties.
+> During a major milestone in the campaign, Landon shifted his high concept to Former Ivory Shroud Disciple, as a result of discovering a plot from within their ranks to take over a small kingdom as their own.
+>
+> Amanda wants to jump the campaign six months forward, and she suggests that if Landon goes on the run, they’re going to try to hunt him down. She sees an opportunity to create material for the next part of the game, so she says, “I think we should find out if Landon starts the next scenario in their clutches or not.”
+>
+> They decide to do it as a conflict, with each exchange representing one confrontation between Landon and the Shroud’s trackers. It goes badly for him and he concedes, taking a moderate consequence into the next session. Amanda suggests that they want to bring Landon back into the fold rather than hurt or kill him, so Lenny decides to take I Don’t Know What’s Right Anymore, reflecting the seeds of doubt they’re planting in his mind.
+>
+> When we see Landon again, he’ll be in the clutches of the Ivory Shroud, struggling with his loyalties.
 
 #### Zoom In Zoom Out
 
 There’s no rule that says you’re required to keep your rolls consistent in terms of story time. One cool trick you can do is use the result of one roll to segue into another roll that takes place over a much smaller period in time, or vice versa. This is a great way to open a new scene, contest, or conflict, or just introduce a change of pace.
 
-{example}
-
-During the aforementioned six-month break, Cynere has been researching the demon compatriots of the horrific Arc’yeth, who soul-burned her in the last arc of the campaign. She decides to go it alone, even though Zird offered to help, and ends up rolling her newly acquired Average (+1) Lore to succeed at an overcome roll.
-
-She ends up doing really well, and Amanda describes Cynere getting lost in research for a few months. Then Amanda says, “Awesome. You return home with the dirt of the trail on you, weary to the bone, hands stained with ink, but your search has uncovered the hiding place of Arc’yeth’s right hand in the Circle of Thirteen, a minor demon named Tan’shael (all these apostrophes!). You fall into bed, ready to start the search in the morning... and are wakened in the middle of the night by a crashing sound coming from your study.”
-
-Lily says, “Well, hell, I get up and rush in there, grabbing my sword as I go!”
-
-Amanda says, “Great—you notice that your research notes are gone, and that the window is broken open. You hear footsteps rushing away into the night.”
-
-Lily says, “Oh, hell no. I’m going after him. Her, it, them, whatever.”
-
-Amanda says, “Great! That’s using Athletics, and let’s do a contest and see if you can catch the culprit.” (Notice, GMs, that this is now happening in immediately consecutive time—we went right from rolling for months-long stuff, to rolling for the seconds it takes for Cynere to give chase.)
-
-The contest goes badly for Cynere, and the person gets away. Lily immediately says, “Screw that. Someone in town has to know something, or he left some clue behind, or something. I’m going to roll Investigate.”
-
-Lily rolls and succeeds with style, and Amanda says, “A week later, you’re in the village of Sunloft, outside the Shoeless Horse tavern, where she (it’s a she, by the way) is rumored to be staying. Oh, and you got some shifts, so I’ll just go ahead and tell you her name is Corathia—she dropped it to someone in your hometown while trying to find your place. That’s worth an aspect, I Know Your Name, which you might use to undermine her confidence.”
-
-(GMs, see what happened? One roll jumped a week, but Amanda and Lily are playing it at the table in continuous time.)
-
-Lily says, “I bust the door down and scream her name.”
-
-Amanda says, “Everyone backs away from a lithe woman at the bar, who sneers at them and goes for her sword, bounding off the stool and aiming a whistling cut at your face.”
-
-“It’s on!” Lily says, and goes for dice to defend. (Now it’s a conflict and happening in super zoomed-in time.)
+> During the aforementioned six-month break, Cynere has been researching the demon compatriots of the horrific Arc’yeth, who soul-burned her in the last arc of the campaign. She decides to go it alone, even though Zird offered to help, and ends up rolling her newly acquired Average (+1) Lore to succeed at an overcome roll.
+>
+> She ends up doing really well, and Amanda describes Cynere getting lost in research for a few months. Then Amanda says, “Awesome. You return home with the dirt of the trail on you, weary to the bone, hands stained with ink, but your search has uncovered the hiding place of Arc’yeth’s right hand in the Circle of Thirteen, a minor demon named Tan’shael (all these apostrophes!). You fall into bed, ready to start the search in the morning... and are wakened in the middle of the night by a crashing sound coming from your study.”
+>
+> Lily says, “Well, hell, I get up and rush in there, grabbing my sword as I go!”
+>
+> Amanda says, “Great—you notice that your research notes are gone, and that the window is broken open. You hear footsteps rushing away into the night.”
+>
+> Lily says, “Oh, hell no. I’m going after him. Her, it, them, whatever.”
+>
+> Amanda says, “Great! That’s using Athletics, and let’s do a contest and see if you can catch the culprit.” (Notice, GMs, that this is now happening in immediately consecutive time—we went right from rolling for months-long stuff, to rolling for the seconds it takes for Cynere to give chase.)
+>
+> The contest goes badly for Cynere, and the person gets away. Lily immediately says, “Screw that. Someone in town has to know something, or he left some clue behind, or something. I’m going to roll Investigate.”
+>
+> Lily rolls and succeeds with style, and Amanda says, “A week later, you’re in the village of Sunloft, outside the Shoeless Horse tavern, where she (it’s a she, by the way) is rumored to be staying. Oh, and you got some shifts, so I’ll just go ahead and tell you her name is Corathia—she dropped it to someone in your hometown while trying to find your place. That’s worth an aspect, I Know Your Name, which you might use to undermine her confidence.”
+>
+> (GMs, see what happened? One roll jumped a week, but Amanda and Lily are playing it at the table in continuous time.)
+>
+> Lily says, “I bust the door down and scream her name.”
+>
+> Amanda says, “Everyone backs away from a lithe woman at the bar, who sneers at them and goes for her sword, bounding off the stool and aiming a whistling cut at your face.”
+>
+> “It’s on!” Lily says, and goes for dice to defend. (Now it’s a conflict and happening in super zoomed-in time.)
 
 #### Judging The Use Of Skills And Stunts
 
@@ -3262,27 +3205,25 @@ From the player’s point of view, there’s almost no way to know what you’ve
 
 If you’re really comfortable with improvising, this means that you can come to the table with very little prepared beforehand, and let the players’ reactions and questions build everything for you. You may need to ask some prompting questions first, to narrow down the scope of what information the player’s looking for, but after that, the sky’s the limit.
 
-{example}
-
-Zird the Arcane is scouting an ancient ritual site, looking for a good place to work on banishing the curse that’s been placed on the nearby village of Belwitch, the mayor of which is paying him good money for the effort.
-
-Ryan says, “I’m going to spend some time in a local library, researching some history about the site. I’d like to use Lore to create an advantage.”
-
-Amanda thinks for a moment. She didn’t really have anything special planned for the site, because all her energy was focused on detailing the nature of the curse and what would be required to get rid of it, because it’s being maintained by a force more powerful than the PCs currently realize.
-
-“What kind of info are you looking for?” Amanda asks. “Just book report-type details, or...?”
-
-Ryan says, “Well, what I really want to know is if anyone’s used the site for dark or nefarious magic... if this village has a local boogeyman or spook story centered around that site.”
-
-Amanda says, “Oh, cool. Yeah, roll your Lore, opposition is Fair (+2).” Unexpectedly, Ryan rolls a –4 and ends up with a Mediocre (+0), meaning that he failed. Ryan decides not to spend any fate points on the roll.
-
-Wanting to turn the failure into something awesome, she says, “Well, you don’t get an aspect for it, but what you find out is actually the opposite of what you’re looking for—the site has an impeccable reputation as a place of blessed power, and the records you find all talk about healing and harvest rituals that brought great plenty and good fortune to the area.”
-
-Ryan says, “If the site is so powerful, how did the village become cursed?”
-
-Amanda shrugs. “Guess you’ll have to investigate further if you want to find out.”
-
-In her notes, she jots something briefly about the fact that the site is now magically defiled and that the town’s priest is keeping that a secret, changing Ryan’s suggestion a little bit and adding some material for him if he decides to ask around.
+> Zird the Arcane is scouting an ancient ritual site, looking for a good place to work on banishing the curse that’s been placed on the nearby village of Belwitch, the mayor of which is paying him good money for the effort.
+>
+> Ryan says, “I’m going to spend some time in a local library, researching some history about the site. I’d like to use Lore to create an advantage.”
+>
+> Amanda thinks for a moment. She didn’t really have anything special planned for the site, because all her energy was focused on detailing the nature of the curse and what would be required to get rid of it, because it’s being maintained by a force more powerful than the PCs currently realize.
+>
+> “What kind of info are you looking for?” Amanda asks. “Just book report-type details, or...?”
+>
+> Ryan says, “Well, what I really want to know is if anyone’s used the site for dark or nefarious magic... if this village has a local boogeyman or spook story centered around that site.”
+>
+> Amanda says, “Oh, cool. Yeah, roll your Lore, opposition is Fair (+2).” Unexpectedly, Ryan rolls a –4 and ends up with a Mediocre (+0), meaning that he failed. Ryan decides not to spend any fate points on the roll.
+>
+> Wanting to turn the failure into something awesome, she says, “Well, you don’t get an aspect for it, but what you find out is actually the opposite of what you’re looking for—the site has an impeccable reputation as a place of blessed power, and the records you find all talk about healing and harvest rituals that brought great plenty and good fortune to the area.”
+>
+> Ryan says, “If the site is so powerful, how did the village become cursed?”
+>
+> Amanda shrugs. “Guess you’ll have to investigate further if you want to find out.”
+>
+> In her notes, she jots something briefly about the fact that the site is now magically defiled and that the town’s priest is keeping that a secret, changing Ryan’s suggestion a little bit and adding some material for him if he decides to ask around.
 
 #### Skills And Specific Measurements
 
@@ -3312,51 +3253,47 @@ Invariably, if you play Fate long enough, someone’s going to try to affect mul
 
 The easiest way to do this is to create an advantage on the scene, rather than on a specific target. A Gas-Filled Room has the potential to affect everyone in it, and it’s not too much of a stretch to suggest that the Inspirational Mood in a room could be contagious. In this context, the aspect presents an excuse to call for a skill roll (using the overcome action) from anyone in the scene who attempts to get past it. Generally speaking, it won’t cause damage, but it will make things more difficult for those affected.
 
-{example}
-
-Landon stalks the battlefield in search of a worthy opponent.
-
-“Who’s the biggest, toughest-looking guy around here?” Lenny asks Amanda.
-
-“That’s easy,” Amanda answers. “You immediately spot a towering 7-foot-tall warrior, clearly not entirely human, armed with an unnecessarily flanged axe and flanked by three underlings. They call him Gorlok the Demon-Blooded.”
-
-“Yeah, that sounds good,” Lenny says. “I’m gonna kill him.”
-
-“I like it. His three henchmen move to intercept. They’re not exactly 7-foot-tall half-demons, but they seem to know what they’re doing.”
-
-Lenny sighs. “I don’t have time for these mooks. I want to make it clear to them that they’re not up to this. You know, wave my sword around menacingly and look like even more of a bad-ass. I want these guys to know that this fight is between me and Gorlok.”
-
-“Sounds like you want to put an aspect on the zone. Give me a Provoke roll.”
-
-Lenny rolls a –3, and adds his Fair (+2) Provoke for a total of Poor (–1). He needed a Mediocre (+0), so he’s failed. But Amanda likes the idea of Landon and Gorlok facing off here without anyone else getting in the way, so she decides to give it to him, but at a cost.
-
-“All right,” she says, “what’s it going to be?”
-
-Lenny doesn’t hesitate. He writes down a mild mental consequence: This Guy is Bigger Than I Thought....
-
-“Cool. They look at you, then back to Gorlok. He waves a hand dismissively. ‘Go, find another to kill,’ he growls. ‘This one’s mine.’”
+> Landon stalks the battlefield in search of a worthy opponent.
+>
+> “Who’s the biggest, toughest-looking guy around here?” Lenny asks Amanda.
+>
+> “That’s easy,” Amanda answers. “You immediately spot a towering 7-foot-tall warrior, clearly not entirely human, armed with an unnecessarily flanged axe and flanked by three underlings. They call him Gorlok the Demon-Blooded.”
+>
+> “Yeah, that sounds good,” Lenny says. “I’m gonna kill him.”
+>
+> “I like it. His three henchmen move to intercept. They’re not exactly 7-foot-tall half-demons, but they seem to know what they’re doing.”
+>
+> Lenny sighs. “I don’t have time for these mooks. I want to make it clear to them that they’re not up to this. You know, wave my sword around menacingly and look like even more of a bad-ass. I want these guys to know that this fight is between me and Gorlok.”
+>
+> “Sounds like you want to put an aspect on the zone. Give me a Provoke roll.”
+>
+> Lenny rolls a –3, and adds his Fair (+2) Provoke for a total of Poor (–1). He needed a Mediocre (+0), so he’s failed. But Amanda likes the idea of Landon and Gorlok facing off here without anyone else getting in the way, so she decides to give it to him, but at a cost.
+>
+> “All right,” she says, “what’s it going to be?”
+>
+> Lenny doesn’t hesitate. He writes down a mild mental consequence: This Guy is Bigger Than I Thought....
+>
+> “Cool. They look at you, then back to Gorlok. He waves a hand dismissively. ‘Go, find another to kill,’ he growls. ‘This one’s mine.’”
 
 Things get more complicated when you want to filter specific targets, rather than just affect a whole zone or scene. When that happens, divide your resulting total up against every target, who all get to defend as per normal. Anyone who fails to defend either takes stress or gains an aspect, depending on what you were trying to do. (Note: If you create an advantage to put an aspect on multiple targets, you do get a free invocation for each one.)
 
-{example}
-
-Zird the Arcane is unleashing fiery death upon his foes in a magical fashion, as is his wont. He has three such foes, charging at him across a battlefield. Zird figures it’s probably Landon’s fault he’s found himself in this circumstance.
-
-Zird’s magic uses his Lore skill, and he does extremely well, getting an Epic (+7) result.
-
-He knows he wants to get one of them pretty good, so he opts to divide his spread up as Superb (+5), Average (+1), and Average (+1). That adds up to +7, which was his roll, so he’s all good. Now Amanda has to defend for all three of them.
-
-The first defender rolls a Mediocre (+0) and takes 5 stress. This is a nameless NPC (see below), so Amanda decides he’s out of the fight, and describes him screaming and batting at flames.
-
-The second defender gets a Fair (+2), beating the attack roll. He charges forward undaunted.
-
-The third defender gets a Mediocre (+0) as well, taking a single point of stress. Amanda checks his lone stress box and describes him sacrificing his shield to deflect the blast.
+> Zird the Arcane is unleashing fiery death upon his foes in a magical fashion, as is his wont. He has three such foes, charging at him across a battlefield. Zird figures it’s probably Landon’s fault he’s found himself in this circumstance.
+>
+> Zird’s magic uses his Lore skill, and he does extremely well, getting an Epic (+7) result.
+>
+> He knows he wants to get one of them pretty good, so he opts to divide his spread up as Superb (+5), Average (+1), and Average (+1). That adds up to +7, which was his roll, so he’s all good. Now Amanda has to defend for all three of them.
+>
+> The first defender rolls a Mediocre (+0) and takes 5 stress. This is a nameless NPC (see below), so Amanda decides he’s out of the fight, and describes him screaming and batting at flames.
+>
+> The second defender gets a Fair (+2), beating the attack roll. He charges forward undaunted.
+>
+> The third defender gets a Mediocre (+0) as well, taking a single point of stress. Amanda checks his lone stress box and describes him sacrificing his shield to deflect the blast.
 
 Attacking a whole zone or everyone in a scene is something you’re going to have to judge by circumstance, like any other stretch use of a skill. Depending on the circumstances of your setting, this might be a totally normal thing to do (for example, because everyone uses grenades and explosives), it might be impossible, or it might require a stunt. As long as you can justify it, you don’t need to apply any special rules—you roll for the attack, and everyone in the zone defends as normal. Depending on the circumstances, you may even have to defend against your own roll, if you’re in the same zone as the attack!
 
-##### Compels And Multiple Targets
-
-Just a quick note: players who want to compel their way out of a conflict don’t get a free lunch on affecting multiple targets, whether it’s one aspect or several that justify the compel. A player must spend one fate point for each target they wish to compel. One fate point compels one individual, period.
+> ##### Compels And Multiple Targets
+>
+> Just a quick note: players who want to compel their way out of a conflict don’t get a free lunch on affecting multiple targets, whether it’s one aspect or several that justify the compel. A player must spend one fate point for each target they wish to compel. One fate point compels one individual, period.
 
 ##### Environmental Hazards
 
@@ -3371,19 +3308,17 @@ Is it more of a distraction or harassment than a direct threat? Let it create as
 Does it have sensors it can use to discover a PC’s aspects? Give it a skill for that.
 And in return, let the PCs use their skills against the threat just like they would an opponent. An automated security system might be vulnerable to “attacks” from a PC’s Burglary skill, or they might escape a trap by winning an Athletics contest. If it makes sense for the hazard in question to take a good deal of effort to surpass, give it a stress track and let it take a mild consequence or two. In other words, cleave to whatever makes narrative sense—if a fire is too big for a PC to put out, the scene should focus on avoidance or escape, and work like a challenge.
 
-{example}
-
-Cynere, Landon, and Zird are exploring the Caverns of Kazak-Thorn, in pursuit of one of the demonic opponents that Cynere’s been so interested in lately. Of course, the demon princess in question doesn’t appreciate being hunted by pesky adventurers and has summoned the powers of darkness to stand between our heroes and herself. So it goes.
-
-They come to the bottom floor of the cave system, only to find it full of wisps of inky darkness, writhing around snakelike and cutting off the light where they whip about. Zird rolls Lore, and Amanda tells him that they are magical hunger spirits—not individual entities so much as pure expressions of hunger, ready to devour anything they touch. He throws a stone into the corridor and watches the tendrils turn it to ash.
-
-“I think I speak for us all when I say ‘Yikes,’” Ryan says.
-
-He asks about banishing the monsters. Amanda shakes her head a touch. “You’re in Asahandra’s place of power, and the whole place is just flooded with those things—it’d take days to dismantle an enchantment this strong. You might, however, be able to use your magic to keep them at bay as you look for Asahandra herself.”
-
-Lily says, “I’m willing to go for it. Let’s do this.”
-
-Amanda decides that even though she could put them into a straight-up conflict, it’d be easier and quicker to deal with it as a challenge. She tells them that to get past the shadow summoning, each of them needs Will to resist the shadows’ potent magical aura and Stealth to move past. Zird can roll Lore to try and thin the herd with magic. In addition, she says that the spirits can provide active opposition against each attempt, and that failing the Will roll will be treated like an attack. The three grit their teeth and start to make their way through the cave....
+> Cynere, Landon, and Zird are exploring the Caverns of Kazak-Thorn, in pursuit of one of the demonic opponents that Cynere’s been so interested in lately. Of course, the demon princess in question doesn’t appreciate being hunted by pesky adventurers and has summoned the powers of darkness to stand between our heroes and herself. So it goes.
+>
+> They come to the bottom floor of the cave system, only to find it full of wisps of inky darkness, writhing around snakelike and cutting off the light where they whip about. Zird rolls Lore, and Amanda tells him that they are magical hunger spirits—not individual entities so much as pure expressions of hunger, ready to devour anything they touch. He throws a stone into the corridor and watches the tendrils turn it to ash.
+>
+> “I think I speak for us all when I say ‘Yikes,’” Ryan says.
+>
+> He asks about banishing the monsters. Amanda shakes her head a touch. “You’re in Asahandra’s place of power, and the whole place is just flooded with those things—it’d take days to dismantle an enchantment this strong. You might, however, be able to use your magic to keep them at bay as you look for Asahandra herself.”
+>
+> Lily says, “I’m willing to go for it. Let’s do this.”
+>
+> Amanda decides that even though she could put them into a straight-up conflict, it’d be easier and quicker to deal with it as a challenge. She tells them that to get past the shadow summoning, each of them needs Will to resist the shadows’ potent magical aura and Stealth to move past. Zird can roll Lore to try and thin the herd with magic. In addition, she says that the spirits can provide active opposition against each attempt, and that failing the Will roll will be treated like an attack. The three grit their teeth and start to make their way through the cave....
 
 #### Dealing With Aspects
 
@@ -3443,7 +3378,7 @@ First of all, keep in mind that you’re never obligated to give any NPC a full 
 
 NPCs come in three different flavors: nameless NPCs, supporting NPCs, and main NPCs.
 
-#### Nameless Np Cs
+#### Nameless NPCs
 
 The majority of the NPCs in your campaign world are nameless—people who are so insignificant to the story that the PCs interactions with them don’t even require them to learn a name. The random shopkeeper they pass on the street, the archivist at the library, the third patron from the left at the bar, the guards at the gate. Their role in the story is temporary and fleeting—the PCs will probably encounter them once and never see them again. In fact, most of the time, you’ll create them simply out of reflex when you describe an environment. “The plaza is beautiful at midday, and full of shoppers milling about. There’s a town crier with an extremely shrill, high-pitched voice barking out the local news.”
 
@@ -3489,21 +3424,17 @@ When a mob takes a hit, shifts in excess of what’s needed to take out one NPC 
 
 When a mob takes enough stress to reduce it to a single NPC, try to have that orphaned NPC join up with another mob in the scene, if it makes sense. (If it doesn’t, just have them flee. Nameless NPCs are good at that.)
 
-{example}
-
-Landon and Cynere are set upon by a half-dozen ill-informed street-gang toughs just for walking down the wrong alleyway.
-
-These thugs are nameless NPCs with Notice and Fight skills of Average (+1).
-
-{example}
-
-Normally Cynere’s Good (+3) Notice would allow her to act first, but Amanda reasons that the thugs’ ability to surround the PCs gives them the drop. In a big group of six, their Average (+1) Notice is increased by +5 to a Fantastic (+6).
-
-As they make their assault, Amanda splits them into two mobs of three: one for Landon and one for Cynere. Both attack with Good (+3) ratings (Average Fight skill with +2 for the helpers), but neither mob hits.
-
-Cynere goes next. Lily says, “In a flash, Cynere’s sword is in hand and slicing through these punks!” She gets a Great (+4) result with her Fight. Amanda’s first thug mob defends with a Good (+3) (+0 on the dice, Average skill, with +2 for the helpers), so Cynere deals one shift to the mob—enough to take one of them out. There are still two in the mob, though, so they only get +1 for the helper when they attack next.
-
-On Lenny’s turn, Landon deals two shifts to the mob he’s facing, enough to take out two thugs and reducing it from a mob of three to a single nameless NPC.
+> Landon and Cynere are set upon by a half-dozen ill-informed street-gang toughs just for walking down the wrong alleyway.
+>
+> These thugs are nameless NPCs with Notice and Fight skills of Average (+1).
+>
+> Normally Cynere’s Good (+3) Notice would allow her to act first, but Amanda reasons that the thugs’ ability to surround the PCs gives them the drop. In a big group of six, their Average (+1) Notice is increased by +5 to a Fantastic (+6).
+>
+> As they make their assault, Amanda splits them into two mobs of three: one for Landon and one for Cynere. Both attack with Good (+3) ratings (Average Fight skill with +2 for the helpers), but neither mob hits.
+>
+> Cynere goes next. Lily says, “In a flash, Cynere’s sword is in hand and slicing through these punks!” She gets a Great (+4) result with her Fight. Amanda’s first thug mob defends with a Good (+3) (+0 on the dice, Average skill, with +2 for the helpers), so Cynere deals one shift to the mob—enough to take one of them out. There are still two in the mob, though, so they only get +1 for the helper when they attack next.
+>
+> On Lenny’s turn, Landon deals two shifts to the mob he’s facing, enough to take out two thugs and reducing it from a mob of three to a single nameless NPC.
 
 **Nameless NPCs as Obstacles:**
 
@@ -3511,11 +3442,9 @@ An even easier way to handle nameless NPCs is simply to treat them as obstacles:
 
 If the situation is more complicated than that, make it a challenge instead. This trick is useful when you want a group of nameless NPCs more as a feature of the scene than as individuals.
 
-{example}
-
-Zird wants to convince a group of mages that continuing their research into the Dark Void will doom them all, and possibly the world. Amanda doesn’t want to deal with him needing to convince each mage individually, so she makes a challenge out of them.
-
-The steps of the challenge are: establish your bona fides (Lore), turn them against each other (Deceive), and cow them into submission by preaching doom and gloom (Provoke). She chooses a passive opposition of Great (+4) for the challenge.
+> Zird wants to convince a group of mages that continuing their research into the Dark Void will doom them all, and possibly the world. Amanda doesn’t want to deal with him needing to convince each mage individually, so she makes a challenge out of them.
+>
+> The steps of the challenge are: establish your bona fides (Lore), turn them against each other (Deceive), and cow them into submission by preaching doom and gloom (Provoke). She chooses a passive opposition of Great (+4) for the challenge.
 
 **NPC First, Name Later**
 
@@ -3527,7 +3456,7 @@ Tavern-Keeper (Average)
 Aspects: I Don’t Want No Trouble in My Place
 Skills: Average (+1) Contacts
 
-￼￼Trained Thug (Fair)
+Trained Thug (Fair)
 Aspects: The Ways of the Streets, Violent Criminal
 Skills: Fair (+2) Fight, Average (+1) Athletics and Physique
 
@@ -3535,9 +3464,7 @@ Collegia Arcana Court Mage (Good)
 Aspects: Haughty Demeanor, Devoted to the Arcane Arts
 Skills: Good (+3) Lore, Fair (+2) Deceive, Average (+1) Will and Empathy
 
-￼
-
-#### Supporting Np Cs
+#### Supporting NPCs
 
 Supporting NPCs have proper names and are a little more detailed than nameless NPCs, playing a supporting role in your scenarios (hence the name). They often display some kind of strong distinguishing trait that sets them apart from the crowd, because of their relationship to a PC or NPC, a particular competence or unique ability, or simply the fact that they tend to appear in the game a great deal. Many action-adventure stories feature a “lieutenant” character who is the right-hand man of the lead villain; that’s a supporting NPC in game terms. The faces that you assign to the locations you make during game creation are supporting NPCs, as are any characters who are named in one of the PCs’ aspects.
 
@@ -3552,30 +3479,29 @@ Skills for a supporting NPC should follow a column distribution. Because you’r
 **Concessions**: Supporting NPCs should not fight to the bitter end, given the option. Instead, have them concede conflicts often, especially early in a story, and especially if the concession is something like “They get away.” Conceding like this serves a few purposes. For one, it foreshadows a future, more significant encounter with the NPC. Because conceding comes with a reward of one or more fate points, it also makes them more of a threat the next time they show up. What’s more, it’s virtually guaranteed to pay off for the players in a satisfying way the next time the NPC makes an appearance. “So, Landon, we meet again! But this time it shall not go so easily for you.”
 Finally, it implicitly demonstrates to the players that, when things are desperate, conceding a conflict is a viable course of action. A PC concession here and there can raise the stakes and introduce new complications organically, both of which make for a more dramatic, engaging story.
 
-{example}
+> Old Finn, Landon’s mentor
+> Aspects: Retired Vinfeld Militia Captain, Too Old For This Shit, Landon’s Mentor
+> Skills: Great (+4) Shoot, Good (+3) Fight, Fair (+2) Will, Average (+1) Athletics
+> Stunts: Battlefield Expert. Can use Fight to create advantages in large-scale tactical situations.
+>
+> Teran the Swift, Thief Extraordinaire
+> Aspects: Cutpurse and Scoundrel, I Just Can’t Help Myself
+> Skills: Superb (+5) Burglary, Great (+4) Stealth, Good (+3) Lore, Fair (+2) Fight, Average (+1) Physique [Note: 3 physical stress boxes]
+> Stunts: Inside Man. +2 to Stealth in an indoor, urban environment.
+>
+> Og the Strong
+> Aspects: Og Smash!, Og Not Terribly Bright
+> Skills: Fantastic (+6) Fight, Superb (+5) Physique [Note: 4 physical stress boxes, 1 extra mild consequence for physical conflicts], Great (+4) Athletics
+> Stunts: none
 
-Old Finn, Landon’s mentor
-Aspects: Retired Vinfeld Militia Captain, Too Old For This Shit, Landon’s Mentor
-Skills: Great (+4) Shoot, Good (+3) Fight, Fair (+2) Will, Average (+1) Athletics
-Stunts: Battlefield Expert. Can use Fight to create advantages in large-scale tactical situations.
-
-Teran the Swift, Thief Extraordinaire
-Aspects: Cutpurse and Scoundrel, I Just Can’t Help Myself
-Skills: Superb (+5) Burglary, Great (+4) Stealth, Good (+3) Lore, Fair (+2) Fight, Average (+1) Physique [Note: 3 physical stress boxes]
-Stunts: Inside Man. +2 to Stealth in an indoor, urban environment.
-
-Og the Strong
-Aspects: Og Smash!, Og Not Terribly Bright
-Skills: Fantastic (+6) Fight, Superb (+5) Physique [Note: 4 physical stress boxes, 1 extra mild consequence for physical conflicts], Great (+4) Athletics
-Stunts: none
-
-#### Main Np Cs
+#### Main NPCs
 
 Main NPCs are the closest you’re ever going to get to playing a PC yourself. They have full character sheets just like a PC does, with five aspects, a full distribution of skills, and a selection of stunts. They are the most significant characters in your PCs’ lives, because they represent pivotal forces of opposition or allies of crucial importance. Because they have a full spread of aspects, they also offer the most nuanced options for interaction, and they have the most options to invoke and be compelled. Your primary “bad guys” in a scenario or arc should always be main NPCs, as should any NPCs who are the most vital pieces of your stories.
 
 Because they have all the same things on their sheet as PCs do, main NPCs will require a lot more of your time and attention than other characters. How you create one really depends on how much time you have—if you want, you can go through the whole character creation process and work out their whole backstory through phases, leaving only those slots for “guest starring” open.
 
-Of course, if you want, you can also upgrade one of your current supporting NPCs to a main using this method. This is great for when a supporting NPC has suddenly or gradually become—usually because of the players—a major fixture in the story, despite your original plans for them.
+> Of course, if you want, you can also upgrade one of your current supporting NPCs to a main using this method. This is great for when a supporting NPC has suddenly or gradually become—usually because of the players—a major fixture in the story, despite your original plans for them.
+
 You could also do things more on the fly if you need to, creating a partial sheet of the aspects you know for sure, those skills you definitely need them to have, and any stunts you want. Then fill in the rest as you go. This is almost like making a supporting NPC, except you can add to the sheet during play.
 
 Main NPCs will fight to the bitter end if need be, making the PCs work for every step.
@@ -3586,32 +3512,30 @@ So, if the PCs are currently capped at Great (+4), your main NPC badass should b
 
 Likewise, a particularly significant NPC might have more than five aspects to highlight their importance to the story.
 
-{example}
-
-Barathar, Smuggler Queen of the Sindral Reach
-Aspects:
-
-Smuggler Queen of the Sindral Reach
-A Mostly Loyal Crew
-Remorse is For the Weak
-“Zird, Why Won’t You Die?”
-My Ship, The Death Dealer
-A Harem of Thugs
-I’ve Got the Law in My Pocket
-
-Skills:
-Fantastic (+6) Deceive and Fight
-Superb (+5) Shoot and Burglary
-Great (+4) Resources and Will
-Good (+3) Contacts and Notice
-Fair (+2) Crafts and Stealth
-Average (+1) Lore and Physique
-
-Stress: 3 physical boxes, 4 mental boxes
-Stunts:
-Takes One to Know One. Use Deceive instead of Empathy to create an advantage in social situations.
-Feint Master. +2 to use Deceive to create an advantage in a physical conflict.
-Riposte. If you succeed with style on a Fight defense, you can choose to inflict a 2-shift hit rather than take a boost.
+> Barathar, Smuggler Queen of the Sindral Reach
+> Aspects:
+>
+> Smuggler Queen of the Sindral Reach
+> A Mostly Loyal Crew
+> Remorse is For the Weak
+> “Zird, Why Won’t You Die?”
+> My Ship, The Death Dealer
+> A Harem of Thugs
+> I’ve Got the Law in My Pocket
+>
+> Skills:
+> Fantastic (+6) Deceive and Fight
+> Superb (+5) Shoot and Burglary
+> Great (+4) Resources and Will
+> Good (+3) Contacts and Notice
+> Fair (+2) Crafts and Stealth
+> Average (+1) Lore and Physique
+>
+> Stress: 3 physical boxes, 4 mental boxes
+> Stunts:
+> Takes One to Know One. Use Deceive instead of Empathy to create an advantage in social situations.
+> Feint Master. +2 to use Deceive to create an advantage in a physical conflict.
+> Riposte. If you succeed with style on a Fight defense, you can choose to inflict a 2-shift hit rather than take a boost.
 
 ### Playing The Opposition
 
@@ -3628,7 +3552,7 @@ Right-sizing the opposition is more of an art than a science, but here are some 
 - Most of the opposition the PCs encounter in a session should be nameless NPCs, with one or two supporting NPCs and main NPCs along the way.
 - Nameless and supporting NPCs means shorter conflicts because they give up or lose sooner; main NPCs mean longer conflicts.
 
-#### Creating Advantages For Np Cs
+#### Creating Advantages For NPCs
 
 It’s easy to fall into the default mode of using the opposition as a direct means to get in the PCs’ way, drawing them into a series of conflict scenes until someone is defeated.
 
@@ -3685,11 +3609,11 @@ Because of all these aspects, you already have a ton of story potential sitting 
 
 You can look at an aspect-related problem as a very large-scale kind of event compel. The setup is a little more work, but the structure is similar—having an aspect suggests or implies something problematic for the PC or multiple PCs, but unlike a compel, it’s something they can’t easily resolve or deal with in the moment.
 
-##### You Don T Always Have To Destroy The World
-
-As you will see from the examples, not all of our urgent, consequential problems necessarily involve the fate of the world or even a large portion of the setting. Interpersonal problems can have just as much of an impact on a group of PCs as stopping this week’s bad guy—winning someone’s respect or resolving an ongoing dispute between two characters can just as easily take the focus for a scenario as whatever grand scheme your badass villain is cooking up.
-
-If you want a classic action-adventure story setup, see if you can come up with two main problems for your scenario—one that focuses on something external to the characters (like the villain’s scheme), and one that deals with interpersonal issues. The latter will serve as a subplot in your scenario and give the characters some development time while they’re in the midst of dealing with other problems.
+> ##### You Don't Always Have To Destroy The World
+>
+> As you will see from the examples, not all of our urgent, consequential problems necessarily involve the fate of the world or even a large portion of the setting. Interpersonal problems can have just as much of an impact on a group of PCs as stopping this week’s bad guy—winning someone’s respect or resolving an ongoing dispute between two characters can just as easily take the focus for a scenario as whatever grand scheme your badass villain is cooking up.
+>
+> If you want a classic action-adventure story setup, see if you can come up with two main problems for your scenario—one that focuses on something external to the characters (like the villain’s scheme), and one that deals with interpersonal issues. The latter will serve as a subplot in your scenario and give the characters some development time while they’re in the midst of dealing with other problems.
 
 #### Problems And Character Aspects
 
@@ -3706,13 +3630,11 @@ The second blank is what makes this a little harder than an event compel—you h
 
 As long as whatever you put in the third blank fits the criteria at the beginning of this section, you’re good to go.
 
-{example}
-
-Cynere has Infamous Girl With Sword, which implies that her reputation precedes her across the countryside. Because of that, a copycat committing crimes in her name and getting the inhabitants of the next city she visits angry and murderous would probably be a big problem for her.
-
-Landon has an aspect of I Owe Old Finn Everything, which implies that he’d feel obligated to help Finn out with any personal problems. Because of that, having to bail Finn’s son out of a gambling debt he owes to some very nasty people would probably be a big problem for him.
-
-Zird has Rivals in the Collegia Arcana, which implies that some or many of them are scheming against him constantly. Because of that, a series of concentrated assassination attempts from someone or several people who know how to get past all his magical defenses would probably be a big problem for him.
+> Cynere has Infamous Girl With Sword, which implies that her reputation precedes her across the countryside. Because of that, a copycat committing crimes in her name and getting the inhabitants of the next city she visits angry and murderous would probably be a big problem for her.
+>
+> Landon has an aspect of I Owe Old Finn Everything, which implies that he’d feel obligated to help Finn out with any personal problems. Because of that, having to bail Finn’s son out of a gambling debt he owes to some very nasty people would probably be a big problem for him.
+>
+> Zird has Rivals in the Collegia Arcana, which implies that some or many of them are scheming against him constantly. Because of that, a series of concentrated assassination attempts from someone or several people who know how to get past all his magical defenses would probably be a big problem for him.
 
 #### Problems And Game Aspects
 
@@ -3726,17 +3648,15 @@ Ask yourself:
 - Who else cares about dealing with the issue, and how might their “solution” be bad for the PCs?
 - What’s a good next step for resolving the issue, and what makes accomplishing that step hard?
 
-##### Put A Face On It
+> ##### Put A Face On It
+>
+> While not all of your scenario problems have to be directly caused by an NPC who serves as a “master villain” for the PCs to take down, it’s often easier if they are. At the very least, you should be able to point directly to an NPC who benefits a great deal from the scenario problem not going the way the PCs want it to go.
 
-While not all of your scenario problems have to be directly caused by an NPC who serves as a “master villain” for the PCs to take down, it’s often easier if they are. At the very least, you should be able to point directly to an NPC who benefits a great deal from the scenario problem not going the way the PCs want it to go.
-
-{example}
-
-Because The Scar Triad is an issue, it implies that the Triad is making a serious power play across the land. Therefore, a complete government takeover by Triad members in the city they’re sent to on their next job would probably create a big problem for the PCs.
-
-Because The Doom that Is to Come is an issue, it implies that agents of the Cult of Tranquility are constantly trying to fulfill parts of the ancient prophecies that foretell the doom. Therefore, a series of ritual murders in the next town meant to awaken an ancient demon that sleeps under the town would probably create a big problem for the PCs.
-
-Because the Cult of Tranquility’s Two Conflicting Prophecies is an issue, it implies that there’s an internal Cult struggle to validate one prophecy as being definitive. Therefore, an all-out war between rival factions in the next town that brings innocents into the crossfire would probably create a big problem for the PCs.
+> Because The Scar Triad is an issue, it implies that the Triad is making a serious power play across the land. Therefore, a complete government takeover by Triad members in the city they’re sent to on their next job would probably create a big problem for the PCs.
+>
+> Because The Doom that Is to Come is an issue, it implies that agents of the Cult of Tranquility are constantly trying to fulfill parts of the ancient prophecies that foretell the doom. Therefore, a series of ritual murders in the next town meant to awaken an ancient demon that sleeps under the town would probably create a big problem for the PCs.
+>
+> Because the Cult of Tranquility’s Two Conflicting Prophecies is an issue, it implies that there’s an internal Cult struggle to validate one prophecy as being definitive. Therefore, an all-out war between rival factions in the next town that brings innocents into the crossfire would probably create a big problem for the PCs.
 
 #### Problems And Aspect Pairs
 
@@ -3756,13 +3676,11 @@ Ask yourself:
 - Do the aspects point to backstory elements that can intersect in the present?
 - Is there a way for one PC’s fortune to become another’s misfortune, because of the aspects?
 
-{example}
-
-Because Landon is a Disciple of the Ivory Shroud, and Zird has Rivals in the Collegia Arcana, it implies that both factions could occasionally cross paths and have incompatible agendas. Therefore, a mandate from the monks of a local Shroud monastery to capture or kill the members of a local Collegia chapterhouse for an unknown slight would probably be a big problem for them.
-
-Because Cynere is Tempted by Shiny Things, and Landon has The Manners of a Goat, it implies that they’re probably the worst partners for any kind of undercover heist. Therefore, a contract to infiltrate the Royal Ball of Ictherya with no backup and walk out with the Crown Jewels on behalf of a neighboring kingdom would probably be a big problem for them.
-
-Because Zird has If I Haven’t Been There, I’ve Read About It, and Cynere is the Secret Sister of Barathar, it implies that proof of Cynere’s true heritage could one day fall into Zird’s hands. Therefore, the unexpected arrival of a genealogical document in code that Barathar and her henchies seek to recover at all costs would probably be a big problem for them.
+> Because Landon is a Disciple of the Ivory Shroud, and Zird has Rivals in the Collegia Arcana, it implies that both factions could occasionally cross paths and have incompatible agendas. Therefore, a mandate from the monks of a local Shroud monastery to capture or kill the members of a local Collegia chapterhouse for an unknown slight would probably be a big problem for them.
+>
+> Because Cynere is Tempted by Shiny Things, and Landon has The Manners of a Goat, it implies that they’re probably the worst partners for any kind of undercover heist. Therefore, a contract to infiltrate the Royal Ball of Ictherya with no backup and walk out with the Crown Jewels on behalf of a neighboring kingdom would probably be a big problem for them.
+>
+> Because Zird has If I Haven’t Been There, I’ve Read About It, and Cynere is the Secret Sister of Barathar, it implies that proof of Cynere’s true heritage could one day fall into Zird’s hands. Therefore, the unexpected arrival of a genealogical document in code that Barathar and her henchies seek to recover at all costs would probably be a big problem for them.
 
 ##### Character Aspect And Issue
 
@@ -3774,17 +3692,15 @@ Ask yourself:
 - Is the next step to dealing with the issue something that impacts a particular character personally because of their aspects?
 - Does someone connected to the issue have a particular reason to target the PC because of an aspect?
 
-##### How Many Problems Do I Need
+> ##### How Many Problems Do I Need
+>
+> For a single scenario, one or two is sufficient, trust us. You’ll see below that even one problem can create enough material for two or three sessions. Don’t feel like you have to engage every PC with every scenario—rotate the spotlight around a little so that they each get some spotlight time, and then throw in an issue-related scenario when you want to concentrate on the larger “plot” of the game.
 
-For a single scenario, one or two is sufficient, trust us. You’ll see below that even one problem can create enough material for two or three sessions. Don’t feel like you have to engage every PC with every scenario—rotate the spotlight around a little so that they each get some spotlight time, and then throw in an issue-related scenario when you want to concentrate on the larger “plot” of the game.
-
-{example}
-
-Because Cynere is the Secret Sister of Barathar and The Scar Triad is an issue, it implies that the Triad could have leverage over Cynere for blackmail. Therefore, the Triad hiring her for an extremely dangerous and morally reprehensible job on the threat of revealing her secret to the world and making her a public enemy across the land would probably be a big problem for her.
-
-Because Zird has If I Haven’t Been There, I’ve Read About It, and the Cult of Tranquility’s Two Conflicting Prophecies are an issue, it implies that Zird could be the key to figuring out which of the prophecies is legitimate. Therefore, getting approached by the Primarch to learn the Rites of Tranquility and figure out the truth of the prophecy, and thus becoming a target for manipulation from both major factions, would probably be a big problem for him.
-
-Because Landon has An Eye for an Eye, and The Doom that Is to Come is an issue, it implies that anything the Cult does to Landon’s loved ones would be met with a desire for vengeance. Therefore, an attack on his hometown by Cult agents on the prowl for more indoctrinated servants as preparation for the End Times would probably be a big problem for him.
+> Because Cynere is the Secret Sister of Barathar and The Scar Triad is an issue, it implies that the Triad could have leverage over Cynere for blackmail. Therefore, the Triad hiring her for an extremely dangerous and morally reprehensible job on the threat of revealing her secret to the world and making her a public enemy across the land would probably be a big problem for her.
+>
+> Because Zird has If I Haven’t Been There, I’ve Read About It, and the Cult of Tranquility’s Two Conflicting Prophecies are an issue, it implies that Zird could be the key to figuring out which of the prophecies is legitimate. Therefore, getting approached by the Primarch to learn the Rites of Tranquility and figure out the truth of the prophecy, and thus becoming a target for manipulation from both major factions, would probably be a big problem for him.
+>
+> Because Landon has An Eye for an Eye, and The Doom that Is to Come is an issue, it implies that anything the Cult does to Landon’s loved ones would be met with a desire for vengeance. Therefore, an attack on his hometown by Cult agents on the prowl for more indoctrinated servants as preparation for the End Times would probably be a big problem for him.
 
 #### Ask Story Questions
 
@@ -3800,23 +3716,21 @@ Every problem you come up with is going to have one very obvious story question:
 
 To come up with story questions, you’re probably going to have to embellish on the problem that you came up with just a bit, and figure out some of the W-How (who, what, when, where, why, how) details. That’s also fine, and part of what the process is for.
 
-{example}
-
-An Arcane Conspiracy: Problem and Story Questions
-
-Cynere is Tempted by Shiny Things, and Zird has Rivals in the Collegia Arcana, which implies that the Collegia’s wealth might end up on Cynere’s radar at an inconvenient time for Zird. Therefore, Cynere getting a lucrative contract to steal one of the Collegia’s sacred treasures at the same time that Zird’s rivals try to put him on trial for crimes against creation would probably be a big problem for both of them.
-
-Two obvious story questions spring to mind already: Will Cynere get the treasure? Will Zird win his trial? But Amanda wants to save those answers for the end, so she brainstorms some other questions.
-
-First of all, she doesn’t know if they’re even going to go willingly into this situation, so she starts there: Will Cynere take the contract? Will Zird allow the Collegia to arrest him, or will he resist?
-
-Then, she needs to figure out why they can’t just go straight to the problem. She decides Cynere has an anonymous rival for the treasure (let’s call it the Jewel of Aetheria, that sounds nice), and her mysterious employer would be most displeased if the rival beat her to the punch.
-
-Zird, in the meantime, has to secure a legal defense that isn’t a part of the conspiracy against him, and will probably want to find out precisely who has it in for him this time.
-
-So, that gives her three more questions: Can Cynere sniff out her competitor before her competitor does the same to her? Can Zird find an ally to defend him among the Collegia’s ranks? Can Zird discover the architects of the conspiracy without suffering further consequences?
-
-Then, because she wants some tension between these two, one that relates to their relationship: Will Cynere turn her back on Zird for the sake of her own goals?
+> An Arcane Conspiracy: Problem and Story Questions
+>
+> Cynere is Tempted by Shiny Things, and Zird has Rivals in the Collegia Arcana, which implies that the Collegia’s wealth might end up on Cynere’s radar at an inconvenient time for Zird. Therefore, Cynere getting a lucrative contract to steal one of the Collegia’s sacred treasures at the same time that Zird’s rivals try to put him on trial for crimes against creation would probably be a big problem for both of them.
+>
+> Two obvious story questions spring to mind already: Will Cynere get the treasure? Will Zird win his trial? But Amanda wants to save those answers for the end, so she brainstorms some other questions.
+>
+> First of all, she doesn’t know if they’re even going to go willingly into this situation, so she starts there: Will Cynere take the contract? Will Zird allow the Collegia to arrest him, or will he resist?
+>
+> Then, she needs to figure out why they can’t just go straight to the problem. She decides Cynere has an anonymous rival for the treasure (let’s call it the Jewel of Aetheria, that sounds nice), and her mysterious employer would be most displeased if the rival beat her to the punch.
+>
+> Zird, in the meantime, has to secure a legal defense that isn’t a part of the conspiracy against him, and will probably want to find out precisely who has it in for him this time.
+>
+> So, that gives her three more questions: Can Cynere sniff out her competitor before her competitor does the same to her? Can Zird find an ally to defend him among the Collegia’s ranks? Can Zird discover the architects of the conspiracy without suffering further consequences?
+>
+> Then, because she wants some tension between these two, one that relates to their relationship: Will Cynere turn her back on Zird for the sake of her own goals?
 
 Notice that each of these questions has the potential to significantly shape the scenario’s plot. Right off the bat, if Zird decides not to go quietly, you have a very different situation than if he chooses to submit to custody. If Zird’s investigations get him arrested, then the trial might end up being a moot point. If Cynere decides to help Zird rather than pursuing the Jewel, then they’re going to have another source of trouble in the form of Cynere’s employer.
 
@@ -3828,7 +3742,7 @@ The way we’ve phrased it, though, we have somewhere to go if she doesn’t do 
 
 There’s also some room to extend material from this scenario into the future. Maybe the identity of Cynere’s opponent doesn’t get answered this session at all—that’s okay, because it’s a detail Amanda can always bring back in a later session.
 
-If you end up with a really large number of story questions (like eight or more), keep in mind that you don’t necessarily have to answer them all in one scenario—you can bring up the questions you don’t answer, either as foreshadowing or to set up stuff you’re going to do in the following scenario. In fact, that’s exactly how you make strong arcs—you have a pile of related story questions, and you take two or three scenarios to answer them all.
+> If you end up with a really large number of story questions (like eight or more), keep in mind that you don’t necessarily have to answer them all in one scenario—you can bring up the questions you don’t answer, either as foreshadowing or to set up stuff you’re going to do in the following scenario. In fact, that’s exactly how you make strong arcs—you have a pile of related story questions, and you take two or three scenarios to answer them all.
 
 #### Establish The Opposition
 
@@ -3844,33 +3758,31 @@ Wherever you can, try and consolidate NPCs so that you don’t have too many cha
 
 For each NPC that you have, decide whether you need to make them a supporting or main. Stat them up according to the guidelines given in Running the Game.
 
-{example}
+> An Arcane Conspiracy: Opposition
+>
+> Amanda looks over the story questions and thinks of NPCs she’ll need in order to answer them. She makes a list of the obvious suspects.
+>
+> Cynere’s mysterious employer (not appearing)
+> The chief arbiter for the Collegia Arcana (supporting)
+> Cynere’s competitor for the Jewel (supporting)
+> A barrister who isn’t part of the conspiracy (supporting)
+> A corrupt barrister, and the one that Zird’s rivals want to set him up with (supporting)
+> The Collegia wizard who engineered the conspiracy to bring Zird down (main)
+> That’s six NPCs, four supporting, one main, and one that isn’t going to be in the scenario—she really doesn’t want to drop any details on who’s hiring Cynere yet. She also doesn’t really want to keep track of five NPCs, so she starts looking for opportunities to consolidate.
+>
+> One pairing that immediately strikes her is making Cynere’s competitor and the neutral barrister into the same person, whom she names Anna. Anna might not be involved in this conspiracy, but clearly, there’s a more complicated motive at work. What’s going on with her? Amanda ultimately decides that Anna’s motives are beneficent; she’s secreting the Jewel away to keep it out of the hands of more corrupt elements in the Collegia’s infrastructure. She doesn’t know anything about Cynere and will mistake her for an agent of those corrupt elements until they clear the air.
+>
+> Then she decides that the chief arbiter and the architect of the conspiracy are the same—he didn’t trust anyone else to stick the final nail in Zird’s coffin, so he made sure he’d be appointed arbiter over the trial. Amanda likes this because his political power makes him a formidable opponent to investigate and gives him a powerful lackey in the form of the corrupt barrister. But why does he have it in for Zird in the first place?
+>
+> She further decides that his motives aren’t personal, but he’s getting ready to do some stuff that will rock the foundations of the Collegia, and he knows that as a misfit in that organization, Zird is one of the most likely candidates to resist him. So it’s basically a preemptive strike.
+>
+> As for the corrupt barrister, the first thing that comes to mind is a pathetic, sniveling toady who is totally in the arbiter’s pocket. But she wants to add a measure of depth to him, so she also decides that the arbiter has blackmail material on him, which helps to ensure his loyalty. She doesn’t know what that info is yet, but she’s hoping that nosy PCs will help her figure it out through a story detail later.
+>
+> She names the arbiter Lanthus, and the corrupt barrister Pight. Now she has her NPCs, and she goes about making their sheets.
 
-An Arcane Conspiracy: Opposition
-
-Amanda looks over the story questions and thinks of NPCs she’ll need in order to answer them. She makes a list of the obvious suspects.
-
-Cynere’s mysterious employer (not appearing)
-The chief arbiter for the Collegia Arcana (supporting)
-Cynere’s competitor for the Jewel (supporting)
-A barrister who isn’t part of the conspiracy (supporting)
-A corrupt barrister, and the one that Zird’s rivals want to set him up with (supporting)
-The Collegia wizard who engineered the conspiracy to bring Zird down (main)
-That’s six NPCs, four supporting, one main, and one that isn’t going to be in the scenario—she really doesn’t want to drop any details on who’s hiring Cynere yet. She also doesn’t really want to keep track of five NPCs, so she starts looking for opportunities to consolidate.
-
-One pairing that immediately strikes her is making Cynere’s competitor and the neutral barrister into the same person, whom she names Anna. Anna might not be involved in this conspiracy, but clearly, there’s a more complicated motive at work. What’s going on with her? Amanda ultimately decides that Anna’s motives are beneficent; she’s secreting the Jewel away to keep it out of the hands of more corrupt elements in the Collegia’s infrastructure. She doesn’t know anything about Cynere and will mistake her for an agent of those corrupt elements until they clear the air.
-
-Then she decides that the chief arbiter and the architect of the conspiracy are the same—he didn’t trust anyone else to stick the final nail in Zird’s coffin, so he made sure he’d be appointed arbiter over the trial. Amanda likes this because his political power makes him a formidable opponent to investigate and gives him a powerful lackey in the form of the corrupt barrister. But why does he have it in for Zird in the first place?
-
-She further decides that his motives aren’t personal, but he’s getting ready to do some stuff that will rock the foundations of the Collegia, and he knows that as a misfit in that organization, Zird is one of the most likely candidates to resist him. So it’s basically a preemptive strike.
-
-As for the corrupt barrister, the first thing that comes to mind is a pathetic, sniveling toady who is totally in the arbiter’s pocket. But she wants to add a measure of depth to him, so she also decides that the arbiter has blackmail material on him, which helps to ensure his loyalty. She doesn’t know what that info is yet, but she’s hoping that nosy PCs will help her figure it out through a story detail later.
-
-She names the arbiter Lanthus, and the corrupt barrister Pight. Now she has her NPCs, and she goes about making their sheets.
-
-#### Advantages Can Save You Work
-
-When you’re establishing your NPCs for your scenario, you don’t have to have everything set in stone when you get to the table—whatever you don’t know, you can always establish by letting the advantages the players create become the NPCs’ aspects. Also see below, for advice about winging it during play.
+> #### Advantages Can Save You Work
+>
+> When you’re establishing your NPCs for your scenario, you don’t have to have everything set in stone when you get to the table—whatever you don’t know, you can always establish by letting the advantages the players create become the NPCs’ aspects. Also see below, for advice about winging it during play.
 
 ##### Set Up The First Scene
 
@@ -3880,41 +3792,37 @@ That way, you’re setting an example for the rest of the session and getting th
 
 If you’re in an ongoing campaign, you might need the first scenes of a session to resolve loose ends that were left hanging from a previous session. It’s okay to spend time on that, because it helps keep the sense of continuity going from session to session. As soon as there’s a lull in momentum, though, hit them with your opening scene fast and hard.
 
-{example}
-
-An Arcane Conspiracy: The Opening Scene
-
-Amanda mulls over her questions and thinks about what she wants as her opening scene. A couple of obvious suggestions come to mind:
-
-Enforcers from the Collegia show up at Zird’s door and serve him papers, demanding he come with them.
-Cynere receives the contract and job details from a mysterious employer, and must decide whether or not to sign.
-She decides to go with the latter scene, because she figures that if Cynere rebuffs the contract and then finds out that Zird’s going to the Collegia anyway, it might create a fun scene where she tries to get the mysterious employer to reconsider. And even if she sticks to her guns, it’ll establish whether or not they’ll have to deal with any drama on the way there, as the mysterious employer’s lackeys harass them on the way.
-
-That doesn’t mean she’s going to just toss the scene with Zird aside—she’s just going to save it for a follow-up to the first scene.
+> An Arcane Conspiracy: The Opening Scene
+>
+> Amanda mulls over her questions and thinks about what she wants as her opening scene. A couple of obvious suggestions come to mind:
+>
+> Enforcers from the Collegia show up at Zird’s door and serve him papers, demanding he come with them.
+> Cynere receives the contract and job details from a mysterious employer, and must decide whether or not to sign.
+> She decides to go with the latter scene, because she figures that if Cynere rebuffs the contract and then finds out that Zird’s going to the Collegia anyway, it might create a fun scene where she tries to get the mysterious employer to reconsider. And even if she sticks to her guns, it’ll establish whether or not they’ll have to deal with any drama on the way there, as the mysterious employer’s lackeys harass them on the way.
+>
+> That doesn’t mean she’s going to just toss the scene with Zird aside—she’s just going to save it for a follow-up to the first scene.
 
 ##### Powerful Session Starting Ninja Gm Trick
 
 Asking the players to contribute something to the beginning of your first scene is a great way to help get them invested in what’s going on right off the bat. If there’s anything that’s flexible about your opening prompt, ask your players to fill in the blanks for you when you start the scene. Clever players may try to use it as an opportunity to push for a compel and get extra fate points right off the bat—we like to call this sort of play “awesome.”
 
-{example}
-
-Let’s look at our example scenes above. The prompts don’t specify where the PCs are when they get confronted with their first choices. So, Amanda might start the session by asking Ryan, “Where exactly isZird when the brute squad from the Collegia comes looking for him?”
-
-Now, even if Ryan just replies with “in his sanctuary,” you’ve solicited his participation and helped him set the scene. But Ryan is awesome, so what he says instead is, “Oh, probably at the public baths, soaking after a long day of research.”
-
-“Perfect!” says Amanda, and holds out a fate point. “So, it’d make sense that your Rivals in the Collegia Arcana would have divined precisely the right time to catch you away from all your magical implements and gear, right?”
-
-Ryan grins and takes the fate point. “Yeah, that sounds about right.”
+> Let’s look at our example scenes above. The prompts don’t specify where the PCs are when they get confronted with their first choices. So, Amanda might start the session by asking Ryan, “Where exactly isZird when the brute squad from the Collegia comes looking for him?”
+>
+> Now, even if Ryan just replies with “in his sanctuary,” you’ve solicited his participation and helped him set the scene. But Ryan is awesome, so what he says instead is, “Oh, probably at the public baths, soaking after a long day of research.”
+>
+> “Perfect!” says Amanda, and holds out a fate point. “So, it’d make sense that your Rivals in the Collegia Arcana would have divined precisely the right time to catch you away from all your magical implements and gear, right?”
+>
+> Ryan grins and takes the fate point. “Yeah, that sounds about right.”
 
 Of course, you can also just have your opening scenario hooks count as “pre-loaded” compels, and hand out some fate points at the start of a session to start the PCs off with a spot of trouble they have to deal with immediately. This helps low-refresh players out and can kickstart the spending of fate points right off the bat. Make sure your group is okay with giving you carte blanche authority to narrate them into a situation, though—some players find the loss of control problematic.
 
-Amanda wants to start the players off with a number of fate points off the bat, so at the beginning of the session, she says to the players:
-
-“Zird, it’s bad enough when your Rivals in the Collegia Arcana give you trouble, but when they pretend to be peasants in the local watering hole, get you drunk, and start a bar fight so they can haul you somewhere secluded, it’s even worse. You wake up with a five-alarm hangover and a black eye—someone punched you in the face!” (2 fate points, for Rivals and Not the Face!)
-
-“Landon, I know Smashing is Always an Option, but how are you going to explain what happened when you tried to fix the wagon while everyone else was away?” (1 fate point for Smashing.)
-
-“Cynere, whoever decided to make you this contract offer knows you pretty well. They’ve included several large gems along with the contract. Problem is, you also know what noble house they were stolen from, and there’s no doubt you’ll be a wanted woman if you don’t sign—and you’re infamous enough that you know no one’s going to believe how you came by them.” (2 fate points for Infamous Girl with Sword and Tempted by Shiny Things.)
+> Amanda wants to start the players off with a number of fate points off the bat, so at the beginning of the session, she says to the players:
+>
+> “Zird, it’s bad enough when your Rivals in the Collegia Arcana give you trouble, but when they pretend to be peasants in the local watering hole, get you drunk, and start a bar fight so they can haul you somewhere secluded, it’s even worse. You wake up with a five-alarm hangover and a black eye—someone punched you in the face!” (2 fate points, for Rivals and Not the Face!)
+>
+> “Landon, I know Smashing is Always an Option, but how are you going to explain what happened when you tried to fix the wagon while everyone else was away?” (1 fate point for Smashing.)
+>
+> “Cynere, whoever decided to make you this contract offer knows you pretty well. They’ve included several large gems along with the contract. Problem is, you also know what noble house they were stolen from, and there’s no doubt you’ll be a wanted woman if you don’t sign—and you’re infamous enough that you know no one’s going to believe how you came by them.” (2 fate points for Infamous Girl with Sword and Tempted by Shiny Things.)
 
 ### Defining Scenes
 
@@ -3939,11 +3847,9 @@ Sometimes, though, they’re going to be pretty vague about it. If you don’t h
 
 Also, sometimes you’ll have to come up with a scene’s purpose all on your own, such as the beginning of a new scenario, or the next scene following a cliffhanger. Whenever you have to do that, try going back to the story questions you came up with earlier and introducing a situation that’s going to directly contribute to answering them. That way, whenever it’s your job to start a scene, you’re always moving the story along.
 
-{example}
-
-Amanda ended the previous session of the group’s story with a cliffhanger: the revelation that Cynere’s mysterious employer is an agent of the Cult of Tranquility, and that the Jewel is an important component in a mysterious ritual. On top of that, Zird’s in the middle of the most important trial of his life, and the Collegia’s discovered that the Jewel is missing
-
-Now Amanda’s thinking about how to start things off next time. The whole situation seems to have really freaked the players out, so she definitely wants to capitalize on that. She figures Anna should return, initially confused about Cynere’s role in the theft and ready to fight. The scene will be about coming to an accord with Anna and realizing that they’re both on the same side, as it were.
+> Amanda ended the previous session of the group’s story with a cliffhanger: the revelation that Cynere’s mysterious employer is an agent of the Cult of Tranquility, and that the Jewel is an important component in a mysterious ritual. On top of that, Zird’s in the middle of the most important trial of his life, and the Collegia’s discovered that the Jewel is missing
+>
+> Now Amanda’s thinking about how to start things off next time. The whole situation seems to have really freaked the players out, so she definitely wants to capitalize on that. She figures Anna should return, initially confused about Cynere’s role in the theft and ready to fight. The scene will be about coming to an accord with Anna and realizing that they’re both on the same side, as it were.
 
 The second question is just as important—you want to start a scene just before something interesting is going to take place. TV and movies are especially good at this—usually, you’re not watching a particular scene for more than thirty seconds before something happens to change the situation or shake things up.
 
@@ -3951,17 +3857,17 @@ The second question is just as important—you want to start a scene just before
 
 If you get stumped by this question, just think of something that might complicate whatever the purpose is or make it problematic. You can also use the ninja trick mentioned earlier and ask the players leading questions to help you figure out the interesting thing that’s about to happen.
 
-Amanda starts the scene with Cynere and Landon walking back to their lodgings late at night, engrossed in conversation about recent events. Lenny suggests they’re not staying at an inn anymore—not after the theft. He figures everyone from the Collegia wizards to the Cult of Tranquility will be looking for Cynere, so they’re holed up somewhere safe.
-
-So they’re understandably surprised by the three armed strangers who ambush them as soon as they walk in the door.
-
-“Whoa!” Lily says. “How’d they know we were going to be here?”
-
-“Tough to say,” Amanda counters, and tosses her and Lenny each a fate point. “But this is a Hub of Trade, Hive of Villainy.”
-
-“Fair enough,” Lenny says, and they both accept the compel.
-
-“Cynere, no sooner have you entered your safehouse than a hooded figure has a sword at your throat. The hood comes off—it’s Anna! And she’s pissed. ‘Where’s the Jewel, you cultist scum?’”
+> Amanda starts the scene with Cynere and Landon walking back to their lodgings late at night, engrossed in conversation about recent events. Lenny suggests they’re not staying at an inn anymore—not after the theft. He figures everyone from the Collegia wizards to the Cult of Tranquility will be looking for Cynere, so they’re holed up somewhere safe.
+>
+> So they’re understandably surprised by the three armed strangers who ambush them as soon as they walk in the door.
+>
+> “Whoa!” Lily says. “How’d they know we were going to be here?”
+>
+> “Tough to say,” Amanda counters, and tosses her and Lenny each a fate point. “But this is a Hub of Trade, Hive of Villainy.”
+>
+> “Fair enough,” Lenny says, and they both accept the compel.
+>
+> “Cynere, no sooner have you entered your safehouse than a hooded figure has a sword at your throat. The hood comes off—it’s Anna! And she’s pissed. ‘Where’s the Jewel, you cultist scum?’”
 
 If you have a clear purpose going into every scene and you start just before some significant piece of action, it’s hard to go wrong.
 
@@ -3987,31 +3893,27 @@ In other words, ask yourself if your scene is doing at least one of the followin
 - Not that it has to be physical—“convince the snitch to talk” is also a clear action.
 - Creating some kind of difficult choice or complication for the PCs. Your best tool to do this with is a compel, but if the situation is problematic enough, you might not need one.
 
-{example}
-
-Cynere’s first impulse is to find out what Anna’s talking about—but Amanda knows Landon’s impulses are... a little more violent.
-
-“Enough talk!” Lenny shouts.
-
-“But... we just started talking,” Lily says.
-
-“Even still! Why talk when Smashing Is Always an Option?” Lenny holds out his hand, and Amanda hands him a fate point for the compel.
+> Cynere’s first impulse is to find out what Anna’s talking about—but Amanda knows Landon’s impulses are... a little more violent.
+>
+> “Enough talk!” Lenny shouts.
+>
+> “But... we just started talking,” Lily says.
+>
+> “Even still! Why talk when Smashing Is Always an Option?” Lenny holds out his hand, and Amanda hands him a fate point for the compel.
 
 #### Hit Their Aspects
 
 Another good way to figure out the interesting action for a scene is to turn to the PCs’ aspects, and create a complication or an event-based compel based on them. This is especially good to do for those PCs whose aspects did not come into play when you made up your scenario problem, because it allows them to have some of the spotlight despite the fact that the overall story does not focus on them as much.
 
-{example}
-
-The scene opens on the big trial. Zird stands before a panel of wizards in the Great Hall of the Collegia Arcana. While they pepper him with questions, every now and then a wizard in the gallery throws out a follow-up, an insult, or a word of discouragement. The whole thing’s like a lively session of the British Parliament. Cynere and Landon stand in the gallery, following the proceedings as best they can.
-
-Amanda turns to Lily. “You going to let them get away with treating your friend that?”
-
-“You’re right! I can’t take it anymore!” Lily says. “I’ve Got Zird’s Back!”
-
-Cynere stands up and shouts at the Arbiter, “Hey, you want to put someone on trial for crimes against creation? How about we start with your mom, ugly!”
-
-Amanda tosses Lily a fate point. “Nice.”
+> The scene opens on the big trial. Zird stands before a panel of wizards in the Great Hall of the Collegia Arcana. While they pepper him with questions, every now and then a wizard in the gallery throws out a follow-up, an insult, or a word of discouragement. The whole thing’s like a lively session of the British Parliament. Cynere and Landon stand in the gallery, following the proceedings as best they can.
+>
+> Amanda turns to Lily. “You going to let them get away with treating your friend that?”
+>
+> “You’re right! I can’t take it anymore!” Lily says. “I’ve Got Zird’s Back!”
+>
+> Cynere stands up and shouts at the Arbiter, “Hey, you want to put someone on trial for crimes against creation? How about we start with your mom, ugly!”
+>
+> Amanda tosses Lily a fate point. “Nice.”
 
 ### The Scenario In Play
 
@@ -4027,30 +3929,28 @@ Notice that we don’t recommend predetermining what scenes and locations are go
 
 Not all is lost, however—the stuff you have prepared should help you tremendously when players do something unexpected. Your story questions are vague enough that there are going to be multiple ways to answer each one, and you can very quickly axe one that isn’t going to be relevant and replace it with something else on the fly without having to toss the rest of your work.
 
-{example}
-
-Amanda had expected that the scene with Landon, Cynere, and Anna would result in a briefly violent reaction, thanks to Landon, followed by the PCs explaining that they’re not with the Cult of Tranquility and everyone realizing that they’re all on the same side.
-
-Right? No.
-
-The first swing of Landon’s sword fells Anna where she stands, killing what would’ve been their first contact with the Sun and Moon Society, an important secret organization opposing the cult. Plus, Anna’s companions are now convinced that he and Cynere are indeed cultists.
-
-So...slight detour. Amanda sees a few ways to go from here:
-
-The warriors throw caution to the wind, cry “Revenge!” and fight to the death.
-One of the warriors assumes Anna’s role in the scene and continues the conversation.
-The warriors flee (making a concession) and report the killing to their superiors in the secret society, leaving Anna’s body behind.
-She decides to go with the third option. These two may be good guys, but they’re not heroes, and neither one of them is up for taking on Landon after that opener. And the odds of them wanting to have a little chat with Anna’s corpse at their feet are, at best, slim.
-
-Plus, Amanda figures Lily and Lenny will want to search the body, which would present a good opportunity to feed them information about the Sun and Moon Society. It’s also a way to bring Zird in on the action—maybe he knows something about the Sun and Moon Society already, and can make contact with them.
+> Amanda had expected that the scene with Landon, Cynere, and Anna would result in a briefly violent reaction, thanks to Landon, followed by the PCs explaining that they’re not with the Cult of Tranquility and everyone realizing that they’re all on the same side.
+>
+> Right? No.
+>
+> The first swing of Landon’s sword fells Anna where she stands, killing what would’ve been their first contact with the Sun and Moon Society, an important secret organization opposing the cult. Plus, Anna’s companions are now convinced that he and Cynere are indeed cultists.
+>
+> So...slight detour. Amanda sees a few ways to go from here:
+>
+> The warriors throw caution to the wind, cry “Revenge!” and fight to the death.
+> One of the warriors assumes Anna’s role in the scene and continues the conversation.
+> The warriors flee (making a concession) and report the killing to their superiors in the secret society, leaving Anna’s body behind.
+> She decides to go with the third option. These two may be good guys, but they’re not heroes, and neither one of them is up for taking on Landon after that opener. And the odds of them wanting to have a little chat with Anna’s corpse at their feet are, at best, slim.
+>
+> Plus, Amanda figures Lily and Lenny will want to search the body, which would present a good opportunity to feed them information about the Sun and Moon Society. It’s also a way to bring Zird in on the action—maybe he knows something about the Sun and Moon Society already, and can make contact with them.
 
 Also, knowing your NPCs’ motivations and goals allows you to adjust their behavior more easily than if you’d just placed them in a static scene waiting for the PCs to show up. When the players throw you a curveball, make the NPCs as dynamic and reactive as they are, by having them take sudden, surprising action in pursuit of their goals.
 
-Amanda’s still stuck on Anna’s unexpected demise. She’d planned on making her an entry point for a whole story arc—maybe not a powerful NPC, but a pretty important one nonetheless. So if Anna’s not going to be around anymore, Amanda at least wants to make something out of her death.
-
-She decides that, while the death of a member of the Sun and Moon Society would go unnoticed by most of Riverton, a guy like Hugo the Charitable would certainly hear about it. He’d already taken notice of Landon after he fought off a few Scar Triad goons. And now this. This newcomer is clearly dangerous, potentially a threat. Worst, he doesn’t seem to be working for anyone.
-
-Given Hugo’s high concept aspect of Everyone in Riverton Fears Me, he sees Landon as a potential asset for the Scar Triad. If you can’t beat ‘em, recruit ‘em.
+> Amanda’s still stuck on Anna’s unexpected demise. She’d planned on making her an entry point for a whole story arc—maybe not a powerful NPC, but a pretty important one nonetheless. So if Anna’s not going to be around anymore, Amanda at least wants to make something out of her death.
+>
+> She decides that, while the death of a member of the Sun and Moon Society would go unnoticed by most of Riverton, a guy like Hugo the Charitable would certainly hear about it. He’d already taken notice of Landon after he fought off a few Scar Triad goons. And now this. This newcomer is clearly dangerous, potentially a threat. Worst, he doesn’t seem to be working for anyone.
+>
+> Given Hugo’s high concept aspect of Everyone in Riverton Fears Me, he sees Landon as a potential asset for the Scar Triad. If you can’t beat ‘em, recruit ‘em.
 
 ### Resolving The Scenario
 
@@ -4086,19 +3986,17 @@ That said, we know some GMs want to have a greater sense of structure for the lo
 
 The best places to look for arc-sized problems are the current or impending issues of places or organizations that you came up with during game creation. If you haven’t made any up yet for a particular place or group, now might be a good time to do that, so you have material for the arc.
 
-{example}
-
-Amanda decides she wants to do one major arc for each PC.
-
-For Zird, his Rivals in the Collegia Arcana makes it pretty easy—she decides that perhaps there’s something more sinister behind these rivalries, such as an attempt by a dark cult operating from within to take over the Collegia and turn it to nefarious purposes.
-
-She needs to focus on story questions that are more general and will take some time to resolve. After thinking about it for a while, she chooses:
-
-Can Zird uncover the identity of the cult’s leader before the takeover occurs? (This lets her do individual scenarios about the attempted takeover.)
-Will Zird’s rivals ally with the cult? (This lets her do individual scenarios about each of Zird’s key rivals.)
-Can Zird reconcile, at long last, with his rivals?
-Will the cult succeed and transform the Collegia forever? (Answering this question ends the arc.)
-Then go through the same process of picking opposing NPCs, keeping in mind that their influence is supposed to be more far-reaching in an arc than in a single scenario.
+> Amanda decides she wants to do one major arc for each PC.
+>
+> For Zird, his Rivals in the Collegia Arcana makes it pretty easy—she decides that perhaps there’s something more sinister behind these rivalries, such as an attempt by a dark cult operating from within to take over the Collegia and turn it to nefarious purposes.
+>
+> She needs to focus on story questions that are more general and will take some time to resolve. After thinking about it for a while, she chooses:
+>
+> Can Zird uncover the identity of the cult’s leader before the takeover occurs? (This lets her do individual scenarios about the attempted takeover.)
+> Will Zird’s rivals ally with the cult? (This lets her do individual scenarios about each of Zird’s key rivals.)
+> Can Zird reconcile, at long last, with his rivals?
+> Will the cult succeed and transform the Collegia forever? (Answering this question ends the arc.)
+> Then go through the same process of picking opposing NPCs, keeping in mind that their influence is supposed to be more far-reaching in an arc than in a single scenario.
 
 ### Building A Campaign
 
@@ -4108,11 +4006,9 @@ However, if you want to do a little bit of focused planning, the advice is the s
 
 The very best aspects to look at for a campaign-level problem are your setting’s current or impending issues, because of their scope.
 
-{example}
-
-Amanda knows that her campaign will hinge on resolving The Doom that Is to Come. So the story question following from that is pretty obvious. “Can the PCs avert, prevent, or mitigate the prophesied doom?”
-
-She knows that to do that, they’re first going to need to figure out which of the Cult of Tranquility’s factions is right about the prophecy (if either). They’ll also need to make sure that none of their personal enemies or The Scar Triad can interfere with whatever they need to do in order to stop the doom. That gives her a good idea of what arcs are going to make up the campaign.
+> Amanda knows that her campaign will hinge on resolving The Doom that Is to Come. So the story question following from that is pretty obvious. “Can the PCs avert, prevent, or mitigate the prophesied doom?”
+>
+> She knows that to do that, they’re first going to need to figure out which of the Cult of Tranquility’s factions is right about the prophecy (if either). They’ll also need to make sure that none of their personal enemies or The Scar Triad can interfere with whatever they need to do in order to stop the doom. That gives her a good idea of what arcs are going to make up the campaign.
 
 #### Advancement And Change
 
@@ -4148,19 +4044,17 @@ This is a good way to make slight character adjustments, if it seems like someth
 
 In fact, you should almost always be able to justify the change you’re making in terms of the game’s story. You shouldn’t be able to change Hot Temper to Staunch Pacifist, for example, unless something happened in the story to inspire a serious change of heart—you met a holy man, or had a traumatic experience that made you want to give up the sword, or whatever. GMs, you’re the final arbiter on this, but don’t be so much of a stickler that you sacrifice a player’s fun for consistency.
 
-{example}
-
-Cynere gets a minor milestone. Lily looks over her character sheet, to see if there’s anything she wants to change. One thing that sticks out to her is that during the last session, Zird has been scheming behind her back a lot and putting her in a bad position.
-
-She looks over at Ryan and says, “You know what? I have this aspect, I’ve Got Zird’s Back. I think I need to change that in light of current circumstances, and call it, I Know Zird is Up to Something.”
-
-Ryan says, “Seriously? I mean, it’s not like he does it all the time.”
-
-Lily grins. “Well, when he stops, I can change it back.”
-
-Amanda approves the change, and Lily rewrites one of Cynere’s aspects.
-
-Meanwhile, Landon also gets a minor milestone. Lenny looks over his sheet, and notices that he spends a lot more time lying to people than he does trying to make friends with them. He asks Amanda if he can swap the ranks of his Deceive and his Rapport skill, giving him Good (+3) Deceive and Fair (+2) Rapport. She agrees, and he notes the new skill totals on his character sheet.
+> Cynere gets a minor milestone. Lily looks over her character sheet, to see if there’s anything she wants to change. One thing that sticks out to her is that during the last session, Zird has been scheming behind her back a lot and putting her in a bad position.
+>
+> She looks over at Ryan and says, “You know what? I have this aspect, I’ve Got Zird’s Back. I think I need to change that in light of current circumstances, and call it, I Know Zird is Up to Something.”
+>
+> Ryan says, “Seriously? I mean, it’s not like he does it all the time.”
+>
+> Lily grins. “Well, when he stops, I can change it back.”
+>
+> Amanda approves the change, and Lily rewrites one of Cynere’s aspects.
+>
+> Meanwhile, Landon also gets a minor milestone. Lenny looks over his sheet, and notices that he spends a lot more time lying to people than he does trying to make friends with them. He asks Amanda if he can swap the ranks of his Deceive and his Rapport skill, giving him Good (+3) Deceive and Fair (+2) Rapport. She agrees, and he notes the new skill totals on his character sheet.
 
 ##### Significant Milestones
 
@@ -4192,17 +4086,15 @@ When this happens, you have one of two options. You can buy a new skill at the l
 
 So in the case above, you could buy an Average (+1) skill, promote one of your Average skills to a Fair (+2), then bump the original skill up to Good (+3). That would take three significant or major milestones to do. Or, you could wait, bank up three skill points, buy a new skill at Fair (+2), then bump the original skill up to Good (+3). It just depends on whether you want to put new stuff on your sheet or not in the interim.
 
-{example}
+> Zird gets a significant milestone after the end of a scenario. He gains an additional skill point.
+>
+> Ryan looks at his character sheet, and decides he wants to take his Notice up from Fair (+2) to Good (+3). He knows that’s going to screw him up with the rules, though, so instead, he decides to take Resources at Average (+1)—the PCs have been on a few lucrative adventures lately, and he figures that’s his opportunity to create a sense of stable wealth.
+>
+> If he waits two more milestones, he’ll be able to put one of his Average skills at Fair (+2), and then bump his Notice up to Good (+3) like he originally wanted.
+>
+> He also has the opportunity to take one of the benefits from a minor milestone. He has been in a lot of fights this game so far, and feels like his Not the Face! is getting old, considering the number of times his character has been hit in the face. He replaces it with Hit Me, and There Will Be Consequences, to reflect his changing attitude about the violence he encounters.
 
-Zird gets a significant milestone after the end of a scenario. He gains an additional skill point.
-
-Ryan looks at his character sheet, and decides he wants to take his Notice up from Fair (+2) to Good (+3). He knows that’s going to screw him up with the rules, though, so instead, he decides to take Resources at Average (+1)—the PCs have been on a few lucrative adventures lately, and he figures that’s his opportunity to create a sense of stable wealth.
-
-If he waits two more milestones, he’ll be able to put one of his Average skills at Fair (+2), and then bump his Notice up to Good (+3) like he originally wanted.
-
-He also has the opportunity to take one of the benefits from a minor milestone. He has been in a lot of fights this game so far, and feels like his Not the Face! is getting old, considering the number of times his character has been hit in the face. He replaces it with Hit Me, and There Will Be Consequences, to reflect his changing attitude about the violence he encounters.
-
-GMs, strictly enforcing how the skills work can be a pain in the ass sometimes. If you and the players really want to be able to upgrade a certain skill in a way that breaks the rules now, simply ask that the player spend the next few milestones “correcting” their skill spread, rather than making them wait. It’s okay. We won’t come after you.
+> GMs, strictly enforcing how the skills work can be a pain in the ass sometimes. If you and the players really want to be able to upgrade a certain skill in a way that breaks the rules now, simply ask that the player spend the next few milestones “correcting” their skill spread, rather than making them wait. It’s okay. We won’t come after you.
 
 You might notice that this means that the further you get up the ladder, the harder it is to quickly advance your skills. This is intentional—no one is going to be able to get to the point where they’re awesome at everything, all the time. That’s boring.
 
@@ -4225,33 +4117,31 @@ GMs, when the player characters go past the skill cap, it will necessarily chang
 
 Most of all, a major milestone should signal that lots of things in the world of your game have changed. Some of that will probably be reflected in world advancement, but given the number of chances the PCs have had to revise their aspects in response to the story, you could be looking at a group with a much different set of priorities and concerns than they had when they started.
 
-{example}
+> Cynere reaches the end of a long story arc and is awarded a major milestone. In the game, the PCs have just accomplished the overthrow of Barathar, Smuggler Queen of the Sindral Reach, which leaves an enormous power vacuum in the game world.
+>
+> Lily looks at her character sheet. She took an extreme consequence in the past arc of scenarios, and allowed one of her aspects to get replaced with the aspect Soul-Burned by the Demon Arc’yeth. She now has the opportunity to rename that aspect again, and she decides to call it I Must Kill Arc’yeth’s Kind—she hasn’t quite escaped the scars of the experience, but it’s better than where she was, given that her aims are now proactive.
+>
+> She also gets an additional point of refresh. She asks Amanda whether or not she can turn her experience with Arc’yeth into something that will allow her to fight demons in the future. Amanda sees no reason to object, and Lily decides to buy a stunt on the spot.
+>
+> “Demon-Slayer: +2 to the use of the Warmaster stunt, when she chooses to use it against any demon or any demonic servitor.”
+>
+> Lily records the new stunt on Cynere’s character sheet, and rewrites the appropriate aspect.
+>
+> Zird the Arcane also gets a major milestone. Ryan looks over his character sheet, and realizes that he’s in a position to advance his peak skill, Lore, to Superb (+5). He does so, and Amanda makes a note that she needs to make any wizardly enemies Zird might encounter that much more powerful, just to get his attention.
+>
+> Finally, Landon also reaches a major milestone. Recently in the plot, Landon discovered that the Ivory Shroud was much more than a martial arts society—they’ve been secret political movers and shakers for a long time, and recently supported Barathar in her efforts to control the Reach.
+>
+> In response to this, Lenny decides to alter his high concept slightly to Former Ivory Shroud Disciple, indicating his desire to distance himself from the order. Amanda tells him that the Shroud isn’t going to take his defection well.
+>
+> So we have Cynere with a new appetite for killing demons, Zird reaching a heretofore unseen level of power, and Landon questioning his loyalty to his only real source of discipline. Amanda makes a lot of notes about what this means for the next few scenarios.
 
-Cynere reaches the end of a long story arc and is awarded a major milestone. In the game, the PCs have just accomplished the overthrow of Barathar, Smuggler Queen of the Sindral Reach, which leaves an enormous power vacuum in the game world.
-
-Lily looks at her character sheet. She took an extreme consequence in the past arc of scenarios, and allowed one of her aspects to get replaced with the aspect Soul-Burned by the Demon Arc’yeth. She now has the opportunity to rename that aspect again, and she decides to call it I Must Kill Arc’yeth’s Kind—she hasn’t quite escaped the scars of the experience, but it’s better than where she was, given that her aims are now proactive.
-
-She also gets an additional point of refresh. She asks Amanda whether or not she can turn her experience with Arc’yeth into something that will allow her to fight demons in the future. Amanda sees no reason to object, and Lily decides to buy a stunt on the spot.
-
-“Demon-Slayer: +2 to the use of the Warmaster stunt, when she chooses to use it against any demon or any demonic servitor.”
-
-Lily records the new stunt on Cynere’s character sheet, and rewrites the appropriate aspect.
-
-Zird the Arcane also gets a major milestone. Ryan looks over his character sheet, and realizes that he’s in a position to advance his peak skill, Lore, to Superb (+5). He does so, and Amanda makes a note that she needs to make any wizardly enemies Zird might encounter that much more powerful, just to get his attention.
-
-Finally, Landon also reaches a major milestone. Recently in the plot, Landon discovered that the Ivory Shroud was much more than a martial arts society—they’ve been secret political movers and shakers for a long time, and recently supported Barathar in her efforts to control the Reach.
-
-In response to this, Lenny decides to alter his high concept slightly to Former Ivory Shroud Disciple, indicating his desire to distance himself from the order. Amanda tells him that the Shroud isn’t going to take his defection well.
-
-So we have Cynere with a new appetite for killing demons, Zird reaching a heretofore unseen level of power, and Landon questioning his loyalty to his only real source of discipline. Amanda makes a lot of notes about what this means for the next few scenarios.
-
-##### Back To Character Creation
-
-One way of looking at a major milestone is that it’s the equivalent of a season finale in a television show. Once you start the next session, a lot of things have the potential to be fundamentally different about your game—you might be focused on new problems, several characters will have aspects changed, there will be new threats in the setting, and so on.
-
-When that happens, you might decide that it’s a worthwhile endeavor to take a session to sit down like you did at character creation and review all the PCs again, altering or adjusting anything that seems like it might need revision—new skill configurations, a new set of stunts, more changes to aspects, etc. You may also want to examine the issues in your game and make sure they’re still appropriate, revise location aspects, or anything else that seems necessary to move your game forward.
-
-So long as you keep them at the same level of refresh and skill points they had, reconvening like this might be exactly what you need to make sure everyone’s still on the same page about the game. And GMs, remember—the more you give the players a chance to actively invest in the game world, the more it’ll pay off for you when you’re running the game.
+> ##### Back To Character Creation
+>
+> One way of looking at a major milestone is that it’s the equivalent of a season finale in a television show. Once you start the next session, a lot of things have the potential to be fundamentally different about your game—you might be focused on new problems, several characters will have aspects changed, there will be new threats in the setting, and so on.
+>
+> When that happens, you might decide that it’s a worthwhile endeavor to take a session to sit down like you did at character creation and review all the PCs again, altering or adjusting anything that seems like it might need revision—new skill configurations, a new set of stunts, more changes to aspects, etc. You may also want to examine the issues in your game and make sure they’re still appropriate, revise location aspects, or anything else that seems necessary to move your game forward.
+>
+> So long as you keep them at the same level of refresh and skill points they had, reconvening like this might be exactly what you need to make sure everyone’s still on the same page about the game. And GMs, remember—the more you give the players a chance to actively invest in the game world, the more it’ll pay off for you when you’re running the game.
 
 #### World Advancement
 
@@ -4266,42 +4156,36 @@ Here are some guidelines regarding each milestone.
 - Do you need to add a new location to the game, based on what the PCs have done? If so, come up with some NPCs to help give more personality to the location and add an issue to the place.
 - Have the PCs resolved an issue in a location? Get rid of the aspect, or maybe change it to represent how the issue was resolved (In the Shadow of the Necromancer becomes Memories of Tyranny, for example).
 
-{example}
-
-The group reaches a minor milestone because they rescued the Lord of Varendep’s son from some of the Smuggler Queen Barathar’s minions. It was a small victory that could pay some pretty nice dividends because they now have an ally in Lord Bornhold of Varendep.
-
-Amanda thinks about what might change as a result of the group’s victory. She doesn’t need to add a new location, but she thinks that Barathar might have a grudge against Varendep for getting out from under her thumb now that their Lord’s son has been rescued. She decides to change Varendep’s issue of Secret Fealty to the Smuggler Queen to At War with Barathar to represent the shifting power dynamic, as well as Lord Bornhold’s willingness to stand up to her now.
+> The group reaches a minor milestone because they rescued the Lord of Varendep’s son from some of the Smuggler Queen Barathar’s minions. It was a small victory that could pay some pretty nice dividends because they now have an ally in Lord Bornhold of Varendep.
+>
+> Amanda thinks about what might change as a result of the group’s victory. She doesn’t need to add a new location, but she thinks that Barathar might have a grudge against Varendep for getting out from under her thumb now that their Lord’s son has been rescued. She decides to change Varendep’s issue of Secret Fealty to the Smuggler Queen to At War with Barathar to represent the shifting power dynamic, as well as Lord Bornhold’s willingness to stand up to her now.
 
 ##### For Significant Milestones
 
 - Did the PCs resolve an issue that was on the whole game world? If so, remove (or alter) the aspect.
 - Did the PCs create permanent change in a location? If so, create a new issue to reflect this, for better or for worse.
 
-{example}
-
-Later, the group drives Barathar’s lieutenant, Hollister, back out of the Sindral Reach. Barathar is still a threat, but her power is significantly diminished; this is a major victory for the party. Cynere skewered Hollister in single combat, so he’s no longer a threat at all; this resolves a world-wide issue, Everybody Fears Hollister, so Amanda crosses it off. She’s not quite sure what to replace it with yet, so she’ll think about it for a bit.
-
-They also created permanent change in the Sindral Reach; that area of the world is no longer under Barathar’s sway. Most of the people are grateful, but a few of Barathar’s thugs remain to make trouble for the party. Amanda replaces the issue Seat of Barathar’s Power with a different one, Smiles in the Open, Knives in the Dark to represent how things have changed.
+> Later, the group drives Barathar’s lieutenant, Hollister, back out of the Sindral Reach. Barathar is still a threat, but her power is significantly diminished; this is a major victory for the party. Cynere skewered Hollister in single combat, so he’s no longer a threat at all; this resolves a world-wide issue, Everybody Fears Hollister, so Amanda crosses it off. She’s not quite sure what to replace it with yet, so she’ll think about it for a bit.
+>
+> They also created permanent change in the Sindral Reach; that area of the world is no longer under Barathar’s sway. Most of the people are grateful, but a few of Barathar’s thugs remain to make trouble for the party. Amanda replaces the issue Seat of Barathar’s Power with a different one, Smiles in the Open, Knives in the Dark to represent how things have changed.
 
 ##### For Major Milestones
 
 - Did the PCs create permanent change in the game world? If so, give it a new issue to reflect this, for better or for worse.
 
-{example}
-
-Finally, the heroes confront and defeat Barathar in an epic confrontation. Barathar held a lot of power in the underground throughout the world and her defeat will cause ripples. Someone’s going to want to step in and take her place (probably a lot of someones), so Amanda creates the issue Underworld Power Vacuum to reflect this.
+> Finally, the heroes confront and defeat Barathar in an epic confrontation. Barathar held a lot of power in the underground throughout the world and her defeat will cause ripples. Someone’s going to want to step in and take her place (probably a lot of someones), so Amanda creates the issue Underworld Power Vacuum to reflect this.
 
 You don’t need to make these changes as precisely or as regularly as the players do—if anything, you should be as reactive as you can. In other words, focus on changing those aspects that the player characters have directly interacted with and caused the most change to.
 
 If you have aspects you haven’t really explored yet, keep them around if you think they’re just waiting their turn. However, you can also change them in order to make them more relevant to what’s going on in the moment, or simply to give the PCs more of a sense of being in an evolving world.
 
-Barathar wasn’t the only game in town. The Skull-King lurks in the north, and Lord Wynthrep is stirring up war in the east. Amanda likes the idea of the PCs facing down a powerful necromancer in the near future, so she decides to keep the issue Darkness Creeps from the North in place.
-
-The other issue, Saber-Rattling in the East is also interesting, but she thinks that all this confrontation with the Smuggler Queen probably gave Lord Wynthrep the opportunity he needed to escalate things. She changes Saber-Rattling in the East to The East at War!. That should give the PCs an interesting decision to make.
+> Barathar wasn’t the only game in town. The Skull-King lurks in the north, and Lord Wynthrep is stirring up war in the east. Amanda likes the idea of the PCs facing down a powerful necromancer in the near future, so she decides to keep the issue Darkness Creeps from the North in place.
+>
+> The other issue, Saber-Rattling in the East is also interesting, but she thinks that all this confrontation with the Smuggler Queen probably gave Lord Wynthrep the opportunity he needed to escalate things. She changes Saber-Rattling in the East to The East at War!. That should give the PCs an interesting decision to make.
 
 Also, keep in mind that if the PCs remove an impending issue, another one must arise to take its place. Don’t worry about this immediately—you need to give your players a sense of enacting permanent change in the game world. But after a while, if you notice that you’re low on impending issues, it’s probably a good time to introduce a new one, whether on the game world as a whole or on a specific location.
 
-##### Dealing With Np Cs
+##### Dealing With NPCs
 
 Remember, GMs, when you add a new location to the game world, you want to add at least one new NPC to go with it. Sometimes, that might mean moving a person from a location you’re not going to use anymore.
 
@@ -4309,13 +4193,11 @@ Likewise, when there’s a significant change in an issue for a location or the 
 
 Most of the time, it should be pretty obvious when you need a new face for a location—when the old one dies or is somehow permanently removed from the game, or is boring now, it’s probably time to change things up.
 
-{example}
+> When the heroes rescued Lord Bornhold’s son, Carris, from the Smuggler Queen, Lord Bornhold became indebted to them. To reflect this, Amanda changed a few of his aspects to make him more friendly to the PCs and less subservient to Barathar.
+>
+> When Barathar was defeated, Amanda figured she needed someone to step in and take over the underworld. Carris and Barathar had become lovers during Carris’s captivity, and he’s not happy about her death. He’s so unhappy, in fact, that he decides to take her place and become the Smuggler King of the Sindral Reach. Because he’s vowed to retake the underworld in Barathar’s name (and because Amanda didn’t have any stats prepared for Carris), Amanda writes up new NPC stats for Carris and turns him into a brand new villain for the PCs to confront. This one could get a bit sticky!
 
-When the heroes rescued Lord Bornhold’s son, Carris, from the Smuggler Queen, Lord Bornhold became indebted to them. To reflect this, Amanda changed a few of his aspects to make him more friendly to the PCs and less subservient to Barathar.
-
-When Barathar was defeated, Amanda figured she needed someone to step in and take over the underworld. Carris and Barathar had become lovers during Carris’s captivity, and he’s not happy about her death. He’s so unhappy, in fact, that he decides to take her place and become the Smuggler King of the Sindral Reach. Because he’s vowed to retake the underworld in Barathar’s name (and because Amanda didn’t have any stats prepared for Carris), Amanda writes up new NPC stats for Carris and turns him into a brand new villain for the PCs to confront. This one could get a bit sticky!
-
-##### Recurring Np Cs
+##### Recurring NPCs
 
 There are essentially two ways to reuse NPCs. You can either use them to show how the PCs have grown since they started, or use them to show how the world is responding to their growth.
 
@@ -4323,11 +4205,9 @@ With the former, you don’t change the NPC, because that’s the point—the ne
 
 With the latter, you allow the NPC to advance like the PCs have—you add new skills, change their aspects around, give them a stunt or two, and otherwise do whatever is necessary to keep them relevant to the PCs’ endeavors. This kind of NPC might be able to hang around as a nemesis for several story arcs, or at least provide some sense of continuity as the PCs become more powerful and influential.
 
-{example}
-
-Barathar advanced right along with the PCs. She was a main villain and Amanda wanted to keep her relevant and challenging right up until they defeated her, so every time the PCs got a milestone, she applied the same effects to Barathar. She also made minor tweaks here and there (changing aspects, swapping skills) to react to what the PCs did in the world throughout their adventures.
-
-Sir Hanley, the knight who tried to prevent them from entering Varendep when they first got there, was pretty challenging when they first confronted him. He was a major NPC, and the fight was meant to be the culmination of an entire session. They got past him, convincing him to let them in, so he became less relevant after that. He was resentful and got in their way a few times, but he didn’t advance as they did so the PCs quickly outclassed him. The last time they had a run-in with Sir Hanley, they spanked him pretty hard and sent him running off to lick his wounds.
+> Barathar advanced right along with the PCs. She was a main villain and Amanda wanted to keep her relevant and challenging right up until they defeated her, so every time the PCs got a milestone, she applied the same effects to Barathar. She also made minor tweaks here and there (changing aspects, swapping skills) to react to what the PCs did in the world throughout their adventures.
+>
+> Sir Hanley, the knight who tried to prevent them from entering Varendep when they first got there, was pretty challenging when they first confronted him. He was a major NPC, and the fight was meant to be the culmination of an entire session. They got past him, convincing him to let them in, so he became less relevant after that. He was resentful and got in their way a few times, but he didn’t advance as they did so the PCs quickly outclassed him. The last time they had a run-in with Sir Hanley, they spanked him pretty hard and sent him running off to lick his wounds.
 
 # Extras
 
@@ -4377,13 +4257,11 @@ Chances are that you already have some ideas for extras in mind after your work 
 
 By nature, extras tend to steal a lot of focus when they’re introduced—gamers have an inveterate attraction to whiz-bang cool options, so you should expect them to get a lot of attention by default. When you’re talking out options for extras, make sure you’re prepared for the elements you choose to become a major focus in your game.
 
-{example}
-
-Amanda and company talk about extras for Hearts of Steel.
-
-Zird’s magic (and the magic of the Collegia Arcana) comes up as an obvious first choice, as do Landon’s martial arts. Lenny and Ryan both note that they’re not interested in lengthy lists of spells or combat moves. Also, because it’s a fantasy game and magic exists, they agree that enchanted items need consideration.
-
-Going over the game’s issues and locations, they decide not to worry about making any of those into extras—they’re supposed to be traveling from place to place anyway, and the characters don’t have enough of a stake in any of the organizations to make it worthwhile.
+> Amanda and company talk about extras for Hearts of Steel.
+>
+> Zird’s magic (and the magic of the Collegia Arcana) comes up as an obvious first choice, as do Landon’s martial arts. Lenny and Ryan both note that they’re not interested in lengthy lists of spells or combat moves. Also, because it’s a fantasy game and magic exists, they agree that enchanted items need consideration.
+>
+> Going over the game’s issues and locations, they decide not to worry about making any of those into extras—they’re supposed to be traveling from place to place anyway, and the characters don’t have enough of a stake in any of the organizations to make it worthwhile.
 
 What Extras Do
 In broad terms, sketch out what you want the extras to be able to do, compared to what your skills, stunts, and aspects can already do by default. Also, think about what the extra looks like “on camera.” What do people see when you use it? What’s the look and feel of it?
@@ -4397,19 +4275,17 @@ In particular, consider these points:
 
 This is an important step because it may reveal that the proposed extra doesn’t actually contribute as much as you thought, which allows you to either add more stuff or remove it from consideration.
 
-{example}
-
-For Zird’s magic, the group decides that they want to keep things pretty low-key and abstract—it’s just another method of solving problems, like Landon’s martial arts or Cynere’s swordthiefery (which Lily insists is a technical term)—a highly trained wizard is to be feared as much as a highly trained swordsman, but no more.
-
-They agree that it influences the story for several reasons. They imagine vistas full of unknowable magical effects and plot devices for Zird to stick his nose in, as well as the Collegia’s territorial desire over the lore.
-
-They decide that Zird’s magic will let someone interact with the supernatural in a way that other people simply can’t do, and can affect and harm people, but again, they stress that it shouldn’t be more powerful than other skills. Basic effects would just use the normal four actions, and rituals will use challenges, contests, or conflicts as appropriate.
-
-Specifically, they rule out the presence of world-altering “high” magic, creating things out of thin air, firebombing whole cities, and so forth. If those things exist, it’s a thread for a scenario, and the product of several people making huge sacrifices.
-
-The group doesn’t see magic influencing other skills much, which helps it keep its compartmentalized nature.
-
-Using Zird’s magic is all about the weird. Ryan imagines making up odd lists of requirements and ingredients that don’t really follow a consistent pattern—some things he can do quickly, others he can’t, and it’s all about dramatic interest in the moment to determine which is when. The group is comfortable with this looseness, so they assent.
+> For Zird’s magic, the group decides that they want to keep things pretty low-key and abstract—it’s just another method of solving problems, like Landon’s martial arts or Cynere’s swordthiefery (which Lily insists is a technical term)—a highly trained wizard is to be feared as much as a highly trained swordsman, but no more.
+>
+> They agree that it influences the story for several reasons. They imagine vistas full of unknowable magical effects and plot devices for Zird to stick his nose in, as well as the Collegia’s territorial desire over the lore.
+>
+> They decide that Zird’s magic will let someone interact with the supernatural in a way that other people simply can’t do, and can affect and harm people, but again, they stress that it shouldn’t be more powerful than other skills. Basic effects would just use the normal four actions, and rituals will use challenges, contests, or conflicts as appropriate.
+>
+> Specifically, they rule out the presence of world-altering “high” magic, creating things out of thin air, firebombing whole cities, and so forth. If those things exist, it’s a thread for a scenario, and the product of several people making huge sacrifices.
+>
+> The group doesn’t see magic influencing other skills much, which helps it keep its compartmentalized nature.
+>
+> Using Zird’s magic is all about the weird. Ryan imagines making up odd lists of requirements and ingredients that don’t really follow a consistent pattern—some things he can do quickly, others he can’t, and it’s all about dramatic interest in the moment to determine which is when. The group is comfortable with this looseness, so they assent.
 
 ### Assigning Character Elements
 
@@ -4430,9 +4306,7 @@ An extra that describes some integral ability of a character might grant a new s
 
 With a firm grasp of what the extra does, you’ll choose which character elements best reinforce those ideas in play and how you’ll use them.
 
-{example}
-
-For Zird’s magic, the group decides that it should use aspects and skills for sure—there’s a clear story influence, and magic creates a new avenue of dealing with problems. They don’t want it to enhance other skills, but rather stand alone, so it doesn’t use stunts. They don’t envision any kind of “mana pool” or other resource associated with it, so it doesn’t use stress or consequences.
+> For Zird’s magic, the group decides that it should use aspects and skills for sure—there’s a clear story influence, and magic creates a new avenue of dealing with problems. They don’t want it to enhance other skills, but rather stand alone, so it doesn’t use stunts. They don’t envision any kind of “mana pool” or other resource associated with it, so it doesn’t use stress or consequences.
 
 ### Permissions And Costs
 
@@ -4444,11 +4318,9 @@ Fortunately, because extras use character elements that are already familiar to 
 
 GMs, if you don’t want players to choose between having extras and having the normal stuff available to a starting character, feel free to raise the number of slots all PCs get at character creation to accommodate extras—just make sure that each PC gets the same amount of additional slots.
 
-{example}
+> Amanda establishes that Zird should have an aspect reflecting that he’s been trained in the Collegia’s magic, as a permission. Zird already does, so that’s a non-issue.
 
-Amanda establishes that Zird should have an aspect reflecting that he’s been trained in the Collegia’s magic, as a permission. Zird already does, so that’s a non-issue.
-
-As for cost, because his magic is going to be primarily skill-based, she’s just going to make him take the magic-using skill and put it in his skill pyramid. Further, in order to save effort, she decides that the skill in question is going to be just plain old Lore, and suggests that anyone with the appropriate training and a high Lore skill could call on magic, rather than it being an issue of genetics or birthright. Ryan likes this, because it’s simple and down to earth, and agrees.
+> As for cost, because his magic is going to be primarily skill-based, she’s just going to make him take the magic-using skill and put it in his skill pyramid. Further, in order to save effort, she decides that the skill in question is going to be just plain old Lore, and suggests that anyone with the appropriate training and a high Lore skill could call on magic, rather than it being an issue of genetics or birthright. Ryan likes this, because it’s simple and down to earth, and agrees.
 
 ### The Writeup
 
@@ -4494,31 +4366,29 @@ An Armor value reduces the shifts of a successful hit. So, Armor:2 makes any hit
 
 We recommend setting a scale for Weapon damage from 1 to 4, keeping in mind that on a tie, a Weapon:4 hit will take out four Average nameless NPCs. Then set your Armor ratings based on what you think you’d need to fully protect against the weapons on each level.
 
-{example}
+> Amanda talks to the group about adding Weapon and Armor ratings. They agree, so now she’ll set up examples of weapons and their corresponding ratings. It’s a fantasy world, and fairly gritty, so she thinks about the “Weapon:4” guideline above and decides that any large, two-handed weapon (like a polearm or claymore-like sword) would spell doom for a nameless NPC group, even on a clumsy hit.
+>
+> Extrapolating from there, she ends up with the following:
+>
+> Weapon:1 corresponds to items like brass knuckles and small saps, or most improvised weapons.Armor:1 is padded clothes.
+>
+> Weapon:2 corresponds to short blades or clubs, such as a dagger or a truncheon. Armor:2 is padding and mail.
+>
+> Weapon:3 covers most swords, maces, and anything you use one-handed. Armor:3 is mail and plate.
+>
+> Weapon:4 is reserved for large, two-handed melee weapons. Armor:4 is full-plate.
 
-Amanda talks to the group about adding Weapon and Armor ratings. They agree, so now she’ll set up examples of weapons and their corresponding ratings. It’s a fantasy world, and fairly gritty, so she thinks about the “Weapon:4” guideline above and decides that any large, two-handed weapon (like a polearm or claymore-like sword) would spell doom for a nameless NPC group, even on a clumsy hit.
-
-Extrapolating from there, she ends up with the following:
-
-Weapon:1 corresponds to items like brass knuckles and small saps, or most improvised weapons.Armor:1 is padded clothes.
-
-Weapon:2 corresponds to short blades or clubs, such as a dagger or a truncheon. Armor:2 is padding and mail.
-
-Weapon:3 covers most swords, maces, and anything you use one-handed. Armor:3 is mail and plate.
-
-Weapon:4 is reserved for large, two-handed melee weapons. Armor:4 is full-plate.
-
-##### Zero Sum Is Boring
-
-Before you go crazy making weapons and armor charts for your campaign, you should stop and think about whether their inclusion is really going to make that much of a difference in your conflict scenes.
-
-The reason we say this is because the first thing your players will want to do is eliminate the effectiveness of whatever their opponents have by armoring up. And unless you want your NPCs to get slaughtered, eventually you’re going to have to do the same. If everyone tends to be the equal of everyone else in terms of weapons and armor, you have a zero-sum game, and you might as well just go back to making everyone roll their default skills.
-
-One way to handle this is to create a deliberate disparity between Weapon and Armor ratings, allowing one to go higher than the other. History is on your side here—most armor couldn’t completely protect against the weapons they went up against. Chain mail might keep a blade slash away, but it’s not going to do much about the blunt force trauma of a mace hit. Likewise, a set of plate might deflect a mace away, but a spear or a thrust sword that can slip between the plates ruins its day.
-
-Another one is to make really good armor unusually scarce, the province of the extremely privileged, rich, or otherwise elite. So while it might be really easy to find a Weapon:3 sword, only the Royal Guard of Carmelion has the master blacksmiths necessary to make armor that’s its equal. Players might spend a lot of time trying to buy, cheat, conquer, or steal their way into such a set of armor, but at least you’ve squeezed some drama out of the attempt.
-
-Just keep in mind that if you’re going to set armor and weapons up to be complete equals, you run the risk of wasted effort when their presence doesn’t actually matter.
+> ##### Zero-Sum Is Boring
+>
+> Before you go crazy making weapons and armor charts for your campaign, you should stop and think about whether their inclusion is really going to make that much of a difference in your conflict scenes.
+>
+> The reason we say this is because the first thing your players will want to do is eliminate the effectiveness of whatever their opponents have by armoring up. And unless you want your NPCs to get slaughtered, eventually you’re going to have to do the same. If everyone tends to be the equal of everyone else in terms of weapons and armor, you have a zero-sum game, and you might as well just go back to making everyone roll their default skills.
+>
+> One way to handle this is to create a deliberate disparity between Weapon and Armor ratings, allowing one to go higher than the other. History is on your side here—most armor couldn’t completely protect against the weapons they went up against. Chain mail might keep a blade slash away, but it’s not going to do much about the blunt force trauma of a mace hit. Likewise, a set of plate might deflect a mace away, but a spear or a thrust sword that can slip between the plates ruins its day.
+>
+> Another one is to make really good armor unusually scarce, the province of the extremely privileged, rich, or otherwise elite. So while it might be really easy to find a Weapon:3 sword, only the Royal Guard of Carmelion has the master blacksmiths necessary to make armor that’s its equal. Players might spend a lot of time trying to buy, cheat, conquer, or steal their way into such a set of armor, but at least you’ve squeezed some drama out of the attempt.
+>
+> Just keep in mind that if you’re going to set armor and weapons up to be complete equals, you run the risk of wasted effort when their presence doesn’t actually matter.
 
 ##### Superpowers
 
@@ -4570,13 +4440,13 @@ You don’t roll Notice or Investigate actions if the object of your search is h
 
 This also helps you stay hidden, because you can see when people are looking for you and where they are. +2 to Stealth to avoid detection.
 
-### Powers And Scaling
-
-As you can see, “balancing” powers in Fate is more a matter of art than science. There are some rough equivalencies you can rely on, like 1 fate point = 1 invoke-equivalent or 1 stunt-equivalent, but when you get into writing rules exceptions like the one for X-Ray Vision, there’s no hard or fast rule for what’s too powerful. Everything is relative to your tastes, and Fate is hard to break.
-
-So don’t sweat it too much when you’re making these up—go with what sounds cool, and if you break something, just change it later. Players, don’t be jerks about this if one of your powers gets a little nerfed.
-
-More precise guidance is in the Fate System Toolkit.
+> ### Powers And Scaling
+>
+> As you can see, “balancing” powers in Fate is more a matter of art than science. There are some rough equivalencies you can rely on, like 1 fate point = 1 invoke-equivalent or 1 stunt-equivalent, but when you get into writing rules exceptions like the one for X-Ray Vision, there’s no hard or fast rule for what’s too powerful. Everything is relative to your tastes, and Fate is hard to break.
+>
+> So don’t sweat it too much when you’re making these up—go with what sounds cool, and if you break something, just change it later. Players, don’t be jerks about this if one of your powers gets a little nerfed.
+>
+> More precise guidance is in the Fate System Toolkit.
 
 ### Special Gear
 
@@ -4588,13 +4458,13 @@ An aspect on gear might also suggest the best situation in which to use it or de
 
 We recommend against going overboard with this and giving every single item your PC owns an aspect or stunt. This is a game about your character, not about his or her stuff. For the most part, you should assume that if your character has a particular skill, that includes the appropriate stuff to use that skill effectively. Reserve extras for items that have unique or personal value, something that you’re not going to be changing constantly through the course of the campaign.
 
-#### Quick And Dirty Story Based Gear
-
-If you don’t want to deal with extras, there’s a way to do gear that doesn’t require too much rigmarole: think of them as auto-created advantages that you bring into a scene. GMs, you already get to put stuff likeNarrow Alleys and Rough Terrain out there—you can also apply this to describe the situational advantages that characters get from gear.
-
-So, if your PC has a full-auto rifle and is taking on someone with a pistol, add a Better Firepower aspect to your character with a free invoke at the start of a scene, just like you would if you’d created that advantage with a roll. That way, you can tune the benefits to narrative circumstances—if you’re fighting in a really narrow alley, your sword might be a poorer tool than your opponent’s knife, so they’d get a free invoke on a Poor Choice of Weapon aspect attached to you.
-
-In those rare situations where you have the absolutely ideal tool for a job, the aspect you get might count as being “with style”, and come with two free invokes.
+> #### Quick And Dirty Story Based Gear
+>
+> If you don’t want to deal with extras, there’s a way to do gear that doesn’t require too much rigmarole: think of them as auto-created advantages that you bring into a scene. GMs, you already get to put stuff likeNarrow Alleys and Rough Terrain out there—you can also apply this to describe the situational advantages that characters get from gear.
+>
+> So, if your PC has a full-auto rifle and is taking on someone with a pistol, add a Better Firepower aspect to your character with a free invoke at the start of a scene, just like you would if you’d created that advantage with a roll. That way, you can tune the benefits to narrative circumstances—if you’re fighting in a really narrow alley, your sword might be a poorer tool than your opponent’s knife, so they’d get a free invoke on a Poor Choice of Weapon aspect attached to you.
+>
+> In those rare situations where you have the absolutely ideal tool for a job, the aspect you get might count as being “with style”, and come with two free invokes.
 
 ##### Extra Demonbane The Enchanted Sword
 
@@ -4686,7 +4556,7 @@ Add the following actions to the Resources skill:
 
 **Defend**: Use Resources to maintain your status in the face of attempts to destroy your capital.
 
-As an interesting advancement option, you might consider allowing permanent downgrades of the Resources skill as a tradeoff for upgrading certain extras, if that extra is something money can buy.
+> As an interesting advancement option, you might consider allowing permanent downgrades of the Resources skill as a tradeoff for upgrading certain extras, if that extra is something money can buy.
 
 #### Vehicles Locations And Organizations
 
@@ -4816,9 +4686,11 @@ You get one free stunt from among those possessed by your order, and you can get
 
 You call on your magical skills when something makes the use of your mundane skills impossible. For example, if you can no longer interrogate a suspect because the torture has killed him, you’d make an overcome roll with Learn to discover what you need to know through magic. If someone is suffering a deep, dark depression that no normal care can address, create an advantage with Change to alter their mood.
 
+<!--
 # Cheat Sheet
 
 [We leave it to you to design the cheat sheet best suited to your game.]
+-->
 
 # Veterans Guide
 
@@ -4873,7 +4745,7 @@ These exist. Whereas each previous Fate game had a specific way of dealing with 
 
 # Feedback Heroes
 
-> 3Jane, John A, Scott Acker, Jordan Adams, Ryan Aech, Dan Alexander, Danny Alexander, Jens Alfke, Carl Anderson, Alexandre Antonov, Devon Apple, Mark Arndt, Arrghus, Michael Atlin, Wille Backman, Kevin Bates, J B Bell, Richard Bellingham, Garrison Benson, Michael R. Bernstein, Billchuck, Don Bisdorf, Peter Blake, Ron Blessing, Adam Blinkinsop, bodhranist, McKay Bonham, Jérémie “Blacky” Bouillon, Brett Bowen, Michael Bowman, Guy Bowring, Ezra Bradford, Mick Bradley, Fabrice Breau, Jean-Baptiste Breton, Bill Burdick, Francisco Bustos, Jason Campbell, Sean Carroll, Nick Carter, Richard Chilton, Krzysztof Chyla, Coboney, Bill Collins, Cameron Corniuk, Danni Coy, Creature, cthos, Josh Culbertson, Patrick Curtin, Carsten Damm, Darryl, James Dawsey, Thomas Deeny, Martin Dickson, Rob Donoghue, Droqen, Lukasz Dziubczyk, Eärdil, Manuel Echevarria, Jason Eley, Johan Elmquist, James English, Epimetreus, Thomas Erskine, Ian Evans, Dustin Evermore, John Faludi, Keith Fannin, Jarrod Farquhar-Nicol, Christian Fasy, Olman Feelyus, Antaeus Feldspar, Fenikso, Chris Flipse, Ben Flood, Brook Freeman, Emlyn Freeman, Josh French, Gauth, GhostBob, D Gilbert, Ed Gonzalez, Mikhail L. Gordin, Oliver Graf, Tim Graham, Tim Gray, Michael Guerra, Jack Gulick, Gwathdring, Roland Gyarmati, Dan Hall, Rob Hanz, Craig Hargraves, Seán Harnett, George Harnish, John Harper, Jon Harrison, Julien Harroch, Christopher Hazell, M. Herzog, Magnus Lie Hetland, Bruce Hill, Rob Hipskind, Jonathon Hodges, Brian Hoffmann, Troy Holaday, Stephen C. Holland, Jeff Hoskinson, Robert M. S. Huether, Link Hughes, Casey Hunten, Blake Hutchins, Hypersmurf, Justin D. Jacobson, Kent J. Johansen, johnoghue, Stephen “SDJThorin” Johnson, Andrew Kampen, Jack Kelly, Dave Klempa, Jeremy Kostiew, Darth Krzysztof, Steve Kunec, Mark Kung, Steve Kyer, Jonathan Lang, Alec Lanter, Shai Laric, Gee Lawrence, LDK, David Leaman, Josh Leavitt, PK Levine, Adam Longley, Eliot Lyon, EK Lytle, Edward MacGregor, Joshua Madore, Ergodic Mage, Ville Makkonen, James Malaspino, Erin McBride, Jon T. McCarty II, Robin McCollum, Robert McCowen, Shawn McDaniel, Colin McMillen, Dylan Mikus, Earl Miles, Agustin Miranda, Tom Miskey, Jim Montgomery, Jacob Mooney, Sean Mulhern, Mysterious and Pedantic Stranger, Peter Netzer, Sarah Newton, Brian K. Nielsen, Koji Nishiuchi, Iain M Norman, Selene O’Rourke, Daniel Paarmann, Lisa Padol, Addramyr Palinor, Andrea “Lord Lance” Parducci, Johnny Peng, Ryan Perrin, Jonathan Pierson, Nick Pilon, Alexander Puterbaugh, Scott Pyle, Rob Rendell, James Ritter, Brian Rock, Mike Roddewig, RolHypnos, Roman, Garrett Rooney, Rosque, RPG Geek, Christopher Ruthenbeck, Carrie S., Norman Sager, Ryan Sands, Philippe Saner, Christoph Sapinsky, John Savage, Ernie Sawyer, Evan Sayre, SC, Torge Schmidt, Jason Schneiderman, Adam Schwaninger, Tim Seiger, Alfredo Sendín, Mike Sergio, Andrew Shore, shosuko, Josh Simmons, Scott Slater, Robert Slaughter, Jon Smejkal, Ruben Smith-Zempel, Tess Snider, Paul Snow, Soren, SQLCowboy, Jan Stals, starwed, Sterling, David L. Stewart, Jaap Stoel, Lane Stroud, Joe Stroup, SwiftOne, Ricardo Tavares, David Thackaberry, John Tobin, Tom X. Tobin, Alan Tsang, Joshua Turton, Carrie Ulrich, Shea Lafayette Valentine, Leroy Van Camp III, Kevin Veale, Paul Vermeren, Nathan W., Ralf Wagner, Josh Ward, John Weber, Greg Weir, Marko Wenzel, Beat Wieland, Mitch A. Williams, Jan Willms, Gordon Wincott, Xavon Wrentaile, wusemajor, Savage Yinn, Kris Zaragoza, Jacob Z-Dawg Zimmerman, zombiecalypse
+> 3Jane • John A • Scott Acker • Jordan Adams • Ryan Aech • Dan Alexander • Danny Alexander • Jens Alfke • Carl Anderson • Alexandre Antonov • Devon Apple • Mark Arndt • Arrghus • Michael Atlin • Wille Backman • Kevin Bates • J B Bell • Richard Bellingham • Garrison Benson • Michael R. Bernstein • Billchuck • Don Bisdorf • Peter Blake • Ron Blessing • Adam Blinkinsop • bodhranist • McKay Bonham • Jérémie “Blacky” Bouillon • Brett Bowen • Michael Bowman • Guy Bowring • Ezra Bradford • Mick Bradley • Fabrice Breau • Jean-Baptiste Breton • Bill Burdick • Francisco Bustos • Jason Campbell • Sean Carroll • Nick Carter • Richard Chilton • Krzysztof Chyla • Coboney • Bill Collins • Cameron Corniuk • Danni Coy • Creature • cthos • Josh Culbertson • Patrick Curtin • Carsten Damm • Darryl • James Dawsey • Thomas Deeny • Martin Dickson • Rob Donoghue • Droqen • Lukasz Dziubczyk • Eärdil • Manuel Echevarria • Jason Eley • Johan Elmquist • James English • Epimetreus • Thomas Erskine • Ian Evans • Dustin Evermore • John Faludi • Keith Fannin • Jarrod Farquhar-Nicol • Christian Fasy • Olman Feelyus • Antaeus Feldspar • Fenikso • Chris Flipse • Ben Flood • Brook Freeman • Emlyn Freeman • Josh French • Gauth • GhostBob • D Gilbert • Ed Gonzalez • Mikhail L. Gordin • Oliver Graf • Tim Graham • Tim Gray • Michael Guerra • Jack Gulick • Gwathdring • Roland Gyarmati • Dan Hall • Rob Hanz • Craig Hargraves • Seán Harnett • George Harnish • John Harper • Jon Harrison • Julien Harroch • Christopher Hazell • M. Herzog • Magnus Lie Hetland • Bruce Hill • Rob Hipskind • Jonathon Hodges • Brian Hoffmann • Troy Holaday • Stephen C. Holland • Jeff Hoskinson • Robert M. S. Huether • Link Hughes • Casey Hunten • Blake Hutchins • Hypersmurf • Justin D. Jacobson • Kent J. Johansen • johnoghue • Stephen “SDJThorin” Johnson • Andrew Kampen • Jack Kelly • Dave Klempa • Jeremy Kostiew • Darth Krzysztof • Steve Kunec • Mark Kung • Steve Kyer • Jonathan Lang • Alec Lanter • Shai Laric • Gee Lawrence • LDK • David Leaman • Josh Leavitt • PK Levine • Adam Longley • Eliot Lyon • EK Lytle • Edward MacGregor • Joshua Madore • Ergodic Mage • Ville Makkonen • James Malaspino • Erin McBride • Jon T. McCarty II • Robin McCollum • Robert McCowen • Shawn McDaniel • Colin McMillen • Dylan Mikus • Earl Miles • Agustin Miranda • Tom Miskey • Jim Montgomery • Jacob Mooney • Sean Mulhern • Mysterious and Pedantic Stranger • Peter Netzer • Sarah Newton • Brian K. Nielsen • Koji Nishiuchi • Iain M Norman • Selene O’Rourke • Daniel Paarmann • Lisa Padol • Addramyr Palinor • Andrea “Lord Lance” Parducci • Johnny Peng • Ryan Perrin • Jonathan Pierson • Nick Pilon • Alexander Puterbaugh • Scott Pyle • Rob Rendell • James Ritter • Brian Rock • Mike Roddewig • RolHypnos • Roman • Garrett Rooney • Rosque • RPG Geek • Christopher Ruthenbeck • Carrie S. • Norman Sager • Ryan Sands • Philippe Saner • Christoph Sapinsky • John Savage • Ernie Sawyer • Evan Sayre • SC • Torge Schmidt • Jason Schneiderman • Adam Schwaninger • Tim Seiger • Alfredo Sendín • Mike Sergio • Andrew Shore • shosuko • Josh Simmons • Scott Slater • Robert Slaughter • Jon Smejkal • Ruben Smith-Zempel • Tess Snider • Paul Snow • Soren • SQLCowboy • Jan Stals • starwed • Sterling • David L. Stewart • Jaap Stoel • Lane Stroud • Joe Stroup • SwiftOne • Ricardo Tavares • David Thackaberry • John Tobin • Tom X. Tobin • Alan Tsang • Joshua Turton • Carrie Ulrich • Shea Lafayette Valentine • Leroy Van Camp III • Kevin Veale • Paul Vermeren • Nathan W. • Ralf Wagner • Josh Ward • John Weber • Greg Weir • Marko Wenzel • Beat Wieland • Mitch A. Williams • Jan Willms • Gordon Wincott • Xavon Wrentaile • wusemajor • Savage Yinn • Kris Zaragoza • Jacob Z-Dawg Zimmerman • zombiecalypse
 
 # Appendix I Open Game License Version 1 0a
 
