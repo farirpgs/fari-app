@@ -1,4 +1,5 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import clsx from "clsx";
 import React from "react";
 
@@ -9,6 +10,11 @@ function getAnchorSvg(color: string) {
 }
 
 const styles = (theme: Theme) => {
+  const lightBackground =
+    theme.palette.type === "light"
+      ? lighten(theme.palette.secondary.light, 0.85)
+      : darken(theme.palette.secondary.light, 0.75);
+
   return {
     root: {
       ...theme.typography.body1,
@@ -63,31 +69,49 @@ const styles = (theme: Theme) => {
       },
       "& h1": {
         ...theme.typography.h3,
+        color: theme.palette.primary.main,
+        textTransform: "uppercase",
+        fontWeight: 800,
         marginTop: "1rem",
         marginBottom: "2rem",
       },
       "& h2": {
         ...theme.typography.h4,
+        color: theme.palette.primary.main,
+        textTransform: "uppercase",
+        fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
       },
       "& h3": {
         ...theme.typography.h5,
+        color: theme.palette.primary.main,
+        textTransform: "uppercase",
+        fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
       },
       "& h4": {
         ...theme.typography.h6,
+        color: theme.palette.primary.main,
+        textTransform: "uppercase",
+        fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
       },
       "& h5": {
         ...theme.typography.h6,
+        color: theme.palette.primary.main,
+        textTransform: "uppercase",
+        fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
       },
       "& h6": {
         ...theme.typography.h6,
+        color: theme.palette.primary.main,
+        textTransform: "uppercase",
+        fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
       },
@@ -134,6 +158,7 @@ const styles = (theme: Theme) => {
         "marginBottom": "16px",
         "borderSpacing": 0,
         "overflow": "hidden",
+
         "& .prop-name": {
           fontSize: 13,
           fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
@@ -168,22 +193,34 @@ const styles = (theme: Theme) => {
       },
       "& th": {
         fontSize: 14,
+        textAlign: "left",
         lineHeight: theme.typography.pxToRem(24),
-        fontWeight: theme.typography.fontWeightMedium,
+        fontWeight: theme.typography.fontWeightBold,
         color: theme.palette.text.primary,
         whiteSpace: "pre",
         borderBottom: `1px solid ${theme.palette.divider}`,
-        padding: 16,
+        padding: ".5rem",
       },
       "& blockquote": {
-        "borderLeft": "5px solid #ffe564",
-        "backgroundColor": "rgba(255,229,100,0.2)",
+        "borderLeft": `5px solid ${theme.palette.primary.main}`,
+        "boxShadow": theme.shadows[1],
+        "backgroundColor": lightBackground,
         "padding": "4px 24px",
         "margin": "24px 0",
         "& p": {
           marginTop: "16px",
         },
+        "& h1,h2,h3,h4,h5,h6": {
+          marginTop: "1rem",
+          fontStyle: "normal",
+          fontFamily: `'Work Sans', sans-serif`,
+        },
+        "& *": {
+          fontStyle: "italic",
+          fontFamily: `'Work Sans', sans-serif`,
+        },
       },
+
       "& a, & a code": {
         // Style taken from the Link component
         "color": theme.palette.primary.main,

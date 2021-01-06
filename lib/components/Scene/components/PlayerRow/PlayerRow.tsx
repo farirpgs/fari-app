@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -23,6 +22,7 @@ import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogge
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
+import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -49,6 +49,7 @@ export const PlayerRow: React.FC<
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
   const textColor = useTextColors(theme.palette.background.default);
+  const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
     : textColor.disabled;
@@ -60,15 +61,7 @@ export const PlayerRow: React.FC<
 
   const hasCharacterSheet = !!props.player.character;
 
-  const selectedRowStyle = css(
-    theme.palette.type === "light"
-      ? {
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          backgroundColor: darken(theme.palette.secondary.dark, 0.75),
-        }
-  );
+  const selectedRowStyle = css({ backgroundColor: lightBackground });
   const playerInfoCellStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
