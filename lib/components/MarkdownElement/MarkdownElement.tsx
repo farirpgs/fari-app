@@ -210,6 +210,9 @@ const styles = (theme: Theme) => {
         "& p": {
           marginTop: "16px",
         },
+        "& ul:first-child": {
+          marginTop: "16px",
+        },
         "& h1,h2,h3,h4,h5,h6": {
           marginTop: "1rem",
           fontStyle: "normal",

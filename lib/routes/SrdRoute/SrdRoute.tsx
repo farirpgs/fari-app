@@ -19,14 +19,16 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React from "react";
-import { useHistory, useParams } from "react-router";
+import kebabCase from "lodash/kebabCase";
+import React, { useEffect } from "react";
+import { useHistory, useLocation, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import {
   ILoadFunction,
@@ -49,6 +51,23 @@ export const SrdRoute: React.FC<{
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const history = useHistory();
+  const location = useLocation();
+  const title = currentH1?.textContent ?? "";
+  const logger = useLogger();
+
+  useEffect(() => {
+    const srdTitle = props.title ? `:${kebabCase(props.title)}` : "";
+    const pageTitle = title ? `:${kebabCase(title)}` : "";
+    const sectionTitle = location.hash
+      ? `:${location.hash.replace("#", "")}`
+      : "";
+    const logMessage = `Route:Srd${srdTitle}${pageTitle}${sectionTitle}`;
+
+    logger.info(logMessage, {
+      pathname: location.pathname,
+      hash: location.hash,
+    });
+  }, [location.pathname, location.hash]);
 
   function goTo(path: string) {
     history.push(`${props.prefix}/${path}`);
@@ -56,7 +75,7 @@ export const SrdRoute: React.FC<{
 
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined}>
-      <PageMeta title={`${currentH1?.textContent ?? ""} | ${props.title}`} />
+      <PageMeta title={`${title} | ${props.title}`} />
       {html ? (
         <Fade in>
           <Box display="flex">
@@ -84,13 +103,17 @@ export const SrdRoute: React.FC<{
     return (
       <Grid container justify="space-between" alignItems="flex-end">
         <Grid item sm={6} xs={12}>
-          <FateLabel>
-            <AppLink to="/srds">{"SRDs"}</AppLink>
-            {" / "}
-            {props.title}
-          </FateLabel>
+          <Box pt="1rem">
+            <FateLabel>
+              <AppLink to="/srds">{"SRDs"}</AppLink>
+              {" / "}
+              {props.title}
+            </FateLabel>
+          </Box>
         </Grid>
-        <Grid item>{renderAutoComplete()}</Grid>
+        <Grid item sm={4} xs={12}>
+          {renderAutoComplete()}
+        </Grid>
       </Grid>
     );
   }
@@ -156,7 +179,7 @@ export const SrdRoute: React.FC<{
             <TextField
               {...params}
               fullWidth
-              className={css({ width: "250px", margin: "0" })}
+              className={css({ width: "100%", margin: "0" })}
               label="Search"
               margin="normal"
             />
@@ -278,28 +301,3 @@ export const SrdRoute: React.FC<{
 SrdRoute.displayName = "SrdRoute";
 
 export default SrdRoute;
-
-export function nextUntil(
-  elem: Element | undefined | null,
-  selector: string,
-  filter?: string
-) {
-  const siblings: Array<Element> = [];
-
-  let currentElement = elem?.nextElementSibling;
-
-  while (currentElement) {
-    if (currentElement.matches(selector)) break;
-
-    if (filter && !currentElement.matches(filter)) {
-      currentElement = currentElement.nextElementSibling;
-      continue;
-    }
-
-    siblings.push(currentElement);
-
-    currentElement = currentElement.nextElementSibling;
-  }
-
-  return siblings;
-}
