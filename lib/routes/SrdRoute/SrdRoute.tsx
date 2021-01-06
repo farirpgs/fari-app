@@ -27,6 +27,7 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import MarkdownElement from "../../components/MarkdownElement/MarkdownElement";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import {
   ILoadFunction,
   IMarkdownHeader,
@@ -44,6 +45,7 @@ export const SrdRoute: React.FC<{
   const { page } = useParams<{ page?: string }>();
   const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
   const { html, nextH1, previousH1, currentH1 } = useMarkdownPage(page, dom);
+  const lightBackground = useLightBackground();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const history = useHistory();
@@ -178,6 +180,7 @@ export const SrdRoute: React.FC<{
             }),
             paper: css({
               width: drawerWidth,
+              background: lightBackground,
             }),
           }}
         >

@@ -45,12 +45,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
   ICharacter,
-  useCharacters
+  useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes
+  useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
@@ -74,7 +74,6 @@ import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
-
 
 export enum SceneMode {
   PlayOnline,
