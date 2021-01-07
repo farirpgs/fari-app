@@ -77,7 +77,7 @@ Players, your character sheet contains everything you need to know about your PC
 
 <!-- Here’s an example of a Fate character sheet, so we can show you all the components. -->
 
-<!-- {Insert your character sheet graphic here} -->
+<!-- Insert your character sheet graphic here -->
 
 ### Aspects
 
@@ -2443,7 +2443,7 @@ In a mental conflict, it might not always make sense to use situation aspects an
 So, you may not even need situation aspects or zones for a lot of mental conflicts. Don’t feel obligated to include them.
 
 > Considering our warehouse again, Amanda thinks about what might make good situation aspects.
-
+>
 > She decides that there are enough crates in here to make free movement a potential problem, so she picks Heavy Crates and Cramped as aspects. The loading door is open, which means that there’s a large dock with water in it, so she also picks Open to the Water as a situation aspect, figuring that someone might try to knock someone in.
 
 As the scene unfolds, players might suggest features of the environment that are perfect as aspects. If the GM described the scene as being poorly lit, a player should be able to invoke the Shadows to help on a Stealth roll even if she hadn’t previously established it as an aspect. If the feature would require some intervention on the part of the characters in the scene to become aspect-worthy, then that’s the purview of the create an advantage action. Usually the barn doesn’t catch On Fire! without someone kicking over the lantern. Usually.
@@ -2482,13 +2482,11 @@ Make sure everyone agrees on the general goals of each side, who’s on which si
 
 It might also help, GMs, to decide how those groups are going to “divvy up” to face one another—is one character going to get mobbed by the bad guy’s henchmen, or is the opposition going to spread itself around equally among the PCs? You might change your mind once the action starts, but if you have a basic idea, it gives you a good starting point to work from.
 
-{example}
-
-In our continuing warehouse fight example, the sides are obvious—Og and his buddies want to do in the PCs, and the PCs want to keep that from happening.
-
-Ryan asks Amanda about finding the smuggled goods, and Amanda replies, “If you think you can sneak in a moment during the fight to look for them, go for it. We’ll see what happens.”
-
-The conflict starts with everyone on the main warehouse floor. Amanda decides that Og and one of his friends are going to go after Landon, two of the other thugs are going after Cynere, and the final one is going to chase after Zird.
+> In our continuing warehouse fight example, the sides are obvious—Og and his buddies want to do in the PCs, and the PCs want to keep that from happening.
+>
+> Ryan asks Amanda about finding the smuggled goods, and Amanda replies, “If you think you can sneak in a moment during the fight to look for them, go for it. We’ll see what happens.”
+>
+> The conflict starts with everyone on the main warehouse floor. Amanda decides that Og and one of his friends are going to go after Landon, two of the other thugs are going after Cynere, and the final one is going to chase after Zird.
 
 ### Turn Order
 
@@ -2576,8 +2574,6 @@ The second option you have for mitigating a hit is taking a consequence. A conse
 
 Consequences come in three levels of severity—mild, moderate, and severe. Each one has a different shift value: two, four, and six, respectively. On your character sheet, you have a number of available consequence slots, in this section:
 
-{Your character sheet image here}
-
 When you use a consequence slot, you reduce the shift value of the attack by the shift value of the consequence. You can use more than one consequence at a time if they’re available. Any of the hit’s remaining shifts must be handled by a stress box to avoid being taken out.
 
 However, there’s a penalty. The consequence written in the slot is an aspect that represents the lasting effect incurred from the attack. The opponent who forced you to take a consequence gets a free invocation, and the aspect remains on your character sheet until you’ve recovered the consequence slot. While it’s on your sheet, the consequence is treated like any other aspect, except because the slant on it is so negative, it’s far more likely to be used to your character’s detriment.
@@ -2604,15 +2600,13 @@ Here are some guidelines for choosing what to name a consequence:
 
 **Severe consequences** go straight to the emergency room (or whatever the equivalent is in your game)—they’re extremely nasty and prevent you from doing a lot of things, and will lay you out for a while. On the mental side, they express things like serious trauma or relationship-changing harm. Examples: Second-Degree Burn, Compound Fracture, Guts Hanging Out, Crippling Shame, Trauma-Induced Phobia.
 
-#### What Skill Do I Use For Recovery
-
-{example}
-
-In Hearts of Steel, physical recovery can only happen through the use of a Lore stunt, which Zird the Arcane has taken. This makes physical fights dangerous and suggests that actual medical training is quite rare. For mental recovery, we use the Empathy skill.
-
-If you want it to be easier to help people recover physically, you could add it as a default action to a skill. Lore is a good default option, but we could see it as a function of Crafts, too. It might even be important enough in your game to add a Medic or Survival skill.
-
-Likewise, if you want to restrict access to mental recovery, make it an Empathy or Rapport stunt, rather than having it built in to a skill.
+> #### What Skill Do I Use For Recovery
+>
+> In Hearts of Steel, physical recovery can only happen through the use of a Lore stunt, which Zird the Arcane has taken. This makes physical fights dangerous and suggests that actual medical training is quite rare. For mental recovery, we use the Empathy skill.
+>
+> If you want it to be easier to help people recover physically, you could add it as a default action to a skill. Lore is a good default option, but we could see it as a function of Crafts, too. It might even be important enough in your game to add a Medic or Survival skill.
+>
+> Likewise, if you want to restrict access to mental recovery, make it an Empathy or Rapport stunt, rather than having it built in to a skill.
 
 ### Recovering From A Consequence
 
@@ -3452,19 +3446,17 @@ If the situation is more complicated than that, make it a challenge instead. Thi
 
 Nameless NPCs don’t have to remain nameless. If the players decide to get to know that barkeep or town crier or security chief or whatever, go ahead and make a real person out of them—but that doesn’t mean that you need to make them any more mechanically complex. If you want to, of course, go ahead and promote them to a supporting NPC. But otherwise, simply giving that courtier a name and a motivation doesn’t mean he can’t go down in one punch.
 
-{example}
+> Tavern-Keeper (Average)
+> Aspects: I Don’t Want No Trouble in My Place
+> Skills: Average (+1) Contacts
 
-Tavern-Keeper (Average)
-Aspects: I Don’t Want No Trouble in My Place
-Skills: Average (+1) Contacts
+> Trained Thug (Fair)
+> Aspects: The Ways of the Streets, Violent Criminal
+> Skills: Fair (+2) Fight, Average (+1) Athletics and Physique
 
-Trained Thug (Fair)
-Aspects: The Ways of the Streets, Violent Criminal
-Skills: Fair (+2) Fight, Average (+1) Athletics and Physique
-
-Collegia Arcana Court Mage (Good)
-Aspects: Haughty Demeanor, Devoted to the Arcane Arts
-Skills: Good (+3) Lore, Fair (+2) Deceive, Average (+1) Will and Empathy
+> Collegia Arcana Court Mage (Good)
+> Aspects: Haughty Demeanor, Devoted to the Arcane Arts
+> Skills: Good (+3) Lore, Fair (+2) Deceive, Average (+1) Will and Empathy
 
 #### Supporting NPCs
 
@@ -4614,9 +4606,7 @@ Average (+1) Fight
 
 When you’re making a magic system, the preliminary discussion is extremely important, because you need to establish some firm expectations for what is and isn’t possible, and how far-reaching the effects can be. No two fantasy worlds in popular media have similar properties for their magic, and often, defining the arcane also defines a vital facet of how the world operates. Therefore, these examples are pretty detailed, using the full range of character elements.
 
-{example}
-
-Lucas the Magic Cop is a PC in the Fate game Ancestral Affairs, inspired by Hong Kong gunplay movies, where the characters are a special supernatural crimes task force operating in the fictional city of San Jian, California. In the setting, you have to channel magical power from ancestral, semi-divine spirits. Powers are specific and portfolio-based, so a spirit of water will confer different benefits than a spirit of luck. Also, people have karmic stress tracks, reflecting the resilience of their soul.
+> Lucas the Magic Cop is a PC in the Fate game Ancestral Affairs, inspired by Hong Kong gunplay movies, where the characters are a special supernatural crimes task force operating in the fictional city of San Jian, California. In the setting, you have to channel magical power from ancestral, semi-divine spirits. Powers are specific and portfolio-based, so a spirit of water will confer different benefits than a spirit of luck. Also, people have karmic stress tracks, reflecting the resilience of their soul.
 
 ##### Extra: Lucas's Arts
 
