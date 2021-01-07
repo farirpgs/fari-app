@@ -46,7 +46,10 @@ export const SrdRoute: React.FC<{
 }> = (props) => {
   const { page } = useParams<{ page?: string }>();
   const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
-  const { html, nextH1, previousH1, currentH1 } = useMarkdownPage(page, dom);
+  const { html, nextH1, previousH1, currentH1, description } = useMarkdownPage(
+    page,
+    dom
+  );
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
@@ -75,7 +78,7 @@ export const SrdRoute: React.FC<{
 
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined}>
-      <PageMeta title={`${title} | ${props.title}`} />
+      <PageMeta title={`${title} | ${props.title}`} description={description} />
       {html ? (
         <Fade in>
           <Box display="flex">

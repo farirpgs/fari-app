@@ -15,10 +15,15 @@ import core from "../../../images/fate/core.jpg";
 import { AppButtonLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
 
 export const SrdsRoute: React.FC = (props) => {
   return (
     <Page>
+      <PageMeta
+        title="Fate System Reference Documents (SRDs)"
+        description="Read and search through the Fate System Reference Documents (SRDs) with ease using Fari, The Fate Companion App"
+      />
       <Container maxWidth="md">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>

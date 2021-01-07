@@ -1,3 +1,4 @@
+import truncate from "lodash/truncate";
 import { useMemo } from "react";
 
 export function useMarkdownPage(
@@ -9,6 +10,8 @@ export function useMarkdownPage(
       dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
 
     const currentH1 = dom?.querySelector(`#${page}`) ?? allH1s[0];
+    const firstParagraph = dom?.querySelector(`p`)?.textContent ?? "";
+    const description = truncate(firstParagraph, { length: 155 });
 
     if (!currentH1) {
       return {
@@ -37,7 +40,13 @@ export function useMarkdownPage(
       newDom.append(e.cloneNode(true));
     });
 
-    return { html: newDom?.innerHTML, currentH1, previousH1, nextH1 };
+    return {
+      html: newDom?.innerHTML,
+      currentH1,
+      previousH1,
+      nextH1,
+      description,
+    };
   }, [page, dom]);
 }
 
