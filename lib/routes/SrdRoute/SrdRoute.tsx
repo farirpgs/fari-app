@@ -83,7 +83,7 @@ export const SrdRoute: React.FC<{
         <Fade in>
           <Box display="flex">
             {renderToc()}
-            <Container className={css({ flexGrow: 1 })}>
+            <Container maxWidth="md" className={css({ flexGrow: 1 })}>
               <Box pb="1rem" mt="-1.5rem">
                 {renderHeader()}
               </Box>
