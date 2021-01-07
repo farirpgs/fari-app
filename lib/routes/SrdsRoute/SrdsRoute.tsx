@@ -1,5 +1,4 @@
 import { css } from "@emotion/css";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import accelerated from "../../../images/fate/accelerated.jpg";
 import condensed from "../../../images/fate/condensed.jpg";
 import core from "../../../images/fate/core.jpg";
+import { AppButtonLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 
@@ -92,15 +92,9 @@ export const SrdCard: React.FC<{
       <CardActions className={css({ flex: "1 0 auto" })}>
         <Grid container justify="flex-end" alignItems="flex-end">
           <Grid item>
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => {
-                history.push(props.link);
-              }}
-            >
+            <AppButtonLink to={props.link} color="primary">
               {"Get Started"}
-            </Button>
+            </AppButtonLink>
           </Grid>
         </Grid>
       </CardActions>
