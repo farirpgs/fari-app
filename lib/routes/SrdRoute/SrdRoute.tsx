@@ -9,6 +9,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -16,11 +17,12 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { AppLink } from "../../components/AppLink/AppLink";
@@ -57,6 +59,7 @@ export const SrdRoute: React.FC<{
   const location = useLocation();
   const title = currentH1?.textContent ?? "";
   const logger = useLogger();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const srdTitle = props.title ? `:${kebabCase(props.title)}` : "";
@@ -77,7 +80,7 @@ export const SrdRoute: React.FC<{
   }
 
   return (
-    <Page drawerWidth={!isSmall ? drawerWidth : undefined}>
+    <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
       <PageMeta title={`${title} | ${props.title}`} description={description} />
       {html ? (
         <Fade in>
@@ -93,6 +96,7 @@ export const SrdRoute: React.FC<{
                 <Divider />
               </Box>
               {renderNavigationButtons()}
+              {renderMobileMenu()}
             </Container>
           </Box>
         </Fade>
@@ -102,17 +106,53 @@ export const SrdRoute: React.FC<{
     </Page>
   );
 
+  function renderTitle() {
+    return (
+      <FateLabel>
+        <AppLink to="/srds">{"SRDs"}</AppLink>
+        {" / "}
+        {props.title}
+      </FateLabel>
+    );
+  }
+
+  function renderMobileMenu() {
+    return (
+      <Hidden mdUp>
+        <Box
+          p=".5rem"
+          className={css({
+            position: "fixed",
+            bottom: "0",
+            left: "0",
+            width: "100%",
+            boxShadow: theme.shadows[24],
+            background: lightBackground,
+          })}
+        >
+          <Grid container spacing={1} alignItems="center">
+            <Grid item>
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  setMenuOpen(true);
+                }}
+              >
+                <MenuIcon color="inherit" />
+              </IconButton>
+            </Grid>
+            <Grid item>{renderTitle()}</Grid>
+          </Grid>
+        </Box>
+      </Hidden>
+    );
+  }
+
   function renderHeader() {
     return (
       <Grid container justify="space-between" alignItems="flex-end">
-        <Grid item sm={6} xs={12}>
-          <Box pt="1rem">
-            <FateLabel>
-              <AppLink to="/srds">{"SRDs"}</AppLink>
-              {" / "}
-              {props.title}
-            </FateLabel>
-          </Box>
+        <Grid item sm xs={12}>
+          <Box pt="1rem">{renderTitle()}</Box>
         </Grid>
         <Grid item sm={4} xs={12}>
           {renderAutoComplete()}
@@ -193,61 +233,87 @@ export const SrdRoute: React.FC<{
   }
 
   function renderToc() {
+    const list = (
+      <List>
+        {Object.entries(toc).map(([, h1], index) => {
+          return (
+            <React.Fragment key={index}>
+              <ListItem
+                button
+                dense
+                component={Link}
+                to={`${props.prefix}/${h1.page.id}`}
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                {renderTocElement(h1.page)}
+              </ListItem>
+              <Collapse in={currentH1?.id === h1.page.id}>
+                {h1.children.map((h2, h2Index) => {
+                  return (
+                    <ListItem
+                      button
+                      dense
+                      key={h2Index}
+                      component={Link}
+                      to={`#${h2.id}`}
+                      onClick={() => {
+                        window.location.hash = h2.id;
+                        setMenuOpen(false);
+                      }}
+                    >
+                      {renderTocElement(h2)}
+                    </ListItem>
+                  );
+                })}
+              </Collapse>
+            </React.Fragment>
+          );
+        })}
+      </List>
+    );
+
     return (
-      <Hidden smDown>
-        <Drawer
-          variant="permanent"
-          anchor="left"
-          open={true}
-          classes={{
-            root: css({
-              width: drawerWidth,
-              flexShrink: 0,
-            }),
-            paper: css({
-              width: drawerWidth,
-              background: lightBackground,
-            }),
-          }}
-        >
-          <Box mt="4.9rem" />
-          <Divider />
-          <List>
-            {Object.entries(toc).map(([, h1], index) => {
-              return (
-                <React.Fragment key={index}>
-                  <ListItem
-                    button
-                    dense
-                    component={Link}
-                    to={`${props.prefix}/${h1.page.id}`}
-                  >
-                    {renderTocElement(h1.page)}
-                  </ListItem>
-                  <Collapse in={currentH1?.id === h1.page.id}>
-                    {h1.children.map((h2, h2Index) => {
-                      return (
-                        <ListItem
-                          button
-                          dense
-                          key={h2Index}
-                          component={Link}
-                          to={`#${h2.id}`}
-                          onClick={() => {
-                            window.location.hash = h2.id;
-                          }}
-                        >
-                          {renderTocElement(h2)}
-                        </ListItem>
-                      );
-                    })}
-                  </Collapse>
-                </React.Fragment>
-              );
-            })}
-          </List>
-        </Drawer>
-      </Hidden>
+      <>
+        <Hidden mdUp>
+          <Drawer
+            anchor="bottom"
+            open={menuOpen}
+            onClose={() => {
+              setMenuOpen(false);
+            }}
+            classes={{
+              paper: css({
+                background: lightBackground,
+              }),
+            }}
+          >
+            <Box p="2rem">{list}</Box>
+          </Drawer>
+        </Hidden>
+        <Hidden smDown>
+          <Drawer
+            variant="permanent"
+            anchor="left"
+            open={true}
+            classes={{
+              root: css({
+                width: drawerWidth,
+                flexShrink: 0,
+              }),
+              paper: css({
+                width: drawerWidth,
+                background: lightBackground,
+              }),
+            }}
+          >
+            <Box mt="4.9rem" />
+            <Divider />
+            {list}
+          </Drawer>
+        </Hidden>
+      </>
     );
   }
 

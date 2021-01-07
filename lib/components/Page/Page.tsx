@@ -53,6 +53,7 @@ export const Page: React.FC<{
   live?: LiveMode;
   liveLabel?: string;
   drawerWidth?: string;
+  pb?: string;
 }> = (props) => {
   const history = useHistory();
   const { displayDonation = true } = props;
@@ -122,6 +123,7 @@ export const Page: React.FC<{
   function renderFooter() {
     return (
       <Box
+        pb={props.pb}
         displayPrint="none"
         className={css({
           paddingTop: "1rem",
