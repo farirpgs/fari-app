@@ -362,6 +362,9 @@ export const IndexCard: React.FC<
   }
 
   function renderContent() {
+    const shouldRenderContentTitle =
+      aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
+
     return (
       <Box
         className={css({
@@ -372,6 +375,24 @@ export const IndexCard: React.FC<
           borderBottom: `1px solid ${theme.palette.divider}`,
         })}
       >
+        {shouldRenderContentTitle && (
+          <Box px="1rem">
+            <Typography variant="overline">
+              {aspect.type === AspectType.NPC && (
+                <>
+                  {t("character-dialog.aspects")} {" & "}
+                  {t("character-dialog.notes")}
+                </>
+              )}
+              {aspect.type === AspectType.BadGuy && (
+                <>
+                  {t("character-dialog.aspects")} {" & "}
+                  {t("character-dialog.notes")}
+                </>
+              )}
+            </Typography>
+          </Box>
+        )}
         <Box p="0 1rem">
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}
