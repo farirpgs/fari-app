@@ -7,6 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import accelerated from "../../../images/fate/accelerated.jpg";
@@ -14,6 +15,7 @@ import condensed from "../../../images/fate/condensed.jpg";
 import core from "../../../images/fate/core.jpg";
 import { AppButtonLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 
@@ -25,6 +27,12 @@ export const SrdsRoute: React.FC = (props) => {
         description="Read and search through the Fate System Reference Documents (SRDs) with ease using Fari, The Fate Companion App"
       />
       <Container maxWidth="md">
+        <Heading
+          icon={MenuBookIcon}
+          subtitle="Select a Fate Variant to Get Started"
+        >
+          {"Fate System Reference Documents (SRDs)"}
+        </Heading>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
@@ -37,7 +45,7 @@ export const SrdsRoute: React.FC = (props) => {
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Fate Core"
-              description="This contains everything you need to know about the Fate system, but also tons of examples and tips on how to run a successfully campaign and be a great Game Master. A most if your thirst for knowledge wasn't satisfied with Fate Condensed."
+              description="A Complete guide to Fate with rules, examples and tips. A most if your thirst for knowledge wasn't satisfied with Fate Condensed."
               imageSrc={core}
               link="/srds/core"
             />
