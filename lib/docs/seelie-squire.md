@@ -24,7 +24,9 @@ Lullaby bards have been hired for a variety of reasons, from helping insomniacs 
 >
 > **Magical Harpist, Soothing If Not Dry At Times, Bringer of Sleep**
 >
-> **Stress**: [1] [2] > [Mild consequence]
+> **Stress**: [1] [2]
+>
+> [**Mild consequence**]
 >
 > - +3 Soothing Harp (**Rapport**)
 > - +2 Discipline (**Will**)
