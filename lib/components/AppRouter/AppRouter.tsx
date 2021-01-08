@@ -151,7 +151,8 @@ export const AppRouter = () => {
             <Doc
               currentPageId={props.match.params.page}
               prefix="/seelie-squire"
-              prefixTitle="Fari"
+              parentTitle="SRDs"
+              parentUrl="/srds"
               docTitle="Seely Squire's Book Of Creatures"
               loadFunction={DocImport.SeelieSquire}
             >

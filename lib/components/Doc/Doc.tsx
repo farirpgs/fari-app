@@ -46,7 +46,8 @@ export const Doc: React.FC<{
   docTitle: string;
   currentPageId: string | undefined;
   prefix: string;
-  prefixTitle: string;
+  parentTitle: string;
+  parentUrl: string;
   loadFunction: ILoadFunction;
 }> = (props) => {
   const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
@@ -125,7 +126,7 @@ export const Doc: React.FC<{
   function renderTitle() {
     return (
       <FateLabel>
-        <AppLink to={props.prefix}>{props.prefixTitle}</AppLink>
+        <AppLink to={props.parentUrl}>{props.parentTitle}</AppLink>
         {" / "}
         {props.docTitle}
       </FateLabel>

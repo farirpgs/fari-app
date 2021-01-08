@@ -16,7 +16,8 @@ export const SrdRoute: React.FC<{
     <Doc
       currentPageId={page}
       prefix={props.prefix}
-      prefixTitle="SRDs"
+      parentTitle="SRDs"
+      parentUrl="/srds"
       docTitle={props.title}
       loadFunction={props.loadFunction}
     />
