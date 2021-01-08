@@ -2,11 +2,15 @@ import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { DocImport as DocImport } from "../../constants/DocImport";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
+import { AppLink } from "../AppLink/AppLink";
 import { Doc } from "../Doc/Doc";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -148,9 +152,46 @@ export const AppRouter = () => {
               currentPageId={props.match.params.page}
               prefix="/seelie-squire"
               prefixTitle="Fari"
-              docTitle="Seely Squire Book Of Creatures"
+              docTitle="Seely Squire's Book Of Creatures"
               loadFunction={DocImport.SeelieSquire}
-            />
+            >
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <Typography variant="body2">Seely Squire:</Typography>
+                </Grid>
+                <Grid item>
+                  <AppLink
+                    to="https://www.patreon.com/seeliesquire"
+                    target="_blank"
+                  >
+                    Patreon
+                  </AppLink>
+                </Grid>
+
+                <Grid item>
+                  <FateLabel color="secondary">{"•"}</FateLabel>
+                </Grid>
+                <Grid item>
+                  <AppLink
+                    to="https://discord.com/invite/8u3VVZd"
+                    target="_blank"
+                  >
+                    Discord
+                  </AppLink>
+                </Grid>
+                <Grid item>
+                  <FateLabel color="secondary">{"•"}</FateLabel>
+                </Grid>
+                <Grid item>
+                  <AppLink
+                    to="https://www.reddit.com/r/seeliesquire/"
+                    target="_blank"
+                  >
+                    Reddit
+                  </AppLink>
+                </Grid>
+              </Grid>
+            </Doc>
           )}
         />
         <Route

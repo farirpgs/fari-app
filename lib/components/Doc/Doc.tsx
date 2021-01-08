@@ -17,6 +17,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
@@ -53,14 +54,17 @@ export const Doc: React.FC<{
     props.currentPageId,
     dom
   );
+
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const history = useHistory();
   const location = useLocation();
-  const title = currentH1?.textContent ?? "";
   const logger = useLogger();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const title = currentH1?.textContent ?? "";
+  const isFirstPage = !previousH1;
 
   useEffect(() => {
     const docTitle = props.docTitle ? `:${kebabCase(props.docTitle)}` : "";
@@ -83,7 +87,7 @@ export const Doc: React.FC<{
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
       <PageMeta
-        title={`${title} | ${props.docTitle}`}
+        title={isFirstPage ? props.docTitle : `${title} | ${props.docTitle}`}
         description={description}
       />
       {html ? (
@@ -91,6 +95,14 @@ export const Doc: React.FC<{
           <Box display="flex">
             {renderTableOfContent()}
             <Container maxWidth="md" className={css({ flexGrow: 1 })}>
+              {props.children && (
+                <Box>
+                  {props.children}
+                  <Box mt=".25rem" mb="2rem">
+                    <Divider />
+                  </Box>
+                </Box>
+              )}
               <Box pb="1rem" mt="-1.5rem">
                 {renderHeader()}
               </Box>
@@ -241,7 +253,7 @@ export const Doc: React.FC<{
       <List>
         {Object.entries(toc).map(([, h1], index) => {
           const isCurrentH1 = currentH1?.id === h1.page.id;
-          const shouldRenderExpandIcon = isCurrentH1 && h1.children.length > 0;
+          const shouldRenderExpandIcon = h1.children.length > 0;
           return (
             <React.Fragment key={index}>
               <ListItem
@@ -255,7 +267,13 @@ export const Doc: React.FC<{
               >
                 {renderTableOfContentElement(h1.page)}
                 {shouldRenderExpandIcon && (
-                  <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
+                  <>
+                    {isCurrentH1 ? (
+                      <ExpandLessIcon htmlColor={theme.palette.text.hint} />
+                    ) : (
+                      <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
+                    )}
+                  </>
                 )}
               </ListItem>
               <Collapse in={isCurrentH1}>

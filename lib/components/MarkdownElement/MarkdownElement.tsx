@@ -69,6 +69,8 @@ const styles = (theme: Theme) => {
       },
       "& h1": {
         ...theme.typography.h3,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -77,6 +79,8 @@ const styles = (theme: Theme) => {
       },
       "& h2": {
         ...theme.typography.h4,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -85,6 +89,8 @@ const styles = (theme: Theme) => {
       },
       "& h3": {
         ...theme.typography.h5,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -93,6 +99,8 @@ const styles = (theme: Theme) => {
       },
       "& h4": {
         ...theme.typography.h6,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -101,6 +109,8 @@ const styles = (theme: Theme) => {
       },
       "& h5": {
         ...theme.typography.h6,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -109,6 +119,8 @@ const styles = (theme: Theme) => {
       },
       "& h6": {
         ...theme.typography.h6,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -263,7 +275,7 @@ const styles = (theme: Theme) => {
           theme.palette.type === "dark" ? "white" : "black"
         ),
         transform: "rotate(45deg)",
-        marginLeft: ".3rem",
+        marginLeft: ".5rem",
         display: "inline-block",
         backgroundRepeat: "no-repeat",
         cursor: "pointer",
