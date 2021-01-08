@@ -376,7 +376,11 @@ export const Page: React.FC<{
               })}
             />
             <Hidden smDown>
-              {displayDonation && !shouldDisplayRejoinButton && <Kofi />}
+              {displayDonation && !shouldDisplayRejoinButton && (
+                <Box width="250px">
+                  <Patreon />
+                </Box>
+              )}
             </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
