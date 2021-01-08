@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 import accelerated from "../../../images/fate/accelerated.jpg";
 import condensed from "../../../images/fate/condensed.jpg";
 import core from "../../../images/fate/core.jpg";
-import { AppButtonLink } from "../../components/AppLink/AppLink";
+import { AppButtonLink, AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
@@ -37,7 +37,14 @@ export const SrdsRoute: React.FC = (props) => {
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Fate Condensed"
-              description="The latest version of the Fate System. Compact, stand-alone and streamlined for clarity and ease of reference."
+              description={
+                <>
+                  The latest version of the Fate System.
+                  <br />
+                  <strong>Compact, stand-alone and streamlined</strong> for
+                  clarity and ease of reference.
+                </>
+              }
               imageSrc={condensed}
               link="/srds/condensed"
             />
@@ -45,7 +52,13 @@ export const SrdsRoute: React.FC = (props) => {
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Fate Core"
-              description="A Complete guide to Fate with rules, examples and tips. A most if your thirst for knowledge wasn't satisfied with Fate Condensed."
+              description={
+                <>
+                  A <strong>Complete guide to Fate</strong> with rules, examples
+                  and tips. A most if your thirst for knowledge was not
+                  satisfied with Fate Condensed.
+                </>
+              }
               imageSrc={core}
               link="/srds/core"
             />
@@ -53,7 +66,13 @@ export const SrdsRoute: React.FC = (props) => {
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Fate Accelerated"
-              description="If you want to get started quickly, this dialed-down version of Fate Core will get you going in no time."
+              description={
+                <>
+                  If you want to <strong>get started quickly</strong>, this
+                  dialed-down version of Fate Core will get you going in no
+                  time.
+                </>
+              }
               imageSrc={accelerated}
               link="/srds/accelerated"
             />
@@ -65,7 +84,13 @@ export const SrdsRoute: React.FC = (props) => {
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Book of Monsters"
-              description="Brought to you by Seelie Squire, this is ultimate resource if you are looking for the closest thing to a Fate Compendium."
+              description={
+                <>
+                  Brought to you by <strong>Seelie Squire</strong>, this is
+                  ultimate resource if you are looking for the closest thing to
+                  a Fate Compendium.
+                </>
+              }
               imageSrc={
                 "https://c10.patreonusercontent.com/3/eyJ3IjoxOTIwfQ%3D%3D/patreon-media/p/campaign/2382411/fca500c1d23c43c58c463b50b3d29ff0/3.png?token-time=1612396800&token-hash=EwHVhjbJhua1WXfwdp8f53r_Dx5kjHv4wvrgx4ZCgWU%3D"
               }
@@ -80,8 +105,8 @@ export const SrdsRoute: React.FC = (props) => {
 SrdsRoute.displayName = "SrdsRoute";
 
 export const SrdCard: React.FC<{
-  title: string;
-  description: string;
+  title: string | JSX.Element;
+  description: string | JSX.Element;
   imageSrc: string;
   link: string;
 }> = (props) => {
@@ -94,30 +119,27 @@ export const SrdCard: React.FC<{
         flexDirection: "column",
       })}
     >
-      {/* <CardActionArea
-        className={css({ height: "100%" })}
-        onClick={() => {
-          history.push(props.link);
-        }}
-      > */}
       <Box height="100%">
-        <CardMedia
-          image={props.imageSrc}
-          title={props.title}
-          className={css({
-            height: "8rem",
-          })}
-        />
+        <AppLink to={props.link}>
+          <CardMedia
+            image={props.imageSrc}
+            title={props.title}
+            className={css({
+              height: "8rem",
+            })}
+          />
+        </AppLink>
         <CardContent className={css({ height: "100%" })}>
           <Typography gutterBottom variant="h5" component="h2">
-            <FateLabel>{props.title}</FateLabel>
+            <AppLink to={props.link}>
+              <FateLabel>{props.title}</FateLabel>
+            </AppLink>
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.description}
           </Typography>
         </CardContent>
       </Box>
-      {/* </CardActionArea> */}
       <CardActions className={css({ flex: "1 0 auto" })}>
         <Grid container justify="flex-end" alignItems="flex-end">
           <Grid item>
