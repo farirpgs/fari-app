@@ -247,9 +247,12 @@ const styles = (theme: Theme) => {
       "& img, video": {
         maxWidth: "100%",
       },
+
       "& img": {
         // Avoid layout jump
-        display: "inline-block",
+        display: "block",
+        margin: "0 auto",
+        width: "50%",
       },
       "& hr": {
         height: 1,
