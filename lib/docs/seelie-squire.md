@@ -1,4 +1,4 @@
-# Seely Squire Book Of Creatures
+# Seely Squire's Book Of Creatures
 
 A place to post your homemade Fate RPG content including monsters, settings, items, stories, and advice!
 
