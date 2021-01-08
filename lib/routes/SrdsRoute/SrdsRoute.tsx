@@ -123,7 +123,7 @@ export const SrdCard: React.FC<{
         <AppLink to={props.link}>
           <CardMedia
             image={props.imageSrc}
-            title={props.title}
+            title={props.title as string}
             className={css({
               height: "8rem",
             })}

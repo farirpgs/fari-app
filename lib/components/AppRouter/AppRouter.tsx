@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { DocImport as DocImport } from "../../constants/DocImport";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { AppLink } from "../AppLink/AppLink";
 import { Doc } from "../Doc/Doc";
@@ -22,9 +23,7 @@ const BlogPostRoute = React.lazy(
 const BlogPostsRoute = React.lazy(
   () => import("../../routes/BlogPosts/BlogPostsRoute")
 );
-const ChangelogRoute = React.lazy(
-  () => import("../../routes/ChangeLog/ChangeLogRoute")
-);
+
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
@@ -69,6 +68,7 @@ export const LoadingRoute: React.FC = (props) => {
 };
 
 export const AppRouter = () => {
+  const { t } = useTranslate();
   return (
     <Suspense fallback={<LoadingRoute />}>
       <Switch>
@@ -141,6 +141,20 @@ export const AppRouter = () => {
               prefix="/srds/condensed"
               title="Fate Condensed"
               loadFunction={DocImport.FateCondensed}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/changelog/:page?"}
+          render={(props) => (
+            <Doc
+              currentPageId={props.match.params.page}
+              prefix="/changelog"
+              parentTitle="Fari"
+              parentUrl="/"
+              docTitle="Changelog"
+              loadFunction={DocImport.Changelog}
             />
           )}
         />
@@ -240,13 +254,7 @@ export const AppRouter = () => {
             return <BlogPostRoute slug={props.match.params.slug} />;
           }}
         />
-        <Route
-          exact
-          path={"/changelog"}
-          render={(props) => {
-            return <ChangelogRoute />;
-          }}
-        />
+
         <Route
           path="*"
           render={(props) => {

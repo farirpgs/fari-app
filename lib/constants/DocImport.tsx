@@ -11,4 +11,7 @@ export const DocImport = {
   SeelieSquire: () => {
     return import("../docs/seelie-squire.md");
   },
+  Changelog: () => {
+    return import("../../CHANGELOG.md");
+  },
 };

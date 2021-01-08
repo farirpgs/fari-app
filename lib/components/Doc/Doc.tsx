@@ -24,6 +24,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
+import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -198,7 +199,7 @@ export const Doc: React.FC<{
               goTo(previousH1?.id);
             }}
           >
-            {previousH1?.textContent}
+            {truncate(previousH1?.textContent ?? "", { length: 50 })}
           </Button>
         )}
 
@@ -210,7 +211,7 @@ export const Doc: React.FC<{
               goTo(nextH1?.id);
             }}
           >
-            {nextH1?.textContent}
+            {truncate(nextH1?.textContent ?? "", { length: 50 })}
           </Button>
         )}
       </Box>

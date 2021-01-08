@@ -1,13 +1,19 @@
 import truncate from "lodash/truncate";
 import { useMemo } from "react";
+import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
 export function useMarkdownPage(
   page: string | undefined,
   dom: HTMLDivElement | undefined
 ) {
+  const logger = useLogger();
   return useMemo(() => {
     const allH1s =
       dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
+
+    if (allH1s.length === 0) {
+      logger.error("useMarkdownPage: no H1 in markdown document");
+    }
 
     const currentH1 = dom?.querySelector(`#${page}`) ?? allH1s[0];
     const firstParagraph = dom?.querySelector(`p`)?.textContent ?? "";
