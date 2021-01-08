@@ -1,5 +1,6 @@
 import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
+import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
 
 const systemFonts = [
   "-apple-system",
@@ -63,23 +64,27 @@ export const defaultThemeConfiguration: ThemeOptions = {
   },
 };
 
-export const AppLightTheme = createMuiTheme({
-  ...defaultThemeConfiguration,
-  palette: {
-    primary: { main: "#415f9c" },
-    secondary: { main: "#7a8cb4" },
-  },
-});
+export const AppLightTheme = responsiveFontSizes(
+  createMuiTheme({
+    ...defaultThemeConfiguration,
+    palette: {
+      primary: { main: "#415f9c" },
+      secondary: { main: "#7a8cb4" },
+    },
+  })
+);
 
-export const AppDarkTheme = createMuiTheme({
-  ...defaultThemeConfiguration,
-  palette: {
-    type: "dark",
-    primary: {
-      main: lighten(AppLightTheme.palette.primary.main, 0.5),
+export const AppDarkTheme = responsiveFontSizes(
+  createMuiTheme({
+    ...defaultThemeConfiguration,
+    palette: {
+      type: "dark",
+      primary: {
+        main: lighten(AppLightTheme.palette.primary.main, 0.5),
+      },
+      secondary: {
+        main: lighten(AppLightTheme.palette.secondary.main, 0.2),
+      },
     },
-    secondary: {
-      main: lighten(AppLightTheme.palette.secondary.main, 0.2),
-    },
-  },
-});
+  })
+);
