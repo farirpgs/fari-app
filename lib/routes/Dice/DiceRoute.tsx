@@ -41,7 +41,7 @@ export const DiceRoute = () => {
         description={t("dice-route.meta.description")}
       />
       <Box>
-        <Heading icon={DiceGameIcon}>{"Dice"}</Heading>
+        <Heading icon={DiceGameIcon} title="Dice" />
 
         <Box display="flex" justifyContent="center" pt="1rem">
           <Button

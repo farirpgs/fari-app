@@ -5,7 +5,8 @@ import React from "react";
 import { FateLabel } from "../FateLabel/FateLabel";
 
 export const Heading: React.FC<{
-  subtitle?: string;
+  title?: string | JSX.Element;
+  subtitle?: string | JSX.Element;
   icon?: React.ElementType;
 }> = (props) => {
   const Icon = props.icon;
@@ -23,7 +24,7 @@ export const Heading: React.FC<{
         </Box>
       )}
       <FateLabel variant="h4" align="center" color="primary">
-        {props.children}
+        {props.title}
       </FateLabel>
       {props.subtitle && (
         <Typography variant="h6" align="center" color="secondary">
