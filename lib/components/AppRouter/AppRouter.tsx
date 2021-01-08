@@ -4,8 +4,9 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { SrdImport } from "../../routes/SrdRoute/constants/SrdImport";
+import { DocImport as DocImport } from "../../constants/DocImport";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
+import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -135,7 +136,20 @@ export const AppRouter = () => {
               {...props}
               prefix="/srds/condensed"
               title="Fate Condensed"
-              loadFunction={SrdImport.Condensed}
+              loadFunction={DocImport.FateCondensed}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/seelie-squire/:page?"}
+          render={(props) => (
+            <Doc
+              currentPageId={props.match.params.page}
+              prefix="/seelie-squire"
+              prefixTitle="Fari"
+              docTitle="Seely Squire Book Of Creatures"
+              loadFunction={DocImport.SeelieSquire}
             />
           )}
         />
@@ -147,7 +161,7 @@ export const AppRouter = () => {
               {...props}
               prefix="/srds/core"
               title="Fate Core"
-              loadFunction={SrdImport.Core}
+              loadFunction={DocImport.FateCore}
             />
           )}
         />
@@ -159,7 +173,7 @@ export const AppRouter = () => {
               {...props}
               prefix="/srds/accelerated"
               title="Fate Accelerated"
-              loadFunction={SrdImport.Accelerated}
+              loadFunction={DocImport.FateAccelerated}
             />
           )}
         />
