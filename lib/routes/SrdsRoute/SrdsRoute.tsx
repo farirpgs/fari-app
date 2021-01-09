@@ -10,14 +10,16 @@ import Typography from "@material-ui/core/Typography";
 import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import React from "react";
-import accelerated from "../../../images/fate/accelerated.jpg";
-import condensed from "../../../images/fate/condensed.jpg";
-import core from "../../../images/fate/core.jpg";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import accelerated from "./images/accelerated.jpg";
+import bookImage from "./images/books.jpeg";
+import condensed from "./images/condensed.jpg";
+import core from "./images/core.jpg";
+import seelieSquireImage from "./images/seelie-squire.png";
 
 export const SrdsRoute: React.FC = (props) => {
   return (
@@ -32,7 +34,7 @@ export const SrdsRoute: React.FC = (props) => {
           title={"Fate System Reference Documents (SRDs)"}
           subtitle="Select a Fate variation to get started"
         />
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Fate Condensed"
@@ -82,7 +84,7 @@ export const SrdsRoute: React.FC = (props) => {
         </Grid>
         <Box pt="1rem" />
         <Heading icon={HelpIcon} title={"Other Resources"} />
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Book of Monsters"
@@ -94,9 +96,7 @@ export const SrdsRoute: React.FC = (props) => {
                 </>
               }
               bgColor="#3c5c39"
-              imageSrc={
-                "https://c10.patreonusercontent.com/3/eyJ3IjoxOTIwfQ%3D%3D/patreon-media/p/campaign/2382411/fca500c1d23c43c58c463b50b3d29ff0/3.png?token-time=1612396800&token-hash=EwHVhjbJhua1WXfwdp8f53r_Dx5kjHv4wvrgx4ZCgWU%3D"
-              }
+              imageSrc={seelieSquireImage}
               link="/seelie-squire"
             />
           </Grid>
@@ -109,11 +109,23 @@ export const SrdsRoute: React.FC = (props) => {
                   creation.
                 </>
               }
-              bgColor="#fff"
-              imageSrc={
-                "https://images.unsplash.com/photo-1520970014086-2208d157c9e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3000&q=80"
-              }
+              bgColor="#223031"
+              imageSrc={bookImage}
               link="/fate-stunts"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <SrdCard
+              title="The Big List of RPG Plots"
+              description={
+                <>
+                  A big list of stunt examples to get you started with character
+                  creation.
+                </>
+              }
+              bgColor="#3f4947"
+              imageSrc={`https://images.unsplash.com/photo-1557218351-1a230b6e5650?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80`}
+              link="/the-big-list-of-rpg-plots"
             />
           </Grid>
         </Grid>

@@ -174,6 +174,20 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/the-big-list-of-rpg-plots/:page?"}
+          render={(props) => (
+            <Doc
+              currentPageId={props.match.params.page}
+              prefix="/the-big-list-of-rpg-plots"
+              parentTitle="SRDs"
+              parentUrl="/srds"
+              docTitle="The Big List of RPG Plots"
+              loadFunction={DocImport.TheBigListOfRpgPlots}
+            />
+          )}
+        />
+        <Route
+          exact
           path={"/seelie-squire/:page?"}
           render={(props) => (
             <Doc

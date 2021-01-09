@@ -14,6 +14,9 @@ export const DocImport = {
   FateStunts: () => {
     return import("./fate-stunts.md");
   },
+  TheBigListOfRpgPlots: () => {
+    return import("./the-big-list-of-rpg-plots.md");
+  },
   Changelog: () => {
     return import("../../CHANGELOG.md");
   },
