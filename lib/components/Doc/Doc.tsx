@@ -112,7 +112,7 @@ export const Doc: React.FC<{
                     backgroundPosition: "center",
                     filter: "blur(8px)",
                     maskImage:
-                      "linear-gradient(to bottom, black 50%, transparent 100%)",
+                      "linear-gradient(to bottom, black 0%, transparent 100%)",
                     backgroundImage: `url("${props.imageUrl}")`,
                   })}
                 />

@@ -101,7 +101,7 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: FariMaxWidth,
+                  maxWidth: props.drawerWidth ? undefined : FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
                   marginTop: "2rem",
