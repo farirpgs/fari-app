@@ -16,11 +16,7 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import accelerated from "./images/accelerated.jpg";
-import bookImage from "./images/books.jpeg";
-import condensed from "./images/condensed.jpg";
-import core from "./images/core.jpg";
-import seelieSquireImage from "./images/seelie-squire.png";
+import { Images } from "../../constants/Images";
 
 export const SrdsRoute: React.FC = (props) => {
   return (
@@ -74,7 +70,7 @@ export const SrdItems: React.FC = (props) => {
               </>
             }
             bgColor="#007fda"
-            imageSrc={condensed}
+            imageSrc={Images.condensed}
             link="/srds/condensed"
           />
         </Grid>
@@ -89,7 +85,7 @@ export const SrdItems: React.FC = (props) => {
               </>
             }
             bgColor="#00409d"
-            imageSrc={core}
+            imageSrc={Images.core}
             link="/srds/core"
           />
         </Grid>
@@ -103,7 +99,7 @@ export const SrdItems: React.FC = (props) => {
               </>
             }
             bgColor="#005aba"
-            imageSrc={accelerated}
+            imageSrc={Images.accelerated}
             link="/srds/accelerated"
           />
         </Grid>
@@ -127,7 +123,7 @@ export const OtherResourcesItems: React.FC = (props) => {
               </>
             }
             bgColor="#3c5c39"
-            imageSrc={seelieSquireImage}
+            imageSrc={Images.seelieSquire}
             link="/seelie-squire"
           />
         </Grid>
@@ -141,7 +137,7 @@ export const OtherResourcesItems: React.FC = (props) => {
               </>
             }
             bgColor="#223031"
-            imageSrc={bookImage}
+            imageSrc={Images.book}
             link="/fate-stunts"
           />
         </Grid>

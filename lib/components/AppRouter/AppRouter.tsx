@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import { Images } from "../../constants/Images";
 import { DocImport as DocImport } from "../../docs/DocImport";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
@@ -140,6 +141,7 @@ export const AppRouter = () => {
               {...props}
               prefix="/srds/condensed"
               title="Fate Condensed"
+              imageUrl={Images.condensed}
               loadFunction={DocImport.FateCondensed}
             />
           )}
@@ -168,6 +170,7 @@ export const AppRouter = () => {
               parentTitle="SRDs"
               parentUrl="/srds"
               docTitle="Fate Stunts"
+              imageUrl={Images.bookImage}
               loadFunction={DocImport.FateStunts}
             />
           )}
@@ -182,6 +185,7 @@ export const AppRouter = () => {
               parentTitle="SRDs"
               parentUrl="/srds"
               docTitle="Seelie Squire's Book Of Creatures"
+              imageUrl={Images.seelieSquire}
               loadFunction={DocImport.SeelieSquire}
             >
               <Grid container spacing={1} alignItems="center">
@@ -231,6 +235,7 @@ export const AppRouter = () => {
               {...props}
               prefix="/srds/core"
               title="Fate Core"
+              imageUrl={Images.core}
               loadFunction={DocImport.FateCore}
             />
           )}
@@ -243,6 +248,7 @@ export const AppRouter = () => {
               {...props}
               prefix="/srds/accelerated"
               title="Fate Accelerated"
+              imageUrl={Images.accelerated}
               loadFunction={DocImport.FateAccelerated}
             />
           )}

@@ -49,6 +49,7 @@ export const Doc: React.FC<{
   prefix: string;
   parentTitle: string;
   parentUrl: string;
+  imageUrl?: string;
   loadFunction: ILoadFunction;
 }> = (props) => {
   const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
@@ -97,26 +98,46 @@ export const Doc: React.FC<{
         <Fade in>
           <Box display="flex">
             {renderTableOfContent()}
-            <Container maxWidth="md" className={css({ flexGrow: 1 })}>
-              {props.children && (
-                <Box>
-                  {props.children}
-                  <Box mt=".25rem" mb="2rem">
-                    <Divider />
-                  </Box>
-                </Box>
+            <Box className={css({ flexGrow: 1 })}>
+              {props.imageUrl && (
+                <Box
+                  className={css({
+                    marginTop: "-2rem",
+                    marginBottom: "2rem",
+                    width: "100%",
+                    height: "8rem",
+                    display: "block",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "repeat",
+                    backgroundPosition: "center",
+                    filter: "blur(8px)",
+                    maskImage:
+                      "linear-gradient(to bottom, black 50%, transparent 100%)",
+                    backgroundImage: `url("${props.imageUrl}")`,
+                  })}
+                />
               )}
-              <Box pb="1rem" mt="-1.5rem">
-                {renderHeader()}
-              </Box>
-              <Box mx="-.5rem">{renderNavigationButtons()}</Box>
-              <MarkdownElement renderedMarkdown={html} />
-              <Box mt="3rem" mb="1rem">
-                <Divider />
-              </Box>
-              {renderNavigationButtons()}
-              {renderMobileMenu()}
-            </Container>
+              <Container maxWidth="md" className={css({ flexGrow: 1 })}>
+                {props.children && (
+                  <Box>
+                    {props.children}
+                    <Box mt=".25rem" mb="2rem">
+                      <Divider />
+                    </Box>
+                  </Box>
+                )}
+                <Box pb="1rem" mt="-1.5rem">
+                  {renderHeader()}
+                </Box>
+                <Box mx="-.5rem">{renderNavigationButtons()}</Box>
+                <MarkdownElement renderedMarkdown={html} />
+                <Box mt="3rem" mb="1rem">
+                  <Divider />
+                </Box>
+                {renderNavigationButtons()}
+                {renderMobileMenu()}
+              </Container>
+            </Box>
           </Box>
         </Fade>
       ) : (

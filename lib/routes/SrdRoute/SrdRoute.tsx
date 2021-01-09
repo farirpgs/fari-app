@@ -8,6 +8,7 @@ export const drawerWidth = "300px";
 export const SrdRoute: React.FC<{
   prefix: string;
   title: string;
+  imageUrl: string;
   loadFunction: ILoadFunction;
 }> = (props) => {
   const { page } = useParams<{ page?: string }>();
@@ -19,6 +20,7 @@ export const SrdRoute: React.FC<{
       parentTitle="SRDs"
       parentUrl="/srds"
       docTitle={props.title}
+      imageUrl={props.imageUrl}
       loadFunction={props.loadFunction}
     />
   );
