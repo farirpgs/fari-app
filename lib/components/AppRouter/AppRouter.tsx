@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { DocImport as DocImport } from "../../constants/DocImport";
+import { DocImport as DocImport } from "../../docs/DocImport";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { AppLink } from "../AppLink/AppLink";
@@ -160,6 +160,20 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/fate-stunts/:page?"}
+          render={(props) => (
+            <Doc
+              currentPageId={props.match.params.page}
+              prefix="/fate-stunts"
+              parentTitle="SRDs"
+              parentUrl="/srds"
+              docTitle="Fate Stunts"
+              loadFunction={DocImport.FateStunts}
+            />
+          )}
+        />
+        <Route
+          exact
           path={"/seelie-squire/:page?"}
           render={(props) => (
             <Doc
@@ -167,12 +181,12 @@ export const AppRouter = () => {
               prefix="/seelie-squire"
               parentTitle="SRDs"
               parentUrl="/srds"
-              docTitle="Seely Squire's Book Of Creatures"
+              docTitle="Seelie Squire's Book Of Creatures"
               loadFunction={DocImport.SeelieSquire}
             >
               <Grid container spacing={1} alignItems="center">
                 <Grid item>
-                  <Typography variant="body2">Seely Squire:</Typography>
+                  <Typography variant="body2">Seelie Squire:</Typography>
                 </Grid>
                 <Grid item>
                   <AppLink

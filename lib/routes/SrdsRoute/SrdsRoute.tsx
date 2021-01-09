@@ -1,20 +1,19 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
 import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import React from "react";
-import { useHistory } from "react-router-dom";
 import accelerated from "../../../images/fate/accelerated.jpg";
 import condensed from "../../../images/fate/condensed.jpg";
 import core from "../../../images/fate/core.jpg";
-import { AppButtonLink, AppLink } from "../../components/AppLink/AppLink";
+import { AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
@@ -45,6 +44,7 @@ export const SrdsRoute: React.FC = (props) => {
                   clarity and ease of reference.
                 </>
               }
+              bgColor="#007fda"
               imageSrc={condensed}
               link="/srds/condensed"
             />
@@ -59,6 +59,7 @@ export const SrdsRoute: React.FC = (props) => {
                   satisfied with Fate Condensed.
                 </>
               }
+              bgColor="#00409d"
               imageSrc={core}
               link="/srds/core"
             />
@@ -73,6 +74,7 @@ export const SrdsRoute: React.FC = (props) => {
                   time.
                 </>
               }
+              bgColor="#005aba"
               imageSrc={accelerated}
               link="/srds/accelerated"
             />
@@ -91,10 +93,27 @@ export const SrdsRoute: React.FC = (props) => {
                   a Fate Compendium.
                 </>
               }
+              bgColor="#3c5c39"
               imageSrc={
                 "https://c10.patreonusercontent.com/3/eyJ3IjoxOTIwfQ%3D%3D/patreon-media/p/campaign/2382411/fca500c1d23c43c58c463b50b3d29ff0/3.png?token-time=1612396800&token-hash=EwHVhjbJhua1WXfwdp8f53r_Dx5kjHv4wvrgx4ZCgWU%3D"
               }
               link="/seelie-squire"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <SrdCard
+              title="Fate Stunts"
+              description={
+                <>
+                  A big list of stunt examples to get you started with character
+                  creation
+                </>
+              }
+              bgColor="#fff"
+              imageSrc={
+                "https://images.unsplash.com/photo-1520970014086-2208d157c9e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3000&q=80"
+              }
+              link="/fate-stunts"
             />
           </Grid>
         </Grid>
@@ -107,48 +126,63 @@ SrdsRoute.displayName = "SrdsRoute";
 export const SrdCard: React.FC<{
   title: string | JSX.Element;
   description: string | JSX.Element;
-  imageSrc: string;
+  bgColor?: string;
+  imageSrc?: string;
   link: string;
 }> = (props) => {
-  const history = useHistory();
+  const theme = useTheme();
+  const backgroundColor = props.bgColor ?? theme.palette.background.paper;
+  const color = theme.palette.getContrastText(backgroundColor);
+
   return (
     <Card
       className={css({
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        background: backgroundColor,
       })}
     >
       <Box height="100%">
         <AppLink to={props.link}>
           <CardMedia
-            image={props.imageSrc}
+            image={props.imageSrc ?? ""}
             title={props.title as string}
             className={css({
-              height: "8rem",
+              "height": "8rem",
+              "mask-image":
+                "linear-gradient(to bottom, black 50%, transparent 100%)",
             })}
           />
         </AppLink>
         <CardContent className={css({ height: "100%" })}>
-          <Typography gutterBottom variant="h5" component="h2">
-            <AppLink to={props.link}>
-              <FateLabel>{props.title}</FateLabel>
-            </AppLink>
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
-          </Typography>
+          <Box pb="1rem">
+            <Typography gutterBottom variant="h5" component="h2">
+              <AppLink to={props.link}>
+                <FateLabel textColor={color} underline>
+                  {props.title}
+                </FateLabel>
+              </AppLink>
+            </Typography>
+            <Typography
+              variant="body2"
+              component="p"
+              className={css({ color: color })}
+            >
+              {props.description}
+            </Typography>
+          </Box>
         </CardContent>
       </Box>
-      <CardActions className={css({ flex: "1 0 auto" })}>
+      {/* <CardActions className={css({ flex: "1 0 auto" })}>
         <Grid container justify="flex-end" alignItems="flex-end">
           <Grid item>
-            <AppButtonLink to={props.link} color="primary">
+            <AppButtonLink to={props.link} className={css({ color: color })}>
               {"Read"}
             </AppButtonLink>
           </Grid>
         </Grid>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };

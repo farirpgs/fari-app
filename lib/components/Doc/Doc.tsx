@@ -63,7 +63,8 @@ export const Doc: React.FC<{
   const history = useHistory();
   const location = useLocation();
   const logger = useLogger();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userClosedH1, setUserClosedH1] = useState(false);
 
   const title = currentH1?.textContent ?? "";
   const isFirstPage = !previousH1;
@@ -153,7 +154,7 @@ export const Doc: React.FC<{
               <IconButton
                 color="inherit"
                 onClick={() => {
-                  setMenuOpen(true);
+                  setMobileMenuOpen(true);
                 }}
               >
                 <MenuIcon color="inherit" />
@@ -256,6 +257,7 @@ export const Doc: React.FC<{
         {Object.entries(toc).map(([, h1], index) => {
           const isCurrentH1 = currentH1?.id === h1.page.id;
           const shouldRenderExpandIcon = h1.children.length > 0;
+          const isSubSectionOPen = isCurrentH1 && !userClosedH1;
           return (
             <React.Fragment key={index}>
               <ListItem
@@ -264,13 +266,18 @@ export const Doc: React.FC<{
                 component={Link}
                 to={`${props.prefix}/${h1.page.id}`}
                 onClick={() => {
-                  setMenuOpen(false);
+                  if (isCurrentH1) {
+                    setUserClosedH1((value) => !value);
+                  } else {
+                    setUserClosedH1(false);
+                    setMobileMenuOpen(false);
+                  }
                 }}
               >
                 {renderTableOfContentElement(h1.page)}
                 {shouldRenderExpandIcon && (
                   <>
-                    {isCurrentH1 ? (
+                    {isSubSectionOPen ? (
                       <ExpandLessIcon htmlColor={theme.palette.text.hint} />
                     ) : (
                       <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
@@ -278,7 +285,7 @@ export const Doc: React.FC<{
                   </>
                 )}
               </ListItem>
-              <Collapse in={isCurrentH1}>
+              <Collapse in={isSubSectionOPen}>
                 {h1.children.map((h2, h2Index) => {
                   return (
                     <ListItem
@@ -289,7 +296,7 @@ export const Doc: React.FC<{
                       to={`#${h2.id}`}
                       onClick={() => {
                         window.location.hash = h2.id;
-                        setMenuOpen(false);
+                        setMobileMenuOpen(false);
                       }}
                     >
                       {renderTableOfContentElement(h2)}
@@ -308,9 +315,9 @@ export const Doc: React.FC<{
         <Hidden mdUp>
           <Drawer
             anchor="bottom"
-            open={menuOpen}
+            open={mobileMenuOpen}
             onClose={() => {
-              setMenuOpen(false);
+              setMobileMenuOpen(false);
             }}
             classes={{
               paper: css({

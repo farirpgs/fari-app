@@ -6,9 +6,11 @@ export const FateLabel: React.FC<
   {
     className?: string;
     underline?: boolean;
+    textColor?: string;
   } & TypographyProps
 > = (props) => {
   const { className, underline, ...rest } = props;
+  const color = props.textColor ?? undefined;
   return (
     <Typography
       {...rest}
@@ -17,6 +19,7 @@ export const FateLabel: React.FC<
         css({
           textTransform: "uppercase",
           fontWeight: 800,
+          color: color,
           textDecoration: underline ? "underline" : undefined,
         })
       )}
