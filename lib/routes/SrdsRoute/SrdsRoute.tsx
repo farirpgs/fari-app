@@ -106,7 +106,7 @@ export const SrdsRoute: React.FC = (props) => {
               description={
                 <>
                   A big list of stunt examples to get you started with character
-                  creation
+                  creation.
                 </>
               }
               bgColor="#fff"
