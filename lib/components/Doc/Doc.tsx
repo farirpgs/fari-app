@@ -105,7 +105,7 @@ export const Doc: React.FC<{
                     marginTop: "-2rem",
                     marginBottom: "2rem",
                     width: "100%",
-                    height: "8rem",
+                    height: "16rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
