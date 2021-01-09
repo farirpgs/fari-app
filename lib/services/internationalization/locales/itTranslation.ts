@@ -62,8 +62,6 @@ export const itTranslation: Record<
   "home-route.play-online.button": `Inizia Partita Online`,
   "home-route.play-online.description": `Incontrati in remoto con i tuoi amici utilizzando la piattaforma di chat video che preferisci, invia loro un link e divertiti con Fate!`,
   "home-route.play-online.title": `Gioca a Fate Online`,
-  "home-route.subtitle1": `Fari è un Tavolo da Gioco Virtuale meticolosamente creato su misura per giocare a Fate RPG (Core, Accelerato or Condensato).`,
-  "home-route.subtitle2": `Semplifica la descrizione di scene, mantenendo lo sguardo sui personaggi ed i loro punti fato, gestendo gli Aspetti e non solo. Trova soluzioni astute per togliere i tuoi Personaggi da situazioni delicate in cui i dadi fudge (o il DM) li hanno cacciati. Lascia libera la tua immaginazione per creare insieme storie memorabili!`,
   "home-route.support-fari.description": `Fari è open-source e completamente gratuito. Credo nel costruire ottimo software ed applicazioni di cui possa beneficiare tutta la comunità. Comunque questo porta anche a sfide nel sostenere gli sviluppatori dietro al progetto. \n\n Mantenere e sviluppare nuove feature in Fari richiede un considerevole ammontare di tempo. Ma col tuo supporto economico, posso spendere più tempo su Fari per renderlo migliore o finanziare le migliorie dei server. \n\n Ogni donazione è utile, ma se la tua situazione finanziaria non ti permette di aiutare economicamente il progetto, puoi sempre spargere la voce!`,
   "home-route.support-fari.title": `Supporta Fari`,
   "home-route.thanks-some-patrons": `Grazie ad alcuni dei miei patron`,

@@ -5,17 +5,24 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import FaceIcon from "@material-ui/icons/Face";
+import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
-import React, { useEffect } from "react";
+import MovieIcon from "@material-ui/icons/Movie";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import appIcon from "../../../images/blue/app.png";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Kofi } from "../../components/Kofi/Kofi";
+import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import {
   DiceGameIcon,
   EyeIcon,
@@ -24,15 +31,22 @@ import {
 import { makeIcon } from "../../domains/Icons/makeIcon";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { OtherResourcesItems } from "../SrdsRoute/SrdsRoute";
 
 const Patrons = ["James Micu", "Randy Oest", "Ryan Singer"];
 
-const sectionGridItem = css({ display: "flex", justifyContent: "center" });
+const sectionGridItem = css({
+  display: "flex",
+  justifyContent: "center",
+  flex: "1 0 auto",
+});
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
   const logger = useLogger();
+  const scenesManager = useContext(ScenesContext);
+  const charactersManager = useContext(CharactersContext);
 
   useEffect(() => {
     logger.info("Route:Home");
@@ -215,6 +229,48 @@ export const HomeRoute: React.FC<{}> = (props) => {
             </Grid>
             <Grid item className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
+                <Link
+                  to=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scenesManager.actions.openManager(ManagerMode.Manage);
+                  }}
+                >
+                  {renderHeadingIcon(MovieIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {t("menu.scenes")}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link
+                  to=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                    charactersManager.actions.openManager(ManagerMode.Manage);
+                  }}
+                >
+                  {renderHeadingIcon(FaceIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {t("menu.characters")}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
                   {renderHeadingIcon(DiceGameIcon)}
                   <FateLabel
@@ -270,7 +326,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Container maxWidth="sm">
         <Box textAlign="center">
-          <FateLabel variant="h4" color="primary">
+          <FateLabel variant="h4" color="primary" as="h1">
             {"Fari"}
           </FateLabel>
         </Box>
@@ -278,26 +334,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <img alt="Fari" width="125px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
-          <FateLabel variant="h6" color="secondary">
+          <FateLabel variant="h6" color="secondary" as="h2">
             {t("home-route.heading")}
           </FateLabel>
-        </Box>
-      </Container>
-    );
-  }
-
-  function renderHeadingDescription() {
-    return (
-      <Container maxWidth="sm">
-        <Box pb="1rem" textAlign="center">
-          <Typography variant="subtitle1">
-            {t("home-route.subtitle1")}
-          </Typography>
-        </Box>
-        <Box pb="1rem" textAlign="center">
-          <Typography variant="subtitle1">
-            {t("home-route.subtitle2")}
-          </Typography>
         </Box>
       </Container>
     );
@@ -313,7 +352,21 @@ export const HomeRoute: React.FC<{}> = (props) => {
         {renderHeading()}
         {renderPlayButtons()}
         {renderSectionsButtons()}
-        {false && renderHeadingDescription()}
+        <Container maxWidth="lg">
+          <Box py="1.5rem">
+            <Divider />
+          </Box>
+        </Container>
+        <Container maxWidth="md">
+          <Box pb="2rem">
+            <Heading
+              icon={HelpIcon}
+              title={"Other Resources"}
+              subtitle={"Compendium, Stunt examples and more..."}
+            />
+            <OtherResourcesItems />
+          </Box>
+        </Container>
         <Container maxWidth="lg">
           <Box py="1.5rem">
             <Divider />

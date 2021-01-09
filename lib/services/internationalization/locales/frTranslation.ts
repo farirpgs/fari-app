@@ -62,8 +62,6 @@ export const frTranslation: Record<
   "home-route.play-online.button": `Commencer une partie en ligne`,
   "home-route.play-online.description": `Rencontrez vos amis à distance en utilisant votre plate-forme de chat vidéo préféré, envoyez leurs un lien de jeu et jouez à Fate!`,
   "home-route.play-online.title": `Jouer à Fate en ligne`,
-  "home-route.subtitle1": `Fari est une application qui est méticuleusement adapté pour jouer le jeu de role Fate en ligne(Core, Accelerated ou Condensed).`,
-  "home-route.subtitle2": `Avec Fari, créer vos scèenes et vos feuilles de personnages et commencer une partie en ligne avec vos amies. Lors d'une partie, concevez des plans aux situations précaires que les dés (ou le MJ) vous font endurer. Laissez votre imagination collective s'épanouir et tissez des histoires mémorables ensemble!`,
   "home-route.support-fari.description": `Fari est libre de droit. Je crois en l'importance de créer des applications qui profite à la communauté. Cependant, le fait que l'application soit libre de droit rend le support de celle-ci plus compliqué. \n\n Le maintien et le développement de nouvelles fonctionnalités dans Fari prend beaucoup de temps, mais avec votre aide financière, je pourrais passer plus de temps pour rendre Fari encore plus incroyable. \n\n Tout don est fortement apprécié, mais si vous votre situation vous empêches d'aider financièrement le projet, vous pouvez toujours aider en passant le mot!`,
   "home-route.support-fari.title": `Envisager de soutenir Fari`,
   "home-route.thanks-some-patrons": `Merci à quelques-un de mes contributeurs`,

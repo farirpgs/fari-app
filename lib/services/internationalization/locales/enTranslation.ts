@@ -57,8 +57,6 @@ export const enTranslation = {
   "home-route.play-online.button": `Start Online Game`,
   "home-route.play-online.description": `Remotely meet with your friends using your favourite video chat platform, send them a game link and enjoy playing Fate!`,
   "home-route.play-online.title": `Play Fate Online`,
-  "home-route.subtitle1": `Fari is a Virtual Tabletop App that is meticulously tailored for playing the Fate RPG (Core, Accelerated or Condensed).`,
-  "home-route.subtitle2": `It facilitates describing scenes, keeping an eye on the characters and their fate points, tracking aspects and even more. Conceive clever solutions to get your characters out of precarious situations the fudge dice (or the GM) forced them in, let your collective imagination run wild and weave memorable stories together!`,
   "home-route.support-fari.description": `Fari is open-source and completely free. I believe in building great software and applications which benefits the community. However, it also brings challenges when it comes to sustaining the developers behind the project. \n\n Maintaining and developing new features in Fari takes a considerable amount of time. But with your financial help, I could spend more time on Fari to make it better or use the financing to upgrade the servers. \n\n Any donation helps, but if your financial situation prevents you from helping the project financially, you can always help by spreading the word!`,
   "home-route.support-fari.title": `Consider Supporting Fari`,
   "home-route.thanks-some-patrons": `Thanks to some of my patrons`,

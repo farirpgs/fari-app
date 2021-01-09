@@ -30,101 +30,125 @@ export const SrdsRoute: React.FC = (props) => {
         description="Read and search through the Fate System Reference Documents (SRDs) with ease using Fari, The Fate Companion App"
       />
       <Container maxWidth="md">
-        <Heading
-          icon={MenuBookIcon}
-          title={"Fate System Reference Documents (SRDs)"}
-          subtitle="Getting Started"
-        />
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Condensed"
-              description={
-                <>
-                  The latest version of the Fate System.
-                  <br />
-                  <strong>Compact, stand-alone and streamlined</strong> for
-                  clarity and ease of reference.
-                </>
-              }
-              bgColor="#007fda"
-              imageSrc={condensed}
-              link="/srds/condensed"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Core"
-              description={
-                <>
-                  A <strong>Complete guide to Fate</strong> with rules, examples
-                  and tips. A most if your thirst for knowledge was not
-                  satisfied with Fate Condensed.
-                </>
-              }
-              bgColor="#00409d"
-              imageSrc={core}
-              link="/srds/core"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Accelerated"
-              description={
-                <>
-                  If you want to <strong>get started quickly</strong>, this
-                  dialed-down version of Fate Core will get you going in no
-                  time.
-                </>
-              }
-              bgColor="#005aba"
-              imageSrc={accelerated}
-              link="/srds/accelerated"
-            />
-          </Grid>
-        </Grid>
-        <Box pt="1rem" />
-        <Heading
-          icon={HelpIcon}
-          title={"Other Resources"}
-          subtitle={"Compendium, Stunt examples and more..."}
-        />
-        <Grid container spacing={4} justify="center">
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Book of Monsters"
-              description={
-                <>
-                  Brought to you by <strong>Seelie Squire</strong>, this is
-                  ultimate resource if you are looking for the closest thing to
-                  a Fate Compendium.
-                </>
-              }
-              bgColor="#3c5c39"
-              imageSrc={seelieSquireImage}
-              link="/seelie-squire"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Stunts"
-              description={
-                <>
-                  A big list of stunt examples to get you started with character
-                  creation.
-                </>
-              }
-              bgColor="#223031"
-              imageSrc={bookImage}
-              link="/fate-stunts"
-            />
-          </Grid>
-        </Grid>
+        <Srds />
       </Container>
     </Page>
   );
 };
 SrdsRoute.displayName = "SrdsRoute";
+
+export const Srds: React.FC = (props) => {
+  return (
+    <div>
+      <Heading
+        icon={MenuBookIcon}
+        title={"Fate System Reference Documents (SRDs)"}
+        subtitle="Getting Started"
+      />
+      <SrdItems />
+      <Box pt="1rem" />
+
+      <Heading
+        icon={HelpIcon}
+        title={"Other Resources"}
+        subtitle={"Compendium, Stunt examples and more..."}
+      />
+      <OtherResourcesItems />
+    </div>
+  );
+};
+
+export const SrdItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Fate Condensed"
+            description={
+              <>
+                The latest version of the Fate System.
+                <br />
+                <strong>Compact, stand-alone and streamlined</strong> for
+                clarity and ease of reference.
+              </>
+            }
+            bgColor="#007fda"
+            imageSrc={condensed}
+            link="/srds/condensed"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Fate Core"
+            description={
+              <>
+                A <strong>Complete guide to Fate</strong> with rules, examples
+                and tips. A most if your thirst for knowledge was not satisfied
+                with Fate Condensed.
+              </>
+            }
+            bgColor="#00409d"
+            imageSrc={core}
+            link="/srds/core"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Fate Accelerated"
+            description={
+              <>
+                If you want to <strong>get started quickly</strong>, this
+                dialed-down version of Fate Core will get you going in no time.
+              </>
+            }
+            bgColor="#005aba"
+            imageSrc={accelerated}
+            link="/srds/accelerated"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export const OtherResourcesItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Book of Monsters"
+            description={
+              <>
+                Brought to you by <strong>Seelie Squire</strong>, this is
+                ultimate resource if you are looking for the closest thing to a
+                Fate Compendium.
+              </>
+            }
+            bgColor="#3c5c39"
+            imageSrc={seelieSquireImage}
+            link="/seelie-squire"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Fate Stunts"
+            description={
+              <>
+                A big list of stunt examples to get you started with character
+                creation.
+              </>
+            }
+            bgColor="#223031"
+            imageSrc={bookImage}
+            link="/fate-stunts"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
 
 export const SrdCard: React.FC<{
   title: string | JSX.Element;
