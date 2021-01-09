@@ -170,7 +170,7 @@ export const AppRouter = () => {
               parentTitle="SRDs"
               parentUrl="/srds"
               docTitle="Fate Stunts"
-              imageUrl={Images.bookImage}
+              imageUrl={Images.book}
               loadFunction={DocImport.FateStunts}
             />
           )}
