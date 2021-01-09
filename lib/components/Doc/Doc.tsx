@@ -88,6 +88,8 @@ export const Doc: React.FC<{
     history.push(`${props.prefix}/${path}`);
   }
 
+  isSmall;
+
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
       <PageMeta
@@ -105,7 +107,7 @@ export const Doc: React.FC<{
                     marginTop: "-2rem",
                     marginBottom: "2rem",
                     width: "100%",
-                    height: "16rem",
+                    height: isSmall ? "8rem" : "16rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
