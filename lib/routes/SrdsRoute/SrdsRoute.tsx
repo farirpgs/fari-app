@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -32,7 +33,7 @@ export const SrdsRoute: React.FC = (props) => {
         <Heading
           icon={MenuBookIcon}
           title={"Fate System Reference Documents (SRDs)"}
-          subtitle="Select a Fate variation to get started"
+          subtitle="Getting Started"
         />
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={4}>
@@ -83,8 +84,12 @@ export const SrdsRoute: React.FC = (props) => {
           </Grid>
         </Grid>
         <Box pt="1rem" />
-        <Heading icon={HelpIcon} title={"Other Resources"} />
-        <Grid container spacing={4}>
+        <Heading
+          icon={HelpIcon}
+          title={"Other Resources"}
+          subtitle={"Compendium, Stunt examples and more..."}
+        />
+        <Grid container spacing={4} justify="center">
           <Grid item xs={12} sm={6} md={4}>
             <SrdCard
               title="Book of Monsters"
@@ -114,20 +119,6 @@ export const SrdsRoute: React.FC = (props) => {
               link="/fate-stunts"
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="The Big List of RPG Plots"
-              description={
-                <>
-                  A big list of stunt examples to get you started with character
-                  creation.
-                </>
-              }
-              bgColor="#3f4947"
-              imageSrc={`https://images.unsplash.com/photo-1557218351-1a230b6e5650?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80`}
-              link="/the-big-list-of-rpg-plots"
-            />
-          </Grid>
         </Grid>
       </Container>
     </Page>
@@ -147,54 +138,64 @@ export const SrdCard: React.FC<{
   const color = theme.palette.getContrastText(backgroundColor);
 
   return (
-    <Card
+    <ButtonBase
       className={css({
         height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        background: backgroundColor,
+        display: "inline-block",
+        textAlign: "left",
       })}
     >
-      <Box height="100%">
-        <AppLink to={props.link}>
-          <CardMedia
-            image={props.imageSrc ?? ""}
-            title={props.title as string}
-            className={css({
-              "height": "8rem",
-              "mask-image":
-                "linear-gradient(to bottom, black 50%, transparent 100%)",
-            })}
-          />
-        </AppLink>
-        <CardContent className={css({ height: "100%" })}>
-          <Box pb="1rem">
-            <Typography gutterBottom variant="h5" component="h2">
-              <AppLink to={props.link}>
-                <FateLabel textColor={color} underline>
-                  {props.title}
-                </FateLabel>
-              </AppLink>
-            </Typography>
-            <Typography
-              variant="body2"
-              component="p"
-              className={css({ color: color })}
-            >
-              {props.description}
-            </Typography>
+      <AppLink to={props.link}>
+        <Card
+          raised
+          className={css({
+            // "cursor": "pointer",
+            "height": "100%",
+            "display": "flex",
+            "flexDirection": "column",
+            "background": backgroundColor,
+            "boxShadow": theme.shadows[8],
+            "transition": theme.transitions.create(["transform", "box-shadow"]),
+            "&:hover": {
+              boxShadow: theme.shadows[16],
+              transform: "scale(1.025)",
+            },
+          })}
+        >
+          <Box height="100%">
+            <CardMedia
+              image={props.imageSrc ?? ""}
+              title={props.title as string}
+              className={css({
+                height: "8rem",
+                maskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+              })}
+            />
+            <CardContent className={css({ height: "100%" })}>
+              <Box pb="1rem">
+                <Typography gutterBottom variant="h5" component="h2">
+                  <FateLabel
+                    textColor={color}
+                    fontSize={theme.typography.h5.fontSize}
+                  >
+                    {props.title}
+                  </FateLabel>
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="p"
+                  className={css({
+                    color: color,
+                  })}
+                >
+                  {props.description}
+                </Typography>
+              </Box>
+            </CardContent>
           </Box>
-        </CardContent>
-      </Box>
-      {/* <CardActions className={css({ flex: "1 0 auto" })}>
-        <Grid container justify="flex-end" alignItems="flex-end">
-          <Grid item>
-            <AppButtonLink to={props.link} className={css({ color: color })}>
-              {"Read"}
-            </AppButtonLink>
-          </Grid>
-        </Grid>
-      </CardActions> */}
-    </Card>
+        </Card>
+      </AppLink>
+    </ButtonBase>
   );
 };

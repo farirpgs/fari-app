@@ -19,6 +19,7 @@ export const AppLink: React.FC<ReactRouterLinkProps & MUILinkProps> = (
       <MaterialUILink
         to={to}
         component={ReactRouterLink}
+        underline={"none"}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
         {...rest}
       >

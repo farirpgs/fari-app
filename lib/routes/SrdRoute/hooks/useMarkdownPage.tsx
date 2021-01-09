@@ -11,7 +11,7 @@ export function useMarkdownPage(
     const allH1s =
       dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
 
-    if (allH1s.length === 0) {
+    if (!!dom && allH1s.length === 0) {
       logger.error("useMarkdownPage: no H1 in markdown document");
     }
 
