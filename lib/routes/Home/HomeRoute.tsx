@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -102,7 +103,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
     );
   }
 
-  function renderHeadingIcon(Icon: ReturnType<typeof makeIcon>) {
+  function renderHeadingIcon(
+    Icon: ReturnType<typeof makeIcon> | React.ElementType
+  ) {
     return (
       <Box display="flex" justifyContent="center">
         <Icon className={css({ fontSize: "3rem" })} color="primary" />
@@ -194,8 +197,23 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Container maxWidth="lg">
         <Box my=".5rem">
-          <Grid container justify="center" spacing={6}>
-            <Grid item xs={12} md={3} className={sectionGridItem}>
+          <Grid container justify="center" spacing={10}>
+            <Grid item className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link to="/srds">
+                  {renderHeadingIcon(MenuBookIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"SRDs"}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
                   {renderHeadingIcon(DiceGameIcon)}
@@ -210,23 +228,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link to="/draw">
-                <Box height="100%" display="flex" flexDirection="column">
-                  {renderHeadingIcon(IllustrationIcon)}
-                  <FateLabel
-                    data-cy="home.draw"
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                  >
-                    {"Draw"}
-                  </FateLabel>
-                </Box>
-              </Link>
-            </Grid>
-            <Grid item xs={12} md={3} className={sectionGridItem}>
+            <Grid item className={sectionGridItem}>
               <Link to="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
@@ -238,6 +240,22 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     underline
                   >
                     {"Oracle"}
+                  </FateLabel>
+                </Box>
+              </Link>
+            </Grid>
+            <Grid item className={sectionGridItem}>
+              <Link to="/draw">
+                <Box height="100%" display="flex" flexDirection="column">
+                  {renderHeadingIcon(IllustrationIcon)}
+                  <FateLabel
+                    data-cy="home.draw"
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"Draw"}
                   </FateLabel>
                 </Box>
               </Link>
