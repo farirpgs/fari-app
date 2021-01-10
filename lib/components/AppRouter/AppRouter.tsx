@@ -180,8 +180,9 @@ export const AppRouter = () => {
               title="Seelie Squire's Book Of Creatures"
               imageUrl={Images.seelieSquire}
               loadFunction={DocImport.SeelieSquire}
-              links={{
+              author={{
                 title: "Seelie Squire",
+                avatarUrl: Images.seelieSquireAvatar,
                 items: [
                   {
                     label: "Patreon",

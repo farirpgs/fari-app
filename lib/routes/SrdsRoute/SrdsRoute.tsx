@@ -163,6 +163,7 @@ export const SrdCard: React.FC<{
         height: "100%",
         display: "inline-block",
         textAlign: "left",
+        width: "100%",
       })}
     >
       <AppLink to={props.link}>

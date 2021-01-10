@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -52,7 +53,11 @@ export const Doc: React.FC<{
     title: string;
     url: string;
   };
-  links?: { title: string; items: Array<{ label: string; url: string }> };
+  author?: {
+    title: string;
+    avatarUrl?: string;
+    items: Array<{ label: string; url: string }>;
+  };
   imageUrl?: string;
   loadFunction: ILoadFunction;
 }> = (props) => {
@@ -109,7 +114,7 @@ export const Doc: React.FC<{
                 <Box
                   className={css({
                     marginTop: "-2rem",
-                    marginBottom: "2rem",
+                    marginBottom: "1rem",
                     width: "100%",
                     height: isSmall ? "8rem" : "16rem",
                     display: "block",
@@ -124,45 +129,7 @@ export const Doc: React.FC<{
                 />
               )}
               <Container maxWidth="md" className={css({ flexGrow: 1 })}>
-                {props.links && (
-                  <Box>
-                    <Grid container spacing={1} alignItems="center">
-                      <Grid item className={css({ display: "flex" })}>
-                        <AccountBoxIcon />
-                      </Grid>
-                      <Grid item>
-                        <FateLabel variant="body2">
-                          <b>
-                            {props.links.title}
-                            {":"}
-                          </b>
-                        </FateLabel>
-                      </Grid>
-                      {props.links.items.map((item, index) => {
-                        const length = props.links?.items.length ?? 0;
-                        const isLast = index === length - 1;
-
-                        return (
-                          <React.Fragment key={item.url}>
-                            <Grid item>
-                              <AppLink to={item.url} target="_blank">
-                                <b> {item.label}</b>
-                              </AppLink>
-                            </Grid>
-                            {!isLast && (
-                              <Grid item>
-                                <FateLabel color="secondary">{"•"}</FateLabel>
-                              </Grid>
-                            )}
-                          </React.Fragment>
-                        );
-                      })}
-                    </Grid>
-                    <Box mt=".25rem" mb="2rem">
-                      <Divider />
-                    </Box>
-                  </Box>
-                )}
+                {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
                 <Box pb="1rem" mt="-1.5rem">
                   {renderHeader()}
@@ -183,6 +150,55 @@ export const Doc: React.FC<{
       )}
     </Page>
   );
+
+  function renderAuthor() {
+    if (!props.author) {
+      return null;
+    }
+    return (
+      <Box>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item className={css({ display: "flex" })}>
+            {props.author.avatarUrl ? (
+              <Avatar alt={props.author.title} src={props.author.avatarUrl} />
+            ) : (
+              <AccountBoxIcon />
+            )}
+          </Grid>
+          <Grid item>
+            <FateLabel variant="body2" color="primary">
+              <b>{props.author.title}</b>
+            </FateLabel>
+          </Grid>
+          <Grid item>
+            <FateLabel color="secondary">{"|"}</FateLabel>
+          </Grid>
+          {props.author.items.map((item, index) => {
+            const length = props.author?.items.length ?? 0;
+            const isLast = index === length - 1;
+
+            return (
+              <React.Fragment key={item.url}>
+                <Grid item>
+                  <AppLink to={item.url} target="_blank">
+                    <b> {item.label}</b>
+                  </AppLink>
+                </Grid>
+                {!isLast && (
+                  <Grid item>
+                    <FateLabel color="secondary">{"•"}</FateLabel>
+                  </Grid>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </Grid>
+        <Box pt=".5rem" pb="3rem">
+          <Divider />
+        </Box>
+      </Box>
+    );
+  }
 
   function renderTitle() {
     return (
@@ -327,7 +343,6 @@ export const Doc: React.FC<{
                     setUserClosedH1((value) => !value);
                   } else {
                     setUserClosedH1(false);
-                    setMobileMenuOpen(false);
                   }
                 }}
               >

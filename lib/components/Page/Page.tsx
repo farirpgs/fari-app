@@ -454,6 +454,17 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                href="/srds"
+                target="_blank"
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {t("SRDs")}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
                 to="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
@@ -476,17 +487,7 @@ export const Page: React.FC<{
             </Grid>
           </>
         )}
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            href="https://github.com/fariapp/fari/discussions"
-            target="_blank"
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.help")}
-          </Button>
-        </Grid>
+
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
             color="inherit"

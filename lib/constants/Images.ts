@@ -1,4 +1,5 @@
 import accelerated from "../../images/srds/accelerated.jpg";
+import seelieSquireAvatar from "../../images/srds/authors/seelie-squire-avatar.png";
 import bookImage from "../../images/srds/books.jpeg";
 import condensed from "../../images/srds/condensed.jpg";
 import core from "../../images/srds/core.jpg";
@@ -12,4 +13,5 @@ export const Images = {
   rpgPlots: rpgPlots as string,
   core: core as string,
   seelieSquire: seelieSquire as string,
+  seelieSquireAvatar: seelieSquireAvatar as string,
 };
