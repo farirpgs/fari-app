@@ -158,41 +158,50 @@ export const Doc: React.FC<{
     }
     return (
       <Box>
-        <Grid container spacing={1} alignItems="center">
-          <Grid item className={css({ display: "flex" })}>
-            {props.author.avatarUrl ? (
-              <Avatar alt={props.author.title} src={props.author.avatarUrl} />
-            ) : (
-              <AccountBoxIcon />
-            )}
+        <Grid container spacing={1} justify="space-between">
+          <Grid container item sm={12} md spacing={1} alignItems="center">
+            <Grid item className={css({ display: "flex" })}>
+              {props.author.avatarUrl ? (
+                <Avatar alt={props.author.title} src={props.author.avatarUrl} />
+              ) : (
+                <AccountBoxIcon />
+              )}
+            </Grid>
+            <Grid item>
+              <FateLabel variant="body2" color="primary">
+                <b>{props.author.title}</b>
+              </FateLabel>
+            </Grid>
           </Grid>
-          <Grid item>
-            <FateLabel variant="body2" color="primary">
-              <b>{props.author.title}</b>
-            </FateLabel>
-          </Grid>
-          <Grid item>
-            <FateLabel color="secondary">{"|"}</FateLabel>
-          </Grid>
-          {props.author.items.map((item, index) => {
-            const length = props.author?.items.length ?? 0;
-            const isLast = index === length - 1;
+          <Grid
+            container
+            item
+            sm={12}
+            md
+            spacing={1}
+            justify={isSmall ? "flex-start" : "flex-end"}
+            alignItems="center"
+          >
+            {props.author.items.map((item, index) => {
+              const length = props.author?.items.length ?? 0;
+              const isLast = index === length - 1;
 
-            return (
-              <React.Fragment key={item.url}>
-                <Grid item>
-                  <AppLink to={item.url} target="_blank">
-                    <b> {item.label}</b>
-                  </AppLink>
-                </Grid>
-                {!isLast && (
+              return (
+                <React.Fragment key={item.url}>
                   <Grid item>
-                    <FateLabel color="secondary">{"•"}</FateLabel>
+                    <AppLink to={item.url} target="_blank">
+                      <b> {item.label}</b>
+                    </AppLink>
                   </Grid>
-                )}
-              </React.Fragment>
-            );
-          })}
+                  {!isLast && (
+                    <Grid item>
+                      <FateLabel color="secondary">{"•"}</FateLabel>
+                    </Grid>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </Grid>
         </Grid>
         <Box pt=".5rem" pb="3rem">
           <Divider />
