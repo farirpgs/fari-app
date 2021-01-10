@@ -15,7 +15,7 @@ export function useMarkdownPage(
       logger.error("useMarkdownPage: no H1 in markdown document");
     }
 
-    const currentH1 = dom?.querySelector(`#${page}`) ?? allH1s[0];
+    const currentH1 = dom?.querySelector(`[id='${page}']`) ?? allH1s[0];
     const firstParagraph = dom?.querySelector(`p`)?.textContent ?? "";
     const description = truncate(firstParagraph, { length: 155 });
 
@@ -38,7 +38,7 @@ export function useMarkdownPage(
       }
     });
 
-    const allElementsInPage = nextSiblingUntil(currentH1, `#${nextH1?.id}`);
+    const allElementsInPage = nextSiblingUntilId(currentH1, `${nextH1?.id}`);
 
     const newDom = document.createElement("div");
     newDom.append(currentH1?.cloneNode(true)!);
@@ -56,22 +56,13 @@ export function useMarkdownPage(
   }, [page, dom]);
 }
 
-function nextSiblingUntil(
-  elem: Element | undefined | null,
-  selector: string,
-  filter?: string
-) {
+function nextSiblingUntilId(elem: Element | undefined | null, id: string) {
   const siblings: Array<Element> = [];
 
   let currentElement = elem?.nextElementSibling;
 
   while (currentElement) {
-    if (currentElement.matches(selector)) break;
-
-    if (filter && !currentElement.matches(filter)) {
-      currentElement = currentElement.nextElementSibling;
-      continue;
-    }
+    if (currentElement.matches(`[id='${id}']`)) break;
 
     siblings.push(currentElement);
 

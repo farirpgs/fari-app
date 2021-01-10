@@ -35,7 +35,6 @@ const PlayOfflineRoute = React.lazy(
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
-const SrdRoute = React.lazy(() => import("../../routes/SrdRoute/SrdRoute"));
 
 export const LoadingRoute: React.FC = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -133,12 +132,69 @@ export const AppRouter = () => {
           exact
           path={"/srds/condensed/:page?"}
           render={(props) => (
-            <SrdRoute
-              {...props}
+            <Doc
+              currentPage={props.match.params.page}
               url="/srds/condensed"
+              parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Condensed"
               imageUrl={Images.condensed}
               loadFunction={DocImport.FateCondensed}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/core/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/core"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate Core"
+              imageUrl={Images.core}
+              loadFunction={DocImport.FateCore}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/accelerated/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/accelerated"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate Accelerated"
+              imageUrl={Images.accelerated}
+              loadFunction={DocImport.FateAccelerated}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/system-toolkit/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/system-toolkit"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate System Toolkit"
+              imageUrl={Images.accelerated}
+              loadFunction={DocImport.FateSystemToolkit}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/adversary-toolkit/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/adversary-toolkit"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate Adversary Toolkit"
+              imageUrl={Images.accelerated}
+              loadFunction={DocImport.FateAdversaryToolkit}
             />
           )}
         />
@@ -201,32 +257,7 @@ export const AppRouter = () => {
             />
           )}
         />
-        <Route
-          exact
-          path={"/srds/core/:page?"}
-          render={(props) => (
-            <SrdRoute
-              {...props}
-              url="/srds/core"
-              title="Fate Core"
-              imageUrl={Images.core}
-              loadFunction={DocImport.FateCore}
-            />
-          )}
-        />
-        <Route
-          exact
-          path={"/srds/accelerated/:page?"}
-          render={(props) => (
-            <SrdRoute
-              {...props}
-              url="/srds/accelerated"
-              title="Fate Accelerated"
-              imageUrl={Images.accelerated}
-              loadFunction={DocImport.FateAccelerated}
-            />
-          )}
-        />
+
         <Route
           exact
           path={"/about"}

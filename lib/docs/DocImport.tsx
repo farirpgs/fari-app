@@ -8,6 +8,12 @@ export const DocImport = {
   FateAccelerated: () => {
     return import("./fate-accelerated.md");
   },
+  FateAdversaryToolkit: () => {
+    return import("./fate-adversary-toolkit.md");
+  },
+  FateSystemToolkit: () => {
+    return import("./fate-system-toolkit.md");
+  },
   SeelieSquire: () => {
     return import("./seelie-squire.md");
   },

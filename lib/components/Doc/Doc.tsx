@@ -32,18 +32,19 @@ import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
-import {
-  ILoadFunction,
-  IMarkdownHeader,
-  useMarkdownFile,
-} from "../../routes/SrdRoute/hooks/useMarkdownFile";
-import { useMarkdownPage } from "../../routes/SrdRoute/hooks/useMarkdownPage";
-import { drawerWidth } from "../../routes/SrdRoute/SrdRoute";
 import { AppLink } from "../AppLink/AppLink";
 import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
+import {
+  ILoadFunction,
+  IMarkdownHeader,
+  useMarkdownFile,
+} from "./hooks/useMarkdownFile";
+import { useMarkdownPage } from "./hooks/useMarkdownPage";
+
+export const drawerWidth = "300px";
 
 export const Doc: React.FC<{
   title: string;
