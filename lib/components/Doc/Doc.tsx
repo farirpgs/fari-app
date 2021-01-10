@@ -17,6 +17,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -44,17 +45,20 @@ import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
 
 export const Doc: React.FC<{
-  docTitle: string;
-  currentPageId: string | undefined;
-  prefix: string;
-  parentTitle: string;
-  parentUrl: string;
+  title: string;
+  currentPage: string | undefined;
+  url: string;
+  parent: {
+    title: string;
+    url: string;
+  };
+  links?: { title: string; items: Array<{ label: string; url: string }> };
   imageUrl?: string;
   loadFunction: ILoadFunction;
 }> = (props) => {
   const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
   const { html, nextH1, previousH1, currentH1, description } = useMarkdownPage(
-    props.currentPageId,
+    props.currentPage,
     dom
   );
 
@@ -71,7 +75,7 @@ export const Doc: React.FC<{
   const isFirstPage = !previousH1;
 
   useEffect(() => {
-    const docTitle = props.docTitle ? `:${kebabCase(props.docTitle)}` : "";
+    const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
     const pageTitle = title ? `:${kebabCase(title)}` : "";
     const sectionTitle = location.hash
       ? `:${location.hash.replace("#", "")}`
@@ -85,7 +89,7 @@ export const Doc: React.FC<{
   }, [location.pathname, location.hash]);
 
   function goTo(path: string) {
-    history.push(`${props.prefix}/${path}`);
+    history.push(`${props.url}/${path}`);
   }
 
   isSmall;
@@ -93,7 +97,7 @@ export const Doc: React.FC<{
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
       <PageMeta
-        title={isFirstPage ? props.docTitle : `${title} | ${props.docTitle}`}
+        title={isFirstPage ? props.title : `${title} | ${props.title}`}
         description={description}
       />
       {html ? (
@@ -120,14 +124,46 @@ export const Doc: React.FC<{
                 />
               )}
               <Container maxWidth="md" className={css({ flexGrow: 1 })}>
-                {props.children && (
+                {props.links && (
                   <Box>
-                    {props.children}
+                    <Grid container spacing={1} alignItems="center">
+                      <Grid item className={css({ display: "flex" })}>
+                        <AccountBoxIcon />
+                      </Grid>
+                      <Grid item>
+                        <FateLabel variant="body2">
+                          <b>
+                            {props.links.title}
+                            {":"}
+                          </b>
+                        </FateLabel>
+                      </Grid>
+                      {props.links.items.map((item, index) => {
+                        const length = props.links?.items.length ?? 0;
+                        const isLast = index === length - 1;
+
+                        return (
+                          <React.Fragment key={item.url}>
+                            <Grid item>
+                              <AppLink to={item.url} target="_blank">
+                                <b> {item.label}</b>
+                              </AppLink>
+                            </Grid>
+                            {!isLast && (
+                              <Grid item>
+                                <FateLabel color="secondary">{"•"}</FateLabel>
+                              </Grid>
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </Grid>
                     <Box mt=".25rem" mb="2rem">
                       <Divider />
                     </Box>
                   </Box>
                 )}
+                {props.children && <Box>{props.children}</Box>}
                 <Box pb="1rem" mt="-1.5rem">
                   {renderHeader()}
                 </Box>
@@ -151,9 +187,9 @@ export const Doc: React.FC<{
   function renderTitle() {
     return (
       <FateLabel>
-        <AppLink to={props.parentUrl}>{props.parentTitle}</AppLink>
+        <AppLink to={props.parent.url}>{props.parent.title}</AppLink>
         {" / "}
-        {props.docTitle}
+        {props.title}
       </FateLabel>
     );
   }
@@ -253,11 +289,9 @@ export const Doc: React.FC<{
             const header = allHeaders.find((h) => newValue === h.label);
 
             if (header?.level === 1) {
-              history.push(`${props.prefix}/${header?.id}`);
+              history.push(`${props.url}/${header?.id}`);
             } else {
-              history.push(
-                `${props.prefix}/${header?.parent?.id}#${header?.id}`
-              );
+              history.push(`${props.url}/${header?.parent?.id}#${header?.id}`);
             }
           }}
           renderInput={(params) => (
@@ -287,7 +321,7 @@ export const Doc: React.FC<{
                 button
                 dense
                 component={Link}
-                to={`${props.prefix}/${h1.page.id}`}
+                to={`${props.url}/${h1.page.id}`}
                 onClick={() => {
                   if (isCurrentH1) {
                     setUserClosedH1((value) => !value);

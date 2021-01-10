@@ -2,17 +2,13 @@ import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Images } from "../../constants/Images";
 import { DocImport as DocImport } from "../../docs/DocImport";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
-import { AppLink } from "../AppLink/AppLink";
 import { Doc } from "../Doc/Doc";
-import { FateLabel } from "../FateLabel/FateLabel";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -139,7 +135,7 @@ export const AppRouter = () => {
           render={(props) => (
             <SrdRoute
               {...props}
-              prefix="/srds/condensed"
+              url="/srds/condensed"
               title="Fate Condensed"
               imageUrl={Images.condensed}
               loadFunction={DocImport.FateCondensed}
@@ -151,11 +147,10 @@ export const AppRouter = () => {
           path={"/changelog/:page?"}
           render={(props) => (
             <Doc
-              currentPageId={props.match.params.page}
-              prefix="/changelog"
-              parentTitle="Fari"
-              parentUrl="/"
-              docTitle="Changelog"
+              currentPage={props.match.params.page}
+              url="/changelog"
+              parent={{ title: "Fari", url: "/" }}
+              title="Changelog"
               loadFunction={DocImport.Changelog}
             />
           )}
@@ -165,11 +160,10 @@ export const AppRouter = () => {
           path={"/fate-stunts/:page?"}
           render={(props) => (
             <Doc
-              currentPageId={props.match.params.page}
-              prefix="/fate-stunts"
-              parentTitle="SRDs"
-              parentUrl="/srds"
-              docTitle="Fate Stunts"
+              currentPage={props.match.params.page}
+              url="/fate-stunts"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate Stunts"
               imageUrl={Images.book}
               loadFunction={DocImport.FateStunts}
             />
@@ -180,51 +174,30 @@ export const AppRouter = () => {
           path={"/seelie-squire/:page?"}
           render={(props) => (
             <Doc
-              currentPageId={props.match.params.page}
-              prefix="/seelie-squire"
-              parentTitle="SRDs"
-              parentUrl="/srds"
-              docTitle="Seelie Squire's Book Of Creatures"
+              currentPage={props.match.params.page}
+              url="/seelie-squire"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Seelie Squire's Book Of Creatures"
               imageUrl={Images.seelieSquire}
               loadFunction={DocImport.SeelieSquire}
-            >
-              <Grid container spacing={1} alignItems="center">
-                <Grid item>
-                  <Typography variant="body2">Seelie Squire:</Typography>
-                </Grid>
-                <Grid item>
-                  <AppLink
-                    to="https://www.patreon.com/seeliesquire"
-                    target="_blank"
-                  >
-                    Patreon
-                  </AppLink>
-                </Grid>
-
-                <Grid item>
-                  <FateLabel color="secondary">{"•"}</FateLabel>
-                </Grid>
-                <Grid item>
-                  <AppLink
-                    to="https://discord.com/invite/8u3VVZd"
-                    target="_blank"
-                  >
-                    Discord
-                  </AppLink>
-                </Grid>
-                <Grid item>
-                  <FateLabel color="secondary">{"•"}</FateLabel>
-                </Grid>
-                <Grid item>
-                  <AppLink
-                    to="https://www.reddit.com/r/seeliesquire/"
-                    target="_blank"
-                  >
-                    Reddit
-                  </AppLink>
-                </Grid>
-              </Grid>
-            </Doc>
+              links={{
+                title: "Seelie Squire",
+                items: [
+                  {
+                    label: "Patreon",
+                    url: "https://www.patreon.com/seeliesquire",
+                  },
+                  {
+                    label: "Discord",
+                    url: "https://discord.com/invite/8u3VVZd",
+                  },
+                  {
+                    label: "Reddit",
+                    url: "https://www.reddit.com/r/seeliesquire/",
+                  },
+                ],
+              }}
+            />
           )}
         />
         <Route
@@ -233,7 +206,7 @@ export const AppRouter = () => {
           render={(props) => (
             <SrdRoute
               {...props}
-              prefix="/srds/core"
+              url="/srds/core"
               title="Fate Core"
               imageUrl={Images.core}
               loadFunction={DocImport.FateCore}
@@ -246,7 +219,7 @@ export const AppRouter = () => {
           render={(props) => (
             <SrdRoute
               {...props}
-              prefix="/srds/accelerated"
+              url="/srds/accelerated"
               title="Fate Accelerated"
               imageUrl={Images.accelerated}
               loadFunction={DocImport.FateAccelerated}

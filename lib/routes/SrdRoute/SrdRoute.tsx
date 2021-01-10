@@ -6,7 +6,7 @@ import { ILoadFunction } from "./hooks/useMarkdownFile";
 export const drawerWidth = "300px";
 
 export const SrdRoute: React.FC<{
-  prefix: string;
+  url: string;
   title: string;
   imageUrl: string;
   loadFunction: ILoadFunction;
@@ -15,11 +15,10 @@ export const SrdRoute: React.FC<{
 
   return (
     <Doc
-      currentPageId={page}
-      prefix={props.prefix}
-      parentTitle="SRDs"
-      parentUrl="/srds"
-      docTitle={props.title}
+      currentPage={page}
+      url={props.url}
+      title={props.title}
+      parent={{ title: "SRDs", url: "/srds" }}
       imageUrl={props.imageUrl}
       loadFunction={props.loadFunction}
     />
