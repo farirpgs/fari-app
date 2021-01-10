@@ -454,12 +454,12 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
-                href="/srds"
-                target="_blank"
+                to="/srds"
+                component={RouterLink}
                 variant={mobile ? "outlined" : undefined}
                 fullWidth={mobile}
               >
-                {t("SRDs")}
+                {"SRDs"}
               </Button>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
