@@ -195,7 +195,7 @@ export const Doc: React.FC<{
               return (
                 <React.Fragment key={item.url}>
                   <Grid item>
-                    <AppLink to={item.url} target="_blank">
+                    <AppLink to={item.url} target="_blank" underline="always">
                       <b> {item.label}</b>
                     </AppLink>
                   </Grid>
@@ -220,7 +220,7 @@ export const Doc: React.FC<{
     return (
       <Breadcrumbs aria-label="breadcrumb">
         <FateLabel noWrap>
-          <AppLink to={props.parent.url} noWrap>
+          <AppLink to={props.parent.url} noWrap underline="always">
             {props.parent.title}
           </AppLink>
         </FateLabel>

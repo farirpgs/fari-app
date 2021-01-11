@@ -152,7 +152,10 @@ export const Page: React.FC<{
             </Grid>
             <Grid item>
               <Typography>
-                <AppLink to="/changelog">{`v${env.version}`}</AppLink>
+                <AppLink
+                  to="/changelog"
+                  underline="always"
+                >{`v${env.version}`}</AppLink>
               </Typography>
             </Grid>
             <Grid item>

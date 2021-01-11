@@ -139,6 +139,24 @@ export const AppRouter = () => {
               title="Fate Condensed"
               imageUrl={Images.condensed}
               loadFunction={DocImport.FateCondensed}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-condensed",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-condensed",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/302571/Fate-Condensed",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -153,6 +171,24 @@ export const AppRouter = () => {
               title="Fate Core"
               imageUrl={Images.core}
               loadFunction={DocImport.FateCore}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-core/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-core",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/114903/Fate-Core-System",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -167,6 +203,24 @@ export const AppRouter = () => {
               title="Fate Accelerated"
               imageUrl={Images.accelerated}
               loadFunction={DocImport.FateAccelerated}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fae/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-accelerated",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/114902/Fate-Accelerated-Edition-o-A-Fate-Core-Build",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -222,6 +276,19 @@ export const AppRouter = () => {
               title="Fate Stunts"
               imageUrl={Images.book}
               loadFunction={DocImport.FateStunts}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/",
+                  },
+                  {
+                    label: "Wiki",
+                    url: "http://evilhat.wikidot.com/fate-core-stunts",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -257,6 +324,7 @@ export const AppRouter = () => {
             />
           )}
         />
+        a{" "}
         <Route
           exact
           path={"/srds/test:page?"}
@@ -288,7 +356,6 @@ export const AppRouter = () => {
             />
           )}
         />
-
         <Route
           exact
           path={"/about"}
@@ -310,7 +377,6 @@ export const AppRouter = () => {
             return <BlogPostRoute slug={props.match.params.slug} />;
           }}
         />
-
         <Route
           path="*"
           render={(props) => {
