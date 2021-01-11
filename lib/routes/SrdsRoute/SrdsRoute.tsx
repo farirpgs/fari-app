@@ -212,10 +212,14 @@ export const SrdCard: React.FC<{
   return (
     <ButtonBase
       className={css({
-        height: "100%",
-        display: "inline-block",
-        textAlign: "left",
-        width: "100%",
+        "height": "100%",
+        "display": "inline-block",
+        "textAlign": "left",
+        "width": "100%",
+        "transition": theme.transitions.create(["transform"]),
+        "&:hover": {
+          transform: "scale(1.05)",
+        },
       })}
     >
       <AppLink to={props.link}>
@@ -227,10 +231,9 @@ export const SrdCard: React.FC<{
             "flexDirection": "column",
             "background": backgroundColor,
             "boxShadow": theme.shadows[8],
-            "transition": theme.transitions.create(["transform", "box-shadow"]),
+            "transition": theme.transitions.create(["box-shadow"]),
             "&:hover": {
               boxShadow: theme.shadows[16],
-              transform: "scale(1.05)",
             },
           })}
         >
