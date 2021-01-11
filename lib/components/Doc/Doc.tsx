@@ -255,7 +255,9 @@ export const Doc: React.FC<{
               </IconButton>
             </Grid>
             <Grid item zeroMinWidth>
-              <Box>{renderTitle()}</Box>
+              <Box>
+                <FateLabel noWrap> {props.title}</FateLabel>
+              </Box>
             </Grid>
           </Grid>
         </Box>

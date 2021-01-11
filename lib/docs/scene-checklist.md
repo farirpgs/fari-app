@@ -21,10 +21,10 @@ During a game, whenever I feel stumped or overwhelmed during a scene, I quickly 
 
 Build, Capture, Catch, Change, Convince, Defeat, Defend, Deliver, Destroy, Discover, Escape, Explore, Find, Follow, Gain, Get, Guard, Impress, Kill, Learn, Negotiate, Protect, Reach, Reconcile, Rescue, Save, Sneak, Solve, Start, Steal, Stop, Traverse, Uncover, Win
 
-## TIPS
+## Tips
 
-• Ask them what they want. Put trouble in the way.
-• End the scene on a disaster, cliffhanger, twist, or intriguing clue: "Now you need to go to [PLACE] in order to [GOAL] or else things will get even worse."
-• If you're stumped about the game world, ask the players.
-• For inspiration, look at their character sheets. Everything the player put on it is something they want to be part of the game.
-• If the story isn't moving forward, add danger. Give them an immediate threat to react to.
+- Ask them what they want. Put trouble in the way.
+- End the scene on a disaster, cliffhanger, twist, or intriguing clue: "Now you need to go to [PLACE] in order to [GOAL] or else things will get even worse."
+- If you're stumped about the game world, ask the players.
+- For inspiration, look at their character sheets. Everything the player put on it is something they want to be part of the game.
+- If the story isn't moving forward, add danger. Give them an immediate threat to react to.

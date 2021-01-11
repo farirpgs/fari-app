@@ -116,7 +116,13 @@ export const ToolkitItems: React.FC = (props) => {
         <Grid item xs={12} sm={6} md={4}>
           <SrdCard
             title="Fate System Toolkit"
-            description={<>[...]</>}
+            description={
+              <>
+                This expansion for the Fate Core System contains tons of
+                flexible, hackable and adaptable rules that fits any world you
+                are trying to play in.
+              </>
+            }
             bgColor="#442d74"
             imageSrc={Images.systemToolkit}
             link="/srds/system-toolkit"
@@ -125,7 +131,12 @@ export const ToolkitItems: React.FC = (props) => {
         <Grid item xs={12} sm={6} md={4}>
           <SrdCard
             title="Fate Adversary Toolkit"
-            description={<>[...]</>}
+            description={
+              <>
+                What ever the genre, this book gives you the tools you need to
+                create great obstacles for you stories.
+              </>
+            }
             bgColor="#1e171c"
             imageSrc={Images.adversaryToolkit}
             link="/srds/adversary-toolkit"
@@ -167,6 +178,15 @@ export const OtherResourcesItems: React.FC = (props) => {
             bgColor="#223031"
             imageSrc={Images.book}
             link="/fate-stunts"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Scene Checklist"
+            description={<>[...]</>}
+            bgColor="#3b3a39"
+            imageSrc={Images.scene}
+            link="/scene-checklist"
           />
         </Grid>
       </Grid>
