@@ -65,7 +65,6 @@ export const SrdItems: React.FC = (props) => {
             description={
               <>
                 The latest version of the Fate System.
-                <br />
                 <strong>Compact, stand-alone and streamlined</strong> for
                 clarity and ease of reference.
               </>
@@ -183,7 +182,12 @@ export const OtherResourcesItems: React.FC = (props) => {
         <Grid item xs={12} sm={6} md={4}>
           <SrdCard
             title="Scene Checklist"
-            description={<>[...]</>}
+            description={
+              <>
+                If you feel stumped during a scene, this checklist is going to
+                help you get back on track in no time.
+              </>
+            }
             bgColor="#3b3a39"
             imageSrc={Images.scene}
             link="/scene-checklist"
