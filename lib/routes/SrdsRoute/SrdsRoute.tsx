@@ -43,6 +43,7 @@ export const Srds: React.FC = (props) => {
       />
       <SrdItems />
       <Box pt="1rem" />
+      <ToolkitItems />
 
       <Heading
         icon={HelpIcon}
@@ -57,7 +58,7 @@ export const Srds: React.FC = (props) => {
 export const SrdItems: React.FC = (props) => {
   return (
     <Box>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={6} md={4}>
           <SrdCard
             title="Fate Condensed"
@@ -101,6 +102,33 @@ export const SrdItems: React.FC = (props) => {
             bgColor="#005aba"
             imageSrc={Images.accelerated}
             link="/srds/accelerated"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export const ToolkitItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Fate System Toolkit"
+            description={<>[...]</>}
+            bgColor="#442d74"
+            imageSrc={Images.systemToolkit}
+            link="/srds/system-toolkit"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Fate Adversary Toolkit"
+            description={<>[...]</>}
+            bgColor="#1e171c"
+            imageSrc={Images.adversaryToolkit}
+            link="/srds/adversary-toolkit"
           />
         </Grid>
       </Grid>
@@ -170,7 +198,6 @@ export const SrdCard: React.FC<{
         <Card
           raised
           className={css({
-            // "cursor": "pointer",
             "height": "100%",
             "display": "flex",
             "flexDirection": "column",

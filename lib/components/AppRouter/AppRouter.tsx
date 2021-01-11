@@ -233,8 +233,26 @@ export const AppRouter = () => {
               url="/srds/system-toolkit"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate System Toolkit"
-              imageUrl={Images.accelerated}
+              imageUrl={Images.systemToolkit}
               loadFunction={DocImport.FateSystemToolkit}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-system-toolkit/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-system-toolkit",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/119385/Fate-System-Toolkit",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -247,8 +265,26 @@ export const AppRouter = () => {
               url="/srds/adversary-toolkit"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Adversary Toolkit"
-              imageUrl={Images.accelerated}
+              imageUrl={Images.adversaryToolkit}
               loadFunction={DocImport.FateAdversaryToolkit}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-adversary-toolkit/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-adversary-toolkit",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/219203/Fate-Adversary-Toolkit",
+                  },
+                ],
+              }}
             />
           )}
         />
