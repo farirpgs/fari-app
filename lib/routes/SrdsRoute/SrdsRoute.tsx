@@ -179,7 +179,7 @@ export const SrdCard: React.FC<{
             "transition": theme.transitions.create(["transform", "box-shadow"]),
             "&:hover": {
               boxShadow: theme.shadows[16],
-              transform: "scale(1.025)",
+              transform: "scale(1.05)",
             },
           })}
         >
