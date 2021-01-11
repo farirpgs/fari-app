@@ -11,8 +11,6 @@ This work is based on Fate Core System and Fate Accelerated Edition (found at ht
 
 # Get Started!
 
-<iframe src="https://itch.io/embed/491601" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-accelerated">Fate Accelerated Edition • A Fate Core Build by evilhat</a></iframe>
-
 Remember those books where the teenage wizards struggle against the Dark Lord of Evil? That movie where the dwarves fight to recapture their mountain home from a dragon? That animated TV show about mystical knights and their army of clones righting wrongs across the galaxy?
 
 Aren’t those awesome?
@@ -20,6 +18,8 @@ Aren’t those awesome?
 Here’s your chance to put yourself in the heroes’ shoes in stories like those.
 
 Fate Accelerated Edition is a tabletop roleplaying game, where you and your friends gather around and tell stories full of danger, excitement, and adventure. You might have played games similar to this before—Dungeons &amp; Dragons is a very popular one—but don’t worry if you haven’t; this booklet will guide you through it.
+
+<iframe src="https://itch.io/embed/491601" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-accelerated">Fate Accelerated Edition • A Fate Core Build by evilhat</a></iframe>
 
 Here’s what you’ll need to play:
 

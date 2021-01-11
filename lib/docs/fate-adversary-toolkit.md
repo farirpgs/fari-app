@@ -4,6 +4,8 @@ As we talk about adversaries in this book, keep in mind the Fate Fractal: everyt
 
 There are three main types of adversaries: enemies, obstacles, and constraints.
 
+<iframe src="https://itch.io/embed/492914" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-adversary-toolkit">Fate Adversary Toolkit by evilhat</a></iframe>
+
 ## Enemies
 
 Enemies are the goons, super-villains, giant robots, and hyper-intelligent ape warriors. This is the enemy’s defining characteristic: it can be fought directly, even if only under certain circumstances. Enemies have many of the same statistics as the PCs do: they have skills, they have at least one aspect, and the more important enemies have stunts, too. They can take stress, and some can take consequences.

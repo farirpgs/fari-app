@@ -1,3 +1,7 @@
+<!--
+
+# Fate System Toolkit
+
 ©2013 Evil Hat Productions, LLC. Refer to the licensing pages at <a href="http://www.faterpg.com/licensing/">http://www.faterpg.com/licensing/</a> for details.
 
 This is the System Reference Document for use with the Creative Commons Attribution Unported license. The following attribution must be provided in your text, wherever you put your own copyright, in the same size as your copyright text:
@@ -5,6 +9,8 @@ This is the System Reference Document for use with the Creative Commons Attribut
 This work is based on the Fate System Toolkit (found at http://www.faterpg.com/), a product of Evil Hat Productions, LLC, developed, authored, and edited by
 Robert Donoghue, Brian Engard, Brennan Taylor, Mike Olson, Mark Diaz Truman, Fred Hicks, and Matthew Gandy,
 and licensed for our use under the Creative Commons Attribution 3.0 Unported license (http://creativecommons.org/licenses/by/3.0/).
+
+<iframe src="https://itch.io/embed/492920" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-system-toolkit">Fate System Toolkit by evilhat</a></iframe>
 
 # Foreword: “A” Not “The”
 
@@ -29,12 +35,15 @@ More than anything, this <em>Fate System Toolkit</em> is a training guide for yo
 — Fred Hicks
 
 July 15, 2013
+ -->
 
 # 1: Introduction
 
 ## Why We’re Here
 
 Think of <em>Fate</em> as a machine, built to produce a specific outcome. Like many machines, <em>Fate</em> can be adjusted to produce other outcomes; it contains a system of dials, a network of rules that can be adjusted up, down, and to the sides to achieve the result you’re looking for. It’s robust, flexible, and—most importantly—hackable.
+
+<iframe src="https://itch.io/embed/492920" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-system-toolkit">Fate System Toolkit by evilhat</a></iframe>
 
 What does that mean, that it’s “hackable?” First, it means that you can change rules. This is true of any game—if you’re playing <em>Monopoly</em>, allowing players to collect money when they land on Free Parking would be a hack. It changes the nature of the game’s economy and makes the game a little more forgiving, so it’s a little harder to lose the game early due to lack of funds. <em>Fate</em> is like that—it can be altered. Do you want the GM to have more fate points? The players to have higher skills? Want to change the way aspects work? All of these things are possible with a little effort on your part.
 
