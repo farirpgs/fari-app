@@ -23,6 +23,9 @@ export const DocImport = {
   SceneCheckist: () => {
     return import("./scene-checklist.md");
   },
+  CheatSheet: () => {
+    return import("./cheat-sheet.md");
+  },
   // TheBigListOfRpgPlots: () => {
   //   return import("./the-big-list-of-rpg-plots.md");
   // },

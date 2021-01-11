@@ -369,15 +369,40 @@ export const AppRouter = () => {
               url="/scene-checklist"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Scene Checklist"
-              // imageUrl={Images.seelieSquire}
               loadFunction={DocImport.SceneCheckist}
               author={{
                 title: "LAURENCE MACNAUGHTON",
-                // avatarUrl: Images.seelieSquireAvatar,
                 items: [
                   {
                     label: "Website",
                     url: "https://laurencemacnaughton.com/",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/cheat-sheet/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/cheat-sheet"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Cheat Sheet"
+              loadFunction={DocImport.CheatSheet}
+              maxWidth="lg"
+              author={{
+                title: "famousbirds",
+                items: [
+                  {
+                    label: "Twitter",
+                    url: "https://twitter.com/famousbirds",
+                  },
+                  {
+                    label: "Reddit",
+                    url: "https://www.reddit.com/user/famousbirds",
                   },
                 ],
               }}

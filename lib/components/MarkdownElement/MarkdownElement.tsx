@@ -166,6 +166,13 @@ const styles = (theme: Theme) => {
           borderBottom: `1px dotted ${theme.palette.divider}`,
         },
       },
+      "& thead tr": {
+        borderBottom: `2px solid ${theme.palette.primary.main}`,
+      },
+      "& tbody tr": {
+        "&:nth-child(even)": { background: "transparent" },
+        "&:nth-child(odd)": { background: lightBackground },
+      },
       "& td": {
         ...theme.typography.body2,
         borderBottom: `1px solid ${theme.palette.divider}`,

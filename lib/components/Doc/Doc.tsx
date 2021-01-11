@@ -5,7 +5,7 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Collapse from "@material-ui/core/Collapse";
-import Container from "@material-ui/core/Container";
+import Container, { ContainerTypeMap } from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
@@ -62,6 +62,7 @@ export const Doc: React.FC<{
   };
   imageUrl?: string;
   loadFunction: ILoadFunction;
+  maxWidth?: ContainerTypeMap["props"]["maxWidth"];
 }> = (props) => {
   const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
   const { html, nextH1, previousH1, currentH1, description } = useMarkdownPage(
@@ -135,7 +136,7 @@ export const Doc: React.FC<{
                   })}
                 />
               )}
-              <Container maxWidth="md">
+              <Container maxWidth={props.maxWidth ?? "md"}>
                 {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
                 <Box pb="1rem" mt="-1.5rem">

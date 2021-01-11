@@ -193,6 +193,22 @@ export const OtherResourcesItems: React.FC = (props) => {
             link="/scene-checklist"
           />
         </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Cheat Sheet"
+            description={
+              <>
+                Your handy tool for a quick access to the most important rules
+                during a session.
+              </>
+            }
+            bgColor="#030200"
+            imageSrc={
+              "https://images.unsplash.com/photo-1598620617148-c9e8ddee6711?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
+            }
+            link="/cheat-sheet"
+          />
+        </Grid>
       </Grid>
     </Box>
   );
