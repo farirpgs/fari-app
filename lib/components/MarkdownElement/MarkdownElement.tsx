@@ -20,10 +20,6 @@ const styles = (theme: Theme) => {
       ...theme.typography.body1,
       "color": theme.palette.text.primary,
       "wordBreak": "break-word",
-      "& .anchor-link": {
-        marginTop: -96,
-        position: "absolute",
-      },
       "& pre": {
         margin: theme.spacing(3, "auto"),
         padding: theme.spacing(2),
@@ -72,6 +68,7 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
+        borderBottom: `2px solid ${theme.palette.primary.main}`,
         textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "1rem",
@@ -82,6 +79,7 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
+        borderBottom: `1px solid ${theme.palette.primary.main}`,
         textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
@@ -136,23 +134,6 @@ const styles = (theme: Theme) => {
           lineHeight: "inherit",
           // Remove scroll on small screens.
           wordBreak: "break-all",
-        },
-        "& .anchor-link-style": {
-          // To prevent the link to get the focus.
-          display: "none",
-        },
-        "&:hover .anchor-link-style": {
-          "display": "inline-block",
-          "padding": "0 8px",
-          "color": theme.palette.text.secondary,
-          "&:hover": {
-            color: theme.palette.text.primary,
-          },
-          "& svg": {
-            width: "0.7em",
-            height: "0.7em",
-            fill: "currentColor",
-          },
         },
       },
       "& table": {
