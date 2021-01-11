@@ -20,9 +20,12 @@ export const DocImport = {
   FateStunts: () => {
     return import("./fate-stunts.md");
   },
-  TheBigListOfRpgPlots: () => {
-    return import("./the-big-list-of-rpg-plots.md");
+  SceneCheckist: () => {
+    return import("./scene-checklist.md");
   },
+  // TheBigListOfRpgPlots: () => {
+  //   return import("./the-big-list-of-rpg-plots.md");
+  // },
   Test: () => {
     return import("./test.md");
   },

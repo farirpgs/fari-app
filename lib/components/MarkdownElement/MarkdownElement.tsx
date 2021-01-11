@@ -127,10 +127,6 @@ const styles = (theme: Theme) => {
         marginTop: "2rem",
         marginBottom: "1rem",
       },
-      "& p, & ul, & ol": {
-        marginTop: 0,
-        marginBottom: 16,
-      },
       "& ul": {
         paddingLeft: 30,
       },
@@ -217,13 +213,13 @@ const styles = (theme: Theme) => {
         "borderLeft": `5px solid ${theme.palette.primary.main}`,
         "boxShadow": theme.shadows[1],
         "backgroundColor": lightBackground,
-        "padding": "4px 24px",
-        "margin": "24px 0",
+        "padding": ".5rem 2rem",
+        "margin": "1.5rem 0",
         "& p": {
           marginTop: "16px",
         },
-        "& ul:first-child": {
-          marginTop: "16px",
+        "& ul:first-child, ol:first-child": {
+          // marginTop: "1rem",
         },
         "& h1,h2,h3,h4,h5,h6": {
           marginTop: "1rem",
@@ -231,7 +227,7 @@ const styles = (theme: Theme) => {
           fontFamily: `'Work Sans', sans-serif`,
         },
         "& *": {
-          fontStyle: "italic",
+          // fontStyle: "italic",
           fontFamily: `'Work Sans', sans-serif`,
         },
       },

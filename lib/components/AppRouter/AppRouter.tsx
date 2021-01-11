@@ -360,7 +360,31 @@ export const AppRouter = () => {
             />
           )}
         />
-        a{" "}
+        <Route
+          exact
+          path={"/scene-checklist/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/scene-checklist"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Scene Checklist"
+              // imageUrl={Images.seelieSquire}
+              loadFunction={DocImport.SceneCheckist}
+              author={{
+                title: "LAURENCE MACNAUGHTON",
+                // avatarUrl: Images.seelieSquireAvatar,
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://laurencemacnaughton.com/",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+
         <Route
           exact
           path={"/srds/test:page?"}
