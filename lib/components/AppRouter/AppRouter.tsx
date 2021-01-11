@@ -257,6 +257,37 @@ export const AppRouter = () => {
             />
           )}
         />
+        <Route
+          exact
+          path={"/srds/test:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/test"
+              parent={{
+                title: "Parent Title Parent Title Parent Title Parent Title",
+                url: "/srds",
+              }}
+              title="Doc Title Doc Title Doc Title Doc Title"
+              imageUrl={Images.book}
+              loadFunction={DocImport.Test}
+              author={{
+                title: "Author Author Author Autho",
+                avatarUrl: Images.seelieSquireAvatar,
+                items: [
+                  {
+                    label: "Link1 Link1 Link1 Link1 Link1",
+                    url: "",
+                  },
+                  {
+                    label: "Link2 Link2 Link2 Link2 Link2",
+                    url: "",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
 
         <Route
           exact

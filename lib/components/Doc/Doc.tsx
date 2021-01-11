@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Collapse from "@material-ui/core/Collapse";
@@ -110,7 +111,11 @@ export const Doc: React.FC<{
         <Fade in>
           <Box display="flex">
             {renderTableOfContent()}
-            <Box className={css({ flexGrow: 1 })}>
+            <Box
+              className={css({
+                flexGrow: 1,
+              })}
+            >
               {props.imageUrl && (
                 <Box
                   className={css({
@@ -130,7 +135,7 @@ export const Doc: React.FC<{
                   })}
                 />
               )}
-              <Container maxWidth="md" className={css({ flexGrow: 1 })}>
+              <Container maxWidth="md">
                 {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
                 <Box pb="1rem" mt="-1.5rem">
@@ -168,8 +173,8 @@ export const Doc: React.FC<{
                 <AccountBoxIcon />
               )}
             </Grid>
-            <Grid item>
-              <FateLabel variant="body2" color="primary">
+            <Grid item zeroMinWidth>
+              <FateLabel variant="body2" color="primary" noWrap>
                 <b>{props.author.title}</b>
               </FateLabel>
             </Grid>
@@ -213,11 +218,14 @@ export const Doc: React.FC<{
 
   function renderTitle() {
     return (
-      <FateLabel>
-        <AppLink to={props.parent.url}>{props.parent.title}</AppLink>
-        {" / "}
-        {props.title}
-      </FateLabel>
+      <Breadcrumbs aria-label="breadcrumb">
+        <FateLabel noWrap>
+          <AppLink to={props.parent.url} noWrap>
+            {props.parent.title}
+          </AppLink>
+        </FateLabel>
+        <FateLabel noWrap> {props.title}</FateLabel>
+      </Breadcrumbs>
     );
   }
 
@@ -235,7 +243,7 @@ export const Doc: React.FC<{
             background: lightBackground,
           })}
         >
-          <Grid container spacing={1} alignItems="center">
+          <Grid container spacing={1} alignItems="center" wrap="nowrap">
             <Grid item>
               <IconButton
                 color="inherit"
@@ -246,7 +254,9 @@ export const Doc: React.FC<{
                 <MenuIcon color="inherit" />
               </IconButton>
             </Grid>
-            <Grid item>{renderTitle()}</Grid>
+            <Grid item zeroMinWidth>
+              <Box>{renderTitle()}</Box>
+            </Grid>
           </Grid>
         </Box>
       </Hidden>
@@ -255,11 +265,11 @@ export const Doc: React.FC<{
 
   function renderHeader() {
     return (
-      <Grid container justify="space-between" alignItems="flex-end">
-        <Grid item sm xs={12}>
-          <Box pt="1rem">{renderTitle()}</Box>
+      <Grid container justify="space-between" alignItems="flex-end" spacing={2}>
+        <Grid item md={8} xs={12} zeroMinWidth>
+          {renderTitle()}
         </Grid>
-        <Grid item sm={4} xs={12}>
+        <Grid item md={4} xs={12}>
           {renderAutoComplete()}
         </Grid>
       </Grid>
@@ -307,7 +317,7 @@ export const Doc: React.FC<{
 
   function renderAutoComplete() {
     return (
-      <Box>
+      <Box width="100%">
         <Autocomplete
           freeSolo
           size="small"

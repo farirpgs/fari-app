@@ -23,6 +23,9 @@ export const DocImport = {
   TheBigListOfRpgPlots: () => {
     return import("./the-big-list-of-rpg-plots.md");
   },
+  Test: () => {
+    return import("./test.md");
+  },
   Changelog: () => {
     return import("../../CHANGELOG.md");
   },
