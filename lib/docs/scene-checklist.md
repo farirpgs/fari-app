@@ -19,7 +19,9 @@ During a game, whenever I feel stumped or overwhelmed during a scene, I quickly 
 
 ## Goal Ideas (for PCs or NPCs)
 
-Build, Capture, Catch, Change, Convince, Defeat, Defend, Deliver, Destroy, Discover, Escape, Explore, Find, Follow, Gain, Get, Guard, Impress, Kill, Learn, Negotiate, Protect, Reach, Reconcile, Rescue, Save, Sneak, Solve, Start, Steal, Stop, Traverse, Uncover, Win
+<p class="MuiTypography-h6 MuiTypography-colorPrimary">
+Build • Capture • Catch • Change • Convince • Defeat • Defend • Deliver • Destroy • Discover • Escape • Explore • Find • Follow • Gain • Get • Guard • Impress • Kill • Learn • Negotiate • Protect • Reach • Reconcile • Rescue • Save • Sneak • Solve • Start • Steal • Stop • Traverse • Uncover • Win
+</p>
 
 ## Tips
 
