@@ -13,7 +13,10 @@ describe("/draw", () => {
   describe("Given I want to draw my zones", () => {
     it("should draw my zones", () => {
       Fari.start();
-      cy.visit("/draw");
+
+      cy.window().then((w) => {
+        w.history.pushState({}, "", "/draw");
+      });
       Fari.get("draw.palette").click();
 
       cy.get(`.data-cy-color-picker [title="#e69f00"]`).click();
