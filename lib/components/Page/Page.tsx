@@ -133,96 +133,98 @@ export const Page: React.FC<{
         })}
       >
         <CookieConsent />
-        <Box py="1rem" textAlign="center">
-          <AppButtonLink
-            to="https://discord.gg/vMAJFjUraA"
-            target="_blank"
-            color="primary"
-            startIcon={<ChatIcon />}
-          >
-            {"Come chat on Discord"}
-          </AppButtonLink>
-        </Box>
+
         <Container>
-          <Grid container justify="flex-end" spacing={4} alignItems="center">
+          <Box py="1rem">
             <Grid
-              item
-              className={css({
-                flex: "1 0 auto",
-              })}
+              container
+              justify="space-between"
+              alignItems="center"
+              spacing={4}
             >
-              <Typography>
-                <Link
-                  href="https://www.netlify.com"
+              <Grid item>
+                <AppButtonLink
+                  to="https://discord.gg/vMAJFjUraA"
                   target="_blank"
-                  rel="noreferrer"
+                  color="primary"
+                  startIcon={<ChatIcon />}
                 >
-                  This site is powered by Netlify
-                </Link>
-              </Typography>
+                  {"Come chat on Discord"}
+                </AppButtonLink>
+              </Grid>
+              <Grid item>
+                <Select
+                  data-cy="page.languages"
+                  value={currentLanguage}
+                  onChange={(e) => {
+                    i18n.changeLanguage(e.target.value as string);
+                  }}
+                >
+                  {Object.keys(i18n.options.resources!).map((language) => {
+                    const shouldRenderDev =
+                      language === "dev" && env.context === "localhost";
+                    if (language !== "dev" || shouldRenderDev) {
+                      return (
+                        <MenuItem key={language} value={language}>
+                          {t(
+                            `common.language.${language}` as IPossibleTranslationKeys
+                          )}
+                        </MenuItem>
+                      );
+                    }
+                  })}
+                </Select>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography>
-                <AppLink
-                  to="/changelog"
-                  underline="always"
-                >{`v${env.version}`}</AppLink>
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Select
-                data-cy="page.languages"
-                value={currentLanguage}
-                onChange={(e) => {
-                  i18n.changeLanguage(e.target.value as string);
-                }}
-              >
-                {Object.keys(i18n.options.resources!).map((language) => {
-                  const shouldRenderDev =
-                    language === "dev" && env.context === "localhost";
-                  if (language !== "dev" || shouldRenderDev) {
-                    return (
-                      <MenuItem key={language} value={language}>
-                        {t(
-                          `common.language.${language}` as IPossibleTranslationKeys
-                        )}
-                      </MenuItem>
-                    );
-                  }
-                })}
-              </Select>
-            </Grid>
-          </Grid>
-          {displayDonation && (
+          </Box>
+          <Box py="1rem">
             <Grid
               container
               justify="space-between"
               spacing={4}
               alignItems="center"
             >
-              <Grid item sm>
-                <Kofi />
-              </Grid>
-
               <Grid item>
-                <Patreon />
+                <Typography>
+                  <Link
+                    href="https://www.netlify.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    This site is powered by Netlify
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography>
+                  <AppLink
+                    to="/changelog"
+                    underline="always"
+                  >{`v${env.version}`}</AppLink>
+                </Typography>
               </Grid>
             </Grid>
+          </Box>
+
+          {displayDonation && (
+            <Box py="1rem">
+              <Grid
+                container
+                justify="space-between"
+                spacing={4}
+                alignItems="center"
+              >
+                <Grid item sm>
+                  <Kofi />
+                </Grid>
+
+                <Grid item>
+                  <Patreon />
+                </Grid>
+              </Grid>
+            </Box>
           )}
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Box mt=".5rem">
-                <Link
-                  href="https://www.iubenda.com/privacy-policy/97549620"
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cy="page.privacy-policy"
-                >
-                  {t("page.privacy-policy")}
-                </Link>
-              </Box>
-            </Grid>
-          </Grid>
+
           <Grid container justify="center">
             <Grid item xs>
               <Box mb=".5rem">
@@ -252,6 +254,20 @@ export const Page: React.FC<{
                   our use under the Creative Commons Attribution 3.0 Unported
                   license (http://creativecommons.org/licenses/by/3.0/).
                 </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item>
+              <Box mt=".5rem">
+                <Link
+                  href="https://www.iubenda.com/privacy-policy/97549620"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cy="page.privacy-policy"
+                >
+                  {t("page.privacy-policy")}
+                </Link>
               </Box>
             </Grid>
           </Grid>
