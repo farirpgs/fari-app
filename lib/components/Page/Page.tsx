@@ -16,6 +16,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
+import ChatIcon from "@material-ui/icons/Chat";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
@@ -31,7 +32,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
-import { AppLink } from "../AppLink/AppLink";
+import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
@@ -132,6 +133,16 @@ export const Page: React.FC<{
         })}
       >
         <CookieConsent />
+        <Box py="1rem" textAlign="center">
+          <AppButtonLink
+            to="https://discord.gg/vMAJFjUraA"
+            target="_blank"
+            color="primary"
+            startIcon={<ChatIcon />}
+          >
+            {"Come chat on Discord"}
+          </AppButtonLink>
+        </Box>
         <Container>
           <Grid container justify="flex-end" spacing={4} alignItems="center">
             <Grid
