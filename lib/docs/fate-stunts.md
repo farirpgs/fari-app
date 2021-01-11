@@ -79,7 +79,7 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 - **Catch.** When defending against an attack with a thrown object, if you succeed with style, you may catch the item that was thrown at you and create a related aspect with a free invoke, instead of just a boost. Details such as your Physique skill and any relevant aspects may be used to determine whether a given object is something you could, practically speaking, catch. (adapted from Spirit of the Century SRD, §6.29.2)
 - **Childhood Playground.** You are remember the place you grew up in well, and you still find it easy to navigate its obstacles. Name and describe that place. You gain +2 to overcome with Athletics whenever you are in a similar environment.
 - **Flanking Specialist.** Once per scene, when you create the aspect _Flanked_ or similar on an opponent, you gain one additional free invocation of the aspect. (Peter Blake)
-- **Sportsman.** Sports are your life. Pick a sport. You get a +2 to all Athletics rolls relating to that sport. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Sportsman.** Sports are your life. Pick a sport. You get a +2 to all Athletics rolls relating to that sport.
 - **Surefooted.** You suffer no increased difficulty to Athletics due to snowdrifts, loose soil, or shifting sand. (Peter Blake)
 
 ## Burglary Stunts
@@ -152,7 +152,7 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 - **Member.** Pick a specific organisation. You belong to that organisation. Whenever you want to get in touch with its other members, gain +2 to Contacts.
 - **Noble Born.** +2 to Contacts when seeking another member of the aristocracy. (Peter Blake)
 - **Renowned Courtesan.** +2 to Contacts when seeking lonely people who would be sexually attracted to you. (Peter Blake)
-- **Salesman's Network.** All good salesmen build up a network of satisfied customers over time. Pick a type of product. Add two to your Contacts skill when looking for or dealing with makers, sellers, or notable consumers of that type of product. ([http://dfrpg-resources.wikispaces.com/Stunts](http://dfrpg-resources.wikispaces.com/Stunts))
+- **Salesman's Network.** All good salesmen build up a network of satisfied customers over time. Pick a type of product. Add two to your Contacts skill when looking for or dealing with makers, sellers, or notable consumers of that type of product.
 - **Too Cool for School.** All the kids wanna be just like you. +2 to Contacts when dealing with young adults of middle school or high school age.
 - **Walk the Walk.** Your travels have taken you to every corner of the globe. +2 to Contacts rolls when dealing with foreign lands or cultures. (adapted from Spirit of the Century SRD, §6.7.1)
 
@@ -180,7 +180,7 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 - **Big Pocking Wrench.** You can do a lot as long as you have your trusty giant wrench on hand. +2 to Crafts when using it to fix or break something with a large wrench, provided the wrench is actually useful for what you are using it for.
 - **Demolitions.** You are an expert with explosives. +2 to attack rolls made with Crafts against a target structure whenever you have time to prepare and place charges at its exact weak points. (adapted from Spirit of the Century SRD, §6.12.2)
 - **The Tools Are Lesser than the Hand.** You can produce master-craftsman-level work with the crudest of tools. With a proper workshop, you can create impossibly amazing devices in the finest da Vinci style. (Fate System Toolkit, p.99)
-- **Workshop of Choice.** Pick a specific workshop or machine shop. You know exactly how this place is arranged and how it operates, and gain +2 on Crafts whenever you perform work within it. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Workshop of Choice.** Pick a specific workshop or machine shop. You know exactly how this place is arranged and how it operates, and gain +2 on Crafts whenever you perform work within it.
 
 ### Targets
 
@@ -243,9 +243,9 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 ### A Fool and His Money
 
 - **Crooked Dealer in Antiquities.** +2 to create advantages with Deceive based on the (false) monetary value of archaeological finds. (Peter Blake)
-- **Crooked Salesman.** You are skilled at subtly misrepresenting your goods or services to customers. +2 to Deceive when using it to sell something. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Crooked Salesman.** You are skilled at subtly misrepresenting your goods or services to customers. +2 to Deceive when using it to sell something.
 - **Faustian Pact.** Your job is to trick people into signing unfair contracts. When you have a copy of such a contract to hand, you gain +2 on Deceive rolls to fool people into thinking it is fair.
-- **Grifter/Professional Panhandler.** You profit from your lies, literally. +2 to Deceive when using it to fool someone into giving you money. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Grifter/Professional Panhandler.** You profit from your lies, literally. +2 to Deceive when using it to fool someone into giving you money.
 
 ### Gambling
 
@@ -318,7 +318,7 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 - **Flying Ace.** You are a skilled combat pilot, and as such may roll Drive instead of Shoot to attack in a dogfight. (adapted from Spirit of the Century SRD, §6.21.1)
 - **Gunner.** You’re a former military man with the training to use vehicle-mounted weaponry. You may use your Drive skill to make attacks with such weapons.
 - **Mechanic.** You may roll Drive instead of Crafts when working on a wheeled vehicle. (adapted from Spirit of the Century SRD, §6.9.1)
-- **Mounted Combat.** You may roll Drive instead of Fight to make melee attacks whenever you are riding an animal. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Mounted Combat.** You may roll Drive instead of Fight to make melee attacks whenever you are riding an animal.
 - **Old Salt.** You may use Drive instead of Lore to make predictions about the weather. (Peter Blake)
 - **Plane Mechanic.** You may roll Drive instead of Crafts when working on a vehicle capable of flight. (adapted from Spirit of the Century SRD, §6.21.2)
 - **Traffic Watcher.** You really know how to use those rear-view mirrors. You may use Drive instead of Notice to be aware of vehicles and road conditions, to detect vehicular ambushes, and to determine turn order while operating a vehicle.
@@ -365,7 +365,7 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 
 ### Other
 
-- **Bartender's Ear.** Like any good bartender, you know how to understand drunk people. Add two to your Empathy skill when dealing with people who are under the influence of alcohol. ([http://dfrpg-resources.wikispaces.com/Stunts](http://dfrpg-resources.wikispaces.com/Stunts))
+- **Bartender's Ear.** Like any good bartender, you know how to understand drunk people. Add two to your Empathy skill when dealing with people who are under the influence of alcohol.
 - **Ebb and Flow.** You are so aware of the social currents in a situation that you are able to see something of what’s coming before it arrives. At the beginning of any exchange, you may spend a fate point to attempt to create an advantage with Empathy. You may then act normally on your turn as usual. (adapted from Spirit of the Century SRD, §6.10.1)
 - **Listening Ear.** +2 to overcome or create advantage with Empathy when you listen to another person for half an hour or more. (Peter Blake)
 - **Preemptive Grace.** (requires Ebb and Flow.) You are so tuned into social situations that you may act quickly and decisively to shape the situation to your liking. +2 to Empathy for the purposes of determining turn order in a conflict. (adapted from Spirit of the Century SRD, §6.10.1)
@@ -388,7 +388,8 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 - **Favored Enemy.** Choose an organisation or ethnic group. You gain +2 on attacks made with Fight against a member of that group. (Exercise discretion in the use of this stunt. A racist villain is probably OK, but a racist PC is almost certainly not.) (Peter Blake)
 - **Favored Enemy Parry.** Choose an organisation. You gain +2 to defend with Fight against members of that group. (Peter Blake)
 - **Mirror Stance.** Your unusual fighting style lets you defend effortlessly when you and your opponent are similarly armed. +2 to defend with Fight whenever your opponent attacks you with the same kind of weapon as you wield.
-- **Reflection Shatters the Mirror.** (requires Mirror Stance.) You can switch in a heartbeat from matching your opponent move for move to doing precisely the opposite. +2 to attack with Fight whenever your opponent wields the same kind of weapon as you do. (adapted from [http://dfrpg](http://dfrpg)\-\* **Unorthodox Fighting.** People with formal training are less able to defend against your tomfoolery in combat. +2 to attacks with Fight against opponents who strictly adhere to a formal style of combat.
+- **Reflection Shatters the Mirror.** (requires Mirror Stance.) You can switch in a heartbeat from matching your opponent move for move to doing precisely the opposite. +2 to attack with Fight whenever your opponent wields the same kind of weapon as you do.
+- **Unorthodox Fighting.** People with formal training are less able to defend against your tomfoolery in combat. +2 to attacks with Fight against opponents who strictly adhere to a formal style of combat.
 
 ### Counterattacks
 
@@ -404,7 +405,7 @@ All stunts from the _Fate Core System_ book are here, plus most of the stunts fr
 ### Disarming
 
 - **Close at Hand.** You can bring your weapon to hand faster than the eye can track. If the difficulty of overcoming an aspect of _Disarmed_ or similar is Fair (+2) or less, you may overcome it as a free action. If the difficulty is higher, instead gain +2 on the roll to overcome that aspect. (adapted from Spirit of the Century SRD, §6.15.3)
-- **Disarming Specialist.** You have been trained in how to disarm an armed combatant. Once per scene per opponent, when you successfully defend against an attack with a melee weapon, you may sacrifice your next action to place the _Disarmed_ aspect on that opponent. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Disarming Specialist.** You have been trained in how to disarm an armed combatant. Once per scene per opponent, when you successfully defend against an attack with a melee weapon, you may sacrifice your next action to place the _Disarmed_ aspect on that opponent.
 - **Firm Grip.** +2 to defend with Fight against being disarmed. (Peter Blake)
 
 ### Full Defense
@@ -457,7 +458,7 @@ resources.wikispaces.com/Stunts)
 - **Demoralising Stance/My Weapon Speaks For Me/Talking With My Fists.** As a trained fighter, you are able to adopt a stance that makes it unequivocally clear how capable you are of handing someone his ass. Whenever displaying your fighting stance or threatening someone with violence, you may roll Fight instead of Provoke to scare them. (adapted from Spirit of the Century SRD, §6.13.2)
 - **Hidden Weapons.** Your knowledge of weapons helps you conceal them. You may use Fight instead of Burglary to conceal weaponry.
 - **Mixed Martial Artist.** You practice judo or another grappling-based martial art. You may use Fight instead of Physique to create advantages related to wrestling and pinning.
-- **Parry Everything.** Your hand-eye coordination is superb, and perhaps you could even deflect a bullet with your weapon. You may use Fight to defend against Shoot attacks. (The GM may limit this stunt by having it only apply to slower projectiles or those fired from another zone.) (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Parry Everything.** Your hand-eye coordination is superb, and perhaps you could even deflect a bullet with your weapon. You may use Fight to defend against Shoot attacks. (The GM may limit this stunt by having it only apply to slower projectiles or those fired from another zone.)
 - **Whip Grip.** You can use Fight to grab things with a whip. (Peter Blake)
 
 ### Other
@@ -479,7 +480,7 @@ resources.wikispaces.com/Stunts)
 - **Right Back At You.** (requires Parry Everything.) Once per scene, when you succeed with style on a Fight defence against a Shoot attack, you may send the projectile flying back towards your attacker, inflicting a 2-shift physical hit on them. (Peter Blake)
 - **Spears of Green Wood.** You may train a body of troops—unnamed characters in a group of up to approximately 100—for a week and increase their Fight Skill by +1. You can repeat this multiple times, improving any given unit to a maximum of your Fight -2. (Fate System Toolkit, p.97)
 - **Steady the Drunkard.** (requires The Drunkard Swings Wide.) You stagger and seem about to fall, so you reach out and grab your opponent’s arm to steady yourself. This seemingly unintentional grip blocks chi and paralyzes your opponent. You may place a _Chi Blocked_ situation aspect with a free invocation on your opponent. Your opponent may not use any kung fu stunts until they remove this aspect. (Fate System Toolkit, p.150)
-- **Use Their Strength Against Them.** Excessive strength can be a disadvantage if your opponent knows how to exploit it. +2 to Fight rolls made to defend against an opponent, provided the opponent is physically much stronger than you. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Use Their Strength Against Them.** Excessive strength can be a disadvantage if your opponent knows how to exploit it. +2 to Fight rolls made to defend against an opponent, provided the opponent is physically much stronger than you.
 - **Warmaster.** +2 to Fight rolls made to create an advantage against an opponent, provided the opponent has a fighting style or weakness you can exploit. (Fate Core, p.299)
 - **Weapon Finesse.** +2 to create advantages with Fight related to fancy but harmless bladework, such as cutting your insignia into your opponent’s clothing. (Peter Blake)
 
@@ -598,7 +599,7 @@ resources.wikispaces.com/Stunts)
 - **Arcane Expert.** Gain a +2 bonus to create an advantage using Lore, whenever the situation has specifically to do with the supernatural or occult. (Fate Core, p.90)
 - **Bletchley's Finest.** +2 to overcome with Lore when cracking a code. (Peter Blake)
 - **Dealer in Antiquities.** +2 to create advantages with Lore based on the monetary value of archaeological finds. (Peter Blake)
-- **Experimenter.** While others are content to read the journals, you have the training and drive to perform cutting-edge research. +2 to Lore whenever you run original scientific experiments or gather original research data. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Experimenter.** While others are content to read the journals, you have the training and drive to perform cutting-edge research. +2 to Lore whenever you run original scientific experiments or gather original research data.
 - **The Eye Sees All Paths.** You may not know everything, but you always know how to find out. When looking for a fairly specific piece of information, you may give the GM a fate point to be told the closest place you can go to find out, no matter how obscure or lost the information is. In short, you can never hit a wall when trying to find something out. There are no guarantees of how easy it will be to get the knowledge, but that’s what adventure is for. (Fate System Toolkit, p.93)
 - **I’ve Read about That!** You’ve read hundreds—if not thousands—of books on a wide variety of topics. You can spend a fate point to use Lore in place of any other skill for one roll or exchange, provided you can justify having read about the action you’re attempting. (Fate Core, p.115)
 - **Keeper of Folklore.** +2 to Lore when recalling the history or legends of your people. (Peter Blake)
@@ -674,14 +675,14 @@ resources.wikispaces.com/Stunts)
 
 - **Grappler.** +2 to Physique rolls made to create advantages on an enemy by wrestling or grappling with them. (Fate Core, p.119)
 - **Hammerlock.** (requires Wrestler.) Whenever you have hold of someone and they fail to overcome your hold, you deal 1 shift of physical stress to them. (adapted from Spirit of the Century SRD, §6.19.2)
-- **Unbound/Clever Wrestling.** You aren't easy to hold down. +2 to overcome with Physique whenever you are physically restrained in some fashion - for example by chains or a mob of people. (adapted from Spirit of the Century SRD, §6.19.1, and [http://dfrpg-resources.wikispaces.com/Stunts](http://dfrpg-resources.wikispaces.com/Stunts))
+- **Unbound/Clever Wrestling.** You aren't easy to hold down. +2 to overcome with Physique whenever you are physically restrained in some fashion - for example by chains or a mob of people.
 
 ### New Actions
 
 - **Bounce Back.** You may roll Physique instead of Lore when performing a physical recovery action on yourself. (adapted from Spirit of the Century SRD, §6.11.2)
 - **Fling Foe.** You may roll Physique to throw an enemy you have _Picked Up_ into an adjacent zone. You must overcome any situation aspects that impede the enemy’s movement. (Peter Blake)
-- **Heavy Object Swing.** Sometimes pure strength can compensate pretty well for a lack of skill. You may use Physique instead of Fight whenever you use a heavy object as a melee weapon. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
-- **Heavy Object Throw.** (requires Heavy Object Swing.) If you spin a weight fast enough, it can become airborne. You may use Physique instead of Shoot to attack targets one zone away with a heavy object. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Heavy Object Swing.** Sometimes pure strength can compensate pretty well for a lack of skill. You may use Physique instead of Fight whenever you use a heavy object as a melee weapon.
+- **Heavy Object Throw.** (requires Heavy Object Swing.) If you spin a weight fast enough, it can become airborne. You may use Physique instead of Shoot to attack targets one zone away with a heavy object.
 - **Mighty Pull.** You can use Physique to create advantages related to your ability to draw bows back further than most, granting extra force to the arrow or bolt. (Peter Blake)
 - **Muscle Your Way Up.** Climbing is basically like weightlifting, except you are the weight. You may use Physique in place of Athletics when climbing.
 - **Piledriver.** (requires Herculean Strength.) You may make attacks against inanimate targets using Physique instead of Fight. (adapted from Spirit of the Century SRD, §6.19.1)
@@ -689,7 +690,7 @@ resources.wikispaces.com/Stunts)
 - **Take the Blow.** You can use Physique to defend against Fight attacks made with fists or blunt instruments, though you always take 1 shift of stress on a tie. (Fate Core, p.119)
 - **Toughness of Mind and Body.** A guy as tough as you has no need to be afraid. You may use Physique instead of Will to defend against fear.
 - **Unstoppable.** (requires Herculean Strength and at least one other Physique stunt.) Once in motion, you are very difficult to stop due to your sheer muscular force. You may use Physique rather than Athletics to move between zones. (adapted from Spirit of the Century SRD, §6.19.1)
-- **Wrestler/Power Over Finesse.** Your unarmed attacks rely on brute strength rather than on technique. You may make such attacks against other humans with Physique rather than Fight. (adapted from Spirit of the Century SRD, §6.19.2, and [http://dfrpg-resources.wikispaces.com/Stunts](http://dfrpg-resources.wikispaces.com/Stunts))
+- **Wrestler/Power Over Finesse.** Your unarmed attacks rely on brute strength rather than on technique. You may make such attacks against other humans with Physique rather than Fight.
 
 ### Other
 
@@ -772,7 +773,7 @@ resources.wikispaces.com/Stunts)
 ### Oratory
 
 - **Demagogue.** +2 to Rapport when you’re delivering an inspiring speech in front of a crowd. (If there are named NPCs or PCs in the scene, you may target them all simultaneously with one roll rather than dividing up your shifts.) (Fate Core, p.121)
-- **Excellent Speaker.** Public speaking is an everyday thing to you. +2 to Rapport whenever you make a formal speech to a group. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Excellent Speaker.** Public speaking is an everyday thing to you. +2 to Rapport whenever you make a formal speech to a group.
 
 ### Specific Audiences
 
@@ -781,7 +782,7 @@ resources.wikispaces.com/Stunts)
 - **Captain’s Word.** Once per scene, you may roll Rapport to command your crew as a free action. (Peter Blake)
 - **Child of the Court.** Gain a +2 bonus to any attempt to overcome obstacles with Rapport when you’re at an aristocratic function, such as a royal ball. (Fate Core, p.90)
 - **Good Cop.** Kindness is more effective when given a basis for comparison. +2 to Rapport when creating advantages to assist someone who has the Bad Cop stunt.
-- **Honest Salesman.** Making a sale comes as naturally to you as breathing. +2 to Rapport when using it to sell goods or services. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Honest Salesman.** Making a sale comes as naturally to you as breathing. +2 to Rapport when using it to sell goods or services.
 - **Master of the Mob.** +2 to Rapport when dealing with a crowd or mob. (Peter Blake)
 - **Negotiator.** +2 to Rapport when you try to broker an end to an armed conflict. (Peter Blake)
 - **Scion of the Court.** (requires Child of the Court.) When you overcome an obstacle with Child of the Court, you may additionally create a situation aspect that describes how the general attitude turns in your favor. If anyone wants to try and get rid of this aspect, they must overcome Fair (+2) opposition. (Fate Core, p.94)
@@ -820,7 +821,7 @@ resources.wikispaces.com/Stunts)
 - **Glitterati.** Money can, in fact, buy friends. You may use Resources in place of Contacts when in high society.
 - **Instant Functionary.** You’re skilled at seeing the shape of an organization from the underside, and in organizations of sufficient size, you can easily convince anyone that you’re just another cog in the machine. This allows you to substitute your Resources skill for Deceive whenever pretending to fill the role of a minor functionary of a target organization. (adapted from Spirit of the Century SRD, §6.18.3)
 - **Money Talks.** You can use Resources instead of Rapport in any situation where ostentatious displays of material wealth might aid your cause. (Fate Core, p.123)
-- **My Wallet Has A Lot To Say.** (requires Money Talks.) +2 to Resources whenever you use the Money Talks stunt. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **My Wallet Has A Lot To Say.** (requires Money Talks.) +2 to Resources whenever you use the Money Talks stunt.
 - **War of Papers.** You can take action against organizations through indirect measures. Effectively you can fight on the level of any organization smaller than a nation without the need to recruit allies or have any organization of your own. Yes, this means you can effectively “kill” a city, or even an army, given enough time. (Fate System Toolkit, p.98)
 
 ### Other
@@ -846,7 +847,6 @@ resources.wikispaces.com/Stunts)
 
 - **Fast Reload.** +2 to Shoot whenever you roll to overcome an aspect of _Out of Ammunition_ or similar that has been placed upon you. (adapted from Spirit of the Century SRD, §6.15.2)
 - **Lead in the Air.** You really like emptying magazines. Any time you’re using a fully automatic weapon and you succeed at a Shoot attack, you automatically create a Fair (+2) opposition against movement in that zone until your next turn, because of all the lead in the air. (Normally, you’d need to take a separate action to set up this kind of interference, but with the stunt, it’s free.) (Fate Core, p.90)
-- **One Shot Left (or Empty Mag, Empty Room).** That last bullet has a kind of magic to it. Once per scene, you may create an aspect of _One Shot Left_ (equivalently, _The Whole Magazine at Once_) on yourself as a free action. You may invoke this aspect once for free, but doing so changes the aspect to _Out of Ammunition_. The Fast Reload stunt explicitly cannot be used to overcome this aspect. (adapted from Spirit of the Century SRD, §6.15.2, and [http://dfrpg-resources.wikispaces.com/Stunts](http://dfrpg-resources.wikispaces.com/Stunts))
 - **Rain of Lead.** +2 to create advantage rolls with Shoot when you create an aspect relating to suppressive fire. (adapted from Spirit of the Century SRD, §6.15.2)
 
 ### Indirect Shots
@@ -881,7 +881,7 @@ resources.wikispaces.com/Stunts)
 ### Other
 
 - **Called Shot.** During a Shoot attack, spend a fate point and declare a specific condition you want to inflict on a target, like _Shot in the Hand_. If you succeed, you place that as a situation aspect on them in addition to hitting them for stress. (Fate Core, p.125)
-- **Master of the Lasso.** +2 to create advantages with Shoot whenever this involves throwing a lasso. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Master of the Lasso.** +2 to create advantages with Shoot whenever this involves throwing a lasso.
 - **Ranged Knockback.** When you succeed with style on a Shoot attack with a thrown weapon, you may choose to reduce the value of your hit by one in order to move your opponent one zone, provided there are no situation aspects impeding this movement. (Peter Blake)
 - **Subtle Draw.** +2 to Shoot whenever there is active opposition to your first shot in a scene. (adapted from Spirit of the Century SRD, §6.15.3)
 - **Trained As a Unit/Team Player.** You were trained alongside the rest of your unit, and now that unit is like a single organism. +2 to create advantages with Shoot whenever working with another character who is from the same unit as you and who also has this stunt. (A similar stunt could exist in many other skills.)
@@ -927,7 +927,7 @@ resources.wikispaces.com/Stunts)
 ### Mental Resistance
 
 - **Fierce Mind.** +2 to overcome fear with Will. (Peter Blake)
-- **Fighting For What You Believe In.** Your faith, in someone or something, is absolute. Pick a being or a concept. +2 to Will when defending that thing or when overcoming separation from it. (adapted from [http://dfrpg-resources.wikia.com/wiki/Stunts](http://dfrpg-resources.wikia.com/wiki/Stunts))
+- **Fighting For What You Believe In.** Your faith, in someone or something, is absolute. Pick a being or a concept. +2 to Will when defending that thing or when overcoming separation from it.
 - **Gift of Faith.** +2 to defend with Will against fear and despair. (Peter Blake)
 - **Indomitable/Fearless.** +2 to defend against Provoke attacks specifically related to intimidation and fear. (Fate Core, p.127)
 - **Inner Strength.** +2 to defend with Will against someone trying to get inside your head – be it through psychic means or through extensive torture. (adapted from Spirit of the Century SRD, §6.23.2)
