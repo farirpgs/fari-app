@@ -327,7 +327,7 @@ export const Page: React.FC<{
 
             <Typography
               variant="h6"
-              component="h1"
+              component="span"
               className={css({
                 paddingRight: "1rem",
                 cursor: "pointer",
