@@ -3,9 +3,7 @@
 
 # Cheat Sheet
 
-Reddit user /u/famousbirds created a Fate Reference Card inside Google Sheet.
-
-This page is an adaptation of this.
+This page is an adaptation of the work of Reddit user /u/famousbirds did on their Fate Reference Card inside Google Sheet
 
 https://www.reddit.com/r/FATErpg/comments/fzeu54/by_popular_request_my_fate_reference_card_in/
 
