@@ -14,9 +14,7 @@ describe("/draw", () => {
     it("should draw my zones", () => {
       Fari.start();
 
-      cy.window().then((w) => {
-        w.history.pushState({}, "", "/draw");
-      });
+      cy.visit("/draw");
       Fari.get("draw.palette").click();
 
       cy.get(`.data-cy-color-picker [title="#e69f00"]`).click();
