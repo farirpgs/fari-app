@@ -56,6 +56,12 @@ export const PlayRoute: React.FC<{
       if (peerAction.action === "update-character") {
         sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
       }
+      if (peerAction.action === "load-character") {
+        sceneManager.actions.updatePlayerCharacterWithHiddenFields(
+          id,
+          peerAction.payload
+        );
+      }
     },
     debug: debug,
   });
@@ -77,7 +83,9 @@ export const PlayRoute: React.FC<{
 
   useEffect(() => {
     if (isGM) {
-      sceneManager.actions.updatePlayers(hostManager.state.connections);
+      sceneManager.actions.updatePlayersWithConnections(
+        hostManager.state.connections
+      );
     }
   }, [hostManager.state.connections]);
 
@@ -90,10 +98,11 @@ export const PlayRoute: React.FC<{
       logger.info("Route:Play:Player");
     }
   }, []);
+
   return (
     <>
       <PageMeta
-        title={pageTitle || t("home-route.play-online.title")}
+        title={pageTitle?.toUpperCase() || t("home-route.play-online.title")}
         description={t("home-route.play-online.description")}
       />
       {shouldRenderPlayerJoinGameScreen ? (
@@ -101,15 +110,6 @@ export const PlayRoute: React.FC<{
           idFromParams={idFromParams}
           connecting={connectionsManager?.state.connectingToHost ?? false}
           error={connectionsManager?.state.connectingToHostError}
-          onSubmitCharacter={(character) => {
-            connectionsManager?.actions.connect<IPeerMeta>(
-              idFromParams,
-              userId,
-              {
-                character: character,
-              }
-            );
-          }}
           onSubmitPlayerName={(playerName) => {
             connectionsManager?.actions.connect<IPeerMeta>(
               idFromParams,

@@ -4,6 +4,8 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import { SrdImport } from "../../routes/SrdRoute/constants/SrdImport";
+import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -31,7 +33,8 @@ const PlayOfflineRoute = React.lazy(
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
-const Oracle = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
+const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
+const SrdRoute = React.lazy(() => import("../../routes/SrdRoute/SrdRoute"));
 
 export const LoadingRoute: React.FC = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -89,7 +92,7 @@ export const AppRouter = () => {
           exact
           path={"/oracle"}
           render={(props) => {
-            return <Oracle />;
+            return <OracleRoute />;
           }}
         />
         <Route
@@ -122,6 +125,43 @@ export const AppRouter = () => {
           exact
           path={"/scenes/:id"}
           render={(props) => <SceneRoute {...props} />}
+        />
+        <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+        <Route
+          exact
+          path={"/srds/condensed/:page?"}
+          render={(props) => (
+            <SrdRoute
+              {...props}
+              prefix="/srds/condensed"
+              title="Fate Condensed"
+              loadFunction={SrdImport.Condensed}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/core/:page?"}
+          render={(props) => (
+            <SrdRoute
+              {...props}
+              prefix="/srds/core"
+              title="Fate Core"
+              loadFunction={SrdImport.Core}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/accelerated/:page?"}
+          render={(props) => (
+            <SrdRoute
+              {...props}
+              prefix="/srds/accelerated"
+              title="Fate Accelerated"
+              loadFunction={SrdImport.Accelerated}
+            />
+          )}
         />
         <Route
           exact

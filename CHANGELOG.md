@@ -1,4 +1,11 @@
-## 3.3 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+## 3.4 (January 5th, 2021) - Join screen UX, Italian translations
+
+- feat: new join screen
+- feat: load character sheet in player row
+- feat: change character sheet in player row
+- feat: italian translations 👏 [#191](https://github.com/fariapp/fari/issues/191) @Redjaw
+
+## 3.3 (Nov 10, 2020 - Dec 29 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier

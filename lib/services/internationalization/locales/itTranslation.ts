@@ -41,9 +41,9 @@ export const itTranslation: Record<
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.it": `Italiano`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
-  "common.language.it": `Italiano`,
   "cookie-consent.button": `Accetto`,
   "cookie-consent.description": `Questo sito utilizza cookies per migliorare la tua esperienza utente. Utilizzando Fari accetti l'utilizzo di questi cookies.`,
   "dice-route.button": `Lancia`,
@@ -110,7 +110,11 @@ export const itTranslation: Record<
   "play-route.add-aspect": `Aspetto`,
   "play-route.add-bad-guy": `Cattivo`,
   "play-route.add-boost": `Vantaggio`,
+<<<<<<< HEAD
   "play-route.add-character": `Aggiungi Personaggio`,
+=======
+  "play-route.add-character-sheet": `Aggiungi la scheda del personaggio`,
+>>>>>>> upstream/master
   "play-route.add-index-card": `Carta Indice`,
   "play-route.add-npc": `PNG`,
   "play-route.awesome-name": `Bellissimo nome tral'altro!`,
@@ -134,7 +138,10 @@ export const itTranslation: Record<
   "play-route.group": `Gruppo`,
   "play-route.init": `Iniziativa`,
   "play-route.initiative-tracker": `Gestore dell'Iniziativa`,
+<<<<<<< HEAD
   "play-route.join-as": `Entra come ✨ {{playerName}} ✨`,
+=======
+>>>>>>> upstream/master
   "play-route.join-error": `La partita in cui stai tentando di entrare non esiste`,
   "play-route.join": `Entra`,
   "play-route.leave-prompt": `Sei sicuro di voler uscire e resettare la tua scena ?`,
@@ -143,7 +150,10 @@ export const itTranslation: Record<
   "play-route.new-scene": `Nuova Scena`,
   "play-route.no-aspects": `La scena non ha ancora nessun aspetto.`,
   "play-route.or-pick-existing": `Scegli un Personaggio`,
+<<<<<<< HEAD
   "play-route.or": `Oppure`,
+=======
+>>>>>>> upstream/master
   "play-route.players": `Giocatori:`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene-confirmation": `Sei sicuro di voler resettare la scena e rimuovere tutti gli attuali Aspetti?`,
@@ -155,6 +165,10 @@ export const itTranslation: Record<
   "play-route.show-character-cards": `Mostra Card Personaggio`,
   "play-route.sort": `Ordina`,
   "play-route.undo-drawing": `Undo`,
+<<<<<<< HEAD
+=======
+  "play-route.what-is-your-name": `Come ti chiami`,
+>>>>>>> upstream/master
   "player-row.add-fate-point": `Aggiungi Punto Fato`,
   "player-row.fate-points": `Punti Fato`,
   "player-row.has-no-character-sheet": `Nessuna Scheda Personaggio`,
@@ -163,6 +177,10 @@ export const itTranslation: Record<
   "player-row.played": `Ha giocato`,
   "player-row.remove-character": `Rimuovi Personaggio`,
   "player-row.remove-fate-point": `Rimuovi Punto Fato`,
+<<<<<<< HEAD
+=======
+  "player-row.swap-character-sheet": `Scambia la scheda del personaggio`,
+>>>>>>> upstream/master
   "scenes-route.meta.description": `Fari è la migliore applicazione companion per Fate RPG. Gioca scene in tempo reale con i tuoi amici, lancia dadi fudge e lascia libera la tua immaginazione per tessere storie memorabili insieme!.`,
   "scenes-route.meta.title": `Gestisci le tue Scene`,
 };

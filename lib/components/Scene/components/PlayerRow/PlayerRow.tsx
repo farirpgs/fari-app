@@ -1,10 +1,10 @@
 import { css, cx } from "@emotion/css";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -14,12 +14,15 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
+import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
+import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -31,11 +34,13 @@ export const PlayerRow: React.FC<
     isGM: boolean;
     isMe: boolean;
     offline: boolean;
+
     onDiceRoll(options: IRollDiceOptions): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onFatePointsChange(fatePoints: number): void;
     onPlayerRemove(): void;
-    onCharacterDialogOpen(): void;
+    onCharacterSheetOpen(): void;
+    onLoadCharacterSheet(): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -44,25 +49,19 @@ export const PlayerRow: React.FC<
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
   const textColor = useTextColors(theme.palette.background.default);
+  const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
     : textColor.disabled;
 
   const name =
-    props.player?.playerName ||
     props.player?.character?.name ||
+    props.player?.playerName ||
     t("play-route.character-name");
+
   const hasCharacterSheet = !!props.player.character;
 
-  const selectedRowStyle = css(
-    theme.palette.type === "light"
-      ? {
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          backgroundColor: darken(theme.palette.secondary.dark, 0.75),
-        }
-  );
+  const selectedRowStyle = css({ backgroundColor: lightBackground });
   const playerInfoCellStyle = css({
     padding: "0.7rem",
     borderBottom: "none",
@@ -100,41 +99,25 @@ export const PlayerRow: React.FC<
         })}
       >
         <TableCell className={playerInfoCellStyle} align="left">
-          <Tooltip
-            title={
-              hasCharacterSheet
-                ? t("player-row.open-character-sheet")
-                : t("player-row.has-no-character-sheet")
-            }
-          >
-            <span>
-              <ButtonBase
-                className={css({
-                  width: "100%",
-                })}
-                disabled={!hasCharacterSheet}
-                onClick={(e) => {
-                  props.onCharacterDialogOpen();
-                  logger.info("ScenePlayer:onCharacterDialogOpen");
-                }}
-              >
-                <Typography
-                  noWrap
-                  color="inherit"
-                  className={css({
-                    width: "100%",
-                    textAlign: "left",
-                    fontSize: "1.2rem",
-                    lineHeight: Font.lineHeight(1.2),
-                    fontWeight: props.isMe ? "bold" : "normal",
-                  })}
-                >
-                  {name}
-                </Typography>
-              </ButtonBase>
-            </span>
-          </Tooltip>
+          {props.player.isGM ? (
+            <Typography
+              noWrap
+              color="inherit"
+              className={css({
+                width: "100%",
+                textAlign: "left",
+                fontSize: "1.2rem",
+                lineHeight: Font.lineHeight(1.2),
+                fontWeight: props.isMe ? "bold" : "normal",
+              })}
+            >
+              {name}
+            </Typography>
+          ) : (
+            renderCharacterSheetButton()
+          )}
         </TableCell>
+
         <TableCell className={playerInfoCellStyle} align="center">
           <Tooltip
             title={
@@ -209,6 +192,70 @@ export const PlayerRow: React.FC<
     </>
   );
 
+  function renderCharacterSheetButton() {
+    return (
+      <>
+        <Grid container wrap="nowrap" alignItems="center">
+          {props.isMe && (
+            <Grid item>
+              <Tooltip
+                title={
+                  hasCharacterSheet
+                    ? t("player-row.swap-character-sheet")
+                    : t("play-route.add-character-sheet")
+                }
+                onClick={() => {
+                  props.onLoadCharacterSheet();
+                  logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+                }}
+              >
+                <IconButton
+                  size="small"
+                  color={hasCharacterSheet ? "secondary" : "primary"}
+                >
+                  {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          )}
+          <Grid item xs>
+            <Button
+              className={css({
+                width: "100%",
+                background: "transparent",
+                textTransform: "none",
+                color: hasCharacterSheet
+                  ? theme.palette.text.primary
+                  : theme.palette.text.secondary,
+                border: "none",
+              })}
+              data-cy={`${props["data-cy"]}.open-character-sheet`}
+              disabled={!props.player.character}
+              size="small"
+              onClick={(e) => {
+                props.onCharacterSheetOpen();
+                logger.info("ScenePlayer:onCharacterSheetButtonPress");
+              }}
+            >
+              <Typography
+                noWrap
+                color="inherit"
+                className={css({
+                  width: "100%",
+                  textAlign: "left",
+                  fontSize: "1.2rem",
+                  lineHeight: Font.lineHeight(1.2),
+                  fontWeight: props.isMe ? "bold" : "normal",
+                })}
+              >
+                {name}
+              </Typography>
+            </Button>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
   function renderGMControls() {
     if (!props.isGM) {
       return null;
