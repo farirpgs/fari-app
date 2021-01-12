@@ -44,7 +44,7 @@ export const Srds: React.FC = (props) => {
       <SrdItems />
       <Box pt="1rem" />
       <ToolkitItems />
-
+      <Box pt="2rem" />
       <Heading
         icon={HelpIcon}
         title={"Other Resources"}
