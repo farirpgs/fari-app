@@ -70,7 +70,7 @@ export const SrdItems: React.FC = (props) => {
               </>
             }
             bgColor="#007fda"
-            imageSrc={Images.condensed}
+            imageUrl={Images.condensed}
             link="/srds/condensed"
           />
         </Grid>
@@ -85,7 +85,7 @@ export const SrdItems: React.FC = (props) => {
               </>
             }
             bgColor="#00409d"
-            imageSrc={Images.core}
+            imageUrl={Images.core}
             link="/srds/core"
           />
         </Grid>
@@ -99,7 +99,7 @@ export const SrdItems: React.FC = (props) => {
               </>
             }
             bgColor="#005aba"
-            imageSrc={Images.accelerated}
+            imageUrl={Images.accelerated}
             link="/srds/accelerated"
           />
         </Grid>
@@ -123,7 +123,7 @@ export const ToolkitItems: React.FC = (props) => {
               </>
             }
             bgColor="#442d74"
-            imageSrc={Images.systemToolkit}
+            imageUrl={Images.systemToolkit}
             link="/srds/system-toolkit"
           />
         </Grid>
@@ -137,7 +137,7 @@ export const ToolkitItems: React.FC = (props) => {
               </>
             }
             bgColor="#1e171c"
-            imageSrc={Images.adversaryToolkit}
+            imageUrl={Images.adversaryToolkit}
             link="/srds/adversary-toolkit"
           />
         </Grid>
@@ -161,7 +161,7 @@ export const OtherResourcesItems: React.FC = (props) => {
               </>
             }
             bgColor="#3c5c39"
-            imageSrc={Images.seelieSquire}
+            imageUrl={Images.seelieSquire}
             link="/seelie-squire"
           />
         </Grid>
@@ -175,8 +175,21 @@ export const OtherResourcesItems: React.FC = (props) => {
               </>
             }
             bgColor="#223031"
-            imageSrc={Images.book}
+            imageUrl={Images.book}
             link="/fate-stunts"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Dials"
+            description={
+              <>
+                Useful rules you can pick and choose to hack your Fate campaign.
+              </>
+            }
+            bgColor="#011779"
+            imageUrl={Images.dials}
+            link="/dials"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
@@ -189,7 +202,7 @@ export const OtherResourcesItems: React.FC = (props) => {
               </>
             }
             bgColor="#3b3a39"
-            imageSrc={Images.scene}
+            imageUrl={Images.scene}
             link="/scene-checklist"
           />
         </Grid>
@@ -203,9 +216,7 @@ export const OtherResourcesItems: React.FC = (props) => {
               </>
             }
             bgColor="#030200"
-            imageSrc={
-              "https://images.unsplash.com/photo-1598620617148-c9e8ddee6711?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-            }
+            imageUrl={Images.cheatSheet}
             link="/cheat-sheet"
           />
         </Grid>
@@ -218,7 +229,7 @@ export const SrdCard: React.FC<{
   title: string | JSX.Element;
   description: string | JSX.Element;
   bgColor?: string;
-  imageSrc?: string;
+  imageUrl?: string;
   link: string;
 }> = (props) => {
   const theme = useTheme();
@@ -255,7 +266,7 @@ export const SrdCard: React.FC<{
         >
           <Box height="100%">
             <CardMedia
-              image={props.imageSrc ?? ""}
+              image={props.imageUrl ?? ""}
               title={props.title as string}
               className={css({
                 height: "8rem",

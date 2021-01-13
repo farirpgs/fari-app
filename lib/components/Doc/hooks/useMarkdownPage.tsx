@@ -39,7 +39,6 @@ export function useMarkdownPage(
     });
 
     const allElementsInPage = nextSiblingUntilId(currentH1, `${nextH1?.id}`);
-
     const newDom = getNewDom(currentH1, allElementsInPage);
 
     return {

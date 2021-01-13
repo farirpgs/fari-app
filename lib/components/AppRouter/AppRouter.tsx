@@ -5,7 +5,7 @@ import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Images } from "../../constants/Images";
-import { DocImport as DocImport } from "../../docs/DocImport";
+import { DocImport } from "../../docs/DocImport";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
@@ -370,6 +370,7 @@ export const AppRouter = () => {
               parent={{ title: "SRDs", url: "/srds" }}
               title="Scene Checklist"
               loadFunction={DocImport.SceneCheckist}
+              imageUrl={Images.scene}
               author={{
                 title: "LAURENCE MACNAUGHTON",
                 items: [
@@ -384,6 +385,21 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/dials/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/dials"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Dials"
+              loadFunction={DocImport.Dials}
+              maxWidth="lg"
+              imageUrl={Images.dials}
+            />
+          )}
+        />
+        <Route
+          exact
           path={"/cheat-sheet/:page?"}
           render={(props) => (
             <Doc
@@ -392,6 +408,7 @@ export const AppRouter = () => {
               parent={{ title: "SRDs", url: "/srds" }}
               title="Cheat Sheet"
               loadFunction={DocImport.CheatSheet}
+              imageUrl={Images.cheatSheet}
               maxWidth="lg"
               author={{
                 title: "famousbirds",

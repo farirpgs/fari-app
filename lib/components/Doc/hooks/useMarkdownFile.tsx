@@ -17,6 +17,7 @@ export type IMarkdownHeader = {
   label: string;
   preview: string;
   level: number;
+  grouping: string;
   page: IMarkdownHeader | undefined;
 };
 
@@ -34,67 +35,27 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
         const markdown = await loadFunction();
 
         if (markdown) {
-          const html = showdownConverter.makeHtml(markdown);
-          const dom = document.createElement("div");
-          dom.innerHTML = html;
+          const {
+            dom,
+            headers,
+            tableOfContent: newTableOfContent,
+          } = new Markdown().process(markdown);
 
-          let newToc: ITableOfContent = {};
-          const headers: Array<IMarkdownHeader> = [];
-
-          let latestH1: IMarkdownHeader | undefined = undefined;
-          dom.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((element) => {
-            const elementLevel = parseInt(element.tagName.replace("H", ""));
-            const label = element.textContent ?? "";
-            const nextElement = element.nextElementSibling;
-
-            const canPreviewNextElement = !nextElement?.tagName.startsWith("H");
-            const preview = canPreviewNextElement
-              ? nextElement?.textContent ?? ""
-              : "";
-
-            const tocElement: IMarkdownHeader = {
-              id: element.id,
-              label: label,
-              preview: preview,
-              level: elementLevel,
-              page: latestH1,
-            };
-
-            // prepare TOC
-            if (elementLevel === 1) {
-              latestH1 = tocElement;
-              newToc = {
-                ...newToc,
-                [element.id]: { page: tocElement, children: [] },
-              };
-            }
-            if (latestH1 && elementLevel === 2) {
-              newToc[latestH1.id].children.push(tocElement);
-            }
-
-            headers.push(tocElement);
-
-            // add anchor on header
-            const anchor = document.createElement("a");
-            anchor.className = "anchor";
-            anchor.href = `#${element.id}`;
-            element.append(anchor);
-          });
-
-          setHtml(dom.innerHTML);
-          setTableOfContent(newToc);
           setDom(dom);
+          setHtml(dom.innerHTML);
           setAllHeaders(headers);
+          setTableOfContent(newTableOfContent);
         }
       }
     }
   }, [loadFunction]);
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout | undefined = undefined;
     scrollToHeaderOnLoad();
     function scrollToHeaderOnLoad() {
       if (html && location.hash) {
-        setTimeout(() => {
+        timeout = setTimeout(() => {
           const element = document.querySelector(location.hash);
           const elementTop = element?.getBoundingClientRect().top ?? 0;
           const topPos = elementTop + window.pageYOffset;
@@ -105,9 +66,87 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
         }, 300);
       }
     }
+    return () => {
+      clearTimeout(timeout as NodeJS.Timeout);
+    };
   }, [html, location.hash]);
 
   return { html, tableOfContent, dom, allHeaders };
 }
 
 export const scrollMarginTop = 16;
+
+class Markdown {
+  public process(markdown: string) {
+    const html = showdownConverter.makeHtml(markdown);
+    const dom = document.createElement("div");
+    dom.innerHTML = html;
+
+    let tableOfContent: ITableOfContent = {};
+    const headers: Array<IMarkdownHeader> = [];
+
+    let latestH1: IMarkdownHeader = (undefined as unknown) as IMarkdownHeader;
+    const allHeaders = dom.querySelectorAll("h1,h2,h3,h4,h5,h6");
+
+    allHeaders.forEach((element) => {
+      const elementLevel = this.getElementLevel(element);
+      const label = element.textContent ?? "";
+      const nextElement = element.nextElementSibling;
+
+      const canPreviewNextElement = this.isElementHeader(nextElement);
+      const preview = canPreviewNextElement
+        ? nextElement?.textContent ?? ""
+        : "";
+
+      if (elementLevel === 1) {
+        const header1: IMarkdownHeader = {
+          id: element.id,
+          label: label,
+          preview: preview,
+          level: elementLevel,
+          page: undefined,
+          grouping: label,
+        };
+
+        latestH1 = header1;
+        tableOfContent = {
+          ...tableOfContent,
+          [element.id]: { page: header1, children: [] },
+        };
+        headers.push(header1);
+      }
+      if (latestH1 && elementLevel === 2) {
+        const header: IMarkdownHeader = {
+          id: element.id,
+          label: label,
+          preview: preview,
+          level: elementLevel,
+          page: latestH1,
+          grouping: latestH1?.label,
+        };
+        tableOfContent[latestH1.id].children.push(header);
+        headers.push(header);
+      }
+
+      const anchor = this.makeHeaderAnchor(element);
+      element.append(anchor);
+    });
+
+    return { dom, tableOfContent, headers };
+  }
+
+  private makeHeaderAnchor(element: Element) {
+    const anchor = document.createElement("a");
+    anchor.className = "anchor";
+    anchor.href = `#${element.id}`;
+    return anchor;
+  }
+
+  private isElementHeader(nextElement: Element | null) {
+    return !nextElement?.tagName.startsWith("H");
+  }
+
+  private getElementLevel(element: Element) {
+    return parseInt(element.tagName.replace("H", ""));
+  }
+}

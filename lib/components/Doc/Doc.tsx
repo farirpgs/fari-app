@@ -81,7 +81,11 @@ export const Doc: React.FC<{
   const location = useLocation();
   const logger = useLogger();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [userClosedH1, setUserClosedH1] = useState(false);
+  const [openH1, setOpenH1] = useState<string | undefined>();
+
+  useEffect(() => {
+    setOpenH1(currentH1?.id);
+  }, [currentH1]);
 
   const title = currentH1?.textContent ?? "";
   const isFirstPage = !previousH1;
@@ -103,8 +107,6 @@ export const Doc: React.FC<{
   function goTo(path: string) {
     history.push(`${props.url}/${path}`);
   }
-
-  isSmall;
 
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
@@ -332,10 +334,8 @@ export const Doc: React.FC<{
           size="small"
           autoHighlight
           filterOptions={createFilterOptions({ limit: 10 })}
-          options={allHeaders
-            .filter((h) => h.level > 1)
-            .map((header) => header)}
-          groupBy={(header) => header.page?.label ?? ""}
+          options={allHeaders.map((header) => header)}
+          groupBy={(header) => header.grouping ?? ""}
           getOptionLabel={(header) => header.label}
           renderOption={(header) => (
             <React.Fragment>
@@ -382,9 +382,9 @@ export const Doc: React.FC<{
     const list = (
       <List>
         {Object.entries(toc).map(([, h1], index) => {
-          const isCurrentH1 = currentH1?.id === h1.page.id;
           const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOPen = isCurrentH1 && !userClosedH1;
+          const isSubSectionOpen = openH1 === h1.page.id;
+
           return (
             <React.Fragment key={index}>
               <ListItem
@@ -393,25 +393,35 @@ export const Doc: React.FC<{
                 component={Link}
                 to={`${props.url}/${h1.page.id}`}
                 onClick={() => {
-                  if (isCurrentH1) {
-                    setUserClosedH1((value) => !value);
-                  } else {
-                    setUserClosedH1(false);
-                  }
+                  setMobileMenuOpen(false);
                 }}
               >
                 {renderTableOfContentElement(h1.page)}
                 {shouldRenderExpandIcon && (
                   <>
-                    {isSubSectionOPen ? (
-                      <ExpandLessIcon htmlColor={theme.palette.text.hint} />
-                    ) : (
-                      <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
-                    )}
+                    <IconButton
+                      size="small"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setOpenH1((draft) => {
+                          if (draft === h1.page.id) {
+                            return undefined;
+                          }
+                          return h1.page.id;
+                        });
+                      }}
+                    >
+                      {isSubSectionOpen ? (
+                        <ExpandLessIcon htmlColor={theme.palette.text.hint} />
+                      ) : (
+                        <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
+                      )}
+                    </IconButton>
                   </>
                 )}
               </ListItem>
-              <Collapse in={isSubSectionOPen}>
+              <Collapse in={isSubSectionOpen}>
                 {h1.children.map((h2, h2Index) => {
                   return (
                     <ListItem
@@ -493,9 +503,10 @@ export const Doc: React.FC<{
             })}
           >
             {tocElement.level === 1 ? (
-              <FateLabel
+              <Typography
                 noWrap
                 className={css({
+                  fontWeight: "bold",
                   width: "100%",
                   display: "inline-block",
                 })}

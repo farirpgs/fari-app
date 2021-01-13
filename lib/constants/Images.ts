@@ -20,4 +20,8 @@ export const Images = {
   seelieSquire: seelieSquire as string,
   seelieSquireAvatar: seelieSquireAvatar as string,
   scene: scene as string,
+  dials:
+    "https://images.unsplash.com/photo-1517778991803-3fa8c9341083?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=652&q=80",
+  cheatSheet:
+    "https://images.unsplash.com/photo-1598620617148-c9e8ddee6711?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80",
 };

@@ -26,9 +26,9 @@ export const DocImport = {
   CheatSheet: () => {
     return import("./cheat-sheet.md");
   },
-  // TheBigListOfRpgPlots: () => {
-  //   return import("./the-big-list-of-rpg-plots.md");
-  // },
+  Dials: () => {
+    return import("./dials.md");
+  },
   Test: () => {
     return import("./test.md");
   },
