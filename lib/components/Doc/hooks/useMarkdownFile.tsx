@@ -15,14 +15,15 @@ export type ITableOfContent = Record<
 export type IMarkdownHeader = {
   id: string;
   label: string;
+  preview: string;
   level: number;
-  parent: IMarkdownHeader | undefined;
+  page: IMarkdownHeader | undefined;
 };
 
 export function useMarkdownFile(loadFunction: ILoadFunction) {
-  const [html, setHtml] = useState<string | undefined>();
-  const [toc, setToc] = useState<ITableOfContent>({});
   const [dom, setDom] = useState<HTMLDivElement>();
+  const [html, setHtml] = useState<string | undefined>();
+  const [tableOfContent, setTableOfContent] = useState<ITableOfContent>({});
   const [allHeaders, setAllHeaders] = useState<Array<IMarkdownHeader>>([]);
   const location = useLocation();
 
@@ -38,27 +39,36 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
           dom.innerHTML = html;
 
           let newToc: ITableOfContent = {};
-          let latestH1: IMarkdownHeader | undefined = undefined;
           const headers: Array<IMarkdownHeader> = [];
 
-          dom.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((e) => {
-            // prepare TOC
-            const level = parseInt(e.tagName.replace("H", ""));
+          let latestH1: IMarkdownHeader | undefined = undefined;
+          dom.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((element) => {
+            const elementLevel = parseInt(element.tagName.replace("H", ""));
+            const label = element.textContent ?? "";
+            const nextElement = element.nextElementSibling;
+
+            const canPreviewNextElement = !nextElement?.tagName.startsWith("H");
+            const preview = canPreviewNextElement
+              ? nextElement?.textContent ?? ""
+              : "";
+
             const tocElement: IMarkdownHeader = {
-              id: e.id,
-              label: e.textContent ?? "",
-              level: level,
-              parent: latestH1,
+              id: element.id,
+              label: label,
+              preview: preview,
+              level: elementLevel,
+              page: latestH1,
             };
 
-            if (level === 1) {
+            // prepare TOC
+            if (elementLevel === 1) {
               latestH1 = tocElement;
               newToc = {
                 ...newToc,
-                [e.id]: { page: tocElement, children: [] },
+                [element.id]: { page: tocElement, children: [] },
               };
             }
-            if (latestH1 && level === 2) {
+            if (latestH1 && elementLevel === 2) {
               newToc[latestH1.id].children.push(tocElement);
             }
 
@@ -67,12 +77,12 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
             // add anchor on header
             const anchor = document.createElement("a");
             anchor.className = "anchor";
-            anchor.href = `#${e.id}`;
-            e.append(anchor);
+            anchor.href = `#${element.id}`;
+            element.append(anchor);
           });
 
           setHtml(dom.innerHTML);
-          setToc(newToc);
+          setTableOfContent(newToc);
           setDom(dom);
           setAllHeaders(headers);
         }
@@ -89,7 +99,7 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
           const elementTop = element?.getBoundingClientRect().top ?? 0;
           const topPos = elementTop + window.pageYOffset;
           window.scrollTo({
-            top: topPos,
+            top: topPos - scrollMarginTop,
             behavior: "smooth",
           });
         }, 300);
@@ -97,5 +107,7 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
     }
   }, [html, location.hash]);
 
-  return { html, toc, dom, allHeaders };
+  return { html, tableOfContent, dom, allHeaders };
 }
+
+export const scrollMarginTop = 16;

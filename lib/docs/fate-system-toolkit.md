@@ -3121,11 +3121,11 @@ At the beginning of a physical conflict between two (and only two) participants,
 
 After that, the combatants can do any of the following every turn:
 
-        - • Attack, if they have the upper hand
+- • Attack, if they have the upper hand
 
-        - • Try to get the upper hand, if they don’t
+- • Try to get the upper hand, if they don’t
 
-        - • Do something else—put down situation aspects, try to escape the conflict, etc.
+- • Do something else—put down situation aspects, try to escape the conflict, etc.
 
 It’s highly recommended that you use the Stress-Free variant with these rules. Otherwise, there’s a real risk of combats dragging out, instead of knocking down and dragging out.
 

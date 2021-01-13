@@ -2,6 +2,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import clsx from "clsx";
 import React from "react";
+import { scrollMarginTop } from "../Doc/hooks/useMarkdownFile";
 
 const anchorSvgMaterialUI = `<svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg>`;
 
@@ -65,6 +66,7 @@ const styles = (theme: Theme) => {
       },
       "& h1": {
         ...theme.typography.h3,
+        scrollMarginTop: scrollMarginTop,
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
@@ -76,6 +78,7 @@ const styles = (theme: Theme) => {
       },
       "& h2": {
         ...theme.typography.h4,
+        scrollMarginTop: scrollMarginTop,
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
@@ -87,6 +90,7 @@ const styles = (theme: Theme) => {
       },
       "& h3": {
         ...theme.typography.h5,
+        scrollMarginTop: scrollMarginTop,
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
@@ -97,6 +101,7 @@ const styles = (theme: Theme) => {
       },
       "& h4": {
         ...theme.typography.h6,
+        scrollMarginTop: scrollMarginTop,
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
@@ -107,6 +112,7 @@ const styles = (theme: Theme) => {
       },
       "& h5": {
         ...theme.typography.h6,
+        scrollMarginTop: scrollMarginTop,
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
@@ -117,6 +123,7 @@ const styles = (theme: Theme) => {
       },
       "& h6": {
         ...theme.typography.h6,
+        scrollMarginTop: scrollMarginTop,
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,

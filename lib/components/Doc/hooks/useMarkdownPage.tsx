@@ -40,11 +40,7 @@ export function useMarkdownPage(
 
     const allElementsInPage = nextSiblingUntilId(currentH1, `${nextH1?.id}`);
 
-    const newDom = document.createElement("div");
-    newDom.append(currentH1?.cloneNode(true)!);
-    allElementsInPage.forEach((e) => {
-      newDom.append(e.cloneNode(true));
-    });
+    const newDom = getNewDom(currentH1, allElementsInPage);
 
     return {
       html: newDom?.innerHTML,
@@ -54,6 +50,15 @@ export function useMarkdownPage(
       description,
     };
   }, [page, dom]);
+}
+
+function getNewDom(currentH1: Element, allElementsInPage: Element[]) {
+  const newDom = document.createElement("div");
+  newDom.append(currentH1?.cloneNode(true)!);
+  allElementsInPage.forEach((e) => {
+    newDom.append(e.cloneNode(true));
+  });
+  return newDom;
 }
 
 function nextSiblingUntilId(elem: Element | undefined | null, id: string) {

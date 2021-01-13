@@ -25,7 +25,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
@@ -64,7 +66,9 @@ export const Doc: React.FC<{
   loadFunction: ILoadFunction;
   maxWidth?: ContainerTypeMap["props"]["maxWidth"];
 }> = (props) => {
-  const { toc, dom, allHeaders } = useMarkdownFile(props.loadFunction);
+  const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
+    props.loadFunction
+  );
   const { html, nextH1, previousH1, currentH1, description } = useMarkdownPage(
     props.currentPage,
     dom
@@ -139,10 +143,12 @@ export const Doc: React.FC<{
               <Container maxWidth={props.maxWidth ?? "md"}>
                 {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
-                <Box pb="1rem" mt="-1.5rem">
-                  {renderHeader()}
+                <Box>
+                  <Box pb="1rem" mt="-1.5rem">
+                    {renderHeader()}
+                  </Box>
+                  <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
-                <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 <MarkdownElement renderedMarkdown={html} />
                 <Box mt="3rem" mb="1rem">
                   <Divider />
@@ -269,10 +275,10 @@ export const Doc: React.FC<{
   function renderHeader() {
     return (
       <Grid container justify="space-between" alignItems="flex-end" spacing={2}>
-        <Grid item md={8} xs={12} zeroMinWidth>
+        <Grid item md={7} xs={12} zeroMinWidth>
           {renderTitle()}
         </Grid>
-        <Grid item md={4} xs={12}>
+        <Grid item md={5} xs={12}>
           {renderAutoComplete()}
         </Grid>
       </Grid>
@@ -324,14 +330,38 @@ export const Doc: React.FC<{
         <Autocomplete
           freeSolo
           size="small"
-          options={allHeaders.map((header) => header.label)}
+          autoHighlight
+          filterOptions={createFilterOptions({ limit: 10 })}
+          options={allHeaders
+            .filter((h) => h.level > 1)
+            .map((header) => header)}
+          groupBy={(header) => header.page?.label ?? ""}
+          getOptionLabel={(header) => header.label}
+          renderOption={(header) => (
+            <React.Fragment>
+              <Box width="100%">
+                <Grid container alignItems="center">
+                  <Grid item>{header.label}</Grid>
+                </Grid>
+                <Box>
+                  <Typography variant="body2" noWrap color="textSecondary">
+                    {header.preview}
+                  </Typography>
+                </Box>
+              </Box>
+            </React.Fragment>
+          )}
           onChange={(event, newValue) => {
-            const header = allHeaders.find((h) => newValue === h.label);
+            const label = (newValue as IMarkdownHeader)?.label;
 
-            if (header?.level === 1) {
-              history.push(`${props.url}/${header?.id}`);
-            } else {
-              history.push(`${props.url}/${header?.parent?.id}#${header?.id}`);
+            if (label) {
+              const header = allHeaders.find((h) => label === h.label);
+
+              if (header?.level === 1) {
+                history.push(`${props.url}/${header?.id}`);
+              } else {
+                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
+              }
             }
           }}
           renderInput={(params) => (
