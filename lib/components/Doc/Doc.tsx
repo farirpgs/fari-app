@@ -108,6 +108,7 @@ export const Doc: React.FC<{
     history.push(`${props.url}/${path}`);
   }
 
+  const shouldRenderImage = props.imageUrl && !isSmall;
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
       <PageMeta
@@ -123,7 +124,7 @@ export const Doc: React.FC<{
                 flexGrow: 1,
               })}
             >
-              {props.imageUrl && (
+              {shouldRenderImage && (
                 <Box
                   className={css({
                     marginTop: "-2rem",
