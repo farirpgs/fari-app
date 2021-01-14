@@ -123,7 +123,8 @@ export const Page: React.FC<{
   function renderFooter() {
     return (
       <Box
-        pb={props.pb}
+        // TODO: https://github.com/fariapp/fari/issues/212
+        pb={props.pb ?? "0"}
         displayPrint="none"
         className={css({
           paddingTop: "1rem",
