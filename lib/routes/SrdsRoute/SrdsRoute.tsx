@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import React from "react";
@@ -60,7 +61,7 @@ export const SrdItems: React.FC = (props) => {
     <Box>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Fate Condensed"
             description={
               <>
@@ -75,7 +76,7 @@ export const SrdItems: React.FC = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Fate Core"
             description={
               <>
@@ -90,7 +91,7 @@ export const SrdItems: React.FC = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Fate Accelerated"
             description={
               <>
@@ -113,7 +114,7 @@ export const ToolkitItems: React.FC = (props) => {
     <Box>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Fate System Toolkit"
             description={
               <>
@@ -128,7 +129,7 @@ export const ToolkitItems: React.FC = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Fate Adversary Toolkit"
             description={
               <>
@@ -166,7 +167,7 @@ export const OtherResourcesItems: React.FC = (props) => {
           />
         </Grid> */}
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Fate Stunts"
             description={
               <>
@@ -180,7 +181,7 @@ export const OtherResourcesItems: React.FC = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Dials"
             description={
               <>
@@ -193,7 +194,7 @@ export const OtherResourcesItems: React.FC = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Scene Checklist"
             description={
               <>
@@ -207,7 +208,7 @@ export const OtherResourcesItems: React.FC = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+          <DocCard
             title="Cheat Sheet"
             description={
               <>
@@ -225,7 +226,7 @@ export const OtherResourcesItems: React.FC = (props) => {
   );
 };
 
-export const SrdCard: React.FC<{
+export const DocCard: React.FC<{
   title: string | JSX.Element;
   description: string | JSX.Element;
   bgColor?: string;
@@ -235,6 +236,7 @@ export const SrdCard: React.FC<{
   const theme = useTheme();
   const backgroundColor = props.bgColor ?? theme.palette.background.paper;
   const color = theme.palette.getContrastText(backgroundColor);
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <ButtonBase
@@ -245,7 +247,7 @@ export const SrdCard: React.FC<{
         "width": "100%",
         "transition": theme.transitions.create(["transform"]),
         "&:hover": {
-          transform: "scale(1.05)",
+          transform: isSmall ? undefined : "scale(1.05)",
         },
       })}
     >
@@ -260,7 +262,7 @@ export const SrdCard: React.FC<{
             "boxShadow": theme.shadows[8],
             "transition": theme.transitions.create(["box-shadow"]),
             "&:hover": {
-              boxShadow: theme.shadows[16],
+              boxShadow: isSmall ? undefined : theme.shadows[16],
             },
           })}
         >
@@ -301,3 +303,5 @@ export const SrdCard: React.FC<{
     </ButtonBase>
   );
 };
+
+DocCard.displayName = "DocCard";

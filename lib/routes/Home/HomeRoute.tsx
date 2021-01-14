@@ -208,7 +208,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
       <Container maxWidth="md">
         <Box my="1rem">
           <Grid container justify="center" spacing={2}>
-            <Grid item xs={4} className={sectionGridItem}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/srds">
                   {renderHeadingIcon(MenuBookIcon)}
@@ -223,7 +223,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={4} className={sectionGridItem}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
                   {renderHeadingIcon(DiceGameIcon)}
@@ -238,7 +238,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={4} className={sectionGridItem}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Link to="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
@@ -258,7 +258,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </Box>
         <Box my="1rem">
           <Grid container justify="center" spacing={2}>
-            <Grid item xs={4} className={sectionGridItem}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link
                   to=""
@@ -279,7 +279,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={4} className={sectionGridItem}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link
                   to=""
