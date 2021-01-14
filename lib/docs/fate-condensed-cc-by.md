@@ -1,24 +1,26 @@
 # Fate Condensed
 
-Fate Condensed ©2020 Evil Hat Productions, LLC.
+Fate Condensed is a compact, stand-alone version of the Fate Core System streamlined for clarity and ease of reference.
 
-Refer to the licensing pages at [http://www.faterpg.com/licensing](http://www.faterpg.com/licensing/) for details.
+Fate Condensed gives you easy-to- digest rules in as few pages as possible, letting you get to the table and roll the dice, fast. It includes a few simple refinements to the Fate Core engine honed over a decade of active play and development. And best of all, it's 100% compatible with every one of our 90+ Fate products already published.
 
-This is the System Reference Document for use with the Creative Commons Attribution Unported license. **The following attribution must be provided in your text, wherever you put your own copyright, in the same size as your copyright text:**
+**Fate veterans** will appreciate the concise layout, minor refinements, and additions to Fate’s rules (see below for the details).
 
-This work is based on Fate Condensed (found at http://www.faterpg.com/), a product of Evil Hat Productions, LLC, developed, authored, and edited by PK Sullivan, Ed Turner, Leonard Balsera, Fred Hicks, Richard Bellingham, Robert Hanz, Ryan Macklin, and Sophie Lagacé, and licensed for our use under the Creative Commons Attribution 3.0 Unported license (http://creativecommons.org/licenses/by/3.0/).
+**New to Fate?** Fate Condensed can drive any game, any scenario you can imagine. Unleash your creativity! Fate's flexible rules make it easy.
 
-# Credits
+You can adapt your favorite movie or tv series, or create an original world uniquely tailored to your group. Players populate that world with proactive, capable characters leading dramatic lives. The Game Master challenges them with crises tied both to the world and to their personal troubles.
 
-Fate Condensed by PK Sullivan, Ed Turner, and Fred Hicks. Additional development by Richard Bellingham, Robert Hanz, and Sophie Lagacé.
+Fate Condensed gives you the flexibility and power to bring your vision to life!
 
-Based on prior works by Rob Donoghue, Fred Hicks, Leonard Balsera, Ryan Macklin, Clark Valentine, Mike Olson, Brian Engard, and Sophie Lagacé.
+**Refined. Streamlined. Fate Condensed**
 
-Based on Fate Core System by Leonard Balsera, Brian Engard, Jeremy Keller, Ryan Macklin, and Mike Olson and Fate Accelerated Edition by Clark Valentine.
+<iframe src="https://itch.io/embed/563496" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-condensed">Fate Condensed by evilhat</a></iframe>
 
-Turn order system based on “Accidentally Designing Marvel’s Action Order System,” written by Fred Hicks and describing a variation on a method originally devised by Leonard Balsera.
-
-Portions of this work are based on Fateful Concepts: Hacking Contests by Ryan Macklin, licensed for our use under the Creative Commons Attribution 3.0 Unported license.
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
 
 # Introduction
 
@@ -50,8 +52,6 @@ Condensing the gist of a system from nearly 300 pages down to about 50 pages of 
 Any game of Fate starts with defining your setting. This might be a concept your GM is bringing to the table, a popular media property the players are familiar with, or a collaborative world-building exercise involving everyone at the table. The setting discussion may be quick and light on detail, or may involve a detailed full session with the whole group, or anything in between.
 
 Your choice of setting forms the basis of the table’s consensus about what is true, and what is acceptable in play and in character concepts. If your setting doesn’t have flying people in it, then a player deciding to make a flying-person character doesn’t pass muster. If your world involves shadowy organizations and deep conspiracies, players may expect story-lines free of clear-cut good-and-evil conflicts and devoid of farcical murder-clowns. It’s up to you!
-
-<iframe src="https://itch.io/embed/563496" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-condensed">Fate Condensed by evilhat</a></iframe>
 
 ## Create Your Characters
 
@@ -1333,3 +1333,15 @@ The effort to extract the system (by Leonard Balsera and Ryan Macklin) to presen
 ## Licensing
 
 In one form or another, Fate has always been open-licensable. You can find details about licensing Fate for your projects at [http://www.faterpg.com/licensing](http://www.faterpg.com/licensing)
+
+# Credits
+
+Fate Condensed by PK Sullivan, Ed Turner, and Fred Hicks. Additional development by Richard Bellingham, Robert Hanz, and Sophie Lagacé.
+
+Based on prior works by Rob Donoghue, Fred Hicks, Leonard Balsera, Ryan Macklin, Clark Valentine, Mike Olson, Brian Engard, and Sophie Lagacé.
+
+Based on Fate Core System by Leonard Balsera, Brian Engard, Jeremy Keller, Ryan Macklin, and Mike Olson and Fate Accelerated Edition by Clark Valentine.
+
+Turn order system based on “Accidentally Designing Marvel’s Action Order System,” written by Fred Hicks and describing a variation on a method originally devised by Leonard Balsera.
+
+Portions of this work are based on Fateful Concepts: Hacking Contests by Ryan Macklin, licensed for our use under the Creative Commons Attribution 3.0 Unported license.

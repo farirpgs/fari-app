@@ -1,10 +1,31 @@
+# Fate Adversary Toolkit
+
+**Calling all adversaries!**
+
+Antagonists. Obstacles. Villains. Impediments. Call them what you will, but a great campaign needs opposition to create stirring conflict. The Fate Adversary Toolkit offers a variety of ideas, mechanics, and hacks to help you make the most out of every obstacle in your game. Explore what an adversary is in Fate terms, and always remember that everything is a character. Inhabit hostile worlds and situations that work against the players. Face down mooks and big bads built to provide high stakes drama and engage everyone at the table. Learn how to use high quality adversaries to drive your stories to completion.
+
+The Fate Adversary Toolkit is a Fate Core supplement. This Toolkit includes:
+
+- A general approach that gives you the tools to create quality adversaries regardless of setting or genre.
+- New categories of adversaries (enemies, obstacles, and constraints), each with their own rules, functions, and samples.
+- Ideas on how to use environments to create conflict and make the most of battlefield zones.
+- A Rogue’s Gallery, full of sample adversaries separated by genre, with ideas on how to use the characters and settings provided to create plot.
+
+**Fate Toolkits. All the tools to build your stage.**
+
+<iframe src="https://itch.io/embed/492914" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-adversary-toolkit">Fate Adversary Toolkit by evilhat</a></iframe>
+
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
+
 # Types of Adversaries
 
 As we talk about adversaries in this book, keep in mind the Fate Fractal: everything is a character (<em>Fate Core</em>, page 270). An adversary is not necessarily a person, monster, or other kind of creature you can punch. Rather, it’s a thing that exists to hinder, challenge, or oppose the players.
 
 There are three main types of adversaries: enemies, obstacles, and constraints.
-
-<iframe src="https://itch.io/embed/492914" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-adversary-toolkit">Fate Adversary Toolkit by evilhat</a></iframe>
 
 ## Enemies
 

@@ -13,6 +13,24 @@ This book uses the OGL version of this text. License found at the end of this do
 
 -->
 
+# Fate Core 
+
+Grab your plasma rifles, spell components, and jetpacks! Name your game; **Fate Core** is the foundation that can make it happen. **Fate Core** is a flexible system that can support whatever worlds you dream up.
+
+Have you always wanted to play a post-apocalyptic spaghetti western with tentacle monsters? Swords and sorcery in space? Wish there was a game based on your favorite series of books, film, or television, but it never happened? **Fate Core** is your answer.
+
+**Fate Core** is a tabletop roleplaying game about proactive, capable people who lead dramatic lives. Create your characters and develop instant group dynamics with our unique phased char gen system. Use those characters as a springboard to storytelling in our GM worldbuilding chapters.
+
+For the Fate-familiar, take advantage of the new and improved approaches to character actions, aspects, compels, and more. With **Fate Core**, your story is up to you. But whatever you choose, you can expect a fun storytelling experience full of twists…of fate.
+
+<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
+
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
+
 # The Basics
 
 ## Welcome To Fate

@@ -37,13 +37,33 @@ More than anything, this <em>Fate System Toolkit</em> is a training guide for yo
 July 15, 2013
  -->
 
+# Fate System Toolkit
+
+**Rules, glorious rules!**
+
+The Fate Core system is flexible, hackable, and adaptable to any world you can dream up. This Fate System Toolkit is packed with system ideas to bring those dreams to life.
+
+Learn how to hack the skill system to better suit your terraforming campaign. Get ideas on how to create races and societies for your woodland elves, subterranean aliens, or afterlife police force. Customize our magic starters to create your own system, and use our gadget starters to bring your gear to life (only not literally).
+
+Whatever genre you’re gaming, you’ll find a wide array of customizable concepts and optional rules in the Fate System Toolkit to take your campaign to the next level.
+
+**Fate System Toolkit. Raise your game!**
+
+_Fate System Toolkit is an expansion for the Fate Core System_
+
+<iframe src="https://itch.io/embed/492920" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-system-toolkit">Fate System Toolkit by evilhat</a></iframe>
+
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
+
 # 1: Introduction
 
 ## Why We’re Here
 
 Think of <em>Fate</em> as a machine, built to produce a specific outcome. Like many machines, <em>Fate</em> can be adjusted to produce other outcomes; it contains a system of dials, a network of rules that can be adjusted up, down, and to the sides to achieve the result you’re looking for. It’s robust, flexible, and—most importantly—hackable.
-
-<iframe src="https://itch.io/embed/492920" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-system-toolkit">Fate System Toolkit by evilhat</a></iframe>
 
 What does that mean, that it’s “hackable?” First, it means that you can change rules. This is true of any game—if you’re playing <em>Monopoly</em>, allowing players to collect money when they land on Free Parking would be a hack. It changes the nature of the game’s economy and makes the game a little more forgiving, so it’s a little harder to lose the game early due to lack of funds. <em>Fate</em> is like that—it can be altered. Do you want the GM to have more fate points? The players to have higher skills? Want to change the way aspects work? All of these things are possible with a little effort on your part.
 
