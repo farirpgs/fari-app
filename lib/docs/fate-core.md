@@ -139,10 +139,10 @@ When you need to roll dice in Fate, pick up four Fate dice and roll them. When y
 
 Here are some sample dice totals:
 
-- -+0+ = +1
-- +-00 =
-- +++- = +2
-- -000 = −1
+- <fate>-+0+</fate> = +1
+- <fate>+-00</fate> =
+- <fate>+++-</fate> = +2
+- <fate>-000</fate> = −1
 
 The result on the dice isn’t your final total, however. If your character has a skill that’s appropriate to the action, you get to add your character’s rating in that skill to whatever you rolled.
 
@@ -188,7 +188,7 @@ When you beat a roll or a set obstacle, the difference between your opposition a
 >
 > Lenny sighs and says, “Well, I’ve got Athletics at Good (+3), so I’ll try dodging and weaving through them to cross the hall.”
 >
-> He takes up the dice and rolls, getting -+++, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
+> He takes up the dice and rolls, getting <fate>-+++</fate>, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
 >
 > Amanda says, “Well, it takes equal parts acrobatics and frantic stumbling, but you manage to make it through to the other side with only some cosmetic tears in your tunic to show for it. The mechanism shows no sign of stopping, though—you’ll still have to deal with it on your way out.”
 >
@@ -1978,7 +1978,7 @@ That’s when it’s time to take out the dice.
 
 - Choose the character’s skill that is appropriate to the action.
 - Roll four Fate dice.
-- Add together the symbols showing on the dice. A `+` is +1, a `-` is –1, and a `0` is 0.
+- Add together the symbols showing on the dice. A <fate>+</fate> is +1, a <fate>-</fate> is –1, and a <fate>0</fate> is 0.
 - Add your skill rating to the dice roll. The total is your result on the ladder.
 - If you invoke an aspect, add +2 to your result or reroll the dice.
 
@@ -1986,7 +1986,7 @@ That’s when it’s time to take out the dice.
 >
 > Lily looks through Cynere’s skill list and picks Resources as her skill, hoping she can scrounge enough out of her coin purse to satisfy them. Her Resources skill is Average (+1), so she’ll add one to whatever result she gets from rolling the dice.
 >
-> She rolls and gets: +-0+
+> She rolls and gets: <fate>+-0+</fate>
 >
 > Her total result is +2 (+1 from her dice and +1 from her skill of Average), which corresponds to a Fair on the ladder.
 
@@ -1996,7 +1996,7 @@ As we said in The Basics, whenever you roll the dice, you’re comparing your ro
 
 > Amanda decides to roll active opposition against Lily on behalf of the guards. She decides the most appropriate opposing skill is Will—they’re trying to resist the temptation of bribery, after all.
 >
-> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: ++0+
+> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: <fate>++0+</fate>
 >
 > ...for an incredibly lucky result of +3!
 >

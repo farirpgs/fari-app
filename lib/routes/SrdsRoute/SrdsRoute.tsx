@@ -150,7 +150,7 @@ export const OtherResourcesItems: React.FC = (props) => {
   return (
     <Box>
       <Grid container spacing={4} justify="center">
-        <Grid item xs={12} sm={6} md={4}>
+        {/* <Grid item xs={12} sm={6} md={4}>
           <SrdCard
             title="Book of Monsters"
             description={
@@ -164,7 +164,7 @@ export const OtherResourcesItems: React.FC = (props) => {
             imageUrl={Images.seelieSquire}
             link="/seelie-squire"
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={6} md={4}>
           <SrdCard
             title="Fate Stunts"

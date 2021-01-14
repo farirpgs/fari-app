@@ -255,6 +255,13 @@ export const Page: React.FC<{
                   license (http://creativecommons.org/licenses/by/3.0/).
                 </Typography>
               </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  The Fate Core font is © Evil Hat Productions, LLC and is used
+                  with permission. The Four Actions icons were designed by
+                  Jeremy Keller.
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
           <Grid container>
