@@ -114,8 +114,7 @@ class Markdown {
           [element.id]: { page: header1, children: [] },
         };
         headers.push(header1);
-      }
-      if (latestH1 && elementLevel === 2) {
+      } else {
         const header: IMarkdownHeader = {
           id: element.id,
           label: label,
@@ -124,8 +123,12 @@ class Markdown {
           page: latestH1,
           grouping: latestH1?.label,
         };
-        tableOfContent[latestH1.id].children.push(header);
+
         headers.push(header);
+
+        if (elementLevel === 2) {
+          tableOfContent[latestH1.id].children.push(header);
+        }
       }
 
       const anchor = this.makeHeaderAnchor(element);

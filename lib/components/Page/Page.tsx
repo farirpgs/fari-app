@@ -259,7 +259,7 @@ export const Page: React.FC<{
           </Grid>
           <Grid container>
             <Grid item>
-              <Box mt=".5rem">
+              <Box my=".5rem">
                 <Link
                   href="https://www.iubenda.com/privacy-policy/97549620"
                   target="_blank"
