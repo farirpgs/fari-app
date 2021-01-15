@@ -40,7 +40,7 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
               dom,
               headers,
               tableOfContent: newTableOfContent,
-            } = new Markdown().process(markdown);
+            } = Markdown.process(markdown);
             setDom(dom);
             setHtml(dom.innerHTML);
             setAllHeaders(headers);
@@ -57,9 +57,8 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
 }
 
 export const scrollMarginTop = 16;
-
 class Markdown {
-  public process(markdown: string) {
+  public static process(markdown: string) {
     const html = showdownConverter.makeHtml(markdown);
     const dom = document.createElement("div");
     dom.innerHTML = html;
@@ -129,18 +128,18 @@ class Markdown {
     return { dom, tableOfContent, headers };
   }
 
-  private makeHeaderAnchor(element: Element) {
+  private static makeHeaderAnchor(element: Element) {
     const anchor = document.createElement("a");
     anchor.className = "anchor";
     anchor.href = `#${element.id}`;
     return anchor;
   }
 
-  private isElementHeader(nextElement: Element | null) {
+  private static isElementHeader(nextElement: Element | null) {
     return !nextElement?.tagName.startsWith("H");
   }
 
-  private getElementLevel(element: Element) {
+  private static getElementLevel(element: Element) {
     return parseInt(element.tagName.replace("H", ""));
   }
 }
