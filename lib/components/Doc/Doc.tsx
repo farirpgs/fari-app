@@ -46,6 +46,7 @@ import {
   useMarkdownFile,
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
+import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
 
@@ -73,6 +74,7 @@ export const Doc: React.FC<{
     props.currentPage,
     dom
   );
+  useScrollOnHtmlLoad(html);
 
   const lightBackground = useLightBackground();
   const theme = useTheme();

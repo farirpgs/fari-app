@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 import { showdownConverter } from "../../../constants/showdownConverter";
+import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
 export type ILoadFunction = () => Promise<string>;
 
@@ -26,50 +26,32 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
   const [html, setHtml] = useState<string | undefined>();
   const [tableOfContent, setTableOfContent] = useState<ITableOfContent>({});
   const [allHeaders, setAllHeaders] = useState<Array<IMarkdownHeader>>([]);
-  const location = useLocation();
+  const logger = useLogger();
 
   useEffect(() => {
     load();
     async function load() {
       if (loadFunction) {
-        const markdown = await loadFunction();
+        try {
+          const markdown = await loadFunction();
 
-        if (markdown) {
-          const {
-            dom,
-            headers,
-            tableOfContent: newTableOfContent,
-          } = new Markdown().process(markdown);
-
-          setDom(dom);
-          setHtml(dom.innerHTML);
-          setAllHeaders(headers);
-          setTableOfContent(newTableOfContent);
+          if (markdown) {
+            const {
+              dom,
+              headers,
+              tableOfContent: newTableOfContent,
+            } = new Markdown().process(markdown);
+            setDom(dom);
+            setHtml(dom.innerHTML);
+            setAllHeaders(headers);
+            setTableOfContent(newTableOfContent);
+          }
+        } catch (error) {
+          logger.error("useMarkdownFile:error", error);
         }
       }
     }
   }, [loadFunction]);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined = undefined;
-    scrollToHeaderOnLoad();
-    function scrollToHeaderOnLoad() {
-      if (html && location.hash) {
-        timeout = setTimeout(() => {
-          const element = document.querySelector(location.hash);
-          const elementTop = element?.getBoundingClientRect().top ?? 0;
-          const topPos = elementTop + window.pageYOffset;
-          window.scrollTo({
-            top: topPos - scrollMarginTop,
-            behavior: "smooth",
-          });
-        }, 300);
-      }
-    }
-    return () => {
-      clearTimeout(timeout as NodeJS.Timeout);
-    };
-  }, [html, location.hash]);
 
   return { html, tableOfContent, dom, allHeaders };
 }
@@ -85,17 +67,26 @@ class Markdown {
     let tableOfContent: ITableOfContent = {};
     const headers: Array<IMarkdownHeader> = [];
 
-    let latestH1: IMarkdownHeader = (undefined as unknown) as IMarkdownHeader;
+    let latestH1:
+      | IMarkdownHeader
+      | undefined = (undefined as unknown) as IMarkdownHeader;
     const allHeaders = dom.querySelectorAll("h1,h2,h3,h4,h5,h6");
 
-    allHeaders.forEach((element) => {
+    for (let i = 0; i < allHeaders.length; i++) {
+      const element = allHeaders[i];
+
       const elementLevel = this.getElementLevel(element);
+
+      if (i === 0 && elementLevel !== 1) {
+        throw "Missing top level <h1/> tag";
+      }
+
       const label = element.textContent ?? "";
       const nextElement = element.nextElementSibling;
 
       const canPreviewNextElement = this.isElementHeader(nextElement);
       const preview = canPreviewNextElement
-        ? nextElement?.textContent ?? ""
+        ? nextElement?.textContent?.trim() ?? ""
         : "";
 
       if (elementLevel === 1) {
@@ -133,7 +124,7 @@ class Markdown {
 
       const anchor = this.makeHeaderAnchor(element);
       element.append(anchor);
-    });
+    }
 
     return { dom, tableOfContent, headers };
   }

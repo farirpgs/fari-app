@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useMarkdownFile Given I properly formatted markdown file should return an good state 1`] = `
+"<h1 id=\\"page1\\">Page 1<a class=\\"anchor\\" href=\\"#page1\\"></a></h1>
+<p>Page 1 introduction</p>
+<h2 id=\\"header2\\">Header 2<a class=\\"anchor\\" href=\\"#header2\\"></a></h2>
+<p>Header 2 details</p>
+<h1 id=\\"page2\\">Page 2<a class=\\"anchor\\" href=\\"#page2\\"></a></h1>
+<p>Page 2 introduction</p>
+<h1 id=\\"page3\\">Page 3<a class=\\"anchor\\" href=\\"#page3\\"></a></h1>
+<ul>
+<li>bullet 1</li>
+<li>bullet 2</li>
+</ul>
+<p>Page 3 introduction</p>"
+`;
+
+exports[`useMarkdownFile Given I properly formatted markdown file should return an good state 2`] = `
+<div>
+  <h1
+    id="page1"
+  >
+    Page 1
+    <a
+      class="anchor"
+      href="#page1"
+    />
+  </h1>
+  
+
+  <p>
+    Page 1 introduction
+  </p>
+  
+
+  <h2
+    id="header2"
+  >
+    Header 2
+    <a
+      class="anchor"
+      href="#header2"
+    />
+  </h2>
+  
+
+  <p>
+    Header 2 details
+  </p>
+  
+
+  <h1
+    id="page2"
+  >
+    Page 2
+    <a
+      class="anchor"
+      href="#page2"
+    />
+  </h1>
+  
+
+  <p>
+    Page 2 introduction
+  </p>
+  
+
+  <h1
+    id="page3"
+  >
+    Page 3
+    <a
+      class="anchor"
+      href="#page3"
+    />
+  </h1>
+  
+
+  <ul>
+    
+
+    <li>
+      bullet 1
+    </li>
+    
+
+    <li>
+      bullet 2
+    </li>
+    
+
+  </ul>
+  
+
+  <p>
+    Page 3 introduction
+  </p>
+</div>
+`;

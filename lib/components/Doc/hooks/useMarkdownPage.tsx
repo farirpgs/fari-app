@@ -16,7 +16,11 @@ export function useMarkdownPage(
     }
 
     const currentH1 = dom?.querySelector(`[id='${page}']`) ?? allH1s[0];
-    const firstParagraph = dom?.querySelector(`p`)?.textContent ?? "";
+    const firstParagraphAfterCurrentH1 = getFirstMatchFromElement(
+      currentH1,
+      "p"
+    );
+    const firstParagraph = firstParagraphAfterCurrentH1?.textContent ?? "";
     const description = truncate(firstParagraph, { length: 155 });
 
     if (!currentH1) {
@@ -38,7 +42,10 @@ export function useMarkdownPage(
       }
     });
 
-    const allElementsInPage = nextSiblingUntilId(currentH1, `${nextH1?.id}`);
+    const allElementsInPage = getAllNextSiblingUntilId(
+      currentH1,
+      `${nextH1?.id}`
+    );
     const newDom = getNewDom(currentH1, allElementsInPage);
 
     return {
@@ -60,13 +67,23 @@ function getNewDom(currentH1: Element, allElementsInPage: Element[]) {
   return newDom;
 }
 
-function nextSiblingUntilId(elem: Element | undefined | null, id: string) {
+function getAllNextSiblingUntilId(
+  elem: Element | undefined | null,
+  id: string
+) {
+  return getAllNextSiblingUntilSelector(elem, `[id='${id}']`);
+}
+
+function getAllNextSiblingUntilSelector(
+  elem: Element | undefined | null,
+  selector: string
+) {
   const siblings: Array<Element> = [];
 
   let currentElement = elem?.nextElementSibling;
 
   while (currentElement) {
-    if (currentElement.matches(`[id='${id}']`)) break;
+    if (currentElement.matches(selector)) break;
 
     siblings.push(currentElement);
 
@@ -74,4 +91,21 @@ function nextSiblingUntilId(elem: Element | undefined | null, id: string) {
   }
 
   return siblings;
+}
+
+function getFirstMatchFromElement(
+  elem: Element | undefined | null,
+  selector: string
+): Element | undefined {
+  const siblings: Array<Element> = [];
+
+  let currentElement = elem?.nextElementSibling;
+
+  while (currentElement) {
+    if (currentElement.matches(selector)) {
+      return currentElement;
+    }
+
+    currentElement = currentElement.nextElementSibling;
+  }
 }
