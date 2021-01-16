@@ -18,12 +18,14 @@ import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
+import Tab from "@material-ui/core/Tab";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -39,18 +41,20 @@ import SaveIcon from "@material-ui/icons/Save";
 import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
   ICharacter,
-  useCharacters,
+  useCharacters
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes,
+  useScenes
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
@@ -143,11 +147,12 @@ export const Scene: React.FC<IProps> = (props) => {
     string | undefined
   >(undefined);
   const [showCharacterCards, setShowCharacterCards] = useState(true);
-
+  const [tab, setTab] = useState<"public" | "private">("public");
   const [savedSnack, setSavedSnack] = useState(false);
 
   const isGM = !props.idFromParams;
   const isOffline = props.mode === SceneMode.PlayOffline;
+  const isPrivate = tab === "private";
 
   const isGMHostingOnlineOrOfflineGame =
     props.mode !== SceneMode.Manage && isGM;
@@ -262,6 +267,7 @@ export const Scene: React.FC<IProps> = (props) => {
       <Fade in>
         <Box>
           {renderHeader()}
+
           {props.mode === SceneMode.Manage ? (
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -605,10 +611,21 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderAspects() {
-    const aspectIds = Object.keys(sceneManager.state.scene.aspects);
-    const hasAspects = aspectIds.length > 0;
+    const aspectIdsToShow = Object.keys(
+      sceneManager.state.scene.aspects
+    ).filter((id) => {
+      const aspect = sceneManager.state.scene.aspects[id];
 
-    const sortedAspectIds = arraySort(aspectIds, [
+      if (tab === "private") {
+        return aspect.isPrivate;
+      } else {
+        return !aspect.isPrivate;
+      }
+    });
+
+    const hasAspects = aspectIdsToShow.length > 0;
+
+    const sortedAspectIds = arraySort(aspectIdsToShow, [
       function sortByPinned(id) {
         const aspect = sceneManager.state.scene.aspects[id];
         return { value: aspect.pinned, direction: "asc" };
@@ -618,69 +635,129 @@ export const Scene: React.FC<IProps> = (props) => {
         return { value: aspect.type, direction: "asc" };
       },
     ]);
-    const aspects = sceneManager.state.scene.sort ? sortedAspectIds : aspectIds;
+    const aspectsToRender = sceneManager.state.scene.sort
+      ? sortedAspectIds
+      : aspectIdsToShow;
+
     const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
+
     return (
       <Box pb="2rem">
-        {hasAspects && (
-          <MagicGridContainer
-            items={aspectIds.length}
-            deps={[
-              sceneManager.computed.playersWithCharacterSheets.length,
-              Object.keys(sceneManager.state.scene.aspects).length,
-              showCharacterCards,
-            ]}
-          >
-            {aspects.map((aspectId, index) => {
-              return (
-                <Box
-                  key={aspectId}
-                  className={cx(
-                    css({
-                      width: width,
-                      padding: "0 .5rem 1.5rem .5rem",
-                    })
-                  )}
-                >
-                  <IndexCard
+        {renderTabs()}
+        <Box>
+          {hasAspects && (
+            <MagicGridContainer
+              items={aspectsToRender.length}
+              deps={[
+                sceneManager.computed.playersWithCharacterSheets.length,
+                Object.keys(sceneManager.state.scene.aspects).length,
+                showCharacterCards,
+              ]}
+            >
+              {aspectsToRender.map((aspectId, index) => {
+                return (
+                  <Box
                     key={aspectId}
-                    data-cy={`scene.aspect.${index}`}
-                    id={`index-card-${aspectId}`}
-                    aspectId={aspectId}
-                    readonly={!isGM}
-                    sceneManager={sceneManager}
-                  />
-                </Box>
-              );
-            })}
-          </MagicGridContainer>
-        )}
-        {!hasAspects && (
-          <Box pt="6rem" textAlign="center">
-            {isGM ? (
-              <Typography variant="h6">
-                {t("play-route.click-on-the-")}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={css({
-                    margin: "0 .5rem",
-                  })}
-                  onClick={() => {
-                    sceneManager.actions.addAspect(AspectType.Aspect);
-                    logger.info("Scene:addAspectEmpty");
-                  }}
-                  endIcon={<AddCircleOutlineIcon />}
-                >
-                  {t("play-route.click-on-the-add-aspect-")}
-                </Button>
-                {t("play-route.click-on-the-add-aspect-button")}
-              </Typography>
-            ) : (
-              <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
-            )}
-          </Box>
-        )}
+                    className={cx(
+                      css({
+                        width: width,
+                        padding: "0 .5rem 1.5rem .5rem",
+                      })
+                    )}
+                  >
+                    <IndexCard
+                      key={aspectId}
+                      data-cy={`scene.aspect.${index}`}
+                      id={`index-card-${aspectId}`}
+                      aspectId={aspectId}
+                      readonly={!isGM}
+                      sceneManager={sceneManager}
+                    />
+                  </Box>
+                );
+              })}
+            </MagicGridContainer>
+          )}
+          {!hasAspects && (
+            <Box pt="6rem" textAlign="center">
+              {isGM ? (
+                <Typography variant="h6">
+                  {t("play-route.click-on-the-")}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={css({
+                      margin: "0 .5rem",
+                    })}
+                    onClick={() => {
+                      sceneManager.actions.addAspect(
+                        AspectType.Aspect,
+                        isPrivate
+                      );
+                      logger.info("Scene:addAspectEmpty");
+                    }}
+                    endIcon={<AddCircleOutlineIcon />}
+                  >
+                    {t("play-route.click-on-the-add-aspect-")}
+                  </Button>
+                  {t("play-route.click-on-the-add-aspect-button")}
+                </Typography>
+              ) : (
+                <Typography variant="h6">
+                  {t("play-route.no-aspects")}
+                </Typography>
+              )}
+            </Box>
+          )}
+        </Box>
+      </Box>
+    );
+  }
+
+  function renderTabs() {
+    if (!isGM) {
+      return null;
+    }
+
+    const tabClass = css({
+      textTransform: "none",
+    });
+    return (
+      <Box px=".5rem" pb="1rem">
+        <Paper
+          square
+          className={css({
+            color: theme.palette.getContrastText(
+              theme.palette.background.paper
+            ),
+            backgroundColor: theme.palette.background.paper,
+          })}
+        >
+          <Tabs
+            value={tab}
+            classes={{
+              indicator: css({
+                background: theme.palette.primary.main,
+              }),
+            }}
+            onChange={(e, newValue) => {
+              setTab(newValue);
+            }}
+          >
+            <Tab
+              value="public"
+              label={t("play-route.public")}
+              classes={{ root: tabClass }}
+              icon={<VisibilityIcon />}
+            />
+            <Tab
+              value="private"
+              label={t("play-route.private")}
+              classes={{ root: tabClass }}
+              icon={<VisibilityOffIcon />}
+            />
+          </Tabs>
+        </Paper>
       </Box>
     );
   }
@@ -793,7 +870,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-aspect"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.Aspect);
+                  sceneManager.actions.addAspect(AspectType.Aspect, isPrivate);
                   logger.info("Scene:onAddCard:Aspect");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -803,7 +880,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-boost"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.Boost);
+                  sceneManager.actions.addAspect(AspectType.Boost, isPrivate);
                   logger.info("Scene:onAddCard:Boost");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -813,7 +890,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-npc"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.NPC);
+                  sceneManager.actions.addAspect(AspectType.NPC, isPrivate);
                   logger.info("Scene:onAddCard:NPC");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -823,7 +900,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-bad-guy"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.BadGuy);
+                  sceneManager.actions.addAspect(AspectType.BadGuy, isPrivate);
                   logger.info("Scene:onAddCard:BadGuy");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -833,7 +910,10 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-index-card"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.IndexCard);
+                  sceneManager.actions.addAspect(
+                    AspectType.IndexCard,
+                    isPrivate
+                  );
                   logger.info("Scene:onAddCard:IndexCard");
                 }}
                 endIcon={<AddCircleOutlineIcon />}

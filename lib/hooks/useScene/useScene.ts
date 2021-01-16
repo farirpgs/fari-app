@@ -206,11 +206,11 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addAspect(type: AspectType) {
+  function addAspect(type: AspectType, isPrivate: boolean) {
     const id = uuidV4();
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id] = defaultAspects[type];
+        draft.aspects[id] = { ...defaultAspects[type], isPrivate: isPrivate };
       })
     );
     setTimeout(() => {
@@ -238,6 +238,14 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         draft.aspects[aspectId] = defaultAspects[draft.aspects[aspectId].type];
+      })
+    );
+  }
+
+  function setAspectIsPrivate(aspectId: string, isPrivate: boolean) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].isPrivate = isPrivate;
       })
     );
   }
@@ -679,6 +687,7 @@ export function useScene(props: IProps) {
       addAspect,
       removeAspect,
       resetAspect,
+      setAspectIsPrivate,
       updateAspectTitle,
       updateAspectContent,
       addAspectTrack,
@@ -729,6 +738,7 @@ const defaultAspect: IAspect = {
   pinned: false,
   hasDrawArea: false,
 };
+
 const defaultIndexCard: IAspect = {
   title: "",
   content: "<br/>",

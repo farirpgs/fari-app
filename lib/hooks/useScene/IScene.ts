@@ -26,9 +26,19 @@ export interface IAspect {
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
   drawAreaObjects?: IDrawAreaObjects;
-  hasDrawArea: boolean | undefined;
   type: AspectType;
+  /**
+   * @default false
+   */
+  hasDrawArea: boolean | undefined;
+  /**
+   * @default false
+   */
   pinned: boolean | undefined;
+  /**
+   * @default false
+   */
+  isPrivate?: boolean;
 }
 
 export interface IScene {
