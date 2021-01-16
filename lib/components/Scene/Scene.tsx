@@ -49,18 +49,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
   ICharacter,
-  useCharacters
+  useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes
+  useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
+import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { IPlayer } from "../../hooks/useScene/IScene";
@@ -153,7 +154,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const isGM = !props.idFromParams;
   const isOffline = props.mode === SceneMode.PlayOffline;
   const isPrivate = tab === "private";
-
+  const lightBackground = useLightBackground();
   const isGMHostingOnlineOrOfflineGame =
     props.mode !== SceneMode.Manage && isGM;
   const isGMEditingDirtyScene =
@@ -602,7 +603,7 @@ export const Scene: React.FC<IProps> = (props) => {
               })}
             </MagicGridContainer>
           </Box>
-          <Box pt="1rem" pb="2rem">
+          <Box pt="1rem" pb="2rem" px=".5rem">
             <Divider />
           </Box>
         </Collapse>
@@ -642,74 +643,83 @@ export const Scene: React.FC<IProps> = (props) => {
     const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
     return (
-      <Box pb="2rem">
-        {renderTabs()}
-        <Box>
-          {hasAspects && (
-            <MagicGridContainer
-              items={aspectsToRender.length}
-              deps={[
-                sceneManager.computed.playersWithCharacterSheets.length,
-                Object.keys(sceneManager.state.scene.aspects).length,
-                showCharacterCards,
-              ]}
-            >
-              {aspectsToRender.map((aspectId, index) => {
-                return (
-                  <Box
-                    key={aspectId}
-                    className={cx(
-                      css({
-                        width: width,
-                        padding: "0 .5rem 1.5rem .5rem",
-                      })
-                    )}
-                  >
-                    <IndexCard
-                      key={aspectId}
-                      data-cy={`scene.aspect.${index}`}
-                      id={`index-card-${aspectId}`}
-                      aspectId={aspectId}
-                      readonly={!isGM}
-                      sceneManager={sceneManager}
-                    />
-                  </Box>
-                );
-              })}
-            </MagicGridContainer>
-          )}
-          {!hasAspects && (
-            <Box pt="6rem" textAlign="center">
-              {isGM ? (
-                <Typography variant="h6">
-                  {t("play-route.click-on-the-")}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={css({
-                      margin: "0 .5rem",
-                    })}
-                    onClick={() => {
-                      sceneManager.actions.addAspect(
-                        AspectType.Aspect,
-                        isPrivate
-                      );
-                      logger.info("Scene:addAspectEmpty");
-                    }}
-                    endIcon={<AddCircleOutlineIcon />}
-                  >
-                    {t("play-route.click-on-the-add-aspect-")}
-                  </Button>
-                  {t("play-route.click-on-the-add-aspect-button")}
-                </Typography>
-              ) : (
-                <Typography variant="h6">
-                  {t("play-route.no-aspects")}
-                </Typography>
+      <Box pb="2rem" mx=".5rem">
+        <Paper
+          elevation={2}
+          className={css({
+            background: lightBackground,
+          })}
+        >
+          <Box>
+            {renderTabs()}
+            <Box pt="2rem" pb="1rem" px="1rem">
+              {hasAspects && (
+                <MagicGridContainer
+                  items={aspectsToRender.length}
+                  deps={[
+                    sceneManager.computed.playersWithCharacterSheets.length,
+                    Object.keys(sceneManager.state.scene.aspects).length,
+                    showCharacterCards,
+                  ]}
+                >
+                  {aspectsToRender.map((aspectId, index) => {
+                    return (
+                      <Box
+                        key={aspectId}
+                        className={cx(
+                          css({
+                            width: width,
+                            padding: "0 .5rem 1.5rem .5rem",
+                          })
+                        )}
+                      >
+                        <IndexCard
+                          key={aspectId}
+                          data-cy={`scene.aspect.${index}`}
+                          id={`index-card-${aspectId}`}
+                          aspectId={aspectId}
+                          readonly={!isGM}
+                          sceneManager={sceneManager}
+                        />
+                      </Box>
+                    );
+                  })}
+                </MagicGridContainer>
+              )}
+              {!hasAspects && (
+                <Box py="6rem" textAlign="center">
+                  {isGM ? (
+                    <Typography variant="h6">
+                      {t("play-route.click-on-the-")}
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={css({
+                          margin: "0 .5rem",
+                        })}
+                        onClick={() => {
+                          sceneManager.actions.addAspect(
+                            AspectType.Aspect,
+                            isPrivate
+                          );
+                          logger.info("Scene:addAspectEmpty");
+                        }}
+                        endIcon={<AddCircleOutlineIcon />}
+                      >
+                        {t("play-route.click-on-the-add-aspect-")}
+                      </Button>
+                      {t("play-route.click-on-the-add-aspect-button")}
+                    </Typography>
+                  ) : (
+                    <Typography variant="h6">
+                      {t("play-route.no-aspects")}
+                    </Typography>
+                  )}
+                </Box>
               )}
             </Box>
-          )}
-        </Box>
+          </Box>
+        </Paper>
       </Box>
     );
   }
@@ -723,41 +733,34 @@ export const Scene: React.FC<IProps> = (props) => {
       textTransform: "none",
     });
     return (
-      <Box px=".5rem" pb="1rem">
-        <Paper
-          square
-          className={css({
-            color: theme.palette.getContrastText(
-              theme.palette.background.paper
-            ),
-            backgroundColor: theme.palette.background.paper,
-          })}
+      <Box>
+        <Tabs
+          value={tab}
+          classes={{
+            root: css({
+              borderBottom: `1px solid ${theme.palette.divider}`,
+            }),
+            indicator: css({
+              background: theme.palette.primary.main,
+            }),
+          }}
+          onChange={(e, newValue) => {
+            setTab(newValue);
+          }}
         >
-          <Tabs
-            value={tab}
-            classes={{
-              indicator: css({
-                background: theme.palette.primary.main,
-              }),
-            }}
-            onChange={(e, newValue) => {
-              setTab(newValue);
-            }}
-          >
-            <Tab
-              value="public"
-              label={t("play-route.public")}
-              classes={{ root: tabClass }}
-              icon={<VisibilityIcon />}
-            />
-            <Tab
-              value="private"
-              label={t("play-route.private")}
-              classes={{ root: tabClass }}
-              icon={<VisibilityOffIcon />}
-            />
-          </Tabs>
-        </Paper>
+          <Tab
+            value="public"
+            label={t("play-route.public")}
+            classes={{ root: tabClass }}
+            icon={<VisibilityIcon />}
+          />
+          <Tab
+            value="private"
+            label={t("play-route.private")}
+            classes={{ root: tabClass }}
+            icon={<VisibilityOffIcon />}
+          />
+        </Tabs>
       </Box>
     );
   }
