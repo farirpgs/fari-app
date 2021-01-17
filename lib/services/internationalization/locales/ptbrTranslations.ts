@@ -130,6 +130,7 @@ export const ptbrTranslation: Record<
   "play-route.error.webRTC": `O navegador que você está usando atualmente não é compatível com Fari para usar suas funcionalidades online. Escolha um navegador diferente, como Google Chrome ou Firefox.`,
   "play-route.fate-points": `Pontos de Destino`,
   "play-route.fp": `P.D.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Grupo`,
   "play-route.init": `Iniciativa`,
   "play-route.initiative-tracker": `Acompanhamento de Iniciativa`,

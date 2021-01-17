@@ -126,6 +126,7 @@ export const enTranslation = {
   "play-route.error.webRTC": `The browser you are currently using is not supported by Fari to use its online functionalities. Please choose a different browser like Google Chrome or Firefox.`,
   "play-route.fate-points": `Fate Points`,
   "play-route.fp": `F.P.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Group`,
   "play-route.init": `Init`,
   "play-route.initiative-tracker": `Initiative Tracker`,

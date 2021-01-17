@@ -659,6 +659,14 @@ export function useScene(props: IProps) {
     );
   }
 
+  function setNotes(notes: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.notes = notes;
+      })
+    );
+  }
+
   function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setScene(
       produce((draft: IScene) => {
@@ -720,6 +728,7 @@ export function useScene(props: IProps) {
       updatePlayerCharacterWithHiddenFields,
       updateDrawAreaObjects,
       toggleAspectPinned,
+      setNotes,
     },
     _: {
       removedPlayers,

@@ -31,6 +31,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import BorderColorIcon from "@material-ui/icons/BorderColor";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
@@ -45,6 +46,8 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import TabContext from "@material-ui/lab/TabContext";
+import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import {
@@ -148,7 +151,7 @@ export const Scene: React.FC<IProps> = (props) => {
     string | undefined
   >(undefined);
   const [showCharacterCards, setShowCharacterCards] = useState(true);
-  const [tab, setTab] = useState<"public" | "private">("public");
+  const [tab, setTab] = useState<"public" | "private" | "gm-notes">("public");
   const [savedSnack, setSavedSnack] = useState(false);
 
   const isGM = !props.idFromParams;
@@ -181,6 +184,8 @@ export const Scene: React.FC<IProps> = (props) => {
     ...sceneManager.state.scene.players,
   ];
 
+  const liveMode = getLiveMode();
+
   function onLoadScene(newScene: ISavableScene) {
     sceneManager.actions.loadScene(newScene, true);
   }
@@ -210,8 +215,6 @@ export const Scene: React.FC<IProps> = (props) => {
       });
     }
   }
-
-  const liveMode = getLiveMode();
 
   return (
     <Page
@@ -273,7 +276,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 {renderCharacterCards()}
-                {renderAspects()}
+                {renderContent()}
               </Grid>
             </Grid>
           ) : (
@@ -283,7 +286,7 @@ export const Scene: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item xs={12} md={7} lg={9}>
                 {renderCharacterCards()}
-                {renderAspects()}
+                {renderContent()}
               </Grid>
             </Grid>
           )}
@@ -611,6 +614,64 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
+  function renderContent() {
+    const tabPanelStyle = css({ padding: "0" });
+    return (
+      <Box pb="2rem" mx=".5rem">
+        <Paper
+          elevation={2}
+          className={css({
+            background: lightBackground,
+          })}
+        >
+          <Box>
+            <TabContext value={tab}>
+              {renderTabs()}
+
+              <TabPanel value={"public"} className={tabPanelStyle}>
+                {renderAspects()}
+              </TabPanel>
+              <TabPanel value={"private"} className={tabPanelStyle}>
+                {renderAspects()}
+              </TabPanel>
+              <TabPanel value={"gm-notes"} className={tabPanelStyle}>
+                {renderGmNotes()}
+              </TabPanel>
+            </TabContext>
+          </Box>
+        </Paper>
+      </Box>
+    );
+  }
+
+  function renderGmNotes() {
+    return (
+      <Box py="2rem" px="1rem">
+        <Grid container>
+          <Grid item xs={12} sm={6}>
+            <Paper>
+              <Box p="2rem">
+                <Box pb="1rem">
+                  <FateLabel variant="h6">{t("play-route.gm-notes")}</FateLabel>
+                </Box>
+                <Box>
+                  <ContentEditable
+                    autoFocus
+                    placeholder={"Scene Notes..."}
+                    value={sceneManager.state.scene.notes ?? ""}
+                    onChange={(newNotes) => {
+                      sceneManager.actions.setNotes(newNotes);
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
+
   function renderAspects() {
     const aspectIdsToShow = Object.keys(
       sceneManager.state.scene.aspects
@@ -643,83 +704,69 @@ export const Scene: React.FC<IProps> = (props) => {
     const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
     return (
-      <Box pb="2rem" mx=".5rem">
-        <Paper
-          elevation={2}
-          className={css({
-            background: lightBackground,
-          })}
-        >
-          <Box>
-            {renderTabs()}
-            <Box pt="2rem" pb="1rem" px="1rem">
-              {hasAspects && (
-                <MagicGridContainer
-                  items={aspectsToRender.length}
-                  deps={[
-                    sceneManager.computed.playersWithCharacterSheets.length,
-                    Object.keys(sceneManager.state.scene.aspects).length,
-                    showCharacterCards,
-                  ]}
-                >
-                  {aspectsToRender.map((aspectId, index) => {
-                    return (
-                      <Box
-                        key={aspectId}
-                        className={cx(
-                          css({
-                            width: width,
-                            padding: "0 .5rem 1.5rem .5rem",
-                          })
-                        )}
-                      >
-                        <IndexCard
-                          key={aspectId}
-                          data-cy={`scene.aspect.${index}`}
-                          id={`index-card-${aspectId}`}
-                          aspectId={aspectId}
-                          readonly={!isGM}
-                          sceneManager={sceneManager}
-                        />
-                      </Box>
-                    );
-                  })}
-                </MagicGridContainer>
-              )}
-              {!hasAspects && (
-                <Box py="6rem" textAlign="center">
-                  {isGM ? (
-                    <Typography variant="h6">
-                      {t("play-route.click-on-the-")}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={css({
-                          margin: "0 .5rem",
-                        })}
-                        onClick={() => {
-                          sceneManager.actions.addAspect(
-                            AspectType.Aspect,
-                            isPrivate
-                          );
-                          logger.info("Scene:addAspectEmpty");
-                        }}
-                        endIcon={<AddCircleOutlineIcon />}
-                      >
-                        {t("play-route.click-on-the-add-aspect-")}
-                      </Button>
-                      {t("play-route.click-on-the-add-aspect-button")}
-                    </Typography>
-                  ) : (
-                    <Typography variant="h6">
-                      {t("play-route.no-aspects")}
-                    </Typography>
+      <Box pt="2rem" pb="1rem" px="1rem">
+        {hasAspects && (
+          <MagicGridContainer
+            items={aspectsToRender.length}
+            deps={[
+              sceneManager.computed.playersWithCharacterSheets.length,
+              Object.keys(sceneManager.state.scene.aspects).length,
+              showCharacterCards,
+            ]}
+          >
+            {aspectsToRender.map((aspectId, index) => {
+              return (
+                <Box
+                  key={aspectId}
+                  className={cx(
+                    css({
+                      width: width,
+                      padding: "0 .5rem 1.5rem .5rem",
+                    })
                   )}
+                >
+                  <IndexCard
+                    key={aspectId}
+                    data-cy={`scene.aspect.${index}`}
+                    id={`index-card-${aspectId}`}
+                    aspectId={aspectId}
+                    readonly={!isGM}
+                    sceneManager={sceneManager}
+                  />
                 </Box>
-              )}
-            </Box>
+              );
+            })}
+          </MagicGridContainer>
+        )}
+        {!hasAspects && (
+          <Box py="6rem" textAlign="center">
+            {isGM ? (
+              <Typography variant="h6">
+                {t("play-route.click-on-the-")}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={css({
+                    margin: "0 .5rem",
+                  })}
+                  onClick={() => {
+                    sceneManager.actions.addAspect(
+                      AspectType.Aspect,
+                      isPrivate
+                    );
+                    logger.info("Scene:addAspectEmpty");
+                  }}
+                  endIcon={<AddCircleOutlineIcon />}
+                >
+                  {t("play-route.click-on-the-add-aspect-")}
+                </Button>
+                {t("play-route.click-on-the-add-aspect-button")}
+              </Typography>
+            ) : (
+              <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
+            )}
           </Box>
-        </Paper>
+        )}
       </Box>
     );
   }
@@ -759,6 +806,12 @@ export const Scene: React.FC<IProps> = (props) => {
             label={t("play-route.private")}
             classes={{ root: tabClass }}
             icon={<VisibilityOffIcon />}
+          />
+          <Tab
+            value="gm-notes"
+            label={t("play-route.gm-notes")}
+            classes={{ root: tabClass }}
+            icon={<BorderColorIcon />}
           />
         </Tabs>
       </Box>
@@ -1039,6 +1092,7 @@ export const Scene: React.FC<IProps> = (props) => {
       </>
     );
   }
+
   function renderPlayerSceneActions() {
     if (isGM) {
       return null;
@@ -1208,5 +1262,4 @@ export const Scene: React.FC<IProps> = (props) => {
     return LiveMode.Live;
   }
 };
-
 Scene.displayName = "Scene";

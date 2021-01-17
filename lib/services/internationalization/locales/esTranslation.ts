@@ -130,6 +130,7 @@ export const esTranslation: Record<
   "play-route.error.webRTC": `Fari no admite el navegador que está utilizando actualmente para utilizar sus funcionalidades en línea. Elija un navegador diferente como Google Chrome o Firefox.`,
   "play-route.fate-points": `Puntos Fate`,
   "play-route.fp": `P.F.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Grupo`,
   "play-route.init": `Inic`,
   "play-route.initiative-tracker": `Contador de Iniciativa`,

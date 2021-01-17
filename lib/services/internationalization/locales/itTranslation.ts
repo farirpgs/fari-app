@@ -131,6 +131,7 @@ export const itTranslation: Record<
   "play-route.error.webRTC": `Il browser che stai usando non è supportato da Fari per utilizzare le sue funzionalità online. Per favore scegli un browser diverso come Google Chrome o Firefox.`,
   "play-route.fate-points": `Punti Fato`,
   "play-route.fp": `P.F.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Gruppo`,
   "play-route.init": `Iniziativa`,
   "play-route.initiative-tracker": `Gestore dell'Iniziativa`,

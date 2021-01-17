@@ -54,4 +54,5 @@ export interface IScene {
   drawAreaObjects: IDrawAreaObjects;
   version: number;
   lastUpdated: number;
+  notes?: string;
 }

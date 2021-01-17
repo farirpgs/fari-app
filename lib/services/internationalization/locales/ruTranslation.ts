@@ -130,6 +130,7 @@ export const ruTranslation: Record<
   "play-route.error.webRTC": `The browser you are currently using is not supported by Fari to use its online functionalities. Please choose a different browser like Google Chrome or Firefox.`,
   "play-route.fate-points": `Жетоны Судьбы`,
   "play-route.fp": `F.P.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `группа`,
   "play-route.init": `Init`,
   "play-route.initiative-tracker": `Трекер Инициативы`,

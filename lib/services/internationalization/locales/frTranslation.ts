@@ -130,6 +130,7 @@ export const frTranslation: Record<
   "play-route.error.webRTC": `Le navigateur que vous utilisez actuellement n'est pas pris en charge par Fari pour utiliser ses fonctionnalités en ligne. Veuillez choisir un autre navigateur comme Google Chrome ou Firefox.`,
   "play-route.fate-points": `Points Fate`,
   "play-route.fp": `P.F.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Groupe`,
   "play-route.init": `Init`,
   "play-route.initiative-tracker": `Initiative`,
