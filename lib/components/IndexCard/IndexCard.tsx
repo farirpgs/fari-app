@@ -143,7 +143,7 @@ export const IndexCard: React.FC<
                 <Tooltip title={t("index-card.reset")}>
                   <IconButton
                     size="small"
-                    data-cy={`${props["data-cy"]}.menu.reset`}
+                    data-cy={`${props["data-cy"]}.reset`}
                     onClick={() => {
                       props.sceneManager.actions.resetAspect(props.aspectId);
                     }}
@@ -157,7 +157,7 @@ export const IndexCard: React.FC<
                 <IconButton
                   size="small"
                   ref={$paletteButton}
-                  data-cy={`${props["data-cy"]}.menu.reset`}
+                  data-cy={`${props["data-cy"]}.color`}
                   onClick={() => {
                     setColorPickerOpen(true);
                   }}
@@ -212,7 +212,7 @@ export const IndexCard: React.FC<
                 <Tooltip title={t("index-card.remove")}>
                   <IconButton
                     size="small"
-                    data-cy={`${props["data-cy"]}.menu.remove`}
+                    data-cy={`${props["data-cy"]}.remove`}
                     onClick={() => {
                       props.sceneManager.actions.removeAspect(props.aspectId);
                     }}

@@ -33,11 +33,11 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.menu.consequence").click();
       Fari.get("scene.aspect.0.menu.track").click();
 
-      Fari.get("scene.aspect.0.menu.color.blue").click();
-      Fari.get("scene.aspect.0.menu.color.green").click();
-      Fari.get("scene.aspect.0.menu.color.red").click();
-      Fari.get("scene.aspect.0.menu.color.white").click();
-      Fari.get("scene.aspect.0.menu.color.yellow").click();
+      // Fari.get("scene.aspect.0.menu.color.blue").click();
+      // Fari.get("scene.aspect.0.menu.color.green").click();
+      // Fari.get("scene.aspect.0.menu.color.red").click();
+      // Fari.get("scene.aspect.0.menu.color.white").click();
+      // Fari.get("scene.aspect.0.menu.color.yellow").click();
 
       // close backdrop
       Fari.closeBackdrop();
@@ -71,9 +71,8 @@ describe("/scenes", () => {
       Fari.get("scene.sort").click();
 
       // remove second
-      Fari.get("scene.aspect.1.menu").click();
-      Fari.get("scene.aspect.1.menu.reset").click();
-      Fari.get("scene.aspect.1.menu.remove").click();
+      Fari.get("scene.aspect.1.reset").click();
+      Fari.get("scene.aspect.1.remove").click();
 
       // initiative
       Fari.get("scene.aspect.1.initiative").click();
