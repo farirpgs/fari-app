@@ -157,7 +157,7 @@ export const IndexCard: React.FC<
                 <IconButton
                   size="small"
                   ref={$paletteButton}
-                  data-cy={`${props["data-cy"]}.color`}
+                  data-cy={`${props["data-cy"]}.palette`}
                   onClick={() => {
                     setColorPickerOpen(true);
                   }}
@@ -203,6 +203,7 @@ export const IndexCard: React.FC<
                         props.aspectId,
                         newColor
                       );
+                      setColorPickerOpen(false);
                     }}
                   />
                 </Popover>
