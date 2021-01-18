@@ -150,7 +150,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
     string | undefined
   >(undefined);
-  const [showCharacterCards, setShowCharacterCards] = useState(true);
+
   const [tab, setTab] = useState<"public" | "private" | "gm-notes">("public");
   const [savedSnack, setSavedSnack] = useState(false);
 
@@ -270,11 +270,10 @@ export const Scene: React.FC<IProps> = (props) => {
     return (
       <Fade in>
         <Box>
-          {renderHeader()}
-
           {props.mode === SceneMode.Manage ? (
             <Grid container spacing={2}>
               <Grid item xs={12}>
+                {renderHeader()}
                 {renderCharacterCards()}
                 {renderContent()}
               </Grid>
@@ -285,6 +284,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 {renderSidePanel()}
               </Grid>
               <Grid item xs={12} md={7} lg={9}>
+                {renderHeader()}
                 {renderCharacterCards()}
                 {renderContent()}
               </Grid>
@@ -574,14 +574,13 @@ export const Scene: React.FC<IProps> = (props) => {
 
     return (
       <>
-        <Collapse in={showCharacterCards && hasPlayersWithCharacterSheets}>
+        <Collapse in={hasPlayersWithCharacterSheets}>
           <Box>
             <MagicGridContainer
               items={playersWithCharacterSheets.length}
               deps={[
                 playersWithCharacterSheets.length,
                 Object.keys(sceneManager.state.scene.aspects).length,
-                showCharacterCards,
               ]}
             >
               {playersWithCharacterSheets.map((player, index) => {
@@ -705,13 +704,14 @@ export const Scene: React.FC<IProps> = (props) => {
 
     return (
       <Box pt="2rem" pb="1rem" px="1rem">
+        <Box>{renderGMAspectActions()}</Box>
+
         {hasAspects && (
           <MagicGridContainer
             items={aspectsToRender.length}
             deps={[
               sceneManager.computed.playersWithCharacterSheets.length,
               Object.keys(sceneManager.state.scene.aspects).length,
-              showCharacterCards,
             ]}
           >
             {aspectsToRender.map((aspectId, index) => {
@@ -740,31 +740,7 @@ export const Scene: React.FC<IProps> = (props) => {
         )}
         {!hasAspects && (
           <Box py="6rem" textAlign="center">
-            {isGM ? (
-              <Typography variant="h6">
-                {t("play-route.click-on-the-")}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={css({
-                    margin: "0 .5rem",
-                  })}
-                  onClick={() => {
-                    sceneManager.actions.addAspect(
-                      AspectType.Aspect,
-                      isPrivate
-                    );
-                    logger.info("Scene:addAspectEmpty");
-                  }}
-                  endIcon={<AddCircleOutlineIcon />}
-                >
-                  {t("play-route.click-on-the-add-aspect-")}
-                </Button>
-                {t("play-route.click-on-the-add-aspect-button")}
-              </Typography>
-            ) : (
-              <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
-            )}
+            <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
           </Box>
         )}
       </Box>
@@ -821,8 +797,12 @@ export const Scene: React.FC<IProps> = (props) => {
   function renderHeader() {
     return (
       <Box pb="2rem">
+        <Box>
+          <Container maxWidth="sm">
+            <Box>{renderManagementActions()}</Box>
+          </Container>
+        </Box>
         <Box pb="2rem">
-          {renderManagementActions()}
           <Container maxWidth="sm">
             <Box mb=".5rem">
               <FateLabel
@@ -900,11 +880,10 @@ export const Scene: React.FC<IProps> = (props) => {
             </Collapse>
           </Container>
         </Box>
-
         <Box>
-          {renderGMAspectActions()}
-          {renderGMSceneActions()}
-          {renderPlayerSceneActions()}
+          <Container maxWidth="sm">
+            <Box>{renderGMSceneActions()}</Box>
+          </Container>
         </Box>
       </Box>
     );
@@ -915,7 +894,7 @@ export const Scene: React.FC<IProps> = (props) => {
       return null;
     }
     return (
-      <Box pb="1rem">
+      <Box pb="2rem">
         <Grid container spacing={1} justify="center">
           <Grid item>
             <ButtonGroup
@@ -989,7 +968,7 @@ export const Scene: React.FC<IProps> = (props) => {
     }
     return (
       <Box pb="1rem">
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={1} justify="center" alignItems="center">
           {props.mode === SceneMode.PlayOnline && (
             <Grid item>
               <Button
@@ -1034,21 +1013,6 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.sort")}
             </Button>
           </Grid>
-          {props.mode !== SceneMode.Manage && (
-            <Grid item>
-              <Button
-                onClick={() => {
-                  setShowCharacterCards((s) => !s);
-                  logger.info("Scene:onShowCharacterCards");
-                }}
-                variant="outlined"
-                color={showCharacterCards ? "secondary" : "default"}
-                endIcon={<SortIcon />}
-              >
-                {t("play-route.show-character-cards")}
-              </Button>
-            </Grid>
-          )}
         </Grid>
       </Box>
     );
@@ -1090,31 +1054,6 @@ export const Scene: React.FC<IProps> = (props) => {
           </span>
         </Tooltip>
       </>
-    );
-  }
-
-  function renderPlayerSceneActions() {
-    if (isGM) {
-      return null;
-    }
-    return (
-      <Box pb="1rem">
-        <Grid container spacing={1} justify="center">
-          <Grid item>
-            <Button
-              onClick={() => {
-                setShowCharacterCards((s) => !s);
-                logger.info("Scene:onShowCharacterCards");
-              }}
-              variant="outlined"
-              color={showCharacterCards ? "secondary" : "default"}
-              endIcon={<SortIcon />}
-            >
-              {t("play-route.show-character-cards")}
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
     );
   }
 

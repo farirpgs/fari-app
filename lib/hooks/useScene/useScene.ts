@@ -72,8 +72,9 @@ export function useScene(props: IProps) {
       name: scene.name,
       group: scene.group,
       aspects: scene.aspects,
-      version: scene.version,
+      notes: scene.notes,
       lastUpdated: scene.lastUpdated,
+      version: scene.version,
     };
     return !isEqual(sceneToLoad, currentScene);
   }, [scene, sceneToLoad]);
@@ -86,6 +87,7 @@ export function useScene(props: IProps) {
           draft.name = sceneToLoad.name;
           draft.group = sceneToLoad.group;
           draft.aspects = sceneToLoad.aspects;
+          draft.notes = sceneToLoad.notes;
           draft.version = sceneToLoad.version;
           draft.lastUpdated = sceneToLoad.lastUpdated;
         })
@@ -148,6 +150,7 @@ export function useScene(props: IProps) {
         name: newScene.name,
         group: newScene.group,
         aspects: aspects,
+        notes: newScene.notes,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
       });
