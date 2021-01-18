@@ -306,6 +306,7 @@ export const Doc: React.FC<{
           <Button
             startIcon={<NavigateBeforeIcon />}
             color="primary"
+            data-cy="doc.previous"
             onClick={() => {
               goTo(previousH1?.id);
             }}
@@ -318,6 +319,7 @@ export const Doc: React.FC<{
           <Button
             endIcon={<NavigateNextIcon />}
             color="primary"
+            data-cy="doc.next"
             onClick={() => {
               goTo(nextH1?.id);
             }}
@@ -395,6 +397,8 @@ export const Doc: React.FC<{
                 dense
                 component={Link}
                 to={`${props.url}/${h1.page.id}`}
+                data-cy={`doc.table-of-content.h1`}
+                data-cy-page-id={h1.page.id}
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
@@ -424,7 +428,10 @@ export const Doc: React.FC<{
                   </>
                 )}
               </ListItem>
-              <Collapse in={isSubSectionOpen}>
+              <Collapse
+                in={isSubSectionOpen}
+                data-cy={`doc.table-of-content.${h1.page.id}.h2s`}
+              >
                 {h1.children.map((h2, h2Index) => {
                   return (
                     <ListItem
@@ -433,6 +440,8 @@ export const Doc: React.FC<{
                       key={h2Index}
                       component={Link}
                       to={`#${h2.id}`}
+                      data-cy={`doc.table-of-content.h2`}
+                      data-cy-page-id={h2.id}
                       onClick={() => {
                         window.location.hash = h2.id;
                         setMobileMenuOpen(false);
