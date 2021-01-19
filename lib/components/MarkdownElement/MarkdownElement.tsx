@@ -111,7 +111,7 @@ const styles = (theme: Theme) => {
         marginBottom: "1rem",
       },
       "& h5": {
-        ...theme.typography.h6,
+        ...theme.typography.subtitle1,
         scrollMarginTop: `${scrollMarginTop}px`,
         display: "flex",
         alignItems: "center",
@@ -122,7 +122,7 @@ const styles = (theme: Theme) => {
         marginBottom: "1rem",
       },
       "& h6": {
-        ...theme.typography.h6,
+        ...theme.typography.subtitle2,
         scrollMarginTop: `${scrollMarginTop}px`,
         display: "flex",
         alignItems: "center",
