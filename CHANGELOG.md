@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.5 Resources, Private Aspects and Scene Notes
+
+#### January 19th, 2020
+
+- feat: SRDs Document
+- feat: Scene Checklist Document
+- feat: Stunts Document
+- feat: Cheatsheet Document
+- feat: Public and Private index cards for scenes
+- feat: Private GM notes for scenes
+
 ## v3.4 Join screen UX, Italian translations
 
 #### January 5th, 2021

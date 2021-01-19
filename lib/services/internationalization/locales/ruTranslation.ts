@@ -1,3 +1,6 @@
+/**
+ * @author https://github.com/hattivatt
+ */
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
@@ -41,6 +44,7 @@ export const ruTranslation: Record<
   "common.language.de": `Немецкий`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.gl": `Galego`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
   "common.language.it": `Italiano`,

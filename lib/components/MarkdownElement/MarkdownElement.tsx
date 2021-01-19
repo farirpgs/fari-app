@@ -147,14 +147,15 @@ const styles = (theme: Theme) => {
         // Trade display table for scroll overflow
         "display": "block",
         "wordBreak": "normal",
-        "width": "100%",
+        "width": "fit-content",
+        // "boxShadow": theme.shadows[4],
+        "border": `1px solid ${theme.palette.primary.main}`,
         "overflowX": "auto",
         "WebkitOverflowScrolling": "touch",
         "borderCollapse": "collapse",
         "marginBottom": "16px",
         "borderSpacing": 0,
         "overflow": "hidden",
-
         "& .prop-name": {
           fontSize: 13,
           fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
@@ -173,12 +174,20 @@ const styles = (theme: Theme) => {
           borderBottom: `1px dotted ${theme.palette.divider}`,
         },
       },
-      "& thead tr": {
-        borderBottom: `2px solid ${theme.palette.primary.main}`,
+      "& thead": {
+        "& tr": {
+          "background": theme.palette.primary.main,
+          "borderBottom": `2px solid ${theme.palette.primary.main}`,
+          "& th": {
+            color: theme.palette.getContrastText(theme.palette.primary.main),
+          },
+        },
       },
-      "& tbody tr": {
-        "&:nth-child(even)": { background: "transparent" },
-        "&:nth-child(odd)": { background: lightBackground },
+      "& tbody": {
+        "& tr": {
+          "&:nth-child(even)": { background: "transparent" },
+          "&:nth-child(odd)": { background: lightBackground },
+        },
       },
       "& td": {
         ...theme.typography.body2,
