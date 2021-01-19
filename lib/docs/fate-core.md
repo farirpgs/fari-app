@@ -13,6 +13,24 @@ This book uses the OGL version of this text. License found at the end of this do
 
 -->
 
+# Fate Core 
+
+Grab your plasma rifles, spell components, and jetpacks! Name your game; **Fate Core** is the foundation that can make it happen. **Fate Core** is a flexible system that can support whatever worlds you dream up.
+
+Have you always wanted to play a post-apocalyptic spaghetti western with tentacle monsters? Swords and sorcery in space? Wish there was a game based on your favorite series of books, film, or television, but it never happened? **Fate Core** is your answer.
+
+**Fate Core** is a tabletop roleplaying game about proactive, capable people who lead dramatic lives. Create your characters and develop instant group dynamics with our unique phased char gen system. Use those characters as a springboard to storytelling in our GM worldbuilding chapters.
+
+For the Fate-familiar, take advantage of the new and improved approaches to character actions, aspects, compels, and more. With **Fate Core**, your story is up to you. But whatever you choose, you can expect a fun storytelling experience full of twists…of fate.
+
+<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
+
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
+
 # The Basics
 
 ## Welcome To Fate
@@ -22,6 +40,8 @@ If you’ve never played a roleplaying game before, here’s the basic idea: you
 It’s not all just conversation, though—sometimes you’ll use dice and the rules in this book to bring uncertainty into the story and make things more exciting.
 
 Fate doesn’t come with a default setting, but it works best with any premise where the characters are proactive, capable people leading dramatic lives. We give more advice on how to bring that flavor to your games in the next chapter.
+
+<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
 
 > ### New To Fate
 >
@@ -137,10 +157,10 @@ When you need to roll dice in Fate, pick up four Fate dice and roll them. When y
 
 Here are some sample dice totals:
 
-- -+0+ = +1
-- +-00 =
-- +++- = +2
-- -000 = −1
+- <fate>-+0+</fate> = +1
+- <fate>+-00</fate> =
+- <fate>+++-</fate> = +2
+- <fate>-000</fate> = −1
 
 The result on the dice isn’t your final total, however. If your character has a skill that’s appropriate to the action, you get to add your character’s rating in that skill to whatever you rolled.
 
@@ -186,7 +206,7 @@ When you beat a roll or a set obstacle, the difference between your opposition a
 >
 > Lenny sighs and says, “Well, I’ve got Athletics at Good (+3), so I’ll try dodging and weaving through them to cross the hall.”
 >
-> He takes up the dice and rolls, getting -+++, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
+> He takes up the dice and rolls, getting <fate>-+++</fate>, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
 >
 > Amanda says, “Well, it takes equal parts acrobatics and frantic stumbling, but you manage to make it through to the other side with only some cosmetic tears in your tunic to show for it. The mechanism shows no sign of stopping, though—you’ll still have to deal with it on your way out.”
 >
@@ -1976,7 +1996,7 @@ That’s when it’s time to take out the dice.
 
 - Choose the character’s skill that is appropriate to the action.
 - Roll four Fate dice.
-- Add together the symbols showing on the dice. A `+` is +1, a `-` is –1, and a `0` is 0.
+- Add together the symbols showing on the dice. A <fate>+</fate> is +1, a <fate>-</fate> is –1, and a <fate>0</fate> is 0.
 - Add your skill rating to the dice roll. The total is your result on the ladder.
 - If you invoke an aspect, add +2 to your result or reroll the dice.
 
@@ -1984,7 +2004,7 @@ That’s when it’s time to take out the dice.
 >
 > Lily looks through Cynere’s skill list and picks Resources as her skill, hoping she can scrounge enough out of her coin purse to satisfy them. Her Resources skill is Average (+1), so she’ll add one to whatever result she gets from rolling the dice.
 >
-> She rolls and gets: +-0+
+> She rolls and gets: <fate>+-0+</fate>
 >
 > Her total result is +2 (+1 from her dice and +1 from her skill of Average), which corresponds to a Fair on the ladder.
 
@@ -1994,7 +2014,7 @@ As we said in The Basics, whenever you roll the dice, you’re comparing your ro
 
 > Amanda decides to roll active opposition against Lily on behalf of the guards. She decides the most appropriate opposing skill is Will—they’re trying to resist the temptation of bribery, after all.
 >
-> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: ++0+
+> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: <fate>++0+</fate>
 >
 > ...for an incredibly lucky result of +3!
 >

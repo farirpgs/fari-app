@@ -4,8 +4,11 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { SrdImport } from "../../routes/SrdRoute/constants/SrdImport";
+import { Images } from "../../constants/Images";
+import { DocImport } from "../../docs/DocImport";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
+import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -17,9 +20,7 @@ const BlogPostRoute = React.lazy(
 const BlogPostsRoute = React.lazy(
   () => import("../../routes/BlogPosts/BlogPostsRoute")
 );
-const ChangelogRoute = React.lazy(
-  () => import("../../routes/ChangeLog/ChangeLogRoute")
-);
+
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
@@ -34,7 +35,6 @@ const PlayOfflineRoute = React.lazy(
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
-const SrdRoute = React.lazy(() => import("../../routes/SrdRoute/SrdRoute"));
 
 export const LoadingRoute: React.FC = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -64,6 +64,7 @@ export const LoadingRoute: React.FC = (props) => {
 };
 
 export const AppRouter = () => {
+  const { t } = useTranslate();
   return (
     <Suspense fallback={<LoadingRoute />}>
       <Switch>
@@ -131,11 +132,31 @@ export const AppRouter = () => {
           exact
           path={"/srds/condensed/:page?"}
           render={(props) => (
-            <SrdRoute
-              {...props}
-              prefix="/srds/condensed"
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/condensed"
+              parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Condensed"
-              loadFunction={SrdImport.Condensed}
+              imageUrl={Images.condensed}
+              loadFunction={DocImport.FateCondensed}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-condensed",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-condensed",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/302571/Fate-Condensed",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -143,11 +164,31 @@ export const AppRouter = () => {
           exact
           path={"/srds/core/:page?"}
           render={(props) => (
-            <SrdRoute
-              {...props}
-              prefix="/srds/core"
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/core"
+              parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Core"
-              loadFunction={SrdImport.Core}
+              imageUrl={Images.core}
+              loadFunction={DocImport.FateCore}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-core/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-core",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/114903/Fate-Core-System",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -155,11 +196,265 @@ export const AppRouter = () => {
           exact
           path={"/srds/accelerated/:page?"}
           render={(props) => (
-            <SrdRoute
-              {...props}
-              prefix="/srds/accelerated"
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/accelerated"
+              parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Accelerated"
-              loadFunction={SrdImport.Accelerated}
+              imageUrl={Images.accelerated}
+              loadFunction={DocImport.FateAccelerated}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fae/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-accelerated",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/114902/Fate-Accelerated-Edition-o-A-Fate-Core-Build",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/system-toolkit/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/system-toolkit"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate System Toolkit"
+              imageUrl={Images.systemToolkit}
+              loadFunction={DocImport.FateSystemToolkit}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-system-toolkit/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-system-toolkit",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/119385/Fate-System-Toolkit",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/srds/adversary-toolkit/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/adversary-toolkit"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate Adversary Toolkit"
+              imageUrl={Images.adversaryToolkit}
+              loadFunction={DocImport.FateAdversaryToolkit}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/home/fate-adversary-toolkit/",
+                  },
+                  {
+                    label: "Itch.io",
+                    url: "https://evilhat.itch.io/fate-adversary-toolkit",
+                  },
+                  {
+                    label: "Drive Thru",
+                    url:
+                      "https://www.drivethrurpg.com/product/219203/Fate-Adversary-Toolkit",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/changelog/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/changelog"
+              parent={{ title: "Fari", url: "/" }}
+              title="Changelog"
+              loadFunction={DocImport.Changelog}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/fate-stunts/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/fate-stunts"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Fate Stunts"
+              imageUrl={Images.book}
+              loadFunction={DocImport.FateStunts}
+              author={{
+                title: "Evil Hat Productions",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://www.evilhat.com/",
+                  },
+                  {
+                    label: "Wiki",
+                    url: "http://evilhat.wikidot.com/fate-core-stunts",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/seelie-squire/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/seelie-squire"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Seelie Squire's Book Of Creatures"
+              imageUrl={Images.seelieSquire}
+              loadFunction={DocImport.SeelieSquire}
+              author={{
+                title: "Seelie Squire",
+                avatarUrl: Images.seelieSquireAvatar,
+                items: [
+                  {
+                    label: "Patreon",
+                    url: "https://www.patreon.com/seeliesquire",
+                  },
+                  {
+                    label: "Discord",
+                    url: "https://discord.com/invite/8u3VVZd",
+                  },
+                  {
+                    label: "Reddit",
+                    url: "https://www.reddit.com/r/seeliesquire/",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/scene-checklist/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/scene-checklist"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Scene Checklist"
+              loadFunction={DocImport.SceneCheckist}
+              imageUrl={Images.scene}
+              author={{
+                title: "LAURENCE MACNAUGHTON",
+                items: [
+                  {
+                    label: "Website",
+                    url: "https://laurencemacnaughton.com/",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/dials/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/dials"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Dials"
+              loadFunction={DocImport.Dials}
+              maxWidth="lg"
+              imageUrl={Images.dials}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={"/cheat-sheet/:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/cheat-sheet"
+              parent={{ title: "SRDs", url: "/srds" }}
+              title="Cheat Sheet"
+              loadFunction={DocImport.CheatSheet}
+              imageUrl={Images.cheatSheet}
+              maxWidth="lg"
+              author={{
+                title: "famousbirds",
+                items: [
+                  {
+                    label: "Twitter",
+                    url: "https://twitter.com/famousbirds",
+                  },
+                  {
+                    label: "Reddit",
+                    url: "https://www.reddit.com/user/famousbirds",
+                  },
+                ],
+              }}
+            />
+          )}
+        />
+
+        <Route
+          exact
+          path={"/srds/test:page?"}
+          render={(props) => (
+            <Doc
+              currentPage={props.match.params.page}
+              url="/srds/test"
+              parent={{
+                title: "Parent Title Parent Title Parent Title Parent Title",
+                url: "/srds",
+              }}
+              title="Doc Title Doc Title Doc Title Doc Title"
+              imageUrl={Images.book}
+              loadFunction={DocImport.Test}
+              author={{
+                title: "Author Author Author Autho",
+                avatarUrl: Images.seelieSquireAvatar,
+                items: [
+                  {
+                    label: "Link1 Link1 Link1 Link1 Link1",
+                    url: "",
+                  },
+                  {
+                    label: "Link2 Link2 Link2 Link2 Link2",
+                    url: "",
+                  },
+                ],
+              }}
             />
           )}
         />
@@ -182,13 +477,6 @@ export const AppRouter = () => {
           path={"/blog/:slug"}
           render={(props) => {
             return <BlogPostRoute slug={props.match.params.slug} />;
-          }}
-        />
-        <Route
-          exact
-          path={"/changelog"}
-          render={(props) => {
-            return <ChangelogRoute />;
           }}
         />
         <Route

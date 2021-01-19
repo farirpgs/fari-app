@@ -72,8 +72,9 @@ export function useScene(props: IProps) {
       name: scene.name,
       group: scene.group,
       aspects: scene.aspects,
-      version: scene.version,
+      notes: scene.notes,
       lastUpdated: scene.lastUpdated,
+      version: scene.version,
     };
     return !isEqual(sceneToLoad, currentScene);
   }, [scene, sceneToLoad]);
@@ -86,6 +87,7 @@ export function useScene(props: IProps) {
           draft.name = sceneToLoad.name;
           draft.group = sceneToLoad.group;
           draft.aspects = sceneToLoad.aspects;
+          draft.notes = sceneToLoad.notes;
           draft.version = sceneToLoad.version;
           draft.lastUpdated = sceneToLoad.lastUpdated;
         })
@@ -148,6 +150,7 @@ export function useScene(props: IProps) {
         name: newScene.name,
         group: newScene.group,
         aspects: aspects,
+        notes: newScene.notes,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
       });
@@ -206,11 +209,11 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addAspect(type: AspectType) {
+  function addAspect(type: AspectType, isPrivate: boolean) {
     const id = uuidV4();
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id] = defaultAspects[type];
+        draft.aspects[id] = { ...defaultAspects[type], isPrivate: isPrivate };
       })
     );
     setTimeout(() => {
@@ -238,6 +241,14 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         draft.aspects[aspectId] = defaultAspects[draft.aspects[aspectId].type];
+      })
+    );
+  }
+
+  function setAspectIsPrivate(aspectId: string, isPrivate: boolean) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.aspects[aspectId].isPrivate = isPrivate;
       })
     );
   }
@@ -651,6 +662,14 @@ export function useScene(props: IProps) {
     );
   }
 
+  function setNotes(notes: string) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.notes = notes;
+      })
+    );
+  }
+
   function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setScene(
       produce((draft: IScene) => {
@@ -679,6 +698,7 @@ export function useScene(props: IProps) {
       addAspect,
       removeAspect,
       resetAspect,
+      setAspectIsPrivate,
       updateAspectTitle,
       updateAspectContent,
       addAspectTrack,
@@ -711,6 +731,7 @@ export function useScene(props: IProps) {
       updatePlayerCharacterWithHiddenFields,
       updateDrawAreaObjects,
       toggleAspectPinned,
+      setNotes,
     },
     _: {
       removedPlayers,
@@ -729,6 +750,7 @@ const defaultAspect: IAspect = {
   pinned: false,
   hasDrawArea: false,
 };
+
 const defaultIndexCard: IAspect = {
   title: "",
   content: "<br/>",

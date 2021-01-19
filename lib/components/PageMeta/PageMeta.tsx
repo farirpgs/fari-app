@@ -15,11 +15,6 @@ export const PageMeta: React.FC<{
   const meta = [];
 
   meta.push({
-    name: "twitter:title",
-    content: title,
-  });
-
-  meta.push({
     name: "og:title",
     content: title,
   });
@@ -33,10 +28,6 @@ export const PageMeta: React.FC<{
       name: "og:description",
       content: props.description,
     });
-    meta.push({
-      name: "twitter:description",
-      content: props.description,
-    });
   }
 
   if (props.noIndex) {
@@ -48,10 +39,6 @@ export const PageMeta: React.FC<{
 
   meta.push({
     name: "og:url",
-    content: location.href,
-  });
-  meta.push({
-    name: "twitter:url",
     content: location.href,
   });
 

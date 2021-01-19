@@ -33,14 +33,20 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.menu.consequence").click();
       Fari.get("scene.aspect.0.menu.track").click();
 
-      Fari.get("scene.aspect.0.menu.color.blue").click();
-      Fari.get("scene.aspect.0.menu.color.green").click();
-      Fari.get("scene.aspect.0.menu.color.red").click();
-      Fari.get("scene.aspect.0.menu.color.white").click();
-      Fari.get("scene.aspect.0.menu.color.yellow").click();
-
       // close backdrop
       Fari.closeBackdrop();
+
+      // change colors
+      Fari.get("scene.aspect.0.palette").click();
+      cy.get(".data-cy-color-picker [title='#ffffff']").click();
+      Fari.get("scene.aspect.0.palette").click();
+      cy.get(".data-cy-color-picker [title='#ff0000']").click();
+      Fari.get("scene.aspect.0.palette").click();
+      cy.get(".data-cy-color-picker [title='#00daff']").click();
+      Fari.get("scene.aspect.0.palette").click();
+      cy.get(".data-cy-color-picker [title='#00ff4c']").click();
+      Fari.get("scene.aspect.0.palette").click();
+      cy.get(".data-cy-color-picker [title='#ffee00']").click();
 
       // aspect tracks
       Fari.get("scene.aspect.0.stressTrack.Free Invokes.add-box").click();
@@ -71,9 +77,8 @@ describe("/scenes", () => {
       Fari.get("scene.sort").click();
 
       // remove second
-      Fari.get("scene.aspect.1.menu").click();
-      Fari.get("scene.aspect.1.menu.reset").click();
-      Fari.get("scene.aspect.1.menu.remove").click();
+      Fari.get("scene.aspect.1.reset").click();
+      Fari.get("scene.aspect.1.remove").click();
 
       // initiative
       Fari.get("scene.aspect.1.initiative").click();

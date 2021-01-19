@@ -1,23 +1,23 @@
 import { css } from "@emotion/css";
+import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import React from "react";
-import { useHistory } from "react-router-dom";
-import accelerated from "../../../images/fate/accelerated.jpg";
-import condensed from "../../../images/fate/condensed.jpg";
-import core from "../../../images/fate/core.jpg";
-import { AppButtonLink } from "../../components/AppLink/AppLink";
+import { AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { Images } from "../../constants/Images";
 
 export const SrdsRoute: React.FC = (props) => {
   return (
@@ -27,90 +27,281 @@ export const SrdsRoute: React.FC = (props) => {
         description="Read and search through the Fate System Reference Documents (SRDs) with ease using Fari, The Fate Companion App"
       />
       <Container maxWidth="md">
-        <Heading
-          icon={MenuBookIcon}
-          subtitle="Select a Fate Variant to Get Started"
-        >
-          {"Fate System Reference Documents (SRDs)"}
-        </Heading>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Condensed"
-              description="The latest version of the Fate System. Compact, stand-alone and streamlined for clarity and ease of reference."
-              imageSrc={condensed}
-              link="/srds/condensed"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Core"
-              description="A Complete guide to Fate with rules, examples and tips. A most if your thirst for knowledge wasn't satisfied with Fate Condensed."
-              imageSrc={core}
-              link="/srds/core"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SrdCard
-              title="Fate Accelerated"
-              description="If you want to get started quickly, this dialed-down version of Fate Core will get you going in no time."
-              imageSrc={accelerated}
-              link="/srds/accelerated"
-            />
-          </Grid>
-        </Grid>
+        <Srds />
       </Container>
     </Page>
   );
 };
 SrdsRoute.displayName = "SrdsRoute";
 
-export const SrdCard: React.FC<{
-  title: string;
-  description: string;
-  imageSrc: string;
-  link: string;
-}> = (props) => {
-  const history = useHistory();
+export const Srds: React.FC = (props) => {
   return (
-    <Card
-      className={css({
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-      })}
-    >
-      <CardActionArea
-        className={css({ height: "100%" })}
-        onClick={() => {
-          history.push(props.link);
-        }}
-      >
-        <CardMedia
-          image={props.imageSrc}
-          title={props.title}
-          className={css({
-            height: "8rem",
-          })}
-        />
-        <CardContent className={css({ height: "100%" })}>
-          <Typography gutterBottom variant="h5" component="h2">
-            <FateLabel>{props.title}</FateLabel>
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions className={css({ flex: "1 0 auto" })}>
-        <Grid container justify="flex-end" alignItems="flex-end">
-          <Grid item>
-            <AppButtonLink to={props.link} color="primary">
-              {"Get Started"}
-            </AppButtonLink>
-          </Grid>
-        </Grid>
-      </CardActions>
-    </Card>
+    <div>
+      <Heading
+        icon={MenuBookIcon}
+        title={"Fate System Reference Documents (SRDs)"}
+        subtitle="Getting Started"
+      />
+      <SrdItems />
+      <Box pt="1rem" />
+      <ToolkitItems />
+      <Box pt="2rem" />
+      <Heading
+        icon={HelpIcon}
+        title={"Other Resources"}
+        subtitle={"Compendium, Stunt examples and more..."}
+      />
+      <OtherResourcesItems />
+    </div>
   );
 };
+
+export const SrdItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fate Condensed"
+            description={
+              <>
+                The latest version of the Fate System.
+                <strong>Compact, stand-alone and streamlined</strong> for
+                clarity and ease of reference.
+              </>
+            }
+            bgColor="#007fda"
+            imageUrl={Images.condensed}
+            link="/srds/condensed"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fate Core"
+            description={
+              <>
+                A <strong>Complete guide to Fate</strong> with rules, examples
+                and tips. A most if your thirst for knowledge was not satisfied
+                with Fate Condensed.
+              </>
+            }
+            bgColor="#00409d"
+            imageUrl={Images.core}
+            link="/srds/core"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fate Accelerated"
+            description={
+              <>
+                If you want to <strong>get started quickly</strong>, this
+                dialed-down version of Fate Core will get you going in no time.
+              </>
+            }
+            bgColor="#005aba"
+            imageUrl={Images.accelerated}
+            link="/srds/accelerated"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export const ToolkitItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fate System Toolkit"
+            description={
+              <>
+                This expansion for the Fate Core System contains tons of
+                flexible, hackable and adaptable rules that fits any world you
+                are trying to play in.
+              </>
+            }
+            bgColor="#442d74"
+            imageUrl={Images.systemToolkit}
+            link="/srds/system-toolkit"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fate Adversary Toolkit"
+            description={
+              <>
+                What ever the genre, this book gives you the tools you need to
+                create great obstacles for you stories.
+              </>
+            }
+            bgColor="#1e171c"
+            imageUrl={Images.adversaryToolkit}
+            link="/srds/adversary-toolkit"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export const OtherResourcesItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4} justify="center">
+        {/* <Grid item xs={12} sm={6} md={4}>
+          <SrdCard
+            title="Book of Monsters"
+            description={
+              <>
+                Brought to you by <strong>Seelie Squire</strong>, this is
+                ultimate resource if you are looking for the closest thing to a
+                Fate Compendium.
+              </>
+            }
+            bgColor="#3c5c39"
+            imageUrl={Images.seelieSquire}
+            link="/seelie-squire"
+          />
+        </Grid> */}
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fate Stunts"
+            description={
+              <>
+                A big list of stunt examples to get you started with character
+                creation.
+              </>
+            }
+            bgColor="#223031"
+            imageUrl={Images.book}
+            link="/fate-stunts"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Dials"
+            description={
+              <>
+                Useful rules you can pick and choose to hack your Fate campaign.
+              </>
+            }
+            bgColor="#011779"
+            imageUrl={Images.dials}
+            link="/dials"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Scene Checklist"
+            description={
+              <>
+                If you feel stumped during a scene, this checklist is going to
+                help you get back on track in no time.
+              </>
+            }
+            bgColor="#3b3a39"
+            imageUrl={Images.scene}
+            link="/scene-checklist"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Cheat Sheet"
+            description={
+              <>
+                Your handy tool for a quick access to the most important rules
+                during a session.
+              </>
+            }
+            bgColor="#030200"
+            imageUrl={Images.cheatSheet}
+            link="/cheat-sheet"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export const DocCard: React.FC<{
+  title: string | JSX.Element;
+  description: string | JSX.Element;
+  bgColor?: string;
+  imageUrl?: string;
+  link: string;
+}> = (props) => {
+  const theme = useTheme();
+  const backgroundColor = props.bgColor ?? theme.palette.background.paper;
+  const color = theme.palette.getContrastText(backgroundColor);
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
+  return (
+    <ButtonBase
+      className={css({
+        "height": "100%",
+        "display": "inline-block",
+        "textAlign": "left",
+        "width": "100%",
+        "transition": theme.transitions.create(["transform"]),
+        "&:hover": {
+          transform: isSmall ? undefined : "scale(1.05)",
+        },
+      })}
+    >
+      <AppLink to={props.link}>
+        <Card
+          raised
+          className={css({
+            "height": "100%",
+            "display": "flex",
+            "flexDirection": "column",
+            "background": backgroundColor,
+            "boxShadow": theme.shadows[8],
+            "transition": theme.transitions.create(["box-shadow"]),
+            "&:hover": {
+              boxShadow: isSmall ? undefined : theme.shadows[16],
+            },
+          })}
+        >
+          <Box height="100%">
+            <CardMedia
+              image={props.imageUrl ?? ""}
+              title={props.title as string}
+              className={css({
+                height: "8rem",
+                maskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+              })}
+            />
+            <CardContent className={css({ height: "100%" })}>
+              <Box pb="1rem">
+                <Typography gutterBottom variant="h5" component="h2">
+                  <FateLabel
+                    textColor={color}
+                    fontSize={theme.typography.h5.fontSize}
+                  >
+                    {props.title}
+                  </FateLabel>
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="p"
+                  className={css({
+                    color: color,
+                  })}
+                >
+                  {props.description}
+                </Typography>
+              </Box>
+            </CardContent>
+          </Box>
+        </Card>
+      </AppLink>
+    </ButtonBase>
+  );
+};
+
+DocCard.displayName = "DocCard";

@@ -2,6 +2,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import clsx from "clsx";
 import React from "react";
+import { scrollMarginTop } from "../Doc/hooks/useMarkdownFile";
 
 const anchorSvgMaterialUI = `<svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg>`;
 
@@ -20,10 +21,6 @@ const styles = (theme: Theme) => {
       ...theme.typography.body1,
       "color": theme.palette.text.primary,
       "wordBreak": "break-word",
-      "& .anchor-link": {
-        marginTop: -96,
-        position: "absolute",
-      },
       "& pre": {
         margin: theme.spacing(3, "auto"),
         padding: theme.spacing(2),
@@ -69,7 +66,11 @@ const styles = (theme: Theme) => {
       },
       "& h1": {
         ...theme.typography.h3,
+        scrollMarginTop: `${scrollMarginTop}px`,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
+        borderBottom: `2px solid ${theme.palette.primary.main}`,
         textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "1rem",
@@ -77,7 +78,11 @@ const styles = (theme: Theme) => {
       },
       "& h2": {
         ...theme.typography.h4,
+        scrollMarginTop: `${scrollMarginTop}px`,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
+        borderBottom: `1px solid ${theme.palette.primary.main}`,
         textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
@@ -85,6 +90,9 @@ const styles = (theme: Theme) => {
       },
       "& h3": {
         ...theme.typography.h5,
+        scrollMarginTop: `${scrollMarginTop}px`,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -93,6 +101,9 @@ const styles = (theme: Theme) => {
       },
       "& h4": {
         ...theme.typography.h6,
+        scrollMarginTop: `${scrollMarginTop}px`,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -100,7 +111,10 @@ const styles = (theme: Theme) => {
         marginBottom: "1rem",
       },
       "& h5": {
-        ...theme.typography.h6,
+        ...theme.typography.subtitle1,
+        scrollMarginTop: `${scrollMarginTop}px`,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
@@ -108,16 +122,15 @@ const styles = (theme: Theme) => {
         marginBottom: "1rem",
       },
       "& h6": {
-        ...theme.typography.h6,
+        ...theme.typography.subtitle2,
+        scrollMarginTop: `${scrollMarginTop}px`,
+        display: "flex",
+        alignItems: "center",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
-      },
-      "& p, & ul, & ol": {
-        marginTop: 0,
-        marginBottom: 16,
       },
       "& ul": {
         paddingLeft: 30,
@@ -128,23 +141,6 @@ const styles = (theme: Theme) => {
           lineHeight: "inherit",
           // Remove scroll on small screens.
           wordBreak: "break-all",
-        },
-        "& .anchor-link-style": {
-          // To prevent the link to get the focus.
-          display: "none",
-        },
-        "&:hover .anchor-link-style": {
-          "display": "inline-block",
-          "padding": "0 8px",
-          "color": theme.palette.text.secondary,
-          "&:hover": {
-            color: theme.palette.text.primary,
-          },
-          "& svg": {
-            width: "0.7em",
-            height: "0.7em",
-            fill: "currentColor",
-          },
         },
       },
       "& table": {
@@ -177,6 +173,13 @@ const styles = (theme: Theme) => {
           borderBottom: `1px dotted ${theme.palette.divider}`,
         },
       },
+      "& thead tr": {
+        borderBottom: `2px solid ${theme.palette.primary.main}`,
+      },
+      "& tbody tr": {
+        "&:nth-child(even)": { background: "transparent" },
+        "&:nth-child(odd)": { background: lightBackground },
+      },
       "& td": {
         ...theme.typography.body2,
         borderBottom: `1px solid ${theme.palette.divider}`,
@@ -205,12 +208,9 @@ const styles = (theme: Theme) => {
         "borderLeft": `5px solid ${theme.palette.primary.main}`,
         "boxShadow": theme.shadows[1],
         "backgroundColor": lightBackground,
-        "padding": "4px 24px",
-        "margin": "24px 0",
+        "padding": ".5rem 2rem",
+        "margin": "1.5rem 0",
         "& p": {
-          marginTop: "16px",
-        },
-        "& ul:first-child": {
           marginTop: "16px",
         },
         "& h1,h2,h3,h4,h5,h6": {
@@ -218,8 +218,7 @@ const styles = (theme: Theme) => {
           fontStyle: "normal",
           fontFamily: `'Work Sans', sans-serif`,
         },
-        "& *": {
-          fontStyle: "italic",
+        "& *:not(fate)": {
           fontFamily: `'Work Sans', sans-serif`,
         },
       },
@@ -235,9 +234,12 @@ const styles = (theme: Theme) => {
       "& img, video": {
         maxWidth: "100%",
       },
+
       "& img": {
         // Avoid layout jump
-        display: "inline-block",
+        display: "block",
+        margin: "0 auto",
+        width: "50%",
       },
       "& hr": {
         height: 1,
@@ -263,7 +265,7 @@ const styles = (theme: Theme) => {
           theme.palette.type === "dark" ? "white" : "black"
         ),
         transform: "rotate(45deg)",
-        marginLeft: ".3rem",
+        marginLeft: ".5rem",
         display: "inline-block",
         backgroundRepeat: "no-repeat",
         cursor: "pointer",

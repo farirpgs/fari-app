@@ -129,7 +129,7 @@ fdescribe("useScene", () => {
 
       // WHEN name is different
       act(() => {
-        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.addAspect(AspectType.Aspect, false);
       });
       // THEN dirty is true
       expect(result.current.state.dirty).toEqual(true);
@@ -195,7 +195,7 @@ fdescribe("useScene", () => {
       });
       act(() => {
         // WHEN adding an aspect
-        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.addAspect(AspectType.Aspect, false);
       });
       // THEN aspect exists
       const [firstAspectId] = Object.keys(result.current.state.scene.aspects);
@@ -206,6 +206,7 @@ fdescribe("useScene", () => {
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        isPrivate: false,
         pinned: false,
         title: "",
         hasDrawArea: false,
@@ -761,7 +762,7 @@ fdescribe("useScene", () => {
       let playerId = "";
       act(() => {
         result.current.actions.updateName("NAME");
-        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.addAspect(AspectType.Aspect, false);
         playerId = result.current.actions.addOfflinePlayer("OFFLINE PLAYER");
         result.current.actions.updatePlayerPlayedDuringTurn(playerId, true);
       });
@@ -818,8 +819,8 @@ fdescribe("useScene", () => {
       // WHEN setuping scene
       let npcAspectId = "";
       act(() => {
-        npcAspectId = result.current.actions.addAspect(AspectType.NPC);
-        result.current.actions.addAspect(AspectType.Aspect);
+        npcAspectId = result.current.actions.addAspect(AspectType.NPC, false);
+        result.current.actions.addAspect(AspectType.Aspect, false);
         result.current.actions.toggleAspectPinned(npcAspectId);
       });
       // THEN

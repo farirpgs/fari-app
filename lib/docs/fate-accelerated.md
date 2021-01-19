@@ -9,6 +9,22 @@ This work is based on Fate Core System and Fate Accelerated Edition (found at ht
 
 -->
 
+# Fate Accelerated
+
+Let’s face it: most roleplaying games aren’t grab-and-go. Giant books and prep work out the ying-yang can be fun if you’ve got the time, but what if you don’t? What if you’re looking for a last minute game? What if you’re new to the RPG world and want a no hassle way to try one out? What if you’re introducing your kids to RPGs and want something easily accessible for them that won’t bore you to tears? We’ve got a solution: **Fate Accelerated Edition**.
+
+**Fate Accelerated**, or **FAE**, is a condensed version of the popular **Fate Core** system that brings all the flexibility and power of Fate in an easily digestible—and quickly read—package. With **FAE**, you and your friends can step into the world of your favorite books, movies, and TV or you can create a world of your own. And set up is simple—you can be playing in minutes. Whether you’re new to RPGs or an expert gamer, **FAE** brings something special to the table.
+
+**Fate Accelerated Edition. Your story—full speed ahead.**
+
+<iframe src="https://itch.io/embed/491601" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-accelerated">Fate Accelerated Edition • A Fate Core Build by evilhat</a></iframe>
+
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
+
 # Get Started!
 
 Remember those books where the teenage wizards struggle against the Dark Lord of Evil? That movie where the dwarves fight to recapture their mountain home from a dragon? That animated TV show about mystical knights and their army of clones righting wrongs across the galaxy?

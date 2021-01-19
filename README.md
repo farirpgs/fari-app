@@ -1,7 +1,9 @@
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
@@ -71,6 +73,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
