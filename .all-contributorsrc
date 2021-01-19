@@ -79,6 +79,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "xurxodiz",
+      "name": "Jorge Diz Pico",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/391584?v=4",
+      "profile": "http://xurxodiz.eu/",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
