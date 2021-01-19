@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.5 Resources, Private Aspects and Scene Notes
+## v3.5 Resources, Private Aspects and Scene Notes
 
 #### January 19th, 2020
 
