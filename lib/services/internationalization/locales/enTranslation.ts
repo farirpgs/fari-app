@@ -36,6 +36,7 @@ export const enTranslation = {
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.gl": `Galego`,
   "common.language.it": `Italiano`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
