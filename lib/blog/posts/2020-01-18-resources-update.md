@@ -1,5 +1,3 @@
-# Fari Update: The One with Resources, Private Aspects and GM Notes
-
 There are a lot of new things to talk about, so I'll get started right away.
 
 ## 📰 Documents
@@ -8,18 +6,18 @@ There are a lot of new things to talk about, so I'll get started right away.
 
 Thanks to /u/wizardoest, I was able to add the SRDs content accessible directly within the app. You can now easily read the documentation for Fate Condensed, Core, Accelerated as well as the System and Adversaries Toolkit inside Fari.
 
-Check it out here: https://fari.app/srds.
+Check it out here: [https://fari.app/srds](https://fari.app/srds).
 
 Thanks to Evil Hat, I was able to add a page which contains tons of great Stunt Examples which was previously available on Evil Hat's wiki.
 
-Find your next awesome stunt here: https://fari.app/fate-stunts.
+Find your next awesome stunt here: [https://fari.app/fate-stunts](https://fari.app/fate-stunts).
 
 Reddit users /u/Laurence_M and /u/famousbirds were kind enough to let me include their helpful "Scene Checklist" and "Cheat Sheet" documents inside Fari as well. Thank you so much to you both.
 
 Check out those awesome documents here:
 
-- https://fari.app/scene-checklist
-- https://fari.app/cheat-sheet
+- [https://fari.app/scene-checklist](https://fari.app/scene-checklist)
+- [https://fari.app/cheat-sheet](https://fari.app/cheat-sheet)
 
 ## 🌟 Features
 
@@ -32,9 +30,9 @@ I was also able to work on adding two new features to the app:
 
 Lastly, Fari now has a Discord server.
 
-Come what with us here: https://discord.com/invite/vMAJFjUraA
+Come what with us here: [https://discord.com/invite/vMAJFjUraA](https://discord.com/invite/vMAJFjUraA)
 
----
+## ❤️ Support
 
 I want to thank my patrons for helping to make this update possible.
 
