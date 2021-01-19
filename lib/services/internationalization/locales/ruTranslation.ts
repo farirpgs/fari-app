@@ -1,3 +1,6 @@
+/**
+ * @author https://github.com/hattivatt
+ */
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/

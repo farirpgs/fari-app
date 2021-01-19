@@ -1,3 +1,7 @@
+/**
+ * @author https://github.com/xurxodiz
+ */
+
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/

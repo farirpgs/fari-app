@@ -1,3 +1,6 @@
+/**
+ * @author https://github.com/Erynus
+ */
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
