@@ -65,7 +65,7 @@ export const glTranslation: Record<
   "home-route.play-online.title": `Xogar a Fate en liña`,
   "home-route.support-fari.description": `Fari é de código aberto e totalmente de balde. Creo na construción de software e aplicacións de calidade que benefician á comunidade. Porén, isto non fai fácil a subsistencia dos desenvolvedores do proxecto. \n\n Manter e desenvolver novas características en Fari ocupa unha cantidade de tempo considerábel. Mais, coa túa axuda económica, podo dedicarlle máis tempo a mellorar Fari ou usar o financiamento para mellorar os servidores. \n\n Calquera doazón axuda, pero se a túa situación actual non che permite axudar o proxecto con cartos, sempre podes botar unha man facéndolle publicidade!`,
   "home-route.support-fari.title": `Pensa en axudar a Fari`,
-  "home-route.thanks-some-patrons": `Grazas a algúns dos meus mecenas`,
+  "home-route.thanks-some-patrons": `Grazas a mecenas como estes`,
   "home-route.welcome": `Benvida a Fari`,
   "index-card.add-1-consequence": `+ Consecuencia`,
   "index-card.add-free-invokes-track": `+ Barra invocacións`,
