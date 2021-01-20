@@ -13,6 +13,24 @@ This book uses the OGL version of this text. License found at the end of this do
 
 -->
 
+# Fate Core
+
+Grab your plasma rifles, spell components, and jetpacks! Name your game; **Fate Core** is the foundation that can make it happen. **Fate Core** is a flexible system that can support whatever worlds you dream up.
+
+Have you always wanted to play a post-apocalyptic spaghetti western with tentacle monsters? Swords and sorcery in space? Wish there was a game based on your favorite series of books, film, or television, but it never happened? **Fate Core** is your answer.
+
+**Fate Core** is a tabletop roleplaying game about proactive, capable people who lead dramatic lives. Create your characters and develop instant group dynamics with our unique phased char gen system. Use those characters as a springboard to storytelling in our GM worldbuilding chapters.
+
+For the Fate-familiar, take advantage of the new and improved approaches to character actions, aspects, compels, and more. With **Fate Core**, your story is up to you. But whatever you choose, you can expect a fun storytelling experience full of twists…of fate.
+
+<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
+
+> This is an adaption of the amazing work done by Randy Oest over the Fate SRD website.
+>
+> Go check it out here: https://fate-srd.com/
+>
+> \- René-Pier Deshaies-Gélinas | Fari
+
 # The Basics
 
 ## Welcome To Fate
@@ -22,6 +40,8 @@ If you’ve never played a roleplaying game before, here’s the basic idea: you
 It’s not all just conversation, though—sometimes you’ll use dice and the rules in this book to bring uncertainty into the story and make things more exciting.
 
 Fate doesn’t come with a default setting, but it works best with any premise where the characters are proactive, capable people leading dramatic lives. We give more advice on how to bring that flavor to your games in the next chapter.
+
+<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
 
 > ### New To Fate
 >
@@ -77,7 +97,7 @@ Players, your character sheet contains everything you need to know about your PC
 
 <!-- Here’s an example of a Fate character sheet, so we can show you all the components. -->
 
-<!-- {Insert your character sheet graphic here} -->
+<!-- Insert your character sheet graphic here -->
 
 ### Aspects
 
@@ -137,10 +157,10 @@ When you need to roll dice in Fate, pick up four Fate dice and roll them. When y
 
 Here are some sample dice totals:
 
-- -+0+ = +1
-- +-00 =
-- +++- = +2
-- -000 = −1
+- <fate>-+0+</fate> = +1
+- <fate>+-00</fate> =
+- <fate>+++-</fate> = +2
+- <fate>-000</fate> = −1
 
 The result on the dice isn’t your final total, however. If your character has a skill that’s appropriate to the action, you get to add your character’s rating in that skill to whatever you rolled.
 
@@ -186,7 +206,7 @@ When you beat a roll or a set obstacle, the difference between your opposition a
 >
 > Lenny sighs and says, “Well, I’ve got Athletics at Good (+3), so I’ll try dodging and weaving through them to cross the hall.”
 >
-> He takes up the dice and rolls, getting -+++, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
+> He takes up the dice and rolls, getting <fate>-+++</fate>, for a result of +2. This steps up his result on the ladder by two, from Good (+3) to Superb (+5). That’s enough to beat the opposition by one shift and succeed.
 >
 > Amanda says, “Well, it takes equal parts acrobatics and frantic stumbling, but you manage to make it through to the other side with only some cosmetic tears in your tunic to show for it. The mechanism shows no sign of stopping, though—you’ll still have to deal with it on your way out.”
 >
@@ -306,7 +326,7 @@ Any Fate game that you play should provide the potential and opportunity for dra
 > - **NPCs:** Decide who the important people and locations are.
 > - **Skills and Stunts:** Decide what sorts of things characters in the setting are likely to want to do.
 
-## Character Creation Make The P Cs
+## Character Creation Make The PCs
 
 ### Setting Up Your Game
 
@@ -328,7 +348,7 @@ If you’re inventing a setting, you have more work cut out for you. It’s beyo
 >
 > Ryan suggests “guy and girl with swords, and guy without a sword” so that there’s a difference between the two guys. Also, because he wants to play someone who is more bookish (for contrast). Everyone’s on board with this, and they move on.
 
-### A Game S Scale
+### A Game's Scale
 
 Decide how epic or personal your story will be.
 
@@ -338,7 +358,7 @@ In a small-scale game, characters deal with problems in a city or region, they d
 
 > Amanda likes the vibe of “guy and girl with sword,” and thinks it’ll shine as a small-scale game, where they might travel from town to town, but the problems they have to deal with are local—like a thieves’ guild or the regent’s vile machinations.
 
-### The Setting S Big Issues
+### The Setting's Big Issues
 
 Decide what threats and pressures inherent to the setting will spur the protagonists to action.
 
@@ -994,7 +1014,7 @@ Now you know what makes for a good aspect, but that doesn’t narrow down your p
 
 If you’re still stuck about what to choose, here are some tips to make things a little easier on you.
 
-#### Sometimes It S Better Not To Choose
+#### Sometimes It's Better Not To Choose
 
 If you can’t think of an aspect that really grabs you and the other people at the table, you’re better off leaving that space blank, or just keeping whatever ideas you had scribbled in the margins. Sometimes it’s much easier to wait for your character to get into play before you figure out how you want to word a particular aspect.
 
@@ -1055,7 +1075,7 @@ Reroll all your dice.
 Pass a +2 benefit to another character’s roll, if it’s reasonable that the aspect you’re invoking would be able to help.
 Add +2 to any source of passive opposition, if it’s reasonable that the aspect you’re invoking could contribute to making things more difficult. You can also use this to create passive opposition at Fair (+2) if there wasn’t going to be any.
 
-#### The Reroll Vs The 2
+#### The Reroll VS The +2
 
 Rerolling the dice is a little riskier than just getting the +2 bonus, but has the potential for greater benefit. We recommend you reserve this option for when you’ve rolled a –3 or a –4 on the dice, to maximize the chance that you’ll get a beneficial result from rerolling. The odds are better that way.
 
@@ -1236,7 +1256,7 @@ With some skills, it’s going to make more sense to stick an advantage to an as
 
 If you’re not looking for a free invocation, and you just think it’d make sense if there were a particular situation aspect in play, you don’t need to roll the dice or anything to make new aspects—just suggest them, and if the group thinks they’re interesting, write them down.
 
-#### For The Gm Extremely Powerful Ninja Gm Trick
+#### For The GM: Extremely Powerful Ninja GM Trick
 
 So, if you don’t have any aspects made up for a scene or an NPC, just ask the players what kinds of aspects they’re looking for when they roll to create an advantage. If they tie or succeed, just write down something similar to what they were looking for and say they were right. If they fail, write it down anyway, or write another aspect down that’s not advantageous to them, so as to contrast with their expectations.
 
@@ -1736,7 +1756,7 @@ The Fight skill covers all forms of close-quarters combat (in other words, withi
 - **Backup Weapon**. Whenever someone’s about to hit you with a Disarmed situation aspect or something similar, spend a fate point to declare you have a backup weapon. Instead of a situation aspect, your opponent gets a boost, representing the momentary distraction you suffer having to switch.
 - **Killing Stroke**. Once per scene, when you force an opponent to take a consequence, you can spend a fate point to increase the consequence’s severity (so mild becomes moderate, moderate becomes severe). If your opponent was already going to take a severe consequence, he must either take a severe consequence and a second consequence or be taken out.
 
-##### The Art S Of Fighting
+##### The Art(s) Of Fighting
 
 It’s a given that most games that you play with Fate will feature a decent amount of action and physical conflict. This is another area of emphasis, like with the Crafts skill, where the skills you choose to have for combat speak volumes on what your game’s about.
 
@@ -1976,7 +1996,7 @@ That’s when it’s time to take out the dice.
 
 - Choose the character’s skill that is appropriate to the action.
 - Roll four Fate dice.
-- Add together the symbols showing on the dice. A `+` is +1, a `-` is –1, and a `0` is 0.
+- Add together the symbols showing on the dice. A <fate>+</fate> is +1, a <fate>-</fate> is –1, and a <fate>0</fate> is 0.
 - Add your skill rating to the dice roll. The total is your result on the ladder.
 - If you invoke an aspect, add +2 to your result or reroll the dice.
 
@@ -1984,7 +2004,7 @@ That’s when it’s time to take out the dice.
 >
 > Lily looks through Cynere’s skill list and picks Resources as her skill, hoping she can scrounge enough out of her coin purse to satisfy them. Her Resources skill is Average (+1), so she’ll add one to whatever result she gets from rolling the dice.
 >
-> She rolls and gets: +-0+
+> She rolls and gets: <fate>+-0+</fate>
 >
 > Her total result is +2 (+1 from her dice and +1 from her skill of Average), which corresponds to a Fair on the ladder.
 
@@ -1994,7 +2014,7 @@ As we said in The Basics, whenever you roll the dice, you’re comparing your ro
 
 > Amanda decides to roll active opposition against Lily on behalf of the guards. She decides the most appropriate opposing skill is Will—they’re trying to resist the temptation of bribery, after all.
 >
-> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: ++0+
+> The guards are nameless NPCs with no reason to be particularly strong of will, so she gives them a Mediocre (+0). She rolls and gets: <fate>++0+</fate>
 >
 > ...for an incredibly lucky result of +3!
 >
@@ -2443,7 +2463,7 @@ In a mental conflict, it might not always make sense to use situation aspects an
 So, you may not even need situation aspects or zones for a lot of mental conflicts. Don’t feel obligated to include them.
 
 > Considering our warehouse again, Amanda thinks about what might make good situation aspects.
-
+>
 > She decides that there are enough crates in here to make free movement a potential problem, so she picks Heavy Crates and Cramped as aspects. The loading door is open, which means that there’s a large dock with water in it, so she also picks Open to the Water as a situation aspect, figuring that someone might try to knock someone in.
 
 As the scene unfolds, players might suggest features of the environment that are perfect as aspects. If the GM described the scene as being poorly lit, a player should be able to invoke the Shadows to help on a Stealth roll even if she hadn’t previously established it as an aspect. If the feature would require some intervention on the part of the characters in the scene to become aspect-worthy, then that’s the purview of the create an advantage action. Usually the barn doesn’t catch On Fire! without someone kicking over the lantern. Usually.
@@ -2482,13 +2502,11 @@ Make sure everyone agrees on the general goals of each side, who’s on which si
 
 It might also help, GMs, to decide how those groups are going to “divvy up” to face one another—is one character going to get mobbed by the bad guy’s henchmen, or is the opposition going to spread itself around equally among the PCs? You might change your mind once the action starts, but if you have a basic idea, it gives you a good starting point to work from.
 
-{example}
-
-In our continuing warehouse fight example, the sides are obvious—Og and his buddies want to do in the PCs, and the PCs want to keep that from happening.
-
-Ryan asks Amanda about finding the smuggled goods, and Amanda replies, “If you think you can sneak in a moment during the fight to look for them, go for it. We’ll see what happens.”
-
-The conflict starts with everyone on the main warehouse floor. Amanda decides that Og and one of his friends are going to go after Landon, two of the other thugs are going after Cynere, and the final one is going to chase after Zird.
+> In our continuing warehouse fight example, the sides are obvious—Og and his buddies want to do in the PCs, and the PCs want to keep that from happening.
+>
+> Ryan asks Amanda about finding the smuggled goods, and Amanda replies, “If you think you can sneak in a moment during the fight to look for them, go for it. We’ll see what happens.”
+>
+> The conflict starts with everyone on the main warehouse floor. Amanda decides that Og and one of his friends are going to go after Landon, two of the other thugs are going after Cynere, and the final one is going to chase after Zird.
 
 ### Turn Order
 
@@ -2576,8 +2594,6 @@ The second option you have for mitigating a hit is taking a consequence. A conse
 
 Consequences come in three levels of severity—mild, moderate, and severe. Each one has a different shift value: two, four, and six, respectively. On your character sheet, you have a number of available consequence slots, in this section:
 
-{Your character sheet image here}
-
 When you use a consequence slot, you reduce the shift value of the attack by the shift value of the consequence. You can use more than one consequence at a time if they’re available. Any of the hit’s remaining shifts must be handled by a stress box to avoid being taken out.
 
 However, there’s a penalty. The consequence written in the slot is an aspect that represents the lasting effect incurred from the attack. The opponent who forced you to take a consequence gets a free invocation, and the aspect remains on your character sheet until you’ve recovered the consequence slot. While it’s on your sheet, the consequence is treated like any other aspect, except because the slant on it is so negative, it’s far more likely to be used to your character’s detriment.
@@ -2604,15 +2620,13 @@ Here are some guidelines for choosing what to name a consequence:
 
 **Severe consequences** go straight to the emergency room (or whatever the equivalent is in your game)—they’re extremely nasty and prevent you from doing a lot of things, and will lay you out for a while. On the mental side, they express things like serious trauma or relationship-changing harm. Examples: Second-Degree Burn, Compound Fracture, Guts Hanging Out, Crippling Shame, Trauma-Induced Phobia.
 
-#### What Skill Do I Use For Recovery
-
-{example}
-
-In Hearts of Steel, physical recovery can only happen through the use of a Lore stunt, which Zird the Arcane has taken. This makes physical fights dangerous and suggests that actual medical training is quite rare. For mental recovery, we use the Empathy skill.
-
-If you want it to be easier to help people recover physically, you could add it as a default action to a skill. Lore is a good default option, but we could see it as a function of Crafts, too. It might even be important enough in your game to add a Medic or Survival skill.
-
-Likewise, if you want to restrict access to mental recovery, make it an Empathy or Rapport stunt, rather than having it built in to a skill.
+> #### What Skill Do I Use For Recovery
+>
+> In Hearts of Steel, physical recovery can only happen through the use of a Lore stunt, which Zird the Arcane has taken. This makes physical fights dangerous and suggests that actual medical training is quite rare. For mental recovery, we use the Empathy skill.
+>
+> If you want it to be easier to help people recover physically, you could add it as a default action to a skill. Lore is a good default option, but we could see it as a function of Crafts, too. It might even be important enough in your game to add a Medic or Survival skill.
+>
+> Likewise, if you want to restrict access to mental recovery, make it an Empathy or Rapport stunt, rather than having it built in to a skill.
 
 ### Recovering From A Consequence
 
@@ -2878,7 +2892,7 @@ This facet of your job also means that when you have NPCs in a scene, you speak 
 >
 > We provide some more tips on judging the use of rules below.
 
-#### You Re The Chairman Not God
+#### You're The Chairman Not God
 
 Approach your position as arbiter of the rules by thinking of yourself as “first among equals” in a committee, rather than as an absolute authority. If there’s a disagreement on the use of the rules, try encouraging a brief discussion and let everyone talk freely, rather than making a unilateral decision. A lot of times, you’ll find that the group is self-policing—if someone tries to throw out a compel that’s a real stretch, it’s just as likely that another player will bring it up before you do.
 
@@ -2896,13 +2910,13 @@ As outlined in Game Creation, inventing or deciding on a setting is often a coll
 
 Of course, if everyone’s amenable, there’s nothing stopping you from showing up with a clear vision of exactly what you want to run. “Okay, this is going to be a game about the Cold War in the ‘60s, except it’s all steampunk and mechs. Go!” Just make sure everyone’s on board if you go that route. Even one player who isn’t into it, and doesn’t really feel inclined to get into it, can really affect the game.
 
-#### Out There Vs Down Here
+#### Out There VS Down Here
 
 Speaking of steampunk mechs in a ‘60s-era Soviet Union, it’s a good idea to consider just how “out there” you want to get. High-concept ideas are a lot of fun, but if they’re too difficult to relate to then your players may have trouble wrapping their heads around the game you’re proposing. Where that line is exactly will vary from group to group (and player to player), so there’s no definitive answer here. Just be aware that every departure from the familiar—whether that’s the real world or well-established genre conventions—has the potential to be a conceptual hurdle for your players. Get everyone on the same page and make sure to go over any questions in advance.
 
 The opposite approach is to set the game down here, in the real world, with perhaps only one or two notable departures with greater ramifications that you can explore as you go. The easiest way to communicate a setting like this is to name a time and place you’re all familiar with, then tack on the exception. For example, “It’s like modern-day London, but robots are commonplace” or “It’s post-World War II Los Angeles, but some returning veterans have supernatural powers.”
 
-#### Top Down Vs Bottom Up
+#### Top Down VS Bottom Up
 
 There’s also the matter of how broad the scope of the game will be. Some like to start with the big picture first and drill down to the details, while others prefer to start with the here and now and develop the big picture as they go. These are often called “top down” and “bottom up,” respectively. Neither one’s better than the other, but each has its pros and cons.
 
@@ -2916,7 +2930,7 @@ The potential downside here is that it requires quite a bit of improvisation and
 
 Fate can handle either, but the system’s support for player-driven contributions to the narrative in the form of aspects and story details really makes the bottom-up method sing. If that’s the way you like to play anyway, great! If not, no pressure—but give it a try sometime.
 
-#### Small Scale Vs Large Scale
+#### Small Scale VS Large Scale
 
 There’s already been some discussion of game scale in Game Creation, but it’s worth a little more discussion.
 
@@ -3452,19 +3466,17 @@ If the situation is more complicated than that, make it a challenge instead. Thi
 
 Nameless NPCs don’t have to remain nameless. If the players decide to get to know that barkeep or town crier or security chief or whatever, go ahead and make a real person out of them—but that doesn’t mean that you need to make them any more mechanically complex. If you want to, of course, go ahead and promote them to a supporting NPC. But otherwise, simply giving that courtier a name and a motivation doesn’t mean he can’t go down in one punch.
 
-{example}
+> Tavern-Keeper (Average)
+> Aspects: I Don’t Want No Trouble in My Place
+> Skills: Average (+1) Contacts
 
-Tavern-Keeper (Average)
-Aspects: I Don’t Want No Trouble in My Place
-Skills: Average (+1) Contacts
+> Trained Thug (Fair)
+> Aspects: The Ways of the Streets, Violent Criminal
+> Skills: Fair (+2) Fight, Average (+1) Athletics and Physique
 
-Trained Thug (Fair)
-Aspects: The Ways of the Streets, Violent Criminal
-Skills: Fair (+2) Fight, Average (+1) Athletics and Physique
-
-Collegia Arcana Court Mage (Good)
-Aspects: Haughty Demeanor, Devoted to the Arcane Arts
-Skills: Good (+3) Lore, Fair (+2) Deceive, Average (+1) Will and Empathy
+> Collegia Arcana Court Mage (Good)
+> Aspects: Haughty Demeanor, Devoted to the Arcane Arts
+> Skills: Good (+3) Lore, Fair (+2) Deceive, Average (+1) Will and Empathy
 
 #### Supporting NPCs
 
@@ -4404,7 +4416,7 @@ Here are a bunch of powers! (This also works if you want a setting with magic wh
 
 These are all taken from a game called Chrome City, home of Simon the Cyber-Ape. It’s basically four-color supers with a cyberpunk veneer thrown on it, and he comes from a society of intelligent, cybernetically enhanced apes who practice kung-fu.
 
-##### Extra Energy Blast
+##### Extra: Energy Blast
 
 **Costs**: 2 points of refresh
 
@@ -4412,13 +4424,13 @@ You can use Shoot to blast other people with energy, without needing a gun or ot
 
 You get +2 when using your energy blasts to make attacks or create advantages, and they hit for Weapon:2. If your setting has mundane weapons, this power has a Weapon value that’s 2 higher than the strongest mundane weapons available.
 
-##### Extra Super Strength
+##### Extra: Super Strength
 
 **Costs**: 2–6 points of refresh
 
 Your Fight attacks are Weapon:2, and nearly all “raw strength” applications of Physique are at +2. Every additional 2 points of refresh you spend adds a +2 to all bonuses.
 
-##### Extra Super Speed
+##### Extra: Super Speed
 
 **Costs**: 3 points of refresh
 
@@ -4428,13 +4440,13 @@ You take a +2 on all defense rolls with Athletics, or in contests relying purely
 
 Except for absolute barriers like solid walls, you ignore all situation aspects that impede movement, and can place yourself in any zone you want at the start of every conflict exchange, because you had enough time to get there.
 
-##### Extra Super Resilience
+##### Extra: Super Resilience
 
 **Costs**: 1–3 refresh
 
 You have Armor:2 vs. any defense roll against physical damage. Each additional point of refresh adds 2 to that total.
 
-#### Extra X Ray Vision
+#### Extra: X-Ray Vision
 
 **Costs**: 2 refresh
 
@@ -4468,7 +4480,7 @@ We recommend against going overboard with this and giving every single item your
 >
 > In those rare situations where you have the absolutely ideal tool for a job, the aspect you get might count as being “with style”, and come with two free invokes.
 
-##### Extra Demonbane The Enchanted Sword
+##### Extra: Demonbane The Enchanted Sword
 
 **Permissions**: Finding the sword during the game
 
@@ -4478,7 +4490,7 @@ The sword Demonbane has an aspect called Slayer of Demon-Kind. If you are the sw
 
 In addition, invoking the sword’s aspect has another pair of special effects: it can banish any nameless NPC demon instantly, with no conflict or contest, and it can reveal the presence of a concealed demon under any circumstances.
 
-##### Extra Brace Jovannich S Dueling Pistol
+##### Extra: Brace Jovannich S Dueling Pistol
 
 **Permissions**: Possessing the aspect The Legacy of Brace
 
@@ -4614,11 +4626,9 @@ Average (+1) Fight
 
 When you’re making a magic system, the preliminary discussion is extremely important, because you need to establish some firm expectations for what is and isn’t possible, and how far-reaching the effects can be. No two fantasy worlds in popular media have similar properties for their magic, and often, defining the arcane also defines a vital facet of how the world operates. Therefore, these examples are pretty detailed, using the full range of character elements.
 
-{example}
+> Lucas the Magic Cop is a PC in the Fate game Ancestral Affairs, inspired by Hong Kong gunplay movies, where the characters are a special supernatural crimes task force operating in the fictional city of San Jian, California. In the setting, you have to channel magical power from ancestral, semi-divine spirits. Powers are specific and portfolio-based, so a spirit of water will confer different benefits than a spirit of luck. Also, people have karmic stress tracks, reflecting the resilience of their soul.
 
-Lucas the Magic Cop is a PC in the Fate game Ancestral Affairs, inspired by Hong Kong gunplay movies, where the characters are a special supernatural crimes task force operating in the fictional city of San Jian, California. In the setting, you have to channel magical power from ancestral, semi-divine spirits. Powers are specific and portfolio-based, so a spirit of water will confer different benefits than a spirit of luck. Also, people have karmic stress tracks, reflecting the resilience of their soul.
-
-##### Extra Lucas S Arts
+##### Extra: Lucas's Arts
 
 **Permissions**: None, anyone can commune with a spirit for power
 
@@ -4655,7 +4665,7 @@ You may prevent any mundane calamity of fate once per scene—avert that car acc
 You can raise a Great (+4) shield of energy to protect you and anyone you name. This can stack with any other active opposition you or your chosen target can bring forth. As soon as someone bypasses the opposition, your shield goes away and you must re-establish it. (Yes, you can stack your free invokes for this and make titanic shields. Presumably, there are other spirits whose powers can rip your shield down.)
 Here’s a build for a fantasy game with rigid schools of magic.
 
-##### Extra Schools Of Power
+##### Extra: Schools Of Power
 
 **Permissions**: One aspect that names which order you belong to
 

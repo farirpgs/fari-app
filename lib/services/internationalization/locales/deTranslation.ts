@@ -1,3 +1,6 @@
+/**
+ * @author https://github.com/handcraftedsource
+ */
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
@@ -46,6 +49,7 @@ export const deTranslation: Record<
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.gl": `Galego`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
   "common.language.it": `Italiano`,
@@ -67,8 +71,6 @@ export const deTranslation: Record<
   "home-route.play-online.button": `Online-Spiel starten`,
   "home-route.play-online.description": `Triff dich online mit deinen Freunden über deine bevorzugte Video-Chat-Plattform, sende ihnen einen Link zum Spiel und genieße es, Fate zu spielen!`,
   "home-route.play-online.title": `Spiele Fate online`,
-  "home-route.subtitle1": `Fari ist eine virtuelle Tabletop-Anwendung, die sorgfältig auf das Spielen des Fate Pen-&-Paper-Rollenspiels (Core, Accelerated oder Condensed) zugeschnitten ist.`,
-  "home-route.subtitle2": `Es erleichtert die Beschreibung von Szenen, die Beobachtung der Charaktere und ihrer Schicksalspunkte, die Verfolgung von Aspekten und noch mehr. Überlegt Euch clevere Lösungen, um Eure Charaktere aus prekären Situationen zu befreien, in die sie der Fudge-Würfel (oder der SL) gezwungen hat, lasst Eurer kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!`,
   "home-route.support-fari.description": `Fari ist quelloffen und völlig frei. Ich glaube daran, großartige Software und Anwendungen zu entwickeln, die der Gemeinschaft zugute kommen. Es bringt jedoch auch Herausforderungen mit sich, wenn es darum geht, die Entwickler hinter dem Projekt zu unterstützen. \n\n Die Pflege und Entwicklung neuer Funktionen in Fari nimmt eine beträchtliche Menge an Zeit in Anspruch. Aber mit deiner finanziellen Hilfe könnte ich mehr Zeit auf Fari verwenden, um es besser zu machen oder die Finanzierung für ein Upgrade der Server zu verwenden. \n\n Jede Spende hilft, aber wenn deine finanzielle Situation dich daran hindert, dem Projekt finanziell zu helfen, kannst du immer helfen, indem du es weitererzählst!`,
   "home-route.support-fari.title": `Erwäge die Unterstützung von Fari`,
   "home-route.thanks-some-patrons": `Danke an einige meiner Unterstützer`,
@@ -83,12 +85,14 @@ export const deTranslation: Record<
   "index-card.boost": `Schub`,
   "index-card.consequence": `Konsequenz`,
   "index-card.free-invokes": `Freie Einsätze`,
+  "index-card.hide": `Hide`,
   "index-card.mental-stress": `Mentaler Stress`,
   "index-card.npc": `NSC`,
   "index-card.physical-stress": `Physischer Stress`,
   "index-card.pin": `Stift`,
   "index-card.remove": `Entfernen`,
   "index-card.reset": `Zurücksetzen`,
+  "index-card.show": `Show`,
   "index-card.unpin": `Lösen Sie den Stift`,
   "manager.deleted": `Gelöscht`,
   "manager.import": `Importieren`,
@@ -135,6 +139,7 @@ export const deTranslation: Record<
   "play-route.error.webRTC": `Der Browser, den du derzeit verwendest, wird von Fari nicht unterstützt, um seine Online-Funktionalitäten zu nutzen. Bitte benutze einen anderen Browser wie Google Chrome oder Firefox.`,
   "play-route.fate-points": `Fate Punkte`,
   "play-route.fp": `F.P.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Gruppe`,
   "play-route.init": `Ini`,
   "play-route.initiative-tracker": `Initiative verfolgen`,
@@ -148,6 +153,8 @@ export const deTranslation: Record<
   "play-route.no-aspects": `Die Szene hat noch keine Aspekte.`,
   "play-route.or-pick-existing": `Wähle einen vorhandenen Charakter`,
   "play-route.players": `Spieler:`,
+  "play-route.private": `Private`,
+  "play-route.public": `Public`,
   "play-route.reset-initiative": `Zurücksetzen`,
   "play-route.reset-scene-confirmation": `Bist du sicher, dass du deine Szene zurücksetzen und alle deine aktuellen Aspekte entfernen willst?`,
   "play-route.reset-scene": `Zurücksetzen`,

@@ -13,6 +13,7 @@ const Pages: Record<IPossibleLanguages, Promise<{ page: string }>> = {
   "en": import("./page/About.en"),
   "pt-BR": import("./page/About.en"),
   "it": import("./page/About.en"),
+  "gl": import("./page/About.en"),
   "es": import("./page/About.es"),
   "fr": import("./page/About.fr"),
   "ru": import("./page/About.ru"),

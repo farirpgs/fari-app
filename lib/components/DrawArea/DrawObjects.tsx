@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
@@ -18,11 +18,10 @@ import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import React, { useEffect, useRef, useState } from "react";
-import TwitterPicker from "react-color/lib/components/twitter/Twitter";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { AspectRatio } from "./AspectRatio";
-import { pickerColors } from "./domains/pickerColors";
 import { DrawObject } from "./DrawObject";
 import { DrawingTool, IDrawingManager, ObjectType } from "./hooks/useDrawing";
 
@@ -432,31 +431,3 @@ export const DrawObjects: React.FC<IProps> = (props) => {
 };
 
 DrawObjects.displayName = "DrawObjects";
-
-export const ColorPicker: React.FC<{
-  value: string;
-  onChange: (color: string) => void;
-}> = (props) => {
-  return (
-    <TwitterPicker
-      width="10.5rem"
-      triangle="hide"
-      styles={{
-        default: {
-          hash: { clear: "both" },
-        },
-      }}
-      color={props.value}
-      colors={pickerColors}
-      className={cx(
-        "data-cy-color-picker",
-        css({
-          boxShadow: "none",
-        })
-      )}
-      onChange={(color) => props.onChange(color.hex)}
-    />
-  );
-};
-
-ColorPicker.displayName = "ColorPicker";

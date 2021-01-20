@@ -5,33 +5,44 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect } from "react";
+import FaceIcon from "@material-ui/icons/Face";
+import HelpIcon from "@material-ui/icons/Help";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+import MovieIcon from "@material-ui/icons/Movie";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import appIcon from "../../../images/blue/app.png";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Kofi } from "../../components/Kofi/Kofi";
+import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import {
-  DiceGameIcon,
-  EyeIcon,
-  IllustrationIcon,
-} from "../../domains/Icons/Icons";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { DiceGameIcon, EyeIcon } from "../../domains/Icons/Icons";
 import { makeIcon } from "../../domains/Icons/makeIcon";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { OtherResourcesItems } from "../SrdsRoute/SrdsRoute";
 
 const Patrons = ["James Micu", "Randy Oest", "Ryan Singer"];
 
-const sectionGridItem = css({ display: "flex", justifyContent: "center" });
+const sectionGridItem = css({
+  display: "flex",
+  justifyContent: "center",
+  // flex: "1 0 auto",
+});
 
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
   const logger = useLogger();
+  const scenesManager = useContext(ScenesContext);
+  const charactersManager = useContext(CharactersContext);
 
   useEffect(() => {
     logger.info("Route:Home");
@@ -102,7 +113,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
     );
   }
 
-  function renderHeadingIcon(Icon: ReturnType<typeof makeIcon>) {
+  function renderHeadingIcon(
+    Icon: ReturnType<typeof makeIcon> | React.ElementType
+  ) {
     return (
       <Box display="flex" justifyContent="center">
         <Icon className={css({ fontSize: "3rem" })} color="primary" />
@@ -192,10 +205,25 @@ export const HomeRoute: React.FC<{}> = (props) => {
 
   function renderSectionsButtons() {
     return (
-      <Container maxWidth="lg">
-        <Box my=".5rem">
-          <Grid container justify="center" spacing={6}>
-            <Grid item xs={12} md={3} className={sectionGridItem}>
+      <Container maxWidth="md">
+        <Box my="1rem">
+          <Grid container justify="center" spacing={2}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link to="/srds">
+                  {renderHeadingIcon(MenuBookIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"SRDs"}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
                   {renderHeadingIcon(DiceGameIcon)}
@@ -210,23 +238,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={12} md={3} className={sectionGridItem}>
-              <Link to="/draw">
-                <Box height="100%" display="flex" flexDirection="column">
-                  {renderHeadingIcon(IllustrationIcon)}
-                  <FateLabel
-                    data-cy="home.draw"
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                  >
-                    {"Draw"}
-                  </FateLabel>
-                </Box>
-              </Link>
-            </Grid>
-            <Grid item xs={12} md={3} className={sectionGridItem}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Link to="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
                   {renderHeadingIcon(EyeIcon)}
@@ -244,6 +256,52 @@ export const HomeRoute: React.FC<{}> = (props) => {
             </Grid>
           </Grid>
         </Box>
+        <Box my="1rem">
+          <Grid container justify="center" spacing={2}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link
+                  to=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scenesManager.actions.openManager(ManagerMode.Manage);
+                  }}
+                >
+                  {renderHeadingIcon(MovieIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {t("menu.scenes")}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link
+                  to=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                    charactersManager.actions.openManager(ManagerMode.Manage);
+                  }}
+                >
+                  {renderHeadingIcon(FaceIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {t("menu.characters")}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
       </Container>
     );
   }
@@ -252,7 +310,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Container maxWidth="sm">
         <Box textAlign="center">
-          <FateLabel variant="h4" color="primary">
+          <FateLabel variant="h4" color="primary" as="h1">
             {"Fari"}
           </FateLabel>
         </Box>
@@ -260,26 +318,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <img alt="Fari" width="125px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
-          <FateLabel variant="h6" color="secondary">
+          <FateLabel variant="h6" color="secondary" as="h2">
             {t("home-route.heading")}
           </FateLabel>
-        </Box>
-      </Container>
-    );
-  }
-
-  function renderHeadingDescription() {
-    return (
-      <Container maxWidth="sm">
-        <Box pb="1rem" textAlign="center">
-          <Typography variant="subtitle1">
-            {t("home-route.subtitle1")}
-          </Typography>
-        </Box>
-        <Box pb="1rem" textAlign="center">
-          <Typography variant="subtitle1">
-            {t("home-route.subtitle2")}
-          </Typography>
         </Box>
       </Container>
     );
@@ -295,7 +336,21 @@ export const HomeRoute: React.FC<{}> = (props) => {
         {renderHeading()}
         {renderPlayButtons()}
         {renderSectionsButtons()}
-        {false && renderHeadingDescription()}
+        <Container maxWidth="lg">
+          <Box py="1.5rem">
+            <Divider />
+          </Box>
+        </Container>
+        <Container maxWidth="md">
+          <Box pb="2rem">
+            <Heading
+              icon={HelpIcon}
+              title={"Other Resources"}
+              subtitle={"Compendium, Stunt examples and more..."}
+            />
+            <OtherResourcesItems />
+          </Box>
+        </Container>
         <Container maxWidth="lg">
           <Box py="1.5rem">
             <Divider />

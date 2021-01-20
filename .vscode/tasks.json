@@ -6,6 +6,14 @@
     {
       "type": "npm",
       "script": "validate",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      },
       "group": {
         "kind": "build",
         "isDefault": true

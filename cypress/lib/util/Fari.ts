@@ -6,8 +6,21 @@ export const Fari = {
     cy.visit("/");
     this.get("cookie-consent").click();
   },
+  /**
+   * Url needs to be in `../../../serve.json`
+   * @param url
+   */
+  visit(url: string) {
+    cy.visit(url);
+  },
   get(tag: string) {
     return cy.get(`[data-cy='${tag}']`);
+  },
+  find(element: Cypress.Chainable, tag: string) {
+    return element.find(`[data-cy='${tag}']`);
+  },
+  getAttribute(element: Cypress.Chainable, attr: string) {
+    return element.invoke("attr", attr);
   },
   waitContentEditable() {
     const contentEditableDelay = 300;

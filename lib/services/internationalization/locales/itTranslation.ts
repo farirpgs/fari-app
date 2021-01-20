@@ -1,3 +1,6 @@
+/**
+ * @author https://github.com/Redjaw
+ */
 import { IPossibleTranslationKeys } from "../IPossibleTranslationKeys";
 
 /*eslint quotes: ["error", "backtick"]*/
@@ -41,6 +44,7 @@ export const itTranslation: Record<
   "common.language.en": `English`,
   "common.language.es": `Español`,
   "common.language.fr": `Français`,
+  "common.language.gl": `Galego`,
   "common.language.it": `Italiano`,
   "common.language.pt-BR": `Português Brasileiro`,
   "common.language.ru": `Русский`,
@@ -62,8 +66,6 @@ export const itTranslation: Record<
   "home-route.play-online.button": `Inizia Partita Online`,
   "home-route.play-online.description": `Incontrati in remoto con i tuoi amici utilizzando la piattaforma di chat video che preferisci, invia loro un link e divertiti con Fate!`,
   "home-route.play-online.title": `Gioca a Fate Online`,
-  "home-route.subtitle1": `Fari è un Tavolo da Gioco Virtuale meticolosamente creato su misura per giocare a Fate RPG (Core, Accelerato or Condensato).`,
-  "home-route.subtitle2": `Semplifica la descrizione di scene, mantenendo lo sguardo sui personaggi ed i loro punti fato, gestendo gli Aspetti e non solo. Trova soluzioni astute per togliere i tuoi Personaggi da situazioni delicate in cui i dadi fudge (o il DM) li hanno cacciati. Lascia libera la tua immaginazione per creare insieme storie memorabili!`,
   "home-route.support-fari.description": `Fari è open-source e completamente gratuito. Credo nel costruire ottimo software ed applicazioni di cui possa beneficiare tutta la comunità. Comunque questo porta anche a sfide nel sostenere gli sviluppatori dietro al progetto. \n\n Mantenere e sviluppare nuove feature in Fari richiede un considerevole ammontare di tempo. Ma col tuo supporto economico, posso spendere più tempo su Fari per renderlo migliore o finanziare le migliorie dei server. \n\n Ogni donazione è utile, ma se la tua situazione finanziaria non ti permette di aiutare economicamente il progetto, puoi sempre spargere la voce!`,
   "home-route.support-fari.title": `Supporta Fari`,
   "home-route.thanks-some-patrons": `Grazie ad alcuni dei miei patron`,
@@ -78,12 +80,14 @@ export const itTranslation: Record<
   "index-card.boost": `Vantaggio`,
   "index-card.consequence": `Conseguenza`,
   "index-card.free-invokes": `Invocazioni gratuite`,
+  "index-card.hide": `Hide`,
   "index-card.mental-stress": `Stress Mentale`,
   "index-card.npc": `PNG`,
   "index-card.physical-stress": `Stress Fisico`,
   "index-card.pin": `Blocca`,
   "index-card.remove": `Rimuovi`,
   "index-card.reset": `Reset`,
+  "index-card.show": `Show`,
   "index-card.unpin": `Sblocca`,
   "manager.deleted": `Cancellato`,
   "manager.import": `Importa`,
@@ -131,6 +135,7 @@ export const itTranslation: Record<
   "play-route.error.webRTC": `Il browser che stai usando non è supportato da Fari per utilizzare le sue funzionalità online. Per favore scegli un browser diverso come Google Chrome o Firefox.`,
   "play-route.fate-points": `Punti Fato`,
   "play-route.fp": `P.F.`,
+  "play-route.gm-notes": `Notes`,
   "play-route.group": `Gruppo`,
   "play-route.init": `Iniziativa`,
   "play-route.initiative-tracker": `Gestore dell'Iniziativa`,
@@ -143,6 +148,8 @@ export const itTranslation: Record<
   "play-route.no-aspects": `La scena non ha ancora nessun aspetto.`,
   "play-route.or-pick-existing": `Scegli un Personaggio`,
   "play-route.players": `Giocatori:`,
+  "play-route.private": `Private`,
+  "play-route.public": `Public`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene-confirmation": `Sei sicuro di voler resettare la scena e rimuovere tutti gli attuali Aspetti?`,
   "play-route.reset-scene": `Reset`,
