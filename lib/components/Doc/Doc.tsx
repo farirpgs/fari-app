@@ -70,10 +70,19 @@ export const Doc: React.FC<{
   const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
     props.loadFunction
   );
-  const { html, nextH1, previousH1, currentH1, description } = useMarkdownPage(
-    props.currentPage,
-    dom
-  );
+  const hash = useLocation().hash;
+  const {
+    html,
+    nextH1,
+    previousH1,
+    currentH1,
+    title,
+    description,
+  } = useMarkdownPage({
+    page: props.currentPage,
+    hash: hash,
+    dom: dom,
+  });
   useScrollOnHtmlLoad(html);
 
   const lightBackground = useLightBackground();
@@ -88,9 +97,6 @@ export const Doc: React.FC<{
   useEffect(() => {
     setOpenH1(currentH1?.id);
   }, [currentH1]);
-
-  const title = currentH1?.textContent ?? "";
-  const isFirstPage = !previousH1;
 
   useEffect(() => {
     const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
@@ -113,10 +119,7 @@ export const Doc: React.FC<{
   const shouldRenderImage = props.imageUrl && !isSmall;
   return (
     <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
-      <PageMeta
-        title={isFirstPage ? props.title : `${title} | ${props.title}`}
-        description={description}
-      />
+      <PageMeta title={title} description={description} />
       {html ? (
         <Fade in>
           <Box display="flex">
