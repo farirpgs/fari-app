@@ -218,7 +218,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     color="primary"
                     underline
                   >
-                    {"SRDs"}
+                    {t("menu.srds")}
                   </FateLabel>
                 </Link>
               </Box>
@@ -233,7 +233,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     color="primary"
                     underline
                   >
-                    {"Dice"}
+                    {t("menu.dice")}
                   </FateLabel>
                 </Link>
               </Box>

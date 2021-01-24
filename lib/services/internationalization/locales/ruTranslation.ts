@@ -108,6 +108,7 @@ export const ruTranslation: Record<
   "menu.help": `Помощь`,
   "menu.play": `Играть`,
   "menu.scenes": `Сцены`,
+  "menu.srds": `SRDs`,
   "oracle-route.meta.description": `Ask questions about your world and get answers from The Oracle`,
   "oracle-route.meta.title": `Oracle`,
   "oracle.value.No": `No`,

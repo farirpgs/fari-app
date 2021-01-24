@@ -95,10 +95,22 @@ export const ContentEditable: React.FC<
           : undefined,
         "borderBottom": props.border ? `1px solid ${borderColor}` : undefined,
         "img": {
-          maxWidth: "75%",
-          padding: ".5rem",
-          margin: "0 auto",
-          display: "flex",
+          "maxWidth": "75%",
+          "padding": ".5rem",
+          "margin": "0 auto",
+          "display": "flex",
+          "position": "relative",
+          "zIndex": theme.zIndex.tooltip,
+          "transition": theme.transitions.create(["transform"], {
+            delay: "0s",
+          }),
+          "cursor": "default",
+          "&:hover": {
+            transition: theme.transitions.create(["transform"], {
+              delay: "750ms",
+            }),
+            transform: "scale(2.5)",
+          },
         },
         "&:empty:before": {
           color: "lightgrey",

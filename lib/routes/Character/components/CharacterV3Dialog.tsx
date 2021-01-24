@@ -75,7 +75,7 @@ const smallIconButtonStyle = css({
   padding: "0",
 });
 
-const HelpLinks: Record<string, string> = {
+const HeaderHelpLinks: Record<string, string> = {
   "Aspects": "/srds/condensed/getting-started#aspects",
   "Stunts & Extras": "/srds/condensed/getting-started#stunts",
   "Refresh": "/srds/condensed/getting-started#refresh",
@@ -85,6 +85,9 @@ const HelpLinks: Record<string, string> = {
   "Skills": "/srds/condensed/getting-started#skill-list",
   "Dice":
     "/srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice",
+};
+const FooterHelpLinks: Record<string, { label: string; link: string }> = {
+  "Stunts & Extras": {},
 };
 
 export const CharacterV3Dialog: React.FC<{
@@ -155,7 +158,7 @@ export const CharacterV3Dialog: React.FC<{
 
   const sheetContentStyle = css({
     width: "100%",
-    padding: ".5rem 1.5rem",
+    padding: ".5rem 1rem",
   });
 
   if (!characterManager.state.character) {
@@ -450,7 +453,7 @@ export const CharacterV3Dialog: React.FC<{
             return null;
           }
 
-          const helpLink = HelpLinks[section.label];
+          const helpLink = HeaderHelpLinks[section.label];
 
           return (
             <Box key={section.id}>
@@ -1121,7 +1124,7 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <SheetHeader
           label={t("character-dialog.refresh")}
-          helpLink={HelpLinks["Refresh"]}
+          helpLink={HeaderHelpLinks["Refresh"]}
           advanced={advanced}
         />
         <Box className={css(sheetContentStyle)}>
@@ -1167,7 +1170,7 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <SheetHeader
           label={t("character-dialog.dice")}
-          helpLink={HelpLinks["Dice"]}
+          helpLink={HeaderHelpLinks["Dice"]}
           advanced={advanced}
         />
         <Box className={sheetContentStyle}>
@@ -1283,7 +1286,7 @@ export const SheetHeader: React.FC<{
     background: headerBackgroundColors.primary,
     color: headerColor,
     width: "100%",
-    padding: ".5rem 1.5rem",
+    padding: ".5rem 1rem",
   });
 
   return (

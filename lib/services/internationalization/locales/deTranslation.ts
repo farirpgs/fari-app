@@ -108,6 +108,7 @@ export const deTranslation: Record<
   "menu.help": `Hilfe`,
   "menu.play": `Spielen`,
   "menu.scenes": `Szenen`,
+  "menu.srds": `SRDs`,
   "oracle-route.meta.description": `Ask questions about your world and get answers from The Oracle`,
   "oracle-route.meta.title": `Oracle`,
   "oracle.value.No": `No`,
