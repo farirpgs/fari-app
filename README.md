@@ -1,7 +1,18 @@
+<!--
+# TODO
+
+- [x] boost sub menu
+- [ ] character sheet dirty state
+- [x] hash sub text for srd
+- [ ] seelie squire
+-->
+
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
