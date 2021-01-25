@@ -11,6 +11,12 @@
 - feat: Public and Private index cards for scenes
 - feat: Private GM notes for scenes
 
+- feat: better SRD title and description for SEO
+- feat: Index Card context menu for boost
+- feat: character cards in tabs
+- fix: Galcian typo #218
+- fix: security issue with immer
+
 ## v3.4 Join screen UX, Italian translations
 
 #### January 5th, 2021

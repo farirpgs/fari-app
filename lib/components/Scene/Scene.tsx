@@ -775,12 +775,14 @@ export const Scene: React.FC<IProps> = (props) => {
         >
           <Tab
             value="player-characters"
+            data-cy="scene.tabs.player-characters"
             label={t("menu.characters")}
             classes={{ root: tabClass }}
             icon={<PeopleAltIcon />}
           />
           <Tab
             value="public"
+            data-cy="scene.tabs.public"
             label={t("play-route.public")}
             classes={{ root: tabClass }}
             icon={<VisibilityIcon />}
@@ -788,6 +790,7 @@ export const Scene: React.FC<IProps> = (props) => {
           {isManaging && (
             <Tab
               value="private"
+              data-cy="scene.tabs.private"
               label={t("play-route.private")}
               classes={{ root: tabClass }}
               icon={<VisibilityOffIcon />}
@@ -796,6 +799,7 @@ export const Scene: React.FC<IProps> = (props) => {
           {isManaging && (
             <Tab
               value="gm-notes"
+              data-cy="scene.tabs.gm-notes"
               label={t("play-route.gm-notes")}
               classes={{ root: tabClass }}
               icon={<BorderColorIcon />}
