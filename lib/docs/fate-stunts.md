@@ -1,7 +1,9 @@
 # Fate Stunts
 
-All stunts from the _Fate Core System_ book are here, plus most of the stunts from the _Fate System Toolkit_ and _Spirit of the Century_. Any stunts that would qualify as extras in _Fate Core_ are omitted, as are stunts that don't make sense without taking an extra.
+A very detailed list of stunts to help you get started with character creation quickly.
 
+> All stunts from the _Fate Core System_ book are here, plus most of the stunts from the _Fate System Toolkit_ and _Spirit of the Century_. Any stunts that would qualify as extras in _Fate Core_ are omitted, as are stunts that don't make sense without taking an extra.
+>
 > This page is an adaptation of the work of Peter Blake from the [Evil Hat Wiki](http://evilhat.wikidot.com/fate-core-stunts)
 >
 > Unless otherwise stated, the content of this page is licensed under Creative Commons Attribution-Share Alike 2.5 License.

@@ -118,7 +118,11 @@ export const Doc: React.FC<{
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   return (
-    <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
+    <Page
+      drawerWidth={!isSmall ? drawerWidth : undefined}
+      pb="4rem"
+      debug={{ metaTitle: title, metaDescription: description }}
+    >
       <PageMeta title={title} description={description} />
       {html ? (
         <Fade in>

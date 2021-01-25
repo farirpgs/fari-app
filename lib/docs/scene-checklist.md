@@ -1,6 +1,8 @@
 # Fate Scene Checklist
 
-During a game, whenever I feel stumped or overwhelmed during a scene, I quickly go down this list and ask the players a few questions. Chances are, I forgot one of these key ingredients.
+The ultimate checklist to go through to make sure your scene help move your story forward.
+
+If you feel stumped or overwhelmed during a scene, quickly go down this list and ask the players a few of those questions.
 
 > ## The Checklist
 >
