@@ -773,13 +773,15 @@ export const Scene: React.FC<IProps> = (props) => {
             setTab(newValue);
           }}
         >
-          <Tab
-            value="player-characters"
-            data-cy="scene.tabs.player-characters"
-            label={t("menu.characters")}
-            classes={{ root: tabClass }}
-            icon={<PeopleAltIcon />}
-          />
+          {props.mode !== SceneMode.Manage && (
+            <Tab
+              value="player-characters"
+              data-cy="scene.tabs.player-characters"
+              label={t("menu.characters")}
+              classes={{ root: tabClass }}
+              icon={<PeopleAltIcon />}
+            />
+          )}
           <Tab
             value="public"
             data-cy="scene.tabs.public"
