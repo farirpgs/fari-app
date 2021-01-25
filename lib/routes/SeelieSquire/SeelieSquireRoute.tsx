@@ -4,7 +4,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
-import { creatures } from "./domains/Creatures";
+import { creatures, ICreature } from "./domains/Creatures";
 
 export const SeelieSquireRoute: React.FC<{ page: string }> = (props) => {
   const theme = useTheme();
@@ -72,45 +72,61 @@ ${creatures.map((c) => {
 
 ${c.description}
 
-> ![](${c.character.image})
+> ${renderImage(c)}
 > 
 > ### ${c.character.name} 
 >
 > <div class=${bigFateLabelClass}>Aspects</div>
 > 
-> ${c.character.aspects
-    .map((a) => {
-      return `**${a}**`;
-    })
-    .join(" • ")}
+> ${renderAspects(c)}
 > 
 > <div class=${bigFateLabelClass}>Skills</div>
 > 
-> ${c.character.skills.map((s) => `\n * ${s}`)}
+> ${renderSkills(c)}
 > 
 > <div class=${bigFateLabelClass}>Health</div>
 > 
-> ${c.character.tracks.map(
-    (s) => `
-> <div class=${smallFateLabelClass}>${s.name}</div>
-> ${s.values.map((sv) => `[${sv}]`).join(" • ")}
-> `
-  )}
+> ${renderHealth(c)}
 > 
 > <div class=${bigFateLabelClass}>Stunts</div>
 > 
-> ${c.character.stunts.map(
-    (s) => `
-> <div class=${smallFateLabelClass}>${s.name}</div>
-> ${s.description}
-> `
-  )}
+> ${renderStunts(c)}
 >
 > <div class=${bigFateLabelClass}>Notes</div>
 > 
-> ${c.character.notes}
+> ${c.character.notes ?? ""}
 `;
 })}`;
 
   return markdown;
+
+  function renderImage(c: ICreature) {
+    return c.character.image ? `![](${c.character.image})` : "";
+  }
+
+  function renderStunts(c: ICreature) {
+    return c.character.stunts.map(
+      (s) => `
+> <div class=${smallFateLabelClass}>${s.name}</div>
+> ${s.description}
+> `
+    );
+  }
+
+  function renderHealth(c: ICreature) {
+    return c.character.tracks.map(
+      (s) => `
+> <div class=${smallFateLabelClass}>${s.name}</div>
+> ${s.values.map((sv) => `[${sv}]`).join(" • ")}
+> `
+    );
+  }
+
+  function renderSkills(c: ICreature) {
+    return c.character.skills.map((s) => `\n * ${s}`);
+  }
+
+  function renderAspects(c: ICreature) {
+    return c.character.aspects.map((a) => `**${a}**`).join(` • `);
+  }
 }
