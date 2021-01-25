@@ -93,6 +93,7 @@ export const Doc: React.FC<{
   const logger = useLogger();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openH1, setOpenH1] = useState<string | undefined>();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setOpenH1(currentH1?.id);
@@ -349,6 +350,26 @@ export const Doc: React.FC<{
           options={allHeaders.map((header) => header)}
           groupBy={(header) => header.grouping ?? ""}
           getOptionLabel={(header) => header.label}
+          inputValue={search}
+          onInputChange={(e, value, reason) => {
+            if (reason === "input") {
+              setSearch(value);
+            } else {
+              setSearch("");
+            }
+          }}
+          onChange={(event, newValue) => {
+            const label = (newValue as IMarkdownHeader)?.label;
+            if (label) {
+              const header = allHeaders.find((h) => label === h.label);
+
+              if (header?.level === 1) {
+                history.push(`${props.url}/${header?.id}`);
+              } else {
+                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
+              }
+            }
+          }}
           renderOption={(header) => (
             <React.Fragment>
               <Box width="100%">
@@ -363,19 +384,6 @@ export const Doc: React.FC<{
               </Box>
             </React.Fragment>
           )}
-          onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownHeader)?.label;
-
-            if (label) {
-              const header = allHeaders.find((h) => label === h.label);
-
-              if (header?.level === 1) {
-                history.push(`${props.url}/${header?.id}`);
-              } else {
-                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
-              }
-            }
-          }}
           renderInput={(params) => (
             <TextField
               {...params}
