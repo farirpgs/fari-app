@@ -35,6 +35,9 @@ const PlayOfflineRoute = React.lazy(
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
+const SeelieSquireRoute = React.lazy(
+  () => import("../../routes/SeelieSquire/SeelieSquireRoute")
+);
 
 export const LoadingRoute: React.FC = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -332,32 +335,7 @@ export const AppRouter = () => {
           exact
           path={"/seelie-squire/:page?"}
           render={(props) => (
-            <Doc
-              currentPage={props.match.params.page}
-              url="/seelie-squire"
-              parent={{ title: "SRDs", url: "/srds" }}
-              title="Seelie Squire's Book Of Creatures"
-              imageUrl={Images.seelieSquire}
-              loadFunction={DocImport.SeelieSquire}
-              author={{
-                title: "Seelie Squire",
-                avatarUrl: Images.seelieSquireAvatar,
-                items: [
-                  {
-                    label: "Patreon",
-                    url: "https://www.patreon.com/seeliesquire",
-                  },
-                  {
-                    label: "Discord",
-                    url: "https://discord.com/invite/8u3VVZd",
-                  },
-                  {
-                    label: "Reddit",
-                    url: "https://www.reddit.com/r/seeliesquire/",
-                  },
-                ],
-              }}
-            />
+            <SeelieSquireRoute page={props.match.params.page} />
           )}
         />
         <Route
