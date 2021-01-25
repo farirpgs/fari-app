@@ -86,7 +86,7 @@ export const ContentEditable: React.FC<
         "display": "inline-block",
         "width": "100%",
         "cursor": hasCursorPointer ? "pointer" : "text",
-        "color": updating ? "grey" : "inherit",
+        "color": updating ? theme.palette.text.secondary : "inherit",
         "textDecoration": props.underline ? "underline" : undefined,
         "transition": !updating
           ? theme.transitions.create("color", { duration: 500 })
