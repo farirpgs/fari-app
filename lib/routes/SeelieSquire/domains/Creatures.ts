@@ -7,8 +7,8 @@ export type ICreature = {
     tracks: Array<{ name: string; values: Array<number> }>;
     skills: Array<string>;
     stunts: Array<{ name: string; description: string }>;
-    notes: string;
-    image: string;
+    notes?: string;
+    image?: string;
   };
 };
 
@@ -16,9 +16,9 @@ export const creatures: Array<ICreature> = [
   {
     title: "Riddleraxxer",
     description: `
-  Any outsider who sets foot in the fae realm will very quickly be overwhelmed with its strangeness. Inanimate objects may appear to change places on their own. The celestial bodies move differently than in the material realm, if at all. The perception of time is unfamiliar. Very few things found in the wilds behave how you expect.
+Any outsider who sets foot in the fae realm will very quickly be overwhelmed with its strangeness. Inanimate objects may appear to change places on their own. The celestial bodies move differently than in the material realm, if at all. The perception of time is unfamiliar. Very few things found in the wilds behave how you expect.
 
-  Riddleraxxers are no exception. These beings wander the fae wilds rambling confusing riddles to themselves and those around. While they are not immediately hostile to those they come across, they are excitable and quick to aggression. The things they spout have a way of disorienting and baffling outsiders. Their very presence makes little sense to those from the material plane. Being easily agitated is a dangerous trait to possess, as riddleraxxers have little concern for the wellbeing of others.
+Riddleraxxers are no exception. These beings wander the fae wilds rambling confusing riddles to themselves and those around. While they are not immediately hostile to those they come across, they are excitable and quick to aggression. The things they spout have a way of disorienting and baffling outsiders. Their very presence makes little sense to those from the material plane. Being easily agitated is a dangerous trait to possess, as riddleraxxers have little concern for the wellbeing of others.
   `,
     character: {
       name: "Riddleraxxer",
