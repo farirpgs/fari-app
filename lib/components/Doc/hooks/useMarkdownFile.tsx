@@ -126,12 +126,25 @@ class Markdown {
       element.append(anchor);
     }
 
+    // dynamic anchors
     const allElementsWithDynamicAnchor = dom.querySelectorAll(".with-anchor");
-
     allElementsWithDynamicAnchor.forEach((element) => {
       element.id = kebabCase(element.textContent ?? "");
       const anchor = this.makeHeaderAnchor(element);
       element.append(anchor);
+    });
+
+    // dynamic table of content
+    const tocElements = dom.querySelectorAll("toc");
+    tocElements.forEach((element) => {
+      const [, ...pages] = Object.keys(tableOfContent);
+      const listItems = pages
+        .map((t) => {
+          const to = tableOfContent[t];
+          return `<li><a href="${to.page.id}">${to.page.label}</a></li>`;
+        })
+        .join("");
+      element.innerHTML = `<ul>${listItems}</ul>`;
     });
 
     return { dom, tableOfContent, headers };
