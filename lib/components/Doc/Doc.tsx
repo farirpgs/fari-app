@@ -165,7 +165,7 @@ export const Doc: React.FC<{
       if (currentH1 && location.hash) {
         const h2 = location.hash.replace("#", "");
         const newUrl = `${props.url}/${currentH1.id}/${h2}`;
-        history.push(newUrl);
+        history.replace(newUrl);
       }
     },
     [location.hash]

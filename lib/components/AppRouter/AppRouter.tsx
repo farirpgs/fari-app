@@ -374,7 +374,7 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/dials/:page?"}
+          path={"/dials/:page?/:section?"}
           render={(props) => (
             <Doc
               page={props.match.params.page}
@@ -383,7 +383,7 @@ export const AppRouter = () => {
               parent={{ title: "SRDs", url: "/srds" }}
               title="Dials"
               loadFunction={DocImport.Dials}
-              maxWidth="lg"
+              // maxWidth=""
               imageUrl={Images.dials}
             />
           )}
@@ -420,7 +420,7 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/srds/test:page?"}
+          path={"/srds/test/:page?/:section?"}
           render={(props) => (
             <Doc
               page={props.match.params.page}

@@ -135,6 +135,10 @@ const styles = (theme: Theme) => {
       "& ul": {
         paddingLeft: 30,
       },
+      "& li": {
+        paddingTop: ".125rem",
+        paddingBottom: ".125rem",
+      },
       "& h1, & h2, & h3, & h4": {
         "& code": {
           fontSize: "inherit",
