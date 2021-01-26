@@ -131,6 +131,7 @@ export const Doc: React.FC<{
   const [search, setSearch] = useState("");
 
   const shouldRenderImage = props.imageUrl && !isSmall;
+  const shouldRenderSectionTitle = title !== props.title;
 
   useEffect(
     function onPageChange() {
@@ -182,7 +183,7 @@ export const Doc: React.FC<{
       disableAutomaticScrollTop
     >
       <PageMeta
-        title={title}
+        title={shouldRenderSectionTitle ? `${title} | ${props.title}` : title}
         description={description}
         noIndex={props.noIndex}
       />

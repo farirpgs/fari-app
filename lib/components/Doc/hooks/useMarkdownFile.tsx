@@ -1,3 +1,4 @@
+import kebabCase from "lodash/kebabCase";
 import { useEffect, useState } from "react";
 import { showdownConverter } from "../../../constants/showdownConverter";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
@@ -124,6 +125,14 @@ class Markdown {
       const anchor = this.makeHeaderAnchor(element);
       element.append(anchor);
     }
+
+    const allElementsWithDynamicAnchor = dom.querySelectorAll(".with-anchor");
+
+    allElementsWithDynamicAnchor.forEach((element) => {
+      element.id = kebabCase(element.textContent ?? "");
+      const anchor = this.makeHeaderAnchor(element);
+      element.append(anchor);
+    });
 
     return { dom, tableOfContent, headers };
   }

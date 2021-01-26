@@ -114,8 +114,6 @@ function getFirstMatchFromElement(
   elem: Element | undefined | null,
   selector: string
 ): Element | undefined {
-  const siblings: Array<Element> = [];
-
   let currentElement = elem?.nextElementSibling;
 
   while (currentElement) {

@@ -269,7 +269,10 @@ const styles = (theme: Theme) => {
         borderRadius: 3,
         boxShadow: "inset 0 -1px 0 #d1d5da",
       },
+      // custom elements
       "& .anchor": {
+        width: "1em",
+        height: "1em",
         backgroundImage: getAnchorSvg(
           theme.palette.type === "dark" ? "white" : "black"
         ),
@@ -279,29 +282,16 @@ const styles = (theme: Theme) => {
         backgroundRepeat: "no-repeat",
         cursor: "pointer",
       },
-      "& h1 .anchor": {
-        width: theme.typography.h4.fontSize,
-        height: theme.typography.h4.fontSize,
+      "& fate": {
+        fontFamily: "fate",
       },
-      "& h2 .anchor": {
-        width: theme.typography.h5.fontSize,
-        height: theme.typography.h5.fontSize,
-      },
-      "& h3 .anchor": {
-        width: theme.typography.h6.fontSize,
-        height: theme.typography.h6.fontSize,
-      },
-      "& h4 .anchor": {
-        width: theme.typography.h6.fontSize,
-        height: theme.typography.h6.fontSize,
-      },
-      "& h5 .anchor": {
-        width: theme.typography.h6.fontSize,
-        height: theme.typography.h6.fontSize,
-      },
-      "& h6 .anchor": {
-        width: theme.typography.h6.fontSize,
-        height: theme.typography.h6.fontSize,
+      "& .with-anchor": {
+        "fontWeight": "bold",
+        "& .anchor": {
+          width: "1em",
+          height: "1em",
+          marginLeft: "0",
+        },
       },
     },
   };
