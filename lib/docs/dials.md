@@ -43,7 +43,7 @@ Here are some examples of props you can add to the game:
 
 An alternate system for fast but very dramatic conflicts.
 
-> This system was inspired and adapted by Trollbabe by Ron Edwards. It is very fast in play (at the table, at any rate). It cuts down on the number of rolls - many conflicts are decided after 1-3 rolls. But players don't feel cheated - every roll is filled with dramatic tension, if it's a conflict they care about. And if it's not, they give up before they take anything more than a Mild Consequence.
+> This system was inspired and adapted from Trollbabe by Ron Edwards. It is very fast in play (at the table, at any rate). It cuts down on the number of rolls - many conflicts are decided after 1-3 rolls. But players don't feel cheated - every roll is filled with dramatic tension, if it's a conflict they care about. And if it's not, they give up before they take anything more than a Mild Consequence.
 >
 > http://evilhat.wikidot.com/quick-conflicts
 
@@ -137,3 +137,47 @@ The finest example of this in my campaign was when Corrin, a knight and a doctor
 So this was essentially a conflict over whether Corrin examine a patient, and in the scene that followed, he ended up challenging Alleron's status as a knight, having a duel with him, killing him, and being banished.
 
 Faced with the cost of his 'victory,' he left without examining the patient.
+
+# Magic: Aspect Based Naration
+
+A simple and lightweight magic system that keeps a good balance between all player characters
+
+> This page is an adaptation of the following wiki article from Evil Hat Production:
+>
+> http://evilhat.wikidot.com/aspect-based-naration
+
+## Design Notes
+
+This magic system is intended to be as simple and lightweight as possible while maintaining a good balance between magic users and mundane characters. The meat of the system is to let ones Aspects be the base by which one narrates actions. There are no new skills, stunts, rules or anything else. Just some guidelines on how to narrate the use of magic. The system allows Magic users to blast enemies with fire, shield themselves with force, communicate with demons, see through walls, and most anything else one can envision a magic character doing. At the same time, the range of possible effects and difficulties should match mundane actions to maintain balance.
+
+## Description
+
+Magic is diverse and mysterious. No one truly knows the source of magic though there are many theories ranging from the gods, to living things to demons and devils to human will. It is clear, however, that magic is much like versatile tool. Like a Swiss army knife on steroids. It can do almost anything in the right hands and its potential can just as easily be wielded to detriment of others as for the betterment of others. Generally, the use of magic universally requires one to speak magic words and make appropriate gestures. Some spells or rituals benefit from material components, specific timings or other factors.
+
+> ### 30-Second Version
+>
+> For those who do not want to read all this:
+>
+> - Take an Aspect that represents you characters ability to do magic
+> - Pick sills that accomplish things you want your magic user to be able to accomplish
+> - Narrate the use of your skills with magic flare!
+
+## Mechanics
+
+### Aspects
+
+The meat of this system is to take advantage of the broad skills presented in Fate Core and the awesomeness of Aspects. The golden rule is that, when narrating the success or failure of a skill, you base your narration on your characters Aspects. This need not only apply to magical aspects either.
+
+#### Example 1:
+
+Kale has the aspect "Outlaw Archer" and the Shooting skill at Good. Grilio has the Aspect "Hermatic Wizard" and the shooting skill at Good. Both can attempt to take out the thug in the next zone. A success of Kale's part might be narrated as him shooting the thug with an arrow. A success by Grilio might be narrated as him blasting the thug with a bolt of fire. Neither would narrate their characters as striking the thug with a a large pebble cast by a sling.
+
+#### Example 2:
+
+Cory has the aspect "Tried and True Detective" and the Investigation skill at Good. Dale has the aspect "Wizard in the Know" and has the Investigation at Good. Both can attempt to discern how many people are behind closed door. A success on Corys' part might be narrated as him counting voices, footsteps and observing shadows that flicker under the door. A success by Dale might be narrated as him casting a quick spell to look through the door and count the number of people he sees. Neither would narate their success in a way that did not jive with their Aspects.
+
+#### Example 3:
+
+### Difficulties, Times and Effects
+
+When trying to determine how difficult a task is and how long it takes to complete when a magician uses a skill, just ask your self how hard it would be and how long it would take for a mundane character to do the same thing with that same skill. There you go! Once success or failure occurs, let the magic wielder spice things up as much as they like. The effects, however, are of the same magnitude as would result from the mundane use of the skill.

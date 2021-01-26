@@ -275,8 +275,8 @@ const styles = (theme: Theme) => {
       },
       // custom elements
       "& .anchor": {
-        width: "1em",
-        height: "1em",
+        width: ".7em",
+        height: ".7em",
         backgroundImage: getAnchorSvg(
           theme.palette.type === "dark" ? "white" : "black"
         ),
