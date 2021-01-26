@@ -59,8 +59,6 @@ export const IndexCard: React.FC<
   const shouldRenderCheckboxesOrConsequences =
     aspect.tracks.length > 0 || aspect.consequences.length > 0;
 
-  const shouldRenderAspectMenuItems = aspect.type !== AspectType.Boost;
-  const shouldRenderContent = aspect.type !== AspectType.Boost;
   const shouldRenderPlayedDuringTurnIcon =
     aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
 
@@ -90,7 +88,7 @@ export const IndexCard: React.FC<
             {renderTitle()}
           </Box>
         </Box>
-        {shouldRenderContent && renderContent()}
+        {renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
         <Collapse in={aspect.hasDrawArea}>
@@ -294,8 +292,7 @@ export const IndexCard: React.FC<
                   setMenuOpen(false);
                 }}
               >
-                {shouldRenderAspectMenuItems && renderAspectMenuItems()}
-                {/* {renderGlobalMenuItems()} */}
+                {renderAspectMenuItems()}
               </Menu>
             </Grid>
           </>
@@ -464,9 +461,6 @@ export const IndexCard: React.FC<
   }
 
   function renderContent() {
-    const shouldRenderContentTitle =
-      aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
-
     return (
       <Box
         className={css({
@@ -477,24 +471,20 @@ export const IndexCard: React.FC<
           borderBottom: `1px solid ${theme.palette.divider}`,
         })}
       >
-        {shouldRenderContentTitle && (
-          <Box px="1rem">
-            <Typography variant="overline">
-              {aspect.type === AspectType.NPC && (
-                <>
-                  {t("character-dialog.aspects")} {" & "}
-                  {t("character-dialog.notes")}
-                </>
-              )}
-              {aspect.type === AspectType.BadGuy && (
-                <>
-                  {t("character-dialog.aspects")} {" & "}
-                  {t("character-dialog.notes")}
-                </>
-              )}
-            </Typography>
-          </Box>
-        )}
+        <Box px="1rem">
+          <Typography variant="overline">
+            {aspect.type === AspectType.NPC ||
+            aspect.type === AspectType.BadGuy ? (
+              <>
+                {t("character-dialog.aspects")} {" & "}
+                {t("character-dialog.notes")}
+              </>
+            ) : (
+              <>{t("character-dialog.notes")}</>
+            )}
+          </Typography>
+        </Box>
+
         <Box p="0 1rem">
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}

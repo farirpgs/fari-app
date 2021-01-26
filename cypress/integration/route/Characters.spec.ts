@@ -107,6 +107,7 @@ describe("/characters", () => {
 
       cy.contains("Luke Skywalker").click();
 
+      Fari.get("scene.tabs.player-characters").click();
       Fari.get("character-card").contains("Luke Skywalker");
       Fari.get("character-card.open-character-sheet").click();
       Fari.get("character-dialog.close").click();

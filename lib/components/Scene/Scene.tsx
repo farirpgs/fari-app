@@ -36,6 +36,7 @@ import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SaveIcon from "@material-ui/icons/Save";
@@ -151,10 +152,13 @@ export const Scene: React.FC<IProps> = (props) => {
     string | undefined
   >(undefined);
 
-  const [tab, setTab] = useState<"public" | "private" | "gm-notes">("public");
+  const [tab, setTab] = useState<
+    "player-characters" | "public" | "private" | "gm-notes"
+  >("public");
   const [savedSnack, setSavedSnack] = useState(false);
 
   const isGM = !props.idFromParams;
+  const isManaging = isGM || props.mode === SceneMode.Manage;
   const isOffline = props.mode === SceneMode.PlayOffline;
   const isPrivate = tab === "private";
   const lightBackground = useLightBackground();
@@ -274,7 +278,6 @@ export const Scene: React.FC<IProps> = (props) => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 {renderHeader()}
-                {renderCharacterCards()}
                 {renderContent()}
               </Grid>
             </Grid>
@@ -285,7 +288,6 @@ export const Scene: React.FC<IProps> = (props) => {
               </Grid>
               <Grid item xs={12} md={7} lg={9}>
                 {renderHeader()}
-                {renderCharacterCards()}
                 {renderContent()}
               </Grid>
             </Grid>
@@ -574,41 +576,43 @@ export const Scene: React.FC<IProps> = (props) => {
 
     return (
       <>
-        <Collapse in={hasPlayersWithCharacterSheets}>
-          <Box>
-            <MagicGridContainer
-              items={playersWithCharacterSheets.length}
-              deps={[
-                playersWithCharacterSheets.length,
-                Object.keys(sceneManager.state.scene.aspects).length,
-              ]}
-            >
-              {playersWithCharacterSheets.map((player, index) => {
-                const isMe =
-                  props.mode === SceneMode.PlayOnline &&
-                  props.userId === player.id;
-                const canControl = isGM || isMe;
-                return (
-                  <CharacterCard
-                    key={player?.id || index}
-                    readonly={!canControl}
-                    playerName={player.playerName}
-                    characterSheet={player.character}
-                    onRoll={(options) => {
-                      roll(player, options);
-                    }}
-                    onCharacterDialogOpen={() => {
-                      setCharacterDialogPlayerId(player.id);
-                    }}
-                  />
-                );
-              })}
-            </MagicGridContainer>
-          </Box>
-          <Box pt="1rem" pb="2rem" px=".5rem">
-            <Divider />
-          </Box>
-        </Collapse>
+        <Box pt="2rem" pb="1rem" px="1rem">
+          <Collapse in={hasPlayersWithCharacterSheets}>
+            <Box>
+              <MagicGridContainer
+                items={playersWithCharacterSheets.length}
+                deps={[
+                  playersWithCharacterSheets.length,
+                  Object.keys(sceneManager.state.scene.aspects).length,
+                ]}
+              >
+                {playersWithCharacterSheets.map((player, index) => {
+                  const isMe =
+                    props.mode === SceneMode.PlayOnline &&
+                    props.userId === player.id;
+                  const canControl = isGM || isMe;
+                  return (
+                    <CharacterCard
+                      key={player?.id || index}
+                      readonly={!canControl}
+                      playerName={player.playerName}
+                      characterSheet={player.character}
+                      onRoll={(options) => {
+                        roll(player, options);
+                      }}
+                      onCharacterDialogOpen={() => {
+                        setCharacterDialogPlayerId(player.id);
+                      }}
+                    />
+                  );
+                })}
+              </MagicGridContainer>
+            </Box>
+            <Box pt="1rem" pb="2rem" px=".5rem">
+              <Divider />
+            </Box>
+          </Collapse>
+        </Box>
       </>
     );
   }
@@ -626,7 +630,9 @@ export const Scene: React.FC<IProps> = (props) => {
           <Box>
             <TabContext value={tab}>
               {renderTabs()}
-
+              <TabPanel value={"player-characters"} className={tabPanelStyle}>
+                {renderCharacterCards()}
+              </TabPanel>
               <TabPanel value={"public"} className={tabPanelStyle}>
                 {renderAspects()}
               </TabPanel>
@@ -748,10 +754,6 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderTabs() {
-    if (!isGM) {
-      return null;
-    }
-
     const tabClass = css({
       textTransform: "none",
     });
@@ -771,24 +773,40 @@ export const Scene: React.FC<IProps> = (props) => {
             setTab(newValue);
           }}
         >
+          {props.mode !== SceneMode.Manage && (
+            <Tab
+              value="player-characters"
+              data-cy="scene.tabs.player-characters"
+              label={t("menu.characters")}
+              classes={{ root: tabClass }}
+              icon={<PeopleAltIcon />}
+            />
+          )}
           <Tab
             value="public"
+            data-cy="scene.tabs.public"
             label={t("play-route.public")}
             classes={{ root: tabClass }}
             icon={<VisibilityIcon />}
           />
-          <Tab
-            value="private"
-            label={t("play-route.private")}
-            classes={{ root: tabClass }}
-            icon={<VisibilityOffIcon />}
-          />
-          <Tab
-            value="gm-notes"
-            label={t("play-route.gm-notes")}
-            classes={{ root: tabClass }}
-            icon={<BorderColorIcon />}
-          />
+          {isManaging && (
+            <Tab
+              value="private"
+              data-cy="scene.tabs.private"
+              label={t("play-route.private")}
+              classes={{ root: tabClass }}
+              icon={<VisibilityOffIcon />}
+            />
+          )}
+          {isManaging && (
+            <Tab
+              value="gm-notes"
+              data-cy="scene.tabs.gm-notes"
+              label={t("play-route.gm-notes")}
+              classes={{ root: tabClass }}
+              icon={<BorderColorIcon />}
+            />
+          )}
         </Tabs>
       </Box>
     );

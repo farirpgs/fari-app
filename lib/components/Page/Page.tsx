@@ -55,6 +55,7 @@ export const Page: React.FC<{
   liveLabel?: string;
   drawerWidth?: string;
   pb?: string;
+  debug?: Record<string, string>;
 }> = (props) => {
   const history = useHistory();
   const { displayDonation = true } = props;
@@ -136,6 +137,17 @@ export const Page: React.FC<{
         <CookieConsent />
 
         <Container>
+          {env.isLocalHost && props.debug && (
+            <pre>
+              {Object.keys(props.debug).map((label) => {
+                return (
+                  <Box key={label}>
+                    {label}: {props.debug?.[label]}
+                  </Box>
+                );
+              })}
+            </pre>
+          )}
           <Box py="1rem">
             <Grid
               container
