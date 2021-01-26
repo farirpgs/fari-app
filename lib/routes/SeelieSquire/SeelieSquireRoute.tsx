@@ -18,6 +18,7 @@ export const SeelieSquireRoute: React.FC<{ page: string }> = (props) => {
       loadFunction={async () => {
         return makeSeelieSquireMarkdown(theme);
       }}
+      noIndex
       author={{
         title: "Seelie Squire",
         avatarUrl: Images.seelieSquireAvatar,

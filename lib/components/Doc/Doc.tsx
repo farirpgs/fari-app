@@ -26,7 +26,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
-  createFilterOptions,
+  createFilterOptions
 } from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
@@ -43,7 +43,7 @@ import { PageMeta } from "../PageMeta/PageMeta";
 import {
   ILoadFunction,
   IMarkdownHeader,
-  useMarkdownFile,
+  useMarkdownFile
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
@@ -66,6 +66,7 @@ export const Doc: React.FC<{
   imageUrl?: string;
   loadFunction: ILoadFunction;
   maxWidth?: ContainerTypeMap["props"]["maxWidth"];
+  noIndex?: boolean;
 }> = (props) => {
   const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
     props.loadFunction
@@ -120,11 +121,12 @@ export const Doc: React.FC<{
   const shouldRenderImage = props.imageUrl && !isSmall;
   return (
     <Page
+    
       drawerWidth={!isSmall ? drawerWidth : undefined}
       pb="4rem"
       debug={{ metaTitle: title, metaDescription: description }}
     >
-      <PageMeta title={title} description={description} />
+      <PageMeta title={title} description={description} noIndex={props.noIndex}/>
       {html ? (
         <Fade in>
           <Box display="flex">
@@ -454,7 +456,7 @@ export const Doc: React.FC<{
                       dense
                       key={h2Index}
                       component={Link}
-                      to={`#${h2.id}`}
+                      to={`${props.url}/${h1.page.id}#${h2.id}`}
                       data-cy={`doc.table-of-content.h2`}
                       data-cy-page-id={h2.id}
                       onClick={() => {
