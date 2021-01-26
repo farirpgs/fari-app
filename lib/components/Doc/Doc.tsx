@@ -26,7 +26,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
-  createFilterOptions
+  createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
@@ -43,7 +43,7 @@ import { PageMeta } from "../PageMeta/PageMeta";
 import {
   ILoadFunction,
   IMarkdownHeader,
-  useMarkdownFile
+  useMarkdownFile,
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
@@ -52,26 +52,59 @@ export const drawerWidth = "300px";
 
 export const Doc: React.FC<{
   title: string;
-  currentPage: string | undefined;
+  /**
+   * Prefix used by the document
+   *
+   * e.g. `/srds/condensed`
+   */
   url: string;
+  /**
+   * Section right after the `props.url` which matches the current `<h1>` in the document
+   *
+   * e.g. `/taking-action-rolling-the-dice`
+   */
+  page: string | undefined;
+  /**
+   * Section right after the `props.page` which matches a `<h>` inside the current page in the document
+   *
+   * e.g. `/modifying-the-dice`
+   */
+  section: string | undefined;
+  /**
+   * Where the user should go when clicking on the breadcrumb parent element
+   */
   parent: {
     title: string;
     url: string;
   };
+  /**
+   * Author of the document as well as links
+   */
   author?: {
     title: string;
     avatarUrl?: string;
     items: Array<{ label: string; url: string }>;
   };
+  /**
+   * Image visible on large views at the top of the document
+   */
   imageUrl?: string;
-  loadFunction: ILoadFunction;
+  /**
+   * Customize the max width of the document
+   */
   maxWidth?: ContainerTypeMap["props"]["maxWidth"];
+  /**
+   * Disables Search Enginge tracking
+   */
   noIndex?: boolean;
+  /**
+   * Function that returns the markdown document to parce
+   */
+  loadFunction: ILoadFunction;
 }> = (props) => {
   const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
     props.loadFunction
   );
-  const hash = useLocation().hash;
   const {
     html,
     nextH1,
@@ -80,11 +113,12 @@ export const Doc: React.FC<{
     title,
     description,
   } = useMarkdownPage({
-    page: props.currentPage,
-    hash: hash,
+    page: props.page,
+    section: props.section,
     dom: dom,
   });
-  useScrollOnHtmlLoad(html);
+
+  useScrollOnHtmlLoad(html, props.section);
 
   const lightBackground = useLightBackground();
   const theme = useTheme();
@@ -96,37 +130,62 @@ export const Doc: React.FC<{
   const [openH1, setOpenH1] = useState<string | undefined>();
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    setOpenH1(currentH1?.id);
-  }, [currentH1]);
+  const shouldRenderImage = props.imageUrl && !isSmall;
 
-  useEffect(() => {
-    const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
-    const pageTitle = title ? `:${kebabCase(title)}` : "";
-    const sectionTitle = location.hash
-      ? `:${location.hash.replace("#", "")}`
-      : "";
-    const logMessage = `Route:Srd${docTitle}${pageTitle}${sectionTitle}`;
+  useEffect(
+    function onPageChange() {
+      setOpenH1(currentH1?.id);
+      window.scrollTo(0, 0);
+    },
+    [currentH1]
+  );
 
-    logger.info(logMessage, {
-      pathname: location.pathname,
-      hash: location.hash,
-    });
-  }, [location.pathname, location.hash]);
+  useEffect(function onUnmount() {
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
 
-  function goTo(path: string) {
+  useEffect(
+    function sendLog() {
+      const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
+
+      const logMessage = `Route:Document:${docTitle}${props.page}${props.section}`;
+      logger.info(logMessage, {
+        pathname: location.pathname,
+        hash: location.hash,
+      });
+    },
+    [location.pathname]
+  );
+
+  useEffect(
+    function transformHashToGoodUrl() {
+      if (currentH1 && location.hash) {
+        const h2 = location.hash.replace("#", "");
+        const newUrl = `${props.url}/${currentH1.id}/${h2}`;
+        history.push(newUrl);
+      }
+    },
+    [location.hash]
+  );
+
+  function handleGoTo(path: string) {
     history.push(`${props.url}/${path}`);
   }
 
-  const shouldRenderImage = props.imageUrl && !isSmall;
   return (
     <Page
-    
       drawerWidth={!isSmall ? drawerWidth : undefined}
       pb="4rem"
       debug={{ metaTitle: title, metaDescription: description }}
+      disableAutomaticScrollTop
     >
-      <PageMeta title={title} description={description} noIndex={props.noIndex}/>
+      <PageMeta
+        title={title}
+        description={description}
+        noIndex={props.noIndex}
+      />
       {html ? (
         <Fade in>
           <Box display="flex">
@@ -318,7 +377,7 @@ export const Doc: React.FC<{
             color="primary"
             data-cy="doc.previous"
             onClick={() => {
-              goTo(previousH1?.id);
+              handleGoTo(previousH1?.id);
             }}
           >
             {truncate(previousH1?.textContent ?? "", { length: 50 })}
@@ -331,7 +390,7 @@ export const Doc: React.FC<{
             color="primary"
             data-cy="doc.next"
             onClick={() => {
-              goTo(nextH1?.id);
+              handleGoTo(nextH1?.id);
             }}
           >
             {truncate(nextH1?.textContent ?? "", { length: 50 })}
@@ -368,7 +427,7 @@ export const Doc: React.FC<{
               if (header?.level === 1) {
                 history.push(`${props.url}/${header?.id}`);
               } else {
-                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
+                history.push(`${props.url}/${header?.page?.id}/${header?.id}`);
               }
             }
           }}
@@ -456,11 +515,10 @@ export const Doc: React.FC<{
                       dense
                       key={h2Index}
                       component={Link}
-                      to={`${props.url}/${h1.page.id}#${h2.id}`}
+                      to={`${props.url}/${h1.page.id}/${h2.id}`}
                       data-cy={`doc.table-of-content.h2`}
                       data-cy-page-id={h2.id}
                       onClick={() => {
-                        window.location.hash = h2.id;
                         setMobileMenuOpen(false);
                       }}
                     >

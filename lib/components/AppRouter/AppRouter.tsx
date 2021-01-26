@@ -133,10 +133,11 @@ export const AppRouter = () => {
         <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
         <Route
           exact
-          path={"/srds/condensed/:page?"}
+          path={"/srds/condensed/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/srds/condensed"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Condensed"
@@ -165,10 +166,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/srds/core/:page?"}
+          path={"/srds/core/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/srds/core"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Core"
@@ -197,10 +199,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/srds/accelerated/:page?"}
+          path={"/srds/accelerated/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/srds/accelerated"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Accelerated"
@@ -229,10 +232,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/srds/system-toolkit/:page?"}
+          path={"/srds/system-toolkit/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/srds/system-toolkit"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate System Toolkit"
@@ -261,10 +265,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/srds/adversary-toolkit/:page?"}
+          path={"/srds/adversary-toolkit/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/srds/adversary-toolkit"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Adversary Toolkit"
@@ -293,10 +298,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/changelog/:page?"}
+          path={"/changelog/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/changelog"
               parent={{ title: "Fari", url: "/" }}
               title="Changelog"
@@ -306,10 +312,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/fate-stunts/:page?"}
+          path={"/fate-stunts/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/fate-stunts"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Fate Stunts"
@@ -333,17 +340,21 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/seelie-squire/:page?"}
+          path={"/seelie-squire/:page?/:section?"}
           render={(props) => (
-            <SeelieSquireRoute page={props.match.params.page} />
+            <SeelieSquireRoute
+              page={props.match.params.page}
+              section={props.match.params.section}
+            />
           )}
         />
         <Route
           exact
-          path={"/scene-checklist/:page?"}
+          path={"/scene-checklist/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/scene-checklist"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Scene Checklist"
@@ -366,7 +377,8 @@ export const AppRouter = () => {
           path={"/dials/:page?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/dials"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Dials"
@@ -378,10 +390,11 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/cheat-sheet/:page?"}
+          path={"/cheat-sheet/:page?/:section?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/cheat-sheet"
               parent={{ title: "SRDs", url: "/srds" }}
               title="Cheat Sheet"
@@ -410,7 +423,8 @@ export const AppRouter = () => {
           path={"/srds/test:page?"}
           render={(props) => (
             <Doc
-              currentPage={props.match.params.page}
+              page={props.match.params.page}
+              section={props.match.params.section}
               url="/srds/test"
               parent={{
                 title: "Parent Title Parent Title Parent Title Parent Title",

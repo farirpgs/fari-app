@@ -9,7 +9,6 @@ import { CharactersManager } from "./components/CharactersManager/CharactersMana
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
-import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { env } from "./constants/env";
 import {
   CharactersContext,
@@ -58,7 +57,6 @@ export const AppProvider: React.FC<{}> = (props) => {
                   "client-context": env.context,
                 }}
               />
-              <ScrollToTop />
               <History />
               <ScenesManager />
               <CharactersManager />

@@ -224,7 +224,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(anEmptyMarkdownFile);
 
-        return useMarkdownPage({ page: "", hash: "", dom: dom });
+        return useMarkdownPage({ page: "", section: "", dom: dom });
       });
 
       expect(view.result.current.title).toEqual("");
@@ -239,7 +239,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(anUndefinedMarkdownFile);
 
-        return useMarkdownPage({ page: undefined, hash: "", dom: dom });
+        return useMarkdownPage({ page: undefined, section: "", dom: dom });
       });
 
       expect(view.result.current.title).toEqual("");
@@ -254,7 +254,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage({ page: undefined, hash: "", dom: dom });
+        return useMarkdownPage({ page: undefined, section: "", dom: dom });
       });
 
       await view.waitForNextUpdate();
@@ -270,7 +270,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage({ page: undefined, hash: "", dom: dom });
+        return useMarkdownPage({ page: undefined, section: "", dom: dom });
       });
 
       await view.waitForNextUpdate();
@@ -286,7 +286,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage({ page: "page2", hash: "", dom });
+        return useMarkdownPage({ page: "page2", section: "", dom });
       });
 
       await view.waitForNextUpdate();
@@ -302,7 +302,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage({ page: "page3", hash: "", dom });
+        return useMarkdownPage({ page: "page3", section: "", dom });
       });
 
       await view.waitForNextUpdate();
@@ -318,7 +318,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage({ page: "page3", hash: "#rage", dom });
+        return useMarkdownPage({ page: "page3", section: "#rage", dom });
       });
 
       await view.waitForNextUpdate();

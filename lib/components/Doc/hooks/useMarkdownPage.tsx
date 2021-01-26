@@ -4,11 +4,10 @@ import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
 export function useMarkdownPage(options: {
   page: string | undefined;
-  hash: string | undefined;
+  section: string | undefined;
   dom: HTMLDivElement | undefined;
 }) {
-  const { page, dom, hash } = options;
-  const hashId = hash?.replace("#", "");
+  const { page, dom, section: section } = options;
   const logger = useLogger();
 
   return useMemo(() => {
@@ -21,16 +20,16 @@ export function useMarkdownPage(options: {
 
     const currentH1 = dom?.querySelector(`[id='${page}']`) ?? allH1s[0];
     const textAfterCurrentH1 = getFirstMatchFromElement(currentH1, "p,ul");
-    const currentHashElement =
-      dom?.querySelector(`[id='${hashId}']`) ?? undefined;
+    const currentSectionElement =
+      dom?.querySelector(`[id='${section}']`) ?? undefined;
 
     const textAfterCurrentHash = getFirstMatchFromElement(
-      currentHashElement,
+      currentSectionElement,
       "p,ul"
     );
 
     const title =
-      currentHashElement?.textContent ?? currentH1?.textContent ?? "";
+      currentSectionElement?.textContent ?? currentH1?.textContent ?? "";
 
     const firstParagraph =
       textAfterCurrentHash?.textContent ??
@@ -73,7 +72,7 @@ export function useMarkdownPage(options: {
       title: title.trim(),
       description: description.trim(),
     };
-  }, [page, dom, hash]);
+  }, [page, dom, section]);
 }
 
 function getNewDom(currentH1: Element, allElementsInPage: Element[]) {
