@@ -26,7 +26,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
-  createFilterOptions,
+  createFilterOptions
 } from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
@@ -43,7 +43,7 @@ import { PageMeta } from "../PageMeta/PageMeta";
 import {
   ILoadFunction,
   IMarkdownHeader,
-  useMarkdownFile,
+  useMarkdownFile
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
@@ -66,14 +66,24 @@ export const Doc: React.FC<{
   imageUrl?: string;
   loadFunction: ILoadFunction;
   maxWidth?: ContainerTypeMap["props"]["maxWidth"];
+  noIndex?: boolean;
 }> = (props) => {
   const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
     props.loadFunction
   );
-  const { html, nextH1, previousH1, currentH1, description } = useMarkdownPage(
-    props.currentPage,
-    dom
-  );
+  const hash = useLocation().hash;
+  const {
+    html,
+    nextH1,
+    previousH1,
+    currentH1,
+    title,
+    description,
+  } = useMarkdownPage({
+    page: props.currentPage,
+    hash: hash,
+    dom: dom,
+  });
   useScrollOnHtmlLoad(html);
 
   const lightBackground = useLightBackground();
@@ -84,13 +94,11 @@ export const Doc: React.FC<{
   const logger = useLogger();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openH1, setOpenH1] = useState<string | undefined>();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setOpenH1(currentH1?.id);
   }, [currentH1]);
-
-  const title = currentH1?.textContent ?? "";
-  const isFirstPage = !previousH1;
 
   useEffect(() => {
     const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
@@ -112,11 +120,13 @@ export const Doc: React.FC<{
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   return (
-    <Page drawerWidth={!isSmall ? drawerWidth : undefined} pb="4rem">
-      <PageMeta
-        title={isFirstPage ? props.title : `${title} | ${props.title}`}
-        description={description}
-      />
+    <Page
+    
+      drawerWidth={!isSmall ? drawerWidth : undefined}
+      pb="4rem"
+      debug={{ metaTitle: title, metaDescription: description }}
+    >
+      <PageMeta title={title} description={description} noIndex={props.noIndex}/>
       {html ? (
         <Fade in>
           <Box display="flex">
@@ -342,6 +352,26 @@ export const Doc: React.FC<{
           options={allHeaders.map((header) => header)}
           groupBy={(header) => header.grouping ?? ""}
           getOptionLabel={(header) => header.label}
+          inputValue={search}
+          onInputChange={(e, value, reason) => {
+            if (reason === "input") {
+              setSearch(value);
+            } else {
+              setSearch("");
+            }
+          }}
+          onChange={(event, newValue) => {
+            const label = (newValue as IMarkdownHeader)?.label;
+            if (label) {
+              const header = allHeaders.find((h) => label === h.label);
+
+              if (header?.level === 1) {
+                history.push(`${props.url}/${header?.id}`);
+              } else {
+                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
+              }
+            }
+          }}
           renderOption={(header) => (
             <React.Fragment>
               <Box width="100%">
@@ -356,19 +386,6 @@ export const Doc: React.FC<{
               </Box>
             </React.Fragment>
           )}
-          onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownHeader)?.label;
-
-            if (label) {
-              const header = allHeaders.find((h) => label === h.label);
-
-              if (header?.level === 1) {
-                history.push(`${props.url}/${header?.id}`);
-              } else {
-                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
-              }
-            }
-          }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -439,7 +456,7 @@ export const Doc: React.FC<{
                       dense
                       key={h2Index}
                       component={Link}
-                      to={`#${h2.id}`}
+                      to={`${props.url}/${h1.page.id}#${h2.id}`}
                       data-cy={`doc.table-of-content.h2`}
                       data-cy-page-id={h2.id}
                       onClick={() => {

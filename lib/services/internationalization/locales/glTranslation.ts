@@ -113,7 +113,7 @@ export const glTranslation: Record<
   "oracle-route.meta.description": `Pregunta sobre o teu mundo e deixa que a Oráculo responda`,
   "oracle-route.meta.title": `Oráculo`,
   "oracle.value.No": `Non`,
-  "oracle.value.NoAnd": `Non e ademáis...`,
+  "oracle.value.NoAnd": `Non e ademais...`,
   "oracle.value.Yes": `Si`,
   "oracle.value.YesAnd": `Si e ademais...`,
   "oracle.value.YesBut": `Si pero...`,

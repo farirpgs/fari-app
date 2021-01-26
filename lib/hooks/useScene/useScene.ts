@@ -574,6 +574,7 @@ export function useScene(props: IProps) {
 
             if (p.character) {
               p.character.playedDuringTurn = playedInTurnOrder;
+              p.character.lastUpdated = getUnix();
             }
           }
         });
@@ -592,6 +593,7 @@ export function useScene(props: IProps) {
 
             if (p.character) {
               p.character.fatePoints = newFatePointsAmount;
+              p.character.lastUpdated = getUnix();
             }
           }
         });

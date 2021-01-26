@@ -8,11 +8,15 @@ exports[`useMarkdownFile Given I properly formatted markdown file should return 
 <h1 id=\\"page2\\">Page 2<a class=\\"anchor\\" href=\\"#page2\\"></a></h1>
 <p>Page 2 introduction</p>
 <h1 id=\\"page3\\">Page 3<a class=\\"anchor\\" href=\\"#page3\\"></a></h1>
+<p>Page 3 introduction</p>
 <ul>
 <li>bullet 1</li>
 <li>bullet 2</li>
 </ul>
-<p>Page 3 introduction</p>"
+<h2 id=\\"rage\\">Rage<a class=\\"anchor\\" href=\\"#rage\\"></a></h2>
+<ul>
+<li><strong>Berserk Rage</strong>. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)</li>
+</ul>"
 `;
 
 exports[`useMarkdownFile Given I properly formatted markdown file should return an good state 2`] = `
@@ -76,6 +80,11 @@ exports[`useMarkdownFile Given I properly formatted markdown file should return 
   </h1>
   
 
+  <p>
+    Page 3 introduction
+  </p>
+  
+
   <ul>
     
 
@@ -92,8 +101,28 @@ exports[`useMarkdownFile Given I properly formatted markdown file should return 
   </ul>
   
 
-  <p>
-    Page 3 introduction
-  </p>
+  <h2
+    id="rage"
+  >
+    Rage
+    <a
+      class="anchor"
+      href="#rage"
+    />
+  </h2>
+  
+
+  <ul>
+    
+
+    <li>
+      <strong>
+        Berserk Rage
+      </strong>
+      . When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)
+    </li>
+    
+
+  </ul>
 </div>
 `;

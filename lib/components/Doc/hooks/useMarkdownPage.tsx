@@ -2,11 +2,15 @@ import truncate from "lodash/truncate";
 import { useMemo } from "react";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
-export function useMarkdownPage(
-  page: string | undefined,
-  dom: HTMLDivElement | undefined
-) {
+export function useMarkdownPage(options: {
+  page: string | undefined;
+  hash: string | undefined;
+  dom: HTMLDivElement | undefined;
+}) {
+  const { page, dom, hash } = options;
+  const hashId = hash?.replace("#", "");
   const logger = useLogger();
+
   return useMemo(() => {
     const allH1s =
       dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
@@ -16,11 +20,22 @@ export function useMarkdownPage(
     }
 
     const currentH1 = dom?.querySelector(`[id='${page}']`) ?? allH1s[0];
-    const firstParagraphAfterCurrentH1 = getFirstMatchFromElement(
-      currentH1,
-      "p"
+    const textAfterCurrentH1 = getFirstMatchFromElement(currentH1, "p,ul");
+    const currentHashElement =
+      dom?.querySelector(`[id='${hashId}']`) ?? undefined;
+
+    const textAfterCurrentHash = getFirstMatchFromElement(
+      currentHashElement,
+      "p,ul"
     );
-    const firstParagraph = firstParagraphAfterCurrentH1?.textContent ?? "";
+
+    const title =
+      currentHashElement?.textContent ?? currentH1?.textContent ?? "";
+
+    const firstParagraph =
+      textAfterCurrentHash?.textContent ??
+      textAfterCurrentH1?.textContent ??
+      "";
     const description = truncate(firstParagraph, { length: 155 });
 
     if (!currentH1) {
@@ -29,6 +44,8 @@ export function useMarkdownPage(
         currentH1: allH1s[0],
         previousH1: undefined,
         nextH1: allH1s[1],
+        title: title.trim(),
+        description: description.trim(),
       };
     }
 
@@ -53,9 +70,10 @@ export function useMarkdownPage(
       currentH1,
       previousH1,
       nextH1,
-      description,
+      title: title.trim(),
+      description: description.trim(),
     };
-  }, [page, dom]);
+  }, [page, dom, hash]);
 }
 
 function getNewDom(currentH1: Element, allElementsInPage: Element[]) {

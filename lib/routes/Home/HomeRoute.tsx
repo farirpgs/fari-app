@@ -5,10 +5,10 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import FaceIcon from "@material-ui/icons/Face";
 import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import MovieIcon from "@material-ui/icons/Movie";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -288,7 +288,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     charactersManager.actions.openManager(ManagerMode.Manage);
                   }}
                 >
-                  {renderHeadingIcon(FaceIcon)}
+                  {renderHeadingIcon(PeopleAltIcon)}
                   <FateLabel
                     variant="h5"
                     align="center"

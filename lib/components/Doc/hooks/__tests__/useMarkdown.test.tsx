@@ -127,7 +127,23 @@ describe("useMarkdownFile", () => {
           label: "Page 3",
           level: 1,
           page: undefined,
-          preview: "bullet 1\nbullet 2",
+          preview: "Page 3 introduction",
+        },
+        {
+          grouping: "Page 3",
+          id: "rage",
+          label: "Rage",
+          level: 2,
+          page: {
+            grouping: "Page 3",
+            id: "page3",
+            label: "Page 3",
+            level: 1,
+            page: undefined,
+            preview: "Page 3 introduction",
+          },
+          preview:
+            "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)",
         },
       ]);
       expect(view.result.current.tableOfContent).toEqual({
@@ -170,14 +186,31 @@ describe("useMarkdownFile", () => {
           },
         },
         page3: {
-          children: [],
+          children: [
+            {
+              grouping: "Page 3",
+              id: "rage",
+              label: "Rage",
+              level: 2,
+              page: {
+                grouping: "Page 3",
+                id: "page3",
+                label: "Page 3",
+                level: 1,
+                page: undefined,
+                preview: "Page 3 introduction",
+              },
+              preview:
+                "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)",
+            },
+          ],
           page: {
             grouping: "Page 3",
             id: "page3",
             label: "Page 3",
             level: 1,
             page: undefined,
-            preview: "bullet 1\nbullet 2",
+            preview: "Page 3 introduction",
           },
         },
       });
@@ -189,16 +222,31 @@ describe("useMarkdownPage", () => {
   describe("Given an empty page", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+        const { dom } = useMarkdownFile(anEmptyMarkdownFile);
 
-        return useMarkdownPage("", dom);
+        return useMarkdownPage({ page: "", hash: "", dom: dom });
       });
 
-      await view.waitForNextUpdate();
-      expect(view.result.current.currentH1.textContent).toEqual("Page 1");
+      expect(view.result.current.title).toEqual("");
+      expect(view.result.current.description).toEqual("");
+      expect(view.result.current.currentH1).toEqual(undefined);
       expect(view.result.current.previousH1).toEqual(undefined);
-      expect(view.result.current.nextH1?.textContent).toEqual("Page 2");
-      expect(view.result.current.description).toEqual("Page 1 introduction");
+      expect(view.result.current.nextH1).toEqual(undefined);
+    });
+  });
+  describe("Given an undefined page", () => {
+    it("should default to first h1", async () => {
+      const view = renderHook(() => {
+        const { dom } = useMarkdownFile(anUndefinedMarkdownFile);
+
+        return useMarkdownPage({ page: undefined, hash: "", dom: dom });
+      });
+
+      expect(view.result.current.title).toEqual("");
+      expect(view.result.current.description).toEqual("");
+      expect(view.result.current.currentH1).toEqual(undefined);
+      expect(view.result.current.previousH1).toEqual(undefined);
+      expect(view.result.current.nextH1).toEqual(undefined);
     });
   });
   describe("Given an undefined page", () => {
@@ -206,29 +254,15 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage(undefined, dom);
+        return useMarkdownPage({ page: undefined, hash: "", dom: dom });
       });
 
       await view.waitForNextUpdate();
+      expect(view.result.current.title).toEqual("Page 1");
+      expect(view.result.current.description).toEqual("Page 1 introduction");
       expect(view.result.current.currentH1.textContent).toEqual("Page 1");
       expect(view.result.current.previousH1).toEqual(undefined);
       expect(view.result.current.nextH1?.textContent).toEqual("Page 2");
-      expect(view.result.current.description).toEqual("Page 1 introduction");
-    });
-  });
-  describe("Given an undefined page", () => {
-    it("should default to first h1", async () => {
-      const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
-
-        return useMarkdownPage(undefined, dom);
-      });
-
-      await view.waitForNextUpdate();
-      expect(view.result.current.currentH1.textContent).toEqual("Page 1");
-      expect(view.result.current.previousH1).toEqual(undefined);
-      expect(view.result.current.nextH1?.textContent).toEqual("Page 2");
-      expect(view.result.current.description).toEqual("Page 1 introduction");
     });
   });
   describe("Given the first page page", () => {
@@ -236,14 +270,15 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage(undefined, dom);
+        return useMarkdownPage({ page: undefined, hash: "", dom: dom });
       });
 
       await view.waitForNextUpdate();
+      expect(view.result.current.title).toEqual("Page 1");
+      expect(view.result.current.description).toEqual("Page 1 introduction");
       expect(view.result.current.currentH1.textContent).toEqual("Page 1");
       expect(view.result.current.previousH1).toEqual(undefined);
       expect(view.result.current.nextH1?.textContent).toEqual("Page 2");
-      expect(view.result.current.description).toEqual("Page 1 introduction");
     });
   });
   describe("Given the second page", () => {
@@ -251,14 +286,15 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage("page2", dom);
+        return useMarkdownPage({ page: "page2", hash: "", dom });
       });
 
       await view.waitForNextUpdate();
+      expect(view.result.current.title).toEqual("Page 2");
+      expect(view.result.current.description).toEqual("Page 2 introduction");
       expect(view.result.current.currentH1.textContent).toEqual("Page 2");
       expect(view.result.current.previousH1?.textContent).toEqual("Page 1");
       expect(view.result.current.nextH1?.textContent).toEqual("Page 3");
-      expect(view.result.current.description).toEqual("Page 2 introduction");
     });
   });
   describe("Given the third page", () => {
@@ -266,14 +302,33 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage("page3", dom);
+        return useMarkdownPage({ page: "page3", hash: "", dom });
       });
 
       await view.waitForNextUpdate();
+      expect(view.result.current.title).toEqual("Page 3");
+      expect(view.result.current.description).toEqual("Page 3 introduction");
       expect(view.result.current.currentH1.textContent).toEqual("Page 3");
       expect(view.result.current.previousH1?.textContent).toEqual("Page 2");
       expect(view.result.current.nextH1).toEqual(undefined);
-      expect(view.result.current.description).toEqual("Page 3 introduction");
+    });
+  });
+  describe("Given the third page and there is a hash", () => {
+    it("should go to third h1 and have the right title and description", async () => {
+      const view = renderHook(() => {
+        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+
+        return useMarkdownPage({ page: "page3", hash: "#rage", dom });
+      });
+
+      await view.waitForNextUpdate();
+      expect(view.result.current.title).toEqual("Rage");
+      expect(view.result.current.description).toEqual(
+        "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical con..."
+      );
+      expect(view.result.current.currentH1.textContent).toEqual("Page 3");
+      expect(view.result.current.previousH1?.textContent).toEqual("Page 2");
+      expect(view.result.current.nextH1).toEqual(undefined);
     });
   });
 });
@@ -307,10 +362,16 @@ Page 2 introduction
 
 # Page 3
 
+Page 3 introduction
+
 - bullet 1
 - bullet 2
 
-Page 3 introduction
+
+## Rage
+
+- **Berserk Rage**. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)
+
 `);
 
 const aMarkdownFileWithoutAHeader1 = makeLoadFunction(`
