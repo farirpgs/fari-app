@@ -35,6 +35,7 @@ export function useMarkdownPage(options: {
       textAfterCurrentHash?.textContent ??
       textAfterCurrentH1?.textContent ??
       "";
+
     const description = truncate(firstParagraph, { length: 155 });
 
     if (!currentH1) {
