@@ -144,7 +144,7 @@ class Markdown {
           return `<li><a href="${to.page.id}">${to.page.label}</a></li>`;
         })
         .join("");
-      element.innerHTML = `<ul>${listItems}</ul>`;
+      element.innerHTML = `<ul class="toc">${listItems}</ul>`;
     });
 
     return { dom, tableOfContent, headers };

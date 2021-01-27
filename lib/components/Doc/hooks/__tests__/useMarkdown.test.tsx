@@ -80,6 +80,41 @@ describe("useMarkdownFile", () => {
       expect(view.result.current.dom).toEqual(undefined);
     });
   });
+  describe("Given I have a markdown file with a dynamic anchor tag", () => {
+    it("should add an anchor at the tag matching the id", async () => {
+      const view = renderHook(
+        () => {
+          return useMarkdownFile(aMarkdownFileWithADynamicAnchor);
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
+
+      await view.waitForValueToChange(() => view.result.current.html);
+      expect(view.result.current.html).toMatchSnapshot();
+      expect(
+        view.result.current.dom
+          ?.querySelector("#something-important .anchor")
+          ?.getAttribute("href")
+      ).toEqual("#something-important");
+    });
+  });
+  describe("Given I have a markdown file with a dynamic table of content element", () => {
+    it("should add a table of content", async () => {
+      const view = renderHook(
+        () => {
+          return useMarkdownFile(aMarkdownFileWithADynamicTableOfContent);
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
+
+      await view.waitForValueToChange(() => view.result.current.html);
+      expect(view.result.current.dom?.querySelector(".toc")).toMatchSnapshot();
+    });
+  });
   describe("Given I properly formatted markdown file", () => {
     it("should return an good state", async () => {
       const view = renderHook(() => {
@@ -318,7 +353,7 @@ describe("useMarkdownPage", () => {
       const view = renderHook(() => {
         const { dom } = useMarkdownFile(aGoodMarkdownFile);
 
-        return useMarkdownPage({ page: "page3", section: "#rage", dom });
+        return useMarkdownPage({ page: "page3", section: "rage", dom });
       });
 
       await view.waitForNextUpdate();
@@ -378,4 +413,33 @@ const aMarkdownFileWithoutAHeader1 = makeLoadFunction(`
 ## Header 2
 
 Header 2 details
+`);
+
+const aMarkdownFileWithADynamicAnchor = makeLoadFunction(`
+# Header 1
+
+<p class="with-anchor">something important</p>
+`);
+
+const aMarkdownFileWithADynamicTableOfContent = makeLoadFunction(`
+# 1
+
+<toc/>
+
+## 1.1
+
+## 1.2
+
+## 1.3
+
+# 2
+
+## 2.1
+## 2.2
+## 2.3
+
+# 3
+
+# 4
+
 `);

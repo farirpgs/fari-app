@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`useMarkdownFile Given I have a markdown file with a dynamic anchor tag should add an anchor at the tag matching the id 1`] = `
+"<h1 id=\\"header1\\">Header 1<a class=\\"anchor\\" href=\\"#header1\\"></a></h1>
+<p class=\\"with-anchor\\" id=\\"something-important\\">something important<a class=\\"anchor\\" href=\\"#something-important\\"></a></p>"
+`;
+
+exports[`useMarkdownFile Given I have a markdown file with a dynamic table of content element should add a table of content 1`] = `
+<ul
+  class="toc"
+>
+  <li>
+    <a
+      href="2"
+    >
+      2
+    </a>
+  </li>
+  <li>
+    <a
+      href="3"
+    >
+      3
+    </a>
+  </li>
+  <li>
+    <a
+      href="4"
+    >
+      4
+    </a>
+  </li>
+</ul>
+`;
+
 exports[`useMarkdownFile Given I properly formatted markdown file should return an good state 1`] = `
 "<h1 id=\\"page1\\">Page 1<a class=\\"anchor\\" href=\\"#page1\\"></a></h1>
 <p>Page 1 introduction</p>
