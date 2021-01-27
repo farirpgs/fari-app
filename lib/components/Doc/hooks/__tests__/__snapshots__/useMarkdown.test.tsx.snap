@@ -11,10 +11,67 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
 >
   <li>
     <a
+      href="/test-doc/1"
+    >
+      1
+    </a>
+    <ul
+      class="toc"
+    >
+      <li>
+        <a
+          href="/test-doc/1/11"
+        >
+          1.1
+        </a>
+      </li>
+      <li>
+        <a
+          href="/test-doc/1/12"
+        >
+          1.2
+        </a>
+      </li>
+      <li>
+        <a
+          href="/test-doc/1/13"
+        >
+          1.3
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a
       href="/test-doc/2"
     >
       2
     </a>
+    <ul
+      class="toc"
+    >
+      <li>
+        <a
+          href="/test-doc/2/21"
+        >
+          2.1
+        </a>
+      </li>
+      <li>
+        <a
+          href="/test-doc/2/22"
+        >
+          2.2
+        </a>
+      </li>
+      <li>
+        <a
+          href="/test-doc/2/23"
+        >
+          2.3
+        </a>
+      </li>
+    </ul>
   </li>
   <li>
     <a
@@ -22,6 +79,9 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
     >
       3
     </a>
+    <ul
+      class="toc"
+    />
   </li>
   <li>
     <a
@@ -29,19 +89,563 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
     >
       4
     </a>
+    <ul
+      class="toc"
+    />
   </li>
 </ul>
 `;
 
+exports[`useMarkdownFile Given I hierarcy formatted markdown file should return an good state 1`] = `
+"<h1 id=\\"header_1\\">header_1<a class=\\"anchor\\" href=\\"#header_1\\"></a></h1>
+<h2 id=\\"header_2\\">header_2<a class=\\"anchor\\" href=\\"#header_2\\"></a></h2>
+<h3 id=\\"header_3\\">header_3<a class=\\"anchor\\" href=\\"#header_3\\"></a></h3>
+<h4 id=\\"header_4\\">header_4<a class=\\"anchor\\" href=\\"#header_4\\"></a></h4>
+<h5 id=\\"header_5\\">header_5<a class=\\"anchor\\" href=\\"#header_5\\"></a></h5>
+<h6 id=\\"header_6\\">header_6<a class=\\"anchor\\" href=\\"#header_6\\"></a></h6>
+<h1 id=\\"again_1\\">again_1<a class=\\"anchor\\" href=\\"#again_1\\"></a></h1>
+<h2 id=\\"again_2\\">again_2<a class=\\"anchor\\" href=\\"#again_2\\"></a></h2>
+<h2 id=\\"again_2-1\\">again_2<a class=\\"anchor\\" href=\\"#again_2-1\\"></a></h2>
+<h3 id=\\"again_3\\">again_3<a class=\\"anchor\\" href=\\"#again_3\\"></a></h3>
+<h3 id=\\"again_3-1\\">again_3<a class=\\"anchor\\" href=\\"#again_3-1\\"></a></h3>
+<h4 id=\\"again_4\\">again_4<a class=\\"anchor\\" href=\\"#again_4\\"></a></h4>
+<h4 id=\\"again_4-1\\">again_4<a class=\\"anchor\\" href=\\"#again_4-1\\"></a></h4>
+<h5 id=\\"again_5\\">again_5<a class=\\"anchor\\" href=\\"#again_5\\"></a></h5>
+<h5 id=\\"again_5-1\\">again_5<a class=\\"anchor\\" href=\\"#again_5-1\\"></a></h5>
+<h6 id=\\"again_6\\">again_6<a class=\\"anchor\\" href=\\"#again_6\\"></a></h6>
+<h6 id=\\"again_6-1\\">again_6<a class=\\"anchor\\" href=\\"#again_6-1\\"></a></h6>"
+`;
+
+exports[`useMarkdownFile Given I hierarcy formatted markdown file should return an good state 2`] = `
+<div>
+  <h1
+    id="header_1"
+  >
+    header_1
+    <a
+      class="anchor"
+      href="#header_1"
+    />
+  </h1>
+  
+
+  <h2
+    id="header_2"
+  >
+    header_2
+    <a
+      class="anchor"
+      href="#header_2"
+    />
+  </h2>
+  
+
+  <h3
+    id="header_3"
+  >
+    header_3
+    <a
+      class="anchor"
+      href="#header_3"
+    />
+  </h3>
+  
+
+  <h4
+    id="header_4"
+  >
+    header_4
+    <a
+      class="anchor"
+      href="#header_4"
+    />
+  </h4>
+  
+
+  <h5
+    id="header_5"
+  >
+    header_5
+    <a
+      class="anchor"
+      href="#header_5"
+    />
+  </h5>
+  
+
+  <h6
+    id="header_6"
+  >
+    header_6
+    <a
+      class="anchor"
+      href="#header_6"
+    />
+  </h6>
+  
+
+  <h1
+    id="again_1"
+  >
+    again_1
+    <a
+      class="anchor"
+      href="#again_1"
+    />
+  </h1>
+  
+
+  <h2
+    id="again_2"
+  >
+    again_2
+    <a
+      class="anchor"
+      href="#again_2"
+    />
+  </h2>
+  
+
+  <h2
+    id="again_2-1"
+  >
+    again_2
+    <a
+      class="anchor"
+      href="#again_2-1"
+    />
+  </h2>
+  
+
+  <h3
+    id="again_3"
+  >
+    again_3
+    <a
+      class="anchor"
+      href="#again_3"
+    />
+  </h3>
+  
+
+  <h3
+    id="again_3-1"
+  >
+    again_3
+    <a
+      class="anchor"
+      href="#again_3-1"
+    />
+  </h3>
+  
+
+  <h4
+    id="again_4"
+  >
+    again_4
+    <a
+      class="anchor"
+      href="#again_4"
+    />
+  </h4>
+  
+
+  <h4
+    id="again_4-1"
+  >
+    again_4
+    <a
+      class="anchor"
+      href="#again_4-1"
+    />
+  </h4>
+  
+
+  <h5
+    id="again_5"
+  >
+    again_5
+    <a
+      class="anchor"
+      href="#again_5"
+    />
+  </h5>
+  
+
+  <h5
+    id="again_5-1"
+  >
+    again_5
+    <a
+      class="anchor"
+      href="#again_5-1"
+    />
+  </h5>
+  
+
+  <h6
+    id="again_6"
+  >
+    again_6
+    <a
+      class="anchor"
+      href="#again_6"
+    />
+  </h6>
+  
+
+  <h6
+    id="again_6-1"
+  >
+    again_6
+    <a
+      class="anchor"
+      href="#again_6-1"
+    />
+  </h6>
+</div>
+`;
+
+exports[`useMarkdownFile Given I hierarcy formatted markdown file should return an good state: markdownIndexes.flat 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "id": "header_1",
+    "label": "header_1",
+    "level": 1,
+    "pageId": undefined,
+    "pageLabel": undefined,
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "header_2",
+    "label": "header_2",
+    "level": 2,
+    "pageId": "header_1",
+    "pageLabel": "header_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "header_3",
+    "label": "header_3",
+    "level": 3,
+    "pageId": "header_1",
+    "pageLabel": "header_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "header_4",
+    "label": "header_4",
+    "level": 4,
+    "pageId": "header_1",
+    "pageLabel": "header_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "header_5",
+    "label": "header_5",
+    "level": 5,
+    "pageId": "header_1",
+    "pageLabel": "header_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "header_6",
+    "label": "header_6",
+    "level": 6,
+    "pageId": "header_1",
+    "pageLabel": "header_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_1",
+    "label": "again_1",
+    "level": 1,
+    "pageId": undefined,
+    "pageLabel": undefined,
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_2",
+    "label": "again_2",
+    "level": 2,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_2-1",
+    "label": "again_2",
+    "level": 2,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_3",
+    "label": "again_3",
+    "level": 3,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_3-1",
+    "label": "again_3",
+    "level": 3,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_4",
+    "label": "again_4",
+    "level": 4,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_4-1",
+    "label": "again_4",
+    "level": 4,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_5",
+    "label": "again_5",
+    "level": 5,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_5-1",
+    "label": "again_5",
+    "level": 5,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_6",
+    "label": "again_6",
+    "level": 6,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+  Object {
+    "children": Array [],
+    "id": "again_6-1",
+    "label": "again_6",
+    "level": 6,
+    "pageId": "again_1",
+    "pageLabel": "again_1",
+    "preview": "",
+  },
+]
+`;
+
+exports[`useMarkdownFile Given I hierarcy formatted markdown file should return an good state: markdownIndexes.tree 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "id": "header_6",
+                        "label": "header_6",
+                        "level": 6,
+                        "pageId": "header_1",
+                        "pageLabel": "header_1",
+                        "preview": "",
+                      },
+                    ],
+                    "id": "header_5",
+                    "label": "header_5",
+                    "level": 5,
+                    "pageId": "header_1",
+                    "pageLabel": "header_1",
+                    "preview": "",
+                  },
+                ],
+                "id": "header_4",
+                "label": "header_4",
+                "level": 4,
+                "pageId": "header_1",
+                "pageLabel": "header_1",
+                "preview": "",
+              },
+            ],
+            "id": "header_3",
+            "label": "header_3",
+            "level": 3,
+            "pageId": "header_1",
+            "pageLabel": "header_1",
+            "preview": "",
+          },
+        ],
+        "id": "header_2",
+        "label": "header_2",
+        "level": 2,
+        "pageId": "header_1",
+        "pageLabel": "header_1",
+        "preview": "",
+      },
+    ],
+    "id": "header_1",
+    "label": "header_1",
+    "level": 1,
+    "pageId": undefined,
+    "pageLabel": undefined,
+    "preview": "",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "again_2",
+        "label": "again_2",
+        "level": 2,
+        "pageId": "again_1",
+        "pageLabel": "again_1",
+        "preview": "",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": "again_3",
+            "label": "again_3",
+            "level": 3,
+            "pageId": "again_1",
+            "pageLabel": "again_1",
+            "preview": "",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "id": "again_4",
+                "label": "again_4",
+                "level": 4,
+                "pageId": "again_1",
+                "pageLabel": "again_1",
+                "preview": "",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "id": "again_5",
+                    "label": "again_5",
+                    "level": 5,
+                    "pageId": "again_1",
+                    "pageLabel": "again_1",
+                    "preview": "",
+                  },
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "id": "again_6",
+                        "label": "again_6",
+                        "level": 6,
+                        "pageId": "again_1",
+                        "pageLabel": "again_1",
+                        "preview": "",
+                      },
+                      Object {
+                        "children": Array [],
+                        "id": "again_6-1",
+                        "label": "again_6",
+                        "level": 6,
+                        "pageId": "again_1",
+                        "pageLabel": "again_1",
+                        "preview": "",
+                      },
+                    ],
+                    "id": "again_5-1",
+                    "label": "again_5",
+                    "level": 5,
+                    "pageId": "again_1",
+                    "pageLabel": "again_1",
+                    "preview": "",
+                  },
+                ],
+                "id": "again_4-1",
+                "label": "again_4",
+                "level": 4,
+                "pageId": "again_1",
+                "pageLabel": "again_1",
+                "preview": "",
+              },
+            ],
+            "id": "again_3-1",
+            "label": "again_3",
+            "level": 3,
+            "pageId": "again_1",
+            "pageLabel": "again_1",
+            "preview": "",
+          },
+        ],
+        "id": "again_2-1",
+        "label": "again_2",
+        "level": 2,
+        "pageId": "again_1",
+        "pageLabel": "again_1",
+        "preview": "",
+      },
+    ],
+    "id": "again_1",
+    "label": "again_1",
+    "level": 1,
+    "pageId": undefined,
+    "pageLabel": undefined,
+    "preview": "",
+  },
+]
+`;
+
 exports[`useMarkdownFile Given I properly formatted markdown file should return an good state 1`] = `
-"<h1 id=\\"page1\\">Page 1<a class=\\"anchor\\" href=\\"#page1\\"></a></h1>
-<p>Page 1 introduction</p>
-<h2 id=\\"header2\\">Header 2<a class=\\"anchor\\" href=\\"#header2\\"></a></h2>
-<p>Header 2 details</p>
-<h1 id=\\"page2\\">Page 2<a class=\\"anchor\\" href=\\"#page2\\"></a></h1>
-<p>Page 2 introduction</p>
-<h1 id=\\"page3\\">Page 3<a class=\\"anchor\\" href=\\"#page3\\"></a></h1>
-<p>Page 3 introduction</p>
+"<h1 id=\\"header_1\\">header_1<a class=\\"anchor\\" href=\\"#header_1\\"></a></h1>
+<p>[header_1.text]</p>
+<h2 id=\\"header_1_1\\">header<em>1</em>1<a class=\\"anchor\\" href=\\"#header_1_1\\"></a></h2>
+<p>[header<em>1</em>2.text]</p>
+<h2 id=\\"header_1_2\\">header<em>1</em>2<a class=\\"anchor\\" href=\\"#header_1_2\\"></a></h2>
+<p>[header<em>1</em>2.text]</p>
+<h3 id=\\"header_1_2_1\\">header<em>1</em>2_1<a class=\\"anchor\\" href=\\"#header_1_2_1\\"></a></h3>
+<h3 id=\\"header_1_2_2\\">header<em>1</em>2_2<a class=\\"anchor\\" href=\\"#header_1_2_2\\"></a></h3>
+<h3 id=\\"header_1_2_3\\">header<em>1</em>2_3<a class=\\"anchor\\" href=\\"#header_1_2_3\\"></a></h3>
+<h1 id=\\"header_2\\">header_2<a class=\\"anchor\\" href=\\"#header_2\\"></a></h1>
+<p>[header_2.text]</p>
+<h1 id=\\"header_3\\">header_3<a class=\\"anchor\\" href=\\"#header_3\\"></a></h1>
+<p>[header_3.text]</p>
 <ul>
 <li>bullet 1</li>
 <li>bullet 2</li>
@@ -55,66 +659,143 @@ exports[`useMarkdownFile Given I properly formatted markdown file should return 
 exports[`useMarkdownFile Given I properly formatted markdown file should return an good state 2`] = `
 <div>
   <h1
-    id="page1"
+    id="header_1"
   >
-    Page 1
+    header_1
     <a
       class="anchor"
-      href="#page1"
+      href="#header_1"
     />
   </h1>
   
 
   <p>
-    Page 1 introduction
+    [header_1.text]
   </p>
   
 
   <h2
-    id="header2"
+    id="header_1_1"
   >
-    Header 2
+    header
+    <em>
+      1
+    </em>
+    1
     <a
       class="anchor"
-      href="#header2"
+      href="#header_1_1"
     />
   </h2>
   
 
   <p>
-    Header 2 details
+    [header
+    <em>
+      1
+    </em>
+    2.text]
   </p>
   
 
-  <h1
-    id="page2"
+  <h2
+    id="header_1_2"
   >
-    Page 2
+    header
+    <em>
+      1
+    </em>
+    2
     <a
       class="anchor"
-      href="#page2"
+      href="#header_1_2"
+    />
+  </h2>
+  
+
+  <p>
+    [header
+    <em>
+      1
+    </em>
+    2.text]
+  </p>
+  
+
+  <h3
+    id="header_1_2_1"
+  >
+    header
+    <em>
+      1
+    </em>
+    2_1
+    <a
+      class="anchor"
+      href="#header_1_2_1"
+    />
+  </h3>
+  
+
+  <h3
+    id="header_1_2_2"
+  >
+    header
+    <em>
+      1
+    </em>
+    2_2
+    <a
+      class="anchor"
+      href="#header_1_2_2"
+    />
+  </h3>
+  
+
+  <h3
+    id="header_1_2_3"
+  >
+    header
+    <em>
+      1
+    </em>
+    2_3
+    <a
+      class="anchor"
+      href="#header_1_2_3"
+    />
+  </h3>
+  
+
+  <h1
+    id="header_2"
+  >
+    header_2
+    <a
+      class="anchor"
+      href="#header_2"
     />
   </h1>
   
 
   <p>
-    Page 2 introduction
+    [header_2.text]
   </p>
   
 
   <h1
-    id="page3"
+    id="header_3"
   >
-    Page 3
+    header_3
     <a
       class="anchor"
-      href="#page3"
+      href="#header_3"
     />
   </h1>
   
 
   <p>
-    Page 3 introduction
+    [header_3.text]
   </p>
   
 

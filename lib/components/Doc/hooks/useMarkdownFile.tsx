@@ -1,4 +1,3 @@
-import produce from "immer";
 import kebabCase from "lodash/kebabCase";
 import { useEffect, useState } from "react";
 import { showdownConverter } from "../../../constants/showdownConverter";
@@ -63,58 +62,44 @@ class Markdown {
 
     const allHeaders = dom.querySelectorAll("h1,h2,h3,h4,h5,h6");
 
-    const markdownIndexes = produce<IMarkdownIndexes>(
-      { tree: [], flat: [] },
-      (draft) => {
-        let latestH1: IMarkdownIndex | undefined;
-        let latestParent: IMarkdownIndex | undefined;
+    const treeReferences: Array<IMarkdownIndex> = [];
+    const flatReferences: Array<IMarkdownIndex> = [];
 
-        allHeaders.forEach((element) => {
-          const elementLevel = this.getElementLevel(element);
-          const label = element.textContent ?? "";
-          const nextElement = element.nextElementSibling;
+    let latestH1: IMarkdownIndex | undefined;
+    let latestParent: IMarkdownIndex | undefined;
 
-          const canPreviewNextElement = this.isElementHeader(nextElement);
-          const preview = canPreviewNextElement
-            ? nextElement?.textContent?.trim() ?? ""
-            : "";
+    allHeaders.forEach((element) => {
+      const currentNode: IMarkdownIndex = Markdown.getNode(element, latestH1);
 
-          const currentNode: IMarkdownIndex = {
-            id: element.id,
-            label: label,
-            preview: preview,
-            level: elementLevel,
-            pageId: latestH1?.id,
-            pageLabel: latestH1?.label,
-            children: [],
-          };
+      flatReferences.push(currentNode);
 
-          draft.flat.push(currentNode);
-
-          const isHigherLevel = !draft.flat.some(
-            (n) => n.level < currentNode.level
-          );
-          if (isHigherLevel) {
-            draft.tree.push(currentNode);
-            latestParent = undefined;
-          }
-
-          if (latestParent) {
-            if (latestParent.level >= currentNode.level) {
-              const latestElementWithHigherLevel = [...draft.flat]
-                .reverse()
-                .find((i) => i.level < currentNode.level);
-              latestParent = latestElementWithHigherLevel;
-            }
-            latestParent?.children.push(currentNode);
-          }
-          latestParent = currentNode;
-
-          const anchor = this.makeHeaderAnchor(element);
-          element.append(anchor);
-        });
+      const isHigherLevel = !flatReferences.some(
+        (n) => n.level < currentNode.level
+      );
+      if (isHigherLevel) {
+        treeReferences.push(currentNode);
+        latestParent = undefined;
       }
-    );
+
+      if (!!latestParent) {
+        const isNodeHigherInHierarchy = latestParent.level >= currentNode.level;
+        if (isNodeHigherInHierarchy) {
+          const indexWithHigherLevelFromEnd = [...flatReferences]
+            .reverse()
+            .find((i) => i.level < currentNode.level);
+          latestParent = indexWithHigherLevelFromEnd;
+        }
+        latestParent?.children.push(currentNode);
+      }
+      latestParent = currentNode;
+
+      if (currentNode.level === 1) {
+        latestH1 = currentNode;
+      }
+
+      const anchor = this.makeHeaderAnchor(element);
+      element.append(anchor);
+    });
 
     // dynamic anchors
     const allElementsWithDynamicAnchor = dom.querySelectorAll(".with-anchor");
@@ -127,7 +112,7 @@ class Markdown {
     // dynamic table of content
     const tocElements = dom.querySelectorAll("toc");
     tocElements.forEach((element) => {
-      const h1 = markdownIndexes.tree
+      const h1 = treeReferences
         .map((h1) => {
           const h2s = h1.children
             .map(
@@ -142,7 +127,37 @@ class Markdown {
       element.innerHTML = `<ul class="toc">${h1}</ul>`;
     });
 
+    const markdownIndexes: IMarkdownIndexes = {
+      tree: treeReferences,
+      flat: flatReferences.map((i) => ({
+        ...i,
+        children: [],
+      })),
+    };
     return { dom, markdownIndexes };
+  }
+
+  private static getNode(
+    element: Element,
+    latestH1: IMarkdownIndex | undefined
+  ) {
+    const elementLevel = this.getElementLevel(element);
+    const label = element.textContent ?? "";
+    const nextElement = element.nextElementSibling;
+    const canPreviewNextElement = this.isElementHeader(nextElement);
+    const preview = canPreviewNextElement
+      ? nextElement?.textContent?.trim() ?? ""
+      : "";
+    const currentNode: IMarkdownIndex = {
+      id: element.id,
+      label: label,
+      preview: preview,
+      level: elementLevel,
+      pageId: elementLevel !== 1 ? latestH1?.id : undefined,
+      pageLabel: elementLevel !== 1 ? latestH1?.label : undefined,
+      children: [],
+    };
+    return currentNode;
   }
 
   private static makeHeaderAnchor(element: Element) {
