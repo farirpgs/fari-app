@@ -42,7 +42,7 @@ import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
 import {
   ILoadFunction,
-  IMarkdownHeader,
+  IMarkdownIndex,
   useMarkdownFile,
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
@@ -102,8 +102,9 @@ export const Doc: React.FC<{
    */
   loadFunction: ILoadFunction;
 }> = (props) => {
-  const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
-    props.loadFunction
+  const { dom, markdownIndexes } = useMarkdownFile(
+    props.loadFunction,
+    props.url
   );
   const {
     html,
@@ -409,9 +410,9 @@ export const Doc: React.FC<{
           size="small"
           autoHighlight
           filterOptions={createFilterOptions({ limit: 10 })}
-          options={allHeaders.map((header) => header)}
-          groupBy={(header) => header.grouping ?? ""}
-          getOptionLabel={(header) => header.label}
+          options={markdownIndexes.flat.map((i) => i)}
+          groupBy={(index) => index.pageLabel ?? ""}
+          getOptionLabel={(index) => index.label}
           inputValue={search}
           onInputChange={(e, value, reason) => {
             if (reason === "input") {
@@ -421,14 +422,16 @@ export const Doc: React.FC<{
             }
           }}
           onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownHeader)?.label;
+            const label = (newValue as IMarkdownIndex)?.label;
             if (label) {
-              const header = allHeaders.find((h) => label === h.label);
+              const index = markdownIndexes.flat.find(
+                (index) => label === index.label
+              );
 
-              if (header?.level === 1) {
-                history.push(`${props.url}/${header?.id}`);
+              if (index?.level === 1) {
+                history.push(`${props.url}/${index?.id}`);
               } else {
-                history.push(`${props.url}/${header?.page?.id}/${header?.id}`);
+                history.push(`${props.url}/${index?.pageId}/${index?.id}`);
               }
             }
           }}
@@ -463,24 +466,24 @@ export const Doc: React.FC<{
   function renderTableOfContent() {
     const list = (
       <List>
-        {Object.entries(toc).map(([, h1], index) => {
+        {markdownIndexes.tree.map((h1, i) => {
           const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = openH1 === h1.page.id;
+          const isSubSectionOpen = openH1 === h1.id;
 
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={i}>
               <ListItem
                 button
                 dense
                 component={Link}
-                to={`${props.url}/${h1.page.id}`}
+                to={`${props.url}/${h1.id}`}
                 data-cy={`doc.table-of-content.h1`}
-                data-cy-page-id={h1.page.id}
+                data-cy-page-id={h1.id}
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
               >
-                {renderTableOfContentElement(h1.page)}
+                {renderTableOfContentElement(h1)}
                 {shouldRenderExpandIcon && (
                   <>
                     <IconButton
@@ -489,10 +492,10 @@ export const Doc: React.FC<{
                         e.preventDefault();
                         e.stopPropagation();
                         setOpenH1((draft) => {
-                          if (draft === h1.page.id) {
+                          if (draft === h1.id) {
                             return undefined;
                           }
-                          return h1.page.id;
+                          return h1.id;
                         });
                       }}
                     >
@@ -507,7 +510,7 @@ export const Doc: React.FC<{
               </ListItem>
               <Collapse
                 in={isSubSectionOpen}
-                data-cy={`doc.table-of-content.${h1.page.id}.h2s`}
+                data-cy={`doc.table-of-content.${h1.id}.h2s`}
               >
                 {h1.children.map((h2, h2Index) => {
                   return (
@@ -516,7 +519,7 @@ export const Doc: React.FC<{
                       dense
                       key={h2Index}
                       component={Link}
-                      to={`${props.url}/${h1.page.id}/${h2.id}`}
+                      to={`${props.url}/${h1.id}/${h2.id}`}
                       data-cy={`doc.table-of-content.h2`}
                       data-cy-page-id={h2.id}
                       onClick={() => {
@@ -577,20 +580,20 @@ export const Doc: React.FC<{
     );
   }
 
-  function renderTableOfContentElement(tocElement: IMarkdownHeader) {
+  function renderTableOfContentElement(index: IMarkdownIndex) {
     return (
       <ListItemText
         primary={
           <Box
             display="inline-block"
-            title={tocElement.label}
+            title={index.label}
             className={css({
               width: "100%",
               display: "inline-block",
-              paddingLeft: `${(tocElement.level - 1) * 1}rem`,
+              paddingLeft: `${(index.level - 1) * 1}rem`,
             })}
           >
-            {tocElement.level === 1 ? (
+            {index.level === 1 ? (
               <Typography
                 noWrap
                 className={css({
@@ -599,7 +602,7 @@ export const Doc: React.FC<{
                   display: "inline-block",
                 })}
                 dangerouslySetInnerHTML={{
-                  __html: tocElement.label,
+                  __html: index.label,
                 }}
               />
             ) : (
@@ -610,7 +613,7 @@ export const Doc: React.FC<{
                   display: "inline-block",
                 })}
                 dangerouslySetInnerHTML={{
-                  __html: tocElement.label,
+                  __html: index.label,
                 }}
               />
             )}

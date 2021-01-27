@@ -27,7 +27,7 @@ describe("useMarkdownFile", () => {
   describe("Given I have an undefined markdown file", () => {
     it("should return an undefined state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(anUndefinedMarkdownFile);
+        return useMarkdownFile(anUndefinedMarkdownFile, "/test-doc");
       });
 
       expect(view.result.current.html).toEqual(undefined);
@@ -39,7 +39,7 @@ describe("useMarkdownFile", () => {
   describe("Given I dont have a load function", () => {
     it("should return an undefined state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(undefined as any);
+        return useMarkdownFile(undefined as any, "/test-doc");
       });
 
       expect(view.result.current.html).toEqual(undefined);
@@ -51,7 +51,7 @@ describe("useMarkdownFile", () => {
   describe("Given I have an empty markdown file", () => {
     it("should return an undefined state", () => {
       const view = renderHook(() => {
-        return useMarkdownFile(anEmptyMarkdownFile);
+        return useMarkdownFile(anEmptyMarkdownFile, "/test-doc");
       });
 
       expect(view.result.current.html).toEqual(undefined);
@@ -64,7 +64,7 @@ describe("useMarkdownFile", () => {
     it("should return an undefined state", async () => {
       const view = renderHook(
         () => {
-          return useMarkdownFile(aMarkdownFileWithoutAHeader1);
+          return useMarkdownFile(aMarkdownFileWithoutAHeader1, "/test-doc");
         },
         {
           wrapper: wrapper,
@@ -84,7 +84,7 @@ describe("useMarkdownFile", () => {
     it("should add an anchor at the tag matching the id", async () => {
       const view = renderHook(
         () => {
-          return useMarkdownFile(aMarkdownFileWithADynamicAnchor);
+          return useMarkdownFile(aMarkdownFileWithADynamicAnchor, "/test-doc");
         },
         {
           wrapper: wrapper,
@@ -104,7 +104,10 @@ describe("useMarkdownFile", () => {
     it("should add a table of content", async () => {
       const view = renderHook(
         () => {
-          return useMarkdownFile(aMarkdownFileWithADynamicTableOfContent);
+          return useMarkdownFile(
+            aMarkdownFileWithADynamicTableOfContent,
+            "/test-doc"
+          );
         },
         {
           wrapper: wrapper,
@@ -118,7 +121,7 @@ describe("useMarkdownFile", () => {
   describe("Given I properly formatted markdown file", () => {
     it("should return an good state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(aGoodMarkdownFile);
+        return useMarkdownFile(aGoodMarkdownFile, "/test-doc");
       });
       await view.waitForValueToChange(() => view.result.current.html);
 
@@ -257,7 +260,7 @@ describe("useMarkdownPage", () => {
   describe("Given an empty page", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(anEmptyMarkdownFile);
+        const { dom } = useMarkdownFile(anEmptyMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: "", section: "", dom: dom });
       });
@@ -272,7 +275,7 @@ describe("useMarkdownPage", () => {
   describe("Given an undefined page", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(anUndefinedMarkdownFile);
+        const { dom } = useMarkdownFile(anUndefinedMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: undefined, section: "", dom: dom });
       });
@@ -287,7 +290,7 @@ describe("useMarkdownPage", () => {
   describe("Given an undefined page", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+        const { dom } = useMarkdownFile(aGoodMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: undefined, section: "", dom: dom });
       });
@@ -303,7 +306,7 @@ describe("useMarkdownPage", () => {
   describe("Given the first page page", () => {
     it("should go to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+        const { dom } = useMarkdownFile(aGoodMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: undefined, section: "", dom: dom });
       });
@@ -319,7 +322,7 @@ describe("useMarkdownPage", () => {
   describe("Given the second page", () => {
     it("should go to second h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+        const { dom } = useMarkdownFile(aGoodMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: "page2", section: "", dom });
       });
@@ -335,7 +338,7 @@ describe("useMarkdownPage", () => {
   describe("Given the third page", () => {
     it("should go to third h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+        const { dom } = useMarkdownFile(aGoodMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: "page3", section: "", dom });
       });
@@ -351,7 +354,7 @@ describe("useMarkdownPage", () => {
   describe("Given the third page and there is a hash", () => {
     it("should go to third h1 and have the right title and description", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aGoodMarkdownFile);
+        const { dom } = useMarkdownFile(aGoodMarkdownFile, "/test-doc");
 
         return useMarkdownPage({ page: "page3", section: "rage", dom });
       });

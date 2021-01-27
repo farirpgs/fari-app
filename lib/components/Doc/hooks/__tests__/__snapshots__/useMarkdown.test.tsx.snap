@@ -11,21 +11,21 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
 >
   <li>
     <a
-      href="2"
+      href="/test-doc/2"
     >
       2
     </a>
   </li>
   <li>
     <a
-      href="3"
+      href="/test-doc/3"
     >
       3
     </a>
   </li>
   <li>
     <a
-      href="4"
+      href="/test-doc/4"
     >
       4
     </a>
