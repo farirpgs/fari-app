@@ -24,6 +24,7 @@ const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
 const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
   () => import("../../routes/NotFound/NotFoundRoute")
@@ -93,6 +94,13 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/data"}
+          render={(props) => {
+            return <DataRoute />;
+          }}
+        />
+        <Route
+          exact
           path={"/oracle"}
           render={(props) => {
             return <OracleRoute />;
@@ -130,6 +138,7 @@ export const AppRouter = () => {
           render={(props) => <SceneRoute {...props} />}
         />
         <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+
         {DocRoutes.map((docRoute) => (
           <Route
             exact

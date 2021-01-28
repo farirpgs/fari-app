@@ -1,4 +1,4 @@
-const fariTypes = ["scene", "character"] as const;
+const fariTypes = ["scene", "character", "batch"] as const;
 type IFariType = typeof fariTypes[number];
 
 type IFariEntity = {

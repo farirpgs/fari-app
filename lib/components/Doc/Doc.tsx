@@ -188,26 +188,28 @@ export const Doc: React.FC<IProps> = (props) => {
     history.push(`${props.url}/${path}`);
   }
 
-  function onTocAnchorClick(e: Event) {
+  function markdownAnchorClick(e: Event) {
     e.preventDefault();
     const anchor = e.currentTarget as Element | undefined;
     const href = anchor?.getAttribute("href");
 
-    if (href) {
+    if (href?.startsWith("/")) {
       history.push(href);
+    } else {
+      window.open(href);
     }
   }
 
   useEffect(
     function connectTocAnchors() {
       {
-        document.querySelectorAll("ul.toc a").forEach((a) => {
-          a.addEventListener("click", onTocAnchorClick);
+        document.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", markdownAnchorClick);
         });
 
         return () => {
-          document.querySelectorAll("ul.toc a").forEach((a) => {
-            a.removeEventListener("click", onTocAnchorClick);
+          document.querySelectorAll("a").forEach((a) => {
+            a.removeEventListener("click", markdownAnchorClick);
           });
         };
       }

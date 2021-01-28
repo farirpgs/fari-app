@@ -159,7 +159,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               {t("manager.import")}
               <input
                 type="file"
-                accept=".json"
+                accept=".fari.json"
                 key={`import-input-${importCounter}`}
                 className={css({
                   display: "none",

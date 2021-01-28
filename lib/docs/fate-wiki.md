@@ -10,6 +10,22 @@ Answers to the most popular Fate related questions.
 
 <toc/>
 
+## Condensed / Core / Accelerated
+
+<p class="author">By RPDeshaies</p>
+
+The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
+
+- Fate Core is the fourth edition of the system and came out of a [Kickstarter](https://www.kickstarter.com/projects/evilhat/fate-core) in 2016.
+- Fate Accelerated _is_ Fate Core but with different dials. Some concepts have been simplified to make it easier to grab the book and start playing as fast as possible.
+- Fate Condensed is the latest iteration of Fate. Fate v4.5 if you will. It came out in early 2020 and contains all the rules you need to play Fate in a very brief but comprehensive way.
+
+If you still don't know where to start, here's a tip:
+
+- [Read Fate Condensed](/srds/condensed) for a quick overview of the most up to date rules.
+- [Read Fate Core](/srds/core) for all its great examples and guides on how to play.
+- [Read Fate Accelerated](/srds/accelerated) if you want a more simplified version of the system and want to get started quickly.
+
 ## What's the Math Behind The Fate Dice
 
 <p class="author">By RPDeshaies</p>
