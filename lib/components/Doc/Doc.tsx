@@ -20,6 +20,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import EditIcon from "@material-ui/icons/Edit";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -104,6 +105,10 @@ type IProps = {
    * Function that returns the markdown document to parce
    */
   loadFunction: ILoadFunction;
+  /**
+   * Link to original file
+   */
+  gitHubLink?: string;
 };
 
 export type IDocProps = IProps;
@@ -233,7 +238,9 @@ export const Doc: React.FC<IProps> = (props) => {
                   <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
                 <MarkdownElement renderedMarkdown={html} />
-                <Box mt="3rem" mb="1rem">
+                {renderEditButton()}
+
+                <Box my=".5rem">
                   <Divider />
                 </Box>
                 {renderNavigationButtons()}
@@ -247,6 +254,30 @@ export const Doc: React.FC<IProps> = (props) => {
       )}
     </Page>
   );
+
+  function renderEditButton() {
+    if (!props.gitHubLink) {
+      return null;
+    }
+    return (
+      <Box my=".5rem">
+        <Grid container justify="flex-end">
+          <Grid item>
+            <Button
+              color="primary"
+              component="a"
+              startIcon={<EditIcon />}
+              target="_blank"
+              rel="noreferrer"
+              href={props.gitHubLink}
+            >
+              Edit this Page
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
 
   function renderAuthor() {
     if (!props.author) {

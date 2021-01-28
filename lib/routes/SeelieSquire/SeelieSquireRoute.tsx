@@ -21,6 +21,7 @@ export const SeelieSquireRoute: React.FC<{ page: string; section: string }> = (
       loadFunction={async () => {
         return makeSeelieSquireMarkdown(theme);
       }}
+      gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
       noIndex
       author={{
         title: "Seelie Squire",
