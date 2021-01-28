@@ -21,6 +21,14 @@ feat: character cards in tabs
 fix: Galcian typo #218
 fix: security issue with immer
 
+**v3.5.3**
+
+feat: better Docs SEO
+feat: Quick Conflicts and Fate Magic dials
+feat: dynamic table of content for certain docs (like /dials)
+feat: dynamic anchors for certain docs (like /fate-stunts)
+fix: routing mechanism for SRD (using paths instead of hash)
+
 ## v3.4 Join screen UX, Italian translations
 
 #### January 5th, 2021
