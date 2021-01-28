@@ -50,7 +50,7 @@ import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
 
-export const Doc: React.FC<{
+type IProps = {
   title: string;
   /**
    * Prefix used by the document
@@ -83,7 +83,10 @@ export const Doc: React.FC<{
   author?: {
     title: string;
     avatarUrl?: string;
-    items: Array<{ label: string; url: string }>;
+    items: Array<{
+      label: string;
+      url: string;
+    }>;
   };
   /**
    * Image visible on large views at the top of the document
@@ -101,7 +104,11 @@ export const Doc: React.FC<{
    * Function that returns the markdown document to parce
    */
   loadFunction: ILoadFunction;
-}> = (props) => {
+};
+
+export type IDocProps = IProps;
+
+export const Doc: React.FC<IProps> = (props) => {
   const { dom, markdownIndexes } = useMarkdownFile(
     props.loadFunction,
     props.url
@@ -513,6 +520,9 @@ export const Doc: React.FC<{
                 data-cy={`doc.table-of-content.${h1.id}.h2s`}
               >
                 {h1.children.map((h2, h2Index) => {
+                  if (h2.level !== 2) {
+                    return null;
+                  }
                   return (
                     <ListItem
                       button
