@@ -9,14 +9,16 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
 <ul
   class="toc"
 >
-  <li>
+  <li
+    data-toc-id="1"
+  >
     <a
       href="/test-doc/1"
     >
       1
     </a>
     <ul
-      class="toc"
+      class="sub-toc"
     >
       <li>
         <a
@@ -41,14 +43,16 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
       </li>
     </ul>
   </li>
-  <li>
+  <li
+    data-toc-id="2"
+  >
     <a
       href="/test-doc/2"
     >
       2
     </a>
     <ul
-      class="toc"
+      class="sub-toc"
     >
       <li>
         <a
@@ -73,24 +77,28 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
       </li>
     </ul>
   </li>
-  <li>
+  <li
+    data-toc-id="3"
+  >
     <a
       href="/test-doc/3"
     >
       3
     </a>
     <ul
-      class="toc"
+      class="sub-toc"
     />
   </li>
-  <li>
+  <li
+    data-toc-id="4"
+  >
     <a
       href="/test-doc/4"
     >
       4
     </a>
     <ul
-      class="toc"
+      class="sub-toc"
     />
   </li>
 </ul>
