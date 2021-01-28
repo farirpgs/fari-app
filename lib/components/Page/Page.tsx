@@ -38,6 +38,7 @@ import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
+import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
 let gameIdSingleton: string | undefined = undefined;
 const FariMaxWidth = "1920px";
@@ -56,6 +57,7 @@ export const Page: React.FC<{
   drawerWidth?: string;
   pb?: string;
   debug?: Record<string, string>;
+  disableAutomaticScrollTop?: boolean;
 }> = (props) => {
   const history = useHistory();
   const { displayDonation = true } = props;
@@ -79,6 +81,8 @@ export const Page: React.FC<{
 
   return (
     <>
+      {!props.disableAutomaticScrollTop && <ScrollToTop />}
+
       {renderHeader()}
       {renderContent()}
     </>

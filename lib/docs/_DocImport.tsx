@@ -1,6 +1,6 @@
 export const DocImport = {
   FateCondensed: () => {
-    return import("./fate-condensed-cc-by.md");
+    return import("./fate-condensed.md");
   },
   FateCore: () => {
     return import("./fate-core.md");
@@ -14,11 +14,11 @@ export const DocImport = {
   FateSystemToolkit: () => {
     return import("./fate-system-toolkit.md");
   },
-  SeelieSquire: () => {
-    return import("./seelie-squire.md");
-  },
   FateStunts: () => {
     return import("./fate-stunts.md");
+  },
+  SeelieSquire: () => {
+    return import("./seelie-squire.md");
   },
   SceneCheckist: () => {
     return import("./scene-checklist.md");

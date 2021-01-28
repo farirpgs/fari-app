@@ -1,31 +1,32 @@
+import kebabCase from "lodash/kebabCase";
 import { useEffect, useState } from "react";
 import { showdownConverter } from "../../../constants/showdownConverter";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
 export type ILoadFunction = () => Promise<string>;
 
-export type ITableOfContent = Record<
-  string,
-  {
-    page: IMarkdownHeader;
-    children: Array<IMarkdownHeader>;
-  }
->;
+export type IMarkdownIndexes = {
+  tree: Array<IMarkdownIndex>;
+  flat: Array<IMarkdownIndex>;
+};
 
-export type IMarkdownHeader = {
+export type IMarkdownIndex = {
   id: string;
   label: string;
   preview: string;
   level: number;
-  grouping: string;
-  page: IMarkdownHeader | undefined;
+  pageId: string | undefined;
+  pageLabel: string | undefined;
+  children: Array<IMarkdownIndex>;
 };
 
-export function useMarkdownFile(loadFunction: ILoadFunction) {
+export function useMarkdownFile(loadFunction: ILoadFunction, prefix: string) {
   const [dom, setDom] = useState<HTMLDivElement>();
   const [html, setHtml] = useState<string | undefined>();
-  const [tableOfContent, setTableOfContent] = useState<ITableOfContent>({});
-  const [allHeaders, setAllHeaders] = useState<Array<IMarkdownHeader>>([]);
+  const [markdownIndexes, setMarkdownIndexes] = useState<IMarkdownIndexes>({
+    tree: [],
+    flat: [],
+  });
   const logger = useLogger();
 
   useEffect(() => {
@@ -36,15 +37,10 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
           const markdown = await loadFunction();
 
           if (markdown) {
-            const {
-              dom,
-              headers,
-              tableOfContent: newTableOfContent,
-            } = Markdown.process(markdown);
+            const { dom, markdownIndexes } = Markdown.process(markdown, prefix);
             setDom(dom);
             setHtml(dom.innerHTML);
-            setAllHeaders(headers);
-            setTableOfContent(newTableOfContent);
+            setMarkdownIndexes(markdownIndexes);
           }
         } catch (error) {
           logger.error("useMarkdownFile:error", error);
@@ -53,79 +49,115 @@ export function useMarkdownFile(loadFunction: ILoadFunction) {
     }
   }, [loadFunction]);
 
-  return { html, tableOfContent, dom, allHeaders };
+  return { dom, html, markdownIndexes };
 }
 
 export const scrollMarginTop = 16;
+
 class Markdown {
-  public static process(markdown: string) {
+  public static process(markdown: string, prefix: string) {
     const html = showdownConverter.makeHtml(markdown);
     const dom = document.createElement("div");
     dom.innerHTML = html;
 
-    let tableOfContent: ITableOfContent = {};
-    const headers: Array<IMarkdownHeader> = [];
-
-    let latestH1:
-      | IMarkdownHeader
-      | undefined = (undefined as unknown) as IMarkdownHeader;
     const allHeaders = dom.querySelectorAll("h1,h2,h3,h4,h5,h6");
 
-    for (let i = 0; i < allHeaders.length; i++) {
-      const element = allHeaders[i];
+    const treeReferences: Array<IMarkdownIndex> = [];
+    const flatReferences: Array<IMarkdownIndex> = [];
 
-      const elementLevel = this.getElementLevel(element);
+    let latestH1: IMarkdownIndex | undefined;
+    let latestParent: IMarkdownIndex | undefined;
 
-      if (i === 0 && elementLevel !== 1) {
-        throw "Missing top level <h1/> tag";
+    allHeaders.forEach((element) => {
+      const currentNode: IMarkdownIndex = Markdown.getNode(element, latestH1);
+
+      flatReferences.push(currentNode);
+
+      const isHigherLevel = !flatReferences.some(
+        (n) => n.level < currentNode.level
+      );
+      if (isHigherLevel) {
+        treeReferences.push(currentNode);
+        latestParent = undefined;
       }
 
-      const label = element.textContent ?? "";
-      const nextElement = element.nextElementSibling;
-
-      const canPreviewNextElement = this.isElementHeader(nextElement);
-      const preview = canPreviewNextElement
-        ? nextElement?.textContent?.trim() ?? ""
-        : "";
-
-      if (elementLevel === 1) {
-        const header1: IMarkdownHeader = {
-          id: element.id,
-          label: label,
-          preview: preview,
-          level: elementLevel,
-          page: undefined,
-          grouping: label,
-        };
-
-        latestH1 = header1;
-        tableOfContent = {
-          ...tableOfContent,
-          [element.id]: { page: header1, children: [] },
-        };
-        headers.push(header1);
-      } else {
-        const header: IMarkdownHeader = {
-          id: element.id,
-          label: label,
-          preview: preview,
-          level: elementLevel,
-          page: latestH1,
-          grouping: latestH1?.label,
-        };
-
-        headers.push(header);
-
-        if (elementLevel === 2) {
-          tableOfContent[latestH1.id].children.push(header);
+      if (!!latestParent) {
+        const isNodeHigherInHierarchy = latestParent.level >= currentNode.level;
+        if (isNodeHigherInHierarchy) {
+          const indexWithHigherLevelFromEnd = [...flatReferences]
+            .reverse()
+            .find((i) => i.level < currentNode.level);
+          latestParent = indexWithHigherLevelFromEnd;
         }
+        latestParent?.children.push(currentNode);
+      }
+      latestParent = currentNode;
+
+      if (currentNode.level === 1) {
+        latestH1 = currentNode;
       }
 
       const anchor = this.makeHeaderAnchor(element);
       element.append(anchor);
-    }
+    });
 
-    return { dom, tableOfContent, headers };
+    // dynamic anchors
+    const allElementsWithDynamicAnchor = dom.querySelectorAll(".with-anchor");
+    allElementsWithDynamicAnchor.forEach((element) => {
+      element.id = kebabCase(element.textContent ?? "");
+      const anchor = this.makeHeaderAnchor(element);
+      element.append(anchor);
+    });
+
+    // dynamic table of content
+    const tocElements = dom.querySelectorAll("toc");
+    tocElements.forEach((element) => {
+      const h1 = treeReferences
+        .map((h1) => {
+          const h2s = h1.children
+            .map(
+              (h2) =>
+                `<li><a href="${prefix}/${h1.id}/${h2.id}">${h2.label}</a></li>`
+            )
+            .join("");
+
+          return `<li><a href="${prefix}/${h1.id}">${h1.label}</a><ul class="toc">${h2s}</ul></li>`;
+        })
+        .join("");
+      element.innerHTML = `<ul class="toc">${h1}</ul>`;
+    });
+
+    const markdownIndexes: IMarkdownIndexes = {
+      tree: treeReferences,
+      flat: flatReferences.map((i) => ({
+        ...i,
+        children: [],
+      })),
+    };
+    return { dom, markdownIndexes };
+  }
+
+  private static getNode(
+    element: Element,
+    latestH1: IMarkdownIndex | undefined
+  ) {
+    const elementLevel = this.getElementLevel(element);
+    const label = element.textContent ?? "";
+    const nextElement = element.nextElementSibling;
+    const canPreviewNextElement = this.isElementHeader(nextElement);
+    const preview = canPreviewNextElement
+      ? nextElement?.textContent?.trim() ?? ""
+      : "";
+    const currentNode: IMarkdownIndex = {
+      id: element.id,
+      label: label,
+      preview: preview,
+      level: elementLevel,
+      pageId: elementLevel !== 1 ? latestH1?.id : undefined,
+      pageLabel: elementLevel !== 1 ? latestH1?.label : undefined,
+      children: [],
+    };
+    return currentNode;
   }
 
   private static makeHeaderAnchor(element: Element) {

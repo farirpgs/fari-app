@@ -20,13 +20,14 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import EditIcon from "@material-ui/icons/Edit";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
-  createFilterOptions
+  createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
@@ -42,36 +43,81 @@ import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
 import {
   ILoadFunction,
-  IMarkdownHeader,
-  useMarkdownFile
+  IMarkdownIndex,
+  useMarkdownFile,
 } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
 
-export const Doc: React.FC<{
+type IProps = {
   title: string;
-  currentPage: string | undefined;
+  /**
+   * Prefix used by the document
+   *
+   * e.g. `/srds/condensed`
+   */
   url: string;
+  /**
+   * Section right after the `props.url` which matches the current `<h1>` in the document
+   *
+   * e.g. `/taking-action-rolling-the-dice`
+   */
+  page: string | undefined;
+  /**
+   * Section right after the `props.page` which matches a `<h>` inside the current page in the document
+   *
+   * e.g. `/modifying-the-dice`
+   */
+  section: string | undefined;
+  /**
+   * Where the user should go when clicking on the breadcrumb parent element
+   */
   parent: {
     title: string;
     url: string;
   };
+  /**
+   * Author of the document as well as links
+   */
   author?: {
     title: string;
     avatarUrl?: string;
-    items: Array<{ label: string; url: string }>;
+    items: Array<{
+      label: string;
+      url: string;
+    }>;
   };
+  /**
+   * Image visible on large views at the top of the document
+   */
   imageUrl?: string;
-  loadFunction: ILoadFunction;
+  /**
+   * Customize the max width of the document
+   */
   maxWidth?: ContainerTypeMap["props"]["maxWidth"];
+  /**
+   * Disables Search Enginge tracking
+   */
   noIndex?: boolean;
-}> = (props) => {
-  const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
-    props.loadFunction
+  /**
+   * Function that returns the markdown document to parce
+   */
+  loadFunction: ILoadFunction;
+  /**
+   * Link to original file
+   */
+  gitHubLink?: string;
+};
+
+export type IDocProps = IProps;
+
+export const Doc: React.FC<IProps> = (props) => {
+  const { dom, markdownIndexes } = useMarkdownFile(
+    props.loadFunction,
+    props.url
   );
-  const hash = useLocation().hash;
   const {
     html,
     nextH1,
@@ -80,11 +126,12 @@ export const Doc: React.FC<{
     title,
     description,
   } = useMarkdownPage({
-    page: props.currentPage,
-    hash: hash,
+    page: props.page,
+    section: props.section,
     dom: dom,
   });
-  useScrollOnHtmlLoad(html);
+
+  useScrollOnHtmlLoad(html, props.section);
 
   const lightBackground = useLightBackground();
   const theme = useTheme();
@@ -96,37 +143,63 @@ export const Doc: React.FC<{
   const [openH1, setOpenH1] = useState<string | undefined>();
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    setOpenH1(currentH1?.id);
-  }, [currentH1]);
+  const shouldRenderImage = props.imageUrl && !isSmall;
+  const shouldRenderSectionTitle = title !== props.title;
 
-  useEffect(() => {
-    const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
-    const pageTitle = title ? `:${kebabCase(title)}` : "";
-    const sectionTitle = location.hash
-      ? `:${location.hash.replace("#", "")}`
-      : "";
-    const logMessage = `Route:Srd${docTitle}${pageTitle}${sectionTitle}`;
+  useEffect(
+    function onPageChange() {
+      setOpenH1(currentH1?.id);
+      window.scrollTo(0, 0);
+    },
+    [currentH1]
+  );
 
-    logger.info(logMessage, {
-      pathname: location.pathname,
-      hash: location.hash,
-    });
-  }, [location.pathname, location.hash]);
+  useEffect(function onUnmount() {
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
 
-  function goTo(path: string) {
+  useEffect(
+    function sendLog() {
+      const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
+
+      const logMessage = `Route:Document:${docTitle}${props.page}${props.section}`;
+      logger.info(logMessage, {
+        pathname: location.pathname,
+        hash: location.hash,
+      });
+    },
+    [location.pathname]
+  );
+
+  useEffect(
+    function transformHashToGoodUrl() {
+      if (currentH1 && location.hash) {
+        const h2 = location.hash.replace("#", "");
+        const newUrl = `${props.url}/${currentH1.id}/${h2}`;
+        history.replace(newUrl);
+      }
+    },
+    [location.hash]
+  );
+
+  function handleGoTo(path: string) {
     history.push(`${props.url}/${path}`);
   }
 
-  const shouldRenderImage = props.imageUrl && !isSmall;
   return (
     <Page
-    
       drawerWidth={!isSmall ? drawerWidth : undefined}
       pb="4rem"
       debug={{ metaTitle: title, metaDescription: description }}
+      disableAutomaticScrollTop
     >
-      <PageMeta title={title} description={description} noIndex={props.noIndex}/>
+      <PageMeta
+        title={shouldRenderSectionTitle ? `${title} | ${props.title}` : title}
+        description={description}
+        noIndex={props.noIndex}
+      />
       {html ? (
         <Fade in>
           <Box display="flex">
@@ -165,7 +238,9 @@ export const Doc: React.FC<{
                   <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
                 <MarkdownElement renderedMarkdown={html} />
-                <Box mt="3rem" mb="1rem">
+                {renderEditButton()}
+
+                <Box my=".5rem">
                   <Divider />
                 </Box>
                 {renderNavigationButtons()}
@@ -179,6 +254,30 @@ export const Doc: React.FC<{
       )}
     </Page>
   );
+
+  function renderEditButton() {
+    if (!props.gitHubLink) {
+      return null;
+    }
+    return (
+      <Box my=".5rem">
+        <Grid container justify="flex-end">
+          <Grid item>
+            <Button
+              color="primary"
+              component="a"
+              startIcon={<EditIcon />}
+              target="_blank"
+              rel="noreferrer"
+              href={props.gitHubLink}
+            >
+              Edit this Page
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
 
   function renderAuthor() {
     if (!props.author) {
@@ -318,7 +417,7 @@ export const Doc: React.FC<{
             color="primary"
             data-cy="doc.previous"
             onClick={() => {
-              goTo(previousH1?.id);
+              handleGoTo(previousH1?.id);
             }}
           >
             {truncate(previousH1?.textContent ?? "", { length: 50 })}
@@ -331,7 +430,7 @@ export const Doc: React.FC<{
             color="primary"
             data-cy="doc.next"
             onClick={() => {
-              goTo(nextH1?.id);
+              handleGoTo(nextH1?.id);
             }}
           >
             {truncate(nextH1?.textContent ?? "", { length: 50 })}
@@ -349,9 +448,9 @@ export const Doc: React.FC<{
           size="small"
           autoHighlight
           filterOptions={createFilterOptions({ limit: 10 })}
-          options={allHeaders.map((header) => header)}
-          groupBy={(header) => header.grouping ?? ""}
-          getOptionLabel={(header) => header.label}
+          options={markdownIndexes.flat.map((i) => i)}
+          groupBy={(index) => index.pageLabel ?? ""}
+          getOptionLabel={(index) => index.label}
           inputValue={search}
           onInputChange={(e, value, reason) => {
             if (reason === "input") {
@@ -361,14 +460,16 @@ export const Doc: React.FC<{
             }
           }}
           onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownHeader)?.label;
+            const label = (newValue as IMarkdownIndex)?.label;
             if (label) {
-              const header = allHeaders.find((h) => label === h.label);
+              const index = markdownIndexes.flat.find(
+                (index) => label === index.label
+              );
 
-              if (header?.level === 1) {
-                history.push(`${props.url}/${header?.id}`);
+              if (index?.level === 1) {
+                history.push(`${props.url}/${index?.id}`);
               } else {
-                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
+                history.push(`${props.url}/${index?.pageId}/${index?.id}`);
               }
             }
           }}
@@ -403,24 +504,24 @@ export const Doc: React.FC<{
   function renderTableOfContent() {
     const list = (
       <List>
-        {Object.entries(toc).map(([, h1], index) => {
+        {markdownIndexes.tree.map((h1, i) => {
           const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = openH1 === h1.page.id;
+          const isSubSectionOpen = openH1 === h1.id;
 
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={i}>
               <ListItem
                 button
                 dense
                 component={Link}
-                to={`${props.url}/${h1.page.id}`}
+                to={`${props.url}/${h1.id}`}
                 data-cy={`doc.table-of-content.h1`}
-                data-cy-page-id={h1.page.id}
+                data-cy-page-id={h1.id}
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
               >
-                {renderTableOfContentElement(h1.page)}
+                {renderTableOfContentElement(h1)}
                 {shouldRenderExpandIcon && (
                   <>
                     <IconButton
@@ -429,10 +530,10 @@ export const Doc: React.FC<{
                         e.preventDefault();
                         e.stopPropagation();
                         setOpenH1((draft) => {
-                          if (draft === h1.page.id) {
+                          if (draft === h1.id) {
                             return undefined;
                           }
-                          return h1.page.id;
+                          return h1.id;
                         });
                       }}
                     >
@@ -447,20 +548,22 @@ export const Doc: React.FC<{
               </ListItem>
               <Collapse
                 in={isSubSectionOpen}
-                data-cy={`doc.table-of-content.${h1.page.id}.h2s`}
+                data-cy={`doc.table-of-content.${h1.id}.h2s`}
               >
                 {h1.children.map((h2, h2Index) => {
+                  if (h2.level !== 2) {
+                    return null;
+                  }
                   return (
                     <ListItem
                       button
                       dense
                       key={h2Index}
                       component={Link}
-                      to={`${props.url}/${h1.page.id}#${h2.id}`}
+                      to={`${props.url}/${h1.id}/${h2.id}`}
                       data-cy={`doc.table-of-content.h2`}
                       data-cy-page-id={h2.id}
                       onClick={() => {
-                        window.location.hash = h2.id;
                         setMobileMenuOpen(false);
                       }}
                     >
@@ -518,20 +621,20 @@ export const Doc: React.FC<{
     );
   }
 
-  function renderTableOfContentElement(tocElement: IMarkdownHeader) {
+  function renderTableOfContentElement(index: IMarkdownIndex) {
     return (
       <ListItemText
         primary={
           <Box
             display="inline-block"
-            title={tocElement.label}
+            title={index.label}
             className={css({
               width: "100%",
               display: "inline-block",
-              paddingLeft: `${(tocElement.level - 1) * 1}rem`,
+              paddingLeft: `${(index.level - 1) * 1}rem`,
             })}
           >
-            {tocElement.level === 1 ? (
+            {index.level === 1 ? (
               <Typography
                 noWrap
                 className={css({
@@ -540,7 +643,7 @@ export const Doc: React.FC<{
                   display: "inline-block",
                 })}
                 dangerouslySetInnerHTML={{
-                  __html: tocElement.label,
+                  __html: index.label,
                 }}
               />
             ) : (
@@ -551,7 +654,7 @@ export const Doc: React.FC<{
                   display: "inline-block",
                 })}
                 dangerouslySetInnerHTML={{
-                  __html: tocElement.label,
+                  __html: index.label,
                 }}
               />
             )}

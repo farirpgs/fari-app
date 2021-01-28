@@ -6,11 +6,14 @@ import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
 import { creatures, ICreature } from "./domains/Creatures";
 
-export const SeelieSquireRoute: React.FC<{ page: string }> = (props) => {
+export const SeelieSquireRoute: React.FC<{ page: string; section: string }> = (
+  props
+) => {
   const theme = useTheme();
   return (
     <Doc
-      currentPage={props.page}
+      page={props.page}
+      section={props.section}
       url="/seelie-squire"
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
@@ -18,6 +21,7 @@ export const SeelieSquireRoute: React.FC<{ page: string }> = (props) => {
       loadFunction={async () => {
         return makeSeelieSquireMarkdown(theme);
       }}
+      gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
       noIndex
       author={{
         title: "Seelie Squire",
