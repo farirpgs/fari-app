@@ -237,7 +237,16 @@ export const Doc: React.FC<IProps> = (props) => {
                   </Box>
                   <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
-                <MarkdownElement renderedMarkdown={html} />
+                <Box
+                  className={css({
+                    [`& ul.toc > li[data-toc-id="${currentH1.id}"] > a`]: {
+                      color: theme.palette.text.disabled,
+                      pointerEvents: "none",
+                    },
+                  })}
+                >
+                  <MarkdownElement renderedMarkdown={html} />
+                </Box>
                 {renderEditButton()}
 
                 <Box my=".5rem">
