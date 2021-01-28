@@ -30,7 +30,7 @@ export const DocImport = {
     return import("./dials.md");
   },
   FateFaq: () => {
-    return import("./fate-faq.md");
+    return import("./fate-wiki.md");
   },
   Test: () => {
     return import("./test.md");

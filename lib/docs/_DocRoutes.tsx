@@ -233,12 +233,12 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     },
   },
   {
-    url: "/fate-faq",
+    url: "/fate-wiki",
     parent: { title: "SRDs", url: "/srds" },
-    title: "Fate FAQ",
+    title: "Fate Wiki",
     loadFunction: DocImport.FateFaq,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-faq.md",
+      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
   },
   {
