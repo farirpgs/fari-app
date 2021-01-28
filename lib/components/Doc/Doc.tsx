@@ -193,6 +193,10 @@ export const Doc: React.FC<IProps> = (props) => {
     const anchor = e.currentTarget as Element | undefined;
     const href = anchor?.getAttribute("href");
 
+    if (!href) {
+      return;
+    }
+
     if (href?.startsWith("/")) {
       history.push(href);
     } else {
