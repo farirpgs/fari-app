@@ -29,6 +29,11 @@ feat: dynamic table of content for certain docs (like /dials)
 feat: dynamic anchors for certain docs (like /fate-stunts)
 fix: routing mechanism for SRD (using paths instead of hash)
 
+**v3.5.4**
+
+feat: new FAQ doc
+feat: disable current table of content element in docs
+
 ## v3.4 Join screen UX, Italian translations
 
 #### January 5th, 2021

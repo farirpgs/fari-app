@@ -112,7 +112,7 @@ class Markdown {
     // dynamic table of content
     const tocElements = dom.querySelectorAll("toc");
     tocElements.forEach((element) => {
-      const h1 = treeReferences
+      const h1s = treeReferences
         .map((h1) => {
           const h2s = h1.children
             .map(
@@ -121,10 +121,10 @@ class Markdown {
             )
             .join("");
 
-          return `<li><a href="${prefix}/${h1.id}">${h1.label}</a><ul class="toc">${h2s}</ul></li>`;
+          return `<li data-toc-id="${h1.id}"><a href="${prefix}/${h1.id}">${h1.label}</a><ul class="toc">${h2s}</ul></li>`;
         })
         .join("");
-      element.innerHTML = `<ul class="toc">${h1}</ul>`;
+      element.innerHTML = `<ul class="toc">${h1s}</ul>`;
     });
 
     const markdownIndexes: IMarkdownIndexes = {

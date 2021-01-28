@@ -1,6 +1,6 @@
 {
   "name": "fari",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
@@ -17,7 +17,7 @@
     "int": "yarn build && concurrently \"cypress run\" \"yarn serve:build\" --success first --kill-others --names \"cypress,server\" ",
     "int:start": "concurrently \"cypress open\" \"yarn start\" --success first --kill-others --names \"cypress,server\" ",
     "validate": "yarn tsc && yarn lint && yarn test",
-    "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
+    "test:watch": "nogt --inspect node_modules/.bin/jest --runInBand --watch",
     "deploy:preview": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08",
     "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod"
   },
