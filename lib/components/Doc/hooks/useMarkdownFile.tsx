@@ -121,7 +121,7 @@ class Markdown {
             )
             .join("");
 
-          return `<li data-toc-id="${h1.id}"><a href="${prefix}/${h1.id}">${h1.label}</a><ul class="toc">${h2s}</ul></li>`;
+          return `<li data-toc-id="${h1.id}"><a href="${prefix}/${h1.id}">${h1.label}</a><ul class="sub-toc">${h2s}</ul></li>`;
         })
         .join("");
       element.innerHTML = `<ul class="toc">${h1s}</ul>`;

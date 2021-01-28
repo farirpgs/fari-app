@@ -188,6 +188,50 @@ export const Doc: React.FC<IProps> = (props) => {
     history.push(`${props.url}/${path}`);
   }
 
+  function onTocAnchorClick(e: Event) {
+    e.preventDefault();
+    const anchor = e.currentTarget as Element | undefined;
+    const href = anchor?.getAttribute("href");
+
+    if (href) {
+      history.push(href);
+    }
+  }
+
+  useEffect(
+    function connectTocAnchors() {
+      {
+        document.querySelectorAll("ul.toc a").forEach((a) => {
+          a.addEventListener("click", onTocAnchorClick);
+        });
+
+        return () => {
+          document.querySelectorAll("ul.toc a").forEach((a) => {
+            a.removeEventListener("click", onTocAnchorClick);
+          });
+        };
+      }
+    },
+    [html]
+  );
+
+  const docMarkdownStyle = css({
+    "& ul.toc": {
+      "&>li": {
+        listStyle: `"📎 "`,
+        listStylePosition: "outside",
+      },
+      [`&>li[data-toc-id="${currentH1?.id}"]`]: {
+        "listStyle": `"👉 "`,
+        "listStylePosition": "outside",
+        "& > a": {
+          color: theme.palette.text.secondary,
+          pointerEvents: "none",
+        },
+      },
+    },
+  });
+
   return (
     <Page
       drawerWidth={!isSmall ? drawerWidth : undefined}
@@ -237,14 +281,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   </Box>
                   <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
-                <Box
-                  className={css({
-                    [`& ul.toc > li[data-toc-id="${currentH1.id}"] > a`]: {
-                      color: theme.palette.text.disabled,
-                      pointerEvents: "none",
-                    },
-                  })}
-                >
+                <Box className={docMarkdownStyle}>
                   <MarkdownElement renderedMarkdown={html} />
                 </Box>
                 {renderEditButton()}
