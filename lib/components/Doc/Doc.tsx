@@ -29,7 +29,6 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
-import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
@@ -162,12 +161,12 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function sendLog() {
-      const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
+      const logMessage = `Route:Document:${location.pathname}`;
 
-      const logMessage = `Route:Document:${docTitle}${props.page}${props.section}`;
       logger.info(logMessage, {
         pathname: location.pathname,
-        hash: location.hash,
+        page: props.page,
+        section: props.section,
       });
     },
     [location.pathname]
@@ -197,7 +196,7 @@ export const Doc: React.FC<IProps> = (props) => {
       return;
     }
 
-    if (href?.startsWith("/")) {
+    if (href?.startsWith("/") || href?.startsWith("#")) {
       history.push(href);
     } else {
       window.open(href);

@@ -286,12 +286,23 @@ export const DataRoute: React.FC = (props) => {
                     flex: 1,
                     disableClickEventBubbling: true,
                   },
-                  { field: "group", headerName: "Group", width: 150 },
-                  { field: "type", headerName: "Type", width: 150 },
+                  {
+                    field: "group",
+                    headerName: "Group",
+                    width: 150,
+                    disableClickEventBubbling: true,
+                  },
+                  {
+                    field: "type",
+                    headerName: "Type",
+                    width: 150,
+                    disableClickEventBubbling: true,
+                  },
                   {
                     field: "lastUpdated",
                     headerName: "Last Updated",
                     width: 250,
+                    disableClickEventBubbling: true,
                     valueGetter: (cell) => {
                       return getDayJSFrom(cell.value as number).format("lll");
                     },
