@@ -245,11 +245,14 @@ export const DocRoutes: Array<
       "https://github.com/fariapp/fari/tree/master/lib/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
     docMode: MarkdownDocMode.H1sAndH2sArePages,
+    noIndex: true,
   },
   {
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
+
     loadFunction: DocImport.Changelog,
   },
 ];
