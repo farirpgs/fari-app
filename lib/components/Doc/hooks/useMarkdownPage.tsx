@@ -2,78 +2,119 @@ import truncate from "lodash/truncate";
 import { useMemo } from "react";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
+export type IPage = {
+  label: string;
+  id: string;
+  url: string;
+};
+
 export function useMarkdownPage(options: {
+  url: string;
   page: string | undefined;
+  subPage: string | undefined;
   section: string | undefined;
   dom: HTMLDivElement | undefined;
 }) {
-  const { page, dom, section: section } = options;
+  const { url, page, subPage, dom, section } = options;
   const logger = useLogger();
 
   return useMemo(() => {
-    const allH1s =
-      dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
+    const allH1sAndH2s =
+      dom?.querySelectorAll(`h1,h2`) ??
+      // dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
 
-    if (!!dom && allH1s.length === 0) {
-      logger.error("useMarkdownPage: no H1 in markdown document");
+    if (!!dom && allH1sAndH2s.length === 0) {
+      logger.error("useMarkdownPage: no H1s or H2s in the markdown document");
     }
 
-    const currentH1 = dom?.querySelector(`[id='${page}']`) ?? allH1s[0];
-    const textAfterCurrentH1 = getFirstMatchFromElement(currentH1, "p,ul");
+    const currentPageElement =
+      dom?.querySelector(`[id='${subPage || page}']`) ?? allH1sAndH2s[0];
+      // dom?.querySelector(`[id='${page}']`) ?? allH1sAndH2s[0];
+    const textAfterCurrentPage = getFirstMatchAfterElement(
+      currentPageElement,
+      "p,ul"
+    );
+
     const currentSectionElement =
       dom?.querySelector(`[id='${section}']`) ?? undefined;
-
-    const textAfterCurrentHash = getFirstMatchFromElement(
+    const textAfterCurrentSection = getFirstMatchAfterElement(
       currentSectionElement,
       "p,ul"
     );
 
     const title =
-      currentSectionElement?.textContent ?? currentH1?.textContent ?? "";
-
+      currentSectionElement?.textContent ??
+      currentPageElement?.textContent ??
+      "";
     const firstParagraph =
-      textAfterCurrentHash?.textContent ??
-      textAfterCurrentH1?.textContent ??
+      textAfterCurrentSection?.textContent ??
+      textAfterCurrentPage?.textContent ??
       "";
 
     const description = truncate(firstParagraph, { length: 155 });
 
-    if (!currentH1) {
+    if (!currentPageElement) {
       return {
         html: "",
-        currentH1: allH1s[0],
-        previousH1: undefined,
-        nextH1: allH1s[1],
+        currentPage: makePageFromH1OrH2(allH1sAndH2s[0], url),
+        previousPage: undefined,
+        nextPage: makePageFromH1OrH2(allH1sAndH2s[1], url),
         title: title.trim(),
         description: description.trim(),
       };
     }
 
-    let previousH1: Element | undefined;
-    let nextH1: Element | undefined;
+    let previousPage: IPage | undefined;
+    let nextPage: IPage | undefined;
 
-    allH1s.forEach((h1, index) => {
-      if (h1.id === currentH1.id) {
-        previousH1 = allH1s[index - 1];
-        nextH1 = allH1s[index + 1];
+    allH1sAndH2s.forEach((h, index) => {
+      if (h.id === currentPageElement.id) {
+        previousPage = makePageFromH1OrH2(allH1sAndH2s[index - 1], url);
+        nextPage = makePageFromH1OrH2(allH1sAndH2s[index + 1], url);
       }
     });
 
-    const allElementsInPage = getAllNextSiblingUntilId(
-      currentH1,
-      `${nextH1?.id}`
+    const allDomElementsInPage = getAllNextSiblingUntilId(
+      currentPageElement,
+      `${nextPage?.id}`
     );
-    const newDom = getNewDom(currentH1, allElementsInPage);
+    const newDom = getNewDom(currentPageElement, allDomElementsInPage);
 
     return {
       html: newDom?.innerHTML,
-      currentH1,
-      previousH1,
-      nextH1,
+      currentPage: makePageFromH1OrH2(currentPageElement, url),
+      previousPage: previousPage,
+      nextPage: nextPage,
       title: title.trim(),
       description: description.trim(),
     };
-  }, [page, dom, section]);
+  }, [url, dom, page, subPage, section]);
+}
+
+function makePageFromH1OrH2(
+  element: Element | undefined,
+  url: string
+): IPage | undefined {
+  if (!element) {
+    return undefined;
+  }
+
+  const level = parseInt(element.tagName.replace("H", ""));
+  const previousH1 = getFirstMatchBeforeElement(element, "h1");
+
+  if (level === 1) {
+    return {
+      label: element.textContent ?? "",
+      id: element.id,
+      url: `${url}/${element.id}`,
+    };
+  }
+
+  return {
+    label: element.textContent ?? "",
+    id: element.id,
+    url: `${url}/${previousH1!.id}/${element!.id}`,
+  };
 }
 
 function getNewDom(currentH1: Element, allElementsInPage: Element[]) {
@@ -111,7 +152,7 @@ function getAllNextSiblingUntilSelector(
   return siblings;
 }
 
-function getFirstMatchFromElement(
+function getFirstMatchAfterElement(
   elem: Element | undefined | null,
   selector: string
 ): Element | undefined {
@@ -123,5 +164,20 @@ function getFirstMatchFromElement(
     }
 
     currentElement = currentElement.nextElementSibling;
+  }
+}
+
+function getFirstMatchBeforeElement(
+  elem: Element | undefined | null,
+  selector: string
+): Element | undefined {
+  let currentElement = elem?.previousElementSibling;
+
+  while (currentElement) {
+    if (currentElement.matches(selector)) {
+      return currentElement;
+    }
+
+    currentElement = currentElement.previousElementSibling;
   }
 }

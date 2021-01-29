@@ -159,9 +159,9 @@ describe("useMarkdownPage", () => {
 
       expect(view.result.current.title).toEqual("");
       expect(view.result.current.description).toEqual("");
-      expect(view.result.current.currentH1).toEqual(undefined);
-      expect(view.result.current.previousH1).toEqual(undefined);
-      expect(view.result.current.nextH1).toEqual(undefined);
+      expect(view.result.current.currentPage).toEqual(undefined);
+      expect(view.result.current.previousPage).toEqual(undefined);
+      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given an undefined page", () => {
@@ -174,9 +174,9 @@ describe("useMarkdownPage", () => {
 
       expect(view.result.current.title).toEqual("");
       expect(view.result.current.description).toEqual("");
-      expect(view.result.current.currentH1).toEqual(undefined);
-      expect(view.result.current.previousH1).toEqual(undefined);
-      expect(view.result.current.nextH1).toEqual(undefined);
+      expect(view.result.current.currentPage).toEqual(undefined);
+      expect(view.result.current.previousPage).toEqual(undefined);
+      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given an undefined page", () => {
@@ -190,9 +190,9 @@ describe("useMarkdownPage", () => {
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_1");
       expect(view.result.current.description).toEqual("[header_1.text]");
-      expect(view.result.current.currentH1.textContent).toEqual("header_1");
-      expect(view.result.current.previousH1).toEqual(undefined);
-      expect(view.result.current.nextH1?.textContent).toEqual("header_2");
+      expect(view.result.current.currentPage.textContent).toEqual("header_1");
+      expect(view.result.current.previousPage).toEqual(undefined);
+      expect(view.result.current.nextPage?.textContent).toEqual("header_2");
     });
   });
   describe("Given the first page page", () => {
@@ -206,9 +206,9 @@ describe("useMarkdownPage", () => {
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_1");
       expect(view.result.current.description).toEqual("[header_1.text]");
-      expect(view.result.current.currentH1.textContent).toEqual("header_1");
-      expect(view.result.current.previousH1).toEqual(undefined);
-      expect(view.result.current.nextH1?.textContent).toEqual("header_2");
+      expect(view.result.current.currentPage.textContent).toEqual("header_1");
+      expect(view.result.current.previousPage).toEqual(undefined);
+      expect(view.result.current.nextPage?.textContent).toEqual("header_2");
     });
   });
   describe("Given the second page", () => {
@@ -222,9 +222,9 @@ describe("useMarkdownPage", () => {
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_2");
       expect(view.result.current.description).toEqual("[header_2.text]");
-      expect(view.result.current.currentH1.textContent).toEqual("header_2");
-      expect(view.result.current.previousH1?.textContent).toEqual("header_1");
-      expect(view.result.current.nextH1?.textContent).toEqual("header_3");
+      expect(view.result.current.currentPage.textContent).toEqual("header_2");
+      expect(view.result.current.previousPage?.textContent).toEqual("header_1");
+      expect(view.result.current.nextPage?.textContent).toEqual("header_3");
     });
   });
   describe("Given the third page", () => {
@@ -238,9 +238,9 @@ describe("useMarkdownPage", () => {
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_3");
       expect(view.result.current.description).toEqual("[header_3.text]");
-      expect(view.result.current.currentH1.textContent).toEqual("header_3");
-      expect(view.result.current.previousH1?.textContent).toEqual("header_2");
-      expect(view.result.current.nextH1).toEqual(undefined);
+      expect(view.result.current.currentPage.textContent).toEqual("header_3");
+      expect(view.result.current.previousPage?.textContent).toEqual("header_2");
+      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given the third page and there is a section", () => {
@@ -256,9 +256,9 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.description).toEqual(
         "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical con..."
       );
-      expect(view.result.current.currentH1.textContent).toEqual("header_3");
-      expect(view.result.current.previousH1?.textContent).toEqual("header_2");
-      expect(view.result.current.nextH1).toEqual(undefined);
+      expect(view.result.current.currentPage.textContent).toEqual("header_3");
+      expect(view.result.current.previousPage?.textContent).toEqual("header_2");
+      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
 });

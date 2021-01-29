@@ -13,8 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -45,7 +45,7 @@ import {
   IMarkdownIndex,
   useMarkdownFile,
 } from "./hooks/useMarkdownFile";
-import { useMarkdownPage } from "./hooks/useMarkdownPage";
+import { IPage, useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
@@ -64,6 +64,7 @@ type IProps = {
    * e.g. `/taking-action-rolling-the-dice`
    */
   page: string | undefined;
+  subPage: string | undefined;
   /**
    * Section right after the `props.page` which matches a `<h>` inside the current page in the document
    *
@@ -119,13 +120,15 @@ export const Doc: React.FC<IProps> = (props) => {
   );
   const {
     html,
-    nextH1,
-    previousH1,
-    currentH1,
+    nextPage,
+    previousPage,
+    currentPage,
     title,
     description,
   } = useMarkdownPage({
+    url: props.url,
     page: props.page,
+    subPage: props.subPage,
     section: props.section,
     dom: dom,
   });
@@ -144,13 +147,13 @@ export const Doc: React.FC<IProps> = (props) => {
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
-
+  logger.debug("page", { previousPage, currentPage, nextPage });
   useEffect(
     function onPageChange() {
-      setOpenH1(currentH1?.id);
+      setOpenH1(props.page);
       window.scrollTo(0, 0);
     },
-    [currentH1]
+    [props.page, props.subPage]
   );
 
   useEffect(function onUnmount() {
@@ -174,20 +177,20 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function transformHashToGoodUrl() {
-      if (currentH1 && location.hash) {
+      if (currentPage && location.hash) {
         const h2 = location.hash.replace("#", "");
-        const newUrl = `${props.url}/${currentH1.id}/${h2}`;
+        const newUrl = `${props.url}/${currentPage.id}/${h2}`;
         history.replace(newUrl);
       }
     },
     [location.hash]
   );
 
-  function handleGoTo(path: string) {
-    history.push(`${props.url}/${path}`);
+  function handleGoToPage(page: IPage) {
+    history.push(page.url);
   }
 
-  function markdownAnchorClick(e: Event) {
+  function handleMarkdownAnchorClick(e: Event) {
     e.preventDefault();
     const anchor = e.currentTarget as Element | undefined;
     const href = anchor?.getAttribute("href");
@@ -207,12 +210,12 @@ export const Doc: React.FC<IProps> = (props) => {
     function connectTocAnchors() {
       {
         document.querySelectorAll("a").forEach((a) => {
-          a.addEventListener("click", markdownAnchorClick);
+          a.addEventListener("click", handleMarkdownAnchorClick);
         });
 
         return () => {
           document.querySelectorAll("a").forEach((a) => {
-            a.removeEventListener("click", markdownAnchorClick);
+            a.removeEventListener("click", handleMarkdownAnchorClick);
           });
         };
       }
@@ -226,7 +229,7 @@ export const Doc: React.FC<IProps> = (props) => {
         listStyle: `"📎 "`,
         listStylePosition: "outside",
       },
-      [`&>li[data-toc-id="${currentH1?.id}"]`]: {
+      [`&>li[data-toc-id="${currentPage?.id}"]`]: {
         "listStyle": `"👉 "`,
         "listStylePosition": "outside",
         "& > a": {
@@ -264,7 +267,7 @@ export const Doc: React.FC<IProps> = (props) => {
                     marginTop: "-2rem",
                     marginBottom: "1rem",
                     width: "100%",
-                    height: isSmall ? "8rem" : "16rem",
+                    height: isSmall ? "8rem" : "8rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
@@ -455,36 +458,36 @@ export const Doc: React.FC<IProps> = (props) => {
       <Box
         display="flex"
         justifyContent={
-          previousH1 && !nextH1
+          previousPage && !nextPage
             ? "flex-start"
-            : !previousH1 && nextH1
+            : !previousPage && nextPage
             ? "flex-end"
             : "space-between"
         }
       >
-        {previousH1 && (
+        {previousPage && (
           <Button
             startIcon={<NavigateBeforeIcon />}
             color="primary"
             data-cy="doc.previous"
             onClick={() => {
-              handleGoTo(previousH1?.id);
+              handleGoToPage(previousPage);
             }}
           >
-            {truncate(previousH1?.textContent ?? "", { length: 50 })}
+            {truncate(previousPage?.label ?? "", { length: 50 })}
           </Button>
         )}
 
-        {nextH1 && (
+        {nextPage && (
           <Button
             endIcon={<NavigateNextIcon />}
             color="primary"
             data-cy="doc.next"
             onClick={() => {
-              handleGoTo(nextH1?.id);
+              handleGoToPage(nextPage);
             }}
           >
-            {truncate(nextH1?.textContent ?? "", { length: 50 })}
+            {truncate(nextPage?.label ?? "", { length: 50 })}
           </Button>
         )}
       </Box>
@@ -561,9 +564,10 @@ export const Doc: React.FC<IProps> = (props) => {
 
           return (
             <React.Fragment key={i}>
-              <ListItem
+              <MenuItem
                 button
                 dense
+                selected={isSubSectionOpen && !props.subPage && !props.section}
                 component={Link}
                 to={`${props.url}/${h1.id}`}
                 data-cy={`doc.table-of-content.h1`}
@@ -596,7 +600,7 @@ export const Doc: React.FC<IProps> = (props) => {
                     </IconButton>
                   </>
                 )}
-              </ListItem>
+              </MenuItem>
               <Collapse
                 in={isSubSectionOpen}
                 data-cy={`doc.table-of-content.${h1.id}.h2s`}
@@ -606,20 +610,46 @@ export const Doc: React.FC<IProps> = (props) => {
                     return null;
                   }
                   return (
-                    <ListItem
-                      button
-                      dense
-                      key={h2Index}
-                      component={Link}
-                      to={`${props.url}/${h1.id}/${h2.id}`}
-                      data-cy={`doc.table-of-content.h2`}
-                      data-cy-page-id={h2.id}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      {renderTableOfContentElement(h2)}
-                    </ListItem>
+                    <React.Fragment key={h2Index}>
+                      <MenuItem
+                        button
+                        dense
+                        selected={props.subPage === h2.id && !props.section}
+                        key={h2Index}
+                        component={Link}
+                        to={`${props.url}/${h1.id}/${h2.id}`}
+                        data-cy={`doc.table-of-content.h2`}
+                        data-cy-page-id={h2.id}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                        }}
+                      >
+                        {renderTableOfContentElement(h2)}
+                      </MenuItem>
+                      {false &&
+                        h2.children.map((h3, h3Index) => {
+                          if (h3.level !== 3) {
+                            return null;
+                          }
+                          return (
+                            <MenuItem
+                              button
+                              dense
+                              selected={props.section === h3.id}
+                              key={h3Index}
+                              component={Link}
+                              to={`${props.url}/${h1.id}/${h2.id}/${h3.id}`}
+                              data-cy={`doc.table-of-content.h2`}
+                              data-cy-page-id={h3.id}
+                              onClick={() => {
+                                setMobileMenuOpen(false);
+                              }}
+                            >
+                              {renderTableOfContentElement(h3)}
+                            </MenuItem>
+                          );
+                        })}
+                    </React.Fragment>
                   );
                 })}
               </Collapse>
@@ -685,7 +715,7 @@ export const Doc: React.FC<IProps> = (props) => {
               paddingLeft: `${(index.level - 1) * 1}rem`,
             })}
           >
-            {index.level === 1 ? (
+            {index.level < 2 ? (
               <Typography
                 noWrap
                 className={css({
