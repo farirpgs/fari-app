@@ -2,6 +2,7 @@ import kebabCase from "lodash/kebabCase";
 import { useEffect, useState } from "react";
 import { showdownConverter } from "../../../constants/showdownConverter";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
+import { MarkdownDocMode } from "./useMarkdownPage";
 
 export type ILoadFunction = () => Promise<string>;
 
@@ -15,12 +16,16 @@ export type IMarkdownIndex = {
   label: string;
   preview: string;
   level: number;
-  pageId: string | undefined;
+  url: string | undefined;
   pageLabel: string | undefined;
   children: Array<IMarkdownIndex>;
 };
 
-export function useMarkdownFile(loadFunction: ILoadFunction, prefix: string) {
+export function useMarkdownFile(props: {
+  loadFunction: ILoadFunction;
+  prefix: string;
+  docMode: MarkdownDocMode;
+}) {
   const [dom, setDom] = useState<HTMLDivElement>();
   const [html, setHtml] = useState<string | undefined>();
   const [markdownIndexes, setMarkdownIndexes] = useState<IMarkdownIndexes>({
@@ -32,12 +37,16 @@ export function useMarkdownFile(loadFunction: ILoadFunction, prefix: string) {
   useEffect(() => {
     load();
     async function load() {
-      if (loadFunction) {
+      if (props.loadFunction) {
         try {
-          const markdown = await loadFunction();
+          const markdown = await props.loadFunction();
 
           if (markdown) {
-            const { dom, markdownIndexes } = Markdown.process(markdown, prefix);
+            const { dom, markdownIndexes } = Markdown.process(
+              markdown,
+              props.prefix,
+              props.docMode
+            );
             setDom(dom);
             setHtml(dom.innerHTML);
             setMarkdownIndexes(markdownIndexes);
@@ -47,7 +56,7 @@ export function useMarkdownFile(loadFunction: ILoadFunction, prefix: string) {
         }
       }
     }
-  }, [loadFunction]);
+  }, [props.loadFunction]);
 
   return { dom, html, markdownIndexes };
 }
@@ -55,7 +64,11 @@ export function useMarkdownFile(loadFunction: ILoadFunction, prefix: string) {
 export const scrollMarginTop = 16;
 
 class Markdown {
-  public static process(markdown: string, prefix: string) {
+  public static process(
+    markdown: string,
+    prefix: string,
+    docMode: MarkdownDocMode
+  ) {
     const html = showdownConverter.makeHtml(markdown);
     const dom = document.createElement("div");
     dom.innerHTML = html;
@@ -66,10 +79,17 @@ class Markdown {
     const flatReferences: Array<IMarkdownIndex> = [];
 
     let latestH1: IMarkdownIndex | undefined;
+    let latestH2: IMarkdownIndex | undefined;
     let latestParent: IMarkdownIndex | undefined;
 
     allHeaders.forEach((element) => {
-      const currentNode: IMarkdownIndex = Markdown.getNode(element, latestH1);
+      const currentNode: IMarkdownIndex = Markdown.getNode({
+        element,
+        prefix,
+        latestH1,
+        latestH2,
+        docMode,
+      });
 
       flatReferences.push(currentNode);
 
@@ -95,6 +115,9 @@ class Markdown {
 
       if (currentNode.level === 1) {
         latestH1 = currentNode;
+      }
+      if (currentNode.level === 2) {
+        latestH2 = currentNode;
       }
 
       const anchor = this.makeHeaderAnchor(element);
@@ -137,27 +160,64 @@ class Markdown {
     return { dom, markdownIndexes };
   }
 
-  private static getNode(
-    element: Element,
-    latestH1: IMarkdownIndex | undefined
-  ) {
-    const elementLevel = this.getElementLevel(element);
-    const label = element.textContent ?? "";
-    const nextElement = element.nextElementSibling;
+  private static getNode(props: {
+    element: Element;
+    prefix: string;
+    latestH1: IMarkdownIndex | undefined;
+    latestH2: IMarkdownIndex | undefined;
+    docMode: MarkdownDocMode;
+  }) {
+    const level = this.getElementLevel(props.element);
+    const label = props.element.textContent ?? "";
+    const nextElement = props.element.nextElementSibling;
     const canPreviewNextElement = this.isElementHeader(nextElement);
     const preview = canPreviewNextElement
       ? nextElement?.textContent?.trim() ?? ""
       : "";
+
+    const url = Markdown.getNodeUrl(props);
+
     const currentNode: IMarkdownIndex = {
-      id: element.id,
+      id: props.element.id,
       label: label,
       preview: preview,
-      level: elementLevel,
-      pageId: elementLevel !== 1 ? latestH1?.id : undefined,
-      pageLabel: elementLevel !== 1 ? latestH1?.label : undefined,
+      level: level,
+      url: url,
+      pageLabel: level !== 1 ? props.latestH1?.label : undefined,
       children: [],
     };
     return currentNode;
+  }
+
+  private static getNodeUrl(props: {
+    element: Element;
+    prefix: string;
+    latestH1: IMarkdownIndex | undefined;
+    latestH2: IMarkdownIndex | undefined;
+    docMode: MarkdownDocMode;
+  }) {
+    const level = this.getElementLevel(props.element);
+    const id = props.element.id;
+
+    if (level === 1) {
+      return `${props.prefix}/${id}`;
+    }
+
+    if (level === 2) {
+      if (props.docMode === MarkdownDocMode.H1sArePages) {
+        return `${props.prefix}/${props.latestH1!.id}?goTo=${id}`;
+      } else {
+        return `${props.prefix}/${props.latestH1!.id}/${id}`;
+      }
+    }
+
+    if (props.docMode === MarkdownDocMode.H1sArePages) {
+      return `${props.prefix}/${props.latestH1!.id}?goTo=${id}`;
+    } else {
+      return `${props.prefix}/${props.latestH1!.id}/${
+        props.latestH2!.id
+      }?goTo=${id}`;
+    }
   }
 
   private static makeHeaderAnchor(element: Element) {

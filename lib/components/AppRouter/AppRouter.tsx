@@ -143,13 +143,12 @@ export const AppRouter = () => {
           <Route
             exact
             key={docRoute.url}
-            path={`${docRoute.url}/:page?/:subPage?/:section?`}
+            path={`${docRoute.url}/:page?/:subPage?`}
             render={(props) => (
               <Doc
                 key={docRoute.url}
                 page={props.match.params.page}
                 subPage={props.match.params.subPage}
-                section={props.match.params.section}
                 url={docRoute.url}
                 parent={docRoute.parent}
                 title={docRoute.title}
@@ -165,12 +164,11 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/seelie-squire/:page?/:subPage?/:section?"}
+          path={"/seelie-squire/:page?/:subPage?"}
           render={(props) => (
             <SeelieSquireRoute
               page={props.match.params.page}
               subPage={props.match.params.subPage}
-              section={props.match.params.section}
             />
           )}
         />

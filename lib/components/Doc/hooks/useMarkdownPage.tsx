@@ -12,11 +12,12 @@ export enum MarkdownDocMode {
   H1sArePages,
   H1sAndH2sArePages,
 }
+
 export function useMarkdownPage(props: {
   url: string;
   page: string | undefined;
   subPage: string | undefined;
-  section: string | undefined;
+  section: string | undefined | null;
   dom: HTMLDivElement | undefined;
   docMode: MarkdownDocMode;
 }) {
@@ -30,7 +31,9 @@ export function useMarkdownPage(props: {
       (([] as unknown) as NodeListOf<Element>);
 
     if (!!props.dom && pageElements.length === 0) {
-      logger.error("useMarkdownPage: no H1s or H2s in the markdown document");
+      logger.error(
+        `useMarkdownPage: no "${pageSelector}" in the markdown document`
+      );
     }
 
     const currentPageSelector =

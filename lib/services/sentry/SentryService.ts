@@ -17,7 +17,7 @@ export class SentryService {
     severity: Severity,
     context: { [key: string]: any } | undefined
   ) {
-    if (env.isTest || env.isLocalhost) {
+    if (env.isTest || env.isLocalHost) {
       return;
     }
 

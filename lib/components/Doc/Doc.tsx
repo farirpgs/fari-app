@@ -75,12 +75,6 @@ type IProps = {
    */
   subPage: string | undefined;
   /**
-   * Section right after the `props.page` which matches a `<h3-6>` inside the current page in the document
-   *
-   * e.g. `/srds/condensed/taking-action-rolling-the-dice/{{h3-6}}`
-   */
-  section: string | undefined;
-  /**
    * Where the user should go when clicking on the breadcrumb parent element
    */
   parent: {
@@ -127,11 +121,25 @@ type IProps = {
 export type IDocProps = IProps;
 
 export const Doc: React.FC<IProps> = (props) => {
-  const { dom, markdownIndexes } = useMarkdownFile(
-    props.loadFunction,
-    props.url
-  );
   const docMode = props.docMode ?? MarkdownDocMode.H1sArePages;
+
+  const lightBackground = useLightBackground();
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const history = useHistory();
+  const logger = useLogger();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const section = params.get("goTo");
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openH1, setOpenH1] = useState<string | undefined>();
+  const [search, setSearch] = useState("");
+  const { dom, markdownIndexes } = useMarkdownFile({
+    loadFunction: props.loadFunction,
+    prefix: props.url,
+    docMode: docMode,
+  });
   const {
     html,
     nextPage,
@@ -143,27 +151,15 @@ export const Doc: React.FC<IProps> = (props) => {
     url: props.url,
     page: props.page,
     subPage: props.subPage,
-    section: props.section,
+    section: section,
     dom: dom,
     docMode: docMode,
   });
 
-  const scrollTo =
-    docMode === MarkdownDocMode.H1sArePages ? props.subPage : props.section;
-  useScrollOnHtmlLoad(html, scrollTo);
-
-  const lightBackground = useLightBackground();
-  const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  const history = useHistory();
-  const location = useLocation();
-  const logger = useLogger();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openH1, setOpenH1] = useState<string | undefined>();
-  const [search, setSearch] = useState("");
-
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
+
+  useScrollOnHtmlLoad(html, section);
   logger.debug("page", { previousPage, currentPage, nextPage });
 
   useEffect(
@@ -197,7 +193,7 @@ export const Doc: React.FC<IProps> = (props) => {
       logger.info(logMessage, {
         pathname: location.pathname,
         page: props.page,
-        section: props.section,
+        section: section,
       });
     },
     [location.pathname]
@@ -206,17 +202,16 @@ export const Doc: React.FC<IProps> = (props) => {
   useEffect(
     function transformHashToGoodUrl() {
       if (currentPage && location.hash) {
-        const h2 = location.hash.replace("#", "");
-        const newUrl = `${props.url}/${currentPage.id}/${h2}`;
-        history.replace(newUrl);
+        const newSection = location.hash.replace("#", "");
+
+        history.replace({
+          pathname: location.pathname,
+          search: `?goTo=${newSection}`,
+        });
       }
     },
     [location.hash]
   );
-
-  function handleGoToPage(page: IPage) {
-    history.push(page.url);
-  }
 
   function handleMarkdownAnchorClick(e: Event) {
     e.preventDefault();
@@ -232,6 +227,10 @@ export const Doc: React.FC<IProps> = (props) => {
     } else {
       window.open(href);
     }
+  }
+
+  function handleGoToPage(page: IPage) {
+    history.push(page.url);
   }
 
   useEffect(
@@ -542,16 +541,14 @@ export const Doc: React.FC<IProps> = (props) => {
             }
           }}
           onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownIndex)?.label;
+            const label = (newValue as IMarkdownIndex)?.id;
             if (label) {
               const index = markdownIndexes.flat.find(
-                (index) => label === index.label
+                (index) => label === index.id
               );
 
-              if (index?.level === 1) {
-                history.push(`${props.url}/${index?.id}`);
-              } else {
-                history.push(`${props.url}/${index?.pageId}/${index?.id}`);
+              if (index?.url) {
+                history.push(index.url);
               }
             }
           }}
@@ -595,7 +592,7 @@ export const Doc: React.FC<IProps> = (props) => {
               <MenuItem
                 button
                 dense
-                selected={isSubSectionOpen && !props.subPage && !props.section}
+                selected={isSubSectionOpen && !props.subPage && !section}
                 component={Link}
                 to={`${props.url}/${h1.id}`}
                 data-cy={`doc.table-of-content.h1`}
@@ -637,15 +634,19 @@ export const Doc: React.FC<IProps> = (props) => {
                   if (h2.level !== 2) {
                     return null;
                   }
+                  const url =
+                    docMode === MarkdownDocMode.H1sAndH2sArePages
+                      ? `${props.url}/${h1.id}/${h2.id}`
+                      : `${props.url}/${h1.id}/?goTo=${h2.id}`;
                   return (
                     <React.Fragment key={h2Index}>
                       <MenuItem
                         button
                         dense
-                        selected={props.subPage === h2.id && !props.section}
+                        selected={props.subPage === h2.id && !section}
                         key={h2Index}
                         component={Link}
-                        to={`${props.url}/${h1.id}/${h2.id}`}
+                        to={url}
                         data-cy={`doc.table-of-content.h2`}
                         data-cy-page-id={h2.id}
                         onClick={() => {
@@ -663,7 +664,7 @@ export const Doc: React.FC<IProps> = (props) => {
                             <MenuItem
                               button
                               dense
-                              selected={props.section === h3.id}
+                              selected={section === h3.id}
                               key={h3Index}
                               component={Link}
                               to={`${props.url}/${h1.id}/${h2.id}/${h3.id}`}
