@@ -45,7 +45,11 @@ import {
   IMarkdownIndex,
   useMarkdownFile,
 } from "./hooks/useMarkdownFile";
-import { IPage, useMarkdownPage } from "./hooks/useMarkdownPage";
+import {
+  IPage,
+  MarkdownDocMode,
+  useMarkdownPage,
+} from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
@@ -60,15 +64,20 @@ type IProps = {
   url: string;
   /**
    * Section right after the `props.url` which matches the current `<h1>` in the document
-   *
-   * e.g. `/taking-action-rolling-the-dice`
+   *n
+   * e.g. `/srds/condensed/{{h1}}`
    */
   page: string | undefined;
+  /**
+   * Section right after the `props.url` which matches the current `<h2>` in the document
+   *
+   * e.g. `/srds/condensed/taking-action-rolling-the-dice/{{h2}}`
+   */
   subPage: string | undefined;
   /**
-   * Section right after the `props.page` which matches a `<h>` inside the current page in the document
+   * Section right after the `props.page` which matches a `<h3-6>` inside the current page in the document
    *
-   * e.g. `/modifying-the-dice`
+   * e.g. `/srds/condensed/taking-action-rolling-the-dice/{{h3-6}}`
    */
   section: string | undefined;
   /**
@@ -109,6 +118,10 @@ type IProps = {
    * Link to original file
    */
   gitHubLink?: string;
+  /**
+   * @default {MarkdownPageMode.H1sArePages}
+   */
+  docMode?: MarkdownDocMode;
 };
 
 export type IDocProps = IProps;
@@ -118,6 +131,7 @@ export const Doc: React.FC<IProps> = (props) => {
     props.loadFunction,
     props.url
   );
+  const docMode = props.docMode ?? MarkdownDocMode.H1sArePages;
   const {
     html,
     nextPage,
@@ -131,9 +145,12 @@ export const Doc: React.FC<IProps> = (props) => {
     subPage: props.subPage,
     section: props.section,
     dom: dom,
+    docMode: docMode,
   });
 
-  useScrollOnHtmlLoad(html, props.section);
+  const scrollTo =
+    docMode === MarkdownDocMode.H1sArePages ? props.subPage : props.section;
+  useScrollOnHtmlLoad(html, scrollTo);
 
   const lightBackground = useLightBackground();
   const theme = useTheme();
@@ -148,12 +165,23 @@ export const Doc: React.FC<IProps> = (props) => {
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
   logger.debug("page", { previousPage, currentPage, nextPage });
+
   useEffect(
     function onPageChange() {
       setOpenH1(props.page);
+
       window.scrollTo(0, 0);
     },
-    [props.page, props.subPage]
+    [props.page]
+  );
+
+  useEffect(
+    function onSubPageChange() {
+      if (docMode === MarkdownDocMode.H1sAndH2sArePages) {
+        window.scrollTo(0, 0);
+      }
+    },
+    [props.subPage]
   );
 
   useEffect(function onUnmount() {

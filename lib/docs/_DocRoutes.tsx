@@ -1,8 +1,11 @@
 import { IDocProps } from "../components/Doc/Doc";
+import { MarkdownDocMode } from "../components/Doc/hooks/useMarkdownPage";
 import { Images } from "../constants/Images";
 import { DocImport } from "./_DocImport";
 
-export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
+export const DocRoutes: Array<
+  Omit<IDocProps, "page" | "subPage" | "section">
+> = [
   {
     url: "/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
@@ -157,6 +160,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
       ],
     },
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
   },
   {
     url: "/scene-checklist",
@@ -240,6 +244,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     gitHubLink:
       "https://github.com/fariapp/fari/tree/master/lib/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
   },
   {
     url: "/changelog",

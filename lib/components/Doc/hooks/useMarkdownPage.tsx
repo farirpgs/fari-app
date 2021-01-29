@@ -8,35 +8,46 @@ export type IPage = {
   url: string;
 };
 
-export function useMarkdownPage(options: {
+export enum MarkdownDocMode {
+  H1sArePages,
+  H1sAndH2sArePages,
+}
+export function useMarkdownPage(props: {
   url: string;
   page: string | undefined;
   subPage: string | undefined;
   section: string | undefined;
   dom: HTMLDivElement | undefined;
+  docMode: MarkdownDocMode;
 }) {
-  const { url, page, subPage, dom, section } = options;
   const logger = useLogger();
 
   return useMemo(() => {
-    const allH1sAndH2s =
-      dom?.querySelectorAll(`h1,h2`) ??
-      // dom?.querySelectorAll(`h1`) ?? (([] as unknown) as NodeListOf<Element>);
+    const pageSelector =
+      props.docMode === MarkdownDocMode.H1sArePages ? "h1" : "h1,h2";
+    const pageElements =
+      props.dom?.querySelectorAll(pageSelector) ??
+      (([] as unknown) as NodeListOf<Element>);
 
-    if (!!dom && allH1sAndH2s.length === 0) {
+    if (!!props.dom && pageElements.length === 0) {
       logger.error("useMarkdownPage: no H1s or H2s in the markdown document");
     }
 
+    const currentPageSelector =
+      props.docMode === MarkdownDocMode.H1sArePages
+        ? `[id='${props.page}']`
+        : `[id='${props.subPage || props.page}']`;
+
     const currentPageElement =
-      dom?.querySelector(`[id='${subPage || page}']`) ?? allH1sAndH2s[0];
-      // dom?.querySelector(`[id='${page}']`) ?? allH1sAndH2s[0];
+      props.dom?.querySelector(currentPageSelector) ?? pageElements[0];
+
     const textAfterCurrentPage = getFirstMatchAfterElement(
       currentPageElement,
       "p,ul"
     );
 
     const currentSectionElement =
-      dom?.querySelector(`[id='${section}']`) ?? undefined;
+      props.dom?.querySelector(`[id='${props.section}']`) ?? undefined;
     const textAfterCurrentSection = getFirstMatchAfterElement(
       currentSectionElement,
       "p,ul"
@@ -56,9 +67,9 @@ export function useMarkdownPage(options: {
     if (!currentPageElement) {
       return {
         html: "",
-        currentPage: makePageFromH1OrH2(allH1sAndH2s[0], url),
+        currentPage: makePageFromH1OrH2(pageElements[0], props.url),
         previousPage: undefined,
-        nextPage: makePageFromH1OrH2(allH1sAndH2s[1], url),
+        nextPage: makePageFromH1OrH2(pageElements[1], props.url),
         title: title.trim(),
         description: description.trim(),
       };
@@ -67,10 +78,10 @@ export function useMarkdownPage(options: {
     let previousPage: IPage | undefined;
     let nextPage: IPage | undefined;
 
-    allH1sAndH2s.forEach((h, index) => {
+    pageElements.forEach((h, index) => {
       if (h.id === currentPageElement.id) {
-        previousPage = makePageFromH1OrH2(allH1sAndH2s[index - 1], url);
-        nextPage = makePageFromH1OrH2(allH1sAndH2s[index + 1], url);
+        previousPage = makePageFromH1OrH2(pageElements[index - 1], props.url);
+        nextPage = makePageFromH1OrH2(pageElements[index + 1], props.url);
       }
     });
 
@@ -82,13 +93,13 @@ export function useMarkdownPage(options: {
 
     return {
       html: newDom?.innerHTML,
-      currentPage: makePageFromH1OrH2(currentPageElement, url),
+      currentPage: makePageFromH1OrH2(currentPageElement, props.url),
       previousPage: previousPage,
       nextPage: nextPage,
       title: title.trim(),
       description: description.trim(),
     };
-  }, [url, dom, page, subPage, section]);
+  }, [props.url, props.dom, props.page, props.subPage, props.section]);
 }
 
 function makePageFromH1OrH2(

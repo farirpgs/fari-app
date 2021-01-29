@@ -157,6 +157,7 @@ export const AppRouter = () => {
                 loadFunction={docRoute.loadFunction}
                 author={docRoute.author}
                 gitHubLink={docRoute.gitHubLink}
+                docMode={docRoute.docMode}
               />
             )}
           />
