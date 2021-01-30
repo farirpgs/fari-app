@@ -160,7 +160,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
       window.scrollTo(0, 0);
     },
-    [props.page, currentPage]
+    [props.page]
   );
 
   useEffect(
@@ -342,7 +342,7 @@ export const Doc: React.FC<IProps> = (props) => {
               startIcon={<EditIcon />}
               target="_blank"
               rel="noreferrer"
-              href={props.gitHubLink}
+              href={`${props.gitHubLink}#${props.page}`}
             >
               Edit this Page
             </Button>
