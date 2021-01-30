@@ -1,3 +1,4 @@
+import appIcon from "../../images/blue/app.png";
 import accelerated from "../../images/srds/accelerated.jpg";
 import adversaryToolkit from "../../images/srds/adversary-toolkit.jpg";
 import seelieSquireAvatar from "../../images/srds/authors/seelie-squire-avatar.png";
@@ -12,6 +13,7 @@ import seelieSquire from "../../images/srds/seelie-squire.png";
 import systemToolkit from "../../images/srds/system-toolkit.jpg";
 
 export const Images = {
+  appIcon: appIcon as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,
   accelerated: accelerated as string,
