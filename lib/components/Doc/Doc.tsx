@@ -332,6 +332,7 @@ export const Doc: React.FC<IProps> = (props) => {
     if (!props.gitHubLink) {
       return null;
     }
+    const githubHash = props.page ? `#${props.page}` : "";
     return (
       <Box my=".5rem">
         <Grid container justify="flex-end">
@@ -342,7 +343,7 @@ export const Doc: React.FC<IProps> = (props) => {
               startIcon={<EditIcon />}
               target="_blank"
               rel="noreferrer"
-              href={`${props.gitHubLink}#${props.page}`}
+              href={`${props.gitHubLink}${githubHash}`}
             >
               Edit this Page
             </Button>
