@@ -104,6 +104,10 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic table of co
 </ul>
 `;
 
+exports[`useMarkdownFile Given I have a markdown file without h1 should return an undefined state 1`] = `""`;
+
+exports[`useMarkdownFile Given I have a markdown file without h1 should return an undefined state 2`] = `<div />`;
+
 exports[`useMarkdownFile Given I hierarchy formatted markdown file should return an good state 1`] = `
 "<h1 id=\\"header_1\\">header_1<a class=\\"anchor\\" href=\\"#header_1\\"></a></h1>
 <h2 id=\\"header_2\\">header_2<a class=\\"anchor\\" href=\\"#header_2\\"></a></h2>
