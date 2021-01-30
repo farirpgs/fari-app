@@ -137,7 +137,6 @@ export const Markdown = {
         children: [],
       })),
     };
-    console.debug("dom", dom.innerHTML);
     return { dom, markdownIndexes };
   },
   getPage(props: {
