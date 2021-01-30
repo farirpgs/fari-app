@@ -1,5 +1,4 @@
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
+import { darken, lighten, makeStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import React from "react";
 import { scrollMarginTop } from "../Doc/hooks/useMarkdownFile";

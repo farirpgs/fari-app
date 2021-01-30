@@ -1,5 +1,8 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
-import { lighten } from "@material-ui/core/styles/colorManipulator";
+import {
+  createMuiTheme,
+  lighten,
+  ThemeOptions,
+} from "@material-ui/core/styles";
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
 
 const systemFonts = [

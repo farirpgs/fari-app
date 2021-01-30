@@ -1,5 +1,4 @@
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, lighten, useTheme } from "@material-ui/core/styles";
 
 export function useLightBackground() {
   const theme = useTheme();
