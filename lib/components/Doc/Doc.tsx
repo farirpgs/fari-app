@@ -153,7 +153,6 @@ export const Doc: React.FC<IProps> = (props) => {
   const shouldRenderSectionTitle = title !== props.title;
 
   useScrollOnHtmlLoad(html, section);
-  logger.debug("page", { previousPage, currentPage, nextPage });
 
   useEffect(
     function onPageChange() {
@@ -161,7 +160,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
       window.scrollTo(0, 0);
     },
-    [props.page]
+    [props.page, currentPage]
   );
 
   useEffect(
@@ -578,7 +577,7 @@ export const Doc: React.FC<IProps> = (props) => {
       <List>
         {markdownIndexes.tree.map((h1, i) => {
           const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = openH1 === h1.id;
+          const isSubSectionOpen = !openH1 ? i === 0 : openH1 === h1.id;
 
           return (
             <React.Fragment key={i}>
