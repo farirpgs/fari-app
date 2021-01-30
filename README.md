@@ -1,6 +1,6 @@
 <!--
 # TODO
-
+- [ ] https://github.com/parcel-bundler/parcel/issues/1762#issuecomment-714322965
 - [x] boost sub menu
 - [ ] character sheet dirty state
 - [x] hash sub text for srd
