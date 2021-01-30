@@ -357,9 +357,11 @@ describe("useMarkdownPage", () => {
       expect(fakeLogger.error).toHaveBeenCalledWith(
         'useMarkdownPage: no "h1" in the markdown document'
       );
-      expect(view.result.current.title).toEqual("");
-      expect(view.result.current.description).toEqual("");
-      expect(view.result.current.html).toEqual("");
+      expect(view.result.current.title).toEqual("Error");
+      expect(view.result.current.description).toEqual("Document Error");
+      expect(view.result.current.html).toEqual(
+        `<h1>Error</h1><p>There was an error processing this document</p>`
+      );
       expect(view.result.current.previousPage).toEqual(undefined);
       expect(view.result.current.nextPage).toEqual(undefined);
       expect(view.result.current.currentPage).toEqual(undefined);
