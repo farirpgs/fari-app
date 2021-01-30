@@ -1,5 +1,5 @@
 import { IDocProps } from "../components/Doc/Doc";
-import { MarkdownDocMode } from "../components/Doc/hooks/useMarkdownPage";
+import { MarkdownDocMode } from "../components/Doc/domains/Markdown";
 import { Images } from "../constants/Images";
 import { DocImport } from "./_DocImport";
 
@@ -235,6 +235,17 @@ export const DocRoutes: Array<
         },
       ],
     },
+  },
+  {
+    url: "/srds/test-empty",
+    parent: {
+      title: "Fari",
+      url: "/",
+    },
+    title: "Test Empty",
+    loadFunction: DocImport.TestEmpty,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/lib/docs/test-empty.md",
   },
   {
     url: "/fate-wiki",

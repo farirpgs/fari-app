@@ -40,16 +40,9 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
-import {
-  ILoadFunction,
-  IMarkdownIndex,
-  useMarkdownFile,
-} from "./hooks/useMarkdownFile";
-import {
-  IPage,
-  MarkdownDocMode,
-  useMarkdownPage,
-} from "./hooks/useMarkdownPage";
+import { IMarkdownIndex, IPage, MarkdownDocMode } from "./domains/Markdown";
+import { ILoadFunction, useMarkdownFile } from "./hooks/useMarkdownFile";
+import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
