@@ -38,6 +38,7 @@ feat: ⚠ BETA ⚠ data export and import manager
 
 **v3.5.5**
 fix: scroll issue in docs
+fix: removed `showdown` markdown transformer in favor of `marked`
 
 ## v3.4 Join screen UX, Italian translations
 
