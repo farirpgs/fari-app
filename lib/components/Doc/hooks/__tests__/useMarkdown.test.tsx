@@ -7,7 +7,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import React from "react";
 import { InjectionsContext } from "../../../../contexts/InjectionsContext/InjectionsContext";
 import { useMarkdownFile } from "../useMarkdownFile";
-import { useMarkdownPage } from "../useMarkdownPage";
+import { MarkdownDocMode, useMarkdownPage } from "../useMarkdownPage";
 
 const fakeLogger = {
   debug: jest.fn(),
@@ -27,7 +27,11 @@ describe("useMarkdownFile", () => {
   describe("Given I have an undefined markdown file", () => {
     it("should return an undefined state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(anUndefinedMarkdownFile, "/test-doc");
+        return useMarkdownFile({
+          loadFunction: anUndefinedMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
       });
 
       expect(view.result.current.html).toEqual(undefined);
@@ -39,7 +43,11 @@ describe("useMarkdownFile", () => {
   describe("Given I dont have a load function", () => {
     it("should return an undefined state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(undefined as any, "/test-doc");
+        return useMarkdownFile({
+          loadFunction: undefined as any,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
       });
 
       expect(view.result.current.html).toEqual(undefined);
@@ -51,7 +59,11 @@ describe("useMarkdownFile", () => {
   describe("Given I have an empty markdown file", () => {
     it("should return an undefined state", () => {
       const view = renderHook(() => {
-        return useMarkdownFile(anEmptyMarkdownFile, "/test-doc");
+        return useMarkdownFile({
+          loadFunction: anEmptyMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
       });
 
       expect(view.result.current.html).toEqual(undefined);
@@ -64,7 +76,11 @@ describe("useMarkdownFile", () => {
     it("should return an undefined state", async () => {
       const view = renderHook(
         () => {
-          return useMarkdownFile(aMarkdownFileWithoutAHeader1, "/test-doc");
+          return useMarkdownFile({
+            loadFunction: aMarkdownFileWithoutAHeader1,
+            prefix: "/test-doc",
+            docMode: MarkdownDocMode.H1sArePages,
+          });
         },
         {
           wrapper: wrapper,
@@ -84,7 +100,11 @@ describe("useMarkdownFile", () => {
     it("should add an anchor at the tag matching the id", async () => {
       const view = renderHook(
         () => {
-          return useMarkdownFile(aMarkdownFileWithADynamicAnchor, "/test-doc");
+          return useMarkdownFile({
+            loadFunction: aMarkdownFileWithADynamicAnchor,
+            prefix: "/test-doc",
+            docMode: MarkdownDocMode.H1sArePages,
+          });
         },
         {
           wrapper: wrapper,
@@ -104,10 +124,11 @@ describe("useMarkdownFile", () => {
     it("should add a table of content", async () => {
       const view = renderHook(
         () => {
-          return useMarkdownFile(
-            aMarkdownFileWithADynamicTableOfContent,
-            "/test-doc"
-          );
+          return useMarkdownFile({
+            loadFunction: aMarkdownFileWithADynamicTableOfContent,
+            prefix: "/test-doc",
+            docMode: MarkdownDocMode.H1sArePages,
+          });
         },
         {
           wrapper: wrapper,
@@ -121,7 +142,11 @@ describe("useMarkdownFile", () => {
   describe("Given I properly formatted markdown file", () => {
     it("should return an good state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(aComplexeMarkdownFile, "/test-doc");
+        return useMarkdownFile({
+          loadFunction: aComplexeMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
       });
       await view.waitForValueToChange(() => view.result.current.html);
 
@@ -129,10 +154,14 @@ describe("useMarkdownFile", () => {
       expect(view.result.current.dom).toMatchSnapshot();
     });
   });
-  describe("Given I hierarcy formatted markdown file", () => {
+  describe("Given I hierarchy formatted markdown file", () => {
     it("should return an good state", async () => {
       const view = renderHook(() => {
-        return useMarkdownFile(aMarkdownFileInHierarchy, "/test-doc");
+        return useMarkdownFile({
+          loadFunction: aMarkdownFileInHierarchy,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
       });
       await view.waitForValueToChange(() => view.result.current.html);
 
@@ -152,9 +181,20 @@ describe("useMarkdownPage", () => {
   describe("Given an empty page", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(anEmptyMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: anEmptyMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: "", section: "", dom: dom });
+        return useMarkdownPage({
+          page: "",
+          subPage: "",
+          section: "",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       expect(view.result.current.title).toEqual("");
@@ -164,12 +204,23 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
-  describe("Given an undefined page", () => {
+  describe("Given an undefined page for an undefined markdown file", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(anUndefinedMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: anUndefinedMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: undefined, section: "", dom: dom });
+        return useMarkdownPage({
+          page: undefined,
+          subPage: "",
+          section: "",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       expect(view.result.current.title).toEqual("");
@@ -179,76 +230,131 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
-  describe("Given an undefined page", () => {
+  describe("Given an undefined page with a good markdown page", () => {
     it("should default to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aComplexeMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: aComplexeMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: undefined, section: "", dom: dom });
+        return useMarkdownPage({
+          page: undefined,
+          subPage: "",
+          section: "",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_1");
       expect(view.result.current.description).toEqual("[header_1.text]");
-      expect(view.result.current.currentPage.textContent).toEqual("header_1");
+      expect(view.result.current.currentPage?.label).toEqual("header_1");
       expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage?.textContent).toEqual("header_2");
+      expect(view.result.current.nextPage?.label).toEqual("header_2");
     });
   });
   describe("Given the first page page", () => {
     it("should go to first h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aComplexeMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: aComplexeMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: undefined, section: "", dom: dom });
+        return useMarkdownPage({
+          page: "header_1",
+          subPage: "",
+          section: "",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_1");
       expect(view.result.current.description).toEqual("[header_1.text]");
-      expect(view.result.current.currentPage.textContent).toEqual("header_1");
+      expect(view.result.current.currentPage?.label).toEqual("header_1");
       expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage?.textContent).toEqual("header_2");
+      expect(view.result.current.nextPage?.label).toEqual("header_2");
     });
   });
   describe("Given the second page", () => {
     it("should go to second h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aComplexeMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: aComplexeMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: "header_2", section: "", dom });
+        return useMarkdownPage({
+          page: "header_2",
+          subPage: "",
+          section: "",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_2");
       expect(view.result.current.description).toEqual("[header_2.text]");
-      expect(view.result.current.currentPage.textContent).toEqual("header_2");
-      expect(view.result.current.previousPage?.textContent).toEqual("header_1");
-      expect(view.result.current.nextPage?.textContent).toEqual("header_3");
+      expect(view.result.current.currentPage?.label).toEqual("header_2");
+      expect(view.result.current.previousPage?.label).toEqual("header_1");
+      expect(view.result.current.nextPage?.label).toEqual("header_3");
     });
   });
   describe("Given the third page", () => {
     it("should go to third h1", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aComplexeMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: aComplexeMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: "header_3", section: "", dom });
+        return useMarkdownPage({
+          page: "header_3",
+          subPage: "",
+          section: "",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header_3");
       expect(view.result.current.description).toEqual("[header_3.text]");
-      expect(view.result.current.currentPage.textContent).toEqual("header_3");
-      expect(view.result.current.previousPage?.textContent).toEqual("header_2");
+      expect(view.result.current.currentPage?.label).toEqual("header_3");
+      expect(view.result.current.previousPage?.label).toEqual("header_2");
       expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given the third page and there is a section", () => {
     it("should go to third h1 and have the right title and description", async () => {
       const view = renderHook(() => {
-        const { dom } = useMarkdownFile(aComplexeMarkdownFile, "/test-doc");
+        const { dom } = useMarkdownFile({
+          loadFunction: aComplexeMarkdownFile,
+          prefix: "/test-doc",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
 
-        return useMarkdownPage({ page: "header_3", section: "rage", dom });
+        return useMarkdownPage({
+          page: "header_3",
+          subPage: "",
+          section: "rage",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "test-doc",
+          dom: dom,
+        });
       });
 
       await view.waitForNextUpdate();
@@ -256,9 +362,34 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.description).toEqual(
         "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical con..."
       );
-      expect(view.result.current.currentPage.textContent).toEqual("header_3");
-      expect(view.result.current.previousPage?.textContent).toEqual("header_2");
+      expect(view.result.current.currentPage?.label).toEqual("header_3");
+      expect(view.result.current.previousPage?.label).toEqual("header_2");
       expect(view.result.current.nextPage).toEqual(undefined);
+    });
+  });
+
+  describe("Given I want to test doc types", () => {
+    it("should ", async () => {
+      const view = renderHook(() => {
+        const { dom } = useMarkdownFile({
+          loadFunction: aWiki,
+          prefix: "/wiki",
+          docMode: MarkdownDocMode.H1sArePages,
+        });
+
+        return useMarkdownPage({
+          page: "",
+          subPage: "",
+          section: "rage",
+          docMode: MarkdownDocMode.H1sArePages,
+          url: "wiki",
+          dom: dom,
+        });
+      });
+
+      await view.waitForNextUpdate();
+
+      expect(view.result.current.html).toMatchSnapshot();
     });
   });
 });
@@ -367,5 +498,30 @@ const aMarkdownFileWithADynamicTableOfContent = makeLoadFunction(`
 # 3
 
 # 4
+
+`);
+
+const aWiki = makeLoadFunction(`
+# Wiki
+
+# FAQ
+
+## Question 1
+
+## Question 2
+
+## Question 3
+
+### Question 3 Explanation
+
+# Tips and Tricks
+
+## Tip 1
+
+## Tip 2
+
+## Tip 3
+
+### Question 3 Explanation
 
 `);
