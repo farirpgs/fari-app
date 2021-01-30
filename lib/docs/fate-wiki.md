@@ -2,13 +2,13 @@
 
 The ultimate open and community driven Fate wiki resources.
 
-<toc/>
+<toc></toc>
 
 # FAQ
 
 Answers to the most popular Fate related questions.
 
-<toc/>
+<toc></toc>
 
 ## Condensed / Core / Accelerated
 
@@ -88,7 +88,7 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 
 List of tips that we think are going to be useful for playing Fate.
 
-<toc/>
+<toc></toc>
 
 ## How to GM Fate
 

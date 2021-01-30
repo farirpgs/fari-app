@@ -36,6 +36,10 @@ feat: more flexible dynamic table of content for docs
 feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc)
 feat: ⚠ BETA ⚠ data export and import manager
 
+**v3.5.5**
+fix: scroll issue in docs
+fix: removed `showdown` markdown transformer in favor of `marked`
+
 ## v3.4 Join screen UX, Italian translations
 
 #### January 5th, 2021

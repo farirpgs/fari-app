@@ -46,20 +46,20 @@ describe("Given I want use the autocomplete indexes", () => {
     ).toEqual([
       { label: "Wiki", url: "/prefix/wiki" },
       { label: "FAQ", url: "/prefix/faq" },
-      { label: "Question 1", url: "/prefix/faq?goTo=question1" },
-      { label: "Question 2", url: "/prefix/faq?goTo=question2" },
-      { label: "Question 3", url: "/prefix/faq?goTo=question3" },
+      { label: "Question 1", url: "/prefix/faq?goTo=question-1" },
+      { label: "Question 2", url: "/prefix/faq?goTo=question-2" },
+      { label: "Question 3", url: "/prefix/faq?goTo=question-3" },
       {
         label: "Question 3 Explanation",
-        url: "/prefix/faq?goTo=question3explanation",
+        url: "/prefix/faq?goTo=question-3-explanation",
       },
-      { label: "Tips and Tricks", url: "/prefix/tipsandtricks" },
-      { label: "Tip 1", url: "/prefix/tipsandtricks?goTo=tip1" },
-      { label: "Tip 2", url: "/prefix/tipsandtricks?goTo=tip2" },
-      { label: "Tip 3", url: "/prefix/tipsandtricks?goTo=tip3" },
+      { label: "Tips and Tricks", url: "/prefix/tips-and-tricks" },
+      { label: "Tip 1", url: "/prefix/tips-and-tricks?goTo=tip-1" },
+      { label: "Tip 2", url: "/prefix/tips-and-tricks?goTo=tip-2" },
+      { label: "Tip 3", url: "/prefix/tips-and-tricks?goTo=tip-3" },
       {
         label: "Question 3 Explanation",
-        url: "/prefix/tipsandtricks?goTo=question3explanation-1",
+        url: "/prefix/tips-and-tricks?goTo=question-3-explanation-1",
       },
     ]);
   });
@@ -84,20 +84,20 @@ describe("Given I want use the autocomplete indexes", () => {
     ).toEqual([
       { label: "Wiki", url: "/prefix/wiki" },
       { label: "FAQ", url: "/prefix/faq" },
-      { label: "Question 1", url: "/prefix/faq/question1" },
-      { label: "Question 2", url: "/prefix/faq/question2" },
-      { label: "Question 3", url: "/prefix/faq/question3" },
+      { label: "Question 1", url: "/prefix/faq/question-1" },
+      { label: "Question 2", url: "/prefix/faq/question-2" },
+      { label: "Question 3", url: "/prefix/faq/question-3" },
       {
         label: "Question 3 Explanation",
-        url: "/prefix/faq/question3?goTo=question3explanation",
+        url: "/prefix/faq/question-3?goTo=question-3-explanation",
       },
-      { label: "Tips and Tricks", url: "/prefix/tipsandtricks" },
-      { label: "Tip 1", url: "/prefix/tipsandtricks/tip1" },
-      { label: "Tip 2", url: "/prefix/tipsandtricks/tip2" },
-      { label: "Tip 3", url: "/prefix/tipsandtricks/tip3" },
+      { label: "Tips and Tricks", url: "/prefix/tips-and-tricks" },
+      { label: "Tip 1", url: "/prefix/tips-and-tricks/tip-1" },
+      { label: "Tip 2", url: "/prefix/tips-and-tricks/tip-2" },
+      { label: "Tip 3", url: "/prefix/tips-and-tricks/tip-3" },
       {
         label: "Question 3 Explanation",
-        url: "/prefix/tipsandtricks/tip3?goTo=question3explanation-1",
+        url: "/prefix/tips-and-tricks/tip-3?goTo=question-3-explanation-1",
       },
     ]);
   });
@@ -393,11 +393,11 @@ describe("useMarkdownPage", () => {
       );
 
       await view.waitForNextUpdate();
-      expect(view.result.current.title).toEqual("header_1");
-      expect(view.result.current.description).toEqual("[header_1.text]");
-      expect(view.result.current.currentPage?.label).toEqual("header_1");
+      expect(view.result.current.title).toEqual("header-1");
+      expect(view.result.current.description).toEqual("[header-1.text]");
+      expect(view.result.current.currentPage?.label).toEqual("header-1");
       expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage?.label).toEqual("header_2");
+      expect(view.result.current.nextPage?.label).toEqual("header-2");
     });
   });
   describe("Given the first page page", () => {
@@ -411,7 +411,7 @@ describe("useMarkdownPage", () => {
           });
 
           return useMarkdownPage({
-            page: "header_1",
+            page: "header-1",
             subPage: "",
             section: "",
             docMode: MarkdownDocMode.H1sArePages,
@@ -425,11 +425,11 @@ describe("useMarkdownPage", () => {
       );
 
       await view.waitForNextUpdate();
-      expect(view.result.current.title).toEqual("header_1");
-      expect(view.result.current.description).toEqual("[header_1.text]");
-      expect(view.result.current.currentPage?.label).toEqual("header_1");
+      expect(view.result.current.title).toEqual("header-1");
+      expect(view.result.current.description).toEqual("[header-1.text]");
+      expect(view.result.current.currentPage?.label).toEqual("header-1");
       expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage?.label).toEqual("header_2");
+      expect(view.result.current.nextPage?.label).toEqual("header-2");
     });
   });
   describe("Given the second page", () => {
@@ -443,7 +443,7 @@ describe("useMarkdownPage", () => {
           });
 
           return useMarkdownPage({
-            page: "header_2",
+            page: "header-2",
             subPage: "",
             section: "",
             docMode: MarkdownDocMode.H1sArePages,
@@ -457,11 +457,11 @@ describe("useMarkdownPage", () => {
       );
 
       await view.waitForNextUpdate();
-      expect(view.result.current.title).toEqual("header_2");
-      expect(view.result.current.description).toEqual("[header_2.text]");
-      expect(view.result.current.currentPage?.label).toEqual("header_2");
-      expect(view.result.current.previousPage?.label).toEqual("header_1");
-      expect(view.result.current.nextPage?.label).toEqual("header_3");
+      expect(view.result.current.title).toEqual("header-2");
+      expect(view.result.current.description).toEqual("[header-2.text]");
+      expect(view.result.current.currentPage?.label).toEqual("header-2");
+      expect(view.result.current.previousPage?.label).toEqual("header-1");
+      expect(view.result.current.nextPage?.label).toEqual("header-3");
     });
   });
   describe("Given the third page", () => {
@@ -474,7 +474,7 @@ describe("useMarkdownPage", () => {
         });
 
         return useMarkdownPage({
-          page: "header_3",
+          page: "header-3",
           subPage: "",
           section: "",
           docMode: MarkdownDocMode.H1sArePages,
@@ -484,10 +484,10 @@ describe("useMarkdownPage", () => {
       });
 
       await view.waitForNextUpdate();
-      expect(view.result.current.title).toEqual("header_3");
-      expect(view.result.current.description).toEqual("[header_3.text]");
-      expect(view.result.current.currentPage?.label).toEqual("header_3");
-      expect(view.result.current.previousPage?.label).toEqual("header_2");
+      expect(view.result.current.title).toEqual("header-3");
+      expect(view.result.current.description).toEqual("[header-3.text]");
+      expect(view.result.current.currentPage?.label).toEqual("header-3");
+      expect(view.result.current.previousPage?.label).toEqual("header-2");
       expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
@@ -502,7 +502,7 @@ describe("useMarkdownPage", () => {
           });
 
           return useMarkdownPage({
-            page: "header_3",
+            page: "header-3",
             subPage: "",
             section: "rage",
             docMode: MarkdownDocMode.H1sArePages,
@@ -520,8 +520,8 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.description).toEqual(
         "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical con..."
       );
-      expect(view.result.current.currentPage?.label).toEqual("header_3");
-      expect(view.result.current.previousPage?.label).toEqual("header_2");
+      expect(view.result.current.currentPage?.label).toEqual("header-3");
+      expect(view.result.current.previousPage?.label).toEqual("header-2");
       expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
@@ -542,31 +542,31 @@ function makeLoadFunction(markdownFile: string | undefined) {
 const anUndefinedMarkdownFile = makeLoadFunction(undefined);
 const anEmptyMarkdownFile = makeLoadFunction("");
 const aComplexeMarkdownFile = makeLoadFunction(`
-# header_1
+# header-1
 
-[header_1.text]
+[header-1.text]
 
-## header_1_1
+## header-1-1
 
-[header_1_2.text]
+[header-1-2.text]
 
-## header_1_2
+## header-1-2
 
-[header_1_2.text]
+[header-1-2.text]
 
-### header_1_2_1
+### header-1-2-1
 
-### header_1_2_2
+### header-1-2-2
 
-### header_1_2_3
+### header-1-2-3
 
-# header_2
+# header-2
 
-[header_2.text]
+[header-2.text]
 
-# header_3
+# header-3
 
-[header_3.text]
+[header-3.text]
 
 - bullet 1
 - bullet 2
@@ -578,12 +578,12 @@ const aComplexeMarkdownFile = makeLoadFunction(`
 `);
 
 const aMarkdownFileInHierarchy = makeLoadFunction(`
-# header_1
-## header_2
-### header_3
-#### header_4
-##### header_5
-###### header_6
+# header-1
+## header-2
+### header-3
+#### header-4
+##### header-5
+###### header-6
 
 # again_1
 ## again_2
@@ -614,7 +614,7 @@ const aMarkdownFileWithADynamicAnchor = makeLoadFunction(`
 const aMarkdownFileWithADynamicTableOfContent = makeLoadFunction(`
 # 1
 
-<toc/>
+<toc></toc>
 
 ## 1.1
 

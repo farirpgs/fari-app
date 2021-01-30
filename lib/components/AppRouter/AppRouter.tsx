@@ -13,12 +13,6 @@ import { Page } from "../Page/Page";
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
 const AboutRoute = React.lazy(() => import("../../routes/About/AboutRoute"));
-const BlogPostRoute = React.lazy(
-  () => import("../../routes/BlogPost/BlogPostRoute")
-);
-const BlogPostsRoute = React.lazy(
-  () => import("../../routes/BlogPosts/BlogPostsRoute")
-);
 
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
@@ -179,20 +173,7 @@ export const AppRouter = () => {
             return <AboutRoute />;
           }}
         />
-        <Route
-          exact
-          path={"/blog"}
-          render={(props) => {
-            return <BlogPostsRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/blog/:slug"}
-          render={(props) => {
-            return <BlogPostRoute slug={props.match.params.slug} />;
-          }}
-        />
+      
         <Route
           path="*"
           render={(props) => {
