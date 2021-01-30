@@ -1,6 +1,6 @@
 {
   "name": "fari",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
@@ -10,7 +10,7 @@
     "start": "parcel ./lib/index.html --target browser",
     "build": "parcel build ./lib/index.html --target browser",
     "serve:build": "cp serve.json dist/serve.json && yarn serve dist -l 1234",
-    "build:serve": "yarn build && yarn serve:build",
+    "build-and-serve": "yarn build && yarn serve:build",
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
     "test": "jest --coverage",
@@ -24,8 +24,8 @@
   "dependencies": {
     "@emotion/css": "^11.0.0",
     "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
     "@material-ui/data-grid": "^4.0.0-alpha.18",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@sentry/react": "^5.24.2",
     "canvas-confetti": "^1.2.0",
@@ -37,7 +37,7 @@
     "jest-junit": "^12.0.0",
     "lodash": "^4.17.19",
     "magic-grid": "^3.2.4",
-    "marked": "^1.0.0",
+    "marked": "^1.2.8",
     "netlify-cli": "^2.63.3",
     "peerjs": "^1.2.0",
     "react": "^17.0.1",
@@ -48,7 +48,6 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "roughjs": "^4.3.1",
-    "showdown": "^1.9.1",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
@@ -58,6 +57,7 @@
     "@types/dompurify": "^2.0.2",
     "@types/jest": "^26.0.20",
     "@types/lodash": "^4.14.149",
+    "@types/marked": "^1.2.1",
     "@types/pouchdb": "^6.4.0",
     "@types/react": "^16.9.34",
     "@types/react-color": "^3.0.4",

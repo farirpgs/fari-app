@@ -614,7 +614,7 @@ const aMarkdownFileWithADynamicAnchor = makeLoadFunction(`
 const aMarkdownFileWithADynamicTableOfContent = makeLoadFunction(`
 # 1
 
-<toc/>
+<toc></toc>
 
 ## 1.1
 

@@ -35,5 +35,12 @@ export function useMarkdownPage(props: {
         nextPage: undefined,
       };
     }
-  }, [props.url, props.dom, props.page, props.subPage, props.section]);
+  }, [
+    props.url,
+    props.dom,
+    props.page,
+    props.subPage,
+    props.section,
+    props.docMode,
+  ]);
 }

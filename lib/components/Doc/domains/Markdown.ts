@@ -1,6 +1,6 @@
 import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
-import { showdownConverter } from "../../../constants/showdownConverter";
+import marked from "marked";
 
 export type IMarkdownIndexes = {
   tree: Array<IMarkdownIndex>;
@@ -10,6 +10,7 @@ export type IPage = {
   label: string;
   id: string;
   url: string;
+  level: number;
 };
 
 export type IMarkdownIndex = {
@@ -33,7 +34,7 @@ export const Markdown = {
     prefix: string;
     docMode: MarkdownDocMode;
   }): { dom: HTMLDivElement; markdownIndexes: IMarkdownIndexes } {
-    const html = showdownConverter.makeHtml(props.markdown);
+    const html = marked(props.markdown);
     const dom = document.createElement("div");
     dom.innerHTML = html;
 
@@ -136,6 +137,7 @@ export const Markdown = {
         children: [],
       })),
     };
+    console.debug("dom", dom.innerHTML);
     return { dom, markdownIndexes };
   },
   getPage(props: {
@@ -316,6 +318,7 @@ function makePageFromH1OrH2(
     return {
       label: element.textContent ?? "",
       id: element.id,
+      level: level,
       url: `${url}/${element.id}`,
     };
   }
@@ -323,7 +326,8 @@ function makePageFromH1OrH2(
   return {
     label: element.textContent ?? "",
     id: element.id,
-    url: `${url}/${previousH1!.id}/${element!.id}`,
+    level: level,
+    url: `${url}/${previousH1?.id}/${element.id}`,
   };
 }
 

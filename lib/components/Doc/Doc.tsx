@@ -153,16 +153,31 @@ export const Doc: React.FC<IProps> = (props) => {
   const shouldRenderSectionTitle = title !== props.title;
 
   useScrollOnHtmlLoad(html, section);
-
+  useEffect(
+    function onCurrentPageChange() {
+      if (currentPage?.level === 1) {
+        setOpenH1(currentPage.id);
+      }
+    },
+    [currentPage]
+  );
   useEffect(
     function onPageChange() {
       setOpenH1(props.page);
-
-      window.scrollTo(0, 0);
+      if (docMode === MarkdownDocMode.H1sArePages) {
+        window.scrollTo(0, 0);
+      }
     },
     [props.page]
   );
-
+  useEffect(
+    function onPageAndSubPageChange() {
+      if (docMode === MarkdownDocMode.H1sAndH2sArePages) {
+        window.scrollTo(0, 0);
+      }
+    },
+    [props.page, props.subPage]
+  );
   useEffect(
     function onSubPageChange() {
       if (docMode === MarkdownDocMode.H1sAndH2sArePages) {
@@ -171,7 +186,6 @@ export const Doc: React.FC<IProps> = (props) => {
     },
     [props.subPage]
   );
-
   useEffect(function onUnmount() {
     return () => {
       window.scrollTo(0, 0);
@@ -578,7 +592,7 @@ export const Doc: React.FC<IProps> = (props) => {
       <List>
         {markdownIndexes.tree.map((h1, i) => {
           const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = !openH1 ? i === 0 : openH1 === h1.id;
+          const isSubSectionOpen = openH1 === h1.id;
 
           return (
             <React.Fragment key={i}>

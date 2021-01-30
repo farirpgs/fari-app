@@ -4,7 +4,7 @@ Rules and dials that you can use and hack to add some colors to your Fate campai
 
 Pick and choose as you wish!
 
-<toc />
+<toc></toc>
 
 # Props (from Return to the Stars)
 
