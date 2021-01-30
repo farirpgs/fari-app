@@ -1,19 +1,21 @@
-import appIcon from "../../images/blue/app.png";
-import accelerated from "../../images/srds/accelerated.jpg";
-import adversaryToolkit from "../../images/srds/adversary-toolkit.jpg";
-import seelieSquireAvatar from "../../images/srds/authors/seelie-squire-avatar.png";
-import bookImage from "../../images/srds/books.jpeg";
-import cheatSheet from "../../images/srds/cheat-sheet.jpeg";
-import condensed from "../../images/srds/condensed.jpg";
-import core from "../../images/srds/core.jpg";
-import dials from "../../images/srds/dials.jpeg";
-import rpgPlots from "../../images/srds/rpg-plots.jpeg";
-import scene from "../../images/srds/scene.jpeg";
-import seelieSquire from "../../images/srds/seelie-squire.png";
-import systemToolkit from "../../images/srds/system-toolkit.jpg";
+import appIcon from "url:../../images/blue/app.png";
+import patreon from "url:../../images/services/patreon.png";
+import accelerated from "url:../../images/srds/accelerated.jpg";
+import adversaryToolkit from "url:../../images/srds/adversary-toolkit.jpg";
+import seelieSquireAvatar from "url:../../images/srds/authors/seelie-squire-avatar.png";
+import bookImage from "url:../../images/srds/books.jpeg";
+import cheatSheet from "url:../../images/srds/cheat-sheet.jpeg";
+import condensed from "url:../../images/srds/condensed.jpg";
+import core from "url:../../images/srds/core.jpg";
+import dials from "url:../../images/srds/dials.jpeg";
+import rpgPlots from "url:../../images/srds/rpg-plots.jpeg";
+import scene from "url:../../images/srds/scene.jpeg";
+import seelieSquire from "url:../../images/srds/seelie-squire.png";
+import systemToolkit from "url:../../images/srds/system-toolkit.jpg";
 
 export const Images = {
   appIcon: appIcon as string,
+  patreon: patreon as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,
   accelerated: accelerated as string,

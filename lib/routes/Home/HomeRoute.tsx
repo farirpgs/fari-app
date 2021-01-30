@@ -12,7 +12,6 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import appIcon from "url:../../../images/blue/app.png";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Kofi } from "../../components/Kofi/Kofi";
@@ -20,6 +19,7 @@ import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
+import { Images } from "../../constants/Images";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
@@ -315,7 +315,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </FateLabel>
         </Box>
         <Box pb=".5rem" textAlign="center">
-          <img alt="Fari" width="125px" src={appIcon} />
+          <img alt="Fari" width="125px" src={Images.appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
           <FateLabel variant="h6" color="secondary" as="h2">

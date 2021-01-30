@@ -1,9 +1,10 @@
+import axios from "axios";
 import kebabCase from "lodash/kebabCase";
 import { useEffect, useState } from "react";
 import { showdownConverter } from "../../../constants/showdownConverter";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 
-export type ILoadFunction = () => Promise<string>;
+export type ILoadFunction = any;
 
 export type IMarkdownIndexes = {
   tree: Array<IMarkdownIndex>;
@@ -34,7 +35,7 @@ export function useMarkdownFile(loadFunction: ILoadFunction, prefix: string) {
     async function load() {
       if (loadFunction) {
         try {
-          const markdown = await loadFunction();
+          const markdown = await (await axios.get(loadFunction)).data;
 
           if (markdown) {
             const { dom, markdownIndexes } = Markdown.process(markdown, prefix);

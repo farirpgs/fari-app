@@ -6,7 +6,7 @@
   "license": "AGPL-3.0",
   "main": "./dist/index.html",
   "scripts": {
-    "ci": "yarn install && yarn build && yarn validate",    
+    "ci": "yarn install && yarn build && yarn validate",
     "start": "parcel serve ./lib/index.html",
     "build": "parcel build ./lib/index.html",
     "serve:build": "cp serve.json dist/serve.json && yarn serve dist -l 1234",
@@ -27,6 +27,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@sentry/react": "^5.24.2",
+    "axios": "^0.21.1",
     "canvas-confetti": "^1.2.0",
     "dayjs": "^1.9.3",
     "dompurify": "^2.0.11",
