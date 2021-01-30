@@ -26,3 +26,8 @@ a {
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "fate";
+  src: url("./fonts/fate-core-font.ttf");
+}

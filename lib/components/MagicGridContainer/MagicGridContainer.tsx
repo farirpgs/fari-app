@@ -1,5 +1,6 @@
 import MagicGrid from "magic-grid";
 import React, { useEffect, useRef } from "react";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useMounted } from "../../hooks/useMounted/useMounted";
 
 const DefaultMagicGridGutter = 0;
@@ -11,6 +12,7 @@ export const MagicGridContainer: React.FC<{
   deps: Array<any>;
 }> = (props) => {
   const isMounted = useMounted();
+  const logger = useLogger();
   const $gridContainer = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -24,11 +26,11 @@ export const MagicGridContainer: React.FC<{
         gutter: props.gutterPx ?? DefaultMagicGridGutter,
       });
 
-      magicGrid.current.positionItems();
+      positionItems();
 
       setTimeout(() => {
         if (isMounted) {
-          magicGrid.current?.positionItems();
+          positionItems();
         }
       });
 
@@ -38,9 +40,17 @@ export const MagicGridContainer: React.FC<{
     function resize() {
       if (!timeout.current)
         timeout.current = setTimeout(() => {
-          magicGrid.current?.positionItems();
+          positionItems();
           timeout.current = null;
         }, MagicGridUpdateDebounceMS);
+    }
+
+    function positionItems() {
+      try {
+        magicGrid.current?.positionItems();
+      } catch (error) {
+        logger.error("MagicGridContainer:error", error);
+      }
     }
 
     return () => {

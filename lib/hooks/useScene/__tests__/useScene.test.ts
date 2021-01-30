@@ -129,7 +129,7 @@ fdescribe("useScene", () => {
 
       // WHEN name is different
       act(() => {
-        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.addAspect(AspectType.Aspect, false);
       });
       // THEN dirty is true
       expect(result.current.state.dirty).toEqual(true);
@@ -195,7 +195,7 @@ fdescribe("useScene", () => {
       });
       act(() => {
         // WHEN adding an aspect
-        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.addAspect(AspectType.Aspect, false);
       });
       // THEN aspect exists
       const [firstAspectId] = Object.keys(result.current.state.scene.aspects);
@@ -206,6 +206,7 @@ fdescribe("useScene", () => {
         content: "<br/>",
         tracks: [],
         playedDuringTurn: false,
+        isPrivate: false,
         pinned: false,
         title: "",
         hasDrawArea: false,
@@ -442,7 +443,7 @@ fdescribe("useScene", () => {
       });
       // WHEN initial connection with a player
       act(() => {
-        result.current.actions.updatePlayers([
+        result.current.actions.updatePlayersWithConnections([
           {
             label: "1",
             metadata: {
@@ -469,13 +470,10 @@ fdescribe("useScene", () => {
           total: 4,
         });
         result.current.actions.updatePlayerFatePoints("1", 1);
-        result.current.actions.updatePlayerCharacter("1", ({
-          myCharacter: "myCharacter",
-        } as unknown) as any);
       });
       // THEN connection mappings reflects that
       expect(result.current.state.scene.players[0]).toEqual({
-        character: { myCharacter: "myCharacter" },
+        character: undefined,
         fatePoints: 1,
         id: "1",
         playedDuringTurn: true,
@@ -492,41 +490,7 @@ fdescribe("useScene", () => {
         // WHEN reseting initiative
         result.current.actions.resetInitiative();
       });
-      // THEN
-      expect(result.current.state.scene.players[0]).toEqual({
-        character: { myCharacter: "myCharacter" },
-        fatePoints: 1,
-        id: "1",
-        playedDuringTurn: false,
-        offline: false,
-        playerName: "RP",
-        rolls: [
-          {
-            rolls: [1, 1, 1, 1],
-            total: 4,
-          },
-        ],
-      });
-      // WHEN new player joins with high refresh
-      act(() => {
-        result.current.actions.updatePlayers([
-          {
-            label: "1",
-            metadata: {
-              playerName: "RP",
-            },
-          },
-          {
-            label: "2",
-            metadata: {
-              character: {
-                refresh: 15,
-              },
-            },
-          },
-        ] as Array<Peer.DataConnection>);
-      });
-      // THEN player 1 is the same but player 2 joined with high refresh
+      // THEN initiative is reset
       expect(result.current.state.scene.players[0]).toEqual({
         character: undefined,
         fatePoints: 1,
@@ -541,14 +505,148 @@ fdescribe("useScene", () => {
           },
         ],
       });
-      expect(result.current.state.scene.players[1]).toEqual({
-        character: { refresh: 15 },
-        fatePoints: 15,
-        id: "2",
-        playedDuringTurn: false,
-        offline: false,
-        playerName: undefined,
-        rolls: [],
+      act(() => {
+        // WHEN player adds character sheet
+        result.current.actions.updatePlayerCharacter("1", ({
+          myCharacter: "my first character",
+        } as unknown) as any);
+      });
+      // THEN player as character
+      expect(result.current.state.scene.players[0].character).toEqual({
+        myCharacter: "my first character",
+      });
+      act(() => {
+        // WHEN player reloads character sheet
+        result.current.actions.updatePlayerCharacter("1", ({
+          myCharacter: "my second character",
+        } as unknown) as any);
+      });
+      // THEN player as character
+      expect(result.current.state.scene.players[0].character).toEqual({
+        myCharacter: "my second character",
+      });
+
+      act(() => {
+        // WHEN player reloads character sheet
+        result.current.actions.updatePlayerCharacter("1", ({
+          myCharacter: "my second character",
+        } as unknown) as any);
+      });
+      // THEN player as character
+      expect(result.current.state.scene.players[0].character).toEqual({
+        myCharacter: "my second character",
+      });
+    });
+    describe("removePlayers sticky connections", () => {
+      it("should keep removed players out", () => {
+        // GIVEN
+        const userId = "111";
+        const gameId = undefined;
+        const useCharactersMock = mockUseCharacters();
+
+        // WHEN initial render
+        const { result } = renderHook(() => {
+          const charactersManager = useCharactersMock();
+          return useScene({
+            userId,
+            gameId,
+            charactersManager,
+          });
+        });
+        // WHEN initial connection with a player
+        act(() => {
+          result.current.actions.updatePlayersWithConnections([
+            {
+              label: "1",
+              metadata: {
+                playerName: "RP",
+              },
+            },
+            {
+              label: "2",
+              metadata: {
+                playerName: "Xav Bad Connection",
+              },
+            },
+          ] as Array<Peer.DataConnection>);
+        });
+        // THEN I should have 2 players
+        expect(result.current.state.scene.players).toEqual([
+          {
+            character: undefined,
+            fatePoints: 3,
+            id: "1",
+            playedDuringTurn: false,
+            offline: false,
+            playerName: "RP",
+            rolls: [],
+          },
+          {
+            character: undefined,
+            fatePoints: 3,
+            id: "2",
+            playedDuringTurn: false,
+            offline: false,
+            playerName: "Xav Bad Connection",
+            rolls: [],
+          },
+        ]);
+
+        // WHEN I kick a bad connection
+        act(() => {
+          result.current.actions.removePlayer("2");
+        });
+
+        // THEN I only have one player
+        expect(result.current._.removedPlayers).toEqual(["2"]);
+        expect(result.current.state.scene.players).toEqual([
+          {
+            character: undefined,
+            fatePoints: 3,
+            id: "1",
+            playedDuringTurn: false,
+            offline: false,
+            playerName: "RP",
+            rolls: [],
+          },
+        ]);
+
+        // WHEN the bad connection joins with a new id
+        act(() => {
+          result.current.actions.updatePlayersWithConnections([
+            {
+              label: "1",
+              metadata: {
+                playerName: "RP",
+              },
+            },
+            {
+              label: "2",
+              metadata: {
+                playerName: "Xav Bad Connection",
+              },
+            },
+            {
+              label: "3",
+              metadata: {
+                playerName: "Xav GOOD",
+              },
+            },
+          ] as Array<Peer.DataConnection>);
+
+          // THEN I only have two player
+          expect(result.current.state.scene.players).toEqual([
+            {
+              character: undefined,
+              fatePoints: 3,
+              id: "1",
+              offline: false,
+              playedDuringTurn: false,
+              playerName: "RP",
+              rolls: [],
+            },
+          ]);
+        });
       });
     });
   });
@@ -664,7 +762,7 @@ fdescribe("useScene", () => {
       let playerId = "";
       act(() => {
         result.current.actions.updateName("NAME");
-        result.current.actions.addAspect(AspectType.Aspect);
+        result.current.actions.addAspect(AspectType.Aspect, false);
         playerId = result.current.actions.addOfflinePlayer("OFFLINE PLAYER");
         result.current.actions.updatePlayerPlayedDuringTurn(playerId, true);
       });
@@ -721,8 +819,8 @@ fdescribe("useScene", () => {
       // WHEN setuping scene
       let npcAspectId = "";
       act(() => {
-        npcAspectId = result.current.actions.addAspect(AspectType.NPC);
-        result.current.actions.addAspect(AspectType.Aspect);
+        npcAspectId = result.current.actions.addAspect(AspectType.NPC, false);
+        result.current.actions.addAspect(AspectType.Aspect, false);
         result.current.actions.toggleAspectPinned(npcAspectId);
       });
       // THEN

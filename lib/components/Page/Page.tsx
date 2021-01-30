@@ -16,6 +16,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
+import ChatIcon from "@material-ui/icons/Chat";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
@@ -31,12 +32,13 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
-import { AppLink } from "../AppLink/AppLink";
+import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
+import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
 let gameIdSingleton: string | undefined = undefined;
 const FariMaxWidth = "1920px";
@@ -52,6 +54,10 @@ export const Page: React.FC<{
   displayDonation?: boolean;
   live?: LiveMode;
   liveLabel?: string;
+  drawerWidth?: string;
+  pb?: string;
+  debug?: Record<string, string>;
+  disableAutomaticScrollTop?: boolean;
 }> = (props) => {
   const history = useHistory();
   const { displayDonation = true } = props;
@@ -75,6 +81,8 @@ export const Page: React.FC<{
 
   return (
     <>
+      {!props.disableAutomaticScrollTop && <ScrollToTop />}
+
       {renderHeader()}
       {renderContent()}
     </>
@@ -99,12 +107,11 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: FariMaxWidth,
+                  maxWidth: props.drawerWidth ? undefined : FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
                   marginTop: "2rem",
                   width: "100%",
-                  padding: "0 1rem",
                   flex: "1 0 auto",
                 })}
               >
@@ -122,90 +129,119 @@ export const Page: React.FC<{
   function renderFooter() {
     return (
       <Box
+        // TODO: https://github.com/fariapp/fari/issues/212
+        pb={props.pb ?? "0"}
         displayPrint="none"
         className={css({
           paddingTop: "1rem",
+          marginLeft: props.drawerWidth ?? undefined,
           borderTop: "1px solid #e0e0e0",
         })}
       >
         <CookieConsent />
+
         <Container>
-          <Grid container justify="flex-end" spacing={4} alignItems="center">
-            <Grid
-              item
-              className={css({
-                flex: "1 0 auto",
+          {env.isLocalHost && props.debug && (
+            <pre>
+              {Object.keys(props.debug).map((label) => {
+                return (
+                  <Box key={label}>
+                    {label}: {props.debug?.[label]}
+                  </Box>
+                );
               })}
+            </pre>
+          )}
+          <Box py="1rem">
+            <Grid
+              container
+              justify="space-between"
+              alignItems="center"
+              spacing={4}
             >
-              <Typography>
-                <Link
-                  href="https://www.netlify.com"
+              <Grid item>
+                <AppButtonLink
+                  to="https://discord.gg/vMAJFjUraA"
                   target="_blank"
-                  rel="noreferrer"
+                  color="primary"
+                  startIcon={<ChatIcon />}
                 >
-                  This site is powered by Netlify
-                </Link>
-              </Typography>
+                  {"Come chat on Discord"}
+                </AppButtonLink>
+              </Grid>
+              <Grid item>
+                <Select
+                  data-cy="page.languages"
+                  value={currentLanguage}
+                  onChange={(e) => {
+                    i18n.changeLanguage(e.target.value as string);
+                  }}
+                >
+                  {Object.keys(i18n.options.resources!).map((language) => {
+                    const shouldRenderDev =
+                      language === "dev" && env.context === "localhost";
+                    if (language !== "dev" || shouldRenderDev) {
+                      return (
+                        <MenuItem key={language} value={language}>
+                          {t(
+                            `common.language.${language}` as IPossibleTranslationKeys
+                          )}
+                        </MenuItem>
+                      );
+                    }
+                  })}
+                </Select>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography>
-                <AppLink to="/changelog">{`v${env.version}`}</AppLink>
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Select
-                data-cy="page.languages"
-                value={currentLanguage}
-                onChange={(e) => {
-                  i18n.changeLanguage(e.target.value as string);
-                }}
-              >
-                {Object.keys(i18n.options.resources!).map((language) => {
-                  const shouldRenderDev =
-                    language === "dev" && env.context === "localhost";
-                  if (language !== "dev" || shouldRenderDev) {
-                    return (
-                      <MenuItem key={language} value={language}>
-                        {t(
-                          `common.language.${language}` as IPossibleTranslationKeys
-                        )}
-                      </MenuItem>
-                    );
-                  }
-                })}
-              </Select>
-            </Grid>
-          </Grid>
-          {displayDonation && (
+          </Box>
+          <Box py="1rem">
             <Grid
               container
               justify="space-between"
               spacing={4}
               alignItems="center"
             >
-              <Grid item sm>
-                <Kofi />
-              </Grid>
-
               <Grid item>
-                <Patreon />
+                <Typography>
+                  <Link
+                    href="https://www.netlify.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    This site is powered by Netlify
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography>
+                  <AppLink
+                    to="/changelog"
+                    underline="always"
+                  >{`v${env.version}`}</AppLink>
+                </Typography>
               </Grid>
             </Grid>
+          </Box>
+
+          {displayDonation && (
+            <Box py="1rem">
+              <Grid
+                container
+                justify="space-between"
+                spacing={4}
+                alignItems="center"
+              >
+                <Grid item sm>
+                  <Kofi />
+                </Grid>
+
+                <Grid item>
+                  <Patreon />
+                </Grid>
+              </Grid>
+            </Box>
           )}
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Box mt=".5rem">
-                <Link
-                  href="https://www.iubenda.com/privacy-policy/97549620"
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cy="page.privacy-policy"
-                >
-                  {t("page.privacy-policy")}
-                </Link>
-              </Box>
-            </Grid>
-          </Grid>
+
           <Grid container justify="center">
             <Grid item xs>
               <Box mb=".5rem">
@@ -236,6 +272,27 @@ export const Page: React.FC<{
                   license (http://creativecommons.org/licenses/by/3.0/).
                 </Typography>
               </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  The Fate Core font is © Evil Hat Productions, LLC and is used
+                  with permission. The Four Actions icons were designed by
+                  Jeremy Keller.
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item>
+              <Box my=".5rem">
+                <Link
+                  href="https://www.iubenda.com/privacy-policy/97549620"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cy="page.privacy-policy"
+                >
+                  {t("page.privacy-policy")}
+                </Link>
+              </Box>
             </Grid>
           </Grid>
         </Container>
@@ -262,6 +319,7 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
+            zIndex: theme.zIndex.drawer + 1,
           })}
         >
           <Toolbar
@@ -293,7 +351,7 @@ export const Page: React.FC<{
 
             <Typography
               variant="h6"
-              component="h1"
+              component="span"
               className={css({
                 paddingRight: "1rem",
                 cursor: "pointer",
@@ -372,7 +430,11 @@ export const Page: React.FC<{
               })}
             />
             <Hidden smDown>
-              {displayDonation && !shouldDisplayRejoinButton && <Kofi />}
+              {displayDonation && !shouldDisplayRejoinButton && (
+                <Box width="250px">
+                  <Patreon />
+                </Box>
+              )}
             </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
@@ -446,6 +508,17 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                to="/srds"
+                component={RouterLink}
+                variant={mobile ? "outlined" : undefined}
+                fullWidth={mobile}
+              >
+                {"SRDs"}
+              </Button>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <Button
+                color="inherit"
                 to="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
@@ -468,17 +541,7 @@ export const Page: React.FC<{
             </Grid>
           </>
         )}
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            href="https://github.com/fariapp/fari/discussions"
-            target="_blank"
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
-          >
-            {t("menu.help")}
-          </Button>
-        </Grid>
+
         <Grid item xs={8} sm={8} className={itemClass}>
           <IconButton
             color="inherit"

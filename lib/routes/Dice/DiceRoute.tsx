@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
-import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -41,17 +41,7 @@ export const DiceRoute = () => {
         description={t("dice-route.meta.description")}
       />
       <Box>
-        <Box
-          py="1rem"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <DiceGameIcon className={css({ fontSize: "3rem" })} color="primary" />
-          <FateLabel variant="h4" align="center" color="primary">
-            {"Dice"}
-          </FateLabel>
-        </Box>
+        <Heading icon={DiceGameIcon} title="Dice" />
 
         <Box display="flex" justifyContent="center" pt="1rem">
           <Button

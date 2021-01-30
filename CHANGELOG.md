@@ -1,4 +1,46 @@
-## 3.3.0-7 (Nov 10, 2020 - Dec 7 2020) - Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+# Changelog
+
+## v3.5 Resources, Private Aspects and Scene Notes
+
+#### January 19th, 2020
+
+- feat: SRDs Document
+- feat: Scene Checklist Document
+- feat: Stunts Document
+- feat: Cheatsheet Document
+- feat: Public and Private index cards for scenes
+- feat: Private GM notes for scenes
+- feat: better SRD title and description for SEO
+- feat: Index Card context menu for boost
+
+**v3.5.2**
+
+feat: better SRD title and description for SEO
+feat: Index Card context menu for boost
+feat: character cards in tabs
+fix: Galcian typo #218
+fix: security issue with immer
+
+**v3.5.3**
+
+feat: better Docs SEO
+feat: Quick Conflicts and Fate Magic dials
+feat: dynamic table of content for certain docs (like /dials)
+feat: dynamic anchors for certain docs (like /fate-stunts)
+fix: routing mechanism for SRD (using paths instead of hash)
+
+## v3.4 Join screen UX, Italian translations
+
+#### January 5th, 2021
+
+- feat: new join screen
+- feat: load character sheet in player row
+- feat: change character sheet in player row
+- feat: italian translations 👏 [#191](https://github.com/fariapp/fari/issues/191) @Redjaw
+
+## v3.3 Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+
+#### Nov 10, 2020 - Dec 29 2020
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
@@ -38,7 +80,21 @@
 - feat: join a game using the Add or Import character buttons
 - feat: scene name help text
 
-## 3.2.0 (Oct 20, 2020) - New Drawing Area, Brazian Portuguse translations
+**3.3.10**
+
+- fix: sentry errors on magic grid container
+
+**3.3.11**
+
+- fix: default character name in player row
+
+**3.3.12**
+
+- fix: en translation
+
+## v3.2.0 New Drawing Area, Brazian Portuguse translations
+
+#### Oct 20, 2020
 
 - feat: A brand new Drawing Area with support for multiple shapes, colors and even player tokens. 👏 [ddkn](https://github.com/ddkn) for the help with the player token designs
 - feat: Brazilian Portuguese translations. 👏 [pedrogsribeiro](https://github.com/pedrogsribeiro) for the translations
@@ -49,7 +105,9 @@
   - [player-03](https://github.com/player-03)
   - [ddkn](https://github.com/ddkn)
 
-## 3.0.0 (Aug 24, 2020) - Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
+## v3.0.0 Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
+
+#### Aug 24, 2020
 
 - feat: Scenes can now be prepared in advance, saved and then loaded directly during a play session.
 - feat: Index Cards are now more flexible. You can now add, remove or rename tracks or consequences as you wish.
@@ -64,13 +122,17 @@
   - [nfregoso](https://github.com/nfregoso)
   - [roypenrod-ohn](https://github.com/roypenrod-ohn)
 
-## v2.3.8 (Jul 6, 2020) - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
+## v2.3.8 - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
+
+#### Jul 6, 2020
 
 - feat: it is now possible to add a "blank" index card
 - feat: it is now possible to add a "Countdown" track to any index card
 - feat: character sheets now have an "advanced" mode which gives you the ability to add,remove or rename pretty much everything
 
-## v2.3 (May 27, 2020) - Character Sheets, Zones and better Peer-to-Peer
+## v2.3 - Character Sheets, Zones and better Peer-to-Peer
+
+#### May 27, 2020
 
 - feat: new [Characters](https://fari.app/characters) page to manage your characters sheets and save them in your browser's storage [#61](https://github.com/fariapp/fari/issues/61)
 - feat: character sheets can be sent to a scene.
@@ -84,7 +146,9 @@
 - fix: dice rolls gettings stuck during animation
 - feat: sticky dark mode
 
-## v2.2 (May 19, 2020) - Player Controls, Confetti and Dark Theme
+## v2.2 - Player Controls, Confetti and Dark Theme
+
+#### May 19, 2020
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
@@ -102,7 +166,9 @@
 - feat: dark theme ⛅️
 - fix: fairer dice [#57](https://github.com/fariapp/fari/pull/57) 👏 [@ConDar15](https://github.com/ConDar15)
 
-## v2.1 (May 15, 2020) - Index Cards Arrangement, Dice Animations and Internationalization
+## v2.1 - Index Cards Arrangement, Dice Animations and Internationalization
+
+#### May 15, 2020
 
 - feat: grid System for Index Cards
 - feat: dice Animations
@@ -112,7 +178,9 @@
 - doc: new LICENSE file
 - fix: nbsp and tags in title of the page
 
-## v2.0 (May 8, 2020) - Revamped Scene Management
+## v2.0 - Revamped Scene Management
+
+#### May 8, 2020
 
 - feat: real-Time Modifications (The GM controls the scene, players see modifications in real-time)
 - feat: index Cards (Aspects, Boost, Colorization, Invokes and Stress & Consequences for bad guys)
@@ -122,7 +190,9 @@
 
 https://www.reddit.com/r/FATErpg/comments/gg00pr/announcing_fari_20_the_best_fate_rpg_companion/
 
-## v1.0 (Dec 15, 2019) - Initial POC
+## v1.0 Initial POC
+
+#### Dec 15, 2019
 
 - feat: initial proof of concept
 

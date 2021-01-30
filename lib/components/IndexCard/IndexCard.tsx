@@ -2,12 +2,12 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
 import Collapse from "@material-ui/core/Collapse";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
+import Popover from "@material-ui/core/Popover";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -15,19 +15,25 @@ import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import DeleteIcon from "@material-ui/icons/Delete";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import PaletteIcon from "@material-ui/icons/Palette";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import RotateLeftIcon from "@material-ui/icons/RotateLeft";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { default as React, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -45,14 +51,14 @@ export const IndexCard: React.FC<
   const theme = useTheme();
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [colorPickerOpen, setColorPickerOpen] = useState(false);
+  const $paletteButton = useRef<HTMLButtonElement | null>(null);
   const $menu = useRef(null);
   const colorPickerBackground = theme.palette.primary.dark;
   const aspect = props.sceneManager.state.scene.aspects[props.aspectId];
   const shouldRenderCheckboxesOrConsequences =
     aspect.tracks.length > 0 || aspect.consequences.length > 0;
 
-  const shouldRenderAspectMenuItems = aspect.type !== AspectType.Boost;
-  const shouldRenderContent = aspect.type !== AspectType.Boost;
   const shouldRenderPlayedDuringTurnIcon =
     aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
 
@@ -82,7 +88,7 @@ export const IndexCard: React.FC<
             {renderTitle()}
           </Box>
         </Box>
-        {shouldRenderContent && renderContent()}
+        {renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
         <Collapse in={aspect.hasDrawArea}>
@@ -102,13 +108,128 @@ export const IndexCard: React.FC<
             />
           </Box>
         </Collapse>
+        {!props.readonly && (
+          <Box py=".5rem" px="1rem">
+            <Grid container wrap="nowrap" justify="flex-end" spacing={1}>
+              <Grid item>
+                <Tooltip
+                  title={
+                    aspect.isPrivate
+                      ? t("index-card.show")
+                      : t("index-card.hide")
+                  }
+                >
+                  <IconButton
+                    size="small"
+                    data-cy={`${props["data-cy"]}.menu.visibility`}
+                    onClick={() => {
+                      props.sceneManager.actions.setAspectIsPrivate(
+                        props.aspectId,
+                        !aspect.isPrivate
+                      );
+                    }}
+                  >
+                    {aspect.isPrivate ? (
+                      <VisibilityIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+              <Grid item>
+                <Tooltip title={t("index-card.reset")}>
+                  <IconButton
+                    size="small"
+                    data-cy={`${props["data-cy"]}.reset`}
+                    onClick={() => {
+                      props.sceneManager.actions.resetAspect(props.aspectId);
+                    }}
+                  >
+                    <RotateLeftIcon />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+              <Grid item>
+                {/* <Tooltip title={t("index-card.reset")}> */}
+                <IconButton
+                  size="small"
+                  ref={$paletteButton}
+                  data-cy={`${props["data-cy"]}.palette`}
+                  onClick={() => {
+                    setColorPickerOpen(true);
+                  }}
+                >
+                  <PaletteIcon />
+                </IconButton>
+                <Popover
+                  open={colorPickerOpen}
+                  anchorEl={$paletteButton.current}
+                  onClose={() => {
+                    setColorPickerOpen(false);
+                  }}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                >
+                  <ColorPicker
+                    value={
+                      IndexCardColor[aspect.color as IndexCardColorTypes].chip
+                    }
+                    colors={Object.keys(IndexCardColor).map((colorName) => {
+                      const colorInfo =
+                        IndexCardColor[colorName as IndexCardColorTypes];
+                      return colorInfo.chip;
+                    })}
+                    hideCustom
+                    onChange={(color) => {
+                      const newColor = Object.keys(IndexCardColor).find(
+                        (colorName) => {
+                          const colorInfo =
+                            IndexCardColor[colorName as IndexCardColorTypes];
+
+                          return colorInfo.chip === color;
+                        }
+                      ) as IndexCardColorTypes;
+
+                      props.sceneManager.actions.updateAspectColor(
+                        props.aspectId,
+                        newColor
+                      );
+                      setColorPickerOpen(false);
+                    }}
+                  />
+                </Popover>
+                {/* </Tooltip> */}
+              </Grid>
+              <Grid item>
+                <Tooltip title={t("index-card.remove")}>
+                  <IconButton
+                    size="small"
+                    data-cy={`${props["data-cy"]}.remove`}
+                    onClick={() => {
+                      props.sceneManager.actions.removeAspect(props.aspectId);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+          </Box>
+        )}
       </Box>
     </Paper>
   );
 
   function renderHeader() {
     return (
-      <Grid container alignItems="center" spacing={2}>
+      <Grid container alignItems="center" spacing={1}>
         <Grid item className={css({ flex: "1 0 auto" })}>
           <Typography
             variant="overline"
@@ -171,8 +292,7 @@ export const IndexCard: React.FC<
                   setMenuOpen(false);
                 }}
               >
-                {shouldRenderAspectMenuItems && renderAspectMenuItems()}
-                {renderGlobalMenuItems()}
+                {renderAspectMenuItems()}
               </Menu>
             </Grid>
           </>
@@ -287,33 +407,12 @@ export const IndexCard: React.FC<
       // >
       //   {t("index-card.add-draw-area")}
       // </MenuItem>,
-      <Divider key="renderAspectMenuItemsDivider" />,
     ];
   }
 
   function renderGlobalMenuItems() {
     return [
-      <MenuItem
-        data-cy={`${props["data-cy"]}.menu.remove`}
-        key="onRemove"
-        onClick={() => {
-          setMenuOpen(false);
-          props.sceneManager.actions.removeAspect(props.aspectId);
-        }}
-      >
-        {t("index-card.remove")}
-      </MenuItem>,
-      <MenuItem
-        data-cy={`${props["data-cy"]}.menu.reset`}
-        key="onReset"
-        onClick={() => {
-          setMenuOpen(false);
-          props.sceneManager.actions.resetAspect(props.aspectId);
-        }}
-      >
-        {t("index-card.reset")}
-      </MenuItem>,
-      <Divider key="renderGlobalMenuItemsDivider" light />,
+      // <Divider key="renderGlobalMenuItemsDivider" light />,
       <MenuItem
         key="onUpdateAspectColor"
         className={css({
@@ -372,6 +471,20 @@ export const IndexCard: React.FC<
           borderBottom: `1px solid ${theme.palette.divider}`,
         })}
       >
+        <Box px="1rem">
+          <Typography variant="overline">
+            {aspect.type === AspectType.NPC ||
+            aspect.type === AspectType.BadGuy ? (
+              <>
+                {t("character-dialog.aspects")} {" & "}
+                {t("character-dialog.notes")}
+              </>
+            ) : (
+              <>{t("character-dialog.notes")}</>
+            )}
+          </Typography>
+        </Box>
+
         <Box p="0 1rem">
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}

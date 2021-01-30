@@ -2,6 +2,7 @@ import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
@@ -22,6 +23,7 @@ import { paperStyle } from "../../../Scene";
 
 export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
+  playerName: string | undefined;
   readonly: boolean;
   onCharacterDialogOpen(): void;
   onRoll(options: IRollDiceOptions): void;
@@ -100,6 +102,9 @@ export const CharacterCard: React.FC<{
                   </Tooltip>
                 </Grid>
               </Grid>
+              {props.playerName && (
+                <InputLabel shrink>{`(${props.playerName})`}</InputLabel>
+              )}
             </Box>
           </Box>
           {renderSkills()}

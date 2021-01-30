@@ -1,0 +1,99 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "RPDeshaies",
+      "name": "rpdeshaies",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6224111?v=4",
+      "profile": "https://github.com/RPDeshaies",
+      "contributions": [
+        "code",
+        "doc",
+        "translation",
+        "review"
+      ]
+    },
+    {
+      "login": "Redjaw",
+      "name": "Davide Vernassa",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4438516?v=4",
+      "profile": "https://github.com/Redjaw",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "corrinachow",
+      "name": "corrina",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/35117708?v=4",
+      "profile": "http://corrinachow.com",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "Erynus",
+      "name": "Erynus",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/65954558?v=4",
+      "profile": "https://github.com/Erynus",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "hattivatt",
+      "name": "hattivatt",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/58445227?v=4",
+      "profile": "https://github.com/hattivatt",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "pedrogsribeiro",
+      "name": "pedrogsribeiro",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/70762456?v=4",
+      "profile": "https://github.com/pedrogsribeiro",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "nfregoso",
+      "name": "nfregoso",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2292312?v=4",
+      "profile": "https://github.com/nfregoso",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ConDar15",
+      "name": "ConDar15",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5701626?v=4",
+      "profile": "https://github.com/ConDar15",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "xurxodiz",
+      "name": "Jorge Diz Pico",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/391584?v=4",
+      "profile": "http://xurxodiz.eu/",
+      "contributions": [
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "fari",
+  "projectOwner": "fariapp",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

@@ -4,6 +4,10 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import { DocRoutes } from "../../docs/_DocRoutes";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
+import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -15,9 +19,7 @@ const BlogPostRoute = React.lazy(
 const BlogPostsRoute = React.lazy(
   () => import("../../routes/BlogPosts/BlogPostsRoute")
 );
-const ChangelogRoute = React.lazy(
-  () => import("../../routes/ChangeLog/ChangeLogRoute")
-);
+
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
@@ -31,7 +33,10 @@ const PlayOfflineRoute = React.lazy(
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
-const Oracle = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
+const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
+const SeelieSquireRoute = React.lazy(
+  () => import("../../routes/SeelieSquire/SeelieSquireRoute")
+);
 
 export const LoadingRoute: React.FC = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -61,6 +66,7 @@ export const LoadingRoute: React.FC = (props) => {
 };
 
 export const AppRouter = () => {
+  const { t } = useTranslate();
   return (
     <Suspense fallback={<LoadingRoute />}>
       <Switch>
@@ -89,7 +95,7 @@ export const AppRouter = () => {
           exact
           path={"/oracle"}
           render={(props) => {
-            return <Oracle />;
+            return <OracleRoute />;
           }}
         />
         <Route
@@ -123,6 +129,39 @@ export const AppRouter = () => {
           path={"/scenes/:id"}
           render={(props) => <SceneRoute {...props} />}
         />
+        <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+        {DocRoutes.map((docRoute) => (
+          <Route
+            exact
+            key={docRoute.url}
+            path={`${docRoute.url}/:page?/:section?`}
+            render={(props) => (
+              <Doc
+                key={docRoute.url}
+                page={props.match.params.page}
+                section={props.match.params.section}
+                url={docRoute.url}
+                parent={docRoute.parent}
+                title={docRoute.title}
+                imageUrl={docRoute.imageUrl}
+                loadFunction={docRoute.loadFunction}
+                author={docRoute.author}
+                gitHubLink={docRoute.gitHubLink}
+              />
+            )}
+          />
+        ))}
+
+        <Route
+          exact
+          path={"/seelie-squire/:page?/:section?"}
+          render={(props) => (
+            <SeelieSquireRoute
+              page={props.match.params.page}
+              section={props.match.params.section}
+            />
+          )}
+        />
         <Route
           exact
           path={"/about"}
@@ -142,13 +181,6 @@ export const AppRouter = () => {
           path={"/blog/:slug"}
           render={(props) => {
             return <BlogPostRoute slug={props.match.params.slug} />;
-          }}
-        />
-        <Route
-          exact
-          path={"/changelog"}
-          render={(props) => {
-            return <ChangelogRoute />;
           }}
         />
         <Route

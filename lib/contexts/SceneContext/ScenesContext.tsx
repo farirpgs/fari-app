@@ -9,7 +9,7 @@ import { IScene } from "../../hooks/useScene/IScene";
 
 export type ISavableScene = Pick<
   IScene,
-  "id" | "name" | "aspects" | "version" | "lastUpdated" | "group"
+  "id" | "name" | "aspects" | "version" | "lastUpdated" | "group" | "notes"
 >;
 
 type IManagerCallback = (scene: ISavableScene) => void | undefined;
@@ -92,6 +92,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       group: scene.group,
       aspects: scene.aspects,
       version: scene.version,
+      notes: scene.notes,
       lastUpdated: getUnix(),
     };
     if (!exists) {
