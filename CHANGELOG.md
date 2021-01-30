@@ -31,8 +31,10 @@ fix: routing mechanism for SRD (using paths instead of hash)
 
 **v3.5.4**
 
-feat: new FAQ doc
-feat: disable current table of content element in docs
+feat: new WIP wiki
+feat: more flexible dynamic table of content for docs
+feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc)
+feat: ⚠ BETA ⚠ data export and import manager
 
 ## v3.4 Join screen UX, Italian translations
 
