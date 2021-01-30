@@ -3,4 +3,6 @@ const hash = process.env.COMMIT_ID ?? "0";
 const context = process.env.CONTEXT ?? "localhost";
 const version = process.env.npm_package_version;
 const isLocalHost = context === "localhost";
-export const env = { buildNumber, hash, context, version, isLocalHost };
+const isTest = process.env.JEST_WORKER_ID;
+
+export const env = { buildNumber, hash, context, version, isLocalHost, isTest };

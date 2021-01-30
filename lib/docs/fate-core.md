@@ -13,7 +13,7 @@ This book uses the OGL version of this text. License found at the end of this do
 
 -->
 
-# Fate Core 
+# Fate Core
 
 Grab your plasma rifles, spell components, and jetpacks! Name your game; **Fate Core** is the foundation that can make it happen. **Fate Core** is a flexible system that can support whatever worlds you dream up.
 
@@ -40,8 +40,6 @@ If you’ve never played a roleplaying game before, here’s the basic idea: you
 It’s not all just conversation, though—sometimes you’ll use dice and the rules in this book to bring uncertainty into the story and make things more exciting.
 
 Fate doesn’t come with a default setting, but it works best with any premise where the characters are proactive, capable people leading dramatic lives. We give more advice on how to bring that flavor to your games in the next chapter.
-
-<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
 
 > ### New To Fate
 >

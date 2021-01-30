@@ -6,14 +6,15 @@ import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
 import { creatures, ICreature } from "./domains/Creatures";
 
-export const SeelieSquireRoute: React.FC<{ page: string; section: string }> = (
-  props
-) => {
+export const SeelieSquireRoute: React.FC<{
+  page: string;
+  subPage: string;
+}> = (props) => {
   const theme = useTheme();
   return (
     <Doc
       page={props.page}
-      section={props.section}
+      subPage={props.subPage}
       url="/seelie-squire"
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"

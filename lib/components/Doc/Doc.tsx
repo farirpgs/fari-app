@@ -13,8 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -29,7 +29,6 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
-import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
@@ -41,11 +40,8 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
-import {
-  ILoadFunction,
-  IMarkdownIndex,
-  useMarkdownFile,
-} from "./hooks/useMarkdownFile";
+import { IMarkdownIndex, IPage, MarkdownDocMode } from "./domains/Markdown";
+import { ILoadFunction, useMarkdownFile } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
@@ -61,16 +57,16 @@ type IProps = {
   url: string;
   /**
    * Section right after the `props.url` which matches the current `<h1>` in the document
-   *
-   * e.g. `/taking-action-rolling-the-dice`
+   *n
+   * e.g. `/srds/condensed/{{h1}}`
    */
   page: string | undefined;
   /**
-   * Section right after the `props.page` which matches a `<h>` inside the current page in the document
+   * Section right after the `props.url` which matches the current `<h2>` in the document
    *
-   * e.g. `/modifying-the-dice`
+   * e.g. `/srds/condensed/taking-action-rolling-the-dice/{{h2}}`
    */
-  section: string | undefined;
+  subPage: string | undefined;
   /**
    * Where the user should go when clicking on the breadcrumb parent element
    */
@@ -109,49 +105,71 @@ type IProps = {
    * Link to original file
    */
   gitHubLink?: string;
+  /**
+   * @default {MarkdownPageMode.H1sArePages}
+   */
+  docMode?: MarkdownDocMode;
 };
 
 export type IDocProps = IProps;
 
 export const Doc: React.FC<IProps> = (props) => {
-  const { dom, markdownIndexes } = useMarkdownFile(
-    props.loadFunction,
-    props.url
-  );
-  const {
-    html,
-    nextH1,
-    previousH1,
-    currentH1,
-    title,
-    description,
-  } = useMarkdownPage({
-    page: props.page,
-    section: props.section,
-    dom: dom,
-  });
-
-  useScrollOnHtmlLoad(html, props.section);
+  const docMode = props.docMode ?? MarkdownDocMode.H1sArePages;
 
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const history = useHistory();
-  const location = useLocation();
   const logger = useLogger();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const section = params.get("goTo");
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openH1, setOpenH1] = useState<string | undefined>();
   const [search, setSearch] = useState("");
+  const { dom, markdownIndexes } = useMarkdownFile({
+    loadFunction: props.loadFunction,
+    prefix: props.url,
+    docMode: docMode,
+  });
+  const {
+    html,
+    nextPage,
+    previousPage,
+    currentPage,
+    title,
+    description,
+  } = useMarkdownPage({
+    url: props.url,
+    page: props.page,
+    subPage: props.subPage,
+    section: section,
+    dom: dom,
+    docMode: docMode,
+  });
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
 
+  useScrollOnHtmlLoad(html, section);
+
   useEffect(
     function onPageChange() {
-      setOpenH1(currentH1?.id);
+      setOpenH1(props.page);
+
       window.scrollTo(0, 0);
     },
-    [currentH1]
+    [props.page]
+  );
+
+  useEffect(
+    function onSubPageChange() {
+      if (docMode === MarkdownDocMode.H1sAndH2sArePages) {
+        window.scrollTo(0, 0);
+      }
+    },
+    [props.subPage]
   );
 
   useEffect(function onUnmount() {
@@ -162,12 +180,12 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function sendLog() {
-      const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
+      const logMessage = `Route:Document:${location.pathname}`;
 
-      const logMessage = `Route:Document:${docTitle}${props.page}${props.section}`;
       logger.info(logMessage, {
         pathname: location.pathname,
-        hash: location.hash,
+        page: props.page,
+        section: section,
       });
     },
     [location.pathname]
@@ -175,18 +193,71 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function transformHashToGoodUrl() {
-      if (currentH1 && location.hash) {
-        const h2 = location.hash.replace("#", "");
-        const newUrl = `${props.url}/${currentH1.id}/${h2}`;
-        history.replace(newUrl);
+      if (currentPage && location.hash) {
+        const newSection = location.hash.replace("#", "");
+
+        history.replace({
+          pathname: location.pathname,
+          search: `?goTo=${newSection}`,
+        });
       }
     },
     [location.hash]
   );
 
-  function handleGoTo(path: string) {
-    history.push(`${props.url}/${path}`);
+  function handleMarkdownAnchorClick(e: Event) {
+    e.preventDefault();
+    const anchor = e.currentTarget as Element | undefined;
+    const href = anchor?.getAttribute("href");
+
+    if (!href) {
+      return;
+    }
+
+    if (href?.startsWith("/") || href?.startsWith("#")) {
+      history.push(href);
+    } else {
+      window.open(href);
+    }
   }
+
+  function handleGoToPage(page: IPage) {
+    history.push(page.url);
+  }
+
+  useEffect(
+    function connectTocAnchors() {
+      {
+        document.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", handleMarkdownAnchorClick);
+        });
+
+        return () => {
+          document.querySelectorAll("a").forEach((a) => {
+            a.removeEventListener("click", handleMarkdownAnchorClick);
+          });
+        };
+      }
+    },
+    [html]
+  );
+
+  const docMarkdownStyle = css({
+    "& ul.toc": {
+      "&>li": {
+        listStyle: `"📎 "`,
+        listStylePosition: "outside",
+      },
+      [`&>li[data-toc-id="${currentPage?.id}"]`]: {
+        "listStyle": `"👉 "`,
+        "listStylePosition": "outside",
+        "& > a": {
+          color: theme.palette.text.secondary,
+          pointerEvents: "none",
+        },
+      },
+    },
+  });
 
   return (
     <Page
@@ -215,7 +286,7 @@ export const Doc: React.FC<IProps> = (props) => {
                     marginTop: "-2rem",
                     marginBottom: "1rem",
                     width: "100%",
-                    height: isSmall ? "8rem" : "16rem",
+                    height: isSmall ? "8rem" : "8rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
@@ -237,7 +308,9 @@ export const Doc: React.FC<IProps> = (props) => {
                   </Box>
                   <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
-                <MarkdownElement renderedMarkdown={html} />
+                <Box className={docMarkdownStyle}>
+                  <MarkdownElement renderedMarkdown={html} />
+                </Box>
                 {renderEditButton()}
 
                 <Box my=".5rem">
@@ -259,6 +332,7 @@ export const Doc: React.FC<IProps> = (props) => {
     if (!props.gitHubLink) {
       return null;
     }
+    const githubHash = props.page ? `#${props.page}` : "";
     return (
       <Box my=".5rem">
         <Grid container justify="flex-end">
@@ -269,7 +343,7 @@ export const Doc: React.FC<IProps> = (props) => {
               startIcon={<EditIcon />}
               target="_blank"
               rel="noreferrer"
-              href={props.gitHubLink}
+              href={`${props.gitHubLink}${githubHash}`}
             >
               Edit this Page
             </Button>
@@ -404,36 +478,36 @@ export const Doc: React.FC<IProps> = (props) => {
       <Box
         display="flex"
         justifyContent={
-          previousH1 && !nextH1
+          previousPage && !nextPage
             ? "flex-start"
-            : !previousH1 && nextH1
+            : !previousPage && nextPage
             ? "flex-end"
             : "space-between"
         }
       >
-        {previousH1 && (
+        {previousPage && (
           <Button
             startIcon={<NavigateBeforeIcon />}
             color="primary"
             data-cy="doc.previous"
             onClick={() => {
-              handleGoTo(previousH1?.id);
+              handleGoToPage(previousPage);
             }}
           >
-            {truncate(previousH1?.textContent ?? "", { length: 50 })}
+            {truncate(previousPage?.label ?? "", { length: 50 })}
           </Button>
         )}
 
-        {nextH1 && (
+        {nextPage && (
           <Button
             endIcon={<NavigateNextIcon />}
             color="primary"
             data-cy="doc.next"
             onClick={() => {
-              handleGoTo(nextH1?.id);
+              handleGoToPage(nextPage);
             }}
           >
-            {truncate(nextH1?.textContent ?? "", { length: 50 })}
+            {truncate(nextPage?.label ?? "", { length: 50 })}
           </Button>
         )}
       </Box>
@@ -460,16 +534,14 @@ export const Doc: React.FC<IProps> = (props) => {
             }
           }}
           onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownIndex)?.label;
+            const label = (newValue as IMarkdownIndex)?.id;
             if (label) {
               const index = markdownIndexes.flat.find(
-                (index) => label === index.label
+                (index) => label === index.id
               );
 
-              if (index?.level === 1) {
-                history.push(`${props.url}/${index?.id}`);
-              } else {
-                history.push(`${props.url}/${index?.pageId}/${index?.id}`);
+              if (index?.url) {
+                history.push(index.url);
               }
             }
           }}
@@ -506,13 +578,14 @@ export const Doc: React.FC<IProps> = (props) => {
       <List>
         {markdownIndexes.tree.map((h1, i) => {
           const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = openH1 === h1.id;
+          const isSubSectionOpen = !openH1 ? i === 0 : openH1 === h1.id;
 
           return (
             <React.Fragment key={i}>
-              <ListItem
+              <MenuItem
                 button
                 dense
+                selected={isSubSectionOpen && !props.subPage && !section}
                 component={Link}
                 to={`${props.url}/${h1.id}`}
                 data-cy={`doc.table-of-content.h1`}
@@ -545,7 +618,7 @@ export const Doc: React.FC<IProps> = (props) => {
                     </IconButton>
                   </>
                 )}
-              </ListItem>
+              </MenuItem>
               <Collapse
                 in={isSubSectionOpen}
                 data-cy={`doc.table-of-content.${h1.id}.h2s`}
@@ -554,21 +627,51 @@ export const Doc: React.FC<IProps> = (props) => {
                   if (h2.level !== 2) {
                     return null;
                   }
+                  const url =
+                    docMode === MarkdownDocMode.H1sAndH2sArePages
+                      ? `${props.url}/${h1.id}/${h2.id}`
+                      : `${props.url}/${h1.id}/?goTo=${h2.id}`;
                   return (
-                    <ListItem
-                      button
-                      dense
-                      key={h2Index}
-                      component={Link}
-                      to={`${props.url}/${h1.id}/${h2.id}`}
-                      data-cy={`doc.table-of-content.h2`}
-                      data-cy-page-id={h2.id}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      {renderTableOfContentElement(h2)}
-                    </ListItem>
+                    <React.Fragment key={h2Index}>
+                      <MenuItem
+                        button
+                        dense
+                        selected={props.subPage === h2.id && !section}
+                        key={h2Index}
+                        component={Link}
+                        to={url}
+                        data-cy={`doc.table-of-content.h2`}
+                        data-cy-page-id={h2.id}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                        }}
+                      >
+                        {renderTableOfContentElement(h2)}
+                      </MenuItem>
+                      {false &&
+                        h2.children.map((h3, h3Index) => {
+                          if (h3.level !== 3) {
+                            return null;
+                          }
+                          return (
+                            <MenuItem
+                              button
+                              dense
+                              selected={section === h3.id}
+                              key={h3Index}
+                              component={Link}
+                              to={`${props.url}/${h1.id}/${h2.id}/${h3.id}`}
+                              data-cy={`doc.table-of-content.h2`}
+                              data-cy-page-id={h3.id}
+                              onClick={() => {
+                                setMobileMenuOpen(false);
+                              }}
+                            >
+                              {renderTableOfContentElement(h3)}
+                            </MenuItem>
+                          );
+                        })}
+                    </React.Fragment>
                   );
                 })}
               </Collapse>
@@ -634,7 +737,7 @@ export const Doc: React.FC<IProps> = (props) => {
               paddingLeft: `${(index.level - 1) * 1}rem`,
             })}
           >
-            {index.level === 1 ? (
+            {index.level < 2 ? (
               <Typography
                 noWrap
                 className={css({

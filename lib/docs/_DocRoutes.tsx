@@ -1,8 +1,11 @@
 import { IDocProps } from "../components/Doc/Doc";
+import { MarkdownDocMode } from "../components/Doc/domains/Markdown";
 import { Images } from "../constants/Images";
 import { DocImport } from "./_DocImport";
 
-export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
+export const DocRoutes: Array<
+  Omit<IDocProps, "page" | "subPage" | "section">
+> = [
   {
     url: "/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
@@ -157,6 +160,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
       ],
     },
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
   },
   {
     url: "/scene-checklist",
@@ -233,9 +237,33 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     },
   },
   {
+    url: "/srds/test-empty",
+    parent: {
+      title: "Fari",
+      url: "/",
+    },
+    title: "Test Empty",
+    loadFunction: DocImport.TestEmpty,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/lib/docs/test-empty.md",
+  },
+  {
+    url: "/fate-wiki",
+    parent: { title: "SRDs", url: "/srds" },
+    title: "Fate Wiki",
+    loadFunction: DocImport.FateFaq,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-wiki.md",
+    imageUrl: Images.cheatSheet,
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
+    noIndex: true,
+  },
+  {
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
+
     loadFunction: DocImport.Changelog,
   },
 ];

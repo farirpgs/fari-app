@@ -3,7 +3,7 @@ import { scrollMarginTop } from "./useMarkdownFile";
 
 export function useScrollOnHtmlLoad(
   html: string | undefined,
-  section: string | undefined
+  section: string | undefined | null
 ) {
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined = undefined;

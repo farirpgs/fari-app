@@ -24,6 +24,7 @@ const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
 const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
   () => import("../../routes/NotFound/NotFoundRoute")
@@ -93,6 +94,13 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/data"}
+          render={(props) => {
+            return <DataRoute />;
+          }}
+        />
+        <Route
+          exact
           path={"/oracle"}
           render={(props) => {
             return <OracleRoute />;
@@ -130,16 +138,17 @@ export const AppRouter = () => {
           render={(props) => <SceneRoute {...props} />}
         />
         <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+
         {DocRoutes.map((docRoute) => (
           <Route
             exact
             key={docRoute.url}
-            path={`${docRoute.url}/:page?/:section?`}
+            path={`${docRoute.url}/:page?/:subPage?`}
             render={(props) => (
               <Doc
                 key={docRoute.url}
                 page={props.match.params.page}
-                section={props.match.params.section}
+                subPage={props.match.params.subPage}
                 url={docRoute.url}
                 parent={docRoute.parent}
                 title={docRoute.title}
@@ -147,6 +156,7 @@ export const AppRouter = () => {
                 loadFunction={docRoute.loadFunction}
                 author={docRoute.author}
                 gitHubLink={docRoute.gitHubLink}
+                docMode={docRoute.docMode}
               />
             )}
           />
@@ -154,11 +164,11 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/seelie-squire/:page?/:section?"}
+          path={"/seelie-squire/:page?/:subPage?"}
           render={(props) => (
             <SeelieSquireRoute
               page={props.match.params.page}
-              section={props.match.params.section}
+              subPage={props.match.params.subPage}
             />
           )}
         />

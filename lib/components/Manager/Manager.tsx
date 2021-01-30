@@ -60,7 +60,6 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [deletedSnack, setDeletedSnack] = useState(false);
   const [deletedObject, setDeletedObject] = useState<T | undefined>(undefined);
-  const [importCounter, setImportCounter] = useState(0);
 
   const { t } = useTranslate();
 
@@ -160,13 +159,12 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               <input
                 type="file"
                 accept=".json"
-                key={`import-input-${importCounter}`}
                 className={css({
                   display: "none",
                 })}
                 onChange={(event) => {
                   onImport(event.target.files);
-                  setImportCounter((prev) => prev + 1);
+                  event.target.value = "";
                 }}
               />
             </Button>

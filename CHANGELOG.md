@@ -29,6 +29,13 @@ feat: dynamic table of content for certain docs (like /dials)
 feat: dynamic anchors for certain docs (like /fate-stunts)
 fix: routing mechanism for SRD (using paths instead of hash)
 
+**v3.5.4**
+
+feat: new WIP wiki
+feat: more flexible dynamic table of content for docs
+feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc)
+feat: ⚠ BETA ⚠ data export and import manager
+
 ## v3.4 Join screen UX, Italian translations
 
 #### January 5th, 2021

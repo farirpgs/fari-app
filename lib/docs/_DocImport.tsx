@@ -29,8 +29,14 @@ export const DocImport = {
   Dials: () => {
     return import("./dials.md");
   },
+  FateFaq: () => {
+    return import("./fate-wiki.md");
+  },
   Test: () => {
     return import("./test.md");
+  },
+  TestEmpty: () => {
+    return import("./test-empty.md");
   },
   Changelog: () => {
     return import("../../CHANGELOG.md");

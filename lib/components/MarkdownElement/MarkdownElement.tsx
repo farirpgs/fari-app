@@ -21,19 +21,6 @@ const styles = (theme: Theme) => {
       ...theme.typography.body1,
       "color": theme.palette.text.primary,
       "wordBreak": "break-word",
-      "& pre": {
-        margin: theme.spacing(3, "auto"),
-        padding: theme.spacing(2),
-        backgroundColor: "#272c34",
-        direction: "ltr",
-        borderRadius: theme.shape.borderRadius,
-        overflow: "auto",
-        WebkitOverflowScrolling: "touch",
-        maxWidth: "calc(100vw - 32px)",
-        [theme.breakpoints.up("md")]: {
-          maxWidth: "calc(100vw - 32px - 16px)",
-        },
-      },
       "& code": {
         lineHeight: 1.4,
         display: "inline-block",
@@ -48,6 +35,24 @@ const styles = (theme: Theme) => {
         fontSize: 14,
         borderRadius: 2,
       },
+      "& pre": {
+        "margin": theme.spacing(3, "auto"),
+        "padding": theme.spacing(2),
+        "backgroundColor": theme.palette.text.primary,
+        "direction": "ltr",
+        "borderRadius": theme.shape.borderRadius,
+        "overflow": "auto",
+        "WebkitOverflowScrolling": "touch",
+        "maxWidth": "calc(100vw - 32px)",
+        "& code": {
+          color: theme.palette.getContrastText(theme.palette.text.primary),
+          backgroundColor: "transparent",
+        },
+        [theme.breakpoints.up("md")]: {
+          maxWidth: "calc(100vw - 32px - 16px)",
+        },
+      },
+
       '& code[class*="language-"]': {
         backgroundColor: "#272c34",
         color: "#fff",
@@ -132,8 +137,12 @@ const styles = (theme: Theme) => {
         marginTop: "2rem",
         marginBottom: "1rem",
       },
-      "& ul": {
-        paddingLeft: 30,
+      "& p": {
+        marginTop: "0",
+        marginBottom: "1rem",
+      },
+      "& ul,ol": {
+        paddingLeft: "2rem",
       },
       "& li": {
         paddingTop: ".125rem",
@@ -290,12 +299,19 @@ const styles = (theme: Theme) => {
         fontFamily: "fate",
       },
       "& .with-anchor": {
+        "scrollMarginTop": `${scrollMarginTop}px`,
         "fontWeight": "bold",
         "& .anchor": {
           width: "1em",
           height: "1em",
           marginLeft: "0",
         },
+      },
+      "& .author": {
+        textAlign: "right",
+        marginTop: "-.5rem",
+        // marginBottom: "0",
+        color: theme.palette.text.secondary,
       },
     },
   };
