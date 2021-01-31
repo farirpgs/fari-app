@@ -151,10 +151,11 @@ export const Doc: React.FC<IProps> = (props) => {
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
+  const fullPath = location.pathname + location.search;
 
   useScrollOnHtmlLoad(html, section);
   useEffect(
-    function onCurrentPageChange() {
+    function trackOpenH1OnCurrentPageChange() {
       if (currentPage?.level === 1) {
         setOpenH1(currentPage.id);
       }
@@ -162,30 +163,21 @@ export const Doc: React.FC<IProps> = (props) => {
     [currentPage]
   );
   useEffect(
-    function onPageChange() {
+    function trackOpenH1OnPageChange() {
       setOpenH1(props.page);
-      if (docMode === MarkdownDocMode.H1sArePages) {
-        window.scrollTo(0, 0);
-      }
     },
     [props.page]
   );
+
   useEffect(
-    function onPageAndSubPageChange() {
-      if (docMode === MarkdownDocMode.H1sAndH2sArePages) {
+    function scrollOnPageChange() {
+      if (!fullPath.includes("?")) {
         window.scrollTo(0, 0);
       }
     },
-    [props.page, props.subPage]
+    [fullPath]
   );
-  useEffect(
-    function onSubPageChange() {
-      if (docMode === MarkdownDocMode.H1sAndH2sArePages) {
-        window.scrollTo(0, 0);
-      }
-    },
-    [props.subPage]
-  );
+
   useEffect(function onUnmount() {
     return () => {
       window.scrollTo(0, 0);

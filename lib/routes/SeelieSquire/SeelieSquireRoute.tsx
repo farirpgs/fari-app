@@ -111,12 +111,13 @@ ${c.description}
   }
 
   function renderStunts(c: ICreature) {
-    return c.character.stunts.map(
-      (s) => `
+    return c.character.stunts
+      .map(
+        (s) => `
 > <div class=${smallFateLabelClass}>${s.name}</div>
-> ${s.description}
-> `
-    );
+> ${s.description}`
+      )
+      .join("<br/><br/>");
   }
 
   function renderHealth(c: ICreature) {
@@ -129,7 +130,7 @@ ${c.description}
   }
 
   function renderSkills(c: ICreature) {
-    return c.character.skills.map((s) => `\n * ${s}`);
+    return c.character.skills.map((s) => `- ${s}`).join("\n>");
   }
 
   function renderAspects(c: ICreature) {
