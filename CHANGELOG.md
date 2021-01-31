@@ -1,5 +1,7 @@
 # Changelog
 
+Detailed technical changelog of Fari
+
 ## v3.5 Resources, Private Aspects and Scene Notes
 
 #### January 19th, 2020
@@ -37,6 +39,7 @@ feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc
 feat: ⚠ BETA ⚠ data export and import manager
 
 **v3.5.5**
+
 fix: scroll issue in docs
 fix: removed `showdown` markdown transformer in favor of `marked`
 
