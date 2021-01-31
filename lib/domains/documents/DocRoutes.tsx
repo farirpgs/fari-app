@@ -257,6 +257,14 @@ export const DocRoutes: Array<
     noIndex: true,
   },
   {
+    url: "/m",
+    parent: { title: "Fari", url: "/" },
+    title: "m",
+    docMode: MarkdownDocMode.H1sArePages,
+    noIndex: true,
+    loadFunction: DocImport.M,
+  },
+  {
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",

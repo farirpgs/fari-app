@@ -38,6 +38,9 @@ export const DocImport = {
   TestEmpty: () => {
     return import("../../../docs/test-empty.md");
   },
+  M: () => {
+    return import("../../../docs/m.md");
+  },
   Changelog: () => {
     return import("../../../CHANGELOG.md");
   },
