@@ -129,7 +129,7 @@ ${c.description}
   }
 
   function renderSkills(c: ICreature) {
-    return c.character.skills.map((s) => `\n * ${s}`);
+    return c.character.skills.map((s) => `- ${s}`).join("\n>");
   }
 
   function renderAspects(c: ICreature) {

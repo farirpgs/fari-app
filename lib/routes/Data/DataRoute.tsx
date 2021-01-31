@@ -27,7 +27,7 @@ import {
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
-import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 

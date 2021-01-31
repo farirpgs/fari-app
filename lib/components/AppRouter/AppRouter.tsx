@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { DocRoutes } from "../../docs/_DocRoutes";
+import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
@@ -173,7 +173,7 @@ export const AppRouter = () => {
             return <AboutRoute />;
           }}
         />
-      
+
         <Route
           path="*"
           render={(props) => {
