@@ -312,7 +312,6 @@ export const Doc: React.FC<IProps> = (props) => {
                   <Box pb="1rem" mt="-1.5rem">
                     {renderHeader()}
                   </Box>
-                  <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
                 <Box className={docMarkdownStyle}>
                   <MarkdownElement renderedMarkdown={html} />
@@ -344,7 +343,8 @@ export const Doc: React.FC<IProps> = (props) => {
         <Grid container justify="flex-end">
           <Grid item>
             <Button
-              color="primary"
+              color="secondary"
+              size="small"
               component="a"
               startIcon={<EditIcon />}
               target="_blank"
@@ -481,9 +481,10 @@ export const Doc: React.FC<IProps> = (props) => {
 
   function renderNavigationButtons() {
     return (
-      <Box
-        display="flex"
-        justifyContent={
+      <Grid
+        container
+        spacing={2}
+        justify={
           previousPage && !nextPage
             ? "flex-start"
             : !previousPage && nextPage
@@ -492,31 +493,43 @@ export const Doc: React.FC<IProps> = (props) => {
         }
       >
         {previousPage && (
-          <Button
-            startIcon={<NavigateBeforeIcon />}
-            color="primary"
-            data-cy="doc.previous"
-            onClick={() => {
-              handleGoToPage(previousPage);
-            }}
-          >
-            {truncate(previousPage?.label ?? "", { length: 50 })}
-          </Button>
+          <Grid container item xs={12} sm={6} justify="flex-start">
+            <Button
+              startIcon={<NavigateBeforeIcon />}
+              fullWidth={isSmall}
+              className={css({
+                textAlign: "left",
+              })}
+              color="primary"
+              data-cy="doc.previous"
+              onClick={() => {
+                handleGoToPage(previousPage);
+              }}
+            >
+              {truncate(previousPage?.label ?? "", { length: 50 })}
+            </Button>
+          </Grid>
         )}
 
         {nextPage && (
-          <Button
-            endIcon={<NavigateNextIcon />}
-            color="primary"
-            data-cy="doc.next"
-            onClick={() => {
-              handleGoToPage(nextPage);
-            }}
-          >
-            {truncate(nextPage?.label ?? "", { length: 50 })}
-          </Button>
+          <Grid container item xs={12} sm={6} justify="flex-end">
+            <Button
+              endIcon={<NavigateNextIcon />}
+              fullWidth={isSmall}
+              className={css({
+                textAlign: "right",
+              })}
+              color="primary"
+              data-cy="doc.next"
+              onClick={() => {
+                handleGoToPage(nextPage);
+              }}
+            >
+              {truncate(nextPage?.label ?? "", { length: 50 })}
+            </Button>
+          </Grid>
         )}
-      </Box>
+      </Grid>
     );
   }
 
