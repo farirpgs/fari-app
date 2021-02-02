@@ -112,30 +112,9 @@ export const Markdown = {
       element.append(anchor);
     });
 
-    // dynamic table of content
-    const tocElements = dom.querySelectorAll("toc");
-    tocElements.forEach((element) => {
-      const h1s = treeReferences
-        .map((h1) => {
-          const h2s = h1.children
-            .map(
-              (h2) =>
-                `<li><a href="${props.prefix}/${h1.id}/${h2.id}">${h2.label}</a></li>`
-            )
-            .join("");
-
-          return `<li data-toc-id="${h1.id}"><a href="${props.prefix}/${h1.id}">${h1.label}</a><ul class="sub-toc">${h2s}</ul></li>`;
-        })
-        .join("");
-      element.innerHTML = `<ul class="toc">${h1s}</ul>`;
-    });
-
     const markdownIndexes: IMarkdownIndexes = {
       tree: treeReferences,
-      flat: flatReferences.map((i) => ({
-        ...i,
-        children: [],
-      })),
+      flat: flatReferences,
     };
     return { dom, markdownIndexes };
   },
@@ -216,10 +195,10 @@ export const Markdown = {
       currentPageElement,
       `${nextPage?.id}`
     );
-    const newDom = getNewDom(currentPageElement, allDomElementsInPage);
+    const pageDom = getPageDom(currentPageElement, allDomElementsInPage);
 
     return {
-      html: newDom?.innerHTML,
+      pageDom: pageDom,
       currentPage: makePageFromH1OrH2(currentPageElement, props.prefix),
       previousPage: previousPage,
       nextPage: nextPage,
@@ -330,12 +309,13 @@ function makePageFromH1OrH2(
   };
 }
 
-function getNewDom(currentH1: Element, allElementsInPage: Element[]) {
+function getPageDom(currentH1: Element, allElementsInPage: Element[]) {
   const newDom = document.createElement("div");
   newDom.append(currentH1?.cloneNode(true)!);
   allElementsInPage.forEach((e) => {
     newDom.append(e.cloneNode(true));
   });
+
   return newDom;
 }
 

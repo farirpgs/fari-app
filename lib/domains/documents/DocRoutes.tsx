@@ -12,6 +12,7 @@ export const DocRoutes: Array<
     title: "Fate Condensed",
     imageUrl: Images.condensed,
     loadFunction: DocImport.FateCondensed,
+
     gitHubLink:
       "https://github.com/fariapp/fari/tree/master/docs/fate-condensed.md",
     author: {
@@ -159,7 +160,34 @@ export const DocRoutes: Array<
         },
       ],
     },
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
+    sideBar: {
+      "Fate Stunts": [
+        "athletics-stunts",
+        "burglary-stunts",
+        "contacts-stunts",
+        "crafts-stunts",
+        "deceive-stunts",
+        "drive-stunts",
+        "empathy-stunts",
+        "fight-stunts",
+        "investigate-stunts",
+        "lore-stunts",
+        "notice-stunts",
+        "physique-stunts",
+        "provoke-stunts",
+        "rapport-stunts",
+        "resources-stunts",
+        "shoot-stunts",
+        "stealth-stunts",
+        "will-stunts",
+      ],
+      "Stunt Rubrics": [
+        "add-a-new-action-to-a-skill",
+        "add-a-bonus-to-an-action",
+        "create-a-rules-exception",
+        "other-rubrics",
+      ],
+    },
   },
   {
     url: "/scene-checklist",

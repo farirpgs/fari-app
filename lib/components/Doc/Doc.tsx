@@ -4,7 +4,6 @@ import Box from "@material-ui/core/Box";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Collapse from "@material-ui/core/Collapse";
 import Container, { ContainerTypeMap } from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,17 +11,13 @@ import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
-import MenuItem from "@material-ui/core/MenuItem";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import EditIcon from "@material-ui/icons/Edit";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
@@ -32,7 +27,6 @@ import Autocomplete, {
 import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
-import { Link } from "react-router-dom";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { AppLink } from "../AppLink/AppLink";
@@ -46,6 +40,12 @@ import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
+
+type ISideBarElement = Array<string | IDocSidebar>;
+
+export type IDocSidebar = {
+  [category: string]: ISideBarElement;
+};
 
 type IProps = {
   title: string;
@@ -109,6 +109,7 @@ type IProps = {
    * @default {MarkdownPageMode.H1sArePages}
    */
   docMode?: MarkdownDocMode;
+  sideBar?: IDocSidebar;
 };
 
 export type IDocProps = IProps;
@@ -133,8 +134,16 @@ export const Doc: React.FC<IProps> = (props) => {
     prefix: props.url,
     docMode: docMode,
   });
+  console.debug(
+    "h2",
+    markdownIndexes.flat
+      .filter((i) => i.level === 2)
+      .map((i) => i.id)
+      .join(",")
+  );
+
   const {
-    html,
+    pageDom,
     nextPage,
     previousPage,
     currentPage,
@@ -148,6 +157,9 @@ export const Doc: React.FC<IProps> = (props) => {
     dom: dom,
     docMode: docMode,
   });
+
+  const html = pageDom?.innerHTML;
+  // usePageHtml({ markdownIndexes, currentPage, pageDom });
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
@@ -248,23 +260,6 @@ export const Doc: React.FC<IProps> = (props) => {
     [html]
   );
 
-  const docMarkdownStyle = css({
-    "& ul.toc": {
-      "&>li": {
-        listStyle: `"📎 "`,
-        listStylePosition: "outside",
-      },
-      [`&>li[data-toc-id="${currentPage?.id}"]`]: {
-        "listStyle": `"👉 "`,
-        "listStylePosition": "outside",
-        "& > a": {
-          color: theme.palette.text.secondary,
-          pointerEvents: "none",
-        },
-      },
-    },
-  });
-
   return (
     <Page
       drawerWidth={!isSmall ? drawerWidth : undefined}
@@ -280,7 +275,7 @@ export const Doc: React.FC<IProps> = (props) => {
       {html ? (
         <Fade in>
           <Box display="flex">
-            {renderTableOfContent()}
+            {renderSideBar()}
             <Box
               className={css({
                 flexGrow: 1,
@@ -305,7 +300,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   })}
                 />
               )}
-              <Container maxWidth={props.maxWidth ?? "md"}>
+              <Container maxWidth={("lg" || props.maxWidth) ?? "md"}>
                 {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
                 <Box>
@@ -313,9 +308,27 @@ export const Doc: React.FC<IProps> = (props) => {
                     {renderHeader()}
                   </Box>
                 </Box>
-                <Box className={docMarkdownStyle}>
-                  <MarkdownElement renderedMarkdown={html} />
-                </Box>
+                <Grid container>
+                  <Grid item xs>
+                    <Box px={2}>
+                      <MarkdownElement renderedMarkdown={html} />
+                    </Box>
+                  </Grid>
+                  <Hidden mdDown>
+                    <Grid item lg={3}>
+                      <Box
+                        px={2}
+                        className={css({
+                          position: "sticky",
+                          top: "0",
+                        })}
+                      >
+                        {renderTableOfContents()}
+                      </Box>
+                    </Grid>
+                  </Hidden>
+                </Grid>
+
                 {renderEditButton()}
 
                 <Box my=".5rem">
@@ -332,6 +345,74 @@ export const Doc: React.FC<IProps> = (props) => {
       )}
     </Page>
   );
+
+  function renderTableOfContents() {
+    const currentIndex = markdownIndexes.flat.find(
+      (i) => i.id === currentPage?.id
+    );
+
+    const shouldNotRenderTableOfContents =
+      currentIndex?.level === 1 && docMode !== MarkdownDocMode.H1sArePages;
+
+    if (shouldNotRenderTableOfContents) {
+      return null;
+    }
+
+    return (
+      <>
+        <Box
+          className={css({
+            marginTop: "4.5rem",
+            height: "100%",
+            maxHeight: "100vh",
+            position: "sticky",
+            top: "0",
+            borderLeft: "1px solid #dadde1",
+            overflowY: "auto",
+          })}
+        >
+          {renderTableOfContentItem(currentIndex)}
+        </Box>
+      </>
+    );
+  }
+
+  function renderTableOfContentItem(index: IMarkdownIndex | undefined) {
+    if (!index) {
+      return null;
+    }
+    return (
+      <ul
+        className={css({
+          listStyleType: "none",
+          marginTop: "0",
+          marginBottom: "0",
+          paddingLeft: ".5rem",
+        })}
+      >
+        {index.children.map((child) => {
+          return (
+            <li
+              key={child.id}
+              className={css({
+                margin: ".5rem",
+              })}
+            >
+              <AppLink
+                to={child.url ?? ""}
+                className={css({
+                  color: theme.palette.text.secondary,
+                })}
+              >
+                {child.label}
+              </AppLink>
+              {child.children.length > 1 && renderTableOfContentItem(child)}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
 
   function renderEditButton() {
     if (!props.gitHubLink) {
@@ -592,19 +673,35 @@ export const Doc: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderTableOfContent() {
-    const list = (
-      <List>
-        {markdownIndexes.tree.map((h1, i) => {
-          const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = openH1 === h1.id;
+  function renderSideBarContent(elements: IDocSidebar) {
+    const isArray = Array.isArray(elements);
+
+    return (
+      <ul>
+        {Object.entries(props.sideBar).map((element, i) => {
+          return <React.Fragment key={i} />;
+        })}
+      </ul>
+    );
+  }
+
+  function renderSideBar() {
+    const list = <div />;
+    // <List>
+    {
+      /* {Object.keys(props.sideBar)?.map((element, i) => {
+          const isSelected = false;
 
           return (
             <React.Fragment key={i}>
               <MenuItem
                 button
                 dense
-                selected={isSubSectionOpen && !props.subPage && !section}
+                selected={isSelected}
+                className={css({
+                  fontWeight: isSelected ? 700 : "inherit",
+                  color: isSelected ? theme.palette.primary.main : "inherit",
+                })}
                 component={Link}
                 to={`${props.url}/${h1.id}`}
                 data-cy={`doc.table-of-content.h1`}
@@ -613,7 +710,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   setMobileMenuOpen(false);
                 }}
               >
-                {renderTableOfContentElement(h1)}
+                {renderMenuElement(h1, isSelected)}
                 {shouldRenderExpandIcon && (
                   <>
                     <IconButton
@@ -641,64 +738,15 @@ export const Doc: React.FC<IProps> = (props) => {
               <Collapse
                 in={isSubSectionOpen}
                 data-cy={`doc.table-of-content.${h1.id}.h2s`}
-              >
-                {h1.children.map((h2, h2Index) => {
-                  if (h2.level !== 2) {
-                    return null;
-                  }
-                  const url =
-                    docMode === MarkdownDocMode.H1sAndH2sArePages
-                      ? `${props.url}/${h1.id}/${h2.id}`
-                      : `${props.url}/${h1.id}/?goTo=${h2.id}`;
-                  return (
-                    <React.Fragment key={h2Index}>
-                      <MenuItem
-                        button
-                        dense
-                        selected={props.subPage === h2.id && !section}
-                        key={h2Index}
-                        component={Link}
-                        to={url}
-                        data-cy={`doc.table-of-content.h2`}
-                        data-cy-page-id={h2.id}
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                        }}
-                      >
-                        {renderTableOfContentElement(h2)}
-                      </MenuItem>
-                      {false &&
-                        h2.children.map((h3, h3Index) => {
-                          if (h3.level !== 3) {
-                            return null;
-                          }
-                          return (
-                            <MenuItem
-                              button
-                              dense
-                              selected={section === h3.id}
-                              key={h3Index}
-                              component={Link}
-                              to={`${props.url}/${h1.id}/${h2.id}/${h3.id}`}
-                              data-cy={`doc.table-of-content.h2`}
-                              data-cy-page-id={h3.id}
-                              onClick={() => {
-                                setMobileMenuOpen(false);
-                              }}
-                            >
-                              {renderTableOfContentElement(h3)}
-                            </MenuItem>
-                          );
-                        })}
-                    </React.Fragment>
-                  );
-                })}
-              </Collapse>
+              ></Collapse>
             </React.Fragment>
           );
         })}
-      </List>
-    );
+      </List> */
+    }
+    {
+      /* ); */
+    }
 
     return (
       <>
@@ -711,7 +759,7 @@ export const Doc: React.FC<IProps> = (props) => {
             }}
             classes={{
               paper: css({
-                background: lightBackground,
+                // background: lightBackground,
               }),
             }}
           >
@@ -730,7 +778,7 @@ export const Doc: React.FC<IProps> = (props) => {
               }),
               paper: css({
                 width: drawerWidth,
-                background: lightBackground,
+                // background: lightBackground,
               }),
             }}
           >
@@ -743,7 +791,7 @@ export const Doc: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderTableOfContentElement(index: IMarkdownIndex) {
+  function renderMenuElement(index: IMarkdownIndex, selected: boolean) {
     return (
       <ListItemText
         primary={
@@ -756,30 +804,19 @@ export const Doc: React.FC<IProps> = (props) => {
               paddingLeft: `${(index.level - 1) * 1}rem`,
             })}
           >
-            {index.level < 2 ? (
-              <Typography
-                noWrap
-                className={css({
-                  fontWeight: "bold",
-                  width: "100%",
-                  display: "inline-block",
-                })}
-                dangerouslySetInnerHTML={{
-                  __html: index.label,
-                }}
-              />
-            ) : (
-              <Typography
-                noWrap
-                className={css({
-                  width: "100%",
-                  display: "inline-block",
-                })}
-                dangerouslySetInnerHTML={{
-                  __html: index.label,
-                }}
-              />
-            )}
+            <Typography
+              noWrap
+              className={css({
+                fontWeight: selected
+                  ? theme.typography.fontWeightBold
+                  : "inherit",
+                width: "100%",
+                display: "inline-block",
+              })}
+              dangerouslySetInnerHTML={{
+                __html: index.label,
+              }}
+            />
           </Box>
         }
       />

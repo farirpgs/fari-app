@@ -198,12 +198,12 @@ describe("useMarkdownFile", () => {
       ).toEqual("#something-important");
     });
   });
-  describe("Given I have a markdown file with a dynamic table of content element", () => {
-    it("should add a table of content", async () => {
+  describe("Given I have a markdown file with a dynamic table of contents element", () => {
+    it("should add a table of contents", async () => {
       const view = renderHook(
         () => {
           return useMarkdownFile({
-            loadFunction: aMarkdownFileWithADynamicTableOfContent,
+            loadFunction: aMarkdownFileWithADynamicTableOfContents,
             prefix: "/test-doc",
             docMode: MarkdownDocMode.H1sArePages,
           });
@@ -611,7 +611,7 @@ const aMarkdownFileWithADynamicAnchor = makeLoadFunction(`
 <p class="with-anchor">something important</p>
 `);
 
-const aMarkdownFileWithADynamicTableOfContent = makeLoadFunction(`
+const aMarkdownFileWithADynamicTableOfContents = makeLoadFunction(`
 # 1
 
 <toc></toc>
