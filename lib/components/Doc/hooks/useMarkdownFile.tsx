@@ -27,8 +27,8 @@ export function useMarkdownFile(props: {
     async function load() {
       if (props.loadFunction) {
         try {
-          const markdown = await (await axios.get(loadFunction)).data;
-
+          const markdown = await (await axios.get(props.loadFunction)).data;
+          debugger;
           if (markdown) {
             const { dom, markdownIndexes } = Markdown.process({
               markdown: markdown,
