@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { DocRoutes } from "../../docs/_DocRoutes";
+import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
@@ -13,17 +13,12 @@ import { Page } from "../Page/Page";
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
 const AboutRoute = React.lazy(() => import("../../routes/About/AboutRoute"));
-const BlogPostRoute = React.lazy(
-  () => import("../../routes/BlogPost/BlogPostRoute")
-);
-const BlogPostsRoute = React.lazy(
-  () => import("../../routes/BlogPosts/BlogPostsRoute")
-);
 
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
 const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
   () => import("../../routes/NotFound/NotFoundRoute")
@@ -93,6 +88,13 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/data"}
+          render={(props) => {
+            return <DataRoute />;
+          }}
+        />
+        <Route
+          exact
           path={"/oracle"}
           render={(props) => {
             return <OracleRoute />;
@@ -130,16 +132,17 @@ export const AppRouter = () => {
           render={(props) => <SceneRoute {...props} />}
         />
         <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+
         {DocRoutes.map((docRoute) => (
           <Route
             exact
             key={docRoute.url}
-            path={`${docRoute.url}/:page?/:section?`}
+            path={`${docRoute.url}/:page?/:subPage?`}
             render={(props) => (
               <Doc
                 key={docRoute.url}
                 page={props.match.params.page}
-                section={props.match.params.section}
+                subPage={props.match.params.subPage}
                 url={docRoute.url}
                 parent={docRoute.parent}
                 title={docRoute.title}
@@ -147,6 +150,7 @@ export const AppRouter = () => {
                 loadFunction={docRoute.loadFunction}
                 author={docRoute.author}
                 gitHubLink={docRoute.gitHubLink}
+                docMode={docRoute.docMode}
               />
             )}
           />
@@ -154,11 +158,11 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/seelie-squire/:page?/:section?"}
+          path={"/seelie-squire/:page?/:subPage?"}
           render={(props) => (
             <SeelieSquireRoute
               page={props.match.params.page}
-              section={props.match.params.section}
+              subPage={props.match.params.subPage}
             />
           )}
         />
@@ -169,20 +173,7 @@ export const AppRouter = () => {
             return <AboutRoute />;
           }}
         />
-        <Route
-          exact
-          path={"/blog"}
-          render={(props) => {
-            return <BlogPostsRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/blog/:slug"}
-          render={(props) => {
-            return <BlogPostRoute slug={props.match.params.slug} />;
-          }}
-        />
+
         <Route
           path="*"
           render={(props) => {

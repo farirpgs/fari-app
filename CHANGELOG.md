@@ -1,5 +1,7 @@
 # Changelog
 
+Detailed technical changelog of Fari
+
 ## v3.5 Resources, Private Aspects and Scene Notes
 
 #### January 19th, 2020
@@ -28,6 +30,18 @@ feat: Quick Conflicts and Fate Magic dials
 feat: dynamic table of content for certain docs (like /dials)
 feat: dynamic anchors for certain docs (like /fate-stunts)
 fix: routing mechanism for SRD (using paths instead of hash)
+
+**v3.5.4**
+
+feat: new WIP wiki
+feat: more flexible dynamic table of content for docs
+feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc)
+feat: ⚠ BETA ⚠ data export and import manager
+
+**v3.5.5**
+
+fix: scroll issue in docs
+fix: removed `showdown` markdown transformer in favor of `marked`
 
 ## v3.4 Join screen UX, Italian translations
 

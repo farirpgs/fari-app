@@ -1,8 +1,11 @@
-import { IDocProps } from "../components/Doc/Doc";
-import { Images } from "../constants/Images";
-import { DocImport } from "./_DocImport";
+import { IDocProps } from "../../components/Doc/Doc";
+import { MarkdownDocMode } from "../../components/Doc/domains/Markdown";
+import { Images } from "../../constants/Images";
+import { DocImport } from "./DocImport";
 
-export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
+export const DocRoutes: Array<
+  Omit<IDocProps, "page" | "subPage" | "section">
+> = [
   {
     url: "/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
@@ -10,7 +13,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     imageUrl: Images.condensed,
     loadFunction: DocImport.FateCondensed,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-condensed.md",
+      "https://github.com/fariapp/fari/tree/master/docs/fate-condensed.md",
     author: {
       title: "Evil Hat Productions",
       items: [
@@ -35,8 +38,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Fate Core",
     imageUrl: Images.core,
     loadFunction: DocImport.FateCore,
-    gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-core.md",
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-core.md",
     author: {
       title: "Evil Hat Productions",
       items: [
@@ -62,7 +64,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     imageUrl: Images.accelerated,
     loadFunction: DocImport.FateAccelerated,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-accelerated.md",
+      "https://github.com/fariapp/fari/tree/master/docs/fate-accelerated.md",
     author: {
       title: "Evil Hat Productions",
       items: [
@@ -89,7 +91,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     imageUrl: Images.systemToolkit,
     loadFunction: DocImport.FateSystemToolkit,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-adversary-toolkit.md",
+      "https://github.com/fariapp/fari/tree/master/docs/fate-adversary-toolkit.md",
     author: {
       title: "Evil Hat Productions",
       items: [
@@ -116,7 +118,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     imageUrl: Images.adversaryToolkit,
     loadFunction: DocImport.FateAdversaryToolkit,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-system-toolkit.md",
+      "https://github.com/fariapp/fari/tree/master/docs/fate-system-toolkit.md",
     author: {
       title: "Evil Hat Productions",
       items: [
@@ -143,7 +145,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     imageUrl: Images.book,
     loadFunction: DocImport.FateStunts,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/fate-stunts.md",
+      "https://github.com/fariapp/fari/tree/master/docs/fate-stunts.md",
     author: {
       title: "Evil Hat Productions",
       items: [
@@ -157,6 +159,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
       ],
     },
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
   },
   {
     url: "/scene-checklist",
@@ -164,7 +167,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Scene Checklist",
     loadFunction: DocImport.SceneCheckist,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/scene-checklist.md",
+      "https://github.com/fariapp/fari/tree/master/docs/scene-checklist.md",
     imageUrl: Images.scene,
     author: {
       title: "LAURENCE MACNAUGHTON",
@@ -182,7 +185,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Cheat Sheet",
     loadFunction: DocImport.CheatSheet,
     gitHubLink:
-      "https://github.com/fariapp/fari/tree/master/lib/docs/cheat-sheet.md",
+      "https://github.com/fariapp/fari/tree/master/docs/cheat-sheet.md",
     imageUrl: Images.cheatSheet,
     maxWidth: "lg",
     author: {
@@ -204,7 +207,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     parent: { title: "SRDs", url: "/srds" },
     title: "Dials",
     loadFunction: DocImport.Dials,
-    gitHubLink: "https://github.com/fariapp/fari/tree/master/lib/docs/dials.md",
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/dials.md",
     imageUrl: Images.dials,
   },
   {
@@ -216,7 +219,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Doc Title Doc Title Doc Title Doc Title",
     imageUrl: Images.book,
     loadFunction: DocImport.Test,
-    gitHubLink: "https://github.com/fariapp/fari/tree/master/lib/docs/test.md",
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/test.md",
     author: {
       title: "Author Author Author Autho",
       avatarUrl: Images.seelieSquireAvatar,
@@ -233,9 +236,40 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     },
   },
   {
+    url: "/srds/test-empty",
+    parent: {
+      title: "Fari",
+      url: "/",
+    },
+    title: "Test Empty",
+    loadFunction: DocImport.TestEmpty,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/docs/test-empty.md",
+  },
+  {
+    url: "/fate-wiki",
+    parent: { title: "SRDs", url: "/srds" },
+    title: "Fate Wiki",
+    loadFunction: DocImport.FateFaq,
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
+    imageUrl: Images.cheatSheet,
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
+    noIndex: true,
+  },
+  {
+    url: "/m",
+    parent: { title: "Fari", url: "/" },
+    title: "m",
+    docMode: MarkdownDocMode.H1sArePages,
+    noIndex: true,
+    loadFunction: DocImport.M,
+  },
+  {
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
+    docMode: MarkdownDocMode.H1sAndH2sArePages,
+
     loadFunction: DocImport.Changelog,
   },
 ];

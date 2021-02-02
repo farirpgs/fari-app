@@ -123,7 +123,7 @@ Testing the different dynamic controls
 
 ## Table of Content
 
-<toc/>
+<toc></toc>
 
 ## With Anchors
 

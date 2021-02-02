@@ -6,14 +6,15 @@ import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
 import { creatures, ICreature } from "./domains/Creatures";
 
-export const SeelieSquireRoute: React.FC<{ page: string; section: string }> = (
-  props
-) => {
+export const SeelieSquireRoute: React.FC<{
+  page: string;
+  subPage: string;
+}> = (props) => {
   const theme = useTheme();
   return (
     <Doc
       page={props.page}
-      section={props.section}
+      subPage={props.subPage}
       url="/seelie-squire"
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
@@ -110,12 +111,13 @@ ${c.description}
   }
 
   function renderStunts(c: ICreature) {
-    return c.character.stunts.map(
-      (s) => `
+    return c.character.stunts
+      .map(
+        (s) => `
 > <div class=${smallFateLabelClass}>${s.name}</div>
-> ${s.description}
-> `
-    );
+> ${s.description}`
+      )
+      .join("<br/><br/>");
   }
 
   function renderHealth(c: ICreature) {
@@ -128,7 +130,7 @@ ${c.description}
   }
 
   function renderSkills(c: ICreature) {
-    return c.character.skills.map((s) => `\n * ${s}`);
+    return c.character.skills.map((s) => `- ${s}`).join("\n>");
   }
 
   function renderAspects(c: ICreature) {
