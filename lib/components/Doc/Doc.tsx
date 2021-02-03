@@ -865,7 +865,14 @@ export const DocTableOfContents: React.FC<{
               <AppLink
                 to={child.url ?? ""}
                 className={css({
-                  color: theme.palette.text.secondary,
+                  color:
+                    section === child.id
+                      ? theme.palette.primary.main
+                      : theme.palette.text.secondary,
+                  fontWeight:
+                    section === child.id
+                      ? theme.typography.fontWeightBold
+                      : "inherit",
                 })}
               >
                 {child.label}

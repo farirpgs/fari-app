@@ -239,6 +239,18 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     loadFunction: DocImport.Dials,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/dials.md",
     imageUrl: Images.dials,
+    sideBar: {
+      "+Fari": [
+        "dials",
+        {
+          "+Rules": [
+            "props-from-return-to-the-stars",
+            "quick-conflicts-from-spirit-of-the-century",
+            "magic-aspect-based-naration",
+          ],
+        },
+      ],
+    },
   },
   {
     url: "/srds/test",

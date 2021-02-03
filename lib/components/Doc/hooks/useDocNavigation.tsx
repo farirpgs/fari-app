@@ -11,7 +11,7 @@ export function useDocNavigation(props: {
 }) {
   const defaultSideBar = useMemo(() => {
     return {
-      ["Sections"]: props.markdownIndexes.tree.map((i) => i.id),
+      ["Fari"]: props.markdownIndexes.tree.map((i) => i.id),
     };
   }, [props.markdownIndexes.tree]);
 
@@ -22,22 +22,40 @@ export function useDocNavigation(props: {
       props.currentPage?.id,
       sideBar
     );
-    const { allPageIds: allPageIds, defaultOpenedCategories } = parseSideBar(
-      sideBar
-    );
+    const { allPageIds, defaultOpenedCategories } = parseSideBar(sideBar);
     const currentPageId = props.currentPage?.id ?? "";
     const currentPageIndex = allPageIds.indexOf(currentPageId);
     const previousPageId = allPageIds[currentPageIndex - 1] ?? undefined;
     const nextPageId = allPageIds[currentPageIndex + 1] ?? undefined;
+    const pageIdsWithoutCategories: Array<string> = [];
+
+    for (const index of props.markdownIndexes.flat) {
+      if (index.level === 1 && !allPageIds.includes(index.id)) {
+        pageIdsWithoutCategories.push(index.id);
+      }
+    }
+
     return {
       highlightedItems,
       defaultOpenedCategories,
       previousPageId,
       nextPageId,
+      pageIdsWithoutCategories,
     };
-  }, [props.currentPage, sideBar]);
+  }, [props.currentPage, sideBar, props.markdownIndexes.flat]);
 
-  return { navigation, sideBar };
+  const sideBarPossiblyWithMissingItems = useMemo(() => {
+    if (navigation.pageIdsWithoutCategories.length === 0) {
+      return sideBar;
+    } else {
+      return {
+        ...sideBar,
+        [`Misc`]: navigation.pageIdsWithoutCategories,
+      };
+    }
+  }, [sideBar, navigation.pageIdsWithoutCategories]);
+
+  return { navigation, sideBar: sideBarPossiblyWithMissingItems };
 }
 
 function getTableOfContentsHighlightedItems(
