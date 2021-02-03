@@ -142,7 +142,11 @@ export const Page: React.FC<{
 
         <Container>
           {env.isLocalHost && props.debug && (
-            <pre>
+            <pre
+              className={css({
+                whiteSpace: "break-spaces",
+              })}
+            >
               {Object.keys(props.debug).map((label) => {
                 return (
                   <Box key={label}>

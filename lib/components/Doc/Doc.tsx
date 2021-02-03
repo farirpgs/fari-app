@@ -4,6 +4,7 @@ import Box from "@material-ui/core/Box";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Collapse from "@material-ui/core/Collapse";
 import Container, { ContainerTypeMap } from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -11,12 +12,14 @@ import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
@@ -27,6 +30,7 @@ import Autocomplete, {
 import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
+import { Link as RouterLink } from "react-router-dom";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { AppLink } from "../AppLink/AppLink";
@@ -34,17 +38,22 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
-import { IMarkdownIndex, IPage, MarkdownDocMode } from "./domains/Markdown";
+import { IMarkdownIndex, IMarkdownIndexes, IPage } from "./domains/Markdown";
+import { useDocNavigation } from "./hooks/useDocNavigation";
 import { ILoadFunction, useMarkdownFile } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
 
-type ISideBarElement = Array<string | IDocSidebar>;
+export type ISideBarItems = Array<
+  | string
+  | IDocSidebar
+  | { label: string; collapsed: boolean; items: ISideBarItems }
+>;
 
 export type IDocSidebar = {
-  [category: string]: ISideBarElement;
+  [category: string]: ISideBarItems;
 };
 
 type IProps = {
@@ -61,12 +70,7 @@ type IProps = {
    * e.g. `/srds/condensed/{{h1}}`
    */
   page: string | undefined;
-  /**
-   * Section right after the `props.url` which matches the current `<h2>` in the document
-   *
-   * e.g. `/srds/condensed/taking-action-rolling-the-dice/{{h2}}`
-   */
-  subPage: string | undefined;
+
   /**
    * Where the user should go when clicking on the breadcrumb parent element
    */
@@ -105,18 +109,13 @@ type IProps = {
    * Link to original file
    */
   gitHubLink?: string;
-  /**
-   * @default {MarkdownPageMode.H1sArePages}
-   */
-  docMode?: MarkdownDocMode;
+
   sideBar?: IDocSidebar;
 };
 
 export type IDocProps = IProps;
 
 export const Doc: React.FC<IProps> = (props) => {
-  const docMode = props.docMode ?? MarkdownDocMode.H1sArePages;
-
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
@@ -132,34 +131,27 @@ export const Doc: React.FC<IProps> = (props) => {
   const { dom, markdownIndexes } = useMarkdownFile({
     loadFunction: props.loadFunction,
     prefix: props.url,
-    docMode: docMode,
   });
-  console.debug(
-    "h2",
-    markdownIndexes.flat
-      .filter((i) => i.level === 2)
-      .map((i) => i.id)
-      .join(",")
-  );
 
   const {
     pageDom,
-    nextPage,
-    previousPage,
+    // nextPage,
+    // previousPage,
     currentPage,
     title,
     description,
   } = useMarkdownPage({
     url: props.url,
     page: props.page,
-    subPage: props.subPage,
     section: section,
     dom: dom,
-    docMode: docMode,
   });
-
+  const { navigation } = useDocNavigation({
+    currentPage: currentPage,
+    markdownIndexes: markdownIndexes,
+    docSideBar: props.sideBar,
+  });
   const html = pageDom?.innerHTML;
-  // usePageHtml({ markdownIndexes, currentPage, pageDom });
 
   const shouldRenderImage = props.imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
@@ -239,8 +231,10 @@ export const Doc: React.FC<IProps> = (props) => {
     }
   }
 
-  function handleGoToPage(page: IPage) {
-    history.push(page.url);
+  function handleGoToIndex(page: IMarkdownIndex) {
+    if (page.url) {
+      history.push(page.url);
+    }
   }
 
   useEffect(
@@ -310,14 +304,14 @@ export const Doc: React.FC<IProps> = (props) => {
                 </Box>
                 <Grid container>
                   <Grid item xs>
-                    <Box px={2}>
+                    <Box pr={2}>
                       <MarkdownElement renderedMarkdown={html} />
                     </Box>
                   </Grid>
                   <Hidden mdDown>
                     <Grid item lg={3}>
                       <Box
-                        px={2}
+                        pl={2}
                         className={css({
                           position: "sticky",
                           top: "0",
@@ -331,7 +325,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
                 {renderEditButton()}
 
-                <Box my=".5rem">
+                <Box my="2rem">
                   <Divider />
                 </Box>
                 {renderNavigationButtons()}
@@ -347,70 +341,32 @@ export const Doc: React.FC<IProps> = (props) => {
   );
 
   function renderTableOfContents() {
-    const currentIndex = markdownIndexes.flat.find(
-      (i) => i.id === currentPage?.id
-    );
-
-    const shouldNotRenderTableOfContents =
-      currentIndex?.level === 1 && docMode !== MarkdownDocMode.H1sArePages;
-
-    if (shouldNotRenderTableOfContents) {
-      return null;
-    }
-
+    const tableOfContentsPaddingTop = "4.5rem";
     return (
       <>
         <Box
           className={css({
-            marginTop: "4.5rem",
-            height: "100%",
-            maxHeight: "100vh",
-            position: "sticky",
-            top: "0",
-            borderLeft: "1px solid #dadde1",
-            overflowY: "auto",
+            paddingTop: tableOfContentsPaddingTop,
           })}
         >
-          {renderTableOfContentItem(currentIndex)}
+          <Box
+            className={css({
+              borderLeft: "1px solid #dadde1",
+              paddingTop: "1rem",
+              height: "100%",
+              maxHeight: `calc(100vh - ${tableOfContentsPaddingTop})`,
+              position: "sticky",
+              top: "0",
+              overflowY: "auto",
+            })}
+          >
+            <DocTableOfContents
+              markdownIndexes={markdownIndexes}
+              currentPage={currentPage}
+            />
+          </Box>
         </Box>
       </>
-    );
-  }
-
-  function renderTableOfContentItem(index: IMarkdownIndex | undefined) {
-    if (!index) {
-      return null;
-    }
-    return (
-      <ul
-        className={css({
-          listStyleType: "none",
-          marginTop: "0",
-          marginBottom: "0",
-          paddingLeft: ".5rem",
-        })}
-      >
-        {index.children.map((child) => {
-          return (
-            <li
-              key={child.id}
-              className={css({
-                margin: ".5rem",
-              })}
-            >
-              <AppLink
-                to={child.url ?? ""}
-                className={css({
-                  color: theme.palette.text.secondary,
-                })}
-              >
-                {child.label}
-              </AppLink>
-              {child.children.length > 1 && renderTableOfContentItem(child)}
-            </li>
-          );
-        })}
-      </ul>
     );
   }
 
@@ -421,11 +377,11 @@ export const Doc: React.FC<IProps> = (props) => {
     const githubHash = props.page ? `#${props.page}` : "";
     return (
       <Box my=".5rem">
-        <Grid container justify="flex-end">
+        <Grid container justify="flex-start">
           <Grid item>
             <Button
-              color="secondary"
-              size="small"
+              color="default"
+              // variant="outlined"
               component="a"
               startIcon={<EditIcon />}
               target="_blank"
@@ -561,19 +517,25 @@ export const Doc: React.FC<IProps> = (props) => {
   }
 
   function renderNavigationButtons() {
+    const previousIndex = markdownIndexes.flat.find(
+      (i) => i.id === navigation.previousPageId
+    );
+    const nextIndex = markdownIndexes.flat.find(
+      (i) => i.id === navigation.nextPageId
+    );
     return (
       <Grid
         container
         spacing={2}
         justify={
-          previousPage && !nextPage
+          previousIndex && !nextIndex
             ? "flex-start"
-            : !previousPage && nextPage
+            : !previousIndex && nextIndex
             ? "flex-end"
             : "space-between"
         }
       >
-        {previousPage && (
+        {previousIndex && (
           <Grid container item xs={12} sm={6} justify="flex-start">
             <Button
               startIcon={<NavigateBeforeIcon />}
@@ -581,18 +543,19 @@ export const Doc: React.FC<IProps> = (props) => {
               className={css({
                 textAlign: "left",
               })}
+              variant="outlined"
               color="primary"
               data-cy="doc.previous"
               onClick={() => {
-                handleGoToPage(previousPage);
+                handleGoToIndex(previousIndex);
               }}
             >
-              {truncate(previousPage?.label ?? "", { length: 50 })}
+              {truncate(previousIndex?.label ?? "", { length: 50 })}
             </Button>
           </Grid>
         )}
 
-        {nextPage && (
+        {nextIndex && (
           <Grid container item xs={12} sm={6} justify="flex-end">
             <Button
               endIcon={<NavigateNextIcon />}
@@ -600,13 +563,14 @@ export const Doc: React.FC<IProps> = (props) => {
               className={css({
                 textAlign: "right",
               })}
+              variant="outlined"
               color="primary"
               data-cy="doc.next"
               onClick={() => {
-                handleGoToPage(nextPage);
+                handleGoToIndex(nextIndex);
               }}
             >
-              {truncate(nextPage?.label ?? "", { length: 50 })}
+              {truncate(nextIndex?.label ?? "", { length: 50 })}
             </Button>
           </Grid>
         )}
@@ -673,80 +637,14 @@ export const Doc: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderSideBarContent(elements: IDocSidebar) {
-    const isArray = Array.isArray(elements);
-
-    return (
-      <ul>
-        {Object.entries(props.sideBar).map((element, i) => {
-          return <React.Fragment key={i} />;
-        })}
-      </ul>
-    );
-  }
-
   function renderSideBar() {
-    const list = <div />;
-    // <List>
-    {
-      /* {Object.keys(props.sideBar)?.map((element, i) => {
-          const isSelected = false;
-
-          return (
-            <React.Fragment key={i}>
-              <MenuItem
-                button
-                dense
-                selected={isSelected}
-                className={css({
-                  fontWeight: isSelected ? 700 : "inherit",
-                  color: isSelected ? theme.palette.primary.main : "inherit",
-                })}
-                component={Link}
-                to={`${props.url}/${h1.id}`}
-                data-cy={`doc.table-of-content.h1`}
-                data-cy-page-id={h1.id}
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                }}
-              >
-                {renderMenuElement(h1, isSelected)}
-                {shouldRenderExpandIcon && (
-                  <>
-                    <IconButton
-                      size="small"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setOpenH1((draft) => {
-                          if (draft === h1.id) {
-                            return undefined;
-                          }
-                          return h1.id;
-                        });
-                      }}
-                    >
-                      {isSubSectionOpen ? (
-                        <ExpandLessIcon htmlColor={theme.palette.text.hint} />
-                      ) : (
-                        <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
-                      )}
-                    </IconButton>
-                  </>
-                )}
-              </MenuItem>
-              <Collapse
-                in={isSubSectionOpen}
-                data-cy={`doc.table-of-content.${h1.id}.h2s`}
-              ></Collapse>
-            </React.Fragment>
-          );
-        })}
-      </List> */
-    }
-    {
-      /* ); */
-    }
+    const sideBar = (
+      <DocSideBar
+        currentPage={currentPage}
+        sideBar={props.sideBar}
+        markdownIndexes={markdownIndexes}
+      />
+    );
 
     return (
       <>
@@ -757,13 +655,8 @@ export const Doc: React.FC<IProps> = (props) => {
             onClose={() => {
               setMobileMenuOpen(false);
             }}
-            classes={{
-              paper: css({
-                // background: lightBackground,
-              }),
-            }}
           >
-            <Box p="2rem">{list}</Box>
+            <Box p="2rem">{sideBar}</Box>
           </Drawer>
         </Hidden>
         <Hidden smDown>
@@ -778,48 +671,15 @@ export const Doc: React.FC<IProps> = (props) => {
               }),
               paper: css({
                 width: drawerWidth,
-                // background: lightBackground,
               }),
             }}
           >
             <Box mt="4.9rem" />
             <Divider />
-            {list}
+            {sideBar}
           </Drawer>
         </Hidden>
       </>
-    );
-  }
-
-  function renderMenuElement(index: IMarkdownIndex, selected: boolean) {
-    return (
-      <ListItemText
-        primary={
-          <Box
-            display="inline-block"
-            title={index.label}
-            className={css({
-              width: "100%",
-              display: "inline-block",
-              paddingLeft: `${(index.level - 1) * 1}rem`,
-            })}
-          >
-            <Typography
-              noWrap
-              className={css({
-                fontWeight: selected
-                  ? theme.typography.fontWeightBold
-                  : "inherit",
-                width: "100%",
-                display: "inline-block",
-              })}
-              dangerouslySetInnerHTML={{
-                __html: index.label,
-              }}
-            />
-          </Box>
-        }
-      />
     );
   }
 
@@ -828,6 +688,193 @@ export const Doc: React.FC<IProps> = (props) => {
       <Box display="flex" justifyContent="center">
         <CircularProgress />
       </Box>
+    );
+  }
+};
+
+export const DocSideBar: React.FC<{
+  currentPage: IPage | undefined;
+  sideBar: IDocSidebar | undefined;
+  markdownIndexes: IMarkdownIndexes;
+}> = (props) => {
+  const theme = useTheme();
+
+  const { navigation, sideBar } = useDocNavigation({
+    currentPage: props.currentPage,
+    markdownIndexes: props.markdownIndexes,
+    docSideBar: props.sideBar,
+  });
+  const [openList, setOpenList] = useState<Array<string>>([
+    ...navigation.defaultOpenedCategories,
+  ]);
+
+  useEffect(() => {
+    setOpenList((d) => [...d, ...navigation.highlightedItems]);
+  }, [navigation.highlightedItems]);
+
+  return <List>{renderSideBarContent(sideBar)}</List>;
+
+  function renderSideBarContent(categories: IDocSidebar) {
+    const categoryNames = Object.keys(categories);
+    return (
+      <>
+        {categoryNames.map((category, i) => {
+          const items = categories[category];
+          const isCategorySelected = navigation.highlightedItems.includes(
+            category
+          );
+          const isCategoryOpened = openList.includes(category);
+
+          return (
+            <React.Fragment key={category}>
+              <ListItem
+                button
+                dense
+                className={css({ borderRadius: theme.shape.borderRadius })}
+                onClick={() => {
+                  if (isCategoryOpened) {
+                    setOpenList((draft) => draft.filter((i) => i !== category));
+                  } else {
+                    setOpenList((draft) => [...draft, category]);
+                  }
+                }}
+              >
+                <Box width="100%">
+                  <Typography
+                    noWrap
+                    className={css({
+                      color: isCategorySelected
+                        ? theme.palette.primary.main
+                        : theme.palette.text.primary,
+                      fontWeight: isCategorySelected
+                        ? theme.typography.fontWeightBold
+                        : theme.typography.fontWeightRegular,
+                    })}
+                  >
+                    {category.replace("+", "")}
+                  </Typography>
+                </Box>
+
+                <ArrowForwardIosIcon
+                  htmlColor={theme.palette.text.hint}
+                  className={css({
+                    width: "1rem",
+                    height: "1rem",
+                    transform: isCategoryOpened
+                      ? "rotate(90deg)"
+                      : "rotate(0deg)",
+                    transition: theme.transitions.create("transform"),
+                  })}
+                />
+              </ListItem>
+              <Collapse in={isCategoryOpened}>
+                <List
+                  className={css({
+                    paddingLeft: "1rem",
+                    paddingTop: "0",
+                    paddingBottom: "0",
+                  })}
+                >
+                  {items.map((item, j) => {
+                    const shouldRenderItem = typeof item === "string";
+                    const index = shouldRenderItem
+                      ? props.markdownIndexes.flat.find((i) => i.id === item)
+                      : undefined;
+                    const isItemSelected = navigation.highlightedItems.includes(
+                      index?.id ?? ""
+                    );
+                    return (
+                      <React.Fragment key={j}>
+                        {shouldRenderItem && index && (
+                          <ListItem
+                            button
+                            component={RouterLink}
+                            to={index.url ?? ""}
+                            dense
+                            className={css({
+                              borderRadius: theme.shape.borderRadius,
+                            })}
+                          >
+                            <Box width="100%">
+                              <Typography
+                                noWrap
+                                className={css({
+                                  color: isItemSelected
+                                    ? theme.palette.primary.main
+                                    : theme.palette.text.primary,
+                                  fontWeight: isItemSelected
+                                    ? theme.typography.fontWeightBold
+                                    : theme.typography.fontWeightRegular,
+                                })}
+                              >
+                                {index.label}
+                              </Typography>
+                            </Box>
+                          </ListItem>
+                        )}
+                        {!shouldRenderItem &&
+                          renderSideBarContent(item as IDocSidebar)}
+                      </React.Fragment>
+                    );
+                  })}
+                </List>
+              </Collapse>
+            </React.Fragment>
+          );
+        })}
+      </>
+    );
+  }
+};
+
+export const DocTableOfContents: React.FC<{
+  currentPage: IPage | undefined;
+  markdownIndexes: IMarkdownIndexes;
+}> = (props) => {
+  const theme = useTheme();
+  const params = new URLSearchParams(location.search);
+  const section = params.get("goTo");
+
+  const currentIndex = props.markdownIndexes.flat.find(
+    (i) => i.id === props.currentPage?.id
+  );
+
+  return <Box>{renderTableOfContentItem(currentIndex)}</Box>;
+
+  function renderTableOfContentItem(index: IMarkdownIndex | undefined) {
+    if (!index) {
+      return null;
+    }
+    return (
+      <ul
+        className={css({
+          listStyleType: "none",
+          marginTop: "0",
+          marginBottom: "0",
+          paddingLeft: ".5rem",
+        })}
+      >
+        {index.children.map((child) => {
+          return (
+            <li
+              key={child.id}
+              className={css({
+                margin: ".5rem",
+              })}
+            >
+              <AppLink
+                to={child.url ?? ""}
+                className={css({
+                  color: theme.palette.text.secondary,
+                })}
+              >
+                {child.label}
+              </AppLink>
+              {child.children.length > 1 && renderTableOfContentItem(child)}
+            </li>
+          );
+        })}
+      </ul>
     );
   }
 };

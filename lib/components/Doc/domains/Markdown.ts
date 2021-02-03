@@ -23,16 +23,10 @@ export type IMarkdownIndex = {
   children: Array<IMarkdownIndex>;
 };
 
-export enum MarkdownDocMode {
-  H1sArePages,
-  H1sAndH2sArePages,
-}
-
 export const Markdown = {
   process(props: {
     markdown: string;
     prefix: string;
-    docMode: MarkdownDocMode;
   }): { dom: HTMLDivElement; markdownIndexes: IMarkdownIndexes } {
     const html = marked(props.markdown);
     const dom = document.createElement("div");
@@ -54,7 +48,6 @@ export const Markdown = {
           prefix: props.prefix,
           latestH1: latestH1,
           latestH2: latestH2,
-          docMode: props.docMode,
         });
 
         if (index === 0 && currentNode.level !== 1) {
@@ -122,12 +115,9 @@ export const Markdown = {
     prefix: string;
     dom: HTMLDivElement | undefined;
     page: string | undefined;
-    subPage: string | undefined;
     section: string | undefined | null;
-    docMode: MarkdownDocMode;
   }) {
-    const pageSelector =
-      props.docMode === MarkdownDocMode.H1sArePages ? "h1" : "h1,h2";
+    const pageSelector = "h1";
     const pageElements =
       props.dom?.querySelectorAll(pageSelector) ??
       (([] as unknown) as NodeListOf<Element>);
@@ -136,10 +126,7 @@ export const Markdown = {
       throw `useMarkdownPage: no "${pageSelector}" in the markdown document`;
     }
 
-    const currentPageSelector =
-      props.docMode === MarkdownDocMode.H1sArePages
-        ? `[id='${props.page}']`
-        : `[id='${props.subPage || props.page}']`;
+    const currentPageSelector = `[id='${props.page}']`;
 
     const currentPageElement =
       props.dom?.querySelector(currentPageSelector) ?? pageElements[0];
@@ -213,7 +200,6 @@ function getNode(props: {
   prefix: string;
   latestH1: IMarkdownIndex | undefined;
   latestH2: IMarkdownIndex | undefined;
-  docMode: MarkdownDocMode;
 }) {
   const level = getElementLevel(props.element);
   const label = props.element.textContent ?? "";
@@ -242,7 +228,6 @@ function getNodeUrl(props: {
   prefix: string;
   latestH1: IMarkdownIndex | undefined;
   latestH2: IMarkdownIndex | undefined;
-  docMode: MarkdownDocMode;
 }) {
   const level = getElementLevel(props.element);
   const id = props.element.id;
@@ -251,19 +236,7 @@ function getNodeUrl(props: {
     return `${props.prefix}/${id}`;
   }
 
-  if (level === 2) {
-    if (props.docMode === MarkdownDocMode.H1sArePages) {
-      return `${props.prefix}/${props.latestH1?.id}?goTo=${id}`;
-    } else {
-      return `${props.prefix}/${props.latestH1?.id}/${id}`;
-    }
-  }
-
-  if (props.docMode === MarkdownDocMode.H1sArePages) {
-    return `${props.prefix}/${props.latestH1?.id}?goTo=${id}`;
-  } else {
-    return `${props.prefix}/${props.latestH1?.id}/${props.latestH2?.id}?goTo=${id}`;
-  }
+  return `${props.prefix}/${props.latestH1?.id}?goTo=${id}`;
 }
 
 function makeHeaderAnchor(element: Element) {

@@ -1,11 +1,8 @@
 import { IDocProps } from "../../components/Doc/Doc";
-import { MarkdownDocMode } from "../../components/Doc/domains/Markdown";
 import { Images } from "../../constants/Images";
 import { DocImport } from "./DocImport";
 
-export const DocRoutes: Array<
-  Omit<IDocProps, "page" | "subPage" | "section">
-> = [
+export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
   {
     url: "/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
@@ -161,31 +158,36 @@ export const DocRoutes: Array<
       ],
     },
     sideBar: {
-      "Fate Stunts": [
-        "athletics-stunts",
-        "burglary-stunts",
-        "contacts-stunts",
-        "crafts-stunts",
-        "deceive-stunts",
-        "drive-stunts",
-        "empathy-stunts",
-        "fight-stunts",
-        "investigate-stunts",
-        "lore-stunts",
-        "notice-stunts",
-        "physique-stunts",
-        "provoke-stunts",
-        "rapport-stunts",
-        "resources-stunts",
-        "shoot-stunts",
-        "stealth-stunts",
-        "will-stunts",
+      "+Fate Stunts": [
+        "fate-stunts",
+        {
+          "+Skills": [
+            "athletics-stunts",
+            "burglary-stunts",
+            "contacts-stunts",
+            "crafts-stunts",
+            "deceive-stunts",
+            "drive-stunts",
+            "empathy-stunts",
+            "fight-stunts",
+            "investigate-stunts",
+            "lore-stunts",
+            "notice-stunts",
+            "physique-stunts",
+            "provoke-stunts",
+            "rapport-stunts",
+            "resources-stunts",
+            "shoot-stunts",
+            "stealth-stunts",
+            "will-stunts",
+          ],
+        },
       ],
       "Stunt Rubrics": [
         "add-a-new-action-to-a-skill",
         "add-a-bonus-to-an-action",
         "create-a-rules-exception",
-        "other-rubrics",
+        { "+Miscellaneous": ["other-rubrics"] },
       ],
     },
   },
@@ -281,14 +283,12 @@ export const DocRoutes: Array<
     loadFunction: DocImport.FateFaq,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
     noIndex: true,
   },
   {
     url: "/m",
     parent: { title: "Fari", url: "/" },
     title: "m",
-    docMode: MarkdownDocMode.H1sArePages,
     noIndex: true,
     loadFunction: DocImport.M,
   },
@@ -296,7 +296,6 @@ export const DocRoutes: Array<
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
 
     loadFunction: DocImport.Changelog,
   },
