@@ -133,14 +133,7 @@ export const Doc: React.FC<IProps> = (props) => {
     prefix: props.url,
   });
 
-  const {
-    pageDom,
-    // nextPage,
-    // previousPage,
-    currentPage,
-    title,
-    description,
-  } = useMarkdownPage({
+  const { pageDom, currentPage, title, description } = useMarkdownPage({
     url: props.url,
     page: props.page,
     section: section,

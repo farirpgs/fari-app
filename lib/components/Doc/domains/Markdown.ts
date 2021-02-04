@@ -156,24 +156,16 @@ export const Markdown = {
 
     if (!currentPageElement) {
       return {
-        html: "",
         currentPage: makePageFromH1OrH2(pageElements[0], props.prefix),
-        previousPage: undefined,
-        nextPage: makePageFromH1OrH2(pageElements[1], props.prefix),
         title: title.trim(),
         description: description.trim(),
       };
     }
 
-    let previousPage: IPage | undefined;
     let nextPage: IPage | undefined;
 
     pageElements.forEach((h, index) => {
       if (h.id === currentPageElement.id) {
-        previousPage = makePageFromH1OrH2(
-          pageElements[index - 1],
-          props.prefix
-        );
         nextPage = makePageFromH1OrH2(pageElements[index + 1], props.prefix);
       }
     });
@@ -187,8 +179,6 @@ export const Markdown = {
     return {
       pageDom: pageDom,
       currentPage: makePageFromH1OrH2(currentPageElement, props.prefix),
-      previousPage: previousPage,
-      nextPage: nextPage,
       title: title.trim(),
       description: description.trim(),
     };

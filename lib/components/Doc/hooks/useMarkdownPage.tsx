@@ -21,7 +21,6 @@ export function useMarkdownPage(props: {
       return result;
     } catch (error) {
       logger.error(error);
-
       const errorHtml =
         "<h1>Error</h1><p>There was an error processing this document</p>";
       const dom = document.createElement("div");
@@ -32,8 +31,6 @@ export function useMarkdownPage(props: {
         description: "Document Error",
         pageDom: dom,
         currentPage: undefined,
-        previousPage: undefined,
-        nextPage: undefined,
       };
     }
   }, [props.url, props.dom, props.page, props.section]);

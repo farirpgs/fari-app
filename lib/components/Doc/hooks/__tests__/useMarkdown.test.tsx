@@ -242,8 +242,6 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.title).toEqual("");
       expect(view.result.current.description).toEqual("");
       expect(view.result.current.currentPage).toEqual(undefined);
-      expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given an undefined page for an undefined markdown file", () => {
@@ -270,8 +268,6 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.title).toEqual("");
       expect(view.result.current.description).toEqual("");
       expect(view.result.current.currentPage).toEqual(undefined);
-      expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given I have a markdown file without h1", () => {
@@ -295,18 +291,17 @@ describe("useMarkdownPage", () => {
         }
       );
 
-      await view.waitForNextUpdate();
-
+      await view.waitForValueToChange(
+        () => view.result.current.pageDom?.innerHTML
+      );
       expect(fakeLogger.error).toHaveBeenCalledWith(
         'useMarkdownPage: no "h1" in the markdown document'
       );
       expect(view.result.current.title).toEqual("Error");
       expect(view.result.current.description).toEqual("Document Error");
-      expect(view.result.current.html).toEqual(
+      expect(view.result.current.pageDom?.innerHTML).toEqual(
         `<h1>Error</h1><p>There was an error processing this document</p>`
       );
-      expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage).toEqual(undefined);
       expect(view.result.current.currentPage).toEqual(undefined);
     });
   });
@@ -336,8 +331,6 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.title).toEqual("header-1");
       expect(view.result.current.description).toEqual("[header-1.text]");
       expect(view.result.current.currentPage?.label).toEqual("header-1");
-      expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage?.label).toEqual("header-2");
     });
   });
   describe("Given the first page page", () => {
@@ -365,8 +358,6 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.title).toEqual("header-1");
       expect(view.result.current.description).toEqual("[header-1.text]");
       expect(view.result.current.currentPage?.label).toEqual("header-1");
-      expect(view.result.current.previousPage).toEqual(undefined);
-      expect(view.result.current.nextPage?.label).toEqual("header-2");
     });
   });
   describe("Given the second page", () => {
@@ -394,8 +385,6 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.title).toEqual("header-2");
       expect(view.result.current.description).toEqual("[header-2.text]");
       expect(view.result.current.currentPage?.label).toEqual("header-2");
-      expect(view.result.current.previousPage?.label).toEqual("header-1");
-      expect(view.result.current.nextPage?.label).toEqual("header-3");
     });
   });
   describe("Given the third page", () => {
@@ -418,8 +407,6 @@ describe("useMarkdownPage", () => {
       expect(view.result.current.title).toEqual("header-3");
       expect(view.result.current.description).toEqual("[header-3.text]");
       expect(view.result.current.currentPage?.label).toEqual("header-3");
-      expect(view.result.current.previousPage?.label).toEqual("header-2");
-      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
   describe("Given the third page and there is a section", () => {
@@ -449,8 +436,6 @@ describe("useMarkdownPage", () => {
         "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical con..."
       );
       expect(view.result.current.currentPage?.label).toEqual("header-3");
-      expect(view.result.current.previousPage?.label).toEqual("header-2");
-      expect(view.result.current.nextPage).toEqual(undefined);
     });
   });
 });
