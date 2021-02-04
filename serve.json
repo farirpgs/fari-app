@@ -4,6 +4,6 @@
     { "source": "/srds/condensed", "destination": "/index.html" },
     { "source": "/srds/accelerated", "destination": "/index.html" },
     { "source": "/fate-wiki", "destination": "/index.html" },
-    { "source": "/srds/fate-stunts", "destination": "/index.html" }
+    { "source": "/fate-stunts", "destination": "/index.html" }
   ]
 }
