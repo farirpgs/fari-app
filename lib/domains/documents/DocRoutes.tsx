@@ -296,6 +296,24 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
     noIndex: true,
+    sideBar: {
+      "+Welcome": [
+        "fate-wiki",
+        {
+          "+FAQ": [
+            "condensed--core--accelerated",
+            "whats-the-math-behind-the-fate-dice",
+            "whats-an-average-session-time",
+          ],
+          "+Guides": [
+            "how-to-gm-fate",
+            "how-to-make-balanced-fights",
+            "how-to-create-a-good-villain",
+            "how-to-create-a-good-setting",
+          ],
+        },
+      ],
+    },
   },
   {
     url: "/m",

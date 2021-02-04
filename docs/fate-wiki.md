@@ -2,11 +2,7 @@
 
 The ultimate open and community driven Fate wiki resources.
 
-# FAQ
-
-Answers to the most popular Fate related questions.
-
-## Condensed / Core / Accelerated
+# Condensed / Core / Accelerated
 
 <p class="author">By RPDeshaies</p>
 
@@ -22,7 +18,7 @@ If you still don't know where to start, here's a tip:
 - [Read Fate Core](/srds/core) for all its great examples and guides on how to play.
 - [Read Fate Accelerated](/srds/accelerated) if you want a more simplified version of the system and want to get started quickly.
 
-## What's the Math Behind The Fate Dice
+# What's the Math Behind The Fate Dice
 
 <p class="author">By RPDeshaies</p>
 
@@ -80,11 +76,11 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 | 3      | 4.94%          | 6.17%                         |
 | 4      | 1.23%          | 1.23%                         |
 
-# How tos
+# What's an Average Session Time
 
-List of tips that we think are going to be useful for playing Fate.
+[...]
 
-## How to GM Fate
+# How to GM Fate
 
 <p class="author">By Dgerrimea</p>
 
@@ -115,14 +111,14 @@ List of tips that we think are going to be useful for playing Fate.
 - Don't set up enemies just to be knocked down; PC's are damn resilient and failure is fun anyway
 - Don't forget how much narrative agency the players have. If they spend a fate point and say there's a secret door, then there's a secret door now. Forget about maps and plot twists; you're not showing your players something you made earlier, you're making it with them as a team. Don't take that away from them!
 
-## How to Make Balanced Fights
+# How to Make Balanced Fights
 
 [...]
 
-## How to Create a Good Villain
+# How to Create a Good Villain
 
 [...]
 
-## How to Create a Good Setting
+# How to Create a Good Setting
 
 [...]
