@@ -29,8 +29,8 @@ export function useDocNavigation(props: {
     const nextPageId = allPageIds[currentPageIndex + 1] ?? undefined;
     const pageIdsWithoutCategories: Array<string> = [];
 
-    for (const index of props.markdownIndexes.flat) {
-      if (index.level === 1 && !allPageIds.includes(index.id)) {
+    for (const index of props.markdownIndexes.tree) {
+      if (!allPageIds.includes(index.id)) {
         pageIdsWithoutCategories.push(index.id);
       }
     }
