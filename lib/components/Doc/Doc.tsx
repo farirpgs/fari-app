@@ -724,6 +724,8 @@ export const DocSideBar: React.FC<{
                 button
                 dense
                 className={css({ borderRadius: theme.shape.borderRadius })}
+                data-cy={"doc.side-bar.category"}
+                data-cy-open={isCategoryOpened}
                 onClick={() => {
                   if (isCategoryOpened) {
                     setOpenList((draft) => draft.filter((i) => i !== category));
@@ -783,6 +785,8 @@ export const DocSideBar: React.FC<{
                             button
                             component={RouterLink}
                             to={index.url ?? ""}
+                            data-cy="doc.side-bar.category-item"
+                            data-cy-item-id={index.id}
                             dense
                             className={css({
                               borderRadius: theme.shape.borderRadius,

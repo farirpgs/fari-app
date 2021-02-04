@@ -1,33 +1,31 @@
 import { Fari } from "lib/util/Fari";
 
-describe("/srds/condensed", () => {
+describe.only("/srds/condensed", () => {
   it("should be able to navigate using the TOCs", () => {
     Fari.start();
-    Fari.visit("/srds/condensed");
+    ["/srds/condensed", "/fate-stunts", "/fate-wiki"].forEach((page) => {
+      Fari.visit(page);
 
-    // Navigate All H1
-    Fari.get("doc.table-of-content.h1").each(($h1) => {
-      // Open H1
-      cy.wrap($h1).click();
+      // Open all categories
+      Fari.get("doc.side-bar.category")
+        .each((category) => {
+          Fari.getAttribute(cy.wrap(category), "data-cy-open").then((open) => {
+            if (open !== "true") {
+              cy.log(`Opening: ${category.text()}`);
+              cy.wrap(category).click({ force: true });
+            }
+          });
+        })
+        .then(() => {
+          Fari.get("doc.side-bar.category-item").each((item) => {
+            cy.log(`Going to: ${item.text()}`);
+            cy.wrap(item).click({ force: true });
 
-      Fari.getAttribute(cy.wrap($h1), "data-cy-page-id").then((id) => {
-        // Verify H1 content is in page
-        cy.get(`#${id}`).should("be.visible");
-
-        // Find H2s
-        Fari.get(`doc.table-of-content.${id}.h2s`).then(($h2Collapse) => {
-          $h2Collapse
-            .find(`[data-cy='doc.table-of-content.h2']`)
-            .each((index, $h2) => {
-              // Navigate All h2
-              cy.wrap($h2).click({ force: true });
-              Fari.getAttribute(cy.wrap($h2), "data-cy-page-id").then((id) => {
-                // Verify H2 content is in page
-                cy.get(`#${id}`).should("be.visible");
-              });
+            Fari.getAttribute(cy.wrap(item), "data-cy-item-id").then((id) => {
+              cy.get(`#${id}`).should("be.visible");
             });
+          });
         });
-      });
     });
   });
 });
