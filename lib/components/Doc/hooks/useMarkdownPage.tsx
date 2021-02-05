@@ -31,6 +31,8 @@ export function useMarkdownPage(props: {
         description: "Document Error",
         pageDom: dom,
         currentPage: undefined,
+        author: undefined,
+        date: undefined,
       };
     }
   }, [props.url, props.dom, props.page, props.section]);
