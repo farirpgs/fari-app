@@ -225,8 +225,6 @@ const styles = (theme: Theme) => {
         padding: ".5rem",
       },
       "& blockquote": {
-        // "display": "flex",
-        // "flexDirection": "column",
         "borderLeft": `5px solid ${theme.palette.primary.main}`,
         "boxShadow": theme.shadows[1],
         "backgroundColor": lightBackground,
@@ -308,10 +306,11 @@ const styles = (theme: Theme) => {
           marginLeft: "0",
         },
       },
-      "& .author": {
-        textAlign: "right",
-        marginTop: "-.5rem",
-        // marginBottom: "0",
+      "& .page-meta": {
+        fontSize: "1rem",
+        lineHeight: "2rem",
+        marginTop: "-2rem",
+        marginBottom: "1rem",
         color: theme.palette.text.secondary,
       },
     },

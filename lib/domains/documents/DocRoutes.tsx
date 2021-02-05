@@ -292,7 +292,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     url: "/fate-wiki",
     parent: { title: "SRDs", url: "/srds" },
     title: "Fate Wiki",
-    loadFunction: DocImport.FateFaq,
+    loadFunction: DocImport.FateWiki,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
     noIndex: true,
@@ -314,6 +314,14 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
       ],
     },
+  },
+  {
+    url: "/blog",
+    parent: { title: "Fari", url: "/" },
+    title: "Blog",
+    loadFunction: DocImport.Blog,
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/blog.md",
+    defaultSideBarCategory: "Blog",
   },
   {
     url: "/m",

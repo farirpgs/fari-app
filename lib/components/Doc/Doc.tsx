@@ -111,6 +111,7 @@ type IProps = {
   gitHubLink?: string;
 
   sideBar?: IDocSidebar;
+  defaultSideBarCategory?: string;
 };
 
 export type IDocProps = IProps;
@@ -126,19 +127,26 @@ export const Doc: React.FC<IProps> = (props) => {
   const section = params.get("goTo");
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openH1, setOpenH1] = useState<string | undefined>();
   const [search, setSearch] = useState("");
   const { dom, markdownIndexes } = useMarkdownFile({
     loadFunction: props.loadFunction,
     prefix: props.url,
   });
 
-  const { pageDom, currentPage, title, description } = useMarkdownPage({
+  const {
+    pageDom,
+    currentPage,
+    title,
+    description,
+    author,
+    date,
+  } = useMarkdownPage({
     url: props.url,
     page: props.page,
     section: section,
     dom: dom,
   });
+
   const { navigation } = useDocNavigation({
     currentPage: currentPage,
     markdownIndexes: markdownIndexes,
@@ -151,20 +159,6 @@ export const Doc: React.FC<IProps> = (props) => {
   const fullPath = location.pathname + location.search;
 
   useScrollOnHtmlLoad(html, section);
-  useEffect(
-    function trackOpenH1OnCurrentPageChange() {
-      if (currentPage?.level === 1) {
-        setOpenH1(currentPage.id);
-      }
-    },
-    [currentPage]
-  );
-  useEffect(
-    function trackOpenH1OnPageChange() {
-      setOpenH1(props.page);
-    },
-    [props.page]
-  );
 
   useEffect(
     function scrollOnPageChange() {
@@ -634,8 +628,9 @@ export const Doc: React.FC<IProps> = (props) => {
     const sideBar = (
       <DocSideBar
         currentPage={currentPage}
-        sideBar={props.sideBar}
         markdownIndexes={markdownIndexes}
+        sideBar={props.sideBar}
+        defaultSideBarCategory={props.defaultSideBarCategory}
       />
     );
 
@@ -687,8 +682,9 @@ export const Doc: React.FC<IProps> = (props) => {
 
 export const DocSideBar: React.FC<{
   currentPage: IPage | undefined;
-  sideBar: IDocSidebar | undefined;
   markdownIndexes: IMarkdownIndexes;
+  sideBar: IDocSidebar | undefined;
+  defaultSideBarCategory?: string;
 }> = (props) => {
   const theme = useTheme();
 
@@ -696,6 +692,7 @@ export const DocSideBar: React.FC<{
     currentPage: props.currentPage,
     markdownIndexes: props.markdownIndexes,
     docSideBar: props.sideBar,
+    defaultSideBarCategory: props.defaultSideBarCategory,
   });
   const [openList, setOpenList] = useState<Array<string>>([
     ...navigation.defaultOpenedCategories,

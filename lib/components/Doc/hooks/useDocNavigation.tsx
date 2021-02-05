@@ -7,11 +7,14 @@ export type IUseDocNavigation = ReturnType<typeof useDocNavigation>;
 export function useDocNavigation(props: {
   currentPage: IPage | undefined;
   docSideBar: IDocSidebar | undefined;
+  defaultSideBarCategory?: string;
   markdownIndexes: IMarkdownIndexes;
 }) {
   const defaultSideBar = useMemo(() => {
     return {
-      ["Fari"]: props.markdownIndexes.tree.map((i) => i.id),
+      [props.defaultSideBarCategory ?? "Fari"]: props.markdownIndexes.tree.map(
+        (i) => i.id
+      ),
     };
   }, [props.markdownIndexes.tree]);
 

@@ -175,12 +175,25 @@ export const Markdown = {
       `${nextPage?.id}`
     );
     const pageDom = getPageDom(currentPageElement, allDomElementsInPage);
+    const pageMeta = pageDom.querySelector("page-meta");
+    const author = pageMeta?.getAttribute("author");
+    const date = pageMeta?.getAttribute("date");
 
+    if (author) {
+      const metaDom = document.createElement("div");
+      metaDom.className = "page-meta";
+      const dateSection = date ? ` • ${date}` : "";
+
+      metaDom.innerHTML = `By ${author}${dateSection}`;
+      pageDom.querySelector("h1")?.after(metaDom);
+    }
     return {
       pageDom: pageDom,
       currentPage: makePageFromH1OrH2(currentPageElement, props.prefix),
       title: title.trim(),
       description: description.trim(),
+      author: author,
+      date: date,
     };
   },
 };

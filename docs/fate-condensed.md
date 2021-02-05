@@ -431,11 +431,8 @@ A character good at Athletics can climb over walls and race through crowded stre
 Your outcomes when overcoming are:
 
 - **If you fail,** discuss with the GM (and the defending player, if any) whether it’s a failure or success at a major cost (**page XX**).
-
 - **If you tie,** it’s success at a minor cost (**page XX**)—you’re in a tough spot, the enemy gets a boost (**page XX**), or you may take a hit. Alternatively, you fail but gain a boost.
-
 - **If you succeed,** you meet your goal and the story moves on without hiccups.
-
 - **If you succeed with style,** it’s a success and you also get a boost.
 
 > Charles has made his way to an Antarctic research facility. The buildings have been wrecked, and the occupants are missing. He wants to search the wreckage for clues. The GM tells him to roll Investigate against Fair (+2) difficulty. Charles gets <fate>00++</fate> on the dice, plus his Average (+1) Investigate, for a Good (+3) effort. A success! The GM describes the clue he finds: footprints in the snow, made by creatures walking on many thin, inhuman legs.
@@ -455,21 +452,15 @@ When you roll to create an advantage, specify whether you’re creating a new as
 Your outcomes when creating a new aspect are:
 
 - **If you fail,** you either don’t create the aspect (failure) or you create it but the enemy gets the free invoke (success at a cost). If you succeed at a cost, the final aspect may need to be rewritten to benefit the enemy. This may still be worth it because aspects are true (**page XX**).
-
 - **If you tie,** you don’t create an aspect, but you do get a boost (**page XX**).
-
 - **If you succeed,** you create a situation aspect with one free invoke on it.
-
 - **If you succeed with style,** you create a situation aspect with _two_ free invokes on it.
 
 With an existing known or unknown aspect the outcomes are:
 
 - **If you fail,** and the aspect was known, the enemy gets a free invoke. If it was unknown, they may choose to reveal it to get a free invoke.
-
 - **If you tie,** you gain a boost if the aspect was unknown; it stays unknown. If the aspect is known, you get a free invoke on it instead.
-
 - **If you succeed,** gain a free invoke on the aspect, revealing it if unknown.
-
 - **If you succeed with style,** gain two free invokes, revealing it if unknown.
 
 > Ethan is face-to-something with a shoggoth, a massive and tireless fleshy beast. He knows it’s too powerful to attack directly, so he decides his best bet is to distract it: “I’d like to make a Molotov cocktail and set this thing on fire!” he announces.
@@ -489,11 +480,8 @@ Keep in mind whether or not harming your target is even possible. Not every atta
 Your outcomes when attacking are:
 
 - **If you fail,** you fail to connect—the attack is parried, dodged, or maybe just absorbed by armor.
-
 - **If you tie,** maybe you barely connect, maybe you cause the defender to flinch. Either way, you get a boost (**page XX**).
-
 - **If you succeed,** you deal a hit equal to the difference between your attack’s total and the defense’s effort. The defender must absorb this hit with stress or consequences, or else be taken out (**page XX**).
-
 - **If you succeed with style,** you deal a hit just like a success, but you may reduce the shifts of the hit by one to get a boost.
 
 > Ruth has stumbled across a corpse raised by arcane powers to fulfill some dark purpose. She decides to punch it. She has Great (+4) Fight but rolls <fate>--00</fate>, giving a Fair (+2) effort.
@@ -509,11 +497,8 @@ Defend is the only reactive action in _Fate Condensed_. You use it to stop somet
 Your outcomes when defending are:
 
 - **If you fail** against an attack, you take a hit, which you must absorb with stress (**page XX**) or consequences (**page XX**). Regardless, the enemy succeeds as described for their action.
-
 - **If you tie,** proceed according to the tie result for the opposed action.
-
 - **If you succeed,** you don’t take a hit or you deny the enemy’s action.
-
 - **If you succeed with style,** you don’t take a hit, you deny the enemy’s action, and you even get a boost as you gain the upper hand for a moment.
 
 > Continuing from the previous example, the corpse gets to defend itself against Ruth. The GM rolls <fate>-00+</fate>, which doesn’t change the creature’s Mediocre (+0) Athletics.
