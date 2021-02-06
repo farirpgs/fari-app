@@ -27,12 +27,10 @@ export function useMarkdownPage(props: {
       dom.innerHTML = errorHtml;
 
       return {
+        pageId: "",
         title: "Error",
         description: "Document Error",
         pageDom: dom,
-        currentPage: undefined,
-        author: undefined,
-        date: undefined,
       };
     }
   }, [props.url, props.dom, props.page, props.section]);

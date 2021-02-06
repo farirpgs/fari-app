@@ -38,7 +38,7 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
-import { IMarkdownIndex, IMarkdownIndexes, IPage } from "./domains/Markdown";
+import { IMarkdownIndex, IMarkdownIndexes } from "./domains/Markdown";
 import { useDocNavigation } from "./hooks/useDocNavigation";
 import { ILoadFunction, useMarkdownFile } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
@@ -133,14 +133,7 @@ export const Doc: React.FC<IProps> = (props) => {
     prefix: props.url,
   });
 
-  const {
-    pageDom,
-    currentPage,
-    title,
-    description,
-    author,
-    date,
-  } = useMarkdownPage({
+  const { pageDom, pageId, title, description } = useMarkdownPage({
     url: props.url,
     page: props.page,
     section: section,
@@ -148,7 +141,7 @@ export const Doc: React.FC<IProps> = (props) => {
   });
 
   const { navigation } = useDocNavigation({
-    currentPage: currentPage,
+    currentPageId: pageId,
     markdownIndexes: markdownIndexes,
     docSideBar: props.sideBar,
   });
@@ -181,7 +174,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
       logger.info(logMessage, {
         pathname: location.pathname,
-        page: props.page,
+        page: pageId,
         section: section,
       });
     },
@@ -190,7 +183,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function transformHashToGoodUrl() {
-      if (currentPage && location.hash) {
+      if (location.hash) {
         const newSection = location.hash.replace("#", "");
 
         history.replace({
@@ -349,7 +342,7 @@ export const Doc: React.FC<IProps> = (props) => {
           >
             <DocTableOfContents
               markdownIndexes={markdownIndexes}
-              currentPage={currentPage}
+              currentPage={pageId}
             />
           </Box>
         </Box>
@@ -361,7 +354,7 @@ export const Doc: React.FC<IProps> = (props) => {
     if (!props.gitHubLink) {
       return null;
     }
-    const githubHash = props.page ? `#${props.page}` : "";
+    const githubHash = pageId ? `#${pageId}` : "";
     return (
       <Box my=".5rem">
         <Grid container justify="flex-start">
@@ -627,7 +620,7 @@ export const Doc: React.FC<IProps> = (props) => {
   function renderSideBar() {
     const sideBar = (
       <DocSideBar
-        currentPage={currentPage}
+        currentPage={pageId}
         markdownIndexes={markdownIndexes}
         sideBar={props.sideBar}
         defaultSideBarCategory={props.defaultSideBarCategory}
@@ -681,7 +674,7 @@ export const Doc: React.FC<IProps> = (props) => {
 };
 
 export const DocSideBar: React.FC<{
-  currentPage: IPage | undefined;
+  currentPage: string | undefined;
   markdownIndexes: IMarkdownIndexes;
   sideBar: IDocSidebar | undefined;
   defaultSideBarCategory?: string;
@@ -689,7 +682,7 @@ export const DocSideBar: React.FC<{
   const theme = useTheme();
 
   const { navigation, sideBar } = useDocNavigation({
-    currentPage: props.currentPage,
+    currentPageId: props.currentPage,
     markdownIndexes: props.markdownIndexes,
     docSideBar: props.sideBar,
     defaultSideBarCategory: props.defaultSideBarCategory,
@@ -822,7 +815,7 @@ export const DocSideBar: React.FC<{
 };
 
 export const DocTableOfContents: React.FC<{
-  currentPage: IPage | undefined;
+  currentPage: string | undefined;
   markdownIndexes: IMarkdownIndexes;
 }> = (props) => {
   const theme = useTheme();
@@ -830,7 +823,7 @@ export const DocTableOfContents: React.FC<{
   const section = params.get("goTo");
 
   const currentIndex = props.markdownIndexes.flat.find(
-    (i) => i.id === props.currentPage?.id
+    (i) => i.id === props.currentPage
   );
 
   return <Box>{renderTableOfContentItem(currentIndex)}</Box>;

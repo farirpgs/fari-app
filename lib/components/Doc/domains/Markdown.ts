@@ -6,12 +6,6 @@ export type IMarkdownIndexes = {
   tree: Array<IMarkdownIndex>;
   flat: Array<IMarkdownIndex>;
 };
-export type IPage = {
-  label: string;
-  id: string;
-  url: string;
-  level: number;
-};
 
 export type IMarkdownIndex = {
   id: string;
@@ -131,16 +125,16 @@ export const Markdown = {
     const currentPageElement =
       props.dom?.querySelector(currentPageSelector) ?? pageElements[0];
 
-    const textAfterCurrentPage = getFirstMatchAfterElement(
+    const textAfterCurrentPage = getFirstMatchAfterElementWithPredicate(
       currentPageElement,
-      "p,ul"
+      (elem) => !!elem?.textContent
     );
 
     const currentSectionElement =
       props.dom?.querySelector(`[id='${props.section}']`) ?? undefined;
-    const textAfterCurrentSection = getFirstMatchAfterElement(
+    const textAfterCurrentSection = getFirstMatchAfterElementWithPredicate(
       currentSectionElement,
-      "p,ul"
+      (elem) => !!elem?.textContent
     );
 
     const title =
@@ -156,28 +150,29 @@ export const Markdown = {
 
     if (!currentPageElement) {
       return {
-        currentPage: makePageFromH1OrH2(pageElements[0], props.prefix),
+        pageDom: undefined,
+        pageId: undefined,
         title: title.trim(),
         description: description.trim(),
       };
     }
 
-    let nextPage: IPage | undefined;
+    let nextPageId: string | undefined;
 
     pageElements.forEach((h, index) => {
       if (h.id === currentPageElement.id) {
-        nextPage = makePageFromH1OrH2(pageElements[index + 1], props.prefix);
+        nextPageId = pageElements[index + 1]?.id;
       }
     });
 
     const allDomElementsInPage = getAllNextSiblingUntilId(
       currentPageElement,
-      `${nextPage?.id}`
+      `${nextPageId}`
     );
     const pageDom = getPageDom(currentPageElement, allDomElementsInPage);
-    const pageMeta = pageDom.querySelector("page-meta");
-    const author = pageMeta?.getAttribute("author");
-    const date = pageMeta?.getAttribute("date");
+    const pageMetaOriginalElement = pageDom.querySelector("page-meta");
+    const author = pageMetaOriginalElement?.getAttribute("author");
+    const date = pageMetaOriginalElement?.getAttribute("date");
 
     if (author) {
       const metaDom = document.createElement("div");
@@ -189,11 +184,9 @@ export const Markdown = {
     }
     return {
       pageDom: pageDom,
-      currentPage: makePageFromH1OrH2(currentPageElement, props.prefix),
+      pageId: currentPageElement.id,
       title: title.trim(),
       description: description.trim(),
-      author: author,
-      date: date,
     };
   },
 };
@@ -257,34 +250,6 @@ function getElementLevel(element: Element) {
   return parseInt(element.tagName.replace("H", ""));
 }
 
-function makePageFromH1OrH2(
-  element: Element | undefined,
-  url: string
-): IPage | undefined {
-  if (!element) {
-    return undefined;
-  }
-
-  const level = parseInt(element.tagName.replace("H", ""));
-  const previousH1 = getFirstMatchBeforeElement(element, "h1");
-
-  if (level === 1) {
-    return {
-      label: element.textContent ?? "",
-      id: element.id,
-      level: level,
-      url: `${url}/${element.id}`,
-    };
-  }
-
-  return {
-    label: element.textContent ?? "",
-    id: element.id,
-    level: level,
-    url: `${url}/${previousH1?.id}/${element.id}`,
-  };
-}
-
 function getPageDom(currentH1: Element, allElementsInPage: Element[]) {
   const newDom = document.createElement("div");
   newDom.append(currentH1?.cloneNode(true)!);
@@ -321,19 +286,29 @@ function getAllNextSiblingUntilSelector(
   return siblings;
 }
 
-function getFirstMatchAfterElement(
+function getFirstMatchAfterElementWithPredicate(
   elem: Element | undefined | null,
-  selector: string
+  predicate: (elem: Element | undefined | null) => boolean
 ): Element | undefined {
   let currentElement = elem?.nextElementSibling;
 
   while (currentElement) {
-    if (currentElement.matches(selector)) {
+    if (predicate(currentElement)) {
       return currentElement;
     }
 
     currentElement = currentElement.nextElementSibling;
   }
+}
+
+function getFirstMatchAfterElementSelector(
+  elem: Element | undefined | null,
+  selector: string
+): Element | undefined {
+  return getFirstMatchAfterElementWithPredicate(
+    elem,
+    (elem) => elem?.matches(selector) ?? false
+  );
 }
 
 function getFirstMatchBeforeElement(

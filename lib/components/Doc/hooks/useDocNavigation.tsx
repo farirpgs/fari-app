@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { IDocSidebar, ISideBarItems } from "../Doc";
-import { IMarkdownIndexes, IPage } from "../domains/Markdown";
+import { IMarkdownIndexes } from "../domains/Markdown";
 
 export type IUseDocNavigation = ReturnType<typeof useDocNavigation>;
 
 export function useDocNavigation(props: {
-  currentPage: IPage | undefined;
+  currentPageId: string | undefined;
   docSideBar: IDocSidebar | undefined;
   defaultSideBarCategory?: string;
   markdownIndexes: IMarkdownIndexes;
@@ -22,11 +22,11 @@ export function useDocNavigation(props: {
 
   const navigation = useMemo(() => {
     const highlightedItems = getTableOfContentsHighlightedItems(
-      props.currentPage?.id,
+      props.currentPageId,
       sideBar
     );
     const { allPageIds, defaultOpenedCategories } = parseSideBar(sideBar);
-    const currentPageId = props.currentPage?.id ?? "";
+    const currentPageId = props.currentPageId ?? "";
     const currentPageIndex = allPageIds.indexOf(currentPageId);
     const previousPageId = allPageIds[currentPageIndex - 1] ?? undefined;
     const nextPageId = allPageIds[currentPageIndex + 1] ?? undefined;
@@ -45,7 +45,7 @@ export function useDocNavigation(props: {
       nextPageId,
       pageIdsWithoutCategories,
     };
-  }, [props.currentPage, sideBar, props.markdownIndexes.flat]);
+  }, [props.currentPageId, sideBar, props.markdownIndexes.flat]);
 
   const sideBarPossiblyWithMissingItems = useMemo(() => {
     if (navigation.pageIdsWithoutCategories.length === 0) {

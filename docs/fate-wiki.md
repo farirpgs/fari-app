@@ -2,7 +2,9 @@
 
 The ultimate open and community driven Fate wiki resources.
 
-# Condensed / Core / Accelerated<page-meta author="RPDeshaies" />
+# Condensed / Core / Accelerated
+
+<page-meta author="RPDeshaies" />
 
 The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
 
@@ -16,7 +18,9 @@ If you still don't know where to start, here's a tip:
 - [Read Fate Core](/srds/core) for all its great examples and guides on how to play.
 - [Read Fate Accelerated](/srds/accelerated) if you want a more simplified version of the system and want to get started quickly.
 
-# What's the Math Behind The Fate Dice<page-meta author="RPDeshaies" />
+# What's the Math Behind The Fate Dice
+
+<page-meta author="RPDeshaies" />
 
 The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are very different.
 
@@ -76,7 +80,9 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 
 [...]
 
-# How to GM Fate<page-meta author="Dgerrimea" />
+# How to GM Fate
+
+<page-meta author="Dgerrimea" />
 
 ### The Fate Mentality
 

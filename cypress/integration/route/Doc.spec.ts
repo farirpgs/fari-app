@@ -1,6 +1,6 @@
 import { Fari } from "lib/util/Fari";
 
-describe.only("/srds/condensed", () => {
+describe("/srds/condensed", () => {
   it("should be able to navigate using the TOCs", () => {
     Fari.start();
     ["/srds/condensed", "/fate-stunts", "/fate-wiki"].forEach((page) => {

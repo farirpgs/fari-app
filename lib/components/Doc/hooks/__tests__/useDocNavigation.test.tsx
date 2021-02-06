@@ -1,13 +1,13 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { IDocSidebar } from "../../Doc";
-import { IMarkdownIndex, IPage } from "../../domains/Markdown";
+import { IMarkdownIndex } from "../../domains/Markdown";
 import { useDocNavigation } from "../useDocNavigation";
 
 describe("useDocNavigation", () => {
   it("should handle top level and deep default opened items", () => {
     const { result } = renderHook(() => {
       return useDocNavigation({
-        currentPage: undefined,
+        currentPageId: undefined,
         markdownIndexes: {
           flat: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
           tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
@@ -23,9 +23,8 @@ describe("useDocNavigation", () => {
   it("should handle top highlighted items", () => {
     const { result } = renderHook(() => {
       return useDocNavigation({
-        currentPage: {
-          id: "welcome",
-        } as IPage,
+        currentPageId: "welcome",
+
         markdownIndexes: {
           flat: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
           tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
@@ -41,9 +40,7 @@ describe("useDocNavigation", () => {
   it("should handle deep highlighted items", () => {
     const { result } = renderHook(() => {
       return useDocNavigation({
-        currentPage: {
-          id: "credits-2",
-        } as IPage,
+        currentPageId: "credits-2",
         markdownIndexes: {
           flat: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
           tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
@@ -61,7 +58,7 @@ describe("useDocNavigation", () => {
     it("should give me the previous item if it exists", () => {
       const { result } = renderHook(() => {
         return useDocNavigation({
-          currentPage: { id: "chapter-2" } as IPage,
+          currentPageId: "chapter-2",
           markdownIndexes: {
             flat: ([] as Array<
               Partial<IMarkdownIndex>
@@ -78,7 +75,7 @@ describe("useDocNavigation", () => {
     it("should return nothing if there is not previous item", () => {
       const { result } = renderHook(() => {
         return useDocNavigation({
-          currentPage: { id: "welcome" } as IPage,
+          currentPageId: "welcome",
           markdownIndexes: {
             flat: ([] as Array<
               Partial<IMarkdownIndex>
@@ -97,7 +94,7 @@ describe("useDocNavigation", () => {
     it("should give me the next item if it exists", () => {
       const { result } = renderHook(() => {
         return useDocNavigation({
-          currentPage: { id: "chapter-2" } as IPage,
+          currentPageId: "chapter-2",
           markdownIndexes: {
             flat: ([] as Array<
               Partial<IMarkdownIndex>
@@ -114,7 +111,7 @@ describe("useDocNavigation", () => {
     it("should return nothing if there is not next item", () => {
       const { result } = renderHook(() => {
         return useDocNavigation({
-          currentPage: { id: "credits-2" } as IPage,
+          currentPageId: "credits-2",
           markdownIndexes: {
             flat: ([] as Array<
               Partial<IMarkdownIndex>
@@ -133,7 +130,7 @@ describe("useDocNavigation", () => {
     it("should categorized pages that are not wrapped in a category", () => {
       const { result } = renderHook(() => {
         return useDocNavigation({
-          currentPage: { id: "chapter-2" } as IPage,
+          currentPageId: "chapter-2",
           markdownIndexes: {
             flat: ([] as Array<
               Partial<IMarkdownIndex>
@@ -172,7 +169,7 @@ describe("useDocNavigation", () => {
     it("should categorized pages in default category if there is no sidebar", () => {
       const { result } = renderHook(() => {
         return useDocNavigation({
-          currentPage: { id: "chapter-2" } as IPage,
+          currentPageId: "chapter-2",
           markdownIndexes: {
             flat: ([] as Array<
               Partial<IMarkdownIndex>
