@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { Images } from "../../constants/Images";
 
 type Metas = React.DetailedHTMLProps<
   React.MetaHTMLAttributes<HTMLMetaElement>,
@@ -9,6 +10,7 @@ type Metas = React.DetailedHTMLProps<
 export const PageMeta: React.FC<{
   title: string;
   description?: string;
+  image?: string;
   noIndex?: boolean;
 }> = (props) => {
   const title = `${props.title?.trim() || "Fate RPG Companion"} | Fari `;
@@ -27,6 +29,18 @@ export const PageMeta: React.FC<{
     meta.push({
       name: "og:description",
       content: props.description,
+    });
+  }
+
+  if (props.image) {
+    meta.push({
+      name: "og:image",
+      content: props.image,
+    });
+  } else {
+    meta.push({
+      name: "og:image",
+      content: Images.logo,
     });
   }
 

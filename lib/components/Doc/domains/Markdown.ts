@@ -154,6 +154,7 @@ export const Markdown = {
         pageId: undefined,
         title: title.trim(),
         description: description.trim(),
+        image: undefined,
       };
     }
 
@@ -173,6 +174,7 @@ export const Markdown = {
     const pageMetaOriginalElement = pageDom.querySelector("page-meta");
     const author = pageMetaOriginalElement?.getAttribute("author");
     const date = pageMetaOriginalElement?.getAttribute("date");
+    const image = pageMetaOriginalElement?.getAttribute("image");
 
     if (author) {
       const metaDom = document.createElement("div");
@@ -187,6 +189,7 @@ export const Markdown = {
       pageId: currentPageElement.id,
       title: title.trim(),
       description: description.trim(),
+      image: image,
     };
   },
 };

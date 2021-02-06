@@ -133,7 +133,7 @@ export const Doc: React.FC<IProps> = (props) => {
     prefix: props.url,
   });
 
-  const { pageDom, pageId, title, description } = useMarkdownPage({
+  const { pageDom, pageId, title, description, image } = useMarkdownPage({
     url: props.url,
     page: props.page,
     section: section,
@@ -146,8 +146,8 @@ export const Doc: React.FC<IProps> = (props) => {
     docSideBar: props.sideBar,
   });
   const html = pageDom?.innerHTML;
-
-  const shouldRenderImage = props.imageUrl && !isSmall;
+  const imageUrl = image || props.imageUrl;
+  const shouldRenderImage = imageUrl && !isSmall;
   const shouldRenderSectionTitle = title !== props.title;
   const fullPath = location.pathname + location.search;
 
@@ -244,6 +244,7 @@ export const Doc: React.FC<IProps> = (props) => {
       <PageMeta
         title={shouldRenderSectionTitle ? `${title} | ${props.title}` : title}
         description={description}
+        image={imageUrl}
         noIndex={props.noIndex}
       />
       {html ? (
@@ -270,7 +271,7 @@ export const Doc: React.FC<IProps> = (props) => {
                     overflow: "hidden",
                     maskImage:
                       "linear-gradient(to bottom, #000 0%, transparent 100%)",
-                    backgroundImage: `url("${props.imageUrl}")`,
+                    backgroundImage: `url("${imageUrl}")`,
                   })}
                 />
               )}

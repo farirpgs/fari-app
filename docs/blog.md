@@ -1,6 +1,6 @@
 # Fate Moves
 
-<page-meta author="RPDeshaies" date="2021-02-05"></page-meta>
+<page-meta author="RPDeshaies" date="2021-02-05" image="https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2064&q=80"></page-meta>
 
 A Powered by the Apocalypse inspired mechanic for the Fate role-playing game.
 
