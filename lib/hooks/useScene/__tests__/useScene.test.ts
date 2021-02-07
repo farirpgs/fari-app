@@ -468,6 +468,7 @@ fdescribe("useScene", () => {
         result.current.actions.updatePlayerRoll("1", {
           rolls: [1, 1, 1, 1],
           total: 4,
+          type: "4dF",
         });
         result.current.actions.updatePlayerFatePoints("1", 1);
       });

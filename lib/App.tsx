@@ -18,6 +18,7 @@ import {
   DarkModeContext,
   useDarkMode,
 } from "./contexts/DarkModeContext/DarkModeContext";
+import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   ScenesContext,
   useScenes,
@@ -28,11 +29,14 @@ export const App: React.FC<{}> = () => {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
+  const diceManager = useDice();
   return (
     <DarkModeContext.Provider value={darkModeManager}>
       <CharactersContext.Provider value={charactersManager}>
         <ScenesContext.Provider value={scenesManager}>
-          <AppProvider />
+          <DiceContext.Provider value={diceManager}>
+            <AppProvider />
+          </DiceContext.Provider>
         </ScenesContext.Provider>
       </CharactersContext.Provider>
     </DarkModeContext.Provider>

@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { Confetti } from "../../../domains/confetti/Confetti";
-import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
-import { useFudgeDice } from "../useFudgeDice";
+import { IDiceRollWithBonus } from "../../../domains/dice/Dice";
+import { useDiceRolls } from "../useDiceRolls";
 
 jest.mock("../../../domains/confetti/Confetti");
 beforeEach(() => {
@@ -11,15 +11,15 @@ beforeEach(() => {
   Confetti.fireCannon.mockClear();
 });
 
-describe("useFudgeDice", () => {
+describe("useDiceRolls", () => {
   it("should display nothing on load", () => {
     // GIVEN
-    const rolls: Array<IDiceRoll> = [];
+    const rolls: Array<IDiceRollWithBonus> = [];
 
     // WHEN
     const view = renderHook(
       (props) => {
-        return useFudgeDice(props.rolls);
+        return useDiceRolls(props.rolls);
       },
       {
         initialProps: { rolls },
@@ -28,20 +28,22 @@ describe("useFudgeDice", () => {
 
     // THEN
     expect(view.result.current.state.label).toEqual("");
-    expect(view.result.current.state.tooltipTitle).toEqual("");
-    expect(view.result.current.state.tooltipDescription).toEqual("");
+    expect(view.result.current.state.rollDetails).toEqual("");
+    expect(view.result.current.state.rollBonus).toEqual("");
     expect(view.result.current.state.rolling).toEqual(false);
     expect(view.result.current.state.hasRolledOnce).toEqual(false);
     expect(view.result.current.state.color).toEqual("inherit");
   });
   it("should display first roll on load without animation", () => {
     // GIVEN
-    const rolls: Array<IDiceRoll> = [{ total: 4, rolls: [1, 1, 1, 1] }];
+    const rolls: Array<IDiceRollWithBonus> = [
+      { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
+    ];
 
     // WHEN
     const view = renderHook(
       (props) => {
-        return useFudgeDice(props.rolls);
+        return useDiceRolls(props.rolls);
       },
       {
         initialProps: { rolls },
@@ -51,28 +53,29 @@ describe("useFudgeDice", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+4");
-    expect(view.result.current.state.tooltipTitle).toEqual(
-      "[+] [+] [+] [+] (4)"
-    );
-    expect(view.result.current.state.tooltipDescription).toEqual("");
+    expect(view.result.current.state.rollDetails).toEqual("+ + + +");
+    expect(view.result.current.state.total).toEqual("4");
+    expect(view.result.current.state.rollBonus).toEqual("");
     expect(view.result.current.state.rolling).toEqual(false);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
   });
   it("should change colors depending on rolls", async () => {
     // GIVEN
     jest.useFakeTimers();
-    const rolls: Array<IDiceRoll> = [];
+    const rolls: Array<IDiceRollWithBonus> = [];
 
     // WHEN
     const view = renderHook(
       (props) => {
-        return useFudgeDice(props.rolls);
+        return useDiceRolls(props.rolls);
       },
       {
         initialProps: { rolls },
       }
     );
-    view.rerender({ rolls: [...rolls, { total: 4, rolls: [1, 1, 1, 1] }] });
+    view.rerender({
+      rolls: [...rolls, { total: 4, rolls: [1, 1, 1, 1], type: "4dF" }],
+    });
     act(() => {
       jest.runAllTimers();
     });
@@ -80,7 +83,7 @@ describe("useFudgeDice", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+4");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[+] [+] [+] [+] (4)"
     );
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
@@ -90,8 +93,8 @@ describe("useFudgeDice", () => {
     view.rerender({
       rolls: [
         ...rolls,
-        { total: 3, rolls: [1, 1, 1, 0] },
-        { total: 4, rolls: [1, 1, 1, 1] },
+        { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
+        { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
       ],
     });
     act(() => {
@@ -101,7 +104,7 @@ describe("useFudgeDice", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+3");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[+] [+] [+] [ ] (3)"
     );
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
@@ -111,9 +114,9 @@ describe("useFudgeDice", () => {
     view.rerender({
       rolls: [
         ...rolls,
-        { total: 0, rolls: [0, 0, 0, 0] },
-        { total: 3, rolls: [1, 1, 1, 0] },
-        { total: 4, rolls: [1, 1, 1, 1] },
+        { total: 0, rolls: [0, 0, 0, 0], type: "4dF" },
+        { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
+        { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
       ],
     });
     act(() => {
@@ -122,7 +125,7 @@ describe("useFudgeDice", () => {
 
     // THEN
     expect(view.result.current.state.label).toEqual("0");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[ ] [ ] [ ] [ ] (0)"
     );
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
@@ -132,10 +135,10 @@ describe("useFudgeDice", () => {
     view.rerender({
       rolls: [
         ...rolls,
-        { total: -3, rolls: [-1, -1, -1, 0] },
-        { total: 0, rolls: [0] },
-        { total: 3, rolls: [1, 1, 1, 0] },
-        { total: 4, rolls: [1, 1, 1, 1] },
+        { total: -3, rolls: [-1, -1, -1, 0], type: "4dF" },
+        { total: 0, rolls: [0], type: "4dF" },
+        { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
+        { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
       ],
     });
     act(() => {
@@ -145,7 +148,7 @@ describe("useFudgeDice", () => {
     // THEN
     expect(Confetti.fireCannon).toHaveBeenCalledTimes(0);
     expect(view.result.current.state.label).toEqual("-3");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[-] [-] [-] [ ] (-3)"
     );
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
@@ -155,11 +158,11 @@ describe("useFudgeDice", () => {
     view.rerender({
       rolls: [
         ...rolls,
-        { total: -4, rolls: [-1, -1, -1, -1] },
-        { total: -3, rolls: [-1, -1, -1, 0] },
-        { total: 0, rolls: [0] },
-        { total: 3, rolls: [1, 1, 1, 0] },
-        { total: 4, rolls: [1, 1, 1, 1] },
+        { total: -4, rolls: [-1, -1, -1, -1], type: "4dF" },
+        { total: -3, rolls: [-1, -1, -1, 0], type: "4dF" },
+        { total: 0, rolls: [0], type: "4dF" },
+        { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
+        { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
       ],
     });
     act(() => {
@@ -169,7 +172,7 @@ describe("useFudgeDice", () => {
     // THEN
     expect(Confetti.fireCannon).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("-4");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[-] [-] [-] [-] (-4)"
     );
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
@@ -177,12 +180,12 @@ describe("useFudgeDice", () => {
   });
   it("should handle labels on load and after and going back to without labels", async () => {
     // GIVEN
-    const rolls: Array<IDiceRoll> = [];
+    const rolls: Array<IDiceRollWithBonus> = [];
 
     // WHEN
     const view = renderHook(
       (props) => {
-        return useFudgeDice(props.rolls);
+        return useDiceRolls(props.rolls);
       },
       {
         initialProps: { rolls },
@@ -193,7 +196,13 @@ describe("useFudgeDice", () => {
     view.rerender({
       rolls: [
         ...rolls,
-        { total: 2, rolls: [0, 0, 1, 1], bonus: 2, bonusLabel: "Notice" },
+        {
+          total: 2,
+          rolls: [0, 0, 1, 1],
+          bonus: 2,
+          bonusLabel: "Notice",
+          type: "4dF",
+        },
       ],
     });
     act(() => {
@@ -202,17 +211,28 @@ describe("useFudgeDice", () => {
 
     // THEN
     expect(view.result.current.state.label).toEqual("+4");
-    expect(view.result.current.state.tooltipTitle).toEqual(
-      "[ ] [ ] [+] [+] (2)"
-    );
-    expect(view.result.current.state.tooltipDescription).toEqual("Notice (+2)");
+    expect(view.result.current.state.rollDetails).toEqual("0 0 + +");
+    expect(view.result.current.state.total).toEqual("2");
+    expect(view.result.current.state.rollBonus).toEqual("Notice (+2)");
 
     // WHEN
     view.rerender({
       rolls: [
         ...rolls,
-        { total: 4, rolls: [1, 1, 1, 1], bonus: 4, bonusLabel: "Shoot" },
-        { total: 2, rolls: [0, 0, 1, 1], bonus: 2, bonusLabel: "Notice" },
+        {
+          total: 4,
+          rolls: [1, 1, 1, 1],
+          bonus: 4,
+          bonusLabel: "Shoot",
+          type: "4dF",
+        },
+        {
+          total: 2,
+          rolls: [0, 0, 1, 1],
+          bonus: 2,
+          bonusLabel: "Notice",
+          type: "4dF",
+        },
       ],
     });
     act(() => {
@@ -222,18 +242,30 @@ describe("useFudgeDice", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+8");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[+] [+] [+] [+] (4)"
     );
-    expect(view.result.current.state.tooltipDescription).toEqual("Shoot (+4)");
+    expect(view.result.current.state.rollBonus).toEqual("Shoot (+4)");
 
     // WHEN
     view.rerender({
       rolls: [
         ...rolls,
-        { total: -3, rolls: [-1, -1, -1, 0] },
-        { total: 4, rolls: [1, 1, 1, 1], bonus: 4, bonusLabel: "Shoot" },
-        { total: 2, rolls: [0, 0, 1, 1], bonus: 2, bonusLabel: "Notice" },
+        { total: -3, rolls: [-1, -1, -1, 0], type: "4dF" },
+        {
+          total: 4,
+          rolls: [1, 1, 1, 1],
+          bonus: 4,
+          bonusLabel: "Shoot",
+          type: "4dF",
+        },
+        {
+          total: 2,
+          rolls: [0, 0, 1, 1],
+          bonus: 2,
+          bonusLabel: "Notice",
+          type: "4dF",
+        },
       ],
     });
     act(() => {
@@ -242,9 +274,9 @@ describe("useFudgeDice", () => {
 
     // THEN
     expect(view.result.current.state.label).toEqual("-3");
-    expect(view.result.current.state.tooltipTitle).toEqual(
+    expect(view.result.current.state.rollDetails).toEqual(
       "[-] [-] [-] [ ] (-3)"
     );
-    expect(view.result.current.state.tooltipDescription).toEqual("");
+    expect(view.result.current.state.rollBonus).toEqual("");
   });
 });

@@ -2,38 +2,49 @@ import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Collapse from "@material-ui/core/Collapse";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import React, { useContext } from "react";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
-import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
+import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 
 type IProps = {
-  rolls: Array<IDiceRoll>;
+  rolls: Array<IDiceRollWithBonus>;
   size: string;
   fontSize: string;
   borderSize: string;
-  borderColor?: string;
+
   disabled?: boolean;
   showDetails?: boolean;
   onClick: () => void;
   onRolling?: (rolling: boolean) => void;
-  onFinalResult?: (realRoll: IDiceRoll) => void;
+  onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
 };
 
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const diceTextColors = useTextColors(theme.palette.background.paper);
-  const diceManager = useFudgeDice(props.rolls, {
+  const diceRollsManager = useDiceRolls(props.rolls, {
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
   });
+  const [diceMenuAnchorElement, setDiceMenuAnchorElement] = React.useState<
+    EventTarget & HTMLButtonElement
+  >();
+  const diceManager = useContext(DiceContext);
 
-  function onClick() {
-    if (diceManager.state.rolling) {
+  const handleDiceTypeMenuClose = () => {
+    setDiceMenuAnchorElement(undefined);
+  };
+
+  function handleButtonBoxClick() {
+    if (diceRollsManager.state.rolling) {
       return;
     }
     props.onClick();
@@ -43,11 +54,9 @@ export const DiceBox: React.FC<IProps> = (props) => {
     fontSize: props.fontSize,
     fontFamily: Font.monospace,
     lineHeight: "normal",
-    color: diceManager.state.color,
+    color: diceRollsManager.state.color,
     background: theme.palette.background.paper,
-    border: `${props.borderSize} solid ${
-      props.borderColor ?? theme.palette.primary.main
-    }`,
+    border: `${props.borderSize} solid ${theme.palette.text.primary}`,
     borderRadius: "4px",
     width: props.size,
     height: props.size,
@@ -64,16 +73,28 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
 
-  const tooltipContent = diceManager.state.tooltipTitle && (
-    <Box textAlign="center">
-      {diceManager.state.tooltipTitle && (
-        <Box>{diceManager.state.tooltipTitle}</Box>
-      )}
-      {diceManager.state.tooltipDescription && (
-        <Box>{diceManager.state.tooltipDescription}</Box>
-      )}
-    </Box>
-  );
+  const type = diceRollsManager.state.type;
+  const tooltipContent =
+    diceRollsManager.state.shouldDisplay && !diceMenuAnchorElement ? (
+      <Box textAlign="center">
+        {diceRollsManager.state.rollDetails && (
+          <Box>
+            <Box
+              display="inline"
+              fontFamily={type === "1dF" || type === "4dF" ? "fate" : "inherit"}
+            >
+              {diceRollsManager.state.rollDetails}
+            </Box>
+            <Box display="inline"> = {diceRollsManager.state.total}</Box>
+          </Box>
+        )}
+        {diceRollsManager.state.rollBonus && (
+          <Box>{diceRollsManager.state.rollBonus}</Box>
+        )}
+      </Box>
+    ) : (
+      ""
+    );
 
   if (props.showDetails) {
     return (
@@ -108,24 +129,68 @@ export const DiceBox: React.FC<IProps> = (props) => {
             borderRadius: "50%",
             color: diceTextColors.primary,
           })}
-          disabled={props.disabled || diceManager.state.rolling}
+          disabled={props.disabled || diceRollsManager.state.rolling}
           onClick={(e) => {
             e.stopPropagation();
-            onClick();
+            handleButtonBoxClick();
+          }}
+          onContextMenu={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            setDiceMenuAnchorElement(e.currentTarget);
           }}
         >
           <Typography
             component="span"
             data-cy="dice"
-            data-cy-value={diceManager.state.label}
-            data-cy-rolling={diceManager.state.rolling}
+            data-cy-value={diceRollsManager.state.label}
+            data-cy-rolling={diceRollsManager.state.rolling}
             className={cx(diceStyle, {
-              [diceRollingAnimationStyle]: diceManager.state.rolling,
+              [diceRollingAnimationStyle]: diceRollsManager.state.rolling,
             })}
           >
-            {diceManager.state.label}
+            {diceRollsManager.state.label}
           </Typography>
         </ButtonBase>
+        <Menu
+          keepMounted
+          open={!!diceMenuAnchorElement}
+          anchorEl={diceMenuAnchorElement}
+          onClose={handleDiceTypeMenuClose}
+        >
+          <MenuItem
+            onClick={() => {
+              diceManager.actions.setDiceType("4dF");
+              handleDiceTypeMenuClose();
+            }}
+          >
+            4dF
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              diceManager.actions.setDiceType("2d6");
+              handleDiceTypeMenuClose();
+            }}
+          >
+            2d6
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              diceManager.actions.setDiceType("coin-toss");
+              handleDiceTypeMenuClose();
+            }}
+          >
+            Coin toss
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              diceManager.actions.setDiceType("1dF");
+              handleDiceTypeMenuClose();
+            }}
+          >
+            1dF
+          </MenuItem>
+        </Menu>
       </div>
     );
   }

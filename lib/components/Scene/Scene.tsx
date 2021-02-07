@@ -55,13 +55,14 @@ import {
   ICharacter,
   useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
-import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
@@ -136,6 +137,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const theme = useTheme();
   const logger = useLogger();
+  const rollDice = useRollDice();
   const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
@@ -171,7 +173,6 @@ export const Scene: React.FC<IProps> = (props) => {
     isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
 
   useBlockReload(shouldBlockLeaving);
-
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -211,11 +212,11 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function roll(player: IPlayer, options: IRollDiceOptions) {
     if (isGM) {
-      sceneManager.actions.updatePlayerRoll(player.id, Dice.roll4DF(options));
+      sceneManager.actions.updatePlayerRoll(player.id, rollDice(options));
     } else {
       connectionsManager?.actions.sendToHost<IPeerActions>({
         action: "roll",
-        payload: Dice.roll4DF(options),
+        payload: rollDice(options),
       });
     }
   }

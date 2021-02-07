@@ -18,7 +18,7 @@ import {
 } from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -619,7 +619,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerRoll(id: string, roll: IDiceRoll) {
+  function updatePlayerRoll(id: string, roll: IDiceRollWithBonus) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];

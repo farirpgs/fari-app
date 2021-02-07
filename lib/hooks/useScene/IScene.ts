@@ -1,14 +1,14 @@
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { ICharacter } from "../../contexts/CharactersContext/CharactersContext";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { AspectType } from "./AspectType";
 
 export interface IPlayer {
   id: string;
   playerName?: string;
   character?: ICharacter;
-  rolls: Array<IDiceRoll>;
+  rolls: Array<IDiceRollWithBonus>;
   playedDuringTurn: boolean;
   fatePoints: number;
   offline: boolean;
