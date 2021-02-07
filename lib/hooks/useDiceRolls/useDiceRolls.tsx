@@ -151,7 +151,10 @@ export function useDiceRolls(
   };
 }
 
-export function formatDiceNumber(n: number, type: IDiceRollType): string {
+export function formatDiceNumber(
+  n: number,
+  type: IDiceRollType = "4dF"
+): string {
   if (type !== "1dF" && type !== "4dF") {
     return n.toString();
   }

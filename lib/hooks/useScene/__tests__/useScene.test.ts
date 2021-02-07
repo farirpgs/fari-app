@@ -484,6 +484,7 @@ fdescribe("useScene", () => {
           {
             rolls: [1, 1, 1, 1],
             total: 4,
+            type: "4dF",
           },
         ],
       });
@@ -503,6 +504,7 @@ fdescribe("useScene", () => {
           {
             rolls: [1, 1, 1, 1],
             total: 4,
+            type: "4dF",
           },
         ],
       });

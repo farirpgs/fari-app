@@ -19,7 +19,7 @@ export function useDice() {
 export function useRollDice() {
   const diceManager = useContext(DiceContext);
 
-  function roll(options: IRollDiceOptions): IDiceRollWithBonus {
+  function roll(options: IRollDiceOptions = {}): IDiceRollWithBonus {
     const result = rollDice(diceManager.state.diceType);
 
     return { ...result, bonus: options.bonus, bonusLabel: options.bonusLabel };

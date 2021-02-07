@@ -25,6 +25,7 @@ export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
   playerName: string | undefined;
   readonly: boolean;
+  isMe: boolean;
   onCharacterDialogOpen(): void;
   onRoll(options: IRollDiceOptions): void;
 }> = (props) => {
@@ -132,9 +133,9 @@ export const CharacterCard: React.FC<{
                     <Link
                       className={css([
                         {
-                          cursor: props.readonly ? "inherit" : "pointer",
+                          cursor: !props.isMe ? "inherit" : "pointer",
                         },
-                        props.readonly && {
+                        !props.isMe && {
                           "color": theme.palette.text.primary,
                           "&:hover": {
                             textDecoration: "none",
@@ -143,7 +144,7 @@ export const CharacterCard: React.FC<{
                       ])}
                       data-cy={`character-card.skill.${skill.name}`}
                       onClick={() => {
-                        if (props.readonly) {
+                        if (!props.isMe) {
                           return;
                         }
                         const bonus = parseInt(skill.value) || 0;
