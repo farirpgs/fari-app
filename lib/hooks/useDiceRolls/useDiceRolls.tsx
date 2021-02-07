@@ -68,11 +68,13 @@ export function useDiceRolls(
   const shouldDisplay = !rolling && !!result;
 
   const diceGroup = DiceGroups[realRoll?.type];
-  const label = shouldDisplay ? formatDiceNumber(total + bonus) : "";
+  const label = shouldDisplay
+    ? formatDiceNumber(total + bonus, realRoll?.type)
+    : "";
   const rollDetails =
-    shouldDisplay && diceGroup.numberOfDice  > 1 ? currentRollsWithSigns : "";
+    shouldDisplay && diceGroup.numberOfDice > 1 ? currentRollsWithSigns : "";
   const rollBonus = bonusLabel
-    ? `${bonusLabel} (${formatDiceNumber(bonus)})`
+    ? `${bonusLabel} (${formatDiceNumber(bonus, realRoll?.type)})`
     : "";
 
   useEffect(() => {
@@ -149,7 +151,10 @@ export function useDiceRolls(
   };
 }
 
-export function formatDiceNumber(n: number): string {
+export function formatDiceNumber(n: number, type: IDiceRollType): string {
+  if (type !== "1dF" && type !== "4dF") {
+    return n.toString();
+  }
   if (n > 0) {
     return `+${n}`;
   }

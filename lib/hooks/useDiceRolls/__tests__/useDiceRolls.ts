@@ -54,7 +54,7 @@ describe("useDiceRolls", () => {
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+4");
     expect(view.result.current.state.rollDetails).toEqual("+ + + +");
-    expect(view.result.current.state.total).toEqual("4");
+    expect(view.result.current.state.total).toEqual(4);
     expect(view.result.current.state.rollBonus).toEqual("");
     expect(view.result.current.state.rolling).toEqual(false);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
@@ -83,9 +83,8 @@ describe("useDiceRolls", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+4");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[+] [+] [+] [+] (4)"
-    );
+    expect(view.result.current.state.rollDetails).toEqual("+ + + +");
+    expect(view.result.current.state.total).toEqual(4);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
     expect(view.result.current.state.color).toEqual("#4caf50");
 
@@ -104,9 +103,8 @@ describe("useDiceRolls", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+3");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[+] [+] [+] [ ] (3)"
-    );
+    expect(view.result.current.state.rollDetails).toEqual("+ + + 0");
+    expect(view.result.current.state.total).toEqual(3);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
     expect(view.result.current.state.color).toEqual("#4caf50");
 
@@ -125,9 +123,8 @@ describe("useDiceRolls", () => {
 
     // THEN
     expect(view.result.current.state.label).toEqual("0");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[ ] [ ] [ ] [ ] (0)"
-    );
+    expect(view.result.current.state.rollDetails).toEqual("0 0 0 0");
+    expect(view.result.current.state.total).toEqual(0);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
     expect(view.result.current.state.color).toEqual("inherit");
 
@@ -148,9 +145,8 @@ describe("useDiceRolls", () => {
     // THEN
     expect(Confetti.fireCannon).toHaveBeenCalledTimes(0);
     expect(view.result.current.state.label).toEqual("-3");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[-] [-] [-] [ ] (-3)"
-    );
+    expect(view.result.current.state.rollDetails).toEqual("- - - 0");
+    expect(view.result.current.state.total).toEqual(-3);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
     expect(view.result.current.state.color).toEqual("#f44336");
 
@@ -172,9 +168,9 @@ describe("useDiceRolls", () => {
     // THEN
     expect(Confetti.fireCannon).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("-4");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[-] [-] [-] [-] (-4)"
-    );
+
+    expect(view.result.current.state.rollDetails).toEqual("- - - -");
+    expect(view.result.current.state.total).toEqual(-4);
     expect(view.result.current.state.hasRolledOnce).toEqual(true);
     expect(view.result.current.state.color).toEqual("#f44336");
   });
@@ -212,7 +208,7 @@ describe("useDiceRolls", () => {
     // THEN
     expect(view.result.current.state.label).toEqual("+4");
     expect(view.result.current.state.rollDetails).toEqual("0 0 + +");
-    expect(view.result.current.state.total).toEqual("2");
+    expect(view.result.current.state.total).toEqual(2);
     expect(view.result.current.state.rollBonus).toEqual("Notice (+2)");
 
     // WHEN
@@ -242,9 +238,9 @@ describe("useDiceRolls", () => {
     // THEN
     expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
     expect(view.result.current.state.label).toEqual("+8");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[+] [+] [+] [+] (4)"
-    );
+
+    expect(view.result.current.state.rollDetails).toEqual("+ + + +");
+    expect(view.result.current.state.total).toEqual(4);
     expect(view.result.current.state.rollBonus).toEqual("Shoot (+4)");
 
     // WHEN
@@ -274,9 +270,9 @@ describe("useDiceRolls", () => {
 
     // THEN
     expect(view.result.current.state.label).toEqual("-3");
-    expect(view.result.current.state.rollDetails).toEqual(
-      "[-] [-] [-] [ ] (-3)"
-    );
+
+    expect(view.result.current.state.rollDetails).toEqual("- - - 0");
+    expect(view.result.current.state.total).toEqual(-3);
     expect(view.result.current.state.rollBonus).toEqual("");
   });
 });
