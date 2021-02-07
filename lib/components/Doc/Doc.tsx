@@ -158,6 +158,7 @@ export const Doc: React.FC<IProps> = (props) => {
       if (!fullPath.includes("?")) {
         window.scrollTo(0, 0);
       }
+      setMobileMenuOpen(false);
     },
     [fullPath]
   );
@@ -262,7 +263,7 @@ export const Doc: React.FC<IProps> = (props) => {
                     marginTop: "-2rem",
                     marginBottom: "1rem",
                     width: "100%",
-                    height: isSmall ? "8rem" : "8rem",
+                    height: "10rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
@@ -306,9 +307,6 @@ export const Doc: React.FC<IProps> = (props) => {
 
                 {renderEditButton()}
 
-                <Box my="2rem">
-                  <Divider />
-                </Box>
                 {renderNavigationButtons()}
                 {renderMobileMenu()}
               </Container>
@@ -357,7 +355,7 @@ export const Doc: React.FC<IProps> = (props) => {
     }
     const githubHash = pageId ? `#${pageId}` : "";
     return (
-      <Box my=".5rem">
+      <Box my=".5rem" pb="2rem">
         <Grid container justify="flex-start">
           <Grid item>
             <Button
@@ -505,57 +503,60 @@ export const Doc: React.FC<IProps> = (props) => {
       (i) => i.id === navigation.nextPageId
     );
     return (
-      <Grid
-        container
-        spacing={2}
-        justify={
-          previousIndex && !nextIndex
-            ? "flex-start"
-            : !previousIndex && nextIndex
-            ? "flex-end"
-            : "space-between"
-        }
-      >
-        {previousIndex && (
-          <Grid container item xs={12} sm={6} justify="flex-start">
-            <Button
-              startIcon={<NavigateBeforeIcon />}
-              fullWidth={isSmall}
-              className={css({
-                textAlign: "left",
-              })}
-              variant="outlined"
-              color="primary"
-              data-cy="doc.previous"
-              onClick={() => {
-                handleGoToIndex(previousIndex);
-              }}
-            >
-              {truncate(previousIndex?.label ?? "", { length: 50 })}
-            </Button>
-          </Grid>
-        )}
-
-        {nextIndex && (
-          <Grid container item xs={12} sm={6} justify="flex-end">
-            <Button
-              endIcon={<NavigateNextIcon />}
-              fullWidth={isSmall}
-              className={css({
-                textAlign: "right",
-              })}
-              variant="outlined"
-              color="primary"
-              data-cy="doc.next"
-              onClick={() => {
-                handleGoToIndex(nextIndex);
-              }}
-            >
-              {truncate(nextIndex?.label ?? "", { length: 50 })}
-            </Button>
-          </Grid>
-        )}
-      </Grid>
+      <Box>
+        <Grid
+          container
+          spacing={2}
+          justify={
+            previousIndex && !nextIndex
+              ? "flex-start"
+              : !previousIndex && nextIndex
+              ? "flex-end"
+              : "space-between"
+          }
+        >
+          {previousIndex && (
+            <Grid container item xs={12} sm={6} justify="flex-start">
+              <Button
+                startIcon={<NavigateBeforeIcon />}
+                fullWidth={isSmall}
+                className={css({
+                  height: "4rem",
+                  textAlign: "left",
+                })}
+                variant="outlined"
+                color="primary"
+                data-cy="doc.previous"
+                onClick={() => {
+                  handleGoToIndex(previousIndex);
+                }}
+              >
+                {truncate(previousIndex?.label ?? "", { length: 50 })}
+              </Button>
+            </Grid>
+          )}
+          {nextIndex && (
+            <Grid container item xs={12} sm={6} justify="flex-end">
+              <Button
+                endIcon={<NavigateNextIcon />}
+                fullWidth={isSmall}
+                className={css({
+                  height: "4rem",
+                  textAlign: "right",
+                })}
+                variant="outlined"
+                color="primary"
+                data-cy="doc.next"
+                onClick={() => {
+                  handleGoToIndex(nextIndex);
+                }}
+              >
+                {truncate(nextIndex?.label ?? "", { length: 50 })}
+              </Button>
+            </Grid>
+          )}
+        </Grid>
+      </Box>
     );
   }
 
