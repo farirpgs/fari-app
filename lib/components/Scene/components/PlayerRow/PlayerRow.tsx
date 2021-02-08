@@ -184,7 +184,7 @@ export const PlayerRow: React.FC<
               size="2rem"
               fontSize="1.25rem"
               borderSize=".15rem"
-              disabled={!props.isMe}
+              disabled={!canControl}
               onClick={() => {
                 handleRoll({});
               }}

@@ -212,7 +212,18 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const handleSetRoll = (result: IDiceRoll) => {
     if (isGM) {
-      sceneManager.actions.updateGMRoll(result);
+      sceneManager.actions.updateGmRoll(result);
+    } else {
+      connectionsManager?.actions.sendToHost<IPeerActions>({
+        action: "roll",
+        payload: result,
+      });
+    }
+  };
+
+  const handleSetPlayerRoll = (playerId: string, result: IDiceRoll) => {
+    if (isGM) {
+      sceneManager.actions.updatePlayerRoll(playerId, result);
     } else {
       connectionsManager?.actions.sendToHost<IPeerActions>({
         action: "roll",
@@ -436,7 +447,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         dialog={true}
                         rolls={player.rolls}
                         onRoll={(options) => {
-                          handleSetRoll(rollDice(options));
+                          handleSetPlayerRoll(player.id, rollDice(options));
                         }}
                         onSave={(updatedCharacter) => {
                           if (isGM) {
@@ -480,7 +491,7 @@ export const Scene: React.FC<IProps> = (props) => {
                           );
                         }}
                         onDiceRoll={(options: IRollDiceOptions) => {
-                          handleSetRoll(rollDice(options));
+                          handleSetPlayerRoll(player.id, rollDice(options));
                         }}
                         onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                           if (isGM) {
@@ -605,7 +616,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       playerName={player.playerName}
                       characterSheet={player.character}
                       onRoll={(options) => {
-                        handleSetRoll(rollDice(options));
+                        handleSetPlayerRoll(player.id, rollDice(options));
                       }}
                       onCharacterDialogOpen={() => {
                         setCharacterDialogPlayerId(player.id);

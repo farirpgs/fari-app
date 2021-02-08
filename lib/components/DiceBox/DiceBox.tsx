@@ -1,14 +1,13 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import Collapse from "@material-ui/core/Collapse";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import Grow from "@material-ui/core/Grow";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import React, { useContext } from "react";
-import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import React from "react";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
@@ -34,14 +33,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
   });
-  const [diceMenuAnchorElement, setDiceMenuAnchorElement] = React.useState<
-    EventTarget & HTMLButtonElement
-  >();
-  const diceManager = useContext(DiceContext);
-
-  const handleDiceTypeMenuClose = () => {
-    setDiceMenuAnchorElement(undefined);
-  };
+  const tooltipBackground = "#182026";
+  const tooltipColor = useTextColors(tooltipBackground);
 
   function handleButtonBoxClick() {
     if (diceRollsManager.state.rolling) {
@@ -58,7 +51,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
     background: theme.palette.background.paper,
     border: `${props.borderSize} solid ${theme.palette.text.primary}`,
     borderRadius: "4px",
-    width: props.size,
+    padding: ".2rem",
+    minWidth: props.size,
     height: props.size,
     display: "flex",
     justifyContent: "center",
@@ -73,28 +67,73 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
 
-  const type = diceRollsManager.state.type;
-  const tooltipContent =
-    diceRollsManager.state.shouldDisplay && !diceMenuAnchorElement ? (
-      <Box textAlign="center">
-        {diceRollsManager.state.rollDetails && (
-          <Box>
-            <Box
-              display="inline"
-              fontFamily={type === "1dF" || type === "4dF" ? "fate" : "inherit"}
-            >
-              {diceRollsManager.state.rollDetails}
-            </Box>
-            <Box display="inline"> = {diceRollsManager.state.total}</Box>
+  const tooltipStyle = css({
+    background: tooltipBackground,
+    borderRadius: "6px",
+    color: tooltipColor.primary,
+    minWidth: "14rem",
+    maxWidth: "none",
+    padding: "0",
+    boxShadow: theme.shadows[2],
+  });
+
+  const tooltipContent = !diceRollsManager.state.finalResultHidden ? (
+    <Box p="1rem">
+      <Grid container alignItems="center" wrap="nowrap" spacing={4}>
+        <Grid item xs>
+          <Box
+            fontSize=".8rem"
+            fontWeight="bold"
+            lineHeight={Font.lineHeight(0.8)}
+            className={css({
+              textTransform: "uppercase",
+              color: theme.palette.secondary.light,
+            })}
+          >
+            {"Roll"}
           </Box>
-        )}
-        {diceRollsManager.state.rollBonus && (
-          <Box>{diceRollsManager.state.rollBonus}</Box>
-        )}
-      </Box>
-    ) : (
-      ""
-    );
+          <Box
+            fontSize="1.5rem"
+            color={tooltipColor.primary}
+            lineHeight={Font.lineHeight(1.5)}
+            fontWeight="bold"
+            fontFamily={
+              diceRollsManager.state.display.type === "1dF" ||
+              diceRollsManager.state.display.type === "4dF"
+                ? "fate"
+                : "inherit"
+            }
+          >
+            {diceRollsManager.state.display.spreaded}
+          </Box>
+          <Box
+            fontSize="1rem"
+            color={tooltipColor.secondary}
+            lineHeight={Font.lineHeight(1)}
+          >
+            {diceRollsManager.state.display.explanation}
+          </Box>
+        </Grid>
+        <Divider
+          orientation="vertical"
+          flexItem
+          className={css({ background: tooltipColor.disabled })}
+        />
+        <Grid item>
+          <Box
+            fontSize="2rem"
+            fontWeight="bold"
+            lineHeight={Font.lineHeight(2)}
+            color={tooltipColor.primary}
+          >
+            {diceRollsManager.state.display.formatted}
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  ) : (
+    ""
+  );
 
   if (props.showDetails) {
     return (
@@ -110,10 +149,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
       <Tooltip
         title={tooltipContent}
         classes={{
-          tooltip: css({
-            fontSize: "1.2rem",
-            fontFamily: "monospace",
-          }),
+          tooltip: tooltipStyle,
         }}
       >
         {renderDice()}
@@ -134,63 +170,21 @@ export const DiceBox: React.FC<IProps> = (props) => {
             e.stopPropagation();
             handleButtonBoxClick();
           }}
-          onContextMenu={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            setDiceMenuAnchorElement(e.currentTarget);
-          }}
         >
           <Typography
             component="span"
             data-cy="dice"
-            data-cy-value={diceRollsManager.state.label}
+            data-cy-value={diceRollsManager.state.display.formatted}
             data-cy-rolling={diceRollsManager.state.rolling}
             className={cx(diceStyle, {
               [diceRollingAnimationStyle]: diceRollsManager.state.rolling,
             })}
           >
-            {diceRollsManager.state.label}
+            {diceRollsManager.state.finalResultHidden
+              ? ""
+              : diceRollsManager.state.display.formatted}
           </Typography>
         </ButtonBase>
-        <Menu
-          keepMounted
-          open={!!diceMenuAnchorElement}
-          anchorEl={diceMenuAnchorElement}
-          onClose={handleDiceTypeMenuClose}
-        >
-          <MenuItem
-            onClick={() => {
-              diceManager.actions.setDiceType("4dF");
-              handleDiceTypeMenuClose();
-            }}
-          >
-            4dF
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              diceManager.actions.setDiceType("2d6");
-              handleDiceTypeMenuClose();
-            }}
-          >
-            2d6
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              diceManager.actions.setDiceType("coin-toss");
-              handleDiceTypeMenuClose();
-            }}
-          >
-            Coin toss
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              diceManager.actions.setDiceType("1dF");
-              handleDiceTypeMenuClose();
-            }}
-          >
-            1dF
-          </MenuItem>
-        </Menu>
       </div>
     );
   }
@@ -201,17 +195,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
 
     return (
-      <Collapse in={!!tooltipContent}>
-        <Box
-          pt="1rem"
-          className={css({
-            fontSize: "1.2rem",
-            fontFamily: "monospace",
-          })}
-        >
+      <Grow in={!!tooltipContent}>
+        <Box mt="1rem" className={tooltipStyle}>
           {tooltipContent}
         </Box>
-      </Collapse>
+      </Grow>
     );
   }
 };

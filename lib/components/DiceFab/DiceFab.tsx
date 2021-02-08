@@ -55,17 +55,27 @@ export const DiceFab: React.FC<{ onSelect?(result: IDiceRoll): void }> = (
         onOpen={handleOpenFab}
       >
         <SpeedDialAction
-          tooltipTitle={"Select"}
+          tooltipTitle="Select"
           icon={<Typography>{"4Df"}</Typography>}
           onClick={() => handleSetDiceType("4dF")}
         />
         <SpeedDialAction
-          tooltipTitle={"Select"}
+          tooltipTitle="Select"
           icon={<Typography>{"1dF"}</Typography>}
           onClick={() => handleSetDiceType("1dF")}
         />
         <SpeedDialAction
-          tooltipTitle={"Select"}
+          tooltipTitle="Select"
+          icon={<Typography>{"Coin"}</Typography>}
+          onClick={() => handleSetDiceType("Coin")}
+        />
+        <SpeedDialAction
+          tooltipTitle="Select"
+          icon={<Typography>{"1d%"}</Typography>}
+          onClick={() => handleSetDiceType("1d100")}
+        />
+        <SpeedDialAction
+          tooltipTitle="Select"
           icon={<Typography>{"2d6"}</Typography>}
           onClick={() => handleSetDiceType("2d6")}
         />

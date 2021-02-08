@@ -133,9 +133,9 @@ export const CharacterCard: React.FC<{
                     <Link
                       className={css([
                         {
-                          cursor: !props.isMe ? "inherit" : "pointer",
+                          cursor: props.readonly ? "inherit" : "pointer",
                         },
-                        !props.isMe && {
+                        props.readonly && {
                           "color": theme.palette.text.primary,
                           "&:hover": {
                             textDecoration: "none",
@@ -144,7 +144,7 @@ export const CharacterCard: React.FC<{
                       ])}
                       data-cy={`character-card.skill.${skill.name}`}
                       onClick={() => {
-                        if (!props.isMe) {
+                        if (props.readonly) {
                           return;
                         }
                         const bonus = parseInt(skill.value) || 0;

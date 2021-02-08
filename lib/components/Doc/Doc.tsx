@@ -360,7 +360,6 @@ export const Doc: React.FC<IProps> = (props) => {
           <Grid item>
             <Button
               color="default"
-              // variant="outlined"
               component="a"
               startIcon={<EditIcon />}
               target="_blank"
