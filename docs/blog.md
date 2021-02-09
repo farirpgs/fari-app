@@ -40,15 +40,21 @@ Enjoy!
 
 ### Harm Someone
 
-Use `Attack` <fate>A</fate> and <fate>+</fate> `Fight / Shoot / Provoke` to deal damage to another character.
+Use `Attack` <fate>A</fate> and `Fight / Shoot / Provoke` to deal damage to another character.
+
+### Defend Yourself
+
+Use `Defend` <fate>D</fate> and `Athletics / Fight` to protect yourself from immediate danger.
 
 ### Brace Yourself
 
-Use `Defend` <fate>D</fate> and <fate>+</fate> `Athletics / Fight` to protect yourself from immediate danger.
+Skip your turn and gain a `+2` to all your `Defend` <fate>D</fate> rolls until the end of the turn
+
+<small>[Fate Condensed Reference](http://localhost:1234/srds/condensed/optional-rules?goTo=full-defense)</small>
 
 ### Protect Someone from Danger
 
-Use `Defend` <fate>D</fate> and <fate>+</fate> `Athletics / Fight` to place yourself between immediate danger and someone in order to try to protect them.
+Use `Defend` <fate>D</fate> and `Athletics / Fight` to place yourself between immediate danger and someone in order to try to protect them.
 
 When doing this you expose yourself to possibly suffering the effects of any failed rolls.
 
@@ -68,15 +74,15 @@ Figure out who has the highest level in the skill among the participants. Each o
 
 ### Investigate a Situation
 
-Use `Create an Advantage` <fate>C</fate> and <fate>+</fate> `Investigate` to try to find something to help move the story forward.
+Use `Create an Advantage` <fate>C</fate> and `Investigate` to try to find something to help move the story forward.
 
 ### Find Something Useful
 
-Use `Create an Advantage` <fate>C</fate> and <fate>+</fate> `Notice` to try to find something you can use to your advantage.
+Use `Create an Advantage` <fate>C</fate> and `Notice` to try to find something you can use to your advantage.
 
 ### Manipulate Someone
 
-Use `Create an Advantage` <fate>C</fate> and <fate>+</fate> `Deceive / Rapport` to convince someone to do what you tell them to do.
+Use `Create an Advantage` <fate>C</fate> and `Deceive / Rapport` to convince someone to do what you tell them to do.
 
 > ## Quick Action Reference Sheet
 >
