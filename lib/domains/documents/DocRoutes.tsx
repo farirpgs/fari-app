@@ -318,10 +318,13 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
   {
     url: "/blog",
     parent: { title: "Fari", url: "/" },
-    title: "Blog",
+    title: "Fari Blog",
     loadFunction: DocImport.Blog,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/blog.md",
     defaultSideBarCategory: "Blog",
+    sideBar: {
+      "+Fari Blog": ["welcome", { "+2021": ["moments-in-fate"] }],
+    },
   },
   {
     url: "/m",

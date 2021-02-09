@@ -17,11 +17,11 @@ const systemFonts = [
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
     // default 300
-    fontWeightLight: 300,
+    fontWeightLight: 400,
     // default 400
     fontWeightRegular: 400,
     // default 500
-    fontWeightMedium: 500,
+    fontWeightMedium: 600,
     // default 700
     fontWeightBold: 700,
     fontFamily: [

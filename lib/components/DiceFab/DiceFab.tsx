@@ -27,10 +27,19 @@ export const DiceFab: React.FC<{ onSelect?(result: IDiceRoll): void }> = (
     props.onSelect?.(result);
   };
 
+  const handleSpeedDialClick = () => {
+    const result = rollDice(diceManager.state.diceType);
+    props.onSelect?.(result);
+  };
+
   return (
     <>
       <SpeedDial
         ariaLabel="Dice"
+        onClick={(e) => {
+          handleCloseFab();
+          handleSpeedDialClick();
+        }}
         className={css({
           right: "2rem",
           bottom: "2rem",
@@ -55,27 +64,32 @@ export const DiceFab: React.FC<{ onSelect?(result: IDiceRoll): void }> = (
         onOpen={handleOpenFab}
       >
         <SpeedDialAction
-          tooltipTitle="Select"
-          icon={<Typography>{"4Df"}</Typography>}
+          tooltipOpen
+          tooltipTitle="Roll&nbsp;4dF"
+          icon={<Typography>{"4dF"}</Typography>}
           onClick={() => handleSetDiceType("4dF")}
         />
         <SpeedDialAction
-          tooltipTitle="Select"
+          tooltipOpen
+          tooltipTitle="Roll&nbsp;1dF"
           icon={<Typography>{"1dF"}</Typography>}
           onClick={() => handleSetDiceType("1dF")}
         />
         <SpeedDialAction
-          tooltipTitle="Select"
+          tooltipOpen
+          tooltipTitle="Flip&nbsp;a&nbsp;Coin"
           icon={<Typography>{"Coin"}</Typography>}
           onClick={() => handleSetDiceType("Coin")}
         />
         <SpeedDialAction
-          tooltipTitle="Select"
+          tooltipOpen
+          tooltipTitle="Roll&nbsp;1d100"
           icon={<Typography>{"1d%"}</Typography>}
           onClick={() => handleSetDiceType("1d100")}
         />
         <SpeedDialAction
-          tooltipTitle="Select"
+          tooltipOpen
+          tooltipTitle="Roll&nbsp;2d6"
           icon={<Typography>{"2d6"}</Typography>}
           onClick={() => handleSetDiceType("2d6")}
         />

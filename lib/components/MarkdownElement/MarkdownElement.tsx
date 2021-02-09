@@ -19,18 +19,22 @@ const styles = (theme: Theme) => {
       ...theme.typography.body1,
       "color": theme.palette.text.primary,
       "wordBreak": "break-word",
+      "& strong, b": {
+        fontWeight: theme.typography.fontWeightBold,
+      },
       "& code": {
         lineHeight: 1.4,
         display: "inline-block",
-        fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
+        fontFamily: "inherit",
+        // fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
         WebkitFontSmoothing: "subpixel-antialiased",
-        padding: "0 3px",
+        padding: "0 4px",
         color: theme.palette.text.primary,
+        fontWeight: theme.typography.fontWeightMedium,
         backgroundColor:
           theme.palette.type === "light"
-            ? "rgba(255, 229, 100, 0.2)"
+            ? "rgba(255, 229, 100, 0.4)"
             : "rgba(255, 229, 100, 0.2)",
-        fontSize: 14,
         borderRadius: 2,
       },
       "& pre": {
@@ -57,9 +61,7 @@ const styles = (theme: Theme) => {
         // Avoid layout jump after hydration (style injected by prism)
         lineHeight: 1.5,
       },
-      "& p code, & ul code, & pre code": {
-        fontSize: 14,
-      },
+
       "& .token.operator": {
         background: "transparent",
       },
@@ -74,7 +76,6 @@ const styles = (theme: Theme) => {
         alignItems: "center",
         color: theme.palette.primary.main,
         borderBottom: `2px solid ${theme.palette.primary.main}`,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "1rem",
         marginBottom: "2rem",
@@ -86,7 +87,6 @@ const styles = (theme: Theme) => {
         alignItems: "center",
         color: theme.palette.primary.main,
         borderBottom: `1px solid ${theme.palette.primary.main}`,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -97,7 +97,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -108,7 +107,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -119,7 +117,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -130,7 +127,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -190,6 +186,8 @@ const styles = (theme: Theme) => {
           "background": theme.palette.primary.main,
           "borderBottom": `2px solid ${theme.palette.primary.main}`,
           "& th": {
+            ...theme.typography.body1,
+            fontWeight: theme.typography.fontWeightBold,
             color: theme.palette.getContrastText(theme.palette.primary.main),
           },
         },
@@ -201,18 +199,14 @@ const styles = (theme: Theme) => {
         },
       },
       "& td": {
-        ...theme.typography.body2,
+        ...theme.typography.body1,
         borderBottom: `1px solid ${theme.palette.divider}`,
         padding: ".5rem",
         color: theme.palette.text.primary,
       },
       "& td p": {
-        ...theme.typography.body2,
+        ...theme.typography.body1,
         margin: "0",
-      },
-      "& td code": {
-        fontSize: 13,
-        lineHeight: 1.6,
       },
       "& th": {
         fontSize: 14,
@@ -243,7 +237,6 @@ const styles = (theme: Theme) => {
           fontFamily: `'Work Sans', sans-serif`,
         },
       },
-
       "& a, & a code": {
         // Style taken from the Link component
         "color": theme.palette.primary.main,
