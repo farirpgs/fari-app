@@ -21,7 +21,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
     // default 400
     fontWeightRegular: 400,
     // default 500
-    fontWeightMedium: 600,
+    fontWeightMedium: 400,
     // default 700
     fontWeightBold: 700,
     fontFamily: [

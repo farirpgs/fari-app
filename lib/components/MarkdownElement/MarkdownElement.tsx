@@ -30,7 +30,7 @@ const styles = (theme: Theme) => {
         WebkitFontSmoothing: "subpixel-antialiased",
         padding: "0 4px",
         color: theme.palette.text.primary,
-        fontWeight: theme.typography.fontWeightMedium,
+        fontWeight: theme.typography.fontWeightBold,
         backgroundColor:
           theme.palette.type === "light"
             ? "rgba(255, 229, 100, 0.4)"
