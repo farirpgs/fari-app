@@ -2,6 +2,13 @@
 
 Detailed technical changelog of Fari
 
+## v3.6 More Dice Support
+
+feat: new doc sidebar
+feat: new doc table of content
+feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
+feat: prettier dice result tooltip
+
 ## v3.5 Resources, Private Aspects and Scene Notes
 
 #### January 19th, 2020
