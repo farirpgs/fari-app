@@ -6,9 +6,12 @@ import React, { useContext, useState } from "react";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDiceRoll, IDiceRollType, rollDice } from "../../domains/dice/Dice";
 import { DiceGameIcon } from "../../domains/Icons/Icons";
-export const DiceFab: React.FC<{ onSelect?(result: IDiceRoll): void }> = (
-  props
-) => {
+
+type IProps = {
+  onSelect?(result: IDiceRoll): void;
+};
+
+export const DiceFab: React.FC<IProps> = (props) => {
   const [open, setOpen] = useState(false);
   const diceManager = useContext(DiceContext);
 
@@ -66,31 +69,46 @@ export const DiceFab: React.FC<{ onSelect?(result: IDiceRoll): void }> = (
           tooltipOpen
           tooltipTitle="Roll&nbsp;4dF"
           icon={<TouchAppIcon />}
-          onClick={() => handleSetDiceType("4dF")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSetDiceType("4dF");
+          }}
         />
         <SpeedDialAction
           tooltipOpen
           tooltipTitle="Roll&nbsp;1dF"
           icon={<TouchAppIcon />}
-          onClick={() => handleSetDiceType("1dF")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSetDiceType("1dF");
+          }}
         />
         <SpeedDialAction
           tooltipOpen
           tooltipTitle="Flip&nbsp;a&nbsp;Coin"
           icon={<TouchAppIcon />}
-          onClick={() => handleSetDiceType("Coin")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSetDiceType("Coin");
+          }}
         />
         <SpeedDialAction
           tooltipOpen
           tooltipTitle="Roll&nbsp;1d100"
           icon={<TouchAppIcon />}
-          onClick={() => handleSetDiceType("1d100")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSetDiceType("1d100");
+          }}
         />
         <SpeedDialAction
           tooltipOpen
           tooltipTitle="Roll&nbsp;2d6"
           icon={<TouchAppIcon />}
-          onClick={() => handleSetDiceType("2d6")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSetDiceType("2d6");
+          }}
         />
       </SpeedDial>
     </>
