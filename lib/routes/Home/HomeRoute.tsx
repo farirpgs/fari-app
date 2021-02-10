@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import CreateIcon from "@material-ui/icons/Create";
 import HelpIcon from "@material-ui/icons/Help";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import MovieIcon from "@material-ui/icons/Movie";
@@ -206,57 +207,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSectionsButtons() {
     return (
       <Container maxWidth="md">
-        <Box my="1rem">
-          <Grid container justify="center" spacing={2}>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link to="/srds">
-                  {renderHeadingIcon(MenuBookIcon)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                  >
-                    {"SRDs"}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link to="/dice">
-                  {renderHeadingIcon(Icons.DiceGameIcon)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                  >
-                    {"Dice"}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Link to="/oracle">
-                <Box height="100%" display="flex" flexDirection="column">
-                  {renderHeadingIcon(Icons.EyeIcon)}
-                  <FateLabel
-                    data-cy="home.oracle"
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                  >
-                    {"Oracle"}
-                  </FateLabel>
-                </Box>
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-        <Box my="1rem">
+        <Box my="3rem">
           <Grid container justify="center" spacing={2}>
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
@@ -299,6 +250,71 @@ export const HomeRoute: React.FC<{}> = (props) => {
                   </FateLabel>
                 </Link>
               </Box>
+            </Grid>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link to="/srds">
+                  {renderHeadingIcon(MenuBookIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"SRDs"}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box my="3rem">
+          <Grid container justify="center" spacing={2}>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link to="/blog">
+                  {renderHeadingIcon(CreateIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"Blog"}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Box height="100%" display="flex" flexDirection="column">
+                <Link to="/dice">
+                  {renderHeadingIcon(Icons.DiceGameIcon)}
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"Dice"}
+                  </FateLabel>
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={4} className={sectionGridItem}>
+              <Link to="/oracle">
+                <Box height="100%" display="flex" flexDirection="column">
+                  {renderHeadingIcon(Icons.EyeIcon)}
+                  <FateLabel
+                    data-cy="home.oracle"
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    underline
+                  >
+                    {"Oracle"}
+                  </FateLabel>
+                </Box>
+              </Link>
             </Grid>
           </Grid>
         </Box>
