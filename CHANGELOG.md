@@ -6,13 +6,13 @@ Detailed technical changelog of Fari
 
 #### Feb 10th, 2021
 
-feat: new doc sidebar
-feat: new doc table of content
-feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
-feat: prettier dice result tooltip
-feat: support for meta images in documents
-fix: uniq groups in data export manager
-fix: footer alignments
+- feat: new doc sidebar
+- feat: new doc table of content
+- feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
+- feat: prettier dice result tooltip
+- feat: support for meta images in documents
+- fix: uniq groups in data export manager
+- fix: footer alignments
 
 ## v3.5 Resources, Private Aspects and Scene Notes
 
