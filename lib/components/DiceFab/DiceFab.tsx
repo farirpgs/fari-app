@@ -85,7 +85,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
         />
         <SpeedDialAction
           tooltipOpen
-          tooltipTitle="Flip&nbsp;a&nbsp;Coin"
+          tooltipTitle="Coin&nbsp;Toss&nbsp;"
           icon={<TouchAppIcon />}
           onClick={(e) => {
             e.stopPropagation();

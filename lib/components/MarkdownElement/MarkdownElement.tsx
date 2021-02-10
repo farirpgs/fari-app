@@ -155,7 +155,6 @@ const styles = (theme: Theme) => {
         "display": "block",
         "wordBreak": "normal",
         "width": "fit-content",
-        // "boxShadow": theme.shadows[4],
         "border": `1px solid ${theme.palette.primary.main}`,
         "overflowX": "auto",
         "WebkitOverflowScrolling": "touch",
@@ -253,7 +252,6 @@ const styles = (theme: Theme) => {
         // Avoid layout jump
         display: "block",
         margin: "0 auto",
-        width: "50%",
       },
       "& hr": {
         height: 1,

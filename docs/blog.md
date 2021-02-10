@@ -4,6 +4,50 @@ Ideas and thoughts by the Fate Community.
 
 Want to contribute ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
+# Fari v3.6.0
+
+<page-meta author="RPDeshaies" date="2021-02-10" image="https://gyazo.com/987c44f98577c6f8576ffb9a80c54fdf.png"></page-meta>
+
+Better document navigation and new dice options.
+
+## New Features 🌟
+
+### Documents
+
+Fari uses a custom made `Document` feature to display the content of the [Fate SRDs](/srds/condensed), the [Cheat Sheet](/cheat-sheet), the [Stunts List](/fate-stunts), and even this blog post!
+
+`Fari Documents` now have better navigation (on the left) as well as a dynamic table of contents (on the right).
+
+This will help with navigating complex documents like the SRDs as well as other types of the documents the community might create in the future.
+
+### More Dice Options
+
+With this update, I added a brand new dice selector to give you the ability to pick a dice group from the following list:
+
+- `4dF`
+- `1dF`
+- `Coin Toss`
+- `1d100`
+- `2d6`
+
+This is currently available in [game sessions](/play) as well as on the [dice page](/dice)
+
+<img width="200px" src="https://gyazo.com/f7266177f86471fb7f4a816b87265e38.png"/>
+
+On top of that, I took a bit of time and made the dice result tooltip easier on the eye. I'm pretty happy with the end result and hope you are going to like it too.
+
+<img width="400px" src="https://gyazo.com/987c44f98577c6f8576ffb9a80c54fdf.png"/>
+
+## Thank You ❤️
+
+I want to thank my patrons for helping to make this update possible.
+
+If you also want to support Fari, go over Fari's [Patreon](https://www.patreon.com/fariapp) page.
+
+There, you can support the development of the Fate RPG Companion App on a monthly basis for as low as the price of one ☕ per month!
+
+If you have any questions or want to talk about Fari, come chat on [Discord](https://discord.com/invite/vMAJFjUraA) and if you encounter any issues with the release, don't hesitate to create a new [bug report](https://github.com/fariapp/fari/issues/new/choose).
+
 # Moments in Fate
 
 <page-meta author="RPDeshaies" date="2021-02-05" image="https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2064&q=80"></page-meta>

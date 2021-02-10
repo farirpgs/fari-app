@@ -49,7 +49,6 @@ export const Markdown = {
         }
 
         flatReferences.push(currentNode);
-
         const isHigherLevel = !flatReferences.some(
           (n) => n.level < currentNode.level
         );
@@ -103,6 +102,7 @@ export const Markdown = {
       tree: treeReferences,
       flat: flatReferences,
     };
+
     return { dom, markdownIndexes };
   },
   getPage(props: {
