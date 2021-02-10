@@ -49,19 +49,17 @@ import { ContentEditable } from "../../../components/ContentEditable/ContentEdit
 import { DiceBox } from "../../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
+import { CharactersContext } from "../../../contexts/CharactersContext/CharactersContext";
+import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
+import { CharacterType } from "../../../domains/character/CharacterType";
 import {
-  CharactersContext,
   CheckboxesFieldValue,
   ICharacter,
   IPage,
   ISection,
-} from "../../../contexts/CharactersContext/CharactersContext";
-import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
-import {
   Position,
   SectionType,
-} from "../../../domains/character/CharacterFactory";
-import { CharacterType } from "../../../domains/character/CharacterType";
+} from "../../../domains/character/types";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import {
   IDiceRollWithBonus,

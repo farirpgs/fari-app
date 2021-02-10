@@ -12,13 +12,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersonIcon from "@material-ui/icons/Person";
 import truncate from "lodash/truncate";
 import React from "react";
+import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
+import { arraySort } from "../../../../../domains/array/arraySort";
 import {
   ICharacter,
   ISection,
-} from "../../../../../contexts/CharactersContext/CharactersContext";
-import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
-import { arraySort } from "../../../../../domains/array/arraySort";
-import { SectionType } from "../../../../../domains/character/CharacterFactory";
+  SectionType,
+} from "../../../../../domains/character/types";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { ContentEditable } from "../../../../ContentEditable/ContentEditable";

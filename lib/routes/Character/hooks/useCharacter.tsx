@@ -2,17 +2,14 @@ import produce from "immer";
 import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { CharacterFactory } from "../../../domains/character/CharacterFactory";
+import { CharacterType } from "../../../domains/character/CharacterType";
 import {
   CheckboxesFieldValue,
   ICharacter,
-  makeField,
-} from "../../../contexts/CharactersContext/CharactersContext";
-import {
-  CharacterFactory,
   Position,
   SectionType,
-} from "../../../domains/character/CharacterFactory";
-import { CharacterType } from "../../../domains/character/CharacterType";
+} from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/id/Id";
 
@@ -124,7 +121,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           label: "Section",
           position: position,
           type: sectionType,
-          fields: [makeField(sectionType)],
+          fields: [CharacterFactory.makeField(sectionType)],
         });
       })
     );
@@ -215,7 +212,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const type = draft.pages[pageIndex].sections[sectionIndex].type;
         draft.pages[pageIndex].sections[sectionIndex].fields.push(
-          makeField(type)
+          CharacterFactory.makeField(type)
         );
       })
     );

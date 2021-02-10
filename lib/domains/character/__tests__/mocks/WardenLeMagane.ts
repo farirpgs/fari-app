@@ -1,4 +1,4 @@
-import { IV2Character } from "../CharactersContext";
+import { IV2Character } from "../../types";
 
 export const Warden: IV2Character = {
   id: "03dd15c8-5bed-40a5-b1e3-b0aa5e59e2e7",

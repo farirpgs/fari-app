@@ -1,6 +1,6 @@
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import { ICharacter } from "../../contexts/CharactersContext/CharactersContext";
+import { ICharacter } from "../../domains/character/types";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { AspectType } from "./AspectType";
 

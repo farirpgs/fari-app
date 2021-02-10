@@ -3,12 +3,10 @@ import { useHistory } from "react-router";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import {
-  CharactersContext,
-  ICharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { ICharacter } from "../../domains/character/types";
 import { IDiceRollWithBonus, IRollDiceOptions } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";

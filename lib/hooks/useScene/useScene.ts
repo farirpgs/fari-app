@@ -5,15 +5,13 @@ import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import {
-  ICharacter,
-  useCharacters,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
   defaultSceneAspects,
   defaultSceneName,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
+import { ICharacter } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";

@@ -1,13 +1,11 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import {
-  CharactersContext,
-  ICharacter,
-  migrateCharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterType } from "../../domains/character/CharacterType";
+import { ICharacter } from "../../domains/character/types";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/id/Id";
 import { Manager } from "../Manager/Manager";
@@ -65,7 +63,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
           draft.id = Id.generate();
         });
 
-        const migratedCharacter = migrateCharacter(characterWithNewId);
+        const migratedCharacter = CharacterFactory.migrate(characterWithNewId);
 
         charactersManager.actions.upsert(migratedCharacter);
 

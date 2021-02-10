@@ -1,19 +1,67 @@
-import { ICharacter } from "../../contexts/CharactersContext/CharactersContext";
+import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../id/Id";
 import { CharacterType } from "./CharacterType";
+import {
+  CheckboxesFieldValue,
+  ICharacter,
+  IField,
+  ISection,
+  IV1Character,
+  IV2Character,
+  Position,
+  SectionType,
+} from "./types";
 
-export enum SectionType {
-  Text,
-  Number,
-  // BigNumber,
-  Checkboxes,
-}
+export const CharacterFactory = {
+  latestVersion: 3,
+  make(type: CharacterType): ICharacter {
+    const newCharacter = {
+      [CharacterType.CoreCondensed]: makeCondensedCharacter,
+      [CharacterType.Accelerated]: makeAcceleratedCharacter,
+      [CharacterType.Custom]: makeCustomCharacter,
+    }[type]();
 
-export enum Position {
-  Left,
-  Right,
-}
+    return {
+      ...newCharacter,
+      id: Id.generate(),
+      name: "",
+      lastUpdated: getUnix(),
+    };
+  },
+  migrate(c: any): ICharacter {
+    try {
+      const v2: IV2Character = migrateV1CharacterToV2(c);
+      const v3: ICharacter = migrateV2CharacterToV3(v2);
+      return v3;
+    } catch (error) {
+      console.error(error);
+      return c;
+    }
+  },
+  makeField(type: SectionType) {
+    const fieldDefault: Record<SectionType, IField> = {
+      [SectionType.Text]: {
+        id: Id.generate(),
+        label: "Text",
+        value: "",
+      } as IField<string>,
+      [SectionType.Number]: {
+        id: Id.generate(),
+        label: "Text",
+        value: "0",
+      } as IField<string>,
+      [SectionType.Checkboxes]: {
+        id: Id.generate(),
+        label: "Text",
+        value: [{ label: "1", checked: false }],
+      } as IField<CheckboxesFieldValue>,
+    };
+
+    return fieldDefault[type];
+  },
+};
+
 function makeCondensedCharacter(): ICharacter {
   return {
     id: "",
@@ -131,6 +179,7 @@ function makeCondensedCharacter(): ICharacter {
     lastUpdated: getUnix(),
   };
 }
+
 function makeAcceleratedCharacter(): ICharacter {
   return {
     id: "",
@@ -226,6 +275,7 @@ function makeAcceleratedCharacter(): ICharacter {
     lastUpdated: getUnix(),
   };
 }
+
 function makeCustomCharacter(): ICharacter {
   return {
     id: "",
@@ -246,20 +296,112 @@ function makeCustomCharacter(): ICharacter {
   };
 }
 
-export const CharacterFactory = {
-  latestVersion: 3,
-  make(type: CharacterType): ICharacter {
-    const newCharacter = {
-      [CharacterType.CoreCondensed]: makeCondensedCharacter,
-      [CharacterType.Accelerated]: makeAcceleratedCharacter,
-      [CharacterType.Custom]: makeCustomCharacter,
-    }[type]();
+export function migrateV1CharacterToV2(v1: IV1Character): IV2Character {
+  if (v1.version !== 1) {
+    return (v1 as unknown) as IV2Character;
+  }
 
-    return {
-      ...newCharacter,
-      id: Id.generate(),
-      name: "",
-      lastUpdated: getUnix(),
-    };
-  },
-};
+  return (produce<IV1Character, IV2Character>(v1, (draft) => {
+    // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
+    draft.stressTracks.forEach((s) => {
+      s.value = s.value.map((box, index) => {
+        return {
+          checked: (box as unknown) as boolean,
+          label: `${index + 1}`,
+        };
+      });
+    });
+    draft.version = 2;
+  }) as unknown) as IV2Character;
+}
+
+export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
+  if (v2.version !== 2) {
+    return (v2 as unknown) as ICharacter;
+  }
+
+  const sections: Array<ISection> = [];
+
+  // aspects
+  sections.push({
+    id: Id.generate(),
+    label: v2.aspectsLabel ?? "Aspects",
+    visibleOnCard: true,
+    position: Position.Left,
+    type: SectionType.Text,
+    fields: v2.aspects.map((a) => {
+      return { id: Id.generate(), label: a.name, value: a.value };
+    }),
+  });
+
+  // stunts
+  sections.push({
+    id: Id.generate(),
+    label: v2.stuntsLabel ?? "Stunts & Extras",
+    position: Position.Left,
+    type: SectionType.Text,
+    fields: v2.stunts.map((a) => {
+      return { id: Id.generate(), label: a.name, value: a.value };
+    }),
+  });
+
+  // notes
+  sections.push({
+    id: Id.generate(),
+    label: v2.notesLabel ?? "Other",
+    position: Position.Left,
+    type: SectionType.Text,
+    fields: [{ id: Id.generate(), label: "Notes", value: v2.notes ?? "" }],
+  });
+
+  // stress
+  sections.push({
+    id: Id.generate(),
+    label: v2.stressTracksLabel ?? "Stress",
+    position: Position.Right,
+    type: SectionType.Checkboxes,
+    fields: v2.stressTracks.map((st) => {
+      return { id: Id.generate(), label: st.name, value: st.value };
+    }),
+  });
+
+  // consequences
+  sections.push({
+    id: Id.generate(),
+    label: v2.consequencesLabel ?? "Consequences",
+    position: Position.Right,
+    type: SectionType.Text,
+    fields: v2.consequences.map((a) => {
+      return { id: Id.generate(), label: a.name, value: a.value };
+    }),
+  });
+
+  // skills
+  sections.push({
+    id: Id.generate(),
+    label: v2.skillsLabel ?? "Skills",
+    visibleOnCard: true,
+    position: Position.Right,
+    type: SectionType.Number,
+    fields: v2.skills.map((a) => {
+      return { id: Id.generate(), label: a.name, value: a.value };
+    }),
+  });
+
+  return {
+    id: v2.id,
+    name: v2.name,
+    group: v2.group,
+    lastUpdated: v2.lastUpdated,
+    pages: [
+      {
+        id: Id.generate(),
+        sections: sections,
+      },
+    ],
+    fatePoints: v2.fatePoints,
+    playedDuringTurn: v2.playedDuringTurn,
+    refresh: v2.refresh,
+    version: CharacterFactory.latestVersion,
+  };
+}

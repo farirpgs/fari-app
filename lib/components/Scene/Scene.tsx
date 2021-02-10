@@ -51,10 +51,7 @@ import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
-import {
-  ICharacter,
-  useCharacters,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
@@ -62,6 +59,7 @@ import {
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
+import { ICharacter } from "../../domains/character/types";
 import { IDiceRoll, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";

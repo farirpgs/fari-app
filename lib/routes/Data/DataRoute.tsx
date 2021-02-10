@@ -16,16 +16,14 @@ import uniq from "lodash/uniq";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import {
-  CharactersContext,
-  ICharacter,
-  migrateCharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import {
   ISavableScene,
   migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/id/Id";
@@ -157,7 +155,7 @@ export const DataRoute: React.FC = (props) => {
       draft.id = Id.generate();
     });
 
-    const migratedCharacter = migrateCharacter(characterWithNewId);
+    const migratedCharacter = CharacterFactory.migrate(characterWithNewId);
     charactersManager.actions.upsert(migratedCharacter);
   }
 

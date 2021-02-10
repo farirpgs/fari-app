@@ -1,4 +1,4 @@
-import { ICharacter } from "../../../contexts/CharactersContext/CharactersContext";
+import { ICharacter } from "../../../domains/character/types";
 import { IDiceRollWithBonus } from "../../../domains/dice/Dice";
 import { IPeerAction } from "../../../hooks/usePeerJS/IPeerAction";
 
