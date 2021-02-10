@@ -476,11 +476,11 @@ export const IndexCard: React.FC<
             {aspect.type === AspectType.NPC ||
             aspect.type === AspectType.BadGuy ? (
               <>
-                {t("character-dialog.aspects")} {" & "}
-                {t("character-dialog.notes")}
+                {t("index-card.aspects")} {" & "}
+                {t("index-card.notes")}
               </>
             ) : (
-              <>{t("character-dialog.notes")}</>
+              <>{t("index-card.notes")}</>
             )}
           </Typography>
         </Box>
