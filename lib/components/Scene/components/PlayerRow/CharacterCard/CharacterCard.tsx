@@ -15,10 +15,10 @@ import React from "react";
 import {
   ICharacter,
   ISection,
-  SectionType,
 } from "../../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../../../../domains/array/arraySort";
+import { SectionType } from "../../../../../domains/character/CharacterFactory";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { ContentEditable } from "../../../../ContentEditable/ContentEditable";

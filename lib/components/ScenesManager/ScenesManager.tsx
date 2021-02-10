@@ -58,7 +58,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       fariType: "scene",
       onImport: (s) => {
         const sceneWithNewId = produce(s, (draft) => {
-          draft.id = Id.get();
+          draft.id = Id.generate();
         });
         const migratedScene = migrateScene(sceneWithNewId);
         scenesManager.actions.upsert(migratedScene);

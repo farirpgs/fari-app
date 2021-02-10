@@ -14,33 +14,6 @@ export type ISavableScene = Pick<
 
 type IManagerCallback = (scene: ISavableScene) => void | undefined;
 
-export const SceneFactory = {
-  make(gmId: string): IScene {
-    return {
-      id: Id.get(),
-      name: defaultSceneName,
-      group: undefined,
-      aspects: defaultSceneAspects,
-      gm: {
-        id: gmId,
-        playerName: "Game Master",
-        rolls: [],
-        playedDuringTurn: false,
-        fatePoints: 3,
-        offline: false,
-        isGM: true,
-      },
-      players: [],
-      goodConfetti: 0,
-      badConfetti: 0,
-      sort: false,
-      drawAreaObjects: [],
-      version: defaultSceneVersion,
-      lastUpdated: getUnix(),
-    };
-  },
-};
-
 export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
   undefined as any
 );
@@ -164,7 +137,7 @@ export function useScenes(props?: { localStorage: Storage }) {
 
 function makeDefaultSavableScene(): ISavableScene {
   return {
-    id: Id.get(),
+    id: Id.generate(),
     name: defaultSceneName,
     group: undefined,
     aspects: defaultSceneAspects,

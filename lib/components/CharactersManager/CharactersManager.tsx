@@ -6,8 +6,8 @@ import {
   ICharacter,
   migrateCharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
-import { CharacterType } from "../../contexts/CharactersContext/CharacterType";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { CharacterType } from "../../domains/character/CharacterType";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/id/Id";
 import { Manager } from "../Manager/Manager";
@@ -62,7 +62,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       fariType: "character",
       onImport: (c) => {
         const characterWithNewId = produce(c, (draft) => {
-          draft.id = Id.get();
+          draft.id = Id.generate();
         });
 
         const migratedCharacter = migrateCharacter(characterWithNewId);

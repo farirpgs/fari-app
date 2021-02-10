@@ -13,12 +13,12 @@ import {
   defaultSceneAspects,
   defaultSceneName,
   ISavableScene,
-  SceneFactory,
 } from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Id } from "../../domains/id/Id";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -142,7 +142,7 @@ export function useScene(props: IProps) {
   function cloneAndLoadNewScene(newScene: ISavableScene) {
     if (newScene) {
       const clonedNewScene = produce(newScene, (draft) => {
-        draft.id = Id.get();
+        draft.id = Id.generate();
       });
       loadScene(clonedNewScene, true);
       forceDirty();
@@ -192,7 +192,7 @@ export function useScene(props: IProps) {
   }
 
   function addAspect(type: AspectType, isPrivate: boolean) {
-    const id = Id.get();
+    const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
         draft.aspects[id] = { ...defaultAspects[type], isPrivate: isPrivate };
@@ -464,7 +464,7 @@ export function useScene(props: IProps) {
   }
 
   function addOfflinePlayer(playerName: string) {
-    const id = Id.get();
+    const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({
@@ -483,7 +483,7 @@ export function useScene(props: IProps) {
   }
 
   function addOfflineCharacter(character: ICharacter) {
-    const id = Id.get();
+    const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({

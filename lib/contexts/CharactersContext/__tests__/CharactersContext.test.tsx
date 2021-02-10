@@ -1,17 +1,14 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { ManagerMode } from "../../../components/Manager/Manager";
-import { CharacterType } from "../CharacterType";
-import { ComplexCharacter } from "../mocks/ComplexCharacter";
-import { Warden } from "../mocks/WardenLeMagane";
+import { CharacterType } from "../../../domains/character/CharacterType";
 import {
   ICharacter,
   IV1Character,
   migrateCharacters,
   useCharacters,
-  import
-} from { CharacterType };
- from "../CharacterType";
 } from "../CharactersContext";
+import { ComplexCharacter } from "../mocks/ComplexCharacter";
+import { Warden } from "../mocks/WardenLeMagane";
 
 describe("migrateCharacters", () => {
   describe("v1", () => {
@@ -49,8 +46,8 @@ describe("migrateCharacters", () => {
         };
         // WHEN
         const result = migrateCharacters([v1Char]);
-        // THEN
 
+        // THEN
         expect(
           result[0].pages
             .flatMap((p) => p.sections)

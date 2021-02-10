@@ -56,12 +56,12 @@ import {
   IPage,
   ISection,
 } from "../../../contexts/CharactersContext/CharactersContext";
-import { CharacterType } from "../../../contexts/CharactersContext/CharacterType";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import {
   Position,
   SectionType,
 } from "../../../domains/character/CharacterFactory";
+import { CharacterType } from "../../../domains/character/CharacterType";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import {
   IDiceRollWithBonus,

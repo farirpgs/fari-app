@@ -35,7 +35,7 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [error, setError] = useState<any>(undefined);
 
   if (!peer.current) {
-    const id = Id.get();
+    const id = Id.generate();
     if (env.context === "localhost") {
       peer.current = new Peer(id, {
         path: "/peer/connect",

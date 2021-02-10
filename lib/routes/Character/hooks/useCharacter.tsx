@@ -7,12 +7,12 @@ import {
   ICharacter,
   makeField,
 } from "../../../contexts/CharactersContext/CharactersContext";
-import { CharacterType } from "../../../contexts/CharactersContext/CharacterType";
 import {
   CharacterFactory,
   Position,
   SectionType,
 } from "../../../domains/character/CharacterFactory";
+import { CharacterType } from "../../../domains/character/CharacterType";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/id/Id";
 
@@ -91,7 +91,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         draft.pages.splice(pageIndex + 1, 0, {
-          id: Id.get(),
+          id: Id.generate(),
           sections: [],
         });
       })
@@ -120,7 +120,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         draft.pages[pageIndex].sections.push({
-          id: Id.get(),
+          id: Id.generate(),
           label: "Section",
           position: position,
           type: sectionType,
