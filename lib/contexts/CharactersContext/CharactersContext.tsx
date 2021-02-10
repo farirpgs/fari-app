@@ -2,15 +2,15 @@ import produce from "immer";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
-import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
-import { Id } from "../../domains/Id/Id";
+import {
+  CharacterFactory,
+  Position,
+  SectionType,
+} from "../../domains/character/CharacterFactory";
+import { CharacterType } from "../../domains/character/CharacterType";
+import { getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { Id } from "../../domains/id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
-
-export enum CharacterType {
-  CoreCondensed = "CoreCondensed",
-  Accelerated = "Accelerated",
-  Custom = "Custom",
-}
 
 type IManagerCallback = (character: ICharacter) => void;
 
@@ -149,270 +149,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
     },
   };
 }
-export enum SectionType {
-  Text,
-  Number,
-  // BigNumber,
-  Checkboxes,
-}
-
-export enum Position {
-  Left,
-  Right,
-}
-
-function makeCondensedCharacter(): ICharacter {
-  return {
-    id: "",
-    version: CharacterFactory.latestVersion,
-    name: "",
-    group: undefined,
-    pages: [
-      {
-        id: Id.get(),
-        sections: [
-          {
-            id: Id.get(),
-            label: "Aspects",
-            visibleOnCard: true,
-            type: SectionType.Text,
-            position: Position.Left,
-            fields: [
-              { id: Id.get(), label: "High Concept", value: "" },
-              { id: Id.get(), label: "Trouble", value: "" },
-              { id: Id.get(), label: "Relationship", value: "" },
-              { id: Id.get(), label: "Other Aspect", value: "" },
-              { id: Id.get(), label: "Other Aspect", value: "" },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Stunts & Extras",
-            type: SectionType.Text,
-            position: Position.Left,
-            fields: [
-              { id: Id.get(), label: "Stunt #1", value: "" },
-              { id: Id.get(), label: "Stunt #2", value: "" },
-              { id: Id.get(), label: "Stunt #3", value: "" },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Other",
-            type: SectionType.Text,
-            position: Position.Left,
-            fields: [{ id: Id.get(), label: "Notes", value: "" }],
-          },
-          {
-            id: Id.get(),
-            label: "Stress",
-            type: SectionType.Checkboxes,
-            position: Position.Right,
-            fields: [
-              {
-                id: Id.get(),
-                label: "Physical",
-                value: [
-                  { checked: false, id: Id.get(), label: "1" },
-                  { checked: false, id: Id.get(), label: "2" },
-                  { checked: false, id: Id.get(), label: "3" },
-                ],
-              },
-              {
-                id: Id.get(),
-                label: "Mental",
-                value: [
-                  { checked: false, id: Id.get(), label: "1" },
-                  { checked: false, id: Id.get(), label: "2" },
-                  { checked: false, id: Id.get(), label: "3" },
-                ],
-              },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Consequences",
-            type: SectionType.Text,
-            position: Position.Right,
-            fields: [
-              { id: Id.get(), label: "Mild", value: "" },
-              { id: Id.get(), label: "Moderate", value: "" },
-              { id: Id.get(), label: "Severe", value: "" },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Skills",
-            visibleOnCard: true,
-            type: SectionType.Number,
-            position: Position.Right,
-            fields: [
-              { id: Id.get(), label: "Academics", value: "" },
-              { id: Id.get(), label: "Athletics", value: "" },
-              { id: Id.get(), label: "Burglary", value: "" },
-              { id: Id.get(), label: "Contacts", value: "" },
-              { id: Id.get(), label: "Crafts", value: "" },
-              { id: Id.get(), label: "Deceive", value: "" },
-              { id: Id.get(), label: "Drive", value: "" },
-              { id: Id.get(), label: "Empathy", value: "" },
-              { id: Id.get(), label: "Fight", value: "" },
-              { id: Id.get(), label: "Investigate", value: "" },
-              { id: Id.get(), label: "Lore", value: "" },
-              { id: Id.get(), label: "Notice", value: "" },
-              { id: Id.get(), label: "Physique", value: "" },
-              { id: Id.get(), label: "Provoke", value: "" },
-              { id: Id.get(), label: "Rapport", value: "" },
-              { id: Id.get(), label: "Resources", value: "" },
-              { id: Id.get(), label: "Shoot", value: "" },
-              { id: Id.get(), label: "Stealth", value: "" },
-              { id: Id.get(), label: "Will", value: "" },
-            ],
-          },
-        ],
-      },
-    ],
-    refresh: 3,
-    fatePoints: undefined,
-    playedDuringTurn: undefined,
-
-    lastUpdated: getUnix(),
-  };
-}
-
-function makeAcceleratedCharacter(): ICharacter {
-  return {
-    id: "",
-    version: CharacterFactory.latestVersion,
-    name: "",
-    group: undefined,
-    pages: [
-      {
-        id: Id.get(),
-        sections: [
-          {
-            id: Id.get(),
-            label: "Aspects",
-            visibleOnCard: true,
-            type: SectionType.Text,
-            position: Position.Left,
-            fields: [
-              { id: Id.get(), label: "High Concept", value: "" },
-              { id: Id.get(), label: "Trouble", value: "" },
-              { id: Id.get(), label: "Relationship", value: "" },
-              { id: Id.get(), label: "Other Aspect", value: "" },
-              { id: Id.get(), label: "Other Aspect", value: "" },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Stunts & Extras",
-            type: SectionType.Text,
-            position: Position.Left,
-            fields: [
-              { id: Id.get(), label: "Stunt #1", value: "" },
-              { id: Id.get(), label: "Stunt #2", value: "" },
-              { id: Id.get(), label: "Stunt #3", value: "" },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Other",
-            type: SectionType.Text,
-            position: Position.Left,
-            fields: [{ id: Id.get(), label: "Notes", value: "" }],
-          },
-          {
-            id: Id.get(),
-            label: "Stress",
-            type: SectionType.Checkboxes,
-            position: Position.Right,
-            fields: [
-              {
-                id: Id.get(),
-                label: "Stress",
-                value: [
-                  { checked: false, id: Id.get(), label: "1" },
-                  { checked: false, id: Id.get(), label: "2" },
-                  { checked: false, id: Id.get(), label: "3" },
-                ],
-              },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Consequences",
-            type: SectionType.Text,
-            position: Position.Right,
-            fields: [
-              { id: Id.get(), label: "Mild", value: "" },
-              { id: Id.get(), label: "Moderate", value: "" },
-              { id: Id.get(), label: "Severe", value: "" },
-            ],
-          },
-          {
-            id: Id.get(),
-            label: "Skills",
-            visibleOnCard: true,
-            type: SectionType.Number,
-            position: Position.Right,
-            fields: [
-              { id: Id.get(), label: "Careful", value: "" },
-              { id: Id.get(), label: "Clever", value: "" },
-              { id: Id.get(), label: "Forceful", value: "" },
-              { id: Id.get(), label: "Flashy", value: "" },
-              { id: Id.get(), label: "Quick", value: "" },
-              { id: Id.get(), label: "Sneaky", value: "" },
-            ],
-          },
-        ],
-      },
-    ],
-    refresh: 3,
-    fatePoints: undefined,
-    playedDuringTurn: undefined,
-
-    lastUpdated: getUnix(),
-  };
-}
-
-function makeCustomCharacter(): ICharacter {
-  return {
-    id: "",
-    version: CharacterFactory.latestVersion,
-    name: "",
-    group: undefined,
-    pages: [
-      {
-        id: Id.get(),
-        sections: [],
-      },
-    ],
-    refresh: 3,
-    fatePoints: undefined,
-    playedDuringTurn: undefined,
-
-    lastUpdated: getUnix(),
-  };
-}
-
-export const CharacterFactory = {
-  latestVersion: 3,
-  make(type: CharacterType): ICharacter {
-    const newCharacter = {
-      [CharacterType.CoreCondensed]: makeCondensedCharacter,
-      [CharacterType.Accelerated]: makeAcceleratedCharacter,
-      [CharacterType.Custom]: makeCustomCharacter,
-    }[type]();
-
-    return {
-      ...newCharacter,
-      id: Id.get(),
-      name: "",
-      lastUpdated: getUnix(),
-    };
-  },
-};
-
 export interface IV1Character {
   id: string;
   name: string;
@@ -493,17 +229,17 @@ export type CheckboxesFieldValue = Array<{
 export function makeField(type: SectionType) {
   const fieldDefault: Record<SectionType, IField> = {
     [SectionType.Text]: {
-      id: Id.get(),
+      id: Id.generate(),
       label: "Text",
       value: "",
     } as IField<string>,
     [SectionType.Number]: {
-      id: Id.get(),
+      id: Id.generate(),
       label: "Text",
       value: "0",
     } as IField<string>,
     [SectionType.Checkboxes]: {
-      id: Id.get(),
+      id: Id.generate(),
       label: "Text",
       value: [{ label: "1", checked: false }],
     } as IField<CheckboxesFieldValue>,
@@ -578,67 +314,67 @@ export function migrateV2Character(v2: IV2Character): ICharacter {
 
   // aspects
   sections.push({
-    id: Id.get(),
+    id: Id.generate(),
     label: v2.aspectsLabel ?? "Aspects",
     visibleOnCard: true,
     position: Position.Left,
     type: SectionType.Text,
     fields: v2.aspects.map((a) => {
-      return { id: Id.get(), label: a.name, value: a.value };
+      return { id: Id.generate(), label: a.name, value: a.value };
     }),
   });
 
   // stunts
   sections.push({
-    id: Id.get(),
+    id: Id.generate(),
     label: v2.stuntsLabel ?? "Stunts & Extras",
     position: Position.Left,
     type: SectionType.Text,
     fields: v2.stunts.map((a) => {
-      return { id: Id.get(), label: a.name, value: a.value };
+      return { id: Id.generate(), label: a.name, value: a.value };
     }),
   });
 
   // notes
   sections.push({
-    id: Id.get(),
+    id: Id.generate(),
     label: v2.notesLabel ?? "Other",
     position: Position.Left,
     type: SectionType.Text,
-    fields: [{ id: Id.get(), label: "Notes", value: v2.notes ?? "" }],
+    fields: [{ id: Id.generate(), label: "Notes", value: v2.notes ?? "" }],
   });
 
   // stress
   sections.push({
-    id: Id.get(),
+    id: Id.generate(),
     label: v2.stressTracksLabel ?? "Stress",
     position: Position.Right,
     type: SectionType.Checkboxes,
     fields: v2.stressTracks.map((st) => {
-      return { id: Id.get(), label: st.name, value: st.value };
+      return { id: Id.generate(), label: st.name, value: st.value };
     }),
   });
 
   // consequences
   sections.push({
-    id: Id.get(),
+    id: Id.generate(),
     label: v2.consequencesLabel ?? "Consequences",
     position: Position.Right,
     type: SectionType.Text,
     fields: v2.consequences.map((a) => {
-      return { id: Id.get(), label: a.name, value: a.value };
+      return { id: Id.generate(), label: a.name, value: a.value };
     }),
   });
 
   // skills
   sections.push({
-    id: Id.get(),
+    id: Id.generate(),
     label: v2.skillsLabel ?? "Skills",
     visibleOnCard: true,
     position: Position.Right,
     type: SectionType.Number,
     fields: v2.skills.map((a) => {
-      return { id: Id.get(), label: a.name, value: a.value };
+      return { id: Id.generate(), label: a.name, value: a.value };
     }),
   });
 
@@ -649,7 +385,7 @@ export function migrateV2Character(v2: IV2Character): ICharacter {
     lastUpdated: v2.lastUpdated,
     pages: [
       {
-        id: Id.get(),
+        id: Id.generate(),
         sections: sections,
       },
     ],

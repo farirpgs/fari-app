@@ -14,7 +14,6 @@ import { DataGrid, RowId } from "@material-ui/data-grid";
 import produce from "immer";
 import uniq from "lodash/uniq";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import {
@@ -29,6 +28,7 @@ import {
 } from "../../contexts/SceneContext/ScenesContext";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/id/Id";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -146,7 +146,7 @@ export const DataRoute: React.FC = (props) => {
 
   function importScene(s: ISavableScene) {
     const sceneWithNewId = produce(s, (draft) => {
-      draft.id = uuidV4();
+      draft.id = Id.generate();
     });
     const migratedScene = migrateScene(sceneWithNewId);
     scenesManager.actions.upsert(migratedScene);
@@ -154,7 +154,7 @@ export const DataRoute: React.FC = (props) => {
 
   function importCharacter(c: ICharacter) {
     const characterWithNewId = produce(c, (draft) => {
-      draft.id = uuidV4();
+      draft.id = Id.generate();
     });
 
     const migratedCharacter = migrateCharacter(characterWithNewId);

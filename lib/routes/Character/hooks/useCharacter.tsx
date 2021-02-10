@@ -3,14 +3,16 @@ import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
 import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import {
-  CharacterFactory,
-  CharacterType,
   CheckboxesFieldValue,
   ICharacter,
   makeField,
+} from "../../../contexts/CharactersContext/CharactersContext";
+import { CharacterType } from "../../../contexts/CharactersContext/CharacterType";
+import {
+  CharacterFactory,
   Position,
   SectionType,
-} from "../../../contexts/CharactersContext/CharactersContext";
+} from "../../../domains/character/CharacterFactory";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/id/Id";
 

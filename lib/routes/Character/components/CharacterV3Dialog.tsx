@@ -51,15 +51,17 @@ import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import {
   CharactersContext,
-  CharacterType,
   CheckboxesFieldValue,
   ICharacter,
   IPage,
   ISection,
+} from "../../../contexts/CharactersContext/CharactersContext";
+import { CharacterType } from "../../../contexts/CharactersContext/CharacterType";
+import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
+import {
   Position,
   SectionType,
-} from "../../../contexts/CharactersContext/CharactersContext";
-import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
+} from "../../../domains/character/CharacterFactory";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import {
   IDiceRollWithBonus,

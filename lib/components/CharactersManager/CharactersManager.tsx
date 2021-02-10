@@ -3,10 +3,10 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import {
   CharactersContext,
-  CharacterType,
   ICharacter,
   migrateCharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { CharacterType } from "../../contexts/CharactersContext/CharacterType";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/id/Id";
