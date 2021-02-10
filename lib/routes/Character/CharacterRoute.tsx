@@ -7,9 +7,9 @@ import {
   CharactersContext,
   ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { IDiceRollWithBonus, IRollDiceOptions } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "./components/CharacterV3Dialog";
@@ -21,8 +21,9 @@ export const CharacterRoute: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const history = useHistory();
+  const rollDice = useRollDice();
   const charactersManager = useContext(CharactersContext);
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
@@ -30,7 +31,7 @@ export const CharacterRoute: React.FC<{
 
   function roll(options: IRollDiceOptions) {
     setRolls((draft) => {
-      const newRoll = Dice.roll4DF(options);
+      const newRoll = rollDice(options);
       logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });

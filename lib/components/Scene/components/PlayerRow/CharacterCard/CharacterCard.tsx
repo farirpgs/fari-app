@@ -29,6 +29,7 @@ export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
   playerName: string | undefined;
   readonly: boolean;
+  isMe: boolean;
   onCharacterDialogOpen(): void;
   onRoll(options: IRollDiceOptions): void;
 }> = (props) => {

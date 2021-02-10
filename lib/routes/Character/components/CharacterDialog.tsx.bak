@@ -43,8 +43,10 @@ import {
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
-import { IRollDiceOptions } from "../../../domains/dice/Dice";
-import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import {
+  IDiceRollWithBonus,
+  IRollDiceOptions,
+} from "../../../domains/dice/Dice";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
@@ -55,7 +57,7 @@ export const CharacterDialog: React.FC<{
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
-  rolls?: Array<IDiceRoll>;
+  rolls?: Array<IDiceRollWithBonus>;
   onRoll?(options: IRollDiceOptions): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
@@ -913,7 +915,6 @@ export const CharacterDialog: React.FC<{
                     size="5rem"
                     fontSize="2rem"
                     borderSize=".2rem"
-                    borderColor="#000000"
                     onClick={() => {
                       props.onRoll?.({});
                     }}

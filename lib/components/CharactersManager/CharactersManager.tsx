@@ -8,7 +8,7 @@ import {
   migrateCharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 

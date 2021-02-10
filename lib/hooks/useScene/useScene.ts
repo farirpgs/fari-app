@@ -7,17 +7,17 @@ import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import {
   ICharacter,
-  useCharacters
+  useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
 import {
   defaultSceneAspects,
   defaultSceneName,
   ISavableScene,
-  SceneFactory
+  SceneFactory,
 } from "../../contexts/SceneContext/ScenesContext";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
@@ -601,7 +601,15 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerRoll(id: string, roll: IDiceRoll) {
+  function updateGmRoll(roll: IDiceRollWithBonus) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.gm.rolls = [roll, ...draft.gm.rolls];
+      })
+    );
+  }
+
+  function updatePlayerRoll(id: string, roll: IDiceRollWithBonus) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
@@ -707,6 +715,7 @@ export function useScene(props: IProps) {
       updatePlayerFatePoints,
       updatePlayerPlayedDuringTurn,
       resetInitiative,
+      updateGmRoll,
       updatePlayerRoll,
       fireGoodConfetti,
       fireBadConfetti,

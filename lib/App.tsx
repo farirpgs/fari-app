@@ -11,7 +11,6 @@ import { CharactersManager } from "./components/CharactersManager/CharactersMana
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
-import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { env } from "./constants/env";
 import {
   CharactersContext,
@@ -21,6 +20,7 @@ import {
   DarkModeContext,
   useDarkMode,
 } from "./contexts/DarkModeContext/DarkModeContext";
+import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   ScenesContext,
   useScenes,
@@ -31,13 +31,15 @@ export const App: React.FC<{}> = () => {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
-
+  const diceManager = useDice();
   return (
     <DndProvider backend={HTML5Backend}>
       <DarkModeContext.Provider value={darkModeManager}>
         <CharactersContext.Provider value={charactersManager}>
           <ScenesContext.Provider value={scenesManager}>
-            <AppProvider />
+            <DiceContext.Provider value={diceManager}>
+              <AppProvider />
+            </DiceContext.Provider>
           </ScenesContext.Provider>
         </CharactersContext.Provider>
       </DarkModeContext.Provider>
@@ -63,7 +65,6 @@ export const AppProvider: React.FC<{}> = (props) => {
                   "client-context": env.context,
                 }}
               />
-              <ScrollToTop />
               <History />
               <ScenesManager />
               <CharactersManager />

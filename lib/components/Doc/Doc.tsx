@@ -14,25 +14,23 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
-  createFilterOptions
+  createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
-import kebabCase from "lodash/kebabCase";
 import truncate from "lodash/truncate";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { AppLink } from "../AppLink/AppLink";
@@ -40,97 +38,220 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
-import {
-  ILoadFunction,
-  IMarkdownHeader,
-  useMarkdownFile
-} from "./hooks/useMarkdownFile";
+import { IMarkdownIndex, IMarkdownIndexes } from "./domains/Markdown";
+import { useDocNavigation } from "./hooks/useDocNavigation";
+import { ILoadFunction, useMarkdownFile } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
 import { useScrollOnHtmlLoad } from "./hooks/useScrollOnHtmlLoad";
 
 export const drawerWidth = "300px";
 
-export const Doc: React.FC<{
+export type ISideBarItems = Array<
+  | string
+  | IDocSidebar
+  | { label: string; collapsed: boolean; items: ISideBarItems }
+>;
+
+export type IDocSidebar = {
+  [category: string]: ISideBarItems;
+};
+
+type IProps = {
   title: string;
-  currentPage: string | undefined;
+  /**
+   * Prefix used by the document
+   *
+   * e.g. `/srds/condensed`
+   */
   url: string;
+  /**
+   * Section right after the `props.url` which matches the current `<h1>` in the document
+   *n
+   * e.g. `/srds/condensed/{{h1}}`
+   */
+  page: string | undefined;
+
+  /**
+   * Where the user should go when clicking on the breadcrumb parent element
+   */
   parent: {
     title: string;
     url: string;
   };
+  /**
+   * Author of the document as well as links
+   */
   author?: {
     title: string;
     avatarUrl?: string;
-    items: Array<{ label: string; url: string }>;
+    items: Array<{
+      label: string;
+      url: string;
+    }>;
   };
+  /**
+   * Image visible on large views at the top of the document
+   */
   imageUrl?: string;
-  loadFunction: ILoadFunction;
+  /**
+   * Customize the max width of the document
+   */
   maxWidth?: ContainerTypeMap["props"]["maxWidth"];
+  /**
+   * Disables Search Enginge tracking
+   */
   noIndex?: boolean;
-}> = (props) => {
-  const { tableOfContent: toc, dom, allHeaders } = useMarkdownFile(
-    props.loadFunction
-  );
-  const hash = useLocation().hash;
-  const {
-    html,
-    nextH1,
-    previousH1,
-    currentH1,
-    title,
-    description,
-  } = useMarkdownPage({
-    page: props.currentPage,
-    hash: hash,
-    dom: dom,
-  });
-  useScrollOnHtmlLoad(html);
+  /**
+   * Function that returns the markdown document to parce
+   */
+  loadFunction: ILoadFunction;
+  /**
+   * Link to original file
+   */
+  gitHubLink?: string;
 
+  sideBar?: IDocSidebar;
+  defaultSideBarCategory?: string;
+};
+
+export type IDocProps = IProps;
+
+export const Doc: React.FC<IProps> = (props) => {
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const history = useHistory();
-  const location = useLocation();
   const logger = useLogger();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const section = params.get("goTo");
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openH1, setOpenH1] = useState<string | undefined>();
   const [search, setSearch] = useState("");
+  const { dom, markdownIndexes } = useMarkdownFile({
+    loadFunction: props.loadFunction,
+    prefix: props.url,
+  });
 
-  useEffect(() => {
-    setOpenH1(currentH1?.id);
-  }, [currentH1]);
+  const { pageDom, pageId, title, description, image } = useMarkdownPage({
+    url: props.url,
+    page: props.page,
+    section: section,
+    dom: dom,
+  });
 
-  useEffect(() => {
-    const docTitle = props.title ? `:${kebabCase(props.title)}` : "";
-    const pageTitle = title ? `:${kebabCase(title)}` : "";
-    const sectionTitle = location.hash
-      ? `:${location.hash.replace("#", "")}`
-      : "";
-    const logMessage = `Route:Srd${docTitle}${pageTitle}${sectionTitle}`;
+  const { navigation } = useDocNavigation({
+    currentPageId: pageId,
+    markdownIndexes: markdownIndexes,
+    docSideBar: props.sideBar,
+  });
+  const html = pageDom?.innerHTML;
+  const imageUrl = image || props.imageUrl;
+  const shouldRenderImage = imageUrl && !isSmall;
+  const shouldRenderSectionTitle = title !== props.title;
+  const fullPath = location.pathname + location.search;
 
-    logger.info(logMessage, {
-      pathname: location.pathname,
-      hash: location.hash,
-    });
-  }, [location.pathname, location.hash]);
+  useScrollOnHtmlLoad(html, section);
 
-  function goTo(path: string) {
-    history.push(`${props.url}/${path}`);
+  useEffect(
+    function scrollOnPageChange() {
+      if (!fullPath.includes("?")) {
+        window.scrollTo(0, 0);
+      }
+      setMobileMenuOpen(false);
+    },
+    [fullPath]
+  );
+
+  useEffect(function onUnmount() {
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
+
+  useEffect(
+    function sendLog() {
+      const logMessage = `Route:Document:${location.pathname}`;
+
+      logger.info(logMessage, {
+        pathname: location.pathname,
+        page: pageId,
+        section: section,
+      });
+    },
+    [location.pathname]
+  );
+
+  useEffect(
+    function transformHashToGoodUrl() {
+      if (location.hash) {
+        const newSection = location.hash.replace("#", "");
+
+        history.replace({
+          pathname: location.pathname,
+          search: `?goTo=${newSection}`,
+        });
+      }
+    },
+    [location.hash]
+  );
+
+  function handleMarkdownAnchorClick(e: Event) {
+    e.preventDefault();
+    const anchor = e.currentTarget as Element | undefined;
+    const href = anchor?.getAttribute("href");
+
+    if (!href) {
+      return;
+    }
+
+    if (href?.startsWith("/") || href?.startsWith("#")) {
+      history.push(href);
+    } else {
+      window.open(href);
+    }
   }
 
-  const shouldRenderImage = props.imageUrl && !isSmall;
+  function handleGoToIndex(page: IMarkdownIndex) {
+    if (page.url) {
+      history.push(page.url);
+    }
+  }
+
+  useEffect(
+    function connectTocAnchors() {
+      {
+        document.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", handleMarkdownAnchorClick);
+        });
+
+        return () => {
+          document.querySelectorAll("a").forEach((a) => {
+            a.removeEventListener("click", handleMarkdownAnchorClick);
+          });
+        };
+      }
+    },
+    [html]
+  );
+
   return (
     <Page
-    
       drawerWidth={!isSmall ? drawerWidth : undefined}
       pb="4rem"
       debug={{ metaTitle: title, metaDescription: description }}
+      disableAutomaticScrollTop
     >
-      <PageMeta title={title} description={description} noIndex={props.noIndex}/>
+      <PageMeta
+        title={shouldRenderSectionTitle ? `${title} | ${props.title}` : title}
+        description={description}
+        image={imageUrl}
+        noIndex={props.noIndex}
+      />
       {html ? (
         <Fade in>
           <Box display="flex">
-            {renderTableOfContent()}
+            {renderSideBar()}
             <Box
               className={css({
                 flexGrow: 1,
@@ -142,7 +263,7 @@ export const Doc: React.FC<{
                     marginTop: "-2rem",
                     marginBottom: "1rem",
                     width: "100%",
-                    height: isSmall ? "8rem" : "16rem",
+                    height: "10rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
@@ -151,23 +272,41 @@ export const Doc: React.FC<{
                     overflow: "hidden",
                     maskImage:
                       "linear-gradient(to bottom, #000 0%, transparent 100%)",
-                    backgroundImage: `url("${props.imageUrl}")`,
+                    backgroundImage: `url("${imageUrl}")`,
                   })}
                 />
               )}
-              <Container maxWidth={props.maxWidth ?? "md"}>
+              <Container maxWidth={("lg" || props.maxWidth) ?? "md"}>
                 {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
                 <Box>
                   <Box pb="1rem" mt="-1.5rem">
                     {renderHeader()}
                   </Box>
-                  <Box mx="-.5rem">{renderNavigationButtons()}</Box>
                 </Box>
-                <MarkdownElement renderedMarkdown={html} />
-                <Box mt="3rem" mb="1rem">
-                  <Divider />
-                </Box>
+                <Grid container>
+                  <Grid item xs>
+                    <Box pr={2}>
+                      <MarkdownElement renderedMarkdown={html} />
+                    </Box>
+                  </Grid>
+                  <Hidden mdDown>
+                    <Grid item lg={3}>
+                      <Box
+                        pl={2}
+                        className={css({
+                          position: "sticky",
+                          top: "0",
+                        })}
+                      >
+                        {renderTableOfContents()}
+                      </Box>
+                    </Grid>
+                  </Hidden>
+                </Grid>
+
+                {renderEditButton()}
+
                 {renderNavigationButtons()}
                 {renderMobileMenu()}
               </Container>
@@ -179,6 +318,61 @@ export const Doc: React.FC<{
       )}
     </Page>
   );
+
+  function renderTableOfContents() {
+    const tableOfContentsPaddingTop = "4.5rem";
+    return (
+      <>
+        <Box
+          className={css({
+            paddingTop: tableOfContentsPaddingTop,
+          })}
+        >
+          <Box
+            className={css({
+              borderLeft: "1px solid #dadde1",
+              paddingTop: "1rem",
+              height: "100%",
+              maxHeight: `calc(100vh - ${tableOfContentsPaddingTop})`,
+              position: "sticky",
+              top: "0",
+              overflowY: "auto",
+            })}
+          >
+            <DocTableOfContents
+              markdownIndexes={markdownIndexes}
+              currentPage={pageId}
+            />
+          </Box>
+        </Box>
+      </>
+    );
+  }
+
+  function renderEditButton() {
+    if (!props.gitHubLink) {
+      return null;
+    }
+    const githubHash = pageId ? `#${pageId}` : "";
+    return (
+      <Box my=".5rem" pb="2rem">
+        <Grid container justify="flex-start">
+          <Grid item>
+            <Button
+              color="default"
+              component="a"
+              startIcon={<EditIcon />}
+              target="_blank"
+              rel="noreferrer"
+              href={`${props.gitHubLink}${githubHash}`}
+            >
+              Edit this Page
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
 
   function renderAuthor() {
     if (!props.author) {
@@ -301,42 +495,66 @@ export const Doc: React.FC<{
   }
 
   function renderNavigationButtons() {
+    const previousIndex = markdownIndexes.flat.find(
+      (i) => i.id === navigation.previousPageId
+    );
+    const nextIndex = markdownIndexes.flat.find(
+      (i) => i.id === navigation.nextPageId
+    );
     return (
-      <Box
-        display="flex"
-        justifyContent={
-          previousH1 && !nextH1
-            ? "flex-start"
-            : !previousH1 && nextH1
-            ? "flex-end"
-            : "space-between"
-        }
-      >
-        {previousH1 && (
-          <Button
-            startIcon={<NavigateBeforeIcon />}
-            color="primary"
-            data-cy="doc.previous"
-            onClick={() => {
-              goTo(previousH1?.id);
-            }}
-          >
-            {truncate(previousH1?.textContent ?? "", { length: 50 })}
-          </Button>
-        )}
-
-        {nextH1 && (
-          <Button
-            endIcon={<NavigateNextIcon />}
-            color="primary"
-            data-cy="doc.next"
-            onClick={() => {
-              goTo(nextH1?.id);
-            }}
-          >
-            {truncate(nextH1?.textContent ?? "", { length: 50 })}
-          </Button>
-        )}
+      <Box>
+        <Grid
+          container
+          spacing={2}
+          justify={
+            previousIndex && !nextIndex
+              ? "flex-start"
+              : !previousIndex && nextIndex
+              ? "flex-end"
+              : "space-between"
+          }
+        >
+          {previousIndex && (
+            <Grid container item xs={12} sm={6} justify="flex-start">
+              <Button
+                startIcon={<NavigateBeforeIcon />}
+                fullWidth={isSmall}
+                className={css({
+                  height: "4rem",
+                  textAlign: "left",
+                })}
+                variant="outlined"
+                color="primary"
+                data-cy="doc.previous"
+                onClick={() => {
+                  handleGoToIndex(previousIndex);
+                }}
+              >
+                {truncate(previousIndex?.label ?? "", { length: 50 })}
+              </Button>
+            </Grid>
+          )}
+          {nextIndex && (
+            <Grid container item xs={12} sm={6} justify="flex-end">
+              <Button
+                endIcon={<NavigateNextIcon />}
+                fullWidth={isSmall}
+                className={css({
+                  height: "4rem",
+                  textAlign: "right",
+                })}
+                variant="outlined"
+                color="primary"
+                data-cy="doc.next"
+                onClick={() => {
+                  handleGoToIndex(nextIndex);
+                }}
+              >
+                {truncate(nextIndex?.label ?? "", { length: 50 })}
+              </Button>
+            </Grid>
+          )}
+        </Grid>
       </Box>
     );
   }
@@ -349,9 +567,9 @@ export const Doc: React.FC<{
           size="small"
           autoHighlight
           filterOptions={createFilterOptions({ limit: 10 })}
-          options={allHeaders.map((header) => header)}
-          groupBy={(header) => header.grouping ?? ""}
-          getOptionLabel={(header) => header.label}
+          options={markdownIndexes.flat.map((i) => i)}
+          groupBy={(index) => index.pageLabel ?? ""}
+          getOptionLabel={(index) => index.label}
           inputValue={search}
           onInputChange={(e, value, reason) => {
             if (reason === "input") {
@@ -361,14 +579,14 @@ export const Doc: React.FC<{
             }
           }}
           onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownHeader)?.label;
+            const label = (newValue as IMarkdownIndex)?.id;
             if (label) {
-              const header = allHeaders.find((h) => label === h.label);
+              const index = markdownIndexes.flat.find(
+                (index) => label === index.id
+              );
 
-              if (header?.level === 1) {
-                history.push(`${props.url}/${header?.id}`);
-              } else {
-                history.push(`${props.url}/${header?.page?.id}#${header?.id}`);
+              if (index?.url) {
+                history.push(index.url);
               }
             }
           }}
@@ -400,79 +618,14 @@ export const Doc: React.FC<{
     );
   }
 
-  function renderTableOfContent() {
-    const list = (
-      <List>
-        {Object.entries(toc).map(([, h1], index) => {
-          const shouldRenderExpandIcon = h1.children.length > 0;
-          const isSubSectionOpen = openH1 === h1.page.id;
-
-          return (
-            <React.Fragment key={index}>
-              <ListItem
-                button
-                dense
-                component={Link}
-                to={`${props.url}/${h1.page.id}`}
-                data-cy={`doc.table-of-content.h1`}
-                data-cy-page-id={h1.page.id}
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                }}
-              >
-                {renderTableOfContentElement(h1.page)}
-                {shouldRenderExpandIcon && (
-                  <>
-                    <IconButton
-                      size="small"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setOpenH1((draft) => {
-                          if (draft === h1.page.id) {
-                            return undefined;
-                          }
-                          return h1.page.id;
-                        });
-                      }}
-                    >
-                      {isSubSectionOpen ? (
-                        <ExpandLessIcon htmlColor={theme.palette.text.hint} />
-                      ) : (
-                        <ExpandMoreIcon htmlColor={theme.palette.text.hint} />
-                      )}
-                    </IconButton>
-                  </>
-                )}
-              </ListItem>
-              <Collapse
-                in={isSubSectionOpen}
-                data-cy={`doc.table-of-content.${h1.page.id}.h2s`}
-              >
-                {h1.children.map((h2, h2Index) => {
-                  return (
-                    <ListItem
-                      button
-                      dense
-                      key={h2Index}
-                      component={Link}
-                      to={`${props.url}/${h1.page.id}#${h2.id}`}
-                      data-cy={`doc.table-of-content.h2`}
-                      data-cy-page-id={h2.id}
-                      onClick={() => {
-                        window.location.hash = h2.id;
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      {renderTableOfContentElement(h2)}
-                    </ListItem>
-                  );
-                })}
-              </Collapse>
-            </React.Fragment>
-          );
-        })}
-      </List>
+  function renderSideBar() {
+    const sideBar = (
+      <DocSideBar
+        currentPage={pageId}
+        markdownIndexes={markdownIndexes}
+        sideBar={props.sideBar}
+        defaultSideBarCategory={props.defaultSideBarCategory}
+      />
     );
 
     return (
@@ -484,13 +637,8 @@ export const Doc: React.FC<{
             onClose={() => {
               setMobileMenuOpen(false);
             }}
-            classes={{
-              paper: css({
-                background: lightBackground,
-              }),
-            }}
           >
-            <Box p="2rem">{list}</Box>
+            <Box p="2rem">{sideBar}</Box>
           </Drawer>
         </Hidden>
         <Hidden smDown>
@@ -505,59 +653,15 @@ export const Doc: React.FC<{
               }),
               paper: css({
                 width: drawerWidth,
-                background: lightBackground,
               }),
             }}
           >
             <Box mt="4.9rem" />
             <Divider />
-            {list}
+            {sideBar}
           </Drawer>
         </Hidden>
       </>
-    );
-  }
-
-  function renderTableOfContentElement(tocElement: IMarkdownHeader) {
-    return (
-      <ListItemText
-        primary={
-          <Box
-            display="inline-block"
-            title={tocElement.label}
-            className={css({
-              width: "100%",
-              display: "inline-block",
-              paddingLeft: `${(tocElement.level - 1) * 1}rem`,
-            })}
-          >
-            {tocElement.level === 1 ? (
-              <Typography
-                noWrap
-                className={css({
-                  fontWeight: "bold",
-                  width: "100%",
-                  display: "inline-block",
-                })}
-                dangerouslySetInnerHTML={{
-                  __html: tocElement.label,
-                }}
-              />
-            ) : (
-              <Typography
-                noWrap
-                className={css({
-                  width: "100%",
-                  display: "inline-block",
-                })}
-                dangerouslySetInnerHTML={{
-                  __html: tocElement.label,
-                }}
-              />
-            )}
-          </Box>
-        }
-      />
     );
   }
 
@@ -566,6 +670,206 @@ export const Doc: React.FC<{
       <Box display="flex" justifyContent="center">
         <CircularProgress />
       </Box>
+    );
+  }
+};
+
+export const DocSideBar: React.FC<{
+  currentPage: string | undefined;
+  markdownIndexes: IMarkdownIndexes;
+  sideBar: IDocSidebar | undefined;
+  defaultSideBarCategory?: string;
+}> = (props) => {
+  const theme = useTheme();
+
+  const { navigation, sideBar } = useDocNavigation({
+    currentPageId: props.currentPage,
+    markdownIndexes: props.markdownIndexes,
+    docSideBar: props.sideBar,
+    defaultSideBarCategory: props.defaultSideBarCategory,
+  });
+  const [openList, setOpenList] = useState<Array<string>>([
+    ...navigation.defaultOpenedCategories,
+  ]);
+
+  useEffect(() => {
+    setOpenList((d) => [...d, ...navigation.highlightedItems]);
+  }, [navigation.highlightedItems]);
+
+  return <List>{renderSideBarContent(sideBar)}</List>;
+
+  function renderSideBarContent(categories: IDocSidebar) {
+    const categoryNames = Object.keys(categories);
+    return (
+      <>
+        {categoryNames.map((category, i) => {
+          const items = categories[category];
+          const isCategorySelected = navigation.highlightedItems.includes(
+            category
+          );
+          const isCategoryOpened = openList.includes(category);
+
+          return (
+            <React.Fragment key={category}>
+              <ListItem
+                button
+                dense
+                className={css({ borderRadius: theme.shape.borderRadius })}
+                data-cy={"doc.side-bar.category"}
+                data-cy-open={isCategoryOpened}
+                onClick={() => {
+                  if (isCategoryOpened) {
+                    setOpenList((draft) => draft.filter((i) => i !== category));
+                  } else {
+                    setOpenList((draft) => [...draft, category]);
+                  }
+                }}
+              >
+                <Box width="100%">
+                  <Typography
+                    noWrap
+                    className={css({
+                      color: isCategorySelected
+                        ? theme.palette.primary.main
+                        : theme.palette.text.primary,
+                      fontWeight: isCategorySelected
+                        ? theme.typography.fontWeightBold
+                        : theme.typography.fontWeightRegular,
+                    })}
+                  >
+                    {category.replace("+", "")}
+                  </Typography>
+                </Box>
+
+                <ArrowForwardIosIcon
+                  htmlColor={theme.palette.text.hint}
+                  className={css({
+                    width: "1rem",
+                    height: "1rem",
+                    transform: isCategoryOpened
+                      ? "rotate(90deg)"
+                      : "rotate(0deg)",
+                    transition: theme.transitions.create("transform"),
+                  })}
+                />
+              </ListItem>
+              <Collapse in={isCategoryOpened}>
+                <List
+                  className={css({
+                    paddingLeft: "1rem",
+                    paddingTop: "0",
+                    paddingBottom: "0",
+                  })}
+                >
+                  {items.map((item, j) => {
+                    const shouldRenderItem = typeof item === "string";
+                    const index = shouldRenderItem
+                      ? props.markdownIndexes.flat.find((i) => i.id === item)
+                      : undefined;
+                    const isItemSelected = navigation.highlightedItems.includes(
+                      index?.id ?? ""
+                    );
+                    return (
+                      <React.Fragment key={j}>
+                        {shouldRenderItem && index && (
+                          <ListItem
+                            button
+                            component={RouterLink}
+                            to={index.url ?? ""}
+                            data-cy="doc.side-bar.category-item"
+                            data-cy-item-id={index.id}
+                            dense
+                            className={css({
+                              borderRadius: theme.shape.borderRadius,
+                            })}
+                          >
+                            <Box width="100%">
+                              <Typography
+                                noWrap
+                                className={css({
+                                  color: isItemSelected
+                                    ? theme.palette.primary.main
+                                    : theme.palette.text.primary,
+                                  fontWeight: isItemSelected
+                                    ? theme.typography.fontWeightBold
+                                    : theme.typography.fontWeightRegular,
+                                })}
+                              >
+                                {index.label}
+                              </Typography>
+                            </Box>
+                          </ListItem>
+                        )}
+                        {!shouldRenderItem &&
+                          renderSideBarContent(item as IDocSidebar)}
+                      </React.Fragment>
+                    );
+                  })}
+                </List>
+              </Collapse>
+            </React.Fragment>
+          );
+        })}
+      </>
+    );
+  }
+};
+
+export const DocTableOfContents: React.FC<{
+  currentPage: string | undefined;
+  markdownIndexes: IMarkdownIndexes;
+}> = (props) => {
+  const theme = useTheme();
+  const params = new URLSearchParams(location.search);
+  const section = params.get("goTo");
+
+  const currentIndex = props.markdownIndexes.flat.find(
+    (i) => i.id === props.currentPage
+  );
+
+  return <Box>{renderTableOfContentItem(currentIndex)}</Box>;
+
+  function renderTableOfContentItem(index: IMarkdownIndex | undefined) {
+    if (!index) {
+      return null;
+    }
+    return (
+      <ul
+        className={css({
+          listStyleType: "none",
+          marginTop: "0",
+          marginBottom: "0",
+          paddingLeft: ".5rem",
+        })}
+      >
+        {index.children.map((child) => {
+          return (
+            <li
+              key={child.id}
+              className={css({
+                margin: ".5rem",
+              })}
+            >
+              <AppLink
+                to={child.url ?? ""}
+                className={css({
+                  color:
+                    section === child.id
+                      ? theme.palette.primary.main
+                      : theme.palette.text.secondary,
+                  fontWeight:
+                    section === child.id
+                      ? theme.typography.fontWeightBold
+                      : "inherit",
+                })}
+              >
+                {child.label}
+              </AppLink>
+              {child.children.length > 1 && renderTableOfContentItem(child)}
+            </li>
+          );
+        })}
+      </ul>
     );
   }
 };

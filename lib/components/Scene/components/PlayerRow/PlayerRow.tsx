@@ -63,13 +63,17 @@ export const PlayerRow: React.FC<
 
   const selectedRowStyle = css({ backgroundColor: lightBackground });
   const playerInfoCellStyle = css({
-    padding: "0.7rem",
+    padding: "0.5rem",
     borderBottom: "none",
   });
   const controlsRowStyle = css({
-    padding: "0 0.7rem",
+    padding: "0.5rem",
   });
-  const defaultTableCellStyle = css({ border: "none" });
+  const controlTableCellStyle = css({ border: "none", padding: ".7rem" });
+  const fatePointsTableCell = css({
+    border: "none",
+    padding: ".7rem 0",
+  });
   const borderTableCellStyle = css({ padding: "0" });
 
   const fatePointsStyle = css({
@@ -84,10 +88,10 @@ export const PlayerRow: React.FC<
     margin: "0 auto",
   });
 
-  function roll(options: IRollDiceOptions) {
+  const handleRoll = (options: IRollDiceOptions) => {
     props.onDiceRoll(options);
     logger.info("ScenePlayer:onDiceRoll");
-  }
+  };
 
   return (
     <>
@@ -106,6 +110,7 @@ export const PlayerRow: React.FC<
               className={css({
                 width: "100%",
                 textAlign: "left",
+                padding: "4px 5px",
                 fontSize: "1.2rem",
                 lineHeight: Font.lineHeight(1.2),
                 fontWeight: props.isMe ? "bold" : "normal",
@@ -181,7 +186,7 @@ export const PlayerRow: React.FC<
               borderSize=".15rem"
               disabled={!canControl}
               onClick={() => {
-                roll({});
+                handleRoll({});
               }}
             />
           </Box>
@@ -268,8 +273,27 @@ export const PlayerRow: React.FC<
           [selectedRowStyle]: shouldHighlight,
         })}
       >
-        <TableCell colSpan={4} className={defaultTableCellStyle}>
-          <Grid container alignItems="center" justify="flex-end" spacing={1}>
+        <TableCell className={controlTableCellStyle}>
+          <Tooltip title={t("player-row.remove-character")}>
+            <IconButton
+              data-cy={`${props["data-cy"]}.remove`}
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onPlayerRemove();
+                logger.info("ScenePlayer:onPlayerRemove");
+              }}
+            >
+              <HighlightOffIcon
+                color="error"
+                className={css({ width: "1rem", height: "1rem" })}
+              />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
+        <TableCell className={controlTableCellStyle} />
+        <TableCell className={fatePointsTableCell}>
+          <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
               <Tooltip title={t("player-row.remove-fate-point")}>
                 <span>
@@ -311,28 +335,9 @@ export const PlayerRow: React.FC<
                 </IconButton>
               </Tooltip>
             </Grid>
-            {!props.player.isGM && (
-              <Grid item>
-                <Tooltip title={t("player-row.remove-character")}>
-                  <IconButton
-                    data-cy={`${props["data-cy"]}.remove`}
-                    size="small"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      props.onPlayerRemove();
-                      logger.info("ScenePlayer:onPlayerRemove");
-                    }}
-                  >
-                    <HighlightOffIcon
-                      color="error"
-                      className={css({ width: "1rem", height: "1rem" })}
-                    />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-            )}
           </Grid>
         </TableCell>
+        <TableCell className={controlTableCellStyle} />
       </TableRow>
     );
   }

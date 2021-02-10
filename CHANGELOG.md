@@ -1,8 +1,22 @@
 # Changelog
 
+Detailed technical changelog of Fari
+
+## v3.6 Document SideBar + Table of Contents and support for more dice
+
+#### Feb 10th, 2021
+
+- feat: new doc sidebar
+- feat: new doc table of content
+- feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
+- feat: prettier dice result tooltip
+- feat: support for meta images in documents
+- fix: uniq groups in data export manager
+- fix: footer alignments
+
 ## v3.5 Resources, Private Aspects and Scene Notes
 
-#### January 19th, 2020
+#### January 19th, 2021
 
 - feat: SRDs Document
 - feat: Scene Checklist Document
@@ -20,6 +34,26 @@ feat: Index Card context menu for boost
 feat: character cards in tabs
 fix: Galcian typo #218
 fix: security issue with immer
+
+**v3.5.3**
+
+feat: better Docs SEO
+feat: Quick Conflicts and Fate Magic dials
+feat: dynamic table of content for certain docs (like /dials)
+feat: dynamic anchors for certain docs (like /fate-stunts)
+fix: routing mechanism for SRD (using paths instead of hash)
+
+**v3.5.4**
+
+feat: new WIP wiki
+feat: more flexible dynamic table of content for docs
+feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc)
+feat: ⚠ BETA ⚠ data export and import manager
+
+**v3.5.5**
+
+fix: scroll issue in docs
+fix: removed `showdown` markdown transformer in favor of `marked`
 
 ## v3.4 Join screen UX, Italian translations
 

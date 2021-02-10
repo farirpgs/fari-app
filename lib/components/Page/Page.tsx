@@ -14,6 +14,7 @@ import Select from "@material-ui/core/Select";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -38,6 +39,7 @@ import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
+import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
 let gameIdSingleton: string | undefined = undefined;
 const FariMaxWidth = "1920px";
@@ -56,8 +58,11 @@ export const Page: React.FC<{
   drawerWidth?: string;
   pb?: string;
   debug?: Record<string, string>;
+  disableAutomaticScrollTop?: boolean;
 }> = (props) => {
   const history = useHistory();
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const { displayDonation = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
@@ -66,7 +71,6 @@ export const Page: React.FC<{
   const darkModeManager = useContext(DarkModeContext);
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
-  const theme = useTheme();
   const logger = useLogger();
 
   const isLive = props.live !== undefined;
@@ -79,6 +83,8 @@ export const Page: React.FC<{
 
   return (
     <>
+      {!props.disableAutomaticScrollTop && <ScrollToTop />}
+
       {renderHeader()}
       {renderContent()}
     </>
@@ -138,7 +144,11 @@ export const Page: React.FC<{
 
         <Container>
           {env.isLocalHost && props.debug && (
-            <pre>
+            <pre
+              className={css({
+                whiteSpace: "break-spaces",
+              })}
+            >
               {Object.keys(props.debug).map((label) => {
                 return (
                   <Box key={label}>
@@ -155,7 +165,7 @@ export const Page: React.FC<{
               alignItems="center"
               spacing={4}
             >
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <AppButtonLink
                   to="https://discord.gg/vMAJFjUraA"
                   target="_blank"
@@ -165,7 +175,7 @@ export const Page: React.FC<{
                   {"Come chat on Discord"}
                 </AppButtonLink>
               </Grid>
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Select
                   data-cy="page.languages"
                   value={currentLanguage}
@@ -197,7 +207,7 @@ export const Page: React.FC<{
               spacing={4}
               alignItems="center"
             >
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Typography>
                   <Link
                     href="https://www.netlify.com"
@@ -208,7 +218,7 @@ export const Page: React.FC<{
                   </Link>
                 </Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Typography>
                   <AppLink
                     to="/changelog"
@@ -227,7 +237,7 @@ export const Page: React.FC<{
                 spacing={4}
                 alignItems="center"
               >
-                <Grid item sm>
+                <Grid item xs={isSmall ? 12 : undefined}>
                   <Kofi />
                 </Grid>
 

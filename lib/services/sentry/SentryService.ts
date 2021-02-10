@@ -2,12 +2,9 @@ import * as Sentry from "@sentry/react";
 import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
 
-const isLocalhost = env.context === "localhost";
-const isTests = process.env.JEST_WORKER_ID !== undefined;
-
 export class SentryService {
   constructor() {
-    if (!isTests && !isLocalhost) {
+    if (!env.isTest && !env.isLocalHost) {
       Sentry.init({
         release: `fari@v${env.version}`,
         environment: env.context,
@@ -20,7 +17,7 @@ export class SentryService {
     severity: Severity,
     context: { [key: string]: any } | undefined
   ) {
-    if (isTests || isLocalhost) {
+    if (env.isTest || env.isLocalHost) {
       return;
     }
 

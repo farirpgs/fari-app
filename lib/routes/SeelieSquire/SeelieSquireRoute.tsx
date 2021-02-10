@@ -6,11 +6,13 @@ import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
 import { creatures, ICreature } from "./domains/Creatures";
 
-export const SeelieSquireRoute: React.FC<{ page: string }> = (props) => {
+export const SeelieSquireRoute: React.FC<{
+  page: string;
+}> = (props) => {
   const theme = useTheme();
   return (
     <Doc
-      currentPage={props.page}
+      page={props.page}
       url="/seelie-squire"
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
@@ -18,6 +20,7 @@ export const SeelieSquireRoute: React.FC<{ page: string }> = (props) => {
       loadFunction={async () => {
         return makeSeelieSquireMarkdown(theme);
       }}
+      gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
       noIndex
       author={{
         title: "Seelie Squire",
@@ -106,12 +109,13 @@ ${c.description}
   }
 
   function renderStunts(c: ICreature) {
-    return c.character.stunts.map(
-      (s) => `
+    return c.character.stunts
+      .map(
+        (s) => `
 > <div class=${smallFateLabelClass}>${s.name}</div>
-> ${s.description}
-> `
-    );
+> ${s.description}`
+      )
+      .join("<br/><br/>");
   }
 
   function renderHealth(c: ICreature) {
@@ -124,7 +128,7 @@ ${c.description}
   }
 
   function renderSkills(c: ICreature) {
-    return c.character.skills.map((s) => `\n * ${s}`);
+    return c.character.skills.map((s) => `- ${s}`).join("\n>");
   }
 
   function renderAspects(c: ICreature) {

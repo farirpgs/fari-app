@@ -7,7 +7,7 @@ import {
   migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
-import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 

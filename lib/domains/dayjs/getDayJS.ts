@@ -7,6 +7,10 @@ dayjs.extend(localizedFormat);
 
 export const dayJS = dayjs;
 
+export function getDayJs() {
+  return dayJS();
+}
+
 export function getUnix() {
   return dayjs().unix();
 }

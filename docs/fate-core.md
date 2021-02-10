@@ -41,8 +41,6 @@ It’s not all just conversation, though—sometimes you’ll use dice and the r
 
 Fate doesn’t come with a default setting, but it works best with any premise where the characters are proactive, capable people leading dramatic lives. We give more advice on how to bring that flavor to your games in the next chapter.
 
-<iframe src="https://itch.io/embed/491599" height="167" width="100%" frameborder="0"><a href="https://evilhat.itch.io/fate-core">Fate Core System by evilhat</a></iframe>
-
 > ### New To Fate
 >
 > If you’re a new player, all you really need to know is in this chapter and on your character sheet—the GM will help you figure out the rest. You may want to check out the cheat sheet just to save your GM some effort, but otherwise, you should be good to go.

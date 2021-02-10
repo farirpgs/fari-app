@@ -1,8 +1,7 @@
-import showdown from "showdown";
-const converter = new showdown.Converter();
+import marked from "marked";
 
 export function md(strings: TemplateStringsArray, ...args: Array<any>): string {
   const raw = strings.raw[0];
 
-  return converter.makeHtml(raw);
+  return marked(raw);
 }

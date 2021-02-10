@@ -1,5 +1,5 @@
 import { ICharacter } from "../../../contexts/CharactersContext/CharactersContext";
-import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import { IDiceRollWithBonus } from "../../../domains/dice/Dice";
 import { IPeerAction } from "../../../hooks/usePeerJS/IPeerAction";
 
 export type IPeerActions =
@@ -9,7 +9,7 @@ export type IPeerActions =
   | ILoadCharacterPeerAction
   | IUpdatePlayedInTurnOrderPeerAction;
 
-type IRollPeerAction = IPeerAction<"roll", IDiceRoll>;
+type IRollPeerAction = IPeerAction<"roll", IDiceRollWithBonus>;
 type IUpdateFatePointPeerAction = IPeerAction<"update-fate-point", number>;
 type ILoadCharacterPeerAction = IPeerAction<"load-character", ICharacter>;
 type IUpdateCharacterPeerAction = IPeerAction<"update-character", ICharacter>;

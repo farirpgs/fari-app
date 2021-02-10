@@ -16,11 +16,11 @@ import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice } from "../../domains/dice/Dice";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
-import { EyeIcon } from "../../domains/Icons/Icons";
-import { formatDiceNumber } from "../../hooks/useFudgeDice/useFudgeDice";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { Icons } from "../../domains/Icons/Icons";
+import { formatDiceNumber } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { Oracle } from "./domains/Oracle";
@@ -58,11 +58,12 @@ export const OracleRoute = () => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
+  const rollDice = useRollDice();
 
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
   const [likeliness, setLikeliness] = useState<number>(0);
   const [rolling, setRolling] = useState<boolean>(false);
-  const [finalRoll, setFinalRoll] = useState<IDiceRoll>();
+  const [finalRoll, setFinalRoll] = useState<IDiceRollWithBonus>();
   const finalRollTotal = finalRoll?.total ?? 0;
   const finalResult = finalRollTotal + likeliness;
   const oracleValue = Oracle.getValue(finalResult);
@@ -70,7 +71,7 @@ export const OracleRoute = () => {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = Dice.roll4DF({});
+      const newRoll = rollDice({});
       logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });
@@ -97,7 +98,10 @@ export const OracleRoute = () => {
           flexDirection="column"
           alignItems="center"
         >
-          <EyeIcon className={css({ fontSize: "3rem" })} color="primary" />
+          <Icons.EyeIcon
+            className={css({ fontSize: "3rem" })}
+            color="primary"
+          />
           <FateLabel variant="h4" align="center" color="primary">
             {"Oracle"}
           </FateLabel>
@@ -109,7 +113,6 @@ export const OracleRoute = () => {
             size="5rem"
             fontSize="2rem"
             borderSize=".2rem"
-            borderColor="#000000"
             onClick={() => {
               roll();
             }}
