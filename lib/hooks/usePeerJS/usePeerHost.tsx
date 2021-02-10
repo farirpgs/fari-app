@@ -1,6 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
-import { DataTransferObject } from "../../domains/data-transfer-objects/DataTransferObject";
+import { DataTransferObject } from "../../domains/data-transfer-object/DataTransferObject";
 import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
 

@@ -9,7 +9,7 @@ import {
 } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
+import { Id } from "../../domains/id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};

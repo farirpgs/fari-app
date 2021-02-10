@@ -61,8 +61,10 @@ import {
 } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
-import { IRollDiceOptions } from "../../../domains/dice/Dice";
-import { IDiceRoll } from "../../../domains/dice/IDiceRoll";
+import {
+  IDiceRollWithBonus,
+  IRollDiceOptions,
+} from "../../../domains/dice/Dice";
 import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
@@ -87,7 +89,7 @@ const HeaderHelpLinks: Record<string, string> = {
     "/srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice",
 };
 const FooterHelpLinks: Record<string, { label: string; link: string }> = {
-  "Stunts & Extras": {},
+  "Stunts & Extras": { label: "", link: "" },
 };
 
 export const CharacterV3Dialog: React.FC<{
@@ -95,7 +97,7 @@ export const CharacterV3Dialog: React.FC<{
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
-  rolls?: Array<IDiceRoll>;
+  rolls?: Array<IDiceRollWithBonus>;
   onRoll?(options: IRollDiceOptions): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
@@ -1183,7 +1185,6 @@ export const CharacterV3Dialog: React.FC<{
                   size="5rem"
                   fontSize="2rem"
                   borderSize=".2rem"
-                  borderColor="#000000"
                   onClick={() => {
                     props.onRoll?.({});
                   }}
