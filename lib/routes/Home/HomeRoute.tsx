@@ -23,7 +23,7 @@ import { Patreon } from "../../components/Patreon/Patreon";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { DiceGameIcon, EyeIcon } from "../../domains/Icons/Icons";
+import { Icons } from "../../domains/Icons/Icons";
 import { makeIcon } from "../../domains/Icons/makeIcon";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -226,7 +226,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
-                  {renderHeadingIcon(DiceGameIcon)}
+                  {renderHeadingIcon(Icons.DiceGameIcon)}
                   <FateLabel
                     variant="h5"
                     align="center"
@@ -241,7 +241,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Link to="/oracle">
                 <Box height="100%" display="flex" flexDirection="column">
-                  {renderHeadingIcon(EyeIcon)}
+                  {renderHeadingIcon(Icons.EyeIcon)}
                   <FateLabel
                     data-cy="home.oracle"
                     variant="h5"

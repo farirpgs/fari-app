@@ -2,17 +2,9 @@
 
 The ultimate open and community driven Fate wiki resources.
 
-<toc></toc>
+# Condensed / Core / Accelerated
 
-# FAQ
-
-Answers to the most popular Fate related questions.
-
-<toc></toc>
-
-## Condensed / Core / Accelerated
-
-<p class="author">By RPDeshaies</p>
+<page-meta author="RPDeshaies"></page-meta>
 
 The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
 
@@ -26,9 +18,9 @@ If you still don't know where to start, here's a tip:
 - [Read Fate Core](/srds/core) for all its great examples and guides on how to play.
 - [Read Fate Accelerated](/srds/accelerated) if you want a more simplified version of the system and want to get started quickly.
 
-## What's the Math Behind The Fate Dice
+# What's the Math Behind The Fate Dice
 
-<p class="author">By RPDeshaies</p>
+<page-meta author="RPDeshaies"></page-meta>
 
 The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are very different.
 
@@ -84,23 +76,21 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 | 3      | 4.94%          | 6.17%                         |
 | 4      | 1.23%          | 1.23%                         |
 
-# Tips and Tricks
+# What's an Average Session Time
 
-List of tips that we think are going to be useful for playing Fate.
+[...]
 
-<toc></toc>
+# How to GM Fate
 
-## How to GM Fate
+<page-meta author="Dgerrimea"></page-meta>
 
-<p class="author">By Dgerrimea</p>
-
-<p class="with-anchor">The Fate Mentality</p>
+### The Fate Mentality
 
 - Take inspiration from movies and TV, not from video games.
 - In D&D you start with what's true about the world, and cool moments come out of following the realistic (in that world) consequences of PC actions.
 - Fate is the other way around; you begin with the cool moments you want to create, and you then establish whatever facts about the world you need to get you there.
 
-<p class="with-anchor">Prepping Fate</p>
+### Prepping Fate
 
 - You need a story problem which is urgent, and catastrophic if ignored.
 - Look at the PCs' aspects, and the game aspects, and see what problems those imply.
@@ -109,14 +99,26 @@ List of tips that we think are going to be useful for playing Fate.
 - Answering each of those questions is a problem in its own right, and each scene should answer one or two of these questions.
 - Think of who would oppose the PCs, and prepare them and their minions.
 
-<p class="with-anchor">Running Fate</p>
+### Running Fate
 
 - Think in terms of scenes, and montage anything that doesn't deserve to be a scene.
 - Each scene needs a story question to answer (that's how you know when the scene is over), and a source of opposition (that's how you give your problem agency and urgency).
   ​
 
-<p class="with-anchor">Misc Tips</p>
+### Misc Tips
 
 - Don't roll unless success and failure are both interesting
 - Don't set up enemies just to be knocked down; PC's are damn resilient and failure is fun anyway
 - Don't forget how much narrative agency the players have. If they spend a fate point and say there's a secret door, then there's a secret door now. Forget about maps and plot twists; you're not showing your players something you made earlier, you're making it with them as a team. Don't take that away from them!
+
+# How to Make Balanced Fights
+
+[...]
+
+# How to Create a Good Villain
+
+[...]
+
+# How to Create a Good Setting
+
+[...]

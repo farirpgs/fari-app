@@ -4,8 +4,6 @@ import clsx from "clsx";
 import React from "react";
 import { scrollMarginTop } from "../Doc/hooks/useMarkdownFile";
 
-const anchorSvgMaterialUI = `<svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg>`;
-
 function getAnchorSvg(color: string) {
   return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' focusable='false' fill='${color}' viewBox='0 0 24 24' aria-hidden='true'%3E%3Cpath d='M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z'%3E%3C/path%3E%3C/svg%3E");`;
 }
@@ -21,18 +19,22 @@ const styles = (theme: Theme) => {
       ...theme.typography.body1,
       "color": theme.palette.text.primary,
       "wordBreak": "break-word",
+      "& strong, b": {
+        fontWeight: theme.typography.fontWeightBold,
+      },
       "& code": {
         lineHeight: 1.4,
         display: "inline-block",
-        fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
+        fontFamily: "inherit",
+        // fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
         WebkitFontSmoothing: "subpixel-antialiased",
-        padding: "0 3px",
+        padding: "0 4px",
         color: theme.palette.text.primary,
+        fontWeight: theme.typography.fontWeightBold,
         backgroundColor:
           theme.palette.type === "light"
-            ? "rgba(255, 229, 100, 0.2)"
+            ? "rgba(255, 229, 100, 0.4)"
             : "rgba(255, 229, 100, 0.2)",
-        fontSize: 14,
         borderRadius: 2,
       },
       "& pre": {
@@ -59,9 +61,7 @@ const styles = (theme: Theme) => {
         // Avoid layout jump after hydration (style injected by prism)
         lineHeight: 1.5,
       },
-      "& p code, & ul code, & pre code": {
-        fontSize: 14,
-      },
+
       "& .token.operator": {
         background: "transparent",
       },
@@ -76,7 +76,6 @@ const styles = (theme: Theme) => {
         alignItems: "center",
         color: theme.palette.primary.main,
         borderBottom: `2px solid ${theme.palette.primary.main}`,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "1rem",
         marginBottom: "2rem",
@@ -88,7 +87,6 @@ const styles = (theme: Theme) => {
         alignItems: "center",
         color: theme.palette.primary.main,
         borderBottom: `1px solid ${theme.palette.primary.main}`,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -99,7 +97,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -110,7 +107,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -121,7 +117,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -132,7 +127,6 @@ const styles = (theme: Theme) => {
         display: "flex",
         alignItems: "center",
         color: theme.palette.primary.main,
-        textTransform: "uppercase",
         fontWeight: 800,
         marginTop: "2rem",
         marginBottom: "1rem",
@@ -161,7 +155,6 @@ const styles = (theme: Theme) => {
         "display": "block",
         "wordBreak": "normal",
         "width": "fit-content",
-        // "boxShadow": theme.shadows[4],
         "border": `1px solid ${theme.palette.primary.main}`,
         "overflowX": "auto",
         "WebkitOverflowScrolling": "touch",
@@ -192,6 +185,8 @@ const styles = (theme: Theme) => {
           "background": theme.palette.primary.main,
           "borderBottom": `2px solid ${theme.palette.primary.main}`,
           "& th": {
+            ...theme.typography.body1,
+            fontWeight: theme.typography.fontWeightBold,
             color: theme.palette.getContrastText(theme.palette.primary.main),
           },
         },
@@ -203,18 +198,14 @@ const styles = (theme: Theme) => {
         },
       },
       "& td": {
-        ...theme.typography.body2,
+        ...theme.typography.body1,
         borderBottom: `1px solid ${theme.palette.divider}`,
         padding: ".5rem",
         color: theme.palette.text.primary,
       },
       "& td p": {
-        ...theme.typography.body2,
+        ...theme.typography.body1,
         margin: "0",
-      },
-      "& td code": {
-        fontSize: 13,
-        lineHeight: 1.6,
       },
       "& th": {
         fontSize: 14,
@@ -231,7 +222,8 @@ const styles = (theme: Theme) => {
         "boxShadow": theme.shadows[1],
         "backgroundColor": lightBackground,
         "padding": ".5rem 2rem",
-        "margin": "1.5rem 0",
+        "margin": "1.5rem auto",
+        "overflow": "auto",
         "& p": {
           marginTop: "16px",
         },
@@ -244,7 +236,6 @@ const styles = (theme: Theme) => {
           fontFamily: `'Work Sans', sans-serif`,
         },
       },
-
       "& a, & a code": {
         // Style taken from the Link component
         "color": theme.palette.primary.main,
@@ -261,7 +252,6 @@ const styles = (theme: Theme) => {
         // Avoid layout jump
         display: "block",
         margin: "0 auto",
-        width: "50%",
       },
       "& hr": {
         height: 1,
@@ -307,10 +297,11 @@ const styles = (theme: Theme) => {
           marginLeft: "0",
         },
       },
-      "& .author": {
-        textAlign: "right",
-        marginTop: "-.5rem",
-        // marginBottom: "0",
+      "& .page-meta": {
+        fontSize: "1rem",
+        lineHeight: "2rem",
+        marginTop: "-2rem",
+        marginBottom: "1rem",
         color: theme.palette.text.secondary,
       },
     },

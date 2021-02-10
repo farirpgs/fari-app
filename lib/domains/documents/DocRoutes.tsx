@@ -1,17 +1,15 @@
 import { IDocProps } from "../../components/Doc/Doc";
-import { MarkdownDocMode } from "../../components/Doc/domains/Markdown";
 import { Images } from "../../constants/Images";
 import { DocImport } from "./DocImport";
 
-export const DocRoutes: Array<
-  Omit<IDocProps, "page" | "subPage" | "section">
-> = [
+export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
   {
     url: "/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
     title: "Fate Condensed",
     imageUrl: Images.condensed,
     loadFunction: DocImport.FateCondensed,
+
     gitHubLink:
       "https://github.com/fariapp/fari/tree/master/docs/fate-condensed.md",
     author: {
@@ -159,7 +157,39 @@ export const DocRoutes: Array<
         },
       ],
     },
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
+    sideBar: {
+      "+Fate Stunts": [
+        "fate-stunts",
+        {
+          "+Skills": [
+            "athletics-stunts",
+            "burglary-stunts",
+            "contacts-stunts",
+            "crafts-stunts",
+            "deceive-stunts",
+            "drive-stunts",
+            "empathy-stunts",
+            "fight-stunts",
+            "investigate-stunts",
+            "lore-stunts",
+            "notice-stunts",
+            "physique-stunts",
+            "provoke-stunts",
+            "rapport-stunts",
+            "resources-stunts",
+            "shoot-stunts",
+            "stealth-stunts",
+            "will-stunts",
+          ],
+        },
+      ],
+      "Stunt Rubrics": [
+        "add-a-new-action-to-a-skill",
+        "add-a-bonus-to-an-action",
+        "create-a-rules-exception",
+        { "+Miscellaneous": ["other-rubrics"] },
+      ],
+    },
   },
   {
     url: "/scene-checklist",
@@ -209,6 +239,18 @@ export const DocRoutes: Array<
     loadFunction: DocImport.Dials,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/dials.md",
     imageUrl: Images.dials,
+    sideBar: {
+      "+Fari": [
+        "dials",
+        {
+          "+Rules": [
+            "props-from-return-to-the-stars",
+            "quick-conflicts-from-spirit-of-the-century",
+            "magic-aspect-based-naration",
+          ],
+        },
+      ],
+    },
   },
   {
     url: "/srds/test",
@@ -250,17 +292,44 @@ export const DocRoutes: Array<
     url: "/fate-wiki",
     parent: { title: "SRDs", url: "/srds" },
     title: "Fate Wiki",
-    loadFunction: DocImport.FateFaq,
+    loadFunction: DocImport.FateWiki,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
     imageUrl: Images.cheatSheet,
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
     noIndex: true,
+    sideBar: {
+      "+Welcome": [
+        "fate-wiki",
+        {
+          "+FAQ": [
+            "condensed--core--accelerated",
+            "whats-the-math-behind-the-fate-dice",
+            "whats-an-average-session-time",
+          ],
+          "+Guides": [
+            "how-to-gm-fate",
+            "how-to-make-balanced-fights",
+            "how-to-create-a-good-villain",
+            "how-to-create-a-good-setting",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    url: "/blog",
+    parent: { title: "Fari", url: "/" },
+    title: "Blog",
+    loadFunction: DocImport.Blog,
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/blog.md",
+    defaultSideBarCategory: "Blog",
+    sideBar: {
+      "+Blog": ["welcome", { "+2021": ["fari-v360", "moments-in-fate"] }],
+    },
   },
   {
     url: "/m",
     parent: { title: "Fari", url: "/" },
     title: "m",
-    docMode: MarkdownDocMode.H1sArePages,
     noIndex: true,
     loadFunction: DocImport.M,
   },
@@ -268,7 +337,6 @@ export const DocRoutes: Array<
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
 
     loadFunction: DocImport.Changelog,
   },

@@ -55,26 +55,27 @@ import {
   ICharacter,
   useCharacters,
 } from "../../contexts/CharactersContext/CharactersContext";
+import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
-import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRoll, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
-import { IPlayer } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "../../routes/Character/components/CharacterDialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
+import { DiceFab } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -136,6 +137,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const theme = useTheme();
   const logger = useLogger();
+  const rollDice = useRollDice();
   const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
@@ -171,7 +173,6 @@ export const Scene: React.FC<IProps> = (props) => {
     isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
 
   useBlockReload(shouldBlockLeaving);
-
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -190,35 +191,46 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const liveMode = getLiveMode();
 
-  function onLoadScene(newScene: ISavableScene) {
+  const handleLoadScene = (newScene: ISavableScene) => {
     sceneManager.actions.loadScene(newScene, true);
-  }
+  };
 
-  function onCloneAndLoadScene(newScene: ISavableScene) {
+  const handleCloneAndLoadScene = (newScene: ISavableScene) => {
     sceneManager.actions.cloneAndLoadNewScene(newScene);
-  }
+  };
 
-  function onGMAddCharacter(character: ICharacter) {
+  const handleGMAddCharacter = (character: ICharacter) => {
     sceneManager.actions.addOfflineCharacter(character);
-  }
+  };
 
-  function onPlayerLoadCharacter(character: ICharacter) {
+  const handlePlayerLoadCharacter = (character: ICharacter) => {
     connectionsManager?.actions.sendToHost<IPeerActions>({
       action: "load-character",
       payload: character,
     });
-  }
+  };
 
-  function roll(player: IPlayer, options: IRollDiceOptions) {
+  const handleSetRoll = (result: IDiceRoll) => {
     if (isGM) {
-      sceneManager.actions.updatePlayerRoll(player.id, Dice.roll4DF(options));
+      sceneManager.actions.updateGmRoll(result);
     } else {
       connectionsManager?.actions.sendToHost<IPeerActions>({
         action: "roll",
-        payload: Dice.roll4DF(options),
+        payload: result,
       });
     }
-  }
+  };
+
+  const handleSetPlayerRoll = (playerId: string, result: IDiceRoll) => {
+    if (isGM) {
+      sceneManager.actions.updatePlayerRoll(playerId, result);
+    } else {
+      connectionsManager?.actions.sendToHost<IPeerActions>({
+        action: "roll",
+        payload: result,
+      });
+    }
+  };
 
   return (
     <Page
@@ -250,6 +262,11 @@ export const Scene: React.FC<IProps> = (props) => {
             {t("play-route.scene-saved")}
           </Alert>
         </Snackbar>
+        <DiceFab
+          onSelect={(result) => {
+            handleSetRoll(result);
+          }}
+        />
         {props.error ? renderPageError() : renderPage()}
       </Box>
     </Page>
@@ -386,7 +403,7 @@ export const Scene: React.FC<IProps> = (props) => {
                             onClick={() => {
                               charactersManager.actions.openManager(
                                 ManagerMode.Use,
-                                onGMAddCharacter
+                                handleGMAddCharacter
                               );
                               logger.info("Scene:addCharacter:GM");
                             }}
@@ -430,7 +447,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         dialog={true}
                         rolls={player.rolls}
                         onRoll={(options) => {
-                          roll(player, options);
+                          handleSetPlayerRoll(player.id, rollDice(options));
                         }}
                         onSave={(updatedCharacter) => {
                           if (isGM) {
@@ -470,11 +487,11 @@ export const Scene: React.FC<IProps> = (props) => {
                         onLoadCharacterSheet={() => {
                           charactersManager.actions.openManager(
                             ManagerMode.Use,
-                            onPlayerLoadCharacter
+                            handlePlayerLoadCharacter
                           );
                         }}
                         onDiceRoll={(options: IRollDiceOptions) => {
-                          roll(player, options);
+                          handleSetPlayerRoll(player.id, rollDice(options));
                         }}
                         onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                           if (isGM) {
@@ -595,10 +612,11 @@ export const Scene: React.FC<IProps> = (props) => {
                     <CharacterCard
                       key={player?.id || index}
                       readonly={!canControl}
+                      isMe={isMe}
                       playerName={player.playerName}
                       characterSheet={player.character}
                       onRoll={(options) => {
-                        roll(player, options);
+                        handleSetPlayerRoll(player.id, rollDice(options));
                       }}
                       onCharacterDialogOpen={() => {
                         setCharacterDialogPlayerId(player.id);
@@ -1149,7 +1167,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onClick={() => {
                     scenesManager.actions.openManager(
                       ManagerMode.Use,
-                      onLoadScene
+                      handleLoadScene
                     );
                     setMenuOpen(false);
                     logger.info("Scene:onLoadScene");
@@ -1165,7 +1183,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onClick={() => {
                     scenesManager.actions.openManager(
                       ManagerMode.Use,
-                      onCloneAndLoadScene
+                      handleCloneAndLoadScene
                     );
                     setMenuOpen(false);
                     logger.info("Scene:onCloneAndLoadScene");

@@ -6,104 +6,7 @@ exports[`useMarkdownFile Given I have a markdown file with a dynamic anchor tag 
 "
 `;
 
-exports[`useMarkdownFile Given I have a markdown file with a dynamic table of content element should add a table of content 1`] = `
-<ul
-  class="toc"
->
-  <li
-    data-toc-id="1"
-  >
-    <a
-      href="/test-doc/1"
-    >
-      1
-    </a>
-    <ul
-      class="sub-toc"
-    >
-      <li>
-        <a
-          href="/test-doc/1/11"
-        >
-          1.1
-        </a>
-      </li>
-      <li>
-        <a
-          href="/test-doc/1/12"
-        >
-          1.2
-        </a>
-      </li>
-      <li>
-        <a
-          href="/test-doc/1/13"
-        >
-          1.3
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li
-    data-toc-id="2"
-  >
-    <a
-      href="/test-doc/2"
-    >
-      2
-    </a>
-    <ul
-      class="sub-toc"
-    >
-      <li>
-        <a
-          href="/test-doc/2/21"
-        >
-          2.1
-        </a>
-      </li>
-      <li>
-        <a
-          href="/test-doc/2/22"
-        >
-          2.2
-        </a>
-      </li>
-      <li>
-        <a
-          href="/test-doc/2/23"
-        >
-          2.3
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li
-    data-toc-id="3"
-  >
-    <a
-      href="/test-doc/3"
-    >
-      3
-    </a>
-    <ul
-      class="sub-toc"
-    />
-  </li>
-  <li
-    data-toc-id="4"
-  >
-    <a
-      href="/test-doc/4"
-    >
-      4
-    </a>
-    <ul
-      class="sub-toc"
-    />
-  </li>
-</ul>
-`;
+exports[`useMarkdownFile Given I have a markdown file with a dynamic table of contents element should add a table of contents 1`] = `null`;
 
 exports[`useMarkdownFile Given I have a markdown file without h1 should return an undefined state 1`] = `""`;
 
@@ -325,7 +228,57 @@ exports[`useMarkdownFile Given I hierarchy formatted markdown file should return
 exports[`useMarkdownFile Given I hierarchy formatted markdown file should return an good state: markdownIndexes.flat 1`] = `
 Array [
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "id": "header-6",
+                        "label": "header-6",
+                        "level": 6,
+                        "pageLabel": "header-1",
+                        "preview": "",
+                        "url": "/test-doc/header-1?goTo=header-6",
+                      },
+                    ],
+                    "id": "header-5",
+                    "label": "header-5",
+                    "level": 5,
+                    "pageLabel": "header-1",
+                    "preview": "",
+                    "url": "/test-doc/header-1?goTo=header-5",
+                  },
+                ],
+                "id": "header-4",
+                "label": "header-4",
+                "level": 4,
+                "pageLabel": "header-1",
+                "preview": "",
+                "url": "/test-doc/header-1?goTo=header-4",
+              },
+            ],
+            "id": "header-3",
+            "label": "header-3",
+            "level": 3,
+            "pageLabel": "header-1",
+            "preview": "",
+            "url": "/test-doc/header-1?goTo=header-3",
+          },
+        ],
+        "id": "header-2",
+        "label": "header-2",
+        "level": 2,
+        "pageLabel": "header-1",
+        "preview": "",
+        "url": "/test-doc/header-1?goTo=header-2",
+      },
+    ],
     "id": "header-1",
     "label": "header-1",
     "level": 1,
@@ -334,7 +287,47 @@ Array [
     "url": "/test-doc/header-1",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "id": "header-6",
+                    "label": "header-6",
+                    "level": 6,
+                    "pageLabel": "header-1",
+                    "preview": "",
+                    "url": "/test-doc/header-1?goTo=header-6",
+                  },
+                ],
+                "id": "header-5",
+                "label": "header-5",
+                "level": 5,
+                "pageLabel": "header-1",
+                "preview": "",
+                "url": "/test-doc/header-1?goTo=header-5",
+              },
+            ],
+            "id": "header-4",
+            "label": "header-4",
+            "level": 4,
+            "pageLabel": "header-1",
+            "preview": "",
+            "url": "/test-doc/header-1?goTo=header-4",
+          },
+        ],
+        "id": "header-3",
+        "label": "header-3",
+        "level": 3,
+        "pageLabel": "header-1",
+        "preview": "",
+        "url": "/test-doc/header-1?goTo=header-3",
+      },
+    ],
     "id": "header-2",
     "label": "header-2",
     "level": 2,
@@ -343,7 +336,37 @@ Array [
     "url": "/test-doc/header-1?goTo=header-2",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "id": "header-6",
+                "label": "header-6",
+                "level": 6,
+                "pageLabel": "header-1",
+                "preview": "",
+                "url": "/test-doc/header-1?goTo=header-6",
+              },
+            ],
+            "id": "header-5",
+            "label": "header-5",
+            "level": 5,
+            "pageLabel": "header-1",
+            "preview": "",
+            "url": "/test-doc/header-1?goTo=header-5",
+          },
+        ],
+        "id": "header-4",
+        "label": "header-4",
+        "level": 4,
+        "pageLabel": "header-1",
+        "preview": "",
+        "url": "/test-doc/header-1?goTo=header-4",
+      },
+    ],
     "id": "header-3",
     "label": "header-3",
     "level": 3,
@@ -352,7 +375,27 @@ Array [
     "url": "/test-doc/header-1?goTo=header-3",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": "header-6",
+            "label": "header-6",
+            "level": 6,
+            "pageLabel": "header-1",
+            "preview": "",
+            "url": "/test-doc/header-1?goTo=header-6",
+          },
+        ],
+        "id": "header-5",
+        "label": "header-5",
+        "level": 5,
+        "pageLabel": "header-1",
+        "preview": "",
+        "url": "/test-doc/header-1?goTo=header-5",
+      },
+    ],
     "id": "header-4",
     "label": "header-4",
     "level": 4,
@@ -361,7 +404,17 @@ Array [
     "url": "/test-doc/header-1?goTo=header-4",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "header-6",
+        "label": "header-6",
+        "level": 6,
+        "pageLabel": "header-1",
+        "preview": "",
+        "url": "/test-doc/header-1?goTo=header-6",
+      },
+    ],
     "id": "header-5",
     "label": "header-5",
     "level": 5,
@@ -379,7 +432,102 @@ Array [
     "url": "/test-doc/header-1?goTo=header-6",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "again_2",
+        "label": "again_2",
+        "level": 2,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_2",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": "again_3",
+            "label": "again_3",
+            "level": 3,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_3",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "id": "again_4",
+                "label": "again_4",
+                "level": 4,
+                "pageLabel": "again_1",
+                "preview": "",
+                "url": "/test-doc/again_1?goTo=again_4",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "id": "again_5",
+                    "label": "again_5",
+                    "level": 5,
+                    "pageLabel": "again_1",
+                    "preview": "",
+                    "url": "/test-doc/again_1?goTo=again_5",
+                  },
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "id": "again_6",
+                        "label": "again_6",
+                        "level": 6,
+                        "pageLabel": "again_1",
+                        "preview": "",
+                        "url": "/test-doc/again_1?goTo=again_6",
+                      },
+                      Object {
+                        "children": Array [],
+                        "id": "again_6-1",
+                        "label": "again_6",
+                        "level": 6,
+                        "pageLabel": "again_1",
+                        "preview": "",
+                        "url": "/test-doc/again_1?goTo=again_6-1",
+                      },
+                    ],
+                    "id": "again_5-1",
+                    "label": "again_5",
+                    "level": 5,
+                    "pageLabel": "again_1",
+                    "preview": "",
+                    "url": "/test-doc/again_1?goTo=again_5-1",
+                  },
+                ],
+                "id": "again_4-1",
+                "label": "again_4",
+                "level": 4,
+                "pageLabel": "again_1",
+                "preview": "",
+                "url": "/test-doc/again_1?goTo=again_4-1",
+              },
+            ],
+            "id": "again_3-1",
+            "label": "again_3",
+            "level": 3,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_3-1",
+          },
+        ],
+        "id": "again_2-1",
+        "label": "again_2",
+        "level": 2,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_2-1",
+      },
+    ],
     "id": "again_1",
     "label": "again_1",
     "level": 1,
@@ -397,7 +545,83 @@ Array [
     "url": "/test-doc/again_1?goTo=again_2",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "again_3",
+        "label": "again_3",
+        "level": 3,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_3",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": "again_4",
+            "label": "again_4",
+            "level": 4,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_4",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "id": "again_5",
+                "label": "again_5",
+                "level": 5,
+                "pageLabel": "again_1",
+                "preview": "",
+                "url": "/test-doc/again_1?goTo=again_5",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "id": "again_6",
+                    "label": "again_6",
+                    "level": 6,
+                    "pageLabel": "again_1",
+                    "preview": "",
+                    "url": "/test-doc/again_1?goTo=again_6",
+                  },
+                  Object {
+                    "children": Array [],
+                    "id": "again_6-1",
+                    "label": "again_6",
+                    "level": 6,
+                    "pageLabel": "again_1",
+                    "preview": "",
+                    "url": "/test-doc/again_1?goTo=again_6-1",
+                  },
+                ],
+                "id": "again_5-1",
+                "label": "again_5",
+                "level": 5,
+                "pageLabel": "again_1",
+                "preview": "",
+                "url": "/test-doc/again_1?goTo=again_5-1",
+              },
+            ],
+            "id": "again_4-1",
+            "label": "again_4",
+            "level": 4,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_4-1",
+          },
+        ],
+        "id": "again_3-1",
+        "label": "again_3",
+        "level": 3,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_3-1",
+      },
+    ],
     "id": "again_2-1",
     "label": "again_2",
     "level": 2,
@@ -415,7 +639,64 @@ Array [
     "url": "/test-doc/again_1?goTo=again_3",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "again_4",
+        "label": "again_4",
+        "level": 4,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_4",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": "again_5",
+            "label": "again_5",
+            "level": 5,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_5",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "id": "again_6",
+                "label": "again_6",
+                "level": 6,
+                "pageLabel": "again_1",
+                "preview": "",
+                "url": "/test-doc/again_1?goTo=again_6",
+              },
+              Object {
+                "children": Array [],
+                "id": "again_6-1",
+                "label": "again_6",
+                "level": 6,
+                "pageLabel": "again_1",
+                "preview": "",
+                "url": "/test-doc/again_1?goTo=again_6-1",
+              },
+            ],
+            "id": "again_5-1",
+            "label": "again_5",
+            "level": 5,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_5-1",
+          },
+        ],
+        "id": "again_4-1",
+        "label": "again_4",
+        "level": 4,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_4-1",
+      },
+    ],
     "id": "again_3-1",
     "label": "again_3",
     "level": 3,
@@ -433,7 +714,45 @@ Array [
     "url": "/test-doc/again_1?goTo=again_4",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "again_5",
+        "label": "again_5",
+        "level": 5,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_5",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": "again_6",
+            "label": "again_6",
+            "level": 6,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_6",
+          },
+          Object {
+            "children": Array [],
+            "id": "again_6-1",
+            "label": "again_6",
+            "level": 6,
+            "pageLabel": "again_1",
+            "preview": "",
+            "url": "/test-doc/again_1?goTo=again_6-1",
+          },
+        ],
+        "id": "again_5-1",
+        "label": "again_5",
+        "level": 5,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_5-1",
+      },
+    ],
     "id": "again_4-1",
     "label": "again_4",
     "level": 4,
@@ -451,7 +770,26 @@ Array [
     "url": "/test-doc/again_1?goTo=again_5",
   },
   Object {
-    "children": Array [],
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": "again_6",
+        "label": "again_6",
+        "level": 6,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_6",
+      },
+      Object {
+        "children": Array [],
+        "id": "again_6-1",
+        "label": "again_6",
+        "level": 6,
+        "pageLabel": "again_1",
+        "preview": "",
+        "url": "/test-doc/again_1?goTo=again_6-1",
+      },
+    ],
     "id": "again_5-1",
     "label": "again_5",
     "level": 5,

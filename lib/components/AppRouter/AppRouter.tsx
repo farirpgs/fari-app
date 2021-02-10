@@ -137,12 +137,11 @@ export const AppRouter = () => {
           <Route
             exact
             key={docRoute.url}
-            path={`${docRoute.url}/:page?/:subPage?`}
+            path={`${docRoute.url}/:page?`}
             render={(props) => (
               <Doc
                 key={docRoute.url}
                 page={props.match.params.page}
-                subPage={props.match.params.subPage}
                 url={docRoute.url}
                 parent={docRoute.parent}
                 title={docRoute.title}
@@ -150,7 +149,8 @@ export const AppRouter = () => {
                 loadFunction={docRoute.loadFunction}
                 author={docRoute.author}
                 gitHubLink={docRoute.gitHubLink}
-                docMode={docRoute.docMode}
+                sideBar={docRoute.sideBar}
+                defaultSideBarCategory={docRoute.defaultSideBarCategory}
               />
             )}
           />
@@ -158,12 +158,9 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/seelie-squire/:page?/:subPage?"}
+          path={"/seelie-squire/:page?"}
           render={(props) => (
-            <SeelieSquireRoute
-              page={props.match.params.page}
-              subPage={props.match.params.subPage}
-            />
+            <SeelieSquireRoute page={props.match.params.page} />
           )}
         />
         <Route

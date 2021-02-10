@@ -2,9 +2,21 @@
 
 Detailed technical changelog of Fari
 
+## v3.6 Document SideBar + Table of Contents and support for more dice
+
+#### Feb 10th, 2021
+
+feat: new doc sidebar
+feat: new doc table of content
+feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
+feat: prettier dice result tooltip
+feat: support for meta images in documents
+fix: uniq groups in data export manager
+fix: footer alignments
+
 ## v3.5 Resources, Private Aspects and Scene Notes
 
-#### January 19th, 2020
+#### January 19th, 2021
 
 - feat: SRDs Document
 - feat: Scene Checklist Document

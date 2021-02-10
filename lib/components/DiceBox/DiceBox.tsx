@@ -1,39 +1,43 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import Collapse from "@material-ui/core/Collapse";
+import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import Grow from "@material-ui/core/Grow";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
-import { useFudgeDice } from "../../hooks/useFudgeDice/useFudgeDice";
+import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 
 type IProps = {
-  rolls: Array<IDiceRoll>;
+  rolls: Array<IDiceRollWithBonus>;
   size: string;
   fontSize: string;
   borderSize: string;
-  borderColor?: string;
+
   disabled?: boolean;
   showDetails?: boolean;
   onClick: () => void;
   onRolling?: (rolling: boolean) => void;
-  onFinalResult?: (realRoll: IDiceRoll) => void;
+  onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
 };
 
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const diceTextColors = useTextColors(theme.palette.background.paper);
-  const diceManager = useFudgeDice(props.rolls, {
+  const diceRollsManager = useDiceRolls(props.rolls, {
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
   });
+  const tooltipBackground = "#182026";
+  const tooltipColor = useTextColors(tooltipBackground);
 
-  function onClick() {
-    if (diceManager.state.rolling) {
+  function handleButtonBoxClick() {
+    if (diceRollsManager.state.rolling) {
       return;
     }
     props.onClick();
@@ -43,13 +47,12 @@ export const DiceBox: React.FC<IProps> = (props) => {
     fontSize: props.fontSize,
     fontFamily: Font.monospace,
     lineHeight: "normal",
-    color: diceManager.state.color,
+    color: diceRollsManager.state.color,
     background: theme.palette.background.paper,
-    border: `${props.borderSize} solid ${
-      props.borderColor ?? theme.palette.primary.main
-    }`,
+    border: `${props.borderSize} solid ${theme.palette.text.primary}`,
     borderRadius: "4px",
-    width: props.size,
+    padding: ".2rem",
+    minWidth: props.size,
     height: props.size,
     display: "flex",
     justifyContent: "center",
@@ -64,15 +67,72 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
 
-  const tooltipContent = diceManager.state.tooltipTitle && (
-    <Box textAlign="center">
-      {diceManager.state.tooltipTitle && (
-        <Box>{diceManager.state.tooltipTitle}</Box>
-      )}
-      {diceManager.state.tooltipDescription && (
-        <Box>{diceManager.state.tooltipDescription}</Box>
-      )}
+  const tooltipStyle = css({
+    background: tooltipBackground,
+    borderRadius: "6px",
+    color: tooltipColor.primary,
+    minWidth: "14rem",
+    maxWidth: "none",
+    padding: "0",
+    boxShadow: theme.shadows[4],
+  });
+
+  const tooltipContent = !diceRollsManager.state.finalResultHidden ? (
+    <Box p="1rem">
+      <Grid container alignItems="center" wrap="nowrap" spacing={4}>
+        <Grid item xs>
+          <Box
+            fontSize=".8rem"
+            fontWeight="bold"
+            lineHeight={Font.lineHeight(0.8)}
+            className={css({
+              textTransform: "uppercase",
+              color: theme.palette.secondary.light,
+            })}
+          >
+            {"Roll"}
+          </Box>
+          <Box
+            fontSize="1.5rem"
+            color={tooltipColor.primary}
+            lineHeight={Font.lineHeight(1.5)}
+            fontWeight="bold"
+            fontFamily={
+              diceRollsManager.state.display.type === "1dF" ||
+              diceRollsManager.state.display.type === "4dF"
+                ? "fate"
+                : "inherit"
+            }
+          >
+            {diceRollsManager.state.display.spreaded}
+          </Box>
+          <Box
+            fontSize="1rem"
+            color={tooltipColor.secondary}
+            lineHeight={Font.lineHeight(1)}
+          >
+            {diceRollsManager.state.display.explanation}
+          </Box>
+        </Grid>
+        <Divider
+          orientation="vertical"
+          flexItem
+          className={css({ background: tooltipColor.disabled })}
+        />
+        <Grid item>
+          <Box
+            fontSize="2rem"
+            fontWeight="bold"
+            lineHeight={Font.lineHeight(2)}
+            color={tooltipColor.primary}
+          >
+            {diceRollsManager.state.display.formatted}
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
+  ) : (
+    ""
   );
 
   if (props.showDetails) {
@@ -87,12 +147,13 @@ export const DiceBox: React.FC<IProps> = (props) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Tooltip
+        arrow
         title={tooltipContent}
         classes={{
-          tooltip: css({
-            fontSize: "1.2rem",
-            fontFamily: "monospace",
+          arrow: css({
+            color: tooltipBackground,
           }),
+          tooltip: tooltipStyle,
         }}
       >
         {renderDice()}
@@ -108,22 +169,24 @@ export const DiceBox: React.FC<IProps> = (props) => {
             borderRadius: "50%",
             color: diceTextColors.primary,
           })}
-          disabled={props.disabled || diceManager.state.rolling}
+          disabled={props.disabled || diceRollsManager.state.rolling}
           onClick={(e) => {
             e.stopPropagation();
-            onClick();
+            handleButtonBoxClick();
           }}
         >
           <Typography
             component="span"
             data-cy="dice"
-            data-cy-value={diceManager.state.label}
-            data-cy-rolling={diceManager.state.rolling}
+            data-cy-value={diceRollsManager.state.display.formatted}
+            data-cy-rolling={diceRollsManager.state.rolling}
             className={cx(diceStyle, {
-              [diceRollingAnimationStyle]: diceManager.state.rolling,
+              [diceRollingAnimationStyle]: diceRollsManager.state.rolling,
             })}
           >
-            {diceManager.state.label}
+            {diceRollsManager.state.finalResultHidden
+              ? ""
+              : diceRollsManager.state.display.formatted}
           </Typography>
         </ButtonBase>
       </div>
@@ -136,17 +199,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
 
     return (
-      <Collapse in={!!tooltipContent}>
-        <Box
-          pt="1rem"
-          className={css({
-            fontSize: "1.2rem",
-            fontFamily: "monospace",
-          })}
-        >
+      <Grow in={!!tooltipContent}>
+        <Box mt="1rem" className={tooltipStyle}>
           {tooltipContent}
         </Box>
-      </Collapse>
+      </Grow>
     );
   }
 };

@@ -12,6 +12,7 @@ import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { DataGrid, RowId } from "@material-ui/data-grid";
 import produce from "immer";
+import uniq from "lodash/uniq";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { Heading } from "../../components/Heading/Heading";
@@ -65,10 +66,10 @@ export const DataRoute: React.FC = (props) => {
     };
   }, [search, group]);
 
-  const groups = [
+  const groups = uniq([
     ...charactersManager.state.groups,
     ...scenesManager.state.groups,
-  ];
+  ]);
 
   const rows = useMemo(() => {
     const originalRows: Array<IRow> = [
@@ -297,6 +298,10 @@ export const DataRoute: React.FC = (props) => {
                     headerName: "Type",
                     width: 150,
                     disableClickEventBubbling: true,
+                    // eslint-disable-next-line react/display-name
+                    renderCell: (params) => {
+                      return <strong>{params.value}</strong>;
+                    },
                   },
                   {
                     field: "lastUpdated",
