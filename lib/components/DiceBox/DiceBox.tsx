@@ -77,7 +77,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     boxShadow: theme.shadows[4],
   });
 
-  const tooltipContent = !diceRollsManager.state.finalResultHidden ? (
+  const tooltipContent = (
     <Box p="1rem">
       <Grid container alignItems="center" wrap="nowrap" spacing={4}>
         <Grid item xs>
@@ -131,8 +131,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
         </Grid>
       </Grid>
     </Box>
-  ) : (
-    ""
   );
 
   if (props.showDetails) {
@@ -148,7 +146,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     <Box display="flex" flexDirection="column" alignItems="center">
       <Tooltip
         arrow
-        title={tooltipContent}
+        title={diceRollsManager.state.finalResultHidden ? "" : tooltipContent}
         classes={{
           arrow: css({
             color: tooltipBackground,
@@ -199,7 +197,10 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
 
     return (
-      <Collapse in={!!tooltipContent}>
+      <Collapse
+        in={!diceRollsManager.state.finalResultHidden}
+        timeout={{ enter: 250, exit: 75, appear: 250 }}
+      >
         <Box mt="1rem" className={tooltipStyle}>
           {tooltipContent}
         </Box>

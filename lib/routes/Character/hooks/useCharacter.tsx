@@ -257,6 +257,29 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function moveDnDSection(
+    pageIndex: number,
+    dragIndex: number,
+    hoverIndex: number
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+
+        const dragItem = draft.pages[pageIndex].sections[dragIndex];
+
+        draft.pages[pageIndex].sections.splice(dragIndex, 1);
+        draft.pages[pageIndex].sections.splice(hoverIndex, 0, dragItem);
+      })
+    );
+  }
+
   function moveDnDSectionField(
     pageIndex: number,
     sectionIndex: number,
@@ -473,6 +496,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       addSectionField,
       renameSectionField,
       moveSectionField,
+      moveDnDSection,
       moveDnDSectionField,
       setSectionFieldValue,
       setSectionFieldLabel,

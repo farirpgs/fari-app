@@ -402,6 +402,18 @@ export const CharacterV3Dialog: React.FC<{
             </Box>
           </Grid>
         </Grid>
+        {/* <Grid container justify="center">
+          <Grid item xs>
+            <Box pt=".5rem">
+              <CharacterCard
+                isMe={false}
+                characterSheet={characterManager.state.character}
+                onCharacterDialogOpen={undefined}
+                onRoll={undefined}
+              />
+            </Box>
+          </Grid>
+        </Grid> */}
       </Box>
     );
   }
@@ -459,6 +471,19 @@ export const CharacterV3Dialog: React.FC<{
 
           return (
             <Box key={section.id}>
+              {/* <BetterDnd
+                key={section.id}
+                index={sectionIndex}
+                type={`page-${pageIndex}`}
+                readonly={!advanced}
+                onMove={(dragIndex, hoverIndex) => {
+                  characterManager.actions.moveDnDSection(
+                    pageIndex,
+                    dragIndex,
+                    hoverIndex
+                  );
+                }}
+              > */}
               <SheetHeader
                 label={section.label}
                 helpLink={helpLink}
@@ -528,6 +553,7 @@ export const CharacterV3Dialog: React.FC<{
                   </Button>
                 </Box>
               </Collapse>
+              {/* </BetterDnd> */}
             </Box>
           );
         })}
@@ -847,9 +873,6 @@ export const CharacterV3Dialog: React.FC<{
                     alignItems="flex-end"
                     wrap="nowrap"
                   >
-                    <Grid item xs={1}>
-                      <FateLabel display="inline">{"•"}</FateLabel>
-                    </Grid>
                     <Grid item xs={2}>
                       <Typography align="center">
                         <ContentEditable
