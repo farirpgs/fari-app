@@ -231,10 +231,10 @@ const styles = (theme: Theme) => {
         "& h1,h2,h3,h4,h5,h6": {
           marginTop: "1rem",
           fontStyle: "normal",
-          fontFamily: `'Work Sans', sans-serif`,
+          // fontFamily: `'Work Sans', sans-serif`,
         },
         "& *:not(fate)": {
-          fontFamily: `'Work Sans', sans-serif`,
+          // fontFamily: `'Work Sans', sans-serif`,
         },
       },
       "& a, & a code": {

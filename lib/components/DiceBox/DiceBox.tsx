@@ -1,9 +1,9 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import Collapse from "@material-ui/core/Collapse";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
-import Grow from "@material-ui/core/Grow";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -199,11 +199,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
 
     return (
-      <Grow in={!!tooltipContent}>
+      <Collapse in={!!tooltipContent}>
         <Box mt="1rem" className={tooltipStyle}>
           {tooltipContent}
         </Box>
-      </Grow>
+      </Collapse>
     );
   }
 };

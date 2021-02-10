@@ -160,7 +160,7 @@ export const CharacterV3Dialog: React.FC<{
 
   const sheetContentStyle = css({
     width: "100%",
-    padding: ".5rem 1rem",
+    padding: ".5rem 1.5rem",
   });
 
   if (!characterManager.state.character) {

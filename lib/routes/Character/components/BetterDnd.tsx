@@ -85,7 +85,7 @@ export const BetterDnd: React.FC<{
     <div
       ref={ref}
       className={css({
-        opacity: isDragging ? 0 : 1,
+        opacity: isDragging ? 0.2 : 1,
         position: "relative",
       })}
     >

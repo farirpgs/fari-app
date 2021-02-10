@@ -97,14 +97,16 @@ export const CharacterCard: React.FC<{
               )}
             </Box>
           </Box>
-          {visibleSections?.map((s) => {
-            return (
-              <Box key={s.id}>
-                {s.type === SectionType.Text && renderTextSection(s)}
-                {s.type === SectionType.Number && renderNumberSection(s)}
-              </Box>
-            );
-          })}
+          <Box py="1rem" px="1rem">
+            {visibleSections?.map((s) => {
+              return (
+                <Box key={s.id}>
+                  {s.type === SectionType.Text && renderTextSection(s)}
+                  {s.type === SectionType.Number && renderNumberSection(s)}
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
       </Paper>
     </Box>
@@ -131,8 +133,8 @@ export const CharacterCard: React.FC<{
       return null;
     }
     return (
-      <Box py=".5rem" px="1rem">
-        <Grid container spacing={1}>
+      <Box pb=".5rem">
+        <Grid container>
           <Grid item xs={12}>
             <FateLabel>{section.label}</FateLabel>
           </Grid>
@@ -179,16 +181,12 @@ export const CharacterCard: React.FC<{
 
   function renderTextSection(section: ISection<string>) {
     return (
-      <Box py="1rem" px="1rem">
+      <Box>
         {section.fields.map((field, fieldIndex) => {
           const containsImage = field.value.includes("<img");
           const value = containsImage
             ? field.value
             : truncate(field.value, { length: 50 });
-
-          if (!field.value) {
-            return null;
-          }
 
           return (
             <Box key={field.id} pb=".5rem">
