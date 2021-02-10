@@ -171,7 +171,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function sendLog() {
-      const logMessage = `Route:Document:${location.pathname}`;
+      const logMessage = `Route:Document${location.pathname}`;
 
       logger.info(logMessage, {
         pathname: location.pathname,
