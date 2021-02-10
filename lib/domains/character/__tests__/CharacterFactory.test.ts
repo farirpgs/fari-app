@@ -1,7 +1,7 @@
 import { CharacterFactory } from "../CharacterFactory";
+import { ComplexCharacter } from "../mocks/ComplexCharacter";
+import { Warden } from "../mocks/WardenLeMagane";
 import { IV1Character } from "../types";
-import { ComplexCharacter } from "./mocks/ComplexCharacter";
-import { Warden } from "./mocks/WardenLeMagane";
 
 describe("CharacterFactory.migrate", () => {
   describe("v1", () => {
