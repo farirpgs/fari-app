@@ -12,7 +12,7 @@ import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRoll, IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
-import { DiceGameIcon } from "../../domains/Icons/Icons";
+import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DiceRoute = () => {
@@ -46,7 +46,7 @@ export const DiceRoute = () => {
         description={t("dice-route.meta.description")}
       />
       <Box>
-        <Heading icon={DiceGameIcon} title="Dice" />
+        <Heading icon={Icons.DiceGameIcon} title="Dice" />
         <DiceFab
           onSelect={(result) => {
             setRollResult(result);

@@ -74,7 +74,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     minWidth: "14rem",
     maxWidth: "none",
     padding: "0",
-    boxShadow: theme.shadows[2],
+    boxShadow: theme.shadows[4],
   });
 
   const tooltipContent = !diceRollsManager.state.finalResultHidden ? (
@@ -147,8 +147,12 @@ export const DiceBox: React.FC<IProps> = (props) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Tooltip
+        arrow
         title={tooltipContent}
         classes={{
+          arrow: css({
+            color: tooltipBackground,
+          }),
           tooltip: tooltipStyle,
         }}
       >

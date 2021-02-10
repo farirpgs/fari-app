@@ -5,7 +5,7 @@ import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import React, { useContext, useState } from "react";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDiceRoll, IDiceRollType, rollDice } from "../../domains/dice/Dice";
-import { DiceGameIcon } from "../../domains/Icons/Icons";
+import { Icons } from "../../domains/Icons/Icons";
 
 type IProps = {
   onSelect?(result: IDiceRoll): void;
@@ -55,10 +55,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
         }}
         open={open}
         icon={
-          <DiceGameIcon
+          <Icons.RollDiceICon
             className={css({
-              width: "2.5rem",
-              height: "2.5rem",
+              width: "3rem",
+              height: "3rem",
             })}
           />
         }

@@ -15,10 +15,7 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../images/blue/app.png";
 import { Page } from "../../components/Page/Page";
-import {
-  TwoPeopleMeetingIcon,
-  TwoPeopleMeetingTalkingIcon,
-} from "../../domains/Icons/Icons";
+import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -89,7 +86,7 @@ export const JoinAGame: React.FC<{
           {props.connecting ? (
             <Fade in key="lol">
               <Box display="flex" justifyContent="center">
-                <TwoPeopleMeetingTalkingIcon
+                <Icons.TwoPeopleMeetingTalkingIcon
                   className={css({ fontSize: "5rem" })}
                   color="primary"
                 />
@@ -98,7 +95,7 @@ export const JoinAGame: React.FC<{
           ) : (
             <Fade in key="asd">
               <Box display="flex" justifyContent="center">
-                <TwoPeopleMeetingIcon
+                <Icons.TwoPeopleMeetingIcon
                   className={css({ fontSize: "5rem" })}
                   color="primary"
                 />

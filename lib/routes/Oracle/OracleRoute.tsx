@@ -19,7 +19,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
-import { EyeIcon } from "../../domains/Icons/Icons";
+import { Icons } from "../../domains/Icons/Icons";
 import { formatDiceNumber } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
@@ -98,7 +98,10 @@ export const OracleRoute = () => {
           flexDirection="column"
           alignItems="center"
         >
-          <EyeIcon className={css({ fontSize: "3rem" })} color="primary" />
+          <Icons.EyeIcon
+            className={css({ fontSize: "3rem" })}
+            color="primary"
+          />
           <FateLabel variant="h4" align="center" color="primary">
             {"Oracle"}
           </FateLabel>

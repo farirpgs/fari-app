@@ -7,7 +7,7 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { IllustrationIcon } from "../../domains/Icons/Icons";
+import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DrawRoute: React.FC = (props) => {
@@ -26,7 +26,7 @@ export const DrawRoute: React.FC = (props) => {
         description={t("draw-route.meta.description")}
       />
       <Box py="1rem" display="flex" flexDirection="column" alignItems="center">
-        <IllustrationIcon
+        <Icons.IllustrationIcon
           className={css({ fontSize: "3rem" })}
           color="primary"
         />
