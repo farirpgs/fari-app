@@ -12,7 +12,7 @@ export const BetterDnd: React.FC<{
   onMove?(dragIndex: number, hoverIndex: number): void;
 }> = (props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     item: { type: props.type },
     begin: () => {
       props.onDrag?.();
@@ -79,7 +79,7 @@ export const BetterDnd: React.FC<{
     }),
   });
 
-  drag(drop(ref));
+  preview(drop(ref));
 
   return (
     <div
@@ -89,16 +89,18 @@ export const BetterDnd: React.FC<{
         position: "relative",
       })}
     >
-      <div ref={drop}>
+      <div>
         {!props.readonly && (
-          <DragIndicatorIcon
-            className={css({
-              cursor: "move",
-              position: "absolute",
-              left: "-1.5rem",
-              top: "0.5rem",
-            })}
-          />
+          <div ref={drag}>
+            <DragIndicatorIcon
+              className={css({
+                cursor: "move",
+                position: "absolute",
+                left: "-1.5rem",
+                top: "0.5rem",
+              })}
+            />
+          </div>
         )}
         {props.children}
       </div>

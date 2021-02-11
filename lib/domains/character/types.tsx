@@ -3,6 +3,7 @@ export enum SectionType {
   Number,
   // BigNumber,
   Checkboxes,
+  RichText,
 }
 
 export enum Position {

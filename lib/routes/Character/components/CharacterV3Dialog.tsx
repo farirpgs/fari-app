@@ -68,6 +68,7 @@ import {
 import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
+import { RichTextEditor } from "../../../molecules/RichTextEditor/RichTextEditor";
 import { IPossibleTranslationKeys } from "../../../services/internationalization/IPossibleTranslationKeys";
 import { useCharacter } from "../hooks/useCharacter";
 import { BetterDnd } from "./BetterDnd";
@@ -530,6 +531,8 @@ export const CharacterV3Dialog: React.FC<{
                 renderNumberFields(pageIndex, sectionIndex, section)}
               {section.type === SectionType.Checkboxes &&
                 renderCheckboxesFields(pageIndex, sectionIndex, section)}
+              {section.type === SectionType.RichText &&
+                renderRichTextFields(pageIndex, sectionIndex, section)}
               <Collapse in={advanced}>
                 <Box
                   p=".5rem"
@@ -1140,6 +1143,99 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
+  function renderRichTextFields(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection<string>
+  ) {
+    return (
+      <Box p=".5rem 1.5rem">
+        {section.fields.map((field, fieldIndex) => {
+          return (
+            <BetterDnd
+              key={field.id}
+              index={fieldIndex}
+              type={section.label}
+              readonly={!advanced}
+              onMove={(dragIndex, hoverIndex) => {
+                characterManager.actions.moveDnDSectionField(
+                  pageIndex,
+                  sectionIndex,
+                  dragIndex,
+                  hoverIndex
+                );
+              }}
+            >
+              <Box py=".5rem">
+                <Grid
+                  container
+                  justify="space-between"
+                  wrap="nowrap"
+                  spacing={1}
+                >
+                  <Grid item className={css({ flex: "1 1 auto" })}>
+                    <FateLabel display="inline">
+                      <ContentEditable
+                        data-cy={`character-dialog.${section.label}.${field.label}.label`}
+                        readonly={!advanced}
+                        border={advanced}
+                        value={field.label}
+                        onChange={(value) => {
+                          characterManager.actions.setSectionFieldLabel(
+                            pageIndex,
+                            sectionIndex,
+                            fieldIndex,
+                            value
+                          );
+                        }}
+                      />
+                    </FateLabel>
+                  </Grid>
+                  {advanced && (
+                    <>
+                      <Grid item>
+                        <Tooltip
+                          title={t("character-dialog.control.remove-field")}
+                        >
+                          <IconButton
+                            data-cy={`character-dialog.${section.label}.${field.label}.remove`}
+                            size="small"
+                            onClick={() => {
+                              characterManager.actions.removeSectionField(
+                                pageIndex,
+                                sectionIndex,
+                                fieldIndex
+                              );
+                            }}
+                          >
+                            <RemoveIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
+                    </>
+                  )}
+                </Grid>
+                <Box py=".5rem">
+                  <RichTextEditor
+                    value={field.value}
+                    onChange={(value) => {
+                      characterManager.actions.setSectionFieldValue(
+                        pageIndex,
+                        sectionIndex,
+                        fieldIndex,
+                        value
+                      );
+                    }}
+                  />
+                </Box>
+              </Box>
+            </BetterDnd>
+          );
+        })}
+      </Box>
+    );
+  }
+
   function renderRefresh(pageIndex: number) {
     if (pageIndex !== 0) {
       return null;
@@ -1283,6 +1379,17 @@ export const AddSection: React.FC<{
               <Filter1Icon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Number Section" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddSection(SectionType.RichText);
+              setAddSectionAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <Filter1Icon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Rich Text" />
           </MenuItem>
         </Menu>
       </ThemeProvider>

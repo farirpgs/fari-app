@@ -56,6 +56,11 @@ export const CharacterFactory = {
         label: "Text",
         value: [{ label: "1", checked: false }],
       } as IField<CheckboxesFieldValue>,
+      [SectionType.RichText]: {
+        id: Id.generate(),
+        label: "Rich Text",
+        value: "",
+      } as IField<string>,
     };
 
     return fieldDefault[type];
