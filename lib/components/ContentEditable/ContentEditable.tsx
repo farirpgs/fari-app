@@ -1,4 +1,4 @@
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 import { useTheme } from "@material-ui/core/styles";
 import DOMPurify from "dompurify";
 import React, { useEffect, useRef, useState } from "react";
@@ -12,6 +12,7 @@ const ContentEditableDelay = 125;
 export const ContentEditable: React.FC<
   {
     value: string;
+    className?: string;
     onClick?: () => void;
     onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
     readonly?: boolean;
@@ -80,31 +81,34 @@ export const ContentEditable: React.FC<
   return (
     <span
       data-cy={props["data-cy"]}
-      className={css({
-        "outline": "none",
-        "wordBreak": "break-word",
-        "display": "inline-block",
-        "width": "100%",
-        "cursor": hasCursorPointer ? "pointer" : "text",
-        "color": updating ? theme.palette.text.secondary : "inherit",
-        "textDecoration": props.underline ? "underline" : undefined,
-        "transition": !updating
-          ? theme.transitions.create("color", { duration: 500 })
-          : undefined,
-        "borderBottom": props.border
-          ? `1px solid ${theme.palette.divider}`
-          : undefined,
-        "img": {
-          maxWidth: "75%",
-          padding: ".5rem",
-          margin: "0 auto",
-          display: "flex",
-        },
-        "&:empty:before": {
-          color: "lightgrey",
-          content: props.placeholder ? `"${props.placeholder}"` : undefined,
-        },
-      })}
+      className={cx(
+        css({
+          "outline": "none",
+          "wordBreak": "break-word",
+          "display": "inline-block",
+          "width": "100%",
+          "cursor": hasCursorPointer ? "pointer" : "text",
+          "color": updating ? theme.palette.text.secondary : "inherit",
+          "textDecoration": props.underline ? "underline" : undefined,
+          "transition": !updating
+            ? theme.transitions.create("color", { duration: 500 })
+            : undefined,
+          "borderBottom": props.border
+            ? `1px solid ${theme.palette.divider}`
+            : undefined,
+          "img": {
+            maxWidth: "75%",
+            padding: ".5rem",
+            margin: "0 auto",
+            display: "flex",
+          },
+          "&:empty:before": {
+            color: "lightgrey",
+            content: props.placeholder ? `"${props.placeholder}"` : undefined,
+          },
+        }),
+        props.className
+      )}
       id={props.id}
       ref={$ref}
       onClick={() => {
