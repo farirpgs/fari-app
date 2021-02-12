@@ -154,7 +154,18 @@ export const CharacterCard: React.FC<{
                         });
                       }}
                     >
-                      {skill.name} ({skill.value})
+                      <ContentEditable
+                        inline
+                        className={css({ width: "auto" })}
+                        readonly={true}
+                        value={skill.name}
+                      />{" "}
+                      <ContentEditable
+                        inline
+                        className={css({ width: "auto" })}
+                        readonly={true}
+                        value={` (${skill.value})`}
+                      />
                     </Link>
                   </Grid>
                 );
