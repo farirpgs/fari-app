@@ -755,7 +755,11 @@ export const Scene: React.FC<IProps> = (props) => {
                     id={`index-card-${aspectId}`}
                     aspectId={aspectId}
                     readonly={!isGM}
+                    showClickableSkills={props.mode !== SceneMode.Manage}
                     sceneManager={sceneManager}
+                    onRoll={(options) => {
+                      handleSetRoll(rollDice(options));
+                    }}
                   />
                 </Box>
               );
