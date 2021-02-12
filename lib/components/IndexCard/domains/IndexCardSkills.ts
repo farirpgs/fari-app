@@ -11,8 +11,8 @@ export const IndexCardSkills = {
     }
     return clickableSkills.map((skill) => {
       const [label, modifier] = skill.split(":");
-      const trimmedLabel = label.trim();
-      const trimmedModifier = modifier.trim();
+      const trimmedLabel = label.replace("[", "").trim();
+      const trimmedModifier = modifier.replace("]", "").trim();
       return {
         label: trimmedLabel,
         modifier: trimmedModifier,
@@ -20,4 +20,5 @@ export const IndexCardSkills = {
     });
   },
 };
-const SkillRegex = /^.+:\s?\-?\d+/gm;
+
+const SkillRegex = /\[(.*?)\]/gm;

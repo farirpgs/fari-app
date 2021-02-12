@@ -25,27 +25,16 @@ describe("IndexCardSkills", () => {
       expect(result).toEqual([]);
     });
   });
-  describe("Given the content has a skill without a space", () => {
+  describe("Given the content has a spaces", () => {
     it("should return an empty array", () => {
-      const result = IndexCardSkills.getSkills("Fight:4");
+      const result = IndexCardSkills.getSkills("[    Fight :     4   ]");
       expect(result).toEqual([{ label: "Fight", modifier: "4" }]);
     });
   });
-  describe("Given the content has a skill with a space", () => {
+
+  describe("Given the content has a skill with a negative number", () => {
     it("should return an empty array", () => {
-      const result = IndexCardSkills.getSkills("Fight: 4");
-      expect(result).toEqual([{ label: "Fight", modifier: "4" }]);
-    });
-  });
-  describe("Given the content has a skill without a space and a negative number", () => {
-    it("should return an empty array", () => {
-      const result = IndexCardSkills.getSkills("Fight:-4");
-      expect(result).toEqual([{ label: "Fight", modifier: "-4" }]);
-    });
-  });
-  describe("Given the content has a skill with a space and a negative number", () => {
-    it("should return an empty array", () => {
-      const result = IndexCardSkills.getSkills("Fight: -4");
+      const result = IndexCardSkills.getSkills("[Fight: -4]");
       expect(result).toEqual([{ label: "Fight", modifier: "-4" }]);
     });
   });
@@ -54,7 +43,7 @@ describe("IndexCardSkills", () => {
       const result = IndexCardSkills.getSkills(`
         Hi
 
-        Fight: -4
+        [Fight: -4]
         <br style="font-size: 3rem"/>
       `);
       expect(result).toEqual([{ label: "Fight", modifier: "-4" }]);
@@ -63,9 +52,20 @@ describe("IndexCardSkills", () => {
   describe("Given the content has a skill with an accent", () => {
     it("should return an empty array", () => {
       const result = IndexCardSkills.getSkills(`
-      Combat à l'épé:4
-      Tir à l'arc:4
+      [Combat à l'épé:4]
+      [Tir à l'arc:4]
       `);
+      expect(result).toEqual([
+        { label: "Combat à l'épé", modifier: "4" },
+        { label: "Tir à l'arc", modifier: "4" },
+      ]);
+    });
+  });
+  describe("Given the content skills on the same line", () => {
+    it("should return an empty array", () => {
+      const result = IndexCardSkills.getSkills(
+        `[Combat à l'épé : 4] [Tir à l'arc : 4]`
+      );
       expect(result).toEqual([
         { label: "Combat à l'épé", modifier: "4" },
         { label: "Tir à l'arc", modifier: "4" },
@@ -77,12 +77,12 @@ describe("IndexCardSkills", () => {
       const result = IndexCardSkills.getSkills(`
       This is a complex NPC
 
-      Notice: 4
-      Fight: 3
-      Physique: 3
-      Investigate:2
-      Athletic:-2
-      Will:-1
+      [Notice: 4]
+      [Fight: 3]
+      [Physique: 3]
+      [Investigate:2]
+      [Athletic:-2]
+      [Will:-1]
       
       `);
       expect(result).toEqual([
