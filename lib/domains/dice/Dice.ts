@@ -30,13 +30,29 @@ export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
   { label: "1d8", icon: Icons.Dice8, value: ["1d8"] },
   { label: "1d10", icon: Icons.Dice10, value: ["1d10"] },
   { label: "1d12", icon: Icons.Dice12, value: ["1d12"] },
-  { label: "1d20", icon: Icons.Dice20, value: ["1d20"] },
+  {
+    label: "1d20",
+    icon: Icons.Dice20,
+    value: ["1d20"],
+    goodRoll: 17,
+    badRoll: 3,
+    criticalSuccess: 20,
+    criticalFailure: 1,
+  },
   { label: "1d100", icon: Icons.Dice100, value: ["1d100"] },
 ];
 
 export const MiscDiceCommandGroups: Array<IDiceCommandGroup> = [
   { label: "Coin Toss", icon: Icons.Coin, value: ["Coin"] },
-  { label: "2d6", icon: Icons.RollDiceIcon, value: ["1d6", "1d6"] },
+  {
+    label: "2d6",
+    icon: Icons.RollDiceIcon,
+    value: ["1d6", "1d6"],
+    goodRoll: 7,
+    badRoll: 6,
+    criticalSuccess: 12,
+    criticalFailure: 2,
+  },
 ];
 
 export const AllDiceCommandGroups: Array<IDiceCommandGroup> = [

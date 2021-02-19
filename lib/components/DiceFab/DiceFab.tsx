@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import Badge from "@material-ui/core/Badge";
 import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Fab from "@material-ui/core/Fab";
 import Grid from "@material-ui/core/Grid";
@@ -8,12 +9,18 @@ import Grow from "@material-ui/core/Grow";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
+import Slide from "@material-ui/core/Slide";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Zoom from "@material-ui/core/Zoom";
+import CloseIcon from "@material-ui/icons/Close";
 import React, { useContext, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
-import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import {
+  DiceContext,
+  IDiceManager,
+} from "../../contexts/DiceContext/DiceContext";
 import {
   d20DiceCommandGroups,
   FateDiceCommandGroups,
@@ -24,30 +31,25 @@ import {
   rollComplexDiceTypes,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+
 type IProps = {
   onSelect?(result: IDiceRollResult): void;
 };
+const buttonSize = "4rem";
 
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
+  const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));
   const zIndex = useZIndex();
   const diceManager = useContext(DiceContext);
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
+  const [dirty, setDirty] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<
     Array<IDiceCommandGroup>
   >([]);
 
-  const commandsToCheckForDynamicFabIcon =
-    selectedOptions.length > 0
-      ? selectedOptions.flatMap((o) => o.value)
-      : diceManager.state.diceTypes;
-
-  const optionMatch = findMatchingCommandGroupWithDiceTypes(
-    commandsToCheckForDynamicFabIcon
-  );
-
-  const ButtonIcon = optionMatch?.icon ?? Icons.ThrowDice;
+  const ButtonIcon = getButtonIcon(selectedOptions, diceManager);
 
   const handleMenuOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -60,164 +62,206 @@ export const DiceFab: React.FC<IProps> = (props) => {
     setSelectedOptions([]);
   };
 
+  const handleFabClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    if (!open) {
+      handleMenuOpen(e);
+    } else {
+      handleMenuClose();
+    }
+  };
+
+  const handleReRoll = () => {
+    const result = rollComplexDiceTypes(diceManager.state.diceTypes);
+    props.onSelect?.(result);
+  };
+
   const handleRoll = () => {
     const newTypes = selectedOptions.flatMap((o) => o.value);
     const result = rollComplexDiceTypes(newTypes);
     diceManager.actions.setDiceTypes(newTypes);
     props.onSelect?.(result);
-  };
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
+    setDirty(true);
   };
 
-  const canRoll = selectedOptions.length > 0;
+  const transitionDuration = {
+    enter: theme.transitions.duration.shortest,
+    exit: theme.transitions.duration.shortest,
+  };
+
+  const hasSelectedNewCommands = selectedOptions.length > 0;
+  const isRollButtonVisible = hasSelectedNewCommands || dirty;
+
   return (
     <>
-      <ClickAwayListener
-        onClickAway={() => {
-          handleMenuClose();
-        }}
+      <Box
+        className={css({
+          left: "4rem",
+          bottom: "2rem",
+          height: buttonSize,
+          position: "fixed",
+          overflow: "hidden",
+        })}
       >
-        <Box>
-          <Zoom
-            in={!canRoll}
-            timeout={transitionDuration}
-            style={{
-              transitionDelay: `${!canRoll ? transitionDuration.exit : 0}ms`,
-            }}
-            unmountOnExit
-          >
-            <Fab
-              variant={"round"}
-              color="primary"
-              onClick={(e) => {
-                if (!open) {
-                  handleMenuOpen(e);
-                } else {
-                  if (selectedOptions.length > 0) {
-                    handleRoll();
-                    handleMenuClose();
-                  } else {
-                    handleMenuClose();
-                  }
-                }
-              }}
-              className={css({
-                right: "2rem",
-                bottom: "2rem",
-                position: "fixed",
-              })}
-              classes={{
-                root: css({
-                  transition: theme.transitions.create("all"),
-                  height: "4rem",
-                }),
+        <Slide
+          direction="right"
+          in={isRollButtonVisible}
+          timeout={theme.transitions.duration.shortest}
+        >
+          {renderSlideButton()}
+        </Slide>
+
+        <ClickAwayListener
+          onClickAway={() => {
+            handleMenuClose();
+          }}
+        >
+          <Box>
+            <Zoom
+              in
+              timeout={transitionDuration}
+              style={{
+                transitionDelay: `${
+                  !hasSelectedNewCommands ? transitionDuration.exit : 0
+                }ms`,
               }}
             >
-              <ButtonIcon
-                className={css({
-                  width: "4rem",
-                  height: "4rem",
-                  padding: ".3rem",
-                })}
-              />
-            </Fab>
-          </Zoom>
-          <Zoom
-            in={canRoll}
-            timeout={transitionDuration}
-            style={{
-              transitionDelay: `${canRoll ? transitionDuration.exit : 0}ms`,
-            }}
-            unmountOnExit
-          >
-            <Fab
-              variant={"extended"}
-              color="primary"
-              onClick={(e) => {
-                if (!open) {
-                  handleMenuOpen(e);
-                } else {
-                  if (selectedOptions.length > 0) {
-                    handleRoll();
-                    handleMenuClose();
-                  } else {
-                    handleMenuClose();
-                  }
-                }
-              }}
-              className={css({
-                right: "2rem",
-                bottom: "2rem",
-                position: "fixed",
-              })}
-              classes={{
-                root: css({
-                  transition: theme.transitions.create("all"),
-                  height: "4rem",
-                }),
-              }}
-            >
-              <ButtonIcon
-                className={css({
-                  width: "4rem",
-                  height: "4rem",
-                  padding: ".3rem",
-                })}
-              />
-
-              <Typography
-                className={css({
-                  fontWeight: theme.typography.fontWeightBold,
-                })}
-              >
-                {"Roll"}
-              </Typography>
-            </Fab>
-          </Zoom>
-
-          <Popper
-            open={open}
-            anchorEl={anchorEl}
-            transition
-            placement="top"
-            className={css({
-              zIndex: zIndex.diceModal,
-            })}
-            modifiers={{
-              flip: {
-                enabled: true,
-              },
-              preventOverflow: {
-                enabled: true,
-                boundariesElement: "scrollParent",
-              },
-            }}
-          >
-            {({ TransitionProps }) => (
-              <Grow {...TransitionProps}>
-                <Box pb="1rem" px="1rem">
-                  <Paper>
-                    <Box p="1rem">
-                      {renderHeader("Fate")}
-                      {renderOptions(FateDiceCommandGroups)}
-                      {renderHeader("D20s")}
-                      {renderOptions(d20DiceCommandGroups)}
-                      {renderHeader("Misc")}
-                      {renderOptions(MiscDiceCommandGroups)}
-                    </Box>
-                  </Paper>
-                </Box>
-              </Grow>
-            )}
-          </Popper>
-        </Box>
-      </ClickAwayListener>
+              {renderFab()}
+            </Zoom>
+            {renderPopper()}
+          </Box>
+        </ClickAwayListener>
+      </Box>
     </>
   );
 
-  function renderHeader(header: string) {
+  function renderFab() {
+    return (
+      <Fab
+        variant="round"
+        color="primary"
+        onClick={handleFabClick}
+        className={css({
+          left: "2rem",
+          bottom: "2rem",
+          width: buttonSize,
+          height: buttonSize,
+          position: "fixed",
+        })}
+      >
+        {open ? (
+          <CloseIcon
+            className={css({
+              width: "90%",
+              height: "auto",
+              padding: ".5rem",
+            })}
+          />
+        ) : (
+          <ButtonIcon
+            className={css({
+              width: "100%",
+              height: "auto",
+              padding: ".5rem",
+            })}
+          />
+        )}
+      </Fab>
+    );
+  }
+
+  function renderSlideButton() {
+    return (
+      <Box
+        className={css({
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: theme.palette.primary.main,
+          color: theme.palette.getContrastText(theme.palette.primary.main),
+          height: buttonSize,
+          borderTopRightRadius: "25px",
+          borderBottomRightRadius: "25px",
+        })}
+      >
+        <ButtonBase
+          className={css({
+            height: "100%",
+            width: "100%",
+            paddingLeft: "3rem",
+            paddingRight: "1rem",
+          })}
+          onClick={() => {
+            if (open) {
+              handleRoll();
+            } else {
+              handleReRoll();
+            }
+          }}
+        >
+          {isRollButtonVisible && (
+            <Typography
+              className={css({
+                textTransform: "uppercase",
+                fontWeight: theme.typography.fontWeightBold,
+              })}
+            >
+              {hasSelectedNewCommands ? "Roll" : "Reroll"}
+            </Typography>
+          )}
+        </ButtonBase>
+      </Box>
+    );
+  }
+
+  function renderPopper() {
+    return (
+      <Popper
+        open={open}
+        anchorEl={anchorEl}
+        transition
+        placement="top"
+        className={css({
+          zIndex: zIndex.diceModal,
+        })}
+        modifiers={{
+          flip: {
+            enabled: true,
+          },
+          preventOverflow: {
+            enabled: true,
+            boundariesElement: "scrollParent",
+          },
+        }}
+      >
+        {({ TransitionProps }) => (
+          <Grow {...TransitionProps}>
+            <Box
+              px={isExtraSmall ? "0" : "2rem"}
+              pb="1rem"
+              onContextMenu={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <Paper>
+                <Box p="1rem">
+                  {renderCommandGroupHeader("Fate")}
+                  {renderOptions(FateDiceCommandGroups)}
+                  {renderCommandGroupHeader("D20s")}
+                  {renderOptions(d20DiceCommandGroups)}
+                  {renderCommandGroupHeader("Misc")}
+                  {renderOptions(MiscDiceCommandGroups)}
+                </Box>
+              </Paper>
+            </Box>
+          </Grow>
+        )}
+      </Popper>
+    );
+  }
+
+  function renderCommandGroupHeader(header: string) {
     return (
       <Box>
         <Typography
@@ -316,3 +360,24 @@ export const DiceFab: React.FC<IProps> = (props) => {
     );
   }
 };
+
+function getButtonIcon(
+  selectedOptions: IDiceCommandGroup[],
+  diceManager: IDiceManager
+) {
+  const commandsToCheckForDynamicFabIcon =
+    selectedOptions.length > 0
+      ? selectedOptions.flatMap((o) => o.value)
+      : diceManager.state.diceTypes;
+  const selectedOption = findMatchingCommandGroupWithDiceTypes(
+    commandsToCheckForDynamicFabIcon
+  );
+  const [firstCommand] = commandsToCheckForDynamicFabIcon;
+  const firstCommandMatch = findMatchingCommandGroupWithDiceTypes([
+    firstCommand,
+  ]);
+
+  const ButtonIcon =
+    selectedOption?.icon ?? firstCommandMatch?.icon ?? Icons.ThrowDice;
+  return ButtonIcon;
+}

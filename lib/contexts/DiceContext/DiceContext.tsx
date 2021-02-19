@@ -6,9 +6,9 @@ import {
   rollComplexDiceTypes,
 } from "../../domains/dice/Dice";
 
-export const DiceContext = React.createContext<ReturnType<typeof useDice>>(
-  undefined as any
-);
+export type IDiceManager = ReturnType<typeof useDice>;
+
+export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
 export function useDice() {
   const [diceTypes, setDiceTypes] = useState<Array<IDiceCommandNames>>([
