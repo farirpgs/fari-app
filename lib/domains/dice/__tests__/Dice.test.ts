@@ -1,4 +1,4 @@
-import { rollDice } from "../Dice";
+import { rollComplexDiceTypes } from "../Dice";
 
 describe("Dice", () => {
   describe("roll4DF", () => {
@@ -15,7 +15,7 @@ function fudgeDiceShouldBeFair() {
   const numberOfTests = 10000;
 
   for (let i = 0; i < numberOfTests; i++) {
-    const diceRoll = rollDice("4dF");
+    const diceRoll = rollComplexDiceTypes(["1dF", "1dF", "1dF", "1dF"]);
     const currentCount = results[diceRoll.total] ?? 0;
     results[diceRoll.total] = currentCount + 1;
   }

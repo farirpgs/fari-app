@@ -62,7 +62,7 @@ import {
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
-import { IDiceRoll, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRollResult, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
@@ -210,7 +210,7 @@ export const Scene: React.FC<IProps> = (props) => {
     });
   };
 
-  const handleSetRoll = (result: IDiceRoll) => {
+  const handleSetRoll = (result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
     } else {
@@ -221,7 +221,7 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleSetPlayerRoll = (playerId: string, result: IDiceRoll) => {
+  const handleSetPlayerRoll = (playerId: string, result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updatePlayerRoll(playerId, result);
     } else {
@@ -236,7 +236,7 @@ export const Scene: React.FC<IProps> = (props) => {
     <Page
       gameId={props.idFromParams}
       live={liveMode}
-      liveLabel={sceneManager.state.scene.name.toUpperCase()}
+      liveLabel={sceneManager.state.scene.name}
     >
       <Box px="1rem">
         <Prompt
@@ -262,11 +262,13 @@ export const Scene: React.FC<IProps> = (props) => {
             {t("play-route.scene-saved")}
           </Alert>
         </Snackbar>
-        <DiceFab
-          onSelect={(result) => {
-            handleSetRoll(result);
-          }}
-        />
+        {props.mode !== SceneMode.Manage && (
+          <DiceFab
+            onSelect={(result) => {
+              handleSetRoll(result);
+            }}
+          />
+        )}
         {props.error ? renderPageError() : renderPage()}
       </Box>
     </Page>
@@ -446,8 +448,8 @@ export const Scene: React.FC<IProps> = (props) => {
                         character={player.character}
                         dialog={true}
                         rolls={player.rolls}
-                        onRoll={(options) => {
-                          handleSetPlayerRoll(player.id, rollDice(options));
+                        onRoll={(result) => {
+                          handleSetPlayerRoll(player.id, result);
                         }}
                         onSave={(updatedCharacter) => {
                           if (isGM) {
@@ -943,6 +945,19 @@ export const Scene: React.FC<IProps> = (props) => {
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
               <Button
+                data-cy="scene.add-index-card"
+                onClick={() => {
+                  sceneManager.actions.addAspect(
+                    AspectType.IndexCard,
+                    isPrivate
+                  );
+                  logger.info("Scene:onAddCard:IndexCard");
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-index-card")}
+              </Button>
+              <Button
                 data-cy="scene.add-aspect"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.Aspect, isPrivate);
@@ -981,19 +996,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 endIcon={<AddCircleOutlineIcon />}
               >
                 {t("play-route.add-bad-guy")}
-              </Button>
-              <Button
-                data-cy="scene.add-index-card"
-                onClick={() => {
-                  sceneManager.actions.addAspect(
-                    AspectType.IndexCard,
-                    isPrivate
-                  );
-                  logger.info("Scene:onAddCard:IndexCard");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-index-card")}
               </Button>
             </ButtonGroup>
           </Grid>
@@ -1121,12 +1123,15 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.save-scene")}
             </Button>
           </Grid>
+          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
+          )}
           <Grid item>
             <ThemeProvider theme={errorTheme}>
               <Button
                 variant="text"
                 color="primary"
-                data-cy="scene.reset"
+                data-cy="scene.new-scene"
                 endIcon={<ErrorIcon />}
                 className={css({ borderRadius: "20px" })}
                 onClick={() => {
@@ -1139,13 +1144,10 @@ export const Scene: React.FC<IProps> = (props) => {
                   }
                 }}
               >
-                {t("play-route.reset-scene")}
+                {t("play-route.new-scene")}
               </Button>
             </ThemeProvider>
           </Grid>
-          {props.mode === SceneMode.PlayOnline && props.shareLink && (
-            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
-          )}
           {props.mode !== SceneMode.Manage && (
             <Grid item>
               <IconButton

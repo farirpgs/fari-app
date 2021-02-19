@@ -1,6 +1,6 @@
 # Fate Wiki
 
-The ultimate open and community driven Fate wiki resources.
+The community driven Fate Wiki resources.
 
 # Condensed / Core / Accelerated
 

@@ -3,7 +3,7 @@ import isEqual from "lodash/isEqual";
 import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { sanitizeContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import {
@@ -834,7 +834,7 @@ function getPinnedAspects(scene: IScene) {
 export function sanitizeSceneName(sceneName: string) {
   return sceneName === defaultSceneName
     ? ""
-    : sanitizeContentEditable(sceneName);
+    : previewContentEditable({ value: sceneName });
 }
 
 export interface IPeerMeta {

@@ -28,7 +28,7 @@ import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import truncate from "lodash/truncate";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -125,7 +125,7 @@ export const Doc: React.FC<IProps> = (props) => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const section = params.get("goTo");
-
+  const markdownRef = useRef<HTMLDivElement | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const { dom, markdownIndexes } = useMarkdownFile({
@@ -220,17 +220,20 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function connectTocAnchors() {
-      {
-        document.querySelectorAll("a").forEach((a) => {
-          a.addEventListener("click", handleMarkdownAnchorClick);
-        });
+      markdownRef.current?.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", handleMarkdownAnchorClick);
+      });
 
-        return () => {
-          document.querySelectorAll("a").forEach((a) => {
-            a.removeEventListener("click", handleMarkdownAnchorClick);
-          });
-        };
-      }
+      markdownRef.current?.querySelectorAll("img").forEach((img) => {
+        const html = img.outerHTML;
+        img.outerHTML = `<figure class="fari-image">${html}<figcaption>${img.alt}</figcaption></figure>`;
+      });
+
+      return () => {
+        markdownRef.current?.querySelectorAll("a").forEach((a) => {
+          a.removeEventListener("click", handleMarkdownAnchorClick);
+        });
+      };
     },
     [html]
   );
@@ -286,8 +289,10 @@ export const Doc: React.FC<IProps> = (props) => {
                 </Box>
                 <Grid container>
                   <Grid item xs>
-                    <Box pr={2}>
-                      <MarkdownElement renderedMarkdown={html} />
+                    <Box pr={isSmall ? 0 : 2}>
+                      <div ref={markdownRef}>
+                        <MarkdownElement renderedMarkdown={html} />
+                      </div>
                     </Box>
                   </Grid>
                   <Hidden mdDown>
@@ -501,6 +506,7 @@ export const Doc: React.FC<IProps> = (props) => {
     const nextIndex = markdownIndexes.flat.find(
       (i) => i.id === navigation.nextPageId
     );
+
     return (
       <Box>
         <Grid
@@ -704,6 +710,7 @@ export const DocSideBar: React.FC<{
       <>
         {categoryNames.map((category, i) => {
           const items = categories[category];
+
           const isCategorySelected = navigation.highlightedItems.includes(
             category
           );

@@ -48,7 +48,7 @@ export const SceneRoute: React.FC<{
   return (
     <>
       <PageMeta
-        title={pageTitle?.toUpperCase() || t("scenes-route.meta.title")}
+        title={pageTitle || t("scenes-route.meta.title")}
         description={t("scenes-route.meta.description")}
       />
       <Scene

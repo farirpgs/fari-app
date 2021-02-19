@@ -12,14 +12,14 @@ export const Heading: React.FC<{
   const Icon = props.icon;
   return (
     <Box
-      pt="1rem"
-      pb="2rem"
+      mt="1rem"
+      mb="2rem"
       display="flex"
       flexDirection="column"
       alignItems="center"
     >
       {Icon && (
-        <Box pb=".5rem">
+        <Box mb=".5rem">
           <Icon className={css({ fontSize: "3rem" })} color="primary" />
         </Box>
       )}

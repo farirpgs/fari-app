@@ -1,7 +1,7 @@
 import produce from "immer";
 import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
-import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import {
   CharacterType,
   defaultCharactersByType,
@@ -499,7 +499,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       if (!draft) {
         return;
       }
-      draft.name = sanitizeContentEditable(draft.name);
+      draft.name = previewContentEditable({ value: draft.name });
       draft.lastUpdated = getUnix();
     });
     return updatedCharacter;

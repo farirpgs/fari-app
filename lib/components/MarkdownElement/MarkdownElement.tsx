@@ -13,7 +13,35 @@ const styles = (theme: Theme) => {
     theme.palette.type === "light"
       ? lighten(theme.palette.secondary.light, 0.85)
       : darken(theme.palette.secondary.light, 0.75);
+  // const h1Background =
+  //   theme.palette.type === "dark"
+  //     ? theme.palette.background.paper
+  //     : theme.palette.primary.main;
 
+  // const h1Style = {
+  //   "clipPath": "polygon(2% 0, 0% 20%, 0% 100%, 98% 100%, 100% 80%, 100% 0)",
+  //   "padding": ".5rem 1rem",
+  //   "border": `3px solid ${theme.palette.primary.main}`,
+  //   "background": h1Background,
+  //   "color": theme.palette.getContrastText(h1Background),
+  //   "& .anchor": {
+  //     backgroundImage: getAnchorSvg(
+  //       theme.palette.type === "dark" ? "white" : "white"
+  //     ),
+  //   },
+  // };
+  const headerStyle = {
+    scrollMarginTop: `${scrollMarginTop}px`,
+    display: "flex",
+    alignItems: "center",
+    color:
+      theme.palette.type === "dark"
+        ? theme.palette.text.primary
+        : theme.palette.primary.main,
+    fontWeight: 800,
+    marginTop: "2rem",
+    marginBottom: "1rem",
+  };
   return {
     root: {
       ...theme.typography.body1,
@@ -71,65 +99,34 @@ const styles = (theme: Theme) => {
       },
       "& h1": {
         ...theme.typography.h3,
-        scrollMarginTop: `${scrollMarginTop}px`,
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.primary.main,
+        ...headerStyle,
         borderBottom: `2px solid ${theme.palette.primary.main}`,
-        fontWeight: 800,
-        marginTop: "1rem",
-        marginBottom: "2rem",
+        textTransform: "uppercase",
       },
       "& h2": {
         ...theme.typography.h4,
-        scrollMarginTop: `${scrollMarginTop}px`,
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.primary.main,
-        borderBottom: `1px solid ${theme.palette.primary.main}`,
-        fontWeight: 800,
-        marginTop: "2rem",
-        marginBottom: "1rem",
+        ...headerStyle,
+        borderBottom: `2px solid ${theme.palette.primary.main}`,
       },
       "& h3": {
         ...theme.typography.h5,
-        scrollMarginTop: `${scrollMarginTop}px`,
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.primary.main,
-        fontWeight: 800,
-        marginTop: "2rem",
-        marginBottom: "1rem",
+        ...headerStyle,
+        textTransform: "uppercase",
       },
       "& h4": {
         ...theme.typography.h6,
-        scrollMarginTop: `${scrollMarginTop}px`,
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.primary.main,
-        fontWeight: 800,
-        marginTop: "2rem",
-        marginBottom: "1rem",
+        ...headerStyle,
+        textTransform: "uppercase",
       },
       "& h5": {
         ...theme.typography.subtitle1,
-        scrollMarginTop: `${scrollMarginTop}px`,
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.primary.main,
-        fontWeight: 800,
-        marginTop: "2rem",
-        marginBottom: "1rem",
+        ...headerStyle,
+        textTransform: "uppercase",
       },
       "& h6": {
         ...theme.typography.subtitle2,
-        scrollMarginTop: `${scrollMarginTop}px`,
-        display: "flex",
-        alignItems: "center",
-        color: theme.palette.primary.main,
-        fontWeight: 800,
-        marginTop: "2rem",
-        marginBottom: "1rem",
+        ...headerStyle,
+        textTransform: "uppercase",
       },
       "& p": {
         marginTop: "0",
@@ -253,6 +250,13 @@ const styles = (theme: Theme) => {
         display: "block",
         margin: "0 auto",
       },
+      "& figcaption": {
+        textAlign: "center",
+        marginTop: ".2rem",
+        marginBottom: ".5rem",
+        fontSize: ".8rem",
+        color: theme.palette.text.secondary,
+      },
       "& hr": {
         height: 1,
         margin: theme.spacing(6, 0),
@@ -300,7 +304,7 @@ const styles = (theme: Theme) => {
       "& .page-meta": {
         fontSize: "1rem",
         lineHeight: "2rem",
-        marginTop: "-2rem",
+        marginTop: "-1rem",
         marginBottom: "1rem",
         color: theme.palette.text.secondary,
       },

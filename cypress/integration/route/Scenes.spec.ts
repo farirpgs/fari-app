@@ -89,7 +89,7 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.1.pin").click();
 
       // reset
-      Fari.get("scene.reset").click();
+      Fari.get("scene.new-scene").click();
 
       // set fields again
       Fari.get("scene.name").type("Ba Sing Se");

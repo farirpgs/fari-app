@@ -25,10 +25,28 @@ describe("IndexCardSkills", () => {
       expect(result).toEqual([]);
     });
   });
-  describe("Given the content has a spaces", () => {
+  describe("Given the content has  spaces", () => {
     it("should return an empty array", () => {
       const result = IndexCardSkills.getSkills("[    Fight :     4   ]");
       expect(result).toEqual([{ label: "Fight", modifier: "4" }]);
+    });
+  });
+  describe("Given the content is only brackets", () => {
+    it("should return an empty array", () => {
+      const result = IndexCardSkills.getSkills("[]");
+      expect(result).toEqual([]);
+    });
+  });
+  describe("Given the content is only label", () => {
+    it("should return an empty array", () => {
+      const result = IndexCardSkills.getSkills("[label:]");
+      expect(result).toEqual([]);
+    });
+  });
+  describe("Given the content is only value", () => {
+    it("should return an empty array", () => {
+      const result = IndexCardSkills.getSkills("[:3]");
+      expect(result).toEqual([]);
     });
   });
 

@@ -34,7 +34,7 @@ import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
-import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
+import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
@@ -285,6 +285,12 @@ export const Page: React.FC<{
                   Jeremy Keller.
                 </Typography>
               </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  Fari uses icons available at{" "}
+                  <a href="http://game-icons.net">http://game-icons.net</a>
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
           <Grid container>
@@ -401,7 +407,7 @@ export const Page: React.FC<{
                   <Grid item>
                     <Box maxWidth="150px">
                       <Typography variant="subtitle1" noWrap>
-                        {sanitizeContentEditable(props.liveLabel)}
+                        {previewContentEditable({ value: props.liveLabel })}
                       </Typography>
                     </Box>
                   </Grid>

@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import { IDocSidebar, ISideBarItems } from "../Doc";
 import { IMarkdownIndexes } from "../domains/Markdown";
 
+const MISC_SECTION_NAME = "Misc";
+
 export type IUseDocNavigation = ReturnType<typeof useDocNavigation>;
 
 export function useDocNavigation(props: {
@@ -21,22 +23,31 @@ export function useDocNavigation(props: {
   const sideBar = props.docSideBar ?? defaultSideBar;
 
   const navigation = useMemo(() => {
+    const { allMappedPageIds, defaultOpenedCategories } = parseSideBar(sideBar);
+    const currentPageId = props.currentPageId ?? "";
+    const pageIdsWithoutCategories: Array<string> = [];
+
+    for (const index of props.markdownIndexes.tree) {
+      if (!allMappedPageIds.includes(index.id)) {
+        pageIdsWithoutCategories.push(index.id);
+      }
+    }
+
     const highlightedItems = getTableOfContentsHighlightedItems(
       props.currentPageId,
       sideBar
     );
-    const { allPageIds, defaultOpenedCategories } = parseSideBar(sideBar);
-    const currentPageId = props.currentPageId ?? "";
+    const isInsideMiscSection = pageIdsWithoutCategories.includes(
+      currentPageId
+    );
+    if (isInsideMiscSection) {
+      highlightedItems.push(MISC_SECTION_NAME, currentPageId);
+    }
+
+    const allPageIds = [...allMappedPageIds, ...pageIdsWithoutCategories];
     const currentPageIndex = allPageIds.indexOf(currentPageId);
     const previousPageId = allPageIds[currentPageIndex - 1] ?? undefined;
     const nextPageId = allPageIds[currentPageIndex + 1] ?? undefined;
-    const pageIdsWithoutCategories: Array<string> = [];
-
-    for (const index of props.markdownIndexes.tree) {
-      if (!allPageIds.includes(index.id)) {
-        pageIdsWithoutCategories.push(index.id);
-      }
-    }
 
     return {
       highlightedItems,
@@ -53,7 +64,7 @@ export function useDocNavigation(props: {
     } else {
       return {
         ...sideBar,
-        [`Misc`]: navigation.pageIdsWithoutCategories,
+        [MISC_SECTION_NAME]: navigation.pageIdsWithoutCategories,
       };
     }
   }, [sideBar, navigation.pageIdsWithoutCategories]);
@@ -111,8 +122,6 @@ function getTableOfContentsHighlightedItems(
   }
 }
 
-type IParsedSideBar = ReturnType<typeof parseSideBar>;
-
 function parseSideBar(sideBar: IDocSidebar) {
   const defaultOpenedCategories: Array<string> = [];
   const allItems: Array<string> = [];
@@ -127,7 +136,7 @@ function parseSideBar(sideBar: IDocSidebar) {
 
   return {
     defaultOpenedCategories: defaultOpenedCategories,
-    allPageIds: allItems,
+    allMappedPageIds: allItems,
   };
 
   function checkChildren(items: ISideBarItems) {

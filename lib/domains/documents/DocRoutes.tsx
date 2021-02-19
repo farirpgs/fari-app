@@ -294,7 +294,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Fate Wiki",
     loadFunction: DocImport.FateWiki,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
-    imageUrl: Images.cheatSheet,
+    imageUrl: Images.fateWiki,
     noIndex: true,
     sideBar: {
       "+Welcome": [
@@ -311,6 +311,24 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
             "how-to-create-a-good-villain",
             "how-to-create-a-good-setting",
           ],
+        },
+      ],
+    },
+  },
+  {
+    url: "/fari-wiki",
+    parent: { title: "Fari", url: "/" },
+    title: "Fari Wiki",
+    loadFunction: DocImport.FariWiki,
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fari-wiki.md",
+    imageUrl: Images.logo,
+
+    sideBar: {
+      "+Welcome": [
+        "fari-wiki",
+        "tips-and-tricks",
+        {
+          // "": [],
         },
       ],
     },

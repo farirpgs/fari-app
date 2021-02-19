@@ -32,8 +32,12 @@ import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
-import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../components/ContentEditable/ContentEditable";
 import { DiceBox } from "../../../components/DiceBox/DiceBox";
+import { DiceFab } from "../../../components/DiceFab/DiceFab";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import {
@@ -41,11 +45,12 @@ import {
   CharacterType,
   ICharacter,
 } from "../../../contexts/CharactersContext/CharactersContext";
+import { useRollDice } from "../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import {
+  IDiceRollResult,
   IDiceRollWithBonus,
-  IRollDiceOptions,
 } from "../../../domains/dice/Dice";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
@@ -58,13 +63,15 @@ export const CharacterDialog: React.FC<{
   readonly?: boolean;
   dialog: boolean;
   rolls?: Array<IDiceRollWithBonus>;
-  onRoll?(options: IRollDiceOptions): void;
+  onRoll?(result: IDiceRollResult): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
+  const rollDice = useRollDice();
+
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
@@ -255,6 +262,11 @@ export const CharacterDialog: React.FC<{
   function renderContent() {
     return (
       <Box>
+        <DiceFab
+          onSelect={(result) => {
+            props.onRoll?.(result);
+          }}
+        />
         <Grid container>
           <Grid
             item
@@ -624,7 +636,11 @@ export const CharacterDialog: React.FC<{
                   value={skill.name}
                   onClick={() => {
                     const bonus = parseInt(skill.value) || 0;
-                    props.onRoll?.({ bonus, bonusLabel: skill.name });
+                    const skillName = previewContentEditable({
+                      value: skill.name,
+                    });
+                    const roll = rollDice({ bonus, bonusLabel: skillName });
+                    props.onRoll?.(roll);
                   }}
                   onChange={(value) => {
                     characterManager.actions.setSkillName(index, value);
@@ -911,12 +927,12 @@ export const CharacterDialog: React.FC<{
                 <Box py="1rem">
                   <DiceBox
                     rolls={props.rolls ?? []}
-                    showDetails
                     size="5rem"
                     fontSize="2rem"
                     borderSize=".2rem"
                     onClick={() => {
-                      props.onRoll?.({});
+                      const roll = rollDice();
+                      props.onRoll?.(roll);
                     }}
                   />
                 </Box>

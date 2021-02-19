@@ -5,10 +5,13 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import useTheme from "@material-ui/core/styles/useTheme";
-import Tooltip from "@material-ui/core/Tooltip";
+import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import { IDiceRollWithBonus } from "../../domains/dice/Dice";
+import {
+  DiceCommandOptions,
+  IDiceRollWithBonus,
+} from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -18,7 +21,8 @@ type IProps = {
   size: string;
   fontSize: string;
   borderSize: string;
-
+  tooltipOpen?: boolean;
+  tooltipPlacement?: TooltipProps["placement"];
   disabled?: boolean;
   showDetails?: boolean;
   onClick: () => void;
@@ -70,9 +74,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const tooltipStyle = css({
     background: tooltipBackground,
     borderRadius: "6px",
-    color: tooltipColor.primary,
-    minWidth: "14rem",
     maxWidth: "none",
+    color: tooltipColor.primary,
     padding: "0",
     boxShadow: theme.shadows[4],
   });
@@ -80,7 +83,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const tooltipContent = !diceRollsManager.state.finalResultHidden ? (
     <Box p="1rem">
       <Grid container alignItems="center" wrap="nowrap" spacing={4}>
-        <Grid item xs>
+        <Grid item xs className={css({ maxWidth: "18rem" })}>
           <Box
             fontSize=".8rem"
             fontWeight="bold"
@@ -93,25 +96,63 @@ export const DiceBox: React.FC<IProps> = (props) => {
             {"Roll"}
           </Box>
           <Box
-            fontSize="1.5rem"
+            fontSize="1.3rem"
             color={tooltipColor.primary}
             lineHeight={Font.lineHeight(1.5)}
             fontWeight="bold"
-            fontFamily={
-              diceRollsManager.state.display.type === "1dF" ||
-              diceRollsManager.state.display.type === "4dF"
-                ? "fate"
-                : "inherit"
-            }
+            className={css({
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            })}
           >
-            {diceRollsManager.state.display.spreaded}
+            {diceRollsManager.state.finalResultRolls.map((r, i) => {
+              const group = DiceCommandOptions[r.type];
+              const isFirst = i === 0;
+              const isFate = r.type === "1dF";
+              return (
+                <span key={i}>
+                  {!isFirst && <span>{" + "}</span>}
+                  <span
+                    className={css({
+                      fontFamily: isFate ? "fate" : "inherit",
+                    })}
+                  >
+                    {group.formatDetailedResult(r.value)}
+                  </span>
+                </span>
+              );
+            })}
+            {diceRollsManager.state.finalResultBonusLabel && (
+              <span>
+                {" + "} {diceRollsManager.state.finalResultBonus}
+              </span>
+            )}
           </Box>
           <Box
             fontSize="1rem"
+            className={css({
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            })}
             color={tooltipColor.secondary}
             lineHeight={Font.lineHeight(1)}
           >
-            {diceRollsManager.state.display.explanation}
+            {diceRollsManager.state.finalResultRolls.map((r, i) => {
+              const isFirst = i === 0;
+              return (
+                <span key={i} className={css({})}>
+                  {!isFirst && <span>{" + "}</span>}
+                  {r.type}
+                </span>
+              );
+            })}
+            {diceRollsManager.state.finalResultBonusLabel && (
+              <span>
+                {" + "} {diceRollsManager.state.finalResultBonusLabel}
+              </span>
+            )}
           </Box>
         </Grid>
         <Divider
@@ -119,14 +160,15 @@ export const DiceBox: React.FC<IProps> = (props) => {
           flexItem
           className={css({ background: tooltipColor.disabled })}
         />
-        <Grid item>
+        <Grid item xs>
           <Box
             fontSize="2rem"
             fontWeight="bold"
+            textAlign="center"
             lineHeight={Font.lineHeight(2)}
             color={tooltipColor.primary}
           >
-            {diceRollsManager.state.display.formatted}
+            {diceRollsManager.state.finalResultTotal}
           </Box>
         </Grid>
       </Grid>
@@ -144,10 +186,14 @@ export const DiceBox: React.FC<IProps> = (props) => {
     );
   }
 
+  const keyForTooltipForceRerender = `dicebox-tooltip-${props.tooltipOpen}`;
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Tooltip
         arrow
+        key={keyForTooltipForceRerender}
+        open={props.tooltipOpen}
+        placement={props.tooltipPlacement}
         title={tooltipContent}
         classes={{
           arrow: css({
@@ -178,7 +224,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
           <Typography
             component="span"
             data-cy="dice"
-            data-cy-value={diceRollsManager.state.display.formatted}
+            data-cy-value={diceRollsManager.state.finalResultTotal}
             data-cy-rolling={diceRollsManager.state.rolling}
             className={cx(diceStyle, {
               [diceRollingAnimationStyle]: diceRollsManager.state.rolling,
@@ -186,7 +232,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
           >
             {diceRollsManager.state.finalResultHidden
               ? ""
-              : diceRollsManager.state.display.formatted}
+              : diceRollsManager.state.finalResultTotal}
           </Typography>
         </ButtonBase>
       </div>

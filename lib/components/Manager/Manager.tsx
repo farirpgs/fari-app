@@ -19,6 +19,7 @@ import ExportIcon from "@material-ui/icons/GetApp";
 import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ContentEditablePreview } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { listItem } from "./domains/ListItem";
 
@@ -98,9 +99,12 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       anchor={"left"}
       open={props.mode !== ManagerMode.Close}
       onClose={props.onClose}
-      className={css({
-        width: isSmall ? "100%" : "30%",
-      })}
+      classes={{
+        paper: css({
+          width: "85%",
+          maxWidth: isSmall ? undefined : "25rem",
+        }),
+      }}
     >
       <Snackbar
         open={deletedSnack}
@@ -250,7 +254,9 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={<>{vm.name}</>}
+                      primary={
+                        <ContentEditablePreview value={vm.name} length={30} />
+                      }
                       secondary={listItem.formatDate(vm.lastUpdated)}
                     />
                     <ListItemSecondaryAction>

@@ -28,7 +28,7 @@ import { Icons } from "../../domains/Icons/Icons";
 import { makeIcon } from "../../domains/Icons/makeIcon";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { OtherResourcesItems } from "../SrdsRoute/SrdsRoute";
+import { MiscellaneousItems, WikiItems } from "../SrdsRoute/SrdsRoute";
 
 const Patrons = ["James Micu", "Randy Oest", "Ryan Singer"];
 
@@ -359,12 +359,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </Container>
         <Container maxWidth="md">
           <Box pb="2rem">
-            <Heading
-              icon={HelpIcon}
-              title={"Other Resources"}
-              subtitle={"Compendium, Stunt examples and more..."}
-            />
-            <OtherResourcesItems />
+            <Heading icon={HelpIcon} title={"Wikis & Resources"} />
+            <WikiItems />
+            <Box pt="2rem" />
+            <Heading icon={HelpIcon} title={"Miscellaneous"} />
+            <MiscellaneousItems />
           </Box>
         </Container>
         <Container maxWidth="lg">

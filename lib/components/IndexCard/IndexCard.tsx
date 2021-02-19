@@ -444,7 +444,7 @@ export const IndexCard: React.FC<
         key="onAddCountdown"
         data-cy={`${props["data-cy"]}.menu.track`}
         onClick={() => {
-          props.sceneManager.actions.addAspectTrack(props.aspectId, "...");
+          props.sceneManager.actions.addAspectTrack(props.aspectId, "Track");
         }}
       >
         {t("index-card.add-track")}

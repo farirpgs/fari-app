@@ -1,6 +1,9 @@
 import { css, cx } from "@emotion/css";
 import { useTheme } from "@material-ui/core/styles";
 import DOMPurify from "dompurify";
+import lowerCase from "lodash/lowerCase";
+import startCase from "lodash/startCase";
+import truncate from "lodash/truncate";
 import React, { useEffect, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
@@ -8,6 +11,42 @@ const DOMPurifyOptions = {
   ALLOWED_TAGS: ["br", "img"],
 };
 const ContentEditableDelay = 125;
+
+type IPreviewContentEditableOptions = {
+  value: string | undefined;
+  length?: number;
+};
+
+export function previewContentEditable(
+  options: IPreviewContentEditableOptions
+) {
+  if (!options.value) {
+    return "";
+  }
+  const valueWithoutBrTags = options.value.split("<br>").join(" ").trim();
+
+  const div = document.createElement("div");
+  div.innerHTML = valueWithoutBrTags;
+  const content = div.textContent ?? "";
+
+  const formattedContent = startCase(lowerCase(content));
+
+  if (options.length) {
+    return truncate(formattedContent, { length: options.length });
+  }
+
+  return formattedContent;
+}
+
+export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> = React.memo(
+  (props) => {
+    const content = previewContentEditable({
+      value: props.value,
+      length: props.length,
+    });
+    return <>{content}</>;
+  }
+);
 
 export const ContentEditable: React.FC<
   {
@@ -88,7 +127,7 @@ export const ContentEditable: React.FC<
           "display": "inline-block",
           "width": "100%",
           "cursor": hasCursorPointer ? "pointer" : "text",
-          "color": updating ? theme.palette.text.secondary : "inherit",
+          "color": "inherit",
           "textDecoration": props.underline ? "underline" : undefined,
           "transition": !updating
             ? theme.transitions.create("color", { duration: 500 })
@@ -125,17 +164,17 @@ export const ContentEditable: React.FC<
 };
 ContentEditable.displayName = "ContentEditable";
 
-export function sanitizeContentEditable(value: string | undefined) {
-  if (!value) {
-    return "";
-  }
-  return removeHTMLTags(removeNBSP(value)).trim();
-}
+// export function sanitizeContentEditable(value: string | undefined) {
+//   if (!value) {
+//     return "";
+//   }
+//   return removeHTMLTags(removeNBSP(value)).trim();
+// }
 
-function removeNBSP(value: string) {
-  return value.replace(/&nbsp;/g, " ");
-}
+// function removeNBSP(value: string) {
+//   return value.replace(/&nbsp;/g, " ");
+// }
 
-function removeHTMLTags(value: string) {
-  return value.replace(/<\/?[^>]+(>|$)/g, " ");
-}
+// function removeHTMLTags(value: string) {
+//   return value.replace(/<\/?[^>]+(>|$)/g, " ");
+// }

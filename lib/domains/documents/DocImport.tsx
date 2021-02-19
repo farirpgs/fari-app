@@ -32,6 +32,9 @@ export const DocImport = {
   FateWiki: () => {
     return import("../../../docs/fate-wiki.md");
   },
+  FariWiki: () => {
+    return import("../../../docs/fari-wiki.md");
+  },
   Blog: () => {
     return import("../../../docs/blog.md");
   },
