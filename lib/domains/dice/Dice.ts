@@ -220,9 +220,9 @@ export const Dice = {
       if (isCountableDiceCommand) {
         const [, /* 1d */ dice] = command.split("d");
         const typeLabel = `${count}d${dice}`;
-        return { type: command, value: result, typeLabel: typeLabel };
+        return { type: typeLabel, value: result };
       }
-      return { type: command, value: result, typeLabel: command };
+      return { type: command, value: result };
     });
 
     return simplifiedRolls;

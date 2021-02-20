@@ -114,13 +114,15 @@ export const DiceBox: React.FC<IProps> = (props) => {
               return (
                 <span key={i}>
                   {!isFirst && <span>{" + "}</span>}
-                  <span
-                    className={css({
-                      fontFamily: isFate ? "fate" : "inherit",
-                    })}
-                  >
-                    {group.formatDetailedResult(r.value)}
-                  </span>
+                  <Tooltip title={r.type}>
+                    <span
+                      className={css({
+                        fontFamily: isFate ? "fate" : "inherit",
+                      })}
+                    >
+                      {group.formatDetailedResult(r.value)}
+                    </span>
+                  </Tooltip>
                 </span>
               );
             })}
