@@ -1,10 +1,7 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
-import {
-  findMatchingCommandGroupWithDiceResult,
-  IDiceRollWithBonus,
-} from "../../domains/dice/Dice";
+import { Dice, IDiceRollWithBonus } from "../../domains/dice/Dice";
 
 const rollingDelay = 1000;
 
@@ -44,7 +41,7 @@ export function useDiceRolls(
 
   useEffect(
     function handleSetResultColor() {
-      const commandGroup = findMatchingCommandGroupWithDiceResult(
+      const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
         latestPlayerRoll
       );
 
@@ -98,7 +95,7 @@ export function useDiceRolls(
   }
 
   function handleSetFinalResult() {
-    const commandGroup = findMatchingCommandGroupWithDiceResult(
+    const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
       latestPlayerRoll
     );
     options?.onRolling?.(false);

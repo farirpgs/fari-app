@@ -143,6 +143,10 @@ export type IDiceRoll = {
   type: IDiceCommandNames;
   value: number;
 };
+export type ISimplifiedDiceRoll = {
+  type: string;
+  value: number;
+};
 
 export type IDiceRollResult = {
   total: number;
@@ -154,44 +158,76 @@ export type IDiceRollWithBonus = IDiceRollResult & {
   bonusLabel?: string;
 };
 
-export function rollComplexDiceTypes(
-  types: Array<IDiceCommandNames>
-): IDiceRollResult {
-  let total = 0;
-  const rolls: Array<IDiceRoll> = [];
+export const Dice = {
+  rollCommands(commands: Array<IDiceCommandNames>): IDiceRollResult {
+    let total = 0;
+    const rolls: Array<IDiceRoll> = [];
 
-  types.forEach((t) => {
-    const diceGroup = DiceCommandOptions[t];
+    commands.forEach((t) => {
+      const diceGroup = DiceCommandOptions[t];
 
-    const sides = diceGroup.sides;
-    const side = getRandomDiceSide(sides.length);
-    const result = sides[side];
+      const sides = diceGroup.sides;
+      const side = getRandomDiceSide(sides.length);
+      const result = sides[side];
 
-    rolls.push({
-      type: t,
-      value: result,
+      rolls.push({
+        type: t,
+        value: result,
+      });
+      total += result;
     });
-    total += result;
-  });
 
-  return { total, commandResults: rolls };
-}
+    const results: IDiceRollResult = { total, commandResults: rolls };
+    return results;
+  },
 
-export function findMatchingCommandGroupWithDiceResult(
-  result: IDiceRollResult | undefined
-) {
-  const commands = result?.commandResults.flatMap((cr) => cr.type);
-  return findMatchingCommandGroupWithDiceTypes(commands);
-}
+  findMatchingCommandGroupWithDiceResult(result: IDiceRollResult | undefined) {
+    const commands = result?.commandResults.flatMap((cr) => cr.type);
+    return Dice.findMatchingCommandGroupWithDiceTypes(commands);
+  },
 
-export function findMatchingCommandGroupWithDiceTypes(
-  commands: IDiceCommandNames[] | undefined
-) {
-  const commandGroup = AllDiceCommandGroups.find((cg) =>
-    isEqual(cg.value, commands)
-  );
-  return commandGroup;
-}
+  findMatchingCommandGroupWithDiceTypes(
+    commands: IDiceCommandNames[] | undefined
+  ) {
+    const commandGroup = AllDiceCommandGroups.find((cg) =>
+      isEqual(cg.value, commands)
+    );
+    return commandGroup;
+  },
+
+  simplifyRolls(rolls: Array<IDiceRoll>): Array<ISimplifiedDiceRoll> {
+    const commandResultsWithCounts = rolls.reduce<
+      Record<string, { result: number; count: number }>
+    >((acc, diceRoll) => {
+      if (acc[diceRoll.type] === undefined) {
+        acc[diceRoll.type] = { count: 0, result: 0 };
+      }
+
+      acc[diceRoll.type].count = acc[diceRoll.type].count + 1;
+      acc[diceRoll.type].result += diceRoll.value;
+
+      return acc;
+    }, {});
+
+    const simplifiedRolls: Array<ISimplifiedDiceRoll> = Object.keys(
+      commandResultsWithCounts
+    ).map((key) => {
+      const command = key as IDiceCommandNames;
+      const result = commandResultsWithCounts[command].result;
+      const count = commandResultsWithCounts[command].count;
+
+      const isCountableDiceCommand = command.includes("d");
+      if (isCountableDiceCommand) {
+        const [, /* 1d */ dice] = command.split("d");
+        const typeLabel = `${count}d${dice}`;
+        return { type: command, value: result, typeLabel: typeLabel };
+      }
+      return { type: command, value: result, typeLabel: command };
+    });
+
+    return simplifiedRolls;
+  },
+};
 
 function getRandomDiceSide(numberOfSides: number): number {
   return Math.trunc(Math.random() * numberOfSides);

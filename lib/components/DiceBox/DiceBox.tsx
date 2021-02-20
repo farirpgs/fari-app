@@ -9,6 +9,7 @@ import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import {
+  Dice,
   DiceCommandOptions,
   IDiceRollWithBonus,
 } from "../../domains/dice/Dice";
@@ -139,15 +140,17 @@ export const DiceBox: React.FC<IProps> = (props) => {
             color={tooltipColor.secondary}
             lineHeight={Font.lineHeight(1)}
           >
-            {diceRollsManager.state.finalResultRolls.map((r, i) => {
-              const isFirst = i === 0;
-              return (
-                <span key={i} className={css({})}>
-                  {!isFirst && <span>{" + "}</span>}
-                  {r.type}
-                </span>
-              );
-            })}
+            {Dice.simplifyRolls(diceRollsManager.state.finalResultRolls).map(
+              (r, i) => {
+                const isFirst = i === 0;
+                return (
+                  <span key={i} className={css({})}>
+                    {!isFirst && <span>{" + "}</span>}
+                    {r.type}
+                  </span>
+                );
+              }
+            )}
             {diceRollsManager.state.finalResultBonusLabel && (
               <span>
                 {" + "} {diceRollsManager.state.finalResultBonusLabel}

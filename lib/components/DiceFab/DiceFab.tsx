@@ -23,12 +23,11 @@ import {
 } from "../../contexts/DiceContext/DiceContext";
 import {
   d20DiceCommandGroups,
+  Dice,
   FateDiceCommandGroups,
-  findMatchingCommandGroupWithDiceTypes,
   IDiceCommandGroup,
   IDiceRollResult,
   MiscDiceCommandGroups,
-  rollComplexDiceTypes,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 
@@ -45,11 +44,9 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
   const [dirty, setDirty] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<
-    Array<IDiceCommandGroup>
-  >([]);
+  const [fabCommands, setFabCommands] = useState<Array<IDiceCommandGroup>>([]);
 
-  const ButtonIcon = getButtonIcon(selectedOptions, diceManager);
+  const ButtonIcon = getButtonIcon(fabCommands, diceManager);
 
   const handleMenuOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -59,7 +56,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSelectedOptions([]);
+    setFabCommands([]);
   };
 
   const handleFabClick = (
@@ -73,14 +70,14 @@ export const DiceFab: React.FC<IProps> = (props) => {
   };
 
   const handleReRoll = () => {
-    const result = rollComplexDiceTypes(diceManager.state.diceTypes);
+    const result = Dice.rollCommands(diceManager.state.selectedCommands);
     props.onSelect?.(result);
   };
 
   const handleRoll = () => {
-    const newTypes = selectedOptions.flatMap((o) => o.value);
-    const result = rollComplexDiceTypes(newTypes);
-    diceManager.actions.setDiceTypes(newTypes);
+    const newCommands = fabCommands.flatMap((o) => o.value);
+    const result = Dice.rollCommands(newCommands);
+    diceManager.actions.setSelectedCommands(newCommands);
     props.onSelect?.(result);
     setDirty(true);
   };
@@ -90,7 +87,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
     exit: theme.transitions.duration.shortest,
   };
 
-  const hasSelectedNewCommands = selectedOptions.length > 0;
+  const hasSelectedNewCommands = fabCommands.length > 0;
   const isRollButtonVisible = hasSelectedNewCommands || dirty;
 
   return (
@@ -284,7 +281,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
         <Box pb=".5rem">
           <Grid container spacing={1} justify="center">
             {options.map((o) => {
-              const badgeContent = selectedOptions.reduce((acc, curr) => {
+              const badgeContent = fabCommands.reduce((acc, curr) => {
                 if (o.label === curr.label) {
                   return acc + 1;
                 }
@@ -296,13 +293,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
                     <Grid container item justify="center">
                       <IconButton
                         onClick={() => {
-                          setSelectedOptions((t) => {
+                          setFabCommands((t) => {
                             return [...t, o];
                           });
                         }}
                         onContextMenu={(e) => {
                           e.preventDefault();
-                          setSelectedOptions((draft) => {
+                          setFabCommands((draft) => {
                             const indexToRemove = draft.findIndex(
                               (selectedOption) =>
                                 selectedOption.label === o.label
@@ -368,12 +365,12 @@ function getButtonIcon(
   const commandsToCheckForDynamicFabIcon =
     selectedOptions.length > 0
       ? selectedOptions.flatMap((o) => o.value)
-      : diceManager.state.diceTypes;
-  const selectedOption = findMatchingCommandGroupWithDiceTypes(
+      : diceManager.state.selectedCommands;
+  const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
     commandsToCheckForDynamicFabIcon
   );
   const [firstCommand] = commandsToCheckForDynamicFabIcon;
-  const firstCommandMatch = findMatchingCommandGroupWithDiceTypes([
+  const firstCommandMatch = Dice.findMatchingCommandGroupWithDiceTypes([
     firstCommand,
   ]);
 
