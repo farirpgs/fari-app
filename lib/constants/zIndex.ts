@@ -9,6 +9,7 @@ export function useZIndex() {
 
   return {
     ...theme.zIndex,
-    diceModal: theme.zIndex.tooltip + 50,
+    navBar: theme.zIndex.drawer + 1,
+    dicePopper: theme.zIndex.tooltip + 50,
   };
 }

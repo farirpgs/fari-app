@@ -341,7 +341,10 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/blog.md",
     defaultSideBarCategory: "Blog",
     sideBar: {
-      "+Blog": ["welcome", { "+2021": ["fari-v360", "moments-in-fate"] }],
+      "+Blog": [
+        "welcome",
+        { "+2021": ["fari-v370", "fari-v360", "moments-in-fate"] },
+      ],
     },
   },
   {

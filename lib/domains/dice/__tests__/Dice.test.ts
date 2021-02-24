@@ -64,8 +64,8 @@ fdescribe("simplifyResults", () => {
       ]);
 
       expect(result).toEqual([
-        { type: "1d10", value: 15, typeLabel: "2d10" },
-        { type: "1d4", value: 2, typeLabel: "1d4" },
+        { type: "2d10", value: 15 },
+        { type: "1d4", value: 2 },
       ]);
     });
   });
@@ -76,7 +76,7 @@ fdescribe("simplifyResults", () => {
         { type: "Coin", value: -1 },
       ]);
 
-      expect(result).toEqual([{ type: "Coin", typeLabel: "Coin", value: 0 }]);
+      expect(result).toEqual([{ type: "Coin", value: 0 }]);
     });
   });
 });

@@ -27,6 +27,7 @@ import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
+import { useZIndex } from "../../constants/zIndex";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -72,6 +73,7 @@ export const Page: React.FC<{
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
   const logger = useLogger();
+  const zIndex = useZIndex();
 
   const isLive = props.live !== undefined;
   useEffect(() => {
@@ -331,7 +333,7 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
-            zIndex: theme.zIndex.drawer + 1,
+            zIndex: zIndex.navBar,
           })}
         >
           <Toolbar

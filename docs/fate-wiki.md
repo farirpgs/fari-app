@@ -111,14 +111,96 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 - Don't set up enemies just to be knocked down; PC's are damn resilient and failure is fun anyway
 - Don't forget how much narrative agency the players have. If they spend a fate point and say there's a secret door, then there's a secret door now. Forget about maps and plot twists; you're not showing your players something you made earlier, you're making it with them as a team. Don't take that away from them!
 
-# How to Make Balanced Fights
+# Problematic PC Aspects
 
-[...]
+<page-meta author="Dgerrimea"></page-meta>
 
-# How to Create a Good Villain
+Aspects can be many things, but mechanically an aspect is something you invoke or compel. The narrative truth of the aspect should have some impact on the fiction, even just to create a cool cinematic moment, and the mechanical bonus will help your character get what they want.
 
-[...]
+There are three types of problematic PC aspects which undermine this process, and I see them often enough from new players that it’s worth exploring them here. These aspects are red flags to watch out for when creating aspects for your PCs.
 
-# How to Create a Good Setting
+The three types are:
 
-[...]
+- Safety Nets Aspects
+- Redundant Troubles
+- Meaningless Aspects
+
+## Safety Net Aspects
+
+### What Are They?
+
+Any aspect which is always relevant.
+
+### What’s An Example?
+
+You’re playing a jumping plumber and your aspect is **I Must Save The Princess**.
+Everything you do is getting you closer to saving the princess, and this aspect describes that intent.
+
+### Why Is This Problematic?
+
+<p class="with-anchor">Because it’s always relevant to everything you do, it’s unclear when to invoke or compel this aspect.</p>
+
+You don’t know when to spend a Fate Point to make this aspect relevant because it’s always relevant. Ideally an aspect would foreshadow a certain kind of moment, but an aspect which foreshadows every moment actually foreshadows nothing.
+
+<p class="with-anchor">Invoking this aspect adds nothing to the fiction</p>
+
+If your jumping plumber is leaping across a chasm, hoping to land on the other side, then you have a dramatic moment where he’s in mid-air and the audience is wondering whether he’s going to fall into the darkness below.
+If you, as a player, invoke **I Must Save The Princess** to help with this jump, then the audience sees the plumber leaping over the chasm in the exactly the same way. It’s not even that now he’s doing it specifically for the princess, because everything he’s doing was always for the princess anyway. Instead of changing the scene or adding anything interesting, this safety net aspect just leaves the story exactly where it was before you invoked it.
+
+<p class="with-anchor">Invoking this aspect feels unsatisfying</p>
+
+Since you don’t know when to compel this aspect, and since it adds nothing to the story when you do invoke it, any time you invoke it feels cheap. Because it is cheap. It’s an invocation you can make any time without having to think about what it means or what the consequences are; it’s purely a mechanical boost with no restrictions or meaningful consequences. A safety net aspect is the opposite of “fiction first”, the Golden Rule of Fate.
+
+### What’s The Solution?
+
+Before you commit to an aspect, think about what kinds of moments you want to foreshadow with it. These moments should be “on screen” moments; dramatic moments in the fiction.
+
+## Redundant Troubles
+
+### What Are They?
+
+A trouble which adds nothing to the struggles you are already facing.
+
+### What’s An Example?
+
+You’re in a fantasy setting playing an Aragorn-type ranger whose trouble is **Obsessed With Hunting Down Orcs**. Any time you see an orc you can’t bring yourself to let it go; you must hunt it down and slay it. Normally a fine trouble, but if your game happens to be about hunting down orcs and slaying them, then this trouble is redundant.
+
+### Why Is This Problematic?
+
+<p class="with-anchor">As with safety net aspects, it’s unclear when to compel this aspect.</p>
+
+Since your trouble is so aligned with your goals and opposition already, it can’t serve as a distraction or a complication. This makes it hard to compel, because the reason the GM would compel a trouble aspect is to create a new problem or complication. A redundant trouble can’t accomplish this, all it can do is emphasise or reiterate the problem/opposition that has already been established.
+
+<p class="with-anchor">If you do compel a redundant trouble, nothing much happens.</p>
+
+If the GM wants to compel the player of our orc hunting ranger, what would that compel look like? The ranger was already hunting and slaying orcs so it’s not going to distract him from anything. You could make a particularly nasty orc, but that’s not what the aspect is about. It could be overwhelming numbers of orcs but, again, that’s only a weak association with the actual aspect. But this is what you must resort to because the trouble itself is redundant.
+
+### What’s The Solution?
+
+Remember that, as a player, you are incentivised to have a trouble that is easy to compel. Begin by considering what your character’s goals are, and what opposition they might face. Then, think of what might be a complication or a distraction from that goal. This way you ensure that the two sources of drama are not overlapping completely.
+Bear in mind that for some games, especially ongoing campaigns, there may be episodes or arcs where your character’s trouble is the main source of drama. That is redundancy, but it’s ok because it’s temporary and is a great way to give a PC’s trouble some spotlight for a little while.
+
+## Meaningless Aspects
+
+### What Are They?
+
+Any aspect which includes a reference to something which has not been established yet.
+
+### What’s An Example?
+
+My character is **The Shadow-Wizard Ruler Of The High Temple**, and in Session 0 we didn’t establish what a shadow-wizard is or what the High Temple is.
+
+### Why Is This Problematic?
+
+<p class="with-anchor">It’s impossible to invoke an aspect which lacks meaning.</p>
+
+If you don’t know what the High Temple is, then you don’t know what it can to for you or for your story. It might have sounded cool at the time, but it’s not useful until it’s meaningful. It will sit there, looking cool on the page, and having no effect on anything, unless and until you establish what it means. It’s a placeholder at best, but it’s not a proper aspect.
+
+<p class="with-anchor">Aspects aren’t just for invoking, though; they also grant narrative permission.</p>
+
+A shadow-wizard might be able to use the Stealth skill to wrap an ally in protective darkness…or something else, or who knows because it hasn’t been established! To a certain extent with skills, and a much larger extent with approaches from Fate Accelerated, we depend on aspects to justify and describe how and why certain characters can do certain things. A meaningless aspect either sits there being a waste of space, or (and even worse), a player will try to establish some new narrative permission at some climactic moment. It’s never fun when the hero wins using an ability never seen before and not foreshadowed in any way. Vagueness is often repurposed into versatility, and a meaningless aspect is the vaguest one possible.
+
+### What’s The Solution?
+
+Look out for any references in aspect names, especially proper nouns, and make sure you understand what is being referenced. It could be a person, place, a discipline (like magic or some other unusual area of study), it could be a contract or a set of rules (like a genie who is **Bound To A Lamp**).
+If you do end up with a meaningless aspect, treat it as a placeholder and don’t use it for anything until you have a chance, preferably between sessions, to clarify it with the group.

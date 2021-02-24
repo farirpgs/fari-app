@@ -4,6 +4,73 @@ Ideas and thoughts by the Fate Community.
 
 Want to contribute ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
+# Fari v3.7.0
+
+<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/6bc3b2e73f433765065838327f2c3e86.png"></page-meta>
+
+New Fari & Fate Community Driven Wikis, new dice menu, and more...
+
+## New Features 🌟
+
+### Wiki
+
+Fari now has two brand new wikis:
+
+- [A Fate related Wiki](/fate-wiki)
+- [A Fari related Wiki](/fari-wiki)
+
+There is not a lot of content as of right now but there will be in the near future.
+
+For now, I recommended check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new article by Dgerrimea about [Problematic PC Aspects](/fate-wiki/problematic-pc-aspects)
+
+> If you are interested in contributing to either of the wikis, come and talk to the team on [Discord](https://discord.com/invite/vMAJFjUraA) 👋
+
+<!-- ![Fari Wiki](https://gyazo.com/51214d0224b7b1e2b858279b3db07f2a.png) -->
+
+### Index Card Skill Modifiers
+
+Fari Index Cards are pretty versatile but can feel restrictive if you want to create a relatively complex NPC that is still not complex enough so that it would need its own character sheet.
+
+So to try to help with that, I've added a new functionality to the index cards that let you add skill modifiers that can trigger dice rolls.
+
+To use this feature, simply use following syntax `[Skill: Number]` inside an index card description and this will tell Fari that your Index Card has a skill that can be rolled. Pretty cool no ?
+
+![Index Card Roll Modifier](https://gyazo.com/04ddec1356bf3b25022341f40d6f3a25.gif)
+
+### Image Preview Modal
+
+For those who didn't know, Fari has this feature where you can copy an image on the web and add it inside index cards or character sheet fields.
+
+While it is a nice feature, its current implementation wasn't ideal since big images would big scaled down which made them hard to look at.
+
+For that reason, I added a new image preview functionality which opens a full-screen modal if you click on those images.
+
+Here what it looks like 👇
+
+![Image Preview Modal](https://gyazo.com/71931e7030cfaf23ef11916fd72290d6.gif)
+
+### More Dice
+
+I recently came across [The Witch is Dead](https://gshowitt.itch.io/the-witch-is-dead), a really cool one page RPG, and wanted to use Fari to play this game with some friends.
+
+This game uses `d10s` which Fari didn't support at the time.
+
+This made me think about making Fari more flexible for simple RPGs like this so I worked on a brand new dice command menu and to be honest, I'm pretty proud of the end result 💪
+
+Check it out [here](/dice) or look at the gif below for a quick preview👇
+
+![Dice Roller](https://gyazo.com/72c3eda69be9983538ef1ae7414073c4.gif)
+
+## Thank You ❤️
+
+I want to thank my patrons for helping to make this update possible.
+
+If you also want to support Fari, go over Fari's [Patreon](https://www.patreon.com/fariapp) page.
+
+There, you can support the development of the Fate RPG Companion App on a monthly basis for as low as the price of one ☕ or 🍪 per month!
+
+If you have any questions or want to talk about Fari, come chat on [Discord](https://discord.com/invite/vMAJFjUraA) and if you encounter any issues with the release, don't hesitate to create a new [bug report](https://github.com/fariapp/fari/issues/new/choose).
+
 # Fari v3.6.0
 
 <page-meta author="RPDeshaies" date="2021-02-10" image="https://gyazo.com/987c44f98577c6f8576ffb9a80c54fdf.png"></page-meta>

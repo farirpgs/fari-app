@@ -595,7 +595,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
     return (
       <>
-        <Box pt="2rem" pb="1rem" px="1rem">
+        <Box>
           <Collapse in={hasPlayersWithCharacterSheets}>
             <Box>
               <MagicGridContainer
@@ -628,9 +628,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 })}
               </MagicGridContainer>
             </Box>
-            <Box pt="1rem" pb="2rem" px=".5rem">
-              <Divider />
-            </Box>
           </Collapse>
         </Box>
       </>
@@ -650,18 +647,25 @@ export const Scene: React.FC<IProps> = (props) => {
           <Box>
             <TabContext value={tab}>
               {renderTabs()}
-              <TabPanel value={"player-characters"} className={tabPanelStyle}>
-                {renderCharacterCards()}
-              </TabPanel>
-              <TabPanel value={"public"} className={tabPanelStyle}>
-                {renderAspects()}
-              </TabPanel>
-              <TabPanel value={"private"} className={tabPanelStyle}>
-                {renderAspects()}
-              </TabPanel>
-              <TabPanel value={"gm-notes"} className={tabPanelStyle}>
-                {renderGmNotes()}
-              </TabPanel>
+              <Box>
+                <Box py="2rem" px="2rem" position="relative" minHeight="20rem">
+                  <TabPanel
+                    value={"player-characters"}
+                    className={tabPanelStyle}
+                  >
+                    {renderCharacterCards()}
+                  </TabPanel>
+                  <TabPanel value={"public"} className={tabPanelStyle}>
+                    {renderAspects()}
+                  </TabPanel>
+                  <TabPanel value={"private"} className={tabPanelStyle}>
+                    {renderAspects()}
+                  </TabPanel>
+                  <TabPanel value={"gm-notes"} className={tabPanelStyle}>
+                    {renderGmNotes()}
+                  </TabPanel>
+                </Box>
+              </Box>
             </TabContext>
           </Box>
         </Paper>
@@ -671,29 +675,25 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function renderGmNotes() {
     return (
-      <Box py="2rem" px="1rem">
-        <Grid container>
-          <Grid item xs={12} sm={6}>
-            <Paper>
-              <Box p="2rem">
-                <Box pb="1rem">
-                  <FateLabel variant="h6">{t("play-route.gm-notes")}</FateLabel>
-                </Box>
-                <Box>
-                  <ContentEditable
-                    autoFocus
-                    placeholder={"Scene Notes..."}
-                    value={sceneManager.state.scene.notes ?? ""}
-                    onChange={(newNotes) => {
-                      sceneManager.actions.setNotes(newNotes);
-                    }}
-                  />
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
+      <Grid container>
+        <Grid item xs={12} sm={6}>
+          <Box>
+            <Box mb="1rem">
+              <FateLabel variant="h6">{t("play-route.gm-notes")}</FateLabel>
+            </Box>
+            <Box>
+              <ContentEditable
+                autoFocus
+                placeholder={"Scene Notes..."}
+                value={sceneManager.state.scene.notes ?? ""}
+                onChange={(newNotes) => {
+                  sceneManager.actions.setNotes(newNotes);
+                }}
+              />
+            </Box>
+          </Box>
         </Grid>
-      </Box>
+      </Grid>
     );
   }
 
@@ -729,7 +729,7 @@ export const Scene: React.FC<IProps> = (props) => {
     const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
     return (
-      <Box pt="2rem" pb="1rem" px="1rem">
+      <Box>
         <Box>{renderGMAspectActions()}</Box>
 
         {hasAspects && (
@@ -770,7 +770,14 @@ export const Scene: React.FC<IProps> = (props) => {
         )}
         {!hasAspects && (
           <Box py="6rem" textAlign="center">
-            <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
+            <Typography
+              variant="h6"
+              className={css({
+                fontWeight: theme.typography.fontWeightBold,
+              })}
+            >
+              {t("play-route.no-aspects")}
+            </Typography>
           </Box>
         )}
       </Box>
@@ -838,7 +845,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function renderHeader() {
     return (
-      <Box pb="2rem">
+      <Box mx=".5rem" mb="2rem" py="2rem">
         <Box>
           <Container maxWidth="sm">
             <Box>{renderManagementActions()}</Box>
@@ -1133,7 +1140,10 @@ export const Scene: React.FC<IProps> = (props) => {
                 color="primary"
                 data-cy="scene.new-scene"
                 endIcon={<ErrorIcon />}
-                className={css({ borderRadius: "20px" })}
+                className={css({
+                  borderRadius: "20px",
+                  fontWeight: theme.typography.fontWeightBold,
+                })}
                 onClick={() => {
                   const confirmed = confirm(
                     t("play-route.reset-scene-confirmation")

@@ -9,7 +9,6 @@ import Grow from "@material-ui/core/Grow";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-import Slide from "@material-ui/core/Slide";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -36,6 +35,7 @@ type IProps = {
 };
 const buttonSize = "4rem";
 
+const SlideDurationForRollButton = 1000;
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));
@@ -62,6 +62,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const handleFabClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
+    e.stopPropagation();
     if (!open) {
       handleMenuOpen(e);
     } else {
@@ -72,6 +73,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const handleReRoll = () => {
     const result = Dice.rollCommands(diceManager.state.selectedCommands);
     props.onSelect?.(result);
+    handleMenuClose();
   };
 
   const handleRoll = () => {
@@ -80,6 +82,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
     diceManager.actions.setSelectedCommands(newCommands);
     props.onSelect?.(result);
     setDirty(true);
+    handleMenuClose();
   };
 
   const transitionDuration = {
@@ -92,86 +95,85 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <Box
-        className={css({
-          left: "4rem",
-          bottom: "2rem",
-          height: buttonSize,
-          position: "fixed",
-          overflow: "hidden",
-        })}
-      >
-        <Slide
-          direction="right"
-          in={isRollButtonVisible}
-          timeout={theme.transitions.duration.shortest}
-        >
-          {renderSlideButton()}
-        </Slide>
-
-        <ClickAwayListener
-          onClickAway={() => {
-            handleMenuClose();
-          }}
-        >
-          <Box>
-            <Zoom
-              in
-              timeout={transitionDuration}
-              style={{
-                transitionDelay: `${
-                  !hasSelectedNewCommands ? transitionDuration.exit : 0
-                }ms`,
-              }}
-            >
-              {renderFab()}
-            </Zoom>
-            {renderPopper()}
-          </Box>
-        </ClickAwayListener>
-      </Box>
+      <ClickAwayListener onClickAway={handleMenuClose}>
+        <Box>
+          <Zoom
+            in
+            timeout={transitionDuration}
+            style={{
+              transitionDelay: `${
+                !hasSelectedNewCommands ? transitionDuration.exit : 0
+              }ms`,
+            }}
+          >
+            {renderFab()}
+          </Zoom>
+          {renderPopper()}
+        </Box>
+      </ClickAwayListener>
     </>
   );
 
   function renderFab() {
     return (
-      <Fab
-        variant="round"
-        color="primary"
-        onClick={handleFabClick}
+      <Box
         className={css({
-          left: "2rem",
+          left: "1rem",
           bottom: "2rem",
-          width: buttonSize,
-          height: buttonSize,
           position: "fixed",
+          zIndex: zIndex.dicePopper,
         })}
       >
-        {open ? (
-          <CloseIcon
+        <Box
+          className={css({
+            position: "relative",
+          })}
+        >
+          <Fab
+            variant="round"
+            color="primary"
+            onClick={handleFabClick}
+            onContextMenu={(e) => {
+              e.preventDefault();
+            }}
             className={css({
-              width: "90%",
-              height: "auto",
-              padding: ".5rem",
+              width: buttonSize,
+              height: buttonSize,
+              zIndex: zIndex.dicePopper,
             })}
-          />
-        ) : (
-          <ButtonIcon
-            className={css({
-              width: "100%",
-              height: "auto",
-              padding: ".5rem",
-            })}
-          />
-        )}
-      </Fab>
+          >
+            {open ? (
+              <CloseIcon
+                className={css({
+                  width: "90%",
+                  height: "auto",
+                  padding: ".5rem",
+                })}
+              />
+            ) : (
+              <ButtonIcon
+                className={css({
+                  width: "100%",
+                  height: "auto",
+                  padding: ".5rem",
+                })}
+              />
+            )}
+          </Fab>
+
+          {renderRollButton()}
+        </Box>
+      </Box>
     );
   }
 
-  function renderSlideButton() {
+  function renderRollButton() {
     return (
       <Box
         className={css({
+          position: "absolute",
+          bottom: "0",
+          left: "2rem",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -180,6 +182,11 @@ export const DiceFab: React.FC<IProps> = (props) => {
           height: buttonSize,
           borderTopRightRadius: "25px",
           borderBottomRightRadius: "25px",
+          overflow: "hidden",
+          transition: theme.transitions.create("max-width", {
+            duration: SlideDurationForRollButton,
+          }),
+          maxWidth: isRollButtonVisible ? "100vw" : "0",
         })}
       >
         <ButtonBase
@@ -196,17 +203,21 @@ export const DiceFab: React.FC<IProps> = (props) => {
               handleReRoll();
             }
           }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
         >
-          {isRollButtonVisible && (
-            <Typography
-              className={css({
-                textTransform: "uppercase",
-                fontWeight: theme.typography.fontWeightBold,
-              })}
-            >
-              {hasSelectedNewCommands ? "Roll" : "Reroll"}
-            </Typography>
-          )}
+          <Typography
+            className={css({
+              textTransform: "uppercase",
+              fontWeight: theme.typography.fontWeightBold,
+            })}
+          >
+            {hasSelectedNewCommands ||
+            (!hasSelectedNewCommands && !isRollButtonVisible)
+              ? "Roll"
+              : "Reroll"}
+          </Typography>
         </ButtonBase>
       </Box>
     );
@@ -219,36 +230,45 @@ export const DiceFab: React.FC<IProps> = (props) => {
         anchorEl={anchorEl}
         transition
         placement="top"
-        className={css({
-          zIndex: zIndex.diceModal,
-        })}
+        style={{ zIndex: zIndex.dicePopper }}
         modifiers={{
           flip: {
-            enabled: true,
+            enabled: false,
+          },
+          offset: {
+            offset: "0, 8px",
           },
           preventOverflow: {
             enabled: true,
-            boundariesElement: "scrollParent",
+            boundariesElement: "viewport",
           },
         }}
       >
         {({ TransitionProps }) => (
           <Grow {...TransitionProps}>
             <Box
-              px={isExtraSmall ? "0" : "2rem"}
-              pb="1rem"
+              className={css({
+                padding: "0 1rem",
+                maxWidth: "90vw",
+                zIndex: zIndex.dicePopper,
+              })}
               onContextMenu={(e) => {
                 e.preventDefault();
               }}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
             >
               <Paper>
-                <Box p="1rem">
-                  {renderCommandGroupHeader("Fate")}
-                  {renderOptions(FateDiceCommandGroups)}
-                  {renderCommandGroupHeader("D20s")}
-                  {renderOptions(d20DiceCommandGroups)}
-                  {renderCommandGroupHeader("Misc")}
-                  {renderOptions(MiscDiceCommandGroups)}
+                <Box maxHeight="70vh" overflow="auto">
+                  <Box p="1rem">
+                    {renderCommandGroupHeader("Fate")}
+                    {renderOptions(FateDiceCommandGroups)}
+                    {renderCommandGroupHeader("D20s")}
+                    {renderOptions(d20DiceCommandGroups)}
+                    {renderCommandGroupHeader("Misc")}
+                    {renderOptions(MiscDiceCommandGroups)}
+                  </Box>
                 </Box>
               </Paper>
             </Box>

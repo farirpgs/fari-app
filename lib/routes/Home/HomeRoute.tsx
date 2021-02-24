@@ -288,7 +288,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
-                  {renderHeadingIcon(Icons.DiceGameIcon)}
+                  {renderHeadingIcon(Icons.FateDice)}
                   <FateLabel
                     variant="h5"
                     align="center"

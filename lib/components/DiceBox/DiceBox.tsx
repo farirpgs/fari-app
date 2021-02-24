@@ -4,10 +4,11 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
+import Popper from "@material-ui/core/Popper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   Dice,
   DiceCommandOptions,
@@ -34,6 +35,9 @@ type IProps = {
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const diceTextColors = useTextColors(theme.palette.background.paper);
+  const [open, setOpen] = useState(false);
+  const anchorEl = useRef<any>(null);
+
   const diceRollsManager = useDiceRolls(props.rolls, {
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
@@ -47,6 +51,16 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
     props.onClick();
   }
+
+  const handleTooltipOpen = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setOpen(true);
+  };
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
 
   const diceStyle = css({
     fontSize: props.fontSize,
@@ -72,17 +86,18 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
 
-  const tooltipStyle = css({
-    background: tooltipBackground,
-    borderRadius: "6px",
-    maxWidth: "none",
-    color: tooltipColor.primary,
-    padding: "0",
-    boxShadow: theme.shadows[4],
-  });
-
-  const tooltipContent = !diceRollsManager.state.finalResultHidden ? (
-    <Box p="1rem">
+  const tooltipContent = !diceRollsManager.state.finalResultHidden && (
+    <Box
+      className={css({
+        background: tooltipBackground,
+        borderRadius: "6px",
+        maxWidth: "90vw",
+        overflow: "auto",
+        color: tooltipColor.primary,
+        padding: "1rem",
+        boxShadow: theme.shadows[4],
+      })}
+    >
       <Grid container alignItems="center" wrap="nowrap" spacing={4}>
         <Grid item xs className={css({ maxWidth: "18rem" })}>
           <Box
@@ -91,13 +106,23 @@ export const DiceBox: React.FC<IProps> = (props) => {
             lineHeight={Font.lineHeight(0.8)}
             className={css({
               textTransform: "uppercase",
+              minWidth: "8rem",
               color: theme.palette.secondary.light,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             })}
           >
             {"Roll"}
+            {diceRollsManager.state.finalResultBonusLabel && (
+              <span>
+                {": "}
+                {diceRollsManager.state.finalResultBonusLabel}
+              </span>
+            )}
           </Box>
           <Box
-            fontSize="1.3rem"
+            fontSize="1.5rem"
             color={tooltipColor.primary}
             lineHeight={Font.lineHeight(1.5)}
             fontWeight="bold"
@@ -155,7 +180,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
             )}
             {diceRollsManager.state.finalResultBonusLabel && (
               <span>
-                {" + "} {diceRollsManager.state.finalResultBonusLabel}
+                {" + "} {diceRollsManager.state.finalResultBonus}
               </span>
             )}
           </Box>
@@ -178,8 +203,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
         </Grid>
       </Grid>
     </Box>
-  ) : (
-    ""
   );
 
   if (props.showDetails) {
@@ -191,24 +214,40 @@ export const DiceBox: React.FC<IProps> = (props) => {
     );
   }
 
-  const keyForTooltipForceRerender = `dicebox-tooltip-${props.tooltipOpen}`;
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
-      <Tooltip
-        arrow
-        key={keyForTooltipForceRerender}
-        open={props.tooltipOpen}
+      {renderDice()}
+      <Popper
+        open={props.tooltipOpen ?? open}
+        anchorEl={anchorEl.current}
+        transition
         placement={props.tooltipPlacement}
-        title={tooltipContent}
-        classes={{
-          arrow: css({
-            color: tooltipBackground,
-          }),
-          tooltip: tooltipStyle,
+        modifiers={{
+          flip: {
+            enabled: false,
+          },
+          enabled: true,
+          offset: {
+            offset: "0, 16px",
+          },
+          preventOverflow: {
+            enabled: true,
+            boundariesElement: "viewport",
+          },
         }}
       >
-        {renderDice()}
-      </Tooltip>
+        {({ TransitionProps }) => (
+          <Grow {...TransitionProps}>
+            <Box
+              onContextMenu={(e) => {
+                e.preventDefault();
+              }}
+            >
+              {tooltipContent}
+            </Box>
+          </Grow>
+        )}
+      </Popper>
     </Box>
   );
 
@@ -216,8 +255,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
     return (
       <div>
         <ButtonBase
+          ref={anchorEl}
+          onMouseEnter={handleTooltipOpen}
+          onMouseLeave={handleTooltipClose}
           className={css({
-            borderRadius: "50%",
+            // borderRadius: "50%",
             color: diceTextColors.primary,
           })}
           disabled={props.disabled || diceRollsManager.state.rolling}
@@ -251,9 +293,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
 
     return (
       <Grow in={!!tooltipContent}>
-        <Box mt="1rem" className={tooltipStyle}>
-          {tooltipContent}
-        </Box>
+        <Box mt="1rem">{tooltipContent}</Box>
       </Grow>
     );
   }

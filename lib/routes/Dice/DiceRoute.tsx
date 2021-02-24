@@ -50,7 +50,7 @@ export const DiceRoute = () => {
         description={t("dice-route.meta.description")}
       />
       <Box>
-        <Heading icon={Icons.RollDiceIcon} title="Dice" />
+        <Heading icon={Icons.FateDice} title="Dice" />
         <DiceFab
           onSelect={(result) => {
             setRollResult(result);
