@@ -343,6 +343,8 @@ export const Page: React.FC<{
               minHeight: "72px",
               width: "100%",
               padding: "1rem",
+              position: "relative",
+              zIndex: zIndex.navBar,
             })}
           >
             <RouterLink

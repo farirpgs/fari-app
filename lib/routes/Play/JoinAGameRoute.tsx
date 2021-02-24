@@ -10,8 +10,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../images/blue/app.png";
 import { Page } from "../../components/Page/Page";
@@ -157,40 +155,6 @@ export const JoinAGame: React.FC<{
               </Typography>
             </Box>
           </Collapse>
-        </Box>
-        <Box pb="1rem">
-          <Alert severity="info">
-            <Box pb=".5rem" fontWeight="bold">
-              <Typography variant="inherit">
-                {"Oh, something is different?"}
-              </Typography>
-            </Box>
-            <Box pb=".5rem">
-              <Typography>
-                {
-                  "I made some changes to this page based on feedback I got from the community."
-                }
-              </Typography>
-            </Box>
-            <Box pb="1rem">
-              <Typography>
-                {
-                  "Just enter your name name in the field below and you will be able to load your character sheet once you've joined the game."
-                }
-              </Typography>
-            </Box>
-            <Box pb=".5rem">
-              <Typography>
-                {"Once inside, simply click the"}
-                <Box display="inline-block" px=".5rem">
-                  <NoteAddIcon />
-                </Box>
-                {
-                  "button besides your name on the left to load a character sheet."
-                }
-              </Typography>
-            </Box>
-          </Alert>
         </Box>
       </form>
     );

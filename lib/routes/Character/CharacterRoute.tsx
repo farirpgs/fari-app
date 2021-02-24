@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { DiceFab } from "../../components/DiceFab/DiceFab";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -60,6 +61,14 @@ export const CharacterRoute: React.FC<{
       />
 
       <Page>
+        {dialogMode && (
+          <DiceFab
+            rolls={rolls}
+            onSelect={(result) => {
+              handleOnRoll(result);
+            }}
+          />
+        )}
         <CharacterDialog
           open={!!selectedCharacter}
           character={selectedCharacter}

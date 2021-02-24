@@ -26,12 +26,15 @@ import {
   FateDiceCommandGroups,
   IDiceCommandGroup,
   IDiceRollResult,
+  IDiceRollWithBonus,
   MiscDiceCommandGroups,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+import { DiceBox } from "../DiceBox/DiceBox";
 
 type IProps = {
   onSelect?(result: IDiceRollResult): void;
+  rolls?: Array<IDiceRollWithBonus>;
 };
 const buttonSize = "4rem";
 
@@ -111,8 +114,30 @@ export const DiceFab: React.FC<IProps> = (props) => {
           {renderPopper()}
         </Box>
       </ClickAwayListener>
+      {props.rolls && renderDiceBox()}
     </>
   );
+
+  function renderDiceBox() {
+    return (
+      <DiceBox
+        className={css({
+          position: "fixed",
+          left: "1.25rem",
+          bottom: "7rem",
+          zIndex: zIndex.diceFabDie,
+        })}
+        rolls={props.rolls ?? []}
+        tooltipPlacement="right-end"
+        size="3.5rem"
+        fontSize="2rem"
+        borderSize=".2rem"
+        onClick={() => {
+          handleReRoll();
+        }}
+      />
+    );
+  }
 
   function renderFab() {
     return (
@@ -121,7 +146,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
           left: "1rem",
           bottom: "2rem",
           position: "fixed",
-          zIndex: zIndex.dicePopper,
+          zIndex: zIndex.diceFab,
         })}
       >
         <Box
@@ -139,7 +164,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
             className={css({
               width: buttonSize,
               height: buttonSize,
-              zIndex: zIndex.dicePopper,
+              zIndex: zIndex.diceFab,
             })}
           >
             {open ? (
@@ -230,7 +255,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
         anchorEl={anchorEl}
         transition
         placement="top"
-        style={{ zIndex: zIndex.dicePopper }}
+        style={{ zIndex: zIndex.diceFab }}
         modifiers={{
           flip: {
             enabled: false,
@@ -250,7 +275,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
               className={css({
                 padding: "0 1rem",
                 maxWidth: "90vw",
-                zIndex: zIndex.dicePopper,
+                zIndex: zIndex.diceFab,
               })}
               onContextMenu={(e) => {
                 e.preventDefault();

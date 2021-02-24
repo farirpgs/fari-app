@@ -10,6 +10,7 @@ export function useZIndex() {
   return {
     ...theme.zIndex,
     navBar: theme.zIndex.drawer + 1,
-    dicePopper: theme.zIndex.tooltip + 50,
+    diceFabDie: theme.zIndex.tooltip + 50,
+    diceFab: theme.zIndex.tooltip + 100,
   };
 }

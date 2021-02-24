@@ -36,7 +36,6 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../../../components/ContentEditable/ContentEditable";
-import { DiceBox } from "../../../components/DiceBox/DiceBox";
 import { DiceFab } from "../../../components/DiceFab/DiceFab";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
@@ -262,11 +261,14 @@ export const CharacterDialog: React.FC<{
   function renderContent() {
     return (
       <Box>
-        <DiceFab
-          onSelect={(result) => {
-            props.onRoll?.(result);
-          }}
-        />
+        {!props.dialog && (
+          <DiceFab
+            rolls={props.rolls}
+            onSelect={(result) => {
+              props.onRoll?.(result);
+            }}
+          />
+        )}
         <Grid container>
           <Grid
             item
@@ -279,7 +281,7 @@ export const CharacterDialog: React.FC<{
             {renderAspects()}
             {renderStunts()}
             {renderRefresh()}
-            {renderDice()}
+
             {renderNotes()}
           </Grid>
           <Grid
@@ -910,34 +912,6 @@ export const CharacterDialog: React.FC<{
                 }}
               />
             </Typography>
-          </Box>
-        </Box>
-      </>
-    );
-  }
-
-  function renderDice() {
-    return (
-      <>
-        <Box displayPrint="none">
-          {renderSheetHeader(t("character-dialog.dice"))}
-          <Box className={sheetContentStyle}>
-            <Grid container justify="center">
-              <Grid item>
-                <Box py="1rem">
-                  <DiceBox
-                    rolls={props.rolls ?? []}
-                    size="5rem"
-                    fontSize="2rem"
-                    borderSize=".2rem"
-                    onClick={() => {
-                      const roll = rollDice();
-                      props.onRoll?.(roll);
-                    }}
-                  />
-                </Box>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </>

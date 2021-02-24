@@ -188,6 +188,7 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
+  const me = everyone.find((player) => props.userId === player.id);
 
   const liveMode = getLiveMode();
 
@@ -264,6 +265,7 @@ export const Scene: React.FC<IProps> = (props) => {
         </Snackbar>
         {props.mode !== SceneMode.Manage && (
           <DiceFab
+            rolls={me?.rolls}
             onSelect={(result) => {
               handleSetRoll(result);
             }}

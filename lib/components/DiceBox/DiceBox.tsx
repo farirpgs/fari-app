@@ -8,7 +8,8 @@ import Popper from "@material-ui/core/Popper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import { useZIndex } from "../../constants/zIndex";
 import {
   Dice,
   DiceCommandOptions,
@@ -27,6 +28,7 @@ type IProps = {
   tooltipPlacement?: TooltipProps["placement"];
   disabled?: boolean;
   showDetails?: boolean;
+  className?: string;
   onClick: () => void;
   onRolling?: (rolling: boolean) => void;
   onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
@@ -34,10 +36,10 @@ type IProps = {
 
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
+  const zIndex = useZIndex();
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const [open, setOpen] = useState(false);
-  const anchorEl = useRef<any>(null);
-
+  const [anchorEl, setAnchorEl] = useState<any>(null);
   const diceRollsManager = useDiceRolls(props.rolls, {
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
@@ -55,10 +57,14 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const handleTooltipOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
+    setAnchorEl(event.target);
     setOpen(true);
   };
 
-  const handleTooltipClose = () => {
+  const handleTooltipClose = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setAnchorEl(event.target);
     setOpen(false);
   };
 
@@ -126,36 +132,49 @@ export const DiceBox: React.FC<IProps> = (props) => {
             color={tooltipColor.primary}
             lineHeight={Font.lineHeight(1.5)}
             fontWeight="bold"
+            display="inline-flex"
+            alignItems="center"
             className={css({
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              width: "100%",
             })}
           >
-            {diceRollsManager.state.finalResultRolls.map((r, i) => {
-              const group = DiceCommandOptions[r.type];
-              const isFirst = i === 0;
-              const isFate = r.type === "1dF";
-              return (
-                <span key={i}>
-                  {!isFirst && <span>{" + "}</span>}
-                  <Tooltip title={r.type}>
-                    <span
-                      className={css({
-                        fontFamily: isFate ? "fate" : "inherit",
-                      })}
-                    >
-                      {group.formatDetailedResult(r.value)}
-                    </span>
-                  </Tooltip>
+            <span
+              className={css({
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              })}
+            >
+              {diceRollsManager.state.finalResultRolls.map((r, i) => {
+                const group = DiceCommandOptions[r.type];
+                const isFirst = i === 0;
+                const isFate = r.type === "1dF";
+                return (
+                  <span key={i}>
+                    {!isFirst && <span>{" + "}</span>}
+                    <Tooltip title={r.type}>
+                      <span
+                        className={css({
+                          verticalAlign: "middle",
+                          fontFamily: isFate ? "fate" : "inherit",
+                        })}
+                      >
+                        {group.formatDetailedResult(r.value)}
+                      </span>
+                    </Tooltip>
+                  </span>
+                );
+              })}
+              {diceRollsManager.state.finalResultBonusLabel && (
+                <span
+                  className={css({
+                    verticalAlign: "middle",
+                  })}
+                >
+                  {" + "} {diceRollsManager.state.finalResultBonus}
                 </span>
-              );
-            })}
-            {diceRollsManager.state.finalResultBonusLabel && (
-              <span>
-                {" + "} {diceRollsManager.state.finalResultBonus}
-              </span>
-            )}
+              )}
+            </span>
           </Box>
           <Box
             fontSize="1rem"
@@ -215,13 +234,21 @@ export const DiceBox: React.FC<IProps> = (props) => {
   }
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center">
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      className={props.className}
+    >
       {renderDice()}
       <Popper
-        open={props.tooltipOpen ?? open}
-        anchorEl={anchorEl.current}
+        open={!!anchorEl && (props.tooltipOpen ?? open)}
+        anchorEl={anchorEl}
         transition
         placement={props.tooltipPlacement}
+        className={css({
+          zIndex: zIndex.tooltip,
+        })}
         modifiers={{
           flip: {
             enabled: false,
@@ -255,11 +282,12 @@ export const DiceBox: React.FC<IProps> = (props) => {
     return (
       <div>
         <ButtonBase
-          ref={anchorEl}
+          ref={(p) => {
+            setAnchorEl(p);
+          }}
           onMouseEnter={handleTooltipOpen}
           onMouseLeave={handleTooltipClose}
           className={css({
-            // borderRadius: "50%",
             color: diceTextColors.primary,
           })}
           disabled={props.disabled || diceRollsManager.state.rolling}

@@ -178,18 +178,20 @@ export const PlayerRow: React.FC<
           </Tooltip>
         </TableCell>
         <TableCell className={cx(playerInfoCellStyle)} align="right">
-          <Box display="flex" justifyContent="flex-end">
-            <DiceBox
-              rolls={props.player.rolls}
-              size="2rem"
-              fontSize="1.25rem"
-              borderSize=".15rem"
-              disabled={!canControl}
-              onClick={() => {
-                handleRoll({});
-              }}
-            />
-          </Box>
+          {!props.isMe && (
+            <Box display="flex" justifyContent="flex-end">
+              <DiceBox
+                rolls={props.player.rolls}
+                size="2rem"
+                fontSize="1.25rem"
+                borderSize=".15rem"
+                disabled={!canControl}
+                onClick={() => {
+                  handleRoll({});
+                }}
+              />
+            </Box>
+          )}
         </TableCell>
       </TableRow>
       {renderGMControls()}
