@@ -188,7 +188,9 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
-  const me = everyone.find((player) => props.userId === player.id);
+  const me = everyone.find((player) => {
+    return props.mode === SceneMode.PlayOnline && props.userId === player.id;
+  });
 
   const liveMode = getLiveMode();
 

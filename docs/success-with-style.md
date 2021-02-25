@@ -1,10 +1,10 @@
-# Fate Wiki
+# Introduction
 
-The community driven Fate Wiki resources.
+<page-meta description="The next generation of Fate philosophy discussions.<br/> The SRD enable you to succeed at Fate, this column adds the 'with style'."></page-meta>
 
-# Condensed / Core / Accelerated
+# Which Fate System Should I Use
 
-<page-meta author="RPDeshaies"></page-meta>
+<page-meta author="RPDeshaies" description="A clear answer on one of the most popular question about the Fate RPG"></page-meta>
 
 The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
 
@@ -20,9 +20,9 @@ If you still don't know where to start, here's a tip:
 
 # What's the Math Behind The Fate Dice
 
-<page-meta author="RPDeshaies"></page-meta>
+<page-meta author="RPDeshaies" description="Understanding why Fate Dice are such a good tool to play TTRPGs."></page-meta>
 
-The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are very different.
+The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are drastically very different.
 
 Outlining the results in a graph where the **vertical axis represents the chances of getting a result** and where the **horizontal axis lists all the possible results**, you would get something that looks like this:
 
@@ -58,11 +58,15 @@ If you were playing with a D20, the graph would look something like this:
 
 ```
 
-That flat line means that basically, you have equal chances of getting each result severalty which, by consequence means that the outcome of a roll tend to also be "flatter".
+That flat line means that basically, you have equal chances of getting each result separately which, by consequence means that the outcome of a roll tend to also be "flatter".
 
-Since Fudge/Fate Dice statistics have this bell curve quality to them, the results will have a big tendency to stay in the `-1 ==> 1` range.
+## Closing Thoughts
 
-All of that said, getting `+4` or a `-4` with those dice truly feels like something unique.
+Since Fudge/Fate Dice statistics have this bell curve quality to them, the end result will have a big tendency to stay in the `-1 ==> 1` range. This makes even getting something like a `+2` exciting.
+
+Getting a `+4` on the other hand is truly cause for celebration.
+
+## More Stats
 
 | Result | Odd of rolling | Odd of rolling this or higher |
 | ------ | -------------- | ----------------------------- |
@@ -76,13 +80,9 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 | 3      | 4.94%          | 6.17%                         |
 | 4      | 1.23%          | 1.23%                         |
 
-# What's an Average Session Time
-
-[...]
-
 # How to GM Fate
 
-<page-meta author="Dgerrimea"></page-meta>
+<page-meta author="Dgerrimea" description="Tips on how to effectively GM a Fate Campaign."></page-meta>
 
 ### The Fate Mentality
 
@@ -113,7 +113,7 @@ All of that said, getting `+4` or a `-4` with those dice truly feels like someth
 
 # Problematic PC Aspects
 
-<page-meta author="Dgerrimea"></page-meta>
+<page-meta author="Dgerrimea" date="2021-02-25" description="Character Aspect pitfalls to analyse & avoid."></page-meta>
 
 Aspects can be many things, but mechanically an aspect is something you invoke or compel. The narrative truth of the aspect should have some impact on the fiction, even just to create a cool cinematic moment, and the mechanical bonus will help your character get what they want.
 
@@ -138,22 +138,28 @@ Everything you do is getting you closer to saving the princess, and this aspect 
 
 ### Why Is This Problematic?
 
-<p class="with-anchor">Because it’s always relevant to everything you do, it’s unclear when to invoke or compel this aspect.</p>
+**Because it’s always relevant to everything you do, it’s unclear when to invoke or compel this aspect.**
 
 You don’t know when to spend a Fate Point to make this aspect relevant because it’s always relevant. Ideally an aspect would foreshadow a certain kind of moment, but an aspect which foreshadows every moment actually foreshadows nothing.
 
-<p class="with-anchor">Invoking this aspect adds nothing to the fiction</p>
+**Invoking this aspect adds nothing to the fiction**
 
 If your jumping plumber is leaping across a chasm, hoping to land on the other side, then you have a dramatic moment where he’s in mid-air and the audience is wondering whether he’s going to fall into the darkness below.
-If you, as a player, invoke **I Must Save The Princess** to help with this jump, then the audience sees the plumber leaping over the chasm in the exactly the same way. It’s not even that now he’s doing it specifically for the princess, because everything he’s doing was always for the princess anyway. Instead of changing the scene or adding anything interesting, this safety net aspect just leaves the story exactly where it was before you invoked it.
+If you, as a player, invoke **I Must Save The Princess** to help with this jump, then the audience sees the plumber leaping over the chasm in exactly the same way. It’s not even that now he’s doing it specifically for the princess, because everything he’s doing was always for the princess anyway. Instead of changing the scene or adding anything interesting, this safety net aspect just leaves the story exactly where it was before you invoked it.
 
-<p class="with-anchor">Invoking this aspect feels unsatisfying</p>
+**Invoking this aspect feels unsatisfying**
 
 Since you don’t know when to compel this aspect, and since it adds nothing to the story when you do invoke it, any time you invoke it feels cheap. Because it is cheap. It’s an invocation you can make any time without having to think about what it means or what the consequences are; it’s purely a mechanical boost with no restrictions or meaningful consequences. A safety net aspect is the opposite of “fiction first”, the Golden Rule of Fate.
 
 ### What’s The Solution?
 
 Before you commit to an aspect, think about what kinds of moments you want to foreshadow with it. These moments should be “on screen” moments; dramatic moments in the fiction.
+
+> **An example solution for our jumping plumber:**
+>
+> As a player, I want to see my jumping plumber leap high over his enemies and come crashing down on their heads with irresistible force! I’ll think of an aspect which describes both of those elements, and I’ll call it something like **Jump Like A Spring, Fall Like A Rock**. This also provides compel opportunities because it implies that my falling is fast and forceful, giving me limited time to react to things.
+>
+> By starting with the fiction, with the narrative moments we want to foreshadow, we’ve created an aspect which is vivid and has obvious use-cases for invokes and compels!
 
 ## Redundant Troubles
 
@@ -167,11 +173,11 @@ You’re in a fantasy setting playing an Aragorn-type ranger whose trouble is **
 
 ### Why Is This Problematic?
 
-<p class="with-anchor">As with safety net aspects, it’s unclear when to compel this aspect.</p>
+**As with safety net aspects, it’s unclear when to compel this aspect.**
 
 Since your trouble is so aligned with your goals and opposition already, it can’t serve as a distraction or a complication. This makes it hard to compel, because the reason the GM would compel a trouble aspect is to create a new problem or complication. A redundant trouble can’t accomplish this, all it can do is emphasise or reiterate the problem/opposition that has already been established.
 
-<p class="with-anchor">If you do compel a redundant trouble, nothing much happens.</p>
+**If you do compel a redundant trouble, nothing much happens.**
 
 If the GM wants to compel the player of our orc hunting ranger, what would that compel look like? The ranger was already hunting and slaying orcs so it’s not going to distract him from anything. You could make a particularly nasty orc, but that’s not what the aspect is about. It could be overwhelming numbers of orcs but, again, that’s only a weak association with the actual aspect. But this is what you must resort to because the trouble itself is redundant.
 
@@ -179,6 +185,10 @@ If the GM wants to compel the player of our orc hunting ranger, what would that 
 
 Remember that, as a player, you are incentivised to have a trouble that is easy to compel. Begin by considering what your character’s goals are, and what opposition they might face. Then, think of what might be a complication or a distraction from that goal. This way you ensure that the two sources of drama are not overlapping completely.
 Bear in mind that for some games, especially ongoing campaigns, there may be episodes or arcs where your character’s trouble is the main source of drama. That is redundancy, but it’s ok because it’s temporary and is a great way to give a PC’s trouble some spotlight for a little while.
+
+> **An example solution for our orc hunter:**
+>
+> As a player, I want to see my character tracking down orcs and slaying them! But that’s already on the table as the PC’s main goal, so I won’t waste my trouble aspect reiterating it. Instead, I’ll think about what it costs me to be so obsessed with orcs. Maybe I have a family to provide for, but because I’m always hunting orcs instead of providing food or medicine, **My Youngest Child Is Dying Of Neglect**. That’s a nice dramatic trouble! It gives the GM the job of how to personify that. Maybe a spouse or sibling appears, begging for my character to return to their senses? Maybe someone who can provide steps in to fill the void, and now there’s a rivalry? Many good compel possibilities are now available!
 
 ## Meaningless Aspects
 
@@ -192,11 +202,11 @@ My character is **The Shadow-Wizard Ruler Of The High Temple**, and in Session 0
 
 ### Why Is This Problematic?
 
-<p class="with-anchor">It’s impossible to invoke an aspect which lacks meaning.</p>
+**It’s impossible to invoke an aspect which lacks meaning.**
 
 If you don’t know what the High Temple is, then you don’t know what it can to for you or for your story. It might have sounded cool at the time, but it’s not useful until it’s meaningful. It will sit there, looking cool on the page, and having no effect on anything, unless and until you establish what it means. It’s a placeholder at best, but it’s not a proper aspect.
 
-<p class="with-anchor">Aspects aren’t just for invoking, though; they also grant narrative permission.</p>
+**Aspects aren’t just for invoking, though; they also grant narrative permission.**
 
 A shadow-wizard might be able to use the Stealth skill to wrap an ally in protective darkness…or something else, or who knows because it hasn’t been established! To a certain extent with skills, and a much larger extent with approaches from Fate Accelerated, we depend on aspects to justify and describe how and why certain characters can do certain things. A meaningless aspect either sits there being a waste of space, or (and even worse), a player will try to establish some new narrative permission at some climactic moment. It’s never fun when the hero wins using an ability never seen before and not foreshadowed in any way. Vagueness is often repurposed into versatility, and a meaningless aspect is the vaguest one possible.
 
@@ -204,3 +214,12 @@ A shadow-wizard might be able to use the Stealth skill to wrap an ally in protec
 
 Look out for any references in aspect names, especially proper nouns, and make sure you understand what is being referenced. It could be a person, place, a discipline (like magic or some other unusual area of study), it could be a contract or a set of rules (like a genie who is **Bound To A Lamp**).
 If you do end up with a meaningless aspect, treat it as a placeholder and don’t use it for anything until you have a chance, preferably between sessions, to clarify it with the group.
+
+> **An example solution for our “Shadow-Wizard”:**
+>
+> As a player, I think Shadow-Wizards sound cool and that’s as far as I’ve gotten. So I’m going to imagine a story about Shadow-Wizards, and I’m going to cut ahead to the first time we see one on-screen. I’m going to ask myself how do they look, what do they want, and how will they get it?
+> I picture long, dark robes, a desire for secret information, and a mixture of stealth and summoning 2-D shadow minions to accomplish this. I can’t really see them blowing up a building, or putting up much of a physical fight. I will discuss these ideas and parameters with my GM, and then I won’t change the aspect at all. I’ll flesh out the High Temple part of it in the same way as I did the Shadow-Wizard part, but the aspect is perfectly fine once it has meaning and clear narrative permissions.
+
+## Closing Thoughts
+
+Good aspects add something to the fiction. They do this by granting narrative permission, through invocations and compels, and just by being true. But however they do it, they leave a signature on-screen and in-story. The Golden Rule of Fate is Fiction First, and that is the solution to all of your Aspect troubles.

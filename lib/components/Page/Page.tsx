@@ -547,6 +547,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                data-cy="page.menu.about"
                 to="/about"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}

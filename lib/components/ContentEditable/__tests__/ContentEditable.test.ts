@@ -47,7 +47,7 @@ describe("previewContentEditable", () => {
       });
 
       expect(result).toMatchInlineSnapshot(
-        `"This Is A Very Complex String With Multiple Lines"`
+        `"This is  A Very COMPLEX  String  With  Multiple Lines"`
       );
     });
   });
@@ -57,7 +57,7 @@ describe("previewContentEditable", () => {
         value: `This is<br><br>A Very Complex<br><br>String<br><br><img src="https://i.imgur.com/sohWhy9.jpg" alt="surprised-pikachu"><br>With<br><br>Multiple Lines<br>`,
       });
       expect(result).toMatchInlineSnapshot(
-        `"This Is A Very Complex String With Multiple Lines"`
+        `"This is  A Very Complex  String   With  Multiple Lines"`
       );
     });
   });
@@ -68,7 +68,7 @@ describe("previewContentEditable", () => {
         length: 50,
       });
       expect(result).toMatchInlineSnapshot(
-        `"Turnip Greens Yarrow Ricebean Rutabaga Endive C..."`
+        `"Turnip greens yarrow ricebean rutabaga endive c..."`
       );
     });
   });

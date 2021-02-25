@@ -196,14 +196,18 @@ export const WikiItems: React.FC = (props) => {
             link="/fari-wiki"
           />
         </Grid>
-        {/* <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate Wiki"
-            description={<>The community driven Wiki for Fate</>}
+            title="Success With Style"
+            description={
+              <>The next generation of Fate philosophy discussions.</>
+            }
             bgColor="#080303"
-            imageUrl={Images.fateWiki}
-            link="/fate-wiki"
+            imageUrl={Images.successWithStyle}
+            link="/success-with-style"
           />
+        </Grid>
+        {/*
         </Grid>
 
         <Grid item xs={12} sm={6} md={4}>

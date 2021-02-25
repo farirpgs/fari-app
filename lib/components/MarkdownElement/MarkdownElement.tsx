@@ -2,6 +2,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import clsx from "clsx";
 import React from "react";
+import { Font } from "../../domains/font/Font";
 import { scrollMarginTop } from "../Doc/hooks/useMarkdownFile";
 
 function getAnchorSvg(color: string) {
@@ -259,7 +260,7 @@ const styles = (theme: Theme) => {
       },
       "& hr": {
         height: 1,
-        margin: theme.spacing(6, 0),
+        margin: "2rem 0",
         border: "none",
         flexShrink: 0,
         backgroundColor: theme.palette.divider,
@@ -298,14 +299,22 @@ const styles = (theme: Theme) => {
         "& .anchor": {
           width: "1em",
           height: "1em",
-          marginLeft: "0",
+          marginLeft: ".25rem",
         },
       },
+      "& .quote": {
+        borderLeft: `3px solid ${theme.palette.text.primary}`,
+        paddingLeft: ".9rem",
+        paddingRight: ".9rem",
+        fontSize: "1.3rem",
+        lineHeight: Font.lineHeight(1.3),
+      },
       "& .page-meta": {
+        borderLeft: `3px solid ${theme.palette.text.primary}`,
+        paddingLeft: ".9rem",
+        paddingRight: ".9rem",
         fontSize: "1rem",
         lineHeight: "2rem",
-        marginTop: "-1rem",
-        marginBottom: "1rem",
         color: theme.palette.text.secondary,
       },
     },

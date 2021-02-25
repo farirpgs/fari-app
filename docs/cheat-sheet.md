@@ -3,7 +3,7 @@
 
 # Cheat Sheet
 
-The Ultimate Fate Cheat Sheet created by the Fate Community
+<page-meta author="famousbirds" description="The Ultimate Fate Cheat Sheet created by the Fate Community"></page-meta>
 
 > This page is an adaptation of the work of Reddit user /u/famousbirds did on their Fate Reference Card inside Google Sheet
 >

@@ -1,14 +1,12 @@
 # Welcome
 
-Ideas and thoughts by the Fate Community.
+<page-meta description="Ideas and thoughts by the Fate Community."></page-meta>
 
-Want to contribute ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
+> Have an idea and want to contribute to this blog ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
 # Fari v3.7.0
 
-<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/6bc3b2e73f433765065838327f2c3e86.png"></page-meta>
-
-New Fari & Fate Community Driven Wikis, new dice menu, and more...
+<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/6bc3b2e73f433765065838327f2c3e86.png" description="Fari Wiki, Success With Style Column, Dice Menu, and more..."></page-meta>
 
 ## New Features 🌟
 

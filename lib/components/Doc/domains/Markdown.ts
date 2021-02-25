@@ -1,6 +1,6 @@
 import kebabCase from "lodash/kebabCase";
-import truncate from "lodash/truncate";
 import marked from "marked";
+import { previewContentEditable } from "../../ContentEditable/ContentEditable";
 
 export type IMarkdownIndexes = {
   tree: Array<IMarkdownIndex>;
@@ -146,14 +146,17 @@ export const Markdown = {
       textAfterCurrentPage?.textContent ??
       "";
 
-    const description = truncate(firstParagraph, { length: 155 });
+    const firstParagraphDescription = previewContentEditable({
+      value: firstParagraph,
+      length: 155,
+    });
 
     if (!currentPageElement) {
       return {
         pageDom: undefined,
         pageId: undefined,
         title: title.trim(),
-        description: description.trim(),
+        description: firstParagraphDescription,
         image: undefined,
       };
     }
@@ -173,6 +176,9 @@ export const Markdown = {
     const pageDom = getPageDom(currentPageElement, allDomElementsInPage);
     const pageMetaOriginalElement = pageDom.querySelector("page-meta");
     const author = pageMetaOriginalElement?.getAttribute("author");
+    const pageMetaDescription = pageMetaOriginalElement?.getAttribute(
+      "description"
+    );
     const date = pageMetaOriginalElement?.getAttribute("date");
     const image = pageMetaOriginalElement?.getAttribute("image");
 
@@ -184,11 +190,23 @@ export const Markdown = {
       metaDom.innerHTML = `By ${author}${dateSection}`;
       pageDom.querySelector("h1")?.after(metaDom);
     }
+
+    if (pageMetaDescription) {
+      const descriptionDom = document.createElement("div");
+      descriptionDom.className = "quote";
+      descriptionDom.innerHTML = pageMetaDescription;
+      pageDom.querySelector("h1")?.after(descriptionDom);
+    }
+    const descriptionToUse = pageMetaDescription || firstParagraphDescription;
+    const formattedDescription = previewContentEditable({
+      value: descriptionToUse,
+      length: 155,
+    });
     return {
       pageDom: pageDom,
       pageId: currentPageElement.id,
       title: title.trim(),
-      description: description.trim(),
+      description: formattedDescription,
       image: image,
     };
   },

@@ -1,8 +1,28 @@
-# Fari Wiki
+# Introduction
 
-Everything you need to know to use Fari.
+<page-meta author="RPDeshaies" description="Everything you need to know to use Fari effectively."></page-meta>
+
+Fari might seem like a simple application at first, but there a lot of more advanced features that you can leverage to boost your Fate online sessions to the next level.
+
+This Wiki will go over the basic feature as well as the more advanced use cases step by step to give you the ability to use Fari at its full potential.
+
+> Have an idea and want to contribute to this wiki ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
+
+# Managing Scenes
+
+🚧 👷 🚧
+
+# Managing Characters
+
+🚧 👷 🚧
+
+# Playing Online
+
+🚧 👷 🚧
 
 # Tips and Tricks
+
+🚧 👷 🚧
 
 ## Use Images
 

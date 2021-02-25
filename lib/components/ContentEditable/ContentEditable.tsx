@@ -17,6 +17,7 @@ const ContentEditableDelay = 125;
 type IPreviewContentEditableOptions = {
   value: string | undefined;
   length?: number;
+  startCase?: boolean;
 };
 
 export function previewContentEditable(
@@ -31,7 +32,9 @@ export function previewContentEditable(
   div.innerHTML = valueWithoutBrTags;
   const content = div.textContent ?? "";
 
-  const formattedContent = startCase(lowerCase(content));
+  const formattedContent = options.startCase
+    ? startCase(lowerCase(content))
+    : content;
 
   if (options.length) {
     return truncate(formattedContent, { length: options.length });

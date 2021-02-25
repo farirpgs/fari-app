@@ -289,31 +289,20 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
       "https://github.com/fariapp/fari/tree/master/docs/test-empty.md",
   },
   {
-    url: "/fate-wiki",
-    parent: { title: "SRDs", url: "/srds" },
-    title: "Fate Wiki",
-    loadFunction: DocImport.FateWiki,
-    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
-    imageUrl: Images.fateWiki,
-    noIndex: true,
+    url: "/success-with-style",
+    parent: { title: "Fari", url: "/" },
+    title: "Success With Style",
+    loadFunction: DocImport.SuccessWithStyle,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/docs/success-with-style.md",
+    imageUrl: Images.successWithStyle,
     sideBar: {
-      "+Welcome": [
-        "fate-wiki",
-        {
-          "+FAQ": [
-            "condensed--core--accelerated",
-            "whats-the-math-behind-the-fate-dice",
-            "whats-an-average-session-time",
-          ],
-          "+Guides": [
-            "how-to-gm-fate",
-            "how-to-make-balanced-fights",
-            "how-to-create-a-good-villain",
-            "how-to-create-a-good-setting",
-          ],
-        },
-      ],
+      "+Success With Style": ["introduction"],
     },
+    sideBarOptions: {
+      miscSectionTitle: "Articles",
+    },
+    noIndex: true,
   },
   {
     url: "/fari-wiki",
@@ -322,14 +311,13 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     loadFunction: DocImport.FariWiki,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fari-wiki.md",
     imageUrl: Images.logo,
-
     sideBar: {
-      "+Welcome": [
-        "fari-wiki",
+      "+Fari Wiki": ["introduction"],
+      "+Getting Started": [
+        "managing-scenes",
+        "managing-characters",
+        "playing-online",
         "tips-and-tricks",
-        {
-          // "": [],
-        },
       ],
     },
   },

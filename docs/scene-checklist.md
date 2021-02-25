@@ -1,6 +1,6 @@
 # Fate Scene Checklist
 
-The ultimate checklist to go through to make sure your scene help move your story forward.
+<page-meta author="Laurence Macnaughton" description="The ultimate checklist to go through to make sure your scene help move your story forward."></page-meta>
 
 If you feel stumped or overwhelmed during a scene, quickly go down this list and ask the players a few of those questions.
 

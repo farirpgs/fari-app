@@ -28,6 +28,7 @@ import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import truncate from "lodash/truncate";
+import uniq from "lodash/uniq";
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
@@ -51,6 +52,10 @@ export type ISideBarItems = Array<
   | IDocSidebar
   | { label: string; collapsed: boolean; items: ISideBarItems }
 >;
+
+export type IDoceSideBarOptions = {
+  miscSectionTitle?: string;
+};
 
 export type IDocSidebar = {
   [category: string]: ISideBarItems;
@@ -109,8 +114,8 @@ type IProps = {
    * Link to original file
    */
   gitHubLink?: string;
-
   sideBar?: IDocSidebar;
+  sideBarOptions?: IDoceSideBarOptions;
   defaultSideBarCategory?: string;
 };
 
@@ -144,6 +149,7 @@ export const Doc: React.FC<IProps> = (props) => {
     currentPageId: pageId,
     markdownIndexes: markdownIndexes,
     docSideBar: props.sideBar,
+    doceSideBarOptions: props.sideBarOptions,
   });
   const html = pageDom?.innerHTML;
   const imageUrl = image || props.imageUrl;
@@ -630,6 +636,7 @@ export const Doc: React.FC<IProps> = (props) => {
         currentPage={pageId}
         markdownIndexes={markdownIndexes}
         sideBar={props.sideBar}
+        sideBarOptions={props.sideBarOptions}
         defaultSideBarCategory={props.defaultSideBarCategory}
       />
     );
@@ -684,6 +691,7 @@ export const DocSideBar: React.FC<{
   currentPage: string | undefined;
   markdownIndexes: IMarkdownIndexes;
   sideBar: IDocSidebar | undefined;
+  sideBarOptions: IDoceSideBarOptions | undefined;
   defaultSideBarCategory?: string;
 }> = (props) => {
   const theme = useTheme();
@@ -692,15 +700,29 @@ export const DocSideBar: React.FC<{
     currentPageId: props.currentPage,
     markdownIndexes: props.markdownIndexes,
     docSideBar: props.sideBar,
+    doceSideBarOptions: props.sideBarOptions,
     defaultSideBarCategory: props.defaultSideBarCategory,
   });
+
   const [openList, setOpenList] = useState<Array<string>>([
     ...navigation.defaultOpenedCategories,
   ]);
 
-  useEffect(() => {
-    setOpenList((d) => [...d, ...navigation.highlightedItems]);
-  }, [navigation.highlightedItems]);
+  useEffect(
+    function syncHighlightedItems() {
+      setOpenList((d) => [...d, ...navigation.highlightedItems]);
+    },
+    [navigation.highlightedItems]
+  );
+
+  useEffect(
+    function syncDefaultOpenedCategories() {
+      setOpenList((d) => {
+        return uniq([...d, ...navigation.defaultOpenedCategories]);
+      });
+    },
+    [navigation.defaultOpenedCategories]
+  );
 
   return <List>{renderSideBarContent(sideBar)}</List>;
 

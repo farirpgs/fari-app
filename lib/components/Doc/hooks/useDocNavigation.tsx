@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IDocSidebar, ISideBarItems } from "../Doc";
+import { IDoceSideBarOptions, IDocSidebar, ISideBarItems } from "../Doc";
 import { IMarkdownIndexes } from "../domains/Markdown";
 
 const MISC_SECTION_NAME = "Misc";
@@ -9,9 +9,12 @@ export type IUseDocNavigation = ReturnType<typeof useDocNavigation>;
 export function useDocNavigation(props: {
   currentPageId: string | undefined;
   docSideBar: IDocSidebar | undefined;
+  doceSideBarOptions: IDoceSideBarOptions | undefined;
   defaultSideBarCategory?: string;
   markdownIndexes: IMarkdownIndexes;
 }) {
+  const miscSectionName =
+    props.doceSideBarOptions?.miscSectionTitle ?? MISC_SECTION_NAME;
   const defaultSideBar = useMemo(() => {
     return {
       [props.defaultSideBarCategory ?? "Fari"]: props.markdownIndexes.tree.map(
@@ -41,7 +44,11 @@ export function useDocNavigation(props: {
       currentPageId
     );
     if (isInsideMiscSection) {
-      highlightedItems.push(MISC_SECTION_NAME, currentPageId);
+      highlightedItems.push(miscSectionName, currentPageId);
+    }
+
+    if (pageIdsWithoutCategories.length > 0) {
+      defaultOpenedCategories.push(miscSectionName);
     }
 
     const allPageIds = [...allMappedPageIds, ...pageIdsWithoutCategories];
@@ -64,7 +71,7 @@ export function useDocNavigation(props: {
     } else {
       return {
         ...sideBar,
-        [MISC_SECTION_NAME]: navigation.pageIdsWithoutCategories,
+        [miscSectionName]: navigation.pageIdsWithoutCategories,
       };
     }
   }, [sideBar, navigation.pageIdsWithoutCategories]);

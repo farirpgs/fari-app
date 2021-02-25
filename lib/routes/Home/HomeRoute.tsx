@@ -207,8 +207,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSectionsButtons() {
     return (
       <Container maxWidth="md">
-        <Box my="3rem">
-          <Grid container justify="center" spacing={2}>
+        <Box mt="3rem" mb="1rem">
+          <Grid container justify="center" spacing={6}>
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link
@@ -266,10 +266,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Link>
               </Box>
             </Grid>
-          </Grid>
-        </Box>
-        <Box my="3rem">
-          <Grid container justify="center" spacing={2}>
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/blog">
