@@ -50,7 +50,11 @@ export const DiceRoute = () => {
         description={t("dice-route.meta.description")}
       />
       <Box>
-        <Heading icon={Icons.FateDice} title="Dice" />
+        <Heading
+          icon={Icons.FateDice}
+          title={t("dice-route.meta.title")}
+          subtitle={t("dice-route.meta.description")}
+        />
         <DiceFab
           onSelect={(result) => {
             setRollResult(result);
@@ -72,7 +76,7 @@ export const DiceRoute = () => {
         </Box>
         <Fade in={!!fiveLatestRolls.length}>
           <Box display="flex" justifyContent="center" flexDirection="column">
-            <Heading title="History" />
+            <Heading title="History" mb="1rem" />
             {fiveLatestRolls.map((roll, index) => {
               return (
                 <Box key={index}>

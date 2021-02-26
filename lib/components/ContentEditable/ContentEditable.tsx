@@ -212,18 +212,3 @@ export const ContentEditable: React.FC<
   );
 };
 ContentEditable.displayName = "ContentEditable";
-
-// export function sanitizeContentEditable(value: string | undefined) {
-//   if (!value) {
-//     return "";
-//   }
-//   return removeHTMLTags(removeNBSP(value)).trim();
-// }
-
-// function removeNBSP(value: string) {
-//   return value.replace(/&nbsp;/g, " ");
-// }
-
-// function removeHTMLTags(value: string) {
-//   return value.replace(/<\/?[^>]+(>|$)/g, " ");
-// }

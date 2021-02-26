@@ -22,8 +22,6 @@ This Wiki will go over the basic feature as well as the more advanced use cases 
 
 # Tips and Tricks
 
-🚧 👷 🚧
-
 ## Use Images
 
 Fari supports adding images to Character Sheet and Index Card fields very easily.

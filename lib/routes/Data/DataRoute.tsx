@@ -29,7 +29,7 @@ import {
 } from "../../contexts/SceneContext/ScenesContext";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
+import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 type IRow = {
@@ -43,7 +43,7 @@ type IRow = {
 export const DataRoute: React.FC = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const errorTheme = useButtonTheme(theme.palette.error.main);
+  const errorTheme = useThemeFromColor(theme.palette.error.main);
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
 

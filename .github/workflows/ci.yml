@@ -9,7 +9,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
 
     strategy:
@@ -47,3 +47,32 @@ jobs:
       - name: Deploy Production
         run: yarn deploy:prod --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
         if: github.repository == 'fariapp/fari' && github.ref == 'refs/heads/master'
+  deploy-preview:
+    runs-on: ubuntu-latest
+    if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
+    environment:
+      name: Preview
+      url: ${{ steps['Deploy Preview'].outputs.url_output }}
+    steps:
+      # Setup
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      # Cache
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      # Install
+      - name: Install
+        run: yarn install
+      # Build
+      - name: Build
+        run: CONTEXT=production yarn build
+      # Deploy Preview
+      - name: Deploy Preview
+        run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}

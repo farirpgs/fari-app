@@ -174,29 +174,9 @@ export const Markdown = {
       `${nextPageId}`
     );
     const pageDom = getPageDom(currentPageElement, allDomElementsInPage);
-    const pageMetaOriginalElement = pageDom.querySelector("page-meta");
-    const author = pageMetaOriginalElement?.getAttribute("author");
-    const pageMetaDescription = pageMetaOriginalElement?.getAttribute(
-      "description"
-    );
-    const date = pageMetaOriginalElement?.getAttribute("date");
-    const image = pageMetaOriginalElement?.getAttribute("image");
 
-    if (author) {
-      const metaDom = document.createElement("div");
-      metaDom.className = "page-meta";
-      const dateSection = date ? ` • ${date}` : "";
+    const { pageMetaDescription, image } = updateDomWithMeta(pageDom);
 
-      metaDom.innerHTML = `By ${author}${dateSection}`;
-      pageDom.querySelector("h1")?.after(metaDom);
-    }
-
-    if (pageMetaDescription) {
-      const descriptionDom = document.createElement("div");
-      descriptionDom.className = "quote";
-      descriptionDom.innerHTML = pageMetaDescription;
-      pageDom.querySelector("h1")?.after(descriptionDom);
-    }
     const descriptionToUse = pageMetaDescription || firstParagraphDescription;
     const formattedDescription = previewContentEditable({
       value: descriptionToUse,
@@ -211,6 +191,40 @@ export const Markdown = {
     };
   },
 };
+
+function updateDomWithMeta(pageDom: HTMLDivElement) {
+  const pageMetaOriginalElement = pageDom.querySelector("page-meta");
+  const author = pageMetaOriginalElement?.getAttribute("author");
+  const pageMetaDescription = pageMetaOriginalElement?.getAttribute(
+    "description"
+  );
+  const date = pageMetaOriginalElement?.getAttribute("date");
+  const image = pageMetaOriginalElement?.getAttribute("image");
+
+  const metaDom = document.createElement("div");
+  metaDom.className = "page-meta";
+
+  if (pageMetaDescription) {
+    const descriptionDom = document.createElement("div");
+    descriptionDom.innerHTML = pageMetaDescription;
+    metaDom.append(descriptionDom);
+  }
+
+  if (author) {
+    const formattedDate = date ? ` • ${date}` : "";
+    const authorDom = document.createElement("div");
+    authorDom.className = "page-meta-details";
+    authorDom.innerHTML = `By ${author}${formattedDate}`;
+    metaDom.append(authorDom);
+  }
+
+  pageDom.querySelector("h1")?.after(metaDom);
+
+  // delete <page-meta> that is wrapped in <p>
+  pageMetaOriginalElement?.parentElement?.remove();
+
+  return { pageMetaDescription, image };
+}
 
 function getNode(props: {
   element: Element;

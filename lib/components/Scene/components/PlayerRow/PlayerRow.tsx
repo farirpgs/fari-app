@@ -218,7 +218,7 @@ export const PlayerRow: React.FC<
               >
                 <IconButton
                   size="small"
-                  color={hasCharacterSheet ? "secondary" : "primary"}
+                  color={hasCharacterSheet ? "default" : "primary"}
                 >
                   {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
                 </IconButton>

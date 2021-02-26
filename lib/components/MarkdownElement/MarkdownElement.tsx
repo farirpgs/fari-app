@@ -12,8 +12,8 @@ function getAnchorSvg(color: string) {
 const styles = (theme: Theme) => {
   const lightBackground =
     theme.palette.type === "light"
-      ? lighten(theme.palette.secondary.light, 0.85)
-      : darken(theme.palette.secondary.light, 0.75);
+      ? lighten(theme.palette.primary.light, 0.85)
+      : darken(theme.palette.primary.light, 0.75);
   // const h1Background =
   //   theme.palette.type === "dark"
   //     ? theme.palette.background.paper
@@ -101,13 +101,11 @@ const styles = (theme: Theme) => {
       "& h1": {
         ...theme.typography.h3,
         ...headerStyle,
-        borderBottom: `2px solid ${theme.palette.primary.main}`,
-        textTransform: "uppercase",
+        // marginBottom: "2rem",
       },
       "& h2": {
         ...theme.typography.h4,
         ...headerStyle,
-        borderBottom: `2px solid ${theme.palette.primary.main}`,
       },
       "& h3": {
         ...theme.typography.h5,
@@ -308,14 +306,20 @@ const styles = (theme: Theme) => {
         paddingRight: ".9rem",
         fontSize: "1.3rem",
         lineHeight: Font.lineHeight(1.3),
+        marginBottom: "1rem",
       },
       "& .page-meta": {
-        borderLeft: `3px solid ${theme.palette.text.primary}`,
-        paddingLeft: ".9rem",
-        paddingRight: ".9rem",
-        fontSize: "1rem",
-        lineHeight: "2rem",
-        color: theme.palette.text.secondary,
+        "borderLeft": `3px solid ${theme.palette.text.primary}`,
+        "paddingLeft": ".9rem",
+        "paddingRight": ".9rem",
+        "fontSize": "1.3rem",
+        "lineHeight": Font.lineHeight(1.3),
+        "marginBottom": "2rem",
+        "& .page-meta-details": {
+          fontSize: "1rem",
+          lineHeight: Font.lineHeight(1),
+          color: theme.palette.text.secondary,
+        },
       },
     },
   };

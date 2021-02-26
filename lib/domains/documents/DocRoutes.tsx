@@ -300,7 +300,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
       "+Success With Style": ["introduction"],
     },
     sideBarOptions: {
-      miscSectionTitle: "Articles",
+      miscSectionTitle: "Fate Pointers",
     },
     noIndex: true,
   },

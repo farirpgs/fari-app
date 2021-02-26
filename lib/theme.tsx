@@ -1,5 +1,4 @@
 import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
-import { lighten } from "@material-ui/core/styles/colorManipulator";
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
 
 const systemFonts = [
@@ -63,13 +62,13 @@ export const defaultThemeConfiguration: ThemeOptions = {
     },
   },
 };
-
+// https://mycolor.space/?hex=%23415F9B&sub=1
 export const AppLightTheme = responsiveFontSizes(
   createMuiTheme({
     ...defaultThemeConfiguration,
     palette: {
       primary: { main: "#415f9c" },
-      secondary: { main: "#7a8cb4" },
+      secondary: { main: "#7891D2" },
     },
   })
 );
@@ -80,10 +79,10 @@ export const AppDarkTheme = responsiveFontSizes(
     palette: {
       type: "dark",
       primary: {
-        main: lighten(AppLightTheme.palette.primary.main, 0.5),
+        main: "#b1cbff",
       },
       secondary: {
-        main: lighten(AppLightTheme.palette.secondary.main, 0.2),
+        main: "#7891D2",
       },
     },
   })

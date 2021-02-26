@@ -428,7 +428,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   </Grid>
                   {!isLast && (
                     <Grid item>
-                      <FateLabel color="secondary">{"•"}</FateLabel>
+                      <FateLabel color="primary">{"•"}</FateLabel>
                     </Grid>
                   )}
                 </React.Fragment>

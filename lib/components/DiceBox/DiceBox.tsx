@@ -17,6 +17,7 @@ import {
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
+import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 
 type IProps = {
@@ -37,6 +38,7 @@ type IProps = {
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const zIndex = useZIndex();
+  const lightBackground = useLightBackground();
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -113,7 +115,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
             className={css({
               textTransform: "uppercase",
               minWidth: "8rem",
-              color: theme.palette.secondary.light,
+              color: lightBackground,
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",

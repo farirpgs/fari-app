@@ -1,25 +1,23 @@
 # Welcome
 
-<page-meta description="Ideas and thoughts by the Fate Community."></page-meta>
+<page-meta description="Blog from the Fari Team"></page-meta>
 
 > Have an idea and want to contribute to this blog ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
 # Fari v3.7.0
 
-<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/6bc3b2e73f433765065838327f2c3e86.png" description="Fari Wiki, Success With Style Column, Dice Menu, and more..."></page-meta>
+<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/ff4fd6615325445608846a3bda394eb2.png" description="Fari Wiki, Success With Style Blog, Dice Menu, and more..."></page-meta>
 
 ## New Features 🌟
 
-### Wiki
+### Content
 
-Fari now has two brand new wikis:
+Fari now has two brand new content sections:
 
-- [A Fate related Wiki](/fate-wiki)
-- [A Fari related Wiki](/fari-wiki)
+- [Success With Style](/success-with-style): A searchable supply of ideas; these Fate pointers help you succeed with style!
+- [The Fari Wiki](/fari-wiki): Everything you need to know to use Fari effectively.
 
-There is not a lot of content as of right now but there will be in the near future.
-
-For now, I recommended check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new article by Dgerrimea about [Problematic PC Aspects](/fate-wiki/problematic-pc-aspects)
+So if you are looking for something new to read, I recommend you check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new **Fate Pointer** by Dgerrimea about [Problematic PC Aspects](/fate-wiki/problematic-pc-aspects)
 
 > If you are interested in contributing to either of the wikis, come and talk to the team on [Discord](https://discord.com/invite/vMAJFjUraA) 👋
 
@@ -29,9 +27,9 @@ For now, I recommended check out the new [Tips and Tricks for Fari](/fari-wiki/t
 
 Fari Index Cards are pretty versatile but can feel restrictive if you want to create a relatively complex NPC that is still not complex enough so that it would need its own character sheet.
 
-So to try to help with that, I've added a new functionality to the index cards that let you add skill modifiers that can trigger dice rolls.
+So to try to help with that, I've added a new functionality to the index cards that let you add skill modifiers that can trigger dice rolls on the GM.
 
-To use this feature, simply use following syntax `[Skill: Number]` inside an index card description and this will tell Fari that your Index Card has a skill that can be rolled. Pretty cool no ?
+To use this feature, simply use following syntax `[Skill: Number]` inside an index card description and this will tell Fari that your Index Card has a skill that can be rolled. Pretty cool, no ?
 
 ![Index Card Roll Modifier](https://gyazo.com/04ddec1356bf3b25022341f40d6f3a25.gif)
 
@@ -39,7 +37,7 @@ To use this feature, simply use following syntax `[Skill: Number]` inside an ind
 
 For those who didn't know, Fari has this feature where you can copy an image on the web and add it inside index cards or character sheet fields.
 
-While it is a nice feature, its current implementation wasn't ideal since big images would big scaled down which made them hard to look at.
+While it is a nice feature, its current implementation wasn't ideal since big images would be scaled down which made them hard to look at.
 
 For that reason, I added a new image preview functionality which opens a full-screen modal if you click on those images.
 
@@ -53,9 +51,11 @@ I recently came across [The Witch is Dead](https://gshowitt.itch.io/the-witch-is
 
 This game uses `d10s` which Fari didn't support at the time.
 
-This made me think about making Fari more flexible for simple RPGs like this so I worked on a brand new dice command menu and to be honest, I'm pretty proud of the end result 💪
+This made me think about making Fari more flexible for simple RPGs like this.
 
-Check it out [here](/dice) or look at the gif below for a quick preview👇
+Fari now has a brand new dice menu and to be honest, I'm pretty proud of the end result 💪
+
+Check it out [here](/dice) or look at the gif below for a quick preview 👇
 
 ![Dice Roller](https://gyazo.com/72c3eda69be9983538ef1ae7414073c4.gif)
 
@@ -71,9 +71,7 @@ If you have any questions or want to talk about Fari, come chat on [Discord](htt
 
 # Fari v3.6.0
 
-<page-meta author="RPDeshaies" date="2021-02-10" image="https://gyazo.com/987c44f98577c6f8576ffb9a80c54fdf.png"></page-meta>
-
-Better document navigation and new dice options.
+<page-meta author="RPDeshaies" date="2021-02-10" image="https://gyazo.com/987c44f98577c6f8576ffb9a80c54fdf.png" description="Better document navigation and new dice options."></page-meta>
 
 ## New Features 🌟
 
@@ -115,9 +113,7 @@ If you have any questions or want to talk about Fari, come chat on [Discord](htt
 
 # Moments in Fate
 
-<page-meta author="RPDeshaies" date="2021-02-05" image="https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2064&q=80"></page-meta>
-
-A [Powered by the Apocalypse](http://apocalypse-world.com/pbta/) inspired mechanic for the Fate role-playing game.
+<page-meta author="RPDeshaies" date="2021-02-05" image="https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2064&q=80" description="A Powered by the Apocalypse inspired mechanic for the Fate role-playing game."></page-meta>
 
 ## Context
 

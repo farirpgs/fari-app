@@ -141,6 +141,19 @@ export const ToolkitItems: React.FC = (props) => {
             link="/srds/adversary-toolkit"
           />
         </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Dials"
+            description={
+              <>
+                Useful rules you can pick and choose to hack your Fate campaign.
+              </>
+            }
+            bgColor="#0a0f1c"
+            imageUrl={Images.dials}
+            link="/dials"
+          />
+        </Grid>
       </Grid>
     </Box>
   );
@@ -162,20 +175,6 @@ export const MiscellaneousItems: React.FC = (props) => {
             bgColor="#030200"
             imageUrl={Images.cheatSheet}
             link="/cheat-sheet"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Scene Checklist"
-            description={
-              <>
-                If you feel stumped during a scene, this checklist is going to
-                help you get back on track in no time.
-              </>
-            }
-            bgColor="#3b3a39"
-            imageUrl={Images.scene}
-            link="/scene-checklist"
           />
         </Grid>
       </Grid>
@@ -200,7 +199,10 @@ export const WikiItems: React.FC = (props) => {
           <DocCard
             title="Success With Style"
             description={
-              <>The next generation of Fate philosophy discussions.</>
+              <>
+                A searchable supply of ideas; these Fate pointers help you
+                succeed with style!
+              </>
             }
             bgColor="#080303"
             imageUrl={Images.successWithStyle}
@@ -237,19 +239,6 @@ export const WikiItems: React.FC = (props) => {
             bgColor="#223031"
             imageUrl={Images.book}
             link="/fate-stunts"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Dials"
-            description={
-              <>
-                Useful rules you can pick and choose to hack your Fate campaign.
-              </>
-            }
-            bgColor="#0a0f1c"
-            imageUrl={Images.dials}
-            link="/dials"
           />
         </Grid>
       </Grid>
@@ -313,6 +302,7 @@ export const DocCard: React.FC<{
                   <FateLabel
                     textColor={color}
                     fontSize={theme.typography.h5.fontSize}
+                    uppercase={false}
                   >
                     {props.title}
                   </FateLabel>

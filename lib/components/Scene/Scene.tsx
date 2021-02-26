@@ -65,12 +65,12 @@ import { arraySort } from "../../domains/array/arraySort";
 import { IDiceRollResult, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
-import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "../../routes/Character/components/CharacterDialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
@@ -141,7 +141,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const errorTheme = useButtonTheme(theme.palette.error.main);
+  const errorTheme = useThemeFromColor(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -417,7 +417,6 @@ export const Scene: React.FC<IProps> = (props) => {
                             color="secondary"
                           >
                             <PersonAddIcon />
-                            {/* <DescriptionIcon /> */}
                           </Button>
                         </span>
                       </Tooltip>
@@ -1030,7 +1029,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   logger.info("Scene:onFireGoodConfetti");
                 }}
                 variant="text"
-                color="secondary"
+                color="primary"
               >
                 <ThumbUpIcon />
               </Button>
@@ -1044,7 +1043,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   logger.info("Scene:onFireBadConfetti");
                 }}
                 variant="text"
-                color="secondary"
+                color="primary"
               >
                 <ThumbDownIcon />
               </Button>
@@ -1059,7 +1058,7 @@ export const Scene: React.FC<IProps> = (props) => {
               }}
               variant="outlined"
               color={
-                props.sceneManager.state.scene.sort ? "secondary" : "default"
+                props.sceneManager.state.scene.sort ? "primary" : "default"
               }
               endIcon={<SortIcon />}
             >
@@ -1099,7 +1098,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 }
               }}
               variant="outlined"
-              color={shareLinkToolTip.open ? "secondary" : "default"}
+              color={shareLinkToolTip.open ? "primary" : "default"}
               endIcon={<FileCopyIcon />}
             >
               {t("play-route.copy-game-link")}

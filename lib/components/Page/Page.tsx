@@ -34,6 +34,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { AppLightTheme } from "../../theme";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
@@ -63,6 +64,7 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
+
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const { displayDonation = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -316,7 +318,7 @@ export const Page: React.FC<{
 
   function renderHeader() {
     const background = isLive
-      ? theme.palette.primary.main
+      ? AppLightTheme.palette.primary.dark
       : theme.palette.background.paper;
     const color = theme.palette.getContrastText(background);
     return (
@@ -454,7 +456,7 @@ export const Page: React.FC<{
             </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
-                color="secondary"
+                color="primary"
                 onClick={() => {
                   history.push(`/play/${gameId}`);
                 }}
