@@ -50,7 +50,7 @@ jobs:
     if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
     environment:
       name: Preview
-      url: https://${{GITHUB_RUN_ID}}--fari.netlify.app
+      url: https://${github.run_id}}--fari.netlify.app
     steps:
       # Setup
       - uses: actions/checkout@v2
