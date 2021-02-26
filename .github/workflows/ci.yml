@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,9 +37,15 @@ jobs:
       # Validate
       - name: Validate
         run: yarn validate
+      # Upload Build Artifacts
+      - name: Upload Cypress Videos
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: dist
+          path: dist
   deploy-preview:
-    name: Deploy Preview
-    needs: [Build]
+    needs: [build]
     runs-on: ubuntu-latest
     if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
     environment:
@@ -63,6 +68,11 @@ jobs:
       # Install
       - name: Install
         run: yarn install
+      # Download Build Artifacts
+      - uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
       # Deploy Preview
       - name: Deploy Preview
         run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
