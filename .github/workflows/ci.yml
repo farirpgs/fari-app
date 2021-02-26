@@ -39,20 +39,13 @@ jobs:
       # Validate
       - name: Validate
         run: yarn validate
-      # Deploy Preview
-      - name: Deploy Preview
-        run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
-        if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
-      # Deploy Production
-      - name: Deploy Production
-        run: yarn deploy:prod --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
-        if: github.repository == 'fariapp/fari' && github.ref == 'refs/heads/master'
   deploy-preview:
+    needs: [Build]
     runs-on: ubuntu-latest
     if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
     environment:
       name: Preview
-      url: ${{ steps['Deploy Preview'].outputs.url_output }}
+      url: ${{ steps['Deploy Preview'].outputs }}
     steps:
       # Setup
       - uses: actions/checkout@v2
@@ -70,9 +63,6 @@ jobs:
       # Install
       - name: Install
         run: yarn install
-      # Build
-      - name: Build
-        run: CONTEXT=production yarn build
       # Deploy Preview
       - name: Deploy Preview
         run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
