@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
@@ -10,6 +11,7 @@ export const SeelieSquireRoute: React.FC<{
   page: string;
 }> = (props) => {
   const theme = useTheme();
+  const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));
   return (
     <Doc
       page={props.page}
@@ -20,7 +22,7 @@ export const SeelieSquireRoute: React.FC<{
       sideBar={{ "+Book of Creatures": ["seelie-squires-book-of-creatures"] }}
       sideBarOptions={{ miscSectionTitle: "Creatures" }}
       loadFunction={async () => {
-        return makeSeelieSquireMarkdown(theme);
+        return makeSeelieSquireMarkdown({ theme, isExtraSmall: isExtraSmall });
       }}
       gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
       noIndex
@@ -44,9 +46,12 @@ export const SeelieSquireRoute: React.FC<{
 
 export default SeelieSquireRoute;
 
-function makeSeelieSquireMarkdown(theme: Theme): string {
+function makeSeelieSquireMarkdown(props: {
+  theme: Theme;
+  isExtraSmall: boolean;
+}): string {
   const bigFateLabelClass = css({
-    color: theme.palette.primary.main,
+    color: props.theme.palette.primary.main,
     textTransform: "uppercase",
     fontSize: "1.15rem",
     fontWeight: 800,
@@ -103,8 +108,9 @@ ${c.description}
   return markdown;
 
   function renderImage(c: ICreature) {
+    const maxWidth = props.isExtraSmall ? "90%" : "50%";
     return c.character.image
-      ? `<img alt="${c.character.name}" src="${c.character.image}" style="max-width: 400px" />`
+      ? `<img alt="${c.character.name}" src="${c.character.image}" style="max-width: ${maxWidth}" />`
       : "";
   }
 
