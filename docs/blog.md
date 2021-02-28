@@ -6,7 +6,7 @@
 
 # Fari v3.7.0
 
-<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/ff4fd6615325445608846a3bda394eb2.png" description="Fari Wiki, Success With Style Blog, New Dice Options, and more..."></page-meta>
+<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/3c74eda84cdedca471890460339b4fa0.png" description="Fari Wiki, Success With Style Blog, New Dice Options, and more..."></page-meta>
 
 ## New Features 🌟
 
@@ -19,7 +19,7 @@ Fari now has two brand new content sections:
 
 So if you are looking for something new to read, I recommend you check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new **Fate Pointer** by Dgerrimea about [Problematic PC Aspects](/fate-wiki/problematic-pc-aspects)
 
-> If you are interested in contributing to either of the wikis, come and talk to the team on [Discord](https://discord.com/invite/vMAJFjUraA) 👋
+> If you are interested in contributing to either of these, come and talk to the team on [Discord](https://discord.com/invite/vMAJFjUraA) 👋
 
 <!-- ![Fari Wiki](https://gyazo.com/51214d0224b7b1e2b858279b3db07f2a.png) -->
 
