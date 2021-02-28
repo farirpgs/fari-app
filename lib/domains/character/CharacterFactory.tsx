@@ -3,14 +3,18 @@ import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../id/Id";
 import { CharacterType } from "./CharacterType";
 import {
-  CheckboxesFieldValue,
+  BlockType,
+  IBlock,
   ICharacter,
-  IField,
+  IPointCounterBlock,
+  IRichTextBlock,
   ISection,
+  ISkillTextBlock,
+  ISlotTrackerBlock,
+  ITextBlock,
   IV1Character,
   IV2Character,
   Position,
-  SectionType,
 } from "./types";
 
 export const CharacterFactory = {
@@ -19,7 +23,7 @@ export const CharacterFactory = {
     const newCharacter = {
       [CharacterType.CoreCondensed]: makeCondensedCharacter,
       [CharacterType.Accelerated]: makeAcceleratedCharacter,
-      [CharacterType.Custom]: makeCustomCharacter,
+      [CharacterType.Empty]: makeEmptyCharacter,
     }[type]();
 
     return {
@@ -39,31 +43,41 @@ export const CharacterFactory = {
       return c;
     }
   },
-  makeField(type: SectionType) {
-    const fieldDefault: Record<SectionType, IField> = {
-      [SectionType.Text]: {
+  makeBlock(type: BlockType) {
+    const blockDefault: Record<BlockType, IBlock> = {
+      [BlockType.Text]: {
         id: Id.generate(),
         label: "Text",
+        type: type,
         value: "",
-      } as IField<string>,
-      [SectionType.Number]: {
-        id: Id.generate(),
-        label: "Text",
-        value: "0",
-      } as IField<string>,
-      [SectionType.Checkboxes]: {
-        id: Id.generate(),
-        label: "Text",
-        value: [{ label: "1", checked: false }],
-      } as IField<CheckboxesFieldValue>,
-      [SectionType.RichText]: {
+      } as IBlock & ITextBlock,
+      [BlockType.RichText]: {
         id: Id.generate(),
         label: "Rich Text",
+        type: type,
         value: "",
-      } as IField<string>,
+      } as IBlock & IRichTextBlock,
+      [BlockType.Skill]: {
+        id: Id.generate(),
+        label: "Skill",
+        type: type,
+        value: "0",
+      } as IBlock & ISkillTextBlock,
+      [BlockType.PointCounter]: {
+        id: Id.generate(),
+        label: "Point Counter",
+        type: type,
+        value: "0",
+      } as IBlock & IPointCounterBlock,
+      [BlockType.SlotTracker]: {
+        id: Id.generate(),
+        label: "Slot Tracker",
+        type: type,
+        value: [{ label: "1", checked: false }],
+      } as IBlock & ISlotTrackerBlock,
     };
 
-    return fieldDefault[type];
+    return blockDefault[type];
   },
 };
 
@@ -81,56 +95,123 @@ function makeCondensedCharacter(): ICharacter {
             id: Id.generate(),
             label: "Aspects",
             visibleOnCard: true,
-            type: SectionType.Text,
             position: Position.Left,
-            fields: [
-              { id: Id.generate(), label: "High Concept", value: "" },
-              { id: Id.generate(), label: "Trouble", value: "" },
-              { id: Id.generate(), label: "Relationship", value: "" },
-              { id: Id.generate(), label: "Other Aspect", value: "" },
-              { id: Id.generate(), label: "Other Aspect", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "High Concept",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Trouble",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Relationship",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Other Aspect",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Other Aspect",
+                value: "",
+              },
             ],
           },
           {
             id: Id.generate(),
             label: "Stunts & Extras",
-            type: SectionType.Text,
             position: Position.Left,
-            fields: [
-              { id: Id.generate(), label: "Stunt #1", value: "" },
-              { id: Id.generate(), label: "Stunt #2", value: "" },
-              { id: Id.generate(), label: "Stunt #3", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Stunt #1",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Stunt #2",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Stunt #3",
+                value: "",
+              },
             ],
           },
           {
             id: Id.generate(),
             label: "Other",
-            type: SectionType.Text,
             position: Position.Left,
-            fields: [{ id: Id.generate(), label: "Notes", value: "" }],
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Notes",
+                value: "",
+              },
+            ],
+          },
+          {
+            id: Id.generate(),
+            label: "Fate Points",
+            position: Position.Left,
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.PointCounter,
+                label: "Fate Points",
+                value: "",
+              },
+            ],
           },
           {
             id: Id.generate(),
             label: "Stress",
-            type: SectionType.Checkboxes,
             position: Position.Right,
-            fields: [
+            blocks: [
               {
                 id: Id.generate(),
                 label: "Physical",
+                type: BlockType.SlotTracker,
                 value: [
-                  { checked: false, id: Id.generate(), label: "1" },
-                  { checked: false, id: Id.generate(), label: "2" },
-                  { checked: false, id: Id.generate(), label: "3" },
+                  {
+                    checked: false,
+                    label: "1",
+                  },
+                  {
+                    checked: false,
+                    label: "2",
+                  },
+                  {
+                    checked: false,
+                    label: "3",
+                  },
                 ],
               },
               {
                 id: Id.generate(),
                 label: "Mental",
+                type: BlockType.SlotTracker,
                 value: [
-                  { checked: false, id: Id.generate(), label: "1" },
-                  { checked: false, id: Id.generate(), label: "2" },
-                  { checked: false, id: Id.generate(), label: "3" },
+                  { checked: false, label: "1" },
+                  { checked: false, label: "2" },
+                  { checked: false, label: "3" },
                 ],
               },
             ],
@@ -138,40 +219,148 @@ function makeCondensedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Consequences",
-            type: SectionType.Text,
             position: Position.Right,
-            fields: [
-              { id: Id.generate(), label: "Mild", value: "" },
-              { id: Id.generate(), label: "Moderate", value: "" },
-              { id: Id.generate(), label: "Severe", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Mild",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Moderate",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Severe",
+                value: "",
+              },
             ],
           },
           {
             id: Id.generate(),
             label: "Skills",
             visibleOnCard: true,
-            type: SectionType.Number,
             position: Position.Right,
-            fields: [
-              { id: Id.generate(), label: "Academics", value: "" },
-              { id: Id.generate(), label: "Athletics", value: "" },
-              { id: Id.generate(), label: "Burglary", value: "" },
-              { id: Id.generate(), label: "Contacts", value: "" },
-              { id: Id.generate(), label: "Crafts", value: "" },
-              { id: Id.generate(), label: "Deceive", value: "" },
-              { id: Id.generate(), label: "Drive", value: "" },
-              { id: Id.generate(), label: "Empathy", value: "" },
-              { id: Id.generate(), label: "Fight", value: "" },
-              { id: Id.generate(), label: "Investigate", value: "" },
-              { id: Id.generate(), label: "Lore", value: "" },
-              { id: Id.generate(), label: "Notice", value: "" },
-              { id: Id.generate(), label: "Physique", value: "" },
-              { id: Id.generate(), label: "Provoke", value: "" },
-              { id: Id.generate(), label: "Rapport", value: "" },
-              { id: Id.generate(), label: "Resources", value: "" },
-              { id: Id.generate(), label: "Shoot", value: "" },
-              { id: Id.generate(), label: "Stealth", value: "" },
-              { id: Id.generate(), label: "Will", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Academics",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Athletics",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Burglary",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Contacts",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Crafts",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Deceive",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Drive",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Empathy",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Fight",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Investigate",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Lore",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Notice",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Physique",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Provoke",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Rapport",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Resources",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Shoot",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Stealth",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Will",
+                value: "",
+              },
             ],
           },
         ],
@@ -199,47 +388,94 @@ function makeAcceleratedCharacter(): ICharacter {
             id: Id.generate(),
             label: "Aspects",
             visibleOnCard: true,
-            type: SectionType.Text,
+
             position: Position.Left,
-            fields: [
-              { id: Id.generate(), label: "High Concept", value: "" },
-              { id: Id.generate(), label: "Trouble", value: "" },
-              { id: Id.generate(), label: "Relationship", value: "" },
-              { id: Id.generate(), label: "Other Aspect", value: "" },
-              { id: Id.generate(), label: "Other Aspect", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "High Concept",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Trouble",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Relationship",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Other Aspect",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Other Aspect",
+                value: "",
+              },
             ],
           },
           {
             id: Id.generate(),
             label: "Stunts & Extras",
-            type: SectionType.Text,
+
             position: Position.Left,
-            fields: [
-              { id: Id.generate(), label: "Stunt #1", value: "" },
-              { id: Id.generate(), label: "Stunt #2", value: "" },
-              { id: Id.generate(), label: "Stunt #3", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Stunt #1",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Stunt #2",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Stunt #3",
+                value: "",
+              },
             ],
           },
           {
             id: Id.generate(),
             label: "Other",
-            type: SectionType.Text,
             position: Position.Left,
-            fields: [{ id: Id.generate(), label: "Notes", value: "" }],
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Notes",
+                value: "",
+              },
+            ],
           },
           {
             id: Id.generate(),
             label: "Stress",
-            type: SectionType.Checkboxes,
+
             position: Position.Right,
-            fields: [
+            blocks: [
               {
                 id: Id.generate(),
+                type: BlockType.SlotTracker,
                 label: "Stress",
                 value: [
-                  { checked: false, id: Id.generate(), label: "1" },
-                  { checked: false, id: Id.generate(), label: "2" },
-                  { checked: false, id: Id.generate(), label: "3" },
+                  { checked: false, label: "1" },
+                  { checked: false, label: "2" },
+                  { checked: false, label: "3" },
                 ],
               },
             ],
@@ -247,27 +483,71 @@ function makeAcceleratedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Consequences",
-            type: SectionType.Text,
             position: Position.Right,
-            fields: [
-              { id: Id.generate(), label: "Mild", value: "" },
-              { id: Id.generate(), label: "Moderate", value: "" },
-              { id: Id.generate(), label: "Severe", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Mild",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Moderate",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Text,
+                label: "Severe",
+                value: "",
+              },
             ],
           },
           {
             id: Id.generate(),
             label: "Skills",
             visibleOnCard: true,
-            type: SectionType.Number,
+
             position: Position.Right,
-            fields: [
-              { id: Id.generate(), label: "Careful", value: "" },
-              { id: Id.generate(), label: "Clever", value: "" },
-              { id: Id.generate(), label: "Forceful", value: "" },
-              { id: Id.generate(), label: "Flashy", value: "" },
-              { id: Id.generate(), label: "Quick", value: "" },
-              { id: Id.generate(), label: "Sneaky", value: "" },
+            blocks: [
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Careful",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Clever",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Forceful",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Flashy",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Quick",
+                value: "",
+              },
+              {
+                id: Id.generate(),
+                type: BlockType.Skill,
+                label: "Sneaky",
+                value: "",
+              },
             ],
           },
         ],
@@ -281,7 +561,7 @@ function makeAcceleratedCharacter(): ICharacter {
   };
 }
 
-function makeCustomCharacter(): ICharacter {
+function makeEmptyCharacter(): ICharacter {
   return {
     id: "",
     version: CharacterFactory.latestVersion,
@@ -333,9 +613,13 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     label: v2.aspectsLabel ?? "Aspects",
     visibleOnCard: true,
     position: Position.Left,
-    type: SectionType.Text,
-    fields: v2.aspects.map((a) => {
-      return { id: Id.generate(), label: a.name, value: a.value };
+    blocks: v2.aspects.map((a) => {
+      return {
+        id: Id.generate(),
+        type: BlockType.Text,
+        label: a.name,
+        value: a.value,
+      };
     }),
   });
 
@@ -344,9 +628,13 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     id: Id.generate(),
     label: v2.stuntsLabel ?? "Stunts & Extras",
     position: Position.Left,
-    type: SectionType.Text,
-    fields: v2.stunts.map((a) => {
-      return { id: Id.generate(), label: a.name, value: a.value };
+    blocks: v2.stunts.map((a) => {
+      return {
+        id: Id.generate(),
+        type: BlockType.Text,
+        label: a.name,
+        value: a.value,
+      };
     }),
   });
 
@@ -355,8 +643,14 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     id: Id.generate(),
     label: v2.notesLabel ?? "Other",
     position: Position.Left,
-    type: SectionType.Text,
-    fields: [{ id: Id.generate(), label: "Notes", value: v2.notes ?? "" }],
+    blocks: [
+      {
+        id: Id.generate(),
+        type: BlockType.Text,
+        label: "Notes",
+        value: v2.notes ?? "",
+      },
+    ],
   });
 
   // stress
@@ -364,9 +658,13 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     id: Id.generate(),
     label: v2.stressTracksLabel ?? "Stress",
     position: Position.Right,
-    type: SectionType.Checkboxes,
-    fields: v2.stressTracks.map((st) => {
-      return { id: Id.generate(), label: st.name, value: st.value };
+    blocks: v2.stressTracks.map((st) => {
+      return {
+        id: Id.generate(),
+        type: BlockType.SlotTracker,
+        label: st.name,
+        value: st.value,
+      };
     }),
   });
 
@@ -375,9 +673,14 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     id: Id.generate(),
     label: v2.consequencesLabel ?? "Consequences",
     position: Position.Right,
-    type: SectionType.Text,
-    fields: v2.consequences.map((a) => {
-      return { id: Id.generate(), label: a.name, value: a.value };
+
+    blocks: v2.consequences.map((a) => {
+      return {
+        id: Id.generate(),
+        type: BlockType.Text,
+        label: a.name,
+        value: a.value,
+      };
     }),
   });
 
@@ -387,9 +690,14 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     label: v2.skillsLabel ?? "Skills",
     visibleOnCard: true,
     position: Position.Right,
-    type: SectionType.Number,
-    fields: v2.skills.map((a) => {
-      return { id: Id.generate(), label: a.name, value: a.value };
+
+    blocks: v2.skills.map((a) => {
+      return {
+        id: Id.generate(),
+        type: BlockType.Skill,
+        label: a.name,
+        value: a.value,
+      };
     }),
   });
 

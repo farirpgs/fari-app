@@ -1,3 +1,5 @@
+import { useTheme } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { ManagerMode } from "../../components/Manager/Manager";
@@ -18,6 +20,7 @@ export const CharacterRoute: React.FC<{
   };
 }> = (props) => {
   const { t } = useTranslate();
+  const theme = useTheme();
   const history = useHistory();
   const rollDice = useRollDice();
   const charactersManager = useContext(CharactersContext);
@@ -61,20 +64,22 @@ export const CharacterRoute: React.FC<{
         description={t("characters-route.description")}
       />
 
-      <Page>
-        <CharacterV3Dialog
-          open={!!selectedCharacter}
-          character={selectedCharacter}
-          dialog={dialogMode || false}
-          rolls={rolls}
-          onRoll={(bonus) => {
-            roll(bonus);
-          }}
-          onSave={(newCharacter) => {
-            charactersManager.actions.upsert(newCharacter);
-          }}
-        />
-      </Page>
+      <Box bgcolor={theme.palette.background.paper}>
+        <Page>
+          <CharacterV3Dialog
+            open={!!selectedCharacter}
+            character={selectedCharacter}
+            dialog={dialogMode || false}
+            rolls={rolls}
+            onRoll={(bonus) => {
+              roll(bonus);
+            }}
+            onSave={(newCharacter) => {
+              charactersManager.actions.upsert(newCharacter);
+            }}
+          />
+        </Page>
+      </Box>
     </>
   );
 };

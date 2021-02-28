@@ -1,3 +1,5 @@
+import { css } from "@emotion/css";
+import { useTheme } from "@material-ui/core/styles";
 import Quill from "quill";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
@@ -8,6 +10,7 @@ export const RichTextEditor: React.FC<{
   value: string;
   onChange(value: string): void;
 }> = (p) => {
+  const theme = useTheme();
   const [id] = useState(() => {
     return `fari-rich-text-editor-${Id.generate()}`;
   });
@@ -48,5 +51,12 @@ export const RichTextEditor: React.FC<{
     [p.value]
   );
 
-  return <div id={id} />;
+  return (
+    <div
+      id={id}
+      className={css({
+        background: theme.palette.background.paper,
+      })}
+    />
+  );
 };

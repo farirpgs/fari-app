@@ -79,6 +79,10 @@ export const AppDarkTheme = responsiveFontSizes(
     ...defaultThemeConfiguration,
     palette: {
       type: "dark",
+      background: {
+        default: "#222222",
+        paper: "#303030",
+      },
       primary: {
         main: lighten(AppLightTheme.palette.primary.main, 0.5),
       },

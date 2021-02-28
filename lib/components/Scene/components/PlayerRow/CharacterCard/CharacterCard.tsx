@@ -15,9 +15,9 @@ import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../../../../domains/array/arraySort";
 import {
+  BlockType,
   ICharacter,
   ISection,
-  SectionType,
 } from "../../../../../domains/character/types";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
@@ -30,8 +30,8 @@ export const CharacterCard: React.FC<{
   playerName: string | undefined;
   readonly: boolean;
   isMe: boolean;
-  onCharacterDialogOpen(): void;
-  onRoll(options: IRollDiceOptions): void;
+  onCharacterDialogOpen?(): void;
+  onRoll?(options: IRollDiceOptions): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -101,8 +101,8 @@ export const CharacterCard: React.FC<{
             {visibleSections?.map((s) => {
               return (
                 <Box key={s.id}>
-                  {s.type === SectionType.Text && renderTextSection(s)}
-                  {s.type === SectionType.Number && renderNumberSection(s)}
+                  {s.type === BlockType.Text && renderTextSection(s)}
+                  {s.type === BlockType.Skill && renderNumberSection(s)}
                 </Box>
               );
             })}
@@ -114,7 +114,7 @@ export const CharacterCard: React.FC<{
 
   function renderNumberSection(section: ISection<string>) {
     const fieldWithValues =
-      section.fields.filter((s) => {
+      section.blocks.filter((s) => {
         return !!s.value;
       }) ?? [];
 
@@ -182,7 +182,7 @@ export const CharacterCard: React.FC<{
   function renderTextSection(section: ISection<string>) {
     return (
       <Box>
-        {section.fields.map((field, fieldIndex) => {
+        {section.blocks.map((field, fieldIndex) => {
           const containsImage = field.value.includes("<img");
           const value = containsImage
             ? field.value

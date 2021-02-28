@@ -44,7 +44,7 @@ describe("CharacterFactory.migrate", () => {
         expect(
           result.pages
             .flatMap((p) => p.sections)
-            .find((s) => s.label === "Stress")?.fields
+            .find((s) => s.label === "Stress")?.blocks
         ).toEqual([
           {
             id: expect.anything(),

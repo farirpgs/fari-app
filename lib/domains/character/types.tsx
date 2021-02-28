@@ -1,9 +1,9 @@
-export enum SectionType {
-  Text,
-  Number,
-  // BigNumber,
-  Checkboxes,
-  RichText,
+export enum BlockType {
+  Text = "Text",
+  RichText = "RichText",
+  Skill = "Skill",
+  PointCounter = "PointCounter",
+  SlotTracker = "SlotTracker",
 }
 
 export enum Position {
@@ -68,25 +68,53 @@ export type ICharacterCustomField<TValue> = Array<{
   value: TValue;
 }>;
 
-export type IField<T = any> = {
-  id: string;
-  label: string;
-  value: T;
+export type ITextBlock = {
+  type: BlockType.Text;
+  value: string;
+};
+export type IRichTextBlock = {
+  type: BlockType.RichText;
+  value: string;
 };
 
-export type ISection<T = any> = {
+export type ISkillTextBlock = {
+  type: BlockType.Skill;
+  value: string;
+};
+
+export type ISlotTrackerBlock = {
+  type: BlockType.SlotTracker;
+  value: Array<{
+    label: string;
+    checked?: boolean;
+  }>;
+};
+
+export type IPointCounterBlock = {
+  type: BlockType.PointCounter;
+  value: string;
+};
+
+export type IBlock = {
+  type: BlockType;
+  id: string;
+  label: string;
+} & (
+  | ITextBlock
+  | IRichTextBlock
+  | ISkillTextBlock
+  | ISlotTrackerBlock
+  | IPointCounterBlock
+);
+
+export type ISection = {
   label: string;
   id: string;
   position: Position;
-  type: SectionType;
-  fields: Array<IField<T>>;
+  blocks: Array<IBlock>;
   visibleOnCard?: boolean;
 };
 
-export type CheckboxesFieldValue = Array<{
-  label: string;
-  checked?: boolean;
-}>;
 export interface IPage {
   id: string;
   sections: Array<ISection>;

@@ -1,5 +1,4 @@
 import { css } from "@emotion/css";
-import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -26,17 +25,21 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Filter1Icon from "@material-ui/icons/Filter1";
 import HelpIcon from "@material-ui/icons/Help";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RemoveIcon from "@material-ui/icons/Remove";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import SaveIcon from "@material-ui/icons/Save";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
@@ -46,26 +49,33 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
-import { DiceBox } from "../../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
+import { CharacterCard } from "../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
 import { CharactersContext } from "../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterType } from "../../../domains/character/CharacterType";
 import {
-  CheckboxesFieldValue,
+  BlockType,
+  IBlock,
   ICharacter,
   IPage,
+  IPointCounterBlock,
+  IRichTextBlock,
   ISection,
+  ISkillTextBlock,
+  ISlotTrackerBlock,
+  ITextBlock,
   Position,
-  SectionType,
 } from "../../../domains/character/types";
 import { getDayJSFrom } from "../../../domains/dayjs/getDayJS";
 import {
   IDiceRollWithBonus,
   IRollDiceOptions,
 } from "../../../domains/dice/Dice";
+import { Font } from "../../../domains/font/Font";
 import { useButtonTheme } from "../../../hooks/useButtonTheme/useButtonTheme";
+import { useQuery } from "../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";
 import { RichTextEditor } from "../../../molecules/RichTextEditor/RichTextEditor";
@@ -79,15 +89,15 @@ const smallIconButtonStyle = css({
 });
 
 const HeaderHelpLinks: Record<string, string> = {
-  "Aspects": "/srds/condensed/getting-started#aspects",
-  "Stunts & Extras": "/srds/condensed/getting-started#stunts",
-  "Refresh": "/srds/condensed/getting-started#refresh",
-  "Stress": "/srds/condensed/challenges-conflicts-and-contests#stress",
+  "Aspects": "/srds/condensed/getting-started?goTo=aspects",
+  "Stunts & Extras": "/srds/condensed/getting-started?goTo=stunts",
+  "Refresh": "/srds/condensed/getting-started?goTo=refresh",
+  "Stress": "/srds/condensed/challenges-conflicts-and-contests?goTo=stress",
   "Consequences":
-    "/srds/condensed/challenges-conflicts-and-contests#consequences-1",
-  "Skills": "/srds/condensed/getting-started#skill-list",
+    "/srds/condensed/challenges-conflicts-and-contests?goTo=consequences-1",
+  "Skills": "/srds/condensed/getting-started?goTo=skill-list",
   "Dice":
-    "/srds/condensed/taking-action-rolling-the-dice#taking-action-rolling-the-dice",
+    "/srds/condensed/taking-action-rolling-the-dice?goTo=taking-action-rolling-the-dice",
 };
 const FooterHelpLinks: Record<string, { label: string; link: string }> = {
   "Stunts & Extras": { label: "", link: "" },
@@ -105,6 +115,8 @@ export const CharacterV3Dialog: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
+  const query = useQuery<"card">();
+  const showCharacterCard = query.get("card") === "true";
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
@@ -176,7 +188,7 @@ export const CharacterV3Dialog: React.FC<{
       />
       <Snackbar
         open={savedSnack}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={(event, reason) => {
           if (reason === "clickaway") {
             return;
@@ -232,8 +244,8 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <Container maxWidth="md">
-        <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
         <Box className={sheetContentStyle}>{renderActions()}</Box>
+        <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
         <Box className={sheetContentStyle}>{renderName()}</Box>
         <Box className={sheetContentStyle}>
           {renderPages(characterManager.state.character?.pages)}
@@ -246,7 +258,7 @@ export const CharacterV3Dialog: React.FC<{
     return (
       <Collapse in={advanced}>
         <Box>
-          <Grid container wrap="nowrap" spacing={2} justify="center">
+          <Grid container wrap="nowrap" spacing={2} justify="flex-start">
             <Grid item>
               <Select
                 data-cy="character-dialog.template"
@@ -305,8 +317,6 @@ export const CharacterV3Dialog: React.FC<{
                 <Grid container>
                   <Grid item xs={12} md={6} className={sectionStyle}>
                     {renderSections(pageIndex, page.sections, Position.Left)}
-                    {renderDice(pageIndex)}
-                    {renderRefresh(pageIndex)}
                   </Grid>
                   <Grid item xs={12} md={6} className={sectionStyle}>
                     {renderSections(pageIndex, page.sections, Position.Right)}
@@ -328,10 +338,9 @@ export const CharacterV3Dialog: React.FC<{
                         })}
                       >
                         <AddSection
-                          onAddSection={(sectionType) => {
+                          onAddSection={() => {
                             characterManager.actions.addSection(
                               pageIndex,
-                              sectionType,
                               Position.Left
                             );
                           }}
@@ -350,10 +359,9 @@ export const CharacterV3Dialog: React.FC<{
                         })}
                       >
                         <AddSection
-                          onAddSection={(sectionType) => {
+                          onAddSection={() => {
                             characterManager.actions.addSection(
                               pageIndex,
-                              sectionType,
                               Position.Right
                             );
                           }}
@@ -403,18 +411,22 @@ export const CharacterV3Dialog: React.FC<{
             </Box>
           </Grid>
         </Grid>
-        {/* <Grid container justify="center">
-          <Grid item xs>
-            <Box pt=".5rem">
-              <CharacterCard
-                isMe={false}
-                characterSheet={characterManager.state.character}
-                onCharacterDialogOpen={undefined}
-                onRoll={undefined}
-              />
-            </Box>
+        {showCharacterCard && (
+          <Grid container justify="center">
+            <Grid item xs>
+              <Box pt=".5rem" ml="-.5rem">
+                <CharacterCard
+                  isMe={false}
+                  playerName="..."
+                  readonly={false}
+                  characterSheet={characterManager.state.character}
+                  onCharacterDialogOpen={() => undefined}
+                  onRoll={() => undefined}
+                />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid> */}
+        )}
       </Box>
     );
   }
@@ -472,19 +484,6 @@ export const CharacterV3Dialog: React.FC<{
 
           return (
             <Box key={section.id}>
-              {/* <BetterDnd
-                key={section.id}
-                index={sectionIndex}
-                type={`page-${pageIndex}`}
-                readonly={!advanced}
-                onMove={(dragIndex, hoverIndex) => {
-                  characterManager.actions.moveDnDSection(
-                    pageIndex,
-                    dragIndex,
-                    hoverIndex
-                  );
-                }}
-              > */}
               <SheetHeader
                 label={section.label}
                 helpLink={helpLink}
@@ -524,15 +523,8 @@ export const CharacterV3Dialog: React.FC<{
                   );
                 }}
               />
+              {renderSectionBlocks(pageIndex, sectionIndex, section)}
 
-              {section.type === SectionType.Text &&
-                renderTextFields(pageIndex, sectionIndex, section)}
-              {section.type === SectionType.Number &&
-                renderNumberFields(pageIndex, sectionIndex, section)}
-              {section.type === SectionType.Checkboxes &&
-                renderCheckboxesFields(pageIndex, sectionIndex, section)}
-              {section.type === SectionType.RichText &&
-                renderRichTextFields(pageIndex, sectionIndex, section)}
               <Collapse in={advanced}>
                 <Box
                   p=".5rem"
@@ -540,23 +532,17 @@ export const CharacterV3Dialog: React.FC<{
                   justifyContent="center"
                   display="flex"
                 >
-                  <Button
-                    color="default"
-                    data-cy={`character-dialog.${section.label}.add-section-field`}
-                    variant="outlined"
-                    endIcon={<AddIcon />}
-                    onClick={() => {
-                      characterManager.actions.addSectionField(
+                  <AddBlock
+                    onAddBlock={(blockType) => {
+                      characterManager.actions.addBlock(
                         pageIndex,
-                        sectionIndex
+                        sectionIndex,
+                        blockType
                       );
                     }}
-                  >
-                    {t("character-dialog.control.add-field")}
-                  </Button>
+                  />
                 </Box>
               </Collapse>
-              {/* </BetterDnd> */}
             </Box>
           );
         })}
@@ -702,27 +688,27 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderTextFields(
+  function renderSectionBlocks(
     pageIndex: number,
     sectionIndex: number,
-    section: ISection<string>
+    section: ISection
   ) {
     return (
       <>
         <Box
           className={css(sheetContentStyle, {
-            padding: section.fields.length === 0 ? "0" : undefined,
+            padding: section.blocks.length === 0 ? "0" : undefined,
           })}
         >
-          {section.fields.map((field, fieldIndex) => {
+          {section.blocks.map((block, blockIndex) => {
             return (
               <BetterDnd
-                key={field.id}
-                index={fieldIndex}
+                key={block.id}
+                index={blockIndex}
                 type={section.label}
                 readonly={!advanced}
                 onMove={(dragIndex, hoverIndex) => {
-                  characterManager.actions.moveDnDSectionField(
+                  characterManager.actions.moveDnDBlock(
                     pageIndex,
                     sectionIndex,
                     dragIndex,
@@ -731,75 +717,46 @@ export const CharacterV3Dialog: React.FC<{
                 }}
               >
                 <Box py=".5rem">
-                  <Box pb=".5rem">
-                    <Grid
-                      container
-                      spacing={1}
-                      justify="space-between"
-                      wrap="nowrap"
-                    >
-                      <Grid item xs>
-                        <FateLabel display="inline">
-                          <ContentEditable
-                            readonly={!advanced}
-                            border={advanced}
-                            data-cy={`character-dialog.${section.label}.${field.label}.label`}
-                            value={field.label}
-                            onChange={(value) => {
-                              characterManager.actions.renameSectionField(
-                                pageIndex,
-                                sectionIndex,
-                                fieldIndex,
-                                value
-                              );
-                            }}
-                          />
-                        </FateLabel>
-                      </Grid>
-                      {advanced && (
-                        <>
-                          <Grid item>
-                            <Tooltip
-                              title={t("character-dialog.control.remove-field")}
-                            >
-                              <IconButton
-                                data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                                size="small"
-                                className={smallIconButtonStyle}
-                                onClick={() => {
-                                  characterManager.actions.removeSectionField(
-                                    pageIndex,
-                                    sectionIndex,
-                                    fieldIndex
-                                  );
-                                }}
-                              >
-                                <RemoveIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </Grid>
-                        </>
-                      )}
-                    </Grid>
-                  </Box>
-                  <Box>
-                    <Typography>
-                      <ContentEditable
-                        border
-                        data-cy={`character-dialog.${section.label}.${field.label}.value`}
-                        readonly={props.readonly}
-                        value={field.value}
-                        onChange={(value) => {
-                          characterManager.actions.setSectionFieldValue(
-                            pageIndex,
-                            sectionIndex,
-                            fieldIndex,
-                            value
-                          );
-                        }}
-                      />
-                    </Typography>
-                  </Box>
+                  {block.type === BlockType.Text &&
+                    renderBlockText(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
+                  {block.type === BlockType.RichText &&
+                    renderBlockRichText(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
+                  {block.type === BlockType.Skill &&
+                    renderBlockSkill(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
+                  {block.type === BlockType.PointCounter &&
+                    renderBlockPointCounter(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
+                  {block.type === BlockType.SlotTracker &&
+                    renderBlockSlotTracker(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
                 </Box>
               </BetterDnd>
             );
@@ -809,506 +766,546 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderNumberFields(
+  function renderBlockText(
     pageIndex: number,
     sectionIndex: number,
-    section: ISection<string>
+    section: ISection,
+    block: IBlock & ITextBlock,
+    blockIndex: number
   ) {
     return (
       <>
-        <Box
-          className={css(sheetContentStyle, {
-            padding: section.fields.length === 0 ? "0" : undefined,
-          })}
-        >
-          {section.fields.map((field, fieldIndex) => {
-            const skillDescription =
-              FateSkillsDescriptions[field.label.toLowerCase()] ?? "";
-            const skillLabel = (
-              <FateLabel
-                display="inline"
-                className={css({
-                  borderBottom: !advanced
-                    ? `1px solid ${theme.palette.text.primary}`
-                    : undefined,
-                })}
-              >
+        <Box pb=".5rem">
+          <Grid container spacing={1} justify="space-between" wrap="nowrap">
+            <Grid item xs>
+              <FateLabel display="inline">
                 <ContentEditable
-                  data-cy={`character-dialog.${section.label}.${field.label}.label`}
                   readonly={!advanced}
                   border={advanced}
-                  value={field.label}
-                  onClick={() => {
-                    const bonus = parseInt(field.value) || 0;
-                    props.onRoll?.({ bonus, bonusLabel: field.label });
-                  }}
+                  data-cy={`character-dialog.${section.label}.${block.label}.label`}
+                  value={block.label}
                   onChange={(value) => {
-                    characterManager.actions.setSectionFieldLabel(
+                    characterManager.actions.renameBlock(
                       pageIndex,
                       sectionIndex,
-                      fieldIndex,
+                      blockIndex,
                       value
                     );
                   }}
                 />
               </FateLabel>
-            );
-
-            return (
-              <BetterDnd
-                key={field.id}
-                index={fieldIndex}
-                type={section.label}
-                readonly={!advanced}
-                onMove={(dragIndex, hoverIndex) => {
-                  characterManager.actions.moveDnDSectionField(
-                    pageIndex,
-                    sectionIndex,
-                    dragIndex,
-                    hoverIndex
-                  );
-                }}
-              >
-                <Box py=".5rem">
-                  <Grid
-                    container
-                    spacing={1}
-                    alignItems="flex-end"
-                    wrap="nowrap"
-                  >
-                    <Grid item xs={2}>
-                      <Typography align="center">
-                        <ContentEditable
-                          data-cy={`character-dialog.${section.label}.${field.label}.value`}
-                          border
-                          readonly={props.readonly}
-                          value={field.value}
-                          onChange={(value) => {
-                            characterManager.actions.setSectionFieldValue(
-                              pageIndex,
-                              sectionIndex,
-                              fieldIndex,
-                              value
-                            );
-                          }}
-                        />
-                      </Typography>
-                    </Grid>
-                    <Grid item className={css({ flex: "1 0 auto" })}>
-                      {advanced ? (
-                        skillLabel
-                      ) : (
-                        <>
-                          <ButtonBase>{skillLabel}</ButtonBase>
-                          {skillDescription && (
-                            <>
-                              <Tooltip
-                                placement="right-start"
-                                classes={{
-                                  tooltip: css({
-                                    backgroundColor:
-                                      theme.palette.background.paper,
-                                    color: theme.palette.text.primary,
-                                    boxShadow: theme.shadows[1],
-                                    fontSize: "1rem",
-                                  }),
-                                }}
-                                title={
-                                  <>
-                                    <Typography
-                                      className={css({
-                                        fontWeight: "bold",
-                                        marginBottom: ".5rem",
-                                      })}
-                                    >
-                                      {skillDescription.quick}
-                                    </Typography>
-                                    <Typography>
-                                      {skillDescription.long}
-                                    </Typography>
-                                  </>
-                                }
-                              >
-                                <HelpIcon
-                                  className={css({
-                                    marginLeft: ".5rem",
-                                    fontSize: "1rem",
-                                  })}
-                                />
-                              </Tooltip>
-                            </>
-                          )}
-                        </>
-                      )}
-                    </Grid>
-                    {advanced && (
-                      <>
-                        <Grid item>
-                          <Tooltip
-                            title={t("character-dialog.control.remove-field")}
-                          >
-                            <IconButton
-                              data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                              size="small"
-                              className={smallIconButtonStyle}
-                              onClick={() => {
-                                characterManager.actions.removeSectionField(
-                                  pageIndex,
-                                  sectionIndex,
-                                  fieldIndex
-                                );
-                              }}
-                            >
-                              <RemoveIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                      </>
-                    )}
-                  </Grid>
-                </Box>
-              </BetterDnd>
-            );
-          })}
+            </Grid>
+            {advanced && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-field")}>
+                    <IconButton
+                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                      size="small"
+                      className={smallIconButtonStyle}
+                      onClick={() => {
+                        characterManager.actions.removeBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </Grid>
+        </Box>
+        <Box>
+          <Typography>
+            <ContentEditable
+              border
+              data-cy={`character-dialog.${section.label}.${block.label}.value`}
+              readonly={props.readonly}
+              value={block.value}
+              onChange={(value) => {
+                characterManager.actions.setBlockValue(
+                  pageIndex,
+                  sectionIndex,
+                  blockIndex,
+                  value
+                );
+              }}
+            />
+          </Typography>
         </Box>
       </>
     );
   }
 
-  function renderCheckboxesFields(
+  function renderBlockRichText(
     pageIndex: number,
     sectionIndex: number,
-    section: ISection<CheckboxesFieldValue>
+    section: ISection,
+    block: IBlock & IRichTextBlock,
+    blockIndex: number
   ) {
     return (
-      <Box p=".5rem 1.5rem">
-        {section.fields.map((field, fieldIndex) => {
-          return (
-            <BetterDnd
-              key={field.id}
-              index={fieldIndex}
-              type={section.label}
-              readonly={!advanced}
-              onMove={(dragIndex, hoverIndex) => {
-                characterManager.actions.moveDnDSectionField(
-                  pageIndex,
-                  sectionIndex,
-                  dragIndex,
-                  hoverIndex
-                );
-              }}
-            >
-              <Box py=".5rem">
-                <Grid
-                  container
-                  justify="space-between"
-                  wrap="nowrap"
-                  spacing={1}
-                >
-                  <Grid item className={css({ flex: "1 1 auto" })}>
-                    <FateLabel display="inline">
-                      <ContentEditable
-                        data-cy={`character-dialog.${section.label}.${field.label}.label`}
-                        readonly={!advanced}
-                        border={advanced}
-                        value={field.label}
-                        onChange={(value) => {
-                          characterManager.actions.setSectionFieldLabel(
-                            pageIndex,
-                            sectionIndex,
-                            fieldIndex,
-                            value
-                          );
-                        }}
-                      />
-                    </FateLabel>
-                  </Grid>
-                  {advanced && (
-                    <>
-                      <Grid item>
-                        <Tooltip
-                          title={t("character-dialog.control.remove-box")}
-                        >
-                          <IconButton
-                            size="small"
-                            data-cy={`character-dialog.${section.label}.${field.label}.remove-box`}
-                            onClick={() => {
-                              characterManager.actions.removeCheckboxFieldValue(
-                                pageIndex,
-                                sectionIndex,
-                                fieldIndex
-                              );
-                            }}
-                          >
-                            <RemoveCircleOutlineIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
-                      <Grid item>
-                        <Tooltip title={t("character-dialog.control.add-box")}>
-                          <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.add-box`}
-                            size="small"
-                            onClick={() => {
-                              characterManager.actions.addCheckboxFieldValue(
-                                pageIndex,
-                                sectionIndex,
-                                fieldIndex
-                              );
-                            }}
-                          >
-                            <AddCircleOutlineIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
-                      <Grid item>
-                        <Tooltip
-                          title={t("character-dialog.control.remove-field")}
-                        >
-                          <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                            size="small"
-                            onClick={() => {
-                              characterManager.actions.removeSectionField(
-                                pageIndex,
-                                sectionIndex,
-                                fieldIndex
-                              );
-                            }}
-                          >
-                            <RemoveIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
-                    </>
-                  )}
-                </Grid>
-
-                <Grid container justify="flex-start" spacing={2}>
-                  {field.value.map((stressBox, boxIndex) => {
-                    return (
-                      <Grid item key={boxIndex}>
-                        <Box
-                          className={css({
-                            display: "flex",
-                            justifyContent: "center",
-                          })}
-                        >
-                          <Checkbox
-                            data-cy={`character-dialog.${section.label}.${field.label}.box.${boxIndex}.value`}
-                            color="default"
-                            size="small"
-                            checked={stressBox.checked}
-                            onChange={(event) => {
-                              if (props.readonly) {
-                                return;
-                              }
-                              characterManager.actions.toggleCheckboxFieldValue(
-                                pageIndex,
-                                sectionIndex,
-                                fieldIndex,
-                                boxIndex
-                              );
-                            }}
-                          />
-                        </Box>
-                        <Box>
-                          <FateLabel className={css({ textAlign: "center" })}>
-                            <ContentEditable
-                              data-cy={`character-dialog.${section.label}.${field.label}.box.${boxIndex}.label`}
-                              readonly={!advanced}
-                              border={advanced}
-                              value={stressBox.label}
-                              onChange={(value) => {
-                                characterManager.actions.renameCheckboxFieldValue(
-                                  pageIndex,
-                                  sectionIndex,
-                                  fieldIndex,
-                                  boxIndex,
-                                  value
-                                );
-                              }}
-                            />
-                          </FateLabel>
-                        </Box>
-                      </Grid>
+      <>
+        <Box pb=".5rem">
+          <Grid container justify="space-between" wrap="nowrap" spacing={1}>
+            <Grid item className={css({ flex: "1 1 auto" })}>
+              <FateLabel display="inline">
+                <ContentEditable
+                  data-cy={`character-dialog.${section.label}.${block.label}.label`}
+                  readonly={!advanced}
+                  border={advanced}
+                  value={block.label}
+                  onChange={(value) => {
+                    characterManager.actions.setBlockLabel(
+                      pageIndex,
+                      sectionIndex,
+                      blockIndex,
+                      value
                     );
-                  })}
+                  }}
+                />
+              </FateLabel>
+            </Grid>
+            {advanced && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-field")}>
+                    <IconButton
+                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.removeBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Grid>
-              </Box>
-            </BetterDnd>
-          );
-        })}
-      </Box>
-    );
-  }
-
-  function renderRichTextFields(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection<string>
-  ) {
-    return (
-      <Box p=".5rem 1.5rem">
-        {section.fields.map((field, fieldIndex) => {
-          return (
-            <BetterDnd
-              key={field.id}
-              index={fieldIndex}
-              type={section.label}
-              readonly={!advanced}
-              onMove={(dragIndex, hoverIndex) => {
-                characterManager.actions.moveDnDSectionField(
+              </>
+            )}
+          </Grid>
+          <Box py=".5rem">
+            <RichTextEditor
+              value={block.value}
+              onChange={(value) => {
+                characterManager.actions.setBlockValue(
                   pageIndex,
                   sectionIndex,
-                  dragIndex,
-                  hoverIndex
+                  blockIndex,
+                  value
                 );
               }}
-            >
-              <Box py=".5rem">
-                <Grid
-                  container
-                  justify="space-between"
-                  wrap="nowrap"
-                  spacing={1}
-                >
-                  <Grid item className={css({ flex: "1 1 auto" })}>
-                    <FateLabel display="inline">
-                      <ContentEditable
-                        data-cy={`character-dialog.${section.label}.${field.label}.label`}
-                        readonly={!advanced}
-                        border={advanced}
-                        value={field.label}
-                        onChange={(value) => {
-                          characterManager.actions.setSectionFieldLabel(
-                            pageIndex,
-                            sectionIndex,
-                            fieldIndex,
-                            value
-                          );
-                        }}
-                      />
-                    </FateLabel>
-                  </Grid>
-                  {advanced && (
-                    <>
-                      <Grid item>
-                        <Tooltip
-                          title={t("character-dialog.control.remove-field")}
-                        >
-                          <IconButton
-                            data-cy={`character-dialog.${section.label}.${field.label}.remove`}
-                            size="small"
-                            onClick={() => {
-                              characterManager.actions.removeSectionField(
-                                pageIndex,
-                                sectionIndex,
-                                fieldIndex
-                              );
-                            }}
-                          >
-                            <RemoveIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
-                    </>
-                  )}
-                </Grid>
-                <Box py=".5rem">
-                  <RichTextEditor
-                    value={field.value}
-                    onChange={(value) => {
-                      characterManager.actions.setSectionFieldValue(
-                        pageIndex,
-                        sectionIndex,
-                        fieldIndex,
-                        value
-                      );
-                    }}
-                  />
-                </Box>
-              </Box>
-            </BetterDnd>
-          );
-        })}
-      </Box>
+            />
+          </Box>
+        </Box>
+      </>
     );
   }
 
-  function renderRefresh(pageIndex: number) {
-    if (pageIndex !== 0) {
-      return null;
-    }
+  function renderBlockSkill(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & ISkillTextBlock,
+    blockIndex: number
+  ) {
+    const skillDescription =
+      FateSkillsDescriptions[block.label.toLowerCase()] ?? "";
+    const skillLabel = (
+      <FateLabel
+        display="inline"
+        className={css({
+          borderBottom: !advanced
+            ? `1px solid ${theme.palette.text.primary}`
+            : undefined,
+        })}
+      >
+        <ContentEditable
+          data-cy={`character-dialog.${section.label}.${block.label}.label`}
+          readonly={!advanced}
+          border={advanced}
+          value={block.label}
+          onClick={() => {
+            const bonus = parseInt(block.value) || 0;
+            props.onRoll?.({ bonus, bonusLabel: block.label });
+          }}
+          onChange={(value) => {
+            characterManager.actions.setBlockLabel(
+              pageIndex,
+              sectionIndex,
+              blockIndex,
+              value
+            );
+          }}
+        />
+      </FateLabel>
+    );
 
     return (
       <>
-        <SheetHeader
-          label={t("character-dialog.refresh")}
-          helpLink={HeaderHelpLinks["Refresh"]}
-          advanced={advanced}
-        />
-        <Box className={css(sheetContentStyle)}>
-          <Grid container justify="center">
-            <Grid item>
-              <Avatar
-                className={css({
-                  color: headerBackgroundColors.primary,
-                  background: theme.palette.background.paper,
-                  border: `3px solid ${headerBackgroundColors.primary}`,
-                  width: "5rem",
-                  height: "5rem",
-                  fontSize: "2rem",
-                  textAlign: "center",
-                })}
-              >
+        <Box pb=".5rem">
+          <Grid container spacing={1} alignItems="flex-end" wrap="nowrap">
+            <Grid item xs={2}>
+              <Typography align="center">
                 <ContentEditable
-                  data-cy={`character-dialog.refresh`}
-                  readonly={!advanced}
-                  border={advanced}
-                  value={characterManager.state.character!.refresh.toString()}
-                  onChange={(value, e) => {
-                    const intValue = parseInt(value);
-                    if (!isNaN(intValue)) {
-                      characterManager.actions.updateRefresh(intValue);
-                    }
+                  data-cy={`character-dialog.${section.label}.${block.label}.value`}
+                  border
+                  readonly={props.readonly}
+                  value={block.value}
+                  onChange={(value) => {
+                    characterManager.actions.setBlockValue(
+                      pageIndex,
+                      sectionIndex,
+                      blockIndex,
+                      value
+                    );
                   }}
                 />
-              </Avatar>
+              </Typography>
             </Grid>
+            <Grid item className={css({ flex: "1 0 auto" })}>
+              {advanced ? (
+                skillLabel
+              ) : (
+                <>
+                  <ButtonBase>{skillLabel}</ButtonBase>
+                  {skillDescription && (
+                    <>
+                      <Tooltip
+                        placement="right-start"
+                        classes={{
+                          tooltip: css({
+                            backgroundColor: theme.palette.background.paper,
+                            color: theme.palette.text.primary,
+                            boxShadow: theme.shadows[1],
+                            fontSize: "1rem",
+                          }),
+                        }}
+                        title={
+                          <>
+                            <Typography
+                              className={css({
+                                fontWeight: "bold",
+                                marginBottom: ".5rem",
+                              })}
+                            >
+                              {skillDescription.quick}
+                            </Typography>
+                            <Typography>{skillDescription.long}</Typography>
+                          </>
+                        }
+                      >
+                        <HelpIcon
+                          className={css({
+                            marginLeft: ".5rem",
+                            fontSize: "1rem",
+                          })}
+                        />
+                      </Tooltip>
+                    </>
+                  )}
+                </>
+              )}
+            </Grid>
+            {advanced && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-field")}>
+                    <IconButton
+                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                      size="small"
+                      className={smallIconButtonStyle}
+                      onClick={() => {
+                        characterManager.actions.removeBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
           </Grid>
         </Box>
       </>
     );
   }
 
-  function renderDice(pageIndex: number) {
-    if (pageIndex !== 0) {
-      return null;
-    }
-
+  function renderBlockSlotTracker(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & ISlotTrackerBlock,
+    blockIndex: number
+  ) {
     return (
       <>
-        <SheetHeader
-          label={t("character-dialog.dice")}
-          helpLink={HeaderHelpLinks["Dice"]}
-          advanced={advanced}
-        />
-        <Box className={sheetContentStyle}>
-          <Grid container justify="center">
-            <Grid item>
-              <Box py="1rem">
-                <DiceBox
-                  rolls={props.rolls ?? []}
-                  showDetails
-                  size="5rem"
-                  fontSize="2rem"
-                  borderSize=".2rem"
-                  onClick={() => {
-                    props.onRoll?.({});
+        <Box pb=".5rem">
+          <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
+            <Grid item className={css({ flex: "1 1 auto" })}>
+              <FateLabel
+                display="inline"
+                align={advanced ? "inherit" : "center"}
+              >
+                <ContentEditable
+                  data-cy={`character-dialog.${section.label}.${block.label}.label`}
+                  readonly={!advanced}
+                  border={advanced}
+                  value={block.label}
+                  onChange={(value) => {
+                    characterManager.actions.setBlockLabel(
+                      pageIndex,
+                      sectionIndex,
+                      blockIndex,
+                      value
+                    );
                   }}
                 />
+              </FateLabel>
+            </Grid>
+            {advanced && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-box")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`character-dialog.${section.label}.${block.label}.remove-box`}
+                      onClick={() => {
+                        characterManager.actions.removeCheckboxFieldValue(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.add-box")}>
+                    <IconButton
+                      data-cy={`character-dialog.${section.label}.${block.label}.add-box`}
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.addCheckboxFieldValue(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <AddCircleOutlineIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-field")}>
+                    <IconButton
+                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.removeBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </Grid>
+
+          <Grid container justify="center" spacing={2}>
+            {block.value.map((stressBox, boxIndex) => {
+              return (
+                <Grid item key={boxIndex}>
+                  <Box
+                    className={css({
+                      display: "flex",
+                      justifyContent: "center",
+                    })}
+                  >
+                    <Checkbox
+                      data-cy={`character-dialog.${section.label}.${block.label}.box.${boxIndex}.value`}
+                      color="primary"
+                      size="small"
+                      icon={<RadioButtonUncheckedIcon />}
+                      checkedIcon={<CheckCircleIcon />}
+                      checked={stressBox.checked}
+                      onChange={(event) => {
+                        if (props.readonly) {
+                          return;
+                        }
+                        characterManager.actions.toggleCheckboxFieldValue(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex,
+                          boxIndex
+                        );
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <FateLabel className={css({ textAlign: "center" })}>
+                      <ContentEditable
+                        data-cy={`character-dialog.${section.label}.${block.label}.box.${boxIndex}.label`}
+                        readonly={!advanced}
+                        border={advanced}
+                        value={stressBox.label}
+                        onChange={(value) => {
+                          characterManager.actions.renameCheckboxFieldValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            boxIndex,
+                            value
+                          );
+                        }}
+                      />
+                    </FateLabel>
+                  </Box>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+      </>
+    );
+  }
+
+  function renderBlockPointCounter(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & IPointCounterBlock,
+    blockIndex: number
+  ) {
+    return (
+      <>
+        <Box pb=".5rem">
+          <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
+            <Grid item className={css({ flex: "1 1 auto" })}>
+              <FateLabel
+                display="inline"
+                align={advanced ? "inherit" : "center"}
+              >
+                <ContentEditable
+                  data-cy={`character-dialog.${section.label}.${block.label}.label`}
+                  readonly={!advanced}
+                  border={advanced}
+                  value={block.label}
+                  onChange={(value) => {
+                    characterManager.actions.setBlockLabel(
+                      pageIndex,
+                      sectionIndex,
+                      blockIndex,
+                      value
+                    );
+                  }}
+                />
+              </FateLabel>
+            </Grid>
+            {advanced && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-field")}>
+                    <IconButton
+                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                      size="small"
+                      onClick={() => {
+                        characterManager.actions.removeBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </Grid>
+
+          <Grid container justify="center" spacing={2} wrap="nowrap">
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  const intValue = parseInt(block.value) || 0;
+                  characterManager.actions.setBlockValue(
+                    pageIndex,
+                    sectionIndex,
+                    blockIndex,
+                    (intValue - 1).toString()
+                  );
+                }}
+              >
+                <RemoveCircleOutlineOutlinedIcon />
+              </IconButton>
+            </Grid>
+            <Grid item className={css({ flex: "1 0 auto" })}>
+              <Box
+                className={css({
+                  color: headerBackgroundColors.primary,
+                  background: theme.palette.background.paper,
+                  border: `1px solid ${headerBackgroundColors.primary}`,
+                  borderRadius: "24px",
+                  fontSize: "1.5rem",
+                  lineHeight: Font.lineHeight(1.5),
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                })}
+              >
+                <Box p=".5rem" width="80%" textAlign="center">
+                  <ContentEditable
+                    data-cy={`character-dialog.${section.label}.${block.label}.value`}
+                    value={block.value}
+                    border
+                    onChange={(value, e) => {
+                      characterManager.actions.setBlockValue(
+                        pageIndex,
+                        sectionIndex,
+                        blockIndex,
+                        value
+                      );
+                    }}
+                  />
+                </Box>
               </Box>
+            </Grid>
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  const intValue = parseInt(block.value) || 0;
+                  characterManager.actions.setBlockValue(
+                    pageIndex,
+                    sectionIndex,
+                    blockIndex,
+                    (intValue + 1).toString()
+                  );
+                }}
+              >
+                <AddCircleOutlineOutlinedIcon />
+              </IconButton>
             </Grid>
           </Grid>
         </Box>
@@ -1319,12 +1316,11 @@ export const CharacterV3Dialog: React.FC<{
 CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
 export const AddSection: React.FC<{
-  onAddSection(section: SectionType): void;
+  onAddSection(): void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const blackButtonTheme = useButtonTheme(theme.palette.text.primary);
-  const [addSectionAnchorEl, setAddSectionAnchorEl] = React.useState<any>();
 
   return (
     <Box p="1rem" justifyContent="center" display="flex">
@@ -1334,23 +1330,50 @@ export const AddSection: React.FC<{
           variant="contained"
           endIcon={<AddIcon />}
           onClick={(e) => {
-            setAddSectionAnchorEl(e.currentTarget);
+            props.onAddSection();
           }}
         >
           {t("character-dialog.control.add-section")}
         </Button>
+      </ThemeProvider>
+    </Box>
+  );
+};
+AddSection.displayName = "AddSection";
+
+export const AddBlock: React.FC<{
+  onAddBlock(section: BlockType): void;
+}> = (props) => {
+  const theme = useTheme();
+  const { t } = useTranslate();
+  const blackButtonTheme = useButtonTheme(theme.palette.text.primary);
+  const [anchorEl, setAnchorEl] = React.useState<any>();
+
+  return (
+    <Box p="1rem" justifyContent="center" display="flex">
+      <ThemeProvider theme={blackButtonTheme}>
+        <Button
+          color="primary"
+          variant="contained"
+          endIcon={<AddIcon />}
+          onClick={(e) => {
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          {t("character-dialog.control.add-block")}
+        </Button>
         <Menu
           elevation={0}
-          anchorEl={addSectionAnchorEl}
-          open={!!addSectionAnchorEl}
+          anchorEl={anchorEl}
+          open={!!anchorEl}
           onClose={() => {
-            setAddSectionAnchorEl(undefined);
+            setAnchorEl(undefined);
           }}
         >
           <MenuItem
             onClick={() => {
-              props.onAddSection(SectionType.Text);
-              setAddSectionAnchorEl(undefined);
+              props.onAddBlock(BlockType.Text);
+              setAnchorEl(undefined);
             }}
           >
             <ListItemIcon>
@@ -1360,30 +1383,8 @@ export const AddSection: React.FC<{
           </MenuItem>
           <MenuItem
             onClick={() => {
-              props.onAddSection(SectionType.Checkboxes);
-              setAddSectionAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <CheckBoxIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary="Checkboxes Section" />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddSection(SectionType.Number);
-              setAddSectionAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <Filter1Icon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary="Number Section" />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddSection(SectionType.RichText);
-              setAddSectionAnchorEl(undefined);
+              props.onAddBlock(BlockType.RichText);
+              setAnchorEl(undefined);
             }}
           >
             <ListItemIcon>
@@ -1391,12 +1392,45 @@ export const AddSection: React.FC<{
             </ListItemIcon>
             <ListItemText primary="Rich Text" />
           </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddBlock(BlockType.Skill);
+              setAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <Filter1Icon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Skill" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddBlock(BlockType.PointCounter);
+              setAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <Filter1Icon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Point Counter" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddBlock(BlockType.SlotTracker);
+              setAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <CheckBoxIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Slot Tracker" />
+          </MenuItem>
         </Menu>
       </ThemeProvider>
     </Box>
   );
 };
-AddSection.displayName = "AddSection";
+AddBlock.displayName = "AddBlock";
 
 export const SheetHeader: React.FC<{
   label: string;
