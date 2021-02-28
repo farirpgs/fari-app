@@ -738,6 +738,7 @@ export const DocSideBar: React.FC<{
           );
           const isCategoryOpened = openList.includes(category);
 
+          const categoryName = category.replace("+", "");
           return (
             <React.Fragment key={category}>
               <ListItem
@@ -757,6 +758,7 @@ export const DocSideBar: React.FC<{
                 <Box width="100%">
                   <Typography
                     noWrap
+                    title={categoryName}
                     className={css({
                       color: isCategorySelected
                         ? theme.palette.primary.main
@@ -766,7 +768,7 @@ export const DocSideBar: React.FC<{
                         : theme.typography.fontWeightRegular,
                     })}
                   >
-                    {category.replace("+", "")}
+                    {categoryName}
                   </Typography>
                 </Box>
 
@@ -815,6 +817,7 @@ export const DocSideBar: React.FC<{
                             <Box width="100%">
                               <Typography
                                 noWrap
+                                title={index.label}
                                 className={css({
                                   color: isItemSelected
                                     ? theme.palette.primary.main
