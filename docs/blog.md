@@ -6,7 +6,7 @@
 
 # Fari v3.7.0
 
-<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/ff4fd6615325445608846a3bda394eb2.png" description="Fari Wiki, Success With Style Blog, Dice Menu, and more..."></page-meta>
+<page-meta author="RPDeshaies" date="2021-02-23" image="https://gyazo.com/ff4fd6615325445608846a3bda394eb2.png" description="Fari Wiki, Success With Style Blog, New Dice Options, and more..."></page-meta>
 
 ## New Features 🌟
 
@@ -45,7 +45,7 @@ Here what it looks like 👇
 
 ![Image Preview Modal](https://gyazo.com/71931e7030cfaf23ef11916fd72290d6.gif)
 
-### More Dice
+### New Dice Options
 
 I recently came across [The Witch is Dead](https://gshowitt.itch.io/the-witch-is-dead), a really cool one page RPG, and wanted to use Fari to play this game with some friends.
 

@@ -17,6 +17,8 @@ export const SeelieSquireRoute: React.FC<{
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
       imageUrl={Images.seelieSquire}
+      sideBar={{ "+Book of Creatures": ["seelie-squires-book-of-creatures"] }}
+      sideBarOptions={{ miscSectionTitle: "Creatures" }}
       loadFunction={async () => {
         return makeSeelieSquireMarkdown(theme);
       }}
@@ -26,10 +28,6 @@ export const SeelieSquireRoute: React.FC<{
         title: "Seelie Squire",
         avatarUrl: Images.seelieSquireAvatar,
         items: [
-          {
-            label: "Patreon",
-            url: "https://www.patreon.com/seeliesquire",
-          },
           {
             label: "Discord",
             url: "https://discord.com/invite/8u3VVZd",
@@ -72,13 +70,13 @@ function makeSeelieSquireMarkdown(theme: Theme): string {
 
 ${creatures.map((c) => {
   return `
-## ${c.title}
+# ${c.title}
 
 ${c.description}
 
 > ${renderImage(c)}
 > 
-> ### ${c.character.name} 
+> ## ${c.character.name} 
 >
 > <div class=${bigFateLabelClass}>Aspects</div>
 > 
@@ -105,7 +103,9 @@ ${c.description}
   return markdown;
 
   function renderImage(c: ICreature) {
-    return c.character.image ? `![](${c.character.image})` : "";
+    return c.character.image
+      ? `<img alt="${c.character.name}" src="${c.character.image}" style="max-width: 400px" />`
+      : "";
   }
 
   function renderStunts(c: ICreature) {
@@ -119,12 +119,14 @@ ${c.description}
   }
 
   function renderHealth(c: ICreature) {
-    return c.character.tracks.map(
-      (s) => `
+    return c.character.tracks
+      .map(
+        (s) => `
 > <div class=${smallFateLabelClass}>${s.name}</div>
 > ${s.values.map((sv) => `[${sv}]`).join(" • ")}
 > `
-    );
+      )
+      .join("<br/><br/>");
   }
 
   function renderSkills(c: ICreature) {
@@ -132,6 +134,6 @@ ${c.description}
   }
 
   function renderAspects(c: ICreature) {
-    return c.character.aspects.map((a) => `**${a}**`).join(` • `);
+    return c.character.aspects.map((a) => `<code>${a}</code>`).join(` • `);
   }
 }
