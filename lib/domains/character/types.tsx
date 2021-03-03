@@ -11,14 +11,17 @@ export enum Position {
   Right,
 }
 
+/**
+ * @deprecated Deprecated V1 Character
+ */
 export interface IV1Character {
   id: string;
   name: string;
-  aspects: ICharacterCustomField<string>;
-  skills: ICharacterCustomField<string>;
-  stunts: ICharacterCustomField<string>;
-  stressTracks: ICharacterCustomField<Array<boolean>>;
-  consequences: ICharacterCustomField<string>;
+  aspects: ICharacterV2CustomField<string>;
+  skills: ICharacterV2CustomField<string>;
+  stunts: ICharacterV2CustomField<string>;
+  stressTracks: ICharacterV2CustomField<Array<boolean>>;
+  consequences: ICharacterV2CustomField<string>;
   aspectsLabel: string | undefined;
   skillsLabel: string | undefined;
   stuntsLabel: string | undefined;
@@ -36,16 +39,19 @@ export interface IV1Character {
   lastUpdated: number;
 }
 
+/**
+ * @deprecated Deprecated V2 Character
+ */
 export interface IV2Character {
   id: string;
   name: string;
-  aspects: ICharacterCustomField<string>;
-  skills: ICharacterCustomField<string>;
-  stunts: ICharacterCustomField<string>;
-  stressTracks: ICharacterCustomField<
+  aspects: ICharacterV2CustomField<string>;
+  skills: ICharacterV2CustomField<string>;
+  stunts: ICharacterV2CustomField<string>;
+  stressTracks: ICharacterV2CustomField<
     Array<{ checked?: boolean; label: string }>
   >;
-  consequences: ICharacterCustomField<string>;
+  consequences: ICharacterV2CustomField<string>;
   aspectsLabel: string | undefined;
   skillsLabel: string | undefined;
   stuntsLabel: string | undefined;
@@ -63,27 +69,41 @@ export interface IV2Character {
   lastUpdated: number;
 }
 
-export type ICharacterCustomField<TValue> = Array<{
+/**
+ * @deprecated
+ */
+export type ICharacterV2CustomField<TValue> = Array<{
   name: string;
   value: TValue;
 }>;
 
+/**
+ * V3
+ */
 export type ITextBlock = {
   type: BlockType.Text;
+  meta: {
+    checked: boolean | undefined;
+  };
   value: string;
 };
 export type IRichTextBlock = {
   type: BlockType.RichText;
+  meta: {};
   value: string;
 };
 
-export type ISkillTextBlock = {
+export type ISkillBlock = {
   type: BlockType.Skill;
+  meta: {
+    checked: boolean | undefined;
+  };
   value: string;
 };
 
 export type ISlotTrackerBlock = {
   type: BlockType.SlotTracker;
+  meta: {};
   value: Array<{
     label: string;
     checked?: boolean;
@@ -92,6 +112,10 @@ export type ISlotTrackerBlock = {
 
 export type IPointCounterBlock = {
   type: BlockType.PointCounter;
+  meta: {
+    max: string | undefined;
+    isMainPointCounter: boolean;
+  };
   value: string;
 };
 
@@ -102,14 +126,14 @@ export type IBlock = {
 } & (
   | ITextBlock
   | IRichTextBlock
-  | ISkillTextBlock
+  | ISkillBlock
   | ISlotTrackerBlock
   | IPointCounterBlock
 );
 
 export type ISection = {
-  label: string;
   id: string;
+  label: string;
   position: Position;
   blocks: Array<IBlock>;
   visibleOnCard?: boolean;
@@ -117,6 +141,7 @@ export type ISection = {
 
 export interface IPage {
   id: string;
+  label: string;
   sections: Array<ISection>;
 }
 
@@ -124,7 +149,6 @@ export interface ICharacter {
   id: string;
   name: string;
   group: string | undefined;
-  refresh: number;
 
   pages: Array<IPage>;
 
@@ -132,6 +156,5 @@ export interface ICharacter {
   version: number;
   lastUpdated: number;
 
-  fatePoints: number | undefined;
-  playedDuringTurn: boolean | undefined;
+  playedDuringTurn?: boolean;
 }

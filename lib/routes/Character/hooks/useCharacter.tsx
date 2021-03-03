@@ -6,7 +6,9 @@ import { CharacterFactory } from "../../../domains/character/CharacterFactory";
 import { CharacterType } from "../../../domains/character/CharacterType";
 import {
   BlockType,
+  IBlock,
   ICharacter,
+  IPage,
   ISlotTrackerBlock,
   Position,
 } from "../../../domains/character/types";
@@ -87,10 +89,13 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages.splice(pageIndex + 1, 0, {
+        const newPage: IPage = {
           id: Id.generate(),
           sections: [],
-        });
+          label: "Page",
+        };
+        draft.pages.push(newPage);
+        // draft.pages.splice(pageIndex + 1, 0, );
       })
     );
   }
@@ -106,13 +111,29 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addSection(pageIndex: number, position: Position) {
+  function renamePage(pageIndex: number, value: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections.push({
+        draft.pages[pageIndex].label = value;
+      })
+    );
+  }
+
+  function addSection(
+    pageIndex: number,
+    sectionIndex: number,
+    position: Position
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.pages[pageIndex].sections.splice(sectionIndex + 1, 0, {
           id: Id.generate(),
           label: "Section",
           position: position,
@@ -150,6 +171,17 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function movePage(pageIndex: number, direction: "up" | "down") {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages = moveValueInList(draft.pages, pageIndex, direction);
+      })
+    );
+  }
+
   function repositionSection(
     pageIndex: number,
     sectionIndex: number,
@@ -161,6 +193,24 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         draft.pages[pageIndex].sections[sectionIndex].position = position;
+      })
+    );
+  }
+  function moveSectionInPage(
+    pageIndex: number,
+    sectionIndex: number,
+    newPageIndex: number
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const [section] = draft.pages[pageIndex].sections.splice(
+          sectionIndex,
+          1
+        );
+        draft.pages[newPageIndex].sections.push(section);
       })
     );
   }
@@ -207,6 +257,22 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         draft.pages[pageIndex].sections[sectionIndex].blocks.push(
           CharacterFactory.makeBlock(type)
+        );
+      })
+    );
+  }
+  function duplicateBlock(
+    pageIndex: number,
+    sectionIndex: number,
+    block: IBlock
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[pageIndex].sections[sectionIndex].blocks.push(
+          CharacterFactory.duplicateBlock(block)
         );
       })
     );
@@ -342,6 +408,25 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function setBlockMeta(
+    pageIndex: number,
+    sectionIndex: number,
+    fieldIndex: number,
+    meta: any
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.pages[pageIndex].sections[sectionIndex].blocks[
+          fieldIndex
+        ].meta = meta;
+      })
+    );
+  }
+
   function removeBlock(
     pageIndex: number,
     sectionIndex: number,
@@ -457,17 +542,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function updateRefresh(newRefresh: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.refresh = newRefresh;
-      })
-    );
-  }
-
   function sanitizeCharacter() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
@@ -486,26 +560,30 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       setName,
       setGroup,
       addPage,
+      renamePage,
       removePage,
       addSection,
       renameSection,
       toggleSectionVisibleOnCard,
       moveSection,
       repositionSection,
+      movePage: movePage,
+      moveSectionInPage: moveSectionInPage,
       removeSection,
       addBlock: addBlock,
+      duplicateBlock: duplicateBlock,
       renameBlock: renameBlock,
       moveBlock: moveBlock,
       moveDnDSection,
       moveDnDBlock: moveDnDBlock,
       setBlockValue: setBlockValue,
+      setBlockMeta: setBlockMeta,
       setBlockLabel: setBlockLabel,
       removeBlock: removeBlock,
       addCheckboxFieldValue,
       removeCheckboxFieldValue,
       toggleCheckboxFieldValue,
       renameCheckboxFieldValue,
-      updateRefresh,
       sanitizeCharacter,
     },
   };

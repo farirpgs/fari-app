@@ -5,31 +5,6 @@ import { ICharacter } from "../../../../domains/character/types";
 import { useCharacter } from "../useCharacter";
 
 describe("useCharacter", () => {
-  describe("refresh", () => {
-    // GIVEN
-    const character = {
-      ...CharacterFactory.make(CharacterType.CoreCondensed),
-      id: "1",
-      lastUpdated: 1,
-    };
-    // WHEN
-    const { result, rerender } = renderHook(
-      (props) => {
-        return useCharacter(character);
-      },
-      {
-        initialProps: { character: character },
-      }
-    );
-    // THEN
-    expect(result.current.state.character).toEqual(character);
-    // WHEN the refresh i updated
-    act(() => {
-      result.current.actions.updateRefresh(4);
-    });
-    expect(result.current.state.character?.refresh).toEqual(4);
-  });
-
   describe("sanitizeCharacter", () => {
     // GIVEN
     const character = {
@@ -48,7 +23,7 @@ describe("useCharacter", () => {
     );
     // THEN
     expect(result.current.state.character).toEqual(character);
-    // WHEN the refresh i updated
+    // WHEN the name is updated
     act(() => {
       result.current.actions.setName("Luke&nbsp;Skywalker&nbsp;&nbsp;");
     });
@@ -228,7 +203,6 @@ describe("useCharacter", () => {
       // id: "1", // kept ID
       // name: "Luke Skywalker", // kept name
       expect(result.current.state.character).toEqual({
-        fatePoints: undefined,
         group: undefined,
         id: "1",
         lastUpdated: expect.anything(),
@@ -403,7 +377,6 @@ describe("useCharacter", () => {
           },
         ],
         playedDuringTurn: undefined,
-        refresh: 3,
         version: CharacterFactory.latestVersion,
       });
     });

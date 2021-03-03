@@ -12,7 +12,7 @@ const ContentEditableDelay = 125;
 export const ContentEditable: React.FC<
   {
     value: string;
-    onClick?: () => void;
+    clickable?: boolean;
     onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
     readonly?: boolean;
     placeholder?: string;
@@ -30,7 +30,7 @@ export const ContentEditable: React.FC<
   const [updating, setUpdating] = useState(false);
   const latestProps = useRef(props);
 
-  const hasCursorPointer = props.readonly && props.onClick;
+  const hasCursorPointer = props.readonly && props.clickable;
 
   useEffect(() => {
     latestProps.current = props;
@@ -119,11 +119,6 @@ export const ContentEditable: React.FC<
       })}
       id={props.id}
       ref={$ref}
-      onClick={() => {
-        if (props.readonly) {
-          props.onClick?.();
-        }
-      }}
       onInput={(e) => {
         onChange(e);
       }}

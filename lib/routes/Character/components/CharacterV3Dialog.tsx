@@ -1,7 +1,6 @@
-import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
+import { css, cx } from "@emotion/css";
+import Box, { BoxProps } from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Checkbox from "@material-ui/core/Checkbox";
 import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
@@ -9,9 +8,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
@@ -20,6 +19,8 @@ import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -27,14 +28,17 @@ import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
+import FlipToBackIcon from "@material-ui/icons/FlipToBack";
+import FormatBoldIcon from "@material-ui/icons/FormatBold";
 import HelpIcon from "@material-ui/icons/Help";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -46,9 +50,14 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import TabContext from "@material-ui/lab/TabContext";
+import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
-import { ContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  sanitizeContentEditable,
+} from "../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { SlideUpTransition } from "../../../components/SlideUpTransition/SlideUpTransition";
@@ -63,7 +72,7 @@ import {
   IPointCounterBlock,
   IRichTextBlock,
   ISection,
-  ISkillTextBlock,
+  ISkillBlock,
   ISlotTrackerBlock,
   ITextBlock,
   Position,
@@ -126,9 +135,9 @@ export const CharacterV3Dialog: React.FC<{
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const blackButtonTheme = useButtonTheme(theme.palette.text.primary);
 
-  const errorTheme = useButtonTheme(theme.palette.error.main);
+  const [tab, setTab] = useState<string>("0");
+  const currentPageIndex = parseInt(tab);
 
   function onSave() {
     const updatedCharacter = characterManager.actions.sanitizeCharacter();
@@ -300,109 +309,138 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderPages(pages: Array<IPage> | undefined) {
+    if (!pages) {
+      return null;
+    }
     return (
       <Box>
-        <Box>
+        <Box mb="1rem">
+          <Grid container alignItems="center" wrap="nowrap">
+            <Grid item xs>
+              <Tabs
+                value={tab}
+                variant="scrollable"
+                scrollButtons="auto"
+                classes={{
+                  root: css({
+                    borderBottom: `1px solid ${theme.palette.divider}`,
+                  }),
+                  indicator: css({
+                    background: theme.palette.primary.main,
+                  }),
+                }}
+                onChange={(e, newValue) => {
+                  setTab(newValue);
+                }}
+              >
+                {pages?.map((page, pageIndex) => {
+                  return (
+                    <Tab
+                      disableRipple
+                      key={page.id}
+                      value={pageIndex.toString()}
+                      label={
+                        <ContentEditable
+                          clickable
+                          value={page.label}
+                          readonly={!advanced}
+                          border={advanced}
+                          onChange={(newValue) => {
+                            characterManager.actions.renamePage(
+                              pageIndex,
+                              newValue
+                            );
+                          }}
+                        />
+                      }
+                    />
+                  );
+                })}
+              </Tabs>
+            </Grid>
+            {advanced && (
+              <Grid item>
+                <IconButton
+                  onClick={() => {
+                    characterManager.actions.addPage(currentPageIndex);
+                  }}
+                >
+                  <AddIcon />
+                </IconButton>
+              </Grid>
+            )}
+          </Grid>
+        </Box>
+        <Collapse in={advanced}>
+          <Box mb=".5rem">
+            <Grid container justify="space-between" alignItems="center">
+              <Grid item>
+                <IconButton
+                  disabled={currentPageIndex === 0}
+                  onClick={() => {
+                    characterManager.actions.movePage(currentPageIndex, "up");
+                  }}
+                >
+                  <ArrowForwardIcon
+                    className={css({
+                      transform: "rotate(180deg)",
+                    })}
+                  />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  disabled={tab === "0"}
+                  onClick={() => {
+                    characterManager.actions.removePage(currentPageIndex);
+                    setTab("0");
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  disabled={currentPageIndex === pages?.length - 1}
+                  onClick={() => {
+                    characterManager.actions.movePage(currentPageIndex, "down");
+                  }}
+                >
+                  <ArrowForwardIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Box>
+        </Collapse>
+
+        <TabContext value={tab}>
           {pages?.map((page, pageIndex) => {
             const sectionStyle = css({
               borderTop: `2px solid ${headerBackgroundColors.primary}`,
               borderLeft: `2px solid ${headerBackgroundColors.primary}`,
               borderRight: `2px solid ${headerBackgroundColors.primary}`,
-              borderBottom: advanced
-                ? "none"
-                : `2px solid ${headerBackgroundColors.primary}`,
+              borderBottom: `2px solid ${headerBackgroundColors.primary}`,
             });
             return (
-              <Box key={page.id} position="relative" mb="3rem">
-                <Grid container>
-                  <Grid item xs={12} md={6} className={sectionStyle}>
-                    {renderSections(pageIndex, page.sections, Position.Left)}
-                  </Grid>
-                  <Grid item xs={12} md={6} className={sectionStyle}>
-                    {renderSections(pageIndex, page.sections, Position.Right)}
-                  </Grid>
-                </Grid>
-                <Collapse in={advanced}>
-                  <Box>
-                    <Grid container>
-                      <Grid
-                        container
-                        item
-                        xs={12}
-                        md={6}
-                        justify="center"
-                        className={css({
-                          borderBottom: `2px solid ${headerBackgroundColors.primary}`,
-                          borderLeft: `2px solid ${headerBackgroundColors.primary}`,
-                          borderRight: `2px solid ${headerBackgroundColors.primary}`,
-                        })}
-                      >
-                        <AddSection
-                          onAddSection={() => {
-                            characterManager.actions.addSection(
-                              pageIndex,
-                              Position.Left
-                            );
-                          }}
-                        />
-                      </Grid>
-                      <Grid
-                        container
-                        item
-                        xs={12}
-                        md={6}
-                        justify="center"
-                        className={css({
-                          borderBottom: `2px solid ${headerBackgroundColors.primary}`,
-                          borderLeft: `2px solid ${headerBackgroundColors.primary}`,
-                          borderRight: `2px solid ${headerBackgroundColors.primary}`,
-                        })}
-                      >
-                        <AddSection
-                          onAddSection={() => {
-                            characterManager.actions.addSection(
-                              pageIndex,
-                              Position.Right
-                            );
-                          }}
-                        />
-                      </Grid>
+              <TabPanel
+                key={page.id}
+                value={pageIndex.toString()}
+                className={css({ padding: "0" })}
+              >
+                <Box position="relative" mb="3rem">
+                  <Grid container>
+                    <Grid item xs={12} md={6} className={sectionStyle}>
+                      {renderSections(pageIndex, page.sections, Position.Left)}
                     </Grid>
-                    <Box
-                      py="1rem"
-                      className={css({
-                        borderBottom: `2px solid ${headerBackgroundColors.primary}`,
-                        borderLeft: `2px solid ${headerBackgroundColors.primary}`,
-                        borderRight: `2px solid ${headerBackgroundColors.primary}`,
-                      })}
-                    >
-                      <Grid container>
-                        <Grid item container xs={12} justify="center">
-                          <ThemeProvider theme={errorTheme}>
-                            <Button
-                              variant="outlined"
-                              color="primary"
-                              endIcon={<DeleteIcon />}
-                              onClick={() => {
-                                characterManager.actions.removePage(pageIndex);
-                              }}
-                            >
-                              {t("character-dialog.control.remove-page")}
-                            </Button>
-                          </ThemeProvider>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Box>
-                </Collapse>
-                {renderAddPage(pageIndex)}
-              </Box>
+                    <Grid item xs={12} md={6} className={sectionStyle}>
+                      {renderSections(pageIndex, page.sections, Position.Right)}
+                    </Grid>
+                  </Grid>
+                </Box>
+              </TabPanel>
             );
           })}
-        </Box>
-
-        {characterManager.state.character?.pages.length === 0 &&
-          renderAddPage(0)}
+        </TabContext>
 
         <Grid container justify="center">
           <Grid item>
@@ -418,6 +456,7 @@ export const CharacterV3Dialog: React.FC<{
                 <CharacterCard
                   isMe={false}
                   playerName="..."
+                  width="350px"
                   readonly={false}
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
@@ -431,48 +470,15 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderAddPage(pageIndex: number) {
-    return (
-      <Collapse in={advanced}>
-        <Box pt="2rem">
-          <Grid
-            container
-            justify="space-around"
-            alignItems="center"
-            spacing={2}
-            wrap="nowrap"
-          >
-            <Grid item xs>
-              <Divider orientation="horizontal" />
-            </Grid>
-            <Grid item>
-              <ThemeProvider theme={blackButtonTheme}>
-                <Button
-                  color="primary"
-                  variant="outlined"
-                  endIcon={<AddIcon />}
-                  onClick={(e) => {
-                    characterManager.actions.addPage(pageIndex);
-                  }}
-                >
-                  {t("character-dialog.control.add-page")}
-                </Button>
-              </ThemeProvider>
-            </Grid>
-            <Grid item xs>
-              <Divider orientation="horizontal" />
-            </Grid>
-          </Grid>
-        </Box>
-      </Collapse>
-    );
-  }
-
   function renderSections(
     pageIndex: number,
     sections: Array<ISection> | undefined,
     position: Position
   ) {
+    const numberOfSections = sections?.filter((s) => s.position === position)
+      .length;
+    const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
+
     return (
       <>
         {sections?.map((section, sectionIndex) => {
@@ -486,9 +492,26 @@ export const CharacterV3Dialog: React.FC<{
             <Box key={section.id}>
               <SheetHeader
                 label={section.label}
+                currentPageIndex={currentPageIndex}
+                pages={characterManager.state.character?.pages}
+                position={section.position}
                 helpLink={helpLink}
                 advanced={advanced}
                 visibleOnCard={section.visibleOnCard}
+                onReposition={(newPosition) => {
+                  characterManager.actions.repositionSection(
+                    pageIndex,
+                    sectionIndex,
+                    newPosition
+                  );
+                }}
+                onMoveToPage={(newPageIndex) => {
+                  characterManager.actions.moveSectionInPage(
+                    pageIndex,
+                    sectionIndex,
+                    newPageIndex
+                  );
+                }}
                 onToggleVisibleOnCard={() => {
                   characterManager.actions.toggleSectionVisibleOnCard(
                     pageIndex,
@@ -526,26 +549,46 @@ export const CharacterV3Dialog: React.FC<{
               {renderSectionBlocks(pageIndex, sectionIndex, section)}
 
               <Collapse in={advanced}>
-                <Box
-                  p=".5rem"
-                  mb=".5rem"
-                  justifyContent="center"
-                  display="flex"
-                >
-                  <AddBlock
-                    onAddBlock={(blockType) => {
-                      characterManager.actions.addBlock(
-                        pageIndex,
-                        sectionIndex,
-                        blockType
-                      );
-                    }}
-                  />
+                <Box p=".5rem" mb=".5rem">
+                  <Grid container justify="center" alignItems="center">
+                    <Grid item>
+                      <AddBlock
+                        onAddBlock={(blockType) => {
+                          characterManager.actions.addBlock(
+                            pageIndex,
+                            sectionIndex,
+                            blockType
+                          );
+                        }}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <AddSection
+                        onAddSection={() => {
+                          characterManager.actions.addSection(
+                            pageIndex,
+                            sectionIndex,
+                            position
+                          );
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
                 </Box>
               </Collapse>
             </Box>
           );
         })}
+
+        {shouldRenderAddSectionButton && (
+          <Box>
+            <AddSection
+              onAddSection={() => {
+                characterManager.actions.addSection(pageIndex, 0, position);
+              }}
+            />
+          </Box>
+        )}
       </>
     );
   }
@@ -592,7 +635,7 @@ export const CharacterV3Dialog: React.FC<{
   function renderName() {
     return (
       <>
-        <Box>
+        <Box mb="1rem">
           <Grid container>
             <Grid
               item
@@ -757,11 +800,204 @@ export const CharacterV3Dialog: React.FC<{
                       block,
                       blockIndex
                     )}
+                  {advanced && (
+                    <Grid container justify="flex-end" spacing={1}>
+                      {block.type === BlockType.PointCounter &&
+                        renderPointCounterAdvancedMenu(
+                          pageIndex,
+                          sectionIndex,
+                          section,
+                          block,
+                          blockIndex
+                        )}
+                      {block.type === BlockType.Text &&
+                        renderTextAdvancedMenu(
+                          pageIndex,
+                          sectionIndex,
+                          section,
+                          block,
+                          blockIndex
+                        )}
+                      {block.type === BlockType.Skill &&
+                        renderSkillAdvancedMenu(
+                          pageIndex,
+                          sectionIndex,
+                          section,
+                          block,
+                          blockIndex
+                        )}
+                      <Grid item>
+                        <Link
+                          component="button"
+                          variant="caption"
+                          className={css({
+                            color: theme.palette.primary.main,
+                          })}
+                          onClick={() => {
+                            characterManager.actions.duplicateBlock(
+                              pageIndex,
+                              sectionIndex,
+                              block
+                            );
+                          }}
+                        >
+                          {"Duplicate"}
+                        </Link>
+                      </Grid>
+                      <Grid item>
+                        <Link
+                          component="button"
+                          variant="caption"
+                          className={css({
+                            color: theme.palette.primary.main,
+                          })}
+                          onClick={() => {
+                            characterManager.actions.removeBlock(
+                              pageIndex,
+                              sectionIndex,
+                              blockIndex
+                            );
+                          }}
+                        >
+                          {t("character-dialog.control.remove-field")}
+                        </Link>
+                      </Grid>
+                    </Grid>
+                  )}
                 </Box>
               </BetterDnd>
             );
           })}
         </Box>
+      </>
+    );
+  }
+
+  function renderPointCounterAdvancedMenu(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & IPointCounterBlock,
+    blockIndex: number
+  ) {
+    return (
+      <>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                {
+                  ...block.meta,
+                  isMainPointCounter: !block.meta?.isMainPointCounter,
+                } as IPointCounterBlock["meta"]
+              );
+            }}
+          >
+            {block.meta?.isMainPointCounter ? "Unstar" : "Star"}
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                {
+                  ...block.meta,
+                  max: block.meta?.max === undefined ? "1" : undefined,
+                } as IPointCounterBlock["meta"]
+              );
+            }}
+          >
+            {block.meta?.max === undefined ? "With Max" : "Without Max"}
+          </Link>
+        </Grid>
+      </>
+    );
+  }
+
+  function renderTextAdvancedMenu(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & ITextBlock,
+    blockIndex: number
+  ) {
+    return (
+      <>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                {
+                  ...block.meta,
+                  checked:
+                    block.meta?.checked === undefined ? false : undefined,
+                } as ITextBlock["meta"]
+              );
+            }}
+          >
+            {block.meta?.checked === undefined ? "Add Toggle" : "Remove Toggle"}
+          </Link>
+        </Grid>
+      </>
+    );
+  }
+
+  function renderSkillAdvancedMenu(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & ISkillBlock,
+    blockIndex: number
+  ) {
+    return (
+      <>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                {
+                  ...block.meta,
+                  checked:
+                    block.meta?.checked === undefined ? false : undefined,
+                } as ISkillBlock["meta"]
+              );
+            }}
+          >
+            {block.meta?.checked === undefined ? "Add Toggle" : "Remove Toggle"}
+          </Link>
+        </Grid>
       </>
     );
   }
@@ -773,52 +1009,46 @@ export const CharacterV3Dialog: React.FC<{
     block: IBlock & ITextBlock,
     blockIndex: number
   ) {
+    const isLabelVisible = !!sanitizeContentEditable(block.label) || advanced;
+    const isSlotTrackerVisible = block.meta?.checked !== undefined;
+
     return (
       <>
-        <Box pb=".5rem">
-          <Grid container spacing={1} justify="space-between" wrap="nowrap">
-            <Grid item xs>
-              <FateLabel display="inline">
-                <ContentEditable
-                  readonly={!advanced}
-                  border={advanced}
-                  data-cy={`character-dialog.${section.label}.${block.label}.label`}
-                  value={block.label}
-                  onChange={(value) => {
-                    characterManager.actions.renameBlock(
-                      pageIndex,
-                      sectionIndex,
-                      blockIndex,
-                      value
-                    );
-                  }}
-                />
-              </FateLabel>
-            </Grid>
-            {advanced && (
-              <>
+        {isLabelVisible && (
+          <Box>
+            <Grid container spacing={1} justify="space-between" wrap="nowrap">
+              <Grid item xs>
+                <FateLabel display="inline">
+                  <ContentEditable
+                    readonly={!advanced}
+                    border={advanced}
+                    data-cy={`character-dialog.${section.label}.${block.label}.label`}
+                    value={block.label}
+                    onChange={(value) => {
+                      characterManager.actions.renameBlock(
+                        pageIndex,
+                        sectionIndex,
+                        blockIndex,
+                        value
+                      );
+                    }}
+                  />
+                </FateLabel>
+              </Grid>
+              {isSlotTrackerVisible && (
                 <Grid item>
-                  <Tooltip title={t("character-dialog.control.remove-field")}>
-                    <IconButton
-                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-                      size="small"
-                      className={smallIconButtonStyle}
-                      onClick={() => {
-                        characterManager.actions.removeBlock(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {renderBlockToggleMeta(
+                    pageIndex,
+                    sectionIndex,
+                    section,
+                    block,
+                    blockIndex
+                  )}
                 </Grid>
-              </>
-            )}
-          </Grid>
-        </Box>
+              )}
+            </Grid>
+          </Box>
+        )}
         <Box>
           <Typography>
             <ContentEditable
@@ -841,6 +1071,42 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
+  function renderBlockToggleMeta(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock & (ITextBlock | ISkillBlock),
+    blockIndex: number
+  ) {
+    return (
+      <Checkbox
+        data-cy={`character-dialog.${section.label}.${block.label}.box.${blockIndex}.checked`}
+        color="primary"
+        size="small"
+        icon={<RadioButtonUncheckedIcon />}
+        checkedIcon={<CheckCircleIcon />}
+        checked={block.meta?.checked}
+        className={css({
+          padding: "0",
+        })}
+        onChange={(event) => {
+          if (props.readonly) {
+            return;
+          }
+          characterManager.actions.setBlockMeta(
+            pageIndex,
+            sectionIndex,
+            blockIndex,
+            {
+              ...block.meta,
+              checked: !block.meta?.checked,
+            } as ITextBlock["meta"]
+          );
+        }}
+      />
+    );
+  }
+
   function renderBlockRichText(
     pageIndex: number,
     sectionIndex: number,
@@ -850,7 +1116,7 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     return (
       <>
-        <Box pb=".5rem">
+        <Box>
           <Grid container justify="space-between" wrap="nowrap" spacing={1}>
             <Grid item className={css({ flex: "1 1 auto" })}>
               <FateLabel display="inline">
@@ -870,27 +1136,6 @@ export const CharacterV3Dialog: React.FC<{
                 />
               </FateLabel>
             </Grid>
-            {advanced && (
-              <>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.control.remove-field")}>
-                    <IconButton
-                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-                      size="small"
-                      onClick={() => {
-                        characterManager.actions.removeBlock(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              </>
-            )}
           </Grid>
           <Box py=".5rem">
             <RichTextEditor
@@ -914,29 +1159,20 @@ export const CharacterV3Dialog: React.FC<{
     pageIndex: number,
     sectionIndex: number,
     section: ISection,
-    block: IBlock & ISkillTextBlock,
+    block: IBlock & ISkillBlock,
     blockIndex: number
   ) {
+    const isSlotTrackerVisible = block.meta?.checked !== undefined;
     const skillDescription =
       FateSkillsDescriptions[block.label.toLowerCase()] ?? "";
+
     const skillLabel = (
-      <FateLabel
-        display="inline"
-        className={css({
-          borderBottom: !advanced
-            ? `1px solid ${theme.palette.text.primary}`
-            : undefined,
-        })}
-      >
+      <FateLabel className={css({ display: "inline-block" })}>
         <ContentEditable
           data-cy={`character-dialog.${section.label}.${block.label}.label`}
           readonly={!advanced}
           border={advanced}
           value={block.label}
-          onClick={() => {
-            const bonus = parseInt(block.value) || 0;
-            props.onRoll?.({ bonus, bonusLabel: block.label });
-          }}
           onChange={(value) => {
             characterManager.actions.setBlockLabel(
               pageIndex,
@@ -951,14 +1187,20 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <>
-        <Box pb=".5rem">
-          <Grid container spacing={1} alignItems="flex-end" wrap="nowrap">
+        <Box>
+          <Grid container spacing={1} alignItems="center" wrap="nowrap">
             <Grid item xs={2}>
-              <Typography align="center">
+              <CharacterCircleBox
+                fontSize="1.2rem"
+                onClick={() => {
+                  const bonus = parseInt(block.value) || 0;
+                  props.onRoll?.({ bonus, bonusLabel: block.label });
+                }}
+              >
                 <ContentEditable
                   data-cy={`character-dialog.${section.label}.${block.label}.value`}
-                  border
-                  readonly={props.readonly}
+                  border={advanced}
+                  readonly={!advanced}
                   value={block.value}
                   onChange={(value) => {
                     characterManager.actions.setBlockValue(
@@ -969,14 +1211,12 @@ export const CharacterV3Dialog: React.FC<{
                     );
                   }}
                 />
-              </Typography>
+              </CharacterCircleBox>
             </Grid>
             <Grid item className={css({ flex: "1 0 auto" })}>
-              {advanced ? (
-                skillLabel
-              ) : (
+              {skillLabel}
+              {!advanced && (
                 <>
-                  <ButtonBase>{skillLabel}</ButtonBase>
                   {skillDescription && (
                     <>
                       <Tooltip
@@ -1015,27 +1255,17 @@ export const CharacterV3Dialog: React.FC<{
                 </>
               )}
             </Grid>
-            {advanced && (
-              <>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.control.remove-field")}>
-                    <IconButton
-                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-                      size="small"
-                      className={smallIconButtonStyle}
-                      onClick={() => {
-                        characterManager.actions.removeBlock(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              </>
+
+            {isSlotTrackerVisible && (
+              <Grid item>
+                {renderBlockToggleMeta(
+                  pageIndex,
+                  sectionIndex,
+                  section,
+                  block,
+                  blockIndex
+                )}
+              </Grid>
             )}
           </Grid>
         </Box>
@@ -1052,7 +1282,7 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     return (
       <>
-        <Box pb=".5rem">
+        <Box>
           <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
             <Grid item className={css({ flex: "1 1 auto" })}>
               <FateLabel
@@ -1111,29 +1341,12 @@ export const CharacterV3Dialog: React.FC<{
                     </IconButton>
                   </Tooltip>
                 </Grid>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.control.remove-field")}>
-                    <IconButton
-                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-                      size="small"
-                      onClick={() => {
-                        characterManager.actions.removeBlock(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
               </>
             )}
           </Grid>
 
-          <Grid container justify="center" spacing={2}>
-            {block.value.map((stressBox, boxIndex) => {
+          <Grid container justify="center" spacing={1}>
+            {block.value.map((box, boxIndex) => {
               return (
                 <Grid item key={boxIndex}>
                   <Box
@@ -1145,10 +1358,9 @@ export const CharacterV3Dialog: React.FC<{
                     <Checkbox
                       data-cy={`character-dialog.${section.label}.${block.label}.box.${boxIndex}.value`}
                       color="primary"
-                      size="small"
                       icon={<RadioButtonUncheckedIcon />}
                       checkedIcon={<CheckCircleIcon />}
-                      checked={stressBox.checked}
+                      checked={box.checked}
                       onChange={(event) => {
                         if (props.readonly) {
                           return;
@@ -1168,7 +1380,7 @@ export const CharacterV3Dialog: React.FC<{
                         data-cy={`character-dialog.${section.label}.${block.label}.box.${boxIndex}.label`}
                         readonly={!advanced}
                         border={advanced}
-                        value={stressBox.label}
+                        value={box.label}
                         onChange={(value) => {
                           characterManager.actions.renameCheckboxFieldValue(
                             pageIndex,
@@ -1199,12 +1411,19 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     return (
       <>
-        <Box pb=".5rem">
+        <Box>
           <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
             <Grid item className={css({ flex: "1 1 auto" })}>
               <FateLabel
                 display="inline"
-                align={advanced ? "inherit" : "center"}
+                className={css({
+                  width: "100%",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
+                  paddingBottom: ".5rem",
+                  display: "inline-block",
+                })}
+                align={"center"}
               >
                 <ContentEditable
                   data-cy={`character-dialog.${section.label}.${block.label}.label`}
@@ -1222,30 +1441,15 @@ export const CharacterV3Dialog: React.FC<{
                 />
               </FateLabel>
             </Grid>
-            {advanced && (
-              <>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.control.remove-field")}>
-                    <IconButton
-                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-                      size="small"
-                      onClick={() => {
-                        characterManager.actions.removeBlock(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              </>
-            )}
           </Grid>
 
-          <Grid container justify="center" spacing={2} wrap="nowrap">
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            spacing={2}
+            wrap="nowrap"
+          >
             <Grid item>
               <IconButton
                 onClick={() => {
@@ -1261,37 +1465,58 @@ export const CharacterV3Dialog: React.FC<{
                 <RemoveCircleOutlineOutlinedIcon />
               </IconButton>
             </Grid>
-            <Grid item className={css({ flex: "1 0 auto" })}>
-              <Box
-                className={css({
-                  color: headerBackgroundColors.primary,
-                  background: theme.palette.background.paper,
-                  border: `1px solid ${headerBackgroundColors.primary}`,
-                  borderRadius: "24px",
-                  fontSize: "1.5rem",
-                  lineHeight: Font.lineHeight(1.5),
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                })}
-              >
-                <Box p=".5rem" width="80%" textAlign="center">
-                  <ContentEditable
-                    data-cy={`character-dialog.${section.label}.${block.label}.value`}
-                    value={block.value}
-                    border
-                    onChange={(value, e) => {
-                      characterManager.actions.setBlockValue(
-                        pageIndex,
-                        sectionIndex,
-                        blockIndex,
-                        value
-                      );
-                    }}
-                  />
-                </Box>
-              </Box>
+            <Grid item>
+              <CharacterCircleBox fontSize="1.2rem" minWidth="4rem">
+                <ContentEditable
+                  data-cy={`character-dialog.${section.label}.${block.label}.value`}
+                  value={block.value}
+                  border
+                  onChange={(current, e) => {
+                    characterManager.actions.setBlockValue(
+                      pageIndex,
+                      sectionIndex,
+                      blockIndex,
+                      current
+                    );
+                  }}
+                />
+              </CharacterCircleBox>
             </Grid>
+            {block.meta?.max !== undefined && (
+              <>
+                <Grid item>
+                  <Typography
+                    className={css({
+                      fontSize: "2rem",
+                      color: "#bdbdbd",
+                      lineHeight: Font.lineHeight(2),
+                    })}
+                  >
+                    {"/"}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <CharacterCircleBox fontSize="1.2rem" minWidth="4rem">
+                    <ContentEditable
+                      data-cy={`character-dialog.${section.label}.${block.label}.value`}
+                      value={block.meta?.max ?? ""}
+                      border
+                      onChange={(max, e) => {
+                        characterManager.actions.setBlockMeta(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex,
+                          {
+                            ...block.meta,
+                            max: max,
+                          } as IPointCounterBlock["meta"]
+                        );
+                      }}
+                    />
+                  </CharacterCircleBox>
+                </Grid>
+              </>
+            )}
             <Grid item>
               <IconButton
                 onClick={() => {
@@ -1327,8 +1552,7 @@ export const AddSection: React.FC<{
       <ThemeProvider theme={blackButtonTheme}>
         <Button
           color="primary"
-          variant="contained"
-          endIcon={<AddIcon />}
+          variant="outlined"
           onClick={(e) => {
             props.onAddSection();
           }}
@@ -1354,8 +1578,7 @@ export const AddBlock: React.FC<{
       <ThemeProvider theme={blackButtonTheme}>
         <Button
           color="primary"
-          variant="contained"
-          endIcon={<AddIcon />}
+          variant="outlined"
           onClick={(e) => {
             setAnchorEl(e.currentTarget);
           }}
@@ -1388,7 +1611,7 @@ export const AddBlock: React.FC<{
             }}
           >
             <ListItemIcon>
-              <Filter1Icon fontSize="small" />
+              <FormatBoldIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Rich Text" />
           </MenuItem>
@@ -1410,7 +1633,7 @@ export const AddBlock: React.FC<{
             }}
           >
             <ListItemIcon>
-              <Filter1Icon fontSize="small" />
+              <ExposureIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Point Counter" />
           </MenuItem>
@@ -1421,7 +1644,7 @@ export const AddBlock: React.FC<{
             }}
           >
             <ListItemIcon>
-              <CheckBoxIcon fontSize="small" />
+              <CheckCircleIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Slot Tracker" />
           </MenuItem>
@@ -1434,25 +1657,41 @@ AddBlock.displayName = "AddBlock";
 
 export const SheetHeader: React.FC<{
   label: string;
+  currentPageIndex: number;
+  position: Position;
   helpLink: string | undefined;
+  pages: Array<IPage> | undefined;
   advanced: boolean;
   onLabelChange?: (newLabel: string) => void;
-  onRemove?: () => void;
-  onMoveUp?: () => void;
-  onMoveDown?: () => void;
+  onRemove: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  onReposition: (position: Position) => void;
+  onMoveToPage: (pageIndex: number) => void;
   visibleOnCard?: boolean;
   onToggleVisibleOnCard?: () => void;
 }> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
+  const [anchorEl, setAnchorEl] = React.useState<any>(null);
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
   const sheetHeader = css({
     background: headerBackgroundColors.primary,
     color: headerColor,
     width: "100%",
-    padding: ".5rem 1rem",
+    padding: ".5rem",
   });
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box className={sheetHeader}>
@@ -1471,7 +1710,11 @@ export const SheetHeader: React.FC<{
           </Grid>
         )}
         <Grid item xs>
-          <FateLabel>
+          <FateLabel
+            className={css({
+              fontSize: "1.2rem",
+            })}
+          >
             <ContentEditable
               data-cy={`character-dialog.${props.label}.label`}
               readonly={!props.advanced || !props.onLabelChange}
@@ -1484,7 +1727,7 @@ export const SheetHeader: React.FC<{
             />
           </FateLabel>
         </Grid>
-        {props.advanced && props.onToggleVisibleOnCard && (
+        {props.advanced && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.visible-on-card")}>
               <IconButton
@@ -1504,39 +1747,22 @@ export const SheetHeader: React.FC<{
             </Tooltip>
           </Grid>
         )}
-        {props.advanced && props.onMoveDown && (
+
+        {props.advanced && (
           <Grid item>
-            <Tooltip title={t("character-dialog.control.move-down")}>
+            <Tooltip title={"Move"}>
               <IconButton
-                data-cy={`character-dialog.${props.label}.move-down`}
+                data-cy={`character-dialog.${props.label}.move`}
                 size="small"
                 className={smallIconButtonStyle}
-                onClick={() => {
-                  props.onMoveDown?.();
-                }}
+                onClick={handleClick}
               >
-                <ArrowDownwardIcon htmlColor={headerColor} />
+                <FlipToBackIcon htmlColor={headerColor} />
               </IconButton>
             </Tooltip>
           </Grid>
         )}
-        {props.advanced && props.onMoveUp && (
-          <Grid item>
-            <Tooltip title={t("character-dialog.control.move-up")}>
-              <IconButton
-                data-cy={`character-dialog.${props.label}.move-up`}
-                size="small"
-                className={smallIconButtonStyle}
-                onClick={() => {
-                  props.onMoveUp?.();
-                }}
-              >
-                <ArrowUpwardIcon htmlColor={headerColor} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        )}
-        {props.advanced && props.onRemove && (
+        {props.advanced && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.remove-section")}>
               <IconButton
@@ -1553,7 +1779,102 @@ export const SheetHeader: React.FC<{
           </Grid>
         )}
       </Grid>
+      <Menu
+        keepMounted
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            props.onMoveUp();
+          }}
+        >
+          <ListItemIcon>
+            <ArrowUpwardIcon />
+          </ListItemIcon>
+          {"Move Up"}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            props.onMoveDown();
+          }}
+        >
+          {" "}
+          <ListItemIcon>
+            <ArrowDownwardIcon />
+          </ListItemIcon>
+          {"Move Down"}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            const newPosition =
+              props.position === Position.Left ? Position.Right : Position.Left;
+            props.onReposition(newPosition);
+          }}
+        >
+          <ListItemIcon>
+            <ArrowForwardIcon
+              className={css({
+                transform:
+                  props.position === Position.Left
+                    ? undefined
+                    : "rotate(180deg)",
+              })}
+            />
+          </ListItemIcon>
+          {props.position === Position.Left ? "Move Right" : "Move Left"}
+        </MenuItem>
+        {props.pages?.map((page, pageIndex) => {
+          if (pageIndex === props.currentPageIndex) {
+            return null;
+          }
+          return (
+            <MenuItem
+              key={page.id}
+              onClick={() => {
+                handleClose();
+                props.onMoveToPage(pageIndex);
+              }}
+            >
+              <ListItemIcon>
+                <FlipToBackIcon />
+              </ListItemIcon>
+              {`Move To Page: ${page.label}`}
+            </MenuItem>
+          );
+        })}
+      </Menu>
     </Box>
   );
 };
 SheetHeader.displayName = "SheetHeader";
+
+export const CharacterCircleBox: React.FC<BoxProps> = (props) => {
+  const { className, ...rest } = props;
+  const theme = useTheme();
+  return (
+    <Box
+      {...rest}
+      className={cx(
+        css({
+          background: theme.palette.background.paper,
+          color: theme.palette.getContrastText(theme.palette.background.paper),
+          border: "2px solid #bdbdbd",
+          borderRadius: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }),
+        className
+      )}
+    >
+      <Box p=".5rem" minWidth="50%" textAlign="center">
+        {props.children}
+      </Box>
+    </Box>
+  );
+};

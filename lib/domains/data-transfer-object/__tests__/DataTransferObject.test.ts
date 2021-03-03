@@ -6,8 +6,6 @@ describe("DataTransferObject", () => {
       const data = DataTransferObject.encode({
         playerName: "Magnus Burnsides",
         rolls: [],
-        fatePoints: 3,
-        refresh: 3,
         characterSheet: {
           name: "Magnus CharacterSheet",
         },
@@ -17,9 +15,7 @@ describe("DataTransferObject", () => {
 
       expect(result).toEqual({
         characterSheet: { name: "Magnus CharacterSheet" },
-        fatePoints: 3,
         playerName: "Magnus Burnsides",
-        refresh: 3,
         rolls: [],
       });
     });
@@ -29,8 +25,6 @@ describe("DataTransferObject", () => {
       const data = DataTransferObject.encode({
         playerName: "🐺🐺🐺🐺",
         rolls: [],
-        fatePoints: 3,
-        refresh: 3,
         characterSheet: {
           name: "Magnus CharacterSheet",
         },
@@ -40,9 +34,7 @@ describe("DataTransferObject", () => {
 
       expect(result).toEqual({
         characterSheet: { name: "Magnus CharacterSheet" },
-        fatePoints: 3,
         playerName: "🐺🐺🐺🐺",
-        refresh: 3,
         rolls: [],
       });
     });

@@ -506,17 +506,17 @@ export const Scene: React.FC<IProps> = (props) => {
                             );
                           }
                         }}
-                        onFatePointsChange={(fatePoints) => {
+                        onUpdatePlayerCharacterMainPointCounter={(points) => {
                           if (isGM) {
-                            sceneManager.actions.updatePlayerFatePoints(
+                            sceneManager.actions.updatePlayerCharacterMainPointCounter(
                               player.id,
-                              fatePoints
+                              points
                             );
                           } else {
                             connectionsManager?.actions.sendToHost<IPeerActions>(
                               {
-                                action: "update-fate-point",
-                                payload: fatePoints,
+                                action: "update-main-point-counter",
+                                payload: points,
                               }
                             );
                           }

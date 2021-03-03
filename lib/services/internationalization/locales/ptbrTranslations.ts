@@ -169,72 +169,13 @@ export const ptbrTranslation: Record<
   "play-route.sort": `Organizar`,
   "play-route.undo-drawing": `Desfazer`,
   "play-route.what-is-your-name": `What's your name`,
-  "player-row.add-fate-point": `Adicionar Ponto de Destino`,
   "player-row.fate-points": `Pontos de Destino`,
   "player-row.has-no-character-sheet": `Sem Ficha de Personagem`,
   "player-row.not-played": `Não Jogou Ainda`,
   "player-row.open-character-sheet": `Abrir Ficha de Personagem`,
   "player-row.played": `Já Jogou`,
   "player-row.remove-character": `Remover Personagem`,
-  "player-row.remove-fate-point": `Remover Ponto de Destino`,
   "player-row.swap-character-sheet": `Swap Character Sheet`,
   "scenes-route.meta.description": `Fari é a melhor aplicação pra auxiliar sua mesa de Fate. Jogue por cenas em tempo real com seus amigos. Role dados fugde, deixe a imaginação coletiva correr solta e construa histórias memoráveis juntos!`,
   "scenes-route.meta.title": `Gerencie suas Cenas`,
-
-  // // Aspects
-  // "High Concept": `Conceito`,
-  // "Trouble": `Problema`,
-  // "Relationship": `Relacionamento`,
-  // "Other Aspect": `Outro Aspecto`,
-
-  // // Skills
-  // "Academics": `Conhecimento`,
-  // "Athletics": `Atletismo`,
-  // "Burglary": `Roubo`,
-  // "Contacts": `Contatos`,
-  // "Crafts": `Ofícios`,
-  // "Deceive": `Enganar`,
-  // "Drive": `Condução`,
-  // "Empathy": `Empatia`,
-  // "Fight": `Lutar`,
-  // "Investigate": `Investigar`,
-  // "Lore": `Ocultismo`,
-  // "Notice": `Percepção`,
-  // "Physique": `Vigor`,
-  // "Provoke": `Provocar`,
-  // "Rapport": `Comunicação`,
-  // "Resources": `Recursos`,
-  // "Shoot": `Atirar`,
-  // "Stealth": `Furtividade`,
-  // "Will": `Vontade`,
-
-  // // Stunts
-  // "Stunt #1": `Façanha #1`,
-  // "Stunt #2": `Façanha #2`,
-  // "Stunt #3": `Façanha #3`,
-
-  // // Stress
-  // "Physical": `Físico`,
-  // "Mental": `Mental`,
-
-  // // FAE Stress
-  // "Stress": `Estresse`,
-
-  // // Consequences
-  // "Mild": `Leve`,
-  // "Moderate": `Moderada`,
-  // "Severe": `Severa`,
-
-  // // FAE Approaches
-  // "Careful": `Cuidadoso`,
-  // "Clever": `Esperto`,
-  // "Forceful": `Poderoso`,
-  // "Flashy": `Estiloso`,
-  // "Quick": `Ágil`,
-  // "Sneaky": `Sorrateiro`,
-
-  // // Custom Character
-  // "Aspect": `Aspecto`,
-  // "Stunt": `Façanha`,
-  // "Skill": `Perícia`,
 };

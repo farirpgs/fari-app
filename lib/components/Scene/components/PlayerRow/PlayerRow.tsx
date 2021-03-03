@@ -19,6 +19,7 @@ import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutl
 import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
@@ -37,7 +38,7 @@ export const PlayerRow: React.FC<
 
     onDiceRoll(options: IRollDiceOptions): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
-    onFatePointsChange(fatePoints: number): void;
+    onUpdatePlayerCharacterMainPointCounter(points: number): void;
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
     onLoadCharacterSheet(): void;
@@ -70,17 +71,19 @@ export const PlayerRow: React.FC<
     padding: "0.5rem",
   });
   const controlTableCellStyle = css({ border: "none", padding: ".7rem" });
-  const fatePointsTableCell = css({
+  const pointsTableCell = css({
     border: "none",
     padding: ".7rem 0",
   });
   const borderTableCellStyle = css({ padding: "0" });
 
-  const fatePointsStyle = css({
-    background:
-      props.player.fatePoints === 0
-        ? textColor.disabled
-        : theme.palette.primary.main,
+  const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
+    props.player.character
+  );
+  const points = parseInt(mainPointerBlock?.value ?? "0") || 0;
+
+  const pointsStyle = css({
+    background: points === 0 ? textColor.disabled : theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     transition: theme.transitions.create("background"),
     width: "2rem",
@@ -156,23 +159,21 @@ export const PlayerRow: React.FC<
           </Tooltip>
         </TableCell>
         <TableCell className={cx(playerInfoCellStyle)} align="center">
-          <Tooltip title={t("player-row.fate-points")}>
+          <Tooltip title={mainPointerBlock?.label ?? ""}>
             <span>
               <ButtonBase
                 className={css({
                   borderRadius: "50%",
                 })}
-                data-cy={`${props["data-cy"]}.consume-fate-point`}
+                data-cy={`${props["data-cy"]}.consume-point`}
                 disabled={!canControl}
                 onClick={(e) => {
                   e.stopPropagation();
-                  props.onFatePointsChange(props.player.fatePoints - 1);
-                  logger.info("ScenePlayer:onConsumeFatePoints");
+                  props.onUpdatePlayerCharacterMainPointCounter(points - 1);
+                  logger.info("ScenePlayer:onConsumePoint");
                 }}
               >
-                <Avatar className={fatePointsStyle}>
-                  {props.player.fatePoints}
-                </Avatar>
+                <Avatar className={pointsStyle}>{points}</Avatar>
               </ButtonBase>
             </span>
           </Tooltip>
@@ -292,22 +293,20 @@ export const PlayerRow: React.FC<
           </Tooltip>
         </TableCell>
         <TableCell className={controlTableCellStyle} />
-        <TableCell className={fatePointsTableCell}>
+        <TableCell className={pointsTableCell}>
           <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
-              <Tooltip title={t("player-row.remove-fate-point")}>
+              <Tooltip title={t("player-row.remove-point")}>
                 <span>
                   <IconButton
-                    data-cy={`${props["data-cy"]}.consume-fate-point-gm`}
+                    data-cy={`${props["data-cy"]}.consume-point-gm`}
                     size="small"
-                    disabled={props.player.fatePoints === 0}
+                    disabled={points === 0}
                     onClick={(e) => {
                       e.stopPropagation();
-                      const fatePointsMinusOne = props.player.fatePoints - 1;
-                      const newValue =
-                        fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
-                      props.onFatePointsChange(newValue);
-                      logger.info("ScenePlayer:onGMConsumeFatePoint");
+
+                      props.onUpdatePlayerCharacterMainPointCounter(points - 1);
+                      logger.info("ScenePlayer:onGMConsumePoint");
                     }}
                   >
                     <RemoveCircleOutlineOutlinedIcon
@@ -319,14 +318,14 @@ export const PlayerRow: React.FC<
             </Grid>
 
             <Grid item>
-              <Tooltip title={t("player-row.add-fate-point")}>
+              <Tooltip title={t("player-row.add-point")}>
                 <IconButton
-                  data-cy={`${props["data-cy"]}.refresh-fate-point-gm`}
+                  data-cy={`${props["data-cy"]}.add-point-gm`}
                   size="small"
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onFatePointsChange(props.player.fatePoints + 1);
-                    logger.info("ScenePlayer:onGMRefreshFatePoint");
+                    props.onUpdatePlayerCharacterMainPointCounter(points + 1);
+                    logger.info("ScenePlayer:onGMAddPoint");
                   }}
                 >
                   <AddCircleOutlineOutlinedIcon

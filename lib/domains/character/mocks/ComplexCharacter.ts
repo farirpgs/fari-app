@@ -42,5 +42,4 @@ export const ComplexCharacter: IV2Character = {
   refreshLabel: "Rafraichissement",
   fatePoints: 3,
   lastUpdated: 1606783644,
-  // fariType: "character",
 };

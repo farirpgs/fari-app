@@ -10,7 +10,10 @@ export type IPeerActions =
   | IUpdatePlayedInTurnOrderPeerAction;
 
 type IRollPeerAction = IPeerAction<"roll", IDiceRollWithBonus>;
-type IUpdateFatePointPeerAction = IPeerAction<"update-fate-point", number>;
+type IUpdateFatePointPeerAction = IPeerAction<
+  "update-main-point-counter",
+  number
+>;
 type ILoadCharacterPeerAction = IPeerAction<"load-character", ICharacter>;
 type IUpdateCharacterPeerAction = IPeerAction<"update-character", ICharacter>;
 type IUpdatePlayedInTurnOrderPeerAction = IPeerAction<

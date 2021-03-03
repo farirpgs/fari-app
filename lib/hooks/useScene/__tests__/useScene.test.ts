@@ -11,7 +11,7 @@ import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
 
-fdescribe("useScene", () => {
+describe("useScene", () => {
   it("constructor", () => {
     // GIVEN
     const userId = "111";
@@ -28,7 +28,6 @@ fdescribe("useScene", () => {
         playerName: "Game Master",
         rolls: [],
         playedDuringTurn: false,
-        fatePoints: 3,
         offline: false,
         isGM: true,
       },
@@ -470,7 +469,7 @@ fdescribe("useScene", () => {
           total: 4,
           type: "4dF",
         });
-        result.current.actions.updatePlayerFatePoints("1", 1);
+        result.current.actions.updatePlayerCharacterMainPointCounter("1", 1);
       });
       // THEN connection mappings reflects that
       expect(result.current.state.scene.players[0]).toEqual({

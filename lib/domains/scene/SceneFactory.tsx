@@ -19,7 +19,7 @@ export const SceneFactory = {
         playerName: "Game Master",
         rolls: [],
         playedDuringTurn: false,
-        fatePoints: 3,
+
         offline: false,
         isGM: true,
       },

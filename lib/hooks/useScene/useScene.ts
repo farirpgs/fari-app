@@ -11,7 +11,7 @@ import {
   defaultSceneName,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
-import { ICharacter } from "../../domains/character/types";
+import { BlockType, ICharacter } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
@@ -436,7 +436,6 @@ export function useScene(props: IProps) {
           const playerCharacter = playerMatch?.character;
 
           const rolls = playerMatch?.rolls ?? [];
-          const fatePoints = playerMatch?.fatePoints ?? 3;
           const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
 
           return {
@@ -445,7 +444,6 @@ export function useScene(props: IProps) {
             character: playerCharacter,
             rolls: rolls,
             playedDuringTurn: playedDuringTurn,
-            fatePoints: fatePoints,
             offline: false,
           } as IPlayer;
         });
@@ -471,7 +469,6 @@ export function useScene(props: IProps) {
           character: undefined,
           rolls: [],
           playedDuringTurn: false,
-          fatePoints: 3,
           offline: true,
           isGM: false,
         });
@@ -490,7 +487,6 @@ export function useScene(props: IProps) {
           character: character,
           rolls: [],
           playedDuringTurn: false,
-          fatePoints: character.refresh,
           offline: true,
           isGM: false,
         });
@@ -542,7 +538,6 @@ export function useScene(props: IProps) {
           if (p.id === id) {
             p.character = character;
             if (updateHiddenFields) {
-              p.fatePoints = character.fatePoints ?? 3;
               p.playedDuringTurn = character.playedDuringTurn ?? false;
             }
           }
@@ -580,18 +575,26 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerFatePoints(id: string, fatePoints: number) {
+  function updatePlayerCharacterMainPointCounter(id: string, points: number) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            const newFatePointsAmount = fatePoints >= 0 ? fatePoints : 0;
-            p.fatePoints = newFatePointsAmount;
-
             if (p.character) {
-              p.character.fatePoints = newFatePointsAmount;
-              p.character.lastUpdated = getUnix();
+              for (const page of p.character.pages) {
+                for (const section of page.sections) {
+                  for (const block of section.blocks) {
+                    const shouldUpdateBlock =
+                      block.type === BlockType.PointCounter &&
+                      block.meta.isMainPointCounter;
+                    if (shouldUpdateBlock) {
+                      block.value = points.toString();
+                      p.character.lastUpdated = getUnix();
+                    }
+                  }
+                }
+              }
             }
           }
         });
@@ -710,7 +713,7 @@ export function useScene(props: IProps) {
       addOfflinePlayer,
       addOfflineCharacter,
       removePlayer,
-      updatePlayerFatePoints,
+      updatePlayerCharacterMainPointCounter,
       updatePlayerPlayedDuringTurn,
       resetInitiative,
       updateGmRoll,

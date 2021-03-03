@@ -10,7 +10,6 @@ export interface IPlayer {
   character?: ICharacter;
   rolls: Array<IDiceRollWithBonus>;
   playedDuringTurn: boolean;
-  fatePoints: number;
   offline: boolean;
   isGM: boolean;
 }
