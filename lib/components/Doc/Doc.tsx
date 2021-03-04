@@ -28,7 +28,8 @@ import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import truncate from "lodash/truncate";
-import React, { useEffect, useState } from "react";
+import uniq from "lodash/uniq";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -51,6 +52,10 @@ export type ISideBarItems = Array<
   | IDocSidebar
   | { label: string; collapsed: boolean; items: ISideBarItems }
 >;
+
+export type IDoceSideBarOptions = {
+  miscSectionTitle?: string;
+};
 
 export type IDocSidebar = {
   [category: string]: ISideBarItems;
@@ -109,8 +114,8 @@ type IProps = {
    * Link to original file
    */
   gitHubLink?: string;
-
   sideBar?: IDocSidebar;
+  sideBarOptions?: IDoceSideBarOptions;
   defaultSideBarCategory?: string;
 };
 
@@ -125,7 +130,7 @@ export const Doc: React.FC<IProps> = (props) => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const section = params.get("goTo");
-
+  const markdownRef = useRef<HTMLDivElement | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const { dom, markdownIndexes } = useMarkdownFile({
@@ -144,6 +149,7 @@ export const Doc: React.FC<IProps> = (props) => {
     currentPageId: pageId,
     markdownIndexes: markdownIndexes,
     docSideBar: props.sideBar,
+    doceSideBarOptions: props.sideBarOptions,
   });
   const html = pageDom?.innerHTML;
   const imageUrl = image || props.imageUrl;
@@ -220,17 +226,20 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function connectTocAnchors() {
-      {
-        document.querySelectorAll("a").forEach((a) => {
-          a.addEventListener("click", handleMarkdownAnchorClick);
-        });
+      markdownRef.current?.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", handleMarkdownAnchorClick);
+      });
 
-        return () => {
-          document.querySelectorAll("a").forEach((a) => {
-            a.removeEventListener("click", handleMarkdownAnchorClick);
-          });
-        };
-      }
+      markdownRef.current?.querySelectorAll("img").forEach((img) => {
+        const html = img.outerHTML;
+        img.outerHTML = `<figure class="fari-image">${html}<figcaption>${img.alt}</figcaption></figure>`;
+      });
+
+      return () => {
+        markdownRef.current?.querySelectorAll("a").forEach((a) => {
+          a.removeEventListener("click", handleMarkdownAnchorClick);
+        });
+      };
     },
     [html]
   );
@@ -286,8 +295,10 @@ export const Doc: React.FC<IProps> = (props) => {
                 </Box>
                 <Grid container>
                   <Grid item xs>
-                    <Box pr={2}>
-                      <MarkdownElement renderedMarkdown={html} />
+                    <Box pr={isSmall ? 0 : 2}>
+                      <div ref={markdownRef}>
+                        <MarkdownElement renderedMarkdown={html} />
+                      </div>
                     </Box>
                   </Grid>
                   <Hidden mdDown>
@@ -417,7 +428,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   </Grid>
                   {!isLast && (
                     <Grid item>
-                      <FateLabel color="secondary">{"•"}</FateLabel>
+                      <FateLabel color="primary">{"•"}</FateLabel>
                     </Grid>
                   )}
                 </React.Fragment>
@@ -501,6 +512,7 @@ export const Doc: React.FC<IProps> = (props) => {
     const nextIndex = markdownIndexes.flat.find(
       (i) => i.id === navigation.nextPageId
     );
+
     return (
       <Box>
         <Grid
@@ -624,6 +636,7 @@ export const Doc: React.FC<IProps> = (props) => {
         currentPage={pageId}
         markdownIndexes={markdownIndexes}
         sideBar={props.sideBar}
+        sideBarOptions={props.sideBarOptions}
         defaultSideBarCategory={props.defaultSideBarCategory}
       />
     );
@@ -678,6 +691,7 @@ export const DocSideBar: React.FC<{
   currentPage: string | undefined;
   markdownIndexes: IMarkdownIndexes;
   sideBar: IDocSidebar | undefined;
+  sideBarOptions: IDoceSideBarOptions | undefined;
   defaultSideBarCategory?: string;
 }> = (props) => {
   const theme = useTheme();
@@ -686,15 +700,29 @@ export const DocSideBar: React.FC<{
     currentPageId: props.currentPage,
     markdownIndexes: props.markdownIndexes,
     docSideBar: props.sideBar,
+    doceSideBarOptions: props.sideBarOptions,
     defaultSideBarCategory: props.defaultSideBarCategory,
   });
+
   const [openList, setOpenList] = useState<Array<string>>([
     ...navigation.defaultOpenedCategories,
   ]);
 
-  useEffect(() => {
-    setOpenList((d) => [...d, ...navigation.highlightedItems]);
-  }, [navigation.highlightedItems]);
+  useEffect(
+    function syncHighlightedItems() {
+      setOpenList((d) => [...d, ...navigation.highlightedItems]);
+    },
+    [navigation.highlightedItems]
+  );
+
+  useEffect(
+    function syncDefaultOpenedCategories() {
+      setOpenList((d) => {
+        return uniq([...d, ...navigation.defaultOpenedCategories]);
+      });
+    },
+    [navigation.defaultOpenedCategories]
+  );
 
   return <List>{renderSideBarContent(sideBar)}</List>;
 
@@ -704,11 +732,13 @@ export const DocSideBar: React.FC<{
       <>
         {categoryNames.map((category, i) => {
           const items = categories[category];
+
           const isCategorySelected = navigation.highlightedItems.includes(
             category
           );
           const isCategoryOpened = openList.includes(category);
 
+          const categoryName = category.replace("+", "");
           return (
             <React.Fragment key={category}>
               <ListItem
@@ -728,6 +758,7 @@ export const DocSideBar: React.FC<{
                 <Box width="100%">
                   <Typography
                     noWrap
+                    title={categoryName}
                     className={css({
                       color: isCategorySelected
                         ? theme.palette.primary.main
@@ -737,7 +768,7 @@ export const DocSideBar: React.FC<{
                         : theme.typography.fontWeightRegular,
                     })}
                   >
-                    {category.replace("+", "")}
+                    {categoryName}
                   </Typography>
                 </Box>
 
@@ -786,6 +817,7 @@ export const DocSideBar: React.FC<{
                             <Box width="100%">
                               <Typography
                                 noWrap
+                                title={index.label}
                                 className={css({
                                   color: isItemSelected
                                     ? theme.palette.primary.main

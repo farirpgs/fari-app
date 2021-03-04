@@ -149,7 +149,6 @@ export const frTranslation: Record<
   "play-route.public": `Publique`,
   "play-route.reset-initiative": `Réinitialiser`,
   "play-route.reset-scene-confirmation": `Etes-vous sûr de vouloir réinitialiser votre scène et de supprimer tous vos aspects actuels?`,
-  "play-route.reset-scene": `Réinitialiser`,
   "play-route.roll": `Lancer`,
   "play-route.save-scene": `Enregistrer`,
   "play-route.scene-name": `Nom de la scène`,

@@ -17,7 +17,10 @@ import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLo
 import { arraySort } from "../../../../../domains/array/arraySort";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import { ContentEditable } from "../../../../ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
 
@@ -38,7 +41,8 @@ export const CharacterCard: React.FC<{
 
   const skillsWithValue =
     props.characterSheet?.skills.filter((s) => {
-      return !!s.value;
+      return true;
+      // return !!s.value;
     }) ?? [];
   const sortedSkills = arraySort(skillsWithValue, [
     (skill) => {
@@ -49,7 +53,8 @@ export const CharacterCard: React.FC<{
       };
     },
   ]);
-  const bestSkills = sortedSkills.slice(0, 6);
+  // const bestSkills = sortedSkills;
+  const bestSkills = sortedSkills.slice(0, 10);
 
   if (!props.characterSheet) {
     return null;
@@ -128,6 +133,13 @@ export const CharacterCard: React.FC<{
           <Grid item xs={12}>
             <Grid container spacing={1} alignItems="center">
               {bestSkills.map((skill, skillIndex) => {
+                const skillName = previewContentEditable({
+                  value: skill.name,
+                });
+                const skillValue = previewContentEditable({
+                  value: skill.value,
+                });
+
                 return (
                   <Grid item key={skillIndex}>
                     <Link
@@ -142,19 +154,19 @@ export const CharacterCard: React.FC<{
                           },
                         },
                       ])}
-                      data-cy={`character-card.skill.${skill.name}`}
+                      data-cy={`character-card.skill.${skillName}`}
                       onClick={() => {
                         if (props.readonly) {
                           return;
                         }
-                        const bonus = parseInt(skill.value) || 0;
+                        const bonus = parseInt(skillValue) || 0;
                         props.onRoll({
                           bonus: bonus,
-                          bonusLabel: skill.name,
+                          bonusLabel: skillName,
                         });
                       }}
                     >
-                      {skill.name} ({skill.value})
+                      {skillName} ({skillValue})
                     </Link>
                   </Grid>
                 );

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { act, renderHook } from "@testing-library/react-hooks";
 import {
   CharacterType,
@@ -5,8 +8,6 @@ import {
   ICharacter,
 } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useCharacter } from "../useCharacter";
-
-// import { v4 as uuidV4 } from "uuid";
 
 describe("useCharacter", () => {
   describe("name and aspects", () => {
@@ -477,7 +478,7 @@ describe("useCharacter", () => {
     expect(result.current.state.character).toEqual(character);
     // WHEN the refresh i updated
     act(() => {
-      result.current.actions.setName("Luke&nbsp;Skywalker&nbsp;&nbsp;");
+      result.current.actions.setName("Luke Skywalker");
     });
     expect(result.current.actions.sanitizeCharacter().name).toEqual(
       "Luke Skywalker"

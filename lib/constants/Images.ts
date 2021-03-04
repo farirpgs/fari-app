@@ -26,4 +26,6 @@ export const Images = {
   scene: scene as string,
   dials: dials as string,
   cheatSheet: cheatSheet as string,
+  successWithStyle:
+    "https://live.staticflickr.com/778/22642415098_eb0d4cae7d_b.jpg",
 };

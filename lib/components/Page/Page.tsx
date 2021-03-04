@@ -27,14 +27,16 @@ import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
+import { useZIndex } from "../../constants/zIndex";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { AppLightTheme } from "../../theme";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
-import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
+import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
@@ -62,6 +64,7 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
+
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const { displayDonation = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -72,6 +75,7 @@ export const Page: React.FC<{
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
   const logger = useLogger();
+  const zIndex = useZIndex();
 
   const isLive = props.live !== undefined;
   useEffect(() => {
@@ -285,6 +289,12 @@ export const Page: React.FC<{
                   Jeremy Keller.
                 </Typography>
               </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  Fari uses icons available at{" "}
+                  <a href="http://game-icons.net">http://game-icons.net</a>
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
           <Grid container>
@@ -308,7 +318,7 @@ export const Page: React.FC<{
 
   function renderHeader() {
     const background = isLive
-      ? theme.palette.primary.main
+      ? AppLightTheme.palette.primary.dark
       : theme.palette.background.paper;
     const color = theme.palette.getContrastText(background);
     return (
@@ -325,7 +335,7 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
-            zIndex: theme.zIndex.drawer + 1,
+            zIndex: zIndex.navBar,
           })}
         >
           <Toolbar
@@ -335,6 +345,8 @@ export const Page: React.FC<{
               minHeight: "72px",
               width: "100%",
               padding: "1rem",
+              position: "relative",
+              zIndex: zIndex.navBar,
             })}
           >
             <RouterLink
@@ -401,7 +413,7 @@ export const Page: React.FC<{
                   <Grid item>
                     <Box maxWidth="150px">
                       <Typography variant="subtitle1" noWrap>
-                        {sanitizeContentEditable(props.liveLabel)}
+                        {previewContentEditable({ value: props.liveLabel })}
                       </Typography>
                     </Box>
                   </Grid>
@@ -444,7 +456,7 @@ export const Page: React.FC<{
             </Hidden>
             {shouldDisplayRejoinButton && (
               <Button
-                color="secondary"
+                color="primary"
                 onClick={() => {
                   history.push(`/play/${gameId}`);
                 }}
@@ -537,6 +549,7 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <Button
                 color="inherit"
+                data-cy="page.menu.about"
                 to="/about"
                 component={RouterLink}
                 variant={mobile ? "outlined" : undefined}

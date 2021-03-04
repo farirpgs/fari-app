@@ -3,7 +3,7 @@ import produce from "immer";
 import { useMemo } from "react";
 import { defaultThemeConfiguration } from "../../theme";
 
-export function useButtonTheme(color: string) {
+export function useThemeFromColor(color: string) {
   const buttonTheme = useMemo(() => {
     const options = produce(defaultThemeConfiguration, (draft) => {
       draft.palette = { primary: { main: color } };

@@ -426,7 +426,7 @@ describe("useMarkdownPage", () => {
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("Rage");
       expect(view.result.current.description).toEqual(
-        "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical con..."
+        "Berserk Rage. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical cons..."
       );
     });
   });

@@ -62,15 +62,15 @@ import {
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
-import { IDiceRoll, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRollResult, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
-import { useButtonTheme } from "../../hooks/useButtonTheme/useButtonTheme";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "../../routes/Character/components/CharacterDialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
@@ -141,7 +141,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const errorTheme = useButtonTheme(theme.palette.error.main);
+  const errorTheme = useThemeFromColor(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -188,6 +188,22 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
+  const controllablePlayerIds = everyone
+    .filter((player) => {
+      if (isGM) {
+        return true;
+      } else if (props.mode === SceneMode.PlayOnline) {
+        return props.userId === player.id;
+      }
+    })
+    .map((p) => p.id);
+  const me = everyone.find((player) => {
+    if (isGM) {
+      return player.isGM;
+    } else if (props.mode === SceneMode.PlayOnline) {
+      return props.userId === player.id;
+    }
+  });
 
   const liveMode = getLiveMode();
 
@@ -210,7 +226,7 @@ export const Scene: React.FC<IProps> = (props) => {
     });
   };
 
-  const handleSetRoll = (result: IDiceRoll) => {
+  const handleSetRoll = (result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
     } else {
@@ -221,7 +237,7 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleSetPlayerRoll = (playerId: string, result: IDiceRoll) => {
+  const handleSetPlayerRoll = (playerId: string, result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updatePlayerRoll(playerId, result);
     } else {
@@ -236,7 +252,7 @@ export const Scene: React.FC<IProps> = (props) => {
     <Page
       gameId={props.idFromParams}
       live={liveMode}
-      liveLabel={sceneManager.state.scene.name.toUpperCase()}
+      liveLabel={sceneManager.state.scene.name}
     >
       <Box px="1rem">
         <Prompt
@@ -262,11 +278,14 @@ export const Scene: React.FC<IProps> = (props) => {
             {t("play-route.scene-saved")}
           </Alert>
         </Snackbar>
-        <DiceFab
-          onSelect={(result) => {
-            handleSetRoll(result);
-          }}
-        />
+        {props.mode !== SceneMode.Manage && (
+          <DiceFab
+            rolls={me?.rolls}
+            onSelect={(result) => {
+              handleSetRoll(result);
+            }}
+          />
+        )}
         {props.error ? renderPageError() : renderPage()}
       </Box>
     </Page>
@@ -411,7 +430,6 @@ export const Scene: React.FC<IProps> = (props) => {
                             color="secondary"
                           >
                             <PersonAddIcon />
-                            {/* <DescriptionIcon /> */}
                           </Button>
                         </span>
                       </Tooltip>
@@ -434,10 +452,8 @@ export const Scene: React.FC<IProps> = (props) => {
               <TableHead>{renderPlayerRowHeader()}</TableHead>
               <TableBody>
                 {everyone.map((player, playerRowIndex) => {
-                  const isMe =
-                    props.mode === SceneMode.PlayOnline &&
-                    props.userId === player.id;
-                  const canControl = isGM || isMe;
+                  const isMe = me?.id === player.id;
+                  const canControl = controllablePlayerIds.includes(player.id);
                   return (
                     <React.Fragment key={player.id}>
                       <CharacterDialog
@@ -446,8 +462,8 @@ export const Scene: React.FC<IProps> = (props) => {
                         character={player.character}
                         dialog={true}
                         rolls={player.rolls}
-                        onRoll={(options) => {
-                          handleSetPlayerRoll(player.id, rollDice(options));
+                        onRoll={(result) => {
+                          handleSetPlayerRoll(player.id, result);
                         }}
                         onSave={(updatedCharacter) => {
                           if (isGM) {
@@ -472,10 +488,10 @@ export const Scene: React.FC<IProps> = (props) => {
                       <PlayerRow
                         data-cy={`scene.player-row.${playerRowIndex}`}
                         key={player.id}
-                        isGM={isGM}
-                        isMe={isMe}
+                        highlight={isMe}
+                        readonly={!canControl}
+                        renderControls={isGM}
                         player={player}
-                        offline={isOffline}
                         onPlayerRemove={() => {
                           sceneManager.actions.removePlayer(player.id);
                         }}
@@ -593,7 +609,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
     return (
       <>
-        <Box pt="2rem" pb="1rem" px="1rem">
+        <Box>
           <Collapse in={hasPlayersWithCharacterSheets}>
             <Box>
               <MagicGridContainer
@@ -626,9 +642,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 })}
               </MagicGridContainer>
             </Box>
-            <Box pt="1rem" pb="2rem" px=".5rem">
-              <Divider />
-            </Box>
           </Collapse>
         </Box>
       </>
@@ -648,18 +661,25 @@ export const Scene: React.FC<IProps> = (props) => {
           <Box>
             <TabContext value={tab}>
               {renderTabs()}
-              <TabPanel value={"player-characters"} className={tabPanelStyle}>
-                {renderCharacterCards()}
-              </TabPanel>
-              <TabPanel value={"public"} className={tabPanelStyle}>
-                {renderAspects()}
-              </TabPanel>
-              <TabPanel value={"private"} className={tabPanelStyle}>
-                {renderAspects()}
-              </TabPanel>
-              <TabPanel value={"gm-notes"} className={tabPanelStyle}>
-                {renderGmNotes()}
-              </TabPanel>
+              <Box>
+                <Box py="2rem" px="2rem" position="relative" minHeight="20rem">
+                  <TabPanel
+                    value={"player-characters"}
+                    className={tabPanelStyle}
+                  >
+                    {renderCharacterCards()}
+                  </TabPanel>
+                  <TabPanel value={"public"} className={tabPanelStyle}>
+                    {renderAspects()}
+                  </TabPanel>
+                  <TabPanel value={"private"} className={tabPanelStyle}>
+                    {renderAspects()}
+                  </TabPanel>
+                  <TabPanel value={"gm-notes"} className={tabPanelStyle}>
+                    {renderGmNotes()}
+                  </TabPanel>
+                </Box>
+              </Box>
             </TabContext>
           </Box>
         </Paper>
@@ -669,29 +689,25 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function renderGmNotes() {
     return (
-      <Box py="2rem" px="1rem">
-        <Grid container>
-          <Grid item xs={12} sm={6}>
-            <Paper>
-              <Box p="2rem">
-                <Box pb="1rem">
-                  <FateLabel variant="h6">{t("play-route.gm-notes")}</FateLabel>
-                </Box>
-                <Box>
-                  <ContentEditable
-                    autoFocus
-                    placeholder={"Scene Notes..."}
-                    value={sceneManager.state.scene.notes ?? ""}
-                    onChange={(newNotes) => {
-                      sceneManager.actions.setNotes(newNotes);
-                    }}
-                  />
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
+      <Grid container>
+        <Grid item xs={12} sm={6}>
+          <Box>
+            <Box mb="1rem">
+              <FateLabel variant="h6">{t("play-route.gm-notes")}</FateLabel>
+            </Box>
+            <Box>
+              <ContentEditable
+                autoFocus
+                placeholder={"Scene Notes..."}
+                value={sceneManager.state.scene.notes ?? ""}
+                onChange={(newNotes) => {
+                  sceneManager.actions.setNotes(newNotes);
+                }}
+              />
+            </Box>
+          </Box>
         </Grid>
-      </Box>
+      </Grid>
     );
   }
 
@@ -727,7 +743,7 @@ export const Scene: React.FC<IProps> = (props) => {
     const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
     return (
-      <Box pt="2rem" pb="1rem" px="1rem">
+      <Box>
         <Box>{renderGMAspectActions()}</Box>
 
         {hasAspects && (
@@ -755,7 +771,11 @@ export const Scene: React.FC<IProps> = (props) => {
                     id={`index-card-${aspectId}`}
                     aspectId={aspectId}
                     readonly={!isGM}
+                    showClickableSkills={props.mode !== SceneMode.Manage}
                     sceneManager={sceneManager}
+                    onRoll={(options) => {
+                      handleSetRoll(rollDice(options));
+                    }}
                   />
                 </Box>
               );
@@ -764,7 +784,14 @@ export const Scene: React.FC<IProps> = (props) => {
         )}
         {!hasAspects && (
           <Box py="6rem" textAlign="center">
-            <Typography variant="h6">{t("play-route.no-aspects")}</Typography>
+            <Typography
+              variant="h6"
+              className={css({
+                fontWeight: theme.typography.fontWeightBold,
+              })}
+            >
+              {t("play-route.no-aspects")}
+            </Typography>
           </Box>
         )}
       </Box>
@@ -832,7 +859,7 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function renderHeader() {
     return (
-      <Box pb="2rem">
+      <Box mx=".5rem" mb="2rem" py="2rem">
         <Box>
           <Container maxWidth="sm">
             <Box>{renderManagementActions()}</Box>
@@ -939,6 +966,19 @@ export const Scene: React.FC<IProps> = (props) => {
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
               <Button
+                data-cy="scene.add-index-card"
+                onClick={() => {
+                  sceneManager.actions.addAspect(
+                    AspectType.IndexCard,
+                    isPrivate
+                  );
+                  logger.info("Scene:onAddCard:IndexCard");
+                }}
+                endIcon={<AddCircleOutlineIcon />}
+              >
+                {t("play-route.add-index-card")}
+              </Button>
+              <Button
                 data-cy="scene.add-aspect"
                 onClick={() => {
                   sceneManager.actions.addAspect(AspectType.Aspect, isPrivate);
@@ -978,19 +1018,6 @@ export const Scene: React.FC<IProps> = (props) => {
               >
                 {t("play-route.add-bad-guy")}
               </Button>
-              <Button
-                data-cy="scene.add-index-card"
-                onClick={() => {
-                  sceneManager.actions.addAspect(
-                    AspectType.IndexCard,
-                    isPrivate
-                  );
-                  logger.info("Scene:onAddCard:IndexCard");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-index-card")}
-              </Button>
             </ButtonGroup>
           </Grid>
         </Grid>
@@ -1013,7 +1040,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   logger.info("Scene:onFireGoodConfetti");
                 }}
                 variant="text"
-                color="secondary"
+                color="primary"
               >
                 <ThumbUpIcon />
               </Button>
@@ -1027,7 +1054,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   logger.info("Scene:onFireBadConfetti");
                 }}
                 variant="text"
-                color="secondary"
+                color="primary"
               >
                 <ThumbDownIcon />
               </Button>
@@ -1042,7 +1069,7 @@ export const Scene: React.FC<IProps> = (props) => {
               }}
               variant="outlined"
               color={
-                props.sceneManager.state.scene.sort ? "secondary" : "default"
+                props.sceneManager.state.scene.sort ? "primary" : "default"
               }
               endIcon={<SortIcon />}
             >
@@ -1082,7 +1109,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 }
               }}
               variant="outlined"
-              color={shareLinkToolTip.open ? "secondary" : "default"}
+              color={shareLinkToolTip.open ? "primary" : "default"}
               endIcon={<FileCopyIcon />}
             >
               {t("play-route.copy-game-link")}
@@ -1117,14 +1144,20 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.save-scene")}
             </Button>
           </Grid>
+          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
+          )}
           <Grid item>
             <ThemeProvider theme={errorTheme}>
               <Button
                 variant="text"
                 color="primary"
-                data-cy="scene.reset"
+                data-cy="scene.new-scene"
                 endIcon={<ErrorIcon />}
-                className={css({ borderRadius: "20px" })}
+                className={css({
+                  borderRadius: "20px",
+                  fontWeight: theme.typography.fontWeightBold,
+                })}
                 onClick={() => {
                   const confirmed = confirm(
                     t("play-route.reset-scene-confirmation")
@@ -1135,13 +1168,10 @@ export const Scene: React.FC<IProps> = (props) => {
                   }
                 }}
               >
-                {t("play-route.reset-scene")}
+                {t("play-route.new-scene")}
               </Button>
             </ThemeProvider>
           </Grid>
-          {props.mode === SceneMode.PlayOnline && props.shareLink && (
-            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
-          )}
           {props.mode !== SceneMode.Manage && (
             <Grid item>
               <IconButton

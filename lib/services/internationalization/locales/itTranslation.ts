@@ -152,7 +152,6 @@ export const itTranslation: Record<
   "play-route.public": `Public`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene-confirmation": `Sei sicuro di voler resettare la scena e rimuovere tutti gli attuali Aspetti?`,
-  "play-route.reset-scene": `Reset`,
   "play-route.roll": `Lancia`,
   "play-route.save-scene": `Salva`,
   "play-route.scene-name": `Nome della Scena`,

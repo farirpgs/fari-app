@@ -1,6 +1,6 @@
 import kebabCase from "lodash/kebabCase";
-import truncate from "lodash/truncate";
 import marked from "marked";
+import { previewContentEditable } from "../../ContentEditable/ContentEditable";
 
 export type IMarkdownIndexes = {
   tree: Array<IMarkdownIndex>;
@@ -146,14 +146,17 @@ export const Markdown = {
       textAfterCurrentPage?.textContent ??
       "";
 
-    const description = truncate(firstParagraph, { length: 155 });
+    const firstParagraphDescription = previewContentEditable({
+      value: firstParagraph,
+      length: 155,
+    });
 
     if (!currentPageElement) {
       return {
         pageDom: undefined,
         pageId: undefined,
         title: title.trim(),
-        description: description.trim(),
+        description: firstParagraphDescription,
         image: undefined,
       };
     }
@@ -171,28 +174,57 @@ export const Markdown = {
       `${nextPageId}`
     );
     const pageDom = getPageDom(currentPageElement, allDomElementsInPage);
-    const pageMetaOriginalElement = pageDom.querySelector("page-meta");
-    const author = pageMetaOriginalElement?.getAttribute("author");
-    const date = pageMetaOriginalElement?.getAttribute("date");
-    const image = pageMetaOriginalElement?.getAttribute("image");
 
-    if (author) {
-      const metaDom = document.createElement("div");
-      metaDom.className = "page-meta";
-      const dateSection = date ? ` • ${date}` : "";
+    const { pageMetaDescription, image } = updateDomWithMeta(pageDom);
 
-      metaDom.innerHTML = `By ${author}${dateSection}`;
-      pageDom.querySelector("h1")?.after(metaDom);
-    }
+    const descriptionToUse = pageMetaDescription || firstParagraphDescription;
+    const formattedDescription = previewContentEditable({
+      value: descriptionToUse,
+      length: 155,
+    });
     return {
       pageDom: pageDom,
       pageId: currentPageElement.id,
       title: title.trim(),
-      description: description.trim(),
+      description: formattedDescription,
       image: image,
     };
   },
 };
+
+function updateDomWithMeta(pageDom: HTMLDivElement) {
+  const pageMetaOriginalElement = pageDom.querySelector("page-meta");
+  const author = pageMetaOriginalElement?.getAttribute("author");
+  const pageMetaDescription = pageMetaOriginalElement?.getAttribute(
+    "description"
+  );
+  const date = pageMetaOriginalElement?.getAttribute("date");
+  const image = pageMetaOriginalElement?.getAttribute("image");
+
+  const metaDom = document.createElement("div");
+  metaDom.className = "page-meta";
+
+  if (pageMetaDescription) {
+    const descriptionDom = document.createElement("div");
+    descriptionDom.innerHTML = pageMetaDescription;
+    metaDom.append(descriptionDom);
+  }
+
+  if (author) {
+    const formattedDate = date ? ` • ${date}` : "";
+    const authorDom = document.createElement("div");
+    authorDom.className = "page-meta-details";
+    authorDom.innerHTML = `By ${author}${formattedDate}`;
+    metaDom.append(authorDom);
+  }
+
+  pageDom.querySelector("h1")?.after(metaDom);
+
+  // delete <page-meta> that is wrapped in <p>
+  pageMetaOriginalElement?.parentElement?.remove();
+
+  return { pageMetaDescription, image };
+}
 
 function getNode(props: {
   element: Element;

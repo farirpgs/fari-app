@@ -4,6 +4,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Collapse from "@material-ui/core/Collapse";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
@@ -29,6 +30,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { default as React, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
+import { IRollDiceOptions } from "../../domains/dice/Dice";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -37,6 +39,7 @@ import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
+import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
 export const IndexCard: React.FC<
@@ -46,6 +49,8 @@ export const IndexCard: React.FC<
     id?: string;
     aspectId: string;
     sceneManager: ReturnType<typeof useScene>;
+    showClickableSkills: boolean;
+    onRoll(options: IRollDiceOptions): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -56,14 +61,14 @@ export const IndexCard: React.FC<
   const $menu = useRef(null);
   const colorPickerBackground = theme.palette.primary.dark;
   const aspect = props.sceneManager.state.scene.aspects[props.aspectId];
+  const indexCardSkills = IndexCardSkills.getSkills(aspect.content);
+
   const shouldRenderCheckboxesOrConsequences =
     aspect.tracks.length > 0 || aspect.consequences.length > 0;
 
   const shouldRenderPlayedDuringTurnIcon =
     aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
-
   const isDark = theme.palette.type === "dark";
-
   const paperBackground = isDark
     ? IndexCardColor[aspect.color].dark
     : IndexCardColor[aspect.color].light;
@@ -91,6 +96,7 @@ export const IndexCard: React.FC<
         {renderContent()}
         {shouldRenderCheckboxesOrConsequences &&
           renderCheckboxesAndConsequences()}
+        {renderSkills()}
         <Collapse in={aspect.hasDrawArea}>
           <Box>
             <DrawArea
@@ -226,6 +232,50 @@ export const IndexCard: React.FC<
       </Box>
     </Paper>
   );
+
+  function renderSkills() {
+    const hasSkills = indexCardSkills.length > 0;
+    return (
+      <Collapse in={hasSkills && !props.readonly && props.showClickableSkills}>
+        <Box px="1rem" py=".5rem">
+          <Grid container spacing={1} alignItems="center">
+            {indexCardSkills.map((skill, skillIndex) => {
+              return (
+                <Grid item key={skillIndex}>
+                  <Link
+                    className={css([
+                      {
+                        cursor: props.readonly ? "inherit" : "pointer",
+                      },
+                      props.readonly && {
+                        "color": theme.palette.text.primary,
+                        "&:hover": {
+                          textDecoration: "none",
+                        },
+                      },
+                    ])}
+                    data-cy={`index-card.skill.${skill.label}`}
+                    onClick={() => {
+                      if (props.readonly) {
+                        return;
+                      }
+                      const bonus = parseInt(skill.modifier) || 0;
+                      props.onRoll({
+                        bonusLabel: skill.label,
+                        bonus: bonus,
+                      });
+                    }}
+                  >
+                    {skill.label} ({skill.modifier})
+                  </Link>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+      </Collapse>
+    );
+  }
 
   function renderHeader() {
     return (
@@ -394,7 +444,7 @@ export const IndexCard: React.FC<
         key="onAddCountdown"
         data-cy={`${props["data-cy"]}.menu.track`}
         onClick={() => {
-          props.sceneManager.actions.addAspectTrack(props.aspectId, "...");
+          props.sceneManager.actions.addAspectTrack(props.aspectId, "Track");
         }}
       >
         {t("index-card.add-track")}

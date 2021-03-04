@@ -1,10 +1,6 @@
 # Dials
 
-Rules and dials that you can use and hack to add some colors to your Fate campaigns.
-
-Pick and choose as you wish!
-
-<toc></toc>
+<page-meta  description="Rules and dials that you can use and hack to add some colors to your Fate campaigns.<br/> Pick and choose as you wish!"></page-meta>
 
 # Props (from Return to the Stars)
 

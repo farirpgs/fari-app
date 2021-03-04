@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { DiceFab } from "../../components/DiceFab/DiceFab";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -7,9 +8,8 @@ import {
   CharactersContext,
   ICharacter,
 } from "../../contexts/CharactersContext/CharactersContext";
-import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { IDiceRollWithBonus, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRollResult, IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterDialog } from "./components/CharacterDialog";
@@ -21,7 +21,6 @@ export const CharacterRoute: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const history = useHistory();
-  const rollDice = useRollDice();
   const charactersManager = useContext(CharactersContext);
   const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<
@@ -29,11 +28,9 @@ export const CharacterRoute: React.FC<{
   >(undefined);
   const logger = useLogger();
 
-  function roll(options: IRollDiceOptions) {
+  function handleOnRoll(result: IDiceRollResult) {
     setRolls((draft) => {
-      const newRoll = rollDice(options);
-      logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
-      return [newRoll, ...draft];
+      return [result, ...draft];
     });
   }
 
@@ -64,13 +61,21 @@ export const CharacterRoute: React.FC<{
       />
 
       <Page>
+        {dialogMode && (
+          <DiceFab
+            rolls={rolls}
+            onSelect={(result) => {
+              handleOnRoll(result);
+            }}
+          />
+        )}
         <CharacterDialog
           open={!!selectedCharacter}
           character={selectedCharacter}
           dialog={dialogMode || false}
           rolls={rolls}
-          onRoll={(bonus) => {
-            roll(bonus);
+          onRoll={(result) => {
+            handleOnRoll(result);
           }}
           onSave={(newCharacter) => {
             charactersManager.actions.upsert(newCharacter);

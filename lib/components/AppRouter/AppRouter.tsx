@@ -150,6 +150,7 @@ export const AppRouter = () => {
                 author={docRoute.author}
                 gitHubLink={docRoute.gitHubLink}
                 sideBar={docRoute.sideBar}
+                sideBarOptions={docRoute.sideBarOptions}
                 defaultSideBarCategory={docRoute.defaultSideBarCategory}
               />
             )}

@@ -1,26 +1,35 @@
 import React, { useContext, useState } from "react";
 import {
-  IDiceRollType,
+  Dice,
+  IDiceCommandNames,
   IDiceRollWithBonus,
   IRollDiceOptions,
-  rollDice,
 } from "../../domains/dice/Dice";
 
-export const DiceContext = React.createContext<ReturnType<typeof useDice>>(
-  undefined as any
-);
+export type IDiceManager = ReturnType<typeof useDice>;
+
+export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
 export function useDice() {
-  const [diceType, setDiceType] = useState<IDiceRollType>("4dF");
+  const [selectedCommands, setSelectedCommands] = useState<
+    Array<IDiceCommandNames>
+  >(["1dF", "1dF", "1dF", "1dF"]);
 
-  return { state: { diceType }, actions: { setDiceType } };
+  const reset = () => {
+    setSelectedCommands(["1dF", "1dF", "1dF", "1dF"]);
+  };
+
+  return {
+    state: { selectedCommands: selectedCommands },
+    actions: { setSelectedCommands: setSelectedCommands, reset },
+  };
 }
 
 export function useRollDice() {
   const diceManager = useContext(DiceContext);
 
   function roll(options: IRollDiceOptions = {}): IDiceRollWithBonus {
-    const result = rollDice(diceManager.state.diceType);
+    const result = Dice.rollCommands(diceManager.state.selectedCommands);
 
     return { ...result, bonus: options.bonus, bonusLabel: options.bonusLabel };
   }
