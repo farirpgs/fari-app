@@ -48,6 +48,7 @@ export const PlayerRow: React.FC<
   const logger = useLogger();
   const shouldHighlight = props.isMe && !props.offline;
   const canControl = props.isGM || props.isMe;
+  const canRollDice = props.isMe || props.offline;
   const textColor = useTextColors(theme.palette.background.default);
   const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
@@ -60,7 +61,6 @@ export const PlayerRow: React.FC<
     t("play-route.character-name");
 
   const hasCharacterSheet = !!props.player.character;
-
   const selectedRowStyle = css({ backgroundColor: lightBackground });
   const playerInfoCellStyle = css({
     padding: "0.5rem",
@@ -185,7 +185,7 @@ export const PlayerRow: React.FC<
                 size="2rem"
                 fontSize="1.25rem"
                 borderSize=".15rem"
-                disabled={!canControl}
+                disabled={!canRollDice}
                 onClick={() => {
                   handleRoll({});
                 }}

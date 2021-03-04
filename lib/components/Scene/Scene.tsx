@@ -189,7 +189,11 @@ export const Scene: React.FC<IProps> = (props) => {
     ...sceneManager.state.scene.players,
   ];
   const me = everyone.find((player) => {
-    return props.mode === SceneMode.PlayOnline && props.userId === player.id;
+    if (isGM) {
+      return player.isGM;
+    } else if (props.mode === SceneMode.PlayOnline) {
+      return props.userId === player.id;
+    }
   });
 
   const liveMode = getLiveMode();
@@ -439,9 +443,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <TableHead>{renderPlayerRowHeader()}</TableHead>
               <TableBody>
                 {everyone.map((player, playerRowIndex) => {
-                  const isMe =
-                    props.mode === SceneMode.PlayOnline &&
-                    props.userId === player.id;
+                  const isMe = me?.id === player.id;
                   const canControl = isGM || isMe;
                   return (
                     <React.Fragment key={player.id}>
