@@ -115,7 +115,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
             className={css({
               textTransform: "uppercase",
               minWidth: "8rem",
-              color: lightBackground,
+              color: theme.palette.secondary.light,
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -282,13 +282,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
 
   function renderDice() {
     return (
-      <div>
+      <Box onMouseEnter={handleTooltipOpen} onMouseLeave={handleTooltipClose}>
         <ButtonBase
           ref={(p) => {
             setAnchorEl(p);
           }}
-          onMouseEnter={handleTooltipOpen}
-          onMouseLeave={handleTooltipClose}
           className={css({
             color: diceTextColors.primary,
           })}
@@ -312,7 +310,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
               : diceRollsManager.state.finalResultTotal}
           </Typography>
         </ButtonBase>
-      </div>
+      </Box>
     );
   }
 

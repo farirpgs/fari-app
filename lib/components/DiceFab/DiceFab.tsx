@@ -11,7 +11,6 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Zoom from "@material-ui/core/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { useContext, useState } from "react";
@@ -41,7 +40,6 @@ const buttonSize = "4rem";
 const SlideDurationForRollButton = 1000;
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
-  const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));
   const zIndex = useZIndex();
   const diceManager = useContext(DiceContext);
   const [anchorEl, setAnchorEl] = useState<any>(null);
