@@ -17,7 +17,7 @@ Fari now has two brand new content sections:
 - [Success With Style](/success-with-style): A searchable supply of ideas; these Fate pointers help you succeed with style!
 - [The Fari Wiki](/fari-wiki): Everything you need to know to use Fari effectively.
 
-So if you are looking for something new to read, I recommend you check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new **Fate Pointer** by Dgerrimea about [Problematic PC Aspects](/fate-wiki/problematic-pc-aspects)
+So if you are looking for something new to read, I recommend you check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new **Fate Pointer** by Dgerrimea about [Problematic PC Aspects](/success-with-style/problematic-pc-aspects)
 
 > If you are interested in contributing to either of these, come and talk to the team on [Discord](https://discord.com/invite/vMAJFjUraA) 👋
 
@@ -25,7 +25,7 @@ So if you are looking for something new to read, I recommend you check out the n
 
 ### Index Card Skill Modifiers
 
-Fari Index Cards are pretty versatile but can feel restrictive if you want to create a relatively complex NPC that is still not complex enough so that it would need its own character sheet.
+Fari Index Cards are pretty versatile, but can feel restrictive if you want to create a relatively complex NPC that is still not complex enough so that it would need its own character sheet.
 
 So to try to help with that, I've added a new functionality to the index cards that let you add skill modifiers that can trigger dice rolls on the GM.
 

@@ -188,6 +188,15 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
+  const controllablePlayerIds = everyone
+    .filter((player) => {
+      if (isGM) {
+        return true;
+      } else if (props.mode === SceneMode.PlayOnline) {
+        return props.userId === player.id;
+      }
+    })
+    .map((p) => p.id);
   const me = everyone.find((player) => {
     if (isGM) {
       return player.isGM;
@@ -444,7 +453,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <TableBody>
                 {everyone.map((player, playerRowIndex) => {
                   const isMe = me?.id === player.id;
-                  const canControl = isGM || isMe;
+                  const canControl = controllablePlayerIds.includes(player.id);
                   return (
                     <React.Fragment key={player.id}>
                       <CharacterDialog
@@ -479,10 +488,10 @@ export const Scene: React.FC<IProps> = (props) => {
                       <PlayerRow
                         data-cy={`scene.player-row.${playerRowIndex}`}
                         key={player.id}
-                        isGM={isGM}
-                        isMe={isMe}
+                        highlight={isMe}
+                        readonly={!canControl}
+                        renderControls={isGM}
                         player={player}
-                        offline={isOffline}
                         onPlayerRemove={() => {
                           sceneManager.actions.removePlayer(player.id);
                         }}
