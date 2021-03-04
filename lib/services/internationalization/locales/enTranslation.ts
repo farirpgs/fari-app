@@ -44,7 +44,7 @@ export const enTranslation = {
   "cookie-consent.description": `This site uses cookies to provide you with a great user experience. By using Fari, you accept our use of cookies.`,
   "dice-route.button": `Roll`,
   "dice-route.meta.description": `Roll any types of dice using this fair dice roller.`,
-  "dice-route.meta.title": `Dice Roller`,
+  "dice-route.meta.title": `Online Dice Roller`,
   "donation.kofi": `Support Fari on Ko-fi`,
   "donation.patreon": `Become a patron!`,
   "draw-route.meta.description": `Draw and sketch your scene using Fari's drawing pad`,
