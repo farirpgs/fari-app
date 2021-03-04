@@ -13,6 +13,7 @@ describe("useDocNavigation", () => {
           tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
         },
         docSideBar: sideBarMock,
+        doceSideBarOptions: undefined,
       });
     });
     expect(result.current.navigation.defaultOpenedCategories).toEqual([
@@ -30,6 +31,7 @@ describe("useDocNavigation", () => {
           tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
         },
         docSideBar: sideBarMock,
+        doceSideBarOptions: undefined,
       });
     });
     expect(result.current.navigation.highlightedItems).toEqual([
@@ -46,6 +48,7 @@ describe("useDocNavigation", () => {
           tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
         },
         docSideBar: sideBarMock,
+        doceSideBarOptions: undefined,
       });
     });
     expect(result.current.navigation.highlightedItems).toEqual([
@@ -68,6 +71,7 @@ describe("useDocNavigation", () => {
             >) as Array<IMarkdownIndex>,
           },
           docSideBar: sideBarMock,
+          doceSideBarOptions: undefined,
         });
       });
       expect(result.current.navigation.previousPageId).toEqual("chapter-1");
@@ -85,6 +89,7 @@ describe("useDocNavigation", () => {
             >) as Array<IMarkdownIndex>,
           },
           docSideBar: sideBarMock,
+          doceSideBarOptions: undefined,
         });
       });
       expect(result.current.navigation.previousPageId).toEqual(undefined);
@@ -104,6 +109,7 @@ describe("useDocNavigation", () => {
             >) as Array<IMarkdownIndex>,
           },
           docSideBar: sideBarMock,
+          doceSideBarOptions: undefined,
         });
       });
       expect(result.current.navigation.nextPageId).toEqual("chapter-3");
@@ -121,6 +127,7 @@ describe("useDocNavigation", () => {
             >) as Array<IMarkdownIndex>,
           },
           docSideBar: sideBarMock,
+          doceSideBarOptions: undefined,
         });
       });
       expect(result.current.navigation.nextPageId).toEqual(undefined);
@@ -142,6 +149,7 @@ describe("useDocNavigation", () => {
             ] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
           },
           docSideBar: sideBarMock,
+          doceSideBarOptions: undefined,
         });
       });
       expect(result.current.navigation.pageIdsWithoutCategories).toEqual([
@@ -192,6 +200,7 @@ describe("useDocNavigation", () => {
             ] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
           },
           docSideBar: undefined,
+          doceSideBarOptions: undefined,
         });
       });
 

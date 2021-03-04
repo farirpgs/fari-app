@@ -28,7 +28,7 @@ import { Icons } from "../../domains/Icons/Icons";
 import { makeIcon } from "../../domains/Icons/makeIcon";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { OtherResourcesItems } from "../SrdsRoute/SrdsRoute";
+import { MiscellaneousItems, WikiItems } from "../SrdsRoute/SrdsRoute";
 
 const Patrons = ["James Micu", "Randy Oest", "Ryan Singer", "Aeife O'Brien"];
 
@@ -53,7 +53,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Container maxWidth="sm">
         <Box mb="1rem">
-          <FateLabel variant="h5" align="center" color="primary">
+          <FateLabel variant="h4" align="center" color="primary">
             {t("home-route.support-fari.title")}
           </FateLabel>
         </Box>
@@ -133,16 +133,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
               <Grid item xs={12} md={4} className={sectionGridItem}>
                 <Box height="100%" display="flex" flexDirection="column">
                   <Box mb="1rem">
-                    <Link to="/play">
-                      <FateLabel
-                        variant="h5"
-                        align="center"
-                        color="primary"
-                        underline
-                      >
-                        {t("home-route.play-online.title")}
-                      </FateLabel>
-                    </Link>
+                    <FateLabel
+                      variant="h5"
+                      align="center"
+                      color="primary"
+                      uppercase={false}
+                    >
+                      {t("home-route.play-online.title")}
+                    </FateLabel>
                   </Box>
 
                   <Typography variant="body1" align="center">
@@ -167,16 +165,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={12} md={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Box mb="1rem">
-                  <Link to="/play-offline">
-                    <FateLabel
-                      variant="h5"
-                      align="center"
-                      color="primary"
-                      underline
-                    >
-                      {t("home-route.play-offline.title")}
-                    </FateLabel>
-                  </Link>
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="primary"
+                    uppercase={false}
+                  >
+                    {t("home-route.play-offline.title")}
+                  </FateLabel>
                 </Box>
 
                 <Typography variant="body1" align="center">
@@ -207,8 +203,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSectionsButtons() {
     return (
       <Container maxWidth="md">
-        <Box my="3rem">
-          <Grid container justify="center" spacing={2}>
+        <Box mt="3rem" mb="1rem">
+          <Grid container justify="center" spacing={6}>
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link
@@ -224,6 +220,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     align="center"
                     color="primary"
                     underline
+                    uppercase={false}
                   >
                     {t("menu.scenes")}
                   </FateLabel>
@@ -245,6 +242,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     align="center"
                     color="primary"
                     underline
+                    uppercase={false}
                   >
                     {t("menu.characters")}
                   </FateLabel>
@@ -260,16 +258,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     align="center"
                     color="primary"
                     underline
+                    uppercase={false}
                   >
                     {"SRDs"}
                   </FateLabel>
                 </Link>
               </Box>
             </Grid>
-          </Grid>
-        </Box>
-        <Box my="3rem">
-          <Grid container justify="center" spacing={2}>
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/blog">
@@ -279,6 +274,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     align="center"
                     color="primary"
                     underline
+                    uppercase={false}
                   >
                     {"Blog"}
                   </FateLabel>
@@ -288,12 +284,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <Grid item xs={6} sm={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Link to="/dice">
-                  {renderHeadingIcon(Icons.DiceGameIcon)}
+                  {renderHeadingIcon(Icons.FateDice)}
                   <FateLabel
                     variant="h5"
                     align="center"
                     color="primary"
                     underline
+                    uppercase={false}
                   >
                     {"Dice"}
                   </FateLabel>
@@ -310,6 +307,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     align="center"
                     color="primary"
                     underline
+                    uppercase={false}
                   >
                     {"Oracle"}
                   </FateLabel>
@@ -334,7 +332,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <img alt="Fari" width="125px" src={appIcon} />
         </Box>
         <Box pb="2rem" textAlign="center">
-          <FateLabel variant="h6" color="secondary" as="h2">
+          <FateLabel variant="h6" color="primary" as="h2">
             {t("home-route.heading")}
           </FateLabel>
         </Box>
@@ -359,12 +357,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </Container>
         <Container maxWidth="md">
           <Box pb="2rem">
-            <Heading
-              icon={HelpIcon}
-              title={"Other Resources"}
-              subtitle={"Compendium, Stunt examples and more..."}
-            />
-            <OtherResourcesItems />
+            <Heading icon={HelpIcon} title={"Wikis & Resources"} />
+            <WikiItems />
+            <Box pt="2rem" />
+            <Heading icon={HelpIcon} title={"Miscellaneous"} />
+            <MiscellaneousItems />
           </Box>
         </Container>
         <Container maxWidth="lg">

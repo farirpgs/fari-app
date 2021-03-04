@@ -1,6 +1,22 @@
 # Changelog
 
-Detailed technical changelog of Fari
+<page-meta author="RPDeshaies" description="Detailed technical changelog"></page-meta>
+
+## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
+
+- feat: new Fari Wiki
+- feat: new Sucess with Style blog
+- feat: new image preview on content editable component
+- feat: new Dice Menu
+- feat: new Dice Floating Action Button in Scenes
+- feat: new Dice Floating Action Button in Character Sheet
+- feat: dynamic dice modifier on Index Cards
+- feat: new Doc "quote" style used for page-meta description
+- feat: Doc image alt text
+- feat: Doc sidebarOption for renaming default category
+- fix: highlight Doc "Misc" section if inside category
+- refac: default Index Card Track label from `...` to `Track`
+- fix: moving cursor when typing inside a content-editable component if content had an image
 
 ## v3.6 Document SideBar + Table of Contents and support for more dice
 

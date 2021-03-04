@@ -11,16 +11,18 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TableRow from "@material-ui/core/TableRow";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { useRollDice } from "../../contexts/DiceContext/DiceContext";
+import {
+  DiceContext,
+  useRollDice,
+} from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
-import { formatDiceNumber } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { Oracle } from "./domains/Oracle";
@@ -59,7 +61,7 @@ export const OracleRoute = () => {
   const theme = useTheme();
   const logger = useLogger();
   const rollDice = useRollDice();
-
+  const diceManager = useContext(DiceContext);
   const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
   const [likeliness, setLikeliness] = useState<number>(0);
   const [rolling, setRolling] = useState<boolean>(false);
@@ -76,6 +78,10 @@ export const OracleRoute = () => {
       return [newRoll, ...draft];
     });
   }
+
+  useEffect(() => {
+    diceManager.actions.reset();
+  }, []);
 
   useEffect(() => {
     if (shouldDisplayFinalResult) {
@@ -191,13 +197,15 @@ export const OracleRoute = () => {
                           }}
                         >
                           <FateLabel className={css({ fontWeight: "bold" })}>
-                            {l.label} ({formatDiceNumber(l.value)})
+                            {l.label} ({formatOracleDiceNumber(l.value)})
                           </FateLabel>
                         </TableCell>
 
                         {Rolls.map((r) => {
                           const cellValue = l.value + r.value;
-                          const formattedValue = formatDiceNumber(cellValue);
+                          const formattedValue = formatOracleDiceNumber(
+                            cellValue
+                          );
 
                           const isCurrentColumn = r.value === finalRollTotal;
 
@@ -278,7 +286,7 @@ export const OracleRoute = () => {
                           })}
                         >
                           <FateLabel align="center">
-                            {formatDiceNumber(r.value)}
+                            {formatOracleDiceNumber(r.value)}
                           </FateLabel>
                         </TableCell>
                       );
@@ -303,3 +311,11 @@ export const OracleRoute = () => {
 
 OracleRoute.displayName = "OracleRoute";
 export default OracleRoute;
+
+function formatOracleDiceNumber(total: number): string {
+  if (total > 0) {
+    return `+${total}`;
+  }
+
+  return total.toString();
+}

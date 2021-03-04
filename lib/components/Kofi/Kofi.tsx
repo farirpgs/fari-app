@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -19,5 +20,16 @@ export const Kofi: React.FC<{}> = (props) => {
     }
   } catch (error) {}
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div
+      className={css({
+        "& span.kofitext": {
+          color: `${theme.palette.getContrastText(
+            theme.palette.primary.main
+          )} !important`,
+        },
+      })}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 };

@@ -31,9 +31,8 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(true);
-      expect(view.result.current.state.display.formatted).toEqual("0");
-      expect(view.result.current.state.display.spreaded).toEqual(undefined);
-      expect(view.result.current.state.display.explanation).toEqual(undefined);
+      expect(view.result.current.state.finalResultTotal).toEqual("0");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(false);
       expect(view.result.current.state.color).toEqual("inherit");
@@ -41,7 +40,15 @@ describe("useDiceRolls", () => {
     it("should display first roll on load without animation", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
+        {
+          total: 4,
+          commandResults: [
+            { value: 1, type: "1dF" },
+            { value: 1, type: "1dF" },
+            { value: 1, type: "1dF" },
+            { value: 1, type: "1dF" },
+          ],
+        },
       ];
 
       // WHEN
@@ -58,9 +65,8 @@ describe("useDiceRolls", () => {
       expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
 
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("+4");
-      expect(view.result.current.state.display.spreaded).toEqual("+ + + +");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
+      expect(view.result.current.state.finalResultTotal).toEqual("+4");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
     });
@@ -79,27 +85,17 @@ describe("useDiceRolls", () => {
         }
       );
       view.rerender({
-        rolls: [...rolls, { total: 4, rolls: [1, 1, 1, 1], type: "4dF" }],
-      });
-      act(() => {
-        jest.runAllTimers();
-      });
-
-      // THEN
-      expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
-      expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("+4");
-      expect(view.result.current.state.display.spreaded).toEqual("+ + + +");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
-      expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#4caf50");
-
-      // WHEN
-      view.rerender({
         rolls: [
           ...rolls,
-          { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
-          { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
+          {
+            total: 4,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
+          },
         ],
       });
       act(() => {
@@ -109,9 +105,8 @@ describe("useDiceRolls", () => {
       // THEN
       expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("+3");
-      expect(view.result.current.state.display.spreaded).toEqual("+ + + 0");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
+      expect(view.result.current.state.finalResultTotal).toEqual("+4");
+
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
       expect(view.result.current.state.color).toEqual("#4caf50");
 
@@ -119,9 +114,69 @@ describe("useDiceRolls", () => {
       view.rerender({
         rolls: [
           ...rolls,
-          { total: 0, rolls: [0, 0, 0, 0], type: "4dF" },
-          { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
-          { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
+          {
+            total: 3,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          {
+            total: 4,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
+          },
+        ],
+      });
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      // THEN
+      expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
+      expect(view.result.current.state.finalResultHidden).toEqual(false);
+      expect(view.result.current.state.finalResultTotal).toEqual("+3");
+
+      expect(view.result.current.state.hasRolledOnce).toEqual(true);
+      expect(view.result.current.state.color).toEqual("#4caf50");
+
+      // WHEN
+      view.rerender({
+        rolls: [
+          ...rolls,
+          {
+            total: 0,
+            commandResults: [
+              { value: 0, type: "1dF" },
+              { value: 0, type: "1dF" },
+              { value: 0, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          {
+            total: 3,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          {
+            total: 4,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
+          },
         ],
       });
       act(() => {
@@ -130,9 +185,8 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("0");
-      expect(view.result.current.state.display.spreaded).toEqual("0 0 0 0");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
+      expect(view.result.current.state.finalResultTotal).toEqual("0");
+
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
       expect(view.result.current.state.color).toEqual("inherit");
 
@@ -140,10 +194,34 @@ describe("useDiceRolls", () => {
       view.rerender({
         rolls: [
           ...rolls,
-          { total: -3, rolls: [-1, -1, -1, 0], type: "4dF" },
-          { total: 0, rolls: [0], type: "4dF" },
-          { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
-          { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
+          {
+            total: -3,
+            commandResults: [
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          { total: 0, commandResults: [{ value: 0, type: "1dF" }] },
+          {
+            total: 3,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          {
+            total: 4,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
+          },
         ],
       });
       act(() => {
@@ -153,9 +231,8 @@ describe("useDiceRolls", () => {
       // THEN
       expect(Confetti.fireCannon).toHaveBeenCalledTimes(0);
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("-3");
-      expect(view.result.current.state.display.spreaded).toEqual("- - - 0");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
+      expect(view.result.current.state.finalResultTotal).toEqual("-3");
+
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
       expect(view.result.current.state.color).toEqual("#f44336");
 
@@ -163,11 +240,43 @@ describe("useDiceRolls", () => {
       view.rerender({
         rolls: [
           ...rolls,
-          { total: -4, rolls: [-1, -1, -1, -1], type: "4dF" },
-          { total: -3, rolls: [-1, -1, -1, 0], type: "4dF" },
-          { total: 0, rolls: [0], type: "4dF" },
-          { total: 3, rolls: [1, 1, 1, 0], type: "4dF" },
-          { total: 4, rolls: [1, 1, 1, 1], type: "4dF" },
+          {
+            total: -4,
+            commandResults: [
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+            ],
+          },
+          {
+            total: -3,
+            commandResults: [
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          { total: 0, commandResults: [{ value: 0, type: "1dF" }] },
+          {
+            total: 3,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
+          {
+            total: 4,
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
+          },
         ],
       });
       act(() => {
@@ -177,9 +286,8 @@ describe("useDiceRolls", () => {
       // THEN
       expect(Confetti.fireCannon).toHaveBeenCalledTimes(1);
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("-4");
-      expect(view.result.current.state.display.spreaded).toEqual("- - - -");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
+      expect(view.result.current.state.finalResultTotal).toEqual("-4");
+
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
       expect(view.result.current.state.color).toEqual("#f44336");
     });
@@ -203,10 +311,14 @@ describe("useDiceRolls", () => {
           ...rolls,
           {
             total: 2,
-            rolls: [0, 0, 1, 1],
+            commandResults: [
+              { value: 0, type: "1dF" },
+              { value: 0, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             bonus: 2,
             bonusLabel: "Notice",
-            type: "4dF",
           },
         ],
       });
@@ -216,28 +328,33 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("+4");
-      expect(view.result.current.state.display.spreaded).toEqual("0 0 + +");
-      expect(view.result.current.state.display.explanation).toEqual(
-        "4dF + 2 (Notice)"
-      );
+      expect(view.result.current.state.finalResultTotal).toEqual("+4");
+
       // WHEN
       view.rerender({
         rolls: [
           ...rolls,
           {
             total: 4,
-            rolls: [1, 1, 1, 1],
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             bonus: 4,
             bonusLabel: "Shoot",
-            type: "4dF",
           },
           {
             total: 2,
-            rolls: [0, 0, 1, 1],
+            commandResults: [
+              { value: 0, type: "1dF" },
+              { value: 0, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             bonus: 2,
             bonusLabel: "Notice",
-            type: "4dF",
           },
         ],
       });
@@ -248,30 +365,42 @@ describe("useDiceRolls", () => {
       // THEN
       expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("+8");
-      expect(view.result.current.state.display.spreaded).toEqual("+ + + +");
-      expect(view.result.current.state.display.explanation).toEqual(
-        "4dF + 4 (Shoot)"
-      );
+      expect(view.result.current.state.finalResultTotal).toEqual("+8");
 
       // WHEN
       view.rerender({
         rolls: [
           ...rolls,
-          { total: -3, rolls: [-1, -1, -1, 0], type: "4dF" },
+          {
+            total: -3,
+            commandResults: [
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: -1, type: "1dF" },
+              { value: 0, type: "1dF" },
+            ],
+          },
           {
             total: 4,
-            rolls: [1, 1, 1, 1],
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             bonus: 4,
             bonusLabel: "Shoot",
-            type: "4dF",
           },
           {
             total: 2,
-            rolls: [0, 0, 1, 1],
+            commandResults: [
+              { value: 0, type: "1dF" },
+              { value: 0, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             bonus: 2,
             bonusLabel: "Notice",
-            type: "4dF",
           },
         ],
       });
@@ -281,16 +410,17 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("-3");
-      expect(view.result.current.state.display.spreaded).toEqual("- - - 0");
-      expect(view.result.current.state.display.explanation).toEqual("4dF");
+      expect(view.result.current.state.finalResultTotal).toEqual("-3");
     });
   });
   describe("Coin toss", () => {
     it("should properly format heads", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: 1, rolls: [1], type: "Coin" },
+        {
+          total: 1,
+          commandResults: [{ value: 1, type: "Coin" }],
+        },
       ];
 
       // WHEN
@@ -305,16 +435,15 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("1");
-      expect(view.result.current.state.display.spreaded).toEqual("Heads");
-      expect(view.result.current.state.display.explanation).toEqual("Coin");
+      expect(view.result.current.state.finalResultTotal).toEqual("1");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
     });
     it("should properly format tails", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: -1, rolls: [-1], type: "Coin" },
+        { total: -1, commandResults: [{ value: -1, type: "Coin" }] },
       ];
 
       // WHEN
@@ -329,9 +458,8 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("-1");
-      expect(view.result.current.state.display.spreaded).toEqual("Tails");
-      expect(view.result.current.state.display.explanation).toEqual("Coin");
+      expect(view.result.current.state.finalResultTotal).toEqual("-1");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
     });
@@ -340,7 +468,13 @@ describe("useDiceRolls", () => {
     it("should properly format result", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: 8, rolls: [5, 3], type: "2d6" },
+        {
+          total: 8,
+          commandResults: [
+            { value: 5, type: "1d6" },
+            { value: 3, type: "1d6" },
+          ],
+        },
       ];
 
       // WHEN
@@ -355,16 +489,23 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("8");
-      expect(view.result.current.state.display.spreaded).toEqual("5 + 3");
-      expect(view.result.current.state.display.explanation).toEqual("2d6");
+      expect(view.result.current.state.finalResultTotal).toEqual("8");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
     });
     it("should properly format result with bonus", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: 8, rolls: [5, 3], type: "2d6", bonus: 2, bonusLabel: "Weird" },
+        {
+          total: 8,
+          commandResults: [
+            { value: 5, type: "1d6" },
+            { value: 3, type: "1d6" },
+          ],
+          bonus: 2,
+          bonusLabel: "Weird",
+        },
       ];
 
       // WHEN
@@ -379,46 +520,18 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("10");
-      expect(view.result.current.state.display.spreaded).toEqual("5 + 3");
-      expect(view.result.current.state.display.explanation).toEqual(
-        "2d6 + 2 (Weird)"
-      );
+      expect(view.result.current.state.finalResultTotal).toEqual("10");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
     });
   });
-  describe("1dF", () => {
-    it("should properly format result", () => {
-      // GIVEN
-      const rolls: Array<IDiceRollWithBonus> = [
-        { total: 1, rolls: [1], type: "1dF" },
-      ];
 
-      // WHEN
-      const view = renderHook(
-        (props) => {
-          return useDiceRolls(props.rolls);
-        },
-        {
-          initialProps: { rolls },
-        }
-      );
-
-      // THEN
-      expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("+1");
-      expect(view.result.current.state.display.spreaded).toEqual("+");
-      expect(view.result.current.state.display.explanation).toEqual("1dF");
-      expect(view.result.current.state.rolling).toEqual(false);
-      expect(view.result.current.state.hasRolledOnce).toEqual(true);
-    });
-  });
   describe("1d100", () => {
     it("should properly format result", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: 45, rolls: [45], type: "1d100" },
+        { total: 45, commandResults: [{ value: 45, type: "1d100" }] },
       ];
 
       // WHEN
@@ -433,9 +546,8 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(view.result.current.state.finalResultHidden).toEqual(false);
-      expect(view.result.current.state.display.formatted).toEqual("45");
-      expect(view.result.current.state.display.spreaded).toEqual("45");
-      expect(view.result.current.state.display.explanation).toEqual("1d100");
+      expect(view.result.current.state.finalResultTotal).toEqual("45");
+
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
     });

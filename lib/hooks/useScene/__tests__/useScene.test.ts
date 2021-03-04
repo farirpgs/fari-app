@@ -465,9 +465,13 @@ describe("useScene", () => {
       act(() => {
         result.current.actions.updatePlayerPlayedDuringTurn("1", true);
         result.current.actions.updatePlayerRoll("1", {
-          rolls: [1, 1, 1, 1],
+          commandResults: [
+            { value: 1, type: "1dF" },
+            { value: 1, type: "1dF" },
+            { value: 1, type: "1dF" },
+            { value: 1, type: "1dF" },
+          ],
           total: 4,
-          type: "4dF",
         });
         result.current.actions.updatePlayerCharacterMainPointCounter("1", 1);
       });
@@ -481,9 +485,13 @@ describe("useScene", () => {
         playerName: "RP",
         rolls: [
           {
-            rolls: [1, 1, 1, 1],
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             total: 4,
-            type: "4dF",
           },
         ],
       });
@@ -501,9 +509,13 @@ describe("useScene", () => {
         playerName: "RP",
         rolls: [
           {
-            rolls: [1, 1, 1, 1],
+            commandResults: [
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+              { value: 1, type: "1dF" },
+            ],
             total: 4,
-            type: "4dF",
           },
         ],
       });

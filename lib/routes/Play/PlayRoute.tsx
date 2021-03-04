@@ -105,7 +105,7 @@ export const PlayRoute: React.FC<{
   return (
     <>
       <PageMeta
-        title={pageTitle?.toUpperCase() || t("home-route.play-online.title")}
+        title={pageTitle || t("home-route.play-online.title")}
         description={t("home-route.play-online.description")}
       />
       {shouldRenderPlayerJoinGameScreen ? (

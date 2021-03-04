@@ -160,7 +160,6 @@ export const deTranslation: Record<
   "play-route.public": `Public`,
   "play-route.reset-initiative": `Zurücksetzen`,
   "play-route.reset-scene-confirmation": `Bist du sicher, dass du deine Szene zurücksetzen und alle deine aktuellen Aspekte entfernen willst?`,
-  "play-route.reset-scene": `Zurücksetzen`,
   "play-route.roll": `Würfeln`,
   "play-route.save-scene": `Speichern`,
   "play-route.scene-name": `Name der Szene`,

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { act, renderHook } from "@testing-library/react-hooks";
 import { CharacterFactory } from "../../../../domains/character/CharacterFactory";
 import { CharacterType } from "../../../../domains/character/CharacterType";
@@ -25,7 +28,7 @@ describe("useCharacter", () => {
     expect(result.current.state.character).toEqual(character);
     // WHEN the name is updated
     act(() => {
-      result.current.actions.setName("Luke&nbsp;Skywalker&nbsp;&nbsp;");
+      result.current.actions.setName("Luke Skywalker");
     });
     expect(result.current.actions.sanitizeCharacter().name).toEqual(
       "Luke Skywalker"

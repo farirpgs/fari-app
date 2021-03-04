@@ -1,6 +1,6 @@
 # Fate Stunts
 
-A very detailed list of stunts to help you get started with character creation quickly.
+<page-meta description="A very detailed list of stunts to help you get started with character creation quickly."></page-meta>
 
 > All stunts from the _Fate Core System_ book are here, plus most of the stunts from the _Fate System Toolkit_ and _Spirit of the Century_. Any stunts that would qualify as extras in _Fate Core_ are omitted, as are stunts that don't make sense without taking an extra.
 >

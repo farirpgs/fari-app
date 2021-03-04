@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
@@ -10,6 +11,7 @@ export const SeelieSquireRoute: React.FC<{
   page: string;
 }> = (props) => {
   const theme = useTheme();
+  const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));
   return (
     <Doc
       page={props.page}
@@ -17,8 +19,10 @@ export const SeelieSquireRoute: React.FC<{
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
       imageUrl={Images.seelieSquire}
+      sideBar={{ "+Book of Creatures": ["seelie-squires-book-of-creatures"] }}
+      sideBarOptions={{ miscSectionTitle: "Creatures" }}
       loadFunction={async () => {
-        return makeSeelieSquireMarkdown(theme);
+        return makeSeelieSquireMarkdown({ theme, isExtraSmall: isExtraSmall });
       }}
       gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
       noIndex
@@ -26,10 +30,6 @@ export const SeelieSquireRoute: React.FC<{
         title: "Seelie Squire",
         avatarUrl: Images.seelieSquireAvatar,
         items: [
-          {
-            label: "Patreon",
-            url: "https://www.patreon.com/seeliesquire",
-          },
           {
             label: "Discord",
             url: "https://discord.com/invite/8u3VVZd",
@@ -46,9 +46,12 @@ export const SeelieSquireRoute: React.FC<{
 
 export default SeelieSquireRoute;
 
-function makeSeelieSquireMarkdown(theme: Theme): string {
+function makeSeelieSquireMarkdown(props: {
+  theme: Theme;
+  isExtraSmall: boolean;
+}): string {
   const bigFateLabelClass = css({
-    color: theme.palette.primary.main,
+    color: props.theme.palette.primary.main,
     textTransform: "uppercase",
     fontSize: "1.15rem",
     fontWeight: 800,
@@ -72,13 +75,13 @@ function makeSeelieSquireMarkdown(theme: Theme): string {
 
 ${creatures.map((c) => {
   return `
-## ${c.title}
+# ${c.title}
 
 ${c.description}
 
 > ${renderImage(c)}
 > 
-> ### ${c.character.name} 
+> ## ${c.character.name} 
 >
 > <div class=${bigFateLabelClass}>Aspects</div>
 > 
@@ -105,7 +108,10 @@ ${c.description}
   return markdown;
 
   function renderImage(c: ICreature) {
-    return c.character.image ? `![](${c.character.image})` : "";
+    const maxWidth = props.isExtraSmall ? "90%" : "50%";
+    return c.character.image
+      ? `<img alt="${c.character.name}" src="${c.character.image}" style="max-width: ${maxWidth}" />`
+      : "";
   }
 
   function renderStunts(c: ICreature) {
@@ -119,12 +125,14 @@ ${c.description}
   }
 
   function renderHealth(c: ICreature) {
-    return c.character.tracks.map(
-      (s) => `
+    return c.character.tracks
+      .map(
+        (s) => `
 > <div class=${smallFateLabelClass}>${s.name}</div>
 > ${s.values.map((sv) => `[${sv}]`).join(" • ")}
 > `
-    );
+      )
+      .join("<br/><br/>");
   }
 
   function renderSkills(c: ICreature) {
@@ -132,6 +140,6 @@ ${c.description}
   }
 
   function renderAspects(c: ICreature) {
-    return c.character.aspects.map((a) => `**${a}**`).join(` • `);
+    return c.character.aspects.map((a) => `<code>${a}</code>`).join(` • `);
   }
 }

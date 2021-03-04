@@ -32,9 +32,9 @@ import { DiceBox } from "../../../DiceBox/DiceBox";
 export const PlayerRow: React.FC<
   {
     player: IPlayer;
-    isGM: boolean;
-    isMe: boolean;
-    offline: boolean;
+    readonly: boolean;
+    renderControls: boolean;
+    highlight: boolean;
 
     onDiceRoll(options: IRollDiceOptions): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
@@ -47,8 +47,8 @@ export const PlayerRow: React.FC<
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const shouldHighlight = props.isMe && !props.offline;
-  const canControl = props.isGM || props.isMe;
+  const shouldHighlight = props.highlight;
+
   const textColor = useTextColors(theme.palette.background.default);
   const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
@@ -61,7 +61,6 @@ export const PlayerRow: React.FC<
     t("play-route.character-name");
 
   const hasCharacterSheet = !!props.player.character;
-
   const selectedRowStyle = css({ backgroundColor: lightBackground });
   const playerInfoCellStyle = css({
     padding: "0.5rem",
@@ -116,7 +115,7 @@ export const PlayerRow: React.FC<
                 padding: "4px 5px",
                 fontSize: "1.2rem",
                 lineHeight: Font.lineHeight(1.2),
-                fontWeight: props.isMe ? "bold" : "normal",
+                fontWeight: props.highlight ? "bold" : "normal",
               })}
             >
               {name}
@@ -146,7 +145,7 @@ export const PlayerRow: React.FC<
                     playedDuringTurn: !props.player.playedDuringTurn,
                   });
                 }}
-                disabled={!canControl}
+                disabled={props.readonly}
                 size="small"
               >
                 {props.player.playedDuringTurn ? (
@@ -166,7 +165,7 @@ export const PlayerRow: React.FC<
                   borderRadius: "50%",
                 })}
                 data-cy={`${props["data-cy"]}.consume-point`}
-                disabled={!canControl}
+                disabled={props.readonly}
                 onClick={(e) => {
                   e.stopPropagation();
                   props.onUpdatePlayerCharacterMainPointCounter(points - 1);
@@ -179,18 +178,20 @@ export const PlayerRow: React.FC<
           </Tooltip>
         </TableCell>
         <TableCell className={cx(playerInfoCellStyle)} align="right">
-          <Box display="flex" justifyContent="flex-end">
-            <DiceBox
-              rolls={props.player.rolls}
-              size="2rem"
-              fontSize="1.25rem"
-              borderSize=".15rem"
-              disabled={!canControl}
-              onClick={() => {
-                handleRoll({});
-              }}
-            />
-          </Box>
+          {!props.highlight && (
+            <Box display="flex" justifyContent="flex-end">
+              <DiceBox
+                rolls={props.player.rolls}
+                size="2rem"
+                fontSize="1.25rem"
+                borderSize=".15rem"
+                disabled={props.readonly}
+                onClick={() => {
+                  handleRoll({});
+                }}
+              />
+            </Box>
+          )}
         </TableCell>
       </TableRow>
       {renderGMControls()}
@@ -202,7 +203,7 @@ export const PlayerRow: React.FC<
     return (
       <>
         <Grid container wrap="nowrap" alignItems="center">
-          {props.isMe && (
+          {props.highlight && (
             <Grid item>
               <Tooltip
                 title={
@@ -217,7 +218,7 @@ export const PlayerRow: React.FC<
               >
                 <IconButton
                   size="small"
-                  color={hasCharacterSheet ? "secondary" : "primary"}
+                  color={hasCharacterSheet ? "default" : "primary"}
                 >
                   {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
                 </IconButton>
@@ -251,7 +252,7 @@ export const PlayerRow: React.FC<
                   textAlign: "left",
                   fontSize: "1.2rem",
                   lineHeight: Font.lineHeight(1.2),
-                  fontWeight: props.isMe ? "bold" : "normal",
+                  fontWeight: props.highlight ? "bold" : "normal",
                 })}
               >
                 {name}
@@ -263,7 +264,7 @@ export const PlayerRow: React.FC<
     );
   }
   function renderGMControls() {
-    if (!props.isGM) {
+    if (!props.renderControls) {
       return null;
     }
 

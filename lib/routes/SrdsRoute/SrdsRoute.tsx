@@ -46,12 +46,11 @@ export const Srds: React.FC = (props) => {
       <Box pt="1rem" />
       <ToolkitItems />
       <Box pt="2rem" />
-      <Heading
-        icon={HelpIcon}
-        title={"Other Resources"}
-        subtitle={"Compendium, Stunt examples and more..."}
-      />
-      <OtherResourcesItems />
+      <Heading icon={HelpIcon} title={"Wikis & Resources"} />
+      <WikiItems />
+      <Box pt="2rem" />
+      <Heading icon={HelpIcon} title={"Miscellaneous"} />
+      <MiscellaneousItems />
     </div>
   );
 };
@@ -142,17 +141,79 @@ export const ToolkitItems: React.FC = (props) => {
             link="/srds/adversary-toolkit"
           />
         </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Dials"
+            description={
+              <>
+                Useful rules you can pick and choose to hack your Fate campaign.
+              </>
+            }
+            bgColor="#0a0f1c"
+            imageUrl={Images.dials}
+            link="/dials"
+          />
+        </Grid>
       </Grid>
     </Box>
   );
 };
 
-export const OtherResourcesItems: React.FC = (props) => {
+export const MiscellaneousItems: React.FC = (props) => {
   return (
     <Box>
       <Grid container spacing={4} justify="center">
-        {/* <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Cheat Sheet"
+            description={
+              <>
+                Your handy tool for a quick access to the most important rules
+                during a session.
+              </>
+            }
+            bgColor="#030200"
+            imageUrl={Images.cheatSheet}
+            link="/cheat-sheet"
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export const WikiItems: React.FC = (props) => {
+  return (
+    <Box>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Fari Wiki"
+            description={<>Tips and detailed explanation on everything Fari.</>}
+            bgColor="#0c2b69"
+            imageUrl={Images.logo}
+            link="/fari-wiki"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Success With Style"
+            description={
+              <>
+                A searchable supply of ideas; these Fate pointers help you
+                succeed with style!
+              </>
+            }
+            bgColor="#080303"
+            imageUrl={Images.successWithStyle}
+            link="/success-with-style"
+          />
+        </Grid>
+        {/*
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
             title="Book of Monsters"
             description={
               <>
@@ -178,47 +239,6 @@ export const OtherResourcesItems: React.FC = (props) => {
             bgColor="#223031"
             imageUrl={Images.book}
             link="/fate-stunts"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Dials"
-            description={
-              <>
-                Useful rules you can pick and choose to hack your Fate campaign.
-              </>
-            }
-            bgColor="#011779"
-            imageUrl={Images.dials}
-            link="/dials"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Scene Checklist"
-            description={
-              <>
-                If you feel stumped during a scene, this checklist is going to
-                help you get back on track in no time.
-              </>
-            }
-            bgColor="#3b3a39"
-            imageUrl={Images.scene}
-            link="/scene-checklist"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Cheat Sheet"
-            description={
-              <>
-                Your handy tool for a quick access to the most important rules
-                during a session.
-              </>
-            }
-            bgColor="#030200"
-            imageUrl={Images.cheatSheet}
-            link="/cheat-sheet"
           />
         </Grid>
       </Grid>
@@ -282,12 +302,13 @@ export const DocCard: React.FC<{
                   <FateLabel
                     textColor={color}
                     fontSize={theme.typography.h5.fontSize}
+                    uppercase={false}
                   >
                     {props.title}
                   </FateLabel>
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="body1"
                   component="p"
                   className={css({
                     color: color,

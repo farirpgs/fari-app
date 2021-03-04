@@ -161,7 +161,6 @@ export const glTranslation: Record<
   "play-route.public": `Público`,
   "play-route.reset-initiative": `Restaurar`,
   "play-route.reset-scene-confirmation": `Tes a certeza de querer restaurar a escena e borrar todos os aspectos actuais?`,
-  "play-route.reset-scene": `Restaurar`,
   "play-route.roll": `Rolar`,
   "play-route.save-scene": `Gardar`,
   "play-route.scene-name": `Nome da escena`,

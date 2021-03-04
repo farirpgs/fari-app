@@ -1,15 +1,15 @@
-import { useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import { useTheme } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { DiceFab } from "../../components/DiceFab/DiceFab";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../domains/character/types";
-import { IDiceRollWithBonus, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRollResult, IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "./components/CharacterV3Dialog";
@@ -22,7 +22,6 @@ export const CharacterRoute: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const history = useHistory();
-  const rollDice = useRollDice();
   const charactersManager = useContext(CharactersContext);
   const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<
@@ -30,11 +29,9 @@ export const CharacterRoute: React.FC<{
   >(undefined);
   const logger = useLogger();
 
-  function roll(options: IRollDiceOptions) {
+  function handleOnRoll(result: IDiceRollResult) {
     setRolls((draft) => {
-      const newRoll = rollDice(options);
-      logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
-      return [newRoll, ...draft];
+      return [result, ...draft];
     });
   }
 
@@ -66,6 +63,14 @@ export const CharacterRoute: React.FC<{
 
       <Box bgcolor={theme.palette.background.paper}>
         <Page>
+          {dialogMode && (
+            <DiceFab
+              rolls={rolls}
+              onSelect={(result) => {
+                handleOnRoll(result);
+              }}
+            />
+          )}
           <CharacterV3Dialog
             open={!!selectedCharacter}
             character={selectedCharacter}

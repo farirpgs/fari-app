@@ -34,6 +34,9 @@ export const MagicGridContainer: React.FC<{
         }
       });
 
+      // resize after `MagicGridUpdateDebounceMS` to let animation run
+      resize();
+
       window.addEventListener("resize", resize);
     }
 

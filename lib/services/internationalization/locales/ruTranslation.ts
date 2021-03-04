@@ -160,7 +160,6 @@ export const ruTranslation: Record<
   "play-route.public": `Public`,
   "play-route.reset-initiative": `Сбросить`,
   "play-route.reset-scene-confirmation": `Вы уверен, что хотите сбросить вашу сцену и удалить все текущие аспекты?`,
-  "play-route.reset-scene": `Сбросить Сцену`,
   "play-route.roll": `Бросок`,
   "play-route.save-scene": `Сохранить Сцену`,
   "play-route.scene-name": `Название сцены`,

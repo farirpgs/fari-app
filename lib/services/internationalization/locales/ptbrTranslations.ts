@@ -160,7 +160,6 @@ export const ptbrTranslation: Record<
   "play-route.public": `Public`,
   "play-route.reset-initiative": `Resetar`,
   "play-route.reset-scene-confirmation": `Você tem certeza que quer resetar sua cena e remover todos os aspectos atuais?`,
-  "play-route.reset-scene": `Resetar`,
   "play-route.roll": `Rolar`,
   "play-route.save-scene": `Salvar`,
   "play-route.scene-name": `Nome da cena`,

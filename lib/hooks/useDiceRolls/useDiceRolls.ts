@@ -1,11 +1,7 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
-import {
-  DiceGroups,
-  IDiceRollType,
-  IDiceRollWithBonus,
-} from "../../domains/dice/Dice";
+import { Dice, IDiceRollWithBonus } from "../../domains/dice/Dice";
 
 const rollingDelay = 1000;
 
@@ -36,42 +32,30 @@ export function useDiceRolls(
 
   const hasRolledOnce = finalResult !== undefined;
 
-  const finalResultRolls = finalResult?.rolls ?? [];
-  const finalResultTotal = finalResult?.total ?? 0;
+  const finalResultRolls = finalResult?.commandResults ?? [];
   const finalResultBonus = finalResult?.bonus ?? 0;
   const finalResultBonusLabel = finalResult?.bonusLabel ?? "";
-
-  const finalResultType = finalResult?.type;
-  const finalResultDiceGroup = DiceGroups[latestPlayerRoll?.type];
-
-  const finalResultFormatted = formatDiceNumber(
-    finalResultTotal + finalResultBonus,
-    finalResultType
-  );
-
-  const finalResultSpread = finalResultDiceGroup?.formatDetailedResult(
-    finalResultRolls
-  );
-  const finalResultExplanation = finalResultBonus
-    ? `${finalResultType} + ${finalResultBonus} (${finalResultBonusLabel})`
-    : finalResultType;
+  const finalResultTotal = formatDiceNumber(finalResult, finalResultBonus);
 
   const finalResultHidden = rolling || !finalResult;
 
   useEffect(
     function handleSetResultColor() {
-      const diceGroup = DiceGroups[latestPlayerRoll?.type];
+      const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
+        latestPlayerRoll
+      );
+
       let newColor = "inherit";
       if (rolling) {
         newColor = "inherit";
       } else if (
-        diceGroup?.goodRoll &&
-        latestPlayerRoll?.total >= diceGroup?.goodRoll
+        commandGroup?.goodRoll &&
+        latestPlayerRoll?.total >= commandGroup?.goodRoll
       ) {
         newColor = theme.palette.success.main;
       } else if (
-        diceGroup?.badRoll &&
-        latestPlayerRoll?.total <= diceGroup?.badRoll
+        commandGroup?.badRoll &&
+        latestPlayerRoll?.total <= commandGroup?.badRoll
       ) {
         newColor = theme.palette.error.main;
       }
@@ -111,19 +95,21 @@ export function useDiceRolls(
   }
 
   function handleSetFinalResult() {
-    const diceGroup = DiceGroups[latestPlayerRoll?.type];
+    const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
+      latestPlayerRoll
+    );
     options?.onRolling?.(false);
     setRolling(false);
     setFinalResult(latestPlayerRoll);
     options?.onFinalResult?.(latestPlayerRoll);
     if (
-      diceGroup?.criticalSuccess !== undefined &&
-      latestPlayerRoll?.total === diceGroup?.criticalSuccess
+      commandGroup?.criticalSuccess !== undefined &&
+      latestPlayerRoll?.total === commandGroup?.criticalSuccess
     ) {
       Confetti.fireConfetti();
     } else if (
-      diceGroup?.criticalFailure !== undefined &&
-      latestPlayerRoll?.total === diceGroup?.criticalFailure
+      commandGroup?.criticalFailure !== undefined &&
+      latestPlayerRoll?.total === commandGroup?.criticalFailure
     ) {
       Confetti.fireCannon();
     }
@@ -131,16 +117,11 @@ export function useDiceRolls(
 
   return {
     state: {
-      display: {
-        formatted: finalResultFormatted,
-        spreaded: finalResultSpread,
-        explanation: finalResultExplanation,
-        type: finalResultType,
-      },
+      finalResultTotal,
+      finalResultRolls,
       finalResultHidden,
       finalResultBonus,
       finalResultBonusLabel,
-      type: finalResultType,
       rolling,
       hasRolledOnce,
       color,
@@ -149,14 +130,16 @@ export function useDiceRolls(
 }
 
 export function formatDiceNumber(
-  n: number,
-  type: IDiceRollType = "4dF"
+  result: IDiceRollWithBonus | undefined,
+  bonus: number = 0
 ): string {
-  if (type !== "1dF" && type !== "4dF") {
-    return n.toString();
+  const containsFateDice = result?.commandResults.some((r) => r.type === "1dF");
+  const total = result?.total ?? 0;
+  const totalWithBonus = total + bonus;
+
+  if (containsFateDice && totalWithBonus > 0) {
+    return `+${totalWithBonus}`;
   }
-  if (n > 0) {
-    return `+${n}`;
-  }
-  return n.toString();
+
+  return totalWithBonus.toString();
 }
