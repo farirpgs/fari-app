@@ -169,6 +169,7 @@ export function makeDnD5eCharacter(): ICharacter {
                 type: BlockType.PointCounter,
                 meta: {
                   isMainPointCounter: false,
+                  max: "1",
                 },
                 value: "0",
               },
@@ -187,6 +188,7 @@ export function makeDnD5eCharacter(): ICharacter {
                 type: BlockType.PointCounter,
                 meta: {
                   isMainPointCounter: false,
+                  max: "1",
                 },
                 value: "0",
               },

@@ -373,7 +373,9 @@ export const CharacterV3Dialog: React.FC<{
               </Grid>
               <Grid item>
                 <IconButton
-                  disabled={tab === "0"}
+                  disabled={
+                    characterManager.state.character?.pages.length === 1
+                  }
                   onClick={() => {
                     characterManager.actions.removePage(currentPageIndex);
                     setTab("0");
@@ -473,7 +475,7 @@ export const CharacterV3Dialog: React.FC<{
           const helpLink = HeaderHelpLinks[section.label];
 
           return (
-            <Box key={section.id} py=".5rem">
+            <Box key={section.id} py={!sections?.length ? ".5rem" : undefined}>
               <SheetHeader
                 label={section.label}
                 currentPageIndex={currentPageIndex}
