@@ -264,34 +264,19 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function duplicateBlock(
     pageIndex: number,
     sectionIndex: number,
-    block: IBlock
+    block: IBlock,
+    blockIndex: number
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionIndex].blocks.push(
+        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
+          blockIndex + 1,
+          0,
           CharacterFactory.duplicateBlock(block)
         );
-      })
-    );
-  }
-
-  function renameBlock(
-    pageIndex: number,
-    sectionIndex: number,
-    fieldIndex: number,
-    label: string
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.pages[pageIndex].sections[sectionIndex].blocks[
-          fieldIndex
-        ].label = label;
       })
     );
   }
@@ -572,7 +557,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       removeSection,
       addBlock: addBlock,
       duplicateBlock: duplicateBlock,
-      renameBlock: renameBlock,
       moveBlock: moveBlock,
       moveDnDSection,
       moveDnDBlock: moveDnDBlock,
@@ -580,10 +564,10 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       setBlockMeta: setBlockMeta,
       setBlockLabel: setBlockLabel,
       removeBlock: removeBlock,
-      addCheckboxFieldValue,
-      removeCheckboxFieldValue,
+      addBlockBox: addCheckboxFieldValue,
+      removeBlockBox: removeCheckboxFieldValue,
       toggleCheckboxFieldValue,
-      renameCheckboxFieldValue,
+      setBlockBoxLabel: renameCheckboxFieldValue,
       sanitizeCharacter,
     },
   };

@@ -72,8 +72,8 @@ fdescribe("simplifyResults", () => {
   describe("Given coins", () => {
     it("should ignore them", () => {
       const result = Dice.simplifyRolls([
-        { type: "Coin", value: 1 },
-        { type: "Coin", value: -1 },
+        { type: "coin", value: 1 },
+        { type: "coin", value: -1 },
       ]);
 
       expect(result).toEqual([{ type: "Coin", value: 0 }]);

@@ -1,3 +1,5 @@
+import { IDiceCommandGroupId } from "../dice/Dice";
+
 export enum BlockType {
   Text = "Text",
   RichText = "RichText",
@@ -83,7 +85,7 @@ export type ICharacterV2CustomField<TValue> = Array<{
 export type ITextBlock = {
   type: BlockType.Text;
   meta: {
-    checked: boolean | undefined;
+    checked?: boolean;
   };
   value: string;
 };
@@ -96,7 +98,8 @@ export type IRichTextBlock = {
 export type ISkillBlock = {
   type: BlockType.Skill;
   meta: {
-    checked: boolean | undefined;
+    checked?: boolean;
+    commands?: Array<IDiceCommandGroupId>;
   };
   value: string;
 };
@@ -113,23 +116,24 @@ export type ISlotTrackerBlock = {
 export type IPointCounterBlock = {
   type: BlockType.PointCounter;
   meta: {
-    max: string | undefined;
+    max?: string;
     isMainPointCounter: boolean;
   };
   value: string;
 };
 
-export type IBlock = {
-  type: BlockType;
-  id: string;
-  label: string;
-} & (
+export type IBlockTypes =
   | ITextBlock
   | IRichTextBlock
   | ISkillBlock
   | ISlotTrackerBlock
-  | IPointCounterBlock
-);
+  | IPointCounterBlock;
+
+export type IBlock = {
+  type: BlockType;
+  id: string;
+  label: string;
+} & IBlockTypes;
 
 export type ISection = {
   id: string;

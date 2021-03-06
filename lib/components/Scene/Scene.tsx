@@ -70,7 +70,7 @@ import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { CharacterV3Dialog } from "../../routes/Character/components/CharacterV3Dialog";
+import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DiceFab } from "../DiceFab/DiceFab";
@@ -460,7 +460,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         character={player.character}
                         dialog={true}
                         rolls={player.rolls}
-                        onRoll={(options) => {
+                        onSkillClick={(options) => {
                           handleSetPlayerRoll(player.id, rollDice(options));
                         }}
                         onSave={(updatedCharacter) => {

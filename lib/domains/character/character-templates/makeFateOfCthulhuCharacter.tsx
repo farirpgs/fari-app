@@ -1,15 +1,10 @@
-import { getUnix } from "../../dayjs/getDayJS";
 import { Id } from "../../id/Id";
 import { CharacterFactory } from "../CharacterFactory";
 import { BlockType, ICharacter } from "../types";
 
 export function makeFateOfCthulhuCharacter(): ICharacter {
-  return {
-    id: Id.generate(),
-    version: CharacterFactory.latestVersion,
+  return CharacterFactory.makeTemplate({
     name: "",
-    group: undefined,
-    lastUpdated: getUnix(),
     pages: [
       {
         id: Id.generate(),
@@ -66,21 +61,21 @@ export function makeFateOfCthulhuCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: false },
+                meta: {},
                 label: "Stunt #1",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: false },
+                meta: {},
                 label: "Stunt #2",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: false },
+                meta: {},
                 label: "Stunt #3",
                 value: "",
               },
@@ -94,7 +89,7 @@ export function makeFateOfCthulhuCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: false },
+                meta: {},
                 label: "Notes",
                 value: "",
               },
@@ -107,7 +102,7 @@ export function makeFateOfCthulhuCharacter(): ICharacter {
             blocks: [
               {
                 id: Id.generate(),
-                meta: { isMainPointCounter: false, max: undefined },
+                meta: { isMainPointCounter: false },
                 type: BlockType.PointCounter,
                 label: "Fate Points",
                 value: "",
@@ -185,171 +180,133 @@ export function makeFateOfCthulhuCharacter(): ICharacter {
             blocks: [
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Academics",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Athletics",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Burglary",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Contacts",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Crafts",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Deceive",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Drive",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Empathy",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Fight",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Investigate",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Lore",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Notice",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Physique",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Provoke",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Rapport",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Resources",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Shoot",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Stealth",
                 value: "",
               },
               {
                 id: Id.generate(),
-                meta: {
-                  checked: false,
-                },
+                meta: {},
                 type: BlockType.Skill,
                 label: "Will",
                 value: "",
@@ -359,5 +316,5 @@ export function makeFateOfCthulhuCharacter(): ICharacter {
         ],
       },
     ],
-  };
+  });
 }

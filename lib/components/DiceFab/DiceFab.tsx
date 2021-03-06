@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import Badge from "@material-ui/core/Badge";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Fab from "@material-ui/core/Fab";
@@ -109,7 +110,12 @@ export const DiceFab: React.FC<IProps> = (props) => {
           >
             {renderFab()}
           </Zoom>
-          {renderPopper()}
+          <DiceMenu
+            open={open}
+            anchorEl={anchorEl}
+            commands={fabCommands}
+            onDiceCommandChange={setFabCommands}
+          />
         </Box>
       </ClickAwayListener>
       {props.rolls && renderDiceBox()}
@@ -246,11 +252,48 @@ export const DiceFab: React.FC<IProps> = (props) => {
     );
   }
 
+  function getButtonIcon(
+    selectedOptions: IDiceCommandGroup[],
+    diceManager: IDiceManager
+  ) {
+    const commandsToCheckForDynamicFabIcon =
+      selectedOptions.length > 0
+        ? selectedOptions.flatMap((o) => o.value)
+        : diceManager.state.selectedCommands;
+    const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
+      commandsToCheckForDynamicFabIcon
+    );
+    const [firstCommand] = commandsToCheckForDynamicFabIcon;
+    const firstCommandMatch = Dice.findMatchingCommandGroupWithDiceTypes([
+      firstCommand,
+    ]);
+
+    const ButtonIcon =
+      selectedOption?.icon ?? firstCommandMatch?.icon ?? Icons.ThrowDice;
+    return ButtonIcon;
+  }
+};
+
+export const DiceMenu: React.FC<{
+  anchorEl: any;
+  open: boolean;
+  ctaLabel?: string;
+  onCtaClick?(): void;
+  commands: Array<IDiceCommandGroup>;
+  onDiceCommandChange: React.Dispatch<
+    React.SetStateAction<IDiceCommandGroup[]>
+  >;
+}> = (props) => {
+  const theme = useTheme();
+  const zIndex = useZIndex();
+
+  return <>{renderPopper()}</>;
+
   function renderPopper() {
     return (
       <Popper
-        open={open}
-        anchorEl={anchorEl}
+        open={props.open}
+        anchorEl={props.anchorEl}
         transition
         placement="top"
         style={{ zIndex: zIndex.diceFab }}
@@ -291,6 +334,22 @@ export const DiceFab: React.FC<IProps> = (props) => {
                     {renderOptions(d20DiceCommandGroups)}
                     {renderCommandGroupHeader("Misc")}
                     {renderOptions(MiscDiceCommandGroups)}
+
+                    {props.ctaLabel && (
+                      <Box mt="1.5rem">
+                        <Grid container justify="center">
+                          <Grid item>
+                            <Button
+                              color="primary"
+                              variant="contained"
+                              onClick={props.onCtaClick}
+                            >
+                              {props.ctaLabel}
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    )}
                   </Box>
                 </Box>
               </Paper>
@@ -324,7 +383,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
         <Box pb=".5rem">
           <Grid container spacing={1} justify="center">
             {options.map((o) => {
-              const badgeContent = fabCommands.reduce((acc, curr) => {
+              const badgeContent = props.commands.reduce((acc, curr) => {
                 if (o.label === curr.label) {
                   return acc + 1;
                 }
@@ -336,13 +395,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
                     <Grid container item justify="center">
                       <IconButton
                         onClick={() => {
-                          setFabCommands((t) => {
+                          props.onDiceCommandChange((t) => {
                             return [...t, o];
                           });
                         }}
                         onContextMenu={(e) => {
                           e.preventDefault();
-                          setFabCommands((draft) => {
+                          props.onDiceCommandChange((draft) => {
                             const indexToRemove = draft.findIndex(
                               (selectedOption) =>
                                 selectedOption.label === o.label
@@ -400,24 +459,3 @@ export const DiceFab: React.FC<IProps> = (props) => {
     );
   }
 };
-
-function getButtonIcon(
-  selectedOptions: IDiceCommandGroup[],
-  diceManager: IDiceManager
-) {
-  const commandsToCheckForDynamicFabIcon =
-    selectedOptions.length > 0
-      ? selectedOptions.flatMap((o) => o.value)
-      : diceManager.state.selectedCommands;
-  const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
-    commandsToCheckForDynamicFabIcon
-  );
-  const [firstCommand] = commandsToCheckForDynamicFabIcon;
-  const firstCommandMatch = Dice.findMatchingCommandGroupWithDiceTypes([
-    firstCommand,
-  ]);
-
-  const ButtonIcon =
-    selectedOption?.icon ?? firstCommandMatch?.icon ?? Icons.ThrowDice;
-  return ButtonIcon;
-}

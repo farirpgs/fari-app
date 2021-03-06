@@ -1,15 +1,10 @@
-import { getUnix } from "../../dayjs/getDayJS";
 import { Id } from "../../id/Id";
 import { CharacterFactory } from "../CharacterFactory";
 import { ICharacter } from "../types";
 
 export function makeEmptyCharacter(): ICharacter {
-  return {
-    id: "",
-    version: CharacterFactory.latestVersion,
+  return CharacterFactory.makeTemplate({
     name: "",
-    group: undefined,
-    lastUpdated: getUnix(),
     pages: [
       {
         id: Id.generate(),
@@ -17,5 +12,5 @@ export function makeEmptyCharacter(): ICharacter {
         sections: [],
       },
     ],
-  };
+  });
 }

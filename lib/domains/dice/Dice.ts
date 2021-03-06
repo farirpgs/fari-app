@@ -2,6 +2,7 @@ import isEqual from "lodash/isEqual";
 import { Icons } from "../Icons/Icons";
 
 export type IDiceCommandGroup = {
+  id: IDiceCommandGroupId;
   label: string;
   icon: React.ElementType;
   value: Array<IDiceCommandNames>;
@@ -11,8 +12,22 @@ export type IDiceCommandGroup = {
   criticalFailure?: number;
 };
 
+export type IDiceCommandGroupId =
+  | "4dF"
+  | "1dF"
+  | "1d4"
+  | "1d6"
+  | "1d8"
+  | "1d10"
+  | "1d12"
+  | "1d20"
+  | "1d100"
+  | "coin-toss"
+  | "2d6";
+
 export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
   {
+    id: "4dF",
     label: "4dF",
     icon: Icons.FateDice,
     value: ["1dF", "1dF", "1dF", "1dF"],
@@ -21,16 +36,47 @@ export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 4,
     criticalFailure: -4,
   },
-  { label: "1dF", icon: Icons.OneDie, value: ["1dF"] },
+  {
+    id: "1dF",
+    label: "1dF",
+    icon: Icons.OneDie,
+    value: ["1dF"],
+  },
 ];
 
 export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
-  { label: "1d4", icon: Icons.Dice4, value: ["1d4"] },
-  { label: "1d6", icon: Icons.Dice6, value: ["1d6"] },
-  { label: "1d8", icon: Icons.Dice8, value: ["1d8"] },
-  { label: "1d10", icon: Icons.Dice10, value: ["1d10"] },
-  { label: "1d12", icon: Icons.Dice12, value: ["1d12"] },
   {
+    id: "1d4",
+    label: "1d4",
+    icon: Icons.Dice4,
+    value: ["1d4"],
+  },
+  {
+    id: "1d6",
+    label: "1d6",
+    icon: Icons.Dice6,
+    value: ["1d6"],
+  },
+  {
+    id: "1d8",
+    label: "1d8",
+    icon: Icons.Dice8,
+    value: ["1d8"],
+  },
+  {
+    id: "1d10",
+    label: "1d10",
+    icon: Icons.Dice10,
+    value: ["1d10"],
+  },
+  {
+    id: "1d12",
+    label: "1d12",
+    icon: Icons.Dice12,
+    value: ["1d12"],
+  },
+  {
+    id: "1d20",
     label: "1d20",
     icon: Icons.Dice20,
     value: ["1d20"],
@@ -39,12 +85,18 @@ export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 20,
     criticalFailure: 1,
   },
-  { label: "1d100", icon: Icons.Dice100, value: ["1d100"] },
+  { id: "1d100", label: "1d100", icon: Icons.Dice100, value: ["1d100"] },
 ];
 
 export const MiscDiceCommandGroups: Array<IDiceCommandGroup> = [
-  { label: "Coin Toss", icon: Icons.Coin, value: ["Coin"] },
   {
+    id: "coin-toss",
+    label: "Coin Toss",
+    icon: Icons.Coin,
+    value: ["coin"],
+  },
+  {
+    id: "2d6",
     label: "2d6",
     icon: Icons.RollDiceIcon,
     value: ["1d6", "1d6"],
@@ -80,7 +132,7 @@ export type IDiceCommandNames =
   | "1d12"
   | "1d20"
   | "1d100"
-  | "Coin";
+  | "coin";
 
 type IDiceCommandOptions = {
   sides: Array<number>;
@@ -123,7 +175,7 @@ export const DiceCommandOptions: Record<
     sides: HundredSidedDie,
     formatDetailedResult: formatNormalDie,
   },
-  "Coin": {
+  "coin": {
     sides: CoinToss,
     formatDetailedResult: (value: number) => {
       if (value === 1) {
@@ -143,6 +195,7 @@ export type IDiceRoll = {
   type: IDiceCommandNames;
   value: number;
 };
+
 export type ISimplifiedDiceRoll = {
   type: string;
   value: number;

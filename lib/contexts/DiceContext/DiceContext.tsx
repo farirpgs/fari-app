@@ -36,3 +36,16 @@ export function useRollDice() {
 
   return roll;
 }
+
+export function useRollDiceWithCommands() {
+  function roll(
+    options: IRollDiceOptions = {},
+    commands: Array<IDiceCommandNames>
+  ): IDiceRollWithBonus {
+    const result = Dice.rollCommands(commands);
+
+    return { ...result, bonus: options.bonus, bonusLabel: options.bonusLabel };
+  }
+
+  return roll;
+}

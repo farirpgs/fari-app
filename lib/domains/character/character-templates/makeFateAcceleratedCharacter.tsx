@@ -1,15 +1,10 @@
-import { getUnix } from "../../dayjs/getDayJS";
 import { Id } from "../../id/Id";
 import { CharacterFactory } from "../CharacterFactory";
 import { BlockType, ICharacter, Position } from "../types";
 
 export function makeFateAcceleratedCharacter(): ICharacter {
-  return {
-    id: "",
-    version: CharacterFactory.latestVersion,
+  return CharacterFactory.makeTemplate({
     name: "",
-    group: undefined,
-    lastUpdated: getUnix(),
     pages: [
       {
         id: Id.generate(),
@@ -25,35 +20,35 @@ export function makeFateAcceleratedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "High Concept",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Trouble",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Relationship",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Other Aspect",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Other Aspect",
                 value: "",
               },
@@ -68,21 +63,21 @@ export function makeFateAcceleratedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Stunt #1",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Stunt #2",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Stunt #3",
                 value: "",
               },
@@ -96,7 +91,7 @@ export function makeFateAcceleratedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {},
                 label: "Notes",
                 value: "",
               },
@@ -129,21 +124,27 @@ export function makeFateAcceleratedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {
+                  checked: false,
+                },
                 label: "Mild",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {
+                  checked: false,
+                },
                 label: "Moderate",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Text,
-                meta: { checked: undefined },
+                meta: {
+                  checked: false,
+                },
                 label: "Severe",
                 value: "",
               },
@@ -159,42 +160,42 @@ export function makeFateAcceleratedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 type: BlockType.Skill,
-                meta: { checked: undefined },
+                meta: { commands: ["4dF"] },
                 label: "Careful",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Skill,
-                meta: { checked: undefined },
+                meta: { commands: ["4dF"] },
                 label: "Clever",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Skill,
-                meta: { checked: undefined },
+                meta: { commands: ["4dF"] },
                 label: "Forceful",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Skill,
-                meta: { checked: undefined },
+                meta: { commands: ["4dF"] },
                 label: "Flashy",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Skill,
-                meta: { checked: undefined },
+                meta: { commands: ["4dF"] },
                 label: "Quick",
                 value: "",
               },
               {
                 id: Id.generate(),
                 type: BlockType.Skill,
-                meta: { checked: undefined },
+                meta: { commands: ["4dF"] },
                 label: "Sneaky",
                 value: "",
               },
@@ -203,5 +204,5 @@ export function makeFateAcceleratedCharacter(): ICharacter {
         ],
       },
     ],
-  };
+  });
 }

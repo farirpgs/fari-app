@@ -419,7 +419,7 @@ describe("useDiceRolls", () => {
       const rolls: Array<IDiceRollWithBonus> = [
         {
           total: 1,
-          commandResults: [{ value: 1, type: "Coin" }],
+          commandResults: [{ value: 1, type: "coin" }],
         },
       ];
 
@@ -443,7 +443,7 @@ describe("useDiceRolls", () => {
     it("should properly format tails", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: -1, commandResults: [{ value: -1, type: "Coin" }] },
+        { total: -1, commandResults: [{ value: -1, type: "coin" }] },
       ];
 
       // WHEN

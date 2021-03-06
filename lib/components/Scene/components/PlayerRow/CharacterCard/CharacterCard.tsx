@@ -28,7 +28,7 @@ import {
 } from "../../../../../domains/character/types";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import { CharacterCircleBox } from "../../../../../routes/Character/components/CharacterV3Dialog";
+import { CharacterCircleBox } from "../../../../../routes/Character/components/CharacterDialog/components/CharacterCircleBox";
 import { ContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";

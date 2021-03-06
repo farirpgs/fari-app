@@ -1,15 +1,18 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../id/Id";
+import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
 import { makeEmptyCharacter } from "./character-templates/makeEmptyCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
 import { makeFateCondensedCharacter } from "./character-templates/makeFateCondensedCharacter";
 import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
+import { makeTheWitchIsDeadCharacter } from "./character-templates/makeTheWitchIsDeadCharacter";
 import { CharacterType } from "./CharacterType";
 import {
   BlockType,
   IBlock,
   ICharacter,
+  IPage,
   IPointCounterBlock,
   IRichTextBlock,
   ISection,
@@ -28,6 +31,8 @@ export const CharacterFactory = {
       [CharacterType.CoreCondensed]: makeFateCondensedCharacter,
       [CharacterType.Accelerated]: makeFateAcceleratedCharacter,
       [CharacterType.FateOfCthulhu]: makeFateOfCthulhuCharacter,
+      [CharacterType.Dnd5e]: makeDnD5eCharacter,
+      [CharacterType.TheWitchIsDead]: makeTheWitchIsDeadCharacter,
       [CharacterType.Empty]: makeEmptyCharacter,
     }[type]();
 
@@ -36,6 +41,16 @@ export const CharacterFactory = {
       id: Id.generate(),
       name: "",
       lastUpdated: getUnix(),
+    };
+  },
+  makeTemplate(props: { name: string; pages: Array<IPage> }): ICharacter {
+    return {
+      id: Id.generate(),
+      version: CharacterFactory.latestVersion,
+      name: props.name,
+      group: undefined,
+      lastUpdated: getUnix(),
+      pages: props.pages,
     };
   },
   migrate(c: any): ICharacter {

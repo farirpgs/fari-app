@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { useTheme } from "@material-ui/core/styles";
 import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import React, { useRef } from "react";
 import { DropTargetMonitor, useDrag, useDrop, XYCoord } from "react-dnd";
@@ -11,6 +12,7 @@ export const BetterDnd: React.FC<{
   onDrop?(): void;
   onMove?(dragIndex: number, hoverIndex: number): void;
 }> = (props) => {
+  const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: props.type },
@@ -86,6 +88,9 @@ export const BetterDnd: React.FC<{
       ref={ref}
       className={css({
         opacity: isDragging ? 0.2 : 1,
+        boxShadow: isDragging
+          ? `0 0 3pt 2pt ${theme.palette.primary.main}`
+          : undefined,
         position: "relative",
       })}
     >
@@ -94,6 +99,7 @@ export const BetterDnd: React.FC<{
           <div ref={drag}>
             <DragIndicatorIcon
               className={css({
+                display: isDragging ? "none" : "block",
                 cursor: "move",
                 position: "absolute",
                 left: "-1.5rem",
