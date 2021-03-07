@@ -4,114 +4,78 @@
 
 > Have an idea and want to contribute to this blog ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
-# Which Fate System Should I Use
+# The Golden Rule
 
-<page-meta author="RPDeshaies" description="A clear answer on one of the most popular question about the Fate RPG"></page-meta>
+<page-meta author="Dgerrimea" description="How to 'get' the Fate mentality." date="2021-03-06"></page-meta>
 
-The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
+## What Is The Golden Rule?
 
-- Fate Core is the fourth edition of the system and came out of a [Kickstarter](https://www.kickstarter.com/projects/evilhat/fate-core) in 2016.
-- Fate Accelerated _is_ Fate Core but with different dials. Some concepts have been simplified to make it easier to grab the book and start playing as fast as possible.
-- Fate Condensed is the latest iteration of Fate. Fate v4.5 if you will. It came out in early 2020 and contains all the rules you need to play Fate in a very brief but comprehensive way.
+Fiction precedes rules.
 
-If you still don't know where to start, here's a tip:
+There is a duality in Fate, as in many RPGs; 1. You witness, in your mind’s eye, a cast of characters taking actions and having dramatic experiences. This is the fiction. 2. You also witness, with your normal eyes, you and your friends rolling dice, adding numbers, and referring to rules like Create An Advantage or Fate Points. These are the rules.
 
-- [Read Fate Condensed](/srds/condensed) for a quick overview of the most up to date rules.
-- [Read Fate Core](/srds/core) for all its great examples and guides on how to play.
-- [Read Fate Accelerated](/srds/accelerated) if you want a more simplified version of the system and want to get started quickly.
+The Golden Rule is that the fiction precedes the rules, and it has a double meaning.
+It’s not just that the fiction has a higher priority, that when in doubt you’d go with what makes sense in the fiction over what the rules would normally require; in fact that’s the Silver Rule. The Golden Rule is that fiction precedes rules literally and chronologically.
 
-# What's the Math Behind The Fate Dice
+When you’re deciding what to do next, as a player and as a character, your initial consideration is what you want to accomplish in the fiction. Once you know what that is, you then look to the rules for how best to model it.
 
-<page-meta author="RPDeshaies" description="Understanding why Fate Dice are such a good tool to play TTRPGs."></page-meta>
+## What’s The Alternative?
 
-The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are drastically very different.
+The alternative, which is the default for a great many players of Fate and other games, is to put the rules first.
 
-Outlining the results in a graph where the **vertical axis represents the chances of getting a result** and where the **horizontal axis lists all the possible results**, you would get something that looks like this:
+If the Golden Rule goes like this:
 
-```
+1. Imagine a cool moment you want to create
+1. Picture like it’s happening on screen
+1. Describe your vision to the table
+1. Consult the rules to help model your moment
 
-  23.46% |     ___
-         |    /   \
-         |   /     \
-         |  /       \
-         | /         \
-  1.23%  --------------
-         -4     0     +4
-```
+Then it’s opposite, the “rules first” style, is like this:
 
-So you technically have a 1.23% (1/81) chance of getting a `-4/+4` but a 23.46% chance of getting a `0`.
+1. Consult the rules or your character sheet
+1. Find a strategically advantageous option
+1. Describe, mechanically, what kind of action or skill you’re using
+1. Picture & describe how doing that would impact the fiction
 
-Where it gets crazy is when you start thinking _about the chances of getting a `0` or higher?_.
+## Do I Have To Follow The Golden Rule?
 
-Because the probabilities are going to stack, you get 61.73% chances to get a `0` or higher.
+No. You can play any game any way you want to. However, Fate was designed with the Golden Rule in mind.
+Symptoms of not following the Golden Rule include:
 
-If you were playing with a D20, the graph would look something like this:
+- It’s a chore to come up with Aspect names when I Create An Advantage
+- When I use X stunt, I don’t know how it should look “on camera”
+- When I invoke X Aspect, I don’t know how it should look “on camera”
+- Feeling like Fate snobs are judging you
 
-```
-   |
-   |
-   |
-   |
-5% | -------------
-   |
-   |
-   ---------------
-   0 1 2 [...]  20
+## How Do I Embrace The Golden Rule?
 
-```
+### Ask Questions Which Pull The Focus Back To The Fiction
 
-That flat line means that basically, you have equal chances of getting each result separately which, by consequence means that the outcome of a roll tend to also be "flatter".
+| When…               | Ask yourself….                            |
+| ------------------- | ----------------------------------------- |
+| Choosing aspects    | What kind of moment am I foreshadowing?   |
+| Making a skill roll | What moment do you want to see on screen? |
+| Invoking an aspect  | How would this look to the audience?      |
 
-## Closing Thoughts
+### Watch For Old Habits
 
-Since Fudge/Fate Dice statistics have this bell curve quality to them, the end result will have a big tendency to stay in the `-1 ==> 1` range. This makes even getting something like a `+2` exciting.
+If you find that you know what skill and action combo you want to use, but you have no idea how it looks onscreen, then stop. Forget about the skill and the action, and focus on the fiction. Only when you know what you want to see on screen should you return to the skill list and make your choice.
 
-Getting a `+4` on the other hand is truly cause for celebration.
+## A Fate Pressure Point: The Bidding War
 
-## More Stats
+The ‘bidding war’ is what happens when two characters make opposed rolls, and begin invoking aspects to trump each other’s total. This is a pressure point of Fate because it can easily descend into math games and the story can get forgotten.
 
-| Result | Odd of rolling | Odd of rolling this or higher |
-| ------ | -------------- | ----------------------------- |
-| -4     | 1.23%          | 100%                          |
-| -3     | 4.94%          | 98.77%                        |
-| -2     | 12.35%         | 93.83%                        |
-| -1     | 19.75%         | 81.48%                        |
-| 0      | 23.46%         | 61.73%                        |
-| 1      | 19.75%         | 38.27%                        |
-| 2      | 12.35%         | 18.52%                        |
-| 3      | 4.94%          | 6.17%                         |
-| 4      | 1.23%          | 1.23%                         |
+Here is some general advice to keep the bidding war from becoming a slog:
 
-# How to GM Fate
-
-<page-meta author="Dgerrimea" description="Tips on how to effectively GM a Fate Campaign."></page-meta>
-
-### The Fate Mentality
-
-- Take inspiration from movies and TV, not from video games.
-- In D&D you start with what's true about the world, and cool moments come out of following the realistic (in that world) consequences of PC actions.
-- Fate is the other way around; you begin with the cool moments you want to create, and you then establish whatever facts about the world you need to get you there.
-
-### Prepping Fate
-
-- You need a story problem which is urgent, and catastrophic if ignored.
-- Look at the PCs' aspects, and the game aspects, and see what problems those imply.
-- Make them open-ended, like "aliens are attacking".
-- Then think about what details you need to solve the problem, like "how many aliens, who's the leader, how are they invading, where and when?"
-- Answering each of those questions is a problem in its own right, and each scene should answer one or two of these questions.
-- Think of who would oppose the PCs, and prepare them and their minions.
-
-### Running Fate
-
-- Think in terms of scenes, and montage anything that doesn't deserve to be a scene.
-- Each scene needs a story question to answer (that's how you know when the scene is over), and a source of opposition (that's how you give your problem agency and urgency).
-  ​
-
-### Misc Tips
-
-- Don't roll unless success and failure are both interesting
-- Don't set up enemies just to be knocked down; PC's are damn resilient and failure is fun anyway
-- Don't forget how much narrative agency the players have. If they spend a fate point and say there's a secret door, then there's a secret door now. Forget about maps and plot twists; you're not showing your players something you made earlier, you're making it with them as a team. Don't take that away from them!
+- Consider saving your invokes:
+  If it’s the NPC’s turn, consider letting them be awesome now, and saving your invokes for your turn. You can probably take the hit, and if everybody spends every invoke and it’s a zero sum, it’s kind of a waste.
+- Avoid weak aspects/advantages:
+  It’s tempting to create an advantage that an enemy is **Off Balance**, but do you really want a story about people being off balance? Is it dramatic enough? Is it worthy? Avoid this kind of filler because when you invoke boring aspects, boring things happen.
+- Have every invoke contribute something:
+  Each invoke can change the scene somehow, because if every invoke leaves a mark then it has more narrative power than just being a +2 to some roll.
+- Mind your phrasing!
+  First: Describe how your action looks on screen
+  Second: Contextualise your description by telling everyone what you’re invoking to make that happen.
 
 # Problematic PC Aspects
 
@@ -225,6 +189,115 @@ If you do end up with a meaningless aspect, treat it as a placeholder and don’
 ## Closing Thoughts
 
 Good aspects add something to the fiction. They do this by granting narrative permission, through invocations and compels, and just by being true. But however they do it, they leave a signature on-screen and in-story. The Golden Rule of Fate is Fiction First, and that is the solution to all of your Aspect troubles.
+
+# Which Fate System Should I Use
+
+<page-meta author="RPDeshaies" description="A clear answer on one of the most popular question about the Fate RPG"></page-meta>
+
+The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
+
+- Fate Core is the fourth edition of the system and came out of a [Kickstarter](https://www.kickstarter.com/projects/evilhat/fate-core) in 2016.
+- Fate Accelerated _is_ Fate Core but with different dials. Some concepts have been simplified to make it easier to grab the book and start playing as fast as possible.
+- Fate Condensed is the latest iteration of Fate. Fate v4.5 if you will. It came out in early 2020 and contains all the rules you need to play Fate in a very brief but comprehensive way.
+
+If you still don't know where to start, here's a tip:
+
+- [Read Fate Condensed](/srds/condensed) for a quick overview of the most up to date rules.
+- [Read Fate Core](/srds/core) for all its great examples and guides on how to play.
+- [Read Fate Accelerated](/srds/accelerated) if you want a more simplified version of the system and want to get started quickly.
+
+# What's the Math Behind The Fate Dice
+
+<page-meta author="RPDeshaies" description="Understanding why Fate Dice are such a good tool to play TTRPGs."></page-meta>
+
+The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are drastically very different.
+
+Outlining the results in a graph where the **vertical axis represents the chances of getting a result** and where the **horizontal axis lists all the possible results**, you would get something that looks like this:
+
+```
+
+  23.46% |     ___
+         |    /   \
+         |   /     \
+         |  /       \
+         | /         \
+  1.23%  --------------
+         -4     0     +4
+```
+
+So you technically have a 1.23% (1/81) chance of getting a `-4/+4` but a 23.46% chance of getting a `0`.
+
+Where it gets crazy is when you start thinking _about the chances of getting a `0` or higher?_.
+
+Because the probabilities are going to stack, you get 61.73% chances to get a `0` or higher.
+
+If you were playing with a D20, the graph would look something like this:
+
+```
+   |
+   |
+   |
+   |
+5% | -------------
+   |
+   |
+   ---------------
+   0 1 2 [...]  20
+
+```
+
+That flat line means that basically, you have equal chances of getting each result separately which, by consequence means that the outcome of a roll tend to also be "flatter".
+
+## Closing Thoughts
+
+Since Fudge/Fate Dice statistics have this bell curve quality to them, the end result will have a big tendency to stay in the `-1 ==> 1` range. This makes even getting something like a `+2` exciting.
+
+Getting a `+4` on the other hand is truly cause for celebration.
+
+## More Stats
+
+| Result | Odd of rolling | Odd of rolling this or higher |
+| ------ | -------------- | ----------------------------- |
+| -4     | 1.23%          | 100%                          |
+| -3     | 4.94%          | 98.77%                        |
+| -2     | 12.35%         | 93.83%                        |
+| -1     | 19.75%         | 81.48%                        |
+| 0      | 23.46%         | 61.73%                        |
+| 1      | 19.75%         | 38.27%                        |
+| 2      | 12.35%         | 18.52%                        |
+| 3      | 4.94%          | 6.17%                         |
+| 4      | 1.23%          | 1.23%                         |
+
+# How to GM Fate
+
+<page-meta author="Dgerrimea" description="Tips on how to effectively GM a Fate Campaign."></page-meta>
+
+### The Fate Mentality
+
+- Take inspiration from movies and TV, not from video games.
+- In D&D you start with what's true about the world, and cool moments come out of following the realistic (in that world) consequences of PC actions.
+- Fate is the other way around; you begin with the cool moments you want to create, and you then establish whatever facts about the world you need to get you there.
+
+### Prepping Fate
+
+- You need a story problem which is urgent, and catastrophic if ignored.
+- Look at the PCs' aspects, and the game aspects, and see what problems those imply.
+- Make them open-ended, like "aliens are attacking".
+- Then think about what details you need to solve the problem, like "how many aliens, who's the leader, how are they invading, where and when?"
+- Answering each of those questions is a problem in its own right, and each scene should answer one or two of these questions.
+- Think of who would oppose the PCs, and prepare them and their minions.
+
+### Running Fate
+
+- Think in terms of scenes, and montage anything that doesn't deserve to be a scene.
+- Each scene needs a story question to answer (that's how you know when the scene is over), and a source of opposition (that's how you give your problem agency and urgency).
+  ​
+
+### Misc Tips
+
+- Don't roll unless success and failure are both interesting
+- Don't set up enemies just to be knocked down; PC's are damn resilient and failure is fun anyway
+- Don't forget how much narrative agency the players have. If they spend a fate point and say there's a secret door, then there's a secret door now. Forget about maps and plot twists; you're not showing your players something you made earlier, you're making it with them as a team. Don't take that away from them!
 
 # Fate Scene Checklist
 
