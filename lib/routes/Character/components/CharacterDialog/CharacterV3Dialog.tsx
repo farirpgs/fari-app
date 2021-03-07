@@ -215,7 +215,7 @@ export const CharacterV3Dialog: React.FC<{
         >
           <DialogTitle className={css({ padding: "0" })}>
             <Container maxWidth="md">
-              <Box className={sheetContentStyle}>{renderName()}</Box>
+              <Box className={sheetContentStyle}>{renderNameAndGroup()}</Box>
             </Container>
           </DialogTitle>
           <DialogContent className={css({ padding: "0" })} dividers>
@@ -227,7 +227,7 @@ export const CharacterV3Dialog: React.FC<{
           </DialogContent>
           <DialogActions className={css({ padding: "0" })}>
             <Container maxWidth="md">
-              <Box className={sheetContentStyle}>{renderActions()}</Box>
+              <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
             </Container>
           </DialogActions>
         </Dialog>
@@ -236,9 +236,9 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <Container maxWidth="md">
-        <Box className={sheetContentStyle}>{renderActions()}</Box>
+        <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
         <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
-        <Box className={sheetContentStyle}>{renderName()}</Box>
+        <Box className={sheetContentStyle}>{renderNameAndGroup()}</Box>
         <Box className={sheetContentStyle}>
           {renderPages(characterManager.state.character?.pages)}
         </Box>
@@ -298,8 +298,8 @@ export const CharacterV3Dialog: React.FC<{
     return (
       <Box>
         <Box mb="1rem">
-          <Grid container alignItems="center" wrap="nowrap">
-            <Grid item xs>
+          <Grid container alignItems="center" wrap="nowrap" justify="center">
+            <Grid item xs={10}>
               <Tabs
                 value={tab}
                 variant="scrollable"
@@ -461,125 +461,127 @@ export const CharacterV3Dialog: React.FC<{
     sections: Array<ISection> | undefined,
     position: Position
   ) {
-    const numberOfSections = sections?.filter((s) => s.position === position)
-      .length;
+    const numberOfSections =
+      sections?.filter((s) => s.position === position).length ?? 0;
     const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
 
     return (
       <>
-        {sections?.map((section, sectionIndex) => {
-          if (section.position !== position) {
-            return null;
-          }
+        <Box py={numberOfSections === 0 ? "1rem" : undefined}>
+          {sections?.map((section, sectionIndex) => {
+            if (section.position !== position) {
+              return null;
+            }
 
-          const helpLink = HeaderHelpLinks[section.label];
+            const helpLink = HeaderHelpLinks[section.label];
 
-          return (
-            <Box key={section.id} py={!sections?.length ? ".5rem" : undefined}>
-              <SheetHeader
-                label={section.label}
-                currentPageIndex={currentPageIndex}
-                pages={characterManager.state.character?.pages}
-                position={section.position}
-                helpLink={helpLink}
-                advanced={advanced}
-                visibleOnCard={section.visibleOnCard}
-                onReposition={(newPosition) => {
-                  characterManager.actions.repositionSection(
-                    pageIndex,
-                    sectionIndex,
-                    newPosition
-                  );
-                }}
-                onMoveToPage={(newPageIndex) => {
-                  characterManager.actions.moveSectionInPage(
-                    pageIndex,
-                    sectionIndex,
-                    newPageIndex
-                  );
-                }}
-                onToggleVisibleOnCard={() => {
-                  characterManager.actions.toggleSectionVisibleOnCard(
-                    pageIndex,
-                    sectionIndex
-                  );
-                }}
-                onLabelChange={(newLabel) => {
-                  characterManager.actions.renameSection(
-                    pageIndex,
-                    sectionIndex,
-                    newLabel
-                  );
-                }}
-                onMoveDown={() => {
-                  characterManager.actions.moveSection(
-                    pageIndex,
-                    sectionIndex,
-                    "down"
-                  );
-                }}
-                onMoveUp={() => {
-                  characterManager.actions.moveSection(
-                    pageIndex,
-                    sectionIndex,
-                    "up"
-                  );
-                }}
-                onRemove={() => {
-                  characterManager.actions.removeSection(
-                    pageIndex,
-                    sectionIndex
-                  );
+            return (
+              <Box key={section.id}>
+                <SheetHeader
+                  label={section.label}
+                  currentPageIndex={currentPageIndex}
+                  pages={characterManager.state.character?.pages}
+                  position={section.position}
+                  helpLink={helpLink}
+                  advanced={advanced}
+                  visibleOnCard={section.visibleOnCard}
+                  onReposition={(newPosition) => {
+                    characterManager.actions.repositionSection(
+                      pageIndex,
+                      sectionIndex,
+                      newPosition
+                    );
+                  }}
+                  onMoveToPage={(newPageIndex) => {
+                    characterManager.actions.moveSectionInPage(
+                      pageIndex,
+                      sectionIndex,
+                      newPageIndex
+                    );
+                  }}
+                  onToggleVisibleOnCard={() => {
+                    characterManager.actions.toggleSectionVisibleOnCard(
+                      pageIndex,
+                      sectionIndex
+                    );
+                  }}
+                  onLabelChange={(newLabel) => {
+                    characterManager.actions.renameSection(
+                      pageIndex,
+                      sectionIndex,
+                      newLabel
+                    );
+                  }}
+                  onMoveDown={() => {
+                    characterManager.actions.moveSection(
+                      pageIndex,
+                      sectionIndex,
+                      "down"
+                    );
+                  }}
+                  onMoveUp={() => {
+                    characterManager.actions.moveSection(
+                      pageIndex,
+                      sectionIndex,
+                      "up"
+                    );
+                  }}
+                  onRemove={() => {
+                    characterManager.actions.removeSection(
+                      pageIndex,
+                      sectionIndex
+                    );
+                  }}
+                />
+                {renderSectionBlocks(pageIndex, sectionIndex, section)}
+
+                <Collapse in={advanced}>
+                  <Box p=".5rem" mb=".5rem">
+                    <Grid container justify="center" alignItems="center">
+                      <Grid item>
+                        <AddBlock
+                          onAddBlock={(blockType) => {
+                            characterManager.actions.addBlock(
+                              pageIndex,
+                              sectionIndex,
+                              blockType
+                            );
+                          }}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <AddSection
+                          onAddSection={() => {
+                            characterManager.actions.addSection(
+                              pageIndex,
+                              sectionIndex,
+                              position
+                            );
+                          }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Collapse>
+              </Box>
+            );
+          })}
+
+          {shouldRenderAddSectionButton && (
+            <Box>
+              <AddSection
+                onAddSection={() => {
+                  characterManager.actions.addSection(pageIndex, 0, position);
                 }}
               />
-              {renderSectionBlocks(pageIndex, sectionIndex, section)}
-
-              <Collapse in={advanced}>
-                <Box p=".5rem" mb=".5rem">
-                  <Grid container justify="center" alignItems="center">
-                    <Grid item>
-                      <AddBlock
-                        onAddBlock={(blockType) => {
-                          characterManager.actions.addBlock(
-                            pageIndex,
-                            sectionIndex,
-                            blockType
-                          );
-                        }}
-                      />
-                    </Grid>
-                    <Grid item>
-                      <AddSection
-                        onAddSection={() => {
-                          characterManager.actions.addSection(
-                            pageIndex,
-                            sectionIndex,
-                            position
-                          );
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Collapse>
             </Box>
-          );
-        })}
-
-        {shouldRenderAddSectionButton && (
-          <Box>
-            <AddSection
-              onAddSection={() => {
-                characterManager.actions.addSection(pageIndex, 0, position);
-              }}
-            />
-          </Box>
-        )}
+          )}
+        </Box>
       </>
     );
   }
 
-  function renderActions() {
+  function renderTopLevelActions() {
     if (props.readonly || !props.onSave) {
       return null;
     }
@@ -616,7 +618,7 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderName() {
+  function renderNameAndGroup() {
     return (
       <>
         <Box mb="1rem">
@@ -954,77 +956,95 @@ export const CharacterV3Dialog: React.FC<{
                       }}
                     />
                   )}
-                  {advanced && (
-                    <Grid container justify="flex-end" spacing={1}>
-                      {block.type === BlockType.PointCounter &&
-                        renderPointCounterAdvancedMenu(
-                          pageIndex,
-                          sectionIndex,
-                          section,
-                          block,
-                          blockIndex
-                        )}
-                      {block.type === BlockType.Text &&
-                        renderTextAdvancedMenu(
-                          pageIndex,
-                          sectionIndex,
-                          section,
-                          block,
-                          blockIndex
-                        )}
-                      {block.type === BlockType.Skill &&
-                        renderSkillAdvancedMenu(
-                          pageIndex,
-                          sectionIndex,
-                          section,
-                          block,
-                          blockIndex
-                        )}
-                      <Grid item>
-                        <Link
-                          component="button"
-                          variant="caption"
-                          className={css({
-                            color: theme.palette.primary.main,
-                          })}
-                          onClick={() => {
-                            characterManager.actions.duplicateBlock(
-                              pageIndex,
-                              sectionIndex,
-                              block,
-                              blockIndex
-                            );
-                          }}
-                        >
-                          {"Duplicate"}
-                        </Link>
-                      </Grid>
-                      <Grid item>
-                        <Link
-                          component="button"
-                          variant="caption"
-                          className={css({
-                            color: theme.palette.primary.main,
-                          })}
-                          onClick={() => {
-                            characterManager.actions.removeBlock(
-                              pageIndex,
-                              sectionIndex,
-                              blockIndex
-                            );
-                          }}
-                        >
-                          {t("character-dialog.control.remove-field")}
-                        </Link>
-                      </Grid>
-                    </Grid>
-                  )}
+                  <Collapse in={advanced}>
+                    {renderBlockAdvancedOptions(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
+                  </Collapse>
                 </Box>
               </BetterDnd>
             );
           })}
         </Box>
       </>
+    );
+  }
+
+  function renderBlockAdvancedOptions(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid container justify="flex-end" spacing={1}>
+        {block.type === BlockType.PointCounter &&
+          renderPointCounterAdvancedMenu(
+            pageIndex,
+            sectionIndex,
+            section,
+            block,
+            blockIndex
+          )}
+        {block.type === BlockType.Text &&
+          renderTextAdvancedMenu(
+            pageIndex,
+            sectionIndex,
+            section,
+            block,
+            blockIndex
+          )}
+        {block.type === BlockType.Skill &&
+          renderSkillAdvancedMenu(
+            pageIndex,
+            sectionIndex,
+            section,
+            block,
+            blockIndex
+          )}
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              characterManager.actions.duplicateBlock(
+                pageIndex,
+                sectionIndex,
+                block,
+                blockIndex
+              );
+            }}
+          >
+            {"Duplicate"}
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              characterManager.actions.removeBlock(
+                pageIndex,
+                sectionIndex,
+                blockIndex
+              );
+            }}
+          >
+            {t("character-dialog.control.remove-field")}
+          </Link>
+        </Grid>
+      </Grid>
     );
   }
 

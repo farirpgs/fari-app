@@ -18,7 +18,9 @@ export const DiceMenuForCharacterSheet: React.FC<{
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
-  const [commands, setCommands] = useState<Array<IDiceCommandGroup>>([]);
+  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>(
+    []
+  );
 
   const handleMenuOpen = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -26,30 +28,35 @@ export const DiceMenuForCharacterSheet: React.FC<{
     setAnchorEl(event.currentTarget);
   };
 
-  const handleChooseClose = () => {
+  const handleOnNewCommandSelect = () => {
     setAnchorEl(null);
-    props.onChange(commands.map((c) => c.id));
+    props.onChange(commandGroups.map((c) => c.id));
   };
 
-  const handleMenuClose = () => {
+  const handleOnMenuClose = () => {
     setAnchorEl(null);
+    setCommandsGroupsFromIds(props.commandIds);
   };
+
+  function setCommandsGroupsFromIds(commandIds: Array<string>) {
+    const newCommands = commandIds.map((commandId) => {
+      return AllDiceCommandGroups.find(
+        (c) => c.id === commandId
+      ) as IDiceCommandGroup;
+    });
+    setCommandGroups(newCommands);
+  }
 
   useEffect(
     function syncPropsWithState() {
-      const newCommands = props.commandIds.map((commandId) => {
-        return AllDiceCommandGroups.find(
-          (c) => c.id === commandId
-        ) as IDiceCommandGroup;
-      });
-      setCommands(newCommands);
+      setCommandsGroupsFromIds(props.commandIds);
     },
     [props.commandIds]
   );
 
   return (
     <>
-      <ClickAwayListener onClickAway={handleMenuClose}>
+      <ClickAwayListener onClickAway={handleOnMenuClose}>
         <Box>
           <Tooltip title={props.commandIds.join(" + ")}>
             <Link
@@ -70,10 +77,11 @@ export const DiceMenuForCharacterSheet: React.FC<{
           <DiceMenu
             open={open}
             anchorEl={anchorEl}
-            commands={commands}
-            onDiceCommandChange={setCommands}
-            ctaLabel="Choose"
-            onCtaClick={handleChooseClose}
+            commands={commandGroups}
+            onDiceCommandChange={setCommandGroups}
+            ctaLabel="Select"
+            onCtaClick={handleOnNewCommandSelect}
+            onClose={handleOnMenuClose}
           />
         </Box>
       </ClickAwayListener>

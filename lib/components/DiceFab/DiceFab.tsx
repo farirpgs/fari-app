@@ -279,6 +279,7 @@ export const DiceMenu: React.FC<{
   open: boolean;
   ctaLabel?: string;
   onCtaClick?(): void;
+  onClose?(): void;
   commands: Array<IDiceCommandGroup>;
   onDiceCommandChange: React.Dispatch<
     React.SetStateAction<IDiceCommandGroup[]>
@@ -337,7 +338,18 @@ export const DiceMenu: React.FC<{
 
                     {props.ctaLabel && (
                       <Box mt="1.5rem">
-                        <Grid container justify="center">
+                        <Grid container justify="center" spacing={2}>
+                          {props.onClose && (
+                            <Grid item>
+                              <Button
+                                color="primary"
+                                variant="outlined"
+                                onClick={props.onClose}
+                              >
+                                {"Cancel"}
+                              </Button>
+                            </Grid>
+                          )}
                           <Grid item>
                             <Button
                               color="primary"

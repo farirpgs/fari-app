@@ -2,6 +2,8 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
+import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
@@ -16,6 +18,11 @@ import { CharacterCircleBox } from "../CharacterCircleBox";
 export function BlockPointCounter(
   props: IBlockComponentProps<IPointCounterBlock> & {}
 ) {
+  const shouldDisableMax =
+    parseInt(props.block.value) === parseInt(props.block.meta.max ?? "0");
+
+  const theme = useTheme();
+
   return (
     <>
       <Box>
@@ -111,14 +118,9 @@ export function BlockPointCounter(
           )}
           <Grid item>
             <IconButton
+              disabled={shouldDisableMax}
               onClick={() => {
                 const intValue = parseInt(props.block.value) || 0;
-                if (props.block.meta.max !== undefined) {
-                  const maxInt = parseInt(props.block.meta.max);
-                  if (intValue + 1 > maxInt) {
-                    props.onValueChange(props.block.meta.max);
-                  }
-                }
                 props.onValueChange((intValue + 1).toString());
               }}
             >
@@ -126,6 +128,24 @@ export function BlockPointCounter(
             </IconButton>
           </Grid>
         </Grid>
+        {props.block.meta.max !== undefined && (
+          <Grid container justify="center">
+            <Grid item>
+              <Link
+                component="button"
+                variant="caption"
+                className={css({
+                  color: theme.palette.primary.main,
+                })}
+                onClick={() => {
+                  props.onValueChange(props.block.meta.max ?? "1");
+                }}
+              >
+                {"Reset"}
+              </Link>
+            </Grid>
+          </Grid>
+        )}
       </Box>
     </>
   );

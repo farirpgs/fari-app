@@ -159,6 +159,7 @@ export function makeDnD5eCharacter(): ICharacter {
                 label: "Initiative",
                 type: BlockType.Skill,
                 meta: {
+                  commands: ["1d20"],
                   checked: false,
                 },
                 value: "0",
