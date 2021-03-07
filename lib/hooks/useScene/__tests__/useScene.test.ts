@@ -92,8 +92,9 @@ describe("useScene", () => {
         aspects: { "aspect-id": { toto: 3 } },
         badConfetti: 0,
         drawAreaObjects: [],
+        group: undefined,
+        notes: undefined,
         gm: {
-          fatePoints: 3,
           id: "111",
           playedDuringTurn: false,
           playerName: "Game Master",
@@ -454,7 +455,6 @@ describe("useScene", () => {
       // THEN
       expect(result.current.state.scene.players[0]).toEqual({
         character: undefined,
-        fatePoints: 3,
         id: "1",
         playedDuringTurn: false,
         offline: false,
@@ -478,7 +478,6 @@ describe("useScene", () => {
       // THEN connection mappings reflects that
       expect(result.current.state.scene.players[0]).toEqual({
         character: undefined,
-        fatePoints: 1,
         id: "1",
         playedDuringTurn: true,
         offline: false,
@@ -502,7 +501,6 @@ describe("useScene", () => {
       // THEN initiative is reset
       expect(result.current.state.scene.players[0]).toEqual({
         character: undefined,
-        fatePoints: 1,
         id: "1",
         playedDuringTurn: false,
         offline: false,
@@ -588,7 +586,6 @@ describe("useScene", () => {
         expect(result.current.state.scene.players).toEqual([
           {
             character: undefined,
-            fatePoints: 3,
             id: "1",
             playedDuringTurn: false,
             offline: false,
@@ -597,7 +594,6 @@ describe("useScene", () => {
           },
           {
             character: undefined,
-            fatePoints: 3,
             id: "2",
             playedDuringTurn: false,
             offline: false,
@@ -616,7 +612,6 @@ describe("useScene", () => {
         expect(result.current.state.scene.players).toEqual([
           {
             character: undefined,
-            fatePoints: 3,
             id: "1",
             playedDuringTurn: false,
             offline: false,
@@ -652,7 +647,6 @@ describe("useScene", () => {
           expect(result.current.state.scene.players).toEqual([
             {
               character: undefined,
-              fatePoints: 3,
               id: "1",
               offline: false,
               playedDuringTurn: false,
@@ -786,7 +780,6 @@ describe("useScene", () => {
       expect(result.current.state.scene.players).toEqual([
         {
           character: undefined,
-          fatePoints: 3,
           id: playerId,
           playedDuringTurn: true,
           offline: true,
@@ -804,7 +797,6 @@ describe("useScene", () => {
       expect(result.current.state.scene.players).toEqual([
         {
           character: undefined,
-          fatePoints: 3,
           id: playerId,
           playedDuringTurn: false,
           offline: true,
@@ -951,34 +943,3 @@ function mockUseCharacters() {
     return result;
   };
 }
-
-/*
-
-
-
-// GIVEN
-const userId = "111";
-const gameId = undefined;
-const useCharactersMock = mockUseCharacters();
-
-// WHEN initial render
-const { result } = renderHook(() => {
-  const charactersManager = useCharactersMock();
-  return useScene({
-    userId,
-    gameId,
-    charactersManager,
-    
-  });
-});
-expect(result.current.state.scene.sort).toEqual(false);
-// WHEN toggle sort
-act(() => {
-  result.current.actions.toggleSort();
-});
-// THEN
-expect(result.current.state.scene.sort).toEqual(true);
-
-
-
-*/

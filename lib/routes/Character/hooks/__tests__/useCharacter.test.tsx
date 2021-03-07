@@ -195,7 +195,7 @@ describe("useCharacter", () => {
       // THEN
       expect(result.current.state.character).toEqual(character);
 
-      // WHEN a tempalte is laoded
+      // WHEN a template is loading
       act(() => {
         result.current.actions.loadTemplate(CharacterType.Accelerated);
       });
@@ -213,174 +213,207 @@ describe("useCharacter", () => {
         pages: [
           {
             id: expect.anything(),
+            label: "Character",
             sections: [
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "High Concept",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Trouble",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Relationship",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Other Aspect",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Other Aspect",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
-                visibleOnCard: true,
                 label: "Aspects",
-                position: 0,
-                type: 0,
+                position: "Left",
+                visibleOnCard: true,
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Stunt #1",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Stunt #2",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Stunt #3",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                 ],
-
                 id: expect.anything(),
                 label: "Stunts & Extras",
-                position: 0,
-                type: 0,
+                position: "Left",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Notes",
+                    meta: {},
+                    type: "Text",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
                 label: "Other",
-                position: 0,
-                type: 0,
+                position: "Left",
               },
               {
-                fields: [
+                blocks: [
+                  {
+                    id: expect.anything(),
+                    label: "Fate Points",
+                    meta: { isMainPointCounter: true, max: "3" },
+                    type: "PointCounter",
+                    value: "3",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Fate Points",
+                position: "Left",
+              },
+              {
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Stress",
+                    meta: {},
+                    type: "SlotTracker",
                     value: [
-                      {
-                        checked: false,
-                        id: expect.anything(),
-                        label: "1",
-                      },
-                      {
-                        checked: false,
-                        id: expect.anything(),
-                        label: "2",
-                      },
-                      {
-                        checked: false,
-                        id: expect.anything(),
-                        label: "3",
-                      },
+                      { checked: false, label: "1" },
+                      { checked: false, label: "2" },
+                      { checked: false, label: "3" },
                     ],
                   },
                 ],
                 id: expect.anything(),
                 label: "Stress",
-                position: 1,
-                type: 2,
+                position: "Right",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Mild",
+                    meta: { checked: false },
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Moderate",
+                    meta: { checked: false },
+                    type: "Text",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Severe",
+                    meta: { checked: false },
+                    type: "Text",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
                 label: "Consequences",
-                position: 1,
-                type: 0,
+                position: "Right",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Careful",
+                    meta: { commands: ["4dF"] },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Clever",
+                    meta: { commands: ["4dF"] },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Forceful",
+                    meta: { commands: ["4dF"] },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Flashy",
+                    meta: { commands: ["4dF"] },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Quick",
+                    meta: { commands: ["4dF"] },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Sneaky",
+                    meta: { commands: ["4dF"] },
+                    type: "Skill",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
-                visibleOnCard: true,
                 label: "Skills",
-                position: 1,
-                type: 1,
+                position: "Right",
+                visibleOnCard: true,
               },
             ],
           },
         ],
-        playedDuringTurn: undefined,
-        version: CharacterFactory.latestVersion,
+        version: 3,
       });
     });
   });

@@ -1,6 +1,6 @@
 import { Id } from "../../id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { BlockType, ICharacter } from "../types";
+import { BlockType, ICharacter, Position } from "../types";
 
 export function makeDnD5eCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
@@ -12,7 +12,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Character",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -75,7 +75,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Equipment",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -145,7 +145,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Health & Combat",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
@@ -233,7 +233,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Saving Throws",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -301,7 +301,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Abilities",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
@@ -396,7 +396,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Actions",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -431,7 +431,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Skills",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
@@ -591,7 +591,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Spells",
-            position: 1,
+            position: Position.Right,
             blocks: [],
           },
         ],
@@ -603,7 +603,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "CLASS FEATURES",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -617,7 +617,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "TRAITS",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
@@ -637,7 +637,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Background",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -729,7 +729,7 @@ export function makeDnD5eCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Notes",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),

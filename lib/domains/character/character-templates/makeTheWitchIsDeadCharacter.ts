@@ -1,6 +1,6 @@
 import { Id } from "../../id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { BlockType, ICharacter } from "../types";
+import { BlockType, ICharacter, Position } from "../types";
 
 export function makeTheWitchIsDeadCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
@@ -12,11 +12,11 @@ export function makeTheWitchIsDeadCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Character",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
-                label: "NAme",
+                label: "Name",
                 type: BlockType.Text,
                 meta: {},
                 value: "",
@@ -30,7 +30,7 @@ export function makeTheWitchIsDeadCharacter(): ICharacter {
               },
               {
                 id: Id.generate(),
-                label: "MAgie spell you know",
+                label: "Magic spell you know",
                 type: BlockType.Text,
                 meta: {},
                 value: "",
@@ -47,7 +47,7 @@ export function makeTheWitchIsDeadCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Skills",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),

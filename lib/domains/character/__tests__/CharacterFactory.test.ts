@@ -21,7 +21,6 @@ describe("CharacterFactory.migrate", () => {
               value: [false, true, false] as any,
             },
           ],
-
           consequences: [],
           refresh: 3,
           aspectsLabel: undefined,
@@ -49,6 +48,8 @@ describe("CharacterFactory.migrate", () => {
           {
             id: expect.anything(),
             label: "Physical",
+            meta: {},
+            type: "SlotTracker",
             value: [
               { checked: false, label: "1" },
               { checked: true, label: "2" },
@@ -59,12 +60,11 @@ describe("CharacterFactory.migrate", () => {
       });
     });
   });
-  describe("v2", () => {
+  fdescribe("v2", () => {
     it("should convert Warden le Magané", () => {
       const result = CharacterFactory.migrate(Warden);
 
       expect(result).toEqual({
-        fatePoints: undefined,
         group: undefined,
         id: expect.anything(),
         lastUpdated: expect.anything(),
@@ -72,86 +72,122 @@ describe("CharacterFactory.migrate", () => {
         pages: [
           {
             id: expect.anything(),
+            label: "Character",
             sections: [
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "High Concept",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value:
                       "Survivant à l'apocalypse et à une rencontre contre la Mère des Sans-Visages",
                   },
                   {
                     id: expect.anything(),
                     label: "Trouble Aspect",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value:
                       "Mon apparence affreuse traumatise quiconque me regarde (CORRUPTED)",
                   },
                   {
                     id: expect.anything(),
                     label: "RELATIONSHIP",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value: "J'ai survécu grâce à l'apocalypse Rodolf Salis",
                   },
                   {
                     id: expect.anything(),
                     label: "Other Aspect",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value: "Ancien chasseur de tête / Assassin",
                   },
                   {
                     id: expect.anything(),
                     label: "OTHER ASPECT",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
                 label: "Aspects",
-                position: 0,
-                type: 0,
+                position: "Left",
                 visibleOnCard: true,
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "The voices, they are telling me things...",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value: "Use Will instead of Notice (And +2)",
                   },
                   {
                     id: expect.anything(),
                     label: "Touched by the occult",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value:
                       "Use Lore instead of Academics about occult, weird or creepy subjects",
                   },
                   {
                     id: expect.anything(),
                     label: "Armor of Fear",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value:
                       "You can use Provoke to defend against Fight attacks, but only until the first time you’re dealt stress in a conflict. You can make your opponents hesitate to attack, but when someone shows them that you’re only human your advantage disappears.",
                   },
                 ],
                 id: expect.anything(),
                 label: "Stunts & Extras",
-                position: 0,
-                type: 0,
+                position: "Left",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Notes",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
                 label: "Other",
-                position: 0,
-                type: 0,
+                position: "Left",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Physical",
+                    meta: {},
+                    type: "SlotTracker",
                     value: [
                       { checked: false, label: "1" },
                       { checked: false, label: "2" },
@@ -162,6 +198,8 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Mental",
+                    meta: {},
+                    type: "SlotTracker",
                     value: [
                       { checked: false, label: "1" },
                       { checked: false, label: "2" },
@@ -174,6 +212,8 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Corruption",
+                    meta: {},
+                    type: "SlotTracker",
                     value: [
                       { checked: false, label: "1" },
                       { checked: false, label: "2" },
@@ -184,141 +224,225 @@ describe("CharacterFactory.migrate", () => {
                 ],
                 id: expect.anything(),
                 label: "Stress",
-                position: 1,
-                type: 2,
+                position: "Right",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     label: "Mild",
                     value: "",
                   },
                   {
                     id: expect.anything(),
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     label: "Moderate",
                     value: "",
                   },
                   {
                     id: expect.anything(),
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Text",
                     label: "Severe",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
                 label: "Consequences",
-                position: 1,
-                type: 0,
+                position: "Right",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Academics",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Athletics",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "2",
                   },
                   {
                     id: expect.anything(),
                     label: "Burglary",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Contacts",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Crafts",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Deceive",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Drive",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Empathy",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Fight",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Investigate",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "2",
                   },
                   {
                     id: expect.anything(),
                     label: "Lore",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "3",
                   },
                   {
                     id: expect.anything(),
                     label: "Notice",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Physique",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Provoke",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "4",
                   },
                   {
                     id: expect.anything(),
                     label: "Rapport",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "2",
                   },
                   {
                     id: expect.anything(),
                     label: "Resources",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Shoot",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Stealth",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Will",
+                    meta: {
+                      checked: undefined,
+                    },
+                    type: "Skill",
                     value: "3",
                   },
                 ],
                 id: expect.anything(),
                 label: "Skills",
-                position: 1,
-                type: 1,
+                position: "Right",
                 visibleOnCard: true,
               },
             ],
           },
         ],
         playedDuringTurn: false,
-        refresh: 3,
         version: 3,
       });
     });
@@ -327,7 +451,6 @@ describe("CharacterFactory.migrate", () => {
       const result = CharacterFactory.migrate(ComplexCharacter);
 
       expect(result).toEqual({
-        fatePoints: 3,
         group: "Le groupe des compliqués",
         id: expect.anything(),
         lastUpdated: 1606783644,
@@ -335,52 +458,58 @@ describe("CharacterFactory.migrate", () => {
         pages: [
           {
             id: expect.anything(),
+            label: "Character",
             sections: [
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Grand Concept",
+                    meta: { checked: undefined },
+                    type: "Text",
                     value: "Mon grand concepte",
                   },
                 ],
                 id: expect.anything(),
                 label: "Aspects",
-                position: 0,
-                type: 0,
+                position: "Left",
                 visibleOnCard: true,
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Mon super pouvoir",
+                    meta: { checked: undefined },
+                    type: "Text",
                     value: "Me permet de faire...",
                   },
                 ],
                 id: expect.anything(),
                 label: "Pouvoirs",
-                position: 0,
-                type: 0,
+                position: "Left",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Notes",
+                    meta: { checked: undefined },
+                    type: "Text",
                     value: "Some notes...",
                   },
                 ],
                 id: expect.anything(),
                 label: "Les Notes",
-                position: 0,
-                type: 0,
+                position: "Left",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Physique",
+                    meta: {},
+                    type: "SlotTracker",
                     value: [
                       { checked: false, label: "11" },
                       { checked: true, label: "22" },
@@ -391,41 +520,41 @@ describe("CharacterFactory.migrate", () => {
                 ],
                 id: expect.anything(),
                 label: "Stresse",
-                position: 1,
-                type: 2,
+                position: "Right",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Mild",
+                    meta: { checked: undefined },
+                    type: "Text",
                     value: "",
                   },
                 ],
                 id: expect.anything(),
                 label: "Conséquences",
-                position: 1,
-                type: 0,
+                position: "Right",
               },
               {
-                fields: [
+                blocks: [
                   {
                     id: expect.anything(),
                     label: "Tout",
+                    meta: { checked: undefined },
+                    type: "Skill",
                     value: "8",
                   },
                 ],
                 id: expect.anything(),
                 label: "Attributs",
-                position: 1,
-                type: 1,
+                position: "Right",
                 visibleOnCard: true,
               },
             ],
           },
         ],
         playedDuringTurn: false,
-        refresh: 3,
         version: 3,
       });
     });

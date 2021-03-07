@@ -1,6 +1,6 @@
 import { Id } from "../../id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { BlockType, ICharacter } from "../types";
+import { BlockType, ICharacter, Position } from "../types";
 
 export function makeFateCondensedCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
@@ -14,7 +14,7 @@ export function makeFateCondensedCharacter(): ICharacter {
             id: Id.generate(),
             label: "Aspects",
             visibleOnCard: true,
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -56,7 +56,7 @@ export function makeFateCondensedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Stunts & Extras",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -84,7 +84,7 @@ export function makeFateCondensedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Other",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -98,7 +98,7 @@ export function makeFateCondensedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Fate Points",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
@@ -112,7 +112,7 @@ export function makeFateCondensedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Stress",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
@@ -141,7 +141,7 @@ export function makeFateCondensedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Consequences",
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
@@ -176,7 +176,7 @@ export function makeFateCondensedCharacter(): ICharacter {
             id: Id.generate(),
             label: "Skills",
             visibleOnCard: true,
-            position: 1,
+            position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),

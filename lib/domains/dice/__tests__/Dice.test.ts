@@ -54,7 +54,7 @@ function assert(
   expect((results[number] / numberOfTests) * 100).toBeLessThanOrEqual(max);
 }
 
-fdescribe("simplifyResults", () => {
+describe("simplifyResults", () => {
   describe("Given multiple commands of the same type", () => {
     it("should simplify them", () => {
       const result = Dice.simplifyRolls([
@@ -76,7 +76,7 @@ fdescribe("simplifyResults", () => {
         { type: "coin", value: -1 },
       ]);
 
-      expect(result).toEqual([{ type: "Coin", value: 0 }]);
+      expect(result).toEqual([{ type: "coin", value: 0 }]);
     });
   });
 });

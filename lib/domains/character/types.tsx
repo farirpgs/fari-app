@@ -9,8 +9,8 @@ export enum BlockType {
 }
 
 export enum Position {
-  Left,
-  Right,
+  Left = "Left",
+  Right = "Right",
 }
 
 /**

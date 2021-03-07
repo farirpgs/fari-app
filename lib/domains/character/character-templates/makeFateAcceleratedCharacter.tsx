@@ -100,7 +100,7 @@ export function makeFateAcceleratedCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Fate Points",
-            position: 0,
+            position: Position.Left,
             blocks: [
               {
                 id: Id.generate(),
