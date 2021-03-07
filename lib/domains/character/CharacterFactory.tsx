@@ -33,7 +33,7 @@ export const CharacterFactory = {
       [CharacterType.FateOfCthulhu]: makeFateOfCthulhuCharacter,
       [CharacterType.Dnd5e]: makeDnD5eCharacter,
       [CharacterType.TheWitchIsDead]: makeTheWitchIsDeadCharacter,
-      [CharacterType.Empty]: makeEmptyCharacter,
+      [CharacterType.Blank]: makeEmptyCharacter,
     }[type]();
 
     return {

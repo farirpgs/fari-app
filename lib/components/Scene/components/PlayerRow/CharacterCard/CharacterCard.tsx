@@ -158,7 +158,7 @@ export const CharacterCard: React.FC<{
       : truncate(block.value, { length: 50 });
 
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <Box>
           <FateLabel className={css({ fontSize: ".8rem" })}>
             {block.label}
@@ -178,7 +178,7 @@ export const CharacterCard: React.FC<{
 
   function renderBlockSkill(block: IBlock & ISkillBlock) {
     return (
-      <Grid item className={css({ flex: "0 1 auto" })}>
+      <Grid item className={css({ flex: "0 1 auto", marginTop: ".2rem" })}>
         <Link
           className={css([
             {
@@ -212,7 +212,7 @@ export const CharacterCard: React.FC<{
   }
   function renderBlockPointCounter(block: IBlock & IPointCounterBlock) {
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <Box>
           <FateLabel className={css({ fontSize: ".8rem" })}>
             {block.label}
@@ -250,7 +250,7 @@ export const CharacterCard: React.FC<{
   }
   function renderBlockSlotTracker(block: IBlock & ISlotTrackerBlock) {
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <Box display="flex" justifyContent="center">
           <FateLabel className={css({ fontSize: ".8rem" })}>
             {block.label}

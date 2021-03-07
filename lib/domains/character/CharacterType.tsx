@@ -4,5 +4,5 @@ export enum CharacterType {
   FateOfCthulhu = "FateOfCthulhu",
   Dnd5e = "Dnd5e",
   TheWitchIsDead = "TheWitchIsDead",
-  Empty = "Empty",
+  Blank = "Blank",
 }

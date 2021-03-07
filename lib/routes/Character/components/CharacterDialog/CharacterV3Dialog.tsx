@@ -111,7 +111,6 @@ export const CharacterV3Dialog: React.FC<{
   const characterManager = useCharacter(props.character);
   const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
-  const [template, setTemplate] = useState(CharacterType.CoreCondensed);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
@@ -257,12 +256,16 @@ export const CharacterV3Dialog: React.FC<{
             <Grid item>
               <Select
                 label="Load Template"
+                displayEmpty
                 data-cy="character-dialog.template"
-                value={template}
+                value={""}
                 onChange={(event) =>
                   onLoadTemplate(event.target.value as CharacterType)
                 }
               >
+                <MenuItem data-cy={`character-dialog.template.none`} value={""}>
+                  {"None"}
+                </MenuItem>
                 {Object.keys(CharacterType).map((type) => {
                   return (
                     <MenuItem
