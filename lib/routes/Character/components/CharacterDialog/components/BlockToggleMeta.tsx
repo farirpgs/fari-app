@@ -10,14 +10,16 @@ import {
   ITextBlock,
 } from "../../../../../domains/character/types";
 
-export function BlockToggleMeta(props: {
+export function BlockToggleMeta<
+  TBlock extends IBlock & (ITextBlock | ISkillBlock)
+>(props: {
   readonly: boolean | undefined;
   pageIndex: number;
   sectionIndex: number;
   section: ISection;
-  block: IBlock & (ITextBlock | ISkillBlock);
+  block: TBlock;
   blockIndex: number;
-  onMetaChange(meta: any): void;
+  onMetaChange(meta: TBlock["meta"]): void;
 }) {
   return (
     <Checkbox
@@ -37,7 +39,7 @@ export function BlockToggleMeta(props: {
         props.onMetaChange({
           ...props.block.meta,
           checked: !props.block.meta.checked,
-        } as ITextBlock["meta"]);
+        });
       }}
     />
   );

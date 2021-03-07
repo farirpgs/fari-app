@@ -12,15 +12,15 @@ import { ContentEditable } from "../../../../../../components/ContentEditable/Co
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
-import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import {
+  IBlockActionComponentProps,
+  IBlockComponentProps,
+} from "../../types/IBlockComponentProps";
 import { CharacterCircleBox } from "../CharacterCircleBox";
 
 export function BlockPointCounter(
   props: IBlockComponentProps<IPointCounterBlock> & {}
 ) {
-  const shouldDisableMax =
-    parseInt(props.block.value) === parseInt(props.block.meta.max ?? "0");
-
   const theme = useTheme();
 
   return (
@@ -118,7 +118,6 @@ export function BlockPointCounter(
           )}
           <Grid item>
             <IconButton
-              disabled={shouldDisableMax}
               onClick={() => {
                 const intValue = parseInt(props.block.value) || 0;
                 props.onValueChange((intValue + 1).toString());
@@ -151,3 +150,49 @@ export function BlockPointCounter(
   );
 }
 BlockPointCounter.displayName = "BlockPointCounter";
+
+export function BlockPointCounterActions(
+  props: IBlockActionComponentProps<IPointCounterBlock>
+) {
+  const theme = useTheme();
+  return (
+    <>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              isMainPointCounter: !props.block.meta.isMainPointCounter,
+            });
+          }}
+        >
+          {props.block.meta.isMainPointCounter ? "Unstar" : "Star"}
+        </Link>
+      </Grid>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              max: props.block.meta.max === undefined ? "1" : undefined,
+            });
+          }}
+        >
+          {props.block.meta.max === undefined ? "With Max" : "Without Max"}
+        </Link>
+      </Grid>
+    </>
+  );
+}
+
+BlockPointCounterActions.displayName = "BlockPointCounterActions";

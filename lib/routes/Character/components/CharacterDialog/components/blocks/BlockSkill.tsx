@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -16,9 +17,13 @@ import {
   IRollDiceOptions,
 } from "../../../../../../domains/dice/Dice";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
-import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import {
+  IBlockActionComponentProps,
+  IBlockComponentProps,
+} from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CharacterCircleBox } from "../CharacterCircleBox";
+import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 
 export function BlockSkill(
   props: IBlockComponentProps<ISkillBlock> & {
@@ -148,3 +153,46 @@ export function BlockSkill(
   );
 }
 BlockSkill.displayName = "BlockSkill";
+
+export function BlockSkillActions(
+  props: IBlockActionComponentProps<ISkillBlock>
+) {
+  const theme = useTheme();
+  return (
+    <>
+      <Grid item>
+        <DiceMenuForCharacterSheet
+          commandIds={props.block.meta.commands || []}
+          onChange={(newCommandIds) => {
+            props.onMetaChange({
+              ...props.block.meta,
+              commands: newCommandIds,
+            });
+          }}
+        />
+      </Grid>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              checked:
+                props.block.meta.checked === undefined ? false : undefined,
+            });
+          }}
+        >
+          {props.block.meta.checked === undefined
+            ? "Add Toggle"
+            : "Remove Toggle"}
+        </Link>
+      </Grid>
+    </>
+  );
+}
+
+BlockSkillActions.displayName = "BlockSkillActions";

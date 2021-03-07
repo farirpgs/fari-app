@@ -16,3 +16,12 @@ export type IBlockComponentProps<TBlockType extends IBlockTypes> = {
   onValueChange(value: string): void;
   onMetaChange(meta: TBlockType["meta"]): void;
 };
+
+export type IBlockActionComponentProps<TBlockType extends IBlockTypes> = {
+  pageIndex: number;
+  sectionIndex: number;
+  section: ISection;
+  block: IBlock & TBlockType;
+  blockIndex: number;
+  onMetaChange(meta: TBlockType["meta"]): void;
+};

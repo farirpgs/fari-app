@@ -99,6 +99,20 @@ export function makeFateAcceleratedCharacter(): ICharacter {
           },
           {
             id: Id.generate(),
+            label: "Fate Points",
+            position: 0,
+            blocks: [
+              {
+                id: Id.generate(),
+                meta: { isMainPointCounter: true, max: "3" },
+                type: BlockType.PointCounter,
+                label: "Fate Points",
+                value: "3",
+              },
+            ],
+          },
+          {
+            id: Id.generate(),
             label: "Stress",
 
             position: Position.Right,

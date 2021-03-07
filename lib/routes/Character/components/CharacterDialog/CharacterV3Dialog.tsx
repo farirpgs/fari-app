@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -19,7 +20,6 @@ import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -44,10 +44,7 @@ import {
   IBlock,
   ICharacter,
   IPage,
-  IPointCounterBlock,
   ISection,
-  ISkillBlock,
-  ITextBlock,
   Position,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
@@ -64,12 +61,14 @@ import { useCharacter } from "../../hooks/useCharacter";
 import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
-import { BlockPointCounter } from "./components/blocks/BlockPointCounter";
+import {
+  BlockPointCounter,
+  BlockPointCounterActions,
+} from "./components/blocks/BlockPointCounter";
 import { BlockRichText } from "./components/blocks/BlockRichText";
-import { BlockSkill } from "./components/blocks/BlockSkill";
+import { BlockSkill, BlockSkillActions } from "./components/blocks/BlockSkill";
 import { BlockSlotTracker } from "./components/blocks/BlockSlotTracker";
-import { BlockText } from "./components/blocks/BlockText";
-import { DiceMenuForCharacterSheet } from "./components/DiceMenuForCharacterSheet";
+import { BlockText, BlockTextActions } from "./components/blocks/BlockText";
 import { SheetHeader } from "./components/SheetHeader";
 
 export const smallIconButtonStyle = css({
@@ -133,20 +132,15 @@ export const CharacterV3Dialog: React.FC<{
     logger.info(`CharacterDialog:onToggleAdvanced`);
   }
 
-  function onTemplateChange(newTemplate: CharacterType) {
-    setTemplate(newTemplate);
-    logger.info(
-      `CharacterDialog:onTemplateChange:${CharacterType[newTemplate]}`
-    );
-  }
-
-  function onLoadTemplate() {
+  function onLoadTemplate(newTemplate: CharacterType) {
     const confirmed = confirm(t("character-dialog.load-template-confirmation"));
 
     if (confirmed) {
-      characterManager.actions.loadTemplate(template);
+      characterManager.actions.loadTemplate(newTemplate);
       setAdvanced(false);
-      logger.info(`CharacterDialog:onLoadTemplate:${CharacterType[template]}`);
+      logger.info(
+        `CharacterDialog:onLoadTemplate:${CharacterType[newTemplate]}`
+      );
     }
   }
 
@@ -250,13 +244,23 @@ export const CharacterV3Dialog: React.FC<{
     return (
       <Collapse in={advanced}>
         <Box>
-          <Grid container wrap="nowrap" spacing={2} justify="flex-start">
+          <Grid
+            container
+            wrap="nowrap"
+            spacing={2}
+            justify="flex-start"
+            alignItems="center"
+          >
+            <Grid item>
+              <InputLabel> {t("character-dialog.load-template")}</InputLabel>
+            </Grid>
             <Grid item>
               <Select
+                label="Load Template"
                 data-cy="character-dialog.template"
                 value={template}
                 onChange={(event) =>
-                  onTemplateChange(event.target.value as CharacterType)
+                  onLoadTemplate(event.target.value as CharacterType)
                 }
               >
                 {Object.keys(CharacterType).map((type) => {
@@ -273,17 +277,6 @@ export const CharacterV3Dialog: React.FC<{
                   );
                 })}
               </Select>
-            </Grid>
-            <Grid item>
-              <Button
-                color="primary"
-                data-cy="character-dialog.load-template"
-                variant="text"
-                endIcon={<AssignmentIndIcon />}
-                onClick={onLoadTemplate}
-              >
-                {t("character-dialog.load-template")}
-              </Button>
             </Grid>
           </Grid>
         </Box>
@@ -983,30 +976,59 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     return (
       <Grid container justify="flex-end" spacing={1}>
-        {block.type === BlockType.PointCounter &&
-          renderPointCounterAdvancedMenu(
-            pageIndex,
-            sectionIndex,
-            section,
-            block,
-            blockIndex
-          )}
-        {block.type === BlockType.Text &&
-          renderTextAdvancedMenu(
-            pageIndex,
-            sectionIndex,
-            section,
-            block,
-            blockIndex
-          )}
-        {block.type === BlockType.Skill &&
-          renderSkillAdvancedMenu(
-            pageIndex,
-            sectionIndex,
-            section,
-            block,
-            blockIndex
-          )}
+        {block.type === BlockType.PointCounter && (
+          <BlockPointCounterActions
+            pageIndex={pageIndex}
+            sectionIndex={sectionIndex}
+            section={section}
+            block={block}
+            blockIndex={blockIndex}
+            onMetaChange={(meta) => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                meta
+              );
+            }}
+          />
+        )}
+        {block.type === BlockType.Text && (
+          <BlockTextActions
+            pageIndex={pageIndex}
+            sectionIndex={sectionIndex}
+            section={section}
+            block={block}
+            blockIndex={blockIndex}
+            onMetaChange={(meta) => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                meta
+              );
+            }}
+          />
+        )}
+
+        {block.type === BlockType.Skill && (
+          <BlockSkillActions
+            pageIndex={pageIndex}
+            sectionIndex={sectionIndex}
+            section={section}
+            block={block}
+            blockIndex={blockIndex}
+            onMetaChange={(meta) => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                meta
+              );
+            }}
+          />
+        )}
+
         <Grid item>
           <Link
             component="button"
@@ -1045,149 +1067,6 @@ export const CharacterV3Dialog: React.FC<{
           </Link>
         </Grid>
       </Grid>
-    );
-  }
-
-  function renderPointCounterAdvancedMenu(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock & IPointCounterBlock,
-    blockIndex: number
-  ) {
-    return (
-      <>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                {
-                  ...block.meta,
-                  isMainPointCounter: !block.meta.isMainPointCounter,
-                } as IPointCounterBlock["meta"]
-              );
-            }}
-          >
-            {block.meta.isMainPointCounter ? "Unstar" : "Star"}
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                {
-                  ...block.meta,
-                  max: block.meta.max === undefined ? "1" : undefined,
-                } as IPointCounterBlock["meta"]
-              );
-            }}
-          >
-            {block.meta.max === undefined ? "With Max" : "Without Max"}
-          </Link>
-        </Grid>
-      </>
-    );
-  }
-
-  function renderTextAdvancedMenu(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock & ITextBlock,
-    blockIndex: number
-  ) {
-    return (
-      <>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                {
-                  ...block.meta,
-                  checked: block.meta.checked === undefined ? false : undefined,
-                } as ITextBlock["meta"]
-              );
-            }}
-          >
-            {block.meta.checked === undefined ? "Add Toggle" : "Remove Toggle"}
-          </Link>
-        </Grid>
-      </>
-    );
-  }
-
-  function renderSkillAdvancedMenu(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock & ISkillBlock,
-    blockIndex: number
-  ) {
-    return (
-      <>
-        <Grid item>
-          <DiceMenuForCharacterSheet
-            commandIds={block.meta.commands || []}
-            onChange={(newCommandIds) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                {
-                  ...block.meta,
-                  commands: newCommandIds,
-                } as ISkillBlock["meta"]
-              );
-            }}
-          />
-        </Grid>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                {
-                  ...block.meta,
-                  checked: block.meta.checked === undefined ? false : undefined,
-                } as ISkillBlock["meta"]
-              );
-            }}
-          >
-            {block.meta.checked === undefined ? "Add Toggle" : "Remove Toggle"}
-          </Link>
-        </Grid>
-      </>
     );
   }
 };

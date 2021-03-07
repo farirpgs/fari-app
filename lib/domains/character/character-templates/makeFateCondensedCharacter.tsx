@@ -102,10 +102,10 @@ export function makeFateCondensedCharacter(): ICharacter {
             blocks: [
               {
                 id: Id.generate(),
-                meta: { isMainPointCounter: false },
+                meta: { isMainPointCounter: true, max: "3" },
                 type: BlockType.PointCounter,
                 label: "Fate Points",
-                value: "",
+                value: "3",
               },
             ],
           },
@@ -181,7 +181,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Academics",
@@ -190,7 +190,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Athletics",
@@ -199,7 +199,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Burglary",
@@ -208,7 +208,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Contacts",
@@ -217,7 +217,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Crafts",
@@ -226,7 +226,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Deceive",
@@ -235,7 +235,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Drive",
@@ -244,7 +244,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Empathy",
@@ -253,7 +253,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Fight",
@@ -262,7 +262,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Investigate",
@@ -271,7 +271,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Lore",
@@ -280,7 +280,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Notice",
@@ -289,7 +289,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Physique",
@@ -298,7 +298,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Provoke",
@@ -307,7 +307,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Rapport",
@@ -316,7 +316,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Resources",
@@ -325,7 +325,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Shoot",
@@ -334,7 +334,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Stealth",
@@ -343,7 +343,7 @@ export function makeFateCondensedCharacter(): ICharacter {
               {
                 id: Id.generate(),
                 meta: {
-                  checked: undefined,
+                  commands: ["4dF"],
                 },
                 type: BlockType.Skill,
                 label: "Will",

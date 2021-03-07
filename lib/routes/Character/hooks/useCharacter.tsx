@@ -10,7 +10,7 @@ import {
   ICharacter,
   IPage,
   ISlotTrackerBlock,
-  Position,
+  Position
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/id/Id";
@@ -284,7 +284,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function moveBlock(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number,
+    blockIndex: number,
 
     direction: "up" | "down"
   ) {
@@ -295,7 +295,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         draft.pages[pageIndex].sections[sectionIndex].blocks = moveValueInList(
           draft.pages[pageIndex].sections[sectionIndex].blocks,
-          fieldIndex,
+          blockIndex,
           direction
         );
       })
@@ -360,7 +360,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function setBlockLabel(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number,
+    blockIndex: number,
     label: any
   ) {
     setCharacter(
@@ -369,7 +369,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         draft.pages[pageIndex].sections[sectionIndex].blocks[
-          fieldIndex
+          blockIndex
         ].label = label;
       })
     );
@@ -378,7 +378,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function setBlockValue(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number,
+    blockIndex: number,
     value: any
   ) {
     setCharacter(
@@ -387,7 +387,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         draft.pages[pageIndex].sections[sectionIndex].blocks[
-          fieldIndex
+          blockIndex
         ].value = value;
       })
     );
@@ -396,7 +396,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function setBlockMeta(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number,
+    blockIndex: number,
     meta: any
   ) {
     setCharacter(
@@ -406,7 +406,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
 
         draft.pages[pageIndex].sections[sectionIndex].blocks[
-          fieldIndex
+          blockIndex
         ].meta = meta;
       })
     );
@@ -415,7 +415,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function removeBlock(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number
+    blockIndex: number
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -425,7 +425,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.pages[pageIndex].sections[sectionIndex].blocks = draft.pages[
           pageIndex
         ].sections[sectionIndex].blocks.filter((field, index) => {
-          return index !== fieldIndex;
+          return index !== blockIndex;
         });
       })
     );
@@ -434,7 +434,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function addCheckboxFieldValue(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number
+    blockIndex: number
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -442,9 +442,9 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         const numberOfBoxes = (draft.pages[pageIndex].sections[sectionIndex]
-          .blocks[fieldIndex].value as ISlotTrackerBlock["value"]).length;
+          .blocks[blockIndex].value as ISlotTrackerBlock["value"]).length;
 
-        (draft.pages[pageIndex].sections[sectionIndex].blocks[fieldIndex]
+        (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
           .value as ISlotTrackerBlock["value"]).push({
           label: (numberOfBoxes + 1).toString(),
           checked: false,
@@ -456,7 +456,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function removeCheckboxFieldValue(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number
+    blockIndex: number
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -464,9 +464,9 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         draft.pages[pageIndex].sections[sectionIndex].blocks[
-          fieldIndex
+          blockIndex
         ].value = (draft.pages[pageIndex].sections[sectionIndex].blocks[
-          fieldIndex
+          blockIndex
         ].value as ISlotTrackerBlock["value"]).filter(
           (box, boxIndex, boxes) => {
             return boxIndex !== boxes.length - 1;
@@ -479,7 +479,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function toggleCheckboxFieldValue(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number,
+    blockIndex: number,
     boxIndexToToggle: number
   ) {
     setCharacter(
@@ -488,11 +488,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         const currentValue = (draft.pages[pageIndex].sections[sectionIndex]
-          .blocks[fieldIndex].value as ISlotTrackerBlock["value"])[
+          .blocks[blockIndex].value as ISlotTrackerBlock["value"])[
           boxIndexToToggle
         ];
 
-        (draft.pages[pageIndex].sections[sectionIndex].blocks[fieldIndex]
+        (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
           .value as ISlotTrackerBlock["value"])[boxIndexToToggle] = {
           label: currentValue.label,
           checked: !currentValue.checked,
@@ -504,7 +504,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   function renameCheckboxFieldValue(
     pageIndex: number,
     sectionIndex: number,
-    fieldIndex: number,
+    blockIndex: number,
     boxIndexToRename: number,
     label: string
   ) {
@@ -514,11 +514,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         const currentValue = (draft.pages[pageIndex].sections[sectionIndex]
-          .blocks[fieldIndex].value as ISlotTrackerBlock["value"])[
+          .blocks[blockIndex].value as ISlotTrackerBlock["value"])[
           boxIndexToRename
         ];
 
-        (draft.pages[pageIndex].sections[sectionIndex].blocks[fieldIndex]
+        (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
           .value as ISlotTrackerBlock["value"])[boxIndexToRename] = {
           label: label,
           checked: currentValue.checked,

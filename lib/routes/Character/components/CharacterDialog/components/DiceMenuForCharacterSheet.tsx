@@ -9,11 +9,12 @@ import { DiceMenu } from "../../../../../components/DiceFab/DiceFab";
 import {
   AllDiceCommandGroups,
   IDiceCommandGroup,
+  IDiceCommandGroupId,
 } from "../../../../../domains/dice/Dice";
 
 export const DiceMenuForCharacterSheet: React.FC<{
   commandIds: Array<string>;
-  onChange(newCommandIds: Array<string>): void;
+  onChange(newCommandIds: Array<IDiceCommandGroupId>): void;
 }> = (props) => {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -56,35 +57,35 @@ export const DiceMenuForCharacterSheet: React.FC<{
 
   return (
     <>
-      <ClickAwayListener onClickAway={handleOnMenuClose}>
-        <Box>
-          <Tooltip title={props.commandIds.join(" + ")}>
-            <Link
-              component="button"
-              variant="caption"
-              className={css({
-                color: theme.palette.primary.main,
-              })}
-              onClick={(e: any) => {
-                handleMenuOpen(e);
-              }}
-            >
-              {!props.commandIds?.length
-                ? "Add Dice Commands"
-                : "Change Dice Commands"}
-            </Link>
-          </Tooltip>
-          <DiceMenu
-            open={open}
-            anchorEl={anchorEl}
-            commands={commandGroups}
-            onDiceCommandChange={setCommandGroups}
-            ctaLabel="Select"
-            onCtaClick={handleOnNewCommandSelect}
-            onClose={handleOnMenuClose}
-          />
-        </Box>
-      </ClickAwayListener>
+      <Box>
+        <Tooltip title={props.commandIds.join(" + ")}>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={(e: any) => {
+              handleMenuOpen(e);
+            }}
+          >
+            {"Dice"}
+          </Link>
+        </Tooltip>
+        <ClickAwayListener onClickAway={handleOnMenuClose}>
+          <Box>
+            <DiceMenu
+              open={open}
+              anchorEl={anchorEl}
+              commands={commandGroups}
+              onDiceCommandChange={setCommandGroups}
+              ctaLabel="Select"
+              onCtaClick={handleOnNewCommandSelect}
+              onClose={handleOnMenuClose}
+            />
+          </Box>
+        </ClickAwayListener>
+      </Box>
     </>
   );
 };

@@ -1,5 +1,7 @@
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
@@ -9,7 +11,10 @@ import {
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ITextBlock } from "../../../../../../domains/character/types";
-import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import {
+  IBlockActionComponentProps,
+  IBlockComponentProps,
+} from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 
 export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
@@ -69,3 +74,35 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   );
 }
 BlockText.displayName = "BlockText";
+
+export function BlockTextActions(
+  props: IBlockActionComponentProps<ITextBlock>
+) {
+  const theme = useTheme();
+  return (
+    <>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              checked:
+                props.block.meta.checked === undefined ? false : undefined,
+            });
+          }}
+        >
+          {props.block.meta.checked === undefined
+            ? "Add Toggle"
+            : "Remove Toggle"}
+        </Link>
+      </Grid>
+    </>
+  );
+}
+
+BlockTextActions.displayName = "BlockTextActions";
