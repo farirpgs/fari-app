@@ -8,6 +8,14 @@ export const ruTranslation: Record<
   IPossibleTranslationKeys,
   string | undefined
 > = {
+  "character-dialog.template.TheWitchIsDead": ``,
+  "character-dialog.template.Dnd5e": ``,
+  "character-dialog.template.FateOfCthulhu": ``,
+  "player-row.remove": `Remove`,
+  "player-row.add": `Add`,
+  /**
+   *
+   */
   "about-route.meta.description": `Fari это Приложение Компаньон для Fate RPG созданное René-Pier Deshaies-Gélinas`,
   "about-route.meta.title": `О Fari`,
   "changelog-route.meta.description": `Список изменений Fari`,
@@ -36,7 +44,7 @@ export const ruTranslation: Record<
   "character-dialog.saved": `Сохранено`,
   "character-dialog.template.Accelerated": `Accelerated`,
   "character-dialog.template.CoreCondensed": `Core/Condensed`,
-  "character-dialog.template.Empty": `Свой`,
+  "character-dialog.template.Blank": `Свой`,
   "characters-route.character-type.accelerated": `Accelerated`,
   "characters-route.character-type.core-condensed": `Core / Condensed`,
   "characters-route.character-type.custom": `Свой`,

@@ -297,7 +297,9 @@ export const PlayerRow: React.FC<
         <TableCell className={pointsTableCell}>
           <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
-              <Tooltip title={t("player-row.remove-point")}>
+              <Tooltip
+                title={`${t("player-row.remove")}: ${mainPointerBlock?.label}`}
+              >
                 <span>
                   <IconButton
                     data-cy={`${props["data-cy"]}.consume-point-gm`}
@@ -319,7 +321,9 @@ export const PlayerRow: React.FC<
             </Grid>
 
             <Grid item>
-              <Tooltip title={t("player-row.add-point")}>
+              <Tooltip
+                title={`${t("player-row.add")}: ${mainPointerBlock?.label}`}
+              >
                 <IconButton
                   data-cy={`${props["data-cy"]}.add-point-gm`}
                   size="small"

@@ -23,7 +23,7 @@ export const DiceMenuForCharacterSheet: React.FC<{
     []
   );
 
-  const handleMenuOpen = (
+  const handleOnMenuOpen = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     setAnchorEl(event.currentTarget);
@@ -58,31 +58,37 @@ export const DiceMenuForCharacterSheet: React.FC<{
   return (
     <>
       <Box>
-        <Tooltip title={props.commandIds.join(" + ")}>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={(e: any) => {
-              handleMenuOpen(e);
-            }}
-          >
-            {"Dice"}
-          </Link>
-        </Tooltip>
         <ClickAwayListener onClickAway={handleOnMenuClose}>
           <Box>
-            <DiceMenu
-              open={open}
-              anchorEl={anchorEl}
-              commands={commandGroups}
-              onDiceCommandChange={setCommandGroups}
-              ctaLabel="Select"
-              onCtaClick={handleOnNewCommandSelect}
-              onClose={handleOnMenuClose}
-            />
+            <Tooltip title={props.commandIds.join(" + ")}>
+              <Link
+                component="button"
+                variant="caption"
+                className={css({
+                  color: theme.palette.primary.main,
+                })}
+                onClick={(e: any) => {
+                  if (!open) {
+                    handleOnMenuOpen(e);
+                  } else {
+                    handleOnMenuClose();
+                  }
+                }}
+              >
+                {"Dice"}
+              </Link>
+            </Tooltip>
+            <Box>
+              <DiceMenu
+                open={open}
+                anchorEl={anchorEl}
+                commands={commandGroups}
+                onDiceCommandChange={setCommandGroups}
+                ctaLabel="Select"
+                onCtaClick={handleOnNewCommandSelect}
+                onClose={handleOnMenuClose}
+              />
+            </Box>
           </Box>
         </ClickAwayListener>
       </Box>

@@ -288,6 +288,7 @@ export const DiceMenu: React.FC<{
   const theme = useTheme();
   const zIndex = useZIndex();
 
+  console.debug("props", props);
   return <>{renderPopper()}</>;
 
   function renderPopper() {

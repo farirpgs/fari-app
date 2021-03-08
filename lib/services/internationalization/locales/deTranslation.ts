@@ -8,6 +8,14 @@ export const deTranslation: Record<
   IPossibleTranslationKeys,
   string | undefined
 > = {
+  "character-dialog.template.TheWitchIsDead": ``,
+  "character-dialog.template.Dnd5e": ``,
+  "character-dialog.template.FateOfCthulhu": ``,
+  "player-row.remove": `Remove`,
+  "player-row.add": `Add`,
+  /**
+   *
+   */
   "about-route.meta.description": `Fari ist eine von René-Pier Deshaies-Gélinas entwickelte Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel`,
   "about-route.meta.title": `Über`,
   "changelog-route.meta.description": `Änderungsprotokoll für Fari`,
@@ -36,7 +44,7 @@ export const deTranslation: Record<
   "character-dialog.saved": `Gespeichert`,
   "character-dialog.template.Accelerated": `Accelerated`,
   "character-dialog.template.CoreCondensed": `Core/Condensed`,
-  "character-dialog.template.Empty": `Benutzerdefiniert`,
+  "character-dialog.template.Blank": `Benutzerdefiniert`,
   "characters-route.character-type.accelerated": `Accelerated`,
   "characters-route.character-type.core-condensed": `Core / Condensed`,
   "characters-route.character-type.custom": `Benutzerdefiniert`,

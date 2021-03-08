@@ -8,6 +8,14 @@ export const itTranslation: Record<
   IPossibleTranslationKeys,
   string | undefined
 > = {
+  "character-dialog.template.TheWitchIsDead": ``,
+  "character-dialog.template.Dnd5e": ``,
+  "character-dialog.template.FateOfCthulhu": ``,
+  "player-row.remove": `Remove`,
+  "player-row.add": `Add`,
+  /**
+   *
+   */
   "about-route.meta.description": `Fari è un'applicazione per giocare a FATE RPG creata da René-Pier Deshaies-Gélinas`,
   "about-route.meta.title": `About`,
   "changelog-route.meta.description": `Fari Changelog`,
@@ -36,7 +44,7 @@ export const itTranslation: Record<
   "character-dialog.saved": `Salvato`,
   "character-dialog.template.Accelerated": `Accelerato`,
   "character-dialog.template.CoreCondensed": `Core/Condensato`,
-  "character-dialog.template.Empty": `Personalizzato`,
+  "character-dialog.template.Blank": `Personalizzato`,
   "characters-route.character-type.accelerated": `Accelerato`,
   "characters-route.character-type.core-condensed": `Core / Condensato`,
   "characters-route.character-type.custom": `Personalizzato`,

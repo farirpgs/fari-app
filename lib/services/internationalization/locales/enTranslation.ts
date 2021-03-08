@@ -1,5 +1,13 @@
 /*eslint quotes: ["error", "backtick"]*/
 export const enTranslation = {
+  "character-dialog.template.FateOfCthulhu": `Fate Of Cthulhu`,
+  "character-dialog.template.Dnd5e": `Dnd 5e`,
+  "character-dialog.template.TheWitchIsDead": `The Witch Is Dead`,
+  "player-row.remove": `Remove`,
+  "player-row.add": `Add`,
+  /**
+   *
+   */
   "about-route.meta.description": `Fari is a Fate RPG Companion Application created by René-Pier Deshaies-Gélinas`,
   "about-route.meta.title": `About`,
   "changelog-route.meta.description": `Changelog for Fari`,
@@ -28,10 +36,7 @@ export const enTranslation = {
   "character-dialog.saved": `Saved`,
   "character-dialog.template.Accelerated": `Fate Accelerated`,
   "character-dialog.template.CoreCondensed": `Fate Core/Condensed`,
-  "character-dialog.template.FateOfCthulhu": `Fate Of Cthulhu`,
-  "character-dialog.template.Dnd5e": `Dnd 5e`,
-  "character-dialog.template.TheWitchIsDead": `The Witch Is Dead`,
-  "character-dialog.template.Empty": `Empty`,
+  "character-dialog.template.Blank": `Blank`,
   "characters-route.character-type.accelerated": `Accelerated`,
   "characters-route.character-type.core-condensed": `Core / Condensed`,
   "characters-route.character-type.custom": `Custom`,
