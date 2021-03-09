@@ -30,7 +30,13 @@ import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { MiscellaneousItems, WikiItems } from "../SrdsRoute/SrdsRoute";
 
-const Patrons = ["James Micu", "Randy Oest", "Ryan Singer", "Aeife O'Brien"];
+const Patrons = [
+  "James Micu",
+  "Randy Oest",
+  "Ryan Singer",
+  "Aeife O'Brien",
+  "GhostDM",
+];
 
 const sectionGridItem = css({
   display: "flex",
