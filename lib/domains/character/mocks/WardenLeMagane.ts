@@ -106,7 +106,6 @@ export const Warden: IV2Character = {
   skillsLabel: undefined,
   stressTracksLabel: undefined,
   stuntsLabel: undefined,
-  fatePoints: undefined,
+  fatePoints: 1,
   lastUpdated: 1606783644,
-  // fariType: "character",
 };

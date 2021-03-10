@@ -79,9 +79,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "High Concept",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value:
                       "Survivant à l'apocalypse et à une rencontre contre la Mère des Sans-Visages",
@@ -89,9 +87,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Trouble Aspect",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value:
                       "Mon apparence affreuse traumatise quiconque me regarde (CORRUPTED)",
@@ -99,27 +95,21 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "RELATIONSHIP",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value: "J'ai survécu grâce à l'apocalypse Rodolf Salis",
                   },
                   {
                     id: expect.anything(),
                     label: "Other Aspect",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value: "Ancien chasseur de tête / Assassin",
                   },
                   {
                     id: expect.anything(),
                     label: "OTHER ASPECT",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value: "",
                   },
@@ -134,18 +124,14 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "The voices, they are telling me things...",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value: "Use Will instead of Notice (And +2)",
                   },
                   {
                     id: expect.anything(),
                     label: "Touched by the occult",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value:
                       "Use Lore instead of Academics about occult, weird or creepy subjects",
@@ -153,9 +139,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Armor of Fear",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     value:
                       "You can use Provoke to defend against Fight attacks, but only until the first time you’re dealt stress in a conflict. You can make your opponents hesitate to attack, but when someone shows them that you’re only human your advantage disappears.",
@@ -169,10 +153,25 @@ describe("CharacterFactory.migrate", () => {
                 blocks: [
                   {
                     id: expect.anything(),
-                    label: "Notes",
+                    label: "Fate Points",
                     meta: {
-                      checked: undefined,
+                      isMainPointCounter: true,
+                      max: "3",
                     },
+                    type: "PointCounter",
+                    value: "1",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Fate Points",
+                position: "Left",
+              },
+              {
+                blocks: [
+                  {
+                    id: expect.anything(),
+                    label: "Notes",
+                    meta: {},
                     type: "Text",
                     value: "",
                   },
@@ -181,6 +180,7 @@ describe("CharacterFactory.migrate", () => {
                 label: "Other",
                 position: "Left",
               },
+
               {
                 blocks: [
                   {
@@ -230,27 +230,21 @@ describe("CharacterFactory.migrate", () => {
                 blocks: [
                   {
                     id: expect.anything(),
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     label: "Mild",
                     value: "",
                   },
                   {
                     id: expect.anything(),
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     label: "Moderate",
                     value: "",
                   },
                   {
                     id: expect.anything(),
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Text",
                     label: "Severe",
                     value: "",
@@ -265,171 +259,133 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Academics",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Athletics",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "2",
                   },
                   {
                     id: expect.anything(),
                     label: "Burglary",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Contacts",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Crafts",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Deceive",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Drive",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Empathy",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Fight",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Investigate",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "2",
                   },
                   {
                     id: expect.anything(),
                     label: "Lore",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "3",
                   },
                   {
                     id: expect.anything(),
                     label: "Notice",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Physique",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Provoke",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "4",
                   },
                   {
                     id: expect.anything(),
                     label: "Rapport",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "2",
                   },
                   {
                     id: expect.anything(),
                     label: "Resources",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Shoot",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "",
                   },
                   {
                     id: expect.anything(),
                     label: "Stealth",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "1",
                   },
                   {
                     id: expect.anything(),
                     label: "Will",
-                    meta: {
-                      checked: undefined,
-                    },
+                    meta: {},
                     type: "Skill",
                     value: "3",
                   },
@@ -465,7 +421,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Grand Concept",
-                    meta: { checked: undefined },
+                    meta: {},
                     type: "Text",
                     value: "Mon grand concepte",
                   },
@@ -480,7 +436,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Mon super pouvoir",
-                    meta: { checked: undefined },
+                    meta: {},
                     type: "Text",
                     value: "Me permet de faire...",
                   },
@@ -493,8 +449,25 @@ describe("CharacterFactory.migrate", () => {
                 blocks: [
                   {
                     id: expect.anything(),
+                    label: "Fate Points",
+                    meta: {
+                      isMainPointCounter: true,
+                      max: "3",
+                    },
+                    type: "PointCounter",
+                    value: "3",
+                  },
+                ],
+                id: expect.anything(),
+                label: "Fate Points",
+                position: "Left",
+              },
+              {
+                blocks: [
+                  {
+                    id: expect.anything(),
                     label: "Notes",
-                    meta: { checked: undefined },
+                    meta: {},
                     type: "Text",
                     value: "Some notes...",
                   },
@@ -503,6 +476,7 @@ describe("CharacterFactory.migrate", () => {
                 label: "Les Notes",
                 position: "Left",
               },
+
               {
                 blocks: [
                   {
@@ -527,7 +501,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Mild",
-                    meta: { checked: undefined },
+                    meta: {},
                     type: "Text",
                     value: "",
                   },
@@ -541,7 +515,7 @@ describe("CharacterFactory.migrate", () => {
                   {
                     id: expect.anything(),
                     label: "Tout",
-                    meta: { checked: undefined },
+                    meta: {},
                     type: "Skill",
                     value: "8",
                   },

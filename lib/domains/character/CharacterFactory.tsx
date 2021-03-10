@@ -153,7 +153,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
       return {
         id: Id.generate(),
         type: BlockType.Text,
-        meta: { checked: undefined },
+        meta: {},
         label: a.name,
         value: a.value,
       };
@@ -176,7 +176,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     }),
   });
 
-  // Fate Points
+  // fate points
   sections.push({
     id: Id.generate(),
     label: "Fate Points",
@@ -261,9 +261,6 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     }),
   });
 
-  // TODO: migrate fate points and refresh
-  // fatePoints: v2.fatePoints,
-  // refresh: v2.refresh,
   return {
     id: v2.id,
     name: v2.name,
