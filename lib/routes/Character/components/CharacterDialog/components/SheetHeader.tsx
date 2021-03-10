@@ -29,7 +29,7 @@ export const SheetHeader: React.FC<{
   position: Position;
   helpLink: string | undefined;
   pages: Array<IPage> | undefined;
-  advanced: boolean;
+  editing: boolean;
   onLabelChange?: (newLabel: string) => void;
   onRemove: () => void;
   onMoveUp: () => void;
@@ -85,8 +85,8 @@ export const SheetHeader: React.FC<{
           >
             <ContentEditable
               data-cy={`character-dialog.${props.label}.label`}
-              readonly={!props.advanced || !props.onLabelChange}
-              border={props.advanced && !!props.onLabelChange}
+              readonly={!props.editing || !props.onLabelChange}
+              border={props.editing && !!props.onLabelChange}
               borderColor={headerColor}
               value={props.label}
               onChange={(newLabel) => {
@@ -95,7 +95,7 @@ export const SheetHeader: React.FC<{
             />
           </FateLabel>
         </Grid>
-        {props.advanced && (
+        {props.editing && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.visible-on-card")}>
               <IconButton
@@ -116,7 +116,7 @@ export const SheetHeader: React.FC<{
           </Grid>
         )}
 
-        {props.advanced && (
+        {props.editing && (
           <Grid item>
             <Tooltip title={"Move"}>
               <IconButton
@@ -130,7 +130,7 @@ export const SheetHeader: React.FC<{
             </Tooltip>
           </Grid>
         )}
-        {props.advanced && (
+        {props.editing && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.remove-section")}>
               <IconButton

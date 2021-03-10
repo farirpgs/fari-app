@@ -7,27 +7,29 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
 import useTheme from "@material-ui/core/styles/useTheme";
+import Switch from "@material-ui/core/Switch";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
-import CreateIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Delete";
+import PrintIcon from "@material-ui/icons/Print";
 import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
 import UndoIcon from "@material-ui/icons/Undo";
 import Alert from "@material-ui/lab/Alert";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useState } from "react";
@@ -38,7 +40,10 @@ import { CharacterCard } from "../../../../components/Scene/components/PlayerRow
 import { SlideUpTransition } from "../../../../components/SlideUpTransition/SlideUpTransition";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
-import { CharacterType } from "../../../../domains/character/CharacterType";
+import {
+  CharacterSheetTypes,
+  CharacterType,
+} from "../../../../domains/character/CharacterType";
 import {
   BlockType,
   IBlock,
@@ -109,7 +114,7 @@ export const CharacterV3Dialog: React.FC<{
   const showCharacterCard = query.get("card") === "true";
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
-  const [advanced, setAdvanced] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
@@ -126,8 +131,8 @@ export const CharacterV3Dialog: React.FC<{
     logger.info(`CharacterDialog:onSave`);
   }
 
-  function onToggleAdvanced() {
-    setAdvanced((prev) => !prev);
+  function handleOnToggleEditing() {
+    setEditing((prev) => !prev);
     logger.info(`CharacterDialog:onToggleAdvanced`);
   }
 
@@ -136,7 +141,7 @@ export const CharacterV3Dialog: React.FC<{
 
     if (confirmed) {
       characterManager.actions.loadTemplate(newTemplate);
-      setAdvanced(false);
+      setEditing(false);
       logger.info(
         `CharacterDialog:onLoadTemplate:${CharacterType[newTemplate]}`
       );
@@ -148,17 +153,17 @@ export const CharacterV3Dialog: React.FC<{
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
         props.onClose?.();
-        setAdvanced(false);
+        setEditing(false);
       }
     } else {
       props.onClose?.();
-      setAdvanced(false);
+      setEditing(false);
     }
   }
 
   const sheetContentStyle = css({
     width: "100%",
-    padding: ".5rem 1.5rem",
+    padding: ".5rem 1rem",
   });
 
   if (!characterManager.state.character) {
@@ -213,9 +218,7 @@ export const CharacterV3Dialog: React.FC<{
           </DialogTitle>
           <DialogContent className={css({ padding: "0" })} dividers>
             <Container maxWidth="md">
-              <Box className={sheetContentStyle}>
-                {renderPages(characterManager.state.character.pages)}
-              </Box>
+              <Box>{renderPages(characterManager.state.character.pages)}</Box>
             </Container>
           </DialogContent>
           <DialogActions className={css({ padding: "0" })}>
@@ -232,16 +235,14 @@ export const CharacterV3Dialog: React.FC<{
         <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
         <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
         <Box className={sheetContentStyle}>{renderNameAndGroup()}</Box>
-        <Box className={sheetContentStyle}>
-          {renderPages(characterManager.state.character?.pages)}
-        </Box>
+        <Box>{renderPages(characterManager.state.character?.pages)}</Box>
       </Container>
     );
   }
 
   function renderManagementActions() {
     return (
-      <Collapse in={advanced}>
+      <Collapse in={editing}>
         <Box>
           <Grid
             container
@@ -254,32 +255,27 @@ export const CharacterV3Dialog: React.FC<{
               <InputLabel> {t("character-dialog.load-template")}</InputLabel>
             </Grid>
             <Grid item>
-              <Select
-                label="Load Template"
-                displayEmpty
-                data-cy="character-dialog.template"
-                value={""}
-                onChange={(event) =>
-                  onLoadTemplate(event.target.value as CharacterType)
+              <Autocomplete
+                size="small"
+                autoHighlight
+                filterOptions={createFilterOptions({ limit: 100 })}
+                options={CharacterSheetTypes}
+                className={css({ width: "300px" })}
+                getOptionLabel={(option) =>
+                  t(
+                    `character-dialog.template.${option.type}` as IPossibleTranslationKeys
+                  )
                 }
-              >
-                <MenuItem data-cy={`character-dialog.template.none`} value={""}>
-                  {"None"}
-                </MenuItem>
-                {Object.keys(CharacterType).map((type) => {
-                  return (
-                    <MenuItem
-                      key={type}
-                      data-cy={`character-dialog.template.${type}`}
-                      value={type}
-                    >
-                      {t(
-                        `character-dialog.template.${type}` as IPossibleTranslationKeys
-                      )}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
+                groupBy={(option) => option.group}
+                onChange={(event, newValue) => {
+                  if (newValue?.type) {
+                    onLoadTemplate(newValue?.type);
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Template" variant="outlined" />
+                )}
+              />
             </Grid>
           </Grid>
         </Box>
@@ -322,8 +318,8 @@ export const CharacterV3Dialog: React.FC<{
                         <ContentEditable
                           clickable
                           value={page.label}
-                          readonly={!advanced}
-                          border={advanced}
+                          readonly={!editing}
+                          border={editing}
                           onChange={(newValue) => {
                             characterManager.actions.renamePage(
                               pageIndex,
@@ -337,7 +333,7 @@ export const CharacterV3Dialog: React.FC<{
                 })}
               </Tabs>
             </Grid>
-            {advanced && (
+            {editing && (
               <Grid item>
                 <IconButton
                   onClick={() => {
@@ -353,7 +349,7 @@ export const CharacterV3Dialog: React.FC<{
             )}
           </Grid>
         </Box>
-        <Collapse in={advanced}>
+        <Collapse in={editing}>
           <Box mb=".5rem">
             <Grid container justify="space-around" alignItems="center">
               <Grid item>
@@ -459,7 +455,7 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     const numberOfSections =
       sections?.filter((s) => s.position === position).length ?? 0;
-    const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
+    const shouldRenderAddSectionButton = editing && numberOfSections === 0;
 
     return (
       <>
@@ -479,7 +475,7 @@ export const CharacterV3Dialog: React.FC<{
                   pages={characterManager.state.character?.pages}
                   position={section.position}
                   helpLink={helpLink}
-                  advanced={advanced}
+                  editing={editing}
                   visibleOnCard={section.visibleOnCard}
                   onReposition={(newPosition) => {
                     characterManager.actions.repositionSection(
@@ -531,7 +527,7 @@ export const CharacterV3Dialog: React.FC<{
                 />
                 {renderSectionBlocks(pageIndex, sectionIndex, section)}
 
-                <Collapse in={advanced}>
+                <Collapse in={editing}>
                   <Box p=".5rem" mb=".5rem">
                     <Grid container justify="center" alignItems="center">
                       <Grid item>
@@ -583,34 +579,69 @@ export const CharacterV3Dialog: React.FC<{
     }
 
     return (
-      <Grid container wrap="nowrap" spacing={2} justify="space-between">
-        {!props.readonly && (
-          <Grid item>
-            <Button
-              color="primary"
-              data-cy="character-dialog.toggle-advanced"
-              variant={advanced ? "contained" : "outlined"}
-              endIcon={<CreateIcon />}
-              onClick={onToggleAdvanced}
-            >
-              {t("character-dialog.advanced")}
-            </Button>
-          </Grid>
-        )}
-        <Grid item>
-          <Button
-            color="primary"
-            data-cy="character-dialog.save"
-            data-cy-dirty={characterManager.state.dirty}
-            variant={characterManager.state.dirty ? "contained" : "outlined"}
-            type="submit"
-            endIcon={<SaveIcon />}
-            onClick={onSave}
+      <>
+        <Grid
+          container
+          wrap="nowrap"
+          spacing={2}
+          justify="space-between"
+          alignItems="center"
+        >
+          {!props.readonly && (
+            <Grid item xs={12} sm={6}>
+              <FormControlLabel
+                label="Advanced Mode"
+                control={
+                  <Switch
+                    color="primary"
+                    checked={editing}
+                    onChange={handleOnToggleEditing}
+                  />
+                }
+              />
+            </Grid>
+          )}
+
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            container
+            alignItems="center"
+            justify="flex-end"
+            spacing={2}
           >
-            {t("character-dialog.save")}
-          </Button>
+            <Grid item>
+              <IconButton
+                color="default"
+                data-cy="character-dialog.print"
+                size="small"
+                onClick={() => {
+                  window.open(`/characters/${props.character?.id}/print`);
+                }}
+              >
+                <PrintIcon />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Button
+                color="primary"
+                data-cy="character-dialog.save"
+                data-cy-dirty={characterManager.state.dirty}
+                variant={
+                  characterManager.state.dirty ? "contained" : "outlined"
+                }
+                type="submit"
+                endIcon={<SaveIcon />}
+                onClick={onSave}
+              >
+                {t("character-dialog.save")}
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
+        <Grid container wrap="nowrap" spacing={2} justify="flex-end" />
+      </>
     );
   }
 
@@ -721,248 +752,264 @@ export const CharacterV3Dialog: React.FC<{
     return (
       <>
         <Box
-          className={css(sheetContentStyle, {
-            padding: section.blocks.length === 0 ? "0" : undefined,
+          className={css({
+            marginTop: section.blocks.length === 0 ? "2rem" : ".25rem",
+            marginBottom: section.blocks.length === 0 ? "2rem" : ".25rem",
           })}
         >
           {section.blocks.map((block, blockIndex) => {
             return (
-              <BetterDnd
-                key={block.id}
-                index={blockIndex}
-                type={section.label}
-                readonly={!advanced}
-                onMove={(dragIndex, hoverIndex) => {
-                  characterManager.actions.moveDnDBlock(
-                    pageIndex,
-                    sectionIndex,
-                    dragIndex,
-                    hoverIndex
-                  );
-                }}
-              >
-                <Box py=".5rem">
-                  {block.type === BlockType.Text && (
-                    <BlockText
-                      advanced={advanced}
-                      readonly={props.readonly}
-                      pageIndex={pageIndex}
-                      sectionIndex={sectionIndex}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {
-                        characterManager.actions.setBlockLabel(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onValueChange={(value) => {
-                        characterManager.actions.setBlockValue(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onMetaChange={(meta) => {
-                        characterManager.actions.setBlockMeta(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          meta
-                        );
-                      }}
-                    />
-                  )}
-                  {block.type === BlockType.RichText && (
-                    <BlockRichText
-                      advanced={advanced}
-                      readonly={props.readonly}
-                      pageIndex={pageIndex}
-                      sectionIndex={sectionIndex}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {
-                        characterManager.actions.setBlockLabel(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onValueChange={(value) => {
-                        characterManager.actions.setBlockValue(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onMetaChange={(meta) => {
-                        characterManager.actions.setBlockMeta(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          meta
-                        );
-                      }}
-                    />
-                  )}
-                  {block.type === BlockType.Skill && (
-                    <BlockSkill
-                      advanced={advanced}
-                      readonly={props.readonly}
-                      pageIndex={pageIndex}
-                      sectionIndex={sectionIndex}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {
-                        characterManager.actions.setBlockLabel(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onValueChange={(value) => {
-                        characterManager.actions.setBlockValue(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onMetaChange={(meta) => {
-                        characterManager.actions.setBlockMeta(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          meta
-                        );
-                      }}
-                      onSkillClick={(options, commands) => {
-                        props.onSkillClick(options, commands);
-                      }}
-                    />
-                  )}
-                  {block.type === BlockType.PointCounter && (
-                    <BlockPointCounter
-                      advanced={advanced}
-                      readonly={props.readonly}
-                      pageIndex={pageIndex}
-                      sectionIndex={sectionIndex}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {
-                        characterManager.actions.setBlockLabel(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onValueChange={(value) => {
-                        characterManager.actions.setBlockValue(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onMetaChange={(meta) => {
-                        characterManager.actions.setBlockMeta(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          meta
-                        );
-                      }}
-                    />
-                  )}
-
-                  {block.type === BlockType.SlotTracker && (
-                    <BlockSlotTracker
-                      advanced={advanced}
-                      readonly={props.readonly}
-                      pageIndex={pageIndex}
-                      sectionIndex={sectionIndex}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {
-                        characterManager.actions.setBlockLabel(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onValueChange={(value) => {
-                        characterManager.actions.setBlockValue(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          value
-                        );
-                      }}
-                      onMetaChange={(meta) => {
-                        characterManager.actions.setBlockMeta(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          meta
-                        );
-                      }}
-                      onAddBox={() => {
-                        characterManager.actions.addBlockBox(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                      onRemoveBox={() => {
-                        characterManager.actions.removeBlockBox(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex
-                        );
-                      }}
-                      onToggleBox={(boxIndex) => {
-                        characterManager.actions.toggleCheckboxFieldValue(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          boxIndex
-                        );
-                      }}
-                      onBoxLabelChange={(boxIndex, value) => {
-                        characterManager.actions.setBlockBoxLabel(
-                          pageIndex,
-                          sectionIndex,
-                          blockIndex,
-                          boxIndex,
-                          value
-                        );
-                      }}
-                    />
-                  )}
-                  <Collapse in={advanced}>
-                    {renderBlockAdvancedOptions(
+              <Box key={block.id}>
+                <BetterDnd
+                  index={blockIndex}
+                  type={section.label}
+                  readonly={!editing}
+                  className={css({
+                    marginLeft: ".5rem",
+                    marginRight: ".5rem",
+                  })}
+                  dragIndicatorClassName={css({
+                    marginTop: ".5rem",
+                  })}
+                  onMove={(dragIndex, hoverIndex) => {
+                    characterManager.actions.moveDnDBlock(
                       pageIndex,
                       sectionIndex,
-                      section,
-                      block,
-                      blockIndex
+                      dragIndex,
+                      hoverIndex
+                    );
+                  }}
+                >
+                  <Box
+                    className={css({
+                      marginTop: ".5rem",
+                      marginBottom: ".5rem",
+                      marginLeft: ".5rem",
+                      marginRight: ".5rem",
+                    })}
+                  >
+                    {block.type === BlockType.Text && (
+                      <BlockText
+                        editing={editing}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                      />
                     )}
-                  </Collapse>
-                </Box>
-              </BetterDnd>
+                    {block.type === BlockType.RichText && (
+                      <BlockRichText
+                        editing={editing}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                      />
+                    )}
+                    {block.type === BlockType.Skill && (
+                      <BlockSkill
+                        editing={editing}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                        onSkillClick={(options, commands) => {
+                          props.onSkillClick(options, commands);
+                        }}
+                      />
+                    )}
+                    {block.type === BlockType.PointCounter && (
+                      <BlockPointCounter
+                        editing={editing}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                      />
+                    )}
+
+                    {block.type === BlockType.SlotTracker && (
+                      <BlockSlotTracker
+                        editing={editing}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                        onAddBox={() => {
+                          characterManager.actions.addBlockBox(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex
+                          );
+                        }}
+                        onRemoveBox={() => {
+                          characterManager.actions.removeBlockBox(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex
+                          );
+                        }}
+                        onToggleBox={(boxIndex) => {
+                          characterManager.actions.toggleCheckboxFieldValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            boxIndex
+                          );
+                        }}
+                        onBoxLabelChange={(boxIndex, value) => {
+                          characterManager.actions.setBlockBoxLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            boxIndex,
+                            value
+                          );
+                        }}
+                      />
+                    )}
+                    <Collapse in={editing}>
+                      {renderBlockAdvancedOptions(
+                        pageIndex,
+                        sectionIndex,
+                        section,
+                        block,
+                        blockIndex
+                      )}
+                    </Collapse>
+                  </Box>
+                </BetterDnd>
+              </Box>
             );
           })}
         </Box>

@@ -6,3 +6,15 @@ export enum CharacterType {
   TheWitchIsDead = "TheWitchIsDead",
   Blank = "Blank",
 }
+
+export const CharacterSheetTypes: Array<{
+  type: CharacterType;
+  group: string;
+}> = [
+  { group: "Fate", type: CharacterType.CoreCondensed },
+  { group: "Fate", type: CharacterType.Accelerated },
+  { group: "Fate", type: CharacterType.FateOfCthulhu },
+  { group: "Dungeons & Dragons", type: CharacterType.Dnd5e },
+  { group: "Grant Howitt", type: CharacterType.TheWitchIsDead },
+  { group: "Blank", type: CharacterType.Blank },
+];

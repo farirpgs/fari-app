@@ -1,8 +1,7 @@
 import { css, cx } from "@emotion/css";
-import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import useTheme from "@material-ui/core/styles/useTheme";
@@ -27,7 +26,11 @@ import { useLightBackground } from "../../../../hooks/useLightBackground/useLigh
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { DiceBox } from "../../../DiceBox/DiceBox";
+import {
+  DiceBonusLabel,
+  DiceBox,
+  DiceBoxResult,
+} from "../../../DiceBox/DiceBox";
 
 export const PlayerRow: React.FC<
   {
@@ -62,19 +65,6 @@ export const PlayerRow: React.FC<
 
   const hasCharacterSheet = !!props.player.character;
   const selectedRowStyle = css({ backgroundColor: lightBackground });
-  const playerInfoCellStyle = css({
-    padding: "0.5rem",
-    borderBottom: "none",
-  });
-  const controlsRowStyle = css({
-    padding: "0.5rem",
-  });
-  const controlTableCellStyle = css({ border: "none", padding: ".7rem" });
-  const pointsTableCell = css({
-    border: "none",
-    padding: ".7rem 0",
-  });
-  const borderTableCellStyle = css({ padding: "0" });
 
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
     props.player.character
@@ -97,113 +87,108 @@ export const PlayerRow: React.FC<
 
   return (
     <>
-      <TableRow
-        data-cy={props["data-cy"]}
-        selected={false}
-        className={cx({
-          [selectedRowStyle]: shouldHighlight,
-        })}
-      >
-        <TableCell className={playerInfoCellStyle} align="left">
-          {props.player.isGM ? (
-            <Typography
-              noWrap
-              color="inherit"
-              className={css({
-                width: "100%",
-                textAlign: "left",
-                padding: "4px 5px",
-                fontSize: "1.2rem",
-                lineHeight: Font.lineHeight(1.2),
-                fontWeight: props.highlight ? "bold" : "normal",
-              })}
-            >
-              {name}
-            </Typography>
-          ) : (
-            renderCharacterSheetButton()
-          )}
-        </TableCell>
-
-        <TableCell className={playerInfoCellStyle} align="center">
-          <Tooltip
-            title={
-              props.player.playedDuringTurn
-                ? t("player-row.played")
-                : t("player-row.not-played")
-            }
-          >
-            <span>
-              <IconButton
-                data-cy={`${props["data-cy"]}.toggle-initiative`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onPlayedInTurnOrderChange(
-                    !props.player.playedDuringTurn
-                  );
-                  logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
-                    playedDuringTurn: !props.player.playedDuringTurn,
-                  });
-                }}
-                disabled={props.readonly}
-                size="small"
-              >
-                {props.player.playedDuringTurn ? (
-                  <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
-                ) : (
-                  <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
-                )}
-              </IconButton>
-            </span>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={cx(playerInfoCellStyle)} align="center">
-          <Tooltip title={mainPointerBlock?.label ?? ""}>
-            <span>
-              <ButtonBase
-                className={css({
-                  borderRadius: "50%",
-                })}
-                data-cy={`${props["data-cy"]}.consume-point`}
-                disabled={props.readonly}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onUpdatePlayerCharacterMainPointCounter(points - 1);
-                  logger.info("ScenePlayer:onConsumePoint");
-                }}
-              >
-                <Avatar className={pointsStyle}>{points}</Avatar>
-              </ButtonBase>
-            </span>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={cx(playerInfoCellStyle)} align="right">
-          {!props.highlight && (
-            <Box display="flex" justifyContent="flex-end">
-              <DiceBox
-                rolls={props.player.rolls}
-                size="2rem"
-                fontSize="1.25rem"
-                borderSize=".15rem"
-                disabled={props.readonly}
-                onClick={() => {
-                  handleRoll({});
-                }}
+      <Box>
+        <Box p=".5rem">
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item xs={9}>
+              {renderCharacterSheetButton()}
+            </Grid>
+            <Grid item xs className={css({ textAlign: "right" })}>
+              {renderInitiative()}
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item>{renderDiceBox()}</Grid>
+          </Grid>
+          {/* <Grid container spacing={2} wrap="nowrap">
+            <Grid item>
+              <BlockPointCounter
+                editing={false}
+                readonly={true}
+                pageIndex={0}
+                sectionIndex={0}
+                blockIndex={0}
+                section={{}}
+                block={mainPointerBlock}
+                onLabelChange={(value) => {}}
+                onValueChange={(value) => {}}
+                onMetaChange={(meta) => {}}
               />
-            </Box>
-          )}
-        </TableCell>
-      </TableRow>
-      {renderGMControls()}
-      {renderBorder()}
+            </Grid>
+          </Grid> */}
+        </Box>
+        <Divider light />
+      </Box>
     </>
   );
+
+  function renderDiceBox() {
+    return (
+      <Grid container spacing={2} wrap="nowrap">
+        <Grid item>
+          <Box display="flex" justifyContent="flex-end">
+            <DiceBox
+              rolls={props.player.rolls}
+              size="2rem"
+              fontSize="1rem"
+              borderSize=".15rem"
+              disabled={props.readonly}
+              onClick={() => {
+                handleRoll({});
+              }}
+            />
+          </Box>
+        </Grid>
+        <Grid item container>
+          <Grid item xs={12}>
+            <DiceBonusLabel rolls={props.player.rolls} />
+          </Grid>
+          <Grid item xs={12}>
+            <DiceBoxResult rolls={props.player.rolls} />
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderInitiative() {
+    return (
+      <Tooltip
+        title={
+          props.player.playedDuringTurn
+            ? t("player-row.played")
+            : t("player-row.not-played")
+        }
+      >
+        <span>
+          <IconButton
+            data-cy={`${props["data-cy"]}.toggle-initiative`}
+            onClick={(e) => {
+              e.stopPropagation();
+              props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
+              logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
+                playedDuringTurn: !props.player.playedDuringTurn,
+              });
+            }}
+            disabled={props.readonly}
+            className={css({ padding: "0" })}
+          >
+            {props.player.playedDuringTurn ? (
+              <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
+            ) : (
+              <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
+            )}
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
 
   function renderCharacterSheetButton() {
     return (
       <>
         <Grid container wrap="nowrap" alignItems="center">
-          {props.highlight && (
+          {!props.readonly && (
             <Grid item>
               <Tooltip
                 title={
@@ -218,6 +203,7 @@ export const PlayerRow: React.FC<
               >
                 <IconButton
                   size="small"
+                  className={css({ padding: "0" })}
                   color={hasCharacterSheet ? "default" : "primary"}
                 >
                   {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
@@ -225,7 +211,7 @@ export const PlayerRow: React.FC<
               </Tooltip>
             </Grid>
           )}
-          <Grid item xs>
+          <Grid item xs zeroMinWidth>
             <Button
               className={css({
                 width: "100%",
@@ -235,6 +221,7 @@ export const PlayerRow: React.FC<
                   ? theme.palette.text.primary
                   : theme.palette.text.secondary,
                 border: "none",
+                borderRadius: "4px",
               })}
               data-cy={`${props["data-cy"]}.open-character-sheet`}
               disabled={!props.player.character}
@@ -250,8 +237,8 @@ export const PlayerRow: React.FC<
                 className={css({
                   width: "100%",
                   textAlign: "left",
-                  fontSize: "1.2rem",
-                  lineHeight: Font.lineHeight(1.2),
+                  fontSize: "1rem",
+                  lineHeight: Font.lineHeight(0.8),
                   fontWeight: props.highlight ? "bold" : "normal",
                 })}
               >
@@ -271,11 +258,11 @@ export const PlayerRow: React.FC<
     return (
       <TableRow
         selected={false}
-        className={cx(controlsRowStyle, {
+        className={cx(undefined, {
           [selectedRowStyle]: shouldHighlight,
         })}
       >
-        <TableCell className={controlTableCellStyle}>
+        <TableCell>
           <Tooltip title={t("player-row.remove-character")}>
             <IconButton
               data-cy={`${props["data-cy"]}.remove`}
@@ -286,15 +273,12 @@ export const PlayerRow: React.FC<
                 logger.info("ScenePlayer:onPlayerRemove");
               }}
             >
-              <HighlightOffIcon
-                color="error"
-                className={css({ width: "1rem", height: "1rem" })}
-              />
+              <HighlightOffIcon color="error" />
             </IconButton>
           </Tooltip>
         </TableCell>
-        <TableCell className={controlTableCellStyle} />
-        <TableCell className={pointsTableCell}>
+        <TableCell />
+        <TableCell>
           <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
               <Tooltip
@@ -312,9 +296,7 @@ export const PlayerRow: React.FC<
                       logger.info("ScenePlayer:onGMConsumePoint");
                     }}
                   >
-                    <RemoveCircleOutlineOutlinedIcon
-                      className={css({ width: "1rem", height: "1rem" })}
-                    />
+                    <RemoveCircleOutlineOutlinedIcon />
                   </IconButton>
                 </span>
               </Tooltip>
@@ -333,23 +315,13 @@ export const PlayerRow: React.FC<
                     logger.info("ScenePlayer:onGMAddPoint");
                   }}
                 >
-                  <AddCircleOutlineOutlinedIcon
-                    className={css({ width: "1rem", height: "1rem" })}
-                  />
+                  <AddCircleOutlineOutlinedIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
           </Grid>
         </TableCell>
-        <TableCell className={controlTableCellStyle} />
-      </TableRow>
-    );
-  }
-
-  function renderBorder() {
-    return (
-      <TableRow>
-        <TableCell colSpan={4} className={borderTableCellStyle} />
+        <TableCell />
       </TableRow>
     );
   }

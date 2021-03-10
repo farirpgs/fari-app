@@ -8,11 +8,13 @@ export function makeTheWitchIsDeadCharacter(): ICharacter {
     pages: [
       {
         id: Id.generate(),
+        label: "Character",
         sections: [
           {
             id: Id.generate(),
             label: "Character",
             position: Position.Left,
+            visibleOnCard: true,
             blocks: [
               {
                 id: Id.generate(),
@@ -47,39 +49,48 @@ export function makeTheWitchIsDeadCharacter(): ICharacter {
           {
             id: Id.generate(),
             label: "Skills",
+            visibleOnCard: true,
             position: Position.Right,
             blocks: [
               {
                 id: Id.generate(),
                 label: "Clever",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d10"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
-                label: "FIERCE",
+                label: "Fierce",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d10"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
-                label: "SLY",
+                label: "Sly",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d10"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
-                label: "QUICK",
+                label: "Quick",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d10"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
-                label: "CURRENT DANGER",
+                label: "Current Danger",
                 type: BlockType.PointCounter,
                 meta: {
                   isMainPointCounter: false,
@@ -89,7 +100,6 @@ export function makeTheWitchIsDeadCharacter(): ICharacter {
             ],
           },
         ],
-        label: "Character Sheet",
       },
     ],
   });

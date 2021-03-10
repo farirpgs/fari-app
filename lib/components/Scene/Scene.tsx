@@ -5,7 +5,6 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
-import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
@@ -19,11 +18,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tab from "@material-ui/core/Tab";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
@@ -52,7 +47,10 @@ import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
-import { useRollDice } from "../../contexts/DiceContext/DiceContext";
+import {
+  useRollDice,
+  useRollDiceWithCommands,
+} from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
@@ -136,6 +134,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const logger = useLogger();
   const rollDice = useRollDice();
+  const rollWithCommands = useRollDiceWithCommands();
   const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
@@ -440,113 +439,100 @@ export const Scene: React.FC<IProps> = (props) => {
         </Box>
 
         <Paper className={paperStyle}>
-          <TableContainer>
-            <Table
-              size="small"
-              className={css({
-                tableLayout: "fixed",
-              })}
-            >
-              <TableHead>{renderPlayerRowHeader()}</TableHead>
-              <TableBody>
-                {everyone.map((player, playerRowIndex) => {
-                  const isMe = me?.id === player.id;
-                  const canControl = controllablePlayerIds.includes(player.id);
-                  return (
-                    <React.Fragment key={player.id}>
-                      <CharacterV3Dialog
-                        readonly={!canControl}
-                        open={characterDialogPlayerId === player.id}
-                        character={player.character}
-                        dialog={true}
-                        rolls={player.rolls}
-                        onSkillClick={(options) => {
-                          handleSetPlayerRoll(player.id, rollDice(options));
-                        }}
-                        onSave={(updatedCharacter) => {
-                          if (isGM) {
-                            sceneManager.actions.updatePlayerCharacter(
-                              player.id,
-                              updatedCharacter
-                            );
-                          } else {
-                            connectionsManager?.actions.sendToHost<IPeerActions>(
-                              {
-                                action: "update-character",
-                                payload: updatedCharacter,
-                              }
-                            );
-                          }
-                          setCharacterDialogPlayerId(undefined);
-                        }}
-                        onClose={() => {
-                          setCharacterDialogPlayerId(undefined);
-                        }}
-                      />
-                      <PlayerRow
-                        data-cy={`scene.player-row.${playerRowIndex}`}
-                        key={player.id}
-                        highlight={isMe}
-                        readonly={!canControl}
-                        renderControls={isGM}
-                        player={player}
-                        onPlayerRemove={() => {
-                          sceneManager.actions.removePlayer(player.id);
-                        }}
-                        onCharacterSheetOpen={() => {
-                          if (player.character) {
-                            setCharacterDialogPlayerId(player.id);
-                          }
-                        }}
-                        onLoadCharacterSheet={() => {
-                          charactersManager.actions.openManager(
-                            ManagerMode.Use,
-                            handlePlayerLoadCharacter
-                          );
-                        }}
-                        onDiceRoll={(options: IRollDiceOptions) => {
-                          handleSetPlayerRoll(player.id, rollDice(options));
-                        }}
-                        onPlayedInTurnOrderChange={(playedInTurnOrder) => {
-                          if (isGM) {
-                            sceneManager.actions.updatePlayerPlayedDuringTurn(
-                              player.id,
-                              playedInTurnOrder
-                            );
-                          } else {
-                            connectionsManager?.actions.sendToHost<IPeerActions>(
-                              {
-                                action: "played-in-turn-order",
-                                payload: playedInTurnOrder,
-                              }
-                            );
-                          }
-                        }}
-                        onUpdatePlayerCharacterMainPointCounter={(points) => {
-                          if (isGM) {
-                            sceneManager.actions.updatePlayerCharacterMainPointCounter(
-                              player.id,
-                              points
-                            );
-                          } else {
-                            connectionsManager?.actions.sendToHost<IPeerActions>(
-                              {
-                                action: "update-main-point-counter",
-                                payload: points,
-                              }
-                            );
-                          }
-                        }}
-                      />
-                    </React.Fragment>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          {everyone.map((player, playerRowIndex) => {
+            const isMe = me?.id === player.id;
+            const canControl = controllablePlayerIds.includes(player.id);
+            return (
+              <React.Fragment key={player.id}>
+                <CharacterV3Dialog
+                  readonly={!canControl}
+                  open={characterDialogPlayerId === player.id}
+                  character={player.character}
+                  dialog={true}
+                  rolls={player.rolls}
+                  onSkillClick={(options, commands) => {
+                    if (commands) {
+                      const result = rollWithCommands(options, commands);
+                      handleSetPlayerRoll(player.id, result);
+                    } else {
+                      const result = rollDice(options);
+                      handleSetPlayerRoll(player.id, result);
+                    }
+                  }}
+                  onSave={(updatedCharacter) => {
+                    if (isGM) {
+                      sceneManager.actions.updatePlayerCharacter(
+                        player.id,
+                        updatedCharacter
+                      );
+                    } else {
+                      connectionsManager?.actions.sendToHost<IPeerActions>({
+                        action: "update-character",
+                        payload: updatedCharacter,
+                      });
+                    }
+                    setCharacterDialogPlayerId(undefined);
+                  }}
+                  onClose={() => {
+                    setCharacterDialogPlayerId(undefined);
+                  }}
+                />
+                <PlayerRow
+                  data-cy={`scene.player-row.${playerRowIndex}`}
+                  key={player.id}
+                  highlight={isMe}
+                  readonly={!canControl}
+                  renderControls={isGM}
+                  player={player}
+                  onPlayerRemove={() => {
+                    sceneManager.actions.removePlayer(player.id);
+                  }}
+                  onCharacterSheetOpen={() => {
+                    if (player.character) {
+                      setCharacterDialogPlayerId(player.id);
+                    }
+                  }}
+                  onLoadCharacterSheet={() => {
+                    charactersManager.actions.openManager(
+                      ManagerMode.Use,
+                      handlePlayerLoadCharacter
+                    );
+                  }}
+                  onDiceRoll={(options: IRollDiceOptions) => {
+                    handleSetPlayerRoll(player.id, rollDice(options));
+                  }}
+                  onPlayedInTurnOrderChange={(playedInTurnOrder) => {
+                    if (isGM) {
+                      sceneManager.actions.updatePlayerPlayedDuringTurn(
+                        player.id,
+                        playedInTurnOrder
+                      );
+                    } else {
+                      connectionsManager?.actions.sendToHost<IPeerActions>({
+                        action: "played-in-turn-order",
+                        payload: playedInTurnOrder,
+                      });
+                    }
+                  }}
+                  onUpdatePlayerCharacterMainPointCounter={(points) => {
+                    if (isGM) {
+                      sceneManager.actions.updatePlayerCharacterMainPointCounter(
+                        player.id,
+                        points
+                      );
+                    } else {
+                      connectionsManager?.actions.sendToHost<IPeerActions>({
+                        action: "update-main-point-counter",
+                        payload: points,
+                      });
+                    }
+                  }}
+                />
+              </React.Fragment>
+            );
+          })}
         </Paper>
         <Paper className={paperStyle}>
-          <Divider light />
           <Box>
             <DrawArea
               objects={sceneManager.state.scene.drawAreaObjects}

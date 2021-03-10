@@ -33,16 +33,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
   },
   overrides: {
     MuiCssBaseline: {
-      "@global": {
-        "@media print": {
-          "@page": {
-            size: "A2",
-          },
-          "body": {
-            minWidth: "1200px",
-          },
-        },
-      },
+      "@global": {},
     },
     MuiButton: {
       root: {

@@ -16,6 +16,7 @@ import {
   IDiceCommandNames,
   IRollDiceOptions,
 } from "../../../../../../domains/dice/Dice";
+import { useTextColors } from "../../../../../../hooks/useTextColors/useTextColors";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
 import {
   IBlockActionComponentProps,
@@ -34,16 +35,27 @@ export function BlockSkill(
   }
 ) {
   const theme = useTheme();
+  const tooltipBackground = "#182026";
+  const tooltipColor = useTextColors(tooltipBackground);
+  const commandGroupsMatch =
+    props.block.meta?.commands?.map((commandId) => {
+      return AllDiceCommandGroups.find(
+        (c) => c.id === commandId
+      ) as IDiceCommandGroup;
+    }) ?? [];
+
   const isSlotTrackerVisible = props.block.meta.checked !== undefined;
   const skillDescription =
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
+
+  const canRoll = !props.editing;
 
   const skillLabel = (
     <FateLabel className={css({ display: "inline-block" })}>
       <ContentEditable
         data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-        readonly={!props.advanced}
-        border={props.advanced}
+        readonly={!props.editing}
+        border={props.editing}
         value={props.block.label}
         onChange={(value) => {
           props.onLabelChange(value);
@@ -51,49 +63,64 @@ export function BlockSkill(
       />
     </FateLabel>
   );
+  const hasCommands = !!props.block.meta.commands?.length;
+
+  const commandGroupValues = props.block.meta.commands?.flatMap((c) => {
+    const group = AllDiceCommandGroups.find((g) => {
+      return g.id === c;
+    }) as IDiceCommandGroup;
+    return group?.value;
+  });
 
   return (
     <>
       <Box>
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
           <Grid item xs={2}>
-            <CharacterCircleBox
-              fontSize="1.2rem"
-              clickable={!props.advanced}
-              onClick={() => {
-                if (props.advanced) {
-                  return;
-                }
-                const bonus = parseInt(props.block.value) || 0;
-                props.onSkillClick?.(
-                  { bonus, bonusLabel: props.block.label },
-                  props.block.meta.commands?.flatMap((c) => {
-                    const group = AllDiceCommandGroups.find((g) => {
-                      return g.id === c;
-                    }) as IDiceCommandGroup;
+            <Box>
+              <CharacterCircleBox
+                fontSize="1.2rem"
+                clickable={canRoll}
+                onClick={() => {
+                  if (!canRoll) {
+                    return;
+                  }
+                  const bonus = parseInt(props.block.value) || 0;
 
-                    return group?.value;
-                  })
-                );
-              }}
-            >
-              <ContentEditable
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-                border={props.advanced}
-                readonly={!props.advanced}
-                className={css({
-                  cursor: props.advanced ? "inherit" : "pointer",
-                })}
-                value={props.block.value}
-                onChange={(value) => {
-                  props.onValueChange(value);
+                  if (hasCommands) {
+                    props.onSkillClick?.(
+                      { bonus, bonusLabel: props.block.label },
+                      commandGroupValues
+                    );
+                  } else {
+                    props.onSkillClick?.(
+                      {
+                        bonus,
+                        bonusLabel: props.block.label,
+                      },
+                      undefined
+                    );
+                  }
                 }}
-              />
-            </CharacterCircleBox>
+              >
+                <ContentEditable
+                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+                  border={props.editing}
+                  readonly={!props.editing}
+                  className={css({
+                    cursor: !canRoll ? "inherit" : "pointer",
+                  })}
+                  value={props.block.value}
+                  onChange={(value) => {
+                    props.onValueChange(value);
+                  }}
+                />
+              </CharacterCircleBox>
+            </Box>
           </Grid>
           <Grid item className={css({ flex: "1 0 auto" })}>
             {skillLabel}
-            {!props.advanced && (
+            {!props.editing && (
               <>
                 {skillDescription && (
                   <>
@@ -130,9 +157,49 @@ export function BlockSkill(
                     </Tooltip>
                   </>
                 )}
+                {commandGroupsMatch.length > 1 && (
+                  <Box>
+                    <Grid container>
+                      {commandGroupsMatch.map((commandGroup, index) => {
+                        return (
+                          <Grid item key={index}>
+                            <Tooltip title={commandGroup.label}>
+                              <commandGroup.icon
+                                className={css({
+                                  display: "flex",
+                                  width: "1.5rem",
+                                  height: "1.5rem",
+                                })}
+                              />
+                            </Tooltip>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Box>
+                )}
               </>
             )}
           </Grid>
+          {commandGroupsMatch.length === 1 && (
+            <Grid item>
+              {commandGroupsMatch.map((commandGroup, index) => {
+                return (
+                  <Grid item key={index}>
+                    <Tooltip title={commandGroup.label}>
+                      <commandGroup.icon
+                        className={css({
+                          display: "flex",
+                          width: "1.5rem",
+                          height: "1.5rem",
+                        })}
+                      />
+                    </Tooltip>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          )}
 
           {isSlotTrackerVisible && (
             <Grid item>
@@ -158,11 +225,12 @@ export function BlockSkillActions(
   props: IBlockActionComponentProps<ISkillBlock>
 ) {
   const theme = useTheme();
+
   return (
     <>
       <Grid item>
         <DiceMenuForCharacterSheet
-          commandIds={props.block.meta.commands || []}
+          commandGroupIds={props.block.meta.commands || []}
           onChange={(newCommandIds) => {
             props.onMetaChange({
               ...props.block.meta,

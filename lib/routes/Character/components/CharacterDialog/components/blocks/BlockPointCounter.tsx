@@ -8,7 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import React from "react";
-import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
@@ -22,35 +25,41 @@ export function BlockPointCounter(
   props: IBlockComponentProps<IPointCounterBlock> & {}
 ) {
   const theme = useTheme();
+  const isLabelVisible =
+    !!previewContentEditable({ value: props.block.label }) || props.editing;
 
   return (
     <>
       <Box>
-        <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
-          <Grid item className={css({ flex: "1 1 auto" })}>
-            <FateLabel
-              display="inline"
-              className={css({
-                width: "100%",
-                paddingLeft: "1rem",
-                paddingRight: "1rem",
-                paddingBottom: ".5rem",
-                display: "inline-block",
-              })}
-              align={"center"}
-            >
-              <ContentEditable
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                readonly={!props.advanced}
-                border={props.advanced}
-                value={props.block.label}
-                onChange={(value) => {
-                  props.onLabelChange(value);
-                }}
-              />
-            </FateLabel>
-          </Grid>
-        </Grid>
+        {isLabelVisible && (
+          <Box>
+            <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
+              <Grid item className={css({ flex: "1 1 auto" })}>
+                <FateLabel
+                  display="inline"
+                  className={css({
+                    width: "100%",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
+                    paddingBottom: ".5rem",
+                    display: "inline-block",
+                  })}
+                  align={"center"}
+                >
+                  <ContentEditable
+                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                    readonly={!props.editing}
+                    border={props.editing}
+                    value={props.block.label}
+                    onChange={(value) => {
+                      props.onLabelChange(value);
+                    }}
+                  />
+                </FateLabel>
+              </Grid>
+            </Grid>
+          </Box>
+        )}
 
         <Grid
           container
@@ -59,25 +68,28 @@ export function BlockPointCounter(
           spacing={2}
           wrap="nowrap"
         >
-          <Grid item>
-            <IconButton
-              onClick={() => {
-                const intValue = parseInt(props.block.value) || 0;
-                if (intValue - 1 === 0) {
-                  props.onValueChange("0");
-                }
-                props.onValueChange((intValue - 1).toString());
-              }}
-            >
-              <RemoveCircleOutlineOutlinedIcon />
-            </IconButton>
-          </Grid>
+          {!props.readonly && (
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  const intValue = parseInt(props.block.value) || 0;
+                  if (intValue - 1 === 0) {
+                    props.onValueChange("0");
+                  }
+                  props.onValueChange((intValue - 1).toString());
+                }}
+              >
+                <RemoveCircleOutlineOutlinedIcon />
+              </IconButton>
+            </Grid>
+          )}
           <Grid item>
             <CharacterCircleBox fontSize="1.2rem" minWidth="4rem">
               <ContentEditable
                 data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
                 value={props.block.value}
                 border
+                readonly={props.readonly}
                 onChange={(value, e) => {
                   const intValue = parseInt(value) || 0;
                   props.onValueChange(intValue.toString());
@@ -104,6 +116,7 @@ export function BlockPointCounter(
                     data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
                     value={props.block.meta.max ?? ""}
                     border
+                    readonly={props.readonly}
                     onChange={(max, e) => {
                       const intValue = parseInt(max) || 0;
                       props.onMetaChange({
@@ -116,18 +129,20 @@ export function BlockPointCounter(
               </Grid>
             </>
           )}
-          <Grid item>
-            <IconButton
-              onClick={() => {
-                const intValue = parseInt(props.block.value) || 0;
-                props.onValueChange((intValue + 1).toString());
-              }}
-            >
-              <AddCircleOutlineOutlinedIcon />
-            </IconButton>
-          </Grid>
+          {!props.readonly && (
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  const intValue = parseInt(props.block.value) || 0;
+                  props.onValueChange((intValue + 1).toString());
+                }}
+              >
+                <AddCircleOutlineOutlinedIcon />
+              </IconButton>
+            </Grid>
+          )}
         </Grid>
-        {props.block.meta.max !== undefined && (
+        {props.block.meta.max !== undefined && !props.readonly && (
           <Grid container justify="center">
             <Grid item>
               <Link
@@ -140,7 +155,7 @@ export function BlockPointCounter(
                   props.onValueChange(props.block.meta.max ?? "1");
                 }}
               >
-                {"Reset"}
+                {"Refresh"}
               </Link>
             </Grid>
           </Grid>

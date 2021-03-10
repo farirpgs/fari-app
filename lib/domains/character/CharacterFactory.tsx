@@ -169,11 +169,30 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
       return {
         id: Id.generate(),
         type: BlockType.Text,
-        meta: { checked: undefined },
+        meta: {},
         label: a.name,
         value: a.value,
       };
     }),
+  });
+
+  // Fate Points
+  sections.push({
+    id: Id.generate(),
+    label: "Fate Points",
+    position: Position.Left,
+    blocks: [
+      {
+        id: Id.generate(),
+        type: BlockType.PointCounter,
+        meta: {
+          isMainPointCounter: true,
+          max: v2.refresh?.toString() ?? "3",
+        },
+        label: "Fate Points",
+        value: v2.fatePoints?.toString() ?? "3",
+      },
+    ],
   });
 
   // notes
@@ -185,7 +204,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
       {
         id: Id.generate(),
         type: BlockType.Text,
-        meta: { checked: undefined },
+        meta: {},
         label: "Notes",
         value: v2.notes ?? "",
       },
@@ -213,12 +232,11 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     id: Id.generate(),
     label: v2.consequencesLabel ?? "Consequences",
     position: Position.Right,
-
     blocks: v2.consequences.map((a) => {
       return {
         id: Id.generate(),
         type: BlockType.Text,
-        meta: { checked: undefined },
+        meta: {},
         label: a.name,
         value: a.value,
       };
@@ -236,7 +254,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
       return {
         id: Id.generate(),
         type: BlockType.Skill,
-        meta: { checked: undefined },
+        meta: {},
         label: a.name,
         value: a.value,
       };

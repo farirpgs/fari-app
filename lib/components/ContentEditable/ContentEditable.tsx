@@ -163,7 +163,7 @@ export const ContentEditable: React.FC<
               ? theme.transitions.create("color", { duration: 500 })
               : undefined,
             "borderBottom": props.border
-              ? `1px solid ${theme.palette.divider}`
+              ? `1px solid ${props.borderColor ?? theme.palette.divider}`
               : undefined,
             "img": {
               maxWidth: "90%",

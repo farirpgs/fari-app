@@ -13,7 +13,7 @@ import {
 } from "../../../../../domains/dice/Dice";
 
 export const DiceMenuForCharacterSheet: React.FC<{
-  commandIds: Array<string>;
+  commandGroupIds: Array<string>;
   onChange(newCommandIds: Array<IDiceCommandGroupId>): void;
 }> = (props) => {
   const theme = useTheme();
@@ -23,21 +23,25 @@ export const DiceMenuForCharacterSheet: React.FC<{
     []
   );
 
-  const handleOnMenuOpen = (
+  function handleOnMenuOpen(
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  ) {
     setAnchorEl(event.currentTarget);
-  };
+  }
 
-  const handleOnNewCommandSelect = () => {
+  function handleOnNewCommandSelect() {
     setAnchorEl(null);
     props.onChange(commandGroups.map((c) => c.id));
-  };
+  }
 
-  const handleOnMenuClose = () => {
+  function handleOnClear() {
+    setCommandsGroupsFromIds([]);
+  }
+
+  function handleOnMenuClose() {
     setAnchorEl(null);
-    setCommandsGroupsFromIds(props.commandIds);
-  };
+    setCommandsGroupsFromIds(props.commandGroupIds);
+  }
 
   function setCommandsGroupsFromIds(commandIds: Array<string>) {
     const newCommands = commandIds.map((commandId) => {
@@ -50,9 +54,9 @@ export const DiceMenuForCharacterSheet: React.FC<{
 
   useEffect(
     function syncPropsWithState() {
-      setCommandsGroupsFromIds(props.commandIds);
+      setCommandsGroupsFromIds(props.commandGroupIds);
     },
-    [props.commandIds]
+    [props.commandGroupIds]
   );
 
   return (
@@ -60,7 +64,7 @@ export const DiceMenuForCharacterSheet: React.FC<{
       <Box>
         <ClickAwayListener onClickAway={handleOnMenuClose}>
           <Box>
-            <Tooltip title={props.commandIds.join(" + ")}>
+            <Tooltip title={props.commandGroupIds.join(" + ")}>
               <Link
                 component="button"
                 variant="caption"
@@ -85,8 +89,9 @@ export const DiceMenuForCharacterSheet: React.FC<{
                 commands={commandGroups}
                 onDiceCommandChange={setCommandGroups}
                 ctaLabel="Select"
-                onCtaClick={handleOnNewCommandSelect}
+                onClear={handleOnClear}
                 onClose={handleOnMenuClose}
+                onCtaClick={handleOnNewCommandSelect}
               />
             </Box>
           </Box>

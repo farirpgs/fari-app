@@ -1,9 +1,8 @@
 <!--
 # TODO
 
-- [x] boost sub menu
-- [ ] character sheet dirty state
-- [x] hash sub text for srd
+- [ ] draw area toggle
+- [ ] dice
 - [ ] seelie squire
 -->
 

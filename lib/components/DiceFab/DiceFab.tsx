@@ -50,42 +50,46 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   const ButtonIcon = getButtonIcon(fabCommands, diceManager);
 
-  const handleMenuOpen = (
+  function handleMenuOpen(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  ) {
     setAnchorEl(event.currentTarget);
-  };
+  }
 
-  const handleMenuClose = () => {
+  function handleMenuClose() {
     setAnchorEl(null);
     setFabCommands([]);
-  };
+  }
 
-  const handleFabClick = (
+  function handleClear() {
+    setFabCommands([]);
+  }
+
+  function handleFabClick(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
+  ): void {
     e.stopPropagation();
     if (!open) {
       handleMenuOpen(e);
     } else {
       handleMenuClose();
     }
-  };
+  }
 
-  const handleReRoll = () => {
+  function handleReRoll() {
     const result = Dice.rollCommands(diceManager.state.selectedCommands);
     props.onSelect?.(result);
     handleMenuClose();
-  };
+  }
 
-  const handleRoll = () => {
+  function handleRoll() {
     const newCommands = fabCommands.flatMap((o) => o.value);
     const result = Dice.rollCommands(newCommands);
     diceManager.actions.setSelectedCommands(newCommands);
     props.onSelect?.(result);
     setDirty(true);
     handleMenuClose();
-  };
+  }
 
   const transitionDuration = {
     enter: theme.transitions.duration.shortest,
@@ -114,6 +118,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
             open={open}
             anchorEl={anchorEl}
             commands={fabCommands}
+            onClear={handleClear}
             onDiceCommandChange={setFabCommands}
           />
         </Box>
@@ -278,9 +283,10 @@ export const DiceMenu: React.FC<{
   anchorEl: any;
   open: boolean;
   ctaLabel?: string;
+  commands: Array<IDiceCommandGroup>;
   onCtaClick?(): void;
   onClose?(): void;
-  commands: Array<IDiceCommandGroup>;
+  onClear?(): void;
   onDiceCommandChange: React.Dispatch<
     React.SetStateAction<IDiceCommandGroup[]>
   >;
@@ -288,7 +294,6 @@ export const DiceMenu: React.FC<{
   const theme = useTheme();
   const zIndex = useZIndex();
 
-  console.debug("props", props);
   return <>{renderPopper()}</>;
 
   function renderPopper() {
@@ -327,7 +332,7 @@ export const DiceMenu: React.FC<{
                 e.stopPropagation();
               }}
             >
-              <Paper>
+              <Paper elevation={6}>
                 <Box maxHeight="70vh" overflow="auto">
                   <Box p="1rem">
                     {renderCommandGroupHeader("Fate")}
@@ -337,29 +342,32 @@ export const DiceMenu: React.FC<{
                     {renderCommandGroupHeader("Misc")}
                     {renderOptions(MiscDiceCommandGroups)}
 
-                    {props.ctaLabel && (
+                    {(props.onClear || props.onCtaClick) && (
                       <Box mt="1.5rem">
                         <Grid container justify="center" spacing={2}>
-                          {props.onClose && (
+                          {props.onClear && (
                             <Grid item>
                               <Button
-                                color="primary"
-                                variant="outlined"
-                                onClick={props.onClose}
+                                color="default"
+                                variant="text"
+                                onClick={props.onClear}
                               >
-                                {"Cancel"}
+                                {"Reset"}
                               </Button>
                             </Grid>
                           )}
-                          <Grid item>
-                            <Button
-                              color="primary"
-                              variant="contained"
-                              onClick={props.onCtaClick}
-                            >
-                              {props.ctaLabel}
-                            </Button>
-                          </Grid>
+
+                          {props.onCtaClick && (
+                            <Grid item>
+                              <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={props.onCtaClick}
+                              >
+                                {props.ctaLabel}
+                              </Button>
+                            </Grid>
+                          )}
                         </Grid>
                       </Box>
                     )}
