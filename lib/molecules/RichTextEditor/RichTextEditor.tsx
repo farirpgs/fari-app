@@ -4,7 +4,7 @@ import Quill from "quill";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import React, { useEffect, useRef, useState } from "react";
-import { Id } from "../../domains/id/Id";
+import { Id } from "../../domains/Id/Id";
 
 export const RichTextEditor: React.FC<{
   value: string;

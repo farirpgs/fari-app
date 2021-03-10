@@ -1,7 +1,7 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
 import { env } from "../../constants/env";
-import { Id } from "../../domains/id/Id";
+import { Id } from "../../domains/Id/Id";
 
 /**
  * When running fariapp/fari-peer-server locally

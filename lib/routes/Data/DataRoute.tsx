@@ -26,7 +26,7 @@ import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/id/Id";
+import { Id } from "../../domains/Id/Id";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 

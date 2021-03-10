@@ -10,10 +10,10 @@ import {
   ICharacter,
   IPage,
   ISlotTrackerBlock,
-  Position
+  Position,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
-import { Id } from "../../../domains/id/Id";
+import { Id } from "../../../domains/Id/Id";
 
 export function useCharacter(characterFromProps?: ICharacter | undefined) {
   const [character, setCharacter] = useState<ICharacter | undefined>(

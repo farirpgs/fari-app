@@ -15,7 +15,7 @@ import { BlockType, ICharacter } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
-import { Id } from "../../domains/id/Id";
+import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";

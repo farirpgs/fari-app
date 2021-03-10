@@ -1,4 +1,4 @@
-import { Id } from "../../id/Id";
+import { Id } from "../../Id/Id";
 import { CharacterFactory } from "../CharacterFactory";
 import { ICharacter } from "../types";
 

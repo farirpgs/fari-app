@@ -1,6 +1,6 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
-import { Id } from "../id/Id";
+import { Id } from "../Id/Id";
 import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
 import { makeEmptyCharacter } from "./character-templates/makeEmptyCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";

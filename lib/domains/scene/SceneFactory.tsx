@@ -5,7 +5,7 @@ import {
 } from "../../contexts/SceneContext/ScenesContext";
 import { IScene } from "../../hooks/useScene/IScene";
 import { getUnix } from "../dayjs/getDayJS";
-import { Id } from "../id/Id";
+import { Id } from "../Id/Id";
 
 export const SceneFactory = {
   make(gmId: string): IScene {

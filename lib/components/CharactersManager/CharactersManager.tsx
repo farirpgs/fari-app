@@ -7,7 +7,7 @@ import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterType } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/id/Id";
+import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
