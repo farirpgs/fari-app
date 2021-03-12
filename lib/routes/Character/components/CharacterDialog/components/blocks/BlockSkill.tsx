@@ -89,12 +89,17 @@ export function BlockSkill(
 
                   if (hasCommands) {
                     props.onSkillClick?.(
-                      { bonus, bonusLabel: props.block.label },
+                      {
+                        pool: false,
+                        bonus,
+                        bonusLabel: props.block.label,
+                      },
                       commandGroupValues
                     );
                   } else {
                     props.onSkillClick?.(
                       {
+                        pool: false,
                         bonus,
                         bonusLabel: props.block.label,
                       },
@@ -159,7 +164,7 @@ export function BlockSkill(
                 )}
                 {commandGroupsMatch.length > 1 && (
                   <Box>
-                    <Grid container>
+                    <Grid container spacing={1} alignItems="center">
                       {commandGroupsMatch.map((commandGroup, index) => {
                         return (
                           <Grid item key={index}>
@@ -254,6 +259,7 @@ export function BlockSkillActions(
             });
           }}
         >
+          {/* TODO: text */}
           {props.block.meta.checked === undefined
             ? "Add Toggle"
             : "Remove Toggle"}

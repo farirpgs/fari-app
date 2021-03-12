@@ -61,9 +61,11 @@ import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
+import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
+import { IPlayer } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -71,7 +73,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { DiceFab } from "../DiceFab/DiceFab";
+import { DiceFab, DiceFabMode } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -158,7 +160,8 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const isGM = !props.idFromParams;
   const isManaging = isGM || props.mode === SceneMode.Manage;
-  const isOffline = props.mode === SceneMode.PlayOffline;
+
+  const poolManager = useDicePool();
   const isPrivate = tab === "private";
   const lightBackground = useLightBackground();
   const isGMHostingOnlineOrOfflineGame =
@@ -200,7 +203,7 @@ export const Scene: React.FC<IProps> = (props) => {
     } else if (props.mode === SceneMode.PlayOnline) {
       return props.userId === player.id;
     }
-  });
+  }) as IPlayer;
 
   const liveMode = getLiveMode();
 
@@ -277,7 +280,16 @@ export const Scene: React.FC<IProps> = (props) => {
         </Snackbar>
         {props.mode !== SceneMode.Manage && (
           <DiceFab
-            rolls={me?.rolls}
+            type={DiceFabMode.RollAndPool}
+            onRollPool={() => {
+              const result = poolManager.actions.getPoolResult();
+              handleSetRoll(result);
+            }}
+            onClearPool={() => {
+              const result = poolManager.actions.clearPool();
+            }}
+            pool={poolManager.state.pool}
+            rollsForDiceBox={me.rolls}
             onSelect={(result) => {
               handleSetRoll(result);
             }}
@@ -446,6 +458,10 @@ export const Scene: React.FC<IProps> = (props) => {
               <React.Fragment key={player.id}>
                 <CharacterV3Dialog
                   readonly={!canControl}
+                  onPoolClick={(element) => {
+                    poolManager.actions.addOrRemovePoolElement(element);
+                  }}
+                  pool={poolManager.state.pool}
                   open={characterDialogPlayerId === player.id}
                   character={player.character}
                   dialog={true}
@@ -724,32 +740,41 @@ export const Scene: React.FC<IProps> = (props) => {
       ? sortedAspectIds
       : aspectIdsToShow;
 
-    const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
+    const count = isLGAndUp ? 4 : isMD ? 3 : 1;
 
     return (
       <Box>
         <Box>{renderGMAspectActions()}</Box>
 
         {hasAspects && (
-          <MagicGridContainer
-            items={aspectsToRender.length}
-            deps={[
-              sceneManager.computed.playersWithCharacterSheets.length,
-              Object.keys(sceneManager.state.scene.aspects).length,
-            ]}
+          // <MagicGridContainer
+          //   items={aspectsToRender.length}
+          //   deps={[
+          //     sceneManager.computed.playersWithCharacterSheets.length,
+          //     Object.keys(sceneManager.state.scene.aspects).length,
+          //   ]}
+          // >
+          <Box
+            className={css({
+              label: "Scene-aspect-masonry-content",
+              columnCount: count,
+              columnWidth: "auto",
+              columnGap: "1rem",
+            })}
           >
             {aspectsToRender.map((aspectId, index) => {
               return (
                 <Box
                   key={aspectId}
-                  className={cx(
-                    css({
-                      width: width,
-                      padding: "0 .5rem 1.5rem .5rem",
-                    })
-                  )}
+                  className={css({
+                    label: "Scene-aspect-masonry-card",
+                    width: "100%",
+                    display: "inline-block",
+                    marginBottom: "1rem",
+                  })}
                 >
                   <IndexCard
+                    index={index}
                     key={aspectId}
                     data-cy={`scene.aspect.${index}`}
                     id={`index-card-${aspectId}`}
@@ -760,11 +785,15 @@ export const Scene: React.FC<IProps> = (props) => {
                     onRoll={(options) => {
                       handleSetRoll(rollDice(options));
                     }}
+                    onMove={(dragIndex, hoverIndex) => {
+                      sceneManager.actions.moveAspects(dragIndex, hoverIndex);
+                    }}
                   />
                 </Box>
               );
             })}
-          </MagicGridContainer>
+            {/* </MagicGridContainer> */}
+          </Box>
         )}
         {!hasAspects && (
           <Box py="6rem" textAlign="center">

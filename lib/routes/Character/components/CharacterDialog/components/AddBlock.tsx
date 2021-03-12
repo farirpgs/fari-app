@@ -10,12 +10,12 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
 import FormatBoldIcon from "@material-ui/icons/FormatBold";
+import PoolIcon from "@material-ui/icons/Pool";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
 import { useThemeFromColor } from "../../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-
 export const AddBlock: React.FC<{
   onAddBlock(section: BlockType): void;
 }> = (props) => {
@@ -53,7 +53,8 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <TextFieldsIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="Text Section" />
+            {/* TODO: Text */}
+            <ListItemText primary="Text" />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -64,6 +65,7 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <FormatBoldIcon fontSize="small" />
             </ListItemIcon>
+            {/* TODO: Text */}
             <ListItemText primary="Rich Text" />
           </MenuItem>
           <MenuItem
@@ -75,7 +77,20 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <Filter1Icon fontSize="small" />
             </ListItemIcon>
+            {/* TODO: Text */}
             <ListItemText primary="Skill" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddBlock(BlockType.DicePool);
+              setAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <PoolIcon fontSize="small" />
+            </ListItemIcon>
+            {/* TODO: Text */}
+            <ListItemText primary="DicePool" />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -86,6 +101,7 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <ExposureIcon fontSize="small" />
             </ListItemIcon>
+            {/* TODO: Text */}
             <ListItemText primary="Point Counter" />
           </MenuItem>
           <MenuItem
@@ -97,6 +113,7 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <CheckCircleIcon fontSize="small" />
             </ListItemIcon>
+            {/* TODO: Text */}
             <ListItemText primary="Slot Tracker" />
           </MenuItem>
         </Menu>

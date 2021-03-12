@@ -155,6 +155,7 @@ export function BlockPointCounter(
                   props.onValueChange(props.block.meta.max ?? "1");
                 }}
               >
+                {/* TODO: text */}
                 {"Refresh"}
               </Link>
             </Grid>
@@ -186,6 +187,7 @@ export function BlockPointCounterActions(
             });
           }}
         >
+          {/* TODO: text */}
           {props.block.meta.isMainPointCounter ? "Unstar" : "Star"}
         </Link>
       </Grid>
@@ -203,6 +205,7 @@ export function BlockPointCounterActions(
             });
           }}
         >
+          {/* TODO: text */}
           {props.block.meta.max === undefined ? "With Max" : "Without Max"}
         </Link>
       </Grid>

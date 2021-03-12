@@ -189,6 +189,7 @@ export const DiceCommandOptions: Record<
 export type IRollDiceOptions = {
   bonus?: number;
   bonusLabel?: string;
+  pool: boolean;
 };
 
 export type IDiceRoll = {

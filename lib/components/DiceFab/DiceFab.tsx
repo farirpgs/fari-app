@@ -14,7 +14,7 @@ import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Zoom from "@material-ui/core/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import {
   DiceContext,
@@ -30,15 +30,38 @@ import {
   MiscDiceCommandGroups,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+import { IDicePool } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { DiceBox } from "../DiceBox/DiceBox";
 
-type IProps = {
-  onSelect?(result: IDiceRollResult): void;
-  rolls?: Array<IDiceRollWithBonus>;
+export enum DiceFabMode {
+  Roll,
+  RollAndPool,
+}
+
+type IRollProps = {
+  type: DiceFabMode.Roll;
+  onSelect(result: IDiceRollResult): void;
+
+  rollsForDiceBox?: Array<IDiceRollWithBonus>;
 };
+
+type IPoolProps = {
+  type: DiceFabMode.RollAndPool;
+  onSelect(result: IDiceRollResult): void;
+
+  rollsForDiceBox?: Array<IDiceRollWithBonus>;
+
+  pool: IDicePool;
+  onClearPool(): void;
+  onRollPool(): void;
+};
+
+type IProps = IRollProps | IPoolProps;
+
 const buttonSize = "4rem";
 
 const SlideDurationForRollButton = 1000;
+
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const zIndex = useZIndex();
@@ -91,29 +114,59 @@ export const DiceFab: React.FC<IProps> = (props) => {
     handleMenuClose();
   }
 
-  const transitionDuration = {
-    enter: theme.transitions.duration.shortest,
-    exit: theme.transitions.duration.shortest,
-  };
-
   const hasSelectedNewCommands = fabCommands.length > 0;
   const isRollButtonVisible = hasSelectedNewCommands || dirty;
+
+  const hasPool =
+    props.type === DiceFabMode.RollAndPool &&
+    !!props.pool &&
+    props.pool.length > 0;
 
   return (
     <>
       <ClickAwayListener onClickAway={handleMenuClose}>
         <Box>
-          <Zoom
-            in
-            timeout={transitionDuration}
-            style={{
-              transitionDelay: `${
-                !hasSelectedNewCommands ? transitionDuration.exit : 0
-              }ms`,
-            }}
-          >
-            {renderFab()}
-          </Zoom>
+          {!hasPool && (
+            <DiceFabButton
+              key="rolls"
+              showClearButton={open}
+              isRollButtonVisible={isRollButtonVisible}
+              icon={ButtonIcon}
+              label={
+                <>
+                  {hasSelectedNewCommands ||
+                  (!hasSelectedNewCommands && !isRollButtonVisible)
+                    ? "Roll"
+                    : "Reroll"}
+                </>
+              }
+              onFabClick={handleFabClick}
+              onCtaClick={() => {
+                if (open) {
+                  handleRoll();
+                } else {
+                  handleReRoll();
+                }
+              }}
+            />
+          )}
+
+          {hasPool && props.type === DiceFabMode.RollAndPool && (
+            <DiceFabButton
+              key="pool"
+              showClearButton={true}
+              isRollButtonVisible={true}
+              icon={ButtonIcon}
+              label={<>{"Roll Pool"}</>}
+              onFabClick={() => {
+                props.onClearPool();
+              }}
+              onCtaClick={() => {
+                props.onRollPool();
+              }}
+            />
+          )}
+
           <DiceMenu
             open={open}
             anchorEl={anchorEl}
@@ -123,7 +176,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
           />
         </Box>
       </ClickAwayListener>
-      {props.rolls && renderDiceBox()}
+      {props.rollsForDiceBox && renderDiceBox()}
     </>
   );
 
@@ -136,7 +189,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
           bottom: "7rem",
           zIndex: zIndex.diceFabDie,
         })}
-        rolls={props.rolls ?? []}
+        rolls={props.rollsForDiceBox ?? []}
         tooltipPlacement="right-end"
         size="3.5rem"
         fontSize="2rem"
@@ -145,115 +198,6 @@ export const DiceFab: React.FC<IProps> = (props) => {
           handleReRoll();
         }}
       />
-    );
-  }
-
-  function renderFab() {
-    return (
-      <Box
-        className={css({
-          left: "1rem",
-          bottom: "2rem",
-          position: "fixed",
-          zIndex: zIndex.diceFab,
-        })}
-      >
-        <Box
-          className={css({
-            position: "relative",
-          })}
-        >
-          <Fab
-            variant="round"
-            color="primary"
-            onClick={handleFabClick}
-            onContextMenu={(e) => {
-              e.preventDefault();
-            }}
-            className={css({
-              width: buttonSize,
-              height: buttonSize,
-              zIndex: zIndex.diceFab,
-            })}
-          >
-            {open ? (
-              <CloseIcon
-                className={css({
-                  width: "90%",
-                  height: "auto",
-                  padding: ".5rem",
-                })}
-              />
-            ) : (
-              <ButtonIcon
-                className={css({
-                  width: "100%",
-                  height: "auto",
-                  padding: ".5rem",
-                })}
-              />
-            )}
-          </Fab>
-
-          {renderRollButton()}
-        </Box>
-      </Box>
-    );
-  }
-
-  function renderRollButton() {
-    return (
-      <Box
-        className={css({
-          position: "absolute",
-          bottom: "0",
-          left: "2rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: theme.palette.primary.main,
-          color: theme.palette.getContrastText(theme.palette.primary.main),
-          height: buttonSize,
-          borderTopRightRadius: "25px",
-          borderBottomRightRadius: "25px",
-          overflow: "hidden",
-          transition: theme.transitions.create("max-width", {
-            duration: SlideDurationForRollButton,
-          }),
-          maxWidth: isRollButtonVisible ? "100vw" : "0",
-        })}
-      >
-        <ButtonBase
-          className={css({
-            height: "100%",
-            width: "100%",
-            paddingLeft: "3rem",
-            paddingRight: "1rem",
-          })}
-          onClick={() => {
-            if (open) {
-              handleRoll();
-            } else {
-              handleReRoll();
-            }
-          }}
-          onContextMenu={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <Typography
-            className={css({
-              textTransform: "uppercase",
-              fontWeight: theme.typography.fontWeightBold,
-            })}
-          >
-            {hasSelectedNewCommands ||
-            (!hasSelectedNewCommands && !isRollButtonVisible)
-              ? "Roll"
-              : "Reroll"}
-          </Typography>
-        </ButtonBase>
-      </Box>
     );
   }
 
@@ -480,3 +424,129 @@ export const DiceMenu: React.FC<{
     );
   }
 };
+
+export function DiceFabButton(props: {
+  showClearButton: boolean;
+  isRollButtonVisible: boolean;
+  onFabClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
+  onCtaClick(): void;
+  icon: React.ElementType;
+  label: JSX.Element;
+}) {
+  const zIndex = useZIndex();
+  const theme = useTheme();
+
+  const [delayedIsRollButtonVisible, setDelayedisRollButtonVisible] = useState(
+    false
+  );
+
+  useEffect(
+    function () {
+      setDelayedisRollButtonVisible(props.isRollButtonVisible);
+    },
+    [props.isRollButtonVisible]
+  );
+
+  return (
+    <Box
+      className={css({
+        left: "1rem",
+        bottom: "2rem",
+        position: "fixed",
+        zIndex: zIndex.diceFab,
+      })}
+    >
+      <Zoom in>
+        <Box
+          className={css({
+            position: "relative",
+          })}
+        >
+          <Fab
+            variant="round"
+            color="primary"
+            onClick={props.onFabClick}
+            onContextMenu={(e) => {
+              e.preventDefault();
+            }}
+            className={css({
+              width: buttonSize,
+              height: buttonSize,
+              zIndex: zIndex.diceFab,
+            })}
+          >
+            {props.showClearButton ? (
+              <CloseIcon
+                className={css({
+                  width: "90%",
+                  height: "auto",
+                  padding: ".5rem",
+                })}
+              />
+            ) : (
+              <props.icon
+                className={css({
+                  width: "100%",
+                  height: "auto",
+                  padding: ".5rem",
+                })}
+              />
+            )}
+          </Fab>
+
+          {renderRollButton()}
+        </Box>
+      </Zoom>
+    </Box>
+  );
+
+  function renderRollButton() {
+    return (
+      <Box
+        className={css({
+          label: "DiceFabButton-fab",
+          position: "absolute",
+          bottom: "0",
+          left: "2rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: theme.palette.primary.main,
+          color: theme.palette.getContrastText(theme.palette.primary.main),
+          height: buttonSize,
+          borderTopRightRadius: "25px",
+          borderBottomRightRadius: "25px",
+          overflow: "hidden",
+          transition: theme.transitions.create("max-width", {
+            duration: SlideDurationForRollButton,
+          }),
+          maxWidth: delayedIsRollButtonVisible ? "100vw" : "0",
+        })}
+      >
+        <ButtonBase
+          className={css({
+            height: "100%",
+            width: "100%",
+            paddingLeft: "3rem",
+            paddingRight: "1rem",
+          })}
+          onClick={props.onCtaClick}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <Typography
+            className={css({
+              label: "DiceFabButton-label",
+              whiteSpace: "nowrap",
+              textTransform: "uppercase",
+              fontWeight: theme.typography.fontWeightBold,
+            })}
+          >
+            {props.label}
+          </Typography>
+        </ButtonBase>
+      </Box>
+    );
+  }
+}

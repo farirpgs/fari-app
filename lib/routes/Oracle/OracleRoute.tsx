@@ -73,7 +73,7 @@ export const OracleRoute = () => {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = rollDice({});
+      const newRoll = rollDice({ pool: false });
       logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });

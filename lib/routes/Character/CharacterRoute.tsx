@@ -2,14 +2,14 @@ import Box from "@material-ui/core/Box";
 import { useTheme } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { DiceFab } from "../../components/DiceFab/DiceFab";
+import { DiceFab, DiceFabMode } from "../../components/DiceFab/DiceFab";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import {
   useRollDice,
-  useRollDiceWithCommands
+  useRollDiceWithCommands,
 } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../domains/character/types";
@@ -17,11 +17,13 @@ import {
   IDiceCommandNames,
   IDiceRollResult,
   IDiceRollWithBonus,
-  IRollDiceOptions
+  IRollDiceOptions,
 } from "../../domains/dice/Dice";
+import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialog";
+import { IDicePoolElement } from "./components/CharacterDialog/components/blocks/BlockDicePool";
 
 export const CharacterRoute: React.FC<{
   match: {
@@ -33,6 +35,7 @@ export const CharacterRoute: React.FC<{
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
   const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
+  const poolManager = useDicePool();
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
@@ -67,10 +70,10 @@ export const CharacterRoute: React.FC<{
   const query = useQuery<"dialog">();
   const dialogMode = query.get("dialog") === "true";
 
-  const handleOnSkillRoll = (
+  function handleOnSkillClick(
     options: IRollDiceOptions,
     commands: IDiceCommandNames[] | undefined
-  ): void => {
+  ): void {
     if (commands) {
       const result = rollWithCommands(options, commands);
       handleOnNewRoll(result);
@@ -78,7 +81,20 @@ export const CharacterRoute: React.FC<{
       const result = rollDice(options);
       handleOnNewRoll(result);
     }
-  };
+  }
+
+  function handleOnClearPool() {
+    poolManager.actions.clearPool();
+  }
+
+  function handleOnRollPool() {
+    const result = poolManager.actions.getPoolResult();
+    handleOnNewRoll(result);
+  }
+
+  function handleOnPoolClick(element: IDicePoolElement) {
+    poolManager.actions.addOrRemovePoolElement(element);
+  }
 
   return (
     <>
@@ -89,13 +105,24 @@ export const CharacterRoute: React.FC<{
 
       <Box bgcolor={theme.palette.background.paper}>
         <Page>
-          {!dialogMode && <DiceFab rolls={rolls} onSelect={handleOnNewRoll} />}
+          {!dialogMode && (
+            <DiceFab
+              type={DiceFabMode.RollAndPool}
+              rollsForDiceBox={rolls}
+              pool={poolManager.state.pool}
+              onClearPool={handleOnClearPool}
+              onRollPool={handleOnRollPool}
+              onSelect={handleOnNewRoll}
+            />
+          )}
           <CharacterV3Dialog
             open={!!selectedCharacter}
             character={selectedCharacter}
             dialog={dialogMode || false}
+            pool={poolManager.state.pool}
             rolls={rolls}
-            onSkillClick={handleOnSkillRoll}
+            onSkillClick={handleOnSkillClick}
+            onPoolClick={handleOnPoolClick}
             onSave={(newCharacter) => {
               charactersManager.actions.upsert(newCharacter);
             }}

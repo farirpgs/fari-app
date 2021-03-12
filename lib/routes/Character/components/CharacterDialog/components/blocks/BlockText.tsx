@@ -95,6 +95,7 @@ export function BlockTextActions(
             });
           }}
         >
+          {/* TODO: text */}
           {props.block.meta.checked === undefined
             ? "Add Toggle"
             : "Remove Toggle"}

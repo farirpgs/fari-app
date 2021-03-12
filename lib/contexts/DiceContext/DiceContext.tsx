@@ -28,7 +28,7 @@ export function useDice() {
 export function useRollDice() {
   const diceManager = useContext(DiceContext);
 
-  function roll(options: IRollDiceOptions = {}): IDiceRollWithBonus {
+  function roll(options: IRollDiceOptions): IDiceRollWithBonus {
     const result = Dice.rollCommands(diceManager.state.selectedCommands);
 
     return { ...result, bonus: options.bonus, bonusLabel: options.bonusLabel };
@@ -39,7 +39,7 @@ export function useRollDice() {
 
 export function useRollDiceWithCommands() {
   function roll(
-    options: IRollDiceOptions = {},
+    options: IRollDiceOptions,
     commands: Array<IDiceCommandNames>
   ): IDiceRollWithBonus {
     const result = Dice.rollCommands(commands);

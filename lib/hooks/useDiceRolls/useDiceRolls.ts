@@ -16,6 +16,7 @@ function usePrevious<T>(value: T) {
 export function useDiceRolls(
   playerRolls: Array<IDiceRollWithBonus>,
   options?: {
+    disableConfettis: boolean;
     onRolling?(rolling: boolean): void;
     onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
   }
@@ -33,7 +34,7 @@ export function useDiceRolls(
   const hasRolledOnce = finalResult !== undefined;
 
   const finalResultRolls = finalResult?.commandResults ?? [];
-  const finalResultBonus = finalResult?.bonus ?? 0;
+  const finalResultBonus = finalResult?.bonus;
   const finalResultBonusLabel = finalResult?.bonusLabel ?? "";
   const finalResultTotal = formatDiceNumber(finalResult, finalResultBonus);
 
@@ -102,6 +103,10 @@ export function useDiceRolls(
     setRolling(false);
     setFinalResult(latestPlayerRoll);
     options?.onFinalResult?.(latestPlayerRoll);
+
+    if (options?.disableConfettis) {
+      return;
+    }
     if (
       commandGroup?.criticalSuccess !== undefined &&
       latestPlayerRoll?.total === commandGroup?.criticalSuccess

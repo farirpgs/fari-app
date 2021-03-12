@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React, { useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
-import { DiceFab } from "../../components/DiceFab/DiceFab";
+import { DiceFab, DiceFabMode } from "../../components/DiceFab/DiceFab";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -29,7 +29,7 @@ export const DiceRoute = () => {
 
   useEffect(() => {
     logger.info("Route:Dice");
-    setRollResult(roll());
+    setRollResult(roll({ pool: false }));
   }, []);
 
   const setRollResult = (result: IDiceRollResult) => {
@@ -40,7 +40,7 @@ export const DiceRoute = () => {
   };
 
   const handleRoll = () => {
-    setRollResult(roll());
+    setRollResult(roll({ pool: false }));
   };
 
   return (
@@ -56,6 +56,7 @@ export const DiceRoute = () => {
           subtitle={t("dice-route.meta.description")}
         />
         <DiceFab
+          type={DiceFabMode.Roll}
           onSelect={(result) => {
             setRollResult(result);
           }}

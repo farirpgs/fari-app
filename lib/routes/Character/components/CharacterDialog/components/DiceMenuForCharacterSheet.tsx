@@ -79,6 +79,7 @@ export const DiceMenuForCharacterSheet: React.FC<{
                   }
                 }}
               >
+                {/* TODO: text */}
                 {"Dice"}
               </Link>
             </Tooltip>

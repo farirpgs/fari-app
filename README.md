@@ -1,8 +1,14 @@
 <!--
 # TODO
 
+- [ ] text on slot tracker ?
+- [ ] fix draw area crash
+- [ ] highlight tab text on click
+
 - [ ] draw area toggle
-- [ ] dice
+- [ ] organize index cards
+- [ ] persist character
+
 - [ ] seelie squire
 -->
 

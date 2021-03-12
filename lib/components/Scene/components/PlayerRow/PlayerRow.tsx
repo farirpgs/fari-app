@@ -134,7 +134,7 @@ export const PlayerRow: React.FC<
               borderSize=".15rem"
               disabled={props.readonly}
               onClick={() => {
-                handleRoll({});
+                handleRoll({ pool: false });
               }}
             />
           </Box>

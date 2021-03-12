@@ -217,6 +217,50 @@ export function useScene(props: IProps) {
     );
   }
 
+  function moveAspects(dragIndex: number, hoverIndex: number) {
+    setScene(
+      produce((draft: IScene) => {
+        if (!draft) {
+          return;
+        }
+
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+        const hoverKey = Object.keys(draft.aspects)[hoverIndex];
+        const dragKey = Object.keys(draft.aspects)[dragIndex];
+
+        draft.aspects = Object.keys(draft.aspects).reduce<
+          Record<string, IAspect>
+        >((acc, currentAspectId, index) => {
+          if (index === dragIndex) {
+            return { ...acc };
+          }
+          if (index === hoverIndex) {
+            const movedAspects =
+              hoverIndex > dragIndex
+                ? {
+                    [hoverKey]: draft.aspects[hoverKey],
+                    [dragKey]: draft.aspects[dragKey],
+                  }
+                : {
+                    [dragKey]: draft.aspects[dragKey],
+                    [hoverKey]: draft.aspects[hoverKey],
+                  };
+            return {
+              ...acc,
+              ...movedAspects,
+            };
+          }
+          return {
+            ...acc,
+            [currentAspectId]: draft.aspects[currentAspectId],
+          };
+        }, {});
+      })
+    );
+  }
+
   function resetAspect(aspectId: string) {
     setScene(
       produce((draft: IScene) => {
@@ -689,6 +733,7 @@ export function useScene(props: IProps) {
       updateName,
       setGroup,
       addAspect,
+      moveAspects,
       removeAspect,
       resetAspect,
       setAspectIsPrivate,

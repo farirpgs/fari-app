@@ -118,6 +118,7 @@ export const SheetHeader: React.FC<{
 
         {props.editing && (
           <Grid item>
+            {/* TODO: text */}
             <Tooltip title={"Move"}>
               <IconButton
                 data-cy={`character-dialog.${props.label}.move`}
@@ -162,6 +163,7 @@ export const SheetHeader: React.FC<{
           <ListItemIcon>
             <ArrowUpwardIcon />
           </ListItemIcon>
+          {/* TODO: text */}
           {"Move Up"}
         </MenuItem>
         <MenuItem
@@ -174,6 +176,7 @@ export const SheetHeader: React.FC<{
           <ListItemIcon>
             <ArrowDownwardIcon />
           </ListItemIcon>
+          {/* TODO: text */}
           {"Move Down"}
         </MenuItem>
         <MenuItem

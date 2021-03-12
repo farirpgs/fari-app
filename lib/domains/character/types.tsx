@@ -4,6 +4,7 @@ export enum BlockType {
   Text = "Text",
   RichText = "RichText",
   Skill = "Skill",
+  DicePool = "DicePool",
   PointCounter = "PointCounter",
   SlotTracker = "SlotTracker",
 }
@@ -104,6 +105,14 @@ export type ISkillBlock = {
   value: string;
 };
 
+export type IDicePoolBlock = {
+  type: BlockType.DicePool;
+  meta: {
+    commands?: Array<IDiceCommandGroupId>;
+  };
+  value: string;
+};
+
 export type ISlotTrackerBlock = {
   type: BlockType.SlotTracker;
   meta: {};
@@ -126,6 +135,7 @@ export type IBlockTypes =
   | ITextBlock
   | IRichTextBlock
   | ISkillBlock
+  | IDicePoolBlock
   | ISlotTrackerBlock
   | IPointCounterBlock;
 

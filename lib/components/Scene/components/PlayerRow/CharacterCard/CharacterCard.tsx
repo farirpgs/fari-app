@@ -64,6 +64,7 @@ export const CharacterCard: React.FC<{
     Text: renderBlockText,
     RichText: renderBlockText,
     Skill: renderBlockSkill,
+    DicePool: renderDicePool,
     PointCounter: renderBlockPointCounter,
     SlotTracker: renderBlockSlotTracker,
   };
@@ -200,6 +201,7 @@ export const CharacterCard: React.FC<{
             }
             const bonus = parseInt(block.value) || 0;
             props.onRoll?.({
+              pool: false,
               bonus: bonus,
               bonusLabel: block.label,
             });
@@ -207,6 +209,13 @@ export const CharacterCard: React.FC<{
         >
           {block.label} ({block.value || "0"})
         </Link>
+      </Grid>
+    );
+  }
+  function renderDicePool(block: IBlock & ISkillBlock) {
+    return (
+      <Grid item className={css({ flex: "0 1 auto", marginTop: ".2rem" })}>
+        {/*  */}
       </Grid>
     );
   }

@@ -12,6 +12,7 @@ import {
   BlockType,
   IBlock,
   ICharacter,
+  IDicePoolBlock,
   IPage,
   IPointCounterBlock,
   IRichTextBlock,
@@ -89,6 +90,15 @@ export const CharacterFactory = {
           checked: undefined,
         },
       } as IBlock & ISkillBlock,
+      [BlockType.DicePool]: {
+        id: Id.generate(),
+        label: "Dice Pool",
+        type: type,
+        value: "",
+        meta: {
+          commands: undefined,
+        },
+      } as IBlock & IDicePoolBlock,
       [BlockType.PointCounter]: {
         id: Id.generate(),
         label: "Point Counter",

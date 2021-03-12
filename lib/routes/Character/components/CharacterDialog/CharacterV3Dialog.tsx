@@ -67,6 +67,12 @@ import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import {
+  BlockDicePool,
+  BlockDicePoolActions,
+  IDicePool,
+  IDicePoolElement,
+} from "./components/blocks/BlockDicePool";
+import {
   BlockPointCounter,
   BlockPointCounterActions,
 } from "./components/blocks/BlockPointCounter";
@@ -91,20 +97,19 @@ const HeaderHelpLinks: Record<string, string> = {
   "Dice":
     "/srds/condensed/taking-action-rolling-the-dice?goTo=taking-action-rolling-the-dice",
 };
-const FooterHelpLinks: Record<string, { label: string; link: string }> = {
-  "Stunts & Extras": { label: "", link: "" },
-};
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
-  rolls?: Array<IDiceRollWithBonus>;
+  pool: IDicePool;
+  rolls: Array<IDiceRollWithBonus>;
   onSkillClick(
     options: IRollDiceOptions,
     commands: Array<IDiceCommandNames> | undefined
   ): void;
+  onPoolClick(element: IDicePoolElement): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
 }> = (props) => {
@@ -369,7 +374,13 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.state.character?.pages.length === 1
                   }
                   onClick={() => {
-                    characterManager.actions.removePage(currentPageIndex);
+                    const confirmed = confirm(
+                      // TODO text
+                      "Are you sure you want to remove that page"
+                    );
+                    if (confirmed) {
+                      characterManager.actions.removePage(currentPageIndex);
+                    }
                     setTab("0");
                   }}
                 >
@@ -519,10 +530,16 @@ export const CharacterV3Dialog: React.FC<{
                     );
                   }}
                   onRemove={() => {
-                    characterManager.actions.removeSection(
-                      pageIndex,
-                      sectionIndex
+                    const confirmed = confirm(
+                      // TODO text
+                      "Are you sure you want to remove that section"
                     );
+                    if (confirmed) {
+                      characterManager.actions.removeSection(
+                        pageIndex,
+                        sectionIndex
+                      );
+                    }
                   }}
                 />
                 {renderSectionBlocks(pageIndex, sectionIndex, section)}
@@ -896,6 +913,45 @@ export const CharacterV3Dialog: React.FC<{
                         }}
                       />
                     )}
+                    {block.type === BlockType.DicePool && (
+                      <BlockDicePool
+                        editing={editing}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                        pool={props.pool}
+                        onPoolClick={(element) => {
+                          props.onPoolClick(element);
+                        }}
+                      />
+                    )}
                     {block.type === BlockType.PointCounter && (
                       <BlockPointCounter
                         editing={editing}
@@ -1078,6 +1134,23 @@ export const CharacterV3Dialog: React.FC<{
             }}
           />
         )}
+        {block.type === BlockType.DicePool && (
+          <BlockDicePoolActions
+            pageIndex={pageIndex}
+            sectionIndex={sectionIndex}
+            section={section}
+            block={block}
+            blockIndex={blockIndex}
+            onMetaChange={(meta) => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                meta
+              );
+            }}
+          />
+        )}
 
         <Grid item>
           <Link
@@ -1095,6 +1168,7 @@ export const CharacterV3Dialog: React.FC<{
               );
             }}
           >
+            {/* TODO: text */}
             {"Duplicate"}
           </Link>
         </Grid>

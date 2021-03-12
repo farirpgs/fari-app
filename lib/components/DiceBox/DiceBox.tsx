@@ -44,6 +44,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const diceRollsManager = useDiceRolls(props.rolls, {
+    disableConfettis: false,
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
   });
@@ -155,7 +156,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
                 );
               }
             )}
-            {diceRollsManager.state.finalResultBonusLabel && (
+            {diceRollsManager.state.finalResultBonus !== undefined && (
               <span>
                 {" + "} {diceRollsManager.state.finalResultBonus}
               </span>
@@ -284,7 +285,13 @@ export const DiceBox: React.FC<IProps> = (props) => {
 };
 
 export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
-  const diceRollsManager = useDiceRolls(props.rolls);
+  const diceRollsManager = useDiceRolls(props.rolls, {
+    disableConfettis: true,
+  });
+  console.debug(
+    "diceRollsManager.state.finalResultBonus",
+    diceRollsManager.state.finalResultBonus
+  );
   return (
     <>
       <span>
@@ -308,7 +315,7 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
             </span>
           );
         })}
-        {diceRollsManager.state.finalResultBonusLabel && (
+        {diceRollsManager.state.finalResultBonus !== undefined && (
           <span
             className={css({
               verticalAlign: "middle",
@@ -325,11 +332,13 @@ export function DiceBonusLabel(props: {
   rolls: IDiceRollWithBonus[];
   colon?: boolean;
 }) {
-  const diceRollsManager = useDiceRolls(props.rolls);
+  const diceRollsManager = useDiceRolls(props.rolls, {
+    disableConfettis: true,
+  });
 
   return (
     <>
-      {diceRollsManager.state.finalResultBonusLabel && (
+      {diceRollsManager.state.finalResultBonusLabel !== undefined && (
         <span>
           {props.colon && ": "}
           {previewContentEditable({
