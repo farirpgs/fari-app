@@ -242,13 +242,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
       to?: string;
       onClick?: () => void;
     }> = [
-      // function renderHeadingIcon(
-      //   {renderHeadingIcon(MovieIcon)}
-      //   {renderHeadingIcon(PeopleAltIcon)}
-      //   {renderHeadingIcon(MenuBookIcon)}
-      //   {renderHeadingIcon(CreateIcon)}
-      //   {renderHeadingIcon(Icons.FateDice)}
-      //   {renderHeadingIcon(Icons.EyeIcon)}
       {
         label: "Scenes",
         description: "Play without having to worry about maps and grids.",
