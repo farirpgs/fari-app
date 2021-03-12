@@ -31,7 +31,12 @@ export function useRollDice() {
   function roll(options: IRollDiceOptions): IDiceRollWithBonus {
     const result = Dice.rollCommands(diceManager.state.selectedCommands);
 
-    return { ...result, bonus: options.bonus, bonusLabel: options.bonusLabel };
+    return {
+      ...result,
+      bonus: options.bonus,
+      bonusLabel: options.bonusLabel,
+      pool: options.pool,
+    };
   }
 
   return roll;
@@ -44,7 +49,12 @@ export function useRollDiceWithCommands() {
   ): IDiceRollWithBonus {
     const result = Dice.rollCommands(commands);
 
-    return { ...result, bonus: options.bonus, bonusLabel: options.bonusLabel };
+    return {
+      ...result,
+      bonus: options.bonus,
+      bonusLabel: options.bonusLabel,
+      pool: options.pool,
+    };
   }
 
   return roll;

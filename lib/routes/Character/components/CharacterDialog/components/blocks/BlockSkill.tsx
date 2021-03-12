@@ -18,6 +18,7 @@ import {
 } from "../../../../../../domains/dice/Dice";
 import { useTextColors } from "../../../../../../hooks/useTextColors/useTextColors";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
+import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -65,12 +66,7 @@ export function BlockSkill(
   );
   const hasCommands = !!props.block.meta.commands?.length;
 
-  const commandGroupValues = props.block.meta.commands?.flatMap((c) => {
-    const group = AllDiceCommandGroups.find((g) => {
-      return g.id === c;
-    }) as IDiceCommandGroup;
-    return group?.value;
-  });
+  const blockCommandNames = CommandGroups.getCommandNamesFromBlock(props.block);
 
   return (
     <>
@@ -94,7 +90,7 @@ export function BlockSkill(
                         bonus,
                         bonusLabel: props.block.label,
                       },
-                      commandGroupValues
+                      blockCommandNames
                     );
                   } else {
                     props.onSkillClick?.(
@@ -172,8 +168,8 @@ export function BlockSkill(
                               <commandGroup.icon
                                 className={css({
                                   display: "flex",
-                                  width: "1.5rem",
-                                  height: "1.5rem",
+                                  width: "2rem",
+                                  height: "2rem",
                                 })}
                               />
                             </Tooltip>
@@ -195,8 +191,8 @@ export function BlockSkill(
                       <commandGroup.icon
                         className={css({
                           display: "flex",
-                          width: "1.5rem",
-                          height: "1.5rem",
+                          width: "2rem",
+                          height: "2rem",
                         })}
                       />
                     </Tooltip>

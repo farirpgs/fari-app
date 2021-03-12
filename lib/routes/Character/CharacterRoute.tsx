@@ -15,7 +15,6 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../domains/character/types";
 import {
   IDiceCommandNames,
-  IDiceRollResult,
   IDiceRollWithBonus,
   IRollDiceOptions,
 } from "../../domains/dice/Dice";
@@ -41,7 +40,7 @@ export const CharacterRoute: React.FC<{
   >(undefined);
   const logger = useLogger();
 
-  function handleOnNewRoll(result: IDiceRollResult) {
+  function handleOnNewRoll(result: IDiceRollWithBonus) {
     setRolls((draft) => {
       return [result, ...draft];
     });

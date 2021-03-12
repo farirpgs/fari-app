@@ -12,7 +12,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import FlipToBackIcon from "@material-ui/icons/FlipToBack";
 import HelpIcon from "@material-ui/icons/Help";
-import RemoveIcon from "@material-ui/icons/Remove";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import React from "react";
@@ -142,7 +142,7 @@ export const SheetHeader: React.FC<{
                   props.onRemove?.();
                 }}
               >
-                <RemoveIcon htmlColor={headerColor} />
+                <RemoveCircleOutlineIcon htmlColor={headerColor} />
               </IconButton>
             </Tooltip>
           </Grid>

@@ -83,6 +83,7 @@ import { BlockText, BlockTextActions } from "./components/blocks/BlockText";
 import { SheetHeader } from "./components/SheetHeader";
 
 export const smallIconButtonStyle = css({
+  label: "CharacterDialog-small-icon-button",
   padding: "0",
 });
 
@@ -167,6 +168,7 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   const sheetContentStyle = css({
+    label: "CharacterDialog-sheet-content",
     width: "100%",
     padding: ".5rem 1rem",
   });
@@ -216,17 +218,33 @@ export const CharacterV3Dialog: React.FC<{
           onClose={onClose}
           TransitionComponent={SlideUpTransition}
         >
-          <DialogTitle className={css({ padding: "0" })}>
+          <DialogTitle
+            className={css({
+              label: "CharacterDialog-dialog-wrapper",
+              padding: "0",
+            })}
+          >
             <Container maxWidth="md">
               <Box className={sheetContentStyle}>{renderNameAndGroup()}</Box>
             </Container>
           </DialogTitle>
-          <DialogContent className={css({ padding: "0" })} dividers>
+          <DialogContent
+            className={css({
+              label: "CharacterDialog-dialog-wrapper",
+              padding: "0",
+            })}
+            dividers
+          >
             <Container maxWidth="md">
               <Box>{renderPages(characterManager.state.character.pages)}</Box>
             </Container>
           </DialogContent>
-          <DialogActions className={css({ padding: "0" })}>
+          <DialogActions
+            className={css({
+              label: "CharacterDialog-dialog-wrapper",
+              padding: "0",
+            })}
+          >
             <Container maxWidth="md">
               <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
             </Container>
@@ -405,6 +423,7 @@ export const CharacterV3Dialog: React.FC<{
         <TabContext value={tab}>
           {pages?.map((page, pageIndex) => {
             const sectionStyle = css({
+              label: "CharacterDialog-grid-section",
               borderTop: `2px solid ${headerBackgroundColors.primary}`,
               borderLeft: `2px solid ${headerBackgroundColors.primary}`,
               borderRight: `2px solid ${headerBackgroundColors.primary}`,
@@ -414,7 +433,10 @@ export const CharacterV3Dialog: React.FC<{
               <TabPanel
                 key={page.id}
                 value={pageIndex.toString()}
-                className={css({ padding: "0" })}
+                className={css({
+                  label: "CharacterDialog-tab-panel",
+                  padding: "0",
+                })}
               >
                 <Box position="relative" mb="3rem">
                   <Grid container>
@@ -675,7 +697,13 @@ export const CharacterV3Dialog: React.FC<{
               spacing={2}
               alignItems="flex-end"
             >
-              <Grid item className={css({ flex: "0 0 auto" })}>
+              <Grid
+                item
+                className={css({
+                  label: "CharacterDialog-name",
+                  flex: "0 0 auto",
+                })}
+              >
                 <FateLabel>{t("character-dialog.name")}</FateLabel>
               </Grid>
               <Grid item xs>
@@ -701,7 +729,13 @@ export const CharacterV3Dialog: React.FC<{
               spacing={2}
               alignItems="flex-end"
             >
-              <Grid item className={css({ flex: "0 0 auto" })}>
+              <Grid
+                item
+                className={css({
+                  label: "CharacterDialog-group",
+                  flex: "0 0 auto",
+                })}
+              >
                 <FateLabel>{t("character-dialog.group")}</FateLabel>
               </Grid>
               <Grid item xs>
@@ -745,6 +779,7 @@ export const CharacterV3Dialog: React.FC<{
                 size="small"
                 data-cy="character-dialog.close"
                 className={css({
+                  label: "CharacterDialog-dialog-close",
                   position: "absolute",
                   padding: ".5rem",
                   top: ".5rem",
@@ -770,8 +805,9 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box
           className={css({
-            marginTop: section.blocks.length === 0 ? "2rem" : ".25rem",
-            marginBottom: section.blocks.length === 0 ? "2rem" : ".25rem",
+            label: "CharacterDialog-sections",
+            marginTop: section.blocks.length === 0 ? "2rem" : ".5rem",
+            marginBottom: section.blocks.length === 0 ? "2rem" : ".5rem",
           })}
         >
           {section.blocks.map((block, blockIndex) => {
@@ -782,10 +818,12 @@ export const CharacterV3Dialog: React.FC<{
                   type={section.label}
                   readonly={!editing}
                   className={css({
+                    label: "CharacterDialog-block-dnd",
                     marginLeft: ".5rem",
                     marginRight: ".5rem",
                   })}
                   dragIndicatorClassName={css({
+                    label: "CharacterDialog-block-dnd-drag",
                     marginTop: ".5rem",
                   })}
                   onMove={(dragIndex, hoverIndex) => {
@@ -799,8 +837,9 @@ export const CharacterV3Dialog: React.FC<{
                 >
                   <Box
                     className={css({
-                      marginTop: ".5rem",
-                      marginBottom: ".5rem",
+                      label: "CharacterDialog-block",
+                      marginTop: ".2rem",
+                      marginBottom: ".2rem",
                       marginLeft: ".5rem",
                       marginRight: ".5rem",
                     })}
@@ -1157,6 +1196,7 @@ export const CharacterV3Dialog: React.FC<{
             component="button"
             variant="caption"
             className={css({
+              label: "CharacterDialog-duplicate",
               color: theme.palette.primary.main,
             })}
             onClick={() => {
@@ -1177,6 +1217,7 @@ export const CharacterV3Dialog: React.FC<{
             component="button"
             variant="caption"
             className={css({
+              label: "CharacterDialog-remove",
               color: theme.palette.primary.main,
             })}
             onClick={() => {

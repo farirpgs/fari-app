@@ -5,9 +5,21 @@ import React from "react";
 import { useLightBackground } from "../../../../../hooks/useLightBackground/useLightBackground";
 
 export const CharacterCircleBox: React.FC<
-  BoxProps & { clickable?: boolean; selected?: boolean }
+  BoxProps & {
+    clickable?: boolean;
+    selected?: boolean;
+    borderRadius?: string;
+    borderStyle?: string;
+  }
 > = (props) => {
-  const { className, clickable, selected, ...rest } = props;
+  const {
+    className,
+    clickable,
+    selected,
+    borderRadius,
+    borderStyle = "solid",
+    ...rest
+  } = props;
   const theme = useTheme();
   const hoverBackground =
     theme.palette.type === "light" ? "#e4e4e4" : "#6b6b6b";
@@ -25,7 +37,7 @@ export const CharacterCircleBox: React.FC<
           "color": !selected
             ? theme.palette.getContrastText(theme.palette.background.paper)
             : theme.palette.getContrastText(lightBackground),
-          "border": `2px solid ${
+          "border": `2px ${borderStyle} ${
             selected ? theme.palette.primary.main : "#bdbdbd"
           }`,
           "boxShadow": selected ? theme.shadows[6] : undefined,
@@ -35,7 +47,7 @@ export const CharacterCircleBox: React.FC<
             "border",
             "boxShadow",
           ]),
-          "borderRadius": "24px",
+          "borderRadius": borderRadius ?? "24px",
           "display": "flex",
           "alignItems": "center",
           "justifyContent": "center",

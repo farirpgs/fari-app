@@ -41,6 +41,7 @@ describe("useDiceRolls", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
         {
+          pool: false,
           total: 4,
           commandResults: [
             { value: 1, type: "1dF" },
@@ -88,6 +89,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -115,6 +117,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: 3,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -124,6 +127,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -151,6 +155,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: 0,
             commandResults: [
               { value: 0, type: "1dF" },
@@ -160,6 +165,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: 3,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -169,6 +175,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -195,6 +202,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: -3,
             commandResults: [
               { value: -1, type: "1dF" },
@@ -203,8 +211,13 @@ describe("useDiceRolls", () => {
               { value: 0, type: "1dF" },
             ],
           },
-          { total: 0, commandResults: [{ value: 0, type: "1dF" }] },
           {
+            pool: false,
+            total: 0,
+            commandResults: [{ value: 0, type: "1dF" }],
+          },
+          {
+            pool: false,
             total: 3,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -214,6 +227,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -241,6 +255,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: -4,
             commandResults: [
               { value: -1, type: "1dF" },
@@ -250,6 +265,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: -3,
             commandResults: [
               { value: -1, type: "1dF" },
@@ -258,8 +274,13 @@ describe("useDiceRolls", () => {
               { value: 0, type: "1dF" },
             ],
           },
-          { total: 0, commandResults: [{ value: 0, type: "1dF" }] },
           {
+            pool: false,
+            total: 0,
+            commandResults: [{ value: 0, type: "1dF" }],
+          },
+          {
+            pool: false,
             total: 3,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -269,6 +290,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -310,6 +332,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: 2,
             commandResults: [
               { value: 0, type: "1dF" },
@@ -335,6 +358,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -346,6 +370,7 @@ describe("useDiceRolls", () => {
             bonusLabel: "Shoot",
           },
           {
+            pool: false,
             total: 2,
             commandResults: [
               { value: 0, type: "1dF" },
@@ -372,6 +397,7 @@ describe("useDiceRolls", () => {
         rolls: [
           ...rolls,
           {
+            pool: false,
             total: -3,
             commandResults: [
               { value: -1, type: "1dF" },
@@ -381,6 +407,7 @@ describe("useDiceRolls", () => {
             ],
           },
           {
+            pool: false,
             total: 4,
             commandResults: [
               { value: 1, type: "1dF" },
@@ -392,6 +419,7 @@ describe("useDiceRolls", () => {
             bonusLabel: "Shoot",
           },
           {
+            pool: false,
             total: 2,
             commandResults: [
               { value: 0, type: "1dF" },
@@ -418,6 +446,7 @@ describe("useDiceRolls", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
         {
+          pool: false,
           total: 1,
           commandResults: [{ value: 1, type: "coin" }],
         },
@@ -443,7 +472,11 @@ describe("useDiceRolls", () => {
     it("should properly format tails", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: -1, commandResults: [{ value: -1, type: "coin" }] },
+        {
+          pool: false,
+          total: -1,
+          commandResults: [{ value: -1, type: "coin" }],
+        },
       ];
 
       // WHEN
@@ -469,6 +502,7 @@ describe("useDiceRolls", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
         {
+          pool: false,
           total: 8,
           commandResults: [
             { value: 5, type: "1d6" },
@@ -498,6 +532,7 @@ describe("useDiceRolls", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
         {
+          pool: false,
           total: 8,
           commandResults: [
             { value: 5, type: "1d6" },
@@ -531,7 +566,11 @@ describe("useDiceRolls", () => {
     it("should properly format result", () => {
       // GIVEN
       const rolls: Array<IDiceRollWithBonus> = [
-        { total: 45, commandResults: [{ value: 45, type: "1d100" }] },
+        {
+          pool: false,
+          total: 45,
+          commandResults: [{ value: 45, type: "1d100" }],
+        },
       ];
 
       // WHEN

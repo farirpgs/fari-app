@@ -13,9 +13,10 @@ import TextField from "@material-ui/core/TextField";
 import { DataGrid, RowId } from "@material-ui/data-grid";
 import produce from "immer";
 import uniq from "lodash/uniq";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
+import { SplitButton } from "../../components/SplitButton/SplitButton";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import {
   ISavableScene,
@@ -29,6 +30,11 @@ import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+
+enum ImportMode {
+  Import = "Import",
+  ImportAndDuplicate = "ImportAndDuplicate",
+}
 
 type IRow = {
   id: string;
@@ -46,7 +52,8 @@ export const DataRoute: React.FC = (props) => {
   const scenesManager = useContext(ScenesContext);
 
   const [selections, setSelection] = useState<Array<RowId>>([]);
-  const [importCounter, setImportCounter] = useState(0);
+  const $importInput = useRef<any>();
+  const $importAndDuplicateInput = useRef<any>();
   const [group, setGroup] = useState("");
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({ group: "", search: "" });
@@ -124,7 +131,10 @@ export const DataRoute: React.FC = (props) => {
     });
   }
 
-  function handleOnImport(fileToImport: FileList | null | undefined) {
+  function handleOnImport(
+    fileToImport: FileList | null | undefined,
+    mode: ImportMode
+  ) {
     FariEntity.import<{
       scenes: Array<ISavableScene>;
       characters: Array<ICharacter>;
@@ -133,29 +143,35 @@ export const DataRoute: React.FC = (props) => {
       fariType: "full",
       onImport: (file) => {
         file.characters.forEach((c) => {
-          importCharacter(c);
+          importCharacter(c, mode);
         });
         file.scenes.forEach((s) => {
-          importScene(s);
+          importScene(s, mode);
         });
       },
     });
   }
 
-  function importScene(s: ISavableScene) {
-    const sceneWithNewId = produce(s, (draft) => {
-      draft.id = Id.generate();
-    });
-    const migratedScene = migrateScene(sceneWithNewId);
+  function importScene(scene: ISavableScene, mode: ImportMode) {
+    const sceneToUse =
+      mode === ImportMode.Import
+        ? scene
+        : produce(scene, (draft) => {
+            draft.id = Id.generate();
+          });
+    const migratedScene = migrateScene(sceneToUse);
     scenesManager.actions.upsert(migratedScene);
   }
 
-  function importCharacter(c: ICharacter) {
-    const characterWithNewId = produce(c, (draft) => {
-      draft.id = Id.generate();
-    });
+  function importCharacter(character: ICharacter, mode: ImportMode) {
+    const characterToUse =
+      mode === ImportMode.Import
+        ? character
+        : produce(character, (draft) => {
+            draft.id = Id.generate();
+          });
 
-    const migratedCharacter = CharacterFactory.migrate(characterWithNewId);
+    const migratedCharacter = CharacterFactory.migrate(characterToUse);
     charactersManager.actions.upsert(migratedCharacter);
   }
 
@@ -232,21 +248,54 @@ export const DataRoute: React.FC = (props) => {
             </Grid>
 
             <Grid item>
-              <Button color="primary" variant="contained" component="label">
-                {t("manager.import")}
-                <input
-                  type="file"
-                  accept=".json"
-                  className={css({
-                    display: "none",
-                  })}
-                  onChange={(event) => {
-                    handleOnImport(event.target.files);
-                    event.target.value = "";
-                  }}
-                />
-              </Button>
+              <SplitButton
+                color="primary"
+                variant="outlined"
+                options={[
+                  {
+                    label: "Import ",
+                    onClick: () => {
+                      $importInput.current.click();
+                    },
+                  },
+                  {
+                    label: "Import And Duplicate",
+                    onClick: () => {
+                      $importAndDuplicateInput.current.click();
+                    },
+                  },
+                ]}
+              />
+
+              <input
+                ref={$importInput}
+                type="file"
+                accept=".json"
+                className={css({
+                  display: "none",
+                })}
+                onChange={(event) => {
+                  handleOnImport(event.target.files, ImportMode.Import);
+                  event.target.value = "";
+                }}
+              />
+              <input
+                ref={$importAndDuplicateInput}
+                type="file"
+                accept=".json"
+                className={css({
+                  display: "none",
+                })}
+                onChange={(event) => {
+                  handleOnImport(
+                    event.target.files,
+                    ImportMode.ImportAndDuplicate
+                  );
+                  event.target.value = "";
+                }}
+              />
             </Grid>
+
             <Grid item>
               <ThemeProvider theme={errorTheme}>
                 <Button

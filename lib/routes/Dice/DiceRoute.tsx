@@ -12,7 +12,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useRollDice } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { IDiceRollResult, IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -32,7 +32,7 @@ export const DiceRoute = () => {
     setRollResult(roll({ pool: false }));
   }, []);
 
-  const setRollResult = (result: IDiceRollResult) => {
+  const setRollResult = (result: IDiceRollWithBonus) => {
     setRolls((draft) => {
       logger.info("DiceRoute:onDiceRoll", { roll: result });
       return [result, ...draft];

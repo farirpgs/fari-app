@@ -20,7 +20,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
     // default 400
     fontWeightRegular: 400,
     // default 500
-    fontWeightMedium: 400,
+    fontWeightMedium: 600,
     // default 700
     fontWeightBold: 700,
     fontFamily: [
@@ -37,7 +37,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
     },
     MuiButton: {
       root: {
-        borderRadius: "7px",
+        borderRadius: "4px",
       },
       contained: {
         fontWeight: 700,

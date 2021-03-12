@@ -58,7 +58,7 @@ import {
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { ICharacter } from "../../domains/character/types";
-import { IDiceRollResult, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceRollWithBonus, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useDicePool } from "../../hooks/useDicePool/useDicePool";
@@ -226,7 +226,7 @@ export const Scene: React.FC<IProps> = (props) => {
     });
   };
 
-  const handleSetRoll = (result: IDiceRollResult) => {
+  const handleSetRoll = (result: IDiceRollWithBonus) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
     } else {
@@ -237,7 +237,10 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleSetPlayerRoll = (playerId: string, result: IDiceRollResult) => {
+  const handleSetPlayerRoll = (
+    playerId: string,
+    result: IDiceRollWithBonus
+  ) => {
     if (isGM) {
       sceneManager.actions.updatePlayerRoll(playerId, result);
     } else {

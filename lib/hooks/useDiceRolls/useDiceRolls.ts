@@ -122,6 +122,7 @@ export function useDiceRolls(
 
   return {
     state: {
+      finalResult,
       finalResultTotal,
       finalResultRolls,
       finalResultHidden,

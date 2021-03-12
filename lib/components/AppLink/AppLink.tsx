@@ -1,25 +1,50 @@
+import { css, cx } from "@emotion/css";
 import Button, { ButtonProps } from "@material-ui/core/Button";
 import MaterialUILink, {
   LinkProps as MUILinkProps,
 } from "@material-ui/core/Link";
+import { useTheme } from "@material-ui/core/styles";
 import React from "react";
 import {
   Link as ReactRouterLink,
   LinkProps as ReactRouterLinkProps,
 } from "react-router-dom";
 
-export const AppLink: React.FC<ReactRouterLinkProps & MUILinkProps> = (
-  props
-) => {
-  const { to, ...rest } = props;
-  const isInternal = (props.to as string).startsWith("/");
+type IProps = {
+  to?: string;
+  onClick?(): void;
+};
+
+export const AppLink: React.FC<
+  Omit<ReactRouterLinkProps, "to"> & Omit<MUILinkProps, "to"> & IProps
+> = (props) => {
+  const { to = "", onClick, className: classNameFromProps, ...rest } = props;
+  const isInternal = to.startsWith("/");
+  const theme = useTheme();
+  const className = cx(
+    css({
+      "label": "AppLink",
+      "fontWeight": theme.typography.fontWeightMedium,
+      ":hover": {
+        textDecoration: "none",
+        color: theme.palette.primary.main,
+      },
+    }),
+    classNameFromProps
+  );
 
   if (isInternal) {
     return (
       <MaterialUILink
         to={to}
         component={ReactRouterLink}
-        underline={"none"}
+        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+          if (onClick) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
+        className={className}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
         {...rest}
       >
@@ -32,7 +57,14 @@ export const AppLink: React.FC<ReactRouterLinkProps & MUILinkProps> = (
     <MaterialUILink
       href={to as string}
       component={"a"}
+      className={className}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
+      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       {...rest}
     >
       {props.children}

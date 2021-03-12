@@ -10,10 +10,10 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
 import FormatBoldIcon from "@material-ui/icons/FormatBold";
-import PoolIcon from "@material-ui/icons/Pool";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
+import { Icons } from "../../../../../domains/Icons/Icons";
 import { useThemeFromColor } from "../../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 export const AddBlock: React.FC<{
@@ -87,7 +87,7 @@ export const AddBlock: React.FC<{
             }}
           >
             <ListItemIcon>
-              <PoolIcon fontSize="small" />
+              <Icons.ThrowDice fontSize="small" />
             </ListItemIcon>
             {/* TODO: Text */}
             <ListItemText primary="DicePool" />

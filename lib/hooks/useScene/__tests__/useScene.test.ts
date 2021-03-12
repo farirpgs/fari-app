@@ -472,6 +472,7 @@ describe("useScene", () => {
             { value: 1, type: "1dF" },
           ],
           total: 4,
+          pool: false,
         });
         result.current.actions.updatePlayerCharacterMainPointCounter("1", 1);
       });
@@ -484,6 +485,7 @@ describe("useScene", () => {
         playerName: "RP",
         rolls: [
           {
+            pool: false,
             commandResults: [
               { value: 1, type: "1dF" },
               { value: 1, type: "1dF" },
@@ -507,6 +509,7 @@ describe("useScene", () => {
         playerName: "RP",
         rolls: [
           {
+            pool: false,
             commandResults: [
               { value: 1, type: "1dF" },
               { value: 1, type: "1dF" },

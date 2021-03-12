@@ -12,8 +12,7 @@ export type IDiceCommandGroup = {
   criticalFailure?: number;
 };
 
-export type IDiceCommandGroupId =
-  | "4dF"
+export type IDiceCommandNames =
   | "1dF"
   | "1d4"
   | "1d6"
@@ -22,8 +21,9 @@ export type IDiceCommandGroupId =
   | "1d12"
   | "1d20"
   | "1d100"
-  | "coin-toss"
-  | "2d6";
+  | "coin";
+
+export type IDiceCommandGroupId = IDiceCommandNames | "4dF" | "2d6";
 
 export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
   {
@@ -90,7 +90,7 @@ export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
 
 export const MiscDiceCommandGroups: Array<IDiceCommandGroup> = [
   {
-    id: "coin-toss",
+    id: "coin",
     label: "Coin Toss",
     icon: Icons.Coin,
     value: ["coin"],
@@ -122,17 +122,6 @@ const TenSidedDie = makeNormalDie(10);
 const TwelveSidedDie = makeNormalDie(12);
 const TwentySidedDie = makeNormalDie(20);
 const HundredSidedDie = makeNormalDie(100);
-
-export type IDiceCommandNames =
-  | "1dF"
-  | "1d4"
-  | "1d6"
-  | "1d8"
-  | "1d10"
-  | "1d12"
-  | "1d20"
-  | "1d100"
-  | "coin";
 
 type IDiceCommandOptions = {
   sides: Array<number>;
@@ -192,22 +181,23 @@ export type IRollDiceOptions = {
   pool: boolean;
 };
 
-export type IDiceRoll = {
+type IDiceRoll = {
   type: IDiceCommandNames;
   value: number;
 };
 
-export type ISimplifiedDiceRoll = {
+type ISimplifiedDiceRoll = {
   type: string;
   value: number;
 };
 
-export type IDiceRollResult = {
+type IDiceRollResult = {
   total: number;
   commandResults: Array<IDiceRoll>;
 };
 
 export type IDiceRollWithBonus = IDiceRollResult & {
+  pool: boolean;
   bonus?: number;
   bonusLabel?: string;
 };

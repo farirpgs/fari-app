@@ -17,8 +17,10 @@ import {
   Position,
 } from "../../domains/character/types";
 import { Font } from "../../domains/font/Font";
+import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { BlockDicePool } from "../Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { BlockPointCounter } from "../Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockRichText } from "../Character/components/CharacterDialog/components/blocks/BlockRichText";
 import { BlockSkill } from "../Character/components/CharacterDialog/components/blocks/BlockSkill";
@@ -39,9 +41,14 @@ export const CharacterPrintRoute: React.FC<{
   );
   const logger = useLogger();
 
+  const query = useQuery<"dev">();
+  const devMode = query.get("dev") === "true";
+
   useEffect(() => {
     logger.info("Route:CharacterPrint");
-    window.print();
+    if (!devMode) {
+      window.print();
+    }
   }, []);
 
   useEffect(() => {
@@ -193,6 +200,22 @@ function PrintSections(props: { sections: Array<ISection> }) {
                       onValueChange={(value) => {}}
                       onMetaChange={(meta) => {}}
                       onSkillClick={(options, commands) => {}}
+                    />
+                  )}
+                  {block.type === BlockType.DicePool && (
+                    <BlockDicePool
+                      editing={false}
+                      readonly={true}
+                      pageIndex={0}
+                      sectionIndex={0}
+                      section={section}
+                      block={block}
+                      blockIndex={blockIndex}
+                      onLabelChange={(value) => {}}
+                      onValueChange={(value) => {}}
+                      onMetaChange={(meta) => {}}
+                      pool={[]}
+                      onPoolClick={(element) => {}}
                     />
                   )}
                   {block.type === BlockType.PointCounter && (

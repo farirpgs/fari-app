@@ -1,13 +1,25 @@
 <!--
 # TODO
 
-- [ ] text on slot tracker ?
-- [ ] fix draw area crash
-- [ ] highlight tab text on click
+- [x] new character sheet
+- [x] new character sheet Text
+- [x] new character sheet RichText
+- [x] new character sheet Skill
+- [x] new character sheet Dice Pool
+- [x] new character sheet Point Counter
+- [x] new character sheet Slot Tracker
+- [x] Organize index cards with drag-and-drop
+- [x] Import inside Data route
+- [x] Import and Duplicate inside Data route
+- [ ] pool toggle on dice route
+- [ ] new player row
+- [ ] index card label after drag and drop
+- [ ] persist character from character sheet
 
-- [ ] draw area toggle
-- [ ] organize index cards
-- [ ] persist character
+- [ ] draw area toggle on scene ?
+- [ ] text on slot tracker ?
+- [ ] fix rich text crash ?
+- [ ] highlight tab text on click ?
 
 - [ ] seelie squire
 -->

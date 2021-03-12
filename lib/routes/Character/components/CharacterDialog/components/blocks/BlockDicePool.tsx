@@ -1,9 +1,9 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import React from "react";
 import {
   ContentEditable,
@@ -11,11 +11,8 @@ import {
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IDicePoolBlock } from "../../../../../../domains/character/types";
-import {
-  AllDiceCommandGroups,
-  IDiceCommandGroup,
-  IDiceCommandNames,
-} from "../../../../../../domains/dice/Dice";
+import { IDiceCommandNames } from "../../../../../../domains/dice/Dice";
+import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -39,23 +36,13 @@ export function BlockDicePool(
 ) {
   const theme = useTheme();
   const hasCommands = !!props.block.meta.commands?.length;
-  const canRoll = !props.editing && hasCommands;
+  const canRoll = !props.editing && !props.readonly && hasCommands;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
 
-  const commandGroupsMatch =
-    props.block.meta?.commands?.map((commandId) => {
-      return AllDiceCommandGroups.find(
-        (c) => c.id === commandId
-      ) as IDiceCommandGroup;
-    }) ?? [];
-
-  const commandGroupValues =
-    props.block.meta.commands?.flatMap((c) => {
-      const group = AllDiceCommandGroups.find((g) => {
-        return g.id === c;
-      }) as IDiceCommandGroup;
-      return group?.value;
-    }) ?? [];
+  const blockCommandGroups = CommandGroups.getCommandGroupFromBlock(
+    props.block
+  );
+  const blockCommandNames = CommandGroups.getCommandNamesFromBlock(props.block);
 
   return (
     <>
@@ -82,8 +69,10 @@ export function BlockDicePool(
             <Box>
               <CharacterCircleBox
                 fontSize="1.2rem"
+                borderRadius="8px"
                 selected={isSelected}
                 clickable={canRoll}
+                borderStyle={hasCommands ? "solid" : "dashed"}
                 onClick={() => {
                   if (!canRoll) {
                     return;
@@ -92,31 +81,25 @@ export function BlockDicePool(
                   props.onPoolClick({
                     blockId: props.block.id,
                     label: previewContentEditable({ value: props.block.label }),
-                    commands: commandGroupValues,
+                    commands: blockCommandNames,
                   });
                 }}
               >
                 <Grid container spacing={1} alignItems="center">
                   {!hasCommands && (
                     <Grid item>
-                      <HelpOutlineIcon
-                        className={css({
-                          display: "flex",
-                          width: "1.5rem",
-                          height: "1.5rem",
-                        })}
-                      />
+                      <Box width="2rem" height="2rem" />
                     </Grid>
                   )}
-                  {commandGroupsMatch.map((commandGroup, index) => {
+                  {blockCommandGroups.map((commandGroup, index) => {
                     return (
                       <Grid item key={index}>
                         <Tooltip title={commandGroup.label}>
                           <commandGroup.icon
                             className={css({
                               display: "flex",
-                              width: "1.5rem",
-                              height: "1.5rem",
+                              width: "2rem",
+                              height: "2rem",
                             })}
                           />
                         </Tooltip>
@@ -125,6 +108,12 @@ export function BlockDicePool(
                   })}
                 </Grid>
               </CharacterCircleBox>
+              <Grid item>
+                <Box display="flex" justifyContent="flex-start">
+                  {/* TODO: Text */}
+                  <FormHelperText>{"Dice Pool"}</FormHelperText>
+                </Box>
+              </Grid>
             </Box>
           </Grid>
         </Grid>

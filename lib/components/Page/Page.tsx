@@ -58,6 +58,7 @@ export const Page: React.FC<{
   live?: LiveMode;
   liveLabel?: string;
   drawerWidth?: string;
+  maxWidth?: string;
   pb?: string;
   debug?: Record<string, string>;
   disableAutomaticScrollTop?: boolean;
@@ -113,7 +114,9 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: props.drawerWidth ? undefined : FariMaxWidth,
+                  maxWidth: props.drawerWidth
+                    ? undefined
+                    : props.maxWidth ?? FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
                   marginTop: "2rem",
@@ -326,7 +329,7 @@ export const Page: React.FC<{
         displayPrint="none"
         className={css({
           color: color,
-          background: background,
+          background: "transparent",
           transition: theme.transitions.create(["color", "background"]),
         })}
       >
@@ -335,6 +338,7 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
+            boxShadow: "none",
             zIndex: zIndex.navBar,
           })}
         >
@@ -367,34 +371,6 @@ export const Page: React.FC<{
               />
             </RouterLink>
 
-            <Typography
-              variant="h6"
-              component="span"
-              className={css({
-                paddingRight: "1rem",
-                cursor: "pointer",
-                userSelect: "none",
-              })}
-            >
-              <div
-                className={css({
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  maxWidth: "25rem",
-                })}
-              >
-                <RouterLink
-                  to="/"
-                  className={css({
-                    color: "inherit",
-                    textDecoration: "none",
-                  })}
-                >
-                  Fari
-                </RouterLink>
-              </div>
-            </Typography>
             {isLive && (
               <Box px=".25rem">
                 <Grid container alignItems="center" spacing={1} wrap="nowrap">
@@ -482,81 +458,98 @@ export const Page: React.FC<{
       : css({ flex: "0 1 auto" });
 
     return (
-      <Grid container spacing={1} justify={mobile ? "center" : undefined}>
+      <Grid
+        container
+        spacing={3}
+        justify={mobile ? "center" : undefined}
+        alignItems="center"
+      >
         {!isLive && (
           <>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={css({
+                  color: "inherit",
+                  fontWeight: theme.typography.fontWeightMedium,
+                  fontSize: "1rem",
+                })}
                 to="/"
                 data-cy="page.menu.play"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.play")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={css({
+                  color: "inherit",
+                  fontWeight: theme.typography.fontWeightMedium,
+                  fontSize: "1rem",
+                })}
                 data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
                 }}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.scenes")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={css({
+                  color: "inherit",
+                  fontWeight: theme.typography.fontWeightMedium,
+                  fontSize: "1rem",
+                })}
                 data-cy="page.menu.characters"
                 onClick={() => {
                   charactersManager.actions.openManager(ManagerMode.Manage);
                 }}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.characters")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={css({
+                  color: "inherit",
+                  fontWeight: theme.typography.fontWeightMedium,
+                  fontSize: "1rem",
+                })}
                 to="/srds"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {"SRDs"}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={css({
+                  color: "inherit",
+                  fontWeight: theme.typography.fontWeightMedium,
+                  fontSize: "1rem",
+                })}
                 to="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.dice")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={css({
+                  color: "inherit",
+                  fontWeight: theme.typography.fontWeightMedium,
+                  fontSize: "1rem",
+                })}
                 data-cy="page.menu.about"
                 to="/about"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.about")}
-              </Button>
+              </AppLink>
             </Grid>
           </>
         )}

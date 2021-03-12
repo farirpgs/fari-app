@@ -25,7 +25,6 @@ import {
   Dice,
   FateDiceCommandGroups,
   IDiceCommandGroup,
-  IDiceRollResult,
   IDiceRollWithBonus,
   MiscDiceCommandGroups,
 } from "../../domains/dice/Dice";
@@ -40,14 +39,14 @@ export enum DiceFabMode {
 
 type IRollProps = {
   type: DiceFabMode.Roll;
-  onSelect(result: IDiceRollResult): void;
+  onSelect(result: IDiceRollWithBonus): void;
 
   rollsForDiceBox?: Array<IDiceRollWithBonus>;
 };
 
 type IPoolProps = {
   type: DiceFabMode.RollAndPool;
-  onSelect(result: IDiceRollResult): void;
+  onSelect(result: IDiceRollWithBonus): void;
 
   rollsForDiceBox?: Array<IDiceRollWithBonus>;
 
@@ -101,7 +100,11 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   function handleReRoll() {
     const result = Dice.rollCommands(diceManager.state.selectedCommands);
-    props.onSelect?.(result);
+    props.onSelect?.({
+      commandResults: result.commandResults,
+      total: result.total,
+      pool: false,
+    });
     handleMenuClose();
   }
 
@@ -109,7 +112,11 @@ export const DiceFab: React.FC<IProps> = (props) => {
     const newCommands = fabCommands.flatMap((o) => o.value);
     const result = Dice.rollCommands(newCommands);
     diceManager.actions.setSelectedCommands(newCommands);
-    props.onSelect?.(result);
+    props.onSelect?.({
+      commandResults: result.commandResults,
+      total: result.total,
+      pool: false,
+    });
     setDirty(true);
     handleMenuClose();
   }
@@ -134,6 +141,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
               icon={ButtonIcon}
               label={
                 <>
+                  {/* TODO: text */}
                   {hasSelectedNewCommands ||
                   (!hasSelectedNewCommands && !isRollButtonVisible)
                     ? "Roll"

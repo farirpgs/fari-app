@@ -19,6 +19,7 @@ import { Font } from "../../domains/font/Font";
 import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { CommandGroups } from "../../routes/Character/components/CharacterDialog/domains/CommandGroups/CommandGroups";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 
 type IProps = {
@@ -95,7 +96,9 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationIterationCount: "infinite",
     animationTimingFunction: "linear",
   });
-
+  const separator = diceRollsManager.state.finalResult?.pool ? " • " : " + ";
+  const isPool = diceRollsManager.state.finalResult?.pool ?? false;
+  const shouldRenderTotal = !isPool;
   const tooltipContent = !diceRollsManager.state.finalResultHidden && (
     <Box
       className={css({
@@ -150,7 +153,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
                 const isFirst = i === 0;
                 return (
                   <span key={i} className={css({})}>
-                    {!isFirst && <span>{" + "}</span>}
+                    {!isFirst && <span>{separator}</span>}
                     {r.type}
                   </span>
                 );
@@ -168,17 +171,19 @@ export const DiceBox: React.FC<IProps> = (props) => {
           flexItem
           className={css({ background: tooltipColor.disabled })}
         />
-        <Grid item xs>
-          <Box
-            fontSize="2rem"
-            fontWeight="bold"
-            textAlign="center"
-            lineHeight={Font.lineHeight(2)}
-            color={tooltipColor.primary}
-          >
-            {diceRollsManager.state.finalResultTotal}
-          </Box>
-        </Grid>
+        {shouldRenderTotal && (
+          <Grid item xs>
+            <Box
+              fontSize="2rem"
+              fontWeight="bold"
+              textAlign="center"
+              lineHeight={Font.lineHeight(2)}
+              color={tooltipColor.primary}
+            >
+              {diceRollsManager.state.finalResultTotal}
+            </Box>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );
@@ -288,28 +293,66 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
   const diceRollsManager = useDiceRolls(props.rolls, {
     disableConfettis: true,
   });
-  console.debug(
-    "diceRollsManager.state.finalResultBonus",
-    diceRollsManager.state.finalResultBonus
-  );
+  const separator = diceRollsManager.state.finalResult?.pool ? "" : "+";
+  const isPool = diceRollsManager.state.finalResult?.pool ?? false;
+
   return (
     <>
-      <span>
+      <span
+        className={css({
+          display: "flex",
+          alignItems: "center",
+        })}
+      >
         {diceRollsManager.state.finalResultRolls.map((r, i) => {
-          const group = DiceCommandOptions[r.type];
+          const options = DiceCommandOptions[r.type];
           const isFirst = i === 0;
           const isFate = r.type === "1dF";
+          const IconForPool = CommandGroups.getCommandGroupByValue(r.type).icon;
+
           return (
-            <span key={i}>
-              {!isFirst && <span>{" + "}</span>}
+            <span
+              key={i}
+              className={css({
+                display: "flex",
+                alignItems: "center",
+              })}
+            >
+              {!isFirst && (
+                <span
+                  className={css({
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "0 .2rem",
+                  })}
+                >
+                  {separator}
+                </span>
+              )}
               <Tooltip title={r.type}>
                 <span
                   className={css({
-                    verticalAlign: "middle",
-                    fontFamily: isFate ? "fate" : "inherit",
+                    display: "flex",
+                    alignItems: "center",
                   })}
                 >
-                  {group.formatDetailedResult(r.value)}
+                  <span
+                    className={css({
+                      display: "flex",
+                      alignItems: "center",
+                      fontFamily: isFate ? "fate" : "inherit",
+                    })}
+                  >
+                    {options.formatDetailedResult(r.value)}
+                  </span>
+                  <span
+                    className={css({
+                      display: "flex",
+                      alignItems: "center",
+                    })}
+                  >
+                    {isPool && <IconForPool />}
+                  </span>
                 </span>
               </Tooltip>
             </span>
@@ -321,13 +364,14 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
               verticalAlign: "middle",
             })}
           >
-            {" + "} {diceRollsManager.state.finalResultBonus}
+            {separator} {diceRollsManager.state.finalResultBonus}
           </span>
         )}
       </span>
     </>
   );
 }
+
 export function DiceBonusLabel(props: {
   rolls: IDiceRollWithBonus[];
   colon?: boolean;
@@ -336,14 +380,16 @@ export function DiceBonusLabel(props: {
     disableConfettis: true,
   });
 
+  const label = previewContentEditable({
+    value: diceRollsManager.state.finalResultBonusLabel,
+  });
+
   return (
     <>
-      {diceRollsManager.state.finalResultBonusLabel !== undefined && (
+      {!!label && (
         <span>
           {props.colon && ": "}
-          {previewContentEditable({
-            value: diceRollsManager.state.finalResultBonusLabel,
-          })}
+          {label}
         </span>
       )}
     </>
