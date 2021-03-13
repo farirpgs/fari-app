@@ -72,7 +72,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
         <LightBox>
           <Container maxWidth="lg">{renderSectionsButtons()}</Container>
         </LightBox>
-        <DarkBox p="5rem">
+        <DarkBox px="2rem" py="5rem">
           <Container maxWidth="sm">{renderDiscord()}</Container>
         </DarkBox>
 
@@ -87,10 +87,10 @@ export const HomeRoute: React.FC<{}> = (props) => {
             </Box>
           </Container>
         </LightBox>
-        <DarkBox p="5rem">
+        <DarkBox px="2rem" py="5rem">
           <Container maxWidth="sm">{renderPatrons()}</Container>
         </DarkBox>
-        <LightBox p="5rem">
+        <LightBox px="2rem" py="5rem">
           <Container maxWidth="sm">{renderSupport()}</Container>
         </LightBox>
       </Box>
@@ -486,15 +486,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderDiscord() {
     return (
       <Box>
-        <Typography
+        <FateLabel
           variant="h4"
           className={css({
             marginBottom: ".5rem",
-            fontWeight: theme.typography.fontWeightBold,
           })}
         >
           {"Join the Community"}
-        </Typography>
+        </FateLabel>
         <Typography
           variant="body1"
           className={css({
