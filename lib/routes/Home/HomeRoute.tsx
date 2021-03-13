@@ -40,6 +40,15 @@ const sectionGridItem = css({
   // flex: "1 0 auto",
 });
 
+type IHomeRouteCard = {
+  label: string;
+  description: string;
+  ctaLabel: string;
+  icon: React.ElementType;
+  to?: string;
+  onClick?: () => void;
+};
+
 export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
@@ -50,8 +59,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
   const inverted = useThemeFromColor(
     theme.palette.getContrastText(theme.palette.text.primary)
   );
-  const lightBackground = useLightBackground();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     logger.info("Route:Home");
@@ -69,14 +76,16 @@ export const HomeRoute: React.FC<{}> = (props) => {
         <LightBox>
           <Container maxWidth="lg">{renderPlayButtons()}</Container>
         </LightBox>
-        <LightBox>
-          <Container maxWidth="lg">{renderSectionsButtons()}</Container>
+        <LightBox px="2rem" py="5rem">
+          <Container maxWidth="lg">{renderFirstActionCards()}</Container>
         </LightBox>
         <DarkBox px="2rem" py="5rem">
           <Container maxWidth="sm">{renderDiscord()}</Container>
         </DarkBox>
-
-        <LightBox>
+        <LightBox px="2rem" py="5rem">
+          <Container maxWidth="lg">{renderSecondActionCards()}</Container>
+        </LightBox>
+        <DarkBox px="2rem" py="2rem">
           <Container maxWidth="md">
             <Box pb="2rem">
               <Heading icon={HelpIcon} title={"Wikis & Resources"} />
@@ -86,13 +95,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
               <MiscellaneousItems />
             </Box>
           </Container>
-        </LightBox>
-        <DarkBox px="2rem" py="5rem">
-          <Container maxWidth="sm">{renderPatrons()}</Container>
         </DarkBox>
         <LightBox px="2rem" py="5rem">
-          <Container maxWidth="sm">{renderSupport()}</Container>
+          <Container maxWidth="sm">{renderPatrons()}</Container>
         </LightBox>
+        <DarkBox px="2rem" py="5rem">
+          <Container maxWidth="sm">{renderSupport()}</Container>
+        </DarkBox>
       </Box>
     </Page>
   );
@@ -131,7 +140,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
       <Box textAlign="center">
         <Box mb="1rem">
           <FateLabel variant="h4" align="center" color="primary">
-            {t("home-route.thanks-some-patrons")}
+            {"Special thanks to those fine folks"}
           </FateLabel>
         </Box>
 
@@ -233,15 +242,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
     );
   }
 
-  function renderSectionsButtons() {
-    const cards: Array<{
-      label: string;
-      description: string;
-      ctaLabel: string;
-      icon: React.ElementType;
-      to?: string;
-      onClick?: () => void;
-    }> = [
+  function renderFirstActionCards() {
+    const cards: Array<IHomeRouteCard> = [
       {
         label: "Scenes",
         description: "Play without having to worry about maps and grids.",
@@ -268,6 +270,15 @@ export const HomeRoute: React.FC<{}> = (props) => {
         ctaLabel: "Roll some dice",
         to: "/dice",
       },
+    ];
+    return (
+      <Box>
+        <HomeRouteCards cards={cards} />
+      </Box>
+    );
+  }
+  function renderSecondActionCards() {
+    const cards: Array<IHomeRouteCard> = [
       {
         label: "What does your future hold",
         description:
@@ -286,199 +297,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
     ];
     return (
       <Box>
-        <Grid container justify="center" spacing={6}>
-          {cards.map((card, index) => {
-            return (
-              <Grid
-                key={index}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                className={css({ height: "100%" })}
-              >
-                <Box
-                  className={css({
-                    "padding": "2.5rem",
-                    "label": "home-page-card",
-                    "borderRadius": "4px",
-                    "background": lightBackground,
-                    "width": "100%",
-                    "transition": theme.transitions.create([
-                      "transform",
-                      "box-shadow",
-                    ]),
-                    "&:hover": {
-                      transform: isSmall ? undefined : "scale(1.005)",
-                      boxShadow: isSmall ? undefined : theme.shadows[4],
-                    },
-                  })}
-                >
-                  <Box display="flex" justifyContent="center" mb="1rem">
-                    <card.icon
-                      className={css({
-                        color: theme.palette.primary.main,
-                        width: "4rem",
-                        height: "4rem",
-                      })}
-                    />
-                  </Box>
-                  <Box mb="1rem">
-                    <FateLabel
-                      variant="h5"
-                      align="center"
-                      color="textPrimary"
-                      uppercase={false}
-                    >
-                      {card.label}
-                    </FateLabel>
-                  </Box>
-                  <Box>
-                    <Typography className={css({ textAlign: "center" })}>
-                      {card.description}
-                    </Typography>
-                  </Box>
-                  <Box my="2rem">
-                    <Divider light />
-                  </Box>
-                  <Box display="flex" justifyContent="center">
-                    {card.onClick && (
-                      <Button
-                        color="primary"
-                        variant="outlined"
-                        onClick={(e) => {
-                          e.preventDefault;
-                          card.onClick?.();
-                        }}
-                      >
-                        {card.ctaLabel}
-                      </Button>
-                    )}
-                    {card.to && (
-                      <Button
-                        color="primary"
-                        variant="outlined"
-                        component={RouterLink}
-                        to={card.to}
-                      >
-                        {card.ctaLabel}
-                      </Button>
-                    )}
-                  </Box>
-                </Box>
-              </Grid>
-            );
-          })}
-          {/* <Grid item xs={6} sm={4} md={3} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link
-                  to=""
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scenesManager.actions.openManager(ManagerMode.Manage);
-                  }}
-                >
-                  {renderHeadingIcon(MovieIcon)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                    uppercase={false}
-                  >
-                    {t("menu.scenes")}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link
-                  to=""
-                  onClick={(e) => {
-                    e.preventDefault();
-                    charactersManager.actions.openManager(ManagerMode.Manage);
-                  }}
-                >
-                  {renderHeadingIcon(PeopleAltIcon)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                    uppercase={false}
-                  >
-                    {t("menu.characters")}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link to="/srds">
-                  {renderHeadingIcon(MenuBookIcon)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                    uppercase={false}
-                  >
-                    {"SRDs"}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link to="/blog">
-                  {renderHeadingIcon(CreateIcon)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                    uppercase={false}
-                  >
-                    {"Blog"}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Box height="100%" display="flex" flexDirection="column">
-                <Link to="/dice">
-                  {renderHeadingIcon(Icons.FateDice)}
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                    uppercase={false}
-                  >
-                    {"Dice"}
-                  </FateLabel>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={4} className={sectionGridItem}>
-              <Link to="/oracle">
-                <Box height="100%" display="flex" flexDirection="column">
-                  {renderHeadingIcon(Icons.EyeIcon)}
-                  <FateLabel
-                    data-cy="home.oracle"
-                    variant="h5"
-                    align="center"
-                    color="primary"
-                    underline
-                    uppercase={false}
-                  >
-                    {"Oracle"}
-                  </FateLabel>
-                </Box> 
-              </Link>
-            </Grid> */}
-        </Grid>
+        <HomeRouteCards cards={cards} />
       </Box>
     );
   }
@@ -549,7 +368,9 @@ function LightBox(props: { children: JSX.Element } & BoxProps) {
   return (
     <Box
       className={cx(
-        css({ label: "LightBox", marginBottom: "4rem" }),
+        css({
+          label: "LightBox",
+        }),
         className
       )}
       {...rest}
@@ -583,5 +404,100 @@ function DarkBox(props: { children: JSX.Element } & BoxProps) {
         {children}
       </Box>
     </ThemeProvider>
+  );
+}
+
+function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
+  const theme = useTheme();
+  const lightBackground = useLightBackground();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
+  return (
+    <>
+      <Grid container justify="center" spacing={6}>
+        {props.cards.map((card, index) => {
+          return (
+            <Grid
+              key={index}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              className={css({ height: "100%" })}
+            >
+              <Box
+                className={css({
+                  "padding": "2.5rem",
+                  "label": "home-page-card",
+                  "borderRadius": "4px",
+                  "background": lightBackground,
+                  "width": "100%",
+                  "transition": theme.transitions.create([
+                    "transform",
+                    "box-shadow",
+                  ]),
+                  "&:hover": {
+                    transform: isSmall ? undefined : "scale(1.005)",
+                    boxShadow: isSmall ? undefined : theme.shadows[4],
+                  },
+                })}
+              >
+                <Box display="flex" justifyContent="center" mb="1rem">
+                  <card.icon
+                    className={css({
+                      color: theme.palette.primary.main,
+                      width: "4rem",
+                      height: "4rem",
+                    })}
+                  />
+                </Box>
+                <Box mb="1rem">
+                  <FateLabel
+                    variant="h5"
+                    align="center"
+                    color="textPrimary"
+                    uppercase={false}
+                  >
+                    {card.label}
+                  </FateLabel>
+                </Box>
+                <Box>
+                  <Typography className={css({ textAlign: "center" })}>
+                    {card.description}
+                  </Typography>
+                </Box>
+                <Box my="2rem">
+                  <Divider light />
+                </Box>
+                <Box display="flex" justifyContent="center">
+                  {card.onClick && (
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.preventDefault;
+                        card.onClick?.();
+                      }}
+                    >
+                      {card.ctaLabel}
+                    </Button>
+                  )}
+                  {card.to && (
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      component={RouterLink}
+                      to={card.to}
+                    >
+                      {card.ctaLabel}
+                    </Button>
+                  )}
+                </Box>
+              </Box>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </>
   );
 }

@@ -73,7 +73,6 @@ export const enTranslation = {
   "home-route.play-online.title": `Play Online`,
   "home-route.support-fari.description": `Fari is open-source and completely free. I believe in building great software and applications which benefits the community. However, it also brings challenges when it comes to sustaining the developers behind the project. \n\n Maintaining and developing new features in Fari takes a considerable amount of time. But with your financial help, I could spend more time on Fari to make it better or use the financing to upgrade the servers. \n\n Any donation helps, but if your financial situation prevents you from helping the project financially, you can always help by spreading the word!`,
   "home-route.support-fari.title": `Consider Supporting Fari`,
-  "home-route.thanks-some-patrons": `Thanks to some of my patrons`,
   "home-route.welcome": `Welcome to Fari`,
   "index-card.add-1-consequence": `+ Consequence`,
   "index-card.add-free-invokes-track": `+ Free Invokes Track`,

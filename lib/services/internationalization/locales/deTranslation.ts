@@ -81,7 +81,6 @@ export const deTranslation: Record<
   "home-route.play-online.title": `Spiele Fate online`,
   "home-route.support-fari.description": `Fari ist quelloffen und völlig frei. Ich glaube daran, großartige Software und Anwendungen zu entwickeln, die der Gemeinschaft zugute kommen. Es bringt jedoch auch Herausforderungen mit sich, wenn es darum geht, die Entwickler hinter dem Projekt zu unterstützen. \n\n Die Pflege und Entwicklung neuer Funktionen in Fari nimmt eine beträchtliche Menge an Zeit in Anspruch. Aber mit deiner finanziellen Hilfe könnte ich mehr Zeit auf Fari verwenden, um es besser zu machen oder die Finanzierung für ein Upgrade der Server zu verwenden. \n\n Jede Spende hilft, aber wenn deine finanzielle Situation dich daran hindert, dem Projekt finanziell zu helfen, kannst du immer helfen, indem du es weitererzählst!`,
   "home-route.support-fari.title": `Erwäge die Unterstützung von Fari`,
-  "home-route.thanks-some-patrons": `Danke an einige meiner Unterstützer`,
   "home-route.welcome": `Willkommen bei Fari`,
   "index-card.add-1-consequence": `+ Konsequenz`,
   "index-card.add-free-invokes-track": `+ Freie Einsätze`,

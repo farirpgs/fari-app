@@ -81,7 +81,6 @@ export const esTranslation: Record<
   "home-route.play-online.title": `Jugar a Fate Online`,
   "home-route.support-fari.description": `Fari es open-source y completamente gratuito. Creo en construir grandes programas y aplicaciones que beneficien a la comunidad. Sin embargo, la cosa se complica cuando se trata de mantener a los desarrolladores que hay detrás del proyecto. \n\n Mantener y desarrollar nuevas funciones de Fari cuesta una cantidad considerable de tiempo. Pero con tu ayuda económica, podría invertir más tiempo en Fari para hacerlo mejor, o usar la financiación para actualizar los servidores. \n\n Cualquier cantidad ayuda, pero si tu situación financiera te impide invertir en el proyecto, ¡siempre puedes ayudar corriendo la voz!`,
   "home-route.support-fari.title": `Considera Apoyar Fari`,
-  "home-route.thanks-some-patrons": `Gracias a algunos de mis colaboradores`,
   "home-route.welcome": `Bienvenido a Fari`,
   "index-card.add-1-consequence": `+ Consecuencia`,
   "index-card.add-free-invokes-track": `+ Pista de invocaciones Gratuitas`,
