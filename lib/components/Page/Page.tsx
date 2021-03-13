@@ -32,9 +32,9 @@ import { CharactersContext } from "../../contexts/CharactersContext/CharactersCo
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
-import { AppLightTheme } from "../../theme";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
@@ -77,7 +77,7 @@ export const Page: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const logger = useLogger();
   const zIndex = useZIndex();
-
+  const highlight = useHighlight();
   const isLive = props.live !== undefined;
   useEffect(() => {
     if (props.gameId) {
@@ -295,7 +295,21 @@ export const Page: React.FC<{
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
                   Fari uses icons available at{" "}
-                  <a href="http://game-icons.net">http://game-icons.net</a>
+                  <a
+                    href="http://game-icons.net"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    http://game-icons.net
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="https://icons8.com/icon/569/dice"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Icons8
+                  </a>
                 </Typography>
               </Box>
             </Grid>
@@ -320,16 +334,14 @@ export const Page: React.FC<{
   }
 
   function renderHeader() {
-    const background = isLive
-      ? AppLightTheme.palette.primary.dark
-      : theme.palette.background.paper;
-    const color = theme.palette.getContrastText(background);
+    const background = highlight.background;
+    const color = highlight.color;
     return (
       <Box
         displayPrint="none"
         className={css({
           color: color,
-          background: "transparent",
+          background: background,
           transition: theme.transitions.create(["color", "background"]),
         })}
       >
@@ -457,6 +469,14 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
+    const linkClassName = css({
+      "color": "inherit",
+      "fontWeight": theme.typography.fontWeightMedium,
+      "fontSize": "1rem",
+      "&:hover": {
+        color: highlight.hover,
+      },
+    });
     return (
       <Grid
         container
@@ -468,11 +488,7 @@ export const Page: React.FC<{
           <>
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
-                className={css({
-                  color: "inherit",
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "1rem",
-                })}
+                className={linkClassName}
                 to="/"
                 data-cy="page.menu.play"
                 component={RouterLink}
@@ -482,11 +498,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
-                className={css({
-                  color: "inherit",
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "1rem",
-                })}
+                className={linkClassName}
                 data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
@@ -497,11 +509,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
-                className={css({
-                  color: "inherit",
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "1rem",
-                })}
+                className={linkClassName}
                 data-cy="page.menu.characters"
                 onClick={() => {
                   charactersManager.actions.openManager(ManagerMode.Manage);
@@ -512,11 +520,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
-                className={css({
-                  color: "inherit",
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "1rem",
-                })}
+                className={linkClassName}
                 to="/srds"
                 component={RouterLink}
               >
@@ -525,11 +529,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
-                className={css({
-                  color: "inherit",
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "1rem",
-                })}
+                className={linkClassName}
                 to="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
@@ -539,11 +539,7 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
-                className={css({
-                  color: "inherit",
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "1rem",
-                })}
+                className={linkClassName}
                 data-cy="page.menu.about"
                 to="/about"
                 component={RouterLink}
@@ -561,9 +557,6 @@ export const Page: React.FC<{
             target="_blank"
             rel="noreferrer"
             size="small"
-            className={css({
-              padding: "6px 8px",
-            })}
           >
             <GitHubIcon />
           </IconButton>
@@ -573,9 +566,6 @@ export const Page: React.FC<{
             data-cy="page.toggle-dark-mode"
             color="inherit"
             size="small"
-            className={css({
-              padding: "6px 8px",
-            })}
             onClick={() => {
               darkModeManager.actions.setDarkMode(
                 !darkModeManager.state.darkMode

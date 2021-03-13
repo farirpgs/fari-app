@@ -7,10 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import CreateIcon from "@material-ui/icons/Create";
 import HelpIcon from "@material-ui/icons/Help";
-import MovieIcon from "@material-ui/icons/Movie";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/blue/app.png";
@@ -25,7 +22,7 @@ import { Patreon } from "../../components/Patreon/Patreon";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { Icons } from "../../domains/Icons/Icons";
+import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -254,7 +251,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
       {
         label: "Scenes",
         description: "Play without having to worry about maps and grids.",
-        icon: MovieIcon,
+        // https://icons8.com/icon/set/alps/ios
+        icon: (props: { className: string }) => (
+          <img
+            className={props.className}
+            src="https://img.icons8.com/dusk/100/000000/alps.png"
+          />
+        ),
         ctaLabel: "Write a Scene",
         onClick: () => {
           scenesManager.actions.openManager(ManagerMode.Manage);
@@ -262,9 +265,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
       },
       {
         label: "Characters",
-        description:
-          "Flexible character sheets that will support any house rule you have for your games.",
-        icon: PeopleAltIcon,
+        description: "Flexible character sheets that support any TTRPG system.",
+        // https://icons8.com/icon/nAUtY5a4Ep9R/cute-monster
+        icon: (props: { className: string }) => (
+          <img
+            className={props.className}
+            src="https://img.icons8.com/dusk/100/000000/cute-monster.png"
+          />
+        ),
         ctaLabel: "Create your first Character",
         onClick: () => {
           charactersManager.actions.openManager(ManagerMode.Manage);
@@ -272,8 +280,16 @@ export const HomeRoute: React.FC<{}> = (props) => {
       },
       {
         label: "Dice Roller",
-        description: "From Fate to d20, we've got you covered.",
-        icon: Icons.FateDice,
+        description:
+          "From Fate to d20, we've got you covered with our fair dice roller.",
+        // icon: Icons.FateDice,
+        // https://icons8.com/icon/nAUtY5a4Ep9R/dice
+        icon: (props: { className: string }) => (
+          <img
+            className={props.className}
+            src="https://img.icons8.com/dusk/100/000000/dice.png"
+          />
+        ),
         ctaLabel: "Roll some dice",
         to: "/dice",
       },
@@ -287,17 +303,29 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSecondActionCards() {
     const cards: Array<IHomeRouteCard> = [
       {
-        label: "What does your future hold",
+        label: "Play Solo",
         description:
-          "Use the Oracle to play in solo-mode and find out what your next adventure has in store for you.",
-        icon: Icons.EyeIcon,
+          "Use the Oracle to find out what your next adventure has in store for you.",
+        // https://icons8.com/icon/N752GNT8ctkJ/magic-crystal-ball
+        icon: (props: { className: string }) => (
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/magic-crystal-ball.png"
+          />
+        ),
         ctaLabel: "Consult the Oracle",
         to: "/oracle",
       },
       {
         label: "Blog",
-        icon: CreateIcon,
-        description: "Check-out what's new about Fari.",
+        // https://icons8.com/icon/set/blog%20post/ios
+        icon: (props: { className: string }) => (
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/blog.png"
+          />
+        ),
+        description: "Check-out the team's blog to know what's new about Fari.",
         ctaLabel: "Read Now",
         to: "/blog",
       },
@@ -326,7 +354,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             marginBottom: "2rem",
           })}
         >
-          {"Have a say in the future of Fari"}
+          {"Have a say in the future of the app."}
         </Typography>
         <Button
           color="primary"
@@ -389,20 +417,17 @@ function LightBox(props: { children: JSX.Element } & BoxProps) {
 
 function DarkBox(props: { children: JSX.Element } & BoxProps) {
   const { children, className, ...rest } = props;
+  const highlight = useHighlight();
   const theme = useTheme();
-  const inverted = useThemeFromColor(
-    theme.palette.getContrastText(theme.palette.text.primary)
-  );
-
   return (
-    <ThemeProvider theme={inverted}>
+    <ThemeProvider theme={highlight.highlightTheme}>
       <Box
         className={cx(
           css({
             label: "DarkBox",
-            background: `${theme.palette.primary.main} linear-gradient(45deg,${theme.palette.primary.main},${theme.palette.primary.dark})`,
+            background: highlight.background,
             textAlign: "center",
-            color: inverted.palette.primary.main,
+            color: highlight.color,
           }),
           className
         )}
@@ -424,18 +449,12 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
       <Grid container justify="center" spacing={6}>
         {props.cards.map((card, index) => {
           return (
-            <Grid
-              key={index}
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              className={css({ height: "100%" })}
-            >
+            <Grid key={index} item xs={12} sm={6} md={4}>
               <Box
                 className={css({
+                  "label": "HomeRouteCards-card",
                   "padding": "2.5rem",
-                  "label": "home-page-card",
+                  "height": "100%",
                   "borderRadius": "4px",
                   "background": lightBackground,
                   "width": "100%",
@@ -452,7 +471,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                 <Box display="flex" justifyContent="center" mb="1rem">
                   <card.icon
                     className={css({
-                      color: theme.palette.primary.main,
+                      // color: theme.palette.primary.main,
                       width: "4rem",
                       height: "4rem",
                     })}
