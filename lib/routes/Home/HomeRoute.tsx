@@ -36,6 +36,7 @@ const Patrons = [
   "Ryan Singer",
   "Aeife O'Brien",
   "GhostDM",
+  "Fluffydumplin",
 ];
 
 const sectionGridItem = css({
