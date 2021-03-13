@@ -17,7 +17,7 @@ Fari now has two brand new content sections:
 - [Success With Style](/success-with-style): A searchable supply of ideas; these Fate pointers help you succeed with style!
 - [The Fari Wiki](/fari-wiki): Everything you need to know to use Fari effectively.
 
-So if you are looking for something new to read, I recommend you check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new **Fate Pointer** by Dgerrimea about [Problematic PC Aspects](/success-with-style/problematic-pc-aspects)
+So if you are looking for something new to read, I recommend you check out the new [Tips and Tricks for Fari](/fari-wiki/tips-and-tricks) article or this new **Fate Pointer** by Jeremy Price about [Problematic PC Aspects](/success-with-style/problematic-pc-aspects)
 
 > If you are interested in contributing to either of these, come and talk to the team on [Discord](https://discord.com/invite/vMAJFjUraA) 👋
 
@@ -243,7 +243,7 @@ Enjoy!
 
 ## Thanks
 
-Thanks to Dgerrimea and Seelie Squire for letting me bounce ideas with them during my thought process. You are awesome.
+Thanks to Jeremy Price and Seelie Squire for letting me bounce ideas with them during my thought process. You are awesome.
 
 ---
 

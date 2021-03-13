@@ -6,7 +6,7 @@
 
 # The Golden Rule
 
-<page-meta author="Dgerrimea" description="How to 'get' the Fate mentality." date="2021-03-06"></page-meta>
+<page-meta author="Jeremy Price" description="How to 'get' the Fate mentality." date="2021-03-06"></page-meta>
 
 ## What Is The Golden Rule?
 
@@ -79,7 +79,7 @@ Here is some general advice to keep the bidding war from becoming a slog:
 
 # Problematic PC Aspects
 
-<page-meta author="Dgerrimea" date="2021-02-25" description="Character Aspect pitfalls to analyse & avoid."></page-meta>
+<page-meta author="Jeremy Price" date="2021-02-25" description="Character Aspect pitfalls to analyse & avoid."></page-meta>
 
 Aspects can be many things, but mechanically an aspect is something you invoke or compel. The narrative truth of the aspect should have some impact on the fiction, even just to create a cool cinematic moment, and the mechanical bonus will help your character get what they want.
 
@@ -270,7 +270,7 @@ Getting a `+4` on the other hand is truly cause for celebration.
 
 # How to GM Fate
 
-<page-meta author="Dgerrimea" description="Tips on how to effectively GM a Fate Campaign."></page-meta>
+<page-meta author="Jeremy Price" description="Tips on how to effectively GM a Fate Campaign."></page-meta>
 
 ### The Fate Mentality
 

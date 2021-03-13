@@ -32,7 +32,14 @@ import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromCol
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { MiscellaneousItems, WikiItems } from "../SrdsRoute/SrdsRoute";
 
-const Patrons = ["James Micu", "Randy Oest", "Ryan Singer", "Aeife O'Brien"];
+const Patrons = [
+  "James Micu",
+  "Randy Oest",
+  "Ryan Singer",
+  "Aeife O'Brien",
+  "GhostDM",
+  "Fluffydumplin",
+];
 
 const sectionGridItem = css({
   display: "flex",

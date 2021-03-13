@@ -1163,31 +1163,33 @@ export const Scene: React.FC<IProps> = (props) => {
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
           )}
-          <Grid item>
-            <ThemeProvider theme={errorTheme}>
-              <Button
-                variant="text"
-                color="primary"
-                data-cy="scene.new-scene"
-                endIcon={<ErrorIcon />}
-                className={css({
-                  borderRadius: "20px",
-                  fontWeight: theme.typography.fontWeightBold,
-                })}
-                onClick={() => {
-                  const confirmed = confirm(
-                    t("play-route.reset-scene-confirmation")
-                  );
-                  if (confirmed) {
-                    sceneManager.actions.resetScene();
-                    logger.info("Scene:onReset");
-                  }
-                }}
-              >
-                {t("play-route.new-scene")}
-              </Button>
-            </ThemeProvider>
-          </Grid>
+          {props.mode !== SceneMode.Manage && (
+            <Grid item>
+              <ThemeProvider theme={errorTheme}>
+                <Button
+                  variant="text"
+                  color="primary"
+                  data-cy="scene.new-scene"
+                  endIcon={<ErrorIcon />}
+                  className={css({
+                    borderRadius: "20px",
+                    fontWeight: theme.typography.fontWeightBold,
+                  })}
+                  onClick={() => {
+                    const confirmed = confirm(
+                      t("play-route.reset-scene-confirmation")
+                    );
+                    if (confirmed) {
+                      sceneManager.actions.resetScene();
+                      logger.info("Scene:onReset");
+                    }
+                  }}
+                >
+                  {t("play-route.new-scene")}
+                </Button>
+              </ThemeProvider>
+            </Grid>
+          )}
           {props.mode !== SceneMode.Manage && (
             <Grid item>
               <IconButton
