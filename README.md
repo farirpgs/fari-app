@@ -11,6 +11,8 @@
 - [x] Organize index cards with drag-and-drop
 - [x] Import inside Data route
 - [x] Import and Duplicate inside Data route
+- [-] player row
+  - [ ] fix DEFAULT POINT COUNTER SYNC
 - [ ] pool toggle on dice route
 - [ ] new player row
 - [ ] index card label after drag and drop
