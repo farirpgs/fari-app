@@ -12,7 +12,7 @@ export type IPeerActions =
 type IRollPeerAction = IPeerAction<"roll", IDiceRollWithBonus>;
 type IUpdateFatePointPeerAction = IPeerAction<
   "update-main-point-counter",
-  number
+  { points: string; maxPoints: string | undefined }
 >;
 type ILoadCharacterPeerAction = IPeerAction<"load-character", ICharacter>;
 type IUpdateCharacterPeerAction = IPeerAction<"update-character", ICharacter>;

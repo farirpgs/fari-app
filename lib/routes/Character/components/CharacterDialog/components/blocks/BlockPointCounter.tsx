@@ -15,11 +15,66 @@ import {
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
+import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { CharacterCircleBox } from "../CharacterCircleBox";
+
+export function usePointCounter(props: {
+  points: string;
+  maxPoints: string | undefined;
+  onPointsChange(newValue: string): void;
+  onMaxPointsChange(newValue: string): void;
+}) {
+  const [internalPoints, setInternalPoints] = useLazyState({
+    value: props.points,
+    onChange: props.onPointsChange,
+  });
+  const [internalMaxPoints, setInternalMaxPoints] = useLazyState({
+    value: props.maxPoints,
+    onChange: props.onMaxPointsChange,
+  });
+
+  function increment() {
+    const intValue = parseInt(internalPoints) || 0;
+    setInternalPoints((intValue + 1).toString());
+  }
+
+  function decrement() {
+    const intValue = parseInt(internalPoints) || 0;
+    if (intValue - 1 === 0) {
+      setInternalPoints("0");
+    }
+    setInternalPoints((intValue - 1).toString());
+  }
+
+  function setPoints(newValue: string) {
+    const intValue = parseInt(newValue) || 0;
+    setInternalPoints(intValue.toString());
+  }
+
+  function setMaxPoints(newMax: string) {
+    const intValue = parseInt(newMax) || 0;
+    setInternalMaxPoints(intValue.toString());
+  }
+
+  function reset() {
+    setInternalPoints(internalMaxPoints ?? "1");
+  }
+
+  return {
+    state: { points: internalPoints, maxPoints: internalMaxPoints },
+    actions: {
+      setPoints,
+      setMaxPoints,
+      increment,
+      decrement,
+      reset,
+    },
+  };
+}
 
 export function BlockPointCounter(
   props: IBlockComponentProps<IPointCounterBlock> & {}
@@ -28,6 +83,19 @@ export function BlockPointCounter(
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.editing;
 
+  const pointsManager = usePointCounter({
+    points: props.block.value,
+    maxPoints: props.block.meta.max,
+    onPointsChange(newValue) {
+      props.onValueChange(newValue);
+    },
+    onMaxPointsChange(newMax) {
+      props.onMetaChange({
+        ...props.block.meta,
+        max: newMax,
+      });
+    },
+  });
   return (
     <>
       <Box>
@@ -72,11 +140,7 @@ export function BlockPointCounter(
             <Grid item>
               <IconButton
                 onClick={() => {
-                  const intValue = parseInt(props.block.value) || 0;
-                  if (intValue - 1 === 0) {
-                    props.onValueChange("0");
-                  }
-                  props.onValueChange((intValue - 1).toString());
+                  pointsManager.actions.decrement();
                 }}
               >
                 <RemoveCircleOutlineOutlinedIcon />
@@ -87,12 +151,11 @@ export function BlockPointCounter(
             <CharacterCircleBox fontSize="1.2rem" minWidth="4rem">
               <ContentEditable
                 data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-                value={props.block.value}
+                value={pointsManager.state.points}
                 border
                 readonly={props.readonly}
                 onChange={(value, e) => {
-                  const intValue = parseInt(value) || 0;
-                  props.onValueChange(intValue.toString());
+                  pointsManager.actions.setPoints(value);
                 }}
               />
             </CharacterCircleBox>
@@ -117,12 +180,8 @@ export function BlockPointCounter(
                     value={props.block.meta.max ?? ""}
                     border
                     readonly={props.readonly}
-                    onChange={(max, e) => {
-                      const intValue = parseInt(max) || 0;
-                      props.onMetaChange({
-                        ...props.block.meta,
-                        max: intValue.toString(),
-                      });
+                    onChange={(newMax, e) => {
+                      pointsManager.actions.setMaxPoints(newMax);
                     }}
                   />
                 </CharacterCircleBox>
@@ -133,8 +192,7 @@ export function BlockPointCounter(
             <Grid item>
               <IconButton
                 onClick={() => {
-                  const intValue = parseInt(props.block.value) || 0;
-                  props.onValueChange((intValue + 1).toString());
+                  pointsManager.actions.increment();
                 }}
               >
                 <AddCircleOutlineOutlinedIcon />
@@ -152,7 +210,7 @@ export function BlockPointCounter(
                   color: theme.palette.primary.main,
                 })}
                 onClick={() => {
-                  props.onValueChange(props.block.meta.max ?? "1");
+                  pointsManager.actions.reset();
                 }}
               >
                 {/* TODO: text */}

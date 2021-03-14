@@ -52,6 +52,10 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const tooltipBackground = "#182026";
   const tooltipColor = useTextColors(tooltipBackground);
 
+  const hasBonus =
+    diceRollsManager.state.finalResultBonus !== undefined &&
+    diceRollsManager.state.finalResultBonus !== null;
+
   function handleButtonBoxClick() {
     if (diceRollsManager.state.rolling) {
       return;
@@ -87,8 +91,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    boxShadow:
-      "3px 5px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+    boxShadow: theme.shadows[2],
   });
   const diceRollingAnimationStyle = css({
     animationName: "spin",
@@ -109,7 +112,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
         overflow: "auto",
         color: tooltipColor.primary,
         padding: "1rem",
-        boxShadow: theme.shadows[4],
+        boxShadow: theme.shadows[2],
       })}
     >
       <Grid container alignItems="center" wrap="nowrap" spacing={4}>
@@ -159,7 +162,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
                 );
               }
             )}
-            {diceRollsManager.state.finalResultBonus !== undefined && (
+            {hasBonus && (
               <span>
                 {" + "} {diceRollsManager.state.finalResultBonus}
               </span>
@@ -295,6 +298,9 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
   });
   const separator = diceRollsManager.state.finalResult?.pool ? "" : "+";
   const isPool = diceRollsManager.state.finalResult?.pool ?? false;
+  const hasBonus =
+    diceRollsManager.state.finalResultBonus !== undefined &&
+    diceRollsManager.state.finalResultBonus !== null;
 
   return (
     <>
@@ -358,7 +364,7 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
             </span>
           );
         })}
-        {diceRollsManager.state.finalResultBonus !== undefined && (
+        {hasBonus && (
           <span
             className={css({
               verticalAlign: "middle",

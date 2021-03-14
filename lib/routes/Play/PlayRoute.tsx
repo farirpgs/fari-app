@@ -47,7 +47,8 @@ export const PlayRoute: React.FC<{
       if (peerAction.action === "update-main-point-counter") {
         sceneManager.actions.updatePlayerCharacterMainPointCounter(
           id,
-          peerAction.payload
+          peerAction.payload.points,
+          peerAction.payload.maxPoints
         );
       }
       if (peerAction.action === "played-in-turn-order") {

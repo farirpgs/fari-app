@@ -30,6 +30,7 @@ describe("useScene", () => {
         playedDuringTurn: false,
         offline: false,
         isGM: true,
+        points: "3",
       },
       players: [],
       goodConfetti: 0,
@@ -101,6 +102,10 @@ describe("useScene", () => {
           rolls: [],
           offline: false,
           isGM: true,
+          defaultPointCounter: {
+            value: "3",
+            max: "3",
+          },
         },
         goodConfetti: 0,
         id: "new-id",
@@ -474,7 +479,11 @@ describe("useScene", () => {
           total: 4,
           pool: false,
         });
-        result.current.actions.updatePlayerCharacterMainPointCounter("1", 1);
+        result.current.actions.updatePlayerCharacterMainPointCounter(
+          "1",
+          "1",
+          "3"
+        );
       });
       // THEN connection mappings reflects that
       expect(result.current.state.scene.players[0]).toEqual({
@@ -770,44 +779,20 @@ describe("useScene", () => {
       });
 
       // WHEN setuping scene
-      let playerId = "";
       act(() => {
         result.current.actions.updateName("NAME");
         result.current.actions.addAspect(AspectType.Aspect, false);
-        playerId = result.current.actions.addOfflinePlayer("OFFLINE PLAYER");
-        result.current.actions.updatePlayerPlayedDuringTurn(playerId, true);
       });
       // THEN
       expect(result.current.state.scene.name).toEqual("NAME");
       expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
-      expect(result.current.state.scene.players).toEqual([
-        {
-          character: undefined,
-          id: playerId,
-          playedDuringTurn: true,
-          offline: true,
-          isGM: false,
-          playerName: "OFFLINE PLAYER",
-          rolls: [],
-        },
-      ]);
+
       // WHEN reseting
       act(() => {
         result.current.actions.resetScene();
       });
       expect(result.current.state.scene.name).toEqual(defaultSceneName);
       expect(Object.keys(result.current.state.scene.aspects).length).toEqual(0);
-      expect(result.current.state.scene.players).toEqual([
-        {
-          character: undefined,
-          id: playerId,
-          playedDuringTurn: false,
-          offline: true,
-          isGM: false,
-          playerName: "OFFLINE PLAYER",
-          rolls: [],
-        },
-      ]);
     });
     it("keep sticky aspects", () => {
       // GIVEN

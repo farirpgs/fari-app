@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -18,8 +18,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tab from "@material-ui/core/Tab";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -30,6 +28,7 @@ import BorderColorIcon from "@material-ui/icons/BorderColor";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import FilterHdrIcon from "@material-ui/icons/FilterHdr";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -65,7 +64,6 @@ import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
-import { IPlayer } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -89,7 +87,7 @@ export enum SceneMode {
   Manage,
 }
 
-export const paperStyle = css({ borderRadius: "0px" });
+export const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
 type IProps =
   | {
@@ -154,7 +152,7 @@ export const Scene: React.FC<IProps> = (props) => {
   >(undefined);
 
   const [tab, setTab] = useState<
-    "player-characters" | "public" | "private" | "gm-notes"
+    "player-characters" | "public" | "private" | "zones" | "gm-notes"
   >("public");
   const [savedSnack, setSavedSnack] = useState(false);
 
@@ -203,7 +201,7 @@ export const Scene: React.FC<IProps> = (props) => {
     } else if (props.mode === SceneMode.PlayOnline) {
       return props.userId === player.id;
     }
-  }) as IPlayer;
+  });
 
   const liveMode = getLiveMode();
 
@@ -292,7 +290,7 @@ export const Scene: React.FC<IProps> = (props) => {
               const result = poolManager.actions.clearPool();
             }}
             pool={poolManager.state.pool}
-            rollsForDiceBox={me.rolls}
+            rollsForDiceBox={me?.rolls ?? []}
             onSelect={(result) => {
               handleSetRoll(result);
             }}
@@ -346,11 +344,8 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderSidePanel() {
-    const tokenTitles = sceneManager.state.scene.players.map(
-      (p) => (p.character?.name ?? p.playerName) as string
-    );
     return (
-      <Box display="flex" flexDirection="column" height="100%" pb="1rem">
+      <Box display="flex" flexDirection="column" height="100%">
         <Box
           className={css({
             backgroundColor: theme.palette.primary.main,
@@ -533,16 +528,17 @@ export const Scene: React.FC<IProps> = (props) => {
                       });
                     }
                   }}
-                  onUpdatePlayerCharacterMainPointCounter={(points) => {
+                  onPointsChange={(points, maxPoints) => {
                     if (isGM) {
                       sceneManager.actions.updatePlayerCharacterMainPointCounter(
                         player.id,
-                        points
+                        points,
+                        maxPoints
                       );
                     } else {
                       connectionsManager?.actions.sendToHost<IPeerActions>({
                         action: "update-main-point-counter",
-                        payload: points,
+                        payload: { points, maxPoints },
                       });
                     }
                   }}
@@ -551,56 +547,7 @@ export const Scene: React.FC<IProps> = (props) => {
             );
           })}
         </Paper>
-        <Paper className={paperStyle}>
-          <Box>
-            <DrawArea
-              objects={sceneManager.state.scene.drawAreaObjects}
-              readonly={!isGM}
-              tokenTitles={tokenTitles}
-              onChange={(lines) => {
-                sceneManager.actions.updateDrawAreaObjects(lines);
-              }}
-            />
-          </Box>
-        </Paper>
       </Box>
-    );
-  }
-
-  function renderPlayerRowHeader() {
-    const tableCellStyle = css({ padding: ".375rem 1rem .375rem 1rem" });
-    const firstTableCellStyle = css({ width: "50%" });
-
-    return (
-      <TableRow>
-        <TableCell
-          className={cx(tableCellStyle, firstTableCellStyle)}
-          align="left"
-        >
-          <Typography variant="overline" noWrap>
-            {t("play-route.name")}
-          </Typography>
-        </TableCell>
-        <TableCell className={tableCellStyle} align="center">
-          <Tooltip title={t("play-route.initiative-tracker")}>
-            <Typography variant="overline" noWrap>
-              {t("play-route.init")}
-            </Typography>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={tableCellStyle} align="center">
-          <Tooltip title={t("play-route.fate-points")}>
-            <Typography variant="overline" noWrap>
-              {t("play-route.fp")}
-            </Typography>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={tableCellStyle} align="right">
-          <Typography variant="overline" noWrap>
-            {t("play-route.dice")}
-          </Typography>
-        </TableCell>
-      </TableRow>
     );
   }
 
@@ -654,7 +601,7 @@ export const Scene: React.FC<IProps> = (props) => {
   function renderContent() {
     const tabPanelStyle = css({ padding: "0" });
     return (
-      <Box pb="2rem" mx=".5rem">
+      <Box mx=".5rem">
         <Paper
           elevation={2}
           className={css({
@@ -677,6 +624,9 @@ export const Scene: React.FC<IProps> = (props) => {
                   </TabPanel>
                   <TabPanel value={"private"} className={tabPanelStyle}>
                     {renderAspects()}
+                  </TabPanel>
+                  <TabPanel value={"zones"} className={tabPanelStyle}>
+                    {renderZones()}
                   </TabPanel>
                   <TabPanel value={"gm-notes"} className={tabPanelStyle}>
                     {renderGmNotes()}
@@ -711,6 +661,24 @@ export const Scene: React.FC<IProps> = (props) => {
           </Box>
         </Grid>
       </Grid>
+    );
+  }
+
+  function renderZones() {
+    const tokenTitles = sceneManager.state.scene.players.map(
+      (p) => (p.character?.name ?? p.playerName) as string
+    );
+    return (
+      <Box border="1px solid #bdbdbd">
+        <DrawArea
+          objects={sceneManager.state.scene.drawAreaObjects}
+          readonly={!isGM}
+          tokenTitles={tokenTitles}
+          onChange={(lines) => {
+            sceneManager.actions.updateDrawAreaObjects(lines);
+          }}
+        />
+      </Box>
     );
   }
 
@@ -821,6 +789,8 @@ export const Scene: React.FC<IProps> = (props) => {
     return (
       <Box>
         <Tabs
+          variant="scrollable"
+          scrollButtons="auto"
           value={tab}
           classes={{
             root: css({
@@ -859,6 +829,13 @@ export const Scene: React.FC<IProps> = (props) => {
               icon={<VisibilityOffIcon />}
             />
           )}
+          <Tab
+            value="zones"
+            data-cy="scene.tabs.zones"
+            label={t("play-route.zones")}
+            classes={{ root: tabClass }}
+            icon={<FilterHdrIcon />}
+          />
           {isManaging && (
             <Tab
               value="gm-notes"

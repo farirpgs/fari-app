@@ -195,7 +195,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </Typography>
                 <Box py="1rem" textAlign="center" marginTop="auto">
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     size="large"
                     onClick={() => {

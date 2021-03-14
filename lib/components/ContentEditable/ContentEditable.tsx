@@ -12,7 +12,7 @@ import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 const DOMPurifyOptions = {
   ALLOWED_TAGS: ["br", "img"],
 };
-const ContentEditableDelay = 125;
+const ContentEditableDelay = 200;
 
 type IPreviewContentEditableOptions = {
   value: string | undefined;

@@ -26,6 +26,9 @@ import { useLightBackground } from "../../../../hooks/useLightBackground/useLigh
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
+import { CharacterCircleBox } from "../../../../routes/Character/components/CharacterDialog/components/CharacterCircleBox";
+import { ContentEditable } from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
   DiceBox,
@@ -41,7 +44,8 @@ export const PlayerRow: React.FC<
 
     onDiceRoll(options: IRollDiceOptions): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
-    onUpdatePlayerCharacterMainPointCounter(points: number): void;
+    onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
+
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
     onLoadCharacterSheet(): void;
@@ -51,6 +55,22 @@ export const PlayerRow: React.FC<
   const { t } = useTranslate();
   const logger = useLogger();
   const shouldHighlight = props.highlight;
+  const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
+    props.player.character
+  );
+  const pointFromProps = mainPointerBlock?.value ?? props.player.points;
+  const maxPointsFromProps = mainPointerBlock?.meta.max ?? undefined;
+
+  const pointsManager = usePointCounter({
+    points: pointFromProps,
+    maxPoints: maxPointsFromProps,
+    onPointsChange(newPoints) {
+      props.onPointsChange(newPoints, pointsManager.state.maxPoints);
+    },
+    onMaxPointsChange(newMaxPoints) {
+      props.onPointsChange(pointsManager.state.points, newMaxPoints);
+    },
+  });
 
   const textColor = useTextColors(theme.palette.background.default);
   const lightBackground = useLightBackground();
@@ -66,9 +86,6 @@ export const PlayerRow: React.FC<
   const hasCharacterSheet = !!props.player.character;
   const selectedRowStyle = css({ backgroundColor: lightBackground });
 
-  const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
-    props.player.character
-  );
   const points = parseInt(mainPointerBlock?.value ?? "0") || 0;
 
   const pointsStyle = css({
@@ -88,7 +105,7 @@ export const PlayerRow: React.FC<
   return (
     <>
       <Box>
-        <Box p=".5rem">
+        <Box py=".8rem" px=".5rem">
           <Grid container spacing={2} wrap="nowrap">
             <Grid item xs={9}>
               {renderCharacterSheetButton()}
@@ -100,27 +117,92 @@ export const PlayerRow: React.FC<
           <Grid container spacing={2} wrap="nowrap">
             <Grid item>{renderDiceBox()}</Grid>
           </Grid>
-          {/* <Grid container spacing={2} wrap="nowrap">
-            <Grid item>
-              <BlockPointCounter
-                editing={false}
-                readonly={true}
-                pageIndex={0}
-                sectionIndex={0}
-                blockIndex={0}
-                section={{}}
-                block={mainPointerBlock}
-                onLabelChange={(value) => {}}
-                onValueChange={(value) => {}}
-                onMetaChange={(meta) => {}}
-              />
-            </Grid>
-          </Grid> */}
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item>{renderPointCounter()}</Grid>
+          </Grid>
         </Box>
         <Divider light />
       </Box>
     </>
   );
+
+  function renderPointCounter() {
+    return (
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        spacing={2}
+        wrap="nowrap"
+      >
+        {!props.readonly && (
+          <Grid item>
+            <IconButton
+              size="small"
+              onClick={() => {
+                pointsManager.actions.decrement();
+              }}
+            >
+              <RemoveCircleOutlineOutlinedIcon />
+            </IconButton>
+          </Grid>
+        )}
+        <Grid item>
+          <CharacterCircleBox fontSize="1rem" minWidth="4rem">
+            <ContentEditable
+              data-cy={`player-row.points`}
+              value={pointsManager.state.points}
+              border
+              readonly={props.readonly}
+              onChange={(newValue, e) => {
+                pointsManager.actions.setPoints(newValue);
+              }}
+            />
+          </CharacterCircleBox>
+        </Grid>
+        {pointsManager.state.maxPoints !== undefined && (
+          <>
+            <Grid item>
+              <Typography
+                className={css({
+                  fontSize: "2rem",
+                  color: "#bdbdbd",
+                  lineHeight: Font.lineHeight(2),
+                })}
+              >
+                {"/"}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <CharacterCircleBox fontSize="1rem" minWidth="4rem">
+                <ContentEditable
+                  data-cy={`player-row.max-points`}
+                  value={pointsManager.state.maxPoints ?? ""}
+                  border
+                  readonly={props.readonly}
+                  onChange={(newMax, e) => {
+                    pointsManager.actions.setMaxPoints(newMax);
+                  }}
+                />
+              </CharacterCircleBox>
+            </Grid>
+          </>
+        )}
+        {!props.readonly && (
+          <Grid item>
+            <IconButton
+              size="small"
+              onClick={() => {
+                pointsManager.actions.increment();
+              }}
+            >
+              <AddCircleOutlineOutlinedIcon />
+            </IconButton>
+          </Grid>
+        )}
+      </Grid>
+    );
+  }
 
   function renderDiceBox() {
     return (
@@ -250,6 +332,7 @@ export const PlayerRow: React.FC<
       </>
     );
   }
+
   function renderGMControls() {
     if (!props.renderControls) {
       return null;
@@ -276,50 +359,6 @@ export const PlayerRow: React.FC<
               <HighlightOffIcon color="error" />
             </IconButton>
           </Tooltip>
-        </TableCell>
-        <TableCell />
-        <TableCell>
-          <Grid container alignItems="center" justify="center" spacing={1}>
-            <Grid item>
-              <Tooltip
-                title={`${t("player-row.remove")}: ${mainPointerBlock?.label}`}
-              >
-                <span>
-                  <IconButton
-                    data-cy={`${props["data-cy"]}.consume-point-gm`}
-                    size="small"
-                    disabled={points === 0}
-                    onClick={(e) => {
-                      e.stopPropagation();
-
-                      props.onUpdatePlayerCharacterMainPointCounter(points - 1);
-                      logger.info("ScenePlayer:onGMConsumePoint");
-                    }}
-                  >
-                    <RemoveCircleOutlineOutlinedIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-            </Grid>
-
-            <Grid item>
-              <Tooltip
-                title={`${t("player-row.add")}: ${mainPointerBlock?.label}`}
-              >
-                <IconButton
-                  data-cy={`${props["data-cy"]}.add-point-gm`}
-                  size="small"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onUpdatePlayerCharacterMainPointCounter(points + 1);
-                    logger.info("ScenePlayer:onGMAddPoint");
-                  }}
-                >
-                  <AddCircleOutlineOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
         </TableCell>
         <TableCell />
       </TableRow>

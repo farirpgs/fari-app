@@ -64,7 +64,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     return (
       <>
         <Box display="flex" flexDirection="column">
-          <AspectRatio widthPercent={100} ratio={1 / 1}>
+          <AspectRatio width={100} ratio={9 / 16}>
             {renderDrawArea()}
           </AspectRatio>
 
@@ -79,7 +79,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     <>
       {renderActions()}
       {renderOtherActions()}
-      <AspectRatio widthPercent={50} ratio={1 / 1}>
+      <AspectRatio width={100} ratio={9 / 16}>
         {renderDrawArea()}
       </AspectRatio>
     </>

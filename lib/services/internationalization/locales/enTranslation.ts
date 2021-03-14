@@ -156,6 +156,7 @@ export const enTranslation = {
   "play-route.or-pick-existing": `Pick a Character`,
   "play-route.players": `Players:`,
   "play-route.private": `Private`,
+  "play-route.zones": `Zones`,
   "play-route.public": `Public`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene-confirmation": `Are you sure you want to start a new scene?`,

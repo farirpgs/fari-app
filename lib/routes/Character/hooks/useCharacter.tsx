@@ -37,6 +37,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       characterFromPropsLastUpdated > currentCharacterLastUpdated;
 
     if (isDifferentCharacter || isOutdated) {
+      console.debug("OUTDATED CHARACTER SHEET", characterFromProps.name);
       setCharacter(characterFromProps);
     }
   }, [characterFromProps]);
@@ -261,6 +262,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       })
     );
   }
+
   function duplicateBlock(
     pageIndex: number,
     sectionIndex: number,

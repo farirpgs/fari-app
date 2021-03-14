@@ -11,7 +11,12 @@ import {
   defaultSceneName,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
-import { BlockType, ICharacter } from "../../domains/character/types";
+import {
+  BlockType,
+  IBlock,
+  ICharacter,
+  IPointCounterBlock,
+} from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
@@ -106,12 +111,15 @@ export function useScene(props: IProps) {
     return p.id === userId;
   });
 
+  useEffect(() => {
+    scene.players.forEach((p) => {
+      charactersManager.actions.updateIfExists(p.character);
+    });
+  }, [scene]);
+
   function safeSetScene(newScene: IScene) {
     if (newScene) {
       setScene(newScene);
-      newScene.players.forEach((p) => {
-        charactersManager.actions.updateIfExists(p.character);
-      });
     }
   }
 
@@ -503,24 +511,6 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addOfflinePlayer(playerName: string) {
-    const id = Id.generate();
-    setScene(
-      produce((draft: IScene) => {
-        draft.players.push({
-          id: id,
-          playerName: playerName,
-          character: undefined,
-          rolls: [],
-          playedDuringTurn: false,
-          offline: true,
-          isGM: false,
-        });
-      })
-    );
-    return id;
-  }
-
   function addOfflineCharacter(character: ICharacter) {
     const id = Id.generate();
     setScene(
@@ -533,6 +523,7 @@ export function useScene(props: IProps) {
           playedDuringTurn: false,
           offline: true,
           isGM: false,
+          points: "3",
         });
       })
     );
@@ -619,13 +610,18 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerCharacterMainPointCounter(id: string, points: number) {
+  function updatePlayerCharacterMainPointCounter(
+    id: string,
+    points: string,
+    maxPoints: string | undefined
+  ) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
             if (p.character) {
+              p.points = points;
               for (const page of p.character.pages) {
                 for (const section of page.sections) {
                   for (const block of section.blocks) {
@@ -633,7 +629,9 @@ export function useScene(props: IProps) {
                       block.type === BlockType.PointCounter &&
                       block.meta.isMainPointCounter;
                     if (shouldUpdateBlock) {
-                      block.value = points.toString();
+                      const typedBlock = block as IPointCounterBlock & IBlock;
+                      typedBlock.value = points;
+                      typedBlock.meta.max = maxPoints;
                       p.character.lastUpdated = getUnix();
                     }
                   }
@@ -755,7 +753,6 @@ export function useScene(props: IProps) {
       updateAspectPlayerDuringTurn,
       updateAspectColor,
       updatePlayersWithConnections,
-      addOfflinePlayer,
       addOfflineCharacter,
       removePlayer,
       updatePlayerCharacterMainPointCounter,

@@ -12,6 +12,7 @@ export interface IPlayer {
   playedDuringTurn: boolean;
   offline: boolean;
   isGM: boolean;
+  points: string;
 }
 
 export interface IAspect {

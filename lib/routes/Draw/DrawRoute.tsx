@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
 import React, { useEffect } from "react";
 import { DrawObjects } from "../../components/DrawArea/DrawObjects";
 import { useDrawing } from "../../components/DrawArea/hooks/useDrawing";
@@ -25,17 +26,28 @@ export const DrawRoute: React.FC = (props) => {
         title={t("draw-route.meta.title")}
         description={t("draw-route.meta.description")}
       />
-      <Box py="1rem" display="flex" flexDirection="column" alignItems="center">
-        <Icons.IllustrationIcon
-          className={css({ fontSize: "3rem" })}
-          color="primary"
-        />
-        <FateLabel variant="h4" align="center" color="primary">
-          {"Draw"}
-        </FateLabel>
-      </Box>
+      <Container maxWidth="md">
+        <Box
+          py="1rem"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <Icons.IllustrationIcon
+            className={css({ fontSize: "3rem" })}
+            color="primary"
+          />
+          <FateLabel variant="h4" align="center" color="primary">
+            {"Draw"}
+          </FateLabel>
+        </Box>
 
-      <DrawObjects drawingManager={drawingManager} controls="top" fullScreen />
+        <DrawObjects
+          drawingManager={drawingManager}
+          controls="top"
+          fullScreen
+        />
+      </Container>
     </Page>
   );
 };
