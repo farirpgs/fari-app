@@ -10,15 +10,7 @@ export const frTranslation: Record<
   "character-dialog.template.FateOfCthulhu": ``,
   "player-row.remove": `Remove`,
   "player-row.add": `Add`,
-  /**
-   *
-   */
-  "about-route.meta.description": `Fari est une application pour jouer a jeu de rôle Fate, créée par René-Pier-Gélinas Deshaies`,
-  "about-route.meta.title": `À propos`,
-  "changelog-route.meta.description": `Journal des modifications pour Fari`,
-  "changelog-route.meta.title": `Journal des modifications`,
-  "character-dialog.advanced": `Basculer en mode avancé`,
-  "character-dialog.close-confirmation": `Êtes-vous sûr de vouloir fermer votre fiche de personnage et perdre toutes vos modifications?`,
+  "play-route.zones": `Zones`,
   "character-dialog.control.add-box": `Ajouter une  boîte`,
   "character-dialog.control.add-block": `Ajouter un bloc`,
   "character-dialog.control.add-page": `Ajouter une page`,
@@ -30,6 +22,15 @@ export const frTranslation: Record<
   "character-dialog.control.remove-page": `Retirer la Page`,
   "character-dialog.control.remove-section": `Retirer la section`,
   "character-dialog.control.visible-on-card": `Visible sur la carte`,
+  /**
+   *
+   */
+  "about-route.meta.description": `Fari est une application pour jouer a jeu de rôle Fate, créée par René-Pier-Gélinas Deshaies`,
+  "about-route.meta.title": `À propos`,
+  "changelog-route.meta.description": `Journal des modifications pour Fari`,
+  "changelog-route.meta.title": `Journal des modifications`,
+  "character-dialog.advanced": `Basculer en mode avancé`,
+  "character-dialog.close-confirmation": `Êtes-vous sûr de vouloir fermer votre fiche de personnage et perdre toutes vos modifications?`,
   "character-dialog.delete": `Supprimer`,
   "character-dialog.dice": `Dés`,
   "character-dialog.group": `Groupe`,

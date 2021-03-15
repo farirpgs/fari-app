@@ -13,15 +13,7 @@ export const esTranslation: Record<
   "character-dialog.template.FateOfCthulhu": ``,
   "player-row.remove": `Remove`,
   "player-row.add": `Add`,
-  /**
-   *
-   */
-  "about-route.meta.description": `Fari es una aplicación de asistencia para Fate RPG creada por René-Pier Deshaies-Gélinas`,
-  "about-route.meta.title": `Acerca de`,
-  "changelog-route.meta.description": `Changelog de Fari`,
-  "changelog-route.meta.title": `Changelog`,
-  "character-dialog.advanced": `Modo Avanzado`,
-  "character-dialog.close-confirmation": `¿Está seguro de que desea cerrar su hoja de personaje y perder todos los cambios?`,
+  "play-route.zones": `Zones`,
   "character-dialog.control.add-box": `Add Box`,
   "character-dialog.control.add-block": `Add Block`,
   "character-dialog.control.add-page": `Add Page`,
@@ -33,6 +25,15 @@ export const esTranslation: Record<
   "character-dialog.control.remove-page": `Remove Page`,
   "character-dialog.control.remove-section": `Remove Section`,
   "character-dialog.control.visible-on-card": `Visible On Card`,
+  /**
+   *
+   */
+  "about-route.meta.description": `Fari es una aplicación de asistencia para Fate RPG creada por René-Pier Deshaies-Gélinas`,
+  "about-route.meta.title": `Acerca de`,
+  "changelog-route.meta.description": `Changelog de Fari`,
+  "changelog-route.meta.title": `Changelog`,
+  "character-dialog.advanced": `Modo Avanzado`,
+  "character-dialog.close-confirmation": `¿Está seguro de que desea cerrar su hoja de personaje y perder todos los cambios?`,
   "character-dialog.delete": `Borrar`,
   "character-dialog.dice": `Dado`,
   "character-dialog.group": `Grupo`,

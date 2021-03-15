@@ -14,15 +14,7 @@ export const glTranslation: Record<
   "character-dialog.template.FateOfCthulhu": ``,
   "player-row.remove": `Remove`,
   "player-row.add": `Add`,
-  /**
-   *
-   */
-  "about-route.meta.description": `Fari é unha aplicación auxiliar para o xogo de rol Fate creada por René-Pier Deshaies-Gélinas`,
-  "about-route.meta.title": `Sobre`,
-  "changelog-route.meta.description": `Mudanzas recentes de Fari`,
-  "changelog-route.meta.title": `Mudanzas`,
-  "character-dialog.advanced": `Alternar modo avanzado`,
-  "character-dialog.close-confirmation": `Tes a certeza de querer pechar a ficha de personaxe e perder todas as mudanzas?`,
+  "play-route.zones": `Zones`,
   "character-dialog.control.add-box": `Add Box`,
   "character-dialog.control.add-block": `Add Block`,
   "character-dialog.control.add-page": `Add Page`,
@@ -34,6 +26,15 @@ export const glTranslation: Record<
   "character-dialog.control.remove-page": `Remove Page`,
   "character-dialog.control.remove-section": `Remove Section`,
   "character-dialog.control.visible-on-card": `Visible On Card`,
+  /**
+   *
+   */
+  "about-route.meta.description": `Fari é unha aplicación auxiliar para o xogo de rol Fate creada por René-Pier Deshaies-Gélinas`,
+  "about-route.meta.title": `Sobre`,
+  "changelog-route.meta.description": `Mudanzas recentes de Fari`,
+  "changelog-route.meta.title": `Mudanzas`,
+  "character-dialog.advanced": `Alternar modo avanzado`,
+  "character-dialog.close-confirmation": `Tes a certeza de querer pechar a ficha de personaxe e perder todas as mudanzas?`,
   "character-dialog.delete": `Borrar`,
   "character-dialog.dice": `Dados`,
   "character-dialog.group": `Grupo`,

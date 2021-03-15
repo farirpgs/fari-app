@@ -13,15 +13,7 @@ export const ruTranslation: Record<
   "character-dialog.template.FateOfCthulhu": ``,
   "player-row.remove": `Remove`,
   "player-row.add": `Add`,
-  /**
-   *
-   */
-  "about-route.meta.description": `Fari это Приложение Компаньон для Fate RPG созданное René-Pier Deshaies-Gélinas`,
-  "about-route.meta.title": `О Fari`,
-  "changelog-route.meta.description": `Список изменений Fari`,
-  "changelog-route.meta.title": `Список изменений`,
-  "character-dialog.advanced": `Включить Расширенный Режим`,
-  "character-dialog.close-confirmation": `Вы уверены, что хотите закрыть лист персонажа и потерять все изменения ?`,
+  "play-route.zones": `Zones`,
   "character-dialog.control.add-box": `Add Box`,
   "character-dialog.control.add-block": `Add Block`,
   "character-dialog.control.add-page": `Add Page`,
@@ -33,6 +25,15 @@ export const ruTranslation: Record<
   "character-dialog.control.remove-page": `Remove Page`,
   "character-dialog.control.remove-section": `Remove Section`,
   "character-dialog.control.visible-on-card": `Visible On Card`,
+  /**
+   *
+   */
+  "about-route.meta.description": `Fari это Приложение Компаньон для Fate RPG созданное René-Pier Deshaies-Gélinas`,
+  "about-route.meta.title": `О Fari`,
+  "changelog-route.meta.description": `Список изменений Fari`,
+  "changelog-route.meta.title": `Список изменений`,
+  "character-dialog.advanced": `Включить Расширенный Режим`,
+  "character-dialog.close-confirmation": `Вы уверены, что хотите закрыть лист персонажа и потерять все изменения ?`,
   "character-dialog.delete": `Удалить`,
   "character-dialog.dice": `игральная кость`,
   "character-dialog.group": `группа`,

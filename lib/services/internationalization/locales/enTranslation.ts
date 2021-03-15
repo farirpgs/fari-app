@@ -5,15 +5,7 @@ export const enTranslation = {
   "character-dialog.template.TheWitchIsDead": `The Witch Is Dead`,
   "player-row.remove": `Remove`,
   "player-row.add": `Add`,
-  /**
-   *
-   */
-  "about-route.meta.description": `Fari is a Fate RPG Companion Application created by René-Pier Deshaies-Gélinas`,
-  "about-route.meta.title": `About`,
-  "changelog-route.meta.description": `Changelog for Fari`,
-  "changelog-route.meta.title": `Changelog`,
-  "character-dialog.advanced": `Toggle Advanced Mode`,
-  "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
+  "play-route.zones": `Zones`,
   "character-dialog.control.add-box": `Add Box`,
   "character-dialog.control.add-block": `Add Block`,
   "character-dialog.control.add-page": `Add Page`,
@@ -25,6 +17,15 @@ export const enTranslation = {
   "character-dialog.control.remove-page": `Remove Page`,
   "character-dialog.control.remove-section": `Remove Section`,
   "character-dialog.control.visible-on-card": `Visible On Card`,
+  /**
+   *
+   */
+  "about-route.meta.description": `Fari is a Fate RPG Companion Application created by René-Pier Deshaies-Gélinas`,
+  "about-route.meta.title": `About`,
+  "changelog-route.meta.description": `Changelog for Fari`,
+  "changelog-route.meta.title": `Changelog`,
+  "character-dialog.advanced": `Toggle Advanced Mode`,
+  "character-dialog.close-confirmation": `Are you sure you want to close your character sheet and lose all your changes ?`,
   "character-dialog.delete": `Delete`,
   "character-dialog.dice": `Dice`,
   "character-dialog.group": `Group`,
@@ -156,7 +157,6 @@ export const enTranslation = {
   "play-route.or-pick-existing": `Pick a Character`,
   "play-route.players": `Players:`,
   "play-route.private": `Private`,
-  "play-route.zones": `Zones`,
   "play-route.public": `Public`,
   "play-route.reset-initiative": `Reset`,
   "play-route.reset-scene-confirmation": `Are you sure you want to start a new scene?`,

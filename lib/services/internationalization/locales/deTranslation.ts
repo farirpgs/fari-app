@@ -13,15 +13,7 @@ export const deTranslation: Record<
   "character-dialog.template.FateOfCthulhu": ``,
   "player-row.remove": `Remove`,
   "player-row.add": `Add`,
-  /**
-   *
-   */
-  "about-route.meta.description": `Fari ist eine von René-Pier Deshaies-Gélinas entwickelte Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel`,
-  "about-route.meta.title": `Über`,
-  "changelog-route.meta.description": `Änderungsprotokoll für Fari`,
-  "changelog-route.meta.title": `Änderungsprotokoll`,
-  "character-dialog.advanced": `Erweiterten Modus umschalten`,
-  "character-dialog.close-confirmation": `Bist du sicher, dass du dein Charakterblatt schließen und alle deine Änderungen verlieren willst?`,
+  "play-route.zones": `Zones`,
   "character-dialog.control.add-box": `Add Box`,
   "character-dialog.control.add-block": `Add Block`,
   "character-dialog.control.add-page": `Add Page`,
@@ -33,6 +25,15 @@ export const deTranslation: Record<
   "character-dialog.control.remove-page": `Remove Page`,
   "character-dialog.control.remove-section": `Remove Section`,
   "character-dialog.control.visible-on-card": `Visible On Card`,
+  /**
+   *
+   */
+  "about-route.meta.description": `Fari ist eine von René-Pier Deshaies-Gélinas entwickelte Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel`,
+  "about-route.meta.title": `Über`,
+  "changelog-route.meta.description": `Änderungsprotokoll für Fari`,
+  "changelog-route.meta.title": `Änderungsprotokoll`,
+  "character-dialog.advanced": `Erweiterten Modus umschalten`,
+  "character-dialog.close-confirmation": `Bist du sicher, dass du dein Charakterblatt schließen und alle deine Änderungen verlieren willst?`,
   "character-dialog.delete": `Löschen`,
   "character-dialog.dice": `Würfel`,
   "character-dialog.group": `Gruppe`,

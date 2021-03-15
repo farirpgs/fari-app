@@ -102,10 +102,7 @@ describe("useScene", () => {
           rolls: [],
           offline: false,
           isGM: true,
-          defaultPointCounter: {
-            value: "3",
-            max: "3",
-          },
+          points: "3",
         },
         goodConfetti: 0,
         id: "new-id",
@@ -490,6 +487,7 @@ describe("useScene", () => {
         character: undefined,
         id: "1",
         playedDuringTurn: true,
+        points: "1",
         offline: false,
         playerName: "RP",
         rolls: [
@@ -514,6 +512,7 @@ describe("useScene", () => {
         character: undefined,
         id: "1",
         playedDuringTurn: false,
+        points: "1",
         offline: false,
         playerName: "RP",
         rolls: [
@@ -892,7 +891,7 @@ describe("useScene", () => {
     expect(result.current.state.scene.players).toEqual([
       {
         character: {},
-        fatePoints: undefined,
+        points: "3",
         id: playerId,
         playedDuringTurn: false,
         isGM: false,
