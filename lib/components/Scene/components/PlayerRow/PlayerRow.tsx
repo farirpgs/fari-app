@@ -1,21 +1,18 @@
-import { css, cx } from "@emotion/css";
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
@@ -28,6 +25,7 @@ import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CharacterCircleBox } from "../../../../routes/Character/components/CharacterDialog/components/CharacterCircleBox";
+import { ConditionalWrapper } from "../../../ConditionalWrapper/ConditionalWrapper";
 import { ContentEditable } from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
@@ -54,7 +52,7 @@ export const PlayerRow: React.FC<
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const shouldHighlight = props.highlight;
+
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
     props.player.character
   );
@@ -84,7 +82,6 @@ export const PlayerRow: React.FC<
     t("play-route.character-name");
 
   const hasCharacterSheet = !!props.player.character;
-  const selectedRowStyle = css({ backgroundColor: lightBackground });
 
   const points = parseInt(mainPointerBlock?.value ?? "0") || 0;
 
@@ -104,7 +101,7 @@ export const PlayerRow: React.FC<
 
   return (
     <>
-      <Box>
+      <Box bgcolor={props.highlight ? lightBackground : undefined}>
         <Box py=".8rem" px=".5rem">
           <Grid container spacing={2} wrap="nowrap">
             <Grid item xs={9}>
@@ -114,17 +111,77 @@ export const PlayerRow: React.FC<
               {renderInitiative()}
             </Grid>
           </Grid>
-          <Grid container spacing={2} wrap="nowrap">
-            <Grid item>{renderDiceBox()}</Grid>
-          </Grid>
+          {/* TODO update show result even if highlight... */}
+          {!props.highlight && (
+            <Grid container spacing={2} wrap="nowrap">
+              <Grid item>{renderDiceBox()}</Grid>
+            </Grid>
+          )}
           <Grid container spacing={2} wrap="nowrap">
             <Grid item>{renderPointCounter()}</Grid>
           </Grid>
+          {!props.readonly && !props.player.isGM && (
+            <Grid container spacing={2} wrap="nowrap">
+              <Grid item>{renderCharacterActions()}</Grid>
+            </Grid>
+          )}
+          {props.renderControls && !props.player.isGM && (
+            <Grid container spacing={2} wrap="nowrap">
+              <Grid item>{renderGMActions()}</Grid>
+            </Grid>
+          )}
         </Box>
         <Divider light />
       </Box>
     </>
   );
+
+  function renderGMActions() {
+    return (
+      <Box>
+        <Tooltip title={t("player-row.remove-character")}>
+          <IconButton
+            data-cy={`${props["data-cy"]}.remove`}
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              props.onPlayerRemove();
+              logger.info("ScenePlayer:onPlayerRemove");
+            }}
+          >
+            <HighlightOffIcon
+              color="error"
+              className={css({ width: "1rem", height: "1rem" })}
+            />
+          </IconButton>
+        </Tooltip>
+      </Box>
+    );
+  }
+
+  function renderCharacterActions() {
+    return (
+      <>
+        <Box px=".25rem">
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              props.onLoadCharacterSheet();
+              logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+            }}
+          >
+            {hasCharacterSheet
+              ? t("player-row.swap-character-sheet")
+              : t("play-route.add-character-sheet")}
+          </Link>
+        </Box>
+      </>
+    );
+  }
 
   function renderPointCounter() {
     return (
@@ -132,7 +189,7 @@ export const PlayerRow: React.FC<
         container
         justify="center"
         alignItems="center"
-        spacing={2}
+        spacing={1}
         wrap="nowrap"
       >
         {!props.readonly && (
@@ -143,7 +200,9 @@ export const PlayerRow: React.FC<
                 pointsManager.actions.decrement();
               }}
             >
-              <RemoveCircleOutlineOutlinedIcon />
+              <RemoveCircleOutlineOutlinedIcon
+                className={css({ width: "1rem", height: "1rem" })}
+              />
             </IconButton>
           </Grid>
         )}
@@ -152,7 +211,7 @@ export const PlayerRow: React.FC<
             <ContentEditable
               data-cy={`player-row.points`}
               value={pointsManager.state.points}
-              border
+              border={!props.readonly}
               readonly={props.readonly}
               onChange={(newValue, e) => {
                 pointsManager.actions.setPoints(newValue);
@@ -196,7 +255,9 @@ export const PlayerRow: React.FC<
                 pointsManager.actions.increment();
               }}
             >
-              <AddCircleOutlineOutlinedIcon />
+              <AddCircleOutlineOutlinedIcon
+                className={css({ width: "1rem", height: "1rem" })}
+              />
             </IconButton>
           </Grid>
         )}
@@ -270,53 +331,36 @@ export const PlayerRow: React.FC<
     return (
       <>
         <Grid container wrap="nowrap" alignItems="center">
-          {!props.readonly && (
-            <Grid item>
-              <Tooltip
-                title={
-                  hasCharacterSheet
-                    ? t("player-row.swap-character-sheet")
-                    : t("play-route.add-character-sheet")
-                }
-                onClick={() => {
-                  props.onLoadCharacterSheet();
-                  logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
-                }}
-              >
-                <IconButton
-                  size="small"
-                  className={css({ padding: "0" })}
-                  color={hasCharacterSheet ? "default" : "primary"}
-                >
-                  {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          )}
           <Grid item xs zeroMinWidth>
-            <Button
-              className={css({
-                width: "100%",
-                background: "transparent",
-                textTransform: "none",
-                color: hasCharacterSheet
-                  ? theme.palette.text.primary
-                  : theme.palette.text.secondary,
-                border: "none",
-                borderRadius: "4px",
-              })}
-              data-cy={`${props["data-cy"]}.open-character-sheet`}
-              disabled={!props.player.character}
-              size="small"
-              onClick={(e) => {
-                props.onCharacterSheetOpen();
-                logger.info("ScenePlayer:onCharacterSheetButtonPress");
-              }}
+            <ConditionalWrapper
+              condition={hasCharacterSheet}
+              wrapper={(children) => (
+                <Button
+                  className={css({
+                    width: "100%",
+                    background: "transparent",
+                    textTransform: "none",
+                    color: theme.palette.text.primary,
+                    border: "none",
+                    borderRadius: "4px",
+                  })}
+                  data-cy={`${props["data-cy"]}.open-character-sheet`}
+                  disabled={!props.player.character}
+                  size="small"
+                  onClick={(e) => {
+                    props.onCharacterSheetOpen();
+                    logger.info("ScenePlayer:onCharacterSheetButtonPress");
+                  }}
+                >
+                  {children}
+                </Button>
+              )}
             >
               <Typography
                 noWrap
                 color="inherit"
                 className={css({
+                  color: theme.palette.text.primary,
                   width: "100%",
                   textAlign: "left",
                   fontSize: "1rem",
@@ -326,42 +370,10 @@ export const PlayerRow: React.FC<
               >
                 {name}
               </Typography>
-            </Button>
+            </ConditionalWrapper>
           </Grid>
         </Grid>
       </>
-    );
-  }
-
-  function renderGMControls() {
-    if (!props.renderControls) {
-      return null;
-    }
-
-    return (
-      <TableRow
-        selected={false}
-        className={cx(undefined, {
-          [selectedRowStyle]: shouldHighlight,
-        })}
-      >
-        <TableCell>
-          <Tooltip title={t("player-row.remove-character")}>
-            <IconButton
-              data-cy={`${props["data-cy"]}.remove`}
-              size="small"
-              onClick={(e) => {
-                e.stopPropagation();
-                props.onPlayerRemove();
-                logger.info("ScenePlayer:onPlayerRemove");
-              }}
-            >
-              <HighlightOffIcon color="error" />
-            </IconButton>
-          </Tooltip>
-        </TableCell>
-        <TableCell />
-      </TableRow>
     );
   }
 };

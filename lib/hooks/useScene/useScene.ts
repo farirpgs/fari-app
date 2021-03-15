@@ -620,8 +620,8 @@ export function useScene(props: IProps) {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
+            p.points = points;
             if (p.character) {
-              p.points = points;
               for (const page of p.character.pages) {
                 for (const section of page.sections) {
                   for (const block of section.blocks) {

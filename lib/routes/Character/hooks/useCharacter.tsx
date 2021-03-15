@@ -10,7 +10,7 @@ import {
   ICharacter,
   IPage,
   ISlotTrackerBlock,
-  Position,
+  Position
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -37,7 +37,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       characterFromPropsLastUpdated > currentCharacterLastUpdated;
 
     if (isDifferentCharacter || isOutdated) {
-      console.debug("OUTDATED CHARACTER SHEET", characterFromProps.name);
       setCharacter(characterFromProps);
     }
   }, [characterFromProps]);

@@ -152,7 +152,7 @@ export function BlockPointCounter(
               <ContentEditable
                 data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
                 value={pointsManager.state.points}
-                border
+                border={!props.readonly}
                 readonly={props.readonly}
                 onChange={(value, e) => {
                   pointsManager.actions.setPoints(value);
@@ -178,7 +178,7 @@ export function BlockPointCounter(
                   <ContentEditable
                     data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
                     value={props.block.meta.max ?? ""}
-                    border
+                    border={!props.readonly}
                     readonly={props.readonly}
                     onChange={(newMax, e) => {
                       pointsManager.actions.setMaxPoints(newMax);

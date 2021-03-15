@@ -17,6 +17,7 @@
 - [ ] new player row
 - [ ] index card label after drag and drop
 - [ ] persist character from character sheet
+- [ ] fix: can click skill of other character
 
 - [ ] draw area toggle on scene ?
 - [ ] text on slot tracker ?

@@ -114,7 +114,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
         const shouldUpdate = characterLastUpdate >= currentCharacterLastUpdated;
 
         if (c.id === character.id && shouldUpdate) {
-          console.debug("UPDATE IF EXISTS", { shouldUpdate, name: c.name });
           return character;
         }
         return c;

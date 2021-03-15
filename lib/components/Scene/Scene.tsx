@@ -186,6 +186,7 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.state.scene.gm,
     ...sceneManager.state.scene.players,
   ];
+
   const controllablePlayerIds = everyone
     .filter((player) => {
       if (isGM) {

@@ -325,7 +325,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/blog.png"
           />
         ),
-        description: "Check-out the team's blog to know what's new about Fari.",
+        description: "Check-out the team's blog to see what's new about Fari.",
         ctaLabel: "Read Now",
         to: "/blog",
       },
