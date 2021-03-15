@@ -464,7 +464,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                   ]),
                   "&:hover": {
                     transform: isSmall ? undefined : "scale(1.005)",
-                    boxShadow: isSmall ? undefined : theme.shadows[4],
+                    boxShadow: isSmall ? undefined : theme.shadows[1],
                   },
                 })}
               >

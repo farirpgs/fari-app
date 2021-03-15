@@ -245,7 +245,7 @@ export const CharacterV3Dialog: React.FC<{
               padding: "0",
             })}
           >
-            <Container maxWidth="md">
+            <Container maxWidth="md" className={css({ padding: ".5rem" })}>
               <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
             </Container>
           </DialogActions>
@@ -622,7 +622,7 @@ export const CharacterV3Dialog: React.FC<{
         <Grid
           container
           wrap="nowrap"
-          spacing={2}
+          spacing={1}
           justify="space-between"
           alignItems="center"
         >
@@ -679,7 +679,6 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
           </Grid>
         </Grid>
-        <Grid container wrap="nowrap" spacing={2} justify="flex-end" />
       </>
     );
   }
