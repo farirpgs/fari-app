@@ -259,15 +259,16 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     label: v2.skillsLabel ?? "Skills",
     visibleOnCard: true,
     position: Position.Right,
-
     blocks: v2.skills.map((a) => {
       return {
         id: Id.generate(),
         type: BlockType.Skill,
-        meta: {},
+        meta: {
+          commands: ["1dF", "1dF", "1dF", "1dF"],
+        },
         label: a.name,
         value: a.value,
-      };
+      } as IBlock & ISkillBlock;
     }),
   });
 

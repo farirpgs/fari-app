@@ -39,7 +39,7 @@ export const Srds: React.FC = (props) => {
     <div>
       <Heading
         icon={MenuBookIcon}
-        title={"Fate System Reference Documents (SRDs)"}
+        title={"Fate System Reference Documents"}
         subtitle="Getting Started"
       />
       <SrdItems />

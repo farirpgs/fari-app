@@ -384,8 +384,8 @@ export const Page: React.FC<{
             </RouterLink>
 
             {isLive && (
-              <Box px=".25rem">
-                <Grid container alignItems="center" spacing={1} wrap="nowrap">
+              <Box>
+                <Grid container alignItems="center" spacing={3} wrap="nowrap">
                   <Grid item>
                     {props.live === LiveMode.Connecting && (
                       <SignalWifi0BarIcon />

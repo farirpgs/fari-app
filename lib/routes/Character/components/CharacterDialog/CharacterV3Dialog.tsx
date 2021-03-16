@@ -58,7 +58,6 @@ import {
   IDiceRollWithBonus,
   IRollDiceOptions,
 } from "../../../../domains/dice/Dice";
-import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -131,12 +130,12 @@ export const CharacterV3Dialog: React.FC<{
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColor = useTextColors(theme.palette.background.paper)
     .primary;
-  const lightBackground = useLightBackground();
+
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
 
   function onSave() {
-    const updatedCharacter = characterManager.actions.sanitizeCharacter();
+    const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
     logger.info(`CharacterDialog:onSave`);
@@ -653,34 +652,38 @@ export const CharacterV3Dialog: React.FC<{
           alignItems="center"
         >
           {!props.readonly && (
-            <Grid item xs={12} sm={6}>
-              <FormControlLabel
-                // TODO: text
-                label="Advanced Mode"
-                control={
-                  <Switch
-                    color="primary"
-                    checked={advanced}
-                    onChange={handleOnToggleAdvancedMode}
-                  />
-                }
-              />
-            </Grid>
-          )}
-          {props.onToggleSync && (
-            <Grid item xs={12} sm={6}>
-              <FormControlLabel
-                // TODO: text
-                label="Sync"
-                control={
-                  <Switch
-                    color="primary"
-                    checked={props.synced ?? false}
-                    disabled={props.synced}
-                    onChange={props.onToggleSync}
-                  />
-                }
-              />
+            <Grid item container xs={12} sm={6}>
+              <Grid item>
+                <FormControlLabel
+                  // TODO: text
+                  label="Advanced Mode"
+                  control={
+                    <Switch
+                      color="primary"
+                      checked={advanced}
+                      onChange={handleOnToggleAdvancedMode}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item>
+                {props.onToggleSync && (
+                  <Grid item>
+                    <FormControlLabel
+                      // TODO: text
+                      label="Sync"
+                      control={
+                        <Switch
+                          color="primary"
+                          checked={props.synced ?? false}
+                          disabled={props.synced}
+                          onChange={props.onToggleSync}
+                        />
+                      }
+                    />
+                  </Grid>
+                )}
+              </Grid>
             </Grid>
           )}
 

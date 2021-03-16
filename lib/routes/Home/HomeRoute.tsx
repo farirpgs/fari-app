@@ -90,6 +90,12 @@ export const HomeRoute: React.FC<{}> = (props) => {
         <LightBox px="2rem" py="5rem">
           <Container maxWidth="lg">{renderSecondActionCards()}</Container>
         </LightBox>
+        <DarkBox px="2rem" py="5rem">
+          <Container maxWidth="sm">{renderPatrons()}</Container>
+        </DarkBox>
+        <LightBox px="2rem" py="5rem">
+          <Container maxWidth="lg">{renderThirdActionCards()}</Container>
+        </LightBox>
         <DarkBox px="2rem" py="2rem">
           <Container maxWidth="md">
             <Box pb="2rem">
@@ -102,11 +108,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </Container>
         </DarkBox>
         <LightBox px="2rem" py="5rem">
-          <Container maxWidth="sm">{renderPatrons()}</Container>
-        </LightBox>
-        <DarkBox px="2rem" py="5rem">
           <Container maxWidth="sm">{renderSupport()}</Container>
-        </DarkBox>
+        </LightBox>
       </Box>
     </Page>
   );
@@ -149,7 +152,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </FateLabel>
         </Box>
 
-        <Box py=".5rem">
+        <Box my=".5rem">
           <Grid container spacing={1} justify="center">
             {Patrons.map((patron, i) => {
               const isLast = i === Patrons.length - 1;
@@ -167,6 +170,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 </React.Fragment>
               );
             })}
+          </Grid>
+        </Box>
+        <Box my="1rem">
+          <Grid container item justify="center">
+            <Patreon />
           </Grid>
         </Box>
       </Box>
@@ -279,6 +287,29 @@ export const HomeRoute: React.FC<{}> = (props) => {
           charactersManager.actions.openManager(ManagerMode.Manage);
         },
       },
+
+      {
+        label: "SRDs",
+        description: "Read the Fate SRDs, conveniently available here.",
+        icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
+          />
+        ),
+        ctaLabel: "Read Now",
+        to: "/srds",
+      },
+    ];
+    return (
+      <Box>
+        <HomeRouteCards cards={cards} />
+      </Box>
+    );
+  }
+  function renderSecondActionCards() {
+    const cards: Array<IHomeRouteCard> = [
       {
         label: "Dice Roller",
         description:
@@ -292,28 +323,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
         ),
         ctaLabel: "Roll some dice",
         to: "/dice",
-      },
-    ];
-    return (
-      <Box>
-        <HomeRouteCards cards={cards} />
-      </Box>
-    );
-  }
-  function renderSecondActionCards() {
-    const cards: Array<IHomeRouteCard> = [
-      {
-        label: "Blog",
-        icon: (props: { className: string }) => (
-          // https://icons8.com/icons/plasticine
-          <img
-            className={props.className}
-            src="https://img.icons8.com/plasticine/100/000000/comments.png"
-          />
-        ),
-        description: "Check-out the team's blog to see what's new about Fari.",
-        ctaLabel: "Read Now",
-        to: "/blog",
       },
       {
         label: "Play Solo",
@@ -329,6 +338,30 @@ export const HomeRoute: React.FC<{}> = (props) => {
         ctaLabel: "Consult the Oracle",
         to: "/oracle",
       },
+    ];
+    return (
+      <Box>
+        <HomeRouteCards cards={cards} />
+      </Box>
+    );
+  }
+
+  function renderThirdActionCards() {
+    const cards: Array<IHomeRouteCard> = [
+      {
+        label: "Blog",
+        icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/comments.png"
+          />
+        ),
+        description: "Check-out the team's blog to see what's new about Fari.",
+        ctaLabel: "Read Now",
+        to: "/blog",
+      },
+
       {
         label: "Wiki",
         icon: (props: { className: string }) => (

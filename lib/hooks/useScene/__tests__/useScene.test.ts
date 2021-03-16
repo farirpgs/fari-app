@@ -925,6 +925,9 @@ function mockUseCharacters() {
       closeManager: jest.fn(),
       openManager: jest.fn(),
     },
+    selectors: {
+      isInStorage: jest.fn(),
+    },
   } as ReturnType<typeof useCharacters>;
   return () => {
     return result;

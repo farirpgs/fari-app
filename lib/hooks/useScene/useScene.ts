@@ -564,15 +564,16 @@ export function useScene(props: IProps) {
   function updatePlayerCharacter(
     id: string,
     character: ICharacter,
-    updateHiddenFields = false
+    loadCharacterHiddenFieldsInPlayer = false
   ) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
+
         everyone.forEach((p) => {
           if (p.id === id) {
             p.character = character;
-            if (updateHiddenFields) {
+            if (loadCharacterHiddenFieldsInPlayer) {
               p.playedDuringTurn = character.playedDuringTurn ?? false;
             }
           }
@@ -581,10 +582,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerCharacterWithHiddenFields(
-    id: string,
-    character: ICharacter
-  ) {
+  function loadPlayerCharacter(id: string, character: ICharacter) {
     updatePlayerCharacter(id, character, true);
   }
 
@@ -763,7 +761,7 @@ export function useScene(props: IProps) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
-      updatePlayerCharacterWithHiddenFields,
+      loadPlayerCharacter: loadPlayerCharacter,
       updateDrawAreaObjects,
       toggleAspectPinned,
       setNotes,

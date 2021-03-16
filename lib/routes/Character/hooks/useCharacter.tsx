@@ -10,7 +10,7 @@ import {
   ICharacter,
   IPage,
   ISlotTrackerBlock,
-  Position
+  Position,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -528,7 +528,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function sanitizeCharacter() {
+  function getCharacterWithNewTimestamp() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
         return;
@@ -569,7 +569,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       removeBlockBox: removeCheckboxFieldValue,
       toggleCheckboxFieldValue,
       setBlockBoxLabel: renameCheckboxFieldValue,
-      sanitizeCharacter,
+      getCharacterWithNewTimestamp: getCharacterWithNewTimestamp,
     },
   };
 }

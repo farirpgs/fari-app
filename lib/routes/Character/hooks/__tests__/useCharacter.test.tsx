@@ -30,12 +30,12 @@ describe("useCharacter", () => {
     act(() => {
       result.current.actions.setName("Luke Skywalker");
     });
-    expect(result.current.actions.sanitizeCharacter().name).toEqual(
+    expect(result.current.actions.getCharacterWithNewTimestamp().name).toEqual(
       "Luke Skywalker"
     );
-    expect(result.current.actions.sanitizeCharacter().lastUpdated).not.toEqual(
-      1
-    );
+    expect(
+      result.current.actions.getCharacterWithNewTimestamp().lastUpdated
+    ).not.toEqual(1);
   });
 
   describe("sync props with state", () => {

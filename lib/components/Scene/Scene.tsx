@@ -218,11 +218,18 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.addOfflineCharacter(character);
   };
 
-  const handlePlayerLoadCharacter = (character: ICharacter) => {
-    connectionsManager?.actions.sendToHost<IPeerActions>({
-      action: "load-character",
-      payload: character,
-    });
+  const handleLoadCharacterForPlayer = (
+    playerId: string,
+    character: ICharacter
+  ) => {
+    if (isGM) {
+      sceneManager.actions.loadPlayerCharacter(playerId, character);
+    } else {
+      connectionsManager?.actions.sendToHost<IPeerActions>({
+        action: "load-character",
+        payload: character,
+      });
+    }
   };
 
   const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
@@ -529,7 +536,9 @@ export const Scene: React.FC<IProps> = (props) => {
                   onLoadCharacterSheet={() => {
                     charactersManager.actions.openManager(
                       ManagerMode.Use,
-                      handlePlayerLoadCharacter
+                      (character) => {
+                        handleLoadCharacterForPlayer(player.id, character);
+                      }
                     );
                   }}
                   onDiceRoll={(options: IRollDiceOptions) => {
