@@ -29,7 +29,7 @@ export const SheetHeader: React.FC<{
   position: Position;
   helpLink: string | undefined;
   pages: Array<IPage> | undefined;
-  editing: boolean;
+  advanced: boolean;
   onLabelChange?: (newLabel: string) => void;
   onRemove: () => void;
   onMoveUp: () => void;
@@ -44,7 +44,12 @@ export const SheetHeader: React.FC<{
   const [anchorEl, setAnchorEl] = React.useState<any>(null);
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+
   const sheetHeader = css({
+    label: "SheetHeader-box",
+    // Hexagone
+    // https://bennettfeely.com/clippy/
+    clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
     background: headerBackgroundColors.primary,
     color: headerColor,
     width: "100%",
@@ -63,7 +68,13 @@ export const SheetHeader: React.FC<{
 
   return (
     <Box className={sheetHeader}>
-      <Grid container justify="space-between" wrap="nowrap" spacing={1}>
+      <Grid
+        container
+        justify="space-between"
+        wrap="nowrap"
+        spacing={1}
+        alignItems="center"
+      >
         {props.helpLink && (
           <Grid item>
             <IconButton
@@ -80,13 +91,13 @@ export const SheetHeader: React.FC<{
         <Grid item xs>
           <FateLabel
             className={css({
-              fontSize: "1.2rem",
+              fontSize: "1rem",
             })}
           >
             <ContentEditable
               data-cy={`character-dialog.${props.label}.label`}
-              readonly={!props.editing || !props.onLabelChange}
-              border={props.editing && !!props.onLabelChange}
+              readonly={!props.advanced || !props.onLabelChange}
+              border={props.advanced && !!props.onLabelChange}
               borderColor={headerColor}
               value={props.label}
               onChange={(newLabel) => {
@@ -95,7 +106,7 @@ export const SheetHeader: React.FC<{
             />
           </FateLabel>
         </Grid>
-        {props.editing && (
+        {props.advanced && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.visible-on-card")}>
               <IconButton
@@ -116,7 +127,7 @@ export const SheetHeader: React.FC<{
           </Grid>
         )}
 
-        {props.editing && (
+        {props.advanced && (
           <Grid item>
             {/* TODO: text */}
             <Tooltip title={"Move"}>
@@ -131,7 +142,7 @@ export const SheetHeader: React.FC<{
             </Tooltip>
           </Grid>
         )}
-        {props.editing && (
+        {props.advanced && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.remove-section")}>
               <IconButton

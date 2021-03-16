@@ -1,6 +1,6 @@
 # Introduction
 
-<page-meta author="RPDeshaies" description="Everything you need to know to use Fari effectively."></page-meta>
+<page-meta author="René-Pier Deshaies-Gélinas" description="Everything you need to know to use Fari effectively."></page-meta>
 
 Fari might seem like a simple application at first, but there a lot of more advanced features that you can leverage to boost your Fate online sessions to the next level.
 
@@ -8,15 +8,108 @@ This Wiki will go over the basic feature as well as the more advanced use cases 
 
 > Have an idea and want to contribute to this wiki ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
+# Playing
+
+When playing in real life, you go to you friend's house, sit at their table and just get started immediately.
+
+Playing your favorite TTRPG with Fari isn't more complicated than that, though there are still a couple of things you should know before getting started.
+
+## Online VS Offline
+
+To start a new game session, Fari offers you the following two options:
+
+- Playing Online
+- Player Offline
+
+### Online
+
+When you play online, Fari will open a new connection with a server to authenticate you and then give you access to a unique link that you can send to your friends.
+
+Sharing that link with people will give them access to your game
+
+![Copying a Game Link](https://gyazo.com/d00cf8bf9b69416ccc5e29c5539ce719.png)
+
+After they entered their name and joined a game, every modification that you do the game will be synced with all the players using something called `peer to peer communication` using the `WebRTC` protocol.
+
+The data that is synced includes things like the index card, the drawing pad and even dice rolls.
+
+![Joining a Game](https://gyazo.com/c3c4a71bfc268c8739a016a07756f122.png)
+
+### Offline
+
+The Offline mode is useful if everyone are physically in the same room but the GM still wants to use Fari to manage their Scenes.
+
+When playing in Offline mode, Fari won't connect to its server and won't generate the unique link cited above. It will instead just store everything locally temporarily.
+
+This mode is also useful if for some reasons, some of your players can't connect to your Online game session. See more about that below.
+
+> #### Issues When Joining a Game
+>
+> Some users might experience issues when trying to join an Online game session.
+>
+> If that is the case for you or one of your player, you should look into why this is happening here.
+>
+> [Connection Issues | Fari Wiki](/fari-wiki/connection-issues)
+
+## Player: Choose your Character
+
+When a player joins an Online game session, they don't have a character linked to them yet.
+
+Kind of like in real life, the player needs to pull their character sheet out of their bag and put it on the table.
+
+To do that, a player simply has to click on the `Add a Character Sheet` link on the left of the screen.
+
+![Add A Character Sheet](https://gyazo.com/5b88a09e2fe82674694b0366960b10dc.png)
+
+You then have the ability to do three things:
+
+- `Select` an existing character from the list.
+- Create a `New` Character.
+- `Import` a character based off a template your GM might have given you.
+
+Once that is done, you are ready to play!
+
+## GM: Managing Game Scenes
+
+### New Scenes
+
+When you start either an Online or Offline game, Fari creates a `New Empty Scene`.
+
+From there, you can get started and start playing right away, but as you play, your players will move forward in the story and you will want to get a new scene going.
+
+If so, you can create a `New Empty Scene` again by pressing the `New Scene` button.
+
+![GM Controls](https://gyazo.com/32f320a4c24b5f341c8b13ce290bf768.png)
+
+### Saving
+
+During a game session, there a very high probably that have to cancel the session early, but you probably don't want to loose your current scene and all the index cards you've added so far.
+
+No worries, simply click the `Save Scene` button and Fari will save your scene so that you can load it in another game session.
+
+### Loading Scenes
+
+Wether you had to leave your last game session early or you've prepared scenes in advance for tonights game, Fari lets you load scenes on the fly during your session so that you are always on top of your game.
+
+Use the `...` menu on the right and either click `Load Scene` or `Clone And Load Scene`
+
+![Loading a Scene](https://gyazo.com/5f093ab4cdf5783d1f61818d1120251f.png)
+
+> #### Load VS Clone and Load
+>
+> Everytime you create something in Fari, Fari creates a unique identifier and attach it to what you created.
+>
+> When you `Load a Scene`, you are truly loading _this_ scene. Which means that if you click `Save` during your game session, you will modify the scene you loaded.
+>
+> When you `Clone and Load` a scene, Fari will clone that scene and assign it a new unique identifier. So modifications done during the game session will be done on the copy of the scene and not the original.
+>
+> This can be useful if for example you want to have a "Scene Template" that you want to use or something along those lines.
+
 # Managing Scenes
 
 🚧 👷 🚧
 
 # Managing Characters
-
-🚧 👷 🚧
-
-# Playing Online
 
 🚧 👷 🚧
 

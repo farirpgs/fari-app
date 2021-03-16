@@ -1,6 +1,6 @@
 # Changelog
 
-<page-meta author="RPDeshaies" description="Detailed technical changelog"></page-meta>
+<page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 

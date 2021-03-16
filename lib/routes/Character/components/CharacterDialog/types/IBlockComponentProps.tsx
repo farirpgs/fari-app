@@ -5,7 +5,7 @@ import {
 } from "../../../../../domains/character/types";
 
 export type IBlockComponentProps<TBlockType extends IBlockTypes> = {
-  editing: boolean;
+  advanced: boolean;
   readonly: boolean | undefined;
   pageIndex: number;
   sectionIndex: number;

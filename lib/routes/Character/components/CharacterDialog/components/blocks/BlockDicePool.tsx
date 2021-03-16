@@ -36,7 +36,7 @@ export function BlockDicePool(
 ) {
   const theme = useTheme();
   const hasCommands = !!props.block.meta.commands?.length;
-  const canRoll = !props.editing && !props.readonly && hasCommands;
+  const canRoll = !props.advanced && !props.readonly && hasCommands;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
 
   const blockCommandGroups = CommandGroups.getCommandGroupFromBlock(
@@ -52,8 +52,8 @@ export function BlockDicePool(
             <Grid item xs>
               <FateLabel display="inline">
                 <ContentEditable
-                  readonly={!props.editing}
-                  border={props.editing}
+                  readonly={!props.advanced}
+                  border={props.advanced}
                   data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
                   value={props.block.label}
                   onChange={(value) => {

@@ -127,6 +127,10 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
+  function isInStorage(id: string | undefined) {
+    return characters.some((c) => c.id === id);
+  }
+
   return {
     state: {
       mode,
@@ -141,6 +145,9 @@ export function useCharacters(props?: { localStorage: Storage }) {
       upsert,
       updateIfExists,
       remove,
+    },
+    selectors: {
+      isInStorage,
     },
   };
 }

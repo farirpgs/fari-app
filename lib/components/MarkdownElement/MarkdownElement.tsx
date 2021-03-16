@@ -14,23 +14,7 @@ const styles = (theme: Theme) => {
     theme.palette.type === "light"
       ? lighten(theme.palette.primary.light, 0.85)
       : darken(theme.palette.primary.light, 0.75);
-  // const h1Background =
-  //   theme.palette.type === "dark"
-  //     ? theme.palette.background.paper
-  //     : theme.palette.primary.main;
 
-  // const h1Style = {
-  //   "clipPath": "polygon(2% 0, 0% 20%, 0% 100%, 98% 100%, 100% 80%, 100% 0)",
-  //   "padding": ".5rem 1rem",
-  //   "border": `3px solid ${theme.palette.primary.main}`,
-  //   "background": h1Background,
-  //   "color": theme.palette.getContrastText(h1Background),
-  //   "& .anchor": {
-  //     backgroundImage: getAnchorSvg(
-  //       theme.palette.type === "dark" ? "white" : "white"
-  //     ),
-  //   },
-  // };
   const headerStyle = {
     scrollMarginTop: `${scrollMarginTop}px`,
     display: "flex",
@@ -308,6 +292,13 @@ const styles = (theme: Theme) => {
         fontSize: "1.3rem",
         lineHeight: Font.lineHeight(1.3),
         marginBottom: "1rem",
+      },
+      "& .fari-image": {
+        border: `1px solid ${
+          theme.palette.type === "light" ? "#e0e0e0" : "#676767"
+        }`,
+        margin: "0 0 1rem 0",
+        padding: "0 2rem",
       },
       "& .page-meta": {
         "borderLeft": `3px solid ${theme.palette.text.primary}`,

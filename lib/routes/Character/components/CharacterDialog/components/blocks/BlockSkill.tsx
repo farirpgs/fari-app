@@ -16,7 +16,6 @@ import {
   IDiceCommandNames,
   IRollDiceOptions,
 } from "../../../../../../domains/dice/Dice";
-import { useTextColors } from "../../../../../../hooks/useTextColors/useTextColors";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
 import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
 import {
@@ -36,8 +35,7 @@ export function BlockSkill(
   }
 ) {
   const theme = useTheme();
-  const tooltipBackground = "#182026";
-  const tooltipColor = useTextColors(tooltipBackground);
+
   const commandGroupsMatch =
     props.block.meta?.commands?.map((commandId) => {
       return AllDiceCommandGroups.find(
@@ -49,14 +47,14 @@ export function BlockSkill(
   const skillDescription =
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
 
-  const canRoll = !props.editing;
+  const canRoll = !props.advanced && !props.readonly;
 
   const skillLabel = (
     <FateLabel className={css({ display: "inline-block" })}>
       <ContentEditable
         data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-        readonly={!props.editing}
-        border={props.editing}
+        readonly={!props.advanced}
+        border={props.advanced}
         value={props.block.label}
         onChange={(value) => {
           props.onLabelChange(value);
@@ -106,8 +104,8 @@ export function BlockSkill(
               >
                 <ContentEditable
                   data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-                  border={props.editing}
-                  readonly={!props.editing}
+                  border={props.advanced}
+                  readonly={!props.advanced}
                   className={css({
                     cursor: !canRoll ? "inherit" : "pointer",
                   })}
@@ -121,7 +119,7 @@ export function BlockSkill(
           </Grid>
           <Grid item className={css({ flex: "1 0 auto" })}>
             {skillLabel}
-            {!props.editing && (
+            {!props.advanced && (
               <>
                 {skillDescription && (
                   <>

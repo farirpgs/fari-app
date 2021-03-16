@@ -225,6 +225,10 @@ export const Scene: React.FC<IProps> = (props) => {
     });
   };
 
+  const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
+    charactersManager.actions.upsert(character);
+  };
+
   const handleSetRoll = (result: IDiceRollWithBonus) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
@@ -453,6 +457,10 @@ export const Scene: React.FC<IProps> = (props) => {
           {everyone.map((player, playerRowIndex) => {
             const isMe = me?.id === player.id;
             const canControl = controllablePlayerIds.includes(player.id);
+            const isCharacterInStorage = charactersManager.selectors.isInStorage(
+              player.character?.id
+            );
+
             return (
               <React.Fragment key={player.id}>
                 <CharacterV3Dialog
@@ -491,9 +499,20 @@ export const Scene: React.FC<IProps> = (props) => {
                   onClose={() => {
                     setCharacterDialogPlayerId(undefined);
                   }}
+                  synced={isCharacterInStorage}
+                  onToggleSync={() => {
+                    handleOnToggleCharacterSync(player.character);
+                  }}
                 />
                 <PlayerRow
                   data-cy={`scene.player-row.${playerRowIndex}`}
+                  permissions={{
+                    canRoll: true,
+                    canUpdatePoints: true,
+                    canUpdateInitiative: true,
+                    canLoadCharacterSheet: true,
+                    canRemove: true,
+                  }}
                   key={player.id}
                   highlight={isMe}
                   readonly={!canControl}
@@ -1183,6 +1202,14 @@ export const Scene: React.FC<IProps> = (props) => {
               <Menu
                 anchorEl={$menu.current}
                 keepMounted
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
                 open={menuOpen}
                 onClose={() => {
                   setMenuOpen(false);

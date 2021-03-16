@@ -66,8 +66,9 @@ export const CharacterRoute: React.FC<{
   const rollDice = useRollDice();
   const rollWithCommands = useRollDiceWithCommands();
 
-  const query = useQuery<"dialog">();
+  const query = useQuery<"dialog" | "readonly">();
   const dialogMode = query.get("dialog") === "true";
+  const readonly = query.get("readonly") === "true";
 
   function handleOnSkillClick(
     options: IRollDiceOptions,
@@ -118,6 +119,7 @@ export const CharacterRoute: React.FC<{
             open={!!selectedCharacter}
             character={selectedCharacter}
             dialog={dialogMode || false}
+            readonly={readonly}
             pool={poolManager.state.pool}
             rolls={rolls}
             onSkillClick={handleOnSkillClick}

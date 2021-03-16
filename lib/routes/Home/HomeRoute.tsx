@@ -250,15 +250,15 @@ export const HomeRoute: React.FC<{}> = (props) => {
     const cards: Array<IHomeRouteCard> = [
       {
         label: "Scenes",
-        description: "Play without having to worry about maps and grids.",
-        // https://icons8.com/icon/set/alps/ios
+        description: "Write in Scenes in advance and load them during a game.",
         icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
           <img
             className={props.className}
-            src="https://img.icons8.com/dusk/100/000000/alps.png"
+            src="https://img.icons8.com/plasticine/100/000000/alps.png"
           />
         ),
-        ctaLabel: "Write a Scene",
+        ctaLabel: "Write a new Scene",
         onClick: () => {
           scenesManager.actions.openManager(ManagerMode.Manage);
         },
@@ -266,11 +266,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
       {
         label: "Characters",
         description: "Flexible character sheets that support any TTRPG system.",
-        // https://icons8.com/icon/nAUtY5a4Ep9R/cute-monster
         icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
           <img
             className={props.className}
-            src="https://img.icons8.com/dusk/100/000000/cute-monster.png"
+            src="https://img.icons8.com/plasticine/100/000000/wizard.png"
           />
         ),
         ctaLabel: "Create your first Character",
@@ -281,13 +281,12 @@ export const HomeRoute: React.FC<{}> = (props) => {
       {
         label: "Dice Roller",
         description:
-          "From Fate to d20, we've got you covered with our fair dice roller.",
-        // icon: Icons.FateDice,
-        // https://icons8.com/icon/nAUtY5a4Ep9R/dice
+          "From Fate dice to d20, we've got you covered with our fair dice roller.",
         icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
           <img
             className={props.className}
-            src="https://img.icons8.com/dusk/100/000000/dice.png"
+            src="https://img.icons8.com/plasticine/100/000000/dice.png"
           />
         ),
         ctaLabel: "Roll some dice",
@@ -303,31 +302,44 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSecondActionCards() {
     const cards: Array<IHomeRouteCard> = [
       {
+        label: "Blog",
+        icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/comments.png"
+          />
+        ),
+        description: "Check-out the team's blog to see what's new about Fari.",
+        ctaLabel: "Read Now",
+        to: "/blog",
+      },
+      {
         label: "Play Solo",
         description:
           "Use the Oracle to find out what your next adventure has in store for you.",
-        // https://icons8.com/icon/N752GNT8ctkJ/magic-crystal-ball
         icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
           <img
             className={props.className}
-            src="https://img.icons8.com/plasticine/100/000000/magic-crystal-ball.png"
+            src="https://img.icons8.com/plasticine/100/000000/crystal-ball.png"
           />
         ),
         ctaLabel: "Consult the Oracle",
         to: "/oracle",
       },
       {
-        label: "Blog",
-        // https://icons8.com/icon/set/blog%20post/ios
+        label: "Wiki",
         icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
           <img
             className={props.className}
-            src="https://img.icons8.com/plasticine/100/000000/blog.png"
+            src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
-        description: "Check-out the team's blog to see what's new about Fari.",
+        description: "Everything you need to become a Fari power-user.",
         ctaLabel: "Read Now",
-        to: "/blog",
+        to: "/fari-wiki",
       },
     ];
     return (

@@ -28,7 +28,7 @@ export function BlockSlotTracker(
 ) {
   const { t } = useTranslate();
   const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.editing;
+    !!previewContentEditable({ value: props.block.label }) || props.advanced;
   return (
     <>
       <Box>
@@ -38,12 +38,12 @@ export function BlockSlotTracker(
               <Grid item className={css({ flex: "1 1 auto" })}>
                 <FateLabel
                   display="inline"
-                  align={props.editing ? "inherit" : "center"}
+                  align={props.advanced ? "inherit" : "center"}
                 >
                   <ContentEditable
                     data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                    readonly={!props.editing}
-                    border={props.editing}
+                    readonly={!props.advanced}
+                    border={props.advanced}
                     value={props.block.label}
                     onChange={(value) => {
                       props.onLabelChange(value);
@@ -51,7 +51,7 @@ export function BlockSlotTracker(
                   />
                 </FateLabel>
               </Grid>
-              {props.editing && (
+              {props.advanced && (
                 <>
                   <Grid item>
                     <Tooltip title={t("character-dialog.control.remove-box")}>
@@ -88,7 +88,7 @@ export function BlockSlotTracker(
         <Grid container justify="center" spacing={1}>
           {props.block.value.map((box, boxIndex) => {
             const isBoxLabelVisible =
-              !!previewContentEditable({ value: box.label }) || props.editing;
+              !!previewContentEditable({ value: box.label }) || props.advanced;
 
             return (
               <Grid item key={boxIndex}>
@@ -118,8 +118,8 @@ export function BlockSlotTracker(
                     <FateLabel className={css({ textAlign: "center" })}>
                       <ContentEditable
                         data-cy={`character-dialog.${props.section.label}.${props.block.label}.box.${boxIndex}.label`}
-                        readonly={!props.editing}
-                        border={props.editing}
+                        readonly={!props.advanced}
+                        border={props.advanced}
                         value={box.label}
                         onChange={(value) => {
                           props.onBoxLabelChange(boxIndex, value);

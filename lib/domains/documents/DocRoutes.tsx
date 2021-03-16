@@ -314,9 +314,9 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     sideBar: {
       "+Fari Wiki": ["introduction"],
       "+Getting Started": [
+        "playing",
         "managing-scenes",
         "managing-characters",
-        "playing-online",
         "tips-and-tricks",
       ],
     },

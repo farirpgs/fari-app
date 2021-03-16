@@ -579,7 +579,6 @@ export function useScene(props: IProps) {
         });
       })
     );
-    charactersManager.actions.updateIfExists(character);
   }
 
   function updatePlayerCharacterWithHiddenFields(

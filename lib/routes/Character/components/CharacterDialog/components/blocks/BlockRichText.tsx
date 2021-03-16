@@ -15,7 +15,7 @@ export function BlockRichText(
   props: IBlockComponentProps<IRichTextBlock> & {}
 ) {
   const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.editing;
+    !!previewContentEditable({ value: props.block.label }) || props.advanced;
   return (
     <>
       <Box>
@@ -26,8 +26,8 @@ export function BlockRichText(
                 <FateLabel display="inline">
                   <ContentEditable
                     data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                    readonly={!props.editing}
-                    border={props.editing}
+                    readonly={!props.advanced}
+                    border={props.advanced}
                     value={props.block.label}
                     onChange={(value) => {
                       props.onLabelChange(value);

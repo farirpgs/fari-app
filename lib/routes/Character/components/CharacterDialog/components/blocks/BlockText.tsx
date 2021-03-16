@@ -19,7 +19,7 @@ import { BlockToggleMeta } from "../BlockToggleMeta";
 
 export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.editing;
+    !!previewContentEditable({ value: props.block.label }) || props.advanced;
   const isSlotTrackerVisible = props.block.meta?.checked !== undefined;
 
   return (
@@ -30,8 +30,8 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
             <Grid item xs>
               <FateLabel display="inline">
                 <ContentEditable
-                  readonly={!props.editing}
-                  border={props.editing}
+                  readonly={!props.advanced}
+                  border={props.advanced}
                   data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
                   value={props.block.label}
                   onChange={(value) => {

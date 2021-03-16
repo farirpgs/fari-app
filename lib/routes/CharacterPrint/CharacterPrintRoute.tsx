@@ -161,7 +161,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                 <Box key={blockIndex} my=".5rem" px=".5rem">
                   {block.type === BlockType.Text && (
                     <BlockText
-                      editing={false}
+                      advanced={false}
                       readonly={true}
                       pageIndex={0}
                       sectionIndex={0}
@@ -175,7 +175,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                   )}
                   {block.type === BlockType.RichText && (
                     <BlockRichText
-                      editing={false}
+                      advanced={false}
                       readonly={true}
                       pageIndex={0}
                       sectionIndex={0}
@@ -189,7 +189,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                   )}
                   {block.type === BlockType.Skill && (
                     <BlockSkill
-                      editing={false}
+                      advanced={false}
                       readonly={true}
                       pageIndex={0}
                       sectionIndex={0}
@@ -204,7 +204,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                   )}
                   {block.type === BlockType.DicePool && (
                     <BlockDicePool
-                      editing={false}
+                      advanced={false}
                       readonly={true}
                       pageIndex={0}
                       sectionIndex={0}
@@ -220,7 +220,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                   )}
                   {block.type === BlockType.PointCounter && (
                     <BlockPointCounter
-                      editing={false}
+                      advanced={false}
                       readonly={true}
                       pageIndex={0}
                       sectionIndex={0}
@@ -235,7 +235,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
 
                   {block.type === BlockType.SlotTracker && (
                     <BlockSlotTracker
-                      editing={false}
+                      advanced={false}
                       readonly={true}
                       pageIndex={0}
                       sectionIndex={0}

@@ -58,6 +58,7 @@ import {
   IDiceRollWithBonus,
   IRollDiceOptions,
 } from "../../../../domains/dice/Dice";
+import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -113,6 +114,8 @@ export const CharacterV3Dialog: React.FC<{
   onPoolClick(element: IDicePoolElement): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
+  synced?: boolean;
+  onToggleSync?(): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -120,13 +123,15 @@ export const CharacterV3Dialog: React.FC<{
   const showCharacterCard = query.get("card") === "true";
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
-  const [editing, setEditing] = useState(false);
+  const [advanced, setAdvanced] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
+  const lightBackground = useLightBackground();
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
 
@@ -137,8 +142,8 @@ export const CharacterV3Dialog: React.FC<{
     logger.info(`CharacterDialog:onSave`);
   }
 
-  function handleOnToggleEditing() {
-    setEditing((prev) => !prev);
+  function handleOnToggleAdvancedMode() {
+    setAdvanced((prev) => !prev);
     logger.info(`CharacterDialog:onToggleAdvanced`);
   }
 
@@ -147,7 +152,7 @@ export const CharacterV3Dialog: React.FC<{
 
     if (confirmed) {
       characterManager.actions.loadTemplate(newTemplate);
-      setEditing(false);
+      setAdvanced(false);
       logger.info(
         `CharacterDialog:onLoadTemplate:${CharacterType[newTemplate]}`
       );
@@ -159,11 +164,11 @@ export const CharacterV3Dialog: React.FC<{
       const confirmed = confirm(t("character-dialog.close-confirmation"));
       if (confirmed) {
         props.onClose?.();
-        setEditing(false);
+        setAdvanced(false);
       }
     } else {
       props.onClose?.();
-      setEditing(false);
+      setAdvanced(false);
     }
   }
 
@@ -265,7 +270,7 @@ export const CharacterV3Dialog: React.FC<{
 
   function renderManagementActions() {
     return (
-      <Collapse in={editing}>
+      <Collapse in={advanced}>
         <Box>
           <Grid
             container
@@ -310,21 +315,27 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
+
     return (
       <Box>
         <Box mb="1rem">
-          <Grid container alignItems="center" wrap="nowrap" justify="center">
-            <Grid item xs={10}>
+          <Grid
+            container
+            alignItems="center"
+            wrap="nowrap"
+            justify="flex-start"
+          >
+            <Grid item xs={advanced ? 11 : 12}>
               <Tabs
                 value={tab}
                 variant="scrollable"
                 scrollButtons="auto"
                 classes={{
-                  root: css({
-                    borderBottom: `1px solid ${theme.palette.divider}`,
+                  flexContainer: css({
+                    borderBottom: `3px solid ${headerBackgroundColor}`,
                   }),
                   indicator: css({
-                    background: theme.palette.primary.main,
+                    // backgroundColor: lightBackground,
                   }),
                 }}
                 onChange={(e, newValue) => {
@@ -336,27 +347,42 @@ export const CharacterV3Dialog: React.FC<{
                     <Tab
                       disableRipple
                       key={page.id}
+                      className={css({
+                        background: headerBackgroundColor,
+                        color: headerColor,
+                        marginRight: ".5rem",
+                        // Pentagone
+                        // https://bennettfeely.com/clippy/
+                        clipPath:
+                          "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+                      })}
                       value={pageIndex.toString()}
                       label={
-                        <ContentEditable
-                          clickable
-                          value={page.label}
-                          readonly={!editing}
-                          border={editing}
-                          onChange={(newValue) => {
-                            characterManager.actions.renamePage(
-                              pageIndex,
-                              newValue
-                            );
-                          }}
-                        />
+                        <FateLabel
+                          className={css({
+                            fontSize: "1.2rem",
+                          })}
+                        >
+                          <ContentEditable
+                            clickable
+                            value={page.label}
+                            readonly={!advanced}
+                            border={advanced}
+                            onChange={(newValue) => {
+                              characterManager.actions.renamePage(
+                                pageIndex,
+                                newValue
+                              );
+                            }}
+                          />
+                        </FateLabel>
                       }
                     />
                   );
                 })}
               </Tabs>
             </Grid>
-            {editing && (
+            {advanced && (
               <Grid item>
                 <IconButton
                   onClick={() => {
@@ -372,7 +398,7 @@ export const CharacterV3Dialog: React.FC<{
             )}
           </Grid>
         </Box>
-        <Collapse in={editing}>
+        <Collapse in={advanced}>
           <Box mb=".5rem">
             <Grid container justify="space-around" alignItems="center">
               <Grid item>
@@ -424,10 +450,10 @@ export const CharacterV3Dialog: React.FC<{
           {pages?.map((page, pageIndex) => {
             const sectionStyle = css({
               label: "CharacterDialog-grid-section",
-              borderTop: `2px solid ${headerBackgroundColors.primary}`,
-              borderLeft: `2px solid ${headerBackgroundColors.primary}`,
-              borderRight: `2px solid ${headerBackgroundColors.primary}`,
-              borderBottom: `2px solid ${headerBackgroundColors.primary}`,
+              // borderTop: `2px solid ${headerBackgroundColors.primary}`,
+              // borderLeft: `2px solid ${headerBackgroundColors.primary}`,
+              // borderRight: `2px solid ${headerBackgroundColors.primary}`,
+              // borderBottom: `2px solid ${headerBackgroundColors.primary}`,
             });
             return (
               <TabPanel
@@ -439,7 +465,7 @@ export const CharacterV3Dialog: React.FC<{
                 })}
               >
                 <Box position="relative" mb="3rem">
-                  <Grid container>
+                  <Grid container spacing={1}>
                     <Grid item xs={12} md={6} className={sectionStyle}>
                       {renderSections(pageIndex, page.sections, Position.Left)}
                     </Grid>
@@ -488,7 +514,7 @@ export const CharacterV3Dialog: React.FC<{
   ) {
     const numberOfSections =
       sections?.filter((s) => s.position === position).length ?? 0;
-    const shouldRenderAddSectionButton = editing && numberOfSections === 0;
+    const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
 
     return (
       <>
@@ -508,7 +534,7 @@ export const CharacterV3Dialog: React.FC<{
                   pages={characterManager.state.character?.pages}
                   position={section.position}
                   helpLink={helpLink}
-                  editing={editing}
+                  advanced={advanced}
                   visibleOnCard={section.visibleOnCard}
                   onReposition={(newPosition) => {
                     characterManager.actions.repositionSection(
@@ -566,7 +592,7 @@ export const CharacterV3Dialog: React.FC<{
                 />
                 {renderSectionBlocks(pageIndex, sectionIndex, section)}
 
-                <Collapse in={editing}>
+                <Collapse in={advanced}>
                   <Box p=".5rem" mb=".5rem">
                     <Grid container justify="center" alignItems="center">
                       <Grid item>
@@ -629,12 +655,29 @@ export const CharacterV3Dialog: React.FC<{
           {!props.readonly && (
             <Grid item xs={12} sm={6}>
               <FormControlLabel
+                // TODO: text
                 label="Advanced Mode"
                 control={
                   <Switch
                     color="primary"
-                    checked={editing}
-                    onChange={handleOnToggleEditing}
+                    checked={advanced}
+                    onChange={handleOnToggleAdvancedMode}
+                  />
+                }
+              />
+            </Grid>
+          )}
+          {props.onToggleSync && (
+            <Grid item xs={12} sm={6}>
+              <FormControlLabel
+                // TODO: text
+                label="Sync"
+                control={
+                  <Switch
+                    color="primary"
+                    checked={props.synced ?? false}
+                    disabled={props.synced}
+                    onChange={props.onToggleSync}
                   />
                 }
               />
@@ -815,7 +858,7 @@ export const CharacterV3Dialog: React.FC<{
                 <BetterDnd
                   index={blockIndex}
                   type={section.label}
-                  readonly={!editing}
+                  readonly={!advanced}
                   className={css({
                     label: "CharacterDialog-block-dnd",
                     marginLeft: ".5rem",
@@ -845,7 +888,7 @@ export const CharacterV3Dialog: React.FC<{
                   >
                     {block.type === BlockType.Text && (
                       <BlockText
-                        editing={editing}
+                        advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
                         sectionIndex={sectionIndex}
@@ -880,7 +923,7 @@ export const CharacterV3Dialog: React.FC<{
                     )}
                     {block.type === BlockType.RichText && (
                       <BlockRichText
-                        editing={editing}
+                        advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
                         sectionIndex={sectionIndex}
@@ -915,7 +958,7 @@ export const CharacterV3Dialog: React.FC<{
                     )}
                     {block.type === BlockType.Skill && (
                       <BlockSkill
-                        editing={editing}
+                        advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
                         sectionIndex={sectionIndex}
@@ -953,7 +996,7 @@ export const CharacterV3Dialog: React.FC<{
                     )}
                     {block.type === BlockType.DicePool && (
                       <BlockDicePool
-                        editing={editing}
+                        advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
                         sectionIndex={sectionIndex}
@@ -992,7 +1035,7 @@ export const CharacterV3Dialog: React.FC<{
                     )}
                     {block.type === BlockType.PointCounter && (
                       <BlockPointCounter
-                        editing={editing}
+                        advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
                         sectionIndex={sectionIndex}
@@ -1028,7 +1071,7 @@ export const CharacterV3Dialog: React.FC<{
 
                     {block.type === BlockType.SlotTracker && (
                       <BlockSlotTracker
-                        editing={editing}
+                        advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
                         sectionIndex={sectionIndex}
@@ -1092,7 +1135,7 @@ export const CharacterV3Dialog: React.FC<{
                         }}
                       />
                     )}
-                    <Collapse in={editing}>
+                    <Collapse in={advanced}>
                       {renderBlockAdvancedOptions(
                         pageIndex,
                         sectionIndex,

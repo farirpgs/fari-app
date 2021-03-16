@@ -35,6 +35,13 @@ import {
 
 export const PlayerRow: React.FC<
   {
+    permissions: {
+      canRoll: boolean;
+      canUpdatePoints: boolean;
+      canUpdateInitiative: boolean;
+      canLoadCharacterSheet: boolean;
+      canRemove: boolean;
+    };
     player: IPlayer;
     readonly: boolean;
     renderControls: boolean;
