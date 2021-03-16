@@ -33,11 +33,12 @@ async function findTranslations(sourceFileLocations) {
           .join("")
           .split(")")
           .join("");
-        const [t, withoutT] = formatted;
+        const withoutT = formatted.substring(1);
         translationKeys.push(withoutT);
       });
     }
   });
+
   return translationKeys;
 }
 
@@ -55,7 +56,8 @@ async function updateTranslations(keys, translationFilesLocations) {
         [curr]: existingValue || "",
       };
     }, {});
-    await fs.writeFile(file.location, JSON.stringify(newData, null, 2));
+    // console.debug('newData', newData)
+    // await fs.writeFile(file.location, JSON.stringify(newData, null, 2));
   }
 }
 
