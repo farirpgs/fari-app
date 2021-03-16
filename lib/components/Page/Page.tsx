@@ -61,6 +61,7 @@ export const Page: React.FC<{
   maxWidth?: string;
   pb?: string;
   debug?: Record<string, string>;
+  hideHeaderLogo?: boolean;
   disableAutomaticScrollTop?: boolean;
 }> = (props) => {
   const history = useHistory();
@@ -79,6 +80,7 @@ export const Page: React.FC<{
   const zIndex = useZIndex();
   const highlight = useHighlight();
   const isLive = props.live !== undefined;
+
   useEffect(() => {
     if (props.gameId) {
       setGameId(props.gameId);
@@ -334,7 +336,7 @@ export const Page: React.FC<{
   }
 
   function renderHeader() {
-    const background = highlight.background;
+    const background = highlight.linearBackground;
     const color = highlight.color;
     return (
       <Box
@@ -378,6 +380,7 @@ export const Page: React.FC<{
                   height: "2.5rem",
                   marginRight: "1rem",
                   cursor: "pointer",
+                  opacity: props.hideHeaderLogo ? 0 : 1,
                 })}
                 src={appIcon}
               />

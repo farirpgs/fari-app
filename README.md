@@ -1,6 +1,8 @@
 <!--
 # TODO
 
+- [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
+
 - [x] new character sheet
 - [x] new character sheet Text
 - [x] new character sheet RichText
@@ -12,14 +14,15 @@
 - [x] Import inside Data route
 - [x] Import and Duplicate inside Data route
 - [-] player row
-  - [ ] fix DEFAULT POINT COUNTER SYNC
-- [ ] pool toggle on dice route
+  - [x] fix DEFAULT POINT COUNTER SYNC
+- [x] pool toggle on dice route
 - [ ] new player row
 - [ ] index card label after drag and drop
-- [ ] persist character from character sheet
+- [x] sync character from character sheet
+- [x] let GM add character sheets
 - [ ] fix: can click skill of other character
 
-- [ ] draw area toggle on scene ?
+- [x] draw area moved to tabs ?
 - [ ] text on slot tracker ?
 - [ ] fix rich text crash ?
 - [ ] highlight tab text on click ?

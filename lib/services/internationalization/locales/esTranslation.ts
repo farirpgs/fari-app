@@ -71,7 +71,6 @@ export const esTranslation: Record<
   "donation.patreon": `Conviértete en un patrón!`,
   "draw-route.meta.description": `Dibuja y dibuja tu escena con el panel de dibujo de Fari`,
   "draw-route.meta.title": `Dibujar`,
-  "home-route.heading": `Aplicación complementaria Fate Roleplaying Game`,
   "home-route.meta.description": `Fari es la mejor aplicación de asistencia para Fate RPG. ¡Juega escenas en tiempo real con tus amigos, lanzad los dados FUDGE y dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!`,
   "home-route.meta.title": `Asistente para Fate RPG`,
   "home-route.play-offline.button": `Iniciar Partida Offline`,

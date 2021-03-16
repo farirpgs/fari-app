@@ -3,9 +3,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
@@ -36,7 +35,7 @@ const SeelieSquireRoute = React.lazy(
   () => import("../../routes/SeelieSquire/SeelieSquireRoute")
 );
 
-export const LoadingRoute: React.FC = (props) => {
+export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
   const timeout = useRef<any | undefined>(undefined);
 
@@ -51,7 +50,7 @@ export const LoadingRoute: React.FC = (props) => {
   });
 
   return (
-    <Page displayDonation={false}>
+    <Page hideHeaderLogo displayDonation={false}>
       <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
@@ -64,9 +63,11 @@ export const LoadingRoute: React.FC = (props) => {
 };
 
 export const AppRouter = () => {
-  const { t } = useTranslate();
+  const location = useLocation();
+  const hideHeaderLogo = location.pathname === "/";
+
   return (
-    <Suspense fallback={<LoadingRoute />}>
+    <Suspense fallback={<LoadingRoute hideHeaderLogo={hideHeaderLogo} />}>
       <Switch>
         <Route
           exact
@@ -93,7 +94,14 @@ export const AppRouter = () => {
           exact
           path={"/dice"}
           render={(props) => {
-            return <DiceRoute />;
+            return <DiceRoute pool={false} />;
+          }}
+        />
+        <Route
+          exact
+          path={"/dice-pool"}
+          render={(props) => {
+            return <DiceRoute pool={true} />;
           }}
         />
         <Route

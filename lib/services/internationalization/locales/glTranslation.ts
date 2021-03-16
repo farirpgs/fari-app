@@ -72,7 +72,6 @@ export const glTranslation: Record<
   "donation.patreon": `Torna en mecenas!`,
   "draw-route.meta.description": `Esboza a túa escena usando o caderno de debuxo de Fari`,
   "draw-route.meta.title": `Debuxar`,
-  "home-route.heading": `Aplicación auxiliar do xogo de rol Fate`,
   "home-route.meta.description": `Fari é a mellor aplicación auxiliar para o xogo de rol Fate. Xoga as escenas en tempo real coas túas amizades, rola os dados e deixade voar a vosa imaxinación colectiva mentres tecedes historias memorábeis!`,
   "home-route.meta.title": `Auxiliar para o xogo de rol Fate`,
   "home-route.play-offline.button": `Comezar partida local`,

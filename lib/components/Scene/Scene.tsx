@@ -214,8 +214,8 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.cloneAndLoadNewScene(newScene);
   };
 
-  const handleGMAddCharacter = (character: ICharacter) => {
-    sceneManager.actions.addOfflineCharacter(character);
+  const handleGMAddOfflinePlayer = () => {
+    sceneManager.actions.addOfflinePlayer();
   };
 
   const handleLoadCharacterForPlayer = (
@@ -439,11 +439,8 @@ export const Scene: React.FC<IProps> = (props) => {
                           <Button
                             data-cy="scene.add-gm-character"
                             onClick={() => {
-                              charactersManager.actions.openManager(
-                                ManagerMode.Use,
-                                handleGMAddCharacter
-                              );
-                              logger.info("Scene:addCharacter:GM");
+                              handleGMAddOfflinePlayer();
+                              logger.info("Scene:addOfflinePlayer");
                             }}
                             variant="contained"
                             color="secondary"
@@ -514,15 +511,15 @@ export const Scene: React.FC<IProps> = (props) => {
                 <PlayerRow
                   data-cy={`scene.player-row.${playerRowIndex}`}
                   permissions={{
-                    canRoll: true,
-                    canUpdatePoints: true,
-                    canUpdateInitiative: true,
-                    canLoadCharacterSheet: true,
-                    canRemove: true,
+                    canRoll: canControl,
+                    canUpdatePoints: canControl,
+                    canUpdateInitiative: canControl,
+                    canLoadCharacterSheet: canControl && !player.isGM,
+                    canRemove: isGM && !player.isGM,
                   }}
+                  number={playerRowIndex + 1}
                   key={player.id}
                   highlight={isMe}
-                  readonly={!canControl}
                   renderControls={isGM}
                   player={player}
                   onPlayerRemove={() => {

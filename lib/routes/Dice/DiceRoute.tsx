@@ -17,7 +17,7 @@ import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const DiceRoute = () => {
+export function DiceRoute(props: { pool: boolean }) {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
@@ -27,10 +27,17 @@ export const DiceRoute = () => {
   const logger = useLogger();
   const roll = useRollDice();
 
-  useEffect(() => {
-    logger.info("Route:Dice");
-    setRollResult(roll({ pool: false }));
-  }, []);
+  useEffect(
+    function onLoad() {
+      if (!props.pool) {
+        logger.info("Route:Dice");
+        setRollResult(roll({ pool: props.pool }));
+      } else {
+        logger.info("Route:DicePool");
+      }
+    },
+    [props.pool]
+  );
 
   const setRollResult = (result: IDiceRollWithBonus) => {
     setRolls((draft) => {
@@ -40,7 +47,7 @@ export const DiceRoute = () => {
   };
 
   const handleRoll = () => {
-    setRollResult(roll({ pool: false }));
+    setRollResult(roll({ pool: props.pool }));
   };
 
   return (
@@ -58,7 +65,7 @@ export const DiceRoute = () => {
         <DiceFab
           type={DiceFabMode.Roll}
           onSelect={(result) => {
-            setRollResult(result);
+            setRollResult({ ...result, pool: props.pool });
           }}
         />
 
@@ -98,7 +105,7 @@ export const DiceRoute = () => {
       </Box>
     </Page>
   );
-};
+}
 
 DiceRoute.displayName = "DiceRoute";
 export default DiceRoute;

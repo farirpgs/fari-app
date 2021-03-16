@@ -71,7 +71,6 @@ export const itTranslation: Record<
   "donation.patreon": `Diventa un patron!`,
   "draw-route.meta.description": `Schizza o disegna la tua scena usando la tavola da disegno di Fari`,
   "draw-route.meta.title": `Disegna`,
-  "home-route.heading": `Fate Roleplaying Game companion application`,
   "home-route.meta.description": `Fari è la migliore applicazione companion per Fate RPG. Gioca scene in tempo reale con i tuo amici. Lancia dadi fudge e lascia libera la tua immaginazione per creare insieme storie memorabili!.`,
   "home-route.meta.title": `Fate RPG Companion`,
   "home-route.play-offline.button": `Inizia Partita Offline`,

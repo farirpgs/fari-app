@@ -71,7 +71,6 @@ export const ruTranslation: Record<
   "donation.patreon": `Станьте покровителем!`,
   "draw-route.meta.description": `Draw and sketch your scene using Fari's drawing pad`,
   "draw-route.meta.title": `Привлечь`,
-  "home-route.heading": `Приложение-компаньон Fate Role Playing Game`,
   "home-route.meta.description": `Fari это лучшее приложение компаньон для Fate RPG. Отыгрывайте сцены с друзьями в реальном времени, бросайте fudge кубики и пусть ваше коллективное воображение разыграется, создав запоминающиеся истории вместе!.`,
   "home-route.meta.title": `Fate RPG Companion`,
   "home-route.play-offline.button": `Начать Игру Оффлайн`,

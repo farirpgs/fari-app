@@ -71,7 +71,6 @@ export const deTranslation: Record<
   "donation.patreon": `Werde ein Patron!`,
   "draw-route.meta.description": `Zeichne und skizziere deine Szene mit Fari's Zeichenfläche`,
   "draw-route.meta.title": `Zeichnen`,
-  "home-route.heading": `Fate Roleplaying Game Begleiter-Anwendung`,
   "home-route.meta.description": `Fari ist die beste Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel. Spiele Szenen in Echtzeit mit deinen Freunden, würfle mit Fudge-Würfeln, lasst eurer kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!`,
   "home-route.meta.title": `Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel`,
   "home-route.play-offline.button": `Offline-Spiel starten`,

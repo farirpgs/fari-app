@@ -68,7 +68,6 @@ export const frTranslation: Record<
   "donation.patreon": `Devenez un contributeur!`,
   "draw-route.meta.description": `Dessinez et esquissez votre scène à l'aide du pad à dessin de Fari`,
   "draw-route.meta.title": `Dessiner`,
-  "home-route.heading": `Application compagnon pour le jeu de rôle Fate`,
   "home-route.meta.description": `Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.`,
   "home-route.meta.title": `RPG Companion`,
   "home-route.play-offline.button": `Commencer une partie hors ligne`,

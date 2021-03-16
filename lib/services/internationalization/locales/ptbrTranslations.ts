@@ -71,7 +71,6 @@ export const ptbrTranslation: Record<
   "donation.patreon": `Torne-se um patrono!`,
   "draw-route.meta.description": `Desenhe e esboce sua cena usando o bloco de desenho de Fari`,
   "draw-route.meta.title": `Desenhar`,
-  "home-route.heading": `Aplicativo complementar Fate Roleplaying Game`,
   "home-route.meta.description": `Fari é a melhor aplicação pra auxiliar sua mesa de Fate. Jogue por cenas em tempo real com seus amigos. Role dados fugde, deixe a imaginação coletiva correr solta e construa histórias memoráveis juntos!`,
   "home-route.meta.title": `Auxiliar para RPG Fate`,
   "home-route.play-offline.button": `Inicie um Jogo Offline`,

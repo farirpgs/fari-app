@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -12,7 +11,9 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
+import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
@@ -26,12 +27,16 @@ import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CharacterCircleBox } from "../../../../routes/Character/components/CharacterDialog/components/CharacterCircleBox";
 import { ConditionalWrapper } from "../../../ConditionalWrapper/ConditionalWrapper";
-import { ContentEditable } from "../../../ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
   DiceBox,
   DiceBoxResult,
 } from "../../../DiceBox/DiceBox";
+import { FateLabel } from "../../../FateLabel/FateLabel";
 
 export const PlayerRow: React.FC<
   {
@@ -43,10 +48,10 @@ export const PlayerRow: React.FC<
       canRemove: boolean;
     };
     player: IPlayer;
-    readonly: boolean;
+
     renderControls: boolean;
     highlight: boolean;
-
+    number: number;
     onDiceRoll(options: IRollDiceOptions): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
@@ -86,7 +91,7 @@ export const PlayerRow: React.FC<
   const name =
     props.player?.character?.name ||
     props.player?.playerName ||
-    t("play-route.character-name");
+    `Player #${props.number}`;
 
   const hasCharacterSheet = !!props.player.character;
 
@@ -110,83 +115,71 @@ export const PlayerRow: React.FC<
     <>
       <Box bgcolor={props.highlight ? lightBackground : undefined}>
         <Box py=".8rem" px=".5rem">
-          <Grid container spacing={2} wrap="nowrap">
+          <Grid container spacing={1} wrap="nowrap">
             <Grid item xs={9}>
               {renderCharacterSheetButton()}
             </Grid>
-            <Grid item xs className={css({ textAlign: "right" })}>
-              {renderInitiative()}
+            <Grid item xs container spacing={1} justify="flex-end">
+              <Grid item>{renderInitiative()}</Grid>
+              {props.permissions.canRemove && (
+                <Grid item>{renderDeleteButton()}</Grid>
+              )}
             </Grid>
           </Grid>
-          {/* TODO update show result even if highlight... */}
-          {!props.highlight && (
-            <Grid container spacing={2} wrap="nowrap">
-              <Grid item>{renderDiceBox()}</Grid>
+
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item>
+              <Box display="flex" justifyContent="flex-end">
+                <DiceBox
+                  rolls={props.player.rolls}
+                  size="2rem"
+                  fontSize="1rem"
+                  borderSize=".15rem"
+                  disabled={!props.permissions.canRoll}
+                  onClick={() => {
+                    handleRoll({ pool: false });
+                  }}
+                />
+              </Box>
             </Grid>
-          )}
+
+            <Grid item container>
+              <Grid item xs={12}>
+                <DiceBonusLabel rolls={props.player.rolls} />
+              </Grid>
+              <Grid item xs={12}>
+                <DiceBoxResult rolls={props.player.rolls} />
+              </Grid>
+            </Grid>
+          </Grid>
+
           <Grid container spacing={2} wrap="nowrap">
             <Grid item>{renderPointCounter()}</Grid>
           </Grid>
-          {!props.readonly && !props.player.isGM && (
-            <Grid container spacing={2} wrap="nowrap">
-              <Grid item>{renderCharacterActions()}</Grid>
-            </Grid>
-          )}
-          {props.renderControls && !props.player.isGM && (
-            <Grid container spacing={2} wrap="nowrap">
-              <Grid item>{renderGMActions()}</Grid>
-            </Grid>
-          )}
         </Box>
         <Divider light />
       </Box>
     </>
   );
 
-  function renderGMActions() {
+  function renderDeleteButton() {
     return (
-      <Box>
-        <Tooltip title={t("player-row.remove-character")}>
-          <IconButton
-            data-cy={`${props["data-cy"]}.remove`}
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              props.onPlayerRemove();
-              logger.info("ScenePlayer:onPlayerRemove");
-            }}
-          >
-            <HighlightOffIcon
-              color="error"
-              className={css({ width: "1rem", height: "1rem" })}
-            />
-          </IconButton>
-        </Tooltip>
-      </Box>
-    );
-  }
-
-  function renderCharacterActions() {
-    return (
-      <>
-        <Box px=".25rem">
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              props.onLoadCharacterSheet();
-              logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
-            }}
-          >
-            {hasCharacterSheet
-              ? t("player-row.swap-character-sheet")
-              : t("play-route.add-character-sheet")}
-          </Link>
-        </Box>
-      </>
+      <Tooltip title={t("player-row.remove-character")}>
+        <IconButton
+          data-cy={`${props["data-cy"]}.remove`}
+          size="small"
+          onClick={(e) => {
+            e.stopPropagation();
+            props.onPlayerRemove();
+            logger.info("ScenePlayer:onPlayerRemove");
+          }}
+        >
+          <HighlightOffIcon
+            color="error"
+            className={css({ width: "1rem", height: "1rem" })}
+          />
+        </IconButton>
+      </Tooltip>
     );
   }
 
@@ -199,7 +192,7 @@ export const PlayerRow: React.FC<
         spacing={1}
         wrap="nowrap"
       >
-        {!props.readonly && (
+        {props.permissions.canUpdatePoints && (
           <Grid item>
             <IconButton
               size="small"
@@ -218,8 +211,8 @@ export const PlayerRow: React.FC<
             <ContentEditable
               data-cy={`player-row.points`}
               value={pointsManager.state.points}
-              border={!props.readonly}
-              readonly={props.readonly}
+              border={props.permissions.canUpdatePoints}
+              readonly={!props.permissions.canUpdatePoints}
               onChange={(newValue, e) => {
                 pointsManager.actions.setPoints(newValue);
               }}
@@ -244,8 +237,8 @@ export const PlayerRow: React.FC<
                 <ContentEditable
                   data-cy={`player-row.max-points`}
                   value={pointsManager.state.maxPoints ?? ""}
-                  border
-                  readonly={props.readonly}
+                  border={props.permissions.canUpdatePoints}
+                  readonly={!props.permissions.canUpdatePoints}
                   onChange={(newMax, e) => {
                     pointsManager.actions.setMaxPoints(newMax);
                   }}
@@ -254,7 +247,7 @@ export const PlayerRow: React.FC<
             </Grid>
           </>
         )}
-        {!props.readonly && (
+        {props.permissions.canUpdatePoints && (
           <Grid item>
             <IconButton
               size="small"
@@ -268,35 +261,6 @@ export const PlayerRow: React.FC<
             </IconButton>
           </Grid>
         )}
-      </Grid>
-    );
-  }
-
-  function renderDiceBox() {
-    return (
-      <Grid container spacing={2} wrap="nowrap">
-        <Grid item>
-          <Box display="flex" justifyContent="flex-end">
-            <DiceBox
-              rolls={props.player.rolls}
-              size="2rem"
-              fontSize="1rem"
-              borderSize=".15rem"
-              disabled={props.readonly}
-              onClick={() => {
-                handleRoll({ pool: false });
-              }}
-            />
-          </Box>
-        </Grid>
-        <Grid item container>
-          <Grid item xs={12}>
-            <DiceBonusLabel rolls={props.player.rolls} />
-          </Grid>
-          <Grid item xs={12}>
-            <DiceBoxResult rolls={props.player.rolls} />
-          </Grid>
-        </Grid>
       </Grid>
     );
   }
@@ -320,7 +284,7 @@ export const PlayerRow: React.FC<
                 playedDuringTurn: !props.player.playedDuringTurn,
               });
             }}
-            disabled={props.readonly}
+            disabled={props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}
           >
             {props.player.playedDuringTurn ? (
@@ -338,6 +302,28 @@ export const PlayerRow: React.FC<
     return (
       <>
         <Grid container wrap="nowrap" alignItems="center">
+          {props.permissions.canLoadCharacterSheet && (
+            <Grid item>
+              <Tooltip
+                title={
+                  hasCharacterSheet
+                    ? t("player-row.swap-character-sheet")
+                    : t("play-route.add-character-sheet")
+                }
+                onClick={() => {
+                  props.onLoadCharacterSheet();
+                  logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+                }}
+              >
+                <IconButton
+                  size="small"
+                  color={hasCharacterSheet ? "default" : "primary"}
+                >
+                  {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          )}
           <Grid item xs zeroMinWidth>
             <ConditionalWrapper
               condition={hasCharacterSheet}
@@ -363,20 +349,18 @@ export const PlayerRow: React.FC<
                 </Button>
               )}
             >
-              <Typography
+              <FateLabel
                 noWrap
                 color="inherit"
                 className={css({
-                  color: theme.palette.text.primary,
                   width: "100%",
                   textAlign: "left",
                   fontSize: "1rem",
-                  lineHeight: Font.lineHeight(0.8),
-                  fontWeight: props.highlight ? "bold" : "normal",
+                  lineHeight: Font.lineHeight(1),
                 })}
               >
-                {name}
-              </Typography>
+                {previewContentEditable({ value: name })}
+              </FateLabel>
             </ConditionalWrapper>
           </Grid>
         </Grid>

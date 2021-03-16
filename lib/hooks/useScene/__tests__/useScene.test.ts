@@ -883,14 +883,12 @@ describe("useScene", () => {
     // WHEN adding an offline character
     let playerId = "";
     act(() => {
-      playerId = result.current.actions.addOfflineCharacter(
-        ({} as unknown) as any
-      );
+      playerId = result.current.actions.addOfflinePlayer();
     });
     // THEN
     expect(result.current.state.scene.players).toEqual([
       {
-        character: {},
+        character: undefined,
         points: "3",
         id: playerId,
         playedDuringTurn: false,

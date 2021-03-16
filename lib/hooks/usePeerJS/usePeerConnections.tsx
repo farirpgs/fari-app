@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { DataTransferObject } from "../../domains/data-transfer-object/DataTransferObject";
 import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
@@ -8,6 +9,7 @@ export function usePeerConnections(options: {
   onHostDataReceive: (data: any) => void;
   debug?: boolean;
 }) {
+  const logger = useLogger();
   const { peer, loading } = usePeerJS({ debug: options.debug });
   const connection = useRef<Peer.DataConnection | undefined>(undefined);
   const [connectionToHost, setConnectionToHost] = useState<
@@ -39,12 +41,12 @@ export function usePeerConnections(options: {
   function onHostConnectionOpen() {
     setConnectionToHost(connection.current);
     setConnectingToHost(false);
-    console.info("usePeerConnections: Connected To Host");
+    logger.debug("usePeerConnections: Connected To Host");
   }
   function onHostConnectionClose() {
     setConnectionToHost(undefined);
     setConnectingToHost(false);
-    console.info("usePeerConnections: Disconnected From Host");
+    logger.debug("usePeerConnections: Disconnected From Host");
   }
   function onHostDataReceive(data: any) {
     const decodedData = DataTransferObject.decode(data);
@@ -60,22 +62,32 @@ export function usePeerConnections(options: {
     },
     actions: {
       connect<T>(id: string, userId: string, metadata?: T) {
-        console.info("Connection: Setup");
+        logger.debug("Connection: Setup");
         setConnectingToHost(true);
         setConnectingToHostError(false);
-        connection.current = peer.connect(id, {
-          reliable: true,
-          label: userId,
-          metadata: metadata,
-        });
-        connection.current.on("open", onHostConnectionOpen);
-        connection.current.on("close", onHostConnectionClose);
-        connection.current.on("data", onHostDataReceive);
+        try {
+          connection.current = peer.connect(id, {
+            reliable: true,
+            label: userId,
+            metadata: metadata,
+          });
+          connection.current.on("open", onHostConnectionOpen);
+          connection.current.on("close", onHostConnectionClose);
+          connection.current.on("data", onHostDataReceive);
+        } catch (error) {
+          logger.error("usePeerConnections.connect: Error", { error });
+          setConnectingToHost(false);
+          setConnectingToHostError(true);
+        }
       },
       sendToHost<TPeerAction extends IPeerAction<string, unknown>>(
         request: TPeerAction
       ) {
-        connectionToHost?.send(request);
+        try {
+          connectionToHost?.send(request);
+        } catch (error) {
+          logger.error("usePeerConnections.sendToHost: Error", { error });
+        }
       },
     },
   };

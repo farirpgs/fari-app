@@ -511,14 +511,14 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addOfflineCharacter(character: ICharacter) {
+  function addOfflinePlayer() {
     const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({
           id: id,
           playerName: "",
-          character: character,
+          character: undefined,
           rolls: [],
           playedDuringTurn: false,
           offline: true,
@@ -750,7 +750,7 @@ export function useScene(props: IProps) {
       updateAspectPlayerDuringTurn,
       updateAspectColor,
       updatePlayersWithConnections,
-      addOfflineCharacter,
+      addOfflinePlayer,
       removePlayer,
       updatePlayerCharacterMainPointCounter,
       updatePlayerPlayedDuringTurn,
