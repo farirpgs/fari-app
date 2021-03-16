@@ -13,7 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import { DataGrid, RowId } from "@material-ui/data-grid";
 import produce from "immer";
 import uniq from "lodash/uniq";
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useMemo, useRef, useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { SplitButton } from "../../components/SplitButton/SplitButton";
@@ -28,6 +28,7 @@ import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
+import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -54,22 +55,25 @@ export const DataRoute: React.FC = (props) => {
   const [selections, setSelection] = useState<Array<RowId>>([]);
   const $importInput = useRef<any>();
   const $importAndDuplicateInput = useRef<any>();
-  const [group, setGroup] = useState("");
-  const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({ group: "", search: "" });
-
-  useEffect(() => {
-    const filterDelay = 300;
-    const t = setTimeout(() => {
-      setFilters({
-        search: search,
-        group: group,
+  const [group, setGroup] = useLazyState({
+    value: "",
+    delay: 750,
+    onChange(newGroup) {
+      setFilters((draft) => {
+        return { ...draft, group: newGroup };
       });
-    }, filterDelay);
-    return () => {
-      clearTimeout(t);
-    };
-  }, [search, group]);
+    },
+  });
+  const [search, setSearch] = useLazyState({
+    value: "",
+    delay: 750,
+    onChange(newSearch) {
+      setFilters((draft) => {
+        return { ...draft, search: newSearch };
+      });
+    },
+  });
 
   const groups = uniq([
     ...charactersManager.state.groups,
@@ -148,6 +152,20 @@ export const DataRoute: React.FC = (props) => {
         file.scenes.forEach((s) => {
           importScene(s, mode);
         });
+      },
+    });
+    FariEntity.import<ICharacter>({
+      filesToImport: fileToImport,
+      fariType: "character",
+      onImport: (character) => {
+        importCharacter(character, mode);
+      },
+    });
+    FariEntity.import<ISavableScene>({
+      filesToImport: fileToImport,
+      fariType: "scene",
+      onImport: (scene) => {
+        importScene(scene, mode);
       },
     });
   }

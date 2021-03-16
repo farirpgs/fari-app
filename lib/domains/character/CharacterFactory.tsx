@@ -264,7 +264,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
         id: Id.generate(),
         type: BlockType.Skill,
         meta: {
-          commands: ["1dF", "1dF", "1dF", "1dF"],
+          commands: ["4dF"],
         },
         label: a.name,
         value: a.value,
