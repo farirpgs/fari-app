@@ -7,7 +7,7 @@ import { esTranslation } from "../../../locales/es.json";
 import { frTranslation } from "../../../locales/fr.json";
 import { glTranslation } from "../../../locales/gl.json";
 import { itTranslation } from "../../../locales/it.json";
-import { ptbrTranslation } from "../../../locales/pt.json";
+import { ptbrTranslation } from "../../../locales/pt-br.json";
 import { ruTranslation } from "../../../locales/ru.json";
 import { ILogger } from "../logger/makeLogger";
 import { devTranslation } from "./locales/devTranslations";
