@@ -25,6 +25,7 @@ export const Patreon: React.FC = (props) => {
           "padding": "0.46875rem 1rem",
           "fontSize": "0.875rem",
           "borderRadius": "9999px",
+          "textAlign": "center",
           "& a": {
             color: "#fff !important",
           },

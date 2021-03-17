@@ -127,8 +127,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </LightBox>
 
         <LightBox
-          title="Getting Started"
-          subTitle="Playing TTRPG online should not be complicated. Get started now."
+          title={t("home-route.sections.getting-started.title")}
+          subTitle={t("home-route.sections.getting-started.sub-title")}
           maxWidth="lg"
           px="2rem"
           mb={sectionsSeparator}
@@ -490,12 +490,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             fontWeight: theme.typography.fontWeightBold,
           })}
         >
-          <>
-            {"Play Table-Top RPGs Online"}{" "}
-            <span className={css({ textDecoration: "underline" })}>
-              {"without the headache"}.
-            </span>
-          </>
+          <>{t("home-route.header.title")}</>
         </Typography>
         <Typography
           variant="subtitle1"
@@ -505,7 +500,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             textAlign: "left",
           })}
         >
-          {"Start a new game, send a link to your friends and play now."}
+          {t("home-route.header.subtitle")}
         </Typography>
         <Box
           className={css({
@@ -535,7 +530,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 fontWeight: theme.typography.fontWeightBold,
               })}
             >
-              {t("home-route-believable")}
+              {t("home-route.header.stats")}
             </Typography>
           </Box>
           {/* <Box mb="2rem">

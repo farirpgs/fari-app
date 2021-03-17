@@ -529,7 +529,7 @@ export const Page: React.FC<{
                 to="/srds"
                 component={RouterLink}
               >
-                {"SRDs"}
+                {t("menu.srds")}
               </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
