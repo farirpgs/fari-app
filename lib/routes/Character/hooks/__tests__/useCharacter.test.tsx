@@ -11,7 +11,7 @@ describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
     // GIVEN
     const character = {
-      ...CharacterFactory.make(CharacterType.CoreCondensed),
+      ...CharacterFactory.make(CharacterType.FateCondensed),
       id: "1",
       lastUpdated: 1,
     };
@@ -178,7 +178,7 @@ describe("useCharacter", () => {
     it("should load the new template but keep the id and the name as is", () => {
       // GIVEN
       const character = {
-        ...CharacterFactory.make(CharacterType.CoreCondensed),
+        ...CharacterFactory.make(CharacterType.FateCondensed),
         id: "1",
         name: "Luke Skywalker",
         lastUpdated: 1,
@@ -197,7 +197,7 @@ describe("useCharacter", () => {
 
       // WHEN a template is loading
       act(() => {
-        result.current.actions.loadTemplate(CharacterType.Accelerated);
+        result.current.actions.loadTemplate(CharacterType.FateAccelerated);
       });
       expect(result.current.state.character?.lastUpdated).not.toEqual(
         character.lastUpdated

@@ -24,7 +24,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRollWithBonus } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { ITranslationKeys } from "../../locale";
 import { Oracle } from "./domains/Oracle";
 
 type IMatrixItem = {
@@ -159,9 +159,7 @@ export const OracleRoute = () => {
                   className={css({ width: "100%" })}
                 >
                   {shouldDisplayFinalResult
-                    ? t(
-                        `oracle.value.${oracleValue}` as IPossibleTranslationKeys
-                      )
+                    ? t(`oracle.value.${oracleValue}` as ITranslationKeys)
                     : " ..."}
                 </FateLabel>
               </Toolbar>

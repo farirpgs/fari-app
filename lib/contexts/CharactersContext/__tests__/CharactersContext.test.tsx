@@ -55,7 +55,7 @@ describe("useCharacters", () => {
       // WHEN I add a new character
       let newCharacter: ICharacter | undefined = undefined;
       act(() => {
-        newCharacter = result.current.actions.add(CharacterType.CoreCondensed);
+        newCharacter = result.current.actions.add(CharacterType.FateCondensed);
       });
       // THEN the character is added
       expect(result.current.state.characters.length).toEqual(1);

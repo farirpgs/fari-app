@@ -20,7 +20,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
 
   function onAdd() {
     const newCharacter = charactersManager.actions.add(
-      CharacterType.CoreCondensed
+      CharacterType.FateCondensed
     );
 
     if (charactersManager.state.managerCallback) {

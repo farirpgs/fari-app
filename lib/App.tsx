@@ -94,4 +94,17 @@ function useMark() {
   t("common.language.pt-BR");
   t("common.language.ru");
   t("common.language.it");
+
+  t("oracle.value.No");
+  t("oracle.value.NoAnd");
+  t("oracle.value.Yes");
+  t("oracle.value.YesAnd");
+  t("oracle.value.YesBut");
+
+  t("character-dialog.template.FateOfCthulhu");
+  t("character-dialog.template.Dnd5e");
+  t("character-dialog.template.TheWitchIsDead");
+  t("character-dialog.template.Accelerated");
+  t("character-dialog.template.CoreCondensed");
+  t("character-dialog.template.Blank");
 }

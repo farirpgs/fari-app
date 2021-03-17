@@ -29,8 +29,9 @@ export const CharacterFactory = {
   latestVersion: 3,
   make(type: CharacterType): ICharacter {
     const newCharacter = {
-      [CharacterType.CoreCondensed]: makeFateCondensedCharacter,
-      [CharacterType.Accelerated]: makeFateAcceleratedCharacter,
+      [CharacterType.FateCondensed]: makeFateCondensedCharacter,
+      [CharacterType.FateCore]: makeFateCondensedCharacter,
+      [CharacterType.FateAccelerated]: makeFateAcceleratedCharacter,
       [CharacterType.FateOfCthulhu]: makeFateOfCthulhuCharacter,
       [CharacterType.Dnd5e]: makeDnD5eCharacter,
       [CharacterType.TheWitchIsDead]: makeTheWitchIsDeadCharacter,
@@ -44,12 +45,17 @@ export const CharacterFactory = {
       lastUpdated: getUnix(),
     };
   },
-  makeTemplate(props: { name: string; pages: Array<IPage> }): ICharacter {
+  makeTemplate(props: {
+    name: string;
+    pages: Array<IPage>;
+    template: CharacterType;
+  }): ICharacter {
     return {
       id: Id.generate(),
       version: CharacterFactory.latestVersion,
       name: props.name,
       group: undefined,
+      template: props.template,
       lastUpdated: getUnix(),
       pages: props.pages,
     };
@@ -284,6 +290,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
         sections: sections,
       },
     ],
+    template: CharacterType.FateCondensed,
     playedDuringTurn: v2.playedDuringTurn,
     version: CharacterFactory.latestVersion,
   };

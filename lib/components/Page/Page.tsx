@@ -34,6 +34,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ITranslationKeys } from "../../locale";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
@@ -197,9 +198,7 @@ export const Page: React.FC<{
                     if (language !== "dev" || shouldRenderDev) {
                       return (
                         <MenuItem key={language} value={language}>
-                          {t(
-                            `common.language.${language}` as IPossibleTranslationKeys
-                          )}
+                          {t(`common.language.${language}` as ITranslationKeys)}
                         </MenuItem>
                       );
                     }

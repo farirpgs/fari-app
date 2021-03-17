@@ -1,10 +1,12 @@
 import { Id } from "../../Id/Id";
 import { CharacterFactory } from "../CharacterFactory";
+import { CharacterType } from "../CharacterType";
 import { BlockType, ICharacter, Position } from "../types";
 
 export function makeFateOfCthulhuCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
     name: "",
+    template: CharacterType.FateOfCthulhu,
     pages: [
       {
         id: Id.generate(),

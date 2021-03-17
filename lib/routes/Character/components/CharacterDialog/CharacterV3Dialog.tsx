@@ -61,7 +61,7 @@ import {
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../../../services/internationalization/IPossibleTranslationKeys";
+import { ITranslationKeys } from "../../../../locale";
 import { useCharacter } from "../../hooks/useCharacter";
 import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
@@ -290,7 +290,7 @@ export const CharacterV3Dialog: React.FC<{
                 className={css({ width: "300px" })}
                 getOptionLabel={(option) =>
                   t(
-                    `character-dialog.template.${option.type}` as IPossibleTranslationKeys
+                    `character-dialog.template.${option.type}` as ITranslationKeys
                   )
                 }
                 groupBy={(option) => option.group}

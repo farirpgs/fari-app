@@ -1,4 +1,5 @@
 import { IDiceCommandGroupId } from "../dice/Dice";
+import { CharacterType } from "./CharacterType";
 
 export enum BlockType {
   Text = "Text",
@@ -169,6 +170,6 @@ export interface ICharacter {
   // hidden
   version: number;
   lastUpdated: number;
-
+  template: CharacterType;
   playedDuringTurn?: boolean;
 }
