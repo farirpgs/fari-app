@@ -1,14 +1,14 @@
 import i18next, { i18n } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import { deTranslation } from "../../../locales/de.json";
-import { enTranslation } from "../../../locales/en.json";
-import { esTranslation } from "../../../locales/es.json";
-import { frTranslation } from "../../../locales/fr.json";
-import { glTranslation } from "../../../locales/gl.json";
-import { itTranslation } from "../../../locales/it.json";
-import { ptbrTranslation } from "../../../locales/pt-br.json";
-import { ruTranslation } from "../../../locales/ru.json";
+import deTranslation from "../../../locales/de.json";
+import enTranslation from "../../../locales/en.json";
+import esTranslation from "../../../locales/es.json";
+import frTranslation from "../../../locales/fr.json";
+import glTranslation from "../../../locales/gl.json";
+import itTranslation from "../../../locales/it.json";
+import ptbrTranslation from "../../../locales/pt-br.json";
+import ruTranslation from "../../../locales/ru.json";
 import { ILogger } from "../logger/makeLogger";
 import { devTranslation } from "./locales/devTranslations";
 

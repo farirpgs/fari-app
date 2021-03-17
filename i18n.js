@@ -59,7 +59,7 @@ async function updateTranslations(keys, translationFilesLocations) {
 
       return {
         ...acc,
-        [curr]: existingValue || "",
+        [curr]: existingValue || null,
       };
     }, {});
     const formattedData = prettier.format(JSON.stringify(newData), {

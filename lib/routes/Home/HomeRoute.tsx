@@ -497,7 +497,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
               fontWeight: theme.typography.fontWeightBold,
             })}
           >
-            {"More than 3000 games played every month!"}
+            {t("home-route-believable")}
           </Typography>
         </Box>
       </Box>

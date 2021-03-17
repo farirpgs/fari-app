@@ -18,15 +18,22 @@ export function useTranslate() {
       options?: UseTranslationOptions & Record<string, string>
     ): string => {
       const value = t(key, options);
-      const valueWithoutFallback = i18n.t(key, {
+      const englishValue = i18n.t(key, {
         ...options,
-        fallbackLng: "dev",
+        lng: "en",
       });
-      if (valueWithoutFallback === key) {
+      const devValue = i18n.t(key, {
+        ...options,
+        lng: "dev",
+      });
+
+      if (!value) {
         logger.warn("useTranslate:onMissingTranslation", {
           key,
           currentLanguage,
         });
+
+        return englishValue || devValue;
       }
       return value;
     },

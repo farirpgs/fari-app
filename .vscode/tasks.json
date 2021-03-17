@@ -14,11 +14,16 @@
         "showReuseMessage": true,
         "clear": true
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
+      "label": "Validate",
       "problemMatcher": ["$tsc", "$eslint-stylish"]
+    },
+    {
+      "type": "npm",
+      "script": "i18n",
+      "problemMatcher": [],
+      "label": "Extract Translations",
+      "group": "build"
     }
   ]
 }

@@ -44,6 +44,7 @@ export type ITranslationKeys =
   | "donation.patreon"
   | "draw-route.meta.description"
   | "draw-route.meta.title"
+  | "home-route-believable"
   | "home-route.meta.description"
   | "home-route.meta.title"
   | "home-route.play-offline.button"
