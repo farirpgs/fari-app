@@ -320,9 +320,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderFirstActionCards() {
     const cards: Array<IHomeRouteCard> = [
       {
-        label: "Scenes",
-        description:
-          "Prepare your Scenes in advance and load them while you play.",
+        label: t("home-route.cards.scenes.title"),
+        description: t("home-route.cards.scenes.description"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -330,14 +329,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/alps.png"
           />
         ),
-        ctaLabel: "Write a new Scene",
+        ctaLabel: t("home-route.cards.scenes.cta"),
         onClick: () => {
           scenesManager.actions.openManager(ManagerMode.Manage);
         },
       },
       {
-        label: "Characters",
-        description: "Flexible character sheets that support any TTRPG system.",
+        label: t("home-route.cards.characters.title"),
+        description: t("home-route.cards.characters.description"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -345,16 +344,15 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/wizard.png"
           />
         ),
-        ctaLabel: "Create your first Character",
+        ctaLabel: t("home-route.cards.characters.cta"),
         onClick: () => {
           charactersManager.actions.openManager(ManagerMode.Manage);
         },
       },
 
       {
-        label: "SRDs",
-        description:
-          "Game System Reference Documents, conveniently available here.",
+        label: t("home-route.cards.srds.title"),
+        description: t("home-route.cards.srds.description"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -362,7 +360,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
-        ctaLabel: "Read Now",
+        ctaLabel: t("home-route.cards.srds.cta"),
         to: "/srds",
       },
     ];
