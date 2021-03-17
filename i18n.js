@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import glob from "glob";
+import sortBy from "lodash/sortBy";
 
 main();
 async function main() {
@@ -43,12 +44,14 @@ async function findTranslations(sourceFileLocations) {
 }
 
 async function updateTranslations(keys, translationFilesLocations) {
+  const sortedKeys = sortBy(keys, (k) => k);
+
   const files = await importJsonFiles(translationFilesLocations);
 
   for (const file of files) {
     const content = file.content;
 
-    const newData = keys.reduce((acc, curr, index) => {
+    const newData = sortedKeys.reduce((acc, curr, index) => {
       const existingValue = content[curr];
 
       return {
@@ -56,8 +59,7 @@ async function updateTranslations(keys, translationFilesLocations) {
         [curr]: existingValue || "",
       };
     }, {});
-    // console.debug('newData', newData)
-    // await fs.writeFile(file.location, JSON.stringify(newData, null, 2));
+    await fs.writeFile(file.location, JSON.stringify(newData, null, 2));
   }
 }
 
