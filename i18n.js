@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import glob from "glob";
 import sortBy from "lodash/sortBy";
+import prettier from "prettier";
 
 main();
 async function main() {
@@ -8,9 +9,10 @@ async function main() {
   const translationKeys = await findTranslations(sourceFileLocations);
   const translationFileLocations = await globPromise("./locales/**/*.json");
   await updateTranslations(translationKeys, translationFileLocations);
+  await updateTypeDefinitions(translationKeys);
 }
 
-//#region
+//#region Translations
 async function findTranslations(sourceFileLocations) {
   const files = await getFilesContent(sourceFileLocations);
 
@@ -19,8 +21,9 @@ async function findTranslations(sourceFileLocations) {
     /**
      * `\b` is for space or beginning of line
      * then look for any `t("*")`
+     * `.*?` is not greedy
      */
-    const match = item.content.match(/(\b)t\(".+"\)/gm);
+    const match = item.content.match(/(\b)t\(".*?"\)/gm);
 
     if (match) {
       match.forEach((m) => {
@@ -59,13 +62,30 @@ async function updateTranslations(keys, translationFilesLocations) {
         [curr]: existingValue || "",
       };
     }, {});
-    await fs.writeFile(file.location, JSON.stringify(newData, null, 2));
+    const formattedData = prettier.format(JSON.stringify(newData), {
+      parser: "json",
+    });
+    await fs.writeFile(file.location, formattedData);
   }
+}
+async function updateTypeDefinitions(keys) {
+  const sortedKeys = sortBy(keys, (k) => k);
+
+  const typescript = `
+    export type ITranslationKeys = ${sortedKeys
+      .map((k) => `"${k}"`)
+      .join(" | ")};
+  `;
+
+  const formattedData = prettier.format(typescript, {
+    parser: "typescript",
+  });
+  await fs.writeFile("./lib/locale.ts", formattedData);
 }
 
 //#endregion
 
-//#region
+//#region Glob
 async function globPromise(pattern) {
   const promise = new Promise((resolve, reject) => {
     glob(pattern, {}, function (er, matchingFiles) {

@@ -25,6 +25,7 @@ import {
   ScenesContext,
   useScenes,
 } from "./contexts/SceneContext/ScenesContext";
+import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { AppDarkTheme, AppLightTheme } from "./theme";
 
 export const App: React.FC<{}> = () => {
@@ -77,3 +78,20 @@ export const AppProvider: React.FC<{}> = (props) => {
   );
 };
 AppProvider.displayName = "AppProvider";
+
+/**
+ * for dynamic keys
+ */
+function useMark() {
+  const { t } = useTranslate();
+
+  t("common.language.dev");
+  t("common.language.de");
+  t("common.language.en");
+  t("common.language.es");
+  t("common.language.fr");
+  t("common.language.gl");
+  t("common.language.pt-BR");
+  t("common.language.ru");
+  t("common.language.it");
+}

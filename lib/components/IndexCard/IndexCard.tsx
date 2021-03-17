@@ -327,6 +327,7 @@ export const IndexCard: React.FC<
               <Grid item>
                 <Tooltip
                   title={
+                    // TODO: INSPECT
                     aspect.pinned ? t("index-card.unpin") : t("index-card.pin")
                   }
                 >

@@ -1,16 +1,15 @@
 import i18next, { i18n } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
+import { deTranslation } from "../../../locales/de.json";
+import { enTranslation } from "../../../locales/en.json";
+import { esTranslation } from "../../../locales/es.json";
+import { frTranslation } from "../../../locales/fr.json";
+import { glTranslation } from "../../../locales/gl.json";
+import { itTranslation } from "../../../locales/it.json";
+import { ptbrTranslation } from "../../../locales/pt.json";
+import { ruTranslation } from "../../../locales/ru.json";
 import { ILogger } from "../logger/makeLogger";
-import { deTranslation } from "./locales/deTranslation";
-import { devTranslation } from "./locales/devTranslation";
-import { enTranslation } from "./locales/enTranslation";
-import { esTranslation } from "./locales/esTranslation";
-import { frTranslation } from "./locales/frTranslation";
-import { glTranslation } from "./locales/glTranslation";
-import { itTranslation } from "./locales/itTranslation";
-import { ptbrTranslation } from "./locales/ptbrTranslations";
-import { ruTranslation } from "./locales/ruTranslation";
 
 export const PossibleLanguages = [
   "en",
@@ -39,7 +38,7 @@ export class InternationalizationService {
       .use(LanguageDetector)
       .use(initReactI18next)
       .init({
-        resources: {          
+        resources: {
           "en": {
             translation: enTranslation,
           },

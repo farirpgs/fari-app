@@ -34,7 +34,6 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";

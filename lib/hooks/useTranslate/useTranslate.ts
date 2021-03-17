@@ -4,7 +4,7 @@ import {
   IPossibleLanguages,
   PossibleLanguages,
 } from "../../services/internationalization/InternationalizationService";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { IPossibleTranslationsKeys } from "../../types/locale";
 
 export function useTranslate() {
   const { t, i18n } = useTranslation();
@@ -14,7 +14,7 @@ export function useTranslate() {
   return {
     currentLanguage,
     t: (
-      key: IPossibleTranslationKeys,
+      key: IPossibleTranslationsKeys,
       options?: UseTranslationOptions & Record<string, string>
     ): string => {
       const value = t(key, options);
