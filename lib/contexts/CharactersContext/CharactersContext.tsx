@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { CharacterType } from "../../domains/character/CharacterType";
+import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useGroups } from "../../hooks/useGroups/useGroups";
@@ -68,7 +68,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     managerCallback.current = undefined;
   }
 
-  function add(type: CharacterType): ICharacter {
+  function add(type: CharacterTemplates): ICharacter {
     const newCharacter = CharacterFactory.make(type);
 
     setCharacters((draft: Array<ICharacter>) => {

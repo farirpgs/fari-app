@@ -7,6 +7,7 @@ export function useHighlight() {
     theme.palette.type === "light" ? theme.palette.primary.main : "#405582";
   const secondColor =
     theme.palette.type === "light" ? theme.palette.primary.dark : "#05235d";
+
   const linearBackground = `${firstColor} linear-gradient(90deg,${secondColor},${firstColor})`;
   const radialBackground = `${firstColor} radial-gradient(${firstColor},${secondColor})`;
   const color = theme.palette.getContrastText(firstColor);

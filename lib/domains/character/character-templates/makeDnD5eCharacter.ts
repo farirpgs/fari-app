@@ -1,12 +1,12 @@
 import { Id } from "../../Id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { CharacterType } from "../CharacterType";
+import { CharacterTemplates } from "../CharacterType";
 import { BlockType, ICharacter, Position } from "../types";
 
 export function makeDnD5eCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
     name: "",
-    template:CharacterType.Dnd5e,
+    template: CharacterTemplates.Dnd5e,
     pages: [
       {
         id: Id.generate(),

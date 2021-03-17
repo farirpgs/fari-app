@@ -60,7 +60,7 @@ describe("CharacterFactory.migrate", () => {
       });
     });
   });
-  fdescribe("v2", () => {
+  describe("v2", () => {
     it("should convert Warden le Magané", () => {
       const result = CharacterFactory.migrate(Warden);
 
@@ -69,6 +69,7 @@ describe("CharacterFactory.migrate", () => {
         id: expect.anything(),
         lastUpdated: expect.anything(),
         name: "Warden Le Magané",
+        template: "FateCondensed",
         pages: [
           {
             id: expect.anything(),
@@ -408,6 +409,7 @@ describe("CharacterFactory.migrate", () => {
 
       expect(result).toEqual({
         group: "Le groupe des compliqués",
+        template: "FateCondensed",
         id: expect.anything(),
         lastUpdated: 1606783644,
         name: "Compliqué",

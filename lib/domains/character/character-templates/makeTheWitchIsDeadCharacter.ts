@@ -1,12 +1,12 @@
 import { Id } from "../../Id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { CharacterType } from "../CharacterType";
+import { CharacterTemplates } from "../CharacterType";
 import { BlockType, ICharacter, Position } from "../types";
 
 export function makeTheWitchIsDeadCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
     name: "",
-    template: CharacterType.TheWitchIsDead,
+    template: CharacterTemplates.TheWitchIsDead,
     pages: [
       {
         id: Id.generate(),

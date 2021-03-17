@@ -1,12 +1,12 @@
 import { Id } from "../../Id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { CharacterType } from "../CharacterType";
+import { CharacterTemplates } from "../CharacterType";
 import { BlockType, ICharacter, Position } from "../types";
 
 export function makeFateCondensedCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
     name: "",
-    template: CharacterType.FateCondensed,
+    template: CharacterTemplates.FateCondensed,
     pages: [
       {
         id: Id.generate(),
@@ -123,8 +123,8 @@ export function makeFateCondensedCharacter(): ICharacter {
                 type: BlockType.SlotTracker,
                 value: [
                   { checked: false, label: "1" },
-                  { checked: false, label: "2" },
-                  { checked: false, label: "3" },
+                  { checked: false, label: "1" },
+                  { checked: false, label: "1" },
                 ],
               },
               {
@@ -134,8 +134,8 @@ export function makeFateCondensedCharacter(): ICharacter {
                 type: BlockType.SlotTracker,
                 value: [
                   { checked: false, label: "1" },
-                  { checked: false, label: "2" },
-                  { checked: false, label: "3" },
+                  { checked: false, label: "1" },
+                  { checked: false, label: "1" },
                 ],
               },
             ],

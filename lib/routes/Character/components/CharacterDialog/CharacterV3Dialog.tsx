@@ -34,6 +34,7 @@ import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useState } from "react";
 import { Prompt } from "react-router";
+import { AppLink } from "../../../../components/AppLink/AppLink";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
@@ -41,8 +42,9 @@ import { SlideUpTransition } from "../../../../components/SlideUpTransition/Slid
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
-  CharacterSheetTypes,
-  CharacterType,
+  CharacterTemplates,
+  CharacterTemplatesWithGroups,
+  getTemplateInfo,
 } from "../../../../domains/character/CharacterType";
 import {
   BlockType,
@@ -134,6 +136,10 @@ export const CharacterV3Dialog: React.FC<{
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
 
+  const characterTemplateInfo = getTemplateInfo(
+    characterManager.state.character?.template
+  );
+
   function onSave() {
     const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
@@ -146,14 +152,14 @@ export const CharacterV3Dialog: React.FC<{
     logger.info(`CharacterDialog:onToggleAdvanced`);
   }
 
-  function onLoadTemplate(newTemplate: CharacterType) {
+  function onLoadTemplate(newTemplate: CharacterTemplates) {
     const confirmed = confirm(t("character-dialog.load-template-confirmation"));
 
     if (confirmed) {
       characterManager.actions.loadTemplate(newTemplate);
       setAdvanced(false);
       logger.info(
-        `CharacterDialog:onLoadTemplate:${CharacterType[newTemplate]}`
+        `CharacterDialog:onLoadTemplate:${CharacterTemplates[newTemplate]}`
       );
     }
   }
@@ -286,17 +292,17 @@ export const CharacterV3Dialog: React.FC<{
                 size="small"
                 autoHighlight
                 filterOptions={createFilterOptions({ limit: 100 })}
-                options={CharacterSheetTypes}
+                options={CharacterTemplatesWithGroups}
                 className={css({ width: "300px" })}
                 getOptionLabel={(option) =>
                   t(
-                    `character-dialog.template.${option.type}` as ITranslationKeys
+                    `character-dialog.template.${option.template}` as ITranslationKeys
                   )
                 }
                 groupBy={(option) => option.group}
                 onChange={(event, newValue) => {
-                  if (newValue?.type) {
-                    onLoadTemplate(newValue?.type);
+                  if (newValue?.template) {
+                    onLoadTemplate(newValue?.template);
                   }
                 }}
                 renderInput={(params) => (
@@ -332,9 +338,6 @@ export const CharacterV3Dialog: React.FC<{
                 classes={{
                   flexContainer: css({
                     borderBottom: `3px solid ${headerBackgroundColor}`,
-                  }),
-                  indicator: css({
-                    // backgroundColor: lightBackground,
                   }),
                 }}
                 onChange={(e, newValue) => {
@@ -478,7 +481,22 @@ export const CharacterV3Dialog: React.FC<{
           })}
         </TabContext>
 
-        <Grid container justify="center">
+        <Grid container justify="space-between" alignItems="center">
+          {characterTemplateInfo?.author && (
+            <Grid item>
+              <Box pt=".5rem">
+                <AppLink
+                  to={characterTemplateInfo.author?.link}
+                  target="_blank"
+                >
+                  {t(
+                    `character-dialog.template.${characterManager.state.character?.template}` as ITranslationKeys
+                  )}{" "}
+                  ({characterTemplateInfo.author?.name})
+                </AppLink>
+              </Box>
+            </Grid>
+          )}
           <Grid item>
             <Box pt=".5rem">
               <Typography>{date.format("lll")}</Typography>

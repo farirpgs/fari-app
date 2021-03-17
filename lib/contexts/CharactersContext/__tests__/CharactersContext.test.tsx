@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { ManagerMode } from "../../../components/Manager/Manager";
-import { CharacterType } from "../../../domains/character/CharacterType";
+import { CharacterTemplates } from "../../../domains/character/CharacterType";
 import { ICharacter } from "../../../domains/character/types";
 import { useCharacters } from "../CharactersContext";
 
@@ -55,7 +55,9 @@ describe("useCharacters", () => {
       // WHEN I add a new character
       let newCharacter: ICharacter | undefined = undefined;
       act(() => {
-        newCharacter = result.current.actions.add(CharacterType.FateCondensed);
+        newCharacter = result.current.actions.add(
+          CharacterTemplates.FateCondensed
+        );
       });
       // THEN the character is added
       expect(result.current.state.characters.length).toEqual(1);

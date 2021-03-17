@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { CharacterType } from "../../domains/character/CharacterType";
+import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
@@ -20,7 +20,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
 
   function onAdd() {
     const newCharacter = charactersManager.actions.add(
-      CharacterType.FateCondensed
+      CharacterTemplates.FateCondensed
     );
 
     if (charactersManager.state.managerCallback) {

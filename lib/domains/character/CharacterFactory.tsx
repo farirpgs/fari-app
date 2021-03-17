@@ -1,13 +1,14 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
+import DrescendFilesAccelerated from "./character-templates/DrescendFilesAccelerated.json";
+import { makeBlankCharacter } from "./character-templates/makeBlankCharacter";
 import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
-import { makeEmptyCharacter } from "./character-templates/makeEmptyCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
 import { makeFateCondensedCharacter } from "./character-templates/makeFateCondensedCharacter";
 import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
 import { makeTheWitchIsDeadCharacter } from "./character-templates/makeTheWitchIsDeadCharacter";
-import { CharacterType } from "./CharacterType";
+import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
   IBlock,
@@ -27,28 +28,38 @@ import {
 
 export const CharacterFactory = {
   latestVersion: 3,
-  make(type: CharacterType): ICharacter {
+  make(type: CharacterTemplates): ICharacter {
     const newCharacter = {
-      [CharacterType.FateCondensed]: makeFateCondensedCharacter,
-      [CharacterType.FateCore]: makeFateCondensedCharacter,
-      [CharacterType.FateAccelerated]: makeFateAcceleratedCharacter,
-      [CharacterType.FateOfCthulhu]: makeFateOfCthulhuCharacter,
-      [CharacterType.Dnd5e]: makeDnD5eCharacter,
-      [CharacterType.TheWitchIsDead]: makeTheWitchIsDeadCharacter,
-      [CharacterType.Blank]: makeEmptyCharacter,
+      [CharacterTemplates.FateCondensed]: makeFateCondensedCharacter,
+      [CharacterTemplates.FateCore]: makeFateCondensedCharacter,
+      [CharacterTemplates.FateAccelerated]: makeFateAcceleratedCharacter,
+      [CharacterTemplates.FateOfCthulhu]: makeFateOfCthulhuCharacter,
+      [CharacterTemplates.DresdenFilesAccelerated]: () => {
+        return this.makeFromJson(DrescendFilesAccelerated);
+      },
+      [CharacterTemplates.Dnd5e]: makeDnD5eCharacter,
+      [CharacterTemplates.TheWitchIsDead]: makeTheWitchIsDeadCharacter,
+      [CharacterTemplates.Blank]: makeBlankCharacter,
     }[type]();
 
     return {
       ...newCharacter,
       id: Id.generate(),
       name: "",
+      template: type,
       lastUpdated: getUnix(),
+    };
+  },
+  makeFromJson(jsonData: any): ICharacter {
+    return {
+      ...jsonData,
+      id: Id.generate(),
     };
   },
   makeTemplate(props: {
     name: string;
     pages: Array<IPage>;
-    template: CharacterType;
+    template: CharacterTemplates;
   }): ICharacter {
     return {
       id: Id.generate(),
@@ -119,6 +130,7 @@ export const CharacterFactory = {
         id: Id.generate(),
         label: "Slot Tracker",
         type: type,
+        meta: {},
         value: [{ label: "1", checked: false }],
       } as IBlock & ISlotTrackerBlock,
     };
@@ -290,7 +302,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
         sections: sections,
       },
     ],
-    template: CharacterType.FateCondensed,
+    template: CharacterTemplates.FateCondensed,
     playedDuringTurn: v2.playedDuringTurn,
     version: CharacterFactory.latestVersion,
   };

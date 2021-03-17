@@ -1,12 +1,12 @@
 import { Id } from "../../Id/Id";
 import { CharacterFactory } from "../CharacterFactory";
-import { CharacterType } from "../CharacterType";
+import { CharacterTemplates } from "../CharacterType";
 import { BlockType, ICharacter, Position } from "../types";
 
 export function makeFateAcceleratedCharacter(): ICharacter {
   return CharacterFactory.makeTemplate({
     name: "",
-    template: CharacterType.FateAccelerated,
+    template: CharacterTemplates.FateAccelerated,
     pages: [
       {
         id: Id.generate(),

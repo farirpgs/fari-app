@@ -3,7 +3,7 @@
  */
 import { act, renderHook } from "@testing-library/react-hooks";
 import { CharacterFactory } from "../../../../domains/character/CharacterFactory";
-import { CharacterType } from "../../../../domains/character/CharacterType";
+import { CharacterTemplates } from "../../../../domains/character/CharacterType";
 import { ICharacter } from "../../../../domains/character/types";
 import { useCharacter } from "../useCharacter";
 
@@ -11,7 +11,7 @@ describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
     // GIVEN
     const character = {
-      ...CharacterFactory.make(CharacterType.FateCondensed),
+      ...CharacterFactory.make(CharacterTemplates.FateCondensed),
       id: "1",
       lastUpdated: 1,
     };
@@ -178,7 +178,7 @@ describe("useCharacter", () => {
     it("should load the new template but keep the id and the name as is", () => {
       // GIVEN
       const character = {
-        ...CharacterFactory.make(CharacterType.FateCondensed),
+        ...CharacterFactory.make(CharacterTemplates.FateCondensed),
         id: "1",
         name: "Luke Skywalker",
         lastUpdated: 1,
@@ -197,7 +197,7 @@ describe("useCharacter", () => {
 
       // WHEN a template is loading
       act(() => {
-        result.current.actions.loadTemplate(CharacterType.FateAccelerated);
+        result.current.actions.loadTemplate(CharacterTemplates.FateAccelerated);
       });
       expect(result.current.state.character?.lastUpdated).not.toEqual(
         character.lastUpdated
@@ -209,6 +209,7 @@ describe("useCharacter", () => {
         group: undefined,
         id: "1",
         lastUpdated: expect.anything(),
+        template: "FateAccelerated",
         name: "Luke Skywalker",
         pages: [
           {

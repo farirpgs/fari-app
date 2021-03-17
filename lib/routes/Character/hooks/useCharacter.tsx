@@ -3,7 +3,7 @@ import isEqual from "lodash/isEqual";
 import { useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
-import { CharacterType } from "../../../domains/character/CharacterType";
+import { CharacterTemplates } from "../../../domains/character/CharacterType";
 import {
   BlockType,
   IBlock,
@@ -41,7 +41,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     }
   }, [characterFromProps]);
 
-  function loadTemplate(type: CharacterType) {
+  function loadTemplate(type: CharacterTemplates) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {

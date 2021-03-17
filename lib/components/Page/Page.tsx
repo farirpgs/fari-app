@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -44,7 +45,9 @@ import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
 let gameIdSingleton: string | undefined = undefined;
-const FariMaxWidth = "1920px";
+
+export const FariMaxWidth = "1920px";
+export const FariToolbarMaxWidth = "1280px";
 
 export enum LiveMode {
   Connecting,
@@ -54,7 +57,6 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  displayDonation?: boolean;
   live?: LiveMode;
   liveLabel?: string;
   drawerWidth?: string;
@@ -68,7 +70,6 @@ export const Page: React.FC<{
   const theme = useTheme();
 
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  const { displayDonation = true } = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -78,8 +79,9 @@ export const Page: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const logger = useLogger();
   const zIndex = useZIndex();
-  const highlight = useHighlight();
+
   const isLive = props.live !== undefined;
+  const highlight = useHighlight();
 
   useEffect(() => {
     if (props.gameId) {
@@ -236,24 +238,22 @@ export const Page: React.FC<{
             </Grid>
           </Box>
 
-          {displayDonation && (
-            <Box py="1rem">
-              <Grid
-                container
-                justify="space-between"
-                spacing={4}
-                alignItems="center"
-              >
-                <Grid item xs={isSmall ? 12 : undefined}>
-                  <Kofi />
-                </Grid>
-
-                <Grid item>
-                  <Patreon />
-                </Grid>
+          <Box py="1rem">
+            <Grid
+              container
+              justify="space-between"
+              spacing={4}
+              alignItems="center"
+            >
+              <Grid item xs={isSmall ? 12 : undefined}>
+                <Kofi />
               </Grid>
-            </Box>
-          )}
+
+              <Grid item>
+                <Patreon />
+              </Grid>
+            </Grid>
+          </Box>
 
           <Grid container justify="center">
             <Grid item xs>
@@ -354,112 +354,116 @@ export const Page: React.FC<{
             zIndex: zIndex.navBar,
           })}
         >
-          <Toolbar
-            className={css({
-              margin: "0 auto",
-              maxWidth: FariMaxWidth,
-              minHeight: "72px",
-              width: "100%",
-              padding: "1rem",
-              position: "relative",
-              zIndex: zIndex.navBar,
-            })}
-          >
-            <RouterLink
-              to="/"
-              data-cy="page.menu.home"
+          <Box className={css({ padding: ".5rem 2.5rem" })}>
+            <Toolbar
               className={css({
-                textDecoration: "none",
+                margin: "0 auto",
+                maxWidth: FariToolbarMaxWidth,
+                minHeight: "72px",
+                width: "100%",
+                padding: "0",
+                position: "relative",
+                zIndex: zIndex.navBar,
               })}
             >
-              <img
-                alt="Fari"
+              <RouterLink
+                to="/"
+                data-cy="page.menu.home"
                 className={css({
-                  height: "2.5rem",
-                  marginRight: "1rem",
-                  cursor: "pointer",
-                  opacity: props.hideHeaderLogo ? 0 : 1,
-                })}
-                src={appIcon}
-              />
-            </RouterLink>
-
-            {isLive && (
-              <Box>
-                <Grid container alignItems="center" spacing={3} wrap="nowrap">
-                  <Grid item>
-                    {props.live === LiveMode.Connecting && (
-                      <SignalWifi0BarIcon />
-                    )}
-                    {props.live === LiveMode.Live && (
-                      <SignalWifi4BarLockIcon
-                        className={css({
-                          // color: theme.palette.primary,
-                        })}
-                      />
-                    )}
-                  </Grid>
-                  <Grid item>
-                    <Box maxWidth="150px">
-                      <Typography variant="subtitle1" noWrap>
-                        {previewContentEditable({ value: props.liveLabel })}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            )}
-            <Hidden smDown>{renderMenu(false)}</Hidden>
-            <Hidden mdUp>
-              {!isLive && (
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    setMenuOpen(true);
-                  }}
-                >
-                  <MenuIcon color="inherit" />
-                </IconButton>
-              )}
-            </Hidden>
-            <Drawer
-              anchor="bottom"
-              open={menuOpen}
-              onClose={() => {
-                setMenuOpen(false);
-              }}
-            >
-              <Box p="2rem">{renderMenu(true)}</Box>
-            </Drawer>
-            <Typography
-              className={css({
-                flex: "1 1 auto",
-              })}
-            />
-            <Hidden smDown>
-              {displayDonation && !shouldDisplayRejoinButton && (
-                <Box width="250px">
-                  <Patreon />
-                </Box>
-              )}
-            </Hidden>
-            {shouldDisplayRejoinButton && (
-              <Button
-                color="primary"
-                onClick={() => {
-                  history.push(`/play/${gameId}`);
-                }}
-                variant={"outlined"}
-                className={css({
-                  minWidth: "10rem",
+                  textDecoration: "none",
                 })}
               >
-                <Typography variant="button" noWrap>
-                  Rejoin&nbsp;Game
-                </Typography>
-              </Button>
-            )}
-          </Toolbar>
+                <img
+                  alt="Fari"
+                  className={css({
+                    height: "2.5rem",
+                    marginRight: "1rem",
+                    cursor: "pointer",
+                    display: props.hideHeaderLogo ? "none" : "inherit",
+                  })}
+                  src={appIcon}
+                />
+              </RouterLink>
+              {isLive && (
+                <Box>
+                  <Grid container alignItems="center" spacing={3} wrap="nowrap">
+                    <Grid item>
+                      {props.live === LiveMode.Connecting && (
+                        <SignalWifi0BarIcon />
+                      )}
+                      {props.live === LiveMode.Live && (
+                        <SignalWifi4BarLockIcon
+                          className={css({
+                            // color: theme.palette.primary,
+                          })}
+                        />
+                      )}
+                    </Grid>
+                    <Grid item>
+                      <Box maxWidth="150px">
+                        <Typography variant="subtitle1" noWrap>
+                          {previewContentEditable({ value: props.liveLabel })}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              )}
+              <Hidden smDown>{renderMenu(false)}</Hidden>
+              <Hidden mdUp>
+                {!isLive && (
+                  <IconButton
+                    color="inherit"
+                    className={css({ padding: "0" })}
+                    onClick={() => {
+                      setMenuOpen(true);
+                    }}
+                  >
+                    <MenuIcon color="inherit" />
+                  </IconButton>
+                )}
+              </Hidden>
+              <Drawer
+                anchor="bottom"
+                open={menuOpen}
+                onClose={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                <Box p="2rem">{renderMenu(true)}</Box>
+              </Drawer>
+              <Typography
+                className={css({
+                  flex: "1 1 auto",
+                })}
+              />
+              <Hidden smDown>
+                {!shouldDisplayRejoinButton && (
+                  <Box width="250px">
+                    <Patreon />
+                  </Box>
+                )}
+              </Hidden>
+              {shouldDisplayRejoinButton && (
+                <ThemeProvider theme={highlight.highlightTheme}>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      history.push(`/play/${gameId}`);
+                    }}
+                    variant={"outlined"}
+                    className={css({
+                      minWidth: "10rem",
+                    })}
+                  >
+                    <Typography variant="button" noWrap>
+                      Rejoin&nbsp;Game
+                    </Typography>
+                  </Button>
+                </ThemeProvider>
+              )}
+            </Toolbar>
+          </Box>{" "}
         </AppBar>
       </Box>
     );

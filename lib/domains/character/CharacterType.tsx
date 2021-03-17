@@ -1,57 +1,71 @@
-export enum CharacterType {
+export enum CharacterTemplates {
   FateCondensed = "FateCondensed",
   FateCore = "FateCore",
   FateAccelerated = "FateAccelerated",
   FateOfCthulhu = "FateOfCthulhu",
+  DresdenFilesAccelerated = "DresdenFilesAccelerated",
   Dnd5e = "Dnd5e",
   TheWitchIsDead = "TheWitchIsDead",
   Blank = "Blank",
 }
 
-export const CharacterSheetTypes: Array<{
-  type: CharacterType;
+export type ICharacterTemplateWithGroup = {
+  template: CharacterTemplates;
   group: string;
-}> = [
-  { group: "Fate", type: CharacterType.FateCondensed },
-  { group: "Fate", type: CharacterType.FateCore },
-  { group: "Fate", type: CharacterType.FateAccelerated },
-  { group: "Fate", type: CharacterType.FateOfCthulhu },
-  { group: "Dungeons & Dragons", type: CharacterType.Dnd5e },
-  { group: "Grant Howitt", type: CharacterType.TheWitchIsDead },
-  { group: "Blank", type: CharacterType.Blank },
+};
+
+export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = [
+  { group: "Fate", template: CharacterTemplates.FateCondensed },
+  { group: "Fate", template: CharacterTemplates.FateCore },
+  { group: "Fate", template: CharacterTemplates.FateAccelerated },
+  { group: "Fate", template: CharacterTemplates.FateOfCthulhu },
+  { group: "Fate", template: CharacterTemplates.DresdenFilesAccelerated },
+  { group: "Dungeons & Dragons", template: CharacterTemplates.Dnd5e },
+  { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead },
+  { group: "Blank", template: CharacterTemplates.Blank },
 ];
 
-export const CharacterSheetTypesInformation: Record<
-  CharacterType,
+export const CharacterTemplatesInformation: Record<
+  CharacterTemplates,
   { author?: { name: string; link: string } }
 > = {
-  [CharacterType.FateCondensed]: {
+  [CharacterTemplates.FateCondensed]: {
     author: {
       name: "Evil Hat Productions",
       link: "https://www.evilhat.com/home/",
     },
   },
-  [CharacterType.FateCore]: {
+  [CharacterTemplates.FateCore]: {
     author: {
       name: "Evil Hat Productions",
       link: "https://www.evilhat.com/home/",
     },
   },
-  [CharacterType.FateAccelerated]: {
+  [CharacterTemplates.FateAccelerated]: {
     author: {
       name: "Evil Hat Productions",
       link: "https://www.evilhat.com/home/",
     },
   },
-  [CharacterType.FateOfCthulhu]: {
+  [CharacterTemplates.FateOfCthulhu]: {
     author: {
       name: "Evil Hat Productions",
       link: "https://www.evilhat.com/home/",
     },
   },
-  [CharacterType.Dnd5e]: {},
-  [CharacterType.TheWitchIsDead]: {
+  [CharacterTemplates.DresdenFilesAccelerated]: {
+    author: {
+      name: "Evil Hat Productions",
+      link: "https://www.evilhat.com/home/",
+    },
+  },
+  [CharacterTemplates.Dnd5e]: {},
+  [CharacterTemplates.TheWitchIsDead]: {
     author: { name: "Grant Howitt", link: "https://rowanrookanddecard.com/" },
   },
-  [CharacterType.Blank]: {},
+  [CharacterTemplates.Blank]: {},
 };
+
+export function getTemplateInfo(template: CharacterTemplates | undefined) {
+  return CharacterTemplatesInformation[template as CharacterTemplates];
+}

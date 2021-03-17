@@ -102,9 +102,11 @@ function useMark() {
   t("oracle.value.YesBut");
 
   t("character-dialog.template.FateOfCthulhu");
+  t("character-dialog.template.DresdenFilesAccelerated");
+  t("character-dialog.template.FateAccelerated");
+  t("character-dialog.template.FateCondensed");
+  t("character-dialog.template.FateCore");
   t("character-dialog.template.Dnd5e");
   t("character-dialog.template.TheWitchIsDead");
-  t("character-dialog.template.Accelerated");
-  t("character-dialog.template.CoreCondensed");
   t("character-dialog.template.Blank");
 }

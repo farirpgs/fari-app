@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Container, { ContainerProps } from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -14,11 +15,12 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/blue/app.png";
 import { RouterLink } from "../../components/AppLink/AppLink";
+import { ConditionalWrapper } from "../../components/ConditionalWrapper/ConditionalWrapper";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { ManagerMode } from "../../components/Manager/Manager";
-import { Page } from "../../components/Page/Page";
+import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -74,63 +76,56 @@ export const HomeRoute: React.FC<{}> = (props) => {
   }, []);
 
   return (
-    <Page hideHeaderLogo displayDonation={false} maxWidth="100vw">
+    <Page hideHeaderLogo maxWidth="100vw">
       <PageMeta
         title={t("home-route.meta.title")}
         description={t("home-route.meta.description")}
       />
       <Box>
-        <DarkBox
-          px="2rem"
-          pb="1rem"
-          mt="-2rem"
-          maxWidth="lg"
-          textAlign="left"
-          linear
-        >
-          <Grid container alignItems="center" spacing={3}>
-            <Grid item>
-              <img alt="Fari" width="50px" src={appIcon} />
+        <DarkBox px="2rem" pb="1rem" mt="-2rem" textAlign="left" linear>
+          <Box
+            className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
+          >
+            <Grid container justify="center" alignItems="center" spacing={3}>
+              <Grid item>
+                <img alt="Fari" width="70px" src={appIcon} />
+              </Grid>
+              <Grid item>
+                <FateLabel
+                  variant="h3"
+                  align="center"
+                  color="primary"
+                  uppercase={false}
+                >
+                  {"Fari"}
+                </FateLabel>
+              </Grid>
             </Grid>
-            <Grid item>
-              <FateLabel
-                variant="h3"
-                align="center"
-                color="primary"
-                uppercase={false}
-              >
-                {"Fari"}
-              </FateLabel>
-            </Grid>
-          </Grid>
+          </Box>
         </DarkBox>
-        <DarkBox
-          textAlign="left"
-          maxWidth="lg"
-          px="2rem"
-          py="2rem"
-          linear
-          mb={sectionsSeparator}
-          imageSrcs={[
-            "https://gyazo.com/8bfd3d59844728d5ee749ffe48196f23.png",
-            "https://gyazo.com/cc7519a58190e6d12504f9d06908d518.png",
-          ]}
-          // TODO: Text
-          title={
-            <>
-              {"Play Table-Top RPGs Online"}{" "}
-              <span className={css({ textDecoration: "underline" })}>
-                {"without the headache"}.
-              </span>
-            </>
-          }
-          subTitle="Start a new game, send a link to your friends and play now."
-        >
-          {renderHeading()}
+        <DarkBox linear px="2rem">
+          <Box
+            className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
+          >
+            <Box>
+              <LightBox
+                textAlign="left"
+                py="2rem"
+                mb={sectionsSeparator}
+                imageSrcs={[
+                  "https://gyazo.com/8bfd3d59844728d5ee749ffe48196f23.png",
+                  "https://gyazo.com/cc7519a58190e6d12504f9d06908d518.png",
+                ]}
+              >
+                {renderHeading()}
+              </LightBox>
+            </Box>
+          </Box>
         </DarkBox>
         <LightBox maxWidth="lg" mb={sectionsSeparator}>
           {renderPlayButtons()}
         </LightBox>
+
         <LightBox
           title="Getting Started"
           subTitle="Playing TTRPG online should not be complicated. Get started now."
@@ -252,24 +247,17 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderPlayButtons() {
     return (
       <Box>
-        <Grid container justify="center" spacing={6}>
+        <Grid container justify="center" spacing={8} alignItems="flex-start">
           {isWebRTCSupported() && (
             <Grid item xs={12} md={4} className={sectionGridItem}>
               <Box height="100%" display="flex" flexDirection="column">
-                <Box mb="1rem">
-                  <FateLabel variant="h5" align="center" uppercase={false}>
-                    {t("home-route.play-online.title")}
-                  </FateLabel>
-                </Box>
-
-                <Typography variant="body1" align="center">
-                  {t("home-route.play-online.description")}
-                </Typography>
-                <Box py="1rem" textAlign="center" marginTop="auto">
+                <Box mb="2rem">
                   <Button
-                    variant="outlined"
+                    variant="contained"
+                    fullWidth
                     color="primary"
                     size="large"
+                    className={css({ height: "3rem" })}
                     onClick={() => {
                       history.push("/play");
                       logger.info("HomeRoute:onStartOnlineGame");
@@ -278,25 +266,35 @@ export const HomeRoute: React.FC<{}> = (props) => {
                     {t("home-route.play-online.button")}
                   </Button>
                 </Box>
+                <Box py="1rem" textAlign="center">
+                  <Typography variant="h5" align="center">
+                    {t("home-route.play-online.description")}
+                  </Typography>
+                </Box>
               </Box>
             </Grid>
           )}
+
+          <Hidden smDown>
+            <Divider
+              orientation="vertical"
+              flexItem
+              className={css({
+                margin: "5rem 2rem",
+                height: "3rem",
+              })}
+            />
+          </Hidden>
+
           <Grid item xs={12} md={4} className={sectionGridItem}>
             <Box height="100%" display="flex" flexDirection="column">
-              <Box mb="1rem">
-                <FateLabel variant="h5" align="center" uppercase={false}>
-                  {t("home-route.play-offline.title")}
-                </FateLabel>
-              </Box>
-
-              <Typography variant="body1" align="center">
-                {t("home-route.play-offline.description")}
-              </Typography>
-              <Box py="1rem" textAlign="center" marginTop="auto">
+              <Box mb="2rem">
                 <Button
-                  variant="outlined"
+                  variant="contained"
+                  fullWidth
                   color="primary"
                   size="large"
+                  className={css({ height: "3rem" })}
                   data-cy="home.play-offline"
                   onClick={() => {
                     history.push("/play-offline");
@@ -305,6 +303,12 @@ export const HomeRoute: React.FC<{}> = (props) => {
                 >
                   {t("home-route.play-offline.button")}
                 </Button>
+              </Box>
+
+              <Box py="1rem" textAlign="center">
+                <Typography variant="h5" align="center">
+                  {t("home-route.play-offline.description")}
+                </Typography>
               </Box>
             </Box>
           </Grid>
@@ -476,29 +480,83 @@ export const HomeRoute: React.FC<{}> = (props) => {
 
   function renderHeading() {
     return (
-      <Box mt="-1rem">
-        <Box>
-          <Rating
-            defaultValue={5}
-            readOnly
-            size="large"
-            icon={
-              <FavoriteIcon
-                className={css({ fontSize: "inherit", color: "#ff6d75" })}
-              />
-            }
-          />
-        </Box>
-
-        <Box>
-          <Typography
-            variant="subtitle2"
-            className={css({
-              fontWeight: theme.typography.fontWeightBold,
-            })}
-          >
-            {t("home-route-believable")}
-          </Typography>
+      <Box display="flex" flexDirection="column" height="100%">
+        <Typography
+          variant="h4"
+          className={css({
+            label: "LightBox-title",
+            marginBottom: ".5rem",
+            textAlign: "left",
+            fontWeight: theme.typography.fontWeightBold,
+          })}
+        >
+          <>
+            {"Play Table-Top RPGs Online"}{" "}
+            <span className={css({ textDecoration: "underline" })}>
+              {"without the headache"}.
+            </span>
+          </>
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          className={css({
+            label: "LightBox-subtitle",
+            marginBottom: "2rem",
+            textAlign: "left",
+          })}
+        >
+          {"Start a new game, send a link to your friends and play now."}
+        </Typography>
+        <Box
+          className={css({
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-end",
+            flex: "1 0 auto",
+          })}
+        >
+          <Box>
+            <Rating
+              defaultValue={5}
+              readOnly
+              size="large"
+              icon={
+                <FavoriteIcon
+                  className={css({ fontSize: "inherit", color: "#ff6d75" })}
+                />
+              }
+            />
+          </Box>
+          <Box>
+            <Typography
+              variant="subtitle2"
+              className={css({
+                fontWeight: theme.typography.fontWeightBold,
+              })}
+            >
+              {t("home-route-believable")}
+            </Typography>
+          </Box>
+          {/* <Box mb="2rem">
+            <Grid container>
+              <Grid item xs={12} lg={8}>
+                <Button
+                  className={css({ height: "3rem" })}
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={() => {
+                    history.push("/play");
+                    logger.info("HomeRoute:onStartOnlineGame");
+                  }}
+                  fullWidth
+                >
+                  {"Play Now"}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box> */}
         </Box>
       </Box>
     );
@@ -514,7 +572,7 @@ type ILightBoxProps = {
   subTitle?: JSX.Element | string;
   imageSrcs?: Array<string>;
   textAlign?: string;
-  maxWidth: ContainerProps["maxWidth"];
+  maxWidth?: ContainerProps["maxWidth"];
 } & Omit<BoxProps, "maxWidth" | "title">;
 
 function LightBox(props: ILightBoxProps) {
@@ -557,7 +615,7 @@ function LightBox(props: ILightBoxProps) {
           {subTitle}
         </Typography>
       )}
-      <Box textAlign={textAlign ?? "center"}>{children}</Box>
+      {children}
     </>
   );
   return (
@@ -570,9 +628,18 @@ function LightBox(props: ILightBoxProps) {
       )}
     >
       <Box {...boxProps}>
-        <Container maxWidth={maxWidth}>
+        <ConditionalWrapper
+          condition={maxWidth !== undefined}
+          wrapper={(children) => {
+            return (
+              <Container maxWidth={maxWidth}>
+                <>{children}</>
+              </Container>
+            );
+          }}
+        >
           {imageSrcs ? (
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
               <Grid item sm={12} lg={6}>
                 {content}
               </Grid>
@@ -599,7 +666,7 @@ function LightBox(props: ILightBoxProps) {
           ) : (
             content
           )}
-        </Container>
+        </ConditionalWrapper>
       </Box>
     </Box>
   );
@@ -663,7 +730,6 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                 <Box display="flex" justifyContent="center" mb="1rem">
                   <card.icon
                     className={css({
-                      // color: theme.palette.primary.main,
                       width: "4rem",
                       height: "4rem",
                     })}

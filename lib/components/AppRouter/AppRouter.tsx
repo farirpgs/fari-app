@@ -50,7 +50,7 @@ export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
   });
 
   return (
-    <Page hideHeaderLogo displayDonation={false}>
+    <Page hideHeaderLogo>
       <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">

@@ -1,12 +1,15 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import { useTheme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import patreonImage from "../../../images/services/patreon.png";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const Patreon: React.FC = (props) => {
   const { t } = useTranslate();
+  const theme = useTheme();
   return (
     <a
       target="_blank"
@@ -37,7 +40,13 @@ export const Patreon: React.FC = (props) => {
           <Grid item>
             <img width="16px" src={patreonImage} />
           </Grid>
-          <Grid item>{t("donation.patreon")}</Grid>
+          <Grid item>
+            <Typography
+              className={css({ fontWeight: theme.typography.fontWeightBold })}
+            >
+              {t("donation.patreon")}
+            </Typography>
+          </Grid>
         </Grid>
       </Box>
     </a>
