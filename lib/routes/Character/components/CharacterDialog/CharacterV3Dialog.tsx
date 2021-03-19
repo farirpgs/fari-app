@@ -222,7 +222,7 @@ export const CharacterV3Dialog: React.FC<{
         <Dialog
           open={props.open}
           fullWidth
-          keepMounted
+          keepMounted={false}
           maxWidth="md"
           scroll="paper"
           onClose={onClose}

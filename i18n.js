@@ -49,17 +49,17 @@ async function findTranslations(sourceFileLocations) {
 async function updateTranslations(keys, translationFilesLocations) {
   const sortedKeys = sortBy(keys, (k) => k);
 
-  const files = await importJsonFiles(translationFilesLocations);
+  const files = await importJsonFiles(["./locales/en.json"]);
+  // const files = await importJsonFiles(translationFilesLocations);
 
   for (const file of files) {
     const content = file.content;
 
     const newData = sortedKeys.reduce((acc, curr, index) => {
       const existingValue = content[curr];
-
       return {
         ...acc,
-        [curr]: existingValue || null,
+        [curr]: existingValue || "",
       };
     }, {});
     const formattedData = prettier.format(JSON.stringify(newData), {

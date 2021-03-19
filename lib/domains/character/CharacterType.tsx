@@ -4,6 +4,7 @@ export enum CharacterTemplates {
   FateAccelerated = "FateAccelerated",
   FateOfCthulhu = "FateOfCthulhu",
   DresdenFilesAccelerated = "DresdenFilesAccelerated",
+  Heartbreaker = "Heartbreaker",
   Dnd5e = "Dnd5e",
   TheWitchIsDead = "TheWitchIsDead",
   Blank = "Blank",
@@ -20,6 +21,7 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Fate", template: CharacterTemplates.FateAccelerated },
   { group: "Fate", template: CharacterTemplates.FateOfCthulhu },
   { group: "Fate", template: CharacterTemplates.DresdenFilesAccelerated },
+  { group: "Fate", template: CharacterTemplates.Heartbreaker },
   { group: "Dungeons & Dragons", template: CharacterTemplates.Dnd5e },
   { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead },
   { group: "Blank", template: CharacterTemplates.Blank },
@@ -57,6 +59,12 @@ export const CharacterTemplatesInformation: Record<
     author: {
       name: "Evil Hat Productions",
       link: "https://www.evilhat.com/home/",
+    },
+  },
+  [CharacterTemplates.Heartbreaker]: {
+    author: {
+      name: "A.C. Luke",
+      link: "https://ac-luke.itch.io/heartbreaker-trifold",
     },
   },
   [CharacterTemplates.Dnd5e]: {},

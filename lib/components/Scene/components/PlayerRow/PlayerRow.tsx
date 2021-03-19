@@ -284,7 +284,7 @@ export const PlayerRow: React.FC<
                 playedDuringTurn: !props.player.playedDuringTurn,
               });
             }}
-            disabled={props.permissions.canUpdateInitiative}
+            disabled={!props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}
           >
             {props.player.playedDuringTurn ? (

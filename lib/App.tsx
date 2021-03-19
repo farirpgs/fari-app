@@ -103,6 +103,7 @@ function useMark() {
 
   t("character-dialog.template.FateOfCthulhu");
   t("character-dialog.template.DresdenFilesAccelerated");
+  t("character-dialog.template.Heartbreaker");
   t("character-dialog.template.FateAccelerated");
   t("character-dialog.template.FateCondensed");
   t("character-dialog.template.FateCore");

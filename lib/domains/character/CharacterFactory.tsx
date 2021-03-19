@@ -2,6 +2,7 @@ import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
 import DrescendFilesAccelerated from "./character-templates/DrescendFilesAccelerated.json";
+import Heartbreaker from "./character-templates/Heartbreaker.json";
 import { makeBlankCharacter } from "./character-templates/makeBlankCharacter";
 import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
@@ -36,6 +37,9 @@ export const CharacterFactory = {
       [CharacterTemplates.FateOfCthulhu]: makeFateOfCthulhuCharacter,
       [CharacterTemplates.DresdenFilesAccelerated]: () => {
         return this.makeFromJson(DrescendFilesAccelerated);
+      },
+      [CharacterTemplates.Heartbreaker]: () => {
+        return this.makeFromJson(Heartbreaker);
       },
       [CharacterTemplates.Dnd5e]: makeDnD5eCharacter,
       [CharacterTemplates.TheWitchIsDead]: makeTheWitchIsDeadCharacter,

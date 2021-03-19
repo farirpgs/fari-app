@@ -467,47 +467,50 @@ export const Scene: React.FC<IProps> = (props) => {
 
             return (
               <React.Fragment key={player.id}>
-                <CharacterV3Dialog
-                  readonly={!canControl}
-                  onPoolClick={(element) => {
-                    poolManager.actions.addOrRemovePoolElement(element);
-                  }}
-                  pool={poolManager.state.pool}
-                  open={characterDialogPlayerId === player.id}
-                  character={player.character}
-                  dialog={true}
-                  rolls={player.rolls}
-                  onSkillClick={(options, commands) => {
-                    if (commands) {
-                      const result = rollWithCommands(options, commands);
-                      handleSetPlayerRoll(player.id, result);
-                    } else {
-                      const result = rollDice(options);
-                      handleSetPlayerRoll(player.id, result);
-                    }
-                  }}
-                  onSave={(updatedCharacter) => {
-                    if (isGM) {
-                      sceneManager.actions.updatePlayerCharacter(
-                        player.id,
-                        updatedCharacter
-                      );
-                    } else {
-                      connectionsManager?.actions.sendToHost<IPeerActions>({
-                        action: "update-character",
-                        payload: updatedCharacter,
-                      });
-                    }
-                    setCharacterDialogPlayerId(undefined);
-                  }}
-                  onClose={() => {
-                    setCharacterDialogPlayerId(undefined);
-                  }}
-                  synced={isCharacterInStorage}
-                  onToggleSync={() => {
-                    handleOnToggleCharacterSync(player.character);
-                  }}
-                />
+                {characterDialogPlayerId === player.id && (
+                  <CharacterV3Dialog
+                    readonly={!canControl}
+                    onPoolClick={(element) => {
+                      poolManager.actions.addOrRemovePoolElement(element);
+                    }}
+                    pool={poolManager.state.pool}
+                    open={characterDialogPlayerId === player.id}
+                    character={player.character}
+                    dialog={true}
+                    rolls={player.rolls}
+                    onSkillClick={(options, commands) => {
+                      if (commands) {
+                        const result = rollWithCommands(options, commands);
+                        handleSetPlayerRoll(player.id, result);
+                      } else {
+                        const result = rollDice(options);
+                        handleSetPlayerRoll(player.id, result);
+                      }
+                    }}
+                    onSave={(updatedCharacter) => {
+                      if (isGM) {
+                        sceneManager.actions.updatePlayerCharacter(
+                          player.id,
+                          updatedCharacter
+                        );
+                      } else {
+                        connectionsManager?.actions.sendToHost<IPeerActions>({
+                          action: "update-character",
+                          payload: updatedCharacter,
+                        });
+                      }
+                      setCharacterDialogPlayerId(undefined);
+                    }}
+                    onClose={() => {
+                      setCharacterDialogPlayerId(undefined);
+                    }}
+                    synced={isCharacterInStorage}
+                    onToggleSync={() => {
+                      handleOnToggleCharacterSync(player.character);
+                    }}
+                  />
+                )}
+
                 <PlayerRow
                   data-cy={`scene.player-row.${playerRowIndex}`}
                   permissions={{

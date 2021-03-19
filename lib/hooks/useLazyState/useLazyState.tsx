@@ -11,6 +11,7 @@ export function useLazyState<T>(props: {
 
   const [internalValue, setInternalValue] = useState(props.value);
   const timeout = useRef<any | undefined>(undefined);
+  const willUpdate = useRef<boolean>(false);
   const latestOnChange = useRef(props.onChange);
 
   useEffect(
@@ -22,17 +23,21 @@ export function useLazyState<T>(props: {
 
   useEffect(
     function syncStateFromProps() {
-      setState(props.value);
+      if (!willUpdate.current) {
+        setInternalValue(props.value);
+      }
     },
     [props.value]
   );
 
   function setState(newValue: T) {
+    willUpdate.current = true;
     setInternalValue(newValue);
 
     clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
       latestOnChange.current(newValue);
+      willUpdate.current = false;
     }, delay);
   }
 

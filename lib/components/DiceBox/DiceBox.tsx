@@ -30,6 +30,7 @@ type IProps = {
   tooltipOpen?: boolean;
   tooltipPlacement?: TooltipProps["placement"];
   disabled?: boolean;
+  reduceOpacityWithoutHover?: boolean;
   showDetails?: boolean;
   className?: string;
   onClick: () => void;
@@ -78,20 +79,25 @@ export const DiceBox: React.FC<IProps> = (props) => {
   };
 
   const diceStyle = css({
-    fontSize: props.fontSize,
-    fontFamily: Font.monospace,
-    lineHeight: "normal",
-    color: diceRollsManager.state.color,
-    background: theme.palette.background.paper,
-    border: `${props.borderSize} solid ${theme.palette.text.primary}`,
-    borderRadius: "4px",
-    padding: ".2rem",
-    minWidth: props.size,
-    height: props.size,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    boxShadow: theme.shadows[2],
+    "fontSize": props.fontSize,
+    "fontFamily": Font.monospace,
+    "lineHeight": "normal",
+    "color": diceRollsManager.state.color,
+    "background": theme.palette.background.paper,
+    "border": `${props.borderSize} solid ${theme.palette.text.primary}`,
+    "borderRadius": "4px",
+    "padding": ".2rem",
+    "minWidth": props.size,
+    "height": props.size,
+    "display": "flex",
+    "justifyContent": "center",
+    "alignItems": "center",
+    "boxShadow": theme.shadows[2],
+    "transition": theme.transitions.create(["opacity"]),
+    "opacity": props.reduceOpacityWithoutHover ? ".2" : "1",
+    "&:hover": {
+      opacity: "1",
+    },
   });
   const diceRollingAnimationStyle = css({
     animationName: "spin",

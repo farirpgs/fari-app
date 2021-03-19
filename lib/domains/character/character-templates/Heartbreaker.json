@@ -1,0 +1,198 @@
+{
+  "id": "74da59e8-32bf-41bf-bc70-d89b7b43d0a6",
+  "version": 3,
+  "name": "Heartbreaker",
+  "template": "FateCondensed",
+  "lastUpdated": 1616077484,
+  "pages": [
+    {
+      "id": "797ebacd-7f37-4616-a645-72f58b663d08",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "43c81329-5c7e-43b2-b38c-d63e1f324b75",
+          "label": "Aspects",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f8528f2a-1928-475f-9834-8bd649122647",
+              "label": "How do people describe you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "f90d3234-7274-412a-8941-f7347443596d",
+              "label": "What causes you the most trouble?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "17f78101-5c22-46ae-8442-0f8e7ba746b6",
+              "label": "How has your heritage or background defined you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "d191a7e9-a5dd-4548-9b42-fcb2e99f2c18",
+              "label": "What is your signature weapon?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "d8c4287c-df5b-482e-8109-615b1a844c3d",
+              "label": "Why did you join the party?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "5201ec2c-9f96-4efa-a9a6-69376acde000",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "cb718b55-40b1-4fee-939a-0cb1fe81f806",
+              "label": "Fate Points",
+              "type": "PointCounter",
+              "meta": { "max": "3", "isMainPointCounter": true },
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "bac9cb1a-2c9e-4654-8367-514a4cdd6b2a",
+          "label": "Stunts &amp; Gear",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "141821ca-55fc-403a-b869-4cc1b47e27f1",
+              "label": "",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "07871473-cd27-4ed8-b725-6fa1316fe251",
+          "label": "Notes",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "8977a1e3-d6ed-4b96-8d39-c1f31cd9b76d",
+              "label": "",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "c637c27d-9b8c-49c7-a6e1-c202503e2c1a",
+          "label": "Approaches",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "a57eeccb-c78f-4f4c-bb0a-26f36bff946d",
+              "label": "Bold",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "d836403f-74e6-4caa-95fc-57a340d19dad",
+              "label": "Clever",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "80ed40fb-a164-4f04-9a78-17b28fdfb607",
+              "label": "Mighty",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "4a024194-304b-40e7-8d61-32665bf6aa8b",
+              "label": "Quick",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "269d4e69-428a-4f01-b7ff-fb53a7214c80",
+              "label": "Subtle",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "92e58e85-fd7a-4bb4-a966-6ae18e4bb889",
+              "label": "Wise",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            }
+          ]
+        },
+        {
+          "id": "737b9d1e-1eda-414e-b8d2-84453e2aa0da",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "89d6a3b7-aae6-4c08-b6d9-715446275ffa",
+              "label": "Stress",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fa292121-b0bd-4825-b71a-a616e6349a27",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "bb77a16e-646f-4f6b-99cd-ef0774d42c61",
+              "label": "[2] MILd",
+              "type": "Text",
+              "value": "",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "981d3a4a-7278-4eb8-a178-9b873f52f057",
+              "label": "[4] MODERATE",
+              "type": "Text",
+              "value": "",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "40e89581-333f-43e7-8be4-151a55b58d62",
+              "label": "[6] SEVERE",
+              "type": "Text",
+              "value": "",
+              "meta": { "checked": false }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

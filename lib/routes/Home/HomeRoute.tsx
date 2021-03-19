@@ -14,6 +14,7 @@ import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/blue/app.png";
+import lokalise from "../../../images/services/lokalise.png";
 import { RouterLink } from "../../components/AppLink/AppLink";
 import { ConditionalWrapper } from "../../components/ConditionalWrapper/ConditionalWrapper";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
@@ -43,11 +44,16 @@ const Patrons = [
   "Ty Prunty",
 ];
 
-const sectionGridItem = css({
-  display: "flex",
-  justifyContent: "center",
-  // flex: "1 0 auto",
-});
+const Sponsors: Array<{ image: string; name: string }> = [
+  {
+    name: "Netlify",
+    image: "https://www.netlify.com/img/global/badges/netlify-color-accent.svg",
+  },
+  {
+    name: "Lokalise",
+    image: lokalise,
+  },
+];
 
 type IHomeRouteCard = {
   label: string;
@@ -64,6 +70,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   const history = useHistory();
   const { t } = useTranslate();
   const logger = useLogger();
+  const lightBackground = useLightBackground();
   const theme = useTheme();
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
@@ -137,8 +144,8 @@ export const HomeRoute: React.FC<{}> = (props) => {
           {renderFirstActionCards()}
         </LightBox>
         <DarkBox
-          title="Join the Community"
-          subTitle="Have a say in the future of the app."
+          title={t("home-route.sections.join-community.title")}
+          subTitle={t("home-route.sections.join-community.sub-title")}
           px="2rem"
           py="5rem"
           mb={sectionsSeparator}
@@ -147,7 +154,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           {renderDiscord()}
         </DarkBox>
         <LightBox
-          title="Essential Tools"
+          title={t("home-route.sections.tools.title")}
           px="2rem"
           py="2rem"
           mb={sectionsSeparator}
@@ -156,14 +163,14 @@ export const HomeRoute: React.FC<{}> = (props) => {
           {renderSecondActionCards()}
         </LightBox>
         <DarkBox
+          title={t("home-route.sections.patreon.title")}
           px="2rem"
           py="5rem"
-          mb={sectionsSeparator}
-          title="Special thanks to those fine folks"
           maxWidth="sm"
         >
           {renderPatrons()}
         </DarkBox>
+        {renderSponsors()}
         <LightBox px="2rem" mb={sectionsSeparator} maxWidth="lg">
           {renderThirdActionCards()}
         </LightBox>
@@ -176,6 +183,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
             <MiscellaneousItems />
           </>
         </LightBox>
+
         <DarkBox px="2rem" py="5rem" maxWidth="sm" mb={sectionsSeparator}>
           {renderSupport()}
         </DarkBox>
@@ -215,7 +223,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderPatrons() {
     return (
       <Box textAlign="center">
-        <Box my=".5rem">
+        <Box mb="1rem">
           <Grid container spacing={1} justify="center">
             {Patrons.map((patron, i) => {
               const isLast = i === Patrons.length - 1;
@@ -235,11 +243,42 @@ export const HomeRoute: React.FC<{}> = (props) => {
             })}
           </Grid>
         </Box>
-        <Box my="1rem">
+        <Box mb="2rem">
           <Grid container item justify="center">
             <Patreon />
           </Grid>
         </Box>
+      </Box>
+    );
+  }
+
+  function renderSponsors() {
+    return (
+      <Box
+        px="2rem"
+        py="4rem"
+        mb={sectionsSeparator}
+        className={css({
+          background: lightBackground,
+          borderTop: `1px solid ${theme.palette.divider}`,
+          borderBottom: `1px solid ${theme.palette.divider}`,
+        })}
+      >
+        <Container maxWidth="lg">
+          <Grid container spacing={4} justify="center">
+            {Sponsors.map((company, i) => {
+              return (
+                <Grid item key={i}>
+                  <img
+                    className={css({ width: "auto", height: "50px" })}
+                    src={company.image}
+                    title={company.name}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
       </Box>
     );
   }
@@ -249,7 +288,15 @@ export const HomeRoute: React.FC<{}> = (props) => {
       <Box>
         <Grid container justify="center" spacing={8} alignItems="flex-start">
           {isWebRTCSupported() && (
-            <Grid item xs={12} md={4} className={sectionGridItem}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              className={css({
+                display: "flex",
+                justifyContent: "center",
+              })}
+            >
               <Box height="100%" display="flex" flexDirection="column">
                 <Box mb="2rem">
                   <Button
@@ -286,7 +333,15 @@ export const HomeRoute: React.FC<{}> = (props) => {
             />
           </Hidden>
 
-          <Grid item xs={12} md={4} className={sectionGridItem}>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            className={css({
+              display: "flex",
+              justifyContent: "center",
+            })}
+          >
             <Box height="100%" display="flex" flexDirection="column">
               <Box mb="2rem">
                 <Button
@@ -322,6 +377,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
       {
         label: t("home-route.cards.scenes.title"),
         description: t("home-route.cards.scenes.description"),
+        ctaLabel: t("home-route.cards.scenes.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -329,7 +385,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/alps.png"
           />
         ),
-        ctaLabel: t("home-route.cards.scenes.cta"),
         onClick: () => {
           scenesManager.actions.openManager(ManagerMode.Manage);
         },
@@ -353,6 +408,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
       {
         label: t("home-route.cards.srds.title"),
         description: t("home-route.cards.srds.description"),
+        ctaLabel: t("home-route.cards.srds.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -360,7 +416,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
-        ctaLabel: t("home-route.cards.srds.cta"),
         to: "/srds",
       },
     ];
@@ -373,9 +428,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSecondActionCards() {
     const cards: Array<IHomeRouteCard> = [
       {
-        label: "Dice Roller",
-        description:
-          "From Fate dice to d20, we've got you covered with our fair dice roller.",
+        label: t("home-route.cards.dice-roller.title"),
+        description: t("home-route.cards.dice-roller.description"),
+        ctaLabel: t("home-route.cards.dice-roller.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -383,12 +438,12 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/dice.png"
           />
         ),
-        ctaLabel: "Roll some dice",
         to: "/dice",
       },
       {
-        label: "Dice Pool",
-        description: "Using Dice Pools? Check-out our Dice Pool Roller.",
+        label: t("home-route.cards.dice-pool.title"),
+        description: t("home-route.cards.dice-pool.description"),
+        ctaLabel: t("home-route.cards.dice-pool.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -396,13 +451,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/box.png"
           />
         ),
-        ctaLabel: "Assemble your Dice Pool",
         to: "/dice-pool",
       },
       {
-        label: "Play Solo",
-        description:
-          "Use the Oracle to find out what your next adventure has in store for you.",
+        label: t("home-route.cards.play-solo.title"),
+        description: t("home-route.cards.play-solo.description"),
+        ctaLabel: t("home-route.cards.play-solo.cta"),
+
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -410,7 +465,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/crystal-ball.png"
           />
         ),
-        ctaLabel: "Consult the Oracle",
         to: "/oracle",
       },
     ];
@@ -424,7 +478,9 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderThirdActionCards() {
     const cards: Array<IHomeRouteCard> = [
       {
-        label: "Blog",
+        label: t("home-route.cards.blog.title"),
+        description: t("home-route.cards.blog.description"),
+        ctaLabel: t("home-route.cards.blog.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -432,14 +488,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/comments.png"
           />
         ),
-        description:
-          "Check-out the team's blog to know about the latest features.",
-        ctaLabel: "Read Now",
         to: "/blog",
       },
 
       {
-        label: "Fari Wiki",
+        label: t("home-route.cards.wiki.title"),
+        description: t("home-route.cards.wiki.description"),
+        ctaLabel: t("home-route.cards.wiki.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -447,8 +502,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
-        description: "Everything you need to become a Fari power-user.",
-        ctaLabel: "Read",
         to: "/fari-wiki",
       },
     ];
@@ -470,7 +523,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           target="_blank"
           rel="noreferrer"
         >
-          {"Join the Discord Server"}
+          {t("home-route.sections.join-community.cta")}
         </Button>
       </Box>
     );
@@ -709,6 +762,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                   "height": "100%",
                   "borderRadius": "4px",
                   "background": lightBackground,
+                  "border": `1px solid ${theme.palette.divider}`,
                   "width": "100%",
                   "transition": theme.transitions.create([
                     "transform",

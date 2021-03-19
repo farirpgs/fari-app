@@ -197,6 +197,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
           bottom: "7rem",
           zIndex: zIndex.diceFabDie,
         })}
+        reduceOpacityWithoutHover
         rolls={props.rollsForDiceBox ?? []}
         tooltipPlacement="right-end"
         size="3.5rem"

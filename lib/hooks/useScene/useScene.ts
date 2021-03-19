@@ -479,7 +479,7 @@ export function useScene(props: IProps) {
       produce((draft: IScene) => {
         const offlinePlayers = draft.players.filter((p) => p.offline);
 
-        const mappedConnections = connections.map((c) => {
+        const mappedConnections = connections.map<IPlayer>((c) => {
           const meta: IPeerMeta = c.metadata;
           const playerName = meta.playerName;
           const peerJsId = c.label;
@@ -489,15 +489,18 @@ export function useScene(props: IProps) {
 
           const rolls = playerMatch?.rolls ?? [];
           const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
+          const points = playerMatch?.points ?? "3";
 
           return {
             id: c.label,
             playerName: playerName,
             character: playerCharacter,
             rolls: rolls,
+            isGM: false,
+            points: points,
             playedDuringTurn: playedDuringTurn,
             offline: false,
-          } as IPlayer;
+          };
         });
         const allPlayers = [...mappedConnections, ...offlinePlayers];
         const allPlayersMinusRemovedPlayersFromStaleConnections = allPlayers.filter(
@@ -627,6 +630,10 @@ export function useScene(props: IProps) {
                       block.meta.isMainPointCounter;
                     if (shouldUpdateBlock) {
                       const typedBlock = block as IPointCounterBlock & IBlock;
+                      console.debug(`updating block for ${p.character.name}`, {
+                        points,
+                        maxPoints,
+                      });
                       typedBlock.value = points;
                       typedBlock.meta.max = maxPoints;
                       p.character.lastUpdated = getUnix();

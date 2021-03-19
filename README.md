@@ -76,7 +76,10 @@ Run `yarn start` and then the app should be running on http://localhost:1234
 ## Special Thanks
 
 <a href="https://www.netlify.com">
-  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+  <img width="100px" src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+</a>
+<a href="https://lokalise.com/">
+  <img  width="200px" style="margin-left:16px;" src="./images/services/lokalise.png" alt="[Deploys by Netlify](https://lokalise.com/)" />
 </a>
 
 [Netlify](https://netlify.com/) for providing hosting for Fari.
