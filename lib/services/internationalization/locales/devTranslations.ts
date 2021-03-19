@@ -4,6 +4,6 @@ import { ITranslationKeys } from "../../../locale";
 export const devTranslation = Object.keys(enTranslation).reduce((acc, curr) => {
   return {
     ...acc,
-    [curr]: curr,
+    [curr]: `{.${curr}.}`,
   };
 }, {} as Record<ITranslationKeys, string>);
