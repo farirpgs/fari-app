@@ -11,6 +11,7 @@ import {
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ITextBlock } from "../../../../../../domains/character/types";
+import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -78,6 +79,7 @@ export function BlockTextActions(
   props: IBlockActionComponentProps<ITextBlock>
 ) {
   const theme = useTheme();
+  const { t } = useTranslate();
   return (
     <>
       <Grid item>
@@ -95,10 +97,9 @@ export function BlockTextActions(
             });
           }}
         >
-          {/* TODO: text */}
           {props.block.meta.checked === undefined
-            ? "Add Toggle"
-            : "Remove Toggle"}
+            ? t("character-dialog.control.add-toggle")
+            : t("character-dialog.control.remove-toggle")}
         </Link>
       </Grid>
     </>

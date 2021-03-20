@@ -94,7 +94,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "alignItems": "center",
     "boxShadow": theme.shadows[2],
     "transition": theme.transitions.create(["opacity"]),
-    "opacity": props.reduceOpacityWithoutHover ? ".2" : "1",
+    "opacity": props.reduceOpacityWithoutHover ? ".4" : "1",
     "&:hover": {
       opacity: "1",
     },

@@ -13,18 +13,33 @@
 - [x] Organize index cards with drag-and-drop
 - [x] Import inside Data route
 - [x] Import and Duplicate inside Data route
-- [-] player row
+- [x] player row
   - [x] fix DEFAULT POINT COUNTER SYNC
 - [x] pool toggle on dice route
-- [ ] new player row
-- [ ] index card label after drag and drop
+- [z] new player row
+- [x] index card label after drag and drop
 - [x] sync character from character sheet
 - [x] let GM add character sheets
 - [ ] fix: can click skill of other character
 
+QA Blitz
+- [x] Change default label of new boxes
+- [x] Edit skill number without advanced mode
+- [x] Roll character skill without clicking on skill value
+- [x] Validate int in skills (no parse int)
+- [ ] Validate point counter int
+- [x] remove full screen for drawing area
+- [ ] character card ellipsis
+- [ ] dice result ellipsis
+- [x] character skill dont trigger BIG dice
+- [x] RETHINK HOW TO ROLL CHARACTER
+- [x] readonly drag and drop for players on aspects
+- [x] readonly remove consequence for players on aspects
+
+# THINK
+- [ ] fix rich text crash ?
 - [x] draw area moved to tabs ?
 - [ ] text on slot tracker ?
-- [ ] fix rich text crash ?
 - [ ] highlight tab text on click ?
 
 - [ ] seelie squire

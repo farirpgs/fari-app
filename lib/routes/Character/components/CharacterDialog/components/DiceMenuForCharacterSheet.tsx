@@ -11,11 +11,13 @@ import {
   IDiceCommandGroup,
   IDiceCommandGroupId,
 } from "../../../../../domains/dice/Dice";
+import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 
 export const DiceMenuForCharacterSheet: React.FC<{
   commandGroupIds: Array<string>;
   onChange(newCommandIds: Array<IDiceCommandGroupId>): void;
 }> = (props) => {
+  const { t } = useTranslate();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
@@ -79,8 +81,7 @@ export const DiceMenuForCharacterSheet: React.FC<{
                   }
                 }}
               >
-                {/* TODO: text */}
-                {"Dice"}
+                {t("character-dialog.control.set-dice")}
               </Link>
             </Tooltip>
             <Box>

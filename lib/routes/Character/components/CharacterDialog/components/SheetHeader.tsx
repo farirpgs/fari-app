@@ -129,8 +129,7 @@ export const SheetHeader: React.FC<{
 
         {props.advanced && (
           <Grid item>
-            {/* TODO: text */}
-            <Tooltip title={"Move"}>
+            <Tooltip title={t("character-dialog.control.move")}>
               <IconButton
                 data-cy={`character-dialog.${props.label}.move`}
                 size="small"
@@ -174,8 +173,7 @@ export const SheetHeader: React.FC<{
           <ListItemIcon>
             <ArrowUpwardIcon />
           </ListItemIcon>
-          {/* TODO: text */}
-          {"Move Up"}
+          {t("character-dialog.control.move-up")}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -187,8 +185,7 @@ export const SheetHeader: React.FC<{
           <ListItemIcon>
             <ArrowDownwardIcon />
           </ListItemIcon>
-          {/* TODO: text */}
-          {"Move Down"}
+          {t("character-dialog.control.move-down")}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -208,7 +205,9 @@ export const SheetHeader: React.FC<{
               })}
             />
           </ListItemIcon>
-          {props.position === Position.Left ? "Move Right" : "Move Left"}
+          {props.position === Position.Left
+            ? t("character-dialog.control.move-right")
+            : t("character-dialog.control.move-left")}
         </MenuItem>
         {props.pages?.map((page, pageIndex) => {
           if (pageIndex === props.currentPageIndex) {

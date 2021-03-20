@@ -95,7 +95,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           label: "Page",
         };
         draft.pages.push(newPage);
-        // draft.pages.splice(pageIndex + 1, 0, );
       })
     );
   }
@@ -442,12 +441,10 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        const numberOfBoxes = (draft.pages[pageIndex].sections[sectionIndex]
-          .blocks[blockIndex].value as ISlotTrackerBlock["value"]).length;
 
         (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
           .value as ISlotTrackerBlock["value"]).push({
-          label: (numberOfBoxes + 1).toString(),
+          label: "0",
           checked: false,
         });
       })

@@ -1,11 +1,11 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
+import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import HelpIcon from "@material-ui/icons/Help";
 import React from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
@@ -16,6 +16,8 @@ import {
   IDiceCommandNames,
   IRollDiceOptions,
 } from "../../../../../../domains/dice/Dice";
+import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
+import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
 import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
 import {
@@ -23,7 +25,6 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
-import { CharacterCircleBox } from "../CharacterCircleBox";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 
 export function BlockSkill(
@@ -35,13 +36,12 @@ export function BlockSkill(
   }
 ) {
   const theme = useTheme();
-
-  const commandGroupsMatch =
-    props.block.meta?.commands?.map((commandId) => {
-      return AllDiceCommandGroups.find(
-        (c) => c.id === commandId
-      ) as IDiceCommandGroup;
-    }) ?? [];
+  const { t } = useTranslate();
+  const [state, setState] = useLazyState({
+    value: props.block.value,
+    onChange: props.onValueChange,
+    delay: 300,
+  });
 
   const isSlotTrackerVisible = props.block.meta.checked !== undefined;
   const skillDescription =
@@ -49,156 +49,122 @@ export function BlockSkill(
 
   const canRoll = !props.advanced && !props.readonly;
 
-  const skillLabel = (
-    <FateLabel className={css({ display: "inline-block" })}>
-      <ContentEditable
-        data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-        readonly={!props.advanced}
-        border={props.advanced}
-        value={props.block.label}
-        onChange={(value) => {
-          props.onLabelChange(value);
-        }}
-      />
-    </FateLabel>
-  );
-  const hasCommands = !!props.block.meta.commands?.length;
+  const [firstCommandGroup] =
+    props.block.meta?.commands?.map((commandId) => {
+      return AllDiceCommandGroups.find(
+        (c) => c.id === commandId
+      ) as IDiceCommandGroup;
+    }) ?? [];
 
-  const blockCommandNames = CommandGroups.getCommandNamesFromBlock(props.block);
+  const handleRoll = () => {
+    if (!canRoll) {
+      return;
+    }
+    const hasCommands = !!props.block.meta.commands?.length;
+    const blockCommandNames = CommandGroups.getCommandNamesFromBlock(
+      props.block
+    );
+    const bonus = parseInt(props.block.value) || 0;
+
+    if (hasCommands) {
+      props.onSkillClick?.(
+        {
+          pool: false,
+          bonus,
+          bonusLabel: props.block.label,
+        },
+        blockCommandNames
+      );
+    } else {
+      props.onSkillClick?.(
+        {
+          pool: false,
+          bonus,
+          bonusLabel: props.block.label,
+        },
+        undefined
+      );
+    }
+  };
 
   return (
     <>
       <Box>
-        <Grid container spacing={1} alignItems="center" wrap="nowrap">
-          <Grid item xs={2}>
-            <Box>
-              <CharacterCircleBox
-                fontSize="1.2rem"
-                clickable={canRoll}
-                onClick={() => {
-                  if (!canRoll) {
-                    return;
-                  }
-                  const bonus = parseInt(props.block.value) || 0;
-
-                  if (hasCommands) {
-                    props.onSkillClick?.(
-                      {
-                        pool: false,
-                        bonus,
-                        bonusLabel: props.block.label,
-                      },
-                      blockCommandNames
-                    );
-                  } else {
-                    props.onSkillClick?.(
-                      {
-                        pool: false,
-                        bonus,
-                        bonusLabel: props.block.label,
-                      },
-                      undefined
-                    );
-                  }
-                }}
-              >
-                <ContentEditable
-                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-                  border={props.advanced}
-                  readonly={!props.advanced}
-                  className={css({
-                    cursor: !canRoll ? "inherit" : "pointer",
-                  })}
-                  value={props.block.value}
-                  onChange={(value) => {
-                    props.onValueChange(value);
-                  }}
-                />
-              </CharacterCircleBox>
-            </Box>
-          </Grid>
-          <Grid item className={css({ flex: "1 0 auto" })}>
-            {skillLabel}
-            {!props.advanced && (
-              <>
-                {skillDescription && (
-                  <>
-                    <Tooltip
-                      placement="right-start"
-                      classes={{
-                        tooltip: css({
-                          backgroundColor: theme.palette.background.paper,
-                          color: theme.palette.text.primary,
-                          boxShadow: theme.shadows[1],
-                          fontSize: "1rem",
-                        }),
-                      }}
-                      title={
-                        <>
-                          <Typography
-                            className={css({
-                              fontWeight: "bold",
-                              marginBottom: ".5rem",
-                            })}
-                          >
-                            {skillDescription.quick}
-                          </Typography>
-                          <Typography>{skillDescription.long}</Typography>
-                        </>
-                      }
-                    >
-                      <HelpIcon
-                        className={css({
-                          marginLeft: ".5rem",
-                          fontSize: "1rem",
-                        })}
-                      />
-                    </Tooltip>
-                  </>
-                )}
-                {commandGroupsMatch.length > 1 && (
-                  <Box>
-                    <Grid container spacing={1} alignItems="center">
-                      {commandGroupsMatch.map((commandGroup, index) => {
-                        return (
-                          <Grid item key={index}>
-                            <Tooltip title={commandGroup.label}>
-                              <commandGroup.icon
-                                className={css({
-                                  display: "flex",
-                                  width: "2rem",
-                                  height: "2rem",
-                                })}
-                              />
-                            </Tooltip>
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
-                  </Box>
-                )}
-              </>
-            )}
-          </Grid>
-          {commandGroupsMatch.length === 1 && (
+        <Grid container spacing={2} alignItems="center" wrap="nowrap">
+          {canRoll && (
             <Grid item>
-              {commandGroupsMatch.map((commandGroup, index) => {
-                return (
-                  <Grid item key={index}>
-                    <Tooltip title={commandGroup.label}>
-                      <commandGroup.icon
-                        className={css({
-                          display: "flex",
-                          width: "2rem",
-                          height: "2rem",
-                        })}
-                      />
-                    </Tooltip>
-                  </Grid>
-                );
-              })}
+              <Tooltip title={t("character-dialog.skill-block.roll")}>
+                <IconButton onClick={handleRoll} size="small">
+                  <firstCommandGroup.icon />
+                </IconButton>
+              </Tooltip>
             </Grid>
           )}
+          <Grid item>
+            <TextField
+              type="number"
+              data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+              value={state}
+              variant="outlined"
+              className={css({
+                textAlign: "center",
+              })}
+              onChange={(e) => {
+                if (!e.target.value) {
+                  setState("");
+                } else {
+                  const parsed = parseInt(e.target.value);
+                  if (parsed > 999) {
+                    setState("999");
+                  } else {
+                    setState(parsed.toString());
+                  }
+                }
+              }}
+              InputProps={{
+                className: css({
+                  width: "3rem",
+                  height: "3rem",
+                  borderRadius: "50%",
+                }),
+              }}
+              inputProps={{
+                className: css({
+                  "fontWeight": theme.typography.fontWeightBold,
+                  "textAlign": "center",
+                  // this disables the up/down browser arrows
+                  "padding": "0",
+                  "&[type=number]": {
+                    MozAppearance: "textfield",
+                  },
+                  "&::-webkit-outer-spin-button": {
+                    WebkitAppearance: "none",
+                    margin: 0,
+                  },
+                  "&::-webkit-inner-spin-button": {
+                    WebkitAppearance: "none",
+                    margin: 0,
+                  },
+                }),
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Grid>
+          <Grid item xs>
+            <FateLabel className={css({ display: "inline-block" })}>
+              <ContentEditable
+                data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                readonly={!props.advanced}
+                border={props.advanced}
+                value={props.block.label}
+                onChange={(value) => {
+                  props.onLabelChange(value);
+                }}
+              />
+            </FateLabel>
+          </Grid>
 
           {isSlotTrackerVisible && (
             <Grid item>
@@ -224,6 +190,7 @@ export function BlockSkillActions(
   props: IBlockActionComponentProps<ISkillBlock>
 ) {
   const theme = useTheme();
+  const { t } = useTranslate();
 
   return (
     <>
@@ -253,10 +220,9 @@ export function BlockSkillActions(
             });
           }}
         >
-          {/* TODO: text */}
           {props.block.meta.checked === undefined
-            ? "Add Toggle"
-            : "Remove Toggle"}
+            ? t("character-dialog.control.add-toggle")
+            : t("character-dialog.control.remove-toggle")}
         </Link>
       </Grid>
     </>
@@ -264,3 +230,91 @@ export function BlockSkillActions(
 }
 
 BlockSkillActions.displayName = "BlockSkillActions";
+
+// const commandGroupsMatch =
+// props.block.meta?.commands?.map((commandId) => {
+//   return AllDiceCommandGroups.find(
+//     (c) => c.id === commandId
+//   ) as IDiceCommandGroup;
+// }) ?? [];
+
+// const shouldDisplayDiceBelowLabel =
+//   !props.advanced && commandGroupsMatch.length > 1;
+
+// {skillDescription && (
+//   <>
+//     <Tooltip
+//       placement="right-start"
+//       classes={{
+//         tooltip: css({
+//           backgroundColor: theme.palette.background.paper,
+//           color: theme.palette.text.primary,
+//           boxShadow: theme.shadows[1],
+//           fontSize: "1rem",
+//         }),
+//       }}
+//       title={
+//         <>
+//           <Typography
+//             className={css({
+//               fontWeight: "bold",
+//               marginBottom: ".5rem",
+//             })}
+//           >
+//             {skillDescription.quick}
+//           </Typography>
+//           <Typography>{skillDescription.long}</Typography>
+//         </>
+//       }
+//     >
+//       <HelpIcon
+//         className={css({
+//           marginLeft: ".5rem",
+//           fontSize: "1rem",
+//         })}
+//       />
+//     </Tooltip>
+//   </>
+// )}
+
+// {commandGroupsMatch.length === 1 && (
+//   <Grid item>
+//     {commandGroupsMatch.map((commandGroup, index) => {
+//       return (
+//         <Grid item key={index}>
+//           <Tooltip title={commandGroup.label}>
+//             <commandGroup.icon
+//               className={css({
+//                 display: "flex",
+//                 width: "2rem",
+//                 height: "2rem",
+//               })}
+//             />
+//           </Tooltip>
+//         </Grid>
+//       );
+//     })}
+//   </Grid>
+// )}
+
+// {shouldDisplayDiceBelowLabel && (
+//   <Box width="100%">
+//     <Grid container spacing={1} alignItems="center">
+//       {commandGroupsMatch.map((commandGroup, index) => {
+//         return (
+//           <Grid item key={index}>
+//             <Tooltip title={commandGroup.label}>
+//               <commandGroup.icon
+//                 className={css({
+//                   display: "flex",
+//                   width: "2rem",
+//                   height: "2rem",
+//                 })}
+//               />
+//             </Tooltip>
+//           </Grid>
+//         );
+//       })}
+//     </Grid>
+//   </Box>
+// )}

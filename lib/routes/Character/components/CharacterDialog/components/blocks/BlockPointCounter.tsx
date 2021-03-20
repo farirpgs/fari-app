@@ -16,6 +16,7 @@ import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
+import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -31,10 +32,12 @@ export function usePointCounter(props: {
   const [internalPoints, setInternalPoints] = useLazyState({
     value: props.points,
     onChange: props.onPointsChange,
+    delay: 1000,
   });
   const [internalMaxPoints, setInternalMaxPoints] = useLazyState({
     value: props.maxPoints,
     onChange: props.onMaxPointsChange,
+    delay: 1000,
   });
 
   function increment() {
@@ -60,7 +63,7 @@ export function usePointCounter(props: {
     setInternalMaxPoints(intValue.toString());
   }
 
-  function reset() {
+  function refresh() {
     setInternalPoints(internalMaxPoints ?? "1");
   }
 
@@ -71,7 +74,7 @@ export function usePointCounter(props: {
       setMaxPoints,
       increment,
       decrement,
-      reset,
+      refresh,
     },
   };
 }
@@ -79,6 +82,8 @@ export function usePointCounter(props: {
 export function BlockPointCounter(
   props: IBlockComponentProps<IPointCounterBlock> & {}
 ) {
+  const { t } = useTranslate();
+
   const theme = useTheme();
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
@@ -96,6 +101,8 @@ export function BlockPointCounter(
       });
     },
   });
+  const canRefresh =
+    props.block.meta.max !== undefined && !props.readonly && !props.advanced;
   return (
     <>
       <Box>
@@ -200,7 +207,7 @@ export function BlockPointCounter(
             </Grid>
           )}
         </Grid>
-        {props.block.meta.max !== undefined && !props.readonly && (
+        {canRefresh && (
           <Grid container justify="center">
             <Grid item>
               <Link
@@ -210,11 +217,10 @@ export function BlockPointCounter(
                   color: theme.palette.primary.main,
                 })}
                 onClick={() => {
-                  pointsManager.actions.reset();
+                  pointsManager.actions.refresh();
                 }}
               >
-                {/* TODO: text */}
-                {"Refresh"}
+                {t("character-dialog.control.refresh")}
               </Link>
             </Grid>
           </Grid>
@@ -229,6 +235,7 @@ export function BlockPointCounterActions(
   props: IBlockActionComponentProps<IPointCounterBlock>
 ) {
   const theme = useTheme();
+  const { t } = useTranslate();
   return (
     <>
       <Grid item>
@@ -245,8 +252,9 @@ export function BlockPointCounterActions(
             });
           }}
         >
-          {/* TODO: text */}
-          {props.block.meta.isMainPointCounter ? "Unstar" : "Star"}
+          {props.block.meta.isMainPointCounter
+            ? t("character-dialog.control.unset-main-counter")
+            : t("character-dialog.control.set-main-counter")}
         </Link>
       </Grid>
       <Grid item>
@@ -263,8 +271,9 @@ export function BlockPointCounterActions(
             });
           }}
         >
-          {/* TODO: text */}
-          {props.block.meta.max === undefined ? "With Max" : "Without Max"}
+          {props.block.meta.max === undefined
+            ? t("character-dialog.control.add-max")
+            : t("character-dialog.control.remove-max")}
         </Link>
       </Grid>
     </>

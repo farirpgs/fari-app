@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import { useLazyState } from "../useLazyState";
 
 describe("useLazyState", () => {
-  it.each([undefined, 5000])(
+  it.each([500, 5000])(
     "delay set states to prevent performance issues with a delay of %s",
     (delay) => {
       // GIVEN a string value

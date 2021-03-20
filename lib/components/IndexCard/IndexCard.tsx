@@ -96,6 +96,7 @@ export const IndexCard: React.FC<
             position: "absolute",
             marginTop: "1rem",
             marginLeft: ".5rem",
+            display: props.readonly ? "none" : "blockl",
           })}
           onMove={(dragIndex, hoverIndex) => {
             props.onMove(dragIndex, hoverIndex);
@@ -302,7 +303,7 @@ export const IndexCard: React.FC<
 
   function renderHeader() {
     return (
-      <Box ml="1rem">
+      <Box ml={props.readonly ? "0" : "1rem"}>
         <Grid container alignItems="center" spacing={1}>
           <Grid item className={css({ flex: "1 0 auto" })}>
             <Typography
@@ -772,25 +773,27 @@ export const IndexCard: React.FC<
                         />
                       </FateLabel>
                     </Grid>
-                    <Grid item>
-                      <IconButton
-                        size="small"
-                        data-cy={`${props["data-cy"]}.consequence.${name}.remove`}
-                        onClick={() => {
-                          props.sceneManager.actions.removeAspectConsequence(
-                            props.aspectId,
-                            consequenceIndex
-                          );
-                        }}
-                      >
-                        <RemoveIcon
-                          className={css({
-                            width: "1rem",
-                            height: "1rem",
-                          })}
-                        />
-                      </IconButton>
-                    </Grid>
+                    {!props.readonly && (
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          data-cy={`${props["data-cy"]}.consequence.${name}.remove`}
+                          onClick={() => {
+                            props.sceneManager.actions.removeAspectConsequence(
+                              props.aspectId,
+                              consequenceIndex
+                            );
+                          }}
+                        >
+                          <RemoveIcon
+                            className={css({
+                              width: "1rem",
+                              height: "1rem",
+                            })}
+                          />
+                        </IconButton>
+                      </Grid>
+                    )}
                   </Grid>
                   <TextField
                     fullWidth

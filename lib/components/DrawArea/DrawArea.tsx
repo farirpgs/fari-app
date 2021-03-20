@@ -1,6 +1,4 @@
-import Dialog from "@material-ui/core/Dialog";
-import React, { useState } from "react";
-import { SlideUpTransition } from "../SlideUpTransition/SlideUpTransition";
+import React from "react";
 import { DrawObjects } from "./DrawObjects";
 import { IDrawAreaObjects, useDrawing } from "./hooks/useDrawing";
 
@@ -12,7 +10,6 @@ interface IProps {
 }
 
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
-  const [fullScreen, setFullScreen] = useState(false);
   const drawingManager = useDrawing({
     objects: props.objects,
     readonly: props.readonly,
@@ -25,33 +22,12 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
 
   return (
     <>
-      {!fullScreen && (
-        <DrawObjects
-          drawingManager={drawingManager}
-          readonly={props.readonly}
-          fullScreen={fullScreen}
-          onFullScreenChange={setFullScreen}
-          controls="bottom"
-          tokenTitles={props.tokenTitles}
-        />
-      )}
-      <Dialog
-        open={fullScreen}
-        fullScreen
-        onClose={() => {
-          setFullScreen(false);
-        }}
-        TransitionComponent={SlideUpTransition}
-      >
-        <DrawObjects
-          drawingManager={drawingManager}
-          readonly={props.readonly}
-          fullScreen={fullScreen}
-          onFullScreenChange={setFullScreen}
-          controls="top"
-          tokenTitles={props.tokenTitles}
-        />
-      </Dialog>
+      <DrawObjects
+        drawingManager={drawingManager}
+        readonly={props.readonly}
+        controls="bottom"
+        tokenTitles={props.tokenTitles}
+      />
     </>
   );
 });

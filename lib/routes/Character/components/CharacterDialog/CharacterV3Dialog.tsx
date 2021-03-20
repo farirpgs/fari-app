@@ -153,7 +153,8 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function onLoadTemplate(newTemplate: CharacterTemplates) {
-    const confirmed = confirm(t("character-dialog.load-template-confirmation"));
+    const confirmKey = t("character-dialog.load-template-confirmation");
+    const confirmed = confirm(confirmKey);
 
     if (confirmed) {
       characterManager.actions.loadTemplate(newTemplate);
@@ -166,7 +167,8 @@ export const CharacterV3Dialog: React.FC<{
 
   function onClose() {
     if (characterManager.state.dirty && !props.readonly) {
-      const confirmed = confirm(t("character-dialog.close-confirmation"));
+      const confirmKey = t("character-dialog.close-confirmation");
+      const confirmed = confirm(confirmKey);
       if (confirmed) {
         props.onClose?.();
         setAdvanced(false);
@@ -673,8 +675,7 @@ export const CharacterV3Dialog: React.FC<{
             <Grid item container xs={12} sm={6}>
               <Grid item>
                 <FormControlLabel
-                  // TODO: text
-                  label="Advanced Mode"
+                  label={t("character-dialog.control.advanced-mode")}
                   control={
                     <Switch
                       color="primary"
@@ -688,8 +689,7 @@ export const CharacterV3Dialog: React.FC<{
                 {props.onToggleSync && (
                   <Grid item>
                     <FormControlLabel
-                      // TODO: text
-                      label="Sync"
+                      label={t("character-dialog.control.sync")}
                       control={
                         <Switch
                           color="primary"
@@ -1271,8 +1271,7 @@ export const CharacterV3Dialog: React.FC<{
               );
             }}
           >
-            {/* TODO: text */}
-            {"Duplicate"}
+            {t("character-dialog.control.duplicate")}
           </Link>
         </Grid>
         <Grid item>
@@ -1291,7 +1290,7 @@ export const CharacterV3Dialog: React.FC<{
               );
             }}
           >
-            {t("character-dialog.control.remove-field")}
+            {t("character-dialog.control.remove-block")}
           </Link>
         </Grid>
       </Grid>

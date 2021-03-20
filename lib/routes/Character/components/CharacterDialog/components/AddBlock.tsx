@@ -16,6 +16,7 @@ import { BlockType } from "../../../../../domains/character/types";
 import { Icons } from "../../../../../domains/Icons/Icons";
 import { useThemeFromColor } from "../../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
+
 export const AddBlock: React.FC<{
   onAddBlock(section: BlockType): void;
 }> = (props) => {
@@ -53,8 +54,8 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <TextFieldsIcon fontSize="small" />
             </ListItemIcon>
-            {/* TODO: Text */}
-            <ListItemText primary="Text" />
+
+            <ListItemText primary={t("character-dialog.block-type.text")} />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -65,8 +66,10 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <FormatBoldIcon fontSize="small" />
             </ListItemIcon>
-            {/* TODO: Text */}
-            <ListItemText primary="Rich Text" />
+
+            <ListItemText
+              primary={t("character-dialog.block-type.rich-text")}
+            />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -77,8 +80,8 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <Filter1Icon fontSize="small" />
             </ListItemIcon>
-            {/* TODO: Text */}
-            <ListItemText primary="Skill" />
+
+            <ListItemText primary={t("character-dialog.block-type.skill")} />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -89,8 +92,10 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <Icons.ThrowDice fontSize="small" />
             </ListItemIcon>
-            {/* TODO: Text */}
-            <ListItemText primary="DicePool" />
+
+            <ListItemText
+              primary={t("character-dialog.block-type.dice-pool")}
+            />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -101,8 +106,10 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <ExposureIcon fontSize="small" />
             </ListItemIcon>
-            {/* TODO: Text */}
-            <ListItemText primary="Point Counter" />
+
+            <ListItemText
+              primary={t("character-dialog.block-type.point-counter")}
+            />
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -113,8 +120,10 @@ export const AddBlock: React.FC<{
             <ListItemIcon>
               <CheckCircleIcon fontSize="small" />
             </ListItemIcon>
-            {/* TODO: Text */}
-            <ListItemText primary="Slot Tracker" />
+
+            <ListItemText
+              primary={t("character-dialog.block-type.slot-tracker")}
+            />
           </MenuItem>
         </Menu>
       </ThemeProvider>

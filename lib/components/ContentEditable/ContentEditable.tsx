@@ -6,7 +6,7 @@ import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";
 import truncate from "lodash/truncate";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
 const DOMPurifyOptions: Config = {
@@ -59,7 +59,7 @@ export const ContentEditable: React.FC<
     value: string;
     className?: string;
     clickable?: boolean;
-    onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
+    onChange?: (value: string, event: FormEvent<HTMLSpanElement>) => void;
     readonly?: boolean;
     placeholder?: string;
     autoFocus?: boolean;
@@ -150,20 +150,14 @@ export const ContentEditable: React.FC<
     }
   }
 
-  // function handleOnPaste(e: React.ClipboardEvent<HTMLSpanElement>) {
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  //   const clipboardData = e.clipboardData;
-  //   const pastedData = clipboardData.getData("Text");
-  //   console.warn("pasted", pastedData);
-  //   window.document.execCommand("insertText", false, pastedData);
-  // }
-
   return (
     <>
       <span
         data-cy={props["data-cy"]}
-        // onPaste={handleOnPaste}
+        id={props.id}
+        ref={$ref}
+        contentEditable={!props.readonly}
+        onInput={handleOnChange}
         className={cx(
           css({
             "outline": "none",
@@ -202,10 +196,6 @@ export const ContentEditable: React.FC<
           }),
           props.className
         )}
-        id={props.id}
-        ref={$ref}
-        onInput={handleOnChange}
-        contentEditable={!props.readonly}
       />
       <Dialog
         maxWidth="xl"

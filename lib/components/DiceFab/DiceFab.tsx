@@ -29,6 +29,7 @@ import {
   MiscDiceCommandGroups,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { IDicePool } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { DiceBox } from "../DiceBox/DiceBox";
 
@@ -67,6 +68,8 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const diceManager = useContext(DiceContext);
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
+  const { t } = useTranslate();
+
   const [dirty, setDirty] = useState(false);
   const [fabCommands, setFabCommands] = useState<Array<IDiceCommandGroup>>([]);
 
@@ -141,11 +144,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
               icon={ButtonIcon}
               label={
                 <>
-                  {/* TODO: text */}
                   {hasSelectedNewCommands ||
                   (!hasSelectedNewCommands && !isRollButtonVisible)
-                    ? "Roll"
-                    : "Reroll"}
+                    ? t("dice-fab.roll")
+                    : t("dice-fab-reroll")}
                 </>
               }
               onFabClick={handleFabClick}

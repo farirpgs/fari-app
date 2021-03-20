@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-const DEFAULT_DELAY = 1000;
-
 export function useLazyState<T>(props: {
   value: T;
   onChange(newValue: T): void;
-  delay?: number;
+  delay: number;
 }) {
-  const delay = props.delay ?? DEFAULT_DELAY;
+  const delay = props.delay;
 
   const [internalValue, setInternalValue] = useState(props.value);
   const timeout = useRef<any | undefined>(undefined);

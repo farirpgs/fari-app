@@ -42,11 +42,7 @@ export const DrawRoute: React.FC = (props) => {
           </FateLabel>
         </Box>
 
-        <DrawObjects
-          drawingManager={drawingManager}
-          controls="top"
-          fullScreen
-        />
+        <DrawObjects drawingManager={drawingManager} controls="top" />
       </Container>
     </Page>
   );

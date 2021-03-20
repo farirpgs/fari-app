@@ -2,8 +2,8 @@
   "id": "74da59e8-32bf-41bf-bc70-d89b7b43d0a6",
   "version": 3,
   "name": "Heartbreaker",
-  "template": "FateCondensed",
-  "lastUpdated": 1616077484,
+  "template": "Heartbreaker",
+  "lastUpdated": 1616252526,
   "pages": [
     {
       "id": "797ebacd-7f37-4616-a645-72f58b663d08",
@@ -72,7 +72,28 @@
           "blocks": [
             {
               "id": "141821ca-55fc-403a-b869-4cc1b47e27f1",
-              "label": "",
+              "label": "Stunt #1",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "4d7e50b4-d4ce-4f9f-8b5e-54031f5196d5",
+              "label": "Stunt #2",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "3e0bbe4a-497c-4a7d-bab4-3ec58455127f",
+              "label": "Stunt #3",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "9eea4d6d-fb42-4d97-a477-c5451ea74192",
+              "label": "Gear",
               "type": "Text",
               "value": "",
               "meta": {}
