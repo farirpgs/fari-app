@@ -39,9 +39,9 @@ The data that is synced includes things like the index card, the drawing pad and
 
 The Offline mode is useful if everyone are physically in the same room but the GM still wants to use Fari to manage their Scenes.
 
-When playing in Offline mode, Fari won't connect to its server and won't generate the unique link cited above. It will instead just store everything locally temporarily.
+When playing in Offline mode, Fari won't connect to its server and won't generate the unique link cited above. It will instead just store everything locally in a temporary manner.
 
-This mode is also useful if for some reasons, some of your players can't connect to your Online game session. See more about that below.
+This mode is also useful if for some reasons, some of your players can't connect to your Online game session and you want to share your screen with them. See more about connection issues below.
 
 > #### Issues When Joining a Game
 >
@@ -57,9 +57,9 @@ When a player joins an Online game session, they don't have a character linked t
 
 Kind of like in real life, the player needs to pull their character sheet out of their bag and put it on the table.
 
-To do that, a player simply has to click on the `Add a Character Sheet` link on the left of the screen.
+To do that, a player simply has to click on the `+` button beside their name on the left of the screen.
 
-![Add A Character Sheet](https://gyazo.com/5b88a09e2fe82674694b0366960b10dc.png)
+![Add A Character Sheet](https://gyazo.com/34943288cf4b1245323ced6dc8902c56.png)
 
 You then have the ability to do three things:
 
