@@ -310,12 +310,7 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
 
   return (
     <>
-      <span
-        className={css({
-          display: "flex",
-          alignItems: "center",
-        })}
-      >
+      <span>
         {diceRollsManager.state.finalResultRolls.map((r, i) => {
           const options = DiceCommandOptions[r.type];
           const isFirst = i === 0;
@@ -323,18 +318,10 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
           const IconForPool = CommandGroups.getCommandGroupByValue(r.type).icon;
 
           return (
-            <span
-              key={i}
-              className={css({
-                display: "flex",
-                alignItems: "center",
-              })}
-            >
+            <span key={i} className={css({ display: "inline-block" })}>
               {!isFirst && (
                 <span
                   className={css({
-                    display: "flex",
-                    alignItems: "center",
                     margin: "0 .2rem",
                   })}
                 >
@@ -342,29 +329,15 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
                 </span>
               )}
               <Tooltip title={r.type}>
-                <span
-                  className={css({
-                    display: "flex",
-                    alignItems: "center",
-                  })}
-                >
+                <span>
                   <span
                     className={css({
-                      display: "flex",
-                      alignItems: "center",
                       fontFamily: isFate ? "fate" : "inherit",
                     })}
                   >
                     {options.formatDetailedResult(r.value)}
                   </span>
-                  <span
-                    className={css({
-                      display: "flex",
-                      alignItems: "center",
-                    })}
-                  >
-                    {isPool && <IconForPool />}
-                  </span>
+                  <span className={css({})}>{isPool && <IconForPool />}</span>
                 </span>
               </Tooltip>
             </span>

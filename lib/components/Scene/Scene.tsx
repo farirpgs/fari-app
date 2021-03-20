@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { useMediaQuery } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -22,7 +23,6 @@ import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
@@ -75,7 +75,6 @@ import { DiceFab, DiceFabMode } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
-import { MagicGridContainer } from "../MagicGridContainer/MagicGridContainer";
 import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
@@ -135,8 +134,9 @@ export const Scene: React.FC<IProps> = (props) => {
   const logger = useLogger();
   const rollDice = useRollDice();
   const rollWithCommands = useRollDiceWithCommands();
-  const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isXlAndUp = useMediaQuery(theme.breakpoints.up("xl"));
+  const isLgAndUp = useMediaQuery(theme.breakpoints.up("lg"));
+  const isMDAndUp = useMediaQuery(theme.breakpoints.up("md"));
   const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
   const errorTheme = useThemeFromColor(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
@@ -169,6 +169,14 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const shouldBlockLeaving =
     isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
+
+  const numberOfColumnsForCards = isXlAndUp
+    ? 4
+    : isLgAndUp
+    ? 3
+    : isMDAndUp
+    ? 2
+    : 1;
 
   useBlockReload(shouldBlockLeaving);
   useEffect(() => {
@@ -591,12 +599,13 @@ export const Scene: React.FC<IProps> = (props) => {
         <Box>
           <Collapse in={hasPlayersWithCharacterSheets}>
             <Box>
-              <MagicGridContainer
-                items={playersWithCharacterSheets.length}
-                deps={[
-                  playersWithCharacterSheets.length,
-                  Object.keys(sceneManager.state.scene.aspects).length,
-                ]}
+              <Box
+                className={css({
+                  label: "Scene-characters-masonry-content",
+                  columnCount: numberOfColumnsForCards,
+                  columnWidth: "auto",
+                  columnGap: "1rem",
+                })}
               >
                 {playersWithCharacterSheets.map((player, index) => {
                   const isMe =
@@ -604,22 +613,36 @@ export const Scene: React.FC<IProps> = (props) => {
                     props.userId === player.id;
                   const canControl = isGM || isMe;
                   return (
-                    <CharacterCard
+                    <Box
                       key={player?.id || index}
-                      readonly={!canControl}
-                      isMe={isMe}
-                      playerName={player.playerName}
-                      characterSheet={player.character}
-                      onRoll={(options) => {
-                        handleSetPlayerRoll(player.id, rollDice(options));
-                      }}
-                      onCharacterDialogOpen={() => {
-                        setCharacterDialogPlayerId(player.id);
-                      }}
-                    />
+                      className={css({
+                        label: "Scene-characters-masonry-card",
+                        width: "100%",
+                        display: "inline-block",
+                        marginBottom: "1rem",
+                      })}
+                    >
+                      <CharacterCard
+                        key={player?.id || index}
+                        readonly={!canControl}
+                        isMe={isMe}
+                        playerName={player.playerName}
+                        characterSheet={player.character}
+                        onRoll={(options) => {
+                          handleSetPlayerRoll(player.id, rollDice(options));
+                        }}
+                        onCharacterDialogOpen={() => {
+                          setCharacterDialogPlayerId(player.id);
+                        }}
+                        pool={poolManager.state.pool}
+                        onPoolClick={(element) => {
+                          poolManager.actions.addOrRemovePoolElement(element);
+                        }}
+                      />
+                    </Box>
                   );
                 })}
-              </MagicGridContainer>
+              </Box>
             </Box>
           </Collapse>
         </Box>
@@ -740,24 +763,15 @@ export const Scene: React.FC<IProps> = (props) => {
       ? sortedAspectIds
       : aspectIdsToShow;
 
-    const count = isLGAndUp ? 4 : isMD ? 3 : 1;
-
     return (
       <Box>
         <Box>{renderGMAspectActions()}</Box>
 
         {hasAspects && (
-          // <MagicGridContainer
-          //   items={aspectsToRender.length}
-          //   deps={[
-          //     sceneManager.computed.playersWithCharacterSheets.length,
-          //     Object.keys(sceneManager.state.scene.aspects).length,
-          //   ]}
-          // >
           <Box
             className={css({
               label: "Scene-aspect-masonry-content",
-              columnCount: count,
+              columnCount: numberOfColumnsForCards,
               columnWidth: "auto",
               columnGap: "1rem",
             })}
@@ -792,7 +806,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 </Box>
               );
             })}
-            {/* </MagicGridContainer> */}
           </Box>
         )}
         {!hasAspects && (

@@ -1,35 +1,38 @@
 import { css, cx } from "@emotion/css";
+import { Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import Checkbox from "@material-ui/core/Checkbox";
 import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import PersonIcon from "@material-ui/icons/Person";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import truncate from "lodash/truncate";
 import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
   BlockType,
   IBlock,
   ICharacter,
+  IDicePoolBlock,
   IPointCounterBlock,
+  ISection,
   ISkillBlock,
   ISlotTrackerBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import { CircleTextField } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSkill";
-import { ContentEditable } from "../../../../ContentEditable/ContentEditable";
+import {
+  BlockDicePool,
+  IDicePool,
+  IDicePoolElement,
+} from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
+import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
+import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
 
@@ -39,8 +42,10 @@ export const CharacterCard: React.FC<{
   readonly: boolean;
   isMe: boolean;
   width?: string;
+  pool: IDicePool;
   onCharacterDialogOpen?(): void;
   onRoll?(options: IRollDiceOptions): void;
+  onPoolClick(element: IDicePoolElement): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -59,7 +64,7 @@ export const CharacterCard: React.FC<{
 
   const renderBlockByBlockType: Record<
     keyof typeof BlockType,
-    (block: any) => JSX.Element
+    (section: ISection, block: any, blockIndex: number) => JSX.Element
   > = {
     Text: renderBlockText,
     RichText: renderBlockText,
@@ -132,11 +137,14 @@ export const CharacterCard: React.FC<{
                     <FateLabel noWrap>{section.label}</FateLabel>
                   </Box>
                   <Grid container>
-                    {section.blocks.map((block) => {
-                      console.debug("block", block);
+                    {section.blocks.map((block, blockIndex) => {
                       return (
                         <React.Fragment key={block.id}>
-                          {renderBlockByBlockType[block.type](block)}
+                          {renderBlockByBlockType[block.type](
+                            section,
+                            block,
+                            blockIndex
+                          )}
                         </React.Fragment>
                       );
                     })}
@@ -153,32 +161,34 @@ export const CharacterCard: React.FC<{
     </Box>
   );
 
-  function renderBlockText(block: IBlock & ITextBlock) {
-    const containsImage = block.value.includes("<img");
-    const value = containsImage
-      ? block.value
-      : truncate(block.value, { length: 50 });
-
+  function renderBlockText(
+    section: ISection,
+    block: IBlock & ITextBlock,
+    blockIndex: number
+  ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
-        <Box>
-          <FateLabel noWrap className={css({ fontSize: ".8rem" })}>
-            {block.label}
-          </FateLabel>
-        </Box>
-        <Box>
-          <Typography
-            title={block.value}
-            className={css({ fontSize: ".8rem" })}
-          >
-            <ContentEditable readonly={true} value={value} />
-          </Typography>
-        </Box>
+        <BlockText
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
       </Grid>
     );
   }
 
-  function renderBlockSkill(block: IBlock & ISkillBlock) {
+  function renderBlockSkill(
+    section: ISection,
+    block: IBlock & ISkillBlock,
+    blockIndex: number
+  ) {
     return (
       <Grid item className={css({ flex: "0 1 auto", marginTop: ".2rem" })}>
         <Link
@@ -213,80 +223,76 @@ export const CharacterCard: React.FC<{
       </Grid>
     );
   }
-  function renderDicePool(block: IBlock & ISkillBlock) {
-    return (
-      <Grid item className={css({ flex: "0 1 auto", marginTop: ".2rem" })}>
-        {/*  */}
-      </Grid>
-    );
-  }
-  function renderBlockPointCounter(block: IBlock & IPointCounterBlock) {
-    return (
-      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
-        <Box>
-          <FateLabel
-            noWrap
-            className={css({ fontSize: ".8rem", marginBottom: ".2rem" })}
-          >
-            {block.label}
-          </FateLabel>
 
-          <Grid container wrap="nowrap" alignItems="center" spacing={1}>
-            <Grid item>
-              <CircleTextField value={block.value} readonly />
-            </Grid>
-            {block.meta?.max !== undefined && (
-              <>
-                <Grid item>
-                  <Typography
-                    className={css({
-                      fontSize: "1.5rem",
-                      color: "#bdbdbd",
-                    })}
-                  >
-                    {"/"}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <CircleTextField value={block.meta?.max ?? ""} readonly />
-                </Grid>
-              </>
-            )}
-          </Grid>
-        </Box>
+  function renderDicePool(
+    section: ISection,
+    block: IBlock & IDicePoolBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid item xs={12}>
+        <BlockDicePool
+          advanced={false}
+          readonly={props.readonly}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={0}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+          pool={props.pool}
+          onPoolClick={props.onPoolClick}
+        />
       </Grid>
     );
   }
-  function renderBlockSlotTracker(block: IBlock & ISlotTrackerBlock) {
+  function renderBlockPointCounter(
+    section: ISection,
+    block: IBlock & IPointCounterBlock,
+    blockIndex: number
+  ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
-        <Box display="flex" justifyContent="center">
-          <FateLabel noWrap className={css({ fontSize: ".8rem" })}>
-            {block.label}
-          </FateLabel>
-        </Box>
-        <Grid container justify="center">
-          {block.value.map((box, boxIndex) => {
-            return (
-              <Grid item key={boxIndex}>
-                <Box
-                  className={css({
-                    display: "flex",
-                    justifyContent: "center",
-                  })}
-                >
-                  <Checkbox
-                    color="primary"
-                    disabled
-                    icon={<RadioButtonUncheckedIcon />}
-                    checkedIcon={<CheckCircleIcon />}
-                    checked={box.checked}
-                  />
-                </Box>
-              </Grid>
-            );
-          })}
-        </Grid>
+        <BlockPointCounter
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
+      </Grid>
+    );
+  }
+  function renderBlockSlotTracker(
+    section: ISection,
+    block: IBlock & ISlotTrackerBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockSlotTracker
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+          onAddBox={() => {}}
+          onRemoveBox={() => {}}
+          onToggleBox={(boxIndex) => {}}
+          onBoxLabelChange={(boxIndex, value) => {}}
+        />
       </Grid>
     );
   }

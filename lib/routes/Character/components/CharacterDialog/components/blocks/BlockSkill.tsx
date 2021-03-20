@@ -104,6 +104,7 @@ export function BlockSkill(
             <CircleTextField
               data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
               value={state}
+              readonly={props.readonly}
               onChange={(newState) => {
                 setState(newState);
               }}

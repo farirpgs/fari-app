@@ -20,17 +20,17 @@
 - [x] index card label after drag and drop
 - [x] sync character from character sheet
 - [x] let GM add character sheets
-- [ ] fix: can click skill of other character
+- [x] fix: can click skill of other character
 
 QA Blitz
 - [x] Change default label of new boxes
 - [x] Edit skill number without advanced mode
 - [x] Roll character skill without clicking on skill value
 - [x] Validate int in skills (no parse int)
-- [ ] Validate point counter int
+- [x] Validate point counter int
 - [x] remove full screen for drawing area
-- [ ] character card ellipsis
-- [ ] dice result ellipsis
+- [x] character card ellipsis
+- [x] dice result ellipsis
 - [x] character skill dont trigger BIG dice
 - [x] RETHINK HOW TO ROLL CHARACTER
 - [x] readonly drag and drop for players on aspects

@@ -105,10 +105,8 @@ export function BlockSlotTracker(
                     checkedIcon={<CheckCircleIcon />}
                     className={css({ padding: "0" })}
                     checked={box.checked}
+                    disabled={props.readonly}
                     onChange={(event) => {
-                      if (props.readonly) {
-                        return;
-                      }
                       props.onToggleBox(boxIndex);
                     }}
                   />

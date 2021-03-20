@@ -108,6 +108,7 @@ export const CharacterV3Dialog: React.FC<{
   dialog: boolean;
   pool: IDicePool;
   rolls: Array<IDiceRollWithBonus>;
+  synced?: boolean;
   onSkillClick(
     options: IRollDiceOptions,
     commands: Array<IDiceCommandNames> | undefined
@@ -115,7 +116,6 @@ export const CharacterV3Dialog: React.FC<{
   onPoolClick(element: IDicePoolElement): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
-  synced?: boolean;
   onToggleSync?(): void;
 }> = (props) => {
   const { t } = useTranslate();
@@ -535,6 +535,8 @@ export const CharacterV3Dialog: React.FC<{
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
                   onRoll={() => undefined}
+                  pool={props.pool}
+                  onPoolClick={props.onPoolClick}
                 />
               </Box>
             </Grid>

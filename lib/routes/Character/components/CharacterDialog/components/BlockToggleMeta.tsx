@@ -29,13 +29,11 @@ export function BlockToggleMeta<
       icon={<RadioButtonUncheckedIcon />}
       checkedIcon={<CheckCircleIcon />}
       checked={props.block.meta.checked}
+      disabled={props.readonly}
       className={css({
         padding: "0",
       })}
       onChange={(event) => {
-        if (props.readonly) {
-          return;
-        }
         props.onMetaChange({
           ...props.block.meta,
           checked: !props.block.meta.checked,

@@ -60,7 +60,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
       <Box>
         <Typography>
           <ContentEditable
-            border
+            border={!props.readonly}
             data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
             readonly={props.readonly}
             value={props.block.value}

@@ -10,10 +10,26 @@ export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
+const DefaultCommands: Array<IDiceCommandNames> = ["1dF", "1dF", "1dF", "1dF"];
+// const DefaultCommands: Array<IDiceCommandNames> = [
+//   "1d4",
+//   "1d6",
+//   "1d8",
+//   "1d10",
+//   "1d12",
+//   "1d20",
+//   "1d4",
+//   "1d6",
+//   "1d8",
+//   "1d10",
+//   "1d12",
+//   "1d20",
+// ];
+
 export function useDice() {
   const [selectedCommands, setSelectedCommands] = useState<
     Array<IDiceCommandNames>
-  >(["1dF", "1dF", "1dF", "1dF"]);
+  >(DefaultCommands);
 
   const reset = () => {
     setSelectedCommands(["1dF", "1dF", "1dF", "1dF"]);
