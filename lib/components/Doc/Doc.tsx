@@ -671,6 +671,7 @@ export const Doc: React.FC<IProps> = (props) => {
           >
             <Box mt="4.9rem" />
             <Divider />
+            <Box mb="1rem" />
             {sideBar}
           </Drawer>
         </Hidden>

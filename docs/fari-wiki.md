@@ -140,9 +140,17 @@ Fari is available in multiple languages like English, Spanish and French but if 
 
 Fari's supported languages are split into multiple files where each file contains a list of keys used by the app and their translated values.
 
+## Lokalise
+
+Fari uses [Lokalise](https://lokalise.com/) to help with localization.
+
+If you are interested in contributing to Fari's in a significant way, contact [RPDeshaies on Discord](https://discord.com/invite/vMAJFjUraA) to see about becoming an official Fari Translator.
+
+Otherwise, take a look at the other options for translating Fari programmatically.
+
 ## Adding a new language to Fari
 
-To add a new language to Fari, you can download the [english translation file](https://github.com/fariapp/fari/blob/master/lib/services/internationalization/locales/enTranslation.ts) and update the values of each key.
+To add a new language to Fari, you can download the [english translation file](https://github.com/fariapp/fari/blob/master/locales/en.json) and update the values of each key.
 
 Once the file is translated, [open a feature request](https://github.com/fariapp/fari/issues/new/choose) and upload the new file in the issue.
 
@@ -150,7 +158,7 @@ A developer will then integrate the file into the application.
 
 ## Updating a translation value
 
-It's possible that something in the app was badly translated, in that case, you can find the proper [language file](https://github.com/fariapp/fari/tree/master/lib/services/internationalization/locales) and open an issue to say which key needs to be updated and what should be the new value.
+It's possible that something in the app was badly translated, in that case, you can find the proper [language file](https://github.com/fariapp/fari/tree/master/locales/en.json) and open an issue to say which key needs to be updated and what should be the new value.
 
 Also, try to include the reason why the original value was not good.
 
