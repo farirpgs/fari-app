@@ -13,8 +13,8 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import FlipToBackIcon from "@material-ui/icons/FlipToBack";
 import HelpIcon from "@material-ui/icons/Help";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import StarIcon from "@material-ui/icons/Star";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
@@ -118,9 +118,9 @@ export const SheetHeader: React.FC<{
                 }}
               >
                 {props.visibleOnCard ? (
-                  <StarIcon htmlColor={headerColor} />
+                  <VisibilityIcon htmlColor={headerColor} />
                 ) : (
-                  <StarBorderIcon htmlColor={headerColor} />
+                  <VisibilityOffIcon htmlColor={headerColor} />
                 )}
               </IconButton>
             </Tooltip>

@@ -28,7 +28,7 @@ import {
 } from "../../../../../domains/character/types";
 import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import { CharacterCircleBox } from "../../../../../routes/Character/components/CharacterDialog/components/CharacterCircleBox";
+import { CircleTextField } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSkill";
 import { ContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
@@ -129,10 +129,11 @@ export const CharacterCard: React.FC<{
               return (
                 <Box key={section.id} className={css({ clear: "both" })}>
                   <Box>
-                    <FateLabel>{section.label}</FateLabel>
+                    <FateLabel noWrap>{section.label}</FateLabel>
                   </Box>
                   <Grid container>
                     {section.blocks.map((block) => {
+                      console.debug("block", block);
                       return (
                         <React.Fragment key={block.id}>
                           {renderBlockByBlockType[block.type](block)}
@@ -161,7 +162,7 @@ export const CharacterCard: React.FC<{
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <Box>
-          <FateLabel className={css({ fontSize: ".8rem" })}>
+          <FateLabel noWrap className={css({ fontSize: ".8rem" })}>
             {block.label}
           </FateLabel>
         </Box>
@@ -223,15 +224,16 @@ export const CharacterCard: React.FC<{
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <Box>
-          <FateLabel className={css({ fontSize: ".8rem" })}>
+          <FateLabel
+            noWrap
+            className={css({ fontSize: ".8rem", marginBottom: ".2rem" })}
+          >
             {block.label}
           </FateLabel>
 
           <Grid container wrap="nowrap" alignItems="center" spacing={1}>
             <Grid item>
-              <CharacterCircleBox minWidth="3rem">
-                <ContentEditable readonly value={block.value} />
-              </CharacterCircleBox>
+              <CircleTextField value={block.value} readonly />
             </Grid>
             {block.meta?.max !== undefined && (
               <>
@@ -246,9 +248,7 @@ export const CharacterCard: React.FC<{
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <CharacterCircleBox minWidth="3rem">
-                    <ContentEditable readonly value={block.meta?.max ?? ""} />
-                  </CharacterCircleBox>
+                  <CircleTextField value={block.meta?.max ?? ""} readonly />
                 </Grid>
               </>
             )}
@@ -261,7 +261,7 @@ export const CharacterCard: React.FC<{
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <Box display="flex" justifyContent="center">
-          <FateLabel className={css({ fontSize: ".8rem" })}>
+          <FateLabel noWrap className={css({ fontSize: ".8rem" })}>
             {block.label}
           </FateLabel>
         </Box>

@@ -101,54 +101,11 @@ export function BlockSkill(
             </Grid>
           )}
           <Grid item>
-            <TextField
-              type="number"
+            <CircleTextField
               data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
               value={state}
-              variant="outlined"
-              className={css({
-                textAlign: "center",
-              })}
-              onChange={(e) => {
-                if (!e.target.value) {
-                  setState("");
-                } else {
-                  const parsed = parseInt(e.target.value);
-                  if (parsed > 999) {
-                    setState("999");
-                  } else {
-                    setState(parsed.toString());
-                  }
-                }
-              }}
-              InputProps={{
-                className: css({
-                  width: "3rem",
-                  height: "3rem",
-                  borderRadius: "50%",
-                }),
-              }}
-              inputProps={{
-                className: css({
-                  "fontWeight": theme.typography.fontWeightBold,
-                  "textAlign": "center",
-                  // this disables the up/down browser arrows
-                  "padding": "0",
-                  "&[type=number]": {
-                    MozAppearance: "textfield",
-                  },
-                  "&::-webkit-outer-spin-button": {
-                    WebkitAppearance: "none",
-                    margin: 0,
-                  },
-                  "&::-webkit-inner-spin-button": {
-                    WebkitAppearance: "none",
-                    margin: 0,
-                  },
-                }),
-              }}
-              InputLabelProps={{
-                shrink: true,
+              onChange={(newState) => {
+                setState(newState);
               }}
             />
           </Grid>
@@ -230,6 +187,71 @@ export function BlockSkillActions(
 }
 
 BlockSkillActions.displayName = "BlockSkillActions";
+
+export function CircleTextField(props: {
+  "data-cy"?: string;
+  "value": string;
+  "readonly"?: boolean;
+  onChange?(value: string): void;
+}) {
+  const theme = useTheme();
+  return (
+    <TextField
+      type="number"
+      data-cy={props["data-cy"]}
+      value={props.value}
+      variant="outlined"
+      className={css({
+        textAlign: "center",
+      })}
+      disabled={props.readonly}
+      onChange={(e) => {
+        if (!props.onChange) {
+          return;
+        }
+        if (!e.target.value) {
+          props.onChange("");
+        } else {
+          const parsed = parseInt(e.target.value);
+          if (parsed > 999) {
+            props.onChange("999");
+          } else {
+            props.onChange(parsed.toString());
+          }
+        }
+      }}
+      InputProps={{
+        className: css({
+          width: "3rem",
+          height: "3rem",
+          borderRadius: "50%",
+        }),
+      }}
+      inputProps={{
+        className: css({
+          "fontWeight": theme.typography.fontWeightBold,
+          "textAlign": "center",
+          // this disables the up/down browser arrows
+          "padding": "0",
+          "&[type=number]": {
+            MozAppearance: "textfield",
+          },
+          "&::-webkit-outer-spin-button": {
+            WebkitAppearance: "none",
+            margin: 0,
+          },
+          "&::-webkit-inner-spin-button": {
+            WebkitAppearance: "none",
+            margin: 0,
+          },
+        }),
+      }}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
+  );
+}
 
 // const commandGroupsMatch =
 // props.block.meta?.commands?.map((commandId) => {

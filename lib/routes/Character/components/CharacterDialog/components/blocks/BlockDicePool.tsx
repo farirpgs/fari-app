@@ -1,10 +1,10 @@
-import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
+import { css, cx } from "@emotion/css";
+import Box, { BoxProps } from "@material-ui/core/Box";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import React from "react";
+import { default as React } from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -12,12 +12,13 @@ import {
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IDicePoolBlock } from "../../../../../../domains/character/types";
 import { IDiceCommandNames } from "../../../../../../domains/dice/Dice";
+import { useLightBackground } from "../../../../../../hooks/useLightBackground/useLightBackground";
+import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
-import { CharacterCircleBox } from "../CharacterCircleBox";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 
 export type IDicePoolElement = {
@@ -35,6 +36,7 @@ export function BlockDicePool(
   }
 ) {
   const theme = useTheme();
+  const { t } = useTranslate();
   const hasCommands = !!props.block.meta.commands?.length;
   const canRoll = !props.advanced && !props.readonly && hasCommands;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
@@ -67,7 +69,7 @@ export function BlockDicePool(
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
           <Grid item>
             <Box>
-              <CharacterCircleBox
+              <Pool
                 fontSize="1.2rem"
                 borderRadius="8px"
                 selected={isSelected}
@@ -85,10 +87,17 @@ export function BlockDicePool(
                   });
                 }}
               >
-                <Grid container spacing={1} alignItems="center">
+                <Grid
+                  container
+                  spacing={1}
+                  alignItems="center"
+                  justify="center"
+                >
                   {!hasCommands && (
                     <Grid item>
-                      <Box width="2rem" height="2rem" />
+                      <FormHelperText>
+                        {t("character-dialog.help-text.empty-dice-pool")}
+                      </FormHelperText>
                     </Grid>
                   )}
                   {blockCommandGroups.map((commandGroup, index) => {
@@ -107,11 +116,12 @@ export function BlockDicePool(
                     );
                   })}
                 </Grid>
-              </CharacterCircleBox>
+              </Pool>
               <Grid item>
                 <Box display="flex" justifyContent="flex-start">
-                  {/* TODO: Text */}
-                  <FormHelperText>{"Dice Pool"}</FormHelperText>
+                  <FormHelperText>
+                    {t("character-dialog.block-type.dice-pool")}
+                  </FormHelperText>
                 </Box>
               </Grid>
             </Box>
@@ -146,3 +156,67 @@ export function BlockDicePoolActions(
 }
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";
+
+const Pool: React.FC<
+  BoxProps & {
+    clickable?: boolean;
+    selected?: boolean;
+    borderRadius?: string;
+    borderStyle?: string;
+  }
+> = (props) => {
+  const {
+    className,
+    clickable,
+    selected,
+    borderRadius,
+    borderStyle = "solid",
+    ...rest
+  } = props;
+  const theme = useTheme();
+  const hoverBackground =
+    theme.palette.type === "light" ? "#e4e4e4" : "#6b6b6b";
+  const hoverColor = theme.palette.getContrastText(hoverBackground);
+  const lightBackground = useLightBackground();
+  return (
+    <Box
+      {...rest}
+      className={cx(
+        css({
+          "label": "character-circle-box",
+          "background": !selected
+            ? theme.palette.background.paper
+            : lightBackground,
+          "color": !selected
+            ? theme.palette.getContrastText(theme.palette.background.paper)
+            : theme.palette.getContrastText(lightBackground),
+          "border": `2px ${borderStyle} ${
+            selected ? theme.palette.primary.main : "#bdbdbd"
+          }`,
+          "boxShadow": selected ? theme.shadows[6] : undefined,
+          "transition": theme.transitions.create([
+            "color",
+            "background",
+            "border",
+            "boxShadow",
+          ]),
+          "borderRadius": borderRadius ?? "24px",
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "cursor": !clickable ? "inherit" : "pointer",
+          "&:hover": {
+            color: !clickable || selected ? undefined : hoverColor,
+            background: !clickable || selected ? undefined : hoverBackground,
+          },
+        }),
+        className
+      )}
+    >
+      <Box p=".5rem" minWidth="50%" textAlign="center">
+        {props.children}
+      </Box>
+    </Box>
+  );
+};
+Pool.displayName = "CharacterCircleBox";

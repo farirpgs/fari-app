@@ -21,7 +21,7 @@ import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
-import { CharacterCircleBox } from "../CharacterCircleBox";
+import { CircleTextField } from "./BlockSkill";
 
 export function usePointCounter(props: {
   points: string;
@@ -155,17 +155,13 @@ export function BlockPointCounter(
             </Grid>
           )}
           <Grid item>
-            <CharacterCircleBox fontSize="1.2rem" minWidth="4rem">
-              <ContentEditable
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-                value={pointsManager.state.points}
-                border={!props.readonly}
-                readonly={props.readonly}
-                onChange={(value, e) => {
-                  pointsManager.actions.setPoints(value);
-                }}
-              />
-            </CharacterCircleBox>
+            <CircleTextField
+              data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+              value={pointsManager.state.points}
+              onChange={(newValue) => {
+                pointsManager.actions.setPoints(newValue);
+              }}
+            />
           </Grid>
           {props.block.meta.max !== undefined && (
             <>
@@ -181,17 +177,13 @@ export function BlockPointCounter(
                 </Typography>
               </Grid>
               <Grid item>
-                <CharacterCircleBox fontSize="1.2rem" minWidth="4rem">
-                  <ContentEditable
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-                    value={props.block.meta.max ?? ""}
-                    border={!props.readonly}
-                    readonly={props.readonly}
-                    onChange={(newMax, e) => {
-                      pointsManager.actions.setMaxPoints(newMax);
-                    }}
-                  />
-                </CharacterCircleBox>
+                <CircleTextField
+                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.max`}
+                  value={pointsManager.state.maxPoints ?? ""}
+                  onChange={(newMax) => {
+                    pointsManager.actions.setMaxPoints(newMax);
+                  }}
+                />
               </Grid>
             </>
           )}

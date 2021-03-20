@@ -858,13 +858,15 @@ export const Scene: React.FC<IProps> = (props) => {
               icon={<VisibilityOffIcon />}
             />
           )}
-          <Tab
-            value="zones"
-            data-cy="scene.tabs.zones"
-            label={t("play-route.zones")}
-            classes={{ root: tabClass }}
-            icon={<FilterHdrIcon />}
-          />
+          {props.mode !== SceneMode.Manage && (
+            <Tab
+              value="zones"
+              data-cy="scene.tabs.zones"
+              label={t("play-route.zones")}
+              classes={{ root: tabClass }}
+              icon={<FilterHdrIcon />}
+            />
+          )}
           {isManaging && (
             <Tab
               value="gm-notes"

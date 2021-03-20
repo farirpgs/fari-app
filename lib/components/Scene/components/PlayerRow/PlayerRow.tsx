@@ -25,12 +25,9 @@ import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
-import { CharacterCircleBox } from "../../../../routes/Character/components/CharacterDialog/components/CharacterCircleBox";
+import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSkill";
 import { ConditionalWrapper } from "../../../ConditionalWrapper/ConditionalWrapper";
-import {
-  ContentEditable,
-  previewContentEditable,
-} from "../../../ContentEditable/ContentEditable";
+import { previewContentEditable } from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
   DiceBox,
@@ -207,17 +204,14 @@ export const PlayerRow: React.FC<
           </Grid>
         )}
         <Grid item>
-          <CharacterCircleBox fontSize="1rem" minWidth="4rem">
-            <ContentEditable
-              data-cy={`player-row.points`}
-              value={pointsManager.state.points}
-              border={props.permissions.canUpdatePoints}
-              readonly={!props.permissions.canUpdatePoints}
-              onChange={(newValue, e) => {
-                pointsManager.actions.setPoints(newValue);
-              }}
-            />
-          </CharacterCircleBox>
+          <CircleTextField
+            data-cy={`player-row.points`}
+            value={pointsManager.state.points}
+            readonly={!props.permissions.canUpdatePoints}
+            onChange={(newValue) => {
+              pointsManager.actions.setPoints(newValue);
+            }}
+          />
         </Grid>
         {pointsManager.state.maxPoints !== undefined && (
           <>
@@ -233,17 +227,14 @@ export const PlayerRow: React.FC<
               </Typography>
             </Grid>
             <Grid item>
-              <CharacterCircleBox fontSize="1rem" minWidth="4rem">
-                <ContentEditable
-                  data-cy={`player-row.max-points`}
-                  value={pointsManager.state.maxPoints ?? ""}
-                  border={props.permissions.canUpdatePoints}
-                  readonly={!props.permissions.canUpdatePoints}
-                  onChange={(newMax, e) => {
-                    pointsManager.actions.setMaxPoints(newMax);
-                  }}
-                />
-              </CharacterCircleBox>
+              <CircleTextField
+                data-cy={`player-row.max-points`}
+                value={pointsManager.state.maxPoints ?? ""}
+                readonly={!props.permissions.canUpdatePoints}
+                onChange={(newMax) => {
+                  pointsManager.actions.setMaxPoints(newMax);
+                }}
+              />
             </Grid>
           </>
         )}

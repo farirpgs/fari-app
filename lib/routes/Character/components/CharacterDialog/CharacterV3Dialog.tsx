@@ -179,7 +179,12 @@ export const CharacterV3Dialog: React.FC<{
     }
   }
 
-  const sheetContentStyle = css({
+  const dialogSheetContentStyle = css({
+    label: "CharacterDialog-sheet-content",
+    width: "100%",
+    padding: ".5rem 1rem",
+  });
+  const fullScreenSheetContentStyle = css({
     label: "CharacterDialog-sheet-content",
     width: "100%",
     padding: ".5rem 1rem",
@@ -237,7 +242,9 @@ export const CharacterV3Dialog: React.FC<{
             })}
           >
             <Container maxWidth="md">
-              <Box className={sheetContentStyle}>{renderNameAndGroup()}</Box>
+              <Box className={dialogSheetContentStyle}>
+                {renderNameAndGroup()}
+              </Box>
             </Container>
           </DialogTitle>
           <DialogContent
@@ -248,7 +255,9 @@ export const CharacterV3Dialog: React.FC<{
             dividers
           >
             <Container maxWidth="md">
-              <Box>{renderPages(characterManager.state.character.pages)}</Box>
+              <Box className={dialogSheetContentStyle}>
+                {renderPages(characterManager.state.character.pages)}
+              </Box>
             </Container>
           </DialogContent>
           <DialogActions
@@ -258,7 +267,9 @@ export const CharacterV3Dialog: React.FC<{
             })}
           >
             <Container maxWidth="md" className={css({ padding: ".5rem" })}>
-              <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
+              <Box className={dialogSheetContentStyle}>
+                {renderTopLevelActions()}
+              </Box>
             </Container>
           </DialogActions>
         </Dialog>
@@ -267,10 +278,18 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <Container maxWidth="md">
-        <Box className={sheetContentStyle}>{renderTopLevelActions()}</Box>
-        <Box className={sheetContentStyle}>{renderManagementActions()}</Box>
-        <Box className={sheetContentStyle}>{renderNameAndGroup()}</Box>
-        <Box>{renderPages(characterManager.state.character?.pages)}</Box>
+        <Box className={fullScreenSheetContentStyle}>
+          {renderTopLevelActions()}
+        </Box>
+        <Box className={fullScreenSheetContentStyle}>
+          {renderManagementActions()}
+        </Box>
+        <Box className={fullScreenSheetContentStyle}>
+          {renderNameAndGroup()}
+        </Box>
+        <Box className={fullScreenSheetContentStyle}>
+          {renderPages(characterManager.state.character?.pages)}
+        </Box>
       </Container>
     );
   }
@@ -423,8 +442,7 @@ export const CharacterV3Dialog: React.FC<{
                   }
                   onClick={() => {
                     const confirmed = confirm(
-                      // TODO text
-                      "Are you sure you want to remove that page"
+                      t("character-dialog.remove-page-confirmation")
                     );
                     if (confirmed) {
                       characterManager.actions.removePage(currentPageIndex);
@@ -598,8 +616,7 @@ export const CharacterV3Dialog: React.FC<{
                   }}
                   onRemove={() => {
                     const confirmed = confirm(
-                      // TODO text
-                      "Are you sure you want to remove that section"
+                      t("character-dialog.remove-section-confirmation")
                     );
                     if (confirmed) {
                       characterManager.actions.removeSection(
