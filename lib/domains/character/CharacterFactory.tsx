@@ -7,6 +7,7 @@ import { makeBlankCharacter } from "./character-templates/makeBlankCharacter";
 import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
 import { makeFateCondensedCharacter } from "./character-templates/makeFateCondensedCharacter";
+import { makeFateCoreCharacter } from "./character-templates/makeFateCoreCharacter";
 import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
 import { makeTheWitchIsDeadCharacter } from "./character-templates/makeTheWitchIsDeadCharacter";
 import { CharacterTemplates } from "./CharacterType";
@@ -31,7 +32,7 @@ export const CharacterFactory = {
   make(type: CharacterTemplates): ICharacter {
     const newCharacter = {
       [CharacterTemplates.FateCondensed]: makeFateCondensedCharacter,
-      [CharacterTemplates.FateCore]: makeFateCondensedCharacter,
+      [CharacterTemplates.FateCore]: makeFateCoreCharacter,
       [CharacterTemplates.FateAccelerated]: makeFateAcceleratedCharacter,
       [CharacterTemplates.FateOfCthulhu]: makeFateOfCthulhuCharacter,
       [CharacterTemplates.DresdenFilesAccelerated]: () => {
