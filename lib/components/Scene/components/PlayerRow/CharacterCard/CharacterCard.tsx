@@ -1,7 +1,7 @@
 import { css, cx } from "@emotion/css";
-import { Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
@@ -67,7 +67,6 @@ export const CharacterCard: React.FC<{
     (section: ISection, block: any, blockIndex: number) => JSX.Element
   > = {
     Text: renderBlockText,
-    RichText: renderBlockText,
     Skill: renderBlockSkill,
     DicePool: renderDicePool,
     PointCounter: renderBlockPointCounter,

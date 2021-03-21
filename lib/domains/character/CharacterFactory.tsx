@@ -17,7 +17,6 @@ import {
   IDicePoolBlock,
   IPage,
   IPointCounterBlock,
-  IRichTextBlock,
   ISection,
   ISkillBlock,
   ISlotTrackerBlock,
@@ -96,12 +95,6 @@ export const CharacterFactory = {
           checked: undefined,
         },
       } as IBlock & ITextBlock,
-      [BlockType.RichText]: {
-        id: Id.generate(),
-        label: "Rich Text",
-        type: type,
-        value: "",
-      } as IBlock & IRichTextBlock,
       [BlockType.Skill]: {
         id: Id.generate(),
         label: "Skill",

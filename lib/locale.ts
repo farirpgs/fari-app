@@ -4,7 +4,6 @@ export type ITranslationKeys =
   | "character-dialog.block-type.dice-pool"
   | "character-dialog.block-type.dice-pool"
   | "character-dialog.block-type.point-counter"
-  | "character-dialog.block-type.rich-text"
   | "character-dialog.block-type.skill"
   | "character-dialog.block-type.slot-tracker"
   | "character-dialog.block-type.text"

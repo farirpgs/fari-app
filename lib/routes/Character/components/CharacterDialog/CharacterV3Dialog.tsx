@@ -78,7 +78,6 @@ import {
   BlockPointCounter,
   BlockPointCounterActions,
 } from "./components/blocks/BlockPointCounter";
-import { BlockRichText } from "./components/blocks/BlockRichText";
 import { BlockSkill, BlockSkillActions } from "./components/blocks/BlockSkill";
 import { BlockSlotTracker } from "./components/blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./components/blocks/BlockText";
@@ -928,41 +927,6 @@ export const CharacterV3Dialog: React.FC<{
                   >
                     {block.type === BlockType.Text && (
                       <BlockText
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.RichText && (
-                      <BlockRichText
                         advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}

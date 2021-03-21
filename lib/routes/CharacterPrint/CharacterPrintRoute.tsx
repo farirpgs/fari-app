@@ -22,7 +22,6 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { BlockDicePool } from "../Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { BlockPointCounter } from "../Character/components/CharacterDialog/components/blocks/BlockPointCounter";
-import { BlockRichText } from "../Character/components/CharacterDialog/components/blocks/BlockRichText";
 import { BlockSkill } from "../Character/components/CharacterDialog/components/blocks/BlockSkill";
 import { BlockSlotTracker } from "../Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../Character/components/CharacterDialog/components/blocks/BlockText";
@@ -161,20 +160,6 @@ function PrintSections(props: { sections: Array<ISection> }) {
                 <Box key={blockIndex} my=".5rem" px=".5rem">
                   {block.type === BlockType.Text && (
                     <BlockText
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                    />
-                  )}
-                  {block.type === BlockType.RichText && (
-                    <BlockRichText
                       advanced={false}
                       readonly={true}
                       pageIndex={0}

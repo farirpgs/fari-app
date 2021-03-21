@@ -1,8 +1,8 @@
 {
-  "id": "1bdaa21f-5df9-4e1f-a462-85ed7dc1fd0c",
+  "id": "bd0b507c-65e9-4d49-b395-5da40a0dd089",
   "version": 3,
   "name": "",
-  "lastUpdated": 1615996793,
+  "lastUpdated": 1616269282,
   "pages": [
     {
       "id": "6e3bbfb9-67e3-4abd-a4ef-79bd3d96881d",
@@ -256,13 +256,6 @@
               ]
             },
             {
-              "id": "3ef9fe7c-00c6-48da-94bc-2bc6be01f447",
-              "label": "",
-              "type": "Text",
-              "value": "",
-              "meta": {}
-            },
-            {
               "id": "2d75ee22-474b-45bd-a0be-72231429095c",
               "label": "",
               "type": "SlotTracker",
@@ -275,13 +268,6 @@
               ]
             },
             {
-              "id": "7c0bfe7b-b9b7-432e-ba03-af29d67356e9",
-              "label": "",
-              "type": "Text",
-              "value": "",
-              "meta": {}
-            },
-            {
               "id": "d68ebbe5-b3b1-4da2-969c-2d89d47e1fa2",
               "label": "",
               "type": "SlotTracker",
@@ -292,13 +278,6 @@
                 { "label": "4", "checked": false },
                 { "label": "5", "checked": false }
               ]
-            },
-            {
-              "id": "aec41d25-c762-43b2-adb5-2ae0f35c0fff",
-              "label": "",
-              "type": "Text",
-              "value": "",
-              "meta": {}
             },
             {
               "id": "f0824b3c-d990-4edc-a2c4-3df279ef505d",
@@ -317,5 +296,6 @@
       ]
     }
   ],
-  "fariType": "character"
+  "fariType": "character",
+  "template": "DresdenFilesAccelerated"
 }

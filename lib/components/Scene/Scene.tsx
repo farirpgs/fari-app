@@ -1,5 +1,4 @@
 import { css } from "@emotion/css";
-import { useMediaQuery } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -23,6 +22,7 @@ import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";

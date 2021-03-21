@@ -3,7 +3,6 @@ import { CharacterTemplates } from "./CharacterType";
 
 export enum BlockType {
   Text = "Text",
-  RichText = "RichText",
   Skill = "Skill",
   DicePool = "DicePool",
   PointCounter = "PointCounter",
@@ -91,11 +90,6 @@ export type ITextBlock = {
   };
   value: string;
 };
-export type IRichTextBlock = {
-  type: BlockType.RichText;
-  meta: {};
-  value: string;
-};
 
 export type ISkillBlock = {
   type: BlockType.Skill;
@@ -134,7 +128,6 @@ export type IPointCounterBlock = {
 
 export type IBlockTypes =
   | ITextBlock
-  | IRichTextBlock
   | ISkillBlock
   | IDicePoolBlock
   | ISlotTrackerBlock

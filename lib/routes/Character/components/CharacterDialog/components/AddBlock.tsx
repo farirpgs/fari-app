@@ -9,7 +9,6 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
-import FormatBoldIcon from "@material-ui/icons/FormatBold";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
@@ -56,20 +55,6 @@ export const AddBlock: React.FC<{
             </ListItemIcon>
 
             <ListItemText primary={t("character-dialog.block-type.text")} />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.RichText);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <FormatBoldIcon fontSize="small" />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={t("character-dialog.block-type.rich-text")}
-            />
           </MenuItem>
           <MenuItem
             onClick={() => {
