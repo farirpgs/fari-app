@@ -3,23 +3,20 @@
 
 - [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
 
-- [x] new character sheet
-- [x] new character sheet Text
-- [x] new character sheet RichText
-- [x] new character sheet Skill
-- [x] new character sheet Dice Pool
-- [x] new character sheet Point Counter
-- [x] new character sheet Slot Tracker
-- [x] Organize index cards with drag-and-drop
-- [x] Import inside Data route
-- [x] Import and Duplicate inside Data route
-- [x] player row
-  - [x] fix DEFAULT POINT COUNTER SYNC
-- [x] pool toggle on dice route
-- [z] new player row
-- [x] index card label after drag and drop
-- [x] sync character from character sheet
-- [x] let GM add character sheets
+- [x] feat: new character sheet
+- [x] feat: new character sheet Text
+- [x] feat: new character sheet Skill
+- [x] feat: new character sheet Dice Pool
+- [x] feat: new character sheet Point Counter
+- [x] feat: new character sheet Slot Tracker
+- [x] feat: Organize index cards with drag-and-drop
+- [x] feat: Import inside Data route
+- [x] feat: Import and Duplicate inside Data route
+- [x] feat: refactor player row for new sheet
+- [x] feat: new dice pool route
+- [x] feat: sync character from character sheet
+- [x] feat: let GM add character sheets
+- [x] fix: index card label after drag and drop
 - [x] fix: can click skill of other character
 
 QA Blitz
@@ -36,12 +33,18 @@ QA Blitz
 - [x] readonly drag and drop for players on aspects
 - [x] readonly remove consequence for players on aspects
 
+# storybook
+
+- [ ] Character Sheet
+- [ ] Scene
+
 # THINK
-- [ ] fix rich text crash ?
 - [x] draw area moved to tabs ?
 - [ ] text on slot tracker ?
 - [ ] highlight tab text on click ?
+- [ ] duplicate without advanced mode ?
 
+# Future
 - [ ] seelie squire
 -->
 

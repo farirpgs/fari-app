@@ -4,7 +4,7 @@ import { SentryService } from "./sentry/SentryService";
 
 const sentryService = new SentryService();
 const logger = makeLogger(sentryService);
-const internationalizationService = new InternationalizationService(logger);
+const internationalizationService = InternationalizationService(logger);
 
 export const injections = {
   internationalizationService,

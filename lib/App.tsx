@@ -33,6 +33,7 @@ export const App: React.FC<{}> = () => {
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const diceManager = useDice();
+
   return (
     <DndProvider backend={HTML5Backend}>
       <DarkModeContext.Provider value={darkModeManager}>

@@ -247,6 +247,7 @@
               "id": "d9cfb9d2-c3d5-4134-b089-4b0bebab5a1e",
               "label": "Indebted",
               "type": "SlotTracker",
+              "meta": {},
               "value": [
                 { "label": "1", "checked": false },
                 { "label": "2", "checked": false },
@@ -258,6 +259,7 @@
             {
               "id": "2d75ee22-474b-45bd-a0be-72231429095c",
               "label": "",
+              "meta": {},
               "type": "SlotTracker",
               "value": [
                 { "label": "1", "checked": false },
@@ -270,6 +272,7 @@
             {
               "id": "d68ebbe5-b3b1-4da2-969c-2d89d47e1fa2",
               "label": "",
+              "meta": {},
               "type": "SlotTracker",
               "value": [
                 { "label": "1", "checked": false },
@@ -282,6 +285,7 @@
             {
               "id": "f0824b3c-d990-4edc-a2c4-3df279ef505d",
               "label": "",
+              "meta": {},
               "type": "SlotTracker",
               "value": [
                 { "label": "1", "checked": false },
