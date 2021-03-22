@@ -21,7 +21,9 @@
     "validate": "yarn tsc && yarn lint && yarn test",
     "test:watch": "node --inspect node_modules/.bin/jest --runInBand --watch",
     "deploy:preview": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08",
-    "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod"
+    "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod",
+    "storybook": "start-storybook -p 6006 -s ./fonts",
+    "build-storybook": "build-storybook -s ./fonts"
   },
   "dependencies": {
     "@emotion/css": "^11.0.0",
@@ -58,6 +60,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^3.2.1",
     "@types/dompurify": "^2.0.2",

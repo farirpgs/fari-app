@@ -90,7 +90,7 @@ export function BlockSkill(
   return (
     <>
       <Box>
-        <Grid container spacing={2} alignItems="center" wrap="nowrap">
+        <Grid container spacing={1} alignItems="center" wrap="nowrap">
           {canRoll && (
             <Grid item>
               <Tooltip title={t("character-dialog.skill-block.roll")}>

@@ -96,7 +96,7 @@ export function BlockDicePool(
                   {!hasCommands && (
                     <Grid item>
                       <FormHelperText>
-                        {t("character-dialog.help-text.empty-dice-pool")}
+                        {t("character-dialog.helper-text.empty-dice-pool")}
                       </FormHelperText>
                     </Grid>
                   )}
@@ -117,13 +117,6 @@ export function BlockDicePool(
                   })}
                 </Grid>
               </Pool>
-              <Grid item>
-                <Box display="flex" justifyContent="flex-start">
-                  <FormHelperText>
-                    {t("character-dialog.block-type.dice-pool")}
-                  </FormHelperText>
-                </Box>
-              </Grid>
             </Box>
           </Grid>
         </Grid>

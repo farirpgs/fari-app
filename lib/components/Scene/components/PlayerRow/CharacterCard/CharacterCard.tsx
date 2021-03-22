@@ -33,6 +33,7 @@ import {
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
+import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
 
@@ -133,7 +134,9 @@ export const CharacterCard: React.FC<{
               return (
                 <Box key={section.id} className={css({ clear: "both" })}>
                   <Box>
-                    <FateLabel noWrap>{section.label}</FateLabel>
+                    <FateLabel noWrap>
+                      {previewContentEditable({ value: section.label })}
+                    </FateLabel>
                   </Box>
                   <Grid container>
                     {section.blocks.map((block, blockIndex) => {

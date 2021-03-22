@@ -6,6 +6,7 @@ import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -151,7 +152,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                     lineHeight: Font.lineHeight(1.4),
                   })}
                 >
-                  {section.label}
+                  {previewContentEditable({ value: section.label })}
                 </Box>
               </Grid>
             </Grid>

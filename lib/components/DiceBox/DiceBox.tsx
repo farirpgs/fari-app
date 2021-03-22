@@ -302,7 +302,7 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
   const diceRollsManager = useDiceRolls(props.rolls, {
     disableConfettis: true,
   });
-  const separator = diceRollsManager.state.finalResult?.pool ? "" : "+";
+  const separator = diceRollsManager.state.finalResult?.pool ? "•" : "+";
   const isPool = diceRollsManager.state.finalResult?.pool ?? false;
   const hasBonus =
     diceRollsManager.state.finalResultBonus !== undefined &&
@@ -318,7 +318,12 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
           const IconForPool = CommandGroups.getCommandGroupByValue(r.type).icon;
 
           return (
-            <span key={i} className={css({ display: "inline-block" })}>
+            <span
+              key={i}
+              className={css({
+                display: "inline-block",
+              })}
+            >
               {!isFirst && (
                 <span
                   className={css({
@@ -337,7 +342,15 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
                   >
                     {options.formatDetailedResult(r.value)}
                   </span>
-                  <span className={css({})}>{isPool && <IconForPool />}</span>
+                  {!isFate && (
+                    <span
+                      className={css({
+                        verticalAlign: "middle",
+                      })}
+                    >
+                      {isPool && <IconForPool />}
+                    </span>
+                  )}
                 </span>
               </Tooltip>
             </span>

@@ -8,6 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -1148,6 +1149,13 @@ export const CharacterV3Dialog: React.FC<{
                         blockIndex
                       )}
                     </Collapse>
+                    {renderBlockHelpText(
+                      pageIndex,
+                      sectionIndex,
+                      section,
+                      block,
+                      blockIndex
+                    )}
                   </Box>
                 </BetterDnd>
               </Box>
@@ -1277,6 +1285,51 @@ export const CharacterV3Dialog: React.FC<{
           </Link>
         </Grid>
       </Grid>
+    );
+  }
+
+  function renderBlockHelpText(
+    pageIndex: number,
+    sectionIndex: number,
+    section: ISection,
+    block: IBlock,
+    blockIndex: number
+  ) {
+    if (!advanced && !block.meta.helperText) {
+      return null;
+    }
+    return (
+      <Box>
+        <Grid container alignItems="flex-start" wrap="nowrap">
+          {advanced && (
+            <Grid item>
+              <FormHelperText className={css({ paddingRight: ".2rem" })}>
+                {t("character-dialog.helper-text.help")}
+              </FormHelperText>
+            </Grid>
+          )}
+
+          <Grid item xs>
+            {" "}
+            <FormHelperText>
+              <ContentEditable
+                readonly={!advanced}
+                border={advanced}
+                data-cy={`character-dialog.${section.label}.${block.label}.helper-text`}
+                value={block.meta.helperText ?? ""}
+                onChange={(newHelpText) => {
+                  characterManager.actions.setBlockMeta(
+                    pageIndex,
+                    sectionIndex,
+                    blockIndex,
+                    { ...block.meta, helperText: newHelpText }
+                  );
+                }}
+              />
+            </FormHelperText>
+          </Grid>
+        </Grid>
+      </Box>
     );
   }
 };

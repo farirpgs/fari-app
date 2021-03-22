@@ -192,7 +192,7 @@
   "character-dialog.control.set-main-counter": "Définir comme compteur principal",
   "character-dialog.control.sync": "Sync",
   "character-dialog.control.unset-main-counter": "Supprimer le comptoir principal",
-  "character-dialog.help-text.empty-dice-pool": "Vide",
+  "character-dialog.helper-text.empty-dice-pool": "Vide",
   "character-dialog.remove-page-confirmation": "Vous êtes sûr de vouloir supprimer cette page",
   "character-dialog.remove-section-confirmation": "Vous êtes sûr de vouloir supprimer cette section",
   "character-dialog.skill-block.roll": "Rouleau",

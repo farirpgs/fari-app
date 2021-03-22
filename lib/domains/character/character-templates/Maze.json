@@ -1,0 +1,203 @@
+{
+  "id": "4516709c-3930-4393-a046-a450c0cc541b",
+  "version": 3,
+  "name": "",
+  "group": "",
+  "template": "Mazes",
+  "lastUpdated": 1616346329,
+  "pages": [
+    {
+      "id": "7d7d87eb-dae9-4979-ac7a-fb3529135940",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "9858a2b4-0d7c-4b1b-93b4-004c3519cdf0",
+          "label": "ASPECT",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f08dda5d-e0e9-412c-8cde-b9b3922bb04d",
+              "type": "Text",
+              "meta": {},
+              "label": "SKILL",
+              "value": "Solves problems with excellent skills<br>"
+            }
+          ]
+        },
+        {
+          "id": "aa46607f-ce72-43d6-a0e1-f19a3a3bb80f",
+          "label": "EDGES",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "12a71233-2e72-491b-89ba-c50f6c1ad324",
+              "type": "Text",
+              "meta": {},
+              "label": "TOUGH",
+              "value": "Can swing hammer all day, whether for shaping metal or defending my friends"
+            },
+            {
+              "id": "fdc2872a-9eea-4d58-8503-c757273cc4ee",
+              "type": "Text",
+              "meta": {},
+              "label": "ARMORED",
+              "value": "Proudly made all of it"
+            },
+            {
+              "id": "6c801cb3-db32-4e17-892c-2f9a2de01219",
+              "type": "Text",
+              "meta": {},
+              "label": "STRONG",
+              "value": "Swinging hammers builds of the upper body strength"
+            },
+            {
+              "id": "af32ed07-0447-4f8d-95cf-3cbe442b1fb5",
+              "type": "Text",
+              "meta": {},
+              "label": "",
+              "value": ""
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "67e62422-32e6-4cf6-b80f-97f6aeec824b",
+          "label": "CONDITIONS",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "15f5fd95-7a41-46e4-9181-ecdf09da1185",
+              "label": "BLANK - TBD",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [{ "label": "1", "checked": false }]
+            },
+            {
+              "id": "92c7a503-12f3-4c32-ae5c-d562d0e0b190",
+              "label": "STRESS - DISADVANTAGE on BOOK. Loose CLASS bonus. Clear via sleep, a vice, or a bond.",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [{ "label": "1", "checked": false }]
+            },
+            {
+              "id": "3a5928bc-8f4e-46dd-be58-ba2271369e16",
+              "label": "Tired - DISADVANTAGE on BOOTS. Clear via a good sleep or by eating and drinking.",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [{ "label": "1", "checked": false }]
+            },
+            {
+              "id": "eca356c9-baee-486d-a80e-78fb3881129f",
+              "label": "Hurt - DISADVANTAGE on BLADES AND BONES. Clear via healing or an extended rest.",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [{ "label": "1", "checked": false }]
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "e4c12f44-5856-4b0c-a003-f4b51d9607fa",
+          "label": "Notes",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "e3d9cd45-a8f7-48a8-92b5-592cd3f531d3",
+              "type": "Text",
+              "meta": {},
+              "label": "",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "a5f70fea-74fe-49f1-9d02-c1a9c07325f3",
+          "label": "&nbsp;RoLE &amp; ROLLS",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "15bea89b-eedc-48f8-973f-bbd7ca021961",
+              "label": "ROLL",
+              "type": "DicePool",
+              "value": "",
+              "meta": { "commands": ["1d10"] }
+            },
+            {
+              "id": "c9754a46-1e0a-4bb0-a4de-d3d779afb5ec",
+              "label": "Sentinel",
+              "type": "Text",
+              "value": "Role",
+              "meta": {}
+            },
+            {
+              "id": "3cbf82b5-6dd3-4499-b452-2e74a8d452f0",
+              "label": "1<br>Class - ItinerAnt SMITH<br>",
+              "type": "Text",
+              "value": "Succeed if the class could do it<br>",
+              "meta": {}
+            },
+            {
+              "id": "a8fc265f-0b50-473c-aca2-6f8eca3f5478",
+              "label": "2 3<br>BOOKS<br>",
+              "type": "Text",
+              "value": "Knowledge, Perception, Skills, Searching, Charisma Senses",
+              "meta": {}
+            },
+            {
+              "id": "1528f02e-5dce-470e-a5d8-16d80053be01",
+              "label": "3 4 5<br>BOOTS<br>",
+              "type": "Text",
+              "value": "Movement, Dexterity, Reflexes, Agility, Speed",
+              "meta": {}
+            },
+            {
+              "id": "b2d1c899-8f63-4a0b-9a5c-1e17b830688a",
+              "label": "4 5 6 7<br>BLADES<br>",
+              "type": "Text",
+              "value": "Violence, Weapons, Combat, Fighting, Dodging",
+              "meta": {}
+            },
+            {
+              "id": "b446a6a0-4dbc-430f-aef1-3a7133fef044",
+              "label": "5 6 7 8 9<br>BONES<br>",
+              "type": "Text",
+              "value": "Endurance, Resistance, Strength, Bravery, Health, Heart",
+              "meta": {}
+            },
+            {
+              "id": "3d10704f-ad95-48b2-beef-97279a1f42a0",
+              "label": "10<br>CROWN<br>",
+              "type": "Text",
+              "value": "Choose to succeed at a negotiated cost. The BLEAKER the DARKNESS, the higher the cost.",
+              "meta": {}
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "6415e339-b74b-4d3b-b33e-b8a627ae3d7f",
+          "label": "HEARTS &amp; STARS",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "a33d9e82-b2ef-4ee4-b5c4-f1081b50af2e",
+              "label": "HEARTS",
+              "type": "PointCounter",
+              "meta": { "max": "10", "isMainPointCounter": true },
+              "value": "10"
+            },
+            {
+              "id": "3f2f8152-928f-456b-a4b4-fe28aa0ad742",
+              "label": "STARS",
+              "type": "PointCounter",
+              "meta": { "max": "1", "isMainPointCounter": false },
+              "value": "1"
+            }
+          ],
+          "visibleOnCard": true
+        }
+      ]
+    }
+  ]
+}

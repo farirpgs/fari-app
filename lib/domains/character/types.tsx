@@ -85,15 +85,14 @@ export type ICharacterV2CustomField<TValue> = Array<{
  */
 export type ITextBlock = {
   type: BlockType.Text;
-  meta: {
-    checked?: boolean;
-  };
+  meta: { helperText?: string; checked?: boolean };
   value: string;
 };
 
 export type ISkillBlock = {
   type: BlockType.Skill;
   meta: {
+    helperText?: string;
     checked?: boolean;
     commands?: Array<IDiceCommandGroupId>;
   };
@@ -103,6 +102,7 @@ export type ISkillBlock = {
 export type IDicePoolBlock = {
   type: BlockType.DicePool;
   meta: {
+    helperText?: string;
     commands?: Array<IDiceCommandGroupId>;
   };
   value: string;
@@ -110,7 +110,9 @@ export type IDicePoolBlock = {
 
 export type ISlotTrackerBlock = {
   type: BlockType.SlotTracker;
-  meta: {};
+  meta: {
+    helperText?: string;
+  };
   value: Array<{
     label: string;
     checked?: boolean;
@@ -119,10 +121,7 @@ export type ISlotTrackerBlock = {
 
 export type IPointCounterBlock = {
   type: BlockType.PointCounter;
-  meta: {
-    max?: string;
-    isMainPointCounter: boolean;
-  };
+  meta: { helperText?: string; max?: string; isMainPointCounter: boolean };
   value: string;
 };
 

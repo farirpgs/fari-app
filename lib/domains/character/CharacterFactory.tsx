@@ -9,7 +9,8 @@ import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcce
 import { makeFateCondensedCharacter } from "./character-templates/makeFateCondensedCharacter";
 import { makeFateCoreCharacter } from "./character-templates/makeFateCoreCharacter";
 import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
-import { makeTheWitchIsDeadCharacter } from "./character-templates/makeTheWitchIsDeadCharacter";
+import Maze from "./character-templates/Maze.json";
+import TheWitchIsDead from "./character-templates/TheWitchIsDead.json";
 import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
@@ -41,8 +42,13 @@ export const CharacterFactory = {
       [CharacterTemplates.Heartbreaker]: () => {
         return this.makeFromJson(Heartbreaker);
       },
+      [CharacterTemplates.Maze]: () => {
+        return this.makeFromJson(Maze);
+      },
       [CharacterTemplates.Dnd5e]: makeDnD5eCharacter,
-      [CharacterTemplates.TheWitchIsDead]: makeTheWitchIsDeadCharacter,
+      [CharacterTemplates.TheWitchIsDead]: () => {
+        return this.makeFromJson(TheWitchIsDead);
+      },
       [CharacterTemplates.Blank]: makeBlankCharacter,
     }[type]();
 
@@ -50,6 +56,7 @@ export const CharacterFactory = {
       ...newCharacter,
       id: Id.generate(),
       name: "",
+      group: "",
       template: type,
       lastUpdated: getUnix(),
     };
@@ -57,7 +64,6 @@ export const CharacterFactory = {
   makeFromJson(jsonData: any): ICharacter {
     return {
       ...jsonData,
-      id: Id.generate(),
     };
   },
   makeTemplate(props: {
