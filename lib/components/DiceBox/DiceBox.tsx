@@ -33,6 +33,7 @@ type IProps = {
   reduceOpacityWithoutHover?: boolean;
   showDetails?: boolean;
   className?: string;
+  disableConfettis?: boolean;
   onClick: () => void;
   onRolling?: (rolling: boolean) => void;
   onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
@@ -46,7 +47,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const diceRollsManager = useDiceRolls(props.rolls, {
-    disableConfettis: false,
+    disableConfettis: props.disableConfettis ?? false,
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
   });

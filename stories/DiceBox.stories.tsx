@@ -19,6 +19,7 @@ export default {
     disabled: false,
     reduceOpacityWithoutHover: false,
     showDetails: false,
+    disableConfettis: true,
   },
 } as Meta<IProps>;
 
@@ -36,6 +37,7 @@ const Template: Story<IProps> = (args) => (
         disabled={args.disabled}
         reduceOpacityWithoutHover={args.reduceOpacityWithoutHover}
         showDetails={args.showDetails}
+        disableConfettis={args.disableConfettis}
       />
     </Box>
   </StoryProvider>
