@@ -181,7 +181,6 @@ export const SheetHeader: React.FC<{
             props.onMoveDown();
           }}
         >
-          {" "}
           <ListItemIcon>
             <ArrowDownwardIcon />
           </ListItemIcon>

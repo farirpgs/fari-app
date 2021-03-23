@@ -3,6 +3,7 @@ import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
 import DrescendFilesAccelerated from "./character-templates/DrescendFilesAccelerated.json";
 import Heartbreaker from "./character-templates/Heartbreaker.json";
+import IronEddaAccelerated from "./character-templates/IronEddaAccelerated.json";
 import { makeBlankCharacter } from "./character-templates/makeBlankCharacter";
 import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
@@ -32,20 +33,51 @@ export const CharacterFactory = {
   latestVersion: 3,
   make(type: CharacterTemplates): ICharacter {
     const newCharacter = {
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.FateCondensed]: makeFateCondensedCharacter,
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.FateCore]: makeFateCoreCharacter,
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.FateAccelerated]: makeFateAcceleratedCharacter,
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.FateOfCthulhu]: makeFateOfCthulhuCharacter,
+      /**
+       * @author @LostInBrittany
+       */
       [CharacterTemplates.DresdenFilesAccelerated]: () => {
         return this.makeFromJson(DrescendFilesAccelerated);
       },
       [CharacterTemplates.Heartbreaker]: () => {
         return this.makeFromJson(Heartbreaker);
       },
+      /**
+       * @author @Pheylorn
+       */
+      [CharacterTemplates.IronEddaAccelerated]: () => {
+        return this.makeFromJson(IronEddaAccelerated);
+      },
+      /**
+       * @author @bhogan
+       */
       [CharacterTemplates.Maze]: () => {
         return this.makeFromJson(Maze);
       },
+      // TODO: VENTURE CITY @Owlbear
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.Dnd5e]: makeDnD5eCharacter,
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.TheWitchIsDead]: () => {
         return this.makeFromJson(TheWitchIsDead);
       },

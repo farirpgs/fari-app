@@ -5,6 +5,8 @@ import { DataTransferObject } from "../../domains/data-transfer-object/DataTrans
 import { IPeerAction } from "./IPeerAction";
 import { usePeerJS } from "./usePeerJS";
 
+const ConnectingTimeout = 5000;
+
 export function usePeerConnections(options: {
   onHostDataReceive: (data: any) => void;
   debug?: boolean;
@@ -12,11 +14,26 @@ export function usePeerConnections(options: {
   const logger = useLogger();
   const { peer, loading } = usePeerJS({ debug: options.debug });
   const connection = useRef<Peer.DataConnection | undefined>(undefined);
+  const connectingTimeoutError = useRef<any>();
   const [connectionToHost, setConnectionToHost] = useState<
     Peer.DataConnection | undefined
   >(undefined);
   const [connectingToHost, setConnectingToHost] = useState(false);
   const [connectingToHostError, setConnectingToHostError] = useState(false);
+
+  useEffect(() => {
+    if (connectingToHost) {
+      connectingTimeoutError.current = setTimeout(() => {
+        setConnectingToHost(false);
+        setConnectingToHostError(true);
+      }, ConnectingTimeout);
+    } else {
+      clearTimeout(connectingTimeoutError.current);
+    }
+    return () => {
+      clearTimeout(connectingTimeoutError.current);
+    };
+  }, [connectingToHost]);
 
   useEffect(() => {
     function subscribeForEvents() {

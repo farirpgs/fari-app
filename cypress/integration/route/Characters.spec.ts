@@ -103,7 +103,9 @@ describe("/characters", () => {
       Fari.get("page.menu.home").click();
       Fari.get("home.play-offline").click();
 
-      Fari.get("scene.add-gm-character").click();
+      // add player
+      Fari.get("scene.add-player").click();
+      Fari.get("scene.player-row.1.load-character-sheet").click();
 
       cy.contains("Luke Skywalker").click();
 
@@ -113,7 +115,7 @@ describe("/characters", () => {
       Fari.get("character-dialog.close").click();
 
       // character card roll skill
-      Fari.get("character-card.Skills.label.Athletics").click();
+      Fari.get("character-card.section.Skills.block.Athletics").click();
       Fari.get("scene.player-row.1")
         .find('[data-cy="dice"]')
         .invoke("attr", "data-cy-value")
@@ -132,7 +134,7 @@ describe("/characters", () => {
   });
 
   describe("Given I want a to use a template", () => {
-    it("should let load a template", () => {
+    it.only("should let load a template", () => {
       Fari.start();
       cy.visit("/");
 
@@ -142,8 +144,7 @@ describe("/characters", () => {
       Fari.get("character-dialog.name").type("Luke");
       Fari.get("character-dialog.toggle-advanced").click();
       Fari.get("character-dialog.template").click();
-      Fari.get("character-dialog.template.Custom").click();
-      Fari.get("character-dialog.load-template").click();
+      cy.contains("Blank").click();
       Fari.get("character-dialog.name").type(" Skywalker");
 
       // save

@@ -46,7 +46,6 @@ export const PlayerRow: React.FC<
     };
     player: IPlayer;
 
-    renderControls: boolean;
     highlight: boolean;
     number: number;
     onDiceRoll(options: IRollDiceOptions): void;
@@ -110,7 +109,10 @@ export const PlayerRow: React.FC<
 
   return (
     <>
-      <Box bgcolor={props.highlight ? lightBackground : undefined}>
+      <Box
+        bgcolor={props.highlight ? lightBackground : undefined}
+        data-cy={props["data-cy"]}
+      >
         <Box py=".8rem" px=".5rem">
           <Grid container spacing={1} wrap="nowrap">
             <Grid item xs={9}>
@@ -301,14 +303,17 @@ export const PlayerRow: React.FC<
                     ? t("player-row.swap-character-sheet")
                     : t("play-route.add-character-sheet")
                 }
-                onClick={() => {
-                  props.onLoadCharacterSheet();
-                  logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
-                }}
               >
                 <IconButton
                   size="small"
                   color={hasCharacterSheet ? "default" : "primary"}
+                  data-cy={`${props["data-cy"]}.load-character-sheet`}
+                  onClick={() => {
+                    props.onLoadCharacterSheet();
+                    logger.info(
+                      "ScenePlayer:onCharacterSheetContextButtonPress"
+                    );
+                  }}
                 >
                   {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
                 </IconButton>

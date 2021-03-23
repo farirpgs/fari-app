@@ -18,6 +18,12 @@
 - [x] feat: let GM add character sheets
 - [x] fix: index card label after drag and drop
 - [x] fix: can click skill of other character
+- [x] fix: add timeout when connecting to game + link to wiki
+- [-] feat: Storybook
+  - [x] character sheet
+  - [x] dice box
+  - [x] dice box result
+  - [ ] player row
 
 QA Blitz
 - [x] Change default label of new boxes

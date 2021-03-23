@@ -16,7 +16,9 @@ import {
   IDiceCommandNames,
   IRollDiceOptions,
 } from "../../../../../../domains/dice/Dice";
+import { useHighlight } from "../../../../../../hooks/useHighlight/useHighlight";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
+import { useLightBackground } from "../../../../../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
 import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
@@ -193,9 +195,13 @@ export function CircleTextField(props: {
   "data-cy"?: string;
   "value": string;
   "readonly"?: boolean;
+  "highlight"?: boolean;
   onChange?(value: string): void;
 }) {
   const theme = useTheme();
+  const lightBackground = useLightBackground();
+  const highlight = useHighlight();
+
   return (
     <TextField
       type="number"
@@ -226,6 +232,12 @@ export function CircleTextField(props: {
           width: "3rem",
           height: "3rem",
           borderRadius: "50%",
+          background: props.highlight ? theme.palette.primary.main : "inherit",
+          color: props.highlight
+            ? theme.palette.getContrastText(theme.palette.primary.main)
+            : "inherit",
+          transition: theme.transitions.create(["color", "background"]),
+          boxShadow: theme.shadows[1],
         }),
       }}
       inputProps={{

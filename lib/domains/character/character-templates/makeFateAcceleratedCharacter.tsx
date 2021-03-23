@@ -168,7 +168,7 @@ export function makeFateAcceleratedCharacter(): ICharacter {
           },
           {
             id: Id.generate(),
-            label: "Skills",
+            label: "Approaches",
             visibleOnCard: true,
 
             position: Position.Right,

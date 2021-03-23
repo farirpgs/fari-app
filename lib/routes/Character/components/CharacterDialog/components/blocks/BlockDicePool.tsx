@@ -186,7 +186,7 @@ const Pool: React.FC<
           "border": `2px ${borderStyle} ${
             selected ? theme.palette.primary.main : "#bdbdbd"
           }`,
-          "boxShadow": selected ? theme.shadows[6] : undefined,
+          "boxShadow": selected ? theme.shadows[6] : theme.shadows[1],
           "transition": theme.transitions.create([
             "color",
             "background",

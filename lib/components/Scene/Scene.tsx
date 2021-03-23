@@ -445,10 +445,10 @@ export const Scene: React.FC<IProps> = (props) => {
                       <Tooltip title={t("play-route.add-character-sheet")}>
                         <span>
                           <Button
-                            data-cy="scene.add-gm-character"
+                            data-cy="scene.add-player"
                             onClick={() => {
                               handleGMAddOfflinePlayer();
-                              logger.info("Scene:addOfflinePlayer");
+                              logger.info("Scene:addPlayer");
                             }}
                             variant="contained"
                             color="secondary"
@@ -531,7 +531,6 @@ export const Scene: React.FC<IProps> = (props) => {
                   number={playerRowIndex + 1}
                   key={player.id}
                   highlight={isMe}
-                  renderControls={isGM}
                   player={player}
                   onPlayerRemove={() => {
                     sceneManager.actions.removePlayer(player.id);
@@ -625,7 +624,6 @@ export const Scene: React.FC<IProps> = (props) => {
                       <CharacterCard
                         key={player?.id || index}
                         readonly={!canControl}
-                        isMe={isMe}
                         playerName={player.playerName}
                         characterSheet={player.character}
                         onRoll={(options) => {

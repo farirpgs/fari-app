@@ -1,4 +1,5 @@
 import Box from "@material-ui/core/Box";
+import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { DiceBox } from "../lib/components/DiceBox/DiceBox";
@@ -11,7 +12,10 @@ export default {
   component: DiceBox,
   args: {
     tooltipOpen: true,
-    onClick: () => undefined,
+    onClick: action("onClick"),
+    onFinalResult: action("onFinalResult"),
+    onRolling: action("onRolling"),
+    rolls: [],
     tooltipPlacement: "right",
     size: "7rem",
     fontSize: "4.5rem",

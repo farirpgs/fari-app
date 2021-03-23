@@ -1,10 +1,10 @@
 {
-  "id": "4516709c-3930-4393-a046-a450c0cc541b",
+  "id": "aa9bee75-0d38-4a50-b9d9-f2b306a98861",
   "version": 3,
   "name": "",
   "group": "",
-  "template": "Mazes",
-  "lastUpdated": 1616346329,
+  "template": "Maze",
+  "lastUpdated": 1616424643,
   "pages": [
     {
       "id": "7d7d87eb-dae9-4979-ac7a-fb3529135940",
@@ -21,7 +21,7 @@
               "type": "Text",
               "meta": {},
               "label": "SKILL",
-              "value": "Solves problems with excellent skills<br>"
+              "value": "<br>"
             }
           ]
         },
@@ -35,27 +35,20 @@
               "type": "Text",
               "meta": {},
               "label": "TOUGH",
-              "value": "Can swing hammer all day, whether for shaping metal or defending my friends"
+              "value": ""
             },
             {
               "id": "fdc2872a-9eea-4d58-8503-c757273cc4ee",
               "type": "Text",
               "meta": {},
               "label": "ARMORED",
-              "value": "Proudly made all of it"
+              "value": ""
             },
             {
               "id": "6c801cb3-db32-4e17-892c-2f9a2de01219",
               "type": "Text",
               "meta": {},
               "label": "STRONG",
-              "value": "Swinging hammers builds of the upper body strength"
-            },
-            {
-              "id": "af32ed07-0447-4f8d-95cf-3cbe442b1fb5",
-              "type": "Text",
-              "meta": {},
-              "label": "",
               "value": ""
             }
           ],
@@ -67,32 +60,34 @@
           "position": "Left",
           "blocks": [
             {
-              "id": "15f5fd95-7a41-46e4-9181-ecdf09da1185",
-              "label": "BLANK - TBD",
-              "type": "SlotTracker",
-              "meta": {},
-              "value": [{ "label": "1", "checked": false }]
+              "id": "eaf815f4-ac33-44d0-b6a3-3ddfbd2b72cc",
+              "label": "Stress",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "DISADVANTAGE on BOOK. Loose CLASS bonus. Clear via sleep, a vice, or a bond."
+              }
             },
             {
-              "id": "92c7a503-12f3-4c32-ae5c-d562d0e0b190",
-              "label": "STRESS - DISADVANTAGE on BOOK. Loose CLASS bonus. Clear via sleep, a vice, or a bond.",
-              "type": "SlotTracker",
-              "meta": {},
-              "value": [{ "label": "1", "checked": false }]
+              "id": "db4935ee-ade9-44ea-bb68-013b8e293c51",
+              "label": "TIRED",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "DISADVANTAGE on BOOTS. Clear via a good sleep or by eating and drinking."
+              }
             },
             {
-              "id": "3a5928bc-8f4e-46dd-be58-ba2271369e16",
-              "label": "Tired - DISADVANTAGE on BOOTS. Clear via a good sleep or by eating and drinking.",
-              "type": "SlotTracker",
-              "meta": {},
-              "value": [{ "label": "1", "checked": false }]
-            },
-            {
-              "id": "eca356c9-baee-486d-a80e-78fb3881129f",
-              "label": "Hurt - DISADVANTAGE on BLADES AND BONES. Clear via healing or an extended rest.",
-              "type": "SlotTracker",
-              "meta": {},
-              "value": [{ "label": "1", "checked": false }]
+              "id": "0e160816-62d1-4b56-833a-ba03f22b65ee",
+              "label": "HURT",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "DISADVANTAGE on BLADES AND BONES. Clear via healing or an extended rest."
+              }
             }
           ],
           "visibleOnCard": true
@@ -113,7 +108,7 @@
         },
         {
           "id": "a5f70fea-74fe-49f1-9d02-c1a9c07325f3",
-          "label": "&nbsp;RoLE &amp; ROLLS",
+          "label": "RoLE &amp; ROLLS",
           "position": "Right",
           "blocks": [
             {
@@ -125,52 +120,62 @@
             },
             {
               "id": "c9754a46-1e0a-4bb0-a4de-d3d779afb5ec",
-              "label": "Sentinel",
+              "label": "Role",
               "type": "Text",
-              "value": "Role",
+              "value": "",
               "meta": {}
             },
             {
               "id": "3cbf82b5-6dd3-4499-b452-2e74a8d452f0",
-              "label": "1<br>Class - ItinerAnt SMITH<br>",
+              "label": "Class [1]<br>",
               "type": "Text",
-              "value": "Succeed if the class could do it<br>",
-              "meta": {}
+              "value": "<br>",
+              "meta": { "helperText": "Succeed if the class could do it" }
             },
             {
               "id": "a8fc265f-0b50-473c-aca2-6f8eca3f5478",
-              "label": "2 3<br>BOOKS<br>",
+              "label": "BOOKS [2,3]<br>",
               "type": "Text",
-              "value": "Knowledge, Perception, Skills, Searching, Charisma Senses",
-              "meta": {}
+              "value": "",
+              "meta": {
+                "helperText": "Knowledge, Perception, Skills, Searching, Charisma Senses"
+              }
             },
             {
               "id": "1528f02e-5dce-470e-a5d8-16d80053be01",
-              "label": "3 4 5<br>BOOTS<br>",
+              "label": "BOOTS [3, 4, 5]<br>",
               "type": "Text",
-              "value": "Movement, Dexterity, Reflexes, Agility, Speed",
-              "meta": {}
+              "value": "",
+              "meta": {
+                "helperText": "Movement, Dexterity, Reflexes, Agility, Speed"
+              }
             },
             {
               "id": "b2d1c899-8f63-4a0b-9a5c-1e17b830688a",
-              "label": "4 5 6 7<br>BLADES<br>",
+              "label": "BLADES [4, 5, 6, 7]<br>",
               "type": "Text",
-              "value": "Violence, Weapons, Combat, Fighting, Dodging",
-              "meta": {}
+              "value": "",
+              "meta": {
+                "helperText": "Violence, Weapons, Combat, Fighting, Dodging"
+              }
             },
             {
               "id": "b446a6a0-4dbc-430f-aef1-3a7133fef044",
-              "label": "5 6 7 8 9<br>BONES<br>",
+              "label": "BONES [5, 6, 7, 8, 9]<br>",
               "type": "Text",
-              "value": "Endurance, Resistance, Strength, Bravery, Health, Heart",
-              "meta": {}
+              "value": "",
+              "meta": {
+                "helperText": "Endurance, Resistance, Strength, Bravery, Health, Heart"
+              }
             },
             {
               "id": "3d10704f-ad95-48b2-beef-97279a1f42a0",
-              "label": "10<br>CROWN<br>",
+              "label": "CROWN&nbsp; [10]<br>",
               "type": "Text",
-              "value": "Choose to succeed at a negotiated cost. The BLEAKER the DARKNESS, the higher the cost.",
-              "meta": {}
+              "value": "",
+              "meta": {
+                "helperText": "Choose to succeed at a negotiated cost. The BLEAKER the DARKNESS, the higher the cost."
+              }
             }
           ],
           "visibleOnCard": true
@@ -199,5 +204,6 @@
         }
       ]
     }
-  ]
+  ],
+  "fariType": "character"
 }

@@ -6,7 +6,7 @@ describe("/play-offline", () => {
     Fari.get("home.play-offline").click();
 
     // add luke
-    Fari.get("scene.add-gm-character").click();
+    Fari.get("scene.add-player").click();
     Fari.get("manager.new").click();
     Fari.get("scene.player-row.1.open-character-sheet").click();
     Fari.get("character-dialog.name").type("Luke Skywalker");
@@ -14,7 +14,7 @@ describe("/play-offline", () => {
     Fari.get("character-dialog.save").click();
 
     // add leia
-    Fari.get("scene.add-gm-character").click();
+    Fari.get("scene.add-player").click();
     Fari.get("manager.new").click();
     Fari.get("scene.player-row.2.open-character-sheet").click();
     Fari.get("character-dialog.name").type("Leia Organa");

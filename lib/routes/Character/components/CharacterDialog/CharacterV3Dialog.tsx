@@ -90,15 +90,18 @@ export const smallIconButtonStyle = css({
 });
 
 const HeaderHelpLinks: Record<string, string> = {
-  "Aspects": "/srds/condensed/getting-started?goTo=aspects",
-  "Stunts & Extras": "/srds/condensed/getting-started?goTo=stunts",
-  "Refresh": "/srds/condensed/getting-started?goTo=refresh",
-  "Stress": "/srds/condensed/challenges-conflicts-and-contests?goTo=stress",
-  "Consequences":
+  "aspects": "/srds/condensed/getting-started?goTo=aspects",
+  "stunts & extras": "/srds/condensed/getting-started?goTo=stunts",
+  "stunts": "/srds/condensed/getting-started?goTo=stunts",
+  "approaches":
+    "/srds/accelerated/how-to-do-stuff-outcomes-actions-and-approaches?goTo=choose-your-approach",
+  "refresh": "/srds/condensed/getting-started?goTo=refresh",
+  "stress": "/srds/condensed/challenges-conflicts-and-contests?goTo=stress",
+  "consequences":
     "/srds/condensed/challenges-conflicts-and-contests?goTo=consequences-1",
-  "Skills": "/srds/condensed/getting-started?goTo=skill-list",
-  "Dice":
-    "/srds/condensed/taking-action-rolling-the-dice?goTo=taking-action-rolling-the-dice",
+  "skills": "/srds/condensed/getting-started?goTo=skill-list",
+  "fate points":
+    "/srds/condensed/aspects-and-fate-points?goTo=aspects-and-fate-points",
 };
 
 export const CharacterV3Dialog: React.FC<{
@@ -327,7 +330,12 @@ export const CharacterV3Dialog: React.FC<{
                   }
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Template" variant="outlined" />
+                  <TextField
+                    {...params}
+                    label="Template"
+                    variant="outlined"
+                    data-cy={`character-dialog.template`}
+                  />
                 )}
               />
             </Grid>
@@ -472,10 +480,6 @@ export const CharacterV3Dialog: React.FC<{
           {pages?.map((page, pageIndex) => {
             const sectionStyle = css({
               label: "CharacterDialog-grid-section",
-              // borderTop: `2px solid ${headerBackgroundColors.primary}`,
-              // borderLeft: `2px solid ${headerBackgroundColors.primary}`,
-              // borderRight: `2px solid ${headerBackgroundColors.primary}`,
-              // borderBottom: `2px solid ${headerBackgroundColors.primary}`,
             });
             return (
               <TabPanel
@@ -528,7 +532,6 @@ export const CharacterV3Dialog: React.FC<{
             <Grid item xs>
               <Box pt=".5rem" ml="-.5rem">
                 <CharacterCard
-                  isMe={false}
                   playerName="..."
                   width="350px"
                   readonly={false}
@@ -563,7 +566,9 @@ export const CharacterV3Dialog: React.FC<{
               return null;
             }
 
-            const helpLink = HeaderHelpLinks[section.label];
+            const helpLink = characterTemplateInfo.isFate
+              ? HeaderHelpLinks[section.label.toLowerCase()]
+              : undefined;
 
             return (
               <Box key={section.id}>
@@ -630,7 +635,7 @@ export const CharacterV3Dialog: React.FC<{
                 />
                 {renderSectionBlocks(pageIndex, sectionIndex, section)}
 
-                <Collapse in={advanced}>
+                {advanced && (
                   <Box p=".5rem" mb=".5rem">
                     <Grid container justify="center" alignItems="center">
                       <Grid item>
@@ -657,7 +662,7 @@ export const CharacterV3Dialog: React.FC<{
                       </Grid>
                     </Grid>
                   </Box>
-                </Collapse>
+                )}
               </Box>
             );
           })}
@@ -698,6 +703,7 @@ export const CharacterV3Dialog: React.FC<{
                   control={
                     <Switch
                       color="primary"
+                      data-cy="character-dialog.toggle-advanced"
                       checked={advanced}
                       onChange={handleOnToggleAdvancedMode}
                     />
@@ -1140,15 +1146,14 @@ export const CharacterV3Dialog: React.FC<{
                         }}
                       />
                     )}
-                    <Collapse in={advanced}>
-                      {renderBlockAdvancedOptions(
+                    {advanced &&
+                      renderBlockAdvancedOptions(
                         pageIndex,
                         sectionIndex,
                         section,
                         block,
                         blockIndex
                       )}
-                    </Collapse>
                     {renderBlockHelpText(
                       pageIndex,
                       sectionIndex,
@@ -1189,6 +1194,9 @@ export const CharacterV3Dialog: React.FC<{
                 blockIndex,
                 meta
               );
+            }}
+            toggleBlockMainPointCounter={() => {
+              characterManager.actions.toggleBlockMainPointCounter(block.id);
             }}
           />
         )}

@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useState } from "react";
 import appIcon from "../../../images/blue/app.png";
+import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
@@ -152,6 +153,11 @@ export const JoinAGame: React.FC<{
             <Box pb="2rem" textAlign="center">
               <Typography color="error">
                 {t("play-route.join-error")}
+              </Typography>
+              <Typography color="error">
+                <AppLink to="/fari-wiki/connection-issues">
+                  {t("play-route.join-error.connection-issues")}
+                </AppLink>
               </Typography>
             </Box>
           </Collapse>

@@ -10,7 +10,7 @@ import {
   ICharacter,
   IPage,
   ISlotTrackerBlock,
-  Position,
+  Position
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -412,6 +412,32 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function toggleBlockMainPointCounter(blockId: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        for (const page of draft.pages) {
+          for (const section of page.sections) {
+            for (const block of section.blocks) {
+              const match = block.id === blockId;
+
+              if (block.type === BlockType.PointCounter) {
+                if (match) {
+                  block.meta.isMainPointCounter = !block.meta.isMainPointCounter;
+                } else {
+                  block.meta.isMainPointCounter = false;
+                }
+              }
+            }
+          }
+        }
+      })
+    );
+  }
+
   function removeBlock(
     pageIndex: number,
     sectionIndex: number,
@@ -560,6 +586,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       moveDnDBlock: moveDnDBlock,
       setBlockValue: setBlockValue,
       setBlockMeta: setBlockMeta,
+      toggleBlockMainPointCounter: toggleBlockMainPointCounter,
       setBlockLabel: setBlockLabel,
       removeBlock: removeBlock,
       addBlockBox: addCheckboxFieldValue,

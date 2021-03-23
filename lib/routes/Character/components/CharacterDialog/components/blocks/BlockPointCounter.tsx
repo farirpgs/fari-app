@@ -80,7 +80,7 @@ export function usePointCounter(props: {
 }
 
 export function BlockPointCounter(
-  props: IBlockComponentProps<IPointCounterBlock> & {}
+  props: IBlockComponentProps<IPointCounterBlock>
 ) {
   const { t } = useTranslate();
 
@@ -157,6 +157,7 @@ export function BlockPointCounter(
           <Grid item>
             <CircleTextField
               data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+              highlight={props.block.meta.isMainPointCounter}
               value={pointsManager.state.points}
               onChange={(newValue) => {
                 pointsManager.actions.setPoints(newValue);
@@ -179,6 +180,7 @@ export function BlockPointCounter(
               <Grid item>
                 <CircleTextField
                   data-cy={`character-dialog.${props.section.label}.${props.block.label}.max`}
+                  highlight={props.block.meta.isMainPointCounter}
                   value={pointsManager.state.maxPoints ?? ""}
                   onChange={(newMax) => {
                     pointsManager.actions.setMaxPoints(newMax);
@@ -224,7 +226,9 @@ export function BlockPointCounter(
 BlockPointCounter.displayName = "BlockPointCounter";
 
 export function BlockPointCounterActions(
-  props: IBlockActionComponentProps<IPointCounterBlock>
+  props: IBlockActionComponentProps<IPointCounterBlock> & {
+    toggleBlockMainPointCounter(): void;
+  }
 ) {
   const theme = useTheme();
   const { t } = useTranslate();
@@ -238,10 +242,7 @@ export function BlockPointCounterActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              isMainPointCounter: !props.block.meta.isMainPointCounter,
-            });
+            props.toggleBlockMainPointCounter();
           }}
         >
           {props.block.meta.isMainPointCounter

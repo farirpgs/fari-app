@@ -8,7 +8,6 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersonIcon from "@material-ui/icons/Person";
 import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
@@ -41,7 +40,6 @@ export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
   playerName: string | undefined;
   readonly: boolean;
-  isMe: boolean;
   width?: string;
   pool: IDicePool;
   onCharacterDialogOpen?(): void;
@@ -51,10 +49,8 @@ export const CharacterCard: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  const dynamicInternalWidth = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
-  const width = props.width ?? dynamicInternalWidth;
+
+  const width = props.width ?? "100%";
 
   const sections = props.characterSheet?.pages.flatMap((p) => p.sections);
   const visibleSections = sections?.filter((s) => s.visibleOnCard);
@@ -207,7 +203,7 @@ export const CharacterCard: React.FC<{
               },
             },
           ])}
-          data-cy={`character-card.${block.label}.label`}
+          data-cy={`character-card.section.${section.label}.block.${block.label}`}
           onClick={() => {
             if (props.readonly) {
               return;
