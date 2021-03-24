@@ -1,5 +1,5 @@
 {
-  "about-route.meta.description": "Fari é unha aplicación auxiliar para o xogo de rol Fate creada por René-Pier Deshaies-Gélinas",
+  "about-route.meta.description": "Fari é unha aplicación complementaria de RPG de mesa creada por René-Pier Deshaies-Gélinas",
   "about-route.meta.title": "Sobre",
   "character-dialog.block-type.dice-pool": "Piscina de dados",
   "character-dialog.block-type.point-counter": "Contador de puntos",
@@ -54,7 +54,6 @@
   "character-dialog.template.TheWitchIsDead": "The Witch Is Dead",
   "character-dialog.template.VentureCity": "Venture City",
   "characters-route.description": "Fari é a mellor aplicación auxiliar para o xogo de rol Fate. Xoga as escenas en tempo real coas túas amizades, rola os dados e deixade voar a vosa imaxinación colectiva mentres tecedes historias memorábeis!",
-  "characters-route.title": "Xerir personaxes",
   "common.language.de": "Deutsch",
   "common.language.dev": "Development",
   "common.language.en": "English",
@@ -102,8 +101,8 @@
   "home-route.header.stats": "Máis de 3000 partidos xogados cada mes.",
   "home-route.header.subtitle": "Non fai falta ningunha conta e é totalmente gratuíta. \n\nComeza un novo xogo, envía unha ligazón aos teus amigos e xoga agora.",
   "home-route.header.title": "Xoga xogos de rol de mesa en liña sen dores de cabeza",
-  "home-route.meta.description": "Fari é a mellor aplicación auxiliar para o xogo de rol Fate. Xoga as escenas en tempo real coas túas amizades, rola os dados e deixade voar a vosa imaxinación colectiva mentres tecedes historias memorábeis!",
-  "home-route.meta.title": "Auxiliar para o xogo de rol Fate",
+  "home-route.meta.description": "Fari é a mellor forma de xogar a xogos de rol de mesa en liña. Xoga escenas en tempo real cos teus amigos, tira dados e deixa que a túa imaxinación colectiva se desenfrene e tece historias memorables xuntas.",
+  "home-route.meta.title": "Xoga xogos de rol de mesa en liña sen dores de cabeza",
   "home-route.play-offline.button": "Comezar partida local",
   "home-route.play-offline.description": "Queda coas túas amizades en persoa o por videochamada, transmite a túa pantalla e gozade xogándodes Fate!",
   "home-route.play-offline.title": "Xogar a Fate localmente",
@@ -157,8 +156,8 @@
   "menu.play": "Xogar",
   "menu.scenes": "Escenas",
   "menu.srds": "SRD",
-  "oracle-route.meta.description": "Pregunta sobre o teu mundo e deixa que a Oráculo responda",
-  "oracle-route.meta.title": "Oráculo",
+  "oracle-route.meta.description": "Fai unha pregunta, selecciona a probabilidade, tira os dados e obtén a resposta de The Oracle",
+  "oracle-route.meta.title": "O Oráculo",
   "oracle.value.No": "Non",
   "oracle.value.NoAnd": "Non e ademais...",
   "oracle.value.Yes": "Si",
@@ -202,7 +201,5 @@
   "player-row.open-character-sheet": "Abrir ficha de personaxe",
   "player-row.played": "Xa actuou",
   "player-row.remove-character": "Quitar personaxe",
-  "player-row.swap-character-sheet": "Trocar ficha de personaxe",
-  "scenes-route.meta.description": "Fari é a mellor aplicación auxiliar para o xogo de rol Fate. Xoga as escenas en tempo real coas túas amizades, rola os dados e deixade voar a vosa imaxinación colectiva mentres tecedes historias memorábeis!",
-  "scenes-route.meta.title": "Xerir escenas"
+  "player-row.swap-character-sheet": "Trocar ficha de personaxe"
 }

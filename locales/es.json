@@ -1,5 +1,5 @@
 {
-  "about-route.meta.description": "Fari es una aplicación de asistencia para Fate RPG creada por René-Pier Deshaies-Gélinas",
+  "about-route.meta.description": "Fari es una aplicación de juego de rol de mesa creada por René-Pier Deshaies-Gélinas",
   "about-route.meta.title": "Acerca de",
   "character-dialog.block-type.dice-pool": "Piscina de dados",
   "character-dialog.block-type.point-counter": "Contador de puntos",
@@ -54,7 +54,6 @@
   "character-dialog.template.TheWitchIsDead": "The Witch Is Dead",
   "character-dialog.template.VentureCity": "Venture City",
   "characters-route.description": "Fari es la mejor aplicación de asistencia para Fate RPG. ¡Juega escenas en tiempo real con tus amigos, lanzad los dados FUDGE y dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!",
-  "characters-route.title": "Gestión de Personajes",
   "common.language.de": "Alemán",
   "common.language.dev": "Desarrollo",
   "common.language.en": "English",
@@ -102,8 +101,8 @@
   "home-route.header.stats": "Más de 3.000 partidos jugados cada mes.",
   "home-route.header.subtitle": "No se necesita una cuenta y es totalmente gratuito. \n\nEmpieza una nueva partida, envía un enlace a tus amigos y juega ahora.",
   "home-route.header.title": "Jugar a juegos de rol de mesa en línea sin quebraderos de cabeza",
-  "home-route.meta.description": "Fari es la mejor aplicación de asistencia para Fate RPG. ¡Juega escenas en tiempo real con tus amigos, lanzad los dados FUDGE y dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!",
-  "home-route.meta.title": "Asistente para Fate RPG",
+  "home-route.meta.description": "Fari es la mejor manera de jugar a juegos de rol de mesa en línea. Juega escenas en tiempo real con tus amigos, tira los dados y deja volar tu imaginación colectiva para tejer juntos historias memorables.",
+  "home-route.meta.title": "Jugar a juegos de rol de mesa en línea sin quebraderos de cabeza",
   "home-route.play-offline.button": "Iniciar Partida Offline",
   "home-route.play-offline.description": "Reúnete con tus amigos en persona o por videollamada, comparte tu pantalla y ¡disfrutad jugando a Fate!",
   "home-route.play-offline.title": "Jugar a Fate Offline",
@@ -157,8 +156,8 @@
   "menu.play": "Jugar",
   "menu.scenes": "Escenas",
   "menu.srds": "SRDs",
-  "oracle-route.meta.description": "Ask questions about your world and get answers from The Oracle",
-  "oracle-route.meta.title": "Oracle",
+  "oracle-route.meta.description": "Haz una pregunta, selecciona la probabilidad, tira los dados y obtén la respuesta de El Oráculo",
+  "oracle-route.meta.title": "El Oráculo",
   "oracle.value.No": "No",
   "oracle.value.NoAnd": "No and...",
   "oracle.value.Yes": "Yes",
@@ -202,7 +201,5 @@
   "player-row.open-character-sheet": "Hoja de carácter abierto",
   "player-row.played": "Ha jugado",
   "player-row.remove-character": "Quitar Personaje",
-  "player-row.swap-character-sheet": "Swap Character Sheet",
-  "scenes-route.meta.description": "Fari es la mejor aplicación de asistencia para Fate RPG. ¡Juega escenas en tiempo real con tus amigos, lanzad los dados FUDGE y dejad que vuestra imaginación colectiva corra libre, tejiendo historias memorables juntos!",
-  "scenes-route.meta.title": "Gestión de escenas"
+  "player-row.swap-character-sheet": "Swap Character Sheet"
 }
