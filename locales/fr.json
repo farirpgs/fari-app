@@ -1,5 +1,5 @@
 {
-  "about-route.meta.description": "Fari est une application pour jouer a jeu de rôle Fate, créée par René-Pier-Gélinas Deshaies",
+  "about-route.meta.description": "Fari est une application compagnon de jeu de rôle sur table créée par René-Pier Deshaies-Gélinas.",
   "about-route.meta.title": "À propos",
   "character-dialog.block-type.dice-pool": "Pool de dés",
   "character-dialog.block-type.point-counter": "Compteur de points",
@@ -54,7 +54,6 @@
   "character-dialog.template.TheWitchIsDead": "The Witch Is Dead",
   "character-dialog.template.VentureCity": "Venture City",
   "characters-route.description": "Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.",
-  "characters-route.title": "Gérer vos personnages",
   "common.language.de": "Allemand",
   "common.language.dev": "Développement",
   "common.language.en": "English",
@@ -102,8 +101,8 @@
   "home-route.header.stats": "Plus de 3000 parties à chaque mois!",
   "home-route.header.subtitle": "Aucun compte requis et entièrement gratuit. \n\nCommencez une nouvelle partie, envoyez un lien à vos amis et jouez maintenant.",
   "home-route.header.title": "Jouer à des jeux de rôles sur table sans avoir mal à la tête.",
-  "home-route.meta.description": "Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.",
-  "home-route.meta.title": "RPG Companion",
+  "home-route.meta.description": "Fari est la meilleure application pour jouer à des jeux de rôles sur table en ligne. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !",
+  "home-route.meta.title": "Jouer à des jeux de rôles sur table sans avoir mal à la tête.",
   "home-route.play-offline.button": "Commencer une partie hors ligne",
   "home-route.play-offline.description": "Diffuser votre écran et laisser Fari s'occuper du reste.",
   "home-route.play-offline.title": "Jouer à Fate hors ligne",
@@ -157,8 +156,8 @@
   "menu.play": "Jouer",
   "menu.scenes": "Scènes",
   "menu.srds": "DRS",
-  "oracle-route.meta.description": "Posez des questions sur votre monde et obtenez des réponses de l'Oracle",
-  "oracle-route.meta.title": "Oracle",
+  "oracle-route.meta.description": "Posez une question, sélectionnez la probabilité, lancez les dés et obtenez uneréponse de l'Oracle.",
+  "oracle-route.meta.title": "L'Oracle",
   "oracle.value.No": "No",
   "oracle.value.NoAnd": "No and...",
   "oracle.value.Yes": "Yes",
@@ -202,7 +201,5 @@
   "player-row.open-character-sheet": "Ouvrir la fiche de personnage",
   "player-row.played": "A joué",
   "player-row.remove-character": "Supprimer le personnage",
-  "player-row.swap-character-sheet": "Changer la fiche de personnage",
-  "scenes-route.meta.description": "Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.",
-  "scenes-route.meta.title": "Gérer vos Scènes"
+  "player-row.swap-character-sheet": "Changer la fiche de personnage"
 }

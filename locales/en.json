@@ -1,5 +1,5 @@
 {
-  "about-route.meta.description": "Fari is a Fate RPG Companion Application created by René-Pier Deshaies-Gélinas",
+  "about-route.meta.description": "Fari is a table-top RPG companion application created by René-Pier Deshaies-Gélinas",
   "about-route.meta.title": "About",
   "character-dialog.block-type.dice-pool": "Dice Pool",
   "character-dialog.block-type.point-counter": "Point Counter",
@@ -54,7 +54,6 @@
   "character-dialog.template.TheWitchIsDead": "The Witch Is Dead",
   "character-dialog.template.VentureCity": "Venture City",
   "characters-route.description": "Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your collective imagination run wild and weave memorable stories together!.",
-  "characters-route.title": "Manage your Characters",
   "common.language.de": "German",
   "common.language.dev": "Development",
   "common.language.en": "English",
@@ -102,8 +101,8 @@
   "home-route.header.stats": "More than 3000 games played every month!",
   "home-route.header.subtitle": "No account needed and entirely free.\n\nStart a new game, send a link to your friends and play now.",
   "home-route.header.title": "Play Table-Top RPGs Online without the headache",
-  "home-route.meta.description": "Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your collective imagination run wild and weave memorable stories together!.",
-  "home-route.meta.title": "Fate RPG Companion",
+  "home-route.meta.description": "Fari is the best way to play table-top RPGs online. Play scenes in real-time with your friends, roll dice and let your collective imagination run wild and weave memorable stories together!",
+  "home-route.meta.title": "Play Table-Top RPGs Online without the headache",
   "home-route.play-offline.button": "Play Offline",
   "home-route.play-offline.description": "Cast your screen to your friends and trust Fari to manage the rest.",
   "home-route.play-offline.title": "Offline Game",
@@ -157,8 +156,8 @@
   "menu.play": "Play",
   "menu.scenes": "Scenes",
   "menu.srds": "SRDs",
-  "oracle-route.meta.description": "Ask questions about your world and get answers from The Oracle",
-  "oracle-route.meta.title": "Oracle",
+  "oracle-route.meta.description": "Ask a question, select the likeliness, roll the dice and get the answer from The Oracle",
+  "oracle-route.meta.title": "The Oracle",
   "oracle.value.No": "No",
   "oracle.value.NoAnd": "No and...",
   "oracle.value.Yes": "Yes",
@@ -202,7 +201,5 @@
   "player-row.open-character-sheet": "Open Character Sheet",
   "player-row.played": "Has played",
   "player-row.remove-character": "Remove Character",
-  "player-row.swap-character-sheet": "Swap Character Sheet",
-  "scenes-route.meta.description": "Fari is the best Fate RPG companion application. Play scenes in real-time with your friends, roll fudge dice and let your collective imagination run wild and weave memorable stories together!.",
-  "scenes-route.meta.title": "Manage your Scenes"
+  "player-row.swap-character-sheet": "Swap Character Sheet"
 }

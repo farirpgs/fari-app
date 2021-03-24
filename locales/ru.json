@@ -1,5 +1,5 @@
 {
-  "about-route.meta.description": "Fari это Приложение Компаньон для Fate RPG созданное René-Pier Deshaies-Gélinas",
+  "about-route.meta.description": "Fari - это настольное приложение для сопровождения ролевой игры, созданное Рене-Пьером Деше-Желина.",
   "about-route.meta.title": "О Fari",
   "character-dialog.block-type.dice-pool": "Бассейн для кубиков",
   "character-dialog.block-type.point-counter": "Счётчик точек",
@@ -54,7 +54,6 @@
   "character-dialog.template.TheWitchIsDead": "The Witch Is Dead",
   "character-dialog.template.VentureCity": "Venture City",
   "characters-route.description": "Fari это лучшее приложение компаньон для Fate RPG. Отыгрывайте сцены с друзьями в реальном времени, бросайте fudge кубики и пусть ваше коллективное воображение разыграется, создав запоминающиеся истории вместе!.",
-  "characters-route.title": "Управлять Персонажами",
   "common.language.de": "Немецкий",
   "common.language.dev": "Development",
   "common.language.en": "English",
@@ -102,8 +101,8 @@
   "home-route.header.stats": "Более 3000 игр в месяц!",
   "home-route.header.subtitle": "Счет не нужен и абсолютно бесплатен. \n\nНачните новую игру, отправьте ссылку друзьям и играйте прямо сейчас.",
   "home-route.header.title": "Играть настольные ролевые игры онлайн без головной боли",
-  "home-route.meta.description": "Fari это лучшее приложение компаньон для Fate RPG. Отыгрывайте сцены с друзьями в реальном времени, бросайте fudge кубики и пусть ваше коллективное воображение разыграется, создав запоминающиеся истории вместе!.",
-  "home-route.meta.title": "Fate RPG Companion",
+  "home-route.meta.description": "Fari - это лучший способ играть в настольные ролевые игры онлайн. Играйте с друзьями в режиме реального времени, бросайте кости и позвольте вашему коллективному воображению разгуляться и сплетать вместе запоминающиеся истории!",
+  "home-route.meta.title": "Играть настольные ролевые игры онлайн без головной боли",
   "home-route.play-offline.button": "Начать Игру Оффлайн",
   "home-route.play-offline.description": "Соберитесь с друзьями вживую или в видеоконференции, поделитесь изображением со своего экрана и наслаждайтесь игрой в Fate!",
   "home-route.play-offline.title": "Играть в Fate Оффлайн",
@@ -157,8 +156,8 @@
   "menu.play": "Играть",
   "menu.scenes": "Сцены",
   "menu.srds": "SRDs",
-  "oracle-route.meta.description": "Ask questions about your world and get answers from The Oracle",
-  "oracle-route.meta.title": "Oracle",
+  "oracle-route.meta.description": "Задай вопрос, выбери симпатию, брось кубики и получи ответ от Оракула.",
+  "oracle-route.meta.title": "Оракул",
   "oracle.value.No": "No",
   "oracle.value.NoAnd": "No and...",
   "oracle.value.Yes": "Yes",
@@ -202,7 +201,5 @@
   "player-row.open-character-sheet": "Открыть Лист Персонажа",
   "player-row.played": "Уже сыграл",
   "player-row.remove-character": "Удалить Персонажа",
-  "player-row.swap-character-sheet": "Swap Character Sheet",
-  "scenes-route.meta.description": "Fari это лучшее приложение компаньон для Fate RPG. Отыгрывайте сцены с друзьями в реальном времени, бросайте fudge кубики и пусть ваше коллективное воображение разыграется, создав запоминающиеся истории вместе!.",
-  "scenes-route.meta.title": "Управлять Сценами"
+  "player-row.swap-character-sheet": "Swap Character Sheet"
 }

@@ -1,5 +1,5 @@
 {
-  "about-route.meta.description": "Fari ist eine von René-Pier Deshaies-Gélinas entwickelte Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel",
+  "about-route.meta.description": "Fari ist eine Table-Top-Rollenspiel-Begleitanwendung, die von René-Pier Deshaies-Gélinas entwickelt wurde",
   "about-route.meta.title": "Über",
   "character-dialog.block-type.dice-pool": "Würfel-Pool",
   "character-dialog.block-type.point-counter": "Punktzähler",
@@ -54,7 +54,6 @@
   "character-dialog.template.TheWitchIsDead": "The Witch Is Dead",
   "character-dialog.template.VentureCity": "Venture City",
   "characters-route.description": "Fari ist die beste Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel. Spiele Szenen in Echtzeit mit deinen Freunden, würfle mit Fudge-Würfeln, lasst eurer kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!",
-  "characters-route.title": "Verwalte deine Charaktere",
   "common.language.de": "Deutsch",
   "common.language.dev": "Development",
   "common.language.en": "English",
@@ -102,8 +101,8 @@
   "home-route.header.stats": "Jeden Monat werden mehr als 3000 Spiele gespielt!",
   "home-route.header.subtitle": "Kein Konto erforderlich und völlig kostenlos.\n\nStarten Sie ein neues Spiel, senden Sie einen Link an Ihre Freunde und spielen Sie jetzt.",
   "home-route.header.title": "Spielen Sie Table-Top-Rollenspiele online ohne Kopfschmerzen",
-  "home-route.meta.description": "Fari ist die beste Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel. Spiele Szenen in Echtzeit mit deinen Freunden, würfle mit Fudge-Würfeln, lasst eurer kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!",
-  "home-route.meta.title": "Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel",
+  "home-route.meta.description": "Fari ist die beste Art, Table-Top-Rollenspiele online zu spielen. Spielen Sie Szenen in Echtzeit mit Ihren Freunden, würfeln Sie und lassen Sie Ihrer kollektiven Fantasie freien Lauf und weben Sie gemeinsam unvergessliche Geschichten!",
+  "home-route.meta.title": "Spielen Sie Table-Top-Rollenspiele online ohne Kopfschmerzen",
   "home-route.play-offline.button": "Offline-Spiel starten",
   "home-route.play-offline.description": "Triff dich mit deinen Freunden persönlich oder mit einem Videoanruf, caste deinen Bildschirm und genieße es, Fate zu spielen!",
   "home-route.play-offline.title": "Fate offline spielen",
@@ -157,8 +156,8 @@
   "menu.play": "Spielen",
   "menu.scenes": "Szenen",
   "menu.srds": "SRDs",
-  "oracle-route.meta.description": "Ask questions about your world and get answers from The Oracle",
-  "oracle-route.meta.title": "Oracle",
+  "oracle-route.meta.description": "Stellen Sie eine Frage, wählen Sie die Wahrscheinlichkeit, würfeln Sie und erhalten Sie die Antwort von The Oracle",
+  "oracle-route.meta.title": "Das Orakel",
   "oracle.value.No": "No",
   "oracle.value.NoAnd": "No and...",
   "oracle.value.Yes": "Yes",
@@ -202,7 +201,5 @@
   "player-row.open-character-sheet": "Charakterbogen öffnen",
   "player-row.played": "Hat gespielt",
   "player-row.remove-character": "Charakter entfernen",
-  "player-row.swap-character-sheet": "Swap Character Sheet",
-  "scenes-route.meta.description": "Fari ist die beste Begleitanwendung für das Fate Pen-&-Paper-Rollenspiel. Spiele mit deinen Freunden Szenen in Echtzeit, würfle mit Fudge-Würfeln, lasse deiner kollektiven Fantasie freien Lauf und webt unvergessliche Geschichten zusammen!",
-  "scenes-route.meta.title": "Verwalte deine Szenen"
+  "player-row.swap-character-sheet": "Swap Character Sheet"
 }
