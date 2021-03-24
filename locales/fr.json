@@ -68,7 +68,7 @@
   "home-route.cards.wiki.description": "Tout ce dont vous avez besoin pour devenir un power-user Fari.",
   "home-route.cards.wiki.title": "Wiki Fari",
   "home-route.header.stats": "Plus de 3000 parties à chaque mois!",
-  "home-route.header.subtitle": "Commencer un partie, envoyer un lien à vos amies et jouer maintenant.",
+  "home-route.header.subtitle": "Aucun compte requis et entièrement gratuit. Commencez une nouvelle partie, envoyez un lien à vos amis et jouez maintenant.",
   "home-route.header.title": "Jouer à des jeux de rôles sur table sans avoir mal à la tête.",
   "home-route.meta.description": "Fari est la meilleure application pour jouer au jeu de role Fate. Jouez des scènes en temps réel avec vos amis, roulez les dés et laissez votre imagination tisser des histoires mémorables !.",
   "home-route.meta.title": "RPG Companion",
@@ -171,7 +171,6 @@
   "scenes-route.meta.title": "Gérer vos Scènes",
   "character-dialog.block-type.dice-pool": "Pool de dés",
   "character-dialog.block-type.point-counter": "Compteur de points",
-  "character-dialog.block-type.rich-text": "Texte enrichi",
   "character-dialog.block-type.skill": "Compétence",
   "character-dialog.block-type.slot-tracker": "Traqueur de machines à sous",
   "character-dialog.block-type.text": "Texte",
@@ -192,10 +191,10 @@
   "character-dialog.control.set-main-counter": "Définir comme compteur principal",
   "character-dialog.control.sync": "Sync",
   "character-dialog.control.unset-main-counter": "Supprimer le comptoir principal",
-  "character-dialog.helper-text.empty-dice-pool": "Vide",
+  "character-dialog.help-text.empty-dice-pool": "Vide",
   "character-dialog.remove-page-confirmation": "Vous êtes sûr de vouloir supprimer cette page",
   "character-dialog.remove-section-confirmation": "Vous êtes sûr de vouloir supprimer cette section",
-  "character-dialog.skill-block.roll": "Rouleau",
+  "character-dialog.skill-block.roll": "Rouler",
   "dice-fab-reroll": "Relancer",
-  "dice-fab.roll": "Rouleau"
+  "dice-fab.roll": "Rouler"
 }
