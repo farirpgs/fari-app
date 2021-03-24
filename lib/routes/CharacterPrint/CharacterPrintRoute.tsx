@@ -182,10 +182,11 @@ function PrintSections(props: { sections: Array<ISection> }) {
                       section={section}
                       block={block}
                       blockIndex={blockIndex}
+                      pool={[]}
                       onLabelChange={(value) => {}}
                       onValueChange={(value) => {}}
                       onMetaChange={(meta) => {}}
-                      onSkillClick={(options, commands) => {}}
+                      onPoolClick={(element) => {}}
                     />
                   )}
                   {block.type === BlockType.DicePool && (

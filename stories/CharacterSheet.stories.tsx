@@ -2,11 +2,13 @@ import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
+import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
-import { IDiceRollWithBonus } from "../lib/domains/dice/Dice";
+import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
+import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterSheet(
@@ -15,23 +17,50 @@ function StorybookCharacterSheet(
     "character" | "dialog" | "readonly"
   >
 ) {
-  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const poolManager = useDicePool();
+
+  function handleOnNewRoll(result: IDiceRollResult) {
+    setRolls((draft) => {
+      return [result, ...draft];
+    });
+  }
+  function handleOnClearPool() {
+    poolManager.actions.clearPool();
+  }
+
+  function handleOnRollPool() {
+    const result = poolManager.actions.getPoolResult();
+    handleOnNewRoll(result);
+  }
+
+  function handleOnPoolClick(element: IDicePoolElement) {
+    poolManager.actions.addOrRemovePoolElement(element);
+  }
+
   return (
-    <CharacterV3Dialog
-      dialog={props.dialog}
-      open={true}
-      character={props.character}
-      readonly={props.readonly}
-      pool={poolManager.state.pool}
-      rolls={rolls}
-      synced={false}
-      onSkillClick={action("onSkillClick")}
-      onPoolClick={poolManager.actions.addOrRemovePoolElement}
-      onClose={action("onClose")}
-      onSave={action("onSave")}
-      onToggleSync={action("onToggleSync")}
-    />
+    <>
+      <DiceFab
+        type={DiceFabMode.RollAndPool}
+        rollsForDiceBox={rolls}
+        pool={poolManager.state.pool}
+        onClearPool={handleOnClearPool}
+        onSelect={handleOnNewRoll}
+        onRollPool={handleOnRollPool}
+      />
+      <CharacterV3Dialog
+        dialog={props.dialog}
+        open={true}
+        character={props.character}
+        readonly={props.readonly}
+        pool={poolManager.state.pool}
+        synced={false}
+        onPoolClick={handleOnPoolClick}
+        onClose={action("onClose")}
+        onSave={action("onSave")}
+        onToggleSync={action("onToggleSync")}
+      />
+    </>
   );
 }
 
@@ -78,6 +107,10 @@ FateOfCthulhu.args = {
 export const DresdenFilesAccelerated = Template.bind({});
 DresdenFilesAccelerated.args = {
   character: CharacterFactory.make(CharacterTemplates.DresdenFilesAccelerated),
+};
+export const VentureCity = Template.bind({});
+VentureCity.args = {
+  character: CharacterFactory.make(CharacterTemplates.VentureCity),
 };
 export const Heartbreaker = Template.bind({});
 Heartbreaker.args = {

@@ -13,17 +13,18 @@ import { useZIndex } from "../../constants/zIndex";
 import {
   Dice,
   DiceCommandOptions,
-  IDiceRollWithBonus,
+  IDiceRollResult,
+  RollType,
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
-import { useDiceRolls } from "../../hooks/useDiceRolls/useDiceRolls";
+import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { CommandGroups } from "../../routes/Character/components/CharacterDialog/domains/CommandGroups/CommandGroups";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 
 type IProps = {
-  rolls: Array<IDiceRollWithBonus>;
+  rolls: Array<IDiceRollResult>;
   size: string;
   fontSize: string;
   borderSize: string;
@@ -36,7 +37,7 @@ type IProps = {
   disableConfettis?: boolean;
   onClick: () => void;
   onRolling?: (rolling: boolean) => void;
-  onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
+  onFinalResult?: (realRoll: IDiceRollResult) => void;
 };
 
 export const DiceBox: React.FC<IProps> = (props) => {
@@ -46,17 +47,13 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);
-  const diceRollsManager = useDiceRolls(props.rolls, {
+  const diceRollsManager = useLatestDiceRoll(props.rolls, {
     disableConfettis: props.disableConfettis ?? false,
     onRolling: props.onRolling,
     onFinalResult: props.onFinalResult,
   });
   const tooltipBackground = "#182026";
   const tooltipColor = useTextColors(tooltipBackground);
-
-  const hasBonus =
-    diceRollsManager.state.finalResultBonus !== undefined &&
-    diceRollsManager.state.finalResultBonus !== null;
 
   function handleButtonBoxClick() {
     if (diceRollsManager.state.rolling) {
@@ -106,8 +103,10 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationIterationCount: "infinite",
     animationTimingFunction: "linear",
   });
-  const separator = diceRollsManager.state.finalResult?.pool ? " • " : " + ";
-  const isPool = diceRollsManager.state.finalResult?.pool ?? false;
+  const shouldListResult =
+    diceRollsManager.state.finalResult?.options.listResults;
+  const separator = shouldListResult ? " • " : " + ";
+  const isPool = shouldListResult ?? false;
   const shouldRenderTotal = !isPool;
   const tooltipContent = !diceRollsManager.state.finalResultHidden && (
     <Box
@@ -164,15 +163,10 @@ export const DiceBox: React.FC<IProps> = (props) => {
                 return (
                   <span key={i} className={css({})}>
                     {!isFirst && <span>{separator}</span>}
-                    {r.type}
+                    {previewContentEditable({ value: r.label })}
                   </span>
                 );
               }
-            )}
-            {hasBonus && (
-              <span>
-                {" + "} {diceRollsManager.state.finalResultBonus}
-              </span>
             )}
           </Box>
         </Grid>
@@ -299,46 +293,81 @@ export const DiceBox: React.FC<IProps> = (props) => {
   }
 };
 
-export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
-  const diceRollsManager = useDiceRolls(props.rolls, {
+export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
+  const diceRollsManager = useLatestDiceRoll(props.rolls, {
     disableConfettis: true,
   });
-  const separator = diceRollsManager.state.finalResult?.pool ? "•" : "+";
-  const isPool = diceRollsManager.state.finalResult?.pool ?? false;
-  const hasBonus =
-    diceRollsManager.state.finalResultBonus !== undefined &&
-    diceRollsManager.state.finalResultBonus !== null;
+  const shouldListResult =
+    diceRollsManager.state.finalResult?.options.listResults;
+  const separator = shouldListResult ? "•" : "+";
+  const isPool = shouldListResult ?? false;
 
   return (
     <>
       <span>
         {diceRollsManager.state.finalResultRolls.map((r, i) => {
-          const options = DiceCommandOptions[r.type];
           const isFirst = i === 0;
-          const isFate = r.type === "1dF";
-          const IconForPool = CommandGroups.getCommandGroupByValue(r.type).icon;
+          if (r.type === RollType.Modifier) {
+            return (
+              <span
+                key={i}
+                className={css({
+                  display: "inline-block",
+                  verticalAlign: "middle",
+                })}
+              >
+                {!isFirst && (
+                  <span
+                    className={css({
+                      margin: "0 .2rem",
+                      verticalAlign: "middle",
+                    })}
+                  >
+                    {separator}
+                  </span>
+                )}
+                <Tooltip title={r.label}>
+                  <span
+                    className={css({
+                      verticalAlign: "middle",
+                    })}
+                  >
+                    {r.value}
+                  </span>
+                </Tooltip>
+              </span>
+            );
+          }
+
+          const options = DiceCommandOptions[r.command];
+          const isFate = r.command === "1dF";
+          const IconForPool = CommandGroups.getCommandGroupByValue(r.command)
+            .icon;
 
           return (
             <span
               key={i}
               className={css({
                 display: "inline-block",
+                verticalAlign: "middle",
               })}
             >
               {!isFirst && (
                 <span
                   className={css({
                     margin: "0 .2rem",
+                    verticalAlign: "middle",
                   })}
                 >
                   {separator}
                 </span>
               )}
-              <Tooltip title={r.type}>
+              <Tooltip title={r.command}>
                 <span>
                   <span
                     className={css({
                       fontFamily: isFate ? "fate" : "inherit",
+                      verticalAlign: "middle",
                     })}
                   >
                     {options.formatDetailedResult(r.value)}
@@ -357,31 +386,27 @@ export function DiceBoxResult(props: { rolls: IDiceRollWithBonus[] }) {
             </span>
           );
         })}
-        {hasBonus && (
-          <span
-            className={css({
-              verticalAlign: "middle",
-            })}
-          >
-            {separator} {diceRollsManager.state.finalResultBonus}
-          </span>
-        )}
       </span>
     </>
   );
 }
 
 export function DiceBonusLabel(props: {
-  rolls: IDiceRollWithBonus[];
+  rolls: IDiceRollResult[];
   colon?: boolean;
 }) {
-  const diceRollsManager = useDiceRolls(props.rolls, {
+  const diceRollsManager = useLatestDiceRoll(props.rolls, {
     disableConfettis: true,
   });
 
-  const label = previewContentEditable({
-    value: diceRollsManager.state.finalResultBonusLabel,
-  });
+  const label = diceRollsManager.state.finalResult?.commandResult
+    .filter((c) => c.type === RollType.Modifier)
+    .map((c) => {
+      if (c.type === RollType.Modifier) {
+        return previewContentEditable({ value: c.label });
+      }
+    })
+    .join(" • ");
 
   return (
     <>

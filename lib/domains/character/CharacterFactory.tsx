@@ -12,6 +12,7 @@ import { makeFateCoreCharacter } from "./character-templates/makeFateCoreCharact
 import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
 import Maze from "./character-templates/Maze.json";
 import TheWitchIsDead from "./character-templates/TheWitchIsDead.json";
+import VentureCity from "./character-templates/VentureCity.json";
 import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
@@ -70,7 +71,12 @@ export const CharacterFactory = {
       [CharacterTemplates.Maze]: () => {
         return this.makeFromJson(Maze);
       },
-      // TODO: VENTURE CITY @Owlbear
+      /**
+       * @author @Owlbear
+       */
+      [CharacterTemplates.VentureCity]: () => {
+        return this.makeFromJson(VentureCity);
+      },
       /**
        * @author @RPDeshaies
        */
@@ -88,7 +94,7 @@ export const CharacterFactory = {
       ...newCharacter,
       id: Id.generate(),
       name: "",
-      group: "",
+      group: undefined,
       template: type,
       lastUpdated: getUnix(),
     };

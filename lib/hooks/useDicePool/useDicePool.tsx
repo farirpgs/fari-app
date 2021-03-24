@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useRollDiceWithCommands } from "../../contexts/DiceContext/DiceContext";
+import { BlockType } from "../../domains/character/types";
+import { Dice } from "../../domains/dice/Dice";
 import {
   IDicePool,
   IDicePoolElement,
 } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 
 export function useDicePool() {
-  const rollWithCommands = useRollDiceWithCommands();
   const [pool, setPool] = useState<IDicePool>([]);
 
   function addOrRemovePoolElement(element: IDicePoolElement) {
@@ -25,12 +25,12 @@ export function useDicePool() {
   }
 
   function getPoolResult() {
-    const labels = pool.map((element) => element.label).join(" / ");
-    const commands = pool.flatMap((element) => element.commands);
-    const result = rollWithCommands(
-      { pool: true, bonus: undefined, bonusLabel: labels },
-      commands
-    );
+    const listResults = pool.some((e) => e.blockType === BlockType.DicePool);
+
+    const commands = pool.flatMap((element) => element.commandOptionList);
+
+    const result = Dice.rollCommandOptionList(commands, { listResults });
+
     clearPool();
     return result;
   }

@@ -104,6 +104,7 @@ function useMark() {
 
   t("character-dialog.template.FateOfCthulhu");
   t("character-dialog.template.DresdenFilesAccelerated");
+  t("character-dialog.template.VentureCity");
   t("character-dialog.template.IronEddaAccelerated");
   t("character-dialog.template.Heartbreaker");
   t("character-dialog.template.FateAccelerated");

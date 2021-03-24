@@ -16,12 +16,9 @@ import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import {
-  DiceContext,
-  useRollDice,
-} from "../../contexts/DiceContext/DiceContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { Dice, IDiceRollResult, RollType } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
@@ -60,12 +57,12 @@ export const OracleRoute = () => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const rollDice = useRollDice();
+
   const diceManager = useContext(DiceContext);
-  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const [likeliness, setLikeliness] = useState<number>(0);
   const [rolling, setRolling] = useState<boolean>(false);
-  const [finalRoll, setFinalRoll] = useState<IDiceRollWithBonus>();
+  const [finalRoll, setFinalRoll] = useState<IDiceRollResult>();
   const finalRollTotal = finalRoll?.total ?? 0;
   const finalResult = finalRollTotal + likeliness;
   const oracleValue = Oracle.getValue(finalResult);
@@ -73,7 +70,27 @@ export const OracleRoute = () => {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = rollDice({ pool: false });
+      const newRoll = Dice.rollCommandOptionList(
+        [
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+        ],
+        { listResults: false }
+      );
       logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });

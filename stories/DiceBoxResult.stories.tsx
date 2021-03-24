@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { DiceBoxResult } from "../lib/components/DiceBox/DiceBox";
+import { RollType } from "../lib/domains/dice/Dice";
 import { StoryProvider } from "./StoryProvider";
 
 type IProps = Parameters<typeof DiceBoxResult>["0"];
@@ -21,23 +22,28 @@ Default.args = {
   rolls: [
     {
       total: 4,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: 4,
+      options: { listResults: false },
+      commandResult: [
         {
           value: 1,
-          type: "1dF",
+          command: "1dF",
+          type: RollType.DiceCommand,
         },
         {
           value: 1,
-          type: "1dF",
+          command: "1dF",
+          type: RollType.DiceCommand,
         },
         {
           value: 1,
-          type: "1dF",
+          command: "1dF",
+          type: RollType.DiceCommand,
         },
         {
           value: 1,
-          type: "1dF",
+          command: "1dF",
+          type: RollType.DiceCommand,
         },
       ],
     },
@@ -49,11 +55,13 @@ SingleD20.args = {
   rolls: [
     {
       total: 20,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: 20,
+      options: { listResults: false },
+      commandResult: [
         {
           value: 20,
-          type: "1d20",
+          command: "1d20",
+          type: RollType.DiceCommand,
         },
       ],
     },
@@ -65,19 +73,23 @@ MultipleDice.args = {
   rolls: [
     {
       total: 6,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: 6,
+      options: { listResults: false },
+      commandResult: [
         {
           value: 1,
-          type: "1d12",
+          command: "1d12",
+          type: RollType.DiceCommand,
         },
         {
           value: 2,
-          type: "1d12",
+          command: "1d12",
+          type: RollType.DiceCommand,
         },
         {
           value: 3,
-          type: "1d12",
+          command: "1d12",
+          type: RollType.DiceCommand,
         },
       ],
     },
@@ -88,19 +100,23 @@ Pool.args = {
   rolls: [
     {
       total: 6,
-      pool: true,
-      commandResults: [
+      totalWithoutModifiers: 6,
+      options: { listResults: true },
+      commandResult: [
         {
           value: 1,
-          type: "1d12",
+          command: "1d12",
+          type: RollType.DiceCommand,
         },
         {
           value: 2,
-          type: "1d12",
+          command: "1d12",
+          type: RollType.DiceCommand,
         },
         {
           value: 3,
-          type: "1d12",
+          command: "1d12",
+          type: RollType.DiceCommand,
         },
       ],
     },

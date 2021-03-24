@@ -4,6 +4,7 @@ export enum CharacterTemplates {
   FateAccelerated = "FateAccelerated",
   FateOfCthulhu = "FateOfCthulhu",
   DresdenFilesAccelerated = "DresdenFilesAccelerated",
+  VentureCity = "VentureCity",
   Heartbreaker = "Heartbreaker",
   IronEddaAccelerated = "IronEddaAccelerated",
   Maze = "Maze",
@@ -23,6 +24,7 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Fate", template: CharacterTemplates.FateAccelerated },
   { group: "Fate", template: CharacterTemplates.FateOfCthulhu },
   { group: "Fate", template: CharacterTemplates.DresdenFilesAccelerated },
+  { group: "Fate", template: CharacterTemplates.VentureCity },
   { group: "Fate", template: CharacterTemplates.Heartbreaker },
   { group: "Fate", template: CharacterTemplates.IronEddaAccelerated },
   { group: "Fate", template: CharacterTemplates.Heartbreaker },
@@ -65,6 +67,13 @@ export const CharacterTemplatesInformation: Record<
     },
   },
   [CharacterTemplates.DresdenFilesAccelerated]: {
+    isFate: true,
+    author: {
+      name: "Evil Hat Productions",
+      link: "https://www.evilhat.com/home/",
+    },
+  },
+  [CharacterTemplates.VentureCity]: {
     isFate: true,
     author: {
       name: "Evil Hat Productions",

@@ -7,6 +7,7 @@ import {
 import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { defaultSceneName } from "../../../contexts/SceneContext/ScenesContext";
+import { RollType } from "../../../domains/dice/Dice";
 import { AspectType } from "../AspectType";
 import { IScene } from "../IScene";
 import { useScene } from "../useScene";
@@ -469,14 +470,14 @@ describe("useScene", () => {
       act(() => {
         result.current.actions.updatePlayerPlayedDuringTurn("1", true);
         result.current.actions.updatePlayerRoll("1", {
-          commandResults: [
-            { value: 1, type: "1dF" },
-            { value: 1, type: "1dF" },
-            { value: 1, type: "1dF" },
-            { value: 1, type: "1dF" },
+          commandResult: [
+            { value: 1, command: "1dF", type: RollType.DiceCommand },
+            { value: 1, command: "1dF", type: RollType.DiceCommand },
+            { value: 1, command: "1dF", type: RollType.DiceCommand },
+            { value: 1, command: "1dF", type: RollType.DiceCommand },
           ],
           total: 4,
-          pool: false,
+          options: { listResults: false },
         });
         result.current.actions.updatePlayerCharacterMainPointCounter(
           "1",
@@ -495,13 +496,31 @@ describe("useScene", () => {
         playerName: "RP",
         rolls: [
           {
-            pool: false,
-            commandResults: [
-              { value: 1, type: "1dF" },
-              { value: 1, type: "1dF" },
-              { value: 1, type: "1dF" },
-              { value: 1, type: "1dF" },
+            commandResult: [
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
             ],
+            options: {
+              listResults: false,
+            },
             total: 4,
           },
         ],
@@ -521,13 +540,31 @@ describe("useScene", () => {
         playerName: "RP",
         rolls: [
           {
-            pool: false,
-            commandResults: [
-              { value: 1, type: "1dF" },
-              { value: 1, type: "1dF" },
-              { value: 1, type: "1dF" },
-              { value: 1, type: "1dF" },
+            commandResult: [
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
+              {
+                command: "1dF",
+                type: "DiceCommand",
+                value: 1,
+              },
             ],
+            options: {
+              listResults: false,
+            },
             total: 4,
           },
         ],

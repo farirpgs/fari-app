@@ -1,7 +1,7 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
-import { Dice, IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { Dice, IDiceRollResult, RollType } from "../../domains/dice/Dice";
 
 const rollingDelay = 1000;
 
@@ -13,30 +13,33 @@ function usePrevious<T>(value: T) {
   return ref.current;
 }
 
-export function useDiceRolls(
-  playerRolls: Array<IDiceRollWithBonus>,
+export function useLatestDiceRoll(
+  playerRolls: Array<IDiceRollResult>,
   options?: {
     disableConfettis: boolean;
     onRolling?(rolling: boolean): void;
-    onFinalResult?: (realRoll: IDiceRollWithBonus) => void;
+    onFinalResult?: (realRoll: IDiceRollResult) => void;
   }
 ) {
   const theme = useTheme();
 
   const previousRolls = usePrevious(playerRolls);
   const [latestPlayerRoll] = playerRolls;
-  const [finalResult, setFinalResult] = useState<
-    IDiceRollWithBonus | undefined
-  >(undefined);
+  const [finalResult, setFinalResult] = useState<IDiceRollResult | undefined>(
+    undefined
+  );
   const [rolling, setRolling] = useState(false);
   const [color, setColor] = useState("inherit");
 
   const hasRolledOnce = finalResult !== undefined;
 
-  const finalResultRolls = finalResult?.commandResults ?? [];
-  const finalResultBonus = finalResult?.bonus;
-  const finalResultBonusLabel = finalResult?.bonusLabel ?? "";
-  const finalResultTotal = formatDiceNumber(finalResult, finalResultBonus);
+  const finalResultRolls = finalResult?.commandResult ?? [];
+
+  const finalResultLabel = finalResultRolls
+    .map((r) => (r.type === RollType.Modifier ? r.label : undefined))
+    .join("/");
+
+  const finalResultTotal = formatDiceNumber(finalResult);
 
   const finalResultHidden = rolling || !finalResult;
 
@@ -51,12 +54,12 @@ export function useDiceRolls(
         newColor = "inherit";
       } else if (
         commandGroup?.goodRoll &&
-        latestPlayerRoll?.total >= commandGroup?.goodRoll
+        latestPlayerRoll?.totalWithoutModifiers >= commandGroup?.goodRoll
       ) {
         newColor = theme.palette.success.main;
       } else if (
         commandGroup?.badRoll &&
-        latestPlayerRoll?.total <= commandGroup?.badRoll
+        latestPlayerRoll?.totalWithoutModifiers <= commandGroup?.badRoll
       ) {
         newColor = theme.palette.error.main;
       }
@@ -109,12 +112,12 @@ export function useDiceRolls(
     }
     if (
       commandGroup?.criticalSuccess !== undefined &&
-      latestPlayerRoll?.total === commandGroup?.criticalSuccess
+      latestPlayerRoll?.totalWithoutModifiers === commandGroup?.criticalSuccess
     ) {
       Confetti.fireConfetti();
     } else if (
       commandGroup?.criticalFailure !== undefined &&
-      latestPlayerRoll?.total === commandGroup?.criticalFailure
+      latestPlayerRoll?.totalWithoutModifiers === commandGroup?.criticalFailure
     ) {
       Confetti.fireCannon();
     }
@@ -126,8 +129,7 @@ export function useDiceRolls(
       finalResultTotal,
       finalResultRolls,
       finalResultHidden,
-      finalResultBonus,
-      finalResultBonusLabel,
+      finalResultLabel,
       rolling,
       hasRolledOnce,
       color,
@@ -135,17 +137,15 @@ export function useDiceRolls(
   };
 }
 
-export function formatDiceNumber(
-  result: IDiceRollWithBonus | undefined,
-  bonus: number = 0
-): string {
-  const containsFateDice = result?.commandResults.some((r) => r.type === "1dF");
+export function formatDiceNumber(result: IDiceRollResult | undefined): string {
+  const containsFateDice = result?.commandResult.some(
+    (r) => r.type === RollType.DiceCommand && r.command === "1dF"
+  );
   const total = result?.total ?? 0;
-  const totalWithBonus = total + bonus;
 
-  if (containsFateDice && totalWithBonus > 0) {
-    return `+${totalWithBonus}`;
+  if (containsFateDice && total > 0) {
+    return `+${total}`;
   }
 
-  return totalWithBonus.toString();
+  return total.toString();
 }

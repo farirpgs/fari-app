@@ -5,15 +5,16 @@ import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import { default as React } from "react";
-import {
-  ContentEditable,
-  previewContentEditable,
-} from "../../../../../../components/ContentEditable/ContentEditable";
+import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
-import { IDicePoolBlock } from "../../../../../../domains/character/types";
-import { IDiceCommandNames } from "../../../../../../domains/dice/Dice";
+import {
+  BlockType,
+  IDicePoolBlock,
+} from "../../../../../../domains/character/types";
+import { IDiceCommandOption } from "../../../../../../domains/dice/Dice";
 import { useLightBackground } from "../../../../../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
+import { Block } from "../../domains/Block/Block";
 import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
 import {
   IBlockActionComponentProps,
@@ -23,8 +24,9 @@ import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 
 export type IDicePoolElement = {
   blockId: string;
+  blockType: BlockType;
   label: string;
-  commands: IDiceCommandNames[];
+  commandOptionList: IDiceCommandOption[];
 };
 
 export type IDicePool = Array<IDicePoolElement>;
@@ -35,16 +37,15 @@ export function BlockDicePool(
     onPoolClick(element: IDicePoolElement): void;
   }
 ) {
-  const theme = useTheme();
   const { t } = useTranslate();
   const hasCommands = !!props.block.meta.commands?.length;
-  const canRoll = !props.advanced && !props.readonly && hasCommands;
+  const canRoll = !props.readonly && hasCommands;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
 
   const blockCommandGroups = CommandGroups.getCommandGroupFromBlock(
     props.block
   );
-  const blockCommandNames = CommandGroups.getCommandNamesFromBlock(props.block);
+  const commandOptionList = Block.getCommandOptionList(props.block);
 
   return (
     <>
@@ -82,8 +83,9 @@ export function BlockDicePool(
 
                   props.onPoolClick({
                     blockId: props.block.id,
-                    label: previewContentEditable({ value: props.block.label }),
-                    commands: blockCommandNames,
+                    blockType: props.block.type,
+                    label: props.block.label,
+                    commandOptionList: commandOptionList,
                   });
                 }}
               >
@@ -150,9 +152,10 @@ export function BlockDicePoolActions(
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";
 
-const Pool: React.FC<
+export const Pool: React.FC<
   BoxProps & {
     clickable?: boolean;
+    tooltipTitle?: string;
     selected?: boolean;
     borderRadius?: string;
     borderStyle?: string;
@@ -163,6 +166,7 @@ const Pool: React.FC<
     clickable,
     selected,
     borderRadius,
+    tooltipTitle,
     borderStyle = "solid",
     ...rest
   } = props;
@@ -172,44 +176,57 @@ const Pool: React.FC<
   const hoverColor = theme.palette.getContrastText(hoverBackground);
   const lightBackground = useLightBackground();
   return (
-    <Box
-      {...rest}
-      className={cx(
-        css({
-          "label": "character-circle-box",
-          "background": !selected
-            ? theme.palette.background.paper
-            : lightBackground,
-          "color": !selected
-            ? theme.palette.getContrastText(theme.palette.background.paper)
-            : theme.palette.getContrastText(lightBackground),
-          "border": `2px ${borderStyle} ${
-            selected ? theme.palette.primary.main : "#bdbdbd"
-          }`,
-          "boxShadow": selected ? theme.shadows[6] : theme.shadows[1],
-          "transition": theme.transitions.create([
-            "color",
-            "background",
-            "border",
-            "boxShadow",
-          ]),
-          "borderRadius": borderRadius ?? "24px",
-          "display": "flex",
-          "alignItems": "center",
-          "justifyContent": "center",
-          "cursor": !clickable ? "inherit" : "pointer",
-          "&:hover": {
-            color: !clickable || selected ? undefined : hoverColor,
-            background: !clickable || selected ? undefined : hoverBackground,
-          },
-        }),
-        className
-      )}
-    >
-      <Box p=".5rem" minWidth="50%" textAlign="center">
-        {props.children}
+    <Tooltip title={tooltipTitle ?? ""}>
+      <Box
+        {...rest}
+        className={cx(
+          css({
+            "label": "character-circle-box",
+            "background": !selected
+              ? theme.palette.background.paper
+              : theme.palette.primary.main,
+            "color": !selected
+              ? theme.palette.getContrastText(theme.palette.background.paper)
+              : theme.palette.getContrastText(theme.palette.primary.main),
+            "border": selected
+              ? `2px ${borderStyle} ${theme.palette.primary.main}`
+              : `2px ${borderStyle} #bdbdbd`,
+
+            "boxShadow": selected ? theme.shadows[4] : theme.shadows[1],
+            "transition": theme.transitions.create([
+              "color",
+              "background",
+              "border",
+              "borderWidth",
+              "boxShadow",
+            ]),
+            "borderRadius": borderRadius ?? "24px",
+            "display": "flex",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "cursor": !clickable ? "inherit" : "pointer",
+            "&:hover": {
+              color: !clickable || selected ? undefined : hoverColor,
+              background: !clickable || selected ? undefined : hoverBackground,
+              border: selected
+                ? undefined
+                : `2px ${borderStyle} ${theme.palette.text.primary}`,
+            },
+          }),
+          className
+        )}
+      >
+        <Box
+          p=".5rem"
+          minWidth="50%"
+          textAlign="center"
+          display="flex"
+          className={css({})}
+        >
+          {props.children}
+        </Box>
       </Box>
-    </Box>
+    </Tooltip>
   );
 };
 Pool.displayName = "CharacterCircleBox";

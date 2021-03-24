@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import {
   Dice,
   IDiceCommandNames,
-  IDiceRollWithBonus,
+  IDiceRollResult,
   IRollDiceOptions,
 } from "../../domains/dice/Dice";
 
@@ -41,36 +41,15 @@ export function useDice() {
   };
 }
 
-export function useRollDice() {
+export function useRollDiceFromContext() {
   const diceManager = useContext(DiceContext);
 
-  function roll(options: IRollDiceOptions): IDiceRollWithBonus {
-    const result = Dice.rollCommands(diceManager.state.selectedCommands);
-
-    return {
-      ...result,
-      bonus: options.bonus,
-      bonusLabel: options.bonusLabel,
-      pool: options.pool,
-    };
-  }
-
-  return roll;
-}
-
-export function useRollDiceWithCommands() {
-  function roll(
-    options: IRollDiceOptions,
-    commands: Array<IDiceCommandNames>
-  ): IDiceRollWithBonus {
-    const result = Dice.rollCommands(commands);
-
-    return {
-      ...result,
-      bonus: options.bonus,
-      bonusLabel: options.bonusLabel,
-      pool: options.pool,
-    };
+  function roll(options: IRollDiceOptions): IDiceRollResult {
+    const result = Dice.rollCommandNameList(
+      diceManager.state.selectedCommands,
+      options
+    );
+    return result;
   }
 
   return roll;

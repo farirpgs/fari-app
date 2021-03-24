@@ -22,7 +22,6 @@ import {
   ISlotTrackerBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
-import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import {
   BlockDicePool,
@@ -32,6 +31,7 @@ import {
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
+import { Block } from "../../../../../routes/Character/components/CharacterDialog/domains/Block/Block";
 import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
@@ -43,7 +43,6 @@ export const CharacterCard: React.FC<{
   width?: string;
   pool: IDicePool;
   onCharacterDialogOpen?(): void;
-  onRoll?(options: IRollDiceOptions): void;
   onPoolClick(element: IDicePoolElement): void;
 }> = (props) => {
   const { t } = useTranslate();
@@ -187,6 +186,7 @@ export const CharacterCard: React.FC<{
     block: IBlock & ISkillBlock,
     blockIndex: number
   ) {
+    const isSelected = props.pool.some((p) => p.blockId === block.id);
     return (
       <Grid item className={css({ flex: "0 1 auto", marginTop: ".2rem" })}>
         <Link
@@ -195,6 +195,10 @@ export const CharacterCard: React.FC<{
               paddingRight: ".5rem",
               fontSize: ".8rem",
               cursor: props.readonly ? "inherit" : "pointer",
+              textTransform: "uppercase",
+              fontWeight: isSelected
+                ? theme.typography.fontWeightBold
+                : undefined,
             },
             props.readonly && {
               "color": theme.palette.text.primary,
@@ -208,11 +212,12 @@ export const CharacterCard: React.FC<{
             if (props.readonly) {
               return;
             }
-            const bonus = parseInt(block.value) || 0;
-            props.onRoll?.({
-              pool: false,
-              bonus: bonus,
-              bonusLabel: block.label,
+            const commandOptionList = Block.getCommandOptionList(block);
+            props.onPoolClick({
+              blockId: block.id,
+              blockType: block.type,
+              label: block.label,
+              commandOptionList: commandOptionList,
             });
           }}
         >

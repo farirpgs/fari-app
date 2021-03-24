@@ -1,5 +1,5 @@
 import { ICharacter } from "../../../domains/character/types";
-import { IDiceRollWithBonus } from "../../../domains/dice/Dice";
+import { IDiceRollResult } from "../../../domains/dice/Dice";
 import { IPeerAction } from "../../../hooks/usePeerJS/IPeerAction";
 
 export type IPeerActions =
@@ -9,7 +9,7 @@ export type IPeerActions =
   | ILoadCharacterPeerAction
   | IUpdatePlayedInTurnOrderPeerAction;
 
-type IRollPeerAction = IPeerAction<"roll", IDiceRollWithBonus>;
+type IRollPeerAction = IPeerAction<"roll", IDiceRollResult>;
 type IUpdateFatePointPeerAction = IPeerAction<
   "update-main-point-counter",
   { points: string; maxPoints: string | undefined }

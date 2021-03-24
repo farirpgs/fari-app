@@ -1,10 +1,14 @@
 import Box from "@material-ui/core/Box";
 import { actions } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
+import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
 import { CharacterCard } from "../lib/components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
+import { IDiceRollResult } from "../lib/domains/dice/Dice";
+import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
+import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterCard(
@@ -13,16 +17,46 @@ function StorybookCharacterCard(
     "characterSheet" | "readonly" | "playerName"
   >
 ) {
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
+  const poolManager = useDicePool();
+
+  function handleOnNewRoll(result: IDiceRollResult) {
+    setRolls((draft) => {
+      return [result, ...draft];
+    });
+  }
+  function handleOnClearPool() {
+    poolManager.actions.clearPool();
+  }
+
+  function handleOnRollPool() {
+    const result = poolManager.actions.getPoolResult();
+    handleOnNewRoll(result);
+  }
+
+  function handleOnPoolClick(element: IDicePoolElement) {
+    poolManager.actions.addOrRemovePoolElement(element);
+  }
+
   return (
-    <CharacterCard
-      playerName={props.playerName}
-      readonly={props.readonly}
-      characterSheet={props.characterSheet}
-      pool={[]}
-      onCharacterDialogOpen={actions("onCharacterDialogOpen") as any}
-      onRoll={actions("onRoll") as any}
-      onPoolClick={actions("onPoolClick") as any}
-    />
+    <>
+      <DiceFab
+        type={DiceFabMode.RollAndPool}
+        rollsForDiceBox={rolls}
+        pool={poolManager.state.pool}
+        onClearPool={handleOnClearPool}
+        onSelect={handleOnNewRoll}
+        onRollPool={handleOnRollPool}
+      />
+      <CharacterCard
+        playerName={props.playerName}
+        readonly={props.readonly}
+        characterSheet={props.characterSheet}
+        pool={poolManager.state.pool}
+        onCharacterDialogOpen={actions("onCharacterDialogOpen") as any}
+        onPoolClick={handleOnPoolClick}
+      />
+    </>
   );
 }
 
@@ -40,7 +74,7 @@ export default {
 
 const Template: Story<IProps> = (args) => (
   <StoryProvider>
-    <Box width="350px">
+    <Box width="350px" ml="5rem">
       <StorybookCharacterCard
         characterSheet={
           {
@@ -76,6 +110,10 @@ DresdenFilesAccelerated.args = {
   characterSheet: CharacterFactory.make(
     CharacterTemplates.DresdenFilesAccelerated
   ),
+};
+export const VentureCity = Template.bind({});
+VentureCity.args = {
+  characterSheet: CharacterFactory.make(CharacterTemplates.VentureCity),
 };
 export const Heartbreaker = Template.bind({});
 Heartbreaker.args = {

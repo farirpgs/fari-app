@@ -176,58 +176,112 @@ export const DiceCommandOptions: Record<
 };
 
 export type IRollDiceOptions = {
-  bonus?: number;
-  bonusLabel?: string;
-  pool: boolean;
+  listResults: boolean;
 };
 
-type IDiceRoll = {
-  type: IDiceCommandNames;
+export enum RollType {
+  DiceCommand = "DiceCommand",
+  Modifier = "Modifier",
+}
+
+export type IDiceCommandOption =
+  | {
+      type: RollType.DiceCommand;
+      command: IDiceCommandNames;
+    }
+  | {
+      type: RollType.Modifier;
+      label: string;
+      modifier: number;
+    };
+
+export type IDiceCommandResult =
+  | {
+      type: RollType.DiceCommand;
+      command: IDiceCommandNames;
+      value: number;
+    }
+  | {
+      type: RollType.Modifier;
+      label: string;
+      value: number;
+    };
+
+export type ISimplifiedDiceRoll = {
+  label: string;
   value: number;
 };
 
-type ISimplifiedDiceRoll = {
-  type: string;
-  value: number;
-};
-
-type IDiceRollResult = {
+export type IDiceRollResult = {
   total: number;
-  commandResults: Array<IDiceRoll>;
-};
-
-export type IDiceRollWithBonus = IDiceRollResult & {
-  pool: boolean;
-  bonus?: number;
-  bonusLabel?: string;
+  totalWithoutModifiers: number;
+  commandResult: Array<IDiceCommandResult>;
+  options: IRollDiceOptions;
 };
 
 export const Dice = {
-  rollCommands(commands: Array<IDiceCommandNames>): IDiceRollResult {
+  rollCommandNameList(
+    commandNameList: Array<IDiceCommandNames>,
+    options: IRollDiceOptions
+  ) {
+    return this.rollCommandOptionList(
+      commandNameList.map((c) => ({
+        type: RollType.DiceCommand,
+        command: c,
+      })),
+      options
+    );
+  },
+  rollCommandOptionList(
+    commandOptionList: Array<IDiceCommandOption>,
+    options: IRollDiceOptions
+  ): IDiceRollResult {
     let total = 0;
-    const rolls: Array<IDiceRoll> = [];
+    let totalWithoutModifiers = 0;
+    const rolls: Array<IDiceCommandResult> = [];
 
-    commands.forEach((t) => {
-      const diceGroup = DiceCommandOptions[t];
+    commandOptionList.forEach((command) => {
+      if (command.type === RollType.DiceCommand) {
+        const diceGroup = DiceCommandOptions[command.command];
 
-      const sides = diceGroup.sides;
-      const side = getRandomDiceSide(sides.length);
-      const result = sides[side];
+        const sides = diceGroup.sides;
+        const side = getRandomDiceSide(sides.length);
+        const result = sides[side];
 
-      rolls.push({
-        type: t,
-        value: result,
-      });
-      total += result;
+        rolls.push({
+          type: command.type,
+          command: command.command,
+          value: result,
+        });
+        total += result;
+        totalWithoutModifiers += result;
+      }
+      if (command.type === RollType.Modifier) {
+        rolls.push({
+          type: command.type,
+          label: command.label,
+          value: command.modifier,
+        });
+        total += command.modifier;
+      }
     });
 
-    const results: IDiceRollResult = { total, commandResults: rolls };
-    return results;
+    return {
+      total,
+      totalWithoutModifiers,
+      commandResult: rolls,
+      options: options,
+    };
   },
 
   findMatchingCommandGroupWithDiceResult(result: IDiceRollResult | undefined) {
-    const commands = result?.commandResults.flatMap((cr) => cr.type);
-    return Dice.findMatchingCommandGroupWithDiceTypes(commands);
+    const flatCommands = result?.commandResult
+      .flatMap((cr) => {
+        return cr.type === RollType.DiceCommand ? cr.command : undefined;
+      })
+      .filter((c) => !!c) as Array<IDiceCommandNames>;
+
+    return this.findMatchingCommandGroupWithDiceTypes(flatCommands);
   },
 
   findMatchingCommandGroupWithDiceTypes(
@@ -239,16 +293,19 @@ export const Dice = {
     return commandGroup;
   },
 
-  simplifyRolls(rolls: Array<IDiceRoll>): Array<ISimplifiedDiceRoll> {
+  simplifyRolls(rolls: Array<IDiceCommandResult>): Array<ISimplifiedDiceRoll> {
     const commandResultsWithCounts = rolls.reduce<
       Record<string, { result: number; count: number }>
     >((acc, diceRoll) => {
-      if (acc[diceRoll.type] === undefined) {
-        acc[diceRoll.type] = { count: 0, result: 0 };
+      if (diceRoll.type === RollType.Modifier) {
+        return acc;
+      }
+      if (acc[diceRoll.command] === undefined) {
+        acc[diceRoll.command] = { count: 0, result: 0 };
       }
 
-      acc[diceRoll.type].count = acc[diceRoll.type].count + 1;
-      acc[diceRoll.type].result += diceRoll.value;
+      acc[diceRoll.command].count = acc[diceRoll.command].count + 1;
+      acc[diceRoll.command].result += diceRoll.value;
 
       return acc;
     }, {});
@@ -264,10 +321,16 @@ export const Dice = {
       if (isCountableDiceCommand) {
         const [, /* 1d */ dice] = command.split("d");
         const typeLabel = `${count}d${dice}`;
-        return { type: typeLabel, value: result };
+        return { label: typeLabel, value: result };
       }
-      return { type: command, value: result };
+      return { label: command, value: result };
     });
+
+    for (const roll of rolls) {
+      if (roll.type === RollType.Modifier) {
+        simplifiedRolls.push({ label: roll.label, value: roll.value });
+      }
+    }
 
     return simplifiedRolls;
   },

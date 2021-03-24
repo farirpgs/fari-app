@@ -407,7 +407,7 @@ describe("useCharacter", () => {
                   },
                 ],
                 id: expect.anything(),
-                label: "Skills",
+                label: "Approaches",
                 position: "Right",
                 visibleOnCard: true,
               },

@@ -136,7 +136,7 @@ export const PlayerRow: React.FC<
                   borderSize=".15rem"
                   disabled={!props.permissions.canRoll}
                   onClick={() => {
-                    handleRoll({ pool: false });
+                    handleRoll({ listResults: false });
                   }}
                 />
               </Box>
@@ -210,6 +210,7 @@ export const PlayerRow: React.FC<
             data-cy={`player-row.points`}
             value={pointsManager.state.points}
             readonly={!props.permissions.canUpdatePoints}
+            highlight
             onChange={(newValue) => {
               pointsManager.actions.setPoints(newValue);
             }}
@@ -233,6 +234,7 @@ export const PlayerRow: React.FC<
                 data-cy={`player-row.max-points`}
                 value={pointsManager.state.maxPoints ?? ""}
                 readonly={!props.permissions.canUpdatePoints}
+                highlight
                 onChange={(newMax) => {
                   pointsManager.actions.setMaxPoints(newMax);
                 }}

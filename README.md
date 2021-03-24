@@ -38,6 +38,8 @@ QA Blitz
 - [x] RETHINK HOW TO ROLL CHARACTER
 - [x] readonly drag and drop for players on aspects
 - [x] readonly remove consequence for players on aspects
+- [ ] I found a bug. When i was editing the page label, i accidentally lost focus after deleting all the text. i couldn't find the place to click to get the cursor back. What if the "click to edit" area wasn't the text element, but the whole tab box (at the top, not the body).
+
 
 # storybook
 

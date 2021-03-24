@@ -19,7 +19,7 @@ import {
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
-import { IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { AspectType } from "./AspectType";
@@ -649,7 +649,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updateGmRoll(roll: IDiceRollWithBonus) {
+  function updateGmRoll(roll: IDiceRollResult) {
     setScene(
       produce((draft: IScene) => {
         draft.gm.rolls = [roll, ...draft.gm.rolls];
@@ -657,7 +657,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerRoll(id: string, roll: IDiceRollWithBonus) {
+  function updatePlayerRoll(id: string, roll: IDiceRollResult) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];

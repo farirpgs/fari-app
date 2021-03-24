@@ -24,15 +24,4 @@ export const CommandGroups = {
 
     return result;
   },
-  getCommandNamesFromBlock(block: IBlock & (IDicePoolBlock | ISkillBlock)) {
-    const result =
-      block.meta.commands?.flatMap((c) => {
-        const group = AllDiceCommandGroups.find((g) => {
-          return g.id === c;
-        }) as IDiceCommandGroup;
-        return group?.value;
-      }) ?? [];
-
-    return result;
-  },
 };

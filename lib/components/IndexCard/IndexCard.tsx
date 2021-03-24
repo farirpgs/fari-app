@@ -30,7 +30,6 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { default as React, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import { IRollDiceOptions } from "../../domains/dice/Dice";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -52,7 +51,7 @@ export const IndexCard: React.FC<
     aspectId: string;
     sceneManager: ReturnType<typeof useScene>;
     showClickableSkills: boolean;
-    onRoll(options: IRollDiceOptions): void;
+    onRoll(modifierLabel: string, modifierValue: number): void;
     onMove(dragIndex: number, hoverIndex: number): void;
   } & IDataCyProps
 > = (props) => {
@@ -282,12 +281,8 @@ export const IndexCard: React.FC<
                       if (props.readonly) {
                         return;
                       }
-                      const bonus = parseInt(skill.modifier) || 0;
-                      props.onRoll({
-                        bonusLabel: skill.label,
-                        bonus: bonus,
-                        pool: false,
-                      });
+                      const modifier = parseInt(skill.modifier) || 0;
+                      props.onRoll(skill.label, modifier);
                     }}
                   >
                     {skill.label} ({skill.modifier})

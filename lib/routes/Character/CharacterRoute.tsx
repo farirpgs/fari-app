@@ -7,17 +7,10 @@ import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import {
-  useRollDice,
-  useRollDiceWithCommands,
-} from "../../contexts/DiceContext/DiceContext";
+import { useRollDiceFromContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../domains/character/types";
-import {
-  IDiceCommandNames,
-  IDiceRollWithBonus,
-  IRollDiceOptions,
-} from "../../domains/dice/Dice";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -33,14 +26,14 @@ export const CharacterRoute: React.FC<{
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
-  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const poolManager = useDicePool();
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
   const logger = useLogger();
 
-  function handleOnNewRoll(result: IDiceRollWithBonus) {
+  function handleOnNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
@@ -63,25 +56,11 @@ export const CharacterRoute: React.FC<{
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
-  const rollDice = useRollDice();
-  const rollWithCommands = useRollDiceWithCommands();
+  const rollDice = useRollDiceFromContext();
 
   const query = useQuery<"dialog" | "readonly">();
   const dialogMode = query.get("dialog") === "true";
   const readonly = query.get("readonly") === "true";
-
-  function handleOnSkillClick(
-    options: IRollDiceOptions,
-    commands: IDiceCommandNames[] | undefined
-  ): void {
-    if (commands) {
-      const result = rollWithCommands(options, commands);
-      handleOnNewRoll(result);
-    } else {
-      const result = rollDice(options);
-      handleOnNewRoll(result);
-    }
-  }
 
   function handleOnClearPool() {
     poolManager.actions.clearPool();
@@ -121,8 +100,6 @@ export const CharacterRoute: React.FC<{
             dialog={dialogMode || false}
             readonly={readonly}
             pool={poolManager.state.pool}
-            rolls={rolls}
-            onSkillClick={handleOnSkillClick}
             onPoolClick={handleOnPoolClick}
             onSave={(newCharacter) => {
               charactersManager.actions.upsert(newCharacter);

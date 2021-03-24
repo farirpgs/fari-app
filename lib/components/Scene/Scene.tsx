@@ -43,13 +43,10 @@ import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
-import {
-  useRollDice,
-  useRollDiceWithCommands,
-} from "../../contexts/DiceContext/DiceContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
@@ -57,7 +54,13 @@ import {
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { ICharacter } from "../../domains/character/types";
-import { IDiceRollWithBonus, IRollDiceOptions } from "../../domains/dice/Dice";
+import {
+  Dice,
+  IDiceCommandOption,
+  IDiceRollResult,
+  IRollDiceOptions,
+  RollType,
+} from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useDicePool } from "../../hooks/useDicePool/useDicePool";
@@ -132,8 +135,8 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const theme = useTheme();
   const logger = useLogger();
-  const rollDice = useRollDice();
-  const rollWithCommands = useRollDiceWithCommands();
+  const diceManager = useContext(DiceContext);
+
   const isXlAndUp = useMediaQuery(theme.breakpoints.up("xl"));
   const isLgAndUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isMDAndUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -244,7 +247,7 @@ export const Scene: React.FC<IProps> = (props) => {
     charactersManager.actions.upsert(character);
   };
 
-  const handleSetRoll = (result: IDiceRollWithBonus) => {
+  const handleSetRoll = (result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
     } else {
@@ -255,10 +258,7 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleSetPlayerRoll = (
-    playerId: string,
-    result: IDiceRollWithBonus
-  ) => {
+  const handleSetPlayerRoll = (playerId: string, result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updatePlayerRoll(playerId, result);
     } else {
@@ -485,16 +485,6 @@ export const Scene: React.FC<IProps> = (props) => {
                     open={characterDialogPlayerId === player.id}
                     character={player.character}
                     dialog={true}
-                    rolls={player.rolls}
-                    onSkillClick={(options, commands) => {
-                      if (commands) {
-                        const result = rollWithCommands(options, commands);
-                        handleSetPlayerRoll(player.id, result);
-                      } else {
-                        const result = rollDice(options);
-                        handleSetPlayerRoll(player.id, result);
-                      }
-                    }}
                     onSave={(updatedCharacter) => {
                       if (isGM) {
                         sceneManager.actions.updatePlayerCharacter(
@@ -549,7 +539,13 @@ export const Scene: React.FC<IProps> = (props) => {
                     );
                   }}
                   onDiceRoll={(options: IRollDiceOptions) => {
-                    handleSetPlayerRoll(player.id, rollDice(options));
+                    handleSetPlayerRoll(
+                      player.id,
+                      Dice.rollCommandNameList(
+                        diceManager.state.selectedCommands,
+                        options
+                      )
+                    );
                   }}
                   onPlayedInTurnOrderChange={(playedInTurnOrder) => {
                     if (isGM) {
@@ -626,9 +622,6 @@ export const Scene: React.FC<IProps> = (props) => {
                         readonly={!canControl}
                         playerName={player.playerName}
                         characterSheet={player.character}
-                        onRoll={(options) => {
-                          handleSetPlayerRoll(player.id, rollDice(options));
-                        }}
                         onCharacterDialogOpen={() => {
                           setCharacterDialogPlayerId(player.id);
                         }}
@@ -794,8 +787,22 @@ export const Scene: React.FC<IProps> = (props) => {
                     readonly={!isGM}
                     showClickableSkills={props.mode !== SceneMode.Manage}
                     sceneManager={sceneManager}
-                    onRoll={(options) => {
-                      handleSetRoll(rollDice(options));
+                    onRoll={(label, modifier) => {
+                      const options: Array<IDiceCommandOption> = diceManager.state.selectedCommands.map(
+                        (c) => ({
+                          command: c,
+                          type: RollType.DiceCommand,
+                        })
+                      );
+                      options.push({
+                        type: RollType.Modifier,
+                        label: label,
+                        modifier: modifier,
+                      });
+                      const result = Dice.rollCommandOptionList(options, {
+                        listResults: false,
+                      });
+                      handleSetRoll(result);
                     }}
                     onMove={(dragIndex, hoverIndex) => {
                       sceneManager.actions.moveAspects(dragIndex, hoverIndex);

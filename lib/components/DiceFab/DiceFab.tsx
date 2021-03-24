@@ -25,7 +25,7 @@ import {
   Dice,
   FateDiceCommandGroups,
   IDiceCommandGroup,
-  IDiceRollWithBonus,
+  IDiceRollResult,
   MiscDiceCommandGroups,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
@@ -40,16 +40,16 @@ export enum DiceFabMode {
 
 type IRollProps = {
   type: DiceFabMode.Roll;
-  onSelect(result: IDiceRollWithBonus): void;
+  onSelect(result: IDiceRollResult): void;
 
-  rollsForDiceBox?: Array<IDiceRollWithBonus>;
+  rollsForDiceBox?: Array<IDiceRollResult>;
 };
 
 type IPoolProps = {
   type: DiceFabMode.RollAndPool;
-  onSelect(result: IDiceRollWithBonus): void;
+  onSelect(result: IDiceRollResult): void;
 
-  rollsForDiceBox?: Array<IDiceRollWithBonus>;
+  rollsForDiceBox?: Array<IDiceRollResult>;
 
   pool: IDicePool;
   onClearPool(): void;
@@ -102,24 +102,22 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 
   function handleReRoll() {
-    const result = Dice.rollCommands(diceManager.state.selectedCommands);
-    props.onSelect?.({
-      commandResults: result.commandResults,
-      total: result.total,
-      pool: false,
-    });
+    const result = Dice.rollCommandNameList(
+      diceManager.state.selectedCommands,
+      { listResults: false }
+    );
+    props.onSelect?.(result);
     handleMenuClose();
   }
 
   function handleRoll() {
     const newCommands = fabCommands.flatMap((o) => o.value);
-    const result = Dice.rollCommands(newCommands);
-    diceManager.actions.setSelectedCommands(newCommands);
-    props.onSelect?.({
-      commandResults: result.commandResults,
-      total: result.total,
-      pool: false,
+    const result = Dice.rollCommandNameList(newCommands, {
+      listResults: false,
     });
+    diceManager.actions.setSelectedCommands(newCommands);
+
+    props.onSelect?.(result);
     setDirty(true);
     handleMenuClose();
   }
@@ -167,7 +165,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
               showClearButton={true}
               isRollButtonVisible={true}
               icon={ButtonIcon}
-              label={<>{"Roll Pool"}</>}
+              label={
+                <>
+                  {props.pool.length === 1
+                    ? t("dice-fab.roll")
+                    : t("dice-fab.roll-pool")}
+                </>
+              }
               onFabClick={() => {
                 props.onClearPool();
               }}
@@ -475,7 +479,7 @@ export function DiceFabButton(props: {
         >
           <Fab
             variant="round"
-            color="primary"
+            color={props.showClearButton ? "secondary" : "primary"}
             onClick={props.onFabClick}
             onContextMenu={(e) => {
               e.preventDefault();

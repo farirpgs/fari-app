@@ -3,6 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { DiceBox } from "../lib/components/DiceBox/DiceBox";
+import { RollType } from "../lib/domains/dice/Dice";
 import { StoryProvider } from "./StoryProvider";
 
 type IProps = Parameters<typeof DiceBox>["0"];
@@ -52,50 +53,99 @@ Default.args = {
   rolls: [
     {
       total: 4,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: 4,
+      options: { listResults: false },
+      commandResult: [
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1dF",
+          command: "1dF",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1dF",
+          command: "1dF",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1dF",
+          command: "1dF",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1dF",
+          command: "1dF",
         },
       ],
     },
   ],
 };
+
+export const DefaultWithModifiers = Template.bind({});
+DefaultWithModifiers.args = {
+  rolls: [
+    {
+      total: 6,
+      totalWithoutModifiers: 4,
+      options: { listResults: false },
+      commandResult: [
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          command: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          command: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          command: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          command: "1dF",
+        },
+        {
+          type: RollType.Modifier,
+          value: 2,
+          label: "Academic",
+        },
+      ],
+    },
+  ],
+};
+
 export const DefaultBadResult = Template.bind({});
 DefaultBadResult.args = {
   rolls: [
     {
       total: -4,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: -4,
+      options: { listResults: false },
+      commandResult: [
         {
+          type: RollType.DiceCommand,
           value: -1,
-          type: "1dF",
+          command: "1dF",
         },
         {
+          type: RollType.DiceCommand,
           value: -1,
-          type: "1dF",
+          command: "1dF",
         },
         {
+          type: RollType.DiceCommand,
           value: -1,
-          type: "1dF",
+          command: "1dF",
         },
         {
+          type: RollType.DiceCommand,
           value: -1,
-          type: "1dF",
+          command: "1dF",
         },
       ],
     },
@@ -107,12 +157,10 @@ DefaultD20.args = {
   rolls: [
     {
       total: 20,
-      pool: false,
-      commandResults: [
-        {
-          value: 20,
-          type: "1d20",
-        },
+      totalWithoutModifiers: 20,
+      options: { listResults: false },
+      commandResult: [
+        { type: RollType.DiceCommand, value: 20, command: "1d20" },
       ],
     },
   ],
@@ -122,12 +170,10 @@ DefaultD20BadResult.args = {
   rolls: [
     {
       total: 1,
-      pool: false,
-      commandResults: [
-        {
-          value: 1,
-          type: "1d20",
-        },
+      totalWithoutModifiers: 1,
+      options: { listResults: false },
+      commandResult: [
+        { type: RollType.DiceCommand, value: 1, command: "1d20" },
       ],
     },
   ],
@@ -138,19 +184,37 @@ MultipleDice.args = {
   rolls: [
     {
       total: 6,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: 6,
+      options: { listResults: false },
+      commandResult: [
+        { type: RollType.DiceCommand, value: 1, command: "1d12" },
+        { type: RollType.DiceCommand, value: 2, command: "1d12" },
+        { type: RollType.DiceCommand, value: 3, command: "1d12" },
+      ],
+    },
+  ],
+};
+
+export const MultipleDiceWithModifiers = Template.bind({});
+MultipleDiceWithModifiers.args = {
+  rolls: [
+    {
+      total: 9,
+      totalWithoutModifiers: 6,
+      options: { listResults: false },
+      commandResult: [
+        { type: RollType.DiceCommand, value: 1, command: "1d12" },
+        { type: RollType.DiceCommand, value: 2, command: "1d12" },
+        { type: RollType.DiceCommand, value: 3, command: "1d12" },
         {
-          value: 1,
-          type: "1d12",
-        },
-        {
+          type: RollType.Modifier,
           value: 2,
-          type: "1d12",
+          label: "Academic",
         },
         {
-          value: 3,
-          type: "1d12",
+          type: RollType.Modifier,
+          value: 1,
+          label: "Lore",
         },
       ],
     },
@@ -162,20 +226,12 @@ Pool.args = {
   rolls: [
     {
       total: 6,
-      pool: true,
-      commandResults: [
-        {
-          value: 1,
-          type: "1d12",
-        },
-        {
-          value: 2,
-          type: "1d12",
-        },
-        {
-          value: 3,
-          type: "1d12",
-        },
+      totalWithoutModifiers: 6,
+      options: { listResults: true },
+      commandResult: [
+        { type: RollType.DiceCommand, value: 1, command: "1d12" },
+        { type: RollType.DiceCommand, value: 2, command: "1d12" },
+        { type: RollType.DiceCommand, value: 3, command: "1d12" },
       ],
     },
   ],
@@ -186,63 +242,78 @@ OutOfBound.args = {
   rolls: [
     {
       total: 6,
-      pool: false,
-      commandResults: [
+      totalWithoutModifiers: 6,
+      options: { listResults: false },
+      commandResult: [
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d4",
+          command: "1d4",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d6",
+          command: "1d6",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d8",
+          command: "1d8",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d10",
+          command: "1d10",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d20",
+          command: "1d20",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d4",
+          command: "1d4",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d6",
+          command: "1d6",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d8",
+          command: "1d8",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d10",
+          command: "1d10",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d20",
+          command: "1d20",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
       ],
     },
@@ -253,63 +324,78 @@ OutOfBoundPool.args = {
   rolls: [
     {
       total: 6,
-      pool: true,
-      commandResults: [
+      totalWithoutModifiers: 6,
+      options: { listResults: true },
+      commandResult: [
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d4",
+          command: "1d4",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d6",
+          command: "1d6",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d8",
+          command: "1d8",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d10",
+          command: "1d10",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d20",
+          command: "1d20",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d4",
+          command: "1d4",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d6",
+          command: "1d6",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d8",
+          command: "1d8",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d10",
+          command: "1d10",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d20",
+          command: "1d20",
         },
         {
+          type: RollType.DiceCommand,
           value: 1,
-          type: "1d12",
+          command: "1d12",
         },
       ],
     },

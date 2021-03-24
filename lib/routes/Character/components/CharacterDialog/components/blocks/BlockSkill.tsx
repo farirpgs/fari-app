@@ -1,40 +1,32 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
 import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
 import React from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISkillBlock } from "../../../../../../domains/character/types";
-import {
-  AllDiceCommandGroups,
-  IDiceCommandGroup,
-  IDiceCommandNames,
-  IRollDiceOptions,
-} from "../../../../../../domains/dice/Dice";
+import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
+import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useHighlight } from "../../../../../../hooks/useHighlight/useHighlight";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useLightBackground } from "../../../../../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
-import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
+import { Block } from "../../domains/Block/Block";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
-
+import { IDicePool, IDicePoolElement, Pool } from "./BlockDicePool";
 export function BlockSkill(
   props: IBlockComponentProps<ISkillBlock> & {
-    onSkillClick(
-      options: IRollDiceOptions,
-      commands: Array<IDiceCommandNames> | undefined
-    ): void;
+    pool: IDicePool;
+    onPoolClick(element: IDicePoolElement): void;
   }
 ) {
   const theme = useTheme();
@@ -48,46 +40,18 @@ export function BlockSkill(
   const isSlotTrackerVisible = props.block.meta.checked !== undefined;
   const skillDescription =
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
+  const hasCommands = !!props.block.meta.commands?.length;
+  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
 
-  const canRoll = !props.advanced && !props.readonly;
+  const canRoll = !props.readonly;
 
   const [firstCommandGroup] =
     props.block.meta?.commands?.map((commandId) => {
-      return AllDiceCommandGroups.find(
-        (c) => c.id === commandId
-      ) as IDiceCommandGroup;
+      return AllDiceCommandGroups.find((c) => c.id === commandId);
     }) ?? [];
+  const commandOptionList = Block.getCommandOptionList(props.block);
 
-  const handleRoll = () => {
-    if (!canRoll) {
-      return;
-    }
-    const hasCommands = !!props.block.meta.commands?.length;
-    const blockCommandNames = CommandGroups.getCommandNamesFromBlock(
-      props.block
-    );
-    const bonus = parseInt(props.block.value) || 0;
-
-    if (hasCommands) {
-      props.onSkillClick?.(
-        {
-          pool: false,
-          bonus,
-          bonusLabel: props.block.label,
-        },
-        blockCommandNames
-      );
-    } else {
-      props.onSkillClick?.(
-        {
-          pool: false,
-          bonus,
-          bonusLabel: props.block.label,
-        },
-        undefined
-      );
-    }
-  };
+  const RollIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
 
   return (
     <>
@@ -95,11 +59,24 @@ export function BlockSkill(
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
           {canRoll && (
             <Grid item>
-              <Tooltip title={t("character-dialog.skill-block.roll")}>
-                <IconButton onClick={handleRoll} size="small">
-                  <firstCommandGroup.icon />
-                </IconButton>
-              </Tooltip>
+              <Pool
+                tooltipTitle={t("character-dialog.skill-block.roll")}
+                fontSize="1.2rem"
+                borderRadius="8px"
+                selected={isSelected}
+                clickable
+                borderStyle={"solid"}
+                onClick={() => {
+                  props.onPoolClick({
+                    blockId: props.block.id,
+                    blockType: props.block.type,
+                    label: props.block.label,
+                    commandOptionList: commandOptionList,
+                  });
+                }}
+              >
+                <RollIcon />
+              </Pool>
             </Grid>
           )}
           <Grid item>
@@ -229,15 +206,19 @@ export function CircleTextField(props: {
       }}
       InputProps={{
         className: css({
-          width: "3rem",
-          height: "3rem",
-          borderRadius: "50%",
-          background: props.highlight ? theme.palette.primary.main : "inherit",
-          color: props.highlight
-            ? theme.palette.getContrastText(theme.palette.primary.main)
+          "width": "3rem",
+          "height": "3rem",
+          "borderRadius": "50%",
+          "background": props.highlight
+            ? theme.palette.primary.main
             : "inherit",
-          transition: theme.transitions.create(["color", "background"]),
-          boxShadow: theme.shadows[1],
+          "&&": {
+            color: props.highlight
+              ? theme.palette.getContrastText(theme.palette.primary.main)
+              : "inherit",
+          },
+          "transition": theme.transitions.create(["color", "background"]),
+          "boxShadow": theme.shadows[1],
         }),
       }}
       inputProps={{

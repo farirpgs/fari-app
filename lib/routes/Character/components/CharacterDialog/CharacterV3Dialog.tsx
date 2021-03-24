@@ -56,11 +56,6 @@ import {
   Position,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
-import {
-  IDiceCommandNames,
-  IDiceRollWithBonus,
-  IRollDiceOptions,
-} from "../../../../domains/dice/Dice";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -110,12 +105,9 @@ export const CharacterV3Dialog: React.FC<{
   readonly?: boolean;
   dialog: boolean;
   pool: IDicePool;
-  rolls: Array<IDiceRollWithBonus>;
+
   synced?: boolean;
-  onSkillClick(
-    options: IRollDiceOptions,
-    commands: Array<IDiceCommandNames> | undefined
-  ): void;
+
   onPoolClick(element: IDicePoolElement): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
@@ -392,13 +384,16 @@ export const CharacterV3Dialog: React.FC<{
                         <FateLabel
                           className={css({
                             fontSize: "1.2rem",
+                            width: "100%",
                           })}
                         >
                           <ContentEditable
                             clickable
+                            className={css({ width: "100%" })}
                             value={page.label}
                             readonly={!advanced}
                             border={advanced}
+                            borderColor={headerColor}
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
                                 pageIndex,
@@ -537,7 +532,6 @@ export const CharacterV3Dialog: React.FC<{
                   readonly={false}
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
-                  onRoll={() => undefined}
                   pool={props.pool}
                   onPoolClick={props.onPoolClick}
                 />
@@ -1000,8 +994,9 @@ export const CharacterV3Dialog: React.FC<{
                             meta
                           );
                         }}
-                        onSkillClick={(options, commands) => {
-                          props.onSkillClick(options, commands);
+                        pool={props.pool}
+                        onPoolClick={(element) => {
+                          props.onPoolClick(element);
                         }}
                       />
                     )}
