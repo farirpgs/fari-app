@@ -1,15 +1,17 @@
 import Box from "@material-ui/core/Box";
-import { actions } from "@storybook/addon-actions";
+import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
 import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
+import { IndexCardColorTypeEnum } from "../lib/components/IndexCard/IndexCardColor";
 import {
   Dice,
   IDiceCommandOption,
   IDiceRollResult,
   RollType,
 } from "../lib/domains/dice/Dice";
+import { Enum } from "../lib/domains/enum/Enum";
 import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
 import { AspectType } from "../lib/hooks/useScene/AspectType";
 import { IAspect } from "../lib/hooks/useScene/IScene";
@@ -21,6 +23,10 @@ function StorybookIndexCard(props: {
   aspect: IAspect;
   readonly: boolean;
   showClickableSkills: boolean;
+  pinned: boolean;
+  playedDuringTurn: boolean;
+  color: IndexCardColorTypeEnum;
+  type: string;
 }) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const poolManager = useDicePool();
@@ -29,32 +35,38 @@ function StorybookIndexCard(props: {
     state: {
       scene: {
         aspects: {
-          "1": props.aspect,
+          "1": {
+            ...props.aspect,
+            color: props.color,
+            playedDuringTurn: props.playedDuringTurn,
+            pinned: props.pinned,
+            type: AspectType[props.type as any] as any,
+          } as IAspect,
         },
       } as any,
-      actions: {
-        setAspectDrawAreaObjects: actions("setAspectDrawAreaObjects"),
-        setAspectIsPrivate: actions("setAspectIsPrivate"),
-        resetAspect: actions("resetAspect"),
-        updateAspectColor: actions("updateAspectColor"),
-        removeAspect: actions("removeAspect"),
-        toggleAspectPinned: actions("toggleAspectPinned"),
-        updateAspectTitle: actions("updateAspectTitle"),
-        updateAspectPlayerDuringTurn: actions("updateAspectPlayerDuringTurn"),
-        addAspectTrack: actions("addAspectTrack"),
-        addAspectConsequence: actions("addAspectConsequence"),
-        addAspectDrawArea: actions("addAspectDrawArea"),
-        updateAspectContent: actions("updateAspectContent"),
-        updateAspectTrackName: actions("updateAspectTrackName"),
-        removeAspectTrackBox: actions("removeAspectTrackBox"),
-        addAspectTrackBox: actions("addAspectTrackBox"),
-        removeAspectTrack: actions("removeAspectTrack"),
-        toggleAspectTrackBox: actions("toggleAspectTrackBox"),
-        updateStressBoxLabel: actions("updateStressBoxLabel"),
-        updateAspectConsequenceName: actions("updateAspectConsequenceName"),
-        removeAspectConsequence: actions("removeAspectConsequence"),
-        updateAspectConsequenceValue: actions("updateAspectConsequenceValue"),
-      } as any,
+    } as any,
+    actions: {
+      setAspectDrawAreaObjects: action("setAspectDrawAreaObjects"),
+      setAspectIsPrivate: action("setAspectIsPrivate"),
+      resetAspect: action("resetAspect"),
+      updateAspectColor: action("updateAspectColor"),
+      removeAspect: action("removeAspect"),
+      toggleAspectPinned: action("toggleAspectPinned"),
+      updateAspectTitle: action("updateAspectTitle"),
+      updateAspectPlayerDuringTurn: action("updateAspectPlayerDuringTurn"),
+      addAspectTrack: action("addAspectTrack"),
+      addAspectConsequence: action("addAspectConsequence"),
+      addAspectDrawArea: action("addAspectDrawArea"),
+      updateAspectContent: action("updateAspectContent"),
+      updateAspectTrackName: action("updateAspectTrackName"),
+      removeAspectTrackBox: action("removeAspectTrackBox"),
+      addAspectTrackBox: action("addAspectTrackBox"),
+      removeAspectTrack: action("removeAspectTrack"),
+      toggleAspectTrackBox: action("toggleAspectTrackBox"),
+      updateStressBoxLabel: action("updateStressBoxLabel"),
+      updateAspectConsequenceName: action("updateAspectConsequenceName"),
+      removeAspectConsequence: action("removeAspectConsequence"),
+      updateAspectConsequenceValue: action("updateAspectConsequenceValue"),
     } as any,
   } as any;
 
@@ -110,7 +122,7 @@ function StorybookIndexCard(props: {
           });
           handleOnNewRoll(result);
         }}
-        onMove={actions("onMove") as any}
+        onMove={action("onMove") as any}
       />
     </>
   );
@@ -125,22 +137,109 @@ export default {
     aspect: anAspect(),
     readonly: false,
     showClickableSkills: false,
+    pinned: false,
+    playedDuringTurn: false,
+    color: IndexCardColorTypeEnum.white,
+    type: AspectType[AspectType.Aspect],
+  },
+  argTypes: {
+    type: {
+      control: {
+        type: "select",
+        options: Enum.getKeys(AspectType),
+      },
+    },
+    color: {
+      control: {
+        type: "select",
+        options: Object.keys(IndexCardColorTypeEnum),
+      },
+    },
   },
 } as Meta<IProps>;
 
 const Template: Story<IProps> = (args) => (
   <StoryProvider>
-    <Box width="350px" ml="5rem">
+    <Box width="350px">
       <StorybookIndexCard
         aspect={args.aspect}
         readonly={args.readonly}
         showClickableSkills={args.showClickableSkills}
+        color={args.color}
+        type={args.type}
+        pinned={args.pinned}
+        playedDuringTurn={args.playedDuringTurn}
       />
     </Box>
   </StoryProvider>
 );
 
 export const Default = Template.bind({});
+export const DefaultWithSkills = Template.bind({});
+DefaultWithSkills.args = {
+  aspect: anAspect({
+    title: "Title",
+    content:
+      "Description <br> Description <br> Description <br> [Academic  : 4]",
+  }),
+  showClickableSkills: true,
+};
+
+export const Aspect = Template.bind({});
+Aspect.args = {
+  aspect: anAspect({
+    title: "Title",
+    content: "Description <br> Description <br> Description <br>",
+  }),
+  type: AspectType[AspectType.Aspect],
+  color: IndexCardColorTypeEnum.white,
+};
+export const Boost = Template.bind({});
+Boost.args = {
+  aspect: anAspect({
+    title: "Title",
+    content: "Description <br> Description <br> Description <br>",
+  }),
+  type: AspectType[AspectType.Boost],
+  color: IndexCardColorTypeEnum.blue,
+};
+export const NPC = Template.bind({});
+NPC.args = {
+  aspect: anAspect({
+    title: "Title",
+    content: "Description <br> Description <br> Description <br>",
+  }),
+  type: AspectType[AspectType.NPC],
+  color: IndexCardColorTypeEnum.green,
+};
+export const BadGuy = Template.bind({});
+BadGuy.args = {
+  aspect: anAspect({
+    title: "Title",
+    content: "Description <br> Description <br> Description <br>",
+  }),
+  type: AspectType[AspectType.BadGuy],
+  color: IndexCardColorTypeEnum.red,
+};
+export const Index_Card = Template.bind({});
+Index_Card.args = {
+  aspect: anAspect({
+    title: "Title",
+    content: "Description <br> Description <br> Description <br>",
+  }),
+  type: AspectType[AspectType.IndexCard],
+  color: IndexCardColorTypeEnum.white,
+};
+
+export const OutOfBound = Template.bind({});
+OutOfBound.args = {
+  aspect: anAspect({
+    title:
+      "Orc dps charisma modifier wagon wisdom Orc dps charisma modifier wagon wisdom",
+    content:
+      "Sense troll cartographer agility horse gnoll. Lance advantage advantage wizard falchion polearm. Longsword tavern spirit strength dexterity polearm. Longsword hobgoblin great axe axe lance initiative. Ship dexterity bow light spell casting poleaxe.",
+  }),
+};
 
 function anAspect(override: Partial<IAspect> = {}): IAspect {
   return {

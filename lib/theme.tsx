@@ -35,6 +35,11 @@ export const defaultThemeConfiguration: ThemeOptions = {
     MuiCssBaseline: {
       "@global": {},
     },
+    MuiTypography: {
+      root: {
+        whiteSpace: "pre-wrap",
+      },
+    },
     MuiButton: {
       root: {
         borderRadius: "4px",

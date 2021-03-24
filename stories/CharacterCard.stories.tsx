@@ -1,5 +1,5 @@
 import Box from "@material-ui/core/Box";
-import { actions } from "@storybook/addon-actions";
+import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
 import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
@@ -53,7 +53,7 @@ function StorybookCharacterCard(
         readonly={props.readonly}
         characterSheet={props.characterSheet}
         pool={poolManager.state.pool}
-        onCharacterDialogOpen={actions("onCharacterDialogOpen") as any}
+        onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
         onPoolClick={handleOnPoolClick}
       />
     </>
@@ -66,7 +66,7 @@ export default {
   title: "Main/CharacterCard",
   component: StorybookCharacterCard,
   args: {
-    playerName: "RP",
+    playerName: "",
     readonly: false,
     characterSheet: undefined,
   },

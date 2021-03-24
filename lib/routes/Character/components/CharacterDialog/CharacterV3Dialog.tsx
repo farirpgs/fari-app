@@ -527,7 +527,7 @@ export const CharacterV3Dialog: React.FC<{
             <Grid item xs>
               <Box pt=".5rem" ml="-.5rem">
                 <CharacterCard
-                  playerName="..."
+                  playerName=""
                   width="350px"
                   readonly={false}
                   characterSheet={characterManager.state.character}

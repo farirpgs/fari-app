@@ -1,6 +1,5 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -22,6 +21,7 @@ import {
   ISlotTrackerBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
+import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import {
   BlockDicePool,
@@ -53,6 +53,20 @@ export const CharacterCard: React.FC<{
 
   const sections = props.characterSheet?.pages.flatMap((p) => p.sections);
   const visibleSections = sections?.filter((s) => s.visibleOnCard);
+
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const sheetHeaderClassName = css({
+    label: "SheetHeader-box",
+    // Hexagone
+    // https://bennettfeely.com/clippy/
+    clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+    background: headerBackgroundColors.primary,
+    color: headerColor,
+    width: "100%",
+    padding: ".5rem",
+    marginTop: "1rem",
+  });
 
   if (!props.characterSheet) {
     return null;
@@ -124,31 +138,30 @@ export const CharacterCard: React.FC<{
               )}
             </Box>
           </Box>
-          <Box py="1rem" px="1rem">
+          <Box px="1rem" pb="1rem">
             {visibleSections?.map((section, sectionIndex) => {
               return (
                 <Box key={section.id} className={css({ clear: "both" })}>
-                  <Box>
+                  <Box className={sheetHeaderClassName}>
                     <FateLabel noWrap>
                       {previewContentEditable({ value: section.label })}
                     </FateLabel>
                   </Box>
-                  <Grid container>
-                    {section.blocks.map((block, blockIndex) => {
-                      return (
-                        <React.Fragment key={block.id}>
-                          {renderBlockByBlockType[block.type](
-                            section,
-                            block,
-                            blockIndex
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
-                  </Grid>
-                  {sectionIndex !== visibleSections.length - 1 && (
-                    <Divider className={css({ margin: "1rem 0" })} />
-                  )}
+                  <Box px=".2rem">
+                    <Grid container>
+                      {section.blocks.map((block, blockIndex) => {
+                        return (
+                          <React.Fragment key={block.id}>
+                            {renderBlockByBlockType[block.type](
+                              section,
+                              block,
+                              blockIndex
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </Grid>
+                  </Box>
                 </Box>
               );
             })}
@@ -187,8 +200,9 @@ export const CharacterCard: React.FC<{
     blockIndex: number
   ) {
     const isSelected = props.pool.some((p) => p.blockId === block.id);
+    const blockValue = block.value || "0";
     return (
-      <Grid item className={css({ flex: "0 1 auto", marginTop: ".2rem" })}>
+      <Grid item className={css({ flex: "0 1 auto", marginTop: ".5rem" })}>
         <Link
           className={css([
             {
@@ -199,6 +213,8 @@ export const CharacterCard: React.FC<{
               fontWeight: isSelected
                 ? theme.typography.fontWeightBold
                 : undefined,
+              color:
+                blockValue === "0" ? theme.palette.secondary.main : undefined,
             },
             props.readonly && {
               "color": theme.palette.text.primary,
@@ -221,7 +237,7 @@ export const CharacterCard: React.FC<{
             });
           }}
         >
-          {block.label} ({block.value || "0"})
+          {block.label} ({blockValue})
         </Link>
       </Grid>
     );

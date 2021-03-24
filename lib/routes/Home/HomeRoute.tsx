@@ -9,6 +9,7 @@ import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import HelpIcon from "@material-ui/icons/Help";
 import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
@@ -174,6 +175,16 @@ export const HomeRoute: React.FC<{}> = (props) => {
         <LightBox px="2rem" mb={sectionsSeparator} maxWidth="lg">
           {renderThirdActionCards()}
         </LightBox>
+        <DarkBox
+          title={t("home-route.sections.open-source.title")}
+          subTitle={t("home-route.sections.open-source.sub-title")}
+          px="2rem"
+          py="5rem"
+          mb={sectionsSeparator}
+          maxWidth="sm"
+        >
+          {renderOpenSource()}
+        </DarkBox>
         <LightBox px="2rem" mb={sectionsSeparator} maxWidth="md">
           <>
             <Heading icon={HelpIcon} title={"Wikis & Resources"} />
@@ -404,29 +415,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
           charactersManager.actions.openManager(ManagerMode.Manage);
         },
       },
-
-      {
-        label: t("home-route.cards.srds.title"),
-        description: t("home-route.cards.srds.description"),
-        ctaLabel: t("home-route.cards.srds.cta"),
-        icon: (props: { className: string }) => (
-          // https://icons8.com/icons/plasticine
-          <img
-            className={props.className}
-            src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
-          />
-        ),
-        to: "/srds",
-      },
-    ];
-    return (
-      <Box>
-        <HomeRouteCards cards={cards} />
-      </Box>
-    );
-  }
-  function renderSecondActionCards() {
-    const cards: Array<IHomeRouteCard> = [
       {
         label: t("home-route.cards.dice-roller.title"),
         description: t("home-route.cards.dice-roller.description"),
@@ -439,6 +427,28 @@ export const HomeRoute: React.FC<{}> = (props) => {
           />
         ),
         to: "/dice",
+      },
+    ];
+    return (
+      <Box>
+        <HomeRouteCards cards={cards} />
+      </Box>
+    );
+  }
+  function renderSecondActionCards() {
+    const cards: Array<IHomeRouteCard> = [
+      {
+        label: t("home-route.cards.data.title"),
+        description: t("home-route.cards.data.description"),
+        ctaLabel: t("home-route.cards.data.cta"),
+        icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/cloud-backup-restore.png"
+          />
+        ),
+        to: "/data",
       },
       {
         label: t("home-route.cards.dice-pool.title"),
@@ -490,7 +500,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
         ),
         to: "/blog",
       },
-
       {
         label: t("home-route.cards.wiki.title"),
         description: t("home-route.cards.wiki.description"),
@@ -503,6 +512,19 @@ export const HomeRoute: React.FC<{}> = (props) => {
           />
         ),
         to: "/fari-wiki",
+      },
+      {
+        label: t("home-route.cards.srds.title"),
+        description: t("home-route.cards.srds.description"),
+        ctaLabel: t("home-route.cards.srds.cta"),
+        icon: (props: { className: string }) => (
+          // https://icons8.com/icons/plasticine
+          <img
+            className={props.className}
+            src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
+          />
+        ),
+        to: "/srds",
       },
     ];
     return (
@@ -526,6 +548,34 @@ export const HomeRoute: React.FC<{}> = (props) => {
           {t("home-route.sections.join-community.cta")}
         </Button>
       </Box>
+    );
+  }
+
+  function renderOpenSource() {
+    return (
+      <Grid container justify="center" spacing={2}>
+        <Grid item xs={12}>
+          <Button
+            color="primary"
+            variant="outlined"
+            component="a"
+            href="https://github.com/fariapp/fari"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t("home-route.sections.open-source.cta")}
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <a
+            href="https://github.com/fariapp/fari"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GitHubIcon className={css({ width: "5rem", height: "5rem" })} />
+          </a>
+        </Grid>
+      </Grid>
     );
   }
 
@@ -727,12 +777,15 @@ function DarkBox(props: ILightBoxProps & { linear?: boolean }) {
       <LightBox
         className={cx(
           css({
-            label: "DarkBox",
-            background: linear
+            "label": "DarkBox",
+            "background": linear
               ? highlight.linearBackground
               : highlight.radialBackground,
-            textAlign: "center",
-            color: highlight.color,
+            "textAlign": "center",
+            "color": highlight.color,
+            "& a": {
+              color: highlight.color,
+            },
           }),
           className
         )}

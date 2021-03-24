@@ -45,7 +45,7 @@ export const SheetHeader: React.FC<{
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
 
-  const sheetHeader = css({
+  const sheetHeaderClassName = css({
     label: "SheetHeader-box",
     // Hexagone
     // https://bennettfeely.com/clippy/
@@ -67,7 +67,7 @@ export const SheetHeader: React.FC<{
   };
 
   return (
-    <Box className={sheetHeader}>
+    <Box className={sheetHeaderClassName}>
       <Grid
         container
         justify="space-between"

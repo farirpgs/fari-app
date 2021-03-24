@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
@@ -113,22 +114,12 @@ export const OracleRoute = () => {
         title={t("oracle-route.meta.title")}
         description={t("oracle-route.meta.description")}
       />
-
       <Box>
-        <Box
-          py="1rem"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Icons.EyeIcon
-            className={css({ fontSize: "3rem" })}
-            color="primary"
-          />
-          <FateLabel variant="h4" align="center" color="primary">
-            {"Oracle"}
-          </FateLabel>
-        </Box>
+        <Heading
+          icon={Icons.EyeIcon}
+          title={t("oracle-route.meta.title")}
+          subtitle={t("oracle-route.meta.description")}
+        />
 
         <Box py="1rem">
           <DiceBox

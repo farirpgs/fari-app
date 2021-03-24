@@ -912,6 +912,7 @@ export const Scene: React.FC<IProps> = (props) => {
             <Box mb=".5rem">
               <FateLabel
                 variant="h4"
+                uppercase={false}
                 className={css({
                   borderBottom: `1px solid ${theme.palette.divider}`,
                   textAlign: "center",

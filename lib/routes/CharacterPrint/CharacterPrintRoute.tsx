@@ -66,10 +66,7 @@ export const CharacterPrintRoute: React.FC<{
 
   return (
     <>
-      <PageMeta
-        title={character?.name || t("characters-route.title")}
-        description={t("characters-route.description")}
-      />
+      <PageMeta title={selectedCharacter?.name} />
 
       <Box bgcolor={theme.palette.background.paper} mt="1rem">
         <Container>

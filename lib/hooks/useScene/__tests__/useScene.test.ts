@@ -477,6 +477,7 @@ describe("useScene", () => {
             { value: 1, command: "1dF", type: RollType.DiceCommand },
           ],
           total: 4,
+          totalWithoutModifiers: 4,
           options: { listResults: false },
         });
         result.current.actions.updatePlayerCharacterMainPointCounter(
@@ -522,6 +523,7 @@ describe("useScene", () => {
               listResults: false,
             },
             total: 4,
+            totalWithoutModifiers: 4,
           },
         ],
       });

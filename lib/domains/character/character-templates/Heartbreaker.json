@@ -13,6 +13,7 @@
           "id": "43c81329-5c7e-43b2-b38c-d63e1f324b75",
           "label": "Aspects",
           "position": "Left",
+          "visibleOnCard": true,
           "blocks": [
             {
               "id": "f8528f2a-1928-475f-9834-8bd649122647",
@@ -118,6 +119,7 @@
           "id": "c637c27d-9b8c-49c7-a6e1-c202503e2c1a",
           "label": "Approaches",
           "position": "Right",
+          "visibleOnCard": true,
           "blocks": [
             {
               "id": "a57eeccb-c78f-4f4c-bb0a-26f36bff946d",

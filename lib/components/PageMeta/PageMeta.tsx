@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Images } from "../../constants/Images";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 type Metas = React.DetailedHTMLProps<
   React.MetaHTMLAttributes<HTMLMetaElement>,
@@ -8,12 +9,14 @@ type Metas = React.DetailedHTMLProps<
 >[];
 
 export const PageMeta: React.FC<{
-  title: string;
+  title: string | undefined;
   description?: string;
   image?: string;
   noIndex?: boolean;
 }> = (props) => {
-  const title = `${props.title?.trim() || "Fate RPG Companion"} | Fari `;
+  const { t } = useTranslate();
+
+  const title = `${props.title?.trim() || t("home-route.meta.title")} | Fari `;
   const meta = [];
 
   meta.push({

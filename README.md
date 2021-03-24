@@ -19,35 +19,19 @@
 - [x] fix: index card label after drag and drop
 - [x] fix: can click skill of other character
 - [x] fix: add timeout when connecting to game + link to wiki
+- [x] fix: keep scene group when reseting
 - [-] feat: Storybook
   - [x] character sheet
   - [x] dice box
   - [x] dice box result
-  - [ ] player row
-
-QA Blitz
-- [x] Change default label of new boxes
-- [x] Edit skill number without advanced mode
-- [x] Roll character skill without clicking on skill value
-- [x] Validate int in skills (no parse int)
-- [x] Validate point counter int
-- [x] remove full screen for drawing area
-- [x] character card ellipsis
-- [x] dice result ellipsis
-- [x] character skill dont trigger BIG dice
-- [x] RETHINK HOW TO ROLL CHARACTER
-- [x] readonly drag and drop for players on aspects
-- [x] readonly remove consequence for players on aspects
-- [ ] I found a bug. When i was editing the page label, i accidentally lost focus after deleting all the text. i couldn't find the place to click to get the cursor back. What if the "click to edit" area wasn't the text element, but the whole tab box (at the top, not the body).
-
-
-# storybook
-
-- [ ] Character Sheet
-- [ ] Scene
+  - [x] player row
+  - [x] index card
+- [x] feat: draw area moved to tabs ?
+- [x] feat: data route filter by type, group and name
+- [x] fix: data route previewContentEditable
+- [ ]
 
 # THINK
-- [x] draw area moved to tabs ?
 - [ ] text on slot tracker ?
 - [ ] highlight tab text on click ?
 - [ ] duplicate without advanced mode ?

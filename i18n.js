@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import glob from "glob";
 import sortBy from "lodash/sortBy";
+import uniq from "lodash/uniq";
 import prettier from "prettier";
 
 main();
@@ -69,7 +70,7 @@ async function updateTranslations(keys, translationFilesLocations) {
   }
 }
 async function updateTypeDefinitions(keys) {
-  const sortedKeys = sortBy(keys, (k) => k);
+  const sortedKeys = uniq(sortBy(keys, (k) => k));
 
   const typescript = `
     export type ITranslationKeys = ${sortedKeys

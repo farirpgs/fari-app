@@ -77,10 +77,7 @@ export const CharacterRoute: React.FC<{
 
   return (
     <>
-      <PageMeta
-        title={selectedCharacter?.name || t("characters-route.title")}
-        description={t("characters-route.description")}
-      />
+      <PageMeta title={selectedCharacter?.name} />
 
       <Box bgcolor={theme.palette.background.paper}>
         <Page>
