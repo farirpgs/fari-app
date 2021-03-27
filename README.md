@@ -37,6 +37,9 @@
 - [ ] feat: add numerical value to text block
 - [x] Write release post
 - [ ] Write character sheet doc
+- [ ] test: usePool
+- [ ] test: useLazy
+- [ ] test: cypress blocks
 
 # THINK
 - [ ] feat: make section help link dynamic
