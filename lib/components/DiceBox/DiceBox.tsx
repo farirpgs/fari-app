@@ -307,6 +307,9 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
       <span>
         {diceRollsManager.state.finalResultRolls.map((r, i) => {
           const isFirst = i === 0;
+          if (r.type === RollType.Label) {
+            return null;
+          }
           if (r.type === RollType.Modifier) {
             return (
               <span
@@ -400,9 +403,9 @@ export function DiceBonusLabel(props: {
   });
 
   const label = diceRollsManager.state.finalResult?.commandResult
-    .filter((c) => c.type === RollType.Modifier)
+    .filter((c) => c.type === RollType.Modifier || c.type === RollType.Label)
     .map((c) => {
-      if (c.type === RollType.Modifier) {
+      if (c.type === RollType.Modifier || c.type === RollType.Label) {
         return previewContentEditable({ value: c.label });
       }
     })

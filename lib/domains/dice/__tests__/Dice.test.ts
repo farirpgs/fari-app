@@ -15,9 +15,29 @@ function fudgeDiceShouldBeFair() {
   const numberOfTests = 10000;
 
   for (let i = 0; i < numberOfTests; i++) {
-    const diceRoll = Dice.rollCommandNameList(["1dF", "1dF", "1dF", "1dF"], {
-      listResults: false,
-    });
+    const diceRoll = Dice.rollCommandOptionList(
+      [
+        {
+          type: RollType.DiceCommand,
+          command: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          command: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          command: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          command: "1dF",
+        },
+      ],
+      {
+        listResults: false,
+      }
+    );
     const currentCount = results[diceRoll.total] ?? 0;
     results[diceRoll.total] = currentCount + 1;
   }

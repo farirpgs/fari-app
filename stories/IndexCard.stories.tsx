@@ -1,12 +1,12 @@
 import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
 import { IndexCardColorTypeEnum } from "../lib/components/IndexCard/IndexCardColor";
+import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import {
-  Dice,
   IDiceCommandOption,
   IDiceRollResult,
   RollType,
@@ -30,6 +30,7 @@ function StorybookIndexCard(props: {
 }) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const poolManager = useDicePool();
+  const diceManager = useContext(DiceContext);
 
   const sceneManager: ReturnType<typeof useScene> = {
     state: {
@@ -117,7 +118,7 @@ function StorybookIndexCard(props: {
             label: label,
             modifier: modifier,
           });
-          const result = Dice.rollCommandOptionList(options, {
+          const result = diceManager.actions.roll(options, {
             listResults: false,
           });
           handleOnNewRoll(result);
@@ -158,8 +159,8 @@ export default {
   },
 } as Meta<IProps>;
 
-const Template: Story<IProps> = (args) => (
-  <StoryProvider>
+const Template: Story<IProps> = (args, context) => (
+  <StoryProvider theme={context.globals.theme}>
     <Box width="350px">
       <StorybookIndexCard
         aspect={args.aspect}

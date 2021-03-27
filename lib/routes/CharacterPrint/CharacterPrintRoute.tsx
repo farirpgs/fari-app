@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -17,11 +18,11 @@ import {
   ISection,
   Position,
 } from "../../domains/character/types";
-import { Font } from "../../domains/font/Font";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { BlockDicePool } from "../Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockNumeric } from "../Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSkill } from "../Character/components/CharacterDialog/components/blocks/BlockSkill";
 import { BlockSlotTracker } from "../Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
@@ -36,9 +37,7 @@ export const CharacterPrintRoute: React.FC<{
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
-  const [character, setSelectedCharacter] = useState<ICharacter | undefined>(
-    undefined
-  );
+  const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
   const logger = useLogger();
 
   const query = useQuery<"dev">();
@@ -57,7 +56,7 @@ export const CharacterPrintRoute: React.FC<{
     );
 
     if (characterToLoad) {
-      setSelectedCharacter(characterToLoad);
+      setCharacter(characterToLoad);
     } else {
       history.replace("/");
       charactersManager.actions.openManager(ManagerMode.Manage);
@@ -66,7 +65,7 @@ export const CharacterPrintRoute: React.FC<{
 
   return (
     <>
-      <PageMeta title={selectedCharacter?.name} />
+      <PageMeta title={character?.name} />
 
       <Box bgcolor={theme.palette.background.paper} mt="1rem">
         <Container>
@@ -82,8 +81,9 @@ export default CharacterPrintRoute;
 
 function PrintCharacter(props: { character: ICharacter | undefined }) {
   const theme = useTheme();
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
   return (
     <>
       <Box mb="1rem">
@@ -103,14 +103,39 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
           );
           return (
             <Box key={pageIndex}>
-              <Grid container spacing={0}>
-                <Grid
-                  item
-                  xs={6}
+              <Box
+                className={css({
+                  borderBottom: `3px solid ${headerBackgroundColor}`,
+                  marginBottom: "1rem",
+                  width: "100%",
+                  display: "flex",
+                })}
+              >
+                <Box
                   className={css({
-                    borderRight: `2px solid ${headerBackgroundColors.primary}`,
+                    background: headerBackgroundColor,
+                    color: headerColor,
+                    marginRight: "1rem",
+                    width: "auto",
+                    padding: ".5rem 1rem",
+                    // Pentagone
+                    // https://bennettfeely.com/clippy/
+                    clipPath:
+                      "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
                   })}
                 >
+                  <FateLabel
+                    noWrap
+                    className={css({
+                      fontSize: "1.4rem",
+                    })}
+                  >
+                    {previewContentEditable({ value: page.label })}
+                  </FateLabel>
+                </Box>
+              </Box>
+              <Grid container spacing={1}>
+                <Grid item xs={6}>
                   <PrintSections sections={leftSections} />
                 </Grid>
                 <Grid item xs={6}>
@@ -128,7 +153,8 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
 function PrintSections(props: { sections: Array<ISection> }) {
   const theme = useTheme();
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
 
   return (
     <>
@@ -139,17 +165,24 @@ function PrintSections(props: { sections: Array<ISection> }) {
               <Grid item xs>
                 <Box
                   className={css({
-                    background: headerBackgroundColors.primary,
+                    // Hexagone
+                    // https://bennettfeely.com/clippy/
+                    clipPath:
+                      "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+                    background: headerBackgroundColor,
                     color: headerColor,
                     width: "100%",
-                    padding: ".1rem .5rem",
-                    textTransform: "uppercase",
-                    fontWeight: theme.typography.fontWeightBold,
-                    fontSize: "1.4em",
-                    lineHeight: Font.lineHeight(1.4),
+                    padding: ".5rem",
                   })}
                 >
-                  {previewContentEditable({ value: section.label })}
+                  <FateLabel
+                    noWrap
+                    className={css({
+                      fontSize: "1rem",
+                    })}
+                  >
+                    {previewContentEditable({ value: section.label })}
+                  </FateLabel>
                 </Box>
               </Grid>
             </Grid>
@@ -158,6 +191,20 @@ function PrintSections(props: { sections: Array<ISection> }) {
                 <Box key={blockIndex} my=".5rem" px=".5rem">
                   {block.type === BlockType.Text && (
                     <BlockText
+                      advanced={false}
+                      readonly={true}
+                      pageIndex={0}
+                      sectionIndex={0}
+                      section={section}
+                      block={block}
+                      blockIndex={blockIndex}
+                      onLabelChange={(value) => {}}
+                      onValueChange={(value) => {}}
+                      onMetaChange={(meta) => {}}
+                    />
+                  )}
+                  {block.type === BlockType.Numeric && (
+                    <BlockNumeric
                       advanced={false}
                       readonly={true}
                       pageIndex={0}

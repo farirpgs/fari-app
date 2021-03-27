@@ -209,9 +209,6 @@ export const WikiItems: React.FC = (props) => {
             link="/success-with-style"
           />
         </Grid>
-        {/*
-        </Grid>
-
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title="Book of Monsters"
@@ -226,7 +223,7 @@ export const WikiItems: React.FC = (props) => {
             imageUrl={Images.seelieSquire}
             link="/seelie-squire"
           />
-        </Grid> */}
+        </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title="Fate Stunts"

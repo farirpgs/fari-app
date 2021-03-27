@@ -10,7 +10,7 @@ import {
   ICharacter,
   IPage,
   ISlotTrackerBlock,
-  Position
+  Position,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -426,7 +426,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
               if (block.type === BlockType.PointCounter) {
                 if (match) {
-                  block.meta.isMainPointCounter = !block.meta.isMainPointCounter;
+                  block.meta.isMainPointCounter = !block.meta
+                    .isMainPointCounter;
                 } else {
                   block.meta.isMainPointCounter = false;
                 }

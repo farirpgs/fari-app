@@ -4,6 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
 import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
 import { CharacterCard } from "../lib/components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
+import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
@@ -72,8 +73,8 @@ export default {
   },
 } as Meta<IProps>;
 
-const Template: Story<IProps> = (args) => (
-  <StoryProvider>
+const Template: Story<IProps> = (args, context) => (
+  <StoryProvider theme={context.globals.theme}>
     <Box width="350px" ml="5rem">
       <StorybookCharacterCard
         characterSheet={
@@ -138,4 +139,8 @@ TheWitchIsDead.args = {
 export const Blank = Template.bind({});
 Blank.args = {
   characterSheet: CharacterFactory.make(CharacterTemplates.Blank),
+};
+export const LoremIpsum = Template.bind({});
+LoremIpsum.args = {
+  characterSheet: LoremIpsumTemplate as any,
 };

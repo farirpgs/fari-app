@@ -3,6 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
 import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
+import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
@@ -76,8 +77,8 @@ export default {
   },
 } as Meta<IProps>;
 
-const Template: Story<IProps> = (args) => (
-  <StoryProvider>
+const Template: Story<IProps> = (args, context) => (
+  <StoryProvider theme={context.globals.theme}>
     <Box>
       <StorybookCharacterSheet
         character={args.character}
@@ -135,4 +136,8 @@ TheWitchIsDead.args = {
 export const Blank = Template.bind({});
 Blank.args = {
   character: CharacterFactory.make(CharacterTemplates.Blank),
+};
+export const LoremIpsum = Template.bind({});
+LoremIpsum.args = {
+  character: LoremIpsumTemplate as any,
 };

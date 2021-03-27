@@ -28,8 +28,8 @@ export default {
   },
 } as Meta<IProps>;
 
-const Template: Story<IProps> = (args) => (
-  <StoryProvider>
+const Template: Story<IProps> = (args, context) => (
+  <StoryProvider theme={context.globals.theme}>
     <Box mt="4rem">
       <DiceBox
         rolls={args.rolls}

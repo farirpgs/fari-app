@@ -19,7 +19,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice, IDiceRollResult, RollType } from "../../domains/dice/Dice";
+import { IDiceRollResult, RollType } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
@@ -71,7 +71,7 @@ export const OracleRoute = () => {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = Dice.rollCommandOptionList(
+      const newRoll = diceManager.actions.roll(
         [
           {
             type: RollType.DiceCommand,

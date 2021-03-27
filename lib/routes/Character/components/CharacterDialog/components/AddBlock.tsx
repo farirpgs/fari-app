@@ -9,13 +9,13 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
+import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
 import { Icons } from "../../../../../domains/Icons/Icons";
 import { useThemeFromColor } from "../../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-
 export const AddBlock: React.FC<{
   onAddBlock(section: BlockType): void;
 }> = (props) => {
@@ -58,12 +58,24 @@ export const AddBlock: React.FC<{
           </MenuItem>
           <MenuItem
             onClick={() => {
-              props.onAddBlock(BlockType.Skill);
+              props.onAddBlock(BlockType.Numeric);
               setAnchorEl(undefined);
             }}
           >
             <ListItemIcon>
               <Filter1Icon fontSize="small" />
+            </ListItemIcon>
+
+            <ListItemText primary={t("character-dialog.block-type.numeric")} />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              props.onAddBlock(BlockType.Skill);
+              setAnchorEl(undefined);
+            }}
+          >
+            <ListItemIcon>
+              <LibraryAddIcon fontSize="small" />
             </ListItemIcon>
 
             <ListItemText primary={t("character-dialog.block-type.skill")} />

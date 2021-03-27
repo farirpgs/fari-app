@@ -182,6 +182,7 @@ export type IRollDiceOptions = {
 export enum RollType {
   DiceCommand = "DiceCommand",
   Modifier = "Modifier",
+  Label = "Label",
 }
 
 export type IDiceCommandOption =
@@ -193,6 +194,10 @@ export type IDiceCommandOption =
       type: RollType.Modifier;
       label: string;
       modifier: number;
+    }
+  | {
+      type: RollType.Label;
+      label: string;
     };
 
 export type IDiceCommandResult =
@@ -205,6 +210,10 @@ export type IDiceCommandResult =
       type: RollType.Modifier;
       label: string;
       value: number;
+    }
+  | {
+      type: RollType.Label;
+      label: string;
     };
 
 export type ISimplifiedDiceRoll = {
@@ -220,18 +229,6 @@ export type IDiceRollResult = {
 };
 
 export const Dice = {
-  rollCommandNameList(
-    commandNameList: Array<IDiceCommandNames>,
-    options: IRollDiceOptions
-  ) {
-    return this.rollCommandOptionList(
-      commandNameList.map((c) => ({
-        type: RollType.DiceCommand,
-        command: c,
-      })),
-      options
-    );
-  },
   rollCommandOptionList(
     commandOptionList: Array<IDiceCommandOption>,
     options: IRollDiceOptions
@@ -263,6 +260,12 @@ export const Dice = {
           value: command.modifier,
         });
         total += command.modifier;
+      }
+      if (command.type === RollType.Label) {
+        rolls.push({
+          type: command.type,
+          label: command.label,
+        });
       }
     });
 
@@ -297,7 +300,10 @@ export const Dice = {
     const commandResultsWithCounts = rolls.reduce<
       Record<string, { result: number; count: number }>
     >((acc, diceRoll) => {
-      if (diceRoll.type === RollType.Modifier) {
+      if (
+        diceRoll.type === RollType.Modifier ||
+        diceRoll.type === RollType.Label
+      ) {
         return acc;
       }
       if (acc[diceRoll.command] === undefined) {

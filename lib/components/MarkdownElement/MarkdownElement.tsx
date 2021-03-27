@@ -298,7 +298,7 @@ const styles = (theme: Theme) => {
           theme.palette.type === "light" ? "#e0e0e0" : "#676767"
         }`,
         margin: "0 0 1rem 0",
-        padding: "0 2rem",
+        // padding: "0 2rem",
       },
       "& .page-meta": {
         "borderLeft": `3px solid ${theme.palette.text.primary}`,

@@ -630,10 +630,7 @@ export function useScene(props: IProps) {
                       block.meta.isMainPointCounter;
                     if (shouldUpdateBlock) {
                       const typedBlock = block as IPointCounterBlock & IBlock;
-                      console.debug(`updating block for ${p.character.name}`, {
-                        points,
-                        maxPoints,
-                      });
+
                       typedBlock.value = points;
                       typedBlock.meta.max = maxPoints;
                       p.character.lastUpdated = getUnix();

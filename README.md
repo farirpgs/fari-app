@@ -29,9 +29,18 @@
 - [x] feat: draw area moved to tabs ?
 - [x] feat: data route filter by type, group and name
 - [x] fix: data route previewContentEditable
-- [ ]
+- [x] Send data route to tester
+- [x] Test dnd sheet
+- [x] Print mode support for pages
+- [x] Disable print if dialog mode
+- [ ] feat: SkillBlock Remove numerical Value
+- [ ] feat: add numerical value to text block
+- [x] Write release post
+- [ ] Write character sheet doc
 
 # THINK
+- [ ] feat: make section help link dynamic
+- [ ] Button base on skill for insta roll?
 - [ ] text on slot tracker ?
 - [ ] highlight tab text on click ?
 - [ ] duplicate without advanced mode ?

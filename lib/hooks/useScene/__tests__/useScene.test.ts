@@ -568,6 +568,7 @@ describe("useScene", () => {
               listResults: false,
             },
             total: 4,
+            totalWithoutModifiers: 4,
           },
         ],
       });

@@ -102,20 +102,16 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 
   function handleReRoll() {
-    const result = Dice.rollCommandNameList(
-      diceManager.state.selectedCommands,
-      { listResults: false }
-    );
+    const result = diceManager.actions.reroll();
     props.onSelect?.(result);
     handleMenuClose();
   }
 
   function handleRoll() {
     const newCommands = fabCommands.flatMap((o) => o.value);
-    const result = Dice.rollCommandNameList(newCommands, {
+    const result = diceManager.actions.rollByCommandNames(newCommands, {
       listResults: false,
     });
-    diceManager.actions.setSelectedCommands(newCommands);
 
     props.onSelect?.(result);
     setDirty(true);
@@ -223,7 +219,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
     const commandsToCheckForDynamicFabIcon =
       selectedOptions.length > 0
         ? selectedOptions.flatMap((o) => o.value)
-        : diceManager.state.selectedCommands;
+        : diceManager.state.latestCommandsNames;
     const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
       commandsToCheckForDynamicFabIcon
     );

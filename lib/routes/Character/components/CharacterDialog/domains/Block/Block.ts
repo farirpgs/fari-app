@@ -1,4 +1,5 @@
 import {
+  BlockType,
   IBlock,
   IDicePoolBlock,
   ISkillBlock,
@@ -27,11 +28,20 @@ export const Block = {
         };
       }
     );
-    commandOptionList.push({
-      label: block.label,
-      type: RollType.Modifier,
-      modifier: parseInt(block.value) || 0,
-    });
+
+    if (block.type === BlockType.Skill) {
+      commandOptionList.push({
+        label: block.label,
+        type: RollType.Modifier,
+        modifier: parseInt(block.value) || 0,
+      });
+    }
+    if (block.type === BlockType.DicePool) {
+      commandOptionList.push({
+        label: block.label,
+        type: RollType.Label,
+      });
+    }
     return commandOptionList;
   },
 };

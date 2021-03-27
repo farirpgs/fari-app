@@ -50,16 +50,15 @@ import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes,
+  useScenes
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { ICharacter } from "../../domains/character/types";
 import {
-  Dice,
   IDiceCommandOption,
   IDiceRollResult,
   IRollDiceOptions,
-  RollType,
+  RollType
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
@@ -541,10 +540,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onDiceRoll={(options: IRollDiceOptions) => {
                     handleSetPlayerRoll(
                       player.id,
-                      Dice.rollCommandNameList(
-                        diceManager.state.selectedCommands,
-                        options
-                      )
+                      diceManager.actions.reroll(options)
                     );
                   }}
                   onPlayedInTurnOrderChange={(playedInTurnOrder) => {
@@ -788,18 +784,15 @@ export const Scene: React.FC<IProps> = (props) => {
                     showClickableSkills={props.mode !== SceneMode.Manage}
                     sceneManager={sceneManager}
                     onRoll={(label, modifier) => {
-                      const options: Array<IDiceCommandOption> = diceManager.state.selectedCommands.map(
-                        (c) => ({
-                          command: c,
-                          type: RollType.DiceCommand,
-                        })
-                      );
+                      const options: Array<IDiceCommandOption> = [
+                        ...diceManager.state.latestCommandOptionList,
+                      ];
                       options.push({
                         type: RollType.Modifier,
                         label: label,
                         modifier: modifier,
                       });
-                      const result = Dice.rollCommandOptionList(options, {
+                      const result = diceManager.actions.roll(options, {
                         listResults: false,
                       });
                       handleSetRoll(result);

@@ -4,7 +4,7 @@ import { useThemeFromColor } from "../useThemeFromColor/useThemeFromColor";
 export function useHighlight() {
   const theme = useTheme();
   const firstColor =
-    theme.palette.type === "light" ? theme.palette.primary.main : "#405582";
+    theme.palette.type === "light" ? theme.palette.primary.main : "#123379";
   const secondColor =
     theme.palette.type === "light" ? theme.palette.primary.dark : "#05235d";
 

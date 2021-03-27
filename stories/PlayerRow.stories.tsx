@@ -54,9 +54,9 @@ export default {
   },
 } as Meta<IProps>;
 
-const Template: Story<IProps> = (args) => (
-  <StoryProvider>
-    <Box width="300px" bgcolor="#fff">
+const Template: Story<IProps> = (args, context) => (
+  <StoryProvider theme={context.globals.theme}>
+    <Box width="300px">
       <StorybookPlayerRow
         canRoll={args.canRoll}
         canUpdatePoints={args.canUpdatePoints}
@@ -92,6 +92,19 @@ PlayerWithControls.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
+};
+
+export const PlayerWithACharacterSheet = Template.bind({});
+PlayerWithACharacterSheet.args = {
+  highlight: false,
+  canLoadCharacterSheet: true,
+  canRemove: true,
+  canRoll: true,
+  canUpdateInitiative: true,
+  canUpdatePoints: true,
+  player: aPlayer({
+    character: { pages: [] } as any,
+  }),
 };
 
 export const PlayerReadOnly = Template.bind({});

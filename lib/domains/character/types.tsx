@@ -3,6 +3,7 @@ import { CharacterTemplates } from "./CharacterType";
 
 export enum BlockType {
   Text = "Text",
+  Numeric = "Numeric",
   Skill = "Skill",
   DicePool = "DicePool",
   PointCounter = "PointCounter",
@@ -85,7 +86,19 @@ export type ICharacterV2CustomField<TValue> = Array<{
  */
 export type ITextBlock = {
   type: BlockType.Text;
-  meta: { helperText?: string; checked?: boolean };
+  meta: {
+    helperText?: string;
+    checked?: boolean;
+  };
+  value: string;
+};
+
+export type INumericBlock = {
+  type: BlockType.Numeric;
+  meta: {
+    helperText?: string;
+    checked?: boolean;
+  };
   value: string;
 };
 
@@ -95,6 +108,7 @@ export type ISkillBlock = {
     helperText?: string;
     checked?: boolean;
     commands?: Array<IDiceCommandGroupId>;
+    hideModifier?: boolean;
   };
   value: string;
 };
@@ -127,6 +141,7 @@ export type IPointCounterBlock = {
 
 export type IBlockTypes =
   | ITextBlock
+  | INumericBlock
   | ISkillBlock
   | IDicePoolBlock
   | ISlotTrackerBlock
@@ -162,6 +177,6 @@ export interface ICharacter {
   // hidden
   version: number;
   lastUpdated: number;
-  template: CharacterTemplates;
+  template?: CharacterTemplates;
   playedDuringTurn?: boolean;
 }

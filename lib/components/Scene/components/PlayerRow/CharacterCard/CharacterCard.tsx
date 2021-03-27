@@ -15,6 +15,7 @@ import {
   IBlock,
   ICharacter,
   IDicePoolBlock,
+  INumericBlock,
   IPointCounterBlock,
   ISection,
   ISkillBlock,
@@ -28,6 +29,7 @@ import {
   IDicePool,
   IDicePoolElement,
 } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
@@ -77,6 +79,7 @@ export const CharacterCard: React.FC<{
     (section: ISection, block: any, blockIndex: number) => JSX.Element
   > = {
     Text: renderBlockText,
+    Numeric: renderBlockNumeric,
     Skill: renderBlockSkill,
     DicePool: renderDicePool,
     PointCounter: renderBlockPointCounter,
@@ -194,6 +197,29 @@ export const CharacterCard: React.FC<{
     );
   }
 
+  function renderBlockNumeric(
+    section: ISection,
+    block: IBlock & INumericBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockNumeric
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
+      </Grid>
+    );
+  }
+
   function renderBlockSkill(
     section: ISection,
     block: IBlock & ISkillBlock,
@@ -202,7 +228,17 @@ export const CharacterCard: React.FC<{
     const isSelected = props.pool.some((p) => p.blockId === block.id);
     const blockValue = block.value || "0";
     return (
-      <Grid item className={css({ flex: "0 1 auto", marginTop: ".5rem" })}>
+      <Grid
+        item
+        className={css({
+          flex: "0 1 auto",
+          marginTop: ".5rem",
+
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        })}
+      >
         <Link
           className={css([
             {
@@ -237,7 +273,7 @@ export const CharacterCard: React.FC<{
             });
           }}
         >
-          {block.label} ({blockValue})
+          {previewContentEditable({ value: block.label })} ({blockValue})
         </Link>
       </Grid>
     );

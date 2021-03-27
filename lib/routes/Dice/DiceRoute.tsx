@@ -4,13 +4,13 @@ import Fade from "@material-ui/core/Fade";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { DiceFab, DiceFabMode } from "../../components/DiceFab/DiceFab";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { useRollDiceFromContext } from "../../contexts/DiceContext/DiceContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -25,13 +25,13 @@ export function DiceRoute(props: { pool: boolean }) {
   const fiveLatestRolls = archivedRolls.slice(0, 5);
   const { t } = useTranslate();
   const logger = useLogger();
-  const roll = useRollDiceFromContext();
+  const diceManager = useContext(DiceContext);
 
   useEffect(
     function onLoad() {
       if (!props.pool) {
         logger.info("Route:Dice");
-        setRollResult(roll({ listResults: props.pool }));
+        setRollResult(diceManager.actions.reroll({ listResults: props.pool }));
       } else {
         logger.info("Route:DicePool");
       }
@@ -47,7 +47,7 @@ export function DiceRoute(props: { pool: boolean }) {
   };
 
   const handleRoll = () => {
-    setRollResult(roll({ listResults: props.pool }));
+    setRollResult(diceManager.actions.reroll({ listResults: props.pool }));
   };
 
   return (

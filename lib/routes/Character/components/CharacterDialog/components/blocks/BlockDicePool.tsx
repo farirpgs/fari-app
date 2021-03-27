@@ -1,5 +1,7 @@
 import { css, cx } from "@emotion/css";
+import { darken, lighten } from "@material-ui/core";
 import Box, { BoxProps } from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
@@ -12,7 +14,6 @@ import {
   IDicePoolBlock,
 } from "../../../../../../domains/character/types";
 import { IDiceCommandOption } from "../../../../../../domains/dice/Dice";
-import { useLightBackground } from "../../../../../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { Block } from "../../domains/Block/Block";
 import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
@@ -109,8 +110,7 @@ export function BlockDicePool(
                           <commandGroup.icon
                             className={css({
                               display: "flex",
-                              width: "2rem",
-                              height: "2rem",
+                              fontSize: "2.3rem",
                             })}
                           />
                         </Tooltip>
@@ -174,7 +174,12 @@ export const Pool: React.FC<
   const hoverBackground =
     theme.palette.type === "light" ? "#e4e4e4" : "#6b6b6b";
   const hoverColor = theme.palette.getContrastText(hoverBackground);
-  const lightBackground = useLightBackground();
+
+  const hoverBackgroundColor =
+    theme.palette.type === "light"
+      ? lighten(theme.palette.primary.main, 0.9)
+      : darken(theme.palette.primary.main, 0.7);
+
   return (
     <Tooltip title={tooltipTitle ?? ""}>
       <Box
@@ -188,18 +193,15 @@ export const Pool: React.FC<
             "color": !selected
               ? theme.palette.getContrastText(theme.palette.background.paper)
               : theme.palette.getContrastText(theme.palette.primary.main),
-            "border": selected
-              ? `2px ${borderStyle} ${theme.palette.primary.main}`
-              : `2px ${borderStyle} #bdbdbd`,
+            "border": props.clickable
+              ? `1px ${borderStyle} ${theme.palette.primary.main}`
+              : `1px ${borderStyle} #bdbdbd`,
 
-            "boxShadow": selected ? theme.shadows[4] : theme.shadows[1],
-            "transition": theme.transitions.create([
-              "color",
-              "background",
-              "border",
-              "borderWidth",
-              "boxShadow",
-            ]),
+            "boxShadow": selected ? theme.shadows[0] : theme.shadows[4],
+            "transition": theme.transitions.create(
+              ["color", "background", "border", "borderWidth", "boxShadow"],
+              { duration: theme.transitions.duration.shorter }
+            ),
             "borderRadius": borderRadius ?? "24px",
             "display": "flex",
             "alignItems": "center",
@@ -207,26 +209,25 @@ export const Pool: React.FC<
             "cursor": !clickable ? "inherit" : "pointer",
             "&:hover": {
               color: !clickable || selected ? undefined : hoverColor,
-              background: !clickable || selected ? undefined : hoverBackground,
-              border: selected
-                ? undefined
-                : `2px ${borderStyle} ${theme.palette.text.primary}`,
+              background:
+                !clickable || selected ? undefined : hoverBackgroundColor,
             },
           }),
           className
         )}
       >
-        <Box
-          p=".5rem"
-          minWidth="50%"
-          textAlign="center"
-          display="flex"
-          className={css({})}
-        >
-          {props.children}
-        </Box>
+        <ButtonBase>
+          <Box
+            p=".3rem"
+            minWidth="50%"
+            textAlign="center"
+            display="flex"
+            className={css({})}
+          >
+            {props.children}
+          </Box>
+        </ButtonBase>
       </Box>
     </Tooltip>
   );
 };
-Pool.displayName = "CharacterCircleBox";

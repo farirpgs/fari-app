@@ -241,42 +241,54 @@ export function makeDnD5eCharacter(): ICharacter {
                 id: Id.generate(),
                 label: "Strength",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Dexterity",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Constitution",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Intelligence",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Wisdom",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Charisma",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
@@ -297,63 +309,81 @@ export function makeDnD5eCharacter(): ICharacter {
                 id: Id.generate(),
                 label: "Strength",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Dexterity",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Constitution",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Intelligence",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Wisdom",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Charisma",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Perception",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Insight",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Investigation",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
@@ -409,119 +439,153 @@ export function makeDnD5eCharacter(): ICharacter {
                 id: Id.generate(),
                 label: "Acrobatics",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Animal Handling",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Athletics",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Deception",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "History",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Insight",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Intimidation",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Investigation",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Medicine",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Nature",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Perception",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Performance",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Persuasion",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Religion",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Sleight Of Hand:",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Stealth",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
               {
                 id: Id.generate(),
                 label: "Survival",
                 type: BlockType.Skill,
-                meta: {},
+                meta: {
+                  commands: ["1d20"],
+                },
                 value: "0",
               },
             ],

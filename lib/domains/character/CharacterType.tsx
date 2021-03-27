@@ -34,9 +34,17 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Blank", template: CharacterTemplates.Blank },
 ];
 
+type ITemplateInfo = {
+  isFate?: boolean;
+  author?: {
+    name: string;
+    link: string;
+  };
+};
+
 export const CharacterTemplatesInformation: Record<
   CharacterTemplates,
-  { isFate?: boolean; author?: { name: string; link: string } }
+  ITemplateInfo
 > = {
   [CharacterTemplates.FateCondensed]: {
     isFate: true,
@@ -108,6 +116,8 @@ export const CharacterTemplatesInformation: Record<
   [CharacterTemplates.Blank]: {},
 };
 
-export function getTemplateInfo(template: CharacterTemplates | undefined) {
+export function getTemplateInfo(
+  template: CharacterTemplates | undefined
+): ITemplateInfo | undefined {
   return CharacterTemplatesInformation[template as CharacterTemplates];
 }

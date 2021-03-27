@@ -110,15 +110,20 @@ export const PlayerRow: React.FC<
   return (
     <>
       <Box
-        bgcolor={props.highlight ? lightBackground : undefined}
+        bgcolor={
+          props.highlight ? lightBackground : theme.palette.background.paper
+        }
         data-cy={props["data-cy"]}
       >
         <Box py=".8rem" px=".5rem">
-          <Grid container spacing={1} wrap="nowrap">
-            <Grid item xs={9}>
-              {renderCharacterSheetButton()}
+          <Grid container spacing={1} wrap="nowrap" alignItems="center">
+            <Grid item xs={6}>
+              {renderName()}
             </Grid>
             <Grid item xs container spacing={1} justify="flex-end">
+              {props.permissions.canLoadCharacterSheet && (
+                <Grid item>{renderCharacterSheetButton()}</Grid>
+              )}
               <Grid item>{renderInitiative()}</Grid>
               {props.permissions.canRemove && (
                 <Grid item>{renderDeleteButton()}</Grid>
@@ -161,23 +166,89 @@ export const PlayerRow: React.FC<
     </>
   );
 
+  function renderCharacterSheetButton() {
+    return (
+      <Tooltip
+        title={
+          hasCharacterSheet
+            ? t("player-row.swap-character-sheet")
+            : t("play-route.add-character-sheet")
+        }
+      >
+        <span>
+          <IconButton
+            className={css({ padding: "0" })}
+            color={hasCharacterSheet ? "default" : "primary"}
+            data-cy={`${props["data-cy"]}.load-character-sheet`}
+            onClick={() => {
+              props.onLoadCharacterSheet();
+              logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+            }}
+          >
+            {!hasCharacterSheet ? (
+              <NoteAddIcon className={css({ width: "1rem", height: "1rem" })} />
+            ) : (
+              <RestorePageIcon
+                className={css({ width: "1rem", height: "1rem" })}
+              />
+            )}
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
   function renderDeleteButton() {
     return (
       <Tooltip title={t("player-row.remove-character")}>
-        <IconButton
-          data-cy={`${props["data-cy"]}.remove`}
-          size="small"
-          onClick={(e) => {
-            e.stopPropagation();
-            props.onPlayerRemove();
-            logger.info("ScenePlayer:onPlayerRemove");
-          }}
-        >
-          <HighlightOffIcon
-            color="error"
-            className={css({ width: "1rem", height: "1rem" })}
-          />
-        </IconButton>
+        <span>
+          <IconButton
+            data-cy={`${props["data-cy"]}.remove`}
+            className={css({ padding: "0" })}
+            onClick={(e) => {
+              e.stopPropagation();
+              props.onPlayerRemove();
+              logger.info("ScenePlayer:onPlayerRemove");
+            }}
+          >
+            <HighlightOffIcon
+              color="error"
+              className={css({ width: "1rem", height: "1rem" })}
+            />
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
+
+  function renderInitiative() {
+    return (
+      <Tooltip
+        title={
+          props.player.playedDuringTurn
+            ? t("player-row.played")
+            : t("player-row.not-played")
+        }
+      >
+        <span>
+          <IconButton
+            data-cy={`${props["data-cy"]}.toggle-initiative`}
+            onClick={(e) => {
+              e.stopPropagation();
+              props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
+              logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
+                playedDuringTurn: !props.player.playedDuringTurn,
+              });
+            }}
+            disabled={!props.permissions.canUpdateInitiative}
+            className={css({ padding: "0" })}
+          >
+            {props.player.playedDuringTurn ? (
+              <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
+            ) : (
+              <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
+            )}
+          </IconButton>
+        </span>
       </Tooltip>
     );
   }
@@ -260,108 +331,46 @@ export const PlayerRow: React.FC<
     );
   }
 
-  function renderInitiative() {
-    return (
-      <Tooltip
-        title={
-          props.player.playedDuringTurn
-            ? t("player-row.played")
-            : t("player-row.not-played")
-        }
-      >
-        <span>
-          <IconButton
-            data-cy={`${props["data-cy"]}.toggle-initiative`}
-            onClick={(e) => {
-              e.stopPropagation();
-              props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
-              logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
-                playedDuringTurn: !props.player.playedDuringTurn,
-              });
-            }}
-            disabled={!props.permissions.canUpdateInitiative}
-            className={css({ padding: "0" })}
-          >
-            {props.player.playedDuringTurn ? (
-              <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
-            ) : (
-              <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
-            )}
-          </IconButton>
-        </span>
-      </Tooltip>
-    );
-  }
-
-  function renderCharacterSheetButton() {
+  function renderName() {
     return (
       <>
-        <Grid container wrap="nowrap" alignItems="center">
-          {props.permissions.canLoadCharacterSheet && (
-            <Grid item>
-              <Tooltip
-                title={
-                  hasCharacterSheet
-                    ? t("player-row.swap-character-sheet")
-                    : t("play-route.add-character-sheet")
-                }
-              >
-                <IconButton
-                  size="small"
-                  color={hasCharacterSheet ? "default" : "primary"}
-                  data-cy={`${props["data-cy"]}.load-character-sheet`}
-                  onClick={() => {
-                    props.onLoadCharacterSheet();
-                    logger.info(
-                      "ScenePlayer:onCharacterSheetContextButtonPress"
-                    );
-                  }}
-                >
-                  {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          )}
-          <Grid item xs zeroMinWidth>
-            <ConditionalWrapper
-              condition={hasCharacterSheet}
-              wrapper={(children) => (
-                <Button
-                  className={css({
-                    width: "100%",
-                    background: "transparent",
-                    textTransform: "none",
-                    color: theme.palette.text.primary,
-                    border: "none",
-                    borderRadius: "4px",
-                  })}
-                  data-cy={`${props["data-cy"]}.open-character-sheet`}
-                  disabled={!props.player.character}
-                  size="small"
-                  onClick={(e) => {
-                    props.onCharacterSheetOpen();
-                    logger.info("ScenePlayer:onCharacterSheetButtonPress");
-                  }}
-                >
-                  {children}
-                </Button>
-              )}
+        <ConditionalWrapper
+          condition={hasCharacterSheet}
+          wrapper={(children) => (
+            <Button
+              className={css({
+                width: "100%",
+                background: "transparent",
+                textTransform: "none",
+                color: theme.palette.text.primary,
+                border: "none",
+                borderRadius: "4px",
+              })}
+              data-cy={`${props["data-cy"]}.open-character-sheet`}
+              disabled={!props.player.character}
+              size="small"
+              onClick={(e) => {
+                props.onCharacterSheetOpen();
+                logger.info("ScenePlayer:onCharacterSheetButtonPress");
+              }}
             >
-              <FateLabel
-                noWrap
-                color="inherit"
-                className={css({
-                  width: "100%",
-                  textAlign: "left",
-                  fontSize: "1rem",
-                  lineHeight: Font.lineHeight(1),
-                })}
-              >
-                {previewContentEditable({ value: name })}
-              </FateLabel>
-            </ConditionalWrapper>
-          </Grid>
-        </Grid>
+              {children}
+            </Button>
+          )}
+        >
+          <FateLabel
+            noWrap
+            color="inherit"
+            className={css({
+              width: "100%",
+              textAlign: "left",
+              fontSize: "1rem",
+              lineHeight: Font.lineHeight(1),
+            })}
+          >
+            {previewContentEditable({ value: name })}
+          </FateLabel>
+        </ConditionalWrapper>
       </>
     );
   }

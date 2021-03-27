@@ -4,6 +4,109 @@
 
 > Have an idea and want to contribute to this blog ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
+# Fari v4.0.0
+
+<page-meta author="René-Pier Deshaies-Gélinas" date="2021-03-25" description="New Character Sheet Framework and Data Management"></page-meta>
+
+This release has been in the making since November of 2020 so it's a big one.
+
+It contains a lot of quality of life enhancement, but also tons of great new features I think you are going to love.
+
+So lets get started.
+
+## New Features 🌟
+
+### New Character Sheet
+
+Lets talk about the elephant in the room: **Character Sheets**!
+
+When Fari was initially released in December 2019, this wasn't even something that was part of the app.
+
+Then, you all have been very vocal (in a good way) about the fact that managing characters should be part of the core experience of playing table-top RPGs online.
+
+Since then, I released two different iteration of the character sheet framework and now is the time for a third take on this.
+
+Third time's the charm!
+
+#### Control
+
+Fate is a very generic and hackable TTRPG. For that reason, character sheets should be generic and hackable as well.
+
+This new framework gives you 100% control over:
+
+- Splitting your sheet into multiple `Pages` and organizing them
+- Adding `Sections` inside your pages and deciding where to place them
+- Each section can then contain building `Blocks` that you can use to manage all the fields in your sheets
+
+#### Building Blocks
+
+You build your character sheets with blocks and Fari supports the following block types:
+
+- `Text`: Save your aspects, consequences or other text based content.
+- `Skill`: This block lets you add a modifier and a set of dice commands attached to a specific skill.
+- `PointCounter`: Track your Fate Points, Health Points or any other count based field.
+- `SlotTracker`: This is useful for stress tracks or anything that you would track with checkboxes.
+- `DicePool`: Similar to the Skill block, this block lets you create dice pools with a set of dice commands to use during gameplay.
+
+![New Character Sheet Framework](https://gyazo.com/9aeba8fad4079cec0e0ba3d0fda294e9.png)
+
+#### Templates
+
+This new framework is powerful enough to support any Fate hack you can imagine, but it can also be used to play other Table Top RPG systems like Cortex Prime or simple one page RPGs like The Witch is Dead by Grant Howitt.
+
+If you toggle the advanced mode inside a character sheet, you will have the ability to load one of the many new templates Fari supports.
+
+From Dresdend Files Accelerated or Venture City to Heartbreaker by A.C. Luke, we've got you covered.
+
+> Are you looking for a template that isn't available and interested in contributing to Fari ?
+>
+> **Create the template** yourself, **export it** and **send it** to us to make it available to the whole Fari community!
+
+![New Templates](https://gyazo.com/34c71ce708382cc6be561041eb61c2ce.png)
+
+### Manage Your Data
+
+Fari doesn't _really_ have servers or databases so all your data is stored inside your browser's localstorage.
+
+You own your data and you should be able to do what ever you want it.
+
+For this reason, Fari now as a new [Data Management](https://fari.app/data) feature which lets you export and import in bulk all the data stored in this application.
+
+You can use this feature to backup your data or copying it from one computer to another.
+
+This can also be useful for game creators. Creators could use this feature to create pre-made scenes and characters to give with their game when they buy it on itch.io or drivethrurpg.
+
+![Data Manager](https://gyazo.com/06d36544539d5eee2cbe220a3631858f.png)
+
+### Syncing Character Sheets
+
+### New Look
+
+I also worked on a brand new home page which I think is going to be useful for new users to explain better what Fari does, while also keeping the most useful features accessible to returning users.
+
+![New Look](https://gyazo.com/c1ea6b639575a5027b0746b71f76e6af.png)
+
+### Miscellaneous
+
+This release also brings a couple of other enhancements, things like:
+
+- the ability to reorganize your index card by simply dragging and dropping them wherever you like
+- the ability for GMs to set a player's character sheet
+- saved screen real-estate by moving the scene drawing area inside a separate tab
+- a brand new [Dice Pool](http://fari.app/dice-pool) roller
+- a print mode for the character sheet
+- and more...
+
+## Thank You ❤️
+
+I want to thank my patrons for helping to make this update possible.
+
+If you also want to support Fari, go over Fari's [Patreon](https://www.patreon.com/fariapp) page.
+
+There, you can support the development of the Fate RPG Companion App on a monthly basis for as low as the price of one ☕ or 🍪 per month!
+
+If you have any questions or want to talk about Fari, come chat on [Discord](https://discord.com/invite/vMAJFjUraA) and if you encounter any issues with the release, don't hesitate to create a new [bug report](https://github.com/fariapp/fari/issues/new/choose).
+
 # Fari v3.7.0
 
 <page-meta author="René-Pier Deshaies-Gélinas" date="2021-02-23" image="https://gyazo.com/3c74eda84cdedca471890460339b4fa0.png" description="Fari Wiki, Success With Style Blog, New Dice Options, and more..."></page-meta>

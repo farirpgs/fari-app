@@ -5,13 +5,14 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import React from "react";
 import {
   IBlock,
+  INumericBlock,
   ISection,
   ISkillBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
 
 export function BlockToggleMeta<
-  TBlock extends IBlock & (ITextBlock | ISkillBlock)
+  TBlock extends IBlock & (ITextBlock | INumericBlock | ISkillBlock)
 >(props: {
   readonly: boolean | undefined;
   pageIndex: number;

@@ -10,9 +10,7 @@ import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISkillBlock } from "../../../../../../domains/character/types";
 import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
-import { useHighlight } from "../../../../../../hooks/useHighlight/useHighlight";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
-import { useLightBackground } from "../../../../../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
 import { Block } from "../../domains/Block/Block";
@@ -75,20 +73,22 @@ export function BlockSkill(
                   });
                 }}
               >
-                <RollIcon />
+                <RollIcon className={css({ fontSize: "2.3rem" })} />
               </Pool>
             </Grid>
           )}
-          <Grid item>
-            <CircleTextField
-              data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-              value={state}
-              readonly={props.readonly}
-              onChange={(newState) => {
-                setState(newState);
-              }}
-            />
-          </Grid>
+          {!props.block.meta.hideModifier && (
+            <Grid item>
+              <CircleTextField
+                data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+                value={state}
+                readonly={props.readonly}
+                onChange={(newState) => {
+                  setState(newState);
+                }}
+              />
+            </Grid>
+          )}
           <Grid item xs>
             <FateLabel className={css({ display: "inline-block" })}>
               <ContentEditable
@@ -132,6 +132,25 @@ export function BlockSkillActions(
   return (
     <>
       <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              hideModifier: !props.block.meta.hideModifier,
+            });
+          }}
+        >
+          {!props.block.meta.hideModifier
+            ? t("character-dialog.control.hide-modifer")
+            : t("character-dialog.control.show-modifier")}
+        </Link>
+      </Grid>
+      <Grid item>
         <DiceMenuForCharacterSheet
           commandGroupIds={props.block.meta.commands || []}
           onChange={(newCommandIds) => {
@@ -170,20 +189,25 @@ BlockSkillActions.displayName = "BlockSkillActions";
 
 export function CircleTextField(props: {
   "data-cy"?: string;
-  "value": string;
+  "value": string | undefined;
   "readonly"?: boolean;
   "highlight"?: boolean;
   onChange?(value: string): void;
 }) {
   const theme = useTheme();
-  const lightBackground = useLightBackground();
-  const highlight = useHighlight();
+  const [value, setValue] = useLazyState({
+    value: props.value ?? "",
+    delay: 750,
+    onChange: (newValue) => {
+      props.onChange?.(newValue);
+    },
+  });
 
   return (
     <TextField
       type="number"
       data-cy={props["data-cy"]}
-      value={props.value}
+      value={value}
       variant="outlined"
       className={css({
         textAlign: "center",
@@ -194,13 +218,13 @@ export function CircleTextField(props: {
           return;
         }
         if (!e.target.value) {
-          props.onChange("");
+          setValue("");
         } else {
           const parsed = parseInt(e.target.value);
           if (parsed > 999) {
-            props.onChange("999");
+            setValue("999");
           } else {
-            props.onChange(parsed.toString());
+            setValue(parsed.toString());
           }
         }
       }}

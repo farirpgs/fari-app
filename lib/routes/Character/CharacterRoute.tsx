@@ -7,7 +7,6 @@ import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { useRollDiceFromContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
@@ -55,8 +54,6 @@ export const CharacterRoute: React.FC<{
       charactersManager.actions.openManager(ManagerMode.Manage);
     }
   }, [props.match.params.id, charactersManager.state.characters]);
-
-  const rollDice = useRollDiceFromContext();
 
   const query = useQuery<"dialog" | "readonly">();
   const dialogMode = query.get("dialog") === "true";

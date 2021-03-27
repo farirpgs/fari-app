@@ -11,8 +11,8 @@ export default {
   component: DiceBoxResult,
 } as Meta;
 
-const Template: Story<IProps> = (args) => (
-  <StoryProvider>
+const Template: Story<IProps> = (args, context) => (
+  <StoryProvider theme={context.globals.theme}>
     <DiceBoxResult rolls={args.rolls} />
   </StoryProvider>
 );

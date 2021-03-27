@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { BlockType } from "../../domains/character/types";
-import { Dice } from "../../domains/dice/Dice";
 import {
   IDicePool,
   IDicePoolElement,
@@ -8,7 +8,7 @@ import {
 
 export function useDicePool() {
   const [pool, setPool] = useState<IDicePool>([]);
-
+  const diceManager = useContext(DiceContext);
   function addOrRemovePoolElement(element: IDicePoolElement) {
     setPool((draft) => {
       const ids = draft.map((element) => element.blockId);
@@ -29,7 +29,7 @@ export function useDicePool() {
 
     const commands = pool.flatMap((element) => element.commandOptionList);
 
-    const result = Dice.rollCommandOptionList(commands, { listResults });
+    const result = diceManager.actions.roll(commands, { listResults });
 
     clearPool();
     return result;

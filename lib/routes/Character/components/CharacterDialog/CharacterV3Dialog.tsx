@@ -33,7 +33,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { AppLink } from "../../../../components/AppLink/AppLink";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
@@ -70,6 +70,10 @@ import {
   IDicePool,
   IDicePoolElement,
 } from "./components/blocks/BlockDicePool";
+import {
+  BlockNumeric,
+  BlockNumericActions,
+} from "./components/blocks/BlockNumeric";
 import {
   BlockPointCounter,
   BlockPointCounterActions,
@@ -184,6 +188,18 @@ export const CharacterV3Dialog: React.FC<{
     width: "100%",
     padding: ".5rem 1rem",
   });
+
+  useEffect(
+    function disableAdvancedOnNewCharacterLoad() {
+      const isDifferentCharacter =
+        props.character?.id !== characterManager.state.character?.id;
+
+      if (isDifferentCharacter) {
+        setAdvanced(false);
+      }
+    },
+    [props.character]
+  );
 
   if (!characterManager.state.character) {
     return null;
@@ -560,7 +576,7 @@ export const CharacterV3Dialog: React.FC<{
               return null;
             }
 
-            const helpLink = characterTemplateInfo.isFate
+            const helpLink = characterTemplateInfo?.isFate
               ? HeaderHelpLinks[section.label.toLowerCase()]
               : undefined;
 
@@ -733,18 +749,20 @@ export const CharacterV3Dialog: React.FC<{
             justify="flex-end"
             spacing={2}
           >
-            <Grid item>
-              <IconButton
-                color="default"
-                data-cy="character-dialog.print"
-                size="small"
-                onClick={() => {
-                  window.open(`/characters/${props.character?.id}/print`);
-                }}
-              >
-                <PrintIcon />
-              </IconButton>
-            </Grid>
+            {!props.dialog && (
+              <Grid item>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.print"
+                  size="small"
+                  onClick={() => {
+                    window.open(`/characters/${props.character?.id}/print`);
+                  }}
+                >
+                  <PrintIcon />
+                </IconButton>
+              </Grid>
+            )}
             <Grid item>
               <Button
                 color="primary"
@@ -928,6 +946,41 @@ export const CharacterV3Dialog: React.FC<{
                   >
                     {block.type === BlockType.Text && (
                       <BlockText
+                        advanced={advanced}
+                        readonly={props.readonly}
+                        pageIndex={pageIndex}
+                        sectionIndex={sectionIndex}
+                        section={section}
+                        block={block}
+                        blockIndex={blockIndex}
+                        onLabelChange={(value) => {
+                          characterManager.actions.setBlockLabel(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onValueChange={(value) => {
+                          characterManager.actions.setBlockValue(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            value
+                          );
+                        }}
+                        onMetaChange={(meta) => {
+                          characterManager.actions.setBlockMeta(
+                            pageIndex,
+                            sectionIndex,
+                            blockIndex,
+                            meta
+                          );
+                        }}
+                      />
+                    )}
+                    {block.type === BlockType.Numeric && (
+                      <BlockNumeric
                         advanced={advanced}
                         readonly={props.readonly}
                         pageIndex={pageIndex}
@@ -1197,6 +1250,23 @@ export const CharacterV3Dialog: React.FC<{
         )}
         {block.type === BlockType.Text && (
           <BlockTextActions
+            pageIndex={pageIndex}
+            sectionIndex={sectionIndex}
+            section={section}
+            block={block}
+            blockIndex={blockIndex}
+            onMetaChange={(meta) => {
+              characterManager.actions.setBlockMeta(
+                pageIndex,
+                sectionIndex,
+                blockIndex,
+                meta
+              );
+            }}
+          />
+        )}
+        {block.type === BlockType.Numeric && (
+          <BlockNumericActions
             pageIndex={pageIndex}
             sectionIndex={sectionIndex}
             section={section}

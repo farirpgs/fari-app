@@ -248,7 +248,11 @@ export const Doc: React.FC<IProps> = (props) => {
     <Page
       drawerWidth={!isSmall ? drawerWidth : undefined}
       pb="4rem"
-      debug={{ metaTitle: title, metaDescription: description }}
+      debug={{
+        metaTitle: title,
+        metaDescription: description,
+        metaImage: imageUrl ?? "",
+      }}
       disableAutomaticScrollTop
     >
       <PageMeta
