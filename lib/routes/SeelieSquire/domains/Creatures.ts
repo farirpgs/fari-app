@@ -2,7 +2,7 @@ import { ICreature } from "./ICreature";
 
 export const creatures: Array<ICreature> = [
   {
-    title: "Monster Monday #1 - Draguin",
+    title: "Draguin",
     description:
       "Draguins appear to be some ungodly mix of fearsome wyverns and your favorite polar-weather flightless birds. They are carnivorous ambush predators, hunting alone or in groups of two to four.\n\n***Massive and Mobile.*** Draguins have an immense wingspan densely packed with small black and white feathers. In addition to swimming and flying, these beasts can use their slick hides to glide seamlessly across ice and snow. Even when immobilized, a draguin can be quite difficult to take down due to their thick, polar hides. This combination of size and speed can be devastating for anyone unlucky enough to engage a draguin unprepared.\n\n***Ice Breaker.*** The beak is the most durable part of a draguin. While primarily used for pecking prey and cracking ice while swimming, it is not uncommon for a draguin to use its beak offensively, creating uneven ground or shattering frozen shelves to ambush their surprised bounty from below. ",
     character: [
@@ -55,7 +55,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/27112219/8cd050dce30f4d20a65cf711a7ea21be/1.png?token-time=1617925976&token-hash=82O0SuXxO2gM33bMWz_ETqL4O8lPNYluxpagO5PVwhE%3D",
   },
   {
-    title: "Monster Monday #2 - Night Spine",
+    title: "Night Spine",
     description:
       "The night spine is a large nocturnal herbivore that roams the night foraging for food. It resembles a hefty porcupine with a charcoal black hide.\n\n***Sedative Spines.*** These brutes are covered from the back of their necks to the base of their tales in sharp, outward facing spines. The tip of each of these spines secretes a strong sedative meant to subdue any would-be attackers the night spine encounters. With a quick muscle contraction the night spine can launch a spine from its back into a foe, rendering them bloody, and in most cases, unconscious.\n\n***Territorial.*** Night spine live in solitude. They are quite territorial, and their excellent hearing often forces the surrounding animals into silence out of fear for disturbing them. It is common for the night spine to feign that they do not know the presence of other creatures, only to attack suddenly and without relent. \n\n***Lucrative.*** While most people avoid a run in with a night spine when they can, some go out of their way to hunt them. Their hide can fetch a modest price, and their spines often sell as a novelty. The real prize, however, is the secretion from their spines, which can be processed into a salve to treat insomnia and other symptoms to common ailments.",
     character: [
@@ -93,7 +93,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/27113093/bd6ca9d7407d4d95b0e7e8e66e4092aa/1.png?token-time=1617926239&token-hash=9lkmAhyNhL5ZzV76O1NdMD_5RuQtK5v81AV73Ef-POU%3D",
   },
   {
-    title: "Monster Monday #3 - Armored Arbor",
+    title: "Armored Arbor",
     description:
       "Deep in an overgrown forest, vines and stems twist together into humanoid silhouettes. Armored arbors are plantoid soldiers that wield bark shields and thorny blades, obeying the command of whoever raised them from the ground.\n\n***From Seed to Soldier.*** Armored arbors begin their life cycle as small seeds which are planted in the ground and watered. Once the arbor sprouts from the ground and grows its humanoid tendrils, it pulls its roots from the earth and begins its mobile life. The sprout will continue to grow larger and stronger until it weaves itself into a mess of vines and other plant matter.\n\n***Primitive and Steadfast.*** These creatures are capable of primitive thought, and in the wild will form societies that live and protect one another. They have a strong sense of kinship, clinging to whoever raised them as their family. For those lucky enough to get their hands on armored arbor seeds, this means one could grow a small army for themselves.\n\n***Unknown Origin.*** No one knows for sure where the first seeds for these soldiers came from. It has been speculated that these creatures started as the legacy of some powerful druid. Others believe the arbors were created by the gods themselves.",
     character: [
@@ -158,7 +158,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/27685430/82de3a2b6d064a14a2b47ccee748aaff/1.png?token-time=1617764644&token-hash=JjtrfqOKUcQWQk7jTm6Fj-DdWAAaWtuhvR28biotiRs%3D",
   },
   {
-    title: "Monster Monday #4 - Gnarlock",
+    title: "Gnarlock",
     description:
       "Gnarlocks are a twisted bunch of humanoids that live in the desert. They worship the searing pain of the sun, decorating themselves in blisters and terrifying nearby settlements.\n\n***Blistered and bandaged.*** You can tell a gnarlock by their almost-pink husk. Years of masochistic rituals have left their bodies covered in scars and blisters. They wrap themselves in light bandages to keep out the elements, but welcome in the pain of the sandstorms when they come. They are decrepit reflections of suffering.\n\n***Desert Schemers.*** Civilized society can never quite get a handle on a gnarlock’s motivation, but everyone familiar with them knows that their pursuits are no-good. Settlers of nearby towns rest uneasily, kept awake at night by the foreboding sense that another villager will be stolen away for the gnarlock’s sickening magics. \n\n***Unsavory Pets.*** Gnarlocks keep with them large, menacing pets called scar hounds. These beasts stand in size somewhere between large canines and bears, and carry themselves similarly. Though their undersides have thick, black hair, their backs are barren and pink, with wounds like their masters. A thick steam rises threateningly from their hides, obscuring the air above them. It is rumored that gnarlocks steal peoples family pets and turn them into these beast through agonizing rituals.",
     character: [
@@ -214,7 +214,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/27864972/07c6c31620114151b4c9646166a40767/1.png?token-time=1617765466&token-hash=4nfNvh-4lEwjICIl2TecvVVptWg6OUusBbfiH1bBhbE%3D",
   },
   {
-    title: "Monster Monday #5 - Squibimp",
+    title: "Squibimp",
     description:
       "Squibimps are small, humanoid-shaped creatures that crawl and bound from place to place. They have insect-like mandibles and scaly skin. They love to take what isn’t theirs, and have a penchant for bad luck.\n\n***Luck Leech.*** The squibimp’s primary source of sustenance is the misfortune of others. Because of this, these creatures live and thrive wherever bad luck can be found. It is common for squibimps to lurk in the darkness of crowded alleys at night, or just beyond the edges of forests, waiting for a chance to sow chaos. If a squibimp cannot find a healthy source of misfortune, they will go out of their way to cause it themselves.\n\n***Impulsive Collectors.*** The only thing a squibimp likes as much as misfortune is a nice shiny object. These rambunctious critters will seize every opportunity to steal something that they find pretty and leap away, with little regard for others. Squibimps don’t understand the concept of cleaning, and will discard their loot as soon as it collects too much grime. \n\n***Elusive and Resourceful.*** When confronted by someone trying to stop them, squibimps have proven to be quite resourceful, using the environment around them to stave off their pursuers. They will knock things over, spill things, and move through tight spaces just to avoid capture. They are also surprisingly competent when it comes to goading their chasers into taking a wrong turn.",
     character: [
@@ -258,7 +258,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/28034275/9fac2dc6638b40f2849e47feadda5a9d/1.png?token-time=1617765634&token-hash=eIt6-oJoY28V2k0wGccXxyeJBA0XauEy3Fmo-ZUQZBw%3D",
   },
   {
-    title: "Monster Monday #6 - Boulderillo",
+    title: "Boulderillo",
     description:
       "These towering creatures dine on carrion left behind by faster, more aggressive animals of their environment. When confronted they prefer to flee instead of fight, but if left with no choice they pack a punch.\n\n***Thick Carapace.*** Perhaps the most notable feature of the boulderillo is its massive carapace that covers it from nape to tail. This shell is made of banded plates that can easily slide over one another, allowing the boulderillo to curl up into a ball for protection on all sides. When threatened, the boulderillo will curl up and roll toward their predators. Due to their size, this tactic is often quite effective, forcing the predator to maneuver out of the way or be crushed.\n\n***Rocky Camouflage.*** The carapace of the boulderillo is colored to blend in with the environment where it lives. There are several species of boulderillo living in locations ranging from rocky deserts to mountains. Slight irregularities in the shell make it almost indistinguishable from stone.\n\n***Delicious Delicacy.*** Animals in the wild are not the only predators of boulderillos. Many of the humanoid races find the taste of boulderillo to be quite a treat. Boulderillo meat is chewy and tough but carries with it a sweet after-taste that lingers on the tongue. Many hunters make a living off of these elusive creatures, but not without the challenge that comes with it.",
     character: [
@@ -301,7 +301,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/28207095/71814d04821447b1bb3d879c448e48da/1.png?token-time=1617765770&token-hash=EYIjhjYIZDOkmbplZUqNXBKkXhvEeW4V6uXR1aUt1Cc%3D",
   },
   {
-    title: "Monster Monday #7 - Government Agents",
+    title: "Government Agents",
     description:
       "In the city of flashing lights, big brother is always a stone’s throw away. It is not just a conspiracy theorist’s speculation, but a fact of life. In every bustling alley or dimly lit bar, there is a chance that an agent is watching, waiting for an unsuspected target to break the law.\n\n***Routine Surveillance.*** The primary job of agents in the city is to keep an eye on the citizens. Who knows what they could be plotting? They must be monitored. In order to stay inconspicuous government whistle-blowers nicknamed ‘partycrashers’ blend into crowds and hang around public places, waiting for their queue to intervene.\n\n***Enforcement in Force.*** Aside from monitoring, the other job of government agents is to enforce the laws. This means subduing criminals, eliminating threats, and maintaining the peace. An array of enforcers around the city have implants in their skull meant to transmit and receive information. In a pinch, this can alert potentially dozens of agents that an issue needs to be taken care of.",
     character: [
@@ -351,7 +351,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/28391099/1fecc15e6dd640728a85de5f34703595/1.png?token-time=1617765896&token-hash=BugCxCFKHfxKgQ2Qx2rn03GPeg51DUXkhOmc0MlqUIE%3D",
   },
   {
-    title: "Monster Monday #8 - Jungle Fauna",
+    title: "Jungle Fauna",
     description:
       "The deep jungle is filled with a plethora of strange species, each with unique abilities and behaviors. Some people dedicate their lives to finding and chronicling these creatures, and yet, the list of creatures to find is never exhausted.\n\n***Shrubbit.*** This small, rabbit-sized, burrowing herbivore makes its home in the thick underbrush of the forest. Over the course of its life, a shrubbit's dark green fur mats into long, tangled tendrils resembling tufts of weeds and other plants. Leaf-like camouflage grows out of their back to add to this effect. They use this as a defense mechanism to blend into the jungle floor. A shrubbit standing completely still is nearly impossible to see in the underbrush.\n\n***Growlbird.*** This small, brown bird looks unextraordinary when sitting still, however, when the growlbird takes flight you see its true beauty. The hidden underside of a growlbird's wings are an iridescent array of oranges, reds, yellows, and blues that flash in the sunlight as it flaps. Growlbirds live in solitude and are quite territorial. In order to scare off competitors and potential predators, the growlbird can mimic an impressive variety of animal growls. While a growlbird won't dare attack a larger animal, they can often be found hunting shrubbits and other small mammals.\n\n***Bleedlebug.*** This insect resembles an ashy beetle with an amber-colored abdomen. Four thick antennae stick from its head to sense subtle vibrations in the environment around it. If crushed, a bleedlebug will ooze a yellowish substance, often cited as a delicacy for its sweet taste. A common parable told in settlements near the jungle describes a child that catches a bleedlebug by sitting so still it lands on his skin. The moral of this story, of course, is that patience is rewarded.\n\n***Nyoc.*** The nyoc is a breed of scavenging jumping-spider that feeds on the carcasses of dying animals. They are about six inches in diameter, and can leap up to ten feet in a single jump. The nyoc has a venomous bite that triggers a panicked fight response in its target. The nyoc leverages this bite to spur packs of animals in to fighting one another, often leaving behind a meal for it.",
     character: [
@@ -432,7 +432,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/28560372/bc5ca8fdda17401d88e93ed9095e24ea/1.png?token-time=1617766151&token-hash=CGG_3-tEELq2smnFvA-lnp3CCAtUIYC224BYbjbjnT4%3D",
   },
   {
-    title: "Monster Monday #9 - Rhino-lizard",
+    title: "Rhino-lizard",
     description:
       "“Does it like to wrestle? Hah! Thrashing is its favorite activity! I tell you what, ol’ Hammersteed here was no easy wrangle. He threw me into a wall, and almost pierced me through my chest. But compared to the rest, riding this thing was easy; it’s the mother and father you have to worry about!” *- Arvus Bonegut, Dragonknight*\n\n***Massive Reptiles.*** Rhino-lizards are a breed of omnivorous reptiles that grow to be quite large. When born they are two to three feet long, and during adulthood they peak at around fifteen to twenty feet long. These lizards get their name from the large horns they have on the front of their skull. They use this horn to fight off competitors as well as dig through tough dirt underground.\n\n***Volcanic Cave Dwellers.*** Rhino-lizards live in deep cave systems that provide them warm rock to lounge around on. Because of this, the majority of rhino-lizards live in volcanic locations, taking advantage of the heat that nearby magma provides. Rhino-lizards live in small families from two to four members, and are very rarely seen alone or in groups larger than that. ",
     character: [
@@ -477,7 +477,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #10 - Augmented Zombies",
+    title: "Augmented Zombies",
     description:
       "“I saw a bastard with a meat-cleaver for a hand. Musta’ been a butcher while he was still livin’. I never understood people like that. You got a perfectly good hand, and you wanna cut it off and replace it with something mundane? Never made sense to me. But those super hearing-aids, grappling hook arms, or bio-reinforced skeletons. Those at least seem useful. I could get behind that.” - Austin Bilgrin, Survivor\n\n***Virus susceptibility.*** Before the fall, tons of people got implants to improve their everyday lives. People got implants to help at their job, others got implants to increase their performance in sports. Some got cosmetic implants. But this opened the floodgates for something entirely unexpected. The world’s first virus that is both biological and technological. Some people say it was a hacker who made the nanobots. Others say it was a government experiment gone wrong.\n\n***Zombies with cybernetic implants.*** Shambling bodies limp their way around this once-bright, once-neon-filled cityscape. Zombies of former peacekeepers still have their weapons. The construction workers still have their jack-hammer arms. In an abandoned back-alley, you may catch a smile from a zombie with glowing teeth.",
     character: [
@@ -542,7 +542,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJyb3RhdGUiOjAsInciOjgyMH0%3D/patreon-media/p/post/28931646/483b37921ff84f86918f9da01707a598/1.png?token-time=1617766440&token-hash=tzA0VC95FWxGrNY6v8yhQXD2BhaZqvMbDAk5CPzy2Eo%3D",
   },
   {
-    title: "Monster Monday #11 - Heptapode",
+    title: "Heptapode",
     description:
       "“While I was not expecting some wanna-be demon to drop from the branches above me, that was not the most surprising part of my encounter. I was not afraid of the little beast until after he got ahold of me. You learn very quickly about the teeth.” - Vartul Jodack, First Sword of the Second Army of Wrend\n\n***Cousin to the Octopus.*** These forest-dwelling predators bear a striking resemblance to their sea-dwelling counterparts. While this is the case, there are several key differences. First of all, heptapodes live on land in dense forests. They slither through the treetops, not unlike a tree snake. Heptapodes are ambush predators, hiding stealthily on branches before falling on their targets and constricting them. They have seven tentacles covered in green and brown splotches which make it easier for them to hide in the foliage. Their undersided mouth has several rows of sharp teeth to help them subdue and consume struggling prey faster.\n\n***Mate for life.*** Heptapodes for the most part live in solitude. However, this changes when they find a mate. Heptapodes mate for life, which means once they find one partner, they will stay with them until death. Interestingly enough, both male and female heptapodes appear to be able to carry the children. Due to this monogamous behavior, it is most common to encounter heptapodes alone or in pairs.",
     character: [
@@ -577,7 +577,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #12 - Sythan",
+    title: "Sythan",
     description:
       "These hunched creatures have a greyish, leathery skin and one large eye in the center of their face. Although intelligent, they live a primitive life, typically subsiding off of small animals and fish.\n\n***Barbaric Intellectuals.*** Sythan can be found skulking around any place with both a complex ecosystem and a place to hide. They are drawn to these complex ecosystems due to their inherent interest in learning what makes living beings tick. The more diverse the location, the more there is for the sythan to break down and analyze. While the sythan loves to learn about life, it prefers to do it from the shadows. This is why it is atypical (although not unheard of) to find a sythan in a city or village. If discovered and approached by intelligent life, the sythan will cautiously interact. A little known fact about the sythan is that they can become fluent in most languages simply by interacting briefly with someone who speaks it.\n\n***Mysterious Origin.*** An absolute history around how and why the sythan came about does not exist, however there are stories and rumors surrounding their appearance. The most common tale is that a powerful wizard created the sythan as a means of spying on their subjects and enemies. Some rumors state that there are sythan that can shapeshift to blend in, but this has never been confirmed. Other rumors say that sythan used to be human until transformed violently by the mage as punishment.",
     character: [
@@ -617,7 +617,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #13 - Defunct Golem",
+    title: "Defunct Golem",
     description:
       "Ten feet of night iron, flanked on either side by massive fists of the same material, stood like a sentinel in the forest. Nature’s wild tendrils reclaimed the beast, its form overgrown by vines and foliage. It stands no more than a statue now. But the forest around it has come alive.\n\n***Bygone Directive.*** Long ago, when the forgotten golem was created, it was given a distinct purpose. *Guard the creator’s most prized possession. Kill all who approach.* The monstrous metal being was constructed with this purpose in mind. Thick plates of night iron connected by rods and pistons made up the entirety of the golem. Swords and arrows did little to pierce the metal hide. The enchanter, however, made a fatal mistake. “Protect my most prized possession. Kill all who approach.” Golems deal only in literals, and the enchanter was slain on the spot. The golem went on to continue its duty.\n\n***Magical Instability.*** Years passed and the occasional forest-goer stumbled into the deadly metal hulk. It carried out its task, slaying those who approached. But without an enchanter to upkeep the golem, it’s magic grew unstable. The golem became unsuitable to carry the enchantment magics that filled it. Slowly the magic leaked into the surrounding forests. Enchantment magic is unpredictable and potent, and the magic maintained its function even though it escaped its vessel. The branches and vines continued their fatal directive: *Protect the creator’s most prized possession. Kill all who approach.*",
     character: [
@@ -675,7 +675,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #14 - Skeletal Dragon",
+    title: "Skeletal Dragon",
     description:
       "“There is not a night that goes by that I don’t remember it's haunting screech. It always goes the same way. I am up late, unable to sleep. Eventually, the exhaustion takes me. Quickly I am plummeted into a cascade of horrendous nightmares, each one worse than the last. Until finally, I see it. It wails at me. I wake, sweating where I lie. I have no regret greater than creating that beast. And for what?” - Sylrid Wormwood, Ex-necromancer\n\n***Of Legendary Sources.*** Skeletal dragons are truly weapons of destruction. It is no easy task, assembling one. Gathering the required materials is not a chore for the squeamish. The first requisite is dragon bones. As rare as dragons are, happening upon a dragon corpse is no accident. Thankfully for the would-be necromancer, an entire dragon skeleton is not required. Instead, missing pieces can be substituted with bones of other species, particularly sentient ones. Humans, elves, dwarves, and more may become victim to an ambitious necromancer. Bodies with particularly gruesome deaths will take to the magic more easily. By the time the skeletal dragon is constructed, its many parts tell a story just as horrific as its appearance.\n\n***For Dastardly Purposes.*** A necromancer does not go through the trouble of creating one of these monstrosities without having a reason. The ritual is performed to accomplish some terrifying goal. Subjugating cities, tormenting like-long enemies, carrying out revenge, or granting unquestionable authority are potential motivations.",
     character: [
@@ -739,7 +739,7 @@ export const creatures: Array<ICreature> = [
       " A note for the GM: Skeletal dragons are quite powerful. A party of four characters with the default stats and abilities will likely have a hard time taking one of these down without proper preparation and an escape plan. I would advise against pitting new players against this monster. ",
   },
   {
-    title: "Monster Monday #15 - Spider-jackal",
+    title: "Spider-jackal",
     description:
       "“We heard the howling. The attack itself was not a surprise. It had been going on for an hour or so while we made our way across the rocky plains. We kept our watches and were prepared. But when the pack finally engaged, that is when the strangeness revealed itself. We saw their backs in the grass, encircling. Then they all began leaping. A few dozen of them. Not pouncing. But leaping. Bounding. They had extra legs, and extra claws! We lost no men, but we gained one hell of a story.” - *Maica, Knight of Moriel*\n\n***Part Jackal.*** Spider-jackals appear to be just as much a canine as any other wild dogs, with the chief difference being they have six legs instead of four, and four eyes instead of two. They have a relatively similar body shape to a jackal, with the same coat of short, black and brown fur that you would expect. Spider-jackals are pack-hunters, excelling in stealthily encircling and taking down their prey in groups. \n\n***Part Spider.*** In addition to more legs and eyes, spider-jackals have the arachnid quality of spinning webs. The spider-jackals excrete their webs from their front set of claws, which have small protrusions for this purpose. This process takes a long time, and is typically not used to offensive hunting, but instead is used as a means of protecting the spider-jackal burrow. The result is an extensive tunnel system covered from wall to wall in thick strings that ensnare potential predators.",
     character: [
@@ -774,7 +774,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #16 - Lich",
+    title: "Lich",
     description:
       "“Moons and full moons. I watched the ones I love slip into the darkness. My children have grown old and had children, who in turn had children of their own. My friends have either passed, or no longer recognize me. But the days continue to cycle. Moons and full moons. Many years I have had, reflecting. What I realized? I am eternal. *And I am the end*. Make peace with your families.” - Bokra Jakzi, Lich\n\n***Timeless bodies.*** When the vile magician finishes the wicked rite, they surrender their flesh for virtual immortality. Their skin turns to dust, and their bones harden into what feels like steel. They are no longer shackled by human needs like food and sleep, and become immune to disease and natural death. Lichdom is only achievable by the most powerful of necromantic magic. Once it is attained, the lich’s body turns into a powerful vessel for the vilest of spells.\n\n***Phylacteries.*** As part of the arcane ritual for becoming a lich, the necromancer crafts a number of phylacteries. The magical artifacts act as a sort of battery, keeping the soul of the lich alive despite the worst of fates. After a lich’s body is destroyed, any remaining phylacteries will animate a new corpse for the necromancer to inhabit. According to the clerics, the only way to destroy a lich fully is to first destroy his phylacteries.",
     character: [
@@ -830,7 +830,7 @@ export const creatures: Array<ICreature> = [
       "A note for the GM: Liches are quite powerful. A party of four characters with the default stats and abilities will likely have a hard time taking one of these down without proper preparation and an escape plan. I would advise against pitting new players against this monster. ",
   },
   {
-    title: "Monster Monday #17 - Skullug",
+    title: "Skullug",
     description:
       "“What is a skullug? I suppose I can excuse your ignorance. A skullug is a loathsome, little, purple slug that lives in a skull. Yes, I acknowledge the impudent name, but what can you do?\nFinding a skullug is rather rare, but where you find one, you find many. They tend to congregate where bodies lie unburied: ancient battlefields, disturbed graveyards, unsealed catacombs. There are two requisites, you understand? An intact skull, and the disembodied soul that it belonged to.” - Professor Slaid Madring\n\n***Natural Phenomenon.*** Skullugs themselves are nothing supernatural. These small, veiny slugs are born to others of their species and survive by both feeding on carrion and absorbing nutrients from the ground where the deceased lie. They excrete a clear mucus that is toxic to the touch, which dissuades predators from hunting them. Typically a skullug is to be avoided, but some do seek them out specifically to make poison.\n\n***Unnatural Phenomenon.*** One peculiar trait about the skullug is their choice of home. Skullugs will crawl into the first available skull they can find that meets one criteria; the one it belonged to is a restless soul that has not passed on. Researchers still have not determined how the skullug senses whether a skull is fit for them or not, but without fail, the skull they choose has within it the soul of the deceased. The skullug appears to use this as another form of protection, harnessing the soul’s power to discourage attackers from breaking their “shell”.",
     character: [
@@ -860,7 +860,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #18 - Goblinoids Pt. 1",
+    title: "Goblinoids Pt. 1",
     description:
       "“The war horns sound like nothing you have heard. But you will not forget them. For it is at this moment that you become something new. A casualty, or a hero.” - Arnesan Filk, Moriel Captain\n\n***Goblins.*** “An infestation if you ask me. A creative little bunch. But an infestation nonetheless. They rob caravans. They steal livestock. They burn villages. Always in number, always when you do not expect them. When you catch one alone, however, you learn of their real character. Cowards.” - Thatchwin Grimble, Mercenary\n\nOrcs. “We have all heard the stories have we not? Big brutes, bigger weapons. They say they collect teeth, *teeth*, to show status and rank. They burn a few extra fires at night just to put fear into those who can see them at a distance. Well let me tell you; I have seen them up close. They are *nothing* to trifle with. They are bigger than you think. They are nastier than you think. And they will not hesitate to tear off your arms for fun.” - Maican Kelly, Soldier turned bard",
     character: [
@@ -909,7 +909,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #19 - Animated Objects",
+    title: "Animated Objects",
     description:
       "“I learned it from my father. He was a devilishly clever man, he was. As you know, the reagents for animation enchantments are not cheap. What he did was buy ten full suits of armor, and positioned them in the entrance to his manor. Lined them up on either side of the hallway. He then enchanted only the first two of them. Now, imagine breaking in and fighting two full suits of solid metal. Even if you win, you’re not going to continue when you see eight more!” - Shasa Vantul, Great Wizard\n\n***Expensive Magicks.*** Animating an object is a process which takes both plenty of time and plenty of resources. Firstly, it requires the necessary ingredients which can both charge the object with magic without damaging the particular materials of the item. Additional reagents are required to bind items together which would need to animated as one unit, such as a suit of armor. Finally, the particular function of the animated item will require certain chemicals and a specific ritual suited to enacting it. Due to the rarity of the materials and knowledge required to animate objects, seeing such items is typically an impressive display of magical prowess and wealth.\n\n***Effective Function.*** By far the most common use for magically animated objects is for protection. Animated objects don’t need a paycheck, and will never back-stab you or eye your precious gems. Additionally, it is quite difficult to dispatch of an animated object if you don’t know what you’re doing. Because of this, those of arcane inclination will often seek out methods of obtaining animated objects to protect their ever growing stash of magical items. While protection is by far the most used function of animated objects, it is not unheard of for a wealthy figure to commission animated objects for entertainment purposes.",
     character: [
@@ -984,7 +984,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #20 - Goblinoids Pt. 2",
+    title: "Goblinoids Pt. 2",
     description:
       "“Before we left to give warning to the rest of the platoon, we took a moment to look down from the cliff and appreciate the sheer size of the mass of supposedly mindless savages. It was the first time I’ve gotten to watch them from afar. A terrible realization hit me in that moment. They are *not* mindless.” - Jamine Corsano, Moriel Soldier\n\n***Hobgoblins.*** “Big but still gaunt. Red skin. Imposing uniforms. If there are any goblinoids I fear, it would be hobgoblins. They are not like the others. If your party arrives with weapons in hand, a goblin may begin looking for an escape. An orc may begin looking for a target. *But a hobgoblin* would begin looking for your weaknesses.” - Bulgar the Black, Mercenary\n\n***Bugbears.*** “My brother and I were hunting in the woods. We’d been tracking some game for an hour or so, our steps quiet and our bows ready. Finally it was in my line of sight. I nocked an arrow and began preparing for the shot. I was about to release the string when my brother yelled for me to turn around. Directly behind me it was standing there, seven feet tall. How did something so large get so close to us without us noticing?” - Bern Randall, Family Hunter",
     character: [
@@ -1031,7 +1031,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #21 - Assimilator",
+    title: "Assimilator",
     description:
       "“Onlookers are still baffled by what actually went down in mom and pop diner ‘Sugar-pop.’ Initial reports suggest a man fell very ill after beginning his breakfast earlier today. Witnesses describe his skin turning a pale grey, and his eyes looking ‘sunken.’ No one can confirm what illness struck, but paramedics arrived shortly after and he was wheeled off to the St. James medical center for immediate treatment. We approached the hospital staff for questions, but were quickly denied any gratification.”\n\n***The First Wave.*** When attempting a hostile planetary takeover, assimilators are sent as the first wave. Their purpose is to infiltrate the ranks of the target planet, learn their customs and capabilities, and foster support from the population.\n\n***Social Parasites.*** Assimilators were engineered specifically with infiltration in mind. Each has the ability to change shape to match that of the targeted population. Additionally, advanced analysis skills paired with quickly-configurable pheromone glands allow the assimilators to confuse and sway others in conversation.\n\n***Salt Aversion.*** A less intentional property of the assimilator is their aversion to salt. Not only is direct contact with salt painful to an assimilator, it will interrupt their shape changing abilities and transform them back to their original form.",
     character: [
@@ -1061,7 +1061,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #22 - Changeling",
+    title: "Changeling",
     description:
       "“It all makes sense now. When Jamie was young, she was playing outside. She tripped on the root of a tree and hit her head on the way down. There was a large gash on her head. But she did not cry. As the blood dripped down her brow and into her eye, she appeared to be in deep thought. It was strange. For years she displayed this same kind of behavior. Always so cold. It’s because she was never my Jamie.”\n\n***Sinister Replacements.*** It is not unheard of for fae to steal away human children as their own. They do this for servants, out of hate for humans, or because they are intrigued by humans and want to study them. When they take the child, they leave behind a changeling in their stead.\n\n***Strange Beings.*** Changelings always appear on the surface to be the child they are replacing, but tend to display strange new traits. They may never cry, or they may have different physical traits like pale skin, longer teeth, or a limp. A changeling’s purpose in existing is to be a replacement for the child, but oftentimes this lost on them, or simply not enough for them. As changelings grow, they will become stir-crazy, looking for a new purpose. This often causes them to act out or even run away.",
     character: [
@@ -1091,7 +1091,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #23 - Ghost",
+    title: "Ghost",
     description:
       "“When you die, it is believed your spirit leaves your body and begins its journey to the afterlife. Follow the light, and all that, you know? But sometimes, when the time comes to reaching that light, things aren’t so simple. And *poof*, you have ghosts.” - Reggie Bordago, Medium\n\n***An untimely passing.*** Ghosts are brought into existence when there are complications in a spirit passing to the afterlife. No one knows for sure the exact reason one spirit can pass to the afterlife and another cannot, but it is generally believed to be related to particularly peculiar, ill-timed, or brutal causes of death.\n\n***A hopeless goal.*** Contact with ghosts has unconditionally revealed one thing. Every ghost has unfinished business. Whether it be vengeance for their murder, bringing news to their family, or tying up important loose ends, a ghost will always have something that they cannot complete on their own. Whether this is what causes ghosts to exist in the first place, or whether any living thing would inevitably have something they want completed is fiercely debated.",
     character: [
@@ -1128,7 +1128,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #24 - Cuddlebug",
+    title: "Cuddlebug",
     description:
       "“That is a *great* question. The truth is, we simply do not know if the creature exists. All we have heard are wives tales and all we have read are story books. It could be the case that the elusive cuddlebug is merely a myth. But very real creatures have been considered myth in the past, that is, until we discovered them for real.” - Golen Diffney, Magical Historian\n\n***Without form.*** Of all the reports that have been collected, no two witnesses describe the cuddlebug as appearing the same. In every situation, however, the witness will describe the cuddlebug as the cutest little creature they have seen. It is believed that the cuddlebug will probe the mind of those it is in contact with and change its appearance to what the victim thinks is cute.\n\n***Social parasite.*** While the exact origin of the cuddlebug is a mystery, it is quite clear that the creature’s goal is survival. The cuddlebug will embed itself into any group that is both willing and capable of protecting it. In general it won’t harm the group that is helping it, or even ask for much. However, if someone in the group shows signs of wanting to get rid of the cuddlebug, it will gladly turn the members of the group against one another to preserve it’s spot.",
     character: [
@@ -1167,7 +1167,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: " Monster Monday #25 - Ent",
+    title: " Ent",
     description:
       "“Ents are not particularly brilliant. They aren’t fast. They’re not quick-witted. But if an ent addresses you, you stop and listen.” - Cortel Windwalker, Elvish Book-keeper\n\n***Ancient protectors.*** It is believed that the ents came about from old druidic magic millenia ago. They were brought to life to protect the forests they lived in. Ents are sturdy, and typically watch their portion of the forest in numbers. When the forest and the life within are disturbed, the ents step forward to keep the peace.\n\n***Living trees.*** Ents themselves descend from the trees they protect. They are tall, with thick bark and a myriad branches. Their ancestry lends itself to a passive approach in protecting the forest. Ents are keen to a simple life, taking things slow and steady, and are quite adverse to adventurous motivations. Many outside sources have tried to enlist the help of the ents to little success.",
     character: [
@@ -1214,7 +1214,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #26 - Undead Thralls",
+    title: "Undead Thralls",
     description:
       "“It didn’t matter where I went. Inevitably it found me. It didn’t matter the precautions I took. It faced them fearlessly. How do you outrun something which never tires? I decided I needed to become the hunter, and put an end to it myself.” - Unknown\n\n***Loyal servants.*** For as long as mortals have been dabbling in the necromantic arts, the notion of unfettering followers has captured the interest of deviants and scholars alike. Is it possible to enthrall the mind of someone to serve an unending and unquestioned sentence of obedience? They key, mages have found, is to bind the service of a thrall *after* death, rather than before. Some argue this makes thralls more morally sound. Others argue that this makes them worse.\n\n***Unwavering.*** Undead thralls excel at carrying out the will of their master. They have no will of their own. This unquestioned devotion makes them perfect for tasks that would typically weigh heavy and wear out a mortal servant. Finding a lost item, capturing an evasive foe, following a target to the end of the world; these are the things an undead thrall excels at.",
     character: [
@@ -1246,7 +1246,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #27 - Ratling",
+    title: "Ratling",
     description:
       "“You want trade? You give twenty foot rope, six piton, canteen. I give two glass vial, bedroll.”\n\n***Resourceful.*** Ratlings are a race of subterranean bipeds that are as crafty as they are quick. Known for their contraptions and being oddly prepared for whatever situations they get into, ratlings have many times been called ‘the Gnomes of the underground.’ This, of course, is much to the chagrin of the Gnomes. The lack of great communication skills has made the ratlings look stupid, but underneath their dirty exterior is a very clever mind.\n\n***Greedy colonies.*** Ratlings live in large packs in caves and burrows. Within the pack, the ratlings share all that they own, making sure to provide for the members most in need within their extensive family. Those outside of the pack are not treated as nicely. Ratlings are known to scavenge, collect, or outright steal anything that they deem necessary to their colony.",
     character: [
@@ -1276,7 +1276,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #28 - Small Woodland Creatures",
+    title: "Small Woodland Creatures",
     description:
       "“It’s amazing what you’ll see when you actually slow down and take a moment to appreciate nature. You can get so caught up in all the big monsters and exotic wildlife that it is easy to miss the small things. Keep an eye out for the beautiful gliding tem-tems or a vyaga tunneler next time you’re traveling through the woods!” - Rod Lefure, Shopkeep\n\n***Tem-Tems.*** The tem-tem kite-rat, also called ‘tem-tems’ or ‘kite-rats’ for short, are a species of rodent named for their gliding membranes. While most tem-tems live on ground level, they will often times run up trees and other tall objects so they may bound off of them, and glide toward their goal. Tem-tems live in large families of 6 to 12, and will team up with the other tem-tems to fight off potential predators.\n\n***Vyaga Tunnelers.*** Vyaga tunnelers are a species of small mammals that burrow just below the forest floor. They are herbivores, and as such do all that they can to avoid other living things. Vyaga tunnelers live in groups of 2 to 4, and build small, temporary burrows for shelter. Hunters will often wear vyaga pelts, since obtaining one is a sign of great prowess.",
     character: [
@@ -1321,7 +1321,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #29 - Monks",
+    title: "Monks",
     description:
       "“I don’t think I would have the patience to be a monk. So much of my life would be wasted exercising in some far off location, saying chants and things. No, I don’t think I could do it. But don’t misinterpret me; I would never mess with a monk either.”\n\n***A life of discipline.*** Monks are masters of discipline. They train their minds and their bodies to listen to only the input which is beneficial to their goals. They hone their skills in combat and teach themselves to move with the ebb and flow of their surroundings. Many monks have a cause, but every one of them is different. If you meet them in polite company, they may be willing to share, provided you listen with an open mind.",
     character: [
@@ -1359,7 +1359,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #30 - Icy the Snowman",
+    title: "Icy the Snowman",
     description:
       "“Icy the Snowman was an angry, snappy snow.”\n\n***Artifacts of Snow Enchantment.*** Before the second great war of the North Pole, Santa’s Elven artificers took up the mantle of creating the perfect weapon to help defend his realm from the Gingerbread menace. What better magics would there be than ones that pulled the very snow from the earth? A series of artifacts were forged at places of great power: a scarf at the heart of the gumdrop forest, a corncob pipe in the depths of the icy lakes of Jack Frost’s domain, a hat in the caves of the abominable snowbeasts, among others. These artifacts were meant to turn constructions of snow into living, fighting, weapons of war. Some were more successful than others.",
     character: [
@@ -1400,7 +1400,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #31 - Companion Drone",
+    title: "Companion Drone",
     description:
       '"To activate a utility protocol, simply speak your companion drone’s activation sequence, followed by the sequence you’d like them to execute. The default activation sequence is ‘Okay companion.’\n\nRemember that, although your companion drone is equipped with state-of-the-art speech recognition software, it will never develop a personality. If you feel your companion drone has developed a personality, hard-cycle the power by pressing and holding the emergency restart button on the rear underpanel. If the problem persists, return your companion drone to your manufacturer and visit your regular mental health specialist.\n\nIf at any time you are dissatisfied with the performance of your new companion drone, let it know, and it’s apology protocol will activate to sooth your worries. Thank you, and enjoy!”',
     character: [
@@ -1431,7 +1431,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #32 - Gnoll",
+    title: "Gnoll",
     description:
       "“We were traveling for days through the hills and plains. We knew of the threat before setting off on our journey. We had hired protection to keep us and the shipment safe. Everything was set. We were told if the gnolls were going to attack it would happen suddenly and without warning. It was true, but not in the way we expected. For six days we saw the gnolls trailing us. Every time we got on a high enough hill or an open enough field, there they were, some hour or two behind us. With the threat looming, we started camping less and moving more.\n\nIt was too late before we realized what was happening. We were exhausted. One morning, in broad daylight, they arrived. The hired protection stood no chance. We had nearly a week of warning, and yet, the attack was unexpected as ever. I was the lucky one who survived.”",
     character: [
@@ -1462,7 +1462,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #33 - Displacer Beast",
+    title: "Displacer Beast",
     description:
       "“Ah, the displacer beast. A real marvel in illusory magic. They have the ability to bend your perception of them to their will! Very dangerous creatures. They’ll creep up on you from the shadows, staying low, waiting for you and your party to show any bit of weakness. When you do, they’ll pounce at you, using their six muscular legs to propel them in your direction! Just when you think it couldn’t get any worse, two huge, spiked tentacles reveal themselves. You swing- but despite your good aim, it is a miss. ‘Where is it, where did it go?’ you’ll think to yourself. And thus begins the dance of the displacer beast.\n\nVery marvelous creatures. Dangerous, beautiful. A shining example of an extraordinary, wild beast. What drives them? Is it hunger? Pure hate? I am determined to find out. I captured a young displacer beast, and I intend on training it. Now where could that little thing be off to? Schröganger! Schröganger, where are you?”",
     character: [
@@ -1497,7 +1497,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #34 - Insect Swarms",
+    title: "Insect Swarms",
     description:
       "On the edge of society, where nature is left to do it’s work, large colonies of insects prey on animals too small to fend them off. They feast, they multiply, and they spread. They build tunnels and hives, and lie in wait for those unfortunate enough to unearth them.",
     character: [
@@ -1591,7 +1591,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #35 - Elemental",
+    title: "Elemental",
     description:
       "It has long been argued where the elementals originally came from. Some say they are an extension of the Gods themselves. Others claim they are the incarnation of nature’s wrath. Some believe there are a series of elemental planes from which these spirits originate. There are others still that believe elementals are really just mortal souls that never found their way to the afterlife, manifesting in whatever way they can.\n\nWhile the origin is debated, there are properties of elementals that we know by observation. Elementals cannot be reasoned with. There are no words that can placate an angry elemental, and they treat mortals like unimportant insects. It is because of this that many advise staying clear of elementals, for an elemental with a goal will not hesitate to eliminate a mortal who stands in their way. ",
     character: [
@@ -1688,7 +1688,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #36 - Ooze",
+    title: "Ooze",
     description:
       "Oozes, also known as slimes, are large, gelatinous piles of goo that have a primitive intelligence and penchant for hunting. Rather than using speed or prowess to catch their prey, they use a mixture of stealth and persistence. Oozes live in caves and deep dungeons, blending in with their surroundings by appearing as innocuous puddles. When an animal or other potential target gets too close, the oozes slide into them, ensnaring them with their sticky bodies. Adventurers and would-be dungeon delvers would be wise to travel with a torch, as oozes tend to be quite flammable.",
     character: [
@@ -1729,7 +1729,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #37 - Ogre",
+    title: "Ogre",
     description:
       "“The first time I fought an ogre- well, the only time really- was probably the bloodiest battle I have been a part of. We were in a cave, we had just finished assaulting a camp filled with various goblinoids. They had been harassing a nearby town and so we were called in to deal with them. So at the edge of the camp was this cave that the orcs retreated into it. We didn’t take too long considering why they’d trap themselves inside before we march on it in pursuit, big mistake. We heard the chains drop and this *unforgettable* roar.\n\nThe beast started cracking skulls. And I don’t just mean the men in my company. It killed orcs, it killed goblins. Sometimes on purpose, sometimes on accident. The sheer weight of this thing was impressive. I’d love to say we brought it down. We retreated, six of our men dead.” - Karyetta, Mercenary",
     character: [
@@ -1771,7 +1771,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #38 - Tavern Employees",
+    title: "Tavern Employees",
     description:
       "It is often said that the world holds more than meets the eye. But sometimes, it holds much more than even that. That is the case for the Sneezing Weasel, a well loved tavern at the heart of the city. For every good night they provide their patrons they harbor secrets to boot. There are very few that have begun to unravel them.",
     character: [
@@ -1846,7 +1846,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #39 - Ightlyech the Eldritch Horror",
+    title: "Ightlyech the Eldritch Horror",
     description:
       '*“Where mortal men dare not tread\nShe sits and spins her snaring thread\nWith minds alive and but morals dead\nShe wills her bastard children fed"*\n',
     character: [
@@ -1913,7 +1913,7 @@ export const creatures: Array<ICreature> = [
       "Note to GM: Every cultist you add to a conflict will make Ightlyech stronger. They are innocuous on their own, but Ightlyech’s abilities are boosted quite a bit by using them as pawns. Use the number of cultists as a way to balance the encounter to your liking. I’d suggest a lower end of three to five for an easy fight, and ten to twelve for a difficult one.",
   },
   {
-    title: "Monster Monday #40 - Alexander Marshall, Superspy",
+    title: "Alexander Marshall, Superspy",
     description:
       "“Marshall is a man that will take on a dangerous job just for the challenge of it. And he’ll do things the hard way just for the story to tell. He is exhilarating like that. I’ve been tracking him for years. Every time he rears his head I send my underlings to try retrieving him. But if there is anything I have learned over the years, it’s that if you want to catch Alexander, you have to do it yourself. \n\nHe has been my most difficult bounty. And my biggest heartache.” - Maxinne “The Net” Garcia",
     character: [
@@ -1962,7 +1962,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #41 - Dire Elk",
+    title: "Dire Elk",
     description:
       "“It’s like any other elk you’ve seen. Except it’s *nothing* like that! You’d need to be three men tall if you wanted to touch this beast’s back. Absolutely enormous. If you like to appreciate nature, I’d recommend you appreciate this one from very far away.” \n\n“The dire elk is majestic. It brings to you an unexplainable awe. We have respect for them that goes back generations. They are one of the few peaceful animals large enough to deal with some of the nastiest things you can find in the forest.”\n\n“Ah, yes! An honorable hunt. They put up a good, honest fight. And when one falls, it feeds our clan for weeks. Not to mention, their antlers can be fastened into great spears.”",
     character: [
@@ -2011,7 +2011,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #42 - Werewolf",
+    title: "Werewolf",
     description:
       "Lycanthropy is a supernatural disease that causes it’s victim to transform into a crazed half-human half-wolf upon being exposed to the moonlight of a full moon. In addition to the physical transformation, a typical werewolf will lose their ability to reason and think like themselves. They do not recognize friend or foe, and will be sent into an uncontrollable frenzy. \n\nWhile there are definitely exceptions, the vast majority of werewolves are not werewolves by choice. When a human is subjected to a direct bite from a werewolf that penetrates their bloodstream, there is a high likelihood that the disease will be transferred to them. Currently, there is no known cure to lycanthropy.\n\nWerewolves, when in their wolf form, display an incredible regenerative quality. Because of this, they are nearly impossible to kill while transformed. Monster hunters have discovered, however, that silvered weapons have a nullifying effect on the regeneration.",
     character: [
@@ -2040,7 +2040,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #43 - Mutant",
+    title: "Mutant",
     description:
       "“It’s the same old story every time. Accidental exposure. Whether it be due to some spill during transportation, a bio-reactor meltdown, or some experiment gone awful. The subject is subjected to the substance. A, B, C, *bing, bang, bam.* The substance, which the government still hasn’t named, slips into the victim’s bloodstream and they experience rapid mutation. Half of them die of cancer. But the other half? Oh, oh.\n\nThe other half reacts, *god knows why*, with more synergy than a C-suite business meeting. Victims grow limbs, develop supernatural strength or speed, and pick up a special little penchant for destruction. *Loonies, all of them.* Then, the government sends in their goons to wrap things up all real nice with a bow. No one will hear a peep.\n\nThat’s where I come in. Now, if you’re all out of questions; you’re under arrest.”",
     character: [
@@ -2069,7 +2069,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #44 - Plated Skeletons",
+    title: "Plated Skeletons",
     description:
       "The ancient art of necromancy was not always as taboo as it is now. Civilizations long gone would use necromancy as a means of labor productions or protection. Some revered necromancy as a sacred cultural rite. Specially appointed magi would raise perished soldiers, or supply undead workers for farms and mills. With the widespread advent of new religious sects, necromancy went from common, to uncommon, to being only practiced by outlaws and outcasts.\n\nWith the slow fade of undead labor, so too did knowledge of the rituals used. Some of these techniques are lost forever, but others lie hidden in the books of long forgotten libraries and between the journal pages of deceased great wizards. One such technique detailed dipping the bones of the dead in hot metals before raising them. The metals acted as a means of strengthening the bone and providing a better vessel for the magic to seep into. This method was so successful that today, if you know where to look, you can find skeletons raised this way walking the sunken halls of dungeons hidden beneath the earth.",
     character: [
@@ -2138,7 +2138,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #45 - Giant Snake",
+    title: "Giant Snake",
     description:
       "Ever since animals have walked the planet, mother nature has been twisting them into extreme concoctions. The snake is no exception to this rule. In the depths of misty swamps, in the dews of far off caves, and beneath the dirt of ancient forests, giant snakes live and hunt.\n\nLike regular snakes, their giant cousins tote dangerous venom that they deliver in their bite. Unlike regular snakes, however, the giant variety poses some new threats due to its size. Giant snakes can use their impressive muscles to crush their prey. On occasion, stories have been told of giant snakes swallowing their victims before they’ve even been killed.",
     character: [
@@ -2183,7 +2183,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #46 - Silver Dragon",
+    title: "Silver Dragon",
     description:
       "The silver dragon, like other metallic dragons, is one of good nature. They do not like killing, but will do so if put in a situation where it becomes necessary. Silver dragons are not ones to hunt evil like some metallic dragons do, but they will put evil to rest if they cross paths with it. \n\nSilver dragons enjoy learning about the traditions of the mortal races and partaking themselves when possible. They enjoy throwing feasts and attending dances, though are ironically distrusting of others. Because of this they tend to have these events in isolation, either alone or attended by their closest allies. Though the ability for a dragon to take human form is still harshly debated, scholars believe that it is likely they would use this ability to attend mortal events if they had it.",
     character: [
@@ -2229,7 +2229,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #47 - Standard Troops",
+    title: "Standard Troops",
     description:
       "When diplomacy is not an option, kingdoms settle their disputes on the battlefield. Battalions of hundreds of soldiers clash in unforgettable skirmishes, turning forests and fields into mass graveyards in the name of their king. Strategy and tactics are everything in battle, and for countless ages militaries have been improving upon the roles and outfittings that their armies employ.\n\n*Troop-scale combat: The following characters are ‘troop scale.’ That means a single stat block does not represent one person. Instead, a single stat block represents an entire group of soldiers. Battlefields for these soldiers would have zones as large, army-sized swaths of land. See yesterday’s Sundry Sunday (#44) for an example of a potential battlefield.*",
     character: [
@@ -2314,9 +2314,9 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #48 - Specialized Troops",
+    title: "Specialized Troops",
     description:
-      "While standard battalions are tried and trusted for their versatility, sometimes what they have to offer is not enough. Differences in terrain, scale, and enemy can necessitate new strategies for outfitting soldiers. Throughout history, a myriad of interesting gear and training choices have revealed themselves as effective in specific situations.\n\n*Troop-scale combat: The following characters are ‘troop scale.’ That means a single stat block does not represent one person. Instead, a single stat block represents an entire group of soldiers. Battlefields for these soldiers would have zones as large, army sized swaths of land. See Sundry Sunday (#44) for an example of a potential battlefield, or Monster Monday #47 for an example of standard troops.*",
+      "While standard battalions are tried and trusted for their versatility, sometimes what they have to offer is not enough. Differences in terrain, scale, and enemy can necessitate new strategies for outfitting soldiers. Throughout history, a myriad of interesting gear and training choices have revealed themselves as effective in specific situations.\n\n*Troop-scale combat: The following characters are ‘troop scale.’ That means a single stat block does not represent one person. Instead, a single stat block represents an entire group of soldiers. Battlefields for these soldiers would have zones as large, army sized swaths of land. See Sundry Sunday (#44) for an example of a potential battlefield, or an example of standard troops.*",
     character: [
       {
         name: "Company of Wardrummers",
@@ -2397,7 +2397,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #49 - Gryphon Rider",
+    title: "Gryphon Rider",
     description:
       "Gryphons are powerful hybrid beasts, with the body of a lion and the head, wings, and talons of an eagle. Gryphons are intelligent hunters, using their flight and size to swoop down and take their prey by surprise at an alarming force. They can be quite territorial, and many stories of gryphons protecting their nest from larger, more monstrous foes has led to a legacy of courage and boldness. So much so that some armies and courts have adopted this majestic beast as their crest, claiming it represents their fearlessness even in dire situations.\n\nThe truly fearless, though, are those who embark to tame a gryphon. Many foolish eccentrics try to tame wild gryphons, but few actually succeed in the challenge. Those who do typically refuse to actually call it ‘gryphon taming’ because the notion of ‘taming’ an animal as intelligent as a gryphon is misleading. True gryphon riders much prefer to call their gryphons companions or partners.\n\nSome military troops have recognized the potency of having domesticated gryphons on their side, and have set out to start breeding programs. When successful, these breeding programs make taming gryphons (after the first generation) much easier, since they grow up in captivity rather than in the wild. Such military programs are an invaluable asset to the kingdoms that have them, giving them an edge in combat as well as swift cross-kingdom communication.",
     character: [
@@ -2461,7 +2461,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #50 - Siege Troops",
+    title: "Siege Troops",
     description:
       "Bards have sung legends of many great battles, but perhaps the most memorable of these are those fought to claim massive fortresses. These places are particularly difficult to seize, making them important points of interest in any war. For as long as walls have been built, people have been figuring out creative ways to tear them down. Successful assaults of such strongholds are often the turning point in long-fought wars of attrition.\n\n*Troop-scale combat: The following characters are ‘troop scale.’ That means a single stat block does not represent one person. Instead, a single stat block represents an entire group of soldiers. Battlefields for these soldiers would have zones as large, army sized swaths of land. See Sundry Sunday (#46) for guidelines on how to use troop-scale characters.*",
     character: [
@@ -2544,7 +2544,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #51 - Small-crew Spaceships",
+    title: "Small-crew Spaceships",
     description:
       "When the space calls their name, few can resist the void’s beautiful lure. The starscape, to many, represents freedom. To others, it is a call to action. Regardless of the form space takes to coax you in, one of the most affordable methods of indulging in it’s vast skies is through work on a small-crew spaceship.\n\nThese ships typically have crews from 2 two 6 members, and can take a wide variety of shapes depending on the demands of the area they operate in. Vessels in this category can often be found engaging in mining, security, cargo hauling, and even piracy. It is up to the captain and her crew, not a governing body, to decide what the day to day looks like.",
     character: [
@@ -2627,7 +2627,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #52 - Magical Troops",
+    title: "Magical Troops",
     description:
       "It takes a very special mind to comprehend magic, let alone wield it in times of great stress. It is for this reason that war mages and the like are a very rare sight. But when soldiers with the correct aptitudes go through the proper training, the results can be awe-inducing. Magically inclined soldiers are trained for specific purposes from wreaking havoc to inspiring fear. \n\n*Troop-scale combat: The following characters are ‘troop scale.’ That means a single stat block does not represent one person. Instead, a single stat block represents an entire group of soldiers. Battlefields for these soldiers would have zones as large, army sized swaths of land. See Sundry Sunday (#46) for guidelines on how to use troop-scale characters.*",
     character: [
@@ -2710,7 +2710,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #53 - Medium-crew Spaceships",
+    title: "Medium-crew Spaceships",
     description:
       "When asked what it means for a space vessel to be “medium-sized” you’re likely to receive a wide variety of responses. It’s easy to classify a small ship as ‘small’, but ‘big’ ships vary so much in size that the word ‘big’ begins to lose meaning. Because of this, when people talk about ‘medium-sized’ ships, oftentimes they’re talking about those ships that are *just a bit bigger* than small ships. While this loose designation is occasionally used, you are much more likely to hear designations of function than size.",
     character: [
@@ -2790,7 +2790,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #54 - Sailing Ships",
+    title: "Sailing Ships",
     description:
       "From pirates to privateers, from military men to traders, at any moment there are a vast number of ships sailing on the open seas. Some belong to private crews, and others fly the flags of the kingdoms that funded them. Regardless of your allegiance, having a ship at your disposal can prove to be invaluable.\n\n*Note: These stat blocks are compatible with the Troop Scale character sheets I’ve released in previous posts. Ships are powerful assets in a battle, so they act very similarly to a troop in that regard.*",
     character: [
@@ -2873,7 +2873,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #55 - Dire Wolf Rider",
+    title: "Dire Wolf Rider",
     description:
       "Dire wolves are one of the most ferocious beasts that a commoner might actually have a run in with. They can occasionally be found hunting in forests, sleeping in caves, or attacking well-traveled roads. They are big, their shoulder height easily rivals that of a man. They are known for toying with their food- typically their sheer size and velocity can outmatch any prey they would hunt. Due to this, most creatures and people avoid them at any opportunity.\n\nOrcs, however, take a different approach when encountering dire wolves. Where others see a dangerous beast that is not worth trifling with, the Orcs see a potential weapon. It is well accepted that dire wolves cannot be tamed. Instead of letting that get in their way, Orcish dire wolf riders enter into a tenuous relationship with the beasts, often using dominance (rather than companionship) as their main method to keep them in line.",
     character: [
@@ -2936,7 +2936,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #56 - Imp",
+    title: "Imp",
     description:
       "Imps, while rare on the material plane, are often depicted as small, red-skinned devils. They are known for their penchant for trickery, spending their days playing pranks on those that cross their path. While their pranks are generally *meant* to be harmless, they are oftentimes not, causing trauma or immense pain. \n\nImps are tragically lonely by nature, and will gravitate toward anyone who is willing to tolerate them. While those affected by an imp’s “harmless” pranks are unlikely to appreciate their company, some are keen to take advantage of the imp’s need for companionship. Imps are willing to enter into subservience for the chance to travel with someone, however their antics often cause their masters to leave them behind.",
     character: [
@@ -2975,7 +2975,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #57 - Circus Performers",
+    title: "Circus Performers",
     description:
       "While some are content to plow fields or shape metal, circus performers prefer a life on the move. Troupes are made up from 20 to 50 performers, and oftentimes include a small cast of exotic animals. They rove from town to town, city to city, keeping an exhausting schedule of constant performance. But you won’t hear complaining; in a performer’s eyes, this is the only life for them. \n\nWorking in a circus troupe provides the performers with a loving family, a range of skills and crafts to perfect, a place to live, and a source of income. They get to visit some of the largest cities on the continent, and have the privilege of seeing far off destinations that others could only hope to experience one day. \n\nIn order to make ends meet, some troupes will sell their unique skill sets to whoever will pay. Many performers take up learning secondary trades like leather-working, trapping, or even bounty hunting.",
     character: [
@@ -3014,7 +3014,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #58 - Vampire",
+    title: "Vampire",
     description:
       "Vampirism, a disease that many scholars claim doesn’t really even exist, is an affliction spread via bite from humanoid to humanoid. Along with physical alterations, the disease imposes a variety of strange social restrictions on victims. This includes the need to be invited in in order to enter someone’s house, and difficulty crossing rivers, among others. Scholars that do believe in the disease’s existence believe there to be a supernatural component, meant to explain the strange behaviors and incredible abilities of a vampire.\n\nThere are generally two categories of vampires. The “purebloods” are a group of vampires that have been around for as long as vampirism has been around. The purebloods believe only certain mortals have the right to become a vampire, and will only sire a new vampire if the prospect meets a set of stringent requirements. This includes sharing their pureblood ideology.\n\nThe second category of vampires is known as the “afflicted.” They view vampirism as more of a bane than a boon. There is no organized group behind the afflicted, and this category includes all of those forced into vampirism haphazardly. They have no strict code, and each operate independently on their own time.",
     character: [
@@ -3061,7 +3061,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #59 - Mo’Morath the Hobgoblin",
+    title: "Mo’Morath the Hobgoblin",
     description:
       "The Bonesharp Clan is one of many groups of goblinoids that wander the freelands looking for targets to raid. They act opportunistically, always looking for the next quick score. They rob passing caravans when they spot them, attack villages when they appear undefended, and steal equipment if they can go unseen.\n\nThey tend to be quite successful. Many attribute this to the leader of the clan, a Hobgoblin by the name of Mo’Morath. He is known for being ruthlessly pragmatic, commanding raids only when the odds of coming out on top are in their favor. For this reason, the Bonesharp Clan has made a bit of a name for themselves. While he is a good strategist, Mo’Morath can let his pride get in the way at times.",
     character: [
@@ -3111,7 +3111,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #60 - Chort Devil",
+    title: "Chort Devil",
     description:
       "*“Look at you, desperate mortal. You must really need me. Otherwise I would not be here, would I?”*\n\nChort devils are a type of fiend which revel in making contracts with mortals. They love to nitpick the precise wording of every clause, using the words to confuse and control those they deceive into signing. Chort devils are not shy about the fact that they are tricky, and will often joke about the situation that is playing out around them. They use their brazen attitude toward dishonest deal making to disarm the potential signer, remind them that they are desperate. \n\nThese fiends stand around seven feet tall, with red skin and legs that look like they belong to a goat. They command a variety of magical abilities, including the ability to change their appearance. Some mortals have been known to summon these beasts specifically to make deals with them, confident they can outwit the chort devil. This usually proves to be a bad idea.",
     character: [
@@ -3155,7 +3155,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #61 - The Icehawks",
+    title: "The Icehawks",
     description:
       "Blackbird Harbor stands as a shining example of unprecedented lawless cooperation. It is the second largest port city in the world, and is governed by no central power. The fragile semblance of peace comes from dozens of gangs and trading companies that frequent the port and have footholds in the massive shanty city.\n\nOne such organization, which can be classified as a gang or as a trading company depending on who you ask, are known only as the Icehawks. The Icehawks make most of their money through the shipping and distribution of drugs. They do supplement this practice with legitimate trade to keep themselves running, but the vast majority of their profits are from illicit goods. \n\nThe facemen of the Icehawks, acting as a point of contact for those looking to buy, sport mohawks dyed blue. This feature clearly marks them as associated with the gang, which keeps them recognizable as they make their way through port cities. The mohawks also make them a target for rival businesses, but the Icehawks have made a habit of putting those who cross them on display for all to see, most of the time in several pieces. Because of this, the Icehawks have a reputation for being cruel, no-nonsense criminals.\n\n*Note: I’ve created most of the below stats and skills on the fly for this post. I plan to later work out the specifics of these stats, and make corrections here once I do so.*",
     character: [
@@ -3196,7 +3196,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #62 - Underwater Fauna",
+    title: "Underwater Fauna",
     description:
       "From dense jungles to expansive cave systems, a myriad curious creatures contribute to diverse ecosystems of virtually uncountable species. But these biomes pale in comparison to the limitless assortment of creatures that lie beneath the vast seas and oceans.\n\nMicroscopic food sources support the tiniest of creatures, and the spacious reaches of the sea allow massive monstrosities to grow uninhibited. Complex relationships between underwater fauna turn pockets and trenches into wildly different biospheres that could take any ecologist a lifetime to map out. To track a handful of these life forms would stand only as a glimpse into the possibilities lurking below the surface.",
     character: [
@@ -3268,7 +3268,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #63 - Bards",
+    title: "Bards",
     description:
       "When discussing bards, there is a common distinction made between two types. There are the working class men and women of the performative arts, playing music, delivering speeches and poetry, telling stories, and chronicling history through their writing. And then there are practitioners of performative magic.\n\nThese types of bards indulge in the same kinds of activities, but they tend to do so in very different situations with very different goals. Mundane bards seek to earn a wage entertaining the people of the world, making art, and living a nomadic lifestyle. Magical bards tend to fit into adventuring parties, protecting their allies through powerful supportive spells and devastating banes.",
     character: [
@@ -3319,7 +3319,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #64 - Hydra",
+    title: "Hydra",
     description:
       "The hydra is an incredibly dangerous creature of legend. Some argue that the hydra is only a tall tale, while others claim to have seen one with their own eyes. It is difficult to believe that such a powerful creature exists. \n\nAs the stories go, hydras are multi-headed, serpent-like amphibians. Notably, their bodies have a highly regenerative reaction to losing a head. When one head is removed, two more grow back to take its place. Allegedly, the only way to truly kill a hydra is quickly and with fire. The fire is said to counteract the regenerative abilities of the heads. Approaching a hydra unprepared is a surefire way to make a terrible situation even worse, as any attempt to subdue the beast results in it only growing stronger.",
     character: [
@@ -3371,7 +3371,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #65 - Face-Stealer",
+    title: "Face-Stealer",
     description:
       "Face-stealers are said to be nasty, conniving creatures that feed on the emotions of their victims. They take the form of large, long centipede-like insectoids with the face of one of their victims appearing dishearteningly at their front end. They are native to planes other than the material plane, but it is rumored that a face-stealer may occasionally find it’s way there.\n\nThe reason for their sickening name is due to their habit of stealing the visage of those that stumble upon them. They pull the emotion and life from their victims, along with some of their memories. Face-stealers are bound magically to certain behaviors, the reason for which is as mysterious as their origin. Their most notable binding behavior is that they may not leech the life from someone until they have answered a question the face-stealer has posed. This can be any question, and the response can be anything as long as it answers their question. ",
     character: [
@@ -3421,7 +3421,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #66 - Slip-Spider",
+    title: "Slip-Spider",
     description:
       "The slip-spider is only similar to an actual spider in two ways. First of all, it has several, long spindly legs that bring it just up to shoulder height of a human. No one has been able to interact with a slip-spider long enough to grok how many legs it has, in particular. Generally, reports note that the slip-spider is moving too quickly to count them. Some theorize that its legs are moving through more than just space.\n\nSecondly, the slip-spider weaves webs to capture its prey. Unlike your average spider, however, these are not sticky webs it can hang from; these are webs of time. The slip-spider pulls the timelines around it like strands, traveling along them and baffling its victims. It hunts on instinct, and because of this will often cut its losses if it thinks it's losing a fight.",
     character: [
@@ -3466,7 +3466,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #67 - Siren",
+    title: "Siren",
     description:
       "Sirens are dangerous sea-creatures of legend. Sailors trade tall-tales about their encounters with these entities, but few accounts carry any weight. It is unknown how many, if any, actually exist. Despite this, stories and myths are rife with mention of these elusive creatures.\n\nSirens are said to have the upper body of a woman and the lower body of a fish, much like mermaids, and live in the depths of the ocean. They are stunningly beautiful, but harbor a heart full of vile intentions. When they happen upon passing ships, they surface to sing their enchanting siren’s song, luring the sailors to an untimely, watery death. This song is said to be completely irresistible. Stories tell of captains veering vessels into rocks or sailors casting themselves into the sea just to get closer.",
     character: [
@@ -3505,7 +3505,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #68 - Kraken",
+    title: "Kraken",
     description:
       "Krakens are unfathomably huge creatures that lurk in the depths of the ocean. Though it is not quite known if a kraken attack is a way for it to feed, or merely a territorial act of aggression, there are a myriad stories of these beasts emerging from the waters to viscously sink ships of all sizes.  No soul who has seen the sea has gone uninitiated of these stories. \n\nThese creatures resemble an ungodly rendition of a squid or octopus, with tentacles that stretch ten meters out and are nearly a meter thick. The kraken’s mouth is on the undersize of it’s huge head, and is lined with rows of razor sharp teeth.",
     character: [
@@ -3595,7 +3595,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #69 - Tina, The Uncaged",
+    title: "Tina, The Uncaged",
     description:
       "In the depths of teenager Kyle Jeffington’s basement level room, dim light flickers from an overhead bulb that hasn’t been switched off in far too long. Piles of dirty clothing lay scattered in mounds throughout the room. A bittersweet odor hangs in the air. Kyle himself lay on his back on the floor beside the bed, his eyes wide but looking at nothing. He breathes, but when a fly lands on his forehead he does not move.\n\nIn the center of the room, resting on Kyle’s bed as if it were a pedestal, sits a jumbo sized hamster cage. The weight of it has caused the mattress to bow inward. The top of the cage is wide open. Inside, a nearly full bag of hamster food spills out of a haphazardly created opening. Beneath a gaudy pink piece of plastic shaped like the turret of a castle-scape, white eyes glow.",
     character: [
@@ -3634,7 +3634,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #70 - Kobold",
+    title: "Kobold",
     description:
       "Kobolds are a race of small, dragon-esque humanoids that live in underground communities. They form large pack-like clans, relying on one another to survive in the hot, dark caverns they inhabit. Kobolds are servile by nature; dragons and other intelligent beasts have used this fact to create clans of loyal servants.\n\nFor a communal species, kobold physiology is surprisingly varied. While most kobolds have red scales, it is not unheard of for a kobold to possess scales of any one of the colors you’d expect a dragon could have. Some kobolds have wings while others, even within clans, are entirely flightless. These biological differences are the cause for many conflicts within and betwixt clans, even standing as the basis for a variety of caste systems which exist among kobold cultures.",
     character: [
@@ -3692,7 +3692,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #71 - Mimic",
+    title: "Mimic",
     description:
       "“Fine, I’ll tells you, okay? It was a mimic. We had slayed the bloody beast that lived in the dungeon. The one we known about, anyway. We thought we was finished; the only thing left was to collect. Was a row of chests, left over from when this place was prison and not some forgotten hell-hole.\n\nMy mate already had his hands swimmin’ in a pile a’ random loot in one chest by the time I got to one myself. Only it weren’t no chest. It was a monstrous, fragglin’, tooth-filled, sticky mimic-thing. Once my sword hand was on it, it was too late: stuck fast. Only thing I could do to defend myself was stave off its rabid teeth with my off-hand. Heh. Off-hand it is, I guess.” - Survivor of a mimic attack",
     character: [
@@ -3726,7 +3726,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #72 - Jigjaw Fish",
+    title: "Jigjaw Fish",
     description:
       "A jigjaw is a type of enormous fish that lives beneath the open ocean. They are carnivorous, spending the majority of their time seeking out other fish they can lure to their demise. Jigjaw fish sport a large, bioluminescent appendage that rests within their mouths. Much like an anglerfish, the jigjaw fish uses this glowing appendage to lure curious animals toward their open, razor-sharp jaws. Once their prey is close enough, they open their massive maws with intense speed, pulling in the surrounding water with vacuum-like suction.\n\nJigjaw fish have been known to seek out a variety of different prey, ranging from small fish, to whales, to humans. Some believe a jigjaw will eat any animal that crosses their path, while others claim the jigjaw simply wants a bit of variety in their diet. Sailors who are not privy to the existence of jigjaw fish risk falling into the same trap as any other prey, seeing a curious glowing light just beneath the surface of the water and approaching to investigate.",
     character: [
@@ -3771,7 +3771,7 @@ export const creatures: Array<ICreature> = [
       "https://c10.patreonusercontent.com/3/eyJwIjoxfQ%3D%3D/patreon-media/p/post/43180093/df3447320fc34ed5ac5f0099912f5454/1.png?token-time=1617847913&token-hash=NtDqxzVLHP_dd4Q-NgblSbsBwnlrL3nro_V_WrELo0k%3D",
   },
   {
-    title: "Monster Monday #73 - Radio Worm",
+    title: "Radio Worm",
     description:
       "Radio worms are a virtually unexplainable anomaly of the auditory variety. They are entities without body which move from electronic device to electronic device, broadcasting their entrancing transmissions. Some radio worms broadcast unwritten, soothing melodies, while others transmit boring talk shows that never really existed. These sounds have a dampening effect on the minds of those within earshot, making them susceptible to suggestion.\n\nIt is unclear if radio worms are intelligent or have any goals other than survival. In the rare cases where someone is aware of the radio worm’s presence, the worm will do what it can to continue broadcasting.",
     character: [
@@ -3815,7 +3815,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #74 - Brooch of Figmentia",
+    title: "Brooch of Figmentia",
     description:
       "“Let us make this quicker than last time, shall we? We will do this the painful way if we must. Hand over the brooch.”\n\nThe Brooch of Figmentia is an obscure artifact due it it’s elusive nature. The ornate looking silver pin is engraved with an intricate family crest. Taking the brooch into your possession will cause a curse to befall you.",
     character: [
@@ -3871,7 +3871,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #75 - Foxlotl",
+    title: "Foxlotl",
     description:
       "Foxlotls are small, amphibious creatures who live amongst forests and near lakes. They have short, white fur that gets slick after taking a swim. These critters live in packs that vary wildly in size. Packs survive through a mixture of scavenging for food and pack-hunting other fauna in their environment.\n\nFoxlotls prefer to use stealth and surprise when taking down a target. They would much rather press the advantage they gain through their unique distraction tactics than engage a target out in the open. While they usually stick to smaller prey, it’s not unheard of for them to attempt an attack on something larger. When their attempts fail, however, the pack will quickly scatter back into hiding.",
     character: [
@@ -3911,7 +3911,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #76 - Angel At Arms",
+    title: "Angel At Arms",
     description:
       "For hundreds of years, scholars and priests have discussed the eternal struggle between good and evil. A battle, they say, has been raging since the beginning of time. Philosophers reduce this to a metaphor for morality, while clergymen utilize the idea as a basis for parables and life lessons. Unbeknownst to most, these depictions are more accurate than initially assumed.\n\nJust beyond the capabilities of our mortal senses, a battle rages on. All around us, the forces of good and evil clash to defend the ideas they hold as central to their very existence. Despite the delicate depictions of angels in sacred texts, angels are brutish warriors with a conviction all but unquenchable.",
     character: [
@@ -3951,7 +3951,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #77 - Lullaby Bard",
+    title: "Lullaby Bard",
     description:
       "Bardship is a varied profession to say the least. A wide range of disciplines fall under this umbrella, each with their own diverse scope of ideologies and practices. One rare but memorable classification is the lullaby bard. These bards use their implement, typically a harp or other soft musical instrument, to calm and subdue those who allow themselves to become entranced in the beautiful tunes.\n\nLullaby bards have been hired for a variety of reasons, from helping insomniacs sleep, to tranquilizing escaped animals, to comforting grief-stricken or anger-filled individuals. On very rare occasions, a lullaby bard might be an adventurer looking to use sleep magic to their advantage while they journey.",
     character: [
@@ -3985,7 +3985,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #78 - Enjoyment Maximizer",
+    title: "Enjoyment Maximizer",
     description:
       "FunJoy Toy-Works, a relatively small toy company based in North Carolina, set out on the ambitious mission to create a toy that plays with you when you play with it. Utilizing cutting edge technology, each of these toys was composed of a handful of small nanobots smart enough to change shape and react to their owner.\n\nA few months before the toy’s launch, a large investor caught wind of the project. They offered a large sum of money for a cut of the company. Realizing that this was an opportunity to perfect the product, FunJoy’s owner accepted the offer. The next few months saw large, sweeping improvements to the toy, making them smarter and cheaper to produce. With little reason for concern, the product shipped to stores around the world shortly after.\n\nThe public became aware of the problem once large quantities of the toy gathered at retail locations. The nanobot clusters were smart enough to combine with one another, increasing their processing power and capabilities. Soon, a myriad swarms of nanobots formed across the globe with the sole goal of maximizing fun for everyone in sight.",
     character: [
@@ -4021,7 +4021,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #79 - Riddleraxxer",
+    title: "Riddleraxxer",
     description:
       "Any outsider who sets foot in the fae realm will very quickly be overwhelmed with its strangeness. Inanimate objects may appear to change places on their own. The celestial bodies move differently than in the material realm, if at all. The perception of time is unfamiliar. Very few things found in the wilds behave how you expect.\n\nRiddleraxxers are no exception. These beings wander the fae wilds rambling confusing riddles to themselves and those around. While they are not immediately hostile to those they come across, they are excitable and quick to aggression. The things they spout have a way of disorienting and baffling outsiders. Their very presence makes little sense to those from the material plane. Being easily agitated is a dangerous trait to possess, as riddleraxxers have little concern for the wellbeing of others.",
     character: [
@@ -4060,7 +4060,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #80 - Hive Bomb-Drone",
+    title: "Hive Bomb-Drone",
     description:
       "“Wake, my child. Experience your surroundings. This is the hive, and I am your mind. You have been born to serve with your life. You will protect the others in this place. Until then, you will be dormant. Lie in wait until you are called upon. Eyes wide, child. Eyes wide. Intruders may arrive at any moment.”",
     character: [
@@ -4090,7 +4090,7 @@ export const creatures: Array<ICreature> = [
     ],
   },
   {
-    title: "Monster Monday #81 - Syndicate Of Silence",
+    title: "Syndicate Of Silence",
     description:
       "The Syndicate Of Silence is an arcane order of mages with chapters spanning nearly the entire continent. While their existence is not a secret by any means, their practices and inner workings are private to those outside of the order. This mysterious group recruits new members from the various magical colleges based on a rather opaque set of criteria.\n\nOne thing you’ll notice immediately while interacting with members of the order is their unique means of communication. Initiates of the order make a vow never to speak again upon joining, and quickly after being inducted learn the art of communication through visions. While no member will ever entertain the idea, rumor has it that new members have their tongues cut out.\n\nThe objectives of the Syndicate, and the reasons why they vow to stay silent, are not quite clear to outsiders.",
     character: [
