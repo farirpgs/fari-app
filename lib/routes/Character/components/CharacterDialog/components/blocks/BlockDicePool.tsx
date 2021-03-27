@@ -1,9 +1,9 @@
 import { css, cx } from "@emotion/css";
-import { darken, lighten } from "@material-ui/core";
 import Box, { BoxProps } from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
+import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import { default as React } from "react";
