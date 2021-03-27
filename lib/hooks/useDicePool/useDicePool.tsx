@@ -9,6 +9,7 @@ import {
 export function useDicePool() {
   const [pool, setPool] = useState<IDicePool>([]);
   const diceManager = useContext(DiceContext);
+
   function addOrRemovePoolElement(element: IDicePoolElement) {
     setPool((draft) => {
       const ids = draft.map((element) => element.blockId);
