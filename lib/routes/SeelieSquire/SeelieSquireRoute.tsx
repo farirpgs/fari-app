@@ -5,11 +5,11 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
+import { creatures } from "./domains/creatures";
 import {
   ICharacter as ICreatureCharacter,
   ICreature,
 } from "./domains/ICreature";
-import { creatures } from "./domains/toto";
 
 export const SeelieSquireRoute: React.FC<{
   page: string;
