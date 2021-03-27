@@ -1342,6 +1342,7 @@ export const CharacterV3Dialog: React.FC<{
           <Link
             component="button"
             variant="caption"
+            data-cy={`character-dialog.${section.label}.${block.label}.remove`}
             className={css({
               label: "CharacterDialog-remove",
               color: theme.palette.primary.main,

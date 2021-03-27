@@ -165,6 +165,7 @@ export const SheetHeader: React.FC<{
         onClose={handleClose}
       >
         <MenuItem
+          data-cy={`character-dialog.${props.label}.move-up`}
           onClick={() => {
             handleClose();
             props.onMoveUp();
@@ -176,6 +177,7 @@ export const SheetHeader: React.FC<{
           {t("character-dialog.control.move-up")}
         </MenuItem>
         <MenuItem
+          data-cy={`character-dialog.${props.label}.move-down`}
           onClick={() => {
             handleClose();
             props.onMoveDown();
@@ -187,6 +189,7 @@ export const SheetHeader: React.FC<{
           {t("character-dialog.control.move-down")}
         </MenuItem>
         <MenuItem
+          data-cy={`character-dialog.${props.label}.switch-side`}
           onClick={() => {
             handleClose();
             const newPosition =
