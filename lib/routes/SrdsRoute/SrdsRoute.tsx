@@ -221,7 +221,7 @@ export const WikiItems: React.FC = (props) => {
             }
             bgColor="#3c5c39"
             imageUrl={Images.seelieSquire}
-            link="/seelie-squire"
+            link="/seeliesquire"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>

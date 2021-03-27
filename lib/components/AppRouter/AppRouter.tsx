@@ -177,7 +177,7 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/seelie-squire/:page?"}
+          path={"/seeliesquire/:page?"}
           render={(props) => (
             <SeelieSquireRoute page={props.match.params.page} />
           )}

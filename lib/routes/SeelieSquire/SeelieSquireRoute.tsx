@@ -19,7 +19,7 @@ export const SeelieSquireRoute: React.FC<{
   return (
     <Doc
       page={props.page}
-      url="/seelie-squire"
+      url="/seeliesquire"
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
       imageUrl={Images.seelieSquire}
