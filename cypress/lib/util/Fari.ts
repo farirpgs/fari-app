@@ -16,6 +16,9 @@ export const Fari = {
   get(tag: string) {
     return cy.get(`[data-cy='${tag}']`);
   },
+  getByText(text: string) {
+    return cy.contains(text);
+  },
   find(element: Cypress.Chainable, tag: string) {
     return element.find(`[data-cy='${tag}']`);
   },

@@ -4,7 +4,7 @@ describe("/oracle", () => {
   describe("Given I want to ask a question to the oracle", () => {
     it("should ask questions to the oracle ", () => {
       Fari.start();
-      Fari.get("home.oracle").click();
+      Fari.getByText("Consult the Oracle").click();
 
       askOracle();
 

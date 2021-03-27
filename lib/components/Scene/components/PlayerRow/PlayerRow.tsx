@@ -266,6 +266,7 @@ export const PlayerRow: React.FC<
           <Grid item>
             <IconButton
               size="small"
+              data-cy={`${props["data-cy"]}.counter.decrement`}
               onClick={() => {
                 pointsManager.actions.decrement();
               }}
@@ -278,7 +279,7 @@ export const PlayerRow: React.FC<
         )}
         <Grid item>
           <CircleTextField
-            data-cy={`player-row.points`}
+            data-cy={`${props["data-cy"]}.counter.value`}
             value={pointsManager.state.points}
             readonly={!props.permissions.canUpdatePoints}
             highlight
@@ -302,7 +303,7 @@ export const PlayerRow: React.FC<
             </Grid>
             <Grid item>
               <CircleTextField
-                data-cy={`player-row.max-points`}
+                data-cy={`${props["data-cy"]}.counter.max`}
                 value={pointsManager.state.maxPoints ?? ""}
                 readonly={!props.permissions.canUpdatePoints}
                 highlight
@@ -317,6 +318,7 @@ export const PlayerRow: React.FC<
           <Grid item>
             <IconButton
               size="small"
+              data-cy={`${props["data-cy"]}.counter.increment`}
               onClick={() => {
                 pointsManager.actions.increment();
               }}

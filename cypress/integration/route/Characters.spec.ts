@@ -53,7 +53,11 @@ describe("/characters", () => {
       Fari.get("character-dialog.group").find("input").type("Star Wars");
 
       // save
-      cy.title().should("eq", "Manage your Characters | Fari");
+
+      cy.title().should(
+        "eq",
+        "Play Table-Top RPGs Online without the headache | Fari"
+      );
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
@@ -155,7 +159,7 @@ describe("/characters", () => {
   });
 
   describe("Given I want to customize my character sheet", () => {
-    it.only("should let me do it using the advanced mode", () => {
+    it("should let me do it using the advanced mode", () => {
       Fari.start();
       cy.visit("/");
 
