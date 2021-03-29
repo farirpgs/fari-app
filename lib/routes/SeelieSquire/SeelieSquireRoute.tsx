@@ -74,7 +74,10 @@ function makeSeelieSquireMarkdown(props: {
   const markdown = `
 # Seelie Squire's Book of Creatures
 
-... 
+> Brought to you by Seelie Squire, this is
+ultimate resource if you are looking for the closest thing to a
+Fate Compendium.
+
 
 ${creatures
   .map((c) => {

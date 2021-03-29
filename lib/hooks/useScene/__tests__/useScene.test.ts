@@ -970,6 +970,7 @@ function mockUseCharacters() {
       upsert: jest.fn(),
       updateIfExists: jest.fn(),
       remove: jest.fn(),
+      duplicate: jest.fn(),
       select: jest.fn(),
       clearSelected: jest.fn(),
       closeManager: jest.fn(),

@@ -118,6 +118,22 @@ export function useScenes(props?: { localStorage: Storage }) {
     });
   }
 
+  function duplicate(id: string | undefined) {
+    setScenes((draft: Array<ISavableScene>) => {
+      const match = draft.find((c) => c.id === id);
+
+      return [
+        ...draft,
+        {
+          ...match,
+          id: Id.generate(),
+          lastUpdated: getUnix(),
+          name: `${match?.name} Copy`,
+        } as ISavableScene,
+      ];
+    });
+  }
+
   return {
     state: {
       mode: mode,
@@ -131,6 +147,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       add,
       upsert,
       remove,
+      duplicate,
     },
   };
 }

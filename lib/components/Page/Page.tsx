@@ -183,7 +183,7 @@ export const Page: React.FC<{
                   color="primary"
                   startIcon={<ChatIcon />}
                 >
-                  {"Come chat on Discord"}
+                  {t("home-route.sections.join-community.cta")}
                 </AppButtonLink>
               </Grid>
               <Grid item xs={isSmall ? 12 : undefined}>
@@ -522,15 +522,6 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
                 className={linkClassName}
-                to="/srds"
-                component={RouterLink}
-              >
-                {t("menu.srds")}
-              </AppLink>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
                 to="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
@@ -541,11 +532,19 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
                 className={linkClassName}
-                data-cy="page.menu.about"
-                to="/about"
+                to="/srds"
                 component={RouterLink}
               >
-                {t("menu.about")}
+                {t("menu.srds")}
+              </AppLink>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <AppLink
+                className={linkClassName}
+                to="/blog"
+                component={RouterLink}
+              >
+                {t("home-route.cards.blog.title")}
               </AppLink>
             </Grid>
           </>

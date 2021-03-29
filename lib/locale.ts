@@ -222,5 +222,6 @@ export type ITranslationKeys =
   | "player-row.not-played"
   | "player-row.open-character-sheet"
   | "player-row.played"
-  | "player-row.remove-character"
+  | "player-row.remove-player"
+  | "player-row.remove-player-confirmation"
   | "player-row.swap-character-sheet";

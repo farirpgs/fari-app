@@ -314,8 +314,8 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
       "+Fari Wiki": ["introduction"],
       "+Getting Started": [
         "playing",
-        "managing-scenes",
         "managing-characters",
+        "managing-scenes",
         "tips-and-tricks",
       ],
     },

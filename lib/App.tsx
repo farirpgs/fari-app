@@ -6,24 +6,24 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
+import { AppAnalytics } from "./components/AppAnalytics/AppAnalytics";
 import { AppRouter } from "./components/AppRouter/AppRouter";
 import { CharactersManager } from "./components/CharactersManager/CharactersManager";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
-import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { env } from "./constants/env";
 import {
   CharactersContext,
-  useCharacters,
+  useCharacters
 } from "./contexts/CharactersContext/CharactersContext";
 import {
   DarkModeContext,
-  useDarkMode,
+  useDarkMode
 } from "./contexts/DarkModeContext/DarkModeContext";
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   ScenesContext,
-  useScenes,
+  useScenes
 } from "./contexts/SceneContext/ScenesContext";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { AppDarkTheme, AppLightTheme } from "./theme";
@@ -67,7 +67,7 @@ export const AppProvider: React.FC<{}> = (props) => {
                   "client-context": env.context,
                 }}
               />
-              <History />
+              <AppAnalytics />
               <ScenesManager />
               <CharactersManager />
               <AppRouter />

@@ -54,6 +54,11 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     logger.info("CharactersManager:onDelete");
   }
 
+  function onDuplicate(character: ICharacter) {
+    charactersManager.actions.duplicate(character.id);
+    logger.info("CharactersManager:onDuplicate");
+  }
+
   function onImport(charactersToImport: FileList | null) {
     FariEntity.import<ICharacter>({
       filesToImport: charactersToImport,
@@ -100,6 +105,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
+      onDuplicate={onDuplicate}
       onUndo={onUndoDelete}
       onClose={charactersManager.actions.closeManager}
       onImport={onImport}

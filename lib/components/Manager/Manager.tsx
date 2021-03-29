@@ -15,6 +15,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ExportIcon from "@material-ui/icons/GetApp";
 import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
@@ -46,6 +47,7 @@ type IProps<T extends IBaseItem> = {
   onItemClick(item: T): void;
   onAdd(): void;
   onDelete(item: T): void;
+  onDuplicate(item: T): void;
   onUndo(item: T): void;
   onImport(importPaths: FileList | null): void;
   onExport(item: T): void;
@@ -86,6 +88,10 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
     props.onDelete(item);
   }
 
+  function onDuplicate(item: T) {
+    props.onDuplicate(item);
+  }
+
   function onImport(itemsToImport: FileList | null) {
     props.onImport(itemsToImport);
   }
@@ -102,7 +108,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       classes={{
         paper: css({
           width: "85%",
-          maxWidth: isSmall ? undefined : "25rem",
+          maxWidth: isSmall ? undefined : "30rem",
         }),
       }}
     >
@@ -220,7 +226,12 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
               key={`${groupName}-${index}`}
               subheader={
                 <ListSubheader component="div">
-                  <FateLabel variant="caption">
+                  <FateLabel
+                    variant="caption"
+                    noWrap
+                    display="block"
+                    className={css({ marginTop: "1rem" })}
+                  >
                     {groupName || t("manager.ungrouped")}
                   </FateLabel>
                 </ListSubheader>
@@ -260,24 +271,41 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
                       secondary={listItem.formatDate(vm.lastUpdated)}
                     />
                     <ListItemSecondaryAction>
-                      <IconButton
-                        edge="start"
-                        data-cy="manager.export"
-                        onClick={() => {
-                          onExport(item);
-                        }}
-                      >
-                        <ExportIcon />
-                      </IconButton>
-                      <IconButton
-                        edge="end"
-                        data-cy="manager.delete"
-                        onClick={() => {
-                          onDelete(item);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
+                      <Grid container spacing={1}>
+                        <Grid item>
+                          <IconButton
+                            edge="start"
+                            data-cy="manager.export"
+                            onClick={() => {
+                              onExport(item);
+                            }}
+                          >
+                            <ExportIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            edge="end"
+                            data-cy="manager.duplicate"
+                            onClick={() => {
+                              onDuplicate(item);
+                            }}
+                          >
+                            <FileCopyIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            edge="end"
+                            data-cy="manager.delete"
+                            onClick={() => {
+                              onDelete(item);
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
                     </ListItemSecondaryAction>
                   </ListItem>
                 );

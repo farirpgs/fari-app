@@ -3,43 +3,9 @@
 
 - [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
 
-- [x] feat: new character sheet
-- [x] feat: new character sheet Text
-- [x] feat: new character sheet Skill
-- [x] feat: new character sheet Dice Pool
-- [x] feat: new character sheet Point Counter
-- [x] feat: new character sheet Slot Tracker
-- [x] feat: Organize index cards with drag-and-drop
-- [x] feat: Import inside Data route
-- [x] feat: Import and Duplicate inside Data route
-- [x] feat: refactor player row for new sheet
-- [x] feat: new dice pool route
-- [x] feat: sync character from character sheet
-- [x] feat: let GM add character sheets
-- [x] fix: index card label after drag and drop
-- [x] fix: can click skill of other character
-- [x] fix: add timeout when connecting to game + link to wiki
-- [x] fix: keep scene group when reseting
-- [-] feat: Storybook
-  - [x] character sheet
-  - [x] dice box
-  - [x] dice box result
-  - [x] player row
-  - [x] index card
-- [x] feat: draw area moved to tabs ?
-- [x] feat: data route filter by type, group and name
-- [x] fix: data route previewContentEditable
-- [x] Send data route to tester
-- [x] Test dnd sheet
-- [x] Print mode support for pages
-- [x] Disable print if dialog mode
-- [ ] feat: SkillBlock Remove numerical Value
-- [ ] feat: add numerical value to text block
-- [x] Write release post
-- [ ] Write character sheet doc
-- [ ] test: usePool
-- [ ] test: useLazy
-- [ ] test: cypress blocks
+# BEFORE RELEASE
+
+- [ ] fix player row icon sizes
 
 # THINK
 - [ ] feat: make section help link dynamic

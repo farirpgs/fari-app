@@ -115,56 +115,67 @@ export const PlayerRow: React.FC<
         }
         data-cy={props["data-cy"]}
       >
-        <Box py=".8rem" px=".5rem">
-          <Grid container spacing={1} wrap="nowrap" alignItems="center">
-            <Grid item xs={6}>
-              {renderName()}
-            </Grid>
-            <Grid item xs container spacing={1} justify="flex-end">
-              {props.permissions.canLoadCharacterSheet && (
-                <Grid item>{renderCharacterSheetButton()}</Grid>
-              )}
-              <Grid item>{renderInitiative()}</Grid>
-              {props.permissions.canRemove && (
-                <Grid item>{renderDeleteButton()}</Grid>
-              )}
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={2} wrap="nowrap">
-            <Grid item>
-              <Box display="flex" justifyContent="flex-end">
-                <DiceBox
-                  rolls={props.player.rolls}
-                  size="2rem"
-                  fontSize="1rem"
-                  borderSize=".15rem"
-                  disabled={!props.permissions.canRoll}
-                  onClick={() => {
-                    handleRoll({ listResults: false });
-                  }}
-                />
-              </Box>
-            </Grid>
-
-            <Grid item container>
-              <Grid item xs={12}>
-                <DiceBonusLabel rolls={props.player.rolls} />
-              </Grid>
-              <Grid item xs={12}>
-                <DiceBoxResult rolls={props.player.rolls} />
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={2} wrap="nowrap">
-            <Grid item>{renderPointCounter()}</Grid>
-          </Grid>
+        <Box py=".5rem" px=".5rem">
+          <Box mb=".5rem">{renderName()}</Box>
+          <Box mb=".5rem">{renderDice()}</Box>
+          <Box>{renderPointCounter()}</Box>
+          <Box>{renderControls()}</Box>
         </Box>
         <Divider light />
       </Box>
     </>
   );
+
+  function renderDice() {
+    return (
+      <Grid container spacing={2} wrap="nowrap" alignItems="center">
+        <Grid item>
+          <Box display="flex" justifyContent="flex-end">
+            <DiceBox
+              rolls={props.player.rolls}
+              size="2rem"
+              fontSize="1rem"
+              borderSize=".15rem"
+              disabled={!props.permissions.canRoll}
+              onClick={() => {
+                handleRoll({ listResults: false });
+              }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item container alignItems="center">
+          <Grid item xs={12}>
+            <DiceBonusLabel rolls={props.player.rolls} />
+          </Grid>
+          <Grid item xs={12}>
+            <DiceBoxResult rolls={props.player.rolls} />
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderControls() {
+    return (
+      <Grid
+        item
+        xs
+        container
+        spacing={1}
+        alignItems="center"
+        justify="flex-end"
+      >
+        {props.permissions.canLoadCharacterSheet && (
+          <Grid item>{renderCharacterSheetButton()}</Grid>
+        )}
+        <Grid item>{renderInitiative()}</Grid>
+        {props.permissions.canRemove && (
+          <Grid item>{renderDeleteButton()}</Grid>
+        )}
+      </Grid>
+    );
+  }
 
   function renderCharacterSheetButton() {
     return (
@@ -185,13 +196,7 @@ export const PlayerRow: React.FC<
               logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
             }}
           >
-            {!hasCharacterSheet ? (
-              <NoteAddIcon className={css({ width: "1rem", height: "1rem" })} />
-            ) : (
-              <RestorePageIcon
-                className={css({ width: "1rem", height: "1rem" })}
-              />
-            )}
+            {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
           </IconButton>
         </span>
       </Tooltip>
@@ -199,21 +204,23 @@ export const PlayerRow: React.FC<
   }
   function renderDeleteButton() {
     return (
-      <Tooltip title={t("player-row.remove-character")}>
+      <Tooltip title={t("player-row.remove-player")}>
         <span>
           <IconButton
             data-cy={`${props["data-cy"]}.remove`}
             className={css({ padding: "0" })}
             onClick={(e) => {
               e.stopPropagation();
-              props.onPlayerRemove();
-              logger.info("ScenePlayer:onPlayerRemove");
+              const confirmed = confirm(
+                t("player-row.remove-player-confirmation")
+              );
+              if (confirmed) {
+                props.onPlayerRemove();
+                logger.info("ScenePlayer:onPlayerRemove");
+              }
             }}
           >
-            <HighlightOffIcon
-              color="error"
-              className={css({ width: "1rem", height: "1rem" })}
-            />
+            <HighlightOffIcon color="error" />
           </IconButton>
         </span>
       </Tooltip>
@@ -257,7 +264,7 @@ export const PlayerRow: React.FC<
     return (
       <Grid
         container
-        justify="center"
+        justify="flex-start"
         alignItems="center"
         spacing={1}
         wrap="nowrap"
@@ -340,14 +347,9 @@ export const PlayerRow: React.FC<
           condition={hasCharacterSheet}
           wrapper={(children) => (
             <Button
-              className={css({
-                width: "100%",
-                background: "transparent",
-                textTransform: "none",
-                color: theme.palette.text.primary,
-                border: "none",
-                borderRadius: "4px",
-              })}
+              variant="outlined"
+              color="default"
+              fullWidth
               data-cy={`${props["data-cy"]}.open-character-sheet`}
               disabled={!props.player.character}
               size="small"
@@ -362,12 +364,11 @@ export const PlayerRow: React.FC<
         >
           <FateLabel
             noWrap
+            uppercase={false}
             color="inherit"
             className={css({
               width: "100%",
-              textAlign: "left",
-              fontSize: "1rem",
-              lineHeight: Font.lineHeight(1),
+              textTransform: "none",
             })}
           >
             {previewContentEditable({ value: name })}

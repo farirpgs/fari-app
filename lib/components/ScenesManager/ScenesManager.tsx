@@ -52,6 +52,11 @@ export const ScenesManager: React.FC<IProps> = (props) => {
     logger.info("ScenesManager:onDelete");
   }
 
+  function onDuplicate(scene: ISavableScene) {
+    scenesManager.actions.duplicate(scene.id);
+    logger.info("ScenesManager:onDuplicate");
+  }
+
   function onImport(sceneToImport: FileList | null) {
     FariEntity.import<ISavableScene>({
       filesToImport: sceneToImport,
@@ -89,6 +94,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
+      onDuplicate={onDuplicate}
       onUndo={onUndoDelete}
       onClose={scenesManager.actions.closeManager}
       onImport={onImport}

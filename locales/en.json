@@ -222,6 +222,7 @@
   "player-row.not-played": "Has not played",
   "player-row.open-character-sheet": "Open Character Sheet",
   "player-row.played": "Has played",
-  "player-row.remove-character": "Remove Character",
+  "player-row.remove-player": "Remove Player",
+  "player-row.remove-player-confirmation": "Are you sure you want to remove this player?",
   "player-row.swap-character-sheet": "Swap Character Sheet"
 }

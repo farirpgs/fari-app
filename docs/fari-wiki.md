@@ -111,7 +111,175 @@ Use the `...` menu on the right and either click `Load Scene` or `Clone And Load
 
 # Managing Characters
 
-🚧 👷 🚧
+This goal of this guide is to help you understand everything you can do with Fari's Character Sheet framework.
+
+Fari's character sheets are extremely flexible and basically limitless, so here how you can get the most out of it.
+
+## Customizing your Character Sheets
+
+When you create a new character, Fari will load the `Fate Condensed` template by default, if you want to customize your sheet yourself or load a different template, simply toggle the `Advanced Mode`.
+
+![Toggle The Advanced Mode](https://gyazo.com/39c3eea686057a9e18168bb5725251e2.gif)
+
+## Name & Group
+
+You can give your character a `Name` and assign them a `Group`. Groups are a basic organization feature where characters with the same group will be _grouped_ together when you open the Character Drawer.
+
+You can view the `Group` field as a "Campaign" field if you want.
+
+## Pages
+
+When the `Advanced Mode` is turned on, you can customize how your sheet is organized.
+
+The Character Sheet is seperated into multiple `Pages/Tabs` where each page can have its own set of sections and building blocks.
+
+### Adding a Page
+
+To add a page, click on the `+` icon on the right and click on the Page name to rename it as you wish
+
+![Addding a Page](https://gyazo.com/e180cb0f68661380ed9da33ef3285459.gif)
+
+### Moving a Page
+
+You can also move your pages left or right by using the Move Page arrows.
+
+![Moving a Page](https://gyazo.com/0438808d699788ce5c1173861828940e.gif)
+
+### Deleting a Page
+
+Finally, if you want to remove a page, you can do so by simply clicking on the Remove Page button which is located between the Move Page arrows
+
+## Sections
+
+Sections let you group your building blocks of a similar kind together.
+
+### Adding a new Section
+
+At the bottom of a each existing section, you can find a button labeled as `Add Section` which will let you add a section below the on you are looking at.
+
+Once added, you can change its name simply by clicking on it and typing what you want.
+
+![Adding a new Section](https://gyazo.com/95eb5246e35aec45063851d45c17f67b.gif)
+
+### Making Sections Visible inside the Character Card
+
+On the right side of your section's name, you will see an Eye button representing the `Visible on Card` action.
+
+Clicking on it will make your entire section visible inside the Character Card.
+
+The Character Card is kind of a condensed version of your character sheet that is going to be accessible to everyone during a game session.
+
+You can use this functionality to make some sections of your characters sheets easily reachable during game play.
+
+![The Character Card](https://gyazo.com/55e37b3a90e53315cee976d386ffb755.png)
+
+### Moving a Section
+
+Besides the Visible on Card button, there's the `Move Section` button. Clicking on this one will give you the ability to move your section up or down, on the other side of your sheet or on a completely different page.
+
+![Moving a Section](https://gyazo.com/45b9b219653989248991e1695ba2c44f.gif)
+
+## Blocks
+
+Blocks are at the core of Fari's character sheets. They are like Legos that you can use to create something incredible.
+
+Fari currently supports 6 different types of blocks
+
+- Text
+- Numeric
+- Skill
+- Dice Pool
+- Point Counter
+- Slot Tracker
+
+![Different Types of Blocks](https://gyazo.com/ede9dec5d82ae085bdf04185db66a156.png)
+
+### Adding a new Block
+
+To add a new block, simply scroll at the bottom of a section and look for the `Add Block` button.
+
+From there, choose the type of block you want to add and this block will be appended at the bottom of your section.
+
+![Adding a Block](https://gyazo.com/af540b6c631f6028dccf704a45fb488a.gif)
+
+#### Text Block
+
+This block can be used to keep text based information. Things like notes or character aspects and things of the sort.
+
+- `Add Toggle`: This control will append a toggle right beside your block's label. It can be useful to track when a power is used or if an aspect of your character is corrupted, etc.
+
+![Text Block](https://gyazo.com/f3a229e8245c4b04db68b8f97ef27df0.png)
+
+#### Numeric Block
+
+Numeric blocks are useful if you are looking for something similar to a Text block, but made to handle numbers instead.
+
+- `Add Toggle`: This control will append a toggle right beside your block's label.
+
+![Numeric Block](https://gyazo.com/77eedbbf4768e0b42949bc9946a3e1eb.png)
+
+#### Skill Block
+
+If there is something inside your character sheet you think should trigger a dice roll, this is kind of block you are looking for.
+
+Skill Blocks let you add a skill or ability to the sheet.
+
+This skill then is linked to a set of dice commands as well as a dice result modifier.
+
+Once configured, clicking on the dice button will enable the Dice floating action button at the bottom left corner on the screen.
+
+Once enabled, clicking on the `Roll` label will let you roll that specific skill right away.
+
+- `Add Toggle`: This control will append a toggle right beside your block's label.
+- `Set Dice`: Clicking on this control will display the dice menu so that you can select the set of dice commands that skill should roll.
+- `Hide Modifier`: Skills don't always have to have a modifier that should be added to the result. For that reason, this control will hide the modifier input to keep the character sheet tidy and clean.
+
+![Skill Block](https://gyazo.com/e48b414263349f33c6cf67e7cd5b701b.png)
+
+#### Dice Pool Block
+
+Similar the the skill block, Dice Pools will let you create some sort of skill that is attached to a set of dice that should be added to a dice pool.
+
+Once configured, when a players clicks on the pool button, all the dice commands inside that block will be added to the pool.
+Clicking on it again will remove the dice commands from the pool.
+
+When the pool is complete, the player simply needs to click on the `Roll Pool` floating action button at the bottom left corner of the screen.
+
+- `Set Dice`: Clicking on this control will display the dice menu so that you can select the set of dice that the pool should contain
+
+![Dice Pool Block](https://gyazo.com/9d6ccb333b78e5b7b5ea724ccfe42943.png)
+
+#### Point Counter Block
+
+This kind of block is useful if you are looking to track any sort of point based value. Use it to track your Fate Points, health points, gold pieces, etc.
+
+- `Set as Main Counter`: This control lets you select a **single** point counter as the main one. The main point counter is going to be the one that is displayed in the Players section when you are playing a game session.
+- `With Max`: Use this value if you want to have a max value attached to your point counter.
+
+![Point Counter Block](https://gyazo.com/b520f5e1d36a3de7f11bcf401721accd.png)
+
+![Main Counter](https://gyazo.com/0f69f3cbf6c3710d521824a2e1275626.png)
+
+#### Slot Tracker Block
+
+Slot trackers let you add a block where you can have a bunch of checkboxes that will help you track things. You can use that to track your stress in Fate or trauma in Blades in the Dark.
+
+- `Add/Remove Box`: Those buttons will let you add or remove a box to your slot tracker.
+- `Box Labels`: Slot tracker block contains boxes, each one of those boxes can be checked or unchecked. You can also customize the label attached to a box. When left empty, the label will simply be hidden when the advanced mode is turned off. You can use that to attach a specific meaning to each box.
+
+![Slot Tracker Block](https://gyazo.com/45123ed0af8ae1772788b34278300c80.png)
+
+### Generic Block Controls
+
+Blocks are all based around the same idea, for that reason all types of blocks have a similar set of actions you can use to help you create a nice character sheet.
+
+- `Move`: Using the drag icon, you can move your blocks _inside the section_ by simply dragging and dropping them where you you
+- `Duplicate`: This action will let you duplicate and append right below a block of the type type with the same values
+- `Remove`: This action will remove the block from the section
+- `Help Text`: Each block can have some help text attached to it. It can useful when you want to provide some useful information to the user of the sheet about what a certain block is about or how its used in the game.
+  - When left empty, the help text will disappear when the advanced mode is toggled off.
+
+![Generic Block Controls](https://gyazo.com/45af086acdaf7542f343e361a1d078d0.png)
 
 # Tips and Tricks
 

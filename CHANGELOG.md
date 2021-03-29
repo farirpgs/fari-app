@@ -2,6 +2,37 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+## v4.0 New Character Sheet Framework, Data Mangagement
+
+- feat: new character sheet
+  - feat: new character sheet Text Block
+  - feat: new character sheet Numeric Block
+  - feat: new character sheet Skill Block
+  - feat: new character sheet Dice Pool Block
+  - feat: new character sheet Point Counter Block
+  - feat: new character sheet Slot Tracker Block
+  - feat: add support for pages (add, move, remove)
+  - feat: move sections (right, left, to page)
+  - feat: move blocks (drag and drop)
+  - feat: support for community driven templates
+  - feat: print mode
+- feat: new Data management page /data
+  - feat: export all
+  - feat: import all
+  - feat: import all and duplicate
+  - feat: filter by name, group, type
+  - feat: sort
+- feat: organize index cards with drag-and-drop
+- feat: enhanced player row to always display dice result
+- feat: Dice Pool route /dice-pool
+- feat: let anyone sync characters to their machine
+- feat: let GM add character sheets to players
+- fix: can click skill of other other player's character sheets
+- fix: add timeout when connecting to game + link to wiki about connection uissues
+- fix: keep scene group when reset-ing them.
+- feat: added Storybook to help with frontend development
+- feat: draw area moved to a new tab
+
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
 - feat: new Fari Wiki

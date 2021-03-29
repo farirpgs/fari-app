@@ -29,7 +29,7 @@ export const Block = {
       }
     );
 
-    if (block.type === BlockType.Skill) {
+    if (block.type === BlockType.Skill && !block.meta.hideModifier) {
       commandOptionList.push({
         label: block.label,
         type: RollType.Modifier,

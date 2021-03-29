@@ -161,6 +161,51 @@ PlayerOutOfBound.args = {
     ],
   }),
 };
+export const PlayerOutOfBoundWithCharacter = Template.bind({});
+PlayerOutOfBoundWithCharacter.args = {
+  highlight: false,
+  canLoadCharacterSheet: true,
+  canRemove: true,
+  canRoll: true,
+  canUpdateInitiative: true,
+  canUpdatePoints: true,
+  player: aPlayer({
+    playerName:
+      "AVeryLongNameAVeryLongNameAVeryLongNameAVeryLongNameAVeryLongNameAVeryLongName",
+    points: "3333333",
+    character: { pages: [] } as any,
+    rolls: [
+      {
+        total: 3,
+        totalWithoutModifiers: 3,
+        options: { listResults: false },
+        commandResult: [
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+          { value: 1, command: "1dF", type: RollType.DiceCommand },
+        ],
+      },
+    ],
+  }),
+};
 export const PlayerOutOfBoundPool = Template.bind({});
 PlayerOutOfBoundPool.args = {
   highlight: false,
@@ -201,7 +246,7 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
   return {
     id: "123",
     points: "3",
-    playerName: "RP",
+    playerName: "Meriadoc Brandybuck",
     isGM: false,
     offline: false,
     playedDuringTurn: false,

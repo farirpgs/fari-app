@@ -6,7 +6,7 @@
 
 # Fari v4.0.0
 
-<page-meta author="René-Pier Deshaies-Gélinas" date="2021-03-25" description="New Character Sheet Framework and Data Management"></page-meta>
+<page-meta author="René-Pier Deshaies-Gélinas" date="2021-03-25" description="New Character Sheet Framework, Data Management and Collaboration with Seelie Squire"></page-meta>
 
 This release has been in the making since November of 2020 so it's a big one.
 
@@ -20,7 +20,7 @@ So lets get started.
 
 Lets talk about the elephant in the room: **Character Sheets**!
 
-When Fari was initially released in December 2019, this wasn't even something that was part of the app.
+When Fari was initially released in December 2019, managing character wasn't even something that you could do with the app.
 
 Then, you all have been very vocal (in a good way) about the fact that managing characters should be part of the core experience of playing table-top RPGs online.
 
@@ -43,22 +43,29 @@ This new framework gives you 100% control over:
 You build your character sheets with blocks and Fari supports the following block types:
 
 - `Text`: Save your aspects, consequences or other text based content.
-- `Skill`: This block lets you add a modifier and a set of dice commands attached to a specific skill.
+- `Numeric`: Similar to the Text block, but made specifically to keep number information attached to a specific label.
+- `Skill`: This block lets you add a modifier and a set of dice commands attached to a specific skill or action.
 - `PointCounter`: Track your Fate Points, Health Points or any other count based field.
 - `SlotTracker`: This is useful for stress tracks or anything that you would track with checkboxes.
 - `DicePool`: Similar to the Skill block, this block lets you create dice pools with a set of dice commands to use during gameplay.
 
 ![New Character Sheet Framework](https://gyazo.com/9aeba8fad4079cec0e0ba3d0fda294e9.png)
 
+#### Getting Started
+
+If you want to get started, checkout our new [Managing Character | Fari Wiki](/fari-wiki/managing-characters) and learn how to get the most out of this new framework.
+
 #### Templates
 
 This new framework is powerful enough to support any Fate hack you can imagine, but it can also be used to play other Table Top RPG systems like Cortex Prime or simple one page RPGs like The Witch is Dead by Grant Howitt.
 
-If you toggle the advanced mode inside a character sheet, you will have the ability to load one of the many new templates Fari supports.
+If you toggle the `Advanced Mode` inside a character sheet, you will have the ability to load one of the many new templates Fari supports.
 
 From Dresdend Files Accelerated or Venture City to Heartbreaker by A.C. Luke, we've got you covered.
 
-> Are you looking for a template that isn't available and interested in contributing to Fari ?
+> Looking for a template but it's not available ?
+>
+> Are you interested in contributing to Fari ?
 >
 > **Create the template** yourself, **export it** and **send it** to us to make it available to the whole Fari community!
 
@@ -72,17 +79,47 @@ You own your data and you should be able to do what ever you want it.
 
 For this reason, Fari now as a new [Data Management](https://fari.app/data) feature which lets you export and import in bulk all the data stored in this application.
 
-You can use this feature to backup your data or copying it from one computer to another.
+You can use this feature to backup your data or use it to copy your data from one computer to another.
 
 This can also be useful for game creators. Creators could use this feature to create pre-made scenes and characters to give with their game when they buy it on itch.io or drivethrurpg.
 
 ![Data Manager](https://gyazo.com/06d36544539d5eee2cbe220a3631858f.png)
 
+### Seelie Squire's Book of Creatures
+
+This release includes also a little surprise :)
+
+If you hang out on /r/FateRPG, you might know about `Seelie Squire`. If you don't, you [should check this out](https://www.reddit.com/r/seeliesquire/).
+
+He often publishes really cool things like Fate settings, stories or his great `Monster Monday` posts.
+
+The work that Seelie has done is incredible, so we partnered up to put all of that great content available to everyone directly inside Fari.
+
+This effort could not have been possible without the awesome work `Christie Kennedy` has done in developing a custom tool to convert all the content into a format that Fari could understand.
+
+Thank you so much to both of you from myself and the entire Fate community!
+
+[Read the book now](/seeliesquire)
+
+![Book of Monsters by Seelie Squire](https://gyazo.com/ac5e3b017c69ced12a220c84ebe28843.png)
+
 ### Syncing Character Sheets
+
+Since all the data Fari manages is stored in your browser. Which meant that your characters could not be accessed by the other players at your table when you are not playing.
+
+I use the past tense here because times have changed.
+
+This releases introduces a new feature which lets your **Sync** character sheets while you are playing.
+
+During a game session, simply open a character sheet and click on the `Sync` button. This button is going to copy the character sheet inside your storage and sync it every time it is modified by anybody.
+
+You can view this as if Fari was your assistant and made sure that every time someone modified their sheets, Fari will also modify your copy as well.
+
+![Sync Character Sheets](https://gyazo.com/1b22f6da0aa42c97106a1735d820c54b.png)
 
 ### New Look
 
-I also worked on a brand new home page which I think is going to be useful for new users to explain better what Fari does, while also keeping the most useful features accessible to returning users.
+I also worked on a brand new landing page which I think is going to be useful for new users to explain better what Fari does, while also keeping the most useful features accessible to returning users.
 
 ![New Look](https://gyazo.com/c1ea6b639575a5027b0746b71f76e6af.png)
 
@@ -92,10 +129,11 @@ This release also brings a couple of other enhancements, things like:
 
 - the ability to reorganize your index card by simply dragging and dropping them wherever you like
 - the ability for GMs to set a player's character sheet
-- saved screen real-estate by moving the scene drawing area inside a separate tab
+- more space available during game sessions since the drawing area has been moved to a seperate tab.
 - a brand new [Dice Pool](http://fari.app/dice-pool) roller
 - a print mode for the character sheet
-- and more...
+- the ability to duplicate scenes or character sheet
+- and even more!
 
 ## Thank You ❤️
 

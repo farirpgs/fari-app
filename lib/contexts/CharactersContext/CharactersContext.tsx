@@ -4,7 +4,8 @@ import { arraySort } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
-import { getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 
 type IManagerCallback = (character: ICharacter) => void;
@@ -127,6 +128,22 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
+  function duplicate(id: string | undefined) {
+    setCharacters((draft: Array<ICharacter>) => {
+      const match = draft.find((s) => s.id === id);
+
+      return [
+        ...draft,
+        {
+          ...match,
+          id: Id.generate(),
+          lastUpdated: getUnix(),
+          name: `${match?.name} Copy`,
+        } as ICharacter,
+      ];
+    });
+  }
+
   function isInStorage(id: string | undefined) {
     return characters.some((c) => c.id === id);
   }
@@ -145,6 +162,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       upsert,
       updateIfExists,
       remove,
+      duplicate,
     },
     selectors: {
       isInStorage,

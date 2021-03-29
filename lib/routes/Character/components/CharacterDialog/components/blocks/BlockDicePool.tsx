@@ -54,7 +54,7 @@ export function BlockDicePool(
         <Box>
           <Grid container spacing={1} justify="space-between" wrap="nowrap">
             <Grid item xs>
-              <FateLabel display="inline">
+              <FateLabel display="inline" align={"center"}>
                 <ContentEditable
                   readonly={!props.advanced}
                   border={props.advanced}
@@ -68,7 +68,13 @@ export function BlockDicePool(
             </Grid>
           </Grid>
         </Box>
-        <Grid container spacing={1} alignItems="center" wrap="nowrap">
+        <Grid
+          container
+          spacing={1}
+          justify="center"
+          alignItems="center"
+          wrap="nowrap"
+        >
           <Grid item>
             <Box>
               <Pool
@@ -197,7 +203,7 @@ export const Pool: React.FC<
               ? `1px ${borderStyle} ${theme.palette.primary.main}`
               : `1px ${borderStyle} #bdbdbd`,
 
-            "boxShadow": selected ? theme.shadows[0] : theme.shadows[4],
+            "boxShadow": selected ? theme.shadows[0] : theme.shadows[2],
             "transition": theme.transitions.create(
               ["color", "background", "border", "borderWidth", "boxShadow"],
               { duration: theme.transitions.duration.shorter }

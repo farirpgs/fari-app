@@ -156,6 +156,7 @@ export const CharacterV3Dialog: React.FC<{
     const confirmed = confirm(confirmKey);
 
     if (confirmed) {
+      setTab("0");
       characterManager.actions.loadTemplate(newTemplate);
       setAdvanced(false);
       logger.info(
@@ -196,6 +197,7 @@ export const CharacterV3Dialog: React.FC<{
 
       if (isDifferentCharacter) {
         setAdvanced(false);
+        setTab("0");
       }
     },
     [props.character]

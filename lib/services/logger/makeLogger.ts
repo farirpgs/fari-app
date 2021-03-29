@@ -1,10 +1,12 @@
 import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
-import { SentryService } from "../sentry/SentryService";
+import { makeSentryService } from "../sentry/SentryService";
 
 const shouldConsole = env.isLocalHost && !env.isTest;
 
-export function makeLogger(sentryService: SentryService) {
+export function makeLogger(
+  sentryService: ReturnType<typeof makeSentryService>
+) {
   return {
     debug(message: string, context?: any) {
       sentryService.log(message, Severity.Debug, context);
