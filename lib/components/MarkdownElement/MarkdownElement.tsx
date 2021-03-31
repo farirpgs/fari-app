@@ -15,6 +15,16 @@ const styles = (theme: Theme) => {
       ? lighten(theme.palette.primary.light, 0.85)
       : darken(theme.palette.primary.light, 0.75);
 
+  const afterBorder = {
+    "&:after": {
+      content: '""',
+      height: "2px",
+      flex: "1 1 auto",
+      opacity: ".6",
+      marginLeft: "10px",
+      backgroundColor: "#415f9c",
+    },
+  };
   const headerStyle = {
     scrollMarginTop: `${scrollMarginTop}px`,
     display: "flex",
@@ -94,6 +104,7 @@ const styles = (theme: Theme) => {
       "& h3": {
         ...theme.typography.h5,
         ...headerStyle,
+        ...afterBorder,
         textTransform: "uppercase",
       },
       "& h4": {

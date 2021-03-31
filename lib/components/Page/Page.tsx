@@ -191,7 +191,9 @@ export const Page: React.FC<{
                   data-cy="page.languages"
                   value={currentLanguage}
                   onChange={(e) => {
-                    i18n.changeLanguage(e.target.value as string);
+                    const newLanguage = e.target.value as string;
+                    i18n.changeLanguage(newLanguage);
+                    logger.setTag("language", newLanguage);
                   }}
                 >
                   {Object.keys(i18n.options.resources!).map((language) => {

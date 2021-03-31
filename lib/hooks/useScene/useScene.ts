@@ -11,6 +11,7 @@ import {
   defaultSceneName,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
+import { arraySort } from "../../domains/array/arraySort";
 import {
   BlockType,
   IBlock,
@@ -105,7 +106,15 @@ export function useScene(props: IProps) {
   const playersWithCharacterSheets = scene.players.filter(
     (player) => !!player.character
   );
-  const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
+  const sortedPlayersWithCharacterSheets = arraySort(
+    playersWithCharacterSheets,
+    [
+      (p) => {
+        return { value: p.id === userId, direction: "asc" };
+      },
+    ]
+  );
+  const hasPlayersWithCharacterSheets = !!sortedPlayersWithCharacterSheets.length;
 
   const userCharacterSheet = scene.players.find((p) => {
     return p.id === userId;
@@ -716,7 +725,7 @@ export function useScene(props: IProps) {
 
   return {
     computed: {
-      playersWithCharacterSheets,
+      playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
       hasPlayersWithCharacterSheets,
       userCharacterSheet,
     },

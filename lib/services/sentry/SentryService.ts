@@ -23,5 +23,6 @@ export function makeSentryService() {
 
       Sentry.captureMessage(message, { level: severity, extra: context });
     },
+    setTag: Sentry.setTag,
   };
 }

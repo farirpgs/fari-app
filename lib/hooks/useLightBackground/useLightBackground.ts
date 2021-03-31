@@ -1,4 +1,3 @@
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import useTheme from "@material-ui/core/styles/useTheme";
 
 export function useLightBackground() {
@@ -8,9 +7,7 @@ export function useLightBackground() {
   //     ? lighten(theme.palette.primary.light, 0.85)
   //     : darken(theme.palette.primary.light, 0.75);
   const lightBackground =
-    theme.palette.type === "light"
-      ? lighten(theme.palette.primary.light, 0.9) // "#eff2f9"
-      : darken(theme.palette.primary.light, 0.75);
+    theme.palette.type === "light" ? "#eff2f9" : "#272c34";
 
   return lightBackground;
 }

@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import useTheme from "@material-ui/core/styles/useTheme";
-import TextField from "@material-ui/core/TextField";
+import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -30,6 +30,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { default as React, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
+import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -790,17 +791,17 @@ export const IndexCard: React.FC<
                       </Grid>
                     )}
                   </Grid>
-                  <TextField
+                  <LazyTextField
                     fullWidth
                     value={value}
-                    onChange={(event) => {
-                      if (props.readonly) {
-                        return;
-                      }
+                    InputProps={{
+                      readOnly: props.readonly,
+                    }}
+                    onChange={(newValue) => {
                       props.sceneManager.actions.updateAspectConsequenceValue(
                         props.aspectId,
                         consequenceIndex,
-                        event.target.value
+                        newValue
                       );
                     }}
                   />
@@ -813,3 +814,27 @@ export const IndexCard: React.FC<
     );
   }
 };
+
+function LazyTextField(
+  props: Omit<TextFieldProps, "value" | "onChange"> & {
+    value: string;
+    onChange(newValue: string): void;
+  }
+) {
+  const { value, onChange, ...rest } = props;
+  const [state, setState] = useLazyState({
+    delay: 750,
+    value: props.value,
+    onChange: onChange,
+  });
+
+  return (
+    <TextField
+      {...props}
+      value={state}
+      onChange={(event) => {
+        setState(event?.target.value);
+      }}
+    />
+  );
+}

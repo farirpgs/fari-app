@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { env } from "../../constants/env";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 
 declare const window: Window & { ga: Function; gtag: Function };
@@ -26,6 +27,8 @@ export const AppAnalytics = withRouter(function HistoryComponent(props) {
     logger.info("Session", {
       referrer: document.referrer,
       pathname: location.pathname,
+      buildNumber: env.buildNumber,
+      version: env.version,
     });
     if (document.referrer) {
       logger.info(`Referrer:${document.referrer}`, {

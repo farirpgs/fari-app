@@ -26,6 +26,7 @@ export function makeLogger(
       sentryService.log(message, Severity.Error, context);
       console.error(message, context);
     },
+    setTag: sentryService.setTag,
   };
 }
 

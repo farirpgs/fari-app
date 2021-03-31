@@ -32,12 +32,12 @@ export function usePointCounter(props: {
   const [internalPoints, setInternalPoints] = useLazyState({
     value: props.points,
     onChange: props.onPointsChange,
-    delay: 1000,
+    delay: 750,
   });
   const [internalMaxPoints, setInternalMaxPoints] = useLazyState({
     value: props.maxPoints,
     onChange: props.onMaxPointsChange,
-    delay: 1000,
+    delay: 750,
   });
 
   function increment() {

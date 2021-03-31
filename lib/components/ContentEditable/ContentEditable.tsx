@@ -13,7 +13,7 @@ const DOMPurifyOptions: Config = {
   ALLOWED_TAGS: ["br", "img"],
 };
 
-const ContentEditableDelay = 200;
+const ContentEditableDelay = 1000;
 
 type IPreviewContentEditableOptions = {
   value: string | undefined;
@@ -74,7 +74,6 @@ export const ContentEditable: React.FC<
   const $ref = useRef<HTMLSpanElement | null>(null);
   const latestHtml = useRef<string>();
   const timeout = useRef<any | undefined>(undefined);
-  const [updating, setUpdating] = useState(false);
   const latestProps = useRef(props);
   const [image, setImage] = useState<string>();
   const hasCursorPointer = props.readonly && props.clickable;
@@ -141,11 +140,9 @@ export const ContentEditable: React.FC<
         DOMPurifyOptions
       ) as string;
 
-      setUpdating(true);
       timeout.current = setTimeout(() => {
         latestHtml.current = cleanHTML;
         latestProps.current.onChange?.(cleanHTML, e);
-        setUpdating(false);
       }, ContentEditableDelay);
     }
   }

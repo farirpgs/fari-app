@@ -50,7 +50,7 @@ import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  useScenes
+  useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import { ICharacter } from "../../domains/character/types";
@@ -58,7 +58,7 @@ import {
   IDiceCommandOption,
   IDiceRollResult,
   IRollDiceOptions,
-  RollType
+  RollType,
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
@@ -192,27 +192,37 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   }, [shareLinkToolTip]);
 
-  const everyone = [
-    sceneManager.state.scene.gm,
-    ...sceneManager.state.scene.players,
-  ];
+  //#region TODO: refac into another function
+  const userId = props.mode === SceneMode.PlayOnline ? props.userId : undefined;
+  const gm = sceneManager.state.scene.gm;
+  const players = sceneManager.state.scene.players;
 
+  const sortedPlayers = arraySort(players, [
+    (p) => {
+      return {
+        value: userId === p.id,
+        direction: "asc",
+      };
+    },
+  ]);
+
+  const everyone = [gm, ...sortedPlayers];
   const controllablePlayerIds = everyone
     .filter((player) => {
       if (isGM) {
         return true;
-      } else if (props.mode === SceneMode.PlayOnline) {
-        return props.userId === player.id;
       }
+      return userId === player.id;
     })
     .map((p) => p.id);
+
   const me = everyone.find((player) => {
     if (isGM) {
       return player.isGM;
-    } else if (props.mode === SceneMode.PlayOnline) {
-      return props.userId === player.id;
     }
+    return userId === player.id;
   });
+  //#endregion
 
   const liveMode = getLiveMode();
 
@@ -708,7 +718,11 @@ export const Scene: React.FC<IProps> = (props) => {
       (p) => (p.character?.name ?? p.playerName) as string
     );
     return (
-      <Box border="1px solid #bdbdbd">
+      <Box
+        border={`1px solid ${theme.palette.divider}`}
+        maxWidth="600px"
+        margin="0 auto"
+      >
         <DrawArea
           objects={sceneManager.state.scene.drawAreaObjects}
           readonly={!isGM}

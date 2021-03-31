@@ -25,7 +25,7 @@ export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
       <DrawObjects
         drawingManager={drawingManager}
         readonly={props.readonly}
-        controls="bottom"
+        controls="top"
         tokenTitles={props.tokenTitles}
       />
     </>

@@ -22,8 +22,6 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
@@ -273,10 +271,10 @@ export const Doc: React.FC<IProps> = (props) => {
               {shouldRenderImage && (
                 <Box
                   className={css({
-                    marginTop: "-2rem",
+                    marginTop: "-3rem",
                     marginBottom: "1rem",
                     width: "100%",
-                    height: "10rem",
+                    height: "12rem",
                     display: "block",
                     backgroundSize: "cover",
                     backgroundRepeat: "repeat",
@@ -533,7 +531,6 @@ export const Doc: React.FC<IProps> = (props) => {
           {previousIndex && (
             <Grid container item xs={12} sm={6} justify="flex-start">
               <Button
-                startIcon={<NavigateBeforeIcon />}
                 fullWidth={isSmall}
                 className={css({
                   height: "4rem",
@@ -546,14 +543,32 @@ export const Doc: React.FC<IProps> = (props) => {
                   handleGoToIndex(previousIndex);
                 }}
               >
-                {truncate(previousIndex?.label ?? "", { length: 50 })}
+                <Box
+                  className={css({
+                    display: "flex",
+                    flexDirection: "column",
+                  })}
+                >
+                  <Box
+                    className={css({
+                      color: theme.palette.text.secondary,
+                      textTransform: "none",
+                      fontWeight: theme.typography.fontWeightRegular,
+                    })}
+                  >
+                    {"Previous"}
+                  </Box>
+                  <Box>
+                    {"« "}
+                    {truncate(previousIndex?.label ?? "", { length: 50 })}
+                  </Box>
+                </Box>
               </Button>
             </Grid>
           )}
           {nextIndex && (
             <Grid container item xs={12} sm={6} justify="flex-end">
               <Button
-                endIcon={<NavigateNextIcon />}
                 fullWidth={isSmall}
                 className={css({
                   height: "4rem",
@@ -566,7 +581,26 @@ export const Doc: React.FC<IProps> = (props) => {
                   handleGoToIndex(nextIndex);
                 }}
               >
-                {truncate(nextIndex?.label ?? "", { length: 50 })}
+                <Box
+                  className={css({
+                    display: "flex",
+                    flexDirection: "column",
+                  })}
+                >
+                  <Box
+                    className={css({
+                      color: theme.palette.text.secondary,
+                      textTransform: "none",
+                      fontWeight: theme.typography.fontWeightRegular,
+                    })}
+                  >
+                    {"Next"}
+                  </Box>
+                  <Box>
+                    {truncate(nextIndex?.label ?? "", { length: 50 })}
+                    {" »"}
+                  </Box>
+                </Box>
               </Button>
             </Grid>
           )}
@@ -669,14 +703,21 @@ export const Doc: React.FC<IProps> = (props) => {
                 flexShrink: 0,
               }),
               paper: css({
+                paddingTop: "5.5rem",
                 width: drawerWidth,
               }),
             }}
           >
-            <Box mt="4.9rem" />
-            <Divider />
-            <Box mb="1rem" />
-            {sideBar}
+            <Box
+              className={css({
+                maxHeight: "calc(100vh - 5.5rem)",
+                overflow: "auto",
+                paddingBottom: "2rem",
+                borderTop: `1px solid ${theme.palette.divider}`,
+              })}
+            >
+              {sideBar}
+            </Box>
           </Drawer>
         </Hidden>
       </>

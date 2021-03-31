@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
+import { useTheme } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
 import { DrawObjects } from "../../components/DrawArea/DrawObjects";
 import { useDrawing } from "../../components/DrawArea/hooks/useDrawing";
@@ -15,7 +16,7 @@ export const DrawRoute: React.FC = (props) => {
   const { t } = useTranslate();
   const logger = useLogger();
   const drawingManager = useDrawing({});
-
+  const theme = useTheme();
   useEffect(() => {
     logger.info("Route:Draw");
   }, []);
@@ -42,7 +43,13 @@ export const DrawRoute: React.FC = (props) => {
           </FateLabel>
         </Box>
 
-        <DrawObjects drawingManager={drawingManager} controls="top" />
+        <Box
+          border={`1px solid ${theme.palette.divider}`}
+          maxWidth="600px"
+          margin="0 auto"
+        >
+          <DrawObjects drawingManager={drawingManager} controls="top" />
+        </Box>
       </Container>
     </Page>
   );

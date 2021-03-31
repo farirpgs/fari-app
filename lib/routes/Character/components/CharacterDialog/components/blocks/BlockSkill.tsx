@@ -32,7 +32,7 @@ export function BlockSkill(
   const [state, setState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
-    delay: 300,
+    delay: 750,
   });
 
   const isSlotTrackerVisible = props.block.meta.checked !== undefined;
@@ -40,8 +40,6 @@ export function BlockSkill(
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
   const hasCommands = !!props.block.meta.commands?.length;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
-
-  const canRoll = !props.readonly;
 
   const [firstCommandGroup] =
     props.block.meta?.commands?.map((commandId) => {
@@ -55,28 +53,26 @@ export function BlockSkill(
     <>
       <Box>
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
-          {canRoll && (
-            <Grid item>
-              <Pool
-                tooltipTitle={t("character-dialog.skill-block.roll")}
-                fontSize="1.2rem"
-                borderRadius="8px"
-                selected={isSelected}
-                clickable
-                borderStyle={"solid"}
-                onClick={() => {
-                  props.onPoolClick({
-                    blockId: props.block.id,
-                    blockType: props.block.type,
-                    label: props.block.label,
-                    commandOptionList: commandOptionList,
-                  });
-                }}
-              >
-                <RollIcon className={css({ fontSize: "2.3rem" })} />
-              </Pool>
-            </Grid>
-          )}
+          <Grid item>
+            <Pool
+              tooltipTitle={t("character-dialog.skill-block.roll")}
+              fontSize="1.2rem"
+              borderRadius="8px"
+              selected={isSelected}
+              clickable={!props.readonly}
+              borderStyle={"solid"}
+              onClick={() => {
+                props.onPoolClick({
+                  blockId: props.block.id,
+                  blockType: props.block.type,
+                  label: props.block.label,
+                  commandOptionList: commandOptionList,
+                });
+              }}
+            >
+              <RollIcon className={css({ fontSize: "2.3rem" })} />
+            </Pool>
+          </Grid>
           {!props.block.meta.hideModifier && (
             <Grid item>
               <CircleTextField

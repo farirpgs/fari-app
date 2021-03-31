@@ -104,7 +104,12 @@ export function BlockDicePool(
                 >
                   {!hasCommands && (
                     <Grid item>
-                      <FormHelperText>
+                      <FormHelperText
+                        className={css({
+                          margin: "0",
+                          padding: ".5rem",
+                        })}
+                      >
                         {t("character-dialog.helper-text.empty-dice-pool")}
                       </FormHelperText>
                     </Grid>

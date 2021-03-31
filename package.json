@@ -32,7 +32,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.18",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "@sentry/react": "^5.24.2",
+    "@sentry/react": "^6.2.4",
     "@types/hoist-non-react-statics": ">= 3.3.1",
     "@types/node": ">= 12",
     "canvas-confetti": "^1.2.0",

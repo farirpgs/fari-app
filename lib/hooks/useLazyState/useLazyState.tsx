@@ -9,7 +9,7 @@ export function useLazyState<T>(props: {
 
   const [internalValue, setInternalValue] = useState(props.value);
   const timeout = useRef<any | undefined>(undefined);
-  const willUpdate = useRef<boolean>(false);
+  const willUpdateSoon = useRef<boolean>(false);
   const latestOnChange = useRef(props.onChange);
 
   useEffect(
@@ -21,21 +21,39 @@ export function useLazyState<T>(props: {
 
   useEffect(
     function syncStateFromProps() {
-      if (!willUpdate.current) {
+      if (!willUpdateSoon.current) {
         setInternalValue(props.value);
       }
     },
     [props.value]
   );
 
-  function setState(newValue: T) {
-    willUpdate.current = true;
-    setInternalValue(newValue);
+  type IStateSetter = (prevState: T) => T;
 
+  function setState(newValue: T | IStateSetter) {
+    willUpdateSoon.current = true;
+
+    let valueForOnChange: T;
+
+    // set state
+    const isNewValueASetter = typeof newValue === "function";
+    if (isNewValueASetter) {
+      const newValueSetter = newValue as IStateSetter;
+      setInternalValue((prevState) => {
+        const resultFromSetter = newValueSetter(prevState);
+        valueForOnChange = resultFromSetter;
+        return resultFromSetter;
+      });
+    } else {
+      setInternalValue(newValue);
+      valueForOnChange = newValue as T;
+    }
+
+    // update parent
     clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
-      latestOnChange.current(newValue);
-      willUpdate.current = false;
+      latestOnChange.current(valueForOnChange);
+      willUpdateSoon.current = false;
     }, delay);
   }
 
