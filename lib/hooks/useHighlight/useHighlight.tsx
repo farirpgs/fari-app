@@ -10,10 +10,11 @@ export function useHighlight() {
 
   const linearBackground = `${firstColor} linear-gradient(90deg,${secondColor},${firstColor})`;
   const radialBackground = `${firstColor} radial-gradient(${firstColor},${secondColor})`;
-  const color = theme.palette.getContrastText(firstColor);
   const highlightTheme = useThemeFromColor(
-    theme.palette.getContrastText(firstColor)
+    theme.palette.getContrastText(firstColor),
+    "dark"
   );
+  const color = highlightTheme.palette.text.primary;
   const hover = "#b1cbff";
   return {
     highlightTheme: highlightTheme,

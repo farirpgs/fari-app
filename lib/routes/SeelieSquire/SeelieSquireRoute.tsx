@@ -73,10 +73,13 @@ function makeSeelieSquireMarkdown(props: {
 
   const markdown = `
 # Seelie Squire's Book of Creatures
-
-> Brought to you by Seelie Squire, this is
+<page-meta author="Seelie Squire" description="Brought to you by Seelie Squire, this is
 ultimate resource if you are looking for the closest thing to a
-Fate Compendium.
+Fate Compendium."></page-meta>
+
+## A Word from Seelie Squire
+
+
 
 
 ${creatures

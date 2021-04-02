@@ -908,13 +908,13 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function renderHeader() {
     return (
-      <Box mx=".5rem" mb="2rem" py="2rem">
+      <Box mx=".5rem" mb="2rem">
         <Box>
           <Container maxWidth="sm">
             <Box>{renderManagementActions()}</Box>
           </Container>
         </Box>
-        <Box pb="2rem">
+        <Box>
           <Container maxWidth="sm">
             <Box mb=".5rem">
               <FateLabel
@@ -940,7 +940,7 @@ export const Scene: React.FC<IProps> = (props) => {
               </FormHelperText>
             </Box>
             <Collapse in={!!sceneManager.state.scene.name}>
-              <Box>
+              <Box mb="1rem">
                 <Grid
                   container
                   spacing={2}

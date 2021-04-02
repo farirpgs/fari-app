@@ -15,6 +15,7 @@ import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import appIcon from "../../../images/blue/app.png";
+import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
 import { RouterLink } from "../../components/AppLink/AppLink";
 import { ConditionalWrapper } from "../../components/ConditionalWrapper/ConditionalWrapper";
@@ -42,7 +43,6 @@ const Patrons = [
   "Aeife O'Brien",
   "GhostDM",
   "Fluffydumplin",
-  "Ty Prunty",
 ];
 
 const Sponsors: Array<{ image: string; name: string }> = [
@@ -195,7 +195,13 @@ export const HomeRoute: React.FC<{}> = (props) => {
           </>
         </LightBox>
 
-        <DarkBox px="2rem" py="5rem" maxWidth="sm" mb={sectionsSeparator}>
+        <DarkBox
+          px="2rem"
+          py="5rem"
+          maxWidth="sm"
+          mb={sectionsSeparator}
+          title={t("home-route.support-fari.title")}
+        >
           {renderSupport()}
         </DarkBox>
       </Box>
@@ -205,19 +211,16 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderSupport() {
     return (
       <Box>
-        <Box mb="1rem">
-          <FateLabel variant="h4" align="center" color="primary">
-            {t("home-route.support-fari.title")}
-          </FateLabel>
+        <Box mb="2rem">
+          <Typography
+            variant="subtitle1"
+            align="center"
+            className={css({ whiteSpace: "pre-line" })}
+          >
+            {t("home-route.support-fari.description")}
+          </Typography>
         </Box>
-        <Typography
-          variant="body1"
-          align="center"
-          className={css({ whiteSpace: "pre-line" })}
-        >
-          {t("home-route.support-fari.description")}
-        </Typography>
-        <Box py="1rem">
+        <Box mb="1rem">
           <Grid container justify="center" spacing={2} alignItems="center">
             <Grid item>
               <Kofi />
@@ -234,7 +237,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderPatrons() {
     return (
       <Box textAlign="center">
-        <Box mb="1rem">
+        <Box mb="2rem">
           <Grid container spacing={1} justify="center">
             {Patrons.map((patron, i) => {
               const isLast = i === Patrons.length - 1;
@@ -536,24 +539,40 @@ export const HomeRoute: React.FC<{}> = (props) => {
 
   function renderDiscord() {
     return (
-      <Box>
-        <Button
-          color="primary"
-          variant="outlined"
-          component="a"
-          href="https://discord.gg/vMAJFjUraA"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {t("home-route.sections.join-community.cta")}
-        </Button>
-      </Box>
+      <Grid container justify="center" spacing={2}>
+        {" "}
+        <Grid item xs={12}>
+          <img src={discord} className={css({ width: "200px" })} />
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            color="primary"
+            variant="outlined"
+            size="large"
+            component="a"
+            href="https://discord.gg/vMAJFjUraA"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t("home-route.sections.join-community.cta")}
+          </Button>
+        </Grid>
+      </Grid>
     );
   }
 
   function renderOpenSource() {
     return (
       <Grid container justify="center" spacing={2}>
+        <Grid item xs={12}>
+          <a
+            href="https://github.com/fariapp/fari"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GitHubIcon className={css({ width: "5rem", height: "5rem" })} />
+          </a>
+        </Grid>
         <Grid item xs={12}>
           <Button
             color="primary"
@@ -566,15 +585,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
             {t("home-route.sections.open-source.cta")}
           </Button>
         </Grid>
-        <Grid item xs={12}>
-          <a
-            href="https://github.com/fariapp/fari"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GitHubIcon className={css({ width: "5rem", height: "5rem" })} />
-          </a>
-        </Grid>
       </Grid>
     );
   }
@@ -583,18 +593,21 @@ export const HomeRoute: React.FC<{}> = (props) => {
     return (
       <Box display="flex" flexDirection="column" height="100%">
         <Typography
-          variant="h4"
+          variant="h3"
+          component="h1"
           className={css({
             label: "LightBox-title",
             marginBottom: ".5rem",
             textAlign: "left",
             fontWeight: theme.typography.fontWeightBold,
+            letterSpacing: "-0.035em",
           })}
         >
           <>{t("home-route.header.title")}</>
         </Typography>
         <Typography
           variant="subtitle1"
+          component="h2"
           className={css({
             label: "LightBox-subtitle",
             marginBottom: "2rem",
@@ -688,12 +701,14 @@ function LightBox(props: ILightBoxProps) {
     <>
       {title && (
         <Typography
-          variant="h4"
+          variant="h3"
+          component="h3"
           className={css({
             label: "LightBox-title",
-            marginBottom: subTitle ? ".5rem" : "2rem",
+            marginBottom: subTitle ? "1rem" : "3rem",
             textAlign: textAlign ?? "center",
             fontWeight: theme.typography.fontWeightBold,
+            letterSpacing: "-0.035em",
           })}
         >
           {title}
@@ -701,11 +716,12 @@ function LightBox(props: ILightBoxProps) {
       )}
       {subTitle && (
         <Typography
-          variant="subtitle1"
+          variant="h5"
           className={css({
             label: "LightBox-subtitle",
-            marginBottom: "2rem",
+            marginBottom: "3rem",
             textAlign: textAlign ?? "center",
+            color: theme.palette.text.secondary,
           })}
         >
           {subTitle}
@@ -782,9 +798,9 @@ function DarkBox(props: ILightBoxProps & { linear?: boolean }) {
               ? highlight.linearBackground
               : highlight.radialBackground,
             "textAlign": "center",
-            "color": highlight.color,
+            "color": highlight.highlightTheme.palette.text.primary,
             "& a": {
-              color: highlight.color,
+              color: highlight.highlightTheme.palette.text.primary,
             },
           }),
           className
@@ -870,6 +886,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                     <Button
                       color="primary"
                       variant="outlined"
+                      size="large"
                       component={RouterLink}
                       to={card.to}
                     >

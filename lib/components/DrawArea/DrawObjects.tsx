@@ -354,45 +354,44 @@ export const DrawObjects: React.FC<IProps> = (props) => {
   }
 
   function renderOtherActions() {
+    if (props.readonly) {
+      return null;
+    }
     return (
       <>
         <Divider />
         <Box p="0.5rem">
           <Grid container justify="flex-start" alignItems="center" spacing={1}>
-            {!props.readonly && (
-              <>
-                <Grid item>
-                  <IconButton
-                    data-cy="draw.clear"
-                    size="small"
-                    className={css({
-                      color: theme.palette.text.primary,
-                    })}
-                    onClick={() => {
-                      drawingManager.actions.clear();
-                      logger.info("DrawArea:onClear");
-                    }}
-                  >
-                    <ClearAllTwoToneIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <IconButton
-                    data-cy="draw.undo"
-                    size="small"
-                    className={css({
-                      color: theme.palette.text.primary,
-                    })}
-                    onClick={() => {
-                      drawingManager.actions.undo();
-                      logger.info("DrawArea:onUndo");
-                    }}
-                  >
-                    <UndoTwoToneIcon />
-                  </IconButton>
-                </Grid>
-              </>
-            )}
+            <Grid item>
+              <IconButton
+                data-cy="draw.clear"
+                size="small"
+                className={css({
+                  color: theme.palette.text.primary,
+                })}
+                onClick={() => {
+                  drawingManager.actions.clear();
+                  logger.info("DrawArea:onClear");
+                }}
+              >
+                <ClearAllTwoToneIcon />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton
+                data-cy="draw.undo"
+                size="small"
+                className={css({
+                  color: theme.palette.text.primary,
+                })}
+                onClick={() => {
+                  drawingManager.actions.undo();
+                  logger.info("DrawArea:onUndo");
+                }}
+              >
+                <UndoTwoToneIcon />
+              </IconButton>
+            </Grid>
           </Grid>
         </Box>
         <Divider />

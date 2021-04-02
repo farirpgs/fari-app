@@ -297,21 +297,21 @@ export const Page: React.FC<{
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
                   Fari uses icons available at{" "}
-                  <a
+                  <Link
                     href="http://game-icons.net"
                     target="_blank"
                     rel="noreferrer"
                   >
                     http://game-icons.net
-                  </a>{" "}
+                  </Link>{" "}
                   and{" "}
-                  <a
+                  <Link
                     href="https://icons8.com/icon/569/dice"
                     target="_blank"
                     rel="noreferrer"
                   >
                     Icons8
-                  </a>
+                  </Link>
                 </Typography>
               </Box>
             </Grid>
