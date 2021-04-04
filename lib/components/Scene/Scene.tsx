@@ -528,7 +528,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   }}
                   number={playerRowIndex + 1}
                   key={player.id}
-                  highlight={isMe}
+                  isMe={isMe}
                   player={player}
                   onPlayerRemove={() => {
                     sceneManager.actions.removePlayer(player.id);

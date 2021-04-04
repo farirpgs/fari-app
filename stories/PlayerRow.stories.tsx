@@ -26,7 +26,7 @@ function StorybookPlayerRow(props: {
         canRemove: props.canRemove,
       }}
       player={props.player}
-      highlight={props.highlight}
+      isMe={props.highlight}
       number={1}
       onDiceRoll={action("onDiceRoll")}
       onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}

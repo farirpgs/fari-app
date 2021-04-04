@@ -44,7 +44,7 @@ export const PlayerRow: React.FC<
       canRemove: boolean;
     };
     player: IPlayer;
-    highlight: boolean;
+    isMe: boolean;
     number: number;
     onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
@@ -108,9 +108,7 @@ export const PlayerRow: React.FC<
   return (
     <>
       <Box
-        bgcolor={
-          props.highlight ? lightBackground : theme.palette.background.paper
-        }
+        bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
         data-cy={props["data-cy"]}
       >
         <Box py=".5rem" px=".5rem">
@@ -133,6 +131,8 @@ export const PlayerRow: React.FC<
               rolls={props.player.rolls}
               size="2rem"
               fontSize="1rem"
+              // disabling the confettis if the current row is "me" because there is already a diceFab
+              disableConfettis={props.isMe}
               borderSize=".15rem"
               disabled={!props.permissions.canRoll}
               onClick={() => {
