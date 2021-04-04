@@ -77,11 +77,6 @@ function makeSeelieSquireMarkdown(props: {
 ultimate resource if you are looking for the closest thing to a
 Fate Compendium."></page-meta>
 
-## A Word from Seelie Squire
-
-
-
-
 ${creatures
   .map((c) => {
     return `
