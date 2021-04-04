@@ -5,12 +5,14 @@ import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Fab from "@material-ui/core/Fab";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { useTheme } from "@material-ui/core/styles";
+import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import Zoom from "@material-ui/core/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
@@ -110,7 +112,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
   function handleRoll() {
     const newCommands = fabCommands.flatMap((o) => o.value);
     const result = diceManager.actions.rollByCommandNames(newCommands, {
-      listResults: false,
+      listResults: diceManager.state.options.listResults,
     });
 
     props.onSelect?.(result);
@@ -181,6 +183,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
             open={open}
             anchorEl={anchorEl}
             commands={fabCommands}
+            showPoolToggle
             onClear={handleClear}
             onDiceCommandChange={setFabCommands}
           />
@@ -219,7 +222,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
     const commandsToCheckForDynamicFabIcon =
       selectedOptions.length > 0
         ? selectedOptions.flatMap((o) => o.value)
-        : diceManager.state.latestCommandsNames;
+        : diceManager.state.commandNames;
     const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
       commandsToCheckForDynamicFabIcon
     );
@@ -239,6 +242,7 @@ export const DiceMenu: React.FC<{
   open: boolean;
   ctaLabel?: string;
   commands: Array<IDiceCommandGroup>;
+  showPoolToggle: boolean;
   onCtaClick?(): void;
   onClose?(): void;
   onClear?(): void;
@@ -248,6 +252,8 @@ export const DiceMenu: React.FC<{
 }> = (props) => {
   const theme = useTheme();
   const zIndex = useZIndex();
+  const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
 
   return <>{renderPopper()}</>;
 
@@ -300,6 +306,27 @@ export const DiceMenu: React.FC<{
                     {(props.onClear || props.onCtaClick) && (
                       <Box mt="1.5rem">
                         <Grid container justify="center" spacing={2}>
+                          {props.showPoolToggle && (
+                            <Grid item>
+                              <FormControlLabel
+                                control={
+                                  <Switch
+                                    checked={
+                                      diceManager.state.options.listResults
+                                    }
+                                    onChange={() => {
+                                      diceManager.actions.setOptions({
+                                        listResults: !diceManager.state.options
+                                          .listResults,
+                                      });
+                                    }}
+                                    color="primary"
+                                  />
+                                }
+                                label={t("dice-fab.pool")}
+                              />
+                            </Grid>
+                          )}
                           {props.onClear && (
                             <Grid item>
                               <Button

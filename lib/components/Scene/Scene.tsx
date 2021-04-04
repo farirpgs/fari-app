@@ -57,7 +57,6 @@ import { ICharacter } from "../../domains/character/types";
 import {
   IDiceCommandOption,
   IDiceRollResult,
-  IRollDiceOptions,
   RollType,
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -547,10 +546,10 @@ export const Scene: React.FC<IProps> = (props) => {
                       }
                     );
                   }}
-                  onDiceRoll={(options: IRollDiceOptions) => {
+                  onDiceRoll={() => {
                     handleSetPlayerRoll(
                       player.id,
-                      diceManager.actions.reroll(options)
+                      diceManager.actions.reroll()
                     );
                   }}
                   onPlayedInTurnOrderChange={(playedInTurnOrder) => {
@@ -799,7 +798,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     sceneManager={sceneManager}
                     onRoll={(label, modifier) => {
                       const options: Array<IDiceCommandOption> = [
-                        ...diceManager.state.latestCommandOptionList,
+                        ...diceManager.state.commandOptionList,
                       ];
                       options.push({
                         type: RollType.Modifier,

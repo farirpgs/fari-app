@@ -85,6 +85,7 @@
   "data-route.none": "None",
   "data-route.type": "Type",
   "dice-fab-reroll": "Reroll",
+  "dice-fab.pool": "Pool",
   "dice-fab.roll": "Roll",
   "dice-fab.roll-pool": "Roll Pool",
   "dice-route.meta.description": "Roll any types of dice using this fair dice roller.",

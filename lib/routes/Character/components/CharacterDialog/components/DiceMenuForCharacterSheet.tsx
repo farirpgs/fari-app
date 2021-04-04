@@ -89,6 +89,7 @@ export const DiceMenuForCharacterSheet: React.FC<{
                 open={open}
                 anchorEl={anchorEl}
                 commands={commandGroups}
+                showPoolToggle={false}
                 onDiceCommandChange={setCommandGroups}
                 ctaLabel="Select"
                 onClear={handleOnClear}

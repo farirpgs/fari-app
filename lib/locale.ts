@@ -85,6 +85,7 @@ export type ITranslationKeys =
   | "data-route.none"
   | "data-route.type"
   | "dice-fab-reroll"
+  | "dice-fab.pool"
   | "dice-fab.roll"
   | "dice-fab.roll-pool"
   | "dice-route.meta.description"

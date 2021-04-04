@@ -18,7 +18,6 @@ import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
-import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
@@ -45,10 +44,9 @@ export const PlayerRow: React.FC<
       canRemove: boolean;
     };
     player: IPlayer;
-
     highlight: boolean;
     number: number;
-    onDiceRoll(options: IRollDiceOptions): void;
+    onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
 
@@ -102,8 +100,8 @@ export const PlayerRow: React.FC<
     margin: "0 auto",
   });
 
-  const handleRoll = (options: IRollDiceOptions) => {
-    props.onDiceRoll(options);
+  const handleRoll = () => {
+    props.onDiceRoll();
     logger.info("ScenePlayer:onDiceRoll");
   };
 
@@ -138,7 +136,7 @@ export const PlayerRow: React.FC<
               borderSize=".15rem"
               disabled={!props.permissions.canRoll}
               onClick={() => {
-                handleRoll({ listResults: false });
+                handleRoll();
               }}
             />
           </Box>

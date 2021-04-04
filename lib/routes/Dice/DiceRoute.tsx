@@ -35,6 +35,7 @@ export function DiceRoute(props: { pool: boolean }) {
       } else {
         logger.info("Route:DicePool");
       }
+      diceManager.actions.setOptions({ listResults: props.pool });
     },
     [props.pool]
   );
@@ -65,7 +66,7 @@ export function DiceRoute(props: { pool: boolean }) {
         <DiceFab
           type={DiceFabMode.Roll}
           onSelect={(result) => {
-            setRollResult({ ...result, options: { listResults: props.pool } });
+            setRollResult(result);
           }}
         />
 

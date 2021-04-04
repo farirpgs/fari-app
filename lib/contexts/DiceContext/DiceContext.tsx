@@ -67,6 +67,10 @@ export function useDice() {
     return result;
   }
 
+  /**
+   * Reroll the latest commands
+   * @param options if empty, uses the latest options
+   */
   function reroll(options?: IRollDiceOptions) {
     const optionsToUse = options ?? latestOptions;
     const result = Dice.rollCommandOptionList(
@@ -78,9 +82,16 @@ export function useDice() {
 
   return {
     state: {
-      latestCommandOptionList,
-      latestCommandsNames,
+      commandOptionList: latestCommandOptionList,
+      commandNames: latestCommandsNames,
+      options: latestOptions,
     },
-    actions: { roll, rollByCommandNames, reroll, reset },
+    actions: {
+      roll,
+      rollByCommandNames,
+      reroll,
+      reset,
+      setOptions: setLatestOptions,
+    },
   };
 }
