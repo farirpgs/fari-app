@@ -28,7 +28,7 @@ export const SeelieSquireRoute: React.FC<{
       loadFunction={async () => {
         return makeSeelieSquireMarkdown({ theme, isExtraSmall: isExtraSmall });
       }}
-      gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
+      gitHubLink="https://github.com/fariapp/fari/blob/master/lib/routes/SeelieSquire/domains/creatures.ts"
       author={{
         title: "Seelie Squire",
         avatarUrl: Images.seelieSquireAvatar,
