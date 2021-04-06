@@ -1,9 +1,9 @@
 {
-  "id": "74da59e8-32bf-41bf-bc70-d89b7b43d0a6",
+  "id": "bc8447d8-cb0c-4877-bdd0-2fd5b8baaa7e",
   "version": 3,
   "name": "Heartbreaker",
   "template": "Heartbreaker",
-  "lastUpdated": 1616252526,
+  "lastUpdated": 1617733243,
   "pages": [
     {
       "id": "797ebacd-7f37-4616-a645-72f58b663d08",
@@ -192,24 +192,24 @@
           "position": "Right",
           "blocks": [
             {
-              "id": "bb77a16e-646f-4f6b-99cd-ef0774d42c61",
-              "label": "[2] MILd",
-              "type": "Text",
-              "value": "",
+              "id": "be2279c9-e608-42a9-a142-77da2be6de6a",
+              "label": "MILD",
+              "type": "Numeric",
+              "value": "2",
               "meta": { "checked": false }
             },
             {
-              "id": "981d3a4a-7278-4eb8-a178-9b873f52f057",
-              "label": "[4] MODERATE",
-              "type": "Text",
-              "value": "",
+              "id": "0290fdd6-1ea1-4b7c-9824-65ad26e283f2",
+              "label": "MODERATE",
+              "type": "Numeric",
+              "value": "4",
               "meta": { "checked": false }
             },
             {
-              "id": "40e89581-333f-43e7-8be4-151a55b58d62",
-              "label": "[6] SEVERE",
-              "type": "Text",
-              "value": "",
+              "id": "7596a6de-cc81-40e9-b583-e5fb1f0bf44f",
+              "label": "SEVERE",
+              "type": "Numeric",
+              "value": "6",
               "meta": { "checked": false }
             }
           ]

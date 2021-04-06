@@ -27,7 +27,6 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Fate", template: CharacterTemplates.VentureCity },
   { group: "Fate", template: CharacterTemplates.Heartbreaker },
   { group: "Fate", template: CharacterTemplates.IronEddaAccelerated },
-  { group: "Fate", template: CharacterTemplates.Heartbreaker },
   { group: "Maze", template: CharacterTemplates.Maze },
   { group: "Dungeons & Dragons", template: CharacterTemplates.Dnd5e },
   { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead },
