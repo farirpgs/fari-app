@@ -140,6 +140,7 @@
   "home-route.sections.join-community.title": "Rejoigner la communauté",
   "home-route.sections.open-source.cta": "Ajouter une étoile sur GitHub",
   "home-route.sections.open-source.description": "Fari est non seulement gratuit, mais tout le monde peut aider à créer de nouvelles fonctionnalités, localiser l'application et aider à résoudre les bugs. \n\nFari est fièrement licencié sous la license AGPLv3.",
+  "home-route.sections.open-source.sub-title": "Axé sur la communauté",
   "home-route.sections.open-source.title": "100% Open Source",
   "home-route.sections.patreon.title": "Merci à ces gens fantastique",
   "home-route.sections.tools.title": "Outils pratique",

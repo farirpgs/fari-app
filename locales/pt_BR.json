@@ -140,6 +140,7 @@
   "home-route.sections.join-community.title": "Junte-se à Comunidade",
   "home-route.sections.open-source.cta": "Adicionar uma estrela no GitHub",
   "home-route.sections.open-source.description": "Não se trata apenas de ser livre, mas também significa que qualquer pessoa pode contribuir com novas funcionalidades, localizar o aplicativo e ajudar a eliminar bugs. \n\nA Fari está orgulhosamente licenciada sob AGPLv3.",
+  "home-route.sections.open-source.sub-title": "Movido pela comunidade",
   "home-route.sections.open-source.title": "100% código aberto",
   "home-route.sections.patreon.title": "Especialmente graças a essa gente fina",
   "home-route.sections.tools.title": "Ferramentas Essenciais",
