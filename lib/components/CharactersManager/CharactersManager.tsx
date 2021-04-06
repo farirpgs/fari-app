@@ -1,15 +1,13 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidV4 } from "uuid";
-import {
-  CharactersContext,
-  CharacterType,
-  ICharacter,
-  migrateCharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { CharacterTemplates } from "../../domains/character/CharacterType";
+import { ICharacter } from "../../domains/character/types";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -22,7 +20,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
 
   function onAdd() {
     const newCharacter = charactersManager.actions.add(
-      CharacterType.CoreCondensed
+      CharacterTemplates.FateCondensed
     );
 
     if (charactersManager.state.managerCallback) {
@@ -56,16 +54,21 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     logger.info("CharactersManager:onDelete");
   }
 
+  function onDuplicate(character: ICharacter) {
+    charactersManager.actions.duplicate(character.id);
+    logger.info("CharactersManager:onDuplicate");
+  }
+
   function onImport(charactersToImport: FileList | null) {
     FariEntity.import<ICharacter>({
       filesToImport: charactersToImport,
       fariType: "character",
       onImport: (c) => {
         const characterWithNewId = produce(c, (draft) => {
-          draft.id = uuidV4();
+          draft.id = Id.generate();
         });
 
-        const migratedCharacter = migrateCharacter(characterWithNewId);
+        const migratedCharacter = CharacterFactory.migrate(characterWithNewId);
 
         charactersManager.actions.upsert(migratedCharacter);
 
@@ -102,6 +105,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
+      onDuplicate={onDuplicate}
       onUndo={onUndoDelete}
       onClose={charactersManager.actions.closeManager}
       onImport={onImport}

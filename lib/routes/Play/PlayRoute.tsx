@@ -44,8 +44,12 @@ export const PlayRoute: React.FC<{
       if (peerAction.action === "roll") {
         sceneManager.actions.updatePlayerRoll(id, peerAction.payload);
       }
-      if (peerAction.action === "update-fate-point") {
-        sceneManager.actions.updatePlayerFatePoints(id, peerAction.payload);
+      if (peerAction.action === "update-main-point-counter") {
+        sceneManager.actions.updatePlayerCharacterMainPointCounter(
+          id,
+          peerAction.payload.points,
+          peerAction.payload.maxPoints
+        );
       }
       if (peerAction.action === "played-in-turn-order") {
         sceneManager.actions.updatePlayerPlayedDuringTurn(
@@ -57,10 +61,7 @@ export const PlayRoute: React.FC<{
         sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
       }
       if (peerAction.action === "load-character") {
-        sceneManager.actions.updatePlayerCharacterWithHiddenFields(
-          id,
-          peerAction.payload
-        );
+        sceneManager.actions.loadPlayerCharacter(id, peerAction.payload);
       }
     },
     debug: debug,

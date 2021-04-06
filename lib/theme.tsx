@@ -20,7 +20,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
     // default 400
     fontWeightRegular: 400,
     // default 500
-    fontWeightMedium: 400,
+    fontWeightMedium: 600,
     // default 700
     fontWeightBold: 700,
     fontFamily: [
@@ -33,26 +33,27 @@ export const defaultThemeConfiguration: ThemeOptions = {
   },
   overrides: {
     MuiCssBaseline: {
-      "@global": {
-        "@media print": {
-          "@page": {
-            size: "A2",
-          },
-          "body": {
-            minWidth: "1200px",
-          },
-        },
+      "@global": {},
+    },
+    MuiTypography: {
+      root: {
+        whiteSpace: "pre-wrap",
       },
     },
     MuiButton: {
       root: {
-        borderRadius: "7px",
+        borderRadius: "4px",
       },
       contained: {
         fontWeight: 700,
       },
       outlined: {
-        fontWeight: 700,
+        "fontWeight": 700,
+        "&:hover": {
+          // theme.shadows[1],
+          boxShadow:
+            "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+        },
       },
     },
     MuiButtonGroup: {
@@ -78,6 +79,11 @@ export const AppDarkTheme = responsiveFontSizes(
     ...defaultThemeConfiguration,
     palette: {
       type: "dark",
+      background: {
+        default: "#212121",
+        // paper: "#424242",
+        paper: "#333333",
+      },
       primary: {
         main: "#b1cbff",
       },

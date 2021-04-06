@@ -14,17 +14,15 @@ import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import {
-  DiceContext,
-  useRollDice,
-} from "../../contexts/DiceContext/DiceContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { IDiceRollResult, RollType } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { ITranslationKeys } from "../../locale";
 import { Oracle } from "./domains/Oracle";
 
 type IMatrixItem = {
@@ -60,12 +58,12 @@ export const OracleRoute = () => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const rollDice = useRollDice();
+
   const diceManager = useContext(DiceContext);
-  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const [likeliness, setLikeliness] = useState<number>(0);
   const [rolling, setRolling] = useState<boolean>(false);
-  const [finalRoll, setFinalRoll] = useState<IDiceRollWithBonus>();
+  const [finalRoll, setFinalRoll] = useState<IDiceRollResult>();
   const finalRollTotal = finalRoll?.total ?? 0;
   const finalResult = finalRollTotal + likeliness;
   const oracleValue = Oracle.getValue(finalResult);
@@ -73,7 +71,27 @@ export const OracleRoute = () => {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = rollDice({});
+      const newRoll = diceManager.actions.roll(
+        [
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+        ],
+        { listResults: false }
+      );
       logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });
@@ -96,22 +114,12 @@ export const OracleRoute = () => {
         title={t("oracle-route.meta.title")}
         description={t("oracle-route.meta.description")}
       />
-
       <Box>
-        <Box
-          py="1rem"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Icons.EyeIcon
-            className={css({ fontSize: "3rem" })}
-            color="primary"
-          />
-          <FateLabel variant="h4" align="center" color="primary">
-            {"Oracle"}
-          </FateLabel>
-        </Box>
+        <Heading
+          icon={Icons.EyeIcon}
+          title={t("oracle-route.meta.title")}
+          subtitle={t("oracle-route.meta.description")}
+        />
 
         <Box py="1rem">
           <DiceBox
@@ -159,9 +167,7 @@ export const OracleRoute = () => {
                   className={css({ width: "100%" })}
                 >
                   {shouldDisplayFinalResult
-                    ? t(
-                        `oracle.value.${oracleValue}` as IPossibleTranslationKeys
-                      )
+                    ? t(`oracle.value.${oracleValue}` as ITranslationKeys)
                     : " ..."}
                 </FateLabel>
               </Toolbar>

@@ -2,23 +2,27 @@ import produce from "immer";
 import isEqual from "lodash/isEqual";
 import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import {
-  ICharacter,
-  useCharacters,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
   defaultSceneAspects,
   defaultSceneName,
-  defaultSceneVersion,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
+import { arraySort } from "../../domains/array/arraySort";
+import {
+  BlockType,
+  IBlock,
+  ICharacter,
+  IPointCounterBlock,
+} from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
-import { IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { IDiceRollResult } from "../../domains/dice/Dice";
+import { Id } from "../../domains/Id/Id";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { AspectType } from "./AspectType";
 import { IAspect, IPlayer, IScene } from "./IScene";
 
@@ -34,29 +38,10 @@ export function useScene(props: IProps) {
   const { userId, gameId, charactersManager } = props;
   const isGM = !gameId;
   const [removedPlayers, setRemovedPlayers] = useState([]);
-  const [scene, setScene] = useState<IScene>(() => ({
-    id: uuidV4(),
-    name: defaultSceneName,
-    group: undefined,
-    aspects: defaultSceneAspects,
-    gm: {
-      id: isGM ? userId : temporaryGMIdUntilFirstSync,
-      playerName: "Game Master",
-      rolls: [],
-      playedDuringTurn: false,
-      fatePoints: 3,
-      offline: false,
-      isGM: true,
-    },
-    players: [],
-    goodConfetti: 0,
-    badConfetti: 0,
-    sort: false,
-    showCharacterCards: undefined,
-    drawAreaObjects: [],
-    version: defaultSceneVersion,
-    lastUpdated: getUnix(),
-  }));
+  const [scene, setScene] = useState<IScene>(() => {
+    const gmId = isGM ? userId : temporaryGMIdUntilFirstSync;
+    return SceneFactory.make(gmId);
+  });
 
   const [sceneToLoad, setSceneToLoad] = useState<ISavableScene | undefined>(
     undefined
@@ -76,6 +61,7 @@ export function useScene(props: IProps) {
       lastUpdated: scene.lastUpdated,
       version: scene.version,
     };
+
     return !isEqual(sceneToLoad, currentScene);
   }, [scene, sceneToLoad]);
 
@@ -120,18 +106,29 @@ export function useScene(props: IProps) {
   const playersWithCharacterSheets = scene.players.filter(
     (player) => !!player.character
   );
-  const hasPlayersWithCharacterSheets = !!playersWithCharacterSheets.length;
+  const sortedPlayersWithCharacterSheets = arraySort(
+    playersWithCharacterSheets,
+    [
+      (p) => {
+        return { value: p.id === userId, direction: "asc" };
+      },
+    ]
+  );
+  const hasPlayersWithCharacterSheets = !!sortedPlayersWithCharacterSheets.length;
 
   const userCharacterSheet = scene.players.find((p) => {
     return p.id === userId;
   });
 
+  useEffect(() => {
+    scene.players.forEach((p) => {
+      charactersManager.actions.updateIfExists(p.character);
+    });
+  }, [scene]);
+
   function safeSetScene(newScene: IScene) {
     if (newScene) {
       setScene(newScene);
-      newScene.players.forEach((p) => {
-        charactersManager.actions.updateIfExists(p.character);
-      });
     }
   }
 
@@ -160,7 +157,7 @@ export function useScene(props: IProps) {
   function cloneAndLoadNewScene(newScene: ISavableScene) {
     if (newScene) {
       const clonedNewScene = produce(newScene, (draft) => {
-        draft.id = uuidV4();
+        draft.id = Id.generate();
       });
       loadScene(clonedNewScene, true);
       forceDirty();
@@ -183,8 +180,7 @@ export function useScene(props: IProps) {
         const pinnedAspects = getPinnedAspects(draft);
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
-        draft.id = uuidV4();
-        draft.group = "";
+        draft.id = Id.generate();
         draft.aspects = { ...pinnedAspects, ...defaultSceneAspects };
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {
@@ -211,7 +207,7 @@ export function useScene(props: IProps) {
   }
 
   function addAspect(type: AspectType, isPrivate: boolean) {
-    const id = uuidV4();
+    const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
         draft.aspects[id] = { ...defaultAspects[type], isPrivate: isPrivate };
@@ -234,6 +230,50 @@ export function useScene(props: IProps) {
     setScene(
       produce((draft: IScene) => {
         delete draft.aspects[aspectId];
+      })
+    );
+  }
+
+  function moveAspects(dragIndex: number, hoverIndex: number) {
+    setScene(
+      produce((draft: IScene) => {
+        if (!draft) {
+          return;
+        }
+
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+        const hoverKey = Object.keys(draft.aspects)[hoverIndex];
+        const dragKey = Object.keys(draft.aspects)[dragIndex];
+
+        draft.aspects = Object.keys(draft.aspects).reduce<
+          Record<string, IAspect>
+        >((acc, currentAspectId, index) => {
+          if (index === dragIndex) {
+            return { ...acc };
+          }
+          if (index === hoverIndex) {
+            const movedAspects =
+              hoverIndex > dragIndex
+                ? {
+                    [hoverKey]: draft.aspects[hoverKey],
+                    [dragKey]: draft.aspects[dragKey],
+                  }
+                : {
+                    [dragKey]: draft.aspects[dragKey],
+                    [hoverKey]: draft.aspects[hoverKey],
+                  };
+            return {
+              ...acc,
+              ...movedAspects,
+            };
+          }
+          return {
+            ...acc,
+            [currentAspectId]: draft.aspects[currentAspectId],
+          };
+        }, {});
       })
     );
   }
@@ -448,7 +488,7 @@ export function useScene(props: IProps) {
       produce((draft: IScene) => {
         const offlinePlayers = draft.players.filter((p) => p.offline);
 
-        const mappedConnections = connections.map((c) => {
+        const mappedConnections = connections.map<IPlayer>((c) => {
           const meta: IPeerMeta = c.metadata;
           const playerName = meta.playerName;
           const peerJsId = c.label;
@@ -457,18 +497,19 @@ export function useScene(props: IProps) {
           const playerCharacter = playerMatch?.character;
 
           const rolls = playerMatch?.rolls ?? [];
-          const fatePoints = playerMatch?.fatePoints ?? 3;
           const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
+          const points = playerMatch?.points ?? "3";
 
           return {
             id: c.label,
             playerName: playerName,
             character: playerCharacter,
             rolls: rolls,
+            isGM: false,
+            points: points,
             playedDuringTurn: playedDuringTurn,
-            fatePoints: fatePoints,
             offline: false,
-          } as IPlayer;
+          };
         });
         const allPlayers = [...mappedConnections, ...offlinePlayers];
         const allPlayersMinusRemovedPlayersFromStaleConnections = allPlayers.filter(
@@ -482,38 +523,19 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addOfflinePlayer(playerName: string) {
-    const id = uuidV4();
-    setScene(
-      produce((draft: IScene) => {
-        draft.players.push({
-          id: id,
-          playerName: playerName,
-          character: undefined,
-          rolls: [],
-          playedDuringTurn: false,
-          fatePoints: 3,
-          offline: true,
-          isGM: false,
-        });
-      })
-    );
-    return id;
-  }
-
-  function addOfflineCharacter(character: ICharacter) {
-    const id = uuidV4();
+  function addOfflinePlayer() {
+    const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
         draft.players.push({
           id: id,
           playerName: "",
-          character: character,
+          character: undefined,
           rolls: [],
           playedDuringTurn: false,
-          fatePoints: character.refresh,
           offline: true,
           isGM: false,
+          points: "3",
         });
       })
     );
@@ -554,29 +576,25 @@ export function useScene(props: IProps) {
   function updatePlayerCharacter(
     id: string,
     character: ICharacter,
-    updateHiddenFields = false
+    loadCharacterHiddenFieldsInPlayer = false
   ) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
+
         everyone.forEach((p) => {
           if (p.id === id) {
             p.character = character;
-            if (updateHiddenFields) {
-              p.fatePoints = character.fatePoints ?? 3;
+            if (loadCharacterHiddenFieldsInPlayer) {
               p.playedDuringTurn = character.playedDuringTurn ?? false;
             }
           }
         });
       })
     );
-    charactersManager.actions.updateIfExists(character);
   }
 
-  function updatePlayerCharacterWithHiddenFields(
-    id: string,
-    character: ICharacter
-  ) {
+  function loadPlayerCharacter(id: string, character: ICharacter) {
     updatePlayerCharacter(id, character, true);
   }
 
@@ -601,18 +619,34 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerFatePoints(id: string, fatePoints: number) {
+  function updatePlayerCharacterMainPointCounter(
+    id: string,
+    points: string,
+    maxPoints: string | undefined
+  ) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
         everyone.forEach((p) => {
           if (p.id === id) {
-            const newFatePointsAmount = fatePoints >= 0 ? fatePoints : 0;
-            p.fatePoints = newFatePointsAmount;
-
+            p.points = points;
             if (p.character) {
-              p.character.fatePoints = newFatePointsAmount;
-              p.character.lastUpdated = getUnix();
+              for (const page of p.character.pages) {
+                for (const section of page.sections) {
+                  for (const block of section.blocks) {
+                    const shouldUpdateBlock =
+                      block.type === BlockType.PointCounter &&
+                      block.meta.isMainPointCounter;
+                    if (shouldUpdateBlock) {
+                      const typedBlock = block as IPointCounterBlock & IBlock;
+
+                      typedBlock.value = points;
+                      typedBlock.meta.max = maxPoints;
+                      p.character.lastUpdated = getUnix();
+                    }
+                  }
+                }
+              }
             }
           }
         });
@@ -620,7 +654,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updateGmRoll(roll: IDiceRollWithBonus) {
+  function updateGmRoll(roll: IDiceRollResult) {
     setScene(
       produce((draft: IScene) => {
         draft.gm.rolls = [roll, ...draft.gm.rolls];
@@ -628,7 +662,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerRoll(id: string, roll: IDiceRollWithBonus) {
+  function updatePlayerRoll(id: string, roll: IDiceRollResult) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];
@@ -691,7 +725,7 @@ export function useScene(props: IProps) {
 
   return {
     computed: {
-      playersWithCharacterSheets,
+      playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
       hasPlayersWithCharacterSheets,
       userCharacterSheet,
     },
@@ -707,6 +741,7 @@ export function useScene(props: IProps) {
       updateName,
       setGroup,
       addAspect,
+      moveAspects,
       removeAspect,
       resetAspect,
       setAspectIsPrivate,
@@ -729,9 +764,8 @@ export function useScene(props: IProps) {
       updateAspectColor,
       updatePlayersWithConnections,
       addOfflinePlayer,
-      addOfflineCharacter,
       removePlayer,
-      updatePlayerFatePoints,
+      updatePlayerCharacterMainPointCounter,
       updatePlayerPlayedDuringTurn,
       resetInitiative,
       updateGmRoll,
@@ -740,7 +774,7 @@ export function useScene(props: IProps) {
       fireBadConfetti,
       toggleSort,
       updatePlayerCharacter,
-      updatePlayerCharacterWithHiddenFields,
+      loadPlayerCharacter: loadPlayerCharacter,
       updateDrawAreaObjects,
       toggleAspectPinned,
       setNotes,

@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import useTheme from "@material-ui/core/styles/useTheme";
-import TextField from "@material-ui/core/TextField";
+import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -30,11 +30,12 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { default as React, useRef, useState } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import { IRollDiceOptions } from "../../domains/dice/Dice";
+import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
@@ -47,10 +48,12 @@ export const IndexCard: React.FC<
     readonly: boolean;
     className?: string;
     id?: string;
+    index: number;
     aspectId: string;
     sceneManager: ReturnType<typeof useScene>;
     showClickableSkills: boolean;
-    onRoll(options: IRollDiceOptions): void;
+    onRoll(modifierLabel: string, modifierValue: number): void;
+    onMove(dragIndex: number, hoverIndex: number): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -79,156 +82,176 @@ export const IndexCard: React.FC<
 
   return (
     <Paper elevation={aspect.pinned ? 8 : 1} className={props.className}>
-      <Box bgcolor={paperBackground} color={paperColor.primary}>
-        <Box
-          className={css({
-            fontSize: "1.5rem",
-            width: "100%",
-            padding: "0.5rem 0",
-            borderBottom: "1px solid #f0a4a4",
+      <Box
+        bgcolor={paperBackground}
+        color={paperColor.primary}
+        position="relative"
+      >
+        <BetterDnd
+          key={props.aspectId}
+          index={props.index}
+          type={"scene-aspects"}
+          readonly={false}
+          dragIndicatorClassName={css({
+            position: "absolute",
+            marginTop: "1rem",
+            marginLeft: ".5rem",
+            display: props.readonly ? "none" : "blockl",
           })}
+          onMove={(dragIndex, hoverIndex) => {
+            props.onMove(dragIndex, hoverIndex);
+          }}
         >
-          <Box p={"0 1rem 1rem 1rem"}>
-            {renderHeader()}
-            {renderTitle()}
+          <Box
+            className={css({
+              fontSize: "1.5rem",
+              width: "100%",
+              padding: "0.5rem 0",
+              borderBottom: "1px solid #f0a4a4",
+            })}
+          >
+            <Box p={"0 1rem 1rem 1rem"}>
+              {renderHeader()}
+              {renderTitle()}
+            </Box>
           </Box>
-        </Box>
-        {renderContent()}
-        {shouldRenderCheckboxesOrConsequences &&
-          renderCheckboxesAndConsequences()}
-        {renderSkills()}
-        <Collapse in={aspect.hasDrawArea}>
-          <Box>
-            <DrawArea
-              objects={aspect!.drawAreaObjects}
-              onChange={(objects) => {
-                if (!aspect.hasDrawArea) {
-                  return;
-                }
-                props.sceneManager.actions.setAspectDrawAreaObjects(
-                  props.aspectId,
-                  objects
-                );
-              }}
-              readonly={props.readonly}
-            />
-          </Box>
-        </Collapse>
-        {!props.readonly && (
-          <Box py=".5rem" px="1rem">
-            <Grid container wrap="nowrap" justify="flex-end" spacing={1}>
-              <Grid item>
-                <Tooltip
-                  title={
-                    aspect.isPrivate
-                      ? t("index-card.show")
-                      : t("index-card.hide")
+          {renderContent()}
+          {shouldRenderCheckboxesOrConsequences &&
+            renderCheckboxesAndConsequences()}
+          {renderSkills()}
+          <Collapse in={aspect.hasDrawArea}>
+            <Box>
+              <DrawArea
+                objects={aspect!.drawAreaObjects}
+                onChange={(objects) => {
+                  if (!aspect.hasDrawArea) {
+                    return;
                   }
-                >
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.menu.visibility`}
-                    onClick={() => {
-                      props.sceneManager.actions.setAspectIsPrivate(
-                        props.aspectId,
-                        !aspect.isPrivate
-                      );
-                    }}
-                  >
-                    {aspect.isPrivate ? (
-                      <VisibilityIcon />
-                    ) : (
-                      <VisibilityOffIcon />
-                    )}
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid item>
-                <Tooltip title={t("index-card.reset")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.reset`}
-                    onClick={() => {
-                      props.sceneManager.actions.resetAspect(props.aspectId);
-                    }}
-                  >
-                    <RotateLeftIcon />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid item>
-                {/* <Tooltip title={t("index-card.reset")}> */}
-                <IconButton
-                  size="small"
-                  ref={$paletteButton}
-                  data-cy={`${props["data-cy"]}.palette`}
-                  onClick={() => {
-                    setColorPickerOpen(true);
-                  }}
-                >
-                  <PaletteIcon />
-                </IconButton>
-                <Popover
-                  open={colorPickerOpen}
-                  anchorEl={$paletteButton.current}
-                  onClose={() => {
-                    setColorPickerOpen(false);
-                  }}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center",
-                  }}
-                >
-                  <ColorPicker
-                    value={
-                      IndexCardColor[aspect.color as IndexCardColorTypes].chip
+                  props.sceneManager.actions.setAspectDrawAreaObjects(
+                    props.aspectId,
+                    objects
+                  );
+                }}
+                readonly={props.readonly}
+              />
+            </Box>
+          </Collapse>
+          {!props.readonly && (
+            <Box py=".5rem" px="1rem">
+              <Grid container wrap="nowrap" justify="flex-end" spacing={1}>
+                <Grid item>
+                  <Tooltip
+                    title={
+                      aspect.isPrivate
+                        ? t("index-card.show")
+                        : t("index-card.hide")
                     }
-                    colors={Object.keys(IndexCardColor).map((colorName) => {
-                      const colorInfo =
-                        IndexCardColor[colorName as IndexCardColorTypes];
-                      return colorInfo.chip;
-                    })}
-                    hideCustom
-                    onChange={(color) => {
-                      const newColor = Object.keys(IndexCardColor).find(
-                        (colorName) => {
-                          const colorInfo =
-                            IndexCardColor[colorName as IndexCardColorTypes];
-
-                          return colorInfo.chip === color;
-                        }
-                      ) as IndexCardColorTypes;
-
-                      props.sceneManager.actions.updateAspectColor(
-                        props.aspectId,
-                        newColor
-                      );
+                  >
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.menu.visibility`}
+                      onClick={() => {
+                        props.sceneManager.actions.setAspectIsPrivate(
+                          props.aspectId,
+                          !aspect.isPrivate
+                        );
+                      }}
+                    >
+                      {aspect.isPrivate ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+                <Grid item>
+                  <Tooltip title={t("index-card.reset")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.reset`}
+                      onClick={() => {
+                        props.sceneManager.actions.resetAspect(props.aspectId);
+                      }}
+                    >
+                      <RotateLeftIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+                <Grid item>
+                  {/* <Tooltip title={t("index-card.reset")}> */}
+                  <IconButton
+                    size="small"
+                    ref={$paletteButton}
+                    data-cy={`${props["data-cy"]}.palette`}
+                    onClick={() => {
+                      setColorPickerOpen(true);
+                    }}
+                  >
+                    <PaletteIcon />
+                  </IconButton>
+                  <Popover
+                    open={colorPickerOpen}
+                    anchorEl={$paletteButton.current}
+                    onClose={() => {
                       setColorPickerOpen(false);
                     }}
-                  />
-                </Popover>
-                {/* </Tooltip> */}
-              </Grid>
-              <Grid item>
-                <Tooltip title={t("index-card.remove")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.remove`}
-                    onClick={() => {
-                      props.sceneManager.actions.removeAspect(props.aspectId);
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "center",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
                     }}
                   >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
+                    <ColorPicker
+                      value={
+                        IndexCardColor[aspect.color as IndexCardColorTypes].chip
+                      }
+                      colors={Object.keys(IndexCardColor).map((colorName) => {
+                        const colorInfo =
+                          IndexCardColor[colorName as IndexCardColorTypes];
+                        return colorInfo.chip;
+                      })}
+                      hideCustom
+                      onChange={(color) => {
+                        const newColor = Object.keys(IndexCardColor).find(
+                          (colorName) => {
+                            const colorInfo =
+                              IndexCardColor[colorName as IndexCardColorTypes];
+
+                            return colorInfo.chip === color;
+                          }
+                        ) as IndexCardColorTypes;
+
+                        props.sceneManager.actions.updateAspectColor(
+                          props.aspectId,
+                          newColor
+                        );
+                        setColorPickerOpen(false);
+                      }}
+                    />
+                  </Popover>
+                  {/* </Tooltip> */}
+                </Grid>
+                <Grid item>
+                  <Tooltip title={t("index-card.remove")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.remove`}
+                      onClick={() => {
+                        props.sceneManager.actions.removeAspect(props.aspectId);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        )}
+            </Box>
+          )}
+        </BetterDnd>
       </Box>
     </Paper>
   );
@@ -259,11 +282,8 @@ export const IndexCard: React.FC<
                       if (props.readonly) {
                         return;
                       }
-                      const bonus = parseInt(skill.modifier) || 0;
-                      props.onRoll({
-                        bonusLabel: skill.label,
-                        bonus: bonus,
-                      });
+                      const modifier = parseInt(skill.modifier) || 0;
+                      props.onRoll(skill.label, modifier);
                     }}
                   >
                     {skill.label} ({skill.modifier})
@@ -279,75 +299,80 @@ export const IndexCard: React.FC<
 
   function renderHeader() {
     return (
-      <Grid container alignItems="center" spacing={1}>
-        <Grid item className={css({ flex: "1 0 auto" })}>
-          <Typography
-            variant="overline"
-            className={css({
-              fontWeight: aspect.pinned ? "bold" : "inherit",
-              transition: theme.transitions.create("font-weight"),
-            })}
-          >
-            {aspect.type === AspectType.Aspect && <>{t("index-card.aspect")}</>}
-            {aspect.type === AspectType.Boost && <>{t("index-card.boost")}</>}
-            {aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
-            {aspect.type === AspectType.BadGuy && (
-              <>{t("index-card.bad-guy")}</>
-            )}
-          </Typography>
-        </Grid>
-        {!props.readonly && (
-          <>
-            <Grid item>
-              <Tooltip
-                title={
-                  aspect.pinned ? t("index-card.unpin") : t("index-card.pin")
-                }
-              >
+      <Box ml={props.readonly ? "0" : "1rem"}>
+        <Grid container alignItems="center" spacing={1}>
+          <Grid item className={css({ flex: "1 0 auto" })}>
+            <Typography
+              variant="overline"
+              className={css({
+                fontWeight: aspect.pinned ? "bold" : "inherit",
+                transition: theme.transitions.create("font-weight"),
+              })}
+            >
+              {aspect.type === AspectType.Aspect && (
+                <>{t("index-card.aspect")}</>
+              )}
+              {aspect.type === AspectType.Boost && <>{t("index-card.boost")}</>}
+              {aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
+              {aspect.type === AspectType.BadGuy && (
+                <>{t("index-card.bad-guy")}</>
+              )}
+            </Typography>
+          </Grid>
+          {!props.readonly && (
+            <>
+              <Grid item>
+                <Tooltip
+                  title={
+                    // TODO: INSPECT
+                    aspect.pinned ? t("index-card.unpin") : t("index-card.pin")
+                  }
+                >
+                  <IconButton
+                    ref={$menu}
+                    size="small"
+                    data-cy={`${props["data-cy"]}.pin`}
+                    onClick={() => {
+                      props.sceneManager.actions.toggleAspectPinned(
+                        props.aspectId
+                      );
+                    }}
+                  >
+                    {aspect.pinned ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+              <Grid item>
                 <IconButton
                   ref={$menu}
                   size="small"
-                  data-cy={`${props["data-cy"]}.pin`}
+                  data-cy={`${props["data-cy"]}.menu`}
                   onClick={() => {
-                    props.sceneManager.actions.toggleAspectPinned(
-                      props.aspectId
-                    );
+                    setMenuOpen(true);
                   }}
                 >
-                  {aspect.pinned ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+                  <MoreVertIcon />
                 </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              <IconButton
-                ref={$menu}
-                size="small"
-                data-cy={`${props["data-cy"]}.menu`}
-                onClick={() => {
-                  setMenuOpen(true);
-                }}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                classes={{
-                  list: css({
-                    paddingBottom: 0,
-                  }),
-                }}
-                anchorEl={$menu.current}
-                keepMounted
-                open={menuOpen}
-                onClose={() => {
-                  setMenuOpen(false);
-                }}
-              >
-                {renderAspectMenuItems()}
-              </Menu>
-            </Grid>
-          </>
-        )}
-      </Grid>
+                <Menu
+                  classes={{
+                    list: css({
+                      paddingBottom: 0,
+                    }),
+                  }}
+                  anchorEl={$menu.current}
+                  keepMounted
+                  open={menuOpen}
+                  onClose={() => {
+                    setMenuOpen(false);
+                  }}
+                >
+                  {renderAspectMenuItems()}
+                </Menu>
+              </Grid>
+            </>
+          )}
+        </Grid>
+      </Box>
     );
   }
 
@@ -526,11 +551,11 @@ export const IndexCard: React.FC<
             {aspect.type === AspectType.NPC ||
             aspect.type === AspectType.BadGuy ? (
               <>
-                {t("character-dialog.aspects")} {" & "}
-                {t("character-dialog.notes")}
+                {t("index-card.aspects")} {" & "}
+                {t("index-card.notes")}
               </>
             ) : (
-              <>{t("character-dialog.notes")}</>
+              <>{t("index-card.notes")}</>
             )}
           </Typography>
         </Box>
@@ -744,37 +769,39 @@ export const IndexCard: React.FC<
                         />
                       </FateLabel>
                     </Grid>
-                    <Grid item>
-                      <IconButton
-                        size="small"
-                        data-cy={`${props["data-cy"]}.consequence.${name}.remove`}
-                        onClick={() => {
-                          props.sceneManager.actions.removeAspectConsequence(
-                            props.aspectId,
-                            consequenceIndex
-                          );
-                        }}
-                      >
-                        <RemoveIcon
-                          className={css({
-                            width: "1rem",
-                            height: "1rem",
-                          })}
-                        />
-                      </IconButton>
-                    </Grid>
+                    {!props.readonly && (
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          data-cy={`${props["data-cy"]}.consequence.${name}.remove`}
+                          onClick={() => {
+                            props.sceneManager.actions.removeAspectConsequence(
+                              props.aspectId,
+                              consequenceIndex
+                            );
+                          }}
+                        >
+                          <RemoveIcon
+                            className={css({
+                              width: "1rem",
+                              height: "1rem",
+                            })}
+                          />
+                        </IconButton>
+                      </Grid>
+                    )}
                   </Grid>
-                  <TextField
+                  <LazyTextField
                     fullWidth
                     value={value}
-                    onChange={(event) => {
-                      if (props.readonly) {
-                        return;
-                      }
+                    InputProps={{
+                      readOnly: props.readonly,
+                    }}
+                    onChange={(newValue) => {
                       props.sceneManager.actions.updateAspectConsequenceValue(
                         props.aspectId,
                         consequenceIndex,
-                        event.target.value
+                        newValue
                       );
                     }}
                   />
@@ -787,3 +814,27 @@ export const IndexCard: React.FC<
     );
   }
 };
+
+function LazyTextField(
+  props: Omit<TextFieldProps, "value" | "onChange"> & {
+    value: string;
+    onChange(newValue: string): void;
+  }
+) {
+  const { value, onChange, ...rest } = props;
+  const [state, setState] = useLazyState({
+    delay: 750,
+    value: props.value,
+    onChange: onChange,
+  });
+
+  return (
+    <TextField
+      {...props}
+      value={state}
+      onChange={(event) => {
+        setState(event?.target.value);
+      }}
+    />
+  );
+}

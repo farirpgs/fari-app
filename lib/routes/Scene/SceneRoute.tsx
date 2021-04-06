@@ -47,10 +47,7 @@ export const SceneRoute: React.FC<{
 
   return (
     <>
-      <PageMeta
-        title={pageTitle || t("scenes-route.meta.title")}
-        description={t("scenes-route.meta.description")}
-      />
+      <PageMeta title={pageTitle} />
       <Scene
         mode={SceneMode.Manage}
         sceneManager={sceneManager}

@@ -1,16 +1,16 @@
-import i18next, { i18n } from "i18next";
+import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
+import deTranslation from "../../../locales/de.json";
+import enTranslation from "../../../locales/en.json";
+import esTranslation from "../../../locales/es.json";
+import frTranslation from "../../../locales/fr.json";
+import glTranslation from "../../../locales/gl_ES.json";
+import itTranslation from "../../../locales/it.json";
+import ptbrTranslation from "../../../locales/pt_BR.json";
+import ruTranslation from "../../../locales/ru.json";
 import { ILogger } from "../logger/makeLogger";
-import { deTranslation } from "./locales/deTranslation";
-import { devTranslation } from "./locales/devTranslation";
-import { enTranslation } from "./locales/enTranslation";
-import { esTranslation } from "./locales/esTranslation";
-import { frTranslation } from "./locales/frTranslation";
-import { glTranslation } from "./locales/glTranslation";
-import { itTranslation } from "./locales/itTranslation";
-import { ptbrTranslation } from "./locales/ptbrTranslations";
-import { ruTranslation } from "./locales/ruTranslation";
+import { devTranslation } from "./locales/devTranslations";
 
 export const PossibleLanguages = [
   "en",
@@ -26,59 +26,53 @@ export const PossibleLanguages = [
 
 export type IPossibleLanguages = typeof PossibleLanguages[number];
 
-export class InternationalizationService {
-  public i18next: i18n;
+export async function InternationalizationService(logger: ILogger) {
+  const i18n = i18next;
 
-  constructor(private logger: ILogger) {
-    this.i18next = i18next;
-    this.init();
-  }
-
-  private async init() {
-    await this.i18next
-      .use(LanguageDetector)
-      .use(initReactI18next)
-      .init({
-        resources: {          
-          "en": {
-            translation: enTranslation,
-          },
-          "es": {
-            translation: esTranslation,
-          },
-          "fr": {
-            translation: frTranslation,
-          },
-          "de": {
-            translation: deTranslation,
-          },
-          "pt-BR": {
-            translation: ptbrTranslation,
-          },
-          "ru": {
-            translation: ruTranslation,
-          },
-          "it": {
-            translation: itTranslation,
-          },
-          "gl": {
-            translation: glTranslation,
-          },
-          "dev": {
-            translation: devTranslation,
-          },
+  await i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      resources: {
+        "en": {
+          translation: enTranslation,
         },
-        supportedLngs: [...PossibleLanguages],
-        fallbackLng: "en",
-        debug: false,
-        keySeparator: false,
-        interpolation: {
-          escapeValue: false,
+        "es": {
+          translation: esTranslation,
         },
-      });
-    this.logger.info(`I18n:onDetect:${this.i18next.language}`, {
-      language: this.i18next.language,
-      languages: this.i18next.languages,
+        "fr": {
+          translation: frTranslation,
+        },
+        "de": {
+          translation: deTranslation,
+        },
+        "pt-BR": {
+          translation: ptbrTranslation,
+        },
+        "ru": {
+          translation: ruTranslation,
+        },
+        "it": {
+          translation: itTranslation,
+        },
+        "gl": {
+          translation: glTranslation,
+        },
+        "dev": {
+          translation: devTranslation,
+        },
+      },
+      supportedLngs: [...PossibleLanguages],
+      fallbackLng: "en",
+      debug: false,
+      keySeparator: false,
+      interpolation: {
+        escapeValue: false,
+      },
     });
-  }
+  logger.setTag("language", i18n.language);
+  logger.info(`I18n:onDetect:${i18n.language}`, {
+    language: i18n.language,
+    languages: i18n.languages,
+  });
 }

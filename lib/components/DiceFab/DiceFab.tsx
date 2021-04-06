@@ -1,19 +1,22 @@
 import { css } from "@emotion/css";
 import Badge from "@material-ui/core/Badge";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Fab from "@material-ui/core/Fab";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { useTheme } from "@material-ui/core/styles";
+import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import Zoom from "@material-ui/core/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import {
   DiceContext,
@@ -25,94 +28,168 @@ import {
   FateDiceCommandGroups,
   IDiceCommandGroup,
   IDiceRollResult,
-  IDiceRollWithBonus,
   MiscDiceCommandGroups,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { IDicePool } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { DiceBox } from "../DiceBox/DiceBox";
 
-type IProps = {
-  onSelect?(result: IDiceRollResult): void;
-  rolls?: Array<IDiceRollWithBonus>;
+export enum DiceFabMode {
+  Roll,
+  RollAndPool,
+}
+
+type IRollProps = {
+  type: DiceFabMode.Roll;
+  onSelect(result: IDiceRollResult): void;
+
+  rollsForDiceBox?: Array<IDiceRollResult>;
 };
+
+type IPoolProps = {
+  type: DiceFabMode.RollAndPool;
+  onSelect(result: IDiceRollResult): void;
+
+  rollsForDiceBox?: Array<IDiceRollResult>;
+
+  pool: IDicePool;
+  onClearPool(): void;
+  onRollPool(): void;
+};
+
+type IProps = IRollProps | IPoolProps;
+
 const buttonSize = "4rem";
 
 const SlideDurationForRollButton = 1000;
+
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const zIndex = useZIndex();
   const diceManager = useContext(DiceContext);
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
+  const { t } = useTranslate();
+
   const [dirty, setDirty] = useState(false);
   const [fabCommands, setFabCommands] = useState<Array<IDiceCommandGroup>>([]);
 
   const ButtonIcon = getButtonIcon(fabCommands, diceManager);
 
-  const handleMenuOpen = (
+  function handleMenuOpen(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  ) {
     setAnchorEl(event.currentTarget);
-  };
+  }
 
-  const handleMenuClose = () => {
+  function handleMenuClose() {
     setAnchorEl(null);
     setFabCommands([]);
-  };
+  }
 
-  const handleFabClick = (
+  function handleClear() {
+    setFabCommands([]);
+  }
+
+  function handleFabClick(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
+  ): void {
     e.stopPropagation();
     if (!open) {
       handleMenuOpen(e);
     } else {
       handleMenuClose();
     }
-  };
+  }
 
-  const handleReRoll = () => {
-    const result = Dice.rollCommands(diceManager.state.selectedCommands);
+  function handleReRoll() {
+    const result = diceManager.actions.reroll();
     props.onSelect?.(result);
     handleMenuClose();
-  };
+  }
 
-  const handleRoll = () => {
+  function handleRoll() {
     const newCommands = fabCommands.flatMap((o) => o.value);
-    const result = Dice.rollCommands(newCommands);
-    diceManager.actions.setSelectedCommands(newCommands);
+    const result = diceManager.actions.rollByCommandNames(newCommands, {
+      listResults: diceManager.state.options.listResults,
+    });
+
     props.onSelect?.(result);
     setDirty(true);
     handleMenuClose();
-  };
-
-  const transitionDuration = {
-    enter: theme.transitions.duration.shortest,
-    exit: theme.transitions.duration.shortest,
-  };
+  }
 
   const hasSelectedNewCommands = fabCommands.length > 0;
   const isRollButtonVisible = hasSelectedNewCommands || dirty;
+
+  const hasPool =
+    props.type === DiceFabMode.RollAndPool &&
+    !!props.pool &&
+    props.pool.length > 0;
 
   return (
     <>
       <ClickAwayListener onClickAway={handleMenuClose}>
         <Box>
-          <Zoom
-            in
-            timeout={transitionDuration}
-            style={{
-              transitionDelay: `${
-                !hasSelectedNewCommands ? transitionDuration.exit : 0
-              }ms`,
-            }}
-          >
-            {renderFab()}
-          </Zoom>
-          {renderPopper()}
+          {!hasPool && (
+            <DiceFabButton
+              key="rolls"
+              showClearButton={open}
+              isRollButtonVisible={isRollButtonVisible}
+              icon={ButtonIcon}
+              label={
+                <>
+                  {hasSelectedNewCommands ||
+                  (!hasSelectedNewCommands && !isRollButtonVisible)
+                    ? t("dice-fab.roll")
+                    : t("dice-fab-reroll")}
+                </>
+              }
+              onFabClick={handleFabClick}
+              onCtaClick={() => {
+                if (open) {
+                  handleRoll();
+                } else {
+                  handleReRoll();
+                }
+              }}
+            />
+          )}
+
+          {hasPool && props.type === DiceFabMode.RollAndPool && (
+            <DiceFabButton
+              key="pool"
+              showClearButton={true}
+              isRollButtonVisible={true}
+              icon={ButtonIcon}
+              label={
+                <>
+                  {props.pool.length === 1
+                    ? t("dice-fab.roll")
+                    : t("dice-fab.roll-pool")}
+                </>
+              }
+              onFabClick={() => {
+                props.onClearPool();
+              }}
+              onCtaClick={() => {
+                props.onRollPool();
+              }}
+            />
+          )}
+
+          <DiceMenu
+            open={open}
+            anchorEl={anchorEl}
+            commands={fabCommands}
+            showPoolToggle
+            onClear={handleClear}
+            onDiceCommandChange={setFabCommands}
+          />
         </Box>
       </ClickAwayListener>
-      {props.rolls && renderDiceBox()}
+      {props.rollsForDiceBox && renderDiceBox()}
     </>
   );
 
@@ -125,7 +202,8 @@ export const DiceFab: React.FC<IProps> = (props) => {
           bottom: "7rem",
           zIndex: zIndex.diceFabDie,
         })}
-        rolls={props.rolls ?? []}
+        reduceOpacityWithoutHover
+        rolls={props.rollsForDiceBox ?? []}
         tooltipPlacement="right-end"
         size="3.5rem"
         fontSize="2rem"
@@ -137,120 +215,53 @@ export const DiceFab: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderFab() {
-    return (
-      <Box
-        className={css({
-          left: "1rem",
-          bottom: "2rem",
-          position: "fixed",
-          zIndex: zIndex.diceFab,
-        })}
-      >
-        <Box
-          className={css({
-            position: "relative",
-          })}
-        >
-          <Fab
-            variant="round"
-            color="primary"
-            onClick={handleFabClick}
-            onContextMenu={(e) => {
-              e.preventDefault();
-            }}
-            className={css({
-              width: buttonSize,
-              height: buttonSize,
-              zIndex: zIndex.diceFab,
-            })}
-          >
-            {open ? (
-              <CloseIcon
-                className={css({
-                  width: "90%",
-                  height: "auto",
-                  padding: ".5rem",
-                })}
-              />
-            ) : (
-              <ButtonIcon
-                className={css({
-                  width: "100%",
-                  height: "auto",
-                  padding: ".5rem",
-                })}
-              />
-            )}
-          </Fab>
-
-          {renderRollButton()}
-        </Box>
-      </Box>
+  function getButtonIcon(
+    selectedOptions: IDiceCommandGroup[],
+    diceManager: IDiceManager
+  ) {
+    const commandsToCheckForDynamicFabIcon =
+      selectedOptions.length > 0
+        ? selectedOptions.flatMap((o) => o.value)
+        : diceManager.state.commandNames;
+    const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
+      commandsToCheckForDynamicFabIcon
     );
-  }
+    const [firstCommand] = commandsToCheckForDynamicFabIcon;
+    const firstCommandMatch = Dice.findMatchingCommandGroupWithDiceTypes([
+      firstCommand,
+    ]);
 
-  function renderRollButton() {
-    return (
-      <Box
-        className={css({
-          position: "absolute",
-          bottom: "0",
-          left: "2rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: theme.palette.primary.main,
-          color: theme.palette.getContrastText(theme.palette.primary.main),
-          height: buttonSize,
-          borderTopRightRadius: "25px",
-          borderBottomRightRadius: "25px",
-          overflow: "hidden",
-          transition: theme.transitions.create("max-width", {
-            duration: SlideDurationForRollButton,
-          }),
-          maxWidth: isRollButtonVisible ? "100vw" : "0",
-        })}
-      >
-        <ButtonBase
-          className={css({
-            height: "100%",
-            width: "100%",
-            paddingLeft: "3rem",
-            paddingRight: "1rem",
-          })}
-          onClick={() => {
-            if (open) {
-              handleRoll();
-            } else {
-              handleReRoll();
-            }
-          }}
-          onContextMenu={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <Typography
-            className={css({
-              textTransform: "uppercase",
-              fontWeight: theme.typography.fontWeightBold,
-            })}
-          >
-            {hasSelectedNewCommands ||
-            (!hasSelectedNewCommands && !isRollButtonVisible)
-              ? "Roll"
-              : "Reroll"}
-          </Typography>
-        </ButtonBase>
-      </Box>
-    );
+    const ButtonIcon =
+      selectedOption?.icon ?? firstCommandMatch?.icon ?? Icons.ThrowDice;
+    return ButtonIcon;
   }
+};
+
+export const DiceMenu: React.FC<{
+  anchorEl: any;
+  open: boolean;
+  ctaLabel?: string;
+  commands: Array<IDiceCommandGroup>;
+  showPoolToggle: boolean;
+  onCtaClick?(): void;
+  onClose?(): void;
+  onClear?(): void;
+  onDiceCommandChange: React.Dispatch<
+    React.SetStateAction<IDiceCommandGroup[]>
+  >;
+}> = (props) => {
+  const theme = useTheme();
+  const zIndex = useZIndex();
+  const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
+
+  return <>{renderPopper()}</>;
 
   function renderPopper() {
     return (
       <Popper
-        open={open}
-        anchorEl={anchorEl}
+        open={props.open}
+        anchorEl={props.anchorEl}
         transition
         placement="top"
         style={{ zIndex: zIndex.diceFab }}
@@ -282,7 +293,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
                 e.stopPropagation();
               }}
             >
-              <Paper>
+              <Paper elevation={6}>
                 <Box maxHeight="70vh" overflow="auto">
                   <Box p="1rem">
                     {renderCommandGroupHeader("Fate")}
@@ -291,6 +302,57 @@ export const DiceFab: React.FC<IProps> = (props) => {
                     {renderOptions(d20DiceCommandGroups)}
                     {renderCommandGroupHeader("Misc")}
                     {renderOptions(MiscDiceCommandGroups)}
+
+                    {(props.onClear || props.onCtaClick) && (
+                      <Box mt="1.5rem">
+                        <Grid container justify="center" spacing={2}>
+                          {props.showPoolToggle && (
+                            <Grid item>
+                              <FormControlLabel
+                                control={
+                                  <Switch
+                                    checked={
+                                      diceManager.state.options.listResults
+                                    }
+                                    onChange={() => {
+                                      diceManager.actions.setOptions({
+                                        listResults: !diceManager.state.options
+                                          .listResults,
+                                      });
+                                    }}
+                                    color="primary"
+                                  />
+                                }
+                                label={t("dice-fab.pool")}
+                              />
+                            </Grid>
+                          )}
+                          {props.onClear && (
+                            <Grid item>
+                              <Button
+                                color="default"
+                                variant="text"
+                                onClick={props.onClear}
+                              >
+                                {"Reset"}
+                              </Button>
+                            </Grid>
+                          )}
+
+                          {props.onCtaClick && (
+                            <Grid item>
+                              <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={props.onCtaClick}
+                              >
+                                {props.ctaLabel}
+                              </Button>
+                            </Grid>
+                          )}
+                        </Grid>
+                      </Box>
+                    )}
                   </Box>
                 </Box>
               </Paper>
@@ -324,7 +386,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
         <Box pb=".5rem">
           <Grid container spacing={1} justify="center">
             {options.map((o) => {
-              const badgeContent = fabCommands.reduce((acc, curr) => {
+              const badgeContent = props.commands.reduce((acc, curr) => {
                 if (o.label === curr.label) {
                   return acc + 1;
                 }
@@ -336,13 +398,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
                     <Grid container item justify="center">
                       <IconButton
                         onClick={() => {
-                          setFabCommands((t) => {
+                          props.onDiceCommandChange((t) => {
                             return [...t, o];
                           });
                         }}
                         onContextMenu={(e) => {
                           e.preventDefault();
-                          setFabCommands((draft) => {
+                          props.onDiceCommandChange((draft) => {
                             const indexToRemove = draft.findIndex(
                               (selectedOption) =>
                                 selectedOption.label === o.label
@@ -401,23 +463,128 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 };
 
-function getButtonIcon(
-  selectedOptions: IDiceCommandGroup[],
-  diceManager: IDiceManager
-) {
-  const commandsToCheckForDynamicFabIcon =
-    selectedOptions.length > 0
-      ? selectedOptions.flatMap((o) => o.value)
-      : diceManager.state.selectedCommands;
-  const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
-    commandsToCheckForDynamicFabIcon
-  );
-  const [firstCommand] = commandsToCheckForDynamicFabIcon;
-  const firstCommandMatch = Dice.findMatchingCommandGroupWithDiceTypes([
-    firstCommand,
-  ]);
+export function DiceFabButton(props: {
+  showClearButton: boolean;
+  isRollButtonVisible: boolean;
+  onFabClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
+  onCtaClick(): void;
+  icon: React.ElementType;
+  label: JSX.Element;
+}) {
+  const zIndex = useZIndex();
+  const theme = useTheme();
 
-  const ButtonIcon =
-    selectedOption?.icon ?? firstCommandMatch?.icon ?? Icons.ThrowDice;
-  return ButtonIcon;
+  const [delayedIsRollButtonVisible, setDelayedisRollButtonVisible] = useState(
+    false
+  );
+
+  useEffect(
+    function () {
+      setDelayedisRollButtonVisible(props.isRollButtonVisible);
+    },
+    [props.isRollButtonVisible]
+  );
+
+  return (
+    <Box
+      className={css({
+        left: "1rem",
+        bottom: "2rem",
+        position: "fixed",
+        zIndex: zIndex.diceFab,
+      })}
+    >
+      <Zoom in>
+        <Box
+          className={css({
+            position: "relative",
+          })}
+        >
+          <Fab
+            variant="round"
+            color={props.showClearButton ? "secondary" : "primary"}
+            onClick={props.onFabClick}
+            onContextMenu={(e) => {
+              e.preventDefault();
+            }}
+            className={css({
+              width: buttonSize,
+              height: buttonSize,
+              zIndex: zIndex.diceFab,
+            })}
+          >
+            {props.showClearButton ? (
+              <CloseIcon
+                className={css({
+                  width: "90%",
+                  height: "auto",
+                  padding: ".5rem",
+                })}
+              />
+            ) : (
+              <props.icon
+                className={css({
+                  width: "100%",
+                  height: "auto",
+                  padding: ".5rem",
+                })}
+              />
+            )}
+          </Fab>
+
+          {renderRollButton()}
+        </Box>
+      </Zoom>
+    </Box>
+  );
+
+  function renderRollButton() {
+    return (
+      <Box
+        className={css({
+          label: "DiceFabButton-fab",
+          position: "absolute",
+          bottom: "0",
+          left: "2rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: theme.palette.primary.main,
+          color: theme.palette.getContrastText(theme.palette.primary.main),
+          height: buttonSize,
+          borderTopRightRadius: "25px",
+          borderBottomRightRadius: "25px",
+          overflow: "hidden",
+          transition: theme.transitions.create("max-width", {
+            duration: SlideDurationForRollButton,
+          }),
+          maxWidth: delayedIsRollButtonVisible ? "100vw" : "0",
+        })}
+      >
+        <ButtonBase
+          className={css({
+            height: "100%",
+            width: "100%",
+            paddingLeft: "3rem",
+            paddingRight: "1rem",
+          })}
+          onClick={props.onCtaClick}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <Typography
+            className={css({
+              label: "DiceFabButton-label",
+              whiteSpace: "nowrap",
+              textTransform: "uppercase",
+              fontWeight: theme.typography.fontWeightBold,
+            })}
+          >
+            {props.label}
+          </Typography>
+        </ButtonBase>
+      </Box>
+    );
+  }
 }

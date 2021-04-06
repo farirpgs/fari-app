@@ -12,48 +12,52 @@ describe("/characters", () => {
       Fari.get("character-dialog.name").type("Luke Skywalker");
 
       // fill up fields
-      Fari.get("character-dialog.aspect.High Concept.value").type(
+      Fari.get("character-dialog.Aspects.High Concept.value").type(
         "The Last Jedi"
       );
-      Fari.get("character-dialog.aspect.Trouble.value").type(
+      Fari.get("character-dialog.Aspects.Trouble.value").type(
         "Everything for my friends"
       );
-      Fari.get("character-dialog.aspect.Relationship.value").type(
+      Fari.get("character-dialog.Aspects.Relationship.value").type(
         "Leia is my sister"
       );
-      Fari.get("character-dialog.aspect.Other Aspect.value")
+      Fari.get("character-dialog.Aspects.Other Aspect.value")
         .eq(0)
         .type("The Dark side calls to me");
-      Fari.get("character-dialog.aspect.Other Aspect.value")
+      Fari.get("character-dialog.Aspects.Other Aspect.value")
         .eq(1)
         .type("Ben Kenobi thought me everything");
 
-      Fari.get("character-dialog.skill.Academics.value").type("4");
-      Fari.get("character-dialog.skill.Athletics.value").type("3");
-      Fari.get("character-dialog.skill.Burglary.value").type("3");
-      Fari.get("character-dialog.skill.Contacts.value").type("2");
-      Fari.get("character-dialog.skill.Crafts.value").type("2");
-      Fari.get("character-dialog.skill.Deceive.value").type("2");
-      Fari.get("character-dialog.skill.Drive.value").type("1");
-      Fari.get("character-dialog.skill.Empathy.value").type("1");
-      Fari.get("character-dialog.skill.Fight.value").type("1");
-      Fari.get("character-dialog.skill.Investigate.value").type("1");
+      Fari.get("character-dialog.Skills.Academics.value").type("4");
+      Fari.get("character-dialog.Skills.Athletics.value").type("3");
+      Fari.get("character-dialog.Skills.Burglary.value").type("3");
+      Fari.get("character-dialog.Skills.Contacts.value").type("2");
+      Fari.get("character-dialog.Skills.Crafts.value").type("2");
+      Fari.get("character-dialog.Skills.Deceive.value").type("2");
+      Fari.get("character-dialog.Skills.Drive.value").type("1");
+      Fari.get("character-dialog.Skills.Empathy.value").type("1");
+      Fari.get("character-dialog.Skills.Fight.value").type("1");
+      Fari.get("character-dialog.Skills.Investigate.value").type("1");
 
-      Fari.get("character-dialog.stressTrack.Physical.label").click();
-      Fari.get("character-dialog.stressTrack.Physical.box.1.value").click();
-      Fari.get("character-dialog.stressTrack.Mental.box.2.value").click();
+      Fari.get("character-dialog.Stress.Physical.label").click();
+      Fari.get("character-dialog.Stress.Physical.box.1.value").click();
+      Fari.get("character-dialog.Stress.Mental.box.2.value").click();
 
-      Fari.get("character-dialog.consequence.Mild.value").type("I");
-      Fari.get("character-dialog.consequence.Moderate.value").type("Lost");
-      Fari.get("character-dialog.consequence.Severe.value").type("An Arm");
+      Fari.get("character-dialog.Consequences.Mild.value").type("I");
+      Fari.get("character-dialog.Consequences.Moderate.value").type("Lost");
+      Fari.get("character-dialog.Consequences.Severe.value").type("An Arm");
 
-      Fari.get("character-dialog.notes").type(
+      Fari.get("character-dialog.Other.Notes.value").type(
         "A long time ago in a galaxy far, far away...."
       );
       Fari.get("character-dialog.group").find("input").type("Star Wars");
 
       // save
-      cy.title().should("eq", "Manage your Characters | Fari");
+
+      cy.title().should(
+        "eq",
+        "Play Table-Top RPGs Online without the headache | Fari"
+      );
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
@@ -103,7 +107,9 @@ describe("/characters", () => {
       Fari.get("page.menu.home").click();
       Fari.get("home.play-offline").click();
 
-      Fari.get("scene.add-gm-character").click();
+      // add player
+      Fari.get("scene.add-player").click();
+      Fari.get("scene.player-row.1.load-character-sheet").click();
 
       cy.contains("Luke Skywalker").click();
 
@@ -113,7 +119,7 @@ describe("/characters", () => {
       Fari.get("character-dialog.close").click();
 
       // character card roll skill
-      Fari.get("character-card.skill.Athletics").click();
+      Fari.get("character-card.section.Skills.block.Athletics").click();
       Fari.get("scene.player-row.1")
         .find('[data-cy="dice"]')
         .invoke("attr", "data-cy-value")
@@ -142,8 +148,7 @@ describe("/characters", () => {
       Fari.get("character-dialog.name").type("Luke");
       Fari.get("character-dialog.toggle-advanced").click();
       Fari.get("character-dialog.template").click();
-      Fari.get("character-dialog.template.Custom").click();
-      Fari.get("character-dialog.load-template").click();
+      Fari.get("character-dialog.template").type("Blank").type("{enter}");
       Fari.get("character-dialog.name").type(" Skywalker");
 
       // save
@@ -166,134 +171,201 @@ describe("/characters", () => {
       Fari.get("character-dialog.toggle-advanced").click();
 
       // aspects
-      Fari.get("character-dialog.aspect.High Concept.label")
+      Fari.get("character-dialog.Aspects.High Concept.label")
         .clear()
         .type("#High Concept");
-      Fari.get("character-dialog.aspect.Trouble.label")
+      Fari.get("character-dialog.Aspects.Trouble.label")
         .clear()
         .type("#Trouble");
-      Fari.get("character-dialog.aspect.Relationship.label")
+      Fari.get("character-dialog.Aspects.Relationship.label")
         .clear()
         .type("#Relationship");
-      Fari.get("character-dialog.aspect.Other Aspect.label")
+      Fari.get("character-dialog.Aspects.Other Aspect.label")
         .eq(0)
         .clear()
         .type("#Other Aspect");
-      Fari.get("character-dialog.aspect.Other Aspect.label")
+      Fari.get("character-dialog.Aspects.Other Aspect.label")
         .eq(1)
         .clear()
         .type("#Other Aspect");
 
       // vitals box
-      Fari.get("character-dialog.stressTrack.Physical.box.0.label")
+      Fari.get("character-dialog.Stress.Physical.box.0.label")
         .clear()
         .type("#2");
-      Fari.get("character-dialog.stressTrack.Physical.box.1.label")
+      Fari.get("character-dialog.Stress.Physical.box.1.label")
         .clear()
         .type("#4");
-      Fari.get("character-dialog.stressTrack.Physical.box.2.label")
+      Fari.get("character-dialog.Stress.Physical.box.2.label")
         .clear()
         .type("#6");
-      Fari.get("character-dialog.stressTrack.Mental.box.0.label")
-        .clear()
-        .type("#2");
-      Fari.get("character-dialog.stressTrack.Mental.box.1.label")
-        .clear()
-        .type("#4");
-      Fari.get("character-dialog.stressTrack.Mental.box.2.label")
-        .clear()
-        .type("#6");
+      Fari.get("character-dialog.Stress.Mental.box.0.label").clear().type("#2");
+      Fari.get("character-dialog.Stress.Mental.box.1.label").clear().type("#4");
+      Fari.get("character-dialog.Stress.Mental.box.2.label").clear().type("#6");
 
       // vitals
-      Fari.get("character-dialog.stressTrack.Physical.label")
+      Fari.get("character-dialog.Stress.Physical.label")
         .clear()
         .type("#Physical");
-      Fari.get("character-dialog.stressTrack.Mental.label")
-        .clear()
-        .type("#Mental");
+      Fari.get("character-dialog.Stress.Mental.label").clear().type("#Mental");
 
       // consequences
-      Fari.get("character-dialog.consequence.Mild.label").clear().type("#Mild");
-      Fari.get("character-dialog.consequence.Moderate.label")
+      Fari.get("character-dialog.Consequences.Mild.label")
+        .clear()
+        .type("#Mild");
+      Fari.get("character-dialog.Consequences.Moderate.label")
         .clear()
         .type("#Moderate");
-      Fari.get("character-dialog.consequence.Severe.label")
+      Fari.get("character-dialog.Consequences.Severe.label")
         .clear()
         .type("#Severe");
 
       // skills
-      Fari.get("character-dialog.skill.Academics.label")
+      Fari.get("character-dialog.Skills.Academics.label")
         .clear()
         .type("#Academics");
-      Fari.get("character-dialog.skill.Athletics.label")
+      Fari.get("character-dialog.Skills.Athletics.label")
         .clear()
         .type("#Athletics");
-      Fari.get("character-dialog.skill.Burglary.label")
+      Fari.get("character-dialog.Skills.Burglary.label")
         .clear()
         .type("#Burglary");
-      Fari.get("character-dialog.skill.Contacts.label")
+      Fari.get("character-dialog.Skills.Contacts.label")
         .clear()
         .type("#Contacts");
-      Fari.get("character-dialog.skill.Crafts.label").clear().type("#Crafts");
-      Fari.get("character-dialog.skill.Deceive.label").clear().type("#Deceive");
-      Fari.get("character-dialog.skill.Drive.label").clear().type("#Drive");
-      Fari.get("character-dialog.skill.Empathy.label").clear().type("#Empathy");
-      Fari.get("character-dialog.skill.Fight.label").clear().type("#Fight");
-      Fari.get("character-dialog.skill.Investigate.label")
+      Fari.get("character-dialog.Skills.Crafts.label").clear().type("#Crafts");
+      Fari.get("character-dialog.Skills.Deceive.label")
+        .clear()
+        .type("#Deceive");
+      Fari.get("character-dialog.Skills.Drive.label").clear().type("#Drive");
+      Fari.get("character-dialog.Skills.Empathy.label")
+        .clear()
+        .type("#Empathy");
+      Fari.get("character-dialog.Skills.Fight.label").clear().type("#Fight");
+      Fari.get("character-dialog.Skills.Investigate.label")
         .clear()
         .type("#Investigate");
-      Fari.get("character-dialog.skill.Lore.label").clear().type("#Lore");
-      Fari.get("character-dialog.skill.Notice.label").clear().type("#Notice");
-      Fari.get("character-dialog.skill.Physique.label")
+      Fari.get("character-dialog.Skills.Lore.label").clear().type("#Lore");
+      Fari.get("character-dialog.Skills.Notice.label").clear().type("#Notice");
+      Fari.get("character-dialog.Skills.Physique.label")
         .clear()
         .type("#Physique");
-      Fari.get("character-dialog.skill.Provoke.label").clear().type("#Provoke");
-      Fari.get("character-dialog.skill.Rapport.label").clear().type("#Rapport");
-      Fari.get("character-dialog.skill.Resources.label")
+      Fari.get("character-dialog.Skills.Provoke.label")
+        .clear()
+        .type("#Provoke");
+      Fari.get("character-dialog.Skills.Rapport.label")
+        .clear()
+        .type("#Rapport");
+      Fari.get("character-dialog.Skills.Resources.label")
         .clear()
         .type("#Resources");
-      Fari.get("character-dialog.skill.Shoot.label").clear().type("#Shoot");
-      Fari.get("character-dialog.skill.Stealth.label").clear().type("#Stealth");
-      Fari.get("character-dialog.skill.Will.label").clear().type("#Will");
+      Fari.get("character-dialog.Skills.Shoot.label").clear().type("#Shoot");
+      Fari.get("character-dialog.Skills.Stealth.label")
+        .clear()
+        .type("#Stealth");
+      Fari.get("character-dialog.Skills.Will.label").clear().type("#Will");
 
       // stunts
-      Fari.get("character-dialog.stunt.Stunt #1.label")
+      Fari.get("character-dialog.Stunts & Extras.Stunt #1.label")
         .clear()
         .type("#Stunt #1");
-      Fari.get("character-dialog.stunt.Stunt #2.label")
+      Fari.get("character-dialog.Stunts & Extras.Stunt #2.label")
         .clear()
         .type("#Stunt #2");
-      Fari.get("character-dialog.stunt.Stunt #3.label")
+      Fari.get("character-dialog.Stunts & Extras.Stunt #3.label")
         .clear()
         .type("#Stunt #3");
-      Fari.get("character-dialog.refresh").clear().type("4");
 
-      // move up, move down, remove
-      Fari.get("character-dialog.aspect.#High Concept.move-up").click();
-      Fari.get("character-dialog.aspect.#High Concept.move-down").click();
-      Fari.get("character-dialog.aspect.#High Concept.remove").click();
+      // Fate Points
+      Fari.get("character-dialog.Fate Points.label")
+        .clear()
+        .type("#Fate Points");
+      Fari.get("character-dialog.#Fate Points.Fate Points.value")
+        .clear()
+        .type("1");
+      Fari.get("character-dialog.#Fate Points.Fate Points.max")
+        .clear()
+        .type("5");
+      Fari.get("character-dialog.#Fate Points.Fate Points.label")
+        .clear()
+        .type("#Fate Points");
 
-      Fari.get("character-dialog.stunt.#Stunt #1.move-up").click();
-      Fari.get("character-dialog.stunt.#Stunt #1.move-down").click();
-      Fari.get("character-dialog.stunt.#Stunt #1.remove").click();
+      // remove
+      Fari.get("character-dialog.Aspects.#High Concept.remove").click();
+      Fari.get("character-dialog.Stunts & Extras.#Stunt #1.remove").click();
+      Fari.get("character-dialog.Consequences.#Severe.remove").click();
+      Fari.get("character-dialog.Skills.#Academics.remove").click();
+      Fari.get("character-dialog.Stress.#Physical.remove").click();
 
-      Fari.get("character-dialog.consequence.#Mild.move-up").click();
-      Fari.get("character-dialog.consequence.#Moderate.move-down").click();
-      Fari.get("character-dialog.consequence.#Severe.remove").click();
+      Fari.get("character-dialog.Stress.#Mental.add-box").click();
+      Fari.get("character-dialog.Stress.#Mental.remove-box").click();
+      Fari.get("character-dialog.Stress.#Mental.remove-box").click();
+      Fari.get("character-dialog.Stress.#Mental.remove-box").click();
+      Fari.get("character-dialog.Stress.#Mental.remove-box").click();
+      Fari.get("character-dialog.Stress.#Mental.add-box").click();
 
-      Fari.get("character-dialog.skill.#Academics.move-up").click();
-      Fari.get("character-dialog.skill.#Academics.move-down").click();
-      Fari.get("character-dialog.skill.#Academics.remove").click();
+      // section labels
+      Fari.get("character-dialog.Aspects.label").clear().type("#Aspects");
+      Fari.get("character-dialog.Stunts & Extras.label")
+        .clear()
+        .type("#Stunts");
+      Fari.get("character-dialog.Other.label").clear().type("#Other");
+      Fari.get("character-dialog.Stress.label").clear().type("#Stress");
+      Fari.get("character-dialog.Consequences.label")
+        .clear()
+        .type("#Consequences");
+      Fari.get("character-dialog.Skills.label").clear().type("#Skills");
 
-      Fari.get("character-dialog.stressTrack.#Physical.move-up").click();
-      Fari.get("character-dialog.stressTrack.#Physical.move-down").click();
-      Fari.get("character-dialog.stressTrack.#Physical.remove").click();
-
-      Fari.get("character-dialog.stressTrack.#Mental.add-box").click();
-      Fari.get("character-dialog.stressTrack.#Mental.remove-box").click();
-      Fari.get("character-dialog.stressTrack.#Mental.remove-box").click();
-      Fari.get("character-dialog.stressTrack.#Mental.remove-box").click();
-      Fari.get("character-dialog.stressTrack.#Mental.remove-box").click();
+      // move and remove new sections
+      Fari.get("character-dialog.#Aspects.move").click();
+      Fari.get("character-dialog.#Aspects.move-up").click();
+      Fari.get("character-dialog.#Aspects.move").click();
+      Fari.get("character-dialog.#Aspects.move-down").click();
+      Fari.get("character-dialog.#Aspects.move").click();
+      Fari.get("character-dialog.#Aspects.switch-side").click();
+      Fari.get("character-dialog.#Aspects.remove").click();
+      Fari.get("character-dialog.#Stunts.move").click();
+      Fari.get("character-dialog.#Stunts.move-up").click();
+      Fari.get("character-dialog.#Stunts.move").click();
+      Fari.get("character-dialog.#Stunts.move-down").click();
+      Fari.get("character-dialog.#Stunts.move").click();
+      Fari.get("character-dialog.#Stunts.switch-side").click();
+      Fari.get("character-dialog.#Stunts.remove").click();
+      Fari.get("character-dialog.#Other.move").click();
+      Fari.get("character-dialog.#Other.move-up").click();
+      Fari.get("character-dialog.#Other.move").click();
+      Fari.get("character-dialog.#Other.move-down").click();
+      Fari.get("character-dialog.#Other.move").click();
+      Fari.get("character-dialog.#Other.switch-side").click();
+      Fari.get("character-dialog.#Other.remove").click();
+      Fari.get("character-dialog.#Stress.move").click();
+      Fari.get("character-dialog.#Stress.move-up").click();
+      Fari.get("character-dialog.#Stress.move").click();
+      Fari.get("character-dialog.#Stress.move-down").click();
+      Fari.get("character-dialog.#Stress.move").click();
+      Fari.get("character-dialog.#Stress.switch-side").click();
+      Fari.get("character-dialog.#Stress.remove").click();
+      Fari.get("character-dialog.#Consequences.move").click();
+      Fari.get("character-dialog.#Consequences.move-up").click();
+      Fari.get("character-dialog.#Consequences.move").click();
+      Fari.get("character-dialog.#Consequences.move-down").click();
+      Fari.get("character-dialog.#Consequences.move").click();
+      Fari.get("character-dialog.#Consequences.switch-side").click();
+      Fari.get("character-dialog.#Consequences.remove").click();
+      Fari.get("character-dialog.#Skills.move").click();
+      Fari.get("character-dialog.#Skills.move-up").click();
+      Fari.get("character-dialog.#Skills.move").click();
+      Fari.get("character-dialog.#Skills.move-down").click();
+      Fari.get("character-dialog.#Skills.move").click();
+      Fari.get("character-dialog.#Skills.switch-side").click();
+      Fari.get("character-dialog.#Skills.remove").click();
+      Fari.get("character-dialog.#Fate Points.move").click();
+      Fari.get("character-dialog.#Fate Points.move-up").click();
+      Fari.get("character-dialog.#Fate Points.move").click();
+      Fari.get("character-dialog.#Fate Points.move-down").click();
+      Fari.get("character-dialog.#Fate Points.move").click();
+      Fari.get("character-dialog.#Fate Points.switch-side").click();
+      Fari.get("character-dialog.#Fate Points.remove").click();
 
       // save
       Fari.waitContentEditable();

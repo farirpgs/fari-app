@@ -88,14 +88,6 @@ describe("/scenes", () => {
       // pin
       Fari.get("scene.aspect.1.pin").click();
 
-      // reset
-      Fari.get("scene.new-scene").click();
-
-      // set fields again
-      Fari.get("scene.name").type("Ba Sing Se");
-      Fari.get("scene.group").type("Avatar");
-      Fari.get("scene.aspect.0.title").type("NPC after reset");
-
       // save
       Fari.waitContentEditable();
       Fari.get("scene.save").click();

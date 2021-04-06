@@ -2,6 +2,7 @@ import isEqual from "lodash/isEqual";
 import { Icons } from "../Icons/Icons";
 
 export type IDiceCommandGroup = {
+  id: IDiceCommandGroupId;
   label: string;
   icon: React.ElementType;
   value: Array<IDiceCommandNames>;
@@ -11,8 +12,22 @@ export type IDiceCommandGroup = {
   criticalFailure?: number;
 };
 
+export type IDiceCommandNames =
+  | "1dF"
+  | "1d4"
+  | "1d6"
+  | "1d8"
+  | "1d10"
+  | "1d12"
+  | "1d20"
+  | "1d100"
+  | "coin";
+
+export type IDiceCommandGroupId = IDiceCommandNames | "4dF" | "2d6";
+
 export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
   {
+    id: "4dF",
     label: "4dF",
     icon: Icons.FateDice,
     value: ["1dF", "1dF", "1dF", "1dF"],
@@ -21,16 +36,47 @@ export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 4,
     criticalFailure: -4,
   },
-  { label: "1dF", icon: Icons.OneDie, value: ["1dF"] },
+  {
+    id: "1dF",
+    label: "1dF",
+    icon: Icons.OneDie,
+    value: ["1dF"],
+  },
 ];
 
 export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
-  { label: "1d4", icon: Icons.Dice4, value: ["1d4"] },
-  { label: "1d6", icon: Icons.Dice6, value: ["1d6"] },
-  { label: "1d8", icon: Icons.Dice8, value: ["1d8"] },
-  { label: "1d10", icon: Icons.Dice10, value: ["1d10"] },
-  { label: "1d12", icon: Icons.Dice12, value: ["1d12"] },
   {
+    id: "1d4",
+    label: "1d4",
+    icon: Icons.Dice4,
+    value: ["1d4"],
+  },
+  {
+    id: "1d6",
+    label: "1d6",
+    icon: Icons.Dice6,
+    value: ["1d6"],
+  },
+  {
+    id: "1d8",
+    label: "1d8",
+    icon: Icons.Dice8,
+    value: ["1d8"],
+  },
+  {
+    id: "1d10",
+    label: "1d10",
+    icon: Icons.Dice10,
+    value: ["1d10"],
+  },
+  {
+    id: "1d12",
+    label: "1d12",
+    icon: Icons.Dice12,
+    value: ["1d12"],
+  },
+  {
+    id: "1d20",
     label: "1d20",
     icon: Icons.Dice20,
     value: ["1d20"],
@@ -39,12 +85,18 @@ export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 20,
     criticalFailure: 1,
   },
-  { label: "1d100", icon: Icons.Dice100, value: ["1d100"] },
+  { id: "1d100", label: "1d100", icon: Icons.Dice100, value: ["1d100"] },
 ];
 
 export const MiscDiceCommandGroups: Array<IDiceCommandGroup> = [
-  { label: "Coin Toss", icon: Icons.Coin, value: ["Coin"] },
   {
+    id: "coin",
+    label: "Coin Toss",
+    icon: Icons.Coin,
+    value: ["coin"],
+  },
+  {
+    id: "2d6",
     label: "2d6",
     icon: Icons.RollDiceIcon,
     value: ["1d6", "1d6"],
@@ -70,17 +122,6 @@ const TenSidedDie = makeNormalDie(10);
 const TwelveSidedDie = makeNormalDie(12);
 const TwentySidedDie = makeNormalDie(20);
 const HundredSidedDie = makeNormalDie(100);
-
-export type IDiceCommandNames =
-  | "1dF"
-  | "1d4"
-  | "1d6"
-  | "1d8"
-  | "1d10"
-  | "1d12"
-  | "1d20"
-  | "1d100"
-  | "Coin";
 
 type IDiceCommandOptions = {
   sides: Array<number>;
@@ -123,7 +164,7 @@ export const DiceCommandOptions: Record<
     sides: HundredSidedDie,
     formatDetailedResult: formatNormalDie,
   },
-  "Coin": {
+  "coin": {
     sides: CoinToss,
     formatDetailedResult: (value: number) => {
       if (value === 1) {
@@ -135,55 +176,115 @@ export const DiceCommandOptions: Record<
 };
 
 export type IRollDiceOptions = {
-  bonus?: number;
-  bonusLabel?: string;
+  listResults: boolean;
 };
 
-export type IDiceRoll = {
-  type: IDiceCommandNames;
-  value: number;
-};
+export enum RollType {
+  DiceCommand = "DiceCommand",
+  Modifier = "Modifier",
+  Label = "Label",
+}
+
+export type IDiceCommandOption =
+  | {
+      type: RollType.DiceCommand;
+      command: IDiceCommandNames;
+    }
+  | {
+      type: RollType.Modifier;
+      label: string;
+      modifier: number;
+    }
+  | {
+      type: RollType.Label;
+      label: string;
+    };
+
+export type IDiceCommandResult =
+  | {
+      type: RollType.DiceCommand;
+      command: IDiceCommandNames;
+      value: number;
+    }
+  | {
+      type: RollType.Modifier;
+      label: string;
+      value: number;
+    }
+  | {
+      type: RollType.Label;
+      label: string;
+    };
+
 export type ISimplifiedDiceRoll = {
-  type: string;
+  label: string;
   value: number;
 };
 
 export type IDiceRollResult = {
   total: number;
-  commandResults: Array<IDiceRoll>;
-};
-
-export type IDiceRollWithBonus = IDiceRollResult & {
-  bonus?: number;
-  bonusLabel?: string;
+  totalWithoutModifiers: number;
+  commandResult: Array<IDiceCommandResult>;
+  options: IRollDiceOptions;
 };
 
 export const Dice = {
-  rollCommands(commands: Array<IDiceCommandNames>): IDiceRollResult {
+  rollCommandOptionList(
+    commandOptionList: Array<IDiceCommandOption>,
+    options: IRollDiceOptions
+  ): IDiceRollResult {
     let total = 0;
-    const rolls: Array<IDiceRoll> = [];
+    let totalWithoutModifiers = 0;
+    const rolls: Array<IDiceCommandResult> = [];
 
-    commands.forEach((t) => {
-      const diceGroup = DiceCommandOptions[t];
+    commandOptionList.forEach((command) => {
+      if (command.type === RollType.DiceCommand) {
+        const diceGroup = DiceCommandOptions[command.command];
 
-      const sides = diceGroup.sides;
-      const side = getRandomDiceSide(sides.length);
-      const result = sides[side];
+        const sides = diceGroup.sides;
+        const side = getRandomDiceSide(sides.length);
+        const result = sides[side];
 
-      rolls.push({
-        type: t,
-        value: result,
-      });
-      total += result;
+        rolls.push({
+          type: command.type,
+          command: command.command,
+          value: result,
+        });
+        total += result;
+        totalWithoutModifiers += result;
+      }
+      if (command.type === RollType.Modifier) {
+        rolls.push({
+          type: command.type,
+          label: command.label,
+          value: command.modifier,
+        });
+        total += command.modifier;
+      }
+      if (command.type === RollType.Label) {
+        rolls.push({
+          type: command.type,
+          label: command.label,
+        });
+      }
     });
 
-    const results: IDiceRollResult = { total, commandResults: rolls };
-    return results;
+    return {
+      total,
+      totalWithoutModifiers,
+      commandResult: rolls,
+      options: options,
+    };
   },
 
   findMatchingCommandGroupWithDiceResult(result: IDiceRollResult | undefined) {
-    const commands = result?.commandResults.flatMap((cr) => cr.type);
-    return Dice.findMatchingCommandGroupWithDiceTypes(commands);
+    const flatCommands = result?.commandResult
+      .flatMap((cr) => {
+        return cr.type === RollType.DiceCommand ? cr.command : undefined;
+      })
+      .filter((c) => !!c) as Array<IDiceCommandNames>;
+
+    return this.findMatchingCommandGroupWithDiceTypes(flatCommands);
   },
 
   findMatchingCommandGroupWithDiceTypes(
@@ -195,16 +296,22 @@ export const Dice = {
     return commandGroup;
   },
 
-  simplifyRolls(rolls: Array<IDiceRoll>): Array<ISimplifiedDiceRoll> {
+  simplifyRolls(rolls: Array<IDiceCommandResult>): Array<ISimplifiedDiceRoll> {
     const commandResultsWithCounts = rolls.reduce<
       Record<string, { result: number; count: number }>
     >((acc, diceRoll) => {
-      if (acc[diceRoll.type] === undefined) {
-        acc[diceRoll.type] = { count: 0, result: 0 };
+      if (
+        diceRoll.type === RollType.Modifier ||
+        diceRoll.type === RollType.Label
+      ) {
+        return acc;
+      }
+      if (acc[diceRoll.command] === undefined) {
+        acc[diceRoll.command] = { count: 0, result: 0 };
       }
 
-      acc[diceRoll.type].count = acc[diceRoll.type].count + 1;
-      acc[diceRoll.type].result += diceRoll.value;
+      acc[diceRoll.command].count = acc[diceRoll.command].count + 1;
+      acc[diceRoll.command].result += diceRoll.value;
 
       return acc;
     }, {});
@@ -220,10 +327,16 @@ export const Dice = {
       if (isCountableDiceCommand) {
         const [, /* 1d */ dice] = command.split("d");
         const typeLabel = `${count}d${dice}`;
-        return { type: typeLabel, value: result };
+        return { label: typeLabel, value: result };
       }
-      return { type: command, value: result };
+      return { label: command, value: result };
     });
+
+    for (const roll of rolls) {
+      if (roll.type === RollType.Modifier) {
+        simplifiedRolls.push({ label: roll.label, value: roll.value });
+      }
+    }
 
     return simplifiedRolls;
   },

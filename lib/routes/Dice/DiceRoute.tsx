@@ -4,33 +4,41 @@ import Fade from "@material-ui/core/Fade";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
-import { DiceFab } from "../../components/DiceFab/DiceFab";
+import { DiceFab, DiceFabMode } from "../../components/DiceFab/DiceFab";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { useRollDice } from "../../contexts/DiceContext/DiceContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { IDiceRollResult, IDiceRollWithBonus } from "../../domains/dice/Dice";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const DiceRoute = () => {
+export function DiceRoute(props: { pool: boolean }) {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  const [rolls, setRolls] = useState<Array<IDiceRollWithBonus>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
   const { t } = useTranslate();
   const logger = useLogger();
-  const roll = useRollDice();
+  const diceManager = useContext(DiceContext);
 
-  useEffect(() => {
-    logger.info("Route:Dice");
-    setRollResult(roll());
-  }, []);
+  useEffect(
+    function onLoad() {
+      if (!props.pool) {
+        logger.info("Route:Dice");
+        setRollResult(diceManager.actions.reroll({ listResults: props.pool }));
+      } else {
+        logger.info("Route:DicePool");
+      }
+      diceManager.actions.setOptions({ listResults: props.pool });
+    },
+    [props.pool]
+  );
 
   const setRollResult = (result: IDiceRollResult) => {
     setRolls((draft) => {
@@ -40,7 +48,7 @@ export const DiceRoute = () => {
   };
 
   const handleRoll = () => {
-    setRollResult(roll());
+    setRollResult(diceManager.actions.reroll({ listResults: props.pool }));
   };
 
   return (
@@ -56,6 +64,7 @@ export const DiceRoute = () => {
           subtitle={t("dice-route.meta.description")}
         />
         <DiceFab
+          type={DiceFabMode.Roll}
           onSelect={(result) => {
             setRollResult(result);
           }}
@@ -97,7 +106,7 @@ export const DiceRoute = () => {
       </Box>
     </Page>
   );
-};
+}
 
 DiceRoute.displayName = "DiceRoute";
 export default DiceRoute;

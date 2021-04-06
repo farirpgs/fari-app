@@ -5,7 +5,11 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
-import { creatures, ICreature } from "./domains/Creatures";
+import { creatures } from "./domains/creatures";
+import {
+  ICharacter as ICreatureCharacter,
+  ICreature,
+} from "./domains/ICreature";
 
 export const SeelieSquireRoute: React.FC<{
   page: string;
@@ -15,7 +19,7 @@ export const SeelieSquireRoute: React.FC<{
   return (
     <Doc
       page={props.page}
-      url="/seelie-squire"
+      url="/seeliesquire"
       parent={{ title: "SRDs", url: "/srds" }}
       title="Seelie Squire's Book Of Creatures"
       imageUrl={Images.seelieSquire}
@@ -25,7 +29,6 @@ export const SeelieSquireRoute: React.FC<{
         return makeSeelieSquireMarkdown({ theme, isExtraSmall: isExtraSmall });
       }}
       gitHubLink="https://github.com/fariapp/fari/tree/master/lib/docs/seelie-squire.md"
-      noIndex
       author={{
         title: "Seelie Squire",
         avatarUrl: Images.seelieSquireAvatar,
@@ -70,76 +73,114 @@ function makeSeelieSquireMarkdown(props: {
 
   const markdown = `
 # Seelie Squire's Book of Creatures
+<page-meta author="Seelie Squire" description="Brought to you by Seelie Squire, this is
+ultimate resource if you are looking for the closest thing to a
+Fate Compendium."></page-meta>
 
-... 
-
-${creatures.map((c) => {
-  return `
+${creatures
+  .map((c) => {
+    return `
 # ${c.title}
+<page-meta author="Seelie Squire" ${
+      c.image ? `image="${c.image}"` : ""
+    }></page-meta>
 
 ${c.description}
 
-> ${renderImage(c)}
-> 
-> ## ${c.character.name} 
->
-> <div class=${bigFateLabelClass}>Aspects</div>
-> 
-> ${renderAspects(c)}
-> 
-> <div class=${bigFateLabelClass}>Skills</div>
-> 
-> ${renderSkills(c)}
-> 
-> <div class=${bigFateLabelClass}>Health</div>
-> 
-> ${renderHealth(c)}
-> 
-> <div class=${bigFateLabelClass}>Stunts</div>
-> 
-> ${renderStunts(c)}
->
-> <div class=${bigFateLabelClass}>Notes</div>
-> 
-> ${c.character.notes ?? ""}
+${renderImage(c)}
+
+${c.character.map((character) => renderCharacter(character)).join("")}
+
+${c.notes ? renderLabel("Notes") : ""}
+
+${c.notes ? c.notes : ""}
+
 `;
-})}`;
+  })
+  .join("")}`;
 
   return markdown;
 
+  function renderCharacter(c: ICreatureCharacter) {
+    return `
+> ## ${c.name} 
+>
+> ${renderLabel("Aspects")}
+> 
+> ${renderAspects(c)}
+> 
+> ${renderLabel("Skills")}
+> 
+> ${renderSkills(c)}
+> 
+> ${renderLabel("Health")}
+> 
+> ${renderHealth(c)}
+> ${renderSlots(c)}
+> 
+> ${renderLabel("Stunts")}
+> 
+> ${renderStunts(c)}
+
+`;
+  }
+
+  function renderLabel(label: string) {
+    return `<div class=${bigFateLabelClass}>${label}</div>`;
+  }
+
   function renderImage(c: ICreature) {
     const maxWidth = props.isExtraSmall ? "90%" : "50%";
-    return c.character.image
-      ? `<img alt="${c.character.name}" src="${c.character.image}" style="max-width: ${maxWidth}" />`
+    return c.image
+      ? `<img alt="${c.title}" src="${c.image}" style="max-width: ${maxWidth}" />`
       : "";
   }
 
-  function renderStunts(c: ICreature) {
-    return c.character.stunts
+  function renderStunts(c: ICreatureCharacter) {
+    return c.stunts
       .map(
         (s) => `
-> <div class=${smallFateLabelClass}>${s.name}</div>
+> <div class="${smallFateLabelClass}">${s.name}</div>
 > ${s.description}`
       )
       .join("<br/><br/>");
   }
 
-  function renderHealth(c: ICreature) {
-    return c.character.tracks
+  function renderSlots(c: ICreatureCharacter) {
+    const slots = c.slots
       .map(
         (s) => `
-> <div class=${smallFateLabelClass}>${s.name}</div>
+> <div class="${smallFateLabelClass}">${s.name}</div>
+> ${s.value}`
+      )
+      .join("<br/><br/>");
+
+    if (c.slots.length === 0) {
+      return "";
+    }
+    return `
+> <br>
+> <br>
+> ${slots}
+> `;
+  }
+
+  function renderHealth(c: ICreatureCharacter) {
+    return c.tracks
+      .map(
+        (s) => `
+> <div class="${smallFateLabelClass}">${s.name}</div>
 > ${s.values.map((sv) => `[${sv}]`).join(" • ")}
 > `
       )
       .join("<br/><br/>");
   }
 
-  function renderSkills(c: ICreature) {
-    return c.character.skills.map((s) => `- ${s}`).join("\n>");
+  function renderSkills(c: ICreatureCharacter) {
+    return c.skills.map((s) => `- ${s}`).join("\n>");
   }
 
-  function renderAspects(c: ICreature) {
-    return c.character.aspects.map((a) => `<code>${a}</code>`).join(` • `);
+  function renderAspects(c: ICreatureCharacter) {
+    return c.aspects.map((a) => `<code>${a}</code>`).join(` • `);
   }
 }

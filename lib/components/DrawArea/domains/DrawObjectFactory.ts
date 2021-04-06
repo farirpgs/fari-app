@@ -8,12 +8,12 @@ import {
   ObjectType,
 } from "../hooks/useDrawing";
 
-export class DrawObjectFactory {
-  public static TokenSize = {
+export const DrawObjectFactory = {
+  TokenSize: {
     width: 8,
     height: 8,
-  };
-  static startRectangle(props: { point: IPoint; color: string }): IObject {
+  },
+  startRectangle(props: { point: IPoint; color: string }): IObject {
     return {
       type: ObjectType.Rectangle,
       color: props.color,
@@ -22,9 +22,9 @@ export class DrawObjectFactory {
         end: props.point,
       },
     };
-  }
+  },
 
-  static continueRectangle(props: {
+  continueRectangle(props: {
     object: IRectangleObject;
     point: IPoint;
   }): IObject {
@@ -35,9 +35,9 @@ export class DrawObjectFactory {
         end: props.point,
       },
     };
-  }
+  },
 
-  static moveRectangle(props: {
+  moveRectangle(props: {
     object: IRectangleObject;
     x: number;
     y: number;
@@ -55,9 +55,9 @@ export class DrawObjectFactory {
         },
       },
     };
-  }
+  },
 
-  static startEllipse(props: { point: IPoint; color: string }): IObject {
+  startEllipse(props: { point: IPoint; color: string }): IObject {
     return {
       type: ObjectType.Ellipse,
       color: props.color,
@@ -66,12 +66,9 @@ export class DrawObjectFactory {
         end: props.point,
       },
     };
-  }
+  },
 
-  static continueEllipse(props: {
-    object: IEllipseObject;
-    point: IPoint;
-  }): IObject {
+  continueEllipse(props: { object: IEllipseObject; point: IPoint }): IObject {
     return {
       ...props.object,
       form: {
@@ -79,9 +76,9 @@ export class DrawObjectFactory {
         end: props.point,
       },
     };
-  }
+  },
 
-  static moveEllipse(props: {
+  moveEllipse(props: {
     object: IEllipseObject;
     x: number;
     y: number;
@@ -99,28 +96,24 @@ export class DrawObjectFactory {
         },
       },
     };
-  }
+  },
 
-  static startLine(props: { point: IPoint; color: string }): IObject {
+  startLine(props: { point: IPoint; color: string }): IObject {
     return {
       type: ObjectType.Line,
       color: props.color,
       points: [props.point],
     };
-  }
+  },
 
-  static continueLine(props: { object: ILineObject; point: IPoint }): IObject {
+  continueLine(props: { object: ILineObject; point: IPoint }): IObject {
     return {
       ...props.object,
       points: [...props.object.points, props.point],
     };
-  }
+  },
 
-  static moveLine(props: {
-    object: ILineObject;
-    x: number;
-    y: number;
-  }): IObject {
+  moveLine(props: { object: ILineObject; x: number; y: number }): IObject {
     return {
       ...props.object,
       points: props.object.points.map((p) => {
@@ -130,9 +123,9 @@ export class DrawObjectFactory {
         };
       }),
     };
-  }
+  },
 
-  static startToken(props: {
+  startToken(props: {
     point: IPoint;
     color: string;
     tokenIndex: number;
@@ -146,13 +139,9 @@ export class DrawObjectFactory {
         y: props.point.y - this.TokenSize.height / 2,
       },
     };
-  }
+  },
 
-  static moveToken(props: {
-    object: ITokenObject;
-    x: number;
-    y: number;
-  }): IObject {
+  moveToken(props: { object: ITokenObject; x: number; y: number }): IObject {
     return {
       ...props.object,
       point: {
@@ -160,5 +149,5 @@ export class DrawObjectFactory {
         y: props.object.point.y + props.y,
       },
     };
-  }
-}
+  },
+};

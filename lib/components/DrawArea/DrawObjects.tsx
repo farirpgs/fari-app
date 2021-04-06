@@ -10,8 +10,6 @@ import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import ClearAllTwoToneIcon from "@material-ui/icons/ClearAllTwoTone";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 import FaceTwoToneIcon from "@material-ui/icons/FaceTwoTone";
-import FullscreenExitTwoToneIcon from "@material-ui/icons/FullscreenExitTwoTone";
-import FullscreenTwoToneIcon from "@material-ui/icons/FullscreenTwoTone";
 import GestureTwoToneIcon from "@material-ui/icons/GestureTwoTone";
 import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
 import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
@@ -28,10 +26,8 @@ import { DrawingTool, IDrawingManager, ObjectType } from "./hooks/useDrawing";
 interface IProps {
   drawingManager: IDrawingManager;
   readonly?: boolean;
-  fullScreen?: boolean;
   controls: "bottom" | "top";
   tokenTitles?: Array<string>;
-  onFullScreenChange?: (fullScreen: boolean) => void;
 }
 
 export const DrawObjects: React.FC<IProps> = (props) => {
@@ -64,7 +60,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     return (
       <>
         <Box display="flex" flexDirection="column">
-          <AspectRatio widthPercent={100} ratio={1 / 1}>
+          <AspectRatio width={100} ratio={1 / 1}>
             {renderDrawArea()}
           </AspectRatio>
 
@@ -79,7 +75,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     <>
       {renderActions()}
       {renderOtherActions()}
-      <AspectRatio widthPercent={50} ratio={1 / 1}>
+      <AspectRatio width={100} ratio={1 / 1}>
         {renderDrawArea()}
       </AspectRatio>
     </>
@@ -102,7 +98,6 @@ export const DrawObjects: React.FC<IProps> = (props) => {
           touchAction: "none",
           height: "100%",
           cursor: props.readonly ? "inherit" : "crosshair",
-          border: props.fullScreen ? "1px solid  grey" : "none",
         })}
       >
         <Fade in={drawingManager.state.objects.length === 0}>
@@ -359,72 +354,47 @@ export const DrawObjects: React.FC<IProps> = (props) => {
   }
 
   function renderOtherActions() {
+    if (props.readonly) {
+      return null;
+    }
     return (
       <>
         <Divider />
         <Box p="0.5rem">
           <Grid container justify="flex-start" alignItems="center" spacing={1}>
-            {!props.readonly && (
-              <>
-                <Grid item>
-                  <IconButton
-                    data-cy="draw.clear"
-                    size="small"
-                    className={css({
-                      color: theme.palette.text.primary,
-                    })}
-                    onClick={() => {
-                      drawingManager.actions.clear();
-                      logger.info("DrawArea:onClear");
-                    }}
-                  >
-                    <ClearAllTwoToneIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <IconButton
-                    data-cy="draw.undo"
-                    size="small"
-                    className={css({
-                      color: theme.palette.text.primary,
-                    })}
-                    onClick={() => {
-                      drawingManager.actions.undo();
-                      logger.info("DrawArea:onUndo");
-                    }}
-                  >
-                    <UndoTwoToneIcon />
-                  </IconButton>
-                </Grid>
-              </>
-            )}
-            {props.onFullScreenChange && (
-              <Grid item>
-                <IconButton
-                  data-cy="draw.full-screen"
-                  size="small"
-                  className={css({
-                    color: theme.palette.text.primary,
-                  })}
-                  onClick={() => {
-                    props.onFullScreenChange?.(!props.fullScreen);
-                    if (!props.fullScreen) {
-                      logger.info("DrawArea:onOpenFullScreen");
-                    } else {
-                      logger.info("DrawArea:onCloseFullScreen");
-                    }
-                  }}
-                >
-                  {!props.fullScreen ? (
-                    <FullscreenTwoToneIcon />
-                  ) : (
-                    <FullscreenExitTwoToneIcon />
-                  )}
-                </IconButton>
-              </Grid>
-            )}
+            <Grid item>
+              <IconButton
+                data-cy="draw.clear"
+                size="small"
+                className={css({
+                  color: theme.palette.text.primary,
+                })}
+                onClick={() => {
+                  drawingManager.actions.clear();
+                  logger.info("DrawArea:onClear");
+                }}
+              >
+                <ClearAllTwoToneIcon />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton
+                data-cy="draw.undo"
+                size="small"
+                className={css({
+                  color: theme.palette.text.primary,
+                })}
+                onClick={() => {
+                  drawingManager.actions.undo();
+                  logger.info("DrawArea:onUndo");
+                }}
+              >
+                <UndoTwoToneIcon />
+              </IconButton>
+            </Grid>
           </Grid>
         </Box>
+        <Divider />
       </>
     );
   }

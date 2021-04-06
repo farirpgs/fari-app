@@ -13,24 +13,31 @@ import TextField from "@material-ui/core/TextField";
 import { DataGrid, RowId } from "@material-ui/data-grid";
 import produce from "immer";
 import uniq from "lodash/uniq";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
+import React, { useContext, useMemo, useRef, useState } from "react";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import {
-  CharactersContext,
-  ICharacter,
-  migrateCharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { SplitButton } from "../../components/SplitButton/SplitButton";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import {
   ISavableScene,
   migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/Id/Id";
+import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+
+enum ImportMode {
+  Import = "Import",
+  ImportAndDuplicate = "ImportAndDuplicate",
+}
 
 type IRow = {
   id: string;
@@ -42,29 +49,52 @@ type IRow = {
 
 export const DataRoute: React.FC = (props) => {
   const { t } = useTranslate();
+  const DataRouteItemType = {
+    Character: t("data-route.item-type.character"),
+    Scene: t("data-route.item-type.scene"),
+  };
+  const DataRouteItemTypeList = [
+    DataRouteItemType.Character,
+    DataRouteItemType.Scene,
+  ];
+
   const theme = useTheme();
   const errorTheme = useThemeFromColor(theme.palette.error.main);
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
 
   const [selections, setSelection] = useState<Array<RowId>>([]);
-  const [importCounter, setImportCounter] = useState(0);
-  const [group, setGroup] = useState("");
-  const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({ group: "", search: "" });
-
-  useEffect(() => {
-    const filterDelay = 300;
-    const t = setTimeout(() => {
-      setFilters({
-        search: search,
-        group: group,
+  const $importInput = useRef<any>();
+  const $importAndDuplicateInput = useRef<any>();
+  const [filters, setFilters] = useState({ group: "", search: "", type: "" });
+  const [group, setGroup] = useLazyState({
+    value: "",
+    delay: 750,
+    onChange(newGroup) {
+      setFilters((draft) => {
+        return { ...draft, group: newGroup };
       });
-    }, filterDelay);
-    return () => {
-      clearTimeout(t);
-    };
-  }, [search, group]);
+    },
+  });
+
+  const [type, setType] = useLazyState({
+    value: "",
+    delay: 750,
+    onChange(newType) {
+      setFilters((draft) => {
+        return { ...draft, type: newType };
+      });
+    },
+  });
+  const [search, setSearch] = useLazyState({
+    value: "",
+    delay: 750,
+    onChange(newSearch) {
+      setFilters((draft) => {
+        return { ...draft, search: newSearch };
+      });
+    },
+  });
 
   const groups = uniq([
     ...charactersManager.state.groups,
@@ -76,19 +106,19 @@ export const DataRoute: React.FC = (props) => {
       ...charactersManager.state.characters.map((c) => {
         return {
           id: c.id,
-          name: c.name,
-          group: c.group ?? "Ungrouped",
+          name: previewContentEditable({ value: c.name }),
+          group: c.group ?? "-",
           lastUpdated: c.lastUpdated,
-          type: "Character",
+          type: DataRouteItemType.Character,
         } as IRow;
       }),
       ...scenesManager.state.scenes.map((s) => {
         return {
           id: s.id,
-          name: s.name,
-          group: s.group ?? "Ungrouped",
+          name: previewContentEditable({ value: s.name }),
+          group: s.group ?? "-",
           lastUpdated: s.lastUpdated,
-          type: "Scenes",
+          type: DataRouteItemType.Scene,
         } as IRow;
       }),
     ];
@@ -98,6 +128,12 @@ export const DataRoute: React.FC = (props) => {
           return true;
         }
         return r.group === filters.group;
+      })
+      .filter((r) => {
+        if (!filters.type) {
+          return true;
+        }
+        return r.type === filters.type;
       })
       .filter((r) => {
         if (!filters.search) {
@@ -126,7 +162,10 @@ export const DataRoute: React.FC = (props) => {
     });
   }
 
-  function handleOnImport(fileToImport: FileList | null | undefined) {
+  function handleOnImport(
+    fileToImport: FileList | null | undefined,
+    mode: ImportMode
+  ) {
     FariEntity.import<{
       scenes: Array<ISavableScene>;
       characters: Array<ICharacter>;
@@ -135,29 +174,49 @@ export const DataRoute: React.FC = (props) => {
       fariType: "full",
       onImport: (file) => {
         file.characters.forEach((c) => {
-          importCharacter(c);
+          importCharacter(c, mode);
         });
         file.scenes.forEach((s) => {
-          importScene(s);
+          importScene(s, mode);
         });
+      },
+    });
+    FariEntity.import<ICharacter>({
+      filesToImport: fileToImport,
+      fariType: "character",
+      onImport: (character) => {
+        importCharacter(character, mode);
+      },
+    });
+    FariEntity.import<ISavableScene>({
+      filesToImport: fileToImport,
+      fariType: "scene",
+      onImport: (scene) => {
+        importScene(scene, mode);
       },
     });
   }
 
-  function importScene(s: ISavableScene) {
-    const sceneWithNewId = produce(s, (draft) => {
-      draft.id = uuidV4();
-    });
-    const migratedScene = migrateScene(sceneWithNewId);
+  function importScene(scene: ISavableScene, mode: ImportMode) {
+    const sceneToUse =
+      mode === ImportMode.Import
+        ? scene
+        : produce(scene, (draft) => {
+            draft.id = Id.generate();
+          });
+    const migratedScene = migrateScene(sceneToUse);
     scenesManager.actions.upsert(migratedScene);
   }
 
-  function importCharacter(c: ICharacter) {
-    const characterWithNewId = produce(c, (draft) => {
-      draft.id = uuidV4();
-    });
+  function importCharacter(character: ICharacter, mode: ImportMode) {
+    const characterToUse =
+      mode === ImportMode.Import
+        ? character
+        : produce(character, (draft) => {
+            draft.id = Id.generate();
+          });
 
-    const migratedCharacter = migrateCharacter(characterWithNewId);
+    const migratedCharacter = CharacterFactory.migrate(characterToUse);
     charactersManager.actions.upsert(migratedCharacter);
   }
 
@@ -179,32 +238,38 @@ export const DataRoute: React.FC = (props) => {
 
   return (
     <Page>
-      <Heading title="Data" />
-
+      <PageMeta
+        title={t("data-route.meta.title")}
+        description={t("data-route.meta.description")}
+      />
+      <Heading
+        title={t("data-route.meta.title")}
+        subtitle={t("data-route.meta.description")}
+      />
       <Container>
         <Box pb="1rem">
           <Grid container spacing={2} alignItems="baseline">
             <Grid item>
               <TextField
                 className={css({ width: "10rem" })}
-                helperText="Filter by Name"
-                label="Name"
+                helperText={t("data-route.filter-by-name")}
+                label={t("data-route.name")}
                 value={search}
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
               />
             </Grid>
-            <Grid>
+            <Grid item>
               <FormControl className={css({ width: "10rem" })}>
-                <InputLabel>Group</InputLabel>
+                <InputLabel>{t("data-route.group")}</InputLabel>
                 <Select
                   value={group}
                   onChange={(event) => {
                     setGroup(event.target.value as string);
                   }}
                 >
-                  <MenuItem value="">None</MenuItem>
+                  <MenuItem value="">{t("data-route.none")}</MenuItem>
                   {groups.map((g) => {
                     return (
                       <MenuItem value={g} key={g}>
@@ -213,7 +278,32 @@ export const DataRoute: React.FC = (props) => {
                     );
                   })}
                 </Select>
-                <FormHelperText>Filter by Group</FormHelperText>
+                <FormHelperText>
+                  {t("data-route.filter-by-group")}
+                </FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl className={css({ width: "10rem" })}>
+                <InputLabel>{t("data-route.type")}</InputLabel>
+                <Select
+                  value={type}
+                  onChange={(event) => {
+                    setType(event.target.value as string);
+                  }}
+                >
+                  <MenuItem value="">{t("data-route.none")}</MenuItem>
+                  {DataRouteItemTypeList.map((t) => {
+                    return (
+                      <MenuItem value={t} key={t}>
+                        {t}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText>
+                  {t("data-route.filter-by-type")}
+                </FormHelperText>
               </FormControl>
             </Grid>
           </Grid>
@@ -229,26 +319,59 @@ export const DataRoute: React.FC = (props) => {
                   handleOnExport();
                 }}
               >
-                {"Export"}
+                {t("data-route.export")}
               </Button>
             </Grid>
 
             <Grid item>
-              <Button color="primary" variant="contained" component="label">
-                {t("manager.import")}
-                <input
-                  type="file"
-                  accept=".json"
-                  className={css({
-                    display: "none",
-                  })}
-                  onChange={(event) => {
-                    handleOnImport(event.target.files);
-                    event.target.value = "";
-                  }}
-                />
-              </Button>
+              <SplitButton
+                color="primary"
+                variant="outlined"
+                options={[
+                  {
+                    label: t("data-route.import"),
+                    onClick: () => {
+                      $importInput.current.click();
+                    },
+                  },
+                  {
+                    label: t("data-route.import-and-duplicate"),
+                    onClick: () => {
+                      $importAndDuplicateInput.current.click();
+                    },
+                  },
+                ]}
+              />
+
+              <input
+                ref={$importInput}
+                type="file"
+                accept=".json"
+                className={css({
+                  display: "none",
+                })}
+                onChange={(event) => {
+                  handleOnImport(event.target.files, ImportMode.Import);
+                  event.target.value = "";
+                }}
+              />
+              <input
+                ref={$importAndDuplicateInput}
+                type="file"
+                accept=".json"
+                className={css({
+                  display: "none",
+                })}
+                onChange={(event) => {
+                  handleOnImport(
+                    event.target.files,
+                    ImportMode.ImportAndDuplicate
+                  );
+                  event.target.value = "";
+                }}
+              />
             </Grid>
+
             <Grid item>
               <ThemeProvider theme={errorTheme}>
                 <Button
@@ -256,12 +379,12 @@ export const DataRoute: React.FC = (props) => {
                   variant="outlined"
                   disabled={!selections.length}
                   onClick={() => {
-                    if (window.confirm("Are you sure ?")) {
+                    if (window.confirm(t("data-route.delete-confirmation"))) {
                       handleOnDelete();
                     }
                   }}
                 >
-                  {"Delete"}
+                  {t("data-route.delete")}
                 </Button>
               </ThemeProvider>
             </Grid>
@@ -283,29 +406,28 @@ export const DataRoute: React.FC = (props) => {
                 columns={[
                   {
                     field: "name",
-                    headerName: "Name",
+                    headerName: t("data-route.name"),
                     flex: 1,
                     disableClickEventBubbling: true,
                   },
                   {
                     field: "group",
-                    headerName: "Group",
+                    headerName: t("data-route.group"),
                     width: 150,
                     disableClickEventBubbling: true,
                   },
                   {
                     field: "type",
-                    headerName: "Type",
+                    headerName: t("data-route.type"),
                     width: 150,
                     disableClickEventBubbling: true,
-                    // eslint-disable-next-line react/display-name
                     renderCell: (params) => {
                       return <strong>{params.value}</strong>;
                     },
                   },
                   {
                     field: "lastUpdated",
-                    headerName: "Last Updated",
+                    headerName: t("data-route.last-updated"),
                     width: 250,
                     disableClickEventBubbling: true,
                     valueGetter: (cell) => {

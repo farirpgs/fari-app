@@ -192,7 +192,7 @@ Good aspects add something to the fiction. They do this by granting narrative pe
 
 # Which Fate System Should I Use
 
-<page-meta author="RPDeshaies" description="A clear answer on one of the most popular question about the Fate RPG"></page-meta>
+<page-meta author="René-Pier Deshaies-Gélinas" description="A clear answer on one of the most popular question about the Fate RPG"></page-meta>
 
 The Fate System comes in different colors and it might be hard at first to understand which version to pick and start using. Let's try to demystify all of that.
 
@@ -208,7 +208,7 @@ If you still don't know where to start, here's a tip:
 
 # What's the Math Behind The Fate Dice
 
-<page-meta author="RPDeshaies" description="Understanding why Fate Dice are such a good tool to play TTRPGs."></page-meta>
+<page-meta author="René-Pier Deshaies-Gélinas" description="Understanding why Fate Dice are such a good tool to play TTRPGs."></page-meta>
 
 The big thing we need to understand when using Fudge/Fate Dice is that the chances of getting a `+4/-4` versus getting a `0` are drastically very different.
 

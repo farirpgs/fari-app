@@ -1,13 +1,10 @@
-import { css, cx } from "@emotion/css";
-import Avatar from "@material-ui/core/Avatar";
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import useTheme from "@material-ui/core/styles/useTheme";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
@@ -19,25 +16,40 @@ import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutl
 import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
-import { IRollDiceOptions } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { DiceBox } from "../../../DiceBox/DiceBox";
+import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
+import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSkill";
+import { ConditionalWrapper } from "../../../ConditionalWrapper/ConditionalWrapper";
+import { previewContentEditable } from "../../../ContentEditable/ContentEditable";
+import {
+  DiceBonusLabel,
+  DiceBox,
+  DiceBoxResult,
+} from "../../../DiceBox/DiceBox";
+import { FateLabel } from "../../../FateLabel/FateLabel";
 
 export const PlayerRow: React.FC<
   {
+    permissions: {
+      canRoll: boolean;
+      canUpdatePoints: boolean;
+      canUpdateInitiative: boolean;
+      canLoadCharacterSheet: boolean;
+      canRemove: boolean;
+    };
     player: IPlayer;
-    readonly: boolean;
-    renderControls: boolean;
-    highlight: boolean;
-
-    onDiceRoll(options: IRollDiceOptions): void;
+    isMe: boolean;
+    number: number;
+    onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
-    onFatePointsChange(fatePoints: number): void;
+    onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
+
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
     onLoadCharacterSheet(): void;
@@ -46,7 +58,23 @@ export const PlayerRow: React.FC<
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const shouldHighlight = props.highlight;
+
+  const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
+    props.player.character
+  );
+  const pointFromProps = mainPointerBlock?.value ?? props.player.points;
+  const maxPointsFromProps = mainPointerBlock?.meta.max ?? undefined;
+
+  const pointsManager = usePointCounter({
+    points: pointFromProps,
+    maxPoints: maxPointsFromProps,
+    onPointsChange(newPoints) {
+      props.onPointsChange(newPoints, pointsManager.state.maxPoints);
+    },
+    onMaxPointsChange(newMaxPoints) {
+      props.onPointsChange(pointsManager.state.points, newMaxPoints);
+    },
+  });
 
   const textColor = useTextColors(theme.palette.background.default);
   const lightBackground = useLightBackground();
@@ -57,29 +85,14 @@ export const PlayerRow: React.FC<
   const name =
     props.player?.character?.name ||
     props.player?.playerName ||
-    t("play-route.character-name");
+    `Player #${props.number}`;
 
   const hasCharacterSheet = !!props.player.character;
-  const selectedRowStyle = css({ backgroundColor: lightBackground });
-  const playerInfoCellStyle = css({
-    padding: "0.5rem",
-    borderBottom: "none",
-  });
-  const controlsRowStyle = css({
-    padding: "0.5rem",
-  });
-  const controlTableCellStyle = css({ border: "none", padding: ".7rem" });
-  const fatePointsTableCell = css({
-    border: "none",
-    padding: ".7rem 0",
-  });
-  const borderTableCellStyle = css({ padding: "0" });
 
-  const fatePointsStyle = css({
-    background:
-      props.player.fatePoints === 0
-        ? textColor.disabled
-        : theme.palette.primary.main,
+  const points = parseInt(mainPointerBlock?.value ?? "0") || 0;
+
+  const pointsStyle = css({
+    background: points === 0 ? textColor.disabled : theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     transition: theme.transitions.create("background"),
     width: "2rem",
@@ -87,154 +100,254 @@ export const PlayerRow: React.FC<
     margin: "0 auto",
   });
 
-  const handleRoll = (options: IRollDiceOptions) => {
-    props.onDiceRoll(options);
+  const handleRoll = () => {
+    props.onDiceRoll();
     logger.info("ScenePlayer:onDiceRoll");
   };
 
   return (
     <>
-      <TableRow
+      <Box
+        bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
         data-cy={props["data-cy"]}
-        selected={false}
-        className={cx({
-          [selectedRowStyle]: shouldHighlight,
-        })}
       >
-        <TableCell className={playerInfoCellStyle} align="left">
-          {props.player.isGM ? (
-            <Typography
-              noWrap
-              color="inherit"
-              className={css({
-                width: "100%",
-                textAlign: "left",
-                padding: "4px 5px",
-                fontSize: "1.2rem",
-                lineHeight: Font.lineHeight(1.2),
-                fontWeight: props.highlight ? "bold" : "normal",
-              })}
-            >
-              {name}
-            </Typography>
-          ) : (
-            renderCharacterSheetButton()
-          )}
-        </TableCell>
-
-        <TableCell className={playerInfoCellStyle} align="center">
-          <Tooltip
-            title={
-              props.player.playedDuringTurn
-                ? t("player-row.played")
-                : t("player-row.not-played")
-            }
-          >
-            <span>
-              <IconButton
-                data-cy={`${props["data-cy"]}.toggle-initiative`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onPlayedInTurnOrderChange(
-                    !props.player.playedDuringTurn
-                  );
-                  logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
-                    playedDuringTurn: !props.player.playedDuringTurn,
-                  });
-                }}
-                disabled={props.readonly}
-                size="small"
-              >
-                {props.player.playedDuringTurn ? (
-                  <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
-                ) : (
-                  <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
-                )}
-              </IconButton>
-            </span>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={cx(playerInfoCellStyle)} align="center">
-          <Tooltip title={t("player-row.fate-points")}>
-            <span>
-              <ButtonBase
-                className={css({
-                  borderRadius: "50%",
-                })}
-                data-cy={`${props["data-cy"]}.consume-fate-point`}
-                disabled={props.readonly}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onFatePointsChange(props.player.fatePoints - 1);
-                  logger.info("ScenePlayer:onConsumeFatePoints");
-                }}
-              >
-                <Avatar className={fatePointsStyle}>
-                  {props.player.fatePoints}
-                </Avatar>
-              </ButtonBase>
-            </span>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={cx(playerInfoCellStyle)} align="right">
-          {!props.highlight && (
-            <Box display="flex" justifyContent="flex-end">
-              <DiceBox
-                rolls={props.player.rolls}
-                size="2rem"
-                fontSize="1.25rem"
-                borderSize=".15rem"
-                disabled={props.readonly}
-                onClick={() => {
-                  handleRoll({});
-                }}
-              />
-            </Box>
-          )}
-        </TableCell>
-      </TableRow>
-      {renderGMControls()}
-      {renderBorder()}
+        <Box py=".5rem" px=".5rem">
+          <Box mb=".5rem">{renderName()}</Box>
+          <Box mb=".5rem">{renderDice()}</Box>
+          <Box>{renderPointCounter()}</Box>
+          <Box>{renderControls()}</Box>
+        </Box>
+        <Divider light />
+      </Box>
     </>
   );
 
+  function renderDice() {
+    return (
+      <Grid container spacing={2} wrap="nowrap" alignItems="center">
+        <Grid item>
+          <Box display="flex" justifyContent="flex-end">
+            <DiceBox
+              rolls={props.player.rolls}
+              size="2rem"
+              fontSize="1rem"
+              // disabling the confettis if the current row is "me" because there is already a diceFab
+              disableConfettis={props.isMe}
+              borderSize=".15rem"
+              disabled={!props.permissions.canRoll}
+              onClick={() => {
+                handleRoll();
+              }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item container alignItems="center">
+          <Grid item xs={12}>
+            <DiceBonusLabel rolls={props.player.rolls} />
+          </Grid>
+          <Grid item xs={12}>
+            <DiceBoxResult rolls={props.player.rolls} />
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderControls() {
+    return (
+      <Grid
+        item
+        xs
+        container
+        spacing={1}
+        alignItems="center"
+        justify="flex-end"
+      >
+        {props.permissions.canLoadCharacterSheet && (
+          <Grid item>{renderCharacterSheetButton()}</Grid>
+        )}
+        <Grid item>{renderInitiative()}</Grid>
+        {props.permissions.canRemove && (
+          <Grid item>{renderDeleteButton()}</Grid>
+        )}
+      </Grid>
+    );
+  }
+
   function renderCharacterSheetButton() {
     return (
-      <>
-        <Grid container wrap="nowrap" alignItems="center">
-          {props.highlight && (
+      <Tooltip
+        title={
+          hasCharacterSheet
+            ? t("player-row.swap-character-sheet")
+            : t("play-route.add-character-sheet")
+        }
+      >
+        <span>
+          <IconButton
+            className={css({ padding: "0" })}
+            color={hasCharacterSheet ? "default" : "primary"}
+            data-cy={`${props["data-cy"]}.load-character-sheet`}
+            onClick={() => {
+              props.onLoadCharacterSheet();
+              logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+            }}
+          >
+            {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
+  function renderDeleteButton() {
+    return (
+      <Tooltip title={t("player-row.remove-player")}>
+        <span>
+          <IconButton
+            data-cy={`${props["data-cy"]}.remove`}
+            className={css({ padding: "0" })}
+            onClick={(e) => {
+              e.stopPropagation();
+              const confirmed = confirm(
+                t("player-row.remove-player-confirmation")
+              );
+              if (confirmed) {
+                props.onPlayerRemove();
+                logger.info("ScenePlayer:onPlayerRemove");
+              }
+            }}
+          >
+            <HighlightOffIcon color="error" />
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
+
+  function renderInitiative() {
+    return (
+      <Tooltip
+        title={
+          props.player.playedDuringTurn
+            ? t("player-row.played")
+            : t("player-row.not-played")
+        }
+      >
+        <span>
+          <IconButton
+            data-cy={`${props["data-cy"]}.toggle-initiative`}
+            onClick={(e) => {
+              e.stopPropagation();
+              props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
+              logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
+                playedDuringTurn: !props.player.playedDuringTurn,
+              });
+            }}
+            disabled={!props.permissions.canUpdateInitiative}
+            className={css({ padding: "0" })}
+          >
+            {props.player.playedDuringTurn ? (
+              <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
+            ) : (
+              <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
+            )}
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
+
+  function renderPointCounter() {
+    return (
+      <Grid
+        container
+        justify="flex-start"
+        alignItems="center"
+        spacing={1}
+        wrap="nowrap"
+      >
+        {props.permissions.canUpdatePoints && (
+          <Grid item>
+            <IconButton
+              size="small"
+              data-cy={`${props["data-cy"]}.counter.decrement`}
+              onClick={() => {
+                pointsManager.actions.decrement();
+              }}
+            >
+              <RemoveCircleOutlineOutlinedIcon
+                className={css({ width: "1rem", height: "1rem" })}
+              />
+            </IconButton>
+          </Grid>
+        )}
+        <Grid item>
+          <CircleTextField
+            data-cy={`${props["data-cy"]}.counter.value`}
+            value={pointsManager.state.points}
+            readonly={!props.permissions.canUpdatePoints}
+            highlight
+            onChange={(newValue) => {
+              pointsManager.actions.setPoints(newValue);
+            }}
+          />
+        </Grid>
+        {pointsManager.state.maxPoints !== undefined && (
+          <>
             <Grid item>
-              <Tooltip
-                title={
-                  hasCharacterSheet
-                    ? t("player-row.swap-character-sheet")
-                    : t("play-route.add-character-sheet")
-                }
-                onClick={() => {
-                  props.onLoadCharacterSheet();
-                  logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
-                }}
+              <Typography
+                className={css({
+                  fontSize: "2rem",
+                  color: "#bdbdbd",
+                  lineHeight: Font.lineHeight(2),
+                })}
               >
-                <IconButton
-                  size="small"
-                  color={hasCharacterSheet ? "default" : "primary"}
-                >
-                  {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
-                </IconButton>
-              </Tooltip>
+                {"/"}
+              </Typography>
             </Grid>
-          )}
-          <Grid item xs>
+            <Grid item>
+              <CircleTextField
+                data-cy={`${props["data-cy"]}.counter.max`}
+                value={pointsManager.state.maxPoints ?? ""}
+                readonly={!props.permissions.canUpdatePoints}
+                highlight
+                onChange={(newMax) => {
+                  pointsManager.actions.setMaxPoints(newMax);
+                }}
+              />
+            </Grid>
+          </>
+        )}
+        {props.permissions.canUpdatePoints && (
+          <Grid item>
+            <IconButton
+              size="small"
+              data-cy={`${props["data-cy"]}.counter.increment`}
+              onClick={() => {
+                pointsManager.actions.increment();
+              }}
+            >
+              <AddCircleOutlineOutlinedIcon
+                className={css({ width: "1rem", height: "1rem" })}
+              />
+            </IconButton>
+          </Grid>
+        )}
+      </Grid>
+    );
+  }
+
+  function renderName() {
+    return (
+      <>
+        <ConditionalWrapper
+          condition={hasCharacterSheet}
+          wrapper={(children) => (
             <Button
-              className={css({
-                width: "100%",
-                background: "transparent",
-                textTransform: "none",
-                color: hasCharacterSheet
-                  ? theme.palette.text.primary
-                  : theme.palette.text.secondary,
-                border: "none",
-              })}
+              variant="outlined"
+              color="default"
+              fullWidth
               data-cy={`${props["data-cy"]}.open-character-sheet`}
               disabled={!props.player.character}
               size="small"
@@ -243,111 +356,23 @@ export const PlayerRow: React.FC<
                 logger.info("ScenePlayer:onCharacterSheetButtonPress");
               }}
             >
-              <Typography
-                noWrap
-                color="inherit"
-                className={css({
-                  width: "100%",
-                  textAlign: "left",
-                  fontSize: "1.2rem",
-                  lineHeight: Font.lineHeight(1.2),
-                  fontWeight: props.highlight ? "bold" : "normal",
-                })}
-              >
-                {name}
-              </Typography>
+              {children}
             </Button>
-          </Grid>
-        </Grid>
+          )}
+        >
+          <FateLabel
+            noWrap
+            uppercase={false}
+            color="inherit"
+            className={css({
+              width: "100%",
+              textTransform: "none",
+            })}
+          >
+            {previewContentEditable({ value: name })}
+          </FateLabel>
+        </ConditionalWrapper>
       </>
-    );
-  }
-  function renderGMControls() {
-    if (!props.renderControls) {
-      return null;
-    }
-
-    return (
-      <TableRow
-        selected={false}
-        className={cx(controlsRowStyle, {
-          [selectedRowStyle]: shouldHighlight,
-        })}
-      >
-        <TableCell className={controlTableCellStyle}>
-          <Tooltip title={t("player-row.remove-character")}>
-            <IconButton
-              data-cy={`${props["data-cy"]}.remove`}
-              size="small"
-              onClick={(e) => {
-                e.stopPropagation();
-                props.onPlayerRemove();
-                logger.info("ScenePlayer:onPlayerRemove");
-              }}
-            >
-              <HighlightOffIcon
-                color="error"
-                className={css({ width: "1rem", height: "1rem" })}
-              />
-            </IconButton>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={controlTableCellStyle} />
-        <TableCell className={fatePointsTableCell}>
-          <Grid container alignItems="center" justify="center" spacing={1}>
-            <Grid item>
-              <Tooltip title={t("player-row.remove-fate-point")}>
-                <span>
-                  <IconButton
-                    data-cy={`${props["data-cy"]}.consume-fate-point-gm`}
-                    size="small"
-                    disabled={props.player.fatePoints === 0}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const fatePointsMinusOne = props.player.fatePoints - 1;
-                      const newValue =
-                        fatePointsMinusOne < 0 ? 0 : fatePointsMinusOne;
-                      props.onFatePointsChange(newValue);
-                      logger.info("ScenePlayer:onGMConsumeFatePoint");
-                    }}
-                  >
-                    <RemoveCircleOutlineOutlinedIcon
-                      className={css({ width: "1rem", height: "1rem" })}
-                    />
-                  </IconButton>
-                </span>
-              </Tooltip>
-            </Grid>
-
-            <Grid item>
-              <Tooltip title={t("player-row.add-fate-point")}>
-                <IconButton
-                  data-cy={`${props["data-cy"]}.refresh-fate-point-gm`}
-                  size="small"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onFatePointsChange(props.player.fatePoints + 1);
-                    logger.info("ScenePlayer:onGMRefreshFatePoint");
-                  }}
-                >
-                  <AddCircleOutlineOutlinedIcon
-                    className={css({ width: "1rem", height: "1rem" })}
-                  />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        </TableCell>
-        <TableCell className={controlTableCellStyle} />
-      </TableRow>
-    );
-  }
-
-  function renderBorder() {
-    return (
-      <TableRow>
-        <TableCell colSpan={4} className={borderTableCellStyle} />
-      </TableRow>
     );
   }
 };

@@ -39,7 +39,7 @@ export const Srds: React.FC = (props) => {
     <div>
       <Heading
         icon={MenuBookIcon}
-        title={"Fate System Reference Documents (SRDs)"}
+        title={"Fate System Reference Documents"}
         subtitle="Getting Started"
       />
       <SrdItems />
@@ -209,9 +209,6 @@ export const WikiItems: React.FC = (props) => {
             link="/success-with-style"
           />
         </Grid>
-        {/*
-        </Grid>
-
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title="Book of Monsters"
@@ -224,9 +221,9 @@ export const WikiItems: React.FC = (props) => {
             }
             bgColor="#3c5c39"
             imageUrl={Images.seelieSquire}
-            link="/seelie-squire"
+            link="/seeliesquire"
           />
-        </Grid> */}
+        </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title="Fate Stunts"

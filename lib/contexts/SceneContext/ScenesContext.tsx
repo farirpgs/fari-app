@@ -1,9 +1,9 @@
 import produce from "immer";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 
@@ -118,6 +118,22 @@ export function useScenes(props?: { localStorage: Storage }) {
     });
   }
 
+  function duplicate(id: string | undefined) {
+    setScenes((draft: Array<ISavableScene>) => {
+      const match = draft.find((c) => c.id === id);
+
+      return [
+        ...draft,
+        {
+          ...match,
+          id: Id.generate(),
+          lastUpdated: getUnix(),
+          name: `${match?.name} Copy`,
+        } as ISavableScene,
+      ];
+    });
+  }
+
   return {
     state: {
       mode: mode,
@@ -131,13 +147,14 @@ export function useScenes(props?: { localStorage: Storage }) {
       add,
       upsert,
       remove,
+      duplicate,
     },
   };
 }
 
 function makeDefaultSavableScene(): ISavableScene {
   return {
-    id: uuidV4(),
+    id: Id.generate(),
     name: defaultSceneName,
     group: undefined,
     aspects: defaultSceneAspects,
@@ -153,9 +170,14 @@ export function migrateScenes(scenes: Array<ISavableScene>) {
 }
 
 export function migrateScene(scene: ISavableScene) {
-  return produce(scene, (draft) => {
-    // todo...
-  });
+  try {
+    return produce(scene, (draft) => {
+      // todo...
+    });
+  } catch (error) {
+    console.error(error);
+    return scene;
+  }
 }
 
 export const defaultSceneName = "";
