@@ -177,6 +177,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </LightBox>
         <DarkBox
           title={t("home-route.sections.open-source.title")}
+          subTitle={t("home-route.sections.open-source.sub-title")}
           px="2rem"
           py="5rem"
           mb={sectionsSeparator}
@@ -562,7 +563,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
       <Grid container justify="center" spacing={2}>
         <Grid item xs={12}>
           <Typography>
-            {t("home-route.sections.open-source.sub-title")}
+            {t("home-route.sections.open-source.description")}
           </Typography>
         </Grid>
         <Grid item xs={12}>

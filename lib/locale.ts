@@ -138,6 +138,7 @@ export type ITranslationKeys =
   | "home-route.sections.join-community.sub-title"
   | "home-route.sections.join-community.title"
   | "home-route.sections.open-source.cta"
+  | "home-route.sections.open-source.description"
   | "home-route.sections.open-source.sub-title"
   | "home-route.sections.open-source.title"
   | "home-route.sections.patreon.title"

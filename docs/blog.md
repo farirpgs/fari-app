@@ -6,7 +6,7 @@
 
 # Fari v4.0.0
 
-<page-meta author="René-Pier Deshaies-Gélinas" date="2021-03-25" description="New Character Sheet Framework, Data Management and Collaboration with Seelie Squire" image="https://gyazo.com/713e2fd2dd9c9a83c58e4fd00b8224ed.png"></page-meta>
+<page-meta author="René-Pier Deshaies-Gélinas" date="2021-04-06" description="New Character Sheet Framework, Data Management and Collaboration with Seelie Squire" image="https://gyazo.com/713e2fd2dd9c9a83c58e4fd00b8224ed.png"></page-meta>
 
 This release has been in the making since November of 2020 so it's a big one.
 
