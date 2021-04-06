@@ -34,7 +34,7 @@ import { useLightBackground } from "../../hooks/useLightBackground/useLightBackg
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { MiscellaneousItems, WikiItems } from "../SrdsRoute/SrdsRoute";
+import { WikiItems } from "../SrdsRoute/SrdsRoute";
 
 const Patrons = [
   "James Micu",
@@ -177,7 +177,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
         </LightBox>
         <DarkBox
           title={t("home-route.sections.open-source.title")}
-          subTitle={t("home-route.sections.open-source.sub-title")}
           px="2rem"
           py="5rem"
           mb={sectionsSeparator}
@@ -189,9 +188,6 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <>
             <Heading icon={HelpIcon} title={"Wikis & Resources"} />
             <WikiItems />
-            <Box pt="2rem" />
-            <Heading icon={HelpIcon} title={"Miscellaneous"} />
-            <MiscellaneousItems />
           </>
         </LightBox>
 
@@ -564,6 +560,11 @@ export const HomeRoute: React.FC<{}> = (props) => {
   function renderOpenSource() {
     return (
       <Grid container justify="center" spacing={2}>
+        <Grid item xs={12}>
+          <Typography>
+            {t("home-route.sections.open-source.sub-title")}
+          </Typography>
+        </Grid>
         <Grid item xs={12}>
           <a
             href="https://github.com/fariapp/fari"

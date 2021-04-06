@@ -13,7 +13,7 @@ const DOMPurifyOptions: Config = {
   ALLOWED_TAGS: ["br", "img"],
 };
 
-const ContentEditableDelay = 1000;
+const ContentEditableDelay = 750;
 
 type IPreviewContentEditableOptions = {
   value: string | undefined;

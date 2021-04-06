@@ -48,9 +48,6 @@ export const Srds: React.FC = (props) => {
       <Box pt="2rem" />
       <Heading icon={HelpIcon} title={"Wikis & Resources"} />
       <WikiItems />
-      <Box pt="2rem" />
-      <Heading icon={HelpIcon} title={"Miscellaneous"} />
-      <MiscellaneousItems />
     </div>
   );
 };
@@ -159,29 +156,6 @@ export const ToolkitItems: React.FC = (props) => {
   );
 };
 
-export const MiscellaneousItems: React.FC = (props) => {
-  return (
-    <Box>
-      <Grid container spacing={4} justify="center">
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Cheat Sheet"
-            description={
-              <>
-                Your handy tool for a quick access to the most important rules
-                during a session.
-              </>
-            }
-            bgColor="#030200"
-            imageUrl={Images.cheatSheet}
-            link="/cheat-sheet"
-          />
-        </Grid>
-      </Grid>
-    </Box>
-  );
-};
-
 export const WikiItems: React.FC = (props) => {
   return (
     <Box>
@@ -236,6 +210,20 @@ export const WikiItems: React.FC = (props) => {
             bgColor="#223031"
             imageUrl={Images.book}
             link="/fate-stunts"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title="Cheat Sheet"
+            description={
+              <>
+                Your handy tool for a quick access to the most important rules
+                during a session.
+              </>
+            }
+            bgColor="#030200"
+            imageUrl={Images.cheatSheet}
+            link="/cheat-sheet"
           />
         </Grid>
       </Grid>
