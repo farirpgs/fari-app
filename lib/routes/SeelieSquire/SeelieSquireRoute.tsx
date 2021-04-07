@@ -150,10 +150,9 @@ ${c.notes ? c.notes : ""}
     const slots = c.slots
       .map(
         (s) => `
-> <div class="${smallFateLabelClass}">${s.name}</div>
-> ${s.value}`
+> <div class="${smallFateLabelClass}">${s.name} [${s.value}]</div>`
       )
-      .join("<br/><br/>");
+      .join("<br/>");
 
     if (c.slots.length === 0) {
       return "";

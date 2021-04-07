@@ -4,14 +4,14 @@ import {
   IDiceCommandNames,
   IDiceCommandOption,
   IRollDiceOptions,
-  RollType,
+  RollType
 } from "../../domains/dice/Dice";
 
 export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
-const DefaultDiceCommandOptionList: Array<IDiceCommandOption> = [
+export const DefaultDiceCommandOptionList: Array<IDiceCommandOption> = [
   {
     type: RollType.DiceCommand,
     command: "1dF",

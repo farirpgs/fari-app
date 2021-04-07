@@ -46,7 +46,10 @@ import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
-import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import {
+  DefaultDiceCommandOptionList,
+  DiceContext,
+} from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
@@ -798,7 +801,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     sceneManager={sceneManager}
                     onRoll={(label, modifier) => {
                       const options: Array<IDiceCommandOption> = [
-                        ...diceManager.state.commandOptionList,
+                        ...DefaultDiceCommandOptionList,
                       ];
                       options.push({
                         type: RollType.Modifier,
