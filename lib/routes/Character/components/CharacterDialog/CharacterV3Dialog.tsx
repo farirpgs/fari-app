@@ -246,6 +246,9 @@ export const CharacterV3Dialog: React.FC<{
           maxWidth="md"
           scroll="paper"
           onClose={onClose}
+          classes={{
+            paper: css({ height: "100%" }),
+          }}
           TransitionComponent={SlideUpTransition}
         >
           <DialogTitle
@@ -308,50 +311,52 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderManagementActions() {
+    return <Collapse in={advanced}>{renderLoadTemplate()}</Collapse>;
+  }
+
+  function renderLoadTemplate() {
     return (
-      <Collapse in={advanced}>
-        <Box>
-          <Grid
-            container
-            wrap="nowrap"
-            spacing={2}
-            justify="flex-start"
-            alignItems="center"
-          >
-            <Grid item>
-              <InputLabel> {t("character-dialog.load-template")}</InputLabel>
-            </Grid>
-            <Grid item>
-              <Autocomplete
-                size="small"
-                autoHighlight
-                filterOptions={createFilterOptions({ limit: 100 })}
-                options={CharacterTemplatesWithGroups}
-                className={css({ width: "300px" })}
-                getOptionLabel={(option) =>
-                  t(
-                    `character-dialog.template.${option.template}` as ITranslationKeys
-                  )
-                }
-                groupBy={(option) => option.group}
-                onChange={(event, newValue) => {
-                  if (newValue?.template) {
-                    onLoadTemplate(newValue?.template);
-                  }
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Template"
-                    variant="outlined"
-                    data-cy={`character-dialog.template`}
-                  />
-                )}
-              />
-            </Grid>
+      <Box>
+        <Grid
+          container
+          wrap="nowrap"
+          spacing={2}
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item>
+            <InputLabel> {t("character-dialog.load-template")}</InputLabel>
           </Grid>
-        </Box>
-      </Collapse>
+          <Grid item>
+            <Autocomplete
+              size="small"
+              autoHighlight
+              filterOptions={createFilterOptions({ limit: 100 })}
+              options={CharacterTemplatesWithGroups}
+              className={css({ width: "300px" })}
+              getOptionLabel={(option) =>
+                t(
+                  `character-dialog.template.${option.template}` as ITranslationKeys
+                )
+              }
+              groupBy={(option) => option.group}
+              onChange={(event, newValue) => {
+                if (newValue?.template) {
+                  onLoadTemplate(newValue?.template);
+                }
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Template"
+                  variant="outlined"
+                  data-cy={`character-dialog.template`}
+                />
+              )}
+            />
+          </Grid>
+        </Grid>
+      </Box>
     );
   }
 
@@ -359,6 +364,11 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
+    const numberOfSections = pages.flatMap((p) => p.sections).length;
+    const doesntHaveSections = numberOfSections === 0;
+    const shouldRenderLoadTemplate = props.dialog
+      ? doesntHaveSections || advanced
+      : doesntHaveSections && !advanced;
 
     return (
       <Box>
@@ -503,7 +513,7 @@ export const CharacterV3Dialog: React.FC<{
                   padding: "0",
                 })}
               >
-                <Box position="relative" mb="3rem">
+                <Box position="relative" mb="2rem">
                   <Grid container spacing={1}>
                     <Grid item xs={12} md={6} className={sectionStyle}>
                       {renderSections(pageIndex, page.sections, Position.Left)}
@@ -517,6 +527,14 @@ export const CharacterV3Dialog: React.FC<{
             );
           })}
         </TabContext>
+
+        <Collapse in={shouldRenderLoadTemplate}>
+          <Box mb="5rem">
+            <Grid container justify="center">
+              <Grid item>{renderLoadTemplate()}</Grid>
+            </Grid>
+          </Box>
+        </Collapse>
 
         <Grid container justify="space-between" alignItems="center">
           {characterTemplateInfo?.author && (
