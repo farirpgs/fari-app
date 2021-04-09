@@ -15,7 +15,10 @@
 - [ ] duplicate without advanced mode ?
 
 # Future
-- [ ] seelie squire
+- [ ] genesys dice
+- [ ] math functions
+- [ ] table building blocks
+- [ ] image building block
 -->
 
 # [Fari](https://fari.app) - The best Fate RPG companion application

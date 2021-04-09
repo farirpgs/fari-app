@@ -38,6 +38,10 @@
 - fix: seelie squire consequence
 - fix: index card double modifier
 
+- feat: default character is blank with "load template" button
+- feat: show load template even in character dialog
+- fix: non sticky dice fab commands
+
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
 - feat: new Fari Wiki
