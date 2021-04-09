@@ -32,6 +32,11 @@
 - fix: keep scene group when reset-ing them.
 - feat: added Storybook to help with frontend development
 - feat: draw area moved to a new tab
+- fix: heartbreaker template listed twice
+- fix: blog date
+- fix: seelie squire edit link
+- fix: seelie squire consequence
+- fix: index card double modifier
 
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
