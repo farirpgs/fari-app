@@ -273,6 +273,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
           >
             {diceRollsManager.state.finalResultHidden
               ? ""
+              : isPool
+              ? "~"
               : diceRollsManager.state.finalResultTotal}
           </Typography>
         </ButtonBase>

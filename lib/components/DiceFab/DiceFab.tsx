@@ -73,9 +73,11 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
 
   const [dirty, setDirty] = useState(false);
-  const [fabCommands, setFabCommands] = useState<Array<IDiceCommandGroup>>([]);
 
-  const ButtonIcon = getButtonIcon(fabCommands, diceManager);
+  const ButtonIcon = getButtonIcon(
+    diceManager.state.commandGroups,
+    diceManager
+  );
 
   function handleMenuOpen(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -85,11 +87,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   function handleMenuClose() {
     setAnchorEl(null);
-    setFabCommands([]);
   }
 
   function handleClear() {
-    setFabCommands([]);
+    diceManager.actions.setCommandGroups([]);
   }
 
   function handleFabClick(
@@ -110,17 +111,15 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 
   function handleRoll() {
-    const newCommands = fabCommands.flatMap((o) => o.value);
-    const result = diceManager.actions.rollByCommandNames(newCommands, {
-      listResults: diceManager.state.options.listResults,
-    });
+    const newCommands = diceManager.state.commandGroups.flatMap((o) => o.value);
+    const result = diceManager.actions.rollByCommandNames(newCommands);
 
     props.onSelect?.(result);
     setDirty(true);
     handleMenuClose();
   }
 
-  const hasSelectedNewCommands = fabCommands.length > 0;
+  const hasSelectedNewCommands = diceManager.state.commandGroups.length > 0;
   const isRollButtonVisible = hasSelectedNewCommands || dirty;
 
   const hasPool =
@@ -138,14 +137,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
               showClearButton={open}
               isRollButtonVisible={isRollButtonVisible}
               icon={ButtonIcon}
-              label={
-                <>
-                  {hasSelectedNewCommands ||
-                  (!hasSelectedNewCommands && !isRollButtonVisible)
-                    ? t("dice-fab.roll")
-                    : t("dice-fab-reroll")}
-                </>
-              }
+              label={<>{open ? t("dice-fab.roll") : t("dice-fab-reroll")}</>}
               onFabClick={handleFabClick}
               onCtaClick={() => {
                 if (open) {
@@ -182,10 +174,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
           <DiceMenu
             open={open}
             anchorEl={anchorEl}
-            commands={fabCommands}
+            commands={diceManager.state.commandGroups}
             showPoolToggle
             onClear={handleClear}
-            onDiceCommandChange={setFabCommands}
+            onDiceCommandChange={diceManager.actions.setCommandGroups}
           />
         </Box>
       </ClickAwayListener>
