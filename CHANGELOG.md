@@ -38,9 +38,10 @@
 - fix: seelie squire consequence
 - fix: index card double modifier
 
-- feat: default character is blank with "load template" button
+- feat: default character now is "blank" and it now displays "load template" button in the middle of the page
 - feat: show load template even in character dialog
 - fix: non sticky dice fab commands
+- fix: display has-played tooltip on index cards @tjbearse
 
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
