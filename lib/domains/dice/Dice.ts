@@ -25,8 +25,11 @@ export type IDiceCommandNames =
 
 export type IDiceCommandGroupId = IDiceCommandNames | "4dF" | "2d6";
 
-export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
-  {
+export const AllDiceCommandGroups: Record<
+  IDiceCommandGroupId,
+  IDiceCommandGroup
+> = {
+  "4dF": {
     id: "4dF",
     label: "4dF",
     icon: Icons.FateDice,
@@ -36,46 +39,43 @@ export const FateDiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 4,
     criticalFailure: -4,
   },
-  {
+  "1dF": {
     id: "1dF",
     label: "1dF",
     icon: Icons.OneDie,
     value: ["1dF"],
   },
-];
-
-export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
-  {
+  "1d4": {
     id: "1d4",
     label: "1d4",
     icon: Icons.Dice4,
     value: ["1d4"],
   },
-  {
+  "1d6": {
     id: "1d6",
     label: "1d6",
     icon: Icons.Dice6,
     value: ["1d6"],
   },
-  {
+  "1d8": {
     id: "1d8",
     label: "1d8",
     icon: Icons.Dice8,
     value: ["1d8"],
   },
-  {
+  "1d10": {
     id: "1d10",
     label: "1d10",
     icon: Icons.Dice10,
     value: ["1d10"],
   },
-  {
+  "1d12": {
     id: "1d12",
     label: "1d12",
     icon: Icons.Dice12,
     value: ["1d12"],
   },
-  {
+  "1d20": {
     id: "1d20",
     label: "1d20",
     icon: Icons.Dice20,
@@ -85,17 +85,19 @@ export const d20DiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 20,
     criticalFailure: 1,
   },
-  { id: "1d100", label: "1d100", icon: Icons.Dice100, value: ["1d100"] },
-];
-
-export const MiscDiceCommandGroups: Array<IDiceCommandGroup> = [
-  {
+  "1d100": {
+    id: "1d100",
+    label: "1d100",
+    icon: Icons.Dice100,
+    value: ["1d100"],
+  },
+  "coin": {
     id: "coin",
     label: "Coin Toss",
     icon: Icons.Coin,
     value: ["coin"],
   },
-  {
+  "2d6": {
     id: "2d6",
     label: "2d6",
     icon: Icons.RollDiceIcon,
@@ -105,13 +107,7 @@ export const MiscDiceCommandGroups: Array<IDiceCommandGroup> = [
     criticalSuccess: 12,
     criticalFailure: 2,
   },
-];
-
-export const AllDiceCommandGroups: Array<IDiceCommandGroup> = [
-  ...FateDiceCommandGroups,
-  ...d20DiceCommandGroups,
-  ...MiscDiceCommandGroups,
-];
+};
 
 const FateDie = [-1, -1, 0, 0, 1, 1];
 const CoinToss = [-1, 1];
@@ -188,7 +184,7 @@ export enum RollType {
 export type IDiceCommandOption =
   | {
       type: RollType.DiceCommand;
-      command: IDiceCommandNames;
+      commandGroupId: IDiceCommandGroupId;
     }
   | {
       type: RollType.Modifier;
@@ -203,7 +199,8 @@ export type IDiceCommandOption =
 export type IDiceCommandResult =
   | {
       type: RollType.DiceCommand;
-      command: IDiceCommandNames;
+      commandGroupId: IDiceCommandGroupId;
+      commandName: IDiceCommandNames;
       value: number;
     }
   | {
@@ -230,41 +227,45 @@ export type IDiceRollResult = {
 
 export const Dice = {
   rollCommandOptionList(
-    commandOptionList: Array<IDiceCommandOption>,
+    commandOptions: Array<IDiceCommandOption>,
     options: IRollDiceOptions
   ): IDiceRollResult {
     let total = 0;
     let totalWithoutModifiers = 0;
     const rolls: Array<IDiceCommandResult> = [];
 
-    commandOptionList.forEach((command) => {
-      if (command.type === RollType.DiceCommand) {
-        const diceGroup = DiceCommandOptions[command.command];
+    commandOptions.forEach((commandOption) => {
+      if (commandOption.type === RollType.DiceCommand) {
+        const commandGroup = AllDiceCommandGroups[commandOption.commandGroupId];
 
-        const sides = diceGroup.sides;
-        const side = getRandomDiceSide(sides.length);
-        const result = sides[side];
+        commandGroup.value.forEach((commandName) => {
+          const diceOption = DiceCommandOptions[commandName];
+          const sides = diceOption.sides;
+          const side = getRandomDiceSide(sides.length);
+          const result = sides[side];
 
-        rolls.push({
-          type: command.type,
-          command: command.command,
-          value: result,
+          rolls.push({
+            type: commandOption.type,
+            commandGroupId: commandOption.commandGroupId,
+            commandName: commandName,
+            value: result,
+          });
+          total += result;
+          totalWithoutModifiers += result;
         });
-        total += result;
-        totalWithoutModifiers += result;
       }
-      if (command.type === RollType.Modifier) {
+      if (commandOption.type === RollType.Modifier) {
         rolls.push({
-          type: command.type,
-          label: command.label,
-          value: command.modifier,
+          type: commandOption.type,
+          label: commandOption.label,
+          value: commandOption.modifier,
         });
-        total += command.modifier;
+        total += commandOption.modifier;
       }
-      if (command.type === RollType.Label) {
+      if (commandOption.type === RollType.Label) {
         rolls.push({
-          type: command.type,
-          label: command.label,
+          type: commandOption.type,
+          label: commandOption.label,
         });
       }
     });
@@ -280,7 +281,7 @@ export const Dice = {
   findMatchingCommandGroupWithDiceResult(result: IDiceRollResult | undefined) {
     const flatCommands = result?.commandResult
       .flatMap((cr) => {
-        return cr.type === RollType.DiceCommand ? cr.command : undefined;
+        return cr.type === RollType.DiceCommand ? cr.commandName : undefined;
       })
       .filter((c) => !!c) as Array<IDiceCommandNames>;
 
@@ -290,10 +291,12 @@ export const Dice = {
   findMatchingCommandGroupWithDiceTypes(
     commands: IDiceCommandNames[] | undefined
   ) {
-    const commandGroup = AllDiceCommandGroups.find((cg) =>
-      isEqual(cg.value, commands)
-    );
-    return commandGroup;
+    const commandGroup = Object.keys(AllDiceCommandGroups).find((id) => {
+      const group = AllDiceCommandGroups[id as IDiceCommandGroupId];
+      return isEqual(group.value, commands);
+    });
+
+    return AllDiceCommandGroups[commandGroup as IDiceCommandGroupId];
   },
 
   simplifyRolls(rolls: Array<IDiceCommandResult>): Array<ISimplifiedDiceRoll> {
@@ -306,12 +309,13 @@ export const Dice = {
       ) {
         return acc;
       }
-      if (acc[diceRoll.command] === undefined) {
-        acc[diceRoll.command] = { count: 0, result: 0 };
+      if (acc[diceRoll.commandGroupId] === undefined) {
+        acc[diceRoll.commandGroupId] = { count: 0, result: 0 };
       }
 
-      acc[diceRoll.command].count = acc[diceRoll.command].count + 1;
-      acc[diceRoll.command].result += diceRoll.value;
+      acc[diceRoll.commandGroupId].count =
+        acc[diceRoll.commandGroupId].count + 1;
+      acc[diceRoll.commandGroupId].result += diceRoll.value;
 
       return acc;
     }, {});

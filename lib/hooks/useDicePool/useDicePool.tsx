@@ -8,6 +8,7 @@ import {
 
 export function useDicePool() {
   const [pool, setPool] = useState<IDicePool>([]);
+  const [playerId, setPlayerId] = useState<string>();
   const diceManager = useContext(DiceContext);
 
   function addOrRemovePoolElement(element: IDicePoolElement) {
@@ -23,6 +24,7 @@ export function useDicePool() {
 
   function clearPool() {
     setPool([]);
+    setPlayerId(undefined);
   }
 
   function getPoolResult() {
@@ -31,9 +33,9 @@ export function useDicePool() {
     const commands = pool.flatMap((element) => element.commandOptionList);
 
     const result = diceManager.actions.roll(commands, { listResults });
-
+    const latestPlayerId = playerId;
     clearPool();
-    return result;
+    return { result, playerId: latestPlayerId };
   }
 
   return {
@@ -42,6 +44,7 @@ export function useDicePool() {
       clearPool,
       addOrRemovePoolElement,
       getPoolResult,
+      setPlayerId,
     },
   };
 }

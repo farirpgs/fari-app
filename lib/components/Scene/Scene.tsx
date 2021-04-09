@@ -47,7 +47,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
-  DefaultDiceCommandOptionList,
+  DefaultDiceCommandOptions,
   DiceContext,
 } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -257,8 +257,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
     charactersManager.actions.upsert(character);
   };
-
-  const handleSetRoll = (result: IDiceRollResult) => {
+  const handleSetMyRoll = (result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
     } else {
@@ -269,7 +268,10 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleSetPlayerRoll = (playerId: string, result: IDiceRollResult) => {
+  const handleSetPlayerRoll = (
+    playerId: string | undefined,
+    result: IDiceRollResult
+  ) => {
     if (isGM) {
       sceneManager.actions.updatePlayerRoll(playerId, result);
     } else {
@@ -314,8 +316,8 @@ export const Scene: React.FC<IProps> = (props) => {
           <DiceFab
             type={DiceFabMode.RollAndPool}
             onRollPool={() => {
-              const result = poolManager.actions.getPoolResult();
-              handleSetRoll(result);
+              const { result, playerId } = poolManager.actions.getPoolResult();
+              handleSetPlayerRoll(playerId, result);
             }}
             onClearPool={() => {
               const result = poolManager.actions.clearPool();
@@ -323,7 +325,7 @@ export const Scene: React.FC<IProps> = (props) => {
             pool={poolManager.state.pool}
             rollsForDiceBox={me?.rolls ?? []}
             onSelect={(result) => {
-              handleSetRoll(result);
+              handleSetMyRoll(result);
             }}
           />
         )}
@@ -491,6 +493,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     readonly={!canControl}
                     onPoolClick={(element) => {
                       poolManager.actions.addOrRemovePoolElement(element);
+                      poolManager.actions.setPlayerId(player.id);
                     }}
                     pool={poolManager.state.pool}
                     open={characterDialogPlayerId === player.id}
@@ -636,6 +639,7 @@ export const Scene: React.FC<IProps> = (props) => {
                         pool={poolManager.state.pool}
                         onPoolClick={(element) => {
                           poolManager.actions.addOrRemovePoolElement(element);
+                          poolManager.actions.setPlayerId(player.id);
                         }}
                       />
                     </Box>
@@ -801,7 +805,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     sceneManager={sceneManager}
                     onRoll={(label, modifier) => {
                       const options: Array<IDiceCommandOption> = [
-                        ...DefaultDiceCommandOptionList,
+                        ...DefaultDiceCommandOptions,
                       ];
                       options.push({
                         type: RollType.Modifier,
@@ -811,7 +815,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       const result = diceManager.actions.roll(options, {
                         listResults: false,
                       });
-                      handleSetRoll(result);
+                      handleSetMyRoll(result);
                     }}
                     onMove={(dragIndex, hoverIndex) => {
                       sceneManager.actions.moveAspects(dragIndex, hoverIndex);

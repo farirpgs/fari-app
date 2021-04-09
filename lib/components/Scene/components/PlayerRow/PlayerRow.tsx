@@ -124,33 +124,44 @@ export const PlayerRow: React.FC<
 
   function renderDice() {
     return (
-      <Grid container spacing={2} wrap="nowrap" alignItems="center">
-        <Grid item>
-          <Box display="flex" justifyContent="flex-end">
-            <DiceBox
-              rolls={props.player.rolls}
-              size="2rem"
-              fontSize="1rem"
-              // disabling the confettis if the current row is "me" because there is already a diceFab
-              disableConfettis={props.isMe}
-              borderSize=".15rem"
-              disabled={!props.permissions.canRoll}
-              onClick={() => {
-                handleRoll();
-              }}
-            />
-          </Box>
-        </Grid>
-
-        <Grid item container alignItems="center">
-          <Grid item xs={12}>
-            <DiceBonusLabel rolls={props.player.rolls} />
+      <Box minHeight="4rem">
+        <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
+          <Grid item>
+            <Box display="flex" justifyContent="flex-end" height="100%">
+              <DiceBox
+                rolls={props.player.rolls}
+                size="2rem"
+                fontSize="1rem"
+                // disabling the confettis if the current row is "me" because there is already a diceFab
+                disableConfettis={props.isMe}
+                borderSize=".15rem"
+                disabled={!props.permissions.canRoll}
+                onClick={() => {
+                  handleRoll();
+                }}
+              />
+            </Box>
           </Grid>
-          <Grid item xs={12}>
-            <DiceBoxResult rolls={props.player.rolls} />
+          <Grid item container alignItems="center">
+            <Grid item xs={12}>
+              <Box
+                className={css({
+                  textTransform: "uppercase",
+                  color: theme.palette.primary.main,
+                  fontWeight: theme.typography.fontWeightBold,
+                })}
+              >
+                <DiceBonusLabel rolls={props.player.rolls} />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box>
+                <DiceBoxResult rolls={props.player.rolls} />
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Box>
     );
   }
 

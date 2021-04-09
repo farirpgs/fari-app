@@ -662,7 +662,7 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updatePlayerRoll(id: string, roll: IDiceRollResult) {
+  function updatePlayerRoll(id: string | undefined, roll: IDiceRollResult) {
     setScene(
       produce((draft: IScene) => {
         const everyone = [draft.gm, ...draft.players];

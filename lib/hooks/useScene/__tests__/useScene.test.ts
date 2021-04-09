@@ -471,10 +471,30 @@ describe("useScene", () => {
         result.current.actions.updatePlayerPlayedDuringTurn("1", true);
         result.current.actions.updatePlayerRoll("1", {
           commandResult: [
-            { value: 1, command: "1dF", type: RollType.DiceCommand },
-            { value: 1, command: "1dF", type: RollType.DiceCommand },
-            { value: 1, command: "1dF", type: RollType.DiceCommand },
-            { value: 1, command: "1dF", type: RollType.DiceCommand },
+            {
+              value: 1,
+              commandGroupId: "1dF",
+              commandName: "1dF",
+              type: RollType.DiceCommand,
+            },
+            {
+              value: 1,
+              commandGroupId: "1dF",
+              commandName: "1dF",
+              type: RollType.DiceCommand,
+            },
+            {
+              value: 1,
+              commandGroupId: "1dF",
+              commandName: "1dF",
+              type: RollType.DiceCommand,
+            },
+            {
+              value: 1,
+              commandGroupId: "1dF",
+              commandName: "1dF",
+              type: RollType.DiceCommand,
+            },
           ],
           total: 4,
           totalWithoutModifiers: 4,

@@ -50,7 +50,10 @@ export function useLatestDiceRoll(
       );
 
       let newColor = "inherit";
-      if (rolling) {
+
+      const isPool = latestPlayerRoll?.options?.listResults;
+
+      if (rolling || isPool) {
         newColor = "inherit";
       } else if (
         commandGroup?.goodRoll &&
@@ -106,8 +109,9 @@ export function useLatestDiceRoll(
     setRolling(false);
     setFinalResult(latestPlayerRoll);
     options?.onFinalResult?.(latestPlayerRoll);
+    const isPool = latestPlayerRoll?.options?.listResults;
 
-    if (options?.disableConfettis) {
+    if (options?.disableConfettis || isPool) {
       return;
     }
     if (
@@ -139,7 +143,7 @@ export function useLatestDiceRoll(
 
 export function formatDiceNumber(result: IDiceRollResult | undefined): string {
   const containsFateDice = result?.commandResult.some(
-    (r) => r.type === RollType.DiceCommand && r.command === "1dF"
+    (r) => r.type === RollType.DiceCommand && r.commandGroupId === "1dF"
   );
   const total = result?.total ?? 0;
 
