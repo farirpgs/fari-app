@@ -311,10 +311,10 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderManagementActions() {
-    return <Collapse in={advanced}>{renderLoadTemplate()}</Collapse>;
+    return <Collapse in={advanced}>{renderLoadTemplate("advanced")}</Collapse>;
   }
 
-  function renderLoadTemplate() {
+  function renderLoadTemplate(dataCy: string) {
     return (
       <Box>
         <Grid
@@ -350,7 +350,7 @@ export const CharacterV3Dialog: React.FC<{
                   {...params}
                   label="Template"
                   variant="outlined"
-                  data-cy={`character-dialog.template`}
+                  data-cy={`character-dialog.template.${dataCy}`}
                 />
               )}
             />
@@ -516,10 +516,20 @@ export const CharacterV3Dialog: React.FC<{
                 <Box position="relative" mb="2rem">
                   <Grid container spacing={1}>
                     <Grid item xs={12} md={6} className={sectionStyle}>
-                      {renderSections(pageIndex, page.sections, Position.Left)}
+                      {renderSections(
+                        page,
+                        pageIndex,
+                        page.sections,
+                        Position.Left
+                      )}
                     </Grid>
                     <Grid item xs={12} md={6} className={sectionStyle}>
-                      {renderSections(pageIndex, page.sections, Position.Right)}
+                      {renderSections(
+                        page,
+                        pageIndex,
+                        page.sections,
+                        Position.Right
+                      )}
                     </Grid>
                   </Grid>
                 </Box>
@@ -531,7 +541,7 @@ export const CharacterV3Dialog: React.FC<{
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="5rem">
             <Grid container justify="center">
-              <Grid item>{renderLoadTemplate()}</Grid>
+              <Grid item>{renderLoadTemplate("content")}</Grid>
             </Grid>
           </Box>
         </Collapse>
@@ -580,6 +590,7 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderSections(
+    page: IPage,
     pageIndex: number,
     sections: Array<ISection> | undefined,
     position: Position
@@ -663,7 +674,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                   }}
                 />
-                {renderSectionBlocks(pageIndex, sectionIndex, section)}
+                {renderSectionBlocks(page, pageIndex, section, sectionIndex)}
 
                 {advanced && (
                   <Box p=".5rem" mb=".5rem">
@@ -917,10 +928,12 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderSectionBlocks(
+    page: IPage,
     pageIndex: number,
-    sectionIndex: number,
-    section: ISection
+    section: ISection,
+    sectionIndex: number
   ) {
+    const dragAndDropKey = `${page.label}.${pageIndex}.${section.label}.${sectionIndex}`;
     return (
       <>
         <Box
@@ -935,7 +948,7 @@ export const CharacterV3Dialog: React.FC<{
               <Box key={block.id}>
                 <BetterDnd
                   index={blockIndex}
-                  type={section.label}
+                  type={dragAndDropKey}
                   readonly={!advanced}
                   className={css({
                     label: "CharacterDialog-block-dnd",
@@ -947,6 +960,7 @@ export const CharacterV3Dialog: React.FC<{
                     marginTop: ".5rem",
                   })}
                   onMove={(dragIndex, hoverIndex) => {
+                    console.debug("ONMOVE", { dragIndex, hoverIndex });
                     characterManager.actions.moveDnDBlock(
                       pageIndex,
                       sectionIndex,
