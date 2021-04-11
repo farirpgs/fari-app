@@ -189,13 +189,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
       <DiceBox
         className={css({
           position: "fixed",
-          left: "1.25rem",
-          bottom: "7rem",
+          right: "1.25rem",
+          bottom: "2rem",
           zIndex: zIndex.diceFabDie,
         })}
         reduceOpacityWithoutHover
         rolls={props.rollsForDiceBox ?? []}
-        tooltipPlacement="right-end"
+        tooltipPlacement="left-end"
         size="3.5rem"
         fontSize="2rem"
         borderSize=".2rem"
