@@ -345,6 +345,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
           }
 
           const options = DiceCommandOptions[r.commandName];
+
           const isFate = r.commandName === "1dF";
           const IconForPool = DiceCommandGroup.getCommandGroupById(
             r.commandGroupId
