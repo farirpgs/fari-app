@@ -1,7 +1,6 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidV4 } from "uuid";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
@@ -9,6 +8,7 @@ import {
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -52,13 +52,18 @@ export const ScenesManager: React.FC<IProps> = (props) => {
     logger.info("ScenesManager:onDelete");
   }
 
+  function onDuplicate(scene: ISavableScene) {
+    scenesManager.actions.duplicate(scene.id);
+    logger.info("ScenesManager:onDuplicate");
+  }
+
   function onImport(sceneToImport: FileList | null) {
     FariEntity.import<ISavableScene>({
       filesToImport: sceneToImport,
       fariType: "scene",
       onImport: (s) => {
         const sceneWithNewId = produce(s, (draft) => {
-          draft.id = uuidV4();
+          draft.id = Id.generate();
         });
         const migratedScene = migrateScene(sceneWithNewId);
         scenesManager.actions.upsert(migratedScene);
@@ -89,6 +94,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
+      onDuplicate={onDuplicate}
       onUndo={onUndoDelete}
       onClose={scenesManager.actions.closeManager}
       onImport={onImport}

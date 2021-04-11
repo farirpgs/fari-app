@@ -6,6 +6,14 @@ interface Colors {
 
 export type IndexCardColorTypes = "white" | "red" | "blue" | "green" | "yellow";
 
+export enum IndexCardColorTypeEnum {
+  white = "white",
+  red = "red",
+  blue = "blue",
+  green = "green",
+  yellow = "yellow",
+}
+
 export const IndexCardColor: Record<IndexCardColorTypes, Colors> = {
   white: {
     chip: "#ffffff",

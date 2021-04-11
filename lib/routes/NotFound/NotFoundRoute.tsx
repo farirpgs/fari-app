@@ -36,9 +36,9 @@ export const NotFoundRoute: React.FC<{}> = (props) => {
           textAlign="center"
         >
           <Typography>
-            <p>The page you are trying to access doesn&apos;t exist.</p>
-            <p>Use the menu to get out of the woods.</p>
+            The page you are trying to access doesn&apos;t exist.
           </Typography>
+          <Typography>Use the menu to get out of the woods.</Typography>
         </Box>
       </Page>
     </div>

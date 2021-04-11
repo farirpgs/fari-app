@@ -1,6 +1,6 @@
 # Fate Stunts
 
-A very detailed list of stunts to help you get started with character creation quickly.
+<page-meta description="A very detailed list of stunts to help you get started with character creation quickly."></page-meta>
 
 > All stunts from the _Fate Core System_ book are here, plus most of the stunts from the _Fate System Toolkit_ and _Spirit of the Century_. Any stunts that would qualify as extras in _Fate Core_ are omitted, as are stunts that don't make sense without taking an extra.
 >
@@ -8,9 +8,9 @@ A very detailed list of stunts to help you get started with character creation q
 >
 > Unless otherwise stated, the content of this page is licensed under Creative Commons Attribution-Share Alike 2.5 License.
 
-## Athletics Stunts
+# Athletics Stunts
 
-### Balancing and Climbing
+## Balancing and Climbing
 
 <p class="with-anchor"> Acrobat </p>
 
@@ -44,7 +44,7 @@ Through a combination of speed, dexterity, and uncanny timing, you always have a
 
 Your Athletics skill works unimpeded by conditions like storms, water, or high seas while on board a ship. (Peter Blake)
 
-### Dodging
+## Dodging
 
 <p class="with-anchor"> Acrobatic Dodge </p>
 
@@ -98,7 +98,7 @@ Once per scene, when you succeed with style on a defence roll with Athletics aga
 
 You work together with your rider to defend yourselves. +2 to defend with Athletics while being ridden.
 
-### Falling
+## Falling
 
 <p class="with-anchor"> Safe Fall </p>
 
@@ -108,7 +108,7 @@ You work together with your rider to defend yourselves. +2 to defend with Athlet
 
 Like a cat, you are able to fall from great heights without excessive harm. When making an Athletics roll to resist falling damage, add +2 to the roll.
 
-### Jumping
+## Jumping
 
 <p class="with-anchor"> Fight By Jumping </p>
 
@@ -130,7 +130,7 @@ Your leaping ability borders on the superhuman. +2 to overcome with Athletics wh
 
 +2 to overcome with Athletics when you have a long pole in hand and the obstacle is primarily height-based. (Peter Blake)
 
-### Sprinting
+## Sprinting
 
 <p class="with-anchor"> The Bastard Will Not Escape </p>
 
@@ -152,7 +152,7 @@ Discretion is the better part of valour, at least for you. On a successful defen
 
 You move two zones for free in a conflict without rolling, instead of one, provided there are no situation aspects restricting movement. (Fate Core, p.98)
 
-### Squeezing
+## Squeezing
 
 <p class="with-anchor"> Contortionist </p>
 
@@ -162,13 +162,13 @@ If you choose to spend an action moving from one zone to an adjacent one, your A
 
 +2 to overcome actions with Athletics when escaping from bonds. (adapted from Spirit of the Century SRD, §6.5.1)
 
-### Swimming
+## Swimming
 
 <p class="with-anchor"> One With the Water </p>
 
 +2 to defend or overcome with Athletics while swimming. (Peter Blake)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Ball Toss </p>
 
@@ -194,7 +194,7 @@ You can use Athletics in place of Burglary for all overcome actions, provided yo
 
 When you assume the stance of the whirlwind, roll Athletics against Fair (+2) opposition. If you succeed, you may run on vertical surfaces and leap unlikely distances without making rolls to do so, until your next turn ends. If you succeed with style, you may instead gain these benefits for the rest of the scene. (Fate System Toolkit, p.35)
 
-### Other
+## Other
 
 <p class="with-anchor"> Catch </p>
 
@@ -216,9 +216,9 @@ Sports are your life. Pick a sport. You get a +2 to all Athletics rolls relating
 
 You suffer no increased difficulty to Athletics due to snowdrifts, loose soil, or shifting sand. (Peter Blake)
 
-## Burglary Stunts
+# Burglary Stunts
 
-### Before the Job
+## Before the Job
 
 <p class="with-anchor"> The Big Heist </p>
 
@@ -228,7 +228,7 @@ You suffer no increased difficulty to Athletics due to snowdrifts, loose soil, o
 
 You’re highly skilled at visualizing the whole of a target based on just a part of it. When casing a location, you receive a +2 on Burglary rolls to create an advantage. (adapted from Spirit of the Century SRD, §6.6.2)
 
-### On The Job
+## On The Job
 
 <p class="with-anchor"> Bump and Grab </p>
 
@@ -254,7 +254,7 @@ Thieves have specialities, just like scientists. Pick a type of location or obje
 
 You don’t have to be present to provide active opposition to someone trying to overcome security measures you put in place or worked on. (Normally, a character would roll against passive opposition for that.) (Fate Core, p.99)
 
-### After the Job
+## After the Job
 
 <p class="with-anchor"> The Accounting of Small Things </p>
 
@@ -272,7 +272,7 @@ Once you have successfully stolen something small enough to fit in a pocket, it 
 
 You don’t have to be present to provide active opposition to someone trying to analyse physical evidence that you were present during a crime. (Normally, a character would roll against passive opposition for that.) (adapted from Spirit of the Century SRD, §6.27.3)
 
-### Magic
+## Magic
 
 <p class="with-anchor"> Legerdemain </p>
 
@@ -286,7 +286,7 @@ You don’t have to be present to provide active opposition to someone trying to
 
 (requires Legerdemain.) You can perform misdirection on a large scale, under appropriately controlled circumstances. Provided you are acting within an arena you control (such as a stage, or an area you have had adequate time to prepare), there are simply no size limitations (within reason) for your Burglary targets. (adapted from Spirit of the Century SRD, §6.26.2)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Disable Device </p>
 
@@ -312,7 +312,7 @@ You’ve run into enough traps that you’ve developed an instinct for avoiding 
 
 You can use Burglary to make mental attacks and create advantages against a target, by staging a heist in such a way as to shatter their confidence in their security. (Fate Core, p.89)
 
-### Other
+## Other
 
 <p class="with-anchor"> Burglar's Signature </p>
 
@@ -322,9 +322,9 @@ Some element of your character makes you an expert thief. Pick one of your aspec
 
 Somehow, you can always pull of a stroke of larcenous brilliance when it really counts. Once per scene, when you succeed on a Burglary roll, you may choose to succeed with style instead.
 
-## Contacts Stunts
+# Contacts Stunts
 
-### Active Networks
+## Active Networks
 
 <p class="with-anchor"> Center of the Web </p>
 
@@ -342,7 +342,7 @@ Once you begin a contacting effort, it becomes self-sustaining, as people you ta
 
 (requires Center of the Web.) First, this stunt steps up the intensity of your Center of the Web stunt – information flows your way a total of two time increments faster. Second, this stunt removes the restriction “so long as you are able to make any sort of contact with the outside world.” Your ties into the organization are so thoroughly widespread that the outside world makes every reasonable effort to stay in contact with you. For a fate point, your organization can even make some fairly unreasonable efforts to stay in contact. (Spirit of the Century SRD, §6.18.3)
 
-### Cold Opens
+## Cold Opens
 
 <p class="with-anchor"> The Bonds of Man Stretch to the Horizon </p>
 
@@ -364,7 +364,7 @@ Whenever you enter a settlement, you may declare you’ve visited it before and 
 
 Your network of contacts extends around the world. You never suffer any increased difficulty on Contacts rolls from being in an unfamiliar area.
 
-### Specific Groups or Subjects
+## Specific Groups or Subjects
 
 <p class="with-anchor"> Absolute Authority </p>
 
@@ -410,7 +410,7 @@ All the kids wanna be just like you. +2 to Contacts when dealing with young adul
 
 Your travels have taken you to every corner of the globe. +2 to Contacts rolls when dealing with foreign lands or cultures. (adapted from Spirit of the Century SRD, §6.7.1)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Big Man </p>
 
@@ -444,7 +444,7 @@ Your friends are very willing to let you borrow whatever you need. You may use y
 
 You can use Contacts instead of Provoke to create advantages based on the fear generated by the sinister reputation you’ve cultivated for yourself and all the shady associates you have. You should have an appropriate aspect to pair with this stunt. (Fate Core, p.101)
 
-### Other
+## Other
 
 <p class="with-anchor"> I Know a Guy Who Knows a Guy </p>
 
@@ -454,9 +454,9 @@ Sometimes it’s not who you know, but who the people you know, know. Many of yo
 
 +2 to create an advantage when you plant vicious rumors about someone else. (Fate Core, p.101)
 
-## Crafts Stunts
+# Crafts Stunts
 
-### Tools
+## Tools
 
 <p class="with-anchor"> Always Making Useful Things </p>
 
@@ -478,7 +478,7 @@ You can produce master-craftsman-level work with the crudest of tools. With a pr
 
 Pick a specific workshop or machine shop. You know exactly how this place is arranged and how it operates, and gain +2 on Crafts whenever you perform work within it.
 
-### Targets
+## Targets
 
 <p class="with-anchor"> Architect of Death </p>
 
@@ -516,7 +516,7 @@ When using Crafts in a conflict involving machinery, you can filter out unwanted
 
 +2 to Crafts when preserving, stuffing, or posing dead animals. (Peter Blake)
 
-### Techniques
+## Techniques
 
 <p class="with-anchor"> Better than New! </p>
 
@@ -554,7 +554,7 @@ There is an art to making things quickly out of cannibalized parts. You find it 
 
 (requires Mister Fix-It.) Sometimes a bunch of repairs can get short-handed with a good swift thump. To activate this ability, spend a fate point and roll Crafts (vs. a target of Mediocre). If your roll succeeds, the device or contraption starts working and continues working for a number of exchanges equal to the shifts gained on the Crafts roll. Once the time is up, the device stops working again, and any efforts to repair it are at a one step higher difficulty (since, after all, you hit the thing). If you wish to thump again, you may do so for another fate point, but the difficulty for the Crafts roll increases by one on each subsequent attempt. (adapted from Spirit of the Century SRD, §6.12.2)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Locksmith </p>
 
@@ -564,9 +564,9 @@ If you can take apart a clock, you can take apart a lock. You may roll Crafts in
 
 Clever engineering can compensate for a lack of combat skill. Pick a broad category of weapon (e.g. swords, polearms, crossbows). When you wield a weapon of this sort that you have created yourself, you may attack with Crafts instead of Fight (for melee weapons) or Shoot (for ranged weapons). Such weapons will often include odd devices and unusual features that make their use very different from that of a normal weapon.
 
-## Deceive Stunts
+# Deceive Stunts
 
-### Disguises and Covers
+## Disguises and Covers
 
 <p class="with-anchor"> Brilliant Disguise </p>
 
@@ -616,7 +616,7 @@ Whenever you meet someone new, you can spend a fate point to declare that you’
 
 You suffer no increased difficulty on Deceive rolls when disguising yourself as a person of different gender, height, skin tone, or age. (Peter Blake)
 
-### Feinting and Feigning
+## Feinting and Feigning
 
 <p class="with-anchor"> Dead For Sure </p>
 
@@ -654,7 +654,7 @@ When you place an aspect like _Feigning Death_ on yourself, no-one can attack yo
 
 +2 to create advantage with Deceive when you try to appear unthreatening during a physical combat. (Peter Blake)
 
-### A Fool and His Money
+## A Fool and His Money
 
 <p class="with-anchor"> Crooked Dealer in Antiquities </p>
 
@@ -672,7 +672,7 @@ Your job is to trick people into signing unfair contracts. When you have a copy 
 
 You profit from your lies, literally. +2 to Deceive when using it to fool someone into giving you money.
 
-### Gambling
+## Gambling
 
 <p class="with-anchor"> The Devil's Own Luck </p>
 
@@ -690,7 +690,7 @@ Whenever gambling with NPCs, you may ask that the GM roll the NPC’s Deceit in 
 
 You win at the gambling tables more than you lose, and are often flush with cash. Once per session, you may use Deceive instead of Resources to represent these winnings, so long as you haven’t recently experienced a loss. You must provide a quick one-sentence explanation of what the resource is and how you won it, when using this stunt. (adapted from Spirit of the Century SRD, §6.14.2)
 
-### Scot-Free
+## Scot-Free
 
 <p class="with-anchor"> Corroboration of Coincidence </p>
 
@@ -708,7 +708,7 @@ You could be found by the police standing next to a burned-down church with a ha
 
 You always provide active opposition to attempts to locate you with Investigate. (Peter Blake)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> The Appearance of Wealth </p>
 
@@ -746,7 +746,7 @@ Your lies run so deep that you almost believe them yourself. You may use Deceive
 
 As an accomplished liar, you’re especially able to figure out when someone else is lying as well. You may use Deceive instead of Empathy to defend against Deceive actions. (adapted from Spirit of the Century SRD, §6.8.3)
 
-### Other
+## Other
 
 <p class="with-anchor"> Bait of Words </p>
 
@@ -780,9 +780,9 @@ You can treat other people like chess pieces and make it work. +2 to attack and 
 
 Pick one specific statement that isn't true. You gain +2 to Deceive when using it to convince someone that that statement is true.
 
-## Drive Stunts
+# Drive Stunts
 
-### On the Road
+## On the Road
 
 <p class="with-anchor"> City Driver </p>
 
@@ -792,7 +792,7 @@ You've spent most of your life driving up and down the same streets. Pick a city
 
 You’re good at keeping your car in one piece. +2 to overcome with Drive during a chase. (adapted from Spirit of the Century SRD, §6.9.2)
 
-### In the Sky
+## In the Sky
 
 <p class="with-anchor"> Barnstormer </p>
 
@@ -810,7 +810,7 @@ Whether in dead of night or during a storm, your piloting skills remain true. Yo
 
 (requires at least two other Drive stunts.) You have a great instinct for crash-landing planes, and are able to walk away from even the most catastrophic-seeming landings. While you are piloting a plane into its crash landing, coincidence conspires to keep you and your passengers alive, and you pass from the view of the other combatants. You may re-enter play in any subsequent scene in as dramatic a fashion as you see fit, explaining to everyone how you survived. You return with all of your physical stress cleared and a single additional consequence incurred to reflect the dangers you defied. (adapted from Spirit of the Century SRD, §6.21.1)
 
-### On Horseback
+## On Horseback
 
 <p class="with-anchor"> Bareback Rider </p>
 
@@ -844,13 +844,13 @@ If it can be ridden like a riding beast, you can ride it. You suffer no increase
 
 You fight and act on horseback without penalty, and nothing can knock you off. Any time you would take a physical consequence, you can opt for the horse to take it instead — the horse having a similar consequence track to your character. (Fate System Toolkit, p.97)
 
-### On the Water
+## On the Water
 
 <p class="with-anchor"> Sailor </p>
 
 +2 to Drive whenever you use it to operate a water-borne vessel.
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Flying Ace </p>
 
@@ -880,7 +880,7 @@ You may roll Drive instead of Crafts when working on a vehicle capable of flight
 
 You really know how to use those rear-view mirrors. You may use Drive instead of Notice to be aware of vehicles and road conditions, to detect vehicular ambushes, and to determine turn order while operating a vehicle.
 
-### Other
+## Other
 
 <p class="with-anchor"> Flawless Navigation </p>
 
@@ -919,9 +919,9 @@ Once per scene, you may reroll a failed Drive roll for free. (Peter Blake)
 
 You are the bane of curbside markets and rickety struts holding up awnings. When you hit an object other than a character or vehicle, increase the stress you cause by 2. Any time an object is taken out by the damage, the result should be spectacular – an explosion or collapse. (adapted from Spirit of the Century SRD, §6.9.2)
 
-## Empathy Stunts
+# Empathy Stunts
 
-### Insight
+## Insight
 
 <p class="with-anchor"> Architecture of the Heart </p>
 
@@ -955,7 +955,7 @@ Every two minutes of conversation you have with someone reveals one of their asp
 
 +2 to create advantage with Empathy on a character's trouble aspect. (Peter Blake)
 
-### Lie Detection
+## Lie Detection
 
 <p class="with-anchor"> I’ve Heard Every Lie in the Book </p>
 
@@ -973,7 +973,7 @@ Without rolling, you can tell if another character is lying so long as the targe
 
 Once per scene, when you successfully see through a lie, you may gain a free invocation on whichever of the liar’s aspects is most closely associated with their reason for lying to you. (Peter Blake)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Animal Empathy </p>
 
@@ -995,7 +995,7 @@ A true samurai can size up a foe within a single breath. You may use Empathy to 
 
 Your understanding of people you’ve met is sufficiently strong that it gives you an easy sense of how to find them. You may roll Empathy instead of Investigate whenever you’re tracking down or otherwise trying to find someone you’ve met before. (adapted from Spirit of the Century SRD, §6.10.1)
 
-### Other
+## Other
 
 <p class="with-anchor"> Bartender's Ear </p>
 
@@ -1017,9 +1017,9 @@ You are so aware of the social currents in a situation that you are able to see 
 
 Once per session you can reduce someone else’s consequence by one level of severity (severe to moderate, moderate to mild, mild to nothing at all) by succeeding on an Empathy roll with a difficulty of Fair (+2) for a mild consequence, Good (+3) for moderate, or Great (+4) for severe. You need to talk with the person you’re treating for at least half an hour in order for them to receive the benefits of this stunt, and you can’t use it on yourself. (Normally, this roll would only start the recovery process, instead of changing the consequence level.) (Fate Core, p.109)
 
-## Fight Stunts
+# Fight Stunts
 
-### Against Multiple Opponents
+## Against Multiple Opponents
 
 <p class="with-anchor"> Army of One/The King Still Stands </p>
 
@@ -1041,7 +1041,7 @@ Once per conflict, when you inflict a physical consequence on an opponent with F
 
 You may make a Fight attack against every opponent in your zone, dividing your roll between them as you see fit. (Peter Blake)
 
-### Against Specific Opponents
+## Against Specific Opponents
 
 <p class="with-anchor"> Advanced Warmaster </p>
 
@@ -1071,7 +1071,7 @@ Your unusual fighting style lets you defend effortlessly when you and your oppon
 
 People with formal training are less able to defend against your tomfoolery in combat. +2 to attacks with Fight against opponents who strictly adhere to a formal style of combat.
 
-### Counterattacks
+## Counterattacks
 
 <p class="with-anchor"> Riposte </p>
 
@@ -1081,7 +1081,7 @@ If you succeed with style on a Fight defense, you can choose to inflict a 2-shif
 
 (requires Riposte.) When you succeed with style on a Fight defense, instead of taking a boost, you may spend a fate point to inflict physical stress equal to the shifts you got on your defense roll. You may only do this once per opponent per scene. (adapted from Spirit of the Century SRD, §6.29.1)
 
-### Defending Others
+## Defending Others
 
 <p class="with-anchor"> Ally’s Shield </p>
 
@@ -1096,7 +1096,7 @@ class="with-anchor" Leave My Friends Alone!
 
 +2 to attack with Fight when your opponent’s most recent action was to attack one of your allies. (Peter Blake)
 
-### Disarming
+## Disarming
 
 <p class="with-anchor"> Close at Hand </p>
 
@@ -1110,7 +1110,7 @@ You have been trained in how to disarm an armed combatant. Once per scene per op
 
 +2 to defend with Fight against being disarmed. (Peter Blake)
 
-### Full Defense
+## Full Defense
 
 <p class="with-anchor"> Fists of Fury </p>
 
@@ -1124,7 +1124,7 @@ You have been trained in how to disarm an armed combatant. Once per scene per op
 
 When you attack someone who is performing a full defense action, you gain +2 to Fight. (Peter Blake)
 
-### In Specific Environments
+## In Specific Environments
 
 <p class="with-anchor"> Blind-Fight </p>
 
@@ -1148,7 +1148,7 @@ You suffer no increased difficulty on Fight rolls from aspects related to cover.
 
 Your Fight skill works unimpeded by conditions such as narrow passages, low ceilings, or other spatial limitations. (Peter Blake)
 
-### Mounted Combat
+## Mounted Combat
 
 <p class="with-anchor"> Ride-By Attack </p>
 
@@ -1158,7 +1158,7 @@ Once per scene, you may move one zone while mounted, attack with Fight, and then
 
 +2 to create advantage with Fight when you try to remove someone from their mount’s back. (Peter Blake)
 
-### Special Moves
+## Special Moves
 
 <p class="with-anchor"> Bull Charge </p>
 
@@ -1192,7 +1192,7 @@ Once per scene, you may move one zone on foot, attack with Fight, and then move 
 
 Once per physical conflict, when you succeed on an unarmed attack, you may place the aspect _Stunned_ on your opponent with one free invocation. (Peter Blake)
 
-### With Specific Weapons
+## With Specific Weapons
 
 <p class="with-anchor"> Do You Like It? I Made It Myself </p>
 
@@ -1206,7 +1206,7 @@ Once per conflict, you can force the opponent to use a mild consequence instead 
 
 Normally, fighting with two swords just looks cool, but when you wield two swords, you have a decisive advantage. Any time you succeed on an attack with two swords, the stress inflicted is increased by one. (adapted from Spirit of the Century SRD, §6.15.4)
 
-### With Any Weapon
+## With Any Weapon
 
 <p class="with-anchor"> Anything Goes </p>
 
@@ -1216,7 +1216,7 @@ Virtually anything can be a lethal weapon in your hands, as long as you can comf
 
 Every kind of proper (not improvised) hand-held melee weapon in the world has been in your hands at one point or another. Once per conflict, when you handle an unusual weapon of this type, you may tell a quick two- or three-sentence story (either to another character or as an internal monologue) to gain a +2 on your next roll with it. (adapted from Spirit of the Century SRD, §6.29.3)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Bloodlust </p>
 
@@ -1242,7 +1242,7 @@ Your hand-eye coordination is superb, and perhaps you could even deflect a bulle
 
 You can use Fight to grab things with a whip. (Peter Blake)
 
-### Other
+## Other
 
 <p class="with-anchor"> Armiger </p>
 
@@ -1324,9 +1324,9 @@ Excessive strength can be a disadvantage if your opponent knows how to exploit i
 
 +2 to create advantages with Fight related to fancy but harmless bladework, such as cutting your insignia into your opponent’s clothing. (Peter Blake)
 
-## Investigate Stunts
+# Investigate Stunts
 
-### Senses
+## Senses
 
 <p class="with-anchor"> Eavesdropper </p>
 
@@ -1348,7 +1348,7 @@ You are skilled at concentrating on one of your senses to the exclusion of all o
 
 You have a strong visual memory, and whenever you revisit a place where you have used Investigate before, it takes a matter of seconds for you to use Investigate to determine what has changed since you were last there. (adapted from Spirit of the Century SRD, §6.17.1)
 
-### Specific Targets
+## Specific Targets
 
 <p class="with-anchor"> De-Bugger </p>
 
@@ -1378,7 +1378,7 @@ Choose a type of animal. You gain +2 to create advantage or overcome with Invest
 
 +2 to Investigate rolls made to analyse or follow a person or creature's physical trail. (Peter Blake)
 
-### Deduction
+## Deduction
 
 <p class="with-anchor"> The Pieces of the Puzzle </p>
 
@@ -1392,7 +1392,7 @@ Once per scene you can spend a fate point (and a few minutes of observation) to 
 
 (requires one other Investigate stunt and one Empathy stunt.) Sometimes your guesses play out to great advantage. Once per scene, you may make a guess about what the “deal” is with a particular character, object, location, or situation. Do not speak this guess aloud; write it down on a piece of paper and give it to the GM. The GM must accept it as a valid hunch that would be something of a revelation if true (i.e., no “I’m convinced that moon orbits the Earth!” – that’s too obvious). If, at some later point, your hunch proves to be correct, you may use your Investigate or Empathy skill instead of any other skill, where that target is concerned, for one exchange. (A savvy GM will occasionally alter her characters’ motives to match your hunches; if she does, that’s absolutely perfect!) (adapted from Spirit of the Century SRD, §6.17.1)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Attention to Detail </p>
 
@@ -1426,15 +1426,15 @@ Part of being a good detective is knowing "whodunit" long before anything can be
 
 You may use Investigate in place of Deceive to lie to about a case.
 
-### Other
+## Other
 
 <p class="with-anchor"> Quick Eye </p>
 
 You are able to investigate a location much more quickly than others, while still being very thorough. All Investigate efforts you make happen one to two time increments faster than usual, allowing you to make one or two additional rolls in the same amount of time, or simply conclude your investigation faster than you would otherwise. (adapted from Spirit of the Century SRD, §6.17.2)
 
-## Lore Stunts
+# Lore Stunts
 
-### Beasts
+## Beasts
 
 <p class="with-anchor"> Animal Affinity </p>
 
@@ -1456,7 +1456,7 @@ Pick a particular type of animal (cats, rodents, horses or the like). You can co
 
 +2 to create advantage or overcome with Lore when you try to calm or communicate with animals. (Peter Blake)
 
-### Languages
+## Languages
 
 <p class="with-anchor"> The Blessing of a Thousand Tongues </p>
 
@@ -1474,7 +1474,7 @@ You know a wide range of languages. +2 to Lore whenever reading, writing, speaki
 
 Once per scene, you can communicate a short message to another human even if you do not speak a common language. (Peter Blake)
 
-### Memory
+## Memory
 
 <p class="with-anchor"> Photographic Memory </p>
 
@@ -1488,7 +1488,7 @@ Once per scene, you can communicate a short message to another human even if you
 
 Your prodigious reading has paid off in spades, and you are able to recall minute details from even the most obscure literary works. You don’t ever have to spend a fate point to declare that you have the proper tools for research using Lore, even in extreme situations (like being imprisoned and unable to access a library). This source of opposition is just off the table. (adapted from Spirit of the Century SRD, §6.2.2)
 
-### Medicine
+## Medicine
 
 <p class="with-anchor"> Drinking from the Jug </p>
 
@@ -1522,7 +1522,7 @@ Can make physical recovery attempts with Lore. (Fate Core, p.300)
 
 (requires Scholar, Healer.) You are a respected authority in a specific field of surgical or therapeutic medicine; define it at the time you take this stunt. Possibilities include heart or brain surgery, transplant operations, disease pathologies, and so on. You get a +2 to all Lore rolls relating to that field. (adapted from Spirit of the Century SRD, §6.25.1)
 
-### Scholarship
+## Scholarship
 
 <p class="with-anchor"> Dizzying Intellect </p>
 
@@ -1544,7 +1544,7 @@ Choose a field of specialization, such as herbology, criminology, or zoology. Yo
 
 +2 to create advantage on an ally with Lore when you spend an hour or so coaching them on an appropriate topic. (Peter Blake)
 
-### Survival
+## Survival
 
 <p class="with-anchor"> Caveman Lifestyle </p>
 
@@ -1574,7 +1574,7 @@ Navigating on foot with your Lore skill works impeded by poor visibility or diff
 
 You don’t ever have to spend a fate point to declare that you are able to find enough food and water for yourself, even in extreme situations (like being dumped in the middle of the desert and separated from all your stuff). This source of opposition is just off the table. (Peter Blake)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Advanced Ritualist </p>
 
@@ -1632,7 +1632,7 @@ Basic wilderness survival includes a great deal of stealth. You may use Lore in 
 
 You may use Lore instead of Rapport when you have visited the homeland or home state of the person you are speaking to. (Peter Blake)
 
-### Other
+## Other
 
 <p class="with-anchor"> Arcane Expert </p>
 
@@ -1675,9 +1675,9 @@ You are trained as a meteorologist and so you are skilled at weather prediction.
 
 (requires Legal Eagle.) Your exposure to international law is so extensive that you’re at ease in any situation involving legal wrangling, wherever you are. You never suffer any increased difficulty from a lack of familiarity with the laws of your locale; your experience is so broad that you’ve either know it already, or can make highly educated guesses about how it functions. (Spirit of the Century SRD, §6.18.2)
 
-## Notice Stunts
+# Notice Stunts
 
-### Reflexes
+## Reflexes
 
 <p class="with-anchor"> On Top Of It </p>
 
@@ -1691,7 +1691,7 @@ You may spend a fate point to go first in an exchange, regardless of your Notice
 
 (requires Ready for Anything.) Whenever it is determined that you provide active opposition to another character's action, you may spend a fate point. When you do, the other character may choose to attempt another action instead. If they do not, you receive +2 on your defend roll against the original action. (adapted from Spirit of the Century SRD, §6.3.1)
 
-### Vigilance
+## Vigilance
 
 <p class="with-anchor"> Constant Vigilance </p>
 
@@ -1717,7 +1717,7 @@ You have the ability to wait, devoting your full effort to watchfulness, for hou
 
 Once per scene you can spend a fate point (and a few minutes of observation) to make a special Notice roll representing opening your senses to a location. For each shift you make on this roll you discover or create an aspect related to direct observation on the scene, though you may only invoke one of them for free. (adapted from Spirit of the Century SRD, §6.3.2)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Body Language Reader </p>
 
@@ -1735,7 +1735,7 @@ Your keen senses allow you to pick up on the subtle clues that indicate when a p
 
 You can use Notice instead of Shoot to make quick, reactive shots that don’t involve a lot of aiming. However, because you’re having a knee-jerk reaction, you’re not allowed to concretely identify your target before using this stunt. So, for example, you might be able to shoot at someone you see moving in the bushes with this stunt, but you won’t be able to tell if it’s friend or foe before you pull the trigger. Choose carefully! (Fate Core, p.117)
 
-### Other
+## Other
 
 <p class="with-anchor"> The Advantage of Familiarity </p>
 
@@ -1766,9 +1766,9 @@ Choose a physical sense (e.g. sight, hearing, touch, taste, smell). You gain +2 
 
 +2 to overcome with Notice when faced someone claiming to be a celebrity or someone you know well. (Peter Blake)
 
-## Physique Stunts
+# Physique Stunts
 
-### Endurance
+## Endurance
 
 <p class="with-anchor"> Always Healthy/Strong Immune System </p>
 
@@ -1802,7 +1802,7 @@ You may spend fate points to keep standing. Any time you would suffer a conseque
 
 +2 to overcome rolls with Physique to resist poisons. (adapted from Spirit of the Century SRD, §6.11.2)
 
-### Pushing and Shoving
+## Pushing and Shoving
 
 <p class="with-anchor"> Body Toss </p>
 
@@ -1824,7 +1824,7 @@ Your rude and artless push contains a greater power than seems possible. You gai
 
 You may roll Physique to push yourself and an opponent into an adjacent zone, provided there are no situation aspects impeding movement. Your opponent may defend with either Athletics or Physique. (Peter Blake)
 
-### Stress and Consequences
+## Stress and Consequences
 
 <p class="with-anchor"> Face the Pain </p>
 
@@ -1850,7 +1850,7 @@ When you take physical stress, you may check off two stress boxes with a total v
 
 Once per session, at the cost of a fate point, you can reduce the severity of a moderate consequence that’s physical in nature to a mild consequence (if your mild consequence slot is free), or erase a mild consequence altogether. (Fate Core, p.119)
 
-### Wrestling
+## Wrestling
 
 <p class="with-anchor"> Grappler </p>
 
@@ -1864,7 +1864,7 @@ Once per session, at the cost of a fate point, you can reduce the severity of a 
 
 You aren't easy to hold down. +2 to overcome with Physique whenever you are physically restrained in some fashion - for example by chains or a mob of people.
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Bounce Back </p>
 
@@ -1914,7 +1914,7 @@ A guy as tough as you has no need to be afraid. You may use Physique instead of 
 
 Your unarmed attacks rely on brute strength rather than on technique. You may make such attacks against other humans with Physique rather than Fight.
 
-### Other
+## Other
 
 <p class="with-anchor"> Bend Bars, Lift Gates </p>
 
@@ -1956,9 +1956,9 @@ While you have the aspect _Enraged_ on you, you gain +2 to break inanimate objec
 
 Once per scene, when you succeed with style on a create advantage roll with Physique and place an aspect on an opponent, you may exchange one of your free invocations for a 2-shift hit on that opponent. (Peter Blake)
 
-## Provoke Stunts
+# Provoke Stunts
 
-### Intimidation
+## Intimidation
 
 <p class="with-anchor"> Aura of Fear </p>
 
@@ -1992,13 +1992,13 @@ When you are face-to-face with another person, gain +2 to create advantages spec
 
 You exude menace far in excess of your capability to act. Even bound and behind prison bars, you are so ripe with the promise of the awful things you could do that you're still scary. +2 to Provoke rolls when opposed by someone in a clearly superior position of power. (adapted from Spirit of the Century SRD, §6.16.1)
 
-### Rage
+## Rage
 
 <p class="with-anchor"> Berserk Rage </p>
 
 When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)
 
-### Satire and Mockery
+## Satire and Mockery
 
 <p class="with-anchor"> Infuriate </p>
 
@@ -2020,7 +2020,7 @@ You know how to craft the most exquisite insults. +2 to create advantage with Pr
 
 When your _Can’t Keep His Big Mouth Shut_ aspect is compelled to make you the target of an attack, you may immediately clear any mild consequences you currently have, instead of taking a fate point. (Fate System Toolkit, p.34)
 
-### Seduction
+## Seduction
 
 (even though, strictly speaking, the response to seduction isn't a "negative emotional response".)
 
@@ -2028,7 +2028,7 @@ When your _Can’t Keep His Big Mouth Shut_ aspect is compelled to make you the 
 
 You’re adept at catching the eye of the opposite sex, and keeping it once you’ve got it. Any seduction attempts you make with Provoke receive a +2 bonus whenever the target is someone who could be receptive to it (this is not always a simple case of gender and preference). (adapted from Spirit of the Century SRD, §6.22.1)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Armor of Fear </p>
 
@@ -2064,7 +2064,7 @@ You don't ask nicely when there's stuff you need to know. You may roll Provoke i
 
 It’s difficult to try to manipulate someone when you’re constantly reminded of how scary they are. You may use Provoke instead of Will to provide defend against create advantage actions made with Deceive, Empathy, or Rapport. (adapted from Spirit of the Century SRD, §6.16.1)
 
-### Other
+## Other
 
 <p class="with-anchor"> Bad Cop </p>
 
@@ -2110,9 +2110,9 @@ You have the complete lack of mercy that is needed to torture someone properly. 
 
 It's hard to disbelieve what those closest to you tell you. While successfully impersonating someone, your successful Provoke attacks on their close associates inflict two additional stress.
 
-## Rapport Stunts
+# Rapport Stunts
 
-### Art
+## Art
 
 <p class="with-anchor">Do You Know Who I Am? </p>
 
@@ -2130,7 +2130,7 @@ It's hard to disbelieve what those closest to you tell you. While successfully i
 
 Choose a field of art, such as painting, composition, or singing. You get a +2 to all Rapport rolls relating to that art. (adapted from Spirit of the Century SRD, §6.4.2)
 
-### Oratory
+## Oratory
 
 <p class="with-anchor"> Demagogue </p>
 
@@ -2140,7 +2140,7 @@ Choose a field of art, such as painting, composition, or singing. You get a +2 t
 
 Public speaking is an everyday thing to you. +2 to Rapport whenever you make a formal speech to a group.
 
-### Specific Audiences
+## Specific Audiences
 
 <p class="with-anchor">Another Round? </p>
 
@@ -2182,7 +2182,7 @@ Making a sale comes as naturally to you as breathing. +2 to Rapport when using i
 
 Pick a specific field of endeavour, such as crime, business, politics, espionage, or the occult. Gain +2 to Rapport rolls whenever dealing with someone from that field. (adapted from Spirit of the Century SRD, §6.7.2)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> All the World's a Stage/Playing to Expectations </p>
 
@@ -2216,7 +2216,7 @@ Smaller parts of a larger truth can contain a blueprint of the whole – and as 
 
 (requires Do You Know Who I Am?) For a fate point, you may use Empathy in place of Contacts, Deceive or Provoke, provided those you are dealing with are aware of your reputation. (adapted from Spirit of the Century SRD, §6.4.4)
 
-### Other
+## Other
 
 <p class="with-anchor"> All Things in Their Place </p>
 
@@ -2250,11 +2250,11 @@ You suffer no increased difficulty on Rapport rolls due to your social class. (P
 
 You’re adept at stepping into a bad situation and dialing it down to something more reasonable. So long as you are not the direct reason someone is upset, your attempts to calm them down using your Rapport receive a +2 bonus. (Spirit of the Century SRD, §6.22.2)
 
-## Resources Stunts
+# Resources Stunts
 
 (Stunts related to business are included here, on the basis that wealth and the skills to manage that wealth go together.)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Grease the Wheels </p>
 
@@ -2284,7 +2284,7 @@ You can use Resources instead of Rapport in any situation where ostentatious dis
 
 You can take action against organizations through indirect measures. Effectively you can fight on the level of any organization smaller than a nation without the need to recruit allies or have any organization of your own. Yes, this means you can effectively “kill” a city, or even an army, given enough time. (Fate System Toolkit, p.98)
 
-### Other
+## Other
 
 <p class="with-anchor"> Best That Money Can Buy </p>
 
@@ -2322,9 +2322,9 @@ Your pockets are full of useful little things. Whenever you need something, you 
 
 Pick a type of business (e.g. supermarket, sporting goods, electronics). You gain +2 to Resources when you attempt to purchase something which that business sells. (Peter Blake)
 
-## Shoot Stunts
+# Shoot Stunts
 
-### Aiming
+## Aiming
 
 <p class="with-anchor"> Scope User </p>
 
@@ -2334,7 +2334,7 @@ You know how to use a scope. +2 to create advantages with Shoot related to aimin
 
 Once per conflict, stack an additional free invoke on an advantage you’ve created to represent the time you take to aim or line up a shot (like _In My Sights_). (Fate Core, p.125)
 
-### Ammunition
+## Ammunition
 
 <p class="with-anchor"> Fast Reload </p>
 
@@ -2348,7 +2348,7 @@ You really like emptying magazines. Any time you’re using a fully automatic we
 
 +2 to create advantage rolls with Shoot when you create an aspect relating to suppressive fire. (adapted from Spirit of the Century SRD, §6.15.2)
 
-### Indirect Shots
+## Indirect Shots
 
 <p class="with-anchor"> Crazy Ricochet </p>
 
@@ -2362,7 +2362,7 @@ Once per scene, when you succeed with style on a Shoot attack, you may inflict a
 
 You may invoke a relevant situation aspect to bounce a projectile off a solid surface, allowing it to come at an opponent from an unexpected direction. (This invocation does not provide its normal bonus.) If your attack is successful, the stress of the hit is increased by 2. (adapted from Spirit of the Century SRD, §6.29.2)
 
-### Long Range
+## Long Range
 
 <p class="with-anchor"> Good Arm </p>
 
@@ -2380,7 +2380,7 @@ You can make physical attacks with Shoot from up to three zones away, rather tha
 
 Once per scene, you may make an attack with Shoot from up to ten zones away, provided you have a sniper rifle and scope. (Peter Blake)
 
-### Specific Targets
+## Specific Targets
 
 <p class="with-anchor"> Feller of Fauna </p>
 
@@ -2394,7 +2394,7 @@ Choose a type of animal. You gain +2 to attack with Shoot against that kind of a
 
 +2 to create advantage with Shoot when firing at an inanimate object. (adapted from Spirit of the Century SRD, §6.15.1)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Gun-Crazy/Way of the Gun </p>
 
@@ -2424,7 +2424,7 @@ Once per scene, you may move one zone, attack with Shoot, and then move one addi
 
 (requires Quick on the Draw.) Once per conflict, between or before other characters’ actions, you may spend a fate point to preempt the usual turn order and act next. The action taken must involve a roll with your Shoot skill – usually an attack. This may be done in addition to your normal action. (adapted from Spirit of the Century SRD, §6.15.3)
 
-### Other
+## Other
 
 <p class="with-anchor"> Called Shot </p>
 
@@ -2454,9 +2454,9 @@ Normally, shooting with two guns just looks cool, but when you fire two weapons,
 
 When you combine Shoot skills with your allies, you contribute an additional +1 bonus. (Peter Blake)
 
-## Stealth Stunts
+# Stealth Stunts
 
-### In Specific Environments
+## In Specific Environments
 
 <p class="with-anchor"> Face in the Crowd </p>
 
@@ -2474,7 +2474,7 @@ Your Stealth skill works impeded by inanimate objects that will make sound if di
 
 +2 to Stealth when hiding on a ship or other large vehicle. (Peter Blake)
 
-### Sudden Disappearances
+## Sudden Disappearances
 
 <p class="with-anchor"> Cunning Evasion </p>
 
@@ -2492,7 +2492,7 @@ At the cost of a fate point, you may exit a scene, passing from sight. (Fate Sys
 
 A momentary distraction is all you need to vanish from the scene. Provided you are not in the midst of a conflict, you may roll a quick contest between your Stealth and the highest Notice in the room. If you succeed, the next time someone turns to look at or talk to you, you’re not there. (adapted from Spirit of the Century SRD, §6.27.2)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Backstab/Sucker Punch </p>
 
@@ -2522,7 +2522,7 @@ Provided you’re in darkness or shadow, you can use Stealth to defend against S
 
 You like to watch people who don't know they're being watched. You may use Stealth in place of Investigate to conduct surveillance.
 
-### Other
+## Other
 
 <p class="with-anchor"> Hush </p>
 
@@ -2544,9 +2544,9 @@ Choose Deceive or Stealth when you take this stunt. When you create an advantage
 
 For some strange reason, you are capable of sneaking around while wearing 30 pounds of steel plating. You never suffer increased difficulty on Stealth rolls from being armoured.
 
-## Will Stunts
+# Will Stunts
 
-### Mental Resistance
+## Mental Resistance
 
 <p class="with-anchor"> Fierce Mind </p>
 
@@ -2584,7 +2584,7 @@ You cling to your beliefs with amazing determination. +2 to Will when overcoming
 
 Pick a person or being who has authority over you and whom you trust. You gain +2 to Will whenever you resist attempts to undermine that trust.
 
-### Stress and Consequences
+## Stress and Consequences
 
 <p class="with-anchor"> Aplomb </p>
 
@@ -2614,7 +2614,7 @@ You gain a -8 physical consequence which recovers in the same way a -2 consequen
 
 (requires Driven.) Your force of will is enough to keep you going in the direst of circumstances. Each time you take physical stress, you may spend a fate point to instead take two 1-shift hits of mental stress. (adapted from Spirit of the Century SRD, §6.23.2)
 
-### New Actions
+## New Actions
 
 <p class="with-anchor"> Determinate </p>
 
@@ -2640,7 +2640,7 @@ Your steadfastness comes from your religious upbringing. You may roll Will inste
 
 Your mental strength allows you to remain calm when others would be caught off guard. You may use Will in place of Notice whenever someone is attempting to surprise you.
 
-### Other
+## Other
 
 <p class="with-anchor"> Extraordinary Concentration </p>
 
@@ -2662,26 +2662,24 @@ So far as social skills are concerned, you do not exist. You cannot be swayed, b
 
 You can perfectly repeat anything you’ve heard in the last hour or so, even if you don’t know the language it was spoken in. (Normally a Will roll would be required to recall the words correctly.) (Peter Blake)
 
-# Stunt Rubrics
-
-## Add a New Action to a Skill
+# Add a New Action to a Skill
 
 The most basic option for a stunt is to allow a skill to do something that it normally can’t do. It adds a new action onto the base skill in certain situations, for those with this stunt. This new action can be one that’s available to another skill (allowing one skill to swap for another under certain circumstances), or one that’s not available to any skill. (Fate Core, p.89)
 
-## Add a Bonus to an Action
+# Add a Bonus to an Action
 
 Another use for a stunt is to give a skill an automatic bonus under a particular, very narrow circumstance, effectively letting a character specialize in something. The circumstance should be narrower than what the normal action allows, and only apply to one particular action or pair of actions.  
 The usual bonus is +2 to the skill total. However, if you want, you can also express the bonus as two shifts of additional effect after the roll succeeds, if that makes more sense. Remember, higher shifts on a roll allow your action to be more effective in certain ways.  
 You can also use this to establish any effect worth two shifts as an additional benefit of succeeding at the skill roll. This might be Fair (+2) passive opposition, the equivalent of a 2-point hit, a mild consequence, or an advantage that takes Fair (+2) opposition to remove. (Fate Core, p.90)
 
-## Create a Rules Exception
+# Create a Rules Exception
 
 Finally, a stunt can allow a skill to make a single exception, in a narrow circumstance, for any other game rule that doesn’t precisely fit into the category of an action. The Challenges, Contests, and Conflicts chapter is full of different little rules about the circumstances under which a skill can be used and what happens when you use them. Stunts can break those, allowing your character to stretch the boundaries of the possible.  
 The only limit to this is that a stunt can’t change any of the basic rules for aspects in terms of invoking, compelling, and the fate point economy. Those always remain the same. (Fate Core, p.91)
 
-## Other Rubrics
+# Other Rubrics
 
-### Flexible Stunts
+## Flexible Stunts
 
 In Fate Core, stunts are tied explicitly to skills. What if you want your stunts to be skill-agnostic, or tied to multiple skills, or tied to something else entirely different, like an aspect or piece of gear or a stress track? (Fate System Toolkit, p.34)
 
@@ -2689,14 +2687,14 @@ In Fate Core, stunts are tied explicitly to skills. What if you want your stunts
 
 For stunts which are tied to aspects, you might view some of their effects as narrowly defined free invocations. Other aspected stunts might require an invocation, as **Ally’s Shield** does, but give something extra or particularly unusual when the aspect is invoked. Such effects should be more potent than a “vanilla” invocation. You could even design a stunt that triggers under particular kinds of compels —just be careful you don’t end up neutering the downside with the resulting benefit. (Fate System Toolkit, p.34)
 
-### Triggered Effects
+## Triggered Effects
 
 When you use this stunt mechanic, you create stunts that trigger under a specific narrative condition, require a skill roll, and have a specific effect as a result. Stunts like this are a great way to encourage players to do the kinds of things you want to see them do in the game, as those stunts directly reward doing those things. (Fate System Toolkit, p.35)
 
-### Broad Stunts
+## Broad Stunts
 
 If you’re looking for more variety in your stunts than a +2 or its equivalent, consider the idea of a broad stunt that offers a +1 to two or three things. These could be three different actions within the same skill, or could branch across multiple related skills. If you’re going to allow broad stunts like this, watch out for the overlaps in stunt combinations: you don’t want two broad stunts giving the net effect of three +2s for the price of only two stunts. (Fate System Toolkit, p.35)
 
-### Combined Stunts
+## Combined Stunts
 
 If you want to offer particularly potent stunts, consider bundling the benefit of multiple stunts together to produce a single big effect. For example, you could create a stunt that provides a monstrous 4-shift effect —that’s a combination of two stunts, and as such would cost two refresh. (You may recognize this as the method used for constructing the supernatural powers in _The Dresden Files_ RPG.) This kind of focused benefit can throw a game out of whack quickly, though. Consider limiting access to such “super-stunts,” either in quantity—e.g., “everyone only gets one double-stunt”—or in selection and permission—“only these stunts are available to werewolves.” (Fate System Toolkit, p.35)

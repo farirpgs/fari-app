@@ -1,9 +1,20 @@
 <!--
 # TODO
-- [ ] https://github.com/parcel-bundler/parcel/issues/1762#issuecomment-714322965
-- [x] boost sub menu
-- [ ] character sheet dirty state
-- [x] hash sub text for srd
+
+- [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
+
+# BEFORE RELEASE
+
+- [ ] fix player row icon sizes
+
+# THINK
+- [ ] feat: make section help link dynamic
+- [ ] Button base on skill for insta roll?
+- [ ] text on slot tracker ?
+- [ ] highlight tab text on click ?
+- [ ] duplicate without advanced mode ?
+
+# Future
 - [ ] seelie squire
 -->
 
@@ -53,7 +64,10 @@ Run `yarn start` and then the app should be running on http://localhost:1234
 ## Special Thanks
 
 <a href="https://www.netlify.com">
-  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+  <img width="100px" src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+</a>
+<a href="https://lokalise.com/">
+  <img  width="200px" style="margin-left:16px;" src="./images/services/lokalise.png" alt="[Deploys by Netlify](https://lokalise.com/)" />
 </a>
 
 [Netlify](https://netlify.com/) for providing hosting for Fari.

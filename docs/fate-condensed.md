@@ -204,7 +204,7 @@ When building your own implementation of Fate, the first thing to think about is
 - Skill ratings in Fate are structured to support character niches. That’s why, in the default, players start with a “pyramid” shape. Make sure niche protection is possible in whatever new list you create.
 - The best starting skill should come in around Great (+4). You can alter this up or down as you see fit, but make sure to keep an eye on what that means for the difficulty and opposing skill ratings your PCs will face.
 
-Fred decides he wants to do a space-faring Fate game with a shorter skill list that’s focused on action-words. He settles on this 9-item skill list: Fight, Know, Move, Notice, Pilot, Sneak, Speak, Tinker, and Will. He also likes the idea of a “diamond” shape for skill ratings rather than a pyramid, so he has players rate their starting skills as follows: 1 at Great (+4), 2 at Good (+3), 3 at Fair (+2), 2 at Average (+1), and 1 at Mediocre (+0). His PCs will have a lot of overlap and core competencies due to the fat middle of his diamond, while still enjoying some niche protections at the top of the diamond’s “point.”
+> Fred decides he wants to do a space-faring Fate game with a shorter skill list that’s focused on action-words. He settles on this 9-item skill list: Fight, Know, Move, Notice, Pilot, Sneak, Speak, Tinker, and Will. He also likes the idea of a “diamond” shape for skill ratings rather than a pyramid, so he has players rate their starting skills as follows: 1 at Great (+4), 2 at Good (+3), 3 at Fair (+2), 2 at Average (+1), and 1 at Mediocre (+0). His PCs will have a lot of overlap and core competencies due to the fat middle of his diamond, while still enjoying some niche protections at the top of the diamond’s “point.”
 
 If you’re considering making your own skill list for your game and are looking for some ideas to kick-start your imagination, see **page XX.**
 
@@ -214,7 +214,7 @@ Your **refresh** is the minimum number of **fate points** (**page XX**) your cha
 
 Each session, you start with fate points at least equal to your refresh. Be sure to keep track of the fate points you have left at the end of each session of play—if you have more fate points than your refresh, you’ll start the next session with the fate points you ended this session with.
 
-Charles earned a lot of fate points during today’s session, ending it with 5 fate points. His refresh is 2, so Charles will start the next session with 5 fate points. But Ethan ends the same session with just one fate point. His refresh is 3, so he’ll begin the next session with 3 fate points, not just the one he had left over.
+> Charles earned a lot of fate points during today’s session, ending it with 5 fate points. His refresh is 2, so Charles will start the next session with 5 fate points. But Ethan ends the same session with just one fate point. His refresh is 3, so he’ll begin the next session with 3 fate points, not just the one he had left over.
 
 ### Stunts
 
@@ -345,7 +345,7 @@ Whenever you roll dice, the difference between your effort and the target diffic
 
 Some outcomes are obviously better for you than others, but all of them should advance the story in interesting ways. You started with fiction first (**page XX**); make sure you end with it too, to maintain focus on the story, and to ensure you interpret the results in a way that fits the fiction.
 
-Ethan isn’t an adept safe-cracker (though he has the tools), and yet he’s in a sinister cult’s guarded secret headquarters, with a steel door between him and the ritual book he desperately needs. Can he get in?
+> Ethan isn’t an adept safe-cracker (though he has the tools), and yet he’s in a sinister cult’s guarded secret headquarters, with a steel door between him and the ritual book he desperately needs. Can he get in?
 
 ### Failure
 
@@ -357,19 +357,19 @@ This can play out in a few ways: simple failure, success at a major cost, or tak
 
 The first is the easiest to understand—**simple failure**. You don’t accomplish your goal, don’t make any progress, and are left wanting. Ensure this keeps the story moving—simply failing to crack the safe is stagnant and boring.
 
-Ethan pulls the handle triumphantly, but the safe remains resolutely closed while the alarms begin to blare. Failure has changed the situation and driven the story forward—now there are guards on the way. Ethan is faced with a new choice—try another way of opening the safe, now that subtlety is out the window, or cut his losses and run?
+> Ethan pulls the handle triumphantly, but the safe remains resolutely closed while the alarms begin to blare. Failure has changed the situation and driven the story forward—now there are guards on the way. Ethan is faced with a new choice—try another way of opening the safe, now that subtlety is out the window, or cut his losses and run?
 
 #### Success at a major cost
 
 Second is **success at a major cost**. You do what you set out to do, but there’s a significant price to be paid—the situation gets worse or more complicated. GM, you can either declare this is the result or can offer it in place of failure. Both options are good and useful in different situations.
 
-Ethan fails his roll and the GM says, “You hear the click of the last tumbler falling into place. It’s echoed by the click of the hammer on a revolver as the guard tells you to put your hands in the air.” The major cost here is the confrontation with a guard he’d hoped to avoid.
+> Ethan fails his roll and the GM says, “You hear the click of the last tumbler falling into place. It’s echoed by the click of the hammer on a revolver as the guard tells you to put your hands in the air.” The major cost here is the confrontation with a guard he’d hoped to avoid.
 
 #### Take a Hit
 
 Lastly, you may **take a hit**, which you’ll need to absorb with stress or consequences, or suffer some other drawback. This sort of failure is most common when defending against attacks or overcoming dangerous obstacles. This is different from a simple failure because the character alone, not necessarily the whole group, is affected. It’s also different from success at a major cost, in that success isn’t necessarily on the table.
 
-Ethan is able to get the safe door open, but as he grasps the handle, he feels a jab in the back of his hand. He couldn’t disable the trap! He writes down the mild consequence **Poisoned**.
+> Ethan is able to get the safe door open, but as he grasps the handle, he feels a jab in the back of his hand. He couldn’t disable the trap! He writes down the mild consequence **Poisoned**.
 
 You can mix these options together: Harmful failure can be harsh but appropriate in the moment. Success at the cost of harm is certainly an option.
 
@@ -383,13 +383,13 @@ Just like failure, ties should move the story forward, never stymie the action. 
 
 The first is **success at a minor cost**—a few points of stress, story details about difficulty or complication but aren’t hindrances themselves, and a boost (**page XX**) to the enemy are all minor costs.
 
-Ethan’s first few attempts all fail. By the time he actually gets the door open, dawn has broken, and escape under cover of darkness is impossible. He got what he needed, but his situation is worse now.
+> Ethan’s first few attempts all fail. By the time he actually gets the door open, dawn has broken, and escape under cover of darkness is impossible. He got what he needed, but his situation is worse now.
 
 #### Partial Success
 
 The other way to handle a tie is **partial success**—you succeeded but only got some of what you wanted.
 
-Ethan can only open the safe door a crack—if the door opens more than an inch, the alarm will sound, and he can’t figure out how to disengage that. He manages to pull a couple pages of the ritual out through the narrow gap, but he’ll have to guess at the final steps.
+> Ethan can only open the safe door a crack—if the door opens more than an inch, the alarm will sound, and he can’t figure out how to disengage that. He manages to pull a couple pages of the ritual out through the narrow gap, but he’ll have to guess at the final steps.
 
 ### Success
 
@@ -409,7 +409,7 @@ If your effort is three or more than the target, you succeed with style.
 
 You get what you want, and you get a bit more on top of that.
 
-Ethan is beyond lucky; the safe door opens almost instantly. Not only does he get the ritual, but he has enough time to poke through the other papers in the back of the safe. Amidst various ledgers and financial documents, he finds a map of the old Akeley mansion.
+> Ethan is beyond lucky; the safe door opens almost instantly. Not only does he get the ritual, but he has enough time to poke through the other papers in the back of the safe. Amidst various ledgers and financial documents, he finds a map of the old Akeley mansion.
 
 ## Actions
 
@@ -431,16 +431,13 @@ A character good at Athletics can climb over walls and race through crowded stre
 Your outcomes when overcoming are:
 
 - **If you fail,** discuss with the GM (and the defending player, if any) whether it’s a failure or success at a major cost (**page XX**).
-
 - **If you tie,** it’s success at a minor cost (**page XX**)—you’re in a tough spot, the enemy gets a boost (**page XX**), or you may take a hit. Alternatively, you fail but gain a boost.
-
 - **If you succeed,** you meet your goal and the story moves on without hiccups.
-
 - **If you succeed with style,** it’s a success and you also get a boost.
 
-Charles has made his way to an Antarctic research facility. The buildings have been wrecked, and the occupants are missing. He wants to search the wreckage for clues. The GM tells him to roll Investigate against Fair (+2) difficulty. Charles gets <fate>00++</fate> on the dice, plus his Average (+1) Investigate, for a Good (+3) effort. A success! The GM describes the clue he finds: footprints in the snow, made by creatures walking on many thin, inhuman legs.
-
-Overcome actions are often used to determine whether a character can access or notice a particular fact or clue. Keep a close eye on those success-at-a-cost options when that’s the case. If missing a detail would cause your story to stall, take failure off the table, and focus on the cost instead.
+> Charles has made his way to an Antarctic research facility. The buildings have been wrecked, and the occupants are missing. He wants to search the wreckage for clues. The GM tells him to roll Investigate against Fair (+2) difficulty. Charles gets <fate>00++</fate> on the dice, plus his Average (+1) Investigate, for a Good (+3) effort. A success! The GM describes the clue he finds: footprints in the snow, made by creatures walking on many thin, inhuman legs.
+>
+> Overcome actions are often used to determine whether a character can access or notice a particular fact or clue. Keep a close eye on those success-at-a-cost options when that’s the case. If missing a detail would cause your story to stall, take failure off the table, and focus on the cost instead.
 
 ### Create an Advantage
 
@@ -455,28 +452,22 @@ When you roll to create an advantage, specify whether you’re creating a new as
 Your outcomes when creating a new aspect are:
 
 - **If you fail,** you either don’t create the aspect (failure) or you create it but the enemy gets the free invoke (success at a cost). If you succeed at a cost, the final aspect may need to be rewritten to benefit the enemy. This may still be worth it because aspects are true (**page XX**).
-
 - **If you tie,** you don’t create an aspect, but you do get a boost (**page XX**).
-
 - **If you succeed,** you create a situation aspect with one free invoke on it.
-
 - **If you succeed with style,** you create a situation aspect with _two_ free invokes on it.
 
 With an existing known or unknown aspect the outcomes are:
 
 - **If you fail,** and the aspect was known, the enemy gets a free invoke. If it was unknown, they may choose to reveal it to get a free invoke.
-
 - **If you tie,** you gain a boost if the aspect was unknown; it stays unknown. If the aspect is known, you get a free invoke on it instead.
-
 - **If you succeed,** gain a free invoke on the aspect, revealing it if unknown.
-
 - **If you succeed with style,** gain two free invokes, revealing it if unknown.
 
-Ethan is face-to-something with a shoggoth, a massive and tireless fleshy beast. He knows it’s too powerful to attack directly, so he decides his best bet is to distract it: “I’d like to make a Molotov cocktail and set this thing on fire!” he announces.
-
-The GM decides that actually hitting the shoggoth is trivial, so this is a Crafts roll—how quickly can he find and weaponize something flammable? The difficulty is set at Good (+3). Ethan has Average (+1) Crafts but rolls <fate>0+++</fate>, giving a Great (+4) effort.
-
-Ethan cobbles together the Molotov and tosses it at the beast. The shoggoth is now **On Fire**, and Ethan has one free invoke on that aspect. The shoggoth is definitely distracted, and if it does try to chase him, Ethan can use that invoke to help himself get away.
+> Ethan is face-to-something with a shoggoth, a massive and tireless fleshy beast. He knows it’s too powerful to attack directly, so he decides his best bet is to distract it: “I’d like to make a Molotov cocktail and set this thing on fire!” he announces.
+>
+> The GM decides that actually hitting the shoggoth is trivial, so this is a Crafts roll—how quickly can he find and weaponize something flammable? The difficulty is set at Good (+3). Ethan has Average (+1) Crafts but rolls <fate>0+++</fate>, giving a Great (+4) effort.
+>
+> Ethan cobbles together the Molotov and tosses it at the beast. The shoggoth is now **On Fire**, and Ethan has one free invoke on that aspect. The shoggoth is definitely distracted, and if it does try to chase him, Ethan can use that invoke to help himself get away.
 
 ### Attack
 
@@ -489,14 +480,11 @@ Keep in mind whether or not harming your target is even possible. Not every atta
 Your outcomes when attacking are:
 
 - **If you fail,** you fail to connect—the attack is parried, dodged, or maybe just absorbed by armor.
-
 - **If you tie,** maybe you barely connect, maybe you cause the defender to flinch. Either way, you get a boost (**page XX**).
-
 - **If you succeed,** you deal a hit equal to the difference between your attack’s total and the defense’s effort. The defender must absorb this hit with stress or consequences, or else be taken out (**page XX**).
-
 - **If you succeed with style,** you deal a hit just like a success, but you may reduce the shifts of the hit by one to get a boost.
 
-Ruth has stumbled across a corpse raised by arcane powers to fulfill some dark purpose. She decides to punch it. She has Great (+4) Fight but rolls <fate>--00</fate>, giving a Fair (+2) effort.
+> Ruth has stumbled across a corpse raised by arcane powers to fulfill some dark purpose. She decides to punch it. She has Great (+4) Fight but rolls <fate>--00</fate>, giving a Fair (+2) effort.
 
 ### Defend
 
@@ -509,16 +497,13 @@ Defend is the only reactive action in _Fate Condensed_. You use it to stop somet
 Your outcomes when defending are:
 
 - **If you fail** against an attack, you take a hit, which you must absorb with stress (**page XX**) or consequences (**page XX**). Regardless, the enemy succeeds as described for their action.
-
 - **If you tie,** proceed according to the tie result for the opposed action.
-
 - **If you succeed,** you don’t take a hit or you deny the enemy’s action.
-
 - **If you succeed with style,** you don’t take a hit, you deny the enemy’s action, and you even get a boost as you gain the upper hand for a moment.
 
-Continuing from the previous example, the corpse gets to defend itself against Ruth. The GM rolls <fate>-00+</fate>, which doesn’t change the creature’s Mediocre (+0) Athletics.
-
-Because Ruth’s effort was higher, her attack succeeds by two shifts, and the corpse is a little closer to being down for good. Had the corpse rolled better, then its defense would have succeeded, and the undead monstrosity would have avoided taking a hit.
+> Continuing from the previous example, the corpse gets to defend itself against Ruth. The GM rolls <fate>-00+</fate>, which doesn’t change the creature’s Mediocre (+0) Athletics.
+>
+> Because Ruth’s effort was higher, her attack succeeds by two shifts, and the corpse is a little closer to being down for good. Had the corpse rolled better, then its defense would have succeeded, and the undead monstrosity would have avoided taking a hit.
 
 #### Which skills can be used to attack and defend?
 
@@ -592,7 +577,7 @@ You can also invoke aspects for free, _if_ you have a free invoke from you or an
 
 If you want an easy way to ensure you have room to incorporate aspects into a roll, try narrating your action with an ellipsis at the end (“...”), and then finish the action with the aspect you want to invoke. Like this:
 
-Ryan says, “So I’m trying to decipher the runes and...” (rolls the dice, hates the result) “...and **If I Haven’t Been There, I’ve Read About It**...” (spends a fate point) “...so I easily start rambling about their origin.”
+> Ryan says, “So I’m trying to decipher the runes and...” (rolls the dice, hates the result) “...and **If I Haven’t Been There, I’ve Read About It**...” (spends a fate point) “...so I easily start rambling about their origin.”
 
 #### Hostile Invocations
 
@@ -720,9 +705,9 @@ Often, you won’t need to know who is acting precisely when, but in contests an
 
 At the start of a scene, the GM and players decide who goes first based on the situation, then the active player picks who goes next. The GM’s characters are selected in the turn order just like the PCs, with the GM deciding who goes next after the NPCs have acted. After everyone has taken a turn, the last player picks who goes next at the start of the next exchange.
 
-Cassandra and Ruth have stumbled across a small group of cultists, led by an acolyte in a golden mask, performing some arcane ritual. Because the cultists are focused on their work, the GM declares that the PCs will go first in this conflict. The players decide that Cassandra will act first: she creates an advantage against the masked cultist, **Distracted**, by running directly at them screaming. It’s crude but effective. To make the best use of the situation aspect, Cassandra’s player decides that Ruth should go next. Ruth throws a dagger at the masked acolyte, and immediately invokes **Distracted** to improve her attack. It’s not enough to take out the acolyte in one hit, but it is a one-two punch that leaves the cultist reeling.
-
-Unfortunately, now that all the PCs in the scene have acted, Ruth has no choice but to pick one of the cultists to go next. She chooses the masked acolyte. The GM smiles, because they know that once the acolyte acts, she can have the cultists act until the end of the round, at which point they can choose the masked acolyte to start the next exchange. The PCs may have gotten a good first hit in, but now the cultists get to fight back.
+> Cassandra and Ruth have stumbled across a small group of cultists, led by an acolyte in a golden mask, performing some arcane ritual. Because the cultists are focused on their work, the GM declares that the PCs will go first in this conflict. The players decide that Cassandra will act first: she creates an advantage against the masked cultist, **Distracted**, by running directly at them screaming. It’s crude but effective. To make the best use of the situation aspect, Cassandra’s player decides that Ruth should go next. Ruth throws a dagger at the masked acolyte, and immediately invokes **Distracted** to improve her attack. It’s not enough to take out the acolyte in one hit, but it is a one-two punch that leaves the cultist reeling.
+>
+> Unfortunately, now that all the PCs in the scene have acted, Ruth has no choice but to pick one of the cultists to go next. She chooses the masked acolyte. The GM smiles, because they know that once the acolyte acts, she can have the cultists act until the end of the round, at which point they can choose the masked acolyte to start the next exchange. The PCs may have gotten a good first hit in, but now the cultists get to fight back.
 
 This method of determining turn order goes by several names in online discussion: elective action order, and “popcorn,” “handoff,” or “Balsera Style” initiative, the last one named after Fate Core author Leonard Balsera, who planted the seed of the idea. You can learn more about this method and its strategies at [https://www.deadlyfredly.com/2012/02/marvel/](https://www.deadlyfredly.com/2012/02/marvel/)
 
@@ -778,7 +763,7 @@ When an attack is successful, the defender must absorb the hit, which has shifts
 
 You can absorb shifts of a hit by marking stress boxes and by taking consequences. If you can’t or don’t absorb all of the shifts, you are **taken out** (**page XX**)—you’re removed from the scene, and the attacker decides how it plays out.
 
-A series of regrettable decisions has put Charles in a dank basement, confronting a ghoul that very much wants to eat him. The ghoul attacks, lunging with its sharp claws; this is an attack using its Fair (+2) Fight. The GM rolls <fate>00++</fate>, bringing the effort up to Great (+4). Charles tries to leap out of the way with his Good (+3) Athletics, but rolls <fate>000-</fate>, taking his effort down to Fair (+2). Because the ghoul’s attack effort was two steps higher than Charles’s defense effort, Charles must absorb two shifts. He marks the first two of his three physical stress boxes; already the fight is proving dangerous.
+> A series of regrettable decisions has put Charles in a dank basement, confronting a ghoul that very much wants to eat him. The ghoul attacks, lunging with its sharp claws; this is an attack using its Fair (+2) Fight. The GM rolls <fate>00++</fate>, bringing the effort up to Great (+4). Charles tries to leap out of the way with his Good (+3) Athletics, but rolls <fate>000-</fate>, taking his effort down to Fair (+2). Because the ghoul’s attack effort was two steps higher than Charles’s defense effort, Charles must absorb two shifts. He marks the first two of his three physical stress boxes; already the fight is proving dangerous.
 
 #### Stress
 
@@ -814,9 +799,9 @@ But even when death is on the table (it’s best to be clear about that before a
 
 Follow the fiction when describing how someone—or something—is taken out. Was a cultist taken out by a barrage of machine gun fire? A spray of red fills the air as they slump with a wet thump to the ground. Were you hurled from the truck as it crossed the 26th Street overpass? You disappear over the edge and are left behind as the conflict rumbles on along the Dan Ryan. Keep death in mind when discussing the terms of being taken out, but often it’s just as interesting to cheat death.
 
-The ghoul gets in a very lucky hit, dealing a Legendary (+8) attack against Charles’s Poor (-1) defense. By this point in the conflict, all of Charles’s stress boxes are full, as is his moderate consequence slot. Even if he were to take a mild and a severe consequence at once, absorbing eight shifts, it wouldn’t be enough. As a result, Charles is taken out. The ghoul gets to decide his fate. The GM would be within their rights to have the ghoul kill Charles then and there…but getting killed isn’t the most interesting result.
-
-Instead, the GM declares that Charles survives, getting knocked out and dragged to the ghoul’s lair, consequences intact. Charles will wake up lost and very fragile in the pitch-dark catacombs beneath the city. Because he was taken out, Charles has no choice but to accept the terms laid before him.
+> The ghoul gets in a very lucky hit, dealing a Legendary (+8) attack against Charles’s Poor (-1) defense. By this point in the conflict, all of Charles’s stress boxes are full, as is his moderate consequence slot. Even if he were to take a mild and a severe consequence at once, absorbing eight shifts, it wouldn’t be enough. As a result, Charles is taken out. The ghoul gets to decide his fate. The GM would be within their rights to have the ghoul kill Charles then and there…but getting killed isn’t the most interesting result.
+>
+> Instead, the GM declares that Charles survives, getting knocked out and dragged to the ghoul’s lair, consequences intact. Charles will wake up lost and very fragile in the pitch-dark catacombs beneath the city. Because he was taken out, Charles has no choice but to accept the terms laid before him.
 
 #### Conceding
 

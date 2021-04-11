@@ -106,3 +106,5 @@ junit.xml
 # Cypress
 cypress/videos
 cypress/screenshots
+
+.DS_Store

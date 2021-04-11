@@ -1,17 +1,15 @@
 import { IDocProps } from "../../components/Doc/Doc";
-import { MarkdownDocMode } from "../../components/Doc/domains/Markdown";
 import { Images } from "../../constants/Images";
 import { DocImport } from "./DocImport";
 
-export const DocRoutes: Array<
-  Omit<IDocProps, "page" | "subPage" | "section">
-> = [
+export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
   {
     url: "/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
     title: "Fate Condensed",
     imageUrl: Images.condensed,
     loadFunction: DocImport.FateCondensed,
+
     gitHubLink:
       "https://github.com/fariapp/fari/tree/master/docs/fate-condensed.md",
     author: {
@@ -159,7 +157,39 @@ export const DocRoutes: Array<
         },
       ],
     },
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
+    sideBar: {
+      "+Fate Stunts": [
+        "fate-stunts",
+        {
+          "+Skills": [
+            "athletics-stunts",
+            "burglary-stunts",
+            "contacts-stunts",
+            "crafts-stunts",
+            "deceive-stunts",
+            "drive-stunts",
+            "empathy-stunts",
+            "fight-stunts",
+            "investigate-stunts",
+            "lore-stunts",
+            "notice-stunts",
+            "physique-stunts",
+            "provoke-stunts",
+            "rapport-stunts",
+            "resources-stunts",
+            "shoot-stunts",
+            "stealth-stunts",
+            "will-stunts",
+          ],
+        },
+      ],
+      "Stunt Rubrics": [
+        "add-a-new-action-to-a-skill",
+        "add-a-bonus-to-an-action",
+        "create-a-rules-exception",
+        { "+Miscellaneous": ["other-rubrics"] },
+      ],
+    },
   },
   {
     url: "/scene-checklist",
@@ -209,6 +239,18 @@ export const DocRoutes: Array<
     loadFunction: DocImport.Dials,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/dials.md",
     imageUrl: Images.dials,
+    sideBar: {
+      "+Fari": [
+        "dials",
+        {
+          "+Rules": [
+            "props-from-return-to-the-stars",
+            "quick-conflicts-from-spirit-of-the-century",
+            "magic-aspect-based-naration",
+          ],
+        },
+      ],
+    },
   },
   {
     url: "/srds/test",
@@ -247,20 +289,55 @@ export const DocRoutes: Array<
       "https://github.com/fariapp/fari/tree/master/docs/test-empty.md",
   },
   {
-    url: "/fate-wiki",
-    parent: { title: "SRDs", url: "/srds" },
-    title: "Fate Wiki",
-    loadFunction: DocImport.FateFaq,
-    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fate-wiki.md",
-    imageUrl: Images.cheatSheet,
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
-    noIndex: true,
+    url: "/success-with-style",
+    parent: { title: "Fari", url: "/" },
+    title: "Success With Style",
+    loadFunction: DocImport.SuccessWithStyle,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/docs/success-with-style.md",
+    imageUrl: Images.successWithStyle,
+    sideBar: {
+      "+Success With Style": ["introduction"],
+    },
+    sideBarOptions: {
+      miscSectionTitle: "Fate Pointers",
+    },
+  },
+  {
+    url: "/fari-wiki",
+    parent: { title: "Fari", url: "/" },
+    title: "Fari Wiki",
+    loadFunction: DocImport.FariWiki,
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fari-wiki.md",
+    imageUrl: Images.logo,
+    sideBar: {
+      "+Fari Wiki": ["introduction"],
+      "+Getting Started": [
+        "playing",
+        "managing-characters",
+        "managing-scenes",
+        "tips-and-tricks",
+      ],
+    },
+  },
+  {
+    url: "/blog",
+    parent: { title: "Fari", url: "/" },
+    title: "Blog",
+    loadFunction: DocImport.Blog,
+    gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/blog.md",
+    defaultSideBarCategory: "Blog",
+    sideBar: {
+      "+Blog": [
+        "welcome",
+        { "+2021": ["fari-v400", "fari-v370", "fari-v360", "moments-in-fate"] },
+      ],
+    },
   },
   {
     url: "/m",
     parent: { title: "Fari", url: "/" },
     title: "m",
-    docMode: MarkdownDocMode.H1sArePages,
     noIndex: true,
     loadFunction: DocImport.M,
   },
@@ -268,7 +345,6 @@ export const DocRoutes: Array<
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
-    docMode: MarkdownDocMode.H1sAndH2sArePages,
 
     loadFunction: DocImport.Changelog,
   },

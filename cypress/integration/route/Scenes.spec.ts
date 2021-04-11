@@ -63,7 +63,7 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.stressTrack.Mental Stress.name")
         .clear()
         .type("#Mental Stress");
-      Fari.get("scene.aspect.0.stressTrack.....remove").click();
+      Fari.get("scene.aspect.0.stressTrack.Track.remove").click();
 
       // aspect consequences
       Fari.get("scene.aspect.0.consequence.Consequence  (2).name")
@@ -88,18 +88,10 @@ describe("/scenes", () => {
       // pin
       Fari.get("scene.aspect.1.pin").click();
 
-      // reset
-      Fari.get("scene.reset").click();
-
-      // set fields again
-      Fari.get("scene.name").type("Ba Sing Se");
-      Fari.get("scene.group").type("Avatar");
-      Fari.get("scene.aspect.0.title").type("NPC after reset");
-
       // save
       Fari.waitContentEditable();
       Fari.get("scene.save").click();
-      cy.title().should("eq", "BA SING SE | Fari");
+      cy.title().should("eq", "Ba Sing Se | Fari");
 
       // delete
       Fari.get("page.menu.scenes").click();
@@ -132,7 +124,7 @@ describe("/scenes", () => {
       Fari.waitContentEditable();
       Fari.get("scene.save").click();
       cy.contains("Saved");
-      cy.title().should("eq", "LOWER RING | Fari");
+      cy.title().should("eq", "Lower Ring | Fari");
 
       // test menu
       Fari.get("page.menu.scenes").click();

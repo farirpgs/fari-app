@@ -1,16 +1,16 @@
 import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
-import { SentryService } from "../sentry/SentryService";
+import { makeSentryService } from "../sentry/SentryService";
 
 const shouldConsole = env.isLocalHost && !env.isTest;
 
-export function makeLogger(sentryService: SentryService) {
+export function makeLogger(
+  sentryService: ReturnType<typeof makeSentryService>
+) {
   return {
     debug(message: string, context?: any) {
       sentryService.log(message, Severity.Debug, context);
-      if (shouldConsole) {
-        console.debug(message, context);
-      }
+      console.debug(message, context);
     },
     info(message: string, context?: any) {
       sentryService.log(message, Severity.Info, context);
@@ -21,17 +21,12 @@ export function makeLogger(sentryService: SentryService) {
     warn(message: string, context?: any) {
       sentryService.log(message, Severity.Warning, context);
       console.warn(message, context);
-      if (shouldConsole) {
-        console.warn(message, context);
-      }
     },
     error(message: string, context?: any) {
       sentryService.log(message, Severity.Error, context);
       console.error(message, context);
-      if (shouldConsole) {
-        console.error(message, context);
-      }
     },
+    setTag: sentryService.setTag,
   };
 }
 

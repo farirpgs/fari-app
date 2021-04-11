@@ -11,18 +11,18 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TableRow from "@material-ui/core/TableRow";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice } from "../../domains/dice/Dice";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
-import { EyeIcon } from "../../domains/Icons/Icons";
-import { formatDiceNumber } from "../../hooks/useFudgeDice/useFudgeDice";
+import { IDiceRollResult, RollType } from "../../domains/dice/Dice";
+import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { ITranslationKeys } from "../../locale";
 import { Oracle } from "./domains/Oracle";
 
 type IMatrixItem = {
@@ -59,10 +59,11 @@ export const OracleRoute = () => {
   const theme = useTheme();
   const logger = useLogger();
 
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
+  const diceManager = useContext(DiceContext);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const [likeliness, setLikeliness] = useState<number>(0);
   const [rolling, setRolling] = useState<boolean>(false);
-  const [finalRoll, setFinalRoll] = useState<IDiceRoll>();
+  const [finalRoll, setFinalRoll] = useState<IDiceRollResult>();
   const finalRollTotal = finalRoll?.total ?? 0;
   const finalResult = finalRollTotal + likeliness;
   const oracleValue = Oracle.getValue(finalResult);
@@ -70,11 +71,35 @@ export const OracleRoute = () => {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = Dice.roll4DF({});
+      const newRoll = diceManager.actions.roll(
+        [
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+          {
+            type: RollType.DiceCommand,
+            command: "1dF",
+          },
+        ],
+        { listResults: false }
+      );
       logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
       return [newRoll, ...draft];
     });
   }
+
+  useEffect(() => {
+    diceManager.actions.reset();
+  }, []);
 
   useEffect(() => {
     if (shouldDisplayFinalResult) {
@@ -89,19 +114,12 @@ export const OracleRoute = () => {
         title={t("oracle-route.meta.title")}
         description={t("oracle-route.meta.description")}
       />
-
       <Box>
-        <Box
-          py="1rem"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <EyeIcon className={css({ fontSize: "3rem" })} color="primary" />
-          <FateLabel variant="h4" align="center" color="primary">
-            {"Oracle"}
-          </FateLabel>
-        </Box>
+        <Heading
+          icon={Icons.EyeIcon}
+          title={t("oracle-route.meta.title")}
+          subtitle={t("oracle-route.meta.description")}
+        />
 
         <Box py="1rem">
           <DiceBox
@@ -109,7 +127,6 @@ export const OracleRoute = () => {
             size="5rem"
             fontSize="2rem"
             borderSize=".2rem"
-            borderColor="#000000"
             onClick={() => {
               roll();
             }}
@@ -150,9 +167,7 @@ export const OracleRoute = () => {
                   className={css({ width: "100%" })}
                 >
                   {shouldDisplayFinalResult
-                    ? t(
-                        `oracle.value.${oracleValue}` as IPossibleTranslationKeys
-                      )
+                    ? t(`oracle.value.${oracleValue}` as ITranslationKeys)
                     : " ..."}
                 </FateLabel>
               </Toolbar>
@@ -188,13 +203,15 @@ export const OracleRoute = () => {
                           }}
                         >
                           <FateLabel className={css({ fontWeight: "bold" })}>
-                            {l.label} ({formatDiceNumber(l.value)})
+                            {l.label} ({formatOracleDiceNumber(l.value)})
                           </FateLabel>
                         </TableCell>
 
                         {Rolls.map((r) => {
                           const cellValue = l.value + r.value;
-                          const formattedValue = formatDiceNumber(cellValue);
+                          const formattedValue = formatOracleDiceNumber(
+                            cellValue
+                          );
 
                           const isCurrentColumn = r.value === finalRollTotal;
 
@@ -275,7 +292,7 @@ export const OracleRoute = () => {
                           })}
                         >
                           <FateLabel align="center">
-                            {formatDiceNumber(r.value)}
+                            {formatOracleDiceNumber(r.value)}
                           </FateLabel>
                         </TableCell>
                       );
@@ -300,3 +317,11 @@ export const OracleRoute = () => {
 
 OracleRoute.displayName = "OracleRoute";
 export default OracleRoute;
+
+function formatOracleDiceNumber(total: number): string {
+  if (total > 0) {
+    return `+${total}`;
+  }
+
+  return total.toString();
+}

@@ -3388,7 +3388,7 @@ Here’s how.
 Take Only What You Need to Survive
 First of all, keep in mind that you’re never obligated to give any NPC a full sheet like the ones the PCs have. Most of the time, you’re not going to need to know that much information, because the NPCs aren’t going to be the center of attention like the PCs are. It’s better to focus on writing down exactly what you need for that NPC’s encounter with the PCs, and then fill in the blanks on the fly (just like PCs can) if that NPC ends up becoming more important in the campaign.
 
-### The NPC Types
+### The Npc Types
 
 NPCs come in three different flavors: nameless NPCs, supporting NPCs, and main NPCs.
 
@@ -3814,7 +3814,7 @@ If you’re in an ongoing campaign, you might need the first scenes of a session
 >
 > That doesn’t mean she’s going to just toss the scene with Zird aside—she’s just going to save it for a follow-up to the first scene.
 
-##### Powerful Session-Starting Ninja GM Trick
+##### Powerful Session Starting Ninja Gm Trick
 
 Asking the players to contribute something to the beginning of your first scene is a great way to help get them invested in what’s going on right off the bat. If there’s anything that’s flexible about your opening prompt, ask your players to fill in the blanks for you when you start the scene. Clever players may try to use it as an opportunity to push for a compel and get extra fate points right off the bat—we like to call this sort of play “awesome.”
 

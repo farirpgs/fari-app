@@ -1,16 +1,12 @@
-import produce from "immer";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { CharacterTemplates } from "../../domains/character/CharacterType";
+import { ICharacter } from "../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
-
-export enum CharacterType {
-  CoreCondensed = "CoreCondensed",
-  Accelerated = "Accelerated",
-  Custom = "Custom",
-}
 
 type IManagerCallback = (character: ICharacter) => void;
 
@@ -28,9 +24,10 @@ export function useCharacters(props?: { localStorage: Storage }) {
     // load from local storage
     try {
       const localStorageCharacters = localStorage.getItem(key);
+
       if (localStorageCharacters) {
-        const parsed = JSON.parse(localStorageCharacters);
-        const migrated = migrateCharacters(parsed);
+        const parsed = JSON.parse(localStorageCharacters) as Array<any>;
+        const migrated = parsed.map(CharacterFactory.migrate);
         return migrated;
       }
     } catch (error) {
@@ -72,14 +69,9 @@ export function useCharacters(props?: { localStorage: Storage }) {
     managerCallback.current = undefined;
   }
 
-  function add(type: CharacterType): ICharacter {
-    const defaultCharacter = defaultCharactersByType[type];
-    const newCharacter = {
-      ...defaultCharacter,
-      id: uuidV4(),
-      lastUpdated: getUnix(),
-      name: "",
-    } as ICharacter;
+  function add(type: CharacterTemplates): ICharacter {
+    const newCharacter = CharacterFactory.make(type);
+
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
     });
@@ -136,6 +128,26 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
+  function duplicate(id: string | undefined) {
+    setCharacters((draft: Array<ICharacter>) => {
+      const match = draft.find((s) => s.id === id);
+
+      return [
+        ...draft,
+        {
+          ...match,
+          id: Id.generate(),
+          lastUpdated: getUnix(),
+          name: `${match?.name} Copy`,
+        } as ICharacter,
+      ];
+    });
+  }
+
+  function isInStorage(id: string | undefined) {
+    return characters.some((c) => c.id === id);
+  }
+
   return {
     state: {
       mode,
@@ -150,229 +162,10 @@ export function useCharacters(props?: { localStorage: Storage }) {
       upsert,
       updateIfExists,
       remove,
+      duplicate,
+    },
+    selectors: {
+      isInStorage,
     },
   };
-}
-
-const defaultCondensedCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  aspects: [
-    { name: "High Concept", value: "" },
-    { name: "Trouble", value: "" },
-    { name: "Relationship", value: "" },
-    { name: "Other Aspect", value: "" },
-    { name: "Other Aspect", value: "" },
-  ],
-  stunts: [
-    { name: "Stunt #1", value: "" },
-    { name: "Stunt #2", value: "" },
-    { name: "Stunt #3", value: "" },
-  ],
-  skills: [
-    { name: "Academics", value: "" },
-    { name: "Athletics", value: "" },
-    { name: "Burglary", value: "" },
-    { name: "Contacts", value: "" },
-    { name: "Crafts", value: "" },
-    { name: "Deceive", value: "" },
-    { name: "Drive", value: "" },
-    { name: "Empathy", value: "" },
-    { name: "Fight", value: "" },
-    { name: "Investigate", value: "" },
-    { name: "Lore", value: "" },
-    { name: "Notice", value: "" },
-    { name: "Physique", value: "" },
-    { name: "Provoke", value: "" },
-    { name: "Rapport", value: "" },
-    { name: "Resources", value: "" },
-    { name: "Shoot", value: "" },
-    { name: "Stealth", value: "" },
-    { name: "Will", value: "" },
-  ],
-  stressTracks: [
-    {
-      name: "Physical",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-    {
-      name: "Mental",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [
-    { name: "Mild", value: "" },
-    { name: "Moderate", value: "" },
-    { name: "Severe", value: "" },
-  ],
-  refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
-
-const defaultAcceleratedCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  aspects: [
-    { name: "High Concept", value: "" },
-    { name: "Trouble", value: "" },
-    { name: "Relationship", value: "" },
-    { name: "Other Aspect", value: "" },
-    { name: "Other Aspect", value: "" },
-  ],
-  stunts: [
-    { name: "Stunt #1", value: "" },
-    { name: "Stunt #2", value: "" },
-    { name: "Stunt #3", value: "" },
-  ],
-  skills: [
-    { name: "Careful", value: "" },
-    { name: "Clever", value: "" },
-    { name: "Forceful", value: "" },
-    { name: "Flashy", value: "" },
-    { name: "Quick", value: "" },
-    { name: "Sneaky", value: "" },
-  ],
-  stressTracks: [
-    {
-      name: "Stress",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [
-    { name: "Mild", value: "" },
-    { name: "Moderate", value: "" },
-    { name: "Severe", value: "" },
-  ],
-  refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
-
-const defaultCustomCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  aspects: [{ name: "Aspect", value: "" }],
-  stunts: [{ name: "Stunt", value: "" }],
-  skills: [{ name: "Skill", value: "" }],
-  stressTracks: [
-    {
-      name: "Stress",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [{ name: "Consequence", value: "" }],
-  refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
-
-export const defaultCharactersByType = {
-  [CharacterType.CoreCondensed]: defaultCondensedCharacter,
-  [CharacterType.Accelerated]: defaultAcceleratedCharacter,
-  [CharacterType.Custom]: defaultCustomCharacter,
-} as const;
-
-export interface ICharacter {
-  id: string;
-  name: string;
-  aspects: ICharacterCustomField<string>;
-  skills: ICharacterCustomField<string>;
-  stunts: ICharacterCustomField<string>;
-  stressTracks: ICharacterCustomField<
-    Array<{ checked?: boolean; label: string }>
-  >;
-  consequences: ICharacterCustomField<string>;
-  aspectsLabel: string | undefined;
-  skillsLabel: string | undefined;
-  stuntsLabel: string | undefined;
-  stressTracksLabel: string | undefined;
-  consequencesLabel: string | undefined;
-  refreshLabel: string | undefined;
-  notesLabel: string | undefined;
-  notes: string | undefined;
-  group: string | undefined;
-  refresh: number;
-  // hidden
-  fatePoints: number | undefined;
-  playedDuringTurn: boolean | undefined;
-  version: number;
-  lastUpdated: number;
-}
-
-export type ICharacterCustomField<TValue> = Array<{
-  name: string;
-  value: TValue;
-}>;
-
-export function migrateCharacters(characters: Array<ICharacter>) {
-  return characters.map((c) => {
-    return migrateCharacter(c);
-  });
-}
-
-export function migrateCharacter(c: ICharacter) {
-  return produce(c, (draft) => {
-    if (draft.version === 1) {
-      // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
-      draft.stressTracks.forEach((s) => {
-        s.value = s.value.map((box, index) => {
-          return {
-            checked: (box as unknown) as boolean,
-            label: `${index + 1}`,
-          };
-        });
-      });
-      draft.version = 2;
-    }
-  });
 }

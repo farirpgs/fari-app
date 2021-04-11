@@ -1,10 +1,69 @@
 # Changelog
 
-Detailed technical changelog of Fari
+<page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
+
+## v4.0 New Character Sheet Framework, Data Mangagement
+
+- feat: new character sheet
+  - feat: new character sheet Text Block
+  - feat: new character sheet Numeric Block
+  - feat: new character sheet Skill Block
+  - feat: new character sheet Dice Pool Block
+  - feat: new character sheet Point Counter Block
+  - feat: new character sheet Slot Tracker Block
+  - feat: add support for pages (add, move, remove)
+  - feat: move sections (right, left, to page)
+  - feat: move blocks (drag and drop)
+  - feat: support for community driven templates
+  - feat: print mode
+- feat: new Data management page /data
+  - feat: export all
+  - feat: import all
+  - feat: import all and duplicate
+  - feat: filter by name, group, type
+  - feat: sort
+- feat: organize index cards with drag-and-drop
+- feat: enhanced player row to always display dice result
+- feat: Dice Pool route /dice-pool
+- feat: let anyone sync characters to their machine
+- feat: let GM add character sheets to players
+- fix: can click skill of other other player's character sheets
+- fix: add timeout when connecting to game + link to wiki about connection uissues
+- fix: keep scene group when reset-ing them.
+- feat: added Storybook to help with frontend development
+- feat: draw area moved to a new tab
+
+## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
+
+- feat: new Fari Wiki
+- feat: new Sucess with Style blog
+- feat: new image preview on content editable component
+- feat: new Dice Menu
+- feat: new Dice Floating Action Button in Scenes
+- feat: new Dice Floating Action Button in Character Sheet
+- feat: dynamic dice modifier on Index Cards
+- feat: new Doc "quote" style used for page-meta description
+- feat: Doc image alt text
+- feat: Doc sidebarOption for renaming default category
+- fix: highlight Doc "Misc" section if inside category
+- refac: default Index Card Track label from `...` to `Track`
+- fix: moving cursor when typing inside a content-editable component if content had an image
+
+## v3.6 Document SideBar + Table of Contents and support for more dice
+
+#### Feb 10th, 2021
+
+- feat: new doc sidebar
+- feat: new doc table of content
+- feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
+- feat: prettier dice result tooltip
+- feat: support for meta images in documents
+- fix: uniq groups in data export manager
+- fix: footer alignments
 
 ## v3.5 Resources, Private Aspects and Scene Notes
 
-#### January 19th, 2020
+#### January 19th, 2021
 
 - feat: SRDs Document
 - feat: Scene Checklist Document

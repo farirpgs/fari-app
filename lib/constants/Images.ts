@@ -1,4 +1,6 @@
 import appIcon from "url:../../images/blue/app.png";
+import discord from "url:../../images/services/discord.png";
+import lokalise from "url:../../images/services/lokalise.png";
 import patreon from "url:../../images/services/patreon.png";
 import accelerated from "url:../../images/srds/accelerated.jpg";
 import adversaryToolkit from "url:../../images/srds/adversary-toolkit.jpg";
@@ -16,6 +18,8 @@ import systemToolkit from "url:../../images/srds/system-toolkit.jpg";
 export const Images = {
   appIcon: appIcon as string,
   patreon: patreon as string,
+  discord: discord as string,
+  lokalise: lokalise as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,
   accelerated: accelerated as string,
@@ -28,4 +32,7 @@ export const Images = {
   scene: scene as string,
   dials: dials as string,
   cheatSheet: cheatSheet as string,
+
+  successWithStyle:
+    "https://live.staticflickr.com/778/22642415098_eb0d4cae7d_b.jpg",
 };

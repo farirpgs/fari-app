@@ -16,7 +16,7 @@ describe("/", () => {
       cy.contains("Commencer une partie en ligne");
       Fari.get("page.menu.dice").click();
 
-      cy.contains("Lancer");
+      cy.contains("Lancer des dés en ligne");
     });
   });
   describe("Given I want to check the privacy policy", () => {

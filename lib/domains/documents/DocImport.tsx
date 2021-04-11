@@ -29,8 +29,14 @@ export const DocImport = {
   Dials: () => {
     return import("url:../../../docs/dials.md");
   },
-  FateFaq: () => {
-    return import("url:../../../docs/fate-wiki.md");
+  SuccessWithStyle: () => {
+    return import("url:../../../docs/success-with-style.md");
+  },
+  FariWiki: () => {
+    return import("url:../../../docs/fari-wiki.md");
+  },
+  Blog: () => {
+    return import("url:../../../docs/blog.md");
   },
   Test: () => {
     return import("url:../../../docs/test.md");

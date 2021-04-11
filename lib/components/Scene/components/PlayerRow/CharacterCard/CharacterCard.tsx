@@ -7,17 +7,34 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersonIcon from "@material-ui/icons/Person";
-import truncate from "lodash/truncate";
 import React from "react";
-import { ICharacter } from "../../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
-import { arraySort } from "../../../../../domains/array/arraySort";
-import { IRollDiceOptions } from "../../../../../domains/dice/Dice";
+import {
+  BlockType,
+  IBlock,
+  ICharacter,
+  IDicePoolBlock,
+  INumericBlock,
+  IPointCounterBlock,
+  ISection,
+  ISkillBlock,
+  ISlotTrackerBlock,
+  ITextBlock,
+} from "../../../../../domains/character/types";
+import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import { ContentEditable } from "../../../../ContentEditable/ContentEditable";
+import {
+  BlockDicePool,
+  IDicePool,
+  IDicePoolElement,
+} from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
+import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
+import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
+import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
+import { Block } from "../../../../../routes/Character/components/CharacterDialog/domains/Block/Block";
+import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
 
@@ -25,34 +42,49 @@ export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
   playerName: string | undefined;
   readonly: boolean;
-  onCharacterDialogOpen(): void;
-  onRoll(options: IRollDiceOptions): void;
+  width?: string;
+  pool: IDicePool;
+  onCharacterDialogOpen?(): void;
+  onPoolClick(element: IDicePoolElement): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const isLGAndUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  const width = isLGAndUp ? "25%" : isMD ? "33%" : "100%";
 
-  const skillsWithValue =
-    props.characterSheet?.skills.filter((s) => {
-      return !!s.value;
-    }) ?? [];
-  const sortedSkills = arraySort(skillsWithValue, [
-    (skill) => {
-      const bonus = parseInt(skill.value) || 0;
-      return {
-        value: bonus,
-        direction: "desc",
-      };
-    },
-  ]);
-  const bestSkills = sortedSkills.slice(0, 6);
+  const width = props.width ?? "100%";
+
+  const sections = props.characterSheet?.pages.flatMap((p) => p.sections);
+  const visibleSections = sections?.filter((s) => s.visibleOnCard);
+
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const sheetHeaderClassName = css({
+    label: "SheetHeader-box",
+    // Hexagone
+    // https://bennettfeely.com/clippy/
+    clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+    background: headerBackgroundColors.primary,
+    color: headerColor,
+    width: "100%",
+    padding: ".5rem",
+    marginTop: "1rem",
+  });
 
   if (!props.characterSheet) {
     return null;
   }
+
+  const renderBlockByBlockType: Record<
+    keyof typeof BlockType,
+    (section: ISection, block: any, blockIndex: number) => JSX.Element
+  > = {
+    Text: renderBlockText,
+    Numeric: renderBlockNumeric,
+    Skill: renderBlockSkill,
+    DicePool: renderDicePool,
+    PointCounter: renderBlockPointCounter,
+    SlotTracker: renderBlockSlotTracker,
+  };
 
   return (
     <Box
@@ -78,120 +110,245 @@ export const CharacterCard: React.FC<{
             <Box>
               <Grid container alignItems="baseline" spacing={2} wrap="nowrap">
                 <Grid item xs zeroMinWidth>
-                  <FateLabel noWrap>
-                    {props.characterSheet?.name ||
-                      t("play-route.character-name")}
-                  </FateLabel>
+                  <FateLabel noWrap>{props.characterSheet?.name}</FateLabel>
                 </Grid>
-                <Grid item>
-                  <Tooltip title={t("player-row.open-character-sheet")}>
-                    <span>
-                      <IconButton
-                        size="small"
-                        data-cy="character-card.open-character-sheet"
-                        onClick={(e) => {
-                          props.onCharacterDialogOpen();
-                          logger.info("CharacterCard:onCharacterDialogOpen");
-                        }}
-                      >
-                        <PersonIcon
-                          className={css({ width: "1.5rem", height: "1.5rem" })}
-                        />
-                      </IconButton>
-                    </span>
-                  </Tooltip>
-                </Grid>
+                {props.onCharacterDialogOpen && (
+                  <Grid item>
+                    <Tooltip title={t("player-row.open-character-sheet")}>
+                      <span>
+                        <IconButton
+                          size="small"
+                          data-cy="character-card.open-character-sheet"
+                          onClick={(e) => {
+                            props.onCharacterDialogOpen?.();
+                            logger.info("CharacterCard:onCharacterDialogOpen");
+                          }}
+                        >
+                          <PersonIcon
+                            className={css({
+                              width: "1.5rem",
+                              height: "1.5rem",
+                            })}
+                          />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                )}
               </Grid>
               {props.playerName && (
                 <InputLabel shrink>{`(${props.playerName})`}</InputLabel>
               )}
             </Box>
           </Box>
-          {renderSkills()}
-          {renderAspects()}
+          <Box px="1rem" pb="1rem">
+            {visibleSections?.map((section, sectionIndex) => {
+              return (
+                <Box key={section.id} className={css({ clear: "both" })}>
+                  <Box className={sheetHeaderClassName}>
+                    <FateLabel noWrap>
+                      {previewContentEditable({ value: section.label })}
+                    </FateLabel>
+                  </Box>
+                  <Box px=".2rem">
+                    <Grid container>
+                      {section.blocks.map((block, blockIndex) => {
+                        return (
+                          <React.Fragment key={block.id}>
+                            {renderBlockByBlockType[block.type](
+                              section,
+                              block,
+                              blockIndex
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </Grid>
+                  </Box>
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
       </Paper>
     </Box>
   );
 
-  function renderSkills() {
-    if (bestSkills.length === 0) {
-      return null;
-    }
+  function renderBlockText(
+    section: ISection,
+    block: IBlock & ITextBlock,
+    blockIndex: number
+  ) {
     return (
-      <Box py=".5rem" px="1rem">
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <FateLabel>{"Skills:"}</FateLabel>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container spacing={1} alignItems="center">
-              {bestSkills.map((skill, skillIndex) => {
-                return (
-                  <Grid item key={skillIndex}>
-                    <Link
-                      className={css([
-                        {
-                          cursor: props.readonly ? "inherit" : "pointer",
-                        },
-                        props.readonly && {
-                          "color": theme.palette.text.primary,
-                          "&:hover": {
-                            textDecoration: "none",
-                          },
-                        },
-                      ])}
-                      data-cy={`character-card.skill.${skill.name}`}
-                      onClick={() => {
-                        if (props.readonly) {
-                          return;
-                        }
-                        const bonus = parseInt(skill.value) || 0;
-                        props.onRoll({
-                          bonus: bonus,
-                          bonusLabel: skill.name,
-                        });
-                      }}
-                    >
-                      {skill.name} ({skill.value})
-                    </Link>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockText
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
+      </Grid>
     );
   }
 
-  function renderAspects() {
+  function renderBlockNumeric(
+    section: ISection,
+    block: IBlock & INumericBlock,
+    blockIndex: number
+  ) {
     return (
-      <Box py="1rem" px="1rem">
-        {props.characterSheet?.aspects.map((aspect, aspectIndex) => {
-          const containsImage = aspect.value.includes("<img");
-          const value = containsImage
-            ? aspect.value
-            : truncate(aspect.value, { length: 50 });
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockNumeric
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
+      </Grid>
+    );
+  }
 
-          if (!aspect.value) {
-            return null;
-          }
+  function renderBlockSkill(
+    section: ISection,
+    block: IBlock & ISkillBlock,
+    blockIndex: number
+  ) {
+    const isSelected = props.pool.some((p) => p.blockId === block.id);
+    const blockValue = block.value || "0";
+    return (
+      <Grid
+        item
+        className={css({
+          flex: "0 1 auto",
+          marginTop: ".5rem",
 
-          return (
-            <Box key={aspectIndex} pb=".5rem">
-              <Box>
-                <FateLabel>{aspect.name}</FateLabel>
-              </Box>
-              <Box>
-                <Typography title={aspect.value}>
-                  <ContentEditable readonly={true} value={value} />
-                </Typography>
-              </Box>
-            </Box>
-          );
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
         })}
-      </Box>
+      >
+        <Link
+          className={css([
+            {
+              paddingRight: ".5rem",
+              fontSize: ".8rem",
+              cursor: props.readonly ? "inherit" : "pointer",
+              textTransform: "uppercase",
+              fontWeight: isSelected
+                ? theme.typography.fontWeightBold
+                : undefined,
+              color:
+                blockValue === "0" ? theme.palette.secondary.main : undefined,
+            },
+            props.readonly && {
+              "color": theme.palette.text.primary,
+              "&:hover": {
+                textDecoration: "none",
+              },
+            },
+          ])}
+          data-cy={`character-card.section.${section.label}.block.${block.label}`}
+          onClick={() => {
+            if (props.readonly) {
+              return;
+            }
+            const commandOptionList = Block.getCommandOptionList(block);
+            props.onPoolClick({
+              blockId: block.id,
+              blockType: block.type,
+              label: block.label,
+              commandOptionList: commandOptionList,
+            });
+          }}
+        >
+          {previewContentEditable({ value: block.label })} ({blockValue})
+        </Link>
+      </Grid>
+    );
+  }
+
+  function renderDicePool(
+    section: ISection,
+    block: IBlock & IDicePoolBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid item xs={12}>
+        <BlockDicePool
+          advanced={false}
+          readonly={props.readonly}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={0}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+          pool={props.pool}
+          onPoolClick={props.onPoolClick}
+        />
+      </Grid>
+    );
+  }
+  function renderBlockPointCounter(
+    section: ISection,
+    block: IBlock & IPointCounterBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockPointCounter
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
+      </Grid>
+    );
+  }
+  function renderBlockSlotTracker(
+    section: ISection,
+    block: IBlock & ISlotTrackerBlock,
+    blockIndex: number
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockSlotTracker
+          advanced={false}
+          readonly={true}
+          pageIndex={0}
+          sectionIndex={0}
+          section={section}
+          block={block}
+          blockIndex={blockIndex}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+          onAddBox={() => {}}
+          onRemoveBox={() => {}}
+          onToggleBox={(boxIndex) => {}}
+          onBoxLabelChange={(boxIndex, value) => {}}
+        />
+      </Grid>
     );
   }
 };

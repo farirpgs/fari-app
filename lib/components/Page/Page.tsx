@@ -11,9 +11,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -26,14 +28,16 @@ import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import { env } from "../../constants/env";
 import { Images } from "../../constants/Images";
+import { useZIndex } from "../../constants/zIndex";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
+import { ITranslationKeys } from "../../locale";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
-import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
+import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
@@ -41,7 +45,9 @@ import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
 let gameIdSingleton: string | undefined = undefined;
-const FariMaxWidth = "1920px";
+
+export const FariMaxWidth = "1920px";
+export const FariToolbarMaxWidth = "1280px";
 
 export enum LiveMode {
   Connecting,
@@ -51,16 +57,19 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  displayDonation?: boolean;
   live?: LiveMode;
   liveLabel?: string;
   drawerWidth?: string;
+  maxWidth?: string;
   pb?: string;
   debug?: Record<string, string>;
+  hideHeaderLogo?: boolean;
   disableAutomaticScrollTop?: boolean;
 }> = (props) => {
   const history = useHistory();
-  const { displayDonation = true } = props;
+  const theme = useTheme();
+
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -68,10 +77,12 @@ export const Page: React.FC<{
   const darkModeManager = useContext(DarkModeContext);
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
-  const theme = useTheme();
   const logger = useLogger();
+  const zIndex = useZIndex();
 
   const isLive = props.live !== undefined;
+  const highlight = useHighlight();
+
   useEffect(() => {
     if (props.gameId) {
       setGameId(props.gameId);
@@ -107,7 +118,9 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: props.drawerWidth ? undefined : FariMaxWidth,
+                  maxWidth: props.drawerWidth
+                    ? undefined
+                    : props.maxWidth ?? FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
                   marginTop: "2rem",
@@ -142,7 +155,11 @@ export const Page: React.FC<{
 
         <Container>
           {env.isLocalHost && props.debug && (
-            <pre>
+            <pre
+              className={css({
+                whiteSpace: "break-spaces",
+              })}
+            >
               {Object.keys(props.debug).map((label) => {
                 return (
                   <Box key={label}>
@@ -159,22 +176,24 @@ export const Page: React.FC<{
               alignItems="center"
               spacing={4}
             >
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <AppButtonLink
                   to="https://discord.gg/vMAJFjUraA"
                   target="_blank"
                   color="primary"
                   startIcon={<ChatIcon />}
                 >
-                  {"Come chat on Discord"}
+                  {t("home-route.sections.join-community.cta")}
                 </AppButtonLink>
               </Grid>
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Select
                   data-cy="page.languages"
                   value={currentLanguage}
                   onChange={(e) => {
-                    i18n.changeLanguage(e.target.value as string);
+                    const newLanguage = e.target.value as string;
+                    i18n.changeLanguage(newLanguage);
+                    logger.setTag("language", newLanguage);
                   }}
                 >
                   {Object.keys(i18n.options.resources!).map((language) => {
@@ -183,9 +202,7 @@ export const Page: React.FC<{
                     if (language !== "dev" || shouldRenderDev) {
                       return (
                         <MenuItem key={language} value={language}>
-                          {t(
-                            `common.language.${language}` as IPossibleTranslationKeys
-                          )}
+                          {t(`common.language.${language}` as ITranslationKeys)}
                         </MenuItem>
                       );
                     }
@@ -201,7 +218,7 @@ export const Page: React.FC<{
               spacing={4}
               alignItems="center"
             >
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Typography>
                   <Link
                     href="https://www.netlify.com"
@@ -212,7 +229,7 @@ export const Page: React.FC<{
                   </Link>
                 </Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Typography>
                   <AppLink
                     to="/changelog"
@@ -223,24 +240,22 @@ export const Page: React.FC<{
             </Grid>
           </Box>
 
-          {displayDonation && (
-            <Box py="1rem">
-              <Grid
-                container
-                justify="space-between"
-                spacing={4}
-                alignItems="center"
-              >
-                <Grid item sm>
-                  <Kofi />
-                </Grid>
-
-                <Grid item>
-                  <Patreon />
-                </Grid>
+          <Box py="1rem">
+            <Grid
+              container
+              justify="space-between"
+              spacing={4}
+              alignItems="center"
+            >
+              <Grid item xs={isSmall ? 12 : undefined}>
+                <Kofi />
               </Grid>
-            </Box>
-          )}
+
+              <Grid item>
+                <Patreon />
+              </Grid>
+            </Grid>
+          </Box>
 
           <Grid container justify="center">
             <Grid item xs>
@@ -279,6 +294,26 @@ export const Page: React.FC<{
                   Jeremy Keller.
                 </Typography>
               </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  Fari uses icons available at{" "}
+                  <Link
+                    href="http://game-icons.net"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    http://game-icons.net
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="https://icons8.com/icon/569/dice"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Icons8
+                  </Link>
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
           <Grid container>
@@ -301,10 +336,8 @@ export const Page: React.FC<{
   }
 
   function renderHeader() {
-    const background = isLive
-      ? theme.palette.primary.main
-      : theme.palette.background.paper;
-    const color = theme.palette.getContrastText(background);
+    const background = highlight.linearBackground;
+    const color = highlight.color;
     return (
       <Box
         displayPrint="none"
@@ -319,140 +352,116 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
-            zIndex: theme.zIndex.drawer + 1,
+            boxShadow: "none",
+            zIndex: zIndex.navBar,
           })}
         >
-          <Toolbar
-            className={css({
-              margin: "0 auto",
-              maxWidth: FariMaxWidth,
-              minHeight: "72px",
-              width: "100%",
-              padding: "1rem",
-            })}
-          >
-            <RouterLink
-              to="/"
-              data-cy="page.menu.home"
+          <Box className={css({ padding: ".5rem 2.5rem" })}>
+            <Toolbar
               className={css({
-                textDecoration: "none",
+                margin: "0 auto",
+                maxWidth: FariToolbarMaxWidth,
+                minHeight: "72px",
+                width: "100%",
+                padding: "0",
+                position: "relative",
+                zIndex: zIndex.navBar,
               })}
             >
-              <img
-                alt="Fari"
+              <RouterLink
+                to="/"
+                data-cy="page.menu.home"
                 className={css({
-                  height: "2.5rem",
-                  marginRight: "1rem",
-                  cursor: "pointer",
-                })}
-                src={Images.appIcon}
-              />
-            </RouterLink>
-
-            <Typography
-              variant="h6"
-              component="span"
-              className={css({
-                paddingRight: "1rem",
-                cursor: "pointer",
-                userSelect: "none",
-              })}
-            >
-              <div
-                className={css({
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  maxWidth: "25rem",
+                  textDecoration: "none",
                 })}
               >
-                <RouterLink
-                  to="/"
+                <img
+                  alt="Fari"
                   className={css({
-                    color: "inherit",
-                    textDecoration: "none",
+                    height: "2.5rem",
+                    marginRight: "1rem",
+                    cursor: "pointer",
+                    display: props.hideHeaderLogo ? "none" : "inherit",
                   })}
-                >
-                  Fari
-                </RouterLink>
-              </div>
-            </Typography>
-            {isLive && (
-              <Box px=".25rem">
-                <Grid container alignItems="center" spacing={1} wrap="nowrap">
-                  <Grid item>
-                    {props.live === LiveMode.Connecting && (
-                      <SignalWifi0BarIcon />
-                    )}
-                    {props.live === LiveMode.Live && (
-                      <SignalWifi4BarLockIcon
-                        className={css({
-                          // color: theme.palette.primary,
-                        })}
-                      />
-                    )}
+                  src={Images.appIcon}
+                />
+              </RouterLink>
+              {isLive && (
+                <Box pr="1.25rem">
+                  <Grid container alignItems="center" spacing={3} wrap="nowrap">
+                    <Grid item>
+                      {props.live === LiveMode.Connecting && (
+                        <SignalWifi0BarIcon />
+                      )}
+                      {props.live === LiveMode.Live && (
+                        <SignalWifi4BarLockIcon />
+                      )}
+                    </Grid>
+                    <Grid item>
+                      <Box maxWidth="150px">
+                        <Typography variant="subtitle1" noWrap>
+                          {previewContentEditable({ value: props.liveLabel })}
+                        </Typography>
+                      </Box>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Box maxWidth="150px">
-                      <Typography variant="subtitle1" noWrap>
-                        {sanitizeContentEditable(props.liveLabel)}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            )}
-            <Hidden smDown>{renderMenu(false)}</Hidden>
-            <Hidden mdUp>
-              {!isLive && (
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    setMenuOpen(true);
-                  }}
-                >
-                  <MenuIcon color="inherit" />
-                </IconButton>
-              )}
-            </Hidden>
-            <Drawer
-              anchor="bottom"
-              open={menuOpen}
-              onClose={() => {
-                setMenuOpen(false);
-              }}
-            >
-              <Box p="2rem">{renderMenu(true)}</Box>
-            </Drawer>
-            <Typography
-              className={css({
-                flex: "1 1 auto",
-              })}
-            />
-            <Hidden smDown>
-              {displayDonation && !shouldDisplayRejoinButton && (
-                <Box width="250px">
-                  <Patreon />
                 </Box>
               )}
-            </Hidden>
-            {shouldDisplayRejoinButton && (
-              <Button
-                color="secondary"
-                onClick={() => {
-                  history.push(`/play/${gameId}`);
+              <Hidden smDown>{renderMenu(false)}</Hidden>
+              <Hidden mdUp>
+                {!isLive && (
+                  <IconButton
+                    color="inherit"
+                    className={css({ padding: "0" })}
+                    onClick={() => {
+                      setMenuOpen(true);
+                    }}
+                  >
+                    <MenuIcon color="inherit" />
+                  </IconButton>
+                )}
+              </Hidden>
+              <Drawer
+                anchor="bottom"
+                open={menuOpen}
+                onClose={() => {
+                  setMenuOpen(false);
                 }}
-                variant={"outlined"}
-                className={css({
-                  minWidth: "10rem",
-                })}
               >
-                <Typography variant="button" noWrap>
-                  Rejoin&nbsp;Game
-                </Typography>
-              </Button>
-            )}
-          </Toolbar>
+                <Box p="2rem">{renderMenu(true)}</Box>
+              </Drawer>
+              <Typography
+                className={css({
+                  flex: "1 1 auto",
+                })}
+              />
+              <Hidden smDown>
+                {!shouldDisplayRejoinButton && (
+                  <Box width="250px">
+                    <Patreon />
+                  </Box>
+                )}
+              </Hidden>
+              {shouldDisplayRejoinButton && (
+                <ThemeProvider theme={highlight.highlightTheme}>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      history.push(`/play/${gameId}`);
+                    }}
+                    variant={"outlined"}
+                    className={css({
+                      minWidth: "10rem",
+                    })}
+                  >
+                    <Typography variant="button" noWrap>
+                      Rejoin&nbsp;Game
+                    </Typography>
+                  </Button>
+                </ThemeProvider>
+              )}
+            </Toolbar>
+          </Box>{" "}
         </AppBar>
       </Box>
     );
@@ -463,81 +472,82 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
+    const linkClassName = css({
+      "color": "inherit",
+      "fontWeight": theme.typography.fontWeightMedium,
+      "fontSize": "1rem",
+      "&:hover": {
+        color: highlight.hover,
+      },
+    });
     return (
-      <Grid container spacing={1} justify={mobile ? "center" : undefined}>
+      <Grid
+        container
+        spacing={3}
+        justify={mobile ? "center" : undefined}
+        alignItems="center"
+      >
         {!isLive && (
           <>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={linkClassName}
                 to="/"
                 data-cy="page.menu.play"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.play")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={linkClassName}
                 data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
                 }}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.scenes")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={linkClassName}
                 data-cy="page.menu.characters"
                 onClick={() => {
                   charactersManager.actions.openManager(ManagerMode.Manage);
                 }}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.characters")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                to="/srds"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {"SRDs"}
-              </Button>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
+              <AppLink
+                className={linkClassName}
                 to="/dice"
                 data-cy="page.menu.dice"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
                 {t("menu.dice")}
-              </Button>
+              </AppLink>
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                to="/about"
+              <AppLink
+                className={linkClassName}
+                to="/srds"
                 component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
-                {t("menu.about")}
-              </Button>
+                {t("menu.srds")}
+              </AppLink>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <AppLink
+                className={linkClassName}
+                to="/blog"
+                component={RouterLink}
+              >
+                {t("home-route.cards.blog.title")}
+              </AppLink>
             </Grid>
           </>
         )}
@@ -549,9 +559,6 @@ export const Page: React.FC<{
             target="_blank"
             rel="noreferrer"
             size="small"
-            className={css({
-              padding: "6px 8px",
-            })}
           >
             <GitHubIcon />
           </IconButton>
@@ -561,9 +568,6 @@ export const Page: React.FC<{
             data-cy="page.toggle-dark-mode"
             color="inherit"
             size="small"
-            className={css({
-              padding: "6px 8px",
-            })}
             onClick={() => {
               darkModeManager.actions.setDarkMode(
                 !darkModeManager.state.darkMode
