@@ -4,11 +4,11 @@ import { useHistory } from "react-router";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -65,7 +65,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
         const sceneWithNewId = produce(s, (draft) => {
           draft.id = Id.generate();
         });
-        const migratedScene = migrateScene(sceneWithNewId);
+        const migratedScene = SceneFactory.migrate(sceneWithNewId);
         scenesManager.actions.upsert(migratedScene);
       },
     });

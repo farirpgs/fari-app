@@ -14,13 +14,13 @@ import {
 import { Enum } from "../lib/domains/enum/Enum";
 import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
 import { AspectType } from "../lib/hooks/useScene/AspectType";
-import { IAspect } from "../lib/hooks/useScene/IScene";
+import { IAspectV1 } from "../lib/hooks/useScene/IScene";
 import { useScene } from "../lib/hooks/useScene/useScene";
 import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookIndexCard(props: {
-  aspect: IAspect;
+  aspect: IAspectV1;
   readonly: boolean;
   showClickableSkills: boolean;
   pinned: boolean;
@@ -42,7 +42,7 @@ function StorybookIndexCard(props: {
             playedDuringTurn: props.playedDuringTurn,
             pinned: props.pinned,
             type: AspectType[props.type as any] as any,
-          } as IAspect,
+          } as IAspectV1,
         },
       } as any,
     } as any,
@@ -239,7 +239,7 @@ OutOfBound.args = {
   }),
 };
 
-function anAspect(override: Partial<IAspect> = {}): IAspect {
+function anAspect(override: Partial<IAspectV1> = {}): IAspectV1 {
   return {
     title: "",
     content: "<br/>",

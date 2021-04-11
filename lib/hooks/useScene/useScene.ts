@@ -7,7 +7,6 @@ import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
-  defaultSceneAspects,
   defaultSceneName,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
@@ -24,7 +23,7 @@ import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { AspectType } from "./AspectType";
-import { IAspect, IPlayer, IScene } from "./IScene";
+import { IAspectV1, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
@@ -56,7 +55,7 @@ export function useScene(props: IProps) {
       id: scene.id,
       name: scene.name,
       group: scene.group,
-      aspects: scene.aspects,
+      indexCards: scene.indexCards,
       notes: scene.notes,
       lastUpdated: scene.lastUpdated,
       version: scene.version,
@@ -72,7 +71,7 @@ export function useScene(props: IProps) {
           draft.id = sceneToLoad.id;
           draft.name = sceneToLoad.name;
           draft.group = sceneToLoad.group;
-          draft.aspects = sceneToLoad.aspects;
+          draft.indexCards = sceneToLoad.indexCards;
           draft.notes = sceneToLoad.notes;
           draft.version = sceneToLoad.version;
           draft.lastUpdated = sceneToLoad.lastUpdated;
@@ -134,19 +133,16 @@ export function useScene(props: IProps) {
 
   function loadScene(newScene: ISavableScene, keepPinned: boolean) {
     if (newScene) {
-      const pinnedAspects = getPinnedAspects(scene);
-      const aspects = keepPinned
-        ? {
-            ...pinnedAspects,
-            ...newScene.aspects,
-          }
-        : newScene.aspects;
+      const pinnedIndexCards = getPinnedIndexCards(scene);
+      const indexCards = keepPinned
+        ? [...pinnedIndexCards, ...newScene.indexCards]
+        : newScene.indexCards;
 
       setSceneToLoad({
         id: newScene.id,
         name: newScene.name,
         group: newScene.group,
-        aspects: aspects,
+        indexCards: indexCards,
         notes: newScene.notes,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
@@ -177,11 +173,11 @@ export function useScene(props: IProps) {
   function resetScene() {
     setScene(
       produce((draft: IScene) => {
-        const pinnedAspects = getPinnedAspects(draft);
+        const pinnedIndexCards = getPinnedIndexCards(draft);
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
         draft.id = Id.generate();
-        draft.aspects = { ...pinnedAspects, ...defaultSceneAspects };
+        draft.indexCards = pinnedIndexCards;
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
@@ -210,7 +206,11 @@ export function useScene(props: IProps) {
     const id = Id.generate();
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id] = { ...defaultAspects[type], isPrivate: isPrivate };
+        draft.indexCards.push({
+          id: id,
+          ...defaultAspects[type],
+          isPrivate: isPrivate,
+        });
       })
     );
     setTimeout(() => {
@@ -248,7 +248,7 @@ export function useScene(props: IProps) {
         const dragKey = Object.keys(draft.aspects)[dragIndex];
 
         draft.aspects = Object.keys(draft.aspects).reduce<
-          Record<string, IAspect>
+          Record<string, IAspectV1>
         >((acc, currentAspectId, index) => {
           if (index === dragIndex) {
             return { ...acc };
@@ -785,85 +785,8 @@ export function useScene(props: IProps) {
   };
 }
 
-const defaultAspect: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "white",
-  type: AspectType.Aspect,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultIndexCard: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "white",
-  type: AspectType.IndexCard,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultBoost: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [{ name: "Free Invoke", value: [{ label: "1", checked: false }] }],
-  consequences: [],
-  color: "blue",
-  type: AspectType.Boost,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultNPC: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "green",
-  type: AspectType.NPC,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultBadGuy: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "red",
-  type: AspectType.BadGuy,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultAspects: Record<AspectType, IAspect> = {
-  [AspectType.Aspect]: defaultAspect,
-  [AspectType.Boost]: defaultBoost,
-  [AspectType.NPC]: defaultNPC,
-  [AspectType.BadGuy]: defaultBadGuy,
-  [AspectType.IndexCard]: defaultIndexCard,
-};
-
-function getPinnedAspects(scene: IScene) {
-  return Object.keys(scene.aspects).reduce((prev, curr) => {
-    const aspect = scene.aspects[curr];
-    if (aspect.pinned) {
-      return {
-        ...prev,
-        [curr]: aspect,
-      };
-    }
-    return prev;
-  }, {} as Record<string, IAspect>);
+function getPinnedIndexCards(scene: IScene) {
+  return scene.indexCards.filter((i) => i.pinned);
 }
 
 export function sanitizeSceneName(sceneName: string) {

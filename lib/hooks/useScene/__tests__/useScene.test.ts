@@ -9,7 +9,7 @@ import { useCharacters } from "../../../contexts/CharactersContext/CharactersCon
 import { defaultSceneName } from "../../../contexts/SceneContext/ScenesContext";
 import { RollType } from "../../../domains/dice/Dice";
 import { AspectType } from "../AspectType";
-import { IScene } from "../IScene";
+import { ISceneV2 } from "../IScene";
 import { useScene } from "../useScene";
 
 describe("useScene", () => {
@@ -19,7 +19,7 @@ describe("useScene", () => {
     const gameId = undefined;
     const useCharactersMock = mockUseCharacters();
 
-    const expectDefaultScene: IScene = {
+    const expectDefaultScene: ISceneV2 = {
       id: expect.anything(),
       name: defaultSceneName,
       group: undefined,

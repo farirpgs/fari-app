@@ -742,39 +742,23 @@ export const Scene: React.FC<IProps> = (props) => {
   }
 
   function renderAspects() {
-    const aspectIdsToShow = Object.keys(
-      sceneManager.state.scene.aspects
-    ).filter((id) => {
-      const aspect = sceneManager.state.scene.aspects[id];
-
-      if (tab === "private") {
-        return aspect.isPrivate;
-      } else {
-        return !aspect.isPrivate;
+    const indexCardsToShow = sceneManager.state.scene.indexCards.filter(
+      (indexCard) => {
+        if (tab === "private") {
+          return indexCard.isPrivate;
+        } else {
+          return !indexCard.isPrivate;
+        }
       }
-    });
+    );
 
-    const hasAspects = aspectIdsToShow.length > 0;
-
-    const sortedAspectIds = arraySort(aspectIdsToShow, [
-      function sortByPinned(id) {
-        const aspect = sceneManager.state.scene.aspects[id];
-        return { value: aspect.pinned, direction: "asc" };
-      },
-      function sortByType(id) {
-        const aspect = sceneManager.state.scene.aspects[id];
-        return { value: aspect.type, direction: "asc" };
-      },
-    ]);
-    const aspectsToRender = sceneManager.state.scene.sort
-      ? sortedAspectIds
-      : aspectIdsToShow;
+    const hasIndexCards = indexCardsToShow.length > 0;
 
     return (
       <Box>
         <Box>{renderGMAspectActions()}</Box>
 
-        {hasAspects && (
+        {hasIndexCards && (
           <Box
             className={css({
               label: "Scene-aspect-masonry-content",
@@ -783,10 +767,10 @@ export const Scene: React.FC<IProps> = (props) => {
               columnGap: "1rem",
             })}
           >
-            {aspectsToRender.map((aspectId, index) => {
+            {indexCardsToShow.map((indexCard, index) => {
               return (
                 <Box
-                  key={aspectId}
+                  key={indexCard.id}
                   className={css({
                     label: "Scene-aspect-masonry-card",
                     width: "100%",
@@ -796,13 +780,12 @@ export const Scene: React.FC<IProps> = (props) => {
                 >
                   <IndexCard
                     index={index}
-                    key={aspectId}
+                    key={indexCard.id}
                     data-cy={`scene.aspect.${index}`}
-                    id={`index-card-${aspectId}`}
-                    aspectId={aspectId}
+                    id={`index-card-${indexCard.id}`}
                     readonly={!isGM}
                     showClickableSkills={props.mode !== SceneMode.Manage}
-                    sceneManager={sceneManager}
+                    indexCard={indexCard}
                     onRoll={(label, modifier) => {
                       const options: Array<IDiceCommandOption> = [
                         ...DefaultDiceCommandOptions,
@@ -826,7 +809,7 @@ export const Scene: React.FC<IProps> = (props) => {
             })}
           </Box>
         )}
-        {!hasAspects && (
+        {!hasIndexCards && (
           <Box py="6rem" textAlign="center">
             <Typography
               variant="h6"

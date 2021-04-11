@@ -22,7 +22,6 @@ import { SplitButton } from "../../components/SplitButton/SplitButton";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import {
   ISavableScene,
-  migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
@@ -30,6 +29,7 @@ import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -204,7 +204,7 @@ export const DataRoute: React.FC = (props) => {
         : produce(scene, (draft) => {
             draft.id = Id.generate();
           });
-    const migratedScene = migrateScene(sceneToUse);
+    const migratedScene = SceneFactory.migrate(sceneToUse);
     scenesManager.actions.upsert(migratedScene);
   }
 

@@ -1,15 +1,15 @@
-import produce from "immer";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { Id } from "../../domains/Id/Id";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 
 export type ISavableScene = Pick<
   IScene,
-  "id" | "name" | "aspects" | "version" | "lastUpdated" | "group" | "notes"
+  "id" | "name" | "indexCards" | "version" | "lastUpdated" | "group" | "notes"
 >;
 
 type IManagerCallback = (scene: ISavableScene) => void | undefined;
@@ -30,7 +30,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       const localStorageScenes = localStorage.getItem(key);
       if (localStorageScenes) {
         const parsed = JSON.parse(localStorageScenes);
-        const migrated = migrateScenes(parsed);
+        const migrated = parsed.map(SceneFactory.migrate);
         return migrated;
       }
     } catch (error) {
@@ -90,7 +90,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       id: scene.id,
       name: scene.name,
       group: scene.group,
-      aspects: scene.aspects,
+      indexCards: scene.indexCards,
       version: scene.version,
       notes: scene.notes,
       lastUpdated: getUnix(),
@@ -157,29 +157,11 @@ function makeDefaultSavableScene(): ISavableScene {
     id: Id.generate(),
     name: defaultSceneName,
     group: undefined,
-    aspects: defaultSceneAspects,
+    indexCards: [],
     version: defaultSceneVersion,
     lastUpdated: getUnix(),
   };
 }
 
-export function migrateScenes(scenes: Array<ISavableScene>) {
-  return scenes.map((s) => {
-    return migrateScene(s);
-  });
-}
-
-export function migrateScene(scene: ISavableScene) {
-  try {
-    return produce(scene, (draft) => {
-      // todo...
-    });
-  } catch (error) {
-    console.error(error);
-    return scene;
-  }
-}
-
 export const defaultSceneName = "";
-export const defaultSceneAspects = {};
 export const defaultSceneVersion = 1;
