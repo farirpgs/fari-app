@@ -38,12 +38,16 @@
 - fix: seelie squire consequence
 - fix: index card double modifier
 
-- feat: default character now is "blank" and it now displays "load template" button in the middle of the page
-- feat: show load template even in character dialog
-- fix: non sticky dice fab commands
-- fix: display has-played tooltip on index cards @tjbearse
-- fix: changed position of dice fab to help stream Fari on Twitch
-- fix: text box toggle disappearing if label if empty and advanced mode is turned off
+- feat: The default character sheet template is now `Blank`
+  - But now the character sheets displays the `Load Template` option directly inside the character sheet even if the advanced mode is turned off
+- feat: Display the `Load Template` toggle in advanced mode even if the character sheet is loaded in a dialog (e.g. inside a game)
+- feat/refac: Dice commands are now `sticky` which means that the latest roll that you have done, where ever it was rolled, is going to be saved so that you can re-roll it easily.
+  - The latest roll commands are now displayed correctly when you open the dice menu (the little badge numbers displayed in the top right corner of each die icon)
+- fix: Display the `has played` tooltip on index cards initiative tracker. Thanks @tjbearse for this fix.
+- fix: Changed the position of the floating dice box at the bottom right corner instead of bottom left to help Fari be more "Twitch friendly"
+- fix: Disappearing Toggles when a Text block label is empty and the advanced mode is turned off. Thanks @sleighr for the bug report.
+- fix: Non-draggable blocks if two sections have the same name. Thanks @sleighr for the bug report.
+- fix: When rolling a character sheet skill has a GM, it was always the GM that was associated with the dice roll. Thanks @JFRobillard for the bug report.
 
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
