@@ -42,6 +42,8 @@
 - feat: show load template even in character dialog
 - fix: non sticky dice fab commands
 - fix: display has-played tooltip on index cards @tjbearse
+- fix: changed position of dice fab to help stream Fari on Twitch
+- fix: text box toggle disappearing if label if empty and advanced mode is turned off
 
 ## v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
