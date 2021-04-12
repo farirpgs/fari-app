@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { IMarkdownIndexes, Markdown } from "../domains/Markdown";
@@ -22,7 +21,7 @@ export function useMarkdownFile(props: {
     async function load() {
       if (props.loadFunction) {
         try {
-          const markdown = await (await axios.get(props.loadFunction)).data;
+          const markdown = await props.loadFunction();
           debugger;
           if (markdown) {
             const { dom, markdownIndexes } = Markdown.process({
