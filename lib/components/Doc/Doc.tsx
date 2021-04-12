@@ -287,7 +287,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   })}
                 />
               )}
-              <Container maxWidth={("lg" || props.maxWidth) ?? "md"}>
+              <Container maxWidth={props.maxWidth ?? "md"}>
                 {renderAuthor()}
                 {props.children && <Box>{props.children}</Box>}
                 <Box>
