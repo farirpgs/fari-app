@@ -51,6 +51,7 @@
 - fix: Non-draggable blocks if two sections have the same name. Thanks @sleighr for the bug report.
 - fix: When rolling a character sheet skill has a GM, it was always the GM that was associated with the dice roll. Thanks @JFRobillard for the bug report.
 - feat: Let the ability to both GMs and Players to either Assign the original version of a character sheet or assign e duplicate version.
+- feat: better spanish translations by @1d12monos
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
