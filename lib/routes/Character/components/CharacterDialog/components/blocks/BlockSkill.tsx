@@ -76,7 +76,7 @@ export function BlockSkill(
           {!props.block.meta.hideModifier && (
             <Grid item>
               <CircleTextField
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+                data-cy={`${props.dataCy}.value`}
                 value={state}
                 readonly={props.readonly}
                 onChange={(newState) => {
@@ -88,7 +88,7 @@ export function BlockSkill(
           <Grid item xs>
             <FateLabel className={css({ display: "inline-block" })}>
               <ContentEditable
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                data-cy={`${props.dataCy}.label`}
                 readonly={!props.advanced}
                 border={props.advanced}
                 value={props.block.label}
@@ -103,11 +103,8 @@ export function BlockSkill(
             <Grid item>
               <BlockToggleMeta
                 readonly={props.readonly}
-                pageIndex={props.pageIndex}
-                sectionIndex={props.sectionIndex}
-                section={props.section}
+                dataCy={props.dataCy}
                 block={props.block}
-                blockIndex={props.blockIndex}
                 onMetaChange={props.onMetaChange}
               />
             </Grid>

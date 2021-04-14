@@ -1,9 +1,19 @@
 import {
+  IndexCardColor,
+  IndexCardColorTypes,
+} from "../../components/IndexCard/IndexCardColor";
+import {
   defaultSceneName,
   defaultSceneVersion,
+  ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
 import { AspectType } from "../../hooks/useScene/AspectType";
-import { IIndexCard, IScene, ISceneV1 } from "../../hooks/useScene/IScene";
+import {
+  IAspectV1,
+  IIndexCard,
+  IScene,
+  ISceneV1,
+} from "../../hooks/useScene/IScene";
 import { BlockType, IBlock } from "../character/types";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
@@ -14,7 +24,10 @@ export const SceneFactory = {
       id: Id.generate(),
       name: defaultSceneName,
       group: undefined,
-      indexCards: [],
+      indexCards: {
+        public: [],
+        private: [],
+      },
       gm: {
         id: gmId,
         playerName: "Game Master",
@@ -33,66 +46,52 @@ export const SceneFactory = {
       lastUpdated: getUnix(),
     };
   },
-  makeIndexCard(type: AspectType, isPrivate: boolean): IIndexCard {
-    const indexCardDefault: Record<AspectType, IIndexCard> = {
-      [AspectType.Aspect]: {
-        id: Id.generate(),
-        title: "",
-        content: "<br/>",
-        color: "white",
-        type: AspectType.Aspect,
-        playedDuringTurn: false,
-        pinned: false,
-        blocks: [],
-        subCards: [],
+  makeSavableScene(): ISavableScene {
+    return {
+      id: Id.generate(),
+      name: defaultSceneName,
+      group: undefined,
+      indexCards: {
+        public: [],
+        private: [],
       },
-      [AspectType.Boost]: {
-        id: Id.generate(),
-        title: "",
-        content: "<br/>",
-        color: "blue",
-        type: AspectType.Boost,
-        playedDuringTurn: false,
-        pinned: false,
-        blocks: [],
-        subCards: [],
-      },
-      [AspectType.BadGuy]: {
-        id: Id.generate(),
-        title: "",
-        content: "<br/>",
-        color: "red",
-        type: AspectType.BadGuy,
-        playedDuringTurn: false,
-        pinned: false,
-        blocks: [],
-        subCards: [],
-      },
-      [AspectType.NPC]: {
-        id: Id.generate(),
-        title: "",
-        content: "<br/>",
-        color: "green",
-        type: AspectType.NPC,
-        playedDuringTurn: false,
-        pinned: false,
-        blocks: [],
-        subCards: [],
-      },
-      [AspectType.IndexCard]: {
-        id: Id.generate(),
-        title: "",
-        content: "<br/>",
-        color: "white",
-        type: AspectType.IndexCard,
-        playedDuringTurn: false,
-        pinned: false,
-        blocks: [],
-        subCards: [],
-      },
+      version: defaultSceneVersion,
+      lastUpdated: getUnix(),
     };
-
-    return indexCardDefault[type];
+  },
+  makeIndexCard(): IIndexCard {
+    return {
+      id: Id.generate(),
+      header: "",
+      title: "",
+      content: "",
+      color: "#fff",
+      playedDuringTurn: false,
+      pinned: false,
+      blocks: [],
+      subCards: [],
+      sub: false,
+    };
+  },
+  makeSubIndexCard(): IIndexCard {
+    return {
+      id: Id.generate(),
+      header: "",
+      title: "",
+      content: "",
+      color: "#fff",
+      playedDuringTurn: false,
+      pinned: false,
+      blocks: [],
+      subCards: [],
+      sub: true,
+    };
+  },
+  duplicateIndexCard(indexCard: IIndexCard): IIndexCard {
+    return {
+      ...indexCard,
+      id: Id.generate(),
+    };
   },
   migrate(s: any): IScene {
     try {
@@ -110,50 +109,28 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
     return (v1 as unknown) as IScene;
   }
 
+  const publicIndexCards: Array<IIndexCard> = [];
+  const privateIndexCards: Array<IIndexCard> = [];
+
+  for (const [aspectId, aspect] of Object.entries(v1.aspects)) {
+    const indexCard = aspectToIndexCard(aspect, aspectId);
+
+    if (aspect.isPrivate) {
+      privateIndexCards.push(indexCard);
+    } else {
+      publicIndexCards.push(indexCard);
+    }
+  }
+
   return {
     version: 2,
     id: v1.id,
     name: v1.name,
     group: v1.group,
-    indexCards: Object.keys(v1.aspects).map(
-      (aspectId): IIndexCard => {
-        const aspect = v1.aspects[aspectId];
-        const blocks: Array<IBlock> = [];
-
-        for (const track of aspect.tracks) {
-          blocks.push({
-            id: Id.generate(),
-            type: BlockType.SlotTracker,
-            label: track.name,
-            value: track.value,
-            meta: {},
-          });
-        }
-
-        for (const track of aspect.consequences) {
-          blocks.push({
-            id: Id.generate(),
-            type: BlockType.Text,
-            label: track.name,
-            value: track.value,
-            meta: {},
-          });
-        }
-
-        return {
-          id: aspectId,
-          title: aspect.title,
-          content: aspect.content,
-          color: aspect.color,
-          playedDuringTurn: aspect.playedDuringTurn,
-          type: aspect.type,
-          pinned: aspect.pinned,
-          isPrivate: aspect.isPrivate,
-          blocks: blocks,
-          subCards: [],
-        };
-      }
-    ),
+    indexCards: {
+      public: publicIndexCards,
+      private: privateIndexCards,
+    },
     gm: v1.gm,
     players: v1.players,
     goodConfetti: v1.goodConfetti,
@@ -162,5 +139,57 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
     drawAreaObjects: v1.drawAreaObjects,
     lastUpdated: v1.lastUpdated,
     notes: v1.notes,
+  };
+}
+
+function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
+  const blocks: Array<IBlock> = [];
+
+  for (const track of aspect.tracks) {
+    blocks.push({
+      id: Id.generate(),
+      type: BlockType.SlotTracker,
+      label: track.name,
+      value: track.value,
+      meta: {},
+    });
+  }
+
+  for (const track of aspect.consequences) {
+    blocks.push({
+      id: Id.generate(),
+      type: BlockType.Text,
+      label: track.name,
+      value: track.value,
+      meta: {},
+    });
+  }
+
+  const headerRecord: Record<AspectType, string> = {
+    [AspectType.Aspect]: "Aspect",
+    [AspectType.Boost]: "Aspect",
+    [AspectType.BadGuy]: "Aspect",
+    [AspectType.NPC]: "Aspect",
+    [AspectType.IndexCard]: "",
+  };
+  const colorRecord: Record<IndexCardColorTypes, string> = {
+    white: IndexCardColor.white.light,
+    blue: IndexCardColor.blue.light,
+    green: IndexCardColor.green.light,
+    red: IndexCardColor.red.light,
+    yellow: IndexCardColor.yellow.light,
+  };
+
+  return {
+    id: aspectId,
+    header: headerRecord[aspect.type],
+    title: aspect.title,
+    content: aspect.content,
+    color: colorRecord[aspect.color],
+    playedDuringTurn: aspect.playedDuringTurn,
+    pinned: aspect.pinned,
+    blocks: blocks,
+    subCards: [],
+    sub: false,
   };
 }

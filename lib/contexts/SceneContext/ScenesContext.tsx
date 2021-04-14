@@ -73,7 +73,7 @@ export function useScenes(props?: { localStorage: Storage }) {
   }
 
   function add() {
-    const newScene: ISavableScene = makeDefaultSavableScene();
+    const newScene: ISavableScene = SceneFactory.makeSavableScene();
     setScenes((draft: Array<ISavableScene>) => {
       return [newScene, ...draft];
     });
@@ -152,16 +152,5 @@ export function useScenes(props?: { localStorage: Storage }) {
   };
 }
 
-function makeDefaultSavableScene(): ISavableScene {
-  return {
-    id: Id.generate(),
-    name: defaultSceneName,
-    group: undefined,
-    indexCards: [],
-    version: defaultSceneVersion,
-    lastUpdated: getUnix(),
-  };
-}
-
 export const defaultSceneName = "";
-export const defaultSceneVersion = 1;
+export const defaultSceneVersion = 2;

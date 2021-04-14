@@ -6,7 +6,6 @@ import React from "react";
 import {
   IBlock,
   INumericBlock,
-  ISection,
   ISkillBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
@@ -15,16 +14,13 @@ export function BlockToggleMeta<
   TBlock extends IBlock & (ITextBlock | INumericBlock | ISkillBlock)
 >(props: {
   readonly: boolean | undefined;
-  pageIndex: number;
-  sectionIndex: number;
-  section: ISection;
+  dataCy: string;
   block: TBlock;
-  blockIndex: number;
   onMetaChange(meta: TBlock["meta"]): void;
 }) {
   return (
     <Checkbox
-      data-cy={`character-dialog.${props.section.label}.${props.block.label}.box.${props.blockIndex}.checked`}
+      data-cy={`${props.dataCy}.toggle`}
       color="primary"
       size="small"
       icon={<RadioButtonUncheckedIcon />}

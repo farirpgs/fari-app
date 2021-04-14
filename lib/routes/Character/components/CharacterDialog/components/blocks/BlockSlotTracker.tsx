@@ -15,64 +15,124 @@ import {
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
+import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../../types/IBlockComponentProps";
 
 export function BlockSlotTracker(
-  props: IBlockComponentProps<ISlotTrackerBlock> & {
-    onToggleBox(boxIndex: number): void;
-    onBoxLabelChange(boxIndex: number, label: string): void;
-    onAddBox(): void;
-    onRemoveBox(): void;
-  }
+  props: IBlockComponentProps<ISlotTrackerBlock>
 ) {
   const { t } = useTranslate();
+
+  const [blockValue, setBlockValue] = useLazyState({
+    value: props.block.value,
+    delay: 750,
+    onChange: (newValue) => {
+      props.onValueChange(newValue);
+    },
+  });
+
+  function handleAddBox() {
+    setBlockValue((draft) => {
+      return [
+        ...draft,
+        {
+          label: "0",
+          checked: false,
+        },
+      ];
+    });
+  }
+
+  function handleRemoveBox() {
+    setBlockValue((draft) => {
+      return draft.filter((box, boxIndex, boxes) => {
+        return boxIndex !== boxes.length - 1;
+      });
+    });
+  }
+
+  function handleToggleBox(boxIndexToToggle: number) {
+    setBlockValue((draft) => {
+      return draft.map((box, boxIndex) => {
+        if (boxIndex === boxIndexToToggle) {
+          return {
+            ...box,
+            checked: !box.checked,
+          };
+        }
+        return box;
+      });
+    });
+  }
+
+  function handleSetBoxLabel(boxIndexToRename: number, label: string) {
+    setBlockValue((draft) => {
+      return draft.map((box, boxIndex) => {
+        if (boxIndex === boxIndexToRename) {
+          return {
+            ...box,
+            label: label,
+          };
+        }
+        return box;
+      });
+    });
+  }
+
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
+
   return (
     <>
       <Box>
-        {isLabelVisible && (
+        {!props.readonly && isLabelVisible && (
           <Box>
-            <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
-              <Grid item className={css({ flex: "1 1 auto" })}>
-                <FateLabel
-                  display="inline"
-                  align={props.advanced ? "inherit" : "center"}
-                >
-                  <ContentEditable
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                    readonly={!props.advanced}
-                    border={props.advanced}
-                    value={props.block.label}
-                    onChange={(value) => {
-                      props.onLabelChange(value);
-                    }}
-                  />
-                </FateLabel>
-              </Grid>
-              {props.advanced && (
+            <Grid container justify={"center"} wrap="nowrap" spacing={1}>
+              {!props.readonly && (
                 <>
                   <Grid item>
                     <Tooltip title={t("character-dialog.control.remove-box")}>
                       <IconButton
                         size="small"
-                        data-cy={`character-dialog.${props.section.label}.${props.block.label}.remove-box`}
+                        data-cy={`${props.dataCy}.remove-box`}
                         onClick={() => {
-                          props.onRemoveBox();
+                          handleRemoveBox();
                         }}
                       >
                         <RemoveCircleOutlineIcon />
                       </IconButton>
                     </Tooltip>
                   </Grid>
+                </>
+              )}
+              {isLabelVisible && (
+                <Grid item className={css({ minWidth: "4rem" })}>
+                  <FateLabel
+                    display="inline"
+                    align={props.readonly ? "inherit" : "center"}
+                  >
+                    <ContentEditable
+                      data-cy={`${props.dataCy}.label`}
+                      readonly={!props.advanced}
+                      border={props.advanced}
+                      value={props.block.label}
+                      onChange={(value) => {
+                        props.onLabelChange(value);
+                      }}
+                    />
+                  </FateLabel>
+                </Grid>
+              )}
+              {!props.readonly && (
+                <>
                   <Grid item>
                     <Tooltip title={t("character-dialog.control.add-box")}>
                       <IconButton
-                        data-cy={`character-dialog.${props.section.label}.${props.block.label}.add-box`}
+                        data-cy={`${props.dataCy}.add-box`}
                         size="small"
                         onClick={() => {
-                          props.onAddBox();
+                          handleAddBox();
                         }}
                       >
                         <AddCircleOutlineIcon />
@@ -86,7 +146,7 @@ export function BlockSlotTracker(
         )}
 
         <Grid container justify="center" spacing={1}>
-          {props.block.value.map((box, boxIndex) => {
+          {blockValue.map((box, boxIndex) => {
             const isBoxLabelVisible =
               !!previewContentEditable({ value: box.label }) || props.advanced;
 
@@ -99,7 +159,7 @@ export function BlockSlotTracker(
                   })}
                 >
                   <Checkbox
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.box.${boxIndex}.value`}
+                    data-cy={`${props.dataCy}.box.${boxIndex}.value`}
                     color="primary"
                     icon={<RadioButtonUncheckedIcon />}
                     checkedIcon={<CheckCircleIcon />}
@@ -107,7 +167,7 @@ export function BlockSlotTracker(
                     checked={box.checked}
                     disabled={props.readonly}
                     onChange={(event) => {
-                      props.onToggleBox(boxIndex);
+                      handleToggleBox(boxIndex);
                     }}
                   />
                 </Box>
@@ -115,12 +175,14 @@ export function BlockSlotTracker(
                   <Box>
                     <FateLabel className={css({ textAlign: "center" })}>
                       <ContentEditable
-                        data-cy={`character-dialog.${props.section.label}.${props.block.label}.box.${boxIndex}.label`}
-                        readonly={!props.advanced}
-                        border={props.advanced}
+                        data-cy={`${props.dataCy}.box.${boxIndex}.label`}
+                        readonly={props.readonly}
+                        border={!props.readonly}
                         value={box.label}
+                        // because of useLazyState above
+                        noDelay
                         onChange={(value) => {
-                          props.onBoxLabelChange(boxIndex, value);
+                          handleSetBoxLabel(boxIndex, value);
                         }}
                       />
                     </FateLabel>

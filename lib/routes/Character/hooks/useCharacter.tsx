@@ -9,7 +9,6 @@ import {
   IBlock,
   ICharacter,
   IPage,
-  ISlotTrackerBlock,
   Position,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
@@ -281,27 +280,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function moveBlock(
-    pageIndex: number,
-    sectionIndex: number,
-    blockIndex: number,
-
-    direction: "up" | "down"
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.pages[pageIndex].sections[sectionIndex].blocks = moveValueInList(
-          draft.pages[pageIndex].sections[sectionIndex].blocks,
-          blockIndex,
-          direction
-        );
-      })
-    );
-  }
-
   function moveDnDSection(
     pageIndex: number,
     dragIndex: number,
@@ -357,11 +335,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function setBlockLabel(
+  function setBlock(
     pageIndex: number,
     sectionIndex: number,
     blockIndex: number,
-    label: any
+    block: IBlock
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -370,25 +348,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         draft.pages[pageIndex].sections[sectionIndex].blocks[
           blockIndex
-        ].label = label;
-      })
-    );
-  }
-
-  function setBlockValue(
-    pageIndex: number,
-    sectionIndex: number,
-    blockIndex: number,
-    value: any
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.pages[pageIndex].sections[sectionIndex].blocks[
-          blockIndex
-        ].value = value;
+        ] = block;
       })
     );
   }
@@ -411,7 +371,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       })
     );
   }
-
   function toggleBlockMainPointCounter(blockId: string) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -458,100 +417,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addCheckboxFieldValue(
-    pageIndex: number,
-    sectionIndex: number,
-    blockIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-
-        (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
-          .value as ISlotTrackerBlock["value"]).push({
-          label: "0",
-          checked: false,
-        });
-      })
-    );
-  }
-
-  function removeCheckboxFieldValue(
-    pageIndex: number,
-    sectionIndex: number,
-    blockIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.pages[pageIndex].sections[sectionIndex].blocks[
-          blockIndex
-        ].value = (draft.pages[pageIndex].sections[sectionIndex].blocks[
-          blockIndex
-        ].value as ISlotTrackerBlock["value"]).filter(
-          (box, boxIndex, boxes) => {
-            return boxIndex !== boxes.length - 1;
-          }
-        );
-      })
-    );
-  }
-
-  function toggleCheckboxFieldValue(
-    pageIndex: number,
-    sectionIndex: number,
-    blockIndex: number,
-    boxIndexToToggle: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const currentValue = (draft.pages[pageIndex].sections[sectionIndex]
-          .blocks[blockIndex].value as ISlotTrackerBlock["value"])[
-          boxIndexToToggle
-        ];
-
-        (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
-          .value as ISlotTrackerBlock["value"])[boxIndexToToggle] = {
-          label: currentValue.label,
-          checked: !currentValue.checked,
-        };
-      })
-    );
-  }
-
-  function renameCheckboxFieldValue(
-    pageIndex: number,
-    sectionIndex: number,
-    blockIndex: number,
-    boxIndexToRename: number,
-    label: string
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const currentValue = (draft.pages[pageIndex].sections[sectionIndex]
-          .blocks[blockIndex].value as ISlotTrackerBlock["value"])[
-          boxIndexToRename
-        ];
-
-        (draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex]
-          .value as ISlotTrackerBlock["value"])[boxIndexToRename] = {
-          label: label,
-          checked: currentValue.checked,
-        };
-      })
-    );
-  }
-
   function getCharacterWithNewTimestamp() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
@@ -582,24 +447,18 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       removeSection,
       addBlock: addBlock,
       duplicateBlock: duplicateBlock,
-      moveBlock: moveBlock,
       moveDnDSection,
       moveDnDBlock: moveDnDBlock,
-      setBlockValue: setBlockValue,
+      setBlock: setBlock,
       setBlockMeta: setBlockMeta,
       toggleBlockMainPointCounter: toggleBlockMainPointCounter,
-      setBlockLabel: setBlockLabel,
       removeBlock: removeBlock,
-      addBlockBox: addCheckboxFieldValue,
-      removeBlockBox: removeCheckboxFieldValue,
-      toggleCheckboxFieldValue,
-      setBlockBoxLabel: renameCheckboxFieldValue,
       getCharacterWithNewTimestamp: getCharacterWithNewTimestamp,
     },
   };
 }
 
-function moveValueInList<T>(
+export function moveValueInList<T>(
   list: Array<T>,
   index: number,
   direction: "up" | "down"

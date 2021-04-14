@@ -68,6 +68,7 @@ export const ContentEditable: React.FC<
     borderColor?: string;
     underline?: boolean;
     id?: string;
+    noDelay?: boolean;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -140,10 +141,15 @@ export const ContentEditable: React.FC<
         DOMPurifyOptions
       ) as string;
 
-      timeout.current = setTimeout(() => {
+      if (props.noDelay) {
         latestHtml.current = cleanHTML;
         latestProps.current.onChange?.(cleanHTML, e);
-      }, ContentEditableDelay);
+      } else {
+        timeout.current = setTimeout(() => {
+          latestHtml.current = cleanHTML;
+          latestProps.current.onChange?.(cleanHTML, e);
+        }, ContentEditableDelay);
+      }
     }
   }
 

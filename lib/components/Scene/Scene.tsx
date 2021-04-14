@@ -65,9 +65,9 @@ import {
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useDicePool } from "../../hooks/useDicePool/useDicePool";
-import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
-import { AspectType } from "../../hooks/useScene/AspectType";
+import { useResponsiveNumberOfColumns } from "../../hooks/useResponsiveNumberOfColumns/useResponsiveNumberOfColumns";
+import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -154,6 +154,9 @@ export const Scene: React.FC<IProps> = (props) => {
   const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
     string | undefined
   >(undefined);
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
 
   const [tab, setTab] = useState<
     "player-characters" | "public" | "private" | "zones" | "gm-notes"
@@ -165,7 +168,6 @@ export const Scene: React.FC<IProps> = (props) => {
 
   const poolManager = useDicePool();
   const isPrivate = tab === "private";
-  const lightBackground = useLightBackground();
   const isGMHostingOnlineOrOfflineGame =
     props.mode !== SceneMode.Manage && isGM;
   const isGMEditingDirtyScene =
@@ -174,13 +176,13 @@ export const Scene: React.FC<IProps> = (props) => {
   const shouldBlockLeaving =
     isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
 
-  const numberOfColumnsForCards = isXlAndUp
-    ? 4
-    : isLgAndUp
-    ? 3
-    : isMDAndUp
-    ? 2
-    : 1;
+  const numberOfColumnsForCards = useResponsiveNumberOfColumns({
+    xl: 4,
+    lg: 3,
+    md: 2,
+    sm: 1,
+    xs: 1,
+  });
 
   useBlockReload(shouldBlockLeaving);
   useEffect(() => {
@@ -600,6 +602,14 @@ export const Scene: React.FC<IProps> = (props) => {
       hasPlayersWithCharacterSheets,
     } = sceneManager.computed;
 
+    const characterCardWidth = isXlAndUp
+      ? "25%"
+      : isLgAndUp
+      ? "33%"
+      : isMDAndUp
+      ? "50%"
+      : "100%";
+
     return (
       <>
         <Box>
@@ -608,9 +618,9 @@ export const Scene: React.FC<IProps> = (props) => {
               <Box
                 className={css({
                   label: "Scene-characters-masonry-content",
-                  columnCount: numberOfColumnsForCards,
-                  columnWidth: "auto",
-                  columnGap: "1rem",
+                  display: "flex",
+                  flexFlow: "row",
+                  flexWrap: "wrap",
                 })}
               >
                 {playersWithCharacterSheets.map((player, index) => {
@@ -623,7 +633,7 @@ export const Scene: React.FC<IProps> = (props) => {
                       key={player?.id || index}
                       className={css({
                         label: "Scene-characters-masonry-card",
-                        width: "100%",
+                        width: characterCardWidth,
                         display: "inline-block",
                         marginBottom: "1rem",
                       })}
@@ -657,40 +667,36 @@ export const Scene: React.FC<IProps> = (props) => {
     const tabPanelStyle = css({ padding: "0" });
     return (
       <Box mx=".5rem">
-        <Paper
-          elevation={2}
-          className={css({
-            background: lightBackground,
-          })}
-        >
-          <Box>
-            <TabContext value={tab}>
-              {renderTabs()}
-              <Box>
-                <Box py="2rem" px="2rem" position="relative" minHeight="20rem">
-                  <TabPanel
-                    value={"player-characters"}
-                    className={tabPanelStyle}
-                  >
-                    {renderCharacterCards()}
-                  </TabPanel>
-                  <TabPanel value={"public"} className={tabPanelStyle}>
-                    {renderAspects()}
-                  </TabPanel>
-                  <TabPanel value={"private"} className={tabPanelStyle}>
-                    {renderAspects()}
-                  </TabPanel>
-                  <TabPanel value={"zones"} className={tabPanelStyle}>
-                    {renderZones()}
-                  </TabPanel>
-                  <TabPanel value={"gm-notes"} className={tabPanelStyle}>
-                    {renderGmNotes()}
-                  </TabPanel>
-                </Box>
+        <Box>
+          <TabContext value={tab}>
+            {renderTabs()}
+            <Box>
+              <Box py="2rem" position="relative" minHeight="20rem">
+                <TabPanel value={"player-characters"} className={tabPanelStyle}>
+                  {renderCharacterCards()}
+                </TabPanel>
+                <TabPanel value={"public"} className={tabPanelStyle}>
+                  {renderIndexCardsForTab(
+                    sceneManager.state.scene.indexCards.public,
+                    "public"
+                  )}
+                </TabPanel>
+                <TabPanel value={"private"} className={tabPanelStyle}>
+                  {renderIndexCardsForTab(
+                    sceneManager.state.scene.indexCards.private,
+                    "private"
+                  )}
+                </TabPanel>
+                <TabPanel value={"zones"} className={tabPanelStyle}>
+                  {renderZones()}
+                </TabPanel>
+                <TabPanel value={"gm-notes"} className={tabPanelStyle}>
+                  {renderGmNotes()}
+                </TabPanel>
               </Box>
-            </TabContext>
-          </Box>
-        </Paper>
+            </Box>
+          </TabContext>
+        </Box>
       </Box>
     );
   }
@@ -741,74 +747,18 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderAspects() {
-    const indexCardsToShow = sceneManager.state.scene.indexCards.filter(
-      (indexCard) => {
-        if (tab === "private") {
-          return indexCard.isPrivate;
-        } else {
-          return !indexCard.isPrivate;
-        }
-      }
-    );
-
-    const hasIndexCards = indexCardsToShow.length > 0;
+  function renderIndexCardsForTab(
+    indexCardsFromTab: Array<IIndexCard>,
+    type: IIndexCardType
+  ) {
+    const hasIndexCards = indexCardsFromTab.length > 0;
 
     return (
       <Box>
-        <Box>{renderGMAspectActions()}</Box>
+        <Box>{renderGMIndexCardActions(type)}</Box>
 
-        {hasIndexCards && (
-          <Box
-            className={css({
-              label: "Scene-aspect-masonry-content",
-              columnCount: numberOfColumnsForCards,
-              columnWidth: "auto",
-              columnGap: "1rem",
-            })}
-          >
-            {indexCardsToShow.map((indexCard, index) => {
-              return (
-                <Box
-                  key={indexCard.id}
-                  className={css({
-                    label: "Scene-aspect-masonry-card",
-                    width: "100%",
-                    display: "inline-block",
-                    marginBottom: "1rem",
-                  })}
-                >
-                  <IndexCard
-                    index={index}
-                    key={indexCard.id}
-                    data-cy={`scene.aspect.${index}`}
-                    id={`index-card-${indexCard.id}`}
-                    readonly={!isGM}
-                    showClickableSkills={props.mode !== SceneMode.Manage}
-                    indexCard={indexCard}
-                    onRoll={(label, modifier) => {
-                      const options: Array<IDiceCommandOption> = [
-                        ...DefaultDiceCommandOptions,
-                      ];
-                      options.push({
-                        type: RollType.Modifier,
-                        label: label,
-                        modifier: modifier,
-                      });
-                      const result = diceManager.actions.roll(options, {
-                        listResults: false,
-                      });
-                      handleSetMyRoll(result);
-                    }}
-                    onMove={(dragIndex, hoverIndex) => {
-                      sceneManager.actions.moveAspects(dragIndex, hoverIndex);
-                    }}
-                  />
-                </Box>
-              );
-            })}
-          </Box>
-        )}
+        {renderIndexCards(indexCardsFromTab, type)}
+
         {!hasIndexCards && (
           <Box py="6rem" textAlign="center">
             <Typography
@@ -825,10 +775,164 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
+  // function renderIndexCardsWithChildren(indexCardsFromTab: Array<IIndexCard>) {
+  //   const indexCardsToShow = indexCardsFromTab.filter(
+  //     (i) => i.subCards.length > 0
+  //   );
+  //   console.debug(
+  //     "with children",
+  //     indexCardsToShow.map((c) => c.title).join(", ")
+  //   );
+  //   return (
+  //     <Grid container>
+  //       {indexCardsToShow.map((indexCard, index) => {
+  //         return (
+  //           <Grid key={indexCard.id} item xs={12}>
+  //             <Box mb="1rem">
+  //               <IndexCard
+  //                 index={index}
+  //                 key={indexCard.id}
+  //                 data-cy={`scene.aspect.`}
+  //                 id={`index-card-${indexCard.id}`}
+  //                 pool={poolManager.state.pool}
+  //                 readonly={!isGM}
+  //                 showClickableSkills={props.mode !== SceneMode.Manage}
+  //                 indexCard={indexCard}
+  //                 onRoll={(label, modifier) => {
+  //                   const options: Array<IDiceCommandOption> = [
+  //                     ...DefaultDiceCommandOptions,
+  //                   ];
+  //                   options.push({
+  //                     type: RollType.Modifier,
+  //                     label: label,
+  //                     modifier: modifier,
+  //                   });
+  //                   const result = diceManager.actions.roll(options, {
+  //                     listResults: false,
+  //                   });
+  //                   handleSetMyRoll(result);
+  //                 }}
+  //                 onPoolClick={(element) => {
+  //                   poolManager.actions.addOrRemovePoolElement(element);
+  //                   poolManager.actions.setPlayerId(gm.id);
+  //                 }}
+  //                 onMove={(dragIndex, hoverIndex) => {
+  //                   sceneManager.actions.moveIndexCard(dragIndex, hoverIndex);
+  //                 }}
+  //                 onChange={(newIndexCard) => {
+  //                   sceneManager.actions.updateIndexCard(newIndexCard);
+  //                 }}
+  //                 onDuplicate={() => {
+  //                   sceneManager.actions.duplicateIndexCard(indexCard);
+  //                 }}
+  //                 onRemove={() => {
+  //                   sceneManager.actions.removeIndexCard(indexCard.id);
+  //                 }}
+  //               />
+  //             </Box>
+  //           </Grid>
+  //         );
+  //       })}
+  //     </Grid>
+  //   );
+  // }
+
+  function renderIndexCards(
+    indexCardsFromTab: Array<IIndexCard>,
+    type: IIndexCardType
+  ) {
+    return (
+      <Box
+        className={css({
+          label: "Scene-aspect-masonry-content",
+          columnCount: numberOfColumnsForCards,
+          columnWidth: "auto",
+          columnGap: "1rem",
+        })}
+      >
+        {indexCardsFromTab.map((indexCard, index) => {
+          const hasChildren = indexCard.subCards.length > 0;
+          return (
+            <Box
+              key={indexCard.id}
+              className={css({
+                label: "Scene-aspect-masonry-card",
+                paddingBottom: "1rem",
+                width: "100%",
+                columnSpan: hasChildren ? "all" : "initial",
+                /**
+                 * Disables bottom being cut-off
+                 */
+                breakInside: "avoid",
+              })}
+            >
+              <IndexCard
+                type={type}
+                reactDndIndex={index}
+                key={indexCard.id}
+                reactDndType={"scene.index-cards"}
+                data-cy={`scene.aspect.${index}`}
+                id={`index-card-${indexCard.id}`}
+                pool={poolManager.state.pool}
+                readonly={!isGM}
+                showClickableSkills={props.mode !== SceneMode.Manage}
+                indexCard={indexCard}
+                onRoll={(label, modifier) => {
+                  const options: Array<IDiceCommandOption> = [
+                    ...DefaultDiceCommandOptions,
+                  ];
+                  options.push({
+                    type: RollType.Modifier,
+                    label: label,
+                    modifier: modifier,
+                  });
+                  const result = diceManager.actions.roll(options, {
+                    listResults: false,
+                  });
+                  handleSetMyRoll(result);
+                }}
+                onPoolClick={(element) => {
+                  poolManager.actions.addOrRemovePoolElement(element);
+                  poolManager.actions.setPlayerId(gm.id);
+                }}
+                onMove={(dragIndex, hoverIndex) => {
+                  sceneManager.actions.moveIndexCard(
+                    dragIndex,
+                    hoverIndex,
+                    type
+                  );
+                }}
+                onChange={(newIndexCard) => {
+                  sceneManager.actions.updateIndexCard(newIndexCard, type);
+                }}
+                onDuplicate={() => {
+                  sceneManager.actions.duplicateIndexCard(indexCard, type);
+                }}
+                onRemove={() => {
+                  sceneManager.actions.removeIndexCard(indexCard.id, type);
+                }}
+              />
+            </Box>
+          );
+        })}
+      </Box>
+    );
+  }
+
   function renderTabs() {
     const tabClass = css({
-      textTransform: "none",
+      background: headerBackgroundColor,
+      color: headerColor,
+      marginRight: ".5rem",
+      // Pentagone
+      // https://bennettfeely.com/clippy/
+      clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
     });
+    const tabLabelClass = css({
+      fontSize: "1rem",
+      width: "100%",
+    });
+
     return (
       <Box>
         <Tabs
@@ -836,11 +940,8 @@ export const Scene: React.FC<IProps> = (props) => {
           scrollButtons="auto"
           value={tab}
           classes={{
-            root: css({
-              borderBottom: `1px solid ${theme.palette.divider}`,
-            }),
-            indicator: css({
-              background: theme.palette.primary.main,
+            flexContainer: css({
+              borderBottom: `3px solid ${headerBackgroundColor}`,
             }),
           }}
           onChange={(e, newValue) => {
@@ -851,24 +952,42 @@ export const Scene: React.FC<IProps> = (props) => {
             <Tab
               value="player-characters"
               data-cy="scene.tabs.player-characters"
-              label={t("menu.characters")}
-              classes={{ root: tabClass }}
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>
+                    {t("menu.characters")}
+                  </FateLabel>
+                </>
+              }
+              className={tabClass}
               icon={<PeopleAltIcon />}
             />
           )}
           <Tab
             value="public"
             data-cy="scene.tabs.public"
-            label={t("play-route.public")}
-            classes={{ root: tabClass }}
+            label={
+              <>
+                <FateLabel className={tabLabelClass}>
+                  {t("play-route.public")}
+                </FateLabel>
+              </>
+            }
+            className={tabClass}
             icon={<VisibilityIcon />}
           />
           {isManaging && (
             <Tab
               value="private"
               data-cy="scene.tabs.private"
-              label={t("play-route.private")}
-              classes={{ root: tabClass }}
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>
+                    {t("play-route.private")}
+                  </FateLabel>
+                </>
+              }
+              className={tabClass}
               icon={<VisibilityOffIcon />}
             />
           )}
@@ -876,8 +995,14 @@ export const Scene: React.FC<IProps> = (props) => {
             <Tab
               value="zones"
               data-cy="scene.tabs.zones"
-              label={t("play-route.zones")}
-              classes={{ root: tabClass }}
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>
+                    {t("draw-route.meta.title")}
+                  </FateLabel>
+                </>
+              }
+              className={tabClass}
               icon={<FilterHdrIcon />}
             />
           )}
@@ -885,8 +1010,14 @@ export const Scene: React.FC<IProps> = (props) => {
             <Tab
               value="gm-notes"
               data-cy="scene.tabs.gm-notes"
-              label={t("play-route.gm-notes")}
-              classes={{ root: tabClass }}
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>
+                    {t("play-route.gm-notes")}
+                  </FateLabel>
+                </>
+              }
+              className={tabClass}
               icon={<BorderColorIcon />}
             />
           )}
@@ -991,7 +1122,7 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderGMAspectActions() {
+  function renderGMIndexCardActions(type: IIndexCardType) {
     if (!isGM) {
       return null;
     }
@@ -1000,17 +1131,14 @@ export const Scene: React.FC<IProps> = (props) => {
         <Grid container spacing={1} justify="center">
           <Grid item>
             <ButtonGroup
-              color="primary"
-              variant="contained"
+              color="default"
+              variant="outlined"
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
               <Button
                 data-cy="scene.add-index-card"
                 onClick={() => {
-                  sceneManager.actions.addAspect(
-                    AspectType.IndexCard,
-                    isPrivate
-                  );
+                  sceneManager.actions.addIndexCard(type);
                   logger.info("Scene:onAddCard:IndexCard");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1020,7 +1148,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-aspect"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.Aspect, isPrivate);
+                  sceneManager.actions.addIndexCard(type);
                   logger.info("Scene:onAddCard:Aspect");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1030,7 +1158,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-boost"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.Boost, isPrivate);
+                  sceneManager.actions.addIndexCard(type);
                   logger.info("Scene:onAddCard:Boost");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1040,7 +1168,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-npc"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.NPC, isPrivate);
+                  sceneManager.actions.addIndexCard(type);
                   logger.info("Scene:onAddCard:NPC");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1050,7 +1178,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-bad-guy"
                 onClick={() => {
-                  sceneManager.actions.addAspect(AspectType.BadGuy, isPrivate);
+                  sceneManager.actions.addIndexCard(type);
                   logger.info("Scene:onAddCard:BadGuy");
                 }}
                 endIcon={<AddCircleOutlineIcon />}

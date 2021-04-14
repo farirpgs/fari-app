@@ -58,7 +58,7 @@ export function BlockDicePool(
                 <ContentEditable
                   readonly={!props.advanced}
                   border={props.advanced}
-                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                  data-cy={`${props.dataCy}.label`}
                   value={props.block.label}
                   onChange={(value) => {
                     props.onLabelChange(value);

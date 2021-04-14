@@ -100,7 +100,7 @@ function StorybookIndexCard(props: {
         onRollPool={handleOnRollPool}
       />
       <IndexCard
-        index={0}
+        reactDndIndex={0}
         aspectId={"1"}
         readonly={props.readonly}
         showClickableSkills={props.showClickableSkills}

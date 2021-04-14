@@ -61,38 +61,28 @@ export interface ISceneV1 {
 
 export interface IIndexCard {
   id: string;
+  header: string;
   title: string;
   content: string;
-  color: IndexCardColorTypes;
+  color: string;
   playedDuringTurn: boolean;
-  type: AspectType;
   blocks: Array<IBlock>;
   /**
    * @default false
    */
   pinned: boolean | undefined;
-  /**
-   * @default false
-   */
-  isPrivate?: boolean;
-  subCards: Array<ISubIndexCards>;
+
+  subCards: Array<IIndexCard>;
+  sub: boolean;
 }
 
-type ISubIndexCards = {
-  id: string;
-  title: string;
-  content: string;
-  color: IndexCardColorTypes;
-  playedDuringTurn: boolean;
-  type: AspectType;
-  blocks: Array<IBlock>;
-};
+export type IIndexCardType = "public" | "private";
 
 export interface IScene {
   id: string;
   name: string;
   group: string | undefined;
-  indexCards: Array<IIndexCard>;
+  indexCards: Record<IIndexCardType, Array<IIndexCard>>;
   gm: IPlayer;
   players: Array<IPlayer>;
   goodConfetti: number;

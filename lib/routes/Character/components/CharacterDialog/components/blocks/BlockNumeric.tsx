@@ -30,7 +30,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
         >
           <Grid item>
             <CircleTextField
-              data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+              data-cy={`${props.dataCy}.value`}
               value={props.block.value}
               readonly={props.readonly}
               onChange={(newValue) => {
@@ -43,7 +43,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
               <ContentEditable
                 readonly={!props.advanced}
                 border={props.advanced}
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                data-cy={`${props.dataCy}.label`}
                 value={props.block.label}
                 onChange={(value) => {
                   props.onLabelChange(value);
@@ -54,12 +54,9 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
           {isSlotTrackerVisible && (
             <Grid item>
               <BlockToggleMeta
+                dataCy={props.dataCy}
                 readonly={props.readonly}
-                pageIndex={props.pageIndex}
-                sectionIndex={props.sectionIndex}
-                section={props.section}
                 block={props.block}
-                blockIndex={props.blockIndex}
                 onMetaChange={props.onMetaChange}
               />
             </Grid>

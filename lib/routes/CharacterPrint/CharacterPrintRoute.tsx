@@ -12,21 +12,11 @@ import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import {
-  BlockType,
-  ICharacter,
-  ISection,
-  Position,
-} from "../../domains/character/types";
+import { ICharacter, ISection, Position } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { BlockDicePool } from "../Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { BlockNumeric } from "../Character/components/CharacterDialog/components/blocks/BlockNumeric";
-import { BlockPointCounter } from "../Character/components/CharacterDialog/components/blocks/BlockPointCounter";
-import { BlockSkill } from "../Character/components/CharacterDialog/components/blocks/BlockSkill";
-import { BlockSlotTracker } from "../Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
-import { BlockText } from "../Character/components/CharacterDialog/components/blocks/BlockText";
+import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 
 export const CharacterPrintRoute: React.FC<{
   match: {
@@ -189,99 +179,17 @@ function PrintSections(props: { sections: Array<ISection> }) {
             {section.blocks.map((block, blockIndex) => {
               return (
                 <Box key={blockIndex} my=".5rem" px=".5rem">
-                  {block.type === BlockType.Text && (
-                    <BlockText
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                    />
-                  )}
-                  {block.type === BlockType.Numeric && (
-                    <BlockNumeric
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                    />
-                  )}
-                  {block.type === BlockType.Skill && (
-                    <BlockSkill
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      pool={[]}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                      onPoolClick={(element) => {}}
-                    />
-                  )}
-                  {block.type === BlockType.DicePool && (
-                    <BlockDicePool
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                      pool={[]}
-                      onPoolClick={(element) => {}}
-                    />
-                  )}
-                  {block.type === BlockType.PointCounter && (
-                    <BlockPointCounter
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                    />
-                  )}
-
-                  {block.type === BlockType.SlotTracker && (
-                    <BlockSlotTracker
-                      advanced={false}
-                      readonly={true}
-                      pageIndex={0}
-                      sectionIndex={0}
-                      section={section}
-                      block={block}
-                      blockIndex={blockIndex}
-                      onLabelChange={(value) => {}}
-                      onValueChange={(value) => {}}
-                      onMetaChange={(meta) => {}}
-                      onAddBox={() => {}}
-                      onRemoveBox={() => {}}
-                      onToggleBox={(boxIndex) => {}}
-                      onBoxLabelChange={(boxIndex, value) => {}}
-                    />
-                  )}
+                  <BlockByType
+                    advanced={false}
+                    readonly={true}
+                    dataCy={`character-card.${section.label}.${block.label}`}
+                    block={block}
+                    onChange={() => undefined}
+                    onDuplicate={() => undefined}
+                    onRemove={() => undefined}
+                    pool={[]}
+                    onPoolClick={() => undefined}
+                  />
                 </Box>
               );
             })}

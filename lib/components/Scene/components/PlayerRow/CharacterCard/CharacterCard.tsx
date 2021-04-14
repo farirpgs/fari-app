@@ -76,7 +76,7 @@ export const CharacterCard: React.FC<{
 
   const renderBlockByBlockType: Record<
     keyof typeof BlockType,
-    (section: ISection, block: any, blockIndex: number) => JSX.Element
+    (section: ISection, block: any) => JSX.Element
   > = {
     Text: renderBlockText,
     Numeric: renderBlockNumeric,
@@ -155,11 +155,7 @@ export const CharacterCard: React.FC<{
                       {section.blocks.map((block, blockIndex) => {
                         return (
                           <React.Fragment key={block.id}>
-                            {renderBlockByBlockType[block.type](
-                              section,
-                              block,
-                              blockIndex
-                            )}
+                            {renderBlockByBlockType[block.type](section, block)}
                           </React.Fragment>
                         );
                       })}
@@ -174,21 +170,14 @@ export const CharacterCard: React.FC<{
     </Box>
   );
 
-  function renderBlockText(
-    section: ISection,
-    block: IBlock & ITextBlock,
-    blockIndex: number
-  ) {
+  function renderBlockText(section: ISection, block: IBlock & ITextBlock) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockText
           advanced={false}
           readonly={true}
-          pageIndex={0}
-          sectionIndex={0}
-          section={section}
+          dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          blockIndex={blockIndex}
           onLabelChange={(value) => {}}
           onValueChange={(value) => {}}
           onMetaChange={(meta) => {}}
@@ -199,19 +188,15 @@ export const CharacterCard: React.FC<{
 
   function renderBlockNumeric(
     section: ISection,
-    block: IBlock & INumericBlock,
-    blockIndex: number
+    block: IBlock & INumericBlock
   ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockNumeric
           advanced={false}
           readonly={true}
-          pageIndex={0}
-          sectionIndex={0}
-          section={section}
+          dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          blockIndex={blockIndex}
           onLabelChange={(value) => {}}
           onValueChange={(value) => {}}
           onMetaChange={(meta) => {}}
@@ -220,11 +205,7 @@ export const CharacterCard: React.FC<{
     );
   }
 
-  function renderBlockSkill(
-    section: ISection,
-    block: IBlock & ISkillBlock,
-    blockIndex: number
-  ) {
+  function renderBlockSkill(section: ISection, block: IBlock & ISkillBlock) {
     const isSelected = props.pool.some((p) => p.blockId === block.id);
     const blockValue = block.value || "0";
     return (
@@ -279,21 +260,14 @@ export const CharacterCard: React.FC<{
     );
   }
 
-  function renderDicePool(
-    section: ISection,
-    block: IBlock & IDicePoolBlock,
-    blockIndex: number
-  ) {
+  function renderDicePool(section: ISection, block: IBlock & IDicePoolBlock) {
     return (
       <Grid item xs={12}>
         <BlockDicePool
           advanced={false}
           readonly={props.readonly}
-          pageIndex={0}
-          sectionIndex={0}
-          section={section}
+          dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          blockIndex={0}
           onLabelChange={(value) => {}}
           onValueChange={(value) => {}}
           onMetaChange={(meta) => {}}
@@ -305,19 +279,15 @@ export const CharacterCard: React.FC<{
   }
   function renderBlockPointCounter(
     section: ISection,
-    block: IBlock & IPointCounterBlock,
-    blockIndex: number
+    block: IBlock & IPointCounterBlock
   ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockPointCounter
           advanced={false}
           readonly={true}
-          pageIndex={0}
-          sectionIndex={0}
-          section={section}
+          dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          blockIndex={blockIndex}
           onLabelChange={(value) => {}}
           onValueChange={(value) => {}}
           onMetaChange={(meta) => {}}
@@ -327,26 +297,18 @@ export const CharacterCard: React.FC<{
   }
   function renderBlockSlotTracker(
     section: ISection,
-    block: IBlock & ISlotTrackerBlock,
-    blockIndex: number
+    block: IBlock & ISlotTrackerBlock
   ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockSlotTracker
           advanced={false}
           readonly={true}
-          pageIndex={0}
-          sectionIndex={0}
-          section={section}
+          dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          blockIndex={blockIndex}
           onLabelChange={(value) => {}}
           onValueChange={(value) => {}}
           onMetaChange={(meta) => {}}
-          onAddBox={() => {}}
-          onRemoveBox={() => {}}
-          onToggleBox={(boxIndex) => {}}
-          onBoxLabelChange={(boxIndex, value) => {}}
         />
       </Grid>
     );

@@ -8,12 +8,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
-import Link from "@material-ui/core/Link";
 import Snackbar from "@material-ui/core/Snackbar";
+import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Switch from "@material-ui/core/Switch";
 import Tab from "@material-ui/core/Tab";
@@ -48,8 +47,6 @@ import {
   getTemplateInfo,
 } from "../../../../domains/character/CharacterType";
 import {
-  BlockType,
-  IBlock,
   ICharacter,
   IPage,
   ISection,
@@ -58,29 +55,15 @@ import {
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
+import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../../../locale";
 import { useCharacter } from "../../hooks/useCharacter";
 import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
-import {
-  BlockDicePool,
-  BlockDicePoolActions,
-  IDicePool,
-  IDicePoolElement,
-} from "./components/blocks/BlockDicePool";
-import {
-  BlockNumeric,
-  BlockNumericActions,
-} from "./components/blocks/BlockNumeric";
-import {
-  BlockPointCounter,
-  BlockPointCounterActions,
-} from "./components/blocks/BlockPointCounter";
-import { BlockSkill, BlockSkillActions } from "./components/blocks/BlockSkill";
-import { BlockSlotTracker } from "./components/blocks/BlockSlotTracker";
-import { BlockText, BlockTextActions } from "./components/blocks/BlockText";
+import { BlockByType } from "./components/BlockByType";
+import { IDicePool, IDicePoolElement } from "./components/blocks/BlockDicePool";
 import { SheetHeader } from "./components/SheetHeader";
 
 export const smallIconButtonStyle = css({
@@ -119,6 +102,7 @@ export const CharacterV3Dialog: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
+  const blackButtonTheme = useThemeFromColor(theme.palette.text.primary);
   const query = useQuery<"card">();
   const showCharacterCard = query.get("card") === "true";
   const logger = useLogger();
@@ -667,30 +651,32 @@ export const CharacterV3Dialog: React.FC<{
 
                 {advanced && (
                   <Box p=".5rem" mb=".5rem">
-                    <Grid container justify="center" alignItems="center">
-                      <Grid item>
-                        <AddBlock
-                          onAddBlock={(blockType) => {
-                            characterManager.actions.addBlock(
-                              pageIndex,
-                              sectionIndex,
-                              blockType
-                            );
-                          }}
-                        />
+                    <ThemeProvider theme={blackButtonTheme}>
+                      <Grid container justify="center" alignItems="center">
+                        <Grid item>
+                          <AddBlock
+                            onAddBlock={(blockType) => {
+                              characterManager.actions.addBlock(
+                                pageIndex,
+                                sectionIndex,
+                                blockType
+                              );
+                            }}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <AddSection
+                            onAddSection={() => {
+                              characterManager.actions.addSection(
+                                pageIndex,
+                                sectionIndex,
+                                position
+                              );
+                            }}
+                          />
+                        </Grid>
                       </Grid>
-                      <Grid item>
-                        <AddSection
-                          onAddSection={() => {
-                            characterManager.actions.addSection(
-                              pageIndex,
-                              sectionIndex,
-                              position
-                            );
-                          }}
-                        />
-                      </Grid>
-                    </Grid>
+                    </ThemeProvider>
                   </Box>
                 )}
               </Box>
@@ -964,271 +950,44 @@ export const CharacterV3Dialog: React.FC<{
                       marginRight: ".5rem",
                     })}
                   >
-                    {block.type === BlockType.Text && (
-                      <BlockText
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.Numeric && (
-                      <BlockNumeric
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.Skill && (
-                      <BlockSkill
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                        pool={props.pool}
-                        onPoolClick={(element) => {
-                          props.onPoolClick(element);
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.DicePool && (
-                      <BlockDicePool
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                        pool={props.pool}
-                        onPoolClick={(element) => {
-                          props.onPoolClick(element);
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.PointCounter && (
-                      <BlockPointCounter
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-
-                    {block.type === BlockType.SlotTracker && (
-                      <BlockSlotTracker
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                        onAddBox={() => {
-                          characterManager.actions.addBlockBox(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex
-                          );
-                        }}
-                        onRemoveBox={() => {
-                          characterManager.actions.removeBlockBox(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex
-                          );
-                        }}
-                        onToggleBox={(boxIndex) => {
-                          characterManager.actions.toggleCheckboxFieldValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            boxIndex
-                          );
-                        }}
-                        onBoxLabelChange={(boxIndex, value) => {
-                          characterManager.actions.setBlockBoxLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            boxIndex,
-                            value
-                          );
-                        }}
-                      />
-                    )}
-                    {advanced &&
-                      renderBlockAdvancedOptions(
-                        pageIndex,
-                        sectionIndex,
-                        section,
-                        block,
-                        blockIndex
-                      )}
-                    {renderBlockHelpText(
-                      pageIndex,
-                      sectionIndex,
-                      section,
-                      block,
-                      blockIndex
-                    )}
+                    <BlockByType
+                      advanced={advanced}
+                      readonly={props.readonly}
+                      dataCy={`character-dialog.${section.label}.${block.label}`}
+                      block={block}
+                      onChange={(newBlock) => {
+                        characterManager.actions.setBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex,
+                          newBlock
+                        );
+                      }}
+                      onRemove={() => {
+                        characterManager.actions.removeBlock(
+                          pageIndex,
+                          sectionIndex,
+                          blockIndex
+                        );
+                      }}
+                      onDuplicate={() => {
+                        characterManager.actions.duplicateBlock(
+                          pageIndex,
+                          sectionIndex,
+                          block,
+                          blockIndex
+                        );
+                      }}
+                      pool={props.pool}
+                      onPoolClick={(newElement) => {
+                        props.onPoolClick(newElement);
+                      }}
+                      onMainPointCounterChange={() => {
+                        characterManager.actions.toggleBlockMainPointCounter(
+                          block.id
+                        );
+                      }}
+                    />
                   </Box>
                 </BetterDnd>
               </Box>
@@ -1236,194 +995,6 @@ export const CharacterV3Dialog: React.FC<{
           })}
         </Box>
       </>
-    );
-  }
-
-  function renderBlockAdvancedOptions(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock,
-    blockIndex: number
-  ) {
-    return (
-      <Grid container justify="flex-end" spacing={1}>
-        {block.type === BlockType.PointCounter && (
-          <BlockPointCounterActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-            toggleBlockMainPointCounter={() => {
-              characterManager.actions.toggleBlockMainPointCounter(block.id);
-            }}
-          />
-        )}
-        {block.type === BlockType.Text && (
-          <BlockTextActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-        {block.type === BlockType.Numeric && (
-          <BlockNumericActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-
-        {block.type === BlockType.Skill && (
-          <BlockSkillActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-        {block.type === BlockType.DicePool && (
-          <BlockDicePoolActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              label: "CharacterDialog-duplicate",
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.duplicateBlock(
-                pageIndex,
-                sectionIndex,
-                block,
-                blockIndex
-              );
-            }}
-          >
-            {t("character-dialog.control.duplicate")}
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-            className={css({
-              label: "CharacterDialog-remove",
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.removeBlock(
-                pageIndex,
-                sectionIndex,
-                blockIndex
-              );
-            }}
-          >
-            {t("character-dialog.control.remove-block")}
-          </Link>
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function renderBlockHelpText(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock,
-    blockIndex: number
-  ) {
-    if (!advanced && !block.meta.helperText) {
-      return null;
-    }
-    return (
-      <Box>
-        <Grid container alignItems="flex-start" wrap="nowrap">
-          {advanced && (
-            <Grid item>
-              <FormHelperText className={css({ paddingRight: ".2rem" })}>
-                {t("character-dialog.helper-text.help")}
-              </FormHelperText>
-            </Grid>
-          )}
-
-          <Grid item xs>
-            {" "}
-            <FormHelperText>
-              <ContentEditable
-                readonly={!advanced}
-                border={advanced}
-                data-cy={`character-dialog.${section.label}.${block.label}.helper-text`}
-                value={block.meta.helperText ?? ""}
-                onChange={(newHelpText) => {
-                  characterManager.actions.setBlockMeta(
-                    pageIndex,
-                    sectionIndex,
-                    blockIndex,
-                    { ...block.meta, helperText: newHelpText }
-                  );
-                }}
-              />
-            </FormHelperText>
-          </Grid>
-        </Grid>
-      </Box>
     );
   }
 };

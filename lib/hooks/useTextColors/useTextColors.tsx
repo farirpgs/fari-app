@@ -2,7 +2,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useMemo } from "react";
 
-const whiteVariants = ["#fff", "#ffffff", "#FFF", "#FFFFFF", "white"];
+export const whiteVariants = ["#fff", "#ffffff", "#FFF", "#FFFFFF", "white"];
 
 export function useTextColors(backgroundColor: string) {
   const theme = useTheme();
