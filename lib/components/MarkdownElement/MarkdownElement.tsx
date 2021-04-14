@@ -47,9 +47,9 @@ const styles = (theme: Theme) => {
       },
       "& code": {
         lineHeight: 1.4,
+
         display: "inline-block",
         fontFamily: "inherit",
-        // fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
         WebkitFontSmoothing: "subpixel-antialiased",
         padding: "0 4px",
         color: theme.palette.text.primary,
@@ -72,6 +72,10 @@ const styles = (theme: Theme) => {
         "& code": {
           color: theme.palette.getContrastText(theme.palette.text.primary),
           backgroundColor: "transparent",
+          fontSize: "0.85rem",
+          fontWeight: theme.typography.fontWeightRegular,
+          fontFamily:
+            "Consolas,Menlo,Monaco,source-code-pro,Courier New,monospace",
         },
         [theme.breakpoints.up("md")]: {
           maxWidth: "calc(100vw - 32px - 16px)",

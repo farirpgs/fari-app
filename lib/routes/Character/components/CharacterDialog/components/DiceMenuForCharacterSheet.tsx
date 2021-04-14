@@ -14,7 +14,7 @@ import {
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 
 export const DiceMenuForCharacterSheet: React.FC<{
-  commandGroupIds: Array<string>;
+  commandGroupIds: Array<IDiceCommandGroupId>;
   onChange(newCommandIds: Array<IDiceCommandGroupId>): void;
 }> = (props) => {
   const { t } = useTranslate();
@@ -45,11 +45,9 @@ export const DiceMenuForCharacterSheet: React.FC<{
     setCommandsGroupsFromIds(props.commandGroupIds);
   }
 
-  function setCommandsGroupsFromIds(commandIds: Array<string>) {
+  function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandGroupId>) {
     const newCommands = commandIds.map((commandId) => {
-      return AllDiceCommandGroups.find(
-        (c) => c.id === commandId
-      ) as IDiceCommandGroup;
+      return AllDiceCommandGroups[commandId];
     });
     setCommandGroups(newCommands);
   }

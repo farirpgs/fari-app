@@ -43,7 +43,7 @@ export function BlockSkill(
 
   const [firstCommandGroup] =
     props.block.meta?.commands?.map((commandId) => {
-      return AllDiceCommandGroups.find((c) => c.id === commandId);
+      return AllDiceCommandGroups[commandId];
     }) ?? [];
   const commandOptionList = Block.getCommandOptionList(props.block);
 

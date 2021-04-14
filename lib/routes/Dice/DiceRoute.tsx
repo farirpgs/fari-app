@@ -48,7 +48,7 @@ export function DiceRoute(props: { pool: boolean }) {
   };
 
   const handleRoll = () => {
-    setRollResult(diceManager.actions.reroll({ listResults: props.pool }));
+    setRollResult(diceManager.actions.reroll());
   };
 
   return (

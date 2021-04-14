@@ -31,7 +31,7 @@ function StorybookCharacterSheet(
   }
 
   function handleOnRollPool() {
-    const result = poolManager.actions.getPoolResult();
+    const { result } = poolManager.actions.getPoolResult();
     handleOnNewRoll(result);
   }
 

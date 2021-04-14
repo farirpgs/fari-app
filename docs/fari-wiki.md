@@ -302,6 +302,34 @@ By using the following syntax `[skill: modifier]` inside an Index Card descripti
 
 ![Index Card Skill Modifier](https://gyazo.com/04ddec1356bf3b25022341f40d6f3a25.gif)
 
+<!-- # Fari in the Wild
+
+## Actual Plays
+
+Here is a list of actual plays of people playing TTRPGs using Fari.
+
+This is a nice way to learn how people _actually_ use Fari!
+
+- 🚧  -->
+
+## Interview
+
+The folks over at TableTalkRPG interviewed René-Pier, the creator of Fari. Check it out here.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UudBkVzGQzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Creating a Character Template for the Community
+
+Looking for a template but it's not available ?
+
+Are you interested in contributing to Fari ? Here is what you can do
+
+1. [Create a template](https://fari.app/fari-wiki/managing-characters)
+2. Export it from the `Characters` menu
+3. Send it to `RPDeshaies#4116` [on Discord](https://discord.com/invite/vMAJFjUraA)
+
+And that's about it!
+
 # Internationalization and localization
 
 Fari is available in multiple languages like English, Spanish and French but if you are interested in translating Fari in another language or update a bad translation, this document is the right place to start.

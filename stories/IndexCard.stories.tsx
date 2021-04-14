@@ -81,7 +81,7 @@ function StorybookIndexCard(props: {
   }
 
   function handleOnRollPool() {
-    const result = poolManager.actions.getPoolResult();
+    const { result } = poolManager.actions.getPoolResult();
     handleOnNewRoll(result);
   }
 
@@ -107,10 +107,7 @@ function StorybookIndexCard(props: {
         sceneManager={sceneManager}
         onRoll={(label, modifier) => {
           const options: Array<IDiceCommandOption> = [
-            { command: "1dF", type: RollType.DiceCommand },
-            { command: "1dF", type: RollType.DiceCommand },
-            { command: "1dF", type: RollType.DiceCommand },
-            { command: "1dF", type: RollType.DiceCommand },
+            { commandGroupId: "4dF", type: RollType.DiceCommand },
           ];
 
           options.push({

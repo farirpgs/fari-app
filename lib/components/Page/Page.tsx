@@ -492,16 +492,6 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
                 className={linkClassName}
-                to="/"
-                data-cy="page.menu.play"
-                component={RouterLink}
-              >
-                {t("menu.play")}
-              </AppLink>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
                 data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
@@ -547,6 +537,15 @@ export const Page: React.FC<{
                 component={RouterLink}
               >
                 {t("home-route.cards.blog.title")}
+              </AppLink>
+            </Grid>
+            <Grid item xs={8} sm={8} className={itemClass}>
+              <AppLink
+                className={linkClassName}
+                to="/fari-wiki"
+                component={RouterLink}
+              >
+                {t("home-route.cards.wiki.title")}
               </AppLink>
             </Grid>
           </>

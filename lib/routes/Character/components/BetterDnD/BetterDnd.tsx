@@ -7,6 +7,9 @@ import { DropTargetMonitor, useDrag, useDrop, XYCoord } from "react-dnd";
 
 export const BetterDnd: React.FC<{
   index: number;
+  /**
+   * Unique key to know where blocks can be dropped
+   */
   type: string;
   className?: string;
   dragIndicatorClassName?: string;

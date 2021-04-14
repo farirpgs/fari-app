@@ -18,17 +18,13 @@ import Zoom from "@material-ui/core/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
-  DiceContext,
-  IDiceManager,
-} from "../../contexts/DiceContext/DiceContext";
-import {
-  d20DiceCommandGroups,
-  Dice,
-  FateDiceCommandGroups,
+  AllDiceCommandGroups,
   IDiceCommandGroup,
+  IDiceCommandOption,
   IDiceRollResult,
-  MiscDiceCommandGroups,
+  RollType,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -62,7 +58,7 @@ type IProps = IRollProps | IPoolProps;
 
 const buttonSize = "4rem";
 
-const SlideDurationForRollButton = 1000;
+const SlideDurationForRollButton = 500;
 
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
@@ -73,9 +69,8 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
 
   const [dirty, setDirty] = useState(false);
-  const [fabCommands, setFabCommands] = useState<Array<IDiceCommandGroup>>([]);
 
-  const ButtonIcon = getButtonIcon(fabCommands, diceManager);
+  const ButtonIcon = getButtonIcon(diceManager.state.commandGroups);
 
   function handleMenuOpen(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -85,11 +80,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   function handleMenuClose() {
     setAnchorEl(null);
-    setFabCommands([]);
   }
 
   function handleClear() {
-    setFabCommands([]);
+    diceManager.actions.setCommandGroups([]);
   }
 
   function handleFabClick(
@@ -110,18 +104,22 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 
   function handleRoll() {
-    const newCommands = fabCommands.flatMap((o) => o.value);
-    const result = diceManager.actions.rollByCommandNames(newCommands, {
-      listResults: diceManager.state.options.listResults,
-    });
+    const commandOptions: Array<IDiceCommandOption> = diceManager.state.commandGroups.map(
+      (commandGroup) => {
+        return {
+          type: RollType.DiceCommand,
+          commandGroupId: commandGroup.id,
+        };
+      }
+    );
+    const result = diceManager.actions.roll(commandOptions);
 
     props.onSelect?.(result);
     setDirty(true);
     handleMenuClose();
   }
 
-  const hasSelectedNewCommands = fabCommands.length > 0;
-  const isRollButtonVisible = hasSelectedNewCommands || dirty;
+  const hasSelectedCommands = diceManager.state.commandGroups.length > 0;
 
   const hasPool =
     props.type === DiceFabMode.RollAndPool &&
@@ -136,16 +134,9 @@ export const DiceFab: React.FC<IProps> = (props) => {
             <DiceFabButton
               key="rolls"
               showClearButton={open}
-              isRollButtonVisible={isRollButtonVisible}
+              isRollButtonVisible={hasSelectedCommands}
               icon={ButtonIcon}
-              label={
-                <>
-                  {hasSelectedNewCommands ||
-                  (!hasSelectedNewCommands && !isRollButtonVisible)
-                    ? t("dice-fab.roll")
-                    : t("dice-fab-reroll")}
-                </>
-              }
+              label={<>{t("dice-fab.roll")}</>}
               onFabClick={handleFabClick}
               onCtaClick={() => {
                 if (open) {
@@ -182,10 +173,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
           <DiceMenu
             open={open}
             anchorEl={anchorEl}
-            commands={fabCommands}
+            commands={diceManager.state.commandGroups}
             showPoolToggle
             onClear={handleClear}
-            onDiceCommandChange={setFabCommands}
+            onDiceCommandChange={diceManager.actions.setCommandGroups}
           />
         </Box>
       </ClickAwayListener>
@@ -198,13 +189,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
       <DiceBox
         className={css({
           position: "fixed",
-          left: "1.25rem",
-          bottom: "7rem",
+          right: "1.25rem",
+          bottom: "2rem",
           zIndex: zIndex.diceFabDie,
         })}
         reduceOpacityWithoutHover
         rolls={props.rollsForDiceBox ?? []}
-        tooltipPlacement="right-end"
+        tooltipPlacement="left-end"
         size="3.5rem"
         fontSize="2rem"
         borderSize=".2rem"
@@ -215,24 +206,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
     );
   }
 
-  function getButtonIcon(
-    selectedOptions: IDiceCommandGroup[],
-    diceManager: IDiceManager
-  ) {
-    const commandsToCheckForDynamicFabIcon =
-      selectedOptions.length > 0
-        ? selectedOptions.flatMap((o) => o.value)
-        : diceManager.state.commandNames;
-    const selectedOption = Dice.findMatchingCommandGroupWithDiceTypes(
-      commandsToCheckForDynamicFabIcon
-    );
-    const [firstCommand] = commandsToCheckForDynamicFabIcon;
-    const firstCommandMatch = Dice.findMatchingCommandGroupWithDiceTypes([
-      firstCommand,
-    ]);
+  function getButtonIcon(commandGroups: IDiceCommandGroup[]) {
+    const [firstCommandGroup] = commandGroups;
 
-    const ButtonIcon =
-      selectedOption?.icon ?? firstCommandMatch?.icon ?? Icons.ThrowDice;
+    const ButtonIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
     return ButtonIcon;
   }
 };
@@ -297,11 +274,25 @@ export const DiceMenu: React.FC<{
                 <Box maxHeight="70vh" overflow="auto">
                   <Box p="1rem">
                     {renderCommandGroupHeader("Fate")}
-                    {renderOptions(FateDiceCommandGroups)}
+                    {renderOptions([
+                      AllDiceCommandGroups["4dF"],
+                      AllDiceCommandGroups["1dF"],
+                    ])}
                     {renderCommandGroupHeader("D20s")}
-                    {renderOptions(d20DiceCommandGroups)}
+                    {renderOptions([
+                      AllDiceCommandGroups["1d4"],
+                      AllDiceCommandGroups["1d6"],
+                      AllDiceCommandGroups["1d8"],
+                      AllDiceCommandGroups["1d10"],
+                      AllDiceCommandGroups["1d12"],
+                      AllDiceCommandGroups["1d20"],
+                      AllDiceCommandGroups["1d100"],
+                    ])}
                     {renderCommandGroupHeader("Misc")}
-                    {renderOptions(MiscDiceCommandGroups)}
+                    {renderOptions([
+                      AllDiceCommandGroups["coin"],
+                      AllDiceCommandGroups["2d6"],
+                    ])}
 
                     {(props.onClear || props.onCtaClick) && (
                       <Box mt="1.5rem">
@@ -556,7 +547,7 @@ export function DiceFabButton(props: {
           borderBottomRightRadius: "25px",
           overflow: "hidden",
           transition: theme.transitions.create("max-width", {
-            duration: SlideDurationForRollButton,
+            duration: 1000,
           }),
           maxWidth: delayedIsRollButtonVisible ? "100vw" : "0",
         })}

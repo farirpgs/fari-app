@@ -75,19 +75,19 @@ export const OracleRoute = () => {
         [
           {
             type: RollType.DiceCommand,
-            command: "1dF",
+            commandGroupId: "1dF",
           },
           {
             type: RollType.DiceCommand,
-            command: "1dF",
+            commandGroupId: "1dF",
           },
           {
             type: RollType.DiceCommand,
-            command: "1dF",
+            commandGroupId: "1dF",
           },
           {
             type: RollType.DiceCommand,
-            command: "1dF",
+            commandGroupId: "1dF",
           },
         ],
         { listResults: false }

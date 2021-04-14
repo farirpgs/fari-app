@@ -317,6 +317,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         "managing-characters",
         "managing-scenes",
         "tips-and-tricks",
+        "data",
       ],
     },
   },

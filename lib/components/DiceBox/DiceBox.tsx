@@ -20,7 +20,7 @@ import { Font } from "../../domains/font/Font";
 import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { CommandGroups } from "../../routes/Character/components/CharacterDialog/domains/CommandGroups/CommandGroups";
+import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 
 type IProps = {
@@ -137,7 +137,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
             })}
           >
             {"Roll"}
-            <DiceBonusLabel colon rolls={props.rolls} />
+            <DiceBonusLabel colonBefore rolls={props.rolls} />
           </Box>
           <Box
             fontSize="1.5rem"
@@ -273,6 +273,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
           >
             {diceRollsManager.state.finalResultHidden
               ? ""
+              : isPool
+              ? "~"
               : diceRollsManager.state.finalResultTotal}
           </Typography>
         </ButtonBase>
@@ -342,10 +344,12 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
             );
           }
 
-          const options = DiceCommandOptions[r.command];
-          const isFate = r.command === "1dF";
-          const IconForPool = CommandGroups.getCommandGroupByValue(r.command)
-            .icon;
+          const options = DiceCommandOptions[r.commandName];
+
+          const isFate = r.commandName === "1dF";
+          const IconForPool = DiceCommandGroup.getCommandGroupById(
+            r.commandGroupId
+          ).icon;
 
           return (
             <span
@@ -365,7 +369,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                   {separator}
                 </span>
               )}
-              <Tooltip title={r.command}>
+              <Tooltip title={r.commandGroupId}>
                 <span>
                   <span
                     className={css({
@@ -396,7 +400,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
 
 export function DiceBonusLabel(props: {
   rolls: IDiceRollResult[];
-  colon?: boolean;
+  colonBefore?: boolean;
 }) {
   const diceRollsManager = useLatestDiceRoll(props.rolls, {
     disableConfettis: true,
@@ -413,9 +417,9 @@ export function DiceBonusLabel(props: {
 
   return (
     <>
-      {!!label && (
+      {label && (
         <span>
-          {props.colon && ": "}
+          {props.colonBefore && ": "}
           {label}
         </span>
       )}

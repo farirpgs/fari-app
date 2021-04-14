@@ -25,50 +25,52 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
 
   return (
     <>
-      {isLabelVisible && (
-        <Box>
-          <Grid container spacing={1} justify="space-between" wrap="nowrap">
-            <Grid item xs>
-              <FateLabel display="inline">
+      <Box>
+        <Grid container spacing={1} justify="space-between" wrap="nowrap">
+          <Grid item xs>
+            {isLabelVisible && (
+              <Box>
+                <FateLabel display="inline">
+                  <ContentEditable
+                    readonly={!props.advanced}
+                    border={props.advanced}
+                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                    value={props.block.label}
+                    onChange={(value) => {
+                      props.onLabelChange(value);
+                    }}
+                  />
+                </FateLabel>
+              </Box>
+            )}
+            <Box>
+              <Typography>
                 <ContentEditable
-                  readonly={!props.advanced}
-                  border={props.advanced}
-                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                  value={props.block.label}
+                  border={!props.readonly}
+                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+                  readonly={props.readonly}
+                  value={props.block.value}
                   onChange={(value) => {
-                    props.onLabelChange(value);
+                    props.onValueChange(value);
                   }}
                 />
-              </FateLabel>
-            </Grid>
-            {isSlotTrackerVisible && (
-              <Grid item>
-                <BlockToggleMeta
-                  readonly={props.readonly}
-                  pageIndex={props.pageIndex}
-                  sectionIndex={props.sectionIndex}
-                  section={props.section}
-                  block={props.block}
-                  blockIndex={props.blockIndex}
-                  onMetaChange={props.onMetaChange}
-                />
-              </Grid>
-            )}
+              </Typography>
+            </Box>
           </Grid>
-        </Box>
-      )}
-      <Box>
-        <Typography>
-          <ContentEditable
-            border={!props.readonly}
-            data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
-            readonly={props.readonly}
-            value={props.block.value}
-            onChange={(value) => {
-              props.onValueChange(value);
-            }}
-          />
-        </Typography>
+          {isSlotTrackerVisible && (
+            <Grid item className={css({ marginLeft: "auto" })}>
+              <BlockToggleMeta
+                readonly={props.readonly}
+                pageIndex={props.pageIndex}
+                sectionIndex={props.sectionIndex}
+                section={props.section}
+                block={props.block}
+                blockIndex={props.blockIndex}
+                onMetaChange={props.onMetaChange}
+              />
+            </Grid>
+          )}
+        </Grid>
       </Box>
     </>
   );

@@ -33,7 +33,9 @@ describe("useDicePool", () => {
     const aBlockElement: IDicePoolElement = {
       blockId: "1",
       blockType: BlockType.DicePool,
-      commandOptionList: [{ type: RollType.DiceCommand, command: "1dF" }],
+      commandOptionList: [
+        { type: RollType.DiceCommand, commandGroupId: "1dF" },
+      ],
       label: "Block 1",
     };
     const anotherBlockElement: IDicePoolElement = {
@@ -59,7 +61,7 @@ describe("useDicePool", () => {
     expect(result.current.state.pool).toEqual([anotherBlockElement]);
 
     act(() => {
-      const poolResult = result.current.actions.getPoolResult();
+      const { result: poolResult } = result.current.actions.getPoolResult();
 
       expect(poolResult).toEqual({
         commandResult: [

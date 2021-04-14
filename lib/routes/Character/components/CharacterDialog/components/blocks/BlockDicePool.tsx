@@ -16,7 +16,7 @@ import {
 import { IDiceCommandOption } from "../../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { Block } from "../../domains/Block/Block";
-import { CommandGroups } from "../../domains/CommandGroups/CommandGroups";
+import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -43,7 +43,7 @@ export function BlockDicePool(
   const canRoll = !props.readonly && hasCommands;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
 
-  const blockCommandGroups = CommandGroups.getCommandGroupFromBlock(
+  const blockCommandGroups = DiceCommandGroup.getCommandGroupFromBlock(
     props.block
   );
   const commandOptionList = Block.getCommandOptionList(props.block);

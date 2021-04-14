@@ -1,67 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Dice,
-  IDiceCommandNames,
+  IDiceCommandGroup,
+  IDiceCommandGroupId,
   IDiceCommandOption,
   IRollDiceOptions,
-  RollType
+  RollType,
 } from "../../domains/dice/Dice";
+import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
 
 export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
-export const DefaultDiceCommandOptionList: Array<IDiceCommandOption> = [
+export const DefaultDiceCommandOptions: Array<IDiceCommandOption> = [
   {
     type: RollType.DiceCommand,
-    command: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    command: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    command: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    command: "1dF",
+    commandGroupId: "4dF",
   },
 ];
 
 export function useDice() {
-  const [latestCommandOptionList, setLatestCommandOptionList] = useState<
+  const [latestCommandOptions, setLatestCommandOptions] = useState<
     Array<IDiceCommandOption>
-  >(DefaultDiceCommandOptionList);
+  >(DefaultDiceCommandOptions);
   const [latestOptions, setLatestOptions] = useState<IRollDiceOptions>({
     listResults: false,
   });
+  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>(
+    []
+  );
 
-  const latestCommandsNames: Array<IDiceCommandNames> = latestCommandOptionList
-    .map((c) => (c.type === RollType.DiceCommand ? c.command : undefined))
-    .filter((c) => !!c) as Array<IDiceCommandNames>;
+  const latestCommandGroupIds: Array<IDiceCommandGroupId> = useMemo(() => {
+    const result = latestCommandOptions
+      .map((c) =>
+        c.type === RollType.DiceCommand ? c.commandGroupId : undefined
+      )
+      .filter((c) => !!c) as Array<IDiceCommandGroupId>;
+    return result;
+  }, [latestCommandOptions]);
+
+  useEffect(() => {
+    const newCommandGroups = latestCommandGroupIds.map((commandGroupId) =>
+      DiceCommandGroup.getCommandGroupById(commandGroupId)
+    );
+    setCommandGroups(newCommandGroups);
+  }, [latestCommandGroupIds]);
 
   const reset = () => {
-    setLatestCommandOptionList(DefaultDiceCommandOptionList);
+    setLatestCommandOptions(DefaultDiceCommandOptions);
   };
-
-  function rollByCommandNames(
-    newCommandsNames: Array<IDiceCommandNames>,
-    options: IRollDiceOptions
-  ) {
-    const newCommands: Array<IDiceCommandOption> = newCommandsNames.map(
-      (command) => ({ type: RollType.DiceCommand, command: command })
-    );
-
-    return roll(newCommands, options);
-  }
 
   function roll(
     newCommands: Array<IDiceCommandOption>,
-    options: IRollDiceOptions
+    options: IRollDiceOptions = latestOptions
   ) {
-    setLatestCommandOptionList(newCommands);
+    setLatestCommandOptions(newCommands);
     setLatestOptions(options);
     const result = Dice.rollCommandOptionList(newCommands, options);
     return result;
@@ -74,7 +68,7 @@ export function useDice() {
   function reroll(options?: IRollDiceOptions) {
     const optionsToUse = options ?? latestOptions;
     const result = Dice.rollCommandOptionList(
-      latestCommandOptionList,
+      latestCommandOptions,
       optionsToUse
     );
     return result;
@@ -82,16 +76,17 @@ export function useDice() {
 
   return {
     state: {
-      commandOptionList: latestCommandOptionList,
-      commandNames: latestCommandsNames,
+      // commandOptionList: latestCommandOptionList,
+      commandNames: latestCommandGroupIds,
       options: latestOptions,
+      commandGroups,
     },
     actions: {
       roll,
-      rollByCommandNames,
       reroll,
       reset,
       setOptions: setLatestOptions,
+      setCommandGroups,
     },
   };
 }
