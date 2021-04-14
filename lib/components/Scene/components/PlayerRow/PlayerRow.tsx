@@ -424,11 +424,12 @@ export const PlayerRow: React.FC<
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Box mb=".5rem">
-            <Grid container wrap="nowrap" justify="space-around">
+          <Box mb=".5rem" width="100%">
+            <Grid container wrap="nowrap" justify="space-around" spacing={2}>
               <Grid item>
                 <Button
                   color="primary"
+                  variant="outlined"
                   endIcon={<GroupAddIcon />}
                   onClick={() => {
                     setLoadCharacterDialogOpen(false);
@@ -445,6 +446,7 @@ export const PlayerRow: React.FC<
                 <Button
                   autoFocus
                   color="primary"
+                  variant="outlined"
                   endIcon={<PersonAddIcon />}
                   onClick={() => {
                     setLoadCharacterDialogOpen(false);
