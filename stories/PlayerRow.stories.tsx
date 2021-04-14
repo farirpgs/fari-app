@@ -33,7 +33,10 @@ function StorybookPlayerRow(props: {
       onPointsChange={action("onPointsChange")}
       onPlayerRemove={action("onPlayerRemove")}
       onCharacterSheetOpen={action("onCharacterSheetOpen")}
-      onLoadCharacterSheet={action("onLoadCharacterSheet")}
+      onAssignOriginalCharacterSheet={action("onLoadCharacterSheet")}
+      onAssignDuplicateCharacterSheet={action(
+        "onLoadAndDuplicateCharacterSheet"
+      )}
     />
   );
 }
@@ -84,11 +87,21 @@ GameMaster.args = {
   }),
 };
 
-export const PlayerWithControls = Template.bind({});
-PlayerWithControls.args = {
+export const PlayerWithGMControls = Template.bind({});
+PlayerWithGMControls.args = {
   highlight: false,
   canLoadCharacterSheet: true,
   canRemove: true,
+  canRoll: true,
+  canUpdateInitiative: true,
+  canUpdatePoints: true,
+};
+
+export const PlayerWithControls = Template.bind({});
+PlayerWithControls.args = {
+  highlight: true,
+  canLoadCharacterSheet: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
@@ -98,7 +111,7 @@ export const PlayerWithARollAndLabel = Template.bind({});
 PlayerWithARollAndLabel.args = {
   highlight: false,
   canLoadCharacterSheet: true,
-  canRemove: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
@@ -147,7 +160,7 @@ export const PlayerWithARollAndModifier = Template.bind({});
 PlayerWithARollAndModifier.args = {
   highlight: false,
   canLoadCharacterSheet: true,
-  canRemove: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
@@ -197,7 +210,7 @@ export const PlayerWithACharacterSheet = Template.bind({});
 PlayerWithACharacterSheet.args = {
   highlight: false,
   canLoadCharacterSheet: true,
-  canRemove: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
@@ -220,7 +233,7 @@ export const PlayerOutOfBound = Template.bind({});
 PlayerOutOfBound.args = {
   highlight: false,
   canLoadCharacterSheet: true,
-  canRemove: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
@@ -369,7 +382,7 @@ export const PlayerOutOfBoundWithCharacter = Template.bind({});
 PlayerOutOfBoundWithCharacter.args = {
   highlight: false,
   canLoadCharacterSheet: true,
-  canRemove: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
@@ -519,7 +532,7 @@ export const PlayerOutOfBoundPool = Template.bind({});
 PlayerOutOfBoundPool.args = {
   highlight: false,
   canLoadCharacterSheet: true,
-  canRemove: true,
+  canRemove: false,
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,

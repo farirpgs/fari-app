@@ -130,6 +130,14 @@ export const CharacterFactory = {
       return c;
     }
   },
+  duplicate(c: ICharacter): ICharacter {
+    return {
+      ...c,
+      id: Id.generate(),
+      lastUpdated: getUnix(),
+      name: `${c?.name} Copy`,
+    };
+  },
   makeBlock(type: BlockType) {
     const blockDefault: Record<BlockType, IBlock> = {
       [BlockType.Text]: {

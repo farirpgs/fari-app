@@ -1,6 +1,11 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -10,11 +15,13 @@ import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import RestorePageIcon from "@material-ui/icons/RestorePage";
-import React from "react";
+import React, { useState } from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
@@ -52,7 +59,8 @@ export const PlayerRow: React.FC<
 
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
-    onLoadCharacterSheet(): void;
+    onAssignOriginalCharacterSheet(): void;
+    onAssignDuplicateCharacterSheet(): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -88,7 +96,7 @@ export const PlayerRow: React.FC<
     `Player #${props.number}`;
 
   const hasCharacterSheet = !!props.player.character;
-
+  const [loadCharacterDialogOpen, setLoadCharacterDialogOpen] = useState(false);
   const points = parseInt(mainPointerBlock?.value ?? "0") || 0;
 
   const pointsStyle = css({
@@ -107,6 +115,7 @@ export const PlayerRow: React.FC<
 
   return (
     <>
+      {renderLoadCharacerSheetDialog()}
       <Box
         bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
         data-cy={props["data-cy"]}
@@ -167,21 +176,33 @@ export const PlayerRow: React.FC<
 
   function renderControls() {
     return (
-      <Grid
-        item
-        xs
-        container
-        spacing={1}
-        alignItems="center"
-        justify="flex-end"
-      >
-        {props.permissions.canLoadCharacterSheet && (
-          <Grid item>{renderCharacterSheetButton()}</Grid>
-        )}
-        <Grid item>{renderInitiative()}</Grid>
-        {props.permissions.canRemove && (
-          <Grid item>{renderDeleteButton()}</Grid>
-        )}
+      <Grid item xs container spacing={1} justify="space-between" wrap="nowrap">
+        <Grid
+          item
+          xs={6}
+          container
+          alignItems="center"
+          justify="flex-start"
+          spacing={1}
+        >
+          <Grid item>{renderInitiative()}</Grid>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          container
+          alignItems="center"
+          justify="flex-end"
+          spacing={1}
+        >
+          {props.permissions.canLoadCharacterSheet && (
+            <Grid item>{renderCharacterSheetButton()}</Grid>
+          )}
+
+          {props.permissions.canRemove && (
+            <Grid item>{renderDeleteButton()}</Grid>
+          )}
+        </Grid>
       </Grid>
     );
   }
@@ -201,8 +222,7 @@ export const PlayerRow: React.FC<
             color={hasCharacterSheet ? "default" : "primary"}
             data-cy={`${props["data-cy"]}.load-character-sheet`}
             onClick={() => {
-              props.onLoadCharacterSheet();
-              logger.info("ScenePlayer:onCharacterSheetContextButtonPress");
+              setLoadCharacterDialogOpen(true);
             }}
           >
             {!hasCharacterSheet ? <NoteAddIcon /> : <RestorePageIcon />}
@@ -384,6 +404,61 @@ export const PlayerRow: React.FC<
           </FateLabel>
         </ConditionalWrapper>
       </>
+    );
+  }
+
+  function renderLoadCharacerSheetDialog() {
+    return (
+      <Dialog
+        open={loadCharacterDialogOpen}
+        onClose={() => {
+          setLoadCharacterDialogOpen(false);
+        }}
+      >
+        <DialogTitle>
+          {t("player-row.load-character-sheet-dialog.title")}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t("player-row.load-character-sheet-dialog.description")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Box mb=".5rem">
+            <Grid container wrap="nowrap" justify="space-around">
+              <Grid item>
+                <Button
+                  color="primary"
+                  endIcon={<GroupAddIcon />}
+                  onClick={() => {
+                    setLoadCharacterDialogOpen(false);
+                    props.onAssignDuplicateCharacterSheet();
+                    logger.info("PlayerRow:onLoadAndDuplicateCharacterSheet");
+                  }}
+                >
+                  {t(
+                    "player-row.load-character-sheet-dialog.load-and-duplicate"
+                  )}
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  autoFocus
+                  color="primary"
+                  endIcon={<PersonAddIcon />}
+                  onClick={() => {
+                    setLoadCharacterDialogOpen(false);
+                    props.onAssignOriginalCharacterSheet();
+                    logger.info("PlayerRow:onLoadCharacterSheet");
+                  }}
+                >
+                  {t("player-row.load-character-sheet-dialog.load")}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </DialogActions>
+      </Dialog>
     );
   }
 };

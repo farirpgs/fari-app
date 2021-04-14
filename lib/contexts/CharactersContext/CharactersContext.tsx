@@ -4,8 +4,7 @@ import { arraySort } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
-import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
-import { Id } from "../../domains/Id/Id";
+import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 
 type IManagerCallback = (character: ICharacter) => void;
@@ -132,15 +131,10 @@ export function useCharacters(props?: { localStorage: Storage }) {
     setCharacters((draft: Array<ICharacter>) => {
       const match = draft.find((s) => s.id === id);
 
-      return [
-        ...draft,
-        {
-          ...match,
-          id: Id.generate(),
-          lastUpdated: getUnix(),
-          name: `${match?.name} Copy`,
-        } as ICharacter,
-      ];
+      if (match) {
+        return [...draft, CharacterFactory.duplicate(match)];
+      }
+      return draft;
     });
   }
 

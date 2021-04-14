@@ -56,6 +56,7 @@ import {
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import {
   IDiceCommandOption,
@@ -240,7 +241,7 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.addOfflinePlayer();
   };
 
-  const handleLoadCharacterForPlayer = (
+  const handleAssignOriginalCharacterSheet = (
     playerId: string,
     character: ICharacter
   ) => {
@@ -250,6 +251,23 @@ export const Scene: React.FC<IProps> = (props) => {
       connectionsManager?.actions.sendToHost<IPeerActions>({
         action: "load-character",
         payload: character,
+      });
+    }
+  };
+
+  const handleAssignDuplicateCharacterSheet = (
+    playerId: string,
+    character: ICharacter
+  ) => {
+    const copy = CharacterFactory.duplicate(character);
+    charactersManager.actions.upsert(copy);
+
+    if (isGM) {
+      sceneManager.actions.loadPlayerCharacter(playerId, copy);
+    } else {
+      connectionsManager?.actions.sendToHost<IPeerActions>({
+        action: "load-character",
+        payload: copy,
       });
     }
   };
@@ -544,11 +562,25 @@ export const Scene: React.FC<IProps> = (props) => {
                       setCharacterDialogPlayerId(player.id);
                     }
                   }}
-                  onLoadCharacterSheet={() => {
+                  onAssignOriginalCharacterSheet={() => {
                     charactersManager.actions.openManager(
                       ManagerMode.Use,
                       (character) => {
-                        handleLoadCharacterForPlayer(player.id, character);
+                        handleAssignOriginalCharacterSheet(
+                          player.id,
+                          character
+                        );
+                      }
+                    );
+                  }}
+                  onAssignDuplicateCharacterSheet={() => {
+                    charactersManager.actions.openManager(
+                      ManagerMode.Use,
+                      (character) => {
+                        handleAssignDuplicateCharacterSheet(
+                          player.id,
+                          character
+                        );
                       }
                     );
                   }}
