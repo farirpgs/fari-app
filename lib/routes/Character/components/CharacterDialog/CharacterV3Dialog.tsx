@@ -33,6 +33,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
+import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { AppLink } from "../../../../components/AppLink/AppLink";
@@ -138,6 +139,23 @@ export const CharacterV3Dialog: React.FC<{
   const characterTemplateInfo = getTemplateInfo(
     characterManager.state.character?.template
   );
+
+  function getTemplateName(template: string | undefined = "") {
+    const label = t(
+      `character-dialog.template.${template}` as ITranslationKeys,
+      {},
+      true
+    );
+
+    if (!!label) {
+      return label;
+    }
+    const formatted = template
+      .split("_")
+      .map((word) => startCase(word))
+      .join(" - ");
+    return formatted;
+  }
 
   function onSave() {
     const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
@@ -334,11 +352,9 @@ export const CharacterV3Dialog: React.FC<{
               filterOptions={createFilterOptions({ limit: 100 })}
               options={CharacterTemplatesWithGroups}
               className={css({ width: "300px" })}
-              getOptionLabel={(option) =>
-                t(
-                  `character-dialog.template.${option.template}` as ITranslationKeys
-                )
-              }
+              getOptionLabel={(option) => {
+                return getTemplateName(option.template);
+              }}
               groupBy={(option) => option.group}
               onChange={(event, newValue) => {
                 if (newValue?.template) {
@@ -554,9 +570,7 @@ export const CharacterV3Dialog: React.FC<{
                   to={characterTemplateInfo.author?.link}
                   target="_blank"
                 >
-                  {t(
-                    `character-dialog.template.${characterManager.state.character?.template}` as ITranslationKeys
-                  )}{" "}
+                  {getTemplateName(characterManager.state.character?.template)}{" "}
                   ({characterTemplateInfo.author?.name})
                 </AppLink>
               </Box>

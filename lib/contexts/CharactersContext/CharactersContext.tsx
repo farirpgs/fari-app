@@ -68,8 +68,8 @@ export function useCharacters(props?: { localStorage: Storage }) {
     managerCallback.current = undefined;
   }
 
-  function add(type: CharacterTemplates): ICharacter {
-    const newCharacter = CharacterFactory.make(type);
+  async function add(type: CharacterTemplates): Promise<ICharacter> {
+    const newCharacter = await CharacterFactory.make(type);
 
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];

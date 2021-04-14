@@ -73,73 +73,139 @@ export default {
   },
 } as Meta<IProps>;
 
-const Template: Story<IProps> = (args, context) => (
-  <StoryProvider theme={context.globals.theme}>
-    <Box width="350px" ml="5rem">
-      <StorybookCharacterCard
-        characterSheet={
-          {
-            ...args.characterSheet,
-            name: "My Character",
-          } as any
-        }
-        readonly={args.readonly}
-        playerName={args.playerName}
-      />
-    </Box>
-  </StoryProvider>
-);
+const Template: Story<IProps> = (args, context) => {
+  const character = args.characterSheet ?? (context as any).loaded.character;
+
+  return (
+    <StoryProvider theme={context.globals.theme}>
+      <Box width="350px" ml="5rem">
+        <StorybookCharacterCard
+          characterSheet={
+            {
+              ...character,
+              name: "My Character",
+            } as any
+          }
+          readonly={args.readonly}
+          playerName={args.playerName}
+        />
+      </Box>
+    </StoryProvider>
+  );
+};
 
 export const FateCondensed = Template.bind({});
-FateCondensed.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.FateCondensed),
-};
+(FateCondensed as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.FateCondensed
+    );
+    return { character };
+  },
+];
+
 export const FateCore = Template.bind({});
-FateCore.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.FateCore),
-};
+(FateCore as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(CharacterTemplates.FateCore);
+    return { character };
+  },
+];
+
 export const FateAccelerated = Template.bind({});
-FateAccelerated.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.FateAccelerated),
-};
+(FateAccelerated as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.FateAccelerated
+    );
+    return { character };
+  },
+];
+
 export const FateOfCthulhu = Template.bind({});
-FateOfCthulhu.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.FateOfCthulhu),
-};
+(FateOfCthulhu as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.FateOfCthulhu
+    );
+    return { character };
+  },
+];
+
 export const DresdenFilesAccelerated = Template.bind({});
-DresdenFilesAccelerated.args = {
-  characterSheet: CharacterFactory.make(
-    CharacterTemplates.DresdenFilesAccelerated
-  ),
-};
+(DresdenFilesAccelerated as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.DresdenFilesAccelerated
+    );
+    return { character };
+  },
+];
+
 export const VentureCity = Template.bind({});
-VentureCity.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.VentureCity),
-};
+(VentureCity as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.VentureCity
+    );
+    return { character };
+  },
+];
+
 export const Heartbreaker = Template.bind({});
-Heartbreaker.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.Heartbreaker),
-};
+(Heartbreaker as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.Heartbreaker
+    );
+    return { character };
+  },
+];
+
 export const IronEddaAccelerated = Template.bind({});
-IronEddaAccelerated.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.IronEddaAccelerated),
-};
+(IronEddaAccelerated as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.IronEddaAccelerated
+    );
+    return { character };
+  },
+];
+
 export const Maze = Template.bind({});
-Maze.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.Maze),
-};
+(Maze as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(CharacterTemplates.Maze);
+    return { character };
+  },
+];
+
 export const Dnd5e = Template.bind({});
-Dnd5e.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.Dnd5e),
-};
+(Dnd5e as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(CharacterTemplates.Dnd5e);
+    return { character };
+  },
+];
+
 export const TheWitchIsDead = Template.bind({});
-TheWitchIsDead.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.TheWitchIsDead),
-};
+(TheWitchIsDead as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.TheWitchIsDead
+    );
+    return { character };
+  },
+];
+
 export const Blank = Template.bind({});
-Blank.args = {
-  characterSheet: CharacterFactory.make(CharacterTemplates.Blank),
-};
+(Blank as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(CharacterTemplates.Blank);
+    return { character };
+  },
+];
+
 export const LoremIpsum = Template.bind({});
 LoremIpsum.args = {
   characterSheet: LoremIpsumTemplate as any,

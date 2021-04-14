@@ -46,12 +46,14 @@
 - feat/refac: Dice commands are now `sticky` which means that the latest roll that you have done, where ever it was rolled, is going to be saved so that you can re-roll it easily.
   - The latest roll commands are now displayed correctly when you open the dice menu (the little badge numbers displayed in the top right corner of each die icon)
 - fix: Display the `has played` tooltip on index cards initiative tracker. Thanks @tjbearse for this fix.
+  - https://github.com/fariapp/fari/pull/256#issuecomment-816675961
 - fix: Changed the position of the floating dice box at the bottom right corner instead of bottom left to help Fari be more "Twitch friendly"
 - fix: Disappearing Toggles when a Text block label is empty and the advanced mode is turned off. Thanks @sleighr for the bug report.
 - fix: Non-draggable blocks if two sections have the same name. Thanks @sleighr for the bug report.
 - fix: When rolling a character sheet skill has a GM, it was always the GM that was associated with the dice roll. Thanks @JFRobillard for the bug report.
 - feat: Let the ability to both GMs and Players to either Assign the original version of a character sheet or assign e duplicate version.
 - feat: better spanish translations by @1d12monos
+  - https://github.com/fariapp/fari/pull/259#event-4594870648
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 

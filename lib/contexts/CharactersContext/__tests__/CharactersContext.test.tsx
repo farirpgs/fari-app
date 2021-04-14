@@ -44,7 +44,7 @@ describe("useCharacters", () => {
     });
   });
   describe("flow", () => {
-    it("should be able to manager characters", () => {
+    it("should be able to manager characters", async () => {
       // GIVEN
       const localStorage = new LocalStorageMock();
 
@@ -54,8 +54,8 @@ describe("useCharacters", () => {
 
       // WHEN I add a new character
       let newCharacter: ICharacter | undefined = undefined;
-      act(() => {
-        newCharacter = result.current.actions.add(
+      await act(async () => {
+        newCharacter = await result.current.actions.add(
           CharacterTemplates.FateCondensed
         );
       });

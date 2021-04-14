@@ -15,7 +15,8 @@ export function useTranslate() {
     currentLanguage,
     t: (
       key: ITranslationKeys,
-      options?: UseTranslationOptions & Record<string, string>
+      options?: UseTranslationOptions & Record<string, string>,
+      noFallback: boolean = false
     ): string => {
       const value = t(key, options);
       const englishValue = i18n.t(key, {
@@ -27,7 +28,11 @@ export function useTranslate() {
         lng: "dev",
       });
 
-      if (!value) {
+      const isValidValue = !!value && key !== value;
+      if (!isValidValue) {
+        if (noFallback) {
+          return "";
+        }
         logger.warn("useTranslate:onMissingTranslation", {
           key,
           currentLanguage,
@@ -35,6 +40,7 @@ export function useTranslate() {
 
         return englishValue || devValue;
       }
+
       return value;
     },
     i18n,

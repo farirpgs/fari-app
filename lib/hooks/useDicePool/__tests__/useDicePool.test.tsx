@@ -65,7 +65,12 @@ describe("useDicePool", () => {
 
       expect(poolResult).toEqual({
         commandResult: [
-          { command: "1dF", type: "DiceCommand", value: expect.anything() },
+          {
+            commandGroupId: "1dF",
+            commandName: "1dF",
+            type: "DiceCommand",
+            value: expect.anything(),
+          },
         ],
         options: { listResults: true },
         total: expect.anything(),

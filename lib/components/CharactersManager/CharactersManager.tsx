@@ -18,8 +18,8 @@ export const CharactersManager: React.FC<IProps> = (props) => {
 
   const logger = useLogger();
 
-  function onAdd() {
-    const newCharacter = charactersManager.actions.add(
+  async function onAdd() {
+    const newCharacter = await charactersManager.actions.add(
       CharacterTemplates.Blank
     );
 
