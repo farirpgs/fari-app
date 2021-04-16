@@ -40,7 +40,6 @@ export const SceneFactory = {
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
-      sort: false,
       drawAreaObjects: [],
       version: defaultSceneVersion,
       lastUpdated: getUnix(),
@@ -62,8 +61,9 @@ export const SceneFactory = {
   makeIndexCard(): IIndexCard {
     return {
       id: Id.generate(),
-      header: "",
+      titleLabel: "Index Card",
       title: "",
+      contentLabel: "Notes",
       content: "",
       color: "#fff",
       playedDuringTurn: false,
@@ -76,8 +76,9 @@ export const SceneFactory = {
   makeSubIndexCard(): IIndexCard {
     return {
       id: Id.generate(),
-      header: "",
+      titleLabel: "Index Card",
       title: "",
+      contentLabel: "Notes",
       content: "",
       color: "#fff",
       playedDuringTurn: false,
@@ -135,7 +136,6 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
     players: v1.players,
     goodConfetti: v1.goodConfetti,
     badConfetti: v1.badConfetti,
-    sort: v1.sort,
     drawAreaObjects: v1.drawAreaObjects,
     lastUpdated: v1.lastUpdated,
     notes: v1.notes,
@@ -173,17 +173,18 @@ function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
     [AspectType.IndexCard]: "",
   };
   const colorRecord: Record<IndexCardColorTypes, string> = {
-    white: IndexCardColor.white.light,
-    blue: IndexCardColor.blue.light,
-    green: IndexCardColor.green.light,
-    red: IndexCardColor.red.light,
-    yellow: IndexCardColor.yellow.light,
+    white: IndexCardColor.white,
+    blue: IndexCardColor.blue,
+    green: IndexCardColor.green,
+    red: IndexCardColor.red,
+    yellow: IndexCardColor.yellow,
   };
 
   return {
     id: aspectId,
-    header: headerRecord[aspect.type],
+    titleLabel: headerRecord[aspect.type],
     title: aspect.title,
+    contentLabel: "Notes",
     content: aspect.content,
     color: colorRecord[aspect.color],
     playedDuringTurn: aspect.playedDuringTurn,

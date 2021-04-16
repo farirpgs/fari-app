@@ -61,8 +61,9 @@ export interface ISceneV1 {
 
 export interface IIndexCard {
   id: string;
-  header: string;
+  titleLabel: string;
   title: string;
+  contentLabel: string;
   content: string;
   color: string;
   playedDuringTurn: boolean;
@@ -87,7 +88,6 @@ export interface IScene {
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  sort: boolean;
   drawAreaObjects: IDrawAreaObjects;
   version: number;
   lastUpdated: number;

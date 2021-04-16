@@ -171,10 +171,10 @@ export const ContentEditable: React.FC<
             "color": "inherit",
             "textDecoration": props.underline ? "underline" : undefined,
             "borderBottom": props.border
-              ? `1px solid ${props.borderColor ?? theme.palette.divider}`
+              ? `1px solid ${props.borderColor ?? theme.palette.text.hint}`
               : undefined,
             "&:empty:before": {
-              color: "lightgrey",
+              color: theme.palette.text.hint,
               content: props.placeholder ? `"${props.placeholder}"` : undefined,
             },
             "& *": {

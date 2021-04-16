@@ -6,14 +6,17 @@
 # vNext
 
 - [x] feat: Ability to use Building Blocks inside Index Cards
-- [ ] feat: Add cards inside Cards (e.g. to be able to represent zones)
+- [x] feat: Add cards inside Cards (e.g. to be able to represent zones)
 - [x] feat: Add a "Duplicate" button on Index cards
 - [x] feat: Change color pick on Index Card to support any type of color
   - [x] feat: Make index card text color dynamic based on background color
-- [ ] feat: sort cards
-- [ ] feat: Index Cards templates
+- [x] feat: sort cards
+- [x] fix: Index Cards templates to use new Block model
 - [x] style: Enhance tab design of scenes
 - [x] chore: Migrate V1 scenes to V2 Scenes
+- [x] feat: New Image building block block
+- [x] feat: Make it possible to edit block label without being in advanced mode
+- [x] feat: Make index cards collapsible
 
 To verify
 

@@ -37,7 +37,7 @@ export function BlockSlotTracker(
       return [
         ...draft,
         {
-          label: "0",
+          label: "1",
           checked: false,
         },
       ];
@@ -114,7 +114,7 @@ export function BlockSlotTracker(
                   >
                     <ContentEditable
                       data-cy={`${props.dataCy}.label`}
-                      readonly={!props.advanced}
+                      readonly={props.readonly}
                       border={props.advanced}
                       value={props.block.label}
                       onChange={(value) => {

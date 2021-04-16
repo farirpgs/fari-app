@@ -17,6 +17,7 @@ import {
   IDicePool,
   IDicePoolElement,
 } from "./blocks/BlockDicePool";
+import { BlockImage } from "./blocks/BlockImage";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
@@ -31,6 +32,7 @@ export function BlockByType(
     IBlockComponentProps<any>,
     "onLabelChange" | "onValueChange" | "onMetaChange"
   > & {
+    hideHelp?: boolean;
     onChange(newBlock: IBlock): void;
     onRemove(): void;
     onDuplicate(): void;
@@ -109,6 +111,17 @@ export function BlockByType(
       )}
       {props.block.type === BlockType.Numeric && (
         <BlockNumeric
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+        />
+      )}
+      {props.block.type === BlockType.Image && (
+        <BlockImage
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
@@ -243,7 +256,7 @@ export function BlockByType(
   }
 
   function renderBlockHelpText() {
-    if (!props.advanced && !block.meta.helperText) {
+    if (props.hideHelp || (!props.advanced && !block.meta.helperText)) {
       return null;
     }
     return (

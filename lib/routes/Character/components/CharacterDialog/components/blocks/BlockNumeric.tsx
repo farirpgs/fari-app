@@ -41,7 +41,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
           <Grid item xs>
             <FateLabel display="inline">
               <ContentEditable
-                readonly={!props.advanced}
+                readonly={props.readonly}
                 border={props.advanced}
                 data-cy={`${props.dataCy}.label`}
                 value={props.block.label}

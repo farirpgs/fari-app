@@ -19,6 +19,7 @@ import {
   IBlock,
   ICharacter,
   IDicePoolBlock,
+  IImageBlock,
   INumericBlock,
   IPage,
   IPointCounterBlock,
@@ -101,9 +102,9 @@ export const CharacterFactory = {
     };
   },
   makeFromJson(jsonData: any): ICharacter {
-    return {
-      ...jsonData,
-    };
+    const newSheet = { ...jsonData };
+    const migratedSheet = this.migrate(newSheet);
+    return migratedSheet;
   },
   makeTemplate(props: {
     name: string;
@@ -185,6 +186,13 @@ export const CharacterFactory = {
         meta: {},
         value: [{ label: "1", checked: false }],
       } as IBlock & ISlotTrackerBlock,
+      [BlockType.Image]: {
+        id: Id.generate(),
+        label: "Image",
+        type: type,
+        meta: {},
+        value: "",
+      } as IBlock & IImageBlock,
     };
 
     return blockDefault[type];

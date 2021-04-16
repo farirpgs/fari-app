@@ -1,13 +1,11 @@
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 
 export const AddSection: React.FC<{
   onAddSection(): void;
 }> = (props) => {
-  const theme = useTheme();
   const { t } = useTranslate();
 
   return (

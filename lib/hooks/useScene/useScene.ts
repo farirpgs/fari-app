@@ -7,14 +7,14 @@ import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
   defaultSceneName,
-  ISavableScene,
+  ISavableScene
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import {
   BlockType,
   IBlock,
   ICharacter,
-  IPointCounterBlock,
+  IPointCounterBlock
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
@@ -212,8 +212,14 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addIndexCard(type: IIndexCardType) {
-    const newCard = SceneFactory.makeIndexCard();
+  function addIndexCard(
+    type: IIndexCardType,
+    cardProducer?: (card: IIndexCard) => IIndexCard | void
+  ) {
+    const defaultCard = SceneFactory.makeIndexCard();
+    const newCard = cardProducer
+      ? produce(defaultCard, cardProducer)
+      : defaultCard;
     setScene(
       produce((draft: IScene) => {
         const cards = draft.indexCards[type];
@@ -502,14 +508,6 @@ export function useScene(props: IProps) {
     );
   }
 
-  function toggleSort() {
-    setScene(
-      produce((draft: IScene) => {
-        draft.sort = !draft.sort;
-      })
-    );
-  }
-
   function setNotes(notes: string) {
     setScene(
       produce((draft: IScene) => {
@@ -553,7 +551,6 @@ export function useScene(props: IProps) {
       safeSetScene,
       setGroup,
       setNotes,
-      toggleSort,
       updateDrawAreaObjects,
       updateGmRoll,
       updateIndexCard,

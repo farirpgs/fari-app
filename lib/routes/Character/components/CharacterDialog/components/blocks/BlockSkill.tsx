@@ -16,7 +16,7 @@ import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions"
 import { Block } from "../../domains/Block/Block";
 import {
   IBlockActionComponentProps,
-  IBlockComponentProps,
+  IBlockComponentProps
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
@@ -89,7 +89,7 @@ export function BlockSkill(
             <FateLabel className={css({ display: "inline-block" })}>
               <ContentEditable
                 data-cy={`${props.dataCy}.label`}
-                readonly={!props.advanced}
+                readonly={props.readonly}
                 border={props.advanced}
                 value={props.block.label}
                 onChange={(value) => {

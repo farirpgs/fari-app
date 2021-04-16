@@ -123,7 +123,7 @@ export function BlockPointCounter(
                 >
                   <ContentEditable
                     data-cy={`${props.dataCy}.label`}
-                    readonly={!props.advanced}
+                    readonly={props.readonly}
                     border={props.advanced}
                     value={props.block.label}
                     onChange={(value) => {

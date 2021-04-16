@@ -685,11 +685,13 @@ export const CharacterV3Dialog: React.FC<{
 
           {shouldRenderAddSectionButton && (
             <Box>
-              <AddSection
-                onAddSection={() => {
-                  characterManager.actions.addSection(pageIndex, 0, position);
-                }}
-              />
+              <ThemeProvider theme={blackButtonTheme}>
+                <AddSection
+                  onAddSection={() => {
+                    characterManager.actions.addSection(pageIndex, 0, position);
+                  }}
+                />
+              </ThemeProvider>
             </Box>
           )}
         </Box>

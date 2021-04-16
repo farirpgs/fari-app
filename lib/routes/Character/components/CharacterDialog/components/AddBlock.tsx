@@ -1,13 +1,15 @@
 import Box from "@material-ui/core/Box";
 import Button, { ButtonProps } from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import useTheme from "@material-ui/core/styles/useTheme";
+import AddIcon from "@material-ui/icons/Add";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
+import ImageIcon from "@material-ui/icons/Image";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
@@ -18,27 +20,49 @@ import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 export const AddBlock: React.FC<
   {
     onAddBlock(section: BlockType): void;
+    variant: "icon" | "button";
   } & Pick<ButtonProps, "color">
 > = (props) => {
-  const theme = useTheme();
+  const variant = props.variant ?? "button";
   const { t } = useTranslate();
   const [anchorEl, setAnchorEl] = React.useState<any>();
 
   return (
     <Box p="1rem" justifyContent="center" display="flex">
-      <Button
-        color={"primary"}
-        variant="outlined"
-        onClick={(e) => {
-          setAnchorEl(e.currentTarget);
-        }}
-      >
-        {t("character-dialog.control.add-block")}
-      </Button>
+      {variant === "button" ? (
+        <Button
+          color={"primary"}
+          variant="outlined"
+          onClick={(e) => {
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          {t("character-dialog.control.add-block")}
+        </Button>
+      ) : (
+        <IconButton
+          size="small"
+          color="primary"
+          onClick={(e) => {
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          <AddIcon />
+        </IconButton>
+      )}
       <Menu
-        elevation={0}
-        anchorEl={anchorEl}
+        elevation={2}
         open={!!anchorEl}
+        anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "center",
+          horizontal: "left",
+        }}
         onClose={() => {
           setAnchorEl(undefined);
         }}
@@ -66,6 +90,18 @@ export const AddBlock: React.FC<
           </ListItemIcon>
 
           <ListItemText primary={t("character-dialog.block-type.numeric")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Image);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <ImageIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.image")} />
         </MenuItem>
         <MenuItem
           onClick={() => {

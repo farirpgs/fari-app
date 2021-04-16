@@ -6,14 +6,17 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
+import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
+import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
@@ -34,7 +37,6 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SaveIcon from "@material-ui/icons/Save";
-import SortIcon from "@material-ui/icons/Sort";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -55,8 +57,9 @@ import {
   ISavableScene,
   useScenes,
 } from "../../contexts/SceneContext/ScenesContext";
-import { arraySort } from "../../domains/array/arraySort";
-import { ICharacter } from "../../domains/character/types";
+import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { BlockType, ICharacter } from "../../domains/character/types";
 import {
   IDiceCommandOption,
   IDiceRollResult,
@@ -79,6 +82,7 @@ import { DiceFab, DiceFabMode } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
+import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
@@ -88,6 +92,12 @@ export enum SceneMode {
   PlayOnline,
   PlayOffline,
   Manage,
+}
+
+enum SortMode {
+  Custom = "Custom",
+  GroupFirst = "GroupFirst",
+  PinnedFirst = "PinnedFirst",
 }
 
 export const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
@@ -146,6 +156,14 @@ export const Scene: React.FC<IProps> = (props) => {
   const textColors = useTextColors(theme.palette.primary.main);
   const { t } = useTranslate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [indexCardHiddenRecord, setIndexCardHiddenRecord] = useState<
+    Record<string, boolean>
+  >({});
+  const areAllCardsVisible =
+    Object.keys(indexCardHiddenRecord).length === 0
+      ? true
+      : Object.values(indexCardHiddenRecord).every((c) => !c);
+
   const $menu = useRef(null);
 
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
@@ -158,6 +176,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const headerBackgroundColor = useTextColors(theme.palette.background.paper)
     .primary;
 
+  const [sort, setSort] = useState<SortMode>(SortMode.Custom);
   const [tab, setTab] = useState<
     "player-characters" | "public" | "private" | "zones" | "gm-notes"
   >("public");
@@ -167,7 +186,6 @@ export const Scene: React.FC<IProps> = (props) => {
   const isManaging = isGM || props.mode === SceneMode.Manage;
 
   const poolManager = useDicePool();
-  const isPrivate = tab === "private";
   const isGMHostingOnlineOrOfflineGame =
     props.mode !== SceneMode.Manage && isGM;
   const isGMEditingDirtyScene =
@@ -284,6 +302,40 @@ export const Scene: React.FC<IProps> = (props) => {
     }
   };
 
+  function handleOnToggleVisibility(indexCard: IIndexCard) {
+    setIndexCardHiddenRecord((prev) => {
+      const oldValue = prev[indexCard.id];
+      return {
+        ...prev,
+        [indexCard.id]: !oldValue,
+      };
+    });
+  }
+
+  function handleOnToggleVisibilityAll() {
+    setIndexCardHiddenRecord((prev) => {
+      const newValue = areAllCardsVisible ? true : false;
+      const indexCardsFromAllTypes = [
+        ...sceneManager.state.scene.indexCards.public,
+        ...sceneManager.state.scene.indexCards.private,
+      ];
+      const allIndexCardIds = [];
+      for (const indexCard of indexCardsFromAllTypes) {
+        allIndexCardIds.push(indexCard.id);
+        for (const subCard of indexCard.subCards) {
+          allIndexCardIds.push(subCard.id);
+        }
+      }
+
+      return allIndexCardIds.reduce((acc, indexCardId) => {
+        return {
+          ...acc,
+          [indexCardId]: newValue,
+        };
+      }, {} as Record<string, boolean>);
+    });
+  }
+
   return (
     <Page
       gameId={props.idFromParams}
@@ -322,7 +374,7 @@ export const Scene: React.FC<IProps> = (props) => {
               handleSetPlayerRoll(playerId, result);
             }}
             onClearPool={() => {
-              const result = poolManager.actions.clearPool();
+              poolManager.actions.clearPool();
             }}
             pool={poolManager.state.pool}
             rollsForDiceBox={me?.rolls ?? []}
@@ -756,6 +808,36 @@ export const Scene: React.FC<IProps> = (props) => {
     return (
       <Box>
         <Box>{renderGMIndexCardActions(type)}</Box>
+        <Box mb="2rem">
+          <Grid container spacing={1} justify="center" alignItems="flex-end">
+            <Grid item>
+              <FormControl>
+                <InputLabel>{t("play-route.sort")}</InputLabel>
+
+                <Select
+                  native
+                  value={sort}
+                  onChange={(e) => {
+                    setSort(e.target.value as SortMode);
+                  }}
+                >
+                  <option value={SortMode.Custom}>Custom</option>
+                  <option value={SortMode.GroupFirst}>Groups First</option>
+                  <option value={SortMode.PinnedFirst}>Pinned Firsts</option>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  handleOnToggleVisibilityAll();
+                }}
+              >
+                {areAllCardsVisible ? "Close All" : "Open All"}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
 
         {renderIndexCards(indexCardsFromTab, type)}
 
@@ -775,72 +857,24 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
-  // function renderIndexCardsWithChildren(indexCardsFromTab: Array<IIndexCard>) {
-  //   const indexCardsToShow = indexCardsFromTab.filter(
-  //     (i) => i.subCards.length > 0
-  //   );
-  //   console.debug(
-  //     "with children",
-  //     indexCardsToShow.map((c) => c.title).join(", ")
-  //   );
-  //   return (
-  //     <Grid container>
-  //       {indexCardsToShow.map((indexCard, index) => {
-  //         return (
-  //           <Grid key={indexCard.id} item xs={12}>
-  //             <Box mb="1rem">
-  //               <IndexCard
-  //                 index={index}
-  //                 key={indexCard.id}
-  //                 data-cy={`scene.aspect.`}
-  //                 id={`index-card-${indexCard.id}`}
-  //                 pool={poolManager.state.pool}
-  //                 readonly={!isGM}
-  //                 showClickableSkills={props.mode !== SceneMode.Manage}
-  //                 indexCard={indexCard}
-  //                 onRoll={(label, modifier) => {
-  //                   const options: Array<IDiceCommandOption> = [
-  //                     ...DefaultDiceCommandOptions,
-  //                   ];
-  //                   options.push({
-  //                     type: RollType.Modifier,
-  //                     label: label,
-  //                     modifier: modifier,
-  //                   });
-  //                   const result = diceManager.actions.roll(options, {
-  //                     listResults: false,
-  //                   });
-  //                   handleSetMyRoll(result);
-  //                 }}
-  //                 onPoolClick={(element) => {
-  //                   poolManager.actions.addOrRemovePoolElement(element);
-  //                   poolManager.actions.setPlayerId(gm.id);
-  //                 }}
-  //                 onMove={(dragIndex, hoverIndex) => {
-  //                   sceneManager.actions.moveIndexCard(dragIndex, hoverIndex);
-  //                 }}
-  //                 onChange={(newIndexCard) => {
-  //                   sceneManager.actions.updateIndexCard(newIndexCard);
-  //                 }}
-  //                 onDuplicate={() => {
-  //                   sceneManager.actions.duplicateIndexCard(indexCard);
-  //                 }}
-  //                 onRemove={() => {
-  //                   sceneManager.actions.removeIndexCard(indexCard.id);
-  //                 }}
-  //               />
-  //             </Box>
-  //           </Grid>
-  //         );
-  //       })}
-  //     </Grid>
-  //   );
-  // }
-
   function renderIndexCards(
     indexCardsFromTab: Array<IIndexCard>,
     type: IIndexCardType
   ) {
+    const sortByPinned: IArraySortGetter<IIndexCard> = (indexCard) => {
+      return { value: indexCard.pinned, direction: "asc" };
+    };
+    const sortByGroup: IArraySortGetter<IIndexCard> = (indexCard) => {
+      return { value: indexCard.subCards.length > 0, direction: "asc" };
+    };
+    const sorters: Array<IArraySortGetter<IIndexCard>> = [];
+    if (sort === SortMode.GroupFirst) {
+      sorters.push(sortByGroup);
+    } else if (sort === SortMode.PinnedFirst) {
+      sorters.push(sortByPinned);
+    }
+    const sortedCards = arraySort(indexCardsFromTab, sorters);
+
     return (
       <Box
         className={css({
@@ -850,11 +884,11 @@ export const Scene: React.FC<IProps> = (props) => {
           columnGap: "1rem",
         })}
       >
-        {indexCardsFromTab.map((indexCard, index) => {
+        {sortedCards.map((indexCard, index) => {
           const hasChildren = indexCard.subCards.length > 0;
           return (
             <Box
-              key={indexCard.id}
+              key={`${indexCard.id}.${type}`}
               className={css({
                 label: "Scene-aspect-masonry-card",
                 paddingBottom: "1rem",
@@ -869,11 +903,16 @@ export const Scene: React.FC<IProps> = (props) => {
               <IndexCard
                 type={type}
                 reactDndIndex={index}
+                canMove={sort === SortMode.Custom}
                 key={indexCard.id}
                 reactDndType={"scene.index-cards"}
                 data-cy={`scene.aspect.${index}`}
                 id={`index-card-${indexCard.id}`}
                 pool={poolManager.state.pool}
+                indexCardHiddenRecord={indexCardHiddenRecord}
+                onToggleVisibility={() => {
+                  handleOnToggleVisibility(indexCard);
+                }}
                 readonly={!isGM}
                 showClickableSkills={props.mode !== SceneMode.Manage}
                 indexCard={indexCard}
@@ -1127,7 +1166,7 @@ export const Scene: React.FC<IProps> = (props) => {
       return null;
     }
     return (
-      <Box pb="2rem">
+      <Box mb="1rem">
         <Grid container spacing={1} justify="center">
           <Grid item>
             <ButtonGroup
@@ -1148,7 +1187,16 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-aspect"
                 onClick={() => {
-                  sceneManager.actions.addIndexCard(type);
+                  sceneManager.actions.addIndexCard(type, (card) => {
+                    card.titleLabel = "Aspect";
+                    card.contentLabel = "Notes";
+                    const freeInvokes = CharacterFactory.makeBlock(
+                      BlockType.SlotTracker
+                    );
+                    freeInvokes.label = "Free Invokes";
+                    freeInvokes.value = [];
+                    card.blocks.push(freeInvokes);
+                  });
                   logger.info("Scene:onAddCard:Aspect");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1158,7 +1206,16 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-boost"
                 onClick={() => {
-                  sceneManager.actions.addIndexCard(type);
+                  sceneManager.actions.addIndexCard(type, (card) => {
+                    card.titleLabel = "Boost";
+                    card.contentLabel = "Notes";
+                    const freeInvokes = CharacterFactory.makeBlock(
+                      BlockType.SlotTracker
+                    );
+                    freeInvokes.label = "Free Invokes";
+                    card.blocks.push(freeInvokes);
+                    card.color = IndexCardColor.blue;
+                  });
                   logger.info("Scene:onAddCard:Boost");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1168,7 +1225,16 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-npc"
                 onClick={() => {
-                  sceneManager.actions.addIndexCard(type);
+                  sceneManager.actions.addIndexCard(type, (card) => {
+                    card.titleLabel = "NPC";
+                    card.contentLabel = "Aspects";
+                    const stress = CharacterFactory.makeBlock(
+                      BlockType.SlotTracker
+                    );
+                    stress.label = "Stress";
+                    card.blocks.push(stress);
+                    card.color = IndexCardColor.green;
+                  });
                   logger.info("Scene:onAddCard:NPC");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1178,7 +1244,16 @@ export const Scene: React.FC<IProps> = (props) => {
               <Button
                 data-cy="scene.add-bad-guy"
                 onClick={() => {
-                  sceneManager.actions.addIndexCard(type);
+                  sceneManager.actions.addIndexCard(type, (card) => {
+                    card.titleLabel = "Bad Guy";
+                    card.contentLabel = "Aspects";
+                    const stress = CharacterFactory.makeBlock(
+                      BlockType.SlotTracker
+                    );
+                    stress.label = "Stress";
+                    card.blocks.push(stress);
+                    card.color = IndexCardColor.red;
+                  });
                   logger.info("Scene:onAddCard:BadGuy");
                 }}
                 endIcon={<AddCircleOutlineIcon />}
@@ -1198,7 +1273,7 @@ export const Scene: React.FC<IProps> = (props) => {
     }
     return (
       <Box pb="1rem">
-        <Grid container spacing={1} justify="center" alignItems="center">
+        <Grid container spacing={1} justify="center" alignItems="flex-end">
           {props.mode === SceneMode.PlayOnline && (
             <Grid item>
               <Button
@@ -1227,22 +1302,6 @@ export const Scene: React.FC<IProps> = (props) => {
               </Button>
             </Grid>
           )}
-          <Grid item>
-            <Button
-              data-cy="scene.sort"
-              onClick={() => {
-                props.sceneManager.actions.toggleSort();
-                logger.info("Scene:onSort");
-              }}
-              variant="outlined"
-              color={
-                props.sceneManager.state.scene.sort ? "primary" : "default"
-              }
-              endIcon={<SortIcon />}
-            >
-              {t("play-route.sort")}
-            </Button>
-          </Grid>
         </Grid>
       </Box>
     );
@@ -1303,7 +1362,7 @@ export const Scene: React.FC<IProps> = (props) => {
               variant={sceneManager.state.dirty ? "contained" : "outlined"}
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
-                sceneManager.actions.loadScene(sceneManager.state.scene, true);
+                sceneManager.actions.loadScene(sceneManager.state.scene, false);
                 setSavedSnack(true);
                 logger.info("Scene:onSave");
               }}
