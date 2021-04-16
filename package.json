@@ -13,6 +13,7 @@
     "serve:build": "cp serve.json dist/serve.json && yarn serve dist -l 1234",
     "preview:build": "rm -rf ./dist && yarn build && yarn deploy:preview",
     "beta": "yarn preview:build --alias beta",
+    "alpha": "yarn preview:build --alias alpha",
     "build-and-serve": "yarn build && yarn serve:build",
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
