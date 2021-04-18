@@ -21,7 +21,8 @@ import { BlockToggleMeta } from "../BlockToggleMeta";
 export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
-  const isSlotTrackerVisible = props.block.meta?.checked !== undefined;
+  const isSlotTrackerVisible =
+    props.block.meta?.checked === true || props.block.meta?.checked === false;
 
   return (
     <>

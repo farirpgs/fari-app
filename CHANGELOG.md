@@ -54,6 +54,9 @@
 - feat: Let the ability to both GMs and Players to either Assign the original version of a character sheet or assign e duplicate version.
 - feat: better spanish translations by @1d12monos
   - https://github.com/fariapp/fari/pull/259#event-4594870648
+- fix: empty label for dice pools should be hidden when advanced mode is turned off
+- fix: toggles for text box always visible afte rimport
+- feat: two columns
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 

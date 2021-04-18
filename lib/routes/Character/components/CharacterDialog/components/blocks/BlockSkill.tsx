@@ -35,7 +35,8 @@ export function BlockSkill(
     delay: 750,
   });
 
-  const isSlotTrackerVisible = props.block.meta.checked !== undefined;
+  const isSlotTrackerVisible =
+    props.block.meta?.checked === true || props.block.meta?.checked === false;
   const skillDescription =
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
   const hasCommands = !!props.block.meta.commands?.length;
