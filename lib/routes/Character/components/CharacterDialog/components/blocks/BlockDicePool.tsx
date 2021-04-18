@@ -7,7 +7,10 @@ import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import { default as React } from "react";
-import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import {
   BlockType,
@@ -42,6 +45,8 @@ export function BlockDicePool(
   const hasCommands = !!props.block.meta.commands?.length;
   const canRoll = !props.readonly && hasCommands;
   const isSelected = props.pool.some((p) => p.blockId === props.block.id);
+  const isLabelVisible =
+    !!previewContentEditable({ value: props.block.label }) || props.advanced;
 
   const blockCommandGroups = DiceCommandGroup.getCommandGroupFromBlock(
     props.block
@@ -51,23 +56,25 @@ export function BlockDicePool(
   return (
     <>
       <Box>
-        <Box>
-          <Grid container spacing={1} justify="space-between" wrap="nowrap">
-            <Grid item xs>
-              <FateLabel display="inline" align={"center"}>
-                <ContentEditable
-                  readonly={!props.advanced}
-                  border={props.advanced}
-                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                  value={props.block.label}
-                  onChange={(value) => {
-                    props.onLabelChange(value);
-                  }}
-                />
-              </FateLabel>
+        {isLabelVisible && (
+          <Box>
+            <Grid container spacing={1} justify="space-between" wrap="nowrap">
+              <Grid item xs>
+                <FateLabel display="inline" align={"center"}>
+                  <ContentEditable
+                    readonly={!props.advanced}
+                    border={props.advanced}
+                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                    value={props.block.label}
+                    onChange={(value) => {
+                      props.onLabelChange(value);
+                    }}
+                  />
+                </FateLabel>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        )}
         <Grid
           container
           spacing={1}
