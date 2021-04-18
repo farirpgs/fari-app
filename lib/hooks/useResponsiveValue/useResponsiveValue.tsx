@@ -1,13 +1,13 @@
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-export function useResponsiveNumberOfColumns(props: {
-  xl: number;
-  lg: number;
-  md: number;
-  sm: number;
-  xs: number;
-}): number {
+export function useResponsiveValue<T>(props: {
+  xl: T;
+  lg: T;
+  md: T;
+  sm: T;
+  xs: T;
+}): T {
   const theme = useTheme();
   const isXlAndUp = useMediaQuery(theme.breakpoints.up("xl"));
   const isLgAndUp = useMediaQuery(theme.breakpoints.up("lg"));

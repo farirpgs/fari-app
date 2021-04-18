@@ -38,7 +38,6 @@ describe("useScene", () => {
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
-      sort: false,
       drawAreaObjects: [],
       version: 1,
       lastUpdated: expect.anything(),
@@ -64,7 +63,7 @@ describe("useScene", () => {
       const useCharactersMock = mockUseCharacters();
 
       // WHEN
-      const { result, rerender } = renderHook((props) => {
+      const { result } = renderHook(() => {
         const charactersManager = useCharactersMock();
         return useScene({
           userId,
@@ -497,35 +496,6 @@ describe("useScene", () => {
     });
   });
 
-  describe("sort", () => {
-    // GIVEN
-    const userId = "111";
-    const gameId = undefined;
-    const useCharactersMock = mockUseCharacters();
-
-    // WHEN initial render
-    const { result } = renderHook(() => {
-      const charactersManager = useCharactersMock();
-      return useScene({
-        userId,
-        gameId,
-        charactersManager,
-      });
-    });
-    expect(result.current.state.scene.sort).toEqual(false);
-    // WHEN toggle sort
-    act(() => {
-      result.current.actions.toggleSort();
-    });
-    // THEN
-    expect(result.current.state.scene.sort).toEqual(true);
-    // WHEN toggle sort
-    act(() => {
-      result.current.actions.toggleSort();
-    });
-    // THEN
-    expect(result.current.state.scene.sort).toEqual(false);
-  });
   describe("draw area", () => {
     // GIVEN
     const userId = "111";
@@ -607,7 +577,7 @@ describe("useScene", () => {
       // WHEN setuping scene
       act(() => {
         result.current.actions.updateName("NAME");
-        result.current.actions.addIndexCard(false);
+        result.current.actions.addIndexCard("public");
       });
       // THEN
       expect(result.current.state.scene.name).toEqual("NAME");
@@ -643,12 +613,15 @@ describe("useScene", () => {
       // WHEN setuping scene
       let npcIndexCard: IIndexCard;
       act(() => {
-        npcIndexCard = result.current.actions.addIndexCard(false);
-        result.current.actions.addIndexCard(false);
-        result.current.actions.updateIndexCard({
-          ...npcIndexCard,
-          pinned: true,
-        });
+        npcIndexCard = result.current.actions.addIndexCard("public");
+        result.current.actions.addIndexCard("public");
+        result.current.actions.updateIndexCard(
+          {
+            ...npcIndexCard,
+            pinned: true,
+          },
+          "public"
+        );
       });
       // THEN
       expect(Object.keys(result.current.state.scene.indexCards).length).toEqual(
@@ -703,7 +676,8 @@ describe("useScene", () => {
       result.current.useCharacters.actions.updateIfExists
     ).toHaveBeenCalledTimes(2);
   });
-  describe("o", () => {
+
+  describe("offline character", () => {
     const userId = "111";
     const gameId = undefined;
     const useCharactersMock = mockUseCharacters();
@@ -717,7 +691,6 @@ describe("useScene", () => {
         charactersManager,
       });
     });
-    expect(result.current.state.scene.sort).toEqual(false);
     // WHEN adding an offline character
     let playerId = "";
     act(() => {

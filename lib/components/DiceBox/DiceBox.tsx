@@ -10,6 +10,7 @@ import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
+import { arraySort } from "../../domains/array/arraySort";
 import {
   Dice,
   DiceCommandOptions,
@@ -304,10 +305,21 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
   const separator = shouldListResult ? "•" : "+";
   const isPool = shouldListResult ?? false;
 
+  const finalRolls = diceRollsManager.state.finalResultRolls;
+  const rolls = isPool
+    ? arraySort(finalRolls, [
+        (roll) => {
+          if (roll.type === RollType.DiceCommand) {
+            return { value: roll.value, direction: "desc" };
+          }
+          return { value: 0, direction: "desc" };
+        },
+      ])
+    : finalRolls;
   return (
     <>
       <span>
-        {diceRollsManager.state.finalResultRolls.map((r, i) => {
+        {rolls.map((r, i) => {
           const isFirst = i === 0;
           if (r.type === RollType.Label) {
             return null;
@@ -317,6 +329,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
               <span
                 key={i}
                 className={css({
+                  label: "DiceBoxResult-rollType-Modifier",
                   display: "inline-block",
                   verticalAlign: "middle",
                 })}
@@ -324,6 +337,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                 {!isFirst && (
                   <span
                     className={css({
+                      label: "DiceBoxResult-rollType-Modifier-separator",
                       margin: "0 .2rem",
                       verticalAlign: "middle",
                     })}
@@ -334,6 +348,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                 <Tooltip title={r.label}>
                   <span
                     className={css({
+                      label: "DiceBoxResult-rollType-Modifier-value",
                       verticalAlign: "middle",
                     })}
                   >
@@ -354,6 +369,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
             <span
               key={i}
               className={css({
+                label: "DiceBoxResult-rollType-DiceCommand",
                 display: "inline-block",
                 verticalAlign: "middle",
               })}
@@ -361,6 +377,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
               {!isFirst && (
                 <span
                   className={css({
+                    label: "DiceBoxResult-rollType-DiceCommand-separator",
                     margin: "0 .2rem",
                     verticalAlign: "middle",
                   })}
@@ -372,6 +389,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                 <span>
                   <span
                     className={css({
+                      label: "DiceBoxResult-rollType-DiceCommand-value",
                       fontFamily: isFate ? "fate" : "inherit",
                       verticalAlign: "middle",
                     })}
@@ -381,7 +399,9 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                   {!isFate && (
                     <span
                       className={css({
-                        verticalAlign: "middle",
+                        label: "DiceBoxResult-rollType-DiceCommand-icon",
+                        paddingLeft: ".25rem",
+                        verticalAlign: "sub",
                       })}
                     >
                       {isPool && <IconForPool />}

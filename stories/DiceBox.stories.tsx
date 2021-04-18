@@ -201,6 +201,25 @@ DefaultD20BadResult.args = {
   ],
 };
 
+export const HeadsOrTrails = Template.bind({});
+HeadsOrTrails.args = {
+  rolls: [
+    {
+      total: 0,
+      totalWithoutModifiers: 0,
+      options: { listResults: true },
+      commandResult: [
+        {
+          type: RollType.DiceCommand,
+          value: "Heads",
+          commandGroupId: "coin",
+          commandName: "coin",
+        },
+      ],
+    },
+  ],
+};
+
 export const MultipleDice = Template.bind({});
 MultipleDice.args = {
   rolls: [

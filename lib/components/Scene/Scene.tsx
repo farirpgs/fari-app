@@ -69,7 +69,7 @@ import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
-import { useResponsiveNumberOfColumns } from "../../hooks/useResponsiveNumberOfColumns/useResponsiveNumberOfColumns";
+import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -87,6 +87,7 @@ import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
+import { useHiddenIndexCardRecord } from "./hooks/useHiddenIndexCardRecord";
 
 export enum SceneMode {
   PlayOnline,
@@ -141,51 +142,12 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager,
     connectionsManager,
     scenesManager,
-    charactersManager: charactersManager,
+    charactersManager,
   } = props;
-
-  const theme = useTheme();
-  const logger = useLogger();
-  const diceManager = useContext(DiceContext);
-
-  const isXlAndUp = useMediaQuery(theme.breakpoints.up("xl"));
-  const isLgAndUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const isMDAndUp = useMediaQuery(theme.breakpoints.up("md"));
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const errorTheme = useThemeFromColor(theme.palette.error.main);
-  const textColors = useTextColors(theme.palette.primary.main);
-  const { t } = useTranslate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [indexCardHiddenRecord, setIndexCardHiddenRecord] = useState<
-    Record<string, boolean>
-  >({});
-  const areAllCardsVisible =
-    Object.keys(indexCardHiddenRecord).length === 0
-      ? true
-      : Object.values(indexCardHiddenRecord).every((c) => !c);
-
-  const $menu = useRef(null);
-
-  const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
-  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
-    string | undefined
-  >(undefined);
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
-
-  const [sort, setSort] = useState<SortMode>(SortMode.Custom);
-  const [tab, setTab] = useState<
-    "player-characters" | "public" | "private" | "zones" | "gm-notes"
-  >("public");
-  const [savedSnack, setSavedSnack] = useState(false);
 
   const isGM = !props.idFromParams;
   const isManaging = isGM || props.mode === SceneMode.Manage;
 
-  const poolManager = useDicePool();
   const isGMHostingOnlineOrOfflineGame =
     props.mode !== SceneMode.Manage && isGM;
   const isGMEditingDirtyScene =
@@ -194,15 +156,53 @@ export const Scene: React.FC<IProps> = (props) => {
   const shouldBlockLeaving =
     isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
 
-  const numberOfColumnsForCards = useResponsiveNumberOfColumns({
+  useBlockReload(shouldBlockLeaving);
+  const theme = useTheme();
+  const { t } = useTranslate();
+  const logger = useLogger();
+  const diceManager = useContext(DiceContext);
+  const poolManager = useDicePool();
+  const numberOfColumnsForCards = useResponsiveValue({
     xl: 4,
     lg: 3,
     md: 2,
     sm: 1,
     xs: 1,
   });
+  const characterCardWidth = useResponsiveValue({
+    xl: "25%",
+    lg: "33%",
+    md: "50%",
+    sm: "100%",
+    xs: "100%",
+  });
 
-  useBlockReload(shouldBlockLeaving);
+  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const errorTheme = useThemeFromColor(theme.palette.error.main);
+  const textColors = useTextColors(theme.palette.primary.main);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
+  const [sort, setSort] = useState<SortMode>(SortMode.Custom);
+  const [tab, setTab] = useState<
+    "player-characters" | "public" | "private" | "zones" | "gm-notes"
+  >("public");
+  const [savedSnack, setSavedSnack] = useState(false);
+
+  const hiddenIndexCardRecord = useHiddenIndexCardRecord(
+    sceneManager.state.scene.indexCards
+  );
+
+  const $menu = useRef(null);
+  const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
+
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
+
   useEffect(() => {
     if (shareLinkToolTip.open) {
       const id = setTimeout(() => {
@@ -301,40 +301,6 @@ export const Scene: React.FC<IProps> = (props) => {
       });
     }
   };
-
-  function handleOnToggleVisibility(indexCard: IIndexCard) {
-    setIndexCardHiddenRecord((prev) => {
-      const oldValue = prev[indexCard.id];
-      return {
-        ...prev,
-        [indexCard.id]: !oldValue,
-      };
-    });
-  }
-
-  function handleOnToggleVisibilityAll() {
-    setIndexCardHiddenRecord((prev) => {
-      const newValue = areAllCardsVisible ? true : false;
-      const indexCardsFromAllTypes = [
-        ...sceneManager.state.scene.indexCards.public,
-        ...sceneManager.state.scene.indexCards.private,
-      ];
-      const allIndexCardIds = [];
-      for (const indexCard of indexCardsFromAllTypes) {
-        allIndexCardIds.push(indexCard.id);
-        for (const subCard of indexCard.subCards) {
-          allIndexCardIds.push(subCard.id);
-        }
-      }
-
-      return allIndexCardIds.reduce((acc, indexCardId) => {
-        return {
-          ...acc,
-          [indexCardId]: newValue,
-        };
-      }, {} as Record<string, boolean>);
-    });
-  }
 
   return (
     <Page
@@ -654,14 +620,6 @@ export const Scene: React.FC<IProps> = (props) => {
       hasPlayersWithCharacterSheets,
     } = sceneManager.computed;
 
-    const characterCardWidth = isXlAndUp
-      ? "25%"
-      : isLgAndUp
-      ? "33%"
-      : isMDAndUp
-      ? "50%"
-      : "100%";
-
     return (
       <>
         <Box>
@@ -830,10 +788,12 @@ export const Scene: React.FC<IProps> = (props) => {
             <Grid item>
               <Button
                 onClick={() => {
-                  handleOnToggleVisibilityAll();
+                  hiddenIndexCardRecord.actions.toggleAll();
                 }}
               >
-                {areAllCardsVisible ? "Close All" : "Open All"}
+                {hiddenIndexCardRecord.state.indexCardHiddenRecord
+                  ? t("play-route.collapse-all")
+                  : t("play-route.expand-all")}
               </Button>
             </Grid>
           </Grid>
@@ -909,9 +869,11 @@ export const Scene: React.FC<IProps> = (props) => {
                 data-cy={`scene.aspect.${index}`}
                 id={`index-card-${indexCard.id}`}
                 pool={poolManager.state.pool}
-                indexCardHiddenRecord={indexCardHiddenRecord}
-                onToggleVisibility={() => {
-                  handleOnToggleVisibility(indexCard);
+                indexCardHiddenRecord={
+                  hiddenIndexCardRecord.state.indexCardHiddenRecord
+                }
+                onToggleVisibility={(indexCard) => {
+                  hiddenIndexCardRecord.actions.toggle(indexCard);
                 }}
                 readonly={!isGM}
                 showClickableSkills={props.mode !== SceneMode.Manage}

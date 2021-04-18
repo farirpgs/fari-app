@@ -110,7 +110,7 @@ export const AllDiceCommandGroups: Record<
 };
 
 const FateDie = [-1, -1, 0, 0, 1, 1];
-const CoinToss = [-1, 1];
+const CoinToss = ["Heads", "Tails"];
 const FourSidedDie = makeNormalDie(4);
 const SixSidedDie = makeNormalDie(6);
 const HeightSidedDie = makeNormalDie(8);
@@ -120,8 +120,8 @@ const TwentySidedDie = makeNormalDie(20);
 const HundredSidedDie = makeNormalDie(100);
 
 type IDiceCommandOptions = {
-  sides: Array<number>;
-  formatDetailedResult: (value: number) => string;
+  sides: Array<number | string>;
+  formatDetailedResult: (value: number | string) => string;
 };
 
 export const DiceCommandOptions: Record<
@@ -162,12 +162,7 @@ export const DiceCommandOptions: Record<
   },
   "coin": {
     sides: CoinToss,
-    formatDetailedResult: (value: number) => {
-      if (value === 1) {
-        return "Heads";
-      }
-      return "Tails";
-    },
+    formatDetailedResult: formatNormalDie,
   },
 };
 
@@ -201,7 +196,7 @@ export type IDiceCommandResult =
       type: RollType.DiceCommand;
       commandGroupId: IDiceCommandGroupId;
       commandName: IDiceCommandNames;
-      value: number;
+      value: number | string;
     }
   | {
       type: RollType.Modifier;
@@ -232,8 +227,8 @@ export const Dice = {
   ): IDiceRollResult {
     let total = 0;
     let totalWithoutModifiers = 0;
+    let containsStringValue = false;
     const rolls: Array<IDiceCommandResult> = [];
-
     commandOptions.forEach((commandOption) => {
       if (commandOption.type === RollType.DiceCommand) {
         const commandGroup = AllDiceCommandGroups[commandOption.commandGroupId];
@@ -250,8 +245,13 @@ export const Dice = {
             commandName: commandName,
             value: result,
           });
-          total += result;
-          totalWithoutModifiers += result;
+
+          if (typeof result === "number") {
+            total += result;
+            totalWithoutModifiers += result;
+          } else {
+            containsStringValue = true;
+          }
         });
       }
       if (commandOption.type === RollType.Modifier) {
@@ -274,7 +274,9 @@ export const Dice = {
       total,
       totalWithoutModifiers,
       commandResult: rolls,
-      options: options,
+      options: {
+        listResults: containsStringValue ? true : options.listResults,
+      },
     };
   },
 
@@ -315,7 +317,10 @@ export const Dice = {
 
       acc[diceRoll.commandGroupId].count =
         acc[diceRoll.commandGroupId].count + 1;
-      acc[diceRoll.commandGroupId].result += diceRoll.value;
+
+      if (typeof diceRoll.value === "number") {
+        acc[diceRoll.commandGroupId].result += diceRoll.value;
+      }
 
       return acc;
     }, {});
@@ -356,11 +361,11 @@ function makeNormalDie(sides: number) {
   });
 }
 
-function formatFateDie(value: number) {
+function formatFateDie(value: number | string) {
   const symbolMap: Record<string, string> = { "-1": "-", "0": "0", "1": "+" };
   return symbolMap[value];
 }
 
-function formatNormalDie(value: number) {
+function formatNormalDie(value: number | string) {
   return value.toString();
 }

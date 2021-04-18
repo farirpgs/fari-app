@@ -36,7 +36,7 @@ import { BlockType, IBlock } from "../../domains/character/types";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
-import { useResponsiveNumberOfColumns } from "../../hooks/useResponsiveNumberOfColumns/useResponsiveNumberOfColumns";
+import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -279,7 +279,7 @@ export const IndexCard: React.FC<
     onRemove(): void;
     onDuplicate(): void;
     onTogglePrivate?(): void;
-    onToggleVisibility(): void;
+    onToggleVisibility(indexCard: IIndexCard): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -296,11 +296,11 @@ export const IndexCard: React.FC<
   const isSubCard = indexCardManager.state.indexCard.sub;
 
   const indexCardSkills = IndexCardSkills.getSkills(
-    indexCardManager.state.indexCard.contentLabel
+    indexCardManager.state.indexCard.content
   );
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord[props.indexCard.id];
-  const numberOfColumnsForSubCards = useResponsiveNumberOfColumns({
+  const numberOfColumnsForSubCards = useResponsiveValue({
     xl: 3,
     lg: 2,
     md: 2,
@@ -355,69 +355,72 @@ export const IndexCard: React.FC<
             );
           }}
         >
-          <Grid container>
-            <Grid item xs={12} md={hasSubCards ? 3 : 12}>
-              <Box display="flex" height="100%" flexDirection="column">
-                <ThemeProvider theme={defaultButtonTheme}>
-                  <Box
-                    className={css({
-                      fontSize: "1.5rem",
-                      width: "100%",
-                      padding: "0.5rem 0",
-                      borderBottom: `1px solid ${
-                        indexCardManager.state.indexCard.color === "#fff"
-                          ? "#f0a4a4"
-                          : paper.primary
-                      }`,
-                    })}
-                  >
-                    <Box px="1rem">
-                      {renderHeader()}
-                      {renderTitle()}
-                    </Box>
-                  </Box>
-                  <Collapse in={open}>
-                    <Box>
-                      <Box>{renderContent()}</Box>
-                      <Box>
-                        {renderBlocks()}
-                        {!props.readonly && (
-                          <Fade in={hover}>
-                            <Box>
-                              <AddBlock
-                                variant="icon"
-                                onAddBlock={(blockType) => {
-                                  indexCardManager.actions.addBlock(blockType);
-                                }}
-                              />
-                            </Box>
-                          </Fade>
-                        )}
+          <Box>
+            <Grid container>
+              <Grid item xs={12} md={hasSubCards ? 3 : 12}>
+                <Box display="flex" height="100%" flexDirection="column">
+                  <ThemeProvider theme={defaultButtonTheme}>
+                    <Box
+                      className={css({
+                        fontSize: "1.5rem",
+                        width: "100%",
+                        padding: "0.5rem 0",
+                        borderBottom: `1px solid ${
+                          indexCardManager.state.indexCard.color === "#fff"
+                            ? "#f0a4a4"
+                            : paper.primary
+                        }`,
+                      })}
+                    >
+                      <Box px="1rem">
+                        {renderHeader()}
+                        {renderTitle()}
                       </Box>
                     </Box>
-                  </Collapse>
-
-                  {renderSkills()}
-                  {renderGMActions()}
-                </ThemeProvider>
-              </Box>
-            </Grid>
-            {hasSubCards && (
-              <Grid
-                item
-                xs={12}
-                md={9}
-                className={css({
-                  background:
-                    paper.type === "light"
-                      ? darken(paper.bgColor, 0.1)
-                      : lighten(paper.bgColor, 0.2),
-                })}
-              >
-                {renderSubCards()}
+                    <Collapse in={open}>
+                      <Box>
+                        <Box>{renderContent()}</Box>
+                        <Box>
+                          {renderBlocks()}
+                          {!props.readonly && (
+                            <Fade in={hover}>
+                              <Box>
+                                <AddBlock
+                                  variant="icon"
+                                  onAddBlock={(blockType) => {
+                                    indexCardManager.actions.addBlock(
+                                      blockType
+                                    );
+                                  }}
+                                />
+                              </Box>
+                            </Fade>
+                          )}
+                        </Box>
+                      </Box>
+                    </Collapse>
+                    {renderSkills()}
+                    {renderGMActions()}
+                  </ThemeProvider>
+                </Box>
               </Grid>
-            )}
-          </Grid>
+              {hasSubCards && (
+                <Grid
+                  item
+                  xs={12}
+                  md={9}
+                  className={css({
+                    background:
+                      paper.type === "light"
+                        ? darken(paper.bgColor, 0.1)
+                        : lighten(paper.bgColor, 0.2),
+                  })}
+                >
+                  {renderSubCards()}
+                </Grid>
+              )}
+            </Grid>
+          </Box>
         </ConditionalWrapper>
       </Box>
     </Paper>
@@ -665,6 +668,7 @@ export const IndexCard: React.FC<
 
   function renderSkills() {
     const hasSkills = indexCardSkills.length > 0;
+
     return (
       <Collapse in={hasSkills && !props.readonly && props.showClickableSkills}>
         <Box px="1rem" py=".5rem">
@@ -811,20 +815,30 @@ export const IndexCard: React.FC<
               </Grid>
 
               <Grid item>
-                <IconButton
-                  size="small"
-                  data-cy={`${props["data-cy"]}.collapse`}
-                  onClick={() => {
-                    props.onToggleVisibility();
-                  }}
+                <Tooltip
+                  title={
+                    open ? t("index-card.collapse") : t("index-card.expand")
+                  }
                 >
-                  <ArrowForwardIosIcon
-                    className={css({
-                      transform: open ? "rotate(270deg)" : "rotate(90deg)",
-                      transition: theme.transitions.create("transform"),
-                    })}
-                  />
-                </IconButton>
+                  <span>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.collapse`}
+                      onClick={() => {
+                        props.onToggleVisibility(
+                          indexCardManager.state.indexCard
+                        );
+                      }}
+                    >
+                      <ArrowForwardIosIcon
+                        className={css({
+                          transform: open ? "rotate(270deg)" : "rotate(90deg)",
+                          transition: theme.transitions.create("transform"),
+                        })}
+                      />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </Grid>
             </Grid>
           </Fade>

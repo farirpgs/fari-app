@@ -15,6 +15,7 @@ import {
   IBlock,
   ICharacter,
   IDicePoolBlock,
+  IImageBlock,
   INumericBlock,
   IPointCounterBlock,
   ISection,
@@ -29,6 +30,7 @@ import {
   IDicePool,
   IDicePoolElement,
 } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockImage } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockImage";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
@@ -80,6 +82,7 @@ export const CharacterCard: React.FC<{
   > = {
     Text: renderBlockText,
     Numeric: renderBlockNumeric,
+    Image: renderBlockImage,
     Skill: renderBlockSkill,
     DicePool: renderDicePool,
     PointCounter: renderBlockPointCounter,
@@ -193,6 +196,22 @@ export const CharacterCard: React.FC<{
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockNumeric
+          advanced={false}
+          readonly={true}
+          dataCy={`character-card.${section.label}.${block.label}`}
+          block={block}
+          onLabelChange={(value) => {}}
+          onValueChange={(value) => {}}
+          onMetaChange={(meta) => {}}
+        />
+      </Grid>
+    );
+  }
+
+  function renderBlockImage(section: ISection, block: IBlock & IImageBlock) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockImage
           advanced={false}
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}

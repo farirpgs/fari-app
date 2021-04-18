@@ -16,11 +16,11 @@ import {
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
-import { ITextBlock } from "../../../../../../domains/character/types";
+import { IImageBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../../types/IBlockComponentProps";
 
-export function BlockImage(props: IBlockComponentProps<ITextBlock> & {}) {
+export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
   const { t } = useTranslate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -116,10 +116,20 @@ export function BlockImage(props: IBlockComponentProps<ITextBlock> & {}) {
             </Grid>
             {false && (
               <Grid item>
-                <Button color="primary" variant="outlined" component="label">
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  component="a"
+                  href="https://imgur.com/upload"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t("character-dialog.image-block.dialog.upload")}
+                </Button>
+                {/* <Button color="primary" variant="outlined" component="label">
                   {t("character-dialog.image-block.dialog.upload")}
                   {renderHiddenUploadInput()}
-                </Button>
+                </Button> */}
               </Grid>
             )}
           </Grid>
@@ -197,6 +207,9 @@ export function BlockImage(props: IBlockComponentProps<ITextBlock> & {}) {
     if (!props.block.value || error) {
       return null;
     }
+
+    const src = props.block.value;
+
     return (
       <Box width="100%" mt=".5rem">
         <img
@@ -211,7 +224,7 @@ export function BlockImage(props: IBlockComponentProps<ITextBlock> & {}) {
             setError(true);
           }}
           onClick={clickable ? handleOnOpen : undefined}
-          src={props.block.value}
+          src={src}
           alt={props.block.label}
         />
       </Box>

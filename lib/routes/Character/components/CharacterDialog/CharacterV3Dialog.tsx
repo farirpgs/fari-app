@@ -655,6 +655,7 @@ export const CharacterV3Dialog: React.FC<{
                       <Grid container justify="center" alignItems="center">
                         <Grid item>
                           <AddBlock
+                            variant="button"
                             onAddBlock={(blockType) => {
                               characterManager.actions.addBlock(
                                 pageIndex,
