@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useContext, useState } from "react";
-import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
+import { DiceFab } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
 import { IndexCardColorTypeEnum } from "../lib/components/IndexCard/IndexCardColor";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
@@ -12,7 +12,6 @@ import {
   RollType,
 } from "../lib/domains/dice/Dice";
 import { Enum } from "../lib/domains/enum/Enum";
-import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
 import { AspectType } from "../lib/hooks/useScene/AspectType";
 import { IAspect } from "../lib/hooks/useScene/IScene";
 import { useScene } from "../lib/hooks/useScene/useScene";
@@ -29,7 +28,6 @@ function StorybookIndexCard(props: {
   type: string;
 }) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-  const poolManager = useDicePool();
   const diceManager = useContext(DiceContext);
 
   const sceneManager: ReturnType<typeof useScene> = {
@@ -76,27 +74,21 @@ function StorybookIndexCard(props: {
       return [result, ...draft];
     });
   }
-  function handleOnClearPool() {
-    poolManager.actions.clearPool();
-  }
 
   function handleOnRollPool() {
-    const { result } = poolManager.actions.getPoolResult();
+    const { result } = diceManager.actions.getPoolResult();
     handleOnNewRoll(result);
   }
 
   function handleOnPoolClick(element: IDicePoolElement) {
-    poolManager.actions.addOrRemovePoolElement(element);
+    diceManager.actions.addOrRemovePoolElement(element);
   }
 
   return (
     <>
       <DiceFab
-        type={DiceFabMode.RollAndPool}
         rollsForDiceBox={rolls}
-        pool={poolManager.state.pool}
-        onClearPool={handleOnClearPool}
-        onSelect={handleOnNewRoll}
+        onRoll={handleOnNewRoll}
         onRollPool={handleOnRollPool}
       />
       <IndexCard

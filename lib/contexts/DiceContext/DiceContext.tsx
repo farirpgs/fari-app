@@ -73,10 +73,13 @@ export function useDice() {
     setCommandGroups(newCommandGroups);
   }, [latestCommandGroupIds]);
 
-  const reset = () => {
+  function reset() {
+    setLatestCommandOptions(DefaultDiceCommandOptions);
+  }
+  function clear() {
     setLatestCommandOptions([]);
     clearPool();
-  };
+  }
 
   function roll(
     newCommands: Array<IDiceCommandOption>,
@@ -114,10 +117,10 @@ export function useDice() {
   }
 
   function addOrRemovePoolElement(element: IDicePoolElement) {
-    if (pool.length === 0) {
+    const isFirstPoolElement = pool.length === 0;
+    if (isFirstPoolElement) {
       setCommandGroups([]);
     }
-    setOptions({ listResults: true });
     setPool((draft) => {
       const ids = draft.map((element) => element.blockId);
       const exists = ids.includes(element.blockId);
@@ -169,10 +172,10 @@ export function useDice() {
       reset,
       setOptions: setOptions,
       setCommandGroups,
-      clearPool,
       addOrRemovePoolElement,
       getPoolResult,
       setPlayerId,
+      clear,
     },
     computed: {
       hasSelectedCommands: allCommandGroups.length > 0,

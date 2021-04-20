@@ -3,10 +3,11 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
-import TextField from "@material-ui/core/TextField";
-import React from "react";
+import Tooltip from "@material-ui/core/Tooltip";
+import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import { ISkillBlock } from "../../../../../../domains/character/types";
 import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
@@ -19,6 +20,7 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
+import { CircleTextField } from "../CircleTextField";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 import { IDicePool, IDicePoolElement, Pool } from "./BlockDicePool";
 export function BlockSkill(
@@ -39,9 +41,9 @@ export function BlockSkill(
     props.block.meta?.checked === true || props.block.meta?.checked === false;
   const skillDescription =
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
-  const hasCommands = !!props.block.meta.commands?.length;
-  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
 
+  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
+  const diceManager = useContext(DiceContext);
   const [firstCommandGroup] =
     props.block.meta?.commands?.map((commandId) => {
       return AllDiceCommandGroups[commandId];
@@ -63,6 +65,7 @@ export function BlockSkill(
               clickable={!props.readonly}
               borderStyle={"solid"}
               onClick={() => {
+                diceManager.actions.setOptions({ listResults: false });
                 props.onPoolClick({
                   blockId: props.block.id,
                   blockType: props.block.type,
@@ -126,6 +129,8 @@ export function BlockSkillActions(
   const theme = useTheme();
   const { t } = useTranslate();
 
+  const commands = props.block.meta.commands || [];
+
   return (
     <>
       <Grid item>
@@ -149,13 +154,33 @@ export function BlockSkillActions(
       </Grid>
       <Grid item>
         <DiceMenuForCharacterSheet
-          commandGroupIds={props.block.meta.commands || []}
+          commandGroupIds={commands}
           onChange={(newCommandIds) => {
             props.onMetaChange({
               ...props.block.meta,
               commands: newCommandIds,
             });
           }}
+          render={(diceMenuProps) => (
+            <Tooltip title={commands.join(" + ")}>
+              <Link
+                component="button"
+                variant="caption"
+                className={css({
+                  color: theme.palette.primary.main,
+                })}
+                onClick={(e: any) => {
+                  if (!diceMenuProps.open) {
+                    diceMenuProps.openMenu(e);
+                  } else {
+                    diceMenuProps.closeMenu();
+                  }
+                }}
+              >
+                {t("character-dialog.control.set-dice")}
+              </Link>
+            </Tooltip>
+          )}
         />
       </Grid>
       <Grid item>
@@ -183,175 +208,3 @@ export function BlockSkillActions(
 }
 
 BlockSkillActions.displayName = "BlockSkillActions";
-
-export function CircleTextField(props: {
-  "data-cy"?: string;
-  "value": string | undefined;
-  "readonly"?: boolean;
-  "highlight"?: boolean;
-  onChange?(value: string): void;
-}) {
-  const theme = useTheme();
-  const [value, setValue] = useLazyState({
-    value: props.value ?? "",
-    delay: 750,
-    onChange: (newValue) => {
-      props.onChange?.(newValue);
-    },
-  });
-
-  return (
-    <TextField
-      type="number"
-      data-cy={props["data-cy"]}
-      value={value}
-      variant="outlined"
-      className={css({
-        textAlign: "center",
-      })}
-      disabled={props.readonly}
-      onChange={(e) => {
-        if (!props.onChange) {
-          return;
-        }
-        if (!e.target.value) {
-          setValue("");
-        } else {
-          const parsed = parseInt(e.target.value);
-          if (parsed > 999) {
-            setValue("999");
-          } else {
-            setValue(parsed.toString());
-          }
-        }
-      }}
-      InputProps={{
-        className: css({
-          "width": "3rem",
-          "height": "3rem",
-          "borderRadius": "50%",
-          "background": props.highlight
-            ? theme.palette.primary.main
-            : "inherit",
-          "&&": {
-            color: props.highlight
-              ? theme.palette.getContrastText(theme.palette.primary.main)
-              : "inherit",
-          },
-          "transition": theme.transitions.create(["color", "background"]),
-          "boxShadow": theme.shadows[1],
-        }),
-      }}
-      inputProps={{
-        className: css({
-          "fontWeight": theme.typography.fontWeightBold,
-          "textAlign": "center",
-          // this disables the up/down browser arrows
-          "padding": "0",
-          "&[type=number]": {
-            MozAppearance: "textfield",
-          },
-          "&::-webkit-outer-spin-button": {
-            WebkitAppearance: "none",
-            margin: 0,
-          },
-          "&::-webkit-inner-spin-button": {
-            WebkitAppearance: "none",
-            margin: 0,
-          },
-        }),
-      }}
-      InputLabelProps={{
-        shrink: true,
-      }}
-    />
-  );
-}
-
-// const commandGroupsMatch =
-// props.block.meta?.commands?.map((commandId) => {
-//   return AllDiceCommandGroups.find(
-//     (c) => c.id === commandId
-//   ) as IDiceCommandGroup;
-// }) ?? [];
-
-// const shouldDisplayDiceBelowLabel =
-//   !props.advanced && commandGroupsMatch.length > 1;
-
-// {skillDescription && (
-//   <>
-//     <Tooltip
-//       placement="right-start"
-//       classes={{
-//         tooltip: css({
-//           backgroundColor: theme.palette.background.paper,
-//           color: theme.palette.text.primary,
-//           boxShadow: theme.shadows[1],
-//           fontSize: "1rem",
-//         }),
-//       }}
-//       title={
-//         <>
-//           <Typography
-//             className={css({
-//               fontWeight: "bold",
-//               marginBottom: ".5rem",
-//             })}
-//           >
-//             {skillDescription.quick}
-//           </Typography>
-//           <Typography>{skillDescription.long}</Typography>
-//         </>
-//       }
-//     >
-//       <HelpIcon
-//         className={css({
-//           marginLeft: ".5rem",
-//           fontSize: "1rem",
-//         })}
-//       />
-//     </Tooltip>
-//   </>
-// )}
-
-// {commandGroupsMatch.length === 1 && (
-//   <Grid item>
-//     {commandGroupsMatch.map((commandGroup, index) => {
-//       return (
-//         <Grid item key={index}>
-//           <Tooltip title={commandGroup.label}>
-//             <commandGroup.icon
-//               className={css({
-//                 display: "flex",
-//                 width: "2rem",
-//                 height: "2rem",
-//               })}
-//             />
-//           </Tooltip>
-//         </Grid>
-//       );
-//     })}
-//   </Grid>
-// )}
-
-// {shouldDisplayDiceBelowLabel && (
-//   <Box width="100%">
-//     <Grid container spacing={1} alignItems="center">
-//       {commandGroupsMatch.map((commandGroup, index) => {
-//         return (
-//           <Grid item key={index}>
-//             <Tooltip title={commandGroup.label}>
-//               <commandGroup.icon
-//                 className={css({
-//                   display: "flex",
-//                   width: "2rem",
-//                   height: "2rem",
-//                 })}
-//               />
-//             </Tooltip>
-//           </Grid>
-//         );
-//       })}
-//     </Grid>
-//   </Box>
-// )}

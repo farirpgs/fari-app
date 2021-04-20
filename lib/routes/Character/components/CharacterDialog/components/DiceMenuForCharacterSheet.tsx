@@ -1,9 +1,5 @@
-import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
-import Tooltip from "@material-ui/core/Tooltip";
 import React, { useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceFab";
 import {
@@ -11,23 +7,25 @@ import {
   IDiceCommandGroup,
   IDiceCommandGroupId,
 } from "../../../../../domains/dice/Dice";
-import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 
-export const DiceMenuForCharacterSheet: React.FC<{
+type RenderProps = {
+  open: boolean;
+  openMenu(event: React.MouseEvent<any, MouseEvent>): void;
+  closeMenu(): void;
+};
+
+export function DiceMenuForCharacterSheet(props: {
   commandGroupIds: Array<IDiceCommandGroupId>;
   onChange(newCommandIds: Array<IDiceCommandGroupId>): void;
-}> = (props) => {
-  const { t } = useTranslate();
-  const theme = useTheme();
+  render(renderProps: RenderProps): JSX.Element;
+}) {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
   const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>(
     []
   );
 
-  function handleOnMenuOpen(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) {
+  function handleOnMenuOpen(event: React.MouseEvent<any, MouseEvent>) {
     setAnchorEl(event.currentTarget);
   }
 
@@ -64,41 +62,27 @@ export const DiceMenuForCharacterSheet: React.FC<{
       <Box>
         <ClickAwayListener onClickAway={handleOnMenuClose}>
           <Box>
-            <Tooltip title={props.commandGroupIds.join(" + ")}>
-              <Link
-                component="button"
-                variant="caption"
-                className={css({
-                  color: theme.palette.primary.main,
-                })}
-                onClick={(e: any) => {
-                  if (!open) {
-                    handleOnMenuOpen(e);
-                  } else {
-                    handleOnMenuClose();
-                  }
-                }}
-              >
-                {t("character-dialog.control.set-dice")}
-              </Link>
-            </Tooltip>
-            <Box>
-              <DiceMenu
-                open={open}
-                anchorEl={anchorEl}
-                commands={commandGroups}
-                showPoolToggle={false}
-                onDiceCommandChange={setCommandGroups}
-                ctaLabel="Select"
-                onClear={handleOnClear}
-                onClose={handleOnMenuClose}
-                onCtaClick={handleOnNewCommandSelect}
-              />
-            </Box>
+            {props.render({
+              open: open,
+              openMenu: handleOnMenuOpen,
+              closeMenu: handleOnMenuClose,
+            })}
+
+            <DiceMenu
+              open={open}
+              anchorEl={anchorEl}
+              commands={commandGroups}
+              showPoolToggle={false}
+              onDiceCommandChange={setCommandGroups}
+              ctaLabel="Select"
+              onClear={handleOnClear}
+              onClose={handleOnMenuClose}
+              onCtaClick={handleOnNewCommandSelect}
+            />
           </Box>
         </ClickAwayListener>
       </Box>
     </>
   );
-};
+}
 DiceMenuForCharacterSheet.displayName = "DiceMenuForCharacterSheet";

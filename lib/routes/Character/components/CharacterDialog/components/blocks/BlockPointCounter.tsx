@@ -1,13 +1,10 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
-import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
-import React from "react";
+import { default as React } from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -21,7 +18,7 @@ import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
-import { CircleTextField } from "./BlockSkill";
+import { CircleTextField } from "../CircleTextField";
 
 export function usePointCounter(props: {
   points: string;
@@ -53,6 +50,19 @@ export function usePointCounter(props: {
     setInternalPoints((intValue - 1).toString());
   }
 
+  function incrementMax() {
+    const intValue = parseInt(internalMaxPoints ?? "") || 0;
+    setInternalMaxPoints((intValue + 1).toString());
+  }
+
+  function decrementMax() {
+    const intValue = parseInt(internalMaxPoints ?? "") || 0;
+    if (intValue - 1 === 0) {
+      setInternalMaxPoints("0");
+    }
+    setInternalMaxPoints((intValue - 1).toString());
+  }
+
   function setPoints(newValue: string) {
     const intValue = parseInt(newValue) || 0;
     setInternalPoints(intValue.toString());
@@ -74,6 +84,8 @@ export function usePointCounter(props: {
       setMaxPoints,
       increment,
       decrement,
+      incrementMax,
+      decrementMax,
       refresh,
     },
   };
@@ -139,21 +151,10 @@ export function BlockPointCounter(
         <Grid
           container
           justify="center"
-          alignItems="center"
-          spacing={2}
           wrap="nowrap"
+          alignItems="center"
+          spacing={1}
         >
-          {!props.readonly && (
-            <Grid item>
-              <IconButton
-                onClick={() => {
-                  pointsManager.actions.decrement();
-                }}
-              >
-                <RemoveCircleOutlineOutlinedIcon />
-              </IconButton>
-            </Grid>
-          )}
           <Grid item>
             <CircleTextField
               data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
@@ -161,6 +162,12 @@ export function BlockPointCounter(
               value={pointsManager.state.points}
               onChange={(newValue) => {
                 pointsManager.actions.setPoints(newValue);
+              }}
+              onIncrement={() => {
+                pointsManager.actions.increment();
+              }}
+              onDecrement={() => {
+                pointsManager.actions.decrement();
               }}
             />
           </Grid>
@@ -185,20 +192,15 @@ export function BlockPointCounter(
                   onChange={(newMax) => {
                     pointsManager.actions.setMaxPoints(newMax);
                   }}
+                  onIncrement={() => {
+                    pointsManager.actions.incrementMax();
+                  }}
+                  onDecrement={() => {
+                    pointsManager.actions.decrementMax();
+                  }}
                 />
               </Grid>
             </>
-          )}
-          {!props.readonly && (
-            <Grid item>
-              <IconButton
-                onClick={() => {
-                  pointsManager.actions.increment();
-                }}
-              >
-                <AddCircleOutlineOutlinedIcon />
-              </IconButton>
-            </Grid>
           )}
         </Grid>
         {canRefresh && (

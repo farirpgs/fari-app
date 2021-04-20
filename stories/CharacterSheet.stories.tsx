@@ -1,13 +1,13 @@
 import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React, { useState } from "react";
-import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
+import React, { useContext, useState } from "react";
+import { DiceFab } from "../lib/components/DiceFab/DiceFab";
+import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
-import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
@@ -19,34 +19,27 @@ function StorybookCharacterSheet(
   >
 ) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-  const poolManager = useDicePool();
-
+  const diceManager = useContext(DiceContext);
   function handleOnNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
   }
-  function handleOnClearPool() {
-    poolManager.actions.clearPool();
-  }
 
   function handleOnRollPool() {
-    const { result } = poolManager.actions.getPoolResult();
+    const { result } = diceManager.actions.getPoolResult();
     handleOnNewRoll(result);
   }
 
   function handleOnPoolClick(element: IDicePoolElement) {
-    poolManager.actions.addOrRemovePoolElement(element);
+    diceManager.actions.addOrRemovePoolElement(element);
   }
 
   return (
     <>
       <DiceFab
-        type={DiceFabMode.RollAndPool}
         rollsForDiceBox={rolls}
-        pool={poolManager.state.pool}
-        onClearPool={handleOnClearPool}
-        onSelect={handleOnNewRoll}
+        onRoll={handleOnNewRoll}
         onRollPool={handleOnRollPool}
       />
       <CharacterV3Dialog
@@ -54,7 +47,7 @@ function StorybookCharacterSheet(
         open={true}
         character={props.character}
         readonly={props.readonly}
-        pool={poolManager.state.pool}
+        pool={diceManager.state.pool}
         synced={false}
         onPoolClick={handleOnPoolClick}
         onClose={action("onClose")}

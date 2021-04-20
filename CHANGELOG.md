@@ -55,8 +55,9 @@
 - feat: better spanish translations by @1d12monos
   - https://github.com/fariapp/fari/pull/259#event-4594870648
 - fix: empty label for dice pools should be hidden when advanced mode is turned off
-- fix: toggles for text box always visible afte rimport
-- feat: two columns
+- fix: toggles for text box always visible after imports
+- feat: enable customizing dice pools without toggling the advanced mode using Right Clicks!
+- feat: give the ability to use Skills/Pools dice commands and add other dice commands using the dice menu.
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 

@@ -57,7 +57,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 
   function handleClear() {
-    diceManager.actions.setCommandGroups([]);
+    diceManager.actions.clear();
   }
 
   function handleFabClick(
@@ -479,7 +479,7 @@ export function DiceFabButton(props: {
   );
 
   function renderRollButton() {
-    const numberOfCommands = diceManager.state.commandGroups.length;
+    const numberOfPoolElements = diceManager.state.pool.length;
     return (
       <Box
         className={css({
@@ -490,16 +490,27 @@ export function DiceFabButton(props: {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: theme.palette.primary.main,
+          // background: theme.palette.primary.main,
+          background: diceManager.computed.hasPool
+            ? theme.palette.primary.dark
+            : theme.palette.primary.main,
           color: theme.palette.getContrastText(theme.palette.primary.main),
           height: buttonSize,
           borderTopRightRadius: "25px",
           borderBottomRightRadius: "25px",
-          // overflow: "hidden",
-          overflowX: "hidden",
-          transition: theme.transitions.create("max-width", {
-            duration: 1000,
-          }),
+          boxShadow: theme.shadows[4],
+          border: `4px solid ${
+            diceManager.computed.hasPool
+              ? theme.palette.primary.light
+              : theme.palette.primary.main
+          }`,
+          overflow: "hidden",
+          transition: theme.transitions.create(
+            ["max-width", "background", "border"],
+            {
+              duration: theme.transitions.duration.complex,
+            }
+          ),
           maxWidth: delayedIsRollButtonVisible ? "100vw" : "0",
         })}
       >
@@ -516,11 +527,7 @@ export function DiceFabButton(props: {
           }}
         >
           <Box ml=".5rem" mr=".25rem">
-            <Badge
-              badgeContent={numberOfCommands}
-              invisible={numberOfCommands <= 1}
-              color="secondary"
-            >
+            <Badge badgeContent={numberOfPoolElements} color="secondary">
               <Typography
                 className={css({
                   label: "DiceFabButton-label",
