@@ -53,6 +53,6 @@ describe("/play-offline", () => {
 
     Fari.get("scene.reset-initiative").click();
 
-    Fari.get("scene.player-row.2.remove").click();
+    Fari.get("scene.player-row.2.remove").click({ force: true });
   });
 });
