@@ -432,7 +432,14 @@ export const PlayerRow: React.FC<
                       color={hasCharacterSheet ? "primary" : "default"}
                       data-cy={`${props["data-cy"]}.open-character-sheet`}
                       className={css({
-                        border: `2px solid ${borderColor}`,
+                        "border": `2px solid ${borderColor}`,
+                        "& svg": {
+                          transition: theme.transitions.create(["transform"]),
+                          transform: "scale(1)",
+                        },
+                        "&:hover svg": {
+                          transform: "scale(1.3)",
+                        },
                       })}
                       onClick={() => {
                         if (hasCharacterSheet) {
