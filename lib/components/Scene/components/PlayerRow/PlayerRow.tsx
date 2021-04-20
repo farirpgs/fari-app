@@ -319,7 +319,7 @@ export const PlayerRow: React.FC<
         <Grid item>
           <Box ml="-.5rem">
             <CircleTextField
-              data-cy={`${props["data-cy"]}.counter.value`}
+              data-cy={`${props["data-cy"]}.counter`}
               value={pointsManager.state.points}
               readonly={!props.permissions.canUpdatePoints}
               highlight
@@ -430,7 +430,7 @@ export const PlayerRow: React.FC<
                     <IconButton
                       disabled={!canOpenOrLoadSheet}
                       color={hasCharacterSheet ? "primary" : "default"}
-                      data-cy={`${props["data-cy"]}.open-character-sheet`}
+                      data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
                       className={css({
                         "border": `2px solid ${borderColor}`,
                         "& svg": {
@@ -546,6 +546,7 @@ export const PlayerRow: React.FC<
                   color="primary"
                   variant="outlined"
                   endIcon={<GroupAddIcon />}
+                  data-cy={`${props["data-cy"]}.character-sheet-dialog.assign-duplicate`}
                   onClick={() => {
                     setLoadCharacterDialogOpen(false);
                     props.onAssignDuplicateCharacterSheet();
@@ -563,6 +564,7 @@ export const PlayerRow: React.FC<
                   color="primary"
                   variant="outlined"
                   endIcon={<PersonAddIcon />}
+                  data-cy={`${props["data-cy"]}.character-sheet-dialog.assign-original`}
                   onClick={() => {
                     setLoadCharacterDialogOpen(false);
                     props.onAssignOriginalCharacterSheet();

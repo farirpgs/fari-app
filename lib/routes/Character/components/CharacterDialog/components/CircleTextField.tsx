@@ -109,6 +109,7 @@ export function CircleTextField(props: {
         <Fade in={hover}>
           <IconButton
             size="small"
+            data-cy={`${props["data-cy"]}.decrement`}
             className={css({
               "position": "absolute",
               "background": theme.palette.background.paper,
@@ -131,6 +132,7 @@ export function CircleTextField(props: {
         <Fade in={hover}>
           <IconButton
             size="small"
+            data-cy={`${props["data-cy"]}.increment`}
             className={css({
               "position": "absolute",
               "background": theme.palette.background.paper,
