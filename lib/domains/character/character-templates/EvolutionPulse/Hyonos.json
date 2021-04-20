@@ -4,7 +4,7 @@
   "name": "Hyonos",
   "group": "Executors",
   "template": "FateAccelerated",
-  "lastUpdated": 1618256593,
+  "lastUpdated": 1618441154,
   "pages": [
     {
       "id": "82d5ada9-333c-4824-9495-8cd4fcb613c8",
@@ -19,23 +19,47 @@
             {
               "id": "1357da16-f258-4956-b72a-e77759985b24",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "Hyonoses live a psychic life, stranded between the material world and a dream world induced by Eden, as a Thoughtform - the materialization of the will of a human in cryosleep. pp.39-40"
+              },
               "label": "High Concept",
               "value": ""
             },
             {
               "id": "cf9509b4-ede3-44d5-ab0f-1717f3ad9dea",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "They base their whole existence on the concepts of duty, sacrifice, and abnegation."
+              },
               "label": "Trouble",
               "value": ""
             },
             {
               "id": "075c74c0-beb1-4638-a668-14e8c236c856",
               "type": "Text",
-              "meta": {},
-              "label": "Other Aspects",
+              "meta": {
+                "helperText": "All beliefs, ethics, or codes of conducts can make good traits. Light opposing dark is a very relevant symbolism."
+              },
+              "label": "Other Aspect #1",
               "value": ""
+            },
+            {
+              "id": "042a6c7a-1381-45eb-bb96-728eadb68d5b",
+              "label": "Other Aspect #2",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "A Hyonos' body is merely a physical simulacrum and can be changed at their will."
+              }
+            },
+            {
+              "id": "9d7de171-8e8f-4486-9fb8-9ce14a07c3f6",
+              "label": "Other Aspect #3",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Hyonoses do not make physical use of technology as it were, but are steeped in the mystical. They prefer close combat weapons, knightly armors, and religious relics."
+              }
             }
           ]
         },
@@ -47,7 +71,9 @@
             {
               "id": "14e01ed8-d3a9-498c-bb3a-f09a6f58fa8f",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "Hyonoses' stunts are based on faith, will, and the relics the Voice of Eden has made available to them."
+              },
               "label": "Stunt #1",
               "value": ""
             },
@@ -90,42 +116,60 @@
             {
               "id": "4c968e5c-efd3-4514-8034-b883afb3c4a4",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The Voice of Eden speaks and always offers guidance; you have to believe. Follow the path and defend humanity from the Hekath. p.42"
+              },
               "label": "Faith",
               "value": ""
             },
             {
               "id": "a6747f89-3b27-45e8-918c-b024b5941271",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You empathize with humanity and know how to interact with them. The world is lost, but humanity is not. p.43"
+              },
               "label": "Humanity",
               "value": ""
             },
             {
               "id": "16d0cc38-9603-4ebf-82b2-8a2b58a93791",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Hunt darkness wherever it gathers. You can find Hekath in the deepest of tunnels as well as see the truth in the humblest of human hearts. Use sense and intuition to find any evil. p.43"
+              },
               "label": "Inquisitive",
               "value": ""
             },
             {
               "id": "57028bd3-681c-46d4-9653-7ef551b604e8",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Fight with the martial weapons Eden has granted you, erasing darkness from the world. p.42"
+              },
               "label": "Martial",
               "value": ""
             },
             {
               "id": "128206a3-333a-492c-a457-6767016d0c0e",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Stopping the spread of darkness is worth more than your own life. The cost of your success in any mission is never too high - for you or anyone else. p.44"
+              },
               "label": "Sacrifice",
               "value": ""
             },
             {
               "id": "2c3ddc6c-cf74-4a03-b9f6-c6492c68a5a8",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You can manipulate the hard-light you are made of and realign it whenever you want. You may flash in and out of existence to pass obstacles, restore your body, or remove interference. p.43"
+              },
               "label": "Realign Reality (Pulse)",
               "value": ""
             }
@@ -139,7 +183,9 @@
             {
               "id": "12ca32a7-1ebf-4045-a06f-86faec73a888",
               "type": "SlotTracker",
-              "meta": {},
+              "meta": {
+                "helperText": "Hyonoses do not have a true corporeal body, instead being composed of hard light, which they can repair and reform by realigning reality."
+              },
               "label": "PHYSICAL Stress",
               "value": [
                 { "checked": false, "label": "1" },
@@ -151,7 +197,9 @@
               "id": "c7b42673-5ba6-488d-8be0-01b3ac5c7ef2",
               "label": "mental stress",
               "type": "SlotTracker",
-              "meta": {},
+              "meta": {
+                "helperText": "A Hyonos' mind, however, must work over-time to keep their form aligned to reality, especially under intense physical duress."
+              },
               "value": [
                 { "label": "1", "checked": false },
                 { "label": "2", "checked": false },

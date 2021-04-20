@@ -4,7 +4,7 @@
   "name": "Obscura",
   "group": "Executors",
   "template": "FateAccelerated",
-  "lastUpdated": 1618256296,
+  "lastUpdated": 1618440808,
   "pages": [
     {
       "id": "719422f7-3c1e-4243-a134-2504f4c32425",
@@ -19,23 +19,47 @@
             {
               "id": "73e215ed-dbb2-4f2e-8287-dc5e94340d60",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "You have always lived in fear, hidden in the dark and praying to survive another day... but then the Hekath found you, and the darkness stepped inside. pp.72-3"
+              },
               "label": "High Concept",
               "value": ""
             },
             {
               "id": "5daff0ea-0930-456c-9a75-443ef2daa1aa",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "You do not know what you are now, but a new power grows within you, ready to explode."
+              },
               "label": "Trouble",
               "value": ""
             },
             {
               "id": "136d1840-aeb7-41d4-94d5-43eb287fd536",
               "type": "Text",
-              "meta": {},
-              "label": "Other Aspects",
+              "meta": {
+                "helperText": "Executors are sometimes friends, sometimes enemies... while the Hekath are dark, relentless, and fierce, but part of you."
+              },
+              "label": "Other Aspect #1",
               "value": ""
+            },
+            {
+              "id": "ea4a42cb-1956-412f-8c90-553f5345e82c",
+              "label": "Other Aspect #2",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Sometimes you can control your corrupted genome to maintain your normal appearance, but in the most desperate moments your corruption becomes apparent."
+              }
+            },
+            {
+              "id": "c21e3b6f-c8d0-48a3-9551-22091562d9af",
+              "label": "Other Aspect #3",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "You have no AI, and are in fact often viewed as an enemy by the super-computers of the Executors. Hekath often ignore you, as if you are but an extension of them."
+              }
             }
           ]
         },
@@ -47,14 +71,18 @@
             {
               "id": "190d1a49-e0f8-47a3-8568-32f156a106d5",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "An Obscura's stunts are based on Hekath genes which change their body and make them into perfect death machines."
+              },
               "label": "Stunt #1",
               "value": ""
             },
             {
               "id": "0c4a6c6b-27ee-43ef-abcb-76a3e5ef5d0a",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "Obscuras can also take advantage of their superhuman gifts/curse to appeal to humanity."
+              },
               "label": "Stunt #2",
               "value": ""
             },
@@ -90,42 +118,60 @@
             {
               "id": "8e1f33e5-3e68-422f-9eff-8edc6c40afee",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Like the Hekath, you can devour matter to regenerate yourself or to modify the environment around you. You can incorporate objects and materials to recover them. p.75"
+              },
               "label": "Absorb reality (Pulse)",
               "value": ""
             },
             {
               "id": "6335c382-b058-4ca8-a260-f978d5813df5",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "When your anger manifests everything you touch falls to pieces. Objects or feelings - no difference. p.74"
+              },
               "label": "Fierce",
               "value": ""
             },
             {
               "id": "3452db2f-8541-4b8a-9332-ee0216393392",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You empathize with other people and you know how to relate to them. The world is lost, but humanity is not. p.75"
+              },
               "label": "Humanity",
               "value": ""
             },
             {
               "id": "fa41aced-158a-4afa-9657-8e4205ac0956",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You feel the beat of the world around you, a constant vibration with innumerable shades of grey... but you also feel them: the Hekath. You feel their intent and subconsciously know how to direct it. p.75"
+              },
               "label": "Instinctive",
               "value": ""
             },
             {
               "id": "83dd98bd-b7a0-4fd2-a011-0ab1f18566b7",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The Hekath infection stirs within you. You have the strength of ten men; what is impossible to many is normal to you. p.74"
+              },
               "label": "Mighty",
               "value": ""
             },
             {
               "id": "cd6b6065-9d96-476f-957e-420f634d3436",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The world is fest; you are faster. p.74"
+              },
               "label": "rapid",
               "value": ""
             }
@@ -139,7 +185,9 @@
             {
               "id": "a1f613d3-f3ce-45a0-8a96-6d5e668e7357",
               "type": "SlotTracker",
-              "meta": {},
+              "meta": {
+                "helperText": "Obscuras are effectively humans; deadly force and psychological trauma that would impact a LostH would likewise impact them."
+              },
               "label": "physical Stress",
               "value": [
                 { "checked": false, "label": "1" },
