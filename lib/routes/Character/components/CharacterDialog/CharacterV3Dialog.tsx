@@ -974,7 +974,6 @@ export const CharacterV3Dialog: React.FC<{
                     marginTop: ".5rem",
                   })}
                   onMove={(dragIndex, hoverIndex) => {
-                    console.debug("ONMOVE", { dragIndex, hoverIndex });
                     characterManager.actions.moveDnDBlock(
                       pageIndex,
                       sectionIndex,

@@ -65,7 +65,6 @@ import {
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
-import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { AspectType } from "../../hooks/useScene/AspectType";
@@ -76,7 +75,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { DiceFab, DiceFabMode } from "../DiceFab/DiceFab";
+import { DiceFab } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -164,7 +163,6 @@ export const Scene: React.FC<IProps> = (props) => {
   const isGM = !props.idFromParams;
   const isManaging = isGM || props.mode === SceneMode.Manage;
 
-  const poolManager = useDicePool();
   const isPrivate = tab === "private";
   const lightBackground = useLightBackground();
   const isGMHostingOnlineOrOfflineGame =
@@ -332,18 +330,12 @@ export const Scene: React.FC<IProps> = (props) => {
         </Snackbar>
         {props.mode !== SceneMode.Manage && (
           <DiceFab
-            type={DiceFabMode.RollAndPool}
-            onRollPool={() => {
-              const { result, playerId } = poolManager.actions.getPoolResult();
-              handleSetPlayerRoll(playerId, result);
-            }}
-            onClearPool={() => {
-              const result = poolManager.actions.clearPool();
-            }}
-            pool={poolManager.state.pool}
             rollsForDiceBox={me?.rolls ?? []}
-            onSelect={(result) => {
+            onRoll={(result) => {
               handleSetMyRoll(result);
+            }}
+            onRollPool={(result, playerId) => {
+              handleSetPlayerRoll(playerId, result);
             }}
           />
         )}
@@ -510,10 +502,10 @@ export const Scene: React.FC<IProps> = (props) => {
                   <CharacterV3Dialog
                     readonly={!canControl}
                     onPoolClick={(element) => {
-                      poolManager.actions.addOrRemovePoolElement(element);
-                      poolManager.actions.setPlayerId(player.id);
+                      diceManager.actions.addOrRemovePoolElement(element);
+                      diceManager.actions.setPlayerId(player.id);
                     }}
-                    pool={poolManager.state.pool}
+                    pool={diceManager.state.pool}
                     open={characterDialogPlayerId === player.id}
                     character={player.character}
                     dialog={true}
@@ -547,6 +539,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     canRoll: canControl,
                     canUpdatePoints: canControl,
                     canUpdateInitiative: canControl,
+                    canLoadDuplicateCharacterSheet: isGM,
                     canLoadCharacterSheet: canControl && !player.isGM,
                     canRemove: isGM && !player.isGM,
                   }}
@@ -668,10 +661,10 @@ export const Scene: React.FC<IProps> = (props) => {
                         onCharacterDialogOpen={() => {
                           setCharacterDialogPlayerId(player.id);
                         }}
-                        pool={poolManager.state.pool}
+                        pool={diceManager.state.pool}
                         onPoolClick={(element) => {
-                          poolManager.actions.addOrRemovePoolElement(element);
-                          poolManager.actions.setPlayerId(player.id);
+                          diceManager.actions.addOrRemovePoolElement(element);
+                          diceManager.actions.setPlayerId(player.id);
                         }}
                       />
                     </Box>
