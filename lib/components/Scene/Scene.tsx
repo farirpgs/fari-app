@@ -330,7 +330,6 @@ export const Scene: React.FC<IProps> = (props) => {
         </Snackbar>
         {props.mode !== SceneMode.Manage && (
           <DiceFab
-            rollsForDiceBox={me?.rolls ?? []}
             onRoll={(result) => {
               handleSetMyRoll(result);
             }}

@@ -159,8 +159,6 @@ export const PlayerRow: React.FC<
                 rolls={props.player.rolls}
                 size="2.5rem"
                 fontSize="1.25rem"
-                // disabling the confettis if the current row is "me" because there is already a diceFab
-                disableConfettis={props.isMe}
                 borderSize=".15rem"
                 disabled={!props.permissions.canRoll}
                 onClick={() => {
