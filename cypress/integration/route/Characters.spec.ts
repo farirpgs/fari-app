@@ -1,7 +1,7 @@
 import { Fari } from "lib/util/Fari";
 
 describe("/characters", () => {
-  describe("Given I want to create a simple character sheet", () => {
+  describe.only("Given I want to create a simple character sheet", () => {
     it("should support adding, filling up and removing a character", () => {
       Fari.start();
       cy.visit("/");
@@ -115,7 +115,10 @@ describe("/characters", () => {
 
       // add player
       Fari.get("scene.add-player").click();
-      Fari.get("scene.player-row.1.load-character-sheet").click();
+      Fari.get("scene.player-row.1.assign-or-open-character-sheet").click();
+      Fari.get(
+        "scene.player-row.1.character-sheet-dialog.assign-original"
+      ).click();
 
       cy.contains("Luke Skywalker").click();
 
