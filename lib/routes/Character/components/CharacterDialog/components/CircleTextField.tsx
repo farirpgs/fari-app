@@ -20,6 +20,7 @@ export function CircleTextField(props: {
 }) {
   const theme = useTheme();
   const [hover, setHover] = useState(false);
+  const [focus, setFocus] = useState(false);
   const [value, setValue] = useLazyState({
     value: props.value ?? "",
     delay: 750,
@@ -27,6 +28,8 @@ export function CircleTextField(props: {
       props.onChange?.(newValue);
     },
   });
+
+  const areCounterButtonsVisible = hover || focus;
 
   return (
     <Box
@@ -49,6 +52,12 @@ export function CircleTextField(props: {
         className={css({
           textAlign: "center",
         })}
+        onFocus={() => {
+          setFocus(true);
+        }}
+        onBlur={() => {
+          setFocus(false);
+        }}
         disabled={props.readonly}
         onChange={(e) => {
           if (!props.onChange) {
@@ -106,7 +115,7 @@ export function CircleTextField(props: {
         }}
       />
       {!props.readonly && props.onDecrement && (
-        <Fade in={hover}>
+        <Fade in={areCounterButtonsVisible}>
           <IconButton
             size="small"
             data-cy={`${props["data-cy"]}.decrement`}
@@ -129,7 +138,7 @@ export function CircleTextField(props: {
         </Fade>
       )}
       {!props.readonly && props.onIncrement && (
-        <Fade in={hover}>
+        <Fade in={areCounterButtonsVisible}>
           <IconButton
             size="small"
             data-cy={`${props["data-cy"]}.increment`}
