@@ -492,30 +492,6 @@ export const PlayerRow: React.FC<
             </Grid>
           </Grid>
         </Box>
-
-        {/* <Button
-          variant="outlined"
-          color="default"
-          fullWidth
-          size="small"
-          onClick={(e) => {
-          
-          }}
-        >
-          <FateLabel
-            noWrap
-            uppercase={false}
-            color="inherit"
-            className={css({
-              width: "100%",
-              textTransform: "none",
-            })}
-          >
-            {previewContentEditable({
-              value: props.player?.character?.name ?? "",
-            })}
-          </FateLabel>
-        </Button> */}
       </>
     );
   }

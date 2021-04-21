@@ -286,7 +286,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
   }
 
   function renderDetails() {
-    console.debug("show details", props.showDetails);
     if (!props.showDetails) {
       return null;
     }

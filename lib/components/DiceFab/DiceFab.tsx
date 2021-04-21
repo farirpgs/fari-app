@@ -490,7 +490,6 @@ export function DiceFabButton(props: {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          // background: theme.palette.primary.main,
           background: diceManager.computed.hasPool
             ? theme.palette.primary.dark
             : theme.palette.primary.main,

@@ -188,20 +188,6 @@ describe("/characters", () => {
       Fari.get("character-dialog.Aspects.High Concept.label")
         .clear()
         .type("#High Concept");
-      // Fari.get("character-dialog.Aspects.Trouble.label")
-      //   .clear()
-      //   .type("#Trouble");
-      // Fari.get("character-dialog.Aspects.Relationship.label")
-      //   .clear()
-      //   .type("#Relationship");
-      // Fari.get("character-dialog.Aspects.Other Aspect.label")
-      //   .eq(0)
-      //   .clear()
-      //   .type("#Other Aspect");
-      // Fari.get("character-dialog.Aspects.Other Aspect.label")
-      //   .eq(1)
-      //   .clear()
-      //   .type("#Other Aspect");
 
       // vitals box
       Fari.get("character-dialog.Stress.Physical.box.0.label")
@@ -213,9 +199,6 @@ describe("/characters", () => {
       Fari.get("character-dialog.Stress.Physical.box.2.label")
         .clear()
         .type("#6");
-      // Fari.get("character-dialog.Stress.Mental.box.0.label").clear().type("#2");
-      // Fari.get("character-dialog.Stress.Mental.box.1.label").clear().type("#4");
-      // Fari.get("character-dialog.Stress.Mental.box.2.label").clear().type("#6");
 
       // vitals
       Fari.get("character-dialog.Stress.Physical.label")
@@ -227,68 +210,16 @@ describe("/characters", () => {
       Fari.get("character-dialog.Consequences.Mild.label")
         .clear()
         .type("#Mild");
-      // Fari.get("character-dialog.Consequences.Moderate.label")
-      //   .clear()
-      //   .type("#Moderate");
-      // Fari.get("character-dialog.Consequences.Severe.label")
-      //   .clear()
-      //   .type("#Severe");
 
       // skills
       Fari.get("character-dialog.Skills.Academics.label")
         .clear()
         .type("#Academics");
-      // Fari.get("character-dialog.Skills.Athletics.label")
-      //   .clear()
-      //   .type("#Athletics");
-      // Fari.get("character-dialog.Skills.Burglary.label")
-      //   .clear()
-      //   .type("#Burglary");
-      // Fari.get("character-dialog.Skills.Contacts.label")
-      //   .clear()
-      //   .type("#Contacts");
-      // Fari.get("character-dialog.Skills.Crafts.label").clear().type("#Crafts");
-      // Fari.get("character-dialog.Skills.Deceive.label")
-      //   .clear()
-      //   .type("#Deceive");
-      // Fari.get("character-dialog.Skills.Drive.label").clear().type("#Drive");
-      // Fari.get("character-dialog.Skills.Empathy.label")
-      //   .clear()
-      //   .type("#Empathy");
-      // Fari.get("character-dialog.Skills.Fight.label").clear().type("#Fight");
-      // Fari.get("character-dialog.Skills.Investigate.label")
-      //   .clear()
-      //   .type("#Investigate");
-      // Fari.get("character-dialog.Skills.Lore.label").clear().type("#Lore");
-      // Fari.get("character-dialog.Skills.Notice.label").clear().type("#Notice");
-      // Fari.get("character-dialog.Skills.Physique.label")
-      //   .clear()
-      //   .type("#Physique");
-      // Fari.get("character-dialog.Skills.Provoke.label")
-      //   .clear()
-      //   .type("#Provoke");
-      // Fari.get("character-dialog.Skills.Rapport.label")
-      //   .clear()
-      //   .type("#Rapport");
-      // Fari.get("character-dialog.Skills.Resources.label")
-      //   .clear()
-      //   .type("#Resources");
-      // Fari.get("character-dialog.Skills.Shoot.label").clear().type("#Shoot");
-      // Fari.get("character-dialog.Skills.Stealth.label")
-      //   .clear()
-      //   .type("#Stealth");
-      // Fari.get("character-dialog.Skills.Will.label").clear().type("#Will");
 
       // stunts
       Fari.get("character-dialog.Stunts & Extras.Stunt #1.label")
         .clear()
         .type("#Stunt #1");
-      // Fari.get("character-dialog.Stunts & Extras.Stunt #2.label")
-      //   .clear()
-      //   .type("#Stunt #2");
-      // Fari.get("character-dialog.Stunts & Extras.Stunt #3.label")
-      //   .clear()
-      //   .type("#Stunt #3");
 
       // Fate Points
 
