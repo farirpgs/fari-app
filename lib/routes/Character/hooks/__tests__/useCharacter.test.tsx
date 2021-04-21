@@ -9,33 +9,38 @@ import { useCharacter } from "../useCharacter";
 
 describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
-    // GIVEN
-    const character = {
-      ...CharacterFactory.make(CharacterTemplates.FateCondensed),
-      id: "1",
-      lastUpdated: 1,
-    };
-    // WHEN
-    const { result, rerender } = renderHook(
-      (props) => {
-        return useCharacter(character);
-      },
-      {
-        initialProps: { character: character },
-      }
-    );
-    // THEN
-    expect(result.current.state.character).toEqual(character);
-    // WHEN the name is updated
-    act(() => {
-      result.current.actions.setName("Luke Skywalker");
+    it("should sanitize the character", async () => {
+      const defaultCahracter = await CharacterFactory.make(
+        CharacterTemplates.FateCondensed
+      );
+      // GIVEN
+      const character = {
+        ...defaultCahracter,
+        id: "1",
+        lastUpdated: 1,
+      };
+      // WHEN
+      const { result, rerender } = renderHook(
+        (props) => {
+          return useCharacter(character);
+        },
+        {
+          initialProps: { character: character },
+        }
+      );
+      // THEN
+      expect(result.current.state.character).toEqual(character);
+      // WHEN the name is updated
+      act(() => {
+        result.current.actions.setName("Luke Skywalker");
+      });
+      expect(
+        result.current.actions.getCharacterWithNewTimestamp().name
+      ).toEqual("Luke Skywalker");
+      expect(
+        result.current.actions.getCharacterWithNewTimestamp().lastUpdated
+      ).not.toEqual(1);
     });
-    expect(result.current.actions.getCharacterWithNewTimestamp().name).toEqual(
-      "Luke Skywalker"
-    );
-    expect(
-      result.current.actions.getCharacterWithNewTimestamp().lastUpdated
-    ).not.toEqual(1);
   });
 
   describe("sync props with state", () => {
@@ -175,16 +180,19 @@ describe("useCharacter", () => {
   });
 
   describe("load template", () => {
-    it("should load the new template but keep the id and the name as is", () => {
+    it("should load the new template but keep the id and the name as is", async () => {
+      const defaultCharacter = await CharacterFactory.make(
+        CharacterTemplates.FateCondensed
+      );
       // GIVEN
       const character = {
-        ...CharacterFactory.make(CharacterTemplates.FateCondensed),
+        ...defaultCharacter,
         id: "1",
         name: "Luke Skywalker",
         lastUpdated: 1,
       };
       // WHEN
-      const { result, rerender } = renderHook(
+      const { result, rerender, waitForNextUpdate } = renderHook(
         (props) => {
           return useCharacter(character);
         },
@@ -199,6 +207,9 @@ describe("useCharacter", () => {
       act(() => {
         result.current.actions.loadTemplate(CharacterTemplates.FateAccelerated);
       });
+
+      // Wait for JSON download
+      await waitForNextUpdate();
       expect(result.current.state.character?.lastUpdated).not.toEqual(
         character.lastUpdated
       );

@@ -395,23 +395,33 @@ export const IndexCard: React.FC<
         </Grid>
         <Grid item>
           {shouldRenderPlayedDuringTurnIcon && (
-            <IconButton
-              data-cy={`${props["data-cy"]}.initiative`}
-              onClick={() => {
-                props.sceneManager.actions.updateAspectPlayerDuringTurn(
-                  props.aspectId,
-                  !aspect.playedDuringTurn
-                );
-              }}
-              disabled={props.readonly}
-              size="small"
+            <Tooltip
+                title={
+                aspect.playedDuringTurn
+                    ? t("player-row.played")
+                    : t("player-row.not-played")
+                }
             >
-              {aspect.playedDuringTurn ? (
-                <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
-              ) : (
-                <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
-              )}
-            </IconButton>
+              <span>
+                <IconButton
+                  data-cy={`${props["data-cy"]}.initiative`}
+                  onClick={() => {
+                    props.sceneManager.actions.updateAspectPlayerDuringTurn(
+                      props.aspectId,
+                      !aspect.playedDuringTurn
+                    );
+                  }}
+                  disabled={props.readonly}
+                  size="small"
+                >
+                  {aspect.playedDuringTurn ? (
+                    <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
+                  ) : (
+                    <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
+                  )}
+                </IconButton>
+              </span>
+            </Tooltip>
           )}
         </Grid>
       </Grid>

@@ -26,7 +26,7 @@ export const Fari = {
     return element.invoke("attr", attr);
   },
   waitContentEditable() {
-    const contentEditableDelay = 300;
+    const contentEditableDelay = 750;
 
     cy.wait(contentEditableDelay + 100);
   },

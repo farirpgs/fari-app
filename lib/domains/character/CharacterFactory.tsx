@@ -1,18 +1,12 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
-import DrescendFilesAccelerated from "./character-templates/DrescendFilesAccelerated.json";
-import Heartbreaker from "./character-templates/Heartbreaker.json";
-import IronEddaAccelerated from "./character-templates/IronEddaAccelerated.json";
 import { makeBlankCharacter } from "./character-templates/makeBlankCharacter";
 import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
 import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
 import { makeFateCondensedCharacter } from "./character-templates/makeFateCondensedCharacter";
 import { makeFateCoreCharacter } from "./character-templates/makeFateCoreCharacter";
 import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
-import Maze from "./character-templates/Maze.json";
-import TheWitchIsDead from "./character-templates/TheWitchIsDead.json";
-import VentureCity from "./character-templates/VentureCity.json";
 import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
@@ -33,64 +27,140 @@ import {
 
 export const CharacterFactory = {
   latestVersion: 3,
-  make(type: CharacterTemplates): ICharacter {
-    const newCharacter = {
+  async make(type: CharacterTemplates): Promise<ICharacter> {
+    const templateFunctions: Record<
+      CharacterTemplates,
+      () => Promise<ICharacter>
+    > = {
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateCondensed]: makeFateCondensedCharacter,
+      [CharacterTemplates.FateCondensed]: async () =>
+        makeFateCondensedCharacter(),
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateCore]: makeFateCoreCharacter,
+      [CharacterTemplates.FateCore]: async () => makeFateCoreCharacter(),
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateAccelerated]: makeFateAcceleratedCharacter,
+      [CharacterTemplates.FateAccelerated]: async () =>
+        makeFateAcceleratedCharacter(),
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateOfCthulhu]: makeFateOfCthulhuCharacter,
+      [CharacterTemplates.FateOfCthulhu]: async () =>
+        makeFateOfCthulhuCharacter(),
       /**
        * @author @LostInBrittany
        */
-      [CharacterTemplates.DresdenFilesAccelerated]: () => {
-        return this.makeFromJson(DrescendFilesAccelerated);
+      [CharacterTemplates.DresdenFilesAccelerated]: async () => {
+        const jsonData = await import(
+          "./character-templates/DrescendFilesAccelerated.json"
+        );
+        return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.Heartbreaker]: () => {
-        return this.makeFromJson(Heartbreaker);
+      [CharacterTemplates.Heartbreaker]: async () => {
+        const jsonData = await import(
+          "./character-templates/Heartbreaker.json"
+        );
+        return this.makeFromJson(jsonData);
       },
       /**
        * @author @Pheylorn
        */
-      [CharacterTemplates.IronEddaAccelerated]: () => {
-        return this.makeFromJson(IronEddaAccelerated);
+      [CharacterTemplates.IronEddaAccelerated]: async () => {
+        const jsonData = await import(
+          "./character-templates/IronEddaAccelerated.json"
+        );
+        return this.makeFromJson(jsonData);
       },
       /**
        * @author @bhogan
        */
-      [CharacterTemplates.Maze]: () => {
-        return this.makeFromJson(Maze);
+      [CharacterTemplates.Maze]: async () => {
+        const jsonData = await import("./character-templates/Maze.json");
+        return this.makeFromJson(jsonData);
       },
       /**
        * @author @Owlbear
        */
-      [CharacterTemplates.VentureCity]: () => {
-        return this.makeFromJson(VentureCity);
+      [CharacterTemplates.VentureCity]: async () => {
+        const jsonData = await import("./character-templates/VentureCity.json");
+        return this.makeFromJson(jsonData);
       },
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.Dnd5e]: makeDnD5eCharacter,
+      [CharacterTemplates.Dnd5e]: async () => makeDnD5eCharacter(),
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.TheWitchIsDead]: () => {
-        return this.makeFromJson(TheWitchIsDead);
+      [CharacterTemplates.TheWitchIsDead]: async () => {
+        const jsonData = await import(
+          "./character-templates/TheWitchIsDead.json"
+        );
+        return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.Blank]: makeBlankCharacter,
-    }[type]();
+      /**
+       * @author sorcho
+       */
+      [CharacterTemplates.ThePool]: async () => {
+        const jsonData = await import("./character-templates/ThePool.json");
+        return this.makeFromJson(jsonData);
+      },
+      /**
+       * @author sorcho
+       */
+      [CharacterTemplates.TunnelsAndTrolls]: async () => {
+        const jsonData = await import(
+          "./character-templates/TunnelsAndTrolls.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      /**
+       * @author Afty
+       */
+      [CharacterTemplates.StrandsOfFate]: async () => {
+        const jsonData = await import(
+          "./character-templates/StrandsOfFate.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.EvolutionPulse_Hydrah]: async () => {
+        const jsonData = await import(
+          "./character-templates/EvolutionPulse/Hydrah.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.EvolutionPulse_Hyonos]: async () => {
+        const jsonData = await import(
+          "./character-templates/EvolutionPulse/Hyonos.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.EvolutionPulse_LostH]: async () => {
+        const jsonData = await import(
+          "./character-templates/EvolutionPulse/LostH.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.EvolutionPulse_Obscura]: async () => {
+        const jsonData = await import(
+          "./character-templates/EvolutionPulse/Obscura.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.EvolutionPulse_Proxy]: async () => {
+        const jsonData = await import(
+          "./character-templates/EvolutionPulse/Proxy.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.Blank]: async () => makeBlankCharacter(),
+    };
 
+    const newCharacter = await templateFunctions[type]();
     return {
       ...newCharacter,
       id: Id.generate(),
@@ -129,6 +199,14 @@ export const CharacterFactory = {
       console.error(error);
       return c;
     }
+  },
+  duplicate(c: ICharacter): ICharacter {
+    return {
+      ...c,
+      id: Id.generate(),
+      lastUpdated: getUnix(),
+      name: `${c?.name} Copy`,
+    };
   },
   makeBlock(type: BlockType) {
     const blockDefault: Record<BlockType, IBlock> = {

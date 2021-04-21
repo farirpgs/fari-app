@@ -14,16 +14,16 @@ import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { env } from "./constants/env";
 import {
   CharactersContext,
-  useCharacters
+  useCharacters,
 } from "./contexts/CharactersContext/CharactersContext";
 import {
   DarkModeContext,
-  useDarkMode
+  useDarkMode,
 } from "./contexts/DarkModeContext/DarkModeContext";
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   ScenesContext,
-  useScenes
+  useScenes,
 } from "./contexts/SceneContext/ScenesContext";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { AppDarkTheme, AppLightTheme } from "./theme";

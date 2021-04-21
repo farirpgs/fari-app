@@ -1,97 +1,185 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
+  AllDiceCommandGroups,
   Dice,
-  IDiceCommandNames,
+  IDiceCommandGroup,
+  IDiceCommandGroupId,
   IDiceCommandOption,
   IRollDiceOptions,
-  RollType
+  RollType,
 } from "../../domains/dice/Dice";
+import {
+  IDicePool,
+  IDicePoolElement,
+} from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
 
 export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
-export const DefaultDiceCommandOptionList: Array<IDiceCommandOption> = [
+export const DefaultDiceCommandOptions: Array<IDiceCommandOption> = [
   {
     type: RollType.DiceCommand,
-    command: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    command: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    command: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    command: "1dF",
+    commandGroupId: "4dF",
   },
 ];
 
 export function useDice() {
-  const [latestCommandOptionList, setLatestCommandOptionList] = useState<
+  const [latestCommandOptions, setLatestCommandOptions] = useState<
     Array<IDiceCommandOption>
-  >(DefaultDiceCommandOptionList);
-  const [latestOptions, setLatestOptions] = useState<IRollDiceOptions>({
+  >(DefaultDiceCommandOptions);
+  const [options, setOptions] = useState<IRollDiceOptions>({
     listResults: false,
   });
 
-  const latestCommandsNames: Array<IDiceCommandNames> = latestCommandOptionList
-    .map((c) => (c.type === RollType.DiceCommand ? c.command : undefined))
-    .filter((c) => !!c) as Array<IDiceCommandNames>;
+  const [pool, setPool] = useState<IDicePool>([]);
+  const [playerId, setPlayerId] = useState<string>();
+  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>(
+    []
+  );
+  const poolCommandGroups = useMemo(() => {
+    const poolCommandOptionList = pool.flatMap((dicePoolElement) => {
+      return dicePoolElement.commandOptionList;
+    });
+    const poolCommandGroups: Array<IDiceCommandGroup> = poolCommandOptionList
+      .map((commandOption) => {
+        if (commandOption.type === RollType.DiceCommand) {
+          return AllDiceCommandGroups[commandOption.commandGroupId];
+        }
+      })
+      .filter(
+        (commandGroupId): commandGroupId is IDiceCommandGroup =>
+          !!commandGroupId
+      );
 
-  const reset = () => {
-    setLatestCommandOptionList(DefaultDiceCommandOptionList);
-  };
+    return poolCommandGroups;
+  }, [pool]);
+  const allCommandGroups = [...commandGroups, ...poolCommandGroups];
 
-  function rollByCommandNames(
-    newCommandsNames: Array<IDiceCommandNames>,
-    options: IRollDiceOptions
-  ) {
-    const newCommands: Array<IDiceCommandOption> = newCommandsNames.map(
-      (command) => ({ type: RollType.DiceCommand, command: command })
+  const latestCommandGroupIds: Array<IDiceCommandGroupId> = useMemo(() => {
+    const result = latestCommandOptions
+      .map((c) =>
+        c.type === RollType.DiceCommand ? c.commandGroupId : undefined
+      )
+      .filter((c) => !!c) as Array<IDiceCommandGroupId>;
+    return result;
+  }, [latestCommandOptions]);
+
+  useEffect(() => {
+    const newCommandGroups = latestCommandGroupIds.map((commandGroupId) =>
+      DiceCommandGroup.getCommandGroupById(commandGroupId)
     );
+    setCommandGroups(newCommandGroups);
+  }, [latestCommandGroupIds]);
 
-    return roll(newCommands, options);
+  function reset() {
+    setLatestCommandOptions(DefaultDiceCommandOptions);
+  }
+  function clear() {
+    setLatestCommandOptions([]);
+    clearPool();
   }
 
   function roll(
     newCommands: Array<IDiceCommandOption>,
-    options: IRollDiceOptions
+    optionsForRoll: IRollDiceOptions = options
   ) {
-    setLatestCommandOptionList(newCommands);
-    setLatestOptions(options);
-    const result = Dice.rollCommandOptionList(newCommands, options);
+    setLatestCommandOptions(newCommands);
+    setOptions(optionsForRoll);
+    const result = Dice.rollCommandOptionList(newCommands, optionsForRoll);
     return result;
+  }
+
+  function rollCommandGroups(optionsForRoll: IRollDiceOptions = options) {
+    const commandOptions: Array<IDiceCommandOption> = commandGroups.map(
+      (commandGroup) => {
+        return {
+          type: RollType.DiceCommand,
+          commandGroupId: commandGroup.id,
+        };
+      }
+    );
+
+    return roll(commandOptions, optionsForRoll);
   }
 
   /**
    * Reroll the latest commands
    * @param options if empty, uses the latest options
    */
-  function reroll(options?: IRollDiceOptions) {
-    const optionsToUse = options ?? latestOptions;
+  function reroll(optionsForRoll: IRollDiceOptions = options) {
     const result = Dice.rollCommandOptionList(
-      latestCommandOptionList,
-      optionsToUse
+      latestCommandOptions,
+      optionsForRoll
     );
     return result;
   }
 
+  function addOrRemovePoolElement(element: IDicePoolElement) {
+    const isFirstPoolElement = pool.length === 0;
+    if (isFirstPoolElement) {
+      setCommandGroups([]);
+    }
+    setPool((draft) => {
+      const ids = draft.map((element) => element.blockId);
+      const exists = ids.includes(element.blockId);
+
+      if (exists) {
+        return draft.filter((e) => e.blockId !== element.blockId);
+      }
+      return [...draft, element];
+    });
+  }
+
+  function clearPool() {
+    setPool([]);
+    setPlayerId(undefined);
+  }
+
+  function getPoolResult() {
+    const optionsFromCommandGroups: Array<IDiceCommandOption> = commandGroups.map(
+      (commandGroup) => {
+        return {
+          type: RollType.DiceCommand,
+          commandGroupId: commandGroup.id,
+        };
+      }
+    );
+    const optionsFromPool = pool.flatMap(
+      (element) => element.commandOptionList
+    );
+    const allOptions = [...optionsFromPool, ...optionsFromCommandGroups];
+
+    const result = roll(allOptions, options);
+    const latestPlayerId = playerId;
+
+    clearPool();
+    return { result, playerId: latestPlayerId };
+  }
+
   return {
     state: {
-      commandOptionList: latestCommandOptionList,
-      commandNames: latestCommandsNames,
-      options: latestOptions,
+      commandNames: latestCommandGroupIds,
+      options: options,
+      commandGroups: allCommandGroups,
+      pool,
     },
     actions: {
       roll,
-      rollByCommandNames,
+      rollCommandGroups,
       reroll,
       reset,
-      setOptions: setLatestOptions,
+      setOptions: setOptions,
+      setCommandGroups,
+      addOrRemovePoolElement,
+      getPoolResult,
+      setPlayerId,
+      clear,
+    },
+    computed: {
+      hasSelectedCommands: allCommandGroups.length > 0,
+      hasPool: pool.length > 0,
     },
   };
 }

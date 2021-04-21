@@ -16,5 +16,6 @@
       }
     ]
   },
+  "include": ["lib/**/*", "stories/**/*"],
   "exclude": ["node_modules", "cypress"]
 }

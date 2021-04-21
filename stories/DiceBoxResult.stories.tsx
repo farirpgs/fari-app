@@ -27,22 +27,26 @@ Default.args = {
       commandResult: [
         {
           value: 1,
-          command: "1dF",
+          commandGroupId: "1dF",
+          commandName: "1dF",
           type: RollType.DiceCommand,
         },
         {
           value: 1,
-          command: "1dF",
+          commandGroupId: "1dF",
+          commandName: "1dF",
           type: RollType.DiceCommand,
         },
         {
           value: 1,
-          command: "1dF",
+          commandGroupId: "1dF",
+          commandName: "1dF",
           type: RollType.DiceCommand,
         },
         {
           value: 1,
-          command: "1dF",
+          commandGroupId: "1dF",
+          commandName: "1dF",
           type: RollType.DiceCommand,
         },
       ],
@@ -60,7 +64,8 @@ SingleD20.args = {
       commandResult: [
         {
           value: 20,
-          command: "1d20",
+          commandGroupId: "1d20",
+          commandName: "1d20",
           type: RollType.DiceCommand,
         },
       ],
@@ -78,17 +83,20 @@ MultipleDice.args = {
       commandResult: [
         {
           value: 1,
-          command: "1d12",
+          commandGroupId: "1d12",
+          commandName: "1d12",
           type: RollType.DiceCommand,
         },
         {
           value: 2,
-          command: "1d12",
+          commandGroupId: "1d12",
+          commandName: "1d12",
           type: RollType.DiceCommand,
         },
         {
           value: 3,
-          command: "1d12",
+          commandGroupId: "1d12",
+          commandName: "1d12",
           type: RollType.DiceCommand,
         },
       ],
@@ -105,17 +113,20 @@ Pool.args = {
       commandResult: [
         {
           value: 1,
-          command: "1d12",
+          commandGroupId: "1d12",
+          commandName: "1d12",
           type: RollType.DiceCommand,
         },
         {
           value: 2,
-          command: "1d12",
+          commandGroupId: "1d12",
+          commandName: "1d12",
           type: RollType.DiceCommand,
         },
         {
           value: 3,
-          command: "1d12",
+          commandGroupId: "1d12",
+          commandName: "1d12",
           type: RollType.DiceCommand,
         },
       ],

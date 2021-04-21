@@ -8,23 +8,22 @@ import {
   IDiceCommandOption,
   RollType,
 } from "../../../../../../domains/dice/Dice";
-import { CommandGroups } from "../CommandGroups/CommandGroups";
+import { DiceCommandGroup } from "../DiceCommandGroup/DiceCommandGroup";
 
 export const Block = {
   getCommandOptionList(
     block: IBlock & (IDicePoolBlock | ISkillBlock)
   ): Array<IDiceCommandOption> {
-    const commands =
-      block.meta.commands?.flatMap((commandGroupId) => {
-        return CommandGroups.getCommandGroupByValue(commandGroupId).value;
+    const commandGroups =
+      block.meta.commands?.map((commandGroupId) => {
+        return DiceCommandGroup.getCommandGroupById(commandGroupId);
       }) ?? [];
 
-    const commandOptionList: Array<IDiceCommandOption> = commands.map(
-      (command) => {
+    const commandOptionList: Array<IDiceCommandOption> = commandGroups.map(
+      (commandGroup): IDiceCommandOption => {
         return {
-          label: block.label,
           type: RollType.DiceCommand,
-          command: command,
+          commandGroupId: commandGroup.id,
         };
       }
     );

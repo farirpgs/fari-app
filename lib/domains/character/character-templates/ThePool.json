@@ -1,0 +1,76 @@
+{
+  "id": "0bebd0c0-7c55-4d6d-8756-e332d0527ab4",
+  "version": 3,
+  "name": "The Pool character sheet",
+  "template": "Blank",
+  "lastUpdated": 1618248384,
+  "pages": [
+    {
+      "id": "0deb2631-16fb-4d62-bcca-60d6570b4a36",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "6a177f8c-23a3-461a-9528-08af93a44677",
+          "label": "Story",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "81675d8b-1800-46be-8040-f4e129cff995",
+              "label": "Story",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Making a character is simple: just write a 50 word Story. Pretend you’re writing a book and this is the introduction of your main character. You only have 50 words to play with, so focus on the most important elements of your new character and how the character fits into the setting your group has chosen. Mentioning your character’s name does not count towards the word limit."
+              }
+            }
+          ]
+        },
+        {
+          "id": "1318a6c2-bd69-4b5f-bd91-57516f5f2e2c",
+          "label": "Pool",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "0c99fe1a-954c-490b-af54-3ab3325bcac6",
+              "label": "Dice In Pool",
+              "type": "Numeric",
+              "value": "",
+              "meta": {
+                "helperText": "A character starts with 15 dice in their Pool to keep or spend on Traits"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b613f73e-b1d0-47da-875b-77a789e6ab3b",
+          "label": "Traits",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "bb69358d-d29d-4e53-9d71-c92cdac6b35d",
+              "label": "Trait 1",
+              "type": "DicePool",
+              "value": "",
+              "meta": { "commands": ["1d6"], "helperText": "" }
+            },
+            {
+              "id": "c9d66c9d-9838-4c23-b516-5e6575fde226",
+              "label": "Trait 2",
+              "type": "DicePool",
+              "value": "",
+              "meta": { "commands": ["1d6"], "helperText": "" }
+            },
+            {
+              "id": "6a7c669c-8a31-4778-87e7-50b953c89349",
+              "label": "Trait 3",
+              "type": "DicePool",
+              "value": "",
+              "meta": { "commands": ["1d6"], "helperText": "" }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

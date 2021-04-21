@@ -1,0 +1,323 @@
+{
+  "id": "d442237e-f77e-40b7-9adb-d0dec1589b31",
+  "version": 3,
+  "name": "Proxy",
+  "group": "Executors",
+  "template": "FateAccelerated",
+  "lastUpdated": 1618440128,
+  "pages": [
+    {
+      "id": "719422f7-3c1e-4243-a134-2504f4c32425",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "36b05b6f-3f1d-4c34-aed9-b5bc4b7b19a0",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "73e215ed-dbb2-4f2e-8287-dc5e94340d60",
+              "type": "Text",
+              "meta": {
+                "helperText": "Proxies crave a normal life and, unlike Hydrahs, they are not typically cold, calculating war-machines. pp.21, 23"
+              },
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "5daff0ea-0930-456c-9a75-443ef2daa1aa",
+              "type": "Text",
+              "meta": {
+                "helperText": "Focus on the future they seek to gain through completion of missions."
+              },
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "136d1840-aeb7-41d4-94d5-43eb287fd536",
+              "type": "Text",
+              "meta": {
+                "helperText": "Like a normal human, Proxies fear the for their own lives. Survival instinct is strong in them."
+              },
+              "label": "Other Aspect #1",
+              "value": ""
+            },
+            {
+              "id": "daeb93ec-f576-424e-8fe9-cba9a1f4c643",
+              "label": "Other Aspect #2",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Aspects regarding their relationship(s) with the LostH, too human and fragile to deserve a life outside of a SafeZone, are fitting."
+              }
+            },
+            {
+              "id": "2bc2f4f7-ffd3-4ab7-b4ea-511b57f00b90",
+              "label": "Other Aspect #3",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Proxies can heal wounds and change their bodies within special bio-regenerative cells located inside Servers. They have access to the very best technology and this is reflected in their equipment."
+              }
+            }
+          ]
+        },
+        {
+          "id": "52e06226-2bdf-48d5-b745-d920c3847d31",
+          "label": "Stunts",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "190d1a49-e0f8-47a3-8568-32f156a106d5",
+              "type": "Text",
+              "meta": {
+                "helperText": "Like the armory, Proxies' stunts are based on the massive technological potential that Nirvana makes available to them."
+              },
+              "label": "Stunt #1",
+              "value": ""
+            },
+            {
+              "id": "0c4a6c6b-27ee-43ef-abcb-76a3e5ef5d0a",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #2",
+              "value": ""
+            },
+            {
+              "id": "a18d397a-f325-484e-bce9-1f42cf24df8f",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "bf6cdb9c-b400-4a5c-a237-db57871c9d78",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "c255c5c1-3b48-4552-81ef-d9b0e99d5c3e",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "1214798a-3fbf-4bdd-b254-f70ea701b1aa",
+          "label": "Approaches",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "3452db2f-8541-4b8a-9332-ee0216393392",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Nirvana allows you to enter a never-ending armory of weapons simply using the R3-CA11 command algorithm. Create a weapon. Point. Shoot. p.24"
+              },
+              "label": "firepower",
+              "value": ""
+            },
+            {
+              "id": "fa41aced-158a-4afa-9657-8e4205ac0956",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You empathize with the LostH you protect and can still relate to them. The world is lost, but humanity is not. p.25"
+              },
+              "label": "humanity",
+              "value": ""
+            },
+            {
+              "id": "6335c382-b058-4ca8-a260-f978d5813df5",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Connected to the remnants of the global Net, you receive data from Nirvana. Whether informational or location scans, Nirvana's database contains all of human knowledge. p.24"
+              },
+              "label": "log in",
+              "value": ""
+            },
+            {
+              "id": "8e1f33e5-3e68-422f-9eff-8edc6c40afee",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Synchronize your heartbeat and remold inorganic matter at an atomic level, shaping reality as you need. Manipulate and create as you wish, but remember: every time you do, the Hekath grow stronger. p.25"
+              },
+              "label": "manipulate reality (Pulse)",
+              "value": ""
+            },
+            {
+              "id": "cd6b6065-9d96-476f-957e-420f634d3436",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The world and Hekath move fast; you are faster."
+              },
+              "label": "rapid",
+              "value": ""
+            },
+            {
+              "id": "83dd98bd-b7a0-4fd2-a011-0ab1f18566b7",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "ExDatas require power and technical/mechanical expertise to operate. You know how to analyze the situation and take advantage of the technology available."
+              },
+              "label": "technical",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "4d34dd27-3808-440b-bcd6-46380fefeab0",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "a1f613d3-f3ce-45a0-8a96-6d5e668e7357",
+              "type": "SlotTracker",
+              "meta": {
+                "helperText": "Clones of exceptionally smart, athletic humans, Proxies are genetically modified and subject to strict dietary regiments but are otherwise normal humans, like the uninfected they hope to join in the SafeZones."
+              },
+              "label": "physical Stress",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" }
+              ]
+            },
+            {
+              "id": "9b867d3d-e5ec-4113-99d3-3fb36907856b",
+              "type": "SlotTracker",
+              "meta": {},
+              "label": "mental Stress",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "10272c4a-5203-4dc7-a316-3c59e85778b5",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "22650961-6bbd-4393-adee-e665fed3c1c2",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Proxies can regenerate their bodies rapidly, but they are normal humans in most other respects."
+              },
+              "label": "[2] - Mild",
+              "value": ""
+            },
+            {
+              "id": "21d3f141-d766-4cd4-a071-26e74c7ad763",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Proxies are prone to physical and psychological consequences fit for a LostH."
+              },
+              "label": "[4] - Moderate",
+              "value": ""
+            },
+            {
+              "id": "49b07b2f-63d8-464d-9378-2d85b2d87471",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "[6] - Severe",
+              "value": ""
+            },
+            {
+              "id": "82f2cfe0-aa9a-4a65-9dc6-819154e00084",
+              "label": "[8] - critical",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1a8dc6ac-c507-4c30-b6d2-9204ea675688",
+      "sections": [
+        {
+          "id": "905d5d4f-afc4-450e-906f-5c514b4cfb9f",
+          "label": "Seven questions",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "72d17395-e34e-4e80-9f7d-cc6ce203617d",
+              "label": "Describe reality seen through your eyes",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "fe9ea25d-1675-4daa-bbd3-a6c6a5e8dc68",
+              "label": "Describe Nirvana, the AI that guides you",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "fed9fb36-bd92-412a-ae46-e4f0dbaedd3e",
+              "label": "Describe the Hekath; how do you see them? what are they to you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "f6c14611-af6b-4273-a116-7cd3fc6f137d",
+              "label": "Describe the LostH; what ties you to them? what pushes you to protect them?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "9222542c-8aa5-4d00-b745-9c3f48eba9a5",
+          "label": "",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "f9ed0d25-f205-429f-80ad-d3628c37c695",
+              "label": "Describe your character and what the others see",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "86c200d8-4c5a-4dd5-b432-a360034c6c00",
+              "label": "Describe how you act on reality",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "28513ef2-7877-4ff6-ae32-7acc5d3e3110",
+              "label": "Describe what the SafeZones are for you",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "Seven questions"
+    }
+  ],
+  "fariType": "character"
+}

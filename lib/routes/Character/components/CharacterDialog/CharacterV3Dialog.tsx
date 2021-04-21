@@ -33,6 +33,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
+import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { AppLink } from "../../../../components/AppLink/AppLink";
@@ -138,6 +139,23 @@ export const CharacterV3Dialog: React.FC<{
   const characterTemplateInfo = getTemplateInfo(
     characterManager.state.character?.template
   );
+
+  function getTemplateName(template: string | undefined = "") {
+    const label = t(
+      `character-dialog.template.${template}` as ITranslationKeys,
+      {},
+      true
+    );
+
+    if (!!label) {
+      return label;
+    }
+    const formatted = template
+      .split("_")
+      .map((word) => startCase(word))
+      .join(" - ");
+    return formatted;
+  }
 
   function onSave() {
     const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
@@ -246,6 +264,9 @@ export const CharacterV3Dialog: React.FC<{
           maxWidth="md"
           scroll="paper"
           onClose={onClose}
+          classes={{
+            paper: css({ height: "100%" }),
+          }}
           TransitionComponent={SlideUpTransition}
         >
           <DialogTitle
@@ -308,50 +329,50 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderManagementActions() {
+    return <Collapse in={advanced}>{renderLoadTemplate("advanced")}</Collapse>;
+  }
+
+  function renderLoadTemplate(dataCy: string) {
     return (
-      <Collapse in={advanced}>
-        <Box>
-          <Grid
-            container
-            wrap="nowrap"
-            spacing={2}
-            justify="flex-start"
-            alignItems="center"
-          >
-            <Grid item>
-              <InputLabel> {t("character-dialog.load-template")}</InputLabel>
-            </Grid>
-            <Grid item>
-              <Autocomplete
-                size="small"
-                autoHighlight
-                filterOptions={createFilterOptions({ limit: 100 })}
-                options={CharacterTemplatesWithGroups}
-                className={css({ width: "300px" })}
-                getOptionLabel={(option) =>
-                  t(
-                    `character-dialog.template.${option.template}` as ITranslationKeys
-                  )
-                }
-                groupBy={(option) => option.group}
-                onChange={(event, newValue) => {
-                  if (newValue?.template) {
-                    onLoadTemplate(newValue?.template);
-                  }
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Template"
-                    variant="outlined"
-                    data-cy={`character-dialog.template`}
-                  />
-                )}
-              />
-            </Grid>
+      <Box>
+        <Grid
+          container
+          wrap="nowrap"
+          spacing={2}
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item>
+            <InputLabel> {t("character-dialog.load-template")}</InputLabel>
           </Grid>
-        </Box>
-      </Collapse>
+          <Grid item>
+            <Autocomplete
+              size="small"
+              autoHighlight
+              filterOptions={createFilterOptions({ limit: 100 })}
+              options={CharacterTemplatesWithGroups}
+              className={css({ width: "300px" })}
+              getOptionLabel={(option) => {
+                return getTemplateName(option.template);
+              }}
+              groupBy={(option) => option.group}
+              onChange={(event, newValue) => {
+                if (newValue?.template) {
+                  onLoadTemplate(newValue?.template);
+                }
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Template"
+                  variant="outlined"
+                  data-cy={`character-dialog.template.${dataCy}`}
+                />
+              )}
+            />
+          </Grid>
+        </Grid>
+      </Box>
     );
   }
 
@@ -359,6 +380,11 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
+    const numberOfSections = pages.flatMap((p) => p.sections).length;
+    const doesntHaveSections = numberOfSections === 0;
+    const shouldRenderLoadTemplate = props.dialog
+      ? doesntHaveSections || advanced
+      : doesntHaveSections && !advanced;
 
     return (
       <Box>
@@ -503,13 +529,23 @@ export const CharacterV3Dialog: React.FC<{
                   padding: "0",
                 })}
               >
-                <Box position="relative" mb="3rem">
+                <Box position="relative" mb="2rem">
                   <Grid container spacing={1}>
                     <Grid item xs={12} md={6} className={sectionStyle}>
-                      {renderSections(pageIndex, page.sections, Position.Left)}
+                      {renderSections(
+                        page,
+                        pageIndex,
+                        page.sections,
+                        Position.Left
+                      )}
                     </Grid>
                     <Grid item xs={12} md={6} className={sectionStyle}>
-                      {renderSections(pageIndex, page.sections, Position.Right)}
+                      {renderSections(
+                        page,
+                        pageIndex,
+                        page.sections,
+                        Position.Right
+                      )}
                     </Grid>
                   </Grid>
                 </Box>
@@ -517,6 +553,14 @@ export const CharacterV3Dialog: React.FC<{
             );
           })}
         </TabContext>
+
+        <Collapse in={shouldRenderLoadTemplate}>
+          <Box mb="5rem">
+            <Grid container justify="center">
+              <Grid item>{renderLoadTemplate("content")}</Grid>
+            </Grid>
+          </Box>
+        </Collapse>
 
         <Grid container justify="space-between" alignItems="center">
           {characterTemplateInfo?.author && (
@@ -526,9 +570,7 @@ export const CharacterV3Dialog: React.FC<{
                   to={characterTemplateInfo.author?.link}
                   target="_blank"
                 >
-                  {t(
-                    `character-dialog.template.${characterManager.state.character?.template}` as ITranslationKeys
-                  )}{" "}
+                  {getTemplateName(characterManager.state.character?.template)}{" "}
                   ({characterTemplateInfo.author?.name})
                 </AppLink>
               </Box>
@@ -562,6 +604,7 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderSections(
+    page: IPage,
     pageIndex: number,
     sections: Array<ISection> | undefined,
     position: Position
@@ -645,7 +688,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                   }}
                 />
-                {renderSectionBlocks(pageIndex, sectionIndex, section)}
+                {renderSectionBlocks(page, pageIndex, section, sectionIndex)}
 
                 {advanced && (
                   <Box p=".5rem" mb=".5rem">
@@ -899,10 +942,12 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderSectionBlocks(
+    page: IPage,
     pageIndex: number,
-    sectionIndex: number,
-    section: ISection
+    section: ISection,
+    sectionIndex: number
   ) {
+    const dragAndDropKey = `${page.label}.${pageIndex}.${section.label}.${sectionIndex}`;
     return (
       <>
         <Box
@@ -917,7 +962,7 @@ export const CharacterV3Dialog: React.FC<{
               <Box key={block.id}>
                 <BetterDnd
                   index={blockIndex}
-                  type={section.label}
+                  type={dragAndDropKey}
                   readonly={!advanced}
                   className={css({
                     label: "CharacterDialog-block-dnd",
