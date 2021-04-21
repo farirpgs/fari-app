@@ -4,7 +4,7 @@
   "name": "LostH",
   "group": "Executors",
   "template": "FateAccelerated",
-  "lastUpdated": 1618256565,
+  "lastUpdated": 1619026639,
   "pages": [
     {
       "id": "719422f7-3c1e-4243-a134-2504f4c32425",
@@ -19,23 +19,45 @@
             {
               "id": "73e215ed-dbb2-4f2e-8287-dc5e94340d60",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "You will manage a crew of 3 different LostH with this single sheet. Aspects should represent components of the crew. p.164"
+              },
               "label": "High Concept",
               "value": ""
             },
             {
               "id": "5daff0ea-0930-456c-9a75-443ef2daa1aa",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "It's a good idea to assign one aspect for each of the 3 LostH, but their Trouble should apply to the whole crew to band them together as a unit."
+              },
               "label": "Trouble",
               "value": ""
             },
             {
               "id": "136d1840-aeb7-41d4-94d5-43eb287fd536",
               "type": "Text",
-              "meta": {},
-              "label": "Other Aspects",
+              "meta": {
+                "helperText": "LostH have a very intimate knowledge of ExDatas and have an inherent instinct to work with and protect other humans."
+              },
+              "label": "Other Aspect #1",
               "value": ""
+            },
+            {
+              "id": "eea5c875-02ea-4c8d-bdc5-83d5054763ae",
+              "label": "Other Aspect #2<br>",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "If a crew member dies in play you can bring in an immediate replacement if available; otherwise, modify that member's aspect to relate to their death."
+              }
+            },
+            {
+              "id": "7a3c504d-47c5-4f5c-bf46-9ca3724ffc3a",
+              "label": "Other Aspect #3",
+              "type": "Text",
+              "value": "",
+              "meta": {}
             }
           ]
         },
@@ -47,21 +69,27 @@
             {
               "id": "190d1a49-e0f8-47a3-8568-32f156a106d5",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "A LostH crew's stunts are based on group collaboration."
+              },
               "label": "Stunt #1",
               "value": ""
             },
             {
               "id": "0c4a6c6b-27ee-43ef-abcb-76a3e5ef5d0a",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "They should aim to take advantage of their stature as much as possible."
+              },
               "label": "Stunt #2",
               "value": ""
             },
             {
               "id": "a18d397a-f325-484e-bce9-1f42cf24df8f",
               "type": "Text",
-              "meta": {},
+              "meta": {
+                "helperText": "The emotions and humanity of the LostH are particularly unique amongst the archetypes; they know how to use this to their advantage."
+              },
               "label": "Stunt #3",
               "value": ""
             }
@@ -90,42 +118,60 @@
             {
               "id": "8e1f33e5-3e68-422f-9eff-8edc6c40afee",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Everything around you is out of your league. If you can't compete, try to prevent the race from starting. p.165"
+              },
               "label": "Adapt to Reality",
               "value": ""
             },
             {
               "id": "fa41aced-158a-4afa-9657-8e4205ac0956",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You empathize with other LostH and have an inherent connection to them that the Executors cannot. The world may be lost, but you will survive. p.167"
+              },
               "label": "humanity",
               "value": ""
             },
             {
               "id": "cd6b6065-9d96-476f-957e-420f634d3436",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The world is fast; you are faster. p.165"
+              },
               "label": "rapid",
               "value": ""
             },
             {
               "id": "3452db2f-8541-4b8a-9332-ee0216393392",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The best way to survive in a world of monstrous anti-matter aliens and near super-human Executors is to not be noticed. p.165"
+              },
               "label": "Stealthy",
               "value": ""
             },
             {
               "id": "83dd98bd-b7a0-4fd2-a011-0ab1f18566b7",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Having been born and raised in the ExDatas, you have a practiced experience with the surviving machines and terminals. You know how to analyze them and how to take advantage of the technologies available. p167"
+              },
               "label": "technical",
               "value": ""
             },
             {
               "id": "6335c382-b058-4ca8-a260-f978d5813df5",
               "type": "Skill",
-              "meta": { "commands": ["4dF"] },
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "However much you suffer you always find the will to press on. You didn't choose this life, but you will never lay down and die. p.167"
+              },
               "label": "Tenacity",
               "value": ""
             }
@@ -139,7 +185,9 @@
             {
               "id": "a1f613d3-f3ce-45a0-8a96-6d5e668e7357",
               "type": "SlotTracker",
-              "meta": {},
+              "meta": {
+                "helperText": "The LostH are human and any kind of physical or psychological consequence fits them perfectly."
+              },
               "label": "physical Stress",
               "value": [
                 { "checked": false, "label": "1" },
@@ -214,7 +262,7 @@
             },
             {
               "id": "fe9ea25d-1675-4daa-bbd3-a6c6a5e8dc68",
-              "label": "Describe who you were before",
+              "label": "Describe who your crew was before they took their fate into their own hands",
               "type": "Text",
               "value": "",
               "meta": {}
