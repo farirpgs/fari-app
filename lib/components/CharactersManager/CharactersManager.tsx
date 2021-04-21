@@ -6,8 +6,8 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
+import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -59,18 +59,19 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     logger.info("CharactersManager:onDuplicate");
   }
 
-  function onImport(charactersToImport: FileList | null) {
+  function onImport(characterFile: FileList | null) {
     FariEntity.import<ICharacter>({
-      filesToImport: charactersToImport,
+      filesToImport: characterFile,
       fariType: "character",
-      onImport: (c) => {
-        const characterWithNewId = produce(c, (draft) => {
-          draft.id = Id.generate();
-        });
-
-        const migratedCharacter = CharacterFactory.migrate(characterWithNewId);
-
-        charactersManager.actions.upsert(migratedCharacter);
+      onImport: (characterToImport) => {
+        const migratedCharacter = CharacterFactory.migrate(characterToImport);
+        const characterWithNewTimestamp = produce(
+          migratedCharacter,
+          (draft: ICharacter) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        charactersManager.actions.upsert(characterWithNewTimestamp);
 
         if (charactersManager.state.managerCallback) {
           charactersManager.state.managerCallback(migratedCharacter);
