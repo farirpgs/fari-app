@@ -97,6 +97,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "1d12monos",
+      "name": "1d12monos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82345656?v=4",
+      "profile": "https://1d12monos.com/",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
