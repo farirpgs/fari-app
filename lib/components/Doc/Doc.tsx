@@ -776,7 +776,7 @@ export const DocSideBar: React.FC<{
     const categoryNames = Object.keys(categories);
     return (
       <>
-        {categoryNames.map((category, i) => {
+        {categoryNames.map((category) => {
           const items = categories[category];
 
           const isCategorySelected = navigation.highlightedItems.includes(

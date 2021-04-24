@@ -187,8 +187,6 @@ function PrintSections(props: { sections: Array<ISection> }) {
                     onChange={() => undefined}
                     onDuplicate={() => undefined}
                     onRemove={() => undefined}
-                    pool={[]}
-                    onPoolClick={() => undefined}
                   />
                 </Box>
               );

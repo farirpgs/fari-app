@@ -50,7 +50,7 @@ export const App: React.FC<{}> = () => {
 };
 App.displayName = "App";
 
-export const AppProvider: React.FC<{}> = (props) => {
+export const AppProvider: React.FC<{}> = () => {
   const store = useContext(DarkModeContext);
 
   return (
@@ -83,7 +83,7 @@ AppProvider.displayName = "AppProvider";
 /**
  * for dynamic keys
  */
-function useMark() {
+export function useMark() {
   const { t } = useTranslate();
 
   t("common.language.dev");

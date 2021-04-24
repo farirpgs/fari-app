@@ -44,10 +44,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd";
 import { AddBlock } from "../../routes/Character/components/CharacterDialog/components/AddBlock";
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
-import {
-  IDicePool,
-  IDicePoolElement,
-} from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
@@ -269,7 +266,6 @@ export const IndexCard: React.FC<
     reactDndIndex: number;
     reactDndType: string;
     showClickableSkills: boolean;
-    pool: IDicePool;
     canMove: boolean;
     indexCardHiddenRecord: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
@@ -599,7 +595,6 @@ export const IndexCard: React.FC<
                     reactDndIndex={subCardIndex}
                     readonly={props.readonly}
                     showClickableSkills={props.showClickableSkills}
-                    pool={props.pool}
                     onPoolClick={props.onPoolClick}
                     onRoll={props.onRoll}
                     indexCardHiddenRecord={props.indexCardHiddenRecord}
@@ -653,10 +648,6 @@ export const IndexCard: React.FC<
                 }}
                 onChange={(newBlock) => {
                   indexCardManager.actions.setBlock(newBlock);
-                }}
-                pool={props.pool}
-                onPoolClick={(element) => {
-                  props.onPoolClick(element);
                 }}
               />
             </Box>

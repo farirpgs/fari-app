@@ -33,7 +33,7 @@ export const FateLabel: React.FC<
           color: color,
           textDecoration: underline ? "underline" : undefined,
         }),
-        props.className
+        className
       )}
     >
       {props.children}

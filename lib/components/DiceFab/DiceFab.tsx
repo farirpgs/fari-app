@@ -37,7 +37,6 @@ type IProps = {
 const buttonSize = "4rem";
 
 export const DiceFab: React.FC<IProps> = (props) => {
-  const theme = useTheme();
   const zIndex = useZIndex();
   const diceManager = useContext(DiceContext);
   const [anchorEl, setAnchorEl] = useState<any>(null);

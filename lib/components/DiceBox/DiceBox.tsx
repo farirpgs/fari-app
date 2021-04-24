@@ -19,7 +19,6 @@ import {
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
-import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
@@ -45,7 +44,6 @@ type IProps = {
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const zIndex = useZIndex();
-  const lightBackground = useLightBackground();
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);

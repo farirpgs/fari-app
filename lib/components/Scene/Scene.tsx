@@ -893,7 +893,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 reactDndType={"scene.index-cards"}
                 data-cy={`scene.aspect.${index}`}
                 id={`index-card-${indexCard.id}`}
-                pool={poolManager.state.pool}
                 indexCardHiddenRecord={
                   hiddenIndexCardRecord.state.indexCardHiddenRecord
                 }

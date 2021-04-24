@@ -3,7 +3,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const Kofi: React.FC<{}> = (props) => {
+export const Kofi: React.FC<{}> = () => {
   let html: string = "";
   const { t } = useTranslate();
   const theme = useTheme();

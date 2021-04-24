@@ -17,20 +17,15 @@ import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions"
 import { Block } from "../../domains/Block/Block";
 import {
   IBlockActionComponentProps,
-  IBlockComponentProps
+  IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CircleTextField } from "../CircleTextField";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
-import { IDicePool, IDicePoolElement, Pool } from "./BlockDicePool";
-export function BlockSkill(
-  props: IBlockComponentProps<ISkillBlock> & {
-    pool: IDicePool;
-    onPoolClick(element: IDicePoolElement): void;
-  }
-) {
-  const theme = useTheme();
+import { Pool } from "./BlockDicePool";
+export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
   const [state, setState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
@@ -42,8 +37,9 @@ export function BlockSkill(
   const skillDescription =
     FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
 
-  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
-  const diceManager = useContext(DiceContext);
+  const isSelected = diceManager.state.pool.some(
+    (p) => p.blockId === props.block.id
+  );
   const [firstCommandGroup] =
     props.block.meta?.commands?.map((commandId) => {
       return AllDiceCommandGroups[commandId];
@@ -66,7 +62,7 @@ export function BlockSkill(
               borderStyle={"solid"}
               onClick={() => {
                 diceManager.actions.setOptions({ listResults: false });
-                props.onPoolClick({
+                diceManager.actions.addOrRemovePoolElement({
                   blockId: props.block.id,
                   blockType: props.block.type,
                   label: props.block.label,

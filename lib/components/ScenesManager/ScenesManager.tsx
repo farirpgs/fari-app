@@ -12,9 +12,7 @@ import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { IScene } from "../../hooks/useScene/IScene";
 import { Manager } from "../Manager/Manager";
 
-type IProps = {};
-
-export const ScenesManager: React.FC<IProps> = (props) => {
+export const ScenesManager: React.FC = () => {
   const history = useHistory();
   const scenesManager = useContext(ScenesContext);
   const logger = useLogger();

@@ -217,6 +217,7 @@ export type ITranslationKeys =
   | "play-route.what-is-your-name"
   | "player-row.load-character-sheet-dialog.description"
   | "player-row.load-character-sheet-dialog.load"
+  | "player-row.load-character-sheet-dialog.load-and-duplicate"
   | "player-row.load-character-sheet-dialog.title"
   | "player-row.not-played"
   | "player-row.open-character-sheet"

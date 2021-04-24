@@ -122,7 +122,7 @@ export const CharacterCard: React.FC<{
                         <IconButton
                           size="small"
                           data-cy="character-card.open-character-sheet"
-                          onClick={(e) => {
+                          onClick={() => {
                             props.onCharacterDialogOpen?.();
                             logger.info("CharacterCard:onCharacterDialogOpen");
                           }}
@@ -145,7 +145,7 @@ export const CharacterCard: React.FC<{
             </Box>
           </Box>
           <Box px="1rem" pb="1rem">
-            {visibleSections?.map((section, sectionIndex) => {
+            {visibleSections?.map((section) => {
               return (
                 <Box key={section.id} className={css({ clear: "both" })}>
                   <Box className={sheetHeaderClassName}>
@@ -155,7 +155,7 @@ export const CharacterCard: React.FC<{
                   </Box>
                   <Box px=".2rem">
                     <Grid container>
-                      {section.blocks.map((block, blockIndex) => {
+                      {section.blocks.map((block) => {
                         return (
                           <React.Fragment key={block.id}>
                             {renderBlockByBlockType[block.type](section, block)}
@@ -181,9 +181,9 @@ export const CharacterCard: React.FC<{
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          onLabelChange={(value) => {}}
-          onValueChange={(value) => {}}
-          onMetaChange={(meta) => {}}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
         />
       </Grid>
     );
@@ -200,9 +200,9 @@ export const CharacterCard: React.FC<{
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          onLabelChange={(value) => {}}
-          onValueChange={(value) => {}}
-          onMetaChange={(meta) => {}}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
         />
       </Grid>
     );
@@ -216,9 +216,9 @@ export const CharacterCard: React.FC<{
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          onLabelChange={(value) => {}}
-          onValueChange={(value) => {}}
-          onMetaChange={(meta) => {}}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
         />
       </Grid>
     );
@@ -287,11 +287,9 @@ export const CharacterCard: React.FC<{
           readonly={props.readonly}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          onLabelChange={(value) => {}}
-          onValueChange={(value) => {}}
-          onMetaChange={(meta) => {}}
-          pool={props.pool}
-          onPoolClick={props.onPoolClick}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
         />
       </Grid>
     );
@@ -307,9 +305,9 @@ export const CharacterCard: React.FC<{
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          onLabelChange={(value) => {}}
-          onValueChange={(value) => {}}
-          onMetaChange={(meta) => {}}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
         />
       </Grid>
     );
@@ -325,9 +323,9 @@ export const CharacterCard: React.FC<{
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
-          onLabelChange={(value) => {}}
-          onValueChange={(value) => {}}
-          onMetaChange={(meta) => {}}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
         />
       </Grid>
     );

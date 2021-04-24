@@ -11,12 +11,7 @@ import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
-import {
-  BlockDicePool,
-  BlockDicePoolActions,
-  IDicePool,
-  IDicePoolElement,
-} from "./blocks/BlockDicePool";
+import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
@@ -36,8 +31,6 @@ export function BlockByType(
     onChange(newBlock: IBlock): void;
     onRemove(): void;
     onDuplicate(): void;
-    pool: IDicePool;
-    onPoolClick(element: IDicePoolElement): void;
     onMainPointCounterChange?(): void;
   }
 ) {
@@ -140,10 +133,6 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
-          pool={props.pool}
-          onPoolClick={(element) => {
-            props.onPoolClick(element);
-          }}
         />
       )}
       {props.block.type === BlockType.DicePool && (
@@ -155,10 +144,6 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
-          pool={props.pool}
-          onPoolClick={(element) => {
-            props.onPoolClick(element);
-          }}
         />
       )}
       {props.block.type === BlockType.PointCounter && (

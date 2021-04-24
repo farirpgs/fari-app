@@ -1,6 +1,6 @@
 import { css, cx } from "@emotion/css";
-import { ButtonBase } from "@material-ui/core";
 import Box, { BoxProps } from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
@@ -37,16 +37,14 @@ export type IDicePoolElement = {
 
 export type IDicePool = Array<IDicePoolElement>;
 
-export function BlockDicePool(
-  props: IBlockComponentProps<IDicePoolBlock> & {
-    pool: IDicePool;
-    onPoolClick(element: IDicePoolElement): void;
-  }
-) {
+export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
   const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
   const hasCommands = !!props.block.meta.commands?.length;
   const canRoll = !props.readonly && hasCommands;
-  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
+  const isSelected = diceManager.state.pool.some(
+    (p) => p.blockId === props.block.id
+  );
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
 
@@ -55,7 +53,6 @@ export function BlockDicePool(
     props.block
   );
   const commandOptionList = Block.getCommandOptionList(props.block);
-  const diceManager = useContext(DiceContext);
   return (
     <>
       <Box>
@@ -67,7 +64,7 @@ export function BlockDicePool(
                   <ContentEditable
                     readonly={!props.advanced}
                     border={props.advanced}
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                    data-cy={`${props.dataCy}.label`}
                     value={props.block.label}
                     onChange={(value) => {
                       props.onLabelChange(value);
@@ -114,7 +111,7 @@ export function BlockDicePool(
                       }
 
                       diceManager.actions.setOptions({ listResults: true });
-                      props.onPoolClick({
+                      diceManager.actions.addOrRemovePoolElement({
                         blockId: props.block.id,
                         blockType: props.block.type,
                         label: props.block.label,

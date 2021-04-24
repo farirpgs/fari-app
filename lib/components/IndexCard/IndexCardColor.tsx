@@ -1,9 +1,3 @@
-interface Colors {
-  chip: string;
-  dark: string;
-  light: string;
-}
-
 /**
  * @deprecated
  */

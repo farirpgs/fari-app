@@ -527,9 +527,11 @@ export const PlayerRow: React.FC<
                     logger.info("PlayerRow:onLoadAndDuplicateCharacterSheet");
                   }}
                 >
-                  {t(
-                    "player-row.load-character-sheet-dialog.load-and-duplicate"
-                  )}
+                  {
+                    // because of i18n.js to extract translations
+                    // prettier-ignore
+                    t("player-row.load-character-sheet-dialog.load-and-duplicate")
+                  }
                 </Button>
               </Grid>
               <Grid item>
