@@ -40,9 +40,7 @@ To verify
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
@@ -111,6 +109,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/ConDar15"><img src="https://avatars3.githubusercontent.com/u/5701626?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ConDar15</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=ConDar15" title="Code">💻</a></td>
     <td align="center"><a href="http://xurxodiz.eu/"><img src="https://avatars3.githubusercontent.com/u/391584?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jorge Diz Pico</b></sub></a><br /><a href="#translation-xurxodiz" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/tjbearse"><img src="https://avatars.githubusercontent.com/u/5686806?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Thomas Bearse</b></sub></a><br /><a href="https://github.com/fariapp/fari/commits?author=tjbearse" title="Code">💻</a></td>
+    <td align="center"><a href="https://1d12monos.com/"><img src="https://avatars.githubusercontent.com/u/82345656?v=4?s=100" width="100px;" alt=""/><br /><sub><b>1d12monos</b></sub></a><br /><a href="#translation-1d12monos" title="Translation">🌍</a></td>
   </tr>
 </table>
 

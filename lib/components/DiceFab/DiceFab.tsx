@@ -22,43 +22,19 @@ import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
   AllDiceCommandGroups,
   IDiceCommandGroup,
-  IDiceCommandOption,
   IDiceRollResult,
-  RollType,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IDicePool } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { DiceBox } from "../DiceBox/DiceBox";
 
-export enum DiceFabMode {
-  Roll,
-  RollAndPool,
-}
-
-type IRollProps = {
-  type: DiceFabMode.Roll;
-  onSelect(result: IDiceRollResult): void;
-
+type IProps = {
+  onRoll(result: IDiceRollResult): void;
+  onRollPool(result: IDiceRollResult, playerId: string | undefined): void;
   rollsForDiceBox?: Array<IDiceRollResult>;
 };
-
-type IPoolProps = {
-  type: DiceFabMode.RollAndPool;
-  onSelect(result: IDiceRollResult): void;
-
-  rollsForDiceBox?: Array<IDiceRollResult>;
-
-  pool: IDicePool;
-  onClearPool(): void;
-  onRollPool(): void;
-};
-
-type IProps = IRollProps | IPoolProps;
 
 const buttonSize = "4rem";
-
-const SlideDurationForRollButton = 500;
 
 export const DiceFab: React.FC<IProps> = (props) => {
   const theme = useTheme();
@@ -67,8 +43,6 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
   const { t } = useTranslate();
-
-  const [dirty, setDirty] = useState(false);
 
   const ButtonIcon = getButtonIcon(diceManager.state.commandGroups);
 
@@ -83,7 +57,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
   }
 
   function handleClear() {
-    diceManager.actions.setCommandGroups([]);
+    diceManager.actions.clear();
   }
 
   function handleFabClick(
@@ -99,76 +73,50 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   function handleReRoll() {
     const result = diceManager.actions.reroll();
-    props.onSelect?.(result);
+    props.onRoll?.(result);
     handleMenuClose();
   }
 
   function handleRoll() {
-    const commandOptions: Array<IDiceCommandOption> = diceManager.state.commandGroups.map(
-      (commandGroup) => {
-        return {
-          type: RollType.DiceCommand,
-          commandGroupId: commandGroup.id,
-        };
-      }
-    );
-    const result = diceManager.actions.roll(commandOptions);
+    const result = diceManager.actions.rollCommandGroups();
 
-    props.onSelect?.(result);
-    setDirty(true);
+    props.onRoll?.(result);
     handleMenuClose();
   }
 
-  const hasSelectedCommands = diceManager.state.commandGroups.length > 0;
+  function handleRollPool() {
+    const { result, playerId } = diceManager.actions.getPoolResult();
 
-  const hasPool =
-    props.type === DiceFabMode.RollAndPool &&
-    !!props.pool &&
-    props.pool.length > 0;
+    props.onRollPool(result, playerId);
+    handleMenuClose();
+  }
+
+  const hasSelectedCommands = diceManager.computed.hasSelectedCommands;
+  const hasPool = diceManager.computed.hasPool;
 
   return (
     <>
       <ClickAwayListener onClickAway={handleMenuClose}>
         <Box>
-          {!hasPool && (
-            <DiceFabButton
-              key="rolls"
-              showClearButton={open}
-              isRollButtonVisible={hasSelectedCommands}
-              icon={ButtonIcon}
-              label={<>{t("dice-fab.roll")}</>}
-              onFabClick={handleFabClick}
-              onCtaClick={() => {
+          <DiceFabButton
+            key="rolls"
+            showCloseButton={open}
+            isRollButtonVisible={hasPool ? true : hasSelectedCommands}
+            icon={ButtonIcon}
+            label={<>{t("dice-fab.roll")}</>}
+            onFabClick={handleFabClick}
+            onCtaClick={() => {
+              if (hasPool) {
+                handleRollPool();
+              } else {
                 if (open) {
                   handleRoll();
                 } else {
                   handleReRoll();
                 }
-              }}
-            />
-          )}
-
-          {hasPool && props.type === DiceFabMode.RollAndPool && (
-            <DiceFabButton
-              key="pool"
-              showClearButton={true}
-              isRollButtonVisible={true}
-              icon={ButtonIcon}
-              label={
-                <>
-                  {props.pool.length === 1
-                    ? t("dice-fab.roll")
-                    : t("dice-fab.roll-pool")}
-                </>
               }
-              onFabClick={() => {
-                props.onClearPool();
-              }}
-              onCtaClick={() => {
-                props.onRollPool();
-              }}
-            />
-          )}
+            }}
+          />
 
           <DiceMenu
             open={open}
@@ -189,18 +137,18 @@ export const DiceFab: React.FC<IProps> = (props) => {
       <DiceBox
         className={css({
           position: "fixed",
-          left: "1.25rem",
-          bottom: "7rem",
+          right: "1.25rem",
+          bottom: "2rem",
           zIndex: zIndex.diceFabDie,
         })}
         reduceOpacityWithoutHover
         rolls={props.rollsForDiceBox ?? []}
-        tooltipPlacement="right-end"
+        tooltipPlacement="left-end"
         size="3.5rem"
         fontSize="2rem"
         borderSize=".2rem"
         onClick={() => {
-          handleReRoll();
+          handleRoll();
         }}
       />
     );
@@ -455,7 +403,7 @@ export const DiceMenu: React.FC<{
 };
 
 export function DiceFabButton(props: {
-  showClearButton: boolean;
+  showCloseButton: boolean;
   isRollButtonVisible: boolean;
   onFabClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
   onCtaClick(): void;
@@ -468,6 +416,7 @@ export function DiceFabButton(props: {
   const [delayedIsRollButtonVisible, setDelayedisRollButtonVisible] = useState(
     false
   );
+  const diceManager = useContext(DiceContext);
 
   useEffect(
     function () {
@@ -493,7 +442,7 @@ export function DiceFabButton(props: {
         >
           <Fab
             variant="round"
-            color={props.showClearButton ? "secondary" : "primary"}
+            color={props.showCloseButton ? "secondary" : "primary"}
             onClick={props.onFabClick}
             onContextMenu={(e) => {
               e.preventDefault();
@@ -504,7 +453,7 @@ export function DiceFabButton(props: {
               zIndex: zIndex.diceFab,
             })}
           >
-            {props.showClearButton ? (
+            {props.showCloseButton ? (
               <CloseIcon
                 className={css({
                   width: "90%",
@@ -530,6 +479,7 @@ export function DiceFabButton(props: {
   );
 
   function renderRollButton() {
+    const numberOfPoolElements = diceManager.state.pool.length;
     return (
       <Box
         className={css({
@@ -540,15 +490,26 @@ export function DiceFabButton(props: {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: theme.palette.primary.main,
+          background: diceManager.computed.hasPool
+            ? theme.palette.primary.dark
+            : theme.palette.primary.main,
           color: theme.palette.getContrastText(theme.palette.primary.main),
           height: buttonSize,
           borderTopRightRadius: "25px",
           borderBottomRightRadius: "25px",
+          boxShadow: theme.shadows[4],
+          border: `4px solid ${
+            diceManager.computed.hasPool
+              ? theme.palette.primary.light
+              : theme.palette.primary.main
+          }`,
           overflow: "hidden",
-          transition: theme.transitions.create("max-width", {
-            duration: 1000,
-          }),
+          transition: theme.transitions.create(
+            ["max-width", "background", "border"],
+            {
+              duration: theme.transitions.duration.complex,
+            }
+          ),
           maxWidth: delayedIsRollButtonVisible ? "100vw" : "0",
         })}
       >
@@ -564,16 +525,21 @@ export function DiceFabButton(props: {
             e.preventDefault();
           }}
         >
-          <Typography
-            className={css({
-              label: "DiceFabButton-label",
-              whiteSpace: "nowrap",
-              textTransform: "uppercase",
-              fontWeight: theme.typography.fontWeightBold,
-            })}
-          >
-            {props.label}
-          </Typography>
+          <Box ml=".5rem" mr=".25rem">
+            <Badge badgeContent={numberOfPoolElements} color="secondary">
+              <Typography
+                className={css({
+                  label: "DiceFabButton-label",
+                  whiteSpace: "nowrap",
+                  textTransform: "uppercase",
+                  fontWeight: theme.typography.fontWeightBold,
+                  paddingRight: ".5rem",
+                })}
+              >
+                {props.label}
+              </Typography>
+            </Badge>
+          </Box>
         </ButtonBase>
       </Box>
     );

@@ -29,6 +29,7 @@ type IProps = {
   size: string;
   fontSize: string;
   borderSize: string;
+  disableTooltip?: boolean;
   tooltipOpen?: boolean;
   tooltipPlacement?: TooltipProps["placement"];
   disabled?: boolean;
@@ -210,40 +211,42 @@ export const DiceBox: React.FC<IProps> = (props) => {
       className={props.className}
     >
       {renderDice()}
-      <Popper
-        open={!!anchorEl && (props.tooltipOpen ?? open)}
-        anchorEl={anchorEl}
-        transition
-        placement={props.tooltipPlacement}
-        className={css({
-          zIndex: zIndex.tooltip,
-        })}
-        modifiers={{
-          flip: {
-            enabled: false,
-          },
-          enabled: true,
-          offset: {
-            offset: "0, 16px",
-          },
-          preventOverflow: {
+      {!props.disableTooltip && (
+        <Popper
+          open={!!anchorEl && (props.tooltipOpen ?? open)}
+          anchorEl={anchorEl}
+          transition
+          placement={props.tooltipPlacement}
+          className={css({
+            zIndex: zIndex.tooltip,
+          })}
+          modifiers={{
+            flip: {
+              enabled: false,
+            },
             enabled: true,
-            boundariesElement: "viewport",
-          },
-        }}
-      >
-        {({ TransitionProps }) => (
-          <Grow {...TransitionProps}>
-            <Box
-              onContextMenu={(e) => {
-                e.preventDefault();
-              }}
-            >
-              {tooltipContent}
-            </Box>
-          </Grow>
-        )}
-      </Popper>
+            offset: {
+              offset: "0, 16px",
+            },
+            preventOverflow: {
+              enabled: true,
+              boundariesElement: "viewport",
+            },
+          }}
+        >
+          {({ TransitionProps }) => (
+            <Grow {...TransitionProps}>
+              <Box
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                {tooltipContent}
+              </Box>
+            </Grow>
+          )}
+        </Popper>
+      )}
     </Box>
   );
 

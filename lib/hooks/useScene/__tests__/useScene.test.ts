@@ -273,22 +273,26 @@ describe("useScene", () => {
           {
             commandResult: [
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
@@ -318,22 +322,26 @@ describe("useScene", () => {
           {
             commandResult: [
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },
               {
-                command: "1dF",
+                commandGroupId: "1dF",
+                commandName: "1dF",
                 type: "DiceCommand",
                 value: 1,
               },

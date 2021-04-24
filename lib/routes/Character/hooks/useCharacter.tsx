@@ -40,7 +40,9 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     }
   }, [characterFromProps]);
 
-  function loadTemplate(type: CharacterTemplates) {
+  async function loadTemplate(type: CharacterTemplates) {
+    const defaultCharacter = await CharacterFactory.make(type);
+
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
@@ -48,7 +50,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const oldId = draft.id;
         const oldName = draft.name;
-        const defaultCharacter = CharacterFactory.make(type);
 
         return {
           ...defaultCharacter,

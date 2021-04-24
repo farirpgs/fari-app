@@ -26,14 +26,14 @@ export const FateLabel: React.FC<
       {...rest}
       variantMapping={{ [props.variant as string]: as }}
       className={cx(
-        props.className,
         css({
           textTransform: uppercase ? "uppercase" : undefined,
           fontWeight: 800,
           fontSize: props.fontSize,
           color: color,
           textDecoration: underline ? "underline" : undefined,
-        })
+        }),
+        props.className
       )}
     >
       {props.children}

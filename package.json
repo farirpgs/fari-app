@@ -1,6 +1,6 @@
 {
   "name": "fari",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
@@ -26,7 +26,8 @@
     "deploy:preview": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08",
     "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod",
     "storybook": "start-storybook -p 6006 -s ./fonts",
-    "build-storybook": "build-storybook -s ./fonts"
+    "build-storybook": "build-storybook -s ./fonts",
+    "chromatic": "npx chromatic --project-token 45d2fc40e469"
   },
   "dependencies": {
     "@emotion/css": "^11.0.0",
@@ -62,10 +63,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@storybook/builder-webpack5": "^6.2.1",
     "@storybook/addon-actions": "^6.2.1",
     "@storybook/addon-essentials": "^6.2.1",
     "@storybook/addon-links": "^6.2.1",
+    "@storybook/builder-webpack5": "^6.2.1",
     "@storybook/react": "^6.2.1",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^3.2.1",
@@ -84,6 +85,7 @@
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "babel-loader": "^8.1.0",
+    "chromatic": "^5.6.2",
     "concurrently": "^5.3.0",
     "cypress": "^6.8.0",
     "eslint": "^7.11.0",

@@ -6,9 +6,10 @@ import {
   ISavableScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
+import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
+import { IScene } from "../../hooks/useScene/IScene";
 import { Manager } from "../Manager/Manager";
 
 type IProps = {};
@@ -57,16 +58,19 @@ export const ScenesManager: React.FC<IProps> = (props) => {
     logger.info("ScenesManager:onDuplicate");
   }
 
-  function onImport(sceneToImport: FileList | null) {
+  function onImport(sceneFile: FileList | null) {
     FariEntity.import<ISavableScene>({
-      filesToImport: sceneToImport,
+      filesToImport: sceneFile,
       fariType: "scene",
-      onImport: (s) => {
-        const sceneWithNewId = produce(s, (draft) => {
-          draft.id = Id.generate();
-        });
-        const migratedScene = SceneFactory.migrate(sceneWithNewId);
-        scenesManager.actions.upsert(migratedScene);
+      onImport: (sceneToImport) => {
+        const migratedScene = SceneFactory.migrate(sceneToImport);
+        const sceneWithNewTimestamp = produce(
+          migratedScene,
+          (draft: IScene) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        scenesManager.actions.upsert(sceneWithNewTimestamp);
       },
     });
     logger.info("ScenesManager:onImport");

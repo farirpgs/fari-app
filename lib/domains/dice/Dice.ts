@@ -229,6 +229,7 @@ export const Dice = {
     let totalWithoutModifiers = 0;
     let containsStringValue = false;
     const rolls: Array<IDiceCommandResult> = [];
+
     commandOptions.forEach((commandOption) => {
       if (commandOption.type === RollType.DiceCommand) {
         const commandGroup = AllDiceCommandGroups[commandOption.commandGroupId];

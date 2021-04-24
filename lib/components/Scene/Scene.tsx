@@ -78,7 +78,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { DiceFab, DiceFabMode } from "../DiceFab/DiceFab";
+import { DiceFab } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -260,7 +260,7 @@ export const Scene: React.FC<IProps> = (props) => {
     sceneManager.actions.addOfflinePlayer();
   };
 
-  const handleLoadCharacterForPlayer = (
+  const handleAssignOriginalCharacterSheet = (
     playerId: string,
     character: ICharacter
   ) => {
@@ -270,6 +270,23 @@ export const Scene: React.FC<IProps> = (props) => {
       connectionsManager?.actions.sendToHost<IPeerActions>({
         action: "load-character",
         payload: character,
+      });
+    }
+  };
+
+  const handleAssignDuplicateCharacterSheet = (
+    playerId: string,
+    character: ICharacter
+  ) => {
+    const copy = CharacterFactory.duplicate(character);
+    charactersManager.actions.upsert(copy);
+
+    if (isGM) {
+      sceneManager.actions.loadPlayerCharacter(playerId, copy);
+    } else {
+      connectionsManager?.actions.sendToHost<IPeerActions>({
+        action: "load-character",
+        payload: copy,
       });
     }
   };
@@ -334,18 +351,11 @@ export const Scene: React.FC<IProps> = (props) => {
         </Snackbar>
         {props.mode !== SceneMode.Manage && (
           <DiceFab
-            type={DiceFabMode.RollAndPool}
-            onRollPool={() => {
-              const { result, playerId } = poolManager.actions.getPoolResult();
-              handleSetPlayerRoll(playerId, result);
-            }}
-            onClearPool={() => {
-              poolManager.actions.clearPool();
-            }}
-            pool={poolManager.state.pool}
-            rollsForDiceBox={me?.rolls ?? []}
-            onSelect={(result) => {
+            onRoll={(result) => {
               handleSetMyRoll(result);
+            }}
+            onRollPool={(result, playerId) => {
+              handleSetPlayerRoll(playerId, result);
             }}
           />
         )}
@@ -512,10 +522,10 @@ export const Scene: React.FC<IProps> = (props) => {
                   <CharacterV3Dialog
                     readonly={!canControl}
                     onPoolClick={(element) => {
-                      poolManager.actions.addOrRemovePoolElement(element);
-                      poolManager.actions.setPlayerId(player.id);
+                      diceManager.actions.addOrRemovePoolElement(element);
+                      diceManager.actions.setPlayerId(player.id);
                     }}
-                    pool={poolManager.state.pool}
+                    pool={diceManager.state.pool}
                     open={characterDialogPlayerId === player.id}
                     character={player.character}
                     dialog={true}
@@ -549,6 +559,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     canRoll: canControl,
                     canUpdatePoints: canControl,
                     canUpdateInitiative: canControl,
+                    canLoadDuplicateCharacterSheet: isGM,
                     canLoadCharacterSheet: canControl && !player.isGM,
                     canRemove: isGM && !player.isGM,
                   }}
@@ -564,11 +575,25 @@ export const Scene: React.FC<IProps> = (props) => {
                       setCharacterDialogPlayerId(player.id);
                     }
                   }}
-                  onLoadCharacterSheet={() => {
+                  onAssignOriginalCharacterSheet={() => {
                     charactersManager.actions.openManager(
                       ManagerMode.Use,
                       (character) => {
-                        handleLoadCharacterForPlayer(player.id, character);
+                        handleAssignOriginalCharacterSheet(
+                          player.id,
+                          character
+                        );
+                      }
+                    );
+                  }}
+                  onAssignDuplicateCharacterSheet={() => {
+                    charactersManager.actions.openManager(
+                      ManagerMode.Use,
+                      (character) => {
+                        handleAssignDuplicateCharacterSheet(
+                          player.id,
+                          character
+                        );
                       }
                     );
                   }}
@@ -656,10 +681,10 @@ export const Scene: React.FC<IProps> = (props) => {
                         onCharacterDialogOpen={() => {
                           setCharacterDialogPlayerId(player.id);
                         }}
-                        pool={poolManager.state.pool}
+                        pool={diceManager.state.pool}
                         onPoolClick={(element) => {
-                          poolManager.actions.addOrRemovePoolElement(element);
-                          poolManager.actions.setPlayerId(player.id);
+                          diceManager.actions.addOrRemovePoolElement(element);
+                          diceManager.actions.setPlayerId(player.id);
                         }}
                       />
                     </Box>

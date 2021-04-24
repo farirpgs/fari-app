@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import produce from "immer";
 import React, { useContext, useState } from "react";
-import { DiceFab, DiceFabMode } from "../lib/components/DiceFab/DiceFab";
+import { DiceFab } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
 import {
   IndexCardColor,
@@ -17,7 +17,6 @@ import {
 } from "../lib/domains/dice/Dice";
 import { Enum } from "../lib/domains/enum/Enum";
 import { SceneFactory } from "../lib/domains/scene/SceneFactory";
-import { useDicePool } from "../lib/hooks/useDicePool/useDicePool";
 import { AspectType } from "../lib/hooks/useScene/AspectType";
 import { IIndexCard } from "../lib/hooks/useScene/IScene";
 import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
@@ -31,7 +30,6 @@ function StorybookIndexCard(props: {
   width: string;
 }) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-  const poolManager = useDicePool();
   const diceManager = useContext(DiceContext);
   const [collapse, setCollapse] = useState(false);
 
@@ -40,27 +38,21 @@ function StorybookIndexCard(props: {
       return [result, ...draft];
     });
   }
-  function handleOnClearPool() {
-    poolManager.actions.clearPool();
-  }
 
   function handleOnRollPool() {
-    const { result } = poolManager.actions.getPoolResult();
+    const { result } = diceManager.actions.getPoolResult();
     handleOnNewRoll(result);
   }
 
   function handleOnPoolClick(element: IDicePoolElement) {
-    poolManager.actions.addOrRemovePoolElement(element);
+    diceManager.actions.addOrRemovePoolElement(element);
   }
 
   return (
     <>
       <DiceFab
-        type={DiceFabMode.RollAndPool}
         rollsForDiceBox={rolls}
-        pool={poolManager.state.pool}
-        onClearPool={handleOnClearPool}
-        onSelect={handleOnNewRoll}
+        onRoll={handleOnNewRoll}
         onRollPool={handleOnRollPool}
       />
       <Box width={props.width}>
@@ -69,7 +61,6 @@ function StorybookIndexCard(props: {
           reactDndIndex={0}
           canMove={true}
           reactDndType={"storybook"}
-          pool={poolManager.state.pool}
           id="123"
           indexCard={props.indexCard}
           indexCardHiddenRecord={{

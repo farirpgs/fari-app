@@ -7,6 +7,14 @@ export enum CharacterTemplates {
   VentureCity = "VentureCity",
   Heartbreaker = "Heartbreaker",
   IronEddaAccelerated = "IronEddaAccelerated",
+  StrandsOfFate = "StrandsOfFate",
+  EvolutionPulse_Hydrah = "EvolutionPulse_Hydrah",
+  EvolutionPulse_Hyonos = "EvolutionPulse_Hyonos",
+  EvolutionPulse_LostH = "EvolutionPulse_LostH",
+  EvolutionPulse_Obscura = "EvolutionPulse_Obscura",
+  EvolutionPulse_Proxy = "EvolutionPulse_Proxy",
+  ThePool = "ThePool",
+  TunnelsAndTrolls = "TunnelsAndTrolls",
   Maze = "Maze",
   Dnd5e = "Dnd5e",
   TheWitchIsDead = "TheWitchIsDead",
@@ -27,7 +35,30 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Fate", template: CharacterTemplates.VentureCity },
   { group: "Fate", template: CharacterTemplates.Heartbreaker },
   { group: "Fate", template: CharacterTemplates.IronEddaAccelerated },
+  { group: "Fate", template: CharacterTemplates.StrandsOfFate },
+  {
+    group: "Evolution Pulse",
+    template: CharacterTemplates.EvolutionPulse_Hydrah,
+  },
+  {
+    group: "Evolution Pulse",
+    template: CharacterTemplates.EvolutionPulse_Hyonos,
+  },
+  {
+    group: "Evolution Pulse",
+    template: CharacterTemplates.EvolutionPulse_LostH,
+  },
+  {
+    group: "Evolution Pulse",
+    template: CharacterTemplates.EvolutionPulse_Obscura,
+  },
+  {
+    group: "Evolution Pulse",
+    template: CharacterTemplates.EvolutionPulse_Proxy,
+  },
   { group: "Maze", template: CharacterTemplates.Maze },
+  { group: "Tunnels & Trolls", template: CharacterTemplates.TunnelsAndTrolls },
+  { group: "The Pool", template: CharacterTemplates.ThePool },
   { group: "Dungeons & Dragons", template: CharacterTemplates.Dnd5e },
   { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead },
   { group: "Blank", template: CharacterTemplates.Blank },
@@ -41,10 +72,9 @@ type ITemplateInfo = {
   };
 };
 
-export const CharacterTemplatesInformation: Record<
-  CharacterTemplates,
-  ITemplateInfo
-> = {
+export const CharacterTemplatesInformation: {
+  [template in CharacterTemplates]?: ITemplateInfo;
+} = {
   [CharacterTemplates.FateCondensed]: {
     isFate: true,
     author: {
@@ -108,11 +138,39 @@ export const CharacterTemplatesInformation: Record<
       link: "https://www..com/product-page/mazes-zine-a-polymorph-adventure",
     },
   },
-  [CharacterTemplates.Dnd5e]: {},
   [CharacterTemplates.TheWitchIsDead]: {
     author: { name: "Grant Howitt", link: "https://rowanrookanddecard.com/" },
   },
-  [CharacterTemplates.Blank]: {},
+  [CharacterTemplates.EvolutionPulse_Hydrah]: {
+    author: {
+      name: "Dreamlord Press",
+      link: "https://www.dreamlord.it/en/dreamlord/",
+    },
+  },
+  [CharacterTemplates.EvolutionPulse_Hyonos]: {
+    author: {
+      name: "Dreamlord Press",
+      link: "https://www.dreamlord.it/en/dreamlord/",
+    },
+  },
+  [CharacterTemplates.EvolutionPulse_LostH]: {
+    author: {
+      name: "Dreamlord Press",
+      link: "https://www.dreamlord.it/en/dreamlord/",
+    },
+  },
+  [CharacterTemplates.EvolutionPulse_Obscura]: {
+    author: {
+      name: "Dreamlord Press",
+      link: "https://www.dreamlord.it/en/dreamlord/",
+    },
+  },
+  [CharacterTemplates.EvolutionPulse_Proxy]: {
+    author: {
+      name: "Dreamlord Press",
+      link: "https://www.dreamlord.it/en/dreamlord/",
+    },
+  },
 };
 
 export function getTemplateInfo(

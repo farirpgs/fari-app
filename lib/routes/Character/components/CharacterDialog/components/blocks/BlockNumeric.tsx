@@ -13,10 +13,11 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
-import { CircleTextField } from "./BlockSkill";
+import { CircleTextField } from "../CircleTextField";
 
 export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
-  const isSlotTrackerVisible = props.block.meta?.checked !== undefined;
+  const isSlotTrackerVisible =
+    props.block.meta?.checked === true || props.block.meta?.checked === false;
 
   return (
     <>

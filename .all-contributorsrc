@@ -88,6 +88,24 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "tjbearse",
+      "name": "Thomas Bearse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5686806?v=4",
+      "profile": "https://github.com/tjbearse",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "1d12monos",
+      "name": "1d12monos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82345656?v=4",
+      "profile": "https://1d12monos.com/",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,

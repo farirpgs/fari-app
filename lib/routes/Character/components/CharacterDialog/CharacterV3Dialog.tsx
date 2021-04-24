@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
@@ -8,7 +9,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -32,6 +32,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
+import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { AppLink } from "../../../../components/AppLink/AppLink";
@@ -122,6 +123,23 @@ export const CharacterV3Dialog: React.FC<{
   const characterTemplateInfo = getTemplateInfo(
     characterManager.state.character?.template
   );
+
+  function getTemplateName(template: string | undefined = "") {
+    const label = t(
+      `character-dialog.template.${template}` as ITranslationKeys,
+      {},
+      true
+    );
+
+    if (!!label) {
+      return label;
+    }
+    const formatted = template
+      .split("_")
+      .map((word) => startCase(word))
+      .join(" - ");
+    return formatted;
+  }
 
   function onSave() {
     const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
@@ -295,10 +313,10 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderManagementActions() {
-    return <Collapse in={advanced}>{renderLoadTemplate()}</Collapse>;
+    return <Collapse in={advanced}>{renderLoadTemplate("advanced")}</Collapse>;
   }
 
-  function renderLoadTemplate() {
+  function renderLoadTemplate(dataCy: string) {
     return (
       <Box>
         <Grid
@@ -318,11 +336,9 @@ export const CharacterV3Dialog: React.FC<{
               filterOptions={createFilterOptions({ limit: 100 })}
               options={CharacterTemplatesWithGroups}
               className={css({ width: "300px" })}
-              getOptionLabel={(option) =>
-                t(
-                  `character-dialog.template.${option.template}` as ITranslationKeys
-                )
-              }
+              getOptionLabel={(option) => {
+                return getTemplateName(option.template);
+              }}
               groupBy={(option) => option.group}
               onChange={(event, newValue) => {
                 if (newValue?.template) {
@@ -334,7 +350,7 @@ export const CharacterV3Dialog: React.FC<{
                   {...params}
                   label="Template"
                   variant="outlined"
-                  data-cy={`character-dialog.template`}
+                  data-cy={`character-dialog.template.${dataCy}`}
                 />
               )}
             />
@@ -500,10 +516,20 @@ export const CharacterV3Dialog: React.FC<{
                 <Box position="relative" mb="2rem">
                   <Grid container spacing={1}>
                     <Grid item xs={12} md={6} className={sectionStyle}>
-                      {renderSections(pageIndex, page.sections, Position.Left)}
+                      {renderSections(
+                        page,
+                        pageIndex,
+                        page.sections,
+                        Position.Left
+                      )}
                     </Grid>
                     <Grid item xs={12} md={6} className={sectionStyle}>
-                      {renderSections(pageIndex, page.sections, Position.Right)}
+                      {renderSections(
+                        page,
+                        pageIndex,
+                        page.sections,
+                        Position.Right
+                      )}
                     </Grid>
                   </Grid>
                 </Box>
@@ -515,7 +541,7 @@ export const CharacterV3Dialog: React.FC<{
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="5rem">
             <Grid container justify="center">
-              <Grid item>{renderLoadTemplate()}</Grid>
+              <Grid item>{renderLoadTemplate("content")}</Grid>
             </Grid>
           </Box>
         </Collapse>
@@ -528,9 +554,7 @@ export const CharacterV3Dialog: React.FC<{
                   to={characterTemplateInfo.author?.link}
                   target="_blank"
                 >
-                  {t(
-                    `character-dialog.template.${characterManager.state.character?.template}` as ITranslationKeys
-                  )}{" "}
+                  {getTemplateName(characterManager.state.character?.template)}{" "}
                   ({characterTemplateInfo.author?.name})
                 </AppLink>
               </Box>
@@ -564,6 +588,7 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderSections(
+    page: IPage,
     pageIndex: number,
     sections: Array<ISection> | undefined,
     position: Position
@@ -647,7 +672,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                   }}
                 />
-                {renderSectionBlocks(pageIndex, sectionIndex, section)}
+                {renderSectionBlocks(page, pageIndex, section, sectionIndex)}
 
                 {advanced && (
                   <Box p=".5rem" mb=".5rem">
@@ -906,10 +931,12 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function renderSectionBlocks(
+    page: IPage,
     pageIndex: number,
-    sectionIndex: number,
-    section: ISection
+    section: ISection,
+    sectionIndex: number
   ) {
+    const dragAndDropKey = `${page.label}.${pageIndex}.${section.label}.${sectionIndex}`;
     return (
       <>
         <Box
@@ -924,7 +951,7 @@ export const CharacterV3Dialog: React.FC<{
               <Box key={block.id}>
                 <BetterDnd
                   index={blockIndex}
-                  type={section.label}
+                  type={dragAndDropKey}
                   readonly={!advanced}
                   className={css({
                     label: "CharacterDialog-block-dnd",

@@ -1,0 +1,474 @@
+{
+  "id": "6b22fe51-c321-4496-a192-29136351c57e",
+  "version": 3,
+  "name": "Strands of Fate",
+  "group": "Templates",
+  "template": "FateCondensed",
+  "lastUpdated": 1618246007,
+  "pages": [
+    {
+      "id": "9e665f32-312b-4419-9f27-7c693b2e8fea",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "97b01d5b-5de8-400c-9dad-545c976b1f23",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "079cb567-2c63-43dd-ac26-1e8c9cebc24a",
+              "type": "Text",
+              "meta": {},
+              "label": "DEFINING ASPECT",
+              "value": ""
+            },
+            {
+              "id": "1addf77a-86f7-451a-bfa9-5cae4f73c68a",
+              "type": "Text",
+              "meta": {},
+              "label": "AMBITION",
+              "value": ""
+            },
+            {
+              "id": "d5522bf8-452f-4877-bb49-f27d0739bbf5",
+              "type": "Text",
+              "meta": {},
+              "label": "BELIEF",
+              "value": ""
+            },
+            {
+              "id": "cb049559-0381-4704-a880-09f51eba22e2",
+              "type": "Text",
+              "meta": {},
+              "label": "CONNECTION",
+              "value": ""
+            },
+            {
+              "id": "0a3e1435-d7fb-484e-b31e-0e01e0e8e3ff",
+              "type": "Text",
+              "meta": {},
+              "label": "DISADVANTAGE",
+              "value": ""
+            },
+            {
+              "id": "d252fac2-2cb0-4a22-8b61-d8152534048f",
+              "label": "EXPERIENCE",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "1038bfb2-910f-48b2-99b1-d1970ac422e3",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "55172f67-1458-47b8-b5c9-c962a9d6aadd",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "af55fbde-da77-4120-bcdf-702dbde595df",
+          "label": "Other",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "e59a7571-1d94-45ce-bcd9-8b496439e9c3",
+              "label": "RACE",
+              "type": "Text",
+              "value": "",
+              "meta": { "helperText": "See p.16 &amp; p.22" }
+            },
+            {
+              "id": "18f5993d-e063-4cb0-a261-65d4f43f11d6",
+              "label": "Size",
+              "type": "Numeric",
+              "value": "0",
+              "meta": { "helperText": "Size 0 = human-sized. See p.22" }
+            },
+            {
+              "id": "73106375-316b-429b-8e76-797840f58179",
+              "label": "CHARACTER EXPERIENCE LEVEL",
+              "type": "Text",
+              "value": "",
+              "meta": { "helperText": "See p.27" }
+            },
+            {
+              "id": "8fad3aeb-7b8c-4da7-82b1-d65ca5b11d35",
+              "label": "CHARACTER POWER LEVEL",
+              "type": "Text",
+              "value": "",
+              "meta": { "helperText": "See p.27" }
+            },
+            {
+              "id": "a35da710-e59f-4373-81c9-aa2c7fe466a3",
+              "label": "MILESTONE",
+              "type": "Text",
+              "value": "",
+              "meta": { "helperText": "See p.21" }
+            },
+            {
+              "id": "12b805f9-d3c9-446c-9e25-67fea112c475",
+              "label": "TECH LEVEL",
+              "type": "Numeric",
+              "value": "",
+              "meta": { "helperText": "See p.26" }
+            },
+            {
+              "id": "5ca3eaf1-964f-4b54-b09a-f802c8dadf61",
+              "type": "Text",
+              "meta": {},
+              "label": "Notes",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "6d120672-4fd0-4cec-aae5-131afb6d28d8",
+          "label": "Stress &amp; Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "4143ef97-06a6-4ed2-85e6-4c10a66c1b58",
+              "label": "Stress",
+              "type": "SlotTracker",
+              "meta": { "helperText": "See p.20 &amp; p.76" },
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false }
+              ]
+            },
+            {
+              "id": "8ab7e5ed-5dbb-4e6a-9e3f-55f31225a009",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Minor aspect (m). A minor wound can recover in 1 hour."
+              },
+              "label": "Wound: Minor (2)",
+              "value": ""
+            },
+            {
+              "id": "49b59d26-7841-41e1-b408-a44b6a04357c",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Normal aspect. A moderate wound can recover in 1 day."
+              },
+              "label": "Wound: Moderate (4)",
+              "value": ""
+            },
+            {
+              "id": "8942e1e6-00df-4808-8509-917643977afc",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Normal aspect. A severe wound can recover in 1 week."
+              },
+              "label": "Wound: Severe (6)",
+              "value": ""
+            },
+            {
+              "id": "2be33e1a-afea-4140-a46a-c687959548f4",
+              "label": "Complication: Minor (2)",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "\n\t\t\n\t\n\t\n\t\tMinor aspect (m). Mild Complications generally take the\nform of new obstacles, or situations that are\nrelatively easy (if inconvenient) to resolve.&nbsp;\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t"
+              }
+            },
+            {
+              "id": "b83d8f93-409f-4f83-9c22-9173fa491115",
+              "label": "Complication: Moderate (4)",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "\n\t\t\n\t\n\t\n\t\tNormal aspect.&nbsp;Moderate Complications\nstick with you. They change relationships,\nyour reputation, and/or result in a string of\nchallenges you’ll need to deal with under less\nthan ideal circumstances.&nbsp;\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t"
+              }
+            },
+            {
+              "id": "62ec11f5-76bb-4cb0-80af-fd84fefd3fa0",
+              "label": "Complication: Severe (6)",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "\n\t\t\n\t\n\t\n\t\tNormal aspect.&nbsp;Severe Complications are like Moderate ones,\nbut have an even more direct personal impact.&nbsp;\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t"
+              }
+            },
+            {
+              "id": "80e7987c-d4f2-4fcf-91b4-b55e80e15f64",
+              "label": "Wound OR Complication: Extreme (8)",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Major aspect (M). Extreme Complications change\nyour character, and/or the world around them,\nin ways from which they may never recover.&nbsp;\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tUnlike other Wounds, Extreme Wounds never\nautomatically downgrade. Instead, after the\nallotted time has passed, the Extreme Wounds\nbecomes an Aspect.&nbsp;\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0213b714-e693-484c-9d06-4a80b3266b02",
+      "sections": [
+        {
+          "id": "49685c89-9749-4f8b-837d-9427b931f755",
+          "label": "Powers",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "57dfd461-c52d-448e-8518-71c3a7b27fb8",
+              "label": "Power #1",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Include Power Name, Power Aspect, Power Level and Effect. See p.118 &amp; p.120."
+              }
+            }
+          ]
+        },
+        {
+          "id": "548d502e-e37c-465a-89f8-c493029ddf3b",
+          "label": "PERKS",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "49d6bc9e-60f6-4ba9-9483-d4d4db383b2e",
+              "type": "Text",
+              "meta": { "helperText": "See p.19 &amp; p.94" },
+              "label": "Perk #1",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "32f79d5b-02bd-440c-ad47-8be11d62aa84",
+          "label": "Skills",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "aae507b3-dabb-4e7c-a6b5-401455b80b2b",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The ability to lie, con, seduce, or bluff. Also the ability to haggle for a good deal."
+              },
+              "type": "Skill",
+              "label": "Guile",
+              "value": ""
+            },
+            {
+              "id": "9313b6d6-54e3-42c5-b154-8850928fe6f9",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Used to intuit other’s feelings, motivations or intentions."
+              },
+              "type": "Skill",
+              "label": "Insight",
+              "value": ""
+            },
+            {
+              "id": "db981aa7-7a56-40c8-9c50-dd019ecb9c92",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Knowledge measures “book learning.”"
+              },
+              "type": "Skill",
+              "label": "Knowledge",
+              "value": ""
+            },
+            {
+              "id": "3ca54d48-8e09-42bd-bda6-1a38ee001e53",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Your strength, health, vigor, and ability to withstand pain, toxins, sicknesses, and diseases of the body."
+              },
+              "type": "Skill",
+              "label": "Might",
+              "value": ""
+            },
+            {
+              "id": "515b0ca9-e49c-4329-923e-073d9c977354",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "How quickly and gracefully you can move your body: running speed, balance, jumping, acrobatics, stealth, and so on."
+              },
+              "type": "Skill",
+              "label": "Mobility",
+              "value": ""
+            },
+            {
+              "id": "0a765f32-748a-43bf-afc4-552bb22d4361",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The quality and quantity of the contacts you have willing to provide you aid."
+              },
+              "type": "Skill",
+              "label": "Networking",
+              "value": ""
+            },
+            {
+              "id": "82c65f39-878b-4592-ac68-48e139e364f6",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The quality of your five senses and general awareness of your surroundings. Can be used to make Assessments."
+              },
+              "type": "Skill",
+              "label": "Perception",
+              "value": ""
+            },
+            {
+              "id": "f4a8fa1d-01ab-432d-97cb-88658a8dafd5",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Your capacity to perform delicate tasks, throw objects, or fire projectile weapons. It is the general measure of your hand-eye coordination."
+              },
+              "type": "Skill",
+              "label": "Precision",
+              "value": ""
+            },
+            {
+              "id": "25225c0c-4cfb-4623-af55-659a0e36f556",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "A measurement of your mental reflexes or “common sense.”"
+              },
+              "type": "Skill",
+              "label": "Reasoning",
+              "value": ""
+            },
+            {
+              "id": "d33e2e43-5cf9-4c2a-bef7-e22f537a1874",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Your ability to react to sudden changes in your environment, such as when dodging blows."
+              },
+              "type": "Skill",
+              "label": "Reflexes",
+              "value": ""
+            },
+            {
+              "id": "e4be0450-dfc0-4992-8d23-23585f54904f",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The measure of your courage, willpower, and ability to resist temptation."
+              },
+              "type": "Skill",
+              "label": "Resolve",
+              "value": ""
+            },
+            {
+              "id": "aa61f818-91fd-4235-8403-f6795708fafd",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The ability to talk with people in a friendly fashion, bargain for a deal, and make a good impression; or alternatively, to intimidate and bully others into doing what you want."
+              },
+              "type": "Skill",
+              "label": "Sway",
+              "value": ""
+            },
+            {
+              "id": "f47a607b-db84-42ce-b3ed-42b1fc5b8736",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Affinity (Special)",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "8c4870e8-ef4d-4c64-b2f8-16a88d7e078d",
+          "label": "Attack &amp; Defense",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "01462bdd-ad4a-4400-9f2a-62ab5aa14fd2",
+              "label": "Attack Item 1",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Include Name, Damage/Explosive Rating, Aspects, Tech Level, Range."
+              }
+            },
+            {
+              "id": "dbd6ad71-8e15-4f70-ac4e-709b610e48f7",
+              "label": "Attack Item 2",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Include Name, Damage/Explosive Rating, Aspects, Tech Level, Range."
+              }
+            },
+            {
+              "id": "e796e629-8ad6-4172-9c08-51eccb66df5e",
+              "label": "Defense Item 1",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Include Name, Armor Rating, Tech Level, Aspects, Min Might"
+              }
+            },
+            {
+              "id": "33e78a07-2c11-4408-8a77-2c53685e435d",
+              "label": "Attack &amp; Defense Notes",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "Skills, Perks, Powers"
+    },
+    {
+      "id": "f2ce7b4b-7bb1-465b-a8cc-20e4e8eadcec",
+      "sections": [
+        {
+          "id": "37fa682e-ce38-4507-86c7-4b21c43e4711",
+          "label": "Resources",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "dd992e87-a466-44f2-99cd-f11bf985ac36",
+              "label": "Resources",
+              "type": "PointCounter",
+              "meta": { "isMainPointCounter": false },
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "id": "99577016-eb3c-4aee-9085-7ae5415e275b",
+          "label": "Gear",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "c35c3559-4e6c-4375-95d3-27ecead7eea6",
+              "label": "Gear",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "2f1a6ee6-4710-465d-8de7-16ed5c67cf61",
+              "label": "Additional Gear Notes",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "Gear"
+    }
+  ],
+  "fariType": "character"
+}
