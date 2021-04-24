@@ -39,7 +39,7 @@ describe("useScene", () => {
       goodConfetti: 0,
       badConfetti: 0,
       drawAreaObjects: [],
-      version: 1,
+      version: 2,
       lastUpdated: expect.anything(),
     };
     // WHEN
@@ -93,7 +93,15 @@ describe("useScene", () => {
 
       // THEN
       expect(result.current.state.scene).toEqual({
-        aspects: { "aspect-id": { toto: 3 } },
+        indexCards: {
+          private: [],
+          public: [
+            {
+              id: "aspect-id",
+            },
+          ],
+        },
+
         badConfetti: 0,
         drawAreaObjects: [],
         group: undefined,
@@ -112,7 +120,6 @@ describe("useScene", () => {
         lastUpdated: 111,
         name: "new name",
         players: [],
-        sort: false,
         version: 3,
       });
 
@@ -589,18 +596,18 @@ describe("useScene", () => {
       });
       // THEN
       expect(result.current.state.scene.name).toEqual("NAME");
-      expect(Object.keys(result.current.state.scene.indexCards).length).toEqual(
-        1
-      );
+      expect(
+        Object.keys(result.current.state.scene.indexCards.public).length
+      ).toEqual(1);
 
       // WHEN reseting
       act(() => {
         result.current.actions.resetScene();
       });
       expect(result.current.state.scene.name).toEqual(defaultSceneName);
-      expect(Object.keys(result.current.state.scene.indexCards).length).toEqual(
-        0
-      );
+      expect(
+        Object.keys(result.current.state.scene.indexCards.public).length
+      ).toEqual(0);
     });
     it("keep sticky aspects", () => {
       // GIVEN
@@ -641,9 +648,9 @@ describe("useScene", () => {
         result.current.actions.resetScene();
       });
       expect(result.current.state.scene.name).toEqual(defaultSceneName);
-      expect(Object.keys(result.current.state.scene.indexCards).length).toEqual(
-        1
-      );
+      expect(
+        Object.keys(result.current.state.scene.indexCards.public).length
+      ).toEqual(1);
     });
   });
   describe("safeSetScene", () => {
