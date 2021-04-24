@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import { useTheme } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
-import { DrawObjects } from "../../components/DrawArea/DrawObjects";
+import { DrawArea } from "../../components/DrawArea/DrawArea";
 import { useDrawing } from "../../components/DrawArea/hooks/useDrawing";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
@@ -48,7 +48,8 @@ export const DrawRoute: React.FC = (props) => {
           maxWidth="600px"
           margin="0 auto"
         >
-          <DrawObjects drawingManager={drawingManager} controls="top" />
+          <DrawArea />
+          {/*<DrawObjects drawingManager={drawingManager} controls="top" />*/}
         </Box>
       </Container>
     </Page>
