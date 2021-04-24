@@ -20,7 +20,7 @@ import {
 } from "../../../../../../domains/character/types";
 import { IDiceCommandOption } from "../../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { Block } from "../../domains/Block/Block";
+import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
 import {
   IBlockActionComponentProps,
@@ -52,7 +52,9 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
   const blockCommandGroups = DiceCommandGroup.getCommandGroupFromBlock(
     props.block
   );
-  const commandOptionList = Block.getCommandOptionList(props.block);
+  const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
+    props.block
+  );
   return (
     <>
       <Box>

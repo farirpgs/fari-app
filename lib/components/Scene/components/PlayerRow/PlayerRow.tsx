@@ -160,6 +160,7 @@ export const PlayerRow: React.FC<
                 size="2.5rem"
                 fontSize="1.25rem"
                 borderSize=".15rem"
+                disableConfettis={props.isMe}
                 disabled={!props.permissions.canRoll}
                 onClick={() => {
                   handleOnRoll();

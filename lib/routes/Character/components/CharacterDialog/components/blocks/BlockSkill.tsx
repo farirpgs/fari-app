@@ -13,8 +13,7 @@ import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
-import { Block } from "../../domains/Block/Block";
+import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -23,6 +22,7 @@ import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CircleTextField } from "../CircleTextField";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 import { Pool } from "./BlockDicePool";
+
 export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const { t } = useTranslate();
   const diceManager = useContext(DiceContext);
@@ -34,8 +34,6 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
 
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
-  const skillDescription =
-    FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
 
   const isSelected = diceManager.state.pool.some(
     (p) => p.blockId === props.block.id
@@ -44,7 +42,9 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
     props.block.meta?.commands?.map((commandId) => {
       return AllDiceCommandGroups[commandId];
     }) ?? [];
-  const commandOptionList = Block.getCommandOptionList(props.block);
+  const blockDiceCommandOptions = BlockSelectors.getDiceCommandOptionsFromBlock(
+    props.block
+  );
 
   const RollIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
 
@@ -60,14 +60,23 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
               selected={isSelected}
               clickable={!props.readonly}
               borderStyle={"solid"}
-              onClick={() => {
+              onContextMenu={(event) => {
+                event.preventDefault();
+
                 diceManager.actions.setOptions({ listResults: false });
                 diceManager.actions.addOrRemovePoolElement({
                   blockId: props.block.id,
                   blockType: props.block.type,
                   label: props.block.label,
-                  commandOptionList: commandOptionList,
+                  commandOptionList: blockDiceCommandOptions,
                 });
+              }}
+              onClick={() => {
+                const diceRollResult = diceManager.actions.roll(
+                  blockDiceCommandOptions,
+                  { listResults: false }
+                );
+                props.onRoll(diceRollResult);
               }}
             >
               <RollIcon className={css({ fontSize: "2.3rem" })} />

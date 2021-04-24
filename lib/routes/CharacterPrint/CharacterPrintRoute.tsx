@@ -15,7 +15,6 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter, ISection, Position } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 
 export const CharacterPrintRoute: React.FC<{
@@ -23,7 +22,6 @@ export const CharacterPrintRoute: React.FC<{
     params: { id: string };
   };
 }> = (props) => {
-  const { t } = useTranslate();
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
@@ -187,6 +185,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
                     onChange={() => undefined}
                     onDuplicate={() => undefined}
                     onRemove={() => undefined}
+                    onRoll={() => undefined}
                   />
                 </Box>
               );

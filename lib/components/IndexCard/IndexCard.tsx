@@ -34,6 +34,7 @@ import { ChromePicker } from "react-color";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { BlockType, IBlock } from "../../domains/character/types";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
@@ -270,7 +271,7 @@ export const IndexCard: React.FC<
     indexCardHiddenRecord: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
-    onRoll(modifierLabel: string, modifierValue: number): void;
+    onRoll(diceRollResult: IDiceRollResult): void;
     onMove(dragIndex: number, hoverIndex: number): void;
     onRemove(): void;
     onDuplicate(): void;
@@ -649,6 +650,9 @@ export const IndexCard: React.FC<
                 onChange={(newBlock) => {
                   indexCardManager.actions.setBlock(newBlock);
                 }}
+                onRoll={(diceRollResult) => {
+                  props.onRoll(diceRollResult);
+                }}
               />
             </Box>
           );
@@ -685,7 +689,8 @@ export const IndexCard: React.FC<
                         return;
                       }
                       const modifier = parseInt(skill.modifier) || 0;
-                      props.onRoll(skill.label, modifier);
+                      // TODO: fix this
+                      // props.onRoll(skill.label, modifier);
                     }}
                   >
                     {skill.label} ({skill.modifier})
@@ -755,7 +760,6 @@ export const IndexCard: React.FC<
                 <Grid item>
                   <Tooltip
                     title={
-                      // TODO: INSPECT
                       indexCardManager.state.indexCard.pinned
                         ? t("index-card.unpin")
                         : t("index-card.pin")

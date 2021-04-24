@@ -48,10 +48,7 @@ import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
-import {
-  DefaultDiceCommandOptions,
-  DiceContext,
-} from "../../contexts/DiceContext/DiceContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
@@ -60,14 +57,9 @@ import {
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { BlockType, ICharacter } from "../../domains/character/types";
-import {
-  IDiceCommandOption,
-  IDiceRollResult,
-  RollType,
-} from "../../domains/dice/Dice";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
-import { useDicePool } from "../../hooks/useDicePool/useDicePool";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
@@ -161,7 +153,6 @@ export const Scene: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
   const logger = useLogger();
   const diceManager = useContext(DiceContext);
-  const poolManager = useDicePool();
   const numberOfColumnsForCards = useResponsiveValue({
     xl: 4,
     lg: 3,
@@ -294,6 +285,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
     charactersManager.actions.upsert(character);
   };
+
   const handleSetMyRoll = (result: IDiceRollResult) => {
     if (isGM) {
       sceneManager.actions.updateGmRoll(result);
@@ -310,7 +302,11 @@ export const Scene: React.FC<IProps> = (props) => {
     result: IDiceRollResult
   ) => {
     if (isGM) {
-      sceneManager.actions.updatePlayerRoll(playerId, result);
+      if (playerId) {
+        sceneManager.actions.updatePlayerRoll(playerId, result);
+      } else {
+        sceneManager.actions.updateGmRoll(result);
+      }
     } else {
       connectionsManager?.actions.sendToHost<IPeerActions>({
         action: "roll",
@@ -349,16 +345,15 @@ export const Scene: React.FC<IProps> = (props) => {
             {t("play-route.scene-saved")}
           </Alert>
         </Snackbar>
-        {props.mode !== SceneMode.Manage && (
-          <DiceFab
-            onRoll={(result) => {
-              handleSetMyRoll(result);
-            }}
-            onRollPool={(result, playerId) => {
-              handleSetPlayerRoll(playerId, result);
-            }}
-          />
-        )}
+        <DiceFab
+          onRoll={(result) => {
+            handleSetMyRoll(result);
+          }}
+          rollsForDiceBox={me?.rolls ?? []}
+          onRollPool={(result, playerId) => {
+            handleSetPlayerRoll(playerId, result);
+          }}
+        />
         {props.error ? renderPageError() : renderPage()}
       </Box>
     </Page>
@@ -521,11 +516,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 {characterDialogPlayerId === player.id && (
                   <CharacterV3Dialog
                     readonly={!canControl}
-                    onPoolClick={(element) => {
-                      diceManager.actions.addOrRemovePoolElement(element);
-                      diceManager.actions.setPlayerId(player.id);
-                    }}
-                    pool={diceManager.state.pool}
                     open={characterDialogPlayerId === player.id}
                     character={player.character}
                     dialog={true}
@@ -549,6 +539,9 @@ export const Scene: React.FC<IProps> = (props) => {
                     synced={isCharacterInStorage}
                     onToggleSync={() => {
                       handleOnToggleCharacterSync(player.character);
+                    }}
+                    onRoll={(newDiceRollResult) => {
+                      handleSetPlayerRoll(player.id, newDiceRollResult);
                     }}
                   />
                 )}
@@ -681,10 +674,8 @@ export const Scene: React.FC<IProps> = (props) => {
                         onCharacterDialogOpen={() => {
                           setCharacterDialogPlayerId(player.id);
                         }}
-                        pool={diceManager.state.pool}
-                        onPoolClick={(element) => {
-                          diceManager.actions.addOrRemovePoolElement(element);
-                          diceManager.actions.setPlayerId(player.id);
+                        onRoll={(newDiceRollResult) => {
+                          handleSetPlayerRoll(player.id, newDiceRollResult);
                         }}
                       />
                     </Box>
@@ -902,23 +893,25 @@ export const Scene: React.FC<IProps> = (props) => {
                 readonly={!isGM}
                 showClickableSkills={props.mode !== SceneMode.Manage}
                 indexCard={indexCard}
-                onRoll={(label, modifier) => {
-                  const options: Array<IDiceCommandOption> = [
-                    ...DefaultDiceCommandOptions,
-                  ];
-                  options.push({
-                    type: RollType.Modifier,
-                    label: label,
-                    modifier: modifier,
-                  });
-                  const result = diceManager.actions.roll(options, {
-                    listResults: false,
-                  });
-                  handleSetMyRoll(result);
-                }}
+                onRoll={handleSetMyRoll}
+                // TODO: fix this
+                // onRoll={(label, modifier) => {
+                //   const options: Array<IDiceCommandOption> = [
+                //     ...DefaultDiceCommandOptions,
+                //   ];
+                //   options.push({
+                //     type: RollType.Modifier,
+                //     label: label,
+                //     modifier: modifier,
+                //   });
+                //   const result = diceManager.actions.roll(options, {
+                //     listResults: false,
+                //   });
+                //   handleSetMyRoll(result);
+                // }}
                 onPoolClick={(element) => {
-                  poolManager.actions.addOrRemovePoolElement(element);
-                  poolManager.actions.setPlayerId(gm.id);
+                  diceManager.actions.addOrRemovePoolElement(element);
+                  diceManager.actions.setPlayerId(gm.id);
                 }}
                 onMove={(dragIndex, hoverIndex) => {
                   sceneManager.actions.moveIndexCard(

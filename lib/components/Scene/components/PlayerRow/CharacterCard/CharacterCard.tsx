@@ -8,7 +8,8 @@ import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import PersonIcon from "@material-ui/icons/Person";
-import React from "react";
+import React, { useContext } from "react";
+import { DiceContext } from "../../../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
   BlockType,
@@ -23,19 +24,16 @@ import {
   ISlotTrackerBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
+import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-import {
-  BlockDicePool,
-  IDicePool,
-  IDicePoolElement,
-} from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockDicePool } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { BlockImage } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockImage";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
-import { Block } from "../../../../../routes/Character/components/CharacterDialog/domains/Block/Block";
+import { BlockSelectors } from "../../../../../routes/Character/components/CharacterDialog/domains/BlockSelectors/BlockSelectors";
 import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
 import { paperStyle } from "../../../Scene";
@@ -45,16 +43,15 @@ export const CharacterCard: React.FC<{
   playerName: string | undefined;
   readonly: boolean;
   width?: string;
-  pool: IDicePool;
   onCharacterDialogOpen?(): void;
-  onPoolClick(element: IDicePoolElement): void;
+  onRoll(newRollResult: IDiceRollResult): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
 
   const width = props.width ?? "100%";
-
+  const diceManager = useContext(DiceContext);
   const sections = props.characterSheet?.pages.flatMap((p) => p.sections);
   const visibleSections = sections?.filter((s) => s.visibleOnCard);
 
@@ -184,6 +181,7 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
+          onRoll={() => {}}
         />
       </Grid>
     );
@@ -203,6 +201,7 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
+          onRoll={() => {}}
         />
       </Grid>
     );
@@ -219,13 +218,16 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
+          onRoll={() => {}}
         />
       </Grid>
     );
   }
 
   function renderBlockSkill(section: ISection, block: IBlock & ISkillBlock) {
-    const isSelected = props.pool.some((p) => p.blockId === block.id);
+    const isSelected = diceManager.state.pool.some(
+      (p) => p.blockId === block.id
+    );
     const blockValue = block.value || "0";
     return (
       <Grid
@@ -260,17 +262,36 @@ export const CharacterCard: React.FC<{
             },
           ])}
           data-cy={`character-card.section.${section.label}.block.${block.label}`}
-          onClick={() => {
+          onContextMenu={(event: any) => {
+            event.preventDefault();
             if (props.readonly) {
               return;
             }
-            const commandOptionList = Block.getCommandOptionList(block);
-            props.onPoolClick({
+
+            const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
+              block
+            );
+            diceManager.actions.setOptions({ listResults: true });
+            diceManager.actions.addOrRemovePoolElement({
               blockId: block.id,
               blockType: block.type,
               label: block.label,
               commandOptionList: commandOptionList,
             });
+          }}
+          onClick={() => {
+            if (props.readonly) {
+              return;
+            }
+
+            const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
+              block
+            );
+
+            const diceRollResult = diceManager.actions.roll(commandOptionList, {
+              listResults: false,
+            });
+            props.onRoll(diceRollResult);
           }}
         >
           {previewContentEditable({ value: block.label })} ({blockValue})
@@ -290,6 +311,7 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
+          onRoll={() => {}}
         />
       </Grid>
     );
@@ -308,6 +330,7 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
+          onRoll={() => {}}
         />
       </Grid>
     );
@@ -326,6 +349,7 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
+          onRoll={() => {}}
         />
       </Grid>
     );

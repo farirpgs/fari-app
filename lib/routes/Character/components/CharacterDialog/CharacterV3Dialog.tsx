@@ -54,6 +54,7 @@ import {
   Position,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
+import { IDiceRollResult } from "../../../../domains/dice/Dice";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
@@ -64,7 +65,6 @@ import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
-import { IDicePool, IDicePoolElement } from "./components/blocks/BlockDicePool";
 import { SheetHeader } from "./components/SheetHeader";
 
 export const smallIconButtonStyle = css({
@@ -92,14 +92,13 @@ export const CharacterV3Dialog: React.FC<{
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
-  pool: IDicePool;
 
   synced?: boolean;
 
-  onPoolClick(element: IDicePoolElement): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
   onToggleSync?(): void;
+  onRoll(diceRollResult: IDiceRollResult): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -576,8 +575,7 @@ export const CharacterV3Dialog: React.FC<{
                   readonly={false}
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
-                  pool={props.pool}
-                  onPoolClick={props.onPoolClick}
+                  onRoll={props.onRoll}
                 />
               </Box>
             </Grid>
@@ -1012,6 +1010,9 @@ export const CharacterV3Dialog: React.FC<{
                         characterManager.actions.toggleBlockMainPointCounter(
                           block.id
                         );
+                      }}
+                      onRoll={(diceRollResult) => {
+                        props.onRoll(diceRollResult);
                       }}
                     />
                   </Box>

@@ -9,7 +9,6 @@ import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
-import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterSheet(
@@ -20,7 +19,8 @@ function StorybookCharacterSheet(
 ) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
-  function handleOnNewRoll(result: IDiceRollResult) {
+
+  function handleSetNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
@@ -28,18 +28,14 @@ function StorybookCharacterSheet(
 
   function handleOnRollPool() {
     const { result } = diceManager.actions.getPoolResult();
-    handleOnNewRoll(result);
-  }
-
-  function handleOnPoolClick(element: IDicePoolElement) {
-    diceManager.actions.addOrRemovePoolElement(element);
+    handleSetNewRoll(result);
   }
 
   return (
     <>
       <DiceFab
         rollsForDiceBox={rolls}
-        onRoll={handleOnNewRoll}
+        onRoll={handleSetNewRoll}
         onRollPool={handleOnRollPool}
       />
       <CharacterV3Dialog
@@ -47,9 +43,8 @@ function StorybookCharacterSheet(
         open={true}
         character={props.character}
         readonly={props.readonly}
-        pool={diceManager.state.pool}
         synced={false}
-        onPoolClick={handleOnPoolClick}
+        onRoll={handleSetNewRoll}
         onClose={action("onClose")}
         onSave={action("onSave")}
         onToggleSync={action("onToggleSync")}

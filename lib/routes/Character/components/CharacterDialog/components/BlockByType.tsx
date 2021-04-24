@@ -8,6 +8,7 @@ import produce from "immer";
 import React from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
+import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
@@ -32,6 +33,7 @@ export function BlockByType(
     onRemove(): void;
     onDuplicate(): void;
     onMainPointCounterChange?(): void;
+    onRoll(diceRollResult: IDiceRollResult): void;
   }
 ) {
   const theme = useTheme();
@@ -100,6 +102,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
       {props.block.type === BlockType.Numeric && (
@@ -111,6 +114,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
       {props.block.type === BlockType.Image && (
@@ -122,6 +126,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
       {props.block.type === BlockType.Skill && (
@@ -133,6 +138,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
       {props.block.type === BlockType.DicePool && (
@@ -144,6 +150,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
       {props.block.type === BlockType.PointCounter && (
@@ -155,6 +162,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
 
@@ -167,6 +175,7 @@ export function BlockByType(
           onLabelChange={handleOnLabelChange}
           onValueChange={handleOnValueChange}
           onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
         />
       )}
 

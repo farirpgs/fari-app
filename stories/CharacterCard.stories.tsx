@@ -9,7 +9,6 @@ import LoremIpsumTemplate from "../lib/domains/character/character-templates/Lor
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
-import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterCard(
@@ -21,7 +20,7 @@ function StorybookCharacterCard(
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
 
-  function handleOnNewRoll(result: IDiceRollResult) {
+  function handleSetNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
@@ -29,27 +28,22 @@ function StorybookCharacterCard(
 
   function handleOnRollPool() {
     const { result } = diceManager.actions.getPoolResult();
-    handleOnNewRoll(result);
-  }
-
-  function handleOnPoolClick(element: IDicePoolElement) {
-    diceManager.actions.addOrRemovePoolElement(element);
+    handleSetNewRoll(result);
   }
 
   return (
     <>
       <DiceFab
         rollsForDiceBox={rolls}
-        onRoll={handleOnNewRoll}
+        onRoll={handleSetNewRoll}
         onRollPool={handleOnRollPool}
       />
       <CharacterCard
         playerName={props.playerName}
         readonly={props.readonly}
         characterSheet={props.characterSheet}
-        pool={diceManager.state.pool}
         onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
-        onPoolClick={handleOnPoolClick}
+        onRoll={handleSetNewRoll}
       />
     </>
   );

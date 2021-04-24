@@ -10,11 +10,7 @@ import {
   IndexCardColorTypeEnum,
 } from "../lib/components/IndexCard/IndexCardColor";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
-import {
-  IDiceCommandOption,
-  IDiceRollResult,
-  RollType,
-} from "../lib/domains/dice/Dice";
+import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { Enum } from "../lib/domains/enum/Enum";
 import { SceneFactory } from "../lib/domains/scene/SceneFactory";
 import { AspectType } from "../lib/hooks/useScene/AspectType";
@@ -68,19 +64,8 @@ function StorybookIndexCard(props: {
           }}
           readonly={props.readonly}
           showClickableSkills={props.showClickableSkills}
-          onRoll={(label, modifier) => {
-            const options: Array<IDiceCommandOption> = [
-              { commandGroupId: "4dF", type: RollType.DiceCommand },
-            ];
-            options.push({
-              type: RollType.Modifier,
-              label: label,
-              modifier: modifier,
-            });
-            const result = diceManager.actions.roll(options, {
-              listResults: false,
-            });
-            handleOnNewRoll(result);
+          onRoll={(diceRollResult) => {
+            handleOnNewRoll(diceRollResult);
           }}
           onPoolClick={handleOnPoolClick}
           onChange={action("onChange") as any}

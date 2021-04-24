@@ -82,12 +82,15 @@ export function useDice() {
   }
 
   function roll(
-    newCommands: Array<IDiceCommandOption>,
+    newDiceCommandOptions: Array<IDiceCommandOption>,
     optionsForRoll: IRollDiceOptions = options
   ) {
-    setLatestCommandOptions(newCommands);
+    setLatestCommandOptions(newDiceCommandOptions);
     setOptions(optionsForRoll);
-    const result = Dice.rollCommandOptionList(newCommands, optionsForRoll);
+    const result = Dice.rollCommandOptionList(
+      newDiceCommandOptions,
+      optionsForRoll
+    );
     return result;
   }
 
@@ -121,6 +124,7 @@ export function useDice() {
     if (isFirstPoolElement) {
       setCommandGroups([]);
     }
+
     setPool((draft) => {
       const ids = draft.map((element) => element.blockId);
       const exists = ids.includes(element.blockId);
@@ -146,6 +150,7 @@ export function useDice() {
         };
       }
     );
+
     const optionsFromPool = pool.flatMap(
       (element) => element.commandOptionList
     );

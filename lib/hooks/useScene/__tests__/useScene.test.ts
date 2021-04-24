@@ -751,10 +751,3 @@ function mockUseCharacters() {
     return result;
   };
 }
-
-// TODO: ...
-// updatePlayerCharacterMainPointCounter
-// cloneAndLoadNewScene
-// forceDirty
-// setGroup
-// moveAspects
