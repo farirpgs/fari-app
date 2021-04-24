@@ -262,7 +262,7 @@ export const CharacterFactory = {
         label: "Slot Tracker",
         type: type,
         meta: {},
-        value: [{ label: "1", checked: false }],
+        value: [{ label: "", checked: false }],
       } as IBlock & ISlotTrackerBlock,
       [BlockType.Image]: {
         id: Id.generate(),

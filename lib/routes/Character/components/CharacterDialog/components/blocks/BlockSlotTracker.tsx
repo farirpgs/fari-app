@@ -37,7 +37,7 @@ export function BlockSlotTracker(
       return [
         ...draft,
         {
-          label: "1",
+          label: "",
           checked: false,
         },
       ];
