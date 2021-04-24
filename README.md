@@ -40,7 +40,9 @@ To verify
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
@@ -49,7 +51,7 @@ To verify
 ![Continous Integration](https://github.com/fariapp/fari/workflows/CI/badge.svg)
 ![Integration Tests](https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg)
 
-This repo contains the source code that powers Fari.
+This repo contains the source code that powers Fari, the open source virtual table-top platform.
 
 If you are here because
 
@@ -57,7 +59,7 @@ If you are here because
 2. you want to ask a question
 3. you have a feature suggestion
 
-you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue.
+you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue or start a [discussion here](https://github.com/fariapp/fari/discussions).
 
 Please take the time to add as much details to your issues as possible.
 

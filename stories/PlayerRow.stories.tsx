@@ -11,6 +11,7 @@ import {
   Position,
 } from "../lib/domains/character/types";
 import { IDiceRollResult, RollType } from "../lib/domains/dice/Dice";
+import { Id } from "../lib/domains/Id/Id";
 import { IPlayer } from "../lib/hooks/useScene/IScene";
 import { StoryProvider } from "./StoryProvider";
 
@@ -749,7 +750,7 @@ function aCharacter(name: string): ICharacter {
 
 function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
   return {
-    id: "123",
+    id: Id.generate(),
     points: "3",
     playerName: "René-Pier",
     isGM: false,

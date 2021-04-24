@@ -205,6 +205,7 @@ export const PlayerRow: React.FC<
           spacing={1}
         >
           <Grid item>{renderInitiative()}</Grid>
+          <Grid item>{renderPlayerId()}</Grid>
         </Grid>
         <Grid
           item
@@ -405,6 +406,7 @@ export const PlayerRow: React.FC<
   function renderName() {
     const canOpenOrLoadSheet =
       hasCharacterSheet || props.permissions.canLoadCharacterSheet;
+
     return (
       <>
         <Box>
@@ -474,16 +476,16 @@ export const PlayerRow: React.FC<
                 >
                   {hasCharacterSheet ? (
                     <>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} zeroMinWidth>
                         {renderMainName(props.player.character?.name)}
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} zeroMinWidth>
                         {renderSecondaryName(props.player.playerName)}
                       </Grid>
                     </>
                   ) : (
                     <>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} zeroMinWidth>
                         {renderMainName(props.player.playerName)}
                       </Grid>
                     </>
@@ -494,6 +496,21 @@ export const PlayerRow: React.FC<
           </Grid>
         </Box>
       </>
+    );
+  }
+
+  function renderPlayerId() {
+    return (
+      <Typography
+        className={css({
+          fontSize: ".8rem",
+          fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+          color: theme.palette.text.secondary,
+        })}
+        display="inline"
+      >
+        [{props.player.id.slice(0, 5)}]
+      </Typography>
     );
   }
 
