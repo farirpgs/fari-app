@@ -5,15 +5,10 @@ import produce from "immer";
 import React, { useContext, useState } from "react";
 import { DiceFab } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
-import {
-  IndexCardColor,
-  IndexCardColorTypeEnum,
-} from "../lib/components/IndexCard/IndexCardColor";
+import { IndexCardColor } from "../lib/components/IndexCard/IndexCardColor";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
-import { Enum } from "../lib/domains/enum/Enum";
 import { SceneFactory } from "../lib/domains/scene/SceneFactory";
-import { AspectType } from "../lib/hooks/useScene/AspectType";
 import { IIndexCard } from "../lib/hooks/useScene/IScene";
 import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
@@ -23,6 +18,7 @@ function StorybookIndexCard(props: {
   showClickableSkills: boolean;
   indexCard: IIndexCard;
   pinned: boolean;
+  playedDuringTurn: boolean;
   width: string;
 }) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
@@ -58,7 +54,11 @@ function StorybookIndexCard(props: {
           canMove={true}
           reactDndType={"storybook"}
           id="123"
-          indexCard={props.indexCard}
+          indexCard={{
+            ...props.indexCard,
+            pinned: props.pinned,
+            playedDuringTurn: props.playedDuringTurn,
+          }}
           indexCardHiddenRecord={{
             "123": collapse ? true : false,
           }}
@@ -95,20 +95,7 @@ export default {
     playedDuringTurn: false,
     width: "350px",
   },
-  argTypes: {
-    type: {
-      control: {
-        type: "select",
-        options: Enum.getKeys(AspectType),
-      },
-    },
-    color: {
-      control: {
-        type: "select",
-        options: Object.keys(IndexCardColorTypeEnum),
-      },
-    },
-  },
+  argTypes: {},
 } as Meta<IProps>;
 
 const Template: Story<IProps> = (args, context) => (
@@ -120,6 +107,7 @@ const Template: Story<IProps> = (args, context) => (
         showClickableSkills={args.showClickableSkills}
         pinned={args.pinned}
         width={args.width}
+        playedDuringTurn={args.playedDuringTurn}
       />
     </Box>
   </StoryProvider>

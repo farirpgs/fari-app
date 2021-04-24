@@ -315,6 +315,7 @@ export const IndexCard: React.FC<
       className={props.className}
     >
       <Box
+        pb={props.readonly ? "1rem" : "0"}
         bgcolor={paper.bgColor}
         color={paper.primary}
         onPointerEnter={() => {
