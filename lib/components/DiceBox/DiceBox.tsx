@@ -302,12 +302,14 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
     disableConfettis: true,
   });
   const shouldListResult =
-    diceRollsManager.state.finalResult?.options.listResults;
-  const separator = shouldListResult ? "•" : "+";
-  const isPool = shouldListResult ?? false;
-
+    diceRollsManager.state.finalResult?.options.listResults ?? false;
   const finalRolls = diceRollsManager.state.finalResultRolls;
-  const rolls = isPool
+  const separator = shouldListResult ? "•" : "+";
+  const finalResultIncludesAStringValue = finalRolls.some((c) => {
+    return c.type === RollType.DiceCommand && typeof c.value === "string";
+  });
+  const shouldSortRolls = shouldListResult && !finalResultIncludesAStringValue;
+  const rolls = shouldSortRolls
     ? arraySort(finalRolls, [
         (roll) => {
           if (roll.type === RollType.DiceCommand) {
@@ -405,7 +407,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                         verticalAlign: "sub",
                       })}
                     >
-                      {isPool && <IconForPool />}
+                      {shouldListResult && <IconForPool />}
                     </span>
                   )}
                 </span>

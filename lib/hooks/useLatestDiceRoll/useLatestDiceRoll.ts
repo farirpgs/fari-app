@@ -145,6 +145,7 @@ export function formatDiceNumber(result: IDiceRollResult | undefined): string {
   const containsFateDice = result?.commandResult.some(
     (r) => r.type === RollType.DiceCommand && r.commandGroupId === "1dF"
   );
+
   const total = result?.total ?? 0;
 
   if (containsFateDice && total > 0) {

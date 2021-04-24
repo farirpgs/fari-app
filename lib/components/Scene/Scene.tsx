@@ -894,21 +894,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 showClickableSkills={props.mode !== SceneMode.Manage}
                 indexCard={indexCard}
                 onRoll={handleSetMyRoll}
-                // TODO: fix this
-                // onRoll={(label, modifier) => {
-                //   const options: Array<IDiceCommandOption> = [
-                //     ...DefaultDiceCommandOptions,
-                //   ];
-                //   options.push({
-                //     type: RollType.Modifier,
-                //     label: label,
-                //     modifier: modifier,
-                //   });
-                //   const result = diceManager.actions.roll(options, {
-                //     listResults: false,
-                //   });
-                //   handleSetMyRoll(result);
-                // }}
                 onPoolClick={(element) => {
                   diceManager.actions.addOrRemovePoolElement(element);
                   diceManager.actions.setPlayerId(gm.id);

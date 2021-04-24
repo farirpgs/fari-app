@@ -1,7 +1,7 @@
 import Box from "@material-ui/core/Box";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import React, { useEffect, useState } from "react";
-import { DiceMenu } from "../../../../../components/DiceFab/DiceFab";
+import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
 import {
   AllDiceCommandGroups,
   IDiceCommandGroup,

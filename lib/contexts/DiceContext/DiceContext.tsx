@@ -21,19 +21,7 @@ export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 export const DefaultDiceCommandOptions: Array<IDiceCommandOption> = [
   {
     type: RollType.DiceCommand,
-    commandGroupId: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    commandGroupId: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    commandGroupId: "1dF",
-  },
-  {
-    type: RollType.DiceCommand,
-    commandGroupId: "1dF",
+    commandGroupId: "4dF",
   },
 ];
 

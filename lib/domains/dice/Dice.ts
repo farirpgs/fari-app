@@ -1,4 +1,5 @@
 import isEqual from "lodash/isEqual";
+import startCase from "lodash/startCase";
 import { Icons } from "../Icons/Icons";
 
 export type IDiceCommandGroup = {
@@ -21,7 +22,8 @@ export type IDiceCommandNames =
   | "1d12"
   | "1d20"
   | "1d100"
-  | "coin";
+  | "coin"
+  | "card";
 
 export type IDiceCommandGroupId = IDiceCommandNames | "4dF" | "2d6";
 
@@ -97,6 +99,12 @@ export const AllDiceCommandGroups: Record<
     icon: Icons.Coin,
     value: ["coin"],
   },
+  "card": {
+    id: "card",
+    label: "Card",
+    icon: Icons.Card,
+    value: ["card"],
+  },
   "2d6": {
     id: "2d6",
     label: "2d6",
@@ -118,6 +126,7 @@ const TenSidedDie = makeNormalDie(10);
 const TwelveSidedDie = makeNormalDie(12);
 const TwentySidedDie = makeNormalDie(20);
 const HundredSidedDie = makeNormalDie(100);
+const DeckOfCards = makeCards();
 
 type IDiceCommandOptions = {
   sides: Array<number | string>;
@@ -158,6 +167,10 @@ export const DiceCommandOptions: Record<
   },
   "1d100": {
     sides: HundredSidedDie,
+    formatDetailedResult: formatNormalDie,
+  },
+  "card": {
+    sides: DeckOfCards,
     formatDetailedResult: formatNormalDie,
   },
   "coin": {
@@ -333,13 +346,14 @@ export const Dice = {
       const result = commandResultsWithCounts[command].result;
       const count = commandResultsWithCounts[command].count;
 
-      const isCountableDiceCommand = command.includes("d");
+      const isCountableDiceCommand =
+        command.startsWith("1d") || command.startsWith("4d");
       if (isCountableDiceCommand) {
         const [, /* 1d */ dice] = command.split("d");
         const typeLabel = `${count}d${dice}`;
         return { label: typeLabel, value: result };
       }
-      return { label: command, value: result };
+      return { label: startCase(command), value: result };
     });
 
     for (const roll of rolls) {
@@ -360,6 +374,32 @@ function makeNormalDie(sides: number) {
   return new Array(sides).fill(0).map((el, i) => {
     return i + 1;
   });
+}
+
+function makeCards() {
+  const cards = [];
+  const suits = ["♣", "♦", "♥", "♠"];
+
+  for (const suit of suits) {
+    cards.push(`Ace ${suit}`);
+    cards.push(`2 ${suit}`);
+    cards.push(`3 ${suit}`);
+    cards.push(`4 ${suit}`);
+    cards.push(`5 ${suit}`);
+    cards.push(`6 ${suit}`);
+    cards.push(`7 ${suit}`);
+    cards.push(`8 ${suit}`);
+    cards.push(`9 ${suit}`);
+    cards.push(`10 ${suit}`);
+    cards.push(`Jack ${suit}`);
+    cards.push(`Queen ${suit}`);
+    cards.push(`King ${suit}`);
+  }
+
+  cards.push("Joker");
+  cards.push("Joker");
+
+  return cards;
 }
 
 function formatFateDie(value: number | string) {
