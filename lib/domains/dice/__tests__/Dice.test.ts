@@ -123,7 +123,7 @@ describe("simplifyResults", () => {
         },
       ]);
 
-      expect(result).toEqual([{ label: "coin", value: 0 }]);
+      expect(result).toEqual([{ label: "Coin", value: 0 }]);
     });
   });
 });
