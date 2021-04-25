@@ -271,6 +271,13 @@ export const CharacterFactory = {
         meta: {},
         value: "",
       } as IBlock & IImageBlock,
+      [BlockType.Link]: {
+        id: Id.generate(),
+        label: "Link",
+        type: type,
+        meta: {},
+        value: "",
+      } as IBlock & IImageBlock,
     };
 
     return blockDefault[type];

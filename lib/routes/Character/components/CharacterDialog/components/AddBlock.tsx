@@ -11,6 +11,7 @@ import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
 import ImageIcon from "@material-ui/icons/Image";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
+import LinkIcon from "@material-ui/icons/Link";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
@@ -154,6 +155,18 @@ export const AddBlock: React.FC<
           <ListItemText
             primary={t("character-dialog.block-type.slot-tracker")}
           />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Link);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <LinkIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.link")} />
         </MenuItem>
       </Menu>
     </Box>

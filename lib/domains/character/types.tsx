@@ -9,6 +9,7 @@ export enum BlockType {
   PointCounter = "PointCounter",
   SlotTracker = "SlotTracker",
   Image = "Image",
+  Link = "Link",
 }
 
 export enum Position {
@@ -146,6 +147,12 @@ export type IImageBlock = {
   value: string;
 };
 
+export type ILinkBlock = {
+  type: BlockType.Link;
+  meta: { helperText?: string };
+  value: string;
+};
+
 export type IBlockTypes =
   | ITextBlock
   | INumericBlock
@@ -153,7 +160,8 @@ export type IBlockTypes =
   | IDicePoolBlock
   | ISlotTrackerBlock
   | IPointCounterBlock
-  | IImageBlock;
+  | IImageBlock
+  | ILinkBlock;
 
 export type IBlock = {
   type: BlockType;

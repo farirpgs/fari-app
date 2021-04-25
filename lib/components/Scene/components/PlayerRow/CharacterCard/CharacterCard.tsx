@@ -17,6 +17,7 @@ import {
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
+  ILinkBlock,
   INumericBlock,
   IPointCounterBlock,
   ISection,
@@ -29,6 +30,7 @@ import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors"
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { BlockDicePool } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { BlockImage } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockImage";
+import { BlockLink } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockLink";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
@@ -84,6 +86,7 @@ export const CharacterCard: React.FC<{
     DicePool: renderDicePool,
     PointCounter: renderBlockPointCounter,
     SlotTracker: renderBlockSlotTracker,
+    Link: renderBlockLink,
   };
 
   return (
@@ -342,6 +345,22 @@ export const CharacterCard: React.FC<{
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockSlotTracker
+          advanced={false}
+          readonly={true}
+          dataCy={`character-card.${section.label}.${block.label}`}
+          block={block}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
+          onRoll={() => {}}
+        />
+      </Grid>
+    );
+  }
+  function renderBlockLink(section: ISection, block: IBlock & ILinkBlock) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockLink
           advanced={false}
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}

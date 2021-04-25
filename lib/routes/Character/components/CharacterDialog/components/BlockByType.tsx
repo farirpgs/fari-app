@@ -14,6 +14,7 @@ import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
+import { BlockLink } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
@@ -168,6 +169,19 @@ export function BlockByType(
 
       {props.block.type === BlockType.SlotTracker && (
         <BlockSlotTracker
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+
+      {props.block.type === BlockType.Link && (
+        <BlockLink
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}

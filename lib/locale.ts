@@ -8,6 +8,7 @@ export type ITranslationKeys =
   | "character-dialog.block-type.skill"
   | "character-dialog.block-type.slot-tracker"
   | "character-dialog.block-type.text"
+  | "character-dialog.block-type.link"
   | "character-dialog.close-confirmation"
   | "character-dialog.control.add-block"
   | "character-dialog.control.add-box"
