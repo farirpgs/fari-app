@@ -10,6 +10,7 @@
 - feat: new block Link block type
 - feat: new block Separator block type
 - feat: display size of each character or scenes in the data manager
+- fix: disable image in content editable components
 
 # v4.0 New Character Sheet Framework, Data Mangagement
 
