@@ -1196,7 +1196,12 @@ export const Scene: React.FC<IProps> = (props) => {
                       BlockType.SlotTracker
                     );
                     stress.label = "Stress";
+                    const consequences = CharacterFactory.makeBlock(
+                      BlockType.Text
+                    );
+                    consequences.label = "Consequences";
                     card.blocks.push(stress);
+                    card.blocks.push(consequences);
                     card.color = IndexCardColor.green;
                   });
                   logger.info("Scene:onAddCard:NPC");
@@ -1215,7 +1220,12 @@ export const Scene: React.FC<IProps> = (props) => {
                       BlockType.SlotTracker
                     );
                     stress.label = "Stress";
+                    const consequences = CharacterFactory.makeBlock(
+                      BlockType.Text
+                    );
+                    consequences.label = "Consequences";
                     card.blocks.push(stress);
+                    card.blocks.push(consequences);
                     card.color = IndexCardColor.red;
                   });
                   logger.info("Scene:onAddCard:BadGuy");
