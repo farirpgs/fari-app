@@ -2,6 +2,15 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v5.0 WIP
+
+- feat: pick any color for index cards
+- feat: give ability to add sub cards to index cards
+- fix: sort private index cards
+- feat: new block Link block type
+- feat: new block Separator block type
+- feat: display size of each character or scenes in the data manager
+
 # v4.0 New Character Sheet Framework, Data Mangagement
 
 - feat: new character sheet
