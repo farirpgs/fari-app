@@ -579,7 +579,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onDiceRoll={() => {
                     handleSetPlayerRoll(
                       player.id,
-                      diceManager.actions.reroll()
+                      diceManager.actions.rollCommandGroups()
                     );
                   }}
                   onPlayedInTurnOrderChange={(playedInTurnOrder) => {

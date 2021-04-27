@@ -59,6 +59,7 @@
 - feat: enable customizing dice pools without toggling the advanced mode using Right Clicks!
 - feat: give the ability to use Skills/Pools dice commands and add other dice commands using the dice menu.
 - feat: new Player component UI
+- fix: clicking on the roll button when the dice menu is closed rolls the latest rolled commands instead of the selected ones
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 

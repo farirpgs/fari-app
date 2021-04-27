@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   AllDiceCommandGroups,
   Dice,
   IDiceCommandGroup,
-  IDiceCommandGroupId,
   IDiceCommandOption,
   IRollDiceOptions,
   RollType,
@@ -12,7 +11,6 @@ import {
   IDicePool,
   IDicePoolElement,
 } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
 
 export type IDiceManager = ReturnType<typeof useDice>;
 
@@ -26,18 +24,18 @@ export const DefaultDiceCommandOptions: Array<IDiceCommandOption> = [
 ];
 
 export function useDice() {
-  const [latestCommandOptions, setLatestCommandOptions] = useState<
-    Array<IDiceCommandOption>
-  >(DefaultDiceCommandOptions);
   const [options, setOptions] = useState<IRollDiceOptions>({
     listResults: false,
   });
 
   const [pool, setPool] = useState<IDicePool>([]);
   const [playerId, setPlayerId] = useState<string>();
-  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>(
-    []
-  );
+  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>([
+    AllDiceCommandGroups["4dF"],
+  ]);
+  const [commandGroupsBeforePool, setCommandGroupsBeforePool] = useState<
+    Array<IDiceCommandGroup>
+  >([]);
   const poolCommandGroups = useMemo(() => {
     const poolCommandOptionList = pool.flatMap((dicePoolElement) => {
       return dicePoolElement.commandOptionList;
@@ -57,27 +55,10 @@ export function useDice() {
   }, [pool]);
   const allCommandGroups = [...commandGroups, ...poolCommandGroups];
 
-  const latestCommandGroupIds: Array<IDiceCommandGroupId> = useMemo(() => {
-    const result = latestCommandOptions
-      .map((c) =>
-        c.type === RollType.DiceCommand ? c.commandGroupId : undefined
-      )
-      .filter((c) => !!c) as Array<IDiceCommandGroupId>;
-    return result;
-  }, [latestCommandOptions]);
-
-  useEffect(() => {
-    const newCommandGroups = latestCommandGroupIds.map((commandGroupId) =>
-      DiceCommandGroup.getCommandGroupById(commandGroupId)
-    );
-    setCommandGroups(newCommandGroups);
-  }, [latestCommandGroupIds]);
-
   function reset() {
-    setLatestCommandOptions(DefaultDiceCommandOptions);
+    setCommandGroups([]);
   }
   function clear() {
-    setLatestCommandOptions([]);
     clearPool();
   }
 
@@ -85,7 +66,6 @@ export function useDice() {
     newCommands: Array<IDiceCommandOption>,
     optionsForRoll: IRollDiceOptions = options
   ) {
-    setLatestCommandOptions(newCommands);
     setOptions(optionsForRoll);
     const result = Dice.rollCommandOptionList(newCommands, optionsForRoll);
     return result;
@@ -104,22 +84,10 @@ export function useDice() {
     return roll(commandOptions, optionsForRoll);
   }
 
-  /**
-   * Reroll the latest commands
-   * @param options if empty, uses the latest options
-   */
-  function reroll(optionsForRoll: IRollDiceOptions = options) {
-    const result = Dice.rollCommandOptionList(
-      latestCommandOptions,
-      optionsForRoll
-    );
-    return result;
-  }
-
   function addOrRemovePoolElement(element: IDicePoolElement) {
     const isFirstPoolElement = pool.length === 0;
     if (isFirstPoolElement) {
-      setCommandGroups([]);
+      preparePool();
     }
     setPool((draft) => {
       const ids = draft.map((element) => element.blockId);
@@ -132,9 +100,9 @@ export function useDice() {
     });
   }
 
-  function clearPool() {
-    setPool([]);
-    setPlayerId(undefined);
+  function preparePool() {
+    setCommandGroupsBeforePool(commandGroups);
+    setCommandGroups([]);
   }
 
   function getPoolResult() {
@@ -158,9 +126,15 @@ export function useDice() {
     return { result, playerId: latestPlayerId };
   }
 
+  function clearPool() {
+    setPool([]);
+    setCommandGroups(commandGroupsBeforePool);
+    setCommandGroupsBeforePool([]);
+    setPlayerId(undefined);
+  }
+
   return {
     state: {
-      commandNames: latestCommandGroupIds,
       options: options,
       commandGroups: allCommandGroups,
       pool,
@@ -168,7 +142,6 @@ export function useDice() {
     actions: {
       roll,
       rollCommandGroups,
-      reroll,
       reset,
       setOptions: setOptions,
       setCommandGroups,
