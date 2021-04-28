@@ -178,6 +178,15 @@ export const TheWitchIsDead = Template.bind({});
     return { character };
   },
 ];
+export const EdgeOfTheEmpire = Template.bind({});
+(EdgeOfTheEmpire as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EdgeOfTheEmpire
+    );
+    return { character };
+  },
+];
 export const EvolutionPulseHydrah = Template.bind({});
 (EvolutionPulseHydrah as any).loaders = [
   async () => {

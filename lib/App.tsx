@@ -112,6 +112,7 @@ function useMark() {
   t("character-dialog.template.FateCore");
   t("character-dialog.template.Dnd5e");
   t("character-dialog.template.TheWitchIsDead");
+  t("character-dialog.template.EdgeOfTheEmpire");
   t("character-dialog.template.Maze");
   t("character-dialog.template.Blank");
 }
