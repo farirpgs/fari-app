@@ -27,7 +27,7 @@
     "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod",
     "storybook": "start-storybook -p 6006 -s ./fonts",
     "build-storybook": "build-storybook -s ./fonts",
-    "chromatic": "npx chromatic --project-token 45d2fc40e469"
+    "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes"
   },
   "dependencies": {
     "@emotion/css": "^11.0.0",
