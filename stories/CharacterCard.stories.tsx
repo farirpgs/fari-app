@@ -192,6 +192,16 @@ export const TheWitchIsDead = Template.bind({});
   },
 ];
 
+export const EdgeOfTheEmpire = Template.bind({});
+(EdgeOfTheEmpire as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EdgeOfTheEmpire
+    );
+    return { character };
+  },
+];
+
 export const Blank = Template.bind({});
 (Blank as any).loaders = [
   async () => {
