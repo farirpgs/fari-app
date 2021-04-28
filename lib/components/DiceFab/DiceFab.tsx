@@ -71,12 +71,6 @@ export const DiceFab: React.FC<IProps> = (props) => {
     }
   }
 
-  function handleReRoll() {
-    const result = diceManager.actions.reroll();
-    props.onRoll?.(result);
-    handleMenuClose();
-  }
-
   function handleRoll() {
     const result = diceManager.actions.rollCommandGroups();
 
@@ -109,11 +103,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
               if (hasPool) {
                 handleRollPool();
               } else {
-                if (open) {
-                  handleRoll();
-                } else {
-                  handleReRoll();
-                }
+                handleRoll();
               }
             }}
           />
