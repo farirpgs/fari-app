@@ -10,6 +10,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FlipToBackIcon from "@material-ui/icons/FlipToBack";
 import HelpIcon from "@material-ui/icons/Help";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
@@ -31,10 +33,11 @@ export const SheetHeader: React.FC<{
   pages: Array<IPage> | undefined;
   advanced: boolean;
   onLabelChange?: (newLabel: string) => void;
-  onRemove: () => void;
-  onMoveUp: () => void;
-  onMoveDown: () => void;
-  onReposition: (position: Position) => void;
+  onRemove(): void;
+  onMoveUp(): void;
+  onMoveDown(): void;
+  onReposition(position: Position): void;
+  onDuplicateSection(): void;
   onMoveToPage: (pageIndex: number) => void;
   visibleOnCard?: boolean;
   onToggleVisibleOnCard?: () => void;
@@ -56,7 +59,7 @@ export const SheetHeader: React.FC<{
     padding: ".5rem",
   });
 
-  const handleClick = (
+  const handleOpenMoveMenu = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     setAnchorEl(event.currentTarget);
@@ -134,9 +137,23 @@ export const SheetHeader: React.FC<{
                 data-cy={`character-dialog.${props.label}.move`}
                 size="small"
                 className={smallIconButtonStyle}
-                onClick={handleClick}
+                onClick={handleOpenMoveMenu}
               >
-                <FlipToBackIcon htmlColor={headerColor} />
+                <ControlCameraIcon htmlColor={headerColor} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
+        {props.advanced && (
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.duplicate")}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.duplicate`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={props.onDuplicateSection}
+              >
+                <FileCopyIcon htmlColor={headerColor} />
               </IconButton>
             </Tooltip>
           </Grid>

@@ -120,7 +120,7 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I update an undefined character
-        result.current.actions.updateIfExists(undefined as any);
+        result.current.actions.addOrUpdateIfMoreRecent(undefined as any);
       });
       // THEN nothing happens
       expect(result.current.state.characters[0]).toEqual(
@@ -132,13 +132,15 @@ describe("useCharacters", () => {
       );
 
       act(() => {
-        // WHEN I update a character that is not in the DB
-        result.current.actions.updateIfExists({
-          id: expect.anything(),
-          name: "A NEW NAME",
+        // WHEN I update a character with an old timestamp
+        result.current.actions.addOrUpdateIfMoreRecent({
+          ...newCharacter,
+          name: "old timestamp",
+          lastUpdated: newCharacter!.lastUpdated - 100,
         } as ICharacter);
       });
-      // THEN nothing happens
+
+      // THEN the character is NOT updated
       expect(result.current.state.characters.length).toEqual(1);
       expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
@@ -149,10 +151,11 @@ describe("useCharacters", () => {
       );
 
       act(() => {
-        // WHEN I update a character that is in the DB
-        result.current.actions.updateIfExists({
+        // WHEN I update a character with a new timestamp
+        result.current.actions.addOrUpdateIfMoreRecent({
           ...newCharacter,
-          name: "A NEW NAME",
+          name: "new timestamp",
+          lastUpdated: newCharacter!.lastUpdated + 100,
         } as ICharacter);
       });
       // THEN the character is updated
@@ -160,8 +163,35 @@ describe("useCharacters", () => {
       expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
-          lastUpdated: newCharacter!.lastUpdated,
-          name: "A NEW NAME",
+          lastUpdated: newCharacter!.lastUpdated + 100,
+          name: "new timestamp",
+        })
+      );
+
+      act(() => {
+        // WHEN I add a character with a new timestamp that doesnt exists
+        result.current.actions.addOrUpdateIfMoreRecent({
+          ...newCharacter,
+          id: "new-id",
+          name: "new character",
+          lastUpdated: newCharacter!.lastUpdated + 100,
+        } as ICharacter);
+      });
+
+      // THEN the character is updated
+      expect(result.current.state.characters.length).toEqual(2);
+      expect(result.current.state.characters[0]).toEqual(
+        expect.objectContaining({
+          id: "new-id",
+          name: "new character",
+          lastUpdated: newCharacter!.lastUpdated + 100,
+        })
+      );
+      expect(result.current.state.characters[1]).toEqual(
+        expect.objectContaining({
+          id: newCharacter!.id,
+          name: "new timestamp",
+          lastUpdated: newCharacter!.lastUpdated + 100,
         })
       );
 

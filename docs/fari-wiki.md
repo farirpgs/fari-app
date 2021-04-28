@@ -53,13 +53,13 @@ This mode is also useful if for some reasons, some of your players can't connect
 
 ## Player: Choose your Character
 
-When a player joins an Online game session, they don't have a character linked to them yet.
+When a player joins an Online game session, they don't have a character assigned to them yet.
 
 Kind of like in real life, the player needs to pull their character sheet out of their bag and put it on the table.
 
-To do that, a player simply has to click on the `+` button beside their name on the left of the screen.
+To do that, a player simply has to click on the `Assign Character Sheet` button beside the player's name on the left of the screen.
 
-![Add A Character Sheet](https://gyazo.com/34943288cf4b1245323ced6dc8902c56.png)
+![Assign A Character Sheet](https://gyazo.com/b749b79a1748e2f21526fac87784359c.gif)
 
 You then have the ability to do three things:
 
@@ -68,6 +68,16 @@ You then have the ability to do three things:
 - `Import` a character based off a template your GM might have given you.
 
 Once that is done, you are ready to play!
+
+## GM: Assign a Character to a player
+
+Sometimes, it's easier if the GM does the heavy lifting of preparing the game material.
+
+For that reason, when a GM clicks on the `Assign Character Sheet` button, they will be prompted to either assign an existing character sheet or assign a duplicate of a character sheet.
+
+This can be useful if the GM prepared character templates in advance for the players
+
+![Assign Original VS Assign Duplicate Character Sheets](https://gyazo.com/be49f9201d04386f9734c17f4c099a18.png)
 
 ## GM: Managing Game Scenes
 
@@ -145,9 +155,17 @@ You can also move your pages left or right by using the Move Page arrows.
 
 ![Moving a Page](https://gyazo.com/0438808d699788ce5c1173861828940e.gif)
 
+### Duplicating a Page
+
+If you are building a template that as a lot of sections that are the same from one page to another, you can use the Duplicate Page button to help you in the creation of your character sheet.
+
+![Duplicating a Page](https://gyazo.com/087bb807b9a537dd5f6e1c36f61ebe47.gif)
+
 ### Deleting a Page
 
 Finally, if you want to remove a page, you can do so by simply clicking on the Remove Page button which is located between the Move Page arrows
+
+![Deleting a Page](https://gyazo.com/04e055c9c1d943db85d65b63f1981b64.gif)
 
 ## Sections
 
@@ -177,7 +195,13 @@ You can use this functionality to make some sections of your characters sheets e
 
 Besides the Visible on Card button, there's the `Move Section` button. Clicking on this one will give you the ability to move your section up or down, on the other side of your sheet or on a completely different page.
 
-![Moving a Section](https://gyazo.com/45b9b219653989248991e1695ba2c44f.gif)
+![Moving a Section](https://gyazo.com/e07f911ede7dbfa3b7d20a52a3724d7e.gif)
+
+### Duplicating a Section
+
+Same as with pages, you can duplicate a section so that the creation of similar section is easier to do. Simple click on the `Duplicate Section` button when the advanced mode is enabled.
+
+![Duplicating a Section](https://gyazo.com/05f2035d7d1757f993915645e51f3f2e.gif)
 
 ## Blocks
 
@@ -282,15 +306,6 @@ Blocks are all based around the same idea, for that reason all types of blocks h
 ![Generic Block Controls](https://gyazo.com/45af086acdaf7542f343e361a1d078d0.png)
 
 # Tips and Tricks
-
-## Use Images
-
-Fari supports adding images to Character Sheet and Index Card fields very easily.
-
-Simply go on the internet, copy an image in your clipboard and paste it in a field inside the character sheet or an index card.
-
-![Copy an image](https://gyazo.com/db1eede383593cfa829359358ec58c4f.png)
-![Paste it in a field](https://gyazo.com/ce1a801bf9bf7362954d0a0a64571117.png)
 
 ## Index Card Roll Modifiers
 

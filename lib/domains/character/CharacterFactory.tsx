@@ -266,7 +266,7 @@ export const CharacterFactory = {
       } as IBlock & ISlotTrackerBlock,
       [BlockType.Image]: {
         id: Id.generate(),
-        label: "Image",
+        label: "",
         type: type,
         meta: {},
         value: "",
@@ -276,10 +276,30 @@ export const CharacterFactory = {
     return blockDefault[type];
   },
   duplicateBlock(block: IBlock): IBlock {
-    return {
-      ...block,
-      id: Id.generate(),
-    };
+    return produce(block, (draft) => {
+      draft.id = Id.generate();
+    });
+  },
+  duplicateSection(section: ISection): ISection {
+    return produce(section, (draft) => {
+      draft.id = Id.generate();
+      draft.label += " Copy";
+      draft.blocks.forEach((b) => {
+        b.id = Id.generate();
+      });
+    });
+  },
+  duplicatePage(page: IPage): IPage {
+    return produce(page, (draft) => {
+      draft.id = Id.generate();
+      draft.label += " Copy";
+      draft.sections.forEach((s) => {
+        s.id = Id.generate();
+        s.blocks.forEach((b) => {
+          b.id = Id.generate();
+        });
+      });
+    });
   },
 };
 

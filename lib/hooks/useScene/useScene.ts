@@ -117,11 +117,16 @@ export function useScene(props: IProps) {
     return p.id === userId;
   });
 
-  useEffect(() => {
-    scene.players.forEach((p) => {
-      charactersManager.actions.updateIfExists(p.character);
-    });
-  }, [scene]);
+  useEffect(
+    function syncCharacterSheetForMe() {
+      scene.players.forEach((player) => {
+        const isMe = props.userId === player.id;
+        if (isMe)
+          charactersManager.actions.addOrUpdateIfMoreRecent(player.character);
+      });
+    },
+    [props.userId, scene]
+  );
 
   function safeSetScene(newScene: IScene) {
     if (newScene) {

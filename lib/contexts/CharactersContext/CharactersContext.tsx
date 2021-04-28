@@ -82,37 +82,41 @@ export function useCharacters(props?: { localStorage: Storage }) {
       return;
     }
 
-    const exists = characters.find((s) => s.id === character.id);
+    setCharacters((prev: Array<ICharacter>) => {
+      const exists = prev.some((c) => c.id === character.id);
 
-    if (!exists) {
-      setCharacters((draft: Array<ICharacter>) => {
-        return [character, ...draft];
-      });
-    } else {
-      setCharacters((draft: Array<ICharacter>) => {
-        return draft.map((c) => {
+      if (!exists) {
+        return [character, ...prev];
+      } else {
+        return prev.map((c) => {
           if (c.id === character.id) {
             return character;
           }
           return c;
         });
-      });
-    }
+      }
+    });
+
     return character;
   }
 
-  function updateIfExists(character: ICharacter | undefined) {
+  function addOrUpdateIfMoreRecent(character: ICharacter | undefined) {
     if (!character) {
       return;
     }
 
-    setCharacters((draft: Array<ICharacter>) => {
-      return draft.map((c) => {
+    setCharacters((prev: Array<ICharacter>) => {
+      const exists = prev.some((c) => c.id === character.id);
+
+      if (!exists) {
+        return [character, ...prev];
+      }
+
+      return prev.map((c) => {
         const currentCharacterLastUpdated = getUnixFrom(c.lastUpdated);
         const characterLastUpdate = getUnixFrom(character?.lastUpdated ?? 0);
 
         const shouldUpdate = characterLastUpdate >= currentCharacterLastUpdated;
-
         if (c.id === character.id && shouldUpdate) {
           return character;
         }
@@ -154,7 +158,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       closeManager,
       add,
       upsert,
-      updateIfExists,
+      addOrUpdateIfMoreRecent,
       remove,
       duplicate,
     },

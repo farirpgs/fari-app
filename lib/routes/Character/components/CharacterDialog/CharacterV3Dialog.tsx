@@ -22,6 +22,7 @@ import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PrintIcon from "@material-ui/icons/Print";
 import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
@@ -467,6 +468,16 @@ export const CharacterV3Dialog: React.FC<{
               </Grid>
               <Grid item>
                 <IconButton
+                  onClick={() => {
+                    characterManager.actions.duplicatePage(currentPageIndex);
+                    setTab((currentPageIndex + 1).toString());
+                  }}
+                >
+                  <FileCopyIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
                   disabled={
                     characterManager.state.character?.pages.length === 1
                   }
@@ -633,6 +644,12 @@ export const CharacterV3Dialog: React.FC<{
                   }}
                   onToggleVisibleOnCard={() => {
                     characterManager.actions.toggleSectionVisibleOnCard(
+                      pageIndex,
+                      sectionIndex
+                    );
+                  }}
+                  onDuplicateSection={() => {
+                    characterManager.actions.duplicateSection(
                       pageIndex,
                       sectionIndex
                     );
@@ -1002,7 +1019,6 @@ export const CharacterV3Dialog: React.FC<{
                         characterManager.actions.duplicateBlock(
                           pageIndex,
                           sectionIndex,
-                          block,
                           blockIndex
                         );
                       }}

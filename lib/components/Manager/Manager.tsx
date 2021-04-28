@@ -108,6 +108,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       classes={{
         paper: css({
           width: "85%",
+          paddingBottom: "6rem",
           maxWidth: isSmall ? undefined : "30rem",
         }),
       }}

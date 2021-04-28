@@ -261,10 +261,43 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function duplicatePage(pageIndex: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const pageToDuplicate = draft.pages[pageIndex];
+        draft.pages.splice(
+          pageIndex + 1,
+          0,
+          CharacterFactory.duplicatePage(pageToDuplicate)
+        );
+      })
+    );
+  }
+
+  function duplicateSection(pageIndex: number, sectionIndex: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const sectionToDuplicate =
+          draft.pages[pageIndex].sections[sectionIndex];
+
+        draft.pages[pageIndex].sections.splice(
+          sectionIndex + 1,
+          0,
+          CharacterFactory.duplicateSection(sectionToDuplicate)
+        );
+      })
+    );
+  }
+
   function duplicateBlock(
     pageIndex: number,
     sectionIndex: number,
-    block: IBlock,
     blockIndex: number
   ) {
     setCharacter(
@@ -272,10 +305,13 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
+        const blockToDuplicate =
+          draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex];
+
         draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
           blockIndex + 1,
           0,
-          CharacterFactory.duplicateBlock(block)
+          CharacterFactory.duplicateBlock(blockToDuplicate)
         );
       })
     );
@@ -443,18 +479,20 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       toggleSectionVisibleOnCard,
       moveSection,
       repositionSection,
-      movePage: movePage,
-      moveSectionInPage: moveSectionInPage,
+      movePage,
+      moveSectionInPage,
       removeSection,
-      addBlock: addBlock,
-      duplicateBlock: duplicateBlock,
+      addBlock,
+      duplicateBlock,
+      duplicatePage,
+      duplicateSection,
       moveDnDSection,
-      moveDnDBlock: moveDnDBlock,
-      setBlock: setBlock,
-      setBlockMeta: setBlockMeta,
-      toggleBlockMainPointCounter: toggleBlockMainPointCounter,
-      removeBlock: removeBlock,
-      getCharacterWithNewTimestamp: getCharacterWithNewTimestamp,
+      moveDnDBlock,
+      setBlock,
+      setBlockMeta,
+      toggleBlockMainPointCounter,
+      removeBlock,
+      getCharacterWithNewTimestamp,
     },
   };
 }

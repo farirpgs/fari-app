@@ -6,11 +6,26 @@
 
 - feat: pick any color for index cards
 - feat: give ability to add sub cards to index cards
+- feat: use building blocks inside index cards
 - fix: sort private index cards
-- feat: new block Link block type
-- feat: new block Separator block type
-- feat: display size of each character or scenes in the data manager
+- feat: collapse index cards
+- feat: display character cards from left to right
+- feat: display size (in KB or MB) of each character or scenes in the data manager
 - fix: disable image in content editable components
+- feat: display player id in player component
+- feat: automatically save a character sheet when assigned by the GM
+- feat: new Image building block
+- feat: duplicate character sheet page
+- feat: duplicate character sheet section
+- feat: better print mode
+- fix: print mode temporarly disables dark mode
+- feat: collapsable index cards
+- feat: index cards sort options
+
+WIP
+
+- feat: new Link building block
+- feat: new Separator building block
 
 # v4.0 New Character Sheet Framework, Data Mangagement
 

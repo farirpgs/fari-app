@@ -3,7 +3,6 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -11,6 +10,7 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter, ISection, Position } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
@@ -25,6 +25,7 @@ export const CharacterPrintRoute: React.FC<{
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
+  const darkModeManager = useContext(DarkModeContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
   const logger = useLogger();
 
@@ -35,6 +36,10 @@ export const CharacterPrintRoute: React.FC<{
     logger.info("Route:CharacterPrint");
     if (!devMode) {
       window.print();
+    }
+    const isDark = darkModeManager.state.darkMode;
+    if (isDark) {
+      darkModeManager.actions.setDarkModeTemporarily(false);
     }
   }, []);
 
@@ -75,9 +80,12 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
   return (
     <>
       <Box mb="1rem">
-        <Grid container>
+        <Grid container justify="center">
           <Grid item>
-            <Typography variant="h4"> {props.character?.name}</Typography>
+            <FateLabel uppercase={false} variant="h4">
+              {" "}
+              {props.character?.name}
+            </FateLabel>
           </Grid>
         </Grid>
       </Box>
@@ -122,6 +130,27 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                   </FateLabel>
                 </Box>
               </Box>
+              {/* <Box
+                className={css({
+                  columns: "2",
+                  columnGap: "1rem",
+                })}
+              >
+                <Box
+                  className={css({
+                    // pageBreakInside: "avoid",
+                  })}
+                >
+                  <PrintSections sections={leftSections} />
+                </Box>
+                <Box
+                  className={css({
+                    // pageBreakInside: "avoid",
+                  })}
+                >
+                  <PrintSections sections={rightSections} />
+                </Box>
+              </Box> */}
               <Grid container spacing={1}>
                 <Grid item xs={6}>
                   <PrintSections sections={leftSections} />
@@ -148,7 +177,12 @@ function PrintSections(props: { sections: Array<ISection> }) {
     <>
       {props.sections.map((section, sectionIndex) => {
         return (
-          <Box key={sectionIndex}>
+          <Box
+            key={sectionIndex}
+            className={css({
+              pageBreakInside: "avoid",
+            })}
+          >
             <Grid container>
               <Grid item xs>
                 <Box
@@ -176,7 +210,14 @@ function PrintSections(props: { sections: Array<ISection> }) {
             </Grid>
             {section.blocks.map((block, blockIndex) => {
               return (
-                <Box key={blockIndex} my=".5rem" px=".5rem">
+                <Box
+                  key={blockIndex}
+                  my=".5rem"
+                  px=".5rem"
+                  className={css({
+                    pageBreakInside: "avoid",
+                  })}
+                >
                   <BlockByType
                     advanced={false}
                     readonly={true}

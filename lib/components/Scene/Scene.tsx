@@ -145,10 +145,8 @@ export const Scene: React.FC<IProps> = (props) => {
   const isGMEditingDirtyScene =
     props.mode === SceneMode.Manage && sceneManager.state.dirty;
 
-  const shouldBlockLeaving =
-    isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
+  useBlockReload(isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene);
 
-  useBlockReload(shouldBlockLeaving);
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
@@ -323,8 +321,12 @@ export const Scene: React.FC<IProps> = (props) => {
     >
       <Box px="1rem">
         <Prompt
-          when={shouldBlockLeaving}
+          when={isGMEditingDirtyScene}
           message={t("manager.leave-without-saving")}
+        />
+        <Prompt
+          when={isGMHostingOnlineOrOfflineGame}
+          message={t("play-route.host-leaving-warning")}
         />
         <Snackbar
           open={savedSnack}

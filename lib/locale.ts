@@ -202,6 +202,7 @@ export type ITranslationKeys =
   | "play-route.expand-all"
   | "play-route.gm-notes"
   | "play-route.group"
+  | "play-route.host-leaving-warning"
   | "play-route.join"
   | "play-route.join-error"
   | "play-route.join-error.connection-issues"
