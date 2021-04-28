@@ -61,6 +61,11 @@
 - feat: new Player component UI
 - fix: clicking on the roll button when the dice menu is closed rolls the latest rolled commands instead of the selected ones
 
+**4.0.8**
+
+fix: remove image tip from wiki
+feat: new Star Wars Edge of The Empire template from @Gpoitras
+
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
 - feat: new Fari Wiki

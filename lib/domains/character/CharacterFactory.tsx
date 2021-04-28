@@ -103,6 +103,15 @@ export const CharacterFactory = {
         return this.makeFromJson(jsonData);
       },
       /**
+       * @author @Gpoitras
+       */
+      [CharacterTemplates.EdgeOfTheEmpire]: async () => {
+        const jsonData = await import(
+          "./character-templates/EdgeOfTheEmpire.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      /**
        * @author sorcho
        */
       [CharacterTemplates.ThePool]: async () => {
