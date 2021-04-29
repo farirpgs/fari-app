@@ -1,9 +1,9 @@
 {
-  "id": "d93120f0-2605-4259-a7dc-e861a6ab2eee",
+  "id": "0869053a-2e35-4bd5-bef7-20f09011746e",
   "version": 3,
   "name": "EdgeOfTheEmpire",
   "template": "EdgeOfTheEmpire",
-  "lastUpdated": 1619291184,
+  "lastUpdated": 1619722408,
   "pages": [
     {
       "id": "5e476072-ee39-4290-b3e1-505c3cbf142b",
@@ -208,7 +208,8 @@
               "meta": { "isMainPointCounter": false },
               "value": "0"
             }
-          ]
+          ],
+          "visibleOnCard": true
         },
         {
           "id": "457de1fb-64e8-4e0c-921c-88b6cacfaa8d",
@@ -280,7 +281,8 @@
                 { "label": "0", "checked": false }
               ]
             }
-          ]
+          ],
+          "visibleOnCard": true
         },
         {
           "id": "774689f0-a7f1-4233-9b44-ab408b15c8fc",
@@ -378,7 +380,8 @@
                 { "label": "0", "checked": false }
               ]
             }
-          ]
+          ],
+          "visibleOnCard": false
         },
         {
           "id": "9e4e0bf7-821d-4911-b9b7-e5b6825db4a9",
@@ -427,7 +430,8 @@
               "value": "",
               "meta": {}
             }
-          ]
+          ],
+          "visibleOnCard": true
         },
         {
           "id": "43e04256-8961-4f00-8e52-3da753319053",
@@ -525,7 +529,8 @@
                 { "label": "0", "checked": false }
               ]
             }
-          ]
+          ],
+          "visibleOnCard": false
         },
         {
           "id": "90cf9d98-6923-4b6a-a8ed-542957e0db39",
@@ -839,7 +844,8 @@
                 { "label": "0", "checked": false }
               ]
             }
-          ]
+          ],
+          "visibleOnCard": false
         }
       ],
       "label": "STATS"
@@ -1082,7 +1088,8 @@
               "value": "",
               "meta": {}
             }
-          ]
+          ],
+          "visibleOnCard": false
         },
         {
           "id": "cf977c98-7dd0-42d2-b5bc-0ab2bfc3f854",
@@ -1159,7 +1166,8 @@
               "value": "",
               "meta": {}
             }
-          ]
+          ],
+          "visibleOnCard": false
         }
       ],
       "label": "talents"
