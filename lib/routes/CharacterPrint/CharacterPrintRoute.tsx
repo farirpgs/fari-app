@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import Grid, { GridSize } from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
@@ -12,7 +12,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ICharacter, ISection, Position } from "../../domains/character/types";
+import { ICharacter, ISection } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
@@ -56,12 +56,14 @@ export const CharacterPrintRoute: React.FC<{
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
+  const maxWidth = character?.wide ? "lg" : "md";
+
   return (
     <>
       <PageMeta title={character?.name} />
 
       <Box bgcolor={theme.palette.background.paper} mt="1rem">
-        <Container>
+        <Container maxWidth={maxWidth}>
           <PrintCharacter character={character} />
         </Container>
       </Box>
@@ -91,12 +93,8 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
       </Box>
       <Box>
         {props.character?.pages.map((page, pageIndex) => {
-          const leftSections = page.sections.filter(
-            (s) => s.position === Position.Left
-          );
-          const rightSections = page.sections.filter(
-            (s) => s.position === Position.Right
-          );
+          const leftSections = page.sections.left;
+          const rightSections = page.sections.right;
           return (
             <Box key={pageIndex}>
               <Box
@@ -208,29 +206,34 @@ function PrintSections(props: { sections: Array<ISection> }) {
                 </Box>
               </Grid>
             </Grid>
-            {section.blocks.map((block, blockIndex) => {
-              return (
-                <Box
-                  key={blockIndex}
-                  my=".5rem"
-                  px=".5rem"
-                  className={css({
-                    pageBreakInside: "avoid",
-                  })}
-                >
-                  <BlockByType
-                    advanced={false}
-                    readonly={true}
-                    dataCy={`character-card.${section.label}.${block.label}`}
-                    block={block}
-                    onChange={() => undefined}
-                    onDuplicate={() => undefined}
-                    onRemove={() => undefined}
-                    onRoll={() => undefined}
-                  />
-                </Box>
-              );
-            })}
+            <Grid container>
+              {section.blocks.map((block, blockIndex) => {
+                const width: GridSize = !!block.meta.width
+                  ? ((block.meta.width * 12) as GridSize)
+                  : 12;
+                return (
+                  <Grid
+                    item
+                    xs={width}
+                    key={block.id}
+                    className={css({
+                      pageBreakInside: "avoid",
+                    })}
+                  >
+                    <Box my=".5rem" px=".5rem">
+                      <BlockByType
+                        advanced={false}
+                        readonly={true}
+                        dataCy={`character-card.${section.label}.${block.label}`}
+                        block={block}
+                        onChange={() => undefined}
+                        onRoll={() => undefined}
+                      />
+                    </Box>
+                  </Grid>
+                );
+              })}
+            </Grid>
           </Box>
         );
       })}

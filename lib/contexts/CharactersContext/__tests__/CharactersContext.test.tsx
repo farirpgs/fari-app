@@ -120,7 +120,7 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I update an undefined character
-        result.current.actions.addOrUpdateIfMoreRecent(undefined as any);
+        result.current.actions.updateIfMoreRecent(undefined as any);
       });
       // THEN nothing happens
       expect(result.current.state.characters[0]).toEqual(
@@ -133,7 +133,7 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I update a character with an old timestamp
-        result.current.actions.addOrUpdateIfMoreRecent({
+        result.current.actions.updateIfMoreRecent({
           ...newCharacter,
           name: "old timestamp",
           lastUpdated: newCharacter!.lastUpdated - 100,
@@ -152,7 +152,7 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I update a character with a new timestamp
-        result.current.actions.addOrUpdateIfMoreRecent({
+        result.current.actions.updateIfMoreRecent({
           ...newCharacter,
           name: "new timestamp",
           lastUpdated: newCharacter!.lastUpdated + 100,
@@ -170,7 +170,7 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I add a character with a new timestamp that doesnt exists
-        result.current.actions.addOrUpdateIfMoreRecent({
+        result.current.actions.addIfDoesntExist({
           ...newCharacter,
           id: "new-id",
           name: "new character",

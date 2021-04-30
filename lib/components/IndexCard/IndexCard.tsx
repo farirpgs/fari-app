@@ -126,19 +126,17 @@ export const IndexCard: React.FC<
                 key={indexCardManager.state.indexCard.id}
                 index={props.reactDndIndex}
                 type={props.reactDndType}
-                readonly={false}
-                dragIndicatorClassName={css({
-                  position: "absolute",
-                  marginTop: "1rem",
-                  marginLeft: ".5rem",
-                  display: props.readonly || !props.canMove ? "none" : "block",
-                })}
                 onMove={(dragIndex, hoverIndex) => {
                   props.onMove(dragIndex, hoverIndex);
                 }}
-              >
-                {children}
-              </BetterDnd>
+                render={(dndRenderProps) => {
+                  // position: "absolute",
+                  // marginTop: "1rem",
+                  // marginLeft: ".5rem",
+                  // display: props.readonly || !props.canMove ? "none" : "block",
+                  return <>{children}</>;
+                }}
+              />
             );
           }}
         >
@@ -431,12 +429,6 @@ export const IndexCard: React.FC<
                 readonly={props.readonly}
                 dataCy={`index-card.${block.label}`}
                 block={block}
-                onDuplicate={() => {
-                  indexCardManager.actions.duplicateBlock(block);
-                }}
-                onRemove={() => {
-                  indexCardManager.actions.removeBlock(block);
-                }}
                 onChange={(newBlock) => {
                   indexCardManager.actions.setBlock(newBlock);
                 }}

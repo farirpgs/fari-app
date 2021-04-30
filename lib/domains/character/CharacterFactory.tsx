@@ -1,12 +1,6 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
-import { makeBlankCharacter } from "./character-templates/makeBlankCharacter";
-import { makeDnD5eCharacter } from "./character-templates/makeDnD5eCharacter";
-import { makeFateAcceleratedCharacter } from "./character-templates/makeFateAcceleratedCharacter";
-import { makeFateCondensedCharacter } from "./character-templates/makeFateCondensedCharacter";
-import { makeFateCoreCharacter } from "./character-templates/makeFateCoreCharacter";
-import { makeFateOfCthulhuCharacter } from "./character-templates/makeFateOfCthulhuCharacter";
 import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
@@ -23,11 +17,13 @@ import {
   ITextBlock,
   IV1Character,
   IV2Character,
-  Position,
+  IV3Character,
+  IV3Section,
+  V3Position,
 } from "./types";
 
 export const CharacterFactory = {
-  latestVersion: 3,
+  latestVersion: 4,
   async make(type: CharacterTemplates): Promise<ICharacter> {
     const templateFunctions: Record<
       CharacterTemplates,
@@ -36,22 +32,37 @@ export const CharacterFactory = {
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateCondensed]: async () =>
-        makeFateCondensedCharacter(),
+      [CharacterTemplates.FateCondensed]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCondensed.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateCore]: async () => makeFateCoreCharacter(),
+      [CharacterTemplates.FateCore]: async () => {
+        const jsonData = await import("./character-templates/FateCore.json");
+        return this.makeFromJson(jsonData);
+      },
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateAccelerated]: async () =>
-        makeFateAcceleratedCharacter(),
+      [CharacterTemplates.FateAccelerated]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateAccelerated.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.FateOfCthulhu]: async () =>
-        makeFateOfCthulhuCharacter(),
+      [CharacterTemplates.FateOfCthulhu]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateOfCthulhu.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       /**
        * @author @LostInBrittany
        */
@@ -93,7 +104,10 @@ export const CharacterFactory = {
       /**
        * @author @RPDeshaies
        */
-      [CharacterTemplates.Dnd5e]: async () => makeDnD5eCharacter(),
+      [CharacterTemplates.Dnd5e]: async () => {
+        const jsonData = await import("./character-templates/DnD5e.json");
+        return this.makeFromJson(jsonData);
+      },
       /**
        * @author @RPDeshaies
        */
@@ -158,7 +172,10 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.Blank]: async () => makeBlankCharacter(),
+      [CharacterTemplates.Blank]: async () => {
+        const jsonData = await import("./character-templates/Blank.json");
+        return this.makeFromJson(jsonData);
+      },
     };
 
     const newCharacter = await templateFunctions[type]();
@@ -185,6 +202,7 @@ export const CharacterFactory = {
       id: Id.generate(),
       version: CharacterFactory.latestVersion,
       name: props.name,
+      wide: false,
       group: undefined,
       template: props.template,
       lastUpdated: getUnix(),
@@ -194,8 +212,9 @@ export const CharacterFactory = {
   migrate(c: any): ICharacter {
     try {
       const v2: IV2Character = migrateV1CharacterToV2(c);
-      const v3: ICharacter = migrateV2CharacterToV3(v2);
-      return v3;
+      const v3: IV3Character = migrateV2CharacterToV3(v2);
+      const v4: ICharacter = migrateV3CharacterToV4(v3);
+      return v4;
     } catch (error) {
       console.error(error);
       return c;
@@ -293,7 +312,14 @@ export const CharacterFactory = {
     return produce(page, (draft) => {
       draft.id = Id.generate();
       draft.label += " Copy";
-      draft.sections.forEach((s) => {
+
+      draft.sections.left.forEach((s) => {
+        s.id = Id.generate();
+        s.blocks.forEach((b) => {
+          b.id = Id.generate();
+        });
+      });
+      draft.sections.right.forEach((s) => {
         s.id = Id.generate();
         s.blocks.forEach((b) => {
           b.id = Id.generate();
@@ -322,19 +348,19 @@ export function migrateV1CharacterToV2(v1: IV1Character): IV2Character {
   }) as unknown) as IV2Character;
 }
 
-export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
+export function migrateV2CharacterToV3(v2: IV2Character): IV3Character {
   if (v2.version !== 2) {
-    return (v2 as unknown) as ICharacter;
+    return (v2 as unknown) as IV3Character;
   }
 
-  const sections: Array<ISection> = [];
+  const sections: Array<IV3Section> = [];
 
   // aspects
   sections.push({
     id: Id.generate(),
     label: v2.aspectsLabel ?? "Aspects",
     visibleOnCard: true,
-    position: Position.Left,
+    position: V3Position.Left,
     blocks: v2.aspects.map((a) => {
       return {
         id: Id.generate(),
@@ -350,7 +376,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.generate(),
     label: v2.stuntsLabel ?? "Stunts & Extras",
-    position: Position.Left,
+    position: V3Position.Left,
     blocks: v2.stunts.map((a) => {
       return {
         id: Id.generate(),
@@ -366,7 +392,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.generate(),
     label: "Fate Points",
-    position: Position.Left,
+    position: V3Position.Left,
     blocks: [
       {
         id: Id.generate(),
@@ -385,7 +411,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.generate(),
     label: v2.notesLabel ?? "Other",
-    position: Position.Left,
+    position: V3Position.Left,
     blocks: [
       {
         id: Id.generate(),
@@ -401,7 +427,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.generate(),
     label: v2.stressTracksLabel ?? "Stress",
-    position: Position.Right,
+    position: V3Position.Right,
     blocks: v2.stressTracks.map((st) => {
       return {
         id: Id.generate(),
@@ -417,7 +443,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
   sections.push({
     id: Id.generate(),
     label: v2.consequencesLabel ?? "Consequences",
-    position: Position.Right,
+    position: V3Position.Right,
     blocks: v2.consequences.map((a) => {
       return {
         id: Id.generate(),
@@ -434,7 +460,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     id: Id.generate(),
     label: v2.skillsLabel ?? "Skills",
     visibleOnCard: true,
-    position: Position.Right,
+    position: V3Position.Right,
     blocks: v2.skills.map((a) => {
       return {
         id: Id.generate(),
@@ -462,6 +488,52 @@ export function migrateV2CharacterToV3(v2: IV2Character): ICharacter {
     ],
     template: CharacterTemplates.FateCondensed,
     playedDuringTurn: v2.playedDuringTurn,
-    version: CharacterFactory.latestVersion,
+    version: 3,
   };
+}
+
+export function migrateV3CharacterToV4(v3: IV3Character): ICharacter {
+  if (v3.version !== 3) {
+    return (v3 as unknown) as ICharacter;
+  }
+
+  const v4: ICharacter = {
+    id: v3.id,
+    name: v3.name,
+    group: v3.group,
+    lastUpdated: v3.lastUpdated,
+    wide: false,
+    pages: v3.pages.map(
+      (page): IPage => {
+        const leftSections = page.sections.filter(
+          (s) => s.position === V3Position.Left
+        );
+        const rightSections = page.sections.filter(
+          (s) => s.position === V3Position.Right
+        );
+        return {
+          id: page.id,
+          label: page.label,
+          sections: {
+            left: leftSections.map((s) => ({
+              id: s.id,
+              blocks: s.blocks,
+              label: s.label,
+              visibleOnCard: s.visibleOnCard,
+            })),
+            right: rightSections.map((s) => ({
+              id: s.id,
+              blocks: s.blocks,
+              label: s.label,
+              visibleOnCard: s.visibleOnCard,
+            })),
+          },
+        };
+      }
+    ),
+    template: CharacterTemplates.FateCondensed,
+    playedDuringTurn: v3.playedDuringTurn,
+    version: 4,
+  };
+  return v4;
 }

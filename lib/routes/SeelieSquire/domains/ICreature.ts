@@ -1,4 +1,4 @@
-export type ICharacter = {
+export type ISeelieSquireCharacter = {
   name: string;
   aspects: Array<string>;
   tracks: Array<{
@@ -21,5 +21,5 @@ export type ICreature = {
   description: string;
   image?: string;
   notes?: string;
-  character: Array<ICharacter>;
+  character: Array<ISeelieSquireCharacter>;
 };

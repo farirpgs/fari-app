@@ -7,14 +7,14 @@ import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
   defaultSceneName,
-  ISavableScene
+  ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort } from "../../domains/array/arraySort";
 import {
   BlockType,
   IBlock,
   ICharacter,
-  IPointCounterBlock
+  IPointCounterBlock,
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
@@ -121,8 +121,11 @@ export function useScene(props: IProps) {
     function syncCharacterSheetForMe() {
       scene.players.forEach((player) => {
         const isMe = props.userId === player.id;
-        if (isMe)
-          charactersManager.actions.addOrUpdateIfMoreRecent(player.character);
+
+        if (isMe) {
+          charactersManager.actions.addIfDoesntExist(player.character);
+        }
+        charactersManager.actions.updateIfMoreRecent(player.character);
       });
     },
     [props.userId, scene]
@@ -454,13 +457,18 @@ export function useScene(props: IProps) {
             p.points = points;
             if (p.character) {
               for (const page of p.character.pages) {
-                for (const section of page.sections) {
+                const allSections = [
+                  ...page.sections.left,
+                  ...page.sections.right,
+                ];
+                for (const section of allSections) {
                   for (const block of section.blocks) {
                     const shouldUpdateBlock =
                       block.type === BlockType.PointCounter &&
                       block.meta.isMainPointCounter;
                     if (shouldUpdateBlock) {
                       const typedBlock = block as IPointCounterBlock & IBlock;
+                      console.debug("shouldUpdateBlock", shouldUpdateBlock);
 
                       typedBlock.value = points;
                       typedBlock.meta.max = maxPoints;

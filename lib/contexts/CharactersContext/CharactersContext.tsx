@@ -100,7 +100,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return character;
   }
 
-  function addOrUpdateIfMoreRecent(character: ICharacter | undefined) {
+  function addIfDoesntExist(character: ICharacter | undefined) {
     if (!character) {
       return;
     }
@@ -111,7 +111,16 @@ export function useCharacters(props?: { localStorage: Storage }) {
       if (!exists) {
         return [character, ...prev];
       }
+      return prev;
+    });
+  }
 
+  function updateIfMoreRecent(character: ICharacter | undefined) {
+    if (!character) {
+      return;
+    }
+
+    setCharacters((prev: Array<ICharacter>) => {
       return prev.map((c) => {
         const currentCharacterLastUpdated = getUnixFrom(c.lastUpdated);
         const characterLastUpdate = getUnixFrom(character?.lastUpdated ?? 0);
@@ -158,7 +167,8 @@ export function useCharacters(props?: { localStorage: Storage }) {
       closeManager,
       add,
       upsert,
-      addOrUpdateIfMoreRecent,
+      addIfDoesntExist,
+      updateIfMoreRecent,
       remove,
       duplicate,
     },

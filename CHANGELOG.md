@@ -18,9 +18,13 @@
 - feat: duplicate character sheet page
 - feat: duplicate character sheet section
 - feat: better print mode
-- fix: print mode temporarly disables dark mode
+- fix: print mode temporarily disables dark mode
 - feat: collapsable index cards
 - feat: index cards sort options
+- feat: pick a card
+- fix: move section weird behaviors
+- feat: character sheet wide mode
+- feat: character sheet block width
 
 WIP
 
