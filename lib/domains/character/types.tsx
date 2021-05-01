@@ -149,7 +149,11 @@ export type IImageBlock = {
 
 export type ILinkBlock = {
   type: BlockType.Link;
-  meta: { helperText?: string };
+  meta: {
+    helperText?: string;
+    displayName?: string;
+    editName?: boolean;
+  };
   value: string;
 };
 

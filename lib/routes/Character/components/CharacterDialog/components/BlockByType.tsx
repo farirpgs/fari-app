@@ -14,7 +14,7 @@ import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
-import { BlockLink } from "./blocks/BlockLink";
+import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
@@ -226,6 +226,9 @@ export function BlockByType(
             block={block}
             onMetaChange={handleOnMetaChange}
           />
+        )}
+        {block.type === BlockType.Link && (
+          <BlockLinkActions block={block} onMetaChange={handleOnMetaChange} />
         )}
 
         <Grid item>
