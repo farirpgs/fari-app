@@ -41,6 +41,7 @@ export type ITranslationKeys =
   | "character-dialog.group"
   | "character-dialog.helper-text.empty-dice-pool"
   | "character-dialog.helper-text.help"
+  | "character-dialog.helper-text.invalid-link"
   | "character-dialog.image-block.dialog.add-image"
   | "character-dialog.image-block.dialog.close"
   | "character-dialog.image-block.dialog.description"

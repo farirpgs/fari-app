@@ -14,6 +14,10 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 
+function isValidLink(link: string): boolean {
+  return /^http(s)?:\/\/.*/.test(link) || link === "";
+}
+
 export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
   const { advanced } = props;
   const { t } = useTranslate();
@@ -24,6 +28,10 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
   });
 
   const isEditNameVisible = Boolean(props.block.meta?.editName);
+  const linkText =
+    isEditNameVisible && props.block.meta?.displayName
+      ? props.block.meta?.displayName
+      : props.block.value.link;
 
   return (
     <Box>
@@ -36,16 +44,25 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                   readOnly: props.readonly,
                 }}
                 data-cy={`${props.dataCy}.value`}
-                value={linkState}
+                value={linkState.link}
+                label={t("character-dialog.label.link")}
+                fullWidth
                 onChange={(e) => {
                   let linkValue = "";
                   if (e.target.value) {
                     linkValue = e.target.value;
                   }
-                  setLinkState(linkValue);
+                  setLinkState({
+                    link: linkValue,
+                    isValid: isValidLink(linkValue),
+                  });
                 }}
-                label={t("character-dialog.label.link")}
-                fullWidth
+                error={!linkState.isValid}
+                helperText={
+                  linkState.isValid
+                    ? undefined
+                    : t("character-dialog.helper-text.invalid-link")
+                }
               />
               {isEditNameVisible && (
                 <TextField
@@ -53,6 +70,8 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                     readOnly: props.readonly,
                   }}
                   value={props.block.meta.displayName || ""}
+                  label={t("character-dialog.label.display-name")}
+                  fullWidth
                   onChange={(e) => {
                     let name = "";
                     if (e.target.value) {
@@ -63,17 +82,19 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                       displayName: name,
                     });
                   }}
-                  label={t("character-dialog.label.display-name")}
-                  fullWidth
                 />
               )}
             </Box>
           ) : (
-            <AppLink to={props.block.value} target="_blank">
-              {isEditNameVisible && props.block.meta?.displayName
-                ? props.block.meta?.displayName
-                : props.block.value}
-            </AppLink>
+            <>
+              {linkState.isValid && props.block.value.link !== "" ? (
+                <AppLink to={props.block.value.link} target="_blank">
+                  {linkText}
+                </AppLink>
+              ) : (
+                linkText
+              )}
+            </>
           )}
         </Grid>
       </Grid>

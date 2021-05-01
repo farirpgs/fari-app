@@ -154,7 +154,10 @@ export type ILinkBlock = {
     displayName?: string;
     editName?: boolean;
   };
-  value: string;
+  value: {
+    link: string;
+    isValid: boolean;
+  };
 };
 
 export type IBlockTypes =

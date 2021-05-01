@@ -14,6 +14,7 @@ import {
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
+  ILinkBlock,
   INumericBlock,
   IPage,
   IPointCounterBlock,
@@ -276,8 +277,8 @@ export const CharacterFactory = {
         label: "Link",
         type: type,
         meta: {},
-        value: "",
-      } as IBlock & IImageBlock,
+        value: { link: "", isValid: true },
+      } as IBlock & ILinkBlock,
     };
 
     return blockDefault[type];
