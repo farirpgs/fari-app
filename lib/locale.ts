@@ -48,6 +48,8 @@ export type ITranslationKeys =
   | "character-dialog.image-block.dialog.image-url-label"
   | "character-dialog.image-block.dialog.title"
   | "character-dialog.image-block.dialog.upload"
+  | "character-dialog.label.display-name"
+  | "character-dialog.label.link"
   | "character-dialog.load-template"
   | "character-dialog.load-template-confirmation"
   | "character-dialog.name"

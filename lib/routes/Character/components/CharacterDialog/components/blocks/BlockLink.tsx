@@ -3,10 +3,9 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import useTheme from "@material-ui/core/styles/useTheme";
-import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { AppLink } from "../../../../../../components/AppLink/AppLink";
-import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ILinkBlock } from "../../../../../../domains/character/types";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -17,6 +16,7 @@ import {
 
 export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
   const { advanced } = props;
+  const { t } = useTranslate();
   const [linkState, setLinkState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
@@ -31,31 +31,41 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
         <Grid item xs>
           {advanced ? (
             <Box>
-              <Typography>
-                <ContentEditable
-                  border={!props.readonly}
-                  data-cy={`${props.dataCy}.value`}
-                  readonly={props.readonly}
-                  value={linkState}
-                  onChange={(newLink) => {
-                    setLinkState(newLink);
-                  }}
-                />
-              </Typography>
+              <TextField
+                InputProps={{
+                  readOnly: props.readonly,
+                }}
+                data-cy={`${props.dataCy}.value`}
+                value={linkState}
+                onChange={(e) => {
+                  let linkValue = "";
+                  if (e.target.value) {
+                    linkValue = e.target.value;
+                  }
+                  setLinkState(linkValue);
+                }}
+                label={t("character-dialog.label.link")}
+                fullWidth
+              />
               {isEditNameVisible && (
-                <Typography>
-                  <ContentEditable
-                    border={!props.readonly}
-                    readonly={props.readonly}
-                    value={props.block.meta.displayName || ""}
-                    onChange={(name) => {
-                      props.onMetaChange({
-                        ...props.block.meta,
-                        displayName: name,
-                      });
-                    }}
-                  />
-                </Typography>
+                <TextField
+                  InputProps={{
+                    readOnly: props.readonly,
+                  }}
+                  value={props.block.meta.displayName || ""}
+                  onChange={(e) => {
+                    let name = "";
+                    if (e.target.value) {
+                      name = e.target.value;
+                    }
+                    props.onMetaChange({
+                      ...props.block.meta,
+                      displayName: name,
+                    });
+                  }}
+                  label={t("character-dialog.label.display-name")}
+                  fullWidth
+                />
               )}
             </Box>
           ) : (
