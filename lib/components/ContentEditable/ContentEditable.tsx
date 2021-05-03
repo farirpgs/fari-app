@@ -1,16 +1,28 @@
 import { css, cx } from "@emotion/css";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
 import { useTheme } from "@material-ui/core/styles";
 import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";
 import truncate from "lodash/truncate";
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
-const DOMPurifyOptions: Config = {
-  ALLOWED_TAGS: ["br", "img"],
+/**
+ * `img` tags were allowed in earlier versions of Fari.
+ *
+ * For that reason, those tags are kept when we render the component using the data from the props.
+ * As soon as the user updates the content of the input, we remove the `img` tags by using the options `onInputChangeOptions`
+ */
+const DomPurifyOptions: {
+  onPropsChangeOptions: Config;
+  onInputChangeOptions: Config;
+} = {
+  onPropsChangeOptions: {
+    ALLOWED_TAGS: ["br", "img"],
+  },
+  onInputChangeOptions: {
+    ALLOWED_TAGS: ["br"],
+  },
 };
 
 const ContentEditableDelay = 750;
@@ -76,32 +88,11 @@ export const ContentEditable: React.FC<
   const latestHtml = useRef<string>();
   const timeout = useRef<any | undefined>(undefined);
   const latestProps = useRef(props);
-  const [image, setImage] = useState<string>();
   const hasCursorPointer = props.readonly && props.clickable;
 
   useEffect(() => {
     latestProps.current = props;
   });
-
-  useEffect(
-    function openImageOnClick() {
-      function openImage(e: MouseEvent) {
-        const img = e.target as HTMLImageElement;
-        setImage(img.src);
-      }
-      setTimeout(() => {
-        $ref.current?.querySelectorAll("img").forEach((i) => {
-          i.addEventListener("click", openImage);
-        });
-      }, 0);
-      return () => {
-        $ref.current?.querySelectorAll("img").forEach((i) => {
-          i.removeEventListener("click", openImage);
-        });
-      };
-    },
-    [props.value]
-  );
 
   useEffect(
     function shouldUpdateInnerHtml() {
@@ -111,7 +102,7 @@ export const ContentEditable: React.FC<
         } else if (latestHtml.current !== props.value) {
           const newHtml = DOMPurify.sanitize(
             props.value,
-            DOMPurifyOptions
+            DomPurifyOptions.onPropsChangeOptions
           ) as string;
           latestHtml.current = newHtml;
           $ref.current.innerHTML = newHtml;
@@ -138,7 +129,7 @@ export const ContentEditable: React.FC<
       clearTimeout(timeout.current);
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
-        DOMPurifyOptions
+        DomPurifyOptions.onInputChangeOptions
       ) as string;
 
       if (props.noDelay) {
@@ -200,23 +191,6 @@ export const ContentEditable: React.FC<
           props.className
         )}
       />
-      <Dialog
-        maxWidth="xl"
-        open={!!image}
-        onClose={() => {
-          setImage(undefined);
-        }}
-      >
-        <DialogContent>
-          <img
-            src={image}
-            className={css({
-              maxWidth: "100%",
-              maxHeight: "80vh",
-            })}
-          />
-        </DialogContent>
-      </Dialog>
     </>
   );
 };

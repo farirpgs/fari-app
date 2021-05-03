@@ -4,12 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { PlayerRow } from "../lib/components/Scene/components/PlayerRow/PlayerRow";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
-import {
-  BlockType,
-  ICharacter,
-  IPage,
-  Position,
-} from "../lib/domains/character/types";
+import { BlockType, ICharacter, IPage } from "../lib/domains/character/types";
 import { IDiceRollResult, RollType } from "../lib/domains/dice/Dice";
 import { Id } from "../lib/domains/Id/Id";
 import { IPlayer } from "../lib/hooks/useScene/IScene";
@@ -725,24 +720,26 @@ function aCharacter(name: string): ICharacter {
       {
         id: "1",
         label: "Page",
-        sections: [
-          {
-            id: "1",
-            label: "Section",
-            position: Position.Left,
-            blocks: [
-              {
-                ...CharacterFactory.makeBlock(BlockType.PointCounter),
-                value: "1",
-                label: "Fate Points",
-                meta: {
-                  max: "3",
-                  isMainPointCounter: true,
+        sections: {
+          left: [
+            {
+              id: "1",
+              label: "Section",
+              blocks: [
+                {
+                  ...CharacterFactory.makeBlock(BlockType.PointCounter),
+                  value: "1",
+                  label: "Fate Points",
+                  meta: {
+                    max: "3",
+                    isMainPointCounter: true,
+                  },
                 },
-              },
-            ],
-          },
-        ],
+              ],
+            },
+          ],
+          right: [],
+        },
       },
     ] as Array<IPage>,
   } as any;

@@ -186,6 +186,16 @@ export const TheWitchIsDead = Template.bind({});
   },
 ];
 
+export const EdgeOfTheEmpire = Template.bind({});
+(EdgeOfTheEmpire as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EdgeOfTheEmpire
+    );
+    return { character };
+  },
+];
+
 export const Blank = Template.bind({});
 (Blank as any).loaders = [
   async () => {
@@ -196,5 +206,5 @@ export const Blank = Template.bind({});
 
 export const LoremIpsum = Template.bind({});
 LoremIpsum.args = {
-  characterSheet: LoremIpsumTemplate as any,
+  characterSheet: CharacterFactory.migrate(LoremIpsumTemplate as any),
 };

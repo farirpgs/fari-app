@@ -2,6 +2,34 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v5.0 WIP
+
+- feat: pick any color for index cards
+- feat: give ability to add sub cards to index cards
+- feat: use building blocks inside index cards
+- fix: sort private index cards
+- feat: index cards sort options
+- feat: collapse index cards
+- feat: display character cards from left to right
+- feat: display size (in KB or MB) of each character or scenes in the data manager
+- fix: disable image in content editable components
+- feat: display player id in player component
+- feat: automatically save a character sheet when assigned by the GM
+- feat: new Image building block
+- feat: duplicate character sheet page
+- feat: duplicate character sheet section
+- feat: better print mode
+- fix: print mode temporarily disables dark mode
+- feat: pick a card
+- fix: move section weird behaviors
+- feat: character sheet wide mode
+- feat: character sheet block width
+
+WIP
+
+- feat: new Link building block
+- feat: new Separator building block
+
 # v4.0 New Character Sheet Framework, Data Mangagement
 
 - feat: new character sheet
@@ -59,6 +87,12 @@
 - feat: enable customizing dice pools without toggling the advanced mode using Right Clicks!
 - feat: give the ability to use Skills/Pools dice commands and add other dice commands using the dice menu.
 - feat: new Player component UI
+- fix: clicking on the roll button when the dice menu is closed rolls the latest rolled commands instead of the selected ones
+
+**4.0.8**
+
+fix: remove image tip from wiki
+feat: new Star Wars Edge of The Empire template from @Gpoitras
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 

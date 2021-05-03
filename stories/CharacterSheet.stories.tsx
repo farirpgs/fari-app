@@ -173,6 +173,15 @@ export const TheWitchIsDead = Template.bind({});
     return { character };
   },
 ];
+export const EdgeOfTheEmpire = Template.bind({});
+(EdgeOfTheEmpire as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EdgeOfTheEmpire
+    );
+    return { character };
+  },
+];
 export const EvolutionPulseHydrah = Template.bind({});
 (EvolutionPulseHydrah as any).loaders = [
   async () => {
@@ -191,5 +200,5 @@ export const Blank = Template.bind({});
 ];
 export const LoremIpsum = Template.bind({});
 LoremIpsum.args = {
-  character: LoremIpsumTemplate as any,
+  character: CharacterFactory.migrate(LoremIpsumTemplate as any),
 };

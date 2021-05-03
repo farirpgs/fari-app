@@ -1,9 +1,8 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import Grid, { GridSize } from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -11,8 +10,9 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ICharacter, ISection, Position } from "../../domains/character/types";
+import { ICharacter, ISection } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
@@ -25,6 +25,7 @@ export const CharacterPrintRoute: React.FC<{
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
+  const darkModeManager = useContext(DarkModeContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
   const logger = useLogger();
 
@@ -35,6 +36,10 @@ export const CharacterPrintRoute: React.FC<{
     logger.info("Route:CharacterPrint");
     if (!devMode) {
       window.print();
+    }
+    const isDark = darkModeManager.state.darkMode;
+    if (isDark) {
+      darkModeManager.actions.setDarkModeTemporarily(false);
     }
   }, []);
 
@@ -51,12 +56,14 @@ export const CharacterPrintRoute: React.FC<{
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
+  const maxWidth = character?.wide ? "lg" : "md";
+
   return (
     <>
       <PageMeta title={character?.name} />
 
       <Box bgcolor={theme.palette.background.paper} mt="1rem">
-        <Container>
+        <Container maxWidth={maxWidth}>
           <PrintCharacter character={character} />
         </Container>
       </Box>
@@ -75,20 +82,19 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
   return (
     <>
       <Box mb="1rem">
-        <Grid container>
+        <Grid container justify="center">
           <Grid item>
-            <Typography variant="h4"> {props.character?.name}</Typography>
+            <FateLabel uppercase={false} variant="h4">
+              {" "}
+              {props.character?.name}
+            </FateLabel>
           </Grid>
         </Grid>
       </Box>
       <Box>
         {props.character?.pages.map((page, pageIndex) => {
-          const leftSections = page.sections.filter(
-            (s) => s.position === Position.Left
-          );
-          const rightSections = page.sections.filter(
-            (s) => s.position === Position.Right
-          );
+          const leftSections = page.sections.left;
+          const rightSections = page.sections.right;
           return (
             <Box key={pageIndex}>
               <Box
@@ -122,6 +128,27 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                   </FateLabel>
                 </Box>
               </Box>
+              {/* <Box
+                className={css({
+                  columns: "2",
+                  columnGap: "1rem",
+                })}
+              >
+                <Box
+                  className={css({
+                    // pageBreakInside: "avoid",
+                  })}
+                >
+                  <PrintSections sections={leftSections} />
+                </Box>
+                <Box
+                  className={css({
+                    // pageBreakInside: "avoid",
+                  })}
+                >
+                  <PrintSections sections={rightSections} />
+                </Box>
+              </Box> */}
               <Grid container spacing={1}>
                 <Grid item xs={6}>
                   <PrintSections sections={leftSections} />
@@ -148,7 +175,12 @@ function PrintSections(props: { sections: Array<ISection> }) {
     <>
       {props.sections.map((section, sectionIndex) => {
         return (
-          <Box key={sectionIndex}>
+          <Box
+            key={sectionIndex}
+            className={css({
+              pageBreakInside: "avoid",
+            })}
+          >
             <Grid container>
               <Grid item xs>
                 <Box
@@ -174,22 +206,34 @@ function PrintSections(props: { sections: Array<ISection> }) {
                 </Box>
               </Grid>
             </Grid>
-            {section.blocks.map((block, blockIndex) => {
-              return (
-                <Box key={blockIndex} my=".5rem" px=".5rem">
-                  <BlockByType
-                    advanced={false}
-                    readonly={true}
-                    dataCy={`character-card.${section.label}.${block.label}`}
-                    block={block}
-                    onChange={() => undefined}
-                    onDuplicate={() => undefined}
-                    onRemove={() => undefined}
-                    onRoll={() => undefined}
-                  />
-                </Box>
-              );
-            })}
+            <Grid container>
+              {section.blocks.map((block, blockIndex) => {
+                const width: GridSize = !!block.meta.width
+                  ? ((block.meta.width * 12) as GridSize)
+                  : 12;
+                return (
+                  <Grid
+                    item
+                    xs={width}
+                    key={block.id}
+                    className={css({
+                      pageBreakInside: "avoid",
+                    })}
+                  >
+                    <Box my=".5rem" px=".5rem">
+                      <BlockByType
+                        advanced={false}
+                        readonly={true}
+                        dataCy={`character-card.${section.label}.${block.label}`}
+                        block={block}
+                        onChange={() => undefined}
+                        onRoll={() => undefined}
+                      />
+                    </Box>
+                  </Grid>
+                );
+              })}
+            </Grid>
           </Box>
         );
       })}

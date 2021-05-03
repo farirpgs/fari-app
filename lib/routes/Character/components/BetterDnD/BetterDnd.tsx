@@ -1,9 +1,13 @@
 import { css, cx } from "@emotion/css";
-import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import React, { useRef } from "react";
-import { DropTargetMonitor, useDrag, useDrop, XYCoord } from "react-dnd";
+import React, { useRef, useState } from "react";
+import {
+  ConnectDragSource,
+  DropTargetMonitor,
+  useDrag,
+  useDrop,
+  XYCoord,
+} from "react-dnd";
 
 export const BetterDnd: React.FC<{
   index: number;
@@ -12,14 +16,18 @@ export const BetterDnd: React.FC<{
    */
   type: string;
   className?: string;
-  dragIndicatorClassName?: string;
-  readonly?: boolean;
+  render(renderProps: {
+    drag: ConnectDragSource;
+    isDragging: boolean;
+    isOver: boolean;
+  }): JSX.Element;
   onDrag?(): void;
   onDrop?(): void;
   onMove?(dragIndex: number, hoverIndex: number): void;
 }> = (props) => {
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState(false);
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: props.type },
     begin: () => {
@@ -102,25 +110,14 @@ export const BetterDnd: React.FC<{
         }),
         props.className
       )}
+      onPointerEnter={() => {
+        setHover(true);
+      }}
+      onPointerLeave={() => {
+        setHover(false);
+      }}
     >
-      <Grid container>
-        {!props.readonly && (
-          <Grid item ref={drag}>
-            <DragIndicatorIcon
-              className={cx(
-                css({
-                  display: isDragging ? "none" : "block",
-                  cursor: "move",
-                }),
-                props.dragIndicatorClassName
-              )}
-            />
-          </Grid>
-        )}
-        <Grid item xs>
-          {props.children}
-        </Grid>
-      </Grid>
+      {props.render({ drag, isDragging, isOver: hover })}
     </div>
   );
 };

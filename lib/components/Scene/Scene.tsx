@@ -145,10 +145,8 @@ export const Scene: React.FC<IProps> = (props) => {
   const isGMEditingDirtyScene =
     props.mode === SceneMode.Manage && sceneManager.state.dirty;
 
-  const shouldBlockLeaving =
-    isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene;
+  useBlockReload(isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene);
 
-  useBlockReload(shouldBlockLeaving);
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
@@ -323,8 +321,12 @@ export const Scene: React.FC<IProps> = (props) => {
     >
       <Box px="1rem">
         <Prompt
-          when={shouldBlockLeaving}
+          when={isGMEditingDirtyScene}
           message={t("manager.leave-without-saving")}
+        />
+        <Prompt
+          when={isGMHostingOnlineOrOfflineGame}
+          message={t("play-route.host-leaving-warning")}
         />
         <Snackbar
           open={savedSnack}
@@ -593,7 +595,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onDiceRoll={() => {
                     handleSetPlayerRoll(
                       player.id,
-                      diceManager.actions.reroll()
+                      diceManager.actions.rollCommandGroups()
                     );
                   }}
                   onPlayedInTurnOrderChange={(playedInTurnOrder) => {
@@ -1196,7 +1198,12 @@ export const Scene: React.FC<IProps> = (props) => {
                       BlockType.SlotTracker
                     );
                     stress.label = "Stress";
+                    const consequences = CharacterFactory.makeBlock(
+                      BlockType.Text
+                    );
+                    consequences.label = "Consequences";
                     card.blocks.push(stress);
+                    card.blocks.push(consequences);
                     card.color = IndexCardColor.green;
                   });
                   logger.info("Scene:onAddCard:NPC");
@@ -1215,7 +1222,12 @@ export const Scene: React.FC<IProps> = (props) => {
                       BlockType.SlotTracker
                     );
                     stress.label = "Stress";
+                    const consequences = CharacterFactory.makeBlock(
+                      BlockType.Text
+                    );
+                    consequences.label = "Consequences";
                     card.blocks.push(stress);
+                    card.blocks.push(consequences);
                     card.color = IndexCardColor.red;
                   });
                   logger.info("Scene:onAddCard:BadGuy");

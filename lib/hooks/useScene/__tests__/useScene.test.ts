@@ -688,7 +688,7 @@ describe("useScene", () => {
       players: [{ character: {} }, { character: {} }],
     });
     expect(
-      result.current.useCharacters.actions.updateIfExists
+      result.current.useCharacters.actions.updateIfMoreRecent
     ).toHaveBeenCalledTimes(2);
   });
 
@@ -742,7 +742,8 @@ function mockUseCharacters() {
     actions: {
       add: jest.fn(),
       upsert: jest.fn(),
-      updateIfExists: jest.fn(),
+      updateIfMoreRecent: jest.fn(),
+      addIfDoesntExist: jest.fn(),
       remove: jest.fn(),
       duplicate: jest.fn(),
       select: jest.fn(),

@@ -6,14 +6,16 @@ export function useDarkMode() {
   const prefersDarkThemeFromStorage =
     localStorage?.getItem(key) === "true" ?? false;
   const [darkMode, setDarkMode] = useState(prefersDarkThemeFromStorage);
+  const [temporaryDarkMode, setDarkModeTemporarily] = useState<boolean>();
 
   useEffect(() => {
     localStorage?.setItem(key, darkMode.toString());
   }, [darkMode]);
 
+  const isDark = temporaryDarkMode ?? darkMode;
   return {
-    state: { darkMode },
-    actions: { setDarkMode },
+    state: { darkMode: isDark },
+    actions: { setDarkMode, setDarkModeTemporarily },
   };
 }
 

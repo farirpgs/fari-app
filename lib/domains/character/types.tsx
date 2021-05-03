@@ -13,7 +13,7 @@ export enum BlockType {
   Separator = "Separator",
 }
 
-export enum Position {
+export enum V3Position {
   Left = "Left",
   Right = "Right",
 }
@@ -87,10 +87,48 @@ export type ICharacterV2CustomField<TValue> = Array<{
 /**
  * V3
  */
+export type IV3Section = {
+  id: string;
+  label: string;
+  position: V3Position;
+  blocks: Array<IBlock>;
+  visibleOnCard?: boolean;
+};
+
+export interface IV3Page {
+  id: string;
+  label: string;
+  sections: Array<IV3Section>;
+}
+
+export interface IV3Character {
+  id: string;
+  name: string;
+  group: string | undefined;
+  pages: Array<IV3Page>;
+
+  // hidden
+  version: number;
+  lastUpdated: number;
+  template?: CharacterTemplates;
+  playedDuringTurn?: boolean;
+}
+
+/**
+ * V4
+ */
+
+export type IDefaultBlockMeta = {
+  helperText?: string;
+  /**
+   * Column width from 0 to 1
+   */
+  width?: number;
+};
+
 export type ITextBlock = {
   type: BlockType.Text;
-  meta: {
-    helperText?: string;
+  meta: IDefaultBlockMeta & {
     checked?: boolean;
   };
   value: string;
@@ -98,8 +136,7 @@ export type ITextBlock = {
 
 export type INumericBlock = {
   type: BlockType.Numeric;
-  meta: {
-    helperText?: string;
+  meta: IDefaultBlockMeta & {
     checked?: boolean;
   };
   value: string;
@@ -107,8 +144,7 @@ export type INumericBlock = {
 
 export type ISkillBlock = {
   type: BlockType.Skill;
-  meta: {
-    helperText?: string;
+  meta: IDefaultBlockMeta & {
     checked?: boolean;
     commands?: Array<IDiceCommandGroupId>;
     hideModifier?: boolean;
@@ -118,8 +154,7 @@ export type ISkillBlock = {
 
 export type IDicePoolBlock = {
   type: BlockType.DicePool;
-  meta: {
-    helperText?: string;
+  meta: IDefaultBlockMeta & {
     commands?: Array<IDiceCommandGroupId>;
   };
   value: string;
@@ -127,9 +162,7 @@ export type IDicePoolBlock = {
 
 export type ISlotTrackerBlock = {
   type: BlockType.SlotTracker;
-  meta: {
-    helperText?: string;
-  };
+  meta: IDefaultBlockMeta & {};
   value: Array<{
     label: string;
     checked?: boolean;
@@ -138,13 +171,16 @@ export type ISlotTrackerBlock = {
 
 export type IPointCounterBlock = {
   type: BlockType.PointCounter;
-  meta: { helperText?: string; max?: string; isMainPointCounter: boolean };
+  meta: IDefaultBlockMeta & {
+    isMainPointCounter: boolean;
+    max: string | undefined;
+  };
   value: string;
 };
 
 export type IImageBlock = {
   type: BlockType.Image;
-  meta: { helperText?: string };
+  meta: IDefaultBlockMeta & {};
   value: string;
 };
 
@@ -189,7 +225,6 @@ export type IBlock = {
 export type ISection = {
   id: string;
   label: string;
-  position: Position;
   blocks: Array<IBlock>;
   visibleOnCard?: boolean;
 };
@@ -197,14 +232,16 @@ export type ISection = {
 export interface IPage {
   id: string;
   label: string;
-  sections: Array<ISection>;
+  sections: { left: Array<ISection>; right: Array<ISection> };
 }
+
+export type IPageSectionPosition = keyof IPage["sections"];
 
 export interface ICharacter {
   id: string;
   name: string;
   group: string | undefined;
-
+  wide: boolean;
   pages: Array<IPage>;
 
   // hidden

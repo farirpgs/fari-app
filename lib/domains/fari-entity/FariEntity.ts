@@ -48,4 +48,20 @@ export const FariEntity = {
     link.download = `${props.name}.fari.json`;
     link.click();
   },
+  getSize(obj: any) {
+    const size = new TextEncoder().encode(JSON.stringify(obj)).length;
+    const kiloBytes = size / 1024;
+    const megaBytes = kiloBytes / 1024;
+
+    return { kiloBytes, megaBytes };
+  },
+  formatSize(kiloBytes:number){
+    const megaBytes = kiloBytes / 1024;
+    const formatted =
+      kiloBytes >= 1000
+        ? `${megaBytes.toFixed(1).toString()} MB`
+        : `${kiloBytes.toFixed(0).toString()} KB`;
+
+        return formatted;
+  }
 };

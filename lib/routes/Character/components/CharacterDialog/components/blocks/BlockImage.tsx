@@ -90,49 +90,54 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
         </DialogTitle>
         <DialogContent>
           {!props.readonly && (
-            <DialogContentText>
-              {t("character-dialog.image-block.dialog.description")}
-            </DialogContentText>
-          )}
-          <Grid
-            container
-            wrap="nowrap"
-            justify="space-around"
-            spacing={2}
-            alignItems="center"
-          >
-            <Grid item xs>
-              <TextField
-                autoFocus
-                margin="dense"
-                value={props.block.value}
-                onChange={(event) => {
-                  setError(false);
-                  props.onValueChange(event.target.value);
-                }}
-                label={t("character-dialog.image-block.dialog.image-url-label")}
-                fullWidth
-              />
-            </Grid>
-            {false && (
-              <Grid item>
-                <Button
-                  color="primary"
-                  variant="outlined"
-                  component="a"
-                  href="https://imgur.com/upload"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {t("character-dialog.image-block.dialog.upload")}
-                </Button>
-                {/* <Button color="primary" variant="outlined" component="label">
+            <>
+              <DialogContentText>
+                {t("character-dialog.image-block.dialog.description")}
+              </DialogContentText>
+              <Grid
+                container
+                wrap="nowrap"
+                justify="space-around"
+                spacing={2}
+                alignItems="center"
+              >
+                <Grid item xs>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    value={props.block.value}
+                    onChange={(event) => {
+                      setError(false);
+                      props.onValueChange(event.target.value);
+                    }}
+                    label={
+                      // prettier-ignore
+                      t("character-dialog.image-block.dialog.image-url-label")
+                    }
+                    fullWidth
+                  />
+                </Grid>
+                {false && (
+                  <Grid item>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      component="a"
+                      href="https://imgur.com/upload"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {t("character-dialog.image-block.dialog.upload")}
+                    </Button>
+                    {/* <Button color="primary" variant="outlined" component="label">
                   {t("character-dialog.image-block.dialog.upload")}
                   {renderHiddenUploadInput()}
                 </Button> */}
+                  </Grid>
+                )}
               </Grid>
-            )}
-          </Grid>
+            </>
+          )}
 
           {renderImage(false)}
         </DialogContent>

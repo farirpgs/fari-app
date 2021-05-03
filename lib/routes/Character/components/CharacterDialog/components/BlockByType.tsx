@@ -2,11 +2,14 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import { useTheme } from "@material-ui/core/styles";
 import produce from "immer";
 import React from "react";
-import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
+import { Link } from "react-router-dom";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
@@ -32,8 +35,7 @@ export function BlockByType(
   > & {
     hideHelp?: boolean;
     onChange(newBlock: IBlock): void;
-    onRemove(): void;
-    onDuplicate(): void;
+    onToggleSplit?(): void;
     onMainPointCounterChange?(): void;
     onRoll(diceRollResult: IDiceRollResult): void;
   }
@@ -207,8 +209,8 @@ export function BlockByType(
         />
       )}
 
-      {props.advanced && renderBlockAdvancedOptions()}
       {renderBlockHelpText()}
+      {props.advanced && renderBlockAdvancedOptions()}
     </>
   );
 
@@ -251,7 +253,27 @@ export function BlockByType(
           />
         )}
 
-        <Grid item>
+        {props.onToggleSplit && (
+          <Grid item>
+            <Link
+              component="button"
+              variant="caption"
+              className={css({
+                label: "CharacterDialog-width",
+                color: theme.palette.primary.main,
+              })}
+              onClick={() => {
+                props.onToggleSplit?.();
+              }}
+            >
+              {t("character-dialog.control.width")}
+              {": "}
+              {(block.meta.width || 1) * 100}
+              {"%"}
+            </Link>
+          </Grid>
+        )}
+        {/* <Grid item>
           <Link
             component="button"
             variant="caption"
@@ -281,13 +303,16 @@ export function BlockByType(
           >
             {t("character-dialog.control.remove-block")}
           </Link>
-        </Grid>
+        </Grid> */}
       </Grid>
     );
   }
 
   function renderBlockHelpText() {
-    if (props.hideHelp || (!props.advanced && !block.meta.helperText)) {
+    const hasHelperText = previewContentEditable({
+      value: block.meta.helperText,
+    });
+    if (props.hideHelp || (!props.advanced && !hasHelperText)) {
       return null;
     }
     return (

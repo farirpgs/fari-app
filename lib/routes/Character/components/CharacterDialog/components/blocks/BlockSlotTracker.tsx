@@ -34,10 +34,17 @@ export function BlockSlotTracker(
 
   function handleAddBox() {
     setBlockValue((draft) => {
+      const lastIndex = draft.length - 1;
+      const lastLabel = draft[lastIndex]?.label;
+      const parsedLabel = parseInt(lastLabel);
+      const nextLabel = Number.isInteger(parsedLabel)
+        ? (draft.length + 1).toString()
+        : "";
+
       return [
         ...draft,
         {
-          label: "",
+          label: nextLabel,
           checked: false,
         },
       ];
@@ -86,7 +93,7 @@ export function BlockSlotTracker(
   return (
     <>
       <Box>
-        {!props.readonly && isLabelVisible && (
+        {(!props.readonly || isLabelVisible) && (
           <Box>
             <Grid container justify={"center"} wrap="nowrap" spacing={1}>
               {!props.readonly && (

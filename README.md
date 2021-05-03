@@ -17,6 +17,10 @@
 - [x] feat: New Image building block block
 - [x] feat: Make it possible to edit block label without being in advanced mode
 - [x] feat: Make index cards collapsible
+- [ ] fix: drag and drop index cards
+- [ ] fix: roll skill modifier on index cards
+- [ ] test: character sheet all
+- [ ] fix: slot tracker invisible label
 
 To verify
 
