@@ -19,6 +19,7 @@ import {
   IPage,
   IPointCounterBlock,
   ISection,
+  ISeparatorBlock,
   ISkillBlock,
   ISlotTrackerBlock,
   ITextBlock,
@@ -279,6 +280,13 @@ export const CharacterFactory = {
         meta: {},
         value: { link: "", isValid: true },
       } as IBlock & ILinkBlock,
+      [BlockType.Separator]: {
+        id: Id.generate(),
+        label: "Separator",
+        type: type,
+        meta: { hasLabel: true },
+        value: "",
+      } as IBlock & ISeparatorBlock,
     };
 
     return blockDefault[type];

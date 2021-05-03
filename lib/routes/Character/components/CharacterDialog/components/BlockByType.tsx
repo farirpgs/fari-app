@@ -20,6 +20,7 @@ import {
   BlockPointCounter,
   BlockPointCounterActions,
 } from "./blocks/BlockPointCounter";
+import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
 import { BlockSlotTracker } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
@@ -193,6 +194,19 @@ export function BlockByType(
         />
       )}
 
+      {props.block.type === BlockType.Separator && (
+        <BlockSeparator
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+
       {props.advanced && renderBlockAdvancedOptions()}
       {renderBlockHelpText()}
     </>
@@ -229,6 +243,12 @@ export function BlockByType(
         )}
         {block.type === BlockType.Link && (
           <BlockLinkActions block={block} onMetaChange={handleOnMetaChange} />
+        )}
+        {block.type === BlockType.Separator && (
+          <BlockSeparatorActions
+            block={block}
+            onMetaChange={handleOnMetaChange}
+          />
         )}
 
         <Grid item>

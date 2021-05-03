@@ -21,6 +21,7 @@ import {
   INumericBlock,
   IPointCounterBlock,
   ISection,
+  ISeparatorBlock,
   ISkillBlock,
   ISlotTrackerBlock,
   ITextBlock,
@@ -33,6 +34,7 @@ import { BlockImage } from "../../../../../routes/Character/components/Character
 import { BlockLink } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockLink";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
+import { BlockSeparator } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSeparator";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
 import { BlockSelectors } from "../../../../../routes/Character/components/CharacterDialog/domains/BlockSelectors/BlockSelectors";
@@ -87,6 +89,7 @@ export const CharacterCard: React.FC<{
     PointCounter: renderBlockPointCounter,
     SlotTracker: renderBlockSlotTracker,
     Link: renderBlockLink,
+    Separator: renderSeparatorBlock,
   };
 
   return (
@@ -361,6 +364,25 @@ export const CharacterCard: React.FC<{
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockLink
+          advanced={false}
+          readonly={true}
+          dataCy={`character-card.${section.label}.${block.label}`}
+          block={block}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
+          onRoll={() => {}}
+        />
+      </Grid>
+    );
+  }
+  function renderSeparatorBlock(
+    section: ISection,
+    block: IBlock & ISeparatorBlock
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockSeparator
           advanced={false}
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}

@@ -12,6 +12,7 @@ import Filter1Icon from "@material-ui/icons/Filter1";
 import ImageIcon from "@material-ui/icons/Image";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import LinkIcon from "@material-ui/icons/Link";
+import RemoveIcon from "@material-ui/icons/Remove";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
@@ -167,6 +168,18 @@ export const AddBlock: React.FC<
           </ListItemIcon>
 
           <ListItemText primary={t("character-dialog.block-type.link")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Separator);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <RemoveIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.separator")} />
         </MenuItem>
       </Menu>
     </Box>

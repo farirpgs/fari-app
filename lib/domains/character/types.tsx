@@ -10,6 +10,7 @@ export enum BlockType {
   SlotTracker = "SlotTracker",
   Image = "Image",
   Link = "Link",
+  Separator = "Separator",
 }
 
 export enum Position {
@@ -160,6 +161,14 @@ export type ILinkBlock = {
   };
 };
 
+export type ISeparatorBlock = {
+  type: BlockType.Separator;
+  meta: {
+    helperText?: string;
+    hasLabel?: boolean;
+  };
+};
+
 export type IBlockTypes =
   | ITextBlock
   | INumericBlock
@@ -168,7 +177,8 @@ export type IBlockTypes =
   | ISlotTrackerBlock
   | IPointCounterBlock
   | IImageBlock
-  | ILinkBlock;
+  | ILinkBlock
+  | ISeparatorBlock;
 
 export type IBlock = {
   type: BlockType;
