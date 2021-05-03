@@ -253,7 +253,7 @@ export function BlockByType(
           />
         )}
 
-        {props.onToggleSplit && (
+        {props.onToggleSplit && block.type !== BlockType.Separator && (
           <Grid item>
             <Link
               component="button"
