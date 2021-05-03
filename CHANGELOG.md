@@ -8,6 +8,7 @@
 - feat: give ability to add sub cards to index cards
 - feat: use building blocks inside index cards
 - fix: sort private index cards
+- feat: index cards sort options
 - feat: collapse index cards
 - feat: display character cards from left to right
 - feat: display size (in KB or MB) of each character or scenes in the data manager
@@ -19,8 +20,6 @@
 - feat: duplicate character sheet section
 - feat: better print mode
 - fix: print mode temporarily disables dark mode
-- feat: collapsable index cards
-- feat: index cards sort options
 - feat: pick a card
 - fix: move section weird behaviors
 - feat: character sheet wide mode
