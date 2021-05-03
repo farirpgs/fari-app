@@ -20,6 +20,7 @@
 - [ ] fix: drag and drop index cards
 - [ ] fix: roll skill modifier on index cards
 - [ ] test: character sheet all
+- [ ] fix: slot tracker invisible label
 
 To verify
 

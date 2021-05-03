@@ -196,5 +196,5 @@ export const Blank = Template.bind({});
 
 export const LoremIpsum = Template.bind({});
 LoremIpsum.args = {
-  characterSheet: LoremIpsumTemplate as any,
+  characterSheet: CharacterFactory.migrate(LoremIpsumTemplate as any),
 };

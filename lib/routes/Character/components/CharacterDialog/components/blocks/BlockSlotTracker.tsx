@@ -93,7 +93,7 @@ export function BlockSlotTracker(
   return (
     <>
       <Box>
-        {!props.readonly && isLabelVisible && (
+        {(!props.readonly || isLabelVisible) && (
           <Box>
             <Grid container justify={"center"} wrap="nowrap" spacing={1}>
               {!props.readonly && (
