@@ -31,7 +31,9 @@ export function DiceRoute(props: { pool: boolean }) {
     function onLoad() {
       if (!props.pool) {
         logger.info("Route:Dice");
-        setRollResult(diceManager.actions.reroll({ listResults: props.pool }));
+        setRollResult(
+          diceManager.actions.rollCommandGroups({ listResults: props.pool })
+        );
       } else {
         logger.info("Route:DicePool");
       }
@@ -48,7 +50,7 @@ export function DiceRoute(props: { pool: boolean }) {
   };
 
   const handleRoll = () => {
-    setRollResult(diceManager.actions.reroll());
+    setRollResult(diceManager.actions.rollCommandGroups());
   };
 
   return (
