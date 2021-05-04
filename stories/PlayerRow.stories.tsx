@@ -6,7 +6,6 @@ import { PlayerRow } from "../lib/components/Scene/components/PlayerRow/PlayerRo
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { BlockType, ICharacter, IPage } from "../lib/domains/character/types";
 import { IDiceRollResult, RollType } from "../lib/domains/dice/Dice";
-import { Id } from "../lib/domains/Id/Id";
 import { IPlayer } from "../lib/hooks/useScene/IScene";
 import { StoryProvider } from "./StoryProvider";
 
@@ -747,7 +746,7 @@ function aCharacter(name: string): ICharacter {
 
 function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
   return {
-    id: Id.generate(),
+    id: "770a7",
     points: "3",
     playerName: "René-Pier",
     isGM: false,

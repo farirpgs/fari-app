@@ -29,6 +29,7 @@ WIP
 
 - feat: new Link building block
 - feat: new Separator building block
+- fix: index card drag and drop
 
 # v4.0 New Character Sheet Framework, Data Mangagement
 
