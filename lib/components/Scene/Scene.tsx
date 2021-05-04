@@ -881,7 +881,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <IndexCard
                 type={type}
                 reactDndIndex={index}
-                canMove={sort === SortMode.Custom}
+                canMove={sort === SortMode.Custom && isGM}
                 key={indexCard.id}
                 reactDndType={"scene.index-cards"}
                 data-cy={`scene.aspect.${index}`}

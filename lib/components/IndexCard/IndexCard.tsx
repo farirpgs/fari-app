@@ -16,6 +16,7 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import EditAttributesIcon from "@material-ui/icons/EditAttributes";
 import EditAttributesOutlinedIcon from "@material-ui/icons/EditAttributesOutlined";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
@@ -130,11 +131,41 @@ export const IndexCard: React.FC<
                   props.onMove(dragIndex, hoverIndex);
                 }}
                 render={(dndRenderProps) => {
-                  // position: "absolute",
-                  // marginTop: "1rem",
-                  // marginLeft: ".5rem",
-                  // display: props.readonly || !props.canMove ? "none" : "block",
-                  return <>{children}</>;
+                  return (
+                    <>
+                      <div ref={dndRenderProps.drag}>
+                        <Tooltip
+                          title={
+                            // prettier-ignore
+                            t("character-dialog.control.move")
+                          }
+                        >
+                          <IconButton
+                            size="small"
+                            className={css({
+                              position: "absolute",
+                              marginTop: "1rem",
+                              marginLeft: ".5rem",
+                              cursor: "drag",
+                              display:
+                                props.readonly || !props.canMove
+                                  ? "none"
+                                  : "block",
+                            })}
+                          >
+                            <DragIndicatorIcon
+                              htmlColor={
+                                dndRenderProps.isOver
+                                  ? theme.palette.text.primary
+                                  : theme.palette.text.hint
+                              }
+                            />
+                          </IconButton>
+                        </Tooltip>
+                        {children}
+                      </div>
+                    </>
+                  );
                 }}
               />
             );
@@ -487,8 +518,9 @@ export const IndexCard: React.FC<
   }
 
   function renderHeader() {
+    const dragIconMargin = "1.5rem";
     return (
-      <Box ml={props.readonly ? "0" : "1rem"}>
+      <Box ml={props.readonly ? "0" : dragIconMargin}>
         <Grid container alignItems="center" spacing={1} wrap="nowrap">
           <Grid item className={css({ flex: "1 0 auto" })}>
             <Typography
