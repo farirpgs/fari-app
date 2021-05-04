@@ -7,6 +7,8 @@ import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { CharacterTemplates } from "../lib/domains/character/CharacterType";
+import { ICharacter } from "../lib/domains/character/types";
+import { dayJS } from "../lib/domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { StoryProvider } from "./StoryProvider";
@@ -86,14 +88,14 @@ export const FateCondensed = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.FateCondensed
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const FateCore = Template.bind({});
 (FateCore as any).loaders = [
   async () => {
     const character = await CharacterFactory.make(CharacterTemplates.FateCore);
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const FateAccelerated = Template.bind({});
@@ -102,7 +104,7 @@ export const FateAccelerated = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.FateAccelerated
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const FateOfCthulhu = Template.bind({});
@@ -111,7 +113,7 @@ export const FateOfCthulhu = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.FateOfCthulhu
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const DresdenFilesAccelerated = Template.bind({});
@@ -120,7 +122,7 @@ export const DresdenFilesAccelerated = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.DresdenFilesAccelerated
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const VentureCity = Template.bind({});
@@ -129,7 +131,7 @@ export const VentureCity = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.VentureCity
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const Heartbreaker = Template.bind({});
@@ -138,7 +140,7 @@ export const Heartbreaker = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.Heartbreaker
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const IronEddaAccelerated = Template.bind({});
@@ -147,21 +149,21 @@ export const IronEddaAccelerated = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.IronEddaAccelerated
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const Maze = Template.bind({});
 (Maze as any).loaders = [
   async () => {
     const character = await CharacterFactory.make(CharacterTemplates.Maze);
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const Dnd5e = Template.bind({});
 (Dnd5e as any).loaders = [
   async () => {
     const character = await CharacterFactory.make(CharacterTemplates.Dnd5e);
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const TheWitchIsDead = Template.bind({});
@@ -170,7 +172,7 @@ export const TheWitchIsDead = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.TheWitchIsDead
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const EdgeOfTheEmpire = Template.bind({});
@@ -179,7 +181,7 @@ export const EdgeOfTheEmpire = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.EdgeOfTheEmpire
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const EvolutionPulseHydrah = Template.bind({});
@@ -188,17 +190,24 @@ export const EvolutionPulseHydrah = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.EvolutionPulse_Hydrah
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const Blank = Template.bind({});
 (Blank as any).loaders = [
   async () => {
     const character = await CharacterFactory.make(CharacterTemplates.Blank);
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const LoremIpsum = Template.bind({});
 LoremIpsum.args = {
   character: CharacterFactory.migrate(LoremIpsumTemplate as any),
 };
+
+function overrideCharacterDateForStorybook(character: ICharacter): ICharacter {
+  return {
+    ...character,
+    lastUpdated: dayJS("2021-01-01").unix(),
+  };
+}
