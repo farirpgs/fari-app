@@ -155,7 +155,6 @@ export const PlayerRow: React.FC<
           <Grid item>
             <Box display="flex" justifyContent="flex-end" height="100%">
               <DiceBox
-                disableTooltip={true}
                 rolls={props.player.rolls}
                 size="2.5rem"
                 fontSize="1.25rem"
