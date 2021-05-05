@@ -1,7 +1,6 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
-import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import Popover from "@material-ui/core/Popover";
@@ -16,15 +15,21 @@ import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
 import React, { useEffect, useRef, useState } from "react";
+import { Ellipse, Group, Layer, Line, Rect, Stage } from "react-konva";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
 import { AspectRatio } from "./AspectRatio";
-import { DrawObject } from "./DrawObject";
-import { DrawingTool, IDrawingManager, ObjectType } from "./hooks/useDrawing";
+import {
+  DrawingTool,
+  IEllipseObject,
+  ILineObject,
+  IRectangleObject,
+  ObjectType,
+  useDrawing,
+} from "./hooks/useDrawing";
 
 interface IProps {
-  drawingManager: IDrawingManager;
   readonly?: boolean;
   controls: "bottom" | "top";
   tokenTitles?: Array<string>;
@@ -39,14 +44,26 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     setDrawingToolBeforeColorPicker,
   ] = useState<DrawingTool | undefined>(undefined);
   const $paletteButton = useRef<HTMLButtonElement | null>(null);
-  const $svg = useRef<SVGSVGElement | null>(null);
   const $container = useRef<HTMLDivElement | null>(null);
 
+  const drawingManager = useDrawing({});
+
   let tokenIndex = 0;
-  const { drawingManager } = props;
 
   useEffect(() => {
-    drawingManager.actions.setSVG($container.current, $svg.current);
+    function checkSize() {
+      const containerWidth = $container.current?.offsetWidth ?? 0;
+      const containerHeight = window.innerHeight ?? 0;
+
+      drawingManager.actions.setWidth(containerWidth);
+      drawingManager.actions.setHeight(containerHeight);
+    }
+    checkSize();
+    window.addEventListener("resize", checkSize);
+
+    return () => {
+      window.addEventListener("resize", checkSize);
+    };
   }, []);
 
   function resetDrawingTool() {
@@ -60,9 +77,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     return (
       <>
         <Box display="flex" flexDirection="column">
-          <AspectRatio width={100} ratio={1 / 1}>
-            {renderDrawArea()}
-          </AspectRatio>
+          {renderDrawArea()}
 
           {renderActions()}
           {renderOtherActions()}
@@ -83,56 +98,17 @@ export const DrawObjects: React.FC<IProps> = (props) => {
 
   function renderDrawArea() {
     return (
-      <div
-        ref={$container}
-        data-cy="draw.container"
-        onPointerDown={drawingManager.handlers.onStartDrawing}
-        onPointerMove={drawingManager.handlers.onDrawing}
-        onPointerUp={drawingManager.handlers.onStopDrawing}
-        onBlur={drawingManager.handlers.onBlur}
-        className={css({
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          touchAction: "none",
-          height: "100%",
-          cursor: props.readonly ? "inherit" : "crosshair",
-        })}
-      >
-        <Fade in={drawingManager.state.objects.length === 0}>
-          <Box
-            width="100%"
-            height="100%"
-            justifyContent="center"
-            alignItems="center"
-            display={
-              drawingManager.state.objects.length === 0 ? "flex" : "none"
-            }
-          >
-            <GestureTwoToneIcon
-              classes={{
-                root: css({
-                  width: "7rem",
-                  height: "7rem",
-                }),
-              }}
-              htmlColor={textColors.disabled}
-            />
-          </Box>
-        </Fade>
-        <Fade in={drawingManager.state.objects.length > 0}>
-          <svg
-            ref={$svg}
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            className={css({
-              display:
-                drawingManager.state.objects.length > 0 ? "block" : "none",
-            })}
-          >
+      <div ref={$container}>
+        <Stage
+          width={drawingManager.state.width}
+          height={drawingManager.state.height}
+          onMouseDown={drawingManager.handlers.onStartDrawing}
+          onMousemove={drawingManager.handlers.onDrawing}
+          onMouseup={drawingManager.handlers.onStopDrawing}
+          onWheel={drawingManager.handlers.onWheel}
+        >
+          <Layer>
+            {/* <Text text="Just start drawing" x={5} y={30} /> */}
             {drawingManager.state.objects.map((object, index) => {
               const hasTokenTitle = object.type === ObjectType.Token;
               const titleIndex = hasTokenTitle ? tokenIndex++ : undefined;
@@ -141,28 +117,94 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   ? props.tokenTitles?.[titleIndex]
                   : undefined;
 
+              const color =
+                object.color === "#000000"
+                  ? theme.palette.text.primary
+                  : object.color;
+
+              // const line = props.roughSVG.linearPath(
+              //   props.object.points.map((p) => [p.x, p.y]),
+              //   {
+              //     stroke: color,
+              //     strokeWidth: strokeWidth,
+              //     roughness: roughness,
+              //     seed: seed,
+              //   }
+              // );
+
+              const Comps: Record<ObjectType, () => JSX.Element> = {
+                [ObjectType.Line]: () => {
+                  const line = object as ILineObject;
+                  return (
+                    <Line
+                      points={line.points.flatMap((p) => [p.x, p.y]) as any}
+                      stroke={color}
+                      strokeWidth={5}
+                      tension={0.5}
+                      lineCap="round"
+                      globalCompositeOperation={
+                        "source-over"
+                        // line.tool === "eraser" ? "destination-out" : "source-over"
+                      }
+                    />
+                  );
+                },
+                [ObjectType.Rectangle]: () => {
+                  const rect = object as IRectangleObject;
+
+                  return (
+                    <>
+                      <Rect
+                        x={rect.form.end.x}
+                        y={rect.form.end.y}
+                        width={rect.form.start.x - rect.form.end.x}
+                        height={rect.form.start.y - rect.form.end.y}
+                        stroke={color}
+                        strokeWidth={5}
+                        tension={0.5}
+                      />
+                    </>
+                  );
+                },
+                [ObjectType.Ellipse]: () => {
+                  const circ = object as IEllipseObject;
+                  const radiusX = (circ.form.start.x - circ.form.end.x) / 2;
+                  const radiusY = (circ.form.start.y - circ.form.end.y) / 2;
+                  return (
+                    <>
+                      <Ellipse
+                        x={(circ.form.start.x + circ.form.end.x) / 2}
+                        y={(circ.form.start.y + circ.form.end.y) / 2}
+                        radiusX={radiusX > 0 ? radiusX : radiusX * -1}
+                        radiusY={radiusY > 0 ? radiusY : radiusY * -1}
+                        stroke={color}
+                        strokeWidth={5}
+                        tension={0.5}
+                      />
+                    </>
+                  );
+                },
+                [ObjectType.Token]: () => <></>,
+              };
+
               return (
-                <DrawObject
-                  key={index}
-                  object={object}
-                  roughSVG={drawingManager.state.roughSVG}
-                  drawingTool={drawingManager.state.drawingTool}
-                  title={title}
-                  onMove={(startEvent, moveEvent) => {
-                    drawingManager.handlers.onObjectMove(
-                      index,
-                      startEvent,
-                      moveEvent
-                    );
-                  }}
-                  onRemove={() => {
-                    drawingManager.handlers.onObjectRemove(index);
-                  }}
-                />
+                <React.Fragment key={index}>
+                  <Group
+                    draggable
+                    onDragStart={(e) => {
+                      drawingManager.handlers.onDragStart(index, e);
+                    }}
+                    onDragEnd={(e) => {
+                      drawingManager.handlers.onDragEnd(index, e);
+                    }}
+                  >
+                    {Comps[object.type]()}
+                  </Group>
+                </React.Fragment>
               );
             })}
-          </svg>
-        </Fade>
+          </Layer>
+        </Stage>
       </div>
     );
   }
