@@ -24,6 +24,7 @@
 - fix: move section weird behaviors
 - feat: character sheet wide mode
 - feat: character sheet block width
+- feat: adding a new index cards adds it to the top of the scene
 
 WIP
 
