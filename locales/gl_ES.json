@@ -47,6 +47,8 @@
   "character-dialog.template.Blank": "Personalizado",
   "character-dialog.template.Dnd5e": "Dnd 5e",
   "character-dialog.template.DresdenFilesAccelerated": "Dresden Files Accelerated",
+  "character-dialog.template.EdgeOfTheEmpire": "Edge of the Empire",
+  "character-dialog.template.EdgeOfTheEmpire_FR": "Edge of the Empire (FR)",
   "character-dialog.template.FateAccelerated": "Fate Accelerated",
   "character-dialog.template.FateCondensed": "Fate Condensed",
   "character-dialog.template.FateCore": "Fate Core",
