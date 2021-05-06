@@ -527,9 +527,10 @@ export const PlayerRow: React.FC<
                     logger.info("PlayerRow:onLoadAndDuplicateCharacterSheet");
                   }}
                 >
-                  {t(
-                    "player-row.load-character-sheet-dialog.load-and-duplicate"
-                  )}
+                  {
+                    // prettier-ignore
+                    t("player-row.load-character-sheet-dialog.load-and-duplicate")
+                  }
                 </Button>
               </Grid>
               <Grid item>
