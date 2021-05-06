@@ -162,7 +162,7 @@ export const ContentEditable: React.FC<
             "color": "inherit",
             "textDecoration": props.underline ? "underline" : undefined,
             "borderBottom": props.border
-              ? `1px solid ${props.borderColor ?? theme.palette.text.hint}`
+              ? `1px solid ${props.borderColor ?? theme.palette.divider}`
               : undefined,
             "&:empty:before": {
               color: theme.palette.text.hint,
