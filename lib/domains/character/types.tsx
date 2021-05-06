@@ -197,6 +197,7 @@ export type ISeparatorBlock = {
   type: BlockType.Separator;
   meta: {
     helperText?: string;
+    hasLabel?: boolean;
   };
 };
 

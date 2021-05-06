@@ -310,9 +310,9 @@ export const CharacterFactory = {
       } as IBlock & ILinkBlock,
       [BlockType.Separator]: {
         id: Id.generate(),
-        label: "Separator",
+        label: "",
         type: type,
-        meta: {},
+        meta: { hasLabel: false },
         value: "",
       } as IBlock & ISeparatorBlock,
     };
