@@ -269,6 +269,53 @@ ImageContentGif.args = makeReadonlyArgs(BlockType.Image, {
   },
 });
 
+export const Link = Template.bind({});
+Link.args = makeNormalArgs(BlockType.Link, {
+  value: "http://google.com",
+});
+export const LinkDisplayName = Template.bind({});
+LinkDisplayName.args = makeNormalArgs(BlockType.Link, {
+  value: "http://google.com",
+  label: "Lorem ipsum",
+  meta: {
+    editName: true,
+  },
+});
+export const LinkAdvanced = Template.bind({});
+LinkAdvanced.args = makeAdvancedArgs(BlockType.Link);
+export const LinkAdvancedInvalid = Template.bind({});
+LinkAdvancedInvalid.args = makeAdvancedArgs(BlockType.Link, {
+  value: "NotALink",
+});
+
+export const LinkAdvancedMax = Template.bind({});
+LinkAdvancedMax.args = makeAdvancedArgs(BlockType.Link, {
+  value: "http://google.com",
+  label: "Lorem ipsum",
+  meta: {
+    editName: true,
+    helperText:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",
+  },
+});
+
+export const Separator = Template.bind({});
+Separator.args = makeNormalArgs(BlockType.Separator);
+export const SeparatorNoLabel = Template.bind({});
+SeparatorNoLabel.args = makeNormalArgs(BlockType.Separator, {
+  label: "",
+});
+export const SeparatorAdvanced = Template.bind({});
+SeparatorAdvanced.args = makeAdvancedArgs(BlockType.Separator);
+export const SeparatorAdvancedMax = Template.bind({});
+SeparatorAdvancedMax.args = makeAdvancedArgs(BlockType.Separator, {
+  label: "Lorem ipsum",
+  meta: {
+    helperText:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",
+  },
+});
+
 function makeNormalArgs(type: BlockType, blockOverride: Partial<IBlock> = {}) {
   return {
     block: { ...CharacterFactory.makeBlock(type), ...blockOverride } as IBlock,
