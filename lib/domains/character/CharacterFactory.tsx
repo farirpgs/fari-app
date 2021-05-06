@@ -8,10 +8,12 @@ import {
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
+  ILinkBlock,
   INumericBlock,
   IPage,
   IPointCounterBlock,
   ISection,
+  ISeparatorBlock,
   ISkillBlock,
   ISlotTrackerBlock,
   ITextBlock,
@@ -299,6 +301,20 @@ export const CharacterFactory = {
         meta: {},
         value: "",
       } as IBlock & IImageBlock,
+      [BlockType.Link]: {
+        id: Id.generate(),
+        label: "",
+        type: type,
+        meta: { hasDisplayName: false },
+        value: "",
+      } as IBlock & ILinkBlock,
+      [BlockType.Separator]: {
+        id: Id.generate(),
+        label: "",
+        type: type,
+        meta: { hasLabel: false },
+        value: "",
+      } as IBlock & ISeparatorBlock,
     };
 
     return blockDefault[type];

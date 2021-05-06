@@ -9,6 +9,8 @@ export enum BlockType {
   PointCounter = "PointCounter",
   SlotTracker = "SlotTracker",
   Image = "Image",
+  Link = "Link",
+  Separator = "Separator",
 }
 
 export enum V3Position {
@@ -182,6 +184,23 @@ export type IImageBlock = {
   value: string;
 };
 
+export type ILinkBlock = {
+  type: BlockType.Link;
+  meta: {
+    helperText?: string;
+    hasDisplayName: boolean;
+  };
+  value: string;
+};
+
+export type ISeparatorBlock = {
+  type: BlockType.Separator;
+  meta: {
+    helperText?: string;
+    hasLabel: boolean;
+  };
+};
+
 export type IBlockTypes =
   | ITextBlock
   | INumericBlock
@@ -189,7 +208,9 @@ export type IBlockTypes =
   | IDicePoolBlock
   | ISlotTrackerBlock
   | IPointCounterBlock
-  | IImageBlock;
+  | IImageBlock
+  | ILinkBlock
+  | ISeparatorBlock;
 
 export type IBlock = {
   type: BlockType;
