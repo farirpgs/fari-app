@@ -115,6 +115,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "Gpoitras",
+      "name": "Gpoitras",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59977641?v=4",
+      "profile": "https://github.com/Gpoitras",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
