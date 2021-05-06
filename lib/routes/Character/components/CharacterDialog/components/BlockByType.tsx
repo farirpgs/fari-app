@@ -2,10 +2,10 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import { useTheme } from "@material-ui/core/styles";
 import produce from "immer";
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ContentEditable,
   previewContentEditable,
@@ -17,11 +17,13 @@ import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
+import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
   BlockPointCounterActions,
 } from "./blocks/BlockPointCounter";
+import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
 import { BlockSlotTracker } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
@@ -181,6 +183,32 @@ export function BlockByType(
         />
       )}
 
+      {props.block.type === BlockType.Link && (
+        <BlockLink
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+
+      {props.block.type === BlockType.Separator && (
+        <BlockSeparator
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+
       {renderBlockHelpText()}
       {props.advanced && renderBlockAdvancedOptions()}
     </>
@@ -215,7 +243,17 @@ export function BlockByType(
             onMetaChange={handleOnMetaChange}
           />
         )}
-        {props.onToggleSplit && (
+        {block.type === BlockType.Link && (
+          <BlockLinkActions block={block} onMetaChange={handleOnMetaChange} />
+        )}
+        {block.type === BlockType.Separator && (
+          <BlockSeparatorActions
+            block={block}
+            onMetaChange={handleOnMetaChange}
+          />
+        )}
+
+        {props.onToggleSplit && block.type !== BlockType.Separator && (
           <Grid item>
             <Link
               component="button"
