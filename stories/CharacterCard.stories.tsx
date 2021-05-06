@@ -211,7 +211,6 @@ export const EdgeOfTheEmpire_FR = Template.bind({});
     return { character };
   },
 ];
-
 export const Blank = Template.bind({});
 (Blank as any).loaders = [
   async () => {

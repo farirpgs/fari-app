@@ -283,15 +283,6 @@ Blocks are all based around the same idea, for that reason all types of blocks h
 
 # Tips and Tricks
 
-## Use Images
-
-Fari supports adding images to Character Sheet and Index Card fields very easily.
-
-Simply go on the internet, copy an image in your clipboard and paste it in a field inside the character sheet or an index card.
-
-![Copy an image](https://gyazo.com/db1eede383593cfa829359358ec58c4f.png)
-![Paste it in a field](https://gyazo.com/ce1a801bf9bf7362954d0a0a64571117.png)
-
 ## Index Card Roll Modifiers
 
 Not every NPC needs to be a full-on character sheet, but the benefit of using character sheets in Fari is that you can easily click on a skill to roll 4dF + a skill modifier.
