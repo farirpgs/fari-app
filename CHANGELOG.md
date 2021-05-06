@@ -66,6 +66,11 @@
 fix: remove image tip from wiki
 feat: new Star Wars Edge of The Empire template from @Gpoitras
 
+**4.0.9**
+
+- fix: edge of the empire character card @Gpoitras
+- feat: edge of the empire french version + storybook @Gpoitras
+
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
 - feat: new Fari Wiki
