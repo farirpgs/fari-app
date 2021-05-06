@@ -1011,6 +1011,7 @@ export const CharacterV3Dialog: React.FC<{
               return (
                 <Grid key={block.id} item xs={width}>
                   <BetterDnd
+                    direction="vertical"
                     index={blockIndex}
                     type={dragAndDropKey}
                     className={css({

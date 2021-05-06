@@ -124,6 +124,7 @@ export const IndexCard: React.FC<
           wrapper={(children) => {
             return (
               <BetterDnd
+                direction="horizontal"
                 key={indexCardManager.state.indexCard.id}
                 index={props.reactDndIndex}
                 type={props.reactDndType}
