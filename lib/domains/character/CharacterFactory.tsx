@@ -303,16 +303,16 @@ export const CharacterFactory = {
       } as IBlock & IImageBlock,
       [BlockType.Link]: {
         id: Id.generate(),
-        label: "Link",
+        label: "",
         type: type,
         meta: {},
-        value: { link: "", isValid: true },
+        value: "",
       } as IBlock & ILinkBlock,
       [BlockType.Separator]: {
         id: Id.generate(),
         label: "Separator",
         type: type,
-        meta: { hasLabel: true },
+        meta: {},
         value: "",
       } as IBlock & ISeparatorBlock,
     };

@@ -23,7 +23,7 @@ import {
   BlockPointCounter,
   BlockPointCounterActions,
 } from "./blocks/BlockPointCounter";
-import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
+import { BlockSeparator } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
 import { BlockSlotTracker } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
@@ -245,12 +245,6 @@ export function BlockByType(
         )}
         {block.type === BlockType.Link && (
           <BlockLinkActions block={block} onMetaChange={handleOnMetaChange} />
-        )}
-        {block.type === BlockType.Separator && (
-          <BlockSeparatorActions
-            block={block}
-            onMetaChange={handleOnMetaChange}
-          />
         )}
 
         {props.onToggleSplit && block.type !== BlockType.Separator && (
