@@ -187,6 +187,15 @@ export const EdgeOfTheEmpire = Template.bind({});
     return { character };
   },
 ];
+export const EdgeOfTheEmpire_FR = Template.bind({});
+(EdgeOfTheEmpire_FR as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EdgeOfTheEmpire_FR
+    );
+    return { character };
+  },
+];
 export const EvolutionPulseHydrah = Template.bind({});
 (EvolutionPulseHydrah as any).loaders = [
   async () => {

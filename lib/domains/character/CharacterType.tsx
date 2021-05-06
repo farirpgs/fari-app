@@ -19,6 +19,7 @@ export enum CharacterTemplates {
   Dnd5e = "Dnd5e",
   TheWitchIsDead = "TheWitchIsDead",
   EdgeOfTheEmpire = "EdgeOfTheEmpire",
+  EdgeOfTheEmpire_FR = "EdgeOfTheEmpire_FR",
   Blank = "Blank",
 }
 
@@ -63,6 +64,7 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Dungeons & Dragons", template: CharacterTemplates.Dnd5e },
   { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead },
   { group: "Star Wars", template: CharacterTemplates.EdgeOfTheEmpire },
+  { group: "Star Wars", template: CharacterTemplates.EdgeOfTheEmpire_FR },
   { group: "Blank", template: CharacterTemplates.Blank },
 ];
 
@@ -144,6 +146,13 @@ export const CharacterTemplatesInformation: {
     author: { name: "Grant Howitt", link: "https://rowanrookanddecard.com/" },
   },
   [CharacterTemplates.EdgeOfTheEmpire]: {
+    author: {
+      name: "Fantasy Flight",
+      link:
+        "https://www.fantasyflightgames.com/en/products/star-wars-edge-of-the-empire/",
+    },
+  },
+  [CharacterTemplates.EdgeOfTheEmpire_FR]: {
     author: {
       name: "Fantasy Flight",
       link:

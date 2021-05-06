@@ -56,6 +56,7 @@ export type ITranslationKeys =
   | "character-dialog.template.Maze"
   | "character-dialog.template.TheWitchIsDead"
   | "character-dialog.template.EdgeOfTheEmpire"
+  | "character-dialog.template.EdgeOfTheEmpire_FR"
   | "character-dialog.template.VentureCity"
   | "common.language.de"
   | "common.language.dev"
