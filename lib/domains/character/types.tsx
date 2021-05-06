@@ -186,8 +186,7 @@ export type IImageBlock = {
 
 export type ILinkBlock = {
   type: BlockType.Link;
-  meta: {
-    helperText?: string;
+  meta: IDefaultBlockMeta & {
     hasDisplayName: boolean;
   };
   value: string;
@@ -195,8 +194,7 @@ export type ILinkBlock = {
 
 export type ISeparatorBlock = {
   type: BlockType.Separator;
-  meta: {
-    helperText?: string;
+  meta: IDefaultBlockMeta & {
     hasLabel: boolean;
   };
 };
@@ -216,6 +214,7 @@ export type IBlock = {
   type: BlockType;
   id: string;
   label: string;
+  value: unknown;
 } & IBlockTypes;
 
 export type ISection = {
