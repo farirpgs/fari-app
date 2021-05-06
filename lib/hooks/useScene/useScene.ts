@@ -232,7 +232,7 @@ export function useScene(props: IProps) {
       produce((draft: IScene) => {
         const cards = draft.indexCards[type];
 
-        cards.push(newCard);
+        cards.unshift(newCard);
       })
     );
     setTimeout(() => {
