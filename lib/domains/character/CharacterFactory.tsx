@@ -305,7 +305,7 @@ export const CharacterFactory = {
         id: Id.generate(),
         label: "",
         type: type,
-        meta: {},
+        meta: { hasDisplayName: false },
         value: "",
       } as IBlock & ILinkBlock,
       [BlockType.Separator]: {

@@ -278,7 +278,7 @@ LinkDisplayName.args = makeNormalArgs(BlockType.Link, {
   value: "http://google.com",
   label: "Lorem ipsum",
   meta: {
-    editName: true,
+    hasDisplayName: true,
   },
 });
 export const LinkAdvanced = Template.bind({});
@@ -293,7 +293,7 @@ LinkAdvancedMax.args = makeAdvancedArgs(BlockType.Link, {
   value: "http://google.com",
   label: "Lorem ipsum",
   meta: {
-    editName: true,
+    hasDisplayName: true,
     helperText:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",
   },

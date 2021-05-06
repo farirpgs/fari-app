@@ -5,10 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  ContentEditable,
-  previewContentEditable,
-} from "../../../../../../components/ContentEditable/ContentEditable";
+import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISeparatorBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -18,16 +15,12 @@ import {
 } from "../../types/IBlockComponentProps";
 
 export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
-  const isLabelVisible =
-    props.block.meta?.hasLabel &&
-    (props.advanced || !!previewContentEditable({ value: props.block.label }));
-
   return (
     <>
       <Box>
         <Grid container spacing={1} justify="space-between" wrap="nowrap">
           <Grid item xs>
-            {isLabelVisible && (
+            {props.block.meta?.hasLabel && (
               <Box>
                 <FateLabel display="inline">
                   <ContentEditable

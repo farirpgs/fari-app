@@ -27,9 +27,8 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
     delay: 750,
   });
 
-  const isEditNameVisible = Boolean(props.block.meta?.editName);
   const linkText =
-    isEditNameVisible && props.block.label !== ""
+    props.block.meta?.hasDisplayName && props.block.label !== ""
       ? props.block.label
       : props.block.value;
 
@@ -63,7 +62,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                     : t("character-dialog.helper-text.invalid-link")
                 }
               />
-              {isEditNameVisible && (
+              {props.block.meta?.hasDisplayName && (
                 <TextField
                   InputProps={{
                     readOnly: props.readonly,
@@ -118,13 +117,13 @@ export function BlockLinkActions(
           onClick={() => {
             props.onMetaChange({
               ...props.block.meta,
-              editName: !Boolean(props.block.meta.editName),
+              hasDisplayName: !props.block.meta?.hasDisplayName,
             });
           }}
         >
-          {props.block.meta.editName
-            ? t("character-dialog.control.hide-edit-name")
-            : t("character-dialog.control.show-edit-name")}
+          {props.block.meta.hasDisplayName
+            ? t("character-dialog.control.hide-display-name")
+            : t("character-dialog.control.show-display-name")}
         </Link>
       </Grid>
     </>

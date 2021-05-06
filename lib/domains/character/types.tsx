@@ -188,7 +188,7 @@ export type ILinkBlock = {
   type: BlockType.Link;
   meta: {
     helperText?: string;
-    editName?: boolean;
+    hasDisplayName: boolean;
   };
   value: string;
 };
@@ -197,7 +197,7 @@ export type ISeparatorBlock = {
   type: BlockType.Separator;
   meta: {
     helperText?: string;
-    hasLabel?: boolean;
+    hasLabel: boolean;
   };
 };
 
