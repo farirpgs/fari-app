@@ -77,6 +77,7 @@ import { IndexCard } from "../IndexCard/IndexCard";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
+import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 import { useHiddenIndexCardRecord } from "./hooks/useHiddenIndexCardRecord";
@@ -170,6 +171,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const errorTheme = useThemeFromColor(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
 
+  const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
   const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
@@ -328,6 +330,17 @@ export const Scene: React.FC<IProps> = (props) => {
           when={isGMHostingOnlineOrOfflineGame}
           message={t("play-route.host-leaving-warning")}
         />
+        {streamerModalOpen && (
+          <WindowPortal
+            onClose={() => {
+              setStreamerModalOpen(false);
+            }}
+          >
+            <div id="lol">
+              <button>SALUT MUI</button>
+            </div>
+          </WindowPortal>
+        )}
         <Snackbar
           open={savedSnack}
           autoHideDuration={2000}
@@ -1346,6 +1359,18 @@ export const Scene: React.FC<IProps> = (props) => {
               {t("play-route.save-scene")}
             </Button>
           </Grid>
+          {false && (
+            <Grid item>
+              <Button
+                color="primary"
+                onClick={() => {
+                  setStreamerModalOpen(true);
+                }}
+              >
+                {"Streamer Window"}
+              </Button>
+            </Grid>
+          )}
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
           )}
