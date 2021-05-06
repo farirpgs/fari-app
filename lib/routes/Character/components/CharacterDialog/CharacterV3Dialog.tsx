@@ -1,4 +1,4 @@
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
@@ -106,11 +106,12 @@ export const CharacterV3Dialog: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const blackButtonTheme = useThemeFromColor(theme.palette.text.primary);
-  const query = useQuery<"card">();
+  const query = useQuery<"card" | "advanced">();
   const showCharacterCard = query.get("card") === "true";
+  const defaultAdvanced = query.get("advanced") === "true";
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
-  const [advanced, setAdvanced] = useState(false);
+  const [advanced, setAdvanced] = useState(defaultAdvanced);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
@@ -200,7 +201,7 @@ export const CharacterV3Dialog: React.FC<{
         props.character?.id !== characterManager.state.character?.id;
 
       if (isDifferentCharacter) {
-        setAdvanced(false);
+        setAdvanced(defaultAdvanced);
         setTab("0");
       }
     },
@@ -1134,13 +1135,28 @@ export const CharacterV3Dialog: React.FC<{
                             )}
                             <Grid item xs>
                               <Box
-                                className={css({
-                                  label: "CharacterDialog-block",
-                                  marginTop: ".2rem",
-                                  marginBottom: ".2rem",
-                                  marginLeft: ".5rem",
-                                  marginRight: ".5rem",
-                                })}
+                                className={cx(
+                                  css({
+                                    label: "CharacterDialog-block",
+                                    marginTop: ".2rem",
+                                    marginBottom: ".2rem",
+                                    marginLeft: ".5rem",
+                                    marginRight: ".5rem",
+                                  }),
+                                  advanced &&
+                                    css({
+                                      padding: ".5rem",
+                                      transition: theme.transitions.create([
+                                        "border",
+                                      ]),
+                                      border: `1px solid ${
+                                        dndRenderProps.isOver
+                                          ? theme.palette.text.secondary
+                                          : theme.palette.divider
+                                      }`,
+                                      borderRadius: "4px",
+                                    })
+                                )}
                               >
                                 <BlockByType
                                   advanced={advanced}
