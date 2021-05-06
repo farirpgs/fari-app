@@ -106,6 +106,33 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "chocoporto",
+      "name": "chocoporto",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18116598?v=4",
+      "profile": "https://github.com/chocoporto",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "Gpoitras",
+      "name": "Gpoitras",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59977641?v=4",
+      "profile": "https://github.com/Gpoitras",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "christiefelker",
+      "name": "Christie Kennedy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28272166?v=4",
+      "profile": "https://github.com/christiefelker",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
