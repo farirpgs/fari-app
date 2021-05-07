@@ -34,8 +34,7 @@ export function useTranslate() {
           return "";
         }
         logger.warn("useTranslate:onMissingTranslation", {
-          key,
-          currentLanguage,
+          tags: { key, currentLanguage },
         });
 
         return englishValue || devValue;

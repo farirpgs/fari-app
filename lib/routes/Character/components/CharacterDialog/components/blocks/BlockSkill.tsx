@@ -53,34 +53,38 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
       <Box>
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
           <Grid item>
-            <Pool
-              tooltipTitle={t("character-dialog.skill-block.roll")}
-              fontSize="1.2rem"
-              borderRadius="8px"
-              selected={isSelected}
-              clickable={!props.readonly}
-              borderStyle={"solid"}
-              onContextMenu={(event) => {
-                event.preventDefault();
+            {props.readonly ? (
+              <RollIcon className={css({ fontSize: "2rem" })} />
+            ) : (
+              <Pool
+                tooltipTitle={t("character-dialog.skill-block.roll")}
+                fontSize="1.2rem"
+                borderRadius="8px"
+                selected={isSelected}
+                clickable={!props.readonly}
+                borderStyle={"solid"}
+                onContextMenu={(event) => {
+                  event.preventDefault();
 
-                diceManager.actions.setOptions({ listResults: false });
-                diceManager.actions.addOrRemovePoolElement({
-                  blockId: props.block.id,
-                  blockType: props.block.type,
-                  label: props.block.label,
-                  commandOptionList: blockDiceCommandOptions,
-                });
-              }}
-              onClick={() => {
-                const diceRollResult = diceManager.actions.roll(
-                  blockDiceCommandOptions,
-                  { listResults: false }
-                );
-                props.onRoll(diceRollResult);
-              }}
-            >
-              <RollIcon className={css({ fontSize: "2.3rem" })} />
-            </Pool>
+                  diceManager.actions.setOptions({ listResults: false });
+                  diceManager.actions.addOrRemovePoolElement({
+                    blockId: props.block.id,
+                    blockType: props.block.type,
+                    label: props.block.label,
+                    commandOptionList: blockDiceCommandOptions,
+                  });
+                }}
+                onClick={() => {
+                  const diceRollResult = diceManager.actions.roll(
+                    blockDiceCommandOptions,
+                    { listResults: false }
+                  );
+                  props.onRoll(diceRollResult);
+                }}
+              >
+                <RollIcon className={css({ fontSize: "2.3rem" })} />
+              </Pool>
+            )}
           </Grid>
           {!props.block.meta.hideModifier && (
             <Grid item>

@@ -85,7 +85,6 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
         <Grid container justify="center">
           <Grid item>
             <FateLabel uppercase={false} variant="h4">
-              {" "}
               {props.character?.name}
             </FateLabel>
           </Grid>
@@ -96,7 +95,12 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
           const leftSections = page.sections.left;
           const rightSections = page.sections.right;
           return (
-            <Box key={pageIndex}>
+            <Box
+              key={pageIndex}
+              className={css({
+                pageBreakAfter: "always",
+              })}
+            >
               <Box
                 className={css({
                   borderBottom: `3px solid ${headerBackgroundColor}`,
@@ -132,18 +136,19 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                 className={css({
                   columns: "2",
                   columnGap: "1rem",
+                  // breakInside: "avoid",
                 })}
               >
                 <Box
                   className={css({
-                    // pageBreakInside: "avoid",
+                    pageBreakInside: "avoid",
                   })}
                 >
                   <PrintSections sections={leftSections} />
                 </Box>
                 <Box
                   className={css({
-                    // pageBreakInside: "avoid",
+                    pageBreakInside: "avoid",
                   })}
                 >
                   <PrintSections sections={rightSections} />

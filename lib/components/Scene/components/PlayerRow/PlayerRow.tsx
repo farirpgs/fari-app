@@ -288,9 +288,7 @@ export const PlayerRow: React.FC<
             onClick={(e) => {
               e.stopPropagation();
               props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
-              logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
-                playedDuringTurn: !props.player.playedDuringTurn,
-              });
+              logger.info("ScenePlayer:onPlayedInTurnOrderChange");
             }}
             disabled={!props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}

@@ -44,7 +44,7 @@ export function DiceRoute(props: { pool: boolean }) {
 
   const setRollResult = (result: IDiceRollResult) => {
     setRolls((draft) => {
-      logger.info("DiceRoute:onDiceRoll", { roll: result });
+      logger.info("DiceRoute:onDiceRoll", { extra: { roll: result } });
       return [result, ...draft];
     });
   };

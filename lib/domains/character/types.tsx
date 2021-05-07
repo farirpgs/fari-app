@@ -194,6 +194,7 @@ export type ILinkBlock = {
 
 export type ISeparatorBlock = {
   type: BlockType.Separator;
+  value: unknown;
   meta: IDefaultBlockMeta & {
     hasLabel: boolean;
   };

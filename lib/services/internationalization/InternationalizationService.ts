@@ -72,7 +72,6 @@ export async function InternationalizationService(logger: ILogger) {
     });
   logger.setTag("language", i18n.language);
   logger.info(`I18n:onDetect:${i18n.language}`, {
-    language: i18n.language,
-    languages: i18n.languages,
+    // tags: { language: i18n.language, languages: i18n.languages },
   });
 }

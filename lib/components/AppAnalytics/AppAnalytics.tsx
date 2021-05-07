@@ -18,21 +18,22 @@ export const AppAnalytics = withRouter(function HistoryComponent(props) {
       window.gtag("config", "UA-150306816-1", { page_path: page });
     }
     logger.info(`Navigate:${location.pathname}`, {
-      referrer: document.referrer,
-      pathname: location.pathname,
+      tags: { referrer: document.referrer, pathname: location.pathname },
     });
   }, [pathname]);
 
   useEffect(() => {
     logger.info("Session", {
-      referrer: document.referrer,
-      pathname: location.pathname,
-      buildNumber: env.buildNumber,
-      version: env.version,
+      tags: {
+        referrer: document.referrer,
+        pathname: location.pathname,
+        buildNumber: env.buildNumber,
+        version: env.version,
+      },
     });
     if (document.referrer) {
       logger.info(`Referrer:${document.referrer}`, {
-        referrer: document.referrer,
+        tags: { referrer: document.referrer },
       });
     }
   }, []);

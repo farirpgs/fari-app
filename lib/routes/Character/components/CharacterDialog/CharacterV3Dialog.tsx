@@ -372,7 +372,10 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
-    const numberOfSections = pages.flatMap((p) => p.sections).length;
+    const numberOfSections = pages.flatMap((p) => [
+      ...p.sections.left,
+      ...p.sections.right,
+    ]).length;
     const doesntHaveSections = numberOfSections === 0;
     const shouldRenderLoadTemplate = props.dialog
       ? doesntHaveSections || advanced
@@ -952,6 +955,9 @@ export const CharacterV3Dialog: React.FC<{
                       InputProps={{
                         ...params.InputProps,
                         disableUnderline: true,
+                        classes: {
+                          input: css({ paddingBottom: "0 !important" }),
+                        },
                       }}
                       data-cy={`character-dialog.group`}
                       disabled={props.readonly}
