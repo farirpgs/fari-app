@@ -301,10 +301,25 @@ LinkAdvancedMax.args = makeAdvancedArgs(BlockType.Link, {
 
 export const Separator = Template.bind({});
 Separator.args = makeNormalArgs(BlockType.Separator);
+export const SeparatorEmptyLabel = Template.bind({});
+SeparatorEmptyLabel.args = makeNormalArgs(BlockType.Separator, {
+  label: "",
+  meta: {
+    hasLabel: true,
+  },
+});
 export const SeparatorLabel = Template.bind({});
 SeparatorLabel.args = makeNormalArgs(BlockType.Separator, {
   label: "Lorem ipsum",
   meta: {
+    hasLabel: true,
+  },
+});
+export const SeparatorLabelHelpText = Template.bind({});
+SeparatorLabelHelpText.args = makeNormalArgs(BlockType.Separator, {
+  label: "Lorem ipsum",
+  meta: {
+    helperText: "Lorem ipsum",
     hasLabel: true,
   },
 });

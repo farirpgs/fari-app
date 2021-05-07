@@ -49,6 +49,7 @@ export function BlockByType(
       props.onChange(newBlock);
     },
   });
+  const isSeparatorBlock = props.block.type === BlockType.Separator;
 
   function handleOnLabelChange(label: any) {
     setBlock(
@@ -96,7 +97,7 @@ export function BlockByType(
   }
 
   return (
-    <>
+    <Box my={isSeparatorBlock ? "1rem" : "0"}>
       {props.block.type === BlockType.Text && (
         <BlockText
           advanced={props.advanced}
@@ -211,7 +212,7 @@ export function BlockByType(
 
       {renderBlockHelpText()}
       {props.advanced && renderBlockAdvancedOptions()}
-    </>
+    </Box>
   );
 
   function renderBlockAdvancedOptions() {
@@ -273,37 +274,6 @@ export function BlockByType(
             </Link>
           </Grid>
         )}
-        {/* <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              label: "CharacterDialog-duplicate",
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              props.onDuplicate();
-            }}
-          >
-            {t("character-dialog.control.duplicate")}
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            data-cy={`${props.dataCy}.remove`}
-            className={css({
-              label: "CharacterDialog-remove",
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              props.onRemove();
-            }}
-          >
-            {t("character-dialog.control.remove-block")}
-          </Link>
-        </Grid> */}
       </Grid>
     );
   }
@@ -312,9 +282,11 @@ export function BlockByType(
     const hasHelperText = previewContentEditable({
       value: block.meta.helperText,
     });
+
     if (props.hideHelp || (!props.advanced && !hasHelperText)) {
       return null;
     }
+
     return (
       <Box>
         <Grid container alignItems="flex-start" wrap="nowrap">

@@ -40,45 +40,56 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
         <Grid item xs>
           {advanced ? (
             <Box>
-              <TextField
-                InputProps={{
-                  readOnly: props.readonly,
-                }}
-                data-cy={`${props.dataCy}.value`}
-                value={linkState}
-                label={t("character-dialog.label.link")}
-                fullWidth
-                onChange={(e) => {
-                  let linkValue = "";
-                  if (e.target.value) {
-                    linkValue = e.target.value;
-                  }
-                  setLinkState(linkValue);
-                }}
-                error={!isValid}
-                helperText={
-                  isValid
-                    ? undefined
-                    : t("character-dialog.helper-text.invalid-link")
-                }
-              />
-              {props.block.meta?.hasDisplayName && (
+              <Box mb=".5rem">
                 <TextField
                   InputProps={{
                     readOnly: props.readonly,
                   }}
-                  value={props.block.label}
-                  label={t("character-dialog.label.display-name")}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  placeholder="https://..."
+                  data-cy={`${props.dataCy}.value`}
+                  value={linkState}
+                  label={t("character-dialog.label.link")}
                   fullWidth
                   onChange={(e) => {
-                    let label = "";
+                    let linkValue = "";
                     if (e.target.value) {
-                      label = e.target.value;
+                      linkValue = e.target.value;
                     }
-                    props.onLabelChange(label);
+                    setLinkState(linkValue);
                   }}
+                  error={!isValid}
+                  helperText={
+                    isValid
+                      ? undefined
+                      : t("character-dialog.helper-text.invalid-link")
+                  }
                 />
-              )}
+              </Box>
+              <Box>
+                {props.block.meta?.hasDisplayName && (
+                  <TextField
+                    InputProps={{
+                      readOnly: props.readonly,
+                    }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={props.block.label}
+                    label={t("character-dialog.label.display-name")}
+                    fullWidth
+                    onChange={(e) => {
+                      let label = "";
+                      if (e.target.value) {
+                        label = e.target.value;
+                      }
+                      props.onLabelChange(label);
+                    }}
+                  />
+                )}
+              </Box>
             </Box>
           ) : (
             <>
