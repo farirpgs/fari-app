@@ -14,6 +14,7 @@ import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
 import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
+import getStroke from "perfect-freehand";
 import React, { useEffect, useRef, useState } from "react";
 import { Ellipse, Group, Layer, Line, Rect, Stage } from "react-konva";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -122,22 +123,27 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   ? theme.palette.text.primary
                   : object.color;
 
-              // const line = props.roughSVG.linearPath(
-              //   props.object.points.map((p) => [p.x, p.y]),
-              //   {
-              //     stroke: color,
-              //     strokeWidth: strokeWidth,
-              //     roughness: roughness,
-              //     seed: seed,
-              //   }
-              // );
-
               const Comps: Record<ObjectType, () => JSX.Element> = {
                 [ObjectType.Line]: () => {
                   const line = object as ILineObject;
+                  const pointsForPerfectFreeHand = line.points.flatMap((p) => ({
+                    x: p.x,
+                    y: p.y,
+                    pressure: 0,
+                  })) as any;
+
+                  const perfectLines = getStroke(pointsForPerfectFreeHand, {
+                    simulatePressure: true,
+                  });
                   return (
                     <Line
-                      points={line.points.flatMap((p) => [p.x, p.y]) as any}
+                      points={
+                        perfectLines.flatMap((p) => {
+                          const x = p[0];
+                          const y = p[1];
+                          return [x, y];
+                        }) as any
+                      }
                       stroke={color}
                       strokeWidth={5}
                       tension={0.5}

@@ -49,6 +49,7 @@
     "marked": "^2.0.0",
     "netlify-cli": "^3.10.9",
     "peerjs": "^1.2.0",
+    "perfect-freehand": "^0.4.71",
     "react": "^17.0.1",
     "react-color": "^2.18.1",
     "react-dnd": "^13.1.1",
