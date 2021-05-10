@@ -68,6 +68,7 @@ export type ITranslationKeys =
   | "character-dialog.template.Dnd5e"
   | "character-dialog.template.DresdenFilesAccelerated"
   | "character-dialog.template.EdgeOfTheEmpire"
+  | "character-dialog.template.EdgeOfTheEmpire_FR"
   | "character-dialog.template.FateAccelerated"
   | "character-dialog.template.FateCondensed"
   | "character-dialog.template.FateCore"

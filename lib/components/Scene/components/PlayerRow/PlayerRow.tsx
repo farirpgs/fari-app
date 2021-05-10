@@ -543,7 +543,6 @@ export const PlayerRow: React.FC<
                   }}
                 >
                   {
-                    // because of i18n.js to extract translations
                     // prettier-ignore
                     t("player-row.load-character-sheet-dialog.load-and-duplicate")
                   }
