@@ -1112,6 +1112,7 @@ export const CharacterV3Dialog: React.FC<{
                                   >
                                     <IconButton
                                       size="small"
+                                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
                                       onClick={() => {
                                         characterManager.actions.removeBlock(
                                           pageIndex,

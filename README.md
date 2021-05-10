@@ -9,6 +9,7 @@
 - [ ] fix: roll skill modifier on index cards
 - [x] test: character sheet all
 - [x] fix: slot tracker invisible label
+- [ ] fix: index card drag indicator
 
 # THINK
 - [ ] feat: make section help link dynamic
