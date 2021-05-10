@@ -190,7 +190,7 @@ export const EdgeOfTheEmpire_FR = Template.bind({});
     const character = await CharacterFactory.make(
       CharacterTemplates.EdgeOfTheEmpire_FR
     );
-    return { character };
+    return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
 export const EvolutionPulseHydrah = Template.bind({});
