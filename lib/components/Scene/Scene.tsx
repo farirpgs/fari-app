@@ -822,7 +822,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   hiddenIndexCardRecord.actions.toggleAll();
                 }}
               >
-                {hiddenIndexCardRecord.state.indexCardHiddenRecord
+                {hiddenIndexCardRecord.state.areAllCardsVisible
                   ? t("play-route.collapse-all")
                   : t("play-route.expand-all")}
               </Button>
@@ -904,6 +904,9 @@ export const Scene: React.FC<IProps> = (props) => {
                 }
                 onToggleVisibility={(indexCard) => {
                   hiddenIndexCardRecord.actions.toggle(indexCard);
+                }}
+                onTogglePrivate={() => {
+                  sceneManager.actions.toggleIndexCardSection(indexCard, type);
                 }}
                 readonly={!isGM}
                 showClickableSkills={props.mode !== SceneMode.Manage}

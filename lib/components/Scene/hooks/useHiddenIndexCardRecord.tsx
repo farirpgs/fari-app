@@ -1,5 +1,5 @@
 import produce from "immer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IIndexCard, IIndexCardType } from "../../../hooks/useScene/IScene";
 
 export function useHiddenIndexCardRecord(
@@ -8,10 +8,30 @@ export function useHiddenIndexCardRecord(
   const [indexCardHiddenRecord, setIndexCardHiddenRecord] = useState<
     Record<string, boolean>
   >({});
+
   const areAllCardsVisible =
     Object.keys(indexCardHiddenRecord).length === 0
       ? true
       : Object.values(indexCardHiddenRecord).every((c) => !c);
+  useEffect(
+    function keepHiddenRecordsInSync() {
+      setIndexCardHiddenRecord((prev: Record<string, boolean>) => {
+        const newRecord: Record<string, boolean> = {};
+        const indexCardsFromAllTypes = [
+          ...indexCards.public,
+          ...indexCards.private,
+        ];
+        for (const indexCard of indexCardsFromAllTypes) {
+          newRecord[indexCard.id] = prev[indexCard.id] ?? false;
+          for (const subCard of indexCard.subCards) {
+            newRecord[subCard.id] = prev[subCard.id] ?? false;
+          }
+        }
+        return newRecord;
+      });
+    },
+    [indexCards]
+  );
 
   function toggle(indexCard: IIndexCard) {
     setIndexCardHiddenRecord(
@@ -34,11 +54,9 @@ export function useHiddenIndexCardRecord(
           ...indexCards.public,
           ...indexCards.private,
         ];
-        const allIndexCardIds = [];
         for (const indexCard of indexCardsFromAllTypes) {
           draft[indexCard.id] = newValue;
           for (const subCard of indexCard.subCards) {
-            allIndexCardIds.push(subCard.id);
             draft[subCard.id] = newValue;
           }
         }
@@ -48,6 +66,7 @@ export function useHiddenIndexCardRecord(
 
   return {
     state: {
+      areAllCardsVisible,
       indexCardHiddenRecord,
     },
     actions: {
