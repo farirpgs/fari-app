@@ -70,6 +70,12 @@ feat: new Star Wars Edge of The Empire template from @Gpoitras
 
 - fix: edge of the empire character card @Gpoitras
 - feat: edge of the empire french version + storybook @Gpoitras
+- feat: better french translations @chocoporto
+
+**4.0.10**
+
+- feat: [lodash audit fix](https://github.com/fariapp/fari/pull/285)
+- feat: [better german translations](https://github.com/fariapp/fari/pull/283) @TecnoSmurf
 
 # v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
 
