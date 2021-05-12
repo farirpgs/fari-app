@@ -279,6 +279,22 @@ export function useScene(props: IProps) {
     );
   }
 
+  function toggleIndexCardSection(
+    indexCardToMove: IIndexCard,
+    from: IIndexCardType
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.indexCards[from] = draft.indexCards[from].filter(
+          (i) => i.id !== indexCardToMove.id
+        );
+
+        const to: IIndexCardType = from === "public" ? "private" : "public";
+        draft.indexCards[to].unshift(indexCardToMove);
+      })
+    );
+  }
+
   function moveIndexCard(
     dragIndex: number,
     hoverIndex: number,
@@ -555,6 +571,7 @@ export function useScene(props: IProps) {
       fireGoodConfetti,
       loadPlayerCharacter: loadPlayerCharacter,
       loadScene,
+      toggleIndexCardSection,
       moveIndexCard,
       removeIndexCard,
       duplicateIndexCard,
