@@ -246,7 +246,9 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
           "+Rules": [
             "props-from-return-to-the-stars",
             "quick-conflicts-from-spirit-of-the-century",
-            "magic-aspect-based-naration",
+            "magic-aspect-based-narration",
+            "using-ammo-in-fate",
+            "chase",
           ],
         },
       ],
