@@ -25,12 +25,13 @@
 - feat: character sheet wide mode
 - feat: character sheet block width
 - feat: adding a new index cards adds it to the top of the scene
-
-WIP
-
 - feat: new Link building block
 - feat: new Separator building block
 - fix: index card drag and drop
+
+WIP
+
+- doc: scene
 
 # v4.0 New Character Sheet Framework, Data Mangagement
 
