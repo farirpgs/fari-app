@@ -886,9 +886,13 @@ export const Scene: React.FC<IProps> = (props) => {
                 width: "100%",
                 columnSpan: hasChildren ? "all" : "initial",
                 /**
-                 * Disables bottom being cut-off
+                 * Disables bottom being cut-off in Chrome
                  */
                 breakInside: "avoid",
+                /**
+                 * Disables bottom being cut-off in Firefox
+                 */
+                display: "inline-block",
               })}
             >
               <IndexCard
@@ -909,7 +913,6 @@ export const Scene: React.FC<IProps> = (props) => {
                   sceneManager.actions.toggleIndexCardSection(indexCard, type);
                 }}
                 readonly={!isGM}
-                showClickableSkills={props.mode !== SceneMode.Manage}
                 indexCard={indexCard}
                 onRoll={handleSetMyRoll}
                 onPoolClick={(element) => {
