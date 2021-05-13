@@ -28,10 +28,15 @@ import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { ThemeProvider } from "@material-ui/styles";
-import { default as React, useRef, useState } from "react";
+import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import { IDiceRollResult } from "../../domains/dice/Dice";
+import {
+  IDiceCommandOption,
+  IDiceRollResult,
+  RollType,
+} from "../../domains/dice/Dice";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
@@ -56,7 +61,6 @@ export const IndexCard: React.FC<
     indexCard: IIndexCard;
     reactDndIndex: number;
     reactDndType: string;
-    showClickableSkills: boolean;
     canMove: boolean;
     indexCardHiddenRecord: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
@@ -85,6 +89,7 @@ export const IndexCard: React.FC<
   const indexCardSkills = IndexCardSkills.getSkills(
     indexCardManager.state.indexCard.content
   );
+  const diceManager = useContext(DiceContext);
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord[props.indexCard.id];
   const numberOfColumnsForSubCards = useResponsiveValue({
@@ -415,7 +420,6 @@ export const IndexCard: React.FC<
                     canMove={true}
                     reactDndIndex={subCardIndex}
                     readonly={props.readonly}
-                    showClickableSkills={props.showClickableSkills}
                     onPoolClick={props.onPoolClick}
                     onRoll={props.onRoll}
                     indexCardHiddenRecord={props.indexCardHiddenRecord}
@@ -479,7 +483,7 @@ export const IndexCard: React.FC<
     const hasSkills = indexCardSkills.length > 0;
 
     return (
-      <Collapse in={hasSkills && !props.readonly && props.showClickableSkills}>
+      <Collapse in={hasSkills && !props.readonly}>
         <Box px="1rem" py=".5rem">
           <Grid container spacing={1} alignItems="center">
             {indexCardSkills.map((skill, skillIndex) => {
@@ -503,8 +507,22 @@ export const IndexCard: React.FC<
                         return;
                       }
                       const modifier = parseInt(skill.modifier) || 0;
-                      // TODO: fix this
-                      // props.onRoll(skill.label, modifier);
+                      const commandOptionList: Array<IDiceCommandOption> = [
+                        {
+                          type: RollType.DiceCommand,
+                          commandGroupId: "4dF",
+                        },
+                        {
+                          type: RollType.Modifier,
+                          label: skill.label,
+                          modifier: modifier,
+                        },
+                      ];
+
+                      const result = diceManager.actions.roll(
+                        commandOptionList
+                      );
+                      props.onRoll(result);
                     }}
                   >
                     {skill.label} ({skill.modifier})

@@ -7,7 +7,6 @@ import { CharactersContext } from "../../contexts/CharactersContext/CharactersCo
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useUserId } from "../../hooks/useUserId/useUserId";
 
 export const SceneRoute: React.FC<{
@@ -25,7 +24,6 @@ export const SceneRoute: React.FC<{
   const sceneName = sceneManager.state.scene.name;
   const pageTitle = sanitizeSceneName(sceneName);
   const history = useHistory();
-  const { t } = useTranslate();
   const logger = useLogger();
 
   useEffect(() => {

@@ -15,7 +15,6 @@ import { StoryProvider } from "./StoryProvider";
 
 function StorybookIndexCard(props: {
   readonly: boolean;
-  showClickableSkills: boolean;
   indexCard: IIndexCard;
   pinned: boolean;
   playedDuringTurn: boolean;
@@ -63,7 +62,6 @@ function StorybookIndexCard(props: {
             "123": collapse ? true : false,
           }}
           readonly={props.readonly}
-          showClickableSkills={props.showClickableSkills}
           onRoll={(diceRollResult) => {
             handleOnNewRoll(diceRollResult);
           }}
@@ -90,7 +88,6 @@ export default {
   args: {
     indexCard: anIndexCard(),
     readonly: false,
-    showClickableSkills: false,
     pinned: false,
     playedDuringTurn: false,
     width: "350px",
@@ -104,7 +101,6 @@ const Template: Story<IProps> = (args, context) => (
       <StorybookIndexCard
         indexCard={args.indexCard}
         readonly={args.readonly}
-        showClickableSkills={args.showClickableSkills}
         pinned={args.pinned}
         width={args.width}
         playedDuringTurn={args.playedDuringTurn}
@@ -137,7 +133,6 @@ DefaultWithSkills.args = {
     draft.content =
       "Description <br> Description <br> Description <br> [Academic  : 4]";
   }),
-  showClickableSkills: true,
 };
 
 export const Aspect = Template.bind({});
