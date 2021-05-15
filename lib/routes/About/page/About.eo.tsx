@@ -11,7 +11,7 @@ Fari estas <b>Fate RPG Companion</b>-Apo kreita de René-Pier Deshaies-Gélinas 
 
 Jes ja!  Vi povas kontribui al la projekto ĉe  [GitHub](https://github.com/fariapp/fari).
 
-### ^Cu ekzistas ŝanĝoprotokolo ?
+### Ĉu ekzistas ŝanĝoprotokolo ?
 
 Jes, [havu](/changelog).
 
@@ -22,9 +22,9 @@ Jes ja! La justeco de la Ĵetkubilo estas validigita kam ajn oni modifas la kodo
 ### Kie miaj datumoj konserviĝas ?
 
 Ĉiuj viaj datumoj konserviĝas loke en la komputilo, per kiu vi atingas Fari-on.
-Fari ne uzas iajn ajn nubajn datumbazojn, sed ni usas Google Analytics.
+Fari ne uzas iajn ajn nubajn datumbazojn, sed ni uzas _Google Analytics_.
 
-Viaj datumoj povas diskoniĝi al aliuloj, per samtavolaj konektoj, kiam vi komencas aŭ aliĝas al ludon.
+Viajn datumojn vi povas diskonui al aliuloj, per samtavolaj konektoj, kiam vi komencas aŭ aliĝas al ludon.
 
 La samtavola konektaĵo estas fermita, se vi fermas la retumilan langeton.
 
@@ -32,7 +32,7 @@ La samtavola konektaĵo estas fermita, se vi fermas la retumilan langeton.
 
 Vi povas [aĉeti por mi kafon](https://ko-fi.com/rpdeshaies) aŭ helpi al mi konstrui Fari-on per kontribuo ĉe [GitHub](https://github.com/fariapp/fari)
 
-Mi laboras je tio dum mia libera tempo, kaj ia ajn donaco estas alte valorata 😊
+Mi laboras je tio ĉi dum mia libera tempo, kaj ian ajn donacon mi alte valoras 😊
 
 ### Ĉu io alia ?
 
