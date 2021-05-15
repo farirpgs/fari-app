@@ -90,6 +90,7 @@ function useMark() {
   t("common.language.de");
   t("common.language.en");
   t("common.language.es");
+  t("common.language.eo");
   t("common.language.fr");
   t("common.language.gl");
   t("common.language.pt-BR");

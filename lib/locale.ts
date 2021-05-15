@@ -62,6 +62,7 @@ export type ITranslationKeys =
   | "common.language.dev"
   | "common.language.en"
   | "common.language.es"
+  | "common.language.eo"
   | "common.language.fr"
   | "common.language.gl"
   | "common.language.it"
