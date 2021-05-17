@@ -892,7 +892,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 /**
                  * Disables bottom being cut-off in Firefox
                  */
-                display: "inline-block",
+                display: hasChildren ? "block" : "inline-block",
               })}
             >
               <IndexCard

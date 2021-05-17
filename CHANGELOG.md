@@ -28,6 +28,7 @@
 - feat: new Link building block
 - feat: new Separator building block
 - fix: index card drag and drop
+- feat: esperato translations [#290](https://github.com/fariapp/fari/pull/290) @ejheil
 
 WIP
 

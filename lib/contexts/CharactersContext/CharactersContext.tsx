@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
@@ -6,6 +6,7 @@ import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useGroups } from "../../hooks/useGroups/useGroups";
+import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
 
 type IManagerCallback = (character: ICharacter) => void;
 
@@ -19,22 +20,11 @@ export function useCharacters(props?: { localStorage: Storage }) {
 
   const [mode, setMode] = useState(ManagerMode.Close);
   const managerCallback = useRef<IManagerCallback | undefined>(undefined);
-  const [characters, setCharacters] = useState<Array<ICharacter>>(() => {
-    // load from local storage
-    try {
-      const localStorageCharacters = localStorage.getItem(key);
 
-      if (localStorageCharacters) {
-        const parsed = JSON.parse(localStorageCharacters) as Array<any>;
-        const migrated = parsed.map(CharacterFactory.migrate);
-        return migrated;
-      }
-    } catch (error) {
-      if (!process.env.IS_JEST) {
-        console.error(error);
-      }
-    }
-    return [];
+  const [characters, setCharacters] = useStorageEntities({
+    key: key,
+    localStorage: localStorage,
+    migrationFunction: CharacterFactory.migrate,
   });
 
   const sortedCharacters = useMemo(() => {
@@ -47,16 +37,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }, [characters]);
 
   const groups = useGroups(sortedCharacters, (c) => c.group);
-
-  useEffect(() => {
-    // sync local storage
-    try {
-      const serialized = JSON.stringify(characters);
-      localStorage.setItem(key, serialized);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [characters]);
 
   function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
     setMode(newMode);

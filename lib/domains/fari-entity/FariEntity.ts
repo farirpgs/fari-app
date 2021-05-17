@@ -48,6 +48,25 @@ export const FariEntity = {
     link.download = `${props.name}.fari.json`;
     link.click();
   },
+  loadEntitiesFromStorage<T>(props: {
+    localStorage: Storage;
+    key: string;
+    migrationFunction: (entity: any) => any;
+  }): Array<T> {
+    try {
+      const localStorageScenes = props.localStorage.getItem(props.key);
+      if (localStorageScenes) {
+        const parsed = JSON.parse(localStorageScenes);
+        const migrated = parsed.map(props.migrationFunction);
+        return migrated;
+      }
+    } catch (error) {
+      if (!process.env.IS_JEST) {
+        console.error(error);
+      }
+    }
+    return [];
+  },
   getSize(obj: any) {
     const size = new TextEncoder().encode(JSON.stringify(obj)).length;
     const kiloBytes = size / 1024;
@@ -55,13 +74,13 @@ export const FariEntity = {
 
     return { kiloBytes, megaBytes };
   },
-  formatSize(kiloBytes:number){
+  formatSize(kiloBytes: number) {
     const megaBytes = kiloBytes / 1024;
     const formatted =
       kiloBytes >= 1000
         ? `${megaBytes.toFixed(1).toString()} MB`
         : `${kiloBytes.toFixed(0).toString()} KB`;
 
-        return formatted;
-  }
+    return formatted;
+  },
 };

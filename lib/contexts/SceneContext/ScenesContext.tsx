@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
@@ -6,6 +6,7 @@ import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
+import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
 
 export type ISavableScene = Pick<
   IScene,
@@ -24,21 +25,10 @@ export function useScenes(props?: { localStorage: Storage }) {
   const [mode, setMode] = useState(ManagerMode.Close);
   const managerCallback = useRef<IManagerCallback | undefined>(undefined);
 
-  const [scenes, setScenes] = useState<Array<ISavableScene>>(() => {
-    // load from local storage
-    try {
-      const localStorageScenes = localStorage.getItem(key);
-      if (localStorageScenes) {
-        const parsed = JSON.parse(localStorageScenes);
-        const migrated = parsed.map(SceneFactory.migrate);
-        return migrated;
-      }
-    } catch (error) {
-      if (!process.env.IS_JEST) {
-        console.error(error);
-      }
-    }
-    return [];
+  const [scenes, setScenes] = useStorageEntities<ISavableScene>({
+    key: key,
+    localStorage: localStorage,
+    migrationFunction: SceneFactory.migrate,
   });
 
   const sortedScenes = useMemo(() => {
@@ -51,16 +41,6 @@ export function useScenes(props?: { localStorage: Storage }) {
   }, [scenes]);
 
   const groups = useGroups(sortedScenes, (s) => s.group);
-
-  useEffect(() => {
-    // sync local storage
-    try {
-      const serialized = JSON.stringify(scenes);
-      localStorage.setItem(key, serialized);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [scenes]);
 
   function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
     setMode(newMode);

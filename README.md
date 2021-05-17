@@ -5,11 +5,12 @@
 
 # TODO
 
-- [ ] fix: drag and drop index cards
-- [ ] fix: roll skill modifier on index cards
+- [x] fix: drag and drop index cards
+- [x] fix: roll skill modifier on index cards
 - [x] test: character sheet all
 - [x] fix: slot tracker invisible label
-- [ ] fix: index card drag indicator
+- [x] fix: index card drag indicator
+- [x] fix: inline block positioning on index cards for group cards OR cut of in firefox
 
 # THINK
 - [ ] feat: make section help link dynamic
