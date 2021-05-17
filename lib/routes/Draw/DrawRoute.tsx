@@ -41,11 +41,7 @@ export const DrawRoute: React.FC = (props) => {
           </FateLabel>
         </Box>
 
-        <Box
-          border={`1px solid ${theme.palette.divider}`}
-          maxWidth="600px"
-          margin="0 auto"
-        >
+        <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
           <DrawObjects controls="top" />
         </Box>
       </Container>

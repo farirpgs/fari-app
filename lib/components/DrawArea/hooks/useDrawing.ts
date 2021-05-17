@@ -308,46 +308,6 @@ export function useDrawing(props: {
     konvaEvent: Konva.KonvaEventObject<MouseEvent>
   ) {
     dragPoint.current = getRelativePointerPosition(konvaEvent.target);
-    // const x = pointerEvent.target.x;
-    // const y = pointerEvent.target.y;
-    // setObjects((objects) => {
-    //   return objects.map((object, index) => {
-    //     const shouldUpdate = index === objectIndex;
-    //     if (!shouldUpdate) {
-    //       return object;
-    //     }
-    //     switch (object.type) {
-    //       case ObjectType.Rectangle: {
-    //         return DrawObjectFactory.moveRectangle({
-    //           object: object,
-    //           x: diffX,
-    //           y: diffY,
-    //         });
-    //       }
-    //       case ObjectType.Ellipse: {
-    //         return DrawObjectFactory.moveEllipse({
-    //           object: object,
-    //           x: diffX,
-    //           y: diffY,
-    //         });
-    //       }
-    //       case ObjectType.Token: {
-    //         return DrawObjectFactory.moveToken({
-    //           object: object,
-    //           x: diffX,
-    //           y: diffY,
-    //         });
-    //       }
-    //       default: {
-    //         return DrawObjectFactory.moveLine({
-    //           object: object,
-    //           x: diffX,
-    //           y: diffY,
-    //         });
-    //       }
-    //     }
-    //   });
-    // });
   }
 
   function onDragEnd(
@@ -358,6 +318,7 @@ export function useDrawing(props: {
     const diffX = dropPoint.x - dragPoint.current?.x;
     const diffY = dropPoint.y - dragPoint.current?.y;
     console.log("point move", { dragPoint, dropPoint });
+
     setObjects((objects) => {
       return objects.map((object, index) => {
         const shouldUpdate = index === objectIndex;

@@ -14,13 +14,11 @@ import PaletteTwoToneIcon from "@material-ui/icons/PaletteTwoTone";
 import PanToolTwoToneIcon from "@material-ui/icons/PanToolTwoTone";
 import RadioButtonUncheckedTwoToneIcon from "@material-ui/icons/RadioButtonUncheckedTwoTone";
 import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
-import getStroke from "perfect-freehand";
 import React, { useEffect, useRef, useState } from "react";
 import { Ellipse, Group, Layer, Line, Rect, Stage } from "react-konva";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { ColorPicker } from "../ColorPicker/ColorPicker";
-import { AspectRatio } from "./AspectRatio";
 import {
   DrawingTool,
   IEllipseObject,
@@ -91,9 +89,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
     <>
       {renderActions()}
       {renderOtherActions()}
-      <AspectRatio width={100} ratio={1 / 1}>
-        {renderDrawArea()}
-      </AspectRatio>
+      {renderDrawArea()}
     </>
   );
 
@@ -126,24 +122,49 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               const Comps: Record<ObjectType, () => JSX.Element> = {
                 [ObjectType.Line]: () => {
                   const line = object as ILineObject;
-                  const pointsForPerfectFreeHand = line.points.flatMap((p) => ({
-                    x: p.x,
-                    y: p.y,
-                    pressure: 0,
-                  })) as any;
+                  // const pointsForPerfectFreeHand = line.points.flatMap((p) => ({
+                  //   x: p.x,
+                  //   y: p.y,
+                  //   // pressure: 0,
+                  // })) as any;
 
-                  const perfectLines = getStroke(pointsForPerfectFreeHand, {
-                    simulatePressure: true,
-                  });
+                  // const perfectLines = getStroke(pointsForPerfectFreeHand, {
+                  //   simulatePressure: true,
+                  //   size: 4,
+                  //   thinning: 0.3,
+                  //   smoothing: 0.3,
+                  //   streamline: 0.3,
+                  // }).filter((p) => {
+                  //   const x = p[0];
+                  //   const y = p[1];
+
+                  //   if (x != null && y != null) {
+                  //     return true;
+                  //   }
+                  // });
+
+                  // const linePoints = perfectLines.flatMap((p) => {
+                  const linePoints = line.points.flatMap((p) => {
+                    // const x = p[0];
+                    // const y = p[1];
+                    const x = p.x;
+                    const y = p.y;
+                    // if (isNaN(x) || isNaN(y)) {
+                    //   console.warn(
+                    //     "XY",
+                    //     JSON.stringify(
+                    //       { x, y, perfectLines, pointsForPerfectFreeHand },
+                    //       null,
+                    //       2
+                    //     )
+                    //   );
+                    // }
+                    return [x, y];
+                  }) as any;
+
                   return (
                     <Line
-                      points={
-                        perfectLines.flatMap((p) => {
-                          const x = p[0];
-                          const y = p[1];
-                          return [x, y];
-                        }) as any
-                      }
+                      points={linePoints}
                       stroke={color}
                       strokeWidth={5}
                       tension={0.5}
@@ -165,6 +186,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                         y={rect.form.end.y}
                         width={rect.form.start.x - rect.form.end.x}
                         height={rect.form.start.y - rect.form.end.y}
+                        fill={color}
                         stroke={color}
                         strokeWidth={5}
                         tension={0.5}
@@ -179,12 +201,22 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   return (
                     <>
                       <Ellipse
+                        // draggable={
+                        //   drawingManager.state.drawingTool === DrawingTool.Move
+                        // }
+                        // onDragStart={(e) => {
+                        //   drawingManager.handlers.onDragStart(index, e);
+                        // }}
+                        // onDragEnd={(e) => {
+                        //   drawingManager.handlers.onDragEnd(index, e);
+                        // }}
                         x={(circ.form.start.x + circ.form.end.x) / 2}
                         y={(circ.form.start.y + circ.form.end.y) / 2}
                         radiusX={radiusX > 0 ? radiusX : radiusX * -1}
                         radiusY={radiusY > 0 ? radiusY : radiusY * -1}
                         stroke={color}
                         strokeWidth={5}
+                        fill={color}
                         tension={0.5}
                       />
                     </>
@@ -196,13 +228,15 @@ export const DrawObjects: React.FC<IProps> = (props) => {
               return (
                 <React.Fragment key={index}>
                   <Group
-                    draggable
-                    onDragStart={(e) => {
-                      drawingManager.handlers.onDragStart(index, e);
-                    }}
-                    onDragEnd={(e) => {
-                      drawingManager.handlers.onDragEnd(index, e);
-                    }}
+                    draggable={
+                      drawingManager.state.drawingTool === DrawingTool.Move
+                    }
+                    // onDragStart={(e) => {
+                    //   drawingManager.handlers.onDragStart(index, e);
+                    // }}
+                    // onDragEnd={(e) => {
+                    //   drawingManager.handlers.onDragEnd(index, e);
+                    // }}
                   >
                     {Comps[object.type]()}
                   </Group>
