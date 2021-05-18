@@ -63,6 +63,7 @@ export type ITranslationKeys =
   | "character-dialog.remove-section-confirmation"
   | "character-dialog.save"
   | "character-dialog.saved"
+  | "character-dialog.skill-block.roll"
   | "character-dialog.template.Blank"
   | "character-dialog.template.Dnd5e"
   | "character-dialog.template.DresdenFilesAccelerated"

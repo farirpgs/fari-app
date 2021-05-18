@@ -63,6 +63,7 @@
   "character-dialog.remove-section-confirmation": "Are you sure you want to remove that section",
   "character-dialog.save": "Save",
   "character-dialog.saved": "Saved",
+  "character-dialog.skill-block.roll": "Roll",
   "character-dialog.template.Blank": "Blank",
   "character-dialog.template.Dnd5e": "Dnd 5e",
   "character-dialog.template.DresdenFilesAccelerated": "Dresden Files Accelerated",
