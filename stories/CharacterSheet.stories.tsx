@@ -217,6 +217,7 @@ LoremIpsum.args = {
 function overrideCharacterDateForStorybook(character: ICharacter): ICharacter {
   return {
     ...character,
+    id: "50fa2",
     lastUpdated: dayJS("2021-01-01").unix(),
   };
 }
