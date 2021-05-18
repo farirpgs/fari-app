@@ -152,11 +152,11 @@ export const SkillContentNoModifier = Template.bind({});
 SkillContentNoModifier.args = makeNormalArgs(BlockType.Skill, {
   label:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",
-  value: "",
+  value: "333",
   meta: {
     commands: ["1d20"],
     checked: true,
-    // hideModifier: true,
+    hideModifier: true,
     helperText:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",
   },
