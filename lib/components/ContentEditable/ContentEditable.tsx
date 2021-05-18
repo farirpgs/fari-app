@@ -18,10 +18,10 @@ const DomPurifyOptions: {
   onInputChangeOptions: Config;
 } = {
   onPropsChangeOptions: {
-    ALLOWED_TAGS: ["br", "img"],
+    ALLOWED_TAGS: ["br", "i", "b", "img"],
   },
   onInputChangeOptions: {
-    ALLOWED_TAGS: ["br"],
+    ALLOWED_TAGS: ["br", "i", "b"],
   },
 };
 
@@ -144,6 +144,12 @@ export const ContentEditable: React.FC<
     }
   }
 
+  function handleOnPaste(e: React.ClipboardEvent<HTMLSpanElement>) {
+    e.preventDefault();
+    const clipboardDataAsText = e.clipboardData.getData("text/plain");
+    document.execCommand("inserttext", false, clipboardDataAsText);
+  }
+
   return (
     <>
       <span
@@ -152,6 +158,7 @@ export const ContentEditable: React.FC<
         ref={$ref}
         contentEditable={!props.readonly}
         onInput={handleOnChange}
+        onPaste={handleOnPaste}
         className={cx(
           css({
             "outline": "none",
@@ -168,17 +175,8 @@ export const ContentEditable: React.FC<
               color: theme.palette.text.hint,
               content: props.placeholder ? `"${props.placeholder}"` : undefined,
             },
-            "& *": {
-              all: "unset !important" as any,
-              img: {
-                maxWidth: "90%",
-                padding: ".5rem",
-                margin: "0 auto",
-                display: "flex",
-                position: "relative",
-                cursor: "pointer",
-              },
-            },
+            "& b": { fontWeight: "bold" },
+            "& i": { fontStyle: "italic" },
             "& img": {
               maxWidth: "90% !important" as any,
               padding: ".5rem !important" as any,

@@ -7,26 +7,26 @@
 - feat: pick any color for index cards
 - feat: give ability to add sub cards to index cards
 - feat: use building blocks inside index cards
-- fix: sort private index cards
-- feat: index cards sort options
-- feat: collapse index cards
+- feat: collapse or expand index cards
+- feat: new index cards sort options
+- feat: sort private index cards
 - feat: display character cards from left to right
 - feat: display size (in KB or MB) of each character or scenes in the data manager
-- fix: disable image in content editable components
+- feat: new Image building block
+- feat: new Link building block
+- feat: new Separator building block
 - feat: display player id in player component
 - feat: automatically save a character sheet when assigned by the GM
-- feat: new Image building block
 - feat: duplicate character sheet page
 - feat: duplicate character sheet section
 - feat: better print mode
+- fix: disable image in content editable components
 - fix: print mode temporarily disables dark mode
-- feat: pick a card
-- fix: move section weird behaviors
+- feat: nice "Pick from deck of card" dice command
 - feat: character sheet wide mode
 - feat: character sheet block width
+- fix: move section weird behaviors
 - feat: adding a new index cards adds it to the top of the scene
-- feat: new Link building block
-- feat: new Separator building block
 - fix: index card drag and drop
 - feat: esperato translations [#290](https://github.com/fariapp/fari/pull/290) @ejheil
 

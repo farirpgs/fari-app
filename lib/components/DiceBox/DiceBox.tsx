@@ -9,6 +9,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
+import { FontFamily } from "../../constants/FontFamily";
 import { useZIndex } from "../../constants/zIndex";
 import { arraySort } from "../../domains/array/arraySort";
 import {
@@ -393,7 +394,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                   <span
                     className={css({
                       label: "DiceBoxResult-rollType-DiceCommand-value",
-                      fontFamily: isFate ? "fate" : "inherit",
+                      fontFamily: isFate ? FontFamily.Fate : "inherit",
                       verticalAlign: "middle",
                     })}
                   >

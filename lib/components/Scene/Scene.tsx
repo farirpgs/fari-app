@@ -89,7 +89,7 @@ export enum SceneMode {
 }
 
 enum SortMode {
-  Custom = "Custom",
+  None = "Custom",
   GroupFirst = "GroupFirst",
   PinnedFirst = "PinnedFirst",
 }
@@ -177,7 +177,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
     string | undefined
   >(undefined);
-  const [sort, setSort] = useState<SortMode>(SortMode.Custom);
+  const [sort, setSort] = useState<SortMode>(SortMode.None);
   const [tab, setTab] = useState<
     "player-characters" | "public" | "private" | "zones" | "gm-notes"
   >("public");
@@ -810,7 +810,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     setSort(e.target.value as SortMode);
                   }}
                 >
-                  <option value={SortMode.Custom}>Custom</option>
+                  <option value={SortMode.None}>None</option>
                   <option value={SortMode.GroupFirst}>Groups First</option>
                   <option value={SortMode.PinnedFirst}>Pinned Firsts</option>
                 </Select>
@@ -898,7 +898,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <IndexCard
                 type={type}
                 reactDndIndex={index}
-                canMove={sort === SortMode.Custom && isGM}
+                canMove={sort === SortMode.None && isGM}
                 key={indexCard.id}
                 reactDndType={"scene.index-cards"}
                 data-cy={`scene.aspect.${index}`}

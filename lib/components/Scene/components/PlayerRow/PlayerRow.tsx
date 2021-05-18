@@ -21,6 +21,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React, { useState } from "react";
+import { FontFamily } from "../../../../constants/FontFamily";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
@@ -34,7 +35,7 @@ import { CircleTextField } from "../../../../routes/Character/components/Charact
 import {
   DiceBonusLabel,
   DiceBox,
-  DiceBoxResult,
+  DiceBoxResult
 } from "../../../DiceBox/DiceBox";
 import { FateLabel } from "../../../FateLabel/FateLabel";
 
@@ -501,7 +502,7 @@ export const PlayerRow: React.FC<
       <Typography
         className={css({
           fontSize: ".8rem",
-          fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+          fontFamily: FontFamily.Console,
           color: theme.palette.text.secondary,
         })}
         display="inline"

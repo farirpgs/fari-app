@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton";
 import useTheme from "@material-ui/core/styles/useTheme";
@@ -7,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import React, { useState } from "react";
+import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 
 export function CircleTextField(props: {
@@ -14,9 +16,12 @@ export function CircleTextField(props: {
   "value": string | undefined;
   "readonly"?: boolean;
   "highlight"?: boolean;
+  "button"?: boolean;
   onChange?(value: string): void;
   onIncrement?(): void;
   onDecrement?(): void;
+  onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
+  onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }) {
   const theme = useTheme();
   const [hover, setHover] = useState(false);
@@ -29,6 +34,7 @@ export function CircleTextField(props: {
     },
   });
 
+  const cursor = props.button ? "pointer !important" : "inherit";
   const areCounterButtonsVisible = hover || focus;
 
   return (
@@ -36,7 +42,18 @@ export function CircleTextField(props: {
       className={css({
         position: "relative",
         padding: ".2rem",
+        cursor: cursor,
       })}
+      onClick={(e) => {
+        if (props.button) {
+          props.onClick?.(e);
+        }
+      }}
+      onContextMenu={(e) => {
+        if (props.button) {
+          props.onContextMenu?.(e);
+        }
+      }}
       onPointerEnter={() => {
         setHover(true);
       }}
@@ -44,76 +61,101 @@ export function CircleTextField(props: {
         setHover(false);
       }}
     >
-      <TextField
-        type="number"
-        data-cy={props["data-cy"]}
-        value={value}
-        variant="outlined"
-        className={css({
-          textAlign: "center",
-        })}
-        onFocus={() => {
-          setFocus(true);
+      <ConditionalWrapper
+        condition={props.button}
+        wrapper={(children) => {
+          return (
+            <ButtonBase className={css({ borderRadius: "50%" })}>
+              {children}
+            </ButtonBase>
+          );
         }}
-        onBlur={() => {
-          setFocus(false);
-        }}
-        disabled={props.readonly}
-        onChange={(e) => {
-          if (!props.onChange) {
-            return;
-          }
-          if (!e.target.value) {
-            setValue("");
-          } else {
-            const parsed = parseInt(e.target.value);
-            if (parsed > 999) {
-              setValue("999");
-            } else {
-              setValue(parsed.toString());
+      >
+        <TextField
+          type="number"
+          data-cy={props["data-cy"]}
+          value={value}
+          variant="outlined"
+          className={css({
+            textAlign: "center",
+            cursor: cursor,
+          })}
+          onFocus={() => {
+            setFocus(true);
+          }}
+          onBlur={() => {
+            setFocus(false);
+          }}
+          disabled={props.readonly || props.button}
+          onChange={(e) => {
+            if (!props.onChange) {
+              return;
             }
-          }
-        }}
-        InputProps={{
-          className: css({
-            "width": "3rem",
-            "height": "3rem",
-            "borderRadius": "50%",
-            "background": props.highlight
-              ? theme.palette.primary.main
-              : "inherit",
-            "&&": {
-              color: props.highlight
-                ? theme.palette.getContrastText(theme.palette.primary.main)
+            if (!e.target.value) {
+              setValue("");
+            } else {
+              const parsed = parseInt(e.target.value);
+              if (parsed > 999) {
+                setValue("999");
+              } else {
+                setValue(parsed.toString());
+              }
+            }
+          }}
+          InputProps={{
+            className: css({
+              "cursor": cursor,
+              "width": "3rem",
+              "height": "3rem",
+              "borderRadius": "50%",
+              "background": props.highlight
+                ? theme.palette.primary.main
                 : "inherit",
-            },
-            "transition": theme.transitions.create(["color", "background"]),
-            "boxShadow": theme.shadows[1],
-          }),
-        }}
-        inputProps={{
-          className: css({
-            "fontWeight": theme.typography.fontWeightBold,
-            "textAlign": "center",
-            // this disables the up/down browser arrows
-            "padding": "0",
-            "&[type=number]": {
-              MozAppearance: "textfield",
-            },
-            "&::-webkit-outer-spin-button": {
-              WebkitAppearance: "none",
-              margin: 0,
-            },
-            "&::-webkit-inner-spin-button": {
-              WebkitAppearance: "none",
-              margin: 0,
-            },
-          }),
-        }}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+              "&&": {
+                color: props.highlight
+                  ? theme.palette.getContrastText(theme.palette.primary.main)
+                  : "inherit",
+              },
+              "transition": theme.transitions.create(["color", "background"], {
+                duration: theme.transitions.duration.shortest,
+              }),
+              "boxShadow": theme.shadows[1],
+              // "&:hover": {
+              //   background: props.highlight
+              //     ? theme.palette.primary.main
+              //     : theme.palette.primary.light,
+              //   color: props.highlight
+              //     ? theme.palette.getContrastText(theme.palette.primary.main)
+              //     : theme.palette.getContrastText(theme.palette.primary.light),
+              // },
+            }),
+          }}
+          inputProps={{
+            className: css({
+              "cursor": cursor,
+              "fontWeight": theme.typography.fontWeightBold,
+              "textAlign": "center",
+              // this disables the up/down browser arrows
+              "padding": "0",
+              "&[type=number]": {
+                MozAppearance: "textfield",
+              },
+              "&::-webkit-outer-spin-button": {
+                WebkitAppearance: "none",
+                margin: 0,
+              },
+              "&::-webkit-inner-spin-button": {
+                WebkitAppearance: "none",
+                margin: 0,
+              },
+            }),
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </ConditionalWrapper>
+
       {!props.readonly && props.onDecrement && (
         <Fade in={areCounterButtonsVisible}>
           <IconButton

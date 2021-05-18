@@ -27,6 +27,12 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
     delay: 750,
   });
 
+  const [linkLabel, setLinkLabel] = useLazyState({
+    value: props.block.label,
+    onChange: props.onLabelChange,
+    delay: 750,
+  });
+
   const linkText =
     props.block.meta?.hasDisplayName && props.block.label !== ""
       ? props.block.label
@@ -77,15 +83,15 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    value={props.block.label}
-                    label={t("character-dialog.label.display-name")}
+                    value={linkLabel}
+                    label={t("character-dialog.block-type.link.display-name")}
                     fullWidth
                     onChange={(e) => {
                       let label = "";
                       if (e.target.value) {
                         label = e.target.value;
                       }
-                      props.onLabelChange(label);
+                      setLinkLabel(label);
                     }}
                   />
                 )}

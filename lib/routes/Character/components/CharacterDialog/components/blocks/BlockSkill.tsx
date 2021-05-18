@@ -9,8 +9,6 @@ import { ContentEditable } from "../../../../../../components/ContentEditable/Co
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import { ISkillBlock } from "../../../../../../domains/character/types";
-import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
-import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
@@ -21,7 +19,6 @@ import {
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CircleTextField } from "../CircleTextField";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
-import { Pool } from "./BlockDicePool";
 
 export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const { t } = useTranslate();
@@ -38,64 +35,50 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const isSelected = diceManager.state.pool.some(
     (p) => p.blockId === props.block.id
   );
-  const [firstCommandGroup] =
-    props.block.meta?.commands?.map((commandId) => {
-      return AllDiceCommandGroups[commandId];
-    }) ?? [];
+
   const blockDiceCommandOptions = BlockSelectors.getDiceCommandOptionsFromBlock(
     props.block
   );
 
-  const RollIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
+  const button = !props.readonly && !props.advanced;
 
   return (
     <>
       <Box>
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
-          <Grid item>
-            {props.readonly ? (
-              <RollIcon className={css({ fontSize: "2rem" })} />
-            ) : (
-              <Pool
-                tooltipTitle={t("character-dialog.skill-block.roll")}
-                fontSize="1.2rem"
-                borderRadius="8px"
-                selected={isSelected}
-                clickable={!props.readonly}
-                borderStyle={"solid"}
-                onContextMenu={(event) => {
-                  event.preventDefault();
-
-                  diceManager.actions.setOptions({ listResults: false });
-                  diceManager.actions.addOrRemovePoolElement({
-                    blockId: props.block.id,
-                    blockType: props.block.type,
-                    label: props.block.label,
-                    commandOptionList: blockDiceCommandOptions,
-                  });
-                }}
-                onClick={() => {
-                  const diceRollResult = diceManager.actions.roll(
-                    blockDiceCommandOptions,
-                    { listResults: false }
-                  );
-                  props.onRoll(diceRollResult);
-                }}
-              >
-                <RollIcon className={css({ fontSize: "2.3rem" })} />
-              </Pool>
-            )}
-          </Grid>
           {!props.block.meta.hideModifier && (
             <Grid item>
-              <CircleTextField
-                data-cy={`${props.dataCy}.value`}
-                value={state}
-                readonly={props.readonly}
-                onChange={(newState) => {
-                  setState(newState);
-                }}
-              />
+              <Tooltip title={button ? t("dice-fab.roll") : ""}>
+                <Box>
+                  <CircleTextField
+                    data-cy={`${props.dataCy}.value`}
+                    value={state}
+                    highlight={isSelected}
+                    readonly={props.readonly}
+                    button={button}
+                    onContextMenu={(event) => {
+                      event.preventDefault();
+                      diceManager.actions.setOptions({ listResults: false });
+                      diceManager.actions.addOrRemovePoolElement({
+                        blockId: props.block.id,
+                        blockType: props.block.type,
+                        label: props.block.label,
+                        commandOptionList: blockDiceCommandOptions,
+                      });
+                    }}
+                    onClick={() => {
+                      const diceRollResult = diceManager.actions.roll(
+                        blockDiceCommandOptions,
+                        { listResults: false }
+                      );
+                      props.onRoll(diceRollResult);
+                    }}
+                    onChange={(newState) => {
+                      setState(newState);
+                    }}
+                  />
+                </Box>
+              </Tooltip>
             </Grid>
           )}
           <Grid item xs>

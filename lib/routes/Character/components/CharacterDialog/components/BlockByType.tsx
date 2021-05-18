@@ -34,6 +34,7 @@ export function BlockByType(
     "onLabelChange" | "onValueChange" | "onMetaChange"
   > & {
     hideHelp?: boolean;
+    otherActions?: JSX.Element;
     onChange(newBlock: IBlock): void;
     onToggleSplit?(): void;
     onMainPointCounterChange?(): void;
@@ -274,6 +275,7 @@ export function BlockByType(
             </Link>
           </Grid>
         )}
+        {props.otherActions && props.otherActions}
       </Grid>
     );
   }

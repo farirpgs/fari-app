@@ -585,7 +585,8 @@ export const CharacterV3Dialog: React.FC<{
             <Box pt=".5rem">
               <Typography>
                 {date.format("lll")} / {"v"}
-                {characterManager.state.character?.version}
+                {characterManager.state.character?.version} /{" "}
+                {characterManager.state.character?.id.slice(0, 5)}
               </Typography>
             </Box>
           </Grid>

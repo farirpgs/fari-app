@@ -30,6 +30,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { ThemeProvider } from "@material-ui/styles";
 import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
+import { FontFamily } from "../../constants/FontFamily";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import {
@@ -160,16 +161,19 @@ export const IndexCard: React.FC<
                             })}
                           >
                             <DragIndicatorIcon
+                              className={css({
+                                transition: theme.transitions.create("color"),
+                              })}
                               htmlColor={
                                 dndRenderProps.isOver
-                                  ? theme.palette.text.primary
-                                  : theme.palette.text.hint
+                                  ? paper.primary
+                                  : paper.secondary
                               }
                             />
                           </IconButton>
                         </Tooltip>
-                        {children}
                       </div>
+                      {children}
                     </>
                   );
                 }}
@@ -213,6 +217,7 @@ export const IndexCard: React.FC<
                                     indexCardManager.actions.addBlock(
                                       blockType
                                     );
+                                    setAdvanced(true);
                                   }}
                                 />
                               </Box>
@@ -354,7 +359,12 @@ export const IndexCard: React.FC<
                     size="small"
                     data-cy={`${props["data-cy"]}.reset`}
                     onClick={() => {
-                      indexCardManager.actions.reset();
+                      const confirmed = confirm(
+                        t("index-card.reset-confirmation")
+                      );
+                      if (confirmed) {
+                        indexCardManager.actions.reset();
+                      }
                     }}
                   >
                     <RotateLeftIcon htmlColor={paper.primary} />
@@ -471,6 +481,40 @@ export const IndexCard: React.FC<
                 onRoll={(diceRollResult) => {
                   props.onRoll(diceRollResult);
                 }}
+                otherActions={
+                  <>
+                    <Grid item>
+                      <Link
+                        component="button"
+                        variant="caption"
+                        data-cy={`index-card.${block.label}.duplicate`}
+                        className={css({
+                          label: "CharacterDialog-duplicate",
+                        })}
+                        onClick={() => {
+                          indexCardManager.actions.duplicateBlock(block);
+                        }}
+                      >
+                        {t("character-dialog.control.duplicate")}
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link
+                        component="button"
+                        variant="caption"
+                        data-cy={`index-card.${block.label}.remove`}
+                        className={css({
+                          label: "CharacterDialog-remove",
+                        })}
+                        onClick={() => {
+                          indexCardManager.actions.removeBlock(block);
+                        }}
+                      >
+                        {t("character-dialog.control.remove-block")}
+                      </Link>
+                    </Grid>
+                  </>
+                }
               />
             </Box>
           );
@@ -569,8 +613,8 @@ export const IndexCard: React.FC<
                   <Tooltip
                     title={
                       props.type === "public"
-                        ? t("index-card.mark-public")
-                        : t("index-card.mark-private")
+                        ? t("index-card.mark-private")
+                        : t("index-card.mark-public")
                     }
                   >
                     <IconButton
@@ -581,9 +625,9 @@ export const IndexCard: React.FC<
                       }}
                     >
                       {props.type === "public" ? (
-                        <VisibilityIcon htmlColor={paper.primary} />
-                      ) : (
                         <VisibilityOffIcon htmlColor={paper.primary} />
+                      ) : (
+                        <VisibilityIcon htmlColor={paper.primary} />
                       )}
                     </IconButton>
                   </Tooltip>
@@ -683,6 +727,10 @@ export const IndexCard: React.FC<
             id={props.id}
             data-cy={`${props["data-cy"]}.title`}
             value={indexCardManager.state.indexCard.title}
+            className={css({
+              fontFamily: FontFamily.HandWriting,
+              fontSize: "1.8rem",
+            })}
             readonly={props.readonly}
             onChange={(newTitle) => {
               indexCardManager.actions.setTitle(newTitle);
@@ -720,6 +768,10 @@ export const IndexCard: React.FC<
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}
             readonly={props.readonly}
+            // className={css({
+            //   fontFamily: FontFamily.HandWriting,
+            //   fontSize: "1.5rem",
+            // })}
             border
             placeholder="..."
             value={indexCardManager.state.indexCard.content}

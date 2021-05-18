@@ -117,7 +117,170 @@ Use the `...` menu on the right and either click `Load Scene` or `Clone And Load
 
 # Managing Scenes
 
-🚧 👷 🚧
+This guide will cover how you can create and organize your Scenes inside Fari.
+
+## What are Scenes used for ?
+
+When you play table-top RPGs in real life, each scene will probably consists of a bunch of index cards laid out all over a table.
+
+Those cards will probably be of different colors, have text, numbers and checkboxes doodled all over them.
+
+Fari Scenes are organized exactly like that. Each scene is a board which you can use to add index cards on!
+
+![Scene Example](https://gyazo.com/ff7a89a873c9e020497c9804fa4ec515.png)
+
+> ### What kind of content can I add on index cards ?
+>
+> To make index cards as versatile as possible, Fari leverages the building blocks framework used by the character sheets to let you add any type of content you want to index card.
+>
+> \> **Read more about the different building blocks you can use [here](/fari-wiki/managing-characters?goTo=blocks)**
+
+## Public and Private Index Cards
+
+Each scene support two types of index cards: `Public` and `Private`.
+
+`Public` cards are things you want everyone at your table to see. While the `Private` cards are only going to be visible to the game master!
+
+As the GM, you can use the private index cards to keep some aces up your sleeves or introduces some bad guys or interesting aspects during play.
+
+### Moving a card from one section to another
+
+When you create a private index card, it is possible to move it out of this section and into the public section.
+
+The opposite is also totally possible.
+
+If you want to do this, simply click on the `Mark Public/Private` button at the top right corner of the index card.
+
+![Mark Public/Private](https://gyazo.com/d121694e8673e28e573e24ca4deee667.png)
+
+## Notes
+
+Each scene has also a basic note field that you can use if you want to save some information like scene recap or things like that.
+
+![Scene Notes](https://gyazo.com/11335b29d602c811917ff5572e0d815a.png)
+
+## Index Cards Quick Templates
+
+Like said previously, Index Cards are built using the character sheet building blocks.
+
+To help you quickly add index cards during play, Fari as 5 quick templates buttons to add:
+
+- An Index Card
+- An Aspect
+- A Boost
+- An NPC
+- A Bad Guy
+
+![Quick Templates Buttons](https://gyazo.com/37a2fbe4267992b6830595a3e72b1872.png)
+![Quick Templates](https://gyazo.com/7b3ddf3e7b6542c941135ddf9b06f965.png)
+
+> ### Wait a minute, aren't most of those pretty Fate Specific ?
+>
+> Yes they are. Fari was initially create as a Fate RPG online companion.
+>
+> For now it is not possible for GMs to create custom quick index cards templates, but rest assure that it is something that we are probably going to add in the future :)
+
+## Sorting Index Cards
+
+Scenes can become pretty messy over time. That why Fari offers 3 index card sorting functions
+
+- `None`: Index Cards can be freely re-organized by the GM. Using this options lets the GM define how index cards are organized
+- `Group First`: Index Cards can contain sub cards, this sorting function will keep those group cards at the top, followed by cards without sub cards
+- `Pinned First`: Cards can also be `Pinned`. Using this sort function will keep the pinned cards first followed by unpinned cards.
+
+![Sorting Index Cards](https://gyazo.com/726fa5f333fd9320dfce6d504ff8db8a.png)
+
+## Collapsing or Expanding Index Cards
+
+Since scenes can become quite big and cluttered as you play, another useful features for organizing your index cards is the `Collapse/Expand` feature.
+
+Using either the top level `Collapse All / Expand All` button or by clicking on the `Collapse/Expand` arrow on an index card, you can minimize the space index cards take by hiding all the content of the card except for the title.
+
+![Collapse All / Expand All](https://gyazo.com/2c2db9625571fde31afc1ff269d38cec.png)
+![Collapse / Expand Arrow](https://gyazo.com/a81824f73a959da4c72008de7cc64d0b.png)
+
+## Index Card Content
+
+Each index card contains by default two text field: a `Title` field and a `Content/Notes` field.
+
+Both fields can be used to add content to help describe what that card is about.
+
+The title field as a label attached to it that by default says `Index Card`.
+The content field also as a label, but this one says `Notes` by default.
+
+Both of those labels can be changed to your liking.
+
+![Index Card Text Fields](https://gyazo.com/eee55be60c3175a4d317ebadbee8fa4f.png)
+
+## Index Card Controls
+
+The following section will go over the different controls that index cards have and what you can do with them
+
+### Color Picker
+
+By default, index cards have a white background. But the cool thing is that you can change this color to what ever you like by using the index card color picker.
+
+If you use a light color, all the content and text of the card will be black. On the other hand, if your card is darker, all the content and the text will be white to make sure that it's always easy to see what is written on the cards.
+
+This feature is super useful if you want to make a card stand-out from the lot!
+
+![Change Index Card Color](https://gyazo.com/3d04bd6d92a4529d86e92dc27e909b37.gif)
+
+### Initiative Tracker
+
+Each index card has an initiative tracker which is represented by the little icon of a person waving!
+
+You can use this to track if an npc has acted during the initiative or is still waiting for their turn
+
+![Initiative Tracker](https://gyazo.com/02c983f637dc26c912e9e5617660a344.png)
+
+### Pin
+
+Fari also offers you the ability to pin index cards.
+
+When an index card is pinned, it will elevate itself a bit from the board as to stand out from the rest of the cards.
+
+Pinned cards are useful since they have some mechanical benefits when used during play.
+
+First off, if you reset a scene or load a new scene, all pinned cards will be copied over from your previous scene to the new one.
+
+The other benefit is that it is possible to sort index cards by showing pinned cards first. This is convenient if you want to always display a couple of cards before the rest.
+
+### Adding Sub Cards
+
+As you can see, index cards are pretty flexible, but Fari as even more to offer.
+
+Top level index cards have the ability can have sub cards associated with them!
+
+You can use this feature to group cards together, or to describe zones with certain cards associated with them.
+
+![Sub Cards](https://gyazo.com/810c375bb03944fe966868ec9753af9e.gif)
+
+### Adding Building Blocks
+
+Like mentioned earlier, it is possible to add the same kind of building blocks supported by Fari's Character Sheets, but inside index cards.
+
+If you want to know more about what kind of blocks Fari supports, you can [read more about it here](/fari-wiki/managing-characters?goTo=blocks).
+
+To add a new block to an index card, click on the Add Block button and select the type of block you want to add.
+
+![Add Block](https://gyazo.com/675e2322017a629036688f5672804108.png)
+
+Afterwards, sky is the limit. You can use this to add more detail or more dynamic fields to you cards. You could also use this to build relatively simple NPCs or add countdowns to your scenes.
+
+![Index Card with Blocks](https://gyazo.com/459b64b8658cbdc3537c27226f8038c8.png)
+
+#### Advanced Mode
+
+Like with the character sheet, you can toggle the index card's `Advanced Mode` to show the blocks' advanced options
+
+![Index Card Advanced Mode](https://gyazo.com/59caaea61dce0fe88661b9adc89f914b.gif)
+
+### Duplicate, Reset, Delete
+
+If you can to either duplicate, delete or reset an index card to their initial state, simply use of on the three action buttons at the bottom right corner of the card to do those operations
+
+![Duplicate/Reset/Delete](https://gyazo.com/2004336c36c90942e6da2e569777b35e.png)
 
 # Managing Characters
 
@@ -207,7 +370,7 @@ Same as with pages, you can duplicate a section so that the creation of similar 
 
 Blocks are at the core of Fari's character sheets. They are like Legos that you can use to create something incredible.
 
-Fari currently supports 6 different types of blocks
+Fari currently supports 9 different types of blocks
 
 - Text
 - Numeric
@@ -215,6 +378,9 @@ Fari currently supports 6 different types of blocks
 - Dice Pool
 - Point Counter
 - Slot Tracker
+- Image
+- Link
+- Separator
 
 ![Different Types of Blocks](https://gyazo.com/ede9dec5d82ae085bdf04185db66a156.png)
 
@@ -293,6 +459,28 @@ Slot trackers let you add a block where you can have a bunch of checkboxes that 
 
 ![Slot Tracker Block](https://gyazo.com/45123ed0af8ae1772788b34278300c80.png)
 
+#### Image Block
+
+Image block lets you add a link to an image or gif hosted somewhere on the web so that it is easily available inside Fari
+
+![Image Block](https://gyazo.com/cc5ccee2a2aeaf389cdc216e4a186388.gif)
+
+#### Separator Block
+
+The Separator Block is useful to split complex sections so that they are easier to look and things a better organized.
+
+- `Add Label`: Use this option to add a label to the separator block.
+
+![Separator Block](https://gyazo.com/57e2b7a87d282fd5fb3353a04cf5d0f2.png)
+
+#### Link Block
+
+If you have a wiki, or want to have references to external resources inside your character sheets; you can use the Link block to link to achieve this.
+
+- `Show Display Name`: Use this option to add a display name to your link instead of displaying the link itself.
+
+![Link Block](https://gyazo.com/c942e54dd69a1f9481a9821a435e5ea0.png)
+
 ### Generic Block Controls
 
 Blocks are all based around the same idea, for that reason all types of blocks have a similar set of actions you can use to help you create a nice character sheet.
@@ -317,7 +505,7 @@ By using the following syntax `[skill: modifier]` inside an Index Card descripti
 
 ![Index Card Skill Modifier](https://gyazo.com/04ddec1356bf3b25022341f40d6f3a25.gif)
 
-<!-- # Fari in the Wild
+# Fari in the Wild
 
 ## Actual Plays
 
@@ -325,11 +513,23 @@ Here is a list of actual plays of people playing TTRPGs using Fari.
 
 This is a nice way to learn how people _actually_ use Fari!
 
-- 🚧  -->
+### By the Fate SRD
+
+- [Weird West, Session 2, Learn to Play the Fate RPG (Jan 2021)](https://www.youtube.com/watch?v=Yhoe7tqkf6s)
+- [Weird West: Eastbound, a Fate RPG Actual Play](https://www.youtube.com/watch?v=JHM5tU2-unY)
+- [Guardians of the Firefly, a Sci-fi Crime Mockumentary Fate One Shot](https://www.youtube.com/watch?v=-tE7BtY5zBc)
+- [The Bane of the British Museum Fate One Shot](https://www.youtube.com/watch?v=Q3treoCi_pQ)
+- [SPACE SPIES, a Fate RPG One Shot](https://www.youtube.com/watch?v=WqzL0jqmGIM)
+- [Weird West, Session 4 — Learn to Play Fate](https://www.youtube.com/watch?v=BZKi9UDNG_E)
+
+### Other
+
+- In Spanish
+  - [El Rastro de Cthulhu - Stele Sophie](https://www.youtube.com/watch?v=wSNv2X06_lA)
 
 ## Interview
 
-The folks over at TableTalkRPG interviewed René-Pier, the creator of Fari. Check it out here.
+The folks over at TableTalkRPG interviewed René-Pier, the creator of Fari. Check it out here below.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UudBkVzGQzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
