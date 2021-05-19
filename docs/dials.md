@@ -155,7 +155,7 @@ Magic is diverse and mysterious. No one truly knows the source of magic though t
 > For those who do not want to read all this:
 >
 > - Take an Aspect that represents you characters ability to do magic
-> - Pick sills that accomplish things you want your magic user to be able to accomplish
+> - Pick skills that accomplish things you want your magic user to be able to accomplish
 > - Narrate the use of your skills with magic flare!
 
 ## Mechanics

@@ -7,6 +7,7 @@
 
 - [ ] new Drawer
 - [ ] new Navigation
+- [ ] new player row: https://xd.adobe.com/view/13659674-c494-4de6-a734-01fdc60959c9-4636/
 - [ ] new GM's Characters
 
 
