@@ -729,7 +729,7 @@ export const IndexCard: React.FC<
             value={indexCardManager.state.indexCard.title}
             className={css({
               fontFamily: FontFamily.HandWriting,
-              fontSize: "1.8rem",
+              fontSize: "1.5rem",
             })}
             readonly={props.readonly}
             onChange={(newTitle) => {
@@ -768,10 +768,6 @@ export const IndexCard: React.FC<
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}
             readonly={props.readonly}
-            // className={css({
-            //   fontFamily: FontFamily.HandWriting,
-            //   fontSize: "1.5rem",
-            // })}
             border
             placeholder="..."
             value={indexCardManager.state.indexCard.content}

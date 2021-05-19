@@ -41,7 +41,6 @@ const Patrons = [
   "Randy Oest",
   "Ryan Singer",
   "Aeife O'Brien",
-  "GhostDM",
   "Fluffydumplin",
 ];
 
