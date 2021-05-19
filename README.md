@@ -5,25 +5,14 @@
 
 # TODO
 
-- [x] fix: drag and drop index cards
-- [x] fix: roll skill modifier on index cards
-- [x] test: character sheet all
-- [x] fix: slot tracker invisible label
-- [x] fix: index card drag indicator
-- [x] fix: inline block positioning on index cards for group cards OR cut of in firefox
+- [ ] new Drawer
+- [ ] new Navigation
+- [ ] new GM's Characters
 
-# THINK
-- [ ] feat: make section help link dynamic
-- [ ] Button base on skill for insta roll?
-- [ ] text on slot tracker ?
-- [ ] highlight tab text on click ?
-- [ ] duplicate without advanced mode ?
 
 # NEXT
-- [ ] genesys dice
-- [ ] math functions
-- [ ] table building blocks
-- [ ] image building block
+- [ ] Genesys dice
+- [ ] Dnd math functions ?
 -->
 
 # [Fari](https://fari.app) - The best Fate RPG companion application
