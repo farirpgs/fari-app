@@ -39,8 +39,14 @@ export function arraySort<T>(
         const bString = (getter(b).value as string).toLowerCase();
         const sortResult =
           sortingType === "asc"
-            ? aString.localeCompare(bString)
-            : bString.localeCompare(aString);
+            ? aString.localeCompare(bString, undefined, {
+                numeric: true,
+                sensitivity: "base",
+              })
+            : bString.localeCompare(aString, undefined, {
+                numeric: true,
+                sensitivity: "base",
+              });
         if (sortResult !== 0) {
           return sortResult;
         }

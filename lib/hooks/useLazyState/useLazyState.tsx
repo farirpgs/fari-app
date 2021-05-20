@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function useLazyState<T>(props: {
   value: T;
-  onChange(newValue: T): void;
+  onChange?(newValue: T): void;
   delay: number;
 }) {
   const delay = props.delay;
@@ -52,7 +52,7 @@ export function useLazyState<T>(props: {
     // update parent
     clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
-      latestOnChange.current(valueForOnChange);
+      latestOnChange.current?.(valueForOnChange);
       willUpdateSoon.current = false;
     }, delay);
   }

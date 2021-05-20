@@ -34,11 +34,8 @@ export const listItem = {
     if (!str) {
       return "";
     }
-    const [firstWord, secondWord] = str.split(" ");
+    const [firstWord] = str.split(" ");
 
-    if (firstWord && secondWord) {
-      return firstWord[0] + secondWord[0];
-    }
     return firstWord[0];
   },
 };
