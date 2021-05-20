@@ -406,9 +406,15 @@ export function useScene(props: IProps) {
 
         draft.indexCards.public.forEach((indexCard) => {
           indexCard.playedDuringTurn = false;
+          indexCard.subCards.forEach((subCard) => {
+            subCard.playedDuringTurn = false;
+          });
         });
         draft.indexCards.private.forEach((indexCard) => {
           indexCard.playedDuringTurn = false;
+          indexCard.subCards.forEach((subCard) => {
+            subCard.playedDuringTurn = false;
+          });
         });
       })
     );
