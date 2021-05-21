@@ -259,6 +259,9 @@ ImageContent.args = makeReadonlyArgs(BlockType.Image, {
   },
 });
 export const ImageContentGif = Template.bind({});
+ImageContentGif.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 ImageContentGif.args = makeReadonlyArgs(BlockType.Image, {
   label:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",

@@ -49,6 +49,9 @@ const Template: Story<IProps> = (args, context) => (
 );
 
 export const Default = Template.bind({});
+Default.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 Default.args = {
   rolls: [
     {
