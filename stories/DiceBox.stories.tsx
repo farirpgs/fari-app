@@ -48,6 +48,11 @@ const Template: Story<IProps> = (args, context) => (
   </StoryProvider>
 );
 
+export const Empty = Template.bind({});
+Empty.args = {
+  rolls: [],
+};
+
 export const Default = Template.bind({});
 Default.args = {
   rolls: [

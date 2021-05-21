@@ -1,7 +1,9 @@
+import produce from "immer";
 import React, { useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useGroups } from "../../hooks/useGroups/useGroups";
@@ -114,6 +116,33 @@ export function useScenes(props?: { localStorage: Storage }) {
     });
   }
 
+  function importEntity(sceneFile: FileList | null) {
+    FariEntity.import<ISavableScene>({
+      filesToImport: sceneFile,
+      fariType: "scene",
+      onImport: (sceneToImport) => {
+        const migratedScene = SceneFactory.migrate(sceneToImport);
+        const sceneWithNewTimestamp = produce(
+          migratedScene,
+          (draft: IScene) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        upsert(sceneWithNewTimestamp);
+      },
+    });
+    // logger.info("ScenesManager:onImport");
+  }
+
+  function exportEntity(scene: ISavableScene) {
+    FariEntity.export({
+      element: scene,
+      fariType: "scene",
+      name: scene.name,
+    });
+    // logger.info("ScenesManager:onExport");
+  }
+
   return {
     state: {
       mode: mode,
@@ -128,6 +157,8 @@ export function useScenes(props?: { localStorage: Storage }) {
       upsert,
       remove,
       duplicate,
+      importEntity,
+      exportEntity,
     },
   };
 }

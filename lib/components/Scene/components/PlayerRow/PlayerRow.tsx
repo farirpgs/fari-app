@@ -29,10 +29,10 @@ import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
-import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/CircleTextField";
+import { previewContentEditable } from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
   DiceBox,
@@ -84,11 +84,10 @@ export const PlayerRow: React.FC<
     },
   });
 
-  const textColor = useTextColors(theme.palette.background.default);
   const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
-    : textColor.disabled;
+    : theme.palette.text.secondary;
 
   const hasCharacterSheet = !!props.player.character;
   const [loadCharacterDialogOpen, setLoadCharacterDialogOpen] = useState(false);
@@ -123,26 +122,21 @@ export const PlayerRow: React.FC<
           setHover(false);
         }}
       >
-        <Box py=".5rem" px=".5rem">
+        <Box
+          py=".5rem"
+          px="1rem"
+          mb="1rem"
+          className={css({
+            border: `2px solid ${borderColor}`,
+            borderRadius: "8px",
+          })}
+        >
           <Box>{renderName()}</Box>
 
-          <Box
-            className={css({
-              borderLeft: `2px solid ${borderColor}`,
-              borderRight: `2px solid ${borderColor}`,
-              borderBottom: `2px solid ${borderColor}`,
-              borderBottomLeftRadius: "8px",
-              borderBottomRightRadius: "8px",
-              marginTop: "-1.5rem",
-              marginBottom: ".5rem",
-              paddingTop: "2.25rem",
-              paddingLeft: "1rem",
-              paddingRight: "1rem",
-            })}
-          >
+          <Box mb=".5rem">
             <Box pb=".5rem">{renderDice()}</Box>
             <Box pb=".5rem">{renderPointCounter()}</Box>
-            <Box pb=".5rem">{renderControls()}</Box>
+            <Box>{renderControls()}</Box>
           </Box>
         </Box>
         <Divider light />
@@ -153,7 +147,7 @@ export const PlayerRow: React.FC<
   function renderDice() {
     return (
       <Box>
-        <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
+        <Grid container spacing={1} wrap="nowrap" alignItems="flex-start">
           <Grid item>
             <Box display="flex" justifyContent="flex-end" height="100%">
               <DiceBox
@@ -184,7 +178,12 @@ export const PlayerRow: React.FC<
               </Box>
             </Grid>
             <Grid item xs={12}>
-              <Box>
+              <Box
+                className={css({
+                  color: theme.palette.primary.main,
+                  fontWeight: theme.typography.fontWeightBold,
+                })}
+              >
                 <DiceBoxResult rolls={props.player.rolls} />
               </Box>
             </Grid>
@@ -308,13 +307,7 @@ export const PlayerRow: React.FC<
 
   function renderPointCounter() {
     return (
-      <Grid
-        container
-        justify="flex-start"
-        alignItems="center"
-        spacing={1}
-        wrap="nowrap"
-      >
+      <Grid container justify="flex-start" alignItems="center" wrap="nowrap">
         <Grid item>
           <Box ml="-.5rem">
             <CircleTextField
@@ -367,9 +360,24 @@ export const PlayerRow: React.FC<
           </>
         )}
         {mainPointerBlock?.label && (
-          <Grid item>
-            <FateLabel uppercase={false} noWrap>
-              {mainPointerBlock?.label}
+          <Grid
+            item
+            className={css({
+              alignSelf: "flex-end",
+              marginBottom: ".2rem",
+            })}
+          >
+            <FateLabel
+              uppercase={true}
+              noWrap
+              className={css({
+                color: theme.palette.primary.main,
+                fontSize: ".8rem",
+                fontWeight: theme.typography.fontWeightBold,
+                marginLeft: ".5rem",
+              })}
+            >
+              {previewContentEditable({ value: mainPointerBlock?.label })}
             </FateLabel>
           </Grid>
         )}
@@ -379,7 +387,14 @@ export const PlayerRow: React.FC<
 
   function renderMainName(name: string | undefined) {
     return (
-      <FateLabel title={name} noWrap uppercase={false}>
+      <FateLabel
+        title={name}
+        noWrap
+        uppercase={false}
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+      >
         {name ?? "..."}
       </FateLabel>
     );
@@ -410,68 +425,8 @@ export const PlayerRow: React.FC<
       <>
         <Box>
           <Grid container wrap="nowrap">
-            <Grid item>
-              <Box
-                className={css({
-                  height: "100%",
-                  zIndex: 1,
-                })}
-              >
-                <Tooltip
-                  title={
-                    hasCharacterSheet
-                      ? t("player-row.open-character-sheet")
-                      : props.permissions.canLoadCharacterSheet
-                      ? t("play-route.add-character-sheet")
-                      : ""
-                  }
-                >
-                  <span>
-                    <IconButton
-                      disabled={!canOpenOrLoadSheet}
-                      color={hasCharacterSheet ? "primary" : "default"}
-                      data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
-                      className={css({
-                        "border": `2px solid ${borderColor}`,
-                        "& svg": {
-                          transition: theme.transitions.create(["transform"]),
-                          transform: "scale(1)",
-                        },
-                        "&:hover svg": {
-                          transform: "scale(1.3)",
-                        },
-                      })}
-                      onClick={() => {
-                        if (hasCharacterSheet) {
-                          props.onCharacterSheetOpen();
-                        } else {
-                          handleOnLoadCharacterSheet();
-                        }
-                        logger.info("ScenePlayer:onCharacterSheetButtonPress");
-                      }}
-                    >
-                      {hasCharacterSheet || !canOpenOrLoadSheet ? (
-                        <FaceIcon htmlColor={borderColor} />
-                      ) : (
-                        <CreateIcon htmlColor={borderColor} />
-                      )}
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Box>
-            </Grid>
             <Grid item zeroMinWidth xs>
-              <Box
-                className={css({
-                  borderTop: `2px solid ${borderColor}`,
-                  borderRight: `2px solid ${borderColor}`,
-                  borderBottom: `1px solid ${theme.palette.text.hint}`,
-                  borderTopRightRadius: "8px",
-                  marginLeft: "-1.5rem",
-                  padding: "0 1rem 0 2rem",
-                  height: "100%",
-                })}
-              >
+              <Box mb=".5rem">
                 <Grid
                   container
                   alignItems="center"
@@ -496,6 +451,47 @@ export const PlayerRow: React.FC<
                 </Grid>
               </Box>
             </Grid>
+
+            <Grid item>
+              <Tooltip
+                title={
+                  hasCharacterSheet
+                    ? t("player-row.open-character-sheet")
+                    : props.permissions.canLoadCharacterSheet
+                    ? t("play-route.add-character-sheet")
+                    : ""
+                }
+              >
+                <span>
+                  <IconButton
+                    size="small"
+                    disabled={!canOpenOrLoadSheet}
+                    color={"primary"}
+                    data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
+                    className={css({
+                      visibility: canOpenOrLoadSheet ? "visible" : "hidden",
+                      border: `1px solid ${theme.palette.primary.main}`,
+                      borderRadius: "50%",
+                      boxShadow: theme.shadows[2],
+                    })}
+                    onClick={() => {
+                      if (hasCharacterSheet) {
+                        props.onCharacterSheetOpen();
+                      } else {
+                        handleOnLoadCharacterSheet();
+                      }
+                      logger.info("ScenePlayer:onCharacterSheetButtonPress");
+                    }}
+                  >
+                    {hasCharacterSheet ? (
+                      <FaceIcon htmlColor={borderColor} />
+                    ) : (
+                      <CreateIcon htmlColor={borderColor} />
+                    )}
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </Grid>
           </Grid>
         </Box>
       </>
@@ -508,7 +504,7 @@ export const PlayerRow: React.FC<
         className={css({
           fontSize: ".8rem",
           fontFamily: FontFamily.Console,
-          color: theme.palette.text.secondary,
+          color: theme.palette.text.hint,
         })}
         display="inline"
       >

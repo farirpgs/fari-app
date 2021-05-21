@@ -32,6 +32,7 @@ import { useZIndex } from "../../constants/zIndex";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -40,7 +41,6 @@ import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
-import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
@@ -68,7 +68,6 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
-
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
@@ -76,6 +75,7 @@ export const Page: React.FC<{
   const { t, i18n, currentLanguage } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
   const scenesManager = useContext(ScenesContext);
+  const myStuffManager = useContext(MyStuffContext);
   const charactersManager = useContext(CharactersContext);
   const logger = useLogger();
   const zIndex = useZIndex();
@@ -494,7 +494,7 @@ export const Page: React.FC<{
                 className={linkClassName}
                 data-cy="page.menu.scenes"
                 onClick={() => {
-                  scenesManager.actions.openManager(ManagerMode.Manage);
+                  myStuffManager.actions.open({ folder: "scenes" });
                 }}
               >
                 {t("menu.scenes")}
@@ -505,7 +505,7 @@ export const Page: React.FC<{
                 className={linkClassName}
                 data-cy="page.menu.characters"
                 onClick={() => {
-                  charactersManager.actions.openManager(ManagerMode.Manage);
+                  myStuffManager.actions.open({ folder: "characters" });
                 }}
               >
                 {t("menu.characters")}

@@ -1,10 +1,12 @@
+import produce from "immer";
 import React, { useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
-import { getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
 
@@ -135,6 +137,34 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return characters.some((c) => c.id === id);
   }
 
+  function importEntity(characterFile: FileList | null) {
+    FariEntity.import<ICharacter>({
+      filesToImport: characterFile,
+      fariType: "character",
+      onImport: (characterToImport) => {
+        const migratedCharacter = CharacterFactory.migrate(characterToImport);
+        const characterWithNewTimestamp = produce(
+          migratedCharacter,
+          (draft: ICharacter) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        upsert(characterWithNewTimestamp);
+
+        // logger.info("CharactersManager:onImport");
+      },
+    });
+  }
+
+  function exportEntity(character: ICharacter) {
+    FariEntity.export({
+      element: character,
+      fariType: "character",
+      name: character.name,
+    });
+    // logger.info("CharactersManager:onExport");
+  }
+
   return {
     state: {
       mode,
@@ -151,6 +181,8 @@ export function useCharacters(props?: { localStorage: Storage }) {
       updateIfMoreRecent,
       remove,
       duplicate,
+      importEntity,
+      exportEntity,
     },
     selectors: {
       isInStorage,

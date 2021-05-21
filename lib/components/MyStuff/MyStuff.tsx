@@ -2,6 +2,7 @@ import { css } from "@emotion/css";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,6 +14,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
+import Snackbar from "@material-ui/core/Snackbar";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -21,10 +23,13 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FolderIcon from "@material-ui/icons/Folder";
 import ExportIcon from "@material-ui/icons/GetApp";
 import SearchIcon from "@material-ui/icons/Search";
+import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { Images } from "../../constants/Images";
 import { arraySort } from "../../domains/array/arraySort";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { AppLink } from "../AppLink/AppLink";
 import { listItem } from "../Manager/domains/ListItem";
 
 // https://dribbble.com/shots/15388627-Global-Search
@@ -35,6 +40,7 @@ export type IManagerViewModel = {
   lastUpdated: number;
   group: string | undefined;
   type: string;
+  original: any;
 };
 
 export type IManagerFolders = Record<string, Array<IManagerViewModel>>;
@@ -44,7 +50,10 @@ enum Where {
   Folder,
   Search,
 }
+
 export function MyStuff<TFolders extends string>(props: {
+  open: boolean;
+  onClose(): void;
   folders: IManagerFolders;
   search: string;
   canGoBack: boolean;
@@ -57,6 +66,7 @@ export function MyStuff<TFolders extends string>(props: {
   onImport(folder: TFolders, importPaths: FileList | null): void;
   onExport(folder: TFolders, element: IManagerViewModel): void;
 }) {
+  const { t } = useTranslate();
   const theme = useTheme();
   const [search, setSearch] = useLazyState({
     value: props.search,
@@ -66,11 +76,30 @@ export function MyStuff<TFolders extends string>(props: {
     value: props.folder,
     delay: 750,
   });
+
+  const [deletedSnack, setDeletedSnack] = useState(false);
+  const [deletedObject, setDeletedObject] = useState<
+    { folder: TFolders; element: any } | undefined
+  >(undefined);
+
+  function handleOnUndo() {
+    if (deletedObject) {
+      props.onUndo(deletedObject.folder, deletedObject.element);
+      setDeletedObject(undefined);
+      setDeletedSnack(false);
+    }
+  }
+
+  function handleOnDelete(currentFolder: TFolders, element: IManagerViewModel) {
+    setDeletedObject({ folder: currentFolder, element: element });
+    setDeletedSnack(true);
+    props.onDelete(currentFolder, element);
+  }
+
   const where = getWhere();
 
   function handleSetSearch(newSearch: string) {
     setSearch(newSearch);
-    setFolder(undefined);
   }
 
   function handleGoBack() {
@@ -80,47 +109,88 @@ export function MyStuff<TFolders extends string>(props: {
 
   return (
     <>
-      <Box p="1rem">
-        <Paper component="form">
-          <Box px="1rem" mb="1rem">
-            <Grid container spacing={1} alignItems="center">
-              <Grid item>
-                <Box mr=".5rem" width="30px">
-                  {where === Where.Folders || !props.canGoBack ? (
-                    <img
-                      src={Images.app}
-                      className={css({
-                        display: "flex",
-                        width: "1.5rem",
-                        height: "auto",
-                      })}
-                    />
-                  ) : (
-                    <IconButton size="small" onClick={handleGoBack}>
-                      <ArrowBackIcon />
-                    </IconButton>
-                  )}
-                </Box>
+      <Dialog
+        open={props.open}
+        onClose={props.onClose}
+        fullWidth
+        maxWidth="md"
+        classes={{
+          paper: css({
+            minHeight: "50vh",
+          }),
+        }}
+      >
+        <Snackbar
+          open={deletedSnack}
+          autoHideDuration={6000}
+          onClose={(event, reason) => {
+            if (reason === "clickaway") {
+              return;
+            }
+            setDeletedSnack(false);
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setDeletedSnack(false);
+            }}
+            severity="success"
+            action={
+              <Button color="inherit" size="small" onClick={handleOnUndo}>
+                {t("manager.undo")}
+              </Button>
+            }
+          >
+            {t("manager.deleted")}
+          </Alert>
+        </Snackbar>
+        <Box p="1rem">
+          <Paper component="form" elevation={2}>
+            <Box px="1rem" mb="1rem">
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <Box mr=".5rem" width="30px">
+                    {where === Where.Folders || !props.canGoBack ? (
+                      <img
+                        src={Images.app}
+                        className={css({
+                          display: "flex",
+                          width: "1.5rem",
+                          height: "auto",
+                        })}
+                      />
+                    ) : (
+                      <IconButton size="small" onClick={handleGoBack}>
+                        <ArrowBackIcon />
+                      </IconButton>
+                    )}
+                  </Box>
+                </Grid>
+                <Grid item xs>
+                  <InputBase
+                    placeholder={folder ? folder : "Search..."}
+                    value={search}
+                    onChange={(e) => {
+                      handleSetSearch(e.target.value);
+                    }}
+                  />
+                </Grid>
+                <Grid item>
+                  <SearchIcon className={css({ display: "flex" })} />
+                </Grid>
               </Grid>
-              <Grid item xs>
-                <InputBase
-                  placeholder={folder ? folder : "Search..."}
-                  value={search}
-                  onChange={(e) => {
-                    handleSetSearch(e.target.value);
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <SearchIcon className={css({ display: "flex" })} />
-              </Grid>
+            </Box>
+          </Paper>
+          {where === Where.Folders && renderFolders()}
+          {where === Where.Folder && renderFolder()}
+          {where === Where.Search && renderSearch()}
+          <Grid container justify="flex-end">
+            <Grid item>
+              <AppLink to="/data">{"All My Data"}</AppLink>
             </Grid>
-          </Box>
-        </Paper>
-        {where === Where.Folders && renderFolders()}
-        {where === Where.Folder && renderFolder()}
-        {where === Where.Search && renderSearch()}
-      </Box>
+          </Grid>
+        </Box>
+      </Dialog>
     </>
   );
 
@@ -203,9 +273,11 @@ export function MyStuff<TFolders extends string>(props: {
   }
 
   function renderSearch() {
-    const allElements = Object.keys(props.folders).flatMap((folderName) => {
-      return props.folders[folderName];
-    });
+    const allElements = folder
+      ? props.folders[folder]
+      : Object.keys(props.folders).flatMap((folderName) => {
+          return props.folders[folderName];
+        });
     const searchElements = allElements.filter((e) => {
       const nameLower = e.name.toLowerCase();
       const groupLower = e.group?.toLowerCase() ?? "";
@@ -236,7 +308,7 @@ export function MyStuff<TFolders extends string>(props: {
         <List dense>
           {elementsForLatest.map((element, key) => {
             return (
-              <React.Fragment key={key}>
+              <React.Fragment key={element.id}>
                 <Element
                   element={element}
                   displayType={false}
@@ -244,7 +316,7 @@ export function MyStuff<TFolders extends string>(props: {
                     props.onSelect(currentFolder, element);
                   }}
                   onDelete={() => {
-                    props.onDelete(currentFolder, element);
+                    handleOnDelete(currentFolder, element);
                   }}
                   onDuplicate={() => {
                     props.onDuplicate(currentFolder, element);
@@ -296,7 +368,7 @@ export function MyStuff<TFolders extends string>(props: {
               <List dense>
                 {sortedGroupItems.map((element) => {
                   return (
-                    <React.Fragment key={key}>
+                    <React.Fragment key={element.id}>
                       <Element
                         element={element}
                         displayType={displayType}

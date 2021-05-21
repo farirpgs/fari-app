@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 import { IManagerFolders, MyStuff } from "../lib/components/MyStuff/MyStuff";
 import { StoryProvider } from "./StoryProvider";
 
@@ -103,9 +103,13 @@ function StorybookMyStuff(props: {
   canGoBack: boolean;
   folder: string | undefined;
 }) {
+  const [open, setOpen] = useState(true);
+
   return (
     <>
       <MyStuff<"Scenes" | "Characters">
+        open={open}
+        onClose={() => setOpen(false)}
         search={props.search}
         folder={props.folder}
         canGoBack={props.canGoBack}
