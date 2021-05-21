@@ -58,6 +58,7 @@ import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { BlockType, ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
+import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { Font } from "../../domains/font/Font";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
@@ -900,7 +901,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 reactDndIndex={index}
                 canMove={sort === SortMode.None && isGM}
                 key={indexCard.id}
-                reactDndType={"scene.index-cards"}
+                reactDndType={DragAndDropTypes.SceneIndexCards}
                 data-cy={`scene.aspect.${index}`}
                 id={`index-card-${indexCard.id}`}
                 indexCardHiddenRecord={

@@ -38,6 +38,7 @@ import {
   IDiceRollResult,
   RollType,
 } from "../../domains/dice/Dice";
+import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
@@ -426,7 +427,7 @@ export const IndexCard: React.FC<
                   <IndexCard
                     indexCard={subCard}
                     id={`index-card-${subCard.id}`}
-                    reactDndType={`index-card.sub-cards.${indexCardManager.state.indexCard.id}`}
+                    reactDndType={`${DragAndDropTypes.SceneIndexCardsSubCards}.${indexCardManager.state.indexCard.id}`}
                     canMove={true}
                     reactDndIndex={subCardIndex}
                     readonly={props.readonly}
@@ -466,55 +467,113 @@ export const IndexCard: React.FC<
 
     return (
       <Box px="1rem" py=".5rem">
-        {indexCardManager.state.indexCard.blocks.map((block) => {
+        {indexCardManager.state.indexCard.blocks.map((block, blockIndex) => {
           return (
             <Box key={block.id} mb=".5rem">
-              <BlockByType
-                advanced={advanced}
-                hideHelp
-                readonly={props.readonly}
-                dataCy={`index-card.${block.label}`}
-                block={block}
-                onChange={(newBlock) => {
-                  indexCardManager.actions.setBlock(newBlock);
+              <BetterDnd
+                direction="vertical"
+                index={blockIndex}
+                type={`${DragAndDropTypes.SceneIndexCardsBlocks}.${indexCardManager.state.indexCard.id}`}
+                onMove={(dragIndex, hoverIndex) => {
+                  indexCardManager.actions.moveIndexCardBlock(
+                    dragIndex,
+                    hoverIndex
+                  );
                 }}
-                onRoll={(diceRollResult) => {
-                  props.onRoll(diceRollResult);
+                render={(dndRenderProps) => {
+                  return (
+                    <Box>
+                      <Grid container wrap="nowrap" spacing={1}>
+                        {advanced && (
+                          <Grid item>
+                            <div ref={dndRenderProps.drag}>
+                              <Tooltip
+                                title={
+                                  // prettier-ignore
+                                  t("character-dialog.control.move")
+                                }
+                              >
+                                <IconButton
+                                  size="small"
+                                  className={css({
+                                    cursor: "drag",
+                                    display: "block",
+                                  })}
+                                >
+                                  <DragIndicatorIcon
+                                    className={css({
+                                      transition: theme.transitions.create(
+                                        "color"
+                                      ),
+                                    })}
+                                    htmlColor={
+                                      dndRenderProps.isOver
+                                        ? paper.primary
+                                        : paper.secondary
+                                    }
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            </div>
+                          </Grid>
+                        )}
+                        <Grid item xs>
+                          <BlockByType
+                            advanced={advanced}
+                            hideHelp
+                            readonly={props.readonly}
+                            dataCy={`index-card.${block.label}`}
+                            block={block}
+                            onChange={(newBlock) => {
+                              indexCardManager.actions.setBlock(newBlock);
+                            }}
+                            onRoll={(diceRollResult) => {
+                              props.onRoll(diceRollResult);
+                            }}
+                            otherActions={
+                              <>
+                                <Grid item>
+                                  <Link
+                                    component="button"
+                                    variant="caption"
+                                    data-cy={`index-card.${block.label}.duplicate`}
+                                    className={css({
+                                      label: "CharacterDialog-duplicate",
+                                    })}
+                                    onClick={() => {
+                                      indexCardManager.actions.duplicateBlock(
+                                        block
+                                      );
+                                    }}
+                                  >
+                                    {t("character-dialog.control.duplicate")}
+                                  </Link>
+                                </Grid>
+                                <Grid item>
+                                  <Link
+                                    component="button"
+                                    variant="caption"
+                                    data-cy={`index-card.${block.label}.remove`}
+                                    className={css({
+                                      label: "CharacterDialog-remove",
+                                    })}
+                                    onClick={() => {
+                                      indexCardManager.actions.removeBlock(
+                                        block
+                                      );
+                                    }}
+                                  >
+                                    {t("character-dialog.control.remove-block")}
+                                  </Link>
+                                </Grid>
+                              </>
+                            }
+                          />
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  );
                 }}
-                otherActions={
-                  <>
-                    <Grid item>
-                      <Link
-                        component="button"
-                        variant="caption"
-                        data-cy={`index-card.${block.label}.duplicate`}
-                        className={css({
-                          label: "CharacterDialog-duplicate",
-                        })}
-                        onClick={() => {
-                          indexCardManager.actions.duplicateBlock(block);
-                        }}
-                      >
-                        {t("character-dialog.control.duplicate")}
-                      </Link>
-                    </Grid>
-                    <Grid item>
-                      <Link
-                        component="button"
-                        variant="caption"
-                        data-cy={`index-card.${block.label}.remove`}
-                        className={css({
-                          label: "CharacterDialog-remove",
-                        })}
-                        onClick={() => {
-                          indexCardManager.actions.removeBlock(block);
-                        }}
-                      >
-                        {t("character-dialog.control.remove-block")}
-                      </Link>
-                    </Grid>
-                  </>
-                }
               />
             </Box>
           );
