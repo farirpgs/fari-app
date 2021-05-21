@@ -4,6 +4,91 @@
 
 > Have an idea and want to contribute to this blog ? Come chat with us on [Discord](https://discord.com/invite/vMAJFjUraA).
 
+# Fari v5.0.0
+
+<page-meta author="René-Pier Deshaies-Gélinas" date="2021-05-20" description="Better Index Cards and New Building Blocks" image="https://gyazo.com/9d6ea69d4a12009d07576baefef9955f.png"></page-meta>
+
+## New Features 🌟
+
+### Use Building Blocks Inside Index Cards
+
+Fari's Index Cards just got a revamped!
+
+After all the work that had been done on the character sheet in the previous release, we leveraged all of that power to be able to use building blocks inside index cards directly!
+
+You can now build complex cards made of text, images, skills tracks and all of the other blocks that were previously only available inside character sheets.
+
+![Blocks in Index Cards](https://gyazo.com/c4f376d229a08c0a97f8abb9c6badf80.gif)
+
+### New Index Card Controls
+
+While we worked on those features, we also took the time to add a couple of nice enhancements to the index cards. Things like the ability to collapse/expand them, add sub cards, use more color options new color picker, and more.
+
+I'm personally already using the sub cards and new color options a ton in my games !
+
+![Sub Cards](https://gyazo.com/9f3b60f27fb544d6cfc5d0765db0b65f.png)
+![Color Picker](https://gyazo.com/3d04bd6d92a4529d86e92dc27e909b37.gif)
+
+### New Building Blocks
+
+3 new building blocks were also added to both the character sheets and index cards:
+
+- An `Image Block`: use this to display nice photos or gifs!
+- A `Separator Block`: pretty useful to make busy sections more organized.
+- A `Link Block`: link to your external documents or wikis directly from inside a character sheet!
+
+![Image Block](https://gyazo.com/b7380a776c232f73a85fd8b7df209ff3.gif)
+![Separator Block](https://gyazo.com/ebce18a4bfb0479b02a98471e82eb230.png)
+![Link Block](https://gyazo.com/09bb558199bde6e93e848f9fc36ac0e8.png)
+
+### Curious about your storage ?
+
+Fari now displays exactly how much space it uses on your browser!
+
+We are able to display how much space is used in general or even drill down the character/scene level.
+
+Just hop on the [Data Page](/data) and see for yourself!
+
+![Storage](https://gyazo.com/2709c8cf86d8b95f2141fb35a4359449.png)
+
+### Character Sheet Print Mode
+
+The Character Sheet Print mode as been enhanced so you can export your sheet as nice PDFs.
+
+Use this to print your sheets physically, or simply to share you amazing looking sheets to your friends!
+
+![PDF Character Sheet](https://gyazo.com/5fe1178cc5cf8b615077cd75df439929.png)
+
+### Fari in the Wild
+
+Perhaps you are not sure where to start with Fari. It's quite a big application so I understand there might be a lot to learn.
+
+Perhaps you would like to see someone use the app to learn a bit more about how to use it yourself ?
+
+We've got your covered then. Checkout our new [Fari in the Wild](/fari-wiki/fari-in-the-wild) page where we include links to videos of people using Fari!
+
+### Miscellaneous
+
+This release also brings a couple of other enhancements, things like:
+
+- New index card sort options
+- New buttons to duplicate a page or a section in a character sheet
+- New Deck of 52 cards dice command
+- The ability to set a character sheet in "wide mode" and also use "two columns" per section
+- German translation updates by TecnoSmurf :D
+- Fari is also now 100% available in Esperanto! Thanks Sorcho :D
+- and more...
+
+## Thank You ❤️
+
+I want to thank my patrons for helping to make this update possible.
+
+If you also want to support Fari, go over Fari's [Patreon](https://www.patreon.com/fariapp) page.
+
+There, you can support the development of the Fate RPG Companion App on a monthly basis for as low as the price of one ☕ or 🍪 per month!
+
+If you have any questions or want to talk about Fari, come chat on [Discord](https://discord.com/invite/vMAJFjUraA) and if you encounter any issues with the release, don't hesitate to create a new [bug report](https://github.com/fariapp/fari/issues/new/choose).
+
 # Fari v4.0.0
 
 <page-meta author="René-Pier Deshaies-Gélinas" date="2021-04-06" description="New Character Sheet Framework, Data Management and Collaboration with Seelie Squire" image="https://gyazo.com/713e2fd2dd9c9a83c58e4fd00b8224ed.png"></page-meta>

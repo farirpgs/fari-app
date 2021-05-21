@@ -333,7 +333,15 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     sideBar: {
       "+Blog": [
         "welcome",
-        { "+2021": ["fari-v400", "fari-v370", "fari-v360", "moments-in-fate"] },
+        {
+          "+2021": [
+            "fari-v500",
+            "fari-v400",
+            "fari-v370",
+            "fari-v360",
+            "moments-in-fate",
+          ],
+        },
       ],
     },
   },

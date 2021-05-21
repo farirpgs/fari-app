@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import CreateIcon from "@material-ui/icons/Create";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import FaceIcon from "@material-ui/icons/Face";
@@ -35,7 +36,7 @@ import { CircleTextField } from "../../../../routes/Character/components/Charact
 import {
   DiceBonusLabel,
   DiceBox,
-  DiceBoxResult
+  DiceBoxResult,
 } from "../../../DiceBox/DiceBox";
 import { FateLabel } from "../../../FateLabel/FateLabel";
 
@@ -449,7 +450,11 @@ export const PlayerRow: React.FC<
                         logger.info("ScenePlayer:onCharacterSheetButtonPress");
                       }}
                     >
-                      <FaceIcon htmlColor={borderColor} />
+                      {hasCharacterSheet || !canOpenOrLoadSheet ? (
+                        <FaceIcon htmlColor={borderColor} />
+                      ) : (
+                        <CreateIcon htmlColor={borderColor} />
+                      )}
                     </IconButton>
                   </span>
                 </Tooltip>

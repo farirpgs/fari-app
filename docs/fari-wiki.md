@@ -493,6 +493,20 @@ Blocks are all based around the same idea, for that reason all types of blocks h
 
 ![Generic Block Controls](https://gyazo.com/45af086acdaf7542f343e361a1d078d0.png)
 
+## Printing
+
+You can create a PDF and/or print a character sheet using `Print` option.
+
+![Print](https://gyazo.com/6b2579f967b21f16aca3d3d0e3af05f5.png)
+
+If you do so, don't forget to enable "Background Graphics" in your browser's print setting so that the sheet keeps its colors!
+
+![Print Setting](https://gyazo.com/b18e60ae9aa8d964f60a0a055d8f8cc0.png)
+
+Here's an example from the community of what it could look like:
+
+![PDF Character Sheet](https://gyazo.com/5fe1178cc5cf8b615077cd75df439929.png)
+
 # Tips and Tricks
 
 ## Index Card Roll Modifiers

@@ -188,6 +188,20 @@ export function useIndexCard(props: {
     );
   }
 
+  function moveIndexCardBlock(dragIndex: number, hoverIndex: number) {
+    setIndexCard(
+      produce((draft: IIndexCard) => {
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+
+        const dragItem = draft.blocks[dragIndex];
+        draft.blocks.splice(dragIndex, 1);
+        draft.blocks.splice(hoverIndex, 0, dragItem);
+      })
+    );
+  }
+
   return {
     state: { indexCard },
     actions: {
@@ -207,6 +221,7 @@ export function useIndexCard(props: {
       togglePinned,
       duplicateIndexCard,
       moveIndexCard,
+      moveIndexCardBlock,
       updateIndexCard,
     },
   };
