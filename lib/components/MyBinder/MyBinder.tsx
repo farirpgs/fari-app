@@ -340,22 +340,23 @@ export function MyBinder<TFolders extends string>(props: {
           renderHeader("Latest", elementsForLatest.length)}
         <List dense>
           {elementsForLatest.map((element) => {
+            const type = element.type as TFolders;
             return (
               <React.Fragment key={element.id}>
                 <Element
                   element={element}
                   displayType={false}
                   onSelect={() => {
-                    props.onSelect(currentFolder, element);
+                    props.onSelect(type, element);
                   }}
                   onDelete={() => {
-                    handleOnDelete(currentFolder, element);
+                    handleOnDelete(type, element);
                   }}
                   onDuplicate={() => {
-                    props.onDuplicate(currentFolder, element);
+                    props.onDuplicate(type, element);
                   }}
                   onExport={() => {
-                    props.onExport(currentFolder, element);
+                    props.onExport(type, element);
                   }}
                 />
               </React.Fragment>

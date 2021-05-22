@@ -98,7 +98,7 @@ function MyBinderManager() {
         group: c.group,
         name: c.name,
         lastUpdated: c.lastUpdated,
-        type: "scenes",
+        type: "characters",
         original: c,
       })
     ),
