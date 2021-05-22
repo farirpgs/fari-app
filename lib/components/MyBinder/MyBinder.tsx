@@ -12,9 +12,10 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
-import { useTheme } from "@material-ui/core/styles";
+import { darken, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -131,7 +132,10 @@ export function MyBinder<TFolders extends string>(props: {
         maxWidth="md"
         classes={{
           paper: css({
+            background: theme.palette.background.default,
             height: "100%",
+            position: "relative",
+            overflow: "auto",
           }),
         }}
       >
@@ -410,7 +414,7 @@ export function MyBinder<TFolders extends string>(props: {
           ]);
           return (
             <Box key={key}>
-              <Box>{renderHeader(groupName, groupItems.length)}</Box>
+              {renderHeader(groupName, groupItems.length)}
               <List dense>
                 {sortedGroupItems.map((element) => {
                   const type = element.type as TFolders;
@@ -445,33 +449,40 @@ export function MyBinder<TFolders extends string>(props: {
 
   function renderHeader(title: string, length: number) {
     return (
-      <Box
-        px="1rem"
-        py=".5rem"
+      <ListSubheader
         className={css({
-          background: theme.palette.action.hover,
-          borderRadius: "4px",
+          padding: "0",
         })}
       >
-        <Box>
-          <span
-            className={css({
-              fontWeight: theme.typography.fontWeightBold,
+        <Box
+          px="1rem"
+          className={css({
+            background:
+              theme.palette.type === "light"
+                ? darken(theme.palette.background.default, 0.03)
+                : theme.palette.background.paper,
+          })}
+        >
+          <Box>
+            <span
+              className={css({
+                fontWeight: theme.typography.fontWeightBold,
 
-              color: theme.palette.text.primary,
-            })}
-          >
-            {title}{" "}
-          </span>
-          <span
-            className={css({
-              color: theme.palette.text.hint,
-            })}
-          >
-            {`(${length})`}
-          </span>
+                color: theme.palette.text.primary,
+              })}
+            >
+              {title}{" "}
+            </span>
+            <span
+              className={css({
+                color: theme.palette.text.hint,
+              })}
+            >
+              {`(${length})`}
+            </span>
+          </Box>
         </Box>
-      </Box>
+      </ListSubheader>
     );
   }
   function getWhere() {
