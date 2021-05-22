@@ -1,7 +1,6 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Popper from "@material-ui/core/Popper";
@@ -109,7 +108,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
     diceRollsManager.state.finalResult?.options.listResults;
   const separator = shouldListResult ? " • " : " + ";
   const isPool = shouldListResult ?? false;
-  const shouldRenderTotal = !isPool;
   const tooltipContent = !diceRollsManager.state.finalResultHidden && (
     <Box
       className={css({
@@ -172,24 +170,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
             )}
           </Box>
         </Grid>
-        <Divider
-          orientation="vertical"
-          flexItem
-          className={css({ background: tooltipColor.disabled })}
-        />
-        {shouldRenderTotal && (
-          <Grid item xs>
-            <Box
-              fontSize="2rem"
-              fontWeight="bold"
-              textAlign="center"
-              lineHeight={Font.lineHeight(2)}
-              color={tooltipColor.primary}
-            >
-              {diceRollsManager.state.finalResultTotal}
-            </Box>
-          </Grid>
-        )}
       </Grid>
     </Box>
   );

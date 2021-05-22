@@ -21,7 +21,6 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ChatIcon from "@material-ui/icons/Chat";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
 import React, { useContext, useEffect, useState } from "react";
@@ -492,7 +491,6 @@ export const Page: React.FC<{
               <AppLink
                 className={linkClassName}
                 data-cy="page.menu.my-binder"
-                endIcon={<MenuBookIcon />}
                 onClick={() => {
                   myBinderManager.actions.open();
                 }}

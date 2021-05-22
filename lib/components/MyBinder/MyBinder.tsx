@@ -3,7 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -22,10 +21,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FolderIcon from "@material-ui/icons/Folder";
 import ExportIcon from "@material-ui/icons/GetApp";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SearchIcon from "@material-ui/icons/Search";
 import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
-import { Images } from "../../constants/Images";
 import { arraySort } from "../../domains/array/arraySort";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -162,20 +161,21 @@ export function MyBinder<TFolders extends string>(props: {
         </Snackbar>
         <Box p="1rem">
           <Paper component="form" elevation={2}>
-            <Box px="1rem" mb="1rem">
+            <Box px="1rem" py=".5rem" mb="1rem">
               <Grid container spacing={1} alignItems="center">
                 <Grid item>
                   <Box mr=".5rem" width="30px">
                     {where === Where.Folders || !props.canGoBack ? (
-                      <img
-                        src={Images.app}
-                        className={css({
-                          display: "flex",
-                          width: "1.5rem",
-                          height: "auto",
-                        })}
-                      />
+                      <MenuBookIcon color="primary" />
                     ) : (
+                      // <img
+                      //   src={Images.app}
+                      //   className={css({
+                      //     display: "flex",
+                      //     width: "1.5rem",
+                      //     height: "auto",
+                      //   })}
+                      // />
                       <IconButton size="small" onClick={handleGoBack}>
                         <ArrowBackIcon />
                       </IconButton>
@@ -207,7 +207,14 @@ export function MyBinder<TFolders extends string>(props: {
           {where === Where.Search && renderSearch()}
           <Grid container justify="flex-end">
             <Grid item>
-              <AppLink to="/data">{"All My Data"}</AppLink>
+              <AppLink
+                to="/data"
+                onClick={() => {
+                  props.onClose();
+                }}
+              >
+                {"All My Data"}
+              </AppLink>
             </Grid>
           </Grid>
         </Box>
@@ -356,7 +363,6 @@ export function MyBinder<TFolders extends string>(props: {
   }
 
   function renderElements(elements: IManagerViewModel[], displayType = false) {
-    const currentFolder = folder as TFolders;
     const groups = elements.reduce((acc, curr) => {
       const group = curr.group || "Other";
       const currentList = acc[group] ?? [];
@@ -377,9 +383,22 @@ export function MyBinder<TFolders extends string>(props: {
           <Grid container justify="center">
             <Grid item>
               <Box my="2rem">
-                <Typography variant="subtitle2" color="textSecondary">
-                  {"Nothing here yet"}
-                </Typography>
+                <Box display="flex" alignItems="center" flexDirection="column">
+                  <Box mb="1rem">
+                    <Typography variant="subtitle2" color="textSecondary">
+                      {"Nothing here yet!"}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <MenuBookIcon
+                      className={css({
+                        color: theme.palette.text.hint,
+                        width: "5rem",
+                        height: "5rem",
+                      })}
+                    />
+                  </Box>
+                </Box>
               </Box>
             </Grid>
           </Grid>
@@ -394,22 +413,23 @@ export function MyBinder<TFolders extends string>(props: {
               <Box>{renderHeader(groupName, groupItems.length)}</Box>
               <List dense>
                 {sortedGroupItems.map((element) => {
+                  const type = element.type as TFolders;
                   return (
                     <React.Fragment key={element.id}>
                       <Element
                         element={element}
                         displayType={displayType}
                         onSelect={() => {
-                          props.onSelect(currentFolder, element);
+                          props.onSelect(type, element);
                         }}
                         onDelete={() => {
-                          props.onDelete(currentFolder, element);
+                          props.onDelete(type, element);
                         }}
                         onDuplicate={() => {
-                          props.onDuplicate(currentFolder, element);
+                          props.onDuplicate(type, element);
                         }}
                         onExport={() => {
-                          props.onExport(currentFolder, element);
+                          props.onExport(type, element);
                         }}
                       />
                     </React.Fragment>
@@ -473,11 +493,22 @@ function Element(props: {
   onDuplicate(): void;
   onDelete(): void;
 }) {
+  const { t } = useTranslate();
   const theme = useTheme();
   const abrev = listItem.getAbreviation(props.element.name);
   const backgroundColor = listItem.getColor(props.element.name);
   const color = theme.palette.getContrastText(backgroundColor);
   const [hover, setHover] = useState(false);
+  const iconButtonClassName = css({
+    transition: theme.transitions.create(["color"], {
+      duration: theme.transitions.duration.shortest,
+    }),
+    color: hover ? theme.palette.text.primary : theme.palette.text.hint,
+  });
+  const translatedType = props.displayType
+    ? t(`my-binder.folder.${props.element.type}` as ITranslationKeys)
+    : undefined;
+
   return (
     <ListItem
       button
@@ -501,52 +532,69 @@ function Element(props: {
           {abrev}
         </Avatar>
       </ListItemAvatar>
-      <ListItemText
-        primary={props.element.name}
-        secondary={props.element.type}
-      />
-      <Fade in={hover} timeout={theme.transitions.duration.shortest}>
-        <ListItemSecondaryAction>
-          <Grid container spacing={1}>
-            <Grid item>
-              <IconButton
-                size="small"
-                data-cy="manager.export"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onExport();
-                }}
-              >
-                <ExportIcon />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton
-                size="small"
-                data-cy="manager.duplicate"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onDuplicate();
-                }}
-              >
-                <FileCopyIcon />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton
-                size="small"
-                data-cy="manager.delete"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onDelete();
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Grid>
+      <ListItemText primary={props.element.name} secondary={translatedType} />
+
+      <ListItemSecondaryAction>
+        <Grid container spacing={1}>
+          <Grid item>
+            <IconButton
+              size="small"
+              data-cy="manager.export"
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onExport();
+              }}
+            >
+              <ExportIcon />
+            </IconButton>
           </Grid>
-        </ListItemSecondaryAction>
-      </Fade>
+          <Grid item>
+            <IconButton
+              size="small"
+              data-cy="manager.duplicate"
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onDuplicate();
+              }}
+            >
+              <FileCopyIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton
+              size="small"
+              data-cy="manager.delete"
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onDelete();
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </ListItemSecondaryAction>
     </ListItem>
   );
 }

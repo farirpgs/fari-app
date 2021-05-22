@@ -57,9 +57,8 @@ export const AppLink: React.FC<
     <MaterialUILink
       to={to}
       component={ReactRouterLink}
-      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+      onClick={() => {
         if (onClick) {
-          e.preventDefault();
           onClick();
         }
       }}
