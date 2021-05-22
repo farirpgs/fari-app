@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 type IManagerCallback = (entity: any) => void | undefined;
 export type IFolders = "characters" | "scenes";
 
-export function useMyStuff() {
+export function useMyBinder() {
   const managerCallback = useRef<IManagerCallback | undefined>(undefined);
 
   const [open, setOpen] = useState(false);
@@ -29,6 +29,6 @@ export function useMyStuff() {
   };
 }
 
-export const MyStuffContext = React.createContext<
-  ReturnType<typeof useMyStuff>
+export const MyBinderContext = React.createContext<
+  ReturnType<typeof useMyBinder>
 >(undefined as any);

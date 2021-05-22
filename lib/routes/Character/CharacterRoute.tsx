@@ -8,7 +8,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
@@ -24,7 +24,7 @@ export const CharacterRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
-  const myStuffManager = useContext(MyStuffContext);
+  const myBinderManager = useContext(MyBinderContext);
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
@@ -49,7 +49,7 @@ export const CharacterRoute: React.FC<{
       setSelectedCharacter(characterToLoad);
     } else {
       history.replace("/");
-      myStuffManager.actions.open({ folder: "characters" });
+      myBinderManager.actions.open({ folder: "characters" });
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 

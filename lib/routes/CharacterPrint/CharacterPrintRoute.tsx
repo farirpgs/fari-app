@@ -11,7 +11,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -27,7 +27,7 @@ export const CharacterPrintRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const darkModeManager = useContext(DarkModeContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
-  const myStuffManager = useContext(MyStuffContext);
+  const myBinderManager = useContext(MyBinderContext);
   const logger = useLogger();
 
   const query = useQuery<"dev">();
@@ -53,7 +53,7 @@ export const CharacterPrintRoute: React.FC<{
       setCharacter(characterToLoad);
     } else {
       history.replace("/");
-      myStuffManager.actions.open({ folder: "characters" });
+      myBinderManager.actions.open({ folder: "characters" });
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 

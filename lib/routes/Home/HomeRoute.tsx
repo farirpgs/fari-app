@@ -26,7 +26,7 @@ import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
@@ -69,7 +69,7 @@ export const HomeRoute: React.FC<{}> = () => {
   const logger = useLogger();
   const lightBackground = useLightBackground();
   const theme = useTheme();
-  const myStuffManager = useContext(MyStuffContext);
+  const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
     logger.info("Route:Home");
@@ -389,7 +389,7 @@ export const HomeRoute: React.FC<{}> = () => {
           />
         ),
         onClick: () => {
-          myStuffManager.actions.open({ folder: "scenes" });
+          myBinderManager.actions.open({ folder: "scenes" });
         },
       },
       {
@@ -404,7 +404,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ),
         ctaLabel: t("home-route.cards.characters.cta"),
         onClick: () => {
-          myStuffManager.actions.open({ folder: "characters" });
+          myBinderManager.actions.open({ folder: "characters" });
         },
       },
       {

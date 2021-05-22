@@ -24,11 +24,12 @@ import FolderIcon from "@material-ui/icons/Folder";
 import ExportIcon from "@material-ui/icons/GetApp";
 import SearchIcon from "@material-ui/icons/Search";
 import Alert from "@material-ui/lab/Alert";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Images } from "../../constants/Images";
 import { arraySort } from "../../domains/array/arraySort";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ITranslationKeys } from "../../locale";
 import { AppLink } from "../AppLink/AppLink";
 import { listItem } from "../Manager/domains/ListItem";
 
@@ -51,7 +52,7 @@ enum Where {
   Search,
 }
 
-export function MyStuff<TFolders extends string>(props: {
+export function MyBinder<TFolders extends string>(props: {
   open: boolean;
   onClose(): void;
   folders: IManagerFolders;
@@ -76,6 +77,21 @@ export function MyStuff<TFolders extends string>(props: {
     value: props.folder,
     delay: 750,
   });
+
+  useEffect(
+    function clearFolderOnClose() {
+      if (props.open === false) {
+        setFolder(undefined);
+      }
+    },
+    [props.open]
+  );
+
+  const currentFolder = folder as TFolders;
+
+  const currentFolderLabel = currentFolder
+    ? t(`my-binder.folder.${currentFolder}` as ITranslationKeys)
+    : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
   const [deletedObject, setDeletedObject] = useState<
@@ -168,7 +184,11 @@ export function MyStuff<TFolders extends string>(props: {
                 </Grid>
                 <Grid item xs>
                   <InputBase
-                    placeholder={folder ? folder : "Search..."}
+                    placeholder={
+                      folder
+                        ? `Search in "${currentFolderLabel}"...`
+                        : "Search..."
+                    }
                     value={search}
                     fullWidth
                     onChange={(e) => {
@@ -199,8 +219,11 @@ export function MyStuff<TFolders extends string>(props: {
     const folderNames = Object.keys(props.folders);
     return (
       <Box>
-        <List dense>
+        <List>
           {folderNames.map((name, key) => {
+            const translatedFolderName = t(
+              `my-binder.folder.${name}` as ITranslationKeys
+            );
             return (
               <ListItem
                 key={key}
@@ -212,7 +235,7 @@ export function MyStuff<TFolders extends string>(props: {
                 <ListItemIcon>
                   <FolderIcon />
                 </ListItemIcon>
-                <ListItemText primary={name} />
+                <ListItemText primary={translatedFolderName} />
               </ListItem>
             );
           })}
@@ -222,7 +245,6 @@ export function MyStuff<TFolders extends string>(props: {
   }
 
   function renderFolder() {
-    const currentFolder = folder as TFolders;
     const folderElements = props.folders[currentFolder];
 
     return (
@@ -296,7 +318,6 @@ export function MyStuff<TFolders extends string>(props: {
   }
 
   function renderLatestElements() {
-    const currentFolder = folder as TFolders;
     const elements = props.folders[currentFolder];
     const elementsSortedByLatest = arraySort(elements, [
       (e) => ({ value: e.lastUpdated, direction: "desc" }),

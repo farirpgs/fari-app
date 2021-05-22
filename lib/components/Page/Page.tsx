@@ -21,6 +21,7 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ChatIcon from "@material-ui/icons/Chat";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
 import React, { useContext, useEffect, useState } from "react";
@@ -31,7 +32,7 @@ import { env } from "../../constants/env";
 import { useZIndex } from "../../constants/zIndex";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
@@ -73,7 +74,7 @@ export const Page: React.FC<{
   const { t, i18n, currentLanguage } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
 
-  const myStuffManager = useContext(MyStuffContext);
+  const myBinderManager = useContext(MyBinderContext);
 
   const logger = useLogger();
   const zIndex = useZIndex();
@@ -490,25 +491,16 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
                 className={linkClassName}
-                data-cy="page.menu.scenes"
+                data-cy="page.menu.my-binder"
+                endIcon={<MenuBookIcon />}
                 onClick={() => {
-                  myStuffManager.actions.open({ folder: "scenes" });
+                  myBinderManager.actions.open();
                 }}
               >
-                {t("menu.scenes")}
+                {t("menu.my-binder")}
               </AppLink>
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
-                data-cy="page.menu.characters"
-                onClick={() => {
-                  myStuffManager.actions.open({ folder: "characters" });
-                }}
-              >
-                {t("menu.characters")}
-              </AppLink>
-            </Grid>
+
             <Grid item xs={8} sm={8} className={itemClass}>
               <AppLink
                 className={linkClassName}

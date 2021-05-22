@@ -50,7 +50,7 @@ import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { useMyStuff } from "../../contexts/MyStuffContext/MyStuffContext";
+import { useMyBinder } from "../../contexts/MyBinderContext/MyBinderContext";
 import {
   ISavableScene,
   useScenes,
@@ -103,7 +103,7 @@ type IProps =
       sceneManager: ReturnType<typeof useScene>;
       scenesManager: ReturnType<typeof useScenes>;
       charactersManager: ReturnType<typeof useCharacters>;
-      myStuffManager: ReturnType<typeof useMyStuff>;
+      myBinderManager: ReturnType<typeof useMyBinder>;
       connectionsManager?: undefined;
       idFromParams?: undefined;
       isLoading?: undefined;
@@ -114,7 +114,7 @@ type IProps =
       sceneManager: ReturnType<typeof useScene>;
       scenesManager: ReturnType<typeof useScenes>;
       charactersManager: ReturnType<typeof useCharacters>;
-      myStuffManager: ReturnType<typeof useMyStuff>;
+      myBinderManager: ReturnType<typeof useMyBinder>;
       connectionsManager: ReturnType<typeof usePeerConnections>;
       userId: string;
       isLoading: boolean;
@@ -126,7 +126,7 @@ type IProps =
       mode: SceneMode.PlayOffline;
       sceneManager: ReturnType<typeof useScene>;
       scenesManager: ReturnType<typeof useScenes>;
-      myStuffManager: ReturnType<typeof useMyStuff>;
+      myBinderManager: ReturnType<typeof useMyBinder>;
       charactersManager: ReturnType<typeof useCharacters>;
       connectionsManager?: undefined;
       idFromParams?: undefined;
@@ -140,7 +140,7 @@ export const Scene: React.FC<IProps> = (props) => {
     connectionsManager,
     scenesManager,
     charactersManager,
-    myStuffManager,
+    myBinderManager,
   } = props;
 
   const isGM = !props.idFromParams;
@@ -589,7 +589,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     }
                   }}
                   onAssignOriginalCharacterSheet={() => {
-                    myStuffManager.actions.open({
+                    myBinderManager.actions.open({
                       folder: "characters",
                       callback: (character) => {
                         handleAssignOriginalCharacterSheet(
@@ -600,7 +600,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     });
                   }}
                   onAssignDuplicateCharacterSheet={() => {
-                    myStuffManager.actions.open({
+                    myBinderManager.actions.open({
                       folder: "characters",
                       callback: (character) => {
                         handleAssignDuplicateCharacterSheet(
@@ -1443,7 +1443,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 <MenuItem
                   data-cy="scene.load-scene"
                   onClick={() => {
-                    myStuffManager.actions.open({
+                    myBinderManager.actions.open({
                       folder: "scenes",
                       callback: handleLoadScene,
                     });
@@ -1460,7 +1460,7 @@ export const Scene: React.FC<IProps> = (props) => {
                 <MenuItem
                   data-cy="scene.clone-and-load-scene"
                   onClick={() => {
-                    myStuffManager.actions.open({
+                    myBinderManager.actions.open({
                       folder: "scenes",
                       callback: handleCloneAndLoadScene,
                     });

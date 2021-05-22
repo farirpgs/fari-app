@@ -9,7 +9,7 @@ import { BrowserRouter, useHistory } from "react-router-dom";
 import { AppAnalytics } from "./components/AppAnalytics/AppAnalytics";
 import { AppRouter } from "./components/AppRouter/AppRouter";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
-import { IManagerViewModel, MyStuff } from "./components/MyStuff/MyStuff";
+import { IManagerViewModel, MyBinder } from "./components/MyBinder/MyBinder";
 import { env } from "./constants/env";
 import {
   CharactersContext,
@@ -22,9 +22,9 @@ import {
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   IFolders,
-  MyStuffContext,
-  useMyStuff,
-} from "./contexts/MyStuffContext/MyStuffContext";
+  MyBinderContext,
+  useMyBinder,
+} from "./contexts/MyBinderContext/MyBinderContext";
 import {
   ScenesContext,
   useScenes,
@@ -46,7 +46,7 @@ function AppContexts(props: { children: ReactNode }) {
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const diceManager = useDice();
-  const myStuffManager = useMyStuff();
+  const myBinderManager = useMyBinder();
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -54,9 +54,9 @@ function AppContexts(props: { children: ReactNode }) {
         <CharactersContext.Provider value={charactersManager}>
           <ScenesContext.Provider value={scenesManager}>
             <DiceContext.Provider value={diceManager}>
-              <MyStuffContext.Provider value={myStuffManager}>
+              <MyBinderContext.Provider value={myBinderManager}>
                 <AppProviders>{props.children}</AppProviders>
-              </MyStuffContext.Provider>
+              </MyBinderContext.Provider>
             </DiceContext.Provider>
           </ScenesContext.Provider>
         </CharactersContext.Provider>
@@ -65,10 +65,10 @@ function AppContexts(props: { children: ReactNode }) {
   );
 }
 
-function MyStuffManager() {
+function MyBinderManager() {
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
-  const myStuffManager = useContext(MyStuffContext);
+  const myBinderManager = useContext(MyBinderContext);
   const history = useHistory();
 
   type IHandlers = {
@@ -110,15 +110,15 @@ function MyStuffManager() {
           CharacterTemplates.Blank
         );
 
-        if (myStuffManager.state.managerCallback.current) {
-          myStuffManager.state.managerCallback.current(newCharacter);
+        if (myBinderManager.state.managerCallback.current) {
+          myBinderManager.state.managerCallback.current(newCharacter);
         } else {
           history.push(`/characters/${newCharacter.id}`);
         }
       },
       onSelect(element) {
-        if (myStuffManager.state.managerCallback.current) {
-          myStuffManager.state.managerCallback.current(element.original);
+        if (myBinderManager.state.managerCallback.current) {
+          myBinderManager.state.managerCallback.current(element.original);
         } else {
           history.push(`/characters/${element.id}`);
         }
@@ -142,15 +142,15 @@ function MyStuffManager() {
     scenes: {
       onAdd() {
         const newScene = scenesManager.actions.add();
-        if (myStuffManager.state.managerCallback.current) {
-          myStuffManager.state.managerCallback.current(newScene.id);
+        if (myBinderManager.state.managerCallback.current) {
+          myBinderManager.state.managerCallback.current(newScene.id);
         } else {
           history.push(`/scenes/${newScene.id}`);
         }
       },
       onSelect(element) {
-        if (myStuffManager.state.managerCallback.current) {
-          myStuffManager.state.managerCallback.current(element);
+        if (myBinderManager.state.managerCallback.current) {
+          myBinderManager.state.managerCallback.current(element);
         } else {
           history.push(`/scenes/${element.id}`);
         }
@@ -172,25 +172,24 @@ function MyStuffManager() {
       },
     },
   };
-  console.log("myStuffManager.state.folder", myStuffManager.state.folder);
 
   return (
-    <MyStuff<IFolders>
-      open={myStuffManager.state.open}
+    <MyBinder<IFolders>
+      open={myBinderManager.state.open}
       onClose={() => {
-        myStuffManager.actions.close();
+        myBinderManager.actions.close();
       }}
       search={""}
-      folder={myStuffManager.state.folder}
-      canGoBack={myStuffManager.state.folder ? false : true}
+      folder={myBinderManager.state.folder}
+      canGoBack={myBinderManager.state.folder ? false : true}
       folders={folders}
       onSelect={(folder, element) => {
         handler[folder].onSelect(element);
-        myStuffManager.actions.close();
+        myBinderManager.actions.close();
       }}
       onAdd={(folder) => {
         handler[folder].onAdd();
-        myStuffManager.actions.close();
+        myBinderManager.actions.close();
       }}
       onDelete={(folder, element) => {
         handler[folder].onDelete(element);
@@ -203,7 +202,7 @@ function MyStuffManager() {
       }}
       onImport={(folder, importPaths) => {
         handler[folder].onImport(importPaths);
-        myStuffManager.actions.close();
+        myBinderManager.actions.close();
       }}
       onExport={(folder, element) => {
         handler[folder].onExport(element);
@@ -230,7 +229,7 @@ function AppProviders(props: { children: ReactNode }) {
                 }}
               />
               <AppAnalytics />
-              <MyStuffManager />
+              <MyBinderManager />
               {props.children}
             </BrowserRouter>
           </HelmetProvider>
@@ -263,6 +262,9 @@ export function useMark() {
   t("oracle.value.Yes");
   t("oracle.value.YesAnd");
   t("oracle.value.YesBut");
+
+  t("my-binder.folder.characters");
+  t("my-binder.folder.scenes");
 
   t("character-dialog.template.FateOfCthulhu");
   t("character-dialog.template.DresdenFilesAccelerated");

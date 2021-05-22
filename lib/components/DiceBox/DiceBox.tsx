@@ -330,38 +330,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
             return null;
           }
           if (r.type === RollType.Modifier) {
-            return (
-              <span
-                key={i}
-                className={css({
-                  label: "DiceBoxResult-rollType-Modifier",
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                })}
-              >
-                {!isFirst && (
-                  <span
-                    className={css({
-                      label: "DiceBoxResult-rollType-Modifier-separator",
-                      margin: "0 .2rem",
-                      verticalAlign: "middle",
-                    })}
-                  >
-                    {separator}
-                  </span>
-                )}
-                <Tooltip title={r.label}>
-                  <span
-                    className={css({
-                      label: "DiceBoxResult-rollType-Modifier-value",
-                      verticalAlign: "middle",
-                    })}
-                  >
-                    {r.value}
-                  </span>
-                </Tooltip>
-              </span>
-            );
+            return null;
           }
 
           const options = DiceCommandOptions[r.commandName];
@@ -433,8 +402,11 @@ export function DiceBonusLabel(props: {
   const label = diceRollsManager.state.finalResult?.commandResult
     .filter((c) => c.type === RollType.Modifier || c.type === RollType.Label)
     .map((c) => {
+      const value = c.type === RollType.Modifier ? c.value : undefined;
+      const formattedValue = value ? ` (${value})` : "";
       if (c.type === RollType.Modifier || c.type === RollType.Label) {
-        return previewContentEditable({ value: c.label });
+        const formattedLabel = previewContentEditable({ value: c.label });
+        return `${formattedLabel}${formattedValue}`;
       }
     })
     .join(" • ");

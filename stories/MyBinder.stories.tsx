@@ -3,11 +3,11 @@ import Paper from "@material-ui/core/Paper";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
-import { IManagerFolders, MyStuff } from "../lib/components/MyStuff/MyStuff";
+import { IManagerFolders, MyBinder } from "../lib/components/MyBinder/MyBinder";
 import { StoryProvider } from "./StoryProvider";
 
 const foldersMock: IManagerFolders = {
-  Scenes: [
+  scenes: [
     {
       id: "1",
       name: "1. Assault on Tantive IV",
@@ -41,7 +41,7 @@ const foldersMock: IManagerFolders = {
       original: undefined,
     },
   ],
-  Characters: [
+  characters: [
     {
       id: "1",
       name: "Luke Skywalker",
@@ -109,7 +109,7 @@ const foldersMock: IManagerFolders = {
   ],
 };
 
-function StorybookMyStuff(props: {
+function StorybookMyBinder(props: {
   folders: IManagerFolders;
   search: string;
   canGoBack: boolean;
@@ -119,7 +119,7 @@ function StorybookMyStuff(props: {
 
   return (
     <>
-      <MyStuff<"Scenes" | "Characters">
+      <MyBinder<"scenes" | "sharacters">
         open={open}
         onClose={() => setOpen(false)}
         search={props.search}
@@ -138,16 +138,16 @@ function StorybookMyStuff(props: {
   );
 }
 
-type IProps = Parameters<typeof StorybookMyStuff>["0"];
+type IProps = Parameters<typeof StorybookMyBinder>["0"];
 
 export default {
-  title: "Main/MyStuff",
-  component: StorybookMyStuff,
+  title: "Main/MyBinder",
+  component: StorybookMyBinder,
   args: {
     folder: undefined,
     search: "",
     canGoBack: true,
-    folders: { Scenes: [], Characters: [] },
+    folders: { scenes: [], characters: [] },
   },
 } as Meta<IProps>;
 
@@ -157,7 +157,7 @@ const Template: Story<IProps> = (args, context) => {
       <Box width="500px">
         <Paper>
           <Box>
-            <StorybookMyStuff
+            <StorybookMyBinder
               search={args.search}
               folder={args.folder}
               folders={args.folders}
@@ -175,7 +175,7 @@ EmptyRoot.args = {};
 
 export const EmptyInsideFolder = Template.bind({});
 EmptyInsideFolder.args = {
-  folder: "Characters",
+  folder: "characters",
 };
 
 export const Folders = Template.bind({});
@@ -186,14 +186,14 @@ Folders.args = {
 export const Folder = Template.bind({});
 Folder.args = {
   folders: foldersMock,
-  folder: "Characters",
+  folder: "characters",
 };
 
 export const FolderCantGoBack = Template.bind({});
 FolderCantGoBack.args = {
   folders: foldersMock,
   canGoBack: false,
-  folder: "Characters",
+  folder: "characters",
 };
 
 export const SearchCharacter = Template.bind({});
