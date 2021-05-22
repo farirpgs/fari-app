@@ -7,7 +7,7 @@ import { Id } from "../../domains/Id/Id";
 /**
  * When running fariapp/fari-peer-server locally
  */
-const localhostConfig = {
+export const localhostConfig = {
   host: "localhost",
   port: 9000,
   secure: false,
@@ -16,7 +16,7 @@ const localhostConfig = {
 /**
  * For testing peer-js versions
  */
-const stagingConfig = {
+export const stagingConfig = {
   host: "fari-peer-server-staging.herokuapp.com",
   secure: true,
 };

@@ -39,7 +39,7 @@ export const BetterDnd: React.FC<{
     }),
   });
 
-  const [{ isOver }, drop] = useDrop({
+  const [{}, drop] = useDrop({
     accept: props.type,
     drop: () => {
       props.onDrop?.();

@@ -29,11 +29,9 @@ import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
 import { useZIndex } from "../../constants/zIndex";
-import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
@@ -74,9 +72,9 @@ export const Page: React.FC<{
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n, currentLanguage } = useTranslate();
   const darkModeManager = useContext(DarkModeContext);
-  const scenesManager = useContext(ScenesContext);
+
   const myStuffManager = useContext(MyStuffContext);
-  const charactersManager = useContext(CharactersContext);
+
   const logger = useLogger();
   const zIndex = useZIndex();
 

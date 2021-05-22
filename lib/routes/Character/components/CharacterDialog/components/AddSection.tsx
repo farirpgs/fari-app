@@ -13,7 +13,7 @@ export const AddSection: React.FC<{
       <Button
         color="primary"
         variant="outlined"
-        onClick={(e) => {
+        onClick={() => {
           props.onAddSection();
         }}
       >

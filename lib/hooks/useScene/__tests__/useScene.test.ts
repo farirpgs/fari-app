@@ -4,7 +4,6 @@ import {
   ILineObject,
   ObjectType,
 } from "../../../components/DrawArea/hooks/useDrawing";
-import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { defaultSceneName } from "../../../contexts/SceneContext/ScenesContext";
 import { RollType } from "../../../domains/dice/Dice";
@@ -736,8 +735,6 @@ function mockUseCharacters() {
     state: {
       characters: [],
       groups: [],
-      mode: ManagerMode.Close,
-      managerCallback: undefined,
     },
     actions: {
       add: jest.fn(),
@@ -748,8 +745,8 @@ function mockUseCharacters() {
       duplicate: jest.fn(),
       select: jest.fn(),
       clearSelected: jest.fn(),
-      closeManager: jest.fn(),
-      openManager: jest.fn(),
+      exportEntity: jest.fn(),
+      importEntity: jest.fn(),
     },
     selectors: {
       isInStorage: jest.fn(),

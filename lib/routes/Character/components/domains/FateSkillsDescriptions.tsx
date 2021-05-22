@@ -80,7 +80,7 @@ export const FateSkillsDescriptions: Record<
   },
 };
 
-const FateSkillsDescriptionsLong: Record<string, string> = {
+export const FateSkillsDescriptionsLong: Record<string, string> = {
   academics: `Mundane, everyday human knowledge and education, including history, sciences, and medicine. Academics stunts often refer to specialized areas of knowledge and medical skills.`,
   athletics: `A measurement of physical potential. Athletics stunts focus on movement—running, jumping, parkour—and dodging attacks.`,
   burglary: `Knowledge of and ability to bypass security systems, pick pockets, and generally commit crimes. Burglary stunts give bonuses to the various stages of committing a crime, from the planning to the execution and escape.`,

@@ -84,7 +84,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "color": theme.palette.getContrastText(diceRollsManager.state.color),
     "background": diceRollsManager.state.color,
     "fontWeight": theme.typography.fontWeightBold,
-    // "border": `${props.borderSize} solid ${theme.palette.text.primary}`,
+    "border": `2px dotted ${theme.palette.primary.main}`,
     "borderRadius": "4px",
     "padding": ".2rem",
     "minWidth": props.size,
@@ -276,17 +276,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
             })}
           >
             {diceRollsManager.state.finalResultHidden
-              ? // ? "🎲"
-                // "…"
-                ""
-              : // <Icons.FateDice
-              //   className={css({
-              //     width: props.size,
-              //     height: props.size,
-              //     padding: ".3rem",
-              //   })}
-              // />
-              isPool
+              ? ""
+              : isPool
               ? "~"
               : diceRollsManager.state.finalResultTotal}
           </Typography>

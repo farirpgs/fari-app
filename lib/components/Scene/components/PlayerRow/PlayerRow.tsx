@@ -6,7 +6,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -125,7 +124,7 @@ export const PlayerRow: React.FC<
         <Box
           py=".5rem"
           px="1rem"
-          mb="1rem"
+          my=".5rem"
           className={css({
             border: `2px solid ${borderColor}`,
             borderRadius: "8px",
@@ -139,7 +138,6 @@ export const PlayerRow: React.FC<
             <Box>{renderControls()}</Box>
           </Box>
         </Box>
-        <Divider light />
       </Box>
     </>
   );

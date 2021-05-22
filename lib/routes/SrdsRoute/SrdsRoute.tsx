@@ -19,7 +19,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Images } from "../../constants/Images";
 
-export const SrdsRoute: React.FC = (props) => {
+export const SrdsRoute: React.FC = () => {
   return (
     <Page>
       <PageMeta
@@ -34,7 +34,7 @@ export const SrdsRoute: React.FC = (props) => {
 };
 SrdsRoute.displayName = "SrdsRoute";
 
-export const Srds: React.FC = (props) => {
+export const Srds: React.FC = () => {
   return (
     <div>
       <Heading
@@ -52,7 +52,7 @@ export const Srds: React.FC = (props) => {
   );
 };
 
-export const SrdItems: React.FC = (props) => {
+export const SrdItems: React.FC = () => {
   return (
     <Box>
       <Grid container spacing={4} justify="center">
@@ -105,7 +105,7 @@ export const SrdItems: React.FC = (props) => {
   );
 };
 
-export const ToolkitItems: React.FC = (props) => {
+export const ToolkitItems: React.FC = () => {
   return (
     <Box>
       <Grid container spacing={4} justify="center">
@@ -156,7 +156,7 @@ export const ToolkitItems: React.FC = (props) => {
   );
 };
 
-export const WikiItems: React.FC = (props) => {
+export const WikiItems: React.FC = () => {
   return (
     <Box>
       <Grid container spacing={4} justify="center">

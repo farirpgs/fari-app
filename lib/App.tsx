@@ -110,8 +110,8 @@ function MyStuffManager() {
           CharacterTemplates.Blank
         );
 
-        if (charactersManager.state.managerCallback) {
-          charactersManager.state.managerCallback(newCharacter);
+        if (myStuffManager.state.managerCallback.current) {
+          myStuffManager.state.managerCallback.current(newCharacter);
         } else {
           history.push(`/characters/${newCharacter.id}`);
         }

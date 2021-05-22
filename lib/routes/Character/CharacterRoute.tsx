@@ -3,12 +3,12 @@ import { useTheme } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { DiceFab } from "../../components/DiceFab/DiceFab";
-import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
@@ -24,6 +24,7 @@ export const CharacterRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
+  const myStuffManager = useContext(MyStuffContext);
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
@@ -48,7 +49,7 @@ export const CharacterRoute: React.FC<{
       setSelectedCharacter(characterToLoad);
     } else {
       history.replace("/");
-      charactersManager.actions.openManager(ManagerMode.Manage);
+      myStuffManager.actions.open({ folder: "characters" });
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 

@@ -3,15 +3,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
-
-const AboutRoute = React.lazy(() => import("../../routes/About/AboutRoute"));
 
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
@@ -35,7 +33,7 @@ const SeelieSquireRoute = React.lazy(
   () => import("../../routes/SeelieSquire/SeelieSquireRoute")
 );
 
-export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
+export const LoadingRoute: React.FC = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const timeout = useRef<any | undefined>(undefined);
 
@@ -63,16 +61,13 @@ export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
 };
 
 export const AppRouter = () => {
-  const location = useLocation();
-  const hideHeaderLogo = location.pathname === "/";
-
   return (
-    <Suspense fallback={<LoadingRoute hideHeaderLogo={hideHeaderLogo} />}>
+    <Suspense fallback={<LoadingRoute />}>
       <Switch>
         <Route
           exact
           path={"/"}
-          render={(props) => {
+          render={() => {
             return <HomeRoute />;
           }}
         />
@@ -93,35 +88,35 @@ export const AppRouter = () => {
         <Route
           exact
           path={"/dice"}
-          render={(props) => {
+          render={() => {
             return <DiceRoute pool={false} />;
           }}
         />
         <Route
           exact
           path={"/dice-pool"}
-          render={(props) => {
+          render={() => {
             return <DiceRoute pool={true} />;
           }}
         />
         <Route
           exact
           path={"/data"}
-          render={(props) => {
+          render={() => {
             return <DataRoute />;
           }}
         />
         <Route
           exact
           path={"/oracle"}
-          render={(props) => {
+          render={() => {
             return <OracleRoute />;
           }}
         />
         <Route
           exact
           path={"/draw"}
-          render={(props) => {
+          render={() => {
             return <DrawRoute />;
           }}
         />
@@ -149,7 +144,7 @@ export const AppRouter = () => {
           path={"/scenes/:id"}
           render={(props) => <SceneRoute {...props} />}
         />
-        <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+        <Route exact path={"/srds"} render={() => <SrdsRoute />} />
 
         {DocRoutes.map((docRoute) => (
           <Route
@@ -182,17 +177,10 @@ export const AppRouter = () => {
             <SeelieSquireRoute page={props.match.params.page} />
           )}
         />
-        <Route
-          exact
-          path={"/about"}
-          render={(props) => {
-            return <AboutRoute />;
-          }}
-        />
 
         <Route
           path="*"
-          render={(props) => {
+          render={() => {
             return <NotFoundRoute />;
           }}
         />

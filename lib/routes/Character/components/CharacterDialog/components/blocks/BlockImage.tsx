@@ -44,24 +44,24 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
    *   --header 'Authorization: Client-ID {{clientId}}' \
    *   --form 'image="R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"'
    */
-  async function handleOnImport(files: FileList | null) {
-    if (files) {
-      const body = new FormData();
-      body.append("image", files[0]);
+  // async function handleOnImport(files: FileList | null) {
+  //   if (files) {
+  //     const body = new FormData();
+  //     body.append("image", files[0]);
 
-      const clientId = "f5bf423182afd45";
-      const response = await fetch("https://api.imgur.com/3/image", {
-        method: "POST",
-        body: body,
-        headers: {
-          "Authorization": `Client-ID ${clientId}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      const jsonResponse = response.json();
-      console.debug("response", jsonResponse);
-    }
-  }
+  //     const clientId = "f5bf423182afd45";
+  //     const response = await fetch("https://api.imgur.com/3/image", {
+  //       method: "POST",
+  //       body: body,
+  //       headers: {
+  //         "Authorization": `Client-ID ${clientId}`,
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+  //     const jsonResponse = response.json();
+  //     console.debug("response", jsonResponse);
+  //   }
+  // }
 
   return (
     <>
@@ -153,18 +153,18 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
     </>
   );
 
-  function renderHiddenUploadInput() {
-    return (
-      <input
-        type="file"
-        hidden
-        onChange={(event) => {
-          handleOnImport(event.target.files);
-          event.target.value = "";
-        }}
-      />
-    );
-  }
+  // function renderHiddenUploadInput() {
+  //   return (
+  //     <input
+  //       type="file"
+  //       hidden
+  //       onChange={(event) => {
+  //         handleOnImport(event.target.files);
+  //         event.target.value = "";
+  //       }}
+  //     />
+  //   );
+  // }
 
   function renderNoImageOrError() {
     if (props.block.value && !error) {

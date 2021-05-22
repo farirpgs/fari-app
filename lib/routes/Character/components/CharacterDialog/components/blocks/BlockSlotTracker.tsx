@@ -173,7 +173,7 @@ export function BlockSlotTracker(
                     className={css({ padding: "0" })}
                     checked={box.checked}
                     disabled={props.readonly}
-                    onChange={(event) => {
+                    onChange={() => {
                       handleToggleBox(boxIndex);
                     }}
                   />

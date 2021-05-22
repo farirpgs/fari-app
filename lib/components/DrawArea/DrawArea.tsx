@@ -9,7 +9,7 @@ interface IProps {
   tokenTitles?: Array<string>;
 }
 
-export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
+export const DrawArea = React.forwardRef<unknown, IProps>((props) => {
   const drawingManager = useDrawing({
     objects: props.objects,
     readonly: props.readonly,

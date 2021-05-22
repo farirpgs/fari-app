@@ -339,12 +339,11 @@ const MarkdownElement = React.forwardRef<
   any,
   { renderedMarkdown: string; className?: string }
 >(function MarkdownElement(props, ref) {
-  const { className, renderedMarkdown, ...other } = props;
   const classes = useStyles();
   return (
     <div
-      className={clsx(classes.root, "markdown-body", className)}
-      dangerouslySetInnerHTML={{ __html: renderedMarkdown }}
+      className={clsx(classes.root, "markdown-body", props.className)}
+      dangerouslySetInnerHTML={{ __html: props.renderedMarkdown }}
       ref={ref}
     />
   );

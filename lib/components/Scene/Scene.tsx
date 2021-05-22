@@ -50,6 +50,7 @@ import { Prompt } from "react-router";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { useMyStuff } from "../../contexts/MyStuffContext/MyStuffContext";
 import {
   ISavableScene,
   useScenes,
@@ -76,7 +77,6 @@ import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
-import { ManagerMode } from "../Manager/Manager";
 import { LiveMode, Page } from "../Page/Page";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
@@ -103,6 +103,7 @@ type IProps =
       sceneManager: ReturnType<typeof useScene>;
       scenesManager: ReturnType<typeof useScenes>;
       charactersManager: ReturnType<typeof useCharacters>;
+      myStuffManager: ReturnType<typeof useMyStuff>;
       connectionsManager?: undefined;
       idFromParams?: undefined;
       isLoading?: undefined;
@@ -113,6 +114,7 @@ type IProps =
       sceneManager: ReturnType<typeof useScene>;
       scenesManager: ReturnType<typeof useScenes>;
       charactersManager: ReturnType<typeof useCharacters>;
+      myStuffManager: ReturnType<typeof useMyStuff>;
       connectionsManager: ReturnType<typeof usePeerConnections>;
       userId: string;
       isLoading: boolean;
@@ -124,6 +126,7 @@ type IProps =
       mode: SceneMode.PlayOffline;
       sceneManager: ReturnType<typeof useScene>;
       scenesManager: ReturnType<typeof useScenes>;
+      myStuffManager: ReturnType<typeof useMyStuff>;
       charactersManager: ReturnType<typeof useCharacters>;
       connectionsManager?: undefined;
       idFromParams?: undefined;
@@ -137,6 +140,7 @@ export const Scene: React.FC<IProps> = (props) => {
     connectionsManager,
     scenesManager,
     charactersManager,
+    myStuffManager,
   } = props;
 
   const isGM = !props.idFromParams;
@@ -585,26 +589,26 @@ export const Scene: React.FC<IProps> = (props) => {
                     }
                   }}
                   onAssignOriginalCharacterSheet={() => {
-                    charactersManager.actions.openManager(
-                      ManagerMode.Use,
-                      (character) => {
+                    myStuffManager.actions.open({
+                      folder: "characters",
+                      callback: (character) => {
                         handleAssignOriginalCharacterSheet(
                           player.id,
                           character
                         );
-                      }
-                    );
+                      },
+                    });
                   }}
                   onAssignDuplicateCharacterSheet={() => {
-                    charactersManager.actions.openManager(
-                      ManagerMode.Use,
-                      (character) => {
+                    myStuffManager.actions.open({
+                      folder: "characters",
+                      callback: (character) => {
                         handleAssignDuplicateCharacterSheet(
                           player.id,
                           character
                         );
-                      }
-                    );
+                      },
+                    });
                   }}
                   onDiceRoll={() => {
                     handleSetPlayerRoll(
@@ -1439,10 +1443,11 @@ export const Scene: React.FC<IProps> = (props) => {
                 <MenuItem
                   data-cy="scene.load-scene"
                   onClick={() => {
-                    scenesManager.actions.openManager(
-                      ManagerMode.Use,
-                      handleLoadScene
-                    );
+                    myStuffManager.actions.open({
+                      folder: "scenes",
+                      callback: handleLoadScene,
+                    });
+
                     setMenuOpen(false);
                     logger.info("Scene:onLoadScene");
                   }}
@@ -1455,10 +1460,10 @@ export const Scene: React.FC<IProps> = (props) => {
                 <MenuItem
                   data-cy="scene.clone-and-load-scene"
                   onClick={() => {
-                    scenesManager.actions.openManager(
-                      ManagerMode.Use,
-                      handleCloneAndLoadScene
-                    );
+                    myStuffManager.actions.open({
+                      folder: "scenes",
+                      callback: handleCloneAndLoadScene,
+                    });
                     setMenuOpen(false);
                     logger.info("Scene:onCloneAndLoadScene");
                   }}

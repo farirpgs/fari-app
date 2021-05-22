@@ -116,7 +116,7 @@ export function MyStuff<TFolders extends string>(props: {
         maxWidth="md"
         classes={{
           paper: css({
-            minHeight: "50vh",
+            height: "100%",
           }),
         }}
       >
@@ -170,6 +170,7 @@ export function MyStuff<TFolders extends string>(props: {
                   <InputBase
                     placeholder={folder ? folder : "Search..."}
                     value={search}
+                    fullWidth
                     onChange={(e) => {
                       handleSetSearch(e.target.value);
                     }}
@@ -306,7 +307,7 @@ export function MyStuff<TFolders extends string>(props: {
         {elementsForLatest.length > 0 &&
           renderHeader("Latest", elementsForLatest.length)}
         <List dense>
-          {elementsForLatest.map((element, key) => {
+          {elementsForLatest.map((element) => {
             return (
               <React.Fragment key={element.id}>
                 <Element
@@ -336,7 +337,7 @@ export function MyStuff<TFolders extends string>(props: {
   function renderElements(elements: IManagerViewModel[], displayType = false) {
     const currentFolder = folder as TFolders;
     const groups = elements.reduce((acc, curr) => {
-      const group = curr.group || "";
+      const group = curr.group || "Other";
       const currentList = acc[group] ?? [];
       return {
         ...acc,
@@ -344,16 +345,21 @@ export function MyStuff<TFolders extends string>(props: {
       };
     }, {} as Record<string, Array<IManagerViewModel>>);
 
-    const groupNames = Object.keys(groups);
+    const groupNames = arraySort(Object.keys(groups), [
+      (g) => ({ value: g !== "Other", direction: "asc" }),
+      (g) => ({ value: g, direction: "asc" }),
+    ]);
 
     return (
       <Box>
         {groupNames.length === 0 && (
           <Grid container justify="center">
             <Grid item>
-              <Typography variant="subtitle2" color="textSecondary">
-                {"Nothing here yet"}
-              </Typography>
+              <Box my="2rem">
+                <Typography variant="subtitle2" color="textSecondary">
+                  {"Nothing here yet"}
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
         )}

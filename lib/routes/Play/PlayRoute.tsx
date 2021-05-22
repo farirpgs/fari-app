@@ -3,6 +3,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
@@ -29,6 +30,7 @@ export const PlayRoute: React.FC<{
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
+  const myStuffManager = useContext(MyStuffContext);
 
   const sceneManager = useScene({
     userId: userId,
@@ -128,6 +130,7 @@ export const PlayRoute: React.FC<{
           scenesManager={scenesManager}
           charactersManager={charactersManager}
           connectionsManager={connectionsManager}
+          myStuffManager={myStuffManager}
           isLoading={
             hostManager.state.loading || connectionsManager.state.loading
           }

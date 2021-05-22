@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { IManagerFolders, MyStuff } from "../lib/components/MyStuff/MyStuff";
 import { StoryProvider } from "./StoryProvider";
 
-const foldersMock = {
+const foldersMock: IManagerFolders = {
   Scenes: [
     {
       id: "1",
@@ -14,6 +14,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Scene",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "2",
@@ -21,6 +22,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Scene",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "3",
@@ -28,6 +30,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Scene",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "4",
@@ -35,6 +38,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Scene",
       lastUpdated: 1,
+      original: undefined,
     },
   ],
   Characters: [
@@ -44,6 +48,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "2",
@@ -51,6 +56,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "3",
@@ -58,6 +64,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "4",
@@ -65,6 +72,7 @@ const foldersMock = {
       group: "Star Wars",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "5",
@@ -72,6 +80,7 @@ const foldersMock = {
       group: "Avatar",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "6",
@@ -79,6 +88,7 @@ const foldersMock = {
       group: "Avatar",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "7",
@@ -86,6 +96,7 @@ const foldersMock = {
       group: "Avatar",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
     {
       id: "8",
@@ -93,6 +104,7 @@ const foldersMock = {
       group: "Avatar",
       type: "Character",
       lastUpdated: 1,
+      original: undefined,
     },
   ],
 };

@@ -7,11 +7,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
-import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -27,6 +27,7 @@ export const CharacterPrintRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const darkModeManager = useContext(DarkModeContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
+  const myStuffManager = useContext(MyStuffContext);
   const logger = useLogger();
 
   const query = useQuery<"dev">();
@@ -52,7 +53,7 @@ export const CharacterPrintRoute: React.FC<{
       setCharacter(characterToLoad);
     } else {
       history.replace("/");
-      charactersManager.actions.openManager(ManagerMode.Manage);
+      myStuffManager.actions.open({ folder: "characters" });
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
@@ -212,7 +213,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
               </Grid>
             </Grid>
             <Grid container>
-              {section.blocks.map((block, blockIndex) => {
+              {section.blocks.map((block) => {
                 const width: GridSize = !!block.meta.width
                   ? ((block.meta.width * 12) as GridSize)
                   : 12;

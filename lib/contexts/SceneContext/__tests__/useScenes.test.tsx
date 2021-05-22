@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { ManagerMode } from "../../../components/Manager/Manager";
 import { defaultSceneName, ISavableScene, useScenes } from "../ScenesContext";
 
 describe("useScenes", () => {
@@ -181,18 +180,6 @@ describe("useScenes", () => {
           newScene!.lastUpdated
         }}]`
       );
-      act(() => {
-        // WHEN I open the manager
-        result.current.actions.openManager(ManagerMode.Use);
-      });
-      // THEN the manager is opened
-      expect(result.current.state.mode).toEqual(ManagerMode.Use);
-      act(() => {
-        // WHEN I close the manager
-        result.current.actions.closeManager();
-      });
-      // THEN the manager is closed
-      expect(result.current.state.mode).toEqual(ManagerMode.Close);
     });
   });
 });

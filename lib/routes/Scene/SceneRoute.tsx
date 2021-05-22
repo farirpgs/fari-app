@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyStuffContext } from "../../contexts/MyStuffContext/MyStuffContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useUserId } from "../../hooks/useUserId/useUserId";
@@ -25,6 +25,7 @@ export const SceneRoute: React.FC<{
   const pageTitle = sanitizeSceneName(sceneName);
   const history = useHistory();
   const logger = useLogger();
+  const myStuffManager = useContext(MyStuffContext);
 
   useEffect(() => {
     logger.info("Route:Scene");
@@ -39,7 +40,7 @@ export const SceneRoute: React.FC<{
       sceneManager.actions.loadScene(sceneToLoad, false);
     } else {
       history.replace("/");
-      scenesManager.actions.openManager(ManagerMode.Manage);
+      myStuffManager.actions.open({ folder: "scenes" });
     }
   }, [props.match.params.id, scenesManager.state.scenes]);
 
@@ -51,6 +52,7 @@ export const SceneRoute: React.FC<{
         sceneManager={sceneManager}
         scenesManager={scenesManager}
         charactersManager={charactersManager}
+        myStuffManager={myStuffManager}
       />
     </>
   );

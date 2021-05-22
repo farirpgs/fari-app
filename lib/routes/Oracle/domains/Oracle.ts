@@ -11,7 +11,7 @@ const OracleValuesMapping: Record<OracleValues, [min: number, max: number]> = {
 export const Oracle = {
   getValue(val: number): OracleValues {
     const [oracleValue] =
-      Object.entries(OracleValuesMapping).find(([enumValue, [min, max]]) => {
+      Object.entries(OracleValuesMapping).find(([, [min, max]]) => {
         return val >= min && val <= max;
       }) ?? [];
 

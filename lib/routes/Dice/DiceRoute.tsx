@@ -69,7 +69,7 @@ export function DiceRoute(props: { pool: boolean }) {
           onRoll={(result) => {
             setRollResult(result);
           }}
-          onRollPool={(result, playerId) => {
+          onRollPool={(result) => {
             setRollResult(result);
           }}
         />

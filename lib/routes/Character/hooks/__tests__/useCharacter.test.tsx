@@ -20,8 +20,8 @@ describe("useCharacter", () => {
         lastUpdated: 1,
       };
       // WHEN
-      const { result, rerender } = renderHook(
-        (props) => {
+      const { result } = renderHook(
+        () => {
           return useCharacter(character);
         },
         {
@@ -48,7 +48,7 @@ describe("useCharacter", () => {
       // GIVEN
       const initialRenderCharacter = (undefined as unknown) as ICharacter;
       // WHEN
-      const { result, rerender } = renderHook(
+      const { result } = renderHook(
         (props) => {
           return useCharacter(props.character);
         },
@@ -192,8 +192,8 @@ describe("useCharacter", () => {
         lastUpdated: 1,
       };
       // WHEN
-      const { result, rerender, waitForNextUpdate } = renderHook(
-        (props) => {
+      const { result, waitForNextUpdate } = renderHook(
+        () => {
           return useCharacter(character);
         },
         {

@@ -1,8 +1,6 @@
 import produce from "immer";
-import React, { useMemo, useRef, useState } from "react";
-import { ManagerMode } from "../../components/Manager/Manager";
-import { arraySort } from "../../domains/array/arraySort";
-import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import React from "react";
+import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
@@ -15,8 +13,6 @@ export type ISavableScene = Pick<
   "id" | "name" | "indexCards" | "version" | "lastUpdated" | "group" | "notes"
 >;
 
-type IManagerCallback = (scene: ISavableScene) => void | undefined;
-
 export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
   undefined as any
 );
@@ -24,8 +20,6 @@ export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
 export function useScenes(props?: { localStorage: Storage }) {
   const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-scenes";
-  const [mode, setMode] = useState(ManagerMode.Close);
-  const managerCallback = useRef<IManagerCallback | undefined>(undefined);
 
   const [scenes, setScenes] = useStorageEntities<ISavableScene>({
     key: key,
@@ -33,26 +27,7 @@ export function useScenes(props?: { localStorage: Storage }) {
     migrationFunction: SceneFactory.migrate,
   });
 
-  const sortedScenes = useMemo(() => {
-    return arraySort(scenes, [
-      (s) => {
-        const lastUpdate = getUnixFrom(s.lastUpdated);
-        return { value: lastUpdate, direction: "desc" };
-      },
-    ]);
-  }, [scenes]);
-
-  const groups = useGroups(sortedScenes, (s) => s.group);
-
-  function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
-    setMode(newMode);
-    managerCallback.current = callback;
-  }
-
-  function closeManager() {
-    setMode(ManagerMode.Close);
-    managerCallback.current = undefined;
-  }
+  const groups = useGroups(scenes, (s) => s.group);
 
   function add() {
     const newScene: ISavableScene = SceneFactory.makeSavableScene();
@@ -145,14 +120,10 @@ export function useScenes(props?: { localStorage: Storage }) {
 
   return {
     state: {
-      mode: mode,
-      scenes: sortedScenes,
+      scenes: scenes,
       groups: groups,
-      managerCallback: managerCallback.current,
     },
     actions: {
-      openManager,
-      closeManager,
       add,
       upsert,
       remove,

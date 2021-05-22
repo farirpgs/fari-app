@@ -30,7 +30,7 @@ export function useLatestDiceRoll(
     undefined
   );
   const [rolling, setRolling] = useState(false);
-  const [color, setColor] = useState(theme.palette.primary.main);
+  const [color, setColor] = useState(theme.palette.background.paper);
 
   const hasRolledOnce = finalResult !== undefined;
 
@@ -50,24 +50,21 @@ export function useLatestDiceRoll(
         latestPlayerRoll
       );
 
-      let newColor = theme.palette.primary.main;
-
-      const isPool = latestPlayerRoll?.options?.listResults;
-
-      if (rolling || isPool) {
-        newColor = theme.palette.primary.main;
+      if (!latestPlayerRoll) {
+        setColor(theme.palette.background.paper);
       } else if (
         commandGroup?.goodRoll &&
         latestPlayerRoll?.totalWithoutModifiers >= commandGroup?.goodRoll
       ) {
-        newColor = darken(theme.palette.success.main, 0.2);
+        setColor(darken(theme.palette.success.main, 0.2));
       } else if (
         commandGroup?.badRoll &&
         latestPlayerRoll?.totalWithoutModifiers <= commandGroup?.badRoll
       ) {
-        newColor = darken(theme.palette.error.main, 0.2);
+        setColor(darken(theme.palette.error.main, 0.2));
+      } else {
+        setColor(theme.palette.primary.main);
       }
-      setColor(newColor);
     },
     [rolling, latestPlayerRoll]
   );

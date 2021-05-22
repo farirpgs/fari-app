@@ -7,7 +7,7 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Font } from "../../domains/font/Font";
 
-export const NotFoundRoute: React.FC<{}> = (props) => {
+export const NotFoundRoute: React.FC<{}> = () => {
   const logger = useLogger();
 
   useEffect(() => {

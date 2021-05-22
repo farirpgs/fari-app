@@ -49,7 +49,7 @@ type IRow = {
   size: number;
 };
 
-export const DataRoute: React.FC = (props) => {
+export const DataRoute: React.FC = () => {
   const { t } = useTranslate();
   const DataRouteItemType = {
     Character: t("data-route.item-type.character"),
