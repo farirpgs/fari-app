@@ -29,8 +29,6 @@ export function useStorageEntities<T>(props: {
 
   useEffect(function syncOtherTabLocalStorage() {
     function refreshStorage() {
-      // TODO: Test after v5
-      return;
       const entities = FariEntity.loadEntitiesFromStorage<T>({
         key: props.key,
         localStorage: props.localStorage,

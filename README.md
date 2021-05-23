@@ -5,13 +5,16 @@
 
 # TODO
 
-- [ ] new Drawer
+- [x] new Drawer
+  - [ ] TEST
 - [ ] new Navigation
 - [ ] new player row: https://xd.adobe.com/view/13659674-c494-4de6-a734-01fdc60959c9-4636/
-- [ ] sync storage between tabs
+- [x] sync storage between tabs
+  - [ ] TEST
 - [ ] GM characters sub section
 - [ ] update dependencies
 - [ ] get rid of yarn
+- [ ] SESSION VS Scene
 
 
 # NEXT
