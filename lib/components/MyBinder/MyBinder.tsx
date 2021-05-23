@@ -82,6 +82,7 @@ export function MyBinder<TFolders extends string>(props: {
     function clearFolderOnClose() {
       if (props.open === false) {
         setFolder(undefined);
+        setSearch("");
       }
     },
     [props.open]
@@ -193,6 +194,7 @@ export function MyBinder<TFolders extends string>(props: {
                         ? `Search in "${currentFolderLabel}"...`
                         : "Search..."
                     }
+                    autoFocus
                     value={search}
                     fullWidth
                     onChange={(e) => {
