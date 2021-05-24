@@ -92,7 +92,7 @@ export const OracleRoute = () => {
         ],
         { listResults: false }
       );
-      logger.info("OracleRoute:onDiceRoll", { roll: newRoll });
+      logger.info("OracleRoute:onDiceRoll", { contexts: { roll: newRoll } });
       return [newRoll, ...draft];
     });
   }
@@ -103,7 +103,9 @@ export const OracleRoute = () => {
 
   useEffect(() => {
     if (shouldDisplayFinalResult) {
-      logger.info("OracleRoute:onResult", { oracleValue: oracleValue });
+      logger.info("OracleRoute:onResult", {
+        tags: { oracleValue: oracleValue },
+      });
       logger.info(`OracleRoute:onResult:value:${oracleValue}`);
     }
   }, [shouldDisplayFinalResult, oracleValue]);
@@ -195,7 +197,7 @@ export const OracleRoute = () => {
                             setLikeliness(l.value);
 
                             logger.info("OracleRoute:onLikelinessChange", {
-                              value: l.value,
+                              tags: { likeliness: l.value },
                             });
                             logger.info(
                               `OracleRoute:onLikelinessChange:value:${l.value}`

@@ -246,7 +246,9 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
           "+Rules": [
             "props-from-return-to-the-stars",
             "quick-conflicts-from-spirit-of-the-century",
-            "magic-aspect-based-naration",
+            "magic-aspect-based-narration",
+            "using-ammo-in-fate",
+            "chase",
           ],
         },
       ],
@@ -331,7 +333,15 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     sideBar: {
       "+Blog": [
         "welcome",
-        { "+2021": ["fari-v400", "fari-v370", "fari-v360", "moments-in-fate"] },
+        {
+          "+2021": [
+            "fari-v500",
+            "fari-v400",
+            "fari-v370",
+            "fari-v360",
+            "moments-in-fate",
+          ],
+        },
       ],
     },
   },

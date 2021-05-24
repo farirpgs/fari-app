@@ -335,28 +335,3 @@ function getFirstMatchAfterElementWithPredicate(
     currentElement = currentElement.nextElementSibling;
   }
 }
-
-function getFirstMatchAfterElementSelector(
-  elem: Element | undefined | null,
-  selector: string
-): Element | undefined {
-  return getFirstMatchAfterElementWithPredicate(
-    elem,
-    (elem) => elem?.matches(selector) ?? false
-  );
-}
-
-function getFirstMatchBeforeElement(
-  elem: Element | undefined | null,
-  selector: string
-): Element | undefined {
-  let currentElement = elem?.previousElementSibling;
-
-  while (currentElement) {
-    if (currentElement.matches(selector)) {
-      return currentElement;
-    }
-
-    currentElement = currentElement.previousElementSibling;
-  }
-}

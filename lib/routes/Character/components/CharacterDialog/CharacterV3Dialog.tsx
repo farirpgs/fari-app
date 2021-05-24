@@ -1,4 +1,4 @@
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
@@ -8,21 +8,23 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Grid from "@material-ui/core/Grid";
+import Grid, { GridSize } from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
-import Link from "@material-ui/core/Link";
 import Snackbar from "@material-ui/core/Snackbar";
+import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Switch from "@material-ui/core/Switch";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PrintIcon from "@material-ui/icons/Print";
 import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
@@ -49,39 +51,23 @@ import {
   getTemplateInfo,
 } from "../../../../domains/character/CharacterType";
 import {
-  BlockType,
-  IBlock,
   ICharacter,
   IPage,
+  IPageSectionPosition,
   ISection,
-  Position,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
+import { IDiceRollResult } from "../../../../domains/dice/Dice";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
+import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../../../locale";
 import { useCharacter } from "../../hooks/useCharacter";
 import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
-import {
-  BlockDicePool,
-  BlockDicePoolActions,
-  IDicePool,
-  IDicePoolElement,
-} from "./components/blocks/BlockDicePool";
-import {
-  BlockNumeric,
-  BlockNumericActions,
-} from "./components/blocks/BlockNumeric";
-import {
-  BlockPointCounter,
-  BlockPointCounterActions,
-} from "./components/blocks/BlockPointCounter";
-import { BlockSkill, BlockSkillActions } from "./components/blocks/BlockSkill";
-import { BlockSlotTracker } from "./components/blocks/BlockSlotTracker";
-import { BlockText, BlockTextActions } from "./components/blocks/BlockText";
+import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
 
 export const smallIconButtonStyle = css({
@@ -109,22 +95,23 @@ export const CharacterV3Dialog: React.FC<{
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
-  pool: IDicePool;
 
   synced?: boolean;
 
-  onPoolClick(element: IDicePoolElement): void;
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
   onToggleSync?(): void;
+  onRoll(diceRollResult: IDiceRollResult): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const query = useQuery<"card">();
+  const blackButtonTheme = useThemeFromColor(theme.palette.text.primary);
+  const query = useQuery<"card" | "advanced">();
   const showCharacterCard = query.get("card") === "true";
+  const defaultAdvanced = query.get("advanced") === "true";
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
-  const [advanced, setAdvanced] = useState(false);
+  const [advanced, setAdvanced] = useState(defaultAdvanced);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
@@ -214,7 +201,7 @@ export const CharacterV3Dialog: React.FC<{
         props.character?.id !== characterManager.state.character?.id;
 
       if (isDifferentCharacter) {
-        setAdvanced(false);
+        setAdvanced(defaultAdvanced);
         setTab("0");
       }
     },
@@ -255,13 +242,15 @@ export const CharacterV3Dialog: React.FC<{
   );
 
   function renderDialog() {
+    const maxWidth = characterManager.state.character?.wide ? "lg" : "md";
+
     if (props.dialog && characterManager.state.character) {
       return (
         <Dialog
           open={props.open}
           fullWidth
           keepMounted={false}
-          maxWidth="md"
+          maxWidth={maxWidth}
           scroll="paper"
           onClose={onClose}
           classes={{
@@ -275,7 +264,7 @@ export const CharacterV3Dialog: React.FC<{
               padding: "0",
             })}
           >
-            <Container maxWidth="md">
+            <Container maxWidth={maxWidth}>
               <Box className={dialogSheetContentStyle}>
                 {renderNameAndGroup()}
               </Box>
@@ -288,7 +277,7 @@ export const CharacterV3Dialog: React.FC<{
             })}
             dividers
           >
-            <Container maxWidth="md">
+            <Container maxWidth={maxWidth}>
               <Box className={dialogSheetContentStyle}>
                 {renderPages(characterManager.state.character.pages)}
               </Box>
@@ -300,7 +289,10 @@ export const CharacterV3Dialog: React.FC<{
               padding: "0",
             })}
           >
-            <Container maxWidth="md" className={css({ padding: ".5rem" })}>
+            <Container
+              maxWidth={maxWidth}
+              className={css({ padding: ".5rem" })}
+            >
               <Box className={dialogSheetContentStyle}>
                 {renderTopLevelActions()}
               </Box>
@@ -311,7 +303,7 @@ export const CharacterV3Dialog: React.FC<{
     }
 
     return (
-      <Container maxWidth="md">
+      <Container maxWidth={maxWidth}>
         <Box className={fullScreenSheetContentStyle}>
           {renderTopLevelActions()}
         </Box>
@@ -380,7 +372,10 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
-    const numberOfSections = pages.flatMap((p) => p.sections).length;
+    const numberOfSections = pages.flatMap((p) => [
+      ...p.sections.left,
+      ...p.sections.right,
+    ]).length;
     const doesntHaveSections = numberOfSections === 0;
     const shouldRenderLoadTemplate = props.dialog
       ? doesntHaveSections || advanced
@@ -456,7 +451,7 @@ export const CharacterV3Dialog: React.FC<{
               <Grid item>
                 <IconButton
                   onClick={() => {
-                    characterManager.actions.addPage(currentPageIndex);
+                    characterManager.actions.addPage();
                     const newTab =
                       characterManager.state.character?.pages.length ?? 0;
                     setTab(newTab.toString());
@@ -480,6 +475,16 @@ export const CharacterV3Dialog: React.FC<{
                   }}
                 >
                   <UndoIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  onClick={() => {
+                    characterManager.actions.duplicatePage(currentPageIndex);
+                    setTab((currentPageIndex + 1).toString());
+                  }}
+                >
+                  <FileCopyIcon />
                 </IconButton>
               </Grid>
               <Grid item>
@@ -535,16 +540,16 @@ export const CharacterV3Dialog: React.FC<{
                       {renderSections(
                         page,
                         pageIndex,
-                        page.sections,
-                        Position.Left
+                        page.sections.left,
+                        "left"
                       )}
                     </Grid>
                     <Grid item xs={12} md={6} className={sectionStyle}>
                       {renderSections(
                         page,
                         pageIndex,
-                        page.sections,
-                        Position.Right
+                        page.sections.right,
+                        "right"
                       )}
                     </Grid>
                   </Grid>
@@ -578,7 +583,11 @@ export const CharacterV3Dialog: React.FC<{
           )}
           <Grid item>
             <Box pt=".5rem">
-              <Typography>{date.format("lll")}</Typography>
+              <Typography>
+                {date.format("lll")} / {"v"}
+                {characterManager.state.character?.version} /{" "}
+                {characterManager.state.character?.id.slice(0, 5)}
+              </Typography>
             </Box>
           </Grid>
         </Grid>
@@ -592,8 +601,7 @@ export const CharacterV3Dialog: React.FC<{
                   readonly={false}
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
-                  pool={props.pool}
-                  onPoolClick={props.onPoolClick}
+                  onRoll={props.onRoll}
                 />
               </Box>
             </Grid>
@@ -607,20 +615,15 @@ export const CharacterV3Dialog: React.FC<{
     page: IPage,
     pageIndex: number,
     sections: Array<ISection> | undefined,
-    position: Position
+    sectionLocation: IPageSectionPosition
   ) {
-    const numberOfSections =
-      sections?.filter((s) => s.position === position).length ?? 0;
+    const numberOfSections = sections?.length ?? 0;
     const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
 
     return (
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
-            if (section.position !== position) {
-              return null;
-            }
-
             const helpLink = characterTemplateInfo?.isFate
               ? HeaderHelpLinks[section.label.toLowerCase()]
               : undefined;
@@ -631,20 +634,23 @@ export const CharacterV3Dialog: React.FC<{
                   label={section.label}
                   currentPageIndex={currentPageIndex}
                   pages={characterManager.state.character?.pages}
-                  position={section.position}
+                  sectionLocation={sectionLocation}
                   helpLink={helpLink}
                   advanced={advanced}
                   visibleOnCard={section.visibleOnCard}
-                  onReposition={(newPosition) => {
+                  canMoveUp={sectionIndex !== 0}
+                  canMoveDown={sectionIndex !== sections.length - 1}
+                  onReposition={() => {
                     characterManager.actions.repositionSection(
                       pageIndex,
-                      sectionIndex,
-                      newPosition
+                      sectionLocation,
+                      sectionIndex
                     );
                   }}
                   onMoveToPage={(newPageIndex) => {
                     characterManager.actions.moveSectionInPage(
                       pageIndex,
+                      sectionLocation,
                       sectionIndex,
                       newPageIndex
                     );
@@ -652,12 +658,21 @@ export const CharacterV3Dialog: React.FC<{
                   onToggleVisibleOnCard={() => {
                     characterManager.actions.toggleSectionVisibleOnCard(
                       pageIndex,
+                      sectionLocation,
+                      sectionIndex
+                    );
+                  }}
+                  onDuplicateSection={() => {
+                    characterManager.actions.duplicateSection(
+                      pageIndex,
+                      sectionLocation,
                       sectionIndex
                     );
                   }}
                   onLabelChange={(newLabel) => {
                     characterManager.actions.renameSection(
                       pageIndex,
+                      sectionLocation,
                       sectionIndex,
                       newLabel
                     );
@@ -665,6 +680,7 @@ export const CharacterV3Dialog: React.FC<{
                   onMoveDown={() => {
                     characterManager.actions.moveSection(
                       pageIndex,
+                      sectionLocation,
                       sectionIndex,
                       "down"
                     );
@@ -672,6 +688,7 @@ export const CharacterV3Dialog: React.FC<{
                   onMoveUp={() => {
                     characterManager.actions.moveSection(
                       pageIndex,
+                      sectionLocation,
                       sectionIndex,
                       "up"
                     );
@@ -683,39 +700,50 @@ export const CharacterV3Dialog: React.FC<{
                     if (confirmed) {
                       characterManager.actions.removeSection(
                         pageIndex,
+                        sectionLocation,
                         sectionIndex
                       );
                     }
                   }}
                 />
-                {renderSectionBlocks(page, pageIndex, section, sectionIndex)}
+                {renderSectionBlocks(
+                  page,
+                  pageIndex,
+                  section,
+                  sectionLocation,
+                  sectionIndex
+                )}
 
                 {advanced && (
                   <Box p=".5rem" mb=".5rem">
-                    <Grid container justify="center" alignItems="center">
-                      <Grid item>
-                        <AddBlock
-                          onAddBlock={(blockType) => {
-                            characterManager.actions.addBlock(
-                              pageIndex,
-                              sectionIndex,
-                              blockType
-                            );
-                          }}
-                        />
+                    <ThemeProvider theme={blackButtonTheme}>
+                      <Grid container justify="center" alignItems="center">
+                        <Grid item>
+                          <AddBlock
+                            variant="button"
+                            onAddBlock={(blockType) => {
+                              characterManager.actions.addBlock(
+                                pageIndex,
+                                sectionLocation,
+                                sectionIndex,
+                                blockType
+                              );
+                            }}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <AddSection
+                            onAddSection={() => {
+                              characterManager.actions.addSection(
+                                pageIndex,
+                                sectionIndex,
+                                sectionLocation
+                              );
+                            }}
+                          />
+                        </Grid>
                       </Grid>
-                      <Grid item>
-                        <AddSection
-                          onAddSection={() => {
-                            characterManager.actions.addSection(
-                              pageIndex,
-                              sectionIndex,
-                              position
-                            );
-                          }}
-                        />
-                      </Grid>
-                    </Grid>
+                    </ThemeProvider>
                   </Box>
                 )}
               </Box>
@@ -724,11 +752,17 @@ export const CharacterV3Dialog: React.FC<{
 
           {shouldRenderAddSectionButton && (
             <Box>
-              <AddSection
-                onAddSection={() => {
-                  characterManager.actions.addSection(pageIndex, 0, position);
-                }}
-              />
+              <ThemeProvider theme={blackButtonTheme}>
+                <AddSection
+                  onAddSection={() => {
+                    characterManager.actions.addSection(
+                      pageIndex,
+                      0,
+                      sectionLocation
+                    );
+                  }}
+                />
+              </ThemeProvider>
             </Box>
           )}
         </Box>
@@ -766,15 +800,30 @@ export const CharacterV3Dialog: React.FC<{
                 />
               </Grid>
               <Grid item>
+                <FormControlLabel
+                  label={t("character-dialog.control.wide-mode")}
+                  control={
+                    <Switch
+                      color="primary"
+                      data-cy="character-dialog.toggle-wide"
+                      checked={characterManager.state.character?.wide ?? false}
+                      onChange={() => {
+                        characterManager.actions.toggleWideMode();
+                      }}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item>
                 {props.onToggleSync && (
                   <Grid item>
                     <FormControlLabel
-                      label={t("character-dialog.control.sync")}
+                      label={t("character-dialog.control.stored")}
                       control={
                         <Switch
                           color="primary"
                           checked={props.synced ?? false}
-                          disabled={props.synced}
+                          readOnly={props.synced}
                           onChange={props.onToggleSync}
                         />
                       }
@@ -907,6 +956,9 @@ export const CharacterV3Dialog: React.FC<{
                       InputProps={{
                         ...params.InputProps,
                         disableUnderline: true,
+                        classes: {
+                          input: css({ paddingBottom: "0 !important" }),
+                        },
                       }}
                       data-cy={`character-dialog.group`}
                       disabled={props.readonly}
@@ -945,6 +997,7 @@ export const CharacterV3Dialog: React.FC<{
     page: IPage,
     pageIndex: number,
     section: ISection,
+    sectionLocation: IPageSectionPosition,
     sectionIndex: number
   ) {
     const dragAndDropKey = `${page.label}.${pageIndex}.${section.label}.${sectionIndex}`;
@@ -957,500 +1010,218 @@ export const CharacterV3Dialog: React.FC<{
             marginBottom: section.blocks.length === 0 ? "2rem" : ".5rem",
           })}
         >
-          {section.blocks.map((block, blockIndex) => {
-            return (
-              <Box key={block.id}>
-                <BetterDnd
-                  index={blockIndex}
-                  type={dragAndDropKey}
-                  readonly={!advanced}
-                  className={css({
-                    label: "CharacterDialog-block-dnd",
-                    marginLeft: ".5rem",
-                    marginRight: ".5rem",
-                  })}
-                  dragIndicatorClassName={css({
-                    label: "CharacterDialog-block-dnd-drag",
-                    marginTop: ".5rem",
-                  })}
-                  onMove={(dragIndex, hoverIndex) => {
-                    characterManager.actions.moveDnDBlock(
-                      pageIndex,
-                      sectionIndex,
-                      dragIndex,
-                      hoverIndex
-                    );
-                  }}
-                >
-                  <Box
+          <Grid container>
+            {section.blocks.map((block, blockIndex) => {
+              const width: GridSize = !!block.meta.width
+                ? ((block.meta.width * 12) as GridSize)
+                : 12;
+              return (
+                <Grid key={block.id} item xs={width}>
+                  <BetterDnd
+                    direction="vertical"
+                    index={blockIndex}
+                    type={dragAndDropKey}
                     className={css({
-                      label: "CharacterDialog-block",
-                      marginTop: ".2rem",
-                      marginBottom: ".2rem",
+                      label: "CharacterDialog-block-dnd",
                       marginLeft: ".5rem",
                       marginRight: ".5rem",
                     })}
-                  >
-                    {block.type === BlockType.Text && (
-                      <BlockText
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.Numeric && (
-                      <BlockNumeric
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.Skill && (
-                      <BlockSkill
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                        pool={props.pool}
-                        onPoolClick={(element) => {
-                          props.onPoolClick(element);
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.DicePool && (
-                      <BlockDicePool
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                        pool={props.pool}
-                        onPoolClick={(element) => {
-                          props.onPoolClick(element);
-                        }}
-                      />
-                    )}
-                    {block.type === BlockType.PointCounter && (
-                      <BlockPointCounter
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                      />
-                    )}
-
-                    {block.type === BlockType.SlotTracker && (
-                      <BlockSlotTracker
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        pageIndex={pageIndex}
-                        sectionIndex={sectionIndex}
-                        section={section}
-                        block={block}
-                        blockIndex={blockIndex}
-                        onLabelChange={(value) => {
-                          characterManager.actions.setBlockLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onValueChange={(value) => {
-                          characterManager.actions.setBlockValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            value
-                          );
-                        }}
-                        onMetaChange={(meta) => {
-                          characterManager.actions.setBlockMeta(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            meta
-                          );
-                        }}
-                        onAddBox={() => {
-                          characterManager.actions.addBlockBox(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex
-                          );
-                        }}
-                        onRemoveBox={() => {
-                          characterManager.actions.removeBlockBox(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex
-                          );
-                        }}
-                        onToggleBox={(boxIndex) => {
-                          characterManager.actions.toggleCheckboxFieldValue(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            boxIndex
-                          );
-                        }}
-                        onBoxLabelChange={(boxIndex, value) => {
-                          characterManager.actions.setBlockBoxLabel(
-                            pageIndex,
-                            sectionIndex,
-                            blockIndex,
-                            boxIndex,
-                            value
-                          );
-                        }}
-                      />
-                    )}
-                    {advanced &&
-                      renderBlockAdvancedOptions(
+                    onMove={(dragIndex, hoverIndex) => {
+                      characterManager.actions.moveDnDBlock(
                         pageIndex,
+                        sectionLocation,
                         sectionIndex,
-                        section,
-                        block,
-                        blockIndex
-                      )}
-                    {renderBlockHelpText(
-                      pageIndex,
-                      sectionIndex,
-                      section,
-                      block,
-                      blockIndex
-                    )}
-                  </Box>
-                </BetterDnd>
-              </Box>
-            );
-          })}
+                        dragIndex,
+                        hoverIndex
+                      );
+                    }}
+                    render={(dndRenderProps) => {
+                      return (
+                        <Box>
+                          <Grid container wrap="nowrap">
+                            {advanced && (
+                              <Grid item>
+                                <div ref={dndRenderProps.drag}>
+                                  <Tooltip
+                                    title={
+                                      // prettier-ignore
+                                      t("character-dialog.control.move")
+                                    }
+                                  >
+                                    <IconButton size="small">
+                                      <DragIndicatorIcon
+                                        className={css({
+                                          transition: theme.transitions.create([
+                                            "color",
+                                          ]),
+                                          display: dndRenderProps.isDragging
+                                            ? "none"
+                                            : "block",
+                                          cursor: "move",
+                                        })}
+                                        htmlColor={
+                                          dndRenderProps.isOver
+                                            ? theme.palette.text.primary
+                                            : theme.palette.text.hint
+                                        }
+                                      />
+                                    </IconButton>
+                                  </Tooltip>
+                                </div>
+                                <Box display="flex" justifyContent="center">
+                                  <Tooltip
+                                    title={
+                                      // prettier-ignore
+                                      t("character-dialog.control.duplicate")
+                                    }
+                                  >
+                                    <IconButton
+                                      size="small"
+                                      onClick={() => {
+                                        characterManager.actions.duplicateBlock(
+                                          pageIndex,
+                                          sectionLocation,
+                                          sectionIndex,
+                                          blockIndex
+                                        );
+                                      }}
+                                    >
+                                      <FileCopyIcon
+                                        className={css({
+                                          width: "1rem",
+                                          height: "1rem",
+                                          transition: theme.transitions.create([
+                                            "color",
+                                          ]),
+                                        })}
+                                        htmlColor={
+                                          dndRenderProps.isOver
+                                            ? theme.palette.text.primary
+                                            : theme.palette.text.hint
+                                        }
+                                      />
+                                    </IconButton>
+                                  </Tooltip>
+                                </Box>
+
+                                <Box display="flex" justifyContent="center">
+                                  <Tooltip
+                                    title={
+                                      // prettier-ignore
+                                      t("character-dialog.control.remove-block")
+                                    }
+                                  >
+                                    <IconButton
+                                      size="small"
+                                      data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                                      onClick={() => {
+                                        characterManager.actions.removeBlock(
+                                          pageIndex,
+                                          sectionLocation,
+                                          sectionIndex,
+                                          blockIndex
+                                        );
+                                      }}
+                                    >
+                                      <DeleteIcon
+                                        className={css({
+                                          width: "1rem",
+                                          height: "1rem",
+                                          transition: theme.transitions.create([
+                                            "color",
+                                          ]),
+                                        })}
+                                        htmlColor={
+                                          dndRenderProps.isOver
+                                            ? theme.palette.text.primary
+                                            : theme.palette.text.hint
+                                        }
+                                      />
+                                    </IconButton>
+                                  </Tooltip>
+                                </Box>
+                              </Grid>
+                            )}
+                            <Grid item xs>
+                              <Box
+                                className={cx(
+                                  css({
+                                    label: "CharacterDialog-block",
+                                    marginTop: ".2rem",
+                                    marginBottom: ".2rem",
+                                    marginLeft: ".5rem",
+                                    marginRight: ".5rem",
+                                  }),
+                                  advanced &&
+                                    css({
+                                      padding: ".5rem",
+                                      transition: theme.transitions.create([
+                                        "border",
+                                      ]),
+                                      border: `1px solid ${
+                                        dndRenderProps.isOver
+                                          ? theme.palette.text.secondary
+                                          : theme.palette.divider
+                                      }`,
+                                      borderRadius: "4px",
+                                    })
+                                )}
+                              >
+                                <BlockByType
+                                  advanced={advanced}
+                                  readonly={props.readonly}
+                                  dataCy={`character-dialog.${section.label}.${block.label}`}
+                                  block={block}
+                                  onChange={(newBlock) => {
+                                    characterManager.actions.setBlock(
+                                      pageIndex,
+                                      sectionLocation,
+                                      sectionIndex,
+                                      blockIndex,
+                                      newBlock
+                                    );
+                                  }}
+                                  onToggleSplit={() => {
+                                    const shouldUseHalfWidth =
+                                      block.meta.width == null ||
+                                      block.meta.width === 1;
+                                    const newWidth = shouldUseHalfWidth
+                                      ? 0.5
+                                      : 1;
+
+                                    characterManager.actions.setBlockMeta(
+                                      pageIndex,
+                                      sectionLocation,
+                                      sectionIndex,
+                                      blockIndex,
+                                      {
+                                        ...block.meta,
+                                        width: newWidth,
+                                      }
+                                    );
+                                  }}
+                                  onMainPointCounterChange={() => {
+                                    characterManager.actions.toggleBlockMainPointCounter(
+                                      block.id
+                                    );
+                                  }}
+                                  onRoll={(diceRollResult) => {
+                                    props.onRoll(diceRollResult);
+                                  }}
+                                />
+                              </Box>
+                            </Grid>
+                          </Grid>
+                        </Box>
+                      );
+                    }}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
         </Box>
       </>
-    );
-  }
-
-  function renderBlockAdvancedOptions(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock,
-    blockIndex: number
-  ) {
-    return (
-      <Grid container justify="flex-end" spacing={1}>
-        {block.type === BlockType.PointCounter && (
-          <BlockPointCounterActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-            toggleBlockMainPointCounter={() => {
-              characterManager.actions.toggleBlockMainPointCounter(block.id);
-            }}
-          />
-        )}
-        {block.type === BlockType.Text && (
-          <BlockTextActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-        {block.type === BlockType.Numeric && (
-          <BlockNumericActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-
-        {block.type === BlockType.Skill && (
-          <BlockSkillActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-        {block.type === BlockType.DicePool && (
-          <BlockDicePoolActions
-            pageIndex={pageIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            block={block}
-            blockIndex={blockIndex}
-            onMetaChange={(meta) => {
-              characterManager.actions.setBlockMeta(
-                pageIndex,
-                sectionIndex,
-                blockIndex,
-                meta
-              );
-            }}
-          />
-        )}
-
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              label: "CharacterDialog-duplicate",
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.duplicateBlock(
-                pageIndex,
-                sectionIndex,
-                block,
-                blockIndex
-              );
-            }}
-          >
-            {t("character-dialog.control.duplicate")}
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            data-cy={`character-dialog.${section.label}.${block.label}.remove`}
-            className={css({
-              label: "CharacterDialog-remove",
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              characterManager.actions.removeBlock(
-                pageIndex,
-                sectionIndex,
-                blockIndex
-              );
-            }}
-          >
-            {t("character-dialog.control.remove-block")}
-          </Link>
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function renderBlockHelpText(
-    pageIndex: number,
-    sectionIndex: number,
-    section: ISection,
-    block: IBlock,
-    blockIndex: number
-  ) {
-    if (!advanced && !block.meta.helperText) {
-      return null;
-    }
-    return (
-      <Box>
-        <Grid container alignItems="flex-start" wrap="nowrap">
-          {advanced && (
-            <Grid item>
-              <FormHelperText className={css({ paddingRight: ".2rem" })}>
-                {t("character-dialog.helper-text.help")}
-              </FormHelperText>
-            </Grid>
-          )}
-
-          <Grid item xs>
-            {" "}
-            <FormHelperText>
-              <ContentEditable
-                readonly={!advanced}
-                border={advanced}
-                data-cy={`character-dialog.${section.label}.${block.label}.helper-text`}
-                value={block.meta.helperText ?? ""}
-                onChange={(newHelpText) => {
-                  characterManager.actions.setBlockMeta(
-                    pageIndex,
-                    sectionIndex,
-                    blockIndex,
-                    { ...block.meta, helperText: newHelpText }
-                  );
-                }}
-              />
-            </FormHelperText>
-          </Grid>
-        </Grid>
-      </Box>
     );
   }
 };

@@ -92,7 +92,9 @@ export function usePeerConnections(options: {
           connection.current.on("close", onHostConnectionClose);
           connection.current.on("data", onHostDataReceive);
         } catch (error) {
-          logger.error("usePeerConnections.connect: Error", { error });
+          logger.error("usePeerConnections.connect: Error", {
+            contexts: { error },
+          });
           setConnectingToHost(false);
           setConnectingToHostError(true);
         }
@@ -103,7 +105,9 @@ export function usePeerConnections(options: {
         try {
           connectionToHost?.send(request);
         } catch (error) {
-          logger.error("usePeerConnections.sendToHost: Error", { error });
+          logger.error("usePeerConnections.sendToHost: Error", {
+            contexts: { error },
+          });
         }
       },
     },

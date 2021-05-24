@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import CreateIcon from "@material-ui/icons/Create";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import FaceIcon from "@material-ui/icons/Face";
@@ -21,6 +22,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RestorePageIcon from "@material-ui/icons/RestorePage";
 import React, { useState } from "react";
+import { FontFamily } from "../../../../constants/FontFamily";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
@@ -155,11 +157,11 @@ export const PlayerRow: React.FC<
           <Grid item>
             <Box display="flex" justifyContent="flex-end" height="100%">
               <DiceBox
-                disableTooltip={true}
                 rolls={props.player.rolls}
                 size="2.5rem"
                 fontSize="1.25rem"
                 borderSize=".15rem"
+                disableConfettis={props.isMe}
                 disabled={!props.permissions.canRoll}
                 onClick={() => {
                   handleOnRoll();
@@ -204,6 +206,7 @@ export const PlayerRow: React.FC<
           spacing={1}
         >
           <Grid item>{renderInitiative()}</Grid>
+          <Grid item>{renderPlayerId()}</Grid>
         </Grid>
         <Grid
           item
@@ -287,9 +290,7 @@ export const PlayerRow: React.FC<
             onClick={(e) => {
               e.stopPropagation();
               props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
-              logger.info("ScenePlayer:onPlayedInTurnOrderChange", {
-                playedDuringTurn: !props.player.playedDuringTurn,
-              });
+              logger.info("ScenePlayer:onPlayedInTurnOrderChange");
             }}
             disabled={!props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}
@@ -404,6 +405,7 @@ export const PlayerRow: React.FC<
   function renderName() {
     const canOpenOrLoadSheet =
       hasCharacterSheet || props.permissions.canLoadCharacterSheet;
+
     return (
       <>
         <Box>
@@ -448,7 +450,11 @@ export const PlayerRow: React.FC<
                         logger.info("ScenePlayer:onCharacterSheetButtonPress");
                       }}
                     >
-                      <FaceIcon htmlColor={borderColor} />
+                      {hasCharacterSheet || !canOpenOrLoadSheet ? (
+                        <FaceIcon htmlColor={borderColor} />
+                      ) : (
+                        <CreateIcon htmlColor={borderColor} />
+                      )}
                     </IconButton>
                   </span>
                 </Tooltip>
@@ -473,16 +479,16 @@ export const PlayerRow: React.FC<
                 >
                   {hasCharacterSheet ? (
                     <>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} zeroMinWidth>
                         {renderMainName(props.player.character?.name)}
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} zeroMinWidth>
                         {renderSecondaryName(props.player.playerName)}
                       </Grid>
                     </>
                   ) : (
                     <>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} zeroMinWidth>
                         {renderMainName(props.player.playerName)}
                       </Grid>
                     </>
@@ -493,6 +499,21 @@ export const PlayerRow: React.FC<
           </Grid>
         </Box>
       </>
+    );
+  }
+
+  function renderPlayerId() {
+    return (
+      <Typography
+        className={css({
+          fontSize: ".8rem",
+          fontFamily: FontFamily.Console,
+          color: theme.palette.text.secondary,
+        })}
+        display="inline"
+      >
+        [{props.player.id.slice(0, 5)}]
+      </Typography>
     );
   }
 

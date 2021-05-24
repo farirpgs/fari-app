@@ -8,8 +8,7 @@ import { ManagerMode } from "../../../components/Manager/Manager";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { defaultSceneName } from "../../../contexts/SceneContext/ScenesContext";
 import { RollType } from "../../../domains/dice/Dice";
-import { AspectType } from "../AspectType";
-import { IScene } from "../IScene";
+import { IIndexCard, IScene } from "../IScene";
 import { useScene } from "../useScene";
 
 describe("useScene", () => {
@@ -23,7 +22,10 @@ describe("useScene", () => {
       id: expect.anything(),
       name: defaultSceneName,
       group: undefined,
-      aspects: {},
+      indexCards: {
+        public: [],
+        private: [],
+      },
       gm: {
         id: "111",
         playerName: "Game Master",
@@ -36,9 +38,8 @@ describe("useScene", () => {
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
-      sort: false,
       drawAreaObjects: [],
-      version: 1,
+      version: 2,
       lastUpdated: expect.anything(),
     };
     // WHEN
@@ -62,7 +63,7 @@ describe("useScene", () => {
       const useCharactersMock = mockUseCharacters();
 
       // WHEN
-      const { result, rerender } = renderHook((props) => {
+      const { result } = renderHook(() => {
         const charactersManager = useCharactersMock();
         return useScene({
           userId,
@@ -79,7 +80,8 @@ describe("useScene", () => {
       const sceneToLoad = {
         id: "new-id",
         group: undefined,
-        aspects: { "aspect-id": { toto: 3 } as any },
+
+        indexCards: { public: [{ id: "aspect-id" } as any], private: [] },
         lastUpdated: 111,
         name: "new name",
         version: 3,
@@ -91,7 +93,15 @@ describe("useScene", () => {
 
       // THEN
       expect(result.current.state.scene).toEqual({
-        aspects: { "aspect-id": { toto: 3 } },
+        indexCards: {
+          private: [],
+          public: [
+            {
+              id: "aspect-id",
+            },
+          ],
+        },
+
         badConfetti: 0,
         drawAreaObjects: [],
         group: undefined,
@@ -110,7 +120,6 @@ describe("useScene", () => {
         lastUpdated: 111,
         name: "new name",
         players: [],
-        sort: false,
         version: 3,
       });
 
@@ -132,7 +141,7 @@ describe("useScene", () => {
 
       // WHEN name is different
       act(() => {
-        result.current.actions.addAspect(AspectType.Aspect, false);
+        result.current.actions.addIndexCard("public");
       });
       // THEN dirty is true
       expect(result.current.state.dirty).toEqual(true);
@@ -143,7 +152,7 @@ describe("useScene", () => {
           {
             id: "new-id",
             group: undefined,
-            aspects: { "aspect-id": { toto: 3 } as any },
+            indexCards: { public: [{ id: "aspect-id" } as any], private: [] },
             lastUpdated: 111,
             name: "new name",
             version: 3,
@@ -177,254 +186,6 @@ describe("useScene", () => {
       // THEN
       expect(result.current.state.scene.name).toEqual("New Name");
       expect(result.current.state.dirty).toEqual(false);
-    });
-  });
-
-  describe("aspects", () => {
-    it("should be able to manage aspects", () => {
-      // GIVEN
-      const userId = "111";
-      const gameId = undefined;
-      const useCharactersMock = mockUseCharacters();
-
-      // WHEN initial render
-      const { result } = renderHook(() => {
-        const charactersManager = useCharactersMock();
-        return useScene({
-          userId,
-          gameId,
-          charactersManager,
-        });
-      });
-      act(() => {
-        // WHEN adding an aspect
-        result.current.actions.addAspect(AspectType.Aspect, false);
-      });
-      // THEN aspect exists
-      const [firstAspectId] = Object.keys(result.current.state.scene.aspects);
-
-      expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
-        color: "white",
-        consequences: [],
-        content: "<br/>",
-        tracks: [],
-        playedDuringTurn: false,
-        isPrivate: false,
-        pinned: false,
-        title: "",
-        hasDrawArea: false,
-        type: 0,
-      });
-      act(() => {
-        // WHEN updating the title
-        result.current.actions.updateAspectTitle(firstAspectId, "new title");
-      });
-      // THEN
-      expect(result.current.state.scene.aspects[firstAspectId].title).toEqual(
-        "new title"
-      );
-      act(() => {
-        // WHEN updating the content
-        result.current.actions.updateAspectContent(
-          firstAspectId,
-          "new content"
-        );
-      });
-      // THEN
-      expect(result.current.state.scene.aspects[firstAspectId].content).toEqual(
-        "new content"
-      );
-      act(() => {
-        // WHEN adding free invoke
-        result.current.actions.addAspectTrack(firstAspectId, "Free Invokes");
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].tracks[0]
-      ).toEqual({
-        name: "Free Invokes",
-        value: [{ checked: false, label: "1" }],
-      });
-      act(() => {
-        // WHEN adding a track box
-        result.current.actions.addAspectTrackBox(firstAspectId, 0);
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].tracks[0]
-      ).toEqual({
-        name: "Free Invokes",
-        value: [
-          { checked: false, label: "1" },
-          { checked: false, label: "2" },
-        ],
-      });
-      act(() => {
-        // WHEN toggling a track box
-        result.current.actions.toggleAspectTrackBox(firstAspectId, 0, 1);
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].tracks[0]
-      ).toEqual({
-        name: "Free Invokes",
-        value: [
-          { checked: false, label: "1" },
-          { checked: true, label: "2" },
-        ],
-      });
-      act(() => {
-        // WHEN setting a box label
-        result.current.actions.updateStressBoxLabel(
-          firstAspectId,
-          0,
-          1,
-          "my custom label"
-        );
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].tracks[0]
-      ).toEqual({
-        name: "Free Invokes",
-        value: [
-          { checked: false, label: "1" },
-          { checked: true, label: "my custom label" },
-        ],
-      });
-      act(() => {
-        // WHEN removing a track box
-        result.current.actions.removeAspectTrackBox(firstAspectId, 0);
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].tracks[0]
-      ).toEqual({
-        name: "Free Invokes",
-        value: [{ checked: false, label: "1" }],
-      });
-      act(() => {
-        // WHEN renaming a track
-        result.current.actions.updateAspectTrackName(
-          firstAspectId,
-          0,
-          "Countdown"
-        );
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].tracks[0]
-      ).toEqual({
-        name: "Countdown",
-        value: [{ checked: false, label: "1" }],
-      });
-      act(() => {
-        // WHEN removing a track
-        result.current.actions.removeAspectTrack(firstAspectId, 0);
-      });
-      // THEN
-      expect(result.current.state.scene.aspects[firstAspectId].tracks).toEqual(
-        []
-      );
-      act(() => {
-        // WHEN adding consequence
-        result.current.actions.addAspectConsequence(firstAspectId);
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].consequences
-      ).toEqual([{ name: "", value: "" }]);
-      act(() => {
-        // WHEN updating consequence
-        result.current.actions.updateAspectConsequenceValue(
-          firstAspectId,
-          0,
-          "new consequence"
-        );
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].consequences
-      ).toEqual([
-        {
-          name: "",
-          value: "new consequence",
-        },
-      ]);
-      act(() => {
-        // WHEN updating consequence name
-        result.current.actions.updateAspectConsequenceName(
-          firstAspectId,
-          0,
-          "Physical Stress"
-        );
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].consequences
-      ).toEqual([
-        {
-          name: "Physical Stress",
-          value: "new consequence",
-        },
-      ]);
-      act(() => {
-        // WHEN removing consequence
-        result.current.actions.removeAspectConsequence(firstAspectId, 0);
-      });
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].consequences
-      ).toEqual([]);
-      act(() => {
-        // WHEN updating initiative
-        result.current.actions.updateAspectPlayerDuringTurn(
-          firstAspectId,
-          true
-        );
-      });
-
-      // THEN
-      expect(
-        result.current.state.scene.aspects[firstAspectId].playedDuringTurn
-      ).toEqual(true);
-      act(() => {
-        // WHEN reseting initiative
-        result.current.actions.resetInitiative();
-      });
-      expect(
-        result.current.state.scene.aspects[firstAspectId].playedDuringTurn
-      ).toEqual(false);
-      act(() => {
-        // WHEN updating color
-        result.current.actions.updateAspectColor(firstAspectId, "blue");
-      });
-      // THEN
-      expect(result.current.state.scene.aspects[firstAspectId].color).toEqual(
-        "blue"
-      );
-      act(() => {
-        // WHEN reseting aspect
-        result.current.actions.resetAspect(firstAspectId);
-      });
-      // THEN
-      expect(result.current.state.scene.aspects[firstAspectId]).toEqual({
-        color: "white",
-        consequences: [],
-        hasDrawArea: false,
-        content: "<br/>",
-        tracks: [],
-        playedDuringTurn: false,
-        pinned: false,
-        title: "",
-        type: AspectType.Aspect,
-      });
-      act(() => {
-        // WHEN removing aspect
-        result.current.actions.removeAspect(firstAspectId);
-      });
-      // THEN
-      expect(result.current.state.scene.aspects).toEqual({});
     });
   });
 
@@ -750,35 +511,6 @@ describe("useScene", () => {
     });
   });
 
-  describe("sort", () => {
-    // GIVEN
-    const userId = "111";
-    const gameId = undefined;
-    const useCharactersMock = mockUseCharacters();
-
-    // WHEN initial render
-    const { result } = renderHook(() => {
-      const charactersManager = useCharactersMock();
-      return useScene({
-        userId,
-        gameId,
-        charactersManager,
-      });
-    });
-    expect(result.current.state.scene.sort).toEqual(false);
-    // WHEN toggle sort
-    act(() => {
-      result.current.actions.toggleSort();
-    });
-    // THEN
-    expect(result.current.state.scene.sort).toEqual(true);
-    // WHEN toggle sort
-    act(() => {
-      result.current.actions.toggleSort();
-    });
-    // THEN
-    expect(result.current.state.scene.sort).toEqual(false);
-  });
   describe("draw area", () => {
     // GIVEN
     const userId = "111";
@@ -860,18 +592,22 @@ describe("useScene", () => {
       // WHEN setuping scene
       act(() => {
         result.current.actions.updateName("NAME");
-        result.current.actions.addAspect(AspectType.Aspect, false);
+        result.current.actions.addIndexCard("public");
       });
       // THEN
       expect(result.current.state.scene.name).toEqual("NAME");
-      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
+      expect(
+        Object.keys(result.current.state.scene.indexCards.public).length
+      ).toEqual(1);
 
       // WHEN reseting
       act(() => {
         result.current.actions.resetScene();
       });
       expect(result.current.state.scene.name).toEqual(defaultSceneName);
-      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(0);
+      expect(
+        Object.keys(result.current.state.scene.indexCards.public).length
+      ).toEqual(0);
     });
     it("keep sticky aspects", () => {
       // GIVEN
@@ -890,21 +626,31 @@ describe("useScene", () => {
       });
 
       // WHEN setuping scene
-      let npcAspectId = "";
+      let npcIndexCard: IIndexCard;
       act(() => {
-        npcAspectId = result.current.actions.addAspect(AspectType.NPC, false);
-        result.current.actions.addAspect(AspectType.Aspect, false);
-        result.current.actions.toggleAspectPinned(npcAspectId);
+        npcIndexCard = result.current.actions.addIndexCard("public");
+        result.current.actions.addIndexCard("public");
+        result.current.actions.updateIndexCard(
+          {
+            ...npcIndexCard,
+            pinned: true,
+          },
+          "public"
+        );
       });
       // THEN
-      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(2);
+      expect(Object.keys(result.current.state.scene.indexCards).length).toEqual(
+        2
+      );
 
       // WHEN reseting
       act(() => {
         result.current.actions.resetScene();
       });
       expect(result.current.state.scene.name).toEqual(defaultSceneName);
-      expect(Object.keys(result.current.state.scene.aspects).length).toEqual(1);
+      expect(
+        Object.keys(result.current.state.scene.indexCards.public).length
+      ).toEqual(1);
     });
   });
   describe("safeSetScene", () => {
@@ -942,10 +688,11 @@ describe("useScene", () => {
       players: [{ character: {} }, { character: {} }],
     });
     expect(
-      result.current.useCharacters.actions.updateIfExists
+      result.current.useCharacters.actions.updateIfMoreRecent
     ).toHaveBeenCalledTimes(2);
   });
-  describe("o", () => {
+
+  describe("offline character", () => {
     const userId = "111";
     const gameId = undefined;
     const useCharactersMock = mockUseCharacters();
@@ -959,7 +706,6 @@ describe("useScene", () => {
         charactersManager,
       });
     });
-    expect(result.current.state.scene.sort).toEqual(false);
     // WHEN adding an offline character
     let playerId = "";
     act(() => {
@@ -996,7 +742,8 @@ function mockUseCharacters() {
     actions: {
       add: jest.fn(),
       upsert: jest.fn(),
-      updateIfExists: jest.fn(),
+      updateIfMoreRecent: jest.fn(),
+      addIfDoesntExist: jest.fn(),
       remove: jest.fn(),
       duplicate: jest.fn(),
       select: jest.fn(),
@@ -1012,10 +759,3 @@ function mockUseCharacters() {
     return result;
   };
 }
-
-// TODO: ...
-// updatePlayerCharacterMainPointCounter
-// cloneAndLoadNewScene
-// forceDirty
-// setGroup
-// moveAspects

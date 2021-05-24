@@ -1,30 +1,30 @@
 <!--
-# TODO
+# WHAT
 
 - [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
 
-# BEFORE RELEASE
+# TODO
 
-- [ ] fix player row icon sizes
+- [ ] new Drawer
+- [ ] new Navigation
+- [ ] new player row: https://xd.adobe.com/view/13659674-c494-4de6-a734-01fdc60959c9-4636/
+- [ ] sync storage between tabs
+- [ ] GM characters sub section
+- [ ] update dependencies
+- [ ] get rid of yarn
 
-# THINK
-- [ ] feat: make section help link dynamic
-- [ ] Button base on skill for insta roll?
-- [ ] text on slot tracker ?
-- [ ] highlight tab text on click ?
-- [ ] duplicate without advanced mode ?
 
-# Future
-- [ ] genesys dice
-- [ ] math functions
-- [ ] table building blocks
-- [ ] image building block
+# NEXT
+- [ ] Genesys dice
+- [ ] custom dice commands ?
 -->
 
 # [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![patreon](https://img.shields.io/static/v1?style=flat-square&logo=patreon&color=FF4D42&label=donate&message=Become%20a%20Patrons!)](https://www.patreon.com/bePatron?u=43408921)
@@ -33,7 +33,7 @@
 ![Continous Integration](https://github.com/fariapp/fari/workflows/CI/badge.svg)
 ![Integration Tests](https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg)
 
-This repo contains the source code that powers Fari.
+This repo contains the source code that powers Fari, the open source virtual table-top platform.
 
 If you are here because
 
@@ -41,7 +41,7 @@ If you are here because
 2. you want to ask a question
 3. you have a feature suggestion
 
-you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue.
+you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue or start a [discussion here](https://github.com/fariapp/fari/discussions).
 
 Please take the time to add as much details to your issues as possible.
 

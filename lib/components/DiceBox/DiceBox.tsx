@@ -9,7 +9,9 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
+import { FontFamily } from "../../constants/FontFamily";
 import { useZIndex } from "../../constants/zIndex";
+import { arraySort } from "../../domains/array/arraySort";
 import {
   Dice,
   DiceCommandOptions,
@@ -18,7 +20,6 @@ import {
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
-import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
@@ -44,7 +45,6 @@ type IProps = {
 export const DiceBox: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const zIndex = useZIndex();
-  const lightBackground = useLightBackground();
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -93,7 +93,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "alignItems": "center",
     "boxShadow": theme.shadows[2],
     "transition": theme.transitions.create(["opacity"]),
-    "opacity": props.reduceOpacityWithoutHover ? ".4" : "1",
+    "opacity": props.reduceOpacityWithoutHover ? "1" : "1",
     "&:hover": {
       opacity: "1",
     },
@@ -303,14 +303,27 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
     disableConfettis: true,
   });
   const shouldListResult =
-    diceRollsManager.state.finalResult?.options.listResults;
+    diceRollsManager.state.finalResult?.options.listResults ?? false;
+  const finalRolls = diceRollsManager.state.finalResultRolls;
   const separator = shouldListResult ? "•" : "+";
-  const isPool = shouldListResult ?? false;
-
+  const finalResultIncludesAStringValue = finalRolls.some((c) => {
+    return c.type === RollType.DiceCommand && typeof c.value === "string";
+  });
+  const shouldSortRolls = shouldListResult && !finalResultIncludesAStringValue;
+  const rolls = shouldSortRolls
+    ? arraySort(finalRolls, [
+        (roll) => {
+          if (roll.type === RollType.DiceCommand) {
+            return { value: roll.value, direction: "desc" };
+          }
+          return { value: 0, direction: "desc" };
+        },
+      ])
+    : finalRolls;
   return (
     <>
       <span>
-        {diceRollsManager.state.finalResultRolls.map((r, i) => {
+        {rolls.map((r, i) => {
           const isFirst = i === 0;
           if (r.type === RollType.Label) {
             return null;
@@ -320,6 +333,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
               <span
                 key={i}
                 className={css({
+                  label: "DiceBoxResult-rollType-Modifier",
                   display: "inline-block",
                   verticalAlign: "middle",
                 })}
@@ -327,6 +341,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                 {!isFirst && (
                   <span
                     className={css({
+                      label: "DiceBoxResult-rollType-Modifier-separator",
                       margin: "0 .2rem",
                       verticalAlign: "middle",
                     })}
@@ -337,6 +352,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                 <Tooltip title={r.label}>
                   <span
                     className={css({
+                      label: "DiceBoxResult-rollType-Modifier-value",
                       verticalAlign: "middle",
                     })}
                   >
@@ -348,7 +364,6 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
           }
 
           const options = DiceCommandOptions[r.commandName];
-
           const isFate = r.commandName === "1dF";
           const IconForPool = DiceCommandGroup.getCommandGroupById(
             r.commandGroupId
@@ -358,6 +373,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
             <span
               key={i}
               className={css({
+                label: "DiceBoxResult-rollType-DiceCommand",
                 display: "inline-block",
                 verticalAlign: "middle",
               })}
@@ -365,6 +381,7 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
               {!isFirst && (
                 <span
                   className={css({
+                    label: "DiceBoxResult-rollType-DiceCommand-separator",
                     margin: "0 .2rem",
                     verticalAlign: "middle",
                   })}
@@ -376,7 +393,8 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                 <span>
                   <span
                     className={css({
-                      fontFamily: isFate ? "fate" : "inherit",
+                      label: "DiceBoxResult-rollType-DiceCommand-value",
+                      fontFamily: isFate ? FontFamily.Fate : "inherit",
                       verticalAlign: "middle",
                     })}
                   >
@@ -385,10 +403,12 @@ export function DiceBoxResult(props: { rolls: Array<IDiceRollResult> }) {
                   {!isFate && (
                     <span
                       className={css({
-                        verticalAlign: "middle",
+                        label: "DiceBoxResult-rollType-DiceCommand-icon",
+                        paddingLeft: ".25rem",
+                        verticalAlign: "sub",
                       })}
                     >
-                      {isPool && <IconForPool />}
+                      {shouldListResult && <IconForPool />}
                     </span>
                   )}
                 </span>

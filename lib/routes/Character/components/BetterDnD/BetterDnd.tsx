@@ -1,9 +1,13 @@
 import { css, cx } from "@emotion/css";
-import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import React, { useRef } from "react";
-import { DropTargetMonitor, useDrag, useDrop, XYCoord } from "react-dnd";
+import React, { useRef, useState } from "react";
+import {
+  ConnectDragSource,
+  DropTargetMonitor,
+  useDrag,
+  useDrop,
+  XYCoord,
+} from "react-dnd";
 
 export const BetterDnd: React.FC<{
   index: number;
@@ -12,14 +16,19 @@ export const BetterDnd: React.FC<{
    */
   type: string;
   className?: string;
-  dragIndicatorClassName?: string;
-  readonly?: boolean;
+  render(renderProps: {
+    drag: ConnectDragSource;
+    isDragging: boolean;
+    isOver: boolean;
+  }): JSX.Element;
   onDrag?(): void;
   onDrop?(): void;
+  direction: "horizontal" | "vertical";
   onMove?(dragIndex: number, hoverIndex: number): void;
 }> = (props) => {
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState(false);
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: props.type },
     begin: () => {
@@ -53,24 +62,42 @@ export const BetterDnd: React.FC<{
       // Get vertical middle
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleX =
+        (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
 
       // Get pixels to the top
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+      const hoverClientX = (clientOffset as XYCoord).x - hoverBoundingRect.left;
 
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
       // When dragging upwards, only move when the cursor is above 50%
       // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
 
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
+      if (props.direction === "vertical") {
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+          return;
+        }
+
+        // Dragging upwards
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+          return;
+        }
+      }
+      if (props.direction === "horizontal") {
+        // if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
+          return;
+        }
+
+        // Dragging upwards
+        // if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
+          return;
+        }
       }
 
       // Time to actually perform the action
@@ -102,25 +129,14 @@ export const BetterDnd: React.FC<{
         }),
         props.className
       )}
+      onPointerEnter={() => {
+        setHover(true);
+      }}
+      onPointerLeave={() => {
+        setHover(false);
+      }}
     >
-      <Grid container>
-        {!props.readonly && (
-          <Grid item ref={drag}>
-            <DragIndicatorIcon
-              className={cx(
-                css({
-                  display: isDragging ? "none" : "block",
-                  cursor: "move",
-                }),
-                props.dragIndicatorClassName
-              )}
-            />
-          </Grid>
-        )}
-        <Grid item xs>
-          {props.children}
-        </Grid>
-      </Grid>
+      {props.render({ drag, isDragging, isOver: hover })}
     </div>
   );
 };

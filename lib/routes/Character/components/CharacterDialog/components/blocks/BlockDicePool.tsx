@@ -20,7 +20,7 @@ import {
 } from "../../../../../../domains/character/types";
 import { IDiceCommandOption } from "../../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { Block } from "../../domains/Block/Block";
+import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
 import {
   IBlockActionComponentProps,
@@ -37,16 +37,14 @@ export type IDicePoolElement = {
 
 export type IDicePool = Array<IDicePoolElement>;
 
-export function BlockDicePool(
-  props: IBlockComponentProps<IDicePoolBlock> & {
-    pool: IDicePool;
-    onPoolClick(element: IDicePoolElement): void;
-  }
-) {
+export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
   const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
   const hasCommands = !!props.block.meta.commands?.length;
   const canRoll = !props.readonly && hasCommands;
-  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
+  const isSelected = diceManager.state.pool.some(
+    (p) => p.blockId === props.block.id
+  );
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
 
@@ -54,8 +52,9 @@ export function BlockDicePool(
   const blockCommandGroups = DiceCommandGroup.getCommandGroupFromBlock(
     props.block
   );
-  const commandOptionList = Block.getCommandOptionList(props.block);
-  const diceManager = useContext(DiceContext);
+  const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
+    props.block
+  );
   return (
     <>
       <Box>
@@ -65,9 +64,9 @@ export function BlockDicePool(
               <Grid item xs>
                 <FateLabel display="inline" align={"center"}>
                   <ContentEditable
-                    readonly={!props.advanced}
+                    readonly={props.readonly}
                     border={props.advanced}
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                    data-cy={`${props.dataCy}.label`}
                     value={props.block.label}
                     onChange={(value) => {
                       props.onLabelChange(value);
@@ -114,7 +113,7 @@ export function BlockDicePool(
                       }
 
                       diceManager.actions.setOptions({ listResults: true });
-                      props.onPoolClick({
+                      diceManager.actions.addOrRemovePoolElement({
                         blockId: props.block.id,
                         blockType: props.block.type,
                         label: props.block.label,

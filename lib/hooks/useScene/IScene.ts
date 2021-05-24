@@ -1,6 +1,6 @@
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
-import { ICharacter } from "../../domains/character/types";
+import { IBlock, ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { AspectType } from "./AspectType";
 
@@ -15,7 +15,10 @@ export interface IPlayer {
   points: string;
 }
 
-export interface IAspect {
+/**
+ * @deprecated
+ */
+export interface IAspectV1 {
   title: string;
   content: string;
   tracks: Array<{
@@ -30,10 +33,6 @@ export interface IAspect {
   /**
    * @default false
    */
-  hasDrawArea: boolean | undefined;
-  /**
-   * @default false
-   */
   pinned: boolean | undefined;
   /**
    * @default false
@@ -41,16 +40,54 @@ export interface IAspect {
   isPrivate?: boolean;
 }
 
-export interface IScene {
+/**
+ * @deprecated
+ */
+export interface ISceneV1 {
   id: string;
   name: string;
   group: string | undefined;
-  aspects: Record<string, IAspect>;
+  aspects: Record<string, IAspectV1>;
   gm: IPlayer;
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;
   sort: boolean;
+  version: number;
+  lastUpdated: number;
+  notes?: string;
+  drawAreaObjects: IDrawAreaObjects;
+}
+
+export interface IIndexCard {
+  id: string;
+  titleLabel: string;
+  title: string;
+  contentLabel: string;
+  content: string;
+  color: string;
+  playedDuringTurn: boolean;
+  blocks: Array<IBlock>;
+  /**
+   * @default false
+   */
+  pinned: boolean | undefined;
+
+  subCards: Array<IIndexCard>;
+  sub: boolean;
+}
+
+export type IIndexCardType = "public" | "private";
+
+export interface IScene {
+  id: string;
+  name: string;
+  group: string | undefined;
+  indexCards: Record<IIndexCardType, Array<IIndexCard>>;
+  gm: IPlayer;
+  players: Array<IPlayer>;
+  goodConfetti: number;
+  badConfetti: number;
   drawAreaObjects: IDrawAreaObjects;
   version: number;
   lastUpdated: number;

@@ -10,9 +10,7 @@ import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Manager } from "../Manager/Manager";
 
-type IProps = {};
-
-export const CharactersManager: React.FC<IProps> = (props) => {
+export const CharactersManager: React.FC = () => {
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
 

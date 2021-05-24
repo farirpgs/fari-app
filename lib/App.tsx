@@ -1,7 +1,7 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import * as Sentry from "@sentry/react";
-import React, { useContext } from "react";
+import React, { ReactNode, useContext } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -28,7 +28,15 @@ import {
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { AppDarkTheme, AppLightTheme } from "./theme";
 
-export const App: React.FC<{}> = () => {
+export function App() {
+  return (
+    <AppContexts>
+      <AppRouter />
+    </AppContexts>
+  );
+}
+
+function AppContexts(props: { children: ReactNode }) {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
@@ -40,17 +48,16 @@ export const App: React.FC<{}> = () => {
         <CharactersContext.Provider value={charactersManager}>
           <ScenesContext.Provider value={scenesManager}>
             <DiceContext.Provider value={diceManager}>
-              <AppProvider />
+              <AppProviders>{props.children}</AppProviders>
             </DiceContext.Provider>
           </ScenesContext.Provider>
         </CharactersContext.Provider>
       </DarkModeContext.Provider>
     </DndProvider>
   );
-};
-App.displayName = "App";
+}
 
-export const AppProvider: React.FC<{}> = (props) => {
+function AppProviders(props: { children: ReactNode }) {
   const store = useContext(DarkModeContext);
 
   return (
@@ -70,26 +77,27 @@ export const AppProvider: React.FC<{}> = (props) => {
               <AppAnalytics />
               <ScenesManager />
               <CharactersManager />
-              <AppRouter />
+              {props.children}
             </BrowserRouter>
           </HelmetProvider>
         </Sentry.ErrorBoundary>
       </StylesProvider>
     </ThemeProvider>
   );
-};
-AppProvider.displayName = "AppProvider";
+}
+AppProviders.displayName = "AppProvider";
 
 /**
  * for dynamic keys
  */
-function useMark() {
+export function useMark() {
   const { t } = useTranslate();
 
   t("common.language.dev");
   t("common.language.de");
   t("common.language.en");
   t("common.language.es");
+  t("common.language.eo");
   t("common.language.fr");
   t("common.language.gl");
   t("common.language.pt-BR");

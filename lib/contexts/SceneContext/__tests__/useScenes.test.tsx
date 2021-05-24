@@ -57,17 +57,20 @@ describe("useScenes", () => {
       // THEN the scene is added
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: {
+            private: [],
+            public: [],
+          },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: defaultSceneName,
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"${defaultSceneName}","aspects":{},"version":1,"lastUpdated":${
+        }","name":"${defaultSceneName}","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -82,17 +85,17 @@ describe("useScenes", () => {
 
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -107,18 +110,20 @@ describe("useScenes", () => {
       // THEN the new scene has been added and is properly sorted
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: undefined,
+          indexCards: undefined,
+          version: undefined,
+          notes: undefined,
+          group: undefined,
           id: "an id from a live session",
           lastUpdated: expect.anything(),
           name: undefined,
-          version: undefined,
         },
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
@@ -126,7 +131,7 @@ describe("useScenes", () => {
           playingScene!.lastUpdated
         }},{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -137,17 +142,19 @@ describe("useScenes", () => {
       // THEN the scene is deleted
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
+          group: undefined,
+          notes: undefined,
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -158,17 +165,19 @@ describe("useScenes", () => {
       // THEN nothing happens
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
+          group: undefined,
+          notes: undefined,
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );

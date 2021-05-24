@@ -1,7 +1,7 @@
 import { Fari } from "lib/util/Fari";
 
 describe("/characters", () => {
-  describe.only("Given I want to create a simple character sheet", () => {
+  describe("Given I want to create a simple character sheet", () => {
     it("should support adding, filling up and removing a character", () => {
       Fari.start();
       cy.visit("/");
@@ -267,55 +267,63 @@ describe("/characters", () => {
       Fari.get("character-dialog.Skills.label").clear().type("#Skills");
 
       // move and remove new sections
-      Fari.get("character-dialog.#Aspects.move").click();
-      Fari.get("character-dialog.#Aspects.move-up").click();
-      Fari.get("character-dialog.#Aspects.move").click();
-      Fari.get("character-dialog.#Aspects.move-down").click();
-      Fari.get("character-dialog.#Aspects.move").click();
-      Fari.get("character-dialog.#Aspects.switch-side").click();
-      Fari.get("character-dialog.#Aspects.remove").click();
-      Fari.get("character-dialog.#Stunts.move").click();
-      Fari.get("character-dialog.#Stunts.move-up").click();
-      Fari.get("character-dialog.#Stunts.move").click();
-      Fari.get("character-dialog.#Stunts.move-down").click();
-      Fari.get("character-dialog.#Stunts.move").click();
-      Fari.get("character-dialog.#Stunts.switch-side").click();
-      Fari.get("character-dialog.#Stunts.remove").click();
-      Fari.get("character-dialog.#Other.move").click();
-      Fari.get("character-dialog.#Other.move-up").click();
-      Fari.get("character-dialog.#Other.move").click();
-      Fari.get("character-dialog.#Other.move-down").click();
-      Fari.get("character-dialog.#Other.move").click();
-      Fari.get("character-dialog.#Other.switch-side").click();
-      Fari.get("character-dialog.#Other.remove").click();
-      Fari.get("character-dialog.#Stress.move").click();
-      Fari.get("character-dialog.#Stress.move-up").click();
-      Fari.get("character-dialog.#Stress.move").click();
-      Fari.get("character-dialog.#Stress.move-down").click();
-      Fari.get("character-dialog.#Stress.move").click();
-      Fari.get("character-dialog.#Stress.switch-side").click();
-      Fari.get("character-dialog.#Stress.remove").click();
-      Fari.get("character-dialog.#Consequences.move").click();
-      Fari.get("character-dialog.#Consequences.move-up").click();
-      Fari.get("character-dialog.#Consequences.move").click();
-      Fari.get("character-dialog.#Consequences.move-down").click();
-      Fari.get("character-dialog.#Consequences.move").click();
-      Fari.get("character-dialog.#Consequences.switch-side").click();
-      Fari.get("character-dialog.#Consequences.remove").click();
-      Fari.get("character-dialog.#Skills.move").click();
-      Fari.get("character-dialog.#Skills.move-up").click();
-      Fari.get("character-dialog.#Skills.move").click();
-      Fari.get("character-dialog.#Skills.move-down").click();
-      Fari.get("character-dialog.#Skills.move").click();
-      Fari.get("character-dialog.#Skills.switch-side").click();
-      Fari.get("character-dialog.#Skills.remove").click();
-      Fari.get("character-dialog.#Fate Points.move").click();
-      Fari.get("character-dialog.#Fate Points.move-up").click();
-      Fari.get("character-dialog.#Fate Points.move").click();
-      Fari.get("character-dialog.#Fate Points.move-down").click();
-      Fari.get("character-dialog.#Fate Points.move").click();
-      Fari.get("character-dialog.#Fate Points.switch-side").click();
-      Fari.get("character-dialog.#Fate Points.remove").click();
+      Fari.get("character-dialog.#Aspects.move").click({ force: true });
+      Fari.get("character-dialog.#Aspects.move-up").click({ force: true });
+      Fari.get("character-dialog.#Aspects.move").click({ force: true });
+      Fari.get("character-dialog.#Aspects.move-down").click({ force: true });
+      Fari.get("character-dialog.#Aspects.move").click({ force: true });
+      Fari.get("character-dialog.#Aspects.switch-side").click({ force: true });
+      Fari.get("character-dialog.#Aspects.remove").click({ force: true });
+      Fari.get("character-dialog.#Stunts.move").click({ force: true });
+      Fari.get("character-dialog.#Stunts.move-up").click({ force: true });
+      Fari.get("character-dialog.#Stunts.move").click({ force: true });
+      Fari.get("character-dialog.#Stunts.move-down").click({ force: true });
+      Fari.get("character-dialog.#Stunts.move").click({ force: true });
+      Fari.get("character-dialog.#Stunts.switch-side").click({ force: true });
+      Fari.get("character-dialog.#Stunts.remove").click({ force: true });
+      Fari.get("character-dialog.#Other.move").click({ force: true });
+      Fari.get("character-dialog.#Other.move-up").click({ force: true });
+      Fari.get("character-dialog.#Other.move").click({ force: true });
+      Fari.get("character-dialog.#Other.move-down").click({ force: true });
+      Fari.get("character-dialog.#Other.move").click({ force: true });
+      Fari.get("character-dialog.#Other.switch-side").click({ force: true });
+      Fari.get("character-dialog.#Other.remove").click({ force: true });
+      Fari.get("character-dialog.#Stress.move").click({ force: true });
+      Fari.get("character-dialog.#Stress.move-up").click({ force: true });
+      Fari.get("character-dialog.#Stress.move").click({ force: true });
+      Fari.get("character-dialog.#Stress.move-down").click({ force: true });
+      Fari.get("character-dialog.#Stress.move").click({ force: true });
+      Fari.get("character-dialog.#Stress.switch-side").click({ force: true });
+      Fari.get("character-dialog.#Stress.remove").click({ force: true });
+      Fari.get("character-dialog.#Consequences.move").click({ force: true });
+      Fari.get("character-dialog.#Consequences.move-up").click({ force: true });
+      Fari.get("character-dialog.#Consequences.move").click({ force: true });
+      Fari.get("character-dialog.#Consequences.move-down").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Consequences.move").click({ force: true });
+      Fari.get("character-dialog.#Consequences.switch-side").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Consequences.remove").click({ force: true });
+      Fari.get("character-dialog.#Skills.move").click({ force: true });
+      Fari.get("character-dialog.#Skills.move-up").click({ force: true });
+      Fari.get("character-dialog.#Skills.move").click({ force: true });
+      Fari.get("character-dialog.#Skills.move-down").click({ force: true });
+      Fari.get("character-dialog.#Skills.move").click({ force: true });
+      Fari.get("character-dialog.#Skills.switch-side").click({ force: true });
+      Fari.get("character-dialog.#Skills.remove").click({ force: true });
+      Fari.get("character-dialog.#Fate Points.move").click({ force: true });
+      Fari.get("character-dialog.#Fate Points.move-up").click({ force: true });
+      Fari.get("character-dialog.#Fate Points.move").click({ force: true });
+      Fari.get("character-dialog.#Fate Points.move-down").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Fate Points.move").click({ force: true });
+      Fari.get("character-dialog.#Fate Points.switch-side").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Fate Points.remove").click({ force: true });
 
       // save
       Fari.waitContentEditable();

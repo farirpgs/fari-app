@@ -24,69 +24,17 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.title").type("Something weird is going on");
       Fari.get("scene.aspect.0.content").type("There is no war in Ba Sing Se");
 
-      // menu
-      Fari.get("scene.aspect.0.menu").click();
-      Fari.get("scene.aspect.0.menu.free-invokes").click();
-      Fari.get("scene.aspect.0.menu.physical-stress").click();
-      Fari.get("scene.aspect.0.menu.mental-stress").click();
-      Fari.get("scene.aspect.0.menu.consequence").click();
-      Fari.get("scene.aspect.0.menu.consequence").click();
-      Fari.get("scene.aspect.0.menu.track").click();
-
-      // close backdrop
-      Fari.closeBackdrop();
-
-      // change colors
-      Fari.get("scene.aspect.0.palette").click();
-      cy.get(".data-cy-color-picker [title='#ffffff']").click();
-      Fari.get("scene.aspect.0.palette").click();
-      cy.get(".data-cy-color-picker [title='#ff0000']").click();
-      Fari.get("scene.aspect.0.palette").click();
-      cy.get(".data-cy-color-picker [title='#00daff']").click();
-      Fari.get("scene.aspect.0.palette").click();
-      cy.get(".data-cy-color-picker [title='#00ff4c']").click();
-      Fari.get("scene.aspect.0.palette").click();
-      cy.get(".data-cy-color-picker [title='#ffee00']").click();
-
-      // aspect tracks
-      Fari.get("scene.aspect.0.stressTrack.Free Invokes.add-box").click();
-      Fari.get("scene.aspect.0.stressTrack.Free Invokes.add-box").click();
-      Fari.get("scene.aspect.0.stressTrack.Free Invokes.add-box").click();
-      Fari.get("scene.aspect.0.stressTrack.Free Invokes.remove-box").click();
-
-      Fari.get("scene.aspect.0.stressTrack.Free Invokes.name")
-        .clear()
-        .type("#Free Invokes");
-      Fari.get("scene.aspect.0.stressTrack.Physical Stress.name")
-        .clear()
-        .type("#Physical Stress");
-      Fari.get("scene.aspect.0.stressTrack.Mental Stress.name")
-        .clear()
-        .type("#Mental Stress");
-      Fari.get("scene.aspect.0.stressTrack.Track.remove").click();
-
-      // aspect consequences
-      Fari.get("scene.aspect.0.consequence.Consequence  (2).name")
-        .clear()
-        .type("#Consequence (2)");
-
-      Fari.get("scene.aspect.0.consequence.Consequence  (4).remove").click();
-
-      // sort
-      Fari.get("scene.sort").click();
-      Fari.get("scene.sort").click();
-
       // remove second
-      Fari.get("scene.aspect.1.reset").click();
-      Fari.get("scene.aspect.1.remove").click();
+      Fari.get("scene.aspect.1.reset").click({ force: true });
+      Fari.get("scene.aspect.1.remove").click({ force: true });
 
       // initiative
-      Fari.get("scene.aspect.1.initiative").click();
-      Fari.get("scene.aspect.2.initiative").click();
-      Fari.get("scene.aspect.2.initiative").click();
+      Fari.get("scene.aspect.1.initiative").click({ force: true });
+      Fari.get("scene.aspect.2.initiative").click({ force: true });
+      Fari.get("scene.aspect.2.initiative").click({ force: true });
 
       // pin
-      Fari.get("scene.aspect.1.pin").click();
+      Fari.get("scene.aspect.1.pin").click({ force: true });
 
       // save
       Fari.waitContentEditable();
@@ -115,7 +63,7 @@ describe("/scenes", () => {
       // add badguy and pin it
       Fari.get("scene.add-bad-guy").click();
       Fari.get("scene.aspect.0.title").type("Dai Li");
-      Fari.get("scene.aspect.0.pin").click();
+      Fari.get("scene.aspect.0.pin").click({ force: true });
 
       // set new field
       Fari.get("scene.name").clear().type("Lower Ring");

@@ -33,9 +33,9 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
               <Box>
                 <FateLabel display="inline">
                   <ContentEditable
-                    readonly={!props.advanced}
+                    readonly={props.readonly}
                     border={props.advanced}
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
+                    data-cy={`${props.dataCy}.label`}
                     value={props.block.label}
                     onChange={(value) => {
                       props.onLabelChange(value);
@@ -48,7 +48,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
               <Typography>
                 <ContentEditable
                   border={!props.readonly}
-                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+                  data-cy={`${props.dataCy}.value`}
                   readonly={props.readonly}
                   value={props.block.value}
                   onChange={(value) => {
@@ -62,11 +62,8 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
             <Grid item className={css({ marginLeft: "auto" })}>
               <BlockToggleMeta
                 readonly={props.readonly}
-                pageIndex={props.pageIndex}
-                sectionIndex={props.sectionIndex}
-                section={props.section}
+                dataCy={props.dataCy}
                 block={props.block}
-                blockIndex={props.blockIndex}
                 onMetaChange={props.onMetaChange}
               />
             </Grid>

@@ -2,6 +2,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
 import clsx from "clsx";
 import React from "react";
+import { FontFamily } from "../../constants/FontFamily";
 import { Font } from "../../domains/font/Font";
 import { scrollMarginTop } from "../Doc/hooks/useMarkdownFile";
 
@@ -160,19 +161,19 @@ const styles = (theme: Theme) => {
 
         "& .prop-name": {
           fontSize: 13,
-          fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+          fontFamily: FontFamily.Console,
         },
         "& .required": {
           color: theme.palette.type === "light" ? "#006500" : "#a5ffa5",
         },
         "& .prop-type": {
           fontSize: 13,
-          fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+          fontFamily: FontFamily.Console,
           color: theme.palette.type === "light" ? "#932981" : "#ffb6ec",
         },
         "& .prop-default": {
           fontSize: 13,
-          fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+          fontFamily: FontFamily.Console,
           borderBottom: `1px dotted ${theme.palette.divider}`,
         },
       },
@@ -226,10 +227,6 @@ const styles = (theme: Theme) => {
         "& h1,h2,h3,h4,h5,h6": {
           marginTop: "1rem",
           fontStyle: "normal",
-          // fontFamily: `'Work Sans', sans-serif`,
-        },
-        "& *:not(fate)": {
-          // fontFamily: `'Work Sans', sans-serif`,
         },
       },
       "& a, & a code": {
@@ -289,7 +286,7 @@ const styles = (theme: Theme) => {
         cursor: "pointer",
       },
       "& fate": {
-        fontFamily: "fate",
+        fontFamily: FontFamily.Fate,
       },
       "& .with-anchor": {
         "scrollMarginTop": `${scrollMarginTop}px`,

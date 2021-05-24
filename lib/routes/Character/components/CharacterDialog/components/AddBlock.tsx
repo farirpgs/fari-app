@@ -1,34 +1,39 @@
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
+import Button, { ButtonProps } from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { ThemeProvider } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import AddIcon from "@material-ui/icons/Add";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
+import ImageIcon from "@material-ui/icons/Image";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
+import LinkIcon from "@material-ui/icons/Link";
+import RemoveIcon from "@material-ui/icons/Remove";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import React from "react";
 import { BlockType } from "../../../../../domains/character/types";
 import { Icons } from "../../../../../domains/Icons/Icons";
-import { useThemeFromColor } from "../../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
-export const AddBlock: React.FC<{
-  onAddBlock(section: BlockType): void;
-}> = (props) => {
-  const theme = useTheme();
+
+export const AddBlock: React.FC<
+  {
+    onAddBlock(section: BlockType): void;
+    variant: "icon" | "button";
+  } & Pick<ButtonProps, "color">
+> = (props) => {
+  const variant = props.variant ?? "button";
   const { t } = useTranslate();
-  const blackButtonTheme = useThemeFromColor(theme.palette.text.primary);
   const [anchorEl, setAnchorEl] = React.useState<any>();
 
   return (
     <Box p="1rem" justifyContent="center" display="flex">
-      <ThemeProvider theme={blackButtonTheme}>
+      {variant === "button" ? (
         <Button
-          color="primary"
+          color={"primary"}
           variant="outlined"
           onClick={(e) => {
             setAnchorEl(e.currentTarget);
@@ -36,94 +41,147 @@ export const AddBlock: React.FC<{
         >
           {t("character-dialog.control.add-block")}
         </Button>
-        <Menu
-          elevation={0}
-          anchorEl={anchorEl}
-          open={!!anchorEl}
-          onClose={() => {
+      ) : (
+        <IconButton
+          size="small"
+          color="primary"
+          onClick={(e) => {
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          <AddIcon />
+        </IconButton>
+      )}
+      <Menu
+        elevation={2}
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "center",
+          horizontal: "left",
+        }}
+        onClose={() => {
+          setAnchorEl(undefined);
+        }}
+      >
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Text);
             setAnchorEl(undefined);
           }}
         >
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.Text);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <TextFieldsIcon fontSize="small" />
-            </ListItemIcon>
+          <ListItemIcon>
+            <TextFieldsIcon fontSize="small" />
+          </ListItemIcon>
 
-            <ListItemText primary={t("character-dialog.block-type.text")} />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.Numeric);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <Filter1Icon fontSize="small" />
-            </ListItemIcon>
+          <ListItemText primary={t("character-dialog.block-type.text")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Numeric);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <Filter1Icon fontSize="small" />
+          </ListItemIcon>
 
-            <ListItemText primary={t("character-dialog.block-type.numeric")} />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.Skill);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <LibraryAddIcon fontSize="small" />
-            </ListItemIcon>
+          <ListItemText primary={t("character-dialog.block-type.numeric")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Image);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <ImageIcon fontSize="small" />
+          </ListItemIcon>
 
-            <ListItemText primary={t("character-dialog.block-type.skill")} />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.DicePool);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <Icons.ThrowDice fontSize="small" />
-            </ListItemIcon>
+          <ListItemText primary={t("character-dialog.block-type.image")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Skill);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <LibraryAddIcon fontSize="small" />
+          </ListItemIcon>
 
-            <ListItemText
-              primary={t("character-dialog.block-type.dice-pool")}
-            />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.PointCounter);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <ExposureIcon fontSize="small" />
-            </ListItemIcon>
+          <ListItemText primary={t("character-dialog.block-type.skill")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.DicePool);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <Icons.ThrowDice fontSize="small" />
+          </ListItemIcon>
 
-            <ListItemText
-              primary={t("character-dialog.block-type.point-counter")}
-            />
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              props.onAddBlock(BlockType.SlotTracker);
-              setAnchorEl(undefined);
-            }}
-          >
-            <ListItemIcon>
-              <CheckCircleIcon fontSize="small" />
-            </ListItemIcon>
+          <ListItemText primary={t("character-dialog.block-type.dice-pool")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.PointCounter);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <ExposureIcon fontSize="small" />
+          </ListItemIcon>
 
-            <ListItemText
-              primary={t("character-dialog.block-type.slot-tracker")}
-            />
-          </MenuItem>
-        </Menu>
-      </ThemeProvider>
+          <ListItemText
+            primary={t("character-dialog.block-type.point-counter")}
+          />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.SlotTracker);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <CheckCircleIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText
+            primary={t("character-dialog.block-type.slot-tracker")}
+          />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Link);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <LinkIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.link")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.Separator);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <RemoveIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.separator")} />
+        </MenuItem>
+      </Menu>
     </Box>
   );
 };

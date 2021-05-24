@@ -186,7 +186,7 @@ export const DrawObjects: React.FC<IProps> = (props) => {
                   className={css({
                     color: theme.palette.text.primary,
                   })}
-                  onClick={(event) => {
+                  onClick={() => {
                     setDrawingToolBeforeColorPicker(
                       drawingManager.state.drawingTool
                     );

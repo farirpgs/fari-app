@@ -12,16 +12,13 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialog";
-import { IDicePoolElement } from "./components/CharacterDialog/components/blocks/BlockDicePool";
 
 export const CharacterRoute: React.FC<{
   match: {
     params: { id: string };
   };
 }> = (props) => {
-  const { t } = useTranslate();
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
@@ -32,7 +29,7 @@ export const CharacterRoute: React.FC<{
   >(undefined);
   const logger = useLogger();
 
-  function handleOnNewRoll(result: IDiceRollResult) {
+  function handleSetRollResult(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
@@ -61,11 +58,7 @@ export const CharacterRoute: React.FC<{
 
   function handleOnRollPool() {
     const { result } = diceManager.actions.getPoolResult();
-    handleOnNewRoll(result);
-  }
-
-  function handleOnPoolClick(element: IDicePoolElement) {
-    diceManager.actions.addOrRemovePoolElement(element);
+    handleSetRollResult(result);
   }
 
   return (
@@ -78,7 +71,7 @@ export const CharacterRoute: React.FC<{
             <DiceFab
               rollsForDiceBox={rolls}
               onRollPool={handleOnRollPool}
-              onRoll={handleOnNewRoll}
+              onRoll={handleSetRollResult}
             />
           )}
           <CharacterV3Dialog
@@ -86,8 +79,7 @@ export const CharacterRoute: React.FC<{
             character={selectedCharacter}
             dialog={dialogMode || false}
             readonly={readonly}
-            pool={diceManager.state.pool}
-            onPoolClick={handleOnPoolClick}
+            onRoll={handleSetRollResult}
             onSave={(newCharacter) => {
               charactersManager.actions.upsert(newCharacter);
             }}

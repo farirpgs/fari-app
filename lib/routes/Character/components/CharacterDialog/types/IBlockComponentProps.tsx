@@ -1,27 +1,18 @@
-import {
-  IBlock,
-  IBlockTypes,
-  ISection,
-} from "../../../../../domains/character/types";
+import { IBlock, IBlockTypes } from "../../../../../domains/character/types";
+import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 
 export type IBlockComponentProps<TBlockType extends IBlockTypes> = {
+  dataCy: string;
   advanced: boolean;
   readonly: boolean | undefined;
-  pageIndex: number;
-  sectionIndex: number;
-  section: ISection;
   block: IBlock & TBlockType;
-  blockIndex: number;
   onLabelChange(label: string): void;
-  onValueChange(value: string): void;
+  onValueChange(value: TBlockType["value"]): void;
   onMetaChange(meta: TBlockType["meta"]): void;
+  onRoll(diceRollResult: IDiceRollResult): void;
 };
 
 export type IBlockActionComponentProps<TBlockType extends IBlockTypes> = {
-  pageIndex: number;
-  sectionIndex: number;
-  section: ISection;
   block: IBlock & TBlockType;
-  blockIndex: number;
   onMetaChange(meta: TBlockType["meta"]): void;
 };

@@ -3,11 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { Images } from "../../constants/Images";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-type Metas = React.DetailedHTMLProps<
-  React.MetaHTMLAttributes<HTMLMetaElement>,
-  HTMLMetaElement
->[];
-
 export const PageMeta: React.FC<{
   title: string | undefined;
   description?: string;

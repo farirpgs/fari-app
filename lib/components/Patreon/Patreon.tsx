@@ -7,7 +7,7 @@ import React from "react";
 import patreonImage from "../../../images/services/patreon.png";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const Patreon: React.FC = (props) => {
+export const Patreon: React.FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
   return (

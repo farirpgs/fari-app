@@ -1,73 +1,28 @@
 import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
+import produce from "immer";
 import React, { useContext, useState } from "react";
 import { DiceFab } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
-import { IndexCardColorTypeEnum } from "../lib/components/IndexCard/IndexCardColor";
+import { IndexCardColor } from "../lib/components/IndexCard/IndexCardColor";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
-import {
-  IDiceCommandOption,
-  IDiceRollResult,
-  RollType,
-} from "../lib/domains/dice/Dice";
-import { Enum } from "../lib/domains/enum/Enum";
-import { AspectType } from "../lib/hooks/useScene/AspectType";
-import { IAspect } from "../lib/hooks/useScene/IScene";
-import { useScene } from "../lib/hooks/useScene/useScene";
+import { IDiceRollResult } from "../lib/domains/dice/Dice";
+import { SceneFactory } from "../lib/domains/scene/SceneFactory";
+import { IIndexCard } from "../lib/hooks/useScene/IScene";
 import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookIndexCard(props: {
-  aspect: IAspect;
   readonly: boolean;
-  showClickableSkills: boolean;
+  indexCard: IIndexCard;
   pinned: boolean;
   playedDuringTurn: boolean;
-  color: IndexCardColorTypeEnum;
-  type: string;
+  width: string;
 }) {
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
-
-  const sceneManager: ReturnType<typeof useScene> = {
-    state: {
-      scene: {
-        aspects: {
-          "1": {
-            ...props.aspect,
-            color: props.color,
-            playedDuringTurn: props.playedDuringTurn,
-            pinned: props.pinned,
-            type: AspectType[props.type as any] as any,
-          } as IAspect,
-        },
-      } as any,
-    } as any,
-    actions: {
-      setAspectDrawAreaObjects: action("setAspectDrawAreaObjects"),
-      setAspectIsPrivate: action("setAspectIsPrivate"),
-      resetAspect: action("resetAspect"),
-      updateAspectColor: action("updateAspectColor"),
-      removeAspect: action("removeAspect"),
-      toggleAspectPinned: action("toggleAspectPinned"),
-      updateAspectTitle: action("updateAspectTitle"),
-      updateAspectPlayerDuringTurn: action("updateAspectPlayerDuringTurn"),
-      addAspectTrack: action("addAspectTrack"),
-      addAspectConsequence: action("addAspectConsequence"),
-      addAspectDrawArea: action("addAspectDrawArea"),
-      updateAspectContent: action("updateAspectContent"),
-      updateAspectTrackName: action("updateAspectTrackName"),
-      removeAspectTrackBox: action("removeAspectTrackBox"),
-      addAspectTrackBox: action("addAspectTrackBox"),
-      removeAspectTrack: action("removeAspectTrack"),
-      toggleAspectTrackBox: action("toggleAspectTrackBox"),
-      updateStressBoxLabel: action("updateStressBoxLabel"),
-      updateAspectConsequenceName: action("updateAspectConsequenceName"),
-      removeAspectConsequence: action("removeAspectConsequence"),
-      updateAspectConsequenceValue: action("updateAspectConsequenceValue"),
-    } as any,
-  } as any;
+  const [collapse, setCollapse] = useState(false);
 
   function handleOnNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
@@ -91,29 +46,36 @@ function StorybookIndexCard(props: {
         onRoll={handleOnNewRoll}
         onRollPool={handleOnRollPool}
       />
-      <IndexCard
-        index={0}
-        aspectId={"1"}
-        readonly={props.readonly}
-        showClickableSkills={props.showClickableSkills}
-        sceneManager={sceneManager}
-        onRoll={(label, modifier) => {
-          const options: Array<IDiceCommandOption> = [
-            { commandGroupId: "4dF", type: RollType.DiceCommand },
-          ];
-
-          options.push({
-            type: RollType.Modifier,
-            label: label,
-            modifier: modifier,
-          });
-          const result = diceManager.actions.roll(options, {
-            listResults: false,
-          });
-          handleOnNewRoll(result);
-        }}
-        onMove={action("onMove") as any}
-      />
+      <Box width={props.width}>
+        <IndexCard
+          type="public"
+          reactDndIndex={0}
+          canMove={true}
+          reactDndType={"storybook"}
+          id="123"
+          indexCard={{
+            ...props.indexCard,
+            pinned: props.pinned,
+            playedDuringTurn: props.playedDuringTurn,
+          }}
+          indexCardHiddenRecord={{
+            "123": collapse ? true : false,
+          }}
+          readonly={props.readonly}
+          onRoll={(diceRollResult) => {
+            handleOnNewRoll(diceRollResult);
+          }}
+          onPoolClick={handleOnPoolClick}
+          onChange={action("onChange") as any}
+          onMove={action("onMove") as any}
+          onRemove={action("onRemove") as any}
+          onDuplicate={action("onDuplicate") as any}
+          onTogglePrivate={action("onTogglePrivate") as any}
+          onToggleVisibility={() => {
+            setCollapse((prev) => !prev);
+          }}
+        />
+      </Box>
     </>
   );
 }
@@ -124,40 +86,23 @@ export default {
   title: "Main/IndexCard",
   component: StorybookIndexCard,
   args: {
-    aspect: anAspect(),
+    indexCard: anIndexCard(),
     readonly: false,
-    showClickableSkills: false,
     pinned: false,
     playedDuringTurn: false,
-    color: IndexCardColorTypeEnum.white,
-    type: AspectType[AspectType.Aspect],
+    width: "350px",
   },
-  argTypes: {
-    type: {
-      control: {
-        type: "select",
-        options: Enum.getKeys(AspectType),
-      },
-    },
-    color: {
-      control: {
-        type: "select",
-        options: Object.keys(IndexCardColorTypeEnum),
-      },
-    },
-  },
+  argTypes: {},
 } as Meta<IProps>;
 
 const Template: Story<IProps> = (args, context) => (
   <StoryProvider theme={context.globals.theme}>
-    <Box width="350px">
+    <Box width="100%">
       <StorybookIndexCard
-        aspect={args.aspect}
+        indexCard={args.indexCard}
         readonly={args.readonly}
-        showClickableSkills={args.showClickableSkills}
-        color={args.color}
-        type={args.type}
         pinned={args.pinned}
+        width={args.width}
         playedDuringTurn={args.playedDuringTurn}
       />
     </Box>
@@ -165,83 +110,121 @@ const Template: Story<IProps> = (args, context) => (
 );
 
 export const Default = Template.bind({});
+
+export const DefaultDark = Template.bind({});
+DefaultDark.args = {
+  indexCard: anIndexCard((draft) => {
+    draft.color = "#000";
+  }),
+};
+
+export const Empty = Template.bind({});
+Empty.args = {
+  indexCard: anIndexCard((draft) => {
+    draft.title = "";
+    draft.content = "";
+  }),
+};
+
 export const DefaultWithSkills = Template.bind({});
 DefaultWithSkills.args = {
-  aspect: anAspect({
-    title: "Title",
-    content:
-      "Description <br> Description <br> Description <br> [Academic  : 4]",
+  indexCard: anIndexCard((draft) => {
+    draft.title = "Title";
+    draft.content =
+      "Description <br> Description <br> Description <br> [Academic  : 4]";
   }),
-  showClickableSkills: true,
 };
 
 export const Aspect = Template.bind({});
 Aspect.args = {
-  aspect: anAspect({
-    title: "Title",
-    content: "Description <br> Description <br> Description <br>",
+  indexCard: anIndexCard((draft) => {
+    draft.titleLabel = "Aspect";
+    draft.title = "Title";
+    draft.contentLabel = "Notes";
+    draft.content = "Description <br> Description <br> Description <br>";
   }),
-  type: AspectType[AspectType.Aspect],
-  color: IndexCardColorTypeEnum.white,
 };
 export const Boost = Template.bind({});
 Boost.args = {
-  aspect: anAspect({
-    title: "Title",
-    content: "Description <br> Description <br> Description <br>",
+  indexCard: anIndexCard((draft) => {
+    draft.titleLabel = "Boost";
+    draft.title = "Title";
+    draft.contentLabel = "Notes";
+    draft.content = "Description <br> Description <br> Description <br>";
+    draft.color = IndexCardColor.blue;
   }),
-  type: AspectType[AspectType.Boost],
-  color: IndexCardColorTypeEnum.blue,
+};
+export const Zone = Template.bind({});
+Zone.args = {
+  indexCard: anIndexCard((draft) => {
+    draft.color = "#eee";
+    draft.subCards.push(SceneFactory.makeSubIndexCard());
+    draft.subCards.push(SceneFactory.makeSubIndexCard());
+    draft.subCards.push(SceneFactory.makeSubIndexCard());
+  }),
+  width: "100%",
+};
+export const ZoneDark = Template.bind({});
+ZoneDark.args = {
+  indexCard: anIndexCard((draft) => {
+    draft.color = "#540000";
+    draft.subCards.push(SceneFactory.makeSubIndexCard());
+    draft.subCards.push(SceneFactory.makeSubIndexCard());
+    draft.subCards.push(SceneFactory.makeSubIndexCard());
+  }),
+  width: "100%",
 };
 export const NPC = Template.bind({});
 NPC.args = {
-  aspect: anAspect({
-    title: "Title",
-    content: "Description <br> Description <br> Description <br>",
+  indexCard: anIndexCard((draft) => {
+    draft.titleLabel = "NPC";
+    draft.title = "Title";
+    draft.contentLabel = "Aspects";
+    draft.content = "Description <br> Description <br> Description <br>";
+    draft.color = IndexCardColor.green;
   }),
-  type: AspectType[AspectType.NPC],
-  color: IndexCardColorTypeEnum.green,
 };
 export const BadGuy = Template.bind({});
 BadGuy.args = {
-  aspect: anAspect({
-    title: "Title",
-    content: "Description <br> Description <br> Description <br>",
+  indexCard: anIndexCard((draft) => {
+    draft.titleLabel = "NPC";
+    draft.title = "Title";
+    draft.contentLabel = "Aspects";
+    draft.content = "Description <br> Description <br> Description <br>";
+    draft.color = IndexCardColor.red;
   }),
-  type: AspectType[AspectType.BadGuy],
-  color: IndexCardColorTypeEnum.red,
 };
 export const Index_Card = Template.bind({});
 Index_Card.args = {
-  aspect: anAspect({
-    title: "Title",
-    content: "Description <br> Description <br> Description <br>",
+  indexCard: anIndexCard((draft) => {
+    draft.title = "Title";
+    draft.content = "Description <br> Description <br> Description <br>";
   }),
-  type: AspectType[AspectType.IndexCard],
-  color: IndexCardColorTypeEnum.white,
 };
 
 export const OutOfBound = Template.bind({});
 OutOfBound.args = {
-  aspect: anAspect({
-    title:
-      "Orc dps charisma modifier wagon wisdom Orc dps charisma modifier wagon wisdom",
-    content:
-      "Sense troll cartographer agility horse gnoll. Lance advantage advantage wizard falchion polearm. Longsword tavern spirit strength dexterity polearm. Longsword hobgoblin great axe axe lance initiative. Ship dexterity bow light spell casting poleaxe.",
+  indexCard: anIndexCard((draft) => {
+    draft.title =
+      "Orc dps charisma modifier wagon wisdom Orc dps charisma modifier wagon wisdom";
+    draft.content =
+      "Sense troll cartographer agility horse gnoll. Lance advantage advantage wizard falchion polearm. Longsword tavern spirit strength dexterity polearm. Longsword hobgoblin great axe axe lance initiative. Ship dexterity bow light spell casting poleaxe.";
   }),
 };
 
-function anAspect(override: Partial<IAspect> = {}): IAspect {
-  return {
-    title: "",
-    content: "<br/>",
-    tracks: [],
-    consequences: [],
-    color: "white",
-    type: AspectType.Aspect,
-    playedDuringTurn: false,
-    pinned: false,
-    hasDrawArea: false,
-    ...override,
-  };
+function anIndexCard(recipe?: (indexCard: IIndexCard) => void): IIndexCard {
+  return produce(SceneFactory.makeIndexCard(), (draft) => {
+    draft.titleLabel = "Index Card";
+    draft.title = "Title";
+    draft.contentLabel = "Notes";
+    draft.content = "Description";
+    draft.color = "#fff";
+    draft.playedDuringTurn = false;
+    draft.pinned = false;
+    draft.id = "123";
+    draft.sub = false;
+    draft.subCards = [];
+    draft.blocks = [];
+    recipe?.(draft);
+  });
 }

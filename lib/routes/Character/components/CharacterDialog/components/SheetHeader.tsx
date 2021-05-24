@@ -10,6 +10,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FlipToBackIcon from "@material-ui/icons/FlipToBack";
 import HelpIcon from "@material-ui/icons/Help";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
@@ -18,7 +20,11 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
-import { IPage, Position } from "../../../../../domains/character/types";
+import {
+  IPage,
+  IPageSectionPosition,
+  V3Position,
+} from "../../../../../domains/character/types";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { smallIconButtonStyle } from "../CharacterV3Dialog";
@@ -26,15 +32,18 @@ import { smallIconButtonStyle } from "../CharacterV3Dialog";
 export const SheetHeader: React.FC<{
   label: string;
   currentPageIndex: number;
-  position: Position;
+  sectionLocation: IPageSectionPosition;
   helpLink: string | undefined;
   pages: Array<IPage> | undefined;
   advanced: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
   onLabelChange?: (newLabel: string) => void;
-  onRemove: () => void;
-  onMoveUp: () => void;
-  onMoveDown: () => void;
-  onReposition: (position: Position) => void;
+  onRemove(): void;
+  onMoveUp(): void;
+  onMoveDown(): void;
+  onReposition(position: V3Position): void;
+  onDuplicateSection(): void;
   onMoveToPage: (pageIndex: number) => void;
   visibleOnCard?: boolean;
   onToggleVisibleOnCard?: () => void;
@@ -56,7 +65,7 @@ export const SheetHeader: React.FC<{
     padding: ".5rem",
   });
 
-  const handleClick = (
+  const handleOpenMoveMenu = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     setAnchorEl(event.currentTarget);
@@ -134,9 +143,23 @@ export const SheetHeader: React.FC<{
                 data-cy={`character-dialog.${props.label}.move`}
                 size="small"
                 className={smallIconButtonStyle}
-                onClick={handleClick}
+                onClick={handleOpenMoveMenu}
               >
-                <FlipToBackIcon htmlColor={headerColor} />
+                <ControlCameraIcon htmlColor={headerColor} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
+        {props.advanced && (
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.duplicate")}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.duplicate`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={props.onDuplicateSection}
+              >
+                <FileCopyIcon htmlColor={headerColor} />
               </IconButton>
             </Tooltip>
           </Grid>
@@ -165,6 +188,7 @@ export const SheetHeader: React.FC<{
         onClose={handleClose}
       >
         <MenuItem
+          disabled={!props.canMoveUp}
           data-cy={`character-dialog.${props.label}.move-up`}
           onClick={() => {
             handleClose();
@@ -177,6 +201,7 @@ export const SheetHeader: React.FC<{
           {t("character-dialog.control.move-up")}
         </MenuItem>
         <MenuItem
+          disabled={!props.canMoveDown}
           data-cy={`character-dialog.${props.label}.move-down`}
           onClick={() => {
             handleClose();
@@ -193,7 +218,9 @@ export const SheetHeader: React.FC<{
           onClick={() => {
             handleClose();
             const newPosition =
-              props.position === Position.Left ? Position.Right : Position.Left;
+              props.sectionLocation === "left"
+                ? V3Position.Right
+                : V3Position.Left;
             props.onReposition(newPosition);
           }}
         >
@@ -201,13 +228,13 @@ export const SheetHeader: React.FC<{
             <ArrowForwardIcon
               className={css({
                 transform:
-                  props.position === Position.Left
+                  props.sectionLocation === "left"
                     ? undefined
                     : "rotate(180deg)",
               })}
             />
           </ListItemIcon>
-          {props.position === Position.Left
+          {props.sectionLocation === "left"
             ? t("character-dialog.control.move-right")
             : t("character-dialog.control.move-left")}
         </MenuItem>

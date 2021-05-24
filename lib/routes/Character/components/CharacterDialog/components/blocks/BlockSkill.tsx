@@ -13,8 +13,7 @@ import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { FateSkillsDescriptions } from "../../../domains/FateSkillsDescriptions";
-import { Block } from "../../domains/Block/Block";
+import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -22,15 +21,11 @@ import {
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CircleTextField } from "../CircleTextField";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
-import { IDicePool, IDicePoolElement, Pool } from "./BlockDicePool";
-export function BlockSkill(
-  props: IBlockComponentProps<ISkillBlock> & {
-    pool: IDicePool;
-    onPoolClick(element: IDicePoolElement): void;
-  }
-) {
-  const theme = useTheme();
+import { Pool } from "./BlockDicePool";
+
+export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
   const [state, setState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
@@ -39,16 +34,17 @@ export function BlockSkill(
 
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
-  const skillDescription =
-    FateSkillsDescriptions[props.block.label.toLowerCase()] ?? "";
 
-  const isSelected = props.pool.some((p) => p.blockId === props.block.id);
-  const diceManager = useContext(DiceContext);
+  const isSelected = diceManager.state.pool.some(
+    (p) => p.blockId === props.block.id
+  );
   const [firstCommandGroup] =
     props.block.meta?.commands?.map((commandId) => {
       return AllDiceCommandGroups[commandId];
     }) ?? [];
-  const commandOptionList = Block.getCommandOptionList(props.block);
+  const blockDiceCommandOptions = BlockSelectors.getDiceCommandOptionsFromBlock(
+    props.block
+  );
 
   const RollIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
 
@@ -57,30 +53,43 @@ export function BlockSkill(
       <Box>
         <Grid container spacing={1} alignItems="center" wrap="nowrap">
           <Grid item>
-            <Pool
-              tooltipTitle={t("character-dialog.skill-block.roll")}
-              fontSize="1.2rem"
-              borderRadius="8px"
-              selected={isSelected}
-              clickable={!props.readonly}
-              borderStyle={"solid"}
-              onClick={() => {
-                diceManager.actions.setOptions({ listResults: false });
-                props.onPoolClick({
-                  blockId: props.block.id,
-                  blockType: props.block.type,
-                  label: props.block.label,
-                  commandOptionList: commandOptionList,
-                });
-              }}
-            >
-              <RollIcon className={css({ fontSize: "2.3rem" })} />
-            </Pool>
+            {props.readonly ? (
+              <RollIcon className={css({ fontSize: "2rem" })} />
+            ) : (
+              <Pool
+                tooltipTitle={t("character-dialog.skill-block.roll")}
+                fontSize="1.2rem"
+                borderRadius="8px"
+                selected={isSelected}
+                clickable={!props.readonly}
+                borderStyle={"solid"}
+                onContextMenu={(event) => {
+                  event.preventDefault();
+
+                  diceManager.actions.setOptions({ listResults: false });
+                  diceManager.actions.addOrRemovePoolElement({
+                    blockId: props.block.id,
+                    blockType: props.block.type,
+                    label: props.block.label,
+                    commandOptionList: blockDiceCommandOptions,
+                  });
+                }}
+                onClick={() => {
+                  const diceRollResult = diceManager.actions.roll(
+                    blockDiceCommandOptions,
+                    { listResults: false }
+                  );
+                  props.onRoll(diceRollResult);
+                }}
+              >
+                <RollIcon className={css({ fontSize: "2.3rem" })} />
+              </Pool>
+            )}
           </Grid>
           {!props.block.meta.hideModifier && (
             <Grid item>
               <CircleTextField
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+                data-cy={`${props.dataCy}.value`}
                 value={state}
                 readonly={props.readonly}
                 onChange={(newState) => {
@@ -92,8 +101,8 @@ export function BlockSkill(
           <Grid item xs>
             <FateLabel className={css({ display: "inline-block" })}>
               <ContentEditable
-                data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                readonly={!props.advanced}
+                data-cy={`${props.dataCy}.label`}
+                readonly={props.readonly}
                 border={props.advanced}
                 value={props.block.label}
                 onChange={(value) => {
@@ -107,11 +116,8 @@ export function BlockSkill(
             <Grid item>
               <BlockToggleMeta
                 readonly={props.readonly}
-                pageIndex={props.pageIndex}
-                sectionIndex={props.sectionIndex}
-                section={props.section}
+                dataCy={props.dataCy}
                 block={props.block}
-                blockIndex={props.blockIndex}
                 onMetaChange={props.onMetaChange}
               />
             </Grid>

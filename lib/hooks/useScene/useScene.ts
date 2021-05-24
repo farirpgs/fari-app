@@ -4,10 +4,8 @@ import Peer from "peerjs";
 import { useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
-import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
-  defaultSceneAspects,
   defaultSceneName,
   ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
@@ -23,8 +21,7 @@ import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
-import { AspectType } from "./AspectType";
-import { IAspect, IPlayer, IScene } from "./IScene";
+import { IIndexCard, IIndexCardType, IPlayer, IScene } from "./IScene";
 
 const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
 
@@ -56,7 +53,7 @@ export function useScene(props: IProps) {
       id: scene.id,
       name: scene.name,
       group: scene.group,
-      aspects: scene.aspects,
+      indexCards: scene.indexCards,
       notes: scene.notes,
       lastUpdated: scene.lastUpdated,
       version: scene.version,
@@ -72,7 +69,7 @@ export function useScene(props: IProps) {
           draft.id = sceneToLoad.id;
           draft.name = sceneToLoad.name;
           draft.group = sceneToLoad.group;
-          draft.aspects = sceneToLoad.aspects;
+          draft.indexCards = sceneToLoad.indexCards;
           draft.notes = sceneToLoad.notes;
           draft.version = sceneToLoad.version;
           draft.lastUpdated = sceneToLoad.lastUpdated;
@@ -120,11 +117,19 @@ export function useScene(props: IProps) {
     return p.id === userId;
   });
 
-  useEffect(() => {
-    scene.players.forEach((p) => {
-      charactersManager.actions.updateIfExists(p.character);
-    });
-  }, [scene]);
+  useEffect(
+    function syncCharacterSheetForMe() {
+      scene.players.forEach((player) => {
+        const isMe = props.userId === player.id;
+
+        if (isMe) {
+          charactersManager.actions.addIfDoesntExist(player.character);
+        }
+        charactersManager.actions.updateIfMoreRecent(player.character);
+      });
+    },
+    [props.userId, scene]
+  );
 
   function safeSetScene(newScene: IScene) {
     if (newScene) {
@@ -134,19 +139,25 @@ export function useScene(props: IProps) {
 
   function loadScene(newScene: ISavableScene, keepPinned: boolean) {
     if (newScene) {
-      const pinnedAspects = getPinnedAspects(scene);
-      const aspects = keepPinned
-        ? {
-            ...pinnedAspects,
-            ...newScene.aspects,
-          }
-        : newScene.aspects;
+      const pinnedIndexCards = getPinnedIndexCards(scene);
+      const publicIndexCards = keepPinned
+        ? [...pinnedIndexCards.publicIndexCards, ...newScene.indexCards.public]
+        : newScene.indexCards.public;
+      const privateIndexCards = keepPinned
+        ? [
+            ...pinnedIndexCards.privateIndexCards,
+            ...newScene.indexCards.private,
+          ]
+        : newScene.indexCards.private;
 
       setSceneToLoad({
         id: newScene.id,
         name: newScene.name,
         group: newScene.group,
-        aspects: aspects,
+        indexCards: {
+          public: publicIndexCards,
+          private: privateIndexCards,
+        },
         notes: newScene.notes,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
@@ -177,11 +188,14 @@ export function useScene(props: IProps) {
   function resetScene() {
     setScene(
       produce((draft: IScene) => {
-        const pinnedAspects = getPinnedAspects(draft);
+        const pinnedIndexCards = getPinnedIndexCards(scene);
         const everyone = [draft.gm, ...draft.players];
         draft.name = defaultSceneName;
         draft.id = Id.generate();
-        draft.aspects = { ...pinnedAspects, ...defaultSceneAspects };
+        draft.indexCards = {
+          public: pinnedIndexCards.publicIndexCards,
+          private: pinnedIndexCards.privateIndexCards,
+        };
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
@@ -206,35 +220,86 @@ export function useScene(props: IProps) {
     );
   }
 
-  function addAspect(type: AspectType, isPrivate: boolean) {
-    const id = Id.generate();
+  function addIndexCard(
+    type: IIndexCardType,
+    cardProducer?: (card: IIndexCard) => IIndexCard | void
+  ) {
+    const defaultCard = SceneFactory.makeIndexCard();
+    const newCard = cardProducer
+      ? produce(defaultCard, cardProducer)
+      : defaultCard;
     setScene(
       produce((draft: IScene) => {
-        draft.aspects[id] = { ...defaultAspects[type], isPrivate: isPrivate };
+        const cards = draft.indexCards[type];
+
+        cards.unshift(newCard);
       })
     );
     setTimeout(() => {
       try {
         const indexCard: HTMLSpanElement | null = document.querySelector(
-          `#index-card-${id}`
+          `#index-card-${newCard.id}`
         );
         if (indexCard) {
           indexCard.focus();
         }
       } catch (error) {}
     });
-    return id;
+    return newCard;
   }
 
-  function removeAspect(aspectId: string) {
+  function removeIndexCard(indexCardId: string, type: IIndexCardType) {
     setScene(
       produce((draft: IScene) => {
-        delete draft.aspects[aspectId];
+        const cards = draft.indexCards[type];
+        const index = cards.findIndex((c) => c.id === indexCardId);
+        cards.splice(index, 1);
       })
     );
   }
 
-  function moveAspects(dragIndex: number, hoverIndex: number) {
+  function duplicateIndexCard(indexCard: IIndexCard, type: IIndexCardType) {
+    setScene(
+      produce((draft: IScene) => {
+        const cards = draft.indexCards[type];
+        const index = cards.findIndex((c) => c.id === indexCard.id);
+        const copy = SceneFactory.duplicateIndexCard(indexCard);
+        cards.splice(index, 0, copy);
+      })
+    );
+  }
+
+  function updateIndexCard(updatedIndexCard: IIndexCard, type: IIndexCardType) {
+    setScene(
+      produce((draft: IScene) => {
+        const cards = draft.indexCards[type];
+        const index = cards.findIndex((c) => c.id === updatedIndexCard.id);
+        cards[index] = updatedIndexCard;
+      })
+    );
+  }
+
+  function toggleIndexCardSection(
+    indexCardToMove: IIndexCard,
+    from: IIndexCardType
+  ) {
+    setScene(
+      produce((draft: IScene) => {
+        draft.indexCards[from] = draft.indexCards[from].filter(
+          (i) => i.id !== indexCardToMove.id
+        );
+
+        const to: IIndexCardType = from === "public" ? "private" : "public";
+        draft.indexCards[to].unshift(indexCardToMove);
+      })
+    );
+  }
+
+  function moveIndexCard(
+    dragIndex: number,
+    hoverIndex: number,
+    type: IIndexCardType
+  ) {
     setScene(
       produce((draft: IScene) => {
         if (!draft) {
@@ -244,239 +309,13 @@ export function useScene(props: IProps) {
         if (dragIndex === undefined || hoverIndex === undefined) {
           return;
         }
-        const hoverKey = Object.keys(draft.aspects)[hoverIndex];
-        const dragKey = Object.keys(draft.aspects)[dragIndex];
 
-        draft.aspects = Object.keys(draft.aspects).reduce<
-          Record<string, IAspect>
-        >((acc, currentAspectId, index) => {
-          if (index === dragIndex) {
-            return { ...acc };
-          }
-          if (index === hoverIndex) {
-            const movedAspects =
-              hoverIndex > dragIndex
-                ? {
-                    [hoverKey]: draft.aspects[hoverKey],
-                    [dragKey]: draft.aspects[dragKey],
-                  }
-                : {
-                    [dragKey]: draft.aspects[dragKey],
-                    [hoverKey]: draft.aspects[hoverKey],
-                  };
-            return {
-              ...acc,
-              ...movedAspects,
-            };
-          }
-          return {
-            ...acc,
-            [currentAspectId]: draft.aspects[currentAspectId],
-          };
-        }, {});
-      })
-    );
-  }
+        const cards = draft.indexCards[type];
 
-  function resetAspect(aspectId: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId] = defaultAspects[draft.aspects[aspectId].type];
-      })
-    );
-  }
+        const dragItem = cards[dragIndex];
 
-  function setAspectIsPrivate(aspectId: string, isPrivate: boolean) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].isPrivate = isPrivate;
-      })
-    );
-  }
-
-  function updateAspectTitle(aspectId: string, title: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].title = title;
-      })
-    );
-  }
-
-  function updateAspectContent(aspectId: string, content: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].content = content;
-      })
-    );
-  }
-
-  function addAspectTrack(aspectId: string, trackName: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].tracks.push({
-          name: trackName,
-          value: [{ checked: false, label: "1" }],
-        });
-      })
-    );
-  }
-
-  function addAspectDrawArea(aspectId: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].drawAreaObjects = [];
-      })
-    );
-  }
-
-  function setAspectDrawAreaObjects(
-    aspectId: string,
-    objects: IDrawAreaObjects
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].drawAreaObjects = objects;
-      })
-    );
-  }
-
-  function toggleAspectPinned(aspectId: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].pinned = !draft.aspects[aspectId].pinned;
-      })
-    );
-  }
-
-  function removeAspectTrack(aspectId: string, trackIndex: number) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].tracks = draft.aspects[aspectId].tracks.filter(
-          (track, index) => {
-            return index !== trackIndex;
-          }
-        );
-      })
-    );
-  }
-
-  function updateAspectTrackName(
-    aspectId: string,
-    trackIndex: number,
-    trackName: string
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].tracks[trackIndex].name = trackName;
-      })
-    );
-  }
-
-  function addAspectTrackBox(aspectId: string, trackIndex: number) {
-    setScene(
-      produce((draft: IScene) => {
-        const numberOfBoxes =
-          draft.aspects[aspectId].tracks[trackIndex].value.length;
-        draft.aspects[aspectId].tracks[trackIndex].value.push({
-          checked: false,
-          label: `${numberOfBoxes + 1}`,
-        });
-      })
-    );
-  }
-
-  function removeAspectTrackBox(id: string, index: number) {
-    setScene(
-      produce((draft: IScene) => {
-        const numberOfBoxes = draft.aspects[id].tracks[index].value.length;
-        draft.aspects[id].tracks[index].value = draft.aspects[id].tracks[
-          index
-        ].value.filter((value, index) => {
-          return index !== numberOfBoxes - 1;
-        });
-      })
-    );
-  }
-
-  function toggleAspectTrackBox(
-    aspectId: string,
-    trackIndex: number,
-    boxIndex: number
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        const oldValue =
-          draft.aspects[aspectId].tracks[trackIndex].value[boxIndex].checked;
-        draft.aspects[aspectId].tracks[trackIndex].value[
-          boxIndex
-        ].checked = !oldValue;
-      })
-    );
-  }
-
-  function updateStressBoxLabel(
-    aspectId: string,
-    trackIndex: number,
-    boxIndex: number,
-    boxLabel: string
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].tracks[trackIndex].value[
-          boxIndex
-        ].label = boxLabel;
-      })
-    );
-  }
-
-  function updateAspectColor(aspectId: string, color: IndexCardColorTypes) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].color = color;
-      })
-    );
-  }
-
-  function addAspectConsequence(aspectId: string) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].consequences.push({ name: "", value: "" });
-      })
-    );
-  }
-
-  function updateAspectConsequenceName(
-    aspectId: string,
-    consequenceIndex: number,
-    name: string
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].consequences[consequenceIndex].name = name;
-      })
-    );
-  }
-
-  function updateAspectConsequenceValue(
-    aspectId: string,
-    consequenceIndex: number,
-    value: string
-  ) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].consequences[consequenceIndex].value = value;
-      })
-    );
-  }
-
-  function removeAspectConsequence(aspectId: string, consequenceIndex: number) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[aspectId].consequences = draft.aspects[
-          aspectId
-        ].consequences.filter((track, index) => {
-          return index !== consequenceIndex;
-        });
+        cards.splice(dragIndex, 1);
+        cards.splice(hoverIndex, 0, dragItem);
       })
     );
   }
@@ -565,9 +404,17 @@ export function useScene(props: IProps) {
           p.playedDuringTurn = false;
         });
 
-        const aspectIds = Object.keys(draft.aspects);
-        aspectIds.forEach((id) => {
-          draft.aspects[id].playedDuringTurn = false;
+        draft.indexCards.public.forEach((indexCard) => {
+          indexCard.playedDuringTurn = false;
+          indexCard.subCards.forEach((subCard) => {
+            subCard.playedDuringTurn = false;
+          });
+        });
+        draft.indexCards.private.forEach((indexCard) => {
+          indexCard.playedDuringTurn = false;
+          indexCard.subCards.forEach((subCard) => {
+            subCard.playedDuringTurn = false;
+          });
         });
       })
     );
@@ -632,13 +479,18 @@ export function useScene(props: IProps) {
             p.points = points;
             if (p.character) {
               for (const page of p.character.pages) {
-                for (const section of page.sections) {
+                const allSections = [
+                  ...page.sections.left,
+                  ...page.sections.right,
+                ];
+                for (const section of allSections) {
                   for (const block of section.blocks) {
                     const shouldUpdateBlock =
                       block.type === BlockType.PointCounter &&
                       block.meta.isMainPointCounter;
                     if (shouldUpdateBlock) {
                       const typedBlock = block as IPointCounterBlock & IBlock;
+                      console.debug("shouldUpdateBlock", shouldUpdateBlock);
 
                       typedBlock.value = points;
                       typedBlock.meta.max = maxPoints;
@@ -691,22 +543,6 @@ export function useScene(props: IProps) {
     );
   }
 
-  function updateAspectPlayerDuringTurn(id: string, playedDuringTurn: boolean) {
-    setScene(
-      produce((draft: IScene) => {
-        draft.aspects[id].playedDuringTurn = playedDuringTurn;
-      })
-    );
-  }
-
-  function toggleSort() {
-    setScene(
-      produce((draft: IScene) => {
-        draft.sort = !draft.sort;
-      })
-    );
-  }
-
   function setNotes(notes: string) {
     setScene(
       produce((draft: IScene) => {
@@ -734,50 +570,32 @@ export function useScene(props: IProps) {
       dirty,
     },
     actions: {
+      addIndexCard: addIndexCard,
+      addOfflinePlayer,
+      cloneAndLoadNewScene,
+      fireBadConfetti,
+      fireGoodConfetti,
+      loadPlayerCharacter: loadPlayerCharacter,
+      loadScene,
+      toggleIndexCardSection,
+      moveIndexCard,
+      removeIndexCard,
+      duplicateIndexCard,
+      removePlayer,
+      resetInitiative,
       resetScene,
       safeSetScene,
-      loadScene,
-      cloneAndLoadNewScene,
-      updateName,
       setGroup,
-      addAspect,
-      moveAspects,
-      removeAspect,
-      resetAspect,
-      setAspectIsPrivate,
-      updateAspectTitle,
-      updateAspectContent,
-      addAspectTrack,
-      addAspectDrawArea,
-      setAspectDrawAreaObjects,
-      removeAspectTrack,
-      updateAspectTrackName,
-      addAspectTrackBox,
-      removeAspectTrackBox,
-      toggleAspectTrackBox,
-      updateStressBoxLabel,
-      addAspectConsequence,
-      updateAspectConsequenceName,
-      updateAspectConsequenceValue,
-      removeAspectConsequence,
-      updateAspectPlayerDuringTurn,
-      updateAspectColor,
-      updatePlayersWithConnections,
-      addOfflinePlayer,
-      removePlayer,
+      setNotes,
+      updateDrawAreaObjects,
+      updateGmRoll,
+      updateIndexCard,
+      updateName,
+      updatePlayerCharacter,
       updatePlayerCharacterMainPointCounter,
       updatePlayerPlayedDuringTurn,
-      resetInitiative,
-      updateGmRoll,
       updatePlayerRoll,
-      fireGoodConfetti,
-      fireBadConfetti,
-      toggleSort,
-      updatePlayerCharacter,
-      loadPlayerCharacter: loadPlayerCharacter,
-      updateDrawAreaObjects,
-      toggleAspectPinned,
-      setNotes,
+      updatePlayersWithConnections,
     },
     _: {
       removedPlayers,
@@ -785,85 +603,11 @@ export function useScene(props: IProps) {
   };
 }
 
-const defaultAspect: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "white",
-  type: AspectType.Aspect,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
+function getPinnedIndexCards(scene: IScene) {
+  const publicIndexCards = scene.indexCards.public.filter((i) => i.pinned);
+  const privateIndexCards = scene.indexCards.private.filter((i) => i.pinned);
 
-const defaultIndexCard: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "white",
-  type: AspectType.IndexCard,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultBoost: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [{ name: "Free Invoke", value: [{ label: "1", checked: false }] }],
-  consequences: [],
-  color: "blue",
-  type: AspectType.Boost,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultNPC: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "green",
-  type: AspectType.NPC,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultBadGuy: IAspect = {
-  title: "",
-  content: "<br/>",
-  tracks: [],
-  consequences: [],
-  color: "red",
-  type: AspectType.BadGuy,
-  playedDuringTurn: false,
-  pinned: false,
-  hasDrawArea: false,
-};
-
-const defaultAspects: Record<AspectType, IAspect> = {
-  [AspectType.Aspect]: defaultAspect,
-  [AspectType.Boost]: defaultBoost,
-  [AspectType.NPC]: defaultNPC,
-  [AspectType.BadGuy]: defaultBadGuy,
-  [AspectType.IndexCard]: defaultIndexCard,
-};
-
-function getPinnedAspects(scene: IScene) {
-  return Object.keys(scene.aspects).reduce((prev, curr) => {
-    const aspect = scene.aspects[curr];
-    if (aspect.pinned) {
-      return {
-        ...prev,
-        [curr]: aspect,
-      };
-    }
-    return prev;
-  }, {} as Record<string, IAspect>);
+  return { publicIndexCards, privateIndexCards };
 }
 
 export function sanitizeSceneName(sceneName: string) {

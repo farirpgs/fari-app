@@ -175,12 +175,15 @@ export const Doc: React.FC<IProps> = (props) => {
 
   useEffect(
     function sendLog() {
-      const logMessage = `Route:Document:${location.pathname}`;
+      const dynamicLogMessage = `Route:Document:${location.pathname}`;
 
-      logger.info(logMessage, {
-        pathname: location.pathname,
-        page: pageId,
-        section: section,
+      logger.info(dynamicLogMessage);
+      logger.info("Route:Document", {
+        tags: {
+          pathname: location.pathname,
+          page: pageId,
+          section: section,
+        },
       });
     },
     [location.pathname]
@@ -776,7 +779,7 @@ export const DocSideBar: React.FC<{
     const categoryNames = Object.keys(categories);
     return (
       <>
-        {categoryNames.map((category, i) => {
+        {categoryNames.map((category) => {
           const items = categories[category];
 
           const isCategorySelected = navigation.highlightedItems.includes(

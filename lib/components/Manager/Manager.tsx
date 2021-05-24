@@ -18,7 +18,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ExportIcon from "@material-ui/icons/GetApp";
 import Alert from "@material-ui/lab/Alert";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ContentEditablePreview } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -63,6 +64,17 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [deletedSnack, setDeletedSnack] = useState(false);
   const [deletedObject, setDeletedObject] = useState<T | undefined>(undefined);
+  const logger = useLogger();
+
+  useEffect(() => {
+    if (props.mode !== ManagerMode.Close) {
+      logger.info("Manager:Open", {
+        extra: {
+          listLength: props.list.length,
+        },
+      });
+    }
+  }, [props.mode]);
 
   const { t } = useTranslate();
 
@@ -108,6 +120,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
       classes={{
         paper: css({
           width: "85%",
+          paddingBottom: "6rem",
           maxWidth: isSmall ? undefined : "30rem",
         }),
       }}

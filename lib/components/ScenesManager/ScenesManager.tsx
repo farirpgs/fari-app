@@ -4,17 +4,15 @@ import { useHistory } from "react-router";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { IScene } from "../../hooks/useScene/IScene";
 import { Manager } from "../Manager/Manager";
 
-type IProps = {};
-
-export const ScenesManager: React.FC<IProps> = (props) => {
+export const ScenesManager: React.FC = () => {
   const history = useHistory();
   const scenesManager = useContext(ScenesContext);
   const logger = useLogger();
@@ -63,7 +61,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       filesToImport: sceneFile,
       fariType: "scene",
       onImport: (sceneToImport) => {
-        const migratedScene = migrateScene(sceneToImport);
+        const migratedScene = SceneFactory.migrate(sceneToImport);
         const sceneWithNewTimestamp = produce(
           migratedScene,
           (draft: IScene) => {

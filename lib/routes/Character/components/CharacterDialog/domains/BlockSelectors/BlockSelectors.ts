@@ -10,8 +10,8 @@ import {
 } from "../../../../../../domains/dice/Dice";
 import { DiceCommandGroup } from "../DiceCommandGroup/DiceCommandGroup";
 
-export const Block = {
-  getCommandOptionList(
+export const BlockSelectors = {
+  getDiceCommandOptionsFromBlock(
     block: IBlock & (IDicePoolBlock | ISkillBlock)
   ): Array<IDiceCommandOption> {
     const commandGroups =

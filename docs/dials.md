@@ -134,7 +134,7 @@ So this was essentially a conflict over whether Corrin examine a patient, and in
 
 Faced with the cost of his 'victory,' he left without examining the patient.
 
-# Magic: Aspect Based Naration
+# Magic: Aspect Based Narration
 
 A simple and lightweight magic system that keeps a good balance between all player characters
 
@@ -155,7 +155,7 @@ Magic is diverse and mysterious. No one truly knows the source of magic though t
 > For those who do not want to read all this:
 >
 > - Take an Aspect that represents you characters ability to do magic
-> - Pick sills that accomplish things you want your magic user to be able to accomplish
+> - Pick skills that accomplish things you want your magic user to be able to accomplish
 > - Narrate the use of your skills with magic flare!
 
 ## Mechanics
@@ -177,3 +177,15 @@ Cory has the aspect "Tried and True Detective" and the Investigation skill at Go
 ### Difficulties, Times and Effects
 
 When trying to determine how difficult a task is and how long it takes to complete when a magician uses a skill, just ask your self how hard it would be and how long it would take for a mundane character to do the same thing with that same skill. There you go! Once success or failure occurs, let the magic wielder spice things up as much as they like. The effects, however, are of the same magnitude as would result from the mundane use of the skill.
+
+# Using Ammo in Fate
+
+This great mechanic from the Fate Codex Vol. 1 is super interesting if you want to make ammos or even inventory matter in your Fate Campaign.
+
+Check it out here: https://fate-srd.com/fate-codex/lock-and-load-using-ammo-fate
+
+# Chase
+
+Not all conflicts are about someone trying to hurt someone else. Sometimes, it's about if you can even catch up to them!
+
+The Fate System Tookit as great mechanics to handle chase scenes which you can check out [here](/srds/system-toolkit/6-special-circumstances?goTo=chases).

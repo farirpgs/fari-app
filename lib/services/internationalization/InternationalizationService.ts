@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 import deTranslation from "../../../locales/de.json";
 import enTranslation from "../../../locales/en.json";
 import esTranslation from "../../../locales/es.json";
+import eoTranslation from "../../../locales/eo.json";
 import frTranslation from "../../../locales/fr.json";
 import glTranslation from "../../../locales/gl_ES.json";
 import itTranslation from "../../../locales/it.json";
@@ -15,6 +16,7 @@ import { devTranslation } from "./locales/devTranslations";
 export const PossibleLanguages = [
   "en",
   "es",
+  "eo",
   "pt-BR",
   "fr",
   "gl",
@@ -39,6 +41,9 @@ export async function InternationalizationService(logger: ILogger) {
         },
         "es": {
           translation: esTranslation,
+        },
+        "eo": {
+          translation: eoTranslation,
         },
         "fr": {
           translation: frTranslation,
@@ -72,7 +77,6 @@ export async function InternationalizationService(logger: ILogger) {
     });
   logger.setTag("language", i18n.language);
   logger.info(`I18n:onDetect:${i18n.language}`, {
-    language: i18n.language,
-    languages: i18n.languages,
+    // tags: { language: i18n.language, languages: i18n.languages },
   });
 }

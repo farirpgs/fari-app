@@ -1,5 +1,6 @@
 import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
+import { FontFamily } from "./constants/FontFamily";
 
 const systemFonts = [
   "-apple-system",
@@ -23,13 +24,7 @@ export const defaultThemeConfiguration: ThemeOptions = {
     fontWeightMedium: 600,
     // default 700
     fontWeightBold: 700,
-    fontFamily: [
-      "Inter",
-      "HelveticaNeue",
-      "Helvetica",
-      "Arial",
-      "sans-serif",
-    ].join(","),
+    fontFamily: FontFamily.Default,
   },
   overrides: {
     MuiCssBaseline: {

@@ -1,6 +1,6 @@
 {
   "name": "fari",
-  "version": "4.0.11",
+  "version": "5.0.0",
   "description": "Fari is the best Fate RPG companion application. License: AGPL-3.0-or-later",
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
@@ -13,6 +13,7 @@
     "serve:build": "cp serve.json dist/serve.json && yarn serve dist -l 1234",
     "preview:build": "rm -rf ./dist && yarn build && yarn deploy:preview",
     "beta": "yarn preview:build --alias beta",
+    "alpha": "yarn preview:build --alias alpha",
     "build-and-serve": "yarn build && yarn serve:build",
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
@@ -26,7 +27,7 @@
     "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod",
     "storybook": "start-storybook -p 6006 -s ./fonts",
     "build-storybook": "build-storybook -s ./fonts",
-    "chromatic": "npx chromatic --project-token 45d2fc40e469"
+    "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes"
   },
   "dependencies": {
     "@emotion/css": "^11.0.0",
@@ -62,11 +63,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@storybook/addon-actions": "^6.2.1",
-    "@storybook/addon-essentials": "^6.2.1",
-    "@storybook/addon-links": "^6.2.1",
-    "@storybook/builder-webpack5": "^6.2.1",
-    "@storybook/react": "^6.2.1",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/builder-webpack5": "^6.2.9",
+    "@storybook/react": "^6.2.9",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^3.2.1",
     "@types/dompurify": "^2.2.1",

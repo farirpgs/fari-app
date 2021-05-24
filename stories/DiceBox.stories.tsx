@@ -49,6 +49,9 @@ const Template: Story<IProps> = (args, context) => (
 );
 
 export const Default = Template.bind({});
+Default.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 Default.args = {
   rolls: [
     {
@@ -195,6 +198,25 @@ DefaultD20BadResult.args = {
           value: 1,
           commandGroupId: "1d20",
           commandName: "1d20",
+        },
+      ],
+    },
+  ],
+};
+
+export const HeadsOrTrails = Template.bind({});
+HeadsOrTrails.args = {
+  rolls: [
+    {
+      total: 0,
+      totalWithoutModifiers: 0,
+      options: { listResults: true },
+      commandResult: [
+        {
+          type: RollType.DiceCommand,
+          value: "Heads",
+          commandGroupId: "coin",
+          commandName: "coin",
         },
       ],
     },

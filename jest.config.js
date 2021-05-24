@@ -7,6 +7,9 @@ module.exports = {
     "<rootDir>/lib/**/?(*.)+(spec|test).[jt]s?(x)",
   ],
   globals: {
+    "window": {
+      location: { search: "" },
+    },
     "ts-jest": {
       isolatedModules: true,
     },

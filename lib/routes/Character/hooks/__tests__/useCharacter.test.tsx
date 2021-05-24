@@ -226,206 +226,207 @@ describe("useCharacter", () => {
           {
             id: expect.anything(),
             label: "Character",
-            sections: [
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "High Concept",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Trouble",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Relationship",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Other Aspect",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Other Aspect",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                ],
-                id: expect.anything(),
-                label: "Aspects",
-                position: "Left",
-                visibleOnCard: true,
-              },
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "Stunt #1",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Stunt #2",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Stunt #3",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                ],
-                id: expect.anything(),
-                label: "Stunts & Extras",
-                position: "Left",
-              },
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "Notes",
-                    meta: {},
-                    type: "Text",
-                    value: "",
-                  },
-                ],
-                id: expect.anything(),
-                label: "Other",
-                position: "Left",
-              },
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "Fate Points",
-                    meta: { isMainPointCounter: true, max: "3" },
-                    type: "PointCounter",
-                    value: "3",
-                  },
-                ],
-                id: expect.anything(),
-                label: "Fate Points",
-                position: "Left",
-              },
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "Stress",
-                    meta: {},
-                    type: "SlotTracker",
-                    value: [
-                      { checked: false, label: "1" },
-                      { checked: false, label: "2" },
-                      { checked: false, label: "3" },
-                    ],
-                  },
-                ],
-                id: expect.anything(),
-                label: "Stress",
-                position: "Right",
-              },
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "Mild",
-                    meta: { checked: false },
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Moderate",
-                    meta: { checked: false },
-                    type: "Text",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Severe",
-                    meta: { checked: false },
-                    type: "Text",
-                    value: "",
-                  },
-                ],
-                id: expect.anything(),
-                label: "Consequences",
-                position: "Right",
-              },
-              {
-                blocks: [
-                  {
-                    id: expect.anything(),
-                    label: "Careful",
-                    meta: { commands: ["4dF"] },
-                    type: "Skill",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Clever",
-                    meta: { commands: ["4dF"] },
-                    type: "Skill",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Forceful",
-                    meta: { commands: ["4dF"] },
-                    type: "Skill",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Flashy",
-                    meta: { commands: ["4dF"] },
-                    type: "Skill",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Quick",
-                    meta: { commands: ["4dF"] },
-                    type: "Skill",
-                    value: "",
-                  },
-                  {
-                    id: expect.anything(),
-                    label: "Sneaky",
-                    meta: { commands: ["4dF"] },
-                    type: "Skill",
-                    value: "",
-                  },
-                ],
-                id: expect.anything(),
-                label: "Approaches",
-                position: "Right",
-                visibleOnCard: true,
-              },
-            ],
+            sections: {
+              left: [
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "High Concept",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Trouble",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Relationship",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Other Aspect",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Other Aspect",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Aspects",
+
+                  visibleOnCard: true,
+                },
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Stunt #1",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Stunt #2",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Stunt #3",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Stunts & Extras",
+                },
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Notes",
+                      meta: {},
+                      type: "Text",
+                      value: "",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Other",
+                },
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Fate Points",
+                      meta: { isMainPointCounter: true, max: "3" },
+                      type: "PointCounter",
+                      value: "3",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Fate Points",
+                },
+              ],
+              right: [
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Stress",
+                      meta: {},
+                      type: "SlotTracker",
+                      value: [
+                        { checked: false, label: "1" },
+                        { checked: false, label: "2" },
+                        { checked: false, label: "3" },
+                      ],
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Stress",
+                },
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Mild",
+                      meta: { checked: false },
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Moderate",
+                      meta: { checked: false },
+                      type: "Text",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Severe",
+                      meta: { checked: false },
+                      type: "Text",
+                      value: "",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Consequences",
+                },
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Careful",
+                      meta: { commands: ["4dF"] },
+                      type: "Skill",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Clever",
+                      meta: { commands: ["4dF"] },
+                      type: "Skill",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Forceful",
+                      meta: { commands: ["4dF"] },
+                      type: "Skill",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Flashy",
+                      meta: { commands: ["4dF"] },
+                      type: "Skill",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Quick",
+                      meta: { commands: ["4dF"] },
+                      type: "Skill",
+                      value: "",
+                    },
+                    {
+                      id: expect.anything(),
+                      label: "Sneaky",
+                      meta: { commands: ["4dF"] },
+                      type: "Skill",
+                      value: "",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Approaches",
+
+                  visibleOnCard: true,
+                },
+              ],
+            },
           },
         ],
-        version: 3,
+
+        wide: false,
+        version: 4,
       });
     });
   });

@@ -134,8 +134,8 @@ export function BlockPointCounter(
                   align={"center"}
                 >
                   <ContentEditable
-                    data-cy={`character-dialog.${props.section.label}.${props.block.label}.label`}
-                    readonly={!props.advanced}
+                    data-cy={`${props.dataCy}.label`}
+                    readonly={props.readonly}
                     border={props.advanced}
                     value={props.block.label}
                     onChange={(value) => {
@@ -157,7 +157,7 @@ export function BlockPointCounter(
         >
           <Grid item>
             <CircleTextField
-              data-cy={`character-dialog.${props.section.label}.${props.block.label}.value`}
+              data-cy={`${props.dataCy}.value`}
               highlight={props.block.meta.isMainPointCounter}
               value={pointsManager.state.points}
               onChange={(newValue) => {
@@ -177,7 +177,7 @@ export function BlockPointCounter(
                 <Typography
                   className={css({
                     fontSize: "2rem",
-                    color: "#bdbdbd",
+                    color: theme.palette.text.secondary,
                     lineHeight: Font.lineHeight(2),
                   })}
                 >
@@ -186,7 +186,7 @@ export function BlockPointCounter(
               </Grid>
               <Grid item>
                 <CircleTextField
-                  data-cy={`character-dialog.${props.section.label}.${props.block.label}.max`}
+                  data-cy={`${props.dataCy}.max`}
                   highlight={props.block.meta.isMainPointCounter}
                   value={pointsManager.state.maxPoints ?? ""}
                   onChange={(newMax) => {
@@ -229,29 +229,31 @@ BlockPointCounter.displayName = "BlockPointCounter";
 
 export function BlockPointCounterActions(
   props: IBlockActionComponentProps<IPointCounterBlock> & {
-    toggleBlockMainPointCounter(): void;
+    onMainPointCounterChange?(): void;
   }
 ) {
   const theme = useTheme();
   const { t } = useTranslate();
   return (
     <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.toggleBlockMainPointCounter();
-          }}
-        >
-          {props.block.meta.isMainPointCounter
-            ? t("character-dialog.control.unset-main-counter")
-            : t("character-dialog.control.set-main-counter")}
-        </Link>
-      </Grid>
+      {props.onMainPointCounterChange && (
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              props.onMainPointCounterChange?.();
+            }}
+          >
+            {props.block.meta.isMainPointCounter
+              ? t("character-dialog.control.unset-main-counter")
+              : t("character-dialog.control.set-main-counter")}
+          </Link>
+        </Grid>
+      )}
       <Grid item>
         <Link
           component="button"
