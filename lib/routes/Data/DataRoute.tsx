@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { DataGrid, RowId } from "@material-ui/data-grid";
+import { DataGrid, GridRowId } from "@material-ui/data-grid";
 import produce from "immer";
 import uniq from "lodash/uniq";
 import React, { useContext, useMemo, useRef, useState } from "react";
@@ -65,7 +65,7 @@ export const DataRoute: React.FC = () => {
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
 
-  const [selections, setSelection] = useState<Array<RowId>>([]);
+  const [selections, setSelection] = useState<Array<GridRowId>>([]);
   const $importInput = useRef<any>();
   const $importAndDuplicateInput = useRef<any>();
   const [filters, setFilters] = useState({ group: "", search: "", type: "" });
@@ -147,8 +147,9 @@ export const DataRoute: React.FC = () => {
         }
         return r.name.toLowerCase().includes(filters.search.toLowerCase());
       });
-    const allRowsSize = FariEntity.getSize(allRows.map((r) => r.entity))
-      .kiloBytes;
+    const allRowsSize = FariEntity.getSize(
+      allRows.map((r) => r.entity)
+    ).kiloBytes;
 
     return {
       filteredRows: filteredRows,
@@ -434,8 +435,8 @@ export const DataRoute: React.FC = () => {
                 autoPageSize
                 pagination
                 checkboxSelection
-                onSelectionChange={(newSelection) => {
-                  setSelection(newSelection.rowIds);
+                onSelectionModelChange={(newSelection) => {
+                  setSelection(newSelection.selectionModel);
                 }}
                 columns={[
                   {
