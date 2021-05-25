@@ -2,7 +2,7 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
-# v5.0 WIP
+# v5.0 Better Index Cards and New Block Types
 
 - feat: pick any color for index cards
 - feat: give ability to add sub cards to index cards
@@ -69,6 +69,11 @@ WIP
 - fix: seelie squire edit link
 - fix: seelie squire consequence
 - fix: index card double modifier
+
+**5.0.1**
+
+- feat: translation update
+- fix: scene sub cards ids arent re-generated when a parent card is duplicated
 
 **4.0.5**
 
