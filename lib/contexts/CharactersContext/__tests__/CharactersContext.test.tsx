@@ -77,12 +77,12 @@ describe("useCharacters", () => {
       });
 
       // THEN the new character has been added and is properly sorted
-      expect(result.current.state.characters[1]).toEqual(
+      expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
           id: playingCharacter!.id,
         })
       );
-      expect(result.current.state.characters[0]).toEqual(
+      expect(result.current.state.characters[1]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,

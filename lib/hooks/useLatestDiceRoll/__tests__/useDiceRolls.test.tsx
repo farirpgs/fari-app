@@ -35,7 +35,7 @@ describe("useDiceRolls", () => {
 
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(false);
-      expect(view.result.current.state.color).toEqual("inherit");
+      expect(view.result.current.state.color).toEqual("#fff");
     });
     it("should display first roll on load without animation", () => {
       // GIVEN
@@ -152,7 +152,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("+4");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#4caf50");
+      expect(view.result.current.state.color).toEqual("rgb(60, 140, 64)");
 
       // WHEN
       view.rerender({
@@ -232,7 +232,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("+3");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#4caf50");
+      expect(view.result.current.state.color).toEqual("rgb(60, 140, 64)");
 
       // WHEN
       view.rerender({
@@ -342,7 +342,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("0");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("inherit");
+      expect(view.result.current.state.color).toEqual("#3f51b5");
 
       // WHEN
       view.rerender({
@@ -466,7 +466,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("-3");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#f44336");
+      expect(view.result.current.state.color).toEqual("rgb(195, 53, 43)");
 
       // WHEN
       view.rerender({
@@ -621,7 +621,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("-4");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#f44336");
+      expect(view.result.current.state.color).toEqual("rgb(195, 53, 43)");
     });
     it("should handle labels on load and after and going back to without labels", async () => {
       jest.useFakeTimers();

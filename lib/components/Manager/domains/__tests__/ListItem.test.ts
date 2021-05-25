@@ -99,7 +99,7 @@ describe("istItem", () => {
       // WHEN
       const result = listItem.getAbreviation(str);
       // THEN
-      expect(result).toEqual("TG");
+      expect(result).toEqual("T");
     });
   });
 });
