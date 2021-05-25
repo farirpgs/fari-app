@@ -55,16 +55,15 @@ If you want to make a contribution to Fari, you will need to clone this repo and
 
 ### Prerequisites
 
-- Install Node `^12.16.3` (to match engine property in `package.json`)
-- Install Yarn by running `npm install -g yarn`
+- Install Node `^14.16.1` (to match engine property in `package.json`)
 
 ### Installation
 
-- Run `yarn install`
+- Run `npm run install`
 
 ### Running the application
 
-Run `yarn start` and then the app should be running on http://localhost:1234
+Run `npm run start` and then the app should be running on http://localhost:1234
 
 ## Special Thanks
 
