@@ -54,6 +54,9 @@ Empty.args = {
 };
 
 export const Default = Template.bind({});
+Default.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 Default.args = {
   rolls: [
     {
