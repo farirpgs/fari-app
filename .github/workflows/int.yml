@@ -12,8 +12,14 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
+      # Checkout
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+      # Use Node
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
       # Cache
       - uses: actions/cache@v2
         with:
