@@ -92,6 +92,12 @@ export const SceneFactory = {
     return {
       ...indexCard,
       id: Id.generate(),
+      subCards: indexCard.subCards.map((sub) => {
+        return {
+          ...sub,
+          id: Id.generate(),
+        };
+      }),
     };
   },
   migrate(s: any): IScene {
@@ -107,7 +113,7 @@ export const SceneFactory = {
 
 function migrateV1SceneToV2(v1: ISceneV1): IScene {
   if (v1.version !== 1) {
-    return (v1 as unknown) as IScene;
+    return v1 as unknown as IScene;
   }
 
   const publicIndexCards: Array<IIndexCard> = [];
