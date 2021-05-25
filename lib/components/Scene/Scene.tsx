@@ -811,9 +811,15 @@ export const Scene: React.FC<IProps> = (props) => {
                     setSort(e.target.value as SortMode);
                   }}
                 >
-                  <option value={SortMode.None}>None</option>
-                  <option value={SortMode.GroupFirst}>Groups First</option>
-                  <option value={SortMode.PinnedFirst}>Pinned Firsts</option>
+                  <option value={SortMode.None}>
+                    {t("play-route.sort-options.none")}
+                  </option>
+                  <option value={SortMode.GroupFirst}>
+                    {t("play-route.sort-options.groups-first")}
+                  </option>
+                  <option value={SortMode.PinnedFirst}>
+                    {t("play-route.sort-options.pinned-first")}
+                  </option>
                 </Select>
               </FormControl>
             </Grid>
