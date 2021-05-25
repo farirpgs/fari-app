@@ -142,12 +142,7 @@ export const IndexCard: React.FC<
                   return (
                     <>
                       <div ref={dndRenderProps.drag}>
-                        <Tooltip
-                          title={
-                            // prettier-ignore
-                            t("character-dialog.control.move")
-                          }
-                        >
+                        <Tooltip title={t("character-dialog.control.move")}>
                           <IconButton
                             size="small"
                             className={css({
@@ -488,10 +483,7 @@ export const IndexCard: React.FC<
                           <Grid item>
                             <div ref={dndRenderProps.drag}>
                               <Tooltip
-                                title={
-                                  // prettier-ignore
-                                  t("character-dialog.control.move")
-                                }
+                                title={t("character-dialog.control.move")}
                               >
                                 <IconButton
                                   size="small"

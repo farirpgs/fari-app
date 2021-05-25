@@ -19,12 +19,16 @@ async function findTranslations(sourceFileLocations) {
 
   const translationKeys = [];
   files.forEach((item) => {
+    const contentWithoutLineBreaksOrSpaces = item.content
+      .split("\n")
+      .join(" ")
+      .replace(/\s+/g, "");
     /**
      * `\b` is for space or beginning of line
      * then look for any `t("*")`
      * `.*?` is not greedy
      */
-    const match = item.content.match(/(\b)t\(".*?"\)/gm);
+    const match = contentWithoutLineBreaksOrSpaces.match(/(\b)t\(".*?"\)/gm);
 
     if (match) {
       match.forEach((m) => {

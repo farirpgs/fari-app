@@ -1043,10 +1043,7 @@ export const CharacterV3Dialog: React.FC<{
                               <Grid item>
                                 <div ref={dndRenderProps.drag}>
                                   <Tooltip
-                                    title={
-                                      // prettier-ignore
-                                      t("character-dialog.control.move")
-                                    }
+                                    title={t("character-dialog.control.move")}
                                   >
                                     <IconButton size="small">
                                       <DragIndicatorIcon
@@ -1070,10 +1067,9 @@ export const CharacterV3Dialog: React.FC<{
                                 </div>
                                 <Box display="flex" justifyContent="center">
                                   <Tooltip
-                                    title={
-                                      // prettier-ignore
-                                      t("character-dialog.control.duplicate")
-                                    }
+                                    title={t(
+                                      "character-dialog.control.duplicate"
+                                    )}
                                   >
                                     <IconButton
                                       size="small"
@@ -1106,10 +1102,9 @@ export const CharacterV3Dialog: React.FC<{
 
                                 <Box display="flex" justifyContent="center">
                                   <Tooltip
-                                    title={
-                                      // prettier-ignore
-                                      t("character-dialog.control.remove-block")
-                                    }
+                                    title={t(
+                                      "character-dialog.control.remove-block"
+                                    )}
                                   >
                                     <IconButton
                                       size="small"

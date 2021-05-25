@@ -110,10 +110,9 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
                       setError(false);
                       props.onValueChange(event.target.value);
                     }}
-                    label={
-                      // prettier-ignore
-                      t("character-dialog.image-block.dialog.image-url-label")
-                    }
+                    label={t(
+                      "character-dialog.image-block.dialog.image-url-label"
+                    )}
                     fullWidth
                   />
                 </Grid>
