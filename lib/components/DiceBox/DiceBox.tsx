@@ -83,7 +83,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "color": theme.palette.getContrastText(diceRollsManager.state.color),
     "background": diceRollsManager.state.color,
     "fontWeight": theme.typography.fontWeightBold,
-    "border": `2px dotted ${theme.palette.primary.main}`,
+    "border": `2px dashed ${
+      diceRollsManager.state.rolling
+        ? theme.palette.primary.main
+        : "transparent"
+    }`,
     "borderRadius": "4px",
     "padding": ".2rem",
     "minWidth": props.size,
@@ -92,7 +96,9 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "justifyContent": "center",
     "alignItems": "center",
     "boxShadow": theme.shadows[2],
-    "transition": theme.transitions.create(["opacity"]),
+    "transition": theme.transitions.create(["opacity", "background"], {
+      duration: theme.transitions.duration.shortest,
+    }),
     "opacity": props.reduceOpacityWithoutHover ? "1" : "1",
     "&:hover": {
       opacity: "1",

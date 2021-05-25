@@ -8,6 +8,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, useHistory } from "react-router-dom";
 import { AppAnalytics } from "./components/AppAnalytics/AppAnalytics";
 import { AppRouter } from "./components/AppRouter/AppRouter";
+import { previewContentEditable } from "./components/ContentEditable/ContentEditable";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { IManagerViewModel, MyBinder } from "./components/MyBinder/MyBinder";
 import { env } from "./constants/env";
@@ -86,7 +87,7 @@ function MyBinderManager() {
       (s): IManagerViewModel => ({
         id: s.id,
         group: s.group,
-        name: s.name,
+        name: previewContentEditable({ value: s.name }),
         lastUpdated: s.lastUpdated,
         type: "scenes",
         original: s,
@@ -96,7 +97,7 @@ function MyBinderManager() {
       (c): IManagerViewModel => ({
         id: c.id,
         group: c.group,
-        name: c.name,
+        name: previewContentEditable({ value: c.name }),
         lastUpdated: c.lastUpdated,
         type: "characters",
         original: c,

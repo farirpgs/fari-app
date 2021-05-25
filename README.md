@@ -16,6 +16,7 @@
 - [ ] update dependencies
 - [x] get rid of yarn
 - [ ] SESSION VS Scene
+- [ ] player edit index cards
 
 
 # NEXT

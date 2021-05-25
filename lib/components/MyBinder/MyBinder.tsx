@@ -3,6 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
+import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -95,9 +96,8 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] = useState<
-    { folder: TFolders; element: any } | undefined
-  >(undefined);
+  const [deletedObject, setDeletedObject] =
+    useState<{ folder: TFolders; element: any } | undefined>(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -208,9 +208,21 @@ export function MyBinder<TFolders extends string>(props: {
               </Grid>
             </Box>
           </Paper>
-          {where === Where.Folders && renderFolders()}
-          {where === Where.Folder && renderFolder()}
-          {where === Where.Search && renderSearch()}
+          {where === Where.Folders && (
+            <Fade in key="renderFolders">
+              <Box>{renderFolders()}</Box>
+            </Fade>
+          )}
+          {where === Where.Folder && (
+            <Fade in key="renderFolder">
+              <Box>{renderFolder()}</Box>
+            </Fade>
+          )}
+          {where === Where.Search && (
+            <Fade in key="renderSearch">
+              <Box>{renderSearch()}</Box>
+            </Fade>
+          )}
           <Grid container justify="flex-end">
             <Grid item>
               <AppLink
@@ -234,6 +246,7 @@ export function MyBinder<TFolders extends string>(props: {
       <Box>
         <List>
           {folderNames.map((name, key) => {
+            const folderItemCount = props.folders[name].length;
             const translatedFolderName = t(
               `my-binder.folder.${name}` as ITranslationKeys
             );
@@ -248,7 +261,18 @@ export function MyBinder<TFolders extends string>(props: {
                 <ListItemIcon>
                   <FolderIcon />
                 </ListItemIcon>
-                <ListItemText primary={translatedFolderName} />
+                <ListItemText
+                  primary={
+                    <span>
+                      {translatedFolderName}{" "}
+                      <span
+                        className={css({ color: theme.palette.text.secondary })}
+                      >
+                        ({folderItemCount})
+                      </span>
+                    </span>
+                  }
+                />
               </ListItem>
             );
           })}
@@ -549,7 +573,12 @@ function Element(props: {
       <ListItemText primary={props.element.name} secondary={translatedType} />
 
       <ListItemSecondaryAction>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item>
+            <span className={css({ color: theme.palette.text.secondary })}>
+              ({listItem.formatDate(props.element.lastUpdated)})
+            </span>
+          </Grid>
           <Grid item>
             <IconButton
               size="small"

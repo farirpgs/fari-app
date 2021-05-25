@@ -1,4 +1,3 @@
-import produce from "immer";
 import React from "react";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
@@ -50,7 +49,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       indexCards: scene.indexCards,
       version: scene.version,
       notes: scene.notes,
-      lastUpdated: getUnix(),
+      lastUpdated: scene.lastUpdated,
     };
     if (!exists) {
       setScenes((draft: Array<ISavableScene>) => {
@@ -60,7 +59,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       setScenes((draft: Array<ISavableScene>) => {
         return draft.map((c) => {
           if (c.id === scene.id) {
-            return newScene;
+            return { ...newScene, lastUpdated: getUnix() };
           }
           return c;
         });
@@ -97,13 +96,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       fariType: "scene",
       onImport: (sceneToImport) => {
         const migratedScene = SceneFactory.migrate(sceneToImport);
-        const sceneWithNewTimestamp = produce(
-          migratedScene,
-          (draft: IScene) => {
-            draft.lastUpdated = getUnix();
-          }
-        );
-        upsert(sceneWithNewTimestamp);
+        upsert(migratedScene);
       },
     });
     // logger.info("ScenesManager:onImport");

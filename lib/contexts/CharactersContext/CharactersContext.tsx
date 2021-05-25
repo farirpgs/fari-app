@@ -1,4 +1,3 @@
-import produce from "immer";
 import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
@@ -46,7 +45,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       } else {
         return prev.map((c) => {
           if (c.id === character.id) {
-            return character;
+            return { ...character, lastUpdated: getUnix() };
           }
           return c;
         });
@@ -117,13 +116,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       fariType: "character",
       onImport: (characterToImport) => {
         const migratedCharacter = CharacterFactory.migrate(characterToImport);
-        const characterWithNewTimestamp = produce(
-          migratedCharacter,
-          (draft: ICharacter) => {
-            draft.lastUpdated = getUnix();
-          }
-        );
-        upsert(characterWithNewTimestamp);
+        upsert(migratedCharacter);
 
         // logger.info("CharactersManager:onImport");
       },
