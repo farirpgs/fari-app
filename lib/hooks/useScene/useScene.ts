@@ -1,8 +1,8 @@
 import produce from "immer";
 import isEqual from "lodash/isEqual";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
-import { defaultSceneName } from "../../contexts/SceneContext/ScenesContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
@@ -16,6 +16,7 @@ export type IProps = {
 };
 
 export function useScene(props: IProps) {
+  const scenesManager = useContext(ScenesContext);
   const [scene, setScene] = useState<IScene | undefined>();
 
   const [sceneToLoad, setSceneToLoad] = useState<IScene | undefined>(undefined);
@@ -33,6 +34,24 @@ export function useScene(props: IProps) {
       setScene(sceneToLoad);
     }
   }, [sceneToLoad]);
+
+  function addAndSetNewScene() {
+    if (!scene) {
+      const sceneToInsert = SceneFactory.make();
+      const newScene = scenesManager.actions.upsert(sceneToInsert);
+      setSceneToLoad(newScene);
+    } else {
+      const pinnedIndexCards = getPinnedIndexCards(scene);
+      const sceneToInsert = SceneFactory.make();
+      sceneToInsert.name = "";
+      sceneToInsert.indexCards = {
+        public: pinnedIndexCards.publicIndexCards,
+        private: pinnedIndexCards.privateIndexCards,
+      };
+      const newScene = scenesManager.actions.upsert(sceneToInsert);
+      setSceneToLoad(newScene);
+    }
+  }
 
   function overrideScene(newScene: IScene) {
     if (newScene) {
@@ -89,23 +108,6 @@ export function useScene(props: IProps) {
         })
       );
     });
-  }
-
-  function reset() {
-    setScene(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        const pinnedIndexCards = getPinnedIndexCards(scene);
-        draft.name = defaultSceneName;
-        draft.id = Id.generate();
-        draft.indexCards = {
-          public: pinnedIndexCards.publicIndexCards,
-          private: pinnedIndexCards.privateIndexCards,
-        };
-      })
-    );
   }
 
   function updateName(name: string) {
@@ -290,7 +292,7 @@ export function useScene(props: IProps) {
     actions: {
       addIndexCard: addIndexCard,
       cloneAndLoadNewScene,
-      reset,
+      addAndSetNewScene,
       loadScene,
       toggleIndexCardSection,
       moveIndexCard,

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
@@ -131,14 +131,11 @@ export const PlayRoute: React.FC<{
           }}
         />
       ) : (
-        <Scene
+        <Session
           mode={SceneMode.PlayOnline}
           sessionManager={sessionManager}
           sceneManager={sceneManager}
-          scenesManager={scenesManager}
-          charactersManager={charactersManager}
           connectionsManager={connectionsManager}
-          myBinderManager={myBinderManager}
           isLoading={
             hostManager.state.loading || connectionsManager.state.loading
           }

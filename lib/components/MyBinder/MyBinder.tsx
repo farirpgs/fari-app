@@ -53,6 +53,30 @@ enum Where {
   Search,
 }
 
+export function MyBinderInput(props: {
+  search: string;
+  placeholder: string;
+  onChange(newSearch: string): void;
+}) {
+  const [searchValue, setSearchValue] = useLazyState({
+    value: props.search,
+    delay: 500,
+    onChange: props.onChange,
+  });
+
+  return (
+    <InputBase
+      placeholder={props.placeholder}
+      autoFocus
+      value={searchValue}
+      fullWidth
+      onChange={(e) => {
+        setSearchValue(e.target.value);
+      }}
+    />
+  );
+}
+
 export function MyBinder<TFolders extends string>(props: {
   open: boolean;
   onClose(): void;
@@ -70,13 +94,11 @@ export function MyBinder<TFolders extends string>(props: {
 }) {
   const { t } = useTranslate();
   const theme = useTheme();
-  const [search, setSearch] = useLazyState({
-    value: props.search,
-    delay: 750,
-  });
+
+  const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
     value: props.folder,
-    delay: 750,
+    delay: 250,
   });
 
   useEffect(
@@ -96,8 +118,9 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] =
-    useState<{ folder: TFolders; element: any } | undefined>(undefined);
+  const [deletedObject, setDeletedObject] = useState<
+    { folder: TFolders; element: any } | undefined
+  >(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -114,10 +137,6 @@ export function MyBinder<TFolders extends string>(props: {
   }
 
   const where = getWhere();
-
-  function handleSetSearch(newSearch: string) {
-    setSearch(newSearch);
-  }
 
   function handleGoBack() {
     setFolder(undefined);
@@ -188,18 +207,16 @@ export function MyBinder<TFolders extends string>(props: {
                   </Box>
                 </Grid>
                 <Grid item xs>
-                  <InputBase
+                  <MyBinderInput
+                    search={search}
+                    onChange={(newSearch) => {
+                      setSearch(newSearch);
+                    }}
                     placeholder={
                       folder
                         ? `Search in "${currentFolderLabel}"...`
                         : "Search..."
                     }
-                    autoFocus
-                    value={search}
-                    fullWidth
-                    onChange={(e) => {
-                      handleSetSearch(e.target.value);
-                    }}
                   />
                 </Grid>
                 <Grid item>

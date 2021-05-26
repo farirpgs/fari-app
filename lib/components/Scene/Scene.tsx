@@ -11,14 +11,10 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { darken } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -28,47 +24,45 @@ import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FilterHdrIcon from "@material-ui/icons/FilterHdr";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MovieIcon from "@material-ui/icons/Movie";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import SaveIcon from "@material-ui/icons/Save";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
-import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { useMyBinder } from "../../contexts/MyBinderContext/MyBinderContext";
-import { useScenes } from "../../contexts/SceneContext/ScenesContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { BlockType, ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { Font } from "../../domains/font/Font";
+import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import {
   IIndexCard,
   IIndexCardType,
+  IPlayer,
   IScene,
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
+import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DiceFab } from "../DiceFab/DiceFab";
@@ -77,6 +71,7 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { LiveMode, Page } from "../Page/Page";
+import { SplitButton } from "../SplitButton/SplitButton";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
@@ -101,9 +96,6 @@ type IProps =
       mode: SceneMode.Manage;
       sessionManager: ReturnType<typeof useSession>;
       sceneManager: ReturnType<typeof useScene>;
-      scenesManager: ReturnType<typeof useScenes>;
-      charactersManager: ReturnType<typeof useCharacters>;
-      myBinderManager: ReturnType<typeof useMyBinder>;
       connectionsManager?: undefined;
       idFromParams?: undefined;
       isLoading?: undefined;
@@ -113,9 +105,6 @@ type IProps =
       mode: SceneMode.PlayOnline;
       sessionManager: ReturnType<typeof useSession>;
       sceneManager: ReturnType<typeof useScene>;
-      scenesManager: ReturnType<typeof useScenes>;
-      charactersManager: ReturnType<typeof useCharacters>;
-      myBinderManager: ReturnType<typeof useMyBinder>;
       connectionsManager: ReturnType<typeof usePeerConnections>;
       userId: string;
       isLoading: boolean;
@@ -127,24 +116,18 @@ type IProps =
       mode: SceneMode.PlayOffline;
       sessionManager: ReturnType<typeof useSession>;
       sceneManager: ReturnType<typeof useScene>;
-      scenesManager: ReturnType<typeof useScenes>;
-      myBinderManager: ReturnType<typeof useMyBinder>;
-      charactersManager: ReturnType<typeof useCharacters>;
       connectionsManager?: undefined;
       idFromParams?: undefined;
       isLoading?: undefined;
       error?: undefined;
     };
 
-export const Scene: React.FC<IProps> = (props) => {
-  const {
-    sessionManager,
-    sceneManager,
-    connectionsManager,
-    scenesManager,
-    charactersManager,
-    myBinderManager,
-  } = props;
+export const Session: React.FC<IProps> = (props) => {
+  const { sessionManager, sceneManager, connectionsManager } = props;
+
+  const charactersManager = useContext(CharactersContext);
+  const scenesManager = useContext(ScenesContext);
+  const myBinderManager = useContext(MyBinderContext);
 
   const isGM = !props.idFromParams;
   const isManaging = isGM || props.mode === SceneMode.Manage;
@@ -160,13 +143,7 @@ export const Scene: React.FC<IProps> = (props) => {
   const { t } = useTranslate();
   const logger = useLogger();
   const diceManager = useContext(DiceContext);
-  const numberOfColumnsForCards = useResponsiveValue({
-    xl: 4,
-    lg: 3,
-    md: 2,
-    sm: 1,
-    xs: 1,
-  });
+
   const characterCardWidth = useResponsiveValue({
     xl: "25%",
     lg: "33%",
@@ -175,32 +152,21 @@ export const Scene: React.FC<IProps> = (props) => {
     xs: "100%",
   });
 
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const errorTheme = useThemeFromColor(theme.palette.error.main);
   const textColors = useTextColors(theme.palette.primary.main);
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] =
-    useState<string | undefined>(undefined);
-  const [sort, setSort] = useState<SortMode>(SortMode.None);
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
+
   const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
-  const [sceneTab, setSceneTab] =
-    useState<"public" | "private" | "notes">("public");
-  const [savedSnack, setSavedSnack] = useState(false);
 
-  const hiddenIndexCardRecord = useHiddenIndexCardRecord(
-    sceneManager.state.scene?.indexCards
-  );
-
-  const $menu = useRef(null);
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
 
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
 
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -246,14 +212,6 @@ export const Scene: React.FC<IProps> = (props) => {
   //#endregion
 
   const liveMode = getLiveMode();
-
-  const handleLoadScene = (newScene: IScene) => {
-    sceneManager.actions.loadScene(newScene, true);
-  };
-
-  const handleCloneAndLoadScene = (newScene: IScene) => {
-    sceneManager.actions.cloneAndLoadNewScene(newScene);
-  };
 
   const handleGMAddOfflinePlayer = () => {
     sessionManager.actions.addOfflinePlayer();
@@ -348,25 +306,7 @@ export const Scene: React.FC<IProps> = (props) => {
             </div>
           </WindowPortal>
         )}
-        <Snackbar
-          open={savedSnack}
-          autoHideDuration={2000}
-          onClose={(event, reason) => {
-            if (reason === "clickaway") {
-              return;
-            }
-            setSavedSnack(false);
-          }}
-        >
-          <Alert
-            severity="success"
-            onClose={() => {
-              setSavedSnack(false);
-            }}
-          >
-            {t("play-route.scene-saved")}
-          </Alert>
-        </Snackbar>
+
         <DiceFab
           onRoll={(result) => {
             handleSetMyRoll(result);
@@ -403,7 +343,6 @@ export const Scene: React.FC<IProps> = (props) => {
           {props.mode === SceneMode.Manage ? (
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                {renderHeader()}
                 {renderSessionTabsAndContent()}
               </Grid>
             </Grid>
@@ -413,7 +352,6 @@ export const Scene: React.FC<IProps> = (props) => {
                 {renderSidePanel()}
               </Grid>
               <Grid item xs={12} md={7} lg={9}>
-                {renderHeader()}
                 {renderSessionTabsAndContent()}
               </Grid>
             </Grid>
@@ -425,237 +363,305 @@ export const Scene: React.FC<IProps> = (props) => {
 
   function renderSidePanel() {
     return (
-      <Box display="flex" flexDirection="column" height="100%">
-        <Box
-          className={css({
-            backgroundColor: theme.palette.primary.main,
-            color: textColors.primary,
-            borderTopLeftRadius: "4px",
-            borderTopRightRadius: "4px",
-            minHeight: "4rem",
-            padding: ".5rem",
-          })}
-        >
-          <Grid container spacing={2} alignItems="center">
-            <Grid
-              item
-              className={css({
-                flex: "1 0 auto",
-              })}
-            >
-              <Typography
-                variant="overline"
+      <Box>
+        <Box>{renderManagementActions()}</Box>
+
+        <Box display="flex" flexDirection="column" height="100%">
+          <Box
+            className={css({
+              backgroundColor: theme.palette.primary.main,
+              color: textColors.primary,
+              borderTopLeftRadius: "4px",
+              borderTopRightRadius: "4px",
+              minHeight: "4rem",
+              padding: ".5rem",
+            })}
+          >
+            <Grid container spacing={2} alignItems="center">
+              <Grid
+                item
                 className={css({
-                  fontSize: ".8rem",
-                  lineHeight: Font.lineHeight(0.8),
-                  fontWeight: "bold",
+                  flex: "1 0 auto",
                 })}
               >
-                {t("play-route.players")}
-              </Typography>
-              <Box>
                 <Typography
                   variant="overline"
                   className={css({
-                    fontSize: "1.2rem",
-                    lineHeight: Font.lineHeight(1.2),
-                  })}
-                >
-                  {sessionManager.state.session.players.length + 1}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  className={css({
                     fontSize: ".8rem",
                     lineHeight: Font.lineHeight(0.8),
+                    fontWeight: "bold",
                   })}
                 >
-                  {" "}
+                  {t("play-route.players")}
                 </Typography>
-                <Typography
-                  variant="caption"
-                  className={css({
-                    fontSize: ".8rem",
-                    lineHeight: Font.lineHeight(0.8),
-                  })}
-                >
-                  {t("play-route.connected")}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item>
-              <Grid container spacing={1}>
-                {isGM && (
-                  <>
-                    <Grid item>
-                      <Button
-                        data-cy="scene.reset-initiative"
-                        onClick={() => {
-                          sceneManager.actions.resetInitiative();
-                          logger.info("Scene:onResetInitiative");
-                        }}
-                        variant="contained"
-                        color="secondary"
-                        endIcon={<EmojiPeopleIcon />}
-                      >
-                        {t("play-route.reset-initiative")}
-                      </Button>
-                    </Grid>
-                    <Grid item>
-                      <Tooltip title={t("play-route.add-character-sheet")}>
-                        <span>
-                          <Button
-                            data-cy="scene.add-player"
-                            onClick={() => {
-                              handleGMAddOfflinePlayer();
-                              logger.info("Scene:addPlayer");
-                            }}
-                            variant="contained"
-                            color="secondary"
-                          >
-                            <PersonAddIcon />
-                          </Button>
-                        </span>
-                      </Tooltip>
-                    </Grid>
-                  </>
-                )}
+                <Box>
+                  <Typography
+                    variant="overline"
+                    className={css({
+                      fontSize: "1.2rem",
+                      lineHeight: Font.lineHeight(1.2),
+                    })}
+                  >
+                    {sessionManager.state.session.players.length + 1}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    className={css({
+                      fontSize: ".8rem",
+                      lineHeight: Font.lineHeight(0.8),
+                    })}
+                  >
+                    {" "}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    className={css({
+                      fontSize: ".8rem",
+                      lineHeight: Font.lineHeight(0.8),
+                    })}
+                  >
+                    {t("play-route.connected")}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item>
+                <Grid container spacing={1}>
+                  {isGM && (
+                    <>
+                      <Grid item>
+                        <Button
+                          data-cy="scene.reset-initiative"
+                          onClick={() => {
+                            sessionManager.actions.resetInitiative();
+                            sceneManager.actions.resetInitiative();
+                            logger.info("Scene:onResetInitiative");
+                          }}
+                          variant="contained"
+                          color="secondary"
+                          endIcon={<EmojiPeopleIcon />}
+                        >
+                          {t("play-route.reset-initiative")}
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip title={t("play-route.gm-add-npc")}>
+                          <span>
+                            <Button
+                              data-cy="scene.add-player"
+                              onClick={() => {
+                                handleGMAddOfflinePlayer();
+                                logger.info("Scene:addPlayer");
+                              }}
+                              variant="contained"
+                              color="secondary"
+                            >
+                              <PersonAddIcon />
+                            </Button>
+                          </span>
+                        </Tooltip>
+                      </Grid>
+                    </>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Box>
+          </Box>
 
-        <Paper className={paperStyle}>
-          {everyone.map((player, playerRowIndex) => {
-            const isMe = me?.id === player.id;
-            const canControl = controllablePlayerIds.includes(player.id);
-            const isCharacterInStorage =
-              charactersManager.selectors.isInStorage(player.character?.id);
-
-            return (
-              <React.Fragment key={player.id}>
-                {characterDialogPlayerId === player.id && (
-                  <CharacterV3Dialog
-                    readonly={!canControl}
-                    open={characterDialogPlayerId === player.id}
-                    character={player.character}
-                    dialog={true}
-                    onSave={(updatedCharacter) => {
-                      if (isGM) {
-                        sessionManager.actions.updatePlayerCharacter(
-                          player.id,
-                          updatedCharacter
-                        );
-                      } else {
-                        connectionsManager?.actions.sendToHost<IPeerActions>({
-                          action: "update-character",
-                          payload: updatedCharacter,
-                        });
-                      }
-                      setCharacterDialogPlayerId(undefined);
-                    }}
-                    onClose={() => {
-                      setCharacterDialogPlayerId(undefined);
-                    }}
-                    synced={isCharacterInStorage}
-                    onToggleSync={() => {
-                      handleOnToggleCharacterSync(player.character);
-                    }}
-                    onRoll={(newDiceRollResult) => {
-                      handleSetPlayerRoll(player.id, newDiceRollResult);
-                    }}
-                  />
-                )}
-
-                <PlayerRow
-                  data-cy={`scene.player-row.${playerRowIndex}`}
-                  permissions={{
-                    canRoll: canControl,
-                    canUpdatePoints: canControl,
-                    canUpdateInitiative: canControl,
-                    canLoadDuplicateCharacterSheet: isGM,
-                    canLoadCharacterSheet: canControl && !player.isGM,
-                    canRemove: isGM && !player.isGM,
-                  }}
-                  number={playerRowIndex + 1}
-                  key={player.id}
-                  isMe={isMe}
-                  player={player}
-                  onPlayerRemove={() => {
-                    sessionManager.actions.removePlayer(player.id);
-                  }}
-                  onCharacterSheetOpen={() => {
-                    if (player.character) {
-                      setCharacterDialogPlayerId(player.id);
-                    }
-                  }}
-                  onAssignOriginalCharacterSheet={() => {
-                    myBinderManager.actions.open({
-                      folder: "characters",
-                      callback: (character) => {
-                        handleAssignOriginalCharacterSheet(
-                          player.id,
-                          character
-                        );
-                      },
-                    });
-                  }}
-                  onAssignDuplicateCharacterSheet={() => {
-                    myBinderManager.actions.open({
-                      folder: "characters",
-                      callback: (character) => {
-                        handleAssignDuplicateCharacterSheet(
-                          player.id,
-                          character
-                        );
-                      },
-                    });
-                  }}
-                  onDiceRoll={() => {
-                    handleSetPlayerRoll(
-                      player.id,
-                      diceManager.actions.rollCommandGroups()
+          <Paper className={paperStyle}>
+            {renderPlayerRow({
+              player: gm,
+              canControl: me?.id === gm.id,
+              isMe: me?.id === gm.id,
+              index: "gm",
+              children: (
+                <>
+                  {gm.npcs.map((npc, npcIndex) => {
+                    return (
+                      <React.Fragment key={npc.id}>
+                        <Box>
+                          {renderPlayerCharacterDialog({
+                            player: npc,
+                            canControl: me?.id === gm.id,
+                          })}
+                          {renderPlayerRow({
+                            player: npc,
+                            canControl: me?.id === gm.id,
+                            isMe: me?.id === gm.id,
+                            index: `gm-npc-${npcIndex}`,
+                          })}
+                        </Box>
+                      </React.Fragment>
                     );
-                  }}
-                  onPlayedInTurnOrderChange={(playedInTurnOrder) => {
-                    if (isGM) {
-                      sessionManager.actions.updatePlayerPlayedDuringTurn(
-                        player.id,
-                        playedInTurnOrder
-                      );
-                    } else {
-                      connectionsManager?.actions.sendToHost<IPeerActions>({
-                        action: "played-in-turn-order",
-                        payload: playedInTurnOrder,
-                      });
-                    }
-                  }}
-                  onPointsChange={(points, maxPoints) => {
-                    if (isGM) {
-                      sessionManager.actions.updatePlayerCharacterMainPointCounter(
-                        player.id,
-                        points,
-                        maxPoints
-                      );
-                    } else {
-                      connectionsManager?.actions.sendToHost<IPeerActions>({
-                        action: "update-main-point-counter",
-                        payload: { points, maxPoints },
-                      });
-                    }
-                  }}
-                />
-              </React.Fragment>
-            );
-          })}
-        </Paper>
+                  })}
+                </>
+              ),
+            })}
+            {sortedPlayers.map((player, playerRowIndex) => {
+              const isMe = me?.id === player.id;
+              const canControl = controllablePlayerIds.includes(player.id);
+
+              return (
+                <React.Fragment key={player.id}>
+                  {renderPlayerCharacterDialog({ player, canControl })}
+                  {renderPlayerRow({
+                    player,
+                    canControl,
+                    isMe,
+                    index: playerRowIndex,
+                  })}
+                </React.Fragment>
+              );
+            })}
+          </Paper>
+        </Box>
       </Box>
     );
   }
 
+  function renderPlayerCharacterDialog(options: {
+    player: IPlayer;
+    canControl: boolean;
+  }) {
+    const { player, canControl } = options;
+    if (characterDialogPlayerId !== player.id) {
+      return null;
+    }
+
+    const isCharacterInStorage = charactersManager.selectors.isInStorage(
+      player.character?.id
+    );
+
+    return (
+      <CharacterV3Dialog
+        readonly={!canControl}
+        open={characterDialogPlayerId === player.id}
+        character={player.character}
+        dialog={true}
+        onSave={(updatedCharacter) => {
+          if (isGM) {
+            sessionManager.actions.updatePlayerCharacter(
+              player.id,
+              updatedCharacter
+            );
+          } else {
+            connectionsManager?.actions.sendToHost<IPeerActions>({
+              action: "update-character",
+              payload: updatedCharacter,
+            });
+          }
+          setCharacterDialogPlayerId(undefined);
+        }}
+        onClose={() => {
+          setCharacterDialogPlayerId(undefined);
+        }}
+        synced={isCharacterInStorage}
+        onToggleSync={() => {
+          handleOnToggleCharacterSync(player.character);
+        }}
+        onRoll={(newDiceRollResult) => {
+          handleSetPlayerRoll(player.id, newDiceRollResult);
+        }}
+      />
+    );
+  }
+
+  function renderPlayerRow(options: {
+    player: IPlayer;
+    canControl: boolean;
+    isMe: boolean;
+    index: number | string;
+    children?: JSX.Element;
+  }) {
+    const {
+      player,
+      canControl,
+      isMe,
+      index: playerRowIndex,
+      children: playerRowChildren,
+    } = options;
+
+    return (
+      <PlayerRow
+        data-cy={`scene.player-row.${playerRowIndex}`}
+        permissions={{
+          canRoll: canControl,
+          canUpdatePoints: canControl,
+          canUpdateInitiative: canControl,
+          canLoadDuplicateCharacterSheet: isGM,
+          canLoadCharacterSheet: canControl && !player.isGM,
+          canRemove: isGM && !player.isGM,
+        }}
+        key={player.id}
+        isMe={isMe}
+        player={player}
+        onPlayerRemove={() => {
+          sessionManager.actions.removePlayer(player.id);
+        }}
+        onCharacterSheetOpen={() => {
+          if (player.character) {
+            setCharacterDialogPlayerId(player.id);
+          }
+        }}
+        onAssignOriginalCharacterSheet={() => {
+          myBinderManager.actions.open({
+            folder: "characters",
+            callback: (character) => {
+              handleAssignOriginalCharacterSheet(player.id, character);
+            },
+          });
+        }}
+        onAssignDuplicateCharacterSheet={() => {
+          myBinderManager.actions.open({
+            folder: "characters",
+            callback: (character) => {
+              handleAssignDuplicateCharacterSheet(player.id, character);
+            },
+          });
+        }}
+        onDiceRoll={() => {
+          handleSetPlayerRoll(
+            player.id,
+            diceManager.actions.rollCommandGroups()
+          );
+        }}
+        onPlayedInTurnOrderChange={(playedInTurnOrder) => {
+          if (isGM) {
+            sessionManager.actions.updatePlayerPlayedDuringTurn(
+              player.id,
+              playedInTurnOrder
+            );
+          } else {
+            connectionsManager?.actions.sendToHost<IPeerActions>({
+              action: "played-in-turn-order",
+              payload: playedInTurnOrder,
+            });
+          }
+        }}
+        onPointsChange={(points, maxPoints) => {
+          if (isGM) {
+            sessionManager.actions.updatePlayerCharacterMainPointCounter(
+              player.id,
+              points,
+              maxPoints
+            );
+          } else {
+            connectionsManager?.actions.sendToHost<IPeerActions>({
+              action: "update-main-point-counter",
+              payload: { points, maxPoints },
+            });
+          }
+        }}
+      >
+        {playerRowChildren}
+      </PlayerRow>
+    );
+  }
+
   function renderCharacterCards() {
-    const { playersWithCharacterSheets, hasPlayersWithCharacterSheets } =
-      sessionManager.computed;
+    const {
+      playersWithCharacterSheets,
+      hasPlayersWithCharacterSheets,
+    } = sessionManager.computed;
 
     return (
       <>
@@ -721,7 +727,16 @@ export const Scene: React.FC<IProps> = (props) => {
                   {renderCharacterCards()}
                 </TabPanel>
                 <TabPanel value={"scene"} className={tabPanelStyle}>
-                  {renderSceneTabsAndContent()}
+                  <Scene
+                    sceneManager={sceneManager}
+                    readonly={!isGM}
+                    canLoad={props.mode !== SceneMode.Manage}
+                    onRoll={handleSetMyRoll}
+                    onPoolClick={(element) => {
+                      diceManager.actions.addOrRemovePoolElement(element);
+                      diceManager.actions.setPlayerId(gm.id);
+                    }}
+                  />
                 </TabPanel>
 
                 <TabPanel value={"draw"} className={tabPanelStyle}>
@@ -735,14 +750,432 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
+  function renderZones() {
+    const tokenTitles = sessionManager.state.session.players.map(
+      (p) => (p.character?.name ?? p.playerName) as string
+    );
+    return (
+      <Box
+        border={`1px solid ${theme.palette.divider}`}
+        maxWidth="600px"
+        margin="0 auto"
+      >
+        <DrawArea
+          objects={sessionManager.state.session.drawAreaObjects}
+          readonly={!isGM}
+          tokenTitles={tokenTitles}
+          onChange={(lines) => {
+            sessionManager.actions.updateDrawAreaObjects(lines);
+          }}
+        />
+      </Box>
+    );
+  }
+
+  function renderSessionTabs() {
+    const tabClass = css({
+      background: headerBackgroundColor,
+      color: headerColor,
+      marginRight: ".5rem",
+      // Pentagone
+      // https://bennettfeely.com/clippy/
+      clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+    });
+    const tabLabelClass = css({
+      fontSize: "1rem",
+      width: "100%",
+    });
+
+    return (
+      <Box>
+        <Tabs
+          variant="scrollable"
+          scrollButtons="auto"
+          value={tab}
+          classes={{
+            flexContainer: css({
+              borderBottom: `3px solid ${headerBackgroundColor}`,
+            }),
+          }}
+          onChange={(e, newValue) => {
+            setTab(newValue);
+          }}
+        >
+          {props.mode !== SceneMode.Manage && (
+            <Tab
+              value="characters"
+              data-cy="session.tabs.player-characters"
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>
+                    {t("menu.characters")}
+                  </FateLabel>
+                </>
+              }
+              className={tabClass}
+              icon={<PeopleAltIcon />}
+            />
+          )}
+
+          <Tab
+            value="scene"
+            data-cy="session.tabs.scene"
+            label={
+              <>
+                <FateLabel className={tabLabelClass}>
+                  {t("menu.scenes")}
+                </FateLabel>
+              </>
+            }
+            className={tabClass}
+            icon={<MovieIcon />}
+          />
+
+          {props.mode !== SceneMode.Manage && (
+            <Tab
+              value="draw"
+              data-cy="session.tabs.draw"
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>
+                    {t("draw-route.meta.title")}
+                  </FateLabel>
+                </>
+              }
+              className={tabClass}
+              icon={<FilterHdrIcon />}
+            />
+          )}
+        </Tabs>
+      </Box>
+    );
+  }
+
+  function renderCopyGameLink(link: string) {
+    return (
+      <>
+        <input
+          ref={$shareLinkInputRef}
+          type="text"
+          value={link}
+          readOnly
+          hidden
+        />
+        <Tooltip open={shareLinkToolTip.open} title="Copied!" placement="top">
+          <span>
+            <Button
+              onClick={() => {
+                if (link && $shareLinkInputRef.current) {
+                  try {
+                    $shareLinkInputRef.current.select();
+                    document.execCommand("copy");
+                    navigator.clipboard.writeText(link);
+                    setShareLinkToolTip({ open: true });
+                  } catch (error) {
+                    window.open(link, "_blank");
+                  }
+
+                  logger.info("Scene:onCopyGameLink");
+                }
+              }}
+              variant="outlined"
+              color={shareLinkToolTip.open ? "primary" : "default"}
+              endIcon={<FileCopyIcon />}
+            >
+              {t("play-route.copy-game-link")}
+            </Button>
+          </span>
+        </Tooltip>
+      </>
+    );
+  }
+
+  function renderManagementActions() {
+    if (!isGM) {
+      return null;
+    }
+
+    return (
+      <Box pb="1rem">
+        <Grid container spacing={1} justify="space-evenly" alignItems="center">
+          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
+          )}
+          {props.mode !== SceneMode.Manage && (
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  sessionManager.actions.fireGoodConfetti();
+                  logger.info("Scene:onFireGoodConfetti");
+                }}
+                color="primary"
+              >
+                <Icons.PartyPopper
+                  className={css({ width: "2rem", height: "2rem" })}
+                  htmlColor={darken(theme.palette.success.main, 0.2)}
+                />
+              </IconButton>
+            </Grid>
+          )}
+          {props.mode !== SceneMode.Manage && (
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  sessionManager.actions.fireBadConfetti();
+                  logger.info("Scene:onFireBadConfetti");
+                }}
+                color="primary"
+              >
+                <Icons.PartyPopper
+                  className={css({ width: "2rem", height: "2rem" })}
+                  htmlColor={darken(theme.palette.error.main, 0.2)}
+                />
+              </IconButton>
+            </Grid>
+          )}
+        </Grid>
+      </Box>
+    );
+  }
+
+  function renderPageError() {
+    return (
+      <Box>
+        <Box display="flex" justifyContent="center" pb="2rem">
+          <Typography variant="h4">{t("play-route.error.title")}</Typography>
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <Typography variant="h6">
+            {t("play-route.error.description1")}
+          </Typography>
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <Typography variant="h6">
+            {t("play-route.error.description2")}
+          </Typography>
+        </Box>
+      </Box>
+    );
+  }
+
+  function getLiveMode() {
+    if (props.mode === SceneMode.PlayOffline) {
+      return LiveMode.Live;
+    }
+    if (props.mode === SceneMode.Manage) {
+      return undefined;
+    }
+    if (props.isLoading) {
+      return LiveMode.Connecting;
+    }
+    return LiveMode.Live;
+  }
+};
+Session.displayName = "Session";
+
+export function Scene(props: {
+  sceneManager: ReturnType<typeof useScene>;
+  readonly: boolean;
+  canLoad: boolean;
+  onRoll(diceRollResult: IDiceRollResult): void;
+  onPoolClick(element: IDicePoolElement): void;
+}) {
+  const { sceneManager } = props;
+
+  const theme = useTheme();
+  const logger = useLogger();
+  const { t } = useTranslate();
+  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const scenesManager = useContext(ScenesContext);
+  const myBinderManager = useContext(MyBinderContext);
+
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
+  const numberOfColumnsForCards = useResponsiveValue({
+    xl: 4,
+    lg: 3,
+    md: 2,
+    sm: 1,
+    xs: 1,
+  });
+  const hiddenIndexCardRecord = useHiddenIndexCardRecord(
+    sceneManager.state.scene?.indexCards
+  );
+
+  const [sort, setSort] = useState<SortMode>(SortMode.None);
+  const [savedSnack, setSavedSnack] = useState(false);
+  const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
+    "public"
+  );
+
+  const headerColor = theme.palette.background.paper;
+  const hasScene = !!sceneManager.state.scene;
+
+  const handleLoadScene = (newScene: IScene) => {
+    sceneManager.actions.loadScene(newScene, true);
+  };
+
+  const handleCloneAndLoadScene = (newScene: IScene) => {
+    sceneManager.actions.cloneAndLoadNewScene(newScene);
+  };
+
+  return (
+    <>
+      {renderSavedSnackBar()}
+      {hasScene ? renderSceneTabsAndContent() : renderNoScene()}
+    </>
+  );
+
+  function renderSavedSnackBar() {
+    return (
+      <Snackbar
+        open={savedSnack}
+        autoHideDuration={2000}
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
+          setSavedSnack(false);
+        }}
+      >
+        <Alert
+          severity="success"
+          onClose={() => {
+            setSavedSnack(false);
+          }}
+        >
+          {t("play-route.scene-saved")}
+        </Alert>
+      </Snackbar>
+    );
+  }
+
+  function renderNoScene() {
+    return (
+      <Box>
+        <Box mb="1rem">
+          <Grid container justify="center">
+            <Grid item>
+              <Typography variant="h6" color="textSecondary">
+                {"No Scene Currently in Play"}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box mb="4rem">
+          <Grid container justify="center" spacing={2}>
+            {renderSceneActionGridItems()}
+          </Grid>
+        </Box>
+        <Box>
+          <Grid container justify="center">
+            <Grid item>
+              <img
+                src="https://img.icons8.com/plasticine/100/000000/alps.png"
+                className={css({
+                  filter: "grayscale(1)",
+                })}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    );
+  }
+
+  function renderSceneActionGridItems() {
+    return (
+      <>
+        {sceneManager.state.scene && (
+          <Grid item>
+            <Button
+              color="primary"
+              data-cy="scene.save"
+              endIcon={<SaveIcon />}
+              variant={sceneManager.state.dirty ? "contained" : "outlined"}
+              onClick={() => {
+                scenesManager.actions.upsert(sceneManager.state.scene);
+                sceneManager.actions.loadScene(
+                  sceneManager.state.scene as IScene,
+                  false
+                );
+                setSavedSnack(true);
+                logger.info("Scene:onSave");
+              }}
+            >
+              {t("play-route.save-scene")}
+            </Button>
+          </Grid>
+        )}
+        {props.canLoad && (
+          <>
+            <Grid item>
+              <Button
+                variant="outlined"
+                color="primary"
+                data-cy="scene.new-scene"
+                endIcon={<MovieIcon />}
+                onClick={() => {
+                  const confirmed = sceneManager.state.scene
+                    ? confirm(t("play-route.reset-scene-confirmation"))
+                    : true;
+                  if (confirmed) {
+                    sceneManager.actions.addAndSetNewScene();
+                    logger.info("Scene:onReset");
+                  }
+                }}
+              >
+                {t("play-route.new-scene")}
+              </Button>
+            </Grid>
+            <Grid item>
+              <SplitButton
+                color="primary"
+                variant="outlined"
+                options={[
+                  {
+                    label: t("play-route.load-scene"),
+                    onClick: () => {
+                      myBinderManager.actions.open({
+                        folder: "scenes",
+                        callback: handleLoadScene,
+                      });
+                    },
+                  },
+                  {
+                    label: t("play-route.clone-and-load-scene"),
+                    onClick: () => {
+                      myBinderManager.actions.open({
+                        folder: "scenes",
+                        callback: handleCloneAndLoadScene,
+                      });
+                    },
+                  },
+                ]}
+              />
+            </Grid>
+          </>
+        )}
+      </>
+    );
+  }
+
   function renderSceneTabsAndContent() {
     const tabPanelStyle = css({ padding: "0" });
 
     return (
       <Box>
         <Box>
+          <Box mb="1rem">
+            <Grid
+              container
+              justify={props.canLoad ? "flex-start" : "center"}
+              spacing={2}
+            >
+              {renderSceneActionGridItems()}
+            </Grid>
+          </Box>
           <Box>
-            {renderSceneActions()}
             <Container maxWidth="sm">{renderSceneNameAndGroup()}</Container>
           </Box>
 
@@ -762,7 +1195,7 @@ export const Scene: React.FC<IProps> = (props) => {
                     "private"
                   )}
                 </TabPanel>
-                <TabPanel value={"scene-notes"} className={tabPanelStyle}>
+                <TabPanel value={"notes"} className={tabPanelStyle}>
                   {renderSceneNotes()}
                 </TabPanel>
               </Box>
@@ -773,129 +1206,9 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderSceneActions() {
-    return (
-      <Grid container>
-        <Grid item>
-          {sceneManager.state.scene && (
-            <Button
-              color="primary"
-              data-cy="scene.save"
-              endIcon={<SaveIcon />}
-              variant={sceneManager.state.dirty ? "contained" : "outlined"}
-              onClick={() => {
-                scenesManager.actions.upsert(sceneManager.state.scene);
-                sceneManager.actions.loadScene(
-                  sceneManager.state.scene as IScene,
-                  false
-                );
-                setSavedSnack(true);
-                logger.info("Scene:onSave");
-              }}
-            >
-              {t("play-route.save-scene")}
-            </Button>
-          )}
-        </Grid>
-        {props.mode !== SceneMode.Manage && (
-          <Grid item>
-            <ThemeProvider theme={errorTheme}>
-              <Button
-                variant="text"
-                color="primary"
-                data-cy="scene.new-scene"
-                endIcon={<ErrorIcon />}
-                className={css({
-                  borderRadius: "20px",
-                  fontWeight: theme.typography.fontWeightBold,
-                })}
-                onClick={() => {
-                  const confirmed = confirm(
-                    t("play-route.reset-scene-confirmation")
-                  );
-                  if (confirmed) {
-                    sceneManager.actions.reset();
-                    sessionManager.actions.reset();
-                    logger.info("Scene:onReset");
-                  }
-                }}
-              >
-                {t("play-route.new-scene")}
-              </Button>
-            </ThemeProvider>
-          </Grid>
-        )}
-        {props.mode !== SceneMode.Manage && (
-          <Grid item>
-            <IconButton
-              ref={$menu}
-              size="small"
-              data-cy={`scene.menu`}
-              onClick={() => {
-                setMenuOpen(true);
-              }}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              anchorEl={$menu.current}
-              keepMounted
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={menuOpen}
-              onClose={() => {
-                setMenuOpen(false);
-              }}
-            >
-              <MenuItem
-                data-cy="scene.load-scene"
-                onClick={() => {
-                  myBinderManager.actions.open({
-                    folder: "scenes",
-                    callback: handleLoadScene,
-                  });
-
-                  setMenuOpen(false);
-                  logger.info("Scene:onLoadScene");
-                }}
-              >
-                <ListItemIcon className={css({ minWidth: "2rem" })}>
-                  <RotateLeftIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary={t("play-route.load-scene")} />
-              </MenuItem>
-              <MenuItem
-                data-cy="scene.clone-and-load-scene"
-                onClick={() => {
-                  myBinderManager.actions.open({
-                    folder: "scenes",
-                    callback: handleCloneAndLoadScene,
-                  });
-                  setMenuOpen(false);
-                  logger.info("Scene:onCloneAndLoadScene");
-                }}
-              >
-                <ListItemIcon className={css({ minWidth: "2rem" })}>
-                  <FileCopyIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary={t("play-route.clone-and-load-scene")} />
-              </MenuItem>
-            </Menu>
-          </Grid>
-        )}
-      </Grid>
-    );
-  }
   function renderSceneNameAndGroup() {
     return (
       <>
-        {" "}
         <Box mb=".5rem">
           <FateLabel
             variant="h4"
@@ -909,7 +1222,7 @@ export const Scene: React.FC<IProps> = (props) => {
               autoFocus
               data-cy="scene.name"
               value={sceneManager.state.scene?.name ?? ""}
-              readonly={!isGM}
+              readonly={props.readonly}
               onChange={(value) => {
                 sceneManager.actions.updateName(value);
               }}
@@ -946,7 +1259,7 @@ export const Scene: React.FC<IProps> = (props) => {
                   onInputChange={(event, newInputValue) => {
                     sceneManager.actions.setGroup(newInputValue);
                   }}
-                  disabled={!isGM}
+                  disabled={props.readonly}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -994,28 +1307,6 @@ export const Scene: React.FC<IProps> = (props) => {
           </Box>
         </Grid>
       </Grid>
-    );
-  }
-
-  function renderZones() {
-    const tokenTitles = sessionManager.state.session.players.map(
-      (p) => (p.character?.name ?? p.playerName) as string
-    );
-    return (
-      <Box
-        border={`1px solid ${theme.palette.divider}`}
-        maxWidth="600px"
-        margin="0 auto"
-      >
-        <DrawArea
-          objects={sessionManager.state.session.drawAreaObjects}
-          readonly={!isGM}
-          tokenTitles={tokenTitles}
-          onChange={(lines) => {
-            sessionManager.actions.updateDrawAreaObjects(lines);
-          }}
-        />
-      </Box>
     );
   }
 
@@ -1129,7 +1420,7 @@ export const Scene: React.FC<IProps> = (props) => {
               <IndexCard
                 type={type}
                 reactDndIndex={index}
-                canMove={sort === SortMode.None && isGM}
+                canMove={sort === SortMode.None && !props.readonly}
                 key={indexCard.id}
                 reactDndType={DragAndDropTypes.SceneIndexCards}
                 data-cy={`scene.aspect.${index}`}
@@ -1143,13 +1434,10 @@ export const Scene: React.FC<IProps> = (props) => {
                 onTogglePrivate={() => {
                   sceneManager.actions.toggleIndexCardSection(indexCard, type);
                 }}
-                readonly={!isGM}
+                readonly={props.readonly}
                 indexCard={indexCard}
-                onRoll={handleSetMyRoll}
-                onPoolClick={(element) => {
-                  diceManager.actions.addOrRemovePoolElement(element);
-                  diceManager.actions.setPlayerId(gm.id);
-                }}
+                onRoll={props.onRoll}
+                onPoolClick={props.onPoolClick}
                 onMove={(dragIndex, hoverIndex) => {
                   sceneManager.actions.moveIndexCard(
                     dragIndex,
@@ -1170,85 +1458,6 @@ export const Scene: React.FC<IProps> = (props) => {
             </Box>
           );
         })}
-      </Box>
-    );
-  }
-
-  function renderSessionTabs() {
-    const tabClass = css({
-      background: headerBackgroundColor,
-      color: headerColor,
-      marginRight: ".5rem",
-      // Pentagone
-      // https://bennettfeely.com/clippy/
-      clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-    });
-    const tabLabelClass = css({
-      fontSize: "1rem",
-      width: "100%",
-    });
-
-    return (
-      <Box>
-        <Tabs
-          variant="scrollable"
-          scrollButtons="auto"
-          value={tab}
-          classes={{
-            flexContainer: css({
-              borderBottom: `3px solid ${headerBackgroundColor}`,
-            }),
-          }}
-          onChange={(e, newValue) => {
-            setTab(newValue);
-          }}
-        >
-          {props.mode !== SceneMode.Manage && (
-            <Tab
-              value="characters"
-              data-cy="session.tabs.player-characters"
-              label={
-                <>
-                  <FateLabel className={tabLabelClass}>
-                    {t("menu.characters")}
-                  </FateLabel>
-                </>
-              }
-              className={tabClass}
-              icon={<PeopleAltIcon />}
-            />
-          )}
-
-          <Tab
-            value="scene"
-            data-cy="session.tabs.scene"
-            label={
-              <>
-                <FateLabel className={tabLabelClass}>
-                  {t("menu.scenes")}
-                </FateLabel>
-              </>
-            }
-            className={tabClass}
-            icon={<PeopleAltIcon />}
-          />
-
-          {props.mode !== SceneMode.Manage && (
-            <Tab
-              value="draw"
-              data-cy="session.tabs.draw"
-              label={
-                <>
-                  <FateLabel className={tabLabelClass}>
-                    {t("draw-route.meta.title")}
-                  </FateLabel>
-                </>
-              }
-              className={tabClass}
-              icon={<FilterHdrIcon />}
-            />
-          )}
-        </Tabs>
       </Box>
     );
   }
@@ -1294,7 +1503,7 @@ export const Scene: React.FC<IProps> = (props) => {
             }
             className={tabClass}
           />
-          {isManaging && (
+          {!props.readonly && (
             <Tab
               value="private"
               data-cy="scene.tabs.private"
@@ -1308,7 +1517,7 @@ export const Scene: React.FC<IProps> = (props) => {
               className={tabClass}
             />
           )}
-          {isManaging && (
+          {!props.readonly && (
             <Tab
               value="notes"
               data-cy="scene.tabs.gm-notes"
@@ -1327,26 +1536,8 @@ export const Scene: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderHeader() {
-    return (
-      <Box mx=".5rem" mb="2rem">
-        <Box>
-          <Container maxWidth="sm">
-            <Box>{renderManagementActions()}</Box>
-          </Container>
-        </Box>
-
-        <Box>
-          <Container maxWidth="sm">
-            <Box>{renderGMSceneActions()}</Box>
-          </Container>
-        </Box>
-      </Box>
-    );
-  }
-
   function renderGMIndexCardActions(type: IIndexCardType) {
-    if (!isGM) {
+    if (props.readonly) {
       return null;
     }
     return (
@@ -1460,145 +1651,4 @@ export const Scene: React.FC<IProps> = (props) => {
       </Box>
     );
   }
-
-  function renderGMSceneActions() {
-    if (!isGM) {
-      return null;
-    }
-    return (
-      <Box pb="1rem">
-        <Grid container spacing={1} justify="center" alignItems="flex-end">
-          {props.mode === SceneMode.PlayOnline && (
-            <Grid item>
-              <Button
-                onClick={() => {
-                  sessionManager.actions.fireGoodConfetti();
-                  logger.info("Scene:onFireGoodConfetti");
-                }}
-                variant="text"
-                color="primary"
-              >
-                <ThumbUpIcon />
-              </Button>
-            </Grid>
-          )}
-          {props.mode === SceneMode.PlayOnline && (
-            <Grid item>
-              <Button
-                onClick={() => {
-                  sessionManager.actions.fireBadConfetti();
-                  logger.info("Scene:onFireBadConfetti");
-                }}
-                variant="text"
-                color="primary"
-              >
-                <ThumbDownIcon />
-              </Button>
-            </Grid>
-          )}
-        </Grid>
-      </Box>
-    );
-  }
-
-  function renderCopyGameLink(link: string) {
-    return (
-      <>
-        <input
-          ref={$shareLinkInputRef}
-          type="text"
-          value={link}
-          readOnly
-          hidden
-        />
-        <Tooltip open={shareLinkToolTip.open} title="Copied!" placement="top">
-          <span>
-            <Button
-              onClick={() => {
-                if (link && $shareLinkInputRef.current) {
-                  try {
-                    $shareLinkInputRef.current.select();
-                    document.execCommand("copy");
-                    navigator.clipboard.writeText(link);
-                    setShareLinkToolTip({ open: true });
-                  } catch (error) {
-                    window.open(link, "_blank");
-                  }
-
-                  logger.info("Scene:onCopyGameLink");
-                }
-              }}
-              variant="outlined"
-              color={shareLinkToolTip.open ? "primary" : "default"}
-              endIcon={<FileCopyIcon />}
-            >
-              {t("play-route.copy-game-link")}
-            </Button>
-          </span>
-        </Tooltip>
-      </>
-    );
-  }
-
-  function renderManagementActions() {
-    if (!isGM) {
-      return null;
-    }
-
-    return (
-      <Box pb="1rem">
-        <Grid container spacing={1} justify="center" alignItems="center">
-          {false && (
-            <Grid item>
-              <Button
-                color="primary"
-                onClick={() => {
-                  setStreamerModalOpen(true);
-                }}
-              >
-                {"Streamer Window"}
-              </Button>
-            </Grid>
-          )}
-          {props.mode === SceneMode.PlayOnline && props.shareLink && (
-            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
-          )}
-        </Grid>
-      </Box>
-    );
-  }
-
-  function renderPageError() {
-    return (
-      <Box>
-        <Box display="flex" justifyContent="center" pb="2rem">
-          <Typography variant="h4">{t("play-route.error.title")}</Typography>
-        </Box>
-        <Box display="flex" justifyContent="center">
-          <Typography variant="h6">
-            {t("play-route.error.description1")}
-          </Typography>
-        </Box>
-        <Box display="flex" justifyContent="center">
-          <Typography variant="h6">
-            {t("play-route.error.description2")}
-          </Typography>
-        </Box>
-      </Box>
-    );
-  }
-
-  function getLiveMode() {
-    if (props.mode === SceneMode.PlayOffline) {
-      return LiveMode.Live;
-    }
-    if (props.mode === SceneMode.Manage) {
-      return undefined;
-    }
-    if (props.isLoading) {
-      return LiveMode.Connecting;
-    }
-    return LiveMode.Live;
-  }
-};
-Scene.displayName = "Scene";
+}

@@ -39,8 +39,8 @@ import {
 } from "../../../DiceBox/DiceBox";
 import { FateLabel } from "../../../FateLabel/FateLabel";
 
-export const PlayerRow: React.FC<
-  {
+export function PlayerRow(
+  props: {
     permissions: {
       canRoll: boolean;
       canUpdatePoints: boolean;
@@ -51,7 +51,7 @@ export const PlayerRow: React.FC<
     };
     player: IPlayer;
     isMe: boolean;
-    number: number;
+    children?: JSX.Element;
     onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
@@ -61,7 +61,7 @@ export const PlayerRow: React.FC<
     onAssignOriginalCharacterSheet(): void;
     onAssignDuplicateCharacterSheet(): void;
   } & IDataCyProps
-> = (props) => {
+) {
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
@@ -135,7 +135,10 @@ export const PlayerRow: React.FC<
           <Box mb=".5rem">
             <Box pb=".5rem">{renderDice()}</Box>
             <Box pb=".5rem">{renderPointCounter()}</Box>
-            <Box>{renderControls()}</Box>
+            <Box pb={props.children ? ".5rem" : undefined}>
+              {renderControls()}
+            </Box>
+            {props.children}
           </Box>
         </Box>
       </Box>
@@ -456,7 +459,7 @@ export const PlayerRow: React.FC<
                   hasCharacterSheet
                     ? t("player-row.open-character-sheet")
                     : props.permissions.canLoadCharacterSheet
-                    ? t("play-route.add-character-sheet")
+                    ? t("play-route.assign-character-sheet")
                     : ""
                 }
               >
@@ -570,5 +573,5 @@ export const PlayerRow: React.FC<
       </Dialog>
     );
   }
-};
+}
 PlayerRow.displayName = "PlayerRow";

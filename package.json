@@ -30,7 +30,8 @@
     "deploy:prod": "netlify deploy --site 534c856a-7d30-4fdd-ad4a-9845ccdefd08 --prod",
     "storybook": "start-storybook -p 6006 -s ./fonts",
     "build-storybook": "build-storybook -s ./fonts",
-    "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes"
+    "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes",
+    "clean": "rm -rf node_modules && rm -rf .cache && npm install"
   },
   "dependencies": {
     "@emotion/css": "^11.1.3",

@@ -207,24 +207,7 @@ export const IndexCard: React.FC<
                     <Collapse in={open}>
                       <Box>
                         <Box>{renderContent()}</Box>
-                        <Box>
-                          {renderBlocks()}
-                          {!props.readonly && (
-                            <Fade in={hover}>
-                              <Box>
-                                <AddBlock
-                                  variant="icon"
-                                  onAddBlock={(blockType) => {
-                                    indexCardManager.actions.addBlock(
-                                      blockType
-                                    );
-                                    setAdvanced(true);
-                                  }}
-                                />
-                              </Box>
-                            </Fade>
-                          )}
-                        </Box>
+                        <Box>{renderBlocks()}</Box>
                       </Box>
                     </Collapse>
                     {renderSkills()}
@@ -337,6 +320,19 @@ export const IndexCard: React.FC<
                       <EditAttributesOutlinedIcon htmlColor={paper.primary} />
                     )}
                   </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+            <Grid item container justify="center" spacing={1}>
+              <Grid item>
+                <Tooltip title={t("index-card.add-block")}>
+                  <AddBlock
+                    variant="icon"
+                    onAddBlock={(blockType) => {
+                      indexCardManager.actions.addBlock(blockType);
+                      setAdvanced(true);
+                    }}
+                  />
                 </Tooltip>
               </Grid>
             </Grid>

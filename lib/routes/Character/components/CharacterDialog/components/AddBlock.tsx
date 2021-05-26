@@ -30,7 +30,11 @@ export const AddBlock: React.FC<
   const [anchorEl, setAnchorEl] = React.useState<any>();
 
   return (
-    <Box p="1rem" justifyContent="center" display="flex">
+    <Box
+      p={variant === "button" ? "1rem" : "0"}
+      justifyContent="center"
+      display="flex"
+    >
       {variant === "button" ? (
         <Button
           color={"primary"}

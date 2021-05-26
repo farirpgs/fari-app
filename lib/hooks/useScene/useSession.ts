@@ -28,6 +28,7 @@ export function useSession(props: IProps) {
       points: "3",
       offline: false,
       isGM: true,
+      npcs: [],
     },
     players: [],
     goodConfetti: 0,
@@ -74,8 +75,7 @@ export function useSession(props: IProps) {
       },
     ]
   );
-  const hasPlayersWithCharacterSheets =
-    !!sortedPlayersWithCharacterSheets.length;
+  const hasPlayersWithCharacterSheets = !!sortedPlayersWithCharacterSheets.length;
 
   const userCharacterSheet = session.players.find((p) => {
     return p.id === userId;
@@ -83,7 +83,8 @@ export function useSession(props: IProps) {
 
   useEffect(
     function syncCharacterSheetForMe() {
-      session.players.forEach((player) => {
+      const everyone = getEveryone(session);
+      everyone.forEach((player) => {
         const isMe = props.userId === player.id;
 
         if (isMe) {
@@ -115,7 +116,7 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        const everyone = [draft.gm, ...draft.players];
+        const everyone = getEveryone(draft);
         everyone.forEach((player) => {
           if (player.id === id) {
             player.rolls = [roll, ...player.rolls];
@@ -166,9 +167,8 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        const offlinePlayers = draft.players.filter((p) => p.offline);
 
-        const mappedConnections = connections.map<IPlayer>((c) => {
+        const players = connections.map<IPlayer>((c) => {
           const meta: IPeerMeta = c.metadata;
           const playerName = meta.playerName;
           const peerJsId = c.label;
@@ -191,11 +191,11 @@ export function useSession(props: IProps) {
             offline: false,
           };
         });
-        const allPlayers = [...mappedConnections, ...offlinePlayers];
-        const allPlayersMinusRemovedPlayersFromStaleConnections =
-          allPlayers.filter((p) => {
+        const allPlayersMinusRemovedPlayersFromStaleConnections = players.filter(
+          (p) => {
             return removedPlayers.find((id) => id === p.id) === undefined;
-          });
+          }
+        );
 
         draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
       })
@@ -209,13 +209,12 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        draft.players.push({
+        draft.gm.npcs.push({
           id: id,
-          playerName: "",
+          playerName: `NPC #${draft.gm.npcs.length + 1}`,
           character: undefined,
           rolls: [],
           playedDuringTurn: false,
-          offline: true,
           isGM: false,
           points: "3",
         });
@@ -235,6 +234,9 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
+        draft.gm.npcs = draft.gm.npcs.filter((p) => {
+          return p.id !== id;
+        });
         draft.players = draft.players.filter((p) => {
           return p.id !== id;
         });
@@ -248,13 +250,14 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        const everyone = [draft.gm, ...draft.players];
+        const everyone = getEveryone(draft);
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
         });
       })
     );
   }
+
   function updatePlayerCharacter(
     id: string,
     character: ICharacter,
@@ -262,7 +265,7 @@ export function useSession(props: IProps) {
   ) {
     setSession(
       produce((draft) => {
-        const everyone = [draft.gm, ...draft.players];
+        const everyone = getEveryone(draft);
 
         everyone.forEach((p) => {
           if (p.id === id) {
@@ -275,9 +278,11 @@ export function useSession(props: IProps) {
       })
     );
   }
+
   function loadPlayerCharacter(id: string, character: ICharacter) {
     updatePlayerCharacter(id, character, true);
   }
+
   function updatePlayerPlayedDuringTurn(
     id: string,
     playedInTurnOrder: boolean
@@ -287,7 +292,7 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        const everyone = [draft.gm, ...draft.players];
+        const everyone = getEveryone(draft);
         everyone.forEach((p) => {
           if (p.id === id) {
             p.playedDuringTurn = playedInTurnOrder;
@@ -308,7 +313,7 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        const everyone = [draft.gm, ...draft.players];
+        const everyone = getEveryone(draft);
         draft.drawAreaObjects = [];
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
@@ -327,7 +332,7 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        const everyone = [draft.gm, ...draft.players];
+        const everyone = getEveryone(draft);
         everyone.forEach((p) => {
           if (p.id === id) {
             p.points = points;
@@ -359,6 +364,10 @@ export function useSession(props: IProps) {
     );
   }
 
+  function getEveryone(session: ISession) {
+    return [session.gm, ...session.gm.npcs, ...session.players];
+  }
+
   return {
     state: { session },
     computed: {
@@ -368,6 +377,7 @@ export function useSession(props: IProps) {
     },
     actions: {
       overrideSession,
+      resetInitiative,
       addOfflinePlayer,
       fireBadConfetti,
       fireGoodConfetti,

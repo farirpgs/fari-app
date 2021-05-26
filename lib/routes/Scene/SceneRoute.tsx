@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
@@ -53,13 +53,10 @@ export const SceneRoute: React.FC<{
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Scene
+      <Session
         mode={SceneMode.Manage}
         sessionManager={sessionManager}
         sceneManager={sceneManager}
-        scenesManager={scenesManager}
-        charactersManager={charactersManager}
-        myBinderManager={myBinderManager}
       />
     </>
   );

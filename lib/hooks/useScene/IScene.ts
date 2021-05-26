@@ -10,7 +10,6 @@ export interface IPlayer {
   character?: ICharacter;
   rolls: Array<IDiceRollResult>;
   playedDuringTurn: boolean;
-  offline: boolean;
   isGM: boolean;
   points: string;
 }
@@ -90,7 +89,7 @@ export interface IScene {
 }
 
 export interface ISession {
-  gm: IPlayer;
+  gm: IPlayer & { npcs: Array<IPlayer> };
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;
