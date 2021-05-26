@@ -83,8 +83,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "color": theme.palette.getContrastText(diceRollsManager.state.color),
     "background": diceRollsManager.state.color,
     "fontWeight": theme.typography.fontWeightBold,
-    "border": `2px dashed ${
-      diceRollsManager.state.rolling
+    "border": `1px dashed ${
+      diceRollsManager.state.rolling || !diceRollsManager.state.finalResult
         ? theme.palette.primary.main
         : "transparent"
     }`,

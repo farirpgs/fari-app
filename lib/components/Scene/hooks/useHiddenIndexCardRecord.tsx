@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IIndexCard, IIndexCardType } from "../../../hooks/useScene/IScene";
 
 export function useHiddenIndexCardRecord(
-  indexCards: Record<IIndexCardType, Array<IIndexCard>>
+  indexCards: Record<IIndexCardType, Array<IIndexCard>> | undefined
 ) {
   const [indexCardHiddenRecord, setIndexCardHiddenRecord] = useState<
     Record<string, boolean>
@@ -15,6 +15,9 @@ export function useHiddenIndexCardRecord(
       : Object.values(indexCardHiddenRecord).every((c) => !c);
   useEffect(
     function keepHiddenRecordsInSync() {
+      if(!indexCards){
+        return
+      }
       setIndexCardHiddenRecord((prev: Record<string, boolean>) => {
         const newRecord: Record<string, boolean> = {};
         const indexCardsFromAllTypes = [
@@ -47,6 +50,9 @@ export function useHiddenIndexCardRecord(
   }
 
   function toggleAll() {
+    if(!indexCards){
+      return
+    }
     setIndexCardHiddenRecord(
       produce((draft: Record<string, boolean>) => {
         const newValue = areAllCardsVisible ? true : false;

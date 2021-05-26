@@ -211,7 +211,7 @@
   "play-route.collapse-all": "Collapse All",
   "play-route.connect-to-game": "Join the game",
   "play-route.connected": "connected",
-  "play-route.copy-game-link": "Copy Game Link",
+  "play-route.copy-game-link": "Copy Session Link",
   "play-route.error.description1": "We could not connect you to the server in order to initialize the game",
   "play-route.error.description2": "Try refreshing the page to see if that fixes the issue. You can start an offline game instead.",
   "play-route.error.title": "Something wrong happened.",

@@ -362,9 +362,9 @@ describe("useScene", () => {
       });
       act(() => {
         // WHEN player adds character sheet
-        result.current.actions.updatePlayerCharacter("1", ({
+        result.current.actions.updatePlayerCharacter("1", {
           myCharacter: "my first character",
-        } as unknown) as any);
+        } as unknown as any);
       });
       // THEN player as character
       expect(result.current.state.scene.players[0].character).toEqual({
@@ -372,9 +372,9 @@ describe("useScene", () => {
       });
       act(() => {
         // WHEN player reloads character sheet
-        result.current.actions.updatePlayerCharacter("1", ({
+        result.current.actions.updatePlayerCharacter("1", {
           myCharacter: "my second character",
-        } as unknown) as any);
+        } as unknown as any);
       });
       // THEN player as character
       expect(result.current.state.scene.players[0].character).toEqual({
@@ -383,9 +383,9 @@ describe("useScene", () => {
 
       act(() => {
         // WHEN player reloads character sheet
-        result.current.actions.updatePlayerCharacter("1", ({
+        result.current.actions.updatePlayerCharacter("1", {
           myCharacter: "my second character",
-        } as unknown) as any);
+        } as unknown as any);
       });
       // THEN player as character
       expect(result.current.state.scene.players[0].character).toEqual({
@@ -672,15 +672,15 @@ describe("useScene", () => {
     });
     // WHEN safeSet with nothing
     act(() => {
-      result.current.useScene.actions.safeSetScene(
-        (undefined as unknown) as any
+      result.current.useScene.actions.overrideScene(
+        undefined as unknown as any
       );
     });
     // WHEN safeSet
     act(() => {
-      result.current.useScene.actions.safeSetScene(({
+      result.current.useScene.actions.overrideScene({
         players: [{ character: {} }, { character: {} }],
-      } as unknown) as any);
+      } as unknown as any);
     });
     // THEN
     expect(result.current.useScene.state.scene).toEqual({

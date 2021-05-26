@@ -151,7 +151,7 @@ function MyBinderManager() {
       },
       onSelect(element) {
         if (myBinderManager.state.managerCallback.current) {
-          myBinderManager.state.managerCallback.current(element);
+          myBinderManager.state.managerCallback.current(element.original);
         } else {
           history.push(`/scenes/${element.id}`);
         }

@@ -84,12 +84,15 @@ export interface IScene {
   name: string;
   group: string | undefined;
   indexCards: Record<IIndexCardType, Array<IIndexCard>>;
+  version: number;
+  lastUpdated: number;
+  notes?: string;
+}
+
+export interface ISession {
   gm: IPlayer;
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;
   drawAreaObjects: IDrawAreaObjects;
-  version: number;
-  lastUpdated: number;
-  notes?: string;
 }

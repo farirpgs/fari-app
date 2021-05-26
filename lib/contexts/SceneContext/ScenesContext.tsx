@@ -7,11 +7,6 @@ import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
 import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
 
-export type ISavableScene = Pick<
-  IScene,
-  "id" | "name" | "indexCards" | "version" | "lastUpdated" | "group" | "notes"
->;
-
 export const ScenesContext = React.createContext<ReturnType<typeof useScenes>>(
   undefined as any
 );
@@ -20,7 +15,7 @@ export function useScenes(props?: { localStorage: Storage }) {
   const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-scenes";
 
-  const [scenes, setScenes] = useStorageEntities<ISavableScene>({
+  const [scenes, setScenes] = useStorageEntities<IScene>({
     key: key,
     localStorage: localStorage,
     migrationFunction: SceneFactory.migrate,
@@ -29,20 +24,20 @@ export function useScenes(props?: { localStorage: Storage }) {
   const groups = useGroups(scenes, (s) => s.group);
 
   function add() {
-    const newScene: ISavableScene = SceneFactory.makeSavableScene();
-    setScenes((draft: Array<ISavableScene>) => {
+    const newScene: IScene = SceneFactory.makeSavableScene();
+    setScenes((draft: Array<IScene>) => {
       return [newScene, ...draft];
     });
     return newScene;
   }
 
-  function upsert(scene: IScene | ISavableScene | undefined) {
+  function upsert(scene: IScene | IScene | undefined) {
     if (!scene) {
       return;
     }
     const exists = scenes.find((s) => s.id === scene.id);
 
-    const newScene: ISavableScene = {
+    const newScene: IScene = {
       id: scene.id,
       name: scene.name,
       group: scene.group,
@@ -52,11 +47,11 @@ export function useScenes(props?: { localStorage: Storage }) {
       lastUpdated: scene.lastUpdated,
     };
     if (!exists) {
-      setScenes((draft: Array<ISavableScene>) => {
+      setScenes((draft: Array<IScene>) => {
         return [newScene, ...draft];
       });
     } else {
-      setScenes((draft: Array<ISavableScene>) => {
+      setScenes((draft: Array<IScene>) => {
         return draft.map((c) => {
           if (c.id === scene.id) {
             return { ...newScene, lastUpdated: getUnix() };
@@ -69,13 +64,13 @@ export function useScenes(props?: { localStorage: Storage }) {
   }
 
   function remove(id: string | undefined) {
-    setScenes((draft: Array<ISavableScene>) => {
+    setScenes((draft: Array<IScene>) => {
       return draft.filter((c) => c.id !== id);
     });
   }
 
   function duplicate(id: string | undefined) {
-    setScenes((draft: Array<ISavableScene>) => {
+    setScenes((draft: Array<IScene>) => {
       const match = draft.find((c) => c.id === id);
 
       return [
@@ -85,13 +80,13 @@ export function useScenes(props?: { localStorage: Storage }) {
           id: Id.generate(),
           lastUpdated: getUnix(),
           name: `${match?.name} Copy`,
-        } as ISavableScene,
+        } as IScene,
       ];
     });
   }
 
   function importEntity(sceneFile: FileList | null) {
-    FariEntity.import<ISavableScene>({
+    FariEntity.import<IScene>({
       filesToImport: sceneFile,
       fariType: "scene",
       onImport: (sceneToImport) => {
@@ -102,7 +97,7 @@ export function useScenes(props?: { localStorage: Storage }) {
     // logger.info("ScenesManager:onImport");
   }
 
-  function exportEntity(scene: ISavableScene) {
+  function exportEntity(scene: IScene) {
     FariEntity.export({
       element: scene,
       fariType: "scene",

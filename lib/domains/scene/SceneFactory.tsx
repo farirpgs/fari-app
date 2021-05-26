@@ -5,7 +5,6 @@ import {
 import {
   defaultSceneName,
   defaultSceneVersion,
-  ISavableScene,
 } from "../../contexts/SceneContext/ScenesContext";
 import { AspectType } from "../../hooks/useScene/AspectType";
 import {
@@ -19,7 +18,7 @@ import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
 
 export const SceneFactory = {
-  make(gmId: string): IScene {
+  make(): IScene {
     return {
       id: Id.generate(),
       name: defaultSceneName,
@@ -28,24 +27,11 @@ export const SceneFactory = {
         public: [],
         private: [],
       },
-      gm: {
-        id: gmId,
-        playerName: "Game Master",
-        rolls: [],
-        playedDuringTurn: false,
-        points: "3",
-        offline: false,
-        isGM: true,
-      },
-      players: [],
-      goodConfetti: 0,
-      badConfetti: 0,
-      drawAreaObjects: [],
       version: defaultSceneVersion,
       lastUpdated: getUnix(),
     };
   },
-  makeSavableScene(): ISavableScene {
+  makeSavableScene(): IScene {
     return {
       id: Id.generate(),
       name: defaultSceneName,
@@ -107,7 +93,7 @@ export const SceneFactory = {
 
 function migrateV1SceneToV2(v1: ISceneV1): IScene {
   if (v1.version !== 1) {
-    return (v1 as unknown) as IScene;
+    return v1 as unknown as IScene;
   }
 
   const publicIndexCards: Array<IIndexCard> = [];
@@ -132,11 +118,6 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
       public: publicIndexCards,
       private: privateIndexCards,
     },
-    gm: v1.gm,
-    players: v1.players,
-    goodConfetti: v1.goodConfetti,
-    badConfetti: v1.badConfetti,
-    drawAreaObjects: v1.drawAreaObjects,
     lastUpdated: v1.lastUpdated,
     notes: v1.notes,
   };

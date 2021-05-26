@@ -20,10 +20,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SplitButton } from "../../components/SplitButton/SplitButton";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import {
-  ISavableScene,
-  ScenesContext,
-} from "../../contexts/SceneContext/ScenesContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
@@ -31,6 +28,7 @@ import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
+import { IScene } from "../../hooks/useScene/IScene";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -189,7 +187,7 @@ export const DataRoute: React.FC = () => {
     mode: ImportMode
   ) {
     FariEntity.import<{
-      scenes: Array<ISavableScene>;
+      scenes: Array<IScene>;
       characters: Array<ICharacter>;
     }>({
       filesToImport: fileToImport,
@@ -210,7 +208,7 @@ export const DataRoute: React.FC = () => {
         importCharacter(character, mode);
       },
     });
-    FariEntity.import<ISavableScene>({
+    FariEntity.import<IScene>({
       filesToImport: fileToImport,
       fariType: "scene",
       onImport: (scene) => {
@@ -219,7 +217,7 @@ export const DataRoute: React.FC = () => {
     });
   }
 
-  function importScene(scene: ISavableScene, mode: ImportMode) {
+  function importScene(scene: IScene, mode: ImportMode) {
     const sceneToUse =
       mode === ImportMode.Import
         ? scene
