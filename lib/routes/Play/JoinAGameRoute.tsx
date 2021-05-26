@@ -21,7 +21,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 let playerNameSingleton = "";
 
 export const JoinAGame: React.FC<{
-  idFromParams: string;
+  idFromParams?: string;
   onSubmitPlayerName(playerName: string): void;
   connecting: boolean;
   error: any;

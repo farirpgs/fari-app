@@ -4,8 +4,6 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -13,18 +11,16 @@ import { useUserId } from "../../hooks/useUserId/useUserId";
 
 export const PlayOfflineRoute: React.FC<{
   match: {
-    params: { id: string };
+    params: { id?: string };
   };
 }> = () => {
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
-  const scenesManager = useContext(ScenesContext);
 
   const sceneManager = useScene({
     userId: userId,
     charactersManager: charactersManager,
   });
-  const myBinderManager = useContext(MyBinderContext);
   const sessionManager = useSession({
     userId: userId,
     charactersManager: charactersManager,

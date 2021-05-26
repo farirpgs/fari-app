@@ -31,7 +31,6 @@ function StorybookPlayerRow(props: {
       }}
       player={props.player}
       isMe={props.highlight}
-      number={1}
       onDiceRoll={action("onDiceRoll")}
       onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
       onPointsChange={action("onPointsChange")}
@@ -750,7 +749,6 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
     points: "3",
     playerName: "René-Pier",
     isGM: false,
-    offline: false,
     playedDuringTurn: false,
     rolls: [],
     ...props,

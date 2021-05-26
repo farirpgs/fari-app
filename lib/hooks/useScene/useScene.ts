@@ -8,8 +8,6 @@ import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { IIndexCard, IIndexCardType, IScene } from "./IScene";
 
-const temporaryGMIdUntilFirstSync = "temporary-gm-id-until-first-sync";
-
 export type IProps = {
   userId: string;
   charactersManager: ReturnType<typeof useCharacters>;
