@@ -76,8 +76,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
         {
           label: "Drive Thru",
-          url:
-            "https://www.drivethrurpg.com/product/114902/Fate-Accelerated-Edition-o-A-Fate-Core-Build",
+          url: "https://www.drivethrurpg.com/product/114902/Fate-Accelerated-Edition-o-A-Fate-Core-Build",
         },
       ],
     },
@@ -103,8 +102,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
         {
           label: "Drive Thru",
-          url:
-            "https://www.drivethrurpg.com/product/119385/Fate-System-Toolkit",
+          url: "https://www.drivethrurpg.com/product/119385/Fate-System-Toolkit",
         },
       ],
     },
@@ -130,8 +128,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
         },
         {
           label: "Drive Thru",
-          url:
-            "https://www.drivethrurpg.com/product/219203/Fate-Adversary-Toolkit",
+          url: "https://www.drivethrurpg.com/product/219203/Fate-Adversary-Toolkit",
         },
       ],
     },
@@ -358,5 +355,35 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Changelog",
 
     loadFunction: DocImport.Changelog,
+  },
+  {
+    url: "/srds/pt-br/condensed",
+    parent: { title: "SRDs", url: "/srds" },
+    title: "Fate Condensado",
+    imageUrl: Images.condensed,
+    loadFunction: DocImport.FateCondensedPtBr,
+    gitHubLink:
+      "https://github.com/fariapp/fari/tree/master/docs/fate-condensed-pt-br.md",
+    author: {
+      title: "Bruno José F. de S. Peixoto / Evil Hat Productions",
+      items: [
+        {
+          label: "Bruno's Twitter",
+          url: "https://twitter.com/BrubruGeek",
+        },
+        {
+          label: "EHP Website",
+          url: "https://www.evilhat.com/home/fate-condensed",
+        },
+        {
+          label: "EHP Itch.io",
+          url: "https://evilhat.itch.io/fate-condensed",
+        },
+        {
+          label: "EHP Drive Thru",
+          url: "https://www.drivethrurpg.com/product/302571/Fate-Condensed",
+        },
+      ],
+    },
   },
 ];
