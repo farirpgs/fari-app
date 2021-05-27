@@ -17,7 +17,7 @@ describe("useSession", () => {
 
     const expectDefaultSession: ISession = {
       gm: {
-        id: "111",
+        id: expect.anything(),
         playerName: "Game Master",
         rolls: [],
         playedDuringTurn: false,
@@ -419,7 +419,7 @@ describe("useSession", () => {
     expect(result.current.state.session.badConfetti).toEqual(0);
   });
 
-  describe("overrideScene", () => {
+  describe("overrideSession", () => {
     // GIVEN
     const userId = "111";
     const useCharactersMock = mockUseCharacters();
@@ -430,7 +430,6 @@ describe("useSession", () => {
       return {
         useSession: useSession({
           userId,
-
           charactersManager,
         }),
         useCharacters: charactersManager,
@@ -442,14 +441,18 @@ describe("useSession", () => {
         undefined as unknown as any
       );
     });
+
     // WHEN safeSet
     act(() => {
       result.current.useSession.actions.overrideSession({
+        gm: { npcs: [] },
         players: [{ character: {} }, { character: {} }],
       } as unknown as any);
     });
+
     // THEN
     expect(result.current.useSession.state.session).toEqual({
+      gm: { npcs: [] },
       players: [{ character: {} }, { character: {} }],
     });
     expect(
@@ -466,7 +469,6 @@ describe("useSession", () => {
       const charactersManager = useCharactersMock();
       return useSession({
         userId,
-
         charactersManager,
       });
     });
@@ -476,15 +478,15 @@ describe("useSession", () => {
       playerId = result.current.actions.addOfflinePlayer();
     });
     // THEN
-    expect(result.current.state.session.players).toEqual([
+    expect(result.current.state.session.gm.npcs).toEqual([
       {
         character: undefined,
         points: "3",
         id: playerId,
         playedDuringTurn: false,
         isGM: false,
-        offline: true,
-        playerName: "",
+
+        playerName: "NPC #1",
         rolls: [],
       },
     ]);
@@ -492,6 +494,8 @@ describe("useSession", () => {
     act(() => {
       result.current.actions.removePlayer(playerId);
     });
+    // THEN
+    expect(result.current.state.session.gm.npcs).toEqual([]);
   });
 });
 

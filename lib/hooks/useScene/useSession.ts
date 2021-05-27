@@ -19,22 +19,23 @@ import { IPeerMeta, IProps } from "./useScene";
 export function useSession(props: IProps) {
   const { userId, charactersManager } = props;
   const [removedPlayers, setRemovedPlayers] = useState([]);
-  const [session, setSession] = useState<ISession>(() => ({
-    gm: {
-      id: Id.generate(),
-      playerName: "Game Master",
-      rolls: [],
-      playedDuringTurn: false,
-      points: "3",
-      offline: false,
-      isGM: true,
-      npcs: [],
-    },
-    players: [],
-    goodConfetti: 0,
-    badConfetti: 0,
-    drawAreaObjects: [],
-  }));
+  const [session, setSession] = useState<ISession>(
+    (): ISession => ({
+      gm: {
+        id: Id.generate(),
+        playerName: "Game Master",
+        rolls: [],
+        playedDuringTurn: false,
+        points: "3",
+        isGM: true,
+        npcs: [],
+      },
+      players: [],
+      goodConfetti: 0,
+      badConfetti: 0,
+      drawAreaObjects: [],
+    })
+  );
 
   useEffect(() => {
     if (session.goodConfetti > 0) {
@@ -75,7 +76,8 @@ export function useSession(props: IProps) {
       },
     ]
   );
-  const hasPlayersWithCharacterSheets = !!sortedPlayersWithCharacterSheets.length;
+  const hasPlayersWithCharacterSheets =
+    !!sortedPlayersWithCharacterSheets.length;
 
   const userCharacterSheet = session.players.find((p) => {
     return p.id === userId;
@@ -84,7 +86,11 @@ export function useSession(props: IProps) {
   useEffect(
     function syncCharacterSheetForMe() {
       const everyone = getEveryone(session);
+
       everyone.forEach((player) => {
+        if (!player.character) {
+          return;
+        }
         const isMe = props.userId === player.id;
 
         if (isMe) {
@@ -97,7 +103,9 @@ export function useSession(props: IProps) {
   );
 
   function overrideSession(newSession: ISession) {
-    setSession(newSession);
+    if (newSession) {
+      setSession(newSession);
+    }
   }
   function updateGmRoll(roll: IDiceRollResult) {
     setSession(
@@ -191,11 +199,10 @@ export function useSession(props: IProps) {
             offline: false,
           };
         });
-        const allPlayersMinusRemovedPlayersFromStaleConnections = players.filter(
-          (p) => {
+        const allPlayersMinusRemovedPlayersFromStaleConnections =
+          players.filter((p) => {
             return removedPlayers.find((id) => id === p.id) === undefined;
-          }
-        );
+          });
 
         draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
       })

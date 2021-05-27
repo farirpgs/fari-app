@@ -13,7 +13,7 @@ export type IProps = {
   charactersManager: ReturnType<typeof useCharacters>;
 };
 
-export function useScene(props: IProps) {
+export function useScene() {
   const scenesManager = useContext(ScenesContext);
   const [scene, setScene] = useState<IScene | undefined>();
 
