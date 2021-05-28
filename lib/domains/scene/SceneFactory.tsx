@@ -86,6 +86,12 @@ export const SceneFactory = {
     return {
       ...indexCard,
       id: Id.generate(),
+      subCards: indexCard.subCards.map((sub) => {
+        return {
+          ...sub,
+          id: Id.generate(),
+        };
+      }),
     };
   },
   migrate(s: any): IScene {
