@@ -102,7 +102,11 @@ export const IndexCard: React.FC<
     xs: 1,
   });
 
-  const paper = useTextColors(indexCardManager.state.indexCard.color);
+  const paper = useTextColors(
+    theme.palette.type === "light"
+      ? indexCardManager.state.indexCard.color
+      : darken(indexCardManager.state.indexCard.color, 0.2)
+  );
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
 
@@ -125,9 +129,6 @@ export const IndexCard: React.FC<
           setHover(false);
         }}
         position="relative"
-        className={css({
-          filter: theme.palette.type === "dark" ? "brightness(90%)" : undefined,
-        })}
       >
         <ConditionalWrapper
           condition={props.canMove}
