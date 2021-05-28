@@ -75,7 +75,7 @@ jobs:
           path: dist
       # Deploy Preview
       - name: Deploy Preview
-        run: npm run deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
+        run: npm run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
   deploy-production:
     needs: [build]
     runs-on: ubuntu-latest
@@ -109,4 +109,4 @@ jobs:
           path: dist
       # Deploy Production
       - name: Deploy Production
-        run: npm run deploy:prod --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
+        run: npm run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
