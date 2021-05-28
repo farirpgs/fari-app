@@ -102,7 +102,11 @@ export const IndexCard: React.FC<
     xs: 1,
   });
 
-  const paper = useTextColors(indexCardManager.state.indexCard.color);
+  const paper = useTextColors(
+    theme.palette.type === "light"
+      ? indexCardManager.state.indexCard.color
+      : darken(indexCardManager.state.indexCard.color, 0.2)
+  );
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
 
@@ -115,6 +119,9 @@ export const IndexCard: React.FC<
         pb={props.readonly ? "1rem" : "0"}
         bgcolor={paper.bgColor}
         color={paper.primary}
+        onClick={() => {
+          setHover(true);
+        }}
         onPointerEnter={() => {
           setHover(true);
         }}
@@ -122,9 +129,6 @@ export const IndexCard: React.FC<
           setHover(false);
         }}
         position="relative"
-        className={css({
-          filter: theme.palette.type === "dark" ? "brightness(90%)" : undefined,
-        })}
       >
         <ConditionalWrapper
           condition={props.canMove}
@@ -207,24 +211,7 @@ export const IndexCard: React.FC<
                     <Collapse in={open}>
                       <Box>
                         <Box>{renderContent()}</Box>
-                        <Box>
-                          {renderBlocks()}
-                          {!props.readonly && (
-                            <Fade in={hover}>
-                              <Box>
-                                <AddBlock
-                                  variant="icon"
-                                  onAddBlock={(blockType) => {
-                                    indexCardManager.actions.addBlock(
-                                      blockType
-                                    );
-                                    setAdvanced(true);
-                                  }}
-                                />
-                              </Box>
-                            </Fade>
-                          )}
-                        </Box>
+                        <Box>{renderBlocks()}</Box>
                       </Box>
                     </Collapse>
                     {renderSkills()}
@@ -337,6 +324,19 @@ export const IndexCard: React.FC<
                       <EditAttributesOutlinedIcon htmlColor={paper.primary} />
                     )}
                   </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+            <Grid item container justify="center" spacing={1}>
+              <Grid item>
+                <Tooltip title={t("index-card.add-block")}>
+                  <AddBlock
+                    variant="icon"
+                    onAddBlock={(blockType) => {
+                      indexCardManager.actions.addBlock(blockType);
+                      setAdvanced(true);
+                    }}
+                  />
                 </Tooltip>
               </Grid>
             </Grid>
@@ -502,9 +502,8 @@ export const IndexCard: React.FC<
                                 >
                                   <DragIndicatorIcon
                                     className={css({
-                                      transition: theme.transitions.create(
-                                        "color"
-                                      ),
+                                      transition:
+                                        theme.transitions.create("color"),
                                     })}
                                     htmlColor={
                                       dndRenderProps.isOver
@@ -622,9 +621,8 @@ export const IndexCard: React.FC<
                         },
                       ];
 
-                      const result = diceManager.actions.roll(
-                        commandOptionList
-                      );
+                      const result =
+                        diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
                   >

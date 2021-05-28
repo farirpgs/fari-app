@@ -30,10 +30,14 @@ export const BetterDnd: React.FC<{
   const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
   const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: props.type },
-    begin: () => {
+    type: props.type,
+    item: () => {
       props.onDrag?.();
+      return {
+        id: props.index,
+      };
     },
+
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

@@ -15,9 +15,8 @@ export function usePeerConnections(options: {
   const { peer, loading } = usePeerJS({ debug: options.debug });
   const connection = useRef<Peer.DataConnection | undefined>(undefined);
   const connectingTimeoutError = useRef<any>();
-  const [connectionToHost, setConnectionToHost] = useState<
-    Peer.DataConnection | undefined
-  >(undefined);
+  const [connectionToHost, setConnectionToHost] =
+    useState<Peer.DataConnection | undefined>(undefined);
   const [connectingToHost, setConnectingToHost] = useState(false);
   const [connectingToHostError, setConnectingToHostError] = useState(false);
 
@@ -78,7 +77,10 @@ export function usePeerConnections(options: {
       connectingToHostError,
     },
     actions: {
-      connect<T>(id: string, userId: string, metadata?: T) {
+      connect<T>(id: string | undefined, userId: string, metadata?: T) {
+        if (!id) {
+          return;
+        }
         logger.debug("Connection: Setup");
         setConnectingToHost(true);
         setConnectingToHostError(false);

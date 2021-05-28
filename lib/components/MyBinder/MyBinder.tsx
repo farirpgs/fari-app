@@ -3,6 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
+import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -27,7 +28,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import { arraySort } from "../../domains/array/arraySort";
-import { useLazyState } from "../../hooks/useLazyState/useLazyState";
+import { LazyState, useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
 import { AppLink } from "../AppLink/AppLink";
@@ -69,13 +70,11 @@ export function MyBinder<TFolders extends string>(props: {
 }) {
   const { t } = useTranslate();
   const theme = useTheme();
-  const [search, setSearch] = useLazyState({
-    value: props.search,
-    delay: 750,
-  });
+
+  const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
     value: props.folder,
-    delay: 750,
+    delay: 250,
   });
 
   useEffect(
@@ -95,9 +94,8 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] = useState<
-    { folder: TFolders; element: any } | undefined
-  >(undefined);
+  const [deletedObject, setDeletedObject] =
+    useState<{ folder: TFolders; element: any } | undefined>(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -114,10 +112,6 @@ export function MyBinder<TFolders extends string>(props: {
   }
 
   const where = getWhere();
-
-  function handleSetSearch(newSearch: string) {
-    setSearch(newSearch);
-  }
 
   function handleGoBack() {
     setFolder(undefined);
@@ -188,17 +182,28 @@ export function MyBinder<TFolders extends string>(props: {
                   </Box>
                 </Grid>
                 <Grid item xs>
-                  <InputBase
-                    placeholder={
-                      folder
-                        ? `Search in "${currentFolderLabel}"...`
-                        : "Search..."
-                    }
-                    autoFocus
+                  <LazyState
                     value={search}
-                    fullWidth
-                    onChange={(e) => {
-                      handleSetSearch(e.target.value);
+                    onChange={(newSearch) => {
+                      setSearch(newSearch);
+                    }}
+                    delay={500}
+                    render={([lazySearch, setLazySearch]) => {
+                      return (
+                        <InputBase
+                          placeholder={
+                            folder
+                              ? `Search in "${currentFolderLabel}"...`
+                              : "Search..."
+                          }
+                          autoFocus
+                          value={lazySearch}
+                          fullWidth
+                          onChange={(e) => {
+                            setLazySearch(e.target.value);
+                          }}
+                        />
+                      );
                     }}
                   />
                 </Grid>
@@ -208,9 +213,21 @@ export function MyBinder<TFolders extends string>(props: {
               </Grid>
             </Box>
           </Paper>
-          {where === Where.Folders && renderFolders()}
-          {where === Where.Folder && renderFolder()}
-          {where === Where.Search && renderSearch()}
+          {where === Where.Folders && (
+            <Fade in key="renderFolders">
+              <Box>{renderFolders()}</Box>
+            </Fade>
+          )}
+          {where === Where.Folder && (
+            <Fade in key="renderFolder">
+              <Box>{renderFolder()}</Box>
+            </Fade>
+          )}
+          {where === Where.Search && (
+            <Fade in key="renderSearch">
+              <Box>{renderSearch()}</Box>
+            </Fade>
+          )}
           <Grid container justify="flex-end">
             <Grid item>
               <AppLink
@@ -234,6 +251,7 @@ export function MyBinder<TFolders extends string>(props: {
       <Box>
         <List>
           {folderNames.map((name, key) => {
+            const folderItemCount = props.folders[name].length;
             const translatedFolderName = t(
               `my-binder.folder.${name}` as ITranslationKeys
             );
@@ -241,6 +259,7 @@ export function MyBinder<TFolders extends string>(props: {
               <ListItem
                 key={key}
                 button
+                data-cy={`my-binder.folders.${name}`}
                 onClick={() => {
                   setFolder(name);
                 }}
@@ -248,7 +267,18 @@ export function MyBinder<TFolders extends string>(props: {
                 <ListItemIcon>
                   <FolderIcon />
                 </ListItemIcon>
-                <ListItemText primary={translatedFolderName} />
+                <ListItemText
+                  primary={
+                    <span>
+                      {translatedFolderName}{" "}
+                      <span
+                        className={css({ color: theme.palette.text.secondary })}
+                      >
+                        ({folderItemCount})
+                      </span>
+                    </span>
+                  }
+                />
               </ListItem>
             );
           })}
@@ -270,6 +300,7 @@ export function MyBinder<TFolders extends string>(props: {
                   variant="outlined"
                   color="primary"
                   size="small"
+                  data-cy={`my-binder.folders.${currentFolder}.new`}
                   onClick={() => {
                     props.onAdd(currentFolder);
                   }}
@@ -281,6 +312,7 @@ export function MyBinder<TFolders extends string>(props: {
                 <Button
                   variant="outlined"
                   color="primary"
+                  data-cy={`my-binder.folders.${currentFolder}.import`}
                   size="small"
                   component="label"
                 >
@@ -513,6 +545,7 @@ function Element(props: {
   const backgroundColor = listItem.getColor(props.element.name);
   const color = theme.palette.getContrastText(backgroundColor);
   const [hover, setHover] = useState(false);
+
   const iconButtonClassName = css({
     transition: theme.transitions.create(["color"], {
       duration: theme.transitions.duration.shortest,
@@ -549,11 +582,16 @@ function Element(props: {
       <ListItemText primary={props.element.name} secondary={translatedType} />
 
       <ListItemSecondaryAction>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item>
+            <span className={css({ color: theme.palette.text.secondary })}>
+              ({listItem.formatDate(props.element.lastUpdated)})
+            </span>
+          </Grid>
           <Grid item>
             <IconButton
               size="small"
-              data-cy="manager.export"
+              data-cy={`my-binder.element.${props.element.name}.export`}
               className={iconButtonClassName}
               onPointerEnter={() => {
                 setHover(true);
@@ -572,7 +610,7 @@ function Element(props: {
           <Grid item>
             <IconButton
               size="small"
-              data-cy="manager.duplicate"
+              data-cy={`my-binder.element.${props.element.name}.duplicate`}
               className={iconButtonClassName}
               onPointerEnter={() => {
                 setHover(true);
@@ -591,7 +629,7 @@ function Element(props: {
           <Grid item>
             <IconButton
               size="small"
-              data-cy="manager.delete"
+              data-cy={`my-binder.element.${props.element.name}.delete`}
               className={iconButtonClassName}
               onPointerEnter={() => {
                 setHover(true);

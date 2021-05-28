@@ -26,9 +26,8 @@ export function useLatestDiceRoll(
 
   const previousRolls = usePrevious(playerRolls);
   const [latestPlayerRoll] = playerRolls;
-  const [finalResult, setFinalResult] = useState<IDiceRollResult | undefined>(
-    undefined
-  );
+  const [finalResult, setFinalResult] =
+    useState<IDiceRollResult | undefined>(undefined);
   const [rolling, setRolling] = useState(false);
   const [color, setColor] = useState(theme.palette.background.paper);
 
@@ -46,11 +45,10 @@ export function useLatestDiceRoll(
 
   useEffect(
     function handleSetResultColor() {
-      const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
-        latestPlayerRoll
-      );
+      const commandGroup =
+        Dice.findMatchingCommandGroupWithDiceResult(latestPlayerRoll);
 
-      if (!latestPlayerRoll) {
+      if (!latestPlayerRoll || rolling) {
         setColor(theme.palette.background.paper);
       } else if (
         commandGroup?.goodRoll &&
@@ -100,9 +98,8 @@ export function useLatestDiceRoll(
   }
 
   function handleSetFinalResult() {
-    const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
-      latestPlayerRoll
-    );
+    const commandGroup =
+      Dice.findMatchingCommandGroupWithDiceResult(latestPlayerRoll);
     options?.onRolling?.(false);
     setRolling(false);
     setFinalResult(latestPlayerRoll);
