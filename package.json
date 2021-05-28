@@ -13,7 +13,7 @@
     "i18n": "node -r esm i18n.js",
     "start": "parcel ./lib/index.html --target browser",
     "build": "parcel build ./lib/index.html --target browser",
-    "serve:build": "cp serve.json dist/serve.json && npm run serve dist -l 1234",
+    "serve:build": "cp serve.json dist/serve.json && npx serve dist -l 1234",
     "preview:build": "rm -rf ./dist && npm run build && npm run deploy:preview",
     "beta": "npm run preview:build -- -- --alias beta",
     "alpha": "npm run preview:build -- -- --alias alpha",
