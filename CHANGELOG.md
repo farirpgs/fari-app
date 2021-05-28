@@ -75,6 +75,12 @@ WIP
 - feat: translation update
 - fix: scene sub cards ids arent re-generated when a parent card is duplicated
 
+**5.0.2**
+
+- feat: update fate of cthulhu template
+- feat: fate condensed pt-br
+- fix: index card color in dark mode
+
 **4.0.5**
 
 - feat: The default character sheet template is now `Blank`
