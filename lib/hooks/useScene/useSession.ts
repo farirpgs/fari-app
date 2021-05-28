@@ -65,7 +65,8 @@ export function useSession(props: IProps) {
     }
   }, [session.badConfetti]);
 
-  const playersWithCharacterSheets = session.players.filter(
+  const playersAndNPCs = [...session.players, ...session.gm.npcs];
+  const playersWithCharacterSheets = playersAndNPCs.filter(
     (player) => !!player.character
   );
   const sortedPlayersWithCharacterSheets = arraySort(

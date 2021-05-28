@@ -74,6 +74,14 @@ export const SceneFactory = {
       sub: true,
     };
   },
+  duplicate(scene: IScene): IScene {
+    return {
+      ...scene,
+      id: Id.generate(),
+      lastUpdated: getUnix(),
+      name: `${scene.name} Copy`,
+    };
+  },
   duplicateIndexCard(indexCard: IIndexCard): IIndexCard {
     return {
       ...indexCard,

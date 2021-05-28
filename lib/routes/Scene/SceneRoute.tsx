@@ -19,10 +19,7 @@ export const SceneRoute: React.FC<{
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
-  const sceneManager = useScene({
-    userId: userId,
-    charactersManager: charactersManager,
-  });
+  const sceneManager = useScene();
   const sceneName = sceneManager.state.scene?.name ?? "";
   const sessionManager = useSession({
     userId: userId,

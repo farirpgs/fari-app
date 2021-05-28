@@ -96,14 +96,16 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }
 
   function duplicate(id: string | undefined) {
-    setCharacters((draft: Array<ICharacter>) => {
-      const match = draft.find((s) => s.id === id);
+    const match = characters.find((s) => s.id === id);
+    if (!match) {
+      return;
+    }
 
-      if (match) {
-        return [...draft, CharacterFactory.duplicate(match)];
-      }
-      return draft;
+    const newCharacter = CharacterFactory.duplicate(match);
+    setCharacters((draft: Array<ICharacter>) => {
+      return [...draft, newCharacter];
     });
+    return newCharacter;
   }
 
   function isInStorage(id: string | undefined) {

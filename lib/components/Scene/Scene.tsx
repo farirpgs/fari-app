@@ -49,6 +49,7 @@ import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
+import { LazyState } from "../../hooks/useLazyState/useLazyState";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import {
@@ -656,55 +657,50 @@ export const Session: React.FC<IProps> = (props) => {
   }
 
   function renderCharacterCards() {
-    const { playersWithCharacterSheets, hasPlayersWithCharacterSheets } =
-      sessionManager.computed;
+    const { playersWithCharacterSheets } = sessionManager.computed;
 
     return (
       <>
         <Box>
-          <Collapse in={hasPlayersWithCharacterSheets}>
-            <Box>
-              <Box
-                className={css({
-                  label: "Scene-characters-masonry-content",
-                  display: "flex",
-                  flexFlow: "row",
-                  flexWrap: "wrap",
-                })}
-              >
-                {playersWithCharacterSheets.map((player, index) => {
-                  const isMe =
-                    props.mode === SceneMode.PlayOnline &&
-                    props.userId === player.id;
-                  const canControl = isGM || isMe;
-                  return (
-                    <Box
-                      key={player?.id || index}
-                      className={css({
-                        label: "Scene-characters-masonry-card",
-                        width: characterCardWidth,
-                        display: "inline-block",
-                        marginBottom: "1rem",
-                      })}
-                    >
-                      <CharacterCard
-                        key={player?.id || index}
-                        readonly={!canControl}
-                        playerName={player.playerName}
-                        characterSheet={player.character}
-                        onCharacterDialogOpen={() => {
-                          setCharacterDialogPlayerId(player.id);
-                        }}
-                        onRoll={(newDiceRollResult) => {
-                          handleSetPlayerRoll(player.id, newDiceRollResult);
-                        }}
-                      />
-                    </Box>
-                  );
-                })}
-              </Box>
-            </Box>
-          </Collapse>
+          <Box
+            className={css({
+              label: "Scene-characters-masonry-content",
+              display: "flex",
+              flexFlow: "row",
+              flexWrap: "wrap",
+            })}
+          >
+            {playersWithCharacterSheets.map((player, index) => {
+              const isMe =
+                props.mode === SceneMode.PlayOnline &&
+                props.userId === player.id;
+              const canControl = isGM || isMe;
+              return (
+                <Box
+                  key={player?.id || index}
+                  className={css({
+                    label: "Scene-characters-masonry-card",
+                    width: characterCardWidth,
+                    display: "inline-block",
+                    marginBottom: "1rem",
+                  })}
+                >
+                  <CharacterCard
+                    key={player?.id || index}
+                    readonly={!canControl}
+                    playerName={player.playerName}
+                    characterSheet={player.character}
+                    onCharacterDialogOpen={() => {
+                      setCharacterDialogPlayerId(player.id);
+                    }}
+                    onRoll={(newDiceRollResult) => {
+                      handleSetPlayerRoll(player.id, newDiceRollResult);
+                    }}
+                  />
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
       </>
     );
@@ -719,7 +715,7 @@ export const Session: React.FC<IProps> = (props) => {
             {props.mode !== SceneMode.Manage && renderSessionTabs()}
             <Box>
               <Box py="2rem" position="relative" minHeight="20rem">
-                <TabPanel value={"player-characters"} className={tabPanelStyle}>
+                <TabPanel value={"characters"} className={tabPanelStyle}>
                   {renderCharacterCards()}
                 </TabPanel>
                 <TabPanel value={"scene"} className={tabPanelStyle}>
@@ -800,7 +796,7 @@ export const Session: React.FC<IProps> = (props) => {
           {props.mode !== SceneMode.Manage && (
             <Tab
               value="characters"
-              data-cy="session.tabs.player-characters"
+              data-cy="session.tabs.characters"
               label={
                 <>
                   <FateLabel className={tabLabelClass}>
@@ -1241,39 +1237,50 @@ export function Scene(props: {
                 <FateLabel>{t("play-route.group")}</FateLabel>
               </Grid>
               <Grid item xs={8} sm={4}>
-                <Autocomplete
-                  freeSolo
-                  options={scenesManager.state.groups.filter((g) => {
-                    const currentGroup = sceneManager.state.scene?.group ?? "";
-                    return g.toLowerCase().includes(currentGroup);
-                  })}
-                  value={sceneManager.state.scene?.group ?? ""}
-                  onChange={(event, newValue) => {
-                    sceneManager.actions.setGroup(newValue);
+                <LazyState
+                  value={sceneManager.state.scene?.group}
+                  delay={750}
+                  onChange={(newGroup) => {
+                    sceneManager.actions.setGroup(newGroup);
                   }}
-                  inputValue={sceneManager.state.scene?.group ?? ""}
-                  onInputChange={(event, newInputValue) => {
-                    sceneManager.actions.setGroup(newInputValue);
+                  render={([lazyGroup, setLazyGroup]) => {
+                    return (
+                      <Autocomplete
+                        freeSolo
+                        options={scenesManager.state.groups.filter((g) => {
+                          const currentGroup = lazyGroup ?? "";
+                          return g.toLowerCase().includes(currentGroup);
+                        })}
+                        value={lazyGroup ?? ""}
+                        onChange={(event, newValue) => {
+                          setLazyGroup(newValue || undefined);
+                        }}
+                        inputValue={lazyGroup ?? ""}
+                        onInputChange={(event, newInputValue) => {
+                          setLazyGroup(newInputValue);
+                        }}
+                        disabled={props.readonly}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="standard"
+                            InputProps={{
+                              ...params.InputProps,
+                              disableUnderline: true,
+                            }}
+                            data-cy="scene.group"
+                            inputProps={{
+                              ...params.inputProps,
+                              className: css({ padding: "2px" }),
+                            }}
+                            className={css({
+                              borderBottom: `1px solid ${theme.palette.divider}`,
+                            })}
+                          />
+                        )}
+                      />
+                    );
                   }}
-                  disabled={props.readonly}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="standard"
-                      InputProps={{
-                        ...params.InputProps,
-                        disableUnderline: true,
-                      }}
-                      data-cy="scene.group"
-                      inputProps={{
-                        ...params.inputProps,
-                        className: css({ padding: "2px" }),
-                      }}
-                      className={css({
-                        borderBottom: `1px solid ${theme.palette.divider}`,
-                      })}
-                    />
-                  )}
                 />
               </Grid>
             </Grid>

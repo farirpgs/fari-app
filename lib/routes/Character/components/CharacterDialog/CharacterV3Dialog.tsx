@@ -58,6 +58,7 @@ import {
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../../../domains/dice/Dice";
+import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
@@ -117,8 +118,9 @@ export const CharacterV3Dialog: React.FC<{
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
@@ -145,7 +147,8 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function onSave() {
-    const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
+    const updatedCharacter =
+      characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
     logger.info(`CharacterDialog:onSave`);
@@ -933,40 +936,49 @@ export const CharacterV3Dialog: React.FC<{
                 <FateLabel>{t("character-dialog.group")}</FateLabel>
               </Grid>
               <Grid item xs>
-                <Autocomplete
-                  freeSolo
-                  options={charactersManager.state.groups.filter((g) => {
-                    const currentGroup =
-                      characterManager.state.character!.group?.toLowerCase() ??
-                      "";
-                    return g.toLowerCase().includes(currentGroup);
-                  })}
-                  value={characterManager.state.character!.group ?? ""}
-                  onChange={(event, newValue) => {
-                    characterManager.actions.setGroup(newValue);
+                <LazyState
+                  value={characterManager.state.character?.group}
+                  delay={750}
+                  onChange={(newGroup) => {
+                    characterManager.actions.setGroup(newGroup);
                   }}
-                  inputValue={characterManager.state.character!.group ?? ""}
-                  onInputChange={(event, newInputValue) => {
-                    characterManager.actions.setGroup(newInputValue);
+                  render={([lazyGroup, setLazyGroup]) => {
+                    return (
+                      <Autocomplete
+                        freeSolo
+                        options={charactersManager.state.groups.filter((g) => {
+                          const currentGroup = lazyGroup?.toLowerCase() ?? "";
+                          return g.toLowerCase().includes(currentGroup);
+                        })}
+                        value={lazyGroup ?? ""}
+                        onChange={(event, newInputValue) => {
+                          setLazyGroup(newInputValue || undefined);
+                        }}
+                        inputValue={lazyGroup ?? ""}
+                        onInputChange={(event, newInputValue) => {
+                          setLazyGroup(newInputValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="standard"
+                            InputProps={{
+                              ...params.InputProps,
+                              disableUnderline: true,
+                              classes: {
+                                input: css({ paddingBottom: "0 !important" }),
+                              },
+                            }}
+                            data-cy={`character-dialog.group`}
+                            disabled={props.readonly}
+                            className={css({
+                              borderBottom: `1px solid ${theme.palette.divider}`,
+                            })}
+                          />
+                        )}
+                      />
+                    );
                   }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="standard"
-                      InputProps={{
-                        ...params.InputProps,
-                        disableUnderline: true,
-                        classes: {
-                          input: css({ paddingBottom: "0 !important" }),
-                        },
-                      }}
-                      data-cy={`character-dialog.group`}
-                      disabled={props.readonly}
-                      className={css({
-                        borderBottom: `1px solid ${theme.palette.divider}`,
-                      })}
-                    />
-                  )}
                 />
               </Grid>
             </Grid>

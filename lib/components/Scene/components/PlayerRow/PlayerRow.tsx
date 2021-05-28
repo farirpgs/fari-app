@@ -114,6 +114,9 @@ export function PlayerRow(
       <Box
         bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
         data-cy={props["data-cy"]}
+        onClick={() => {
+          setHover(true);
+        }}
         onPointerEnter={() => {
           setHover(true);
         }}
@@ -236,7 +239,7 @@ export function PlayerRow(
             <IconButton
               className={css({ padding: "0" })}
               color={hasCharacterSheet ? "default" : "primary"}
-              data-cy={`${props["data-cy"]}.swap--character-sheet`}
+              data-cy={`${props["data-cy"]}.swap-character-sheet`}
               onClick={() => {
                 handleOnLoadCharacterSheet();
               }}

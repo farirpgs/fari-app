@@ -115,6 +115,9 @@ export const IndexCard: React.FC<
         pb={props.readonly ? "1rem" : "0"}
         bgcolor={paper.bgColor}
         color={paper.primary}
+        onClick={() => {
+          setHover(true);
+        }}
         onPointerEnter={() => {
           setHover(true);
         }}
@@ -498,9 +501,8 @@ export const IndexCard: React.FC<
                                 >
                                   <DragIndicatorIcon
                                     className={css({
-                                      transition: theme.transitions.create(
-                                        "color"
-                                      ),
+                                      transition:
+                                        theme.transitions.create("color"),
                                     })}
                                     htmlColor={
                                       dndRenderProps.isOver
@@ -618,9 +620,8 @@ export const IndexCard: React.FC<
                         },
                       ];
 
-                      const result = diceManager.actions.roll(
-                        commandOptionList
-                      );
+                      const result =
+                        diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
                   >

@@ -4,7 +4,6 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { getUnix } from "../../domains/dayjs/getDayJS";
-import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { IIndexCard, IIndexCardType, IScene } from "./IScene";
 
@@ -85,13 +84,10 @@ export function useScene() {
     }
   }
 
-  function cloneAndLoadNewScene(newScene: IScene) {
-    if (newScene) {
-      const clonedNewScene = produce(newScene, (draft) => {
-        draft.id = Id.generate();
-      });
-      loadScene(clonedNewScene, true);
-      forceDirty();
+  function cloneAndLoadNewScene(sceneToClone: IScene) {
+    if (sceneToClone) {
+      const clonedNewScene = scenesManager.actions.duplicate(sceneToClone.id);
+      loadScene(clonedNewScene as IScene, true);
     }
   }
 

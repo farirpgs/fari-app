@@ -17,10 +17,7 @@ export const PlayOfflineRoute: React.FC<{
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
 
-  const sceneManager = useScene({
-    userId: userId,
-    charactersManager: charactersManager,
-  });
+  const sceneManager = useScene();
   const sessionManager = useSession({
     userId: userId,
     charactersManager: charactersManager,

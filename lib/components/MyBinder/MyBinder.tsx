@@ -28,7 +28,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import { arraySort } from "../../domains/array/arraySort";
-import { useLazyState } from "../../hooks/useLazyState/useLazyState";
+import { LazyState, useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
 import { AppLink } from "../AppLink/AppLink";
@@ -51,30 +51,6 @@ enum Where {
   Folders,
   Folder,
   Search,
-}
-
-export function MyBinderInput(props: {
-  search: string;
-  placeholder: string;
-  onChange(newSearch: string): void;
-}) {
-  const [searchValue, setSearchValue] = useLazyState({
-    value: props.search,
-    delay: 500,
-    onChange: props.onChange,
-  });
-
-  return (
-    <InputBase
-      placeholder={props.placeholder}
-      autoFocus
-      value={searchValue}
-      fullWidth
-      onChange={(e) => {
-        setSearchValue(e.target.value);
-      }}
-    />
-  );
 }
 
 export function MyBinder<TFolders extends string>(props: {
@@ -118,9 +94,8 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] = useState<
-    { folder: TFolders; element: any } | undefined
-  >(undefined);
+  const [deletedObject, setDeletedObject] =
+    useState<{ folder: TFolders; element: any } | undefined>(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -207,16 +182,29 @@ export function MyBinder<TFolders extends string>(props: {
                   </Box>
                 </Grid>
                 <Grid item xs>
-                  <MyBinderInput
-                    search={search}
+                  <LazyState
+                    value={search}
                     onChange={(newSearch) => {
                       setSearch(newSearch);
                     }}
-                    placeholder={
-                      folder
-                        ? `Search in "${currentFolderLabel}"...`
-                        : "Search..."
-                    }
+                    delay={500}
+                    render={([lazySearch, setLazySearch]) => {
+                      return (
+                        <InputBase
+                          placeholder={
+                            folder
+                              ? `Search in "${currentFolderLabel}"...`
+                              : "Search..."
+                          }
+                          autoFocus
+                          value={lazySearch}
+                          fullWidth
+                          onChange={(e) => {
+                            setLazySearch(e.target.value);
+                          }}
+                        />
+                      );
+                    }}
                   />
                 </Grid>
                 <Grid item>
@@ -271,6 +259,7 @@ export function MyBinder<TFolders extends string>(props: {
               <ListItem
                 key={key}
                 button
+                data-cy={`my-binder.folders.${name}`}
                 onClick={() => {
                   setFolder(name);
                 }}
@@ -311,6 +300,7 @@ export function MyBinder<TFolders extends string>(props: {
                   variant="outlined"
                   color="primary"
                   size="small"
+                  data-cy={`my-binder.folders.${currentFolder}.new`}
                   onClick={() => {
                     props.onAdd(currentFolder);
                   }}
@@ -322,6 +312,7 @@ export function MyBinder<TFolders extends string>(props: {
                 <Button
                   variant="outlined"
                   color="primary"
+                  data-cy={`my-binder.folders.${currentFolder}.import`}
                   size="small"
                   component="label"
                 >
@@ -554,6 +545,7 @@ function Element(props: {
   const backgroundColor = listItem.getColor(props.element.name);
   const color = theme.palette.getContrastText(backgroundColor);
   const [hover, setHover] = useState(false);
+
   const iconButtonClassName = css({
     transition: theme.transitions.create(["color"], {
       duration: theme.transitions.duration.shortest,
@@ -599,7 +591,7 @@ function Element(props: {
           <Grid item>
             <IconButton
               size="small"
-              data-cy="manager.export"
+              data-cy={`my-binder.element.${props.element.name}.export`}
               className={iconButtonClassName}
               onPointerEnter={() => {
                 setHover(true);
@@ -618,7 +610,7 @@ function Element(props: {
           <Grid item>
             <IconButton
               size="small"
-              data-cy="manager.duplicate"
+              data-cy={`my-binder.element.${props.element.name}.duplicate`}
               className={iconButtonClassName}
               onPointerEnter={() => {
                 setHover(true);
@@ -637,7 +629,7 @@ function Element(props: {
           <Grid item>
             <IconButton
               size="small"
-              data-cy="manager.delete"
+              data-cy={`my-binder.element.${props.element.name}.delete`}
               className={iconButtonClassName}
               onPointerEnter={() => {
                 setHover(true);

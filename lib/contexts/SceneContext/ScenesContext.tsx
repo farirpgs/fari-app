@@ -1,7 +1,6 @@
 import React from "react";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
@@ -70,19 +69,15 @@ export function useScenes(props?: { localStorage: Storage }) {
   }
 
   function duplicate(id: string | undefined) {
+    const match = scenes.find((c) => c.id === id);
+    if (!match) {
+      return;
+    }
+    const newScene = SceneFactory.duplicate(match);
     setScenes((draft: Array<IScene>) => {
-      const match = draft.find((c) => c.id === id);
-
-      return [
-        ...draft,
-        {
-          ...match,
-          id: Id.generate(),
-          lastUpdated: getUnix(),
-          name: `${match?.name} Copy`,
-        } as IScene,
-      ];
+      return [...draft, newScene];
     });
+    return newScene;
   }
 
   function importEntity(sceneFile: FileList | null) {

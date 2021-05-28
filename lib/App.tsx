@@ -83,16 +83,6 @@ function MyBinderManager() {
   };
 
   const folders: Record<IFolders, Array<IManagerViewModel>> = {
-    scenes: scenesManager.state.scenes.map(
-      (s): IManagerViewModel => ({
-        id: s.id,
-        group: s.group,
-        name: previewContentEditable({ value: s.name }),
-        lastUpdated: s.lastUpdated,
-        type: "scenes",
-        original: s,
-      })
-    ),
     characters: charactersManager.state.characters.map(
       (c): IManagerViewModel => ({
         id: c.id,
@@ -101,6 +91,16 @@ function MyBinderManager() {
         lastUpdated: c.lastUpdated,
         type: "characters",
         original: c,
+      })
+    ),
+    scenes: scenesManager.state.scenes.map(
+      (s): IManagerViewModel => ({
+        id: s.id,
+        group: s.group,
+        name: previewContentEditable({ value: s.name }),
+        lastUpdated: s.lastUpdated,
+        type: "scenes",
+        original: s,
       })
     ),
   };
@@ -116,6 +116,7 @@ function MyBinderManager() {
         } else {
           history.push(`/characters/${newCharacter.id}`);
         }
+        myBinderManager.actions.close();
       },
       onSelect(element) {
         if (myBinderManager.state.managerCallback.current) {
@@ -123,6 +124,7 @@ function MyBinderManager() {
         } else {
           history.push(`/characters/${element.id}`);
         }
+        myBinderManager.actions.close();
       },
       onDelete(element) {
         charactersManager.actions.remove(element.id);
@@ -144,10 +146,11 @@ function MyBinderManager() {
       onAdd() {
         const newScene = scenesManager.actions.add();
         if (myBinderManager.state.managerCallback.current) {
-          myBinderManager.state.managerCallback.current(newScene.id);
+          myBinderManager.state.managerCallback.current(newScene);
         } else {
           history.push(`/scenes/${newScene.id}`);
         }
+        myBinderManager.actions.close();
       },
       onSelect(element) {
         if (myBinderManager.state.managerCallback.current) {
@@ -155,6 +158,7 @@ function MyBinderManager() {
         } else {
           history.push(`/scenes/${element.id}`);
         }
+        myBinderManager.actions.close();
       },
       onDelete(element) {
         scenesManager.actions.remove(element.id);
@@ -186,11 +190,9 @@ function MyBinderManager() {
       folders={folders}
       onSelect={(folder, element) => {
         handler[folder].onSelect(element);
-        myBinderManager.actions.close();
       }}
       onAdd={(folder) => {
         handler[folder].onAdd();
-        myBinderManager.actions.close();
       }}
       onDelete={(folder, element) => {
         handler[folder].onDelete(element);
@@ -203,7 +205,6 @@ function MyBinderManager() {
       }}
       onImport={(folder, importPaths) => {
         handler[folder].onImport(importPaths);
-        myBinderManager.actions.close();
       }}
       onExport={(folder, element) => {
         handler[folder].onExport(element);
