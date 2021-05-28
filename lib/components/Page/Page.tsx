@@ -36,6 +36,7 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
+import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
 import { Patreon } from "../Patreon/Patreon";
@@ -384,7 +385,7 @@ export const Page: React.FC<{
                 />
               </RouterLink>
               {isLive && (
-                <Box>
+                <Box pr="1.25rem">
                   <Grid container alignItems="center" spacing={3} wrap="nowrap">
                     <Grid item>
                       {props.live === LiveMode.Connecting && (
@@ -397,7 +398,7 @@ export const Page: React.FC<{
                     <Grid item>
                       <Box maxWidth="150px">
                         <Typography variant="subtitle1" noWrap>
-                          {/*  */}
+                          {previewContentEditable({ value: props.liveLabel })}
                         </Typography>
                       </Box>
                     </Grid>

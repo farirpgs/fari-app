@@ -1,7 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { getUnix } from "../../../domains/dayjs/getDayJS";
-import { IScene } from "../../../hooks/useScene/IScene";
-import { defaultSceneName, useScenes } from "../ScenesContext";
+import { defaultSceneName, ISavableScene, useScenes } from "../ScenesContext";
 
 describe("useScenes", () => {
   describe("local storage load", () => {
@@ -51,7 +49,7 @@ describe("useScenes", () => {
         return useScenes({ localStorage: localStorage as any });
       });
       // WHEN I add a new scene
-      let newScene: IScene | undefined = undefined;
+      let newScene: ISavableScene | undefined = undefined;
       act(() => {
         newScene = result.current.actions.add();
       });
@@ -101,12 +99,11 @@ describe("useScenes", () => {
         }}]`
       );
 
-      let playingScene: IScene | undefined = undefined;
+      let playingScene: ISavableScene | undefined = undefined;
       act(() => {
         // WHEN I save a scene I'm already playing
         playingScene = result.current.actions.upsert({
           id: "an id from a live session",
-          lastUpdated: getUnix(),
         } as any);
       });
       // THEN the new scene has been added and is properly sorted
@@ -121,8 +118,6 @@ describe("useScenes", () => {
           name: undefined,
         },
         {
-          notes: undefined,
-          group: undefined,
           indexCards: { public: [], private: [] },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,

@@ -1,30 +1,30 @@
 import React, { useContext, useEffect } from "react";
-import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { SceneMode, Session } from "../../components/Scene/Scene";
+import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { useScene } from "../../hooks/useScene/useScene";
-import { useSession } from "../../hooks/useScene/useSession";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
+import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { useUserId } from "../../hooks/useUserId/useUserId";
 
 export const PlayOfflineRoute: React.FC<{
   match: {
-    params: { id?: string };
+    params: { id: string };
   };
 }> = () => {
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
+  const scenesManager = useContext(ScenesContext);
 
-  const sceneManager = useScene();
-  const sessionManager = useSession({
+  const sceneManager = useScene({
     userId: userId,
     charactersManager: charactersManager,
   });
-  const sceneName = sceneManager.state.scene?.name ?? "";
-  const pageTitle = previewContentEditable({ value: sceneName });
-
+  const myBinderManager = useContext(MyBinderContext);
+  const sceneName = sceneManager.state.scene.name;
+  const pageTitle = sanitizeSceneName(sceneName);
   const logger = useLogger();
 
   useEffect(() => {
@@ -39,10 +39,12 @@ export const PlayOfflineRoute: React.FC<{
         title={pageTitle || t("home-route.play-offline.title")}
         description={t("home-route.play-offline.description")}
       />
-      <Session
+      <Scene
         mode={SceneMode.PlayOffline}
-        sessionManager={sessionManager}
         sceneManager={sceneManager}
+        scenesManager={scenesManager}
+        charactersManager={charactersManager}
+        myBinderManager={myBinderManager}
       />
     </>
   );

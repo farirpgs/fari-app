@@ -39,8 +39,8 @@ import {
 } from "../../../DiceBox/DiceBox";
 import { FateLabel } from "../../../FateLabel/FateLabel";
 
-export function PlayerRow(
-  props: {
+export const PlayerRow: React.FC<
+  {
     permissions: {
       canRoll: boolean;
       canUpdatePoints: boolean;
@@ -51,7 +51,7 @@ export function PlayerRow(
     };
     player: IPlayer;
     isMe: boolean;
-    children?: JSX.Element;
+    number: number;
     onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
@@ -61,7 +61,7 @@ export function PlayerRow(
     onAssignOriginalCharacterSheet(): void;
     onAssignDuplicateCharacterSheet(): void;
   } & IDataCyProps
-) {
+> = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
@@ -114,9 +114,6 @@ export function PlayerRow(
       <Box
         bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
         data-cy={props["data-cy"]}
-        onClick={() => {
-          setHover(true);
-        }}
         onPointerEnter={() => {
           setHover(true);
         }}
@@ -138,10 +135,7 @@ export function PlayerRow(
           <Box mb=".5rem">
             <Box pb=".5rem">{renderDice()}</Box>
             <Box pb=".5rem">{renderPointCounter()}</Box>
-            <Box pb={props.children ? ".5rem" : undefined}>
-              {renderControls()}
-            </Box>
-            {props.children}
+            <Box>{renderControls()}</Box>
           </Box>
         </Box>
       </Box>
@@ -239,7 +233,7 @@ export function PlayerRow(
             <IconButton
               className={css({ padding: "0" })}
               color={hasCharacterSheet ? "default" : "primary"}
-              data-cy={`${props["data-cy"]}.swap-character-sheet`}
+              data-cy={`${props["data-cy"]}.swap--character-sheet`}
               onClick={() => {
                 handleOnLoadCharacterSheet();
               }}
@@ -462,7 +456,7 @@ export function PlayerRow(
                   hasCharacterSheet
                     ? t("player-row.open-character-sheet")
                     : props.permissions.canLoadCharacterSheet
-                    ? t("play-route.assign-character-sheet")
+                    ? t("play-route.add-character-sheet")
                     : ""
                 }
               >
@@ -576,5 +570,5 @@ export function PlayerRow(
       </Dialog>
     );
   }
-}
+};
 PlayerRow.displayName = "PlayerRow";

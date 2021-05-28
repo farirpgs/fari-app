@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { DataGrid, GridRowId } from "@material-ui/data-grid";
+import { DataGrid, RowId } from "@material-ui/data-grid";
 import produce from "immer";
 import uniq from "lodash/uniq";
 import React, { useContext, useMemo, useRef, useState } from "react";
@@ -20,7 +20,10 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SplitButton } from "../../components/SplitButton/SplitButton";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import {
+  ISavableScene,
+  ScenesContext,
+} from "../../contexts/SceneContext/ScenesContext";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
@@ -28,7 +31,6 @@ import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
-import { IScene } from "../../hooks/useScene/IScene";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -63,7 +65,7 @@ export const DataRoute: React.FC = () => {
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
 
-  const [selections, setSelection] = useState<Array<GridRowId>>([]);
+  const [selections, setSelection] = useState<Array<RowId>>([]);
   const $importInput = useRef<any>();
   const $importAndDuplicateInput = useRef<any>();
   const [filters, setFilters] = useState({ group: "", search: "", type: "" });
@@ -145,9 +147,8 @@ export const DataRoute: React.FC = () => {
         }
         return r.name.toLowerCase().includes(filters.search.toLowerCase());
       });
-    const allRowsSize = FariEntity.getSize(
-      allRows.map((r) => r.entity)
-    ).kiloBytes;
+    const allRowsSize = FariEntity.getSize(allRows.map((r) => r.entity))
+      .kiloBytes;
 
     return {
       filteredRows: filteredRows,
@@ -187,7 +188,7 @@ export const DataRoute: React.FC = () => {
     mode: ImportMode
   ) {
     FariEntity.import<{
-      scenes: Array<IScene>;
+      scenes: Array<ISavableScene>;
       characters: Array<ICharacter>;
     }>({
       filesToImport: fileToImport,
@@ -208,7 +209,7 @@ export const DataRoute: React.FC = () => {
         importCharacter(character, mode);
       },
     });
-    FariEntity.import<IScene>({
+    FariEntity.import<ISavableScene>({
       filesToImport: fileToImport,
       fariType: "scene",
       onImport: (scene) => {
@@ -217,7 +218,7 @@ export const DataRoute: React.FC = () => {
     });
   }
 
-  function importScene(scene: IScene, mode: ImportMode) {
+  function importScene(scene: ISavableScene, mode: ImportMode) {
     const sceneToUse =
       mode === ImportMode.Import
         ? scene
@@ -433,8 +434,8 @@ export const DataRoute: React.FC = () => {
                 autoPageSize
                 pagination
                 checkboxSelection
-                onSelectionModelChange={(newSelection) => {
-                  setSelection(newSelection.selectionModel);
+                onSelectionChange={(newSelection) => {
+                  setSelection(newSelection.rowIds);
                 }}
                 columns={[
                   {

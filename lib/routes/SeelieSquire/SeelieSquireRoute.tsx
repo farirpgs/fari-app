@@ -12,7 +12,7 @@ import {
 } from "./domains/ICreature";
 
 export const SeelieSquireRoute: React.FC<{
-  page: string | undefined;
+  page: string;
 }> = (props) => {
   const theme = useTheme();
   const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));

@@ -14,9 +14,8 @@
   - [ ] TEST
 - [ ] GM characters sub section
 - [ ] update dependencies
-- [x] get rid of yarn
+- [ ] get rid of yarn
 - [ ] SESSION VS Scene
-- [ ] player edit index cards
 
 
 # NEXT
@@ -24,7 +23,7 @@
 - [ ] custom dice commands ?
 -->
 
-# [Fari](https://fari.app) - Play Table-Top RPGs Online Without the Headache
+# [Fari](https://fari.app) - The best Fate RPG companion application
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -56,7 +55,7 @@ If you want to make a contribution to Fari, you will need to clone this repo and
 
 ### Prerequisites
 
-- Install Node `^16.2.0` (to match engine property in `package.json`)
+- Install Node `^14.16.1` (to match engine property in `package.json`)
 
 ### Installation
 

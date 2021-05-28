@@ -7,7 +7,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import FaceIcon from "@material-ui/icons/Face";
+import PersonIcon from "@material-ui/icons/Person";
 import React, { useContext } from "react";
 import { DiceContext } from "../../../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
@@ -133,7 +133,7 @@ export const CharacterCard: React.FC<{
                             logger.info("CharacterCard:onCharacterDialogOpen");
                           }}
                         >
-                          <FaceIcon
+                          <PersonIcon
                             className={css({
                               width: "1.5rem",
                               height: "1.5rem",
@@ -277,8 +277,9 @@ export const CharacterCard: React.FC<{
               return;
             }
 
-            const commandOptionList =
-              BlockSelectors.getDiceCommandOptionsFromBlock(block);
+            const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
+              block
+            );
             diceManager.actions.setOptions({ listResults: true });
             diceManager.actions.addOrRemovePoolElement({
               blockId: block.id,
@@ -292,8 +293,9 @@ export const CharacterCard: React.FC<{
               return;
             }
 
-            const commandOptionList =
-              BlockSelectors.getDiceCommandOptionsFromBlock(block);
+            const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
+              block
+            );
 
             const diceRollResult = diceManager.actions.roll(commandOptionList, {
               listResults: false,

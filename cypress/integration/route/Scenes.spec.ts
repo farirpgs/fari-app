@@ -7,9 +7,8 @@ describe("/scenes", () => {
       cy.visit("/");
 
       // new scene
-      Fari.get("page.menu.my-binder").click();
-      Fari.get("my-binder.folders.scenes").click();
-      Fari.get("my-binder.folders.scenes.new").click();
+      Fari.get("page.menu.scenes").click();
+      Fari.get("manager.new").click();
 
       // set fields
       Fari.get("scene.name").type("Ba Sing Se");
@@ -43,9 +42,8 @@ describe("/scenes", () => {
       cy.title().should("eq", "Ba Sing Se | Fari");
 
       // delete
-      Fari.get("page.menu.my-binder").click();
-      Fari.get("my-binder.folders.scenes").click();
-      Fari.get("my-binder.element.Ba Sing Se.delete").first().click();
+      Fari.get("page.menu.scenes").click();
+      Fari.get("manager.delete").click();
 
       cy.contains("Avatar").should("not.exist");
       cy.contains("Ba Sing Se").should("not.exist");
@@ -59,9 +57,8 @@ describe("/scenes", () => {
       cy.contains("Ba Sing Se").click();
 
       // new scene
-      Fari.get("page.menu.my-binder").click();
-      Fari.get("my-binder.folders.scenes").click();
-      Fari.get("my-binder.folders.scenes.new").click();
+      Fari.get("page.menu.scenes").click();
+      Fari.get("manager.new").click();
 
       // add badguy and pin it
       Fari.get("scene.add-bad-guy").click();
@@ -78,9 +75,7 @@ describe("/scenes", () => {
       cy.title().should("eq", "Lower Ring | Fari");
 
       // test menu
-      Fari.get("page.menu.my-binder").click();
-      Fari.get("my-binder.folders.scenes").click();
-
+      Fari.get("page.menu.scenes").click();
       cy.contains("Avatar");
       cy.contains("Ba Sing Se");
       cy.contains("Lower Ring");

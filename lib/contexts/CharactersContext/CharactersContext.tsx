@@ -1,3 +1,4 @@
+import produce from "immer";
 import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
@@ -45,7 +46,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       } else {
         return prev.map((c) => {
           if (c.id === character.id) {
-            return { ...character, lastUpdated: getUnix() };
+            return character;
           }
           return c;
         });
@@ -96,16 +97,14 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }
 
   function duplicate(id: string | undefined) {
-    const match = characters.find((s) => s.id === id);
-    if (!match) {
-      return;
-    }
-
-    const newCharacter = CharacterFactory.duplicate(match);
     setCharacters((draft: Array<ICharacter>) => {
-      return [...draft, newCharacter];
+      const match = draft.find((s) => s.id === id);
+
+      if (match) {
+        return [...draft, CharacterFactory.duplicate(match)];
+      }
+      return draft;
     });
-    return newCharacter;
   }
 
   function isInStorage(id: string | undefined) {
@@ -118,7 +117,13 @@ export function useCharacters(props?: { localStorage: Storage }) {
       fariType: "character",
       onImport: (characterToImport) => {
         const migratedCharacter = CharacterFactory.migrate(characterToImport);
-        upsert(migratedCharacter);
+        const characterWithNewTimestamp = produce(
+          migratedCharacter,
+          (draft: ICharacter) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        upsert(characterWithNewTimestamp);
 
         // logger.info("CharactersManager:onImport");
       },

@@ -34,7 +34,7 @@ export const Fari = {
     cy.get(".MuiPopover-root").eq(0).click();
   },
   closeDrawer() {
-    cy.get(".MuiBackdrop-root").eq(0).click({ force: true });
+    cy.get(".MuiBackdrop-root").eq(0).click();
   },
   toggleDarkMode() {
     Fari.get("page.toggle-dark-mode").click();

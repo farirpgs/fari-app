@@ -1,14 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { SceneMode, Session } from "../../components/Scene/Scene";
+import { Scene, SceneMode } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { useScene } from "../../hooks/useScene/useScene";
-import { useSession } from "../../hooks/useScene/useSession";
+import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
 import { useUserId } from "../../hooks/useUserId/useUserId";
 
 export const SceneRoute: React.FC<{
@@ -19,13 +17,12 @@ export const SceneRoute: React.FC<{
   const userId = useUserId();
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
-  const sceneManager = useScene();
-  const sceneName = sceneManager.state.scene?.name ?? "";
-  const sessionManager = useSession({
+  const sceneManager = useScene({
     userId: userId,
     charactersManager: charactersManager,
   });
-  const pageTitle = previewContentEditable({ value: sceneName });
+  const sceneName = sceneManager.state.scene.name;
+  const pageTitle = sanitizeSceneName(sceneName);
   const history = useHistory();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
@@ -50,10 +47,12 @@ export const SceneRoute: React.FC<{
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Session
+      <Scene
         mode={SceneMode.Manage}
-        sessionManager={sessionManager}
         sceneManager={sceneManager}
+        scenesManager={scenesManager}
+        charactersManager={charactersManager}
+        myBinderManager={myBinderManager}
       />
     </>
   );

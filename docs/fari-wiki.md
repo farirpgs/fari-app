@@ -23,25 +23,23 @@ To start a new game session, Fari offers you the following two options:
 
 ### Online
 
-When you click on the `Play Online` button on the home page, Fari will create a temporary space for you that we call a `Session` where you are the host and owner.
+When you play online, Fari will open a new connection with a server to authenticate you and then give you access to a unique link that you can send to your friends.
 
-When a session is started, Fari gives you access to a `Session Link` that you can send to your friends so that they can join your `Session`.
+Sharing that link with people will give them access to your game
 
 ![Copying a Game Link](https://gyazo.com/d00cf8bf9b69416ccc5e29c5539ce719.png)
 
-After you sent your players the session link, they can enter their name and joined a game, every modification that you do the Session, Scene or Character will be synced with all the players.
+After they entered their name and joined a game, every modification that you do the game will be synced with all the players using something called `peer to peer communication` using the `WebRTC` protocol.
+
+The data that is synced includes things like the index card, the drawing pad and even dice rolls.
 
 ![Joining a Game](https://gyazo.com/c3c4a71bfc268c8739a016a07756f122.png)
-
-> #### How does Fari sync my data with my players ?
->
-> Fari relies on something called `peer to peer communication` using the `WebRTC` protocol.
 
 ### Offline
 
 The Offline mode is useful if everyone are physically in the same room but the GM still wants to use Fari to manage their Scenes.
 
-When playing in Offline mode, Fari won't connect to its server and won't generate the session link cited above.
+When playing in Offline mode, Fari won't connect to its server and won't generate the unique link cited above. It will instead just store everything locally in a temporary manner.
 
 This mode is also useful if for some reasons, some of your players can't connect to your Online game session and you want to share your screen with them. See more about connection issues below.
 

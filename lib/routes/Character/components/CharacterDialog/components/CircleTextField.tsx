@@ -48,7 +48,6 @@ export function CircleTextField(props: {
         if (props.button) {
           props.onClick?.(e);
         }
-        setHover(true);
       }}
       onContextMenu={(e) => {
         if (props.button) {
