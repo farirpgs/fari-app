@@ -357,7 +357,7 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     loadFunction: DocImport.Changelog,
   },
   {
-    url: "/srds/pt-br/condensed",
+    url: "/pt-br/srds/condensed",
     parent: { title: "SRDs", url: "/srds" },
     title: "Fate Condensado",
     imageUrl: Images.condensed,
