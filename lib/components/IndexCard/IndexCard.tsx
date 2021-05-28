@@ -102,7 +102,11 @@ export const IndexCard: React.FC<
     xs: 1,
   });
 
-  const paper = useTextColors(indexCardManager.state.indexCard.color);
+  const paper = useTextColors(
+    theme.palette.type === "light"
+      ? indexCardManager.state.indexCard.color
+      : darken(indexCardManager.state.indexCard.color, 0.2)
+  );
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
 
@@ -494,9 +498,8 @@ export const IndexCard: React.FC<
                                 >
                                   <DragIndicatorIcon
                                     className={css({
-                                      transition: theme.transitions.create(
-                                        "color"
-                                      ),
+                                      transition:
+                                        theme.transitions.create("color"),
                                     })}
                                     htmlColor={
                                       dndRenderProps.isOver
@@ -614,9 +617,8 @@ export const IndexCard: React.FC<
                         },
                       ];
 
-                      const result = diceManager.actions.roll(
-                        commandOptionList
-                      );
+                      const result =
+                        diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
                   >
