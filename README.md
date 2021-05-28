@@ -1,29 +1,3 @@
-<!--
-# WHAT
-
-- [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
-
-# TODO
-
-- [x] new Drawer
-  - [ ] TEST
-- [ ] new Navigation
-- [x] Cross tab
-- [ ] new player row: https://xd.adobe.com/view/13659674-c494-4de6-a734-01fdc60959c9-4636/
-- [x] sync storage between tabs
-  - [ ] TEST
-- [ ] GM characters sub section
-- [ ] update dependencies
-- [x] get rid of yarn
-- [ ] SESSION VS Scene
-- [ ] player edit index cards
-
-
-# NEXT
-- [ ] Genesys dice
-- [ ] custom dice commands ?
--->
-
 # [Fari](https://fari.app) - Play Table-Top RPGs Online Without the Headache
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
