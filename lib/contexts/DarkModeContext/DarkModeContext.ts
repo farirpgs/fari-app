@@ -1,24 +1,51 @@
-import React, { useEffect, useState } from "react";
+import produce from "immer";
+import React, { useState } from "react";
+import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
-const key = "prefers-dark-mode";
+type IThemeMode = "dark" | "light";
 
-export function useDarkMode() {
-  const prefersDarkThemeFromStorage =
-    localStorage?.getItem(key) === "true" ?? false;
-  const [darkMode, setDarkMode] = useState(prefersDarkThemeFromStorage);
-  const [temporaryDarkMode, setDarkModeTemporarily] = useState<boolean>();
+type ISettings = {
+  themeMode: IThemeMode;
+};
 
-  useEffect(() => {
-    localStorage?.setItem(key, darkMode.toString());
-  }, [darkMode]);
+const oldDarkThemeLocalStorageKey = "prefers-dark-mode";
+const oldDarkThemeLocalStorageValue =
+  localStorage?.getItem(oldDarkThemeLocalStorageKey) === "true";
 
-  const isDark = temporaryDarkMode ?? darkMode;
+export function useSettings() {
+  const [temporaryThemeMode, setThemeModeTemporarily] = useState<IThemeMode>();
+
+  const [settings, setSettings] = useStorageEntity<ISettings>({
+    defaulValue: {
+      themeMode: oldDarkThemeLocalStorageValue ? "dark" : "light",
+    },
+    key: "fari-settings",
+    localStorage: window.localStorage,
+  });
+
+  function setThemeMode(mode: IThemeMode) {
+    setSettings(
+      produce((draft: ISettings) => {
+        draft.themeMode = mode;
+      })
+    );
+  }
+
+  function toggleThemeMode() {
+    setSettings(
+      produce((draft: ISettings) => {
+        draft.themeMode = draft.themeMode === "light" ? "dark" : "light";
+      })
+    );
+  }
+
+  const themeMode = temporaryThemeMode ?? settings.themeMode;
   return {
-    state: { darkMode: isDark },
-    actions: { setDarkMode, setDarkModeTemporarily },
+    state: { themeMode },
+    actions: { setThemeMode, toggleThemeMode, setThemeModeTemporarily },
   };
 }
 
-export const DarkModeContext = React.createContext<
-  ReturnType<typeof useDarkMode>
+export const SettingsContext = React.createContext<
+  ReturnType<typeof useSettings>
 >(undefined as any);

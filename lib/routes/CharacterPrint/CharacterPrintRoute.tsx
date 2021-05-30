@@ -9,7 +9,7 @@ import { previewContentEditable } from "../../components/ContentEditable/Content
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import { SettingsContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ICharacter, ISection } from "../../domains/character/types";
@@ -25,7 +25,7 @@ export const CharacterPrintRoute: React.FC<{
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
-  const darkModeManager = useContext(DarkModeContext);
+  const settingsManager = useContext(SettingsContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
   const myBinderManager = useContext(MyBinderContext);
   const logger = useLogger();
@@ -38,10 +38,8 @@ export const CharacterPrintRoute: React.FC<{
     if (!devMode) {
       window.print();
     }
-    const isDark = darkModeManager.state.darkMode;
-    if (isDark) {
-      darkModeManager.actions.setDarkModeTemporarily(false);
-    }
+
+    settingsManager.actions.setThemeModeTemporarily("light");
   }, []);
 
   useEffect(() => {

@@ -17,8 +17,8 @@ import {
   useCharacters,
 } from "./contexts/CharactersContext/CharactersContext";
 import {
-  DarkModeContext,
-  useDarkMode,
+  SettingsContext,
+  useSettings,
 } from "./contexts/DarkModeContext/DarkModeContext";
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
@@ -43,7 +43,7 @@ export function App() {
 }
 
 function AppContexts(props: { children: ReactNode }) {
-  const darkModeManager = useDarkMode();
+  const settingsManager = useSettings();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const diceManager = useDice();
@@ -51,7 +51,7 @@ function AppContexts(props: { children: ReactNode }) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <DarkModeContext.Provider value={darkModeManager}>
+      <SettingsContext.Provider value={settingsManager}>
         <CharactersContext.Provider value={charactersManager}>
           <ScenesContext.Provider value={scenesManager}>
             <DiceContext.Provider value={diceManager}>
@@ -61,7 +61,7 @@ function AppContexts(props: { children: ReactNode }) {
             </DiceContext.Provider>
           </ScenesContext.Provider>
         </CharactersContext.Provider>
-      </DarkModeContext.Provider>
+      </SettingsContext.Provider>
     </DndProvider>
   );
 }
@@ -214,10 +214,12 @@ function MyBinderManager() {
 }
 
 function AppProviders(props: { children: ReactNode }) {
-  const store = useContext(DarkModeContext);
+  const store = useContext(SettingsContext);
 
   return (
-    <ThemeProvider theme={store.state.darkMode ? AppDarkTheme : AppLightTheme}>
+    <ThemeProvider
+      theme={store.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
+    >
       <StylesProvider injectFirst>
         <CssBaseline />
         <Sentry.ErrorBoundary fallback={ErrorReport} showDialog>

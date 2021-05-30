@@ -10,8 +10,8 @@ import {
   useCharacters,
 } from "../lib/contexts/CharactersContext/CharactersContext";
 import {
-  DarkModeContext,
-  useDarkMode,
+  SettingsContext,
+  useSettings,
 } from "../lib/contexts/DarkModeContext/DarkModeContext";
 import { DiceContext, useDice } from "../lib/contexts/DiceContext/DiceContext";
 import {
@@ -28,28 +28,26 @@ export function StoryProvider(props: {
   children: JSX.Element;
   theme: "light" | "dark";
 }) {
-  const darkModeManager = useDarkMode();
+  const settingsManager = useSettings();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const diceManager = useDice();
 
   useEffect(() => {
-    if (props.theme === "dark") {
-      darkModeManager.actions.setDarkMode(true);
-    } else {
-      darkModeManager.actions.setDarkMode(false);
-    }
+    settingsManager.actions.setThemeMode(props.theme);
   }, [props.theme]);
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <DarkModeContext.Provider value={darkModeManager}>
+      <SettingsContext.Provider value={settingsManager}>
         <CharactersContext.Provider value={charactersManager}>
           <ScenesContext.Provider value={scenesManager}>
             <DiceContext.Provider value={diceManager}>
               <ThemeProvider
                 theme={
-                  darkModeManager.state.darkMode ? AppDarkTheme : AppLightTheme
+                  settingsManager.state.themeMode === "dark"
+                    ? AppDarkTheme
+                    : AppLightTheme
                 }
               >
                 <StylesProvider injectFirst>
@@ -62,7 +60,7 @@ export function StoryProvider(props: {
             </DiceContext.Provider>
           </ScenesContext.Provider>
         </CharactersContext.Provider>
-      </DarkModeContext.Provider>
+      </SettingsContext.Provider>
     </DndProvider>
   );
 }

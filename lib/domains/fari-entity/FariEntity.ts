@@ -48,15 +48,35 @@ export const FariEntity = {
     link.download = `${props.name}.fari.json`;
     link.click();
   },
+  loadEntityFromStorage<T>(props: {
+    defaultValue: T;
+    localStorage: Storage;
+    key: string;
+    migrationFunction?: (entity: any) => any;
+  }): T {
+    try {
+      const localStorageValue = props.localStorage.getItem(props.key);
+      if (localStorageValue) {
+        const parsed = JSON.parse(localStorageValue);
+        const migrated = props.migrationFunction?.(parsed) ?? parsed;
+        return migrated;
+      }
+    } catch (error) {
+      if (!process.env.IS_JEST) {
+        console.error(error);
+      }
+    }
+    return props.defaultValue;
+  },
   loadEntitiesFromStorage<T>(props: {
     localStorage: Storage;
     key: string;
     migrationFunction: (entity: any) => any;
   }): Array<T> {
     try {
-      const localStorageScenes = props.localStorage.getItem(props.key);
-      if (localStorageScenes) {
-        const parsed = JSON.parse(localStorageScenes);
+      const localStorageValue = props.localStorage.getItem(props.key);
+      if (localStorageValue) {
+        const parsed = JSON.parse(localStorageValue);
         const migrated = parsed.map(props.migrationFunction);
         return migrated;
       }

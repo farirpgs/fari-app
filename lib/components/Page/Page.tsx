@@ -29,7 +29,7 @@ import { Link as RouterLink } from "react-router-dom";
 import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
 import { useZIndex } from "../../constants/zIndex";
-import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import { SettingsContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
@@ -70,10 +70,9 @@ export const Page: React.FC<{
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n, currentLanguage } = useTranslate();
-  const darkModeManager = useContext(DarkModeContext);
 
   const myBinderManager = useContext(MyBinderContext);
-
+  const settingsManager = useContext(SettingsContext);
   const logger = useLogger();
   const zIndex = useZIndex();
 
@@ -555,17 +554,10 @@ export const Page: React.FC<{
             color="inherit"
             size="small"
             onClick={() => {
-              darkModeManager.actions.setDarkMode(
-                !darkModeManager.state.darkMode
-              );
-              if (darkModeManager.state.darkMode) {
-                logger.info("Page.toggleLightMode");
-              } else {
-                logger.info("Page.toggleDarkMode");
-              }
+              settingsManager.actions.toggleThemeMode();
             }}
           >
-            {darkModeManager.state.darkMode ? (
+            {settingsManager.state.themeMode === "dark" ? (
               <Brightness7Icon />
             ) : (
               <Brightness4Icon />
