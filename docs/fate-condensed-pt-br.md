@@ -521,15 +521,15 @@ Outras habilidades podem obter permissão para atacar ou defender em circunstân
 
 # Aspectos e Pontos de Destino
 
-Um **aspecto** é uma palavra ou frase que descreve algo especial sobre uma pessoa, lugar, coisa, situação ou grupo. Quase tudo em que você possa pensar pode ter aspectos. Uma pessoa pode ter a reputação de ser o Maior Atirador de Elite da Terra Deserta (veja abaixo mais informações sobre esses tipos de aspectos). Uma sala pode estar Em Chamas depois de você derrubar uma lamparina a óleo. Depois de um encontro com um monstro, você pode ficar Apavorado. Aspectos permitem que você mude a história de maneiras que vão de acordo com as tendências, habilidades ou problemas de seu personagem.
+Um **aspecto** é uma palavra ou frase que descreve algo especial sobre uma pessoa, lugar, coisa, situação ou grupo. Quase tudo em que você possa pensar pode ter aspectos. Uma pessoa pode ter a reputação de ser o **Maior Atirador de Elite da Terra Deserta** (veja abaixo mais informações sobre esses tipos de aspectos). Uma sala pode estar **Em Chamas** depois de você derrubar uma lamparina a óleo. Depois de um encontro com um monstro, você pode ficar **Apavorado**. Aspectos permitem que você mude a história de maneiras que vão de acordo com as tendências, habilidades ou problemas de seu personagem.
 
 ## Aspectos São Sempre Verdade
 
 Você pode invocar aspectos para conseguir um bônus em um rolamento (página XX) ou para impô-los para criar uma complicação (página XX). Mas mesmo quando não se trata de bônus ou de criar complicações, alguns aspectos ainda afetam a narrativa. Quando você tem aquela monstruosidade sanguinolenta presa Presa Em Uma Prensa Hidráulica, isso é verdade. Ela não vai poder fazer muita coisa enquanto estiver presa ali, e se soltar não vai ser nada fácil.
 
-Em essência, “aspectos são sempre verdade” significa que aspectos podem conceder ou retirar a permissão para o que pode acontecer na história (eles também podem afetar a dificuldade: consulte a página XX). Se a monstruosidade acima mencionada for Presa, o MJ (e todos os outros) tem que respeitar isso. A criatura perdeu a permissão para se mover até que algo aconteça que remova esse aspecto, seja uma ação de superar bem-sucedida (que por sua vez pode exigir um aspecto de justificação como Força Sobre-humana) ou até que alguém sem juízo abra a prensa. Da mesma forma, se você tem Pernas Ciberneticamente Aprimoradas, você provavelmente ganhou permissão para pular sobre muros em um único salto, sem nem mesmo ter que rolar.
+Em essência, “aspectos são sempre verdade” significa que **aspectos podem conceder ou retirar a permissão para o que pode acontecer na história** (eles também podem afetar a dificuldade: consulte a página XX). Se a monstruosidade acima mencionada for Presa, o MJ (e todos os outros) tem que respeitar isso. A criatura perdeu a permissão para se mover até que algo aconteça que remova esse aspecto, seja uma ação de superar bem-sucedida (que por sua vez pode exigir um aspecto de justificação como Força Sobre-humana) ou até que alguém sem juízo abra a prensa. Da mesma forma, se você tem Pernas Ciberneticamente Aprimoradas, você provavelmente ganhou permissão para pular sobre muros em um único salto, sem nem mesmo ter que rolar.
 
-Isso não quer dizer que você possa criar qualquer aspecto que queira e usar sua verdade de má fé. Aspectos concedem muito poder para moldar a história, sim, mas com esse poder vem a responsabilidade de jogar dentro dos limites da história. Os aspectos têm que se alinhar com o senso da mesa sobre o que realmente faz sentido. Se um aspecto não colar, ele precisa ser reformulado.
+Isso não quer dizer que você possa criar qualquer aspecto que queira e usar sua verdade de má fé. Aspectos concedem muito poder para moldar a história, sim, mas com esse poder vem a responsabilidade de jogar dentro dos limites da história. Os aspectos têm que se alinhar com o senso da mesa sobre o que realmente faz sentido. **Se um aspecto não colar, ele precisa ser reformulado**.
 
 Claro, você pode querer usar criar uma vantagem para infligir o aspecto Desmembrado naquele super-soldado fúngico, mas isso claramente invade o terreno da ação Atacar e, além disso, você precisa suar um pouco mais que isso para cortar fora o braço de alguém (pode funcionar como consequência, no entanto - consulte a próxima página). Você pode dizer que é o Melhor Atirador do Mundo, mas precisará comprovar isso com suas habilidades. E por mais que você queira se tornar À Prova de Balas, removendo a permissão para alguém usar armas de fogo leves para feri-lo, é improvável que isso convença alguém, a menos que o jogo que você está jogando envolva o uso de aspectos como superpoderes.
 
@@ -565,13 +565,13 @@ Exemplos: Na Mira; Distraído; Chão Instável
 
 ### Ganhar Pontos de Destino
 
-Uma maneira de ganhar pontos de destino é permitindo que os aspectos de seu personagem sejam impostos (página XX) contra você para complicar a situação ou tornar sua vida mais difícil. Você também pode obter uma compensação de pontos de destino se alguém usar seu aspecto contra você em uma invocação hostil (página XX) ou quando você conceder (página XX).
+Uma maneira de ganhar pontos de destino é permitindo que os aspectos de seu personagem sejam **impostos** (página XX) contra você para complicar a situação ou tornar sua vida mais difícil. Você também pode obter uma compensação de pontos de destino se alguém usar seu aspecto contra você em uma invocação hostil (página XX) ou quando você conceder (página XX).
 
 Lembre-se, a cada sessão, você também começa com pontos de destino pelo menos iguais à sua recarga. Se você foi imposto mais do que invocou na sessão anterior, começará a próxima sessão com alguns pontos a mais. Consulte a página XX para obter detalhes.
 
 ### Invocar
 
-Para desbloquear o verdadeiro poder dos aspectos e fazer proveito deles, você precisará gastar pontos de destino para invocá-los durante as jogadas de dados (página XX). Acompanhe sua quantidade de pontos de destino com moedas, contas de vidro, fichas de pôquer ou algum outro tipo de contador.
+Para desbloquear o verdadeiro poder dos aspectos e fazer proveito deles, você precisará gastar **pontos de destino** para invocá-los durante as jogadas de dados (página XX). Acompanhe sua quantidade de pontos de destino com moedas, contas de vidro, fichas de pôquer ou algum outro tipo de contador.
 
 Você também pode invocar aspectos gratuitamente, se tiver uma invocação gratuita sua ou de um aliado criando uma vantagem que você possa usar (página XX).
 
@@ -583,7 +583,7 @@ Ryan diz: “Então, estou tentando decifrar as runas e ...” (rola os dados, o
 
 #### Invocações Hostis
 
-Na maioria das vezes que um aspecto é invocado, é um aspecto de personagem ou um aspecto de situação. Às vezes, você invocará os aspectos de personagem dos inimigos contra eles. Isso é chamado de invocação hostil e funciona da mesma forma que invocar qualquer outro aspecto - pague um ponto de destino e obtenha um +2 em seu rolamento ou role os dados novamente. Há uma pequena diferença - quando você faz uma invocação hostil, você dá o ponto de destino ao inimigo. Mas eles não podem usar o ponto de destino até que a cena termine. Este pagamento só se aplica quando um ponto de destino é realmente gasto em uma invocação hostil. Invocações gratuitas não acionam um pagamento.
+Na maioria das vezes que um aspecto é invocado, é um aspecto de personagem ou um aspecto de situação. Às vezes, você invocará os aspectos de personagem dos inimigos contra eles. Isso é chamado de **invocação hostil** e funciona da mesma forma que invocar qualquer outro aspecto - pague um ponto de destino e obtenha um +2 em seu rolamento ou role os dados novamente. Há uma pequena diferença - **quando você faz uma invocação hostil, você dá o ponto de destino ao inimigo**. Mas eles não podem usar o ponto de destino até que a cena termine. Este pagamento só se aplica quando um ponto de destino é realmente gasto em uma invocação hostil. Invocações gratuitas não acionam um pagamento.
 
 #### Invocando para Declarar Detalhes da História
 
@@ -591,15 +591,15 @@ Você pode adicionar um detalhe importante ou improvável à história com base 
 
 ### Impor
 
-Os aspectos podem ser impostos para complicar a situação e ganhar pontos de destino. Para impor um aspecto, o MJ ou um jogador oferece um ponto de destino ao jogador que está sendo imposto e diz a ele por que um aspecto está tornando as coisas mais difíceis ou complicadas. Se você recusar a imposição, você deve gastar um de seus pontos de destino e descrever como seu personagem evita a complicação. Sim, isso significa que se você não tiver nenhum ponto de destino, não pode evitar ser imposto!
+Os aspectos podem ser **impostos** para complicar a situação e ganhar pontos de destino. Para impor um aspecto, o MJ ou um jogador oferece um ponto de destino ao jogador que está sendo imposto e diz a ele por que um aspecto está tornando as coisas mais difíceis ou complicadas. Se você recusar a imposição, você deve gastar um de seus pontos de destino e descrever como seu personagem evita a complicação. Sim, isso significa que se você não tiver nenhum ponto de destino, não pode evitar ser imposto!
 
-Qualquer aspecto pode ser imposto \- seja um aspecto do personagem, um aspecto de situação ou uma consequência - mas deve ser algo que afete o personagem que está sendo imposto.
+**Qualquer aspecto pode ser imposto**. seja um aspecto do personagem, um aspecto de situação ou uma consequência - mas deve ser algo que afete o personagem que está sendo imposto.
 
-Qualquer um pode oferecer uma imposição. O jogador que propõe uma imposição deve gastar um de seus próprios pontos de destino. O MJ então assume o desfecho da imposição para o alvo afetado. O MJ não perde um ponto de destino ao oferecer uma imposição - ele tem uma quantidade limitada de pontos de destino para invocar aspectos, mas pode impor o quanto quiser.
+**Qualquer um pode oferecer uma imposição.** O jogador que propõe uma imposição deve gastar um de seus próprios pontos de destino. O MJ então assume o desfecho da imposição para o alvo afetado. O MJ não perde um ponto de destino ao oferecer uma imposição - ele tem uma quantidade limitada de pontos de destino para invocar aspectos, mas pode impor o quanto quiser.
 
-Um aspecto pode ser imposto de forma retroativa. Se um jogador descobrir que já interpretou de acordo com uma complicação relacionada a um de seus aspectos, ou a um aspecto de situação que diz respeito a ele, pode perguntar ao MJ se isso conta como impor a si mesmo. Se o grupo concordar, o MJ entrega um ponto de destino para o jogador.
+**Um aspecto pode ser imposto de forma retroativa.** Se um jogador descobrir que já interpretou de acordo com uma complicação relacionada a um de seus aspectos, ou a um aspecto de situação que diz respeito a ele, pode perguntar ao MJ se isso conta como impor a si mesmo. Se o grupo concordar, o MJ entrega um ponto de destino para o jogador.
 
-Não há problema em perceber que um aspecto está sendo imposto de forma equivocada, e desistir de impô-lo. Se o grupo concordar que uma imposição proposta não é apropriada, ela deve ser retirada sem nenhum custo para o personagem imposto.
+**Não há problema em perceber que um aspecto está sendo imposto de forma equivocada, e desistir de impô-lo.** Se o grupo concordar que uma imposição proposta não é apropriada, ela deve ser retirada sem nenhum custo para o personagem imposto.
 
 #### Impor é Criar Complicações, Não Obstáculos
 
@@ -613,7 +613,7 @@ Para obter algumas ideias sobre o que funciona e o que não funciona como uma im
 
 #### Eventos e Decisões
 
-Existem dois tipos gerais de imposições: eventos e decisões.
+Existem dois tipos gerais de imposições: **eventos** e **decisões**.
 
 Um evento imposto é algo que acontece a um personagem por causa de uma força externa. Essa força externa se conecta com o aspecto de alguma forma, resultando em uma complicação infeliz.
 
@@ -645,21 +645,21 @@ No entanto, se não houver bloqueio narrativo para remover um aspecto, você pod
 
 Abordamos os tipos padrão de aspectos na página XX. Estes tipos adicionais são opcionais, mas podem agregar valor ao seu jogo. Até certo ponto, essas são variantes dos aspectos do personagem (se você expandir sua noção do que conta como um personagem) e aspectos de situação (se você mudar sua noção de quanto tempo eles duram).
 
-Aspectos de organizações: às vezes, você pode estar lidando com uma organização inteira que opera sob um determinado conjunto de princípios. Considere dar à organização aspectos que qualquer membro pode acessar como se fossem seus próprios.
+**Aspectos de organizações:** às vezes, você pode estar lidando com uma organização inteira que opera sob um determinado conjunto de princípios. Considere dar à organização aspectos que qualquer membro pode acessar como se fossem seus próprios.
 
-Aspectos de trama: Às vezes, uma determinada trama pode introduzir um novo tema que aparece repetidamente na narrativa. Considere definir esse tema como um aspecto que está disponível para todos os personagens da história até que essa parte da trama termine.
+**Aspectos de trama:** Às vezes, uma determinada trama pode introduzir um novo tema que aparece repetidamente na narrativa. Considere definir esse tema como um aspecto que está disponível para todos os personagens da história até que essa parte da trama termine.
 
-Aspectos de cenário: Assim como no aspecto de trama, o próprio cenário de sua campanha pode ter temas recorrentes. Ao contrário de um aspecto do cenário, esses aspectos não desaparecem.
+**Aspectos de cenário:** Assim como no aspecto de trama, o próprio cenário de sua campanha pode ter temas recorrentes. Ao contrário de um aspecto do cenário, esses aspectos não desaparecem.
 
-Aspectos de zona: Você pode anexar aspectos de situação a um determinado lugar no mapa representado por uma zona (página XX). Isso pode trazer dinamismo para as interações de seu grupo com o mapa. Um MJ pode encorajar isso disponibilizando uma invocação gratuita no estilo “quem pegar, pegou” em um aspecto de zona no início da cena, atraindo personagens (jogadores e não jogadores) para tirar proveito daquele aspecto como parte de sua estratégia inicial.
+**Aspectos de zona:** Você pode anexar aspectos de situação a um determinado lugar no mapa representado por uma zona (página XX). Isso pode trazer dinamismo para as interações de seu grupo com o mapa. Um MJ pode encorajar isso disponibilizando uma invocação gratuita no estilo “quem pegar, pegou” em um aspecto de zona no início da cena, atraindo personagens (jogadores e não jogadores) para tirar proveito daquele aspecto como parte de sua estratégia inicial.
 
 # Desafios, Conflitos e Disputas
 
-Muitas vezes, você será capaz de resolver uma ação com um único rolamento de dados - você abre o cofre, evita a segurança ou convence o repórter a lhe dar suas anotações? Outras vezes, você terá enfrentamentos prolongados que exigem muitos rolamentos para serem resolvidos. Para esses casos, oferecemos três ferramentas de resolução: desafios, disputas e conflitos. Cada um funciona de maneira um pouco diferente, dependendo do objetivo do enfrentamento e da oposição envolvida.
+Muitas vezes, você será capaz de resolver uma ação com um único rolamento de dados - você abre o cofre, evita a segurança ou convence o repórter a lhe dar suas anotações? Outras vezes, você terá enfrentamentos prolongados que exigem muitos rolamentos para serem resolvidos. Para esses casos, oferecemos três ferramentas de resolução: **desafios**, disputas e conflitos. Cada um funciona de maneira um pouco diferente, dependendo do objetivo do enfrentamento e da oposição envolvida.
 
-- Um desafio é uma situação complicada ou dinâmica. Você terá a oposição de alguém ou algo, mas não existe um "outro lado" dominante. É assim que você pode interpretar um pesquisador em busca de pistas em um livro antigo, o negociador do partido distraindo o bibliotecário e o agressor impedindo que horrores incontáveis ​​entrem na biblioteca, tudo ao mesmo tempo.
-- Uma disputa é uma situação em que duas ou mais partes buscam objetivos mutuamente exclusivos, mas não estão ativamente ferindo uma à outra. As disputas são perfeitas para perseguições, debates e corridas de todos os tipos. (E só porque as partes não estão tentando ferir umas às outras, não significa que danos não possam acontecer!)
-- Um conflito é quando os personagens podem e querem ferir uns aos outros. Lutando na lama com um cultista enquanto as facadas rolam soltas, crivando um bando de carniçais com balas enquanto garras rasgam sua carne, e uma troca cruel de farpas com seu rival sob o olhar vigilante da rainha - todos esses são conflitos.
+- **Um desafio é uma situação complicada ou dinâmica.** Você terá a oposição de alguém ou algo, mas não existe um "outro lado" dominante. É assim que você pode interpretar um pesquisador em busca de pistas em um livro antigo, o negociador do partido distraindo o bibliotecário e o agressor impedindo que horrores incontáveis ​​entrem na biblioteca, tudo ao mesmo tempo.
+- **Uma disputa é uma situação em que duas ou mais partes buscam objetivos mutuamente exclusivos, mas não estão ativamente ferindo uma à outra.** As disputas são perfeitas para perseguições, debates e corridas de todos os tipos. (E só porque as partes não estão tentando ferir umas às outras, não significa que danos não possam acontecer!)
+- **Um conflito é quando os personagens podem e querem ferir uns aos outros.** Lutando na lama com um cultista enquanto as facadas rolam soltas, crivando um bando de carniçais com balas enquanto garras rasgam sua carne, e uma troca cruel de farpas com seu rival sob o olhar vigilante da rainha - todos esses são conflitos.
 
 ## Configurando Cenas
 
@@ -671,9 +671,9 @@ As zonas são uma representação do espaço físico - um mapa rápido dividido 
 
 As zonas ajudam a guiar a história, moldando o que é possível. Quem você pode atacar e para onde pode ir depende da zona em que você está.
 
-Qualquer pessoa em uma zona pode interagir com tudo e com todos nessa zona. Isso significa que você pode bater, esfaquear ou se envolver fisicamente com pessoas e coisas em sua zona. Precisa abrir aquele cofre de parede do quarto? Você terá que estar nessa zona. Qualquer coisa fora de sua zona geralmente está fora de seu alcance - você precisará se mover para chegar lá ou usar algo que possa estender seu alcance até lá (telecinesia, uma arma, etc).
+**Qualquer pessoa em uma zona pode interagir com tudo e com todos nessa zona.** Isso significa que você pode bater, esfaquear ou se envolver fisicamente com pessoas e coisas em sua zona. Precisa abrir aquele cofre de parede do quarto? Você terá que estar nessa zona. Qualquer coisa fora de sua zona geralmente está fora de seu alcance - você precisará se mover para chegar lá ou usar algo que possa estender seu alcance até lá (telecinesia, uma arma, etc).
 
-Mover-se entre as zonas é fácil, desde que não haja nada em seu caminho. Você pode mover-se para uma zona adjacente em adição a sua ação durante uma troca (página XX), desde que nada esteja em seu caminho. Se o seu movimento for impedido, será necessário usar sua ação para fazê-lo. Faça um rolamento de superar para escalar uma parede, passar por um grupo de cultistas ou pular pelos telhados. Se você falhar, ficará na sua zona ou o movimento custará algo. Você também pode usar sua ação para mover-se para qualquer lugar no mapa - embora o MJ tenha o direito de definir uma dificuldade alta se for um movimento épico.
+Mover-se entre as zonas é fácil, desde que não haja nada em seu caminho. **Você pode mover-se para uma zona adjacente em adição a sua ação durante uma troca** (página XX), desde que nada esteja em seu caminho. Se o seu movimento for impedido, será necessário usar sua ação para fazê-lo. Faça um rolamento de superar para escalar uma parede, passar por um grupo de cultistas ou pular pelos telhados. Se você falhar, ficará na sua zona ou o movimento custará algo. Você também pode usar sua ação para mover-se para qualquer lugar no mapa - embora o MJ tenha o direito de definir uma dificuldade alta se for um movimento épico.
 
 Se algo não é arriscado ou interessante o suficiente para merecer um rolamento, então não é um impedimento ao movimento. Por exemplo, você não precisa gastar sua ação abrindo uma porta destrancada - isso é apenas uma parte do movimento.
 
@@ -683,11 +683,11 @@ A habilidade Tiro permite que você ataque à distância. Ataques à distância 
 
 Ao definir o cenário, o MJ deve pensar em características ambientais interessantes e dinâmicas que podem restringir a ação ou fornecer oportunidades para mudar a situação quando usadas. Três a cinco detalhes são mais do que suficientes. Use estas categorias como um guia:
 
-- Tom, humor ou clima - escuridão, relâmpago, ventos uivantes
-- impedimentos ao movimento - conectados por escadas, cobertos de limo, cheios de fumaça
-- Cobertura e obstruções - veículos, pilares, caixas
-- Características perigosas \- caixotes de TNT, barris de óleo, artefatos sobrenaturais crepitando com eletricidade
-- Objetos utilizáveis estranhos - armas improvisadas, estátuas ou estantes de livros para derrubar, portas a serem trancadas
+- **Tom, humor ou clima** - escuridão, relâmpago, ventos uivantes
+- **impedimentos ao movimento** - conectados por escadas, cobertos de limo, cheios de fumaça
+- **Cobertura e obstruções** - veículos, pilares, caixas
+- **Características perigosas** \- caixotes de TNT, barris de óleo, artefatos sobrenaturais crepitando com eletricidade
+- **Objetos utilizáveis estranhos** - armas improvisadas, estátuas ou estantes de livros para derrubar, portas a serem trancadas
 
 Qualquer um pode invocar e impor esses aspectos, então lembre-se de levá-los em consideração quando você rolar no chão com aquele cultista enquanto há Gosma Cáustica Por Todo Lado.
 
@@ -703,7 +703,7 @@ Como mencionado na página XX, alguns aspectos de situação podem se aplicar a 
 
 ### Ordem dos Turnos
 
-Frequentemente, você não precisa saber exatamente quem age quando, mas em disputas e conflitos a ordem dos turnos pode se tornar importante. Essas cenas acontecem ao longo de uma série de trocas. Em uma troca, cada personagem envolvido pode realizar uma dentre as ações superar, criar uma vantagem ou atacar, e pode se mover uma vez. (Os desafios funcionam de forma um pouco diferente; consulte a página XX.) Como a defesa é uma reação à ação de outra pessoa, os personagens podem se defender quantas vezes forem necessárias durante os turnos dos outros personagens, desde que possam justificar sua capacidade de interferir com base no que já foi estabelecido na história.
+Frequentemente, você não precisa saber exatamente quem age quando, mas em disputas e conflitos a ordem dos turnos pode se tornar importante. Essas cenas acontecem ao longo de uma série de **trocas**. Em uma troca, cada personagem envolvido pode realizar uma dentre as ações superar, criar uma vantagem ou atacar, e pode se mover uma vez. (Os desafios funcionam de forma um pouco diferente; consulte a página XX.) Como a defesa é uma reação à ação de outra pessoa, os personagens podem se defender quantas vezes forem necessárias durante os turnos dos outros personagens, desde que possam justificar sua capacidade de interferir com base no que já foi estabelecido na história.
 
 No início de uma cena, o MJ e os jogadores decidem quem vai primeiro com base na situação, então o jogador ativo escolhe quem vai em seguida. Os personagens do MJ são selecionados na ordem do turno da mesma forma que os PJs, com o MJ decidindo quem vai em seguida após os PNJs terem agido. Depois que todos jogaram sua vez, o último jogador escolhe quem será o próximo no início da próxima troca.
 
@@ -725,7 +725,7 @@ Caso contrário, você pode criar uma vantagem na sua vez e deixar um aliado usa
 
 Muitas das dificuldades que seus personagens enfrentam podem ser resolvidas com um único rolamento no decorrer de uma cena - desarmar a bomba, encontrar o tomo de sabedoria sobrenatural ou decodificar a cifra. Mas às vezes as coisas são mais fluidas, mais complicadas, e não basta apenas encontrar o tomo da sabedoria antiga, porque o iate em que você está procurando está adernando pelo porto de Hong Kong enquanto uma monção ruge do lado de fora e a biblioteca do barco está pegando fogo - o que nem de longe é sua culpa.
 
-Em circunstâncias complicadas sem oposição, você deverá usar um desafio: uma série de ações superar que abordam um problema maior. Os desafios permitem que todo o grupo trabalhe junto em uma cena e mantém as coisas dinâmicas.
+Em circunstâncias complicadas sem oposição, você deverá usar um **desafio**: uma série de ações superar que abordam um problema maior. Os desafios permitem que todo o grupo trabalhe junto em uma cena e mantém as coisas dinâmicas.
 
 Para definir um desafio, o MJ considera a situação e escolhe uma série de habilidades que podem contribuir para o sucesso do grupo. Trate cada ação como um rolamento de superar separado. Ações de trabalho em equipe são permitidas, mas podem apresentar custos ou complicações, como falta de tempo ou outras ineficiências.
 
@@ -735,15 +735,15 @@ Depois que os rolamentos forem feitos, o MJ avaliará os sucessos, fracassos e c
 
 ## Disputas
 
-Uma disputa é quando dois ou mais lados estão em oposição direta, mas não há conflito. Isso não significa que um lado não queira ferir o outro. As disputas podem envolver o grupo tentando escapar de uma ameaça antes que ela elimine qualquer chance de vitória.
+Uma **disputa** é quando dois ou mais lados estão em oposição direta, mas não há conflito. Isso não significa que um lado não queira ferir o outro. As disputas podem envolver o grupo tentando escapar de uma ameaça antes que ela elimine qualquer chance de vitória.
 
-No início de uma disputa, todos os envolvidos declaram suas intenções, o que esperam obter com isso. Se houver vários PJs envolvidos, eles podem estar do mesmo lado ou em lados diferentes, dependendo de seus objetivos - por exemplo, em uma corrida a pé, é cada um por si. Em uma disputa, os PJs não podem ou não estão tentando ferir o inimigo. Ameaças externas (por exemplo, vulcão em erupção, deus zangado) podem atacar qualquer um ou todos os lados; essas ameaças também podem ser um participante da disputa.
+No início de uma disputa, todos os envolvidos declaram suas intenções, o que esperam obter com isso. Se houver vários PJs envolvidos, eles podem estar do mesmo lado ou em lados diferentes, dependendo de seus objetivos - por exemplo, em uma corrida a pé, é cada um por si. **Em uma disputa, os PJs não podem ou não estão tentando ferir o inimigo**. Ameaças externas (por exemplo, vulcão em erupção, deus zangado) podem atacar qualquer um ou todos os lados; essas ameaças também podem ser um participante da disputa.
 
 As disputas acontecem em uma série de trocas. Em cada troca, cada lado realiza uma ação superar para fazer algo que ajude a atingir seus objetivos. Apenas um personagem de cada lado realiza a ação superar em cada troca, mas seus aliados podem fornecer trabalho em equipe e tentar criar vantagens para ajudar (o que traz alguns riscos - veja abaixo). As ações superar podem ser contra dificuldades fixas - se os competidores estão enfrentando desafios ambientais distintos - ou comparadas entre si quando estão em disputa direta.
 
-No final de cada troca, compare os esforços da ação de cada lado. O lado com o maior esforço marca uma vitória. Se o vencedor tiver sucesso com estilo - e ninguém mais -, ele marca duas vitórias. O primeiro lado a ter três vitórias ganha a disputa. (Você sempre pode decidir, em vez disso, realizar uma disputa prolongada que exija mais vitórias, embora não recomendamos mais do que cinco.)
+No final de cada troca, compare os esforços da ação de cada lado. O lado com o maior esforço marca uma **vitória**. Se o vencedor tiver sucesso com estilo - e ninguém mais -, ele marca **duas** vitórias. O primeiro lado a ter três vitórias ganha a disputa. (Você sempre pode decidir, em vez disso, realizar uma disputa prolongada que exija mais vitórias, embora não recomendamos mais do que cinco.)
 
-Quando há um empate no maior esforço, ninguém marca uma vitória e uma reviravolta inesperada acontece. O MJ apresentará um novo aspecto de situação para refletir como o cenário, terreno ou situação mudou.
+Quando há um empate no maior esforço, ninguém marca uma vitória e uma **reviravolta inesperada** acontece. O MJ apresentará um novo aspecto de situação para refletir como o cenário, terreno ou situação mudou.
 
 Em disputas onde uma ameaça está tentando ferir qualquer um dos competidores, todos de um lado levam um golpe quando seu rolamento na disputa é menor do que o rolamento de ataque da ameaça ou da dificuldade fixa. Eles sofrem uma quantidade de tensões igual às tensões do fracasso. Assim como em um conflito, se um personagem não consegue absorver todas as tensões de um golpe, eles são derrotados.
 
@@ -753,7 +753,7 @@ Durante qualquer troca, seu lado pode tentar criar vantagens antes de fazer seu 
 
 ## Conflitos
 
-Quando os heróis entram em um combate direto - seja com as autoridades, cultistas ou algum horror indescritível - e podem vencer, você tem um conflito. Em outras palavras, use conflitos quando a violência ou coerção forem um meio razoável para os fins dos PJs.
+Quando os heróis entram em um combate direto - seja com as autoridades, cultistas ou algum horror indescritível - e podem vencer, você tem um **conflito**. Em outras palavras, use conflitos quando a violência ou coerção forem um meio razoável para os fins dos PJs.
 
 Os conflitos podem parecer os mais diretos - afinal, a história dos jogos de RPG foi erguida sobre simuladores de combate. Mas tenha em mente uma parte importante de sua descrição: os personagens envolvidos têm a capacidade de ferir uns aos outros. Se for unilateral - digamos que você esteja tentando socar uma montanha viva - não há chance de machucá-la. Isso não é um conflito. É uma disputa onde provavelmente os PJs estão tentando escapar ou encontrar meios de contra-atacar.
 
@@ -765,21 +765,21 @@ O tempo é importante ao usar alguns tipos de trabalho em equipe (página XX). V
 
 Quando um ataque é bem sucedido, o defensor deve absorver o golpe, que tem tensões iguais à diferença entre o esforço de ataque e o esforço de defesa.
 
-Você pode absorver as tensões de um golpe marcando caixas de estresse e sofrendo consequências. Se você não puder ou não absorver todas as tensões, você será derrotado (página XX) - você será removido da cena e o atacante decidirá como isso ocorrerá.
+Você pode absorver as tensões de um golpe marcando caixas de estresse e sofrendo consequências. Se você não puder ou não absorver todas as tensões, você será **derrotado** (página XX) - você será removido da cena e o atacante decidirá como isso ocorrerá.
 
 Uma série de decisões lamentáveis ​​colocou Charles em um porão úmido, confrontando um carniçal que deseja muito comê-lo. O carniçal ataca, investindo com suas garras afiadas; este é um ataque usando sua Luta Razoável (+2). O MJ rola \[0\] \[0\] \[+\] \[+\], elevando o esforço para Ótimo (+4). Charles tenta pular fora do caminho com seu Atletismo Bom (+3), mas rola \[0\] \[0\] \[0\] \[-\], reduzindo seu esforço para Razoável (+2). Como o esforço de ataque do carniçal era dois pontos mais alto do que o esforço de defesa de Charles, Charles precisava absorver duas tensões. Ele marca as duas primeiras de suas três caixas de estresse físico; a luta já está se mostrando perigosa.
 
 #### Estresse
 
-Simplificando, o estresse é uma proteção fictícia. É um recurso usado para manter seu personagem ativo e na luta quando seus inimigos o atingem. Quando você marca as caixas de estresse para absorver um golpe, está dizendo coisas como "Isso quase me acertou" ou "Uau, cheguei a perder o fôlego, mas estou bem". Dito isso, é um recurso limitado - a maioria dos personagens tem apenas três caixas para estresse físico e três caixas de estresse mental, embora personagens com Vontade ou Físico altos tenham mais caixas.
+Simplificando, o **estresse** é uma proteção fictícia. É um recurso usado para manter seu personagem ativo e na luta quando seus inimigos o atingem. Quando você marca as caixas de estresse para absorver um golpe, está dizendo coisas como "Isso quase me acertou" ou "Uau, cheguei a perder o fôlego, mas estou bem". Dito isso, é um recurso limitado - a maioria dos personagens tem apenas três caixas para estresse físico e três caixas de estresse mental, embora personagens com Vontade ou Físico altos tenham mais caixas.
 
-Você encontrará duas trilhas de estresse em sua ficha de personagem, uma para danos físicos e outra para danos mentais. Quando você leva um golpe, pode marcar caixas de estresse vazias do tipo apropriado para absorvê-lo e permanecer na luta. Cada caixa de estresse que você marca absorve uma tensão. Você pode marcar várias caixas de estresse, se necessário.
+Você encontrará duas **trilhas de estresse** em sua ficha de personagem, uma para danos físicos e outra para danos mentais. Quando você leva um golpe, pode marcar caixas de estresse vazias do tipo apropriado para absorvê-lo e permanecer na luta. Cada caixa de estresse que você marca absorve uma tensão. Você pode marcar várias caixas de estresse, se necessário.
 
 As caixas são binárias - ou estão vazias e podem ser usadas ou estão cheias e não podem. Mas não se preocupe. Você esvaziará a trilha de estresse assim que passar pela cena - desde que os monstros não o comam primeiro.
 
 #### Consequências
 
-Consequências são novos aspectos que você escreve em sua ficha de personagem quando seu personagem é atingido, representando ferimentos e injúrias reais que seu personagem sofreu.
+**Consequências** são novos aspectos que você escreve em sua ficha de personagem quando seu personagem é atingido, representando ferimentos e injúrias reais que seu personagem sofreu.
 
 Quando você leva uma consequência para absorver um golpe, escreva um aspecto em um espaço de consequência vazio que descreva o dano que acontecerá ao seu personagem. Use a gravidade da consequência como um guia: se você foi mordido por uma criatura estelar, uma consequência suave pode ser Mordida Feia, mas uma consequência moderada pode ser Mordida Que Não Para de Sangrar, e uma consequência severa pode ser Perna Aleijada.
 
@@ -795,7 +795,7 @@ Charles ainda está lutando contra o carniçal. Ele o ataca com suas garras, des
 
 #### Ser Derrotado
 
-Se você não conseguir absorver todas as tensões de um golpe com o estresse e as consequências, você será derrotado.
+Se você não conseguir absorver todas as tensões de um golpe com o estresse e as consequências, você será **derrotado**.
 
 Ser derrotado é ruim. Quem te derrotou decide o que acontece. Em situações perigosas e inimigos poderosos, isso pode significar que você foi morto, mas essa não é a única possibilidade. O resultado deve estar de acordo com o escopo e a escala do conflito em questão - você não morrerá de vergonha se perder uma discussão - mas mudanças em sua ficha de personagem (e mais) são possíveis. O resultado também deve se encaixar nos limites que seu grupo estabeleceu - se o seu grupo acha que os personagens nunca devem ser mortos sem o consentimento do jogador, isso é perfeitamente válido.
 
@@ -809,7 +809,7 @@ Em vez disso, o MJ declara que Charles sobreviveu, sendo nocauteado e arrastado 
 
 #### Conceder
 
-Então, como você pode evitar morrer horrivelmente - ou algo pior? Você pode interromper qualquer ação em um conflito para conceder, desde que os dados ainda não tenham tocado a mesa. Apenas ceda. Diga a todos que para você acabou, que não pode continuar. Seu personagem perde e sai do conflito, mas você ganha um ponto de destino e mais um ponto extra para cada consequência que ele teve neste conflito.
+Então, como você pode evitar morrer horrivelmente - ou algo pior? Você pode interromper qualquer ação em um conflito para **conceder**, desde que os dados ainda não tenham tocado a mesa. Apenas ceda. Diga a todos que para você acabou, que não pode continuar. Seu personagem perde e sai do conflito, mas **você ganha um ponto de destino** e mais um ponto extra para cada consequência que ele teve neste conflito.
 
 Além disso, a concessão significa que você declara os termos de sua perda e como sairá do conflito. Você pode escapar dos monstros e viver para lutar outro dia. É uma perda, no entanto. Você terá que dar ao seu inimigo algo que ele queira. Você não pode ceder e descrever como heroicamente salva o dia - essa possibilidade não está mais em jogo.
 
@@ -829,19 +829,19 @@ Um conflito chega ao fim quando todos de um lado concederam ou foram derrotados.
 
 No final de cada cena, todos os personagens limpam suas caixas de estresse. As consequências levam mais tempo e esforço para serem eliminadas.
 
-Para iniciar o processo de recuperação, a pessoa que está tratando você precisará ter sucesso na ação superar com uma habilidade apropriada. Lesões físicas normalmente são tratadas usando o conhecimento médico via Formação, enquanto as consequências mentais são curadas com Empatia. Esta ação superar enfrenta dificuldade igual à severidade da consequência: Razoável (+2) para uma consequência suave, Ótimo (+4) para moderada e Fantástica (+6) para severa. Essas dificuldades aumentam em dois quando você está tentando tratar a si mesmo (é mais fácil ter outra pessoa fazendo isso).
+Para iniciar o **processo de recuperação**, a pessoa que está tratando você precisará ter sucesso na ação superar com uma habilidade apropriada. Lesões físicas normalmente são tratadas usando o conhecimento médico via Formação, enquanto as consequências mentais são curadas com Empatia. Esta ação superar enfrenta dificuldade igual à severidade da consequência: Razoável (+2) para uma consequência suave, Ótimo (+4) para moderada e Fantástica (+6) para severa. Essas dificuldades aumentam em dois quando você está tentando tratar a si mesmo (é mais fácil ter outra pessoa fazendo isso).
 
 Se você for bem-sucedido nesse rolamento, reescreva a consequência para indicar que ela está curando. Um Braço Quebrado pode ser reescrito como Braço Engessado, por exemplo.
 
 O sucesso aqui é apenas o primeiro obstáculo - leva tempo para superar as consequências.
 
-- Consequências Suaves exigem uma cena inteira após o tratamento para serem removidas.
-- Consequências Moderadas duram mais, levando uma sessão inteira após o tratamento para serem removidas.
-- Consequências Severas só desaparecem quando você atinge um avanço (página XX) após o tratamento.
+- **Consequências Suaves** exigem uma cena inteira após o tratamento para serem removidas.
+- **Consequências Moderadas** duram mais, levando uma sessão inteira após o tratamento para serem removidas.
+- **Consequências Severas** só desaparecem quando você atinge um avanço (página XX) após o tratamento.
 
 # Evolução
 
-Conforme seus personagens se divertem pela história, eles crescem e mudam. No final de cada sessão, você ganhará um marco, que permite mover as coisas em sua ficha de personagem. Ao concluir cada arco da história, você ganhará um avanço, que permite adicionar coisas à sua ficha de personagem. (Saiba mais sobre sessões e arcos na página XX.)
+Conforme seus personagens se divertem pela história, eles crescem e mudam. No final de cada sessão, você ganhará um **marco**, que permite mover as coisas em sua ficha de personagem. Ao concluir cada arco da história, você ganhará um **avanço**, que permite adicionar coisas à sua ficha de personagem. (Saiba mais sobre sessões e arcos na página XX.)
 
 ## Marcos
 
@@ -873,85 +873,41 @@ Ao melhorar um nível de habilidade, você deve manter uma estrutura de “colun
 
 Ruth quer aumentar seu Ocultismo de Regular (+1) para Razoável (+2), mas isso significa que ela teria quatro perícias Razoáveis ​​(+2) e apenas três Regulares (+1)... isso não funciona. Felizmente, ela economizou um outro ponto de habilidade de um avanço anterior, então ela também aumenta sua Empatia Medíocre (+0) para Regular (+1). Agora ela tem uma perícia Ótima (+4), duas Boas (+3), quatro Razoáveis (+2) e quatro Regulares (+1).
 
-A Pirâmide
+| A Pirâmide |                |
+| ---------- | -------------- |
+| +4         | `[0]`          |
+| +3         | `[0][0]`       |
+| +2         | `[0][0][0]`    |
+| +1         | `[0][0][0][0]` |
 
-+4
+| Não Válido |                |
+| ---------- | -------------- |
+| +4         | `[0]`          |
+| +3         | `[0][0]`       |
+| +2         | `[0][0][0][0]` |
+| +1         | `[0][0][0]`    |
 
-\[0\]
+| Válido |                |
+| ------ | -------------- |
+| +4     | `[0]`          |
+| +3     | `[0][0]`       |
+| +2     | `[0][0][0][0]` |
+| +1     | `[0][0][0][0]` |
 
-+3
-
-\[0\] \[0\]
-
-+2
-
-\[0\] \[0\] \[0\]
-
-+1
-
-\[0\] \[0\] \[0\] \[0\]
-
-Não Válido
-
-+4
-
-\[0\]
-
-+3
-
-\[0\] \[0\]
-
-+2
-
-\[0\] \[0\] \[0\] \[0\]
-
-+1
-
-\[0\] \[0\] \[0\]
-
-Válido
-
-+4
-
-\[0\]
-
-+3
-
-\[0\] \[0\]
-
-+2
-
-\[0\] \[0\] \[0\] \[0\]
-
-+1
-
-\[0\] \[0\] \[0\] \[0\]
-
-Também Válido
-
-+4
-
-\[0\]
-
-+3
-
-\[0\] \[0\] \[0\]
-
-+2
-
-\[0\] \[0\] \[0\]
-
-+1
-
-\[0\] \[0\] \[0\]
+| Também Válido |             |
+| ------------- | ----------- |
+| +4            | `[0]`       |
+| +3            | `[0][0]`    |
+| +2            | `[0][0][0]` |
+| +1            | `[0][0][0]` |
 
 ## Sessões e Arcos
 
 Existem algumas suposições em jogo aqui, quando falamos sobre sessões e arcos. Gostaríamos de esclarecê-las para que você possa fazer ajustes baseado em como seu jogo difere dessas suposições.
 
-Uma sessão é uma única partida composta por várias cenas e algumas horas de jogo. Pense nisso como semelhante a um único episódio de um programa de televisão. Provavelmente cai na faixa de três a quatro horas.
+Uma **sessão** é uma única partida composta por várias cenas e algumas horas de jogo. Pense nisso como semelhante a um único episódio de um programa de televisão. Provavelmente cai na faixa de três a quatro horas.
 
-Um arco é uma série de sessões que geralmente contêm elementos da história que passam de uma sessão para outra. Esses elementos da história não precisam ser concluídos dentro de um arco, mas geralmente ocorrem desenvolvimentos e mudanças significativas no decorrer dele. Pense nisso como algo semelhante a um terço ou meia temporada de um programa de televisão. Provavelmente, é composto por cerca de quatro sessões de jogo.
+Um **arco** é uma série de sessões que geralmente contêm elementos da história que passam de uma sessão para outra. Esses elementos da história não precisam ser concluídos dentro de um arco, mas geralmente ocorrem desenvolvimentos e mudanças significativas no decorrer dele. Pense nisso como algo semelhante a um terço ou meia temporada de um programa de televisão. Provavelmente, é composto por cerca de quatro sessões de jogo.
 
 Se a sua maneira de jogar estiver fora das faixas “prováveis”, você pode querer mudar a forma como algumas partes do avanço funcionam. Se seus arcos duram mais de quatro a seis sessões de jogo, você pode permitir que as consequências severas desapareçam depois que quatro sessões passarem, em vez de esperar até o final do arco. Se você quiser que o avanço aconteça mais lentamente, pode permitir melhorias como pontos de habilidade e ganhos de atualização com menos frequência. Se o seu grupo tende a agendar sessões relativamente curtas, você pode não atingir um marco no final de cada sessão. Tempere a gosto; o jogo é seu para moldar!
 
@@ -959,15 +915,15 @@ Se a sua maneira de jogar estiver fora das faixas “prováveis”, você pode q
 
 Como o MJ, você é o diretor das sessões do jogo. Observe que você não é o chefe. Fate Condensed é colaborativo, e os jogadores têm voz sobre o que acontece com seus personagens. Seu trabalho é manter as coisas em movimento, fazendo o seguinte:
 
-- Conduzir cenas: uma sessão é composta de cenas. Decida onde a cena começa, quem está lá e o que está acontecendo. Decida quando todas as coisas interessantes aconteceram e quando a cena acaba. Ignore as coisas desnecessárias; da mesma forma que você não joga dados se o resultado de uma ação não for interessante, não crie uma cena se nada excitante, dramático, útil ou divertido aconteceria durante ela.
-- Julgue as regras: quando surgir alguma dúvida sobre como aplicar as regras, você pode discutir com os jogadores e tentar chegar a um consenso aceitável, mas você terá a palavra final.
-- Determine a dificuldade: Decida quando os rolamentos são necessários e defina suas dificuldades.
-- Determine os custos das falhas: Quando um personagem falha no rolamento, você decide qual será o custo do sucesso. Você certamente pode aceitar sugestões do jogador - eles podem saber exatamente como querem que seu personagem se machuque - mas, no final das contas, você decide.
-- Jogue os PNJs: Cada jogador controla seu próprio personagem, mas você controla todo o resto, de cultistas a monstros e até o próprio Grande Vilão.
-- Dê aos PJs oportunidades de ação: Se os jogadores não souberem o que fazer a seguir, é seu trabalho dar-lhes um empurrão. Nunca deixe as coisas ficarem muito atoladas em indecisão ou falta de informação - faça algo para agitar as coisas. Em caso de dúvida, pense nas táticas e objetivos do seu Grande Vilão para criar um ponto de incômodo para os heróis.
-- Certifique-se de que todos recebam os holofotes: Seu objetivo não é derrotar os jogadores, mas desafiá-los. Certifique-se de que cada PJ tenha a chance de ser a estrela de vez em quando. Espalhe imposições e desafios adaptados às diferentes habilidades e fraquezas dos personagens.
-- Complicar a vida dos PJs: Além de jogar monstros nos personagens, você será a fonte primária de imposições. Os jogadores podem impor a si mesmos e a outros personagens, é claro, mas você deve garantir que todos tenham oportunidades de experimentar as repercussões negativas de seus aspectos.
-- Trabalhe com as escolhas dos jogadores: Observe as ações que os PJs realizaram durante o jogo e pense em como o mundo muda e reage. Faça o mundo parecer vivo apresentando aos PJs essas consequências - boas e más - em jogo.
+- **Conduzir cenas**: uma sessão é composta de cenas. Decida onde a cena começa, quem está lá e o que está acontecendo. Decida quando todas as coisas interessantes aconteceram e quando a cena acaba. Ignore as coisas desnecessárias; da mesma forma que você não joga dados se o resultado de uma ação não for interessante, não crie uma cena se nada excitante, dramático, útil ou divertido aconteceria durante ela.
+- **Julgue as regras**: quando surgir alguma dúvida sobre como aplicar as regras, você pode discutir com os jogadores e tentar chegar a um consenso aceitável, mas você terá a palavra final.
+- **Determine a dificuldade**: Decida quando os rolamentos são necessários e defina suas dificuldades.
+- **Determine os custos das falhas**: Quando um personagem falha no rolamento, você decide qual será o custo do sucesso. Você certamente pode aceitar sugestões do jogador - eles podem saber exatamente como querem que seu personagem se machuque - mas, no final das contas, você decide.
+- **Jogue os PNJs**: Cada jogador controla seu próprio personagem, mas você controla todo o resto, de cultistas a monstros e até o próprio Grande Vilão.
+- **Dê aos PJs oportunidades de ação**: Se os jogadores não souberem o que fazer a seguir, é seu trabalho dar-lhes um empurrão. Nunca deixe as coisas ficarem muito atoladas em indecisão ou falta de informação - faça algo para agitar as coisas. Em caso de dúvida, pense nas táticas e objetivos do seu Grande Vilão para criar um ponto de incômodo para os heróis.
+- **Certifique-se de que todos recebam os holofotes**: Seu objetivo não é derrotar os jogadores, mas desafiá-los. Certifique-se de que cada PJ tenha a chance de ser a estrela de vez em quando. Espalhe imposições e desafios adaptados às diferentes habilidades e fraquezas dos personagens.
+- **Complicar a vida dos PJs**: Além de jogar monstros nos personagens, você será a fonte primária de imposições. Os jogadores podem impor a si mesmos e a outros personagens, é claro, mas você deve garantir que todos tenham oportunidades de experimentar as repercussões negativas de seus aspectos.
+- **Trabalhe com as escolhas dos jogadores**: Observe as ações que os PJs realizaram durante o jogo e pense em como o mundo muda e reage. Faça o mundo parecer vivo apresentando aos PJs essas consequências - boas e más - em jogo.
 
 ## Definindo Dificuldade e Oposição
 
@@ -975,9 +931,9 @@ Como o MJ, você é o diretor das sessões do jogo. Observe que você não é o 
 
 Mas se não houver oposição, você deve decidir a dificuldade da ação:
 
-- Dificuldades baixas, abaixo do nível da habilidade relevante do PC, são apropriadas quando você deseja dar a eles uma chance de se exibirem.
-- Dificuldades moderadas, próximas ao nível da habilidade relevante do PC, são apropriadas quando você deseja deixá-los tensos, mas sem sobrecarregá-los.
-- Dificuldades altas, muito maiores do que o nível da habilidade relevante do PC, são apropriadas quando você deseja enfatizar o quão terríveis ou incomuns são as circunstâncias e levá-los aos seus limites, ou colocá-los em uma posição onde precisarão sofrer as consequências de falhar.
+- **Dificuldades baixas**, abaixo do nível da habilidade relevante do PC, são apropriadas quando você deseja dar a eles uma chance de se exibirem.
+- **Dificuldades moderadas**, próximas ao nível da habilidade relevante do PC, são apropriadas quando você deseja deixá-los tensos, mas sem sobrecarregá-los.
+- **Dificuldades altas**, muito maiores do que o nível da habilidade relevante do PC, são apropriadas quando você deseja enfatizar o quão terríveis ou incomuns são as circunstâncias e levá-los aos seus limites, ou colocá-los em uma posição onde precisarão sofrer as consequências de falhar.
 
 Da mesma forma, use a escala de adjetivos (página XX) dos níveis para ajudá-lo a escolher uma dificuldade apropriada. É extremamente difícil? Então escolha Soberbo (+5)! Aqui estão algumas regras básicas para você começar.
 
@@ -1025,7 +981,7 @@ Charles, Ruth, Cassandra e Ethan estão se dirigindo para o confronto final com 
 
 Como MJ, você pode gastar pontos de destino dessa reserva para invocar aspectos, recusar imposições que os jogadores ofereçam aos PNJs e usar quaisquer façanhas de PNJ que os exijam - tudo exatamente como os jogadores fazem.
 
-No entanto, você não precisa gastar pontos de destino para impor quaisquer aspectos. Você tem um estoque infinito de pontos de destino para esse propósito.
+**No entanto, você não precisa gastar pontos de destino para impor quaisquer aspectos**. Você tem um estoque infinito de pontos de destino para esse propósito.
 
 ## Ferramentas de Segurança
 
@@ -1042,15 +998,15 @@ Estas são algumas regras opcionais ou alternativas que você pode decidir usar 
 
 ## Condições
 
-Condições são um alternativas às consequências, e as substituem inteiramente. As condições servem a dois propósitos: elas retiram parte da pressão dos jogadores e do MJ para criar rapidamente uma boa redação para uma consequência sofrida, e dão a você a oportunidade de moldar a natureza do seu jogo predefinindo as formas de danos duradouros que recaem sobre os personagens.
+**Condições** são um alternativas às consequências, e as substituem inteiramente. As condições servem a dois propósitos: elas retiram parte da pressão dos jogadores e do MJ para criar rapidamente uma boa redação para uma consequência sofrida, e dão a você a oportunidade de moldar a natureza do seu jogo predefinindo as formas de danos duradouros que recaem sobre os personagens.
 
 A versão Fate Condensed das condições pega cada nível de consequência e o divide em duas condições com a metade do valor.
 
-\[1\] Machucado (Suave) \[1\] Assustado (Suave)
+\[1\] **Machucado** (Suave) \[1\] **Assustado** (Suave)
 
-\[2\] Lesionado (Moderada) \[2\] Abalado (Moderada)
+\[2\] **Lesionado** (Moderada) \[2\] **Abalado** (Moderada)
 
-\[3\] Ferido (Grave) \[3\] Desmoralizado (Grave)
+\[3\] **Ferido** (Grave) \[3\] **Desmoralizado** (Grave)
 
 Correspondem a estados físicos e mentais - mas só porque você levou um golpe físico não significa que você não pode marcar também uma condição mental e vice-versa, desde que faça sentido. Os ataques são traumáticos!
 
@@ -1072,28 +1028,28 @@ Vários jogos publicados baseados em Fate usam condições em vez de consequênc
 
 Conforme mencionado na página XX, listas de habilidades são a primeira coisa a se considerar ao fazer seu próprio jogo de Fate. Nossa configuração padrão de habilidades apresenta uma lista de 19 habilidades organizadas em uma pirâmide de 10. Essa lista também é estruturada em torno de uma noção tradicional de capacidades em vários campos de ação, em essência abordando a questão "o que você pode fazer?" Outras listas de habilidades não são necessariamente do mesmo tamanho, organizadas da mesma maneira ou abordando a mesma questão. Dito isto, aqui estão algumas listas curtas de habilidades a serem consideradas, emprestadas e modificadas.
 
-- Ações: Resistir, Lutar, Saber, Mover, Observar, Pilotar, Esgueirar, Falar, Remendar.
-- Abordagens: Cuidadoso, Esperto, Chamativo, Vigoroso, Rápido, Sorrateiro.
-- Aptidões: Atletismo, Combate, Liderança, Escolaridade, Subterfúgio.
-- Atributos: Força, Destreza, Robustez, Inteligência, Charme.
-- Relacionamentos: Liderança, Parceria, Apoio, Solo.
-- Funções: Motorista, Atirador, Hacker, Mecânico, Vigarista, Ladrão, Mente Criminosa.
-- Temas: Ar, Fogo, Metal, Mente, Pedra, Vazio, Água, Vento, Madeira.
-- Valores: Dever, Glória, Justiça, Amor, Poder, Segurança, Verdade, Vingança.
+- **Ações:** Resistir, Lutar, Saber, Mover, Observar, Pilotar, Esgueirar, Falar, Remendar.
+- **Abordagens:** Cuidadoso, Esperto, Chamativo, Vigoroso, Rápido, Sorrateiro.
+- **Aptidões:** Atletismo, Combate, Liderança, Escolaridade, Subterfúgio.
+- **Atributos:** Força, Destreza, Robustez, Inteligência, Charme.
+- **Relacionamentos:** Liderança, Parceria, Apoio, Solo.
+- **Funções:** Motorista, Atirador, Hacker, Mecânico, Vigarista, Ladrão, Mente Criminosa.
+- **Temas:** Ar, Fogo, Metal, Mente, Pedra, Vazio, Água, Vento, Madeira.
+- **Valores:** Dever, Glória, Justiça, Amor, Poder, Segurança, Verdade, Vingança.
 
 Se você quiser uma lista mais longa, tente começar com a lista padrão, adicionando, combinando e removendo habilidades dela conforme necessário até chegar ao que você está procurando. Em vez disso, você pode combinar duas ou mais listas acima de alguma forma.
 
-Avanço: quanto menor o número de habilidades em sua lista em relação ao padrão, menos frequentemente você deverá premiar os personagens com de pontos de habilidade. Talvez permita-os apenas quando ficarem “bombados” (página XX) ou restrinja-os de outra forma.
+**Avanço**: quanto menor o número de habilidades em sua lista em relação ao padrão, menos frequentemente você deverá premiar os personagens com de pontos de habilidade. Talvez permita-os apenas quando ficarem “bombados” (página XX) ou restrinja-os de outra forma.
 
 Alternativas para a pirâmide:
 
-- Diamante: Um meio largo (cerca de um terço delas) que se estreita em direção ao topo e à base, por exemplo, 1 habilidade em +0, 2 habilidades em +1, 3 habilidades em +2, 2 habilidades em +3, 1 habilidade em +4.
-- Coluna: um número quase igual de habilidades em cada nível. Se sua lista for curta o suficiente, pode ser uma linha, uma habilidade por nível.
-- Grátis + Limite: Dê aos jogadores pontos de habilidade suficientes para fazer uma pirâmide (ou outra forma), mas não os obrigue. Eles podem comprar o que quiserem, permanecendo dentro do limite.
+- **Diamante**: Um meio largo (cerca de um terço delas) que se estreita em direção ao topo e à base, por exemplo, 1 habilidade em +0, 2 habilidades em +1, 3 habilidades em +2, 2 habilidades em +3, 1 habilidade em +4.
+- **Coluna**: um número quase igual de habilidades em cada nível. Se sua lista for curta o suficiente, pode ser uma linha, uma habilidade por nível.
+- **Grátis + Limite**: Dê aos jogadores pontos de habilidade suficientes para fazer uma pirâmide (ou outra forma), mas não os obrigue. Eles podem comprar o que quiserem, permanecendo dentro do limite.
 
-Cobertura: certifique-se de considerar quantas habilidades você espera que sejam compradas, do total. A lista padrão tem níveis em 53% das habilidades (10 de 19). Quanto maior a porcentagem, mais sobreposição os jogadores podem ter. Cuide para que haja a proteção de nicho.
+**Cobertura:** certifique-se de considerar quantas habilidades você espera que sejam compradas, do total. A lista padrão tem níveis em 53% das habilidades (10 de 19). Quanto maior a porcentagem, mais sobreposição os jogadores podem ter. Cuide para que haja a proteção de nicho.
 
-Combinação: Você pode querer ter duas listas, com os jogadores adicionando uma de cada para fazer seu rolamento. O principal a se ter em mente é manter os totais potenciais dentro do alcance de zero ao limite estabelecido. Você pode ter níveis de +0 a +2 em cada lista, ou -1 a +1 em uma e +1 a +3 na outra, etc.
+**Combinação:** Você pode querer ter duas listas, com os jogadores adicionando uma de cada para fazer seu rolamento. O principal a se ter em mente é manter os totais potenciais dentro do alcance de zero ao limite estabelecido. Você pode ter níveis de +0 a +2 em cada lista, ou -1 a +1 em uma e +1 a +3 na outra, etc.
 
 ## Criação de Personagem Durante o Jogo
 
@@ -1107,11 +1063,11 @@ Uma contagem regressiva adiciona urgência a um adversário ou situação: lide 
 
 As contagens regressivas têm três componentes: uma trilha de contagem regressiva, um ou mais gatilhos e um resultado.
 
-A trilha de contagem regressiva se parece muito com uma trilha de estresse: é uma linha de caixas que você marca da esquerda para a direita. Cada vez que você marca uma caixa, a contagem regressiva fica mais perto do fim. Quanto mais curta a trilha, mais rápido a desgraça se aproxima.
+A **trilha de contagem regressiva** se parece muito com uma trilha de estresse: é uma linha de caixas que você marca da esquerda para a direita. Cada vez que você marca uma caixa, a contagem regressiva fica mais perto do fim. Quanto mais curta a trilha, mais rápido a desgraça se aproxima.
 
-Um gatilho é um evento que marca uma caixa na trilha de contagem regressiva. Pode ser simples como “um minuto / uma hora / um dia / uma troca se passa” ou tão específico como “o vilão sofre uma consequência ou é derrotado”.
+Um **gatilho** é um evento que marca uma caixa na trilha de contagem regressiva. Pode ser simples como “um minuto / uma hora / um dia / uma troca se passa” ou tão específico como “o vilão sofre uma consequência ou é derrotado”.
 
-Quando você marca a última caixa, a contagem regressiva termina e o resultado acontece, seja ele qual for.
+Quando você marca a última caixa, a contagem regressiva termina e o **resultado** acontece, seja ele qual for.
 
 Os MJs podem desejar revelar a existência de uma trilha de contagem regressiva para os jogadores, sem dizer a eles o que ela representa, a princípio, como uma espécie de prenúncio e para aumentar a tensão na história.
 
@@ -1121,7 +1077,7 @@ Uma contagem regressiva pode ter mais de um gatilho, se você quiser; talvez a c
 
 As consequências extremas introduzem uma quarta gravidade de consequência, opcional, para o seu jogo: algo que muda um personagem de forma permanente e irreversível.
 
-Usar uma consequência extrema reduz o estresse recebido em 8. Quando usada, você deve substituir um dos aspectos existentes de seu personagem (exceto seu conceito, que é proibido) por um aspecto que representa a mudança profunda no personagem decorrente do mal que ele sofreu.
+Usar uma consequência extrema reduz o estresse recebido em 8. Quando usada, você deve **substituir** um dos aspectos existentes de seu personagem (exceto seu conceito, que é proibido) por um aspecto que representa a mudança profunda no personagem decorrente do mal que ele sofreu.
 
 Por padrão, não há opção de recuperação de uma consequência extrema. Ela se torna parte do personagem. Em sua próxima descoberta, você pode renomeá-lo para refletir como você está lidando com ela, mas não pode voltar ao aspecto original.
 
@@ -1137,17 +1093,17 @@ Alguns grupos podem achar que as disputas envolvem muitas tentativas de criar va
 
 ## Defesa Total
 
-Às vezes, um jogador (ou MJ) pode querer que seu personagem foque totalmente no uso da ação defender até o próximo turno, ao invés de realizar uma ação em seu turno. Isso se chama defesa total.
+Às vezes, um jogador (ou MJ) pode querer que seu personagem foque totalmente no uso da ação defender até o próximo turno, ao invés de realizar uma ação em seu turno. Isso se chama **defesa total**.
 
 Ao declarar defesa total, você deve deixar claro o foco de seus esforços. Por padrão, você está se defendendo (de ataques e esforços para criar vantagens sobre você), mas pode desejar especificar alguém que está protegendo, ou uma defesa contra um determinado grupo de agressores, ou um determinado esforço ou resultado a que deseja se opor.
 
-Enquanto estiver na defesa total, você ganha +2 em todas as jogadas de defesa relevantes para o seu foco declarado.
+**Enquanto estiver na defesa total, você ganha +2 em todas as jogadas de defesa relevantes para o seu foco declarado.**
 
 Se nada acontecer e você não tiver rolado para se defender nenhuma vez até que seu próximo turno aconteça, você ganha um impulso (página XX), pois tem a oportunidade de se preparar para sua próxima ação. Isso compensa “perder a vez” porque você concentrou seus esforços na defesa contra algo que não aconteceu.
 
 ## Obstáculos
 
-A qualidade definidora dos inimigos é que eles podem ser atacados e derrotados. Em contraste, a qualidade definidora dos obstáculos é que eles não podem ser atacados. Obstáculos certamente tornam as cenas mais difíceis para os PJs, mas os PJs não podem simplesmente lutar contra eles. Obstáculos devem ser contornados, suportados ou tornados irrelevantes.
+A qualidade definidora dos inimigos é que eles podem ser atacados e derrotados. Em contraste, a qualidade definidora dos **obstáculos** é que eles não podem ser atacados. Obstáculos certamente tornam as cenas mais difíceis para os PJs, mas os PJs não podem simplesmente lutar contra eles. Obstáculos devem ser contornados, suportados ou tornados irrelevantes.
 
 Embora a maioria dos obstáculos seja uma característica do ambiente, alguns podem ser personagens que não podem ser derrotados usando métodos convencionais. O dragão pode ser um chefão, mas também pode ser um obstáculo perigoso. A estátua animada impedindo você de chegar ao mago maligno pode ser uma ameaça, mas também pode ser um bloqueio ou uma distração. Tudo depende da função do adversário na cena e de como os PJs devem lidar com ele.
 
@@ -1157,7 +1113,7 @@ Existem três tipos de obstáculos: perigos, bloqueios e distrações.
 
 ### Perigos
 
-Se um obstáculo pode atacar os PJs, é um perigo. Jatos de fogo, pedras rolando ou um franco-atirador muito longe para ser afetado diretamente - são todos perigos. Cada perigo tem um nome, um nível de habilidade e um nível de arma (página XX) de 1 a 4.
+Se um obstáculo pode atacar os PJs, é um **perigo**. Jatos de fogo, pedras rolando ou um franco-atirador muito longe para ser afetado diretamente - são todos perigos. Cada perigo tem um nome, um nível de habilidade e um nível de arma (página XX) de 1 a 4.
 
 O nome do perigo é uma habilidade e um aspecto; ou seja, o nome define o que o perigo pode fazer e seu nível de habilidade define o quão bom ele é nisso, mas o nome também pode ser invocado ou imposto como qualquer aspecto.
 
@@ -1169,7 +1125,7 @@ Se um jogador quiser superar ou criar uma vantagem contra um perigo, ele enfrent
 
 ### Bloqueios
 
-Enquanto os perigos existem para ferir os PJs, os bloqueios servem para impedi-los de fazer as coisas que desejam. Os bloqueios podem causar estresse, embora nem sempre o façam. A principal diferença entre bloqueios e perigos é que os bloqueios não realizam ações e são mais difíceis de se livrar. Os bloqueios fornecem oposição passiva em certas circunstâncias e podem ameaçar ou causar danos se não forem resolvidos.
+Enquanto os perigos existem para ferir os PJs, os **bloqueios** servem para impedi-los de fazer as coisas que desejam. Os bloqueios podem causar estresse, embora nem sempre o façam. A principal diferença entre bloqueios e perigos é que os bloqueios não realizam ações e são mais difíceis de se livrar. Os bloqueios fornecem oposição passiva em certas circunstâncias e podem ameaçar ou causar danos se não forem resolvidos.
 
 Como os perigos, os bloqueios têm um nome e um nível de habilidade, e o nome é uma habilidade e um aspecto. Ao contrário dos perigos, o nível de habilidade de um bloqueio não deve ser muito maior do que um nível acima da habilidade mais alta dos PJs; caso contrário, as coisas podem ficar frustrantes rapidamente. Um bloqueio pode ter um nível de arma de até 4, mas não necessariamente precisa ter níveis de arma.
 
@@ -1189,12 +1145,12 @@ Use bloqueios com moderação. Os bloqueios tornam mais difícil para os PJs rea
 
 ### Distrações
 
-Enquanto os perigos atacam os PJs diretamente e os bloqueios os impedem de realizar certas ações, as distrações forçam os PJs a definir suas prioridades. Dos obstáculos, as distrações costumam ser as menos definidas mecanicamente. Eles também não necessariamente tornam a cena mecanicamente mais difícil. Em vez disso, eles apresentam aos PJs decisões difíceis. Aqui estão as partes da distração:
+Enquanto os perigos atacam os PJs diretamente e os bloqueios os impedem de realizar certas ações, as **distrações** forçam os PJs a definir suas prioridades. Dos obstáculos, as distrações costumam ser as menos definidas mecanicamente. Eles também não necessariamente tornam a cena mecanicamente mais difícil. Em vez disso, eles apresentam aos PJs decisões difíceis. Aqui estão as partes da distração:
 
-- O nome de uma distração é uma representação breve e contundente do que é. Pode ser um aspecto, se você precisar ou quiser que seja.
-- A escolha de uma distração é uma pergunta simples que codifica a decisão que ela dá aos PJs.
-- A repercussão de uma distração é o que acontece aos PJs se eles não lidarem com a distração. Algumas distrações podem ter várias repercussões, incluindo repercussões por ser bem sucedido ao lidar com a distração.
-- A oposição de uma distração é sua oposição passiva contra a qual os PJs rolam. Nem toda distração precisa oferecer oposição.
+- O **nome** de uma distração é uma representação breve e contundente do que é. Pode ser um aspecto, se você precisar ou quiser que seja.
+- A **escolha** de uma distração é uma pergunta simples que codifica a decisão que ela dá aos PJs.
+- A **repercussão** de uma distração é o que acontece aos PJs se eles não lidarem com a distração. Algumas distrações podem ter várias repercussões, incluindo repercussões por ser bem sucedido ao lidar com a distração.
+- A **oposição** de uma distração é sua oposição passiva contra a qual os PJs rolam. Nem toda distração precisa oferecer oposição.
 
 Se você tem medo de que os PJs lidem com facilidade com uma luta que você tem planejada, adicionar uma ou duas distrações pode forçá-los a decidir se é mais importante derrotar os bandidos ou lidar com as distrações.
 
@@ -1221,15 +1177,15 @@ Distrações
 
 ## Escala
 
-Escala é um subsistema opcional que você pode usar para representar seres sobrenaturais que operam em um nível além das capacidades da maioria dos personagens em seu jogo. Normalmente, você não precisa se preocupar com o impacto da escala em seu jogo. Pode haver momentos, no entanto, em que seja desejável apresentar aos personagens uma ameaça maior do que eles normalmente enfrentam - ou uma oportunidade para personagens peso-pena socarem como pesos-pesados.
+**Escala** é um subsistema opcional que você pode usar para representar seres sobrenaturais que operam em um nível além das capacidades da maioria dos personagens em seu jogo. Normalmente, você não precisa se preocupar com o impacto da escala em seu jogo. Pode haver momentos, no entanto, em que seja desejável apresentar aos personagens uma ameaça maior do que eles normalmente enfrentam - ou uma oportunidade para personagens peso-pena socarem como pesos-pesados.
 
 Como exemplo - você pode querer mudar a lista para algo mais adequado ao seu ambiente - apresentaremos cinco níveis de escala em potencial: Mundano, Sobrenatural, Etéreo, Lendário e Divino.
 
-- Mundano representa personagens sem acesso a poderes sobrenaturais ou tecnologias que os coloquem além das capacidades dos humanos.
-- Sobrenatural representa personagens que têm acesso a poderes sobrenaturais ou tecnologias que vão além da capacidade humana, mas que ainda são efetivamente humanos.
-- Etéreo representa personagens incomuns ou únicos cujos poderes os afastam das preocupações mundanas da humanidade.
-- Legendário representa espíritos, entidades e seres alienígenas poderosos para os quais a humanidade é mais uma curiosidade do que uma ameaça.
-- Divino representa as forças mais poderosas do universo: arcanjos, deuses, rainhas das fadas, planetas vivos e assim por diante.
+- **Mundano** representa personagens sem acesso a poderes sobrenaturais ou tecnologias que os coloquem além das capacidades dos humanos.
+- **Sobrenatural** representa personagens que têm acesso a poderes sobrenaturais ou tecnologias que vão além da capacidade humana, mas que ainda são efetivamente humanos.
+- **Etéreo** representa personagens incomuns ou únicos cujos poderes os afastam das preocupações mundanas da humanidade.
+- **Legendário** representa espíritos, entidades e seres alienígenas poderosos para os quais a humanidade é mais uma curiosidade do que uma ameaça.
+- **Divino** representa as forças mais poderosas do universo: arcanjos, deuses, rainhas das fadas, planetas vivos e assim por diante.
 
 Ao aplicar a escala a duas forças ou indivíduos opostos, compare os níveis de cada lado e determine quem é mais alto e em quantos níveis. Eles obtêm um dos seguintes benefícios em qualquer ação rolada contra seus oponentes inferiores:
 
@@ -1275,15 +1231,15 @@ Mas lembre-se, para monstros e outras grandes ameaças é aceitável quebrar as 
 
 Ambos os métodos servem para prolongar o confronto final, conduzindo o grupo através de uma atividade sob pressão do tempo antes que eles possam ir atrás do Grande Vilão.
 
-Com a imunidade de desafio, seu Grande Vilão não pode ser afetado diretamente (mentalmente, fisicamente ou ambos) até que o grupo supere um desafio (por exemplo, desmontando a fonte de seu poder, descobrindo qual é sua fraqueza, etc). Os grandes vilões, entretanto, podem agir livremente e podem atacá-los enquanto tentam agir, opor-se a seus esforços de superar ou criar vantagens com seus rolamentos de defesa, atacar suas invocações gratuitas com suas próprias superações ou preparar-se para seu eventual avanço criando vantagens próprias.
+Com a **imunidade de desafio**, seu Grande Vilão não pode ser afetado diretamente (mentalmente, fisicamente ou ambos) até que o grupo supere um desafio (por exemplo, desmontando a fonte de seu poder, descobrindo qual é sua fraqueza, etc). Os grandes vilões, entretanto, podem agir livremente e podem atacá-los enquanto tentam agir, opor-se a seus esforços de superar ou criar vantagens com seus rolamentos de defesa, atacar suas invocações gratuitas com suas próprias superações ou preparar-se para seu eventual avanço criando vantagens próprias.
 
-Com imunidade de disputa, o grupo deve vencer uma disputa para poder atacar diretamente o Grande Vilão - e o Grande Vilão consegue atacá-los enquanto eles estão tentando. Se o Grande Vilão vencer a disputa, ele consegue executar seu plano e escapa ileso.
+Com **imunidade de disputa**, o grupo deve vencer uma disputa para poder atacar diretamente o Grande Vilão - e o Grande Vilão consegue atacá-los enquanto eles estão tentando. Se o Grande Vilão vencer a disputa, ele consegue executar seu plano e escapa ileso.
 
 ### Armadura de Lacaios Descartáveis
 
 Cercar-se de lacaios é uma maneira de tentar equilibrar o lado do Grande Vilão contra os PJs, mas só funciona de verdade se os jogadores decidirem ir atrás do Grande Vilão diretamente e ignorar aqueles lacaios irritantes por um tempo.
 
-Mas com a armadura de lacaios descartáveis em jogo, um Grande Vilão sempre pode ter sucesso com um custo em suas jogadas de defesa contra ataques, forçando um lacaio no caminho do golpe. Aquele lacaio não rola para se defender, ele apenas recebe o golpe que teria acertado o Grande Vilão. Isso força os PJs a desgastar o exército do Grande Vilão antes do confronto final.
+Mas com a **armadura de lacaios descartáveis** em jogo, um Grande Vilão sempre pode ter sucesso com um custo em suas jogadas de defesa contra ataques, forçando um lacaio no caminho do golpe. Aquele lacaio não rola para se defender, ele apenas recebe o golpe que teria acertado o Grande Vilão. Isso força os PJs a desgastar o exército do Grande Vilão antes do confronto final.
 
 E lembre-se, lacaios não precisam ser lacaios literais. Por exemplo, você pode criar um ou mais “geradores de escudo”, cada um com uma trilha de estresse e talvez uma habilidade para criar vantagens defensivas para o Grande Vilão protegido!
 
@@ -1297,26 +1253,26 @@ Se você quiser suavizar isso um pouco, leve as consequências que o Grande Vil�
 
 ### Aumentar a Escala
 
-Você pode aumentar a escala para permitir que seu Grande Vilão opere em uma escala maior do que os PJs, usando a opção de escala da página XX. Você pode fazer isso mesmo se a escala não estiver normalmente em jogo em sua campanha - essas regras só precisam ser aplicadas quando um Grande Vilão entra em campo!
+Você pode **aumentar a escala** para permitir que seu Grande Vilão opere em uma escala maior do que os PJs, usando a opção de escala da página XX. Você pode fazer isso mesmo se a escala não estiver normalmente em jogo em sua campanha - essas regras só precisam ser aplicadas quando um Grande Vilão entra em campo!
 
 ### Bônus Solo
 
-Os jogadores podem desfrutar de um bônus de trabalho em equipe, com certeza - mas por que não dar ao seu Grande Vilão um bônus solo complementar quando ele for o único enfrentando os heróis?
+Os jogadores podem desfrutar de um bônus de trabalho em equipe, com certeza - mas por que não dar ao seu Grande Vilão um **bônus solo** complementar quando ele for o único enfrentando os heróis?
 
 Existem algumas maneiras de implementar um bônus solo. Você pode usar mais de uma, mas tenha cuidado ao combiná-las, pois seus efeitos se acumulam rapidamente.
 
-- O Grande Vilão recebe um bônus nas jogadas de habilidade que é igual ao bônus potencial máximo de trabalho em equipe do grupo (página XX) - o número de PJs agindo contra o Grande Vilão menos um (então, +2 contra um grupo de 3, etc). Este bônus não pode fazer melhor do que dobrar a habilidade afetada do Grande Vilão, no entanto, assim como ocorre com os PJs (ou talvez você também infrinja essa regra).
-- O Grande Vilão pode reduzir o estresse de ataques bem-sucedidos pelo número de PJs oponentes dividido por dois, arredondado para cima. Se você está preocupado que isso fará com que a luta seja muito longa, então os acertos reduzidos desta forma não podem ser reduzidos abaixo de 1.
-- O Grande Vilão tem invocações ampliadas: quando pagar para invocar um aspecto, seu bônus é igual ao número de PJs que ele enfrenta. Não funciona com invocações gratuitas, mas isso faz com que o gasto de um ponto de destino seja algo aterrorizante.
-- O Grande Vilão pode suprimir invocações: ao enfrentar dois ou mais inimigos, as invocações do adversário fornecem apenas um bônus de +1, ou permitem apenas novas jogadas, quando usadas diretamente contra o Grande Vilão. Opcionalmente, o Grande Vilão também pode remover a capacidade dos PJs de empilhar invocações gratuitas.
+- O Grande Vilão recebe um **bônus nas jogadas de habilidade** que é igual ao bônus potencial máximo de trabalho em equipe do grupo (página XX) - o número de PJs agindo contra o Grande Vilão menos um (então, +2 contra um grupo de 3, etc). Este bônus não pode fazer melhor do que dobrar a habilidade afetada do Grande Vilão, no entanto, assim como ocorre com os PJs (ou talvez você também infrinja essa regra).
+- O Grande Vilão pode **reduzir o estresse** de ataques bem-sucedidos pelo número de PJs oponentes dividido por dois, arredondado para cima. Se você está preocupado que isso fará com que a luta seja muito longa, então os acertos reduzidos desta forma não podem ser reduzidos abaixo de 1.
+- O Grande Vilão tem **invocações ampliadas**: quando pagar para invocar um aspecto, seu bônus é igual ao número de PJs que ele enfrenta. Não funciona com invocações gratuitas, mas isso faz com que o gasto de um ponto de destino seja algo aterrorizante.
+- O Grande Vilão pode **suprimir invocações**: ao enfrentar dois ou mais inimigos, as invocações do adversário fornecem apenas um bônus de +1, ou permitem apenas novas jogadas, quando usadas diretamente contra o Grande Vilão. Opcionalmente, o Grande Vilão também pode remover a capacidade dos PJs de empilhar invocações gratuitas.
 
 ### A Ameaça é um Mapa (ou um Enxame de Personagens)
 
-Em Fate, qualquer coisa pode ser um personagem, então por que não um mapa? Quando a ameaça é um mapa, seu Grande Vilão tem zonas (página XX) que devem ser navegadas para alcançar a vitória.
+Em Fate, qualquer coisa pode ser um personagem, então por que não um mapa? Quando **a ameaça é um mapa**, seu Grande Vilão tem zonas (página XX) que devem ser navegadas para alcançar a vitória.
 
 Conforme você detalha seu mapa Grande Vilão, cada zona pode ter suas próprias habilidades, aspectos e trilhas de estresse. Algumas zonas podem conter desafios simples que devem ser superados para entrar mais fundo na criatura. Cada zona pode realizar uma ação como um personagem separado contra os PJs que ocupam aquela zona, ou no caso de uma zona representando um membro ou similar, pode ser capaz de atacar zonas adjacentes também. Se uma zona for derrotada por um dos ataques do PC, ela pode ser contornada e não pode mais realizar ações por conta própria, mas o Grande Vilão geral não é derrotado até que os heróis possam alcançar seu coração e matá-lo de verdade.
 
-Este método funciona particularmente bem se o seu Grande Vilão é um monstro verdadeiramente gigantesco, mas não precisa se limitar a essa situação. Você pode usar a ideia de tratar a ameaça como uma coleção de personagens interconectados, sem exigir que os PJs realmente entrem ou naveguem no Grande Vilão como um mapa literal. Usado dessa forma, você tem um híbrido entre um mapa e uma armadura de lacaios descartáveis (página XX) - uma enxame de personagens, de certo modo. Algumas partes do Grande Vilão devem ser derrotadas antes que os jogadores possam acertar onde é verdadeiramente vulnerável, e essas partes podem realizar suas próprias ações na troca.
+Este método funciona particularmente bem se o seu Grande Vilão é um monstro verdadeiramente gigantesco, mas não precisa se limitar a essa situação. Você pode usar a ideia de tratar a ameaça como uma coleção de personagens interconectados, sem exigir que os PJs realmente entrem ou naveguem no Grande Vilão como um mapa literal. Usado dessa forma, você tem um híbrido entre um mapa e uma armadura de lacaios descartáveis (página XX) - uma **enxame de personagens**, de certo modo. Algumas partes do Grande Vilão devem ser derrotadas antes que os jogadores possam acertar onde é verdadeiramente vulnerável, e essas partes podem realizar suas próprias ações na troca.
 
 Quer você se engaje totalmente na ideia do mapa ou simplesmente construa o Grande Vilão como uma enxame, você com certeza terminará com uma luta mais dinâmica, onde o Grande Vilão age com mais frequência, e os jogadores devem descobrir um plano de ataque que elimine a ameaça peça por peça antes que eles possam finalmente acabar com ela.
 
@@ -1324,13 +1280,13 @@ Quer você se engaje totalmente na ideia do mapa ou simplesmente construa o Gran
 
 Inevitavelmente, alguém em sua mesa desejará afetar vários alvos de uma vez. Caso você permita, aqui estão alguns métodos que você pode usar.
 
-Se você deseja ser seletivo sobre seus alvos, pode dividir seus esforços. Role sua habilidade e, se o total resultante for positivo, você pode dividir esse total como quiser entre os alvos, cada um dos quais se defenderá contra o esforço que você designou a ele. Você deve atribuir pelo menos um ponto de esforço a um alvo, caso contrário você sequer o alvejou.
+Se você deseja ser seletivo sobre seus alvos, pode **dividir seus esforços**. Role sua habilidade e, se o total resultante for positivo, você pode dividir esse total como quiser entre os alvos, cada um dos quais se defenderá contra o esforço que você designou a ele. Você deve atribuir pelo menos um ponto de esforço a um alvo, caso contrário você sequer o alvejou.
 
 Sophie enfrenta um trio de capangas e quer atacar todos os três em uma sequência de estocadas com seu florete. Graças a uma invocação e alguma sorte, seu rolamento de Luta chega com Épico (+7). Ela atribui um ataque Bom (+3) para aquele que parece mais veterano e Razoável (+2) para cada um dos outros dois, com um total de sete. Cada um deles rola para se defender.
 
-Em algumas circunstâncias especiais, como em uma explosão ou semelhante, você pode fazer um ataque de zona contra todos em uma zona, tanto amigos quanto inimigos. Aqui, você não divide seu esforço; cada alvo deve se defender contra seu rolamento total. As circunstâncias e o método devem ser adequados para fazer isso; frequentemente, o MJ exigirá que você invoque um aspecto ou use uma façanha para obter permissão.
+Em algumas circunstâncias especiais, como em uma explosão ou semelhante, você pode fazer um **ataque de zona** contra todos em uma zona, tanto amigos quanto inimigos. Aqui, você não divide seu esforço; cada alvo deve se defender contra seu rolamento total. As circunstâncias e o método devem ser adequados para fazer isso; frequentemente, o MJ exigirá que você invoque um aspecto ou use uma façanha para obter permissão.
 
-Se você deseja criar uma vantagem que afete uma zona ou grupo inteiro, mire na cena: coloque um único aspecto na zona ou na própria cena ao invés de colocar aspectos separados em cada um dos alvos. Isso tem a vantagem adicional de ser simples de acompanhar. Se alguém insistir em criar um aspecto separado em cada alvo, ele deve usar o método de divisão de esforço.
+Se você deseja criar uma vantagem que afete uma zona ou grupo inteiro, **mire na cena**: coloque um único aspecto na zona ou na própria cena ao invés de colocar aspectos separados em cada um dos alvos. Isso tem a vantagem adicional de ser simples de acompanhar. Se alguém insistir em criar um aspecto separado em cada alvo, ele deve usar o método de divisão de esforço.
 
 Em qualquer um desses métodos, todos os alvos devem estar na mesma zona. O MJ pode permitir uma exceção ocasional devido ao método utilizado e às circunstâncias.
 
@@ -1340,9 +1296,9 @@ Apenas um tipo de ação deve ser usado - como atacar vários alvos com um golpe
 
 Quer explorar um pouco daquela vibração de equipamento de combate que outros jogos têm? Considere os níveis de armas e armaduras. Resumindo, ser atingido por uma arma irá causar mais dano em você, e ter uma armadura impede que isso aconteça. (Você poderia modelar isso com façanhas, mas você pode achar ruim gastar espaços de façanhas com isso.)
 
-O valor da arma é adicionado à quantidade de tensões de um golpe bem-sucedido. Se você tiver Arma: 2, significa que qualquer golpe causará 2 tensões a mais do que o normal. Isso conta para empates; você causa estresse em um empate ao invés de receber um impulso.
+O valor da **arma** é adicionado à quantidade de tensões de um golpe bem-sucedido. Se você tiver Arma: 2, significa que qualquer golpe causará 2 tensões a mais do que o normal. Isso conta para empates; você causa estresse em um empate ao invés de receber um impulso.
 
-O valor da armadura reduz as tensões de um acerto bem-sucedido. Então, Armadura: 2 faz com que qualquer golpe cause 2 a menos que o normal. Se você acertar, mas a armadura do alvo reduzir as tensões do ataque para 0 ou menos, você recebe um impulso para usar no alvo, mas não causa nenhum dano.
+O valor da **armadura** reduz as tensões de um acerto bem-sucedido. Então, Armadura: 2 faz com que qualquer golpe cause 2 a menos que o normal. Se você acertar, mas a armadura do alvo reduzir as tensões do ataque para 0 ou menos, você recebe um impulso para usar no alvo, mas não causa nenhum dano.
 
 Escolha o alcance desses níveis com cuidado. Fique de olho no quão provável seria que eles causem uma consequência (ou pior) em um empate. Recomendamos um intervalo de 0 a 4, no máximo.
 
@@ -1350,7 +1306,7 @@ Escolha o alcance desses níveis com cuidado. Fique de olho no quão provável s
 
 Desde o final de 2012, existe apenas uma versão do Fate pela Evil Hat: Fate Core System, a quarta edição do sistema.
 
-Ah, mas e quanto ao Fate Accelerated, poderia perguntar um perspicaz fã do Fate? Acontece que esse é o Fate Core também - é o mesmo sistema, apenas com diferentes configurações de engrenagens (ou seja, opções/estilos de configuração) para trilhas de estresse, a lista de habilidades, façanhas e design de PNJs. Quaisquer diferenças aparentes nas funções centrais do sistema são devidas a acidentes de desenvolvimento paralelo e podem ser consideradas não intencionais - com as devidas desculpas aos advogados de regras que têm por aí! Se houver um conflito entre os designs, o Fate Core System tem a palavra final.
+Ah, mas e quanto ao Fate Accelerated, poderia perguntar um perspicaz fã do Fate? Acontece que esse é o Fate Core também - é o mesmo sistema, apenas com diferentes **configurações de engrenagens** (ou seja, opções/estilos de configuração) para trilhas de estresse, a lista de habilidades, façanhas e design de PNJs. Quaisquer diferenças aparentes nas funções centrais do sistema são devidas a acidentes de desenvolvimento paralelo e podem ser consideradas não intencionais - com as devidas desculpas aos advogados de regras que têm por aí! Se houver um conflito entre os designs, o Fate Core System tem a palavra final.
 
 Essas duas perspectivas no Fate Core se juntam aqui, em Fate Condensed - muito literalmente, na verdade. Fate Condensed começou com o texto do Fate Accelerated, tirando todas as configurações de engrenagens únicas do Fate Accelerated, substituídas pelas do Fate Core. Desse ponto de partida, aplicamos oito anos de experiência em jogos com a comunidade para refinamento e esclarecimento. Esse esforço produziu algumas pequenas diferenças, conforme observado na página XX, mas quer você escolha jogar com ou sem essas diferenças, o sistema ainda é o Fate Core no final das contas. Sentimos que o Fate Condensed é com certeza uma melhoria, mas não há uma guerra de edições aqui (e por favor, não tente começar uma). É tudo Fate Core.
 
