@@ -20,7 +20,6 @@ import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import EditAttributesIcon from "@material-ui/icons/EditAttributes";
 import EditAttributesOutlinedIcon from "@material-ui/icons/EditAttributesOutlined";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import FiberManualRecordTwoToneIcon from "@material-ui/icons/FiberManualRecordTwoTone";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteOutlinedIcon from "@material-ui/icons/PaletteOutlined";
@@ -54,11 +53,7 @@ import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
-import {
-  IndexCardColor,
-  IndexCardColorContrast,
-  IndexCardColorTypes,
-} from "./IndexCardColor";
+import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
 export const IndexCard: React.FC<
   {
@@ -111,7 +106,7 @@ export const IndexCard: React.FC<
   const paper = useTextColors(
     theme.palette.type === "light"
       ? indexCardManager.state.indexCard.color
-      : darken(indexCardManager.state.indexCard.color, 0.2)
+      : darken(indexCardManager.state.indexCard.color, 0.5)
   );
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
@@ -879,12 +874,10 @@ function IndexCardColorPicker(props: {
           },
         }}
       />
-      <Box pb=".5rem" bgcolor="white">
+      <Box pb=".5rem" bgcolor="white" width="225px">
         <Grid container justify="center" spacing={1}>
           {Object.keys(IndexCardColor).map((colorName) => {
             const color = IndexCardColor[colorName as IndexCardColorTypes];
-            const colorContrast =
-              IndexCardColorContrast[colorName as IndexCardColorTypes];
             return (
               <Grid item key={color}>
                 <IconButton
@@ -894,12 +887,14 @@ function IndexCardColorPicker(props: {
                     props.onChange(color);
                   }}
                 >
-                  <FiberManualRecordTwoToneIcon
-                    htmlColor={colorContrast}
+                  <Box
+                    // htmlColor={color}
                     className={css({
-                      // border:
-                      // colorName === "white" ? "1px solid black" : undefined,
-                      // borderRadius:"50%",
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      background: color,
+                      borderRadius: "50%",
+                      border: "1px solid #e0e0e0",
                     })}
                   />
                 </IconButton>
