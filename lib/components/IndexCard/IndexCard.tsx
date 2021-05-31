@@ -879,7 +879,7 @@ function IndexCardColorPicker(props: {
           },
         }}
       />
-      <Box pb=".5rem">
+      <Box pb=".5rem" bgcolor="white">
         <Grid container justify="center" spacing={1}>
           {Object.keys(IndexCardColor).map((colorName) => {
             const color = IndexCardColor[colorName as IndexCardColorTypes];
