@@ -418,7 +418,7 @@ Ethan está com muita sorte; a porta do cofre se abre quase instantaneamente. El
 Existem quatro ações que você pode rolar, cada uma com propósitos e efeitos específicos na história:
 
 - **Superar** para vencer obstáculos com suas habilidades.
-- **Criar** uma vantagem para mudar uma situação em seu benefício.
+- **Criar uma vantagem** para mudar uma situação em seu benefício.
 - **Atacar** para ferir o inimigo.
 - **Defender** para sobreviver a um ataque, impedir um inimigo de criar uma vantagem ou opor-se a um esforço para superar um obstáculo.
 
