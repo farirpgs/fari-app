@@ -20,6 +20,7 @@ import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import EditAttributesIcon from "@material-ui/icons/EditAttributes";
 import EditAttributesOutlinedIcon from "@material-ui/icons/EditAttributesOutlined";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import FiberManualRecordTwoToneIcon from "@material-ui/icons/FiberManualRecordTwoTone";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteOutlinedIcon from "@material-ui/icons/PaletteOutlined";
@@ -53,6 +54,11 @@ import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
+import {
+  IndexCardColor,
+  IndexCardColorContrast,
+  IndexCardColorTypes,
+} from "./IndexCardColor";
 
 export const IndexCard: React.FC<
   {
@@ -378,7 +384,12 @@ export const IndexCard: React.FC<
                     size="small"
                     data-cy={`${props["data-cy"]}.remove`}
                     onClick={() => {
-                      props.onRemove();
+                      const confirmed = confirm(
+                        t("index-card.remove-confirmation")
+                      );
+                      if (confirmed) {
+                        props.onRemove();
+                      }
                     }}
                   >
                     <DeleteIcon htmlColor={paper.primary} />
@@ -498,8 +509,9 @@ export const IndexCard: React.FC<
                                 >
                                   <DragIndicatorIcon
                                     className={css({
-                                      transition:
-                                        theme.transitions.create("color"),
+                                      transition: theme.transitions.create(
+                                        "color"
+                                      ),
                                     })}
                                     htmlColor={
                                       dndRenderProps.isOver
@@ -617,8 +629,9 @@ export const IndexCard: React.FC<
                         },
                       ];
 
-                      const result =
-                        diceManager.actions.roll(commandOptionList);
+                      const result = diceManager.actions.roll(
+                        commandOptionList
+                      );
                       props.onRoll(result);
                     }}
                   >
@@ -843,13 +856,58 @@ function IndexCardColorPicker(props: {
     onChange: props.onChange,
     delay: 75,
   });
+  const colors = [
+    IndexCardColor.white,
+    IndexCardColor.blue,
+    IndexCardColor.green,
+    IndexCardColor.red,
+    IndexCardColor.yellow,
+  ];
   return (
-    <ChromePicker
-      color={color}
-      disableAlpha
-      onChange={(color) => {
-        return setColor(color.hex);
-      }}
-    />
+    <>
+      <ChromePicker
+        color={color}
+        disableAlpha
+        onChange={(color) => {
+          return setColor(color.hex);
+        }}
+        styles={{
+          default: {
+            picker: {
+              boxShadow: "none",
+            },
+          },
+        }}
+      />
+      <Box pb=".5rem">
+        <Grid container justify="center" spacing={1}>
+          {Object.keys(IndexCardColor).map((colorName) => {
+            const color = IndexCardColor[colorName as IndexCardColorTypes];
+            const colorContrast =
+              IndexCardColorContrast[colorName as IndexCardColorTypes];
+            return (
+              <Grid item key={color}>
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    setColor(color);
+                    props.onChange(color);
+                  }}
+                >
+                  <FiberManualRecordTwoToneIcon
+                    htmlColor={colorContrast}
+                    className={css({
+                      // border:
+                      // colorName === "white" ? "1px solid black" : undefined,
+                      // borderRadius:"50%",
+                    })}
+                  />
+                </IconButton>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    </>
   );
 }

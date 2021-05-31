@@ -198,6 +198,7 @@
   "index-card.mark-public": "Mark Public",
   "index-card.pin": "Pin",
   "index-card.remove": "Remove",
+  "index-card.remove-confirmation": "Are you sure you want to remove that index card ?",
   "index-card.reset": "Reset",
   "index-card.reset-confirmation": "Are you sure you want to reset that index card ?",
   "index-card.unpin": "Unpin",

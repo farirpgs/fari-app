@@ -1,18 +1,4 @@
-/**
- * @deprecated
- */
 export type IndexCardColorTypes = "white" | "red" | "blue" | "green" | "yellow";
-
-/**
- * @deprecated
- */
-export enum IndexCardColorTypeEnum {
-  white = "white",
-  red = "red",
-  blue = "blue",
-  green = "green",
-  yellow = "yellow",
-}
 
 export const IndexCardColor: Record<IndexCardColorTypes, string> = {
   white: "#fff",
@@ -20,4 +6,12 @@ export const IndexCardColor: Record<IndexCardColorTypes, string> = {
   blue: "#e9fcff",
   green: "#e8ffef",
   yellow: "#fffddb",
+} as const;
+
+export const IndexCardColorContrast: Record<IndexCardColorTypes, string> = {
+  white: "#dedede",
+  red: "#ff0000",
+  blue: "#00daff",
+  green: "#00ff4c",
+  yellow: "#ffee00",
 } as const;

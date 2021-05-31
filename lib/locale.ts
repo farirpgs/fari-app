@@ -198,6 +198,7 @@ export type ITranslationKeys =
   | "index-card.mark-public"
   | "index-card.pin"
   | "index-card.remove"
+  | "index-card.remove-confirmation"
   | "index-card.reset"
   | "index-card.reset-confirmation"
   | "index-card.unpin"
