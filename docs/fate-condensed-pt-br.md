@@ -649,7 +649,7 @@ Abordamos os tipos padrão de aspectos na página XX. Estes tipos adicionais sã
 
 **Aspectos de trama:** Às vezes, uma determinada trama pode introduzir um novo tema que aparece repetidamente na narrativa. Considere definir esse tema como um aspecto que está disponível para todos os personagens da história até que essa parte da trama termine.
 
-**Aspectos de cenário:** Assim como no aspecto de trama, o próprio cenário de sua campanha pode ter temas recorrentes. Ao contrário de um aspecto do cenário, esses aspectos não desaparecem.
+**Aspectos de cenário:** Assim como no aspecto de trama, o próprio cenário de sua campanha pode ter temas recorrentes. Ao contrário de um aspecto de trama, esses aspectos não desaparecem.
 
 **Aspectos de zona:** Você pode anexar aspectos de situação a um determinado lugar no mapa representado por uma zona (página XX). Isso pode trazer dinamismo para as interações de seu grupo com o mapa. Um MJ pode encorajar isso disponibilizando uma invocação gratuita no estilo “quem pegar, pegou” em um aspecto de zona no início da cena, atraindo personagens (jogadores e não jogadores) para tirar proveito daquele aspecto como parte de sua estratégia inicial.
 
@@ -657,7 +657,7 @@ Abordamos os tipos padrão de aspectos na página XX. Estes tipos adicionais sã
 
 Muitas vezes, você será capaz de resolver uma ação com um único rolamento de dados - você abre o cofre, evita a segurança ou convence o repórter a lhe dar suas anotações? Outras vezes, você terá enfrentamentos prolongados que exigem muitos rolamentos para serem resolvidos. Para esses casos, oferecemos três ferramentas de resolução: **desafios**, disputas e conflitos. Cada um funciona de maneira um pouco diferente, dependendo do objetivo do enfrentamento e da oposição envolvida.
 
-- **Um desafio é uma situação complicada ou dinâmica.** Você terá a oposição de alguém ou algo, mas não existe um "outro lado" dominante. É assim que você pode interpretar um pesquisador em busca de pistas em um livro antigo, o negociador do partido distraindo o bibliotecário e o agressor impedindo que horrores incontáveis ​​entrem na biblioteca, tudo ao mesmo tempo.
+- **Um desafio é uma situação complicada ou dinâmica.** Você terá a oposição de alguém ou algo, mas não existe um "outro lado" dominante. É assim que você pode interpretar um pesquisador em busca de pistas em um livro antigo, o negociador do grupo distraindo o bibliotecário e o agressor impedindo que horrores incontáveis ​​entrem na biblioteca, tudo ao mesmo tempo.
 - **Uma disputa é uma situação em que duas ou mais partes buscam objetivos mutuamente exclusivos, mas não estão ativamente ferindo uma à outra.** As disputas são perfeitas para perseguições, debates e corridas de todos os tipos. (E só porque as partes não estão tentando ferir umas às outras, não significa que danos não possam acontecer!)
 - **Um conflito é quando os personagens podem e querem ferir uns aos outros.** Lutando na lama com um cultista enquanto as facadas rolam soltas, crivando um bando de carniçais com balas enquanto garras rasgam sua carne, e uma troca cruel de farpas com seu rival sob o olhar vigilante da rainha - todos esses são conflitos.
 

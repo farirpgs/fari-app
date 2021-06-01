@@ -851,13 +851,7 @@ function IndexCardColorPicker(props: {
     onChange: props.onChange,
     delay: 75,
   });
-  const colors = [
-    IndexCardColor.white,
-    IndexCardColor.blue,
-    IndexCardColor.green,
-    IndexCardColor.red,
-    IndexCardColor.yellow,
-  ];
+
   return (
     <>
       <ChromePicker
@@ -888,7 +882,6 @@ function IndexCardColorPicker(props: {
                   }}
                 >
                   <Box
-                    // htmlColor={color}
                     className={css({
                       width: "1.5rem",
                       height: "1.5rem",
