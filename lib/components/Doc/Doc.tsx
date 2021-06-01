@@ -406,7 +406,7 @@ export const Doc: React.FC<IProps> = (props) => {
               )}
             </Grid>
             <Grid item zeroMinWidth>
-              <FateLabel variant="body2" color="primary" noWrap>
+              <FateLabel variant="body2" color="primary">
                 <b>{props.author.title}</b>
               </FateLabel>
             </Grid>
@@ -428,7 +428,7 @@ export const Doc: React.FC<IProps> = (props) => {
                 <React.Fragment key={item.url}>
                   <Grid item>
                     <AppLink to={item.url} target="_blank" underline="always">
-                      <b> {item.label}</b>
+                      <b>{item.label}</b>
                     </AppLink>
                   </Grid>
                   {!isLast && (
@@ -782,9 +782,8 @@ export const DocSideBar: React.FC<{
         {categoryNames.map((category) => {
           const items = categories[category];
 
-          const isCategorySelected = navigation.highlightedItems.includes(
-            category
-          );
+          const isCategorySelected =
+            navigation.highlightedItems.includes(category);
           const isCategoryOpened = openList.includes(category);
 
           const categoryName = category.replace("+", "");

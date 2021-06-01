@@ -50,4 +50,7 @@ export const DocImport = {
   Changelog: () => {
     return import("../../../CHANGELOG.md");
   },
+  FateCondensedPtBr: () => {
+    return import("../../../docs/fate-condensed-pt-br.md");
+  },
 };
