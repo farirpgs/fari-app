@@ -198,6 +198,7 @@
   "index-card.mark-public": "Mark Publika",
   "index-card.pin": "Fiksu",
   "index-card.remove": "Forigu",
+  "index-card.remove-confirmation": "Ĉu vi certas, ke vi volas forigi tiun indekson?",
   "index-card.reset": "Restarigu",
   "index-card.reset-confirmation": "Ĉu vi certas, ke vi volas reagordi tiun indekson?",
   "index-card.unpin": "Malfiksu",

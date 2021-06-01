@@ -198,6 +198,7 @@
   "index-card.mark-public": "Marca Pública",
   "index-card.pin": "Fijar",
   "index-card.remove": "Eliminar",
+  "index-card.remove-confirmation": "¿Seguro que quieres quitar esa ficha?",
   "index-card.reset": "Reiniciar",
   "index-card.reset-confirmation": "¿Seguro que quieres reiniciar esa ficha?",
   "index-card.unpin": "Soltar",

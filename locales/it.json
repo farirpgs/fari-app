@@ -198,6 +198,7 @@
   "index-card.mark-public": "Segna pubblico",
   "index-card.pin": "Blocca",
   "index-card.remove": "Rimuovi",
+  "index-card.remove-confirmation": "Sei sicuro di voler rimuovere quella scheda?",
   "index-card.reset": "Reset",
   "index-card.reset-confirmation": "Sei sicuro di voler resettare quella scheda?",
   "index-card.unpin": "Sblocca",

@@ -198,6 +198,7 @@
   "index-card.mark-public": "Марк Паблик",
   "index-card.pin": "Штырь",
   "index-card.remove": "Удалить",
+  "index-card.remove-confirmation": "Вы уверены, что хотите удалить эту карточку?",
   "index-card.reset": "Сбросить",
   "index-card.reset-confirmation": "Вы уверены, что хотите сбросить эту карту?",
   "index-card.unpin": "Открепить",
