@@ -32,7 +32,7 @@ export function FeatureRequestsRoute() {
         subtitle={t("feature-requests-route.meta.description")}
       />
       <Container disableGutters>
-        <Box bgcolor="#fff" px="1rem" mx="-1rem">
+        <Box bgcolor="#fff" px="1rem" py="1rem" mx="-1rem">
           <div data-canny />
         </Box>
       </Container>
