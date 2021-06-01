@@ -11,6 +11,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import HelpIcon from "@material-ui/icons/Help";
+import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
@@ -151,7 +152,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           mb={sectionsSeparator}
           maxWidth="sm"
         >
-          {renderDiscord()}
+          {renderCommunity()}
         </DarkBox>
         <LightBox
           title={t("home-route.sections.tools.title")}
@@ -533,25 +534,53 @@ export const HomeRoute: React.FC<{}> = (props) => {
     );
   }
 
-  function renderDiscord() {
+  function renderCommunity() {
     return (
-      <Grid container justify="center" spacing={2}>
-        {" "}
-        <Grid item xs={12}>
-          <img src={discord} className={css({ width: "200px" })} />
+      <Grid container justify="center" alignItems="baseline" spacing={2}>
+        <Grid item md={6} xs={12} container justify="center" spacing={2}>
+          <Grid item xs={12}>
+            <QuestionAnswerIcon
+              className={css({
+                width: "50px",
+                height: "auto",
+              })}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              color="primary"
+              variant="outlined"
+              size="large"
+              component={RouterLink}
+              to={"/feature-requests"}
+            >
+              {t("home-route.sections.request-a-feature.cta")}
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Button
-            color="primary"
-            variant="outlined"
-            size="large"
-            component="a"
-            href="https://discord.gg/vMAJFjUraA"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t("home-route.sections.join-community.cta")}
-          </Button>
+        <Grid item md={6} xs={12} container justify="center" spacing={2}>
+          <Grid item xs={12}>
+            <img
+              src={discord}
+              className={css({
+                width: "50px",
+                height: "auto",
+              })}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              color="primary"
+              variant="outlined"
+              size="large"
+              component="a"
+              href="https://discord.gg/vMAJFjUraA"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("home-route.sections.join-community.cta")}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     );
