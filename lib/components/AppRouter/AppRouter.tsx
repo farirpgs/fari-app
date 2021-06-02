@@ -18,6 +18,9 @@ const CharacterPrintRoute = React.lazy(
   () => import("../../routes/CharacterPrint/CharacterPrintRoute")
 );
 const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const FeatureRequestsRoute = React.lazy(
+  () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
+);
 const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
@@ -176,6 +179,14 @@ export const AppRouter = () => {
           render={(props) => (
             <SeelieSquireRoute page={props.match.params.page} />
           )}
+        />
+
+        <Route
+          exact
+          path={["/feature-requests", "/feature-requests/*"]}
+          render={(props) => {
+            return <FeatureRequestsRoute />;
+          }}
         />
 
         <Route

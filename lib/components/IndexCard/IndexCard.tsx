@@ -53,6 +53,7 @@ import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
+import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
 export const IndexCard: React.FC<
   {
@@ -105,7 +106,7 @@ export const IndexCard: React.FC<
   const paper = useTextColors(
     theme.palette.type === "light"
       ? indexCardManager.state.indexCard.color
-      : darken(indexCardManager.state.indexCard.color, 0.2)
+      : darken(indexCardManager.state.indexCard.color, 0.5)
   );
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
@@ -374,7 +375,12 @@ export const IndexCard: React.FC<
                     size="small"
                     data-cy={`${props["data-cy"]}.remove`}
                     onClick={() => {
-                      props.onRemove();
+                      const confirmed = confirm(
+                        t("index-card.remove-confirmation")
+                      );
+                      if (confirmed) {
+                        props.onRemove();
+                      }
                     }}
                   >
                     <DeleteIcon htmlColor={paper.primary} />
@@ -494,8 +500,9 @@ export const IndexCard: React.FC<
                                 >
                                   <DragIndicatorIcon
                                     className={css({
-                                      transition:
-                                        theme.transitions.create("color"),
+                                      transition: theme.transitions.create(
+                                        "color"
+                                      ),
                                     })}
                                     htmlColor={
                                       dndRenderProps.isOver
@@ -613,8 +620,9 @@ export const IndexCard: React.FC<
                         },
                       ];
 
-                      const result =
-                        diceManager.actions.roll(commandOptionList);
+                      const result = diceManager.actions.roll(
+                        commandOptionList
+                      );
                       props.onRoll(result);
                     }}
                   >
@@ -839,13 +847,51 @@ function IndexCardColorPicker(props: {
     onChange: props.onChange,
     delay: 75,
   });
+
   return (
-    <ChromePicker
-      color={color}
-      disableAlpha
-      onChange={(color) => {
-        return setColor(color.hex);
-      }}
-    />
+    <>
+      <ChromePicker
+        color={color}
+        disableAlpha
+        onChange={(color) => {
+          return setColor(color.hex);
+        }}
+        styles={{
+          default: {
+            picker: {
+              boxShadow: "none",
+            },
+          },
+        }}
+      />
+      <Box pb=".5rem" bgcolor="white" width="225px">
+        <Grid container justify="center" spacing={1}>
+          {Object.keys(IndexCardColor).map((colorName) => {
+            const color = IndexCardColor[colorName as IndexCardColorTypes];
+            return (
+              <Grid item key={color}>
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    setColor(color);
+                    props.onChange(color);
+                  }}
+                >
+                  <Box
+                    className={css({
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      background: color,
+                      borderRadius: "50%",
+                      border: "1px solid #e0e0e0",
+                    })}
+                  />
+                </IconButton>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    </>
   );
 }

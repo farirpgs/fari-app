@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Play Table-Top RPGs Online without the headache | Fari</title>
-    <link rel="icon" type="image/png" href="../images/app-favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../images/blue/favicon/favicon.ico"
+    />
     <meta
       name="google-site-verification"
       content="_SkIJRylG7gB1j0jbxxXboxdViB678DOHglRv43DNtE"
@@ -88,6 +92,33 @@
       type="text/javascript"
       src="https://ko-fi.com/widgets/widget_2.js"
     ></script>
+    <script>
+      !(function (w, d, i, s) {
+        function l() {
+          if (!d.getElementById(i)) {
+            var f = d.getElementsByTagName(s)[0],
+              e = d.createElement(s);
+            (e.type = "text/javascript"),
+              (e.async = !0),
+              (e.src = "https://canny.io/sdk.js"),
+              f.parentNode.insertBefore(e, f);
+          }
+        }
+        if ("function" != typeof w.Canny) {
+          var c = function () {
+            c.q.push(arguments);
+          };
+          (c.q = []),
+            (w.Canny = c),
+            "complete" === d.readyState
+              ? l()
+              : w.attachEvent
+              ? w.attachEvent("onload", l)
+              : w.addEventListener("load", l, !1);
+        }
+      })(window, document, "canny-jssdk", "script");
+    </script>
+
     <script src="./index.tsx"></script>
   </body>
 </html>

@@ -107,7 +107,7 @@ export const SceneFactory = {
 
 function migrateV1SceneToV2(v1: ISceneV1): IScene {
   if (v1.version !== 1) {
-    return v1 as unknown as IScene;
+    return (v1 as unknown) as IScene;
   }
 
   const publicIndexCards: Array<IIndexCard> = [];
@@ -167,7 +167,7 @@ function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
     [AspectType.NPC]: "Aspect",
     [AspectType.IndexCard]: "",
   };
-  const colorRecord: Record<IndexCardColorTypes, string> = {
+  const colorRecord: { [key in IndexCardColorTypes]?: string } = {
     white: IndexCardColor.white,
     blue: IndexCardColor.blue,
     green: IndexCardColor.green,
@@ -181,7 +181,7 @@ function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
     title: aspect.title,
     contentLabel: "Notes",
     content: aspect.content,
-    color: colorRecord[aspect.color],
+    color: colorRecord[aspect.color] as string,
     playedDuringTurn: aspect.playedDuringTurn,
     pinned: aspect.pinned,
     blocks: blocks,
