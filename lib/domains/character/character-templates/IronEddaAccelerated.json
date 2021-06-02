@@ -115,6 +115,20 @@
           ]
         },
         {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Exploding Rogue",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.drivethrurpg.com/product/137962/Iron-Edda-War-of-Metal-and-Bone"
+            }
+          ]
+        },
+        {
           "id": "b46d61f9-6049-42dc-b18b-0e668ed27a31",
           "label": "Stress and conditions",
           "position": "Right",

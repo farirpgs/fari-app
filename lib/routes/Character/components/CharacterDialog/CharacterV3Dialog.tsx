@@ -38,7 +38,6 @@ import TabPanel from "@material-ui/lab/TabPanel";
 import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
-import { AppLink } from "../../../../components/AppLink/AppLink";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
@@ -48,7 +47,6 @@ import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogge
 import {
   CharacterTemplates,
   CharacterTemplatesWithGroups,
-  getTemplateInfo,
 } from "../../../../domains/character/CharacterType";
 import {
   ICharacter,
@@ -124,10 +122,6 @@ export const CharacterV3Dialog: React.FC<{
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
-
-  const characterTemplateInfo = getTemplateInfo(
-    characterManager.state.character?.template
-  );
 
   function getTemplateName(template: string | undefined = "") {
     const label = t(
@@ -344,7 +338,14 @@ export const CharacterV3Dialog: React.FC<{
             <Autocomplete
               size="small"
               autoHighlight
-              filterOptions={createFilterOptions({ limit: 100 })}
+              filterOptions={createFilterOptions({
+                limit: 100,
+                stringify: (option) => {
+                  const templateName = getTemplateName(option.template);
+                  const groupName = option.group;
+                  return `${templateName} ${groupName}`;
+                },
+              })}
               options={CharacterTemplatesWithGroups}
               className={css({ width: "300px" })}
               getOptionLabel={(option) => {
@@ -571,19 +572,6 @@ export const CharacterV3Dialog: React.FC<{
         </Collapse>
 
         <Grid container justify="space-between" alignItems="center">
-          {characterTemplateInfo?.author && (
-            <Grid item>
-              <Box pt=".5rem">
-                <AppLink
-                  to={characterTemplateInfo.author?.link}
-                  target="_blank"
-                >
-                  {getTemplateName(characterManager.state.character?.template)}{" "}
-                  ({characterTemplateInfo.author?.name})
-                </AppLink>
-              </Box>
-            </Grid>
-          )}
           <Grid item>
             <Box pt=".5rem">
               <Typography>
@@ -627,9 +615,7 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
-            const helpLink = characterTemplateInfo?.isFate
-              ? HeaderHelpLinks[section.label.toLowerCase()]
-              : undefined;
+            const helpLink = HeaderHelpLinks[section.label.toLowerCase()];
 
             return (
               <Box key={section.id}>

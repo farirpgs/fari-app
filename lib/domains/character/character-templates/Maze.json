@@ -112,6 +112,20 @@
           "blocks": []
         },
         {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "9th Level Games",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www..com/product-page/mazes-zine-a-polymorph-adventure"
+            }
+          ]
+        },
+        {
           "id": "a5f70fea-74fe-49f1-9d02-c1a9c07325f3",
           "label": "&nbsp;RoLE &amp; ROLLS",
           "position": "Right",

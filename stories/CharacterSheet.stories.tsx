@@ -202,6 +202,67 @@ export const EvolutionPulseHydrah = Template.bind({});
     return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
+export const EvolutionPulse_Hyonos = Template.bind({});
+(EvolutionPulse_Hyonos as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EvolutionPulse_Hyonos
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const EvolutionPulse_LostH = Template.bind({});
+(EvolutionPulse_LostH as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EvolutionPulse_LostH
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const EvolutionPulse_Obscura = Template.bind({});
+(EvolutionPulse_Obscura as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EvolutionPulse_Obscura
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const EvolutionPulse_Proxy = Template.bind({});
+(EvolutionPulse_Proxy as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.EvolutionPulse_Proxy
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const ThePool = Template.bind({});
+(ThePool as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(CharacterTemplates.ThePool);
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const TunnelsAndTrolls = Template.bind({});
+(TunnelsAndTrolls as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.TunnelsAndTrolls
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const StrandsOfFate = Template.bind({});
+(StrandsOfFate as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.StrandsOfFate
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
 export const Blank = Template.bind({});
 (Blank as any).loaders = [
   async () => {

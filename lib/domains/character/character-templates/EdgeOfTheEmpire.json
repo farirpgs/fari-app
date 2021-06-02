@@ -162,6 +162,20 @@
               "meta": {}
             }
           ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Fantasy Flight",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.fantasyflightgames.com/en/products/star-wars-edge-of-the-empire/"
+            }
+          ]
         }
       ]
     },
