@@ -2,6 +2,16 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v5.1 WIP
+
+- feat: A new binder view has replaced the previous scenes and characters drawer to offer new search and filtering features on Fari's data;
+- feat: The scene screen user interface has been revamped to make it easier to use and understand;
+- feat: The Dice box and the Player row components have been revamped to make them easier on the eye!;
+- deps: The different technologies, libraries and framework have been updated to make sure Fari stand the test of time;
+- tech: Devs contributing to the repo now have to use npm 7 + node 16 to run Fari locally on their machine
+- tech: Session and Scene information are now splitted on the tech side of things which will make it easier to maintain in the future.
+- [ ]: need to keep latest dice roll in settings
+
 # v5.0 Better Index Cards and New Block Types
 
 - feat: pick any color for index cards
