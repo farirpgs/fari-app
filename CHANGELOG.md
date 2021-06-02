@@ -30,9 +30,18 @@
 - fix: index card drag and drop
 - feat: esperato translations [#290](https://github.com/fariapp/fari/pull/290) @ejheil
 
-WIP
+**5.0.1**
 
-- doc: scene
+- feat: translation update
+- fix: scene sub cards ids arent re-generated when a parent card is duplicated
+
+**5.0.2**
+
+- feat: update the Fate of Cthulhu template to include the corruption track
+- feat: fate condensed is now fully available in pt-br
+- fix: index card colors in dark mode have been adjusted so that they are easier on the eye
+- feat: the index card color picker now offers a set of 12 colors to help you organize your cards better
+- fix: there is now a confirmation pop-up if you try to delete an index card
 
 # v4.0 New Character Sheet Framework, Data Mangagement
 
@@ -69,19 +78,6 @@ WIP
 - fix: seelie squire edit link
 - fix: seelie squire consequence
 - fix: index card double modifier
-
-**5.0.1**
-
-- feat: translation update
-- fix: scene sub cards ids arent re-generated when a parent card is duplicated
-
-**5.0.2**
-
-- feat: update the Fate of Cthulhu template to include the corruption track
-- feat: fate condensed is now fully available in pt-br
-- fix: index card colors in dark mode have been adjusted so that they are easier on the eye
-- feat: the index card color picker now offers a set of 12 colors to help you organize your cards better
-- fix: there is now a confirmation pop-up if you try to delete an index card
 
 **4.0.5**
 
