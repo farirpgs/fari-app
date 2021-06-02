@@ -1,3 +1,4 @@
+import banner from "../../images/blue/banner.png";
 import logo from "../../images/blue/logo.png";
 import accelerated from "../../images/srds/accelerated.jpg";
 import adversaryToolkit from "../../images/srds/adversary-toolkit.jpg";
@@ -14,6 +15,7 @@ import systemToolkit from "../../images/srds/system-toolkit.jpg";
 
 export const Images = {
   logo: logo as string,
+  banner: banner as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,
   accelerated: accelerated as string,

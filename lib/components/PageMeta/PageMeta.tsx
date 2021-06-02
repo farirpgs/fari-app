@@ -10,12 +10,23 @@ export const PageMeta: React.FC<{
   noIndex?: boolean;
 }> = (props) => {
   const { t } = useTranslate();
+  const propsTitle = props.title?.trim();
 
-  const title = `${props.title?.trim() || t("home-route.meta.title")} | Fari `;
+  const title = propsTitle
+    ? `${propsTitle} | Fari `
+    : `Fari | ${t("home-route.meta.title")}`;
   const meta = [];
 
   meta.push({
+    name: "name",
+    content: title,
+  });
+  meta.push({
     name: "og:title",
+    content: title,
+  });
+  meta.push({
+    name: "twitter:title",
     content: title,
   });
 
@@ -28,19 +39,30 @@ export const PageMeta: React.FC<{
       name: "og:description",
       content: props.description,
     });
+    meta.push({
+      name: "twitter:description",
+      content: props.description,
+    });
   }
 
-  if (props.image) {
-    meta.push({
-      name: "og:image",
-      content: props.image,
-    });
-  } else {
-    meta.push({
-      name: "og:image",
-      content: Images.logo,
-    });
-  }
+  const imageToUse = props.image ? props.image : Images.banner;
+  meta.push({
+    name: "image",
+    content: imageToUse,
+  });
+  meta.push({
+    name: "og:image",
+    content: imageToUse,
+  });
+  meta.push({
+    name: "twitter:image",
+    content: imageToUse,
+  });
+
+  meta.push({
+    name: "og:url",
+    content: location.href,
+  });
 
   if (props.noIndex) {
     meta.push({
@@ -48,11 +70,6 @@ export const PageMeta: React.FC<{
       content: "noindex",
     });
   }
-
-  meta.push({
-    name: "og:url",
-    content: location.href,
-  });
 
   return <Helmet title={title} meta={meta} />;
 };
