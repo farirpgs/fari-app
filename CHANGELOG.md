@@ -75,6 +75,14 @@ WIP
 - feat: translation update
 - fix: scene sub cards ids arent re-generated when a parent card is duplicated
 
+**5.0.2**
+
+- feat: update the Fate of Cthulhu template to include the corruption track
+- feat: fate condensed is now fully available in pt-br
+- fix: index card colors in dark mode have been adjusted so that they are easier on the eye
+- feat: the index card color picker now offers a set of 12 colors to help you organize your cards better
+- fix: there is now a confirmation pop-up if you try to delete an index card
+
 **4.0.5**
 
 - feat: The default character sheet template is now `Blank`
