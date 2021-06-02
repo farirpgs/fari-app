@@ -62,7 +62,7 @@ describe("/characters", () => {
 
       cy.title().should(
         "eq",
-        "Play Table-Top RPGs Online Without the Headache | Fari"
+        "Fari | Play Table-Top RPGs Online Without the Headache"
       );
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
