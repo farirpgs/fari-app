@@ -1,4 +1,6 @@
 {
+  "about-route.meta.description": "Fari is a table-top RPG companion application created by René-Pier Deshaies-Gélinas",
+  "about-route.meta.title": "About",
   "character-dialog.block-type.dice-pool": "Dice Pool",
   "character-dialog.block-type.image": "Image",
   "character-dialog.block-type.link": "Link",
@@ -210,6 +212,7 @@
   "manager.no-items": "There's nothing here yet",
   "manager.undo": "Undo",
   "manager.ungrouped": "Ungrouped",
+  "menu.about": "About",
   "menu.characters": "Characters",
   "menu.dice": "Dice",
   "menu.scenes": "Scenes",
