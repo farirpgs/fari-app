@@ -1,5 +1,4 @@
 import { css, cx } from "@emotion/css";
-import Box from "@material-ui/core/Box";
 import Button, { ButtonProps } from "@material-ui/core/Button";
 import MaterialUILink, {
   LinkProps as MUILinkProps,
@@ -14,19 +13,12 @@ import {
 type IProps = {
   to?: string;
   onClick?(): void;
-  endIcon?: JSX.Element;
 };
 
 export const AppLink: React.FC<
   Omit<ReactRouterLinkProps, "to"> & Omit<MUILinkProps, "to"> & IProps
 > = (props) => {
-  const {
-    to = "",
-    onClick,
-    className: classNameFromProps,
-    endIcon,
-    ...rest
-  } = props;
+  const { to = "", onClick, className: classNameFromProps, ...rest } = props;
   const isInternal = to.startsWith("/");
   const theme = useTheme();
   const className = cx(
@@ -43,16 +35,7 @@ export const AppLink: React.FC<
     }),
     classNameFromProps
   );
-  const childrenWithIcon = (
-    <>
-      <Box component="span">{props.children}</Box>
-      {endIcon && (
-        <Box ml=".25rem" component="span">
-          {endIcon}
-        </Box>
-      )}
-    </>
-  );
+
   const link = isInternal ? (
     <MaterialUILink
       to={to}
@@ -66,7 +49,7 @@ export const AppLink: React.FC<
       rel={props.target === "_blank" ? "noreferrer" : undefined}
       {...rest}
     >
-      {childrenWithIcon}
+      {props.children}
     </MaterialUILink>
   ) : (
     <MaterialUILink
@@ -82,7 +65,7 @@ export const AppLink: React.FC<
       }}
       {...rest}
     >
-      {childrenWithIcon}
+      {props.children}
     </MaterialUILink>
   );
 
