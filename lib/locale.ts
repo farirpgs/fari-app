@@ -1,4 +1,6 @@
 export type ITranslationKeys =
+  | "bugs-route.meta.description"
+  | "bugs-route.meta.title"
   | "character-dialog.block-type.dice-pool"
   | "character-dialog.block-type.image"
   | "character-dialog.block-type.link"

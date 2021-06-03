@@ -21,6 +21,7 @@ const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
 const FeatureRequestsRoute = React.lazy(
   () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
 );
+const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
 const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
@@ -37,6 +38,7 @@ const SeelieSquireRoute = React.lazy(
 );
 
 export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
+  const location = useLocation();
   const [fadeIn, setFadeIn] = useState(false);
   const timeout = useRef<any | undefined>(undefined);
 
@@ -51,7 +53,7 @@ export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
   });
 
   return (
-    <Page hideHeaderLogo>
+    <Page hideHeaderLogo={location.pathname === "/"}>
       <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
@@ -95,14 +97,14 @@ export const AppRouter = () => {
           exact
           path={"/dice"}
           render={(props) => {
-            return <DiceRoute pool={false} />;
+            return <DiceRoute pool={false} key="dice" />;
           }}
         />
         <Route
           exact
           path={"/dice-pool"}
           render={(props) => {
-            return <DiceRoute pool={true} />;
+            return <DiceRoute pool={true} key="dice-pool" />;
           }}
         />
         <Route
@@ -189,6 +191,14 @@ export const AppRouter = () => {
           path={["/feature-requests", "/feature-requests/*"]}
           render={(props) => {
             return <FeatureRequestsRoute />;
+          }}
+        />
+
+        <Route
+          exact
+          path={["/bugs", "/bugs/*"]}
+          render={() => {
+            return <BugsRoute />;
           }}
         />
 

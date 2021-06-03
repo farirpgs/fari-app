@@ -12,7 +12,7 @@ import {
 
 type IProps = {
   to?: string;
-  onClick?(): void;
+  onClick?(event: React.MouseEvent<HTMLAnchorElement>): void;
 };
 
 export const AppLink: React.FC<
@@ -38,10 +38,10 @@ export const AppLink: React.FC<
       <MaterialUILink
         to={to}
         component={ReactRouterLink}
-        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+        onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
           if (onClick) {
-            e.preventDefault();
-            onClick();
+            event.preventDefault();
+            onClick(event);
           }
         }}
         className={className}
@@ -59,10 +59,10 @@ export const AppLink: React.FC<
       component={"a"}
       className={className}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
-      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+      onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
         if (onClick) {
-          e.preventDefault();
-          onClick();
+          event.preventDefault();
+          onClick(event);
         }
       }}
       {...rest}
