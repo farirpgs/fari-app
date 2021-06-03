@@ -69,6 +69,8 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
+import { DndItem } from "../../routes/Character/components/Dnd/DndItem";
+import { DndProvider } from "../../routes/Character/components/Dnd/DndProvider";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DiceFab } from "../DiceFab/DiceFab";
@@ -874,79 +876,108 @@ export const Scene: React.FC<IProps> = (props) => {
     const sortedCards = arraySort(indexCardsFromTab, sorters);
 
     return (
-      <Box
-        className={css({
-          label: "Scene-aspect-masonry-content",
-          columnCount: numberOfColumnsForCards,
-          columnWidth: "auto",
-          columnGap: "1rem",
-        })}
+      <DndProvider
+        onMove={(dragIndex, hoverIndex) => {
+          sceneManager.actions.moveIndexCard(dragIndex, hoverIndex, type);
+        }}
+        items={sortedCards}
       >
-        {sortedCards.map((indexCard, index) => {
-          const hasChildren = indexCard.subCards.length > 0;
-          return (
-            <Box
-              key={`${indexCard.id}.${type}`}
-              className={css({
-                label: "Scene-aspect-masonry-card",
-                paddingBottom: "1rem",
-                width: "100%",
-                columnSpan: hasChildren ? "all" : "initial",
-                /**
-                 * Disables bottom being cut-off in Chrome
-                 */
-                breakInside: "avoid",
-                /**
-                 * Disables bottom being cut-off in Firefox
-                 */
-                display: hasChildren ? "block" : "inline-block",
-              })}
-            >
-              <IndexCard
-                type={type}
-                reactDndIndex={index}
-                canMove={sort === SortMode.None && isGM}
-                key={indexCard.id}
-                reactDndType={DragAndDropTypes.SceneIndexCards}
-                data-cy={`scene.aspect.${index}`}
-                id={`index-card-${indexCard.id}`}
-                indexCardHiddenRecord={
-                  hiddenIndexCardRecord.state.indexCardHiddenRecord
-                }
-                onToggleVisibility={(indexCard) => {
-                  hiddenIndexCardRecord.actions.toggle(indexCard);
-                }}
-                onTogglePrivate={() => {
-                  sceneManager.actions.toggleIndexCardSection(indexCard, type);
-                }}
-                readonly={!isGM}
-                indexCard={indexCard}
-                onRoll={handleSetMyRoll}
-                onPoolClick={(element) => {
-                  diceManager.actions.addOrRemovePoolElement(element);
-                  diceManager.actions.setPlayerId(gm.id);
-                }}
-                onMove={(dragIndex, hoverIndex) => {
-                  sceneManager.actions.moveIndexCard(
-                    dragIndex,
-                    hoverIndex,
-                    type
-                  );
-                }}
-                onChange={(newIndexCard) => {
-                  sceneManager.actions.updateIndexCard(newIndexCard, type);
-                }}
-                onDuplicate={() => {
-                  sceneManager.actions.duplicateIndexCard(indexCard, type);
-                }}
-                onRemove={() => {
-                  sceneManager.actions.removeIndexCard(indexCard.id, type);
-                }}
-              />
-            </Box>
-          );
-        })}
-      </Box>
+        <Box
+          className={css({
+            label: "Scene-aspect-masonry-content",
+            columnCount: numberOfColumnsForCards,
+            columnWidth: "auto",
+            columnGap: "1rem",
+          })}
+        >
+          {sortedCards.map((indexCard, index) => {
+            const hasChildren = indexCard.subCards.length > 0;
+            return (
+              <Box
+                key={`${indexCard.id}.${type}`}
+                className={css({
+                  label: "Scene-aspect-masonry-card",
+                  paddingBottom: "1rem",
+                  width: "100%",
+                  columnSpan: hasChildren ? "all" : "initial",
+                  /**
+                   * Disables bottom being cut-off in Chrome
+                   */
+                  breakInside: "avoid",
+                  /**
+                   * Disables bottom being cut-off in Firefox
+                   */
+                  display: hasChildren ? "block" : "inline-block",
+                })}
+              >
+                <DndItem
+                  dndId={index.toString()}
+                  render={(dndRenderProps) => {
+                    return (
+                      <>
+                        <IndexCard
+                          dndRenderedProps={dndRenderProps}
+                          type={type}
+                          reactDndIndex={index}
+                          canMove={sort === SortMode.None && isGM}
+                          key={indexCard.id}
+                          reactDndType={DragAndDropTypes.SceneIndexCards}
+                          data-cy={`scene.aspect.${index}`}
+                          id={`index-card-${indexCard.id}`}
+                          indexCardHiddenRecord={
+                            hiddenIndexCardRecord.state.indexCardHiddenRecord
+                          }
+                          onToggleVisibility={(indexCard) => {
+                            hiddenIndexCardRecord.actions.toggle(indexCard);
+                          }}
+                          onTogglePrivate={() => {
+                            sceneManager.actions.toggleIndexCardSection(
+                              indexCard,
+                              type
+                            );
+                          }}
+                          readonly={!isGM}
+                          indexCard={indexCard}
+                          onRoll={handleSetMyRoll}
+                          onPoolClick={(element) => {
+                            diceManager.actions.addOrRemovePoolElement(element);
+                            diceManager.actions.setPlayerId(gm.id);
+                          }}
+                          onMove={(dragIndex, hoverIndex) => {
+                            sceneManager.actions.moveIndexCard(
+                              dragIndex,
+                              hoverIndex,
+                              type
+                            );
+                          }}
+                          onChange={(newIndexCard) => {
+                            sceneManager.actions.updateIndexCard(
+                              newIndexCard,
+                              type
+                            );
+                          }}
+                          onDuplicate={() => {
+                            sceneManager.actions.duplicateIndexCard(
+                              indexCard,
+                              type
+                            );
+                          }}
+                          onRemove={() => {
+                            sceneManager.actions.removeIndexCard(
+                              indexCard.id,
+                              type
+                            );
+                          }}
+                        />
+                      </>
+                    );
+                  }}
+                />
+              </Box>
+            );
+          })}
+        </Box>
+      </DndProvider>
     );
   }
 

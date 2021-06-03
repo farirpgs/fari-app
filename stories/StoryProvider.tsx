@@ -1,8 +1,6 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import {
@@ -42,27 +40,25 @@ export function StoryProvider(props: {
   }, [props.theme]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <DarkModeContext.Provider value={darkModeManager}>
-        <CharactersContext.Provider value={charactersManager}>
-          <ScenesContext.Provider value={scenesManager}>
-            <DiceContext.Provider value={diceManager}>
-              <ThemeProvider
-                theme={
-                  darkModeManager.state.darkMode ? AppDarkTheme : AppLightTheme
-                }
-              >
-                <StylesProvider injectFirst>
-                  <BrowserRouter>
-                    <CssBaseline />
-                    <HelmetProvider>{props.children}</HelmetProvider>
-                  </BrowserRouter>
-                </StylesProvider>
-              </ThemeProvider>
-            </DiceContext.Provider>
-          </ScenesContext.Provider>
-        </CharactersContext.Provider>
-      </DarkModeContext.Provider>
-    </DndProvider>
+    <DarkModeContext.Provider value={darkModeManager}>
+      <CharactersContext.Provider value={charactersManager}>
+        <ScenesContext.Provider value={scenesManager}>
+          <DiceContext.Provider value={diceManager}>
+            <ThemeProvider
+              theme={
+                darkModeManager.state.darkMode ? AppDarkTheme : AppLightTheme
+              }
+            >
+              <StylesProvider injectFirst>
+                <BrowserRouter>
+                  <CssBaseline />
+                  <HelmetProvider>{props.children}</HelmetProvider>
+                </BrowserRouter>
+              </StylesProvider>
+            </ThemeProvider>
+          </DiceContext.Provider>
+        </ScenesContext.Provider>
+      </CharactersContext.Provider>
+    </DarkModeContext.Provider>
   );
 }
