@@ -1,5 +1,6 @@
 import produce from "immer";
 import React, { useState } from "react";
+import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
 type IThemeMode = "dark" | "light";
@@ -22,6 +23,16 @@ export function useSettings() {
     key: "fari-settings",
     localStorage: window.localStorage,
   });
+  const [userId] = useStorageEntity<string>({
+    defaulValue: Id.generate(),
+    key: "fari-user-id",
+    localStorage: window.localStorage,
+  });
+  const [userName, setUserName] = useStorageEntity<string>({
+    defaulValue: Id.generate(),
+    key: "fari-user-name",
+    localStorage: window.localStorage,
+  });
 
   function setThemeMode(mode: IThemeMode) {
     setSettings(
@@ -41,8 +52,13 @@ export function useSettings() {
 
   const themeMode = temporaryThemeMode ?? settings.themeMode;
   return {
-    state: { themeMode },
-    actions: { setThemeMode, toggleThemeMode, setThemeModeTemporarily },
+    state: { themeMode, userId, userName },
+    actions: {
+      setThemeMode,
+      toggleThemeMode,
+      setThemeModeTemporarily,
+      setUserName,
+    },
   };
 }
 

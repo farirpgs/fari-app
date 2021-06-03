@@ -3,7 +3,6 @@ import isEqual from "lodash/isEqual";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { getUnix } from "../../domains/dayjs/getDayJS";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { IIndexCard, IIndexCardType, IScene } from "./IScene";
 
@@ -89,19 +88,6 @@ export function useScene() {
       const clonedNewScene = scenesManager.actions.duplicate(sceneToClone.id);
       loadScene(clonedNewScene as IScene, true);
     }
-  }
-
-  function forceDirty() {
-    setTimeout(() => {
-      setScene(
-        produce((draft) => {
-          if (!draft) {
-            return;
-          }
-          draft.lastUpdated = getUnix();
-        })
-      );
-    });
   }
 
   function updateName(name: string) {

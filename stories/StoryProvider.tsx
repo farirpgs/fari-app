@@ -9,15 +9,15 @@ import {
   CharactersContext,
   useCharacters,
 } from "../lib/contexts/CharactersContext/CharactersContext";
-import {
-  SettingsContext,
-  useSettings,
-} from "../lib/contexts/DarkModeContext/DarkModeContext";
 import { DiceContext, useDice } from "../lib/contexts/DiceContext/DiceContext";
 import {
   ScenesContext,
   useScenes,
 } from "../lib/contexts/SceneContext/ScenesContext";
+import {
+  SettingsContext,
+  useSettings,
+} from "../lib/contexts/SettingsContext/SettingsContext";
 import { AppDarkTheme, AppLightTheme } from "../lib/theme";
 
 /**

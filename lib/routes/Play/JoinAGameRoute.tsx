@@ -10,15 +10,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import appIcon from "../../../images/blue/app.png";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-
-let playerNameSingleton = "";
 
 export const JoinAGame: React.FC<{
   idFromParams?: string;
@@ -27,14 +26,15 @@ export const JoinAGame: React.FC<{
   error: any;
 }> = (props) => {
   const { t } = useTranslate();
-  const [playerName, setPlayerName] = useState(playerNameSingleton);
+  const settingsManager = useContext(SettingsContext);
+  const [playerName, setPlayerName] = useState(settingsManager.state.userName);
 
   function onSubmitPlayerName(playerName: string) {
     props.onSubmitPlayerName(playerName);
   }
 
   useEffect(() => {
-    playerNameSingleton = playerName;
+    settingsManager.actions.setUserName(playerName);
   }, [playerName]);
 
   return (

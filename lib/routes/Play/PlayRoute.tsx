@@ -4,12 +4,12 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
 import { IPeerMeta, useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useUserId } from "../../hooks/useUserId/useUserId";
 import { JoinAGame } from "./JoinAGameRoute";
 import { IPeerActions } from "./types/IPeerActions";
 
@@ -23,12 +23,12 @@ export const PlayRoute: React.FC<{
   const logger = useLogger();
 
   const idFromParams = props.match.params.id;
-  const userId = useUserId();
+  const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
 
   const sceneManager = useScene();
   const sessionManager = useSession({
-    userId: userId,
+    userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
   const sceneName = sceneManager.state.scene?.name ?? "";
@@ -116,7 +116,7 @@ export const PlayRoute: React.FC<{
           onSubmitPlayerName={(playerName) => {
             connectionsManager?.actions.connect<IPeerMeta>(
               idFromParams,
-              userId,
+              settingsManager.state.userId,
               {
                 playerName: playerName,
               }
@@ -134,7 +134,7 @@ export const PlayRoute: React.FC<{
           }
           idFromParams={idFromParams}
           shareLink={shareLink}
-          userId={userId}
+          userId={settingsManager.state.userId}
           error={hostManager.state.error}
         />
       )}

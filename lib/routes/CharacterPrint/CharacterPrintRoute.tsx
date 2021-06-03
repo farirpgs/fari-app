@@ -9,9 +9,9 @@ import { previewContentEditable } from "../../components/ContentEditable/Content
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { SettingsContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -76,8 +76,9 @@ export default CharacterPrintRoute;
 function PrintCharacter(props: { character: ICharacter | undefined }) {
   const theme = useTheme();
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
   return (
     <>
       <Box mb="1rem">
@@ -172,8 +173,9 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
 function PrintSections(props: { sections: Array<ISection> }) {
   const theme = useTheme();
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
 
   return (
     <>

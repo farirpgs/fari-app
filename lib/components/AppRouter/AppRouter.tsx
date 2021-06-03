@@ -184,7 +184,7 @@ export const AppRouter = () => {
         <Route
           exact
           path={["/feature-requests", "/feature-requests/*"]}
-          render={(props) => {
+          render={() => {
             return <FeatureRequestsRoute />;
           }}
         />

@@ -7,22 +7,22 @@ import { CharactersContext } from "../../contexts/CharactersContext/CharactersCo
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
-import { useUserId } from "../../hooks/useUserId/useUserId";
 
 export const SceneRoute: React.FC<{
   match: {
     params: { id: string };
   };
 }> = (props) => {
-  const userId = useUserId();
+  const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
   const sceneManager = useScene();
   const sceneName = sceneManager.state.scene?.name ?? "";
   const sessionManager = useSession({
-    userId: userId,
+    userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
   const pageTitle = previewContentEditable({ value: sceneName });

@@ -11,6 +11,7 @@
 - tech: Devs contributing to the repo now have to use npm 7 + node 16 to run Fari locally on their machine
 - tech: Session and Scene information are now splitted on the tech side of things which will make it easier to maintain in the future.
 - [ ]: need to keep latest dice roll in settings
+- [ ]: sticky user name + usePeerHost mapping logic (based on user)
 
 # v5.0 Better Index Cards and New Block Types
 

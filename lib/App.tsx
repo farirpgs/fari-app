@@ -16,10 +16,6 @@ import {
   CharactersContext,
   useCharacters,
 } from "./contexts/CharactersContext/CharactersContext";
-import {
-  SettingsContext,
-  useSettings,
-} from "./contexts/DarkModeContext/DarkModeContext";
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   IFolders,
@@ -30,6 +26,10 @@ import {
   ScenesContext,
   useScenes,
 } from "./contexts/SceneContext/ScenesContext";
+import {
+  SettingsContext,
+  useSettings,
+} from "./contexts/SettingsContext/SettingsContext";
 import { CharacterTemplates } from "./domains/character/CharacterType";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { AppDarkTheme, AppLightTheme } from "./theme";
