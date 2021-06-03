@@ -37,6 +37,7 @@ export function useStorageEntity<T>(props: {
         localStorage: props.localStorage,
         migrationFunction: props.migrationFunction,
       });
+
       setEntity(newEntity);
     }
 
@@ -45,7 +46,7 @@ export function useStorageEntity<T>(props: {
     return () => {
       window.removeEventListener?.("storage", refreshStorage);
     };
-  });
+  }, []);
 
   return [entity, setEntity] as const;
 }

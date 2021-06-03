@@ -656,7 +656,7 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderCharacterCards() {
+  function renderPlayersCharacterCards() {
     const { playersWithCharacterSheets } = sessionManager.computed;
 
     return (
@@ -664,7 +664,6 @@ export const Session: React.FC<IProps> = (props) => {
         <Box>
           <Box
             className={css({
-              label: "Scene-characters-masonry-content",
               display: "flex",
               flexFlow: "row",
               flexWrap: "wrap",
@@ -679,7 +678,6 @@ export const Session: React.FC<IProps> = (props) => {
                 <Box
                   key={player?.id || index}
                   className={css({
-                    label: "Scene-characters-masonry-card",
                     width: characterCardWidth,
                     display: "inline-block",
                     marginBottom: "1rem",
@@ -705,6 +703,49 @@ export const Session: React.FC<IProps> = (props) => {
       </>
     );
   }
+  function renderNpcsCharacterCards() {
+    return (
+      <>
+        <Box>
+          <Box
+            className={css({
+              display: "flex",
+              flexFlow: "row",
+              flexWrap: "wrap",
+            })}
+          >
+            {sessionManager.computed.npcsWithCharacterSheets.map(
+              (npc, index) => {
+                return (
+                  <Box
+                    key={npc?.id || index}
+                    className={css({
+                      width: characterCardWidth,
+                      display: "inline-block",
+                      marginBottom: "1rem",
+                    })}
+                  >
+                    <CharacterCard
+                      key={npc?.id || index}
+                      readonly={!isGM}
+                      playerName={npc.playerName}
+                      characterSheet={npc.character}
+                      onCharacterDialogOpen={() => {
+                        setCharacterDialogPlayerId(npc.id);
+                      }}
+                      onRoll={(newDiceRollResult) => {
+                        handleSetPlayerRoll(npc.id, newDiceRollResult);
+                      }}
+                    />
+                  </Box>
+                );
+              }
+            )}
+          </Box>
+        </Box>
+      </>
+    );
+  }
 
   function renderSessionTabsAndContent() {
     const tabPanelStyle = css({ padding: "0" });
@@ -716,7 +757,10 @@ export const Session: React.FC<IProps> = (props) => {
             <Box>
               <Box py="2rem" position="relative" minHeight="20rem">
                 <TabPanel value={"characters"} className={tabPanelStyle}>
-                  {renderCharacterCards()}
+                  {renderPlayersCharacterCards()}
+                </TabPanel>
+                <TabPanel value={"npcs"} className={tabPanelStyle}>
+                  {renderNpcsCharacterCards()}
                 </TabPanel>
                 <TabPanel value={"scene"} className={tabPanelStyle}>
                   <Scene
