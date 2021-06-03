@@ -40,7 +40,7 @@ export const Fari = {
     Fari.get("page.toggle-dark-mode").click();
   },
   changeLanguage(language: string) {
-    Fari.get("page.languages").click();
-    cy.get(`[data-value="${language}"]`).click();
+    Fari.get("page.menu.languages").click();
+    Fari.get("app.languages").select(language);
   },
 };

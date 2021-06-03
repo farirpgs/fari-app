@@ -16,6 +16,7 @@ describe("/play-offline", () => {
     Fari.get("character-dialog.name").type("Luke Skywalker");
     Fari.waitContentEditable();
     Fari.get("character-dialog.save").click();
+    Fari.get("character-dialog.close").click();
 
     // add leia
     Fari.get("scene.add-player").click();
@@ -28,6 +29,7 @@ describe("/play-offline", () => {
     Fari.get("character-dialog.name").type("Leia Organa");
     Fari.waitContentEditable();
     Fari.get("character-dialog.save").click();
+    Fari.get("character-dialog.close").click();
 
     // play
     Fari.get("scene.player-row.1.toggle-initiative").click();

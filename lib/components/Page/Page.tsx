@@ -498,9 +498,10 @@ export const Page: React.FC<{
             <Grid item xs={8} sm={8} className={itemClass}>
               <PageNavLink
                 label="Tools"
+                data-cy="page.menu.tools"
                 subNav={[
                   {
-                    label: "Toolbelt",
+                    label: "Tools",
                     links: [
                       {
                         to: "/data",
@@ -511,6 +512,7 @@ export const Page: React.FC<{
                         to: "/dice",
                         label: t("menu.dice"),
                         icon: <Icons.FateDice />,
+                        ["data-cy"]: "page.menu.tools.dice",
                       },
                       {
                         to: "/dice-pool",
@@ -582,13 +584,18 @@ export const Page: React.FC<{
               />
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
-              <PageNavLink label={<TranslateIcon />}>
+              <PageNavLink
+                data-cy="page.menu.languages"
+                label={<TranslateIcon />}
+              >
                 <Box>
                   <Select
                     fullWidth
                     native
-                    data-cy="page.languages"
                     value={currentLanguage}
+                    inputProps={{
+                      ["data-cy"]: "app.languages",
+                    }}
                     onChange={(e) => {
                       const newLanguage = e.target.value as string;
                       i18n.changeLanguage(newLanguage);
@@ -806,6 +813,7 @@ function PageNavLink(
                         <AppLink
                           to={link.to}
                           target={link.target}
+                          data-cy={link["data-cy"]}
                           onClick={link.onClick}
                           className={css({
                             "color": theme.palette.primary.main,
