@@ -203,6 +203,15 @@ export const AppRouter = () => {
         />
 
         <Route
+          exact
+          path={"/discord"}
+          render={() => {
+            window.location.href = "https://discord.gg/vMAJFjUraA";
+            return null;
+          }}
+        />
+
+        <Route
           path="*"
           render={(props) => {
             return <NotFoundRoute />;

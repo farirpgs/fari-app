@@ -2,6 +2,7 @@ import { css } from "@emotion/css";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
 import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
@@ -9,28 +10,35 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import BookIcon from "@material-ui/icons/Book";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
+import BugReportIcon from "@material-ui/icons/BugReport";
 import ChatIcon from "@material-ui/icons/Chat";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
+import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import FiberNewIcon from "@material-ui/icons/FiberNew";
+import ForumIcon from "@material-ui/icons/Forum";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import InfoIcon from "@material-ui/icons/Info";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import LocalCafeIcon from "@material-ui/icons/LocalCafe";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import MenuIcon from "@material-ui/icons/Menu";
-import NewReleasesIcon from "@material-ui/icons/NewReleases";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
 import StorageIcon from "@material-ui/icons/Storage";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import TranslateIcon from "@material-ui/icons/Translate";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
@@ -422,7 +430,11 @@ export const Page: React.FC<{
                   setMenuOpen(false);
                 }}
               >
-                <Box p="2rem" color={theme.palette.primary.main}>
+                <Box
+                  p="2rem"
+                  color={theme.palette.primary.main}
+                  bgcolor={theme.palette.background.default}
+                >
                   {renderMenu(true)}
                 </Box>
               </Drawer>
@@ -497,15 +509,15 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <PageNavLink
-                label="Tools"
+                label={t("menu.tools")}
                 data-cy="page.menu.tools"
                 subNav={[
                   {
-                    label: "Tools",
+                    label: t("menu.tools"),
                     links: [
                       {
                         to: "/data",
-                        label: t("data-route.meta.title"),
+                        label: t("menu.data"),
                         icon: <StorageIcon />,
                       },
                       {
@@ -516,12 +528,12 @@ export const Page: React.FC<{
                       },
                       {
                         to: "/dice-pool",
-                        label: t("home-route.cards.dice-pool.title"),
+                        label: t("menu.dice-pool"),
                         icon: <Icons.ThrowDice />,
                       },
                       {
                         to: "/oracle",
-                        label: t("oracle-route.meta.title"),
+                        label: t("menu.oracle"),
                         icon: <Icons.EyeIcon />,
                       },
                     ],
@@ -531,38 +543,43 @@ export const Page: React.FC<{
             </Grid>
             <Grid item xs={8} sm={8} className={itemClass}>
               <PageNavLink
-                label="Resources"
+                label={t("menu.resources")}
                 subNav={[
                   {
                     label: "Fari",
                     links: [
                       {
-                        to: "/fari-wiki",
-                        label: t("home-route.cards.wiki.title"),
-                        icon: <InfoIcon />,
-                      },
-                      {
                         to: "https://fari.canny.io/changelog",
-                        label: "Changelog",
-                        icon: <NewReleasesIcon />,
+                        label: t("menu.whats-new"),
+                        icon: <FiberNewIcon />,
                         target: "_blank",
                       },
                       {
-                        to: "/blog",
-                        label: t("home-route.cards.blog.title"),
-                        icon: <BookIcon />,
+                        to: "/feature-requests",
+                        label: t("menu.feature-requests"),
+                        icon: <EmojiObjectsIcon />,
                       },
                       {
-                        to: "https://github.com/fariapp/fari",
-                        label: "GitHub",
-                        icon: <GitHubIcon />,
+                        to: "/bugs",
+                        label: t("menu.report-a-bug"),
+                        icon: <BugReportIcon />,
+                      },
+                      {
+                        to: "/discord",
+                        label: t("menu.discord"),
+                        icon: <ForumIcon />,
                         target: "_blank",
                       },
                     ],
                   },
                   {
-                    label: "Community",
+                    label: "Documents",
                     links: [
+                      {
+                        to: "/fari-wiki",
+                        label: t("menu.fari-wiki"),
+                        icon: <InfoIcon />,
+                      },
                       {
                         to: "/srds",
                         label: t("menu.srds"),
@@ -570,61 +587,90 @@ export const Page: React.FC<{
                       },
                       {
                         to: "/success-with-style",
-                        label: "Success With Style",
+                        label: t("menu.success-with-style-blog"),
                         icon: <DoneOutlineIcon />,
                       },
                       {
                         to: "/seeliesquire",
-                        label: "Seelie Squire's Book Of Creatures",
+                        label: t("menu.seelie-squire"),
                         icon: <LocalLibraryIcon />,
+                      },
+                      {
+                        to: "/blog",
+                        label: t("menu.blog"),
+                        icon: <BookIcon />,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Support",
+                    links: [
+                      {
+                        to: "https://www.patreon.com/bePatron?u=43408921",
+                        label: t("menu.patreon"),
+                        icon: <ThumbUpIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        to: "https://ko-fi.com/rpdeshaies",
+                        label: t("menu.ko-fi"),
+                        icon: <LocalCafeIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        to: "https://github.com/fariapp/fari",
+                        label: t("menu.github"),
+                        icon: <GitHubIcon />,
+                        target: "_blank",
                       },
                     ],
                   },
                 ]}
               />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <PageNavLink
-                data-cy="page.menu.languages"
-                label={<TranslateIcon />}
-              >
-                <Box>
-                  <Select
-                    fullWidth
-                    native
-                    value={currentLanguage}
-                    inputProps={{
-                      ["data-cy"]: "app.languages",
-                    }}
-                    onChange={(e) => {
-                      const newLanguage = e.target.value as string;
-                      i18n.changeLanguage(newLanguage);
-                      logger.setTag("language", newLanguage);
-                    }}
-                  >
-                    {Object.keys(i18n.options.resources!).map((language) => {
-                      const shouldRenderDev =
-                        language === "dev" && env.context === "localhost";
-                      if (language !== "dev" || shouldRenderDev) {
-                        return (
-                          <option key={language} value={language}>
-                            {t(
-                              `common.language.${language}` as ITranslationKeys
-                            )}
-                          </option>
-                        );
-                      }
-                    })}
-                  </Select>
-                </Box>
-              </PageNavLink>
-            </Grid>
           </>
         )}
 
         <Grid item xs={8} sm={8} className={itemClass}>
           <PageNavLink
+            data-cy="page.menu.languages"
+            tooltip={t("menu.languages")}
+            label={<TranslateIcon />}
+          >
+            <Box>
+              <Select
+                fullWidth
+                native
+                value={currentLanguage}
+                inputProps={{
+                  ["data-cy"]: "app.languages",
+                }}
+                onChange={(e) => {
+                  const newLanguage = e.target.value as string;
+                  i18n.changeLanguage(newLanguage);
+                  logger.setTag("language", newLanguage);
+                }}
+              >
+                {Object.keys(i18n.options.resources!).map((language) => {
+                  const shouldRenderDev =
+                    language === "dev" && env.context === "localhost";
+                  if (language !== "dev" || shouldRenderDev) {
+                    return (
+                      <option key={language} value={language}>
+                        {t(`common.language.${language}` as ITranslationKeys)}
+                      </option>
+                    );
+                  }
+                })}
+              </Select>
+            </Box>
+          </PageNavLink>
+        </Grid>
+
+        <Grid item xs={8} sm={8} className={itemClass}>
+          <PageNavLink
             data-cy="page.toggle-dark-mode"
+            tooltip={t("menu.toggle-theme")}
             onClick={() => {
               darkModeManager.actions.setDarkMode(
                 !darkModeManager.state.darkMode
@@ -648,8 +694,9 @@ export const Page: React.FC<{
         </Grid>
         <Grid item xs={8} sm={8} className={itemClass}>
           <PageNavLink
+            tooltip={t("menu.whats-new")}
             onClick={() => {
-              //
+              // ignore
             }}
             label={
               <>
@@ -668,6 +715,7 @@ type IPageNavLink = {
   target?: "_blank";
   ["data-cy"]?: string;
   to?: string;
+  tooltip?: string;
   onClick?(event: React.MouseEvent<HTMLAnchorElement>): void;
 };
 
@@ -694,7 +742,11 @@ function PageNavLink(
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) {
     if (hasPopperContent) {
-      setAnchorEl(event.currentTarget);
+      if (!open) {
+        setAnchorEl(event.currentTarget);
+      } else {
+        handleCloseSubNav();
+      }
     }
   }
 
@@ -702,51 +754,40 @@ function PageNavLink(
     setAnchorEl(null);
   }
 
-  const shouldDisplayLink = props.to || props.onClick || !isSmall;
-
   return (
     <>
-      {shouldDisplayLink ? (
-        <AppLink
-          data-cy={props["data-cy"]}
-          target={props.target}
-          className={css({
-            "label": "PageNavLink",
-            "display": "flex",
-            "alignItems": "center",
-            "color": "inherit",
-            "fontWeight": theme.typography.fontWeightMedium,
-            "fontSize": "1.1rem",
-            "&:hover": {
-              color: isSmall ? "inherit" : highlight.hover,
-              textDecoration: "underline",
-            },
-          })}
-          to={props.to}
-          onClick={props.onClick ?? handleOpenSubNav}
-        >
-          {props.label}
-          {hasSubNav && <ExpandMoreIcon />}
-        </AppLink>
-      ) : (
-        <Box
-          className={css({
-            label: "PageNavLink",
-            display: "flex",
-            alignItems: "center",
-            color: theme.palette.text.secondary,
-            fontWeight: theme.typography.fontWeightMedium,
-            fontSize: "1.1rem",
-          })}
-        >
-          {props.label}
-        </Box>
-      )}
+      <Tooltip title={props.tooltip ?? ""}>
+        <div>
+          <AppLink
+            data-cy={props["data-cy"]}
+            target={props.target}
+            className={css({
+              "label": "PageNavLink",
+              "display": "flex",
+              "alignItems": "center",
+              "color": "inherit",
+              "fontWeight": theme.typography.fontWeightMedium,
+              "fontSize": "1.1rem",
+              "&:hover": {
+                color: isSmall ? "inherit" : highlight.hover,
+                textDecoration: "underline",
+              },
+            })}
+            to={props.to}
+            onClick={props.onClick ?? handleOpenSubNav}
+          >
+            {props.label}
+            {hasPopperContent && <ExpandMoreIcon />}
+          </AppLink>
+        </div>
+      </Tooltip>
+
       <Hidden smDown>
         <Popover
           open={open}
           onClose={handleCloseSubNav}
           anchorEl={anchorEl}
+          TransitionProps={{ timeout: theme.transitions.duration.shortest }}
           className={css({
             marginTop: "1rem",
           })}
@@ -762,15 +803,23 @@ function PageNavLink(
           <Box px="1.5rem" py=".5rem" minWidth="200px">
             <Box>
               <Box>{renderSubNav()}</Box>
-              {props.children}
+              <Box>{props.children}</Box>
             </Box>
           </Box>
         </Popover>
       </Hidden>
 
       <Hidden mdUp>
-        <Box>{renderSubNav()}</Box>
-        <Box>{props.children}</Box>
+        <Collapse in={open}>
+          <Box mt=".5rem">
+            <Paper elevation={2}>
+              <Box p="1rem">
+                <Box>{renderSubNav()}</Box>
+                <Box>{props.children}</Box>
+              </Box>
+            </Paper>
+          </Box>
+        </Collapse>
       </Hidden>
     </>
   );
@@ -810,22 +859,26 @@ function PageNavLink(
                         </Grid>
                       )}
                       <Grid item>
-                        <AppLink
-                          to={link.to}
-                          target={link.target}
-                          data-cy={link["data-cy"]}
-                          onClick={link.onClick}
-                          className={css({
-                            "color": theme.palette.primary.main,
-                            "fontWeight": theme.typography.fontWeightMedium,
-                            "fontSize": "1rem",
-                            "&:hover": {
-                              textDecoration: "underline",
-                            },
-                          })}
-                        >
-                          {link.label}
-                        </AppLink>
+                        <Tooltip title={link.tooltip ?? ""}>
+                          <div>
+                            <AppLink
+                              to={link.to}
+                              target={link.target}
+                              data-cy={link["data-cy"]}
+                              onClick={link.onClick}
+                              className={css({
+                                "color": theme.palette.primary.main,
+                                "fontWeight": theme.typography.fontWeightMedium,
+                                "fontSize": "1rem",
+                                "&:hover": {
+                                  textDecoration: "underline",
+                                },
+                              })}
+                            >
+                              {link.label}
+                            </AppLink>
+                          </div>
+                        </Tooltip>
                       </Grid>
                     </Grid>
                   </Box>

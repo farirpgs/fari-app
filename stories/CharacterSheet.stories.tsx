@@ -202,6 +202,87 @@ export const EvolutionPulseHydrah = Template.bind({});
     return { character: overrideCharacterDateForStorybook(character) };
   },
 ];
+export const MärchenkriegerLOS = Template.bind({});
+(MärchenkriegerLOS as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.MärchenkriegerLOS
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const FateCondensedSpanish = Template.bind({});
+(FateCondensedSpanish as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.FateCondensedSpanish
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const FateCoreSpanish = Template.bind({});
+(FateCoreSpanish as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.FateCoreSpanish
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const TachyonSquadronCharacter = Template.bind({});
+(TachyonSquadronCharacter as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.TachyonSquadronCharacter
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const TachyonSquadronShip = Template.bind({});
+(TachyonSquadronShip as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.TachyonSquadronShip
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const TachyonSquadronCharacterAndShip = Template.bind({});
+(TachyonSquadronCharacterAndShip as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.TachyonSquadronCharacterAndShip
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const DresdenFilesRPGCharacter = Template.bind({});
+(DresdenFilesRPGCharacter as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.DresdenFilesRPGCharacter
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const DresdenFilesRPGSpellCaster = Template.bind({});
+(DresdenFilesRPGSpellCaster as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.DresdenFilesRPGSpellCaster
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
+export const DresdenFilesRPGVampire = Template.bind({});
+(DresdenFilesRPGVampire as any).loaders = [
+  async () => {
+    const character = await CharacterFactory.make(
+      CharacterTemplates.DresdenFilesRPGVampire
+    );
+    return { character: overrideCharacterDateForStorybook(character) };
+  },
+];
 export const Blank = Template.bind({});
 (Blank as any).loaders = [
   async () => {
