@@ -431,7 +431,7 @@ export const Page: React.FC<{
                 }}
               >
                 <Box
-                  p="2rem"
+                  p="1.5rem"
                   color={theme.palette.primary.main}
                   bgcolor={theme.palette.background.default}
                 >
@@ -480,6 +480,9 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
+    const smSize = 8;
+    const xsSize = 12;
+
     return (
       <Grid
         container
@@ -489,7 +492,7 @@ export const Page: React.FC<{
       >
         {!isLive && (
           <>
-            <Grid item xs={8} sm={8} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
               <PageNavLink
                 label={t("menu.scenes")}
                 data-cy="page.menu.scenes"
@@ -498,7 +501,7 @@ export const Page: React.FC<{
                 }}
               />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
               <PageNavLink
                 label={t("menu.characters")}
                 data-cy="page.menu.characters"
@@ -507,7 +510,7 @@ export const Page: React.FC<{
                 }}
               />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
               <PageNavLink
                 label={t("menu.tools")}
                 data-cy="page.menu.tools"
@@ -541,7 +544,7 @@ export const Page: React.FC<{
                 ]}
               />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
               <PageNavLink
                 label={t("menu.resources")}
                 subNav={[
@@ -631,7 +634,7 @@ export const Page: React.FC<{
           </>
         )}
 
-        <Grid item xs={8} sm={8} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
           <PageNavLink
             data-cy="page.menu.languages"
             tooltip={t("menu.languages")}
@@ -667,7 +670,7 @@ export const Page: React.FC<{
           </PageNavLink>
         </Grid>
 
-        <Grid item xs={8} sm={8} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
           <PageNavLink
             data-cy="page.toggle-dark-mode"
             tooltip={t("menu.toggle-theme")}
@@ -692,7 +695,7 @@ export const Page: React.FC<{
             }
           />
         </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
           <PageNavLink
             tooltip={t("menu.whats-new")}
             onClick={() => {
@@ -860,7 +863,11 @@ function PageNavLink(
                       )}
                       <Grid item>
                         <Tooltip title={link.tooltip ?? ""}>
-                          <div>
+                          <div
+                            className={css({
+                              textAlign: "left",
+                            })}
+                          >
                             <AppLink
                               to={link.to}
                               target={link.target}
@@ -869,6 +876,7 @@ function PageNavLink(
                               className={css({
                                 "color": theme.palette.primary.main,
                                 "fontWeight": theme.typography.fontWeightMedium,
+
                                 "fontSize": "1rem",
                                 "&:hover": {
                                   textDecoration: "underline",
