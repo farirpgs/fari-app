@@ -9,7 +9,7 @@ describe("/characters", () => {
       // new character
       Fari.get("page.menu.characters").click();
       Fari.get("manager.new").click();
-      Fari.get("character-dialog.name").type("Luke Skywalker");
+      Fari.get("character-dialog.name").clear().type("Luke Skywalker");
 
       // load fate template
       Fari.get("character-dialog.template.content").click();
@@ -60,10 +60,7 @@ describe("/characters", () => {
 
       // save
 
-      cy.title().should(
-        "eq",
-        "Fari | Play Table-Top RPGs Online Without the Headache"
-      );
+      cy.title().should("eq", "Blank | Fari");
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
@@ -154,7 +151,7 @@ describe("/characters", () => {
       // new character
       Fari.get("page.menu.characters").click();
       Fari.get("manager.new").click();
-      Fari.get("character-dialog.name").type("Luke");
+      Fari.get("character-dialog.name").clear().type("Luke");
       Fari.get("character-dialog.toggle-advanced").click();
       Fari.get("character-dialog.template.advanced").click();
       Fari.get("character-dialog.template.advanced")

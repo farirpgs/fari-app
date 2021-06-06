@@ -547,7 +547,6 @@ export const Scene: React.FC<IProps> = (props) => {
                           payload: updatedCharacter,
                         });
                       }
-                      setCharacterDialogPlayerId(undefined);
                     }}
                     onClose={() => {
                       setCharacterDialogPlayerId(undefined);

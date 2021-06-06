@@ -13,6 +13,15 @@ export enum CharacterTemplates {
   EvolutionPulse_LostH = "EvolutionPulse_LostH",
   EvolutionPulse_Obscura = "EvolutionPulse_Obscura",
   EvolutionPulse_Proxy = "EvolutionPulse_Proxy",
+  FateCoreSpanish = "FateCoreSpanish",
+  FateCondensedSpanish = "FateCondensedSpanish",
+  MärchenkriegerLOS = "MärchenkriegerLOS",
+  TachyonSquadronCharacter = "TachyonSquadronCharacter",
+  TachyonSquadronShip = "TachyonSquadronShip",
+  TachyonSquadronCharacterAndShip = "TachyonSquadronCharacterAndShip",
+  DresdenFilesRPGCharacter = "DresdenFilesRPGCharacter",
+  DresdenFilesRPGSpellCaster = "DresdenFilesRPGSpellCaster",
+  DresdenFilesRPGVampire = "DresdenFilesRPGVampire",
   ThePool = "ThePool",
   TunnelsAndTrolls = "TunnelsAndTrolls",
   Maze = "Maze",
@@ -38,6 +47,24 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   { group: "Fate", template: CharacterTemplates.Heartbreaker },
   { group: "Fate", template: CharacterTemplates.IronEddaAccelerated },
   { group: "Fate", template: CharacterTemplates.StrandsOfFate },
+  { group: "Fate", template: CharacterTemplates.MärchenkriegerLOS },
+  {
+    group: "Fate (Spanish)",
+    template: CharacterTemplates.FateCondensedSpanish,
+  },
+  { group: "Fate (Spanish)", template: CharacterTemplates.FateCoreSpanish },
+  {
+    group: "Tachyon Squadron",
+    template: CharacterTemplates.TachyonSquadronCharacter,
+  },
+  {
+    group: "Tachyon Squadron",
+    template: CharacterTemplates.TachyonSquadronShip,
+  },
+  {
+    group: "Tachyon Squadron",
+    template: CharacterTemplates.TachyonSquadronCharacterAndShip,
+  },
   {
     group: "Evolution Pulse",
     template: CharacterTemplates.EvolutionPulse_Hydrah,
@@ -57,6 +84,18 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> = 
   {
     group: "Evolution Pulse",
     template: CharacterTemplates.EvolutionPulse_Proxy,
+  },
+  {
+    group: "Dresden Files RPG",
+    template: CharacterTemplates.DresdenFilesRPGCharacter,
+  },
+  {
+    group: "Dresden Files RPG",
+    template: CharacterTemplates.DresdenFilesRPGSpellCaster,
+  },
+  {
+    group: "Dresden Files RPG",
+    template: CharacterTemplates.DresdenFilesRPGVampire,
   },
   { group: "Maze", template: CharacterTemplates.Maze },
   { group: "Tunnels & Trolls", template: CharacterTemplates.TunnelsAndTrolls },

@@ -3,7 +3,9 @@ import { Fari } from "lib/util/Fari";
 describe("/dice", () => {
   it("Should roll dice", () => {
     Fari.start();
-    Fari.get("page.menu.dice").click();
+
+    Fari.get("page.menu.tools").click({ force: true });
+    Fari.get("page.menu.tools.dice").click();
 
     setAliases();
 
