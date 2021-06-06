@@ -1,5 +1,4 @@
 import produce from "immer";
-import startCase from "lodash/startCase";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
 import { CharacterTemplates } from "./CharacterType";
@@ -257,7 +256,7 @@ export const CharacterFactory = {
     return {
       ...newCharacter,
       id: Id.generate(),
-      name: startCase(type),
+      name: "",
       group: undefined,
       template: type,
       lastUpdated: getUnix(),
@@ -267,22 +266,6 @@ export const CharacterFactory = {
     const newSheet = { ...jsonData };
     const migratedSheet = this.migrate(newSheet);
     return migratedSheet;
-  },
-  makeTemplate(props: {
-    name: string;
-    pages: Array<IPage>;
-    template: CharacterTemplates;
-  }): ICharacter {
-    return {
-      id: Id.generate(),
-      version: CharacterFactory.latestVersion,
-      name: props.name,
-      wide: false,
-      group: undefined,
-      template: props.template,
-      lastUpdated: getUnix(),
-      pages: props.pages,
-    };
   },
   migrate(c: any): ICharacter {
     try {
