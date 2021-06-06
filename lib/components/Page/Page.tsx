@@ -2,6 +2,7 @@ import { css } from "@emotion/css";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
 import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
@@ -9,36 +10,55 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
-import MenuItem from "@material-ui/core/MenuItem";
+import Paper from "@material-ui/core/Paper";
+import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
 import { ThemeProvider } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import BookIcon from "@material-ui/icons/Book";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
+import BugReportIcon from "@material-ui/icons/BugReport";
 import ChatIcon from "@material-ui/icons/Chat";
+import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
+import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import FiberNewIcon from "@material-ui/icons/FiberNew";
+import ForumIcon from "@material-ui/icons/Forum";
 import GitHubIcon from "@material-ui/icons/GitHub";
+import InfoIcon from "@material-ui/icons/Info";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import LocalCafeIcon from "@material-ui/icons/LocalCafe";
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import MenuIcon from "@material-ui/icons/Menu";
 import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
 import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
+import StorageIcon from "@material-ui/icons/Storage";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import TranslateIcon from "@material-ui/icons/Translate";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
+import { Images } from "../../constants/Images";
 import { useZIndex } from "../../constants/zIndex";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { Icons } from "../../domains/Icons/Icons";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
+import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
 import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
+import { FateLabel } from "../FateLabel/FateLabel";
 import { Kofi } from "../Kofi/Kofi";
 import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
@@ -185,29 +205,6 @@ export const Page: React.FC<{
                 >
                   {t("home-route.sections.join-community.cta")}
                 </AppButtonLink>
-              </Grid>
-              <Grid item xs={isSmall ? 12 : undefined}>
-                <Select
-                  data-cy="page.languages"
-                  value={currentLanguage}
-                  onChange={(e) => {
-                    const newLanguage = e.target.value as string;
-                    i18n.changeLanguage(newLanguage);
-                    logger.setTag("language", newLanguage);
-                  }}
-                >
-                  {Object.keys(i18n.options.resources!).map((language) => {
-                    const shouldRenderDev =
-                      language === "dev" && env.context === "localhost";
-                    if (language !== "dev" || shouldRenderDev) {
-                      return (
-                        <MenuItem key={language} value={language}>
-                          {t(`common.language.${language}` as ITranslationKeys)}
-                        </MenuItem>
-                      );
-                    }
-                  })}
-                </Select>
               </Grid>
             </Grid>
           </Box>
@@ -383,7 +380,7 @@ export const Page: React.FC<{
                     cursor: "pointer",
                     display: props.hideHeaderLogo ? "none" : "inherit",
                   })}
-                  src={appIcon}
+                  src={Images.app}
                 />
               </RouterLink>
               {isLive && (
@@ -423,12 +420,23 @@ export const Page: React.FC<{
               </Hidden>
               <Drawer
                 anchor="bottom"
+                classes={{
+                  paper: css({
+                    maxHeight: "80vh",
+                  }),
+                }}
                 open={menuOpen}
                 onClose={() => {
                   setMenuOpen(false);
                 }}
               >
-                <Box p="2rem">{renderMenu(true)}</Box>
+                <Box
+                  p="1.5rem"
+                  color={theme.palette.primary.main}
+                  bgcolor={theme.palette.background.default}
+                >
+                  {renderMenu(true)}
+                </Box>
               </Drawer>
               <Typography
                 className={css({
@@ -461,7 +469,7 @@ export const Page: React.FC<{
                 </ThemeProvider>
               )}
             </Toolbar>
-          </Box>{" "}
+          </Box>
         </AppBar>
       </Box>
     );
@@ -472,14 +480,9 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
-    const linkClassName = css({
-      "color": "inherit",
-      "fontWeight": theme.typography.fontWeightMedium,
-      "fontSize": "1rem",
-      "&:hover": {
-        color: highlight.hover,
-      },
-    });
+    const smSize = 8;
+    const xsSize = 12;
+
     return (
       <Grid
         container
@@ -489,84 +492,188 @@ export const Page: React.FC<{
       >
         {!isLive && (
           <>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <PageNavLink
+                label={t("menu.scenes")}
                 data-cy="page.menu.scenes"
                 onClick={() => {
                   scenesManager.actions.openManager(ManagerMode.Manage);
                 }}
-              >
-                {t("menu.scenes")}
-              </AppLink>
+              />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <PageNavLink
+                label={t("menu.characters")}
                 data-cy="page.menu.characters"
                 onClick={() => {
                   charactersManager.actions.openManager(ManagerMode.Manage);
                 }}
-              >
-                {t("menu.characters")}
-              </AppLink>
+              />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
-                to="/dice"
-                data-cy="page.menu.dice"
-                component={RouterLink}
-              >
-                {t("menu.dice")}
-              </AppLink>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <PageNavLink
+                label={t("menu.tools")}
+                data-cy="page.menu.tools"
+                subNav={[
+                  {
+                    label: t("menu.tools"),
+                    links: [
+                      {
+                        to: "/data",
+                        label: t("menu.data"),
+                        icon: <StorageIcon />,
+                      },
+                      {
+                        to: "/dice",
+                        label: t("menu.dice"),
+                        icon: <Icons.FateDice />,
+                        ["data-cy"]: "page.menu.tools.dice",
+                      },
+                      {
+                        to: "/dice-pool",
+                        label: t("menu.dice-pool"),
+                        icon: <Icons.ThrowDice />,
+                      },
+                      {
+                        to: "/oracle",
+                        label: t("menu.oracle"),
+                        icon: <Icons.EyeIcon />,
+                      },
+                    ],
+                  },
+                ]}
+              />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
-                to="/srds"
-                component={RouterLink}
-              >
-                {t("menu.srds")}
-              </AppLink>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
-                to="/blog"
-                component={RouterLink}
-              >
-                {t("home-route.cards.blog.title")}
-              </AppLink>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <AppLink
-                className={linkClassName}
-                to="/fari-wiki"
-                component={RouterLink}
-              >
-                {t("home-route.cards.wiki.title")}
-              </AppLink>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <PageNavLink
+                label={t("menu.resources")}
+                subNav={[
+                  {
+                    label: "Fari",
+                    links: [
+                      {
+                        to: "https://fari.canny.io/changelog",
+                        label: t("menu.whats-new"),
+                        icon: <FiberNewIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        to: "/feature-requests",
+                        label: t("menu.feature-requests"),
+                        icon: <EmojiObjectsIcon />,
+                      },
+                      {
+                        to: "/bugs",
+                        label: t("menu.report-a-bug"),
+                        icon: <BugReportIcon />,
+                      },
+                      {
+                        to: "/discord",
+                        label: t("menu.discord"),
+                        icon: <ForumIcon />,
+                        target: "_blank",
+                      },
+                    ],
+                  },
+                  {
+                    label: "Documents",
+                    links: [
+                      {
+                        to: "/fari-wiki",
+                        label: t("menu.fari-wiki"),
+                        icon: <InfoIcon />,
+                      },
+                      {
+                        to: "/srds",
+                        label: t("menu.srds"),
+                        icon: <LibraryBooksIcon />,
+                      },
+                      {
+                        to: "/success-with-style",
+                        label: t("menu.success-with-style-blog"),
+                        icon: <DoneOutlineIcon />,
+                      },
+                      {
+                        to: "/seeliesquire",
+                        label: t("menu.seelie-squire"),
+                        icon: <LocalLibraryIcon />,
+                      },
+                      {
+                        to: "/blog",
+                        label: t("menu.blog"),
+                        icon: <BookIcon />,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Support",
+                    links: [
+                      {
+                        to: "https://www.patreon.com/bePatron?u=43408921",
+                        label: t("menu.patreon"),
+                        icon: <ThumbUpIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        to: "https://ko-fi.com/rpdeshaies",
+                        label: t("menu.ko-fi"),
+                        icon: <LocalCafeIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        to: "https://github.com/fariapp/fari",
+                        label: t("menu.github"),
+                        icon: <GitHubIcon />,
+                        target: "_blank",
+                      },
+                    ],
+                  },
+                ]}
+              />
             </Grid>
           </>
         )}
 
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <IconButton
-            color="inherit"
-            href="https://github.com/fariapp/fari"
-            target="_blank"
-            rel="noreferrer"
-            size="small"
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <PageNavLink
+            data-cy="page.menu.languages"
+            tooltip={t("menu.languages")}
+            label={<TranslateIcon />}
           >
-            <GitHubIcon />
-          </IconButton>
+            <Box>
+              <Select
+                fullWidth
+                native
+                value={currentLanguage}
+                inputProps={{
+                  ["data-cy"]: "app.languages",
+                }}
+                onChange={(e) => {
+                  const newLanguage = e.target.value as string;
+                  i18n.changeLanguage(newLanguage);
+                  logger.setTag("language", newLanguage);
+                }}
+              >
+                {Object.keys(i18n.options.resources!).map((language) => {
+                  const shouldRenderDev =
+                    language === "dev" && env.context === "localhost";
+                  if (language !== "dev" || shouldRenderDev) {
+                    return (
+                      <option key={language} value={language}>
+                        {t(`common.language.${language}` as ITranslationKeys)}
+                      </option>
+                    );
+                  }
+                })}
+              </Select>
+            </Box>
+          </PageNavLink>
         </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <IconButton
+
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <PageNavLink
             data-cy="page.toggle-dark-mode"
-            color="inherit"
-            size="small"
+            tooltip={t("menu.toggle-theme")}
             onClick={() => {
               darkModeManager.actions.setDarkMode(
                 !darkModeManager.state.darkMode
@@ -577,15 +684,218 @@ export const Page: React.FC<{
                 logger.info("Page.toggleDarkMode");
               }
             }}
-          >
-            {darkModeManager.state.darkMode ? (
-              <Brightness7Icon />
-            ) : (
-              <Brightness4Icon />
-            )}
-          </IconButton>
+            label={
+              <>
+                {darkModeManager.state.darkMode ? (
+                  <Brightness7Icon />
+                ) : (
+                  <Brightness4Icon />
+                )}
+              </>
+            }
+          />
+        </Grid>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <PageNavLink
+            tooltip={t("menu.whats-new")}
+            onClick={() => {
+              // ignore
+            }}
+            label={
+              <>
+                <CannyChangelog mobile={mobile} />
+              </>
+            }
+          />
         </Grid>
       </Grid>
     );
   }
 };
+
+type IPageNavLink = {
+  label: JSX.Element | string;
+  target?: "_blank";
+  ["data-cy"]?: string;
+  to?: string;
+  tooltip?: string;
+  onClick?(event: React.MouseEvent<HTMLAnchorElement>): void;
+};
+
+function PageNavLink(
+  props: IPageNavLink & {
+    subNav?: Array<{
+      label: JSX.Element | string;
+      links: Array<IPageNavLink & { icon?: JSX.Element }>;
+    }>;
+    children?: JSX.Element;
+  }
+) {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const highlight = useHighlight();
+  const subNav = props.subNav ?? [];
+  const hasSubNav = subNav.length > 0;
+  const hasPopperContent = hasSubNav || !!props.children;
+  const [anchorEl, setAnchorEl] = useState<HTMLAnchorElement | null>(null);
+
+  const open = Boolean(anchorEl);
+
+  function handleOpenSubNav(
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) {
+    if (hasPopperContent) {
+      if (!open) {
+        setAnchorEl(event.currentTarget);
+      } else {
+        handleCloseSubNav();
+      }
+    }
+  }
+
+  function handleCloseSubNav() {
+    setAnchorEl(null);
+  }
+
+  return (
+    <>
+      <Tooltip title={props.tooltip ?? ""}>
+        <div>
+          <AppLink
+            data-cy={props["data-cy"]}
+            target={props.target}
+            className={css({
+              "label": "PageNavLink",
+              "display": "flex",
+              "alignItems": "center",
+              "color": "inherit",
+              "fontWeight": theme.typography.fontWeightMedium,
+              "fontSize": "1.1rem",
+              "&:hover": {
+                color: isSmall ? "inherit" : highlight.hover,
+                textDecoration: "underline",
+              },
+            })}
+            to={props.to}
+            onClick={props.onClick ?? handleOpenSubNav}
+          >
+            {props.label}
+            {hasPopperContent && <ExpandMoreIcon />}
+          </AppLink>
+        </div>
+      </Tooltip>
+
+      <Hidden smDown>
+        <Popover
+          open={open}
+          onClose={handleCloseSubNav}
+          anchorEl={anchorEl}
+          TransitionProps={{ timeout: theme.transitions.duration.shortest }}
+          className={css({
+            marginTop: "1rem",
+          })}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          <Box px="1.5rem" py=".5rem" minWidth="200px">
+            <Box>
+              <Box>{renderSubNav()}</Box>
+              <Box>{props.children}</Box>
+            </Box>
+          </Box>
+        </Popover>
+      </Hidden>
+
+      <Hidden mdUp>
+        <Collapse in={open}>
+          <Box mt=".5rem">
+            <Paper elevation={2}>
+              <Box p="1rem">
+                <Box>{renderSubNav()}</Box>
+                <Box>{props.children}</Box>
+              </Box>
+            </Paper>
+          </Box>
+        </Collapse>
+      </Hidden>
+    </>
+  );
+
+  function renderSubNav() {
+    return (
+      <>
+        {props.subNav?.map((category, categoryIndex) => {
+          return (
+            <Box key={categoryIndex} mt=".5rem" mb="1.5rem">
+              <Box display="flex">
+                <FateLabel color="textSecondary" fontSize=".8rem">
+                  {category.label}
+                </FateLabel>
+              </Box>
+              {category.links.map((link, linkIndex) => {
+                return (
+                  <Box key={linkIndex} my=".5rem">
+                    <Grid
+                      container
+                      wrap="nowrap"
+                      spacing={1}
+                      alignItems="center"
+                    >
+                      {link.icon && (
+                        <Grid item>
+                          <Box
+                            display="flex"
+                            className={css({
+                              "& *": {
+                                color: theme.palette.primary.main,
+                              },
+                            })}
+                          >
+                            {link.icon}
+                          </Box>
+                        </Grid>
+                      )}
+                      <Grid item>
+                        <Tooltip title={link.tooltip ?? ""}>
+                          <div
+                            className={css({
+                              textAlign: "left",
+                            })}
+                          >
+                            <AppLink
+                              to={link.to}
+                              target={link.target}
+                              data-cy={link["data-cy"]}
+                              onClick={link.onClick}
+                              className={css({
+                                "color": theme.palette.primary.main,
+                                "fontWeight": theme.typography.fontWeightMedium,
+
+                                "fontSize": "1rem",
+                                "&:hover": {
+                                  textDecoration: "underline",
+                                },
+                              })}
+                            >
+                              {link.label}
+                            </AppLink>
+                          </div>
+                        </Tooltip>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                );
+              })}
+            </Box>
+          );
+        })}
+      </>
+    );
+  }
+}

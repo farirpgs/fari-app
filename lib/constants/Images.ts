@@ -1,3 +1,4 @@
+import app from "../../images/blue/app.png";
 import banner from "../../images/blue/banner.png";
 import logo from "../../images/blue/logo.png";
 import accelerated from "../../images/srds/accelerated.jpg";
@@ -14,6 +15,7 @@ import seelieSquire from "../../images/srds/seelie-squire.png";
 import systemToolkit from "../../images/srds/system-toolkit.jpg";
 
 export const Images = {
+  app: app as string,
   logo: logo as string,
   banner: banner as string,
   systemToolkit: systemToolkit as string,

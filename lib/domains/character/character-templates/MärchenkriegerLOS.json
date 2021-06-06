@@ -1,0 +1,481 @@
+{
+  "id": "d8625071-d629-43ea-87b8-77df8be6aa6f",
+  "version": 3,
+  "name": "Vorlage - Märchenkrieger, LOS!",
+  "group": "Märchenkrieger, LOS!",
+  "template": "Blank",
+  "lastUpdated": 1621260422,
+  "pages": [
+    {
+      "id": "2191de21-06d8-4024-8b4d-c04b1d7a9286",
+      "label": "MEnsch",
+      "sections": [
+        {
+          "id": "c95d14d9-8177-413e-937d-c778dd2f1140",
+          "label": "Aspekte - Mensch",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "eb2cf223-a217-4fcb-9155-061f424701aa",
+              "label": "Konzept",
+              "type": "Text",
+              "value": "",
+              "meta": { "helperText": "" }
+            },
+            {
+              "id": "a4c9a87d-8512-444a-92d8-7bb6e7492de9",
+              "label": "Dilemma",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "6b6b207e-ec34-4b61-b241-05a74827a950",
+              "label": "Aspekt",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Entweder 1 Aspekt für jeweils den Menschen oder die Figur. Oder 2 Aspekte für entweder den Menschen oder die Figur."
+              }
+            },
+            {
+              "id": "201c23d8-1578-4127-992b-f864574097bd",
+              "label": "Aspekt",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Entweder 1 Aspekt für jeweils den Menschen oder die Figur. Oder 2 Aspekte für entweder den Menschen oder die Figur."
+              }
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "63cc8cbe-ab99-41f5-9fea-30011440eae6",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "3f5cf89f-a6c1-47c6-ba89-3557adf6c816",
+              "label": "Körperlich",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false }
+              ]
+            },
+            {
+              "id": "4ff016d7-2799-49ad-94cb-9528bccf2b55",
+              "label": "Geistig",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false }
+              ]
+            }
+          ],
+          "visibleOnCard": false
+        },
+        {
+          "id": "f16fb9c0-1f44-42d7-b0e5-1a355fa01643",
+          "label": "Konsequenzen",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "adee9514-d643-4c73-ae3e-f9469d6ccf59",
+              "label": "Leicht",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "Checkbox = In Heilung"
+              }
+            },
+            {
+              "id": "e2ac36ab-42bc-4ca5-af05-4a74790faecc",
+              "label": "Mittel",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "Checkbox = In Heilung"
+              }
+            },
+            {
+              "id": "393459bf-03bc-4f58-ac13-006f76f4b000",
+              "label": "SChwer",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "Checkbox = In Heilung"
+              }
+            }
+          ],
+          "visibleOnCard": false
+        },
+        {
+          "id": "328047ba-9ef7-485d-a98d-c9b3d1ff1f67",
+          "label": "Fertigkeiten",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "1cb434c5-6d89-4818-974d-978e00072ad7",
+              "label": "Athlethik",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "80ebf791-b5bb-4c71-b1d2-18ae55467608",
+              "label": "charisma",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "f3b2855c-3b53-4636-8e7d-9485f74ccfe3",
+              "label": "diebeskunst",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "4c98ff91-8bad-4837-a7b0-6b73b3099cf5",
+              "label": "empathie",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "9f820067-43c6-46f9-ba4a-58ff95ca3205",
+              "label": "handwerk",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "9ca50546-df4a-4bc3-b63c-56c9f9180376",
+              "label": "heimlichkeit",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "475ca37c-70d2-4545-ab9d-f68995173ae2",
+              "label": "Kämpfen",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "3821bdd1-d33c-4b4c-bcff-a09fc200e20e",
+              "label": "Kontakte",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "485542e1-4612-4a78-b193-6a16873bb92d",
+              "label": "KRaft",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "418a53e9-bb84-4547-a40d-74c69703a26a",
+              "label": "Märchenkunde",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "fdde00d7-a62c-4ff8-8387-38dd4ea848bc",
+              "label": "Nachforschungen",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "52246b5d-ef95-4997-8881-1228affc8d59",
+              "label": "Provozieren",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "8807ffdd-9eac-4e7e-b880-bcf3f46d52fb",
+              "label": "Reiten",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "fbeec64f-148e-4134-99b6-f90f4def3861",
+              "label": "Ressourcen",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "41c10888-ad8c-46d6-880c-0187a85afe05",
+              "label": "Schiessen",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "6b93f9be-bbe7-4bc8-bebf-2bde8aea06e0",
+              "label": "Täuschung",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "c75cac23-7380-42f8-b337-d1e2e6a1e0d3",
+              "label": "Wahrnehmung",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "5cd8cde3-9543-4082-b979-2817fb49c940",
+              "label": "Wille",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "5055a1ea-3157-49df-8638-bd511993afcc",
+              "label": "Wissen",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "7145c4f6-bac8-4c48-ad31-2ca48fa116f7",
+          "label": "Stunts",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "e8e495cd-bd3f-4417-a873-27894fef0150",
+              "label": "1. Stunt",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "cac0e88f-bfd5-41bb-a64a-42adbf0988a9",
+              "label": "2. Stunt",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ],
+          "visibleOnCard": false
+        },
+        {
+          "id": "ac88b8b6-c3f5-42cd-8379-086aae9ec97b",
+          "label": "Anderes",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "1ca9e098-ae2d-49b9-8c2a-f24573158cd5",
+              "label": "Fate Punkte",
+              "type": "PointCounter",
+              "meta": {
+                "max": "3",
+                "isMainPointCounter": true,
+                "helperText": "Der komplette Charakter hat nur einen Pool für Fate-Punkte"
+              },
+              "value": "3"
+            },
+            {
+              "id": "4a8664b0-0bd8-4126-ab23-0ec946a5bf8d",
+              "label": "Krise",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Welches Ereignis hat dafür gesorgt, das du eine Doppelseele wurdest?"
+              }
+            },
+            {
+              "id": "64c55bc6-fbbb-49b0-b67e-be6659d096ec",
+              "label": "Notizen",
+              "type": "Text",
+              "value": "",
+              "meta": { "helperText": "" }
+            }
+          ],
+          "visibleOnCard": false
+        }
+      ]
+    },
+    {
+      "id": "2fea9e34-9de6-476f-89a2-874bb160521f",
+      "sections": [
+        {
+          "id": "0076a9a3-2654-442d-a468-b567e3bc3424",
+          "label": "Aspekte - Figur",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "ea84850a-7f24-4cbc-a35d-9e63c77e977a",
+              "label": "Konzept",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "6fe8286e-7643-4fd2-a15a-133aaffcfe24",
+              "label": "Dilemma",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "e84c5391-87e0-4fdc-a2a5-a20a23151b18",
+              "label": "Aspekt",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Entweder 1 Aspekt für jeweils den Menschen oder die Figur. Oder 2 Aspekte für entweder den Menschen oder die Figur."
+              }
+            },
+            {
+              "id": "75bad8ec-aee9-42f7-9b6c-6510b4084eac",
+              "label": "Aspekt",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Entweder 1 Aspekt für jeweils den Menschen oder die Figur. Oder 2 Aspekte für entweder den Menschen oder die Figur."
+              }
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "e5d95e48-95b7-4c50-bc39-1cba829b96c9",
+          "label": "MEthoden",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "2ef6456f-1ce3-4ed9-abf4-338238f76107",
+              "label": "Flink",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "ce6187cd-8c1a-4690-93f3-0ccf08cf3870",
+              "label": "Kraftvoll",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "288cc4ac-3ad9-4f1a-8cae-20caddd08677",
+              "label": "scharfsinnig",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "8aa2e60c-9e91-4227-90c6-0b7911e4d224",
+              "label": "sorgfältig",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "617273cd-6044-49c3-8d1e-d9d0d714bf7a",
+              "label": "Tollkühn",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "94d86321-590e-405e-b07a-7978c5142095",
+              "label": "Tückisch",
+              "type": "Skill",
+              "value": "",
+              "meta": { "commands": ["4dF"] }
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "3693cb19-97c2-4c5c-882a-8beecd4e1c65",
+          "label": "Superkräfte",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "7dd9af5a-cfa9-46d0-87ae-afc0b7435112",
+              "label": "1. Kraft",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "293b98b0-f4e1-4769-8c3d-617b7831cfd7",
+              "label": "2. KRAFT",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "390d257e-1803-46b6-9865-24b2916bab37",
+              "label": "3. KRAFT",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "e6535502-dde4-4513-8a88-1eee7064d278",
+              "label": "4. KRAFT",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ],
+          "visibleOnCard": false
+        },
+        {
+          "id": "4e633772-240c-4f6f-b969-1ec71c5f3441",
+          "label": "Anderes",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "c9e30d19-1f8d-44f7-b124-a9f9607d9012",
+              "label": "Verwandlungssequenz",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Wie sieht es aus, wenn dein Mensch sich in die Figur verwandelt? Je Anime, desto POW!"
+              }
+            },
+            {
+              "id": "705216d4-23ee-4cd6-bee6-55c1f808de4e",
+              "label": "Notizen",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ],
+          "visibleOnCard": false
+        }
+      ],
+      "label": "Figur"
+    }
+  ],
+  "fariType": "character"
+}

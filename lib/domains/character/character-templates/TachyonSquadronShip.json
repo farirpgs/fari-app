@@ -1,0 +1,299 @@
+{
+  "id": "726be459-53c9-45e2-989b-791f0ffcba2c",
+  "name": "Ship Sheet - SF-46D \"Blackfish\"",
+  "group": "Tachyon Squadron",
+  "lastUpdated": 1622746831,
+  "wide": false,
+  "pages": [
+    {
+      "id": "e7dfd09a-0a62-4957-89b5-c61e3e199db3",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "30288451-f2b3-4674-865c-3e91011634bc",
+            "blocks": [
+              {
+                "id": "44008493-9333-49fd-8e86-a30459f1259c",
+                "label": "aspect",
+                "type": "Text",
+                "value": "Old but reliable",
+                "meta": { "helperText": "Aspect&nbsp; of the ship" }
+              },
+              {
+                "id": "4869fda9-d3fe-4b1a-a61d-035b1533d437",
+                "label": "stunt or power",
+                "type": "Text",
+                "value": "Well Armed: Gain Weapon: 1 to Gunnery attacks",
+                "meta": {}
+              },
+              {
+                "id": "77892d33-1e4e-4035-911e-06e7d0eeeae3",
+                "label": "stunt or power",
+                "type": "Text",
+                "value": "Automatic Ejection System",
+                "meta": {}
+              }
+            ],
+            "label": "standard features",
+            "visibleOnCard": true
+          },
+          {
+            "id": "87b2b079-8c88-4be2-b163-4f1d31d071d0",
+            "blocks": [
+              {
+                "id": "591cded4-0469-40c7-bf96-1294126c2db4",
+                "label": "pilot",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "The current pilot of the ship" }
+              },
+              {
+                "id": "5f47a372-25eb-4352-8d8b-b0cb04591711",
+                "label": "detection",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "e40f4478-03d5-405d-9ce3-425ddd9bac76",
+                "label": "minimize detection die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              },
+              {
+                "id": "d6b36dec-76f5-4a7a-9501-4adee0c9a4fa",
+                "label": "defend",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "c5f08db6-28fb-41a1-a142-65e0d65e191e",
+                "label": "minimize defend die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              },
+              {
+                "id": "3ab9b89e-3022-4410-abe8-49fd0171ad72",
+                "label": "maneuver",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "22161ff5-debf-48ff-b369-9ae410848f30",
+                "label": "minimize maneuver die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              },
+              {
+                "id": "b314e7c8-80d1-4d16-a41d-4fed03d33e6f",
+                "label": "attack",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "41249978-fba4-43a9-bbf8-ab4b5a4b2b7e",
+                "label": "minimize attack die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              }
+            ],
+            "label": "engagement bonuses",
+            "visibleOnCard": true
+          },
+          {
+            "id": "0b420ac2-ea2c-42e0-96b6-bfa0e1bc4eef",
+            "blocks": [
+              {
+                "id": "e8903d39-a411-4b70-b9f3-a08d4e7cfd67",
+                "label": "equipment bay 1",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "eefe3787-0fa4-4dad-8216-d23b4a398c6f",
+                "label": "equipment bay 2",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              }
+            ],
+            "label": "equipment bay"
+          }
+        ],
+        "right": [
+          {
+            "id": "11463db2-c0eb-4c97-b8f5-05779ad6f728",
+            "blocks": [
+              {
+                "id": "f95eb803-56c6-48bf-bf17-b541e14c0829",
+                "label": "shields",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false }
+                ]
+              }
+            ],
+            "label": "system damage",
+            "visibleOnCard": true
+          },
+          {
+            "id": "a2e7e4ff-b617-4869-bb71-f24937955057",
+            "blocks": [
+              {
+                "id": "9e582a38-fe0c-4404-bb14-0881bf145456",
+                "label": "sensors damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die from Technology actions."
+                }
+              },
+              {
+                "id": "bf8ecbc2-a43e-445e-a75d-81fb40d00226",
+                "label": "targeting systems damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die from Gunnery actions.&nbsp;"
+                }
+              },
+              {
+                "id": "d7b77b16-ea9d-4591-8a78-eb9cd717c3ef",
+                "label": "sensors and targeting offline",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die from both Gunnery and Technology actions rolls. Gain aspect: SHOOTS IN THE DARK"
+                }
+              },
+              {
+                "id": "0b68bb9b-e656-427a-93df-2e51c46504ff",
+                "label": "catastrophic damage",
+                "type": "Numeric",
+                "value": "0",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Flash fire! punch out!"
+                }
+              }
+            ],
+            "label": "(+) computer systems damage",
+            "visibleOnCard": true
+          },
+          {
+            "id": "77950b70-e143-4997-b23f-d92d43aa6b50",
+            "blocks": [
+              {
+                "id": "8734396c-cc98-4e05-beb3-9ac86e60e9b5",
+                "label": "afterburner damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die on Tactics actions."
+                }
+              },
+              {
+                "id": "7ce9ab7d-babf-4d08-ac1c-375a839b5617",
+                "label": "meneuvering jets damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die on Pilot actions."
+                }
+              },
+              {
+                "id": "5922097b-7bff-4d76-b28a-7a6935ec1de1",
+                "label": "critical damage to drives",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die on both Tactics and Pilot actions. Gain Aspect: DRIVES READY TO GIVE OUT"
+                }
+              },
+              {
+                "id": "4fe7517f-e348-49fc-ab05-ffdda52e545b",
+                "label": "catastrophic damage",
+                "type": "Numeric",
+                "value": "0",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Catastrophic explosion! Punch out!"
+                }
+              }
+            ],
+            "label": "( ) Propulsion systems damage"
+          },
+          {
+            "id": "60fbee21-c5a9-4abd-9f94-62a7aef583b7",
+            "blocks": [
+              {
+                "id": "3a927383-befc-4725-a7ea-2b08d7d98668",
+                "label": "life support damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Aspect: LIFE SUPPORT DAMAGED"
+                }
+              },
+              {
+                "id": "bb96a149-d0aa-40d9-abf6-2354646eb282",
+                "label": "cockpit hit",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "the pilot sustains a hit equal to the attack.&nbsp;"
+                }
+              },
+              {
+                "id": "a3859ff1-7d36-4cfb-8283-8f3bfdc4049c",
+                "label": "catastrophic damage",
+                "type": "Numeric",
+                "value": "",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Structural disintegration! Punch out!"
+                }
+              }
+            ],
+            "label": "(-) Critical systems damage"
+          }
+        ]
+      }
+    }
+  ],
+  "template": "TachyonSquadron",
+  "version": 4,
+  "fariType": "character"
+}
