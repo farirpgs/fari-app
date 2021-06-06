@@ -60,7 +60,10 @@ describe("/characters", () => {
 
       // save
 
-      cy.title().should("eq", "Blank | Fari");
+      cy.title().should(
+        "eq",
+        "Fari | Play Table-Top RPGs Online Without the Headache"
+      );
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
