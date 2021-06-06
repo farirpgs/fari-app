@@ -1,6 +1,6 @@
 {
-  "about-route.meta.description": "Fari - это настольное приложение для сопровождения ролевой игры, созданное Рене-Пьером Деше-Желина.",
-  "about-route.meta.title": "О Fari",
+  "bugs-route.meta.description": "Сообщить о найденной ошибке",
+  "bugs-route.meta.title": "Ошибки",
   "character-dialog.block-type.dice-pool": "Набор кубиков",
   "character-dialog.block-type.image": "Изображение",
   "character-dialog.block-type.link": "Ссылка",
