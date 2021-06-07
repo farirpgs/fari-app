@@ -15,6 +15,7 @@ import seelieSquire from "../../images/srds/seelie-squire.png";
 import systemToolkit from "../../images/srds/system-toolkit.jpg";
 
 export const Images = {
+  app: app as string,
   logo: logo as string,
   app: app as string,
   banner: banner as string,

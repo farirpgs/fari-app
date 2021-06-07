@@ -41,18 +41,33 @@
 - fix: index card drag and drop
 - feat: esperato translations [#290](https://github.com/fariapp/fari/pull/290) @ejheil
 
-**5.0.1**
+**v5.0.1**
 
 - feat: translation update
 - fix: scene sub cards ids arent re-generated when a parent card is duplicated
 
-**5.0.2**
+**v5.0.2**
 
 - feat: update the Fate of Cthulhu template to include the corruption track
 - feat: fate condensed is now fully available in pt-br
 - fix: index card colors in dark mode have been adjusted so that they are easier on the eye
 - feat: the index card color picker now offers a set of 12 colors to help you organize your cards better
 - fix: there is now a confirmation pop-up if you try to delete an index card
+
+**v5.0.6**
+
+- feat: new navigation
+- feat: header canny changelog integration
+- feat: characrer sheets don't close after save when playing online.
+- feat: new character sheet templates
+  - Fate Condensed in Spanish
+  - Fate Core in Spanish
+  - Tachyon Squadron Character
+  - Tachyon Squadron Ship
+  - Tachyon Squadron Character And Ship
+  - Dresden Files RPG Character
+  - Dresden Files RPG Spell Caster
+  - Dresden Files RPG Vampire
 
 # v4.0 New Character Sheet Framework, Data Mangagement
 

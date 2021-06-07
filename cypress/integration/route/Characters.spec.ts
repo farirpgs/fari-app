@@ -11,7 +11,7 @@ describe("/characters", () => {
       Fari.get("my-binder.folders.characters").click();
       Fari.get("my-binder.folders.characters.new").click();
 
-      Fari.get("character-dialog.name").type("Luke Skywalker");
+      Fari.get("character-dialog.name").clear().type("Luke Skywalker");
 
       // load fate template
       Fari.get("character-dialog.template.content").click();
@@ -163,7 +163,7 @@ describe("/characters", () => {
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.characters").click();
       Fari.get("my-binder.folders.characters.new").click();
-      Fari.get("character-dialog.name").type("Luke");
+      Fari.get("character-dialog.name").clear().type("Luke");
       Fari.get("character-dialog.toggle-advanced").click();
       Fari.get("character-dialog.template.advanced").click();
       Fari.get("character-dialog.template.advanced")

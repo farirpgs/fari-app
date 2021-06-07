@@ -523,6 +523,10 @@ By using the following syntax `[skill: modifier]` inside an Index Card descripti
 
 # Fari in the Wild
 
+## Tutorials and Overview
+
+- [Fari App Virtual Table Top by Dragons Are Real Podcast](https://www.youtube.com/watch?v=BNL5xXDgA3w)
+
 ## Actual Plays
 
 Here is a list of actual plays of people playing TTRPGs using Fari.

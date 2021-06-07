@@ -48,13 +48,15 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        const oldId = draft.id;
-        const oldName = draft.name;
+        const id = draft.id;
+        const name = draft.name || defaultCharacter.name;
+        const group = draft.group || defaultCharacter.group;
 
         return {
           ...defaultCharacter,
-          id: oldId,
-          name: oldName,
+          id: id,
+          name: name,
+          group: group,
           lastUpdated: getUnix(),
         };
       })

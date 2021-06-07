@@ -3,7 +3,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
@@ -21,6 +21,7 @@ const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
 const FeatureRequestsRoute = React.lazy(
   () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
 );
+const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
 const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
@@ -37,6 +38,7 @@ const SeelieSquireRoute = React.lazy(
 );
 
 export const LoadingRoute: React.FC = () => {
+  const location = useLocation();
   const [fadeIn, setFadeIn] = useState(false);
   const timeout = useRef<any | undefined>(undefined);
 
@@ -51,7 +53,7 @@ export const LoadingRoute: React.FC = () => {
   });
 
   return (
-    <Page hideHeaderLogo>
+    <Page hideHeaderLogo={location.pathname === "/"}>
       <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
@@ -92,14 +94,14 @@ export const AppRouter = () => {
           exact
           path={"/dice"}
           render={() => {
-            return <DiceRoute pool={false} />;
+            return <DiceRoute pool={false} key="dice" />;
           }}
         />
         <Route
           exact
           path={"/dice-pool"}
           render={() => {
-            return <DiceRoute pool={true} />;
+            return <DiceRoute pool={true} key="dice-pool" />;
           }}
         />
         <Route
@@ -186,6 +188,23 @@ export const AppRouter = () => {
           path={["/feature-requests", "/feature-requests/*"]}
           render={() => {
             return <FeatureRequestsRoute />;
+          }}
+        />
+
+        <Route
+          exact
+          path={["/bugs", "/bugs/*"]}
+          render={() => {
+            return <BugsRoute />;
+          }}
+        />
+
+        <Route
+          exact
+          path={"/discord"}
+          render={() => {
+            window.location.href = "https://discord.gg/vMAJFjUraA";
+            return null;
           }}
         />
 

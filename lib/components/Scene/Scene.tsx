@@ -155,17 +155,17 @@ export const Session: React.FC<IProps> = (props) => {
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] =
-    useState<string | undefined>(undefined);
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
 
   const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
 
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
 
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
 
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -1025,9 +1025,8 @@ export function Scene(props: {
   const scenesManager = useContext(ScenesContext);
   const myBinderManager = useContext(MyBinderContext);
 
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
+  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
+    .primary;
   const numberOfColumnsForCards = useResponsiveValue({
     xl: 4,
     lg: 3,
@@ -1041,8 +1040,9 @@ export function Scene(props: {
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
   const [savedSnack, setSavedSnack] = useState(false);
-  const [sceneTab, setSceneTab] =
-    useState<"public" | "private" | "notes">("public");
+  const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
+    "public"
+  );
 
   const headerColor = theme.palette.background.paper;
   const hasScene = !!sceneManager.state.scene;

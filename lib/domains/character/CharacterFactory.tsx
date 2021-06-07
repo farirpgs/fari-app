@@ -192,6 +192,60 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
+      [CharacterTemplates.MärchenkriegerLOS]: async () => {
+        const jsonData = await import(
+          "./character-templates/MärchenkriegerLOS.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.FateCondensedSpanish]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCondensedSpanish.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.FateCoreSpanish]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCoreSpanish.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.TachyonSquadronCharacter]: async () => {
+        const jsonData = await import(
+          "./character-templates/TachyonSquadronCharacter.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.TachyonSquadronShip]: async () => {
+        const jsonData = await import(
+          "./character-templates/TachyonSquadronShip.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.TachyonSquadronCharacterAndShip]: async () => {
+        const jsonData = await import(
+          "./character-templates/TachyonSquadronCharacterAndShip.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.DresdenFilesRPGCharacter]: async () => {
+        const jsonData = await import(
+          "./character-templates/DresdenFilesRPGCharacter.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.DresdenFilesRPGSpellCaster]: async () => {
+        const jsonData = await import(
+          "./character-templates/DresdenFilesRPGSpellCaster.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.DresdenFilesRPGVampire]: async () => {
+        const jsonData = await import(
+          "./character-templates/DresdenFilesRPGVampire.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       [CharacterTemplates.Blank]: async () => {
         const jsonData = await import("./character-templates/Blank.json");
         return this.makeFromJson(jsonData);
@@ -212,22 +266,6 @@ export const CharacterFactory = {
     const newSheet = { ...jsonData };
     const migratedSheet = this.migrate(newSheet);
     return migratedSheet;
-  },
-  makeTemplate(props: {
-    name: string;
-    pages: Array<IPage>;
-    template: CharacterTemplates;
-  }): ICharacter {
-    return {
-      id: Id.generate(),
-      version: CharacterFactory.latestVersion,
-      name: props.name,
-      wide: false,
-      group: undefined,
-      template: props.template,
-      lastUpdated: getUnix(),
-      pages: props.pages,
-    };
   },
   migrate(c: any): ICharacter {
     try {

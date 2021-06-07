@@ -12,7 +12,7 @@ import {
 
 type IProps = {
   to?: string;
-  onClick?(): void;
+  onClick?(event: React.MouseEvent<HTMLAnchorElement>): void;
 };
 
 export const AppLink: React.FC<
@@ -36,31 +36,36 @@ export const AppLink: React.FC<
     classNameFromProps
   );
 
-  const link = isInternal ? (
-    <MaterialUILink
-      to={to}
-      component={ReactRouterLink}
-      onClick={() => {
-        if (onClick) {
-          onClick();
-        }
-      }}
-      className={className}
-      rel={props.target === "_blank" ? "noreferrer" : undefined}
-      {...rest}
-    >
-      {props.children}
-    </MaterialUILink>
-  ) : (
+  if (isInternal) {
+    return (
+      <MaterialUILink
+        to={to}
+        component={ReactRouterLink}
+        onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
+          if (onClick) {
+            event.preventDefault();
+            onClick(event);
+          }
+        }}
+        className={className}
+        rel={props.target === "_blank" ? "noreferrer" : undefined}
+        {...rest}
+      >
+        {props.children}
+      </MaterialUILink>
+    );
+  }
+
+  return (
     <MaterialUILink
       href={to as string}
       component={"a"}
       className={className}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
-      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+      onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
         if (onClick) {
-          e.preventDefault();
-          onClick();
+          event.preventDefault();
+          onClick(event);
         }
       }}
       {...rest}
@@ -68,8 +73,6 @@ export const AppLink: React.FC<
       {props.children}
     </MaterialUILink>
   );
-
-  return link;
 };
 
 export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
