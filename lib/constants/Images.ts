@@ -17,7 +17,6 @@ import systemToolkit from "../../images/srds/system-toolkit.jpg";
 export const Images = {
   app: app as string,
   logo: logo as string,
-  app: app as string,
   banner: banner as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,

@@ -666,7 +666,7 @@ export const Page: React.FC<{
             }}
             label={
               <>
-                {darkModeManager.state.darkMode ? (
+                {settingsManager.state.themeMode === "dark" ? (
                   <Brightness7Icon />
                 ) : (
                   <Brightness4Icon />
