@@ -46,7 +46,7 @@
   "character-dialog.control.width": "Ширина",
   "character-dialog.group": "Группа",
   "character-dialog.helper-text.empty-dice-pool": "Пустой",
-  "character-dialog.helper-text.help": "Помощь",
+  "character-dialog.helper-text.help": "Помощь:",
   "character-dialog.helper-text.invalid-link": "Неверная ссылка",
   "character-dialog.image-block.dialog.add-image": "Добавить изображение",
   "character-dialog.image-block.dialog.close": "Закрыть",
