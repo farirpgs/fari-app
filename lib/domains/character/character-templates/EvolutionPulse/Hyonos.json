@@ -1,0 +1,320 @@
+{
+  "id": "3059e4b0-e97d-402f-a69b-25f13e6a7979",
+  "version": 3,
+  "name": "Hyonos",
+  "group": "Executors",
+  "template": "FateAccelerated",
+  "lastUpdated": 1618441154,
+  "pages": [
+    {
+      "id": "82d5ada9-333c-4824-9495-8cd4fcb613c8",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "91b3ca96-d0f1-453a-af60-ae4b9c86c8d5",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "1357da16-f258-4956-b72a-e77759985b24",
+              "type": "Text",
+              "meta": {
+                "helperText": "Hyonoses live a psychic life, stranded between the material world and a dream world induced by Eden, as a Thoughtform - the materialization of the will of a human in cryosleep. pp.39-40"
+              },
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "cf9509b4-ede3-44d5-ab0f-1717f3ad9dea",
+              "type": "Text",
+              "meta": {
+                "helperText": "They base their whole existence on the concepts of duty, sacrifice, and abnegation."
+              },
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "075c74c0-beb1-4638-a668-14e8c236c856",
+              "type": "Text",
+              "meta": {
+                "helperText": "All beliefs, ethics, or codes of conducts can make good traits. Light opposing dark is a very relevant symbolism."
+              },
+              "label": "Other Aspect #1",
+              "value": ""
+            },
+            {
+              "id": "042a6c7a-1381-45eb-bb96-728eadb68d5b",
+              "label": "Other Aspect #2",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "A Hyonos' body is merely a physical simulacrum and can be changed at their will."
+              }
+            },
+            {
+              "id": "9d7de171-8e8f-4486-9fb8-9ce14a07c3f6",
+              "label": "Other Aspect #3",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Hyonoses do not make physical use of technology as it were, but are steeped in the mystical. They prefer close combat weapons, knightly armors, and religious relics."
+              }
+            }
+          ]
+        },
+        {
+          "id": "15668834-c45b-4427-a7db-9c970c1a5eb1",
+          "label": "Stunts",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "14e01ed8-d3a9-498c-bb3a-f09a6f58fa8f",
+              "type": "Text",
+              "meta": {
+                "helperText": "Hyonoses' stunts are based on faith, will, and the relics the Voice of Eden has made available to them."
+              },
+              "label": "Stunt #1",
+              "value": ""
+            },
+            {
+              "id": "89efd949-81ae-46fd-8990-e89085306cff",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #2",
+              "value": ""
+            },
+            {
+              "id": "8c26cbd3-1d73-47ec-a762-ba8d20841248",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "e92997b4-e869-4a02-93d8-d5fa703006a4",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0ed22502-d5d0-4163-8e0f-9fb0e00db327",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "3d7664cc-b9b4-43af-b67c-d313e63d2979",
+          "label": "Approaches",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "4c968e5c-efd3-4514-8034-b883afb3c4a4",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "The Voice of Eden speaks and always offers guidance; you have to believe. Follow the path and defend humanity from the Hekath. p.42"
+              },
+              "label": "Faith",
+              "value": ""
+            },
+            {
+              "id": "a6747f89-3b27-45e8-918c-b024b5941271",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You empathize with humanity and know how to interact with them. The world is lost, but humanity is not. p.43"
+              },
+              "label": "Humanity",
+              "value": ""
+            },
+            {
+              "id": "16d0cc38-9603-4ebf-82b2-8a2b58a93791",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Hunt darkness wherever it gathers. You can find Hekath in the deepest of tunnels as well as see the truth in the humblest of human hearts. Use sense and intuition to find any evil. p.43"
+              },
+              "label": "Inquisitive",
+              "value": ""
+            },
+            {
+              "id": "57028bd3-681c-46d4-9653-7ef551b604e8",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Fight with the martial weapons Eden has granted you, erasing darkness from the world. p.42"
+              },
+              "label": "Martial",
+              "value": ""
+            },
+            {
+              "id": "128206a3-333a-492c-a457-6767016d0c0e",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Stopping the spread of darkness is worth more than your own life. The cost of your success in any mission is never too high - for you or anyone else. p.44"
+              },
+              "label": "Sacrifice",
+              "value": ""
+            },
+            {
+              "id": "2c3ddc6c-cf74-4a03-b9f6-c6492c68a5a8",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You can manipulate the hard-light you are made of and realign it whenever you want. You may flash in and out of existence to pass obstacles, restore your body, or remove interference. p.43"
+              },
+              "label": "Realign Reality (Pulse)",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "48a95812-2f00-46da-b046-c8da3ce6be74",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "12ca32a7-1ebf-4045-a06f-86faec73a888",
+              "type": "SlotTracker",
+              "meta": {
+                "helperText": "Hyonoses do not have a true corporeal body, instead being composed of hard light, which they can repair and reform by realigning reality."
+              },
+              "label": "PHYSICAL Stress",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" }
+              ]
+            },
+            {
+              "id": "c7b42673-5ba6-488d-8be0-01b3ac5c7ef2",
+              "label": "mental stress",
+              "type": "SlotTracker",
+              "meta": {
+                "helperText": "A Hyonos' mind, however, must work over-time to keep their form aligned to reality, especially under intense physical duress."
+              },
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "f2e25d84-1f8d-44ae-a1c3-0311acec654a",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "38ebdbcb-eae1-4f33-9d4d-c62f885458c8",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "[2] - Mild",
+              "value": ""
+            },
+            {
+              "id": "1c4569e9-047a-4086-b9e1-743cf711ee08",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "[4] - Moderate",
+              "value": ""
+            },
+            {
+              "id": "7904a84f-3f83-4a4c-bf01-d67fc66466ca",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "[6] - Severe",
+              "value": ""
+            },
+            {
+              "id": "2abc2a05-95b3-48cb-8502-dcbd711ca4d1",
+              "label": "[8] - critical",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "516adcc5-f748-46ae-aa9f-cae672386362",
+      "sections": [
+        {
+          "id": "18720125-0328-4c8d-9a50-19fe6c3117e9",
+          "label": "Seven Questions",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "c233e0c9-ed81-429f-b03b-e38285afd07d",
+              "label": "Describe reality seen through your eyes",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "98eb138f-e634-4123-8197-e874ac2ac551",
+              "label": "Describe Eden, the AI that guides you",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "5f2bccc2-e0ff-4e95-9d18-73b7505ccb95",
+              "label": "Describe the Hekath; how do you see them? what are they to you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "764238a2-9827-4c1b-9ada-a542bfa5af7c",
+              "label": "Describe the LostH; what ties you to them? what pushes you to protect them?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "d4c11b84-c5fd-413c-ab65-ca4b3d762f77",
+          "label": "",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "3b89169c-afc8-4d68-a256-15a93cd650bf",
+              "label": "Describe your character and what the others see",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "83f499e2-c2de-45c5-9295-b8a7c22715c8",
+              "label": "Describe how you act on reality",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "87fd2785-4cc2-476e-8e42-cccd5b50c84c",
+              "label": "Describe what the SafeZones are for you",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "Seven questions"
+    }
+  ],
+  "fariType": "character"
+}

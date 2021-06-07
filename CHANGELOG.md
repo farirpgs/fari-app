@@ -1,8 +1,170 @@
 # Changelog
 
-## v3.5 Resources, Private Aspects and Scene Notes
+<page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
-#### January 19th, 2020
+# v5.0 Better Index Cards and New Block Types
+
+- feat: pick any color for index cards
+- feat: give ability to add sub cards to index cards
+- feat: use building blocks inside index cards
+- feat: collapse or expand index cards
+- feat: new index cards sort options
+- feat: sort private index cards
+- feat: display character cards from left to right
+- feat: display size (in KB or MB) of each character or scenes in the data manager
+- feat: new Image building block
+- feat: new Link building block
+- feat: new Separator building block
+- feat: display player id in player component
+- feat: automatically save a character sheet when assigned by the GM
+- feat: duplicate character sheet page
+- feat: duplicate character sheet section
+- feat: better print mode
+- fix: disable image in content editable components
+- fix: print mode temporarily disables dark mode
+- feat: nice "Pick from deck of card" dice command
+- feat: character sheet wide mode
+- feat: character sheet block width
+- fix: move section weird behaviors
+- feat: adding a new index cards adds it to the top of the scene
+- fix: index card drag and drop
+- feat: esperato translations [#290](https://github.com/fariapp/fari/pull/290) @ejheil
+
+**v5.0.1**
+
+- feat: translation update
+- fix: scene sub cards ids arent re-generated when a parent card is duplicated
+
+**v5.0.2**
+
+- feat: update the Fate of Cthulhu template to include the corruption track
+- feat: fate condensed is now fully available in pt-br
+- fix: index card colors in dark mode have been adjusted so that they are easier on the eye
+- feat: the index card color picker now offers a set of 12 colors to help you organize your cards better
+- fix: there is now a confirmation pop-up if you try to delete an index card
+
+**v5.0.6**
+
+- feat: new navigation
+- feat: header canny changelog integration
+- feat: characrer sheets don't close after save when playing online.
+- feat: new character sheet templates
+  - Fate Condensed in Spanish
+  - Fate Core in Spanish
+  - Tachyon Squadron Character
+  - Tachyon Squadron Ship
+  - Tachyon Squadron Character And Ship
+  - Dresden Files RPG Character
+  - Dresden Files RPG Spell Caster
+  - Dresden Files RPG Vampire
+
+# v4.0 New Character Sheet Framework, Data Mangagement
+
+- feat: new character sheet
+  - feat: new character sheet Text Block
+  - feat: new character sheet Numeric Block
+  - feat: new character sheet Skill Block
+  - feat: new character sheet Dice Pool Block
+  - feat: new character sheet Point Counter Block
+  - feat: new character sheet Slot Tracker Block
+  - feat: add support for pages (add, move, remove)
+  - feat: move sections (right, left, to page)
+  - feat: move blocks (drag and drop)
+  - feat: support for community driven templates
+  - feat: print mode
+- feat: new Data management page /data
+  - feat: export all
+  - feat: import all
+  - feat: import all and duplicate
+  - feat: filter by name, group, type
+  - feat: sort
+- feat: organize index cards with drag-and-drop
+- feat: enhanced player row to always display dice result
+- feat: Dice Pool route /dice-pool
+- feat: let anyone sync characters to their machine
+- feat: let GM add character sheets to players
+- fix: can click skill of other other player's character sheets
+- fix: add timeout when connecting to game + link to wiki about connection uissues
+- fix: keep scene group when reset-ing them.
+- feat: added Storybook to help with frontend development
+- feat: draw area moved to a new tab
+- fix: heartbreaker template listed twice
+- fix: blog date
+- fix: seelie squire edit link
+- fix: seelie squire consequence
+- fix: index card double modifier
+
+**4.0.5**
+
+- feat: The default character sheet template is now `Blank`
+  - But now the character sheets displays the `Load Template` option directly inside the character sheet even if the advanced mode is turned off
+- feat: Display the `Load Template` toggle in advanced mode even if the character sheet is loaded in a dialog (e.g. inside a game)
+- feat/refac: Dice commands are now `sticky` which means that the latest roll that you have done, where ever it was rolled, is going to be saved so that you can re-roll it easily.
+  - The latest roll commands are now displayed correctly when you open the dice menu (the little badge numbers displayed in the top right corner of each die icon)
+- fix: Display the `has played` tooltip on index cards initiative tracker. Thanks @tjbearse for this fix.
+  - https://github.com/fariapp/fari/pull/256#issuecomment-816675961
+- fix: Changed the position of the floating dice box at the bottom right corner instead of bottom left to help Fari be more "Twitch friendly"
+- fix: Disappearing Toggles when a Text block label is empty and the advanced mode is turned off. Thanks @sleighr for the bug report.
+- fix: Non-draggable blocks if two sections have the same name. Thanks @sleighr for the bug report.
+- fix: When rolling a character sheet skill has a GM, it was always the GM that was associated with the dice roll. Thanks @JFRobillard for the bug report.
+- feat: Let the ability to both GMs and Players to either Assign the original version of a character sheet or assign e duplicate version.
+- feat: better spanish translations by @1d12monos
+  - https://github.com/fariapp/fari/pull/259#event-4594870648
+- fix: empty label for dice pools should be hidden when advanced mode is turned off
+- fix: toggles for text box always visible after JSON file import
+- feat: enable customizing dice pools without toggling the advanced mode using Right Clicks!
+- feat: give the ability to use Skills/Pools dice commands and add other dice commands using the dice menu.
+- feat: new Player component UI
+- fix: clicking on the roll button when the dice menu is closed rolls the latest rolled commands instead of the selected ones
+
+**4.0.8**
+
+fix: remove image tip from wiki
+feat: new Star Wars Edge of The Empire template from @Gpoitras
+
+**4.0.9**
+
+- fix: edge of the empire character card @Gpoitras
+- feat: edge of the empire french version + storybook @Gpoitras
+- feat: better french translations @chocoporto
+
+**4.0.10**
+
+- feat: [lodash audit fix](https://github.com/fariapp/fari/pull/285)
+- feat: [better german translations](https://github.com/fariapp/fari/pull/283) @TecnoSmurf
+- feat: [better pr-br translations](https://github.com/fariapp/fari/pull/288) @Ruulul
+
+# v3.7 Fari Wiki, Success With Style, Image Preview, Dice Menu
+
+- feat: new Fari Wiki
+- feat: new Sucess with Style blog
+- feat: new image preview on content editable component
+- feat: new Dice Menu
+- feat: new Dice Floating Action Button in Scenes
+- feat: new Dice Floating Action Button in Character Sheet
+- feat: dynamic dice modifier on Index Cards
+- feat: new Doc "quote" style used for page-meta description
+- feat: Doc image alt text
+- feat: Doc sidebarOption for renaming default category
+- fix: highlight Doc "Misc" section if inside category
+- refac: default Index Card Track label from `...` to `Track`
+- fix: moving cursor when typing inside a content-editable component if content had an image
+
+# v3.6 Document SideBar + Table of Contents and support for more dice
+
+### Feb 10th, 2021
+
+- feat: new doc sidebar
+- feat: new doc table of content
+- feat: support for more dice types (4df, 1df, coin toss, 1d100, 2d6)
+- feat: prettier dice result tooltip
+- feat: support for meta images in documents
+- fix: uniq groups in data export manager
+- fix: footer alignments
+
+# v3.5 Resources, Private Aspects and Scene Notes
+
+### January 19th, 2021
 
 - feat: SRDs Document
 - feat: Scene Checklist Document
@@ -29,18 +191,30 @@ feat: dynamic table of content for certain docs (like /dials)
 feat: dynamic anchors for certain docs (like /fate-stunts)
 fix: routing mechanism for SRD (using paths instead of hash)
 
-## v3.4 Join screen UX, Italian translations
+**v3.5.4**
 
-#### January 5th, 2021
+feat: new WIP wiki
+feat: more flexible dynamic table of content for docs
+feat: new doc mode to using `h2` as seperate pages (used for the fate-stunts doc)
+feat: ⚠ BETA ⚠ data export and import manager
+
+**v3.5.5**
+
+fix: scroll issue in docs
+fix: removed `showdown` markdown transformer in favor of `marked`
+
+# v3.4 Join screen UX, Italian translations
+
+### January 5th, 2021
 
 - feat: new join screen
 - feat: load character sheet in player row
 - feat: change character sheet in player row
 - feat: italian translations 👏 [#191](https://github.com/fariapp/fari/issues/191) @Redjaw
 
-## v3.3 Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
+# v3.3 Group Scenes or Character Sheets, Roll with modifier and Russian Localizations
 
-#### Nov 10, 2020 - Dec 29 2020
+### Nov 10, 2020 - Dec 29 2020
 
 - feat: Group Scenes or Character sheets by campaigns
 - feat: Click on a skill to roll + skill modifier
@@ -92,9 +266,9 @@ fix: routing mechanism for SRD (using paths instead of hash)
 
 - fix: en translation
 
-## v3.2.0 New Drawing Area, Brazian Portuguse translations
+# v3.2.0 New Drawing Area, Brazian Portuguse translations
 
-#### Oct 20, 2020
+### Oct 20, 2020
 
 - feat: A brand new Drawing Area with support for multiple shapes, colors and even player tokens. 👏 [ddkn](https://github.com/ddkn) for the help with the player token designs
 - feat: Brazilian Portuguese translations. 👏 [pedrogsribeiro](https://github.com/pedrogsribeiro) for the translations
@@ -105,9 +279,9 @@ fix: routing mechanism for SRD (using paths instead of hash)
   - [player-03](https://github.com/player-03)
   - [ddkn](https://github.com/ddkn)
 
-## v3.0.0 Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
+# v3.0.0 Scene Storage, More Flexible Index Cards, and Import/Export functionnalities!
 
-#### Aug 24, 2020
+### Aug 24, 2020
 
 - feat: Scenes can now be prepared in advance, saved and then loaded directly during a play session.
 - feat: Index Cards are now more flexible. You can now add, remove or rename tracks or consequences as you wish.
@@ -122,17 +296,17 @@ fix: routing mechanism for SRD (using paths instead of hash)
   - [nfregoso](https://github.com/nfregoso)
   - [roypenrod-ohn](https://github.com/roypenrod-ohn)
 
-## v2.3.8 - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
+# v2.3.8 - Blank Index Cards, Coutdown, Advanced Mode for Character Sheets
 
-#### Jul 6, 2020
+### Jul 6, 2020
 
 - feat: it is now possible to add a "blank" index card
 - feat: it is now possible to add a "Countdown" track to any index card
 - feat: character sheets now have an "advanced" mode which gives you the ability to add,remove or rename pretty much everything
 
-## v2.3 - Character Sheets, Zones and better Peer-to-Peer
+# v2.3 - Character Sheets, Zones and better Peer-to-Peer
 
-#### May 27, 2020
+### May 27, 2020
 
 - feat: new [Characters](https://fari.app/characters) page to manage your characters sheets and save them in your browser's storage [#61](https://github.com/fariapp/fari/issues/61)
 - feat: character sheets can be sent to a scene.
@@ -146,9 +320,9 @@ fix: routing mechanism for SRD (using paths instead of hash)
 - fix: dice rolls gettings stuck during animation
 - feat: sticky dark mode
 
-## v2.2 - Player Controls, Confetti and Dark Theme
+# v2.2 - Player Controls, Confetti and Dark Theme
 
-#### May 19, 2020
+### May 19, 2020
 
 - feat: players can control their own initiative
 - feat: players can consume their own fate points
@@ -166,9 +340,9 @@ fix: routing mechanism for SRD (using paths instead of hash)
 - feat: dark theme ⛅️
 - fix: fairer dice [#57](https://github.com/fariapp/fari/pull/57) 👏 [@ConDar15](https://github.com/ConDar15)
 
-## v2.1 - Index Cards Arrangement, Dice Animations and Internationalization
+# v2.1 - Index Cards Arrangement, Dice Animations and Internationalization
 
-#### May 15, 2020
+### May 15, 2020
 
 - feat: grid System for Index Cards
 - feat: dice Animations
@@ -178,9 +352,9 @@ fix: routing mechanism for SRD (using paths instead of hash)
 - doc: new LICENSE file
 - fix: nbsp and tags in title of the page
 
-## v2.0 - Revamped Scene Management
+# v2.0 - Revamped Scene Management
 
-#### May 8, 2020
+### May 8, 2020
 
 - feat: real-Time Modifications (The GM controls the scene, players see modifications in real-time)
 - feat: index Cards (Aspects, Boost, Colorization, Invokes and Stress & Consequences for bad guys)
@@ -190,10 +364,14 @@ fix: routing mechanism for SRD (using paths instead of hash)
 
 https://www.reddit.com/r/FATErpg/comments/gg00pr/announcing_fari_20_the_best_fate_rpg_companion/
 
-## v1.0 Initial POC
+# v1.0 Initial POC
 
-#### Dec 15, 2019
+### Dec 15, 2019
 
 - feat: initial proof of concept
 
 https://www.reddit.com/r/FATErpg/comments/eb4xpk/fari_the_roleplaying_fate_game_companion/
+
+```
+
+```

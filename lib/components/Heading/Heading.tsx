@@ -1,39 +1,43 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
+import Box, { BoxProps } from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { FateLabel } from "../FateLabel/FateLabel";
 
-export const Heading: React.FC<{
-  title?: string | JSX.Element;
-  subtitle?: string | JSX.Element;
-  icon?: React.ElementType;
-}> = (props) => {
-  const Icon = props.icon;
+export const Heading: React.FC<
+  {
+    title?: string | JSX.Element;
+    subtitle?: string | JSX.Element;
+    icon?: React.ElementType;
+  } & BoxProps
+> = (props) => {
+  const { title, subtitle, icon, ...boxProps } = props;
+  const Icon = icon;
   return (
     <Box
-      pt="1rem"
-      pb="2rem"
+      mt="1rem"
+      mb="2rem"
       display="flex"
       flexDirection="column"
       alignItems="center"
+      {...boxProps}
     >
       {Icon && (
-        <Box pb=".5rem">
+        <Box mb=".5rem">
           <Icon className={css({ fontSize: "3rem" })} color="primary" />
         </Box>
       )}
       <FateLabel variant="h4" as="h1" align="center" color="primary">
-        {props.title}
+        {title}
       </FateLabel>
-      {props.subtitle && (
+      {subtitle && (
         <Typography
           variant="h6"
           variantMapping={{ h6: "h2" }}
           align="center"
-          color="secondary"
+          color="primary"
         >
-          {props.subtitle}
+          {subtitle}
         </Typography>
       )}
     </Box>

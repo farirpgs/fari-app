@@ -1,58 +1,121 @@
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 import { useTheme } from "@material-ui/core/styles";
-import DOMPurify from "dompurify";
-import React, { useEffect, useRef, useState } from "react";
+import DOMPurify, { Config } from "dompurify";
+import lowerCase from "lodash/lowerCase";
+import startCase from "lodash/startCase";
+import truncate from "lodash/truncate";
+import React, { FormEvent, useEffect, useRef } from "react";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
-const DOMPurifyOptions = {
-  ALLOWED_TAGS: ["br", "img"],
+/**
+ * `img` tags were allowed in earlier versions of Fari.
+ *
+ * For that reason, those tags are kept when we render the component using the data from the props.
+ * As soon as the user updates the content of the input, we remove the `img` tags by using the options `onInputChangeOptions`
+ */
+const DomPurifyOptions: {
+  onPropsChangeOptions: Config;
+  onInputChangeOptions: Config;
+} = {
+  onPropsChangeOptions: {
+    ALLOWED_TAGS: ["br", "i", "b", "img"],
+  },
+  onInputChangeOptions: {
+    ALLOWED_TAGS: ["br", "i", "b"],
+  },
 };
-const ContentEditableDelay = 125;
+
+const ContentEditableDelay = 750;
+
+type IPreviewContentEditableOptions = {
+  value: string | undefined;
+  length?: number;
+  startCase?: boolean;
+};
+
+export function previewContentEditable(
+  options: IPreviewContentEditableOptions
+) {
+  if (!options.value) {
+    return "";
+  }
+  const valueWithoutBrTags = options.value.split("<br>").join(" ").trim();
+
+  const div = document.createElement("div");
+  div.innerHTML = valueWithoutBrTags;
+  const content = div.textContent ?? "";
+
+  const formattedContent = options.startCase
+    ? startCase(lowerCase(content))
+    : content;
+
+  if (options.length) {
+    return truncate(formattedContent, { length: options.length });
+  }
+
+  return formattedContent;
+}
+
+export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> = React.memo(
+  (props) => {
+    const content = previewContentEditable({
+      value: props.value,
+      length: props.length,
+    });
+    return <>{content}</>;
+  }
+);
 
 export const ContentEditable: React.FC<
   {
     value: string;
-    onClick?: () => void;
-    onChange?: (value: string, event: React.FormEvent<HTMLDivElement>) => void;
+    className?: string;
+    clickable?: boolean;
+    onChange?: (value: string, event: FormEvent<HTMLSpanElement>) => void;
     readonly?: boolean;
     placeholder?: string;
     autoFocus?: boolean;
     inline?: boolean;
     border?: boolean;
+    borderColor?: string;
     underline?: boolean;
     id?: string;
+    noDelay?: boolean;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
   const $ref = useRef<HTMLSpanElement | null>(null);
+  const latestHtml = useRef<string>();
   const timeout = useRef<any | undefined>(undefined);
-  const [updating, setUpdating] = useState(false);
   const latestProps = useRef(props);
-
-  const hasCursorPointer = props.readonly && props.onClick;
+  const hasCursorPointer = props.readonly && props.clickable;
 
   useEffect(() => {
     latestProps.current = props;
   });
 
-  useEffect(() => {
-    if ($ref.current) {
-      if (!props.value && props.readonly) {
-        $ref.current.innerHTML = "&nbsp;";
-      } else if ($ref.current.innerHTML !== props.value) {
-        const cleanHTML = DOMPurify.sanitize(props.value, DOMPurifyOptions);
-        $ref.current.innerHTML = cleanHTML;
+  useEffect(
+    function shouldUpdateInnerHtml() {
+      if ($ref.current) {
+        if (!props.value && props.readonly) {
+          $ref.current.innerHTML = "&nbsp;";
+        } else if (latestHtml.current !== props.value) {
+          const newHtml = DOMPurify.sanitize(
+            props.value,
+            DomPurifyOptions.onPropsChangeOptions
+          ) as string;
+          latestHtml.current = newHtml;
+          $ref.current.innerHTML = newHtml;
+        }
       }
-    }
-  }, [props.value, props.readonly]);
+    },
+    [props.value, props.readonly]
+  );
 
-  useEffect(() => {
-    function focusOnLoad() {
-      if ($ref.current && props.autoFocus) {
-        $ref.current.focus();
-      }
+  useEffect(function focusOnLoad() {
+    if ($ref.current && props.autoFocus) {
+      $ref.current.focus();
     }
-    focusOnLoad();
   }, []);
 
   useEffect(() => {
@@ -61,77 +124,72 @@ export const ContentEditable: React.FC<
     };
   }, []);
 
-  function onChange(e: any) {
+  function handleOnChange(e: React.FormEvent<HTMLSpanElement>) {
     if ($ref.current) {
       clearTimeout(timeout.current);
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
-        DOMPurifyOptions
-      );
+        DomPurifyOptions.onInputChangeOptions
+      ) as string;
 
-      setUpdating(true);
-      timeout.current = setTimeout(() => {
+      if (props.noDelay) {
+        latestHtml.current = cleanHTML;
         latestProps.current.onChange?.(cleanHTML, e);
-        setUpdating(false);
-      }, ContentEditableDelay);
+      } else {
+        timeout.current = setTimeout(() => {
+          latestHtml.current = cleanHTML;
+          latestProps.current.onChange?.(cleanHTML, e);
+        }, ContentEditableDelay);
+      }
     }
   }
 
+  function handleOnPaste(e: React.ClipboardEvent<HTMLSpanElement>) {
+    e.preventDefault();
+    const clipboardDataAsText = e.clipboardData.getData("text/plain");
+    document.execCommand("inserttext", false, clipboardDataAsText);
+  }
+
   return (
-    <span
-      data-cy={props["data-cy"]}
-      className={css({
-        "outline": "none",
-        "wordBreak": "break-word",
-        "display": "inline-block",
-        "width": "100%",
-        "cursor": hasCursorPointer ? "pointer" : "text",
-        "color": updating ? theme.palette.text.secondary : "inherit",
-        "textDecoration": props.underline ? "underline" : undefined,
-        "transition": !updating
-          ? theme.transitions.create("color", { duration: 500 })
-          : undefined,
-        "borderBottom": props.border
-          ? `1px solid ${theme.palette.divider}`
-          : undefined,
-        "img": {
-          maxWidth: "75%",
-          padding: ".5rem",
-          margin: "0 auto",
-          display: "flex",
-        },
-        "&:empty:before": {
-          color: "lightgrey",
-          content: props.placeholder ? `"${props.placeholder}"` : undefined,
-        },
-      })}
-      id={props.id}
-      ref={$ref}
-      onClick={() => {
-        if (props.readonly) {
-          props.onClick?.();
-        }
-      }}
-      onInput={(e) => {
-        onChange(e);
-      }}
-      contentEditable={!props.readonly}
-    />
+    <>
+      <span
+        data-cy={props["data-cy"]}
+        id={props.id}
+        ref={$ref}
+        contentEditable={!props.readonly}
+        onInput={handleOnChange}
+        onPaste={handleOnPaste}
+        className={cx(
+          css({
+            "outline": "none",
+            "wordBreak": "break-word",
+            "display": "inline-block",
+            "width": "100%",
+            "cursor": hasCursorPointer ? "pointer" : "text",
+            "color": "inherit",
+            "textDecoration": props.underline ? "underline" : undefined,
+            "borderBottom": props.border
+              ? `1px solid ${props.borderColor ?? theme.palette.divider}`
+              : undefined,
+            "&:empty:before": {
+              color: theme.palette.text.hint,
+              content: props.placeholder ? `"${props.placeholder}"` : undefined,
+            },
+            "& b": { fontWeight: "bold" },
+            "& i": { fontStyle: "italic" },
+            "& img": {
+              maxWidth: "90% !important" as any,
+              padding: ".5rem !important" as any,
+              margin: "0 auto !important" as any,
+              display: "flex !important" as any,
+              position: "relative !important" as any,
+              cursor: "pointer !important" as any,
+            },
+          }),
+          props.className
+        )}
+      />
+    </>
   );
 };
 ContentEditable.displayName = "ContentEditable";
-
-export function sanitizeContentEditable(value: string | undefined) {
-  if (!value) {
-    return "";
-  }
-  return removeHTMLTags(removeNBSP(value)).trim();
-}
-
-function removeNBSP(value: string) {
-  return value.replace(/&nbsp;/g, " ");
-}
-
-function removeHTMLTags(value: string) {
-  return value.replace(/<\/?[^>]+(>|$)/g, " ");
-}

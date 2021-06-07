@@ -1,10 +1,10 @@
 import { useTranslation, UseTranslationOptions } from "react-i18next";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { ITranslationKeys } from "../../locale";
 import {
   IPossibleLanguages,
   PossibleLanguages,
 } from "../../services/internationalization/InternationalizationService";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
 
 export function useTranslate() {
   const { t, i18n } = useTranslation();
@@ -14,20 +14,32 @@ export function useTranslate() {
   return {
     currentLanguage,
     t: (
-      key: IPossibleTranslationKeys,
-      options?: UseTranslationOptions & Record<string, string>
+      key: ITranslationKeys,
+      options?: UseTranslationOptions & Record<string, string>,
+      noFallback: boolean = false
     ): string => {
       const value = t(key, options);
-      const valueWithoutFallback = i18n.t(key, {
+      const englishValue = i18n.t(key, {
         ...options,
-        fallbackLng: "dev",
+        lng: "en",
       });
-      if (valueWithoutFallback === key) {
+      const devValue = i18n.t(key, {
+        ...options,
+        lng: "dev",
+      });
+
+      const isValidValue = !!value && key !== value;
+      if (!isValidValue) {
+        if (noFallback) {
+          return "";
+        }
         logger.warn("useTranslate:onMissingTranslation", {
-          key,
-          currentLanguage,
+          tags: { key, currentLanguage },
         });
+
+        return englishValue || devValue;
       }
+
       return value;
     },
     i18n,

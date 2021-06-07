@@ -16,6 +16,9 @@ export const Fari = {
   get(tag: string) {
     return cy.get(`[data-cy='${tag}']`);
   },
+  getByText(text: string) {
+    return cy.contains(text);
+  },
   find(element: Cypress.Chainable, tag: string) {
     return element.find(`[data-cy='${tag}']`);
   },
@@ -23,7 +26,7 @@ export const Fari = {
     return element.invoke("attr", attr);
   },
   waitContentEditable() {
-    const contentEditableDelay = 300;
+    const contentEditableDelay = 750;
 
     cy.wait(contentEditableDelay + 100);
   },
@@ -37,7 +40,7 @@ export const Fari = {
     Fari.get("page.toggle-dark-mode").click();
   },
   changeLanguage(language: string) {
-    Fari.get("page.languages").click();
-    cy.get(`[data-value="${language}"]`).click();
+    Fari.get("page.menu.languages").click();
+    Fari.get("app.languages").select(language);
   },
 };

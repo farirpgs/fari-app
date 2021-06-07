@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 
-export const ScrollToTop: React.FC<{}> = (props) => {
+export const ScrollToTop: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {

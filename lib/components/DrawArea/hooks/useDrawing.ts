@@ -311,7 +311,7 @@ export function useDrawing(props: {
     });
   }
 
-  function onBlur(blurEvent: React.FocusEvent<HTMLDivElement>) {
+  function onBlur() {
     if (drawing) {
       setDrawing(false);
     }

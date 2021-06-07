@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import React from "react";
 
-export const AspectRatio: React.FC<{ widthPercent: number; ratio: number }> = (
+export const AspectRatio: React.FC<{ width: number; ratio: number }> = (
   props
 ) => {
   // https://ratiobuddy.com/
@@ -10,13 +10,10 @@ export const AspectRatio: React.FC<{ widthPercent: number; ratio: number }> = (
     <Box
       className={css({
         "position": "relative",
-        "width": `${props.widthPercent}%`,
-        "margin": "0 auto",
-        "maxWidth": "80vh",
         "&:before": {
           display: "block",
           content: '""',
-          width: `${props.widthPercent}%`,
+          width: `${props.width}%`,
           paddingTop: `${props.ratio * 100}%`,
         },
       })}

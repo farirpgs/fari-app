@@ -1,4 +1,4 @@
-import { Dice } from "../Dice";
+import { Dice, RollType } from "../Dice";
 
 describe("Dice", () => {
   describe("roll4DF", () => {
@@ -15,7 +15,29 @@ function fudgeDiceShouldBeFair() {
   const numberOfTests = 10000;
 
   for (let i = 0; i < numberOfTests; i++) {
-    const diceRoll = Dice.roll4DF({});
+    const diceRoll = Dice.rollCommandOptionList(
+      [
+        {
+          type: RollType.DiceCommand,
+          commandGroupId: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          commandGroupId: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          commandGroupId: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          commandGroupId: "1dF",
+        },
+      ],
+      {
+        listResults: false,
+      }
+    );
     const currentCount = results[diceRoll.total] ?? 0;
     results[diceRoll.total] = currentCount + 1;
   }
@@ -53,3 +75,55 @@ function assert(
   expect((results[number] / numberOfTests) * 100).toBeGreaterThanOrEqual(min);
   expect((results[number] / numberOfTests) * 100).toBeLessThanOrEqual(max);
 }
+
+describe("simplifyResults", () => {
+  describe("Given multiple commands of the same type", () => {
+    it("should simplify them", () => {
+      const result = Dice.simplifyRolls([
+        {
+          commandGroupId: "1d10",
+          commandName: "1d10",
+          value: 5,
+          type: RollType.DiceCommand,
+        },
+        {
+          commandGroupId: "1d4",
+          commandName: "1d4",
+          value: 2,
+          type: RollType.DiceCommand,
+        },
+        {
+          commandGroupId: "1d10",
+          commandName: "1d10",
+          value: 10,
+          type: RollType.DiceCommand,
+        },
+      ]);
+
+      expect(result).toEqual([
+        { label: "2d10", value: 15 },
+        { label: "1d4", value: 2 },
+      ]);
+    });
+  });
+  describe("Given coins", () => {
+    it("should ignore them", () => {
+      const result = Dice.simplifyRolls([
+        {
+          commandGroupId: "coin",
+          commandName: "coin",
+          value: 1,
+          type: RollType.DiceCommand,
+        },
+        {
+          commandGroupId: "coin",
+          commandName: "coin",
+          value: -1,
+          type: RollType.DiceCommand,
+        },
+      ]);
+
+      expect(result).toEqual([{ label: "Coin", value: 0 }]);
+    });
+  });
+});

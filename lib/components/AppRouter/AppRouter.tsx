@@ -3,27 +3,26 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Fade from "@material-ui/core/Fade";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import { DocRoutes } from "../../docs/_DocRoutes";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { Route, Switch, useLocation } from "react-router-dom";
+import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
-const AboutRoute = React.lazy(() => import("../../routes/About/AboutRoute"));
-const BlogPostRoute = React.lazy(
-  () => import("../../routes/BlogPost/BlogPostRoute")
-);
-const BlogPostsRoute = React.lazy(
-  () => import("../../routes/BlogPosts/BlogPostsRoute")
-);
-
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
+const CharacterPrintRoute = React.lazy(
+  () => import("../../routes/CharacterPrint/CharacterPrintRoute")
+);
 const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const FeatureRequestsRoute = React.lazy(
+  () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
+);
+const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
+const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
   () => import("../../routes/NotFound/NotFoundRoute")
@@ -38,7 +37,8 @@ const SeelieSquireRoute = React.lazy(
   () => import("../../routes/SeelieSquire/SeelieSquireRoute")
 );
 
-export const LoadingRoute: React.FC = (props) => {
+export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
+  const location = useLocation();
   const [fadeIn, setFadeIn] = useState(false);
   const timeout = useRef<any | undefined>(undefined);
 
@@ -53,7 +53,7 @@ export const LoadingRoute: React.FC = (props) => {
   });
 
   return (
-    <Page displayDonation={false}>
+    <Page hideHeaderLogo={location.pathname === "/"}>
       <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
@@ -66,9 +66,11 @@ export const LoadingRoute: React.FC = (props) => {
 };
 
 export const AppRouter = () => {
-  const { t } = useTranslate();
+  const location = useLocation();
+  const hideHeaderLogo = location.pathname === "/";
+
   return (
-    <Suspense fallback={<LoadingRoute />}>
+    <Suspense fallback={<LoadingRoute hideHeaderLogo={hideHeaderLogo} />}>
       <Switch>
         <Route
           exact
@@ -86,9 +88,30 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/characters/:id/print"}
+          render={(props) => {
+            return <CharacterPrintRoute {...props} />;
+          }}
+        />
+        <Route
+          exact
           path={"/dice"}
           render={(props) => {
-            return <DiceRoute />;
+            return <DiceRoute pool={false} key="dice" />;
+          }}
+        />
+        <Route
+          exact
+          path={"/dice-pool"}
+          render={(props) => {
+            return <DiceRoute pool={true} key="dice-pool" />;
+          }}
+        />
+        <Route
+          exact
+          path={"/data"}
+          render={(props) => {
+            return <DataRoute />;
           }}
         />
         <Route
@@ -130,16 +153,16 @@ export const AppRouter = () => {
           render={(props) => <SceneRoute {...props} />}
         />
         <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+
         {DocRoutes.map((docRoute) => (
           <Route
             exact
             key={docRoute.url}
-            path={`${docRoute.url}/:page?/:section?`}
+            path={`${docRoute.url}/:page?`}
             render={(props) => (
               <Doc
                 key={docRoute.url}
                 page={props.match.params.page}
-                section={props.match.params.section}
                 url={docRoute.url}
                 parent={docRoute.parent}
                 title={docRoute.title}
@@ -147,6 +170,9 @@ export const AppRouter = () => {
                 loadFunction={docRoute.loadFunction}
                 author={docRoute.author}
                 gitHubLink={docRoute.gitHubLink}
+                sideBar={docRoute.sideBar}
+                sideBarOptions={docRoute.sideBarOptions}
+                defaultSideBarCategory={docRoute.defaultSideBarCategory}
               />
             )}
           />
@@ -154,35 +180,37 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/seelie-squire/:page?/:section?"}
+          path={"/seeliesquire/:page?"}
           render={(props) => (
-            <SeelieSquireRoute
-              page={props.match.params.page}
-              section={props.match.params.section}
-            />
+            <SeelieSquireRoute page={props.match.params.page} />
           )}
         />
+
         <Route
           exact
-          path={"/about"}
+          path={["/feature-requests", "/feature-requests/*"]}
           render={(props) => {
-            return <AboutRoute />;
+            return <FeatureRequestsRoute />;
           }}
         />
+
         <Route
           exact
-          path={"/blog"}
-          render={(props) => {
-            return <BlogPostsRoute />;
+          path={["/bugs", "/bugs/*"]}
+          render={() => {
+            return <BugsRoute />;
           }}
         />
+
         <Route
           exact
-          path={"/blog/:slug"}
-          render={(props) => {
-            return <BlogPostRoute slug={props.match.params.slug} />;
+          path={"/discord"}
+          render={() => {
+            window.location.href = "https://discord.gg/vMAJFjUraA";
+            return null;
           }}
         />
+
         <Route
           path="*"
           render={(props) => {

@@ -3,7 +3,7 @@ import { scrollMarginTop } from "./useMarkdownFile";
 
 export function useScrollOnHtmlLoad(
   html: string | undefined,
-  section: string | undefined
+  section: string | undefined | null
 ) {
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined = undefined;
@@ -18,7 +18,7 @@ export function useScrollOnHtmlLoad(
             top: topPos - scrollMarginTop,
             behavior: "smooth",
           });
-        }, 0);
+        }, DELAY_FOR_IMAGES_TO_LOAD);
       }
     }
     return () => {
@@ -26,3 +26,5 @@ export function useScrollOnHtmlLoad(
     };
   }, [html, section]);
 }
+
+const DELAY_FOR_IMAGES_TO_LOAD = 500;

@@ -1,16 +1,12 @@
-import produce from "immer";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
+import React, { useMemo, useRef, useState } from "react";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { arraySort } from "../../domains/array/arraySort";
-import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { CharacterTemplates } from "../../domains/character/CharacterType";
+import { ICharacter } from "../../domains/character/types";
+import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useGroups } from "../../hooks/useGroups/useGroups";
-
-export enum CharacterType {
-  CoreCondensed = "CoreCondensed",
-  Accelerated = "Accelerated",
-  Custom = "Custom",
-}
+import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
 
 type IManagerCallback = (character: ICharacter) => void;
 
@@ -24,21 +20,11 @@ export function useCharacters(props?: { localStorage: Storage }) {
 
   const [mode, setMode] = useState(ManagerMode.Close);
   const managerCallback = useRef<IManagerCallback | undefined>(undefined);
-  const [characters, setCharacters] = useState<Array<ICharacter>>(() => {
-    // load from local storage
-    try {
-      const localStorageCharacters = localStorage.getItem(key);
-      if (localStorageCharacters) {
-        const parsed = JSON.parse(localStorageCharacters);
-        const migrated = migrateCharacters(parsed);
-        return migrated;
-      }
-    } catch (error) {
-      if (!process.env.IS_JEST) {
-        console.error(error);
-      }
-    }
-    return [];
+
+  const [characters, setCharacters] = useStorageEntities({
+    key: key,
+    localStorage: localStorage,
+    migrationFunction: CharacterFactory.migrate,
   });
 
   const sortedCharacters = useMemo(() => {
@@ -52,16 +38,6 @@ export function useCharacters(props?: { localStorage: Storage }) {
 
   const groups = useGroups(sortedCharacters, (c) => c.group);
 
-  useEffect(() => {
-    // sync local storage
-    try {
-      const serialized = JSON.stringify(characters);
-      localStorage.setItem(key, serialized);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [characters]);
-
   function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
     setMode(newMode);
     managerCallback.current = callback;
@@ -72,14 +48,9 @@ export function useCharacters(props?: { localStorage: Storage }) {
     managerCallback.current = undefined;
   }
 
-  function add(type: CharacterType): ICharacter {
-    const defaultCharacter = defaultCharactersByType[type];
-    const newCharacter = {
-      ...defaultCharacter,
-      id: uuidV4(),
-      lastUpdated: getUnix(),
-      name: "",
-    } as ICharacter;
+  async function add(type: CharacterTemplates): Promise<ICharacter> {
+    const newCharacter = await CharacterFactory.make(type);
+
     setCharacters((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
     });
@@ -91,37 +62,50 @@ export function useCharacters(props?: { localStorage: Storage }) {
       return;
     }
 
-    const exists = characters.find((s) => s.id === character.id);
+    setCharacters((prev: Array<ICharacter>) => {
+      const exists = prev.some((c) => c.id === character.id);
 
-    if (!exists) {
-      setCharacters((draft: Array<ICharacter>) => {
-        return [character, ...draft];
-      });
-    } else {
-      setCharacters((draft: Array<ICharacter>) => {
-        return draft.map((c) => {
+      if (!exists) {
+        return [character, ...prev];
+      } else {
+        return prev.map((c) => {
           if (c.id === character.id) {
             return character;
           }
           return c;
         });
-      });
-    }
+      }
+    });
+
     return character;
   }
 
-  function updateIfExists(character: ICharacter | undefined) {
+  function addIfDoesntExist(character: ICharacter | undefined) {
     if (!character) {
       return;
     }
 
-    setCharacters((draft: Array<ICharacter>) => {
-      return draft.map((c) => {
+    setCharacters((prev: Array<ICharacter>) => {
+      const exists = prev.some((c) => c.id === character.id);
+
+      if (!exists) {
+        return [character, ...prev];
+      }
+      return prev;
+    });
+  }
+
+  function updateIfMoreRecent(character: ICharacter | undefined) {
+    if (!character) {
+      return;
+    }
+
+    setCharacters((prev: Array<ICharacter>) => {
+      return prev.map((c) => {
         const currentCharacterLastUpdated = getUnixFrom(c.lastUpdated);
         const characterLastUpdate = getUnixFrom(character?.lastUpdated ?? 0);
 
         const shouldUpdate = characterLastUpdate >= currentCharacterLastUpdated;
-
         if (c.id === character.id && shouldUpdate) {
           return character;
         }
@@ -136,6 +120,21 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
+  function duplicate(id: string | undefined) {
+    setCharacters((draft: Array<ICharacter>) => {
+      const match = draft.find((s) => s.id === id);
+
+      if (match) {
+        return [...draft, CharacterFactory.duplicate(match)];
+      }
+      return draft;
+    });
+  }
+
+  function isInStorage(id: string | undefined) {
+    return characters.some((c) => c.id === id);
+  }
+
   return {
     state: {
       mode,
@@ -148,231 +147,13 @@ export function useCharacters(props?: { localStorage: Storage }) {
       closeManager,
       add,
       upsert,
-      updateIfExists,
+      addIfDoesntExist,
+      updateIfMoreRecent,
       remove,
+      duplicate,
+    },
+    selectors: {
+      isInStorage,
     },
   };
-}
-
-const defaultCondensedCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  aspects: [
-    { name: "High Concept", value: "" },
-    { name: "Trouble", value: "" },
-    { name: "Relationship", value: "" },
-    { name: "Other Aspect", value: "" },
-    { name: "Other Aspect", value: "" },
-  ],
-  stunts: [
-    { name: "Stunt #1", value: "" },
-    { name: "Stunt #2", value: "" },
-    { name: "Stunt #3", value: "" },
-  ],
-  skills: [
-    { name: "Academics", value: "" },
-    { name: "Athletics", value: "" },
-    { name: "Burglary", value: "" },
-    { name: "Contacts", value: "" },
-    { name: "Crafts", value: "" },
-    { name: "Deceive", value: "" },
-    { name: "Drive", value: "" },
-    { name: "Empathy", value: "" },
-    { name: "Fight", value: "" },
-    { name: "Investigate", value: "" },
-    { name: "Lore", value: "" },
-    { name: "Notice", value: "" },
-    { name: "Physique", value: "" },
-    { name: "Provoke", value: "" },
-    { name: "Rapport", value: "" },
-    { name: "Resources", value: "" },
-    { name: "Shoot", value: "" },
-    { name: "Stealth", value: "" },
-    { name: "Will", value: "" },
-  ],
-  stressTracks: [
-    {
-      name: "Physical",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-    {
-      name: "Mental",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [
-    { name: "Mild", value: "" },
-    { name: "Moderate", value: "" },
-    { name: "Severe", value: "" },
-  ],
-  refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
-
-const defaultAcceleratedCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  aspects: [
-    { name: "High Concept", value: "" },
-    { name: "Trouble", value: "" },
-    { name: "Relationship", value: "" },
-    { name: "Other Aspect", value: "" },
-    { name: "Other Aspect", value: "" },
-  ],
-  stunts: [
-    { name: "Stunt #1", value: "" },
-    { name: "Stunt #2", value: "" },
-    { name: "Stunt #3", value: "" },
-  ],
-  skills: [
-    { name: "Careful", value: "" },
-    { name: "Clever", value: "" },
-    { name: "Forceful", value: "" },
-    { name: "Flashy", value: "" },
-    { name: "Quick", value: "" },
-    { name: "Sneaky", value: "" },
-  ],
-  stressTracks: [
-    {
-      name: "Stress",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [
-    { name: "Mild", value: "" },
-    { name: "Moderate", value: "" },
-    { name: "Severe", value: "" },
-  ],
-  refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
-
-const defaultCustomCharacter: ICharacter = {
-  id: "",
-  name: "",
-  group: undefined,
-  aspects: [{ name: "Aspect", value: "" }],
-  stunts: [{ name: "Stunt", value: "" }],
-  skills: [{ name: "Skill", value: "" }],
-  stressTracks: [
-    {
-      name: "Stress",
-      value: [
-        { checked: false, label: "1" },
-        { checked: false, label: "2" },
-        { checked: false, label: "3" },
-      ],
-    },
-  ],
-  consequences: [{ name: "Consequence", value: "" }],
-  refresh: 3,
-  notes: undefined,
-  aspectsLabel: undefined,
-  skillsLabel: undefined,
-  stuntsLabel: undefined,
-  stressTracksLabel: undefined,
-  consequencesLabel: undefined,
-  refreshLabel: undefined,
-  notesLabel: undefined,
-  fatePoints: undefined,
-  playedDuringTurn: undefined,
-  version: 2,
-  lastUpdated: getUnix(),
-};
-
-export const defaultCharactersByType = {
-  [CharacterType.CoreCondensed]: defaultCondensedCharacter,
-  [CharacterType.Accelerated]: defaultAcceleratedCharacter,
-  [CharacterType.Custom]: defaultCustomCharacter,
-} as const;
-
-export interface ICharacter {
-  id: string;
-  name: string;
-  aspects: ICharacterCustomField<string>;
-  skills: ICharacterCustomField<string>;
-  stunts: ICharacterCustomField<string>;
-  stressTracks: ICharacterCustomField<
-    Array<{ checked?: boolean; label: string }>
-  >;
-  consequences: ICharacterCustomField<string>;
-  aspectsLabel: string | undefined;
-  skillsLabel: string | undefined;
-  stuntsLabel: string | undefined;
-  stressTracksLabel: string | undefined;
-  consequencesLabel: string | undefined;
-  refreshLabel: string | undefined;
-  notesLabel: string | undefined;
-  notes: string | undefined;
-  group: string | undefined;
-  refresh: number;
-  // hidden
-  fatePoints: number | undefined;
-  playedDuringTurn: boolean | undefined;
-  version: number;
-  lastUpdated: number;
-}
-
-export type ICharacterCustomField<TValue> = Array<{
-  name: string;
-  value: TValue;
-}>;
-
-export function migrateCharacters(characters: Array<ICharacter>) {
-  return characters.map((c) => {
-    return migrateCharacter(c);
-  });
-}
-
-export function migrateCharacter(c: ICharacter) {
-  return produce(c, (draft) => {
-    if (draft.version === 1) {
-      // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
-      draft.stressTracks.forEach((s) => {
-        s.value = s.value.map((box, index) => {
-          return {
-            checked: (box as unknown) as boolean,
-            label: `${index + 1}`,
-          };
-        });
-      });
-      draft.version = 2;
-    }
-  });
 }

@@ -18,73 +18,71 @@ import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Images } from "../../constants/Images";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { IPossibleLanguages } from "../../services/internationalization/InternationalizationService";
 
-export const SrdsRoute: React.FC = (props) => {
+export function SrdsRoute() {
+  const { t } = useTranslate();
+
   return (
     <Page>
       <PageMeta
-        title="Fate System Reference Documents (SRDs)"
-        description="Read and search through the Fate System Reference Documents (SRDs) with ease using Fari, The Fate Companion App"
+        title={t("srds-route.title")}
+        description={t("srds-route.description")}
       />
       <Container maxWidth="md">
         <Srds />
       </Container>
     </Page>
   );
-};
+}
 SrdsRoute.displayName = "SrdsRoute";
 
-export const Srds: React.FC = (props) => {
+export function Srds() {
+  const { t } = useTranslate();
   return (
     <div>
       <Heading
         icon={MenuBookIcon}
-        title={"Fate System Reference Documents (SRDs)"}
-        subtitle="Getting Started"
+        title={t("srds-route.fate-srds.title")}
+        subtitle={t("srds-route.fate-srds.subtitle")}
       />
       <SrdItems />
       <Box pt="1rem" />
       <ToolkitItems />
       <Box pt="2rem" />
-      <Heading
-        icon={HelpIcon}
-        title={"Other Resources"}
-        subtitle={"Compendium, Stunt examples and more..."}
-      />
-      <OtherResourcesItems />
+      <Heading icon={HelpIcon} title={t("srds-route.resources.title")} />
+      <WikiItems />
     </div>
   );
-};
+}
 
-export const SrdItems: React.FC = (props) => {
+const FateCondensedLinks: { [language in IPossibleLanguages]?: string } = {
+  "en": "/srds/condensed",
+  "pt-BR": "/pt-br/srds/condensed",
+};
+export function SrdItems() {
+  const { currentLanguage, t } = useTranslate();
+
+  const fateCondensedLink =
+    FateCondensedLinks[currentLanguage] ?? (FateCondensedLinks["en"] as string);
+
   return (
     <Box>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate Condensed"
-            description={
-              <>
-                The latest version of the Fate System.
-                <strong>Compact, stand-alone and streamlined</strong> for
-                clarity and ease of reference.
-              </>
-            }
+            title={t("docs.fate-condensed.title")}
+            description={t("docs.fate-condensed.description")}
             bgColor="#007fda"
             imageUrl={Images.condensed}
-            link="/srds/condensed"
+            link={fateCondensedLink}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate Core"
-            description={
-              <>
-                A <strong>Complete guide to Fate</strong> with rules, examples
-                and tips. A most if your thirst for knowledge was not satisfied
-                with Fate Condensed.
-              </>
-            }
+            title={t("docs.fate-core.title")}
+            description={t("docs.fate-core.description")}
             bgColor="#00409d"
             imageUrl={Images.core}
             link="/srds/core"
@@ -92,13 +90,8 @@ export const SrdItems: React.FC = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate Accelerated"
-            description={
-              <>
-                If you want to <strong>get started quickly</strong>, this
-                dialed-down version of Fate Core will get you going in no time.
-              </>
-            }
+            title={t("docs.fate-accelerated.title")}
+            description={t("docs.fate-accelerated.description")}
             bgColor="#005aba"
             imageUrl={Images.accelerated}
             link="/srds/accelerated"
@@ -107,22 +100,17 @@ export const SrdItems: React.FC = (props) => {
       </Grid>
     </Box>
   );
-};
+}
 
-export const ToolkitItems: React.FC = (props) => {
+export function ToolkitItems() {
+  const { t } = useTranslate();
   return (
     <Box>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate System Toolkit"
-            description={
-              <>
-                This expansion for the Fate Core System contains tons of
-                flexible, hackable and adaptable rules that fits any world you
-                are trying to play in.
-              </>
-            }
+            title={t("docs.fate-system-toolkit.title")}
+            description={t("docs.fate-system-toolkit.description")}
             bgColor="#442d74"
             imageUrl={Images.systemToolkit}
             link="/srds/system-toolkit"
@@ -130,51 +118,63 @@ export const ToolkitItems: React.FC = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate Adversary Toolkit"
-            description={
-              <>
-                What ever the genre, this book gives you the tools you need to
-                create great obstacles for you stories.
-              </>
-            }
+            title={t("docs.fate-adversary-toolkit.title")}
+            description={t("docs.fate-adversary-toolkit.description")}
             bgColor="#1e171c"
             imageUrl={Images.adversaryToolkit}
             link="/srds/adversary-toolkit"
           />
         </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title={t("docs.dials.title")}
+            description={t("docs.dials.description")}
+            bgColor="#0a0f1c"
+            imageUrl={Images.dials}
+            link="/dials"
+          />
+        </Grid>
       </Grid>
     </Box>
   );
-};
+}
 
-export const OtherResourcesItems: React.FC = (props) => {
+export function WikiItems() {
+  const { t } = useTranslate();
   return (
     <Box>
       <Grid container spacing={4} justify="center">
-        {/* <Grid item xs={12} sm={6} md={4}>
-          <SrdCard
-            title="Book of Monsters"
-            description={
-              <>
-                Brought to you by <strong>Seelie Squire</strong>, this is
-                ultimate resource if you are looking for the closest thing to a
-                Fate Compendium.
-              </>
-            }
-            bgColor="#3c5c39"
-            imageUrl={Images.seelieSquire}
-            link="/seelie-squire"
-          />
-        </Grid> */}
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Fate Stunts"
-            description={
-              <>
-                A big list of stunt examples to get you started with character
-                creation.
-              </>
-            }
+            title={t("docs.fari-wiki.title")}
+            description={t("docs.fari-wiki.description")}
+            bgColor="#0c2b69"
+            imageUrl={Images.logo}
+            link="/fari-wiki"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title={t("docs.success-with-style.title")}
+            description={t("docs.success-with-style.description")}
+            bgColor="#080303"
+            imageUrl={Images.successWithStyle}
+            link="/success-with-style"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title={t("docs.book-of-monsters.title")}
+            description={t("docs.book-of-monsters.description")}
+            bgColor="#3c5c39"
+            imageUrl={Images.seelieSquire}
+            link="/seeliesquire"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DocCard
+            title={t("docs.fate-stunts.title")}
+            description={t("docs.fate-stunts.description")}
             bgColor="#223031"
             imageUrl={Images.book}
             link="/fate-stunts"
@@ -182,40 +182,8 @@ export const OtherResourcesItems: React.FC = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
-            title="Dials"
-            description={
-              <>
-                Useful rules you can pick and choose to hack your Fate campaign.
-              </>
-            }
-            bgColor="#011779"
-            imageUrl={Images.dials}
-            link="/dials"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Scene Checklist"
-            description={
-              <>
-                If you feel stumped during a scene, this checklist is going to
-                help you get back on track in no time.
-              </>
-            }
-            bgColor="#3b3a39"
-            imageUrl={Images.scene}
-            link="/scene-checklist"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DocCard
-            title="Cheat Sheet"
-            description={
-              <>
-                Your handy tool for a quick access to the most important rules
-                during a session.
-              </>
-            }
+            title={t("docs.cheat-sheet.title")}
+            description={t("docs.cheat-sheet.description")}
             bgColor="#030200"
             imageUrl={Images.cheatSheet}
             link="/cheat-sheet"
@@ -224,7 +192,7 @@ export const OtherResourcesItems: React.FC = (props) => {
       </Grid>
     </Box>
   );
-};
+}
 
 export const DocCard: React.FC<{
   title: string | JSX.Element;
@@ -282,12 +250,13 @@ export const DocCard: React.FC<{
                   <FateLabel
                     textColor={color}
                     fontSize={theme.typography.h5.fontSize}
+                    uppercase={false}
                   >
                     {props.title}
                   </FateLabel>
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="body1"
                   component="p"
                   className={css({
                     color: color,

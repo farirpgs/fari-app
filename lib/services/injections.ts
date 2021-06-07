@@ -1,10 +1,10 @@
 import { InternationalizationService } from "./internationalization/InternationalizationService";
 import { makeLogger } from "./logger/makeLogger";
-import { SentryService } from "./sentry/SentryService";
+import { makeSentryService } from "./sentry/SentryService";
 
-const sentryService = new SentryService();
+const sentryService = makeSentryService();
 const logger = makeLogger(sentryService);
-const internationalizationService = new InternationalizationService(logger);
+const internationalizationService = InternationalizationService(logger);
 
 export const injections = {
   internationalizationService,

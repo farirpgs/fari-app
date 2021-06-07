@@ -1,7 +1,8 @@
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 import { env } from "../../constants/env";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { Id } from "../../domains/Id/Id";
 
 /**
  * When running fariapp/fari-peer-server locally
@@ -33,9 +34,10 @@ export function usePeerJS(options: { debug?: boolean }) {
   const [hostId, setHostId] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(undefined);
+  const logger = useLogger();
 
   if (!peer.current) {
-    const id = uuidV4();
+    const id = Id.generate();
     if (env.context === "localhost") {
       peer.current = new Peer(id, {
         path: "/peer/connect",
@@ -56,7 +58,7 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   useEffect(() => {
     function setupPeer() {
-      console.info("usePeerJS: Setup");
+      logger.debug("usePeerJS: Setup");
 
       peer.current?.on("open", onPeerOpenCallback);
       peer.current?.on("disconnected", onPeerDisconnectedCallback);
@@ -73,22 +75,22 @@ export function usePeerJS(options: { debug?: boolean }) {
       function onPeerOpenCallback(id: string) {
         setHostId(id);
         setLoading(false);
-        console.info("usePeerJS: Connection Opened");
+        logger.debug("usePeerJS: Connection Opened");
       }
       function onPeerDisconnectedCallback() {
         setHostId(undefined);
         peer.current?.reconnect();
-        console.info("usePeerJS: Disconnected. Reconnecting");
+        logger.debug("usePeerJS: Disconnected. Reconnecting");
       }
       function onPeerCloseCallback() {
         setHostId(undefined);
-        console.info("usePeerJS: Connection Closed");
+        logger.debug("usePeerJS: Connection Closed");
       }
       function onPeerErrorCallback(error: any) {
         if (error.type === "server-error") {
           setError(error);
         }
-        console.info("usePeerJS: Error", error.type);
+        logger.error("usePeerJS: Error", error.type);
       }
     }
 

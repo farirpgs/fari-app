@@ -1,38 +1,37 @@
+import Box from "@material-ui/core/Box";
+import { useTheme } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { DiceFab } from "../../components/DiceFab/DiceFab";
 import { ManagerMode } from "../../components/Manager/Manager";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import {
-  CharactersContext,
-  ICharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice, IRollDiceOptions } from "../../domains/dice/Dice";
-import { IDiceRoll } from "../../domains/dice/IDiceRoll";
+import { ICharacter } from "../../domains/character/types";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { CharacterDialog } from "./components/CharacterDialog";
+import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialog";
 
 export const CharacterRoute: React.FC<{
   match: {
     params: { id: string };
   };
 }> = (props) => {
-  const { t } = useTranslate();
+  const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
-  const [rolls, setRolls] = useState<Array<IDiceRoll>>([]);
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
+  const diceManager = useContext(DiceContext);
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
   const logger = useLogger();
 
-  function roll(options: IRollDiceOptions) {
+  function handleSetRollResult(result: IDiceRollResult) {
     setRolls((draft) => {
-      const newRoll = Dice.roll4DF(options);
-      logger.info("DiceRoute:onDiceRoll", { roll: newRoll });
-      return [newRoll, ...draft];
+      return [result, ...draft];
     });
   }
 
@@ -53,29 +52,40 @@ export const CharacterRoute: React.FC<{
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
-  const query = useQuery<"dialog">();
+  const query = useQuery<"dialog" | "readonly">();
   const dialogMode = query.get("dialog") === "true";
+  const readonly = query.get("readonly") === "true";
+
+  function handleOnRollPool() {
+    const { result } = diceManager.actions.getPoolResult();
+    handleSetRollResult(result);
+  }
+
   return (
     <>
-      <PageMeta
-        title={selectedCharacter?.name || t("characters-route.title")}
-        description={t("characters-route.description")}
-      />
+      <PageMeta title={selectedCharacter?.name} />
 
-      <Page>
-        <CharacterDialog
-          open={!!selectedCharacter}
-          character={selectedCharacter}
-          dialog={dialogMode || false}
-          rolls={rolls}
-          onRoll={(bonus) => {
-            roll(bonus);
-          }}
-          onSave={(newCharacter) => {
-            charactersManager.actions.upsert(newCharacter);
-          }}
-        />
-      </Page>
+      <Box bgcolor={theme.palette.background.paper}>
+        <Page>
+          {!dialogMode && (
+            <DiceFab
+              rollsForDiceBox={rolls}
+              onRollPool={handleOnRollPool}
+              onRoll={handleSetRollResult}
+            />
+          )}
+          <CharacterV3Dialog
+            open={!!selectedCharacter}
+            character={selectedCharacter}
+            dialog={dialogMode || false}
+            readonly={readonly}
+            onRoll={handleSetRollResult}
+            onSave={(newCharacter) => {
+              charactersManager.actions.upsert(newCharacter);
+            }}
+          />
+        </Page>
+      </Box>
     </>
   );
 };

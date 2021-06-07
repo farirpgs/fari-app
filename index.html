@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Fari | Fate RPG Companion</title>
-    <link rel="icon" type="image/png" href="../images/app-favicon.png" />
+    <title>Fari | Play Table-Top RPGs Online without the headache</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="../images/blue/favicon/favicon.ico"
+    />
     <meta
       name="google-site-verification"
       content="_SkIJRylG7gB1j0jbxxXboxdViB678DOHglRv43DNtE"
@@ -15,6 +19,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -35,12 +43,9 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="../images/blue/logo.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-
-    <meta property="twitter:image" content="../images/blue/logo.png" />
   </head>
   <style>
     .full-page-loader {
@@ -87,6 +92,33 @@
       type="text/javascript"
       src="https://ko-fi.com/widgets/widget_2.js"
     ></script>
+    <script>
+      !(function (w, d, i, s) {
+        function l() {
+          if (!d.getElementById(i)) {
+            var f = d.getElementsByTagName(s)[0],
+              e = d.createElement(s);
+            (e.type = "text/javascript"),
+              (e.async = !0),
+              (e.src = "https://canny.io/sdk.js"),
+              f.parentNode.insertBefore(e, f);
+          }
+        }
+        if ("function" != typeof w.Canny) {
+          var c = function () {
+            c.q.push(arguments);
+          };
+          (c.q = []),
+            (w.Canny = c),
+            "complete" === d.readyState
+              ? l()
+              : w.attachEvent
+              ? w.attachEvent("onload", l)
+              : w.addEventListener("load", l, !1);
+        }
+      })(window, document, "canny-jssdk", "script");
+    </script>
+    
     <script type="module" src="./lib/index.tsx"></script>
   </body>
 </html>

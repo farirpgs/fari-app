@@ -1,13 +1,15 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import * as Sentry from "@sentry/react";
-import React, { useContext } from "react";
+import React, { ReactNode, useContext } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
+import { AppAnalytics } from "./components/AppAnalytics/AppAnalytics";
 import { AppRouter } from "./components/AppRouter/AppRouter";
 import { CharactersManager } from "./components/CharactersManager/CharactersManager";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
-import { History } from "./components/History/History";
 import { ScenesManager } from "./components/ScenesManager/ScenesManager";
 import { env } from "./constants/env";
 import {
@@ -18,29 +20,44 @@ import {
   DarkModeContext,
   useDarkMode,
 } from "./contexts/DarkModeContext/DarkModeContext";
+import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
 import {
   ScenesContext,
   useScenes,
 } from "./contexts/SceneContext/ScenesContext";
+import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { AppDarkTheme, AppLightTheme } from "./theme";
 
-export const App: React.FC<{}> = () => {
+export function App() {
+  return (
+    <AppContexts>
+      <AppRouter />
+    </AppContexts>
+  );
+}
+
+function AppContexts(props: { children: ReactNode }) {
   const darkModeManager = useDarkMode();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
-  return (
-    <DarkModeContext.Provider value={darkModeManager}>
-      <CharactersContext.Provider value={charactersManager}>
-        <ScenesContext.Provider value={scenesManager}>
-          <AppProvider />
-        </ScenesContext.Provider>
-      </CharactersContext.Provider>
-    </DarkModeContext.Provider>
-  );
-};
-App.displayName = "App";
+  const diceManager = useDice();
 
-export const AppProvider: React.FC<{}> = (props) => {
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <DarkModeContext.Provider value={darkModeManager}>
+        <CharactersContext.Provider value={charactersManager}>
+          <ScenesContext.Provider value={scenesManager}>
+            <DiceContext.Provider value={diceManager}>
+              <AppProviders>{props.children}</AppProviders>
+            </DiceContext.Provider>
+          </ScenesContext.Provider>
+        </CharactersContext.Provider>
+      </DarkModeContext.Provider>
+    </DndProvider>
+  );
+}
+
+function AppProviders(props: { children: ReactNode }) {
   const store = useContext(DarkModeContext);
 
   return (
@@ -57,15 +74,54 @@ export const AppProvider: React.FC<{}> = (props) => {
                   "client-context": env.context,
                 }}
               />
-              <History />
+              <AppAnalytics />
               <ScenesManager />
               <CharactersManager />
-              <AppRouter />
+              {props.children}
             </BrowserRouter>
           </HelmetProvider>
         </Sentry.ErrorBoundary>
       </StylesProvider>
     </ThemeProvider>
   );
-};
-AppProvider.displayName = "AppProvider";
+}
+AppProviders.displayName = "AppProvider";
+
+/**
+ * for dynamic keys
+ */
+export function useMark() {
+  const { t } = useTranslate();
+
+  t("common.language.dev");
+  t("common.language.de");
+  t("common.language.en");
+  t("common.language.es");
+  t("common.language.eo");
+  t("common.language.fr");
+  t("common.language.gl");
+  t("common.language.pt-BR");
+  t("common.language.ru");
+  t("common.language.it");
+
+  t("oracle.value.No");
+  t("oracle.value.NoAnd");
+  t("oracle.value.Yes");
+  t("oracle.value.YesAnd");
+  t("oracle.value.YesBut");
+
+  t("character-dialog.template.FateOfCthulhu");
+  t("character-dialog.template.DresdenFilesAccelerated");
+  t("character-dialog.template.VentureCity");
+  t("character-dialog.template.IronEddaAccelerated");
+  t("character-dialog.template.Heartbreaker");
+  t("character-dialog.template.FateAccelerated");
+  t("character-dialog.template.FateCondensed");
+  t("character-dialog.template.FateCore");
+  t("character-dialog.template.Dnd5e");
+  t("character-dialog.template.TheWitchIsDead");
+  t("character-dialog.template.EdgeOfTheEmpire");
+  t("character-dialog.template.EdgeOfTheEmpire_FR");
+  t("character-dialog.template.Maze");
+  t("character-dialog.template.Blank");
+}

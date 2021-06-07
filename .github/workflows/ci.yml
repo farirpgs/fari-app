@@ -5,17 +5,15 @@ on:
   push:
     branches: [master]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
+    branches:
+      - "**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x]
-
     steps:
       # Setup
       - uses: actions/checkout@v2
@@ -39,11 +37,76 @@ jobs:
       # Validate
       - name: Validate
         run: yarn validate
+      # Upload Artifacts
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: dist
+          path: dist
+  deploy-preview:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
+    environment:
+      name: Preview
+      url: https://${{github.run_id}}--fari.netlify.app
+    steps:
+      # Setup
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      # Cache
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      # Install
+      - name: Install
+        run: yarn install
+      # Download Artifacts
+      - name: Download Artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
       # Deploy Preview
       - name: Deploy Preview
-        run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
-        if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
+        run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
+  deploy-production:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.repository == 'fariapp/fari' && github.ref == 'refs/heads/master'
+    environment:
+      name: Production
+      url: https://fari.app
+    steps:
+      # Setup
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      # Cache
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      # Install
+      - name: Install
+        run: yarn install
+      # Download Artifacts
+      - name: Download Artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
       # Deploy Production
       - name: Deploy Production
         run: yarn deploy:prod --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
-        if: github.repository == 'fariapp/fari' && github.ref == 'refs/heads/master'

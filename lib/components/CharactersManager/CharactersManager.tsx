@@ -1,28 +1,24 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidV4 } from "uuid";
-import {
-  CharactersContext,
-  CharacterType,
-  ICharacter,
-  migrateCharacter,
-} from "../../contexts/CharactersContext/CharactersContext";
+import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
+import { CharacterTemplates } from "../../domains/character/CharacterType";
+import { ICharacter } from "../../domains/character/types";
+import { getUnix } from "../../domains/dayjs/getDayJS";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Manager } from "../Manager/Manager";
 
-type IProps = {};
-
-export const CharactersManager: React.FC<IProps> = (props) => {
+export const CharactersManager: React.FC = () => {
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
 
   const logger = useLogger();
 
-  function onAdd() {
-    const newCharacter = charactersManager.actions.add(
-      CharacterType.CoreCondensed
+  async function onAdd() {
+    const newCharacter = await charactersManager.actions.add(
+      CharacterTemplates.Blank
     );
 
     if (charactersManager.state.managerCallback) {
@@ -56,18 +52,24 @@ export const CharactersManager: React.FC<IProps> = (props) => {
     logger.info("CharactersManager:onDelete");
   }
 
-  function onImport(charactersToImport: FileList | null) {
+  function onDuplicate(character: ICharacter) {
+    charactersManager.actions.duplicate(character.id);
+    logger.info("CharactersManager:onDuplicate");
+  }
+
+  function onImport(characterFile: FileList | null) {
     FariEntity.import<ICharacter>({
-      filesToImport: charactersToImport,
+      filesToImport: characterFile,
       fariType: "character",
-      onImport: (c) => {
-        const characterWithNewId = produce(c, (draft) => {
-          draft.id = uuidV4();
-        });
-
-        const migratedCharacter = migrateCharacter(characterWithNewId);
-
-        charactersManager.actions.upsert(migratedCharacter);
+      onImport: (characterToImport) => {
+        const migratedCharacter = CharacterFactory.migrate(characterToImport);
+        const characterWithNewTimestamp = produce(
+          migratedCharacter,
+          (draft: ICharacter) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        charactersManager.actions.upsert(characterWithNewTimestamp);
 
         if (charactersManager.state.managerCallback) {
           charactersManager.state.managerCallback(migratedCharacter);
@@ -102,6 +104,7 @@ export const CharactersManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
+      onDuplicate={onDuplicate}
       onUndo={onUndoDelete}
       onClose={charactersManager.actions.closeManager}
       onImport={onImport}

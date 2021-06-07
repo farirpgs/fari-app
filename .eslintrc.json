@@ -23,6 +23,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
     "no-restricted-imports": [
       "error",
       {
@@ -37,6 +39,7 @@
     ],
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
+    "react/display-name": 0,
     // "react-hooks/exhaustive-deps": "warn",
     "prefer-template": "error",
     "react/self-closing-comp": [

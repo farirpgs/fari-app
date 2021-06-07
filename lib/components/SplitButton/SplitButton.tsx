@@ -40,7 +40,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
     setOpen((prevOpen) => !prevOpen);
   }
 
-  function handleClose(event: React.MouseEvent<Document, MouseEvent>) {
+  function handleClose() {
     setOpen(false);
   }
 

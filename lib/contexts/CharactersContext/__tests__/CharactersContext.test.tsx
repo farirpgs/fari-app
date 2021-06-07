@@ -1,63 +1,8 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { ManagerMode } from "../../../components/Manager/Manager";
-import {
-  CharacterType,
-  ICharacter,
-  migrateCharacters,
-  useCharacters,
-} from "../CharactersContext";
-
-describe("migrateCharacters", () => {
-  describe("v1", () => {
-    describe("stressTracks", () => {
-      it("should migrate characters from v1 `stressTracks` to v2 `stressTracks`", () => {
-        // GIVEN
-        const v1Char: ICharacter = {
-          id: "",
-          name: "",
-          group: undefined,
-          aspects: [],
-          stunts: [],
-          skills: [],
-          stressTracks: [
-            {
-              name: "Physical",
-              value: [false, true, false] as any,
-            },
-          ],
-
-          consequences: [],
-          refresh: 3,
-          aspectsLabel: undefined,
-          skillsLabel: undefined,
-          stuntsLabel: undefined,
-          stressTracksLabel: undefined,
-          consequencesLabel: undefined,
-          refreshLabel: undefined,
-          fatePoints: undefined,
-          playedDuringTurn: undefined,
-          notes: undefined,
-          notesLabel: undefined,
-          version: 1,
-          lastUpdated: 0,
-        };
-        // WHEN
-        const result = migrateCharacters([v1Char]);
-        // THEN
-        expect(result[0].stressTracks).toEqual([
-          {
-            name: "Physical",
-            value: [
-              { checked: false, label: "1" },
-              { checked: true, label: "2" },
-              { checked: false, label: "3" },
-            ],
-          },
-        ]);
-      });
-    });
-  });
-});
+import { CharacterTemplates } from "../../../domains/character/CharacterType";
+import { ICharacter } from "../../../domains/character/types";
+import { useCharacters } from "../CharactersContext";
 
 describe("useCharacters", () => {
   describe("local storage load", () => {
@@ -99,7 +44,7 @@ describe("useCharacters", () => {
     });
   });
   describe("flow", () => {
-    it("should be able to manager characters", () => {
+    it("should be able to manager characters", async () => {
       // GIVEN
       const localStorage = new LocalStorageMock();
 
@@ -109,76 +54,13 @@ describe("useCharacters", () => {
 
       // WHEN I add a new character
       let newCharacter: ICharacter | undefined = undefined;
-      act(() => {
-        newCharacter = result.current.actions.add(CharacterType.CoreCondensed);
+      await act(async () => {
+        newCharacter = await result.current.actions.add(
+          CharacterTemplates.FateCondensed
+        );
       });
       // THEN the character is added
-      expect(result.current.state.characters).toEqual([
-        {
-          id: newCharacter!.id,
-          lastUpdated: newCharacter!.lastUpdated,
-          aspects: [
-            { name: "High Concept", value: "" },
-            { name: "Trouble", value: "" },
-            { name: "Relationship", value: "" },
-            { name: "Other Aspect", value: "" },
-            { name: "Other Aspect", value: "" },
-          ],
-          consequences: [
-            { name: "Mild", value: "" },
-            { name: "Moderate", value: "" },
-            { name: "Severe", value: "" },
-          ],
-
-          name: "",
-          refresh: 3,
-          skills: [
-            { name: "Academics", value: "" },
-            { name: "Athletics", value: "" },
-            { name: "Burglary", value: "" },
-            { name: "Contacts", value: "" },
-            { name: "Crafts", value: "" },
-            { name: "Deceive", value: "" },
-            { name: "Drive", value: "" },
-            { name: "Empathy", value: "" },
-            { name: "Fight", value: "" },
-            { name: "Investigate", value: "" },
-            { name: "Lore", value: "" },
-            { name: "Notice", value: "" },
-            { name: "Physique", value: "" },
-            { name: "Provoke", value: "" },
-            { name: "Rapport", value: "" },
-            { name: "Resources", value: "" },
-            { name: "Shoot", value: "" },
-            { name: "Stealth", value: "" },
-            { name: "Will", value: "" },
-          ],
-          stressTracks: [
-            {
-              name: "Physical",
-              value: [
-                { checked: false, label: "1" },
-                { checked: false, label: "2" },
-                { checked: false, label: "3" },
-              ],
-            },
-            {
-              name: "Mental",
-              value: [
-                { checked: false, label: "1" },
-                { checked: false, label: "2" },
-                { checked: false, label: "3" },
-              ],
-            },
-          ],
-          stunts: [
-            { name: "Stunt #1", value: "" },
-            { name: "Stunt #2", value: "" },
-            { name: "Stunt #3", value: "" },
-          ],
-          version: 2,
-        },
-      ]);
+      expect(result.current.state.characters.length).toEqual(1);
 
       act(() => {
         // WHEN I update my character
@@ -194,15 +76,14 @@ describe("useCharacters", () => {
           id: "an id from a live session",
         } as ICharacter);
       });
-      return;
 
       // THEN the new character has been added and is properly sorted
-      expect(result.current.state.characters[0]).toEqual(
+      expect(result.current.state.characters[1]).toEqual(
         expect.objectContaining({
           id: playingCharacter!.id,
         })
       );
-      expect(result.current.state.characters[1]).toEqual(
+      expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
@@ -239,7 +120,7 @@ describe("useCharacters", () => {
 
       act(() => {
         // WHEN I update an undefined character
-        result.current.actions.updateIfExists(undefined as any);
+        result.current.actions.updateIfMoreRecent(undefined as any);
       });
       // THEN nothing happens
       expect(result.current.state.characters[0]).toEqual(
@@ -251,13 +132,15 @@ describe("useCharacters", () => {
       );
 
       act(() => {
-        // WHEN I update a character that is not in the DB
-        result.current.actions.updateIfExists({
-          id: "id-that-is-not-in-the-db",
-          name: "A NEW NAME",
+        // WHEN I update a character with an old timestamp
+        result.current.actions.updateIfMoreRecent({
+          ...newCharacter,
+          name: "old timestamp",
+          lastUpdated: newCharacter!.lastUpdated - 100,
         } as ICharacter);
       });
-      // THEN nothing happens
+
+      // THEN the character is NOT updated
       expect(result.current.state.characters.length).toEqual(1);
       expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
@@ -268,10 +151,11 @@ describe("useCharacters", () => {
       );
 
       act(() => {
-        // WHEN I update a character that is in the DB
-        result.current.actions.updateIfExists({
+        // WHEN I update a character with a new timestamp
+        result.current.actions.updateIfMoreRecent({
           ...newCharacter,
-          name: "A NEW NAME",
+          name: "new timestamp",
+          lastUpdated: newCharacter!.lastUpdated + 100,
         } as ICharacter);
       });
       // THEN the character is updated
@@ -279,8 +163,35 @@ describe("useCharacters", () => {
       expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
-          lastUpdated: newCharacter!.lastUpdated,
-          name: "A NEW NAME",
+          lastUpdated: newCharacter!.lastUpdated + 100,
+          name: "new timestamp",
+        })
+      );
+
+      act(() => {
+        // WHEN I add a character with a new timestamp that doesnt exists
+        result.current.actions.addIfDoesntExist({
+          ...newCharacter,
+          id: "new-id",
+          name: "new character",
+          lastUpdated: newCharacter!.lastUpdated + 100,
+        } as ICharacter);
+      });
+
+      // THEN the character is updated
+      expect(result.current.state.characters.length).toEqual(2);
+      expect(result.current.state.characters[0]).toEqual(
+        expect.objectContaining({
+          id: "new-id",
+          name: "new character",
+          lastUpdated: newCharacter!.lastUpdated + 100,
+        })
+      );
+      expect(result.current.state.characters[1]).toEqual(
+        expect.objectContaining({
+          id: newCharacter!.id,
+          name: "new timestamp",
+          lastUpdated: newCharacter!.lastUpdated + 100,
         })
       );
 

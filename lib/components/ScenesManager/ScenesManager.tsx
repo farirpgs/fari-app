@@ -1,19 +1,18 @@
 import produce from "immer";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidV4 } from "uuid";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import {
   ISavableScene,
-  migrateScene,
   ScenesContext,
 } from "../../contexts/SceneContext/ScenesContext";
-import { FariEntity } from "../../domains/FariEntity/FariEntity";
+import { getUnix } from "../../domains/dayjs/getDayJS";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { SceneFactory } from "../../domains/scene/SceneFactory";
+import { IScene } from "../../hooks/useScene/IScene";
 import { Manager } from "../Manager/Manager";
 
-type IProps = {};
-
-export const ScenesManager: React.FC<IProps> = (props) => {
+export const ScenesManager: React.FC = () => {
   const history = useHistory();
   const scenesManager = useContext(ScenesContext);
   const logger = useLogger();
@@ -52,16 +51,24 @@ export const ScenesManager: React.FC<IProps> = (props) => {
     logger.info("ScenesManager:onDelete");
   }
 
-  function onImport(sceneToImport: FileList | null) {
+  function onDuplicate(scene: ISavableScene) {
+    scenesManager.actions.duplicate(scene.id);
+    logger.info("ScenesManager:onDuplicate");
+  }
+
+  function onImport(sceneFile: FileList | null) {
     FariEntity.import<ISavableScene>({
-      filesToImport: sceneToImport,
+      filesToImport: sceneFile,
       fariType: "scene",
-      onImport: (s) => {
-        const sceneWithNewId = produce(s, (draft) => {
-          draft.id = uuidV4();
-        });
-        const migratedScene = migrateScene(sceneWithNewId);
-        scenesManager.actions.upsert(migratedScene);
+      onImport: (sceneToImport) => {
+        const migratedScene = SceneFactory.migrate(sceneToImport);
+        const sceneWithNewTimestamp = produce(
+          migratedScene,
+          (draft: IScene) => {
+            draft.lastUpdated = getUnix();
+          }
+        );
+        scenesManager.actions.upsert(sceneWithNewTimestamp);
       },
     });
     logger.info("ScenesManager:onImport");
@@ -89,6 +96,7 @@ export const ScenesManager: React.FC<IProps> = (props) => {
       onItemClick={onItemClick}
       onAdd={onAdd}
       onDelete={onDelete}
+      onDuplicate={onDuplicate}
       onUndo={onUndoDelete}
       onClose={scenesManager.actions.closeManager}
       onImport={onImport}

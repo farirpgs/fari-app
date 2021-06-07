@@ -1,3 +1,6 @@
+import app from "../../images/blue/app.png";
+import banner from "../../images/blue/banner.png";
+import logo from "../../images/blue/logo.png";
 import accelerated from "../../images/srds/accelerated.jpg";
 import adversaryToolkit from "../../images/srds/adversary-toolkit.jpg";
 import seelieSquireAvatar from "../../images/srds/authors/seelie-squire-avatar.png";
@@ -12,6 +15,9 @@ import seelieSquire from "../../images/srds/seelie-squire.png";
 import systemToolkit from "../../images/srds/system-toolkit.jpg";
 
 export const Images = {
+  app: app as string,
+  logo: logo as string,
+  banner: banner as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,
   accelerated: accelerated as string,
@@ -24,4 +30,6 @@ export const Images = {
   scene: scene as string,
   dials: dials as string,
   cheatSheet: cheatSheet as string,
+  successWithStyle:
+    "https://live.staticflickr.com/778/22642415098_eb0d4cae7d_b.jpg",
 };

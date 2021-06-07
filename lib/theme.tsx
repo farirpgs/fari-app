@@ -1,9 +1,6 @@
-import {
-  createMuiTheme,
-  lighten,
-  ThemeOptions,
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
+import { FontFamily } from "./constants/FontFamily";
 
 const systemFonts = [
   "-apple-system",
@@ -20,43 +17,38 @@ const systemFonts = [
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
     // default 300
-    fontWeightLight: 300,
+    fontWeightLight: 400,
     // default 400
     fontWeightRegular: 400,
     // default 500
-    fontWeightMedium: 500,
+    fontWeightMedium: 600,
     // default 700
     fontWeightBold: 700,
-    fontFamily: [
-      "Inter",
-      "HelveticaNeue",
-      "Helvetica",
-      "Arial",
-      "sans-serif",
-    ].join(","),
+    fontFamily: FontFamily.Default,
   },
   overrides: {
     MuiCssBaseline: {
-      "@global": {
-        "@media print": {
-          "@page": {
-            size: "A2",
-          },
-          "body": {
-            minWidth: "1200px",
-          },
-        },
+      "@global": {},
+    },
+    MuiTypography: {
+      root: {
+        whiteSpace: "pre-wrap",
       },
     },
     MuiButton: {
       root: {
-        borderRadius: "7px",
+        borderRadius: "4px",
       },
       contained: {
         fontWeight: 700,
       },
       outlined: {
-        fontWeight: 700,
+        "fontWeight": 700,
+        "&:hover": {
+          // theme.shadows[1],
+          boxShadow:
+            "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+        },
       },
     },
     MuiButtonGroup: {
@@ -66,13 +58,13 @@ export const defaultThemeConfiguration: ThemeOptions = {
     },
   },
 };
-
+// https://mycolor.space/?hex=%23415F9B&sub=1
 export const AppLightTheme = responsiveFontSizes(
   createMuiTheme({
     ...defaultThemeConfiguration,
     palette: {
       primary: { main: "#415f9c" },
-      secondary: { main: "#7a8cb4" },
+      secondary: { main: "#7891D2" },
     },
   })
 );
@@ -82,11 +74,16 @@ export const AppDarkTheme = responsiveFontSizes(
     ...defaultThemeConfiguration,
     palette: {
       type: "dark",
+      background: {
+        default: "#212121",
+        // paper: "#424242",
+        paper: "#333333",
+      },
       primary: {
-        main: lighten(AppLightTheme.palette.primary.main, 0.5),
+        main: "#b1cbff",
       },
       secondary: {
-        main: lighten(AppLightTheme.palette.secondary.main, 0.2),
+        main: "#7891D2",
       },
     },
   })

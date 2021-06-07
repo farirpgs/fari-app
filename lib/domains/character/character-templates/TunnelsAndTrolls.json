@@ -1,0 +1,320 @@
+{
+  "id": "880133b7-9b96-454c-aac7-439ce6097116",
+  "version": 3,
+  "name": "Tunnels & Trolls Template",
+  "group": "TnT",
+  "template": "Blank",
+  "lastUpdated": 1618255739,
+  "pages": [
+    {
+      "id": "c4af5edf-8610-44a5-b321-3c1008d155af",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "67ce0aa4-cdeb-4a36-ba02-7888be0d613e",
+          "label": "Details",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "3654d673-02dc-43ac-b29e-532570faefad",
+              "label": "Type",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "e4d8548e-39b5-4853-b345-71bafda6e596",
+              "label": "kindred",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "2c3b375a-2056-4a72-aebe-be1328a35795",
+              "label": "level",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "806e3af0-07c4-42f2-b020-3933df56af41",
+          "label": "Prime Attributes",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "faddbf38-d93e-4e66-ac9b-21ee6ee35186",
+              "label": "Strength",
+              "type": "PointCounter",
+              "meta": { "max": "1", "isMainPointCounter": false },
+              "value": "0"
+            },
+            {
+              "id": "32b0863d-e42a-43c6-8a42-dbf49b8c0c3e",
+              "label": "Intelligence",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "bba95f45-4a5a-473c-b0f2-8ac6806ffc52",
+              "label": "Luck",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "c443d3cc-2d35-4b91-972d-6f93cddc111e",
+              "label": "Constitution",
+              "type": "PointCounter",
+              "meta": { "max": "1", "isMainPointCounter": false },
+              "value": "0"
+            },
+            {
+              "id": "8ba6bc39-5a74-4574-a6c6-3563d25c3c93",
+              "label": "Charisma",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "34fa0d2f-7450-4894-8e15-85f783f15af3",
+              "label": "Dexterity",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "45afb3e7-39a5-4bd8-ae0f-04a09e659e5e",
+          "label": "Other Stats\n",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "0a678c36-426a-4113-b780-ef0fbf37df6e",
+              "label": "Regular ADds",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "45402fe8-9e7a-4f41-a78c-27c0ee302029",
+              "label": "Missile ADds",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "02ea8d30-4f25-4f63-a203-b3367fb4ab9a",
+              "label": "Weight Possible",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "d95ac270-215b-47ee-ab60-e442c282b48d",
+              "label": "Weight Carried",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "5343a149-631f-442b-b746-d20cf3c85cf9",
+              "label": "Gold",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "b3f01ab6-8e57-480b-a35e-babc39d484e3",
+              "label": "Adventure Points",
+              "type": "Numeric",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "9d2b1e12-60d8-4b77-a377-f01f2d5b9530",
+              "label": "Main Weapon",
+              "type": "Skill",
+              "value": "0",
+              "meta": {
+                "commands": ["1d6"],
+                "helperText": "Your usual weapon, here on the front page for easy reference.&nbsp; Other weapons can be found on the \"Stuff\" page.&nbsp; Select \"Advanced Mode\" and \"Set Dice\" to give it its proper number of dice."
+              }
+            },
+            {
+              "id": "ef3a3706-e1cd-4beb-acf1-7f6292a98fe9",
+              "label": "Total Armor",
+              "type": "Numeric",
+              "value": "",
+              "meta": {
+                "helperText": "Your total armor protection, here on the front page for easy reference.&nbsp; Detailed breakdown of armor can be found on the \"Stuff\" page."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a5f59289-1fc0-4056-a50b-b27e5b4335ba",
+      "sections": [
+        {
+          "id": "1f01cff4-535e-45a7-930c-dce0677c40f0",
+          "label": "Weapons",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f2418807-c2e6-4c67-a3b2-83f5745cf6f2",
+              "label": "Weapon",
+              "type": "Skill",
+              "value": "0",
+              "meta": {
+                "checked": false,
+                "commands": ["1d6"],
+                "helperText": "Go into Advanced Mode and choose \"Set Dice\" to give this weapon its proper number of dice.&nbsp; Copy your favorite weapon to the main page for easy reference."
+              }
+            },
+            {
+              "id": "b0420ba4-eb0b-4f69-a2d1-6f45bce3b8c5",
+              "label": "Weapon\n",
+              "type": "Skill",
+              "value": "0",
+              "meta": {
+                "checked": false,
+                "commands": ["1d6"],
+                "helperText": "Go into Advanced Mode and choose \"Set Dice\" to give this weapon its proper number of dice.&nbsp; Copy your favorite weapon to the main page for easy reference."
+              }
+            }
+          ]
+        },
+        {
+          "id": "3410e17b-4f95-4efe-aad1-4f96972404b0",
+          "label": "Other",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "bf9227d2-b6fd-4089-958b-5084d311868a",
+              "label": "Thing",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "50110075-dd97-424c-83c8-79c76506bbbc",
+              "label": "Thing",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "435b6d95-de60-463c-a080-d12c84b51cd9",
+              "label": "Thing",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "5b0f5c8b-bf1a-4591-a616-a521d68bcf90",
+              "label": "Thing",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "24679471-8b6c-463d-89fe-4693fd20af67",
+          "label": "Armor",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "591f201c-bb92-48e7-af86-302cb9ed469c",
+              "label": "Armor",
+              "type": "Numeric",
+              "value": "",
+              "meta": {
+                "helperText": "Copy your total armor protection to the main page for easy reference."
+              }
+            },
+            {
+              "id": "f5a79296-9f1e-43da-9bc8-a58488a2f7d8",
+              "label": "Armor",
+              "type": "Numeric",
+              "value": "",
+              "meta": {
+                "helperText": "Copy your total armor protection to the main page for easy reference."
+              }
+            },
+            {
+              "id": "5dd0e63a-09e1-42dd-b906-7f040207fac8",
+              "label": "Armor",
+              "type": "Numeric",
+              "value": "",
+              "meta": {
+                "helperText": "Copy your total armor protection to the main page for easy reference."
+              }
+            }
+          ]
+        }
+      ],
+      "label": "Stuff"
+    },
+    {
+      "id": "2d94386e-c2d4-496b-9610-b4ad53661421",
+      "sections": [
+        {
+          "id": "1fcb4924-039e-466f-867b-734171a89c68",
+          "label": "Languages",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "ef26d25e-c486-41f6-a3b4-f385866182ad",
+              "label": "languages\n",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "6af506e3-761e-4304-a9ad-853ab6fe20db",
+          "label": "magic",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "8354c2f9-bd44-4329-9d4d-cbe8cb58bec0",
+              "label": "SpELLS\n",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "known"
+    },
+    {
+      "id": "910350e9-b378-4923-9936-00a6c31893af",
+      "sections": [
+        {
+          "id": "dcbf5ab2-afab-4c19-bfc9-e1e8f87a5433",
+          "label": "Notes",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "fdab4071-5248-4c57-a0e8-a3c79b25c4a3",
+              "label": "Notes\n",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "NOTES\n"
+    }
+  ],
+  "fariType": "character"
+}

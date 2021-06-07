@@ -14,9 +14,10 @@ describe("/", () => {
       Fari.changeLanguage("fr");
 
       cy.contains("Commencer une partie en ligne");
-      Fari.get("page.menu.dice").click();
+      Fari.get("page.menu.tools").click({ force: true });
+      Fari.get("page.menu.tools.dice").click();
 
-      cy.contains("Lancer");
+      cy.contains("Lancer des dés en ligne");
     });
   });
   describe("Given I want to check the privacy policy", () => {
