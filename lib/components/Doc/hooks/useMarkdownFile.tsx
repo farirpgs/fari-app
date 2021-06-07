@@ -25,7 +25,7 @@ export function useMarkdownFile(props: {
 
           if (markdown) {
             const { dom, markdownIndexes } = Markdown.process({
-              markdown: markdown,
+              markdown: markdown.default,
               prefix: props.prefix,
             });
             setDom(dom);

@@ -112,3 +112,4 @@ cypress/screenshots
 dist
 dist-ssr
 *.local
+.tsc
