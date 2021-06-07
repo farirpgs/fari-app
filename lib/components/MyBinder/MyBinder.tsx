@@ -94,8 +94,9 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] =
-    useState<{ folder: TFolders; element: any } | undefined>(undefined);
+  const [deletedObject, setDeletedObject] = useState<
+    { folder: TFolders; element: any } | undefined
+  >(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -193,8 +194,10 @@ export function MyBinder<TFolders extends string>(props: {
                         <InputBase
                           placeholder={
                             folder
-                              ? `Search in "${currentFolderLabel}"...`
-                              : "Search..."
+                              ? `${t(
+                                  "my-binder.search-in"
+                                )} "${currentFolderLabel}"...`
+                              : t("my-binder.search")
                           }
                           autoFocus
                           value={lazySearch}
@@ -236,7 +239,7 @@ export function MyBinder<TFolders extends string>(props: {
                   props.onClose();
                 }}
               >
-                {"All My Data"}
+                {t("my-binder.all-my-data")}
               </AppLink>
             </Grid>
           </Grid>
@@ -305,7 +308,7 @@ export function MyBinder<TFolders extends string>(props: {
                     props.onAdd(currentFolder);
                   }}
                 >
-                  {"New"}
+                  {t("my-binder.elements.new")}
                 </Button>
               </Grid>
               <Grid item>
@@ -316,7 +319,7 @@ export function MyBinder<TFolders extends string>(props: {
                   size="small"
                   component="label"
                 >
-                  {"Import"}
+                  {t("menu.elements.import")}
                   <input
                     type="file"
                     accept=".json"
@@ -425,7 +428,7 @@ export function MyBinder<TFolders extends string>(props: {
                 <Box display="flex" alignItems="center" flexDirection="column">
                   <Box mb="1rem">
                     <Typography variant="subtitle2" color="textSecondary">
-                      {"Nothing here yet!"}
+                      {t("my-binder.folder.empty")}
                     </Typography>
                   </Box>
                   <Box>
