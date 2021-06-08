@@ -62,7 +62,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           <Box>
             <Grid container spacing={1} justify="space-between" wrap="nowrap">
               <Grid item xs>
-                <FateLabel display="inline" align={"center"}>
+                <FateLabel display="inline" align="center">
                   <ContentEditable
                     readonly={props.readonly}
                     border={props.advanced}
@@ -257,7 +257,7 @@ export const Pool: React.FC<
               ? `1px ${borderStyle} ${theme.palette.primary.main}`
               : `1px ${borderStyle} #bdbdbd`,
 
-            "boxShadow": selected ? theme.shadows[0] : theme.shadows[2],
+            "boxShadow": selected ? theme.shadows[0] : theme.shadows[1],
             "transition": theme.transitions.create(
               ["color", "background", "border", "borderWidth", "boxShadow"],
               { duration: theme.transitions.duration.shorter }
