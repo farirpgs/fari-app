@@ -99,7 +99,9 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
             </Grid>
           )}
           <Grid item xs>
-            <FateLabel className={css({ display: "inline-block" })}>
+            <FateLabel
+              className={css({ display: "inline-block", width: "100%" })}
+            >
               <ContentEditable
                 data-cy={`${props.dataCy}.label`}
                 readonly={props.readonly}
