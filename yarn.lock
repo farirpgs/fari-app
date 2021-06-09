@@ -1942,6 +1942,11 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/standalone@^7.13.12":
+  version "7.14.4"
+  resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.14.4.tgz#b50522a9119bea33f0d8e13e7f7d51274fad0530"
+  integrity sha512-oBvBtSdACtNeH2YAg2kyZhfbqfKQK7lgudfHo8IC03JiBrfuvvMlfkBaSrqxrpf9DmUCZJnDZH3uLNVN5QoXog==
+
 "@babel/template@^7.10.4", "@babel/template@^7.3.3", "@babel/template@^7.4.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.10.4.tgz#3251996c4200ebc71d1a8fc405fba940f36ba278"
@@ -5202,6 +5207,17 @@
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@ungap/from-entries/-/from-entries-0.2.1.tgz#7e86196b8b2e99d73106a8f25c2a068326346354"
   integrity sha512-CAqefTFAfnUPwYqsWHXpOxHaq1Zo5UQ3m9Zm2p09LggGe57rqHoBn3c++xcoomzXKynAUuiBMDUCQvKMnXjUpA==
+
+"@vitejs/plugin-legacy@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-legacy/-/plugin-legacy-1.4.1.tgz#e9f7030081df0534ebc6d6c0f9f7c90adb9e60a9"
+  integrity sha512-xfcBaNYpPCFzDjvhvoUYOGh87SNvvJNmrHtRdAe6lmnmSOgMYW+QNOvWwdHFEUpWaWUGtgeyYfcVN024IgBafA==
+  dependencies:
+    "@babel/standalone" "^7.13.12"
+    core-js "^3.8.2"
+    magic-string "^0.25.7"
+    regenerator-runtime "^0.13.7"
+    systemjs "^6.8.3"
 
 "@vitejs/plugin-react-refresh@^1.3.1":
   version "1.3.3"
@@ -18821,6 +18837,11 @@ symbol.prototype.description@^1.0.0:
     es-abstract "^1.18.0-next.2"
     has-symbols "^1.0.1"
     object.getownpropertydescriptors "^2.1.2"
+
+systemjs@^6.8.3:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-6.10.0.tgz#4392b040f054d1f7beead4f8cf2f7371469d66df"
+  integrity sha512-DBkidP/UR/GfCjREpXAyeBWgIhxD2ybUs5HW2a7sng7ZTNSmW6LNX8A18D0OcyD2mNupBIVaDXG47zi81Ymp0Q==
 
 table@^5.2.3:
   version "5.4.6"
