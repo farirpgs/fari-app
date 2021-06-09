@@ -6,6 +6,7 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
+import { CharacterGenerator } from "../CharacterGenerator/CharacterGenerator";
 import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
 
@@ -205,6 +206,14 @@ export const AppRouter = () => {
           render={() => {
             window.location.href = "https://discord.gg/vMAJFjUraA";
             return null;
+          }}
+        />
+
+        <Route
+          exact
+          path={"/character-generator"}
+          render={() => {
+            return <CharacterGenerator />;
           }}
         />
 
