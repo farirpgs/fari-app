@@ -4,7 +4,7 @@ export const Fari = {
   },
   start() {
     cy.visit("/");
-    this.get("cookie-consent").click();
+    this.get("cookie-consent").click({ force: true });
   },
   /**
    * Url needs to be in `../../../serve.json`
