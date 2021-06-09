@@ -107,4 +107,9 @@ junit.xml
 cypress/videos
 cypress/screenshots
 
+# Vite
 .DS_Store
+dist
+dist-ssr
+*.local
+.tsc

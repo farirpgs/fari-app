@@ -118,7 +118,15 @@
         }
       })(window, document, "canny-jssdk", "script");
     </script>
+    <script>
+      /**
+       * Defining `parcelRequire` require because Vite's input is in type="module" and that
+       *  makes Parcel V1, used by PeerJS, invalid because it doesn't declare the `parcelRequire` variable
+       * https://github.com/parcel-bundler/parcel/issues/1401
+       */
+      var parcelRequire = undefined;
+    </script>
 
-    <script src="./index.tsx"></script>
+    <script type="module" src="./lib/index.tsx"></script>
   </body>
 </html>
