@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
 import { IMarkdownIndexes, Markdown } from "../domains/Markdown";
 
-export type ILoadFunction = () => Promise<string>;
+export type ILoadFunction = () => Promise<{ default: string }>;
 
 export function useMarkdownFile(props: {
   loadFunction: ILoadFunction;
@@ -22,10 +22,10 @@ export function useMarkdownFile(props: {
       if (props.loadFunction) {
         try {
           const markdown = await props.loadFunction();
-
-          if (markdown) {
+          const markdownContent = markdown?.default;
+          if (markdownContent) {
             const { dom, markdownIndexes } = Markdown.process({
-              markdown: markdown.default,
+              markdown: markdownContent,
               prefix: props.prefix,
             });
             setDom(dom);

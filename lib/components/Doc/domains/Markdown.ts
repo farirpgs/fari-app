@@ -18,11 +18,11 @@ export type IMarkdownIndex = {
 };
 
 export const Markdown = {
-  process(props: {
-    markdown: string;
-    prefix: string;
-  }): { dom: HTMLDivElement; markdownIndexes: IMarkdownIndexes } {
-    const html = marked(props.markdown);
+  process(props: { markdown: string; prefix: string }): {
+    dom: HTMLDivElement;
+    markdownIndexes: IMarkdownIndexes;
+  } {
+    const html = props.markdown ? marked(props.markdown) : "";
     const dom = document.createElement("div");
     dom.innerHTML = html;
 
@@ -114,7 +114,7 @@ export const Markdown = {
     const pageSelector = "h1";
     const pageElements =
       props.dom?.querySelectorAll(pageSelector) ??
-      (([] as unknown) as NodeListOf<Element>);
+      ([] as unknown as NodeListOf<Element>);
 
     if (!!props.dom && pageElements.length === 0) {
       throw `useMarkdownPage: no "${pageSelector}" in the markdown document`;
@@ -195,9 +195,8 @@ export const Markdown = {
 function updateDomWithMeta(pageDom: HTMLDivElement) {
   const pageMetaOriginalElement = pageDom.querySelector("page-meta");
   const author = pageMetaOriginalElement?.getAttribute("author");
-  const pageMetaDescription = pageMetaOriginalElement?.getAttribute(
-    "description"
-  );
+  const pageMetaDescription =
+    pageMetaOriginalElement?.getAttribute("description");
   const date = pageMetaOriginalElement?.getAttribute("date");
   const image = pageMetaOriginalElement?.getAttribute("image");
 

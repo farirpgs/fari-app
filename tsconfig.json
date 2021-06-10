@@ -3,8 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "jsx": "react",
     "outDir": "./.tsc",
     "skipLibCheck": true,
@@ -15,7 +14,7 @@
         "name": "typescript-tslint-plugin"
       }
     ],
-    "types": ["vite/client"]
+    "types": ["vite/client", "jest"]
   },
   "include": ["lib/**/*", "stories/**/*"],
   "exclude": ["node_modules", "cypress"]

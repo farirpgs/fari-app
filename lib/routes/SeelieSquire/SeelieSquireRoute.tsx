@@ -26,7 +26,12 @@ export const SeelieSquireRoute: React.FC<{
       sideBar={{ "+Book of Creatures": ["seelie-squires-book-of-creatures"] }}
       sideBarOptions={{ miscSectionTitle: "Creatures" }}
       loadFunction={async () => {
-        return makeSeelieSquireMarkdown({ theme, isExtraSmall: isExtraSmall });
+        return {
+          default: makeSeelieSquireMarkdown({
+            theme,
+            isExtraSmall: isExtraSmall,
+          }),
+        };
       }}
       gitHubLink="https://github.com/fariapp/fari/blob/master/lib/routes/SeelieSquire/domains/creatures.ts"
       author={{

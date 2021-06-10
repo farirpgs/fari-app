@@ -240,6 +240,7 @@ export type ITranslationKeys =
   | "my-binder.all-my-data"
   | "my-binder.elements.new"
   | "my-binder.folder.characters"
+  | "my-binder.folder.empty"
   | "my-binder.folder.scenes"
   | "my-binder.search"
   | "my-binder.search-in"

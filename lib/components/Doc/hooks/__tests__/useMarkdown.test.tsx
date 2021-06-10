@@ -9,6 +9,8 @@ import { InjectionsContext } from "../../../../contexts/InjectionsContext/Inject
 import { useMarkdownFile } from "../useMarkdownFile";
 import { useMarkdownPage } from "../useMarkdownPage";
 
+jest.mock("../../../../constants/env.ts");
+
 const fakeLogger = {
   debug: jest.fn(),
   info: jest.fn(),
@@ -441,7 +443,10 @@ const wrapper = (props: { children?: React.ReactNode }): JSX.Element => {
 };
 
 function makeLoadFunction(markdownFile: string | undefined) {
-  return async () => new Promise<string>((r) => r(markdownFile as string));
+  return async () =>
+    new Promise<{ default: string }>((r) =>
+      r({ default: markdownFile as string })
+    );
 }
 
 const anUndefinedMarkdownFile = makeLoadFunction(undefined);
