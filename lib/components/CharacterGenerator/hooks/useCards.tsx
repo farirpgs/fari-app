@@ -98,7 +98,7 @@ const Backgrounds: Array<Card> = [
   { label: "Anarchist" },
   { label: "Doctor" },
   { label: "Assassin" },
-  { label: "The One" },
+  { label: "The Chosen One" },
   { label: "King" },
   { label: "Queen" },
   { label: "Vassal" },

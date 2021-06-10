@@ -7,6 +7,7 @@ import { lighten, useTheme } from "@material-ui/core/styles";
 import ReplayIcon from "@material-ui/icons/Replay";
 import React, { useEffect, useState } from "react";
 import { Images } from "../../constants/Images";
+import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { Heading } from "../Heading/Heading";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
@@ -171,12 +172,13 @@ function GeneratorCard<T extends { label: string }>(props: {
 }) {
   const [state, pick] = useRandomFromList(props.list);
 
-  function renderCardContent(
-    title: JSX.Element | string | undefined,
-    subTitle?: JSX.Element | string
-  ) {
-    const isBack = !subTitle;
-    const isFront = !!subTitle;
+  function renderCardContent(renderProps: {
+    title: JSX.Element | string | undefined;
+    subTitle?: JSX.Element | string;
+    colors: ReturnType<typeof useTextColors>;
+  }) {
+    const isBack = !renderProps.subTitle;
+    const isFront = !!renderProps.subTitle;
     return (
       <Box p="2rem" height="100%">
         <Box
@@ -196,13 +198,16 @@ function GeneratorCard<T extends { label: string }>(props: {
             </Box>
           )}
           {isFront && (
-            <Box>
+            <Box mb="1rem">
               <FateLabel
                 align="center"
                 variant="subtitle1"
-                className={css({ overflowWrap: "break-word" })}
+                className={css({
+                  overflowWrap: "break-word",
+                  color: renderProps.colors.secondary,
+                })}
               >
-                {subTitle}
+                {renderProps.subTitle}
               </FateLabel>
             </Box>
           )}
@@ -212,7 +217,7 @@ function GeneratorCard<T extends { label: string }>(props: {
               variant="h5"
               className={css({ overflowWrap: "break-word" })}
             >
-              {title}
+              {renderProps.title}
             </FateLabel>
           </Box>
           {isFront && (
@@ -237,25 +242,44 @@ function GeneratorCard<T extends { label: string }>(props: {
       }}
       disabled={props.list.length === 0}
       background={props.color}
-      back={<>{renderCardContent(props.label)}</>}
-      front={<>{renderCardContent(state?.label, props.label)}</>}
+      renderBack={(renderProps) => (
+        <>
+          {renderCardContent({
+            title: props.label,
+            colors: renderProps.colors,
+          })}
+        </>
+      )}
+      renderFront={(renderProps) => (
+        <>
+          {renderCardContent({
+            title: state?.label,
+            subTitle: props.label,
+            colors: renderProps.colors,
+          })}
+        </>
+      )}
     />
   );
 }
 
 function Card(props: {
-  front: JSX.Element;
-  back: JSX.Element;
+  renderFront(renderProps: {
+    colors: ReturnType<typeof useTextColors>;
+  }): JSX.Element;
+  renderBack(renderProps: {
+    colors: ReturnType<typeof useTextColors>;
+  }): JSX.Element;
+
   disabled?: boolean;
   onFlip?(): void;
   background: string;
 }) {
   const [flip, setFlip] = useState(false);
   const theme = useTheme();
-  const backBackground = props.background;
-  const backColor = theme.palette.getContrastText(backBackground);
-  const frontBackground = lighten(props.background, 0.7);
-  const frontColor = theme.palette.getContrastText(frontBackground);
+
+  const backColors = useTextColors(props.background);
+  const frontColors = useTextColors(lighten(props.background, 0.7));
 
   useEffect(() => {
     if (flip) {
@@ -291,8 +315,7 @@ function Card(props: {
           height: "100%",
           transition: "transform 0.8s",
           transformStyle: "preserve-3d",
-          border: `8px double ${backBackground}`,
-
+          border: `8px double ${backColors.bgColor}`,
           borderRadius: "8px",
           boxShadow: theme.shadows[2],
           transform: !flip ? "rotateY(180deg)" : undefined,
@@ -306,11 +329,11 @@ function Card(props: {
             height: "100%",
             overfloww: "hidden",
             backfaceVisibility: "hidden",
-            background: frontBackground,
-            color: frontColor,
+            background: frontColors.bgColor,
+            color: frontColors.primary,
           })}
         >
-          {props.front}
+          {props.renderFront({ colors: frontColors })}
         </div>
         <div
           className={css({
@@ -321,11 +344,11 @@ function Card(props: {
             overflow: "hidden",
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
-            background: backBackground,
-            color: backColor,
+            background: backColors.bgColor,
+            color: backColors.primary,
           })}
         >
-          {props.back}
+          {props.renderBack({ colors: backColors })}
         </div>
       </div>
     </div>

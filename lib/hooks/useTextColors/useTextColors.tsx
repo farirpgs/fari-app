@@ -6,6 +6,7 @@ export const whiteVariants = ["#fff", "#ffffff", "#FFF", "#FFFFFF", "white"];
 
 export function useTextColors(backgroundColor: string) {
   const theme = useTheme();
+
   const textColors = useMemo(() => {
     const color = theme.palette.getContrastText(backgroundColor);
     const isContrastWhite = whiteVariants.some(
