@@ -280,6 +280,8 @@ function Card(props: {
 
   const backColors = useTextColors(props.background);
   const frontColors = useTextColors(lighten(props.background, 0.7));
+  const animationDelayMs = 800;
+  const [flipAfterAnimation, setFlipAfterAnimation] = useState(false);
 
   useEffect(() => {
     if (flip) {
@@ -287,16 +289,43 @@ function Card(props: {
     }
   }, [flip]);
 
+  useEffect(() => {
+    let timeout: any;
+    if (flipAfterAnimation) {
+      timeout = setTimeout(() => {
+        handleFlip();
+        setFlipAfterAnimation(false);
+      }, animationDelayMs);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [flipAfterAnimation]);
+
+  function handleFlip() {
+    setFlip((f) => {
+      const isFlipped = f;
+      return !isFlipped;
+    });
+  }
+
+  function handleReFlip() {
+    handleFlip();
+    setFlipAfterAnimation(true);
+  }
+
   return (
     <div
       onClick={() => {
         if (props.disabled) {
           return;
         }
-        setFlip((f) => {
-          const isFlipped = f;
-          return !isFlipped;
-        });
+        if (!flip) {
+          handleFlip();
+        } else {
+          handleReFlip();
+        }
       }}
       className={css({
         label: "card",
@@ -313,7 +342,7 @@ function Card(props: {
           position: "relative",
           width: "100%",
           height: "100%",
-          transition: "transform 0.8s",
+          transition: `transform ${animationDelayMs}ms`,
           transformStyle: "preserve-3d",
           border: `8px double ${backColors.bgColor}`,
           borderRadius: "8px",

@@ -170,7 +170,7 @@ export const Page: React.FC<{
         <CookieConsent />
 
         <Container>
-          {env.isLocalHost && props.debug && (
+          {env.isDev && props.debug && (
             <pre
               className={css({
                 whiteSpace: "break-spaces",
@@ -647,8 +647,7 @@ export const Page: React.FC<{
                 }}
               >
                 {Object.keys(i18n.options.resources!).map((language) => {
-                  const shouldRenderDev =
-                    language === "dev" && env.context === "localhost";
+                  const shouldRenderDev = language === "dev" && env.isDev;
                   if (language !== "dev" || shouldRenderDev) {
                     return (
                       <option key={language} value={language}>

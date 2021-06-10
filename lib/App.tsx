@@ -269,19 +269,4 @@ export function useMark() {
 
   t("my-binder.folder.characters");
   t("my-binder.folder.scenes");
-
-  t("character-dialog.template.FateOfCthulhu");
-  t("character-dialog.template.DresdenFilesAccelerated");
-  t("character-dialog.template.VentureCity");
-  t("character-dialog.template.IronEddaAccelerated");
-  t("character-dialog.template.Heartbreaker");
-  t("character-dialog.template.FateAccelerated");
-  t("character-dialog.template.FateCondensed");
-  t("character-dialog.template.FateCore");
-  t("character-dialog.template.Dnd5e");
-  t("character-dialog.template.TheWitchIsDead");
-  t("character-dialog.template.EdgeOfTheEmpire");
-  t("character-dialog.template.EdgeOfTheEmpire_FR");
-  t("character-dialog.template.Maze");
-  t("character-dialog.template.Blank");
 }

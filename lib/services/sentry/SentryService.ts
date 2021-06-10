@@ -3,7 +3,7 @@ import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
 
 export function makeSentryService() {
-  if (!env.isTest && !env.isLocalHost) {
+  if (!env.isTest && !env.isDev) {
     Sentry.init({
       release: `fari@v${env.version}`,
       environment: env.context as string,
@@ -17,7 +17,7 @@ export function makeSentryService() {
       severity: Severity,
       context: { [key: string]: any } | undefined
     ) {
-      if (env.isTest || env.isLocalHost) {
+      if (env.isTest || env.isDev) {
         return;
       }
 

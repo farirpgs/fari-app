@@ -202,6 +202,49 @@ export function useScene() {
     );
   }
 
+  function moveIndexCardTo(
+    idOfIndexCardToMove: string,
+    idOfIndexCardToMoveTo: string,
+    type: IIndexCardType
+  ) {
+    setScene(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        const indexCards = draft.indexCards[type];
+        const indexCardToMove = spliceIndexCard();
+        addIndexCard(indexCardToMove);
+
+        function spliceIndexCard() {
+          for (const [index, card] of indexCards.entries()) {
+            if (card.id === idOfIndexCardToMove) {
+              return indexCards.splice(index, 1)[0];
+            }
+            for (const [subCardIndex, subCard] of card.subCards.entries()) {
+              if (subCard.id === idOfIndexCardToMove) {
+                return card.subCards.splice(subCardIndex, 1)[0];
+              }
+            }
+          }
+        }
+
+        function addIndexCard(cardToAdd: IIndexCard | undefined) {
+          if (!cardToAdd) {
+            return;
+          }
+
+          for (const card of indexCards) {
+            if (card.id === idOfIndexCardToMoveTo) {
+              card.subCards.push(cardToAdd);
+              return;
+            }
+          }
+        }
+      })
+    );
+  }
   function moveIndexCard(
     dragIndex: number,
     hoverIndex: number,
@@ -276,6 +319,7 @@ export function useScene() {
       loadScene,
       toggleIndexCardSection,
       moveIndexCard,
+      moveIndexCardTo,
       removeIndexCard,
       duplicateIndexCard,
       resetInitiative,

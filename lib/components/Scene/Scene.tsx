@@ -1472,6 +1472,7 @@ export function Scene(props: {
               <IndexCard
                 type={type}
                 reactDndIndex={index}
+                allCards={sortedCards}
                 canMove={sort === SortMode.None && !props.readonly}
                 key={indexCard.id}
                 reactDndType={DragAndDropTypes.SceneIndexCards}
@@ -1485,6 +1486,16 @@ export function Scene(props: {
                 }}
                 onTogglePrivate={() => {
                   sceneManager.actions.toggleIndexCardSection(indexCard, type);
+                }}
+                onMoveTo={(
+                  idOfIndexCardToMove: string,
+                  idOfIndexCardToMoveTo: string
+                ) => {
+                  sceneManager.actions.moveIndexCardTo(
+                    idOfIndexCardToMove,
+                    idOfIndexCardToMoveTo,
+                    type
+                  );
                 }}
                 readonly={props.readonly}
                 indexCard={indexCard}

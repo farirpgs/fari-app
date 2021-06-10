@@ -523,8 +523,11 @@ By using the following syntax `[skill: modifier]` inside an Index Card descripti
 
 # Fari in the Wild
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C_rHMMuYoo8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Tutorials and Overview
 
+- [Fari: The VTT For DMs Who LOVE Custom Sheets and Index Cards! by The Dungeon Newb's Guide](https://www.youtube.com/watch?v=C_rHMMuYoo8)
 - [Fari App Virtual Table Top by Dragons Are Real Podcast](https://www.youtube.com/watch?v=BNL5xXDgA3w)
 
 ## Actual Plays
@@ -541,6 +544,8 @@ This is a nice way to learn how people _actually_ use Fari!
 - [The Bane of the British Museum Fate One Shot](https://www.youtube.com/watch?v=Q3treoCi_pQ)
 - [SPACE SPIES, a Fate RPG One Shot](https://www.youtube.com/watch?v=WqzL0jqmGIM)
 - [Weird West, Session 4 — Learn to Play Fate](https://www.youtube.com/watch?v=BZKi9UDNG_E)
+- [The Frenchman and the American Soldier — A Book of Hanz Fate RPG One Shot](https://www.youtube.com/watch?v=-aRtBe2hT1g)
+- [Enchanters vs Necromancers](https://www.youtube.com/watch?v=rvQVPeI1R0s)
 
 ### Other
 

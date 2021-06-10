@@ -2,11 +2,14 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
 import Fade from "@material-ui/core/Fade";
+import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
+import Select from "@material-ui/core/Select";
 import { darken, lighten } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -14,6 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
@@ -24,7 +28,6 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteOutlinedIcon from "@material-ui/icons/PaletteOutlined";
 import PostAddIcon from "@material-ui/icons/PostAdd";
-import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { ThemeProvider } from "@material-ui/styles";
@@ -50,10 +53,71 @@ import { AddBlock } from "../../routes/Character/components/CharacterDialog/comp
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
-import { ContentEditable } from "../ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
+function FariPopper(props: {
+  renderAnchor: (renderProps: {
+    open: boolean;
+    anchorEl: any;
+    handleOnOpen(event: any): void;
+    handleOnClose(): void;
+  }) => JSX.Element;
+  renderPopper: (renderProps: {
+    open: boolean;
+    anchorEl: any;
+    handleOnOpen(event: any): void;
+    handleOnClose(): void;
+  }) => JSX.Element;
+}) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleOnOpen(event: any) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleOnClose() {
+    setAnchorEl(null);
+  }
+
+  const open = Boolean(anchorEl);
+
+  return (
+    <>
+      {props.renderAnchor({
+        open: open,
+        anchorEl: anchorEl,
+        handleOnOpen: handleOnOpen,
+        handleOnClose: handleOnClose,
+      })}
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleOnClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        {props.renderPopper({
+          open: open,
+          anchorEl: anchorEl,
+          handleOnOpen: handleOnOpen,
+          handleOnClose: handleOnClose,
+        })}
+      </Popover>
+    </>
+  );
+}
 
 export const IndexCard: React.FC<
   {
@@ -62,12 +126,15 @@ export const IndexCard: React.FC<
     id: string;
     type?: IIndexCardType;
     indexCard: IIndexCard;
+    parentIndexCard?: IIndexCard;
+    allCards: Array<IIndexCard>;
     reactDndIndex: number;
     reactDndType: string;
     canMove: boolean;
     indexCardHiddenRecord: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
+    onMoveTo(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
     onRoll(diceRollResult: IDiceRollResult): void;
     onMove(dragIndex: number, hoverIndex: number): void;
     onRemove(): void;
@@ -326,13 +393,15 @@ export const IndexCard: React.FC<
             <Grid item container justify="center" spacing={1}>
               <Grid item>
                 <Tooltip title={t("index-card.add-block")}>
-                  <AddBlock
-                    variant="icon"
-                    onAddBlock={(blockType) => {
-                      indexCardManager.actions.addBlock(blockType);
-                      setAdvanced(true);
-                    }}
-                  />
+                  <span>
+                    <AddBlock
+                      variant="icon"
+                      onAddBlock={(blockType) => {
+                        indexCardManager.actions.addBlock(blockType);
+                        setAdvanced(true);
+                      }}
+                    />
+                  </span>
                 </Tooltip>
               </Grid>
             </Grid>
@@ -351,22 +420,74 @@ export const IndexCard: React.FC<
                 </Tooltip>
               </Grid>
               <Grid item>
-                <Tooltip title={t("index-card.reset")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.reset`}
-                    onClick={() => {
-                      const confirmed = confirm(
-                        t("index-card.reset-confirmation")
-                      );
-                      if (confirmed) {
-                        indexCardManager.actions.reset();
-                      }
-                    }}
-                  >
-                    <RotateLeftIcon htmlColor={paper.primary} />
-                  </IconButton>
-                </Tooltip>
+                <FariPopper
+                  renderPopper={(renderProps) => {
+                    const cardsForSelect = props.allCards.filter((c) => {
+                      const isCurrent =
+                        c.id !== indexCardManager.state.indexCard.id;
+                      const isParent = c.id !== props.parentIndexCard?.id;
+                      return isCurrent && isParent;
+                    });
+                    return (
+                      <Box p="1rem" minWidth="200px">
+                        <FormControl fullWidth>
+                          <InputLabel>{t("index-card.move-to")}</InputLabel>
+
+                          <Select
+                            fullWidth
+                            native
+                            inputProps={{
+                              ["data-cy"]: "app.languages",
+                            }}
+                            onChange={(e) => {
+                              renderProps.handleOnClose();
+                              if (e.target.value) {
+                                props.onMoveTo(
+                                  indexCardManager.state.indexCard.id,
+                                  e.target.value as string
+                                );
+                              }
+                            }}
+                          >
+                            <option value="" />
+                            {cardsForSelect.map((card) => {
+                              const value = previewContentEditable({
+                                value: card.title,
+                              });
+                              return (
+                                <option key={card.id} value={card.id}>
+                                  {value}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </FormControl>
+                      </Box>
+                    );
+                  }}
+                  renderAnchor={(renderProps) => {
+                    return (
+                      <Tooltip title={t("index-card.move-to")}>
+                        <span>
+                          <IconButton
+                            disabled={hasSubCards}
+                            size="small"
+                            data-cy={`${props["data-cy"]}.move`}
+                            onClick={(event) => {
+                              renderProps.handleOnOpen(event);
+                            }}
+                          >
+                            <ControlCameraIcon
+                              htmlColor={
+                                hasSubCards ? paper.disabled : paper.primary
+                              }
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    );
+                  }}
+                />
               </Grid>
 
               <Grid item>
@@ -427,6 +548,8 @@ export const IndexCard: React.FC<
                 >
                   <IndexCard
                     indexCard={subCard}
+                    parentIndexCard={indexCardManager.state.indexCard}
+                    allCards={props.allCards}
                     id={`index-card-${subCard.id}`}
                     reactDndType={`${DragAndDropTypes.SceneIndexCardsSubCards}.${indexCardManager.state.indexCard.id}`}
                     canMove={true}
@@ -436,6 +559,12 @@ export const IndexCard: React.FC<
                     onRoll={props.onRoll}
                     indexCardHiddenRecord={props.indexCardHiddenRecord}
                     onToggleVisibility={props.onToggleVisibility}
+                    onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
+                      props.onMoveTo(
+                        idOfIndexCardToMove,
+                        idOfIndexCardToMoveTo
+                      );
+                    }}
                     onMove={(dragIndex, hoverIndex) => {
                       indexCardManager.actions.moveIndexCard(
                         dragIndex,
@@ -500,9 +629,8 @@ export const IndexCard: React.FC<
                                 >
                                   <DragIndicatorIcon
                                     className={css({
-                                      transition: theme.transitions.create(
-                                        "color"
-                                      ),
+                                      transition:
+                                        theme.transitions.create("color"),
                                     })}
                                     htmlColor={
                                       dndRenderProps.isOver
@@ -620,9 +748,8 @@ export const IndexCard: React.FC<
                         },
                       ];
 
-                      const result = diceManager.actions.roll(
-                        commandOptionList
-                      );
+                      const result =
+                        diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
                   >

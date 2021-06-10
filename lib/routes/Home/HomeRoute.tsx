@@ -15,7 +15,6 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import appIcon from "../../../images/blue/app.png";
 import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
 import { RouterLink } from "../../components/AppLink/AppLink";
@@ -26,6 +25,7 @@ import { Kofi } from "../../components/Kofi/Kofi";
 import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
+import { Images } from "../../constants/Images";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
@@ -89,7 +89,7 @@ export const HomeRoute: React.FC<{}> = () => {
           >
             <Grid container justify="center" alignItems="center" spacing={3}>
               <Grid item>
-                <img alt="Fari" width="70px" src={appIcon} />
+                <img alt="Fari" width="70px" src={Images.app} />
               </Grid>
               <Grid item>
                 <FateLabel

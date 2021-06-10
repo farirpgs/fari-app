@@ -38,7 +38,7 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   if (!peer.current) {
     const id = Id.generate();
-    if (env.context === "localhost") {
+    if (env.isDev) {
       peer.current = new Peer(id, {
         path: "/peer/connect",
         debug: options.debug ? 3 : 0,
