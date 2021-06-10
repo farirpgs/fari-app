@@ -115,6 +115,12 @@ export const FateCoreSpanish = makeCharacterSheetStory(CharacterTemplates.FateCo
 // prettier-ignore
 export const FateCondensedSpanish = makeCharacterSheetStory(CharacterTemplates.FateCondensedSpanish)
 // prettier-ignore
+export const FateCondensedTurkish = makeCharacterSheetStory(CharacterTemplates.FateCondensedTurkish)
+// prettier-ignore
+export const FateCondensedBrazilianPortuguese = makeCharacterSheetStory(CharacterTemplates.FateCondensedBrazilianPortuguese)
+// prettier-ignore
+export const FateAcceleratedBrazilianPortuguese = makeCharacterSheetStory(CharacterTemplates.FateAcceleratedBrazilianPortuguese)
+// prettier-ignore
 export const MärchenkriegerLOS = makeCharacterSheetStory(CharacterTemplates.MärchenkriegerLOS)
 // prettier-ignore
 export const TachyonSquadronCharacter = makeCharacterSheetStory(CharacterTemplates.TachyonSquadronCharacter)

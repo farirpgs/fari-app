@@ -1,0 +1,208 @@
+{
+  "id": "978b8be8-c1a8-4551-bf1e-eeb887d636bb",
+  "name": "",
+  "lastUpdated": 1623282214,
+  "wide": false,
+  "pages": [
+    {
+      "id": "3e7710ef-d781-445e-a993-52cd8bfd96cb",
+      "label": "Personagem",
+      "sections": {
+        "left": [
+          {
+            "id": "1ae6c144-f44a-4937-9609-bbb3641f65aa",
+            "blocks": [
+              {
+                "id": "27cf81ba-d292-48b9-8b2b-4a0e7c929b3d",
+                "type": "Text",
+                "meta": {},
+                "label": "Conceito",
+                "value": ""
+              },
+              {
+                "id": "7789a552-7c76-44e9-82c0-850d465d79c5",
+                "type": "Text",
+                "meta": {},
+                "label": "Problema",
+                "value": ""
+              },
+              {
+                "id": "67da31ce-6b43-49d3-9114-58f733b4d85b",
+                "type": "Text",
+                "meta": {},
+                "label": "Relações",
+                "value": ""
+              },
+              {
+                "id": "2540f054-1834-4cb8-8b69-25b16f49cefc",
+                "type": "Text",
+                "meta": {},
+                "label": "aspecto",
+                "value": ""
+              },
+              {
+                "id": "a42066eb-08b3-4b91-b940-214106fd047f",
+                "type": "Text",
+                "meta": {},
+                "label": "aspecto",
+                "value": ""
+              }
+            ],
+            "label": "Aspectos",
+            "visibleOnCard": true
+          },
+          {
+            "id": "cce54cbc-1686-4e08-beae-a0b2ac7212c8",
+            "blocks": [
+              {
+                "id": "aa82413c-bd42-4485-84ac-ae606a15dd96",
+                "type": "Text",
+                "meta": {},
+                "label": "façanha #1",
+                "value": ""
+              },
+              {
+                "id": "45c1eb28-de40-4258-9a2e-21ff9251d46c",
+                "type": "Text",
+                "meta": {},
+                "label": "façanha #2",
+                "value": ""
+              },
+              {
+                "id": "49e8cf78-4756-4ed9-b4ed-059a05861d7c",
+                "type": "Text",
+                "meta": {},
+                "label": "façanha #3",
+                "value": ""
+              }
+            ],
+            "label": "façanhas &amp; extras"
+          },
+          {
+            "id": "2878f3cd-f398-4ebe-8b7c-e88ba3a24d19",
+            "blocks": [
+              {
+                "id": "86251724-8ab9-43b6-8e41-8f2521e54aca",
+                "type": "Text",
+                "meta": {},
+                "label": "Notas",
+                "value": ""
+              }
+            ],
+            "label": "outros"
+          },
+          {
+            "id": "6ad3dccd-bf23-4ef6-9d64-cb6483ca1c37",
+            "blocks": [
+              {
+                "id": "0b90651e-2770-46ae-8d3b-2cd805e5ec8d",
+                "meta": { "isMainPointCounter": true, "max": "3" },
+                "type": "PointCounter",
+                "label": "pontos de destino",
+                "value": "3"
+              }
+            ],
+            "label": "pontos de destino"
+          }
+        ],
+        "right": [
+          {
+            "id": "b5be37b4-dd0a-4f4d-95c0-4da368d79995",
+            "blocks": [
+              {
+                "id": "fbbff2bd-9fb4-4008-8870-e1932ed51b84",
+                "type": "SlotTracker",
+                "meta": {},
+                "label": "Stress",
+                "value": [
+                  { "checked": false, "label": "1" },
+                  { "checked": false, "label": "2" },
+                  { "checked": false, "label": "3" }
+                ]
+              }
+            ],
+            "label": "Stress"
+          },
+          {
+            "id": "85204bb7-7728-49c1-b6dd-598c95d08cda",
+            "blocks": [
+              {
+                "id": "115dd50b-5aff-4bb2-b6eb-f11bbc3e6cac",
+                "type": "Text",
+                "meta": { "checked": false },
+                "label": "suave",
+                "value": ""
+              },
+              {
+                "id": "01335a73-bfb8-4b1d-a690-3a60887ef73e",
+                "type": "Text",
+                "meta": { "checked": false },
+                "label": "Moderada",
+                "value": ""
+              },
+              {
+                "id": "8e54f6e8-8690-40db-8a68-b6186c3103c7",
+                "type": "Text",
+                "meta": { "checked": false },
+                "label": "Severa",
+                "value": ""
+              }
+            ],
+            "label": "Consequências"
+          },
+          {
+            "id": "df12b546-f36c-45e9-b216-6c525f483b29",
+            "blocks": [
+              {
+                "id": "40627fba-04ec-46cc-8800-067ee97dffa7",
+                "type": "Skill",
+                "meta": { "commands": ["4dF"] },
+                "label": "Cuidadoso",
+                "value": ""
+              },
+              {
+                "id": "d4ceba56-2a6b-42a1-89ba-0cb264cb5b2d",
+                "type": "Skill",
+                "meta": { "commands": ["4dF"] },
+                "label": "esperto",
+                "value": ""
+              },
+              {
+                "id": "05a24805-f6ef-4b97-b4a4-69fbaa665719",
+                "type": "Skill",
+                "meta": { "commands": ["4dF"] },
+                "label": "forte",
+                "value": ""
+              },
+              {
+                "id": "21239aed-4043-4b3e-8191-7a2b7317c9df",
+                "type": "Skill",
+                "meta": { "commands": ["4dF"] },
+                "label": "estiloso",
+                "value": ""
+              },
+              {
+                "id": "dd592ceb-9867-4f90-a049-e008dae773f3",
+                "type": "Skill",
+                "meta": { "commands": ["4dF"] },
+                "label": "ágil",
+                "value": ""
+              },
+              {
+                "id": "f93438d2-d410-40ca-b426-c7cec1dd23e8",
+                "type": "Skill",
+                "meta": { "commands": ["4dF"] },
+                "label": "Sorrateiro",
+                "value": ""
+              }
+            ],
+            "label": "abordagens",
+            "visibleOnCard": true
+          }
+        ]
+      }
+    }
+  ],
+  "template": "FateAccelerated",
+  "version": 4
+}

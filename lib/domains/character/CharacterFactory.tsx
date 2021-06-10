@@ -210,6 +210,24 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
+      [CharacterTemplates.FateCondensedTurkish]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCondensedTurkish.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.FateCondensedBrazilianPortuguese]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCondensedBrazilianPortuguese.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.FateAcceleratedBrazilianPortuguese]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateAcceleratedBrazilianPortuguese.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       [CharacterTemplates.TachyonSquadronCharacter]: async () => {
         const jsonData = await import(
           "./character-templates/TachyonSquadronCharacter.json"
@@ -403,26 +421,26 @@ export const CharacterFactory = {
 
 export function migrateV1CharacterToV2(v1: IV1Character): IV2Character {
   if (v1.version !== 1) {
-    return (v1 as unknown) as IV2Character;
+    return v1 as unknown as IV2Character;
   }
 
-  return (produce<IV1Character, IV2Character>(v1, (draft) => {
+  return produce<IV1Character, IV2Character>(v1, (draft) => {
     // stress box values used to be booleans, now they are `{ checked?: boolean; label: string }`
     draft.stressTracks.forEach((s) => {
       s.value = s.value.map((box, index) => {
         return {
-          checked: (box as unknown) as boolean,
+          checked: box as unknown as boolean,
           label: `${index + 1}`,
         };
       });
     });
     draft.version = 2;
-  }) as unknown) as IV2Character;
+  }) as unknown as IV2Character;
 }
 
 export function migrateV2CharacterToV3(v2: IV2Character): IV3Character {
   if (v2.version !== 2) {
-    return (v2 as unknown) as IV3Character;
+    return v2 as unknown as IV3Character;
   }
 
   const sections: Array<IV3Section> = [];
@@ -566,7 +584,7 @@ export function migrateV2CharacterToV3(v2: IV2Character): IV3Character {
 
 export function migrateV3CharacterToV4(v3: IV3Character): ICharacter {
   if (v3.version !== 3) {
-    return (v3 as unknown) as ICharacter;
+    return v3 as unknown as ICharacter;
   }
 
   const v4: ICharacter = {
@@ -575,34 +593,32 @@ export function migrateV3CharacterToV4(v3: IV3Character): ICharacter {
     group: v3.group,
     lastUpdated: v3.lastUpdated,
     wide: false,
-    pages: v3.pages.map(
-      (page): IPage => {
-        const leftSections = page.sections.filter(
-          (s) => s.position === V3Position.Left
-        );
-        const rightSections = page.sections.filter(
-          (s) => s.position === V3Position.Right
-        );
-        return {
-          id: page.id,
-          label: page.label,
-          sections: {
-            left: leftSections.map((s) => ({
-              id: s.id,
-              blocks: s.blocks,
-              label: s.label,
-              visibleOnCard: s.visibleOnCard,
-            })),
-            right: rightSections.map((s) => ({
-              id: s.id,
-              blocks: s.blocks,
-              label: s.label,
-              visibleOnCard: s.visibleOnCard,
-            })),
-          },
-        };
-      }
-    ),
+    pages: v3.pages.map((page): IPage => {
+      const leftSections = page.sections.filter(
+        (s) => s.position === V3Position.Left
+      );
+      const rightSections = page.sections.filter(
+        (s) => s.position === V3Position.Right
+      );
+      return {
+        id: page.id,
+        label: page.label,
+        sections: {
+          left: leftSections.map((s) => ({
+            id: s.id,
+            blocks: s.blocks,
+            label: s.label,
+            visibleOnCard: s.visibleOnCard,
+          })),
+          right: rightSections.map((s) => ({
+            id: s.id,
+            blocks: s.blocks,
+            label: s.label,
+            visibleOnCard: s.visibleOnCard,
+          })),
+        },
+      };
+    }),
     template: CharacterTemplates.FateCondensed,
     playedDuringTurn: v3.playedDuringTurn,
     version: 4,
