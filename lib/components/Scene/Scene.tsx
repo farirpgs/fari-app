@@ -548,7 +548,6 @@ export const Session: React.FC<IProps> = (props) => {
               payload: updatedCharacter,
             });
           }
-          setCharacterDialogPlayerId(undefined);
         }}
         onClose={() => {
           setCharacterDialogPlayerId(undefined);
