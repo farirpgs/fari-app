@@ -49,6 +49,7 @@ function StorybookIndexCard(props: {
       <Box width={props.width}>
         <IndexCard
           type="public"
+          allCards={[]}
           reactDndIndex={0}
           canMove={true}
           reactDndType={"storybook"}
@@ -66,6 +67,7 @@ function StorybookIndexCard(props: {
             handleOnNewRoll(diceRollResult);
           }}
           onPoolClick={handleOnPoolClick}
+          onMoveTo={action("onMoveTo") as any}
           onChange={action("onChange") as any}
           onMove={action("onMove") as any}
           onRemove={action("onRemove") as any}
