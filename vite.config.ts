@@ -4,6 +4,11 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    "process.env.npm_package_version": JSON.stringify(
+      process.env.npm_package_version
+    ),
+  },
   plugins: [
     reactRefresh(),
     legacy({
