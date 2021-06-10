@@ -7,7 +7,7 @@ describe("/characters", () => {
       cy.visit("/");
 
       // new character
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.characters").click();
       Fari.get("my-binder.folders.characters.new").click();
 
@@ -130,13 +130,13 @@ describe("/characters", () => {
 
       cy.contains("Luke Skywalker").click();
 
-      Fari.get("session.tabs.characters").click();
-      Fari.get("character-card").contains("Luke Skywalker");
-      Fari.get("character-card.open-character-sheet").click();
-      Fari.get("character-dialog.close").click();
+      // Fari.get("session.tabs.characters").click();
+      // Fari.get("character-card").contains("Luke Skywalker");
+      // Fari.get("character-card.open-character-sheet").click();
+      // Fari.get("character-dialog.close").click();
 
-      // character card roll skill
-      Fari.get("character-card.section.Skills.block.Athletics").click();
+      // // character card roll skill
+      // Fari.get("character-card.section.Skills.block.Athletics").click();
       Fari.get("scene.player-row.gm-npc-0")
         .find('[data-cy="dice"]')
         .invoke("attr", "data-cy-value")
@@ -160,7 +160,7 @@ describe("/characters", () => {
       cy.visit("/");
 
       // new character
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.characters").click();
       Fari.get("my-binder.folders.characters.new").click();
       Fari.get("character-dialog.name").clear().type("Luke");
@@ -184,7 +184,7 @@ describe("/characters", () => {
       cy.visit("/");
 
       // new character
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.characters").click();
       Fari.get("my-binder.folders.characters.new").click();
       Fari.get("character-dialog.name").type("Luke Skywalker");

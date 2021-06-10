@@ -1,6 +1,6 @@
 import { Fari } from "lib/util/Fari";
 
-describe("/play-offline", () => {
+describe.only("/play-offline", () => {
   it("Should roll dice", () => {
     Fari.start();
     Fari.get("home.play-offline").click();

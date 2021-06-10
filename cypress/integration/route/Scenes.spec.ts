@@ -7,7 +7,7 @@ describe("/scenes", () => {
       cy.visit("/");
 
       // new scene
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.scenes").click();
       Fari.get("my-binder.folders.scenes.new").click();
 
