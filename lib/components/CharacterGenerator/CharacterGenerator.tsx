@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
+import Chip from "@material-ui/core/Chip";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { lighten, useTheme } from "@material-ui/core/styles";
@@ -10,88 +11,46 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import { Heading } from "../Heading/Heading";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { Page } from "../Page/Page";
-
-function useRandomFromList<T extends { label: string }>(list: Array<T>) {
-  const [state, setState] = useState<T>();
-
-  function pick() {
-    const newElement = getRandomFromList(list);
-    if (newElement) {
-      setState(newElement);
-    }
-  }
-
-  function getRandomFromList(list: Array<T>): T {
-    const listWithoutCurrentElement = list.filter(
-      (l) => l.label !== state?.label
-    );
-    const length = listWithoutCurrentElement.length;
-    const index = Math.trunc(Math.random() * length);
-    const newPick = listWithoutCurrentElement[index];
-    return newPick;
-  }
-
-  return [state, pick] as const;
-}
+import { Tags, useCards } from "./hooks/useCards";
+import { useRandomFromList } from "./hooks/useRandomFromList";
 
 export function CharacterGenerator() {
-  /**
-   * ORIGIN (place) / BACKGROUND (backgrounds)
-   * RELATIONSHIP (people) / CHARACTER (archetype) / RELATIONSHIP (people)
-   * PAST (event) / FUTURE (event)
-   *
-   */
-
-  type Card = { label: string; icon?: string };
-
-  const archetypes: Array<Card> = [
-    { label: "Rogue" },
-    { label: "Warrior" },
-    // { label: "Brother" },
-  ];
-  const backgrounds: Array<Card> = [];
-  const faces: Array<Card> = [
-    { label: "Mother" },
-    { label: "Father" },
-    { label: "Brother" },
-    { label: "Sister" },
-    { label: "Uncle" },
-    { label: "Aunt" },
-    { label: "Master" },
-    { label: "Apprentice" },
-  ];
-  const places: Array<Card> = [
-    { label: "River" },
-    // {label:"Mountain"},
-  ];
-  const events: Array<Card> = [];
-
   const theme = useTheme();
-
-  const [archetype, pickArchetype] = useRandomFromList(archetypes);
-  const [origin, pickOrigin] = useRandomFromList(places);
-  const [lastAdventure, setLastAdventure] = useRandomFromList(backgrounds);
-  const [firstRelationship, pickFirstRelationship] = useRandomFromList(faces);
-  const [firstRelationshipEvent, pickFirstRelationshipEvent] =
-    useRandomFromList(events);
-  const [secondRelationship, pickSecondRelationship] = useRandomFromList(faces);
-  const [secondRelationshipEvent, pickSecondRelationshipEvent] =
-    useRandomFromList(events);
+  const cardManager = useCards();
 
   return (
     <Page>
       <Container maxWidth="xl">
+        <Box>
+          <Grid container justify="center" spacing={2}>
+            {Object.keys(Tags).map((tag) => {
+              return (
+                <Grid item key={tag}>
+                  <Chip
+                    variant={
+                      cardManager.state.tags.includes(tag as unknown as Tags)
+                        ? "default"
+                        : "outlined"
+                    }
+                    color="primary"
+                    label={tag}
+                    onClick={() => {
+                      cardManager.actions.toggle(tag as unknown as Tags);
+                    }}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
         <Box pb="4rem">
           <Heading title={"Who you are"} />
           <Grid container justify="center" spacing={8}>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  pickArchetype();
-                }}
-                background={theme.palette.primary.main}
-                back={<>{renderCardContent("Archetype")}</>}
-                front={<>{renderCardContent(archetype?.label, "Archetype")}</>}
+              <GeneratorCard
+                color={theme.palette.primary.main}
+                label={"Archetype"}
+                list={cardManager.state.archetypes}
               />
             </Grid>
           </Grid>
@@ -100,27 +59,17 @@ export function CharacterGenerator() {
           <Heading title={"Where You Come From"} />
           <Grid container justify="center" spacing={8}>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  pickOrigin();
-                }}
-                background={IndexCardColor.darkBlue}
-                back={<>{renderCardContent("Origin")}</>}
-                front={<>{renderCardContent(origin?.label, "Origin")}</>}
+              <GeneratorCard
+                color={IndexCardColor.darkBlue}
+                label={"Origin"}
+                list={cardManager.state.places}
               />
             </Grid>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  setLastAdventure();
-                }}
-                background={IndexCardColor.darkBlue}
-                back={<>{renderCardContent("Last Adventure")}</>}
-                front={
-                  <>
-                    {renderCardContent(lastAdventure?.label, "Last Adventure")}
-                  </>
-                }
+              <GeneratorCard
+                color={IndexCardColor.darkBlue}
+                label={"story"}
+                list={cardManager.state.backgrounds}
               />
             </Grid>
           </Grid>
@@ -129,65 +78,83 @@ export function CharacterGenerator() {
           <Heading title={"Faces"} />
           <Grid container justify="center" spacing={8}>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  pickFirstRelationshipEvent();
-                }}
-                background={IndexCardColor.orange}
-                back={<>{renderCardContent("Event")}</>}
-                front={
-                  <>
-                    {renderCardContent(firstRelationshipEvent?.label, "Event")}
-                  </>
-                }
+              <GeneratorCard
+                color={IndexCardColor.orange}
+                label={"Event"}
+                list={cardManager.state.events}
               />
             </Grid>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  pickFirstRelationship();
-                }}
-                background={IndexCardColor.orange}
-                back={<>{renderCardContent("Relationship")}</>}
-                front={
-                  <>
-                    {renderCardContent(
-                      firstRelationship?.label,
-                      "Relationship"
-                    )}
-                  </>
-                }
+              <GeneratorCard
+                color={IndexCardColor.orange}
+                label={"Relationship"}
+                list={cardManager.state.faces}
               />
             </Grid>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  pickSecondRelationship();
-                }}
-                background={IndexCardColor.purple}
-                back={<>{renderCardContent("Relationship")}</>}
-                front={
-                  <>
-                    {renderCardContent(
-                      secondRelationship?.label,
-                      "Relationship"
-                    )}
-                  </>
-                }
+              <GeneratorCard
+                color={IndexCardColor.yellow}
+                label={"Relationship"}
+                list={cardManager.state.faces}
               />
             </Grid>
             <Grid item>
-              <Card
-                onFlip={() => {
-                  pickSecondRelationshipEvent();
-                }}
-                background={IndexCardColor.purple}
-                back={<>{renderCardContent("Event")}</>}
-                front={
-                  <>
-                    {renderCardContent(secondRelationshipEvent?.label, "Event")}
-                  </>
-                }
+              <GeneratorCard
+                color={IndexCardColor.yellow}
+                label={"Event"}
+                list={cardManager.state.events}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+        <Box pb="4rem">
+          <Heading title={"Past Issue"} />
+          <Grid container justify="center" spacing={8}>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.brown}
+                label={"What"}
+                list={cardManager.state.events}
+              />
+            </Grid>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.brown}
+                label={"Who"}
+                list={cardManager.state.faces}
+              />
+            </Grid>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.brown}
+                label={"Where"}
+                list={cardManager.state.places}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+        <Box pb="4rem">
+          <Heading title={"Impending Issue"} />
+          <Grid container justify="center" spacing={8}>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.teal}
+                label={"What"}
+                list={cardManager.state.events}
+              />
+            </Grid>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.teal}
+                label={"Who"}
+                list={cardManager.state.faces}
+              />
+            </Grid>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.teal}
+                label={"Where"}
+                list={cardManager.state.places}
               />
             </Grid>
           </Grid>
@@ -195,6 +162,14 @@ export function CharacterGenerator() {
       </Container>
     </Page>
   );
+}
+
+function GeneratorCard<T extends { label: string }>(props: {
+  list: Array<T>;
+  color: string;
+  label: JSX.Element | string;
+}) {
+  const [state, pick] = useRandomFromList(props.list);
 
   function renderCardContent(
     title: JSX.Element | string | undefined,
@@ -254,11 +229,24 @@ export function CharacterGenerator() {
       </Box>
     );
   }
+
+  return (
+    <Card
+      onFlip={() => {
+        pick();
+      }}
+      disabled={props.list.length === 0}
+      background={props.color}
+      back={<>{renderCardContent(props.label)}</>}
+      front={<>{renderCardContent(state?.label, props.label)}</>}
+    />
+  );
 }
 
 function Card(props: {
   front: JSX.Element;
   back: JSX.Element;
+  disabled?: boolean;
   onFlip?(): void;
   background: string;
 }) {
@@ -278,6 +266,9 @@ function Card(props: {
   return (
     <div
       onClick={() => {
+        if (props.disabled) {
+          return;
+        }
         setFlip((f) => {
           const isFlipped = f;
           return !isFlipped;
@@ -288,7 +279,8 @@ function Card(props: {
         width: "300px",
         height: "400px",
         perspective: "1000px", // 3d effect
-        cursor: "pointer",
+        cursor: props.disabled ? "default" : "pointer",
+        filter: props.disabled ? "grayscale(100%)" : undefined,
       })}
     >
       <div
@@ -300,6 +292,7 @@ function Card(props: {
           transition: "transform 0.8s",
           transformStyle: "preserve-3d",
           border: `8px double ${backBackground}`,
+
           borderRadius: "8px",
           boxShadow: theme.shadows[2],
           transform: !flip ? "rotateY(180deg)" : undefined,

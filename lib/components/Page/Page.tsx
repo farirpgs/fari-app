@@ -522,6 +522,11 @@ export const Page: React.FC<{
                         icon: <Icons.ThrowDice />,
                       },
                       {
+                        to: "/character-generator",
+                        label: "Character Generator",
+                        icon: <LocalLibraryIcon />,
+                      },
+                      {
                         to: "/oracle",
                         label: t("menu.oracle"),
                         icon: <Icons.EyeIcon />,
