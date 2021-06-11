@@ -33,6 +33,9 @@ jobs:
       # Build
       - name: Build
         run: CONTEXT=production npm run build
+        env:
+          VITE_GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER
+          VITE_GITHUB_SHA: GITHUB_SHA
       # Validate
       - name: Validate
         run: npm run validate

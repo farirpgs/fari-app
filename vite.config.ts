@@ -8,8 +8,6 @@ export default defineConfig({
     "process.env.npm_package_version": JSON.stringify(
       process.env.npm_package_version
     ),
-    "process.env.COMMIT_ID": JSON.stringify(process.env.COMMIT_ID),
-    "process.env.BUILD_NUMBER": JSON.stringify(process.env.BUILD_NUMBER),
     "process.env.JEST_WORKER_ID": JSON.stringify(false),
   },
   plugins: [
