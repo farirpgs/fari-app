@@ -54,6 +54,7 @@ export function useCards() {
 }
 
 const Archetypes: Array<Card> = [
+  //#region
   { label: "Artificer", tags: [Tags.Fantasy] },
   { label: "Barbarian", tags: [Tags.Fantasy] },
   { label: "Bard", tags: [Tags.Fantasy] },
@@ -69,8 +70,15 @@ const Archetypes: Array<Card> = [
   { label: "Sorcerer", tags: [Tags.Fantasy] },
   { label: "Warlock", tags: [Tags.Fantasy] },
   { label: "Wizard", tags: [Tags.Fantasy] },
+  //#endregion
+
   { label: "Pilot", tags: [Tags.SciFi] },
-  { label: "Engineer", tags: [Tags.SciFi] },
+  { label: "Technician", tags: [Tags.SciFi] },
+  { label: "Smuggler", tags: [Tags.SciFi] },
+  { label: "Bounty Hunter", tags: [Tags.SciFi] },
+  { label: "Soldier", tags: [Tags.SciFi] },
+  { label: "Colonist", tags: [Tags.SciFi] },
+  { label: "Explorer", tags: [Tags.SciFi] },
 ];
 
 const Acenstry: Array<Card> = [
@@ -87,6 +95,7 @@ const Acenstry: Array<Card> = [
 ];
 
 const Backgrounds: Array<Card> = [
+  //#region
   { label: "Investigator" },
   { label: "Artist" },
   { label: "Ghost" },
@@ -113,27 +122,44 @@ const Backgrounds: Array<Card> = [
   { label: "Deity" },
   { label: "Politician" },
   { label: "Diplomatic" },
+  //#endregion
 ];
+
 const Faces: Array<Card> = [
+  //#region
+  // { label: "Parent" },
+  // { label: "Sibling" },
+  // { label: "Child" },
   { label: "Mother" },
   { label: "Father" },
   { label: "Brother" },
   { label: "Sister" },
+  { label: "Son" },
+  { label: "Daughter" },
   { label: "Uncle" },
   { label: "Aunt" },
   { label: "Master" },
   { label: "Apprentice" },
   { label: "Ally" },
   { label: "Ennemy" },
-  { label: "Son" },
-  { label: "Daughter" },
+  { label: "Child" },
   { label: "Lover" },
   { label: "Former Lover" },
   { label: "Chief" },
   { label: "Follower" },
+  //#endregion
+  { label: "Best Friend" },
+  { label: "Admirer" },
+  { label: "Rival" },
+  { label: "Guide" },
+  { label: "Mentor" },
+  // Dealer, Secret Lover, Best Friend, Childhood Friend, School Rival, Blast from the Past, Soulmate,
+  // Boss, Employee, Former Teammate, Total Stranger, Industry Mogul,
+  // Local Business Person, Local Law Enforcement,
+  // National Law Enforcement, Handler, Informant, Fence, Fixer
 ];
 const Places: Array<Card> = [
-  { label: "River" },
+  //#region
   { label: "Forest" },
   { label: "Mountain" },
   { label: "Village" },
@@ -142,7 +168,7 @@ const Places: Array<Card> = [
   { label: "Cave" },
   { label: "Ruins" },
   { label: "Advanced Civilization" },
-  { label: "Cemetary" },
+  { label: "Graveyard" },
   { label: "Temple" },
   { label: "Ship" },
   { label: "Port" },
@@ -155,11 +181,38 @@ const Places: Array<Card> = [
   { label: "Inn" },
   { label: "Home" },
   { label: "Sea" },
+  { label: "Lake" },
+  { label: "River" },
   { label: "Island" },
   { label: "Dungeon" },
   { label: "Prison" },
+  //#endregion
+
+  { label: "Along the Road" },
+  { label: "Sewers" },
+  { label: "Tunnels" },
+  { label: "Swamps" },
+  { label: "Forest Clearing" },
+  { label: "Overgrown Forest" },
+
+  { label: "Abandoned Tower", tags: [Tags.Fantasy] },
+  { label: "Ritual Chamber", tags: [Tags.Fantasy] },
+  { label: "Fae Forest", tags: [Tags.Fantasy] },
+  { label: "Spirit Forest", tags: [Tags.Fantasy] },
+  { label: "In Between Worlds", tags: [Tags.Fantasy] },
+  { label: "Alchemist Lab", tags: [Tags.Fantasy] },
+  { label: "Antiques Shop", tags: [Tags.Fantasy] },
+  { label: "Forge", tags: [Tags.Fantasy] },
+  { label: "Place of Worship", tags: [Tags.Fantasy] },
+  { label: "Stables", tags: [Tags.Fantasy] },
+  { label: "Public Square", tags: [Tags.Fantasy] },
+  { label: "Gallows", tags: [Tags.Fantasy] },
+  { label: "Throne Room", tags: [Tags.Fantasy] },
+  { label: "Behind Enemy Lines ", tags: [Tags.Fantasy] },
+  { label: "Crystal Clear Lake", tags: [Tags.Fantasy] },
 ];
 const Events: Array<Card> = [
+  //#region
   { label: "Rise" },
   { label: "Fall" },
   { label: "Be Helped" },
@@ -188,4 +241,5 @@ const Events: Array<Card> = [
   { label: "Corruption" },
   { label: "Reward" },
   { label: "Revenge" },
+  //#endregion
 ];

@@ -26,7 +26,7 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.content").type("There is no war in Ba Sing Se");
 
       // remove second
-      Fari.get("scene.aspect.1.reset").click({ force: true });
+      // Fari.get("scene.aspect.1.reset").click({ force: true });
       Fari.get("scene.aspect.1.remove").click({ force: true });
 
       // initiative
