@@ -37,7 +37,7 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import MarkdownElement from "../MarkdownElement/MarkdownElement";
 import { Page } from "../Page/Page";
 import { PageMeta } from "../PageMeta/PageMeta";
-import { IMarkdownIndex, IMarkdownIndexes } from "./domains/Markdown";
+import { IDocumentIndex, IDocumentIndexes } from "./domains/DocumentProcessor";
 import { useDocNavigation } from "./hooks/useDocNavigation";
 import { ILoadFunction, useMarkdownFile } from "./hooks/useMarkdownFile";
 import { useMarkdownPage } from "./hooks/useMarkdownPage";
@@ -219,7 +219,7 @@ export const Doc: React.FC<IProps> = (props) => {
     }
   }
 
-  function handleGoToIndex(page: IMarkdownIndex) {
+  function handleGoToIndex(page: IDocumentIndex) {
     if (page.url) {
       history.push(page.url);
     }
@@ -632,7 +632,7 @@ export const Doc: React.FC<IProps> = (props) => {
             }
           }}
           onChange={(event, newValue) => {
-            const label = (newValue as IMarkdownIndex)?.id;
+            const label = (newValue as IDocumentIndex)?.id;
             if (label) {
               const index = markdownIndexes.flat.find(
                 (index) => label === index.id
@@ -738,7 +738,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
 export const DocSideBar: React.FC<{
   currentPage: string | undefined;
-  markdownIndexes: IMarkdownIndexes;
+  markdownIndexes: IDocumentIndexes;
   sideBar: IDocSidebar | undefined;
   sideBarOptions: IDoceSideBarOptions | undefined;
   defaultSideBarCategory?: string;
@@ -897,7 +897,7 @@ export const DocSideBar: React.FC<{
 
 export const DocTableOfContents: React.FC<{
   currentPage: string | undefined;
-  markdownIndexes: IMarkdownIndexes;
+  markdownIndexes: IDocumentIndexes;
 }> = (props) => {
   const theme = useTheme();
   const params = new URLSearchParams(location.search);
@@ -909,7 +909,7 @@ export const DocTableOfContents: React.FC<{
 
   return <Box>{renderTableOfContentItem(currentIndex)}</Box>;
 
-  function renderTableOfContentItem(index: IMarkdownIndex | undefined) {
+  function renderTableOfContentItem(index: IDocumentIndex | undefined) {
     if (!index) {
       return null;
     }

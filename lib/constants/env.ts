@@ -13,5 +13,3 @@ export const env = {
   isDev: isDev,
   isTest,
 };
-
-console.debug("env", JSON.stringify({ env, vite: import.meta.env }, null, 2));

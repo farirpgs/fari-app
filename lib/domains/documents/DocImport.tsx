@@ -1,56 +1,66 @@
+import axios from "axios";
+
+async function getDoc(getMarkdownPromise: Promise<typeof import("*?url")>) {
+  const url = (await getMarkdownPromise).default;
+  const docResponse = await axios.get(url);
+  return docResponse.data;
+}
+
+/**
+ * Import HTML documents generated from the original markdown files by `eleventy`
+ */
 export const DocImport = {
   FateCondensed: () => {
-    return import("../../../docs/fate-condensed.md?raw");
+    return getDoc(import("../../../_site/fate-condensed/index.html?url"));
   },
   FateCore: () => {
-    return import("../../../docs/fate-core.md?raw");
+    return getDoc(import("../../../_site/fate-core/index.html?url"));
   },
   FateAccelerated: () => {
-    return import("../../../docs/fate-accelerated.md?raw");
+    return getDoc(import("../../../_site/fate-accelerated/index.html?url"));
   },
   FateAdversaryToolkit: () => {
-    return import("../../../docs/fate-adversary-toolkit.md?raw");
+    return getDoc(
+      import("../../../_site/fate-adversary-toolkit/index.html?url")
+    );
   },
   FateSystemToolkit: () => {
-    return import("../../../docs/fate-system-toolkit.md?raw");
+    return getDoc(import("../../../_site/fate-system-toolkit/index.html?url"));
   },
   FateStunts: () => {
-    return import("../../../docs/fate-stunts.md?raw");
+    return getDoc(import("../../../_site/fate-stunts/index.html?url"));
   },
   SeelieSquire: () => {
-    return import("../../../docs/seelie-squire.md?raw");
+    return getDoc(import("../../../_site/seelie-squire/index.html?url"));
   },
   SceneCheckist: () => {
-    return import("../../../docs/scene-checklist.md?raw");
+    return getDoc(import("../../../_site/scene-checklist/index.html?url"));
   },
   CheatSheet: () => {
-    return import("../../../docs/cheat-sheet.md?raw");
+    return getDoc(import("../../../_site/cheat-sheet/index.html?url"));
   },
   Dials: () => {
-    return import("../../../docs/dials.md?raw");
+    return getDoc(import("../../../_site/dials/index.html?url"));
   },
   SuccessWithStyle: () => {
-    return import("../../../docs/success-with-style.md?raw");
+    return getDoc(import("../../../_site/success-with-style/index.html?url"));
   },
   FariWiki: () => {
-    return import("../../../docs/fari-wiki.md?raw");
+    return getDoc(import("../../../_site/fari-wiki/index.html?url"));
   },
   Blog: () => {
-    return import("../../../docs/blog.md?raw");
+    return getDoc(import("../../../_site/blog/index.html?url"));
   },
   Test: () => {
-    return import("../../../docs/test.md?raw");
+    return getDoc(import("../../../_site/test/index.html?url"));
   },
   TestEmpty: () => {
-    return import("../../../docs/test-empty.md?raw");
-  },
-  M: () => {
-    return import("../../../docs/m.md?raw");
+    return getDoc(import("../../../_site/test-empty/index.html?url"));
   },
   Changelog: () => {
-    return import("../../../CHANGELOG.md?raw");
+    return getDoc(import("../../../_site/CHANGELOG/index.html?url"));
   },
   FateCondensedPtBr: () => {
-    return import("../../../docs/fate-condensed-pt-br.md?raw");
+    return getDoc(import("../../../_site/fate-condensed-pt-br/index.html?url"));
   },
 };

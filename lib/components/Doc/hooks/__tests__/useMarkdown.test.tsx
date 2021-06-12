@@ -443,10 +443,7 @@ const wrapper = (props: { children?: React.ReactNode }): JSX.Element => {
 };
 
 function makeLoadFunction(markdownFile: string | undefined) {
-  return async () =>
-    new Promise<{ default: string }>((r) =>
-      r({ default: markdownFile as string })
-    );
+  return async () => new Promise<string>((r) => r(markdownFile as string));
 }
 
 const anUndefinedMarkdownFile = makeLoadFunction(undefined);

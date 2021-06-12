@@ -1,43 +1,51 @@
 import kebabCase from "lodash/kebabCase";
-import marked from "marked";
 import { previewContentEditable } from "../../ContentEditable/ContentEditable";
 
-export type IMarkdownIndexes = {
-  tree: Array<IMarkdownIndex>;
-  flat: Array<IMarkdownIndex>;
+export type IDocumentIndexes = {
+  tree: Array<IDocumentIndex>;
+  flat: Array<IDocumentIndex>;
 };
 
-export type IMarkdownIndex = {
+export type IDocumentIndex = {
   id: string;
   label: string;
   preview: string;
   level: number;
   url: string | undefined;
   pageLabel: string | undefined;
-  children: Array<IMarkdownIndex>;
+  children: Array<IDocumentIndex>;
 };
 
-export const Markdown = {
-  process(props: { markdown: string; prefix: string }): {
+export const DocumentProcessor = {
+  process(props: { html: string; prefix: string }): {
     dom: HTMLDivElement;
-    markdownIndexes: IMarkdownIndexes;
+    documentIndexes: IDocumentIndexes;
   } {
-    const html = props.markdown ? marked(props.markdown) : "";
+    const html = props.html || "";
     const dom = document.createElement("div");
     dom.innerHTML = html;
 
     const allHeaders = dom.querySelectorAll("h1,h2,h3,h4,h5,h6");
 
-    const treeReferences: Array<IMarkdownIndex> = [];
-    const flatReferences: Array<IMarkdownIndex> = [];
+    const headerIdCounts: Record<string, number> = {};
+    allHeaders.forEach((h) => {
+      const id = kebabCase(h.textContent ?? "");
+      const count = headerIdCounts[id] ?? 0;
+      const newCount = count + 1;
+      h.id = count === 0 ? id : `${id}-${newCount}`;
+      headerIdCounts[id] = newCount;
+    });
 
-    let latestH1: IMarkdownIndex | undefined;
-    let latestH2: IMarkdownIndex | undefined;
-    let latestParent: IMarkdownIndex | undefined;
+    const treeReferences: Array<IDocumentIndex> = [];
+    const flatReferences: Array<IDocumentIndex> = [];
+
+    let latestH1: IDocumentIndex | undefined;
+    let latestH2: IDocumentIndex | undefined;
+    let latestParent: IDocumentIndex | undefined;
 
     try {
       allHeaders.forEach((element, index) => {
-        const currentNode: IMarkdownIndex = getNode({
+        const currentNode: IDocumentIndex = getNode({
           element: element,
           prefix: props.prefix,
           latestH1: latestH1,
@@ -83,7 +91,7 @@ export const Markdown = {
     } catch (error) {
       return {
         dom: document.createElement("div"),
-        markdownIndexes: {
+        documentIndexes: {
           flat: [],
           tree: [],
         },
@@ -98,12 +106,11 @@ export const Markdown = {
       element.append(anchor);
     });
 
-    const markdownIndexes: IMarkdownIndexes = {
+    const documentIndexes: IDocumentIndexes = {
       tree: treeReferences,
       flat: flatReferences,
     };
-
-    return { dom, markdownIndexes };
+    return { dom, documentIndexes: documentIndexes };
   },
   getPage(props: {
     prefix: string;
@@ -115,9 +122,8 @@ export const Markdown = {
     const pageElements =
       props.dom?.querySelectorAll(pageSelector) ??
       ([] as unknown as NodeListOf<Element>);
-
     if (!!props.dom && pageElements.length === 0) {
-      throw `useMarkdownPage: no "${pageSelector}" in the markdown document`;
+      throw `DocumentProcessor: no "${pageSelector}" in the document`;
     }
 
     const currentPageSelector = `[id='${props.page}']`;
@@ -228,8 +234,8 @@ function updateDomWithMeta(pageDom: HTMLDivElement) {
 function getNode(props: {
   element: Element;
   prefix: string;
-  latestH1: IMarkdownIndex | undefined;
-  latestH2: IMarkdownIndex | undefined;
+  latestH1: IDocumentIndex | undefined;
+  latestH2: IDocumentIndex | undefined;
 }) {
   const level = getElementLevel(props.element);
   const label = props.element.textContent ?? "";
@@ -241,7 +247,7 @@ function getNode(props: {
 
   const url = getNodeUrl(props);
 
-  const currentNode: IMarkdownIndex = {
+  const currentNode: IDocumentIndex = {
     id: props.element.id,
     label: label,
     preview: preview,
@@ -256,8 +262,8 @@ function getNode(props: {
 function getNodeUrl(props: {
   element: Element;
   prefix: string;
-  latestH1: IMarkdownIndex | undefined;
-  latestH2: IMarkdownIndex | undefined;
+  latestH1: IDocumentIndex | undefined;
+  latestH2: IDocumentIndex | undefined;
 }) {
   const level = getElementLevel(props.element);
   const id = props.element.id;

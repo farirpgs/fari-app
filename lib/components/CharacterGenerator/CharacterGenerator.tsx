@@ -4,6 +4,8 @@ import Chip from "@material-ui/core/Chip";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { lighten, useTheme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import ReplayIcon from "@material-ui/icons/Replay";
 import React, { useEffect, useState } from "react";
 import { Images } from "../../constants/Images";
@@ -12,173 +14,304 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import { Heading } from "../Heading/Heading";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { Page } from "../Page/Page";
-import { Tags, useCards } from "./hooks/useCards";
+import { Tags, useDecks } from "./hooks/useDecks";
 import { useRandomFromList } from "./hooks/useRandomFromList";
+
+function Text(props: { children: JSX.Element }) {
+  return (
+    <Container maxWidth="sm">
+      <Box textAlign="center" mb=".5rem">
+        <Typography variant="subtitle1">{props.children}</Typography>
+      </Box>
+    </Container>
+  );
+}
 
 export function CharacterGenerator() {
   const theme = useTheme();
-  const cardManager = useCards();
+  const decksManager = useDecks();
 
   return (
     <Page>
+      <Heading title={"Story Builder"} icon={LocalLibraryIcon}>
+        <>
+          <Text>
+            <>
+              Below, you will find cards that you can flip by simply clicking on
+              them. Once flipped, the card will reveal an important detail about
+              your story. Use that to create interesting characters and worlds
+              <br />
+              <br />
+              Before you start, you can help the <b>Story Builder</b> by
+              selecting specific <b>Tags</b>.
+            </>
+          </Text>
+          <Text>
+            <>{renderTags()}</>
+          </Text>
+          <Text>
+            <>Now {"let's"} write a great story!</>
+          </Text>
+        </>
+      </Heading>
       <Container maxWidth="xl">
-        <Box>
-          <Grid container justify="center" spacing={2}>
-            {Object.keys(Tags).map((tag) => {
-              return (
-                <Grid item key={tag}>
-                  <Chip
-                    variant={
-                      cardManager.state.tags.includes(tag as unknown as Tags)
-                        ? "default"
-                        : "outlined"
-                    }
-                    color="primary"
-                    label={tag}
-                    onClick={() => {
-                      cardManager.actions.toggle(tag as unknown as Tags);
-                    }}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
-        <Box pb="4rem">
-          <Heading title={"Who you are"} />
+        <Box pb="2rem">
+          <Heading title={"Who is the story about ?"} />
           <Grid container justify="center" spacing={8}>
             <Grid item>
               <GeneratorCard
                 color={theme.palette.primary.main}
-                label={"Archetype"}
-                list={cardManager.state.archetypes}
-              />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box pb="4rem">
-          <Heading title={"Where You Come From"} />
-          <Grid container justify="center" spacing={8}>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.darkBlue}
-                label={"Origin"}
-                list={cardManager.state.places}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.darkBlue}
-                label={"story"}
-                list={cardManager.state.backgrounds}
-              />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box pb="4rem">
-          <Heading title={"Faces"} />
-          <Grid container justify="center" spacing={8}>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.orange}
-                label={"Event"}
-                list={cardManager.state.events}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.orange}
-                label={"Relationship"}
-                list={cardManager.state.faces}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.yellow}
-                label={"Relationship"}
-                list={cardManager.state.faces}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.yellow}
-                label={"Event"}
-                list={cardManager.state.events}
-              />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box pb="4rem">
-          <Heading title={"Past Issue"} />
-          <Grid container justify="center" spacing={8}>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.brown}
-                label={"What"}
-                list={cardManager.state.events}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.brown}
-                label={"Who"}
-                list={cardManager.state.faces}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.brown}
-                label={"Where"}
-                list={cardManager.state.places}
-              />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box pb="4rem">
-          <Heading title={"Impending Issue"} />
-          <Grid container justify="center" spacing={8}>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.teal}
-                label={"What"}
-                list={cardManager.state.events}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.teal}
-                label={"Who"}
-                list={cardManager.state.faces}
-              />
-            </Grid>
-            <Grid item>
-              <GeneratorCard
-                color={IndexCardColor.teal}
-                label={"Where"}
-                list={cardManager.state.places}
+                label={"It is about"}
+                list={decksManager.state.decks.archetypes}
               />
             </Grid>
           </Grid>
         </Box>
       </Container>
+
+      <Box pb="2rem">
+        <Heading title={"Background"}>
+          <Text>
+            <>
+              Next, we need to know to origins of that character. Where they
+              come from and what is their background.
+            </>
+          </Text>
+        </Heading>
+
+        <Grid container justify="center" spacing={8}>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.darkBlue}
+              label={"They come from"}
+              list={decksManager.state.decks.places}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.darkBlue}
+              label={"And they are"}
+              list={decksManager.state.decks.backgrounds}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box pb="2rem">
+        <Heading title={"Faces"}>
+          <Text>
+            <>
+              Now, let us look are key people (or <b>Faces</b>) in the life our
+              character.
+            </>
+          </Text>
+        </Heading>
+        <Grid container justify="center" spacing={8}>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.orange}
+              label={"Linked to"}
+              list={decksManager.state.decks.faces}
+            />
+          </Grid>
+          <Grid item>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.orange}
+                label={"And it Involves"}
+                list={decksManager.state.decks.events}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Text>
+          <Box my="3rem">Now we will repeat this exercice a second time</Box>
+        </Text>
+        <Grid container justify="center" spacing={8}>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.yellow}
+              label={"and they are also Linked to"}
+              list={decksManager.state.decks.faces}
+            />
+          </Grid>
+          <Grid item>
+            <Grid item>
+              <GeneratorCard
+                color={IndexCardColor.yellow}
+                label={"And it Involves"}
+                list={decksManager.state.decks.events}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box pb="2rem">
+        <Heading title={"The Past"}>
+          <Text>
+            <>
+              We will now refine the past of our character.
+              <br />
+              <br />
+              Let us declare an event (the <b>What</b>), linked to someone (the{" "}
+              <b>Who</b>) that happened at a certain location (the <b>Where</b>
+              ).
+            </>
+          </Text>
+        </Heading>
+        <Grid container justify="center" spacing={8}>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.brown}
+              label={"There was"}
+              list={decksManager.state.decks.events}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.brown}
+              label={"Related to"}
+              list={decksManager.state.decks.faces}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.brown}
+              label={"It happened around"}
+              list={decksManager.state.decks.places}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box pb="2rem">
+        <Heading title={"Impending Issue"}>
+          <Text>
+            <>
+              Now there is the future. What challenges await our character and
+              will they be able to face them.
+              <br />
+              So, let us create another event!
+            </>
+          </Text>
+        </Heading>
+        <Grid container justify="center" spacing={8}>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.teal}
+              label={"There was"}
+              list={decksManager.state.decks.events}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.teal}
+              label={"Related to"}
+              list={decksManager.state.decks.faces}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={IndexCardColor.teal}
+              label={"It happened around"}
+              list={decksManager.state.decks.places}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box pb="2rem">
+        <Heading title={"More"}>
+          <Text>
+            <>
+              Maybe you still have a couple of questions about your character.
+              Perhaps you want to add more details about their past, or add
+              another important relationship.
+              <br />
+              <br />
+              So, here are all of deck of cards that Fari has so that you can
+              answer all those questions easily.
+              <br />
+              Draw as many as you like, it is free as in beer!
+            </>
+          </Text>
+        </Heading>
+        <Grid container justify="center" spacing={8}>
+          <Grid item>
+            <GeneratorCard
+              color={theme.palette.primary.main}
+              label={"Events"}
+              list={decksManager.state.decks.events}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={theme.palette.primary.main}
+              label={"Faces"}
+              list={decksManager.state.decks.faces}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={theme.palette.primary.main}
+              label={"Places"}
+              list={decksManager.state.decks.places}
+            />
+          </Grid>
+          <Grid item>
+            <GeneratorCard
+              color={theme.palette.primary.main}
+              label={"Archetypes"}
+              list={decksManager.state.decks.archetypes}
+            />
+          </Grid>
+        </Grid>
+      </Box>
     </Page>
   );
+
+  function renderTags() {
+    return (
+      <Box>
+        <Grid container justify="center" spacing={2}>
+          {Object.keys(Tags).map((tag) => {
+            return (
+              <Grid item key={tag}>
+                <Chip
+                  variant={
+                    decksManager.state.selectedTags.includes(
+                      tag as unknown as Tags
+                    )
+                      ? "default"
+                      : "outlined"
+                  }
+                  color="primary"
+                  label={tag}
+                  onClick={() => {
+                    decksManager.actions.toggleTag(tag as unknown as Tags);
+                  }}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    );
+  }
 }
 
 function GeneratorCard<T extends { label: string }>(props: {
   list: Array<T>;
   color: string;
-  label: JSX.Element | string;
+  label: string;
 }) {
   const [state, pick] = useRandomFromList(props.list);
 
   function renderCardContent(renderProps: {
-    title: JSX.Element | string | undefined;
-    subTitle?: JSX.Element | string;
+    title: string | undefined;
+    subTitle?: string;
     colors: ReturnType<typeof useTextColors>;
   }) {
     const isBack = !renderProps.subTitle;
     const isFront = !!renderProps.subTitle;
+
     return (
       <Box p="2rem" height="100%">
         <Box
@@ -208,6 +341,7 @@ function GeneratorCard<T extends { label: string }>(props: {
                 })}
               >
                 {renderProps.subTitle}
+                {"..."}
               </FateLabel>
             </Box>
           )}
@@ -280,7 +414,7 @@ function Card(props: {
 
   const backColors = useTextColors(props.background);
   const frontColors = useTextColors(lighten(props.background, 0.7));
-  const animationDelayMs = 800;
+  const animationDelayMs = 500;
   const [flipAfterAnimation, setFlipAfterAnimation] = useState(false);
 
   useEffect(() => {
@@ -315,10 +449,12 @@ function Card(props: {
     setFlipAfterAnimation(true);
   }
 
+  const preventClick = props.disabled || flipAfterAnimation;
+
   return (
     <div
       onClick={() => {
-        if (props.disabled) {
+        if (preventClick) {
           return;
         }
         if (!flip) {
@@ -332,7 +468,7 @@ function Card(props: {
         width: "300px",
         height: "400px",
         perspective: "1000px", // 3d effect
-        cursor: props.disabled ? "default" : "pointer",
+        cursor: preventClick ? "default" : "pointer",
         filter: props.disabled ? "grayscale(100%)" : undefined,
       })}
     >

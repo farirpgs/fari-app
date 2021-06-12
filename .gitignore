@@ -113,3 +113,6 @@ dist
 dist-ssr
 *.local
 .tsc
+
+# @11ty/eleventy
+_site
