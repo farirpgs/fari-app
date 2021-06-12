@@ -221,9 +221,9 @@ const Places: Array<Card> = [
  */
 const Events: Array<Card> = [
   //#region
-  { label: "Ris" },
-  { label: "Fall" },
-  { label: "Being Help" },
+  // { label: "Rise" },
+  // { label: "Fall" },
+  { label: "Being Helped" },
   { label: "Giving Help" },
   { label: "Death" },
   { label: "Victory" },
@@ -238,7 +238,7 @@ const Events: Array<Card> = [
   { label: "Redemption" },
   { label: "Selfless Sacrifice" },
   { label: "Legend" },
-  { label: "Secret" },
+  { label: "Secrets" },
   { label: "Wealth" },
   { label: "Poverty" },
   { label: "Betrayal" },
@@ -247,7 +247,7 @@ const Events: Array<Card> = [
   { label: "Training" },
   { label: "Research" },
   { label: "Corruption" },
-  { label: "Reward" },
+  { label: "Rewards" },
   { label: "Revenge" },
   //#endregion
 ];

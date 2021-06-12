@@ -6,9 +6,9 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
-import { CharacterGenerator } from "../CharacterGenerator/CharacterGenerator";
 import { Doc } from "../Doc/Doc";
 import { Page } from "../Page/Page";
+import { StoryBuilder } from "../StoryBuilder/StoryBuilder";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
@@ -211,9 +211,9 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/character-generator"}
+          path={"/story-builder"}
           render={() => {
-            return <CharacterGenerator />;
+            return <StoryBuilder />;
           }}
         />
 

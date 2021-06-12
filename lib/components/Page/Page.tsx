@@ -522,8 +522,8 @@ export const Page: React.FC<{
                         icon: <Icons.ThrowDice />,
                       },
                       {
-                        to: "/character-generator",
-                        label: "Character Generator",
+                        to: "/story-builder",
+                        label: "Story Builder",
                         icon: <LocalLibraryIcon />,
                       },
                       {
