@@ -97,7 +97,7 @@ export const BetterDnd: React.FC<{
           return;
         }
 
-        // Dragging upwards
+        // Dragging rightwards
         // if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
           return;

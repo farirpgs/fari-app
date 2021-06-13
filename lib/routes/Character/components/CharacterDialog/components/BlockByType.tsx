@@ -98,7 +98,7 @@ export function BlockByType(
   }
 
   return (
-    <Box my={isSeparatorBlock ? "1rem" : "0"}>
+    <Box my={isSeparatorBlock ? ".5rem" : "0"}>
       {props.block.type === BlockType.Text && (
         <BlockText
           advanced={props.advanced}

@@ -1140,8 +1140,8 @@ export const CharacterV3Dialog: React.FC<{
                                 className={cx(
                                   css({
                                     label: "CharacterDialog-block",
-                                    marginTop: ".2rem",
-                                    marginBottom: ".2rem",
+                                    marginTop: "4px",
+                                    marginBottom: "4px",
                                     marginLeft: ".5rem",
                                     marginRight: ".5rem",
                                   }),
