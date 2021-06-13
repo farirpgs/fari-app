@@ -19,17 +19,19 @@ exports[`useMarkdownFile Given I hierarchy formatted markdown file should return
 <h4 id=\\"header-4\\">header-4<a class=\\"anchor\\" href=\\"#header-4\\"></a></h4>
 <h5 id=\\"header-5\\">header-5<a class=\\"anchor\\" href=\\"#header-5\\"></a></h5>
 <h6 id=\\"header-6\\">header-6<a class=\\"anchor\\" href=\\"#header-6\\"></a></h6>
-<h1 id=\\"again_1\\">again_1<a class=\\"anchor\\" href=\\"#again_1\\"></a></h1>
-<h2 id=\\"again_2\\">again_2<a class=\\"anchor\\" href=\\"#again_2\\"></a></h2>
-<h2 id=\\"again_2-1\\">again_2<a class=\\"anchor\\" href=\\"#again_2-1\\"></a></h2>
-<h3 id=\\"again_3\\">again_3<a class=\\"anchor\\" href=\\"#again_3\\"></a></h3>
-<h3 id=\\"again_3-1\\">again_3<a class=\\"anchor\\" href=\\"#again_3-1\\"></a></h3>
-<h4 id=\\"again_4\\">again_4<a class=\\"anchor\\" href=\\"#again_4\\"></a></h4>
-<h4 id=\\"again_4-1\\">again_4<a class=\\"anchor\\" href=\\"#again_4-1\\"></a></h4>
-<h5 id=\\"again_5\\">again_5<a class=\\"anchor\\" href=\\"#again_5\\"></a></h5>
-<h5 id=\\"again_5-1\\">again_5<a class=\\"anchor\\" href=\\"#again_5-1\\"></a></h5>
-<h6 id=\\"again_6\\">again_6<a class=\\"anchor\\" href=\\"#again_6\\"></a></h6>
-<h6 id=\\"again_6-1\\">again_6<a class=\\"anchor\\" href=\\"#again_6-1\\"></a></h6>
+
+<h1 id=\\"again-1\\">again_1<a class=\\"anchor\\" href=\\"#again-1\\"></a></h1>
+<h2 id=\\"again-2\\">again_2<a class=\\"anchor\\" href=\\"#again-2\\"></a></h2>
+<h2 id=\\"again-2-1\\">again_2<a class=\\"anchor\\" href=\\"#again-2-1\\"></a></h2>
+<h3 id=\\"again-3\\">again_3<a class=\\"anchor\\" href=\\"#again-3\\"></a></h3>
+<h3 id=\\"again-3-1\\">again_3<a class=\\"anchor\\" href=\\"#again-3-1\\"></a></h3>
+<h4 id=\\"again-4\\">again_4<a class=\\"anchor\\" href=\\"#again-4\\"></a></h4>
+<h4 id=\\"again-4-1\\">again_4<a class=\\"anchor\\" href=\\"#again-4-1\\"></a></h4>
+<h5 id=\\"again-5\\">again_5<a class=\\"anchor\\" href=\\"#again-5\\"></a></h5>
+<h5 id=\\"again-5-1\\">again_5<a class=\\"anchor\\" href=\\"#again-5-1\\"></a></h5>
+<h6 id=\\"again-6\\">again_6<a class=\\"anchor\\" href=\\"#again-6\\"></a></h6>
+<h6 id=\\"again-6-1\\">again_6<a class=\\"anchor\\" href=\\"#again-6-1\\"></a></h6>
+
 "
 `;
 
@@ -101,126 +103,128 @@ exports[`useMarkdownFile Given I hierarchy formatted markdown file should return
   </h6>
   
 
+
   <h1
-    id="again_1"
+    id="again-1"
   >
     again_1
     <a
       class="anchor"
-      href="#again_1"
+      href="#again-1"
     />
   </h1>
   
 
   <h2
-    id="again_2"
+    id="again-2"
   >
     again_2
     <a
       class="anchor"
-      href="#again_2"
+      href="#again-2"
     />
   </h2>
   
 
   <h2
-    id="again_2-1"
+    id="again-2-1"
   >
     again_2
     <a
       class="anchor"
-      href="#again_2-1"
+      href="#again-2-1"
     />
   </h2>
   
 
   <h3
-    id="again_3"
+    id="again-3"
   >
     again_3
     <a
       class="anchor"
-      href="#again_3"
+      href="#again-3"
     />
   </h3>
   
 
   <h3
-    id="again_3-1"
+    id="again-3-1"
   >
     again_3
     <a
       class="anchor"
-      href="#again_3-1"
+      href="#again-3-1"
     />
   </h3>
   
 
   <h4
-    id="again_4"
+    id="again-4"
   >
     again_4
     <a
       class="anchor"
-      href="#again_4"
+      href="#again-4"
     />
   </h4>
   
 
   <h4
-    id="again_4-1"
+    id="again-4-1"
   >
     again_4
     <a
       class="anchor"
-      href="#again_4-1"
+      href="#again-4-1"
     />
   </h4>
   
 
   <h5
-    id="again_5"
+    id="again-5"
   >
     again_5
     <a
       class="anchor"
-      href="#again_5"
+      href="#again-5"
     />
   </h5>
   
 
   <h5
-    id="again_5-1"
+    id="again-5-1"
   >
     again_5
     <a
       class="anchor"
-      href="#again_5-1"
+      href="#again-5-1"
     />
   </h5>
   
 
   <h6
-    id="again_6"
+    id="again-6"
   >
     again_6
     <a
       class="anchor"
-      href="#again_6"
+      href="#again-6"
     />
   </h6>
   
 
   <h6
-    id="again_6-1"
+    id="again-6-1"
   >
     again_6
     <a
       class="anchor"
-      href="#again_6-1"
+      href="#again-6-1"
     />
   </h6>
   
+
 
 </div>
 `;
@@ -435,385 +439,385 @@ Array [
     "children": Array [
       Object {
         "children": Array [],
-        "id": "again_2",
+        "id": "again-2",
         "label": "again_2",
         "level": 2,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_2",
+        "url": "/test-doc/again-1?goTo=again-2",
       },
       Object {
         "children": Array [
           Object {
             "children": Array [],
-            "id": "again_3",
+            "id": "again-3",
             "label": "again_3",
             "level": 3,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_3",
+            "url": "/test-doc/again-1?goTo=again-3",
           },
           Object {
             "children": Array [
               Object {
                 "children": Array [],
-                "id": "again_4",
+                "id": "again-4",
                 "label": "again_4",
                 "level": 4,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_4",
+                "url": "/test-doc/again-1?goTo=again-4",
               },
               Object {
                 "children": Array [
                   Object {
                     "children": Array [],
-                    "id": "again_5",
+                    "id": "again-5",
                     "label": "again_5",
                     "level": 5,
                     "pageLabel": "again_1",
                     "preview": "",
-                    "url": "/test-doc/again_1?goTo=again_5",
+                    "url": "/test-doc/again-1?goTo=again-5",
                   },
                   Object {
                     "children": Array [
                       Object {
                         "children": Array [],
-                        "id": "again_6",
+                        "id": "again-6",
                         "label": "again_6",
                         "level": 6,
                         "pageLabel": "again_1",
                         "preview": "",
-                        "url": "/test-doc/again_1?goTo=again_6",
+                        "url": "/test-doc/again-1?goTo=again-6",
                       },
                       Object {
                         "children": Array [],
-                        "id": "again_6-1",
+                        "id": "again-6-1",
                         "label": "again_6",
                         "level": 6,
                         "pageLabel": "again_1",
                         "preview": "",
-                        "url": "/test-doc/again_1?goTo=again_6-1",
+                        "url": "/test-doc/again-1?goTo=again-6-1",
                       },
                     ],
-                    "id": "again_5-1",
+                    "id": "again-5-1",
                     "label": "again_5",
                     "level": 5,
                     "pageLabel": "again_1",
                     "preview": "",
-                    "url": "/test-doc/again_1?goTo=again_5-1",
+                    "url": "/test-doc/again-1?goTo=again-5-1",
                   },
                 ],
-                "id": "again_4-1",
+                "id": "again-4-1",
                 "label": "again_4",
                 "level": 4,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_4-1",
+                "url": "/test-doc/again-1?goTo=again-4-1",
               },
             ],
-            "id": "again_3-1",
+            "id": "again-3-1",
             "label": "again_3",
             "level": 3,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_3-1",
+            "url": "/test-doc/again-1?goTo=again-3-1",
           },
         ],
-        "id": "again_2-1",
+        "id": "again-2-1",
         "label": "again_2",
         "level": 2,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_2-1",
+        "url": "/test-doc/again-1?goTo=again-2-1",
       },
     ],
-    "id": "again_1",
+    "id": "again-1",
     "label": "again_1",
     "level": 1,
     "pageLabel": undefined,
     "preview": "",
-    "url": "/test-doc/again_1",
+    "url": "/test-doc/again-1",
   },
   Object {
     "children": Array [],
-    "id": "again_2",
+    "id": "again-2",
     "label": "again_2",
     "level": 2,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_2",
+    "url": "/test-doc/again-1?goTo=again-2",
   },
   Object {
     "children": Array [
       Object {
         "children": Array [],
-        "id": "again_3",
+        "id": "again-3",
         "label": "again_3",
         "level": 3,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_3",
+        "url": "/test-doc/again-1?goTo=again-3",
       },
       Object {
         "children": Array [
           Object {
             "children": Array [],
-            "id": "again_4",
+            "id": "again-4",
             "label": "again_4",
             "level": 4,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_4",
+            "url": "/test-doc/again-1?goTo=again-4",
           },
           Object {
             "children": Array [
               Object {
                 "children": Array [],
-                "id": "again_5",
+                "id": "again-5",
                 "label": "again_5",
                 "level": 5,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_5",
+                "url": "/test-doc/again-1?goTo=again-5",
               },
               Object {
                 "children": Array [
                   Object {
                     "children": Array [],
-                    "id": "again_6",
+                    "id": "again-6",
                     "label": "again_6",
                     "level": 6,
                     "pageLabel": "again_1",
                     "preview": "",
-                    "url": "/test-doc/again_1?goTo=again_6",
+                    "url": "/test-doc/again-1?goTo=again-6",
                   },
                   Object {
                     "children": Array [],
-                    "id": "again_6-1",
+                    "id": "again-6-1",
                     "label": "again_6",
                     "level": 6,
                     "pageLabel": "again_1",
                     "preview": "",
-                    "url": "/test-doc/again_1?goTo=again_6-1",
+                    "url": "/test-doc/again-1?goTo=again-6-1",
                   },
                 ],
-                "id": "again_5-1",
+                "id": "again-5-1",
                 "label": "again_5",
                 "level": 5,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_5-1",
+                "url": "/test-doc/again-1?goTo=again-5-1",
               },
             ],
-            "id": "again_4-1",
+            "id": "again-4-1",
             "label": "again_4",
             "level": 4,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_4-1",
+            "url": "/test-doc/again-1?goTo=again-4-1",
           },
         ],
-        "id": "again_3-1",
+        "id": "again-3-1",
         "label": "again_3",
         "level": 3,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_3-1",
+        "url": "/test-doc/again-1?goTo=again-3-1",
       },
     ],
-    "id": "again_2-1",
+    "id": "again-2-1",
     "label": "again_2",
     "level": 2,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_2-1",
+    "url": "/test-doc/again-1?goTo=again-2-1",
   },
   Object {
     "children": Array [],
-    "id": "again_3",
+    "id": "again-3",
     "label": "again_3",
     "level": 3,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_3",
+    "url": "/test-doc/again-1?goTo=again-3",
   },
   Object {
     "children": Array [
       Object {
         "children": Array [],
-        "id": "again_4",
+        "id": "again-4",
         "label": "again_4",
         "level": 4,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_4",
+        "url": "/test-doc/again-1?goTo=again-4",
       },
       Object {
         "children": Array [
           Object {
             "children": Array [],
-            "id": "again_5",
+            "id": "again-5",
             "label": "again_5",
             "level": 5,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_5",
+            "url": "/test-doc/again-1?goTo=again-5",
           },
           Object {
             "children": Array [
               Object {
                 "children": Array [],
-                "id": "again_6",
+                "id": "again-6",
                 "label": "again_6",
                 "level": 6,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_6",
+                "url": "/test-doc/again-1?goTo=again-6",
               },
               Object {
                 "children": Array [],
-                "id": "again_6-1",
+                "id": "again-6-1",
                 "label": "again_6",
                 "level": 6,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_6-1",
+                "url": "/test-doc/again-1?goTo=again-6-1",
               },
             ],
-            "id": "again_5-1",
+            "id": "again-5-1",
             "label": "again_5",
             "level": 5,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_5-1",
+            "url": "/test-doc/again-1?goTo=again-5-1",
           },
         ],
-        "id": "again_4-1",
+        "id": "again-4-1",
         "label": "again_4",
         "level": 4,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_4-1",
+        "url": "/test-doc/again-1?goTo=again-4-1",
       },
     ],
-    "id": "again_3-1",
+    "id": "again-3-1",
     "label": "again_3",
     "level": 3,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_3-1",
+    "url": "/test-doc/again-1?goTo=again-3-1",
   },
   Object {
     "children": Array [],
-    "id": "again_4",
+    "id": "again-4",
     "label": "again_4",
     "level": 4,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_4",
+    "url": "/test-doc/again-1?goTo=again-4",
   },
   Object {
     "children": Array [
       Object {
         "children": Array [],
-        "id": "again_5",
+        "id": "again-5",
         "label": "again_5",
         "level": 5,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_5",
+        "url": "/test-doc/again-1?goTo=again-5",
       },
       Object {
         "children": Array [
           Object {
             "children": Array [],
-            "id": "again_6",
+            "id": "again-6",
             "label": "again_6",
             "level": 6,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_6",
+            "url": "/test-doc/again-1?goTo=again-6",
           },
           Object {
             "children": Array [],
-            "id": "again_6-1",
+            "id": "again-6-1",
             "label": "again_6",
             "level": 6,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_6-1",
+            "url": "/test-doc/again-1?goTo=again-6-1",
           },
         ],
-        "id": "again_5-1",
+        "id": "again-5-1",
         "label": "again_5",
         "level": 5,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_5-1",
+        "url": "/test-doc/again-1?goTo=again-5-1",
       },
     ],
-    "id": "again_4-1",
+    "id": "again-4-1",
     "label": "again_4",
     "level": 4,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_4-1",
+    "url": "/test-doc/again-1?goTo=again-4-1",
   },
   Object {
     "children": Array [],
-    "id": "again_5",
+    "id": "again-5",
     "label": "again_5",
     "level": 5,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_5",
+    "url": "/test-doc/again-1?goTo=again-5",
   },
   Object {
     "children": Array [
       Object {
         "children": Array [],
-        "id": "again_6",
+        "id": "again-6",
         "label": "again_6",
         "level": 6,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_6",
+        "url": "/test-doc/again-1?goTo=again-6",
       },
       Object {
         "children": Array [],
-        "id": "again_6-1",
+        "id": "again-6-1",
         "label": "again_6",
         "level": 6,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_6-1",
+        "url": "/test-doc/again-1?goTo=again-6-1",
       },
     ],
-    "id": "again_5-1",
+    "id": "again-5-1",
     "label": "again_5",
     "level": 5,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_5-1",
+    "url": "/test-doc/again-1?goTo=again-5-1",
   },
   Object {
     "children": Array [],
-    "id": "again_6",
+    "id": "again-6",
     "label": "again_6",
     "level": 6,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_6",
+    "url": "/test-doc/again-1?goTo=again-6",
   },
   Object {
     "children": Array [],
-    "id": "again_6-1",
+    "id": "again-6-1",
     "label": "again_6",
     "level": 6,
     "pageLabel": "again_1",
     "preview": "",
-    "url": "/test-doc/again_1?goTo=again_6-1",
+    "url": "/test-doc/again-1?goTo=again-6-1",
   },
 ]
 `;
@@ -883,105 +887,105 @@ Array [
     "children": Array [
       Object {
         "children": Array [],
-        "id": "again_2",
+        "id": "again-2",
         "label": "again_2",
         "level": 2,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_2",
+        "url": "/test-doc/again-1?goTo=again-2",
       },
       Object {
         "children": Array [
           Object {
             "children": Array [],
-            "id": "again_3",
+            "id": "again-3",
             "label": "again_3",
             "level": 3,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_3",
+            "url": "/test-doc/again-1?goTo=again-3",
           },
           Object {
             "children": Array [
               Object {
                 "children": Array [],
-                "id": "again_4",
+                "id": "again-4",
                 "label": "again_4",
                 "level": 4,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_4",
+                "url": "/test-doc/again-1?goTo=again-4",
               },
               Object {
                 "children": Array [
                   Object {
                     "children": Array [],
-                    "id": "again_5",
+                    "id": "again-5",
                     "label": "again_5",
                     "level": 5,
                     "pageLabel": "again_1",
                     "preview": "",
-                    "url": "/test-doc/again_1?goTo=again_5",
+                    "url": "/test-doc/again-1?goTo=again-5",
                   },
                   Object {
                     "children": Array [
                       Object {
                         "children": Array [],
-                        "id": "again_6",
+                        "id": "again-6",
                         "label": "again_6",
                         "level": 6,
                         "pageLabel": "again_1",
                         "preview": "",
-                        "url": "/test-doc/again_1?goTo=again_6",
+                        "url": "/test-doc/again-1?goTo=again-6",
                       },
                       Object {
                         "children": Array [],
-                        "id": "again_6-1",
+                        "id": "again-6-1",
                         "label": "again_6",
                         "level": 6,
                         "pageLabel": "again_1",
                         "preview": "",
-                        "url": "/test-doc/again_1?goTo=again_6-1",
+                        "url": "/test-doc/again-1?goTo=again-6-1",
                       },
                     ],
-                    "id": "again_5-1",
+                    "id": "again-5-1",
                     "label": "again_5",
                     "level": 5,
                     "pageLabel": "again_1",
                     "preview": "",
-                    "url": "/test-doc/again_1?goTo=again_5-1",
+                    "url": "/test-doc/again-1?goTo=again-5-1",
                   },
                 ],
-                "id": "again_4-1",
+                "id": "again-4-1",
                 "label": "again_4",
                 "level": 4,
                 "pageLabel": "again_1",
                 "preview": "",
-                "url": "/test-doc/again_1?goTo=again_4-1",
+                "url": "/test-doc/again-1?goTo=again-4-1",
               },
             ],
-            "id": "again_3-1",
+            "id": "again-3-1",
             "label": "again_3",
             "level": 3,
             "pageLabel": "again_1",
             "preview": "",
-            "url": "/test-doc/again_1?goTo=again_3-1",
+            "url": "/test-doc/again-1?goTo=again-3-1",
           },
         ],
-        "id": "again_2-1",
+        "id": "again-2-1",
         "label": "again_2",
         "level": 2,
         "pageLabel": "again_1",
         "preview": "",
-        "url": "/test-doc/again_1?goTo=again_2-1",
+        "url": "/test-doc/again-1?goTo=again-2-1",
       },
     ],
-    "id": "again_1",
+    "id": "again-1",
     "label": "again_1",
     "level": 1,
     "pageLabel": undefined,
     "preview": "",
-    "url": "/test-doc/again_1",
+    "url": "/test-doc/again-1",
   },
 ]
 `;

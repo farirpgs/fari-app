@@ -32,7 +32,8 @@ export const DocumentProcessor = {
       const id = kebabCase(h.textContent ?? "");
       const count = headerIdCounts[id] ?? 0;
       const newCount = count + 1;
-      h.id = count === 0 ? id : `${id}-${newCount}`;
+      // console.warn("new count", { newCount, id });
+      h.id = count === 0 ? id : `${id}-${count}`;
       headerIdCounts[id] = newCount;
     });
 
@@ -122,6 +123,7 @@ export const DocumentProcessor = {
     const pageElements =
       props.dom?.querySelectorAll(pageSelector) ??
       ([] as unknown as NodeListOf<Element>);
+
     if (!!props.dom && pageElements.length === 0) {
       throw `DocumentProcessor: no "${pageSelector}" in the document`;
     }
