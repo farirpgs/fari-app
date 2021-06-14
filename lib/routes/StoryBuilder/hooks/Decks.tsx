@@ -1,6 +1,7 @@
-import { Card, Tags } from "./useDecks";
+import { ICard } from "./ICard";
+import { Tags } from "./Tags";
 
-export const Archetypes: Array<Card> = [
+export const Archetypes: Array<ICard> = [
   //#region
   { label: "An Artificer", tags: [Tags.Fantasy] },
   { label: "A Barbarian", tags: [Tags.Fantasy] },
@@ -27,7 +28,7 @@ export const Archetypes: Array<Card> = [
   { label: "An Explorer", tags: [Tags.SciFi] },
 ];
 
-export const Ancestry: Array<Card> = [
+export const Ancestry: Array<ICard> = [
   { label: "Orc", tags: [Tags.Fantasy] },
   { label: "Dragonborn", tags: [Tags.Fantasy] },
   { label: "Draft", tags: [Tags.Fantasy] },
@@ -40,7 +41,7 @@ export const Ancestry: Array<Card> = [
   { label: "Elf", tags: [Tags.Fantasy] },
 ];
 
-export const Backgrounds: Array<Card> = [
+export const Backgrounds: Array<ICard> = [
   //#region
   { label: "An Investigator" },
   { label: "An Artist" },
@@ -73,7 +74,7 @@ export const Backgrounds: Array<Card> = [
   { label: "Conman" },
 ];
 
-export const Faces: Array<Card> = [
+export const Faces: Array<ICard> = [
   //#region
   // { label: "Parent" },
   // { label: "Sibling" },
@@ -105,7 +106,7 @@ export const Faces: Array<Card> = [
   // Local Business Person, Local Law Enforcement,
   // National Law Enforcement, Handler, Informant, Fence, Fixer
 ];
-export const Places: Array<Card> = [
+export const Places: Array<ICard> = [
   //#region
   { label: "A Forest" },
   { label: "A Mountain" },
@@ -161,7 +162,7 @@ export const Places: Array<Card> = [
  * It involves...
  */
 
-export const Events: Array<Card> = [
+export const Events: Array<ICard> = [
   //#region
   // { label: "Rise" },
   // { label: "Fall" },

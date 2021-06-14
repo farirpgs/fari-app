@@ -7,13 +7,8 @@ import {
   Faces,
   Places,
 } from "./Decks";
-
-export enum Tags {
-  Fantasy = "Fantasy",
-  SciFi = "SciFi",
-}
-
-export type Card = { label: string; tags?: Array<Tags> };
+import { ICard } from "./ICard";
+import { Tags } from "./Tags";
 
 export function useDecks() {
   const [selectedTags, setSelectedTags] = useState<Array<Tags>>([Tags.Fantasy]);
@@ -32,7 +27,7 @@ export function useDecks() {
     });
   }
 
-  function filterByTag(card: Card): boolean {
+  function filterByTag(card: ICard): boolean {
     if (!card.tags) {
       return true;
     }

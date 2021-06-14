@@ -14,7 +14,8 @@ import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { Tags, useDecks } from "./hooks/useDecks";
+import { Tags } from "./hooks/Tags";
+import { useDecks } from "./hooks/useDecks";
 import { useRandomFromList } from "./hooks/useRandomFromList";
 
 function Text(props: { children: JSX.Element }) {
