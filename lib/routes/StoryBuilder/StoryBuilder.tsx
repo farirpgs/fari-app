@@ -8,12 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import ReplayIcon from "@material-ui/icons/Replay";
 import React, { useEffect, useState } from "react";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
+import { Heading } from "../../components/Heading/Heading";
+import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
+import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { FateLabel } from "../FateLabel/FateLabel";
-import { Heading } from "../Heading/Heading";
-import { IndexCardColor } from "../IndexCard/IndexCardColor";
-import { Page } from "../Page/Page";
 import { Tags, useDecks } from "./hooks/useDecks";
 import { useRandomFromList } from "./hooks/useRandomFromList";
 
@@ -27,7 +27,7 @@ function Text(props: { children: JSX.Element }) {
   );
 }
 
-export function StoryBuilder() {
+export function StoryBuilderRoute() {
   const theme = useTheme();
   const decksManager = useDecks();
 
@@ -47,7 +47,9 @@ export function StoryBuilder() {
             </>
           </Text>
           <Text>
-            <>{renderTags()}</>
+            <>
+              <StoryDeckTags decksManager={decksManager} />
+            </>
           </Text>
           <Text>
             <>Now {"let's"} write a great story!</>
@@ -58,7 +60,7 @@ export function StoryBuilder() {
         <Box px="16">
           <Box pb="2rem">
             <Heading title={"Who is the story about ?"} />
-            <Grid container justify="center" spacing={8}>
+            <Grid container justify="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={theme.palette.primary.main}
@@ -77,7 +79,7 @@ export function StoryBuilder() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={8}>
+            <Grid container justify="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.darkBlue}
@@ -103,7 +105,7 @@ export function StoryBuilder() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={8}>
+            <Grid container justify="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.orange}
@@ -124,7 +126,7 @@ export function StoryBuilder() {
                 Now we will repeat this exercice a second time
               </Box>
             </Text>
-            <Grid container justify="center" spacing={8}>
+            <Grid container justify="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.yellow}
@@ -157,7 +159,7 @@ export function StoryBuilder() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={8}>
+            <Grid container justify="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.brown}
@@ -192,7 +194,7 @@ export function StoryBuilder() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={8}>
+            <Grid container justify="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.teal}
@@ -232,70 +234,79 @@ export function StoryBuilder() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={8}>
-              <Grid item>
-                <GeneratorCard
-                  color={theme.palette.primary.main}
-                  label={"An Archetypes"}
-                  list={decksManager.state.decks.archetypes}
-                />
-              </Grid>
-              <Grid item>
-                <GeneratorCard
-                  color={theme.palette.primary.main}
-                  label={"An Events"}
-                  list={decksManager.state.decks.events}
-                />
-              </Grid>
-              <Grid item>
-                <GeneratorCard
-                  color={theme.palette.primary.main}
-                  label={"A Face"}
-                  list={decksManager.state.decks.faces}
-                />
-              </Grid>
-              <Grid item>
-                <GeneratorCard
-                  color={theme.palette.primary.main}
-                  label={"A Place"}
-                  list={decksManager.state.decks.places}
-                />
-              </Grid>
-            </Grid>
+            <StoryDecks decksManager={decksManager} />
           </Box>
         </Box>
       </Container>
     </Page>
   );
+}
 
-  function renderTags() {
-    return (
-      <Box>
-        <Grid container justify="center" spacing={2}>
-          {Object.keys(Tags).map((tag) => {
-            return (
-              <Grid item key={tag}>
-                <Chip
-                  variant={
-                    decksManager.state.selectedTags.includes(
-                      tag as unknown as Tags
-                    )
-                      ? "default"
-                      : "outlined"
-                  }
-                  color="primary"
-                  label={tag}
-                  onClick={() => {
-                    decksManager.actions.toggleTag(tag as unknown as Tags);
-                  }}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
-    );
-  }
+export function StoryDecks(props: {
+  decksManager: ReturnType<typeof useDecks>;
+}) {
+  const theme = useTheme();
+  return (
+    <Grid container justify="center" spacing={4}>
+      <Grid item>
+        <GeneratorCard
+          color={theme.palette.primary.main}
+          label={"An Archetypes"}
+          list={props.decksManager.state.decks.archetypes}
+        />
+      </Grid>
+      <Grid item>
+        <GeneratorCard
+          color={theme.palette.primary.main}
+          label={"An Events"}
+          list={props.decksManager.state.decks.events}
+        />
+      </Grid>
+      <Grid item>
+        <GeneratorCard
+          color={theme.palette.primary.main}
+          label={"A Face"}
+          list={props.decksManager.state.decks.faces}
+        />
+      </Grid>
+      <Grid item>
+        <GeneratorCard
+          color={theme.palette.primary.main}
+          label={"A Place"}
+          list={props.decksManager.state.decks.places}
+        />
+      </Grid>
+    </Grid>
+  );
+}
+
+export function StoryDeckTags(props: {
+  decksManager: ReturnType<typeof useDecks>;
+}) {
+  return (
+    <Grid container justify="center" spacing={2}>
+      {Object.keys(Tags).map((tag) => {
+        return (
+          <Grid item key={tag}>
+            <Chip
+              variant={
+                props.decksManager.state.selectedTags.includes(
+                  tag as unknown as Tags
+                )
+                  ? "default"
+                  : "outlined"
+              }
+              color="primary"
+              label={tag}
+              onClick={() => {
+                props.decksManager.actions.toggleTag(tag as unknown as Tags);
+              }}
+            />
+          </Grid>
+        );
+      })}
+    </Grid>
+  );
 }
 
 function GeneratorCard<T extends { label: string }>(props: {

@@ -4,6 +4,7 @@ import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Fab from "@material-ui/core/Fab";
+import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Zoom from "@material-ui/core/Zoom";
@@ -78,35 +79,40 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <ClickAwayListener onClickAway={handleMenuClose}>
-        <Box>
-          <DiceFabButton
-            key="rolls"
-            showCloseButton={open}
-            isRollButtonVisible={hasPool ? true : hasSelectedCommands}
-            icon={ButtonIcon}
-            label={<>{t("dice-fab.roll")}</>}
-            onFabClick={handleFabClick}
-            onCtaClick={() => {
-              if (hasPool) {
-                handleRollPool();
-              } else {
-                handleRoll();
-              }
-            }}
-          />
+      <Grid container spacing={2} alignItems="center">
+        {props.rollsForDiceBox && <Grid item>{renderDiceBox()}</Grid>}
 
-          <DiceMenu
-            open={open}
-            anchorEl={anchorEl}
-            commands={diceManager.state.commandGroups}
-            showPoolToggle
-            onClear={handleClear}
-            onDiceCommandChange={diceManager.actions.setCommandGroups}
-          />
-        </Box>
-      </ClickAwayListener>
-      {props.rollsForDiceBox && renderDiceBox()}
+        <Grid item>
+          <ClickAwayListener onClickAway={handleMenuClose}>
+            <Box>
+              <DiceFabButton
+                key="rolls"
+                showCloseButton={open}
+                isRollButtonVisible={hasPool ? true : hasSelectedCommands}
+                icon={ButtonIcon}
+                label={<>{t("dice-fab.roll")}</>}
+                onFabClick={handleFabClick}
+                onCtaClick={() => {
+                  if (hasPool) {
+                    handleRollPool();
+                  } else {
+                    handleRoll();
+                  }
+                }}
+              />
+
+              <DiceMenu
+                open={open}
+                anchorEl={anchorEl}
+                commands={diceManager.state.commandGroups}
+                showPoolToggle
+                onClear={handleClear}
+                onDiceCommandChange={diceManager.actions.setCommandGroups}
+              />
+            </Box>
+          </ClickAwayListener>
+        </Grid>
+      </Grid>
     </>
   );
 
@@ -114,14 +120,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
     return (
       <DiceBox
         className={css({
-          position: "fixed",
-          right: "1.25rem",
-          bottom: "2rem",
           zIndex: zIndex.diceFabDie,
         })}
-        reduceOpacityWithoutHover
         rolls={props.rollsForDiceBox ?? []}
-        tooltipPlacement="left-end"
+        tooltipPlacement="right-start"
         size="3.5rem"
         fontSize="2rem"
         borderSize=".2rem"
@@ -151,9 +153,8 @@ export function DiceFabButton(props: {
   const zIndex = useZIndex();
   const theme = useTheme();
 
-  const [delayedIsRollButtonVisible, setDelayedisRollButtonVisible] = useState(
-    false
-  );
+  const [delayedIsRollButtonVisible, setDelayedisRollButtonVisible] =
+    useState(false);
   const diceManager = useContext(DiceContext);
 
   useEffect(
@@ -166,9 +167,6 @@ export function DiceFabButton(props: {
   return (
     <Box
       className={css({
-        left: "1rem",
-        bottom: "2rem",
-        position: "fixed",
         zIndex: zIndex.diceFab,
       })}
     >
@@ -188,6 +186,7 @@ export function DiceFabButton(props: {
             className={css({
               width: buttonSize,
               height: buttonSize,
+              marginRight: "6.3rem",
               zIndex: zIndex.diceFab,
             })}
           >
@@ -235,7 +234,7 @@ export function DiceFabButton(props: {
           height: buttonSize,
           borderTopRightRadius: "25px",
           borderBottomRightRadius: "25px",
-          boxShadow: theme.shadows[4],
+          boxShadow: theme.shadows[2],
           border: `4px solid ${
             diceManager.computed.hasPool
               ? theme.palette.primary.light

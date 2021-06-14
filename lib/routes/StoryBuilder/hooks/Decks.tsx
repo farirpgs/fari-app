@@ -1,62 +1,6 @@
-import { useState } from "react";
+import { Card, Tags } from "./useDecks";
 
-export enum Tags {
-  Fantasy = "Fantasy",
-  SciFi = "SciFi",
-}
-
-export type Card = { label: string; tags?: Array<Tags> };
-
-export function useDecks() {
-  const [selectedTags, setSelectedTags] = useState<Array<Tags>>([Tags.Fantasy]);
-
-  function toggleTag(tagToToggle: Tags) {
-    setSelectedTags((prev) => {
-      const exists = prev.some((t) => t === tagToToggle);
-
-      if (!exists) {
-        return [...prev, tagToToggle];
-      }
-
-      return prev.filter((t) => {
-        return t !== tagToToggle;
-      });
-    });
-  }
-
-  function filterByTag(card: Card): boolean {
-    if (!card.tags) {
-      return true;
-    }
-
-    for (const cardTag of card.tags) {
-      const match = selectedTags.includes(cardTag);
-      if (match) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  const archetypes = Archetypes.filter(filterByTag);
-  const ancestry = Ancestry.filter(filterByTag);
-  const backgrounds = Backgrounds.filter(filterByTag);
-  const faces = Faces.filter(filterByTag);
-  const places = Places.filter(filterByTag);
-  const events = Events.filter(filterByTag);
-
-  return {
-    state: {
-      selectedTags: selectedTags,
-      decks: { archetypes, ancestry, backgrounds, faces, places, events },
-    },
-    actions: {
-      toggleTag: toggleTag,
-    },
-  };
-}
-
-const Archetypes: Array<Card> = [
+export const Archetypes: Array<Card> = [
   //#region
   { label: "An Artificer", tags: [Tags.Fantasy] },
   { label: "A Barbarian", tags: [Tags.Fantasy] },
@@ -74,7 +18,6 @@ const Archetypes: Array<Card> = [
   { label: "A Warlock", tags: [Tags.Fantasy] },
   { label: "A Wizard", tags: [Tags.Fantasy] },
   //#endregion
-
   { label: "A Pilot", tags: [Tags.SciFi] },
   { label: "A Technician", tags: [Tags.SciFi] },
   { label: "A Smuggler", tags: [Tags.SciFi] },
@@ -84,7 +27,7 @@ const Archetypes: Array<Card> = [
   { label: "An Explorer", tags: [Tags.SciFi] },
 ];
 
-const Ancestry: Array<Card> = [
+export const Ancestry: Array<Card> = [
   { label: "Orc", tags: [Tags.Fantasy] },
   { label: "Dragonborn", tags: [Tags.Fantasy] },
   { label: "Draft", tags: [Tags.Fantasy] },
@@ -97,7 +40,7 @@ const Ancestry: Array<Card> = [
   { label: "Elf", tags: [Tags.Fantasy] },
 ];
 
-const Backgrounds: Array<Card> = [
+export const Backgrounds: Array<Card> = [
   //#region
   { label: "An Investigator" },
   { label: "An Artist" },
@@ -130,7 +73,7 @@ const Backgrounds: Array<Card> = [
   { label: "Conman" },
 ];
 
-const Faces: Array<Card> = [
+export const Faces: Array<Card> = [
   //#region
   // { label: "Parent" },
   // { label: "Sibling" },
@@ -162,7 +105,7 @@ const Faces: Array<Card> = [
   // Local Business Person, Local Law Enforcement,
   // National Law Enforcement, Handler, Informant, Fence, Fixer
 ];
-const Places: Array<Card> = [
+export const Places: Array<Card> = [
   //#region
   { label: "A Forest" },
   { label: "A Mountain" },
@@ -191,7 +134,6 @@ const Places: Array<Card> = [
   { label: "A Dungeon" },
   { label: "A Prison" },
   //#endregion
-
   { label: "The Road" },
   { label: "The Sewers" },
   { label: "Tunnels" },
@@ -215,11 +157,11 @@ const Places: Array<Card> = [
   { label: "Behind Enemy Lines ", tags: [Tags.Fantasy] },
   { label: "A Crystal Clear Lake", tags: [Tags.Fantasy] },
 ];
-
 /**
  * It involves...
  */
-const Events: Array<Card> = [
+
+export const Events: Array<Card> = [
   //#region
   // { label: "Rise" },
   // { label: "Fall" },
@@ -250,4 +192,6 @@ const Events: Array<Card> = [
   { label: "Rewards" },
   { label: "Revenge" },
   //#endregion
+  { label: "Trauma" },
+  { label: "Opportunities" },
 ];

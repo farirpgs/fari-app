@@ -8,7 +8,7 @@ const OracleValuesMapping: Record<OracleValues, [min: number, max: number]> = {
   ["NoAnd"]: [-99, -4],
 };
 
-export const Oracle = {
+export const TheOracle = {
   getValue(val: number): OracleValues {
     const [oracleValue] =
       Object.entries(OracleValuesMapping).find(([, [min, max]]) => {

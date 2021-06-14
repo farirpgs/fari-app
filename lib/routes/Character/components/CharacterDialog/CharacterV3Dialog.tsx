@@ -25,6 +25,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import ExportIcon from "@material-ui/icons/GetApp";
 import PrintIcon from "@material-ui/icons/Print";
 import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
@@ -834,16 +835,36 @@ export const CharacterV3Dialog: React.FC<{
           >
             {!props.dialog && (
               <Grid item>
-                <IconButton
-                  color="default"
-                  data-cy="character-dialog.print"
-                  size="small"
-                  onClick={() => {
-                    window.open(`/characters/${props.character?.id}/print`);
-                  }}
-                >
-                  <PrintIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.print")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.print"
+                    size="small"
+                    onClick={() => {
+                      window.open(`/characters/${props.character?.id}/print`);
+                    }}
+                  >
+                    <PrintIcon />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            )}
+            {!props.dialog && (
+              <Grid item>
+                <Tooltip title={t("character-dialog.export")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.print"
+                    size="small"
+                    onClick={() => {
+                      charactersManager.actions.exportEntity(
+                        characterManager.state.character as ICharacter
+                      );
+                    }}
+                  >
+                    <ExportIcon />
+                  </IconButton>
+                </Tooltip>
               </Grid>
             )}
             <Grid item>

@@ -22,7 +22,6 @@ export default {
     fontSize: "4.5rem",
     borderSize: ".5rem",
     disabled: false,
-    reduceOpacityWithoutHover: false,
     showDetails: false,
     disableConfettis: true,
   },
@@ -40,7 +39,6 @@ const Template: Story<IProps> = (args, context) => (
         fontSize={args.fontSize}
         borderSize={args.borderSize}
         disabled={args.disabled}
-        reduceOpacityWithoutHover={args.reduceOpacityWithoutHover}
         showDetails={args.showDetails}
         disableConfettis={args.disableConfettis}
       />

@@ -66,13 +66,13 @@ import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDi
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { DiceFab } from "../DiceFab/DiceFab";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { LiveMode, Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
+import { Toolbox } from "../Toolbox/Toolbox";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
@@ -281,6 +281,7 @@ export const Session: React.FC<IProps> = (props) => {
   };
   return (
     <Page
+      pb="6rem"
       gameId={props.idFromParams}
       live={liveMode}
       liveLabel={sceneManager.state.scene?.name ?? ""}
@@ -301,21 +302,63 @@ export const Session: React.FC<IProps> = (props) => {
             }}
           >
             <div id="lol">
-              <button>SALUT MUI</button>
+              <button>Test...</button>
             </div>
           </WindowPortal>
         )}
 
-        <DiceFab
-          onRoll={(result) => {
-            handleSetMyRoll(result);
+        <Toolbox
+          dice={{
+            onRoll: (result) => {
+              handleSetMyRoll(result);
+            },
+            rollsForDiceBox: me?.rolls ?? [],
+            onRollPool: (result, playerId) => {
+              handleSetPlayerRoll(playerId, result);
+            },
           }}
-          rollsForDiceBox={me?.rolls ?? []}
-          onRollPool={(result, playerId) => {
-            handleSetPlayerRoll(playerId, result);
-          }}
+          centerActions={
+            <>
+              {isGM && (
+                <>
+                  {props.mode !== SceneMode.Manage && (
+                    <Grid item>
+                      <IconButton
+                        onClick={() => {
+                          sessionManager.actions.fireGoodConfetti();
+                          logger.info("Scene:onFireGoodConfetti");
+                        }}
+                        color="primary"
+                      >
+                        <Icons.PartyPopper
+                          className={css({ width: "2rem", height: "2rem" })}
+                          htmlColor={darken(theme.palette.success.main, 0.2)}
+                        />
+                      </IconButton>
+                    </Grid>
+                  )}
+                  {props.mode !== SceneMode.Manage && (
+                    <Grid item>
+                      <IconButton
+                        onClick={() => {
+                          sessionManager.actions.fireBadConfetti();
+                          logger.info("Scene:onFireBadConfetti");
+                        }}
+                        color="primary"
+                      >
+                        <Icons.PartyPopper
+                          className={css({ width: "2rem", height: "2rem" })}
+                          htmlColor={darken(theme.palette.error.main, 0.2)}
+                        />
+                      </IconButton>
+                    </Grid>
+                  )}
+                </>
+              )}
+            </>
+          }
         />
-        {props.error ? renderPageError() : renderPage()}
+        <Box px="1rem">{props.error ? renderPageError() : renderPage()}</Box>
       </Box>
     </Page>
   );
@@ -935,38 +978,6 @@ export const Session: React.FC<IProps> = (props) => {
         <Grid container spacing={1} justify="space-evenly" alignItems="center">
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
-          )}
-          {props.mode !== SceneMode.Manage && (
-            <Grid item>
-              <IconButton
-                onClick={() => {
-                  sessionManager.actions.fireGoodConfetti();
-                  logger.info("Scene:onFireGoodConfetti");
-                }}
-                color="primary"
-              >
-                <Icons.PartyPopper
-                  className={css({ width: "2rem", height: "2rem" })}
-                  htmlColor={darken(theme.palette.success.main, 0.2)}
-                />
-              </IconButton>
-            </Grid>
-          )}
-          {props.mode !== SceneMode.Manage && (
-            <Grid item>
-              <IconButton
-                onClick={() => {
-                  sessionManager.actions.fireBadConfetti();
-                  logger.info("Scene:onFireBadConfetti");
-                }}
-                color="primary"
-              >
-                <Icons.PartyPopper
-                  className={css({ width: "2rem", height: "2rem" })}
-                  htmlColor={darken(theme.palette.error.main, 0.2)}
-                />
-              </IconButton>
-            </Grid>
           )}
         </Grid>
       </Box>

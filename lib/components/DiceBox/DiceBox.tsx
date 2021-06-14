@@ -32,7 +32,6 @@ type IProps = {
   tooltipOpen?: boolean;
   tooltipPlacement?: TooltipProps["placement"];
   disabled?: boolean;
-  reduceOpacityWithoutHover?: boolean;
   showDetails?: boolean;
   className?: string;
   disableConfettis?: boolean;
@@ -99,7 +98,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
     "transition": theme.transitions.create(["opacity", "background"], {
       duration: theme.transitions.duration.shortest,
     }),
-    "opacity": props.reduceOpacityWithoutHover ? "1" : "1",
     "&:hover": {
       opacity: "1",
     },

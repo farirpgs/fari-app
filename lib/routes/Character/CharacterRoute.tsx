@@ -2,9 +2,9 @@ import Box from "@material-ui/core/Box";
 import { useTheme } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { DiceFab } from "../../components/DiceFab/DiceFab";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { Toolbox } from "../../components/Toolbox/Toolbox";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -25,9 +25,8 @@ export const CharacterRoute: React.FC<{
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
   const myBinderManager = useContext(MyBinderContext);
-  const [selectedCharacter, setSelectedCharacter] = useState<
-    ICharacter | undefined
-  >(undefined);
+  const [selectedCharacter, setSelectedCharacter] =
+    useState<ICharacter | undefined>(undefined);
   const logger = useLogger();
 
   function handleSetRollResult(result: IDiceRollResult) {
@@ -67,12 +66,14 @@ export const CharacterRoute: React.FC<{
       <PageMeta title={selectedCharacter?.name} />
 
       <Box bgcolor={theme.palette.background.paper}>
-        <Page>
+        <Page pb="6rem">
           {!dialogMode && (
-            <DiceFab
-              rollsForDiceBox={rolls}
-              onRollPool={handleOnRollPool}
-              onRoll={handleSetRollResult}
+            <Toolbox
+              dice={{
+                onRoll: handleSetRollResult,
+                rollsForDiceBox: rolls,
+                onRollPool: handleOnRollPool,
+              }}
             />
           )}
           <CharacterV3Dialog
