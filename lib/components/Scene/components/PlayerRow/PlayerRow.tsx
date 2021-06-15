@@ -113,6 +113,7 @@ export function PlayerRow(
       {renderLoadCharacerSheetDialog()}
       <Box
         bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
+        m=".5rem"
         data-cy={props["data-cy"]}
         onClick={() => {
           setHover(true);
@@ -127,7 +128,6 @@ export function PlayerRow(
         <Box
           py=".5rem"
           px="1rem"
-          my=".5rem"
           className={css({
             border: `2px solid ${borderColor}`,
             borderRadius: "8px",

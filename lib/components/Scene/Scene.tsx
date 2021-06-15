@@ -525,12 +525,14 @@ export const Session: React.FC<IProps> = (props) => {
                             player: npc,
                             canControl: me?.id === gm.id,
                           })}
-                          {renderPlayerRow({
-                            player: npc,
-                            canControl: me?.id === gm.id,
-                            isMe: me?.id === gm.id,
-                            index: `gm-npc-${npcIndex}`,
-                          })}
+                          <Box mx="-.5rem">
+                            {renderPlayerRow({
+                              player: npc,
+                              canControl: me?.id === gm.id,
+                              isMe: me?.id === gm.id,
+                              index: `gm-npc-${npcIndex}`,
+                            })}
+                          </Box>
                         </Box>
                       </React.Fragment>
                     );
