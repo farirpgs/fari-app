@@ -30,7 +30,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
-import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
+import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { WikiItems } from "../SrdsRoute/SrdsRoute";
 

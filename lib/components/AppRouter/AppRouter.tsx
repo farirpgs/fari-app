@@ -1,14 +1,10 @@
-import Box from "@material-ui/core/Box";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Fade from "@material-ui/core/Fade";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilder";
 import { Doc } from "../Doc/Doc";
-import { Page } from "../Page/Page";
+import { LoadingRoute } from "./LoadingRoute";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
@@ -38,37 +34,10 @@ const SeelieSquireRoute = React.lazy(
   () => import("../../routes/SeelieSquire/SeelieSquireRoute")
 );
 
-export const LoadingRoute: React.FC = () => {
-  const location = useLocation();
-  const [fadeIn, setFadeIn] = useState(false);
-  const timeout = useRef<any | undefined>(undefined);
-
-  useEffect(() => {
-    timeout.current = setTimeout(() => {
-      setFadeIn(true);
-    }, 400);
-
-    return () => {
-      clearTimeout(timeout.current);
-    };
-  });
-
-  return (
-    <Page hideHeaderLogo={location.pathname === "/"}>
-      <Fade in={fadeIn}>
-        <Container maxWidth="md">
-          <Box display="flex" justifyContent="center">
-            <CircularProgress />
-          </Box>
-        </Container>
-      </Fade>
-    </Page>
-  );
-};
-
 export const AppRouter = () => {
+  const location = useLocation();
   return (
-    <Suspense fallback={<LoadingRoute />}>
+    <React.Suspense fallback={<LoadingRoute pathname={location.pathname} />}>
       <Switch>
         <Route
           exact
@@ -224,6 +193,6 @@ export const AppRouter = () => {
           }}
         />
       </Switch>
-    </Suspense>
+    </React.Suspense>
   );
 };

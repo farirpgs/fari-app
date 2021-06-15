@@ -52,7 +52,10 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { Icons } from "../../domains/Icons/Icons";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { ITranslationKeys } from "../../locale";
+import {
+  IPossibleLanguages,
+  PossibleLanguagesNames,
+} from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
@@ -646,12 +649,16 @@ export const Page: React.FC<{
                   logger.setTag("language", newLanguage);
                 }}
               >
-                {Object.keys(i18n.options.resources!).map((language) => {
-                  const shouldRenderDev = language === "dev" && env.isDev;
-                  if (language !== "dev" || shouldRenderDev) {
+                {Object.keys(PossibleLanguagesNames).map((languageKey) => {
+                  const shouldRenderDev = languageKey === "dev" && env.isDev;
+                  if (languageKey !== "dev" || shouldRenderDev) {
                     return (
-                      <option key={language} value={language}>
-                        {t(`common.language.${language}` as ITranslationKeys)}
+                      <option key={languageKey} value={languageKey}>
+                        {
+                          PossibleLanguagesNames[
+                            languageKey as IPossibleLanguages
+                          ]
+                        }
                       </option>
                     );
                   }

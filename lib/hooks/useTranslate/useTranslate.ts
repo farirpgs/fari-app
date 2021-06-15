@@ -33,9 +33,6 @@ export function useTranslate() {
         if (noFallback) {
           return "";
         }
-        logger.warn("useTranslate:onMissingTranslation", {
-          tags: { key, currentLanguage },
-        });
 
         return englishValue || devValue;
       }

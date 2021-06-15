@@ -1,17 +1,8 @@
 import i18next from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+import I18nLanguageDetector from "i18next-browser-languagedetector";
+import I18nHttpApi from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
-import deTranslation from "../../../locales/de.json";
-import enTranslation from "../../../locales/en.json";
-import esTranslation from "../../../locales/es.json";
-import eoTranslation from "../../../locales/eo.json";
-import frTranslation from "../../../locales/fr.json";
-import glTranslation from "../../../locales/gl_ES.json";
-import itTranslation from "../../../locales/it.json";
-import ptbrTranslation from "../../../locales/pt_BR.json";
-import ruTranslation from "../../../locales/ru.json";
 import { ILogger } from "../logger/makeLogger";
-import { devTranslation } from "./locales/devTranslations";
 
 export const PossibleLanguages = [
   "en",
@@ -28,45 +19,27 @@ export const PossibleLanguages = [
 
 export type IPossibleLanguages = typeof PossibleLanguages[number];
 
+export const PossibleLanguagesNames: Record<IPossibleLanguages, string> = {
+  "en": "English",
+  "es": "Español",
+  "eo": "Esperanto",
+  "pt-BR": "Português Brasileiro",
+  "fr": "Français",
+  "gl": "Galego",
+  "ru": "Русский",
+  "de": "Deutsch",
+  "it": "Italiano",
+  "dev": "Development",
+};
+
 export async function InternationalizationService(logger: ILogger) {
   const i18n = i18next;
 
   await i18n
-    .use(LanguageDetector)
+    .use(I18nLanguageDetector)
     .use(initReactI18next)
+    .use(I18nHttpApi)
     .init({
-      resources: {
-        "en": {
-          translation: enTranslation,
-        },
-        "es": {
-          translation: esTranslation,
-        },
-        "eo": {
-          translation: eoTranslation,
-        },
-        "fr": {
-          translation: frTranslation,
-        },
-        "de": {
-          translation: deTranslation,
-        },
-        "pt-BR": {
-          translation: ptbrTranslation,
-        },
-        "ru": {
-          translation: ruTranslation,
-        },
-        "it": {
-          translation: itTranslation,
-        },
-        "gl": {
-          translation: glTranslation,
-        },
-        "dev": {
-          translation: devTranslation,
-        },
-      },
       supportedLngs: [...PossibleLanguages],
       fallbackLng: "en",
       debug: false,

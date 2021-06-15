@@ -99,7 +99,3 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   return { peer: peer.current, hostId, loading, error };
 }
-
-export function isWebRTCSupported() {
-  return window.RTCPeerConnection !== undefined;
-}

@@ -50,19 +50,21 @@ function AppContexts(props: { children: ReactNode }) {
   const myBinderManager = useMyBinder();
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <SettingsContext.Provider value={settingsManager}>
-        <CharactersContext.Provider value={charactersManager}>
-          <ScenesContext.Provider value={scenesManager}>
-            <DiceContext.Provider value={diceManager}>
-              <MyBinderContext.Provider value={myBinderManager}>
-                <AppProviders>{props.children}</AppProviders>
-              </MyBinderContext.Provider>
-            </DiceContext.Provider>
-          </ScenesContext.Provider>
-        </CharactersContext.Provider>
-      </SettingsContext.Provider>
-    </DndProvider>
+    <React.Suspense fallback={null}>
+      <DndProvider backend={HTML5Backend}>
+        <SettingsContext.Provider value={settingsManager}>
+          <CharactersContext.Provider value={charactersManager}>
+            <ScenesContext.Provider value={scenesManager}>
+              <DiceContext.Provider value={diceManager}>
+                <MyBinderContext.Provider value={myBinderManager}>
+                  <AppProviders>{props.children}</AppProviders>
+                </MyBinderContext.Provider>
+              </DiceContext.Provider>
+            </ScenesContext.Provider>
+          </CharactersContext.Provider>
+        </SettingsContext.Provider>
+      </DndProvider>
+    </React.Suspense>
   );
 }
 

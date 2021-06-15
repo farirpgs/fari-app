@@ -16,7 +16,7 @@ import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { Icons } from "../../domains/Icons/Icons";
-import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
+import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const JoinAGame: React.FC<{
