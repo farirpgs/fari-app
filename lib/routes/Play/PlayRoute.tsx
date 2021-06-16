@@ -11,6 +11,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SceneMode, Session } from "../../components/Scene/Scene";
+import { env } from "../../constants/env";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
@@ -22,8 +23,11 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 const client = createClient({
   authEndpoint: async (room) => {
-    const result = await axios.get(`/.netlify/functions/auth?room=${room}`);
-    return result.data.token;
+    const test = env.isDev ? "test=true" : "";
+    const result = await axios.get(
+      `/.netlify/functions/auth?room=${room}${test}`
+    );
+    return result.data.liveblocks.token;
   },
 });
 
