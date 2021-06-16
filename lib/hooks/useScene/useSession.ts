@@ -7,7 +7,7 @@ import {
   BlockType,
   IBlock,
   ICharacter,
-  IPointCounterBlock
+  IPointCounterBlock,
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
@@ -200,6 +200,7 @@ export function useSession(props: IProps) {
             points: points,
             playedDuringTurn: playedDuringTurn,
             offline: false,
+            npcs: [],
           };
         });
         const allPlayersMinusRemovedPlayersFromStaleConnections =
@@ -227,6 +228,7 @@ export function useSession(props: IProps) {
           playedDuringTurn: false,
           isGM: false,
           points: "3",
+          npcs: [],
         });
       })
     );
@@ -381,7 +383,7 @@ export function useSession(props: IProps) {
   return {
     state: { session },
     computed: {
-      npcsWithCharacterSheets:npcsWithCharacterSheets,
+      npcsWithCharacterSheets: npcsWithCharacterSheets,
       playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
       hasPlayersWithCharacterSheets,
       userCharacterSheet,

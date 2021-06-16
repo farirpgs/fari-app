@@ -50,7 +50,6 @@ import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { LazyState } from "../../hooks/useLazyState/useLazyState";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import {
   IIndexCard,
@@ -64,13 +63,12 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { IndexCardColor } from "../IndexCard/IndexCardColor";
-import { LiveMode, Page } from "../Page/Page";
+import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
@@ -92,44 +90,22 @@ enum SortMode {
 
 export const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
-type IProps =
-  | {
-      mode: SceneMode.Manage;
-      sessionManager: ReturnType<typeof useSession>;
-      sceneManager: ReturnType<typeof useScene>;
-      connectionsManager?: undefined;
-      idFromParams?: undefined;
-      isLoading?: undefined;
-      error?: undefined;
-    }
-  | {
-      mode: SceneMode.PlayOnline;
-      sessionManager: ReturnType<typeof useSession>;
-      sceneManager: ReturnType<typeof useScene>;
-      connectionsManager: ReturnType<typeof usePeerConnections>;
-      userId: string;
-      isLoading: boolean;
-      error: any;
-      shareLink: string;
-      idFromParams?: string;
-    }
-  | {
-      mode: SceneMode.PlayOffline;
-      sessionManager: ReturnType<typeof useSession>;
-      sceneManager: ReturnType<typeof useScene>;
-      connectionsManager?: undefined;
-      idFromParams?: undefined;
-      isLoading?: undefined;
-      error?: undefined;
-    };
-
+type IProps = {
+  mode: SceneMode;
+  sessionManager: ReturnType<typeof useSession>;
+  sceneManager: ReturnType<typeof useScene>;
+  userId: string;
+  isGM: boolean;
+  roomId: string;
+  shareLink?: string;
+};
 export const Session: React.FC<IProps> = (props) => {
-  const { sessionManager, sceneManager, connectionsManager } = props;
+  const { sessionManager, sceneManager } = props;
 
   const charactersManager = useContext(CharactersContext);
   const myBinderManager = useContext(MyBinderContext);
 
-  const isGM = !props.idFromParams;
+  const isGM = props.isGM;
 
   const isGMHostingOnlineOrOfflineGame =
     props.mode !== SceneMode.Manage && isGM;
@@ -179,14 +155,14 @@ export const Session: React.FC<IProps> = (props) => {
   }, [shareLinkToolTip]);
 
   //#region TODO: refac into another function
-  const userId = props.mode === SceneMode.PlayOnline ? props.userId : undefined;
+
   const gm = sessionManager.state.session.gm;
   const players = sessionManager.state.session.players ?? [];
 
   const sortedPlayers = arraySort(players, [
     (p) => {
       return {
-        value: userId === p.id,
+        value: props.userId === p.id,
         direction: "asc",
       };
     },
@@ -198,7 +174,7 @@ export const Session: React.FC<IProps> = (props) => {
       if (isGM) {
         return true;
       }
-      return userId === player.id;
+      return props.userId === player.id;
     })
     .map((p) => p.id);
 
@@ -206,11 +182,9 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       return player.isGM;
     }
-    return userId === player.id;
+    return props.userId === player.id;
   });
   //#endregion
-
-  const liveMode = getLiveMode();
 
   const handleGMAddOfflinePlayer = () => {
     sessionManager.actions.addOfflinePlayer();
@@ -223,10 +197,11 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, character);
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "load-character",
-        payload: character,
-      });
+      // TODO: Event
+      // connectionsManager?.actions.sendToHost<IPeerActions>({
+      //   action: "load-character",
+      //   payload: character,
+      // });
     }
   };
 
@@ -240,10 +215,11 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, copy);
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "load-character",
-        payload: copy,
-      });
+      // TODO: Event
+      // connectionsManager?.actions.sendToHost<IPeerActions>({
+      //   action: "load-character",
+      //   payload: copy,
+      // });
     }
   };
 
@@ -255,10 +231,11 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.updateGmRoll(result);
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "roll",
-        payload: result,
-      });
+      // TODO: Event
+      // connectionsManager?.actions.sendToHost<IPeerActions>({
+      //   action: "roll",
+      //   payload: result,
+      // });
     }
   };
 
@@ -273,17 +250,19 @@ export const Session: React.FC<IProps> = (props) => {
         sessionManager.actions.updateGmRoll(result);
       }
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "roll",
-        payload: result,
-      });
+      // TODO: Event
+      // connectionsManager?.actions.sendToHost<IPeerActions>({
+      //   action: "roll",
+      //   payload: result,
+      // });
     }
   };
   return (
     <Page
       pb="6rem"
-      gameId={props.idFromParams}
-      live={liveMode}
+      gameId={props.roomId}
+      // TODO: Live Mode
+      // live={liveMode}
       liveLabel={sceneManager.state.scene?.name ?? ""}
     >
       <Box px="1rem">
@@ -358,13 +337,15 @@ export const Session: React.FC<IProps> = (props) => {
             </>
           }
         />
-        <Box px="1rem">{props.error ? renderPageError() : renderPage()}</Box>
+        {/* TODO: Error  */}
+        <Box px="1rem">{false ? renderPageError() : renderPage()}</Box>
       </Box>
     </Page>
   );
 
   function renderPage() {
-    if (props.isLoading) {
+    // TODO: Loading
+    if (false) {
       return renderIsLoading();
     }
     return renderPageContent();
@@ -588,10 +569,11 @@ export const Session: React.FC<IProps> = (props) => {
               updatedCharacter
             );
           } else {
-            connectionsManager?.actions.sendToHost<IPeerActions>({
-              action: "update-character",
-              payload: updatedCharacter,
-            });
+            // TODO: Event
+            // connectionsManager?.actions.sendToHost<IPeerActions>({
+            //   action: "update-character",
+            //   payload: updatedCharacter,
+            // });
           }
         }}
         onClose={() => {
@@ -674,10 +656,11 @@ export const Session: React.FC<IProps> = (props) => {
               playedInTurnOrder
             );
           } else {
-            connectionsManager?.actions.sendToHost<IPeerActions>({
-              action: "played-in-turn-order",
-              payload: playedInTurnOrder,
-            });
+            // TODO: Event
+            // connectionsManager?.actions.sendToHost<IPeerActions>({
+            //   action: "played-in-turn-order",
+            //   payload: playedInTurnOrder,
+            // });
           }
         }}
         onPointsChange={(points, maxPoints) => {
@@ -688,10 +671,10 @@ export const Session: React.FC<IProps> = (props) => {
               maxPoints
             );
           } else {
-            connectionsManager?.actions.sendToHost<IPeerActions>({
-              action: "update-main-point-counter",
-              payload: { points, maxPoints },
-            });
+            // connectionsManager?.actions.sendToHost<IPeerActions>({
+            //   action: "update-main-point-counter",
+            //   payload: { points, maxPoints },
+            // });
           }
         }}
       >
@@ -1004,19 +987,6 @@ export const Session: React.FC<IProps> = (props) => {
         </Box>
       </Box>
     );
-  }
-
-  function getLiveMode() {
-    if (props.mode === SceneMode.PlayOffline) {
-      return LiveMode.Live;
-    }
-    if (props.mode === SceneMode.Manage) {
-      return undefined;
-    }
-    if (props.isLoading) {
-      return LiveMode.Connecting;
-    }
-    return LiveMode.Live;
   }
 };
 Session.displayName = "Session";

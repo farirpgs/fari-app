@@ -12,6 +12,7 @@ export interface IPlayer {
   playedDuringTurn: boolean;
   isGM: boolean;
   points: string;
+  npcs: Array<IPlayer>;
 }
 
 /**

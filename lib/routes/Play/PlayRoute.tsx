@@ -1,96 +1,144 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import {
+  createClient,
+  LiveblocksProvider,
+  RoomProvider,
+  useErrorListener,
+  useMyPresence,
+  useOthers,
+} from "@liveblocks/react";
+import axios from "axios";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
-import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
-import { IPeerMeta, useScene } from "../../hooks/useScene/useScene";
+import { Id } from "../../domains/Id/Id";
+import { IPlayer } from "../../hooks/useScene/IScene";
+import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { JoinAGame } from "./JoinAGameRoute";
-import { IPeerActions } from "./types/IPeerActions";
 
-const debug = true;
+const client = createClient({
+  authEndpoint: async (room) => {
+    const result = await axios.get(`/.netlify/functions/auth?room=${room}`);
+    return result.data.token;
+  },
+});
 
-export const PlayRoute: React.FC<{
-  match: {
-    params: { id?: string };
+function PlayRouteProvider(props: { roomId?: string }) {
+  const isGM = !props.roomId;
+  const [roomId] = useState(() => {
+    return props.roomId || Id.generate();
+  });
+
+  const defaultPresence: IPlayer = {
+    id: Id.generate(),
+    playerName: isGM ? "Game Master" : "Player",
+    rolls: [],
+    playedDuringTurn: false,
+    points: "3",
+    isGM: isGM,
+    npcs: [],
   };
-}> = (props) => {
+
+  return (
+    <LiveblocksProvider client={client}>
+      <RoomProvider
+        id={roomId}
+        defaultPresence={() => {
+          return defaultPresence as any;
+        }}
+      >
+        <PlayRoute roomId={roomId} />
+      </RoomProvider>
+    </LiveblocksProvider>
+  );
+}
+
+export function PlayRoute(props: { roomId: string }) {
+  const isGM = !!props.roomId;
+  const shareLink = `${location.origin}/play/${props.roomId}`;
+
+  const { t } = useTranslate();
   const logger = useLogger();
 
-  const idFromParams = props.match.params.id;
   const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
+
+  const [myPresence, updateMyPresence] = useMyPresence();
+
+  const others = useOthers();
+  const othersPresence = others
+    .map((o) => {
+      if (!o.presence) {
+        return null;
+      }
+      return o.presence;
+    })
+    .filter((presence) => !!presence);
+  const everyone = [myPresence, ...othersPresence] as unknown as Array<IPlayer>;
+  const count = everyone.length;
+  const gm = everyone.find((presence) => {
+    return presence.isGM;
+  });
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     updateMyPresence({
+  //       count: (myPresence?.count ?? 0) + 1,
+  //     });
+  //   }, 2000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [myPresence]);
+
+  console.debug(
+    JSON.stringify(
+      {
+        count: count,
+        myPresence,
+        others: others.toArray(),
+        everyone,
+      },
+      null,
+      2
+    )
+  );
+  useErrorListener((err) => {
+    console.error("LiveBlocks:Error", err);
+  });
 
   const sceneManager = useScene();
   const sessionManager = useSession({
     userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
+
   const sceneName = sceneManager.state.scene?.name ?? "";
   const pageTitle = useMemo(() => {
     return previewContentEditable({ value: sceneName });
   }, [sceneName]);
-  const { t } = useTranslate();
 
-  const hostManager = usePeerHost({
-    onConnectionDataReceive(id: string, peerAction: IPeerActions) {
-      if (peerAction.action === "roll") {
-        sessionManager.actions.updatePlayerRoll(id, peerAction.payload);
-      }
-      if (peerAction.action === "update-main-point-counter") {
-        sessionManager.actions.updatePlayerCharacterMainPointCounter(
-          id,
-          peerAction.payload.points,
-          peerAction.payload.maxPoints
-        );
-      }
-      if (peerAction.action === "played-in-turn-order") {
-        sessionManager.actions.updatePlayerPlayedDuringTurn(
-          id,
-          peerAction.payload
-        );
-      }
-      if (peerAction.action === "update-character") {
-        sessionManager.actions.updatePlayerCharacter(id, peerAction.payload);
-      }
-      if (peerAction.action === "load-character") {
-        sessionManager.actions.loadPlayerCharacter(id, peerAction.payload);
-      }
-    },
-    debug: debug,
-  });
-  const connectionsManager = usePeerConnections({
-    onHostDataReceive(newData) {
-      sceneManager.actions.overrideScene(newData.scene);
-      sessionManager.actions.overrideSession(newData.session);
-    },
-    debug: debug,
-  });
+  // const shouldRenderPlayerJoinGameScreen =
+  //   !isGM && !connectionsManager!.state.isConnectedToHost;
 
-  const isGM = !idFromParams;
-  const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
-  const shouldRenderPlayerJoinGameScreen =
-    !isGM && !connectionsManager!.state.isConnectedToHost;
+  // useEffect(() => {
+  //   hostManager.actions.sendToConnections({
+  //     scene: sceneManager.state.scene,
+  //     session: sessionManager.state.session,
+  //   });
+  // }, [sceneManager.state.scene, sessionManager.state.session]);
 
-  useEffect(() => {
-    hostManager.actions.sendToConnections({
-      scene: sceneManager.state.scene,
-      session: sessionManager.state.session,
-    });
-  }, [sceneManager.state.scene, sessionManager.state.session]);
-
-  useEffect(() => {
-    if (isGM) {
-      sessionManager.actions.updatePlayersWithConnections(
-        hostManager.state.connections
-      );
-    }
-  }, [hostManager.state.connections]);
+  // useEffect(() => {
+  //   if (isGM) {
+  //     sessionManager.actions.updatePlayersWithConnections(
+  //       hostManager.state.connections
+  //     );
+  //   }
+  // }, [hostManager.state.connections]);
 
   useEffect(() => {
     if (isGM) {
@@ -108,39 +156,18 @@ export const PlayRoute: React.FC<{
         title={pageTitle || t("home-route.play-online.title")}
         description={t("home-route.play-online.description")}
       />
-      {shouldRenderPlayerJoinGameScreen ? (
-        <JoinAGame
-          idFromParams={idFromParams}
-          connecting={connectionsManager?.state.connectingToHost ?? false}
-          error={connectionsManager?.state.connectingToHostError}
-          onSubmitPlayerName={(playerName) => {
-            connectionsManager?.actions.connect<IPeerMeta>(
-              idFromParams,
-              settingsManager.state.userId,
-              {
-                playerName: playerName,
-              }
-            );
-          }}
-        />
-      ) : (
-        <Session
-          mode={SceneMode.PlayOnline}
-          sessionManager={sessionManager}
-          sceneManager={sceneManager}
-          connectionsManager={connectionsManager}
-          isLoading={
-            hostManager.state.loading || connectionsManager.state.loading
-          }
-          idFromParams={idFromParams}
-          shareLink={shareLink}
-          userId={settingsManager.state.userId}
-          error={hostManager.state.error}
-        />
-      )}
+      <Session
+        mode={SceneMode.PlayOnline}
+        sessionManager={sessionManager}
+        sceneManager={sceneManager}
+        isGM={isGM}
+        roomId={props.roomId}
+        shareLink={shareLink}
+        userId={settingsManager.state.userId}
+      />
     </>
   );
-};
+}
 
 PlayRoute.displayName = "PlayRoute";
-export default PlayRoute;
+export default PlayRouteProvider;

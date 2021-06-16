@@ -27,7 +27,9 @@ const NotFoundRoute = React.lazy(
 const PlayOfflineRoute = React.lazy(
   () => import("../../routes/Play/PlayOfflineRoute")
 );
-const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
+const PlayRouteProvider = React.lazy(
+  () => import("../../routes/Play/PlayRoute")
+);
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
 const SeelieSquireRoute = React.lazy(
@@ -98,15 +100,15 @@ export const AppRouter = () => {
         <Route
           exact
           path={"/play"}
-          render={(props) => {
-            return <PlayRoute {...props} />;
+          render={() => {
+            return <PlayRouteProvider />;
           }}
         />
         <Route
           exact
           path={"/play/:id"}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            return <PlayRouteProvider roomId={props.match.params.id} />;
           }}
         />
         <Route
