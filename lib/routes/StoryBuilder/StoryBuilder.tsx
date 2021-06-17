@@ -18,6 +18,8 @@ import { Tags } from "./hooks/Tags";
 import { useDecks } from "./hooks/useDecks";
 import { useRandomFromList } from "./hooks/useRandomFromList";
 
+const icons = import.meta.glob("../../../images/story-dice/**/*.svg?raw");
+console.debug("icons", icons);
 function Text(props: { children: JSX.Element }) {
   return (
     <Container maxWidth="sm">
