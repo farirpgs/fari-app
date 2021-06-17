@@ -10,6 +10,9 @@ import { useMarkdownFile } from "../useMarkdownFile";
 import { useMarkdownPage } from "../useMarkdownPage";
 
 jest.mock("../../../../constants/env.ts");
+jest.mock("axios");
+jest.mock("@sentry/react");
+jest.mock("@sentry/browser");
 
 const fakeLogger = {
   debug: jest.fn(),
@@ -27,12 +30,17 @@ beforeEach(() => {
 
 describe("Given I want use the autocomplete indexes", () => {
   it("should give me good indexes", async () => {
-    const view = renderHook(() => {
-      return useMarkdownFile({
-        loadFunction: aWiki,
-        prefix: "/prefix",
-      });
-    });
+    const view = renderHook(
+      () => {
+        return useMarkdownFile({
+          loadFunction: aWiki,
+          prefix: "/prefix",
+        });
+      },
+      {
+        wrapper: wrapper,
+      }
+    );
 
     await view.waitForNextUpdate();
 
@@ -68,12 +76,17 @@ describe("Given I want use the autocomplete indexes", () => {
 describe("useMarkdownFile", () => {
   describe("Given I have an undefined markdown file", () => {
     it("should return an undefined state", async () => {
-      const view = renderHook(() => {
-        return useMarkdownFile({
-          loadFunction: anUndefinedMarkdownFile,
-          prefix: "/test-doc",
-        });
-      });
+      const view = renderHook(
+        () => {
+          return useMarkdownFile({
+            loadFunction: anUndefinedMarkdownFile,
+            prefix: "/test-doc",
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       expect(view.result.current.html).toEqual(undefined);
       expect(view.result.current.markdownIndexes.flat).toEqual([]);
@@ -83,12 +96,17 @@ describe("useMarkdownFile", () => {
   });
   describe("Given I dont have a load function", () => {
     it("should return an undefined state", async () => {
-      const view = renderHook(() => {
-        return useMarkdownFile({
-          loadFunction: undefined as any,
-          prefix: "/test-doc",
-        });
-      });
+      const view = renderHook(
+        () => {
+          return useMarkdownFile({
+            loadFunction: undefined as any,
+            prefix: "/test-doc",
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       expect(view.result.current.html).toEqual(undefined);
       expect(view.result.current.markdownIndexes.flat).toEqual([]);
@@ -98,12 +116,17 @@ describe("useMarkdownFile", () => {
   });
   describe("Given I have an empty markdown file", () => {
     it("should return an undefined state", async () => {
-      const view = renderHook(() => {
-        return useMarkdownFile({
-          loadFunction: anEmptyMarkdownFile,
-          prefix: "/test-doc",
-        });
-      });
+      const view = renderHook(
+        () => {
+          return useMarkdownFile({
+            loadFunction: anEmptyMarkdownFile,
+            prefix: "/test-doc",
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       expect(view.result.current.html).toEqual(undefined);
       expect(view.result.current.markdownIndexes.flat).toEqual([]);
@@ -385,19 +408,24 @@ describe("useMarkdownPage", () => {
   });
   describe("Given the third page", () => {
     it("should go to third h1", async () => {
-      const view = renderHook(() => {
-        const { dom } = useMarkdownFile({
-          loadFunction: aComplexeMarkdownFile,
-          prefix: "/test-doc",
-        });
+      const view = renderHook(
+        () => {
+          const { dom } = useMarkdownFile({
+            loadFunction: aComplexeMarkdownFile,
+            prefix: "/test-doc",
+          });
 
-        return useMarkdownPage({
-          page: "header-3",
-          section: "",
-          url: "test-doc",
-          dom: dom,
-        });
-      });
+          return useMarkdownPage({
+            page: "header-3",
+            section: "",
+            url: "test-doc",
+            dom: dom,
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header-3");

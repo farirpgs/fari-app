@@ -21,7 +21,7 @@ export function LoadingRoute(props: { pathname: string }) {
 
   return (
     <Page hideHeaderLogo={props.pathname === "/"}>
-      <Fade>
+      <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
             <CircularProgress />

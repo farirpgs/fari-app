@@ -5,14 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "npm start",
+      "command": "npm run start",
       "name": "Start",
       "request": "launch",
       "type": "node-terminal"
     },
     {
-      "command": "npm start:all",
+      "command": "npm run start:all",
       "name": "Start All",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "npm run storybook",
+      "name": "Start Storybook",
       "request": "launch",
       "type": "node-terminal"
     }

@@ -17,6 +17,7 @@ import {
   useCharacters,
 } from "./contexts/CharactersContext/CharactersContext";
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
+import { InjectionsContext } from "./contexts/InjectionsContext/InjectionsContext";
 import {
   IFolders,
   MyBinderContext,
@@ -32,7 +33,10 @@ import {
 } from "./contexts/SettingsContext/SettingsContext";
 import { CharacterTemplates } from "./domains/character/CharacterType";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
+import { getDefaultInjections } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";
+
+const injections = getDefaultInjections();
 
 export function App() {
   return (
@@ -51,19 +55,21 @@ function AppContexts(props: { children: ReactNode }) {
 
   return (
     <React.Suspense fallback={null}>
-      <DndProvider backend={HTML5Backend}>
-        <SettingsContext.Provider value={settingsManager}>
-          <CharactersContext.Provider value={charactersManager}>
-            <ScenesContext.Provider value={scenesManager}>
-              <DiceContext.Provider value={diceManager}>
-                <MyBinderContext.Provider value={myBinderManager}>
-                  <AppProviders>{props.children}</AppProviders>
-                </MyBinderContext.Provider>
-              </DiceContext.Provider>
-            </ScenesContext.Provider>
-          </CharactersContext.Provider>
-        </SettingsContext.Provider>
-      </DndProvider>
+      <InjectionsContext.Provider value={injections}>
+        <DndProvider backend={HTML5Backend}>
+          <SettingsContext.Provider value={settingsManager}>
+            <CharactersContext.Provider value={charactersManager}>
+              <ScenesContext.Provider value={scenesManager}>
+                <DiceContext.Provider value={diceManager}>
+                  <MyBinderContext.Provider value={myBinderManager}>
+                    <AppProviders>{props.children}</AppProviders>
+                  </MyBinderContext.Provider>
+                </DiceContext.Provider>
+              </ScenesContext.Provider>
+            </CharactersContext.Provider>
+          </SettingsContext.Provider>
+        </DndProvider>
+      </InjectionsContext.Provider>
     </React.Suspense>
   );
 }

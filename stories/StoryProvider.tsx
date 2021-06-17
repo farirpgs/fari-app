@@ -10,6 +10,7 @@ import {
   useCharacters,
 } from "../lib/contexts/CharactersContext/CharactersContext";
 import { DiceContext, useDice } from "../lib/contexts/DiceContext/DiceContext";
+import { InjectionsContext } from "../lib/contexts/InjectionsContext/InjectionsContext";
 import {
   ScenesContext,
   useScenes,
@@ -18,10 +19,13 @@ import {
   SettingsContext,
   useSettings,
 } from "../lib/contexts/SettingsContext/SettingsContext";
+import { getDefaultInjections } from "../lib/services/injections";
 import { AppDarkTheme, AppLightTheme } from "../lib/theme";
 
+const injections = getDefaultInjections();
+
 /**
- * The Fate Font is served using the `-s` option on the package.json
+ * The Fate Font and locales files are served using the `--static-dir` option on the package.json
  * Also see .storybook/preview-head.html
  */
 export function StoryProvider(props: {
@@ -38,29 +42,33 @@ export function StoryProvider(props: {
   }, [props.theme]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <SettingsContext.Provider value={settingsManager}>
-        <CharactersContext.Provider value={charactersManager}>
-          <ScenesContext.Provider value={scenesManager}>
-            <DiceContext.Provider value={diceManager}>
-              <ThemeProvider
-                theme={
-                  settingsManager.state.themeMode === "dark"
-                    ? AppDarkTheme
-                    : AppLightTheme
-                }
-              >
-                <StylesProvider injectFirst>
-                  <BrowserRouter>
-                    <CssBaseline />
-                    <HelmetProvider>{props.children}</HelmetProvider>
-                  </BrowserRouter>
-                </StylesProvider>
-              </ThemeProvider>
-            </DiceContext.Provider>
-          </ScenesContext.Provider>
-        </CharactersContext.Provider>
-      </SettingsContext.Provider>
-    </DndProvider>
+    <React.Suspense fallback={null}>
+      <InjectionsContext.Provider value={injections}>
+        <DndProvider backend={HTML5Backend}>
+          <SettingsContext.Provider value={settingsManager}>
+            <CharactersContext.Provider value={charactersManager}>
+              <ScenesContext.Provider value={scenesManager}>
+                <DiceContext.Provider value={diceManager}>
+                  <ThemeProvider
+                    theme={
+                      settingsManager.state.themeMode === "dark"
+                        ? AppDarkTheme
+                        : AppLightTheme
+                    }
+                  >
+                    <StylesProvider injectFirst>
+                      <BrowserRouter>
+                        <CssBaseline />
+                        <HelmetProvider>{props.children}</HelmetProvider>
+                      </BrowserRouter>
+                    </StylesProvider>
+                  </ThemeProvider>
+                </DiceContext.Provider>
+              </ScenesContext.Provider>
+            </CharactersContext.Provider>
+          </SettingsContext.Provider>
+        </DndProvider>
+      </InjectionsContext.Provider>
+    </React.Suspense>
   );
 }

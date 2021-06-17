@@ -1,5 +1,4 @@
 import { useTranslation, UseTranslationOptions } from "react-i18next";
-import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { ITranslationKeys } from "../../locale";
 import {
   IPossibleLanguages,
@@ -8,7 +7,6 @@ import {
 
 export function useTranslate() {
   const { t, i18n } = useTranslation();
-  const logger = useLogger();
   const currentLanguage = getCurrentLanguage();
 
   return {

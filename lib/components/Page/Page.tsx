@@ -23,6 +23,7 @@ import BookIcon from "@material-ui/icons/Book";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import BugReportIcon from "@material-ui/icons/BugReport";
+import CasinoIcon from '@material-ui/icons/Casino';
 import ChatIcon from "@material-ui/icons/Chat";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
@@ -54,7 +55,7 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPossibleLanguages,
-  PossibleLanguagesNames,
+  PossibleLanguagesNames
 } from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
@@ -528,6 +529,11 @@ export const Page: React.FC<{
                         to: "/story-builder",
                         label: "Story Builder",
                         icon: <LocalLibraryIcon />,
+                      },
+                      {
+                        to: "/story-dice",
+                        label: "Story Dice",
+                        icon: <CasinoIcon />,
                       },
                       {
                         to: "/oracle",

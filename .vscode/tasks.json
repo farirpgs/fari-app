@@ -15,7 +15,7 @@
         "clear": true
       },
       "group": "build",
-      "label": "Validate",
+      "label": "TSC & Lint & Tests",
       "problemMatcher": ["$tsc", "$eslint-stylish"]
     },
     {

@@ -2,7 +2,8 @@ import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
-import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilder";
+import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
+import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
 import { Doc } from "../Doc/Doc";
 import { LoadingRoute } from "./LoadingRoute";
 
@@ -183,6 +184,13 @@ export const AppRouter = () => {
           path={"/story-builder"}
           render={() => {
             return <StoryBuilderRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/story-dice"}
+          render={() => {
+            return <StoryDiceRoute />;
           }}
         />
 

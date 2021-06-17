@@ -29,10 +29,15 @@ a {
 
 @font-face {
   font-family: "fate";
-  src: url("../fonts/fate-core-font.ttf");
+  src: url("/fonts/fate-core-font.ttf");
 }
 
 @font-face {
   font-family: "Virgil";
-  src: url("../fonts/Virgil.woff2");
+  src: url("/fonts/Virgil.woff2");
+}
+
+@font-face {
+  font-family: "Pangolin";
+  src: url("/fonts/Pangolin/Pangolin-Regular.ttf");
 }

@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
+import CasinoIcon from "@material-ui/icons/Casino";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import React, { useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
@@ -17,7 +18,8 @@ import { useDecks } from "../../routes/StoryBuilder/hooks/useDecks";
 import {
   StoryDecks,
   StoryDeckTags,
-} from "../../routes/StoryBuilder/StoryBuilder";
+} from "../../routes/StoryBuilder/StoryBuilderRoute";
+import { StoryDice } from "../../routes/StoryDice/StoryDiceRoute";
 import { DiceFab } from "../DiceFab/DiceFab";
 
 type DiceFabProps = Parameters<typeof DiceFab>[0];
@@ -32,11 +34,13 @@ export function Toolbox(props: {
   const zIndex = useZIndex();
   const decksManager = useDecks();
   const [openStoryBuilderDecks, setOpenStoryBuilderDecks] = useState(false);
+  const [openStoryDice, setOpenStoryDice] = useState(false);
   const [openOracle, setOpenOracle] = useState(false);
 
   return (
     <>
       {renderStoryBuilderDecksDialog()}
+      {renderStoryDiceDialog()}
       {renderOracleDialog()}
       <Box
         className={css({
@@ -139,6 +143,24 @@ export function Toolbox(props: {
                     </IconButton>
                   </Tooltip>
                 </Grid>
+                <Grid item>
+                  <Tooltip title="Story Builder Decks">
+                    <IconButton
+                      className={css({
+                        border: `1px solid ${theme.palette.primary.main}`,
+                        boxShadow: theme.shadows[2],
+                      })}
+                      onClick={() => {
+                        setOpenStoryDice(true);
+                      }}
+                    >
+                      <CasinoIcon
+                        color="primary"
+                        className={css({ width: "2rem", height: "2rem" })}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -172,6 +194,37 @@ export function Toolbox(props: {
             autoFocus
             onClick={() => {
               setOpenStoryBuilderDecks(false);
+            }}
+            color="primary"
+          >
+            {"Close"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
+  function renderStoryDiceDialog() {
+    return (
+      <Dialog
+        fullWidth
+        maxWidth="md"
+        open={openStoryDice}
+        onClose={() => {
+          setOpenStoryDice(false);
+        }}
+      >
+        <DialogContent>
+          <Box py="2rem">
+            <Box pb="1rem">
+              <StoryDice />
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={() => {
+              setOpenStoryDice(false);
             }}
             color="primary"
           >

@@ -2,12 +2,11 @@ import { InternationalizationService } from "./internationalization/Internationa
 import { makeLogger } from "./logger/makeLogger";
 import { makeSentryService } from "./sentry/SentryService";
 
-const sentryService = makeSentryService();
-const logger = makeLogger(sentryService);
-const internationalizationService = InternationalizationService(logger);
+export function getDefaultInjections() {
+  const sentryService = makeSentryService();
+  const logger = makeLogger(sentryService);
+  const internationalizationService = InternationalizationService(logger);
+  return { internationalizationService, logger, sentryService };
+}
 
-export const injections = {
-  internationalizationService,
-  logger,
-  sentryService,
-};
+export type IInjections = ReturnType<typeof getDefaultInjections>;
