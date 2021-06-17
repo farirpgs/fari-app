@@ -76,31 +76,28 @@ export const DiceBox: React.FC<IProps> = (props) => {
   };
 
   const diceStyle = css({
-    "fontSize": props.fontSize,
-    "fontFamily": Font.monospace,
-    "lineHeight": "normal",
-    "color": theme.palette.getContrastText(diceRollsManager.state.color),
-    "background": diceRollsManager.state.color,
-    "fontWeight": theme.typography.fontWeightBold,
-    "border": `1px dashed ${
+    fontSize: props.fontSize,
+    fontFamily: Font.monospace,
+    lineHeight: "normal",
+    color: theme.palette.getContrastText(diceRollsManager.state.color),
+    background: diceRollsManager.state.color,
+    fontWeight: theme.typography.fontWeightBold,
+    border: `1px dashed ${
       diceRollsManager.state.rolling || !diceRollsManager.state.finalResult
         ? theme.palette.primary.main
         : "transparent"
     }`,
-    "borderRadius": "4px",
-    "padding": ".2rem",
-    "minWidth": props.size,
-    "height": props.size,
-    "display": "flex",
-    "justifyContent": "center",
-    "alignItems": "center",
-    "boxShadow": theme.shadows[2],
-    "transition": theme.transitions.create(["opacity", "background"], {
+    borderRadius: "4px",
+    padding: ".2rem",
+    minWidth: props.size,
+    height: props.size,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxShadow: theme.shadows[2],
+    transition: theme.transitions.create(["background"], {
       duration: theme.transitions.duration.shortest,
     }),
-    "&:hover": {
-      opacity: "1",
-    },
   });
   const diceRollingAnimationStyle = css({
     animationName: "spin",

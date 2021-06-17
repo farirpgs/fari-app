@@ -1,5 +1,6 @@
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Chip from "@material-ui/core/Chip";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -13,13 +14,12 @@ import { Heading } from "../../components/Heading/Heading";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
+import { StoryDiceIcons } from "../../domains/Icons/StoryDiceIcons/StoryDiceIcons";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { Tags } from "./hooks/Tags";
 import { useDecks } from "./hooks/useDecks";
 import { useRandomFromList } from "./hooks/useRandomFromList";
 
-const icons = import.meta.glob("../../../images/story-dice/**/*.svg?raw");
-console.debug("icons", icons);
 function Text(props: { children: JSX.Element }) {
   return (
     <Container maxWidth="sm">
@@ -30,12 +30,141 @@ function Text(props: { children: JSX.Element }) {
   );
 }
 
+function StoryDie(props: {
+  diceName: string;
+  sideName: string;
+  onDieClick(): void;
+}) {
+  const rollingAnimationTime = 1000;
+  const [rolling, setRolling] = useState(false);
+  const theme = useTheme();
+  const icons = (StoryDiceIcons as any)[props.diceName];
+  const Icon = icons[props.sideName];
+  const showFinalResult = Icon && !rolling;
+
+  const diceRollingAnimationStyle = css({
+    animationName: "spin",
+    animationDuration: "250ms",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear",
+  });
+
+  useEffect(
+    function animateOnSideChange() {
+      let timeout: any;
+      if (props.diceName && props.sideName) {
+        setRolling(true);
+
+        timeout = setTimeout(() => {
+          setRolling(false);
+        }, rollingAnimationTime);
+      }
+      return () => {
+        clearTimeout(timeout);
+      };
+    },
+    [props.diceName, props.sideName]
+  );
+
+  return (
+    <ButtonBase
+      onClick={() => {
+        props.onDieClick();
+      }}
+    >
+      <Box
+        className={cx(
+          css({
+            background: !showFinalResult
+              ? theme.palette.background.paper
+              : theme.palette.primary.main,
+            color: theme.palette.getContrastText(theme.palette.primary.main),
+            borderRadius: "4px",
+            padding: ".5rem",
+            border: `1px dashed ${theme.palette.primary.main}`,
+            cursor: "pointer",
+            boxShadow: theme.shadows[2],
+            transition: theme.transitions.create(["background"], {
+              duration: theme.transitions.duration.shortest,
+            }),
+          }),
+          {
+            [diceRollingAnimationStyle]: rolling,
+          }
+        )}
+      >
+        {showFinalResult ? (
+          <Icon
+            className={css({
+              display: "flex",
+              width: "4rem",
+              height: "4rem",
+            })}
+          />
+        ) : (
+          <Box
+            className={css({
+              display: "flex",
+              width: "4rem",
+              height: "4rem",
+            })}
+          />
+        )}
+      </Box>
+    </ButtonBase>
+  );
+}
+
+function StoryDice() {
+  const [diceNameAndIcon, setDiceNameAndIcon] = useState<
+    Record<string, string>
+  >({});
+
+  return (
+    <Box>
+      <Grid container justify="center" alignItems="center" spacing={2}>
+        {Object.keys(StoryDiceIcons).map((diceName) => {
+          const currentSide = diceNameAndIcon[diceName];
+          return (
+            <Grid item key={diceName}>
+              <StoryDie
+                diceName={diceName}
+                sideName={currentSide}
+                onDieClick={() => {
+                  const icons = (StoryDiceIcons as any)[diceName];
+                  const possibleIconNames = Object.keys(icons).filter(
+                    (iconName) => iconName !== currentSide
+                  );
+                  const index = Math.trunc(
+                    Math.random() * possibleIconNames.length
+                  );
+
+                  setDiceNameAndIcon((prev) => {
+                    return {
+                      ...prev,
+                      [diceName]: possibleIconNames[index],
+                    };
+                  });
+                }}
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
+  );
+}
+
 export function StoryBuilderRoute() {
   const theme = useTheme();
   const decksManager = useDecks();
 
   return (
     <Page>
+      <Container maxWidth="md">
+        <StoryDice />
+      </Container>
+
       <Heading title={"Story Builder"} icon={LocalLibraryIcon}>
         <>
           <Text>
