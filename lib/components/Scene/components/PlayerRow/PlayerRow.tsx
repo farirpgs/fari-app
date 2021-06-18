@@ -28,7 +28,6 @@ import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
-import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/CircleTextField";
@@ -66,8 +65,6 @@ export function PlayerRow(
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const diceResultBackground = "#182026";
-  const diceResultColor = useTextColors(diceResultBackground);
   const [hover, setHover] = useState(false);
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
     props.player.character

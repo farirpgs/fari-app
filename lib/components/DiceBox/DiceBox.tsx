@@ -391,14 +391,13 @@ export function DiceBonusLabel(props: {
     disableConfettis: true,
   });
 
-  const { labelsAndColors, hasLabels } = getLabelsAndColors(
+  const { labelsAndColors } = getLabelsAndColors(
     diceRollsManager.state.finalResult?.commandResult
   );
 
   return (
     <>
       <Grid container alignItems="center">
-        {/* {props.colonBefore && hasLabels && ": "} */}
         {Object.keys(labelsAndColors).map((label, index) => {
           const color = !props.noColor ? labelsAndColors[label] : undefined;
           const isFirstLabel = index === 0;
