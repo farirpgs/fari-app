@@ -28,6 +28,7 @@ import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
+import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/CircleTextField";
@@ -65,6 +66,8 @@ export function PlayerRow(
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
+  const diceResultBackground = "#182026";
+  const diceResultColor = useTextColors(diceResultBackground);
   const [hover, setHover] = useState(false);
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
     props.player.character
@@ -156,8 +159,8 @@ export function PlayerRow(
             <Box display="flex" justifyContent="flex-end" height="100%">
               <DiceBox
                 rolls={props.player.rolls}
-                size="2.5rem"
-                fontSize="1.25rem"
+                size="3rem"
+                fontSize="1.5rem"
                 borderSize=".15rem"
                 disableConfettis={props.isMe}
                 disabled={!props.permissions.canRoll}
@@ -167,31 +170,35 @@ export function PlayerRow(
               />
             </Box>
           </Grid>
-          <Grid item container alignItems="center">
-            <Grid item xs={12}>
+          {props.player.rolls.length > 0 && (
+            <Grid item>
               <Box
                 className={css({
-                  display: "flex",
-                  fontSize: ".75rem",
-                  textTransform: "uppercase",
-                  color: theme.palette.primary.main,
                   fontWeight: theme.typography.fontWeightBold,
+                  borderRadius: "4px",
+                  padding: ".3rem .5rem",
                 })}
               >
-                <DiceBonusLabel rolls={props.player.rolls} />
+                <Grid container alignItems="center">
+                  <Grid item xs={12}>
+                    <Box
+                      className={css({
+                        display: "flex",
+                        fontSize: ".75rem",
+                        textTransform: "uppercase",
+                        fontWeight: theme.typography.fontWeightBold,
+                      })}
+                    >
+                      <DiceBonusLabel rolls={props.player.rolls} noColor />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <DiceBoxResult rolls={props.player.rolls} noColor />
+                  </Grid>
+                </Grid>
               </Box>
             </Grid>
-            <Grid item xs={12}>
-              <Box
-                className={css({
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightBold,
-                })}
-              >
-                <DiceBoxResult rolls={props.player.rolls} />
-              </Box>
-            </Grid>
-          </Grid>
+          )}
         </Grid>
       </Box>
     );

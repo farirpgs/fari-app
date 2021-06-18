@@ -26,6 +26,7 @@ type DiceFabProps = Parameters<typeof DiceFab>[0];
 
 export function Toolbox(props: {
   dice: DiceFabProps;
+  hideDefaultRightActions?: boolean;
   leftActions?: JSX.Element;
   centerActions?: JSX.Element;
   rightActions?: JSX.Element;
@@ -99,70 +100,72 @@ export function Toolbox(props: {
               </Grid>
             </Grid>
             {/* RIGHT */}
-            <Grid item>
-              <Grid
-                container
-                alignItems="center"
-                justify="space-between"
-                spacing={2}
-              >
-                {props.rightActions}
-                <Grid item>
-                  <Tooltip title="Oracle">
-                    <IconButton
-                      className={css({
-                        border: `1px solid ${theme.palette.primary.main}`,
-                        boxShadow: theme.shadows[2],
-                      })}
-                      onClick={() => {
-                        setOpenOracle(true);
-                      }}
-                    >
-                      <Icons.EyeIcon
-                        color="primary"
-                        className={css({ width: "2rem", height: "2rem" })}
-                      />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-                <Grid item>
-                  <Tooltip title="Story Builder Decks">
-                    <IconButton
-                      className={css({
-                        border: `1px solid ${theme.palette.primary.main}`,
-                        boxShadow: theme.shadows[2],
-                      })}
-                      onClick={() => {
-                        setOpenStoryBuilderDecks(true);
-                      }}
-                    >
-                      <LocalLibraryIcon
-                        color="primary"
-                        className={css({ width: "2rem", height: "2rem" })}
-                      />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-                <Grid item>
-                  <Tooltip title="Story Builder Decks">
-                    <IconButton
-                      className={css({
-                        border: `1px solid ${theme.palette.primary.main}`,
-                        boxShadow: theme.shadows[2],
-                      })}
-                      onClick={() => {
-                        setOpenStoryDice(true);
-                      }}
-                    >
-                      <CasinoIcon
-                        color="primary"
-                        className={css({ width: "2rem", height: "2rem" })}
-                      />
-                    </IconButton>
-                  </Tooltip>
+            {!props.hideDefaultRightActions && (
+              <Grid item>
+                <Grid
+                  container
+                  alignItems="center"
+                  justify="space-between"
+                  spacing={2}
+                >
+                  {props.rightActions}
+                  <Grid item>
+                    <Tooltip title="Oracle">
+                      <IconButton
+                        className={css({
+                          border: `1px solid ${theme.palette.primary.main}`,
+                          boxShadow: theme.shadows[2],
+                        })}
+                        onClick={() => {
+                          setOpenOracle(true);
+                        }}
+                      >
+                        <Icons.EyeIcon
+                          color="primary"
+                          className={css({ width: "2rem", height: "2rem" })}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip title="Story Builder Decks">
+                      <IconButton
+                        className={css({
+                          border: `1px solid ${theme.palette.primary.main}`,
+                          boxShadow: theme.shadows[2],
+                        })}
+                        onClick={() => {
+                          setOpenStoryBuilderDecks(true);
+                        }}
+                      >
+                        <LocalLibraryIcon
+                          color="primary"
+                          className={css({ width: "2rem", height: "2rem" })}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip title="Story Builder Decks">
+                      <IconButton
+                        className={css({
+                          border: `1px solid ${theme.palette.primary.main}`,
+                          boxShadow: theme.shadows[2],
+                        })}
+                        onClick={() => {
+                          setOpenStoryDice(true);
+                        }}
+                      >
+                        <CasinoIcon
+                          color="primary"
+                          className={css({ width: "2rem", height: "2rem" })}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            )}{" "}
           </Grid>
         </Box>
       </Box>

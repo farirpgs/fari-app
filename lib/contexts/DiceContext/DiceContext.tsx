@@ -110,21 +110,21 @@ export function useDice() {
   }
 
   function getPoolResult() {
-    const optionsFromCommandGroups: Array<IDiceCommandOption> = commandGroups.map(
+    const selectedCommands: Array<IDiceCommandOption> = commandGroups.map(
       (commandGroup) => {
         return {
           type: RollType.DiceCommand,
           commandGroupId: commandGroup.id,
+          label: commandGroup.label,
         };
       }
     );
 
-    const optionsFromPool = pool.flatMap(
+    const commandsFromPool = pool.flatMap(
       (element) => element.commandOptionList
     );
-    const allOptions = [...optionsFromPool, ...optionsFromCommandGroups];
-
-    const result = roll(allOptions, options);
+    const allCommands = [...commandsFromPool, ...selectedCommands];
+    const result = roll(allCommands, options);
     const latestPlayerId = playerId;
 
     clearPool();

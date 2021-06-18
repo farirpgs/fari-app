@@ -1,3 +1,4 @@
+import { previewContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import {
   BlockType,
   IBlock,
@@ -24,23 +25,19 @@ export const BlockSelectors = {
         return {
           type: RollType.DiceCommand,
           commandGroupId: commandGroup.id,
+          label: previewContentEditable({ value: block.label }),
         };
       }
     );
 
     if (block.type === BlockType.Skill && !block.meta.hideModifier) {
       commandOptionList.push({
-        label: block.label,
+        label: previewContentEditable({ value: block.label }),
         type: RollType.Modifier,
         modifier: parseInt(block.value) || 0,
       });
     }
-    if (block.type === BlockType.DicePool) {
-      commandOptionList.push({
-        label: block.label,
-        type: RollType.Label,
-      });
-    }
+
     return commandOptionList;
   },
 };

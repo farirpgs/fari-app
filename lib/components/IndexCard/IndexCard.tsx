@@ -33,6 +33,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { ThemeProvider } from "@material-ui/styles";
 import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
+import { FontFamily } from "../../constants/FontFamily";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import {
@@ -911,8 +912,9 @@ export const IndexCard: React.FC<
             data-cy={`${props["data-cy"]}.title`}
             value={indexCardManager.state.indexCard.title}
             className={css({
-              fontSize: "1.6rem",
-              letterSpacing: "-.5px",
+              fontSize: "1.8rem",
+              fontFamily: FontFamily.HandWriting,
+              // letterSpacing: "-.5px",
             })}
             readonly={props.readonly}
             onChange={(newTitle) => {

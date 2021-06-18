@@ -175,6 +175,21 @@ PlayerWithARollAndModifier.args = {
   }),
 };
 
+export const PlayerWithAPoolRoll = Template.bind({});
+PlayerWithAPoolRoll.args = {
+  highlight: false,
+  canLoadCharacterSheet: true,
+  canLoadDuplicateCharacterSheet: false,
+  canRemove: false,
+  canRoll: true,
+  canUpdateInitiative: true,
+  canUpdatePoints: true,
+  player: aPlayer({
+    character: aCharacter("Meriadoc Brandybuck"),
+    rolls: [aPoolRoll()],
+  }),
+};
+
 export const PlayerReadOnly = Template.bind({});
 PlayerReadOnly.args = {
   highlight: false,
@@ -673,6 +688,58 @@ function aRollWithModifier(): IDiceRollResult {
   };
 }
 
+function aPoolRoll(): IDiceRollResult {
+  return {
+    total: 6,
+    totalWithoutModifiers: 6,
+    options: { listResults: true },
+    commandResult: [
+      {
+        type: RollType.DiceCommand,
+        value: 1,
+        label: "Athletic",
+        commandGroupId: "1d12",
+        commandName: "1d12",
+      },
+      {
+        type: RollType.DiceCommand,
+        value: 2,
+        label: "Athletic",
+        commandGroupId: "1d12",
+        commandName: "1d12",
+      },
+      {
+        type: RollType.DiceCommand,
+        value: 3,
+        label: "Athletic",
+        commandGroupId: "1d12",
+        commandName: "1d12",
+      },
+      {
+        type: RollType.DiceCommand,
+        value: 3,
+        label: "Fight",
+        commandGroupId: "1d12",
+        commandName: "1d12",
+      },
+      {
+        type: RollType.DiceCommand,
+        value: 3,
+        label: "Fight",
+        commandGroupId: "1d12",
+        commandName: "1d12",
+      },
+      {
+        type: RollType.DiceCommand,
+        value: 3,
+        label: "Shoot",
+        commandGroupId: "1d12",
+        commandName: "1d12",
+      },
+    ],
+  };
+}
+
 function aRollWithLabel(): IDiceRollResult {
   return {
     total: 7,
@@ -684,28 +751,28 @@ function aRollWithLabel(): IDiceRollResult {
         commandGroupId: "1dF",
         commandName: "1dF",
         type: RollType.DiceCommand,
+        label: "Athletic",
       },
       {
         value: 1,
         commandGroupId: "1dF",
         commandName: "1dF",
         type: RollType.DiceCommand,
+        label: "Athletic",
       },
       {
         value: 1,
         commandGroupId: "1dF",
         commandName: "1dF",
         type: RollType.DiceCommand,
+        label: "Athletic",
       },
       {
         value: 0,
         commandGroupId: "1dF",
         commandName: "1dF",
         type: RollType.DiceCommand,
-      },
-      {
         label: "Athletic",
-        type: RollType.Label,
       },
     ],
   };

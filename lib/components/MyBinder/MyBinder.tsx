@@ -27,6 +27,7 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SearchIcon from "@material-ui/icons/Search";
 import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { arraySort } from "../../domains/array/arraySort";
 import { LazyState, useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -70,6 +71,7 @@ export function MyBinder<TFolders extends string>(props: {
 }) {
   const { t } = useTranslate();
   const theme = useTheme();
+  const history = useHistory();
 
   const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
@@ -94,9 +96,8 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] = useState<
-    { folder: TFolders; element: any } | undefined
-  >(undefined);
+  const [deletedObject, setDeletedObject] =
+    useState<{ folder: TFolders; element: any } | undefined>(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -234,8 +235,8 @@ export function MyBinder<TFolders extends string>(props: {
           <Grid container justify="flex-end">
             <Grid item>
               <AppLink
-                to="/data"
                 onClick={() => {
+                  history.push("/data");
                   props.onClose();
                 }}
               >

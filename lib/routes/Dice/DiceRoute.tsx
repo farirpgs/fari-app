@@ -15,6 +15,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
+import { formatDiceNumber } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export function DiceRoute(props: { pool: boolean }) {
@@ -66,6 +67,7 @@ export function DiceRoute(props: { pool: boolean }) {
           subtitle={t("dice-route.meta.description")}
         />
         <Toolbox
+          hideDefaultRightActions
           dice={{
             onRoll: (result) => {
               setRollResult(result);
@@ -102,7 +104,7 @@ export function DiceRoute(props: { pool: boolean }) {
                       textAlign: "center",
                     })}
                   >
-                    {roll.total}
+                    {formatDiceNumber(roll)}
                   </Typography>
                 </Box>
               );

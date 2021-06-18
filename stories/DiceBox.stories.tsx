@@ -133,6 +133,53 @@ DefaultWithModifiers.args = {
   ],
 };
 
+export const DefaultWithMultipleModifiers = Template.bind({});
+DefaultWithMultipleModifiers.args = {
+  rolls: [
+    {
+      total: 8,
+      totalWithoutModifiers: 4,
+      options: { listResults: false },
+      commandResult: [
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          commandGroupId: "1dF",
+          commandName: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          commandGroupId: "1dF",
+          commandName: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          commandGroupId: "1dF",
+          commandName: "1dF",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          commandGroupId: "1dF",
+          commandName: "1dF",
+        },
+        {
+          type: RollType.Modifier,
+          value: 2,
+          label: "Academic",
+        },
+        {
+          type: RollType.Modifier,
+          value: 2,
+          label: "Careful",
+        },
+      ],
+    },
+  ],
+};
+
 export const DefaultBadResult = Template.bind({});
 DefaultBadResult.args = {
   rolls: [
@@ -257,11 +304,73 @@ MultipleDice.args = {
   ],
 };
 
+export const MultipleDiceWithLabel = Template.bind({});
+MultipleDiceWithLabel.args = {
+  rolls: [
+    {
+      total: 27,
+      totalWithoutModifiers: 27,
+      options: { listResults: false },
+      commandResult: [
+        {
+          type: RollType.DiceCommand,
+          value: 6,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Combat",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 6,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Combat",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 2,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Combat",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 2,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Strength",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 6,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Strength",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 4,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Strength",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+          label: "Strength",
+        },
+      ],
+    },
+  ],
+};
+
 export const MultipleDiceWithModifiers = Template.bind({});
 MultipleDiceWithModifiers.args = {
   rolls: [
     {
-      total: 9,
+      total: 12,
       totalWithoutModifiers: 6,
       options: { listResults: false },
       commandResult: [
@@ -285,12 +394,12 @@ MultipleDiceWithModifiers.args = {
         },
         {
           type: RollType.Modifier,
-          value: 2,
+          value: 3,
           label: "Academic",
         },
         {
           type: RollType.Modifier,
-          value: 1,
+          value: 3,
           label: "Lore",
         },
       ],
@@ -321,6 +430,61 @@ Pool.args = {
         {
           type: RollType.DiceCommand,
           value: 3,
+          commandGroupId: "1d12",
+          commandName: "1d12",
+        },
+      ],
+    },
+  ],
+};
+
+export const PoolGroups = Template.bind({});
+PoolGroups.args = {
+  rolls: [
+    {
+      total: 6,
+      totalWithoutModifiers: 6,
+      options: { listResults: true },
+      commandResult: [
+        {
+          type: RollType.DiceCommand,
+          value: 1,
+          label: "Athletic",
+          commandGroupId: "1d12",
+          commandName: "1d12",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 2,
+          label: "Athletic",
+          commandGroupId: "1d12",
+          commandName: "1d12",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 3,
+          label: "Athletic",
+          commandGroupId: "1d12",
+          commandName: "1d12",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 3,
+          label: "Fight",
+          commandGroupId: "1d12",
+          commandName: "1d12",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 3,
+          label: "Fight",
+          commandGroupId: "1d12",
+          commandName: "1d12",
+        },
+        {
+          type: RollType.DiceCommand,
+          value: 3,
+          label: "Shoot",
           commandGroupId: "1d12",
           commandName: "1d12",
         },
@@ -438,42 +602,49 @@ OutOfBoundPool.args = {
           value: 1,
           commandGroupId: "1d4",
           commandName: "1d4",
+          label: "First",
         },
         {
           type: RollType.DiceCommand,
           value: 1,
           commandGroupId: "1d6",
           commandName: "1d6",
+          label: "Second",
         },
         {
           type: RollType.DiceCommand,
           value: 1,
           commandGroupId: "1d8",
           commandName: "1d8",
+          label: "Third",
         },
         {
           type: RollType.DiceCommand,
           value: 1,
           commandGroupId: "1d10",
           commandName: "1d10",
+          label: "Fourth",
         },
         {
           type: RollType.DiceCommand,
           value: 1,
           commandGroupId: "1d12",
           commandName: "1d12",
+          label: "Fifth",
         },
         {
           type: RollType.DiceCommand,
           value: 1,
           commandGroupId: "1d20",
           commandName: "1d20",
+          label: "Sixt",
         },
         {
           type: RollType.DiceCommand,
           value: 1,
           commandGroupId: "1d12",
           commandName: "1d12",
+          label: "Seventh",
         },
         {
           type: RollType.DiceCommand,
