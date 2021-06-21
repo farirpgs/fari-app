@@ -292,4 +292,8 @@ export type ITranslationKeys =
   | "srds-route.fate-srds.subtitle"
   | "srds-route.fate-srds.title"
   | "srds-route.resources.title"
-  | "srds-route.title";
+  | "srds-route.title"
+  | "story-builder-route.meta.description"
+  | "story-builder-route.meta.title"
+  | "story-dice-route.meta.description"
+  | "story-dice-route.meta.title";

@@ -9,7 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef, useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { StoryDiceIcons } from "../../domains/Icons/StoryDiceIcons/StoryDiceIcons";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 function Text(props: { children: JSX.Element }) {
   return (
@@ -22,17 +24,17 @@ function Text(props: { children: JSX.Element }) {
 }
 
 export function StoryDiceRoute() {
+  const { t } = useTranslate();
   return (
     <Page>
-      <Heading title={"Story Dice"}>
+      <PageMeta
+        title={t("story-dice-route.meta.title")}
+        description={t("story-dice-route.meta.description")}
+      />
+      <Heading title={t("story-dice-route.meta.title")}>
         <>
           <Text>
-            <>
-              Below, you will find 9 Story Dice.
-              <br />
-              Click to roll them and they will reveal an image to you. Use those
-              images to help you create interesting stories.
-            </>
+            <>{t("story-dice-route.meta.description")}</>
           </Text>
           <Container maxWidth="md">
             <StoryDice />

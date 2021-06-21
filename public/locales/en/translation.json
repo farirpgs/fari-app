@@ -292,5 +292,9 @@
   "srds-route.fate-srds.subtitle": "Getting Started",
   "srds-route.fate-srds.title": "Fate System Reference Documents",
   "srds-route.resources.title": "Wikis & Resources",
-  "srds-route.title": "Fate System Reference Documents (SRDs)"
+  "srds-route.title": "Fate System Reference Documents (SRDs)",
+  "story-builder-route.meta.description": "Pick cards from Fari's Story Builder Decks to help you create interesting characters.",
+  "story-builder-route.meta.title": "Story Builder",
+  "story-dice-route.meta.description": "Roll those 9 Story Dice to help you create amazing and interesting stories.",
+  "story-dice-route.meta.title": "Story Dice"
 }
