@@ -12,6 +12,7 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { Page } from "../../components/Page/Page";
+import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Images } from "../../constants/Images";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { Tags } from "./hooks/Tags";
@@ -34,7 +35,15 @@ export function StoryBuilderRoute() {
 
   return (
     <Page>
-      <Heading title={"Story Builder"} icon={LocalLibraryIcon}>
+      <PageMeta
+        title={t("story-builder-route.meta.title")}
+        description={t("story-builder-route.meta.description")}
+      />
+
+      <Heading
+        title={t("story-builder-route.meta.title")}
+        icon={LocalLibraryIcon}
+      >
         <>
           <Text>
             <>
