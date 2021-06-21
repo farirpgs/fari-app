@@ -15,6 +15,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Images } from "../../constants/Images";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { Tags } from "./hooks/Tags";
 import { useDecks } from "./hooks/useDecks";
 import { useRandomFromList } from "./hooks/useRandomFromList";
@@ -32,6 +33,7 @@ function Text(props: { children: JSX.Element }) {
 export function StoryBuilderRoute() {
   const theme = useTheme();
   const decksManager = useDecks();
+  const { t } = useTranslate();
 
   return (
     <Page>
