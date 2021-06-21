@@ -22,6 +22,13 @@ export type IDiceCommandNames =
   | "1d12"
   | "1d20"
   | "1d100"
+  | "narrative-white"
+  | "narrative-green"
+  | "narrative-purple"
+  | "narrative-yellow"
+  | "narrative-red"
+  | "narrative-blue"
+  | "narrative-black"
   | "coin"
   | "card";
 
@@ -87,6 +94,48 @@ export const AllDiceCommandGroups: Record<
     criticalSuccess: 20,
     criticalFailure: 1,
   },
+  "narrative-white": {
+    id: "narrative-white",
+    label: "White",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-white"],
+  },
+  "narrative-green": {
+    id: "narrative-green",
+    label: "Green",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-green"],
+  },
+  "narrative-purple": {
+    id: "narrative-purple",
+    label: "Purple",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-purple"],
+  },
+  "narrative-yellow": {
+    id: "narrative-yellow",
+    label: "Yellow",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-yellow"],
+  },
+  "narrative-red": {
+    id: "narrative-red",
+    label: "Red",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-red"],
+  },
+  "narrative-blue": {
+    id: "narrative-blue",
+    label: "Blue",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-blue"],
+  },
+  "narrative-black": {
+    id: "narrative-black",
+    label: "Black",
+    icon: Icons.BalanceIcon,
+    value: ["narrative-black"],
+  },
   "1d100": {
     id: "1d100",
     label: "1d100",
@@ -129,7 +178,7 @@ const HundredSidedDie = makeNormalDie(100);
 const DeckOfCards = makeCards();
 
 type IDiceCommandOptions = {
-  sides: Array<number | string>;
+  sides: Array<any>;
   formatDetailedResult: (value: number | string) => string;
 };
 
@@ -167,6 +216,34 @@ export const DiceCommandOptions: Record<
   },
   "1d100": {
     sides: HundredSidedDie,
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-white": {
+    sides: [],
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-green": {
+    sides: [{}],
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-purple": {
+    sides: [],
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-yellow": {
+    sides: [],
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-red": {
+    sides: [],
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-blue": {
+    sides: [],
+    formatDetailedResult: formatNormalDie,
+  },
+  "narrative-black": {
+    sides: [],
     formatDetailedResult: formatNormalDie,
   },
   "card": {
@@ -243,8 +320,8 @@ export const Dice = {
         commandGroup.value.forEach((commandName) => {
           const diceOption = DiceCommandOptions[commandName];
           const sides = diceOption.sides;
-          const side = getRandomDiceSide(sides.length);
-          const result = sides[side];
+          const sideIndex = getRandomDiceSide(sides.length);
+          const result = sides[sideIndex];
 
           rolls.push({
             type: commandOption.type,

@@ -1,4 +1,4 @@
-import { Dice, RollType } from "../Dice";
+import { Dice, IDiceCommandOption, RollType } from "../Dice";
 
 describe("Dice", () => {
   describe("roll4DF", () => {
@@ -124,6 +124,31 @@ describe("simplifyResults", () => {
       ]);
 
       expect(result).toEqual([{ label: "Coin", value: 0 }]);
+    });
+  });
+});
+
+describe("Given I roll narrative dice", () => {
+  it("should considered its a pool", () => {
+    const commands: Array<IDiceCommandOption> = [
+      { commandGroupId: "narrative-white", type: RollType.DiceCommand },
+    ];
+
+    const result = Dice.rollCommandOptionList(commands, { listResults: false });
+
+    expect(result).toEqual({
+      commandResult: [
+        {
+          commandGroupId: "narrative-white",
+          commandName: "narrative-white",
+          label: undefined,
+          type: "DiceCommand",
+          value: undefined,
+        },
+      ],
+      options: { listResults: true },
+      total: 0,
+      totalWithoutModifiers: 0,
     });
   });
 });
