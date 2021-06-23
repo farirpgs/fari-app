@@ -18,7 +18,7 @@ import {
   BlockType,
   IDicePoolBlock,
 } from "../../../../../../domains/character/types";
-import { IDiceCommandOption } from "../../../../../../domains/dice/Dice";
+import { IRollGroup } from "../../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
@@ -32,7 +32,7 @@ export type IDicePoolElement = {
   blockId: string;
   blockType: BlockType;
   label: string;
-  commandOptionList: IDiceCommandOption[];
+  rollGroup: IRollGroup;
 };
 
 export type IDicePool = Array<IDicePoolElement>;
@@ -49,12 +49,10 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
 
   const commands = props.block.meta.commands || [];
-  const blockCommandGroups = DiceCommandGroup.getCommandGroupFromBlock(
+  const blockCommandSetOptions = DiceCommandGroup.getCommandSetOptionsFromBlock(
     props.block
   );
-  const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
-    props.block
-  );
+  const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
   return (
     <>
       <Box>
@@ -87,7 +85,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           <Grid item>
             <Box>
               <DiceMenuForCharacterSheet
-                commandGroupIds={commands}
+                commandSetIds={commands}
                 onChange={(newCommandIds) => {
                   props.onMetaChange({
                     ...props.block.meta,
@@ -117,7 +115,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
                         blockId: props.block.id,
                         blockType: props.block.type,
                         label: props.block.label,
-                        commandOptionList: commandOptionList,
+                        rollGroup: rollGroup,
                       });
                     }}
                   >
@@ -139,11 +137,11 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
                           </FormHelperText>
                         </Grid>
                       )}
-                      {blockCommandGroups.map((commandGroup, index) => {
+                      {blockCommandSetOptions.map((commandSet, index) => {
                         return (
                           <Grid item key={index}>
-                            <Tooltip title={commandGroup.label}>
-                              <commandGroup.icon
+                            <Tooltip title={commandSet.label}>
+                              <commandSet.icon
                                 className={css({
                                   display: "flex",
                                   fontSize: "2.3rem",
@@ -177,7 +175,7 @@ export function BlockDicePoolActions(
     <>
       <Grid item>
         <DiceMenuForCharacterSheet
-          commandGroupIds={commands}
+          commandSetIds={commands}
           onChange={(newCommandIds) => {
             props.onMetaChange({
               ...props.block.meta,

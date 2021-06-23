@@ -277,14 +277,13 @@ export const CharacterCard: React.FC<{
               return;
             }
 
-            const commandOptionList =
-              BlockSelectors.getDiceCommandOptionsFromBlock(block);
+            const rollGroup = BlockSelectors.getRollGroupFromBlock(block);
             diceManager.actions.setOptions({ listResults: true });
             diceManager.actions.addOrRemovePoolElement({
               blockId: block.id,
               blockType: block.type,
               label: block.label,
-              commandOptionList: commandOptionList,
+              rollGroup: rollGroup,
             });
           }}
           onClick={() => {
@@ -292,10 +291,9 @@ export const CharacterCard: React.FC<{
               return;
             }
 
-            const commandOptionList =
-              BlockSelectors.getDiceCommandOptionsFromBlock(block);
+            const rollGroup = BlockSelectors.getRollGroupFromBlock(block);
 
-            const diceRollResult = diceManager.actions.roll(commandOptionList, {
+            const diceRollResult = diceManager.actions.roll([rollGroup], {
               listResults: false,
             });
             props.onRoll(diceRollResult);

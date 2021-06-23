@@ -2,7 +2,7 @@ import { darken } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
-import { Dice, IDiceRollResult, RollType } from "../../domains/dice/Dice";
+import { Dice, IDiceRollResult } from "../../domains/dice/Dice";
 
 const rollingDelay = 1000;
 
@@ -33,12 +33,7 @@ export function useLatestDiceRoll(
 
   const hasRolledOnce = finalResult !== undefined;
 
-  const finalResultRolls = finalResult?.commandResult ?? [];
-
-  const finalResultLabel = finalResultRolls
-    .map((r) => (r.type === RollType.Modifier ? r.label : undefined))
-    .join("/");
-
+  const finalRollGroups = finalResult?.rollGroups ?? [];
   const finalResultTotal = formatDiceNumber(finalResult);
 
   const finalResultHidden = rolling || !finalResult;
@@ -46,7 +41,7 @@ export function useLatestDiceRoll(
   useEffect(
     function handleSetResultColor() {
       const commandGroup =
-        Dice.findMatchingCommandGroupWithDiceResult(latestPlayerRoll);
+        Dice.findCommandGroupOptionsMatchForResult(latestPlayerRoll);
 
       if (!latestPlayerRoll || rolling) {
         setColor(theme.palette.background.paper);
@@ -99,7 +94,7 @@ export function useLatestDiceRoll(
 
   function handleSetFinalResult() {
     const commandGroup =
-      Dice.findMatchingCommandGroupWithDiceResult(latestPlayerRoll);
+      Dice.findCommandGroupOptionsMatchForResult(latestPlayerRoll);
     options?.onRolling?.(false);
     setRolling(false);
     setFinalResult(latestPlayerRoll);
@@ -126,9 +121,8 @@ export function useLatestDiceRoll(
     state: {
       finalResult,
       finalResultTotal,
-      finalResultRolls,
+      finalResultRolls: finalRollGroups,
       finalResultHidden,
-      finalResultLabel,
       rolling,
       hasRolledOnce,
       color,
@@ -137,9 +131,10 @@ export function useLatestDiceRoll(
 }
 
 export function formatDiceNumber(result: IDiceRollResult | undefined): string {
-  const containsFateDice = result?.commandResult.some(
-    (r) => r.type === RollType.DiceCommand && r.commandName === "1dF"
-  );
+  const containsFateDice = result?.rollGroups
+    .flatMap((rg) => rg.commandSets)
+    .flatMap((cr) => cr.commands)
+    .some((r) => r.name === "1dF");
 
   const total = result?.total ?? 0;
 

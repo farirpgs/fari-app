@@ -4,19 +4,21 @@ import {
   ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
-  AllDiceCommandGroups,
-  IDiceCommandGroupId,
+  CommmandSetOptions,
+  IDiceCommandSetId,
 } from "../../../../../../domains/dice/Dice";
 
 export const DiceCommandGroup = {
-  getCommandGroupById(commandId: IDiceCommandGroupId) {
-    const result = AllDiceCommandGroups[commandId];
+  getCommandSetById(commandId: IDiceCommandSetId) {
+    const result = CommmandSetOptions[commandId];
     return result;
   },
-  getCommandGroupFromBlock(block: IBlock & (IDicePoolBlock | ISkillBlock)) {
+  getCommandSetOptionsFromBlock(
+    block: IBlock & (IDicePoolBlock | ISkillBlock)
+  ) {
     const result =
       block.meta?.commands?.map((commandId) => {
-        return this.getCommandGroupById(commandId);
+        return this.getCommandSetById(commandId);
       }) ?? [];
 
     return result;

@@ -36,11 +36,7 @@ import { ChromePicker } from "react-color";
 import { FontFamily } from "../../constants/FontFamily";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import {
-  IDiceCommandOption,
-  IDiceRollResult,
-  RollType,
-} from "../../domains/dice/Dice";
+import { IDiceRollResult, IRollGroup } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
@@ -736,15 +732,11 @@ export const IndexCard: React.FC<
                         return;
                       }
                       const modifier = parseInt(skill.modifier) || 0;
-                      const commandOptionList: Array<IDiceCommandOption> = [
+                      const commandOptionList: Array<IRollGroup> = [
                         {
-                          type: RollType.DiceCommand,
-                          commandGroupId: "4dF",
-                        },
-                        {
-                          type: RollType.Modifier,
                           label: skill.label,
                           modifier: modifier,
+                          commandSets: [{ id: "4dF" }],
                         },
                       ];
 

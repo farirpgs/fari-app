@@ -7,23 +7,19 @@ import Popper from "@material-ui/core/Popper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import uniq from "lodash/uniq";
 import React, { useState } from "react";
 import { FontFamily } from "../../constants/FontFamily";
 import { useZIndex } from "../../constants/zIndex";
 import { arraySort } from "../../domains/array/arraySort";
 import {
+  CommmandSetOptions,
   Dice,
   DiceCommandOptions,
-  IDiceCommandResult,
   IDiceRollResult,
-  RollType,
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
-import { DiceCommandGroup } from "../../routes/Character/components/CharacterDialog/domains/DiceCommandGroup/DiceCommandGroup";
-import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { DiceLabelsColors } from "../IndexCard/IndexCardColor";
 
 type IProps = {
@@ -154,20 +150,45 @@ export const DiceBox: React.FC<IProps> = (props) => {
           </Box>
           <Box
             fontSize="1rem"
+            mt=".5rem"
             color={tooltipColor.secondary}
             lineHeight={Font.lineHeight(1)}
           >
-            {Dice.simplifyRolls(diceRollsManager.state.finalResultRolls).map(
-              (r, i) => {
-                const isFirst = i === 0;
-                return (
-                  <span key={i} className={css({})}>
-                    {!isFirst && <span>{separator}</span>}
-                    {previewContentEditable({ value: r.label })}
-                  </span>
-                );
-              }
-            )}
+            <Grid container>
+              {Dice.simplifyRolls(diceRollsManager.state.finalResultRolls).map(
+                (rollGroup, rollGroupIndex) => {
+                  const color = DiceLabelsColors[rollGroupIndex];
+                  return rollGroup.simplifiedRolls.map((label, rollIndex) => {
+                    const isFirst = rollGroupIndex === 0 && rollIndex === 0;
+                    return (
+                      <React.Fragment key={`${rollGroupIndex}_${rollIndex}`}>
+                        {!isFirst && (
+                          <Grid
+                            item
+                            className={css({
+                              fontFamily: FontFamily.Console,
+                              marginRight: "4px",
+                            })}
+                          >
+                            {separator}
+                          </Grid>
+                        )}
+                        <Grid
+                          item
+                          className={css({
+                            fontFamily: FontFamily.Console,
+                            color: color,
+                            marginRight: "4px",
+                          })}
+                        >
+                          {label}
+                        </Grid>
+                      </React.Fragment>
+                    );
+                  });
+                }
+              )}
+            </Grid>
           </Box>
         </Grid>
       </Grid>
@@ -288,50 +309,45 @@ export function DiceBoxResult(props: {
   });
   const shouldListResult =
     diceRollsManager.state.finalResult?.options.listResults ?? false;
-  const finalRolls = diceRollsManager.state.finalResultRolls;
   const separator = shouldListResult ? "~" : "+";
-  const finalResultIncludesAStringValue = finalRolls.some((c) => {
-    return c.type === RollType.DiceCommand && typeof c.value === "string";
-  });
-  const shouldSortRolls = shouldListResult && !finalResultIncludesAStringValue;
-  const { labelsAndColors, labels } = getLabelsAndColors(
-    diceRollsManager.state.finalResult?.commandResult
-  );
 
-  const rolls = shouldSortRolls
-    ? arraySort(finalRolls, [
-        (roll) => {
-          return { value: labels.indexOf(roll.label ?? ""), direction: "asc" };
-        },
-        (roll) => {
-          if (roll.type === RollType.DiceCommand) {
-            return { value: roll.value, direction: "desc" };
-          }
-          return { value: 0, direction: "desc" };
-        },
-      ])
-    : finalRolls;
+  const items = diceRollsManager.state.finalResultRolls.flatMap(
+    (rollGroup, i) => {
+      const color = !props.noColor ? DiceLabelsColors[i] : undefined;
+
+      const commandSets = rollGroup.commandSets.flatMap((commandSet) => {
+        return commandSet.commands.flatMap((command) => {
+          return {
+            name: command.name,
+            value: command.value,
+            commandSetId: commandSet.id,
+            label: rollGroup.label,
+            color: color,
+          };
+        });
+      });
+      return arraySort(commandSets, [
+        (c) => ({
+          value: c.value.toString(),
+          direction: "desc",
+        }),
+      ]);
+    }
+  );
 
   return (
     <>
       <Grid container justify="flex-start" alignItems="center">
-        {rolls.map((r, i) => {
-          const isFirst = i === 0;
+        {items.map((item, itemIndex) => {
+          const isFirst = itemIndex === 0;
+          const isFate = item.name === "1dF";
+          const options = CommmandSetOptions[item.commandSetId];
+          const diceCommandOptions = DiceCommandOptions[item.name!];
 
-          if (r.type === RollType.Modifier) {
-            return null;
-          }
-          const label = r.label;
-          const color =
-            label && !props.noColor ? labelsAndColors[label] : undefined;
-          const options = DiceCommandOptions[r.commandName];
-          const isFate = r.commandName === "1dF";
-          const IconForPool = DiceCommandGroup.getCommandGroupById(
-            r.commandGroupId
-          ).icon;
+          const IconForPool = options.icon;
 
           return (
-            <React.Fragment key={i}>
+            <React.Fragment key={itemIndex}>
               {!isFirst && (
                 <Grid
                   item
@@ -346,11 +362,19 @@ export function DiceBoxResult(props: {
                 </Grid>
               )}
               <Grid item>
-                <Tooltip title={`${r.commandGroupId} (${label})`}>
+                <Tooltip
+                  title={
+                    item.label
+                      ? `${item.commandSetId} (${item.label})`
+                      : item.commandSetId
+                  }
+                >
                   <Box
                     className={css({
-                      color: color ? color : undefined,
-                      borderBottom: color ? `3px solid ${color}` : undefined,
+                      color: item.color ? item.color : undefined,
+                      borderBottom: item.color
+                        ? `3px solid ${item.color}`
+                        : undefined,
                     })}
                   >
                     <Grid container alignItems="center">
@@ -359,15 +383,21 @@ export function DiceBoxResult(props: {
                           className={css({
                             label: "DiceBoxResult-rollType-DiceCommand-value",
                             fontFamily: isFate ? FontFamily.Fate : "inherit",
+                            marginLeft: isFate ? ".2rem" : undefined,
                             verticalAlign: "middle",
                           })}
                         >
-                          {options.formatDetailedResult(r.value)}
+                          {diceCommandOptions.formatDetailedResult(item.value)}
                         </Box>
                       </Grid>
                       {!isFate && shouldListResult && (
                         <Grid item>
-                          <IconForPool className={css({ display: "flex" })} />
+                          <IconForPool
+                            className={css({
+                              display: "flex",
+                              marginLeft: "4px",
+                            })}
+                          />
                         </Grid>
                       )}
                     </Grid>
@@ -391,18 +421,22 @@ export function DiceBonusLabel(props: {
     disableConfettis: true,
   });
 
-  const { labelsAndColors } = getLabelsAndColors(
-    diceRollsManager.state.finalResult?.commandResult
-  );
+  const labels = diceRollsManager.state.finalResultRolls
+    .flatMap((rollGroup, i) => {
+      const color = !props.noColor ? DiceLabelsColors[i] : undefined;
+      const label = rollGroup.label;
+      const modifier = rollGroup.modifier;
+      return { color, text: label, modifier };
+    })
+    .filter((l) => l.text);
 
   return (
     <>
       <Grid container alignItems="center">
-        {Object.keys(labelsAndColors).map((label, index) => {
-          const color = !props.noColor ? labelsAndColors[label] : undefined;
+        {labels.map((label, index) => {
           const isFirstLabel = index === 0;
           return (
-            <React.Fragment key={label}>
+            <React.Fragment key={index}>
               {!isFirstLabel && (
                 <Grid item className={css({ padding: "0 2px" })}>
                   {"/"}
@@ -412,10 +446,10 @@ export function DiceBonusLabel(props: {
               <Grid item>
                 <span
                   className={css({
-                    color: color,
+                    color: label.color,
                   })}
                 >
-                  {label}
+                  {label.text} {label.modifier ? `(${label.modifier})` : null}
                 </span>
               </Grid>
             </React.Fragment>
@@ -424,34 +458,4 @@ export function DiceBonusLabel(props: {
       </Grid>
     </>
   );
-}
-
-function getLabelsAndColors(commandResults: IDiceCommandResult[] | undefined) {
-  if (!commandResults) {
-    return { labels: [], labelsAndColors: {}, hasLabels: false };
-  }
-  const labelsToProcess =
-    commandResults
-      .map((c) => {
-        const value = c.type === RollType.Modifier ? c.value : undefined;
-        const formattedValue = value ? ` (${value})` : "";
-        const formattedLabel = c?.label;
-
-        if (formattedLabel) {
-          return `${formattedLabel}${formattedValue}`;
-        }
-      })
-      .filter((label) => !!label) ?? [];
-
-  const uniqLabels = uniq(labelsToProcess) as Array<string>;
-  const labelsAndColors = uniqLabels.reduce((acc, curr, index) => {
-    const color = DiceLabelsColors[index] ?? "#fff";
-    return {
-      ...acc,
-      [curr]: color,
-    };
-  }, {} as Record<string, string>);
-
-  const hasLabels = uniqLabels.length > 0;
-  return { labels: uniqLabels, labelsAndColors, hasLabels };
 }

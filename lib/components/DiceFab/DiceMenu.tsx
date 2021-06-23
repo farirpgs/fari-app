@@ -15,8 +15,8 @@ import React, { useContext } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
-  AllDiceCommandGroups,
-  IDiceCommandGroup,
+  CommmandSetOptions,
+  IDiceCommandSetOption,
 } from "../../domains/dice/Dice";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -24,13 +24,13 @@ export function DiceMenu(props: {
   anchorEl: any;
   open: boolean;
   ctaLabel?: string;
-  commands: Array<IDiceCommandGroup>;
+  commands: Array<IDiceCommandSetOption>;
   showPoolToggle: boolean;
   onCtaClick?(): void;
   onClose?(): void;
   onClear?(): void;
   onDiceCommandChange: React.Dispatch<
-    React.SetStateAction<IDiceCommandGroup[]>
+    React.SetStateAction<IDiceCommandSetOption[]>
   >;
 }) {
   const theme = useTheme();
@@ -79,26 +79,26 @@ export function DiceMenu(props: {
               <Paper elevation={6}>
                 <Box maxHeight="70vh" overflow="auto">
                   <Box p="1rem">
-                    {renderCommandGroupHeader("Fate")}
+                    {renderCommandSetHeader("Fate")}
                     {renderOptions([
-                      AllDiceCommandGroups["4dF"],
-                      AllDiceCommandGroups["1dF"],
+                      CommmandSetOptions["4dF"],
+                      CommmandSetOptions["1dF"],
                     ])}
-                    {renderCommandGroupHeader("D20s")}
+                    {renderCommandSetHeader("D20s")}
                     {renderOptions([
-                      AllDiceCommandGroups["1d4"],
-                      AllDiceCommandGroups["1d6"],
-                      AllDiceCommandGroups["1d8"],
-                      AllDiceCommandGroups["1d10"],
-                      AllDiceCommandGroups["1d12"],
-                      AllDiceCommandGroups["1d20"],
-                      AllDiceCommandGroups["1d100"],
+                      CommmandSetOptions["1d4"],
+                      CommmandSetOptions["1d6"],
+                      CommmandSetOptions["1d8"],
+                      CommmandSetOptions["1d10"],
+                      CommmandSetOptions["1d12"],
+                      CommmandSetOptions["1d20"],
+                      CommmandSetOptions["1d100"],
                     ])}
-                    {renderCommandGroupHeader("Misc")}
+                    {renderCommandSetHeader("Misc")}
                     {renderOptions([
-                      AllDiceCommandGroups["coin"],
-                      AllDiceCommandGroups["card"],
-                      AllDiceCommandGroups["2d6"],
+                      CommmandSetOptions["coin"],
+                      CommmandSetOptions["card"],
+                      CommmandSetOptions["2d6"],
                     ])}
 
                     {(props.onClear || props.onCtaClick) && (
@@ -114,8 +114,9 @@ export function DiceMenu(props: {
                                     }
                                     onChange={() => {
                                       diceManager.actions.setOptions({
-                                        listResults: !diceManager.state.options
-                                          .listResults,
+                                        listResults:
+                                          !diceManager.state.options
+                                            .listResults,
                                       });
                                     }}
                                     color="primary"
@@ -161,7 +162,7 @@ export function DiceMenu(props: {
     );
   }
 
-  function renderCommandGroupHeader(header: string) {
+  function renderCommandSetHeader(header: string) {
     return (
       <Box>
         <Typography
@@ -178,7 +179,7 @@ export function DiceMenu(props: {
     );
   }
 
-  function renderOptions(options: Array<IDiceCommandGroup>) {
+  function renderOptions(options: Array<IDiceCommandSetOption>) {
     return (
       <>
         <Box pb=".5rem">

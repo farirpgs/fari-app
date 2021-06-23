@@ -5,7 +5,6 @@ import {
   ObjectType,
 } from "../../../components/DrawArea/hooks/useDrawing";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
-import { RollType } from "../../../domains/dice/Dice";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 
@@ -82,32 +81,22 @@ describe("useSession", () => {
       act(() => {
         result.current.actions.updatePlayerPlayedDuringTurn("1", true);
         result.current.actions.updatePlayerRoll("1", {
-          commandResult: [
+          rollGroups: [
             {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
+              commandSets: [
+                {
+                  id: "4dF",
+                  commands: [
+                    { value: 1, name: "1dF" },
+                    { value: 1, name: "1dF" },
+                    { value: 1, name: "1dF" },
+                    { value: 1, name: "1dF" },
+                  ],
+                },
+              ],
             },
           ],
+
           total: 4,
           totalWithoutModifiers: 4,
           options: { listResults: false },
@@ -129,30 +118,19 @@ describe("useSession", () => {
         playerName: "RP",
         rolls: [
           {
-            commandResult: [
+            rollGroups: [
               {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
-              },
-              {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
-              },
-              {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
-              },
-              {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
             options: {
@@ -178,30 +156,19 @@ describe("useSession", () => {
         playerName: "RP",
         rolls: [
           {
-            commandResult: [
+            rollGroups: [
               {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
-              },
-              {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
-              },
-              {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
-              },
-              {
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: "DiceCommand",
-                value: 1,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
             options: {

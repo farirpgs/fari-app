@@ -1,11 +1,10 @@
 import React, { useMemo, useState } from "react";
 import {
-  AllDiceCommandGroups,
+  CommmandSetOptions,
   Dice,
-  IDiceCommandGroup,
-  IDiceCommandOption,
+  IDiceCommandSetOption,
   IRollDiceOptions,
-  RollType,
+  IRollGroup,
 } from "../../domains/dice/Dice";
 import {
   IDicePool,
@@ -16,10 +15,9 @@ export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
-export const DefaultDiceCommandOptions: Array<IDiceCommandOption> = [
+export const DefaultDiceCommandOptions: Array<IRollGroup> = [
   {
-    type: RollType.DiceCommand,
-    commandGroupId: "4dF",
+    commandSets: [{ id: "4dF" }],
   },
 ];
 
@@ -30,61 +28,58 @@ export function useDice() {
 
   const [pool, setPool] = useState<IDicePool>([]);
   const [playerId, setPlayerId] = useState<string>();
-  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>([
-    AllDiceCommandGroups["4dF"],
+  const [commandSets, setCommandSets] = useState<Array<IDiceCommandSetOption>>([
+    CommmandSetOptions["4dF"],
   ]);
-  const [commandGroupsBeforePool, setCommandGroupsBeforePool] = useState<
-    Array<IDiceCommandGroup>
+  const [commandSetsBeforePool, setCommandSetsBeforePool] = useState<
+    Array<IDiceCommandSetOption>
   >([]);
-  const poolCommandGroups = useMemo(() => {
-    const poolCommandOptionList = pool.flatMap((dicePoolElement) => {
-      return dicePoolElement.commandOptionList;
-    });
-    const poolCommandGroups: Array<IDiceCommandGroup> = poolCommandOptionList
-      .map((commandOption) => {
-        if (commandOption.type === RollType.DiceCommand) {
-          return AllDiceCommandGroups[commandOption.commandGroupId];
-        }
-      })
-      .filter(
-        (commandGroupId): commandGroupId is IDiceCommandGroup =>
-          !!commandGroupId
-      );
 
-    return poolCommandGroups;
+  const poolCommandSets = useMemo(() => {
+    const poolRollGroups = pool.flatMap((dicePoolElement) => {
+      return dicePoolElement.rollGroup.commandSets;
+    });
+    const poolRollCommandGroupOptions: Array<IDiceCommandSetOption> =
+      poolRollGroups
+        .map((commandOption) => {
+          return CommmandSetOptions[commandOption.id];
+        })
+        .filter(
+          (commandGroupId): commandGroupId is IDiceCommandSetOption =>
+            !!commandGroupId
+        );
+
+    return poolRollCommandGroupOptions;
   }, [pool]);
-  const allCommandGroups = [...commandGroups, ...poolCommandGroups];
+  const allCommandSets = [...commandSets, ...poolCommandSets];
 
   function reset() {
-    setCommandGroups([]);
+    setCommandSets([]);
   }
   function clear() {
     clearPool();
   }
 
   function roll(
-    newDiceCommandOptions: Array<IDiceCommandOption>,
+    rollGroups: Array<IRollGroup>,
     optionsForRoll: IRollDiceOptions = options
   ) {
     setOptions(optionsForRoll);
-    const result = Dice.rollCommandOptionList(
-      newDiceCommandOptions,
-      optionsForRoll
-    );
+    const result = Dice.rollGroups(rollGroups, optionsForRoll);
     return result;
   }
 
   function rollCommandGroups(optionsForRoll: IRollDiceOptions = options) {
-    const commandOptions: Array<IDiceCommandOption> = commandGroups.map(
-      (commandGroup) => {
-        return {
-          type: RollType.DiceCommand,
-          commandGroupId: commandGroup.id,
-        };
-      }
-    );
-
-    return roll(commandOptions, optionsForRoll);
+    const rollGroups: Array<IRollGroup> = [
+      {
+        commandSets: commandSets.map((commandGroup) => {
+          return {
+            id: commandGroup.id,
+          };
+        }),
+      },
+    ];
+    return roll(rollGroups, optionsForRoll);
   }
 
   function addOrRemovePoolElement(element: IDicePoolElement) {
@@ -105,26 +100,27 @@ export function useDice() {
   }
 
   function preparePool() {
-    setCommandGroupsBeforePool(commandGroups);
-    setCommandGroups([]);
+    setCommandSetsBeforePool(commandSets);
+    setCommandSets([]);
   }
 
   function getPoolResult() {
-    const selectedCommands: Array<IDiceCommandOption> = commandGroups.map(
-      (commandGroup) => {
-        return {
-          type: RollType.DiceCommand,
-          commandGroupId: commandGroup.id,
-          label: commandGroup.label,
-        };
-      }
-    );
+    const currentRollGroups: Array<IRollGroup> =
+      commandSets.length > 0
+        ? [
+            {
+              commandSets: commandSets.map((commandGroup) => {
+                return {
+                  id: commandGroup.id,
+                };
+              }),
+            },
+          ]
+        : [];
 
-    const commandsFromPool = pool.flatMap(
-      (element) => element.commandOptionList
-    );
-    const allCommands = [...commandsFromPool, ...selectedCommands];
-    const result = roll(allCommands, options);
+    const rollGroupsFromPool = pool.flatMap((element) => element.rollGroup);
+    const commandSetsToRoll = [...currentRollGroups, ...rollGroupsFromPool];
+    const result = roll(commandSetsToRoll, options);
     const latestPlayerId = playerId;
 
     clearPool();
@@ -133,15 +129,15 @@ export function useDice() {
 
   function clearPool() {
     setPool([]);
-    setCommandGroups(commandGroupsBeforePool);
-    setCommandGroupsBeforePool([]);
+    setCommandSets(commandSetsBeforePool);
+    setCommandSetsBeforePool([]);
     setPlayerId(undefined);
   }
 
   return {
     state: {
       options: options,
-      commandGroups: allCommandGroups,
+      commandGroups: allCommandSets,
       pool,
     },
     actions: {
@@ -149,14 +145,14 @@ export function useDice() {
       rollCommandGroups,
       reset,
       setOptions: setOptions,
-      setCommandGroups,
+      setCommandGroups: setCommandSets,
       addOrRemovePoolElement,
       getPoolResult,
       setPlayerId,
       clear,
     },
     computed: {
-      hasSelectedCommands: allCommandGroups.length > 0,
+      hasSelectedCommands: allCommandSets.length > 0,
       hasPool: pool.length > 0,
     },
   };

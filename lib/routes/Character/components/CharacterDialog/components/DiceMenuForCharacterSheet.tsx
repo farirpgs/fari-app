@@ -3,9 +3,9 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import React, { useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
 import {
-  AllDiceCommandGroups,
-  IDiceCommandGroup,
-  IDiceCommandGroupId,
+  CommmandSetOptions,
+  IDiceCommandSetId,
+  IDiceCommandSetOption,
 } from "../../../../../domains/dice/Dice";
 
 type RenderProps = {
@@ -15,15 +15,15 @@ type RenderProps = {
 };
 
 export function DiceMenuForCharacterSheet(props: {
-  commandGroupIds: Array<IDiceCommandGroupId>;
-  onChange(newCommandIds: Array<IDiceCommandGroupId>): void;
+  commandSetIds: Array<IDiceCommandSetId>;
+  onChange(newCommandIds: Array<IDiceCommandSetId>): void;
   render(renderProps: RenderProps): JSX.Element;
 }) {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
-  const [commandGroups, setCommandGroups] = useState<Array<IDiceCommandGroup>>(
-    []
-  );
+  const [commandSetIds, setCommandSetIds] = useState<
+    Array<IDiceCommandSetOption>
+  >([]);
 
   function handleOnMenuOpen(event: React.MouseEvent<any, MouseEvent>) {
     setAnchorEl(event.currentTarget);
@@ -31,7 +31,7 @@ export function DiceMenuForCharacterSheet(props: {
 
   function handleOnNewCommandSelect() {
     setAnchorEl(null);
-    props.onChange(commandGroups.map((c) => c.id));
+    props.onChange(commandSetIds.map((c) => c.id));
   }
 
   function handleOnClear() {
@@ -40,21 +40,21 @@ export function DiceMenuForCharacterSheet(props: {
 
   function handleOnMenuClose() {
     setAnchorEl(null);
-    setCommandsGroupsFromIds(props.commandGroupIds);
+    setCommandsGroupsFromIds(props.commandSetIds);
   }
 
-  function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandGroupId>) {
+  function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandSetId>) {
     const newCommands = commandIds.map((commandId) => {
-      return AllDiceCommandGroups[commandId];
+      return CommmandSetOptions[commandId];
     });
-    setCommandGroups(newCommands);
+    setCommandSetIds(newCommands);
   }
 
   useEffect(
     function syncPropsWithState() {
-      setCommandsGroupsFromIds(props.commandGroupIds);
+      setCommandsGroupsFromIds(props.commandSetIds);
     },
-    [props.commandGroupIds]
+    [props.commandSetIds]
   );
 
   return (
@@ -71,9 +71,9 @@ export function DiceMenuForCharacterSheet(props: {
             <DiceMenu
               open={open}
               anchorEl={anchorEl}
-              commands={commandGroups}
+              commands={commandSetIds}
               showPoolToggle={false}
-              onDiceCommandChange={setCommandGroups}
+              onDiceCommandChange={setCommandSetIds}
               ctaLabel="Select"
               onClear={handleOnClear}
               onClose={handleOnMenuClose}

@@ -17,7 +17,7 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice, IDiceRollResult, RollType } from "../../domains/dice/Dice";
+import { Dice, IDiceRollResult } from "../../domains/dice/Dice";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
 import { TheOracle } from "./domains/TheOracle";
@@ -84,27 +84,9 @@ export function Oracle() {
 
   function roll() {
     setRolls((draft) => {
-      const newRoll = Dice.rollCommandOptionList(
-        [
-          {
-            type: RollType.DiceCommand,
-            commandGroupId: "1dF",
-          },
-          {
-            type: RollType.DiceCommand,
-            commandGroupId: "1dF",
-          },
-          {
-            type: RollType.DiceCommand,
-            commandGroupId: "1dF",
-          },
-          {
-            type: RollType.DiceCommand,
-            commandGroupId: "1dF",
-          },
-        ],
-        { listResults: false }
-      );
+      const newRoll = Dice.rollGroups([{ commandSets: [{ id: "4dF" }] }], {
+        listResults: false,
+      });
       logger.info("OracleRoute:onDiceRoll", { contexts: { roll: newRoll } });
       return [newRoll, ...draft];
     });

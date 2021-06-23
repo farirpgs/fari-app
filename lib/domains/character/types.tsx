@@ -1,4 +1,4 @@
-import { IDiceCommandGroupId } from "../dice/Dice";
+import { IDiceCommandSetId } from "../dice/Dice";
 import { CharacterTemplates } from "./CharacterType";
 
 export enum BlockType {
@@ -146,7 +146,7 @@ export type ISkillBlock = {
   type: BlockType.Skill;
   meta: IDefaultBlockMeta & {
     checked?: boolean;
-    commands?: Array<IDiceCommandGroupId>;
+    commands?: Array<IDiceCommandSetId>;
     hideModifier?: boolean;
   };
   value: string;
@@ -155,7 +155,7 @@ export type ISkillBlock = {
 export type IDicePoolBlock = {
   type: BlockType.DicePool;
   meta: IDefaultBlockMeta & {
-    commands?: Array<IDiceCommandGroupId>;
+    commands?: Array<IDiceCommandSetId>;
   };
   value: string;
 };

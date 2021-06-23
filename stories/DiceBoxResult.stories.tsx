@@ -1,7 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { DiceBoxResult } from "../lib/components/DiceBox/DiceBox";
-import { RollType } from "../lib/domains/dice/Dice";
 import { StoryProvider } from "./StoryProvider";
 
 type IProps = Parameters<typeof DiceBoxResult>["0"];
@@ -24,30 +23,19 @@ Default.args = {
       total: 4,
       totalWithoutModifiers: 4,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-          type: RollType.DiceCommand,
+          commandSets: [
+            {
+              id: "4dF",
+              commands: [
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -61,12 +49,14 @@ SingleD20.args = {
       total: 20,
       totalWithoutModifiers: 20,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          value: 20,
-          commandGroupId: "1d20",
-          commandName: "1d20",
-          type: RollType.DiceCommand,
+          commandSets: [
+            {
+              id: "1d20",
+              commands: [{ value: 1, name: "1d20" }],
+            },
+          ],
         },
       ],
     },
@@ -80,24 +70,22 @@ MultipleDice.args = {
       total: 6,
       totalWithoutModifiers: 6,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 2,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 3,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-          type: RollType.DiceCommand,
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 1, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 3, name: "1d12" }],
+            },
+          ],
         },
       ],
     },
@@ -110,24 +98,22 @@ Pool.args = {
       total: 6,
       totalWithoutModifiers: 6,
       options: { listResults: true },
-      commandResult: [
+      rollGroups: [
         {
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 2,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-          type: RollType.DiceCommand,
-        },
-        {
-          value: 3,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-          type: RollType.DiceCommand,
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 1, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 3, name: "1d12" }],
+            },
+          ],
         },
       ],
     },

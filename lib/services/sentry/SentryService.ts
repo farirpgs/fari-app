@@ -2,8 +2,11 @@ import * as Sentry from "@sentry/react";
 import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
 
+const shouldLog =
+  !env.isTest && !env.isDev && location.hostname !== "localhost";
+
 export function makeSentryService() {
-  if (!env.isTest && !env.isDev) {
+  if (shouldLog) {
     Sentry.init({
       release: `fari@v${env.version}`,
       environment: env.context as string,
@@ -17,7 +20,7 @@ export function makeSentryService() {
       severity: Severity,
       context: { [key: string]: any } | undefined
     ) {
-      if (env.isTest || env.isDev) {
+      if (!shouldLog) {
         return;
       }
 

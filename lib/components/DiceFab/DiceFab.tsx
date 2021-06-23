@@ -12,7 +12,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
-import { IDiceCommandGroup, IDiceRollResult } from "../../domains/dice/Dice";
+import {
+  IDiceCommandSetOption,
+  IDiceRollResult,
+} from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceBox } from "../DiceBox/DiceBox";
@@ -134,7 +137,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
     );
   }
 
-  function getButtonIcon(commandGroups: IDiceCommandGroup[]) {
+  function getButtonIcon(commandGroups: IDiceCommandSetOption[]) {
     const [firstCommandGroup] = commandGroups;
 
     const ButtonIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
