@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useContext, useState } from "react";
-import { DiceFab } from "../lib/components/DiceFab/DiceFab";
+import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
@@ -22,7 +22,7 @@ function StorybookCharacterSheet(
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
 
-  function handleSetNewRoll(result: IDiceRollResult) {
+  function handleOnNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
@@ -30,15 +30,18 @@ function StorybookCharacterSheet(
 
   function handleOnRollPool() {
     const { result } = diceManager.actions.getPoolResult();
-    handleSetNewRoll(result);
+    handleOnNewRoll(result);
   }
 
   return (
     <>
-      <DiceFab
-        rollsForDiceBox={rolls}
-        onRoll={handleSetNewRoll}
-        onRollPool={handleOnRollPool}
+      <Toolbox
+        dice={{
+          rollsForDiceBox: rolls,
+          onRoll: handleOnNewRoll,
+          onRollPool: handleOnRollPool,
+        }}
+        hideDefaultRightActions={true}
       />
       <CharacterV3Dialog
         dialog={props.dialog}
@@ -46,11 +49,12 @@ function StorybookCharacterSheet(
         character={props.character}
         readonly={props.readonly}
         synced={false}
-        onRoll={handleSetNewRoll}
+        onRoll={handleOnNewRoll}
         onClose={action("onClose")}
         onSave={action("onSave")}
         onToggleSync={action("onToggleSync")}
       />
+      <Box mt="6rem" />
     </>
   );
 }

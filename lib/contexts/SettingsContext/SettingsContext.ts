@@ -29,7 +29,7 @@ export function useSettings() {
     localStorage: window.localStorage,
   });
   const [userName, setUserName] = useStorageEntity<string>({
-    defaulValue: Id.generate(),
+    defaulValue: "",
     key: "fari-user-name",
     localStorage: window.localStorage,
   });

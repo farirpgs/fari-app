@@ -3,9 +3,9 @@ import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import produce from "immer";
 import React, { useContext, useState } from "react";
-import { DiceFab } from "../lib/components/DiceFab/DiceFab";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
 import { IndexCardColor } from "../lib/components/IndexCard/IndexCardColor";
+import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { SceneFactory } from "../lib/domains/scene/SceneFactory";
@@ -41,11 +41,15 @@ function StorybookIndexCard(props: {
 
   return (
     <>
-      <DiceFab
-        rollsForDiceBox={rolls}
-        onRoll={handleOnNewRoll}
-        onRollPool={handleOnRollPool}
+      <Toolbox
+        dice={{
+          rollsForDiceBox: rolls,
+          onRoll: handleOnNewRoll,
+          onRollPool: handleOnRollPool,
+        }}
+        hideDefaultRightActions={true}
       />
+
       <Box width={props.width}>
         <IndexCard
           type="public"
@@ -78,6 +82,7 @@ function StorybookIndexCard(props: {
           }}
         />
       </Box>
+      <Box mt="6rem" />
     </>
   );
 }
