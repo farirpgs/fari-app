@@ -40,6 +40,7 @@ export function useScene() {
       const pinnedIndexCards = getPinnedIndexCards(scene);
       const sceneToInsert = SceneFactory.make();
       sceneToInsert.name = "";
+      sceneToInsert.group = scene.group;
       sceneToInsert.indexCards = {
         public: pinnedIndexCards.publicIndexCards,
         private: pinnedIndexCards.privateIndexCards,
