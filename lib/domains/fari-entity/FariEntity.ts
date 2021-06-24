@@ -7,31 +7,35 @@ type IFariEntity = {
 };
 
 export const FariEntity = {
-  import<T>(props: {
+  async import<T>(props: {
     filesToImport: FileList | null | undefined;
     fariType: IFariType;
-    onImport: (element: T) => void;
-  }) {
-    if (!props.filesToImport) {
-      return;
-    }
-    type IExportedFariEntity = T & IFariEntity;
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      try {
-        if (!!event.target?.result) {
-          const data = JSON.parse(
-            event.target.result.toString()
-          ) as IExportedFariEntity;
-          const { fariType, ...entity } = data;
-          if (fariType === props.fariType) {
-            props.onImport((entity as unknown) as T);
+  }): Promise<T> {
+    const promise = new Promise<T>((resolve, reject) => {
+      if (!props.filesToImport) {
+        return;
+      }
+      type IExportedFariEntity = T & IFariEntity;
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        try {
+          if (!!event.target?.result) {
+            const data = JSON.parse(
+              event.target.result.toString()
+            ) as IExportedFariEntity;
+            const { fariType, ...entity } = data;
+            if (fariType === props.fariType) {
+              resolve(entity as unknown as T);
+            }
           }
+        } catch (error) {
+          // reject(error)
         }
-      } catch (error) {}
-    };
-    const firstFile = props.filesToImport[0];
-    reader.readAsText(firstFile);
+      };
+      const firstFile = props.filesToImport[0];
+      reader.readAsText(firstFile);
+    });
+    return promise;
   },
   export<T>(props: { element: T; name: string; fariType: IFariType }) {
     const elementWithMeta = {

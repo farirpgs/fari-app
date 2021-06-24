@@ -64,12 +64,12 @@ export function useScenes(props?: { localStorage: Storage }) {
 
   function remove(id: string | undefined) {
     setScenes((draft: Array<IScene>) => {
-      return draft.filter((c) => c.id !== id);
+      return draft.filter((s) => s.id !== id);
     });
   }
 
   function duplicate(id: string | undefined) {
-    const match = scenes.find((c) => c.id === id);
+    const match = scenes.find((s) => s.id === id);
     if (!match) {
       return;
     }
@@ -80,15 +80,14 @@ export function useScenes(props?: { localStorage: Storage }) {
     return newScene;
   }
 
-  function importEntity(sceneFile: FileList | null) {
-    FariEntity.import<IScene>({
+  async function importEntity(sceneFile: FileList | null) {
+    const sceneToImport = await FariEntity.import<IScene>({
       filesToImport: sceneFile,
       fariType: "scene",
-      onImport: (sceneToImport) => {
-        const migratedScene = SceneFactory.migrate(sceneToImport);
-        upsert(migratedScene);
-      },
     });
+    const migratedScene = SceneFactory.migrate(sceneToImport);
+    const match = scenes.find((s) => s.id === migratedScene.id);
+    return { scene: migratedScene, exists: !!match };
     // logger.info("ScenesManager:onImport");
   }
 

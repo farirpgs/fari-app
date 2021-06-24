@@ -3,6 +3,10 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -66,7 +70,13 @@ export function MyBinder<TFolders extends string>(props: {
   onDelete(folder: TFolders, element: IManagerViewModel): void;
   onDuplicate(folder: TFolders, element: IManagerViewModel): void;
   onUndo(folder: TFolders, element: IManagerViewModel): void;
-  onImport(folder: TFolders, importPaths: FileList | null): void;
+  onImport(
+    folder: TFolders,
+    importPaths: FileList | null
+  ): Promise<{ entity: any | undefined }>;
+
+  onImportAddAsNew(folder: TFolders, entity: any): void;
+  onImportUpdateExisting(folder: TFolders, entity: any): void;
   onExport(folder: TFolders, element: IManagerViewModel): void;
 }) {
   const { t } = useTranslate();
@@ -78,6 +88,8 @@ export function MyBinder<TFolders extends string>(props: {
     value: props.folder,
     delay: 250,
   });
+
+  const [importDialogModalEntity, setImportDialogModalEntity] = useState<any>();
 
   useEffect(
     function clearFolderOnClose() {
@@ -122,6 +134,59 @@ export function MyBinder<TFolders extends string>(props: {
 
   return (
     <>
+      <Dialog
+        open={!!importDialogModalEntity}
+        onClose={() => {
+          setImportDialogModalEntity(undefined);
+        }}
+      >
+        <DialogTitle>{t("my-binder.import-dialog.title")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t("my-binder.import-dialog.description")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Box mb=".5rem" width="100%">
+            <Grid container wrap="nowrap" justify="space-around" spacing={2}>
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  data-cy={`my-binder.folders.${currentFolder}.import`}
+                  size="small"
+                  onClick={() => {
+                    props.onImportUpdateExisting(
+                      currentFolder,
+                      importDialogModalEntity
+                    );
+                    setImportDialogModalEntity(undefined);
+                  }}
+                >
+                  {t("my-binder.import-dialog.update-existing")}
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  data-cy={`my-binder.folders.${currentFolder}.import`}
+                  size="small"
+                  onClick={() => {
+                    props.onImportAddAsNew(
+                      currentFolder,
+                      importDialogModalEntity
+                    );
+                    setImportDialogModalEntity(undefined);
+                  }}
+                >
+                  {t("my-binder.import-dialog.add-as-new")}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </DialogActions>
+      </Dialog>
       <Dialog
         open={props.open}
         onClose={props.onClose}
@@ -169,14 +234,6 @@ export function MyBinder<TFolders extends string>(props: {
                     {where === Where.Folders || !props.canGoBack ? (
                       <MenuBookIcon color="primary" />
                     ) : (
-                      // <img
-                      //   src={Images.app}
-                      //   className={css({
-                      //     display: "flex",
-                      //     width: "1.5rem",
-                      //     height: "auto",
-                      //   })}
-                      // />
                       <IconButton size="small" onClick={handleGoBack}>
                         <ArrowBackIcon />
                       </IconButton>
@@ -327,8 +384,14 @@ export function MyBinder<TFolders extends string>(props: {
                     className={css({
                       display: "none",
                     })}
-                    onChange={(event) => {
-                      props.onImport(currentFolder, event.target.files);
+                    onChange={async (event) => {
+                      const { entity } = await props.onImport(
+                        currentFolder,
+                        event.target.files
+                      );
+                      if (entity) {
+                        setImportDialogModalEntity(entity);
+                      }
                       event.target.value = "";
                     }}
                   />

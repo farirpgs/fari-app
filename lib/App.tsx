@@ -31,7 +31,10 @@ import {
   SettingsContext,
   useSettings,
 } from "./contexts/SettingsContext/SettingsContext";
+import { CharacterFactory } from "./domains/character/CharacterFactory";
 import { CharacterTemplates } from "./domains/character/CharacterType";
+import { SceneFactory } from "./domains/scene/SceneFactory";
+import { IScene } from "./hooks/useScene/IScene";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { getDefaultInjections } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";
@@ -86,7 +89,11 @@ function MyBinderManager() {
     onDelete(element: IManagerViewModel): void;
     onDuplicate(element: IManagerViewModel): void;
     onUndo(element: IManagerViewModel): void;
-    onImport(importPaths: FileList | null): void;
+    onImport(
+      importPaths: FileList | null
+    ): Promise<{ entity: any | undefined }>;
+    onImportAddAsNew(entity: any): void;
+    onImportUpdateExisting(entity: any): void;
     onExport(element: IManagerViewModel): void;
   };
 
@@ -143,8 +150,26 @@ function MyBinderManager() {
       onUndo(element) {
         charactersManager.actions.upsert(element.original);
       },
-      onImport(importPaths) {
-        charactersManager.actions.importEntity(importPaths);
+      async onImport(importPaths) {
+        const { character, exists } =
+          await charactersManager.actions.importEntity(importPaths);
+
+        if (!exists) {
+          charactersManager.actions.upsert(character);
+          return { entity: undefined };
+        } else {
+          return {
+            entity: character,
+          };
+        }
+      },
+      onImportAddAsNew(character) {
+        charactersManager.actions.addIfDoesntExist(
+          CharacterFactory.duplicate(character)
+        );
+      },
+      onImportUpdateExisting(character) {
+        charactersManager.actions.upsert(character);
       },
       onExport(element) {
         charactersManager.actions.exportEntity(element.original);
@@ -177,8 +202,25 @@ function MyBinderManager() {
       onUndo(element) {
         scenesManager.actions.upsert(element.original);
       },
-      onImport(importPaths) {
-        scenesManager.actions.importEntity(importPaths);
+      async onImport(importPaths) {
+        const { scene, exists } = await scenesManager.actions.importEntity(
+          importPaths
+        );
+
+        if (!exists) {
+          scenesManager.actions.upsert(scene);
+          return { entity: undefined };
+        } else {
+          return {
+            entity: scene,
+          };
+        }
+      },
+      onImportAddAsNew(scene: IScene) {
+        scenesManager.actions.upsert(SceneFactory.duplicate(scene));
+      },
+      onImportUpdateExisting(scene) {
+        scenesManager.actions.upsert(scene);
       },
       onExport(element) {
         scenesManager.actions.exportEntity(element.original);
@@ -212,7 +254,13 @@ function MyBinderManager() {
         handler[folder].onUndo(element);
       }}
       onImport={(folder, importPaths) => {
-        handler[folder].onImport(importPaths);
+        return handler[folder].onImport(importPaths);
+      }}
+      onImportAddAsNew={(folder, entity) => {
+        return handler[folder].onImportAddAsNew(entity);
+      }}
+      onImportUpdateExisting={(folder, entity) => {
+        return handler[folder].onImportUpdateExisting(entity);
       }}
       onExport={(folder, element) => {
         handler[folder].onExport(element);

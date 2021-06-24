@@ -112,17 +112,14 @@ export function useCharacters(props?: { localStorage: Storage }) {
     return characters.some((c) => c.id === id);
   }
 
-  function importEntity(characterFile: FileList | null) {
-    FariEntity.import<ICharacter>({
+  async function importEntity(characterFile: FileList | null) {
+    const characterToImport = await FariEntity.import<ICharacter>({
       filesToImport: characterFile,
       fariType: "character",
-      onImport: (characterToImport) => {
-        const migratedCharacter = CharacterFactory.migrate(characterToImport);
-        upsert(migratedCharacter);
-
-        // logger.info("CharactersManager:onImport");
-      },
     });
+    const migratedCharacter = CharacterFactory.migrate(characterToImport);
+    const match = characters.find((c) => c.id === migratedCharacter.id);
+    return { character: migratedCharacter, exists: !!match };
   }
 
   function exportEntity(character: ICharacter) {
