@@ -7,11 +7,18 @@
 - feat: A new binder view has replaced the previous scenes and characters drawer to offer new search and filtering features on Fari's data;
 - feat: The scene screen user interface has been revamped to make it easier to use and understand;
 - feat: The Dice box and the Player row components have been revamped to make them easier on the eye!;
+- feat: It is now possible to move index cards inside others or to move them out of a parent card.
+- feat: Fari now includes a [Story Builder Tool](/story-builder)
+- feat: Fari now includes a [Story Dice Tool](/story-dice)
 - deps: The different technologies, libraries and framework have been updated to make sure Fari stand the test of time;
+- feat: It is now possible to export Characters/Scenes as template. This will export them without their `id`. This means that when they are imported, they will have a new `id` assigned to them and there will no longer be conflicts and people all having the same character sheet and overriding each other's changes all the time.
+- feat: When starting a new scene, the new scene will have the same group as the previous one
+- feat: Fari will remember the last name you used when you last joined a game.
+- feat: If you loose connection to a game and join again, Fari will try to remap you to the original player that was in the game so that you don't have to re-assign your character sheets.
+- tech: Fari now only downloads the language you are using. This helps loading the app around 200ms faster than before.
 - tech: Devs contributing to the repo now have to use npm 7 + node 16 to run Fari locally on their machine
 - tech: Session and Scene information are now splitted on the tech side of things which will make it easier to maintain in the future.
 - [ ]: need to keep latest dice roll in settings
-- [ ]: sticky user name + usePeerHost mapping logic (based on user)
 
 # v5.0 Better Index Cards and New Block Types
 
