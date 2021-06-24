@@ -304,6 +304,14 @@ export const CharacterFactory = {
       name: `${c?.name} Copy`,
     };
   },
+  makeATemplate(c: ICharacter): Omit<ICharacter, "id"> & { id: undefined } {
+    return {
+      ...c,
+      id: undefined,
+      lastUpdated: getUnix(),
+      name: `${c?.name} Template`,
+    };
+  },
   makeBlock(type: BlockType) {
     const blockDefault: Record<BlockType, IBlock> = {
       [BlockType.Text]: {

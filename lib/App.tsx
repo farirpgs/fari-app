@@ -95,12 +95,13 @@ function MyBinderManager() {
     onImportAddAsNew(entity: any): void;
     onImportUpdateExisting(entity: any): void;
     onExport(element: IManagerViewModel): void;
+    onExportAsTemplate(element: IManagerViewModel): void;
   };
 
   const folders: Record<IFolders, Array<IManagerViewModel>> = {
     characters: charactersManager.state.characters.map(
       (c): IManagerViewModel => ({
-        id: c.id,
+        id: c.id as string,
         group: c.group,
         name: previewContentEditable({ value: c.name }),
         lastUpdated: c.lastUpdated,
@@ -110,7 +111,7 @@ function MyBinderManager() {
     ),
     scenes: scenesManager.state.scenes.map(
       (s): IManagerViewModel => ({
-        id: s.id,
+        id: s.id as string,
         group: s.group,
         name: previewContentEditable({ value: s.name }),
         lastUpdated: s.lastUpdated,
@@ -174,6 +175,9 @@ function MyBinderManager() {
       onExport(element) {
         charactersManager.actions.exportEntity(element.original);
       },
+      onExportAsTemplate(element) {
+        charactersManager.actions.exportEntityAsTemplate(element.original);
+      },
     },
     scenes: {
       onAdd() {
@@ -225,6 +229,9 @@ function MyBinderManager() {
       onExport(element) {
         scenesManager.actions.exportEntity(element.original);
       },
+      onExportAsTemplate(element) {
+        scenesManager.actions.exportEntityAsTemplate(element.original);
+      },
     },
   };
 
@@ -264,6 +271,9 @@ function MyBinderManager() {
       }}
       onExport={(folder, element) => {
         handler[folder].onExport(element);
+      }}
+      onExportAsTemplate={(folder, element) => {
+        handler[folder].onExportAsTemplate(element);
       }}
     />
   );

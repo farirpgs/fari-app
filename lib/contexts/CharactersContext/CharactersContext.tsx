@@ -4,6 +4,7 @@ import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
 
@@ -37,22 +38,27 @@ export function useCharacters(props?: { localStorage: Storage }) {
       return;
     }
 
+    const id = character.id || Id.generate(); // If it's a template, `id` is undefined
+    const characterToUpsert = {
+      ...character,
+      id: id,
+      lastUpdated: getUnix(),
+    };
     setCharacters((prev: Array<ICharacter>) => {
       const exists = prev.some((c) => c.id === character.id);
-
       if (!exists) {
-        return [character, ...prev];
+        return [characterToUpsert, ...prev];
       } else {
         return prev.map((c) => {
           if (c.id === character.id) {
-            return { ...character, lastUpdated: getUnix() };
+            return characterToUpsert;
           }
           return c;
         });
       }
     });
 
-    return character;
+    return characterToUpsert;
   }
 
   function addIfDoesntExist(character: ICharacter | undefined) {
@@ -128,7 +134,15 @@ export function useCharacters(props?: { localStorage: Storage }) {
       fariType: "character",
       name: character.name,
     });
-    // logger.info("CharactersManager:onExport");
+  }
+
+  function exportEntityAsTemplate(character: ICharacter) {
+    const template = CharacterFactory.makeATemplate(character);
+    FariEntity.export({
+      element: template,
+      fariType: "character",
+      name: template.name,
+    });
   }
 
   return {
@@ -145,6 +159,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       duplicate,
       importEntity,
       exportEntity,
+      exportEntityAsTemplate,
     },
     selectors: {
       isInStorage,

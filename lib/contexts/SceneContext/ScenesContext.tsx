@@ -1,6 +1,7 @@
 import React from "react";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { IScene } from "../../hooks/useScene/IScene";
@@ -36,30 +37,27 @@ export function useScenes(props?: { localStorage: Storage }) {
     }
     const exists = scenes.find((s) => s.id === scene.id);
 
-    const newScene: IScene = {
-      id: scene.id,
-      name: scene.name,
-      group: scene.group,
-      indexCards: scene.indexCards,
-      version: scene.version,
-      notes: scene.notes,
-      lastUpdated: scene.lastUpdated,
+    const id = scene.id || Id.generate(); // If the file was exported without an id, it was exported as a template
+    const sceneToUpsert = {
+      ...scene,
+      id: id,
+      lastUpdated: getUnix(),
     };
     if (!exists) {
       setScenes((draft: Array<IScene>) => {
-        return [newScene, ...draft];
+        return [sceneToUpsert, ...draft];
       });
     } else {
       setScenes((draft: Array<IScene>) => {
         return draft.map((c) => {
           if (c.id === scene.id) {
-            return { ...newScene, lastUpdated: getUnix() };
+            return sceneToUpsert;
           }
           return c;
         });
       });
     }
-    return newScene;
+    return sceneToUpsert;
   }
 
   function remove(id: string | undefined) {
@@ -88,7 +86,6 @@ export function useScenes(props?: { localStorage: Storage }) {
     const migratedScene = SceneFactory.migrate(sceneToImport);
     const match = scenes.find((s) => s.id === migratedScene.id);
     return { scene: migratedScene, exists: !!match };
-    // logger.info("ScenesManager:onImport");
   }
 
   function exportEntity(scene: IScene) {
@@ -97,7 +94,14 @@ export function useScenes(props?: { localStorage: Storage }) {
       fariType: "scene",
       name: scene.name,
     });
-    // logger.info("ScenesManager:onExport");
+  }
+  function exportEntityAsTemplate(scene: IScene) {
+    const template = SceneFactory.makeATemplate(scene);
+    FariEntity.export({
+      element: template,
+      fariType: "scene",
+      name: template.name,
+    });
   }
 
   return {
@@ -112,6 +116,7 @@ export function useScenes(props?: { localStorage: Storage }) {
       duplicate,
       importEntity,
       exportEntity,
+      exportEntityAsTemplate,
     },
   };
 }

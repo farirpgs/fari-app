@@ -192,28 +192,25 @@ export const DataRoute: React.FC = () => {
     }>({
       filesToImport: fileToImport,
       fariType: "full",
-      onImport: (file) => {
-        file.characters.forEach((c) => {
-          importCharacter(c, mode);
-        });
-        file.scenes.forEach((s) => {
-          importScene(s, mode);
-        });
-      },
+    }).then((file) => {
+      file.characters.forEach((c) => {
+        importCharacter(c, mode);
+      });
+      file.scenes.forEach((s) => {
+        importScene(s, mode);
+      });
     });
     FariEntity.import<ICharacter>({
       filesToImport: fileToImport,
       fariType: "character",
-      onImport: (character) => {
-        importCharacter(character, mode);
-      },
+    }).then((character) => {
+      importCharacter(character, mode);
     });
     FariEntity.import<IScene>({
       filesToImport: fileToImport,
       fariType: "scene",
-      onImport: (scene) => {
-        importScene(scene, mode);
-      },
+    }).then((scene) => {
+      importScene(scene, mode);
     });
   }
 

@@ -483,6 +483,7 @@ function mockUseCharacters() {
       clearSelected: jest.fn(),
       exportEntity: jest.fn(),
       importEntity: jest.fn(),
+      exportEntityAsTemplate: jest.fn(),
     },
     selectors: {
       isInStorage: jest.fn(),

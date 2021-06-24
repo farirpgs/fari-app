@@ -21,6 +21,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import Paper from "@material-ui/core/Paper";
 import Snackbar from "@material-ui/core/Snackbar";
 import { darken, useTheme } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -29,6 +30,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import ExportIcon from "@material-ui/icons/GetApp";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SearchIcon from "@material-ui/icons/Search";
+import ShareIcon from "@material-ui/icons/Share";
 import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
@@ -78,6 +80,7 @@ export function MyBinder<TFolders extends string>(props: {
   onImportAddAsNew(folder: TFolders, entity: any): void;
   onImportUpdateExisting(folder: TFolders, entity: any): void;
   onExport(folder: TFolders, element: IManagerViewModel): void;
+  onExportAsTemplate(folder: TFolders, element: IManagerViewModel): void;
 }) {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -459,6 +462,9 @@ export function MyBinder<TFolders extends string>(props: {
                   onExport={() => {
                     props.onExport(type, element);
                   }}
+                  onExportAsTemplate={() => {
+                    props.onExportAsTemplate(type, element);
+                  }}
                 />
               </React.Fragment>
             );
@@ -537,6 +543,9 @@ export function MyBinder<TFolders extends string>(props: {
                         onExport={() => {
                           props.onExport(type, element);
                         }}
+                        onExportAsTemplate={() => {
+                          props.onExportAsTemplate(type, element);
+                        }}
                       />
                     </React.Fragment>
                   );
@@ -603,6 +612,7 @@ function Element(props: {
   displayType: boolean;
   onSelect(): void;
   onExport(): void;
+  onExportAsTemplate(): void;
   onDuplicate(): void;
   onDelete(): void;
 }) {
@@ -656,61 +666,88 @@ function Element(props: {
             </span>
           </Grid>
           <Grid item>
-            <IconButton
-              size="small"
-              data-cy={`my-binder.element.${props.element.name}.export`}
-              className={iconButtonClassName}
-              onPointerEnter={() => {
-                setHover(true);
-              }}
-              onPointerLeave={() => {
-                setHover(false);
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                props.onExport();
-              }}
-            >
-              <ExportIcon />
-            </IconButton>
+            <Tooltip title={t("my-binder.element.export")}>
+              <IconButton
+                size="small"
+                data-cy={`my-binder.element.${props.element.name}.export`}
+                className={iconButtonClassName}
+                onPointerEnter={() => {
+                  setHover(true);
+                }}
+                onPointerLeave={() => {
+                  setHover(false);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onExport();
+                }}
+              >
+                <ExportIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
           <Grid item>
-            <IconButton
-              size="small"
-              data-cy={`my-binder.element.${props.element.name}.duplicate`}
-              className={iconButtonClassName}
-              onPointerEnter={() => {
-                setHover(true);
-              }}
-              onPointerLeave={() => {
-                setHover(false);
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                props.onDuplicate();
-              }}
-            >
-              <FileCopyIcon />
-            </IconButton>
+            <Tooltip title={t("my-binder.element.export-as-template")}>
+              <IconButton
+                size="small"
+                data-cy={`my-binder.element.${props.element.name}.export-as-template`}
+                className={iconButtonClassName}
+                onPointerEnter={() => {
+                  setHover(true);
+                }}
+                onPointerLeave={() => {
+                  setHover(false);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onExportAsTemplate();
+                }}
+              >
+                <ShareIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
           <Grid item>
-            <IconButton
-              size="small"
-              data-cy={`my-binder.element.${props.element.name}.delete`}
-              className={iconButtonClassName}
-              onPointerEnter={() => {
-                setHover(true);
-              }}
-              onPointerLeave={() => {
-                setHover(false);
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                props.onDelete();
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title={t("my-binder.element.duplicate")}>
+              <IconButton
+                size="small"
+                data-cy={`my-binder.element.${props.element.name}.duplicate`}
+                className={iconButtonClassName}
+                onPointerEnter={() => {
+                  setHover(true);
+                }}
+                onPointerLeave={() => {
+                  setHover(false);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onDuplicate();
+                }}
+              >
+                <FileCopyIcon />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid item>
+            <Tooltip title={t("my-binder.element.delete")}>
+              <IconButton
+                size="small"
+                data-cy={`my-binder.element.${props.element.name}.delete`}
+                className={iconButtonClassName}
+                onPointerEnter={() => {
+                  setHover(true);
+                }}
+                onPointerLeave={() => {
+                  setHover(false);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onDelete();
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Grid>
       </ListItemSecondaryAction>

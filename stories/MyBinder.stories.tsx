@@ -131,7 +131,10 @@ function StorybookMyBinder(props: {
         onDelete={action("onDelete")}
         onDuplicate={action("onDuplicate")}
         onUndo={action("onUndo")}
-        onImport={action("onImport")}
+        onImport={action("onImport") as any}
+        onImportAddAsNew={action("onImportAddAsNew")}
+        onExportAsTemplate={action("onExportAsTemplate")}
+        onImportUpdateExisting={action("onImportUpdateExisting")}
         onExport={action("onExport")}
       />
     </>

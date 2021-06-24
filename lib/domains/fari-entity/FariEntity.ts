@@ -11,7 +11,7 @@ export const FariEntity = {
     filesToImport: FileList | null | undefined;
     fariType: IFariType;
   }): Promise<T> {
-    const promise = new Promise<T>((resolve, reject) => {
+    const promise = new Promise<T>((resolve) => {
       if (!props.filesToImport) {
         return;
       }

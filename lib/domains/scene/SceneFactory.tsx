@@ -82,6 +82,14 @@ export const SceneFactory = {
       name: `${scene.name} Copy`,
     };
   },
+  makeATemplate(scene: IScene): Omit<IScene, "id"> & { id: undefined } {
+    return {
+      ...scene,
+      id: undefined,
+      lastUpdated: getUnix(),
+      name: `${scene.name} Template`,
+    };
+  },
   duplicateIndexCard(indexCard: IIndexCard): IIndexCard {
     return {
       ...indexCard,
@@ -107,7 +115,7 @@ export const SceneFactory = {
 
 function migrateV1SceneToV2(v1: ISceneV1): IScene {
   if (v1.version !== 1) {
-    return (v1 as unknown) as IScene;
+    return v1 as unknown as IScene;
   }
 
   const publicIndexCards: Array<IIndexCard> = [];
