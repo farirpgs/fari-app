@@ -31,6 +31,13 @@ const PlayOfflineRoute = React.lazy(
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
+const ShopRoute = React.lazy(() => import("../../routes/Shop/ShopRoute"));
+const ShopCreatorProductRoute = React.lazy(
+  () => import("../../routes/Shop/ShopCreatorProductRoute")
+);
+const ShopCreatorRoute = React.lazy(
+  () => import("../../routes/Shop/ShopCreatorRoute")
+);
 const SeelieSquireRoute = React.lazy(
   () => import("../../routes/SeelieSquire/SeelieSquireRoute")
 );
@@ -191,6 +198,27 @@ export const AppRouter = () => {
           path={"/story-dice"}
           render={() => {
             return <StoryDiceRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/shop"}
+          render={() => {
+            return <ShopRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/shop/c/:creatorSlug/"}
+          render={() => {
+            return <ShopCreatorRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/shop/p/:creatorSlug/:productSlug"}
+          render={() => {
+            return <ShopCreatorProductRoute />;
           }}
         />
 

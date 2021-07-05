@@ -1,3 +1,6 @@
+@import url("slick-carousel/slick/slick.css");
+@import url("slick-carousel/slick/slick-theme.css");
+
 html {
   width: auto !important;
   overflow-y: scroll;

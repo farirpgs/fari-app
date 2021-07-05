@@ -69,7 +69,9 @@
     "react-i18next": "^11.9.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-slick": "^0.28.1",
     "roughjs": "^4.4.1",
+    "slick-carousel": "^1.8.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -90,6 +92,7 @@
     "@types/react-color": "^3.0.4",
     "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.1.7",
+    "@types/react-slick": "^0.23.4",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
