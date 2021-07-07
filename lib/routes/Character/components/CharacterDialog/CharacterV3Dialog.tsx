@@ -29,6 +29,7 @@ import ExportIcon from "@material-ui/icons/GetApp";
 import PrintIcon from "@material-ui/icons/Print";
 import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
+import ShareIcon from "@material-ui/icons/Share";
 import UndoIcon from "@material-ui/icons/Undo";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete, {
@@ -305,9 +306,7 @@ export const CharacterV3Dialog: React.FC<{
         <Box className={fullScreenSheetContentStyle}>
           {renderTopLevelActions()}
         </Box>
-        <Box className={fullScreenSheetContentStyle}>
-          {renderManagementActions()}
-        </Box>
+
         <Box className={fullScreenSheetContentStyle}>
           {renderNameAndGroup()}
         </Box>
@@ -316,10 +315,6 @@ export const CharacterV3Dialog: React.FC<{
         </Box>
       </Container>
     );
-  }
-
-  function renderManagementActions() {
-    return <Collapse in={advanced}>{renderLoadTemplate("advanced")}</Collapse>;
   }
 
   function renderLoadTemplate(dataCy: string) {
@@ -382,12 +377,17 @@ export const CharacterV3Dialog: React.FC<{
       ...p.sections.right,
     ]).length;
     const doesntHaveSections = numberOfSections === 0;
-    const shouldRenderLoadTemplate = props.dialog
-      ? doesntHaveSections || advanced
-      : doesntHaveSections && !advanced;
+    const shouldRenderLoadTemplate = doesntHaveSections || advanced;
 
     return (
       <Box>
+        <Collapse in={shouldRenderLoadTemplate}>
+          <Box mb="1rem">
+            <Grid container justify="center">
+              <Grid item>{renderLoadTemplate("content")}</Grid>
+            </Grid>
+          </Box>
+        </Collapse>
         <Box mb="1rem">
           <Grid
             container
@@ -563,14 +563,6 @@ export const CharacterV3Dialog: React.FC<{
             );
           })}
         </TabContext>
-
-        <Collapse in={shouldRenderLoadTemplate}>
-          <Box mb="5rem">
-            <Grid container justify="center">
-              <Grid item>{renderLoadTemplate("content")}</Grid>
-            </Grid>
-          </Box>
-        </Collapse>
 
         <Grid container justify="space-between" alignItems="center">
           <Grid item>
@@ -850,22 +842,39 @@ export const CharacterV3Dialog: React.FC<{
               </Grid>
             )}
             {!props.dialog && (
-              <Grid item>
-                <Tooltip title={t("character-dialog.export")}>
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.export")}>
+                    <IconButton
+                      color="default"
+                      data-cy="character-dialog.print"
+                      size="small"
+                      onClick={() => {
+                        charactersManager.actions.exportEntity(
+                          characterManager.state.character as ICharacter
+                        );
+                      }}
+                    >
+                      <ExportIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+
+                <Tooltip title={t("character-dialog.export-as-template")}>
                   <IconButton
                     color="default"
                     data-cy="character-dialog.print"
                     size="small"
-                    onClick={() => {
-                      charactersManager.actions.exportEntity(
+                    onClick={(e) => {
+                      charactersManager.actions.exportEntityAsTemplate(
                         characterManager.state.character as ICharacter
                       );
                     }}
                   >
-                    <ExportIcon />
+                    <ShareIcon />
                   </IconButton>
                 </Tooltip>
-              </Grid>
+              </>
             )}
             <Grid item>
               <Button

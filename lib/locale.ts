@@ -45,6 +45,7 @@ export type ITranslationKeys =
   | "character-dialog.control.wide-mode"
   | "character-dialog.control.width"
   | "character-dialog.export"
+  | "character-dialog.export-as-template"
   | "character-dialog.group"
   | "character-dialog.helper-text.empty-dice-pool"
   | "character-dialog.helper-text.help"

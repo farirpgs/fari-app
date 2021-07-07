@@ -45,6 +45,7 @@
   "character-dialog.control.wide-mode": "Wide Mode",
   "character-dialog.control.width": "Width",
   "character-dialog.export": "Export",
+  "character-dialog.export-as-template": "Export as Template",
   "character-dialog.group": "Group",
   "character-dialog.helper-text.empty-dice-pool": "Empty",
   "character-dialog.helper-text.help": "Help:",
