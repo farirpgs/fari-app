@@ -107,6 +107,26 @@ Use the `...` menu on the right and either click `Load Scene` or `Clone And Load
 
 ![Loading a Scene](https://gyazo.com/5f093ab4cdf5783d1f61818d1120251f.png)
 
+## Offline Access
+
+Fari is kind of like a desktop application that runs in your browser.
+
+It doesn't have any servers or databases to store your data. You are 100% in control of your data because it lives inside your browser's local storage on your computer.
+
+But when you are playing an online game, Fari acts as a gateway so that you can see other people's data. Things like the current scene in play or players' character sheets.
+
+So, Fari is like a **virtual table** that lets you share temporarily data with others. When you leave that table and close your browser's tab, you take with you your character sheet and put it in your **backpack**.
+
+Because of that, it's not directly possible to see other people's data without sitting at the **table**.
+
+But, Fari has a mechanism in place that lets you see data that doesn't belong to you using what we call the `Stored Toggle`.
+
+When opening a character sheet inside an online game and clicking on the `Stored Toggle`, Fari will act has your personal assistant and keep an up to date copy of that character sheet in your **backpack** so that you can consult it later without sitting at the **table**.
+
+> A word of caution, if modify a character sheet that you aren't the true owner of and join an online game later, Fari might override those changes if the owner also modified the sheet on their end.
+
+![Stored Toggle](https://gyazo.com/ea063d783e6d026ee077d4d94e5f6c91.png)
+
 > #### Load VS Clone and Load
 >
 > Everytime you create something in Fari, Fari creates a unique identifier and attach it to what you created.
