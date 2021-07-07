@@ -7,7 +7,7 @@ import React from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { AppButtonLink } from "../../../components/AppLink/AppLink";
 import { useThemeFromColor } from "../../../hooks/useThemeFromColor/useThemeFromColor";
-import { ShopLink } from "../domains/GameLink";
+import { ShopLink } from "../domains/ShopLink";
 import {
   driveThruRpgAffiliateCode,
   IGame,

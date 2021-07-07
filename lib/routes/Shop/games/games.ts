@@ -4,6 +4,7 @@ export const ShopCategories: Array<{ name: string; tags: string }> = [
   { name: "Fate Must Have", tags: "fate-must" },
   { name: "You will LOVE those games", tags: "staff-pick" },
   { name: "Fate Toolkits", tags: "fate-toolkit" },
+  { name: "Forged in the Dark", tags: "fitd" },
 ];
 
 export type IGame = {
@@ -170,6 +171,48 @@ export const games: Array<IGame> = [
     image: "https://img.itch.zone/aW1nLzU0NDA4MjIucG5n/315x250%23cb/FY5LK6.png",
     links: {
       itchIo: "https://ac-luke.itch.io/heartbreaker-trifold",
+    },
+  },
+  {
+    name: "Blades in the Dark",
+    description:
+      "Tabletop role-playing game about a crew of daring scoundrels seeking their fortunes on the haunted streets of an industrial-fantasy city",
+    creator: "John Harper",
+    tags: ["fitd", "game", "staff-pick"],
+    rating: 10,
+    image: "https://img.itch.zone/aW1nLzMzMTY2NTgucG5n/original/BWh368.png",
+    links: {
+      itchIo: "https://johnharper.itch.io/blades-in-the-dark",
+      driveThru:
+        "https://www.drivethrurpg.com/product/170689/Blades-in-the-Dark",
+    },
+  },
+  {
+    name: "Bande of Blades",
+    description:
+      "The Legion is in retreat following a failed battle against the armies of the undead. You are a member of the Legion, your bonds to one another forged in the dark by bone and blood.",
+    creator: "Off Guard Games",
+    tags: ["fitd", "game", "staff-pick"],
+    rating: 9,
+    image: "https://img.itch.zone/aW1nLzIzMDk4NDMuanBn/original/OvyJdD.jpg",
+    links: {
+      itchIo: "https://offguardgames.itch.io/band-of-blades",
+      driveThru: "https://www.drivethrurpg.com/product/243347/Band-of-Blades",
+    },
+  },
+  {
+    name: "Scum and Villainy",
+    description:
+      "Unwise deals. Blaster fights. High adventure among the stars. Welcome to the world of Scum and Villainy.",
+    creator: "Off Guard Games",
+    tags: ["fitd", "game", "staff-pick"],
+    rating: 9,
+    image:
+      "https://img.itch.zone/aW1hZ2UvMjY2NTc0LzEyODQ5NjkucG5n/original/RZVlbt.png",
+    links: {
+      itchIo: "https://offguardgames.itch.io/scum-and-villainy",
+      driveThru:
+        "https://www.drivethrurpg.com/product/198681/Scum-and-Villainy",
     },
   },
 ];

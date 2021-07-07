@@ -13,7 +13,7 @@ import { Page } from "../../components/Page/Page";
 import { MoreByCreator } from "./components/MoreByCreator";
 import { ProductDetails } from "./components/ProductDetails";
 import { ShopCategory } from "./components/ShopCategory";
-import { ShopLink } from "./domains/GameLink";
+import { ShopLink } from "./domains/ShopLink";
 import { games } from "./games/games";
 
 export function ShopCreatorProductRoute() {

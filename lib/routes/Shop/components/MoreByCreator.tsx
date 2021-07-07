@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import kebabCase from "lodash/kebabCase";
 import React from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { ShopLink } from "../domains/GameLink";
+import { ShopLink } from "../domains/ShopLink";
 import { games } from "../games/games";
 
 export function MoreByCreator(props: {
@@ -20,11 +20,12 @@ export function MoreByCreator(props: {
   });
 
   const [firstGame] = creatorsGames;
+
+  const gamesToDisplay = creatorsGames.slice(0, props.count);
+
   if (!firstGame) {
     return null;
   }
-
-  const gamesToDisplay = creatorsGames.slice(0, props.count);
 
   return (
     <>

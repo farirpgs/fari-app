@@ -6,7 +6,7 @@ import React, { useMemo } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Settings } from "react-slick";
 import { arraySort } from "../../../domains/array/arraySort";
-import { ShopLink } from "../domains/GameLink";
+import { ShopLink } from "../domains/ShopLink";
 import { games, IGame } from "../games/games";
 import { BetterSlider } from "./BetterSlider";
 
