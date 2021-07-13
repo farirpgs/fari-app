@@ -1,13 +1,9 @@
-import produce from "immer";
 import React, { useState } from "react";
+import { IDiceCommandSetId } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
 type IThemeMode = "dark" | "light";
-
-type ISettings = {
-  themeMode: IThemeMode;
-};
 
 const oldDarkThemeLocalStorageKey = "prefers-dark-mode";
 const oldDarkThemeLocalStorageValue =
@@ -16,48 +12,48 @@ const oldDarkThemeLocalStorageValue =
 export function useSettings() {
   const [temporaryThemeMode, setThemeModeTemporarily] = useState<IThemeMode>();
 
-  const [settings, setSettings] = useStorageEntity<ISettings>({
-    defaulValue: {
-      themeMode: oldDarkThemeLocalStorageValue ? "dark" : "light",
-    },
-    key: "fari-settings",
+  const [themeMode, setThemeMode] = useStorageEntity<IThemeMode>({
+    defaultValue: oldDarkThemeLocalStorageValue ? "dark" : "light",
+    key: "fari-theme",
     localStorage: window.localStorage,
   });
   const [userId] = useStorageEntity<string>({
-    defaulValue: Id.generate(),
+    defaultValue: Id.generate(),
     key: "fari-user-id",
     localStorage: window.localStorage,
   });
   const [userName, setUserName] = useStorageEntity<string>({
-    defaulValue: "",
+    defaultValue: "",
     key: "fari-user-name",
     localStorage: window.localStorage,
   });
-
-  function setThemeMode(mode: IThemeMode) {
-    setSettings(
-      produce((draft: ISettings) => {
-        draft.themeMode = mode;
-      })
-    );
-  }
+  const [diceCommandIds, setDiceCommandsIds] =
+    useStorageEntity<Array<IDiceCommandSetId> | null>({
+      defaultValue: null,
+      key: "fari-dice-command-ids",
+      localStorage: window.localStorage,
+    });
 
   function toggleThemeMode() {
-    setSettings(
-      produce((draft: ISettings) => {
-        draft.themeMode = draft.themeMode === "light" ? "dark" : "light";
-      })
-    );
+    setThemeMode(() => {
+      return themeMode === "light" ? "dark" : "light";
+    });
   }
 
-  const themeMode = temporaryThemeMode ?? settings.themeMode;
+  const appThemeMode = temporaryThemeMode ?? themeMode;
   return {
-    state: { themeMode, userId, userName },
+    state: {
+      themeMode: appThemeMode,
+      userId,
+      userName,
+      diceCommandIds: diceCommandIds,
+    },
     actions: {
       setThemeMode,
       toggleThemeMode,
       setThemeModeTemporarily,
       setUserName,
+      setDiceCommandsIds: setDiceCommandsIds,
     },
   };
 }

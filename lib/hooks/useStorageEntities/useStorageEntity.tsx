@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 
 export function useStorageEntity<T>(props: {
-  defaulValue: T;
+  defaultValue: T;
   localStorage: Storage;
   key: string;
   migrationFunction?: (entity: T) => T;
 }) {
   const [entity, setEntity] = useState<T>(() => {
     const newEntity = FariEntity.loadEntityFromStorage<T>({
-      defaultValue: props.defaulValue,
+      defaultValue: props.defaultValue,
       key: props.key,
       localStorage: props.localStorage,
       migrationFunction: props.migrationFunction,
@@ -32,7 +32,7 @@ export function useStorageEntity<T>(props: {
   useEffect(function syncOtherTabLocalStorage() {
     function refreshStorage() {
       const newEntity = FariEntity.loadEntityFromStorage<T>({
-        defaultValue: props.defaulValue,
+        defaultValue: props.defaultValue,
         key: props.key,
         localStorage: props.localStorage,
         migrationFunction: props.migrationFunction,

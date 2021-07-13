@@ -110,7 +110,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
                 commands={diceManager.state.commandGroups}
                 showPoolToggle
                 onClear={handleClear}
-                onDiceCommandChange={diceManager.actions.setCommandGroups}
+                onDiceCommandChange={diceManager.actions.setCommandSets}
               />
             </Box>
           </ClickAwayListener>

@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   CommmandSetOptions,
   Dice,
+  IDiceCommandSetId,
   IDiceCommandSetOption,
   IRollDiceOptions,
   IRollGroup,
@@ -10,30 +11,36 @@ import {
   IDicePool,
   IDicePoolElement,
 } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-
 export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
-export const DefaultDiceCommandOptions: Array<IRollGroup> = [
-  {
-    commandSets: [{ id: "4dF" }],
-  },
-];
-
-export function useDice() {
+export function useDice(props: {
+  defaultCommands: Array<IDiceCommandSetId> | null;
+  onCommandSetsChange(commandSets: Array<IDiceCommandSetOption>): void;
+}) {
   const [options, setOptions] = useState<IRollDiceOptions>({
     listResults: false,
   });
 
   const [pool, setPool] = useState<IDicePool>([]);
   const [playerId, setPlayerId] = useState<string>();
-  const [commandSets, setCommandSets] = useState<Array<IDiceCommandSetOption>>([
-    CommmandSetOptions["4dF"],
-  ]);
+
+  const [commandSets, setCommandSets] = useState<Array<IDiceCommandSetOption>>(
+    () => {
+      const defaultSet = props.defaultCommands?.map(
+        (c) => CommmandSetOptions[c]
+      ) ?? [CommmandSetOptions["4dF"]];
+      return defaultSet;
+    }
+  );
   const [commandSetsBeforePool, setCommandSetsBeforePool] = useState<
     Array<IDiceCommandSetOption>
   >([]);
+
+  useEffect(() => {
+    props.onCommandSetsChange(commandSets);
+  }, [commandSets]);
 
   const poolCommandSets = useMemo(() => {
     const poolRollGroups = pool.flatMap((dicePoolElement) => {
@@ -145,7 +152,7 @@ export function useDice() {
       rollCommandGroups,
       reset,
       setOptions: setOptions,
-      setCommandGroups: setCommandSets,
+      setCommandSets: setCommandSets,
       addOrRemovePoolElement,
       getPoolResult,
       setPlayerId,

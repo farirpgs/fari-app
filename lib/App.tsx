@@ -53,7 +53,13 @@ function AppContexts(props: { children: ReactNode }) {
   const settingsManager = useSettings();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
-  const diceManager = useDice();
+  const diceManager = useDice({
+    defaultCommands: settingsManager.state.diceCommandIds,
+    onCommandSetsChange(commandSetOptions) {
+      const commandSetIds = commandSetOptions.map((l) => l.id);
+      settingsManager.actions.setDiceCommandsIds(commandSetIds);
+    },
+  });
   const myBinderManager = useMyBinder();
 
   return (
