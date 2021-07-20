@@ -1,5 +1,4 @@
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
+import { darken, lighten, makeStyles, Theme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import React from "react";
 import { FontFamily } from "../../constants/FontFamily";
@@ -339,12 +338,11 @@ const MarkdownElement = React.forwardRef<
   any,
   { renderedMarkdown: string; className?: string }
 >(function MarkdownElement(props, ref) {
-  const { className, renderedMarkdown, ...other } = props;
   const classes = useStyles();
   return (
     <div
-      className={clsx(classes.root, "markdown-body", className)}
-      dangerouslySetInnerHTML={{ __html: renderedMarkdown }}
+      className={clsx(classes.root, "markdown-body", props.className)}
+      dangerouslySetInnerHTML={{ __html: props.renderedMarkdown }}
       ref={ref}
     />
   );

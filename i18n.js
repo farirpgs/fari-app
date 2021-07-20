@@ -8,8 +8,8 @@ main();
 async function main() {
   const sourceFileLocations = await globPromise("./lib/**/*.tsx");
   const translationKeys = await findTranslations(sourceFileLocations);
-  const translationFileLocations = await globPromise("./locales/**/*.json");
-  await updateTranslations(translationKeys, translationFileLocations);
+
+  await updateTranslations(translationKeys);
   await updateTypeDefinitions(translationKeys);
 }
 
@@ -51,10 +51,10 @@ async function findTranslations(sourceFileLocations) {
   return translationKeys;
 }
 
-async function updateTranslations(keys, translationFilesLocations) {
+async function updateTranslations(keys) {
   const sortedKeys = sortBy(keys, (k) => k);
 
-  const files = await importJsonFiles(["./locales/en.json"]);
+  const files = await importJsonFiles(["./public/locales/en/translation.json"]);
   // const files = await importJsonFiles(translationFilesLocations);
 
   for (const file of files) {

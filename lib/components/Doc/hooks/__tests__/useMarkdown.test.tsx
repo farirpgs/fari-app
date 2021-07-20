@@ -9,6 +9,11 @@ import { InjectionsContext } from "../../../../contexts/InjectionsContext/Inject
 import { useMarkdownFile } from "../useMarkdownFile";
 import { useMarkdownPage } from "../useMarkdownPage";
 
+jest.mock("../../../../constants/env.ts");
+jest.mock("axios");
+jest.mock("@sentry/react");
+jest.mock("@sentry/browser");
+
 const fakeLogger = {
   debug: jest.fn(),
   info: jest.fn(),
@@ -25,12 +30,17 @@ beforeEach(() => {
 
 describe("Given I want use the autocomplete indexes", () => {
   it("should give me good indexes", async () => {
-    const view = renderHook(() => {
-      return useMarkdownFile({
-        loadFunction: aWiki,
-        prefix: "/prefix",
-      });
-    });
+    const view = renderHook(
+      () => {
+        return useMarkdownFile({
+          loadFunction: aWiki,
+          prefix: "/prefix",
+        });
+      },
+      {
+        wrapper: wrapper,
+      }
+    );
 
     await view.waitForNextUpdate();
 
@@ -66,12 +76,17 @@ describe("Given I want use the autocomplete indexes", () => {
 describe("useMarkdownFile", () => {
   describe("Given I have an undefined markdown file", () => {
     it("should return an undefined state", async () => {
-      const view = renderHook(() => {
-        return useMarkdownFile({
-          loadFunction: anUndefinedMarkdownFile,
-          prefix: "/test-doc",
-        });
-      });
+      const view = renderHook(
+        () => {
+          return useMarkdownFile({
+            loadFunction: anUndefinedMarkdownFile,
+            prefix: "/test-doc",
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       expect(view.result.current.html).toEqual(undefined);
       expect(view.result.current.markdownIndexes.flat).toEqual([]);
@@ -81,12 +96,17 @@ describe("useMarkdownFile", () => {
   });
   describe("Given I dont have a load function", () => {
     it("should return an undefined state", async () => {
-      const view = renderHook(() => {
-        return useMarkdownFile({
-          loadFunction: undefined as any,
-          prefix: "/test-doc",
-        });
-      });
+      const view = renderHook(
+        () => {
+          return useMarkdownFile({
+            loadFunction: undefined as any,
+            prefix: "/test-doc",
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       expect(view.result.current.html).toEqual(undefined);
       expect(view.result.current.markdownIndexes.flat).toEqual([]);
@@ -96,12 +116,17 @@ describe("useMarkdownFile", () => {
   });
   describe("Given I have an empty markdown file", () => {
     it("should return an undefined state", async () => {
-      const view = renderHook(() => {
-        return useMarkdownFile({
-          loadFunction: anEmptyMarkdownFile,
-          prefix: "/test-doc",
-        });
-      });
+      const view = renderHook(
+        () => {
+          return useMarkdownFile({
+            loadFunction: anEmptyMarkdownFile,
+            prefix: "/test-doc",
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       expect(view.result.current.html).toEqual(undefined);
       expect(view.result.current.markdownIndexes.flat).toEqual([]);
@@ -293,7 +318,7 @@ describe("useMarkdownPage", () => {
         () => view.result.current.pageDom?.innerHTML
       );
       expect(fakeLogger.error).toHaveBeenCalledWith(
-        'useMarkdownPage: no "h1" in the markdown document'
+        'DocumentProcessor: no "h1" in the document'
       );
       expect(view.result.current.title).toEqual("Error");
       expect(view.result.current.description).toEqual("Document Error");
@@ -383,19 +408,24 @@ describe("useMarkdownPage", () => {
   });
   describe("Given the third page", () => {
     it("should go to third h1", async () => {
-      const view = renderHook(() => {
-        const { dom } = useMarkdownFile({
-          loadFunction: aComplexeMarkdownFile,
-          prefix: "/test-doc",
-        });
+      const view = renderHook(
+        () => {
+          const { dom } = useMarkdownFile({
+            loadFunction: aComplexeMarkdownFile,
+            prefix: "/test-doc",
+          });
 
-        return useMarkdownPage({
-          page: "header-3",
-          section: "",
-          url: "test-doc",
-          dom: dom,
-        });
-      });
+          return useMarkdownPage({
+            page: "header-3",
+            section: "",
+            url: "test-doc",
+            dom: dom,
+          });
+        },
+        {
+          wrapper: wrapper,
+        }
+      );
 
       await view.waitForNextUpdate();
       expect(view.result.current.title).toEqual("header-3");
@@ -446,120 +476,94 @@ function makeLoadFunction(markdownFile: string | undefined) {
 
 const anUndefinedMarkdownFile = makeLoadFunction(undefined);
 const anEmptyMarkdownFile = makeLoadFunction("");
-const aComplexeMarkdownFile = makeLoadFunction(`
-# header-1
+const aComplexeMarkdownFile = makeLoadFunction(`<h1>header-1</h1>
+<p>[header-1.text]</p>
+<h2>header-1-1</h2>
+<p>[header-1-2.text]</p>
+<h2>header-1-2</h2>
+<p>[header-1-2.text]</p>
+<h3>header-1-2-1</h3>
+<h3>header-1-2-2</h3>
+<h3>header-1-2-3</h3>
+<h1>header-2</h1>
+<p>[header-2.text]</p>
+<h1>header-3</h1>
+<p>[header-3.text]</p>
+<ul>
+<li>bullet 1</li>
+<li>bullet 2</li>
+</ul>
+<h2>Rage</h2>
+<ul>
+<li><strong>Berserk Rage</strong>. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)</li>
+</ul>
+`);
 
-[header-1.text]
+const aMarkdownFileInHierarchy = makeLoadFunction(`<h1>header-1</h1>
+<h2>header-2</h2>
+<h3>header-3</h3>
+<h4>header-4</h4>
+<h5>header-5</h5>
+<h6>header-6</h6>
 
-## header-1-1
-
-[header-1-2.text]
-
-## header-1-2
-
-[header-1-2.text]
-
-### header-1-2-1
-
-### header-1-2-2
-
-### header-1-2-3
-
-# header-2
-
-[header-2.text]
-
-# header-3
-
-[header-3.text]
-
-- bullet 1
-- bullet 2
-
-## Rage
-
-- **Berserk Rage**. When you suffer a physical consequence, you can invoke that consequence for free on your next attack. If you suffer multiple physical consequences, you get a free invocation for each. (Fate System Toolkit, p.34)
+<h1>again_1</h1>
+<h2>again_2</h2>
+<h2>again_2</h2>
+<h3>again_3</h3>
+<h3>again_3</h3>
+<h4>again_4</h4>
+<h4>again_4</h4>
+<h5>again_5</h5>
+<h5>again_5</h5>
+<h6>again_6</h6>
+<h6>again_6</h6>
 
 `);
 
-const aMarkdownFileInHierarchy = makeLoadFunction(`
-# header-1
-## header-2
-### header-3
-#### header-4
-##### header-5
-###### header-6
-
-# again_1
-## again_2
-## again_2
-### again_3
-### again_3
-#### again_4
-#### again_4
-##### again_5
-##### again_5
-###### again_6
-###### again_6
-
+const aMarkdownFileWithoutAHeader1 = makeLoadFunction(`<h2>Header 2</h2>
+<p>Header 2 details</p>
 `);
 
-const aMarkdownFileWithoutAHeader1 = makeLoadFunction(`
-## Header 2
-
-Header 2 details
-`);
-
-const aMarkdownFileWithADynamicAnchor = makeLoadFunction(`
-# Header 1
-
+const aMarkdownFileWithADynamicAnchor = makeLoadFunction(`<h1>Header 1</h1>
 <p class="with-anchor">something important</p>
 `);
 
 const aMarkdownFileWithADynamicTableOfContents = makeLoadFunction(`
-# 1
-
+<h1>1</h1>
 <toc></toc>
-
-## 1.1
-
-## 1.2
-
-## 1.3
-
-# 2
-
-## 2.1
-## 2.2
-## 2.3
-
-# 3
-
-# 4
+<h2>1.1</h2>
+<h2>1.2</h2>
+<h2>1.3</h2>
+<h1>2</h1>
+<h2>2.1</h2>
+<h2>2.2</h2>
+<h2>2.3</h2>
+<h1>3</h1>
+<h1>4</h1>
 
 `);
 
 const aWiki = makeLoadFunction(`
-# Wiki
+<h1>Wiki</h1>
 
-# FAQ
+<h1>FAQ</h1>
 
-## Question 1
+<h2>Question 1</h2>
 
-## Question 2
+<h2>Question 2</h2>
 
-## Question 3
+<h2>Question 3</h2>
 
-### Question 3 Explanation
+<h3>Question 3 Explanation</h3>
 
-# Tips and Tricks
+<h1>Tips and Tricks</h1>
 
-## Tip 1
+<h2>Tip 1</h2>
 
-## Tip 2
+<h2>Tip 2</h2>
 
-## Tip 3
+<h2>Tip 3</h2>
 
-### Question 3 Explanation
+<h3>Question 3 Explanation</h3>
 
 `);

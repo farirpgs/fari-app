@@ -46,6 +46,20 @@
           ]
         },
         {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Grant Howitt",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://rowanrookanddecard.com/"
+            }
+          ]
+        },
+        {
           "id": "014c6964-09b1-4795-a04f-468e1feff17a",
           "label": "Skills",
           "visibleOnCard": true,

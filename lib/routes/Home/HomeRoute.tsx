@@ -15,7 +15,6 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import appIcon from "../../../images/blue/app.png";
 import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
 import { RouterLink } from "../../components/AppLink/AppLink";
@@ -23,17 +22,15 @@ import { ConditionalWrapper } from "../../components/ConditionalWrapper/Conditio
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { Kofi } from "../../components/Kofi/Kofi";
-import { ManagerMode } from "../../components/Manager/Manager";
 import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
-import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { Images } from "../../constants/Images";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
-import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
-import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
+import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { WikiItems } from "../SrdsRoute/SrdsRoute";
 
@@ -67,17 +64,13 @@ type IHomeRouteCard = {
 
 const sectionsSeparator = "4rem";
 
-export const HomeRoute: React.FC<{}> = (props) => {
+export const HomeRoute: React.FC<{}> = () => {
   const history = useHistory();
   const { t } = useTranslate();
   const logger = useLogger();
   const lightBackground = useLightBackground();
   const theme = useTheme();
-  const scenesManager = useContext(ScenesContext);
-  const charactersManager = useContext(CharactersContext);
-  const inverted = useThemeFromColor(
-    theme.palette.getContrastText(theme.palette.text.primary)
-  );
+  const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
     logger.info("Route:Home");
@@ -96,7 +89,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           >
             <Grid container justify="center" alignItems="center" spacing={3}>
               <Grid item>
-                <img alt="Fari" width="70px" src={appIcon} />
+                <img alt="Fari" width="70px" src={Images.app} />
               </Grid>
               <Grid item>
                 <FateLabel
@@ -238,7 +231,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           <Grid container spacing={1} justify="center">
             {Patrons.map((patron, i) => {
               const isLast = i === Patrons.length - 1;
-              const dot = !isLast ? "•" : undefined;
+
               return (
                 <React.Fragment key={i}>
                   <Grid item>
@@ -397,7 +390,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
           />
         ),
         onClick: () => {
-          scenesManager.actions.openManager(ManagerMode.Manage);
+          myBinderManager.actions.open({ folder: "scenes" });
         },
       },
       {
@@ -412,7 +405,7 @@ export const HomeRoute: React.FC<{}> = (props) => {
         ),
         ctaLabel: t("home-route.cards.characters.cta"),
         onClick: () => {
-          charactersManager.actions.openManager(ManagerMode.Manage);
+          myBinderManager.actions.open({ folder: "characters" });
         },
       },
       {

@@ -7,7 +7,7 @@ import { Id } from "../../domains/Id/Id";
 /**
  * When running fariapp/fari-peer-server locally
  */
-const localhostConfig = {
+export const localhostConfig = {
   host: "localhost",
   port: 9000,
   secure: false,
@@ -16,7 +16,7 @@ const localhostConfig = {
 /**
  * For testing peer-js versions
  */
-const stagingConfig = {
+export const stagingConfig = {
   host: "fari-peer-server-staging.herokuapp.com",
   secure: true,
 };
@@ -38,7 +38,7 @@ export function usePeerJS(options: { debug?: boolean }) {
 
   if (!peer.current) {
     const id = Id.generate();
-    if (env.context === "localhost") {
+    if (env.isDev) {
       peer.current = new Peer(id, {
         path: "/peer/connect",
         debug: options.debug ? 3 : 0,
@@ -98,8 +98,4 @@ export function usePeerJS(options: { debug?: boolean }) {
   }, []);
 
   return { peer: peer.current, hostId, loading, error };
-}
-
-export function isWebRTCSupported() {
-  return window.RTCPeerConnection !== undefined;
 }

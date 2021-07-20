@@ -31,7 +31,14 @@ export function usePeerHost(options: {
             currentConnection.label
           );
           setConnections((connections) => {
-            return [...connections, currentConnection];
+            const connectionsWithoutCurrentInCaseItWasDisconnected = connections.filter(
+              (c) => c.label !== currentConnection.label
+            );
+
+            return [
+              ...connectionsWithoutCurrentInCaseItWasDisconnected,
+              currentConnection,
+            ];
           });
         });
         currentConnection.on("close", () => {

@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { ManagerMode } from "../../../components/Manager/Manager";
 import { CharacterTemplates } from "../../../domains/character/CharacterType";
 import { ICharacter } from "../../../domains/character/types";
 import { useCharacters } from "../CharactersContext";
@@ -78,12 +77,12 @@ describe("useCharacters", () => {
       });
 
       // THEN the new character has been added and is properly sorted
-      expect(result.current.state.characters[1]).toEqual(
+      expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
           id: playingCharacter!.id,
         })
       );
-      expect(result.current.state.characters[0]).toEqual(
+      expect(result.current.state.characters[1]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
@@ -194,19 +193,6 @@ describe("useCharacters", () => {
           lastUpdated: newCharacter!.lastUpdated + 100,
         })
       );
-
-      act(() => {
-        // WHEN I open the manager
-        result.current.actions.openManager(ManagerMode.Use);
-      });
-      // THEN the manager is opened
-      expect(result.current.state.mode).toEqual(ManagerMode.Use);
-      act(() => {
-        // WHEN I close the manager
-        result.current.actions.closeManager();
-      });
-      // THEN the manager is closed
-      expect(result.current.state.mode).toEqual(ManagerMode.Close);
     });
   });
 });

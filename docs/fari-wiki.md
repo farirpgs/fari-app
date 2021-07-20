@@ -23,23 +23,25 @@ To start a new game session, Fari offers you the following two options:
 
 ### Online
 
-When you play online, Fari will open a new connection with a server to authenticate you and then give you access to a unique link that you can send to your friends.
+When you click on the `Play Online` button on the home page, Fari will create a temporary space for you that we call a `Session` where you are the host and owner.
 
-Sharing that link with people will give them access to your game
+When a session is started, Fari gives you access to a `Session Link` that you can send to your friends so that they can join your `Session`.
 
 ![Copying a Game Link](https://gyazo.com/d00cf8bf9b69416ccc5e29c5539ce719.png)
 
-After they entered their name and joined a game, every modification that you do the game will be synced with all the players using something called `peer to peer communication` using the `WebRTC` protocol.
-
-The data that is synced includes things like the index card, the drawing pad and even dice rolls.
+After you sent your players the session link, they can enter their name and joined a game, every modification that you do the Session, Scene or Character will be synced with all the players.
 
 ![Joining a Game](https://gyazo.com/c3c4a71bfc268c8739a016a07756f122.png)
+
+> #### How does Fari sync my data with my players ?
+>
+> Fari relies on something called `peer to peer communication` using the `WebRTC` protocol.
 
 ### Offline
 
 The Offline mode is useful if everyone are physically in the same room but the GM still wants to use Fari to manage their Scenes.
 
-When playing in Offline mode, Fari won't connect to its server and won't generate the unique link cited above. It will instead just store everything locally in a temporary manner.
+When playing in Offline mode, Fari won't connect to its server and won't generate the session link cited above.
 
 This mode is also useful if for some reasons, some of your players can't connect to your Online game session and you want to share your screen with them. See more about connection issues below.
 
@@ -104,6 +106,26 @@ Wether you had to leave your last game session early or you've prepared scenes i
 Use the `...` menu on the right and either click `Load Scene` or `Clone And Load Scene`
 
 ![Loading a Scene](https://gyazo.com/5f093ab4cdf5783d1f61818d1120251f.png)
+
+## Offline Access
+
+Fari is kind of like a desktop application that runs in your browser.
+
+It doesn't have any servers or databases to store your data. You are 100% in control of your data because it lives inside your browser's local storage on your computer.
+
+But when you are playing an online game, Fari acts as a gateway so that you can see other people's data. Things like the current scene in play or players' character sheets.
+
+So, Fari is like a **virtual table** that lets you share temporarily data with others. When you leave that table and close your browser's tab, you take with you your character sheet and put it in your **backpack**.
+
+Because of that, it's not directly possible to see other people's data without sitting at the **table**.
+
+But, Fari has a mechanism in place that lets you see data that doesn't belong to you using what we call the `Stored Toggle`.
+
+When opening a character sheet inside an online game and clicking on the `Stored Toggle`, Fari will act has your personal assistant and keep an up to date copy of that character sheet in your **backpack** so that you can consult it later without sitting at the **table**.
+
+> A word of caution, if modify a character sheet that you aren't the true owner of and join an online game later, Fari might override those changes if the owner also modified the sheet on their end.
+
+![Stored Toggle](https://gyazo.com/ea063d783e6d026ee077d4d94e5f6c91.png)
 
 > #### Load VS Clone and Load
 >
@@ -521,8 +543,11 @@ By using the following syntax `[skill: modifier]` inside an Index Card descripti
 
 # Fari in the Wild
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C_rHMMuYoo8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Tutorials and Overview
 
+- [Fari: The VTT For DMs Who LOVE Custom Sheets and Index Cards! by The Dungeon Newb's Guide](https://www.youtube.com/watch?v=C_rHMMuYoo8)
 - [Fari App Virtual Table Top by Dragons Are Real Podcast](https://www.youtube.com/watch?v=BNL5xXDgA3w)
 
 ## Actual Plays
@@ -539,6 +564,8 @@ This is a nice way to learn how people _actually_ use Fari!
 - [The Bane of the British Museum Fate One Shot](https://www.youtube.com/watch?v=Q3treoCi_pQ)
 - [SPACE SPIES, a Fate RPG One Shot](https://www.youtube.com/watch?v=WqzL0jqmGIM)
 - [Weird West, Session 4 — Learn to Play Fate](https://www.youtube.com/watch?v=BZKi9UDNG_E)
+- [The Frenchman and the American Soldier — A Book of Hanz Fate RPG One Shot](https://www.youtube.com/watch?v=-aRtBe2hT1g)
+- [Enchanters vs Necromancers](https://www.youtube.com/watch?v=rvQVPeI1R0s)
 
 ### Other
 

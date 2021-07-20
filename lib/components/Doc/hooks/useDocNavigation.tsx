@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { IDoceSideBarOptions, IDocSidebar, ISideBarItems } from "../Doc";
-import { IMarkdownIndexes } from "../domains/Markdown";
+import { IDocumentIndexes } from "../domains/DocumentProcessor";
 
 const MISC_SECTION_NAME = "Misc";
 
@@ -11,7 +11,7 @@ export function useDocNavigation(props: {
   docSideBar: IDocSidebar | undefined;
   doceSideBarOptions: IDoceSideBarOptions | undefined;
   defaultSideBarCategory?: string;
-  markdownIndexes: IMarkdownIndexes;
+  markdownIndexes: IDocumentIndexes;
 }) {
   const miscSectionName =
     props.doceSideBarOptions?.miscSectionTitle ?? MISC_SECTION_NAME;
@@ -40,9 +40,8 @@ export function useDocNavigation(props: {
       props.currentPageId,
       sideBar
     );
-    const isInsideMiscSection = pageIdsWithoutCategories.includes(
-      currentPageId
-    );
+    const isInsideMiscSection =
+      pageIdsWithoutCategories.includes(currentPageId);
     if (isInsideMiscSection) {
       highlightedItems.push(miscSectionName, currentPageId);
     }

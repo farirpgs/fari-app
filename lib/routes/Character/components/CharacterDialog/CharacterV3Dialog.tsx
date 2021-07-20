@@ -25,9 +25,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import ExportIcon from "@material-ui/icons/GetApp";
 import PrintIcon from "@material-ui/icons/Print";
 import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
+import ShareIcon from "@material-ui/icons/Share";
 import UndoIcon from "@material-ui/icons/Undo";
 import Alert from "@material-ui/lab/Alert";
 import Autocomplete, {
@@ -38,7 +40,6 @@ import TabPanel from "@material-ui/lab/TabPanel";
 import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
-import { AppLink } from "../../../../components/AppLink/AppLink";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
@@ -48,7 +49,6 @@ import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogge
 import {
   CharacterTemplates,
   CharacterTemplatesWithGroups,
-  getTemplateInfo,
 } from "../../../../domains/character/CharacterType";
 import {
   ICharacter,
@@ -58,6 +58,7 @@ import {
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../../../domains/dice/Dice";
+import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
@@ -117,15 +118,12 @@ export const CharacterV3Dialog: React.FC<{
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
-
-  const characterTemplateInfo = getTemplateInfo(
-    characterManager.state.character?.template
-  );
 
   function getTemplateName(template: string | undefined = "") {
     const label = t(
@@ -145,7 +143,8 @@ export const CharacterV3Dialog: React.FC<{
   }
 
   function onSave() {
-    const updatedCharacter = characterManager.actions.getCharacterWithNewTimestamp();
+    const updatedCharacter =
+      characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
     logger.info(`CharacterDialog:onSave`);
@@ -307,9 +306,7 @@ export const CharacterV3Dialog: React.FC<{
         <Box className={fullScreenSheetContentStyle}>
           {renderTopLevelActions()}
         </Box>
-        <Box className={fullScreenSheetContentStyle}>
-          {renderManagementActions()}
-        </Box>
+
         <Box className={fullScreenSheetContentStyle}>
           {renderNameAndGroup()}
         </Box>
@@ -320,11 +317,7 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderManagementActions() {
-    return <Collapse in={advanced}>{renderLoadTemplate("advanced")}</Collapse>;
-  }
-
-  function renderLoadTemplate(dataCy: string) {
+  function renderLoadTemplate() {
     return (
       <Box>
         <Grid
@@ -341,7 +334,14 @@ export const CharacterV3Dialog: React.FC<{
             <Autocomplete
               size="small"
               autoHighlight
-              filterOptions={createFilterOptions({ limit: 100 })}
+              filterOptions={createFilterOptions({
+                limit: 100,
+                stringify: (option) => {
+                  const templateName = getTemplateName(option.template);
+                  const groupName = option.group;
+                  return `${templateName} ${groupName}`;
+                },
+              })}
               options={CharacterTemplatesWithGroups}
               className={css({ width: "300px" })}
               getOptionLabel={(option) => {
@@ -358,7 +358,7 @@ export const CharacterV3Dialog: React.FC<{
                   {...params}
                   label="Template"
                   variant="outlined"
-                  data-cy={`character-dialog.template.${dataCy}`}
+                  data-cy={`character-dialog.template-input`}
                 />
               )}
             />
@@ -377,12 +377,17 @@ export const CharacterV3Dialog: React.FC<{
       ...p.sections.right,
     ]).length;
     const doesntHaveSections = numberOfSections === 0;
-    const shouldRenderLoadTemplate = props.dialog
-      ? doesntHaveSections || advanced
-      : doesntHaveSections && !advanced;
+    const shouldRenderLoadTemplate = doesntHaveSections || advanced;
 
     return (
       <Box>
+        <Collapse in={shouldRenderLoadTemplate}>
+          <Box mb="1rem">
+            <Grid container justify="center">
+              <Grid item>{renderLoadTemplate()}</Grid>
+            </Grid>
+          </Box>
+        </Collapse>
         <Box mb="1rem">
           <Grid
             container
@@ -559,28 +564,7 @@ export const CharacterV3Dialog: React.FC<{
           })}
         </TabContext>
 
-        <Collapse in={shouldRenderLoadTemplate}>
-          <Box mb="5rem">
-            <Grid container justify="center">
-              <Grid item>{renderLoadTemplate("content")}</Grid>
-            </Grid>
-          </Box>
-        </Collapse>
-
         <Grid container justify="space-between" alignItems="center">
-          {characterTemplateInfo?.author && (
-            <Grid item>
-              <Box pt=".5rem">
-                <AppLink
-                  to={characterTemplateInfo.author?.link}
-                  target="_blank"
-                >
-                  {getTemplateName(characterManager.state.character?.template)}{" "}
-                  ({characterTemplateInfo.author?.name})
-                </AppLink>
-              </Box>
-            </Grid>
-          )}
           <Grid item>
             <Box pt=".5rem">
               <Typography>
@@ -624,9 +608,7 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
-            const helpLink = characterTemplateInfo?.isFate
-              ? HeaderHelpLinks[section.label.toLowerCase()]
-              : undefined;
+            const helpLink = HeaderHelpLinks[section.label.toLowerCase()];
 
             return (
               <Box key={section.id}>
@@ -845,17 +827,54 @@ export const CharacterV3Dialog: React.FC<{
           >
             {!props.dialog && (
               <Grid item>
-                <IconButton
-                  color="default"
-                  data-cy="character-dialog.print"
-                  size="small"
-                  onClick={() => {
-                    window.open(`/characters/${props.character?.id}/print`);
-                  }}
-                >
-                  <PrintIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.print")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.print"
+                    size="small"
+                    onClick={() => {
+                      window.open(`/characters/${props.character?.id}/print`);
+                    }}
+                  >
+                    <PrintIcon />
+                  </IconButton>
+                </Tooltip>
               </Grid>
+            )}
+            {!props.dialog && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.export")}>
+                    <IconButton
+                      color="default"
+                      data-cy="character-dialog.print"
+                      size="small"
+                      onClick={() => {
+                        charactersManager.actions.exportEntity(
+                          characterManager.state.character as ICharacter
+                        );
+                      }}
+                    >
+                      <ExportIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+
+                <Tooltip title={t("character-dialog.export-as-template")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.print"
+                    size="small"
+                    onClick={(e) => {
+                      charactersManager.actions.exportEntityAsTemplate(
+                        characterManager.state.character as ICharacter
+                      );
+                    }}
+                  >
+                    <ShareIcon />
+                  </IconButton>
+                </Tooltip>
+              </>
             )}
             <Grid item>
               <Button
@@ -933,40 +952,49 @@ export const CharacterV3Dialog: React.FC<{
                 <FateLabel>{t("character-dialog.group")}</FateLabel>
               </Grid>
               <Grid item xs>
-                <Autocomplete
-                  freeSolo
-                  options={charactersManager.state.groups.filter((g) => {
-                    const currentGroup =
-                      characterManager.state.character!.group?.toLowerCase() ??
-                      "";
-                    return g.toLowerCase().includes(currentGroup);
-                  })}
-                  value={characterManager.state.character!.group ?? ""}
-                  onChange={(event, newValue) => {
-                    characterManager.actions.setGroup(newValue);
+                <LazyState
+                  value={characterManager.state.character?.group}
+                  delay={750}
+                  onChange={(newGroup) => {
+                    characterManager.actions.setGroup(newGroup);
                   }}
-                  inputValue={characterManager.state.character!.group ?? ""}
-                  onInputChange={(event, newInputValue) => {
-                    characterManager.actions.setGroup(newInputValue);
+                  render={([lazyGroup, setLazyGroup]) => {
+                    return (
+                      <Autocomplete
+                        freeSolo
+                        options={charactersManager.state.groups.filter((g) => {
+                          const currentGroup = lazyGroup?.toLowerCase() ?? "";
+                          return g.toLowerCase().includes(currentGroup);
+                        })}
+                        value={lazyGroup ?? ""}
+                        onChange={(event, newInputValue) => {
+                          setLazyGroup(newInputValue || undefined);
+                        }}
+                        inputValue={lazyGroup ?? ""}
+                        onInputChange={(event, newInputValue) => {
+                          setLazyGroup(newInputValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="standard"
+                            InputProps={{
+                              ...params.InputProps,
+                              disableUnderline: true,
+                              classes: {
+                                input: css({ paddingBottom: "0 !important" }),
+                              },
+                            }}
+                            data-cy={`character-dialog.group`}
+                            disabled={props.readonly}
+                            className={css({
+                              borderBottom: `1px solid ${theme.palette.divider}`,
+                            })}
+                          />
+                        )}
+                      />
+                    );
                   }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="standard"
-                      InputProps={{
-                        ...params.InputProps,
-                        disableUnderline: true,
-                        classes: {
-                          input: css({ paddingBottom: "0 !important" }),
-                        },
-                      }}
-                      data-cy={`character-dialog.group`}
-                      disabled={props.readonly}
-                      className={css({
-                        borderBottom: `1px solid ${theme.palette.divider}`,
-                      })}
-                    />
-                  )}
                 />
               </Grid>
             </Grid>
@@ -1142,8 +1170,8 @@ export const CharacterV3Dialog: React.FC<{
                                 className={cx(
                                   css({
                                     label: "CharacterDialog-block",
-                                    marginTop: ".2rem",
-                                    marginBottom: ".2rem",
+                                    marginTop: "4px",
+                                    marginBottom: "4px",
                                     marginLeft: ".5rem",
                                     marginRight: ".5rem",
                                   }),

@@ -9,6 +9,7 @@ export const Heading: React.FC<
     title?: string | JSX.Element;
     subtitle?: string | JSX.Element;
     icon?: React.ElementType;
+    children?: string | JSX.Element;
   } & BoxProps
 > = (props) => {
   const { title, subtitle, icon, ...boxProps } = props;
@@ -40,6 +41,7 @@ export const Heading: React.FC<
           {subtitle}
         </Typography>
       )}
+      {props.children}
     </Box>
   );
 };

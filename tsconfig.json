@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "react",
     "outDir": "./.tsc",
@@ -14,8 +13,20 @@
       {
         "name": "typescript-tslint-plugin"
       }
-    ]
+    ],
+    "types": ["vite/client", "jest"]
   },
   "include": ["lib/**/*", "stories/**/*"],
   "exclude": ["node_modules", "cypress"]
 }
+
+// //  //     "skipLibCheck": true,
+// "skipLibCheck": false,
+// "allowJs": false,
+// // "strict": true,
+// "forceConsistentCasingInFileNames": true,
+// "isolatedModules": true,
+// "noEmit": true,
+// "resolveJsonModule": true,
+// "types": ["vite/client"],
+// "lib": ["es2015", "es2016", "es2017", "DOM", "DOM.Iterable", "ESNext"],

@@ -7,13 +7,15 @@ describe("/characters", () => {
       cy.visit("/");
 
       // new character
-      Fari.get("page.menu.characters").click();
-      Fari.get("manager.new").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
+      Fari.get("my-binder.folders.characters").click();
+      Fari.get("my-binder.folders.characters.new").click();
+
       Fari.get("character-dialog.name").clear().type("Luke Skywalker");
 
       // load fate template
-      Fari.get("character-dialog.template.content").click();
-      Fari.get("character-dialog.template.content")
+      Fari.get("character-dialog.template-input").click();
+      Fari.get("character-dialog.template-input")
         .type("Fate Condensed")
         .type("{enter}");
 
@@ -73,7 +75,9 @@ describe("/characters", () => {
       Fari.get("page.menu.home").click();
 
       // re-open sheet
-      Fari.get("page.menu.characters").click();
+      Fari.get("page.menu.my-binder").click();
+      Fari.get("my-binder.folders.characters").click();
+
       cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
@@ -96,8 +100,10 @@ describe("/characters", () => {
         ]);
 
       // delete
-      Fari.get("page.menu.characters").click();
-      Fari.get("manager.delete").click();
+      Fari.get("page.menu.my-binder").click();
+      Fari.get("my-binder.folders.characters").click();
+
+      Fari.get("my-binder.element.Luke Skywalker.delete").first().click();
       cy.contains("Star Wars").should("not.exist");
       cy.contains("Luke Skywalker").should("not.exist");
 
@@ -115,21 +121,23 @@ describe("/characters", () => {
 
       // add player
       Fari.get("scene.add-player").click();
-      Fari.get("scene.player-row.1.assign-or-open-character-sheet").click();
       Fari.get(
-        "scene.player-row.1.character-sheet-dialog.assign-original"
+        "scene.player-row.gm-npc-0.assign-or-open-character-sheet"
+      ).click();
+      Fari.get(
+        "scene.player-row.gm-npc-0.character-sheet-dialog.assign-original"
       ).click();
 
       cy.contains("Luke Skywalker").click();
 
-      Fari.get("scene.tabs.player-characters").click();
-      Fari.get("character-card").contains("Luke Skywalker");
-      Fari.get("character-card.open-character-sheet").click();
-      Fari.get("character-dialog.close").click();
+      // Fari.get("session.tabs.characters").click();
+      // Fari.get("character-card").contains("Luke Skywalker");
+      // Fari.get("character-card.open-character-sheet").click();
+      // Fari.get("character-dialog.close").click();
 
-      // character card roll skill
-      Fari.get("character-card.section.Skills.block.Athletics").click();
-      Fari.get("scene.player-row.1")
+      // // character card roll skill
+      // Fari.get("character-card.section.Skills.block.Athletics").click();
+      Fari.get("scene.player-row.gm-npc-0")
         .find('[data-cy="dice"]')
         .invoke("attr", "data-cy-value")
         .should("be.oneOf", [
@@ -152,14 +160,13 @@ describe("/characters", () => {
       cy.visit("/");
 
       // new character
-      Fari.get("page.menu.characters").click();
-      Fari.get("manager.new").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
+      Fari.get("my-binder.folders.characters").click();
+      Fari.get("my-binder.folders.characters.new").click();
       Fari.get("character-dialog.name").clear().type("Luke");
       Fari.get("character-dialog.toggle-advanced").click();
-      Fari.get("character-dialog.template.advanced").click();
-      Fari.get("character-dialog.template.advanced")
-        .type("Blank")
-        .type("{enter}");
+      Fari.get("character-dialog.template-input").click();
+      Fari.get("character-dialog.template-input").type("Blank").type("{enter}");
       Fari.get("character-dialog.name").type(" Skywalker");
 
       // save
@@ -175,13 +182,14 @@ describe("/characters", () => {
       cy.visit("/");
 
       // new character
-      Fari.get("page.menu.characters").click();
-      Fari.get("manager.new").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
+      Fari.get("my-binder.folders.characters").click();
+      Fari.get("my-binder.folders.characters.new").click();
       Fari.get("character-dialog.name").type("Luke Skywalker");
 
       // load fate template
-      Fari.get("character-dialog.template.content").click();
-      Fari.get("character-dialog.template.content")
+      Fari.get("character-dialog.template-input").click();
+      Fari.get("character-dialog.template-input")
         .type("Fate Condensed")
         .type("{enter}");
 
@@ -334,7 +342,8 @@ describe("/characters", () => {
       Fari.get("page.menu.home").click();
 
       // re-open sheet
-      Fari.get("page.menu.characters").click();
+      Fari.get("page.menu.my-binder").click();
+      Fari.get("my-binder.folders.characters").click();
       cy.contains("Luke Skywalker").click();
     });
   });

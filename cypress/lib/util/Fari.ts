@@ -4,7 +4,7 @@ export const Fari = {
   },
   start() {
     cy.visit("/");
-    this.get("cookie-consent").click();
+    this.get("cookie-consent").click({ force: true });
   },
   /**
    * Url needs to be in `../../../serve.json`
@@ -34,7 +34,7 @@ export const Fari = {
     cy.get(".MuiPopover-root").eq(0).click();
   },
   closeDrawer() {
-    cy.get(".MuiBackdrop-root").eq(0).click();
+    cy.get(".MuiBackdrop-root").eq(0).click({ force: true });
   },
   toggleDarkMode() {
     Fari.get("page.toggle-dark-mode").click();

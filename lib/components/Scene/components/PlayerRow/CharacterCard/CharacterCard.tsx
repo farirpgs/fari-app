@@ -7,7 +7,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
-import PersonIcon from "@material-ui/icons/Person";
+import FaceIcon from "@material-ui/icons/Face";
 import React, { useContext } from "react";
 import { DiceContext } from "../../../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
@@ -133,7 +133,7 @@ export const CharacterCard: React.FC<{
                             logger.info("CharacterCard:onCharacterDialogOpen");
                           }}
                         >
-                          <PersonIcon
+                          <FaceIcon
                             className={css({
                               width: "1.5rem",
                               height: "1.5rem",
@@ -277,15 +277,13 @@ export const CharacterCard: React.FC<{
               return;
             }
 
-            const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
-              block
-            );
+            const rollGroup = BlockSelectors.getRollGroupFromBlock(block);
             diceManager.actions.setOptions({ listResults: true });
             diceManager.actions.addOrRemovePoolElement({
               blockId: block.id,
               blockType: block.type,
               label: block.label,
-              commandOptionList: commandOptionList,
+              rollGroup: rollGroup,
             });
           }}
           onClick={() => {
@@ -293,11 +291,9 @@ export const CharacterCard: React.FC<{
               return;
             }
 
-            const commandOptionList = BlockSelectors.getDiceCommandOptionsFromBlock(
-              block
-            );
+            const rollGroup = BlockSelectors.getRollGroupFromBlock(block);
 
-            const diceRollResult = diceManager.actions.roll(commandOptionList, {
+            const diceRollResult = diceManager.actions.roll([rollGroup], {
               listResults: false,
             });
             props.onRoll(diceRollResult);

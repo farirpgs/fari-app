@@ -25,6 +25,9 @@ export const AppLink: React.FC<
     css({
       "label": "AppLink",
       "fontWeight": theme.typography.fontWeightMedium,
+      "display": "inline-flex",
+      "flexDirection": "row",
+      "alignItems": "center",
       ":hover": {
         textDecoration: "none",
         color: theme.palette.primary.main,

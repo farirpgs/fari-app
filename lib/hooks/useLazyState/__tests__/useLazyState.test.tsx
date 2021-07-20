@@ -64,7 +64,7 @@ describe("useLazyState", () => {
 
         const onChange = jest.fn();
         const initialValue = 0;
-        const { result, rerender } = renderHook(
+        const { result } = renderHook(
           (props) => {
             return useLazyState({
               value: props.value,
@@ -98,7 +98,7 @@ describe("useLazyState", () => {
 
         const onChange = jest.fn();
         const initialValue = 0;
-        const { result, rerender } = renderHook(
+        const { result } = renderHook(
           (props) => {
             return useLazyState<number>({
               value: props.value,
@@ -132,7 +132,7 @@ describe("useLazyState", () => {
 
         const onChange = jest.fn();
         const initialValue = { counter: 0 };
-        const { result, rerender } = renderHook(
+        const { result } = renderHook(
           (props) => {
             return useLazyState<{ counter: number }>({
               value: props.value,
@@ -176,7 +176,7 @@ describe("useLazyState", () => {
 
         const onChange = jest.fn();
         const initialValue = { counter: 0 };
-        const { result, rerender } = renderHook(
+        const { result } = renderHook(
           (props) => {
             return useLazyState<{ counter: number }>({
               value: props.value,

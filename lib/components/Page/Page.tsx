@@ -23,6 +23,7 @@ import BookIcon from "@material-ui/icons/Book";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import BugReportIcon from "@material-ui/icons/BugReport";
+import CasinoIcon from '@material-ui/icons/Casino';
 import ChatIcon from "@material-ui/icons/Chat";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
@@ -46,21 +47,21 @@ import { Link as RouterLink } from "react-router-dom";
 import { env } from "../../constants/env";
 import { Images } from "../../constants/Images";
 import { useZIndex } from "../../constants/zIndex";
-import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { Icons } from "../../domains/Icons/Icons";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { ITranslationKeys } from "../../locale";
+import {
+  IPossibleLanguages,
+  PossibleLanguagesNames
+} from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
-import { previewContentEditable } from "../ContentEditable/ContentEditable";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { Kofi } from "../Kofi/Kofi";
-import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
@@ -88,15 +89,14 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
-
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n, currentLanguage } = useTranslate();
-  const darkModeManager = useContext(DarkModeContext);
-  const scenesManager = useContext(ScenesContext);
-  const charactersManager = useContext(CharactersContext);
+
+  const myBinderManager = useContext(MyBinderContext);
+  const settingsManager = useContext(SettingsContext);
   const logger = useLogger();
   const zIndex = useZIndex();
 
@@ -174,7 +174,7 @@ export const Page: React.FC<{
         <CookieConsent />
 
         <Container>
-          {env.isLocalHost && props.debug && (
+          {env.isDev && props.debug && (
             <pre
               className={css({
                 whiteSpace: "break-spaces",
@@ -384,7 +384,7 @@ export const Page: React.FC<{
                 />
               </RouterLink>
               {isLive && (
-                <Box pr="1.25rem">
+                <Box>
                   <Grid container alignItems="center" spacing={3} wrap="nowrap">
                     <Grid item>
                       {props.live === LiveMode.Connecting && (
@@ -397,7 +397,7 @@ export const Page: React.FC<{
                     <Grid item>
                       <Box maxWidth="150px">
                         <Typography variant="subtitle1" noWrap>
-                          {previewContentEditable({ value: props.liveLabel })}
+                          {/*  */}
                         </Typography>
                       </Box>
                     </Grid>
@@ -494,19 +494,10 @@ export const Page: React.FC<{
           <>
             <Grid item xs={xsSize} sm={smSize} className={itemClass}>
               <PageNavLink
-                label={t("menu.scenes")}
-                data-cy="page.menu.scenes"
+                label={t("menu.my-binder")}
+                data-cy="page.menu.my-binder"
                 onClick={() => {
-                  scenesManager.actions.openManager(ManagerMode.Manage);
-                }}
-              />
-            </Grid>
-            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-              <PageNavLink
-                label={t("menu.characters")}
-                data-cy="page.menu.characters"
-                onClick={() => {
-                  charactersManager.actions.openManager(ManagerMode.Manage);
+                  myBinderManager.actions.open();
                 }}
               />
             </Grid>
@@ -533,6 +524,16 @@ export const Page: React.FC<{
                         to: "/dice-pool",
                         label: t("menu.dice-pool"),
                         icon: <Icons.ThrowDice />,
+                      },
+                      {
+                        to: "/story-builder",
+                        label: "Story Builder",
+                        icon: <LocalLibraryIcon />,
+                      },
+                      {
+                        to: "/story-dice",
+                        label: "Story Dice",
+                        icon: <CasinoIcon />,
                       },
                       {
                         to: "/oracle",
@@ -654,13 +655,16 @@ export const Page: React.FC<{
                   logger.setTag("language", newLanguage);
                 }}
               >
-                {Object.keys(i18n.options.resources!).map((language) => {
-                  const shouldRenderDev =
-                    language === "dev" && env.context === "localhost";
-                  if (language !== "dev" || shouldRenderDev) {
+                {Object.keys(PossibleLanguagesNames).map((languageKey) => {
+                  const shouldRenderDev = languageKey === "dev" && env.isDev;
+                  if (languageKey !== "dev" || shouldRenderDev) {
                     return (
-                      <option key={language} value={language}>
-                        {t(`common.language.${language}` as ITranslationKeys)}
+                      <option key={languageKey} value={languageKey}>
+                        {
+                          PossibleLanguagesNames[
+                            languageKey as IPossibleLanguages
+                          ]
+                        }
                       </option>
                     );
                   }
@@ -675,18 +679,11 @@ export const Page: React.FC<{
             data-cy="page.toggle-dark-mode"
             tooltip={t("menu.toggle-theme")}
             onClick={() => {
-              darkModeManager.actions.setDarkMode(
-                !darkModeManager.state.darkMode
-              );
-              if (darkModeManager.state.darkMode) {
-                logger.info("Page.toggleLightMode");
-              } else {
-                logger.info("Page.toggleDarkMode");
-              }
+              settingsManager.actions.toggleThemeMode();
             }}
             label={
               <>
-                {darkModeManager.state.darkMode ? (
+                {settingsManager.state.themeMode === "dark" ? (
                   <Brightness7Icon />
                 ) : (
                   <Brightness4Icon />

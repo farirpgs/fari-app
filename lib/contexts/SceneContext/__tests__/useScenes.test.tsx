@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { ManagerMode } from "../../../components/Manager/Manager";
-import { defaultSceneName, ISavableScene, useScenes } from "../ScenesContext";
+import { getUnix } from "../../../domains/dayjs/getDayJS";
+import { IScene } from "../../../hooks/useScene/IScene";
+import { defaultSceneName, useScenes } from "../ScenesContext";
 
 describe("useScenes", () => {
   describe("local storage load", () => {
@@ -50,7 +51,7 @@ describe("useScenes", () => {
         return useScenes({ localStorage: localStorage as any });
       });
       // WHEN I add a new scene
-      let newScene: ISavableScene | undefined = undefined;
+      let newScene: IScene | undefined = undefined;
       act(() => {
         newScene = result.current.actions.add();
       });
@@ -100,11 +101,12 @@ describe("useScenes", () => {
         }}]`
       );
 
-      let playingScene: ISavableScene | undefined = undefined;
+      let playingScene: IScene | undefined = undefined;
       act(() => {
         // WHEN I save a scene I'm already playing
         playingScene = result.current.actions.upsert({
           id: "an id from a live session",
+          lastUpdated: getUnix(),
         } as any);
       });
       // THEN the new scene has been added and is properly sorted
@@ -119,6 +121,8 @@ describe("useScenes", () => {
           name: undefined,
         },
         {
+          notes: undefined,
+          group: undefined,
           indexCards: { public: [], private: [] },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
@@ -181,18 +185,6 @@ describe("useScenes", () => {
           newScene!.lastUpdated
         }}]`
       );
-      act(() => {
-        // WHEN I open the manager
-        result.current.actions.openManager(ManagerMode.Use);
-      });
-      // THEN the manager is opened
-      expect(result.current.state.mode).toEqual(ManagerMode.Use);
-      act(() => {
-        // WHEN I close the manager
-        result.current.actions.closeManager();
-      });
-      // THEN the manager is closed
-      expect(result.current.state.mode).toEqual(ManagerMode.Close);
     });
   });
 });

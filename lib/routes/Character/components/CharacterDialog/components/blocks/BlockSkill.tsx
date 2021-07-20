@@ -9,7 +9,7 @@ import { ContentEditable } from "../../../../../../components/ContentEditable/Co
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import { ISkillBlock } from "../../../../../../domains/character/types";
-import { AllDiceCommandGroups } from "../../../../../../domains/dice/Dice";
+import { CommmandSetOptions } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -38,15 +38,13 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const isSelected = diceManager.state.pool.some(
     (p) => p.blockId === props.block.id
   );
-  const [firstCommandGroup] =
+  const [firstCommandSet] =
     props.block.meta?.commands?.map((commandId) => {
-      return AllDiceCommandGroups[commandId];
+      return CommmandSetOptions[commandId];
     }) ?? [];
-  const blockDiceCommandOptions = BlockSelectors.getDiceCommandOptionsFromBlock(
-    props.block
-  );
+  const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
 
-  const RollIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
+  const RollIcon = firstCommandSet?.icon ?? Icons.ThrowDice;
 
   return (
     <>
@@ -71,14 +69,13 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
                     blockId: props.block.id,
                     blockType: props.block.type,
                     label: props.block.label,
-                    commandOptionList: blockDiceCommandOptions,
+                    rollGroup: rollGroup,
                   });
                 }}
                 onClick={() => {
-                  const diceRollResult = diceManager.actions.roll(
-                    blockDiceCommandOptions,
-                    { listResults: false }
-                  );
+                  const diceRollResult = diceManager.actions.roll([rollGroup], {
+                    listResults: false,
+                  });
                   props.onRoll(diceRollResult);
                 }}
               >
@@ -99,7 +96,9 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
             </Grid>
           )}
           <Grid item xs>
-            <FateLabel className={css({ display: "inline-block" })}>
+            <FateLabel
+              className={css({ display: "inline-block", width: "100%" })}
+            >
               <ContentEditable
                 data-cy={`${props.dataCy}.label`}
                 readonly={props.readonly}
@@ -160,7 +159,7 @@ export function BlockSkillActions(
       </Grid>
       <Grid item>
         <DiceMenuForCharacterSheet
-          commandGroupIds={commands}
+          commandSetIds={commands}
           onChange={(newCommandIds) => {
             props.onMetaChange({
               ...props.block.meta,

@@ -3,7 +3,6 @@ import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { DiceBox } from "../lib/components/DiceBox/DiceBox";
-import { RollType } from "../lib/domains/dice/Dice";
 import { StoryProvider } from "./StoryProvider";
 
 type IProps = Parameters<typeof DiceBox>["0"];
@@ -22,7 +21,6 @@ export default {
     fontSize: "4.5rem",
     borderSize: ".5rem",
     disabled: false,
-    reduceOpacityWithoutHover: false,
     showDetails: false,
     disableConfettis: true,
   },
@@ -40,13 +38,17 @@ const Template: Story<IProps> = (args, context) => (
         fontSize={args.fontSize}
         borderSize={args.borderSize}
         disabled={args.disabled}
-        reduceOpacityWithoutHover={args.reduceOpacityWithoutHover}
         showDetails={args.showDetails}
         disableConfettis={args.disableConfettis}
       />
     </Box>
   </StoryProvider>
 );
+
+export const Empty = Template.bind({});
+Empty.args = {
+  rolls: [],
+};
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -58,30 +60,19 @@ Default.args = {
       total: 4,
       totalWithoutModifiers: 4,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
+          commandSets: [
+            {
+              id: "4dF",
+              commands: [
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -95,35 +86,54 @@ DefaultWithModifiers.args = {
       total: 6,
       totalWithoutModifiers: 4,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
+          label: "Athletic",
+          modifier: 2,
+          commandSets: [
+            {
+              id: "4dF",
+              commands: [
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+              ],
+            },
+          ],
         },
+      ],
+    },
+  ],
+};
+
+export const DefaultWithMultipleModifiers = Template.bind({});
+DefaultWithMultipleModifiers.args = {
+  rolls: [
+    {
+      total: 8,
+      totalWithoutModifiers: 4,
+      options: { listResults: false },
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.Modifier,
-          value: 2,
           label: "Academic",
+          modifier: 2,
+          commandSets: [
+            {
+              id: "4dF",
+              commands: [
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+                { value: 1, name: "1dF" },
+              ],
+            },
+          ],
+        },
+        {
+          label: "Careful",
+          modifier: 2,
+          commandSets: [],
         },
       ],
     },
@@ -137,30 +147,19 @@ DefaultBadResult.args = {
       total: -4,
       totalWithoutModifiers: -4,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: -1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: -1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: -1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: -1,
-          commandGroupId: "1dF",
-          commandName: "1dF",
+          commandSets: [
+            {
+              id: "4dF",
+              commands: [
+                { value: -1, name: "1dF" },
+                { value: -1, name: "1dF" },
+                { value: -1, name: "1dF" },
+                { value: -1, name: "1dF" },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -174,12 +173,14 @@ DefaultD20.args = {
       total: 20,
       totalWithoutModifiers: 20,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 20,
-          commandGroupId: "1d20",
-          commandName: "1d20",
+          commandSets: [
+            {
+              id: "1d20",
+              commands: [{ value: 20, name: "1d20" }],
+            },
+          ],
         },
       ],
     },
@@ -192,12 +193,14 @@ DefaultD20BadResult.args = {
       total: 1,
       totalWithoutModifiers: 1,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d20",
-          commandName: "1d20",
+          commandSets: [
+            {
+              id: "1d20",
+              commands: [{ value: 1, name: "1d20" }],
+            },
+          ],
         },
       ],
     },
@@ -211,12 +214,14 @@ HeadsOrTrails.args = {
       total: 0,
       totalWithoutModifiers: 0,
       options: { listResults: true },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: "Heads",
-          commandGroupId: "coin",
-          commandName: "coin",
+          commandSets: [
+            {
+              id: "coin",
+              commands: [{ value: "Heads", name: "coin" }],
+            },
+          ],
         },
       ],
     },
@@ -230,24 +235,82 @@ MultipleDice.args = {
       total: 6,
       totalWithoutModifiers: 6,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 1, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 3, name: "1d12" }],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+export const MultipleDiceWithLabel = Template.bind({});
+MultipleDiceWithLabel.args = {
+  rolls: [
+    {
+      total: 27,
+      totalWithoutModifiers: 27,
+      options: { listResults: false },
+      rollGroups: [
+        {
+          label: "Combat",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 6, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 6, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+          ],
         },
         {
-          type: RollType.DiceCommand,
-          value: 2,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          label: "Strength",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 6, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 4, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 1, name: "1d12" }],
+            },
+          ],
         },
         {
-          type: RollType.DiceCommand,
-          value: 3,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          label: "Shoot",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 3, name: "1d12" }],
+            },
+          ],
         },
       ],
     },
@@ -258,37 +321,31 @@ export const MultipleDiceWithModifiers = Template.bind({});
 MultipleDiceWithModifiers.args = {
   rolls: [
     {
-      total: 9,
+      total: 12,
       totalWithoutModifiers: 6,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [
+                { name: "1d12", value: 1 },
+                { name: "1d12", value: 2 },
+                { name: "1d12", value: 3 },
+              ],
+            },
+          ],
         },
         {
-          type: RollType.DiceCommand,
-          value: 2,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 3,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.Modifier,
-          value: 2,
           label: "Academic",
+          modifier: 3,
+          commandSets: [],
         },
         {
-          type: RollType.Modifier,
-          value: 1,
           label: "Lore",
+          modifier: 3,
+          commandSets: [],
         },
       ],
     },
@@ -302,24 +359,82 @@ Pool.args = {
       total: 6,
       totalWithoutModifiers: 6,
       options: { listResults: true },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 1, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 3, name: "1d12" }],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+export const PoolGroups = Template.bind({});
+PoolGroups.args = {
+  rolls: [
+    {
+      total: 6,
+      totalWithoutModifiers: 6,
+      options: { listResults: true },
+      rollGroups: [
+        {
+          label: "Combat",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 6, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 6, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+          ],
         },
         {
-          type: RollType.DiceCommand,
-          value: 2,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          label: "Strength",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 2, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 6, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 4, name: "1d12" }],
+            },
+            {
+              id: "1d12",
+              commands: [{ value: 1, name: "1d12" }],
+            },
+          ],
         },
         {
-          type: RollType.DiceCommand,
-          value: 3,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          label: "Shoot",
+          commandSets: [
+            {
+              id: "1d12",
+              commands: [{ value: 3, name: "1d12" }],
+            },
+          ],
         },
       ],
     },
@@ -333,90 +448,12 @@ OutOfBound.args = {
       total: 6,
       totalWithoutModifiers: 6,
       options: { listResults: false },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d4",
-          commandName: "1d4",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d6",
-          commandName: "1d6",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d8",
-          commandName: "1d8",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d10",
-          commandName: "1d10",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d20",
-          commandName: "1d20",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d4",
-          commandName: "1d4",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d6",
-          commandName: "1d6",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d8",
-          commandName: "1d8",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d10",
-          commandName: "1d10",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d20",
-          commandName: "1d20",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          commandSets: new Array(50).fill(1).map(() => ({
+            id: "1dF",
+            commands: [{ value: 1, name: "1dF" }],
+          })),
         },
       ],
     },
@@ -429,90 +466,12 @@ OutOfBoundPool.args = {
       total: 6,
       totalWithoutModifiers: 6,
       options: { listResults: true },
-      commandResult: [
+      rollGroups: [
         {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d4",
-          commandName: "1d4",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d6",
-          commandName: "1d6",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d8",
-          commandName: "1d8",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d10",
-          commandName: "1d10",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d20",
-          commandName: "1d20",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d4",
-          commandName: "1d4",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d6",
-          commandName: "1d6",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d8",
-          commandName: "1d8",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d10",
-          commandName: "1d10",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d20",
-          commandName: "1d20",
-        },
-        {
-          type: RollType.DiceCommand,
-          value: 1,
-          commandGroupId: "1d12",
-          commandName: "1d12",
+          commandSets: new Array(50).fill(1).map(() => ({
+            id: "1dF",
+            commands: [{ value: 1, name: "1dF" }],
+          })),
         },
       ],
     },

@@ -1,10 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useLazyState<T>(props: {
+type IStateSetter<T> = (prevState: T) => T;
+type ILazyStateProps<T> = {
   value: T;
-  onChange(newValue: T): void;
+  onChange?(newValue: T): void;
   delay: number;
-}) {
+};
+
+export function LazyState<T>(
+  props: ILazyStateProps<T> & {
+    render(
+      renderProps: [state: T, setState: (newValue: T | IStateSetter<T>) => void]
+    ): JSX.Element;
+  }
+) {
+  const [state, setState] = useLazyState({
+    delay: props.delay,
+    value: props.value,
+    onChange: props.onChange,
+  });
+
+  return props.render([state, setState]);
+}
+
+export function useLazyState<T>(props: ILazyStateProps<T>) {
   const delay = props.delay;
 
   const [internalValue, setInternalValue] = useState(props.value);
@@ -28,9 +47,7 @@ export function useLazyState<T>(props: {
     [props.value]
   );
 
-  type IStateSetter = (prevState: T) => T;
-
-  function setState(newValue: T | IStateSetter) {
+  function setState(newValue: T | IStateSetter<T>) {
     willUpdateSoon.current = true;
 
     let valueForOnChange: T;
@@ -38,7 +55,7 @@ export function useLazyState<T>(props: {
     // set state
     const isNewValueASetter = typeof newValue === "function";
     if (isNewValueASetter) {
-      const newValueSetter = newValue as IStateSetter;
+      const newValueSetter = newValue as IStateSetter<T>;
       setInternalValue((prevState) => {
         const resultFromSetter = newValueSetter(prevState);
         valueForOnChange = resultFromSetter;
@@ -52,7 +69,7 @@ export function useLazyState<T>(props: {
     // update parent
     clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
-      latestOnChange.current(valueForOnChange);
+      latestOnChange.current?.(valueForOnChange);
       willUpdateSoon.current = false;
     }, delay);
   }

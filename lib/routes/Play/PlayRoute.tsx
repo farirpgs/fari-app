@@ -1,18 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
-import {
-  IPeerMeta,
-  sanitizeSceneName,
-  useScene,
-} from "../../hooks/useScene/useScene";
+import { IPeerMeta, useScene } from "../../hooks/useScene/useScene";
+import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useUserId } from "../../hooks/useUserId/useUserId";
 import { JoinAGame } from "./JoinAGameRoute";
 import { IPeerActions } from "./types/IPeerActions";
 
@@ -20,55 +17,57 @@ const debug = true;
 
 export const PlayRoute: React.FC<{
   match: {
-    params: { id: string };
+    params: { id?: string };
   };
 }> = (props) => {
   const logger = useLogger();
 
   const idFromParams = props.match.params.id;
-  const userId = useUserId();
+  const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
-  const scenesManager = useContext(ScenesContext);
 
-  const sceneManager = useScene({
-    userId: userId,
-    gameId: idFromParams,
+  const sceneManager = useScene();
+  const sessionManager = useSession({
+    userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
-  const sceneName = sceneManager.state.scene.name;
-  const pageTitle = sanitizeSceneName(sceneName);
+  const sceneName = sceneManager.state.scene?.name ?? "";
+  const pageTitle = useMemo(() => {
+    return previewContentEditable({ value: sceneName });
+  }, [sceneName]);
   const { t } = useTranslate();
 
   const hostManager = usePeerHost({
     onConnectionDataReceive(id: string, peerAction: IPeerActions) {
       if (peerAction.action === "roll") {
-        sceneManager.actions.updatePlayerRoll(id, peerAction.payload);
+        sessionManager.actions.updatePlayerRoll(id, peerAction.payload);
       }
       if (peerAction.action === "update-main-point-counter") {
-        sceneManager.actions.updatePlayerCharacterMainPointCounter(
+        sessionManager.actions.updatePlayerCharacterMainPointCounter(
           id,
           peerAction.payload.points,
           peerAction.payload.maxPoints
         );
       }
       if (peerAction.action === "played-in-turn-order") {
-        sceneManager.actions.updatePlayerPlayedDuringTurn(
+        sessionManager.actions.updatePlayerPlayedDuringTurn(
           id,
           peerAction.payload
         );
       }
       if (peerAction.action === "update-character") {
-        sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
+        sessionManager.actions.updatePlayerCharacter(id, peerAction.payload);
       }
       if (peerAction.action === "load-character") {
-        sceneManager.actions.loadPlayerCharacter(id, peerAction.payload);
+        sessionManager.actions.loadPlayerCharacter(id, peerAction.payload);
       }
     },
     debug: debug,
   });
   const connectionsManager = usePeerConnections({
-    onHostDataReceive(newScene) {
-      sceneManager.actions.safeSetScene(newScene);
+    onHostDataReceive(newData) {
+      sceneManager.actions.overrideScene(newData.scene);
+      sessionManager.actions.overrideSession(newData.session);
     },
     debug: debug,
   });
@@ -79,12 +78,15 @@ export const PlayRoute: React.FC<{
     !isGM && !connectionsManager!.state.isConnectedToHost;
 
   useEffect(() => {
-    hostManager.actions.sendToConnections(sceneManager.state.scene);
-  }, [sceneManager.state.scene]);
+    hostManager.actions.sendToConnections({
+      scene: sceneManager.state.scene,
+      session: sessionManager.state.session,
+    });
+  }, [sceneManager.state.scene, sessionManager.state.session]);
 
   useEffect(() => {
     if (isGM) {
-      sceneManager.actions.updatePlayersWithConnections(
+      sessionManager.actions.updatePlayersWithConnections(
         hostManager.state.connections
       );
     }
@@ -114,7 +116,7 @@ export const PlayRoute: React.FC<{
           onSubmitPlayerName={(playerName) => {
             connectionsManager?.actions.connect<IPeerMeta>(
               idFromParams,
-              userId,
+              settingsManager.state.userId,
               {
                 playerName: playerName,
               }
@@ -122,18 +124,17 @@ export const PlayRoute: React.FC<{
           }}
         />
       ) : (
-        <Scene
+        <Session
           mode={SceneMode.PlayOnline}
+          sessionManager={sessionManager}
           sceneManager={sceneManager}
-          scenesManager={scenesManager}
-          charactersManager={charactersManager}
           connectionsManager={connectionsManager}
           isLoading={
             hostManager.state.loading || connectionsManager.state.loading
           }
           idFromParams={idFromParams}
           shareLink={shareLink}
-          userId={userId}
+          userId={settingsManager.state.userId}
           error={hostManager.state.error}
         />
       )}

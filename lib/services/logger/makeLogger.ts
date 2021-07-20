@@ -2,7 +2,7 @@ import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
 import { makeSentryService } from "../sentry/SentryService";
 
-const shouldConsole = env.isLocalHost && !env.isTest;
+const shouldConsole = env.isDev && !env.isTest;
 
 type LoggerContext = {
   tags?: Record<string, any>;

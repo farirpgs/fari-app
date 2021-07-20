@@ -2,18 +2,6 @@ import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
 import { FontFamily } from "./constants/FontFamily";
 
-const systemFonts = [
-  "-apple-system",
-  "system-ui",
-  "BlinkMacSystemFont",
-  "'Segoe UI'",
-  "Roboto",
-  "'Helvetica Neue'",
-  "Ubuntu",
-  "Arial",
-  "sans-serif",
-];
-
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
     // default 300

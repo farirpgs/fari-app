@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { IDocSidebar } from "../../Doc";
-import { IMarkdownIndex } from "../../domains/Markdown";
+import { IDocumentIndex } from "../../domains/DocumentProcessor";
 import { useDocNavigation } from "../useDocNavigation";
 
 describe("useDocNavigation", () => {
@@ -9,8 +9,8 @@ describe("useDocNavigation", () => {
       return useDocNavigation({
         currentPageId: undefined,
         markdownIndexes: {
-          flat: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
-          tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
+          flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+          tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
         },
         docSideBar: sideBarMock,
         doceSideBarOptions: undefined,
@@ -27,8 +27,8 @@ describe("useDocNavigation", () => {
         currentPageId: "welcome",
 
         markdownIndexes: {
-          flat: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
-          tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
+          flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+          tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
         },
         docSideBar: sideBarMock,
         doceSideBarOptions: undefined,
@@ -44,8 +44,8 @@ describe("useDocNavigation", () => {
       return useDocNavigation({
         currentPageId: "credits-2",
         markdownIndexes: {
-          flat: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
-          tree: ([] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
+          flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+          tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
         },
         docSideBar: sideBarMock,
         doceSideBarOptions: undefined,
@@ -63,12 +63,8 @@ describe("useDocNavigation", () => {
         return useDocNavigation({
           currentPageId: "chapter-2",
           markdownIndexes: {
-            flat: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
-            tree: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
+            flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+            tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
           },
           docSideBar: sideBarMock,
           doceSideBarOptions: undefined,
@@ -81,12 +77,8 @@ describe("useDocNavigation", () => {
         return useDocNavigation({
           currentPageId: "welcome",
           markdownIndexes: {
-            flat: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
-            tree: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
+            flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+            tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
           },
           docSideBar: sideBarMock,
           doceSideBarOptions: undefined,
@@ -101,12 +93,8 @@ describe("useDocNavigation", () => {
         return useDocNavigation({
           currentPageId: "chapter-2",
           markdownIndexes: {
-            flat: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
-            tree: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
+            flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+            tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
           },
           docSideBar: sideBarMock,
           doceSideBarOptions: undefined,
@@ -119,12 +107,8 @@ describe("useDocNavigation", () => {
         return useDocNavigation({
           currentPageId: "credits-2",
           markdownIndexes: {
-            flat: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
-            tree: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
+            flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+            tree: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
           },
           docSideBar: sideBarMock,
           doceSideBarOptions: undefined,
@@ -139,14 +123,12 @@ describe("useDocNavigation", () => {
         return useDocNavigation({
           currentPageId: "chapter-2",
           markdownIndexes: {
-            flat: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
-            tree: ([
+            flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+            tree: [
               { id: "missing-1", level: 1 },
               { id: "missing-2", level: 1 },
               { id: "missing-3", level: 1 },
-            ] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
+            ] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
           },
           docSideBar: sideBarMock,
           doceSideBarOptions: undefined,
@@ -179,10 +161,8 @@ describe("useDocNavigation", () => {
         return useDocNavigation({
           currentPageId: "chapter-2",
           markdownIndexes: {
-            flat: ([] as Array<
-              Partial<IMarkdownIndex>
-            >) as Array<IMarkdownIndex>,
-            tree: ([
+            flat: [] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
+            tree: [
               { id: "missing-1", level: 1 },
               { id: "missing-2", level: 1 },
               { id: "missing-3", level: 1 },
@@ -197,7 +177,7 @@ describe("useDocNavigation", () => {
               { id: "optional-rules", level: 1 },
               { id: "what-version-is-this", level: 1 },
               { id: "credits", level: 1 },
-            ] as Array<Partial<IMarkdownIndex>>) as Array<IMarkdownIndex>,
+            ] as Array<Partial<IDocumentIndex>> as Array<IDocumentIndex>,
           },
           docSideBar: undefined,
           doceSideBarOptions: undefined,

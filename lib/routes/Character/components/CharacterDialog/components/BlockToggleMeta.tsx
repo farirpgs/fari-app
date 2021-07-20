@@ -30,7 +30,7 @@ export function BlockToggleMeta<
       className={css({
         padding: "0",
       })}
-      onChange={(event) => {
+      onChange={() => {
         props.onMetaChange({
           ...props.block.meta,
           checked: !props.block.meta.checked,

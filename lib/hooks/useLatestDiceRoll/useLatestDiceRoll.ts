@@ -1,7 +1,8 @@
+import { darken } from "@material-ui/core/styles";
 import useTheme from "@material-ui/core/styles/useTheme";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
-import { Dice, IDiceRollResult, RollType } from "../../domains/dice/Dice";
+import { Dice, IDiceRollResult } from "../../domains/dice/Dice";
 
 const rollingDelay = 1000;
 
@@ -25,48 +26,38 @@ export function useLatestDiceRoll(
 
   const previousRolls = usePrevious(playerRolls);
   const [latestPlayerRoll] = playerRolls;
-  const [finalResult, setFinalResult] = useState<IDiceRollResult | undefined>(
-    undefined
-  );
+  const [finalResult, setFinalResult] =
+    useState<IDiceRollResult | undefined>(undefined);
   const [rolling, setRolling] = useState(false);
-  const [color, setColor] = useState("inherit");
+  const [color, setColor] = useState(theme.palette.background.paper);
 
   const hasRolledOnce = finalResult !== undefined;
 
-  const finalResultRolls = finalResult?.commandResult ?? [];
-
-  const finalResultLabel = finalResultRolls
-    .map((r) => (r.type === RollType.Modifier ? r.label : undefined))
-    .join("/");
-
+  const finalRollGroups = finalResult?.rollGroups ?? [];
   const finalResultTotal = formatDiceNumber(finalResult);
 
   const finalResultHidden = rolling || !finalResult;
 
   useEffect(
     function handleSetResultColor() {
-      const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
-        latestPlayerRoll
-      );
+      const commandGroup =
+        Dice.findCommandGroupOptionsMatchForResult(latestPlayerRoll);
 
-      let newColor = "inherit";
-
-      const isPool = latestPlayerRoll?.options?.listResults;
-
-      if (rolling || isPool) {
-        newColor = "inherit";
+      if (!latestPlayerRoll || rolling) {
+        setColor(theme.palette.background.paper);
       } else if (
         commandGroup?.goodRoll &&
         latestPlayerRoll?.totalWithoutModifiers >= commandGroup?.goodRoll
       ) {
-        newColor = theme.palette.success.main;
+        setColor(darken(theme.palette.success.main, 0.2));
       } else if (
         commandGroup?.badRoll &&
         latestPlayerRoll?.totalWithoutModifiers <= commandGroup?.badRoll
       ) {
-        newColor = theme.palette.error.main;
+        setColor(darken(theme.palette.error.main, 0.2));
+      } else {
+        setColor(theme.palette.primary.main);
       }
-      setColor(newColor);
     },
     [rolling, latestPlayerRoll]
   );
@@ -102,9 +93,8 @@ export function useLatestDiceRoll(
   }
 
   function handleSetFinalResult() {
-    const commandGroup = Dice.findMatchingCommandGroupWithDiceResult(
-      latestPlayerRoll
-    );
+    const commandGroup =
+      Dice.findCommandGroupOptionsMatchForResult(latestPlayerRoll);
     options?.onRolling?.(false);
     setRolling(false);
     setFinalResult(latestPlayerRoll);
@@ -131,9 +121,8 @@ export function useLatestDiceRoll(
     state: {
       finalResult,
       finalResultTotal,
-      finalResultRolls,
+      finalResultRolls: finalRollGroups,
       finalResultHidden,
-      finalResultLabel,
       rolling,
       hasRolledOnce,
       color,
@@ -142,9 +131,10 @@ export function useLatestDiceRoll(
 }
 
 export function formatDiceNumber(result: IDiceRollResult | undefined): string {
-  const containsFateDice = result?.commandResult.some(
-    (r) => r.type === RollType.DiceCommand && r.commandName === "1dF"
-  );
+  const containsFateDice = result?.rollGroups
+    .flatMap((rg) => rg.commandSets)
+    .flatMap((cr) => cr.commands)
+    .some((r) => r.name === "1dF");
 
   const total = result?.total ?? 0;
 

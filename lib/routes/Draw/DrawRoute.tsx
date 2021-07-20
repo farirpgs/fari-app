@@ -12,7 +12,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const DrawRoute: React.FC = (props) => {
+export const DrawRoute: React.FC = () => {
   const { t } = useTranslate();
   const logger = useLogger();
   const drawingManager = useDrawing({});

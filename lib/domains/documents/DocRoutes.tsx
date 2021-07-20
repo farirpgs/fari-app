@@ -343,17 +343,9 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     },
   },
   {
-    url: "/m",
-    parent: { title: "Fari", url: "/" },
-    title: "m",
-    noIndex: true,
-    loadFunction: DocImport.M,
-  },
-  {
     url: "/changelog",
     parent: { title: "Fari", url: "/" },
     title: "Changelog",
-
     loadFunction: DocImport.Changelog,
   },
   {

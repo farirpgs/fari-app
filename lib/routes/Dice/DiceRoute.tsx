@@ -6,15 +6,16 @@ import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
-import { DiceFab } from "../../components/DiceFab/DiceFab";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { Toolbox } from "../../components/Toolbox/Toolbox";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
+import { formatDiceNumber } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export function DiceRoute(props: { pool: boolean }) {
@@ -65,12 +66,15 @@ export function DiceRoute(props: { pool: boolean }) {
           title={t("dice-route.meta.title")}
           subtitle={t("dice-route.meta.description")}
         />
-        <DiceFab
-          onRoll={(result) => {
-            setRollResult(result);
-          }}
-          onRollPool={(result, playerId) => {
-            setRollResult(result);
+        <Toolbox
+          hideDefaultRightActions
+          dice={{
+            onRoll: (result) => {
+              setRollResult(result);
+            },
+            onRollPool: (result) => {
+              setRollResult(result);
+            },
           }}
         />
 
@@ -100,7 +104,7 @@ export function DiceRoute(props: { pool: boolean }) {
                       textAlign: "center",
                     })}
                   >
-                    {roll.total}
+                    {formatDiceNumber(roll)}
                   </Typography>
                 </Box>
               );

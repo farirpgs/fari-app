@@ -1,30 +1,34 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import { ManagerMode } from "../../components/Manager/Manager";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { SceneMode, Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
-import { useUserId } from "../../hooks/useUserId/useUserId";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { useScene } from "../../hooks/useScene/useScene";
+import { useSession } from "../../hooks/useScene/useSession";
 
 export const SceneRoute: React.FC<{
   match: {
     params: { id: string };
   };
 }> = (props) => {
-  const userId = useUserId();
+  const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
-  const sceneManager = useScene({
-    userId: userId,
+  const sceneManager = useScene();
+  const sceneName = sceneManager.state.scene?.name ?? "";
+  const sessionManager = useSession({
+    userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
-  const sceneName = sceneManager.state.scene.name;
-  const pageTitle = sanitizeSceneName(sceneName);
+  const pageTitle = previewContentEditable({ value: sceneName });
   const history = useHistory();
   const logger = useLogger();
+  const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
     logger.info("Route:Scene");
@@ -39,18 +43,17 @@ export const SceneRoute: React.FC<{
       sceneManager.actions.loadScene(sceneToLoad, false);
     } else {
       history.replace("/");
-      scenesManager.actions.openManager(ManagerMode.Manage);
+      myBinderManager.actions.open({ folder: "scenes" });
     }
   }, [props.match.params.id, scenesManager.state.scenes]);
 
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Scene
+      <Session
         mode={SceneMode.Manage}
+        sessionManager={sessionManager}
         sceneManager={sceneManager}
-        scenesManager={scenesManager}
-        charactersManager={charactersManager}
       />
     </>
   );

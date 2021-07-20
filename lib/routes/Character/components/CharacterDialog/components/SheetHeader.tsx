@@ -11,10 +11,10 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+import DeleteIcon from "@material-ui/icons/Delete";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FlipToBackIcon from "@material-ui/icons/FlipToBack";
 import HelpIcon from "@material-ui/icons/Help";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
@@ -175,7 +175,7 @@ export const SheetHeader: React.FC<{
                   props.onRemove?.();
                 }}
               >
-                <RemoveCircleOutlineIcon htmlColor={headerColor} />
+                <DeleteIcon htmlColor={headerColor} />
               </IconButton>
             </Tooltip>
           </Grid>

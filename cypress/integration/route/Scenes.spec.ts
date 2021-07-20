@@ -7,8 +7,9 @@ describe("/scenes", () => {
       cy.visit("/");
 
       // new scene
-      Fari.get("page.menu.scenes").click();
-      Fari.get("manager.new").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
+      Fari.get("my-binder.folders.scenes").click();
+      Fari.get("my-binder.folders.scenes.new").click();
 
       // set fields
       Fari.get("scene.name").type("Ba Sing Se");
@@ -25,7 +26,7 @@ describe("/scenes", () => {
       Fari.get("scene.aspect.0.content").type("There is no war in Ba Sing Se");
 
       // remove second
-      Fari.get("scene.aspect.1.reset").click({ force: true });
+      // Fari.get("scene.aspect.1.reset").click({ force: true });
       Fari.get("scene.aspect.1.remove").click({ force: true });
 
       // initiative
@@ -42,8 +43,9 @@ describe("/scenes", () => {
       cy.title().should("eq", "Ba Sing Se | Fari");
 
       // delete
-      Fari.get("page.menu.scenes").click();
-      Fari.get("manager.delete").click();
+      Fari.get("page.menu.my-binder").click();
+      Fari.get("my-binder.folders.scenes").click();
+      Fari.get("my-binder.element.Ba Sing Se.delete").first().click();
 
       cy.contains("Avatar").should("not.exist");
       cy.contains("Ba Sing Se").should("not.exist");
@@ -57,8 +59,9 @@ describe("/scenes", () => {
       cy.contains("Ba Sing Se").click();
 
       // new scene
-      Fari.get("page.menu.scenes").click();
-      Fari.get("manager.new").click();
+      Fari.get("page.menu.my-binder").click();
+      Fari.get("my-binder.folders.scenes").click();
+      Fari.get("my-binder.folders.scenes.new").click();
 
       // add badguy and pin it
       Fari.get("scene.add-bad-guy").click();
@@ -75,7 +78,9 @@ describe("/scenes", () => {
       cy.title().should("eq", "Lower Ring | Fari");
 
       // test menu
-      Fari.get("page.menu.scenes").click();
+      Fari.get("page.menu.my-binder").click();
+      Fari.get("my-binder.folders.scenes").click();
+
       cy.contains("Avatar");
       cy.contains("Ba Sing Se");
       cy.contains("Lower Ring");

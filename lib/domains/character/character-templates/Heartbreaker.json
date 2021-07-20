@@ -116,6 +116,20 @@
           ]
         },
         {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "A.C. Luke",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://ac-luke.itch.io/heartbreaker-trifold"
+            }
+          ]
+        },
+        {
           "id": "c637c27d-9b8c-49c7-a6e1-c202503e2c1a",
           "label": "Approaches",
           "position": "Right",

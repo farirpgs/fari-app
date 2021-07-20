@@ -1,13 +1,11 @@
-import Box from "@material-ui/core/Box";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Fade from "@material-ui/core/Fade";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
+import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
+import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
 import { Doc } from "../Doc/Doc";
-import { Page } from "../Page/Page";
+import { LoadingRoute } from "./LoadingRoute";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
@@ -37,45 +35,15 @@ const SeelieSquireRoute = React.lazy(
   () => import("../../routes/SeelieSquire/SeelieSquireRoute")
 );
 
-export const LoadingRoute: React.FC<{ hideHeaderLogo: boolean }> = (props) => {
-  const location = useLocation();
-  const [fadeIn, setFadeIn] = useState(false);
-  const timeout = useRef<any | undefined>(undefined);
-
-  useEffect(() => {
-    timeout.current = setTimeout(() => {
-      setFadeIn(true);
-    }, 400);
-
-    return () => {
-      clearTimeout(timeout.current);
-    };
-  });
-
-  return (
-    <Page hideHeaderLogo={location.pathname === "/"}>
-      <Fade in={fadeIn}>
-        <Container maxWidth="md">
-          <Box display="flex" justifyContent="center">
-            <CircularProgress />
-          </Box>
-        </Container>
-      </Fade>
-    </Page>
-  );
-};
-
 export const AppRouter = () => {
   const location = useLocation();
-  const hideHeaderLogo = location.pathname === "/";
-
   return (
-    <Suspense fallback={<LoadingRoute hideHeaderLogo={hideHeaderLogo} />}>
+    <React.Suspense fallback={<LoadingRoute pathname={location.pathname} />}>
       <Switch>
         <Route
           exact
           path={"/"}
-          render={(props) => {
+          render={() => {
             return <HomeRoute />;
           }}
         />
@@ -96,35 +64,35 @@ export const AppRouter = () => {
         <Route
           exact
           path={"/dice"}
-          render={(props) => {
+          render={() => {
             return <DiceRoute pool={false} key="dice" />;
           }}
         />
         <Route
           exact
           path={"/dice-pool"}
-          render={(props) => {
+          render={() => {
             return <DiceRoute pool={true} key="dice-pool" />;
           }}
         />
         <Route
           exact
           path={"/data"}
-          render={(props) => {
+          render={() => {
             return <DataRoute />;
           }}
         />
         <Route
           exact
           path={"/oracle"}
-          render={(props) => {
+          render={() => {
             return <OracleRoute />;
           }}
         />
         <Route
           exact
           path={"/draw"}
-          render={(props) => {
+          render={() => {
             return <DrawRoute />;
           }}
         />
@@ -152,7 +120,7 @@ export const AppRouter = () => {
           path={"/scenes/:id"}
           render={(props) => <SceneRoute {...props} />}
         />
-        <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
+        <Route exact path={"/srds"} render={() => <SrdsRoute />} />
 
         {DocRoutes.map((docRoute) => (
           <Route
@@ -189,7 +157,7 @@ export const AppRouter = () => {
         <Route
           exact
           path={["/feature-requests", "/feature-requests/*"]}
-          render={(props) => {
+          render={() => {
             return <FeatureRequestsRoute />;
           }}
         />
@@ -212,12 +180,27 @@ export const AppRouter = () => {
         />
 
         <Route
+          exact
+          path={"/story-builder"}
+          render={() => {
+            return <StoryBuilderRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/story-dice"}
+          render={() => {
+            return <StoryDiceRoute />;
+          }}
+        />
+
+        <Route
           path="*"
-          render={(props) => {
+          render={() => {
             return <NotFoundRoute />;
           }}
         />
       </Switch>
-    </Suspense>
+    </React.Suspense>
   );
 };

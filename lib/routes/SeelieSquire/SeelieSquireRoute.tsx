@@ -2,6 +2,7 @@ import { css } from "@emotion/css";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import marked from "marked";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
 import { Images } from "../../constants/Images";
@@ -12,7 +13,7 @@ import {
 } from "./domains/ICreature";
 
 export const SeelieSquireRoute: React.FC<{
-  page: string;
+  page: string | undefined;
 }> = (props) => {
   const theme = useTheme();
   const isExtraSmall = useMediaQuery(theme.breakpoints.down("xs"));
@@ -26,7 +27,12 @@ export const SeelieSquireRoute: React.FC<{
       sideBar={{ "+Book of Creatures": ["seelie-squires-book-of-creatures"] }}
       sideBarOptions={{ miscSectionTitle: "Creatures" }}
       loadFunction={async () => {
-        return makeSeelieSquireMarkdown({ theme, isExtraSmall: isExtraSmall });
+        return marked(
+          makeSeelieSquireMarkdown({
+            theme,
+            isExtraSmall: isExtraSmall,
+          })
+        );
       }}
       gitHubLink="https://github.com/fariapp/fari/blob/master/lib/routes/SeelieSquire/domains/creatures.ts"
       author={{

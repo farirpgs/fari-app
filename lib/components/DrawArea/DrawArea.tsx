@@ -9,6 +9,7 @@ interface IProps {
   tokenTitles?: Array<string>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const DrawArea = React.forwardRef<unknown, IProps>((props, ref) => {
   const drawingManager = useDrawing({
     objects: props.objects,

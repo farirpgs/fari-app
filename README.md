@@ -1,25 +1,4 @@
-<!--
-# WHAT
-
-- [ ] TEST: https://developer.chrome.com/blog/enabling-shared-array-buffer/#cross-origin-isolation
-
-# TODO
-
-- [ ] new Drawer
-- [ ] new Navigation
-- [ ] new player row: https://xd.adobe.com/view/13659674-c494-4de6-a734-01fdc60959c9-4636/
-- [ ] sync storage between tabs
-- [ ] GM characters sub section
-- [ ] update dependencies
-- [ ] get rid of yarn
-
-
-# NEXT
-- [ ] Genesys dice
-- [ ] custom dice commands ?
--->
-
-# [Fari](https://fari.app) - The best Fate RPG companion application
+# [Fari](https://fari.app) - Play Table-Top RPGs Online Without the Headache
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -35,32 +14,61 @@
 
 This repo contains the source code that powers Fari, the open source virtual table-top platform.
 
-If you are here because
+## Feature Requests
 
-1. you have encountered issue with Fari
-2. you want to ask a question
-3. you have a feature suggestion
+You can request new features [here](https://fari.app/feature-requests/)
 
-you can fill an issue by [clicking here](https://github.com/fariapp/fari/issues/new/choose) and choosing the appriopriate type of issue or start a [discussion here](https://github.com/fariapp/fari/discussions).
+## Bug Report
 
-Please take the time to add as much details to your issues as possible.
+If you found an issue with the app, you can report the bug [here](https://fari.app/bugs)
 
 ## Development
 
-If you want to make a contribution to Fari, you will need to clone this repo and follow the following steps to run the app locally.
+If you want to make a contribution to Fari, you will need to fork / clone this repo and follow the following steps to run the app locally.
 
 ### Prerequisites
 
-- Install Node `^12.16.3` (to match engine property in `package.json`)
-- Install Yarn by running `npm install -g yarn`
+1. Install Node `^16.2.0` (to match engine property in `package.json`)
 
 ### Installation
 
-- Run `yarn install`
+Fari relies on Node and the Node Package Manager to download its dependencies and run.
+
+If you are using the proper node and npm version, you then need to install Fari's dependencies
+
+```sh
+npm install
+```
+
+Once the dependencies are installed, Fari will also build some of it's static content (e.g. the content of the SRD) using [11ty](https://www.11ty.dev/) which will convert the markdown files to HTML files insides a `_site` directory.
 
 ### Running the application
 
-Run `yarn start` and then the app should be running on http://localhost:1234
+If you want to run Fari on your machine, simply run:
+
+```sh
+npm run start
+```
+
+This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make it available on http://localhost:1234
+
+ViteJS will also update your browser's content (using React Refresh) anytime you do save a file on the disk.
+
+### Updating document content
+
+Fari as a couple of markdown files that it transforms to HTML files so that they can be used inside the app.
+
+This process is done at build time to prevent useless calculation on the client side.
+
+Since it takes a bit of time do transform those documents, and it's not everyday that you modify those documents, the `npm start` doesn't do that process that default.
+
+If you want to update a markdown file and see the changes reflected right away in your browser, you can run
+
+```sh
+npm run start:all
+```
+
+This will run the normal server, but also rebuild the markdown files everytime you modify them.
 
 ## Special Thanks
 
@@ -71,7 +79,9 @@ Run `yarn start` and then the app should be running on http://localhost:1234
   <img  width="200px" style="margin-left:16px;" src="./images/services/lokalise.png" alt="[Deploys by Netlify](https://lokalise.com/)" />
 </a>
 
-[Netlify](https://netlify.com/) for providing hosting for Fari.
+- [Netlify](https://netlify.com/) for hosting Fari.
+- [Lokalise](https://lokalise.com/) for providing internalization feature for Fari.
+- [Canny](https://canny.io/) for providing user feedback features for Fari.
 
 ## Contributors ✨
 

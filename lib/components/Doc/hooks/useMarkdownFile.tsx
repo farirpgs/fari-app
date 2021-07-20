@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLogger } from "../../../contexts/InjectionsContext/hooks/useLogger";
-import { IMarkdownIndexes, Markdown } from "../domains/Markdown";
+import {
+  DocumentProcessor,
+  IDocumentIndexes,
+} from "../domains/DocumentProcessor";
 
 export type ILoadFunction = () => Promise<string>;
 
@@ -10,7 +13,7 @@ export function useMarkdownFile(props: {
 }) {
   const [dom, setDom] = useState<HTMLDivElement>();
   const [html, setHtml] = useState<string | undefined>();
-  const [markdownIndexes, setMarkdownIndexes] = useState<IMarkdownIndexes>({
+  const [markdownIndexes, setMarkdownIndexes] = useState<IDocumentIndexes>({
     tree: [],
     flat: [],
   });
@@ -22,12 +25,13 @@ export function useMarkdownFile(props: {
       if (props.loadFunction) {
         try {
           const markdown = await props.loadFunction();
-
-          if (markdown) {
-            const { dom, markdownIndexes } = Markdown.process({
-              markdown: markdown,
-              prefix: props.prefix,
-            });
+          const markdownContent = markdown;
+          if (markdownContent) {
+            const { dom, documentIndexes: markdownIndexes } =
+              DocumentProcessor.process({
+                html: markdownContent,
+                prefix: props.prefix,
+              });
             setDom(dom);
             setHtml(dom.innerHTML);
             setMarkdownIndexes(markdownIndexes);

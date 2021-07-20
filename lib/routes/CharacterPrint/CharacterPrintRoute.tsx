@@ -7,11 +7,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
-import { ManagerMode } from "../../components/Manager/Manager";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
@@ -25,8 +25,9 @@ export const CharacterPrintRoute: React.FC<{
   const theme = useTheme();
   const history = useHistory();
   const charactersManager = useContext(CharactersContext);
-  const darkModeManager = useContext(DarkModeContext);
+  const settingsManager = useContext(SettingsContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
+  const myBinderManager = useContext(MyBinderContext);
   const logger = useLogger();
 
   const query = useQuery<"dev">();
@@ -37,10 +38,8 @@ export const CharacterPrintRoute: React.FC<{
     if (!devMode) {
       window.print();
     }
-    const isDark = darkModeManager.state.darkMode;
-    if (isDark) {
-      darkModeManager.actions.setDarkModeTemporarily(false);
-    }
+
+    settingsManager.actions.setThemeModeTemporarily("light");
   }, []);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export const CharacterPrintRoute: React.FC<{
       setCharacter(characterToLoad);
     } else {
       history.replace("/");
-      charactersManager.actions.openManager(ManagerMode.Manage);
+      myBinderManager.actions.open({ folder: "characters" });
     }
   }, [props.match.params.id, charactersManager.state.characters]);
 
@@ -77,8 +76,9 @@ export default CharacterPrintRoute;
 function PrintCharacter(props: { character: ICharacter | undefined }) {
   const theme = useTheme();
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
   return (
     <>
       <Box mb="1rem">
@@ -173,8 +173,9 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
 function PrintSections(props: { sections: Array<ISection> }) {
   const theme = useTheme();
   const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(theme.palette.background.paper)
-    .primary;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
 
   return (
     <>
@@ -212,7 +213,7 @@ function PrintSections(props: { sections: Array<ISection> }) {
               </Grid>
             </Grid>
             <Grid container>
-              {section.blocks.map((block, blockIndex) => {
+              {section.blocks.map((block) => {
                 const width: GridSize = !!block.meta.width
                   ? ((block.meta.width * 12) as GridSize)
                   : 12;

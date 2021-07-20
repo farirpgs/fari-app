@@ -1,14 +1,12 @@
-import React, { useMemo, useRef, useState } from "react";
-import { ManagerMode } from "../../components/Manager/Manager";
-import { arraySort } from "../../domains/array/arraySort";
+import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
-import { getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { FariEntity } from "../../domains/fari-entity/FariEntity";
+import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../../hooks/useGroups/useGroups";
 import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
-
-type IManagerCallback = (character: ICharacter) => void;
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
@@ -18,35 +16,13 @@ export function useCharacters(props?: { localStorage: Storage }) {
   const localStorage = props?.localStorage ?? window.localStorage;
   const key = "fari-characters";
 
-  const [mode, setMode] = useState(ManagerMode.Close);
-  const managerCallback = useRef<IManagerCallback | undefined>(undefined);
-
   const [characters, setCharacters] = useStorageEntities({
     key: key,
     localStorage: localStorage,
     migrationFunction: CharacterFactory.migrate,
   });
 
-  const sortedCharacters = useMemo(() => {
-    return arraySort(characters, [
-      (c) => {
-        const lastUpdate = getUnixFrom(c.lastUpdated);
-        return { value: lastUpdate, direction: "desc" };
-      },
-    ]);
-  }, [characters]);
-
-  const groups = useGroups(sortedCharacters, (c) => c.group);
-
-  function openManager(newMode: ManagerMode, callback?: IManagerCallback) {
-    setMode(newMode);
-    managerCallback.current = callback;
-  }
-
-  function closeManager() {
-    setMode(ManagerMode.Close);
-    managerCallback.current = undefined;
-  }
+  const groups = useGroups(characters, (c) => c.group);
 
   async function add(type: CharacterTemplates): Promise<ICharacter> {
     const newCharacter = await CharacterFactory.make(type);
@@ -62,22 +38,27 @@ export function useCharacters(props?: { localStorage: Storage }) {
       return;
     }
 
+    const id = character.id || Id.generate(); // If it's a template, `id` is undefined
+    const characterToUpsert = {
+      ...character,
+      id: id,
+      lastUpdated: getUnix(),
+    };
     setCharacters((prev: Array<ICharacter>) => {
       const exists = prev.some((c) => c.id === character.id);
-
       if (!exists) {
-        return [character, ...prev];
+        return [characterToUpsert, ...prev];
       } else {
         return prev.map((c) => {
           if (c.id === character.id) {
-            return character;
+            return characterToUpsert;
           }
           return c;
         });
       }
     });
 
-    return character;
+    return characterToUpsert;
   }
 
   function addIfDoesntExist(character: ICharacter | undefined) {
@@ -121,36 +102,64 @@ export function useCharacters(props?: { localStorage: Storage }) {
   }
 
   function duplicate(id: string | undefined) {
-    setCharacters((draft: Array<ICharacter>) => {
-      const match = draft.find((s) => s.id === id);
+    const match = characters.find((s) => s.id === id);
+    if (!match) {
+      return;
+    }
 
-      if (match) {
-        return [...draft, CharacterFactory.duplicate(match)];
-      }
-      return draft;
+    const newCharacter = CharacterFactory.duplicate(match);
+    setCharacters((draft: Array<ICharacter>) => {
+      return [...draft, newCharacter];
     });
+    return newCharacter;
   }
 
   function isInStorage(id: string | undefined) {
     return characters.some((c) => c.id === id);
   }
 
+  async function importEntity(characterFile: FileList | null) {
+    const characterToImport = await FariEntity.import<ICharacter>({
+      filesToImport: characterFile,
+      fariType: "character",
+    });
+    const migratedCharacter = CharacterFactory.migrate(characterToImport);
+    const match = characters.find((c) => c.id === migratedCharacter.id);
+    return { character: migratedCharacter, exists: !!match };
+  }
+
+  function exportEntity(character: ICharacter) {
+    FariEntity.export({
+      element: character,
+      fariType: "character",
+      name: character.name,
+    });
+  }
+
+  function exportEntityAsTemplate(character: ICharacter) {
+    const template = CharacterFactory.makeATemplate(character);
+    FariEntity.export({
+      element: template,
+      fariType: "character",
+      name: template.name,
+    });
+  }
+
   return {
     state: {
-      mode,
-      characters: sortedCharacters,
-      managerCallback: managerCallback.current,
+      characters: characters,
       groups: groups,
     },
     actions: {
-      openManager,
-      closeManager,
       add,
       upsert,
       addIfDoesntExist,
       updateIfMoreRecent,
       remove,
       duplicate,
+      importEntity,
+      exportEntity,
+      exportEntityAsTemplate,
     },
     selectors: {
       isInStorage,

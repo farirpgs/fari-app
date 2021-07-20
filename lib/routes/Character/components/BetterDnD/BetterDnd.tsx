@@ -30,16 +30,20 @@ export const BetterDnd: React.FC<{
   const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
   const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: props.type },
-    begin: () => {
+    type: props.type,
+    item: () => {
       props.onDrag?.();
+      return {
+        id: props.index,
+      };
     },
+
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
 
-  const [{ isOver }, drop] = useDrop({
+  const [{}, drop] = useDrop({
     accept: props.type,
     drop: () => {
       props.onDrop?.();
@@ -93,7 +97,7 @@ export const BetterDnd: React.FC<{
           return;
         }
 
-        // Dragging upwards
+        // Dragging rightwards
         // if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
           return;

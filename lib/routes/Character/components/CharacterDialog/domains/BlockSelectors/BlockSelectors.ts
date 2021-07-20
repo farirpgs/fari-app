@@ -1,46 +1,27 @@
+import { previewContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import {
   BlockType,
   IBlock,
   IDicePoolBlock,
   ISkillBlock,
 } from "../../../../../../domains/character/types";
-import {
-  IDiceCommandOption,
-  RollType,
-} from "../../../../../../domains/dice/Dice";
-import { DiceCommandGroup } from "../DiceCommandGroup/DiceCommandGroup";
+import { IRollGroup } from "../../../../../../domains/dice/Dice";
 
 export const BlockSelectors = {
-  getDiceCommandOptionsFromBlock(
+  getRollGroupFromBlock(
     block: IBlock & (IDicePoolBlock | ISkillBlock)
-  ): Array<IDiceCommandOption> {
-    const commandGroups =
-      block.meta.commands?.map((commandGroupId) => {
-        return DiceCommandGroup.getCommandGroupById(commandGroupId);
-      }) ?? [];
-
-    const commandOptionList: Array<IDiceCommandOption> = commandGroups.map(
-      (commandGroup): IDiceCommandOption => {
-        return {
-          type: RollType.DiceCommand,
-          commandGroupId: commandGroup.id,
-        };
-      }
-    );
-
+  ): IRollGroup {
+    let modifier: number | undefined;
     if (block.type === BlockType.Skill && !block.meta.hideModifier) {
-      commandOptionList.push({
-        label: block.label,
-        type: RollType.Modifier,
-        modifier: parseInt(block.value) || 0,
-      });
+      modifier = parseInt(block.value) || 0;
     }
-    if (block.type === BlockType.DicePool) {
-      commandOptionList.push({
-        label: block.label,
-        type: RollType.Label,
-      });
-    }
-    return commandOptionList;
+    return {
+      label: previewContentEditable({ value: block.label }),
+      modifier: modifier,
+      commandSets:
+        block.meta.commands?.map((commandGroupId) => ({
+          id: commandGroupId,
+        })) ?? [],
+    };
   },
 };

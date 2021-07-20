@@ -6,7 +6,7 @@ import { env } from "../../constants/env";
 export const DevTool: React.FC<{
   data: any;
 }> = (props) => {
-  if (env.context !== "localhost") {
+  if (env.isDev) {
     return null;
   }
 

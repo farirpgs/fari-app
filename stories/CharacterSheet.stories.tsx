@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useContext, useState } from "react";
-import { DiceFab } from "../lib/components/DiceFab/DiceFab";
+import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
@@ -22,7 +22,7 @@ function StorybookCharacterSheet(
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
 
-  function handleSetNewRoll(result: IDiceRollResult) {
+  function handleOnNewRoll(result: IDiceRollResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
@@ -30,15 +30,18 @@ function StorybookCharacterSheet(
 
   function handleOnRollPool() {
     const { result } = diceManager.actions.getPoolResult();
-    handleSetNewRoll(result);
+    handleOnNewRoll(result);
   }
 
   return (
     <>
-      <DiceFab
-        rollsForDiceBox={rolls}
-        onRoll={handleSetNewRoll}
-        onRollPool={handleOnRollPool}
+      <Toolbox
+        dice={{
+          rollsForDiceBox: rolls,
+          onRoll: handleOnNewRoll,
+          onRollPool: handleOnRollPool,
+        }}
+        hideDefaultRightActions={true}
       />
       <CharacterV3Dialog
         dialog={props.dialog}
@@ -46,11 +49,12 @@ function StorybookCharacterSheet(
         character={props.character}
         readonly={props.readonly}
         synced={false}
-        onRoll={handleSetNewRoll}
+        onRoll={handleOnNewRoll}
         onClose={action("onClose")}
         onSave={action("onSave")}
         onToggleSync={action("onToggleSync")}
       />
+      <Box mt="6rem" />
     </>
   );
 }
@@ -82,223 +86,97 @@ const Template: Story<IProps> = (args, context) => {
   );
 };
 
-export const FateCondensed = Template.bind({});
-(FateCondensed as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateCondensed
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const FateCore = Template.bind({});
-(FateCore as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.FateCore);
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const FateAccelerated = Template.bind({});
-(FateAccelerated as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateAccelerated
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const FateOfCthulhu = Template.bind({});
-(FateOfCthulhu as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateOfCthulhu
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const DresdenFilesAccelerated = Template.bind({});
-(DresdenFilesAccelerated as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.DresdenFilesAccelerated
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const VentureCity = Template.bind({});
-(VentureCity as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.VentureCity
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const Heartbreaker = Template.bind({});
-(Heartbreaker as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.Heartbreaker
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const IronEddaAccelerated = Template.bind({});
-(IronEddaAccelerated as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.IronEddaAccelerated
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const Maze = Template.bind({});
-(Maze as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.Maze);
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const Dnd5e = Template.bind({});
-(Dnd5e as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.Dnd5e);
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const TheWitchIsDead = Template.bind({});
-(TheWitchIsDead as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.TheWitchIsDead
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const EdgeOfTheEmpire = Template.bind({});
-(EdgeOfTheEmpire as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.EdgeOfTheEmpire
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const EdgeOfTheEmpire_FR = Template.bind({});
-(EdgeOfTheEmpire_FR as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.EdgeOfTheEmpire_FR
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const EvolutionPulseHydrah = Template.bind({});
-(EvolutionPulseHydrah as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.EvolutionPulse_Hydrah
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const MärchenkriegerLOS = Template.bind({});
-(MärchenkriegerLOS as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.MärchenkriegerLOS
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const FateCondensedSpanish = Template.bind({});
-(FateCondensedSpanish as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateCondensedSpanish
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const FateCoreSpanish = Template.bind({});
-(FateCoreSpanish as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateCoreSpanish
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const TachyonSquadronCharacter = Template.bind({});
-(TachyonSquadronCharacter as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.TachyonSquadronCharacter
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const TachyonSquadronShip = Template.bind({});
-(TachyonSquadronShip as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.TachyonSquadronShip
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const TachyonSquadronCharacterAndShip = Template.bind({});
-(TachyonSquadronCharacterAndShip as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.TachyonSquadronCharacterAndShip
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const DresdenFilesRPGCharacter = Template.bind({});
-(DresdenFilesRPGCharacter as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.DresdenFilesRPGCharacter
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const DresdenFilesRPGSpellCaster = Template.bind({});
-(DresdenFilesRPGSpellCaster as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.DresdenFilesRPGSpellCaster
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const DresdenFilesRPGVampire = Template.bind({});
-(DresdenFilesRPGVampire as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.DresdenFilesRPGVampire
-    );
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
-export const Blank = Template.bind({});
-(Blank as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.Blank);
-    return { character: overrideCharacterDateForStorybook(character) };
-  },
-];
+// prettier-ignore
+export const FateCondensed = makeCharacterSheetStory(CharacterTemplates.FateCondensed)
+// prettier-ignore
+export const FateCore = makeCharacterSheetStory(CharacterTemplates.FateCore)
+// prettier-ignore
+export const FateAccelerated = makeCharacterSheetStory(CharacterTemplates.FateAccelerated)
+// prettier-ignore
+export const FateOfCthulhu = makeCharacterSheetStory(CharacterTemplates.FateOfCthulhu)
+// prettier-ignore
+export const DresdenFilesAccelerated = makeCharacterSheetStory(CharacterTemplates.DresdenFilesAccelerated)
+// prettier-ignore
+export const VentureCity = makeCharacterSheetStory(CharacterTemplates.VentureCity)
+// prettier-ignore
+export const Heartbreaker = makeCharacterSheetStory(CharacterTemplates.Heartbreaker)
+// prettier-ignore
+export const IronEddaAccelerated = makeCharacterSheetStory(CharacterTemplates.IronEddaAccelerated)
+// prettier-ignore
+export const StrandsOfFate = makeCharacterSheetStory(CharacterTemplates.StrandsOfFate)
+// prettier-ignore
+export const EvolutionPulse_Hydrah = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Hydrah)
+// prettier-ignore
+export const EvolutionPulse_Hyonos = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Hyonos)
+// prettier-ignore
+export const EvolutionPulse_LostH = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_LostH)
+// prettier-ignore
+export const EvolutionPulse_Obscura = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Obscura)
+// prettier-ignore
+export const EvolutionPulse_Proxy = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Proxy)
+// prettier-ignore
+export const FateCoreSpanish = makeCharacterSheetStory(CharacterTemplates.FateCoreSpanish)
+// prettier-ignore
+export const FateCondensedSpanish = makeCharacterSheetStory(CharacterTemplates.FateCondensedSpanish)
+// prettier-ignore
+export const FateCondensedTurkish = makeCharacterSheetStory(CharacterTemplates.FateCondensedTurkish)
+// prettier-ignore
+export const FateCondensedBrazilianPortuguese = makeCharacterSheetStory(CharacterTemplates.FateCondensedBrazilianPortuguese)
+// prettier-ignore
+export const FateAcceleratedBrazilianPortuguese = makeCharacterSheetStory(CharacterTemplates.FateAcceleratedBrazilianPortuguese)
+// prettier-ignore
+export const MärchenkriegerLOS = makeCharacterSheetStory(CharacterTemplates.MärchenkriegerLOS)
+// prettier-ignore
+export const TachyonSquadronCharacter = makeCharacterSheetStory(CharacterTemplates.TachyonSquadronCharacter)
+// prettier-ignore
+export const TachyonSquadronShip = makeCharacterSheetStory(CharacterTemplates.TachyonSquadronShip)
+// prettier-ignore
+export const TachyonSquadronCharacterAndShip = makeCharacterSheetStory(CharacterTemplates.TachyonSquadronCharacterAndShip)
+// prettier-ignore
+export const DresdenFilesRPGCharacter = makeCharacterSheetStory(CharacterTemplates.DresdenFilesRPGCharacter)
+// prettier-ignore
+export const DresdenFilesRPGSpellCaster = makeCharacterSheetStory(CharacterTemplates.DresdenFilesRPGSpellCaster)
+// prettier-ignore
+export const DresdenFilesRPGVampire = makeCharacterSheetStory(CharacterTemplates.DresdenFilesRPGVampire)
+// prettier-ignore
+export const ThePool = makeCharacterSheetStory(CharacterTemplates.ThePool)
+// prettier-ignore
+export const TunnelsAndTrolls = makeCharacterSheetStory(CharacterTemplates.TunnelsAndTrolls)
+// prettier-ignore
+export const Maze = makeCharacterSheetStory(CharacterTemplates.Maze)
+// prettier-ignore
+export const Dnd5e = makeCharacterSheetStory(CharacterTemplates.Dnd5e)
+// prettier-ignore
+export const TheWitchIsDead = makeCharacterSheetStory(CharacterTemplates.TheWitchIsDead)
+// prettier-ignore
+export const EdgeOfTheEmpire = makeCharacterSheetStory(CharacterTemplates.EdgeOfTheEmpire)
+// prettier-ignore
+export const EdgeOfTheEmpire_FR = makeCharacterSheetStory(CharacterTemplates.EdgeOfTheEmpire_FR)
+// prettier-ignore
+export const Blank = makeCharacterSheetStory(CharacterTemplates.Blank)
+
 export const LoremIpsum = Template.bind({});
 LoremIpsum.args = {
   character: CharacterFactory.migrate(LoremIpsumTemplate as any),
 };
 
-function overrideCharacterDateForStorybook(character: ICharacter): ICharacter {
-  return {
-    ...character,
-    id: "50fa2",
-    lastUpdated: dayJS("2021-01-01").unix(),
-  };
+function makeCharacterSheetStory(template: CharacterTemplates) {
+  const story = Template.bind({});
+  (story as any).loaders = [
+    async () => {
+      const character = await CharacterFactory.make(template);
+      return { character: overrideCharacterDateForStorybook(character) };
+    },
+  ];
+  return story;
+
+  function overrideCharacterDateForStorybook(
+    character: ICharacter
+  ): ICharacter {
+    return {
+      ...character,
+      id: "50fa2",
+      lastUpdated: dayJS("2021-01-01").unix(),
+    };
+  }
 }

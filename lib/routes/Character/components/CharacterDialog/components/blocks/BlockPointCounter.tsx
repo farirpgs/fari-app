@@ -124,14 +124,11 @@ export function BlockPointCounter(
               <Grid item className={css({ flex: "1 1 auto" })}>
                 <FateLabel
                   display="inline"
+                  align="center"
                   className={css({
                     width: "100%",
-                    paddingLeft: "1rem",
-                    paddingRight: "1rem",
-                    paddingBottom: ".5rem",
                     display: "inline-block",
                   })}
-                  align={"center"}
                 >
                   <ContentEditable
                     data-cy={`${props.dataCy}.label`}

@@ -5,7 +5,7 @@ import React from "react";
 import { PlayerRow } from "../lib/components/Scene/components/PlayerRow/PlayerRow";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { BlockType, ICharacter, IPage } from "../lib/domains/character/types";
-import { IDiceRollResult, RollType } from "../lib/domains/dice/Dice";
+import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { IPlayer } from "../lib/hooks/useScene/IScene";
 import { StoryProvider } from "./StoryProvider";
 
@@ -31,7 +31,6 @@ function StorybookPlayerRow(props: {
       }}
       player={props.player}
       isMe={props.highlight}
-      number={1}
       onDiceRoll={action("onDiceRoll")}
       onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
       onPointsChange={action("onPointsChange")}
@@ -176,6 +175,21 @@ PlayerWithARollAndModifier.args = {
   }),
 };
 
+export const PlayerWithAPoolRoll = Template.bind({});
+PlayerWithAPoolRoll.args = {
+  highlight: false,
+  canLoadCharacterSheet: true,
+  canLoadDuplicateCharacterSheet: false,
+  canRemove: false,
+  canRoll: true,
+  canUpdateInitiative: true,
+  canUpdatePoints: true,
+  player: aPlayer({
+    character: aCharacter("Meriadoc Brandybuck"),
+    rolls: [aPoolRoll()],
+  }),
+};
+
 export const PlayerReadOnly = Template.bind({});
 PlayerReadOnly.args = {
   highlight: false,
@@ -219,132 +233,12 @@ PlayerOutOfBound.args = {
         total: 3,
         totalWithoutModifiers: 3,
         options: { listResults: false },
-        commandResult: [
+        rollGroups: [
           {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
+            commandSets: new Array(50).fill(1).map(() => ({
+              id: "1dF",
+              commands: [{ value: 1, name: "1dF" }],
+            })),
           },
         ],
       },
@@ -372,132 +266,12 @@ PlayerOutOfBoundWithCharacter.args = {
         total: 3,
         totalWithoutModifiers: 3,
         options: { listResults: false },
-        commandResult: [
+        rollGroups: [
           {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1dF",
-            commandName: "1dF",
-            type: RollType.DiceCommand,
+            commandSets: new Array(50).fill(1).map(() => ({
+              id: "1dF",
+              commands: [{ value: 1, name: "1dF" }],
+            })),
           },
         ],
       },
@@ -523,78 +297,15 @@ PlayerOutOfBoundPool.args = {
         total: 3,
         totalWithoutModifiers: 3,
         options: { listResults: false },
-        commandResult: [
+        rollGroups: [
           {
-            value: 1,
-            commandGroupId: "1d4",
-            commandName: "1d4",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d6",
-            commandName: "1d6",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d8",
-            commandName: "1d8",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d10",
-            commandName: "1d10",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d12",
-            commandName: "1d12",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d20",
-            commandName: "1d20",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d4",
-            commandName: "1d4",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d6",
-            commandName: "1d6",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d8",
-            commandName: "1d8",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d10",
-            commandName: "1d10",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d12",
-            commandName: "1d12",
-            type: RollType.DiceCommand,
-          },
-          {
-            value: 1,
-            commandGroupId: "1d20",
-            commandName: "1d20",
-            type: RollType.DiceCommand,
+            commandSets: new Array(50)
+              .fill(1)
+              .fill(1)
+              .map(() => ({
+                id: "1dF",
+                commands: [{ value: 1, name: "1dF" }],
+              })),
           },
         ],
       },
@@ -607,30 +318,19 @@ function aRoll(): IDiceRollResult {
     total: 3,
     totalWithoutModifiers: 3,
     options: { listResults: false },
-    commandResult: [
+    rollGroups: [
       {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 0,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
+        commandSets: [
+          {
+            id: "4dF",
+            commands: [
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+            ],
+          },
+        ],
       },
     ],
   };
@@ -640,35 +340,70 @@ function aRollWithModifier(): IDiceRollResult {
     total: 7,
     totalWithoutModifiers: 3,
     options: { listResults: false },
-    commandResult: [
+    rollGroups: [
       {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
+        label: "Atheltic",
+        modifier: 4,
+        commandSets: [
+          {
+            id: "4dF",
+            commands: [
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+              { value: 0, name: "1dF" },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+}
+
+function aPoolRoll(): IDiceRollResult {
+  return {
+    total: 6,
+    totalWithoutModifiers: 6,
+    options: { listResults: true },
+    rollGroups: [
+      {
+        label: "Atheltic",
+        commandSets: [
+          {
+            id: "1d12",
+            commands: [{ value: 1, name: "1d12" }],
+          },
+          {
+            id: "1d12",
+            commands: [{ value: 2, name: "1d12" }],
+          },
+          {
+            id: "1d12",
+            commands: [{ value: 3, name: "1d12" }],
+          },
+        ],
       },
       {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
+        label: "Fight",
+        commandSets: [
+          {
+            id: "1d12",
+            commands: [{ value: 4, name: "1d12" }],
+          },
+          {
+            id: "1d12",
+            commands: [{ value: 5, name: "1d12" }],
+          },
+        ],
       },
       {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 0,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        label: "Athletic",
-        type: RollType.Modifier,
-        value: 3,
+        label: "Shoot",
+        commandSets: [
+          {
+            id: "1d12",
+            commands: [{ value: 6, name: "1d12" }],
+          },
+        ],
       },
     ],
   };
@@ -679,34 +414,20 @@ function aRollWithLabel(): IDiceRollResult {
     total: 7,
     totalWithoutModifiers: 3,
     options: { listResults: false },
-    commandResult: [
+    rollGroups: [
       {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 1,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        value: 0,
-        commandGroupId: "1dF",
-        commandName: "1dF",
-        type: RollType.DiceCommand,
-      },
-      {
-        label: "Athletic",
-        type: RollType.Label,
+        label: "Ahtletic",
+        commandSets: [
+          {
+            id: "4dF",
+            commands: [
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+              { value: 1, name: "1dF" },
+            ],
+          },
+        ],
       },
     ],
   };
@@ -750,7 +471,6 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
     points: "3",
     playerName: "René-Pier",
     isGM: false,
-    offline: false,
     playedDuringTurn: false,
     rolls: [],
     ...props,

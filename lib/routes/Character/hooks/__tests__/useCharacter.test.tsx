@@ -20,8 +20,8 @@ describe("useCharacter", () => {
         lastUpdated: 1,
       };
       // WHEN
-      const { result, rerender } = renderHook(
-        (props) => {
+      const { result } = renderHook(
+        () => {
           return useCharacter(character);
         },
         {
@@ -46,9 +46,9 @@ describe("useCharacter", () => {
   describe("sync props with state", () => {
     it("should not crash if characters in props in undefined", async () => {
       // GIVEN
-      const initialRenderCharacter = (undefined as unknown) as ICharacter;
+      const initialRenderCharacter = undefined as unknown as ICharacter;
       // WHEN
-      const { result, rerender } = renderHook(
+      const { result } = renderHook(
         (props) => {
           return useCharacter(props.character);
         },
@@ -192,8 +192,8 @@ describe("useCharacter", () => {
         lastUpdated: 1,
       };
       // WHEN
-      const { result, rerender, waitForNextUpdate } = renderHook(
-        (props) => {
+      const { result, waitForNextUpdate } = renderHook(
+        () => {
           return useCharacter(character);
         },
         {
@@ -221,6 +221,7 @@ describe("useCharacter", () => {
         id: "1",
         lastUpdated: expect.anything(),
         template: "FateAccelerated",
+        playedDuringTurn: undefined,
         name: "Luke Skywalker",
         pages: [
           {
@@ -268,7 +269,6 @@ describe("useCharacter", () => {
                   ],
                   id: expect.anything(),
                   label: "Aspects",
-
                   visibleOnCard: true,
                 },
                 {
@@ -297,6 +297,7 @@ describe("useCharacter", () => {
                   ],
                   id: expect.anything(),
                   label: "Stunts & Extras",
+                  visibleOnCard: undefined,
                 },
                 {
                   blocks: [
@@ -310,6 +311,7 @@ describe("useCharacter", () => {
                   ],
                   id: expect.anything(),
                   label: "Other",
+                  visibleOnCard: undefined,
                 },
                 {
                   blocks: [
@@ -323,6 +325,23 @@ describe("useCharacter", () => {
                   ],
                   id: expect.anything(),
                   label: "Fate Points",
+                  visibleOnCard: undefined,
+                },
+                {
+                  blocks: [
+                    {
+                      id: expect.anything(),
+                      label: "Evil Hat Productions",
+                      meta: {
+                        hasDisplayName: true,
+                      },
+                      type: "Link",
+                      value: "https://www.evilhat.com/home/",
+                    },
+                  ],
+                  id: expect.anything(),
+                  label: "Credits",
+                  visibleOnCard: undefined,
                 },
               ],
               right: [
@@ -342,6 +361,7 @@ describe("useCharacter", () => {
                   ],
                   id: expect.anything(),
                   label: "Stress",
+                  visibleOnCard: undefined,
                 },
                 {
                   blocks: [
@@ -369,6 +389,7 @@ describe("useCharacter", () => {
                   ],
                   id: expect.anything(),
                   label: "Consequences",
+                  visibleOnCard: undefined,
                 },
                 {
                   blocks: [

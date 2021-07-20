@@ -1,56 +1,74 @@
+import axios from "axios";
+
+async function getDoc(getMarkdownPromise: Promise<typeof import("*?url")>) {
+  const url = (await getMarkdownPromise).default;
+  const docResponse = await axios.get(url);
+  return docResponse.data;
+}
+
+/**
+ * Import HTML documents generated from the original markdown files by `eleventy`
+ */
 export const DocImport = {
   FateCondensed: () => {
-    return import("../../../docs/fate-condensed.md");
+    return getDoc(import("../../../_site/docs/fate-condensed/index.html?url"));
   },
   FateCore: () => {
-    return import("../../../docs/fate-core.md");
+    return getDoc(import("../../../_site/docs/fate-core/index.html?url"));
   },
   FateAccelerated: () => {
-    return import("../../../docs/fate-accelerated.md");
+    return getDoc(
+      import("../../../_site/docs/fate-accelerated/index.html?url")
+    );
   },
   FateAdversaryToolkit: () => {
-    return import("../../../docs/fate-adversary-toolkit.md");
+    return getDoc(
+      import("../../../_site/docs/fate-adversary-toolkit/index.html?url")
+    );
   },
   FateSystemToolkit: () => {
-    return import("../../../docs/fate-system-toolkit.md");
+    return getDoc(
+      import("../../../_site/docs/fate-system-toolkit/index.html?url")
+    );
   },
   FateStunts: () => {
-    return import("../../../docs/fate-stunts.md");
+    return getDoc(import("../../../_site/docs/fate-stunts/index.html?url"));
   },
   SeelieSquire: () => {
-    return import("../../../docs/seelie-squire.md");
+    return getDoc(import("../../../_site/docs/seelie-squire/index.html?url"));
   },
   SceneCheckist: () => {
-    return import("../../../docs/scene-checklist.md");
+    return getDoc(import("../../../_site/docs/scene-checklist/index.html?url"));
   },
   CheatSheet: () => {
-    return import("../../../docs/cheat-sheet.md");
+    return getDoc(import("../../../_site/docs/cheat-sheet/index.html?url"));
   },
   Dials: () => {
-    return import("../../../docs/dials.md");
+    return getDoc(import("../../../_site/docs/dials/index.html?url"));
   },
   SuccessWithStyle: () => {
-    return import("../../../docs/success-with-style.md");
+    return getDoc(
+      import("../../../_site/docs/success-with-style/index.html?url")
+    );
   },
   FariWiki: () => {
-    return import("../../../docs/fari-wiki.md");
+    return getDoc(import("../../../_site/docs/fari-wiki/index.html?url"));
   },
   Blog: () => {
-    return import("../../../docs/blog.md");
+    return getDoc(import("../../../_site/docs/blog/index.html?url"));
   },
   Test: () => {
-    return import("../../../docs/test.md");
+    return getDoc(import("../../../_site/docs/test/index.html?url"));
   },
   TestEmpty: () => {
-    return import("../../../docs/test-empty.md");
-  },
-  M: () => {
-    return import("../../../docs/m.md");
+    return getDoc(import("../../../_site/docs/test-empty/index.html?url"));
   },
   Changelog: () => {
-    return import("../../../CHANGELOG.md");
+    return getDoc(import("../../../_site/CHANGELOG/index.html?url"));
   },
   FateCondensedPtBr: () => {
-    return import("../../../docs/fate-condensed-pt-br.md");
+    return getDoc(
+      import("../../../_site/docs/fate-condensed-pt-br/index.html?url")
+    );
   },
 };

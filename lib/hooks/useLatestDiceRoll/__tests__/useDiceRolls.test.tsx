@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { act, renderHook } from "@testing-library/react-hooks";
 import { Confetti } from "../../../domains/confetti/Confetti";
-import { IDiceRollResult, RollType } from "../../../domains/dice/Dice";
+import { IDiceRollResult } from "../../../domains/dice/Dice";
 import { useLatestDiceRoll } from "../useLatestDiceRoll";
 jest.mock("../../../domains/confetti/Confetti");
 
@@ -35,7 +35,7 @@ describe("useDiceRolls", () => {
 
       expect(view.result.current.state.rolling).toEqual(false);
       expect(view.result.current.state.hasRolledOnce).toEqual(false);
-      expect(view.result.current.state.color).toEqual("inherit");
+      expect(view.result.current.state.color).toEqual("#fff");
     });
     it("should display first roll on load without animation", () => {
       // GIVEN
@@ -44,30 +44,19 @@ describe("useDiceRolls", () => {
           options: { listResults: false },
           total: 4,
           totalWithoutModifiers: 4,
-          commandResult: [
+          rollGroups: [
             {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 1,
-              commandGroupId: "1dF",
-              commandName: "1dF",
-              type: RollType.DiceCommand,
+              commandSets: [
+                {
+                  id: "4dF",
+                  commands: [
+                    { value: 1, name: "1dF" },
+                    { value: 1, name: "1dF" },
+                    { value: 1, name: "1dF" },
+                    { value: 1, name: "1dF" },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -113,30 +102,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -152,7 +130,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("+4");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#4caf50");
+      expect(view.result.current.state.color).toEqual("rgb(60, 140, 64)");
 
       // WHEN
       view.rerender({
@@ -162,30 +140,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 3,
             totalWithoutModifiers: 3,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -193,30 +160,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -228,11 +184,11 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
-      expect(view.result.current.state.finalResultHidden).toEqual(false);
+       expect(view.result.current.state.finalResultHidden).toEqual(false);
       expect(view.result.current.state.finalResultTotal).toEqual("+3");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#4caf50");
+      expect(view.result.current.state.color).toEqual("rgb(60, 140, 64)");
 
       // WHEN
       view.rerender({
@@ -242,30 +198,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 0,
             totalWithoutModifiers: 0,
-            commandResult: [
+            rollGroups: [
               {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -273,30 +218,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 3,
             totalWithoutModifiers: 3,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -304,30 +238,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -342,7 +265,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("0");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("inherit");
+      expect(view.result.current.state.color).toEqual("#3f51b5");
 
       // WHEN
       view.rerender({
@@ -352,30 +275,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: -3,
             totalWithoutModifiers: -3,
-            commandResult: [
+            rollGroups: [
               {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -383,12 +295,14 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 0,
             totalWithoutModifiers: 0,
-            commandResult: [
+            rollGroups: [
               {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "1dF",
+                    commands: [{ value: 0, name: "1dF" }],
+                  },
+                ],
               },
             ],
           },
@@ -396,30 +310,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 3,
             totalWithoutModifiers: 3,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -427,30 +330,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -466,7 +358,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("-3");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#f44336");
+      expect(view.result.current.state.color).toEqual("rgb(195, 53, 43)");
 
       // WHEN
       view.rerender({
@@ -476,61 +368,41 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: -4,
             totalWithoutModifiers: -4,
-            commandResult: [
+            rollGroups: [
               {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
+     
+     
           },
           {
             options: { listResults: false },
             total: -3,
             totalWithoutModifiers: -3,
-            commandResult: [
+            rollGroups: [
               {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -538,12 +410,16 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 0,
             totalWithoutModifiers: 0,
-            commandResult: [
+            rollGroups: [
               {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -551,30 +427,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 3,
             totalWithoutModifiers: 3,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -582,30 +447,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value:1, name: "1dF" },
+                      { value:1, name: "1dF" },
+                      { value:1, name: "1dF" },
+                      { value:1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -621,7 +475,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("-4");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#f44336");
+      expect(view.result.current.state.color).toEqual("rgb(195, 53, 43)");
     });
     it("should handle labels on load and after and going back to without labels", async () => {
       jest.useFakeTimers();
@@ -646,33 +500,25 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 2,
-            commandResult: [
+            rollGroups: [
               {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                label:"Notice",
+                modifier:2,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                    ],
+                  },
+                ],
               },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              { value: 2, label: "Notice", type: RollType.Modifier },
             ],
+
+          
           },
         ],
       });
@@ -692,64 +538,44 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 8,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                label:"Shoot",
+                modifier:4,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              { value: 4, label: "Shoot", type: RollType.Modifier },
             ],
           },
           {
             options: { listResults: false },
-            total: 2,
+            total: 4,
             totalWithoutModifiers: 2,
-            commandResult: [
+            rollGroups: [
               {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                label:"Notice",
+                modifier:2,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                    ],
+                  },
+                ],
               },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              { value: 2, label: "Notice", type: RollType.Modifier },
             ],
           },
         ],
@@ -765,36 +591,25 @@ describe("useDiceRolls", () => {
 
       // WHEN
       view.rerender({
-        rolls: [
+           rolls: [
           ...rolls,
           {
             options: { listResults: false },
             total: -3,
             totalWithoutModifiers: -3,
-            commandResult: [
+            rollGroups: [
               {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: -1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: -1, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -802,30 +617,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 4,
             totalWithoutModifiers: 4,
-            commandResult: [
+            rollGroups: [
               {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -833,30 +637,19 @@ describe("useDiceRolls", () => {
             options: { listResults: false },
             total: 2,
             totalWithoutModifiers: 2,
-            commandResult: [
+            rollGroups: [
               {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 0,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
-              },
-              {
-                value: 1,
-                commandGroupId: "1dF",
-                commandName: "1dF",
-                type: RollType.DiceCommand,
+                commandSets: [
+                  {
+                    id: "4dF",
+                    commands: [
+                      { value: 0, name: "1dF" },
+                      { value: 0, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -879,14 +672,19 @@ describe("useDiceRolls", () => {
           options: { listResults: false },
           total: 1,
           totalWithoutModifiers: 1,
-          commandResult: [
+          rollGroups: [
             {
-              value: 1,
-              commandGroupId: "coin",
-              commandName: "coin",
-              type: RollType.DiceCommand,
+              commandSets: [
+                {
+                  id: "coin",
+                  commands: [
+                    { value: 1, name: "coin" },
+                  ],
+                },
+              ],
             },
-          ],
+           ],
+       
         },
       ];
 
@@ -914,12 +712,16 @@ describe("useDiceRolls", () => {
           options: { listResults: false },
           total: -1,
           totalWithoutModifiers: -1,
-          commandResult: [
+          rollGroups: [
             {
-              value: -1,
-              commandGroupId: "coin",
-              commandName: "coin",
-              type: RollType.DiceCommand,
+              commandSets: [
+                {
+                  id: "coin",
+                  commands: [
+                    { value: -1, name: "coin" },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -951,18 +753,17 @@ describe("useDiceRolls", () => {
           options: { listResults: false },
           total: 8,
           totalWithoutModifiers: 8,
-          commandResult: [
+          rollGroups: [
             {
-              value: 5,
-              commandGroupId: "1d6",
-              commandName: "1d6",
-              type: RollType.DiceCommand,
-            },
-            {
-              value: 3,
-              commandGroupId: "1d6",
-              commandName: "1d6",
-              type: RollType.DiceCommand,
+              commandSets: [
+                {
+                  id: "2d6",
+                  commands: [
+                    { value: 5, name: "1d6" },
+                    { value: 3, name: "1d6" },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -992,21 +793,22 @@ describe("useDiceRolls", () => {
           options: { listResults: false },
           total: 10,
           totalWithoutModifiers: 8,
-          commandResult: [
+          rollGroups: [
             {
-              value: 5,
-              commandGroupId: "1d6",
-              commandName: "1d6",
-              type: RollType.DiceCommand,
+              label: "Academics",
+              modifier: 2,
+              commandSets: [
+                {
+                  id: "2d6",
+                  commands: [
+                    { value: 5, name: "1d6" },
+                    { value: 3, name: "1d6" },
+                  ],
+                },
+              ],
             },
-            {
-              value: 3,
-              commandGroupId: "1d6",
-              commandName: "1d6",
-              type: RollType.DiceCommand,
-            },
-            { value: 2, label: "Academics", type: RollType.Modifier },
           ],
+       
         },
       ];
 
@@ -1037,12 +839,16 @@ describe("useDiceRolls", () => {
           options: { listResults: false },
           total: 45,
           totalWithoutModifiers: 45,
-          commandResult: [
+          rollGroups: [
             {
-              value: 45,
-              commandGroupId: "1d100",
-              commandName: "1d100",
-              type: RollType.DiceCommand,
+              commandSets: [
+                {
+                  id: "1d100",
+                  commands: [
+                    { value: 45, name: "1d100" },
+                  ],
+                },
+              ],
             },
           ],
         },
