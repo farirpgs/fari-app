@@ -14,8 +14,8 @@ describe("/characters", () => {
       Fari.get("character-dialog.name").clear().type("Luke Skywalker");
 
       // load fate template
-      Fari.get("character-dialog.template.content").click();
-      Fari.get("character-dialog.template.content")
+      Fari.get("character-dialog.template-input").click();
+      Fari.get("character-dialog.template-input")
         .type("Fate Condensed")
         .type("{enter}");
 
@@ -165,10 +165,8 @@ describe("/characters", () => {
       Fari.get("my-binder.folders.characters.new").click();
       Fari.get("character-dialog.name").clear().type("Luke");
       Fari.get("character-dialog.toggle-advanced").click();
-      Fari.get("character-dialog.template.advanced").click();
-      Fari.get("character-dialog.template.advanced")
-        .type("Blank")
-        .type("{enter}");
+      Fari.get("character-dialog.template-input").click();
+      Fari.get("character-dialog.template-input").type("Blank").type("{enter}");
       Fari.get("character-dialog.name").type(" Skywalker");
 
       // save
@@ -190,8 +188,8 @@ describe("/characters", () => {
       Fari.get("character-dialog.name").type("Luke Skywalker");
 
       // load fate template
-      Fari.get("character-dialog.template.content").click();
-      Fari.get("character-dialog.template.content")
+      Fari.get("character-dialog.template-input").click();
+      Fari.get("character-dialog.template-input")
         .type("Fate Condensed")
         .type("{enter}");
 

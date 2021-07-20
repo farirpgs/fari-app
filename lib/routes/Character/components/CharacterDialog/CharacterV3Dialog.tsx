@@ -317,7 +317,7 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderLoadTemplate(dataCy: string) {
+  function renderLoadTemplate() {
     return (
       <Box>
         <Grid
@@ -358,7 +358,7 @@ export const CharacterV3Dialog: React.FC<{
                   {...params}
                   label="Template"
                   variant="outlined"
-                  data-cy={`character-dialog.template.${dataCy}`}
+                  data-cy={`character-dialog.template-input`}
                 />
               )}
             />
@@ -384,7 +384,7 @@ export const CharacterV3Dialog: React.FC<{
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="1rem">
             <Grid container justify="center">
-              <Grid item>{renderLoadTemplate("content")}</Grid>
+              <Grid item>{renderLoadTemplate()}</Grid>
             </Grid>
           </Box>
         </Collapse>
