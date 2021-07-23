@@ -20,6 +20,12 @@
 - tech: Devs contributing to the repo now have to use npm 7 + node 16 to run Fari locally on their machine
 - tech: Session and Scene information are now splitted on the tech side of things which will make it easier to maintain in the future.
 
+**v5.1.1**
+
+- feat: polish translations
+- feat: polish Fate Core/Condensed/Accelerated templates
+- feat: display game master characters in offline
+
 # v5.0 Better Index Cards and New Block Types
 
 - feat: pick any color for index cards
