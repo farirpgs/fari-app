@@ -20,6 +20,8 @@ export type ITranslationKeys =
   | "character-dialog.control.add-sub-card"
   | "character-dialog.control.add-toggle"
   | "character-dialog.control.advanced-mode"
+  | "character-dialog.control.as-clock"
+  | "character-dialog.control.as-track"
   | "character-dialog.control.duplicate"
   | "character-dialog.control.hide-display-name"
   | "character-dialog.control.hide-modifer"
