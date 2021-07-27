@@ -13,8 +13,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
-import { ThemeProvider } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { ThemeProvider, Theme, StyledEngineProvider, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -65,6 +64,13 @@ import { Kofi } from "../Kofi/Kofi";
 import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
+
+declare module '@material-ui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
+
 let gameIdSingleton: string | undefined = undefined;
 
 export const FariMaxWidth = "1920px";
@@ -89,7 +95,7 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -192,7 +198,7 @@ export const Page: React.FC<{
           <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
               alignItems="center"
               spacing={4}
             >
@@ -211,7 +217,7 @@ export const Page: React.FC<{
           <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
               spacing={4}
               alignItems="center"
             >
@@ -240,7 +246,7 @@ export const Page: React.FC<{
           <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
               spacing={4}
               alignItems="center"
             >
@@ -254,7 +260,7 @@ export const Page: React.FC<{
             </Grid>
           </Box>
 
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item xs>
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
@@ -404,7 +410,7 @@ export const Page: React.FC<{
                   </Grid>
                 </Box>
               )}
-              <Hidden smDown>{renderMenu(false)}</Hidden>
+              <Hidden mdDown>{renderMenu(false)}</Hidden>
               <Hidden mdUp>
                 {!isLive && (
                   <IconButton
@@ -413,7 +419,7 @@ export const Page: React.FC<{
                     onClick={() => {
                       setMenuOpen(true);
                     }}
-                  >
+                    size="large">
                     <MenuIcon color="inherit" />
                   </IconButton>
                 )}
@@ -443,7 +449,7 @@ export const Page: React.FC<{
                   flex: "1 1 auto",
                 })}
               />
-              <Hidden smDown>
+              <Hidden mdDown>
                 {!shouldDisplayRejoinButton && (
                   <Box width="250px">
                     <Patreon />
@@ -451,22 +457,24 @@ export const Page: React.FC<{
                 )}
               </Hidden>
               {shouldDisplayRejoinButton && (
-                <ThemeProvider theme={highlight.highlightTheme}>
-                  <Button
-                    color="primary"
-                    onClick={() => {
-                      history.push(`/play/${gameId}`);
-                    }}
-                    variant={"outlined"}
-                    className={css({
-                      minWidth: "10rem",
-                    })}
-                  >
-                    <Typography variant="button" noWrap>
-                      Rejoin&nbsp;Game
-                    </Typography>
-                  </Button>
-                </ThemeProvider>
+                <StyledEngineProvider injectFirst>
+                  <ThemeProvider theme={highlight.highlightTheme}>
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        history.push(`/play/${gameId}`);
+                      }}
+                      variant={"outlined"}
+                      className={css({
+                        minWidth: "10rem",
+                      })}
+                    >
+                      <Typography variant="button" noWrap>
+                        Rejoin&nbsp;Game
+                      </Typography>
+                    </Button>
+                  </ThemeProvider>
+                </StyledEngineProvider>
               )}
             </Toolbar>
           </Box>
@@ -487,7 +495,7 @@ export const Page: React.FC<{
       <Grid
         container
         spacing={3}
-        justify={mobile ? "center" : undefined}
+        justifyContent={mobile ? "center" : undefined}
         alignItems="center"
       >
         {!isLive && (
@@ -729,7 +737,7 @@ function PageNavLink(
   }
 ) {
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const highlight = useHighlight();
   const subNav = props.subNav ?? [];
   const hasSubNav = subNav.length > 0;
@@ -754,75 +762,73 @@ function PageNavLink(
     setAnchorEl(null);
   }
 
-  return (
-    <>
-      <Tooltip title={props.tooltip ?? ""}>
-        <div>
-          <AppLink
-            data-cy={props["data-cy"]}
-            target={props.target}
-            className={css({
-              "label": "PageNavLink",
-              "display": "flex",
-              "alignItems": "center",
-              "color": "inherit",
-              "fontWeight": theme.typography.fontWeightMedium,
-              "fontSize": "1.1rem",
-              "&:hover": {
-                color: isSmall ? "inherit" : highlight.hover,
-                textDecoration: "underline",
-              },
-            })}
-            to={props.to}
-            onClick={props.onClick ?? handleOpenSubNav}
-          >
-            {props.label}
-            {hasPopperContent && <ExpandMoreIcon />}
-          </AppLink>
-        </div>
-      </Tooltip>
-
-      <Hidden smDown>
-        <Popover
-          open={open}
-          onClose={handleCloseSubNav}
-          anchorEl={anchorEl}
-          TransitionProps={{ timeout: theme.transitions.duration.shortest }}
+  return <>
+    <Tooltip title={props.tooltip ?? ""}>
+      <div>
+        <AppLink
+          data-cy={props["data-cy"]}
+          target={props.target}
           className={css({
-            marginTop: "1rem",
+            "label": "PageNavLink",
+            "display": "flex",
+            "alignItems": "center",
+            "color": "inherit",
+            "fontWeight": theme.typography.fontWeightMedium,
+            "fontSize": "1.1rem",
+            "&:hover": {
+              color: isSmall ? "inherit" : highlight.hover,
+              textDecoration: "underline",
+            },
           })}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
+          to={props.to}
+          onClick={props.onClick ?? handleOpenSubNav}
         >
-          <Box px="1.5rem" py=".5rem" minWidth="200px">
-            <Box>
+          {props.label}
+          {hasPopperContent && <ExpandMoreIcon />}
+        </AppLink>
+      </div>
+    </Tooltip>
+
+    <Hidden mdDown>
+      <Popover
+        open={open}
+        onClose={handleCloseSubNav}
+        anchorEl={anchorEl}
+        TransitionProps={{ timeout: theme.transitions.duration.shortest }}
+        className={css({
+          marginTop: "1rem",
+        })}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        <Box px="1.5rem" py=".5rem" minWidth="200px">
+          <Box>
+            <Box>{renderSubNav()}</Box>
+            <Box>{props.children}</Box>
+          </Box>
+        </Box>
+      </Popover>
+    </Hidden>
+
+    <Hidden mdUp>
+      <Collapse in={open}>
+        <Box mt=".5rem">
+          <Paper elevation={2}>
+            <Box p="1rem">
               <Box>{renderSubNav()}</Box>
               <Box>{props.children}</Box>
             </Box>
-          </Box>
-        </Popover>
-      </Hidden>
-
-      <Hidden mdUp>
-        <Collapse in={open}>
-          <Box mt=".5rem">
-            <Paper elevation={2}>
-              <Box p="1rem">
-                <Box>{renderSubNav()}</Box>
-                <Box>{props.children}</Box>
-              </Box>
-            </Paper>
-          </Box>
-        </Collapse>
-      </Hidden>
-    </>
-  );
+          </Paper>
+        </Box>
+      </Collapse>
+    </Hidden>
+  </>;
 
   function renderSubNav() {
     return (

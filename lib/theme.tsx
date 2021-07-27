@@ -1,8 +1,7 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
-import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
+import { createTheme, DeprecatedThemeOptions, adaptV4Theme, responsiveFontSizes } from "@material-ui/core/styles";
 import { FontFamily } from "./constants/FontFamily";
 
-export const defaultThemeConfiguration: ThemeOptions = {
+export const defaultThemeConfiguration: DeprecatedThemeOptions = {
   typography: {
     // default 300
     fontWeightLight: 400,
@@ -48,20 +47,20 @@ export const defaultThemeConfiguration: ThemeOptions = {
 };
 // https://mycolor.space/?hex=%23415F9B&sub=1
 export const AppLightTheme = responsiveFontSizes(
-  createMuiTheme({
+  createTheme(adaptV4Theme({
     ...defaultThemeConfiguration,
     palette: {
       primary: { main: "#415f9c" },
       secondary: { main: "#7891D2" },
     },
-  })
+  }))
 );
 
 export const AppDarkTheme = responsiveFontSizes(
-  createMuiTheme({
+  createTheme(adaptV4Theme({
     ...defaultThemeConfiguration,
     palette: {
-      type: "dark",
+      mode: "dark",
       background: {
         default: "#212121",
         // paper: "#424242",
@@ -74,5 +73,5 @@ export const AppDarkTheme = responsiveFontSizes(
         main: "#7891D2",
       },
     },
-  })
+  }))
 );

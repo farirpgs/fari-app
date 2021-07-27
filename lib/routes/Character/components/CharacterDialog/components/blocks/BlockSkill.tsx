@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Tooltip from "@material-ui/core/Tooltip";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";

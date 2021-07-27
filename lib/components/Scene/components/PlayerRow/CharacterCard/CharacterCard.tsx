@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Tooltip from "@material-ui/core/Tooltip";
 import FaceIcon from "@material-ui/icons/Face";
 import React, { useContext } from "react";

@@ -14,7 +14,7 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -24,7 +24,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
 import Autocomplete, {
   createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
+} from '@material-ui/core/Autocomplete';
 import truncate from "lodash/truncate";
 import uniq from "lodash/uniq";
 import React, { useEffect, useRef, useState } from "react";
@@ -122,7 +122,7 @@ export type IDocProps = IProps;
 export const Doc: React.FC<IProps> = (props) => {
   const lightBackground = useLightBackground();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const history = useHistory();
   const logger = useLogger();
   const location = useLocation();
@@ -306,7 +306,7 @@ export const Doc: React.FC<IProps> = (props) => {
                       </div>
                     </Box>
                   </Grid>
-                  <Hidden mdDown>
+                  <Hidden lgDown>
                     <Grid item lg={3}>
                       <Box
                         pl={2}
@@ -372,16 +372,14 @@ export const Doc: React.FC<IProps> = (props) => {
     const githubHash = pageId ? `#${pageId}` : "";
     return (
       <Box my=".5rem" pb="2rem">
-        <Grid container justify="flex-start">
+        <Grid container justifyContent="flex-start">
           <Grid item>
             <Button
-              color="default"
               component="a"
               startIcon={<EditIcon />}
               target="_blank"
               rel="noreferrer"
-              href={`${props.gitHubLink}${githubHash}`}
-            >
+              href={`${props.gitHubLink}${githubHash}`}>
               Edit this Page
             </Button>
           </Grid>
@@ -396,7 +394,7 @@ export const Doc: React.FC<IProps> = (props) => {
     }
     return (
       <Box>
-        <Grid container spacing={1} justify="space-between">
+        <Grid container spacing={1} justifyContent="space-between">
           <Grid container item sm={12} md spacing={1} alignItems="center">
             <Grid item className={css({ display: "flex" })}>
               {props.author.avatarUrl ? (
@@ -417,7 +415,7 @@ export const Doc: React.FC<IProps> = (props) => {
             sm={12}
             md
             spacing={1}
-            justify={isSmall ? "flex-start" : "flex-end"}
+            justifyContent={isSmall ? "flex-start" : "flex-end"}
             alignItems="center"
           >
             {props.author.items.map((item, index) => {
@@ -482,7 +480,7 @@ export const Doc: React.FC<IProps> = (props) => {
                 onClick={() => {
                   setMobileMenuOpen(true);
                 }}
-              >
+                size="large">
                 <MenuIcon color="inherit" />
               </IconButton>
             </Grid>
@@ -499,7 +497,7 @@ export const Doc: React.FC<IProps> = (props) => {
 
   function renderHeader() {
     return (
-      <Grid container justify="space-between" alignItems="flex-end" spacing={2}>
+      <Grid container justifyContent="space-between" alignItems="flex-end" spacing={2}>
         <Grid item md={7} xs={12} zeroMinWidth>
           {renderTitle()}
         </Grid>
@@ -523,7 +521,7 @@ export const Doc: React.FC<IProps> = (props) => {
         <Grid
           container
           spacing={2}
-          justify={
+          justifyContent={
             previousIndex && !nextIndex
               ? "flex-start"
               : !previousIndex && nextIndex
@@ -532,7 +530,7 @@ export const Doc: React.FC<IProps> = (props) => {
           }
         >
           {previousIndex && (
-            <Grid container item xs={12} sm={6} justify="flex-start">
+            <Grid container item xs={12} sm={6} justifyContent="flex-start">
               <Button
                 fullWidth={isSmall}
                 className={css({
@@ -570,7 +568,7 @@ export const Doc: React.FC<IProps> = (props) => {
             </Grid>
           )}
           {nextIndex && (
-            <Grid container item xs={12} sm={6} justify="flex-end">
+            <Grid container item xs={12} sm={6} justifyContent="flex-end">
               <Button
                 fullWidth={isSmall}
                 className={css({
@@ -682,49 +680,47 @@ export const Doc: React.FC<IProps> = (props) => {
       />
     );
 
-    return (
-      <>
-        <Hidden mdUp>
-          <Drawer
-            anchor="bottom"
-            open={mobileMenuOpen}
-            onClose={() => {
-              setMobileMenuOpen(false);
-            }}
+    return <>
+      <Hidden mdUp>
+        <Drawer
+          anchor="bottom"
+          open={mobileMenuOpen}
+          onClose={() => {
+            setMobileMenuOpen(false);
+          }}
+        >
+          <Box p="2rem">{sideBar}</Box>
+        </Drawer>
+      </Hidden>
+      <Hidden mdDown>
+        <Drawer
+          variant="permanent"
+          anchor="left"
+          open={true}
+          classes={{
+            root: css({
+              width: drawerWidth,
+              flexShrink: 0,
+            }),
+            paper: css({
+              paddingTop: "5.5rem",
+              width: drawerWidth,
+            }),
+          }}
+        >
+          <Box
+            className={css({
+              maxHeight: "calc(100vh - 5.5rem)",
+              overflow: "auto",
+              paddingBottom: "2rem",
+              borderTop: `1px solid ${theme.palette.divider}`,
+            })}
           >
-            <Box p="2rem">{sideBar}</Box>
-          </Drawer>
-        </Hidden>
-        <Hidden smDown>
-          <Drawer
-            variant="permanent"
-            anchor="left"
-            open={true}
-            classes={{
-              root: css({
-                width: drawerWidth,
-                flexShrink: 0,
-              }),
-              paper: css({
-                paddingTop: "5.5rem",
-                width: drawerWidth,
-              }),
-            }}
-          >
-            <Box
-              className={css({
-                maxHeight: "calc(100vh - 5.5rem)",
-                overflow: "auto",
-                paddingBottom: "2rem",
-                borderTop: `1px solid ${theme.palette.divider}`,
-              })}
-            >
-              {sideBar}
-            </Box>
-          </Drawer>
-        </Hidden>
-      </>
-    );
+            {sideBar}
+          </Box>
+        </Drawer>
+      </Hidden>
+    </>;
   }
 
   function renderIsLoading() {

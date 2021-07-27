@@ -218,7 +218,7 @@ export function BlockByType(
 
   function renderBlockAdvancedOptions() {
     return (
-      <Grid container justify="flex-end" spacing={1}>
+      <Grid container justifyContent="flex-end" spacing={1}>
         {block.type === BlockType.PointCounter && (
           <BlockPointCounterActions
             block={block}

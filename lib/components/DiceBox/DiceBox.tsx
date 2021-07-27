@@ -4,7 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Popper from "@material-ui/core/Popper";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
@@ -335,81 +335,79 @@ export function DiceBoxResult(props: {
     }
   );
 
-  return (
-    <>
-      <Grid container justify="flex-start" alignItems="center">
-        {items.map((item, itemIndex) => {
-          const isFirst = itemIndex === 0;
-          const isFate = item.name === "1dF";
-          const options = CommmandSetOptions[item.commandSetId];
-          const diceCommandOptions = DiceCommandOptions[item.name!];
+  return <>
+    <Grid container justifyContent="flex-start" alignItems="center">
+      {items.map((item, itemIndex) => {
+        const isFirst = itemIndex === 0;
+        const isFate = item.name === "1dF";
+        const options = CommmandSetOptions[item.commandSetId];
+        const diceCommandOptions = DiceCommandOptions[item.name!];
 
-          const IconForPool = options.icon;
+        const IconForPool = options.icon;
 
-          return (
-            <React.Fragment key={itemIndex}>
-              {!isFirst && (
-                <Grid
-                  item
+        return (
+          <React.Fragment key={itemIndex}>
+            {!isFirst && (
+              <Grid
+                item
+                className={css({
+                  label: "DiceBoxResult-rollType-DiceCommand-separator",
+                  display: "flex",
+                  margin: "0 4px",
+                  fontSize: ".8rem",
+                })}
+              >
+                {separator}
+              </Grid>
+            )}
+            <Grid item>
+              <Tooltip
+                title={
+                  item.label
+                    ? `${item.commandSetId} (${item.label})`
+                    : item.commandSetId
+                }
+              >
+                <Box
                   className={css({
-                    label: "DiceBoxResult-rollType-DiceCommand-separator",
-                    display: "flex",
-                    margin: "0 4px",
-                    fontSize: ".8rem",
+                    color: item.color ? item.color : undefined,
+                    borderBottom: item.color
+                      ? `3px solid ${item.color}`
+                      : undefined,
                   })}
                 >
-                  {separator}
-                </Grid>
-              )}
-              <Grid item>
-                <Tooltip
-                  title={
-                    item.label
-                      ? `${item.commandSetId} (${item.label})`
-                      : item.commandSetId
-                  }
-                >
-                  <Box
-                    className={css({
-                      color: item.color ? item.color : undefined,
-                      borderBottom: item.color
-                        ? `3px solid ${item.color}`
-                        : undefined,
-                    })}
-                  >
-                    <Grid container alignItems="center">
-                      <Grid item>
-                        <Box
-                          className={css({
-                            label: "DiceBoxResult-rollType-DiceCommand-value",
-                            fontFamily: isFate ? FontFamily.Fate : "inherit",
-                            marginLeft: isFate ? ".2rem" : undefined,
-                            verticalAlign: "middle",
-                          })}
-                        >
-                          {diceCommandOptions.formatDetailedResult(item.value)}
-                        </Box>
-                      </Grid>
-                      {!isFate && shouldListResult && (
-                        <Grid item>
-                          <IconForPool
-                            className={css({
-                              display: "flex",
-                              marginLeft: "4px",
-                            })}
-                          />
-                        </Grid>
-                      )}
+                  <Grid container alignItems="center">
+                    <Grid item>
+                      <Box
+                        className={css({
+                          label: "DiceBoxResult-rollType-DiceCommand-value",
+                          fontFamily: isFate ? FontFamily.Fate : "inherit",
+                          marginLeft: isFate ? ".2rem" : undefined,
+                          verticalAlign: "middle",
+                        })}
+                      >
+                        {diceCommandOptions.formatDetailedResult(item.value)}
+                      </Box>
                     </Grid>
-                  </Box>
-                </Tooltip>
-              </Grid>
-            </React.Fragment>
-          );
-        })}
-      </Grid>
-    </>
-  );
+                    {!isFate && shouldListResult && (
+                      <Grid item>
+                        <IconForPool
+                          className={css({
+                            display: "flex",
+                            marginLeft: "4px",
+                          })}
+                        />
+                      </Grid>
+                    )}
+                  </Grid>
+                </Box>
+              </Tooltip>
+            </Grid>
+          </React.Fragment>
+        );
+      })}
+    </Grid>
+  </>;
 }
 
 export function DiceBonusLabel(props: {

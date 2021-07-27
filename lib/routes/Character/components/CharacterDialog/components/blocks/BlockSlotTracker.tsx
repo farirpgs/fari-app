@@ -90,117 +90,115 @@ export function BlockSlotTracker(
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
 
-  return (
-    <>
-      <Box>
-        {(!props.readonly || isLabelVisible) && (
-          <Box>
-            <Grid container justify={"center"} wrap="nowrap" spacing={1}>
-              {!props.readonly && (
-                <>
-                  <Grid item>
-                    <Tooltip title={t("character-dialog.control.remove-box")}>
-                      <IconButton
-                        size="small"
-                        data-cy={`${props.dataCy}.remove-box`}
-                        onClick={() => {
-                          handleRemoveBox();
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                </>
-              )}
-              {isLabelVisible && (
-                <Grid item className={css({ minWidth: "4rem" })}>
-                  <FateLabel
-                    display="inline"
-                    align={props.readonly ? "inherit" : "center"}
-                  >
+  return <>
+    <Box>
+      {(!props.readonly || isLabelVisible) && (
+        <Box>
+          <Grid container justifyContent={"center"} wrap="nowrap" spacing={1}>
+            {!props.readonly && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.remove-box")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props.dataCy}.remove-box`}
+                      onClick={() => {
+                        handleRemoveBox();
+                      }}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+            {isLabelVisible && (
+              <Grid item className={css({ minWidth: "4rem" })}>
+                <FateLabel
+                  display="inline"
+                  align={props.readonly ? "inherit" : "center"}
+                >
+                  <ContentEditable
+                    data-cy={`${props.dataCy}.label`}
+                    readonly={props.readonly}
+                    border={props.advanced}
+                    value={props.block.label}
+                    onChange={(value) => {
+                      props.onLabelChange(value);
+                    }}
+                  />
+                </FateLabel>
+              </Grid>
+            )}
+            {!props.readonly && (
+              <>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.add-box")}>
+                    <IconButton
+                      data-cy={`${props.dataCy}.add-box`}
+                      size="small"
+                      onClick={() => {
+                        handleAddBox();
+                      }}
+                    >
+                      <AddCircleOutlineIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </Grid>
+        </Box>
+      )}
+
+      <Grid container justifyContent="center" spacing={1}>
+        {blockValue.map((box, boxIndex) => {
+          const isBoxLabelVisible =
+            !!previewContentEditable({ value: box.label }) || props.advanced;
+
+          return (
+            <Grid item key={boxIndex}>
+              <Box
+                className={css({
+                  display: "flex",
+                  justifyContent: "center",
+                })}
+              >
+                <Checkbox
+                  data-cy={`${props.dataCy}.box.${boxIndex}.value`}
+                  color="primary"
+                  icon={<RadioButtonUncheckedIcon />}
+                  checkedIcon={<CheckCircleIcon />}
+                  className={css({ padding: "0" })}
+                  checked={box.checked}
+                  disabled={props.readonly}
+                  onChange={() => {
+                    handleToggleBox(boxIndex);
+                  }}
+                />
+              </Box>
+              {isBoxLabelVisible && (
+                <Box>
+                  <FateLabel className={css({ textAlign: "center" })}>
                     <ContentEditable
-                      data-cy={`${props.dataCy}.label`}
+                      data-cy={`${props.dataCy}.box.${boxIndex}.label`}
                       readonly={props.readonly}
-                      border={props.advanced}
-                      value={props.block.label}
+                      border={!props.readonly}
+                      value={box.label}
+                      // because of useLazyState above
+                      noDelay
                       onChange={(value) => {
-                        props.onLabelChange(value);
+                        handleSetBoxLabel(boxIndex, value);
                       }}
                     />
                   </FateLabel>
-                </Grid>
-              )}
-              {!props.readonly && (
-                <>
-                  <Grid item>
-                    <Tooltip title={t("character-dialog.control.add-box")}>
-                      <IconButton
-                        data-cy={`${props.dataCy}.add-box`}
-                        size="small"
-                        onClick={() => {
-                          handleAddBox();
-                        }}
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                </>
+                </Box>
               )}
             </Grid>
-          </Box>
-        )}
-
-        <Grid container justify="center" spacing={1}>
-          {blockValue.map((box, boxIndex) => {
-            const isBoxLabelVisible =
-              !!previewContentEditable({ value: box.label }) || props.advanced;
-
-            return (
-              <Grid item key={boxIndex}>
-                <Box
-                  className={css({
-                    display: "flex",
-                    justifyContent: "center",
-                  })}
-                >
-                  <Checkbox
-                    data-cy={`${props.dataCy}.box.${boxIndex}.value`}
-                    color="primary"
-                    icon={<RadioButtonUncheckedIcon />}
-                    checkedIcon={<CheckCircleIcon />}
-                    className={css({ padding: "0" })}
-                    checked={box.checked}
-                    disabled={props.readonly}
-                    onChange={() => {
-                      handleToggleBox(boxIndex);
-                    }}
-                  />
-                </Box>
-                {isBoxLabelVisible && (
-                  <Box>
-                    <FateLabel className={css({ textAlign: "center" })}>
-                      <ContentEditable
-                        data-cy={`${props.dataCy}.box.${boxIndex}.label`}
-                        readonly={props.readonly}
-                        border={!props.readonly}
-                        value={box.label}
-                        // because of useLazyState above
-                        noDelay
-                        onChange={(value) => {
-                          handleSetBoxLabel(boxIndex, value);
-                        }}
-                      />
-                    </FateLabel>
-                  </Box>
-                )}
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
-    </>
-  );
+          );
+        })}
+      </Grid>
+    </Box>
+  </>;
 }
 BlockSlotTracker.displayName = "BlockSlotTracker";

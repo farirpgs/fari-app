@@ -12,12 +12,12 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Snackbar from "@material-ui/core/Snackbar";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ExportIcon from "@material-ui/icons/GetApp";
-import Alert from "@material-ui/lab/Alert";
+import Alert from '@material-ui/core/Alert';
 import React, { useEffect, useState } from "react";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -61,7 +61,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   };
 
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const [deletedSnack, setDeletedSnack] = useState(false);
   const [deletedObject, setDeletedObject] = useState<T | undefined>(undefined);
   const logger = useLogger();
@@ -160,7 +160,7 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
   function renderActions() {
     return (
       <Box padding={0.5}>
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={1} justifyContent="center">
           <Grid item>
             <Button
               color="primary"
@@ -229,105 +229,103 @@ export const Manager = <T extends IBaseItem>(props: IProps<T>) => {
         };
       }, {} as Record<string, Array<IGroupedItem>>);
 
-    return (
-      <>
-        {Object.keys(groups).map((groupName, index) => {
-          const groupItems = groups[groupName];
+    return <>
+      {Object.keys(groups).map((groupName, index) => {
+        const groupItems = groups[groupName];
 
-          return (
-            <List
-              key={`${groupName}-${index}`}
-              subheader={
-                <ListSubheader component="div">
-                  <FateLabel
-                    variant="caption"
-                    noWrap
-                    display="block"
-                    className={css({ marginTop: "1rem" })}
-                  >
-                    {groupName || t("manager.ungrouped")}
-                  </FateLabel>
-                </ListSubheader>
-              }
-            >
-              {groupItems.map((element) => {
-                const { item, vm: vm } = element;
-                const abrev = listItem.getAbreviation(vm.name);
-                const backgroundColor = listItem.getColor(abrev);
-                const color = theme.palette.getContrastText(backgroundColor);
+        return (
+          <List
+            key={`${groupName}-${index}`}
+            subheader={
+              <ListSubheader component="div">
+                <FateLabel
+                  variant="caption"
+                  noWrap
+                  display="block"
+                  className={css({ marginTop: "1rem" })}
+                >
+                  {groupName || t("manager.ungrouped")}
+                </FateLabel>
+              </ListSubheader>
+            }
+          >
+            {groupItems.map((element) => {
+              const { item, vm: vm } = element;
+              const abrev = listItem.getAbreviation(vm.name);
+              const backgroundColor = listItem.getColor(abrev);
+              const color = theme.palette.getContrastText(backgroundColor);
 
-                return (
-                  <ListItem
-                    button
-                    key={vm.id}
-                    onClick={() => {
-                      onItemClick(item);
-                    }}
-                    className={css({
-                      paddingRight: "102px",
-                    })}
-                  >
-                    <ListItemAvatar>
-                      <Avatar
-                        className={css({
-                          color: color,
-                          backgroundColor: backgroundColor,
-                        })}
-                      >
-                        {abrev}
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <ContentEditablePreview value={vm.name} length={30} />
-                      }
-                      secondary={listItem.formatDate(vm.lastUpdated)}
-                    />
-                    <ListItemSecondaryAction>
-                      <Grid container spacing={1}>
-                        <Grid item>
-                          <IconButton
-                            edge="start"
-                            data-cy="manager.export"
-                            onClick={() => {
-                              onExport(item);
-                            }}
-                          >
-                            <ExportIcon />
-                          </IconButton>
-                        </Grid>
-                        <Grid item>
-                          <IconButton
-                            edge="end"
-                            data-cy="manager.duplicate"
-                            onClick={() => {
-                              onDuplicate(item);
-                            }}
-                          >
-                            <FileCopyIcon />
-                          </IconButton>
-                        </Grid>
-                        <Grid item>
-                          <IconButton
-                            edge="end"
-                            data-cy="manager.delete"
-                            onClick={() => {
-                              onDelete(item);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Grid>
+              return (
+                <ListItem
+                  button
+                  key={vm.id}
+                  onClick={() => {
+                    onItemClick(item);
+                  }}
+                  className={css({
+                    paddingRight: "102px",
+                  })}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      className={css({
+                        color: color,
+                        backgroundColor: backgroundColor,
+                      })}
+                    >
+                      {abrev}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <ContentEditablePreview value={vm.name} length={30} />
+                    }
+                    secondary={listItem.formatDate(vm.lastUpdated)}
+                  />
+                  <ListItemSecondaryAction>
+                    <Grid container spacing={1}>
+                      <Grid item>
+                        <IconButton
+                          edge="start"
+                          data-cy="manager.export"
+                          onClick={() => {
+                            onExport(item);
+                          }}
+                          size="large">
+                          <ExportIcon />
+                        </IconButton>
                       </Grid>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
-              })}
-            </List>
-          );
-        })}
-      </>
-    );
+                      <Grid item>
+                        <IconButton
+                          edge="end"
+                          data-cy="manager.duplicate"
+                          onClick={() => {
+                            onDuplicate(item);
+                          }}
+                          size="large">
+                          <FileCopyIcon />
+                        </IconButton>
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          edge="end"
+                          data-cy="manager.delete"
+                          onClick={() => {
+                            onDelete(item);
+                          }}
+                          size="large">
+                          <DeleteIcon />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+          </List>
+        );
+      })}
+    </>;
   }
 };
 

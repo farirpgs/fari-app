@@ -5,14 +5,14 @@ import Container, { ContainerProps } from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
+import { ThemeProvider, Theme, StyledEngineProvider, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import HelpIcon from "@material-ui/icons/Help";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import Rating from "@material-ui/lab/Rating";
+import Rating from '@material-ui/core/Rating';
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import discord from "../../../images/services/discord.png";
@@ -33,6 +33,13 @@ import { useLightBackground } from "../../hooks/useLightBackground/useLightBackg
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { WikiItems } from "../SrdsRoute/SrdsRoute";
+
+
+declare module '@material-ui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 const Patrons = [
   "James Micu",
@@ -87,7 +94,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <Box
             className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
           >
-            <Grid container justify="center" alignItems="center" spacing={3}>
+            <Grid container justifyContent="center" alignItems="center" spacing={3}>
               <Grid item>
                 <img alt="Fari" width="70px" src={Images.app} />
               </Grid>
@@ -211,7 +218,7 @@ export const HomeRoute: React.FC<{}> = () => {
           </Typography>
         </Box>
         <Box mb="1rem">
-          <Grid container justify="center" spacing={2} alignItems="center">
+          <Grid container justifyContent="center" spacing={2} alignItems="center">
             <Grid item>
               <Kofi />
             </Grid>
@@ -228,7 +235,7 @@ export const HomeRoute: React.FC<{}> = () => {
     return (
       <Box textAlign="center">
         <Box mb="2rem">
-          <Grid container spacing={1} justify="center">
+          <Grid container spacing={1} justifyContent="center">
             {Patrons.map((patron, i) => {
               const isLast = i === Patrons.length - 1;
 
@@ -248,7 +255,7 @@ export const HomeRoute: React.FC<{}> = () => {
           </Grid>
         </Box>
         <Box mb="2rem">
-          <Grid container item justify="center">
+          <Grid container item justifyContent="center">
             <Patreon />
           </Grid>
         </Box>
@@ -269,7 +276,7 @@ export const HomeRoute: React.FC<{}> = () => {
         })}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={4} justify="center">
+          <Grid container spacing={4} justifyContent="center">
             {Sponsors.map((company, i) => {
               return (
                 <Grid item key={i}>
@@ -290,7 +297,7 @@ export const HomeRoute: React.FC<{}> = () => {
   function renderPlayButtons() {
     return (
       <Box>
-        <Grid container justify="center" spacing={8} alignItems="flex-start">
+        <Grid container justifyContent="center" spacing={8} alignItems="flex-start">
           {isWebRTCSupported() && (
             <Grid
               item
@@ -326,7 +333,7 @@ export const HomeRoute: React.FC<{}> = () => {
             </Grid>
           )}
 
-          <Hidden smDown>
+          <Hidden mdDown>
             <Divider
               orientation="vertical"
               flexItem
@@ -529,8 +536,8 @@ export const HomeRoute: React.FC<{}> = () => {
 
   function renderCommunity() {
     return (
-      <Grid container justify="center" alignItems="baseline" spacing={2}>
-        <Grid item md={6} xs={12} container justify="center" spacing={2}>
+      <Grid container justifyContent="center" alignItems="baseline" spacing={2}>
+        <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
             <QuestionAnswerIcon
               className={css({
@@ -551,7 +558,7 @@ export const HomeRoute: React.FC<{}> = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid item md={6} xs={12} container justify="center" spacing={2}>
+        <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
             <img
               src={discord}
@@ -581,7 +588,7 @@ export const HomeRoute: React.FC<{}> = () => {
 
   function renderOpenSource() {
     return (
-      <Grid container justify="center" spacing={2}>
+      <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={12}>
           <Typography>
             {t("home-route.sections.open-source.description")}
@@ -812,116 +819,116 @@ function DarkBox(props: ILightBoxProps & { linear?: boolean }) {
   const highlight = useHighlight();
 
   return (
-    <ThemeProvider theme={highlight.highlightTheme}>
-      <LightBox
-        className={cx(
-          css({
-            "label": "DarkBox",
-            "background": linear
-              ? highlight.linearBackground
-              : highlight.radialBackground,
-            "textAlign": "center",
-            "color": highlight.highlightTheme.palette.text.primary,
-            "& a": {
-              color: highlight.highlightTheme.palette.text.primary,
-            },
-          }),
-          className
-        )}
-        {...rest}
-      >
-        {children}
-      </LightBox>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={highlight.highlightTheme}>
+        <LightBox
+          className={cx(
+            css({
+              "label": "DarkBox",
+              "background": linear
+                ? highlight.linearBackground
+                : highlight.radialBackground,
+              "textAlign": "center",
+              "color": highlight.highlightTheme.palette.text.primary,
+              "& a": {
+                color: highlight.highlightTheme.palette.text.primary,
+              },
+            }),
+            className
+          )}
+          {...rest}
+        >
+          {children}
+        </LightBox>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 
 function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
   const theme = useTheme();
   const lightBackground = useLightBackground();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
 
-  return (
-    <>
-      <Grid container justify="center" spacing={6}>
-        {props.cards.map((card, index) => {
-          return (
-            <Grid key={index} item xs={12} sm={6} md={4}>
-              <Box
-                className={css({
-                  "label": "HomeRouteCards-card",
-                  "padding": "2.5rem",
-                  "height": "100%",
-                  "borderRadius": "4px",
-                  "background": lightBackground,
-                  "border": `1px solid ${theme.palette.divider}`,
-                  "width": "100%",
-                  "transition": theme.transitions.create([
-                    "transform",
-                    "box-shadow",
-                  ]),
-                  "&:hover": {
-                    transform: isSmall ? undefined : "scale(1.005)",
-                    boxShadow: isSmall ? undefined : theme.shadows[1],
-                  },
-                })}
-              >
-                <Box display="flex" justifyContent="center" mb="1rem">
-                  <card.icon
-                    className={css({
-                      width: "4rem",
-                      height: "4rem",
-                    })}
-                  />
-                </Box>
-                <Box mb="1rem">
-                  <FateLabel
-                    variant="h5"
-                    align="center"
-                    color="textPrimary"
-                    uppercase={false}
-                  >
-                    {card.label}
-                  </FateLabel>
-                </Box>
-                <Box>
-                  <Typography className={css({ textAlign: "center" })}>
-                    {card.description}
-                  </Typography>
-                </Box>
-                <Box my="2rem">
-                  <Divider light />
-                </Box>
-                <Box display="flex" justifyContent="center">
-                  {card.onClick && (
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      onClick={(e) => {
-                        e.preventDefault;
-                        card.onClick?.();
-                      }}
-                    >
-                      {card.ctaLabel}
-                    </Button>
-                  )}
-                  {card.to && (
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      size="large"
-                      component={RouterLink}
-                      to={card.to}
-                    >
-                      {card.ctaLabel}
-                    </Button>
-                  )}
-                </Box>
+  return <>
+    <Grid container justifyContent="center" spacing={6}>
+      {props.cards.map((card, index) => {
+        return (
+          <Grid key={index} item xs={12} sm={6} md={4}>
+            <Box
+              className={css({
+                "label": "HomeRouteCards-card",
+                "padding": "2.5rem",
+                "height": "100%",
+                "borderRadius": "4px",
+                "background": lightBackground,
+                "border": `1px solid ${theme.palette.divider}`,
+                "width": "100%",
+                "transition": theme.transitions.create([
+                  "transform",
+                  "box-shadow",
+                ]),
+                "&:hover": {
+                  transform: isSmall ? undefined : "scale(1.005)",
+                  boxShadow: isSmall ? undefined : theme.shadows[1],
+                },
+              })}
+            >
+              <Box display="flex" justifyContent="center" mb="1rem">
+                <card.icon
+                  className={css({
+                    width: "4rem",
+                    height: "4rem",
+                  })}
+                />
               </Box>
-            </Grid>
-          );
-        })}
-      </Grid>
-    </>
-  );
+              <Box mb="1rem">
+                <FateLabel
+                  variant="h5"
+                  align="center"
+                  color="textPrimary"
+                  uppercase={false}
+                >
+                  {card.label}
+                </FateLabel>
+              </Box>
+              <Box>
+                <Typography className={css({ textAlign: "center" })}>
+                  {card.description}
+                </Typography>
+              </Box>
+              <Box my="2rem">
+                <Divider light />
+              </Box>
+              <Box display="flex" justifyContent="center">
+                {card.onClick && (
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={(e) => {
+                      e.preventDefault;
+                      card.onClick?.();
+                    }}
+                  >
+                    {card.ctaLabel}
+                  </Button>
+                )}
+                {card.to && (
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    size="large"
+                    component={RouterLink}
+                    to={card.to}
+                  >
+                    {card.ctaLabel}
+                  </Button>
+                )}
+              </Box>
+            </Box>
+          </Grid>
+        );
+      })}
+    </Grid>
+  </>;
 }

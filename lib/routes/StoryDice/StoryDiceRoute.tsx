@@ -77,7 +77,7 @@ export function StoryDice() {
   return (
     <Box>
       <Box mb="2rem">
-        <Grid container justify="center" alignItems="center" spacing={2}>
+        <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item>
             <Button color="primary" variant="contained" onClick={handleRollAll}>
               Roll All
@@ -85,7 +85,7 @@ export function StoryDice() {
           </Grid>
         </Grid>
       </Box>
-      <Grid container justify="center" alignItems="center" spacing={2}>
+      <Grid container justifyContent="center" alignItems="center" spacing={2}>
         {Object.keys(StoryDiceIcons).map((diceName) => {
           const currentSide = diceNameAndIcon[diceName];
           return (

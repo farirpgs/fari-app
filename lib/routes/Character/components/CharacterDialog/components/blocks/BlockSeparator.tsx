@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import React from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
@@ -19,13 +19,48 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
   const dividerHeight = "3px";
   const dividerMargin = ".5rem 0";
 
-  return (
-    <>
-      <Box>
-        <Grid container spacing={1} justify="space-between" wrap="nowrap">
-          <Grid item xs>
-            <Box>
-              <Grid container spacing={1} alignItems="center">
+  return <>
+    <Box>
+      <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
+        <Grid item xs>
+          <Box>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs>
+                <Divider
+                  className={css({
+                    height: dividerHeight,
+                    margin: dividerMargin,
+                    backgroundColor: theme.palette.text.secondary,
+                  })}
+                />
+              </Grid>
+              {props.block.meta?.hasLabel && (
+                <>
+                  <Grid item>{"//"}</Grid>
+                  <Grid item>
+                    <FateLabel
+                      align="center"
+                      className={css({
+                        minWidth: "3rem",
+                        fontSize: "1.1rem",
+                        display: "flex",
+                      })}
+                    >
+                      <ContentEditable
+                        readonly={!props.advanced}
+                        border={props.advanced}
+                        data-cy={`${props.dataCy}.label`}
+                        value={props.block.label}
+                        onChange={(value) => {
+                          props.onLabelChange(value);
+                        }}
+                      />
+                    </FateLabel>
+                  </Grid>
+                  <Grid item>{"//"}</Grid>
+                </>
+              )}
+              {props.block.meta?.hasLabel && (
                 <Grid item xs>
                   <Divider
                     className={css({
@@ -35,50 +70,13 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                     })}
                   />
                 </Grid>
-                {props.block.meta?.hasLabel && (
-                  <>
-                    <Grid item>{"//"}</Grid>
-                    <Grid item>
-                      <FateLabel
-                        align="center"
-                        className={css({
-                          minWidth: "3rem",
-                          fontSize: "1.1rem",
-                          display: "flex",
-                        })}
-                      >
-                        <ContentEditable
-                          readonly={!props.advanced}
-                          border={props.advanced}
-                          data-cy={`${props.dataCy}.label`}
-                          value={props.block.label}
-                          onChange={(value) => {
-                            props.onLabelChange(value);
-                          }}
-                        />
-                      </FateLabel>
-                    </Grid>
-                    <Grid item>{"//"}</Grid>
-                  </>
-                )}
-                {props.block.meta?.hasLabel && (
-                  <Grid item xs>
-                    <Divider
-                      className={css({
-                        height: dividerHeight,
-                        margin: dividerMargin,
-                        backgroundColor: theme.palette.text.secondary,
-                      })}
-                    />
-                  </Grid>
-                )}
-              </Grid>
-            </Box>
-          </Grid>
+              )}
+            </Grid>
+          </Box>
         </Grid>
-      </Box>
-    </>
-  );
+      </Grid>
+    </Box>
+  </>;
 }
 BlockSeparator.displayName = "BlockSeparator";
 

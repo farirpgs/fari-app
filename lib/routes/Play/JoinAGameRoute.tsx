@@ -126,7 +126,7 @@ export const JoinAGame: React.FC<{
                   />
                 </Box>
                 <Box>
-                  <Grid container justify="flex-end">
+                  <Grid container justifyContent="flex-end">
                     <Grid item>
                       <Button
                         type="submit"

@@ -14,8 +14,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
-import { darken } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, useTheme } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
@@ -30,8 +29,8 @@ import MovieIcon from "@material-ui/icons/Movie";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
-import Alert from "@material-ui/lab/Alert";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Alert from '@material-ui/core/Alert';
+import Autocomplete from '@material-ui/core/Autocomplete';
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -329,7 +328,7 @@ export const Session: React.FC<IProps> = (props) => {
                           logger.info("Scene:onFireGoodConfetti");
                         }}
                         color="primary"
-                      >
+                        size="large">
                         <Icons.PartyPopper
                           className={css({ width: "2rem", height: "2rem" })}
                           htmlColor={darken(theme.palette.success.main, 0.2)}
@@ -345,7 +344,7 @@ export const Session: React.FC<IProps> = (props) => {
                           logger.info("Scene:onFireBadConfetti");
                         }}
                         color="primary"
-                      >
+                        size="large">
                         <Icons.PartyPopper
                           className={css({ width: "2rem", height: "2rem" })}
                           htmlColor={darken(theme.palette.error.main, 0.2)}
@@ -1004,7 +1003,7 @@ export const Session: React.FC<IProps> = (props) => {
 
     return (
       <Box pb="1rem">
-        <Grid container spacing={1} justify="space-evenly" alignItems="center">
+        <Grid container spacing={1} justifyContent="space-evenly" alignItems="center">
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
           )}
@@ -1060,7 +1059,7 @@ export function Scene(props: {
   const theme = useTheme();
   const logger = useLogger();
   const { t } = useTranslate();
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSMAndDown = useMediaQuery(theme.breakpoints.down('md'));
   const scenesManager = useContext(ScenesContext);
   const myBinderManager = useContext(MyBinderContext);
 
@@ -1129,7 +1128,7 @@ export function Scene(props: {
     return (
       <Box>
         <Box mb="1rem">
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <Typography variant="h6" color="textSecondary">
                 {"No Scene Currently in Play"}
@@ -1138,12 +1137,12 @@ export function Scene(props: {
           </Grid>
         </Box>
         <Box mb="4rem">
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             {renderSceneActionGridItems()}
           </Grid>
         </Box>
         <Box>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <img
                 src="https://img.icons8.com/plasticine/100/000000/alps.png"
@@ -1244,7 +1243,7 @@ export function Scene(props: {
           <Box mb="1rem">
             <Grid
               container
-              justify={props.canLoad ? "flex-start" : "center"}
+              justifyContent={props.canLoad ? "flex-start" : "center"}
               spacing={2}
             >
               {renderSceneActionGridItems()}
@@ -1282,95 +1281,93 @@ export function Scene(props: {
   }
 
   function renderSceneNameAndGroup() {
-    return (
-      <>
-        <Box mb=".5rem">
-          <FateLabel
-            variant="h4"
-            uppercase={false}
-            className={css({
-              borderBottom: `1px solid ${theme.palette.divider}`,
-              textAlign: "center",
-            })}
+    return <>
+      <Box mb=".5rem">
+        <FateLabel
+          variant="h4"
+          uppercase={false}
+          className={css({
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            textAlign: "center",
+          })}
+        >
+          <ContentEditable
+            autoFocus
+            data-cy="scene.name"
+            value={sceneManager.state.scene?.name ?? ""}
+            readonly={props.readonly}
+            onChange={(value) => {
+              sceneManager.actions.updateName(value);
+            }}
+          />
+        </FateLabel>
+        <FormHelperText className={css({ textAlign: "right" })}>
+          {t("play-route.scene-name")}
+        </FormHelperText>
+      </Box>
+      <Collapse in={!!(sceneManager.state.scene?.name ?? "")}>
+        <Box mb="1rem">
+          <Grid
+            container
+            spacing={2}
+            wrap="nowrap"
+            justifyContent="center"
+            alignItems="flex-end"
           >
-            <ContentEditable
-              autoFocus
-              data-cy="scene.name"
-              value={sceneManager.state.scene?.name ?? ""}
-              readonly={props.readonly}
-              onChange={(value) => {
-                sceneManager.actions.updateName(value);
-              }}
-            />
-          </FateLabel>
-          <FormHelperText className={css({ textAlign: "right" })}>
-            {t("play-route.scene-name")}
-          </FormHelperText>
-        </Box>
-        <Collapse in={!!(sceneManager.state.scene?.name ?? "")}>
-          <Box mb="1rem">
-            <Grid
-              container
-              spacing={2}
-              wrap="nowrap"
-              justify="center"
-              alignItems="flex-end"
-            >
-              <Grid item>
-                <FateLabel>{t("play-route.group")}</FateLabel>
-              </Grid>
-              <Grid item xs={8} sm={4}>
-                <LazyState
-                  value={sceneManager.state.scene?.group}
-                  delay={750}
-                  onChange={(newGroup) => {
-                    sceneManager.actions.setGroup(newGroup);
-                  }}
-                  render={([lazyGroup, setLazyGroup]) => {
-                    return (
-                      <Autocomplete
-                        freeSolo
-                        options={scenesManager.state.groups.filter((g) => {
-                          const currentGroup = lazyGroup ?? "";
-                          return g.toLowerCase().includes(currentGroup);
-                        })}
-                        value={lazyGroup ?? ""}
-                        onChange={(event, newValue) => {
-                          setLazyGroup(newValue || undefined);
-                        }}
-                        inputValue={lazyGroup ?? ""}
-                        onInputChange={(event, newInputValue) => {
-                          setLazyGroup(newInputValue);
-                        }}
-                        disabled={props.readonly}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="standard"
-                            InputProps={{
-                              ...params.InputProps,
-                              disableUnderline: true,
-                            }}
-                            data-cy="scene.group"
-                            inputProps={{
-                              ...params.inputProps,
-                              className: css({ padding: "2px" }),
-                            }}
-                            className={css({
-                              borderBottom: `1px solid ${theme.palette.divider}`,
-                            })}
-                          />
-                        )}
-                      />
-                    );
-                  }}
-                />
-              </Grid>
+            <Grid item>
+              <FateLabel>{t("play-route.group")}</FateLabel>
             </Grid>
-          </Box>
-        </Collapse>
-      </>
-    );
+            <Grid item xs={8} sm={4}>
+              <LazyState
+                value={sceneManager.state.scene?.group}
+                delay={750}
+                onChange={(newGroup) => {
+                  sceneManager.actions.setGroup(newGroup);
+                }}
+                render={([lazyGroup, setLazyGroup]) => {
+                  return (
+                    <Autocomplete
+                      freeSolo
+                      options={scenesManager.state.groups.filter((g) => {
+                        const currentGroup = lazyGroup ?? "";
+                        return g.toLowerCase().includes(currentGroup);
+                      })}
+                      value={lazyGroup ?? ""}
+                      onChange={(event, newValue) => {
+                        setLazyGroup(newValue || undefined);
+                      }}
+                      inputValue={lazyGroup ?? ""}
+                      onInputChange={(event, newInputValue) => {
+                        setLazyGroup(newInputValue);
+                      }}
+                      disabled={props.readonly}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="standard"
+                          InputProps={{
+                            ...params.InputProps,
+                            disableUnderline: true,
+                          }}
+                          data-cy="scene.group"
+                          inputProps={{
+                            ...params.inputProps,
+                            className: css({ padding: "2px" }),
+                          }}
+                          className={css({
+                            borderBottom: `1px solid ${theme.palette.divider}`,
+                          })}
+                        />
+                      )}
+                    />
+                  );
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </Collapse>
+    </>;
   }
   function renderSceneNotes() {
     return (
@@ -1406,7 +1403,7 @@ export function Scene(props: {
       <Box>
         <Box>{renderGMIndexCardActions(type)}</Box>
         <Box mb="2rem">
-          <Grid container spacing={1} justify="center" alignItems="flex-end">
+          <Grid container spacing={1} justifyContent="center" alignItems="flex-end">
             <Grid item>
               <FormControl>
                 <InputLabel>{t("play-route.sort")}</InputLabel>
@@ -1645,7 +1642,7 @@ export function Scene(props: {
     }
     return (
       <Box mb="1rem">
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={1} justifyContent="center">
           <Grid item>
             <ButtonGroup
               color="default"

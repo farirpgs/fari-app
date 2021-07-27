@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Tooltip from "@material-ui/core/Tooltip";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -79,7 +79,7 @@ export const SheetHeader: React.FC<{
     <Box className={sheetHeaderClassName}>
       <Grid
         container
-        justify="space-between"
+        justifyContent="space-between"
         wrap="nowrap"
         spacing={1}
         alignItems="center"

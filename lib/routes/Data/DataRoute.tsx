@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
+import { ThemeProvider, Theme, StyledEngineProvider, useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { DataGrid, GridRowId } from "@material-ui/data-grid";
 import produce from "immer";
@@ -31,6 +31,13 @@ import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { IScene } from "../../hooks/useScene/IScene";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+
+
+declare module '@material-ui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 enum ImportMode {
   Import = "Import",
@@ -390,20 +397,22 @@ export const DataRoute: React.FC = () => {
             </Grid>
 
             <Grid item>
-              <ThemeProvider theme={errorTheme}>
-                <Button
-                  color="primary"
-                  variant="outlined"
-                  disabled={!selections.length}
-                  onClick={() => {
-                    if (window.confirm(t("data-route.delete-confirmation"))) {
-                      handleOnDelete();
-                    }
-                  }}
-                >
-                  {t("data-route.delete")}
-                </Button>
-              </ThemeProvider>
+              <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={errorTheme}>
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    disabled={!selections.length}
+                    onClick={() => {
+                      if (window.confirm(t("data-route.delete-confirmation"))) {
+                        handleOnDelete();
+                      }
+                    }}
+                  >
+                    {t("data-route.delete")}
+                  </Button>
+                </ThemeProvider>
+              </StyledEngineProvider>
             </Grid>
             <Grid item>
               {t("data-route.total-size")}

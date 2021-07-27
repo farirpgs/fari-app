@@ -103,7 +103,7 @@ export function DiceMenu(props: {
 
                     {(props.onClear || props.onCtaClick) && (
                       <Box mt="1.5rem">
-                        <Grid container justify="center" spacing={2}>
+                        <Grid container justifyContent="center" spacing={2}>
                           {props.showPoolToggle && (
                             <Grid item>
                               <FormControlLabel
@@ -128,11 +128,7 @@ export function DiceMenu(props: {
                           )}
                           {props.onClear && (
                             <Grid item>
-                              <Button
-                                color="default"
-                                variant="text"
-                                onClick={props.onClear}
-                              >
+                              <Button variant="text" onClick={props.onClear}>
                                 {"Reset"}
                               </Button>
                             </Grid>
@@ -180,84 +176,82 @@ export function DiceMenu(props: {
   }
 
   function renderOptions(options: Array<IDiceCommandSetOption>) {
-    return (
-      <>
-        <Box pb=".5rem">
-          <Grid container spacing={1} justify="center">
-            {options.map((o) => {
-              const badgeContent = props.commands.reduce((acc, curr) => {
-                if (o.label === curr.label) {
-                  return acc + 1;
-                }
-                return acc;
-              }, 0);
-              return (
-                <Grid item key={o.label}>
-                  <Grid container justify="center" direction="column">
-                    <Grid container item justify="center">
-                      <IconButton
-                        onClick={() => {
-                          props.onDiceCommandChange((t) => {
-                            return [...t, o];
-                          });
-                        }}
-                        onContextMenu={(e) => {
-                          e.preventDefault();
-                          props.onDiceCommandChange((draft) => {
-                            const indexToRemove = draft.findIndex(
-                              (selectedOption) =>
-                                selectedOption.label === o.label
-                            );
-                            if (indexToRemove !== -1) {
-                              draft.splice(indexToRemove, 1);
-                            }
-                            return [...draft];
-                          });
-                        }}
-                        className={css({
-                          background:
-                            badgeContent > 0
-                              ? theme.palette.action.hover
-                              : "inherit",
-                        })}
-                      >
-                        <Badge badgeContent={badgeContent} color="primary">
-                          <o.icon
-                            className={css({
-                              fontSize: "3rem",
-                              color:
-                                badgeContent > 0
-                                  ? theme.palette.primary.main
-                                  : theme.palette.text.secondary,
-                            })}
-                          />
-                        </Badge>
-                      </IconButton>
-                    </Grid>
-                    <Grid container item justify="center">
-                      <Typography
-                        className={css({
-                          fontWeight:
-                            badgeContent > 0
-                              ? theme.typography.fontWeightBold
-                              : "inherit",
-                          color:
-                            badgeContent > 0
-                              ? theme.palette.text.primary
-                              : theme.palette.text.secondary,
-                          textAlign: "center",
-                        })}
-                      >
-                        {o.label}
-                      </Typography>
-                    </Grid>
+    return <>
+      <Box pb=".5rem">
+        <Grid container spacing={1} justifyContent="center">
+          {options.map((o) => {
+            const badgeContent = props.commands.reduce((acc, curr) => {
+              if (o.label === curr.label) {
+                return acc + 1;
+              }
+              return acc;
+            }, 0);
+            return (
+              <Grid item key={o.label}>
+                <Grid container justifyContent="center" direction="column">
+                  <Grid container item justifyContent="center">
+                    <IconButton
+                      onClick={() => {
+                        props.onDiceCommandChange((t) => {
+                          return [...t, o];
+                        });
+                      }}
+                      onContextMenu={(e) => {
+                        e.preventDefault();
+                        props.onDiceCommandChange((draft) => {
+                          const indexToRemove = draft.findIndex(
+                            (selectedOption) =>
+                              selectedOption.label === o.label
+                          );
+                          if (indexToRemove !== -1) {
+                            draft.splice(indexToRemove, 1);
+                          }
+                          return [...draft];
+                        });
+                      }}
+                      className={css({
+                        background:
+                          badgeContent > 0
+                            ? theme.palette.action.hover
+                            : "inherit",
+                      })}
+                      size="large">
+                      <Badge badgeContent={badgeContent} color="primary">
+                        <o.icon
+                          className={css({
+                            fontSize: "3rem",
+                            color:
+                              badgeContent > 0
+                                ? theme.palette.primary.main
+                                : theme.palette.text.secondary,
+                          })}
+                        />
+                      </Badge>
+                    </IconButton>
+                  </Grid>
+                  <Grid container item justifyContent="center">
+                    <Typography
+                      className={css({
+                        fontWeight:
+                          badgeContent > 0
+                            ? theme.typography.fontWeightBold
+                            : "inherit",
+                        color:
+                          badgeContent > 0
+                            ? theme.palette.text.primary
+                            : theme.palette.text.secondary,
+                        textAlign: "center",
+                      })}
+                    >
+                      {o.label}
+                    </Typography>
                   </Grid>
                 </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
-      </>
-    );
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    </>;
   }
 }

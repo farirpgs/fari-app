@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { AppLink } from "../../../../../../components/AppLink/AppLink";
@@ -42,7 +42,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
 
   return (
     <Box>
-      <Grid container spacing={1} justify="space-between" wrap="nowrap">
+      <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
         <Grid item xs>
           {advanced ? (
             <Box>

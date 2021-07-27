@@ -12,8 +12,7 @@ import Grid, { GridSize } from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Snackbar from "@material-ui/core/Snackbar";
-import { ThemeProvider } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { ThemeProvider, Theme, StyledEngineProvider, useTheme } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -31,10 +30,10 @@ import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
 import ShareIcon from "@material-ui/icons/Share";
 import UndoIcon from "@material-ui/icons/Undo";
-import Alert from "@material-ui/lab/Alert";
+import Alert from '@material-ui/core/Alert';
 import Autocomplete, {
   createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
+} from '@material-ui/core/Autocomplete';
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import startCase from "lodash/startCase";
@@ -70,6 +69,13 @@ import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
+
+
+declare module '@material-ui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 export const smallIconButtonStyle = css({
   label: "CharacterDialog-small-icon-button",
@@ -324,7 +330,7 @@ export const CharacterV3Dialog: React.FC<{
           container
           wrap="nowrap"
           spacing={2}
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
         >
           <Grid item>
@@ -383,7 +389,7 @@ export const CharacterV3Dialog: React.FC<{
       <Box>
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="1rem">
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Grid item>{renderLoadTemplate()}</Grid>
             </Grid>
           </Box>
@@ -393,7 +399,7 @@ export const CharacterV3Dialog: React.FC<{
             container
             alignItems="center"
             wrap="nowrap"
-            justify="flex-start"
+            justifyContent="flex-start"
           >
             <Grid item xs={advanced ? 11 : 12}>
               <Tabs
@@ -461,7 +467,7 @@ export const CharacterV3Dialog: React.FC<{
                       characterManager.state.character?.pages.length ?? 0;
                     setTab(newTab.toString());
                   }}
-                >
+                  size="large">
                   <AddIcon />
                 </IconButton>
               </Grid>
@@ -470,7 +476,7 @@ export const CharacterV3Dialog: React.FC<{
         </Box>
         <Collapse in={advanced}>
           <Box mb=".5rem">
-            <Grid container justify="space-around" alignItems="center">
+            <Grid container justifyContent="space-around" alignItems="center">
               <Grid item>
                 <IconButton
                   disabled={currentPageIndex === 0}
@@ -478,7 +484,7 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.actions.movePage(currentPageIndex, "up");
                     setTab((currentPageIndex - 1).toString());
                   }}
-                >
+                  size="large">
                   <UndoIcon />
                 </IconButton>
               </Grid>
@@ -488,7 +494,7 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.actions.duplicatePage(currentPageIndex);
                     setTab((currentPageIndex + 1).toString());
                   }}
-                >
+                  size="large">
                   <FileCopyIcon />
                 </IconButton>
               </Grid>
@@ -506,7 +512,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                     setTab("0");
                   }}
-                >
+                  size="large">
                   <DeleteIcon />
                 </IconButton>
               </Grid>
@@ -517,7 +523,7 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.actions.movePage(currentPageIndex, "down");
                     setTab((currentPageIndex + 1).toString());
                   }}
-                >
+                  size="large">
                   <RedoIcon />
                 </IconButton>
               </Grid>
@@ -564,7 +570,7 @@ export const CharacterV3Dialog: React.FC<{
           })}
         </TabContext>
 
-        <Grid container justify="space-between" alignItems="center">
+        <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
             <Box pt=".5rem">
               <Typography>
@@ -576,7 +582,7 @@ export const CharacterV3Dialog: React.FC<{
           </Grid>
         </Grid>
         {showCharacterCard && (
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item xs>
               <Box pt=".5rem" ml="-.5rem">
                 <CharacterCard
@@ -604,102 +610,102 @@ export const CharacterV3Dialog: React.FC<{
     const numberOfSections = sections?.length ?? 0;
     const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
 
-    return (
-      <>
-        <Box py={numberOfSections === 0 ? "1rem" : undefined}>
-          {sections?.map((section, sectionIndex) => {
-            const helpLink = HeaderHelpLinks[section.label.toLowerCase()];
+    return <>
+      <Box py={numberOfSections === 0 ? "1rem" : undefined}>
+        {sections?.map((section, sectionIndex) => {
+          const helpLink = HeaderHelpLinks[section.label.toLowerCase()];
 
-            return (
-              <Box key={section.id}>
-                <SheetHeader
-                  label={section.label}
-                  currentPageIndex={currentPageIndex}
-                  pages={characterManager.state.character?.pages}
-                  sectionLocation={sectionLocation}
-                  helpLink={helpLink}
-                  advanced={advanced}
-                  visibleOnCard={section.visibleOnCard}
-                  canMoveUp={sectionIndex !== 0}
-                  canMoveDown={sectionIndex !== sections.length - 1}
-                  onReposition={() => {
-                    characterManager.actions.repositionSection(
+          return (
+            <Box key={section.id}>
+              <SheetHeader
+                label={section.label}
+                currentPageIndex={currentPageIndex}
+                pages={characterManager.state.character?.pages}
+                sectionLocation={sectionLocation}
+                helpLink={helpLink}
+                advanced={advanced}
+                visibleOnCard={section.visibleOnCard}
+                canMoveUp={sectionIndex !== 0}
+                canMoveDown={sectionIndex !== sections.length - 1}
+                onReposition={() => {
+                  characterManager.actions.repositionSection(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex
+                  );
+                }}
+                onMoveToPage={(newPageIndex) => {
+                  characterManager.actions.moveSectionInPage(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex,
+                    newPageIndex
+                  );
+                }}
+                onToggleVisibleOnCard={() => {
+                  characterManager.actions.toggleSectionVisibleOnCard(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex
+                  );
+                }}
+                onDuplicateSection={() => {
+                  characterManager.actions.duplicateSection(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex
+                  );
+                }}
+                onLabelChange={(newLabel) => {
+                  characterManager.actions.renameSection(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex,
+                    newLabel
+                  );
+                }}
+                onMoveDown={() => {
+                  characterManager.actions.moveSection(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex,
+                    "down"
+                  );
+                }}
+                onMoveUp={() => {
+                  characterManager.actions.moveSection(
+                    pageIndex,
+                    sectionLocation,
+                    sectionIndex,
+                    "up"
+                  );
+                }}
+                onRemove={() => {
+                  const confirmed = confirm(
+                    t("character-dialog.remove-section-confirmation")
+                  );
+                  if (confirmed) {
+                    characterManager.actions.removeSection(
                       pageIndex,
                       sectionLocation,
                       sectionIndex
                     );
-                  }}
-                  onMoveToPage={(newPageIndex) => {
-                    characterManager.actions.moveSectionInPage(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      newPageIndex
-                    );
-                  }}
-                  onToggleVisibleOnCard={() => {
-                    characterManager.actions.toggleSectionVisibleOnCard(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex
-                    );
-                  }}
-                  onDuplicateSection={() => {
-                    characterManager.actions.duplicateSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex
-                    );
-                  }}
-                  onLabelChange={(newLabel) => {
-                    characterManager.actions.renameSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      newLabel
-                    );
-                  }}
-                  onMoveDown={() => {
-                    characterManager.actions.moveSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      "down"
-                    );
-                  }}
-                  onMoveUp={() => {
-                    characterManager.actions.moveSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      "up"
-                    );
-                  }}
-                  onRemove={() => {
-                    const confirmed = confirm(
-                      t("character-dialog.remove-section-confirmation")
-                    );
-                    if (confirmed) {
-                      characterManager.actions.removeSection(
-                        pageIndex,
-                        sectionLocation,
-                        sectionIndex
-                      );
-                    }
-                  }}
-                />
-                {renderSectionBlocks(
-                  page,
-                  pageIndex,
-                  section,
-                  sectionLocation,
-                  sectionIndex
-                )}
+                  }
+                }}
+              />
+              {renderSectionBlocks(
+                page,
+                pageIndex,
+                section,
+                sectionLocation,
+                sectionIndex
+              )}
 
-                {advanced && (
-                  <Box p=".5rem" mb=".5rem">
+              {advanced && (
+                <Box p=".5rem" mb=".5rem">
+                  <StyledEngineProvider injectFirst>
                     <ThemeProvider theme={blackButtonTheme}>
-                      <Grid container justify="center" alignItems="center">
+                      <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
                           <AddBlock
                             variant="button"
@@ -726,14 +732,16 @@ export const CharacterV3Dialog: React.FC<{
                         </Grid>
                       </Grid>
                     </ThemeProvider>
-                  </Box>
-                )}
-              </Box>
-            );
-          })}
+                  </StyledEngineProvider>
+                </Box>
+              )}
+            </Box>
+          );
+        })}
 
-          {shouldRenderAddSectionButton && (
-            <Box>
+        {shouldRenderAddSectionButton && (
+          <Box>
+            <StyledEngineProvider injectFirst>
               <ThemeProvider theme={blackButtonTheme}>
                 <AddSection
                   onAddSection={() => {
@@ -745,11 +753,11 @@ export const CharacterV3Dialog: React.FC<{
                   }}
                 />
               </ThemeProvider>
-            </Box>
-          )}
-        </Box>
-      </>
-    );
+            </StyledEngineProvider>
+          </Box>
+        )}
+      </Box>
+    </>;
   }
 
   function renderTopLevelActions() {
@@ -757,144 +765,142 @@ export const CharacterV3Dialog: React.FC<{
       return null;
     }
 
-    return (
-      <>
+    return <>
+      <Grid
+        container
+        wrap="nowrap"
+        spacing={1}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        {!props.readonly && (
+          <Grid item container xs={12} sm={6}>
+            <Grid item>
+              <FormControlLabel
+                label={t("character-dialog.control.advanced-mode")}
+                control={
+                  <Switch
+                    color="primary"
+                    data-cy="character-dialog.toggle-advanced"
+                    checked={advanced}
+                    onChange={handleOnToggleAdvancedMode}
+                  />
+                }
+              />
+            </Grid>
+            <Grid item>
+              <FormControlLabel
+                label={t("character-dialog.control.wide-mode")}
+                control={
+                  <Switch
+                    color="primary"
+                    data-cy="character-dialog.toggle-wide"
+                    checked={characterManager.state.character?.wide ?? false}
+                    onChange={() => {
+                      characterManager.actions.toggleWideMode();
+                    }}
+                  />
+                }
+              />
+            </Grid>
+            <Grid item>
+              {props.onToggleSync && (
+                <Grid item>
+                  <FormControlLabel
+                    label={t("character-dialog.control.stored")}
+                    control={
+                      <Switch
+                        color="primary"
+                        checked={props.synced ?? false}
+                        readOnly={props.synced}
+                        onChange={props.onToggleSync}
+                      />
+                    }
+                  />
+                </Grid>
+              )}
+            </Grid>
+          </Grid>
+        )}
+
         <Grid
+          item
+          xs={12}
+          sm={6}
           container
-          wrap="nowrap"
-          spacing={1}
-          justify="space-between"
           alignItems="center"
+          justifyContent="flex-end"
+          spacing={2}
         >
-          {!props.readonly && (
-            <Grid item container xs={12} sm={6}>
-              <Grid item>
-                <FormControlLabel
-                  label={t("character-dialog.control.advanced-mode")}
-                  control={
-                    <Switch
-                      color="primary"
-                      data-cy="character-dialog.toggle-advanced"
-                      checked={advanced}
-                      onChange={handleOnToggleAdvancedMode}
-                    />
-                  }
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  label={t("character-dialog.control.wide-mode")}
-                  control={
-                    <Switch
-                      color="primary"
-                      data-cy="character-dialog.toggle-wide"
-                      checked={characterManager.state.character?.wide ?? false}
-                      onChange={() => {
-                        characterManager.actions.toggleWideMode();
-                      }}
-                    />
-                  }
-                />
-              </Grid>
-              <Grid item>
-                {props.onToggleSync && (
-                  <Grid item>
-                    <FormControlLabel
-                      label={t("character-dialog.control.stored")}
-                      control={
-                        <Switch
-                          color="primary"
-                          checked={props.synced ?? false}
-                          readOnly={props.synced}
-                          onChange={props.onToggleSync}
-                        />
-                      }
-                    />
-                  </Grid>
-                )}
-              </Grid>
+          {!props.dialog && (
+            <Grid item>
+              <Tooltip title={t("character-dialog.print")}>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.print"
+                  size="small"
+                  onClick={() => {
+                    window.open(`/characters/${props.character?.id}/print`);
+                  }}
+                >
+                  <PrintIcon />
+                </IconButton>
+              </Tooltip>
             </Grid>
           )}
-
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            container
-            alignItems="center"
-            justify="flex-end"
-            spacing={2}
-          >
-            {!props.dialog && (
+          {!props.dialog && (
+            <>
               <Grid item>
-                <Tooltip title={t("character-dialog.print")}>
+                <Tooltip title={t("character-dialog.export")}>
                   <IconButton
                     color="default"
                     data-cy="character-dialog.print"
                     size="small"
                     onClick={() => {
-                      window.open(`/characters/${props.character?.id}/print`);
-                    }}
-                  >
-                    <PrintIcon />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-            )}
-            {!props.dialog && (
-              <>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.export")}>
-                    <IconButton
-                      color="default"
-                      data-cy="character-dialog.print"
-                      size="small"
-                      onClick={() => {
-                        charactersManager.actions.exportEntity(
-                          characterManager.state.character as ICharacter
-                        );
-                      }}
-                    >
-                      <ExportIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-
-                <Tooltip title={t("character-dialog.export-as-template")}>
-                  <IconButton
-                    color="default"
-                    data-cy="character-dialog.print"
-                    size="small"
-                    onClick={(e) => {
-                      charactersManager.actions.exportEntityAsTemplate(
+                      charactersManager.actions.exportEntity(
                         characterManager.state.character as ICharacter
                       );
                     }}
                   >
-                    <ShareIcon />
+                    <ExportIcon />
                   </IconButton>
                 </Tooltip>
-              </>
-            )}
-            <Grid item>
-              <Button
-                color="primary"
-                data-cy="character-dialog.save"
-                data-cy-dirty={characterManager.state.dirty}
-                variant={
-                  characterManager.state.dirty ? "contained" : "outlined"
-                }
-                type="submit"
-                endIcon={<SaveIcon />}
-                onClick={onSave}
-              >
-                {t("character-dialog.save")}
-              </Button>
-            </Grid>
+              </Grid>
+
+              <Tooltip title={t("character-dialog.export-as-template")}>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.print"
+                  size="small"
+                  onClick={(e) => {
+                    charactersManager.actions.exportEntityAsTemplate(
+                      characterManager.state.character as ICharacter
+                    );
+                  }}
+                >
+                  <ShareIcon />
+                </IconButton>
+              </Tooltip>
+            </>
+          )}
+          <Grid item>
+            <Button
+              color="primary"
+              data-cy="character-dialog.save"
+              data-cy-dirty={characterManager.state.dirty}
+              variant={
+                characterManager.state.dirty ? "contained" : "outlined"
+              }
+              type="submit"
+              endIcon={<SaveIcon />}
+              onClick={onSave}
+            >
+              {t("character-dialog.save")}
+            </Button>
           </Grid>
         </Grid>
-      </>
-    );
+      </Grid>
+    </>;
   }
 
   function renderNameAndGroup() {

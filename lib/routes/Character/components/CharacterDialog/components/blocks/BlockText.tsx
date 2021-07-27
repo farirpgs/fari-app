@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import {
@@ -24,54 +24,52 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
 
-  return (
-    <>
-      <Box>
-        <Grid container spacing={1} justify="space-between" wrap="nowrap">
-          <Grid item xs>
-            {isLabelVisible && (
-              <Box>
-                <FateLabel display="inline">
-                  <ContentEditable
-                    readonly={props.readonly}
-                    border={props.advanced}
-                    data-cy={`${props.dataCy}.label`}
-                    value={props.block.label}
-                    onChange={(value) => {
-                      props.onLabelChange(value);
-                    }}
-                  />
-                </FateLabel>
-              </Box>
-            )}
+  return <>
+    <Box>
+      <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
+        <Grid item xs>
+          {isLabelVisible && (
             <Box>
-              <Typography>
+              <FateLabel display="inline">
                 <ContentEditable
-                  border
-                  data-cy={`${props.dataCy}.value`}
                   readonly={props.readonly}
-                  value={props.block.value}
+                  border={props.advanced}
+                  data-cy={`${props.dataCy}.label`}
+                  value={props.block.label}
                   onChange={(value) => {
-                    props.onValueChange(value);
+                    props.onLabelChange(value);
                   }}
                 />
-              </Typography>
+              </FateLabel>
             </Box>
-          </Grid>
-          {isSlotTrackerVisible && (
-            <Grid item className={css({ marginLeft: "auto" })}>
-              <BlockToggleMeta
-                readonly={props.readonly}
-                dataCy={props.dataCy}
-                block={props.block}
-                onMetaChange={props.onMetaChange}
-              />
-            </Grid>
           )}
+          <Box>
+            <Typography>
+              <ContentEditable
+                border
+                data-cy={`${props.dataCy}.value`}
+                readonly={props.readonly}
+                value={props.block.value}
+                onChange={(value) => {
+                  props.onValueChange(value);
+                }}
+              />
+            </Typography>
+          </Box>
         </Grid>
-      </Box>
-    </>
-  );
+        {isSlotTrackerVisible && (
+          <Grid item className={css({ marginLeft: "auto" })}>
+            <BlockToggleMeta
+              readonly={props.readonly}
+              dataCy={props.dataCy}
+              block={props.block}
+              onMetaChange={props.onMetaChange}
+            />
+          </Grid>
+        )}
+      </Grid>
+    </Box>
+  </>;
 }
 BlockText.displayName = "BlockText";
 

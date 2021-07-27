@@ -1,5 +1,4 @@
-import { darken } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, useTheme } from "@material-ui/core/styles";
 import { useEffect, useRef, useState } from "react";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { Dice, IDiceRollResult } from "../../domains/dice/Dice";

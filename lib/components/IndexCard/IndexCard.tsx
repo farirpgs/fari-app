@@ -10,8 +10,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
-import { darken, lighten } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, lighten, useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -30,7 +29,7 @@ import PaletteOutlinedIcon from "@material-ui/icons/PaletteOutlined";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider, Theme, StyledEngineProvider } from "@material-ui/styles";
 import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
 import { FontFamily } from "../../constants/FontFamily";
@@ -56,6 +55,13 @@ import {
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
+
+declare module '@material-ui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 function FariPopper(props: {
   renderAnchor: (renderProps: {
@@ -167,7 +173,7 @@ export const IndexCard: React.FC<
   });
 
   const paper = useTextColors(
-    theme.palette.type === "light"
+    theme.palette.mode === "light"
       ? indexCardManager.state.indexCard.color
       : darken(indexCardManager.state.indexCard.color, 0.5)
   );
@@ -249,33 +255,35 @@ export const IndexCard: React.FC<
             <Grid container>
               <Grid item xs={12} md={hasSubCards ? 3 : 12}>
                 <Box display="flex" height="100%" flexDirection="column">
-                  <ThemeProvider theme={defaultButtonTheme}>
-                    <Box
-                      className={css({
-                        fontSize: "1.5rem",
-                        width: "100%",
-                        padding: "0.5rem 0",
-                        borderBottom: `1px solid ${
-                          indexCardManager.state.indexCard.color === "#fff"
-                            ? "#f0a4a4"
-                            : paper.primary
-                        }`,
-                      })}
-                    >
-                      <Box px="1rem">
-                        {renderHeader()}
-                        {renderTitle()}
+                  <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={defaultButtonTheme}>
+                      <Box
+                        className={css({
+                          fontSize: "1.5rem",
+                          width: "100%",
+                          padding: "0.5rem 0",
+                          borderBottom: `1px solid ${
+                            indexCardManager.state.indexCard.color === "#fff"
+                              ? "#f0a4a4"
+                              : paper.primary
+                          }`,
+                        })}
+                      >
+                        <Box px="1rem">
+                          {renderHeader()}
+                          {renderTitle()}
+                        </Box>
                       </Box>
-                    </Box>
-                    <Collapse in={open}>
-                      <Box>
-                        <Box>{renderContent()}</Box>
-                        <Box>{renderBlocks()}</Box>
-                      </Box>
-                    </Collapse>
-                    {renderSkills()}
-                    {renderGMActions()}
-                  </ThemeProvider>
+                      <Collapse in={open}>
+                        <Box>
+                          <Box>{renderContent()}</Box>
+                          <Box>{renderBlocks()}</Box>
+                        </Box>
+                      </Collapse>
+                      {renderSkills()}
+                      {renderGMActions()}
+                    </ThemeProvider>
+                  </StyledEngineProvider>
                 </Box>
               </Grid>
               {hasSubCards && (
@@ -313,8 +321,8 @@ export const IndexCard: React.FC<
           alignItems="flex-end"
           flex="1 0 auto"
         >
-          <Grid container wrap="nowrap" justify="space-between" spacing={1}>
-            <Grid item container justify="flex-start" spacing={1}>
+          <Grid container wrap="nowrap" justifyContent="space-between" spacing={1}>
+            <Grid item container justifyContent="flex-start" spacing={1}>
               <Grid item>
                 <IconButton
                   size="small"
@@ -386,7 +394,7 @@ export const IndexCard: React.FC<
                 </Tooltip>
               </Grid>
             </Grid>
-            <Grid item container justify="center" spacing={1}>
+            <Grid item container justifyContent="center" spacing={1}>
               <Grid item>
                 <Tooltip title={t("index-card.add-block")}>
                   <span>
@@ -401,7 +409,7 @@ export const IndexCard: React.FC<
                 </Tooltip>
               </Grid>
             </Grid>
-            <Grid item container justify="flex-end" spacing={1}>
+            <Grid item container justifyContent="flex-end" spacing={1}>
               <Grid item>
                 <Tooltip title={t("index-card.duplicate")}>
                   <IconButton
@@ -783,7 +791,7 @@ export const IndexCard: React.FC<
           </Grid>
 
           <Fade in={hover}>
-            <Grid item container justify="flex-end">
+            <Grid item container justifyContent="flex-end">
               {!isSubCard && !props.readonly && (
                 <Grid item>
                   <Tooltip
@@ -897,7 +905,7 @@ export const IndexCard: React.FC<
 
   function renderTitle() {
     return (
-      <Grid container justify="space-between" alignItems="center" spacing={2}>
+      <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
         <Grid item xs>
           <ContentEditable
             id={props.id}
@@ -968,50 +976,48 @@ function IndexCardColorPicker(props: {
     delay: 75,
   });
 
-  return (
-    <>
-      <ChromePicker
-        color={color}
-        disableAlpha
-        onChange={(color) => {
-          return setColor(color.hex);
-        }}
-        styles={{
-          default: {
-            picker: {
-              boxShadow: "none",
-            },
+  return <>
+    <ChromePicker
+      color={color}
+      disableAlpha
+      onChange={(color) => {
+        return setColor(color.hex);
+      }}
+      styles={{
+        default: {
+          picker: {
+            boxShadow: "none",
           },
-        }}
-      />
-      <Box pb=".5rem" bgcolor="white" width="225px">
-        <Grid container justify="center" spacing={1}>
-          {Object.keys(IndexCardColor).map((colorName) => {
-            const color = IndexCardColor[colorName as IndexCardColorTypes];
-            return (
-              <Grid item key={color}>
-                <IconButton
-                  size="small"
-                  onClick={() => {
-                    setColor(color);
-                    props.onChange(color);
-                  }}
-                >
-                  <Box
-                    className={css({
-                      width: "1.5rem",
-                      height: "1.5rem",
-                      background: color,
-                      borderRadius: "50%",
-                      border: "1px solid #e0e0e0",
-                    })}
-                  />
-                </IconButton>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
-    </>
-  );
+        },
+      }}
+    />
+    <Box pb=".5rem" bgcolor="white" width="225px">
+      <Grid container justifyContent="center" spacing={1}>
+        {Object.keys(IndexCardColor).map((colorName) => {
+          const color = IndexCardColor[colorName as IndexCardColorTypes];
+          return (
+            <Grid item key={color}>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  setColor(color);
+                  props.onChange(color);
+                }}
+              >
+                <Box
+                  className={css({
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    background: color,
+                    borderRadius: "50%",
+                    border: "1px solid #e0e0e0",
+                  })}
+                />
+              </IconButton>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
+  </>;
 }
