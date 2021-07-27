@@ -1405,7 +1405,7 @@ export function Scene(props: {
         <Box mb="2rem">
           <Grid container spacing={1} justifyContent="center" alignItems="flex-end">
             <Grid item>
-              <FormControl>
+              <FormControl variant="standard">
                 <InputLabel>{t("play-route.sort")}</InputLabel>
 
                 <Select
@@ -1414,7 +1414,7 @@ export function Scene(props: {
                   onChange={(e) => {
                     setSort(e.target.value as SortMode);
                   }}
-                >
+                  variant="standard">
                   <option value={SortMode.None}>
                     {t("play-route.sort-options.none")}
                   </option>

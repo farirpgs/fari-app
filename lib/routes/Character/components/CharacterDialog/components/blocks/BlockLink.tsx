@@ -72,7 +72,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                       ? undefined
                       : t("character-dialog.helper-text.invalid-link")
                   }
-                />
+                  variant="standard" />
               </Box>
               <Box>
                 {props.block.meta?.hasDisplayName && (
@@ -93,7 +93,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                       }
                       setLinkLabel(label);
                     }}
-                  />
+                    variant="standard" />
                 )}
               </Box>
             </Box>

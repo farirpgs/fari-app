@@ -113,7 +113,7 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
                     "character-dialog.image-block.dialog.image-url-label"
                   )}
                   fullWidth
-                />
+                  variant="standard" />
               </Grid>
               {false && (
                 <Grid item>

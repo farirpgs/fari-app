@@ -662,7 +662,7 @@ export const Page: React.FC<{
                   i18n.changeLanguage(newLanguage);
                   logger.setTag("language", newLanguage);
                 }}
-              >
+                variant="standard">
                 {Object.keys(PossibleLanguagesNames).map((languageKey) => {
                   const shouldRenderDev = languageKey === "dev" && env.isDev;
                   if (languageKey !== "dev" || shouldRenderDev) {

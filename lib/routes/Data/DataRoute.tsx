@@ -282,17 +282,17 @@ export const DataRoute: React.FC = () => {
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
-              />
+                variant="standard" />
             </Grid>
             <Grid item>
-              <FormControl className={css({ width: "10rem" })}>
+              <FormControl className={css({ width: "10rem" })} variant="standard">
                 <InputLabel>{t("data-route.group")}</InputLabel>
                 <Select
                   value={group}
                   onChange={(event) => {
                     setGroup(event.target.value as string);
                   }}
-                >
+                  variant="standard">
                   <MenuItem value="">{t("data-route.none")}</MenuItem>
                   {groups.map((g) => {
                     return (
@@ -308,14 +308,14 @@ export const DataRoute: React.FC = () => {
               </FormControl>
             </Grid>
             <Grid item>
-              <FormControl className={css({ width: "10rem" })}>
+              <FormControl className={css({ width: "10rem" })} variant="standard">
                 <InputLabel>{t("data-route.type")}</InputLabel>
                 <Select
                   value={type}
                   onChange={(event) => {
                     setType(event.target.value as string);
                   }}
-                >
+                  variant="standard">
                   <MenuItem value="">{t("data-route.none")}</MenuItem>
                   {DataRouteItemTypeList.map((t) => {
                     return (

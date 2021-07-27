@@ -662,7 +662,7 @@ export const Doc: React.FC<IProps> = (props) => {
               className={css({ width: "100%", margin: "0" })}
               label="Search"
               margin="normal"
-            />
+              variant="standard" />
           )}
         />
       </Box>

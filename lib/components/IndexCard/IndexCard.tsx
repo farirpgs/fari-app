@@ -434,7 +434,7 @@ export const IndexCard: React.FC<
                     });
                     return (
                       <Box p="1rem" minWidth="200px">
-                        <FormControl fullWidth>
+                        <FormControl fullWidth variant="standard">
                           <InputLabel>{t("index-card.move-to")}</InputLabel>
 
                           <Select
@@ -452,7 +452,7 @@ export const IndexCard: React.FC<
                                 );
                               }
                             }}
-                          >
+                            variant="standard">
                             <option value="" />
                             {cardsForSelect.map((card) => {
                               const value = previewContentEditable({
