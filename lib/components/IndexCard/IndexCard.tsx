@@ -675,7 +675,7 @@ export const IndexCard: React.FC<
                                         block
                                       );
                                     }}
-                                  >
+                                    underline="hover">
                                     {t("character-dialog.control.duplicate")}
                                   </Link>
                                 </Grid>
@@ -692,7 +692,7 @@ export const IndexCard: React.FC<
                                         block
                                       );
                                     }}
-                                  >
+                                    underline="hover">
                                     {t("character-dialog.control.remove-block")}
                                   </Link>
                                 </Grid>
@@ -752,7 +752,7 @@ export const IndexCard: React.FC<
                         diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
-                  >
+                    underline="hover">
                     {skill.label} ({skill.modifier})
                   </Link>
                 </Grid>

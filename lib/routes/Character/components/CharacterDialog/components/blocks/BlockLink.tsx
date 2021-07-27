@@ -122,29 +122,27 @@ export function BlockLinkActions(
   const theme = useTheme();
   const { t } = useTranslate();
 
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              hasDisplayName: !props.block.meta?.hasDisplayName,
-            });
-          }}
-        >
-          {props.block.meta.hasDisplayName
-            ? t("character-dialog.control.hide-display-name")
-            : t("character-dialog.control.show-display-name")}
-        </Link>
-      </Grid>
-    </>
-  );
+  return <>
+    <Grid item>
+      <Link
+        component="button"
+        variant="caption"
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+        onClick={() => {
+          props.onMetaChange({
+            ...props.block.meta,
+            hasDisplayName: !props.block.meta?.hasDisplayName,
+          });
+        }}
+        underline="hover">
+        {props.block.meta.hasDisplayName
+          ? t("character-dialog.control.hide-display-name")
+          : t("character-dialog.control.show-display-name")}
+      </Link>
+    </Grid>
+  </>;
 }
 
 BlockLinkActions.displayName = "BlockLinkActions";

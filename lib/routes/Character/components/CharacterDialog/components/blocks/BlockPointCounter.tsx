@@ -211,7 +211,7 @@ export function BlockPointCounter(
               onClick={() => {
                 pointsManager.actions.refresh();
               }}
-            >
+              underline="hover">
               {t("character-dialog.control.refresh")}
             </Link>
           </Grid>
@@ -229,26 +229,8 @@ export function BlockPointCounterActions(
 ) {
   const theme = useTheme();
   const { t } = useTranslate();
-  return (
-    <>
-      {props.onMainPointCounterChange && (
-        <Grid item>
-          <Link
-            component="button"
-            variant="caption"
-            className={css({
-              color: theme.palette.primary.main,
-            })}
-            onClick={() => {
-              props.onMainPointCounterChange?.();
-            }}
-          >
-            {props.block.meta.isMainPointCounter
-              ? t("character-dialog.control.unset-main-counter")
-              : t("character-dialog.control.set-main-counter")}
-          </Link>
-        </Grid>
-      )}
+  return <>
+    {props.onMainPointCounterChange && (
       <Grid item>
         <Link
           component="button"
@@ -257,19 +239,35 @@ export function BlockPointCounterActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              max: props.block.meta.max === undefined ? "1" : undefined,
-            });
+            props.onMainPointCounterChange?.();
           }}
-        >
-          {props.block.meta.max === undefined
-            ? t("character-dialog.control.add-max")
-            : t("character-dialog.control.remove-max")}
+          underline="hover">
+          {props.block.meta.isMainPointCounter
+            ? t("character-dialog.control.unset-main-counter")
+            : t("character-dialog.control.set-main-counter")}
         </Link>
       </Grid>
-    </>
-  );
+    )}
+    <Grid item>
+      <Link
+        component="button"
+        variant="caption"
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+        onClick={() => {
+          props.onMetaChange({
+            ...props.block.meta,
+            max: props.block.meta.max === undefined ? "1" : undefined,
+          });
+        }}
+        underline="hover">
+        {props.block.meta.max === undefined
+          ? t("character-dialog.control.add-max")
+          : t("character-dialog.control.remove-max")}
+      </Link>
+    </Grid>
+  </>;
 }
 
 BlockPointCounterActions.displayName = "BlockPointCounterActions";

@@ -298,7 +298,7 @@ export const CharacterCard: React.FC<{
             });
             props.onRoll(diceRollResult);
           }}
-        >
+          underline="hover">
           {previewContentEditable({ value: block.label })} ({blockValue})
         </Link>
       </Grid>

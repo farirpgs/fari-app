@@ -168,41 +168,39 @@ export function BlockDicePoolActions(
   const { t } = useTranslate();
 
   const commands = props.block.meta.commands || [];
-  return (
-    <>
-      <Grid item>
-        <DiceMenuForCharacterSheet
-          commandSetIds={commands}
-          onChange={(newCommandIds) => {
-            props.onMetaChange({
-              ...props.block.meta,
-              commands: newCommandIds,
-            });
-          }}
-          render={(diceMenuProps) => (
-            <Tooltip title={commands.join(" + ")}>
-              <Link
-                component="button"
-                variant="caption"
-                className={css({
-                  color: theme.palette.primary.main,
-                })}
-                onClick={(e: any) => {
-                  if (!diceMenuProps.open) {
-                    diceMenuProps.openMenu(e);
-                  } else {
-                    diceMenuProps.closeMenu();
-                  }
-                }}
-              >
-                {t("character-dialog.control.set-dice")}
-              </Link>
-            </Tooltip>
-          )}
-        />
-      </Grid>
-    </>
-  );
+  return <>
+    <Grid item>
+      <DiceMenuForCharacterSheet
+        commandSetIds={commands}
+        onChange={(newCommandIds) => {
+          props.onMetaChange({
+            ...props.block.meta,
+            commands: newCommandIds,
+          });
+        }}
+        render={(diceMenuProps) => (
+          <Tooltip title={commands.join(" + ")}>
+            <Link
+              component="button"
+              variant="caption"
+              className={css({
+                color: theme.palette.primary.main,
+              })}
+              onClick={(e: any) => {
+                if (!diceMenuProps.open) {
+                  diceMenuProps.openMenu(e);
+                } else {
+                  diceMenuProps.closeMenu();
+                }
+              }}
+              underline="hover">
+              {t("character-dialog.control.set-dice")}
+            </Link>
+          </Tooltip>
+        )}
+      />
+    </Grid>
+  </>;
 }
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";

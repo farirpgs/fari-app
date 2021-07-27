@@ -86,28 +86,26 @@ export function BlockSeparatorActions(
   const theme = useTheme();
   const { t } = useTranslate();
 
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              hasLabel: !props.block.meta.hasLabel,
-            });
-          }}
-        >
-          {props.block.meta.hasLabel
-            ? t("character-dialog.control.remove-label")
-            : t("character-dialog.control.add-label")}
-        </Link>
-      </Grid>
-    </>
-  );
+  return <>
+    <Grid item>
+      <Link
+        component="button"
+        variant="caption"
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+        onClick={() => {
+          props.onMetaChange({
+            ...props.block.meta,
+            hasLabel: !props.block.meta.hasLabel,
+          });
+        }}
+        underline="hover">
+        {props.block.meta.hasLabel
+          ? t("character-dialog.control.remove-label")
+          : t("character-dialog.control.add-label")}
+      </Link>
+    </Grid>
+  </>;
 }
 BlockSeparatorActions.displayName = "BlockSeparatorActions";

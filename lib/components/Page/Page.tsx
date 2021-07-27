@@ -227,7 +227,7 @@ export const Page: React.FC<{
                     href="https://www.netlify.com"
                     target="_blank"
                     rel="noreferrer"
-                  >
+                    underline="hover">
                     This site is powered by Netlify
                   </Link>
                 </Typography>
@@ -304,7 +304,7 @@ export const Page: React.FC<{
                     href="http://game-icons.net"
                     target="_blank"
                     rel="noreferrer"
-                  >
+                    underline="hover">
                     http://game-icons.net
                   </Link>{" "}
                   and{" "}
@@ -312,7 +312,7 @@ export const Page: React.FC<{
                     href="https://icons8.com/icon/569/dice"
                     target="_blank"
                     rel="noreferrer"
-                  >
+                    underline="hover">
                     Icons8
                   </Link>
                 </Typography>
@@ -327,7 +327,7 @@ export const Page: React.FC<{
                   target="_blank"
                   rel="noreferrer"
                   data-cy="page.privacy-policy"
-                >
+                  underline="hover">
                   {t("page.privacy-policy")}
                 </Link>
               </Box>

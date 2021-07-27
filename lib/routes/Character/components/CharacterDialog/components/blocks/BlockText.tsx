@@ -78,30 +78,28 @@ export function BlockTextActions(
 ) {
   const theme = useTheme();
   const { t } = useTranslate();
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
-          }}
-        >
-          {props.block.meta.checked === undefined
-            ? t("character-dialog.control.add-toggle")
-            : t("character-dialog.control.remove-toggle")}
-        </Link>
-      </Grid>
-    </>
-  );
+  return <>
+    <Grid item>
+      <Link
+        component="button"
+        variant="caption"
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+        onClick={() => {
+          props.onMetaChange({
+            ...props.block.meta,
+            checked:
+              props.block.meta.checked === undefined ? false : undefined,
+          });
+        }}
+        underline="hover">
+        {props.block.meta.checked === undefined
+          ? t("character-dialog.control.add-toggle")
+          : t("character-dialog.control.remove-toggle")}
+      </Link>
+    </Grid>
+  </>;
 }
 
 BlockTextActions.displayName = "BlockTextActions";

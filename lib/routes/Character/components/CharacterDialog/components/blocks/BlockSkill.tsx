@@ -136,80 +136,78 @@ export function BlockSkillActions(
 
   const commands = props.block.meta.commands || [];
 
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              hideModifier: !props.block.meta.hideModifier,
-            });
-          }}
-        >
-          {!props.block.meta.hideModifier
-            ? t("character-dialog.control.hide-modifer")
-            : t("character-dialog.control.show-modifier")}
-        </Link>
-      </Grid>
-      <Grid item>
-        <DiceMenuForCharacterSheet
-          commandSetIds={commands}
-          onChange={(newCommandIds) => {
-            props.onMetaChange({
-              ...props.block.meta,
-              commands: newCommandIds,
-            });
-          }}
-          render={(diceMenuProps) => (
-            <Tooltip title={commands.join(" + ")}>
-              <Link
-                component="button"
-                variant="caption"
-                className={css({
-                  color: theme.palette.primary.main,
-                })}
-                onClick={(e: any) => {
-                  if (!diceMenuProps.open) {
-                    diceMenuProps.openMenu(e);
-                  } else {
-                    diceMenuProps.closeMenu();
-                  }
-                }}
-              >
-                {t("character-dialog.control.set-dice")}
-              </Link>
-            </Tooltip>
-          )}
-        />
-      </Grid>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
-          }}
-        >
-          {props.block.meta.checked === undefined
-            ? t("character-dialog.control.add-toggle")
-            : t("character-dialog.control.remove-toggle")}
-        </Link>
-      </Grid>
-    </>
-  );
+  return <>
+    <Grid item>
+      <Link
+        component="button"
+        variant="caption"
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+        onClick={() => {
+          props.onMetaChange({
+            ...props.block.meta,
+            hideModifier: !props.block.meta.hideModifier,
+          });
+        }}
+        underline="hover">
+        {!props.block.meta.hideModifier
+          ? t("character-dialog.control.hide-modifer")
+          : t("character-dialog.control.show-modifier")}
+      </Link>
+    </Grid>
+    <Grid item>
+      <DiceMenuForCharacterSheet
+        commandSetIds={commands}
+        onChange={(newCommandIds) => {
+          props.onMetaChange({
+            ...props.block.meta,
+            commands: newCommandIds,
+          });
+        }}
+        render={(diceMenuProps) => (
+          <Tooltip title={commands.join(" + ")}>
+            <Link
+              component="button"
+              variant="caption"
+              className={css({
+                color: theme.palette.primary.main,
+              })}
+              onClick={(e: any) => {
+                if (!diceMenuProps.open) {
+                  diceMenuProps.openMenu(e);
+                } else {
+                  diceMenuProps.closeMenu();
+                }
+              }}
+              underline="hover">
+              {t("character-dialog.control.set-dice")}
+            </Link>
+          </Tooltip>
+        )}
+      />
+    </Grid>
+    <Grid item>
+      <Link
+        component="button"
+        variant="caption"
+        className={css({
+          color: theme.palette.primary.main,
+        })}
+        onClick={() => {
+          props.onMetaChange({
+            ...props.block.meta,
+            checked:
+              props.block.meta.checked === undefined ? false : undefined,
+          });
+        }}
+        underline="hover">
+        {props.block.meta.checked === undefined
+          ? t("character-dialog.control.add-toggle")
+          : t("character-dialog.control.remove-toggle")}
+      </Link>
+    </Grid>
+  </>;
 }
 
 BlockSkillActions.displayName = "BlockSkillActions";

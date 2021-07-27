@@ -267,7 +267,7 @@ export function BlockByType(
               onClick={() => {
                 props.onToggleSplit?.();
               }}
-            >
+              underline="hover">
               {t("character-dialog.control.width")}
               {": "}
               {(block.meta.width || 1) * 100}

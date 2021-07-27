@@ -50,7 +50,7 @@ export const AppLink: React.FC<
         className={className}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
         {...rest}
-      >
+        underline="hover">
         {props.children}
       </MaterialUILink>
     );
@@ -69,7 +69,7 @@ export const AppLink: React.FC<
         }
       }}
       {...rest}
-    >
+      underline="hover">
       {props.children}
     </MaterialUILink>
   );
