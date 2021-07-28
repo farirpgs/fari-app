@@ -55,20 +55,20 @@ export function StoryProvider(props: {
             <CharactersContext.Provider value={charactersManager}>
               <ScenesContext.Provider value={scenesManager}>
                 <DiceContext.Provider value={diceManager}>
-                  <ThemeProvider
-                    theme={
-                      settingsManager.state.themeMode === "dark"
-                        ? AppDarkTheme
-                        : AppLightTheme
-                    }
-                  >
-                    <StyledEngineProvider injectFirst>
+                  <StyledEngineProvider injectFirst>
+                    <ThemeProvider
+                      theme={
+                        settingsManager.state.themeMode === "dark"
+                          ? AppDarkTheme
+                          : AppLightTheme
+                      }
+                    >
                       <CssBaseline />
                       <BrowserRouter>
                         <HelmetProvider>{props.children}</HelmetProvider>
                       </BrowserRouter>
-                    </StyledEngineProvider>
-                  </ThemeProvider>
+                    </ThemeProvider>
+                  </StyledEngineProvider>
                 </DiceContext.Provider>
               </ScenesContext.Provider>
             </CharactersContext.Provider>

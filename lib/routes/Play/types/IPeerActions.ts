@@ -7,7 +7,8 @@ export type IPeerActions =
   | IUpdateFatePointPeerAction
   | IUpdateCharacterPeerAction
   | ILoadCharacterPeerAction
-  | IUpdatePlayedInTurnOrderPeerAction;
+  | IUpdatePlayedInTurnOrderPeerAction
+  | IPauseSession;
 
 type IRollPeerAction = IPeerAction<"roll", IDiceRollResult>;
 type IUpdateFatePointPeerAction = IPeerAction<
@@ -20,3 +21,4 @@ type IUpdatePlayedInTurnOrderPeerAction = IPeerAction<
   "played-in-turn-order",
   boolean
 >;
+type IPauseSession = IPeerAction<"pause", undefined>;

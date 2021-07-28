@@ -94,4 +94,5 @@ export interface ISession {
   goodConfetti: number;
   badConfetti: number;
   drawAreaObjects: IDrawAreaObjects;
+  paused: boolean;
 }

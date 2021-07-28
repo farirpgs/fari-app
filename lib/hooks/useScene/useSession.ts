@@ -33,6 +33,7 @@ export function useSession(props: IProps) {
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
+      paused: false,
       drawAreaObjects: [],
     })
   );
@@ -155,6 +156,26 @@ export function useSession(props: IProps) {
           return;
         }
         draft.badConfetti++;
+      })
+    );
+  }
+  function pause() {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        draft.paused = true;
+      })
+    );
+  }
+  function unpause() {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        draft.paused = false;
       })
     );
   }
@@ -402,6 +423,8 @@ export function useSession(props: IProps) {
       updatePlayerRoll,
       updatePlayerCharacterMainPointCounter,
       updatePlayersWithConnections,
+      pause,
+      unpause,
     },
     _: {
       removedPlayers,

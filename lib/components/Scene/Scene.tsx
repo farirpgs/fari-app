@@ -7,6 +7,11 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Collapse from "@material-ui/core/Collapse";
 import Container from "@material-ui/core/Container";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Fade from "@material-ui/core/Fade";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -27,9 +32,11 @@ import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FilterHdrIcon from "@material-ui/icons/FilterHdr";
 import MovieIcon from "@material-ui/icons/Movie";
+import PanToolIcon from "@material-ui/icons/PanTool";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
@@ -297,6 +304,7 @@ export const Session: React.FC<IProps> = (props) => {
           when={isGMHostingOnlineOrOfflineGame}
           message={t("play-route.host-leaving-warning")}
         />
+        {renderPauseDialog()}
         {streamerModalOpen && (
           <WindowPortal
             onClose={() => {
@@ -321,43 +329,63 @@ export const Session: React.FC<IProps> = (props) => {
           }}
           centerActions={
             <>
-              {isGM && (
-                <>
-                  {props.mode !== SceneMode.Manage && (
-                    <Grid item>
-                      <IconButton
-                        onClick={() => {
-                          sessionManager.actions.fireGoodConfetti();
-                          logger.info("Scene:onFireGoodConfetti");
-                        }}
-                        color="primary"
-                        size="large"
-                      >
-                        <Icons.PartyPopper
-                          className={css({ width: "2rem", height: "2rem" })}
-                          htmlColor={darken(theme.palette.success.main, 0.2)}
-                        />
-                      </IconButton>
-                    </Grid>
-                  )}
-                  {props.mode !== SceneMode.Manage && (
-                    <Grid item>
-                      <IconButton
-                        onClick={() => {
-                          sessionManager.actions.fireBadConfetti();
-                          logger.info("Scene:onFireBadConfetti");
-                        }}
-                        color="primary"
-                        size="large"
-                      >
-                        <Icons.PartyPopper
-                          className={css({ width: "2rem", height: "2rem" })}
-                          htmlColor={darken(theme.palette.error.main, 0.2)}
-                        />
-                      </IconButton>
-                    </Grid>
-                  )}
-                </>
+              {isGM && props.mode !== SceneMode.Manage && (
+                <Grid item>
+                  <IconButton
+                    onClick={() => {
+                      sessionManager.actions.fireGoodConfetti();
+                      logger.info("Scene:onFireGoodConfetti");
+                    }}
+                    color="primary"
+                    size="large"
+                  >
+                    <Icons.PartyPopper
+                      className={css({ width: "2rem", height: "2rem" })}
+                      htmlColor={darken(theme.palette.success.main, 0.2)}
+                    />
+                  </IconButton>
+                </Grid>
+              )}
+              {props.mode !== SceneMode.Manage && (
+                <Grid item>
+                  <IconButton
+                    onClick={() => {
+                      if (isGM) {
+                        sessionManager.actions.pause();
+                      } else {
+                        connectionsManager?.actions.sendToHost<IPeerActions>({
+                          action: "pause",
+                          payload: undefined,
+                        });
+                      }
+                    }}
+                    color="primary"
+                    size="large"
+                  >
+                    <PanToolIcon
+                      className={css({ width: "1.8rem", height: "1.8rem" })}
+                      htmlColor={theme.palette.text.primary}
+                    />
+                  </IconButton>
+                </Grid>
+              )}
+
+              {isGM && props.mode !== SceneMode.Manage && (
+                <Grid item>
+                  <IconButton
+                    onClick={() => {
+                      sessionManager.actions.fireBadConfetti();
+                      logger.info("Scene:onFireBadConfetti");
+                    }}
+                    color="primary"
+                    size="large"
+                  >
+                    <Icons.PartyPopper
+                      className={css({ width: "2rem", height: "2rem" })}
+                      htmlColor={darken(theme.palette.error.main, 0.2)}
+                    />
+                  </IconButton>
+                </Grid>
               )}
             </>
           }
@@ -404,6 +432,53 @@ export const Session: React.FC<IProps> = (props) => {
           )}
         </Box>
       </Fade>
+    );
+  }
+
+  function renderPauseDialog() {
+    return (
+      <Dialog
+        fullWidth
+        maxWidth="sm"
+        open={sessionManager.state.session.paused}
+        keepMounted={false}
+        onClose={() => {
+          if (isGM) {
+            sessionManager.actions.unpause();
+          }
+        }}
+      >
+        <DialogTitle>
+          <Grid container justifyContent="center">
+            <Grid item>{t("play-route.paused-dialog.title")}</Grid>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <Grid container justifyContent="center">
+            <Grid item>
+              <ErrorIcon
+                className={css({
+                  width: "3rem",
+                  height: "3rem",
+                })}
+              />
+            </Grid>
+          </Grid>
+
+          <DialogContentText textAlign="center">
+            {t("play-route.paused-dialog.content")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              sessionManager.actions.unpause();
+            }}
+          >
+            {t("play-route.paused-dialog.continue")}
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 
@@ -886,7 +961,8 @@ export const Session: React.FC<IProps> = (props) => {
   function renderSessionTabs() {
     const tabClass = css({
       background: headerBackgroundColor,
-      color: headerColor,
+      color: `${headerColor} !important`,
+      padding: "0 1rem",
       marginRight: ".5rem",
       // Pentagone
       // https://bennettfeely.com/clippy/
@@ -1516,9 +1592,10 @@ export function Scene(props: {
                 width: "100%",
                 paddingTop: ".25rem",
                 paddingBottom: ".25rem",
-                gridColumnEnd: hasChildren
-                  ? "span 4 !important"
-                  : "span 1 !important",
+                // columnSpan: hasChildren ? "all" : "initial",
+                // gridColumnEnd: hasChildren
+                //   ? "span 4 !important"
+                //   : "span 1 !important",
               })}
             >
               <IndexCard
