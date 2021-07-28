@@ -172,6 +172,7 @@ export function BlockSlotTracker(
         <Grid item>
           <Clock
             slices={slices}
+            disabled={props.readonly}
             onClick={(slideIndex) => {
               handleToggleBox(slideIndex);
             }}
@@ -280,19 +281,13 @@ function Clock(props: {
   const circleR = 50;
 
   const checkedSliceStyle = css({
-    cursor: props.disabled ? "inherit" : "pointer",
     fill: theme.palette.primary.light,
+    cursor: props.disabled ? "inherit" : "pointer",
     transition: theme.transitions.create(["fill"], { duration: "0.2s" }),
-    // "&:hover": {
-    //   fill: theme.palette.action.hover,
-    // },
   });
   const sliceStyle = css({
-    "cursor": props.disabled ? "inherit" : "pointer",
-    "transition": theme.transitions.create(["fill"], { duration: "0.2s" }),
-    "&:hover": {
-      fill: theme.palette.action.hover,
-    },
+    cursor: props.disabled ? "inherit" : "pointer",
+    transition: theme.transitions.create(["fill"], { duration: "0.2s" }),
   });
 
   if (props.slices.length <= 0) {
@@ -316,6 +311,7 @@ function Clock(props: {
           cx={circleCx}
           cy={circleCy}
           r={circleR}
+          fill={props.slices[0] ? theme.palette.primary.light : "transparent"}
           stroke="#000"
           strokeWidth="4px"
           className={sliceStyle}
@@ -332,15 +328,24 @@ function Clock(props: {
           const checked = props.slices[i];
           const fromAngle = (i * 360) / props.slices.length;
           const toAngle = ((i + 1) * 360) / props.slices.length;
+          const numberToAlignTopRight = 270; // Because otherwise the clock starts on middle right
 
           const fromCoordX =
-            circleCx + circleR * Math.cos((fromAngle * Math.PI) / 180);
+            circleCx +
+            circleR *
+              Math.cos(((fromAngle + numberToAlignTopRight) * Math.PI) / 180);
           const fromCoordY =
-            circleCy + circleR * Math.sin((fromAngle * Math.PI) / 180);
+            circleCy +
+            circleR *
+              Math.sin(((fromAngle + numberToAlignTopRight) * Math.PI) / 180);
           const toCoordX =
-            circleCx + circleR * Math.cos((toAngle * Math.PI) / 180);
+            circleCx +
+            circleR *
+              Math.cos(((toAngle + numberToAlignTopRight) * Math.PI) / 180);
           const toCoordY =
-            circleCy + circleR * Math.sin((toAngle * Math.PI) / 180);
+            circleCy +
+            circleR *
+              Math.sin(((toAngle + numberToAlignTopRight) * Math.PI) / 180);
 
           const d = `M${circleCx},${circleCy} L${fromCoordX},${fromCoordY} A${circleR},${circleR} 0 0,1 ${toCoordX},${toCoordY}z`;
 

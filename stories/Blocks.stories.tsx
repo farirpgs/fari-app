@@ -241,6 +241,84 @@ SlotTrackerContent.args = makeNormalArgs(BlockType.SlotTracker, {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel posuere odio",
   },
 });
+export const SlotTrackerClockEmpty = Template.bind({});
+SlotTrackerClockEmpty.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [
+    { label: "1", checked: true },
+    { label: "2", checked: true },
+    { label: "3", checked: false },
+  ],
+  meta: {
+    asClock: true,
+  },
+});
+export const SlotTrackerClockOne = Template.bind({});
+SlotTrackerClockOne.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [{ label: "", checked: false }],
+  meta: {
+    asClock: true,
+  },
+});
+export const SlotTrackerClockTwo = Template.bind({});
+SlotTrackerClockTwo.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [
+    { label: "", checked: false },
+    { label: "", checked: false },
+  ],
+  meta: {
+    asClock: true,
+  },
+});
+export const SlotTrackerClockThree = Template.bind({});
+SlotTrackerClockThree.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [
+    { label: "", checked: false },
+    { label: "", checked: false },
+    { label: "", checked: false },
+  ],
+  meta: {
+    asClock: true,
+  },
+});
+export const SlotTrackerClockFour = Template.bind({});
+SlotTrackerClockFour.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [
+    { label: "", checked: false },
+    { label: "", checked: false },
+    { label: "", checked: false },
+    { label: "", checked: false },
+  ],
+  meta: {
+    asClock: true,
+  },
+});
+export const SlotTrackerClockFive = Template.bind({});
+SlotTrackerClockFive.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [
+    { label: "", checked: true },
+    { label: "", checked: true },
+    { label: "", checked: false },
+    { label: "", checked: false },
+    { label: "", checked: false },
+  ],
+  meta: {
+    asClock: true,
+  },
+});
+export const SlotTrackerClockOneChecked = Template.bind({});
+SlotTrackerClockOneChecked.args = makeNormalArgs(BlockType.SlotTracker, {
+  label: "Clock",
+  value: [{ label: "", checked: true }],
+  meta: {
+    asClock: true,
+  },
+});
 
 export const Image = Template.bind({});
 Image.args = makeNormalArgs(BlockType.Image);
