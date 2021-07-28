@@ -1,4 +1,4 @@
-import { responsiveFontSizes, adaptV4Theme, createTheme } from "@material-ui/core/styles";
+import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import produce from "immer";
 import { useMemo } from "react";
 import { defaultThemeConfiguration } from "../../theme";
@@ -14,7 +14,7 @@ export function useThemeFromColor(color: string, type?: PaletteType) {
       const typeToUse = type ?? defaultType;
       draft.palette.mode = typeToUse;
     });
-    return responsiveFontSizes(createTheme(adaptV4Theme(options)));
+    return responsiveFontSizes(createTheme(options));
   }, [color]);
 
   return buttonTheme;

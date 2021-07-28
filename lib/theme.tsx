@@ -1,7 +1,11 @@
-import { createTheme, DeprecatedThemeOptions, adaptV4Theme, responsiveFontSizes } from "@material-ui/core/styles";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeOptions,
+} from "@material-ui/core/styles";
 import { FontFamily } from "./constants/FontFamily";
 
-export const defaultThemeConfiguration: DeprecatedThemeOptions = {
+export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
     // default 300
     fontWeightLight: 400,
@@ -13,51 +17,59 @@ export const defaultThemeConfiguration: DeprecatedThemeOptions = {
     fontWeightBold: 700,
     fontFamily: FontFamily.Default,
   },
-  overrides: {
+  components: {
     MuiCssBaseline: {
-      "@global": {},
+      styleOverrides: {
+        "@global": {},
+      },
     },
     MuiTypography: {
-      root: {
-        whiteSpace: "pre-wrap",
+      styleOverrides: {
+        root: {
+          whiteSpace: "pre-wrap",
+        },
       },
     },
     MuiButton: {
-      root: {
-        borderRadius: "4px",
-      },
-      contained: {
-        fontWeight: 700,
-      },
-      outlined: {
-        "fontWeight": 700,
-        "&:hover": {
-          // theme.shadows[1],
-          boxShadow:
-            "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+      styleOverrides: {
+        root: {
+          borderRadius: "4px",
+        },
+        contained: {
+          fontWeight: 700,
+        },
+        outlined: {
+          "fontWeight": 700,
+          "&:hover": {
+            // theme.shadows[1],
+            boxShadow:
+              "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+          },
         },
       },
     },
     MuiButtonGroup: {
-      root: {
-        borderRadius: "20px",
+      styleOverrides: {
+        root: {
+          borderRadius: "20px",
+        },
       },
     },
   },
 };
 // https://mycolor.space/?hex=%23415F9B&sub=1
 export const AppLightTheme = responsiveFontSizes(
-  createTheme(adaptV4Theme({
+  createTheme({
     ...defaultThemeConfiguration,
     palette: {
       primary: { main: "#415f9c" },
       secondary: { main: "#7891D2" },
     },
-  }))
+  })
 );
 
 export const AppDarkTheme = responsiveFontSizes(
-  createTheme(adaptV4Theme({
+  createTheme({
     ...defaultThemeConfiguration,
     palette: {
       mode: "dark",
@@ -73,5 +85,5 @@ export const AppDarkTheme = responsiveFontSizes(
         main: "#7891D2",
       },
     },
-  }))
+  })
 );

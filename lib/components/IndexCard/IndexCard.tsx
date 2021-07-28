@@ -14,8 +14,6 @@ import { darken, lighten, useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
@@ -27,9 +25,11 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteOutlinedIcon from "@material-ui/icons/PaletteOutlined";
 import PostAddIcon from "@material-ui/icons/PostAdd";
+import PushPinIcon from "@material-ui/icons/PushPin";
+import PushPinOutlinedIcon from "@material-ui/icons/PushPinOutlined";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { ThemeProvider, Theme, StyledEngineProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
 import { FontFamily } from "../../constants/FontFamily";
@@ -55,13 +55,6 @@ import {
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
-
-
-declare module '@material-ui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
 
 function FariPopper(props: {
   renderAnchor: (renderProps: {
@@ -182,7 +175,7 @@ export const IndexCard: React.FC<
 
   return (
     <Paper
-      elevation={indexCardManager.state.indexCard.pinned ? 8 : 2}
+      elevation={indexCardManager.state.indexCard.pinned ? 4 : 2}
       className={props.className}
     >
       <Box
@@ -221,8 +214,8 @@ export const IndexCard: React.FC<
                             size="small"
                             className={css({
                               position: "absolute",
-                              marginTop: "1rem",
-                              marginLeft: ".5rem",
+                              marginTop: ".5rem",
+                              marginLeft: ".25rem",
                               cursor: "drag",
                               display:
                                 props.readonly || !props.canMove
@@ -255,35 +248,33 @@ export const IndexCard: React.FC<
             <Grid container>
               <Grid item xs={12} md={hasSubCards ? 3 : 12}>
                 <Box display="flex" height="100%" flexDirection="column">
-                  <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={defaultButtonTheme}>
-                      <Box
-                        className={css({
-                          fontSize: "1.5rem",
-                          width: "100%",
-                          padding: "0.5rem 0",
-                          borderBottom: `1px solid ${
-                            indexCardManager.state.indexCard.color === "#fff"
-                              ? "#f0a4a4"
-                              : paper.primary
-                          }`,
-                        })}
-                      >
-                        <Box px="1rem">
-                          {renderHeader()}
-                          {renderTitle()}
-                        </Box>
+                  <ThemeProvider theme={defaultButtonTheme}>
+                    <Box
+                      className={css({
+                        fontSize: "1.5rem",
+                        width: "100%",
+                        padding: "0.5rem 0",
+                        borderBottom: `1px solid ${
+                          indexCardManager.state.indexCard.color === "#fff"
+                            ? "#f0a4a4"
+                            : paper.primary
+                        }`,
+                      })}
+                    >
+                      <Box px="1rem">
+                        {renderHeader()}
+                        {renderTitle()}
                       </Box>
-                      <Collapse in={open}>
-                        <Box>
-                          <Box>{renderContent()}</Box>
-                          <Box>{renderBlocks()}</Box>
-                        </Box>
-                      </Collapse>
-                      {renderSkills()}
-                      {renderGMActions()}
-                    </ThemeProvider>
-                  </StyledEngineProvider>
+                    </Box>
+                    <Collapse in={open}>
+                      <Box>
+                        <Box>{renderContent()}</Box>
+                        <Box>{renderBlocks()}</Box>
+                      </Box>
+                    </Collapse>
+                    {renderSkills()}
+                    {renderGMActions()}
+                  </ThemeProvider>
                 </Box>
               </Grid>
               {hasSubCards && (
@@ -321,7 +312,12 @@ export const IndexCard: React.FC<
           alignItems="flex-end"
           flex="1 0 auto"
         >
-          <Grid container wrap="nowrap" justifyContent="space-between" spacing={1}>
+          <Grid
+            container
+            wrap="nowrap"
+            justifyContent="space-between"
+            spacing={1}
+          >
             <Grid item container justifyContent="flex-start" spacing={1}>
               <Grid item>
                 <IconButton
@@ -452,7 +448,8 @@ export const IndexCard: React.FC<
                                 );
                               }
                             }}
-                            variant="standard">
+                            variant="standard"
+                          >
                             <option value="" />
                             {cardsForSelect.map((card) => {
                               const value = previewContentEditable({
@@ -527,7 +524,6 @@ export const IndexCard: React.FC<
           px="1rem"
           // mb="1rem"
           className={css({
-            label: "IndexCard-masonry-content",
             columnCount: numberOfColumnsForSubCards,
             columnWidth: "auto",
             columnGap: "1rem",
@@ -675,7 +671,8 @@ export const IndexCard: React.FC<
                                         block
                                       );
                                     }}
-                                    underline="hover">
+                                    underline="hover"
+                                  >
                                     {t("character-dialog.control.duplicate")}
                                   </Link>
                                 </Grid>
@@ -692,7 +689,8 @@ export const IndexCard: React.FC<
                                         block
                                       );
                                     }}
-                                    underline="hover">
+                                    underline="hover"
+                                  >
                                     {t("character-dialog.control.remove-block")}
                                   </Link>
                                 </Grid>
@@ -752,7 +750,8 @@ export const IndexCard: React.FC<
                         diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
-                    underline="hover">
+                    underline="hover"
+                  >
                     {skill.label} ({skill.modifier})
                   </Link>
                 </Grid>
@@ -835,9 +834,9 @@ export const IndexCard: React.FC<
                       }}
                     >
                       {indexCardManager.state.indexCard.pinned ? (
-                        <BookmarkIcon htmlColor={paper.primary} />
+                        <PushPinIcon htmlColor={paper.primary} />
                       ) : (
-                        <BookmarkBorderIcon htmlColor={paper.primary} />
+                        <PushPinOutlinedIcon htmlColor={paper.primary} />
                       )}
                     </IconButton>
                   </Tooltip>
@@ -905,7 +904,12 @@ export const IndexCard: React.FC<
 
   function renderTitle() {
     return (
-      <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+      >
         <Grid item xs>
           <ContentEditable
             id={props.id}
@@ -914,6 +918,7 @@ export const IndexCard: React.FC<
             className={css({
               fontSize: "1.8rem",
               fontFamily: FontFamily.HandWriting,
+              lineHeight: "normal",
               // letterSpacing: "-.5px",
             })}
             readonly={props.readonly}
@@ -976,48 +981,50 @@ function IndexCardColorPicker(props: {
     delay: 75,
   });
 
-  return <>
-    <ChromePicker
-      color={color}
-      disableAlpha
-      onChange={(color) => {
-        return setColor(color.hex);
-      }}
-      styles={{
-        default: {
-          picker: {
-            boxShadow: "none",
+  return (
+    <>
+      <ChromePicker
+        color={color}
+        disableAlpha
+        onChange={(color) => {
+          return setColor(color.hex);
+        }}
+        styles={{
+          default: {
+            picker: {
+              boxShadow: "none",
+            },
           },
-        },
-      }}
-    />
-    <Box pb=".5rem" bgcolor="white" width="225px">
-      <Grid container justifyContent="center" spacing={1}>
-        {Object.keys(IndexCardColor).map((colorName) => {
-          const color = IndexCardColor[colorName as IndexCardColorTypes];
-          return (
-            <Grid item key={color}>
-              <IconButton
-                size="small"
-                onClick={() => {
-                  setColor(color);
-                  props.onChange(color);
-                }}
-              >
-                <Box
-                  className={css({
-                    width: "1.5rem",
-                    height: "1.5rem",
-                    background: color,
-                    borderRadius: "50%",
-                    border: "1px solid #e0e0e0",
-                  })}
-                />
-              </IconButton>
-            </Grid>
-          );
-        })}
-      </Grid>
-    </Box>
-  </>;
+        }}
+      />
+      <Box pb=".5rem" bgcolor="white" width="225px">
+        <Grid container justifyContent="center" spacing={1}>
+          {Object.keys(IndexCardColor).map((colorName) => {
+            const color = IndexCardColor[colorName as IndexCardColorTypes];
+            return (
+              <Grid item key={color}>
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    setColor(color);
+                    props.onChange(color);
+                  }}
+                >
+                  <Box
+                    className={css({
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      background: color,
+                      borderRadius: "50%",
+                      border: "1px solid #e0e0e0",
+                    })}
+                  />
+                </IconButton>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    </>
+  );
 }

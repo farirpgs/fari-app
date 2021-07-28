@@ -4,7 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Popper from "@material-ui/core/Popper";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
@@ -59,20 +59,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
     props.onClick();
   }
-
-  const handleTooltipOpen = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setAnchorEl(event.target);
-    setOpen(true);
-  };
-
-  const handleTooltipClose = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setAnchorEl(event.target);
-    setOpen(false);
-  };
 
   const diceStyle = css({
     fontSize: props.fontSize,
@@ -221,23 +207,30 @@ export const DiceBox: React.FC<IProps> = (props) => {
           className={css({
             zIndex: zIndex.modal,
           })}
-          modifiers={{
-            flip: {
+          modifiers={[
+            {
+              name: "flip",
               enabled: false,
             },
-            enabled: true,
-            offset: {
-              offset: "0, 16px",
+            {
+              name: "offset",
+              options: {
+                offset: [0, 16],
+              },
             },
-            preventOverflow: {
+            {
+              name: "preventOverflow",
               enabled: true,
-              boundariesElement: "viewport",
+              options: {
+                boundariesElement: "viewport",
+              },
             },
-          }}
+          ]}
         >
           {({ TransitionProps }) => (
             <Grow {...TransitionProps}>
               <Box
+                // m="1rem"
                 onContextMenu={(e) => {
                   e.preventDefault();
                 }}
@@ -253,7 +246,16 @@ export const DiceBox: React.FC<IProps> = (props) => {
 
   function renderDice() {
     return (
-      <Box onMouseEnter={handleTooltipOpen} onMouseLeave={handleTooltipClose}>
+      <Box
+        onMouseEnter={(event) => {
+          setAnchorEl(event.target);
+          setOpen(true);
+        }}
+        onMouseLeave={(event) => {
+          setAnchorEl(event.target);
+          setOpen(false);
+        }}
+      >
         <ButtonBase
           ref={(p) => {
             setAnchorEl(p);
@@ -335,79 +337,81 @@ export function DiceBoxResult(props: {
     }
   );
 
-  return <>
-    <Grid container justifyContent="flex-start" alignItems="center">
-      {items.map((item, itemIndex) => {
-        const isFirst = itemIndex === 0;
-        const isFate = item.name === "1dF";
-        const options = CommmandSetOptions[item.commandSetId];
-        const diceCommandOptions = DiceCommandOptions[item.name!];
+  return (
+    <>
+      <Grid container justifyContent="flex-start" alignItems="center">
+        {items.map((item, itemIndex) => {
+          const isFirst = itemIndex === 0;
+          const isFate = item.name === "1dF";
+          const options = CommmandSetOptions[item.commandSetId];
+          const diceCommandOptions = DiceCommandOptions[item.name!];
 
-        const IconForPool = options.icon;
+          const IconForPool = options.icon;
 
-        return (
-          <React.Fragment key={itemIndex}>
-            {!isFirst && (
-              <Grid
-                item
-                className={css({
-                  label: "DiceBoxResult-rollType-DiceCommand-separator",
-                  display: "flex",
-                  margin: "0 4px",
-                  fontSize: ".8rem",
-                })}
-              >
-                {separator}
-              </Grid>
-            )}
-            <Grid item>
-              <Tooltip
-                title={
-                  item.label
-                    ? `${item.commandSetId} (${item.label})`
-                    : item.commandSetId
-                }
-              >
-                <Box
+          return (
+            <React.Fragment key={itemIndex}>
+              {!isFirst && (
+                <Grid
+                  item
                   className={css({
-                    color: item.color ? item.color : undefined,
-                    borderBottom: item.color
-                      ? `3px solid ${item.color}`
-                      : undefined,
+                    label: "DiceBoxResult-rollType-DiceCommand-separator",
+                    display: "flex",
+                    margin: "0 4px",
+                    fontSize: ".8rem",
                   })}
                 >
-                  <Grid container alignItems="center">
-                    <Grid item>
-                      <Box
-                        className={css({
-                          label: "DiceBoxResult-rollType-DiceCommand-value",
-                          fontFamily: isFate ? FontFamily.Fate : "inherit",
-                          marginLeft: isFate ? ".2rem" : undefined,
-                          verticalAlign: "middle",
-                        })}
-                      >
-                        {diceCommandOptions.formatDetailedResult(item.value)}
-                      </Box>
-                    </Grid>
-                    {!isFate && shouldListResult && (
+                  {separator}
+                </Grid>
+              )}
+              <Grid item>
+                <Tooltip
+                  title={
+                    item.label
+                      ? `${item.commandSetId} (${item.label})`
+                      : item.commandSetId
+                  }
+                >
+                  <Box
+                    className={css({
+                      color: item.color ? item.color : undefined,
+                      borderBottom: item.color
+                        ? `3px solid ${item.color}`
+                        : undefined,
+                    })}
+                  >
+                    <Grid container alignItems="center">
                       <Grid item>
-                        <IconForPool
+                        <Box
                           className={css({
-                            display: "flex",
-                            marginLeft: "4px",
+                            label: "DiceBoxResult-rollType-DiceCommand-value",
+                            fontFamily: isFate ? FontFamily.Fate : "inherit",
+                            marginLeft: isFate ? ".2rem" : undefined,
+                            verticalAlign: "middle",
                           })}
-                        />
+                        >
+                          {diceCommandOptions.formatDetailedResult(item.value)}
+                        </Box>
                       </Grid>
-                    )}
-                  </Grid>
-                </Box>
-              </Tooltip>
-            </Grid>
-          </React.Fragment>
-        );
-      })}
-    </Grid>
-  </>;
+                      {!isFate && shouldListResult && (
+                        <Grid item>
+                          <IconForPool
+                            className={css({
+                              display: "flex",
+                              marginLeft: "4px",
+                            })}
+                          />
+                        </Grid>
+                      )}
+                    </Grid>
+                  </Box>
+                </Tooltip>
+              </Grid>
+            </React.Fragment>
+          );
+        })}
+      </Grid>
+    </>
+  );
 }
 
 export function DiceBonusLabel(props: {

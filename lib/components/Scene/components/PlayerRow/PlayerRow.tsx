@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import CreateIcon from "@material-ui/icons/Create";
@@ -203,7 +203,14 @@ export function PlayerRow(
 
   function renderControls() {
     return (
-      <Grid item xs container spacing={1} justifyContent="space-between" wrap="nowrap">
+      <Grid
+        item
+        xs
+        container
+        spacing={1}
+        justifyContent="space-between"
+        wrap="nowrap"
+      >
         <Grid
           item
           xs={6}
@@ -247,7 +254,8 @@ export function PlayerRow(
               onClick={() => {
                 handleOnLoadCharacterSheet();
               }}
-              size="large">
+              size="large"
+            >
               <RestorePageIcon />
             </IconButton>
           </span>
@@ -273,7 +281,8 @@ export function PlayerRow(
                   logger.info("ScenePlayer:onPlayerRemove");
                 }
               }}
-              size="large">
+              size="large"
+            >
               <HighlightOffIcon color="error" />
             </IconButton>
           </span>
@@ -301,7 +310,8 @@ export function PlayerRow(
             }}
             disabled={!props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}
-            size="large">
+            size="large"
+          >
             {props.player.playedDuringTurn ? (
               <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
             ) : (
@@ -315,7 +325,12 @@ export function PlayerRow(
 
   function renderPointCounter() {
     return (
-      <Grid container justifyContent="flex-start" alignItems="center" wrap="nowrap">
+      <Grid
+        container
+        justifyContent="flex-start"
+        alignItems="center"
+        wrap="nowrap"
+      >
         <Grid item>
           <Box ml="-.5rem">
             <CircleTextField
@@ -512,7 +527,7 @@ export function PlayerRow(
         className={css({
           fontSize: ".8rem",
           fontFamily: FontFamily.Console,
-          color: theme.palette.text.hint,
+          color: theme.palette.text.secondary,
         })}
         display="inline"
       >
@@ -539,7 +554,12 @@ export function PlayerRow(
         </DialogContent>
         <DialogActions>
           <Box mb=".5rem" width="100%">
-            <Grid container wrap="nowrap" justifyContent="space-around" spacing={2}>
+            <Grid
+              container
+              wrap="nowrap"
+              justifyContent="space-around"
+              spacing={2}
+            >
               <Grid item>
                 <Button
                   color="primary"

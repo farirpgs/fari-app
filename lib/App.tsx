@@ -1,6 +1,5 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider, Theme, StyledEngineProvider } from "@material-ui/core/styles";
-import StylesProvider from '@material-ui/styles/StylesProvider';
+import { StyledEngineProvider, ThemeProvider } from "@material-ui/core/styles";
 import * as Sentry from "@sentry/react";
 import React, { ReactNode, useContext } from "react";
 import { DndProvider } from "react-dnd";
@@ -39,13 +38,6 @@ import { IScene } from "./hooks/useScene/IScene";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { getDefaultInjections } from "./services/injections";
 import { AppDarkTheme, AppLightTheme } from "./theme";
-
-
-declare module '@material-ui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
 
 const injections = getDefaultInjections();
 
@@ -297,31 +289,29 @@ function AppProviders(props: { children: ReactNode }) {
   const store = useContext(SettingsContext);
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider
-        theme={store.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
-      >
-        <StylesProvider injectFirst>
-          <CssBaseline />
-          <Sentry.ErrorBoundary fallback={ErrorReport} showDialog>
-            <HelmetProvider>
-              <BrowserRouter>
-                <Helmet
-                  htmlAttributes={{
-                    "client-build-number": env.buildNumber,
-                    "client-hash": env.hash,
-                    "client-context": env.context,
-                  }}
-                />
-                <AppAnalytics />
-                <MyBinderManager />
-                {props.children}
-              </BrowserRouter>
-            </HelmetProvider>
-          </Sentry.ErrorBoundary>
-        </StylesProvider>
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <ThemeProvider
+      theme={store.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
+    >
+      <StyledEngineProvider injectFirst>
+        <CssBaseline />
+        <Sentry.ErrorBoundary fallback={ErrorReport} showDialog>
+          <HelmetProvider>
+            <BrowserRouter>
+              <Helmet
+                htmlAttributes={{
+                  "client-build-number": env.buildNumber,
+                  "client-hash": env.hash,
+                  "client-context": env.context,
+                }}
+              />
+              <AppAnalytics />
+              <MyBinderManager />
+              {props.children}
+            </BrowserRouter>
+          </HelmetProvider>
+        </Sentry.ErrorBoundary>
+      </StyledEngineProvider>
+    </ThemeProvider>
   );
 }
 AppProviders.displayName = "AppProvider";

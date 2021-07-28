@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import Alert from "@material-ui/core/Alert";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -31,7 +32,6 @@ import ExportIcon from "@material-ui/icons/GetApp";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SearchIcon from "@material-ui/icons/Search";
 import ShareIcon from "@material-ui/icons/Share";
-import Alert from '@material-ui/core/Alert';
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { arraySort } from "../../domains/array/arraySort";
@@ -111,8 +111,9 @@ export function MyBinder<TFolders extends string>(props: {
     : "";
 
   const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] =
-    useState<{ folder: TFolders; element: any } | undefined>(undefined);
+  const [deletedObject, setDeletedObject] = useState<
+    { folder: TFolders; element: any } | undefined
+  >(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -135,177 +136,184 @@ export function MyBinder<TFolders extends string>(props: {
     setSearch("");
   }
 
-  return <>
-    <Dialog
-      open={!!importDialogModalEntity}
-      onClose={() => {
-        setImportDialogModalEntity(undefined);
-      }}
-    >
-      <DialogTitle>{t("my-binder.import-dialog.title")}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          {t("my-binder.import-dialog.description")}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Box mb=".5rem" width="100%">
-          <Grid container wrap="nowrap" justifyContent="space-around" spacing={2}>
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="primary"
-                data-cy={`my-binder.folders.${currentFolder}.import`}
-                size="small"
-                onClick={() => {
-                  props.onImportUpdateExisting(
-                    currentFolder,
-                    importDialogModalEntity
-                  );
-                  setImportDialogModalEntity(undefined);
-                }}
-              >
-                {t("my-binder.import-dialog.update-existing")}
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="primary"
-                data-cy={`my-binder.folders.${currentFolder}.import`}
-                size="small"
-                onClick={() => {
-                  props.onImportAddAsNew(
-                    currentFolder,
-                    importDialogModalEntity
-                  );
-                  setImportDialogModalEntity(undefined);
-                }}
-              >
-                {t("my-binder.import-dialog.add-as-new")}
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
-      </DialogActions>
-    </Dialog>
-    <Dialog
-      open={props.open}
-      onClose={props.onClose}
-      fullWidth
-      maxWidth="md"
-      classes={{
-        paper: css({
-          background: theme.palette.background.default,
-          height: "100%",
-          position: "relative",
-          overflow: "auto",
-        }),
-      }}
-    >
-      <Snackbar
-        open={deletedSnack}
-        autoHideDuration={6000}
-        onClose={(event, reason) => {
-          if (reason === "clickaway") {
-            return;
-          }
-          setDeletedSnack(false);
+  return (
+    <>
+      <Dialog
+        open={!!importDialogModalEntity}
+        onClose={() => {
+          setImportDialogModalEntity(undefined);
         }}
       >
-        <Alert
-          onClose={() => {
-            setDeletedSnack(false);
-          }}
-          severity="success"
-          action={
-            <Button color="inherit" size="small" onClick={handleOnUndo}>
-              {t("manager.undo")}
-            </Button>
-          }
-        >
-          {t("manager.deleted")}
-        </Alert>
-      </Snackbar>
-      <Box p="1rem">
-        <Paper component="form" elevation={2}>
-          <Box px="1rem" py=".5rem" mb="1rem">
-            <Grid container spacing={1} alignItems="center">
+        <DialogTitle>{t("my-binder.import-dialog.title")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t("my-binder.import-dialog.description")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Box mb=".5rem" width="100%">
+            <Grid
+              container
+              wrap="nowrap"
+              justifyContent="space-around"
+              spacing={2}
+            >
               <Grid item>
-                <Box mr=".5rem" width="30px">
-                  {where === Where.Folders || !props.canGoBack ? (
-                    <MenuBookIcon color="primary" />
-                  ) : (
-                    <IconButton size="small" onClick={handleGoBack}>
-                      <ArrowBackIcon />
-                    </IconButton>
-                  )}
-                </Box>
-              </Grid>
-              <Grid item xs>
-                <LazyState
-                  value={search}
-                  onChange={(newSearch) => {
-                    setSearch(newSearch);
-                  }}
-                  delay={500}
-                  render={([lazySearch, setLazySearch]) => {
-                    return (
-                      <InputBase
-                        placeholder={
-                          folder
-                            ? `${t(
-                                "my-binder.search-in"
-                              )} "${currentFolderLabel}"...`
-                            : t("my-binder.search")
-                        }
-                        autoFocus
-                        value={lazySearch}
-                        fullWidth
-                        onChange={(e) => {
-                          setLazySearch(e.target.value);
-                        }}
-                      />
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  data-cy={`my-binder.folders.${currentFolder}.import`}
+                  size="small"
+                  onClick={() => {
+                    props.onImportUpdateExisting(
+                      currentFolder,
+                      importDialogModalEntity
                     );
+                    setImportDialogModalEntity(undefined);
                   }}
-                />
+                >
+                  {t("my-binder.import-dialog.update-existing")}
+                </Button>
               </Grid>
               <Grid item>
-                <SearchIcon className={css({ display: "flex" })} />
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  data-cy={`my-binder.folders.${currentFolder}.import`}
+                  size="small"
+                  onClick={() => {
+                    props.onImportAddAsNew(
+                      currentFolder,
+                      importDialogModalEntity
+                    );
+                    setImportDialogModalEntity(undefined);
+                  }}
+                >
+                  {t("my-binder.import-dialog.add-as-new")}
+                </Button>
               </Grid>
             </Grid>
           </Box>
-        </Paper>
-        {where === Where.Folders && (
-          <Fade in key="renderFolders">
-            <Box>{renderFolders()}</Box>
-          </Fade>
-        )}
-        {where === Where.Folder && (
-          <Fade in key="renderFolder">
-            <Box>{renderFolder()}</Box>
-          </Fade>
-        )}
-        {where === Where.Search && (
-          <Fade in key="renderSearch">
-            <Box>{renderSearch()}</Box>
-          </Fade>
-        )}
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <AppLink
-              onClick={() => {
-                history.push("/data");
-                props.onClose();
-              }}
-            >
-              {t("my-binder.all-my-data")}
-            </AppLink>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={props.open}
+        onClose={props.onClose}
+        fullWidth
+        maxWidth="md"
+        classes={{
+          paper: css({
+            background: theme.palette.background.default,
+            height: "100%",
+            position: "relative",
+            overflow: "auto",
+          }),
+        }}
+      >
+        <Snackbar
+          open={deletedSnack}
+          autoHideDuration={6000}
+          onClose={(event, reason) => {
+            if (reason === "clickaway") {
+              return;
+            }
+            setDeletedSnack(false);
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setDeletedSnack(false);
+            }}
+            severity="success"
+            action={
+              <Button color="inherit" size="small" onClick={handleOnUndo}>
+                {t("manager.undo")}
+              </Button>
+            }
+          >
+            {t("manager.deleted")}
+          </Alert>
+        </Snackbar>
+        <Box p="1rem">
+          <Paper component="form" elevation={2}>
+            <Box px="1rem" py=".5rem" mb="1rem">
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <Box mr=".5rem" width="30px">
+                    {where === Where.Folders || !props.canGoBack ? (
+                      <MenuBookIcon color="primary" />
+                    ) : (
+                      <IconButton size="small" onClick={handleGoBack}>
+                        <ArrowBackIcon />
+                      </IconButton>
+                    )}
+                  </Box>
+                </Grid>
+                <Grid item xs>
+                  <LazyState
+                    value={search}
+                    onChange={(newSearch) => {
+                      setSearch(newSearch);
+                    }}
+                    delay={500}
+                    render={([lazySearch, setLazySearch]) => {
+                      return (
+                        <InputBase
+                          placeholder={
+                            folder
+                              ? `${t(
+                                  "my-binder.search-in"
+                                )} "${currentFolderLabel}"...`
+                              : t("my-binder.search")
+                          }
+                          autoFocus
+                          value={lazySearch}
+                          fullWidth
+                          onChange={(e) => {
+                            setLazySearch(e.target.value);
+                          }}
+                        />
+                      );
+                    }}
+                  />
+                </Grid>
+                <Grid item>
+                  <SearchIcon className={css({ display: "flex" })} />
+                </Grid>
+              </Grid>
+            </Box>
+          </Paper>
+          {where === Where.Folders && (
+            <Fade in key="renderFolders">
+              <Box>{renderFolders()}</Box>
+            </Fade>
+          )}
+          {where === Where.Folder && (
+            <Fade in key="renderFolder">
+              <Box>{renderFolder()}</Box>
+            </Fade>
+          )}
+          {where === Where.Search && (
+            <Fade in key="renderSearch">
+              <Box>{renderSearch()}</Box>
+            </Fade>
+          )}
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <AppLink
+                onClick={() => {
+                  history.push("/data");
+                  props.onClose();
+                }}
+              >
+                {t("my-binder.all-my-data")}
+              </AppLink>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </Dialog>
-  </>;
+        </Box>
+      </Dialog>
+    </>
+  );
 
   function renderFolders() {
     const folderNames = Object.keys(props.folders);
@@ -502,7 +510,7 @@ export function MyBinder<TFolders extends string>(props: {
                   <Box>
                     <MenuBookIcon
                       className={css({
-                        color: theme.palette.text.hint,
+                        color: theme.palette.text.secondary,
                         width: "5rem",
                         height: "5rem",
                       })}
@@ -584,7 +592,7 @@ export function MyBinder<TFolders extends string>(props: {
             </span>
             <span
               className={css({
-                color: theme.palette.text.hint,
+                color: theme.palette.text.secondary,
               })}
             >
               {`(${length})`}
@@ -625,7 +633,7 @@ function Element(props: {
     transition: theme.transitions.create(["color"], {
       duration: theme.transitions.duration.shortest,
     }),
-    color: hover ? theme.palette.text.primary : theme.palette.text.hint,
+    color: hover ? theme.palette.text.primary : theme.palette.text.secondary,
   });
   const translatedType = props.displayType
     ? t(`my-binder.folder.${props.element.type}` as ITranslationKeys)

@@ -1,4 +1,7 @@
 import { css } from "@emotion/css";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/core/Autocomplete";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
@@ -14,7 +17,7 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -22,9 +25,6 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
-import Autocomplete, {
-  createFilterOptions,
-} from '@material-ui/core/Autocomplete';
 import truncate from "lodash/truncate";
 import uniq from "lodash/uniq";
 import React, { useEffect, useRef, useState } from "react";
@@ -122,7 +122,7 @@ export type IDocProps = IProps;
 export const Doc: React.FC<IProps> = (props) => {
   const lightBackground = useLightBackground();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const history = useHistory();
   const logger = useLogger();
   const location = useLocation();
@@ -379,7 +379,8 @@ export const Doc: React.FC<IProps> = (props) => {
               startIcon={<EditIcon />}
               target="_blank"
               rel="noreferrer"
-              href={`${props.gitHubLink}${githubHash}`}>
+              href={`${props.gitHubLink}${githubHash}`}
+            >
               Edit this Page
             </Button>
           </Grid>
@@ -480,7 +481,8 @@ export const Doc: React.FC<IProps> = (props) => {
                 onClick={() => {
                   setMobileMenuOpen(true);
                 }}
-                size="large">
+                size="large"
+              >
                 <MenuIcon color="inherit" />
               </IconButton>
             </Grid>
@@ -497,7 +499,12 @@ export const Doc: React.FC<IProps> = (props) => {
 
   function renderHeader() {
     return (
-      <Grid container justifyContent="space-between" alignItems="flex-end" spacing={2}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="flex-end"
+        spacing={2}
+      >
         <Grid item md={7} xs={12} zeroMinWidth>
           {renderTitle()}
         </Grid>
@@ -641,15 +648,15 @@ export const Doc: React.FC<IProps> = (props) => {
               }
             }
           }}
-          renderOption={(header) => (
+          renderOption={(props, options) => (
             <React.Fragment>
               <Box width="100%">
                 <Grid container alignItems="center">
-                  <Grid item>{header.label}</Grid>
+                  <Grid item>{options.label}</Grid>
                 </Grid>
                 <Box>
                   <Typography variant="body2" noWrap color="textSecondary">
-                    {header.preview}
+                    {options.preview}
                   </Typography>
                 </Box>
               </Box>
@@ -662,7 +669,8 @@ export const Doc: React.FC<IProps> = (props) => {
               className={css({ width: "100%", margin: "0" })}
               label="Search"
               margin="normal"
-              variant="standard" />
+              variant="standard"
+            />
           )}
         />
       </Box>
@@ -680,47 +688,49 @@ export const Doc: React.FC<IProps> = (props) => {
       />
     );
 
-    return <>
-      <Hidden mdUp>
-        <Drawer
-          anchor="bottom"
-          open={mobileMenuOpen}
-          onClose={() => {
-            setMobileMenuOpen(false);
-          }}
-        >
-          <Box p="2rem">{sideBar}</Box>
-        </Drawer>
-      </Hidden>
-      <Hidden mdDown>
-        <Drawer
-          variant="permanent"
-          anchor="left"
-          open={true}
-          classes={{
-            root: css({
-              width: drawerWidth,
-              flexShrink: 0,
-            }),
-            paper: css({
-              paddingTop: "5.5rem",
-              width: drawerWidth,
-            }),
-          }}
-        >
-          <Box
-            className={css({
-              maxHeight: "calc(100vh - 5.5rem)",
-              overflow: "auto",
-              paddingBottom: "2rem",
-              borderTop: `1px solid ${theme.palette.divider}`,
-            })}
+    return (
+      <>
+        <Hidden mdUp>
+          <Drawer
+            anchor="bottom"
+            open={mobileMenuOpen}
+            onClose={() => {
+              setMobileMenuOpen(false);
+            }}
           >
-            {sideBar}
-          </Box>
-        </Drawer>
-      </Hidden>
-    </>;
+            <Box p="2rem">{sideBar}</Box>
+          </Drawer>
+        </Hidden>
+        <Hidden mdDown>
+          <Drawer
+            variant="permanent"
+            anchor="left"
+            open={true}
+            classes={{
+              root: css({
+                width: drawerWidth,
+                flexShrink: 0,
+              }),
+              paper: css({
+                paddingTop: "5.5rem",
+                width: drawerWidth,
+              }),
+            }}
+          >
+            <Box
+              className={css({
+                maxHeight: "calc(100vh - 5.5rem)",
+                overflow: "auto",
+                paddingBottom: "2rem",
+                borderTop: `1px solid ${theme.palette.divider}`,
+              })}
+            >
+              {sideBar}
+            </Box>
+          </Drawer>
+        </Hidden>
+      </>
+    );
   }
 
   function renderIsLoading() {
@@ -817,7 +827,7 @@ export const DocSideBar: React.FC<{
                 </Box>
 
                 <ArrowForwardIosIcon
-                  htmlColor={theme.palette.text.hint}
+                  htmlColor={theme.palette.text.secondary}
                   className={css({
                     width: "1rem",
                     height: "1rem",

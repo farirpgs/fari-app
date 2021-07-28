@@ -1,4 +1,6 @@
 import { css } from "@emotion/css";
+import Alert from "@material-ui/core/Alert";
+import Autocomplete from "@material-ui/core/Autocomplete";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -10,6 +12,8 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import ImageList from "@material-ui/core/ImageList";
+import ImageListItem from "@material-ui/core/ImageListItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
@@ -29,8 +33,6 @@ import MovieIcon from "@material-ui/icons/Movie";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
-import Alert from '@material-ui/core/Alert';
-import Autocomplete from '@material-ui/core/Autocomplete';
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -154,8 +156,9 @@ export const Session: React.FC<IProps> = (props) => {
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] =
-    useState<string | undefined>(undefined);
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
 
   const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
 
@@ -328,7 +331,8 @@ export const Session: React.FC<IProps> = (props) => {
                           logger.info("Scene:onFireGoodConfetti");
                         }}
                         color="primary"
-                        size="large">
+                        size="large"
+                      >
                         <Icons.PartyPopper
                           className={css({ width: "2rem", height: "2rem" })}
                           htmlColor={darken(theme.palette.success.main, 0.2)}
@@ -344,7 +348,8 @@ export const Session: React.FC<IProps> = (props) => {
                           logger.info("Scene:onFireBadConfetti");
                         }}
                         color="primary"
-                        size="large">
+                        size="large"
+                      >
                         <Icons.PartyPopper
                           className={css({ width: "2rem", height: "2rem" })}
                           htmlColor={darken(theme.palette.error.main, 0.2)}
@@ -985,7 +990,7 @@ export const Session: React.FC<IProps> = (props) => {
                 }
               }}
               variant="outlined"
-              color={shareLinkToolTip.open ? "primary" : "default"}
+              color={shareLinkToolTip.open ? "primary" : "inherit"}
               endIcon={<FileCopyIcon />}
             >
               {t("play-route.copy-game-link")}
@@ -1003,7 +1008,12 @@ export const Session: React.FC<IProps> = (props) => {
 
     return (
       <Box pb="1rem">
-        <Grid container spacing={1} justifyContent="space-evenly" alignItems="center">
+        <Grid
+          container
+          spacing={1}
+          justifyContent="space-evenly"
+          alignItems="center"
+        >
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
           )}
@@ -1059,7 +1069,7 @@ export function Scene(props: {
   const theme = useTheme();
   const logger = useLogger();
   const { t } = useTranslate();
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down('md'));
+  const isSMAndDown = useMediaQuery(theme.breakpoints.down("md"));
   const scenesManager = useContext(ScenesContext);
   const myBinderManager = useContext(MyBinderContext);
 
@@ -1079,8 +1089,9 @@ export function Scene(props: {
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
   const [savedSnack, setSavedSnack] = useState(false);
-  const [sceneTab, setSceneTab] =
-    useState<"public" | "private" | "notes">("public");
+  const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
+    "public"
+  );
 
   const headerColor = theme.palette.background.paper;
   const hasScene = !!sceneManager.state.scene;
@@ -1281,93 +1292,95 @@ export function Scene(props: {
   }
 
   function renderSceneNameAndGroup() {
-    return <>
-      <Box mb=".5rem">
-        <FateLabel
-          variant="h4"
-          uppercase={false}
-          className={css({
-            borderBottom: `1px solid ${theme.palette.divider}`,
-            textAlign: "center",
-          })}
-        >
-          <ContentEditable
-            autoFocus
-            data-cy="scene.name"
-            value={sceneManager.state.scene?.name ?? ""}
-            readonly={props.readonly}
-            onChange={(value) => {
-              sceneManager.actions.updateName(value);
-            }}
-          />
-        </FateLabel>
-        <FormHelperText className={css({ textAlign: "right" })}>
-          {t("play-route.scene-name")}
-        </FormHelperText>
-      </Box>
-      <Collapse in={!!(sceneManager.state.scene?.name ?? "")}>
-        <Box mb="1rem">
-          <Grid
-            container
-            spacing={2}
-            wrap="nowrap"
-            justifyContent="center"
-            alignItems="flex-end"
+    return (
+      <>
+        <Box mb=".5rem">
+          <FateLabel
+            variant="h4"
+            uppercase={false}
+            className={css({
+              borderBottom: `1px solid ${theme.palette.divider}`,
+              textAlign: "center",
+            })}
           >
-            <Grid item>
-              <FateLabel>{t("play-route.group")}</FateLabel>
-            </Grid>
-            <Grid item xs={8} sm={4}>
-              <LazyState
-                value={sceneManager.state.scene?.group}
-                delay={750}
-                onChange={(newGroup) => {
-                  sceneManager.actions.setGroup(newGroup);
-                }}
-                render={([lazyGroup, setLazyGroup]) => {
-                  return (
-                    <Autocomplete
-                      freeSolo
-                      options={scenesManager.state.groups.filter((g) => {
-                        const currentGroup = lazyGroup ?? "";
-                        return g.toLowerCase().includes(currentGroup);
-                      })}
-                      value={lazyGroup ?? ""}
-                      onChange={(event, newValue) => {
-                        setLazyGroup(newValue || undefined);
-                      }}
-                      inputValue={lazyGroup ?? ""}
-                      onInputChange={(event, newInputValue) => {
-                        setLazyGroup(newInputValue);
-                      }}
-                      disabled={props.readonly}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          variant="standard"
-                          InputProps={{
-                            ...params.InputProps,
-                            disableUnderline: true,
-                          }}
-                          data-cy="scene.group"
-                          inputProps={{
-                            ...params.inputProps,
-                            className: css({ padding: "2px" }),
-                          }}
-                          className={css({
-                            borderBottom: `1px solid ${theme.palette.divider}`,
-                          })}
-                        />
-                      )}
-                    />
-                  );
-                }}
-              />
-            </Grid>
-          </Grid>
+            <ContentEditable
+              autoFocus
+              data-cy="scene.name"
+              value={sceneManager.state.scene?.name ?? ""}
+              readonly={props.readonly}
+              onChange={(value) => {
+                sceneManager.actions.updateName(value);
+              }}
+            />
+          </FateLabel>
+          <FormHelperText className={css({ textAlign: "right" })}>
+            {t("play-route.scene-name")}
+          </FormHelperText>
         </Box>
-      </Collapse>
-    </>;
+        <Collapse in={!!(sceneManager.state.scene?.name ?? "")}>
+          <Box mb="1rem">
+            <Grid
+              container
+              spacing={2}
+              wrap="nowrap"
+              justifyContent="center"
+              alignItems="flex-end"
+            >
+              <Grid item>
+                <FateLabel>{t("play-route.group")}</FateLabel>
+              </Grid>
+              <Grid item xs={8} sm={4}>
+                <LazyState
+                  value={sceneManager.state.scene?.group}
+                  delay={750}
+                  onChange={(newGroup) => {
+                    sceneManager.actions.setGroup(newGroup);
+                  }}
+                  render={([lazyGroup, setLazyGroup]) => {
+                    return (
+                      <Autocomplete
+                        freeSolo
+                        options={scenesManager.state.groups.filter((g) => {
+                          const currentGroup = lazyGroup ?? "";
+                          return g.toLowerCase().includes(currentGroup);
+                        })}
+                        value={lazyGroup ?? ""}
+                        onChange={(event, newValue) => {
+                          setLazyGroup(newValue || undefined);
+                        }}
+                        inputValue={lazyGroup ?? ""}
+                        onInputChange={(event, newInputValue) => {
+                          setLazyGroup(newInputValue);
+                        }}
+                        disabled={props.readonly}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="standard"
+                            InputProps={{
+                              ...params.InputProps,
+                              disableUnderline: true,
+                            }}
+                            data-cy="scene.group"
+                            inputProps={{
+                              ...params.inputProps,
+                              className: css({ padding: "2px" }),
+                            }}
+                            className={css({
+                              borderBottom: `1px solid ${theme.palette.divider}`,
+                            })}
+                          />
+                        )}
+                      />
+                    );
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </Collapse>
+      </>
+    );
   }
   function renderSceneNotes() {
     return (
@@ -1403,7 +1416,12 @@ export function Scene(props: {
       <Box>
         <Box>{renderGMIndexCardActions(type)}</Box>
         <Box mb="2rem">
-          <Grid container spacing={1} justifyContent="center" alignItems="flex-end">
+          <Grid
+            container
+            spacing={1}
+            justifyContent="center"
+            alignItems="flex-end"
+          >
             <Grid item>
               <FormControl variant="standard">
                 <InputLabel>{t("play-route.sort")}</InputLabel>
@@ -1414,7 +1432,8 @@ export function Scene(props: {
                   onChange={(e) => {
                     setSort(e.target.value as SortMode);
                   }}
-                  variant="standard">
+                  variant="standard"
+                >
                   <option value={SortMode.None}>
                     {t("play-route.sort-options.none")}
                   </option>
@@ -1478,32 +1497,28 @@ export function Scene(props: {
     const sortedCards = arraySort(indexCardsFromTab, sorters);
 
     return (
-      <Box
+      <ImageList
+        variant="masonry"
+        cols={numberOfColumnsForCards}
+        gap={16}
         className={css({
-          label: "Scene-aspect-masonry-content",
-          columnCount: numberOfColumnsForCards,
-          columnWidth: "auto",
-          columnGap: "1rem",
+          padding: "2rem 2rem", // for boxShadow padding
+          margin: "-2rem -2rem", // for boxShadow padding
         })}
       >
         {sortedCards.map((indexCard, index) => {
           const hasChildren = indexCard.subCards.length > 0;
+
           return (
-            <Box
+            <ImageListItem
               key={`${indexCard.id}.${type}`}
               className={css({
-                label: "Scene-aspect-masonry-card",
-                paddingBottom: "1rem",
                 width: "100%",
-                columnSpan: hasChildren ? "all" : "initial",
-                /**
-                 * Disables bottom being cut-off in Chrome
-                 */
-                breakInside: "avoid",
-                /**
-                 * Disables bottom being cut-off in Firefox
-                 */
-                display: hasChildren ? "block" : "inline-block",
+                paddingTop: ".25rem",
+                paddingBottom: ".25rem",
+                gridColumnEnd: hasChildren
+                  ? "span 4 !important"
+                  : "span 1 !important",
               })}
             >
               <IndexCard
@@ -1555,18 +1570,18 @@ export function Scene(props: {
                   sceneManager.actions.removeIndexCard(indexCard.id, type);
                 }}
               />
-            </Box>
+            </ImageListItem>
           );
         })}
-      </Box>
+      </ImageList>
     );
   }
 
   function renderSceneTabs() {
     const tabClass = css({
       background: headerBackgroundColor,
-      color: headerColor,
       marginRight: ".5rem",
+      color: `${headerColor} !important`,
       // Pentagone
       // https://bennettfeely.com/clippy/
       // clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
@@ -1645,7 +1660,7 @@ export function Scene(props: {
         <Grid container spacing={1} justifyContent="center">
           <Grid item>
             <ButtonGroup
-              color="default"
+              color="inherit"
               variant="outlined"
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >

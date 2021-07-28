@@ -22,6 +22,7 @@ type IProps = {
 } & ButtonGroupProps;
 
 export const SplitButton: React.FC<IProps> = (props) => {
+  return null;
   const { options, ...buttonProps } = props;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);

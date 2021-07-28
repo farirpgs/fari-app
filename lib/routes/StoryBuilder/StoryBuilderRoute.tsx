@@ -306,7 +306,7 @@ export function StoryDeckTags(props: {
                 props.decksManager.state.selectedTags.includes(
                   tag as unknown as Tags
                 )
-                  ? "default"
+                  ? "filled"
                   : "outlined"
               }
               color="primary"
@@ -513,11 +513,10 @@ function Card(props: {
       >
         <div
           className={css({
-            label: "card-front",
             position: "absolute",
             width: "100%",
             height: "100%",
-            overfloww: "hidden",
+            overflow: "hidden",
             backfaceVisibility: "hidden",
             background: frontColors.bgColor,
             color: frontColors.primary,
@@ -527,7 +526,6 @@ function Card(props: {
         </div>
         <div
           className={css({
-            label: "card-back",
             position: "absolute",
             width: "100%",
             height: "100%",

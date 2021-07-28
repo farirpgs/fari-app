@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { ThemeProvider, Theme, StyledEngineProvider, useTheme } from "@material-ui/core/styles";
+import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { DataGrid, GridRowId } from "@material-ui/data-grid";
 import produce from "immer";
@@ -31,13 +31,6 @@ import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { IScene } from "../../hooks/useScene/IScene";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-
-
-declare module '@material-ui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
 
 enum ImportMode {
   Import = "Import",
@@ -282,17 +275,22 @@ export const DataRoute: React.FC = () => {
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
-                variant="standard" />
+                variant="standard"
+              />
             </Grid>
             <Grid item>
-              <FormControl className={css({ width: "10rem" })} variant="standard">
+              <FormControl
+                className={css({ width: "10rem" })}
+                variant="standard"
+              >
                 <InputLabel>{t("data-route.group")}</InputLabel>
                 <Select
                   value={group}
                   onChange={(event) => {
                     setGroup(event.target.value as string);
                   }}
-                  variant="standard">
+                  variant="standard"
+                >
                   <MenuItem value="">{t("data-route.none")}</MenuItem>
                   {groups.map((g) => {
                     return (
@@ -308,14 +306,18 @@ export const DataRoute: React.FC = () => {
               </FormControl>
             </Grid>
             <Grid item>
-              <FormControl className={css({ width: "10rem" })} variant="standard">
+              <FormControl
+                className={css({ width: "10rem" })}
+                variant="standard"
+              >
                 <InputLabel>{t("data-route.type")}</InputLabel>
                 <Select
                   value={type}
                   onChange={(event) => {
                     setType(event.target.value as string);
                   }}
-                  variant="standard">
+                  variant="standard"
+                >
                   <MenuItem value="">{t("data-route.none")}</MenuItem>
                   {DataRouteItemTypeList.map((t) => {
                     return (
@@ -397,22 +399,20 @@ export const DataRoute: React.FC = () => {
             </Grid>
 
             <Grid item>
-              <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={errorTheme}>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    disabled={!selections.length}
-                    onClick={() => {
-                      if (window.confirm(t("data-route.delete-confirmation"))) {
-                        handleOnDelete();
-                      }
-                    }}
-                  >
-                    {t("data-route.delete")}
-                  </Button>
-                </ThemeProvider>
-              </StyledEngineProvider>
+              <ThemeProvider theme={errorTheme}>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  disabled={!selections.length}
+                  onClick={() => {
+                    if (window.confirm(t("data-route.delete-confirmation"))) {
+                      handleOnDelete();
+                    }
+                  }}
+                >
+                  {t("data-route.delete")}
+                </Button>
+              </ThemeProvider>
             </Grid>
             <Grid item>
               {t("data-route.total-size")}
@@ -431,7 +431,7 @@ export const DataRoute: React.FC = () => {
         </Box>
         <Box height="400px">
           <Box display="flex" height="100%">
-            <Box flexGrow="1">
+            <Box className={css({ flexGrow: 1 })}>
               <DataGrid
                 rows={filteredRows}
                 // showToolbar
@@ -439,27 +439,25 @@ export const DataRoute: React.FC = () => {
                 autoPageSize
                 pagination
                 checkboxSelection
-                onSelectionModelChange={(newSelection) => {
-                  setSelection(newSelection.selectionModel);
+                onSelectionModelChange={(ids) => {
+                  setSelection(ids);
                 }}
                 columns={[
                   {
                     field: "name",
                     headerName: t("data-route.name"),
                     flex: 1,
-                    disableClickEventBubbling: true,
                   },
                   {
                     field: "group",
                     headerName: t("data-route.group"),
                     width: 150,
-                    disableClickEventBubbling: true,
                   },
                   {
                     field: "type",
                     headerName: t("data-route.type"),
                     width: 150,
-                    disableClickEventBubbling: true,
+
                     renderCell: (params) => {
                       return <strong>{params.value}</strong>;
                     },
@@ -468,7 +466,7 @@ export const DataRoute: React.FC = () => {
                     field: "size",
                     headerName: t("data-route.size"),
                     width: 150,
-                    disableClickEventBubbling: true,
+
                     renderCell: (params) => {
                       const kiloBytes = params.value as number;
                       const formatted = FariEntity.formatSize(kiloBytes);
@@ -480,7 +478,7 @@ export const DataRoute: React.FC = () => {
                     field: "lastUpdated",
                     headerName: t("data-route.last-updated"),
                     width: 250,
-                    disableClickEventBubbling: true,
+
                     valueGetter: (cell) => {
                       return getDayJSFrom(cell.value as number).format("lll");
                     },

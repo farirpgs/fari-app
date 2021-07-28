@@ -1,5 +1,5 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
+import { StyledEngineProvider, ThemeProvider } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -62,12 +62,12 @@ export function StoryProvider(props: {
                         : AppLightTheme
                     }
                   >
-                    <StylesProvider injectFirst>
+                    <StyledEngineProvider injectFirst>
+                      <CssBaseline />
                       <BrowserRouter>
-                        <CssBaseline />
                         <HelmetProvider>{props.children}</HelmetProvider>
                       </BrowserRouter>
-                    </StylesProvider>
+                    </StyledEngineProvider>
                   </ThemeProvider>
                 </DiceContext.Provider>
               </ScenesContext.Provider>

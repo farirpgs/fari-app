@@ -13,7 +13,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
-import { ThemeProvider, Theme, StyledEngineProvider, useTheme } from "@material-ui/core/styles";
+import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -22,7 +22,7 @@ import BookIcon from "@material-ui/icons/Book";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import BugReportIcon from "@material-ui/icons/BugReport";
-import CasinoIcon from '@material-ui/icons/Casino';
+import CasinoIcon from "@material-ui/icons/Casino";
 import ChatIcon from "@material-ui/icons/Chat";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
@@ -54,7 +54,7 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPossibleLanguages,
-  PossibleLanguagesNames
+  PossibleLanguagesNames,
 } from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
@@ -63,13 +63,6 @@ import { FateLabel } from "../FateLabel/FateLabel";
 import { Kofi } from "../Kofi/Kofi";
 import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
-
-
-declare module '@material-ui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
 
 let gameIdSingleton: string | undefined = undefined;
 
@@ -95,7 +88,7 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -227,7 +220,8 @@ export const Page: React.FC<{
                     href="https://www.netlify.com"
                     target="_blank"
                     rel="noreferrer"
-                    underline="hover">
+                    underline="hover"
+                  >
                     This site is powered by Netlify
                   </Link>
                 </Typography>
@@ -304,7 +298,8 @@ export const Page: React.FC<{
                     href="http://game-icons.net"
                     target="_blank"
                     rel="noreferrer"
-                    underline="hover">
+                    underline="hover"
+                  >
                     http://game-icons.net
                   </Link>{" "}
                   and{" "}
@@ -312,7 +307,8 @@ export const Page: React.FC<{
                     href="https://icons8.com/icon/569/dice"
                     target="_blank"
                     rel="noreferrer"
-                    underline="hover">
+                    underline="hover"
+                  >
                     Icons8
                   </Link>
                 </Typography>
@@ -327,7 +323,8 @@ export const Page: React.FC<{
                   target="_blank"
                   rel="noreferrer"
                   data-cy="page.privacy-policy"
-                  underline="hover">
+                  underline="hover"
+                >
                   {t("page.privacy-policy")}
                 </Link>
               </Box>
@@ -419,7 +416,8 @@ export const Page: React.FC<{
                     onClick={() => {
                       setMenuOpen(true);
                     }}
-                    size="large">
+                    size="large"
+                  >
                     <MenuIcon color="inherit" />
                   </IconButton>
                 )}
@@ -457,24 +455,22 @@ export const Page: React.FC<{
                 )}
               </Hidden>
               {shouldDisplayRejoinButton && (
-                <StyledEngineProvider injectFirst>
-                  <ThemeProvider theme={highlight.highlightTheme}>
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        history.push(`/play/${gameId}`);
-                      }}
-                      variant={"outlined"}
-                      className={css({
-                        minWidth: "10rem",
-                      })}
-                    >
-                      <Typography variant="button" noWrap>
-                        Rejoin&nbsp;Game
-                      </Typography>
-                    </Button>
-                  </ThemeProvider>
-                </StyledEngineProvider>
+                <ThemeProvider theme={highlight.highlightTheme}>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      history.push(`/play/${gameId}`);
+                    }}
+                    variant={"outlined"}
+                    className={css({
+                      minWidth: "10rem",
+                    })}
+                  >
+                    <Typography variant="button" noWrap>
+                      Rejoin&nbsp;Game
+                    </Typography>
+                  </Button>
+                </ThemeProvider>
               )}
             </Toolbar>
           </Box>
@@ -662,7 +658,8 @@ export const Page: React.FC<{
                   i18n.changeLanguage(newLanguage);
                   logger.setTag("language", newLanguage);
                 }}
-                variant="standard">
+                variant="standard"
+              >
                 {Object.keys(PossibleLanguagesNames).map((languageKey) => {
                   const shouldRenderDev = languageKey === "dev" && env.isDev;
                   if (languageKey !== "dev" || shouldRenderDev) {
@@ -737,7 +734,7 @@ function PageNavLink(
   }
 ) {
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const highlight = useHighlight();
   const subNav = props.subNav ?? [];
   const hasSubNav = subNav.length > 0;
@@ -762,73 +759,75 @@ function PageNavLink(
     setAnchorEl(null);
   }
 
-  return <>
-    <Tooltip title={props.tooltip ?? ""}>
-      <div>
-        <AppLink
-          data-cy={props["data-cy"]}
-          target={props.target}
+  return (
+    <>
+      <Tooltip title={props.tooltip ?? ""}>
+        <div>
+          <AppLink
+            data-cy={props["data-cy"]}
+            target={props.target}
+            className={css({
+              "label": "PageNavLink",
+              "display": "flex",
+              "alignItems": "center",
+              "color": "inherit",
+              "fontWeight": theme.typography.fontWeightMedium,
+              "fontSize": "1.1rem",
+              "&:hover": {
+                color: isSmall ? "inherit" : highlight.hover,
+                textDecoration: "underline",
+              },
+            })}
+            to={props.to}
+            onClick={props.onClick ?? handleOpenSubNav}
+          >
+            {props.label}
+            {hasPopperContent && <ExpandMoreIcon />}
+          </AppLink>
+        </div>
+      </Tooltip>
+
+      <Hidden mdDown>
+        <Popover
+          open={open}
+          onClose={handleCloseSubNav}
+          anchorEl={anchorEl}
+          TransitionProps={{ timeout: theme.transitions.duration.shortest }}
           className={css({
-            "label": "PageNavLink",
-            "display": "flex",
-            "alignItems": "center",
-            "color": "inherit",
-            "fontWeight": theme.typography.fontWeightMedium,
-            "fontSize": "1.1rem",
-            "&:hover": {
-              color: isSmall ? "inherit" : highlight.hover,
-              textDecoration: "underline",
-            },
+            marginTop: "1rem",
           })}
-          to={props.to}
-          onClick={props.onClick ?? handleOpenSubNav}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
         >
-          {props.label}
-          {hasPopperContent && <ExpandMoreIcon />}
-        </AppLink>
-      </div>
-    </Tooltip>
-
-    <Hidden mdDown>
-      <Popover
-        open={open}
-        onClose={handleCloseSubNav}
-        anchorEl={anchorEl}
-        TransitionProps={{ timeout: theme.transitions.duration.shortest }}
-        className={css({
-          marginTop: "1rem",
-        })}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        <Box px="1.5rem" py=".5rem" minWidth="200px">
-          <Box>
-            <Box>{renderSubNav()}</Box>
-            <Box>{props.children}</Box>
-          </Box>
-        </Box>
-      </Popover>
-    </Hidden>
-
-    <Hidden mdUp>
-      <Collapse in={open}>
-        <Box mt=".5rem">
-          <Paper elevation={2}>
-            <Box p="1rem">
+          <Box px="1.5rem" py=".5rem" minWidth="200px">
+            <Box>
               <Box>{renderSubNav()}</Box>
               <Box>{props.children}</Box>
             </Box>
-          </Paper>
-        </Box>
-      </Collapse>
-    </Hidden>
-  </>;
+          </Box>
+        </Popover>
+      </Hidden>
+
+      <Hidden mdUp>
+        <Collapse in={open}>
+          <Box mt=".5rem">
+            <Paper elevation={2}>
+              <Box p="1rem">
+                <Box>{renderSubNav()}</Box>
+                <Box>{props.children}</Box>
+              </Box>
+            </Paper>
+          </Box>
+        </Collapse>
+      </Hidden>
+    </>
+  );
 
   function renderSubNav() {
     return (
