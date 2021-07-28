@@ -104,7 +104,13 @@ export function BlockSlotTracker(
               {!props.readonly && (
                 <>
                   <Grid item>
-                    <Tooltip title={t("character-dialog.control.remove-box")}>
+                    <Tooltip
+                      title={
+                        props.block.meta.asClock
+                          ? t("character-dialog.control.remove-segment")
+                          : t("character-dialog.control.remove-box")
+                      }
+                    >
                       <IconButton
                         size="small"
                         data-cy={`${props.dataCy}.remove-box`}
@@ -139,7 +145,13 @@ export function BlockSlotTracker(
               {!props.readonly && (
                 <>
                   <Grid item>
-                    <Tooltip title={t("character-dialog.control.add-box")}>
+                    <Tooltip
+                      title={
+                        props.block.meta.asClock
+                          ? t("character-dialog.control.add-segment")
+                          : t("character-dialog.control.add-box")
+                      }
+                    >
                       <IconButton
                         data-cy={`${props.dataCy}.add-box`}
                         size="small"
