@@ -64,6 +64,12 @@ export const PlayRoute: React.FC<{
       if (peerAction.action === "pause") {
         sessionManager.actions.pause();
       }
+      if (peerAction.action === "update-index-card") {
+        sceneManager.actions.updateIndexCard(
+          peerAction.payload.indexCard,
+          "public"
+        );
+      }
     },
     debug: debug,
   });

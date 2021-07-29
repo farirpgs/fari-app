@@ -163,9 +163,8 @@ export const Session: React.FC<IProps> = (props) => {
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
-    string | undefined
-  >(undefined);
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] =
+    useState<string | undefined>(undefined);
 
   const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
 
@@ -922,6 +921,16 @@ export const Session: React.FC<IProps> = (props) => {
                       diceManager.actions.addOrRemovePoolElement(element);
                       diceManager.actions.setPlayerId(gm.id);
                     }}
+                    onIndexCardUpdate={(indexCard, type) => {
+                      if (isGM) {
+                        sceneManager.actions.updateIndexCard(indexCard, type);
+                      } else {
+                        connectionsManager?.actions.sendToHost<IPeerActions>({
+                          action: "update-index-card",
+                          payload: { indexCard: indexCard },
+                        });
+                      }
+                    }}
                   />
                 </TabPanel>
 
@@ -1139,6 +1148,7 @@ export function Scene(props: {
   canLoad: boolean;
   onRoll(diceRollResult: IDiceRollResult): void;
   onPoolClick(element: IDicePoolElement): void;
+  onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
 }) {
   const { sceneManager } = props;
 
@@ -1165,9 +1175,8 @@ export function Scene(props: {
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
   const [savedSnack, setSavedSnack] = useState(false);
-  const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
-    "public"
-  );
+  const [sceneTab, setSceneTab] =
+    useState<"public" | "private" | "notes">("public");
 
   const headerColor = theme.palette.background.paper;
   const hasScene = !!sceneManager.state.scene;
@@ -1574,12 +1583,12 @@ export function Scene(props: {
 
     return (
       <ImageList
-        variant="masonry"
+        variant={sortedCards.length >= 10 ? "masonry" : "standard"}
         cols={numberOfColumnsForCards}
         gap={16}
         className={css({
-          padding: "2rem 2rem", // for boxShadow padding
-          margin: "-2rem -2rem", // for boxShadow padding
+          padding: "1rem 1rem", // for boxShadow padding
+          margin: "-1rem -1rem", // for boxShadow padding
         })}
       >
         {sortedCards.map((indexCard, index) => {
@@ -1588,14 +1597,21 @@ export function Scene(props: {
           return (
             <ImageListItem
               key={`${indexCard.id}.${type}`}
+              cols={hasChildren ? numberOfColumnsForCards : 1}
               className={css({
                 width: "100%",
                 paddingTop: ".25rem",
                 paddingBottom: ".25rem",
-                // columnSpan: hasChildren ? "all" : "initial",
-                // gridColumnEnd: hasChildren
-                //   ? "span 4 !important"
-                //   : "span 1 !important",
+                // Cards with children take 100% of the available space
+                columnSpan: hasChildren ? "all" : "initial",
+                /**
+                 * Disables bottom being cut-off in Chrome
+                 */
+                // breakInside: "avoid",
+                /**
+                 * Disables bottom being cut-off in Firefox
+                 */
+                display: hasChildren ? "block" : "inline-block",
               })}
             >
               <IndexCard
@@ -1626,7 +1642,7 @@ export function Scene(props: {
                     type
                   );
                 }}
-                readonly={props.readonly}
+                // readonly={props.readonly}
                 indexCard={indexCard}
                 onRoll={props.onRoll}
                 onPoolClick={props.onPoolClick}
@@ -1638,7 +1654,7 @@ export function Scene(props: {
                   );
                 }}
                 onChange={(newIndexCard) => {
-                  sceneManager.actions.updateIndexCard(newIndexCard, type);
+                  props.onIndexCardUpdate(newIndexCard, type);
                 }}
                 onDuplicate={() => {
                   sceneManager.actions.duplicateIndexCard(indexCard, type);

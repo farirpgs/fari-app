@@ -1,6 +1,7 @@
 import { ICharacter } from "../../../domains/character/types";
 import { IDiceRollResult } from "../../../domains/dice/Dice";
 import { IPeerAction } from "../../../hooks/usePeerJS/IPeerAction";
+import { IIndexCard } from "../../../hooks/useScene/IScene";
 
 export type IPeerActions =
   | IRollPeerAction
@@ -8,6 +9,7 @@ export type IPeerActions =
   | IUpdateCharacterPeerAction
   | ILoadCharacterPeerAction
   | IUpdatePlayedInTurnOrderPeerAction
+  | IUpdateIndexCard
   | IPauseSession;
 
 type IRollPeerAction = IPeerAction<"roll", IDiceRollResult>;
@@ -22,3 +24,9 @@ type IUpdatePlayedInTurnOrderPeerAction = IPeerAction<
   boolean
 >;
 type IPauseSession = IPeerAction<"pause", undefined>;
+type IUpdateIndexCard = IPeerAction<
+  "update-index-card",
+  {
+    indexCard: IIndexCard;
+  }
+>;

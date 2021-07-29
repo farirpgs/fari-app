@@ -116,7 +116,7 @@ function FariPopper(props: {
 
 export const IndexCard: React.FC<
   {
-    readonly: boolean;
+    readonly?: boolean;
     className?: string;
     id: string;
     type?: IIndexCardType;
