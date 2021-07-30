@@ -1582,91 +1582,94 @@ export function Scene(props: {
     const sortedCards = arraySort(indexCardsFromTab, sorters);
 
     return (
-      <ImageList
-        variant={sortedCards.length >= 10 ? "masonry" : "standard"}
-        cols={numberOfColumnsForCards}
-        gap={16}
-        className={css({
-          padding: "1rem 1rem", // for boxShadow padding
-          margin: "-1rem -1rem", // for boxShadow padding
-        })}
-      >
-        {sortedCards.map((indexCard, index) => {
-          const hasChildren = indexCard.subCards.length > 0;
-
-          return (
-            <ImageListItem
-              key={`${indexCard.id}.${type}`}
-              cols={hasChildren ? numberOfColumnsForCards : 1}
-              className={css({
-                width: "100%",
-                paddingTop: ".25rem",
-                paddingBottom: ".25rem",
-                // Cards with children take 100% of the available space
-                columnSpan: hasChildren ? "all" : "initial",
-                /**
-                 * Disables bottom being cut-off in Chrome
-                 */
-                // breakInside: "avoid",
-                /**
-                 * Disables bottom being cut-off in Firefox
-                 */
-                display: hasChildren ? "block" : "inline-block",
-              })}
-            >
-              <IndexCard
-                type={type}
-                reactDndIndex={index}
-                allCards={sortedCards}
-                canMove={sort === SortMode.None && !props.readonly}
-                key={indexCard.id}
-                reactDndType={DragAndDropTypes.SceneIndexCards}
-                data-cy={`scene.aspect.${index}`}
-                id={`index-card-${indexCard.id}`}
-                indexCardHiddenRecord={
-                  hiddenIndexCardRecord.state.indexCardHiddenRecord
-                }
-                onToggleVisibility={(indexCard) => {
-                  hiddenIndexCardRecord.actions.toggle(indexCard);
-                }}
-                onTogglePrivate={() => {
-                  sceneManager.actions.toggleIndexCardSection(indexCard, type);
-                }}
-                onMoveTo={(
-                  idOfIndexCardToMove: string,
-                  idOfIndexCardToMoveTo: string
-                ) => {
-                  sceneManager.actions.moveIndexCardTo(
-                    idOfIndexCardToMove,
-                    idOfIndexCardToMoveTo,
-                    type
-                  );
-                }}
-                // readonly={props.readonly}
-                indexCard={indexCard}
-                onRoll={props.onRoll}
-                onPoolClick={props.onPoolClick}
-                onMove={(dragIndex, hoverIndex) => {
-                  sceneManager.actions.moveIndexCard(
-                    dragIndex,
-                    hoverIndex,
-                    type
-                  );
-                }}
-                onChange={(newIndexCard) => {
-                  props.onIndexCardUpdate(newIndexCard, type);
-                }}
-                onDuplicate={() => {
-                  sceneManager.actions.duplicateIndexCard(indexCard, type);
-                }}
-                onRemove={() => {
-                  sceneManager.actions.removeIndexCard(indexCard.id, type);
-                }}
-              />
-            </ImageListItem>
-          );
-        })}
-      </ImageList>
+      <Box>
+        <ImageList
+          variant={sortedCards.length >= 10 ? "masonry" : "standard"}
+          cols={numberOfColumnsForCards}
+          gap={16}
+          className={css({
+            overflow: "initial",
+          })}
+        >
+          {sortedCards.map((indexCard, index) => {
+            const hasChildren = indexCard.subCards.length > 0;
+            return (
+              <ImageListItem
+                key={`${indexCard.id}.${type}`}
+                cols={hasChildren ? numberOfColumnsForCards : 1}
+                className={css({
+                  width: "100%",
+                  paddingTop: ".25rem",
+                  paddingBottom: ".25rem",
+                  // Cards with children take 100% of the available space
+                  columnSpan: hasChildren ? "all" : "initial",
+                  /**
+                   * Disables bottom being cut-off in Chrome
+                   */
+                  // breakInside: "avoid",
+                  /**
+                   * Disables bottom being cut-off in Firefox
+                   */
+                  display: hasChildren ? "block" : "inline-block",
+                })}
+              >
+                <IndexCard
+                  type={type}
+                  reactDndIndex={index}
+                  allCards={sortedCards}
+                  canMove={sort === SortMode.None && !props.readonly}
+                  key={indexCard.id}
+                  reactDndType={DragAndDropTypes.SceneIndexCards}
+                  data-cy={`scene.aspect.${index}`}
+                  id={`index-card-${indexCard.id}`}
+                  indexCardHiddenRecord={
+                    hiddenIndexCardRecord.state.indexCardHiddenRecord
+                  }
+                  onToggleVisibility={(indexCard) => {
+                    hiddenIndexCardRecord.actions.toggle(indexCard);
+                  }}
+                  onTogglePrivate={() => {
+                    sceneManager.actions.toggleIndexCardSection(
+                      indexCard,
+                      type
+                    );
+                  }}
+                  onMoveTo={(
+                    idOfIndexCardToMove: string,
+                    idOfIndexCardToMoveTo: string
+                  ) => {
+                    sceneManager.actions.moveIndexCardTo(
+                      idOfIndexCardToMove,
+                      idOfIndexCardToMoveTo,
+                      type
+                    );
+                  }}
+                  // readonly={props.readonly}
+                  indexCard={indexCard}
+                  onRoll={props.onRoll}
+                  onPoolClick={props.onPoolClick}
+                  onMove={(dragIndex, hoverIndex) => {
+                    sceneManager.actions.moveIndexCard(
+                      dragIndex,
+                      hoverIndex,
+                      type
+                    );
+                  }}
+                  onChange={(newIndexCard) => {
+                    props.onIndexCardUpdate(newIndexCard, type);
+                  }}
+                  onDuplicate={() => {
+                    sceneManager.actions.duplicateIndexCard(indexCard, type);
+                  }}
+                  onRemove={() => {
+                    sceneManager.actions.removeIndexCard(indexCard.id, type);
+                  }}
+                />
+              </ImageListItem>
+            );
+          })}
+        </ImageList>
+      </Box>
     );
   }
 

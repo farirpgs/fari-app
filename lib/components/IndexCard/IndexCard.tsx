@@ -5,6 +5,8 @@ import Fade from "@material-ui/core/Fade";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import ImageList from "@material-ui/core/ImageList";
+import ImageListItem from "@material-ui/core/ImageListItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
@@ -518,32 +520,26 @@ export const IndexCard: React.FC<
 
   function renderSubCards() {
     return (
-      <>
-        <Box
-          py="1rem"
-          px="1rem"
-          // mb="1rem"
+      <Box px="1rem" py="1rem">
+        <ImageList
+          variant={"standard"}
+          cols={numberOfColumnsForSubCards}
+          gap={16}
           className={css({
-            columnCount: numberOfColumnsForSubCards,
-            columnWidth: "auto",
-            columnGap: "1rem",
+            // padding: "1rem 1rem", // for boxShadow padding
+            // margin: "-1rem -1rem", // for boxShadow padding
           })}
         >
           {indexCardManager.state.indexCard.subCards?.map(
             (subCard, subCardIndex) => {
               return (
-                <Box
+                <ImageListItem
                   key={subCard.id}
+                  cols={1}
                   className={css({
-                    label: "IndexCard-masonry-card",
                     width: "100%",
-                    display: "inline-block",
-
-                    marginBottom: "1rem",
-                    /**
-                     * Disables bottom being cut-off
-                     */
-                    breakInside: "avoid",
+                    paddingTop: ".25rem",
+                    paddingBottom: ".25rem",
                   })}
                 >
                   <IndexCard
@@ -581,12 +577,12 @@ export const IndexCard: React.FC<
                       indexCardManager.actions.removeIndexCard(subCard.id);
                     }}
                   />
-                </Box>
+                </ImageListItem>
               );
             }
           )}
-        </Box>
-      </>
+        </ImageList>
+      </Box>
     );
   }
 
