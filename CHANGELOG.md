@@ -25,6 +25,10 @@
 - feat: polish translations
 - feat: polish Fate Core/Condensed/Accelerated templates
 - feat: display game master characters in offline
+- **v5.1.2**
+
+- fix: only sort dice results when its a dice pool
+- feat: slot tracker can now be displayed as clocks
 
 # v5.0 Better Index Cards and New Block Types
 
