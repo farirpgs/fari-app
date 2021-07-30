@@ -162,7 +162,9 @@ export type IDicePoolBlock = {
 
 export type ISlotTrackerBlock = {
   type: BlockType.SlotTracker;
-  meta: IDefaultBlockMeta & {};
+  meta: IDefaultBlockMeta & {
+    asClock?: boolean;
+  };
   value: Array<{
     label: string;
     checked?: boolean;

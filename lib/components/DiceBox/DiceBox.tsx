@@ -328,12 +328,14 @@ export function DiceBoxResult(props: {
           };
         });
       });
-      return arraySort(commandSets, [
-        (c) => ({
-          value: c.value.toString(),
-          direction: "desc",
-        }),
-      ]);
+      return shouldListResult
+        ? arraySort(commandSets, [
+            (c) => ({
+              value: c.value.toString(),
+              direction: "desc",
+            }),
+          ])
+        : commandSets;
     }
   );
 

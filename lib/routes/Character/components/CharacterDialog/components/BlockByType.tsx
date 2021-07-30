@@ -25,7 +25,10 @@ import {
 } from "./blocks/BlockPointCounter";
 import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
-import { BlockSlotTracker } from "./blocks/BlockSlotTracker";
+import {
+  BlockSlotTracker,
+  BlockSlotTrackerActions,
+} from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
 
 export function BlockByType(
@@ -231,6 +234,12 @@ export function BlockByType(
         )}
         {block.type === BlockType.Numeric && (
           <BlockNumericActions
+            block={block}
+            onMetaChange={handleOnMetaChange}
+          />
+        )}
+        {block.type === BlockType.SlotTracker && (
+          <BlockSlotTrackerActions
             block={block}
             onMetaChange={handleOnMetaChange}
           />
