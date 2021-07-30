@@ -48,7 +48,7 @@ export const sceneButtonTemplates: Record<string, Array<ISceneButtonTemplate>> =
         },
       },
       {
-        name: "BadGuy",
+        name: "Bad Guy",
         factory(card) {
           card.titleLabel = "Bad Guy";
           card.contentLabel = "Aspects";

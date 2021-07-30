@@ -1783,7 +1783,7 @@ export function Scene(props: {
               orientation={isSMAndDown ? "vertical" : "horizontal"}
             >
               <Button
-                data-cy="scene.add-index-card"
+                data-cy="scene.add-card"
                 onClick={() => {
                   sceneManager.actions.addIndexCard(type);
                   logger.info("Scene:onAddCard:IndexCard");
@@ -1798,6 +1798,7 @@ export function Scene(props: {
                 return (
                   <Button
                     key={template.name}
+                    data-cy={`scene.add-card-${template.name}`}
                     onClick={() => {
                       sceneManager.actions.addIndexCard(type, template.factory);
                     }}
