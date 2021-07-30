@@ -291,9 +291,11 @@ function Clock(props: {
   const circleCx = 55;
   const circleCy = 55;
   const circleR = 50;
-
+  const filledColor = true
+    ? `url(#fari-slot-tracker-clock-pattern)`
+    : theme.palette.text.secondary;
   const checkedSliceStyle = css({
-    fill: theme.palette.primary.light,
+    fill: filledColor,
     cursor: props.disabled ? "inherit" : "pointer",
     transition: theme.transitions.create(["fill"], { duration: "0.2s" }),
   });
@@ -310,7 +312,6 @@ function Clock(props: {
     <svg
       viewBox="0 0 110 110"
       id="pie"
-      fill="#fff"
       className={cx(
         css({
           fill: "transparent",
@@ -318,13 +319,33 @@ function Clock(props: {
         props.className
       )}
     >
+      <defs>
+        <pattern
+          id="fari-slot-tracker-clock-pattern"
+          x="0"
+          y="0"
+          width="5"
+          height="5"
+          patternUnits="userSpaceOnUse"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="5"
+            y2="5"
+            stroke={theme.palette.text.primary}
+            strokeWidth="1"
+          />
+        </pattern>
+      </defs>
+
       {props.slices.length === 1 && (
         <circle
           cx={circleCx}
           cy={circleCy}
           r={circleR}
-          fill={props.slices[0] ? theme.palette.primary.light : "transparent"}
-          stroke="#000"
+          fill={props.slices[0] ? `filledColor` : "transparent"}
+          stroke={theme.palette.text.primary}
           strokeWidth="4px"
           className={sliceStyle}
           onClick={() => {
@@ -366,7 +387,7 @@ function Clock(props: {
               d={d}
               key={i}
               className={checked ? checkedSliceStyle : sliceStyle}
-              stroke="#000"
+              stroke={theme.palette.text.primary}
               strokeWidth="4px"
               onClick={() => {
                 if (props.disabled) {
