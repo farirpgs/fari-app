@@ -263,7 +263,7 @@ MultipleDiceWithLabel.args = {
     {
       total: 27,
       totalWithoutModifiers: 27,
-      options: { listResults: false },
+      options: { listResults: true },
       rollGroups: [
         {
           label: "Combat",
