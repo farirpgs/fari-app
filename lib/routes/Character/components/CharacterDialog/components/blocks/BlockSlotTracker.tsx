@@ -180,7 +180,7 @@ export function BlockSlotTracker(
     });
 
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Grid item>
           <Clock
             slices={slices}

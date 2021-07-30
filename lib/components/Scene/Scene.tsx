@@ -49,9 +49,10 @@ import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { BlockType, ICharacter } from "../../domains/character/types";
+import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { Font } from "../../domains/font/Font";
@@ -77,13 +78,13 @@ import { ContentEditable } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
-import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { LiveMode, Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
+import { sceneButtonTemplates } from "./domains/sceneButtonTemplates";
 import { useHiddenIndexCardRecord } from "./hooks/useHiddenIndexCardRecord";
 
 export enum SceneMode {
@@ -1151,6 +1152,7 @@ export function Scene(props: {
   onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
 }) {
   const { sceneManager } = props;
+  const settingsManager = useContext(SettingsContext);
 
   const theme = useTheme();
   const logger = useLogger();
@@ -1755,6 +1757,26 @@ export function Scene(props: {
       <Box mb="1rem">
         <Grid container spacing={1} justifyContent="center">
           <Grid item>
+            <FormControl variant="standard">
+              <Select
+                native
+                value={settingsManager.state.gameTemplate}
+                onChange={(e) => {
+                  settingsManager.actions.setGameTemplate(
+                    e.target.value as SortMode
+                  );
+                }}
+                variant="standard"
+              >
+                {Object.keys(sceneButtonTemplates).map((template) => (
+                  <option key={template} value={template}>
+                    {template}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item>
             <ButtonGroup
               color="inherit"
               variant="outlined"
@@ -1770,92 +1792,21 @@ export function Scene(props: {
               >
                 {t("play-route.add-index-card")}
               </Button>
-              <Button
-                data-cy="scene.add-aspect"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "Aspect";
-                    card.contentLabel = "Notes";
-                    const freeInvokes = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    freeInvokes.label = "Free Invokes";
-                    freeInvokes.value = [];
-                    card.blocks.push(freeInvokes);
-                  });
-                  logger.info("Scene:onAddCard:Aspect");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-aspect")}
-              </Button>
-              <Button
-                data-cy="scene.add-boost"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "Boost";
-                    card.contentLabel = "Notes";
-                    const freeInvokes = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    freeInvokes.label = "Free Invokes";
-                    card.blocks.push(freeInvokes);
-                    card.color = IndexCardColor.blue;
-                  });
-                  logger.info("Scene:onAddCard:Boost");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-boost")}
-              </Button>
-              <Button
-                data-cy="scene.add-npc"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "NPC";
-                    card.contentLabel = "Aspects";
-                    const stress = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    stress.label = "Stress";
-                    const consequences = CharacterFactory.makeBlock(
-                      BlockType.Text
-                    );
-                    consequences.label = "Consequences";
-                    card.blocks.push(stress);
-                    card.blocks.push(consequences);
-                    card.color = IndexCardColor.green;
-                  });
-                  logger.info("Scene:onAddCard:NPC");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-npc")}
-              </Button>
-              <Button
-                data-cy="scene.add-bad-guy"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "Bad Guy";
-                    card.contentLabel = "Aspects";
-                    const stress = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    stress.label = "Stress";
-                    const consequences = CharacterFactory.makeBlock(
-                      BlockType.Text
-                    );
-                    consequences.label = "Consequences";
-                    card.blocks.push(stress);
-                    card.blocks.push(consequences);
-                    card.color = IndexCardColor.red;
-                  });
-                  logger.info("Scene:onAddCard:BadGuy");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-bad-guy")}
-              </Button>
+              {sceneButtonTemplates[
+                settingsManager.state.gameTemplate || "Fate"
+              ].map((template) => {
+                return (
+                  <Button
+                    key={template.name}
+                    onClick={() => {
+                      sceneManager.actions.addIndexCard(type, template.factory);
+                    }}
+                    endIcon={<AddCircleOutlineIcon />}
+                  >
+                    {template.name}
+                  </Button>
+                );
+              })}
             </ButtonGroup>
           </Grid>
         </Grid>

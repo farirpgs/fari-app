@@ -27,6 +27,7 @@ describe("useSession", () => {
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
+      paused: false,
       drawAreaObjects: [],
     };
     // WHEN

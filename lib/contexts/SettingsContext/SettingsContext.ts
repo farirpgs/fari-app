@@ -27,6 +27,11 @@ export function useSettings() {
     key: "fari-user-name",
     localStorage: window.localStorage,
   });
+  const [gameTemplate, setGameTemplate] = useStorageEntity<string>({
+    defaultValue: "",
+    key: "fari-game-template",
+    localStorage: window.localStorage,
+  });
   const [diceCommandIds, setDiceCommandsIds] =
     useStorageEntity<Array<IDiceCommandSetId> | null>({
       defaultValue: null,
@@ -47,6 +52,7 @@ export function useSettings() {
       userId,
       userName,
       diceCommandIds: diceCommandIds,
+      gameTemplate,
     },
     actions: {
       setThemeMode,
@@ -54,6 +60,7 @@ export function useSettings() {
       setThemeModeTemporarily,
       setUserName,
       setDiceCommandsIds: setDiceCommandsIds,
+      setGameTemplate,
     },
   };
 }
