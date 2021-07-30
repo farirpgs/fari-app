@@ -344,7 +344,7 @@ function Clock(props: {
           cx={circleCx}
           cy={circleCy}
           r={circleR}
-          fill={props.slices[0] ? `filledColor` : "transparent"}
+          fill={props.slices[0] ? filledColor : "transparent"}
           stroke={theme.palette.text.primary}
           strokeWidth="4px"
           className={sliceStyle}
