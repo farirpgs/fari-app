@@ -255,12 +255,20 @@ describe("/characters", () => {
       Fari.get("character-dialog.Stress.#Physical.remove").click();
 
       // slot tracker
-      Fari.get("character-dialog.Stress.Mental.add-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.add-box").click();
+      Fari.get("character-dialog.Stress.Mental.add-box").click({ force: true });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.add-box").click({ force: true });
 
       // section labels
       Fari.get("character-dialog.Aspects.label").clear().type("#Aspects");

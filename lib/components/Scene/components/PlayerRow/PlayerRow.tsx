@@ -20,6 +20,8 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RestorePageIcon from "@material-ui/icons/RestorePage";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React, { useState } from "react";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
@@ -48,6 +50,7 @@ export function PlayerRow(
       canLoadCharacterSheet: boolean;
       canLoadDuplicateCharacterSheet: boolean;
       canRemove: boolean;
+      canMarkPrivate: boolean;
     };
     player: IPlayer;
     isMe: boolean;
@@ -56,6 +59,7 @@ export function PlayerRow(
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
 
+    onTogglePrivate(): void;
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
     onAssignOriginalCharacterSheet(): void;
@@ -237,6 +241,9 @@ export function PlayerRow(
           {props.permissions.canRemove && (
             <Grid item>{renderDeleteButton()}</Grid>
           )}
+          {props.permissions.canRemove && (
+            <Grid item>{renderMarkPrivateButton()}</Grid>
+          )}
         </Grid>
       </Grid>
     );
@@ -284,6 +291,38 @@ export function PlayerRow(
               size="large"
             >
               <HighlightOffIcon color="error" />
+            </IconButton>
+          </span>
+        </Tooltip>
+      </Fade>
+    );
+  }
+  function renderMarkPrivateButton() {
+    return (
+      <Fade in={hover}>
+        <Tooltip
+          title={
+            props.player.private
+              ? t("player-row.show-to-players")
+              : t("player-row.hide-from-players")
+          }
+        >
+          <span>
+            <IconButton
+              data-cy={`${props["data-cy"]}.mark-private`}
+              className={css({ padding: "0" })}
+              onClick={(e) => {
+                e.stopPropagation();
+
+                props.onTogglePrivate();
+              }}
+              size="large"
+            >
+              {props.player.private ? (
+                <VisibilityIcon />
+              ) : (
+                <VisibilityOffIcon />
+              )}
             </IconButton>
           </span>
         </Tooltip>

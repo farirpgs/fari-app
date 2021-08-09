@@ -16,6 +16,7 @@ function StorybookPlayerRow(props: {
   canLoadCharacterSheet: boolean;
   canLoadDuplicateCharacterSheet: boolean;
   canRemove: boolean;
+  canMarkPrivate: boolean;
   player: IPlayer;
   highlight: boolean;
 }) {
@@ -28,6 +29,7 @@ function StorybookPlayerRow(props: {
         canLoadDuplicateCharacterSheet: props.canLoadDuplicateCharacterSheet,
         canLoadCharacterSheet: props.canLoadCharacterSheet,
         canRemove: props.canRemove,
+        canMarkPrivate: props.canMarkPrivate,
       }}
       player={props.player}
       isMe={props.highlight}
@@ -35,6 +37,7 @@ function StorybookPlayerRow(props: {
       onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
       onPointsChange={action("onPointsChange")}
       onPlayerRemove={action("onPlayerRemove")}
+      onTogglePrivate={action("onTogglePrivate")}
       onCharacterSheetOpen={action("onCharacterSheetOpen")}
       onAssignOriginalCharacterSheet={action("onLoadCharacterSheet")}
       onAssignDuplicateCharacterSheet={action(
@@ -56,6 +59,7 @@ export default {
     canLoadCharacterSheet: false,
     canLoadDuplicateCharacterSheet: false,
     canRemove: false,
+    canMarkPrivate: false,
     highlight: false,
     player: aPlayer(),
   },
@@ -71,6 +75,7 @@ const Template: Story<IProps> = (args, context) => (
         canLoadCharacterSheet={args.canLoadCharacterSheet}
         canLoadDuplicateCharacterSheet={args.canLoadDuplicateCharacterSheet}
         canRemove={args.canRemove}
+        canMarkPrivate={args.canMarkPrivate}
         player={args.player}
         highlight={args.highlight}
       />
@@ -473,6 +478,7 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
     isGM: false,
     playedDuringTurn: false,
     rolls: [],
+    private: false,
     ...props,
   };
 }

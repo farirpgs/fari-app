@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
@@ -121,14 +121,6 @@ export function CircleTextField(props: {
                 duration: theme.transitions.duration.shortest,
               }),
               "boxShadow": theme.shadows[1],
-              // "&:hover": {
-              //   background: props.highlight
-              //     ? theme.palette.primary.main
-              //     : theme.palette.primary.light,
-              //   color: props.highlight
-              //     ? theme.palette.getContrastText(theme.palette.primary.main)
-              //     : theme.palette.getContrastText(theme.palette.primary.light),
-              // },
             }),
           }}
           inputProps={{
@@ -138,6 +130,9 @@ export function CircleTextField(props: {
               "textAlign": "center",
               // this disables the up/down browser arrows
               "padding": "0",
+              "&.Mui-disabled": {
+                WebkitTextFillColor: "unset",
+              },
               "&[type=number]": {
                 MozAppearance: "textfield",
               },

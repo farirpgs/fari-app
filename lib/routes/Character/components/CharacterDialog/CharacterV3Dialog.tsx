@@ -75,21 +75,6 @@ export const smallIconButtonStyle = css({
   padding: "0",
 });
 
-const HeaderHelpLinks: Record<string, string> = {
-  "aspects": "/srds/condensed/getting-started?goTo=aspects",
-  "stunts & extras": "/srds/condensed/getting-started?goTo=stunts",
-  "stunts": "/srds/condensed/getting-started?goTo=stunts",
-  "approaches":
-    "/srds/accelerated/how-to-do-stuff-outcomes-actions-and-approaches?goTo=choose-your-approach",
-  "refresh": "/srds/condensed/getting-started?goTo=refresh",
-  "stress": "/srds/condensed/challenges-conflicts-and-contests?goTo=stress",
-  "consequences":
-    "/srds/condensed/challenges-conflicts-and-contests?goTo=consequences-1",
-  "skills": "/srds/condensed/getting-started?goTo=skill-list",
-  "fate points":
-    "/srds/condensed/aspects-and-fate-points?goTo=aspects-and-fate-points",
-};
-
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
@@ -612,8 +597,6 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
-            const helpLink = HeaderHelpLinks[section.label.toLowerCase()];
-
             return (
               <Box key={section.id}>
                 <SheetHeader
@@ -621,7 +604,6 @@ export const CharacterV3Dialog: React.FC<{
                   currentPageIndex={currentPageIndex}
                   pages={characterManager.state.character?.pages}
                   sectionLocation={sectionLocation}
-                  helpLink={helpLink}
                   advanced={advanced}
                   visibleOnCard={section.visibleOnCard}
                   canMoveUp={sectionIndex !== 0}
@@ -873,7 +855,7 @@ export const CharacterV3Dialog: React.FC<{
                     color="default"
                     data-cy="character-dialog.print"
                     size="small"
-                    onClick={(e) => {
+                    onClick={() => {
                       charactersManager.actions.exportEntityAsTemplate(
                         characterManager.state.character as ICharacter
                       );
@@ -1048,7 +1030,7 @@ export const CharacterV3Dialog: React.FC<{
           <Grid container>
             {section.blocks.map((block, blockIndex) => {
               const width: GridSize = !!block.meta.width
-                ? ((block.meta.width * 12) as GridSize)
+                ? (Math.round(block.meta.width * 12) as GridSize)
                 : 12;
               return (
                 <Grid key={block.id} item xs={width}>

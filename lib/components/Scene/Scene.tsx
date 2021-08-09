@@ -164,8 +164,9 @@ export const Session: React.FC<IProps> = (props) => {
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] =
-    useState<string | undefined>(undefined);
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
 
   const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
 
@@ -594,9 +595,13 @@ export const Session: React.FC<IProps> = (props) => {
               canControl: me?.id === gm.id,
               isMe: me?.id === gm.id,
               index: "gm",
+              isChild: false,
               children: (
                 <>
                   {gm.npcs.map((npc, npcIndex) => {
+                    if (npc.private && !isGM) {
+                      return null;
+                    }
                     return (
                       <React.Fragment key={npc.id}>
                         <Box>
@@ -609,6 +614,7 @@ export const Session: React.FC<IProps> = (props) => {
                               player: npc,
                               canControl: me?.id === gm.id,
                               isMe: me?.id === gm.id,
+                              isChild: true,
                               index: `gm-npc-${npcIndex}`,
                             })}
                           </Box>
@@ -630,6 +636,7 @@ export const Session: React.FC<IProps> = (props) => {
                     player,
                     canControl,
                     isMe,
+                    isChild: false,
                     index: playerRowIndex,
                   })}
                 </React.Fragment>
@@ -692,12 +699,14 @@ export const Session: React.FC<IProps> = (props) => {
     canControl: boolean;
     isMe: boolean;
     index: number | string;
+    isChild: boolean;
     children?: JSX.Element;
   }) {
     const {
       player,
       canControl,
       isMe,
+      isChild,
       index: playerRowIndex,
       children: playerRowChildren,
     } = options;
@@ -712,12 +721,16 @@ export const Session: React.FC<IProps> = (props) => {
           canLoadDuplicateCharacterSheet: isGM,
           canLoadCharacterSheet: canControl && !player.isGM,
           canRemove: isGM && !player.isGM,
+          canMarkPrivate: isGM && isChild,
         }}
         key={player.id}
         isMe={isMe}
         player={player}
         onPlayerRemove={() => {
           sessionManager.actions.removePlayer(player.id);
+        }}
+        onTogglePrivate={() => {
+          sessionManager.actions.togglePlayerVisibility(player.id);
         }}
         onCharacterSheetOpen={() => {
           if (player.character) {
@@ -972,7 +985,7 @@ export const Session: React.FC<IProps> = (props) => {
     const tabClass = css({
       background: headerBackgroundColor,
       color: `${headerColor} !important`,
-      padding: "0 1rem",
+      padding: "0 1.5rem",
       marginRight: ".5rem",
       // Pentagone
       // https://bennettfeely.com/clippy/
@@ -1177,8 +1190,9 @@ export function Scene(props: {
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
   const [savedSnack, setSavedSnack] = useState(false);
-  const [sceneTab, setSceneTab] =
-    useState<"public" | "private" | "notes">("public");
+  const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
+    "public"
+  );
 
   const headerColor = theme.palette.background.paper;
   const hasScene = !!sceneManager.state.scene;

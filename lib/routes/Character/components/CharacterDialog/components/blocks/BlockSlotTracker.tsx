@@ -1,6 +1,7 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
+import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
@@ -10,7 +11,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import React from "react";
+import React, { useState } from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -28,7 +29,7 @@ export function BlockSlotTracker(
   props: IBlockComponentProps<ISlotTrackerBlock>
 ) {
   const { t } = useTranslate();
-
+  const [hover, setHover] = useState(false);
   const [blockValue, setBlockValue] = useLazyState({
     value: props.block.value,
     delay: 750,
@@ -97,12 +98,25 @@ export function BlockSlotTracker(
 
   return (
     <>
-      <Box>
+      <Box
+        onPointerEnter={() => {
+          setHover(true);
+        }}
+        onPointerLeave={() => {
+          setHover(false);
+        }}
+      >
         {(!props.readonly || isLabelVisible) && (
           <Box>
-            <Grid container justifyContent={"center"} wrap="nowrap" spacing={1}>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              wrap="nowrap"
+              spacing={1}
+            >
               {!props.readonly && (
-                <>
+                <Fade in={hover}>
                   <Grid item>
                     <Tooltip
                       title={
@@ -122,7 +136,7 @@ export function BlockSlotTracker(
                       </IconButton>
                     </Tooltip>
                   </Grid>
-                </>
+                </Fade>
               )}
               {isLabelVisible && (
                 <Grid item className={css({ minWidth: "4rem" })}>
@@ -143,7 +157,7 @@ export function BlockSlotTracker(
                 </Grid>
               )}
               {!props.readonly && (
-                <>
+                <Fade in={hover}>
                   <Grid item>
                     <Tooltip
                       title={
@@ -163,7 +177,7 @@ export function BlockSlotTracker(
                       </IconButton>
                     </Tooltip>
                   </Grid>
-                </>
+                </Fade>
               )}
             </Grid>
           </Box>
@@ -199,7 +213,7 @@ export function BlockSlotTracker(
 
   function renderAsTrack() {
     return (
-      <Grid container justify="center" spacing={1}>
+      <Grid container justifyContent="center" spacing={1}>
         {blockValue.map((box, boxIndex) => {
           const isBoxLabelVisible =
             !!previewContentEditable({ value: box.label }) || props.advanced;

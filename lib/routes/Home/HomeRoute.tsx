@@ -741,7 +741,7 @@ function LightBox(props: ILightBoxProps) {
           component="h3"
           className={css({
             marginBottom: subTitle ? "1rem" : "3rem",
-            textAlign: textAlign ?? "center",
+            textAlign: (textAlign as any) ?? "center",
             fontWeight: theme.typography.fontWeightBold,
             letterSpacing: "-0.035em",
           })}
@@ -754,7 +754,7 @@ function LightBox(props: ILightBoxProps) {
           variant="h5"
           className={css({
             marginBottom: "3rem",
-            textAlign: textAlign ?? "center",
+            textAlign: (textAlign as any) ?? "center",
             color: theme.palette.text.secondary,
           })}
         >

@@ -20,6 +20,7 @@ describe("useSession", () => {
         playerName: "Game Master",
         rolls: [],
         playedDuringTurn: false,
+        private: false,
         npcs: [],
         isGM: true,
         points: "3",

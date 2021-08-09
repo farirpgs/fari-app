@@ -28,6 +28,7 @@ export function useSession(props: IProps) {
         playedDuringTurn: false,
         points: "3",
         isGM: true,
+        private: false,
         npcs: [],
       },
       players: [],
@@ -219,6 +220,7 @@ export function useSession(props: IProps) {
             rolls: rolls,
             isGM: false,
             points: points,
+            private: false,
             playedDuringTurn: playedDuringTurn,
             offline: false,
           };
@@ -247,6 +249,7 @@ export function useSession(props: IProps) {
           rolls: [],
           playedDuringTurn: false,
           isGM: false,
+          private: false,
           points: "3",
         });
       })
@@ -270,6 +273,22 @@ export function useSession(props: IProps) {
         });
         draft.players = draft.players.filter((p) => {
           return p.id !== id;
+        });
+      })
+    );
+  }
+
+  function togglePlayerVisibility(id: string) {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        const everyone = getEveryone(draft);
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.private = !p.private;
+          }
         });
       })
     );
@@ -415,6 +434,7 @@ export function useSession(props: IProps) {
       fireGoodConfetti,
       loadPlayerCharacter: loadPlayerCharacter,
       removePlayer,
+      togglePlayerVisibility,
       reset,
       updateDrawAreaObjects,
       updateGmRoll,
