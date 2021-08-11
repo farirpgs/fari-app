@@ -91,6 +91,7 @@ function MyBinderManager() {
 
   type IHandlers = {
     onSelect(element: IManagerViewModel): void;
+    onSelectOnNewTab(element: IManagerViewModel): void;
     onAdd(): void;
     onDelete(element: IManagerViewModel): void;
     onDuplicate(element: IManagerViewModel): void;
@@ -148,6 +149,9 @@ function MyBinderManager() {
         }
         myBinderManager.actions.close();
       },
+      onSelectOnNewTab(element) {
+        window.open(`/characters/${element.id}`, "_blank");
+      },
       onDelete(element) {
         charactersManager.actions.remove(element.id);
       },
@@ -203,6 +207,9 @@ function MyBinderManager() {
         }
         myBinderManager.actions.close();
       },
+      onSelectOnNewTab(element) {
+        window.open(`/scenes/${element.id}`);
+      },
       onDelete(element) {
         scenesManager.actions.remove(element.id);
       },
@@ -253,6 +260,9 @@ function MyBinderManager() {
       folders={folders}
       onSelect={(folder, element) => {
         handler[folder].onSelect(element);
+      }}
+      onSelectOnNewTab={(folder, element) => {
+        handler[folder].onSelectOnNewTab(element);
       }}
       onAdd={(folder) => {
         handler[folder].onAdd();

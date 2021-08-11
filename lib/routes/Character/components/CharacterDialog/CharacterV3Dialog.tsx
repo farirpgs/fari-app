@@ -849,21 +849,22 @@ export const CharacterV3Dialog: React.FC<{
                     </IconButton>
                   </Tooltip>
                 </Grid>
-
-                <Tooltip title={t("character-dialog.export-as-template")}>
-                  <IconButton
-                    color="default"
-                    data-cy="character-dialog.print"
-                    size="small"
-                    onClick={() => {
-                      charactersManager.actions.exportEntityAsTemplate(
-                        characterManager.state.character as ICharacter
-                      );
-                    }}
-                  >
-                    <ShareIcon />
-                  </IconButton>
-                </Tooltip>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.export-as-template")}>
+                    <IconButton
+                      color="default"
+                      data-cy="character-dialog.print"
+                      size="small"
+                      onClick={() => {
+                        charactersManager.actions.exportEntityAsTemplate(
+                          characterManager.state.character as ICharacter
+                        );
+                      }}
+                    >
+                      <ShareIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
               </>
             )}
             <Grid item>

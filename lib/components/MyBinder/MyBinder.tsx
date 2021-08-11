@@ -68,6 +68,7 @@ export function MyBinder<TFolders extends string>(props: {
   canGoBack: boolean;
   folder: string | undefined;
   onSelect(folder: TFolders, element: IManagerViewModel): void;
+  onSelectOnNewTab(folder: TFolders, element: IManagerViewModel): void;
   onAdd(folder: TFolders): void;
   onDelete(folder: TFolders, element: IManagerViewModel): void;
   onDuplicate(folder: TFolders, element: IManagerViewModel): void;
@@ -443,7 +444,7 @@ export function MyBinder<TFolders extends string>(props: {
     const elementsSortedByLatest = arraySort(elements, [
       (e) => ({ value: e.lastUpdated, direction: "desc" }),
     ]);
-    const elementsForLatest = elementsSortedByLatest.slice(0, 3);
+    const elementsForLatest = elementsSortedByLatest.slice(0, 5);
     return (
       <Box>
         {elementsForLatest.length > 0 &&
@@ -458,6 +459,9 @@ export function MyBinder<TFolders extends string>(props: {
                   displayType={false}
                   onSelect={() => {
                     props.onSelect(type, element);
+                  }}
+                  onSelectOnNewTab={() => {
+                    props.onSelectOnNewTab(type, element);
                   }}
                   onDelete={() => {
                     handleOnDelete(type, element);
@@ -540,6 +544,9 @@ export function MyBinder<TFolders extends string>(props: {
                         onSelect={() => {
                           props.onSelect(type, element);
                         }}
+                        onSelectOnNewTab={() => {
+                          props.onSelectOnNewTab(type, element);
+                        }}
                         onDelete={() => {
                           props.onDelete(type, element);
                         }}
@@ -617,6 +624,7 @@ function Element(props: {
   element: IManagerViewModel;
   displayType: boolean;
   onSelect(): void;
+  onSelectOnNewTab(): void;
   onExport(): void;
   onExportAsTemplate(): void;
   onDuplicate(): void;
@@ -649,7 +657,14 @@ function Element(props: {
         setHover(false);
       }}
       onClick={() => {
+        console.debug("onClick");
         props.onSelect();
+      }}
+      onMouseDown={(event) => {
+        console.debug("onMouseDown");
+        if (event.button === 1) {
+          props.onSelectOnNewTab();
+        }
       }}
     >
       <ListItemAvatar>
