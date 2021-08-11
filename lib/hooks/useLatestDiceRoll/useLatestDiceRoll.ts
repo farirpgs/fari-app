@@ -25,8 +25,9 @@ export function useLatestDiceRoll(
 
   const previousRolls = usePrevious(playerRolls);
   const [latestPlayerRoll] = playerRolls;
-  const [finalResult, setFinalResult] =
-    useState<IDiceRollResult | undefined>(undefined);
+  const [finalResult, setFinalResult] = useState<IDiceRollResult | undefined>(
+    undefined
+  );
   const [rolling, setRolling] = useState(false);
   const [color, setColor] = useState(theme.palette.background.paper);
 
@@ -46,12 +47,14 @@ export function useLatestDiceRoll(
         setColor(theme.palette.background.paper);
       } else if (
         commandGroup?.goodRoll &&
-        latestPlayerRoll?.totalWithoutModifiers >= commandGroup?.goodRoll
+        latestPlayerRoll?.totalWithoutModifiers >= commandGroup?.goodRoll &&
+        !latestPlayerRoll.options.listResults
       ) {
         setColor(darken(theme.palette.success.main, 0.2));
       } else if (
         commandGroup?.badRoll &&
-        latestPlayerRoll?.totalWithoutModifiers <= commandGroup?.badRoll
+        latestPlayerRoll?.totalWithoutModifiers <= commandGroup?.badRoll &&
+        !latestPlayerRoll.options.listResults
       ) {
         setColor(darken(theme.palette.error.main, 0.2));
       } else {
