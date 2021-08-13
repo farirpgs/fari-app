@@ -90,7 +90,7 @@ export const Faces: Array<ICard> = [
   { label: "A Master" },
   { label: "An Apprentice" },
   { label: "An Ally" },
-  { label: "An Ennemy" },
+  { label: "An Enemy" },
   { label: "A Lover" },
   { label: "A Former Lover" },
   { label: "A Chief" },

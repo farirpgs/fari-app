@@ -23,7 +23,8 @@ export function usePeerHost(options: {
         currentConnection: Peer.DataConnection
       ) {
         currentConnection.on("data", (data) => {
-          options.onConnectionDataReceive(currentConnection.label, data);
+          const decodedData = DataTransferObject.decode(data);
+          options.onConnectionDataReceive(currentConnection.label, decodedData);
         });
         currentConnection.on("open", () => {
           console.info(
@@ -31,9 +32,8 @@ export function usePeerHost(options: {
             currentConnection.label
           );
           setConnections((connections) => {
-            const connectionsWithoutCurrentInCaseItWasDisconnected = connections.filter(
-              (c) => c.label !== currentConnection.label
-            );
+            const connectionsWithoutCurrentInCaseItWasDisconnected =
+              connections.filter((c) => c.label !== currentConnection.label);
 
             return [
               ...connectionsWithoutCurrentInCaseItWasDisconnected,
