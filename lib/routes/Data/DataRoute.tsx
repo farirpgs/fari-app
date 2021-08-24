@@ -218,7 +218,7 @@ export const DataRoute: React.FC = () => {
     FariEntity.import<{
       scenes: Array<IScene>;
       characters: Array<ICharacter>;
-      indexCardCollections: Array<IIndexCardCollection>;
+      indexCardCollections?: Array<IIndexCardCollection>;
     }>({
       filesToImport: fileToImport,
       fariType: "full",
@@ -229,7 +229,7 @@ export const DataRoute: React.FC = () => {
       file.scenes.forEach((s) => {
         importScene(s, mode);
       });
-      file.indexCardCollections.forEach((c) => {
+      file.indexCardCollections?.forEach((c) => {
         importIndexCardCollection(c, mode);
       });
     });
