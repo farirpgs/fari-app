@@ -656,12 +656,14 @@ function Element(props: {
       onPointerLeave={() => {
         setHover(false);
       }}
-      onClick={() => {
-        console.debug("onClick");
-        props.onSelect();
+      onClick={(event) => {
+        if (event.ctrlKey || event.metaKey) {
+          props.onSelectOnNewTab();
+        } else {
+          props.onSelect();
+        }
       }}
       onMouseDown={(event) => {
-        console.debug("onMouseDown");
         if (event.button === 1) {
           props.onSelectOnNewTab();
         }
