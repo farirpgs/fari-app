@@ -52,7 +52,7 @@ import { IDicePoolElement } from "../../routes/Character/components/CharacterDia
 import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
@@ -128,7 +128,7 @@ export const IndexCard: React.FC<
     reactDndIndex: number;
     reactDndType: string;
     canMove: boolean;
-    indexCardHiddenRecord: Record<string, boolean>;
+    indexCardHiddenRecord?: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
     onMoveTo(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
@@ -137,7 +137,7 @@ export const IndexCard: React.FC<
     onRemove(): void;
     onDuplicate(): void;
     onTogglePrivate?(): void;
-    onToggleVisibility(indexCard: IIndexCard): void;
+    onToggleVisibility?(indexCard: IIndexCard): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -158,7 +158,7 @@ export const IndexCard: React.FC<
   );
   const diceManager = useContext(DiceContext);
   const [advanced, setAdvanced] = useState(false);
-  const open = !props.indexCardHiddenRecord[props.indexCard.id];
+  const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
   const numberOfColumnsForSubCards = useResponsiveValue({
     xl: 3,
     lg: 2,
@@ -658,6 +658,7 @@ export const IndexCard: React.FC<
                                   <Link
                                     component="button"
                                     variant="caption"
+                                    color="inherit"
                                     data-cy={`index-card.${block.label}.duplicate`}
                                     className={css({
                                       label: "CharacterDialog-duplicate",
@@ -676,6 +677,7 @@ export const IndexCard: React.FC<
                                   <Link
                                     component="button"
                                     variant="caption"
+                                    color="inherit"
                                     data-cy={`index-card.${block.label}.remove`}
                                     className={css({
                                       label: "CharacterDialog-remove",
@@ -768,6 +770,7 @@ export const IndexCard: React.FC<
             <Typography
               variant="overline"
               className={css({
+                display: "flex",
                 fontWeight: indexCardManager.state.indexCard.pinned
                   ? "bold"
                   : "inherit",
@@ -787,7 +790,7 @@ export const IndexCard: React.FC<
 
           <Fade in={hover}>
             <Grid item container justifyContent="flex-end">
-              {!isSubCard && !props.readonly && (
+              {!isSubCard && !props.readonly && props.onTogglePrivate && (
                 <Grid item>
                   <Tooltip
                     title={
@@ -865,32 +868,37 @@ export const IndexCard: React.FC<
                 </Tooltip>
               </Grid>
 
-              <Grid item>
-                <Tooltip
-                  title={
-                    open ? t("index-card.collapse") : t("index-card.expand")
-                  }
-                >
-                  <span>
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.collapse`}
-                      onClick={() => {
-                        props.onToggleVisibility(
-                          indexCardManager.state.indexCard
-                        );
-                      }}
-                    >
-                      <ArrowForwardIosIcon
-                        className={css({
-                          transform: open ? "rotate(270deg)" : "rotate(90deg)",
-                          transition: theme.transitions.create("transform"),
-                        })}
-                      />
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Grid>
+              {props.onToggleVisibility && (
+                <Grid item>
+                  <Tooltip
+                    title={
+                      open ? t("index-card.collapse") : t("index-card.expand")
+                    }
+                  >
+                    <span>
+                      <IconButton
+                        size="small"
+                        data-cy={`${props["data-cy"]}.collapse`}
+                        onClick={() => {
+                          props.onToggleVisibility?.(
+                            indexCardManager.state.indexCard
+                          );
+                        }}
+                      >
+                        <ArrowForwardIosIcon
+                          htmlColor={paper.primary}
+                          className={css({
+                            transform: open
+                              ? "rotate(270deg)"
+                              : "rotate(90deg)",
+                            transition: theme.transitions.create("transform"),
+                          })}
+                        />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                </Grid>
+              )}
             </Grid>
           </Fade>
         </Grid>

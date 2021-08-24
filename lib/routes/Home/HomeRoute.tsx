@@ -107,6 +107,23 @@ export const HomeRoute: React.FC<{}> = () => {
                 </FateLabel>
               </Grid>
             </Grid>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              spacing={3}
+            >
+              <Grid item>
+                <FateLabel
+                  variant="h6"
+                  align="center"
+                  color="primary"
+                  uppercase={false}
+                >
+                  {t("home-route.header.logo-title")}
+                </FateLabel>
+              </Grid>
+            </Grid>
           </Box>
         </DarkBox>
         <DarkBox linear px="2rem">
@@ -300,12 +317,7 @@ export const HomeRoute: React.FC<{}> = () => {
   function renderPlayButtons() {
     return (
       <Box>
-        <Grid
-          container
-          justifyContent="center"
-          spacing={8}
-          alignItems="flex-start"
-        >
+        <Grid container justifyContent="center" alignItems="flex-start">
           {isWebRTCSupported() && (
             <Grid
               item
@@ -652,6 +664,25 @@ export const HomeRoute: React.FC<{}> = () => {
         >
           {t("home-route.header.subtitle")}
         </Typography>
+        <Box mb="1rem" display="flex">
+          <Grid container>
+            <Grid item lg={6} xs={12}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                size="large"
+                className={css({ height: "3rem" })}
+                onClick={() => {
+                  history.push("/play");
+                  logger.info("HomeRoute:onStartOnlineGame");
+                }}
+              >
+                {t("home-route.header.cta")}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
         <Box
           className={css({
             display: "flex",

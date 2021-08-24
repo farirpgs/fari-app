@@ -482,6 +482,7 @@ function mockUseCharacters() {
       remove: jest.fn(),
       duplicate: jest.fn(),
       select: jest.fn(),
+      setEntities: jest.fn(),
       clearSelected: jest.fn(),
       exportEntity: jest.fn(),
       importEntity: jest.fn(),

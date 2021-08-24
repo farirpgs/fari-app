@@ -46,6 +46,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
@@ -74,7 +75,10 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
-import { ContentEditable } from "../ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -84,7 +88,6 @@ import { Toolbox } from "../Toolbox/Toolbox";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
-import { sceneButtonTemplates } from "./domains/sceneButtonTemplates";
 import { useHiddenIndexCardRecord } from "./hooks/useHiddenIndexCardRecord";
 
 export enum SceneMode {
@@ -1166,6 +1169,11 @@ export function Scene(props: {
 }) {
   const { sceneManager } = props;
   const settingsManager = useContext(SettingsContext);
+  const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
+  const selectedIndexCardCollection =
+    indexCardCollectionsManager.state.sceneIndexCardCollections.find(
+      (i) => i.id === settingsManager.state.gameTemplate
+    );
 
   const theme = useTheme();
   const logger = useLogger();
@@ -1441,6 +1449,7 @@ export function Scene(props: {
                     return (
                       <Autocomplete
                         freeSolo
+                        // multiple
                         options={scenesManager.state.groups.filter((g) => {
                           const currentGroup = lazyGroup ?? "";
                           return g.toLowerCase().includes(currentGroup);
@@ -1776,17 +1785,23 @@ export function Scene(props: {
                 native
                 value={settingsManager.state.gameTemplate}
                 onChange={(e) => {
-                  settingsManager.actions.setGameTemplate(
-                    e.target.value as SortMode
-                  );
+                  settingsManager.actions.setGameTemplate(e.target.value);
                 }}
                 variant="standard"
               >
-                {Object.keys(sceneButtonTemplates).map((template) => (
-                  <option key={template} value={template}>
-                    {template}
-                  </option>
-                ))}
+                <option value={""}>- Collections -</option>
+                {indexCardCollectionsManager.state.sceneIndexCardCollections.map(
+                  (indexCardCollection) => (
+                    <option
+                      key={indexCardCollection.id}
+                      value={indexCardCollection.id}
+                    >
+                      {previewContentEditable({
+                        value: indexCardCollection.name,
+                      })}
+                    </option>
+                  )
+                )}
               </Select>
             </FormControl>
           </Grid>
@@ -1806,19 +1821,17 @@ export function Scene(props: {
               >
                 {t("play-route.add-index-card")}
               </Button>
-              {sceneButtonTemplates[
-                settingsManager.state.gameTemplate || "Fate"
-              ].map((template) => {
+              {(selectedIndexCardCollection?.indexCards ?? []).map((card) => {
                 return (
                   <Button
-                    key={template.name}
-                    data-cy={`scene.add-card-${template.name}`}
+                    key={card.titleLabel}
+                    data-cy={`scene.add-card-${card.titleLabel}`}
                     onClick={() => {
-                      sceneManager.actions.addIndexCard(type, template.factory);
+                      sceneManager.actions.duplicateIndexCard(card, type);
                     }}
                     endIcon={<AddCircleOutlineIcon />}
                   >
-                    {template.name}
+                    {card.titleLabel}
                   </Button>
                 );
               })}

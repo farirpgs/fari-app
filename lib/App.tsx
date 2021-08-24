@@ -17,6 +17,10 @@ import {
   useCharacters,
 } from "./contexts/CharactersContext/CharactersContext";
 import { DiceContext, useDice } from "./contexts/DiceContext/DiceContext";
+import {
+  IndexCardCollectionsContext,
+  useIndexCardCollections,
+} from "./contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { InjectionsContext } from "./contexts/InjectionsContext/InjectionsContext";
 import {
   IFolders,
@@ -33,6 +37,10 @@ import {
 } from "./contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "./domains/character/CharacterFactory";
 import { CharacterTemplates } from "./domains/character/CharacterType";
+import {
+  IIndexCardCollection,
+  IndexCardCollectionFactory,
+} from "./domains/index-card-collection/IndexCardCollectionFactory";
 import { SceneFactory } from "./domains/scene/SceneFactory";
 import { IScene } from "./hooks/useScene/IScene";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
@@ -53,6 +61,7 @@ function AppContexts(props: { children: ReactNode }) {
   const settingsManager = useSettings();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
+  const indexCardCollectionsManager = useIndexCardCollections();
   const diceManager = useDice({
     defaultCommands: settingsManager.state.diceCommandIds,
     onCommandSetsChange(commandSetOptions) {
@@ -69,11 +78,15 @@ function AppContexts(props: { children: ReactNode }) {
           <SettingsContext.Provider value={settingsManager}>
             <CharactersContext.Provider value={charactersManager}>
               <ScenesContext.Provider value={scenesManager}>
-                <DiceContext.Provider value={diceManager}>
-                  <MyBinderContext.Provider value={myBinderManager}>
-                    <AppProviders>{props.children}</AppProviders>
-                  </MyBinderContext.Provider>
-                </DiceContext.Provider>
+                <IndexCardCollectionsContext.Provider
+                  value={indexCardCollectionsManager}
+                >
+                  <DiceContext.Provider value={diceManager}>
+                    <MyBinderContext.Provider value={myBinderManager}>
+                      <AppProviders>{props.children}</AppProviders>
+                    </MyBinderContext.Provider>
+                  </DiceContext.Provider>
+                </IndexCardCollectionsContext.Provider>
               </ScenesContext.Provider>
             </CharactersContext.Provider>
           </SettingsContext.Provider>
@@ -86,6 +99,7 @@ function AppContexts(props: { children: ReactNode }) {
 function MyBinderManager() {
   const scenesManager = useContext(ScenesContext);
   const charactersManager = useContext(CharactersContext);
+  const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const myBinderManager = useContext(MyBinderContext);
   const history = useHistory();
 
@@ -106,7 +120,7 @@ function MyBinderManager() {
   };
 
   const folders: Record<IFolders, Array<IManagerViewModel>> = {
-    characters: charactersManager.state.characters.map(
+    "characters": charactersManager.state.characters.map(
       (c): IManagerViewModel => ({
         id: c.id as string,
         group: c.group,
@@ -116,7 +130,7 @@ function MyBinderManager() {
         original: c,
       })
     ),
-    scenes: scenesManager.state.scenes.map(
+    "scenes": scenesManager.state.scenes.map(
       (s): IManagerViewModel => ({
         id: s.id as string,
         group: s.group,
@@ -126,9 +140,20 @@ function MyBinderManager() {
         original: s,
       })
     ),
+    "index-card-collections":
+      indexCardCollectionsManager.state.indexCardCollections.map(
+        (s): IManagerViewModel => ({
+          id: s.id as string,
+          group: s.group,
+          name: previewContentEditable({ value: s.name }),
+          lastUpdated: s.lastUpdated,
+          type: "index-card-collections",
+          original: s,
+        })
+      ),
   };
   const handler: Record<IFolders, IHandlers> = {
-    characters: {
+    "characters": {
       async onAdd() {
         const newCharacter = await charactersManager.actions.add(
           CharacterTemplates.Blank
@@ -162,15 +187,16 @@ function MyBinderManager() {
         charactersManager.actions.upsert(element.original);
       },
       async onImport(importPaths) {
-        const { character, exists } =
-          await charactersManager.actions.importEntity(importPaths);
+        const { entity, exists } = await charactersManager.actions.importEntity(
+          importPaths
+        );
 
         if (!exists) {
-          charactersManager.actions.upsert(character);
+          charactersManager.actions.upsert(entity);
           return { entity: undefined };
         } else {
           return {
-            entity: character,
+            entity: entity,
           };
         }
       },
@@ -189,7 +215,7 @@ function MyBinderManager() {
         charactersManager.actions.exportEntityAsTemplate(element.original);
       },
     },
-    scenes: {
+    "scenes": {
       onAdd() {
         const newScene = scenesManager.actions.add();
         if (myBinderManager.state.managerCallback.current) {
@@ -220,16 +246,16 @@ function MyBinderManager() {
         scenesManager.actions.upsert(element.original);
       },
       async onImport(importPaths) {
-        const { scene, exists } = await scenesManager.actions.importEntity(
+        const { entity, exists } = await scenesManager.actions.importEntity(
           importPaths
         );
 
         if (!exists) {
-          scenesManager.actions.upsert(scene);
+          scenesManager.actions.upsert(entity);
           return { entity: undefined };
         } else {
           return {
-            entity: scene,
+            entity: entity,
           };
         }
       },
@@ -244,6 +270,66 @@ function MyBinderManager() {
       },
       onExportAsTemplate(element) {
         scenesManager.actions.exportEntityAsTemplate(element.original);
+      },
+    },
+    "index-card-collections": {
+      onAdd() {
+        const newEntity = indexCardCollectionsManager.actions.add();
+        if (myBinderManager.state.managerCallback.current) {
+          myBinderManager.state.managerCallback.current(newEntity);
+        } else {
+          history.push(`/cards/${newEntity.id}`);
+        }
+        myBinderManager.actions.close();
+      },
+      onSelect(element) {
+        if (myBinderManager.state.managerCallback.current) {
+          myBinderManager.state.managerCallback.current(element.original);
+        } else {
+          history.push(`/cards/${element.id}`);
+        }
+        myBinderManager.actions.close();
+      },
+      onSelectOnNewTab(element) {
+        window.open(`/cards/${element.id}`);
+      },
+      onDelete(element) {
+        indexCardCollectionsManager.actions.remove(element.id);
+      },
+      onDuplicate(element) {
+        indexCardCollectionsManager.actions.duplicate(element.id);
+      },
+      onUndo(element) {
+        indexCardCollectionsManager.actions.upsert(element.original);
+      },
+      async onImport(importPaths) {
+        const { entity, exists } =
+          await indexCardCollectionsManager.actions.importEntity(importPaths);
+
+        if (!exists) {
+          indexCardCollectionsManager.actions.upsert(entity);
+          return { entity: undefined };
+        } else {
+          return {
+            entity: entity,
+          };
+        }
+      },
+      onImportAddAsNew(entity: IIndexCardCollection) {
+        indexCardCollectionsManager.actions.upsert(
+          IndexCardCollectionFactory.duplicate(entity)
+        );
+      },
+      onImportUpdateExisting(scene) {
+        indexCardCollectionsManager.actions.upsert(scene);
+      },
+      onExport(element) {
+        indexCardCollectionsManager.actions.exportEntity(element.original);
+      },
+      onExportAsTemplate(element) {
+        indexCardCollectionsManager.actions.exportEntityAsTemplate(
+          element.original
+        );
       },
     },
   };
@@ -351,4 +437,5 @@ export function useMark() {
 
   t("my-binder.folder.characters");
   t("my-binder.folder.scenes");
+  t("my-binder.folder.index-card-collections");
 }

@@ -127,6 +127,7 @@ export function BlockSlotTracker(
                     >
                       <IconButton
                         size="small"
+                        color="inherit"
                         data-cy={`${props.dataCy}.remove-box`}
                         onClick={() => {
                           handleRemoveBox();
@@ -167,6 +168,7 @@ export function BlockSlotTracker(
                       }
                     >
                       <IconButton
+                        color="inherit"
                         data-cy={`${props.dataCy}.add-box`}
                         size="small"
                         onClick={() => {
@@ -276,6 +278,7 @@ export function BlockSlotTrackerActions(
         <Link
           component="button"
           variant="caption"
+          underline="hover"
           className={css({
             color: theme.palette.primary.main,
           })}

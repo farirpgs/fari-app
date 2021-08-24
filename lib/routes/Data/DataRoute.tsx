@@ -20,12 +20,17 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SplitButton } from "../../components/SplitButton/SplitButton";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
+import {
+  IIndexCardCollection,
+  IndexCardCollectionFactory,
+} from "../../domains/index-card-collection/IndexCardCollectionFactory";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { IScene } from "../../hooks/useScene/IScene";
@@ -52,16 +57,19 @@ export const DataRoute: React.FC = () => {
   const DataRouteItemType = {
     Character: t("data-route.item-type.character"),
     Scene: t("data-route.item-type.scene"),
+    IndexCardCollection: t("data-route.item-type.index-card-collection"),
   };
   const DataRouteItemTypeList = [
     DataRouteItemType.Character,
     DataRouteItemType.Scene,
+    DataRouteItemType.IndexCardCollection,
   ];
 
   const theme = useTheme();
   const errorTheme = useThemeFromColor(theme.palette.error.main);
   const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
+  const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
 
   const [selections, setSelection] = useState<Array<GridRowId>>([]);
   const $importInput = useRef<any>();
@@ -125,6 +133,17 @@ export const DataRoute: React.FC = () => {
           size: FariEntity.getSize(s).kiloBytes,
         } as IRow;
       }),
+      ...indexCardCollectionsManager.state.indexCardCollections.map((s) => {
+        return {
+          id: s.id,
+          entity: s,
+          name: previewContentEditable({ value: s.name }),
+          group: s.group ?? "-",
+          lastUpdated: s.lastUpdated,
+          type: DataRouteItemType.IndexCardCollection,
+          size: FariEntity.getSize(s).kiloBytes,
+        } as IRow;
+      }),
     ];
     const filteredRows = allRows
       .filter((r) => {
@@ -154,7 +173,12 @@ export const DataRoute: React.FC = () => {
       allRows: allRows,
       size: allRowsSize,
     };
-  }, [charactersManager.state.characters, scenesManager.state.scenes, filters]);
+  }, [
+    charactersManager.state.characters,
+    scenesManager.state.scenes,
+    indexCardCollectionsManager.state.indexCardCollections,
+    filters,
+  ]);
 
   const selectedRowsSize = useMemo(() => {
     const rows = allRows.filter((r) => {
@@ -171,6 +195,10 @@ export const DataRoute: React.FC = () => {
     const scenesToExport = scenesManager.state.scenes.filter((c) =>
       selections.includes(c.id)
     );
+    const indexCardCollectionsToExport =
+      indexCardCollectionsManager.state.indexCardCollections.filter((c) =>
+        selections.includes(c.id)
+      );
 
     FariEntity.export({
       fariType: "full",
@@ -178,6 +206,7 @@ export const DataRoute: React.FC = () => {
       element: {
         scenes: scenesToExport,
         characters: charactersToExport,
+        indexCardCollections: indexCardCollectionsToExport,
       },
     });
   }
@@ -189,6 +218,7 @@ export const DataRoute: React.FC = () => {
     FariEntity.import<{
       scenes: Array<IScene>;
       characters: Array<ICharacter>;
+      indexCardCollections: Array<IIndexCardCollection>;
     }>({
       filesToImport: fileToImport,
       fariType: "full",
@@ -199,19 +229,44 @@ export const DataRoute: React.FC = () => {
       file.scenes.forEach((s) => {
         importScene(s, mode);
       });
+      file.indexCardCollections.forEach((c) => {
+        importIndexCardCollection(c, mode);
+      });
     });
     FariEntity.import<ICharacter>({
       filesToImport: fileToImport,
       fariType: "character",
-    }).then((character) => {
-      importCharacter(character, mode);
+    }).then((entity) => {
+      importCharacter(entity, mode);
     });
     FariEntity.import<IScene>({
       filesToImport: fileToImport,
       fariType: "scene",
-    }).then((scene) => {
-      importScene(scene, mode);
+    }).then((entity) => {
+      importScene(entity, mode);
     });
+    FariEntity.import<IIndexCardCollection>({
+      filesToImport: fileToImport,
+      fariType: "index-card-template",
+    }).then((entity) => {
+      importIndexCardCollection(entity, mode);
+    });
+  }
+
+  function importIndexCardCollection(
+    indexCardCollection: IIndexCardCollection,
+    mode: ImportMode
+  ) {
+    const indexCardCollectionToUse =
+      mode === ImportMode.Import
+        ? indexCardCollection
+        : produce(indexCardCollection, (draft) => {
+            draft.id = Id.generate();
+          });
+    const migratedIndexCardCollection = IndexCardCollectionFactory.migrate(
+      indexCardCollectionToUse
+    );
+    indexCardCollectionsManager.actions.upsert(migratedIndexCardCollection);
   }
 
   function importScene(scene: IScene, mode: ImportMode) {
@@ -238,18 +293,24 @@ export const DataRoute: React.FC = () => {
   }
 
   function handleOnDelete() {
-    const charactersToExport = charactersManager.state.characters.filter((s) =>
+    const charactersToRemove = charactersManager.state.characters.filter((s) =>
       selections.includes(s.id)
     );
-    const scenesToExport = scenesManager.state.scenes.filter((c) =>
+    const scenesToRemove = scenesManager.state.scenes.filter((c) =>
       selections.includes(c.id)
     );
-
-    charactersToExport.forEach((c) => {
+    const indexCardCollectionsToRemove =
+      indexCardCollectionsManager.state.indexCardCollections.filter((c) =>
+        selections.includes(c.id)
+      );
+    charactersToRemove.forEach((c) => {
       charactersManager.actions.remove(c.id);
     });
-    scenesToExport.forEach((s) => {
+    scenesToRemove.forEach((s) => {
       scenesManager.actions.remove(s.id);
+    });
+    indexCardCollectionsToRemove.forEach((s) => {
+      indexCardCollectionsManager.actions.remove(s.id);
     });
   }
 
