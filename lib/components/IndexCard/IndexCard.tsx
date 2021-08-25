@@ -132,7 +132,7 @@ export const IndexCard: React.FC<
     indexCardHiddenRecord?: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
-    onMoveTo(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
+    onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
     onRoll(diceRollResult: IDiceRollResult): void;
     onMove(dragIndex: number, hoverIndex: number): void;
     onRemove(): void;
@@ -421,7 +421,7 @@ export const IndexCard: React.FC<
                   </Tooltip>
                 </Grid>
               )}
-              {props.isGM && (
+              {props.isGM && props.onMoveTo && (
                 <Grid item>
                   <FariPopper
                     renderPopper={(renderProps) => {
@@ -445,7 +445,7 @@ export const IndexCard: React.FC<
                               onChange={(e) => {
                                 renderProps.handleOnClose();
                                 if (e.target.value) {
-                                  props.onMoveTo(
+                                  props.onMoveTo?.(
                                     indexCardManager.state.indexCard.id,
                                     e.target.value as string
                                   );
@@ -560,7 +560,7 @@ export const IndexCard: React.FC<
                     indexCardHiddenRecord={props.indexCardHiddenRecord}
                     onToggleVisibility={props.onToggleVisibility}
                     onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
-                      props.onMoveTo(
+                      props.onMoveTo?.(
                         idOfIndexCardToMove,
                         idOfIndexCardToMoveTo
                       );

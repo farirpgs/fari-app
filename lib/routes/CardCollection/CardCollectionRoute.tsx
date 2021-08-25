@@ -113,6 +113,30 @@ function useCardCollection(props: {
     );
   }
 
+  function moveIndexCard(dragIndex: number, hoverIndex: number) {
+    setCardCollection(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        if (!draft) {
+          return;
+        }
+
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+
+        const cards = draft.indexCards;
+
+        const dragItem = cards[dragIndex];
+
+        cards.splice(dragIndex, 1);
+        cards.splice(hoverIndex, 0, dragItem);
+      })
+    );
+  }
+
   return {
     state: {
       cardCollection: cardCollection,
@@ -124,6 +148,7 @@ function useCardCollection(props: {
       addCard,
       removeIndexCard,
       duplicateIndexCard,
+      moveIndexCard,
 
       updateIndexCard,
     },
@@ -289,26 +314,14 @@ export const CardCollectionRoute: React.FC<{
                           reactDndType={DragAndDropTypes.SceneIndexCards}
                           data-cy={`card-collection.card.${index}`}
                           id={`index-card-${indexCard.id}`}
-                          onMoveTo={(
-                            idOfIndexCardToMove: string,
-                            idOfIndexCardToMoveTo: string
-                          ) => {
-                            // sceneManager.actions.moveIndexCardTo(
-                            //   idOfIndexCardToMove,
-                            //   idOfIndexCardToMoveTo,
-                            //   type
-                            // );
-                          }}
-                          // readonly={props.readonly}
                           indexCard={indexCard}
                           onRoll={() => {}}
                           onPoolClick={() => {}}
                           onMove={(dragIndex, hoverIndex) => {
-                            // sceneManager.actions.moveIndexCard(
-                            //   dragIndex,
-                            //   hoverIndex,
-                            //   type
-                            // );
+                            indexCardCollectionManager.actions.moveIndexCard(
+                              dragIndex,
+                              hoverIndex
+                            );
                           }}
                           onChange={(newIndexCard) => {
                             indexCardCollectionManager.actions.updateIndexCard(
