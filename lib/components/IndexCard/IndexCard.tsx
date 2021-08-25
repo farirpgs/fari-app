@@ -52,7 +52,7 @@ import { IDicePoolElement } from "../../routes/Character/components/CharacterDia
 import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../ContentEditable/ContentEditable";
 import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
@@ -118,7 +118,7 @@ function FariPopper(props: {
 
 export const IndexCard: React.FC<
   {
-    readonly?: boolean;
+    // readonly?: boolean;
     className?: string;
     id: string;
     type?: IIndexCardType;
@@ -128,6 +128,7 @@ export const IndexCard: React.FC<
     reactDndIndex: number;
     reactDndType: string;
     canMove: boolean;
+    isGM: boolean;
     indexCardHiddenRecord?: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
@@ -181,7 +182,7 @@ export const IndexCard: React.FC<
       className={props.className}
     >
       <Box
-        pb={props.readonly ? "1rem" : "0"}
+        pb={!props.isGM ? "1rem" : "0"}
         bgcolor={paper.bgColor}
         color={paper.primary}
         onClick={() => {
@@ -220,7 +221,7 @@ export const IndexCard: React.FC<
                               marginLeft: ".25rem",
                               cursor: "drag",
                               display:
-                                props.readonly || !props.canMove
+                                !props.canMove || !props.isGM
                                   ? "none"
                                   : "block",
                             })}
@@ -302,9 +303,6 @@ export const IndexCard: React.FC<
   );
 
   function renderGMActions() {
-    if (props.readonly) {
-      return null;
-    }
     return (
       <Fade in={hover}>
         <Box
@@ -408,109 +406,115 @@ export const IndexCard: React.FC<
               </Grid>
             </Grid>
             <Grid item container justifyContent="flex-end" spacing={1}>
-              <Grid item>
-                <Tooltip title={t("index-card.duplicate")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.duplicate`}
-                    onClick={() => {
-                      props.onDuplicate();
-                    }}
-                  >
-                    <FileCopyIcon htmlColor={paper.primary} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid item>
-                <FariPopper
-                  renderPopper={(renderProps) => {
-                    const cardsForSelect = props.allCards.filter((c) => {
-                      const isCurrent =
-                        c.id !== indexCardManager.state.indexCard.id;
-                      const isParent = c.id !== props.parentIndexCard?.id;
-                      return isCurrent && isParent;
-                    });
-                    return (
-                      <Box p="1rem" minWidth="200px">
-                        <FormControl fullWidth variant="standard">
-                          <InputLabel>{t("index-card.move-to")}</InputLabel>
+              {props.isGM && (
+                <Grid item>
+                  <Tooltip title={t("index-card.duplicate")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.duplicate`}
+                      onClick={() => {
+                        props.onDuplicate();
+                      }}
+                    >
+                      <FileCopyIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+              {props.isGM && (
+                <Grid item>
+                  <FariPopper
+                    renderPopper={(renderProps) => {
+                      const cardsForSelect = props.allCards.filter((c) => {
+                        const isCurrent =
+                          c.id !== indexCardManager.state.indexCard.id;
+                        const isParent = c.id !== props.parentIndexCard?.id;
+                        return isCurrent && isParent;
+                      });
+                      return (
+                        <Box p="1rem" minWidth="200px">
+                          <FormControl fullWidth variant="standard">
+                            <InputLabel>{t("index-card.move-to")}</InputLabel>
 
-                          <Select
-                            fullWidth
-                            native
-                            inputProps={{
-                              ["data-cy"]: "app.languages",
-                            }}
-                            onChange={(e) => {
-                              renderProps.handleOnClose();
-                              if (e.target.value) {
-                                props.onMoveTo(
-                                  indexCardManager.state.indexCard.id,
-                                  e.target.value as string
+                            <Select
+                              fullWidth
+                              native
+                              inputProps={{
+                                ["data-cy"]: "app.languages",
+                              }}
+                              onChange={(e) => {
+                                renderProps.handleOnClose();
+                                if (e.target.value) {
+                                  props.onMoveTo(
+                                    indexCardManager.state.indexCard.id,
+                                    e.target.value as string
+                                  );
+                                }
+                              }}
+                              variant="standard"
+                            >
+                              <option value="" />
+                              {cardsForSelect.map((card) => {
+                                const value = previewContentEditable({
+                                  value: card.title,
+                                });
+                                return (
+                                  <option key={card.id} value={card.id}>
+                                    {value}
+                                  </option>
                                 );
-                              }
-                            }}
-                            variant="standard"
-                          >
-                            <option value="" />
-                            {cardsForSelect.map((card) => {
-                              const value = previewContentEditable({
-                                value: card.title,
-                              });
-                              return (
-                                <option key={card.id} value={card.id}>
-                                  {value}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </FormControl>
-                      </Box>
-                    );
-                  }}
-                  renderAnchor={(renderProps) => {
-                    return (
-                      <Tooltip title={t("index-card.move-to")}>
-                        <span>
-                          <IconButton
-                            disabled={hasSubCards}
-                            size="small"
-                            data-cy={`${props["data-cy"]}.move`}
-                            onClick={(event) => {
-                              renderProps.handleOnOpen(event);
-                            }}
-                          >
-                            <ControlCameraIcon
-                              htmlColor={
-                                hasSubCards ? paper.disabled : paper.primary
-                              }
-                            />
-                          </IconButton>
-                        </span>
-                      </Tooltip>
-                    );
-                  }}
-                />
-              </Grid>
-
-              <Grid item>
-                <Tooltip title={t("index-card.remove")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.remove`}
-                    onClick={() => {
-                      const confirmed = confirm(
-                        t("index-card.remove-confirmation")
+                              })}
+                            </Select>
+                          </FormControl>
+                        </Box>
                       );
-                      if (confirmed) {
-                        props.onRemove();
-                      }
                     }}
-                  >
-                    <DeleteIcon htmlColor={paper.primary} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
+                    renderAnchor={(renderProps) => {
+                      return (
+                        <Tooltip title={t("index-card.move-to")}>
+                          <span>
+                            <IconButton
+                              disabled={hasSubCards}
+                              size="small"
+                              data-cy={`${props["data-cy"]}.move`}
+                              onClick={(event) => {
+                                renderProps.handleOnOpen(event);
+                              }}
+                            >
+                              <ControlCameraIcon
+                                htmlColor={
+                                  hasSubCards ? paper.disabled : paper.primary
+                                }
+                              />
+                            </IconButton>
+                          </span>
+                        </Tooltip>
+                      );
+                    }}
+                  />
+                </Grid>
+              )}
+
+              {props.isGM && (
+                <Grid item>
+                  <Tooltip title={t("index-card.remove")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.remove`}
+                      onClick={() => {
+                        const confirmed = confirm(
+                          t("index-card.remove-confirmation")
+                        );
+                        if (confirmed) {
+                          props.onRemove();
+                        }
+                      }}
+                    >
+                      <DeleteIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Box>
@@ -544,13 +548,13 @@ export const IndexCard: React.FC<
                 >
                   <IndexCard
                     indexCard={subCard}
+                    isGM={props.isGM}
                     parentIndexCard={indexCardManager.state.indexCard}
                     allCards={props.allCards}
                     id={`index-card-${subCard.id}`}
                     reactDndType={`${DragAndDropTypes.SceneIndexCardsSubCards}.${indexCardManager.state.indexCard.id}`}
                     canMove={true}
                     reactDndIndex={subCardIndex}
-                    readonly={props.readonly}
                     onPoolClick={props.onPoolClick}
                     onRoll={props.onRoll}
                     indexCardHiddenRecord={props.indexCardHiddenRecord}
@@ -643,7 +647,7 @@ export const IndexCard: React.FC<
                           <BlockByType
                             advanced={advanced}
                             hideHelp
-                            readonly={props.readonly}
+                            readonly={false}
                             dataCy={`index-card.${block.label}`}
                             block={block}
                             onChange={(newBlock) => {
@@ -712,7 +716,7 @@ export const IndexCard: React.FC<
     const hasSkills = indexCardSkills.length > 0;
 
     return (
-      <Collapse in={hasSkills && !props.readonly}>
+      <Collapse in={hasSkills && props.isGM}>
         <Box px="1rem" py=".5rem">
           <Grid container spacing={1} alignItems="center">
             {indexCardSkills.map((skill, skillIndex) => {
@@ -721,9 +725,9 @@ export const IndexCard: React.FC<
                   <Link
                     className={css([
                       {
-                        cursor: props.readonly ? "inherit" : "pointer",
+                        cursor: !props.isGM ? "inherit" : "pointer",
                       },
-                      props.readonly && {
+                      !props.isGM && {
                         "color": theme.palette.text.primary,
                         "&:hover": {
                           textDecoration: "none",
@@ -732,7 +736,7 @@ export const IndexCard: React.FC<
                     ])}
                     data-cy={`index-card.skill.${skill.label}`}
                     onClick={() => {
-                      if (props.readonly) {
+                      if (!props.isGM) {
                         return;
                       }
                       const modifier = parseInt(skill.modifier) || 0;
@@ -764,10 +768,11 @@ export const IndexCard: React.FC<
   function renderHeader() {
     const dragIconMargin = "1.5rem";
     return (
-      <Box ml={props.readonly ? "0" : dragIconMargin}>
-        <Grid container alignItems="center" spacing={1} wrap="nowrap">
-          <Grid item className={css({ flex: "1 0 auto" })}>
+      <Box ml={!props.isGM ? "0" : dragIconMargin}>
+        <Grid container alignItems="baseline" spacing={1} wrap="nowrap">
+          <Grid item xs={4}>
             <Typography
+              noWrap
               variant="overline"
               className={css({
                 display: "flex",
@@ -780,7 +785,6 @@ export const IndexCard: React.FC<
               <ContentEditable
                 data-cy={`${props["data-cy"]}.title-label`}
                 value={indexCardManager.state.indexCard.titleLabel}
-                readonly={props.readonly}
                 onChange={(newLabel) => {
                   indexCardManager.actions.setTitleLabel(newLabel);
                 }}
@@ -790,7 +794,7 @@ export const IndexCard: React.FC<
 
           <Fade in={hover}>
             <Grid item container justifyContent="flex-end">
-              {!isSubCard && !props.readonly && props.onTogglePrivate && (
+              {!isSubCard && props.isGM && props.onTogglePrivate && (
                 <Grid item>
                   <Tooltip
                     title={
@@ -815,7 +819,7 @@ export const IndexCard: React.FC<
                   </Tooltip>
                 </Grid>
               )}
-              {!props.readonly && (
+              {props.isGM && (
                 <Grid item>
                   <Tooltip
                     title={
@@ -855,7 +859,6 @@ export const IndexCard: React.FC<
                       onClick={() => {
                         indexCardManager.actions.toggleInitiative();
                       }}
-                      disabled={props.readonly}
                       size="small"
                     >
                       {indexCardManager.state.indexCard.playedDuringTurn ? (
@@ -925,7 +928,6 @@ export const IndexCard: React.FC<
               lineHeight: "normal",
               // letterSpacing: "-.5px",
             })}
-            readonly={props.readonly}
             onChange={(newTitle) => {
               indexCardManager.actions.setTitle(newTitle);
             }}
@@ -950,7 +952,6 @@ export const IndexCard: React.FC<
             <ContentEditable
               data-cy={`${props["data-cy"]}.content-label`}
               value={indexCardManager.state.indexCard.contentLabel}
-              readonly={props.readonly}
               onChange={(newLabel) => {
                 indexCardManager.actions.setContentLabel(newLabel);
               }}
@@ -961,7 +962,6 @@ export const IndexCard: React.FC<
         <Box p="0 1rem">
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}
-            readonly={props.readonly}
             border
             placeholder="..."
             value={indexCardManager.state.indexCard.content}

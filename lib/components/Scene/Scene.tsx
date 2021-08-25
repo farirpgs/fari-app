@@ -931,7 +931,7 @@ export const Session: React.FC<IProps> = (props) => {
                 <TabPanel value={"scene"} className={tabPanelStyle}>
                   <Scene
                     sceneManager={sceneManager}
-                    readonly={!isGM}
+                    isGM={isGM}
                     canLoad={props.mode !== SceneMode.Manage && isGM}
                     onRoll={handleSetMyRoll}
                     onPoolClick={(element) => {
@@ -1161,7 +1161,7 @@ Session.displayName = "Session";
 
 export function Scene(props: {
   sceneManager: ReturnType<typeof useScene>;
-  readonly: boolean;
+  isGM: boolean;
   canLoad: boolean;
   onRoll(diceRollResult: IDiceRollResult): void;
   onPoolClick(element: IDicePoolElement): void;
@@ -1186,7 +1186,7 @@ export function Scene(props: {
     theme.palette.background.paper
   ).primary;
   const numberOfColumnsForCards = useResponsiveValue({
-    xl: 4,
+    xl: 3,
     lg: 3,
     md: 2,
     sm: 1,
@@ -1416,7 +1416,7 @@ export function Scene(props: {
               autoFocus
               data-cy="scene.name"
               value={sceneManager.state.scene?.name ?? ""}
-              readonly={props.readonly}
+              readonly={!props.isGM}
               onChange={(value) => {
                 sceneManager.actions.updateName(value);
               }}
@@ -1462,7 +1462,7 @@ export function Scene(props: {
                         onInputChange={(event, newInputValue) => {
                           setLazyGroup(newInputValue);
                         }}
-                        disabled={props.readonly}
+                        disabled={!props.isGM}
                         renderInput={(params) => (
                           <TextField
                             {...params}
@@ -1642,7 +1642,7 @@ export function Scene(props: {
                   type={type}
                   reactDndIndex={index}
                   allCards={sortedCards}
-                  canMove={sort === SortMode.None && !props.readonly}
+                  canMove={sort === SortMode.None && props.isGM}
                   key={indexCard.id}
                   reactDndType={DragAndDropTypes.SceneIndexCards}
                   data-cy={`scene.aspect.${index}`}
@@ -1669,7 +1669,7 @@ export function Scene(props: {
                       type
                     );
                   }}
-                  // readonly={props.readonly}
+                  isGM={props.isGM}
                   indexCard={indexCard}
                   onRoll={props.onRoll}
                   onPoolClick={props.onPoolClick}
@@ -1739,7 +1739,7 @@ export function Scene(props: {
             }
             className={tabClass}
           />
-          {!props.readonly && (
+          {props.isGM && (
             <Tab
               value="private"
               data-cy="scene.tabs.private"
@@ -1753,7 +1753,7 @@ export function Scene(props: {
               className={tabClass}
             />
           )}
-          {!props.readonly && (
+          {props.isGM && (
             <Tab
               value="notes"
               data-cy="scene.tabs.gm-notes"
@@ -1773,7 +1773,7 @@ export function Scene(props: {
   }
 
   function renderGMIndexCardActions(type: IIndexCardType) {
-    if (props.readonly) {
+    if (!props.isGM) {
       return null;
     }
     return (

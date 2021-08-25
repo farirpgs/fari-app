@@ -18,6 +18,7 @@ import {
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
+import { Id } from "../../../../../../domains/Id/Id";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
@@ -230,12 +231,14 @@ export function BlockSlotTracker(
               >
                 <Checkbox
                   data-cy={`${props.dataCy}.box.${boxIndex}.value`}
-                  color="primary"
-                  icon={<RadioButtonUncheckedIcon />}
-                  checkedIcon={<CheckCircleIcon />}
-                  className={css({ padding: "0" })}
+                  icon={<RadioButtonUncheckedIcon htmlColor="currentColor" />}
+                  checkedIcon={<CheckCircleIcon htmlColor="currentColor" />}
                   checked={box.checked}
                   disabled={props.readonly}
+                  className={css({
+                    color: "inherit",
+                    padding: "0",
+                  })}
                   onChange={() => {
                     handleToggleBox(boxIndex);
                   }}
@@ -305,12 +308,13 @@ function Clock(props: {
   onClick: (sliceIndex: number) => void;
 }) {
   const theme = useTheme();
+  const uuid = useState(() => Id.generate())[0];
   const circleCx = 55;
   const circleCy = 55;
   const circleR = 50;
   const filledColor = true
-    ? `url(#fari-slot-tracker-clock-pattern)`
-    : theme.palette.text.secondary;
+    ? `url(#fari-slot-tracker-clock-pattern-${uuid})`
+    : "theme.palette.text.primary";
   const checkedSliceStyle = css({
     fill: filledColor,
     cursor: props.disabled ? "inherit" : "pointer",
@@ -331,6 +335,7 @@ function Clock(props: {
       id="pie"
       className={cx(
         css({
+          color: "inherit",
           fill: "transparent",
         }),
         props.className
@@ -338,7 +343,7 @@ function Clock(props: {
     >
       <defs>
         <pattern
-          id="fari-slot-tracker-clock-pattern"
+          id={`fari-slot-tracker-clock-pattern-${uuid}`}
           x="0"
           y="0"
           width="5"
