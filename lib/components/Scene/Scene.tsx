@@ -473,15 +473,17 @@ export const Session: React.FC<IProps> = (props) => {
             {t("play-route.paused-dialog.content")}
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
-              sessionManager.actions.unpause();
-            }}
-          >
-            {t("play-route.paused-dialog.continue")}
-          </Button>
-        </DialogActions>
+        {isGM && (
+          <DialogActions>
+            <Button
+              onClick={() => {
+                sessionManager.actions.unpause();
+              }}
+            >
+              {t("play-route.paused-dialog.continue")}
+            </Button>
+          </DialogActions>
+        )}
       </Dialog>
     );
   }
