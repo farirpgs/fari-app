@@ -283,6 +283,7 @@ export const CardCollectionRoute: React.FC<{
                             indexCardCollectionManager.state.cardCollection
                               ?.indexCards ?? []
                           }
+                          isGM={true}
                           canMove={true}
                           key={indexCard.id}
                           reactDndType={DragAndDropTypes.SceneIndexCards}
