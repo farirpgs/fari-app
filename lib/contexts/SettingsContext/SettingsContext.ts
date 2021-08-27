@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IDiceCommandSetId } from "../../domains/dice/Dice";
+import { IDiceCommandSetId, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
@@ -38,6 +38,13 @@ export function useSettings() {
       key: "fari-dice-command-ids",
       localStorage: window.localStorage,
     });
+  const [diceOptions, setDiceOptions] = useStorageEntity<IRollDiceOptions>({
+    defaultValue: {
+      listResults: false,
+    },
+    key: "fari-dice-command-options",
+    localStorage: window.localStorage,
+  });
 
   function toggleThemeMode() {
     setThemeMode(() => {
@@ -52,6 +59,7 @@ export function useSettings() {
       userId,
       userName,
       diceCommandIds: diceCommandIds,
+      diceOptions,
       gameTemplate,
     },
     actions: {
@@ -61,6 +69,7 @@ export function useSettings() {
       setUserName,
       setDiceCommandsIds: setDiceCommandsIds,
       setGameTemplate,
+      setDiceOptions,
     },
   };
 }
