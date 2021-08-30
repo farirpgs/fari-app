@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import CreateIcon from "@material-ui/icons/Create";
@@ -20,6 +20,8 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RestorePageIcon from "@material-ui/icons/RestorePage";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React, { useState } from "react";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
@@ -48,6 +50,7 @@ export function PlayerRow(
       canLoadCharacterSheet: boolean;
       canLoadDuplicateCharacterSheet: boolean;
       canRemove: boolean;
+      canMarkPrivate: boolean;
     };
     player: IPlayer;
     isMe: boolean;
@@ -56,6 +59,7 @@ export function PlayerRow(
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
 
+    onTogglePrivate(): void;
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
     onAssignOriginalCharacterSheet(): void;
@@ -203,13 +207,20 @@ export function PlayerRow(
 
   function renderControls() {
     return (
-      <Grid item xs container spacing={1} justify="space-between" wrap="nowrap">
+      <Grid
+        item
+        xs
+        container
+        spacing={1}
+        justifyContent="space-between"
+        wrap="nowrap"
+      >
         <Grid
           item
           xs={6}
           container
           alignItems="center"
-          justify="flex-start"
+          justifyContent="flex-start"
           spacing={1}
         >
           <Grid item>{renderInitiative()}</Grid>
@@ -220,7 +231,7 @@ export function PlayerRow(
           xs={6}
           container
           alignItems="center"
-          justify="flex-end"
+          justifyContent="flex-end"
           spacing={1}
         >
           {props.permissions.canLoadCharacterSheet && (
@@ -229,6 +240,9 @@ export function PlayerRow(
 
           {props.permissions.canRemove && (
             <Grid item>{renderDeleteButton()}</Grid>
+          )}
+          {props.permissions.canRemove && (
+            <Grid item>{renderMarkPrivateButton()}</Grid>
           )}
         </Grid>
       </Grid>
@@ -247,6 +261,7 @@ export function PlayerRow(
               onClick={() => {
                 handleOnLoadCharacterSheet();
               }}
+              size="large"
             >
               <RestorePageIcon />
             </IconButton>
@@ -273,8 +288,41 @@ export function PlayerRow(
                   logger.info("ScenePlayer:onPlayerRemove");
                 }
               }}
+              size="large"
             >
               <HighlightOffIcon color="error" />
+            </IconButton>
+          </span>
+        </Tooltip>
+      </Fade>
+    );
+  }
+  function renderMarkPrivateButton() {
+    return (
+      <Fade in={hover}>
+        <Tooltip
+          title={
+            props.player.private
+              ? t("player-row.show-to-players")
+              : t("player-row.hide-from-players")
+          }
+        >
+          <span>
+            <IconButton
+              data-cy={`${props["data-cy"]}.mark-private`}
+              className={css({ padding: "0" })}
+              onClick={(e) => {
+                e.stopPropagation();
+
+                props.onTogglePrivate();
+              }}
+              size="large"
+            >
+              {props.player.private ? (
+                <VisibilityIcon />
+              ) : (
+                <VisibilityOffIcon />
+              )}
             </IconButton>
           </span>
         </Tooltip>
@@ -301,6 +349,7 @@ export function PlayerRow(
             }}
             disabled={!props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}
+            size="large"
           >
             {props.player.playedDuringTurn ? (
               <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
@@ -315,7 +364,12 @@ export function PlayerRow(
 
   function renderPointCounter() {
     return (
-      <Grid container justify="flex-start" alignItems="center" wrap="nowrap">
+      <Grid
+        container
+        justifyContent="flex-start"
+        alignItems="center"
+        wrap="nowrap"
+      >
         <Grid item>
           <Box ml="-.5rem">
             <CircleTextField
@@ -512,7 +566,7 @@ export function PlayerRow(
         className={css({
           fontSize: ".8rem",
           fontFamily: FontFamily.Console,
-          color: theme.palette.text.hint,
+          color: theme.palette.text.secondary,
         })}
         display="inline"
       >
@@ -539,7 +593,12 @@ export function PlayerRow(
         </DialogContent>
         <DialogActions>
           <Box mb=".5rem" width="100%">
-            <Grid container wrap="nowrap" justify="space-around" spacing={2}>
+            <Grid
+              container
+              wrap="nowrap"
+              justifyContent="space-around"
+              spacing={2}
+            >
               <Grid item>
                 <Button
                   color="primary"

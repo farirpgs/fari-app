@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -14,11 +14,13 @@ import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FlipToBackIcon from "@material-ui/icons/FlipToBack";
-import HelpIcon from "@material-ui/icons/Help";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
-import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
 import {
   IPage,
@@ -33,7 +35,6 @@ export const SheetHeader: React.FC<{
   label: string;
   currentPageIndex: number;
   sectionLocation: IPageSectionPosition;
-  helpLink: string | undefined;
   pages: Array<IPage> | undefined;
   advanced: boolean;
   canMoveUp: boolean;
@@ -79,24 +80,11 @@ export const SheetHeader: React.FC<{
     <Box className={sheetHeaderClassName}>
       <Grid
         container
-        justify="space-between"
+        justifyContent="space-between"
         wrap="nowrap"
         spacing={1}
         alignItems="center"
       >
-        {props.helpLink && (
-          <Grid item>
-            <IconButton
-              size="small"
-              className={smallIconButtonStyle}
-              onClick={() => {
-                window.open(props.helpLink);
-              }}
-            >
-              <HelpIcon htmlColor={headerColor} />
-            </IconButton>
-          </Grid>
-        )}
         <Grid item xs>
           <FateLabel
             className={css({
@@ -253,7 +241,7 @@ export const SheetHeader: React.FC<{
               <ListItemIcon>
                 <FlipToBackIcon />
               </ListItemIcon>
-              {`Move To Page: ${page.label}`}
+              {`Move To Page: ${previewContentEditable({ value: page.label })}`}
             </MenuItem>
           );
         })}

@@ -48,18 +48,25 @@ export function DiceMenu(props: {
         transition
         placement="top"
         style={{ zIndex: zIndex.diceFab }}
-        modifiers={{
-          flip: {
+        modifiers={[
+          {
+            name: "flip",
             enabled: false,
           },
-          offset: {
-            offset: "0, 8px",
+          {
+            name: "offset",
+            options: {
+              offset: [0, 16],
+            },
           },
-          preventOverflow: {
+          {
+            name: "preventOverflow",
             enabled: true,
-            boundariesElement: "viewport",
+            options: {
+              boundariesElement: "viewport",
+            },
           },
-        }}
+        ]}
       >
         {({ TransitionProps }) => (
           <Grow {...TransitionProps}>
@@ -103,7 +110,7 @@ export function DiceMenu(props: {
 
                     {(props.onClear || props.onCtaClick) && (
                       <Box mt="1.5rem">
-                        <Grid container justify="center" spacing={2}>
+                        <Grid container justifyContent="center" spacing={2}>
                           {props.showPoolToggle && (
                             <Grid item>
                               <FormControlLabel
@@ -128,11 +135,7 @@ export function DiceMenu(props: {
                           )}
                           {props.onClear && (
                             <Grid item>
-                              <Button
-                                color="default"
-                                variant="text"
-                                onClick={props.onClear}
-                              >
+                              <Button variant="text" onClick={props.onClear}>
                                 {"Reset"}
                               </Button>
                             </Grid>
@@ -183,7 +186,7 @@ export function DiceMenu(props: {
     return (
       <>
         <Box pb=".5rem">
-          <Grid container spacing={1} justify="center">
+          <Grid container spacing={1} justifyContent="center">
             {options.map((o) => {
               const badgeContent = props.commands.reduce((acc, curr) => {
                 if (o.label === curr.label) {
@@ -193,8 +196,8 @@ export function DiceMenu(props: {
               }, 0);
               return (
                 <Grid item key={o.label}>
-                  <Grid container justify="center" direction="column">
-                    <Grid container item justify="center">
+                  <Grid container justifyContent="center" direction="column">
+                    <Grid container item justifyContent="center">
                       <IconButton
                         onClick={() => {
                           props.onDiceCommandChange((t) => {
@@ -220,6 +223,7 @@ export function DiceMenu(props: {
                               ? theme.palette.action.hover
                               : "inherit",
                         })}
+                        size="large"
                       >
                         <Badge badgeContent={badgeContent} color="primary">
                           <o.icon
@@ -234,7 +238,7 @@ export function DiceMenu(props: {
                         </Badge>
                       </IconButton>
                     </Grid>
-                    <Grid container item justify="center">
+                    <Grid container item justifyContent="center">
                       <Typography
                         className={css({
                           fontWeight:

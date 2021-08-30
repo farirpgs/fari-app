@@ -6,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HelpIcon from "@material-ui/icons/Help";
@@ -69,7 +69,7 @@ export function SrdItems() {
 
   return (
     <Box>
-      <Grid container spacing={4} justify="center">
+      <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title={t("docs.fate-condensed.title")}
@@ -106,7 +106,7 @@ export function ToolkitItems() {
   const { t } = useTranslate();
   return (
     <Box>
-      <Grid container spacing={4} justify="center">
+      <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title={t("docs.fate-system-toolkit.title")}
@@ -143,7 +143,7 @@ export function WikiItems() {
   const { t } = useTranslate();
   return (
     <Box>
-      <Grid container spacing={4} justify="center">
+      <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
           <DocCard
             title={t("docs.fari-wiki.title")}
@@ -204,7 +204,7 @@ export const DocCard: React.FC<{
   const theme = useTheme();
   const backgroundColor = props.bgColor ?? theme.palette.background.paper;
   const color = theme.palette.getContrastText(backgroundColor);
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <ButtonBase

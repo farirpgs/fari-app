@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef, useState } from "react";
 import { DrawObjectFactory } from "./domains/DrawObjectFactory";

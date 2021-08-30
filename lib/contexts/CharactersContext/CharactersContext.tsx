@@ -2,63 +2,30 @@ import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
-import { getUnix, getUnixFrom } from "../../domains/dayjs/getDayJS";
-import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
-import { useGroups } from "../../hooks/useGroups/useGroups";
-import { useStorageEntities } from "../../hooks/useStorageEntities/useStorageEntities";
+import { getUnixFrom } from "../../domains/dayjs/getDayJS";
+import { useAppEntity } from "../../hooks/useAppEntity/useAppEntity";
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
 >(undefined as any);
 
 export function useCharacters(props?: { localStorage: Storage }) {
-  const localStorage = props?.localStorage ?? window.localStorage;
-  const key = "fari-characters";
-
-  const [characters, setCharacters] = useStorageEntities({
-    key: key,
-    localStorage: localStorage,
-    migrationFunction: CharacterFactory.migrate,
+  const entityManager = useAppEntity({
+    fariType: "character",
+    localStorageKey: "fari-characters",
+    localStorage: props?.localStorage,
+    onDuplicate: CharacterFactory.duplicate,
+    onMakeTemplate: CharacterFactory.makeATemplate,
+    onMigration: CharacterFactory.migrate,
   });
-
-  const groups = useGroups(characters, (c) => c.group);
 
   async function add(type: CharacterTemplates): Promise<ICharacter> {
     const newCharacter = await CharacterFactory.make(type);
 
-    setCharacters((draft: Array<ICharacter>) => {
+    entityManager.actions.setEntities((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];
     });
     return newCharacter;
-  }
-
-  function upsert(character: ICharacter | undefined) {
-    if (!character) {
-      return;
-    }
-
-    const id = character.id || Id.generate(); // If it's a template, `id` is undefined
-    const characterToUpsert = {
-      ...character,
-      id: id,
-      lastUpdated: getUnix(),
-    };
-    setCharacters((prev: Array<ICharacter>) => {
-      const exists = prev.some((c) => c.id === character.id);
-      if (!exists) {
-        return [characterToUpsert, ...prev];
-      } else {
-        return prev.map((c) => {
-          if (c.id === character.id) {
-            return characterToUpsert;
-          }
-          return c;
-        });
-      }
-    });
-
-    return characterToUpsert;
   }
 
   function addIfDoesntExist(character: ICharacter | undefined) {
@@ -66,7 +33,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       return;
     }
 
-    setCharacters((prev: Array<ICharacter>) => {
+    entityManager.actions.setEntities((prev: Array<ICharacter>) => {
       const exists = prev.some((c) => c.id === character.id);
 
       if (!exists) {
@@ -81,7 +48,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       return;
     }
 
-    setCharacters((prev: Array<ICharacter>) => {
+    entityManager.actions.setEntities((prev: Array<ICharacter>) => {
       return prev.map((c) => {
         const currentCharacterLastUpdated = getUnixFrom(c.lastUpdated);
         const characterLastUpdate = getUnixFrom(character?.lastUpdated ?? 0);
@@ -95,71 +62,20 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
-  function remove(id: string | undefined) {
-    setCharacters((draft: Array<ICharacter>) => {
-      return draft.filter((c) => c.id !== id);
-    });
-  }
-
-  function duplicate(id: string | undefined) {
-    const match = characters.find((s) => s.id === id);
-    if (!match) {
-      return;
-    }
-
-    const newCharacter = CharacterFactory.duplicate(match);
-    setCharacters((draft: Array<ICharacter>) => {
-      return [...draft, newCharacter];
-    });
-    return newCharacter;
-  }
-
   function isInStorage(id: string | undefined) {
-    return characters.some((c) => c.id === id);
-  }
-
-  async function importEntity(characterFile: FileList | null) {
-    const characterToImport = await FariEntity.import<ICharacter>({
-      filesToImport: characterFile,
-      fariType: "character",
-    });
-    const migratedCharacter = CharacterFactory.migrate(characterToImport);
-    const match = characters.find((c) => c.id === migratedCharacter.id);
-    return { character: migratedCharacter, exists: !!match };
-  }
-
-  function exportEntity(character: ICharacter) {
-    FariEntity.export({
-      element: character,
-      fariType: "character",
-      name: character.name,
-    });
-  }
-
-  function exportEntityAsTemplate(character: ICharacter) {
-    const template = CharacterFactory.makeATemplate(character);
-    FariEntity.export({
-      element: template,
-      fariType: "character",
-      name: template.name,
-    });
+    return entityManager.state.entities.some((c) => c.id === id);
   }
 
   return {
     state: {
-      characters: characters,
-      groups: groups,
+      characters: entityManager.state.entities,
+      groups: entityManager.state.groups,
     },
     actions: {
+      ...entityManager.actions,
       add,
-      upsert,
       addIfDoesntExist,
       updateIfMoreRecent,
-      remove,
-      duplicate,
-      importEntity,
-      exportEntity,
-      exportEntityAsTemplate,
     },
     selectors: {
       isInStorage,

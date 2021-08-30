@@ -127,6 +127,7 @@ function StorybookMyBinder(props: {
         canGoBack={props.canGoBack}
         folders={props.folders}
         onSelect={action("onSelect")}
+        onSelectOnNewTab={action("onSelectOnNewTab")}
         onAdd={action("onAdd")}
         onDelete={action("onDelete")}
         onDuplicate={action("onDuplicate")}

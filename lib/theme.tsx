@@ -1,5 +1,8 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
-import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeOptions,
+} from "@material-ui/core/styles";
 import { FontFamily } from "./constants/FontFamily";
 
 export const defaultThemeConfiguration: ThemeOptions = {
@@ -14,41 +17,49 @@ export const defaultThemeConfiguration: ThemeOptions = {
     fontWeightBold: 700,
     fontFamily: FontFamily.Default,
   },
-  overrides: {
+  components: {
     MuiCssBaseline: {
-      "@global": {},
+      styleOverrides: {
+        "@global": {},
+      },
     },
     MuiTypography: {
-      root: {
-        whiteSpace: "pre-wrap",
+      styleOverrides: {
+        root: {
+          whiteSpace: "pre-wrap",
+        },
       },
     },
     MuiButton: {
-      root: {
-        borderRadius: "4px",
-      },
-      contained: {
-        fontWeight: 700,
-      },
-      outlined: {
-        "fontWeight": 700,
-        "&:hover": {
-          // theme.shadows[1],
-          boxShadow:
-            "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+      styleOverrides: {
+        root: {
+          borderRadius: "4px",
+        },
+        contained: {
+          fontWeight: 700,
+        },
+        outlined: {
+          "fontWeight": 700,
+          "&:hover": {
+            // theme.shadows[1],
+            boxShadow:
+              "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+          },
         },
       },
     },
     MuiButtonGroup: {
-      root: {
-        borderRadius: "20px",
+      styleOverrides: {
+        root: {
+          borderRadius: "20px",
+        },
       },
     },
   },
 };
 // https://mycolor.space/?hex=%23415F9B&sub=1
 export const AppLightTheme = responsiveFontSizes(
-  createMuiTheme({
+  createTheme({
     ...defaultThemeConfiguration,
     palette: {
       primary: { main: "#415f9c" },
@@ -58,10 +69,10 @@ export const AppLightTheme = responsiveFontSizes(
 );
 
 export const AppDarkTheme = responsiveFontSizes(
-  createMuiTheme({
+  createTheme({
     ...defaultThemeConfiguration,
     palette: {
-      type: "dark",
+      mode: "dark",
       background: {
         default: "#212121",
         // paper: "#424242",

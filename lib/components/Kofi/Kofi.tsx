@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import React from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 

@@ -1,5 +1,4 @@
-import { useTheme } from "@material-ui/core/styles";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { useTheme, Theme } from "@material-ui/core/styles";
 import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon";
 import React from "react";
 

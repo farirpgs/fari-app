@@ -5,6 +5,7 @@ import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
   IBlock,
+  IBlockTypes,
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
@@ -336,7 +337,7 @@ export const CharacterFactory = {
       name: `${c?.name} Template`,
     };
   },
-  makeBlock(type: BlockType) {
+  makeBlock<TType extends IBlockTypes>(type: BlockType) {
     const blockDefault: Record<BlockType, IBlock> = {
       [BlockType.Text]: {
         id: Id.generate(),
@@ -414,7 +415,7 @@ export const CharacterFactory = {
       } as IBlock & ISeparatorBlock,
     };
 
-    return blockDefault[type];
+    return blockDefault[type] as IBlock & TType;
   },
   duplicateBlock(block: IBlock): IBlock {
     return produce(block, (draft) => {

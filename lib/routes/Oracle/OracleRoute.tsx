@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from '@material-ui/core/styles';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";

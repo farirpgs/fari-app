@@ -37,7 +37,7 @@ export const AddBlock: React.FC<
     >
       {variant === "button" ? (
         <Button
-          color={"primary"}
+          color="inherit"
           variant="outlined"
           onClick={(e) => {
             setAnchorEl(e.currentTarget);
@@ -48,7 +48,7 @@ export const AddBlock: React.FC<
       ) : (
         <IconButton
           size="small"
-          color="primary"
+          color="inherit"
           onClick={(e) => {
             setAnchorEl(e.currentTarget);
           }}
@@ -60,7 +60,6 @@ export const AddBlock: React.FC<
         elevation={2}
         open={!!anchorEl}
         anchorEl={anchorEl}
-        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: "center",
           horizontal: "right",

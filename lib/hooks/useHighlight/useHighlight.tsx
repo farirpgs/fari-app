@@ -4,9 +4,9 @@ import { useThemeFromColor } from "../useThemeFromColor/useThemeFromColor";
 export function useHighlight() {
   const theme = useTheme();
   const firstColor =
-    theme.palette.type === "light" ? theme.palette.primary.main : "#123379";
+    theme.palette.mode === "light" ? theme.palette.primary.main : "#123379";
   const secondColor =
-    theme.palette.type === "light" ? theme.palette.primary.dark : "#05235d";
+    theme.palette.mode === "light" ? theme.palette.primary.dark : "#05235d";
 
   const linearBackground = `${firstColor} linear-gradient(90deg,${secondColor},${firstColor})`;
   const radialBackground = `${firstColor} radial-gradient(${firstColor},${secondColor})`;

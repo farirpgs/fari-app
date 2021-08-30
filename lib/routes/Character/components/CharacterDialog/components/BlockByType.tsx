@@ -221,7 +221,7 @@ export function BlockByType(
 
   function renderBlockAdvancedOptions() {
     return (
-      <Grid container justify="flex-end" spacing={1}>
+      <Grid container justifyContent="flex-end" spacing={1}>
         {block.type === BlockType.PointCounter && (
           <BlockPointCounterActions
             block={block}
@@ -276,7 +276,7 @@ export function BlockByType(
               onClick={() => {
                 props.onToggleSplit?.();
               }}
-            >
+              underline="hover">
               {t("character-dialog.control.width")}
               {": "}
               {(block.meta.width || 1) * 100}

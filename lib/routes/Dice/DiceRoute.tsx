@@ -20,7 +20,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export function DiceRoute(props: { pool: boolean }) {
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);

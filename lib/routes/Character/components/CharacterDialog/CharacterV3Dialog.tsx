@@ -1,4 +1,8 @@
 import { css, cx } from "@emotion/css";
+import Alert from "@material-ui/core/Alert";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/core/Autocomplete";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
@@ -12,8 +16,7 @@ import Grid, { GridSize } from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Snackbar from "@material-ui/core/Snackbar";
-import { ThemeProvider } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -31,10 +34,6 @@ import RedoIcon from "@material-ui/icons/Redo";
 import SaveIcon from "@material-ui/icons/Save";
 import ShareIcon from "@material-ui/icons/Share";
 import UndoIcon from "@material-ui/icons/Undo";
-import Alert from "@material-ui/lab/Alert";
-import Autocomplete, {
-  createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import startCase from "lodash/startCase";
@@ -75,21 +74,6 @@ export const smallIconButtonStyle = css({
   label: "CharacterDialog-small-icon-button",
   padding: "0",
 });
-
-const HeaderHelpLinks: Record<string, string> = {
-  "aspects": "/srds/condensed/getting-started?goTo=aspects",
-  "stunts & extras": "/srds/condensed/getting-started?goTo=stunts",
-  "stunts": "/srds/condensed/getting-started?goTo=stunts",
-  "approaches":
-    "/srds/accelerated/how-to-do-stuff-outcomes-actions-and-approaches?goTo=choose-your-approach",
-  "refresh": "/srds/condensed/getting-started?goTo=refresh",
-  "stress": "/srds/condensed/challenges-conflicts-and-contests?goTo=stress",
-  "consequences":
-    "/srds/condensed/challenges-conflicts-and-contests?goTo=consequences-1",
-  "skills": "/srds/condensed/getting-started?goTo=skill-list",
-  "fate points":
-    "/srds/condensed/aspects-and-fate-points?goTo=aspects-and-fate-points",
-};
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
@@ -324,7 +308,7 @@ export const CharacterV3Dialog: React.FC<{
           container
           wrap="nowrap"
           spacing={2}
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
         >
           <Grid item>
@@ -383,7 +367,7 @@ export const CharacterV3Dialog: React.FC<{
       <Box>
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="1rem">
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Grid item>{renderLoadTemplate()}</Grid>
             </Grid>
           </Box>
@@ -393,7 +377,7 @@ export const CharacterV3Dialog: React.FC<{
             container
             alignItems="center"
             wrap="nowrap"
-            justify="flex-start"
+            justifyContent="flex-start"
           >
             <Grid item xs={advanced ? 11 : 12}>
               <Tabs
@@ -416,7 +400,7 @@ export const CharacterV3Dialog: React.FC<{
                       key={page.id}
                       className={css({
                         background: headerBackgroundColor,
-                        color: headerColor,
+                        color: `${headerColor} !important`,
                         marginRight: ".5rem",
                         // Pentagone
                         // https://bennettfeely.com/clippy/
@@ -461,6 +445,7 @@ export const CharacterV3Dialog: React.FC<{
                       characterManager.state.character?.pages.length ?? 0;
                     setTab(newTab.toString());
                   }}
+                  size="large"
                 >
                   <AddIcon />
                 </IconButton>
@@ -470,7 +455,7 @@ export const CharacterV3Dialog: React.FC<{
         </Box>
         <Collapse in={advanced}>
           <Box mb=".5rem">
-            <Grid container justify="space-around" alignItems="center">
+            <Grid container justifyContent="space-around" alignItems="center">
               <Grid item>
                 <IconButton
                   disabled={currentPageIndex === 0}
@@ -478,6 +463,7 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.actions.movePage(currentPageIndex, "up");
                     setTab((currentPageIndex - 1).toString());
                   }}
+                  size="large"
                 >
                   <UndoIcon />
                 </IconButton>
@@ -488,6 +474,7 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.actions.duplicatePage(currentPageIndex);
                     setTab((currentPageIndex + 1).toString());
                   }}
+                  size="large"
                 >
                   <FileCopyIcon />
                 </IconButton>
@@ -506,6 +493,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                     setTab("0");
                   }}
+                  size="large"
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -517,6 +505,7 @@ export const CharacterV3Dialog: React.FC<{
                     characterManager.actions.movePage(currentPageIndex, "down");
                     setTab((currentPageIndex + 1).toString());
                   }}
+                  size="large"
                 >
                   <RedoIcon />
                 </IconButton>
@@ -564,7 +553,7 @@ export const CharacterV3Dialog: React.FC<{
           })}
         </TabContext>
 
-        <Grid container justify="space-between" alignItems="center">
+        <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
             <Box pt=".5rem">
               <Typography>
@@ -576,7 +565,7 @@ export const CharacterV3Dialog: React.FC<{
           </Grid>
         </Grid>
         {showCharacterCard && (
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item xs>
               <Box pt=".5rem" ml="-.5rem">
                 <CharacterCard
@@ -608,8 +597,6 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
-            const helpLink = HeaderHelpLinks[section.label.toLowerCase()];
-
             return (
               <Box key={section.id}>
                 <SheetHeader
@@ -617,7 +604,6 @@ export const CharacterV3Dialog: React.FC<{
                   currentPageIndex={currentPageIndex}
                   pages={characterManager.state.character?.pages}
                   sectionLocation={sectionLocation}
-                  helpLink={helpLink}
                   advanced={advanced}
                   visibleOnCard={section.visibleOnCard}
                   canMoveUp={sectionIndex !== 0}
@@ -699,7 +685,11 @@ export const CharacterV3Dialog: React.FC<{
                 {advanced && (
                   <Box p=".5rem" mb=".5rem">
                     <ThemeProvider theme={blackButtonTheme}>
-                      <Grid container justify="center" alignItems="center">
+                      <Grid
+                        container
+                        justifyContent="center"
+                        alignItems="center"
+                      >
                         <Grid item>
                           <AddBlock
                             variant="button"
@@ -763,7 +753,7 @@ export const CharacterV3Dialog: React.FC<{
           container
           wrap="nowrap"
           spacing={1}
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="center"
         >
           {!props.readonly && (
@@ -822,7 +812,7 @@ export const CharacterV3Dialog: React.FC<{
             sm={6}
             container
             alignItems="center"
-            justify="flex-end"
+            justifyContent="flex-end"
             spacing={2}
           >
             {!props.dialog && (
@@ -859,21 +849,22 @@ export const CharacterV3Dialog: React.FC<{
                     </IconButton>
                   </Tooltip>
                 </Grid>
-
-                <Tooltip title={t("character-dialog.export-as-template")}>
-                  <IconButton
-                    color="default"
-                    data-cy="character-dialog.print"
-                    size="small"
-                    onClick={(e) => {
-                      charactersManager.actions.exportEntityAsTemplate(
-                        characterManager.state.character as ICharacter
-                      );
-                    }}
-                  >
-                    <ShareIcon />
-                  </IconButton>
-                </Tooltip>
+                <Grid item>
+                  <Tooltip title={t("character-dialog.export-as-template")}>
+                    <IconButton
+                      color="default"
+                      data-cy="character-dialog.print"
+                      size="small"
+                      onClick={() => {
+                        charactersManager.actions.exportEntityAsTemplate(
+                          characterManager.state.character as ICharacter
+                        );
+                      }}
+                    >
+                      <ShareIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
               </>
             )}
             <Grid item>
@@ -1033,7 +1024,6 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box
           className={css({
-            label: "CharacterDialog-sections",
             marginTop: section.blocks.length === 0 ? "2rem" : ".5rem",
             marginBottom: section.blocks.length === 0 ? "2rem" : ".5rem",
           })}
@@ -1041,7 +1031,7 @@ export const CharacterV3Dialog: React.FC<{
           <Grid container>
             {section.blocks.map((block, blockIndex) => {
               const width: GridSize = !!block.meta.width
-                ? ((block.meta.width * 12) as GridSize)
+                ? (Math.round(block.meta.width * 12) as GridSize)
                 : 12;
               return (
                 <Grid key={block.id} item xs={width}>
@@ -1087,7 +1077,7 @@ export const CharacterV3Dialog: React.FC<{
                                         htmlColor={
                                           dndRenderProps.isOver
                                             ? theme.palette.text.primary
-                                            : theme.palette.text.hint
+                                            : theme.palette.text.secondary
                                         }
                                       />
                                     </IconButton>
@@ -1121,7 +1111,7 @@ export const CharacterV3Dialog: React.FC<{
                                         htmlColor={
                                           dndRenderProps.isOver
                                             ? theme.palette.text.primary
-                                            : theme.palette.text.hint
+                                            : theme.palette.text.secondary
                                         }
                                       />
                                     </IconButton>
@@ -1157,7 +1147,7 @@ export const CharacterV3Dialog: React.FC<{
                                         htmlColor={
                                           dndRenderProps.isOver
                                             ? theme.palette.text.primary
-                                            : theme.palette.text.hint
+                                            : theme.palette.text.secondary
                                         }
                                       />
                                     </IconButton>

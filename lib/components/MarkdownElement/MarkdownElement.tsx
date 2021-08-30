@@ -1,4 +1,5 @@
-import { darken, lighten, makeStyles, Theme } from "@material-ui/core/styles";
+import { darken, lighten, Theme } from "@material-ui/core/styles";
+import makeStyles from '@material-ui/styles/makeStyles';
 import clsx from "clsx";
 import React from "react";
 import { FontFamily } from "../../constants/FontFamily";
@@ -11,7 +12,7 @@ function getAnchorSvg(color: string) {
 
 const styles = (theme: Theme) => {
   const lightBackground =
-    theme.palette.type === "light"
+    theme.palette.mode === "light"
       ? lighten(theme.palette.primary.light, 0.85)
       : darken(theme.palette.primary.light, 0.75);
 
@@ -30,7 +31,7 @@ const styles = (theme: Theme) => {
     display: "flex",
     alignItems: "center",
     color:
-      theme.palette.type === "dark"
+      theme.palette.mode === "dark"
         ? theme.palette.text.primary
         : theme.palette.primary.main,
     fontWeight: 800,
@@ -55,7 +56,7 @@ const styles = (theme: Theme) => {
         color: theme.palette.text.primary,
         fontWeight: theme.typography.fontWeightBold,
         backgroundColor:
-          theme.palette.type === "light"
+          theme.palette.mode === "light"
             ? "rgba(255, 229, 100, 0.4)"
             : "rgba(255, 229, 100, 0.2)",
         borderRadius: 2,
@@ -163,12 +164,12 @@ const styles = (theme: Theme) => {
           fontFamily: FontFamily.Console,
         },
         "& .required": {
-          color: theme.palette.type === "light" ? "#006500" : "#a5ffa5",
+          color: theme.palette.mode === "light" ? "#006500" : "#a5ffa5",
         },
         "& .prop-type": {
           fontSize: 13,
           fontFamily: FontFamily.Console,
-          color: theme.palette.type === "light" ? "#932981" : "#ffb6ec",
+          color: theme.palette.mode === "light" ? "#932981" : "#ffb6ec",
         },
         "& .prop-default": {
           fontSize: 13,
@@ -276,7 +277,7 @@ const styles = (theme: Theme) => {
         width: ".7em",
         height: ".7em",
         backgroundImage: getAnchorSvg(
-          theme.palette.type === "dark" ? "white" : "black"
+          theme.palette.mode === "dark" ? "white" : "black"
         ),
         transform: "rotate(45deg)",
         marginLeft: ".5rem",
@@ -306,7 +307,7 @@ const styles = (theme: Theme) => {
       },
       "& .fari-image": {
         // border: `1px solid ${
-        //   theme.palette.type === "light" ? "#e0e0e0" : "#676767"
+        //   theme.palette.mode === "light" ? "#e0e0e0" : "#676767"
         // }`,
         margin: "0 0 1rem 0",
       },

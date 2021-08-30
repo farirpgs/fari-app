@@ -15,11 +15,11 @@ describe("/scenes", () => {
       Fari.get("scene.name").type("Ba Sing Se");
       Fari.get("scene.group").type("Avatar");
 
-      Fari.get("scene.add-aspect").click();
-      Fari.get("scene.add-boost").click();
-      Fari.get("scene.add-npc").click();
-      Fari.get("scene.add-bad-guy").click();
-      Fari.get("scene.add-index-card").click();
+      Fari.get("scene.add-card-Aspect").click();
+      Fari.get("scene.add-card-Boost").click();
+      Fari.get("scene.add-card-NPC").click();
+      Fari.get("scene.add-card-Bad Guy").click();
+      Fari.get("scene.add-card").click();
 
       // aspect
       Fari.get("scene.aspect.0.title").type("Something weird is going on");
@@ -64,7 +64,7 @@ describe("/scenes", () => {
       Fari.get("my-binder.folders.scenes.new").click();
 
       // add badguy and pin it
-      Fari.get("scene.add-bad-guy").click();
+      Fari.get("scene.add-card-Bad Guy").click();
       Fari.get("scene.aspect.0.title").type("Dai Li");
       Fari.get("scene.aspect.0.pin").click({ force: true });
 

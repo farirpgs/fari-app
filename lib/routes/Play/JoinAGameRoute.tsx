@@ -123,10 +123,10 @@ export const JoinAGame: React.FC<{
                     }}
                     fullWidth
                     required
-                  />
+                    variant="standard" />
                 </Box>
                 <Box>
-                  <Grid container justify="flex-end">
+                  <Grid container justifyContent="flex-end">
                     <Grid item>
                       <Button
                         type="submit"
