@@ -1,5 +1,5 @@
-import { Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Meta, Story } from "@storybook/react";
 import { default as React } from "react";
@@ -18,7 +18,12 @@ function StorybookStoryBuilderIcons(props: {}) {
               <Box mb=".5rem">
                 <FateLabel>{diceName}</FateLabel>
               </Box>
-              <Grid container justify="center" alignItems="center" spacing={2}>
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+              >
                 {Object.keys((StoryDiceIcons as any)[diceName]).map(
                   (sideName) => {
                     return (

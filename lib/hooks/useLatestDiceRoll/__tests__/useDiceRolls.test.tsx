@@ -130,7 +130,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("+4");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("rgb(60, 140, 64)");
+      expect(view.result.current.state.color).toEqual("rgb(36, 100, 40)");
 
       // WHEN
       view.rerender({
@@ -184,11 +184,11 @@ describe("useDiceRolls", () => {
 
       // THEN
       expect(Confetti.fireConfetti).toHaveBeenCalledTimes(1);
-       expect(view.result.current.state.finalResultHidden).toEqual(false);
+      expect(view.result.current.state.finalResultHidden).toEqual(false);
       expect(view.result.current.state.finalResultTotal).toEqual("+3");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("rgb(60, 140, 64)");
+      expect(view.result.current.state.color).toEqual("rgb(36, 100, 40)");
 
       // WHEN
       view.rerender({
@@ -265,7 +265,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("0");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#3f51b5");
+      expect(view.result.current.state.color).toEqual("#1976d2");
 
       // WHEN
       view.rerender({
@@ -358,7 +358,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("-3");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("rgb(195, 53, 43)");
+      expect(view.result.current.state.color).toEqual("rgb(168, 37, 37)");
 
       // WHEN
       view.rerender({
@@ -383,8 +383,6 @@ describe("useDiceRolls", () => {
                 ],
               },
             ],
-     
-     
           },
           {
             options: { listResults: false },
@@ -415,9 +413,7 @@ describe("useDiceRolls", () => {
                 commandSets: [
                   {
                     id: "4dF",
-                    commands: [
-                      { value: 0, name: "1dF" },
-                    ],
+                    commands: [{ value: 0, name: "1dF" }],
                   },
                 ],
               },
@@ -453,10 +449,10 @@ describe("useDiceRolls", () => {
                   {
                     id: "4dF",
                     commands: [
-                      { value:1, name: "1dF" },
-                      { value:1, name: "1dF" },
-                      { value:1, name: "1dF" },
-                      { value:1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
+                      { value: 1, name: "1dF" },
                     ],
                   },
                 ],
@@ -475,7 +471,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("-4");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("rgb(195, 53, 43)");
+      expect(view.result.current.state.color).toEqual("rgb(168, 37, 37)");
     });
     it("should handle labels on load and after and going back to without labels", async () => {
       jest.useFakeTimers();
@@ -502,8 +498,8 @@ describe("useDiceRolls", () => {
             totalWithoutModifiers: 2,
             rollGroups: [
               {
-                label:"Notice",
-                modifier:2,
+                label: "Notice",
+                modifier: 2,
                 commandSets: [
                   {
                     id: "4dF",
@@ -517,8 +513,6 @@ describe("useDiceRolls", () => {
                 ],
               },
             ],
-
-          
           },
         ],
       });
@@ -540,8 +534,8 @@ describe("useDiceRolls", () => {
             totalWithoutModifiers: 4,
             rollGroups: [
               {
-                label:"Shoot",
-                modifier:4,
+                label: "Shoot",
+                modifier: 4,
                 commandSets: [
                   {
                     id: "4dF",
@@ -562,8 +556,8 @@ describe("useDiceRolls", () => {
             totalWithoutModifiers: 2,
             rollGroups: [
               {
-                label:"Notice",
-                modifier:2,
+                label: "Notice",
+                modifier: 2,
                 commandSets: [
                   {
                     id: "4dF",
@@ -591,7 +585,7 @@ describe("useDiceRolls", () => {
 
       // WHEN
       view.rerender({
-           rolls: [
+        rolls: [
           ...rolls,
           {
             options: { listResults: false },
@@ -677,14 +671,11 @@ describe("useDiceRolls", () => {
               commandSets: [
                 {
                   id: "coin",
-                  commands: [
-                    { value: 1, name: "coin" },
-                  ],
+                  commands: [{ value: 1, name: "coin" }],
                 },
               ],
             },
-           ],
-       
+          ],
         },
       ];
 
@@ -717,9 +708,7 @@ describe("useDiceRolls", () => {
               commandSets: [
                 {
                   id: "coin",
-                  commands: [
-                    { value: -1, name: "coin" },
-                  ],
+                  commands: [{ value: -1, name: "coin" }],
                 },
               ],
             },
@@ -808,7 +797,6 @@ describe("useDiceRolls", () => {
               ],
             },
           ],
-       
         },
       ];
 
@@ -844,9 +832,7 @@ describe("useDiceRolls", () => {
               commandSets: [
                 {
                   id: "1d100",
-                  commands: [
-                    { value: 45, name: "1d100" },
-                  ],
+                  commands: [{ value: 45, name: "1d100" }],
                 },
               ],
             },

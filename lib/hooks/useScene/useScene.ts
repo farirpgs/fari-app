@@ -164,9 +164,13 @@ export function useScene() {
           return;
         }
         const cards = draft.indexCards[type];
-        const index = cards.findIndex((c) => c.id === indexCard.id);
         const copy = SceneFactory.duplicateIndexCard(indexCard);
-        cards.splice(index, 0, copy);
+        const index = cards.findIndex((c) => c.id === indexCard.id);
+        if (index !== -1) {
+          cards.splice(index, 0, copy);
+        } else {
+          cards.unshift(copy);
+        }
       })
     );
   }

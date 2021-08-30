@@ -4,7 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Popper from "@material-ui/core/Popper";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
@@ -59,20 +59,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
     }
     props.onClick();
   }
-
-  const handleTooltipOpen = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setAnchorEl(event.target);
-    setOpen(true);
-  };
-
-  const handleTooltipClose = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setAnchorEl(event.target);
-    setOpen(false);
-  };
 
   const diceStyle = css({
     fontSize: props.fontSize,
@@ -221,23 +207,30 @@ export const DiceBox: React.FC<IProps> = (props) => {
           className={css({
             zIndex: zIndex.modal,
           })}
-          modifiers={{
-            flip: {
+          modifiers={[
+            {
+              name: "flip",
               enabled: false,
             },
-            enabled: true,
-            offset: {
-              offset: "0, 16px",
+            {
+              name: "offset",
+              options: {
+                offset: [0, 16],
+              },
             },
-            preventOverflow: {
+            {
+              name: "preventOverflow",
               enabled: true,
-              boundariesElement: "viewport",
+              options: {
+                boundariesElement: "viewport",
+              },
             },
-          }}
+          ]}
         >
           {({ TransitionProps }) => (
             <Grow {...TransitionProps}>
               <Box
+                // m="1rem"
                 onContextMenu={(e) => {
                   e.preventDefault();
                 }}
@@ -253,7 +246,16 @@ export const DiceBox: React.FC<IProps> = (props) => {
 
   function renderDice() {
     return (
-      <Box onMouseEnter={handleTooltipOpen} onMouseLeave={handleTooltipClose}>
+      <Box
+        onMouseEnter={(event) => {
+          setAnchorEl(event.target);
+          setOpen(true);
+        }}
+        onMouseLeave={(event) => {
+          setAnchorEl(event.target);
+          setOpen(false);
+        }}
+      >
         <ButtonBase
           ref={(p) => {
             setAnchorEl(p);
@@ -339,7 +341,7 @@ export function DiceBoxResult(props: {
 
   return (
     <>
-      <Grid container justify="flex-start" alignItems="center">
+      <Grid container justifyContent="flex-start" alignItems="center">
         {items.map((item, itemIndex) => {
           const isFirst = itemIndex === 0;
           const isFate = item.name === "1dF";

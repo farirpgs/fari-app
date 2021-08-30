@@ -73,7 +73,7 @@ export function StoryBuilderRoute() {
         <Box px="16">
           <Box pb="2rem">
             <Heading title={"Who is the story about ?"} />
-            <Grid container justify="center" spacing={4}>
+            <Grid container justifyContent="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={theme.palette.primary.main}
@@ -92,7 +92,7 @@ export function StoryBuilderRoute() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={4}>
+            <Grid container justifyContent="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.darkBlue}
@@ -118,7 +118,7 @@ export function StoryBuilderRoute() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={4}>
+            <Grid container justifyContent="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.orange}
@@ -139,7 +139,7 @@ export function StoryBuilderRoute() {
                 Now we will repeat this exercice a second time
               </Box>
             </Text>
-            <Grid container justify="center" spacing={4}>
+            <Grid container justifyContent="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.yellow}
@@ -172,7 +172,7 @@ export function StoryBuilderRoute() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={4}>
+            <Grid container justifyContent="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.brown}
@@ -207,7 +207,7 @@ export function StoryBuilderRoute() {
                 </>
               </Text>
             </Heading>
-            <Grid container justify="center" spacing={4}>
+            <Grid container justifyContent="center" spacing={4}>
               <Grid item>
                 <GeneratorCard
                   color={IndexCardColor.teal}
@@ -260,7 +260,7 @@ export function StoryDecks(props: {
 }) {
   const theme = useTheme();
   return (
-    <Grid container justify="center" spacing={4}>
+    <Grid container justifyContent="center" spacing={4}>
       <Grid item>
         <GeneratorCard
           color={theme.palette.primary.main}
@@ -297,7 +297,7 @@ export function StoryDeckTags(props: {
   decksManager: ReturnType<typeof useDecks>;
 }) {
   return (
-    <Grid container justify="center" spacing={2}>
+    <Grid container justifyContent="center" spacing={2}>
       {Object.keys(Tags).map((tag) => {
         return (
           <Grid item key={tag}>
@@ -306,7 +306,7 @@ export function StoryDeckTags(props: {
                 props.decksManager.state.selectedTags.includes(
                   tag as unknown as Tags
                 )
-                  ? "default"
+                  ? "filled"
                   : "outlined"
               }
               color="primary"
@@ -513,11 +513,10 @@ function Card(props: {
       >
         <div
           className={css({
-            label: "card-front",
             position: "absolute",
             width: "100%",
             height: "100%",
-            overfloww: "hidden",
+            overflow: "hidden",
             backfaceVisibility: "hidden",
             background: frontColors.bgColor,
             color: frontColors.primary,
@@ -527,7 +526,6 @@ function Card(props: {
         </div>
         <div
           className={css({
-            label: "card-back",
             position: "absolute",
             width: "100%",
             height: "100%",

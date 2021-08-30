@@ -1,6 +1,7 @@
 import { css, cx } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
+import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
@@ -10,13 +11,14 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import React from "react";
+import React, { useState } from "react";
 import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
+import { Id } from "../../../../../../domains/Id/Id";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
@@ -28,7 +30,7 @@ export function BlockSlotTracker(
   props: IBlockComponentProps<ISlotTrackerBlock>
 ) {
   const { t } = useTranslate();
-
+  const [hover, setHover] = useState(false);
   const [blockValue, setBlockValue] = useLazyState({
     value: props.block.value,
     delay: 750,
@@ -97,12 +99,25 @@ export function BlockSlotTracker(
 
   return (
     <>
-      <Box>
+      <Box
+        onPointerEnter={() => {
+          setHover(true);
+        }}
+        onPointerLeave={() => {
+          setHover(false);
+        }}
+      >
         {(!props.readonly || isLabelVisible) && (
           <Box>
-            <Grid container justify={"center"} wrap="nowrap" spacing={1}>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              wrap="nowrap"
+              spacing={1}
+            >
               {!props.readonly && (
-                <>
+                <Fade in={hover}>
                   <Grid item>
                     <Tooltip
                       title={
@@ -113,6 +128,7 @@ export function BlockSlotTracker(
                     >
                       <IconButton
                         size="small"
+                        color="inherit"
                         data-cy={`${props.dataCy}.remove-box`}
                         onClick={() => {
                           handleRemoveBox();
@@ -122,7 +138,7 @@ export function BlockSlotTracker(
                       </IconButton>
                     </Tooltip>
                   </Grid>
-                </>
+                </Fade>
               )}
               {isLabelVisible && (
                 <Grid item className={css({ minWidth: "4rem" })}>
@@ -143,7 +159,7 @@ export function BlockSlotTracker(
                 </Grid>
               )}
               {!props.readonly && (
-                <>
+                <Fade in={hover}>
                   <Grid item>
                     <Tooltip
                       title={
@@ -153,6 +169,7 @@ export function BlockSlotTracker(
                       }
                     >
                       <IconButton
+                        color="inherit"
                         data-cy={`${props.dataCy}.add-box`}
                         size="small"
                         onClick={() => {
@@ -163,7 +180,7 @@ export function BlockSlotTracker(
                       </IconButton>
                     </Tooltip>
                   </Grid>
-                </>
+                </Fade>
               )}
             </Grid>
           </Box>
@@ -180,7 +197,7 @@ export function BlockSlotTracker(
     });
 
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Grid item>
           <Clock
             slices={slices}
@@ -199,7 +216,7 @@ export function BlockSlotTracker(
 
   function renderAsTrack() {
     return (
-      <Grid container justify="center" spacing={1}>
+      <Grid container justifyContent="center" spacing={1}>
         {blockValue.map((box, boxIndex) => {
           const isBoxLabelVisible =
             !!previewContentEditable({ value: box.label }) || props.advanced;
@@ -214,12 +231,14 @@ export function BlockSlotTracker(
               >
                 <Checkbox
                   data-cy={`${props.dataCy}.box.${boxIndex}.value`}
-                  color="primary"
-                  icon={<RadioButtonUncheckedIcon />}
-                  checkedIcon={<CheckCircleIcon />}
-                  className={css({ padding: "0" })}
+                  icon={<RadioButtonUncheckedIcon htmlColor="currentColor" />}
+                  checkedIcon={<CheckCircleIcon htmlColor="currentColor" />}
                   checked={box.checked}
                   disabled={props.readonly}
+                  className={css({
+                    color: "inherit",
+                    padding: "0",
+                  })}
                   onChange={() => {
                     handleToggleBox(boxIndex);
                   }}
@@ -262,6 +281,7 @@ export function BlockSlotTrackerActions(
         <Link
           component="button"
           variant="caption"
+          underline="hover"
           className={css({
             color: theme.palette.primary.main,
           })}
@@ -288,12 +308,13 @@ function Clock(props: {
   onClick: (sliceIndex: number) => void;
 }) {
   const theme = useTheme();
+  const uuid = useState(() => Id.generate())[0];
   const circleCx = 55;
   const circleCy = 55;
   const circleR = 50;
   const filledColor = true
-    ? `url(#fari-slot-tracker-clock-pattern)`
-    : theme.palette.text.secondary;
+    ? `url(#fari-slot-tracker-clock-pattern-${uuid})`
+    : "theme.palette.text.primary";
   const checkedSliceStyle = css({
     fill: filledColor,
     cursor: props.disabled ? "inherit" : "pointer",
@@ -314,6 +335,7 @@ function Clock(props: {
       id="pie"
       className={cx(
         css({
+          color: "inherit",
           fill: "transparent",
         }),
         props.className
@@ -321,7 +343,7 @@ function Clock(props: {
     >
       <defs>
         <pattern
-          id="fari-slot-tracker-clock-pattern"
+          id={`fari-slot-tracker-clock-pattern-${uuid}`}
           x="0"
           y="0"
           width="5"

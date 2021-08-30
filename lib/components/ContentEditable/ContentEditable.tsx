@@ -56,15 +56,14 @@ export function previewContentEditable(
   return formattedContent;
 }
 
-export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> = React.memo(
-  (props) => {
+export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> =
+  React.memo((props) => {
     const content = previewContentEditable({
       value: props.value,
       length: props.length,
     });
     return <>{content}</>;
-  }
-);
+  });
 
 export const ContentEditable: React.FC<
   {
@@ -172,7 +171,7 @@ export const ContentEditable: React.FC<
               ? `1px solid ${props.borderColor ?? theme.palette.divider}`
               : undefined,
             "&:empty:before": {
-              color: theme.palette.text.hint,
+              color: theme.palette.text.secondary,
               content: props.placeholder ? `"${props.placeholder}"` : undefined,
             },
             "& b": { fontWeight: "bold" },

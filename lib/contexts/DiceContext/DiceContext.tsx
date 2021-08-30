@@ -17,11 +17,12 @@ export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
 export function useDice(props: {
   defaultCommands: Array<IDiceCommandSetId> | null;
+  defaultOptions: IRollDiceOptions;
   onCommandSetsChange(commandSets: Array<IDiceCommandSetOption>): void;
 }) {
-  const [options, setOptions] = useState<IRollDiceOptions>({
-    listResults: false,
-  });
+  const [options, setOptions] = useState<IRollDiceOptions>(
+    props.defaultOptions
+  );
 
   const [pool, setPool] = useState<IDicePool>([]);
   const [playerId, setPlayerId] = useState<string>();

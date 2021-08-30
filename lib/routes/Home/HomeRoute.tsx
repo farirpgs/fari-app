@@ -5,6 +5,7 @@ import Container, { ContainerProps } from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
+import Rating from "@material-ui/core/Rating";
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -12,7 +13,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import HelpIcon from "@material-ui/icons/Help";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import Rating from "@material-ui/lab/Rating";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import discord from "../../../images/services/discord.png";
@@ -87,7 +87,12 @@ export const HomeRoute: React.FC<{}> = () => {
           <Box
             className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
           >
-            <Grid container justify="center" alignItems="center" spacing={3}>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              spacing={3}
+            >
               <Grid item>
                 <img alt="Fari" width="70px" src={Images.app} />
               </Grid>
@@ -99,6 +104,23 @@ export const HomeRoute: React.FC<{}> = () => {
                   uppercase={false}
                 >
                   {"Fari"}
+                </FateLabel>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              spacing={3}
+            >
+              <Grid item>
+                <FateLabel
+                  variant="h6"
+                  align="center"
+                  color="primary"
+                  uppercase={false}
+                >
+                  {t("home-route.header.logo-title")}
                 </FateLabel>
               </Grid>
             </Grid>
@@ -211,7 +233,12 @@ export const HomeRoute: React.FC<{}> = () => {
           </Typography>
         </Box>
         <Box mb="1rem">
-          <Grid container justify="center" spacing={2} alignItems="center">
+          <Grid
+            container
+            justifyContent="center"
+            spacing={2}
+            alignItems="center"
+          >
             <Grid item>
               <Kofi />
             </Grid>
@@ -228,7 +255,7 @@ export const HomeRoute: React.FC<{}> = () => {
     return (
       <Box textAlign="center">
         <Box mb="2rem">
-          <Grid container spacing={1} justify="center">
+          <Grid container spacing={1} justifyContent="center">
             {Patrons.map((patron, i) => {
               const isLast = i === Patrons.length - 1;
 
@@ -248,7 +275,7 @@ export const HomeRoute: React.FC<{}> = () => {
           </Grid>
         </Box>
         <Box mb="2rem">
-          <Grid container item justify="center">
+          <Grid container item justifyContent="center">
             <Patreon />
           </Grid>
         </Box>
@@ -269,7 +296,7 @@ export const HomeRoute: React.FC<{}> = () => {
         })}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={4} justify="center">
+          <Grid container spacing={4} justifyContent="center">
             {Sponsors.map((company, i) => {
               return (
                 <Grid item key={i}>
@@ -290,7 +317,7 @@ export const HomeRoute: React.FC<{}> = () => {
   function renderPlayButtons() {
     return (
       <Box>
-        <Grid container justify="center" spacing={8} alignItems="flex-start">
+        <Grid container justifyContent="center" alignItems="flex-start">
           {isWebRTCSupported() && (
             <Grid
               item
@@ -326,7 +353,7 @@ export const HomeRoute: React.FC<{}> = () => {
             </Grid>
           )}
 
-          <Hidden smDown>
+          <Hidden mdDown>
             <Divider
               orientation="vertical"
               flexItem
@@ -529,8 +556,8 @@ export const HomeRoute: React.FC<{}> = () => {
 
   function renderCommunity() {
     return (
-      <Grid container justify="center" alignItems="baseline" spacing={2}>
-        <Grid item md={6} xs={12} container justify="center" spacing={2}>
+      <Grid container justifyContent="center" alignItems="baseline" spacing={2}>
+        <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
             <QuestionAnswerIcon
               className={css({
@@ -551,7 +578,7 @@ export const HomeRoute: React.FC<{}> = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid item md={6} xs={12} container justify="center" spacing={2}>
+        <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
             <img
               src={discord}
@@ -581,7 +608,7 @@ export const HomeRoute: React.FC<{}> = () => {
 
   function renderOpenSource() {
     return (
-      <Grid container justify="center" spacing={2}>
+      <Grid container justifyContent="center" spacing={2}>
         <Grid item xs={12}>
           <Typography>
             {t("home-route.sections.open-source.description")}
@@ -619,7 +646,6 @@ export const HomeRoute: React.FC<{}> = () => {
           variant="h3"
           component="h1"
           className={css({
-            label: "LightBox-title",
             marginBottom: ".5rem",
             textAlign: "left",
             fontWeight: theme.typography.fontWeightBold,
@@ -632,13 +658,31 @@ export const HomeRoute: React.FC<{}> = () => {
           variant="subtitle1"
           component="h2"
           className={css({
-            label: "LightBox-subtitle",
             marginBottom: "2rem",
             textAlign: "left",
           })}
         >
           {t("home-route.header.subtitle")}
         </Typography>
+        <Box mb="1rem" display="flex">
+          <Grid container>
+            <Grid item lg={6} xs={12}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                size="large"
+                className={css({ height: "3rem" })}
+                onClick={() => {
+                  history.push("/play");
+                  logger.info("HomeRoute:onStartOnlineGame");
+                }}
+              >
+                {t("home-route.header.cta")}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
         <Box
           className={css({
             display: "flex",
@@ -727,9 +771,8 @@ function LightBox(props: ILightBoxProps) {
           variant="h3"
           component="h3"
           className={css({
-            label: "LightBox-title",
             marginBottom: subTitle ? "1rem" : "3rem",
-            textAlign: textAlign ?? "center",
+            textAlign: (textAlign as any) ?? "center",
             fontWeight: theme.typography.fontWeightBold,
             letterSpacing: "-0.035em",
           })}
@@ -741,9 +784,8 @@ function LightBox(props: ILightBoxProps) {
         <Typography
           variant="h5"
           className={css({
-            label: "LightBox-subtitle",
             marginBottom: "3rem",
-            textAlign: textAlign ?? "center",
+            textAlign: (textAlign as any) ?? "center",
             color: theme.palette.text.secondary,
           })}
         >
@@ -839,11 +881,11 @@ function DarkBox(props: ILightBoxProps & { linear?: boolean }) {
 function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
   const theme = useTheme();
   const lightBackground = useLightBackground();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
-      <Grid container justify="center" spacing={6}>
+      <Grid container justifyContent="center" spacing={6}>
         {props.cards.map((card, index) => {
           return (
             <Grid key={index} item xs={12} sm={6} md={4}>
