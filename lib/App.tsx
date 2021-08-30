@@ -419,17 +419,6 @@ AppProviders.displayName = "AppProvider";
 export function useMark() {
   const { t } = useTranslate();
 
-  t("common.language.dev");
-  t("common.language.de");
-  t("common.language.en");
-  t("common.language.es");
-  t("common.language.eo");
-  t("common.language.fr");
-  t("common.language.gl");
-  t("common.language.pt-BR");
-  t("common.language.ru");
-  t("common.language.it");
-
   t("oracle.value.No");
   t("oracle.value.NoAnd");
   t("oracle.value.Yes");
