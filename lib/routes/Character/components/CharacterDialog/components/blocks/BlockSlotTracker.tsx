@@ -8,8 +8,8 @@ import Link from "@material-ui/core/Link";
 import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import CircleIcon from "@material-ui/icons/Circle";
+import CircleOutlinedIcon from "@material-ui/icons/CircleOutlined";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import React, { useState } from "react";
 import {
@@ -231,10 +231,11 @@ export function BlockSlotTracker(
               >
                 <Checkbox
                   data-cy={`${props.dataCy}.box.${boxIndex}.value`}
-                  icon={<RadioButtonUncheckedIcon htmlColor="currentColor" />}
-                  checkedIcon={<CheckCircleIcon htmlColor="currentColor" />}
+                  icon={<CircleOutlinedIcon htmlColor="currentColor" />}
+                  checkedIcon={<CircleIcon htmlColor="currentColor" />}
                   checked={box.checked}
                   disabled={props.readonly}
+                  color="default"
                   className={css({
                     color: "inherit",
                     padding: "0",
