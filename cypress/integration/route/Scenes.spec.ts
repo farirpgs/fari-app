@@ -15,6 +15,8 @@ describe("/scenes", () => {
       Fari.get("scene.name").type("Ba Sing Se");
       Fari.get("scene.group").type("Avatar");
 
+      Fari.get("scene.card-collections").select("Fate");
+
       Fari.get("scene.add-card-Aspect").click();
       Fari.get("scene.add-card-Boost").click();
       Fari.get("scene.add-card-NPC").click();

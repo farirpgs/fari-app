@@ -62,7 +62,7 @@ describe("/characters", () => {
 
       // save
 
-      cy.title().contains("Fari | ");
+      cy.title().should("contain", "Fari | ");
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
       cy.title().should("eq", "Luke Skywalker | Fari");

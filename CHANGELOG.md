@@ -2,6 +2,15 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v5.2
+
+- feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.
+- feat: NPCs now how up in the scene's characters tab
+- feat: GMs can now hide NPCs from players
+- fix: when there is less than 10 index cards in a scene, they will flow from left to right. More than 10 index cards will trigger the masonry (pinterest) style layout
+- feat: new "Card Collections" beta feature that lets you create your own "add index cards" buttons!
+- tech: Material-UI was updated from v4 to v5
+
 # v5.1
 
 - feat: A new binder view has replaced the previous scenes and characters drawer to offer new search and filtering features on Fari's data;

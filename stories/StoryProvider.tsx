@@ -37,6 +37,9 @@ export function StoryProvider(props: {
   const scenesManager = useScenes();
   const diceManager = useDice({
     defaultCommands: settingsManager.state.diceCommandIds,
+    defaultOptions: {
+      listResults: false,
+    },
     onCommandSetsChange(commandSetOptions) {
       const commandSetIds = commandSetOptions.map((l) => l.id);
       settingsManager.actions.setDiceCommandsIds(commandSetIds);
