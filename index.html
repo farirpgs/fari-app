@@ -26,7 +26,7 @@
       rel="stylesheet"
     />
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- OLD Global site tag (gtag.js) - Google Analytics -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-150306816-1"
@@ -38,7 +38,21 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "UA-150306816-1");
+      gtag("config", "UA-150306816-1"); // old
+    </script>
+    <!-- NEW lobal site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-BRZ1HL2EJG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-BRZ1HL2EJG");
     </script>
 
     <!-- Open Graph / Facebook -->
