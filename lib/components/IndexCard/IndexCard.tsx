@@ -249,7 +249,7 @@ export const IndexCard: React.FC<
         >
           <Box>
             <Grid container>
-              <Grid item xs={12} md={hasSubCards ? 3 : 12}>
+              <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
                 <Box display="flex" height="100%" flexDirection="column">
                   <ThemeProvider theme={defaultButtonTheme}>
                     <Box
@@ -284,7 +284,7 @@ export const IndexCard: React.FC<
                 <Grid
                   item
                   xs={12}
-                  md={9}
+                  lg={9}
                   className={css({
                     background:
                       paper.type === "light"
@@ -769,13 +769,14 @@ export const IndexCard: React.FC<
     const dragIconMargin = "1.5rem";
     return (
       <Box ml={!props.isGM ? "0" : dragIconMargin}>
-        <Grid container alignItems="baseline" spacing={1} wrap="nowrap">
-          <Grid item xs={4}>
+        <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
+          <Grid item xs>
             <Typography
               noWrap
               variant="overline"
               className={css({
                 display: "flex",
+                width: "100%",
                 fontWeight: indexCardManager.state.indexCard.pinned
                   ? "bold"
                   : "inherit",
@@ -793,115 +794,117 @@ export const IndexCard: React.FC<
           </Grid>
 
           <Fade in={hover}>
-            <Grid item container justifyContent="flex-end">
-              {!isSubCard && props.isGM && props.onTogglePrivate && (
+            <Grid item>
+              <Grid container spacing={1} justifyContent="flex-end">
+                {!isSubCard && props.isGM && props.onTogglePrivate && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        props.type === "public"
+                          ? t("index-card.mark-private")
+                          : t("index-card.mark-public")
+                      }
+                    >
+                      <IconButton
+                        size="small"
+                        data-cy={`${props["data-cy"]}.menu.visibility`}
+                        onClick={() => {
+                          props.onTogglePrivate?.();
+                        }}
+                      >
+                        {props.type === "public" ? (
+                          <VisibilityOffIcon htmlColor={paper.primary} />
+                        ) : (
+                          <VisibilityIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
+                {props.isGM && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        indexCardManager.state.indexCard.pinned
+                          ? t("index-card.unpin")
+                          : t("index-card.pin")
+                      }
+                    >
+                      <IconButton
+                        ref={$menu}
+                        size="small"
+                        data-cy={`${props["data-cy"]}.pin`}
+                        onClick={() => {
+                          indexCardManager.actions.togglePinned();
+                        }}
+                      >
+                        {indexCardManager.state.indexCard.pinned ? (
+                          <PushPinIcon htmlColor={paper.primary} />
+                        ) : (
+                          <PushPinOutlinedIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
                 <Grid item>
                   <Tooltip
                     title={
-                      props.type === "public"
-                        ? t("index-card.mark-private")
-                        : t("index-card.mark-public")
-                    }
-                  >
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.menu.visibility`}
-                      onClick={() => {
-                        props.onTogglePrivate?.();
-                      }}
-                    >
-                      {props.type === "public" ? (
-                        <VisibilityOffIcon htmlColor={paper.primary} />
-                      ) : (
-                        <VisibilityIcon htmlColor={paper.primary} />
-                      )}
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
-              {props.isGM && (
-                <Grid item>
-                  <Tooltip
-                    title={
-                      indexCardManager.state.indexCard.pinned
-                        ? t("index-card.unpin")
-                        : t("index-card.pin")
-                    }
-                  >
-                    <IconButton
-                      ref={$menu}
-                      size="small"
-                      data-cy={`${props["data-cy"]}.pin`}
-                      onClick={() => {
-                        indexCardManager.actions.togglePinned();
-                      }}
-                    >
-                      {indexCardManager.state.indexCard.pinned ? (
-                        <PushPinIcon htmlColor={paper.primary} />
-                      ) : (
-                        <PushPinOutlinedIcon htmlColor={paper.primary} />
-                      )}
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
-              <Grid item>
-                <Tooltip
-                  title={
-                    indexCardManager.state.indexCard.playedDuringTurn
-                      ? t("player-row.played")
-                      : t("player-row.not-played")
-                  }
-                >
-                  <span>
-                    <IconButton
-                      data-cy={`${props["data-cy"]}.initiative`}
-                      onClick={() => {
-                        indexCardManager.actions.toggleInitiative();
-                      }}
-                      size="small"
-                    >
-                      {indexCardManager.state.indexCard.playedDuringTurn ? (
-                        <DirectionsRunIcon htmlColor={paper.primary} />
-                      ) : (
-                        <EmojiPeopleIcon htmlColor={paper.primary} />
-                      )}
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Grid>
-
-              {props.onToggleVisibility && (
-                <Grid item>
-                  <Tooltip
-                    title={
-                      open ? t("index-card.collapse") : t("index-card.expand")
+                      indexCardManager.state.indexCard.playedDuringTurn
+                        ? t("player-row.played")
+                        : t("player-row.not-played")
                     }
                   >
                     <span>
                       <IconButton
-                        size="small"
-                        data-cy={`${props["data-cy"]}.collapse`}
+                        data-cy={`${props["data-cy"]}.initiative`}
                         onClick={() => {
-                          props.onToggleVisibility?.(
-                            indexCardManager.state.indexCard
-                          );
+                          indexCardManager.actions.toggleInitiative();
                         }}
+                        size="small"
                       >
-                        <ArrowForwardIosIcon
-                          htmlColor={paper.primary}
-                          className={css({
-                            transform: open
-                              ? "rotate(270deg)"
-                              : "rotate(90deg)",
-                            transition: theme.transitions.create("transform"),
-                          })}
-                        />
+                        {indexCardManager.state.indexCard.playedDuringTurn ? (
+                          <DirectionsRunIcon htmlColor={paper.primary} />
+                        ) : (
+                          <EmojiPeopleIcon htmlColor={paper.primary} />
+                        )}
                       </IconButton>
                     </span>
                   </Tooltip>
                 </Grid>
-              )}
+
+                {props.onToggleVisibility && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        open ? t("index-card.collapse") : t("index-card.expand")
+                      }
+                    >
+                      <span>
+                        <IconButton
+                          size="small"
+                          data-cy={`${props["data-cy"]}.collapse`}
+                          onClick={() => {
+                            props.onToggleVisibility?.(
+                              indexCardManager.state.indexCard
+                            );
+                          }}
+                        >
+                          <ArrowForwardIosIcon
+                            htmlColor={paper.primary}
+                            className={css({
+                              transform: open
+                                ? "rotate(270deg)"
+                                : "rotate(90deg)",
+                              transition: theme.transitions.create("transform"),
+                            })}
+                          />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                )}
+              </Grid>
             </Grid>
           </Fade>
         </Grid>
