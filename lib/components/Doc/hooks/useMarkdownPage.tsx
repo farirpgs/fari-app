@@ -20,7 +20,7 @@ export function useMarkdownPage(props: {
       });
       return result;
     } catch (error) {
-      logger.error(error);
+      logger.error("useMarkdownPage:error", error as any);
       const errorHtml =
         "<h1>Error</h1><p>There was an error processing this document</p>";
       const dom = document.createElement("div");

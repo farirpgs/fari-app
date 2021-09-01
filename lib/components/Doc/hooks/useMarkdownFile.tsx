@@ -37,7 +37,7 @@ export function useMarkdownFile(props: {
             setMarkdownIndexes(markdownIndexes);
           }
         } catch (error) {
-          logger.error("useMarkdownFile:error", error);
+          logger.error("useMarkdownFile:error", error as any);
         }
       }
     }
