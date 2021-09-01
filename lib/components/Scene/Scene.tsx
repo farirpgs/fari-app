@@ -1779,6 +1779,7 @@ export function Scene(props: {
                 </Grid>
                 <Grid item>
                   <SplitButton
+                    data-cy="scene.add-card"
                     instant
                     options={[
                       {

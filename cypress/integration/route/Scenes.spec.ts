@@ -17,11 +17,20 @@ describe("/scenes", () => {
 
       Fari.get("scene.card-collections").select("Fate");
 
-      Fari.get("scene.add-card-Aspect").click();
-      Fari.get("scene.add-card-Boost").click();
-      Fari.get("scene.add-card-NPC").click();
-      Fari.get("scene.add-card-Bad Guy").click();
-      Fari.get("scene.add-card").click();
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.ASPECT").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.BOOST").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.NPC").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.BAD GUY").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.CARD").click({ force: true });
 
       // aspect
       Fari.get("scene.aspect.0.title").type("Something weird is going on");
@@ -66,7 +75,10 @@ describe("/scenes", () => {
       Fari.get("my-binder.folders.scenes.new").click();
 
       // add badguy and pin it
-      Fari.get("scene.add-card-Bad Guy").click();
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.BAD GUY").click({ force: true });
+
       Fari.get("scene.aspect.0.title").type("Dai Li");
       Fari.get("scene.aspect.0.pin").click({ force: true });
 

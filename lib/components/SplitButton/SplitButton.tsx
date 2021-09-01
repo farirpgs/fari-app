@@ -20,8 +20,9 @@ export type IOption = {
 };
 
 type IProps = {
-  instant?: boolean;
-  options: Array<IOption>;
+  "data-cy"?: string;
+  "instant"?: boolean;
+  "options": Array<IOption>;
 } & ButtonGroupProps;
 
 export const SplitButton: React.FC<IProps> = (props) => {
@@ -59,6 +60,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
       <Grid item xs={12}>
         <ButtonGroup {...buttonProps} ref={anchorRef}>
           <Button
+            data-cy={`${props["data-cy"]}.button`}
             onClick={handleClick}
             endIcon={options[selectedIndex]?.endIcon}
           >
@@ -66,6 +68,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
           </Button>
           <Button
             onClick={handleToggle}
+            data-cy={`${props["data-cy"]}.select`}
             className={css({
               padding: 0,
             })}
@@ -94,6 +97,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
                   <MenuList>
                     {options.map((option, index) => (
                       <MenuItem
+                        data-cy={`${props["data-cy"]}.select.${option.label}`}
                         key={option.label}
                         selected={index === selectedIndex}
                         onClick={() => handleMenuItemClick(index)}
