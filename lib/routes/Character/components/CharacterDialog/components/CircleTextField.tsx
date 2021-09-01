@@ -109,6 +109,7 @@ export function CircleTextField(props: {
               "width": "3rem",
               "height": "3rem",
               "borderRadius": "50%",
+
               "background": props.highlight
                 ? theme.palette.primary.main
                 : "inherit",
@@ -121,6 +122,9 @@ export function CircleTextField(props: {
                 duration: theme.transitions.duration.shortest,
               }),
               "boxShadow": theme.shadows[1],
+              "& fieldset": {
+                borderColor: "currentColor",
+              },
             }),
           }}
           inputProps={{
