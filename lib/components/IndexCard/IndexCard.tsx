@@ -398,6 +398,13 @@ export const IndexCard: React.FC<
                       variant="icon"
                       onAddBlock={(blockType) => {
                         indexCardManager.actions.addBlock(blockType);
+
+                        if (!open) {
+                          props.onToggleVisibility?.(
+                            indexCardManager.state.indexCard
+                          );
+                        }
+
                         setAdvanced(true);
                       }}
                     />
