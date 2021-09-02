@@ -148,10 +148,10 @@ function useCardCollection(props: {
         }
 
         const indexCards = draft.indexCards;
-        const indexCardToMove = spliceIndexCard();
-        addIndexCard(indexCardToMove);
+        const indexCardToMove = removeIndexCardFromCurrentPosition();
+        addIndexCardToNewPosition(indexCardToMove);
 
-        function spliceIndexCard() {
+        function removeIndexCardFromCurrentPosition() {
           for (const [index, card] of indexCards.entries()) {
             if (card.id === idOfIndexCardToMove) {
               return indexCards.splice(index, 1)[0];
@@ -164,7 +164,7 @@ function useCardCollection(props: {
           }
         }
 
-        function addIndexCard(cardToAdd: IIndexCard | undefined) {
+        function addIndexCardToNewPosition(cardToAdd: IIndexCard | undefined) {
           if (!cardToAdd) {
             return;
           }
