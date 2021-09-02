@@ -137,6 +137,49 @@ function useCardCollection(props: {
     );
   }
 
+  function moveIndexCardTo(
+    idOfIndexCardToMove: string,
+    idOfIndexCardToMoveTo: string
+  ) {
+    setCardCollection(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        const indexCards = draft.indexCards;
+        const indexCardToMove = spliceIndexCard();
+        addIndexCard(indexCardToMove);
+
+        function spliceIndexCard() {
+          for (const [index, card] of indexCards.entries()) {
+            if (card.id === idOfIndexCardToMove) {
+              return indexCards.splice(index, 1)[0];
+            }
+            for (const [subCardIndex, subCard] of card.subCards.entries()) {
+              if (subCard.id === idOfIndexCardToMove) {
+                return card.subCards.splice(subCardIndex, 1)[0];
+              }
+            }
+          }
+        }
+
+        function addIndexCard(cardToAdd: IIndexCard | undefined) {
+          if (!cardToAdd) {
+            return;
+          }
+
+          for (const card of indexCards) {
+            if (card.id === idOfIndexCardToMoveTo) {
+              card.subCards.push(cardToAdd);
+              return;
+            }
+          }
+        }
+      })
+    );
+  }
+
   return {
     state: {
       cardCollection: cardCollection,
@@ -149,7 +192,7 @@ function useCardCollection(props: {
       removeIndexCard,
       duplicateIndexCard,
       moveIndexCard,
-
+      moveIndexCardTo,
       updateIndexCard,
     },
   };
@@ -206,8 +249,8 @@ export const CardCollectionRoute: React.FC<{
         <Container maxWidth="md">
           <Box my="1rem">
             <Alert severity="warning">
-              <AlertTitle>Alert - Beta Feature</AlertTitle>
-              Index Card Collections are currently in beta. This means that data
+              <AlertTitle>Beta Feature</AlertTitle>
+              Card Collections are currently in beta. This means that data
               related to this feature might end up being lost before it is
               officially rolled out.
               <br />
@@ -225,9 +268,8 @@ export const CardCollectionRoute: React.FC<{
           <Box mb=".5rem">
             <Alert severity="info">
               <Typography variant="body1">
-                Use Index Card Collections to create index cards templates that
-                you will be able to pull easily inside scenes during a game
-                session.
+                Use Card Collections to create templates that you will be able
+                to pull easily inside scenes during a game session.
               </Typography>
             </Alert>
           </Box>
@@ -317,6 +359,15 @@ export const CardCollectionRoute: React.FC<{
                           indexCard={indexCard}
                           onRoll={() => {}}
                           onPoolClick={() => {}}
+                          onMoveTo={(
+                            idOfIndexCardToMove: string,
+                            idOfIndexCardToMoveTo: string
+                          ) => {
+                            indexCardCollectionManager.actions.moveIndexCardTo(
+                              idOfIndexCardToMove,
+                              idOfIndexCardToMoveTo
+                            );
+                          }}
                           onMove={(dragIndex, hoverIndex) => {
                             indexCardCollectionManager.actions.moveIndexCard(
                               dragIndex,

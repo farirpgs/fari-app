@@ -2,6 +2,14 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+<!--
+
+- [ ] Tooltip for clone and load button
+- [ ] bug with private section not cleaned after loading new scene
+- [ ] space in name of collection
+- [ ]
+ -->
+
 # v5.2
 
 - feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.
