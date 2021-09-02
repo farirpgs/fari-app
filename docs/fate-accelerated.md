@@ -38,7 +38,7 @@ Fate Accelerated Edition is a tabletop roleplaying game, where you and your frie
 Here’s what you’ll need to play:
 
 - **Three to five people**. One of you will be the **gamemaster**, the others **players**. We’ll talk about what those mean later.
-- **Fate Dice™**, at least four, preferably four per person. These are a special kind of six-sided dice that are marked on two sides with a plus symbol [+], two sides with a minus symbol [-], and two sides are blank [ ]. You can get these dice from many hobby and game stores, often under their original name—Fudge dice. We call them Fate Dice in this book, but you can call them whatever you like. Evil Hat will offer Fate Dice for sale at <a href="http://www.evilhat.com/"><span>www.evilhat.com</a> later in 2013.</span>
+- **Fate Dice™**, at least four, preferably four per person. These are a special kind of six-sided dice that are marked on two sides with a plus symbol [+], two sides with a minus symbol [-], and two sides are blank [ ]. You can get these dice from many hobby and game stores, often under their original name—Fudge dice. We call them Fate Dice in this book, but you can call them whatever you like. Evil Hat will offer Fate Dice for sale at <a href="http://www.evilhat.com/">www.evilhat.com</a> later in 2013.
 
 > If you don't want to use Fudge dice, you don't have to–any set of regular six-sided dice will work. If you're using regular dice, you read 5 or 6 as [+], 1 or 2 as [-], and 3 or 4 as [ ].<br />
 
