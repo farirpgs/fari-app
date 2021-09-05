@@ -5,7 +5,6 @@
 <!--
 
 - [ ] Tooltip for clone and load button
-- [ ] bug with private section not cleaned after loading new scene
 - [ ] space in name of collection
 - [ ]
  -->

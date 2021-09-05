@@ -388,6 +388,10 @@ export const CharacterV3Dialog: React.FC<{
                   flexContainer: css({
                     borderBottom: `3px solid ${headerBackgroundColor}`,
                   }),
+                  indicator: css({
+                    height: ".4rem",
+                    backgroundColor: theme.palette.secondary.main,
+                  }),
                 }}
                 onChange={(e, newValue) => {
                   setTab(newValue);

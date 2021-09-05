@@ -1017,6 +1017,10 @@ export const Session: React.FC<IProps> = (props) => {
             flexContainer: css({
               borderBottom: `3px solid ${headerBackgroundColor}`,
             }),
+            indicator: css({
+              height: ".4rem",
+              backgroundColor: theme.palette.secondary.main,
+            }),
           }}
           onChange={(e, newValue) => {
             setTab(newValue);
@@ -1685,6 +1689,10 @@ export function Scene(props: {
           classes={{
             flexContainer: css({
               borderBottom: `1px solid ${headerBackgroundColor}`,
+            }),
+            indicator: css({
+              height: ".4rem",
+              backgroundColor: theme.palette.secondary.main,
             }),
           }}
           onChange={(e, newValue) => {
