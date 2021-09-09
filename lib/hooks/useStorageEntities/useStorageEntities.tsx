@@ -1,3 +1,4 @@
+import isEqual from "lodash/isEqual";
 import { useEffect, useState } from "react";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
 
@@ -28,20 +29,29 @@ export function useStorageEntities<T>(props: {
   );
 
   useEffect(function syncOtherTabLocalStorage() {
-    function refreshStorage() {
-      const entities = FariEntity.loadEntitiesFromStorage<T>({
-        key: props.key,
-        localStorage: props.localStorage,
-        migrationFunction: props.migrationFunction,
-      });
-      setEntities(entities);
-    }
-
     window.addEventListener?.("storage", refreshStorage);
 
     return () => {
       window.removeEventListener?.("storage", refreshStorage);
     };
+
+    function refreshStorage(event: StorageEvent) {
+      if (event.key !== props.key) {
+        return;
+      }
+
+      const entitiesFromStorage = FariEntity.loadEntitiesFromStorage<T>({
+        key: props.key,
+        localStorage: props.localStorage,
+        migrationFunction: props.migrationFunction,
+      });
+
+      const isDeepEqual = isEqual(entities, entitiesFromStorage);
+
+      if (!isDeepEqual) {
+        setEntities(entitiesFromStorage);
+      }
+    }
   }, []);
 
   return [entities, setEntities] as const;
