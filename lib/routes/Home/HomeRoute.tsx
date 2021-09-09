@@ -42,14 +42,16 @@ const Patrons = [
   "Fluffydumplin",
 ];
 
-const Sponsors: Array<{ image: string; name: string }> = [
+const Sponsors: Array<{ image: string; name: string; link: string }> = [
   {
     name: "Netlify",
     image: "https://www.netlify.com/img/global/badges/netlify-color-accent.svg",
+    link: "https://www.netlify.com",
   },
   {
     name: "Lokalise",
     image: lokalise,
+    link: "https://lokalise.com/",
   },
 ];
 
@@ -297,14 +299,16 @@ export const HomeRoute: React.FC<{}> = () => {
       >
         <Container maxWidth="lg">
           <Grid container spacing={4} justifyContent="center">
-            {Sponsors.map((company, i) => {
+            {Sponsors.map((sponsor, i) => {
               return (
                 <Grid item key={i}>
-                  <img
-                    className={css({ width: "auto", height: "50px" })}
-                    src={company.image}
-                    title={company.name}
-                  />
+                  <a href={sponsor.link} target="_blank" rel="noreferrer">
+                    <img
+                      className={css({ width: "auto", height: "50px" })}
+                      src={sponsor.image}
+                      title={sponsor.name}
+                    />
+                  </a>
                 </Grid>
               );
             })}
