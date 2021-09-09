@@ -6,7 +6,6 @@
 
 - [ ] Tooltip for clone and load button
 - [ ] space in name of collection
-- [ ]
  -->
 
 # v5.2
@@ -17,6 +16,7 @@
 - fix: when there is less than 10 index cards in a scene, they will flow from left to right. More than 10 index cards will trigger the masonry (pinterest) style layout
 - feat: new "Card Collections" beta feature that lets you create your own "add index cards" buttons!
 - tech: Material-UI was updated from v4 to v5
+- tech: Performance issue when using multiple tabs
 
 # v5.1
 
