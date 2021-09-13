@@ -451,7 +451,7 @@ describe("useSession", () => {
     // WHEN adding an offline character
     let playerId = "";
     act(() => {
-      playerId = result.current.actions.addOfflinePlayer();
+      playerId = result.current.actions.addNpc();
     });
     // THEN
     expect(result.current.state.session.gm.npcs).toEqual([

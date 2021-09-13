@@ -75,7 +75,7 @@ export const HomeRoute: React.FC<{}> = () => {
   const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
-    logger.info("Route:Home");
+    logger.track("view_home");
   }, []);
 
   return (
@@ -342,7 +342,8 @@ export const HomeRoute: React.FC<{}> = () => {
                     className={css({ height: "3rem" })}
                     onClick={() => {
                       history.push("/play");
-                      logger.info("HomeRoute:onStartOnlineGame");
+
+                      logger.track("home.start_online_game");
                     }}
                   >
                     {t("home-route.play-online.button")}
@@ -388,7 +389,8 @@ export const HomeRoute: React.FC<{}> = () => {
                   data-cy="home.play-offline"
                   onClick={() => {
                     history.push("/play-offline");
-                    logger.info("HomeRoute:onStartOfflineGame");
+
+                    logger.track("home.start_offline_game");
                   }}
                 >
                   {t("home-route.play-offline.button")}
@@ -679,7 +681,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 className={css({ height: "3rem" })}
                 onClick={() => {
                   history.push("/play");
-                  logger.info("HomeRoute:onStartOnlineGame");
+                  logger.track("home.start_online_game");
                 }}
               >
                 {t("home-route.header.cta")}
@@ -718,25 +720,6 @@ export const HomeRoute: React.FC<{}> = () => {
               {t("home-route.header.stats")}
             </Typography>
           </Box>
-          {/* <Box mb="2rem">
-            <Grid container>
-              <Grid item xs={12} lg={8}>
-                <Button
-                  className={css({ height: "3rem" })}
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  onClick={() => {
-                    history.push("/play");
-                    logger.info("HomeRoute:onStartOnlineGame");
-                  }}
-                  fullWidth
-                >
-                  {"Play Now"}
-                </Button>
-              </Grid>
-            </Grid>
-          </Box> */}
         </Box>
       </Box>
     );

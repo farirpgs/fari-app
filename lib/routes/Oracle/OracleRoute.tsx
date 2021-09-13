@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -87,17 +87,16 @@ export function Oracle() {
       const newRoll = Dice.rollGroups([{ commandSets: [{ id: "4dF" }] }], {
         listResults: false,
       });
-      logger.info("OracleRoute:onDiceRoll", { contexts: { roll: newRoll } });
+
       return [newRoll, ...draft];
     });
   }
 
   useEffect(() => {
     if (shouldDisplayFinalResult) {
-      logger.info("OracleRoute:onResult", {
-        tags: { oracleValue: oracleValue },
+      logger.track("view_oracle_result", {
+        value: oracleValue,
       });
-      logger.info(`OracleRoute:onResult:value:${oracleValue}`);
     }
   }, [shouldDisplayFinalResult, oracleValue]);
 
@@ -176,12 +175,9 @@ export function Oracle() {
                         onClick={() => {
                           setLikeliness(l.value);
 
-                          logger.info("OracleRoute:onLikelinessChange", {
-                            tags: { likeliness: l.value },
+                          logger.track("change_oracle_likeliness", {
+                            likeliness: l.value,
                           });
-                          logger.info(
-                            `OracleRoute:onLikelinessChange:value:${l.value}`
-                          );
                         }}
                       >
                         <FateLabel className={css({ fontWeight: "bold" })}>

@@ -132,7 +132,9 @@ export const CharacterCard: React.FC<{
                           data-cy="character-card.open-character-sheet"
                           onClick={() => {
                             props.onCharacterDialogOpen?.();
-                            logger.info("CharacterCard:onCharacterDialogOpen");
+                            logger.track(
+                              "session.open_character_sheet_from_card"
+                            );
                           }}
                         >
                           <FaceIcon

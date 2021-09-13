@@ -2,24 +2,19 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import { useTheme } from "@material-ui/core/styles";
-import React, { useEffect } from "react";
+import React from "react";
 import { DrawObjects } from "../../components/DrawArea/DrawObjects";
 import { useDrawing } from "../../components/DrawArea/hooks/useDrawing";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const DrawRoute: React.FC = () => {
   const { t } = useTranslate();
-  const logger = useLogger();
   const drawingManager = useDrawing({});
   const theme = useTheme();
-  useEffect(() => {
-    logger.info("Route:Draw");
-  }, []);
 
   return (
     <Page>

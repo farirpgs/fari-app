@@ -27,7 +27,6 @@ import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -223,8 +222,8 @@ export const Session: React.FC<IProps> = (props) => {
 
   const liveMode = getLiveMode();
 
-  const handleGMAddOfflinePlayer = () => {
-    sessionManager.actions.addOfflinePlayer();
+  const handleGMAddNpc = () => {
+    sessionManager.actions.addNpc();
   };
 
   const handleAssignOriginalCharacterSheet = (
@@ -337,7 +336,7 @@ export const Session: React.FC<IProps> = (props) => {
                     <IconButton
                       onClick={() => {
                         sessionManager.actions.fireGoodConfetti();
-                        logger.info("Scene:onFireGoodConfetti");
+                        logger.track("session.fire_good_confetti");
                       }}
                       color="primary"
                       size="large"
@@ -382,7 +381,8 @@ export const Session: React.FC<IProps> = (props) => {
                     <IconButton
                       onClick={() => {
                         sessionManager.actions.fireBadConfetti();
-                        logger.info("Scene:onFireBadConfetti");
+
+                        logger.track("session.fire_fire_confetti");
                       }}
                       color="primary"
                       size="large"
@@ -565,7 +565,7 @@ export const Session: React.FC<IProps> = (props) => {
                           onClick={() => {
                             sessionManager.actions.resetInitiative();
                             sceneManager.actions.resetInitiative();
-                            logger.info("Scene:onResetInitiative");
+                            logger.track("session.reset_initiative");
                           }}
                           variant="contained"
                           color="secondary"
@@ -580,8 +580,9 @@ export const Session: React.FC<IProps> = (props) => {
                             <Button
                               data-cy="scene.add-player"
                               onClick={() => {
-                                handleGMAddOfflinePlayer();
-                                logger.info("Scene:addPlayer");
+                                handleGMAddNpc();
+
+                                logger.track("session.add_npc");
                               }}
                               variant="contained"
                               color="secondary"
@@ -1100,7 +1101,7 @@ export const Session: React.FC<IProps> = (props) => {
                     window.open(link, "_blank");
                   }
 
-                  logger.info("Scene:onCopyGameLink");
+                  logger.track("session.copy_session_link");
                 }
               }}
               variant="outlined"
@@ -1190,7 +1191,7 @@ export function Scene(props: {
   const theme = useTheme();
   const logger = useLogger();
   const { t } = useTranslate();
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down("md"));
+
   const scenesManager = useContext(ScenesContext);
   const myBinderManager = useContext(MyBinderContext);
 
@@ -1306,7 +1307,8 @@ export function Scene(props: {
                     : true;
                   if (confirmed) {
                     sceneManager.actions.addAndSetNewScene();
-                    logger.info("Scene:onReset");
+
+                    logger.track("session.new_scene");
                   }
                 }}
               >
@@ -1350,7 +1352,7 @@ export function Scene(props: {
                   false
                 );
                 setSavedSnack(true);
-                logger.info("Scene:onSave");
+                logger.track("scene.save");
               }}
             >
               {t("play-route.save-scene")}
@@ -1795,7 +1797,7 @@ export function Scene(props: {
                         endIcon: <AddCircleOutlineIcon />,
                         onClick: () => {
                           sceneManager.actions.addIndexCard(type);
-                          logger.info("Scene:onAddCard:IndexCard");
+                          logger.track("scene.add_index_card");
                         },
                       },
                       ...(selectedIndexCardCollection?.indexCards ?? []).map(

@@ -222,7 +222,7 @@ export const CardCollectionRoute: React.FC<{
   const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
-    logger.info("Route:Scene");
+    logger.track("card_collection.view");
   }, []);
 
   useEffect(() => {

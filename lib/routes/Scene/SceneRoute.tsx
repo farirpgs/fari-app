@@ -31,7 +31,7 @@ export const SceneRoute: React.FC<{
   const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
-    logger.info("Route:Scene");
+    logger.track("view_scene");
   }, []);
 
   useEffect(() => {

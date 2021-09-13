@@ -429,7 +429,7 @@ export function useSession(props: IProps) {
     actions: {
       overrideSession,
       resetInitiative,
-      addOfflinePlayer,
+      addNpc: addOfflinePlayer,
       fireBadConfetti,
       fireGoodConfetti,
       loadPlayerCharacter: loadPlayerCharacter,

@@ -109,7 +109,7 @@ export function PlayerRow(
 
   function handleOnRoll() {
     props.onDiceRoll();
-    logger.info("ScenePlayer:onDiceRoll");
+    logger.track("session.player_reroll_dice");
   }
 
   return (
@@ -285,7 +285,7 @@ export function PlayerRow(
                 );
                 if (confirmed) {
                   props.onPlayerRemove();
-                  logger.info("ScenePlayer:onPlayerRemove");
+                  logger.track("session.remove_player");
                 }
               }}
               size="large"
@@ -345,7 +345,7 @@ export function PlayerRow(
             onClick={(e) => {
               e.stopPropagation();
               props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
-              logger.info("ScenePlayer:onPlayedInTurnOrderChange");
+              logger.track("session.change_player_initiative");
             }}
             disabled={!props.permissions.canUpdateInitiative}
             className={css({ padding: "0" })}
@@ -542,7 +542,8 @@ export function PlayerRow(
                       } else {
                         handleOnLoadCharacterSheet();
                       }
-                      logger.info("ScenePlayer:onCharacterSheetButtonPress");
+
+                      logger.track("session.open_character_sheet");
                     }}
                   >
                     {hasCharacterSheet ? (
@@ -608,7 +609,7 @@ export function PlayerRow(
                   onClick={() => {
                     setLoadCharacterDialogOpen(false);
                     props.onAssignDuplicateCharacterSheet();
-                    logger.info("PlayerRow:onLoadAndDuplicateCharacterSheet");
+                    logger.track("session.load_and_duplicate_character");
                   }}
                 >
                   {t(
@@ -626,7 +627,7 @@ export function PlayerRow(
                   onClick={() => {
                     setLoadCharacterDialogOpen(false);
                     props.onAssignOriginalCharacterSheet();
-                    logger.info("PlayerRow:onLoadCharacterSheet");
+                    logger.track("session.load_character");
                   }}
                 >
                   {t("player-row.load-character-sheet-dialog.load")}

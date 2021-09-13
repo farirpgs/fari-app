@@ -17,12 +17,14 @@ export function makeLogger(
   sentryService: ReturnType<typeof makeSentryService>
 ) {
   return {
+    track(event: string, body = {}) {
+      //@ts-ignore
+      gtag("event", event, body);
+    },
     debug(message: string, context?: LoggerContext) {
-      sentryService.log(message, Severity.Debug, context);
       console.debug(message, context);
     },
     info(message: string, context?: LoggerContext) {
-      sentryService.log(message, Severity.Info, context);
       if (shouldConsole) {
         console.info(message, context);
       }

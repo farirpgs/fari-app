@@ -131,12 +131,12 @@ export const CharacterV3Dialog: React.FC<{
       characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
-    logger.info(`CharacterDialog:onSave`);
+    logger.track("character.save");
   }
 
   function handleOnToggleAdvancedMode() {
     setAdvanced((prev) => !prev);
-    logger.info(`CharacterDialog:onToggleAdvanced`);
+    logger.track("character.toggle_advanced_mode");
   }
 
   function onLoadTemplate(newTemplate: CharacterTemplates) {
@@ -147,9 +147,7 @@ export const CharacterV3Dialog: React.FC<{
       setTab("0");
       characterManager.actions.loadTemplate(newTemplate);
       setAdvanced(false);
-      logger.info(
-        `CharacterDialog:onLoadTemplate:${CharacterTemplates[newTemplate]}`
-      );
+      logger.track("character.load_template", { template: newTemplate });
     }
   }
 

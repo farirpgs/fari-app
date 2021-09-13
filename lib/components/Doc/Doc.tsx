@@ -30,7 +30,6 @@ import uniq from "lodash/uniq";
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { AppLink } from "../AppLink/AppLink";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -124,7 +123,6 @@ export const Doc: React.FC<IProps> = (props) => {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const history = useHistory();
-  const logger = useLogger();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const section = params.get("goTo");
@@ -172,22 +170,6 @@ export const Doc: React.FC<IProps> = (props) => {
       window.scrollTo(0, 0);
     };
   }, []);
-
-  useEffect(
-    function sendLog() {
-      const dynamicLogMessage = `Route:Document:${location.pathname}`;
-
-      logger.info(dynamicLogMessage);
-      logger.info("Route:Document", {
-        tags: {
-          pathname: location.pathname,
-          page: pageId,
-          section: section,
-        },
-      });
-    },
-    [location.pathname]
-  );
 
   useEffect(
     function transformHashToGoodUrl() {

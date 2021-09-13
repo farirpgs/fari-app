@@ -34,7 +34,7 @@ export const CharacterPrintRoute: React.FC<{
   const devMode = query.get("dev") === "true";
 
   useEffect(() => {
-    logger.info("Route:CharacterPrint");
+    logger.track("character.print");
     if (!devMode) {
       window.print();
     }
@@ -79,59 +79,60 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
   const headerBackgroundColor = useTextColors(
     theme.palette.background.paper
   ).primary;
-  return <>
-    <Box mb="1rem">
-      <Grid container justifyContent="center">
-        <Grid item>
-          <FateLabel uppercase={false} variant="h4">
-            {props.character?.name}
-          </FateLabel>
+  return (
+    <>
+      <Box mb="1rem">
+        <Grid container justifyContent="center">
+          <Grid item>
+            <FateLabel uppercase={false} variant="h4">
+              {props.character?.name}
+            </FateLabel>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-    <Box>
-      {props.character?.pages.map((page, pageIndex) => {
-        const leftSections = page.sections.left;
-        const rightSections = page.sections.right;
-        return (
-          <Box
-            key={pageIndex}
-            className={css({
-              pageBreakAfter: "always",
-            })}
-          >
+      </Box>
+      <Box>
+        {props.character?.pages.map((page, pageIndex) => {
+          const leftSections = page.sections.left;
+          const rightSections = page.sections.right;
+          return (
             <Box
+              key={pageIndex}
               className={css({
-                borderBottom: `3px solid ${headerBackgroundColor}`,
-                marginBottom: "1rem",
-                width: "100%",
-                display: "flex",
+                pageBreakAfter: "always",
               })}
             >
               <Box
                 className={css({
-                  background: headerBackgroundColor,
-                  color: headerColor,
-                  marginRight: "1rem",
-                  width: "auto",
-                  padding: ".5rem 1rem",
-                  // Pentagone
-                  // https://bennettfeely.com/clippy/
-                  clipPath:
-                    "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+                  borderBottom: `3px solid ${headerBackgroundColor}`,
+                  marginBottom: "1rem",
+                  width: "100%",
+                  display: "flex",
                 })}
               >
-                <FateLabel
-                  noWrap
+                <Box
                   className={css({
-                    fontSize: "1.4rem",
+                    background: headerBackgroundColor,
+                    color: headerColor,
+                    marginRight: "1rem",
+                    width: "auto",
+                    padding: ".5rem 1rem",
+                    // Pentagone
+                    // https://bennettfeely.com/clippy/
+                    clipPath:
+                      "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
                   })}
                 >
-                  {previewContentEditable({ value: page.label })}
-                </FateLabel>
+                  <FateLabel
+                    noWrap
+                    className={css({
+                      fontSize: "1.4rem",
+                    })}
+                  >
+                    {previewContentEditable({ value: page.label })}
+                  </FateLabel>
+                </Box>
               </Box>
-            </Box>
-            {/* <Box
+              {/* <Box
               className={css({
                 columns: "2",
                 columnGap: "1rem",
@@ -153,19 +154,20 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                 <PrintSections sections={rightSections} />
               </Box>
             </Box> */}
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <PrintSections sections={leftSections} />
+              <Grid container spacing={1}>
+                <Grid item xs={6}>
+                  <PrintSections sections={leftSections} />
+                </Grid>
+                <Grid item xs={6}>
+                  <PrintSections sections={rightSections} />
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <PrintSections sections={rightSections} />
-              </Grid>
-            </Grid>
-          </Box>
-        );
-      })}
-    </Box>
-  </>;
+            </Box>
+          );
+        })}
+      </Box>
+    </>
+  );
 }
 
 function PrintSections(props: { sections: Array<ISection> }) {
