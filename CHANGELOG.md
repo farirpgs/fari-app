@@ -15,6 +15,7 @@
 - feat: GMs can now hide NPCs from players
 - fix: when there is less than 10 index cards in a scene, they will flow from left to right. More than 10 index cards will trigger the masonry (pinterest) style layout
 - feat: new "Card Collections" beta feature that lets you create your own "add index cards" buttons!
+- feat: adding a new Skill/Pool block uses the currently selected dice commands as its default
 - tech: Material-UI was updated from v4 to v5
 - tech: Performance issue when using multiple tabs
 

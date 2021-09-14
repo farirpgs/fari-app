@@ -1,4 +1,6 @@
 import produce from "immer";
+import { useContext } from "react";
+import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
 import { BlockType, IBlock } from "../../../domains/character/types";
 import { SceneFactory } from "../../../domains/scene/SceneFactory";
@@ -9,6 +11,8 @@ export function useIndexCard(props: {
   indexCard: IIndexCard;
   onChange(indexCard: IIndexCard): void;
 }) {
+  const settingsManager = useContext(SettingsContext);
+
   const [indexCard, setIndexCard] = useLazyState({
     value: props.indexCard,
     onChange: (newIndexCard) => {
@@ -103,7 +107,11 @@ export function useIndexCard(props: {
   function addBlock(blockType: BlockType) {
     setIndexCard(
       produce((draft: IIndexCard) => {
-        draft.blocks.push(CharacterFactory.makeBlock(blockType));
+        draft.blocks.push(
+          CharacterFactory.makeBlock(blockType, {
+            defaultCommands: settingsManager.state.diceCommandIds,
+          })
+        );
       })
     );
   }
@@ -119,9 +127,8 @@ export function useIndexCard(props: {
   function duplicateBlock(blockToDuplicate: IBlock) {
     setIndexCard(
       produce((draft: IIndexCard) => {
-        const duplicatedBlock = CharacterFactory.duplicateBlock(
-          blockToDuplicate
-        );
+        const duplicatedBlock =
+          CharacterFactory.duplicateBlock(blockToDuplicate);
         const index = draft.blocks.findIndex(
           (block) => block.id === blockToDuplicate.id
         );

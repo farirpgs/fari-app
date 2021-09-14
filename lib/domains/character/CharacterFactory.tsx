@@ -1,5 +1,6 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
+import { IDiceCommandSetId } from "../dice/Dice";
 import { Id } from "../Id/Id";
 import { CharacterTemplates } from "./CharacterType";
 import {
@@ -337,7 +338,12 @@ export const CharacterFactory = {
       name: `${c?.name} Template`,
     };
   },
-  makeBlock<TType extends IBlockTypes>(type: BlockType) {
+  makeBlock<TType extends IBlockTypes>(
+    type: BlockType,
+    options: {
+      defaultCommands?: Array<IDiceCommandSetId> | null;
+    } = {}
+  ) {
     const blockDefault: Record<BlockType, IBlock> = {
       [BlockType.Text]: {
         id: Id.generate(),
@@ -364,6 +370,7 @@ export const CharacterFactory = {
         value: "0",
         meta: {
           checked: undefined,
+          commands: options.defaultCommands,
         },
       } as IBlock & ISkillBlock,
       [BlockType.DicePool]: {
@@ -372,7 +379,7 @@ export const CharacterFactory = {
         type: type,
         value: "",
         meta: {
-          commands: undefined,
+          commands: options.defaultCommands,
         },
       } as IBlock & IDicePoolBlock,
       [BlockType.PointCounter]: {

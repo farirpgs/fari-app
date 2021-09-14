@@ -383,11 +383,11 @@ function MyBinderManager() {
 }
 
 function AppProviders(props: { children: ReactNode }) {
-  const store = useContext(SettingsContext);
+  const settingsManager = useContext(SettingsContext);
 
   return (
     <ThemeProvider
-      theme={store.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
+      theme={settingsManager.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
     >
       <StyledEngineProvider injectFirst>
         <CssBaseline />

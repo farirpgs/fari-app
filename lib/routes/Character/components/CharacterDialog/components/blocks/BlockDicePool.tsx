@@ -4,7 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import { darken, lighten, useTheme } from '@material-ui/core/styles';
+import { darken, lighten, useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import { default as React, useContext } from "react";
 import {
@@ -52,112 +52,119 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
     props.block
   );
   const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
-  return <>
-    <Box>
-      {isLabelVisible && (
-        <Box>
-          <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
-            <Grid item xs>
-              <FateLabel display="inline" align="center">
-                <ContentEditable
-                  readonly={props.readonly}
-                  border={props.advanced}
-                  data-cy={`${props.dataCy}.label`}
-                  value={props.block.label}
-                  onChange={(value) => {
-                    props.onLabelChange(value);
-                  }}
-                />
-              </FateLabel>
+  return (
+    <>
+      <Box>
+        {isLabelVisible && (
+          <Box pb=".5rem">
+            <Grid
+              container
+              spacing={1}
+              justifyContent="space-between"
+              wrap="nowrap"
+            >
+              <Grid item xs>
+                <FateLabel display="inline" align="center">
+                  <ContentEditable
+                    readonly={props.readonly}
+                    border={props.advanced}
+                    data-cy={`${props.dataCy}.label`}
+                    value={props.block.label}
+                    onChange={(value) => {
+                      props.onLabelChange(value);
+                    }}
+                  />
+                </FateLabel>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-      )}
-      <Grid
-        container
-        spacing={1}
-        justifyContent="center"
-        alignItems="center"
-        wrap="nowrap"
-      >
-        <Grid item>
-          <Box>
-            <DiceMenuForCharacterSheet
-              commandSetIds={commands}
-              onChange={(newCommandIds) => {
-                props.onMetaChange({
-                  ...props.block.meta,
-                  commands: newCommandIds,
-                });
-              }}
-              render={(diceMenuProps) => (
-                <Pool
-                  fontSize="1.2rem"
-                  borderRadius="8px"
-                  selected={isSelected}
-                  clickable={canRoll}
-                  borderStyle={hasCommands ? "solid" : "dashed"}
-                  onContextMenu={(e) => {
-                    e.preventDefault();
-                    if (!props.readonly) {
-                      diceMenuProps.openMenu(e);
-                    }
-                  }}
-                  onClick={() => {
-                    if (!canRoll) {
-                      return;
-                    }
-
-                    diceManager.actions.setOptions({ listResults: true });
-                    diceManager.actions.addOrRemovePoolElement({
-                      blockId: props.block.id,
-                      blockType: props.block.type,
-                      label: props.block.label,
-                      rollGroup: rollGroup,
-                    });
-                  }}
-                >
-                  <Grid
-                    container
-                    spacing={1}
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    {!hasCommands && (
-                      <Grid item>
-                        <FormHelperText
-                          className={css({
-                            margin: "0",
-                            padding: ".5rem",
-                          })}
-                        >
-                          {t("character-dialog.helper-text.empty-dice-pool")}
-                        </FormHelperText>
-                      </Grid>
-                    )}
-                    {blockCommandSetOptions.map((commandSet, index) => {
-                      return (
-                        <Grid item key={index}>
-                          <Tooltip title={commandSet.label}>
-                            <commandSet.icon
-                              className={css({
-                                display: "flex",
-                                fontSize: "2.3rem",
-                              })}
-                            />
-                          </Tooltip>
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-                </Pool>
-              )}
-            />
           </Box>
+        )}
+        <Grid
+          container
+          spacing={1}
+          justifyContent="center"
+          alignItems="center"
+          wrap="nowrap"
+        >
+          <Grid item>
+            <Box>
+              <DiceMenuForCharacterSheet
+                commandSetIds={commands}
+                onChange={(newCommandIds) => {
+                  props.onMetaChange({
+                    ...props.block.meta,
+                    commands: newCommandIds,
+                  });
+                }}
+                render={(diceMenuProps) => (
+                  <Pool
+                    fontSize="1.2rem"
+                    borderRadius="8px"
+                    selected={isSelected}
+                    clickable={canRoll}
+                    borderStyle={hasCommands ? "solid" : "dashed"}
+                    onContextMenu={(e) => {
+                      e.preventDefault();
+                      if (!props.readonly) {
+                        diceMenuProps.openMenu(e);
+                      }
+                    }}
+                    onClick={() => {
+                      if (!canRoll) {
+                        return;
+                      }
+
+                      diceManager.actions.setOptions({ listResults: true });
+                      diceManager.actions.addOrRemovePoolElement({
+                        blockId: props.block.id,
+                        blockType: props.block.type,
+                        label: props.block.label,
+                        rollGroup: rollGroup,
+                      });
+                    }}
+                  >
+                    <Grid
+                      container
+                      spacing={1}
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      {!hasCommands && (
+                        <Grid item>
+                          <FormHelperText
+                            className={css({
+                              margin: "0",
+                              padding: ".5rem",
+                            })}
+                          >
+                            {t("character-dialog.helper-text.empty-dice-pool")}
+                          </FormHelperText>
+                        </Grid>
+                      )}
+                      {blockCommandSetOptions.map((commandSet, index) => {
+                        return (
+                          <Grid item key={index}>
+                            <Tooltip title={commandSet.label}>
+                              <commandSet.icon
+                                className={css({
+                                  display: "flex",
+                                  fontSize: "2.3rem",
+                                })}
+                              />
+                            </Tooltip>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Pool>
+                )}
+              />
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-  </>;
+      </Box>
+    </>
+  );
 }
 BlockDicePool.displayName = "BlockDicePool";
 
@@ -168,39 +175,42 @@ export function BlockDicePoolActions(
   const { t } = useTranslate();
 
   const commands = props.block.meta.commands || [];
-  return <>
-    <Grid item>
-      <DiceMenuForCharacterSheet
-        commandSetIds={commands}
-        onChange={(newCommandIds) => {
-          props.onMetaChange({
-            ...props.block.meta,
-            commands: newCommandIds,
-          });
-        }}
-        render={(diceMenuProps) => (
-          <Tooltip title={commands.join(" + ")}>
-            <Link
-              component="button"
-              variant="caption"
-              className={css({
-                color: theme.palette.primary.main,
-              })}
-              onClick={(e: any) => {
-                if (!diceMenuProps.open) {
-                  diceMenuProps.openMenu(e);
-                } else {
-                  diceMenuProps.closeMenu();
-                }
-              }}
-              underline="hover">
-              {t("character-dialog.control.set-dice")}
-            </Link>
-          </Tooltip>
-        )}
-      />
-    </Grid>
-  </>;
+  return (
+    <>
+      <Grid item>
+        <DiceMenuForCharacterSheet
+          commandSetIds={commands}
+          onChange={(newCommandIds) => {
+            props.onMetaChange({
+              ...props.block.meta,
+              commands: newCommandIds,
+            });
+          }}
+          render={(diceMenuProps) => (
+            <Tooltip title={commands.join(" + ")}>
+              <Link
+                component="button"
+                variant="caption"
+                className={css({
+                  color: theme.palette.primary.main,
+                })}
+                onClick={(e: any) => {
+                  if (!diceMenuProps.open) {
+                    diceMenuProps.openMenu(e);
+                  } else {
+                    diceMenuProps.closeMenu();
+                  }
+                }}
+                underline="hover"
+              >
+                {t("character-dialog.control.set-dice")}
+              </Link>
+            </Tooltip>
+          )}
+        />
+      </Grid>
+    </>
+  );
 }
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";
