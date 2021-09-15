@@ -19,6 +19,7 @@ import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SplitButton } from "../../components/SplitButton/SplitButton";
+import { Delays } from "../../constants/Delays";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
@@ -77,7 +78,7 @@ export const DataRoute: React.FC = () => {
   const [filters, setFilters] = useState({ group: "", search: "", type: "" });
   const [group, setGroup] = useLazyState({
     value: "",
-    delay: 750,
+    delay: Delays.field,
     onChange(newGroup) {
       setFilters((draft) => {
         return { ...draft, group: newGroup };
@@ -87,7 +88,7 @@ export const DataRoute: React.FC = () => {
 
   const [type, setType] = useLazyState({
     value: "",
-    delay: 750,
+    delay: Delays.field,
     onChange(newType) {
       setFilters((draft) => {
         return { ...draft, type: newType };
@@ -96,7 +97,7 @@ export const DataRoute: React.FC = () => {
   });
   const [search, setSearch] = useLazyState({
     value: "",
-    delay: 750,
+    delay: Delays.field,
     onChange(newSearch) {
       setFilters((draft) => {
         return { ...draft, search: newSearch };

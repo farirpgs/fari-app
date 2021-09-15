@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { default as React } from "react";
 import {
@@ -10,6 +10,7 @@ import {
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { Delays } from "../../../../../../constants/Delays";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
@@ -29,12 +30,12 @@ export function usePointCounter(props: {
   const [internalPoints, setInternalPoints] = useLazyState({
     value: props.points,
     onChange: props.onPointsChange,
-    delay: 750,
+    delay: Delays.field,
   });
   const [internalMaxPoints, setInternalMaxPoints] = useLazyState({
     value: props.maxPoints,
     onChange: props.onMaxPointsChange,
-    delay: 750,
+    delay: Delays.field,
   });
 
   function increment() {
@@ -115,110 +116,118 @@ export function BlockPointCounter(
   });
   const canRefresh =
     props.block.meta.max !== undefined && !props.readonly && !props.advanced;
-  return <>
-    <Box>
-      {isLabelVisible && (
-        <Box>
-          <Grid container justifyContent={"space-between"} wrap="nowrap" spacing={1}>
-            <Grid item className={css({ flex: "1 1 auto" })}>
-              <FateLabel
-                display="inline"
-                align="center"
-                className={css({
-                  width: "100%",
-                  display: "inline-block",
-                })}
-              >
-                <ContentEditable
-                  data-cy={`${props.dataCy}.label`}
-                  readonly={props.readonly}
-                  border={props.advanced}
-                  value={props.block.label}
-                  onChange={(value) => {
-                    props.onLabelChange(value);
+  return (
+    <>
+      <Box>
+        {isLabelVisible && (
+          <Box>
+            <Grid
+              container
+              justifyContent={"space-between"}
+              wrap="nowrap"
+              spacing={1}
+            >
+              <Grid item className={css({ flex: "1 1 auto" })}>
+                <FateLabel
+                  display="inline"
+                  align="center"
+                  className={css({
+                    width: "100%",
+                    display: "inline-block",
+                  })}
+                >
+                  <ContentEditable
+                    data-cy={`${props.dataCy}.label`}
+                    readonly={props.readonly}
+                    border={props.advanced}
+                    value={props.block.label}
+                    onChange={(value) => {
+                      props.onLabelChange(value);
+                    }}
+                  />
+                </FateLabel>
+              </Grid>
+            </Grid>
+          </Box>
+        )}
+
+        <Grid
+          container
+          justifyContent="center"
+          wrap="nowrap"
+          alignItems="center"
+          spacing={1}
+        >
+          <Grid item>
+            <CircleTextField
+              data-cy={`${props.dataCy}.value`}
+              highlight={props.block.meta.isMainPointCounter}
+              value={pointsManager.state.points}
+              onChange={(newValue) => {
+                pointsManager.actions.setPoints(newValue);
+              }}
+              onIncrement={() => {
+                pointsManager.actions.increment();
+              }}
+              onDecrement={() => {
+                pointsManager.actions.decrement();
+              }}
+            />
+          </Grid>
+          {props.block.meta.max !== undefined && (
+            <>
+              <Grid item>
+                <Typography
+                  className={css({
+                    fontSize: "2rem",
+                    color: theme.palette.text.secondary,
+                    lineHeight: Font.lineHeight(2),
+                  })}
+                >
+                  {"/"}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <CircleTextField
+                  data-cy={`${props.dataCy}.max`}
+                  highlight={props.block.meta.isMainPointCounter}
+                  value={pointsManager.state.maxPoints ?? ""}
+                  onChange={(newMax) => {
+                    pointsManager.actions.setMaxPoints(newMax);
+                  }}
+                  onIncrement={() => {
+                    pointsManager.actions.incrementMax();
+                  }}
+                  onDecrement={() => {
+                    pointsManager.actions.decrementMax();
                   }}
                 />
-              </FateLabel>
-            </Grid>
-          </Grid>
-        </Box>
-      )}
-
-      <Grid
-        container
-        justifyContent="center"
-        wrap="nowrap"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-          <CircleTextField
-            data-cy={`${props.dataCy}.value`}
-            highlight={props.block.meta.isMainPointCounter}
-            value={pointsManager.state.points}
-            onChange={(newValue) => {
-              pointsManager.actions.setPoints(newValue);
-            }}
-            onIncrement={() => {
-              pointsManager.actions.increment();
-            }}
-            onDecrement={() => {
-              pointsManager.actions.decrement();
-            }}
-          />
+              </Grid>
+            </>
+          )}
         </Grid>
-        {props.block.meta.max !== undefined && (
-          <>
+        {canRefresh && (
+          <Grid container justifyContent="center">
             <Grid item>
-              <Typography
+              <Link
+                component="button"
+                variant="caption"
                 className={css({
-                  fontSize: "2rem",
-                  color: theme.palette.text.secondary,
-                  lineHeight: Font.lineHeight(2),
+                  color: theme.palette.primary.main,
                 })}
+                onClick={() => {
+                  pointsManager.actions.refresh();
+                }}
+                underline="hover"
               >
-                {"/"}
-              </Typography>
+                {t("character-dialog.control.refresh")}
+              </Link>
             </Grid>
-            <Grid item>
-              <CircleTextField
-                data-cy={`${props.dataCy}.max`}
-                highlight={props.block.meta.isMainPointCounter}
-                value={pointsManager.state.maxPoints ?? ""}
-                onChange={(newMax) => {
-                  pointsManager.actions.setMaxPoints(newMax);
-                }}
-                onIncrement={() => {
-                  pointsManager.actions.incrementMax();
-                }}
-                onDecrement={() => {
-                  pointsManager.actions.decrementMax();
-                }}
-              />
-            </Grid>
-          </>
-        )}
-      </Grid>
-      {canRefresh && (
-        <Grid container justifyContent="center">
-          <Grid item>
-            <Link
-              component="button"
-              variant="caption"
-              className={css({
-                color: theme.palette.primary.main,
-              })}
-              onClick={() => {
-                pointsManager.actions.refresh();
-              }}
-              underline="hover">
-              {t("character-dialog.control.refresh")}
-            </Link>
           </Grid>
-        </Grid>
-      )}
-    </Box>
-  </>;
+        )}
+      </Box>
+    </>
+  );
 }
 BlockPointCounter.displayName = "BlockPointCounter";
 
@@ -229,8 +238,27 @@ export function BlockPointCounterActions(
 ) {
   const theme = useTheme();
   const { t } = useTranslate();
-  return <>
-    {props.onMainPointCounterChange && (
+  return (
+    <>
+      {props.onMainPointCounterChange && (
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              props.onMainPointCounterChange?.();
+            }}
+            underline="hover"
+          >
+            {props.block.meta.isMainPointCounter
+              ? t("character-dialog.control.unset-main-counter")
+              : t("character-dialog.control.set-main-counter")}
+          </Link>
+        </Grid>
+      )}
       <Grid item>
         <Link
           component="button"
@@ -239,35 +267,20 @@ export function BlockPointCounterActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMainPointCounterChange?.();
+            props.onMetaChange({
+              ...props.block.meta,
+              max: props.block.meta.max === undefined ? "1" : undefined,
+            });
           }}
-          underline="hover">
-          {props.block.meta.isMainPointCounter
-            ? t("character-dialog.control.unset-main-counter")
-            : t("character-dialog.control.set-main-counter")}
+          underline="hover"
+        >
+          {props.block.meta.max === undefined
+            ? t("character-dialog.control.add-max")
+            : t("character-dialog.control.remove-max")}
         </Link>
       </Grid>
-    )}
-    <Grid item>
-      <Link
-        component="button"
-        variant="caption"
-        className={css({
-          color: theme.palette.primary.main,
-        })}
-        onClick={() => {
-          props.onMetaChange({
-            ...props.block.meta,
-            max: props.block.meta.max === undefined ? "1" : undefined,
-          });
-        }}
-        underline="hover">
-        {props.block.meta.max === undefined
-          ? t("character-dialog.control.add-max")
-          : t("character-dialog.control.remove-max")}
-      </Link>
-    </Grid>
-  </>;
+    </>
+  );
 }
 
 BlockPointCounterActions.displayName = "BlockPointCounterActions";

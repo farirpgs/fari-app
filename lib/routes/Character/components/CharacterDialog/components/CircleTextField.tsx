@@ -9,6 +9,7 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import React, { useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
+import { Delays } from "../../../../../constants/Delays";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 
 export function CircleTextField(props: {
@@ -28,7 +29,7 @@ export function CircleTextField(props: {
   const [focus, setFocus] = useState(false);
   const [value, setValue] = useLazyState({
     value: props.value ?? "",
-    delay: 750,
+    delay: Delays.field,
     onChange: (newValue) => {
       props.onChange?.(newValue);
     },

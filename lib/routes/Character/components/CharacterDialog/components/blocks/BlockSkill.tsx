@@ -7,6 +7,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { Delays } from "../../../../../../constants/Delays";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import { ISkillBlock } from "../../../../../../domains/character/types";
 import { CommmandSetOptions } from "../../../../../../domains/dice/Dice";
@@ -31,7 +32,7 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const [state, setState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
-    delay: 750,
+    delay: Delays.field,
   });
 
   const isSlotTrackerVisible =

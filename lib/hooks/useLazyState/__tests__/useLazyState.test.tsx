@@ -69,7 +69,7 @@ describe("useLazyState", () => {
             return useLazyState({
               value: props.value,
               onChange: props.onChange,
-              delay: 500,
+              delay: 250,
             });
           },
           { initialProps: { value: initialValue, onChange: onChange } }
@@ -103,7 +103,7 @@ describe("useLazyState", () => {
             return useLazyState<number>({
               value: props.value,
               onChange: props.onChange,
-              delay: 500,
+              delay: 250,
             });
           },
           { initialProps: { value: initialValue, onChange: onChange } }
@@ -137,7 +137,7 @@ describe("useLazyState", () => {
             return useLazyState<{ counter: number }>({
               value: props.value,
               onChange: props.onChange,
-              delay: 500,
+              delay: 250,
             });
           },
           { initialProps: { value: initialValue, onChange: onChange } }
@@ -181,7 +181,7 @@ describe("useLazyState", () => {
             return useLazyState<{ counter: number }>({
               value: props.value,
               onChange: props.onChange,
-              delay: 500,
+              delay: 250,
             });
           },
           { initialProps: { value: initialValue, onChange: onChange } }

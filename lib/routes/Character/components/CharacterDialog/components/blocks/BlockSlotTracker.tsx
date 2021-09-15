@@ -17,6 +17,7 @@ import {
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { Delays } from "../../../../../../constants/Delays";
 import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
 import { Id } from "../../../../../../domains/Id/Id";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
@@ -33,7 +34,7 @@ export function BlockSlotTracker(
   const [hover, setHover] = useState(false);
   const [blockValue, setBlockValue] = useLazyState({
     value: props.block.value,
-    delay: 750,
+    delay: Delays.field,
     onChange: (newValue) => {
       props.onValueChange(newValue);
     },

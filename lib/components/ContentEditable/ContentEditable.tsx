@@ -5,6 +5,7 @@ import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";
 import truncate from "lodash/truncate";
 import React, { FormEvent, useEffect, useRef } from "react";
+import { Delays } from "../../constants/Delays";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
 /**
@@ -24,8 +25,6 @@ const DomPurifyOptions: {
     ALLOWED_TAGS: ["br", "i", "b"],
   },
 };
-
-const ContentEditableDelay = 750;
 
 type IPreviewContentEditableOptions = {
   value: string | undefined;
@@ -138,7 +137,7 @@ export const ContentEditable: React.FC<
         timeout.current = setTimeout(() => {
           latestHtml.current = cleanHTML;
           latestProps.current.onChange?.(cleanHTML, e);
-        }, ContentEditableDelay);
+        }, Delays.contentEditable);
       }
     }
   }
