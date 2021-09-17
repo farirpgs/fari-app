@@ -427,6 +427,7 @@ export function useSession(props: IProps) {
       userCharacterSheet,
     },
     actions: {
+      setSession,
       overrideSession,
       resetInitiative,
       addNpc: addOfflinePlayer,

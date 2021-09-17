@@ -29,6 +29,9 @@ const PlayOfflineRoute = React.lazy(
   () => import("../../routes/Play/PlayOfflineRoute")
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
+const JoinAGameRoute = React.lazy(
+  () => import("../../routes/Play/JoinAGameRoute")
+);
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const CardCollection = React.lazy(
   () => import("../../routes/CardCollection/CardCollectionRoute")
@@ -101,16 +104,16 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/play"}
+          path={["/play", "/play/:id"]}
           render={(props) => {
             return <PlayRoute {...props} />;
           }}
         />
         <Route
           exact
-          path={"/play/:id"}
+          path={"/play/join/:id"}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            return <JoinAGameRoute {...props} />;
           }}
         />
         <Route

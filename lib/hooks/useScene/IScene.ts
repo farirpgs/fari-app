@@ -89,8 +89,12 @@ export interface IScene {
   notes?: string;
 }
 
+export type IGM = IPlayer & {
+  npcs: Array<IPlayer>;
+};
+
 export interface ISession {
-  gm: IPlayer & { npcs: Array<IPlayer> };
+  gm: IGM;
   players: Array<IPlayer>;
   goodConfetti: number;
   badConfetti: number;

@@ -387,7 +387,11 @@ function AppProviders(props: { children: ReactNode }) {
 
   return (
     <ThemeProvider
-      theme={settingsManager.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
+      theme={
+        settingsManager.state.themeMode === "dark"
+          ? AppDarkTheme
+          : AppLightTheme
+      }
     >
       <StyledEngineProvider injectFirst>
         <CssBaseline />

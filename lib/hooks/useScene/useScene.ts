@@ -318,6 +318,7 @@ export function useScene() {
       dirty,
     },
     actions: {
+      setScene,
       addIndexCard: addIndexCard,
       cloneAndLoadNewScene,
       addAndSetNewScene,

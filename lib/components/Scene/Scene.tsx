@@ -132,6 +132,93 @@ type IProps =
       error?: undefined;
     };
 
+function TabbedScreen(props: {
+  tabs: Array<{
+    value: string;
+    label: string;
+    icon: React.ReactNode;
+    dataCy: string;
+    render(): React.ReactNode;
+  }>;
+}) {
+  const theme = useTheme();
+  const [tab, setTab] = useState(props.tabs[0].value);
+
+  const headerColor = theme.palette.background.paper;
+  const headerBackgroundColor = useTextColors(
+    theme.palette.background.paper
+  ).primary;
+  const tabClass = css({
+    background: headerBackgroundColor,
+    color: `${headerColor} !important`,
+    padding: "0 1.5rem",
+    marginRight: ".5rem",
+    // Pentagone
+    // https://bennettfeely.com/clippy/
+    clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+  });
+  const tabLabelClass = css({
+    fontSize: "1rem",
+    width: "100%",
+  });
+
+  return (
+    <>
+      <Tabs
+        variant="scrollable"
+        scrollButtons="auto"
+        value={tab}
+        classes={{
+          flexContainer: css({
+            borderBottom: `3px solid ${headerBackgroundColor}`,
+          }),
+          indicator: css({
+            height: ".4rem",
+            backgroundColor: theme.palette.secondary.main,
+          }),
+        }}
+        onChange={(e, newValue) => {
+          setTab(newValue);
+        }}
+      >
+        {props.tabs.map((tab) => {
+          return (
+            <Tab
+              key={tab.value}
+              value={tab.value}
+              data-cy={tab.dataCy}
+              label={
+                <>
+                  <FateLabel className={tabLabelClass}>{tab.label}</FateLabel>
+                </>
+              }
+              className={tabClass}
+              icon={<>{tab.icon}</>}
+            />
+          );
+        })}
+      </Tabs>
+      <TabContext value={tab}>
+        <Box>
+          <Box py="2rem" position="relative" minHeight="20rem">
+            {props.tabs.map((tab) => {
+              return (
+                <TabPanel
+                  key={tab.value}
+                  value={tab.value}
+                  className={css({ padding: "0" })}
+                >
+                  {tab.render()}
+                </TabPanel>
+              );
+            })}
+          </Box>
+        </Box>
+      </TabContext>
+    </>
+  );
+}
+
 export const Session: React.FC<IProps> = (props) => {
   const { sessionManager, sceneManager, connectionsManager } = props;
 
@@ -168,14 +255,7 @@ export const Session: React.FC<IProps> = (props) => {
     string | undefined
   >(undefined);
 
-  const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
-
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
-
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
 
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -422,22 +502,14 @@ export const Session: React.FC<IProps> = (props) => {
     return (
       <Fade in>
         <Box>
-          {props.mode === SceneMode.Manage ? (
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                {renderSessionTabsAndContent()}
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={5} lg={3}>
+              {renderSidePanel()}
             </Grid>
-          ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={5} lg={3}>
-                {renderSidePanel()}
-              </Grid>
-              <Grid item xs={12} md={7} lg={9}>
-                {renderSessionTabsAndContent()}
-              </Grid>
+            <Grid item xs={12} md={7} lg={9}>
+              {renderSession()}
             </Grid>
-          )}
+          </Grid>
         </Box>
       </Fade>
     );
@@ -878,98 +950,6 @@ export const Session: React.FC<IProps> = (props) => {
       </>
     );
   }
-  function renderNpcsCharacterCards() {
-    return (
-      <>
-        <Box>
-          <Box
-            className={css({
-              display: "flex",
-              flexFlow: "row",
-              flexWrap: "wrap",
-            })}
-          >
-            {sessionManager.computed.npcsWithCharacterSheets.map(
-              (npc, index) => {
-                return (
-                  <Box
-                    key={npc?.id || index}
-                    className={css({
-                      width: characterCardWidth,
-                      display: "inline-block",
-                      marginBottom: "1rem",
-                    })}
-                  >
-                    <CharacterCard
-                      key={npc?.id || index}
-                      readonly={!isGM}
-                      playerName={npc.playerName}
-                      characterSheet={npc.character}
-                      onCharacterDialogOpen={() => {
-                        setCharacterDialogPlayerId(npc.id);
-                      }}
-                      onRoll={(newDiceRollResult) => {
-                        handleSetPlayerRoll(npc.id, newDiceRollResult);
-                      }}
-                    />
-                  </Box>
-                );
-              }
-            )}
-          </Box>
-        </Box>
-      </>
-    );
-  }
-
-  function renderSessionTabsAndContent() {
-    const tabPanelStyle = css({ padding: "0" });
-    return (
-      <Box mx=".5rem">
-        <Box>
-          <TabContext value={tab}>
-            {props.mode !== SceneMode.Manage && renderSessionTabs()}
-            <Box>
-              <Box py="2rem" position="relative" minHeight="20rem">
-                <TabPanel value={"characters"} className={tabPanelStyle}>
-                  {renderCharacterCards()}
-                </TabPanel>
-                <TabPanel value={"npcs"} className={tabPanelStyle}>
-                  {renderNpcsCharacterCards()}
-                </TabPanel>
-                <TabPanel value={"scene"} className={tabPanelStyle}>
-                  <Scene
-                    sceneManager={sceneManager}
-                    isGM={isGM}
-                    canLoad={props.mode !== SceneMode.Manage && isGM}
-                    onRoll={handleSetMyRoll}
-                    onPoolClick={(element) => {
-                      diceManager.actions.addOrRemovePoolElement(element);
-                      diceManager.actions.setPlayerId(gm.id);
-                    }}
-                    onIndexCardUpdate={(indexCard, type) => {
-                      if (isGM) {
-                        sceneManager.actions.updateIndexCard(indexCard, type);
-                      } else {
-                        connectionsManager?.actions.sendToHost<IPeerActions>({
-                          action: "update-index-card",
-                          payload: { indexCard: indexCard },
-                        });
-                      }
-                    }}
-                  />
-                </TabPanel>
-
-                <TabPanel value={"draw"} className={tabPanelStyle}>
-                  {renderZones()}
-                </TabPanel>
-              </Box>
-            </Box>
-          </TabContext>
-        </Box>
-      </Box>
-    );
-  }
 
   function renderZones() {
     const tokenTitles = sessionManager.state.session.players.map(
@@ -993,86 +973,55 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderSessionTabs() {
-    const tabClass = css({
-      background: headerBackgroundColor,
-      color: `${headerColor} !important`,
-      padding: "0 1.5rem",
-      marginRight: ".5rem",
-      // Pentagone
-      // https://bennettfeely.com/clippy/
-      clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-    });
-    const tabLabelClass = css({
-      fontSize: "1rem",
-      width: "100%",
-    });
-
+  function renderSession() {
     return (
       <Box>
-        <Tabs
-          variant="scrollable"
-          scrollButtons="auto"
-          value={tab}
-          classes={{
-            flexContainer: css({
-              borderBottom: `3px solid ${headerBackgroundColor}`,
-            }),
-            indicator: css({
-              height: ".4rem",
-              backgroundColor: theme.palette.secondary.main,
-            }),
-          }}
-          onChange={(e, newValue) => {
-            setTab(newValue);
-          }}
-        >
-          {props.mode !== SceneMode.Manage && (
-            <Tab
-              value="characters"
-              data-cy="session.tabs.characters"
-              label={
-                <>
-                  <FateLabel className={tabLabelClass}>
-                    {t("menu.characters")}
-                  </FateLabel>
-                </>
-              }
-              className={tabClass}
-              icon={<PeopleAltIcon />}
-            />
-          )}
-
-          <Tab
-            value="scene"
-            data-cy="session.tabs.scene"
-            label={
-              <>
-                <FateLabel className={tabLabelClass}>
-                  {t("menu.scenes")}
-                </FateLabel>
-              </>
-            }
-            className={tabClass}
-            icon={<MovieIcon />}
-          />
-
-          {props.mode !== SceneMode.Manage && (
-            <Tab
-              value="draw"
-              data-cy="session.tabs.draw"
-              label={
-                <>
-                  <FateLabel className={tabLabelClass}>
-                    {t("draw-route.meta.title")}
-                  </FateLabel>
-                </>
-              }
-              className={tabClass}
-              icon={<FilterHdrIcon />}
-            />
-          )}
-        </Tabs>
+        <TabbedScreen
+          tabs={[
+            {
+              value: "scene",
+              dataCy: "session.tabs.characters",
+              label: t("menu.scenes"),
+              icon: <MovieIcon />,
+              render: () => (
+                <Scene
+                  sceneManager={sceneManager}
+                  isGM={isGM}
+                  canLoad={props.mode !== SceneMode.Manage && isGM}
+                  onRoll={handleSetMyRoll}
+                  onPoolClick={(element) => {
+                    diceManager.actions.addOrRemovePoolElement(element);
+                    diceManager.actions.setPlayerId(gm.id);
+                  }}
+                  onIndexCardUpdate={(indexCard, type) => {
+                    if (isGM) {
+                      sceneManager.actions.updateIndexCard(indexCard, type);
+                    } else {
+                      connectionsManager?.actions.sendToHost<IPeerActions>({
+                        action: "update-index-card",
+                        payload: { indexCard: indexCard },
+                      });
+                    }
+                  }}
+                />
+              ),
+            },
+            {
+              value: "characters",
+              dataCy: "session.tabs.scene",
+              label: t("menu.characters"),
+              icon: <PeopleAltIcon />,
+              render: renderCharacterCards,
+            },
+            {
+              value: "draw",
+              dataCy: "session.tabs.draw",
+              label: t("draw-route.meta.title"),
+              icon: <FilterHdrIcon />,
+              render: renderZones,
+            },
+          ]}
+        />
       </Box>
     );
   }
@@ -1338,7 +1287,7 @@ export function Scene(props: {
           </Grid>
         )}
 
-        {sceneManager.state.scene && (
+        {sceneManager.state.scene && props.isGM && (
           <Grid item>
             <Button
               color="primary"

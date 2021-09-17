@@ -11,26 +11,35 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { Icons } from "../../domains/Icons/Icons";
+import { useFirebaseSessionTester } from "../../hooks/useFirebaseSession/useFirebaseSession";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const JoinAGame: React.FC<{
-  idFromParams?: string;
-  onSubmitPlayerName(playerName: string): void;
-  connecting: boolean;
-  error: any;
+export const JoinAGameRoute: React.FC<{
+  match: {
+    params: { id?: string };
+  };
 }> = (props) => {
   const { t } = useTranslate();
   const settingsManager = useContext(SettingsContext);
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
+  const firebaseSessionTester = useFirebaseSessionTester();
+  const history = useHistory();
 
-  function onSubmitPlayerName(playerName: string) {
-    props.onSubmitPlayerName(playerName);
+  async function onJoin(playerName: string) {
+    const result = await firebaseSessionTester.actions.test(
+      props.match.params.id
+    );
+
+    if (result) {
+      history.push(`/play/${props.match.params.id}?name=${playerName}`);
+    }
   }
 
   useEffect(() => {
@@ -38,7 +47,7 @@ export const JoinAGame: React.FC<{
   }, [playerName]);
 
   return (
-    <Page gameId={props.idFromParams}>
+    <Page>
       <Box>
         <Box pb="1rem">
           <Container maxWidth="xs">
@@ -70,7 +79,7 @@ export const JoinAGame: React.FC<{
         onSubmit={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onSubmitPlayerName(playerName);
+          onJoin(playerName);
         }}
       >
         <Box pb="2rem" textAlign="center">
@@ -82,7 +91,7 @@ export const JoinAGame: React.FC<{
           </Typography>
         </Box>
         <Box pb="1rem">
-          {props.connecting ? (
+          {firebaseSessionTester.state.loading ? (
             <Fade in key="lol">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
@@ -123,7 +132,8 @@ export const JoinAGame: React.FC<{
                     }}
                     fullWidth
                     required
-                    variant="standard" />
+                    variant="standard"
+                  />
                 </Box>
                 <Box>
                   <Grid container justifyContent="flex-end">
@@ -142,14 +152,14 @@ export const JoinAGame: React.FC<{
             </Paper>
           </Box>
 
-          <Collapse in={props.connecting}>
+          <Collapse in={firebaseSessionTester.state.loading}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
                 <CircularProgress />
               </Box>
             </Box>
           </Collapse>
-          <Collapse in={props.error}>
+          <Collapse in={firebaseSessionTester.state.error}>
             <Box pb="2rem" textAlign="center">
               <Typography color="error">
                 {t("play-route.join-error")}
@@ -167,4 +177,4 @@ export const JoinAGame: React.FC<{
   }
 };
 
-JoinAGame.displayName = "JoinAGame";
+export default JoinAGameRoute;
