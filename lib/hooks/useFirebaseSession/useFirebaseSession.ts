@@ -12,6 +12,7 @@ export function useFirebaseSessionTester() {
   const { fariFirebase } = useContext(InjectionsContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>();
+  const [ready, setReady] = useState(false);
 
   async function test(id: string | undefined) {
     try {
@@ -20,6 +21,7 @@ export function useFirebaseSessionTester() {
       );
 
       if (session) {
+        setReady(true);
         return true;
       }
       throw new Error("Session not found");
@@ -29,11 +31,12 @@ export function useFirebaseSessionTester() {
     }
 
     setLoading(false);
+    setReady(false);
     return false;
   }
 
   return {
-    state: { loading, error },
+    state: { loading, error, ready },
     actions: { test },
   };
 }
@@ -64,12 +67,35 @@ export function useFirebaseSession(sessionId: string) {
   function putSessionInfo(sessionInfo: ISession) {
     fariFirebase.put(`/sessions/${sessionId}/info`, sessionInfo);
   }
+  function put(path: string, payload: any) {
+    fariFirebase.put(`/sessions/${sessionId}/${path}`, payload);
+  }
+  function clearScene() {
+    fariFirebase.remove(`/sessions/${sessionId}/scene`);
+  }
   function putScene(scene: IScene | undefined) {
     fariFirebase.put(`/sessions/${sessionId}/scene`, scene);
   }
 
+  function addPlayer(id: string, name: string) {
+    const player = {
+      id: id,
+      playerName: name,
+      character: undefined,
+      rolls: [],
+      isGM: false,
+      points: 3,
+      private: false,
+      playedDuringTurn: false,
+      offline: false,
+    };
+
+    fariFirebase.put(`/sessions/${sessionId}/info/players/${id}`, player);
+  }
+
   return {
     state: {
+      ready: firebaseSessionTester.state.ready,
       error: firebaseSessionTester.state.error,
       loading: firebaseSessionTester.state.loading,
       firebaseSession,
@@ -77,6 +103,9 @@ export function useFirebaseSession(sessionId: string) {
     actions: {
       putSessionInfo,
       putScene,
+      put,
+      addPlayer,
+      clearScene,
     },
   };
 }

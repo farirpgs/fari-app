@@ -7,6 +7,7 @@ import {
   off,
   onValue,
   ref,
+  remove,
   set,
 } from "firebase/database";
 
@@ -54,17 +55,18 @@ export const makeFariFirebase = () => {
         off(watcher);
       };
     },
+    remove(path: string) {
+      const db = getDatabase();
+      remove(ref(db, path));
+    },
     put<T>(path: string, body: T) {
-      if (!body) {
+      if (body === null || body === undefined) {
         return;
       }
       const db = getDatabase();
+
       const bodyWithoutUndefined = JSON.parse(JSON.stringify(body));
       set(ref(db, path), bodyWithoutUndefined);
-    },
-    putAsString<T>(path: string, body: T) {
-      const db = getDatabase();
-      set(ref(db, path), JSON.stringify(body));
     },
   };
 };

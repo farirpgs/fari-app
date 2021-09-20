@@ -1,7 +1,7 @@
 import produce from "immer";
-import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
+import { Delays } from "../../constants/Delays";
 import { arraySort } from "../../domains/array/arraySort";
 import {
   BlockType,
@@ -13,16 +13,16 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
-import { IPlayer, ISession } from "./IScene";
-import { IPeerMeta, IProps } from "./useScene";
+import { ISession } from "./IScene";
+import { IProps } from "./useScene";
 
 export function useSession(props: IProps) {
   const { userId, charactersManager } = props;
-  const [removedPlayers, setRemovedPlayers] = useState([]);
+
   const [session, setSession] = useState<ISession>(
     (): ISession => ({
       gm: {
-        id: Id.generate(),
+        id: props.userId,
         playerName: "Game Master",
         rolls: [],
         playedDuringTurn: false,
@@ -31,7 +31,7 @@ export function useSession(props: IProps) {
         private: false,
         npcs: [],
       },
-      players: [],
+      players: {},
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
@@ -39,35 +39,7 @@ export function useSession(props: IProps) {
     })
   );
 
-  useEffect(() => {
-    if (session.goodConfetti > 0) {
-      Confetti.fireConfetti();
-      setSession(
-        produce((draft) => {
-          if (!draft) {
-            return;
-          }
-          draft.goodConfetti = 0;
-        })
-      );
-    }
-  }, [session.goodConfetti]);
-
-  useEffect(() => {
-    if (session.badConfetti > 0) {
-      Confetti.fireCannon();
-      setSession(
-        produce((draft) => {
-          if (!draft) {
-            return;
-          }
-          draft.badConfetti = 0;
-        })
-      );
-    }
-  }, [session.badConfetti]);
-
-  const playersWithCharacterSheets = session.players.filter(
+  const playersWithCharacterSheets = Object.values(session.players).filter(
     (player) => !!player.character
   );
   const npcsWithCharacterSheets = session.gm.npcs.filter(
@@ -84,9 +56,48 @@ export function useSession(props: IProps) {
   const hasPlayersWithCharacterSheets =
     !!sortedPlayersWithCharacterSheets.length;
 
-  const userCharacterSheet = session.players.find((p) => {
-    return p.id === userId;
-  });
+  useEffect(() => {
+    let timeout: any;
+    if (session.goodConfetti > 0) {
+      Confetti.fireConfetti();
+      timeout = setTimeout(() => {
+        setSession(
+          produce((draft) => {
+            if (!draft) {
+              return;
+            }
+            draft.goodConfetti = 0;
+          })
+        );
+      }, Delays.clearSessionConfetti);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [session.goodConfetti]);
+
+  useEffect(() => {
+    let timeout: any;
+    if (session.badConfetti > 0) {
+      Confetti.fireCannon();
+
+      timeout = setTimeout(() => {
+        setSession(
+          produce((draft) => {
+            if (!draft) {
+              return;
+            }
+            draft.badConfetti = 0;
+          })
+        );
+      }, Delays.clearSessionConfetti);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [session.badConfetti]);
 
   useEffect(
     function syncCharacterSheetForMe() {
@@ -107,7 +118,7 @@ export function useSession(props: IProps) {
     [props.userId, session]
   );
 
-  function overrideSession(newSession: ISession) {
+  function overrideSession(newSession: ISession | undefined) {
     if (newSession) {
       setSession(newSession);
     }
@@ -192,48 +203,48 @@ export function useSession(props: IProps) {
     );
   }
 
-  function updatePlayersWithConnections(
-    connections: Array<Peer.DataConnection>
-  ) {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
+  // function updatePlayersWithConnections(
+  //   connections: Array<Peer.DataConnection>
+  // ) {
+  //   setSession(
+  //     produce((draft) => {
+  //       if (!draft) {
+  //         return;
+  //       }
 
-        const players = connections.map<IPlayer>((c) => {
-          const meta: IPeerMeta = c.metadata;
-          const playerName = meta.playerName;
-          const peerJsId = c.label;
+  //       const players = connections.map<IPlayer>((c) => {
+  //         const meta: IPeerMeta = c.metadata;
+  //         const playerName = meta.playerName;
+  //         const peerJsId = c.label;
 
-          const playerMatch = draft.players.find((p) => p.id === peerJsId);
-          const playerCharacter = playerMatch?.character;
+  //         const playerMatch = draft.players.find((p) => p.id === peerJsId);
+  //         const playerCharacter = playerMatch?.character;
 
-          const rolls = playerMatch?.rolls ?? [];
-          const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
-          const points = playerMatch?.points ?? "3";
+  //         const rolls = playerMatch?.rolls ?? [];
+  //         const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
+  //         const points = playerMatch?.points ?? "3";
 
-          return {
-            id: c.label,
-            playerName: playerName,
-            character: playerCharacter,
-            rolls: rolls,
-            isGM: false,
-            points: points,
-            private: false,
-            playedDuringTurn: playedDuringTurn,
-            offline: false,
-          };
-        });
-        const allPlayersMinusRemovedPlayersFromStaleConnections =
-          players.filter((p) => {
-            return removedPlayers.find((id) => id === p.id) === undefined;
-          });
+  //         return {
+  //           id: c.label,
+  //           playerName: playerName,
+  //           character: playerCharacter,
+  //           rolls: rolls,
+  //           isGM: false,
+  //           points: points,
+  //           private: false,
+  //           playedDuringTurn: playedDuringTurn,
+  //           offline: false,
+  //         };
+  //       });
+  //       const allPlayersMinusRemovedPlayersFromStaleConnections =
+  //         players.filter((p) => {
+  //           return removedPlayers.find((id) => id === p.id) === undefined;
+  //         });
 
-        draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
-      })
-    );
-  }
+  //       draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
+  //     })
+  //   );
+  // }
 
   function addOfflinePlayer() {
     const id = Id.generate();
@@ -258,11 +269,6 @@ export function useSession(props: IProps) {
   }
 
   function removePlayer(id: string) {
-    setRemovedPlayers(
-      produce((draft: Array<string>) => {
-        draft.push(id);
-      })
-    );
     setSession(
       produce((draft) => {
         if (!draft) {
@@ -271,9 +277,7 @@ export function useSession(props: IProps) {
         draft.gm.npcs = draft.gm.npcs.filter((p) => {
           return p.id !== id;
         });
-        draft.players = draft.players.filter((p) => {
-          return p.id !== id;
-        });
+        delete draft.players[id];
       })
     );
   }
@@ -415,7 +419,8 @@ export function useSession(props: IProps) {
   }
 
   function getEveryone(session: ISession) {
-    return [session.gm, ...session.gm.npcs, ...session.players];
+    const players = Object.values(session.players);
+    return [session.gm, ...session.gm.npcs, ...players];
   }
 
   return {
@@ -424,10 +429,8 @@ export function useSession(props: IProps) {
       npcsWithCharacterSheets: npcsWithCharacterSheets,
       playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
       hasPlayersWithCharacterSheets,
-      userCharacterSheet,
     },
     actions: {
-      setSession,
       overrideSession,
       resetInitiative,
       addNpc: addOfflinePlayer,
@@ -443,12 +446,8 @@ export function useSession(props: IProps) {
       updatePlayerPlayedDuringTurn,
       updatePlayerRoll,
       updatePlayerCharacterMainPointCounter,
-      updatePlayersWithConnections,
       pause,
       unpause,
-    },
-    _: {
-      removedPlayers,
     },
   };
 }

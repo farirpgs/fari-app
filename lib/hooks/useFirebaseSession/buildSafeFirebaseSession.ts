@@ -7,7 +7,12 @@ export const SafeFirebaseSession = {
     return produce(snapshot as IFirebaseSession, (draft: IFirebaseSession) => {
       makeGMSafe(draft.info.gm);
 
-      draft.info.players = draft.info.players ?? [];
+      draft.info.players = draft.info.players ?? {};
+
+      for (const [, player] of Object.entries(draft.info.players)) {
+        makePlayerSafe(player);
+      }
+
       draft.info.drawAreaObjects = draft.info.drawAreaObjects ?? [];
 
       makeSceneSafe(draft.scene);
@@ -16,7 +21,7 @@ export const SafeFirebaseSession = {
     function makeGMSafe(gm: IGM) {
       gm.npcs = gm.npcs ?? [];
       for (const npc of gm.npcs) {
-        npc.rolls = npc.rolls ?? [];
+        makePlayerSafe(npc);
       }
 
       makePlayerSafe(gm);
@@ -47,7 +52,10 @@ export const SafeFirebaseSession = {
       }
     }
 
-    function makeSceneSafe(scene: IScene) {
+    function makeSceneSafe(scene: IScene | undefined) {
+      if (!scene) {
+        return;
+      }
       scene.indexCards = scene.indexCards ?? {
         public: [],
         private: [],

@@ -1,5 +1,5 @@
 import Container from "@material-ui/core/Container";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Page } from "../../components/Page/Page";
@@ -9,7 +9,6 @@ import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useScene } from "../../hooks/useScene/useScene";
 
 export const SceneRoute: React.FC<{
@@ -30,14 +29,6 @@ export const SceneRoute: React.FC<{
   useEffect(() => {
     logger.track("view_scene");
   }, []);
-
-  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-
-  function handleSetRollResult(result: IDiceRollResult) {
-    setRolls((draft) => {
-      return [result, ...draft];
-    });
-  }
 
   useEffect(() => {
     const sceneToLoad = scenesManager.state.scenes.find(
@@ -61,9 +52,7 @@ export const SceneRoute: React.FC<{
             sceneManager={sceneManager}
             isGM={true}
             canLoad={false}
-            onRoll={(result) => {
-              handleSetRollResult(result);
-            }}
+            onRoll={() => {}}
             onPoolClick={(element) => {
               diceManager.actions.addOrRemovePoolElement(element);
             }}

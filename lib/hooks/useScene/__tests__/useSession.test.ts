@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import Peer from "peerjs";
 import {
   ILineObject,
   ObjectType,
@@ -25,7 +24,7 @@ describe("useSession", () => {
         isGM: true,
         points: "3",
       },
-      players: [],
+      players: {},
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
@@ -59,17 +58,10 @@ describe("useSession", () => {
       });
       // WHEN initial connection with a player
       act(() => {
-        result.current.actions.updatePlayersWithConnections([
-          {
-            label: "1",
-            metadata: {
-              playerName: "RP",
-            },
-          },
-        ] as Array<Peer.DataConnection>);
+        result.current.actions.addNpc();
       });
       // THEN
-      expect(result.current.state.session.players[0]).toEqual({
+      expect(result.current.state.session.gm.npcs[0]).toEqual({
         character: undefined,
         id: "1",
         isGM: false,
@@ -111,7 +103,7 @@ describe("useSession", () => {
         );
       });
       // THEN connection mappings reflects that
-      expect(result.current.state.session.players[0]).toEqual({
+      expect(result.current.state.session.gm.npcs[0]).toEqual({
         character: undefined,
         id: "1",
         playedDuringTurn: true,
@@ -150,7 +142,7 @@ describe("useSession", () => {
         result.current.actions.resetInitiative();
       });
       // THEN initiative is reset
-      expect(result.current.state.session.players[0]).toEqual({
+      expect(result.current.state.session.gm.npcs[0]).toEqual({
         character: undefined,
         id: "1",
         playedDuringTurn: false,
@@ -191,7 +183,7 @@ describe("useSession", () => {
         } as unknown as any);
       });
       // THEN player as character
-      expect(result.current.state.session.players[0].character).toEqual({
+      expect(result.current.state.session.gm.npcs[0].character).toEqual({
         myCharacter: "my first character",
       });
       act(() => {
@@ -201,7 +193,7 @@ describe("useSession", () => {
         } as unknown as any);
       });
       // THEN player as character
-      expect(result.current.state.session.players[0].character).toEqual({
+      expect(result.current.state.session.gm.npcs[0].character).toEqual({
         myCharacter: "my second character",
       });
 
@@ -212,126 +204,8 @@ describe("useSession", () => {
         } as unknown as any);
       });
       // THEN player as character
-      expect(result.current.state.session.players[0].character).toEqual({
+      expect(result.current.state.session.gm.npcs[0].character).toEqual({
         myCharacter: "my second character",
-      });
-    });
-    describe("removePlayers sticky connections", () => {
-      it("should keep removed players out", () => {
-        // GIVEN
-        const userId = "111";
-        const useCharactersMock = mockUseCharacters();
-
-        // WHEN initial render
-        const { result } = renderHook(() => {
-          const charactersManager = useCharactersMock();
-          return useSession({
-            userId,
-            charactersManager,
-          });
-        });
-        // WHEN initial connection with a player
-        act(() => {
-          result.current.actions.updatePlayersWithConnections([
-            {
-              label: "1",
-              metadata: {
-                playerName: "RP",
-              },
-            },
-            {
-              label: "2",
-              metadata: {
-                playerName: "Xav Bad Connection",
-              },
-            },
-          ] as Array<Peer.DataConnection>);
-        });
-        // THEN I should have 2 players
-        expect(result.current.state.session.players).toEqual([
-          {
-            character: undefined,
-            id: "1",
-            playedDuringTurn: false,
-            offline: false,
-            isGM: false,
-            private: false,
-            points: "3",
-            playerName: "RP",
-            rolls: [],
-          },
-          {
-            character: undefined,
-            id: "2",
-            playedDuringTurn: false,
-            offline: false,
-            isGM: false,
-            private: false,
-            points: "3",
-            playerName: "Xav Bad Connection",
-            rolls: [],
-          },
-        ]);
-
-        // WHEN I kick a bad connection
-        act(() => {
-          result.current.actions.removePlayer("2");
-        });
-
-        // THEN I only have one player
-        expect(result.current._.removedPlayers).toEqual(["2"]);
-        expect(result.current.state.session.players).toEqual([
-          {
-            character: undefined,
-            id: "1",
-            playedDuringTurn: false,
-            isGM: false,
-            private: false,
-            points: "3",
-            offline: false,
-            playerName: "RP",
-            rolls: [],
-          },
-        ]);
-
-        // WHEN the bad connection joins with a new id
-        act(() => {
-          result.current.actions.updatePlayersWithConnections([
-            {
-              label: "1",
-              metadata: {
-                playerName: "RP",
-              },
-            },
-            {
-              label: "2",
-              metadata: {
-                playerName: "Xav Bad Connection",
-              },
-            },
-            {
-              label: "3",
-              metadata: {
-                playerName: "Xav GOOD",
-              },
-            },
-          ] as Array<Peer.DataConnection>);
-
-          // THEN I only have two player
-          expect(result.current.state.session.players).toEqual([
-            {
-              character: undefined,
-              id: "1",
-              offline: false,
-              isGM: false,
-              private: false,
-              points: "3",
-              playedDuringTurn: false,
-              playerName: "RP",
-              rolls: [],
-            },
-          ]);
-        });
       });
     });
   });

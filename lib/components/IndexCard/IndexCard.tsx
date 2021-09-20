@@ -34,6 +34,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { ThemeProvider } from "@material-ui/styles";
 import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
+import { Delays } from "../../constants/Delays";
 import { FontFamily } from "../../constants/FontFamily";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
@@ -992,7 +993,7 @@ function IndexCardColorPicker(props: {
   const [color, setColor] = useLazyState({
     value: props.color,
     onChange: props.onChange,
-    delay: 75,
+    delay: Delays.colorPicker,
   });
 
   return (

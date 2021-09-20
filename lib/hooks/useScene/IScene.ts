@@ -95,7 +95,7 @@ export type IGM = IPlayer & {
 
 export interface ISession {
   gm: IGM;
-  players: Array<IPlayer>;
+  players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
   drawAreaObjects: IDrawAreaObjects;
