@@ -36,7 +36,7 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad, false);
+      sceneManager.actions.loadScene(sceneToLoad);
     } else {
       history.replace("/");
       myBinderManager.actions.open({ folder: "scenes" });

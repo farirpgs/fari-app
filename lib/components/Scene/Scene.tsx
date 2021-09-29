@@ -62,7 +62,7 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene,
+  IScene
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
@@ -76,7 +76,7 @@ import {
 } from "../../routes/Play/types/IPlayerInteraction";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -1072,7 +1072,7 @@ export function Scene(props: {
   const hasScene = !!sceneManager.state.scene;
 
   const handleLoadScene = (newScene: IScene) => {
-    sceneManager.actions.loadScene(newScene, true);
+    sceneManager.actions.loadScene(newScene);
   };
 
   const handleCloneAndLoadScene = (newScene: IScene) => {
@@ -1202,7 +1202,7 @@ export function Scene(props: {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(
                   sceneManager.state.scene as IScene,
-                  false
+                  
                 );
                 setSavedSnack(true);
                 logger.track("scene.save");

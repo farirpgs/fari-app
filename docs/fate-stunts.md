@@ -578,7 +578,7 @@ You have a cover identity you can assume. Describe your cover identity, choose a
 
 <p class="with-anchor"> Double Life </p>
 
-If you are in disguise at the start of a scene, you gain the aspect _Definitely Not [your real name]_ with one free invocation. If you are not in disguise at the start of a scene, you gain the aspect _Definitely Not [your secret identity]_ with one free invocation. These aspects go away at the end of each scene. (Peter Blake)
+If you are in disguise at the start of a scene, you gain the aspect _Definitely Not &lt;your real name&gt;_ with one free invocation. If you are not in disguise at the start of a scene, you gain the aspect _Definitely Not &lt;your secret identity&gt;_ with one free invocation. These aspects go away at the end of each scene. (Peter Blake)
 
 <p class="with-anchor"> Infiltrator </p>
 
@@ -898,7 +898,7 @@ Multitasking behind the wheel is second nature to you. +2 to overcome with Drive
 
 You can coax more speed out of your vehicle than seems possible. Whenever you’re engaged in any contest where speed is the primary factor (such as a chase or race of some kind) and you tie with your Drive roll, it’s considered a success. (Fate Core, p.107)
 
-<p class="with-anchor"> Ramming Speed!></p>
+<p class="with-anchor">Ramming Speed!</p>
 
 When ramming another vehicle, you ignore two shifts of damage. So if you ram and hit for four shifts, you only take two yourself. (Fate Core, p.107)
 
@@ -1090,7 +1090,7 @@ You can invoke _Dwarven Shield-Maiden_ when a nearby ally suffers an attack. Whe
 
 When someone is attacked physically while within your zone, you can spend a fate point to redirect that attack to yourself. You may defend against that attack at +1. (Fate System Toolkit, p.41)
 
-<p class="with-anchor"> Leave My Friends Alone! </p>
+<p class="with-anchor"> Leave My Friends Alone!</p>
 
 +2 to attack with Fight when your opponent’s most recent action was to attack one of your allies. (Peter Blake)
 
@@ -1652,7 +1652,7 @@ While others are content to read the journals, you have the training and drive t
 
 You may not know everything, but you always know how to find out. When looking for a fairly specific piece of information, you may give the GM a fate point to be told the closest place you can go to find out, no matter how obscure or lost the information is. In short, you can never hit a wall when trying to find something out. There are no guarantees of how easy it will be to get the knowledge, but that’s what adventure is for. (Fate System Toolkit, p.93)
 
-<p class="with-anchor"> I’ve Read about That! </p>
+<p class="with-anchor"> I’ve Read about That!</p>
 
 You’ve read hundreds—if not thousands—of books on a wide variety of topics. You can spend a fate point to use Lore in place of any other skill for one roll or exchange, provided you can justify having read about the action you’re attempting. (Fate Core, p.115)
 
@@ -1738,7 +1738,7 @@ You can use Notice instead of Shoot to make quick, reactive shots that don’t i
 
 There are benefits to knowing a place really well. Pick a location or a small neighbourhood. +2 to Notice while you are in that area.
 
-<p class="with-anchor"> Attention! </p>
+<p class="with-anchor"> Attention!</p>
 
 You have been trained to follow orders instantly in combat. When determining turn order for a physical conflict, you may use an ally's Notice skill instead of your own.
 
@@ -2002,7 +2002,7 @@ Sometimes fear isn’t an option, but that doesn’t mean you can’t still get 
 
 <p class="with-anchor"> Master of Mockery </p>
 
-When you place an aspect such as _Enraged with [Your Name Here]_ on an opponent, that opponent can do nothing but attack you until the aspect is overcome. (Peter Blake)
+When you place an aspect such as _Enraged with &lt;Your Name Here&gt;_ on an opponent, that opponent can do nothing but attack you until the aspect is overcome. (Peter Blake)
 
 <p class="with-anchor"> Poison Words </p>
 
@@ -2036,9 +2036,9 @@ You can use Provoke to enter the kinds of contests that you’d normally need Ph
 
 <p class="with-anchor"> Imposing Attitude </p>
 
-For some reason, people seem reluctant to disagree with you. Maybe it’s your cologne. You may use Provoke instead of Rapport to defend attempts to damage your reputation
+For some reason, people seem reluctant to disagree with you. Maybe it’s your cologne. You may use Provoke instead of Rapport to defend attempts to damage your reputation.
 
-<p class="with-anchor">  Okay, Fine! </p>
+<p class="with-anchor"> Okay, Fine!</p>
 
 You can use Provoke in place of Empathy to learn a target’s aspects, by bullying them until they reveal one to you. The target defends against this with Will. (If the GM thinks the aspect is particularly vulnerable to your hostile approach, you get a +2 bonus.) (Fate Core, p.120)
 
@@ -2050,7 +2050,7 @@ You are just someone people don’t want to cross, and that’s clear even to ot
 
 (requires Subtle Menace.) It’s hard not to talk to you. Not because you're approachable, but because it seems like such a bad idea not to. Fear makes people uncomfortable, and they occasionally let things slip they would not otherwise. You may use Provoke in place of Empathy or Rapport when trying to get information out of someone in a “softer” fashion. If successfully used in this way, the target is definitely rattled – so it certainly doesn’t leave the target in the same pleasant state he might be left by one of those other skills. If used to read a character's emotional state, the aspects revealed are limited only to those which might be expressed in the language of fear. (adapted from Spirit of the Century SRD, §6.16.1)
 
-<p class="with-anchor"> Tell Me or Else! </p>
+<p class="with-anchor">Tell Me or Else!</p>
 
 You don't ask nicely when there's stuff you need to know. You may roll Provoke instead of Contacts when you are gathering information from your informants.
 
