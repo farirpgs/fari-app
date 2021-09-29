@@ -38,7 +38,7 @@ describe("useScene", () => {
       };
       // WHEN
       act(() => {
-        result.current.actions.loadScene(sceneToLoad, true);
+        result.current.actions.loadScene(sceneToLoad);
       });
 
       // THEN
@@ -70,7 +70,7 @@ describe("useScene", () => {
 
       // WHEN reload the same scene
       act(() => {
-        result.current.actions.loadScene(sceneToLoad, true);
+        result.current.actions.loadScene(sceneToLoad);
       });
 
       // THEN dirty is false
@@ -85,17 +85,14 @@ describe("useScene", () => {
 
       // WHEN reload
       act(() => {
-        result.current.actions.loadScene(
-          {
-            id: "new-id",
-            group: undefined,
-            indexCards: { public: [{ id: "aspect-id" } as any], private: [] },
-            lastUpdated: 111,
-            name: "new name",
-            version: 3,
-          },
-          true
-        );
+        result.current.actions.loadScene({
+          id: "new-id",
+          group: undefined,
+          indexCards: { public: [{ id: "aspect-id" } as any], private: [] },
+          lastUpdated: 111,
+          name: "new name",
+          version: 3,
+        });
       });
       // THEN dirty is false
       expect(result.current.state.dirty).toEqual(false);
@@ -118,7 +115,7 @@ describe("useScene", () => {
         version: 3,
       };
       act(() => {
-        result.current.actions.loadScene(sceneToLoad, true);
+        result.current.actions.loadScene(sceneToLoad);
       });
       act(() => {
         result.current.actions.updateName("New Name");
@@ -148,7 +145,7 @@ describe("useScene", () => {
         version: 3,
       };
       act(() => {
-        result.current.actions.loadScene(sceneToLoad, true);
+        result.current.actions.loadScene(sceneToLoad);
       });
       act(() => {
         result.current.actions.updateName("NAME");
@@ -187,7 +184,7 @@ describe("useScene", () => {
         version: 3,
       };
       act(() => {
-        result.current.actions.loadScene(sceneToLoad, true);
+        result.current.actions.loadScene(sceneToLoad);
       });
       let npcIndexCard: IIndexCard;
       act(() => {
