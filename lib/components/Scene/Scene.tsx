@@ -62,7 +62,7 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene
+  IScene,
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
@@ -76,7 +76,7 @@ import {
 } from "../../routes/Play/types/IPlayerInteraction";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -240,12 +240,8 @@ export const Session: React.FC<IProps> = (props) => {
       sessionManager.actions.updateGmRoll(result);
     } else {
       // TODO
-      const oldRolls = me?.rolls ?? [];
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.updatePlayerRolls(me!.id, [
-          result,
-          ...oldRolls,
-        ])
+        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
       );
     }
   };
@@ -262,13 +258,9 @@ export const Session: React.FC<IProps> = (props) => {
       }
     } else {
       // TODO
-      const oldRolls = players.find((p) => p.id === playerId)?.rolls ?? [];
 
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.updatePlayerRolls(me!.id, [
-          result,
-          ...oldRolls,
-        ])
+        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
       );
     }
   };
@@ -339,10 +331,10 @@ export const Session: React.FC<IProps> = (props) => {
                         sessionManager.actions.pause();
                       } else {
                         // TODO
-                        props.onPlayerInteraction?.({
-                          type: `/info/paused`,
-                          payload: true,
-                        });
+
+                        props.onPlayerInteraction?.(
+                          PlayerInteractionFactory.pauseInteraction()
+                        );
                       }
                     }}
                     color="primary"
@@ -770,13 +762,10 @@ export const Session: React.FC<IProps> = (props) => {
               maxPoints
             );
           } else {
-            // TODO
             props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerPoints(player.id, points)
-            );
-            props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerMaxPoints(
+              PlayerInteractionFactory.updatePlayerPoints(
                 player.id,
+                points,
                 maxPoints
               )
             );
@@ -1201,8 +1190,7 @@ export function Scene(props: {
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(
-                  sceneManager.state.scene as IScene,
-                  
+                  sceneManager.state.scene as IScene
                 );
                 setSavedSnack(true);
                 logger.track("scene.save");

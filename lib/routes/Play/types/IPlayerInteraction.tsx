@@ -1,40 +1,75 @@
 import { ICharacter } from "../../../domains/character/types";
 import { IDiceRollResult } from "../../../domains/dice/Dice";
+import { IPlayer } from "../../../hooks/useScene/IScene";
 
-export type IPlayerInteraction = {
-  type: string;
-  payload: any;
-};
+export type IPlayerInteraction =
+  | {
+      type: "pause";
+      payload: undefined;
+    }
+  | {
+      type: "add-player";
+      payload: {
+        player: IPlayer;
+      };
+    }
+  | {
+      type: "update-player-points";
+      payload: { id: string; points: string; maxPoints: string | undefined };
+    }
+  | {
+      type: "update-player-roll";
+      payload: { id: string; roll: IDiceRollResult };
+    }
+  | {
+      type: "update-player-played-during-turn";
+      payload: { id: string; playedDuringTurn: boolean };
+    }
+  | {
+      type: "update-player-character";
+      payload: { id: string; character: ICharacter };
+    };
 
 export const PlayerInteractionFactory = {
-  pauseInteraction(payload: boolean) {
+  pauseInteraction(): IPlayerInteraction {
     return {
-      type: `/info/paused`,
-      payload,
+      type: `pause`,
+      payload: undefined,
     };
   },
-  updatePlayerPoints(id: string, points: string): IPlayerInteraction {
+  addPlayer(id: string, name: string): IPlayerInteraction {
+    const newPlayer: IPlayer = {
+      id: id,
+      playerName: name ?? "",
+      character: undefined,
+      rolls: [],
+      isGM: false,
+      points: "3",
+      private: false,
+      playedDuringTurn: false,
+    };
+
     return {
-      type: `/info/players/${id}/points`,
-      payload: points,
+      type: "add-player",
+      payload: {
+        player: newPlayer,
+      },
     };
   },
-  updatePlayerRolls(
+  updatePlayerRolls(id: string, roll: IDiceRollResult): IPlayerInteraction {
+    return {
+      type: `update-player-roll`,
+      payload: { id, roll },
+    };
+  },
+  updatePlayerPoints(
     id: string,
-    rolls: Array<IDiceRollResult>
-  ): IPlayerInteraction {
-    return {
-      type: `/info/players/${id}/rolls`,
-      payload: rolls,
-    };
-  },
-  updatePlayerMaxPoints(
-    id: string,
+    points: string,
     maxPoints: string | undefined
   ): IPlayerInteraction {
     return {
-      type: `/info/players/${id}/maxPoints`,
-      payload: maxPoints || null,
+      type: `update-player-points`,
+      payload: { id, points, maxPoints },
     };
   },
   updatePlayerPlayedDuringTurn(
@@ -42,14 +77,14 @@ export const PlayerInteractionFactory = {
     playedDuringTurn: boolean
   ): IPlayerInteraction {
     return {
-      type: `/info/players/${id}/playedDuringTurn`,
-      payload: playedDuringTurn,
+      type: `update-player-played-during-turn`,
+      payload: { id, playedDuringTurn },
     };
   },
   updatePlayerCharacter(id: string, character: ICharacter): IPlayerInteraction {
     return {
-      type: `/info/players/${id}/character`,
-      payload: character,
+      type: `update-player-character`,
+      payload: { id, character },
     };
   },
 };

@@ -17,7 +17,6 @@ import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { Icons } from "../../domains/Icons/Icons";
-import { useFirebaseSessionTester } from "../../hooks/useFirebaseSession/useFirebaseSession";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -29,17 +28,16 @@ export const JoinAGameRoute: React.FC<{
   const { t } = useTranslate();
   const settingsManager = useContext(SettingsContext);
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
-  const firebaseSessionTester = useFirebaseSessionTester();
   const history = useHistory();
 
   async function onJoin(playerName: string) {
-    const result = await firebaseSessionTester.actions.test(
-      props.match.params.id
-    );
+    // const result = await firebaseSessionTester.actions.test(
+    //   props.match.params.id
+    // );
 
-    if (result) {
-      history.push(`/play/${props.match.params.id}?name=${playerName}`);
-    }
+    // if (result) {
+    history.push(`/play/${props.match.params.id}?name=${playerName}`);
+    // }
   }
 
   useEffect(() => {
@@ -91,8 +89,8 @@ export const JoinAGameRoute: React.FC<{
           </Typography>
         </Box>
         <Box pb="1rem">
-          {firebaseSessionTester.state.loading ? (
-            <Fade in key="lol">
+          {false ? (
+            <Fade in key="loading">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
                   className={css({ fontSize: "5rem" })}
@@ -101,7 +99,7 @@ export const JoinAGameRoute: React.FC<{
               </Box>
             </Fade>
           ) : (
-            <Fade in key="asd">
+            <Fade in key="waiting">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingIcon
                   className={css({ fontSize: "5rem" })}
@@ -152,14 +150,14 @@ export const JoinAGameRoute: React.FC<{
             </Paper>
           </Box>
 
-          <Collapse in={firebaseSessionTester.state.loading}>
+          <Collapse in={false}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
                 <CircularProgress />
               </Box>
             </Box>
           </Collapse>
-          <Collapse in={firebaseSessionTester.state.error}>
+          <Collapse in={false}>
             <Box pb="2rem" textAlign="center">
               <Typography color="error">
                 {t("play-route.join-error")}

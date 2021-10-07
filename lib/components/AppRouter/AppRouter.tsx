@@ -1,5 +1,8 @@
-import React from "react";
+import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
+import React, { useContext } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
@@ -43,6 +46,10 @@ const SeelieSquireRoute = React.lazy(
 
 export const AppRouter = () => {
   const location = useLocation();
+  const settingsManager = useContext(SettingsContext);
+  const injections = useContext(InjectionsContext);
+  const userId = settingsManager.state.userId;
+
   return (
     <React.Suspense fallback={<LoadingRoute pathname={location.pathname} />}>
       <Switch>
@@ -106,7 +113,15 @@ export const AppRouter = () => {
           exact
           path={["/play", "/play/:id"]}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            const sessionId = (props.match.params as any).id || userId;
+
+            return (
+              <LiveblocksProvider client={injections.liveBlocksClient}>
+                <RoomProvider id={sessionId}>
+                  <PlayRoute {...props} />;
+                </RoomProvider>
+              </LiveblocksProvider>
+            );
           }}
         />
         <Route

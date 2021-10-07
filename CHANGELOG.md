@@ -2,11 +2,22 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
-<!--
+# In Progress
+
+## LiveBlocks
+
+- [ ] Player Interactions
+- [ ] Clear scene on load (missing API)
+
+## Character Sheet
+
+- [ ] List Block
+- [ ] Wide Character Sheet
+
+## Misc
 
 - [ ] Tooltip for clone and load button
 - [ ] space in name of collection
- -->
 
 # v5.2
 

@@ -13,7 +13,7 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
-import { ISession } from "./IScene";
+import { IPlayer, ISession } from "./IScene";
 import { IProps } from "./useScene";
 
 export function useSession(props: IProps) {
@@ -134,6 +134,16 @@ export function useSession(props: IProps) {
     );
   }
 
+  function addPlayer(player: IPlayer) {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        draft.players[player.id] = player;
+      })
+    );
+  }
   function updatePlayerRoll(id: string | undefined, roll: IDiceRollResult) {
     setSession(
       produce((draft) => {
@@ -445,6 +455,7 @@ export function useSession(props: IProps) {
       updatePlayerCharacter,
       updatePlayerPlayedDuringTurn,
       updatePlayerRoll,
+      addPlayer,
       updatePlayerCharacterMainPointCounter,
       pause,
       unpause,

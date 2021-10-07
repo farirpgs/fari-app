@@ -1,3 +1,8 @@
+import {
+  useBroadcastEvent,
+  useEventListener,
+  useObject,
+} from "@liveblocks/react";
 import React, { useContext, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -6,11 +11,45 @@ import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
-import { useFirebaseSession } from "../../hooks/useFirebaseSession/useFirebaseSession";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPlayerInteraction } from "./types/IPlayerInteraction";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "./types/IPlayerInteraction";
+
+export function useLiveBlockObject<T>(props: {
+  key: string;
+  value: T;
+  isGM: boolean;
+  onChange(newValue: T): void;
+}) {
+  const object = useObject<T>(props.key);
+
+  useEffect(() => {
+    if (props.isGM) {
+      object?.update(props.value);
+    }
+  }, [props.value]);
+
+  useEffect(() => {
+    syncSessionForPlayer();
+    object?.subscribe(syncSessionForPlayer);
+    return () => {
+      object?.unsubscribe(syncSessionForPlayer);
+    };
+
+    function syncSessionForPlayer() {
+      const isPlayer = !props.isGM;
+      if (isPlayer && object) {
+        props.onChange(object.toObject() as T);
+      }
+    }
+  }, [object]);
+
+  return object;
+}
 
 export const PlayRoute: React.FC<{
   match: {
@@ -30,9 +69,6 @@ export const PlayRoute: React.FC<{
   const userId = settingsManager.state.userId;
   const sessionId = isPlayer ? idFromParams : userId;
   const shareLink = `${window.location.origin}/play/join/${sessionId}`;
-  const firebaseSession = useFirebaseSession(sessionId);
-  const sessionInfoFromFirebase = firebaseSession.state.firebaseSession?.info;
-  const sceneFromFirebase = firebaseSession.state.firebaseSession?.scene;
 
   const sceneManager = useScene();
   const sessionManager = useSession({
@@ -40,77 +76,79 @@ export const PlayRoute: React.FC<{
     charactersManager: charactersManager,
   });
 
+  useLiveBlockObject({
+    key: "session",
+    isGM: isGM,
+    value: sessionManager.state.session,
+    onChange: (newValue) => {
+      sessionManager.actions.overrideSession(newValue);
+    },
+  });
+
+  useLiveBlockObject({
+    key: "scene",
+    isGM: isGM,
+    value: sceneManager.state.scene,
+    onChange: (newValue) => {
+      sceneManager.actions.overrideScene(newValue);
+    },
+  });
+
+  const broadcast = useBroadcastEvent();
+
+  useEventListener<IPlayerInteraction>(({ connectionId, event }) => {
+    if (event.type === "pause") {
+      sessionManager.actions.pause();
+    }
+    if (event.type === "update-player-roll") {
+      sessionManager.actions.updatePlayerRoll(
+        event.payload.id,
+        event.payload.roll
+      );
+    }
+    if (event.type === "add-player") {
+      sessionManager.actions.addPlayer(event.payload.player);
+    }
+    if (event.type === "update-player-points") {
+      sessionManager.actions.updatePlayerCharacterMainPointCounter(
+        event.payload.id,
+        event.payload.points,
+        event.payload.maxPoints
+      );
+    }
+    if (event.type === "update-player-played-during-turn") {
+      sessionManager.actions.updatePlayerPlayedDuringTurn(
+        event.payload.id,
+        event.payload.playedDuringTurn
+      );
+    }
+    if (event.type === "update-player-character") {
+      sessionManager.actions.updatePlayerCharacter(
+        event.payload.id,
+        event.payload.character
+      );
+    }
+  });
+
   function handlePlayerInteraction(interaction: IPlayerInteraction) {
-    firebaseSession.actions.put(interaction.type, interaction.payload);
+    broadcast({
+      type: interaction.type,
+      payload: interaction.payload,
+    });
   }
 
   useEffect(() => {
-    clearScene();
-    addPlayerWhenReady();
-
-    function clearScene() {
-      if (firebaseSession.state.ready && isGM) {
-        firebaseSession.actions.clearScene();
-      }
+    if (playerName) {
+      handlePlayerInteraction(
+        PlayerInteractionFactory.addPlayer(userId, playerName)
+      );
     }
-
-    function addPlayerWhenReady() {
-      if (firebaseSession.state.ready && playerName) {
-        firebaseSession.actions.addPlayer(userId, playerName);
-      }
-    }
-  }, [firebaseSession.state.ready, isGM]);
-
-  /**
-   * Session Sync
-   */
-  useEffect(() => {
-    if (isGM) {
-      firebaseSession.actions.putSessionInfo(sessionManager.state.session);
-    }
-  }, [sessionManager.state.session]);
-  useEffect(() => {
-    // if (isPlayer) {
-    sessionManager.actions.overrideSession(sessionInfoFromFirebase);
-    // }
-  }, [sessionInfoFromFirebase]);
-
-  /**
-   * Scene Sync
-   */
-  useEffect(() => {
-    if (isGM) {
-      firebaseSession.actions.putScene(sceneManager.state.scene);
-    }
-  }, [sceneManager.state.scene]);
-  useEffect(() => {
-    // if (isPlayer) {
-    sceneManager.actions.overrideScene(sceneFromFirebase);
-    // }
-  }, [sceneFromFirebase]);
+  }, [playerName]);
 
   const sceneName = sceneManager.state.scene?.name ?? "";
   const pageTitle = useMemo(() => {
     return previewContentEditable({ value: sceneName });
   }, [sceneName]);
-
-  // const hostManager = usePeerHost({
-  //   onConnectionDataReceive(id: string, peerAction: IPeerActions) {
-  //     if (peerAction.action === "update-character") {
-  //       sessionManager.actions.updatePlayerCharacter(id, peerAction.payload);
-  //     }
-  //     if (peerAction.action === "load-character") {
-  //       sessionManager.actions.loadPlayerCharacter(id, peerAction.payload);
-  //     }
-  //     if (peerAction.action === "update-index-card") {
-  //       sceneManager.actions.updateIndexCard(
-  //         peerAction.payload.indexCard,
-  //         "public"
-  //       );
-  //     }
-  //   },
-  //   debug: debug,
-  // });
 
   useEffect(() => {
     if (isGM) {
@@ -148,34 +186,3 @@ export const PlayRoute: React.FC<{
 
 PlayRoute.displayName = "PlayRoute";
 export default PlayRoute;
-
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "load-character",
-//   payload: character,
-// });
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "load-character",
-//   payload: copy,
-// });
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "roll",
-//   payload: result,
-// });
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "roll",
-//   payload: result,
-// });
-
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "update-character",
-//   payload: updatedCharacter,
-// });
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "played-in-turn-order",
-//   payload: playedInTurnOrder,
-// });
-
-// connectionsManager?.actions.sendToHost<IPeerActions>({
-//   action: "update-main-point-counter",
-//   payload: { points, maxPoints },
-// });

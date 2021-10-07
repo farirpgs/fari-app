@@ -4,7 +4,8 @@ import console from "console";
 
 require("dotenv").config();
 
-const testApiKey = process.env.LIVEBLOCKS_TEST_API_KEY;
+const testApiKey =
+  process.env.LIVEBLOCKS_TEST_API_KEY ?? "sk_test_PEqKTcHDheSNsDZpqC7mCDUs";
 const liveApiKey = process.env.LIVEBLOCKS_LIVE_API_KEY;
 
 const handler: Handler = async (event, context) => {
