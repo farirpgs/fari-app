@@ -25,30 +25,35 @@ export function useLiveBlockObject<T>(props: {
   isGM: boolean;
   onChange(newValue: T): void;
 }) {
-  const object = useObject<T>(props.key);
+  const liveObject = useObject<T>(props.key);
 
   useEffect(() => {
     if (props.isGM) {
-      object?.update(props.value);
+      console.debug(`GM update: ${props.key}`, props.value);
+      liveObject?.update(props.value);
     }
   }, [props.value]);
 
   useEffect(() => {
     syncSessionForPlayer();
-    object?.subscribe(syncSessionForPlayer);
+    liveObject?.subscribe(syncSessionForPlayer);
     return () => {
-      object?.unsubscribe(syncSessionForPlayer);
+      liveObject?.unsubscribe(syncSessionForPlayer);
     };
 
     function syncSessionForPlayer() {
       const isPlayer = !props.isGM;
-      if (isPlayer && object) {
-        props.onChange(object.toObject() as T);
+      const object = liveObject?.toObject();
+      const objectKeys = Object.keys(object ?? {});
+
+      if (isPlayer && object && objectKeys.length > 0) {
+        console.debug(`Player get: ${props.key}`, object);
+        props.onChange(object as T);
       }
     }
-  }, [object]);
+  }, [liveObject]);
 
-  return object;
+  return liveObject;
 }
 
 export const PlayRoute: React.FC<{
