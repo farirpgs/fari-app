@@ -202,6 +202,14 @@ export type ISeparatorBlock = {
   };
 };
 
+export type IDropDownBlock = {
+  type: BlockType.Text;
+  meta: IDefaultBlockMeta & {
+    possibleValues?: Array<string>;
+  };
+  value: string;
+};
+
 export type IBlockTypes =
   | ITextBlock
   | INumericBlock
@@ -211,7 +219,8 @@ export type IBlockTypes =
   | IPointCounterBlock
   | IImageBlock
   | ILinkBlock
-  | ISeparatorBlock;
+  | ISeparatorBlock
+  | IDropDownBlock;
 
 export type IBlock = {
   type: BlockType;
