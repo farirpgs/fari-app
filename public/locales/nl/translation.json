@@ -8,6 +8,7 @@
   "character-dialog.block-type.numeric": "",
   "character-dialog.block-type.point-counter": "",
   "character-dialog.block-type.separator": "",
+  "character-dialog.block-type.dropdown": "",
   "character-dialog.block-type.skill": "",
   "character-dialog.block-type.slot-tracker": "",
   "character-dialog.block-type.text": "",

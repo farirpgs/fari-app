@@ -8,6 +8,7 @@
   "character-dialog.block-type.numeric": "Numérico",
   "character-dialog.block-type.point-counter": "Contador de puntos",
   "character-dialog.block-type.separator": "Separador",
+  "character-dialog.block-type.dropdown": "",
   "character-dialog.block-type.skill": "Habilidad",
   "character-dialog.block-type.slot-tracker": "Marcador de Huecos",
   "character-dialog.block-type.text": "Texto",

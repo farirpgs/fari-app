@@ -11,6 +11,7 @@ export enum BlockType {
   Image = "Image",
   Link = "Link",
   Separator = "Separator",
+  DropDown = "DropDown",
 }
 
 export enum V3Position {
@@ -205,7 +206,7 @@ export type ISeparatorBlock = {
 export type IDropDownBlock = {
   type: BlockType.Text;
   meta: IDefaultBlockMeta & {
-    possibleValues?: Array<string>;
+    possibleValues: Array<string>;
   };
   value: string;
 };

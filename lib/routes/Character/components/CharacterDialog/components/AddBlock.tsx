@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AddIcon from "@material-ui/icons/Add";
+import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
@@ -184,6 +185,18 @@ export const AddBlock: React.FC<
           </ListItemIcon>
 
           <ListItemText primary={t("character-dialog.block-type.separator")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.DropDown);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <ArrowDropDown fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.dropdown")} />
         </MenuItem>
       </Menu>
     </Box>

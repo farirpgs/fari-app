@@ -7,6 +7,7 @@ import {
   IBlock,
   ICharacter,
   IDicePoolBlock,
+  IDropDownBlock,
   IImageBlock,
   ILinkBlock,
   INumericBlock,
@@ -412,6 +413,15 @@ export const CharacterFactory = {
         meta: { hasLabel: false },
         value: "",
       } as IBlock & ISeparatorBlock,
+      [BlockType.DropDown]: {
+        id: Id.generate(),
+        label: "DropDown",
+        type: type,
+        value: "value1",
+        meta: {
+          possibleValues: ["value1", "value2", "value3"],
+        },
+      } as IBlock & IDropDownBlock,
     };
 
     return blockDefault[type];

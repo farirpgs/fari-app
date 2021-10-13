@@ -8,6 +8,7 @@
   "character-dialog.block-type.numeric": "Nombra",
   "character-dialog.block-type.point-counter": "Poent-Nombrilo",
   "character-dialog.block-type.separator": "Apartigilo",
+  "character-dialog.block-type.dropdown": "",
   "character-dialog.block-type.skill": "Lerteco",
   "character-dialog.block-type.slot-tracker": "Kontrolmarkilo",
   "character-dialog.block-type.text": "Teksto",

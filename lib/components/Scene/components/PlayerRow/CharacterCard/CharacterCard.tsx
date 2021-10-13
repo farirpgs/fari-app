@@ -16,6 +16,7 @@ import {
   IBlock,
   ICharacter,
   IDicePoolBlock,
+  IDropDownBlock,
   IImageBlock,
   ILinkBlock,
   INumericBlock,
@@ -30,6 +31,7 @@ import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { BlockDicePool } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { BlockDropDown } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDropDown";
 import { BlockImage } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockImage";
 import { BlockLink } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockLink";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
@@ -93,6 +95,7 @@ export const CharacterCard: React.FC<{
     SlotTracker: renderBlockSlotTracker,
     Link: renderBlockLink,
     Separator: renderSeparatorBlock,
+    DropDown: renderBlockDropDown,
   };
 
   return (
@@ -384,6 +387,25 @@ export const CharacterCard: React.FC<{
         <BlockSeparator
           advanced={false}
           readonly={true}
+          dataCy={`character-card.${section.label}.${block.label}`}
+          block={block}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
+          onRoll={() => {}}
+        />
+      </Grid>
+    );
+  }
+  function renderBlockDropDown(
+    section: ISection,
+    block: IBlock & IDropDownBlock
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockDropDown
+          advanced={false}
+          readonly={false}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
           onLabelChange={() => {}}

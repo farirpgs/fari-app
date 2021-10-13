@@ -16,6 +16,7 @@ import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
+import { BlockDropDown } from "./blocks/BlockDropDown";
 import { BlockImage } from "./blocks/BlockImage";
 import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
@@ -203,6 +204,19 @@ export function BlockByType(
 
       {props.block.type === BlockType.Separator && (
         <BlockSeparator
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+
+      {props.block.type === BlockType.DropDown && (
+        <BlockDropDown
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
