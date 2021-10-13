@@ -71,7 +71,7 @@ export function BlockDropDown(
             data-cy={`${props.dataCy}.value`}
             value={props.block.value}
             onChange={(event, node: ReactNode) => {
-              if (node) {
+              if (node && node.props) {
                 props.onValueChange(node.props.value);
               }
             }}
