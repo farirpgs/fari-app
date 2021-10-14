@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -27,15 +28,23 @@ export function BlockDropDown(
 
   return (
     <>
-      <Box>
-        <Grid container spacing={1} justify="space-between" wrap="nowrap">
-          {isLabelVisible && renderLabel(props)}
-          <Grid item>
-            {!props.advanced && renderDropDown(props)}
-            {props.advanced && renderConfigurationPanel(t, props)}
+      {!props.advanced && (
+        <Box>
+          <Grid container justify="space-between">
+            <Grid item>{isLabelVisible && renderLabel(props)}</Grid>
+            <Grid item>{renderDropDown(props)}</Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      )}
+
+      {props.advanced && (
+        <Box>
+          {isLabelVisible && renderLabel(props)}
+          <div style={{ marginTop: "1em" }}>
+            {renderConfigurationPanel(t, props)}
+          </div>
+        </Box>
+      )}
     </>
   );
 
@@ -43,21 +52,19 @@ export function BlockDropDown(
     props: IBlockComponentProps<IDropDownBlock>
   ): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
     return (
-      <Grid item>
-        <Box>
-          <FateLabel display="inline">
-            <ContentEditable
-              readonly={props.readonly}
-              border={props.advanced}
-              data-cy={`${props.dataCy}.label`}
-              value={props.block.label}
-              onChange={(value) => {
-                props.onLabelChange(value);
-              }}
-            />
-          </FateLabel>
-        </Box>
-      </Grid>
+      <Box>
+        <FateLabel display="inline">
+          <ContentEditable
+            readonly={props.readonly}
+            border={props.advanced}
+            data-cy={`${props.dataCy}.label`}
+            value={props.block.label}
+            onChange={(value) => {
+              props.onLabelChange(value);
+            }}
+          />
+        </FateLabel>
+      </Box>
     );
   }
 
@@ -102,10 +109,16 @@ export function BlockDropDown(
               return (
                 <Grid
                   container
-                  justify={"center"}
+                  justify={"space-between"}
                   wrap="nowrap"
                   spacing={1}
                   key={index}
+                  className={css({
+                    "&:hover": {
+                      boxShadow:
+                        "inset rgba(0, 0, 0, 0.25) 0px 0px 3px, rgba(0, 0, 0, 0.25) 0px 0px 3px",
+                    },
+                  })}
                 >
                   <Grid item>
                     <ContentEditable
@@ -118,13 +131,11 @@ export function BlockDropDown(
                       }}
                     />
                   </Grid>
-                  <Grid item xs>
-                    {renderRemoveButton(t, index, props)}
-                  </Grid>
+                  <Grid item>{renderRemoveButton(t, index, props)}</Grid>
                 </Grid>
               );
             })}
-          {renderAddButton(t, props)}
+          <div style={{ marginTop: "1em" }}>{renderAddButton(t, props)}</div>
         </Typography>
       </Box>
     );
