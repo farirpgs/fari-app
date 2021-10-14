@@ -95,6 +95,24 @@ export function MyBinder<TFolders extends string>(props: {
 
   const [importDialogModalEntity, setImportDialogModalEntity] = useState<any>();
 
+  const [deletedSnack, setDeletedSnack] = useState(false);
+  const [deletedObject, setDeletedObject] = useState<
+    { folder: TFolders; element: any } | undefined
+  >(undefined);
+
+  const currentFolder = folder as TFolders;
+  const currentFolderLabel = currentFolder
+    ? t(`my-binder.folder.${currentFolder}` as ITranslationKeys)
+    : "";
+
+  const currentFolderElements = props.folders[currentFolder] ?? [];
+  const currentFolderElementsSorted = arraySort(currentFolderElements, [
+    (e) => ({ value: e.lastUpdated, direction: "desc" }),
+  ]);
+  const latestElements = currentFolderElementsSorted.slice(0, 5);
+
+  const where = getWhere();
+
   useEffect(
     function clearFolderOnClose() {
       if (props.open === false) {
@@ -104,17 +122,6 @@ export function MyBinder<TFolders extends string>(props: {
     },
     [props.open]
   );
-
-  const currentFolder = folder as TFolders;
-
-  const currentFolderLabel = currentFolder
-    ? t(`my-binder.folder.${currentFolder}` as ITranslationKeys)
-    : "";
-
-  const [deletedSnack, setDeletedSnack] = useState(false);
-  const [deletedObject, setDeletedObject] = useState<
-    { folder: TFolders; element: any } | undefined
-  >(undefined);
 
   function handleOnUndo() {
     if (deletedObject) {
@@ -129,8 +136,6 @@ export function MyBinder<TFolders extends string>(props: {
     setDeletedSnack(true);
     props.onDelete(currentFolder, element);
   }
-
-  const where = getWhere();
 
   function handleGoBack() {
     setFolder(undefined);
@@ -359,8 +364,6 @@ export function MyBinder<TFolders extends string>(props: {
   }
 
   function renderFolder() {
-    const folderElements = props.folders[currentFolder];
-
     return (
       <Box>
         <Box>
@@ -411,7 +414,7 @@ export function MyBinder<TFolders extends string>(props: {
           </Box>
 
           <Box>{renderLatestElements()}</Box>
-          <Box>{renderElements(folderElements)}</Box>
+          <Box>{renderElements(currentFolderElements)}</Box>
         </Box>
       </Box>
     );
@@ -440,17 +443,12 @@ export function MyBinder<TFolders extends string>(props: {
   }
 
   function renderLatestElements() {
-    const elements = props.folders[currentFolder];
-    const elementsSortedByLatest = arraySort(elements, [
-      (e) => ({ value: e.lastUpdated, direction: "desc" }),
-    ]);
-    const elementsForLatest = elementsSortedByLatest.slice(0, 5);
     return (
       <Box>
-        {elementsForLatest.length > 0 &&
-          renderHeader("Latest", elementsForLatest.length)}
+        {latestElements.length > 0 &&
+          renderHeader("Latest", latestElements.length)}
         <List dense>
-          {elementsForLatest.map((element) => {
+          {latestElements.map((element) => {
             const type = element.type as TFolders;
             return (
               <React.Fragment key={element.id}>
@@ -529,7 +527,15 @@ export function MyBinder<TFolders extends string>(props: {
           const groupItems = groups[groupName];
           const sortedGroupItems = arraySort(groupItems, [
             (e) => ({ value: e.lastUpdated, direction: "desc" }),
-          ]);
+          ]).filter((e) => {
+            const isntInLatestElements =
+              latestElements.find((le) => le.id === e.id) === undefined;
+            return isntInLatestElements;
+          });
+
+          if (sortedGroupItems.length === 0) {
+            return null;
+          }
           return (
             <Box key={key}>
               {renderHeader(groupName, groupItems.length)}
