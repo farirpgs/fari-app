@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,6 +19,13 @@ import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IDropDownBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+
+const smallerIcon = css({
+  fontSize: "1rem",
+});
+const smallerButton = css({
+  padding: "0rem",
+});
 
 export function BlockDropDown(
   props: IBlockComponentProps<IDropDownBlock> & {}
@@ -74,26 +82,24 @@ export function BlockDropDown(
   ): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
     return (
       <Box>
-        <Typography>
-          <Select
-            data-cy={`${props.dataCy}.value`}
-            value={props.block.value}
-            onChange={(event, node: ReactNode) => {
-              if (node && node.props) {
-                props.onValueChange(node.props.value);
-              }
-            }}
-          >
-            {!!props.block.meta?.possibleValues &&
-              props.block.meta?.possibleValues.map((possibleValue, index) => {
-                return (
-                  <MenuItem key={index} value={possibleValue}>
-                    {possibleValue}
-                  </MenuItem>
-                );
-              })}
-          </Select>
-        </Typography>
+        <Select
+          data-cy={`${props.dataCy}.value`}
+          value={props.block.value}
+          onChange={(event, node: ReactNode) => {
+            if (node && node.props) {
+              props.onValueChange(node.props.value);
+            }
+          }}
+        >
+          {!!props.block.meta?.possibleValues &&
+            props.block.meta?.possibleValues.map((possibleValue, index) => {
+              return (
+                <MenuItem key={index} value={possibleValue}>
+                  {possibleValue}
+                </MenuItem>
+              );
+            })}
+        </Select>
       </Box>
     );
   }
@@ -167,7 +173,10 @@ function renderGoUpButton(
   props: IBlockComponentProps<IDropDownBlock>
 ) {
   return (
-    <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
+    <Tooltip
+      title={t("character-dialog.control.remove-dropdown-item")}
+      className={css({})}
+    >
       <IconButton
         size="small"
         data-cy={`${props.dataCy}.remove-dropdown-item`}
@@ -175,7 +184,7 @@ function renderGoUpButton(
           handleMoveDropDownItem(Direction.Up, index, props);
         }}
       >
-        <ArrowUpwardRounded />
+        <ArrowUpwardRounded className={smallerIcon} />
       </IconButton>
     </Tooltip>
   );
@@ -190,12 +199,13 @@ function renderGoDownButton(
     <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
       <IconButton
         size="small"
+        className={smallerButton}
         data-cy={`${props.dataCy}.remove-dropdown-item`}
         onClick={() => {
           handleMoveDropDownItem(Direction.Down, index, props);
         }}
       >
-        <ArrowDownwardRounded />
+        <ArrowDownwardRounded className={smallerIcon} />
       </IconButton>
     </Tooltip>
   );
@@ -238,12 +248,13 @@ function renderRemoveButton(
     <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
       <IconButton
         size="small"
+        className={smallerButton}
         data-cy={`${props.dataCy}.remove-dropdown-item`}
         onClick={() => {
           handleRemoveDropDownItem(props);
         }}
       >
-        <RemoveCircleOutlineIcon />
+        <RemoveCircleOutlineIcon className={smallerIcon} />
       </IconButton>
     </Tooltip>
   );
@@ -273,6 +284,7 @@ function renderAddButton(t: any, props: IBlockComponentProps<IDropDownBlock>) {
     <Tooltip title={t("character-dialog.control.add-dropdown-item")}>
       <IconButton
         size="small"
+        className={smallerButton}
         data-cy={`${props.dataCy}.remove-dropdown-item`}
         onClick={() => {
           handleAddDropDownItem(props);
