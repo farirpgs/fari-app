@@ -26,6 +26,7 @@ const smallerIcon = css({
 const smallerButton = css({
   padding: "0rem",
 });
+const defaultValue = " ";
 
 export function BlockDropDown(
   props: IBlockComponentProps<IDropDownBlock> & {}
@@ -85,7 +86,7 @@ export function BlockDropDown(
         <Autocomplete
           multiple
           size="small"
-          options={props.block.meta?.possibleValues}
+          options={[defaultValue, ...props.block.meta?.possibleValues]}
           getOptionLabel={(option) => option}
           defaultValue={[props.block.meta?.possibleValues[0]]}
           renderInput={(params) => (
@@ -93,15 +94,17 @@ export function BlockDropDown(
           )}
           value={props.block.value}
           onChange={(event, newValue) => {
-            if (newValue) {
+            if (newValue && newValue.length > 0) {
               props.onValueChange(newValue);
+            } else {
+              props.onValueChange([defaultValue]);
             }
           }}
         />
 
         <Autocomplete
           size="small"
-          options={props.block.meta?.possibleValues}
+          options={[defaultValue, ...props.block.meta?.possibleValues]}
           getOptionLabel={(option) => option}
           defaultValue={props.block.meta?.possibleValues[0]}
           renderInput={(params) => (
@@ -111,18 +114,11 @@ export function BlockDropDown(
           onChange={(event, newValue) => {
             if (newValue) {
               props.onValueChange([newValue]);
+            } else {
+              props.onValueChange([defaultValue]);
             }
           }}
         />
-
-        {/* {!!props.block.meta?.possibleValues &&
-            props.block.meta?.possibleValues.map((possibleValue, index) => {
-              return (
-                <MenuItem key={index} value={possibleValue}>
-                  {possibleValue}
-                </MenuItem>
-              );
-            })} */}
       </Box>
     );
   }
