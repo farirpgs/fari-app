@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,6 +6,8 @@ import Select from "@material-ui/core/Select";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import ArrowDownwardRounded from "@material-ui/icons/ArrowDownwardRounded";
+import ArrowUpwardRounded from "@material-ui/icons/ArrowUpwardRounded";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import React, { ReactNode } from "react";
 import {
@@ -109,18 +110,12 @@ export function BlockDropDown(
               return (
                 <Grid
                   container
-                  justify={"space-between"}
+                  justify={"flex-end"}
                   wrap="nowrap"
                   spacing={1}
                   key={index}
-                  className={css({
-                    "&:hover": {
-                      boxShadow:
-                        "inset rgba(0, 0, 0, 0.25) 0px 0px 3px, rgba(0, 0, 0, 0.25) 0px 0px 3px",
-                    },
-                  })}
                 >
-                  <Grid item>
+                  <Grid item xs={10}>
                     <ContentEditable
                       readonly={false}
                       border={true}
@@ -131,6 +126,8 @@ export function BlockDropDown(
                       }}
                     />
                   </Grid>
+                  <Grid item>{renderGoUpButton(t, index, props)}</Grid>
+                  <Grid item>{renderGoDownButton(t, index, props)}</Grid>
                   <Grid item>{renderRemoveButton(t, index, props)}</Grid>
                 </Grid>
               );
@@ -164,6 +161,74 @@ function handleDropDownItemChange(
   }
 }
 
+function renderGoUpButton(
+  t: any,
+  index: number,
+  props: IBlockComponentProps<IDropDownBlock>
+) {
+  return (
+    <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
+      <IconButton
+        size="small"
+        data-cy={`${props.dataCy}.remove-dropdown-item`}
+        onClick={() => {
+          handleMoveDropDownItem(Direction.Up, index, props);
+        }}
+      >
+        <ArrowUpwardRounded />
+      </IconButton>
+    </Tooltip>
+  );
+}
+
+function renderGoDownButton(
+  t: any,
+  index: number,
+  props: IBlockComponentProps<IDropDownBlock>
+) {
+  return (
+    <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
+      <IconButton
+        size="small"
+        data-cy={`${props.dataCy}.remove-dropdown-item`}
+        onClick={() => {
+          handleMoveDropDownItem(Direction.Down, index, props);
+        }}
+      >
+        <ArrowDownwardRounded />
+      </IconButton>
+    </Tooltip>
+  );
+}
+
+enum Direction {
+  Up,
+  Down,
+}
+
+function handleMoveDropDownItem(
+  direction: Direction,
+  index: number,
+  props: IBlockComponentProps<IDropDownBlock>
+) {
+  if (props.block.meta) {
+    const copy = [...props.block.meta.possibleValues];
+
+    const targetIndex = direction === Direction.Down ? index + 1 : index - 1;
+
+    const targetValue = copy[targetIndex];
+    if (!targetValue) return;
+
+    copy[targetIndex] = copy[index];
+    copy[index] = targetValue;
+
+    props.onMetaChange({
+      ...props.block.meta,
+      possibleValues: [...copy],
+    });
+  }
+}
+
 function renderRemoveButton(
   t: any,
   index: number,
@@ -188,6 +253,11 @@ function renderRemoveButton(
   ) {
     if (props.block.meta) {
       const copy = [...props.block.meta.possibleValues];
+
+      if (props.block.value === copy[index]) {
+        props.onValueChange(props.block.meta.possibleValues[0]);
+      }
+
       copy.splice(index, 1);
 
       props.onMetaChange({
