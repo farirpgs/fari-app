@@ -210,10 +210,7 @@ export function BlockDropDown(
 
   function renderGoUpButton(index: number) {
     return (
-      <Tooltip
-        title={t("character-dialog.control.remove-dropdown-item")}
-        className={css({})}
-      >
+      <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
         <IconButton
           size="small"
           data-cy={`${props.dataCy}.remove-dropdown-item`}
