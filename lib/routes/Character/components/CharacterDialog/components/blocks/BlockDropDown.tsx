@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { TextField } from "@material-ui/core";
+import { Link, TextField, useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,7 +18,10 @@ import {
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IDropDownBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import {
+  IBlockActionComponentProps,
+  IBlockComponentProps,
+} from "../../types/IBlockComponentProps";
 
 const smallerIcon = css({
   fontSize: "1rem",
@@ -83,42 +86,56 @@ export function BlockDropDown(
   ): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
     return (
       <Box>
-        <Autocomplete
-          multiple
-          size="small"
-          options={[defaultValue, ...props.block.meta?.possibleValues]}
-          getOptionLabel={(option) => option}
-          defaultValue={[props.block.meta?.possibleValues[0]]}
-          renderInput={(params) => (
-            <TextField {...params} variant="standard" label="" placeholder="" />
-          )}
-          value={props.block.value}
-          onChange={(event, newValue) => {
-            if (newValue && newValue.length > 0) {
-              props.onValueChange(newValue);
-            } else {
-              props.onValueChange([defaultValue]);
-            }
-          }}
-        />
+        {props.block.meta.asMultiple && (
+          <Autocomplete
+            multiple
+            size="small"
+            options={[defaultValue, ...props.block.meta?.possibleValues]}
+            getOptionLabel={(option) => option}
+            defaultValue={[props.block.meta?.possibleValues[0]]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="standard"
+                label=""
+                placeholder=""
+              />
+            )}
+            value={props.block.value}
+            onChange={(event, newValue) => {
+              if (newValue && newValue.length > 0) {
+                props.onValueChange(newValue);
+              } else {
+                props.onValueChange([defaultValue]);
+              }
+            }}
+          />
+        )}
 
-        <Autocomplete
-          size="small"
-          options={[defaultValue, ...props.block.meta?.possibleValues]}
-          getOptionLabel={(option) => option}
-          defaultValue={props.block.meta?.possibleValues[0]}
-          renderInput={(params) => (
-            <TextField {...params} variant="standard" label="" placeholder="" />
-          )}
-          value={props.block.value[0]}
-          onChange={(event, newValue) => {
-            if (newValue) {
-              props.onValueChange([newValue]);
-            } else {
-              props.onValueChange([defaultValue]);
-            }
-          }}
-        />
+        {!props.block.meta.asMultiple && (
+          <Autocomplete
+            size="small"
+            options={[defaultValue, ...props.block.meta?.possibleValues]}
+            getOptionLabel={(option) => option}
+            defaultValue={props.block.meta?.possibleValues[0]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="standard"
+                label=""
+                placeholder=""
+              />
+            )}
+            value={props.block.value[0]}
+            onChange={(event, newValue) => {
+              if (newValue) {
+                props.onValueChange([newValue]);
+              } else {
+                props.onValueChange([defaultValue]);
+              }
+            }}
+          />
+        )}
       </Box>
     );
   }
@@ -329,3 +346,33 @@ function renderAddButton(t: any, props: IBlockComponentProps<IDropDownBlock>) {
 }
 
 BlockDropDown.displayName = "BlockDropDown";
+
+export function BlockDropDownActions(
+  props: IBlockActionComponentProps<IDropDownBlock>
+) {
+  const theme = useTheme();
+  const { t } = useTranslate();
+  return (
+    <>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              asMultiple: !props.block.meta.asMultiple,
+            });
+          }}
+        >
+          {props.block.meta.asMultiple
+            ? t("character-dialog.control.as-single")
+            : t("character-dialog.control.as-multiple")}
+        </Link>
+      </Grid>
+    </>
+  );
+}

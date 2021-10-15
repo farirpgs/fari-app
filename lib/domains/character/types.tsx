@@ -207,6 +207,7 @@ export type IDropDownBlock = {
   type: BlockType.Text;
   meta: IDefaultBlockMeta & {
     possibleValues: Array<string>;
+    asMultiple: boolean;
   };
   value: Array<string>;
 };

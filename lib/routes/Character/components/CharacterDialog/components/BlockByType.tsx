@@ -16,7 +16,7 @@ import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
-import { BlockDropDown } from "./blocks/BlockDropDown";
+import { BlockDropDown, BlockDropDownActions } from "./blocks/BlockDropDown";
 import { BlockImage } from "./blocks/BlockImage";
 import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
@@ -254,6 +254,13 @@ export function BlockByType(
         )}
         {block.type === BlockType.SlotTracker && (
           <BlockSlotTrackerActions
+            block={block}
+            onMetaChange={handleOnMetaChange}
+          />
+        )}
+
+        {block.type === BlockType.DropDown && (
+          <BlockDropDownActions
             block={block}
             onMetaChange={handleOnMetaChange}
           />
