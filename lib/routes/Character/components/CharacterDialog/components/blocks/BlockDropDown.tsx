@@ -1,16 +1,16 @@
 import { css } from "@emotion/css";
+import { TextField } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ArrowDownwardRounded from "@material-ui/icons/ArrowDownwardRounded";
 import ArrowUpwardRounded from "@material-ui/icons/ArrowUpwardRounded";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import React, { ReactNode } from "react";
+import { Autocomplete } from "@material-ui/lab";
+import React from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -82,24 +82,47 @@ export function BlockDropDown(
   ): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
     return (
       <Box>
-        <Select
-          data-cy={`${props.dataCy}.value`}
+        <Autocomplete
+          multiple
+          size="small"
+          options={props.block.meta?.possibleValues}
+          getOptionLabel={(option) => option}
+          defaultValue={[props.block.meta?.possibleValues[0]]}
+          renderInput={(params) => (
+            <TextField {...params} variant="standard" label="" placeholder="" />
+          )}
           value={props.block.value}
-          onChange={(event, node: ReactNode) => {
-            if (node && node.props) {
-              props.onValueChange(node.props.value);
+          onChange={(event, newValue) => {
+            if (newValue) {
+              props.onValueChange(newValue);
             }
           }}
-        >
-          {!!props.block.meta?.possibleValues &&
+        />
+
+        <Autocomplete
+          size="small"
+          options={props.block.meta?.possibleValues}
+          getOptionLabel={(option) => option}
+          defaultValue={props.block.meta?.possibleValues[0]}
+          renderInput={(params) => (
+            <TextField {...params} variant="standard" label="" placeholder="" />
+          )}
+          value={props.block.value[0]}
+          onChange={(event, newValue) => {
+            if (newValue) {
+              props.onValueChange([newValue]);
+            }
+          }}
+        />
+
+        {/* {!!props.block.meta?.possibleValues &&
             props.block.meta?.possibleValues.map((possibleValue, index) => {
               return (
                 <MenuItem key={index} value={possibleValue}>
                   {possibleValue}
                 </MenuItem>
               );
-            })}
-        </Select>
+            })} */}
       </Box>
     );
   }

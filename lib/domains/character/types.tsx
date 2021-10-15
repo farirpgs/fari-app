@@ -208,7 +208,7 @@ export type IDropDownBlock = {
   meta: IDefaultBlockMeta & {
     possibleValues: Array<string>;
   };
-  value: string;
+  value: Array<string>;
 };
 
 export type IBlockTypes =
