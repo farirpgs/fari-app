@@ -90,7 +90,7 @@ export function BlockDropDown(
       {props.advanced && (
         <Box>
           {isLabelVisible && renderLabel()}
-          <div style={{ marginTop: "1em" }}>{renderConfigurationPanel(t)}</div>
+          <div style={{ marginTop: "1em" }}>{renderConfigurationPanel()}</div>
         </Box>
       )}
     </>
@@ -171,7 +171,7 @@ export function BlockDropDown(
     );
   }
 
-  function renderConfigurationPanel(t: any) {
+  function renderConfigurationPanel() {
     return (
       <Box>
         <Typography>
@@ -196,19 +196,19 @@ export function BlockDropDown(
                       }}
                     />
                   </Grid>
-                  <Grid item>{renderGoUpButton(t, index)}</Grid>
-                  <Grid item>{renderGoDownButton(t, index)}</Grid>
-                  <Grid item>{renderRemoveButton(t, index)}</Grid>
+                  <Grid item>{renderGoUpButton(index)}</Grid>
+                  <Grid item>{renderGoDownButton(index)}</Grid>
+                  <Grid item>{renderRemoveButton(index)}</Grid>
                 </Grid>
               );
             })}
-          <div style={{ marginTop: "1em" }}>{renderAddButton(t)}</div>
+          <div style={{ marginTop: "1em" }}>{renderAddButton()}</div>
         </Typography>
       </Box>
     );
   }
 
-  function renderGoUpButton(t: any, index: number) {
+  function renderGoUpButton(index: number) {
     return (
       <Tooltip
         title={t("character-dialog.control.remove-dropdown-item")}
@@ -227,7 +227,7 @@ export function BlockDropDown(
     );
   }
 
-  function renderGoDownButton(t: any, index: number) {
+  function renderGoDownButton(index: number) {
     return (
       <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
         <IconButton
@@ -244,7 +244,7 @@ export function BlockDropDown(
     );
   }
 
-  function renderRemoveButton(t: any, index: number) {
+  function renderRemoveButton(index: number) {
     return (
       <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
         <IconButton
@@ -278,7 +278,7 @@ export function BlockDropDown(
     }
   }
 
-  function renderAddButton(t: any) {
+  function renderAddButton() {
     return (
       <Tooltip title={t("character-dialog.control.add-dropdown-item")}>
         <IconButton
