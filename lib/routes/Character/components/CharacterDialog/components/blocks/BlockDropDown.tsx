@@ -23,6 +23,8 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 
+const defaultValue = " ";
+
 const smallerIcon = css({
   fontSize: "1rem",
 });
@@ -30,7 +32,15 @@ const smallerButton = css({
   padding: "0rem",
 });
 
-const defaultValue = " ";
+const useStyles = makeStyles({
+  fullWidthInput: {
+    "& .MuiInputBase-input": {
+      width: "100%",
+    },
+  },
+});
+
+const classes = useStyles();
 
 export function BlockDropDown(
   props: IBlockComponentProps<IDropDownBlock> & {}
@@ -126,16 +136,6 @@ export function BlockDropDown(
       });
     }
   }
-
-  const useStyles = makeStyles({
-    fullWidthInput: {
-      "& .MuiInputBase-input": {
-        width: "100%",
-      },
-    },
-  });
-
-  const classes = useStyles();
 
   return (
     <>
