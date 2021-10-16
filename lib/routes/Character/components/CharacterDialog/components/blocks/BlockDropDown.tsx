@@ -39,39 +39,89 @@ export function BlockDropDown(
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
 
-  function handleDropDownItemChange(index: number, newValue: string) {
+  function handleAlterDropDownItem(
+    index: number,
+    alteredPossibleValue: string
+  ) {
     if (props.block.meta) {
-      const copy = [...props.block.meta.possibleValues];
-      const currentValue = copy[index];
+      const possibleValueBeforeAlteration =
+        props.block.meta.possibleValues[index];
 
-      copy[index] = newValue;
+      const newPossibleValues = [...props.block.meta.possibleValues];
+      newPossibleValues[index] = alteredPossibleValue;
 
-      if (props.block.value === currentValue) {
-        props.onValueChange([newValue]);
+      const selectedValues = [...props.block.value];
+      for (let index = 0; index < selectedValues.length; index++) {
+        if (selectedValues[index] === possibleValueBeforeAlteration) {
+          selectedValues[index] = alteredPossibleValue;
+        }
       }
+
+      props.onValueChange(selectedValues);
 
       props.onMetaChange({
         ...props.block.meta,
-        possibleValues: [...copy],
+        possibleValues: newPossibleValues,
       });
     }
   }
 
   function handleMoveDropDownItem(direction: Direction, index: number) {
     if (props.block.meta) {
-      const copy = [...props.block.meta.possibleValues];
+      const newPossibleValues = [...props.block.meta.possibleValues];
 
       const targetIndex = direction === Direction.Down ? index + 1 : index - 1;
 
-      const targetValue = copy[targetIndex];
+      const targetValue = newPossibleValues[targetIndex];
       if (!targetValue) return;
 
-      copy[targetIndex] = copy[index];
-      copy[index] = targetValue;
+      newPossibleValues[targetIndex] = newPossibleValues[index];
+      newPossibleValues[index] = targetValue;
 
       props.onMetaChange({
         ...props.block.meta,
-        possibleValues: [...copy],
+        possibleValues: [...newPossibleValues],
+      });
+    }
+  }
+
+  function handleRemoveDropDownItem(indexToRemove: number) {
+    if (props.block.meta) {
+      const removedValue = props.block.meta.possibleValues[indexToRemove];
+
+      if (
+        props.block.value.length === 1 &&
+        props.block.value[0] === removedValue
+      ) {
+        props.onValueChange([defaultValue]);
+      }
+
+      const newSelectedValues = props.block.value.filter((v) => {
+        return v !== removedValue;
+      });
+
+      const newPossibleValues = props.block.meta.possibleValues.filter(
+        (v, index) => {
+          return index !== indexToRemove;
+        }
+      );
+
+      props.onValueChange(newSelectedValues);
+
+      props.onMetaChange({
+        ...props.block.meta,
+        possibleValues: newPossibleValues,
+      });
+    }
+  }
+
+  function handleAddDropDownItem() {
+    if (props.block.meta) {
+      const newData = [...props.block.meta.possibleValues, "newValue"];
+
+      props.onMetaChange({
+        ...props.block.meta,
+        possibleValues: newData,
       });
     }
   }
@@ -192,7 +242,7 @@ export function BlockDropDown(
                       data-cy={`${props.dataCy}.dropdown.item`}
                       value={value}
                       onChange={(newValue) => {
-                        handleDropDownItemChange(index, newValue);
+                        handleAlterDropDownItem(index, newValue);
                       }}
                     />
                   </Grid>
@@ -241,7 +291,7 @@ export function BlockDropDown(
     );
   }
 
-  function renderRemoveButton(index: number) {
+  function renderRemoveButton(indexToRemove: number) {
     return (
       <Tooltip title={t("character-dialog.control.remove-dropdown-item")}>
         <IconButton
@@ -249,30 +299,13 @@ export function BlockDropDown(
           className={smallerButton}
           data-cy={`${props.dataCy}.remove-dropdown-item`}
           onClick={() => {
-            handleRemoveDropDownItem();
+            handleRemoveDropDownItem(indexToRemove);
           }}
         >
           <RemoveCircleOutlineIcon className={smallerIcon} />
         </IconButton>
       </Tooltip>
     );
-
-    function handleRemoveDropDownItem() {
-      if (props.block.meta) {
-        const copy = [...props.block.meta.possibleValues];
-
-        if (props.block.value === copy[index]) {
-          props.onValueChange([props.block.meta.possibleValues[0]]);
-        }
-
-        copy.splice(index, 1);
-
-        props.onMetaChange({
-          ...props.block.meta,
-          possibleValues: [...copy],
-        });
-      }
-    }
   }
 
   function renderAddButton() {
@@ -283,28 +316,13 @@ export function BlockDropDown(
           className={smallerButton}
           data-cy={`${props.dataCy}.remove-dropdown-item`}
           onClick={() => {
-            handleAddDropDownItem(props);
+            handleAddDropDownItem();
           }}
         >
           <AddCircleOutlineIcon />
         </IconButton>
       </Tooltip>
     );
-
-    function handleAddDropDownItem(
-      props: IBlockComponentProps<IDropDownBlock>
-    ) {
-      if (props.block.meta) {
-        const copy = [...props.block.meta.possibleValues];
-
-        copy.push("new value");
-
-        props.onMetaChange({
-          ...props.block.meta,
-          possibleValues: [...copy],
-        });
-      }
-    }
   }
 }
 
