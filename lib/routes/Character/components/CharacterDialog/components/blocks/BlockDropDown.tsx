@@ -94,19 +94,19 @@ export function BlockDropDown(
         props.block.value[0] === removedValue
       ) {
         props.onValueChange([defaultValue]);
-      }
+      } else {
+        const newSelectedValues = props.block.value.filter(
+          (v) => v !== removedValue
+        );
 
-      const newSelectedValues = props.block.value.filter((v) => {
-        return v !== removedValue;
-      });
+        props.onValueChange(newSelectedValues);
+      }
 
       const newPossibleValues = props.block.meta.possibleValues.filter(
         (v, index) => {
           return index !== indexToRemove;
         }
       );
-
-      props.onValueChange(newSelectedValues);
 
       props.onMetaChange({
         ...props.block.meta,
