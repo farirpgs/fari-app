@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { Link, TextField, useTheme } from "@material-ui/core";
+import { Link, makeStyles, TextField, useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -29,6 +29,7 @@ const smallerIcon = css({
 const smallerButton = css({
   padding: "0rem",
 });
+
 const defaultValue = " ";
 
 export function BlockDropDown(
@@ -126,6 +127,16 @@ export function BlockDropDown(
     }
   }
 
+  const useStyles = makeStyles({
+    fullWidthInput: {
+      "& .MuiInputBase-input": {
+        width: "100%",
+      },
+    },
+  });
+
+  const classes = useStyles();
+
   return (
     <>
       {!props.advanced && (
@@ -195,17 +206,13 @@ export function BlockDropDown(
 
         {!props.block.meta.asMultiple && (
           <Autocomplete
-            size="small"
             options={[defaultValue, ...props.block.meta?.possibleValues]}
             getOptionLabel={(option) => option}
             defaultValue={props.block.meta?.possibleValues[0]}
             renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="standard"
-                label=""
-                placeholder=""
-              />
+              <>
+                <TextField {...params} className={classes.fullWidthInput} />
+              </>
             )}
             value={props.block.value[0]}
             onChange={(event, newValue) => {

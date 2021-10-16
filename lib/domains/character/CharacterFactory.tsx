@@ -417,9 +417,9 @@ export const CharacterFactory = {
         id: Id.generate(),
         label: "DropDown",
         type: type,
-        value: "value1",
+        value: "placeholder",
         meta: {
-          possibleValues: ["value1", "value2", "value3"],
+          possibleValues: ["placeholder"],
         },
       } as IBlock & IDropDownBlock,
     };
