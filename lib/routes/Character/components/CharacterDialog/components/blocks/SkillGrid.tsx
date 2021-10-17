@@ -20,7 +20,7 @@ export interface ISkillGridItem {
   connectors: Array<SkillGridConnectorDirection>;
 }
 
-enum SkillGridConnectorDirection {
+export enum SkillGridConnectorDirection {
   RIGHT,
   BOTTOM,
 }
@@ -28,149 +28,149 @@ enum SkillGridConnectorDirection {
 export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   const theme = useTheme();
 
-  const items = [
-    {
-      display: true,
-      checked: false,
-      name: "Cloister",
-      description: "+1 scale for your Adept cohorts",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Vice den",
-      description: "(Tier roll) - Heat = coin in downtime",
-      connectors: [SkillGridConnectorDirection.RIGHT],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Offertory",
-      description: "+2 coin for occult operations",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Ancient obelisk",
-      description: "-1 stress cost for all arcane powers and ritual",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Ancient tower",
-      description: "+1d to Consort w/ arcane entities on site",
-      connectors: [SkillGridConnectorDirection.BOTTOM],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Turf",
-      description: "",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Turf",
-      description: "",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: true,
-      name: "Lair",
-      description: "",
-      connectors: [SkillGridConnectorDirection.BOTTOM],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Turf",
-      description: "",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Turf",
-      description: "",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Spirit well",
-      description: "+1d to Attune on site",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Ancient gate",
-      description: "Safe passage in the Deathlands",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Sanctuary",
-      description: "+1d to Command and Sway on site",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Sacred nexus",
-      description: "+1d to healing rolls",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-    {
-      display: true,
-      checked: false,
-      name: "Ancient altar",
-      description: "+1d engagement for occult plans",
-      connectors: [
-        SkillGridConnectorDirection.RIGHT,
-        SkillGridConnectorDirection.BOTTOM,
-      ],
-    },
-  ];
+  // const items = [
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Cloister",
+  //     description: "+1 scale for your Adept cohorts",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Vice den",
+  //     description: "(Tier roll) - Heat = coin in downtime",
+  //     connectors: [SkillGridConnectorDirection.RIGHT],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Offertory",
+  //     description: "+2 coin for occult operations",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Ancient obelisk",
+  //     description: "-1 stress cost for all arcane powers and ritual",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Ancient tower",
+  //     description: "+1d to Consort w/ arcane entities on site",
+  //     connectors: [SkillGridConnectorDirection.BOTTOM],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Turf",
+  //     description: "",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Turf",
+  //     description: "",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: true,
+  //     name: "Lair",
+  //     description: "",
+  //     connectors: [SkillGridConnectorDirection.BOTTOM],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Turf",
+  //     description: "",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Turf",
+  //     description: "",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Spirit well",
+  //     description: "+1d to Attune on site",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Ancient gate",
+  //     description: "Safe passage in the Deathlands",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Sanctuary",
+  //     description: "+1d to Command and Sway on site",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Sacred nexus",
+  //     description: "+1d to healing rolls",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  //   {
+  //     display: true,
+  //     checked: false,
+  //     name: "Ancient altar",
+  //     description: "+1d engagement for occult plans",
+  //     connectors: [
+  //       SkillGridConnectorDirection.RIGHT,
+  //       SkillGridConnectorDirection.BOTTOM,
+  //     ],
+  //   },
+  // ];
 
   // configuration
   const columnCount = props.block.meta.columnCount;
@@ -246,7 +246,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     }
 
     if (direction === SkillGridConnectorDirection.BOTTOM) {
-      const itemBelow = items[index + columnCount];
+      const itemBelow = props.block.meta.items[index + columnCount];
       return itemBelow && itemBelow.display;
     }
 
@@ -254,7 +254,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       const isCurrentItemLastInRow = (index + 1) % columnCount === 0;
       if (isCurrentItemLastInRow) return false;
 
-      const itemOnTheRight = items[index + 1];
+      const itemOnTheRight = props.block.meta.items[index + 1];
       return itemOnTheRight && itemOnTheRight.display;
     }
   }
@@ -263,16 +263,25 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     <>
       <Box>
         <Grid container justify="space-between">
-          {items.map((item, index) => (
+          {props.block.meta.items.map((item, index) => (
             <Grid item xs={itemHorizontalGridSize} key={index}>
               <Grid container>
                 <Grid item xs={11}>
                   {item.display && (
                     <Box className={classes.box}>
-                      {/* TODO: wire the check to the metadata */}
                       <Checkbox
                         className={classes.checkBox}
                         checked={item.checked}
+                        onChange={() => {
+                          const newItem = { ...item, checked: !item.checked };
+                          const newItems = [...props.block.meta.items];
+                          newItems[index] = newItem;
+
+                          props.onMetaChange({
+                            ...props.block.meta,
+                            items: newItems,
+                          });
+                        }}
                       />
                       <Box style={{ margin: ".5em" }}>
                         <Typography

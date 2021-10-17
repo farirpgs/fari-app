@@ -1,4 +1,5 @@
 import produce from "immer";
+import { SkillGridConnectorDirection } from "../../routes/Character/components/CharacterDialog/components/blocks/SkillGrid";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
 import { CharacterTemplates } from "./CharacterType";
@@ -413,7 +414,149 @@ export const CharacterFactory = {
         meta: {
           boxHeight: 125,
           columnCount: 3,
-          items: [],
+          items: [
+            {
+              display: true,
+              checked: false,
+              name: "Cloister",
+              description: "+1 scale for your Adept cohorts",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Vice den",
+              description: "(Tier roll) - Heat = coin in downtime",
+              connectors: [SkillGridConnectorDirection.RIGHT],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Offertory",
+              description: "+2 coin for occult operations",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Ancient obelisk",
+              description: "-1 stress cost for all arcane powers and ritual",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Ancient tower",
+              description: "+1d to Consort w/ arcane entities on site",
+              connectors: [SkillGridConnectorDirection.BOTTOM],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Turf",
+              description: "",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Turf",
+              description: "",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: true,
+              name: "Lair",
+              description: "",
+              connectors: [SkillGridConnectorDirection.BOTTOM],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Turf",
+              description: "",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Turf",
+              description: "",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Spirit well",
+              description: "+1d to Attune on site",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Ancient gate",
+              description: "Safe passage in the Deathlands",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Sanctuary",
+              description: "+1d to Command and Sway on site",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Sacred nexus",
+              description: "+1d to healing rolls",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+            {
+              display: true,
+              checked: false,
+              name: "Ancient altar",
+              description: "+1d engagement for occult plans",
+              connectors: [
+                SkillGridConnectorDirection.RIGHT,
+                SkillGridConnectorDirection.BOTTOM,
+              ],
+            },
+          ],
         },
         value: "",
       } as IBlock & ISkillGrid,
