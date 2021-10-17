@@ -15,6 +15,7 @@ import {
   ISection,
   ISeparatorBlock,
   ISkillBlock,
+  ISkillGrid,
   ISlotTrackerBlock,
   ITextBlock,
   IV1Character,
@@ -405,6 +406,17 @@ export const CharacterFactory = {
         meta: { hasDisplayName: false },
         value: "",
       } as IBlock & ILinkBlock,
+      [BlockType.SkillGrid]: {
+        id: Id.generate(),
+        label: "",
+        type: type,
+        meta: {
+          boxHeight: 125,
+          columnCount: 3,
+          items: [],
+        },
+        value: "",
+      } as IBlock & ISkillGrid,
       [BlockType.Separator]: {
         id: Id.generate(),
         label: "",

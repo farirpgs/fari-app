@@ -9,6 +9,7 @@ export type ITranslationKeys =
   | "character-dialog.block-type.point-counter"
   | "character-dialog.block-type.separator"
   | "character-dialog.block-type.skill"
+  | "character-dialog.block-type.skill-grid"
   | "character-dialog.block-type.slot-tracker"
   | "character-dialog.block-type.text"
   | "character-dialog.close-confirmation"

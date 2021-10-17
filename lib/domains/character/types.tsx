@@ -199,7 +199,11 @@ export type ILinkBlock = {
 export type ISkillGrid = {
   type: BlockType.SkillGrid;
   value: unknown;
-  meta: IDefaultBlockMeta & ISkillGridItem;
+  meta: IDefaultBlockMeta & {
+    items: Array<ISkillGridItem>;
+    columnCount: number;
+    boxHeight: number;
+  };
 };
 
 export type ISeparatorBlock = {

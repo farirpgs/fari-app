@@ -9,6 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
+import Grid4x4Icon from "@material-ui/icons/GridOff";
 import ImageIcon from "@material-ui/icons/Image";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import LinkIcon from "@material-ui/icons/Link";
@@ -172,6 +173,18 @@ export const AddBlock: React.FC<
           </ListItemIcon>
 
           <ListItemText primary={t("character-dialog.block-type.link")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.SkillGrid);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <Grid4x4Icon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.skill-grid")} />
         </MenuItem>
         <MenuItem
           onClick={() => {

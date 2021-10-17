@@ -9,7 +9,6 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import FaceIcon from "@material-ui/icons/Face";
 import React, { useContext } from "react";
-import { Separator } from "../../../../../../stories/Blocks.stories";
 import { DiceContext } from "../../../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
@@ -24,6 +23,7 @@ import {
   ISection,
   ISeparatorBlock,
   ISkillBlock,
+  ISkillGrid,
   ISlotTrackerBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
@@ -35,6 +35,7 @@ import { BlockImage } from "../../../../../routes/Character/components/Character
 import { BlockLink } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockLink";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
+import { BlockSeparator } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSeparator";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
 import { SkillGrid } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/SkillGrid";
@@ -399,7 +400,7 @@ export const CharacterCard: React.FC<{
   ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
-        <Separator
+        <BlockSeparator
           advanced={false}
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}

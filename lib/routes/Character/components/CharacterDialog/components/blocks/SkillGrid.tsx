@@ -173,11 +173,12 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   ];
 
   // configuration
-  const columnCount = 3;
-  const boxHeight = 125;
-  const boxHeightInPixels = `${boxHeight}px`;
+  const columnCount = props.block.meta.columnCount;
+  const boxHeight = props.block.meta.boxHeight;
+
   //end configuration
 
+  const boxHeightInPixels = `${boxHeight}px`;
   const rightConnectorHeight = `${boxHeight / 10}px`;
   const itemHorizontalWidth = Math.floor(12 / columnCount);
   const itemHorizontalGridSize: GridSize = itemHorizontalWidth as any;
