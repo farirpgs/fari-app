@@ -1,3 +1,4 @@
+import { ISkillGridItem } from "../../routes/Character/components/CharacterDialog/components/blocks/SkillGrid";
 import { IDiceCommandSetId } from "../dice/Dice";
 import { CharacterTemplates } from "./CharacterType";
 
@@ -10,6 +11,7 @@ export enum BlockType {
   SlotTracker = "SlotTracker",
   Image = "Image",
   Link = "Link",
+  SkillGrid = "SkillGrid",
   Separator = "Separator",
 }
 
@@ -194,6 +196,12 @@ export type ILinkBlock = {
   value: string;
 };
 
+export type ISkillGrid = {
+  type: BlockType.SkillGrid;
+  value: unknown;
+  meta: IDefaultBlockMeta & ISkillGridItem;
+};
+
 export type ISeparatorBlock = {
   type: BlockType.Separator;
   value: unknown;
@@ -211,6 +219,7 @@ export type IBlockTypes =
   | IPointCounterBlock
   | IImageBlock
   | ILinkBlock
+  | ISkillGrid
   | ISeparatorBlock;
 
 export type IBlock = {

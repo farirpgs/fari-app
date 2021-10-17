@@ -9,6 +9,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import Tooltip from "@material-ui/core/Tooltip";
 import FaceIcon from "@material-ui/icons/Face";
 import React, { useContext } from "react";
+import { Separator } from "../../../../../../stories/Blocks.stories";
 import { DiceContext } from "../../../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
@@ -34,9 +35,9 @@ import { BlockImage } from "../../../../../routes/Character/components/Character
 import { BlockLink } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockLink";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
-import { BlockSeparator } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSeparator";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
+import { SkillGrid } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/SkillGrid";
 import { BlockSelectors } from "../../../../../routes/Character/components/CharacterDialog/domains/BlockSelectors/BlockSelectors";
 import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
@@ -92,6 +93,7 @@ export const CharacterCard: React.FC<{
     PointCounter: renderBlockPointCounter,
     SlotTracker: renderBlockSlotTracker,
     Link: renderBlockLink,
+    SkillGrid: renderSkillGrid,
     Separator: renderSeparatorBlock,
   };
 
@@ -375,13 +377,29 @@ export const CharacterCard: React.FC<{
       </Grid>
     );
   }
+  function renderSkillGrid(section: ISection, block: IBlock & ISkillGrid) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <SkillGrid
+          advanced={false}
+          readonly={true}
+          dataCy={`character-card.${section.label}.${block.label}`}
+          block={block}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
+          onRoll={() => {}}
+        />
+      </Grid>
+    );
+  }
   function renderSeparatorBlock(
     section: ISection,
     block: IBlock & ISeparatorBlock
   ) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
-        <BlockSeparator
+        <Separator
           advanced={false}
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}

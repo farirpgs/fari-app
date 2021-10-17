@@ -30,6 +30,7 @@ import {
   BlockSlotTrackerActions,
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
+import { SkillGrid } from "./blocks/SkillGrid";
 
 export function BlockByType(
   props: Omit<
@@ -190,6 +191,19 @@ export function BlockByType(
 
       {props.block.type === BlockType.Link && (
         <BlockLink
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+
+      {props.block.type === BlockType.SkillGrid && (
+        <SkillGrid
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
