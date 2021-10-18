@@ -244,9 +244,28 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     },
     checkBox: {
       position: "absolute",
-      left: 0,
-      top: 0,
+      right: 0,
+      bottom: 0,
       padding: 0,
+    },
+    outer: {
+      display: "table",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: "100%",
+    },
+
+    middle: {
+      display: "table-cell",
+      verticalAlign: "middle",
+    },
+
+    inner: {
+      marginLeft: "auto",
+      marginRight: "auto",
+      /* Whatever width you want */
     },
   });
 
@@ -341,27 +360,20 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                           });
                         }}
                       />
-                      <Box style={{ margin: ".5em" }}>
-                        <Grid container direction="column">
-                          <Grid item>
-                            <Typography
-                              align="center"
-                              style={{
-                                fontSize: "1em",
-                                fontWeight: "bold",
-                                textTransform: "uppercase",
-                              }}
-                            >
-                              {item.name}
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <Typography variant="body2" align="center">
-                              {item.description}
-                            </Typography>
-                          </Grid>
-                        </Grid>
+
+                      {/* if there is no description, the tile will be put in the center of the tile */}
+                      {item.description && renderGridItemTitle(item)}
+
+                      <Box className={classes.outer}>
+                        <Box className={classes.middle}>
+                          <Box className={classes.inner}>
+                            {item.description
+                              ? renderGridItemDescription(item)
+                              : renderGridItemTitle(item)}
+                          </Box>
+                        </Box>
                       </Box>
+                      {/* </Box> */}
                     </Box>
                   )}
                 </Grid>
@@ -399,6 +411,40 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       </Box>
     </>
   );
+
+  function renderGridItemDescription(item: ISkillGridItem): React.ReactNode {
+    return (
+      <Typography variant="body2" align="center">
+        {item.description}
+      </Typography>
+    );
+  }
+
+  function renderGridItemTitle(
+    item: ISkillGridItem
+  ):
+    | string
+    | number
+    | boolean
+    | {}
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | React.ReactNodeArray
+    | React.ReactPortal
+    | null
+    | undefined {
+    return (
+      <Typography
+        align="center"
+        style={{
+          fontSize: "1em",
+          fontWeight: "bold",
+          textTransform: "uppercase",
+        }}
+      >
+        {item.name}
+      </Typography>
+    );
+  }
 }
 SkillGrid.displayName = "SkillGrid";
 
