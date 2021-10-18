@@ -333,7 +333,7 @@ export const Session: React.FC<IProps> = (props) => {
                         // TODO
 
                         props.onPlayerInteraction?.(
-                          PlayerInteractionFactory.pauseInteraction()
+                          PlayerInteractionFactory.pause()
                         );
                       }
                     }}

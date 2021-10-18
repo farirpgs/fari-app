@@ -128,7 +128,14 @@ export const AppRouter = () => {
           exact
           path={"/play/join/:id"}
           render={(props) => {
-            return <JoinAGameRoute {...props} />;
+            const sessionId = (props.match.params as any).id;
+            return (
+              <LiveblocksProvider client={injections.liveBlocksClient}>
+                <RoomProvider id={sessionId}>
+                  <JoinAGameRoute {...props} />;
+                </RoomProvider>
+              </LiveblocksProvider>
+            );
           }}
         />
         <Route

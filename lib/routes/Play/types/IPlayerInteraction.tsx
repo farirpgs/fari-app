@@ -4,6 +4,14 @@ import { IPlayer } from "../../../hooks/useScene/IScene";
 
 export type IPlayerInteraction =
   | {
+      type: "ping";
+      payload: undefined;
+    }
+  | {
+      type: "pong";
+      payload: undefined;
+    }
+  | {
       type: "pause";
       payload: undefined;
     }
@@ -31,7 +39,19 @@ export type IPlayerInteraction =
     };
 
 export const PlayerInteractionFactory = {
-  pauseInteraction(): IPlayerInteraction {
+  ping(): IPlayerInteraction {
+    return {
+      type: "ping",
+      payload: undefined,
+    };
+  },
+  pong(): IPlayerInteraction {
+    return {
+      type: "pong",
+      payload: undefined,
+    };
+  },
+  pause(): IPlayerInteraction {
     return {
       type: `pause`,
       payload: undefined,

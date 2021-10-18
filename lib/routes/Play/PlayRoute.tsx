@@ -133,6 +133,9 @@ export const PlayRoute: React.FC<{
         event.payload.character
       );
     }
+    if (event.type === "ping") {
+      broadcast(PlayerInteractionFactory.pong());
+    }
   });
 
   function handlePlayerInteraction(interaction: IPlayerInteraction) {

@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -10,7 +11,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
@@ -19,6 +20,10 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "./types/IPlayerInteraction";
 
 export const JoinAGameRoute: React.FC<{
   match: {
@@ -28,16 +33,29 @@ export const JoinAGameRoute: React.FC<{
   const { t } = useTranslate();
   const settingsManager = useContext(SettingsContext);
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const isGameLinkValid = useRef(false);
   const history = useHistory();
 
-  async function onJoin(playerName: string) {
-    // const result = await firebaseSessionTester.actions.test(
-    //   props.match.params.id
-    // );
+  const broadcast = useBroadcastEvent();
 
-    // if (result) {
-    history.push(`/play/${props.match.params.id}?name=${playerName}`);
-    // }
+  useEventListener<IPlayerInteraction>(({ event }) => {
+    if (event.type === "pong") {
+      isGameLinkValid.current = true;
+      history.push(`/play/${props.match.params.id}?name=${playerName}`);
+    }
+  });
+
+  async function onJoin() {
+    broadcast(PlayerInteractionFactory.ping());
+    setLoading(true);
+    setTimeout(() => {
+      if (!isGameLinkValid) {
+        setLoading(false);
+        setError(true);
+      }
+    }, 3000);
   }
 
   useEffect(() => {
@@ -77,7 +95,7 @@ export const JoinAGameRoute: React.FC<{
         onSubmit={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onJoin(playerName);
+          onJoin();
         }}
       >
         <Box pb="2rem" textAlign="center">
@@ -89,7 +107,7 @@ export const JoinAGameRoute: React.FC<{
           </Typography>
         </Box>
         <Box pb="1rem">
-          {false ? (
+          {loading ? (
             <Fade in key="loading">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
@@ -150,14 +168,14 @@ export const JoinAGameRoute: React.FC<{
             </Paper>
           </Box>
 
-          <Collapse in={false}>
+          <Collapse in={loading}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
                 <CircularProgress />
               </Box>
             </Box>
           </Collapse>
-          <Collapse in={false}>
+          <Collapse in={error}>
             <Box pb="2rem" textAlign="center">
               <Typography color="error">
                 {t("play-route.join-error")}
