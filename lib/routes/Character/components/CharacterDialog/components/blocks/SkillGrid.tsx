@@ -1,10 +1,13 @@
+import { css } from "@emotion/css";
+import { Grid, TextField } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
-import Grid, { GridSize } from "@material-ui/core/Grid";
+import { GridSize } from "@material-ui/core/Grid";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
+import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISkillGrid } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
@@ -175,8 +178,32 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   // configuration
   const columnCount = props.block.meta.columnCount;
   const boxHeight = props.block.meta.boxHeight;
-
   //end configuration
+
+  const itemCount = props.block.meta.items.length;
+  const rowCount = Math.ceil(itemCount / columnCount);
+  const gridCellCount = columnCount * rowCount;
+
+  const missingCellCount = gridCellCount - itemCount;
+
+  if (missingCellCount > 0) {
+    const deactivatedItemsToAdd = new Array<ISkillGridItem>();
+    for (let i = 0; i < missingCellCount; i++) {
+      deactivatedItemsToAdd.push({
+        display: false,
+        checked: false,
+        name: "",
+        description: "",
+        connectors: new Array<SkillGridConnectorDirection>(),
+      });
+    }
+    const newItems = [...props.block.meta.items, ...deactivatedItemsToAdd];
+
+    props.onMetaChange({
+      ...props.block.meta,
+      items: newItems,
+    });
+  }
 
   const boxHeightInPixels = `${boxHeight}px`;
   const rightConnectorHeight = `${boxHeight / 10}px`;
@@ -204,7 +231,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       background: "lightgray",
       margin: 0,
       height: rightConnectorHeight,
-      width: "20px",
+      width: "30px",
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
@@ -261,6 +288,37 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
 
   return (
     <>
+      <Box className={css({ padding: "1em" })}>
+        <Grid container>
+          <Grid item xs={10}>
+            <FateLabel variant="body2" color="primary">
+              <b>Number of columns:</b>
+            </FateLabel>
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
+              type="number"
+              value={props.block.meta.columnCount}
+              onChange={(e) => {
+                let columnCount = 3;
+                if (e.target.value) {
+                  const parsed = parseInt(e.target.value);
+                  if (parsed > 6) {
+                    columnCount = 6;
+                  } else {
+                    columnCount = parsed;
+                  }
+                }
+
+                props.onMetaChange({
+                  ...props.block.meta,
+                  columnCount: columnCount,
+                });
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Box>
       <Box>
         <Grid container justify="space-between">
           {props.block.meta.items.map((item, index) => (
@@ -284,19 +342,25 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                         }}
                       />
                       <Box style={{ margin: ".5em" }}>
-                        <Typography
-                          align="center"
-                          style={{
-                            fontSize: "1em",
-                            fontWeight: "bold",
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          {item.name}
-                        </Typography>
-                        <Typography variant="body2" align="center">
-                          {item.description}
-                        </Typography>
+                        <Grid container direction="column">
+                          <Grid item>
+                            <Typography
+                              align="center"
+                              style={{
+                                fontSize: "1em",
+                                fontWeight: "bold",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              {item.name}
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Typography variant="body2" align="center">
+                              {item.description}
+                            </Typography>
+                          </Grid>
+                        </Grid>
                       </Box>
                     </Box>
                   )}

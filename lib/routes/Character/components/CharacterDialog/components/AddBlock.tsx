@@ -9,7 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ExposureIcon from "@material-ui/icons/Exposure";
 import Filter1Icon from "@material-ui/icons/Filter1";
-import Grid4x4Icon from "@material-ui/icons/GridOff";
+import GridOnIcon from "@material-ui/icons/GridOn";
 import ImageIcon from "@material-ui/icons/Image";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import LinkIcon from "@material-ui/icons/Link";
@@ -181,7 +181,7 @@ export const AddBlock: React.FC<
           }}
         >
           <ListItemIcon>
-            <Grid4x4Icon fontSize="small" />
+            <GridOnIcon fontSize="small" />
           </ListItemIcon>
 
           <ListItemText primary={t("character-dialog.block-type.skill-grid")} />
