@@ -19,34 +19,35 @@ import {
   PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
 
-export function useLiveBlockObject<T>(props: {
+export function useLiveObject<T>(props: {
   key: string;
   value: T;
-  isGM: boolean;
+  isOwner: boolean;
   onChange(newValue: T): void;
 }) {
   const liveObject = useObject<T>(props.key);
 
   useEffect(() => {
-    if (props.isGM) {
+    if (props.isOwner) {
       console.debug(`GM update: ${props.key}`, props.value);
       liveObject?.update(props.value);
     }
   }, [props.value]);
 
   useEffect(() => {
-    syncSessionForPlayer();
-    liveObject?.subscribe(syncSessionForPlayer);
+    onLiveObjectChange();
+
+    liveObject?.subscribe(onLiveObjectChange);
     return () => {
-      liveObject?.unsubscribe(syncSessionForPlayer);
+      liveObject?.unsubscribe(onLiveObjectChange);
     };
 
-    function syncSessionForPlayer() {
-      const isPlayer = !props.isGM;
+    function onLiveObjectChange() {
+      const isSubscriber = !props.isOwner;
       const object = liveObject?.toObject();
       const objectKeys = Object.keys(object ?? {});
 
-      if (isPlayer && object && objectKeys.length > 0) {
+      if (isSubscriber && object && objectKeys.length > 0) {
         console.debug(`Player get: ${props.key}`, object);
         props.onChange(object as T);
       }
@@ -81,18 +82,18 @@ export const PlayRoute: React.FC<{
     charactersManager: charactersManager,
   });
 
-  useLiveBlockObject({
+  useLiveObject({
     key: "session",
-    isGM: isGM,
+    isOwner: isGM,
     value: sessionManager.state.session,
     onChange: (newValue) => {
       sessionManager.actions.overrideSession(newValue);
     },
   });
 
-  useLiveBlockObject({
+  useLiveObject({
     key: "scene",
-    isGM: isGM,
+    isOwner: isGM,
     value: sceneManager.state.scene,
     onChange: (newValue) => {
       sceneManager.actions.overrideScene(newValue);
