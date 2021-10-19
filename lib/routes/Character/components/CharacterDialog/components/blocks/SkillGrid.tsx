@@ -30,178 +30,58 @@ export enum SkillGridConnectorDirection {
 }
 
 export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
-  // const items = [
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Cloister",
-  //     description: "+1 scale for your Adept cohorts",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Vice den",
-  //     description: "(Tier roll) - Heat = coin in downtime",
-  //     connectors: [SkillGridConnectorDirection.RIGHT],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Offertory",
-  //     description: "+2 coin for occult operations",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Ancient obelisk",
-  //     description: "-1 stress cost for all arcane powers and ritual",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Ancient tower",
-  //     description: "+1d to Consort w/ arcane entities on site",
-  //     connectors: [SkillGridConnectorDirection.BOTTOM],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Turf",
-  //     description: "",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Turf",
-  //     description: "",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: true,
-  //     name: "Lair",
-  //     description: "",
-  //     connectors: [SkillGridConnectorDirection.BOTTOM],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Turf",
-  //     description: "",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Turf",
-  //     description: "",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Spirit well",
-  //     description: "+1d to Attune on site",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Ancient gate",
-  //     description: "Safe passage in the Deathlands",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Sanctuary",
-  //     description: "+1d to Command and Sway on site",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Sacred nexus",
-  //     description: "+1d to healing rolls",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  //   {
-  //     display: true,
-  //     checked: false,
-  //     name: "Ancient altar",
-  //     description: "+1d engagement for occult plans",
-  //     connectors: [
-  //       SkillGridConnectorDirection.RIGHT,
-  //       SkillGridConnectorDirection.BOTTOM,
-  //     ],
-  //   },
-  // ];
-
+  console.warn("new render");
   // configuration
   const columnCount = props.block.meta.columnCount;
   const boxHeight = props.block.meta.boxHeight;
   //end configuration
 
-  const itemCount = props.block.meta.items.length;
-  const rowCount = Math.ceil(itemCount / columnCount);
+  const realItems = [...props.block.meta.items];
+  for (let index = props.block.meta.items.length - 1; index >= 0; index--) {
+    const element = props.block.meta.items[index];
+    if (!element.display && !element.name && !element.description) {
+      realItems.splice(index, 1);
+    } else {
+      break;
+    }
+  }
+
+  const realItemsCount = realItems.length;
+  const allItemsCount = props.block.meta.items.length;
+  const rowCount = Math.ceil(realItemsCount / columnCount);
   const gridCellCount = columnCount * rowCount;
 
-  const missingCellCount = gridCellCount - itemCount;
+  if (gridCellCount !== allItemsCount) {
+    const cellCountDelta = gridCellCount - allItemsCount;
 
-  if (missingCellCount > 0) {
-    const deactivatedItemsToAdd = new Array<ISkillGridItem>();
-    for (let i = 0; i < missingCellCount; i++) {
-      deactivatedItemsToAdd.push({
-        display: false,
-        checked: false,
-        name: "",
-        description: "",
-        connectors: new Array<SkillGridConnectorDirection>(),
+    const missingItemsCount = cellCountDelta > 0 ? cellCountDelta : 0;
+    const surplusItemsCount = cellCountDelta < 0 ? -cellCountDelta : 0;
+
+    if (missingItemsCount > 0) {
+      const deactivatedItemsToAdd = new Array<ISkillGridItem>();
+      for (let i = 0; i < cellCountDelta; i++) {
+        deactivatedItemsToAdd.push({
+          display: false,
+          checked: false,
+          name: "",
+          description: "",
+          connectors: new Array<SkillGridConnectorDirection>(),
+        });
+      }
+      const newItems = [...props.block.meta.items, ...deactivatedItemsToAdd];
+      props.onMetaChange({
+        ...props.block.meta,
+        items: newItems,
+      });
+    } else if (surplusItemsCount > 0) {
+      const trimmedItems = [...props.block.meta.items];
+      trimmedItems.splice(gridCellCount, surplusItemsCount);
+
+      props.onMetaChange({
+        ...props.block.meta,
+        items: trimmedItems,
       });
     }
-    const newItems = [...props.block.meta.items, ...deactivatedItemsToAdd];
-
-    props.onMetaChange({
-      ...props.block.meta,
-      items: newItems,
-    });
   }
 
   const boxHeightInPixels = `${boxHeight}px`;
@@ -358,75 +238,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
             <Grid item xs={resolveItemWidth(index)} key={index}>
               <Grid container>
                 <Grid item xs={11}>
-                  {!item.display && (
-                    <Box className={classes.deactivatedBox}>
-                      <IconButton
-                        size="small"
-                        className={classes.topRightIcon}
-                        onClick={() => {
-                          const newItem = { ...item, display: true };
-                          const newItems = [...props.block.meta.items];
-                          newItems[index] = newItem;
-
-                          props.onMetaChange({
-                            ...props.block.meta,
-                            items: newItems,
-                          });
-                        }}
-                      >
-                        <PlayCircleOutlineIcon />
-                      </IconButton>
-                    </Box>
-                  )}
-                  {item.display && (
-                    <Box className={classes.box}>
-                      <Checkbox
-                        className={classes.bottomRightCheckbox}
-                        checked={item.checked}
-                        onChange={() => {
-                          const newItem = { ...item, checked: !item.checked };
-                          const newItems = [...props.block.meta.items];
-                          newItems[index] = newItem;
-
-                          props.onMetaChange({
-                            ...props.block.meta,
-                            items: newItems,
-                          });
-                        }}
-                      />
-
-                      <IconButton
-                        size="small"
-                        className={classes.topRightIcon}
-                        onClick={() => {
-                          const newItem = { ...item, display: false };
-                          const newItems = [...props.block.meta.items];
-                          newItems[index] = newItem;
-
-                          props.onMetaChange({
-                            ...props.block.meta,
-                            items: newItems,
-                          });
-                        }}
-                      >
-                        <HighlightOffIcon />
-                      </IconButton>
-
-                      {/* if there is no description, the tile will be put in the center of the tile */}
-                      {item.description && renderGridItemTitle(item)}
-
-                      <Box className={classes.outer}>
-                        <Box className={classes.middle}>
-                          <Box className={classes.inner}>
-                            {item.description
-                              ? renderGridItemDescription(item)
-                              : renderGridItemTitle(item)}
-                          </Box>
-                        </Box>
-                      </Box>
-                      {/* </Box> */}
-                    </Box>
-                  )}
+                  {renderItem(item, index)}
                 </Grid>
                 {shouldDisplayConnector(
                   SkillGridConnectorDirection.RIGHT,
@@ -461,6 +273,83 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       </Box>
     </>
   );
+
+  function renderItem(item: ISkillGridItem, index: number) {
+    return (
+      <>
+        {!item.display && (
+          <Box className={classes.deactivatedBox}>
+            <IconButton
+              size="small"
+              className={classes.topRightIcon}
+              onClick={() => {
+                const newItem = { ...item, display: true };
+                const newItems = [...props.block.meta.items];
+                newItems[index] = newItem;
+
+                props.onMetaChange({
+                  ...props.block.meta,
+                  items: newItems,
+                });
+              }}
+            >
+              <PlayCircleOutlineIcon />
+            </IconButton>
+          </Box>
+        )}
+
+        {item.display && (
+          <Box className={classes.box}>
+            <Checkbox
+              className={classes.bottomRightCheckbox}
+              checked={item.checked}
+              onChange={() => {
+                const newItem = { ...item, checked: !item.checked };
+                const newItems = [...props.block.meta.items];
+                newItems[index] = newItem;
+
+                props.onMetaChange({
+                  ...props.block.meta,
+                  items: newItems,
+                });
+              }}
+            />
+
+            <IconButton
+              size="small"
+              className={classes.topRightIcon}
+              onClick={() => {
+                const newItem = { ...item, display: false };
+                const newItems = [...props.block.meta.items];
+                newItems[index] = newItem;
+
+                props.onMetaChange({
+                  ...props.block.meta,
+                  items: newItems,
+                });
+              }}
+            >
+              <HighlightOffIcon />
+            </IconButton>
+
+            {/* if there is no description, the tile will be put in the center of the tile */}
+            {item.description && renderGridItemTitle(item)}
+
+            <Box className={classes.outer}>
+              <Box className={classes.middle}>
+                <Box className={classes.inner}>
+                  {item.description
+                    ? renderGridItemDescription(item)
+                    : renderGridItemTitle(item)}
+                </Box>
+              </Box>
+            </Box>
+            {/* </Box> */}
+          </Box>
+        )}
+      </>
+    );
+  }
 
   // The MUI Grid is not made to handle 5 columns. If we do need 5 columns,
   // we make sure the first and last columns are take more space to fill out the 12 slots MUI gives us per row
