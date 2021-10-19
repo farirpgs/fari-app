@@ -5,8 +5,8 @@ import Grid, { GridSize } from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
@@ -293,7 +293,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                 });
               }}
             >
-              <PlayCircleOutlineIcon />
+              <VisibilityIcon />
             </IconButton>
           </Box>
         )}
@@ -329,7 +329,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                 });
               }}
             >
-              <HighlightOffIcon />
+              <VisibilityOffIcon />
             </IconButton>
 
             {/* if there is no description, the tile will be put in the center of the tile */}
