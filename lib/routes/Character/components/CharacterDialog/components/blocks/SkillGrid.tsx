@@ -120,14 +120,16 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       top: "50%",
       transform: "translateY(-50%)",
     },
+    itemContainer: {
+      height: boxHeightInPixels,
+    },
     box: {
       background: "lightgray",
-      height: boxHeightInPixels,
       overflow: "hidden",
       position: "relative",
     },
-    deactivatedBox: {
-      border: "solid 1px lightgray",
+    hiddenItem: {
+      background: "#EFEFEF",
       height: boxHeightInPixels,
       overflow: "hidden",
       position: "relative",
@@ -354,8 +356,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   function renderItem(item: ISkillGridItem, index: number) {
     return (
       <>
-        {!item.display && (
-          <Box className={classes.deactivatedBox}>
+        {/* <Box className={classes.itemContainer}> */}
+        {!item.display && props.advanced && (
+          <Box className={clsx(classes.hiddenItem, classes.itemContainer)}>
             <IconButton
               size="small"
               className={classes.topRightIcon}
@@ -376,7 +379,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
         )}
 
         {item.display && (
-          <Box className={classes.box}>
+          <Box className={clsx(classes.box, classes.itemContainer)}>
             <Checkbox
               className={classes.bottomRightCheckbox}
               checked={item.checked}
@@ -392,23 +395,24 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               }}
             />
 
-            <IconButton
-              size="small"
-              className={classes.topRightIcon}
-              onClick={() => {
-                const newItem = { ...item, display: false };
-                const newItems = [...props.block.meta.items];
-                newItems[index] = newItem;
+            {props.advanced && (
+              <IconButton
+                size="small"
+                className={classes.topRightIcon}
+                onClick={() => {
+                  const newItem = { ...item, display: false };
+                  const newItems = [...props.block.meta.items];
+                  newItems[index] = newItem;
 
-                props.onMetaChange({
-                  ...props.block.meta,
-                  items: newItems,
-                });
-              }}
-            >
-              <VisibilityOffIcon />
-            </IconButton>
-
+                  props.onMetaChange({
+                    ...props.block.meta,
+                    items: newItems,
+                  });
+                }}
+              >
+                <VisibilityOffIcon />
+              </IconButton>
+            )}
             {/* if there is no description, the tile will be put in the center of the tile */}
             {item.description && renderGridItemTitle(item)}
 
@@ -421,9 +425,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                 </Box>
               </Box>
             </Box>
-            {/* </Box> */}
           </Box>
         )}
+        {/* </Box> */}
       </>
     );
   }
