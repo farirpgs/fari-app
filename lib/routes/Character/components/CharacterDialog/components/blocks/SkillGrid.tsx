@@ -37,6 +37,8 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   const boxHeight = props.block.meta.boxHeight;
   //end configuration
 
+  console.log(`new render`);
+
   const boxHeightInPixels = `${boxHeight}px`;
   const rightConnectorHeight = `${boxHeight / 10}px`;
   const itemHorizontalWidth = Math.floor(12 / columnCount);
@@ -155,7 +157,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       });
     } else if (surplusItemsCount > 0) {
       const trimmedItems = [...props.block.meta.items];
-      trimmedItems.splice(trimmedItems.length, surplusItemsCount);
+      trimmedItems.splice(trimmedItems.length - 1, surplusItemsCount);
 
       props.onMetaChange({
         ...props.block.meta,
