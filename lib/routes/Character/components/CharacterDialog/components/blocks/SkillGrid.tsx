@@ -37,52 +37,12 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   const boxHeight = props.block.meta.boxHeight;
   //end configuration
 
-  const realItems = [...props.block.meta.items];
-  for (let index = props.block.meta.items.length - 1; index >= 0; index--) {
-    const element = props.block.meta.items[index];
-    if (!element.display && !element.name && !element.description) {
-      realItems.splice(index, 1);
-    } else {
-      break;
-    }
-  }
+  const rowCount = resolveRowCount();
 
-  const realItemsCount = realItems.length;
-  const allItemsCount = props.block.meta.items.length;
-  const rowCount = Math.ceil(realItemsCount / columnCount);
-  const gridCellCount = columnCount * rowCount;
+  const cellCountDelta = resolveCellDelta();
 
-  if (gridCellCount !== allItemsCount) {
-    const cellCountDelta = gridCellCount - allItemsCount;
-
-    const missingItemsCount = cellCountDelta > 0 ? cellCountDelta : 0;
-    const surplusItemsCount = cellCountDelta < 0 ? -cellCountDelta : 0;
-
-    if (missingItemsCount > 0) {
-      const deactivatedItemsToAdd = new Array<ISkillGridItem>();
-      for (let i = 0; i < cellCountDelta; i++) {
-        deactivatedItemsToAdd.push({
-          display: false,
-          checked: false,
-          name: "",
-          description: "",
-          connectors: new Array<SkillGridConnectorDirection>(),
-        });
-      }
-      const newItems = [...props.block.meta.items, ...deactivatedItemsToAdd];
-      props.onMetaChange({
-        ...props.block.meta,
-        items: newItems,
-      });
-    } else if (surplusItemsCount > 0) {
-      const trimmedItems = [...props.block.meta.items];
-      trimmedItems.splice(gridCellCount, surplusItemsCount);
-
-      props.onMetaChange({
-        ...props.block.meta,
-        items: trimmedItems,
-      });
-    }
+  if (cellCountDelta !== 0) {
+    handleCellDelta();
   }
 
   const boxHeightInPixels = `${boxHeight}px`;
@@ -171,6 +131,77 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
 
   const classes = useStyles();
 
+  function resolveCellDelta() {
+    const allItemsCount = props.block.meta.items.length;
+    const gridCellCount = columnCount * rowCount;
+    const cellCountDelta = gridCellCount - allItemsCount;
+    return cellCountDelta;
+  }
+
+  function handleCellDelta() {
+    const missingItemsCount = cellCountDelta > 0 ? cellCountDelta : 0;
+    const surplusItemsCount = cellCountDelta < 0 ? -cellCountDelta : 0;
+
+    if (missingItemsCount > 0) {
+      const emptyItemsToAppend = buildEmptyItems(cellCountDelta);
+
+      props.onMetaChange({
+        ...props.block.meta,
+        items: [...props.block.meta.items, ...emptyItemsToAppend],
+      });
+    } else if (surplusItemsCount > 0) {
+      const trimmedItems = [...props.block.meta.items];
+      trimmedItems.splice(trimmedItems.length, surplusItemsCount);
+
+      props.onMetaChange({
+        ...props.block.meta,
+        items: trimmedItems,
+      });
+    }
+  }
+
+  function resolveRowCount() {
+    const realItems = getRealItems(props.block.meta.items);
+
+    const realItemsCount = realItems.length;
+    const rowCount = Math.ceil(realItemsCount / columnCount);
+    return rowCount;
+  }
+
+  function buildEmptyItems(numberOfItemsToBuild: number) {
+    const items = new Array<ISkillGridItem>();
+
+    for (let i = 0; i < numberOfItemsToBuild; i++) {
+      items.push({
+        display: false,
+        checked: false,
+        name: "",
+        description: "",
+        connectors: new Array<SkillGridConnectorDirection>(),
+      });
+    }
+
+    return items;
+  }
+
+  function getRealItems(allItems: ISkillGridItem[]) {
+    const realItems = [...allItems];
+
+    // we specifically need to only take the empty items that are at the end of the array: having empty items in the middle of the grid could be legit
+    for (let index = allItems.length - 1; index >= 0; index--) {
+      const item = allItems[index];
+
+      const isEmptyItem = !item.display && !item.name && !item.description;
+      if (isEmptyItem) {
+        realItems.splice(index, 1);
+      } else {
+        return realItems;
+      }
+    }
+
+    return realItems;
+  }
+
   function shouldDisplayConnector(
     direction: SkillGridConnectorDirection,
     item: ISkillGridItem,
@@ -208,52 +239,11 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   return (
     <>
       <Box className={css({ padding: "1em" })}>
-        <Grid container>
-          <Grid item xs={10}>
-            <FateLabel variant="body2" color="primary">
-              <b>Number of columns:</b>
-            </FateLabel>
-          </Grid>
-          <Grid item xs={2}>
-            <TextField
-              type="number"
-              InputProps={{ inputProps: { min: 2, max: 6 } }}
-              value={props.block.meta.columnCount}
-              onChange={(e) => {
-                let columnCount = 3;
-                if (e.target.value) {
-                  const parsed = parseInt(e.target.value);
-                  if (parsed > 6) {
-                    columnCount = 6;
-                  } else {
-                    columnCount = parsed;
-                  }
-                }
-
-                props.onMetaChange({
-                  ...props.block.meta,
-                  columnCount: columnCount,
-                });
-              }}
-            />
-          </Grid>
-        </Grid>
+        <Grid container>{renderColumnCountConfigurationRow()}</Grid>
       </Box>
       <Box>
         <Grid container justify="space-between">
           {props.block.meta.items.map((item, index) => {
-            const shouldDisplayRightConnector = shouldDisplayConnector(
-              SkillGridConnectorDirection.RIGHT,
-              item,
-              index
-            );
-
-            const shouldDisplayBottomConnector = shouldDisplayConnector(
-              SkillGridConnectorDirection.BOTTOM,
-              item,
-              index
-            );
-
             return (
               <Grid item xs={resolveItemWidth(index)} key={index}>
                 <Grid container>
@@ -262,28 +252,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                   </Grid>
 
                   <Grid item xs={1} className={classes.rightConnectorContainer}>
-                    {(props.advanced || shouldDisplayRightConnector) && (
-                      <Box
-                        className={clsx(
-                          classes.rightConnector,
-                          shouldDisplayRightConnector
-                            ? classes.visibleConnector
-                            : classes.hiddenConnector
-                        )}
-                      >
-                        {props.advanced && (
-                          <Button
-                            onClick={() => {
-                              handleConnectorClick(
-                                item,
-                                index,
-                                SkillGridConnectorDirection.RIGHT
-                              );
-                            }}
-                          />
-                        )}
-                      </Box>
-                    )}
+                    {renderRightConnector(item, index)}
                   </Grid>
 
                   <>
@@ -292,28 +261,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                       xs={11}
                       className={classes.bottomConnectorContainer}
                     >
-                      {(props.advanced || shouldDisplayBottomConnector) && (
-                        <Box
-                          className={clsx(
-                            classes.bottomConnector,
-                            shouldDisplayBottomConnector
-                              ? classes.visibleConnector
-                              : classes.hiddenConnector
-                          )}
-                        >
-                          {props.advanced && (
-                            <Button
-                              onClick={() => {
-                                handleConnectorClick(
-                                  item,
-                                  index,
-                                  SkillGridConnectorDirection.BOTTOM
-                                );
-                              }}
-                            />
-                          )}
-                        </Box>
-                      )}
+                      {renderBottomConnector(item, index)}
                     </Grid>
                     <Grid item xs={1} />
                   </>
@@ -325,6 +273,111 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       </Box>
     </>
   );
+
+  function renderRightConnector(item: ISkillGridItem, index: number) {
+    const shouldDisplayRightConnector = shouldDisplayConnector(
+      SkillGridConnectorDirection.RIGHT,
+      item,
+      index
+    );
+
+    return (
+      <>
+        {(props.advanced || shouldDisplayRightConnector) && (
+          <Box
+            className={clsx(
+              classes.rightConnector,
+              shouldDisplayRightConnector
+                ? classes.visibleConnector
+                : classes.hiddenConnector
+            )}
+          >
+            {props.advanced && (
+              <Button
+                onClick={() => {
+                  handleConnectorClick(
+                    item,
+                    index,
+                    SkillGridConnectorDirection.RIGHT
+                  );
+                }}
+              />
+            )}
+          </Box>
+        )}
+      </>
+    );
+  }
+
+  function renderBottomConnector(item: ISkillGridItem, index: number) {
+    const shouldDisplayBottomConnector = shouldDisplayConnector(
+      SkillGridConnectorDirection.BOTTOM,
+      item,
+      index
+    );
+
+    return (
+      <>
+        {(props.advanced || shouldDisplayBottomConnector) && (
+          <Box
+            className={clsx(
+              classes.bottomConnector,
+              shouldDisplayBottomConnector
+                ? classes.visibleConnector
+                : classes.hiddenConnector
+            )}
+          >
+            {props.advanced && (
+              <Button
+                onClick={() => {
+                  handleConnectorClick(
+                    item,
+                    index,
+                    SkillGridConnectorDirection.BOTTOM
+                  );
+                }}
+              />
+            )}
+          </Box>
+        )}
+      </>
+    );
+  }
+
+  function renderColumnCountConfigurationRow() {
+    return (
+      <>
+        <Grid item xs={10}>
+          <FateLabel variant="body2" color="primary">
+            <b>Number of columns:</b>
+          </FateLabel>
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            type="number"
+            InputProps={{ inputProps: { min: 2, max: 6 } }}
+            value={props.block.meta.columnCount}
+            onChange={(e) => {
+              let columnCount = 3;
+              if (e.target.value) {
+                const parsed = parseInt(e.target.value);
+                if (parsed > 6) {
+                  columnCount = 6;
+                } else {
+                  columnCount = parsed;
+                }
+              }
+
+              props.onMetaChange({
+                ...props.block.meta,
+                columnCount: columnCount,
+              });
+            }}
+          />
+        </Grid>
+      </>
+    );
+  }
 
   function handleConnectorClick(
     item: ISkillGridItem,
@@ -413,6 +466,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                 <VisibilityOffIcon />
               </IconButton>
             )}
+
             {/* if there is no description, the tile will be put in the center of the tile */}
             {item.description && renderGridItemTitle(item)}
 
@@ -427,7 +481,6 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
             </Box>
           </Box>
         )}
-        {/* </Box> */}
       </>
     );
   }
