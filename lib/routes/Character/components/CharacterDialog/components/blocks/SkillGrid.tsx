@@ -206,18 +206,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     return realItems;
   }
 
-  function shouldDisplayConnector(
-    direction: SkillGridConnectorDirection,
-    item: ISkillGridItem,
-    index: number
-  ) {
-    return (
-      isConnectorPossible(direction, item, index) &&
-      item.connectors.some((connector) => connector === direction)
-    );
-  }
-
-  function isConnectorPossible(
+  function getIsPositionValid(
     direction: SkillGridConnectorDirection,
     item: ISkillGridItem,
     index: number
@@ -238,6 +227,24 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       const itemOnTheRight = props.block.meta.items[index + 1];
       return itemOnTheRight && itemOnTheRight.display;
     }
+  }
+
+  function shouldDisplayConnector(
+    direction: SkillGridConnectorDirection,
+    item: ISkillGridItem,
+    index: number
+  ) {
+    const isPositionValid = getIsPositionValid(direction, item, index);
+    const isConnectorVisible = item.connectors.some(
+      (connector) => connector === direction
+    );
+
+    const returnValue = {
+      isPositionValid: isPositionValid,
+      isConnectorVisible: isConnectorVisible,
+    };
+
+    return returnValue;
   }
 
   function handleConnectorClick(
@@ -318,7 +325,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   );
 
   function renderRightConnector(item: ISkillGridItem, index: number) {
-    const shouldDisplayRightConnector = shouldDisplayConnector(
+    const { isPositionValid, isConnectorVisible } = shouldDisplayConnector(
       SkillGridConnectorDirection.RIGHT,
       item,
       index
@@ -326,11 +333,11 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
 
     return (
       <>
-        {(props.advanced || shouldDisplayRightConnector) && (
+        {isPositionValid && (props.advanced || isConnectorVisible) && (
           <Box
             className={clsx(
               classes.rightConnector,
-              shouldDisplayRightConnector
+              isConnectorVisible
                 ? classes.visibleConnector
                 : classes.hiddenConnector
             )}
@@ -353,7 +360,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function renderBottomConnector(item: ISkillGridItem, index: number) {
-    const shouldDisplayBottomConnector = shouldDisplayConnector(
+    const { isPositionValid, isConnectorVisible } = shouldDisplayConnector(
       SkillGridConnectorDirection.BOTTOM,
       item,
       index
@@ -361,11 +368,11 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
 
     return (
       <>
-        {(props.advanced || shouldDisplayBottomConnector) && (
+        {isPositionValid && (props.advanced || isConnectorVisible) && (
           <Box
             className={clsx(
               classes.bottomConnector,
-              shouldDisplayBottomConnector
+              isConnectorVisible
                 ? classes.visibleConnector
                 : classes.hiddenConnector
             )}
