@@ -11,6 +11,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import React from "react";
+import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISkillGrid } from "../../../../../../domains/character/types";
 import {
@@ -79,6 +80,12 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     itemContainer: {
       height: boxHeightInPixels,
     },
+    nameContainer: {
+      margin: ".5em",
+
+      // to keep the other items clickable
+      zIndex: 1,
+    },
     box: {
       background: "lightgray",
       overflow: "hidden",
@@ -95,6 +102,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       right: 0,
       bottom: 0,
       padding: 0,
+
+      // to keep the other items clickable
+      zIndex: 1,
     },
     topRightIcon: {
       position: "absolute",
@@ -102,7 +112,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       top: 0,
       padding: 0,
 
-      // to keep the icon clickable in its absolute position
+      // to keep the other items clickable
       zIndex: 1,
     },
     outer: {
@@ -445,14 +455,13 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
             {props.advanced && renderHideItemButton(item, index)}
 
             {/* if there is no description, the tile will be put in the center of the tile */}
-            {item.description && renderGridItemTitle(item)}
-
+            {item.description && renderGridItemTitle(item, index)}
             <Box className={classes.outer}>
               <Box className={classes.middle}>
                 <Box className={classes.inner}>
                   {item.description
-                    ? renderGridItemDescription(item)
-                    : renderGridItemTitle(item)}
+                    ? renderGridItemDescription(item, index)
+                    : renderGridItemTitle(item, index)}
                 </Box>
               </Box>
             </Box>
@@ -481,19 +490,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderHideItemButton(
-    item: ISkillGridItem,
-    index: number
-  ):
-    | string
-    | number
-    | boolean
-    | {}
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | React.ReactNodeArray
-    | React.ReactPortal
-    | null
-    | undefined {
+  function renderHideItemButton(item: ISkillGridItem, index: number) {
     return (
       <IconButton
         size="small"
@@ -537,7 +534,10 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderGridItemDescription(item: ISkillGridItem): React.ReactNode {
+  function renderGridItemDescription(
+    item: ISkillGridItem,
+    index: number
+  ): React.ReactNode {
     return (
       <Typography
         variant="body2"
@@ -546,24 +546,51 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
           margin: "0em .5em",
         }}
       >
-        {item.description}
+        <ContentEditable
+          value={item.description}
+          readonly={!props.advanced}
+          onChange={(newDescription) => {
+            const newItem = { ...item, description: newDescription };
+            const newItems = [...props.block.meta.items];
+            newItems[index] = newItem;
+
+            props.onMetaChange({
+              ...props.block.meta,
+              items: newItems,
+            });
+          }}
+        />
       </Typography>
     );
   }
 
-  function renderGridItemTitle(item: ISkillGridItem) {
+  function renderGridItemTitle(item: ISkillGridItem, index: number) {
     return (
-      <Typography
-        align="center"
-        style={{
-          margin: ".5em",
-          fontSize: "1em",
-          fontWeight: "bold",
-          textTransform: "uppercase",
-        }}
-      >
-        {item.name}
-      </Typography>
+      <Box className={classes.nameContainer}>
+        <Typography
+          align="center"
+          style={{
+            fontSize: "1em",
+            fontWeight: "bold",
+            textTransform: "uppercase",
+          }}
+        >
+          <ContentEditable
+            value={item.name}
+            readonly={!props.advanced}
+            onChange={(newName) => {
+              const newItem = { ...item, name: newName };
+              const newItems = [...props.block.meta.items];
+              newItems[index] = newItem;
+
+              props.onMetaChange({
+                ...props.block.meta,
+                items: newItems,
+              });
+            }}
+          />
+        </Typography>
+      </Box>
     );
   }
 }
