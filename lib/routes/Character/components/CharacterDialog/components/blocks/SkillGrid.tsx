@@ -37,18 +37,12 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   const boxHeight = props.block.meta.boxHeight;
   //end configuration
 
-  const rowCount = resolveRowCount();
-
-  const cellCountDelta = resolveCellDelta();
-
-  if (cellCountDelta !== 0) {
-    handleCellDelta();
-  }
-
   const boxHeightInPixels = `${boxHeight}px`;
   const rightConnectorHeight = `${boxHeight / 10}px`;
   const itemHorizontalWidth = Math.floor(12 / columnCount);
   const itemHorizontalGridSize: GridSize = itemHorizontalWidth as any;
+
+  ensureGridIsFilled();
 
   const useStyles = makeStyles({
     bottomConnectorContainer: {
@@ -131,14 +125,24 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
 
   const classes = useStyles();
 
-  function resolveCellDelta() {
+  function ensureGridIsFilled() {
+    const rowCount = resolveRowCount();
+    const cellCountDelta = resolveCellDelta(columnCount, rowCount);
+
+    if (cellCountDelta !== 0) {
+      handleCellDelta(cellCountDelta);
+    }
+  }
+
+  function resolveCellDelta(columnCount: number, rowCount: number) {
     const allItemsCount = props.block.meta.items.length;
     const gridCellCount = columnCount * rowCount;
     const cellCountDelta = gridCellCount - allItemsCount;
+
     return cellCountDelta;
   }
 
-  function handleCellDelta() {
+  function handleCellDelta(cellCountDelta: number) {
     const missingItemsCount = cellCountDelta > 0 ? cellCountDelta : 0;
     const surplusItemsCount = cellCountDelta < 0 ? -cellCountDelta : 0;
 
@@ -236,10 +240,49 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     }
   }
 
+  function handleConnectorClick(
+    item: ISkillGridItem,
+    index: number,
+    connectorDirection: SkillGridConnectorDirection
+  ) {
+    const bottomConnectorIndex = item.connectors.findIndex(
+      (connector) => connector === connectorDirection
+    );
+    const newConnectors = [...item.connectors];
+    if (bottomConnectorIndex >= 0) {
+      newConnectors.splice(bottomConnectorIndex, 1);
+    } else {
+      newConnectors.push(connectorDirection);
+    }
+    const newItem = {
+      ...item,
+      connectors: newConnectors,
+    };
+    const newItems = [...props.block.meta.items];
+    newItems[index] = newItem;
+
+    props.onMetaChange({
+      ...props.block.meta,
+      items: newItems,
+    });
+  }
+
+  // The MUI Grid is not made to handle 5 columns. If we do need 5 columns,
+  // we make sure the first and last columns take more space to fill out the 12 slots MUI gives us per row
+  function resolveItemWidth(index: number) {
+    if (columnCount !== 5) return itemHorizontalGridSize;
+
+    const isLastColumn = index % columnCount === 0;
+    const isFirstColumn = index % columnCount === 4;
+    if (isFirstColumn || isLastColumn) return 3 as GridSize;
+
+    return itemHorizontalGridSize;
+  }
+
   return (
     <>
       <Box className={css({ padding: "1em" })}>
-        <Grid container>{renderColumnCountConfigurationRow()}</Grid>
+        <Grid container>{renderColumnCountEditor()}</Grid>
       </Box>
       <Box>
         <Grid container justify="space-between">
@@ -344,7 +387,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderColumnCountConfigurationRow() {
+  function renderColumnCountEditor() {
     return (
       <>
         <Grid item xs={10}>
@@ -377,33 +420,6 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
         </Grid>
       </>
     );
-  }
-
-  function handleConnectorClick(
-    item: ISkillGridItem,
-    index: number,
-    connectorDirection: SkillGridConnectorDirection
-  ) {
-    const bottomConnectorIndex = item.connectors.findIndex(
-      (connector) => connector === connectorDirection
-    );
-    const newConnectors = [...item.connectors];
-    if (bottomConnectorIndex >= 0) {
-      newConnectors.splice(bottomConnectorIndex, 1);
-    } else {
-      newConnectors.push(connectorDirection);
-    }
-    const newItem = {
-      ...item,
-      connectors: newConnectors,
-    };
-    const newItems = [...props.block.meta.items];
-    newItems[index] = newItem;
-
-    props.onMetaChange({
-      ...props.block.meta,
-      items: newItems,
-    });
   }
 
   function renderItem(item: ISkillGridItem, index: number) {
@@ -483,18 +499,6 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
         )}
       </>
     );
-  }
-
-  // The MUI Grid is not made to handle 5 columns. If we do need 5 columns,
-  // we make sure the first and last columns are take more space to fill out the 12 slots MUI gives us per row
-  function resolveItemWidth(index: number) {
-    if (columnCount !== 5) return itemHorizontalGridSize;
-
-    const isLastColumn = index % columnCount === 0;
-    const isFirstColumn = index % columnCount === 4;
-    if (isFirstColumn || isLastColumn) return 3 as GridSize;
-
-    return itemHorizontalGridSize;
   }
 
   function renderGridItemDescription(item: ISkillGridItem): React.ReactNode {
