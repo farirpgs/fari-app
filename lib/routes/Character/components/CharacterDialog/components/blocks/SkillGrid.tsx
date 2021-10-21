@@ -434,63 +434,15 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   function renderItem(item: ISkillGridItem, index: number) {
     return (
       <>
-        {/* <Box className={classes.itemContainer}> */}
-        {!item.display && props.advanced && (
-          <Box className={clsx(classes.hiddenItem, classes.itemContainer)}>
-            <IconButton
-              size="small"
-              className={classes.topRightIcon}
-              onClick={() => {
-                const newItem = { ...item, display: true };
-                const newItems = [...props.block.meta.items];
-                newItems[index] = newItem;
-
-                props.onMetaChange({
-                  ...props.block.meta,
-                  items: newItems,
-                });
-              }}
-            >
-              <VisibilityIcon />
-            </IconButton>
-          </Box>
-        )}
+        {!item.display &&
+          props.advanced &&
+          renderDisplayItemButton(item, index)}
 
         {item.display && (
           <Box className={clsx(classes.box, classes.itemContainer)}>
-            <Checkbox
-              className={classes.bottomRightCheckbox}
-              checked={item.checked}
-              onChange={() => {
-                const newItem = { ...item, checked: !item.checked };
-                const newItems = [...props.block.meta.items];
-                newItems[index] = newItem;
+            {renderItemCheckbox(item, index)}
 
-                props.onMetaChange({
-                  ...props.block.meta,
-                  items: newItems,
-                });
-              }}
-            />
-
-            {props.advanced && (
-              <IconButton
-                size="small"
-                className={classes.topRightIcon}
-                onClick={() => {
-                  const newItem = { ...item, display: false };
-                  const newItems = [...props.block.meta.items];
-                  newItems[index] = newItem;
-
-                  props.onMetaChange({
-                    ...props.block.meta,
-                    items: newItems,
-                  });
-                }}
-              >
-                <VisibilityOffIcon />
-              </IconButton>
-            )}
+            {props.advanced && renderHideItemButton(item, index)}
 
             {/* if there is no description, the tile will be put in the center of the tile */}
             {item.description && renderGridItemTitle(item)}
@@ -507,6 +459,81 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
           </Box>
         )}
       </>
+    );
+  }
+
+  function renderItemCheckbox(item: ISkillGridItem, index: number) {
+    return (
+      <Checkbox
+        className={classes.bottomRightCheckbox}
+        checked={item.checked}
+        onChange={() => {
+          const newItem = { ...item, checked: !item.checked };
+          const newItems = [...props.block.meta.items];
+          newItems[index] = newItem;
+
+          props.onMetaChange({
+            ...props.block.meta,
+            items: newItems,
+          });
+        }}
+      />
+    );
+  }
+
+  function renderHideItemButton(
+    item: ISkillGridItem,
+    index: number
+  ):
+    | string
+    | number
+    | boolean
+    | {}
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | React.ReactNodeArray
+    | React.ReactPortal
+    | null
+    | undefined {
+    return (
+      <IconButton
+        size="small"
+        className={classes.topRightIcon}
+        onClick={() => {
+          const newItem = { ...item, display: false };
+          const newItems = [...props.block.meta.items];
+          newItems[index] = newItem;
+
+          props.onMetaChange({
+            ...props.block.meta,
+            items: newItems,
+          });
+        }}
+      >
+        <VisibilityOffIcon />
+      </IconButton>
+    );
+  }
+
+  function renderDisplayItemButton(item: ISkillGridItem, index: number) {
+    return (
+      <Box className={clsx(classes.hiddenItem, classes.itemContainer)}>
+        <IconButton
+          size="small"
+          className={classes.topRightIcon}
+          onClick={() => {
+            const newItem = { ...item, display: true };
+            const newItems = [...props.block.meta.items];
+            newItems[index] = newItem;
+
+            props.onMetaChange({
+              ...props.block.meta,
+              items: newItems,
+            });
+          }}
+        >
+          <VisibilityIcon />
+        </IconButton>
+      </Box>
     );
   }
 
