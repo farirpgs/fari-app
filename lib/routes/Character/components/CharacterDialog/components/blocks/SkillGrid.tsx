@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/styles";
@@ -113,6 +114,15 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     topRightIcon: {
       position: "absolute",
       right: 0,
+      top: 0,
+      padding: 0,
+
+      // to keep the other items clickable
+      zIndex: 1,
+    },
+    topLeftIcon: {
+      position: "absolute",
+      left: 0,
       top: 0,
       padding: 0,
 
@@ -321,61 +331,63 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                     {renderRightConnector(item, index)}
                   </Grid>
 
-                  <>
-                    <Grid
-                      item
-                      xs={11}
-                      className={classes.bottomConnectorContainer}
-                    >
-                      {renderBottomConnector(item, index)}
-                    </Grid>
-                    <Grid item xs={1} />
-                  </>
+                  <Grid
+                    item
+                    xs={11}
+                    className={classes.bottomConnectorContainer}
+                  >
+                    {renderBottomConnector(item, index)}
+                  </Grid>
+                  <Grid item xs={1} />
                 </Grid>
               </Grid>
             );
           })}
-          <Grid item xs={12} key="row">
-            <Box
-              className={clsx(
-                classes.box,
-                classes.itemContainer,
-                classes.addItemRowItem
-              )}
-            >
-              <Box className={classes.outer}>
-                <Box className={classes.middle}>
-                  <Box className={classes.inner}>
-                    <IconButton
-                      onClick={() => {
-                        const newItem = {
-                          display: true,
-                          checked: false,
-                          name: "",
-                          description: "",
-                          connectors: new Array<SkillGridConnectorDirection>(),
-                        };
 
-                        props.onMetaChange({
-                          ...props.block.meta,
-                          items: [
-                            ...getRealItems(props.block.meta.items),
-                            newItem,
-                          ],
-                        });
-                      }}
-                    >
-                      <AddRoundedIcon fontSize="large" />
-                    </IconButton>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
+          {props.advanced && renderAddItemButton()}
         </Grid>
       </Box>
     </>
   );
+
+  function renderAddItemButton() {
+    return (
+      <Grid item xs={12} key="row">
+        <Box
+          className={clsx(
+            classes.box,
+            classes.itemContainer,
+            classes.addItemRowItem
+          )}
+        >
+          <Box className={classes.outer}>
+            <Box className={classes.middle}>
+              <Box className={classes.inner}>
+                <IconButton
+                  onClick={() => {
+                    const newItem = {
+                      display: true,
+                      checked: false,
+                      name: "name",
+                      description: "description",
+                      connectors: new Array<SkillGridConnectorDirection>(),
+                    };
+
+                    props.onMetaChange({
+                      ...props.block.meta,
+                      items: [...getRealItems(props.block.meta.items), newItem],
+                    });
+                  }}
+                >
+                  <AddRoundedIcon fontSize="large" />
+                </IconButton>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Grid>
+    );
+  }
 
   function renderRightConnector(item: ISkillGridItem, index: number) {
     const { isPositionValid, isConnectorVisible } = shouldDisplayConnector(
@@ -485,9 +497,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   function renderItem(item: ISkillGridItem, index: number) {
     return (
       <>
-        {!item.display &&
-          props.advanced &&
-          renderDisplayItemButton(item, index)}
+        {!item.display && props.advanced && renderHiddenItem(item, index)}
 
         {item.display && (
           <Box className={clsx(classes.box, classes.itemContainer)}>
@@ -552,7 +562,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderDisplayItemButton(item: ISkillGridItem, index: number) {
+  function renderHiddenItem(item: ISkillGridItem, index: number) {
     return (
       <Box className={clsx(classes.hiddenItem, classes.itemContainer)}>
         <IconButton
@@ -570,6 +580,22 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
           }}
         >
           <VisibilityIcon />
+        </IconButton>
+
+        <IconButton
+          size="small"
+          className={classes.topLeftIcon}
+          onClick={() => {
+            const newItems = [...props.block.meta.items];
+            newItems.splice(index, 1);
+
+            props.onMetaChange({
+              ...props.block.meta,
+              items: newItems,
+            });
+          }}
+        >
+          <DeleteForeverIcon />
         </IconButton>
       </Box>
     );
