@@ -1068,30 +1068,33 @@ export const CharacterV3Dialog: React.FC<{
                         <Box>
                           <Grid container wrap="nowrap">
                             {advanced && (
-                              <Grid item>
+                              <Grid item className={css({ width: "10px" })}>
                                 <div ref={dndRenderProps.drag}>
-                                  <Tooltip
-                                    title={t("character-dialog.control.move")}
-                                  >
-                                    <IconButton size="small">
-                                      <DragIndicatorIcon
-                                        className={css({
-                                          transition: theme.transitions.create([
-                                            "color",
-                                          ]),
-                                          display: dndRenderProps.isDragging
-                                            ? "none"
-                                            : "block",
-                                          cursor: "move",
-                                        })}
-                                        htmlColor={
-                                          dndRenderProps.isOver
-                                            ? theme.palette.text.primary
-                                            : theme.palette.text.hint
-                                        }
-                                      />
-                                    </IconButton>
-                                  </Tooltip>
+                                  <Box display="flex" justifyContent="center">
+                                    <Tooltip
+                                      title={t("character-dialog.control.move")}
+                                    >
+                                      <IconButton size="small">
+                                        <DragIndicatorIcon
+                                          className={css({
+                                            transition:
+                                              theme.transitions.create([
+                                                "color",
+                                              ]),
+                                            display: dndRenderProps.isDragging
+                                              ? "none"
+                                              : "block",
+                                            cursor: "move",
+                                          })}
+                                          htmlColor={
+                                            dndRenderProps.isOver
+                                              ? theme.palette.text.primary
+                                              : theme.palette.text.hint
+                                          }
+                                        />
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Box>
                                 </div>
                                 <Box display="flex" justifyContent="center">
                                   <Tooltip
@@ -1165,7 +1168,12 @@ export const CharacterV3Dialog: React.FC<{
                                 </Box>
                               </Grid>
                             )}
-                            <Grid item xs>
+                            <Grid
+                              item
+                              className={css({
+                                width: advanced ? "calc(100% - 10px)" : "100%",
+                              })}
+                            >
                               <Box
                                 className={cx(
                                   css({

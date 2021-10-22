@@ -412,7 +412,6 @@ export const CharacterFactory = {
         label: "",
         type: type,
         meta: {
-          boxHeight: 125,
           columnCount: 3,
           items: [
             {

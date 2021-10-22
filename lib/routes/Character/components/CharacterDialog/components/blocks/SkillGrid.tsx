@@ -1,22 +1,25 @@
 import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import Grid, { GridSize } from "@material-ui/core/Grid";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import { useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { makeStyles } from "@material-ui/styles";
-import clsx from "clsx";
 import React from "react";
-import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../../../../../../components/ContentEditable/ContentEditable";
 import { ISkillGrid } from "../../../../../../domains/character/types";
+import { BetterDnd } from "../../../BetterDnD/BetterDnd";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -36,121 +39,10 @@ export enum SkillGridConnectorDirection {
 }
 
 export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
-  // configuration
+  const theme = useTheme();
   const columnCount = props.block.meta.columnCount;
-  const boxHeight = props.block.meta.boxHeight;
-  //end configuration
-
-  console.log(`new render`);
-
-  const boxHeightInPixels = `${boxHeight}px`;
-  const rightConnectorHeight = `${boxHeight / 10}px`;
-  const itemHorizontalWidth = Math.floor(12 / columnCount);
-  const itemHorizontalGridSize: GridSize = itemHorizontalWidth as any;
 
   ensureGridIsFilled();
-
-  const useStyles = makeStyles({
-    bottomConnectorContainer: {
-      position: "relative",
-      height: "20px",
-    },
-    addItemRowItem: {
-      textAlign: "center",
-    },
-    visibleConnector: {
-      background: "lightgray",
-    },
-    hiddenConnector: {
-      border: "1px solid lightgray",
-    },
-    bottomConnector: {
-      width: rightConnectorHeight,
-      height: "20px",
-      margin: 0,
-      position: "absolute",
-      left: "50%",
-      transform: "translateX(-50%)",
-    },
-    rightConnectorContainer: {
-      position: "relative",
-    },
-    rightConnector: {
-      margin: 0,
-      height: rightConnectorHeight,
-      width: "30px",
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-    },
-    itemContainer: {
-      height: boxHeightInPixels,
-    },
-    nameContainer: {
-      margin: ".5em",
-
-      // to keep the other items clickable
-      zIndex: 1,
-    },
-    box: {
-      background: "lightgray",
-      overflow: "hidden",
-      position: "relative",
-    },
-    hiddenItem: {
-      background: "#EFEFEF",
-      height: boxHeightInPixels,
-      overflow: "hidden",
-      position: "relative",
-    },
-    bottomRightItem: {
-      position: "absolute",
-      right: 0,
-      bottom: 0,
-      padding: 0,
-
-      // to keep the other items clickable
-      zIndex: 1,
-    },
-    topRightIcon: {
-      position: "absolute",
-      right: 0,
-      top: 0,
-      padding: 0,
-
-      // to keep the other items clickable
-      zIndex: 1,
-    },
-    topLeftIcon: {
-      position: "absolute",
-      left: 0,
-      top: 0,
-      padding: 0,
-
-      // to keep the other items clickable
-      zIndex: 1,
-    },
-    outer: {
-      display: "table",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      height: "100%",
-      width: "100%",
-    },
-
-    middle: {
-      display: "table-cell",
-      verticalAlign: "middle",
-    },
-
-    inner: {
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
-  });
-
-  const classes = useStyles();
 
   function ensureGridIsFilled() {
     const rowCount = resolveRowCount();
@@ -301,92 +193,109 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     });
   }
 
-  // The MUI Grid is not made to handle 5 columns. If we do need 5 columns,
-  // we make sure the first and last columns take more space to fill out the 12 slots MUI gives us per row
-  function resolveItemWidth(index: number) {
-    if (columnCount !== 5) return itemHorizontalGridSize;
-
-    const isLastColumn = index % columnCount === 0;
-    const isFirstColumn = index % columnCount === 4;
-    if (isFirstColumn || isLastColumn) return 3 as GridSize;
-
-    return itemHorizontalGridSize;
-  }
+  const columnSize = 300;
+  const paddingRem = 1;
 
   return (
     <>
-      <Box className={css({ padding: "1em" })}>
-        <Grid container>{renderColumnCountEditor()}</Grid>
+      <Box p="1rem" width="200px">
+        {renderColumnCountEditor()}
       </Box>
-      <Box>
-        <Grid container justify="space-between">
+      <Box
+        className={css({
+          width: "100%",
+          height: "auto",
+          overflowX: "auto",
+          background: theme.palette.background.default,
+        })}
+      >
+        <Box
+          className={css({
+            display: "flex",
+            flexWrap: "wrap",
+            width: `${columnSize * columnCount}px`,
+            alignItems: "stretch",
+          })}
+        >
           {props.block.meta.items.map((item, index) => {
             return (
-              <Grid item xs={resolveItemWidth(index)} key={index}>
-                <Grid container>
-                  <Grid item xs={11}>
-                    {renderItem(item, index)}
-                  </Grid>
+              <BetterDnd
+                key={index}
+                direction="horizontal"
+                index={index}
+                className={css({
+                  display: "flex",
+                  width: `${columnSize}px`,
+                  padding: `${paddingRem}rem`,
+                  position: "relative",
+                })}
+                type={`ZONEMAPBLOCK-${props.block.id}`}
+                onMove={(dragIndex, hoverIndex) => {
+                  console.log(dragIndex, hoverIndex);
+                }}
+                render={(dndRenderProps) => {
+                  return (
+                    <Box
+                      className={css({
+                        padding: ".5rem",
+                        background: item.display
+                          ? theme.palette.background.paper
+                          : theme.palette.background.default,
+                        boxShadow:
+                          item.display || props.advanced
+                            ? theme.shadows[1]
+                            : undefined,
+                        width: "100%",
+                      })}
+                    >
+                      <Box display="flex" flexDirection="column" height="100%">
+                        <Box flex="1" py="2rem">
+                          <Button ref={dndRenderProps.drag}>DRAG</Button>
 
-                  <Grid item xs={1} className={classes.rightConnectorContainer}>
-                    {renderRightConnector(item, index)}
-                  </Grid>
+                          {(item.display || props.advanced) &&
+                            renderItem(item, index)}
+                        </Box>
+                        {renderActions(item, index)}
+                      </Box>
 
-                  <Grid
-                    item
-                    xs={11}
-                    className={classes.bottomConnectorContainer}
-                  >
-                    {renderBottomConnector(item, index)}
-                  </Grid>
-                  <Grid item xs={1} />
-                </Grid>
-              </Grid>
+                      {renderRightConnector(item, index)}
+                      {renderBottomConnector(item, index)}
+                    </Box>
+                  );
+                }}
+              />
             );
           })}
-
-          {props.advanced && renderAddItemButton()}
-        </Grid>
+        </Box>
       </Box>
+      {props.advanced && renderAddItemButton()}
     </>
   );
 
   function renderAddItemButton() {
     return (
-      <Grid item xs={12} key="row">
-        <Box
-          className={clsx(
-            classes.box,
-            classes.itemContainer,
-            classes.addItemRowItem
-          )}
-        >
-          <Box className={classes.outer}>
-            <Box className={classes.middle}>
-              <Box className={classes.inner}>
-                <IconButton
-                  onClick={() => {
-                    const newItem = {
-                      display: true,
-                      checked: false,
-                      name: "name",
-                      description: "description",
-                      connectors: new Array<SkillGridConnectorDirection>(),
-                    };
+      <Box py="1rem">
+        <Button
+          onClick={() => {
+            const newItem = {
+              display: true,
+              checked: false,
+              name: "name",
+              description: "description",
+              connectors: new Array<SkillGridConnectorDirection>(),
+            };
 
-                    props.onMetaChange({
-                      ...props.block.meta,
-                      items: [...getRealItems(props.block.meta.items), newItem],
-                    });
-                  }}
-                >
-                  <AddRoundedIcon fontSize="large" />
-                </IconButton>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Grid>
+            props.onMetaChange({
+              ...props.block.meta,
+              items: [...getRealItems(props.block.meta.items), newItem],
+            });
+          }}
+          color={"default"}
+          variant="outlined"
+        >
+          {"Add Item"}
+        </Button>
+      </Box>
     );
   }
 
@@ -400,31 +309,133 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     return (
       <>
         {isPositionValid && (props.advanced || isConnectorVisible) && (
-          <Box
-            className={clsx(
-              classes.rightConnector,
-              isConnectorVisible
-                ? classes.visibleConnector
-                : classes.hiddenConnector
-            )}
-          >
-            {props.advanced && (
-              <Button
-                onClick={() => {
-                  handleConnectorClick(
-                    item,
-                    index,
-                    SkillGridConnectorDirection.RIGHT
-                  );
-                }}
-              />
-            )}
-          </Box>
+          <ButtonBase
+            disabled={!props.advanced}
+            className={css({
+              background: isConnectorVisible
+                ? theme.palette.background.paper
+                : theme.palette.background.default,
+              borderTop: `${isConnectorVisible ? "1px" : "2px"} ${
+                isConnectorVisible ? "solid" : "dashed"
+              } ${theme.palette.divider}`,
+              borderBottom: `${isConnectorVisible ? "1px" : "2px"} ${
+                isConnectorVisible ? "solid" : "dashed"
+              } ${theme.palette.divider}`,
+              width: `${paddingRem * 2}rem`,
+              height: `${paddingRem * 2}rem`,
+              position: "absolute",
+              right: `${-paddingRem}rem`,
+              zIndex: 1,
+              top: "50%",
+              transform: "translate(0, -50%)",
+            })}
+            onClick={() => {
+              handleConnectorClick(
+                item,
+                index,
+                SkillGridConnectorDirection.RIGHT
+              );
+            }}
+          />
         )}
       </>
     );
   }
 
+  function renderActions(item: ISkillGridItem, index: number) {
+    const isHiddenAndAdvanced = !item.display && props.advanced;
+
+    if (!item.display && !props.advanced) {
+      return null;
+    }
+    return (
+      <Box>
+        <Grid container justify="flex-end" alignItems="baseline">
+          {isHiddenAndAdvanced && (
+            <Grid item>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  const newItems = [...props.block.meta.items];
+                  newItems.splice(index, 1);
+
+                  props.onMetaChange({
+                    ...props.block.meta,
+                    items: newItems,
+                  });
+                }}
+              >
+                <DeleteForeverIcon />
+              </IconButton>
+            </Grid>
+          )}
+
+          {isHiddenAndAdvanced && (
+            <Grid item>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  const newItem = {
+                    ...item,
+                    display: false,
+                    description: "description",
+                    name: "name",
+                  };
+                  const newItems = [...props.block.meta.items];
+                  newItems[index] = newItem;
+
+                  props.onMetaChange({
+                    ...props.block.meta,
+                    items: newItems,
+                  });
+                }}
+              >
+                <RefreshIcon />
+              </IconButton>
+            </Grid>
+          )}
+
+          {props.advanced && (
+            <Grid item>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  const newItem = { ...item, display: !item.display };
+                  const newItems = [...props.block.meta.items];
+                  newItems[index] = newItem;
+
+                  props.onMetaChange({
+                    ...props.block.meta,
+                    items: newItems,
+                  });
+                }}
+              >
+                {item.display ? <VisibilityIcon /> : <VisibilityOffIcon />}
+              </IconButton>
+            </Grid>
+          )}
+
+          <Grid item>
+            <IconButton
+              size="small"
+              onClick={() => {
+                const newItem = { ...item, checked: !item.checked };
+                const newItems = [...props.block.meta.items];
+                newItems[index] = newItem;
+
+                props.onMetaChange({
+                  ...props.block.meta,
+                  items: newItems,
+                });
+              }}
+            >
+              {item.checked ? <CheckBoxOutlineBlankIcon /> : <CheckBoxIcon />}
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
   function renderBottomConnector(item: ISkillGridItem, index: number) {
     const { isPositionValid, isConnectorVisible } = shouldDisplayConnector(
       SkillGridConnectorDirection.BOTTOM,
@@ -435,26 +446,34 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     return (
       <>
         {isPositionValid && (props.advanced || isConnectorVisible) && (
-          <Box
-            className={clsx(
-              classes.bottomConnector,
-              isConnectorVisible
-                ? classes.visibleConnector
-                : classes.hiddenConnector
-            )}
-          >
-            {props.advanced && (
-              <Button
-                onClick={() => {
-                  handleConnectorClick(
-                    item,
-                    index,
-                    SkillGridConnectorDirection.BOTTOM
-                  );
-                }}
-              />
-            )}
-          </Box>
+          <ButtonBase
+            disabled={!props.advanced}
+            className={css({
+              background: isConnectorVisible
+                ? theme.palette.background.paper
+                : theme.palette.background.default,
+              borderLeft: `${isConnectorVisible ? "1px" : "2px"} ${
+                isConnectorVisible ? "solid" : "dashed"
+              } ${theme.palette.divider}`,
+              borderRight: `${isConnectorVisible ? "1px" : "2px"} ${
+                isConnectorVisible ? "solid" : "dashed"
+              } ${theme.palette.divider}`,
+              width: `${paddingRem * 2}rem`,
+              height: `${paddingRem * 2}rem`,
+              position: "absolute",
+              bottom: `${-paddingRem}rem`,
+              zIndex: 1,
+              left: "50%",
+              transform: "translate(-50%, 0)",
+            })}
+            onClick={() => {
+              handleConnectorClick(
+                item,
+                index,
+                SkillGridConnectorDirection.BOTTOM
+              );
+            }}
+          />
         )}
       </>
     );
@@ -463,34 +482,29 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   function renderColumnCountEditor() {
     return (
       <>
-        <Grid item xs={10}>
-          <FateLabel variant="body2" color="primary">
-            <b>Number of columns:</b>
-          </FateLabel>
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            type="number"
-            InputProps={{ inputProps: { min: 2, max: 6 } }}
-            value={props.block.meta.columnCount}
-            onChange={(e) => {
-              let columnCount = 3;
-              if (e.target.value) {
-                const parsed = parseInt(e.target.value);
-                if (parsed > 6) {
-                  columnCount = 6;
-                } else {
-                  columnCount = parsed;
-                }
+        <TextField
+          label="Number of columns:"
+          type="number"
+          fullWidth
+          InputProps={{ inputProps: { min: 2, max: 6 } }}
+          value={props.block.meta.columnCount}
+          onChange={(e) => {
+            let columnCount = 3;
+            if (e.target.value) {
+              const parsed = parseInt(e.target.value);
+              if (parsed > 6) {
+                columnCount = 6;
+              } else {
+                columnCount = parsed;
               }
+            }
 
-              props.onMetaChange({
-                ...props.block.meta,
-                columnCount: columnCount,
-              });
-            }}
-          />
-        </Grid>
+            props.onMetaChange({
+              ...props.block.meta,
+              columnCount: columnCount,
+            });
+          }}
+        />
       </>
     );
   }
@@ -498,129 +512,11 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   function renderItem(item: ISkillGridItem, index: number) {
     return (
       <>
-        {!item.display && props.advanced && renderHiddenItem(item, index)}
-
-        {item.display && (
-          <Box className={clsx(classes.box, classes.itemContainer)}>
-            {renderItemCheckbox(item, index)}
-
-            {props.advanced && renderHideItemButton(item, index)}
-
-            {/* if there is no description, the tile will be put in the center of the tile */}
-            {item.description && renderGridItemTitle(item, index)}
-            <Box className={classes.outer}>
-              <Box className={classes.middle}>
-                <Box className={classes.inner}>
-                  {item.description
-                    ? renderGridItemDescription(item, index)
-                    : renderGridItemTitle(item, index)}
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-        )}
+        <Box>
+          {renderGridItemTitle(item, index)}
+          {renderGridItemDescription(item, index)}
+        </Box>
       </>
-    );
-  }
-
-  function renderItemCheckbox(item: ISkillGridItem, index: number) {
-    return (
-      <Checkbox
-        className={classes.bottomRightItem}
-        checked={item.checked}
-        onChange={() => {
-          const newItem = { ...item, checked: !item.checked };
-          const newItems = [...props.block.meta.items];
-          newItems[index] = newItem;
-
-          props.onMetaChange({
-            ...props.block.meta,
-            items: newItems,
-          });
-        }}
-      />
-    );
-  }
-
-  function renderHideItemButton(item: ISkillGridItem, index: number) {
-    return (
-      <IconButton
-        size="small"
-        className={classes.topRightIcon}
-        onClick={() => {
-          const newItem = { ...item, display: false };
-          const newItems = [...props.block.meta.items];
-          newItems[index] = newItem;
-
-          props.onMetaChange({
-            ...props.block.meta,
-            items: newItems,
-          });
-        }}
-      >
-        <VisibilityOffIcon />
-      </IconButton>
-    );
-  }
-
-  function renderHiddenItem(item: ISkillGridItem, index: number) {
-    return (
-      <Box className={clsx(classes.hiddenItem, classes.itemContainer)}>
-        <IconButton
-          size="small"
-          className={classes.topLeftIcon}
-          onClick={() => {
-            const newItems = [...props.block.meta.items];
-            newItems.splice(index, 1);
-
-            props.onMetaChange({
-              ...props.block.meta,
-              items: newItems,
-            });
-          }}
-        >
-          <DeleteForeverIcon />
-        </IconButton>
-
-        <IconButton
-          size="small"
-          className={classes.topRightIcon}
-          onClick={() => {
-            const newItem = { ...item, display: true };
-            const newItems = [...props.block.meta.items];
-            newItems[index] = newItem;
-
-            props.onMetaChange({
-              ...props.block.meta,
-              items: newItems,
-            });
-          }}
-        >
-          <VisibilityIcon />
-        </IconButton>
-
-        <IconButton
-          size="small"
-          className={classes.bottomRightItem}
-          onClick={() => {
-            const newItem = {
-              ...item,
-              display: false,
-              description: "description",
-              name: "name",
-            };
-            const newItems = [...props.block.meta.items];
-            newItems[index] = newItem;
-
-            props.onMetaChange({
-              ...props.block.meta,
-              items: newItems,
-            });
-          }}
-        >
-          <RefreshIcon />
-        </IconButton>
-      </Box>
     );
   }
 
@@ -628,17 +524,26 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     item: ISkillGridItem,
     index: number
   ): React.ReactNode {
+    const isVisible =
+      !!previewContentEditable({ value: item.description }) || props.advanced;
+
+    if (!isVisible) {
+      return null;
+    }
     return (
       <Typography
         variant="body2"
         align="center"
-        style={{
-          margin: "0em .5em",
-        }}
+        className={css({
+          color: item.display
+            ? theme.palette.text.primary
+            : theme.palette.text.secondary,
+        })}
       >
         <ContentEditable
           value={item.description}
           readonly={!props.advanced}
+          border={props.advanced}
           onChange={(newDescription) => {
             const newItem = { ...item, description: newDescription };
             const newItems = [...props.block.meta.items];
@@ -655,19 +560,29 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function renderGridItemTitle(item: ISkillGridItem, index: number) {
+    const isVisible =
+      !!previewContentEditable({ value: item.name }) || props.advanced;
+
+    if (!isVisible) {
+      return null;
+    }
     return (
-      <Box className={classes.nameContainer}>
+      <Box pb=".5rem">
         <Typography
           align="center"
-          style={{
+          className={css({
             fontSize: "1em",
             fontWeight: "bold",
             textTransform: "uppercase",
-          }}
+            color: item.display
+              ? theme.palette.text.primary
+              : theme.palette.text.secondary,
+          })}
         >
           <ContentEditable
             value={item.name}
             readonly={!props.advanced}
+            border={props.advanced}
             onChange={(newName) => {
               const newItem = { ...item, name: newName };
               const newItems = [...props.block.meta.items];

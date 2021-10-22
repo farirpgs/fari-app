@@ -202,7 +202,6 @@ export type ISkillGrid = {
   meta: IDefaultBlockMeta & {
     items: Array<ISkillGridItem>;
     columnCount: number;
-    boxHeight: number;
   };
 };
 
