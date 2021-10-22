@@ -6,6 +6,7 @@ import Grid, { GridSize } from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/styles";
@@ -51,6 +52,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     bottomConnectorContainer: {
       position: "relative",
       height: "20px",
+    },
+    addItemRowItem: {
+      textAlign: "center",
     },
     visibleConnector: {
       background: "lightgray",
@@ -331,6 +335,43 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               </Grid>
             );
           })}
+          <Grid item xs={12} key="row">
+            <Box
+              className={clsx(
+                classes.box,
+                classes.itemContainer,
+                classes.addItemRowItem
+              )}
+            >
+              <Box className={classes.outer}>
+                <Box className={classes.middle}>
+                  <Box className={classes.inner}>
+                    <IconButton
+                      onClick={() => {
+                        const newItem = {
+                          display: true,
+                          checked: false,
+                          name: "",
+                          description: "",
+                          connectors: new Array<SkillGridConnectorDirection>(),
+                        };
+
+                        props.onMetaChange({
+                          ...props.block.meta,
+                          items: [
+                            ...getRealItems(props.block.meta.items),
+                            newItem,
+                          ],
+                        });
+                      }}
+                    >
+                      <AddRoundedIcon fontSize="large" />
+                    </IconButton>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
         </Grid>
       </Box>
     </>
