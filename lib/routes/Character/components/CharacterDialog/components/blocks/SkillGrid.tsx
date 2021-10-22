@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/styles";
@@ -102,7 +103,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       overflow: "hidden",
       position: "relative",
     },
-    bottomRightCheckbox: {
+    bottomRightItem: {
       position: "absolute",
       right: 0,
       bottom: 0,
@@ -525,7 +526,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   function renderItemCheckbox(item: ISkillGridItem, index: number) {
     return (
       <Checkbox
-        className={classes.bottomRightCheckbox}
+        className={classes.bottomRightItem}
         checked={item.checked}
         onChange={() => {
           const newItem = { ...item, checked: !item.checked };
@@ -567,6 +568,22 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       <Box className={clsx(classes.hiddenItem, classes.itemContainer)}>
         <IconButton
           size="small"
+          className={classes.topLeftIcon}
+          onClick={() => {
+            const newItems = [...props.block.meta.items];
+            newItems.splice(index, 1);
+
+            props.onMetaChange({
+              ...props.block.meta,
+              items: newItems,
+            });
+          }}
+        >
+          <DeleteForeverIcon />
+        </IconButton>
+
+        <IconButton
+          size="small"
           className={classes.topRightIcon}
           onClick={() => {
             const newItem = { ...item, display: true };
@@ -584,10 +601,16 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
 
         <IconButton
           size="small"
-          className={classes.topLeftIcon}
+          className={classes.bottomRightItem}
           onClick={() => {
+            const newItem = {
+              ...item,
+              display: false,
+              description: "description",
+              name: "name",
+            };
             const newItems = [...props.block.meta.items];
-            newItems.splice(index, 1);
+            newItems[index] = newItem;
 
             props.onMetaChange({
               ...props.block.meta,
@@ -595,7 +618,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
             });
           }}
         >
-          <DeleteForeverIcon />
+          <RefreshIcon />
         </IconButton>
       </Box>
     );
