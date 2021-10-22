@@ -443,11 +443,13 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               {item.checked ? <CheckBoxOutlineBlankIcon /> : <CheckBoxIcon />}
             </IconButton>
           </Grid>
-          <Grid item>
-            <IconButton size="small" ref={dragSource}>
-              <DragIndicatorIcon />
-            </IconButton>
-          </Grid>
+          {props.advanced && (
+            <Grid item>
+              <IconButton size="small" ref={dragSource}>
+                <DragIndicatorIcon />
+              </IconButton>
+            </Grid>
+          )}
         </Grid>
       </Box>
     );
