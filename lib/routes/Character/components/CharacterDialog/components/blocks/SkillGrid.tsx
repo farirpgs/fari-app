@@ -10,10 +10,12 @@ import Typography from "@material-ui/core/Typography";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
+import { ConnectDragSource } from "react-dnd";
 import {
   ContentEditable,
   previewContentEditable,
@@ -219,51 +221,56 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
         >
           {props.block.meta.items.map((item, index) => {
             return (
-              <BetterDnd
+              <Box
                 key={index}
-                direction="horizontal"
-                index={index}
                 className={css({
                   display: "flex",
                   width: `${columnSize}px`,
                   padding: `${paddingRem}rem`,
                   position: "relative",
                 })}
-                type={`ZONEMAPBLOCK-${props.block.id}`}
-                onMove={(dragIndex, hoverIndex) => {
-                  console.log(dragIndex, hoverIndex);
-                }}
-                render={(dndRenderProps) => {
-                  return (
-                    <Box
-                      className={css({
-                        padding: ".5rem",
-                        background: item.display
-                          ? theme.palette.background.paper
-                          : theme.palette.background.default,
-                        boxShadow:
-                          item.display || props.advanced
-                            ? theme.shadows[1]
-                            : undefined,
-                        width: "100%",
-                      })}
-                    >
-                      <Box display="flex" flexDirection="column" height="100%">
-                        <Box flex="1" py="2rem">
-                          <Button ref={dndRenderProps.drag}>DRAG</Button>
-
-                          {(item.display || props.advanced) &&
-                            renderItem(item, index)}
+              >
+                <BetterDnd
+                  key={index}
+                  className={css({
+                    padding: ".5rem",
+                    background: item.display
+                      ? theme.palette.background.paper
+                      : theme.palette.background.default,
+                    boxShadow:
+                      item.display || props.advanced
+                        ? theme.shadows[1]
+                        : undefined,
+                    width: "100%",
+                  })}
+                  direction="horizontal"
+                  index={index}
+                  type={`ZONEMAPBLOCK-${props.block.id}`}
+                  onMove={(dragIndex, hoverIndex) => {
+                    console.log(dragIndex, hoverIndex);
+                  }}
+                  render={(dndRenderProps) => {
+                    return (
+                      <>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          height="100%"
+                        >
+                          <Box flex="1" py="2rem">
+                            {(item.display || props.advanced) &&
+                              renderItem(item, index)}
+                          </Box>
+                          {renderActions(item, index, dndRenderProps.drag)}
                         </Box>
-                        {renderActions(item, index)}
-                      </Box>
 
-                      {renderRightConnector(item, index)}
-                      {renderBottomConnector(item, index)}
-                    </Box>
-                  );
-                }}
-              />
+                        {renderRightConnector(item, index)}
+                        {renderBottomConnector(item, index)}
+                      </>
+                    );
+                  }}
+                />
+              </Box>
             );
           })}
         </Box>
@@ -324,7 +331,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               width: `${paddingRem * 2}rem`,
               height: `${paddingRem * 2}rem`,
               position: "absolute",
-              right: `${-paddingRem}rem`,
+              right: `${paddingRem * -2}rem`,
               zIndex: 1,
               top: "50%",
               transform: "translate(0, -50%)",
@@ -342,7 +349,11 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderActions(item: ISkillGridItem, index: number) {
+  function renderActions(
+    item: ISkillGridItem,
+    index: number,
+    dragSource: ConnectDragSource
+  ) {
     const isHiddenAndAdvanced = !item.display && props.advanced;
 
     if (!item.display && !props.advanced) {
@@ -432,6 +443,11 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               {item.checked ? <CheckBoxOutlineBlankIcon /> : <CheckBoxIcon />}
             </IconButton>
           </Grid>
+          <Grid item>
+            <IconButton size="small" ref={dragSource}>
+              <DragIndicatorIcon />
+            </IconButton>
+          </Grid>
         </Grid>
       </Box>
     );
@@ -461,7 +477,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               width: `${paddingRem * 2}rem`,
               height: `${paddingRem * 2}rem`,
               position: "absolute",
-              bottom: `${-paddingRem}rem`,
+              bottom: `${paddingRem * -2}rem`,
               zIndex: 1,
               left: "50%",
               transform: "translate(-50%, 0)",
