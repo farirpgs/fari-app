@@ -11,7 +11,6 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import RefreshIcon from "@material-ui/icons/Refresh";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
@@ -247,7 +246,20 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                   index={index}
                   type={`ZONEMAPBLOCK-${props.block.id}`}
                   onMove={(dragIndex, hoverIndex) => {
-                    console.log(dragIndex, hoverIndex);
+                    if (dragIndex === undefined || hoverIndex === undefined) {
+                      return;
+                    }
+
+                    const newItems = [...props.block.meta.items];
+
+                    const dragItem = newItems[dragIndex];
+                    newItems.splice(dragIndex, 1);
+                    newItems.splice(hoverIndex, 0, dragItem);
+
+                    props.onMetaChange({
+                      ...props.block.meta,
+                      items: newItems,
+                    });
                   }}
                   render={(dndRenderProps) => {
                     return (
@@ -377,31 +389,6 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
                 }}
               >
                 <DeleteForeverIcon />
-              </IconButton>
-            </Grid>
-          )}
-
-          {isHiddenAndAdvanced && (
-            <Grid item>
-              <IconButton
-                size="small"
-                onClick={() => {
-                  const newItem = {
-                    ...item,
-                    display: false,
-                    description: "description",
-                    name: "name",
-                  };
-                  const newItems = [...props.block.meta.items];
-                  newItems[index] = newItem;
-
-                  props.onMetaChange({
-                    ...props.block.meta,
-                    items: newItems,
-                  });
-                }}
-              >
-                <RefreshIcon />
               </IconButton>
             </Grid>
           )}
