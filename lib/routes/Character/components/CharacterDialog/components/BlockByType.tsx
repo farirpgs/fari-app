@@ -10,6 +10,7 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../components/ContentEditable/ContentEditable";
+import { ZoneMap } from "../../../../../components/ZoneMap/ZoneMap";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
@@ -30,7 +31,6 @@ import {
   BlockSlotTrackerActions,
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
-import { SkillGrid } from "./blocks/SkillGrid";
 
 export function BlockByType(
   props: Omit<
@@ -202,8 +202,8 @@ export function BlockByType(
         />
       )}
 
-      {props.block.type === BlockType.SkillGrid && (
-        <SkillGrid
+      {props.block.type === BlockType.ZoneMap && (
+        <ZoneMap
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}

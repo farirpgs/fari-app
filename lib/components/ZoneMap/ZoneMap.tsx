@@ -15,31 +15,31 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
 import { ConnectDragSource } from "react-dnd";
-import {
-  ContentEditable,
-  previewContentEditable,
-} from "../../../../../../components/ContentEditable/ContentEditable";
-import { ISkillGrid } from "../../../../../../domains/character/types";
-import { BetterDnd } from "../../../BetterDnD/BetterDnd";
+import { IZoneMap } from "../../domains/character/types";
+import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
-} from "../../types/IBlockComponentProps";
+} from "../../routes/Character/components/CharacterDialog/types/IBlockComponentProps";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../ContentEditable/ContentEditable";
 
-export interface ISkillGridItem {
+export interface IZoneMapItem {
   display: boolean;
   checked: boolean;
   name: string;
   description: string;
-  connectors: Array<SkillGridConnectorDirection>;
+  connectors: Array<ZoneMapConnectorDirection>;
 }
 
-export enum SkillGridConnectorDirection {
+export enum ZoneMapConnectorDirection {
   RIGHT,
   BOTTOM,
 }
 
-export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
+export function ZoneMap(props: IBlockComponentProps<IZoneMap>) {
   const theme = useTheme();
   const columnCount = props.block.meta.columnCount;
 
@@ -93,7 +93,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function buildEmptyItems(numberOfItemsToBuild: number) {
-    const items = new Array<ISkillGridItem>();
+    const items = new Array<IZoneMapItem>();
 
     for (let i = 0; i < numberOfItemsToBuild; i++) {
       items.push({
@@ -101,14 +101,14 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
         checked: false,
         name: "",
         description: "",
-        connectors: new Array<SkillGridConnectorDirection>(),
+        connectors: new Array<ZoneMapConnectorDirection>(),
       });
     }
 
     return items;
   }
 
-  function getRealItems(allItems: ISkillGridItem[]) {
+  function getRealItems(allItems: IZoneMapItem[]) {
     const realItems = [...allItems];
 
     // we specifically need to only take the empty items that are at the end of the array: having empty items in the middle of the grid could be legit
@@ -127,20 +127,20 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function getIsPositionValid(
-    direction: SkillGridConnectorDirection,
-    item: ISkillGridItem,
+    direction: ZoneMapConnectorDirection,
+    item: IZoneMapItem,
     index: number
   ) {
     if (!item.display) {
       return false;
     }
 
-    if (direction === SkillGridConnectorDirection.BOTTOM) {
+    if (direction === ZoneMapConnectorDirection.BOTTOM) {
       const itemBelow = props.block.meta.items[index + columnCount];
       return itemBelow && itemBelow.display;
     }
 
-    if (direction === SkillGridConnectorDirection.RIGHT) {
+    if (direction === ZoneMapConnectorDirection.RIGHT) {
       const isCurrentItemLastInRow = (index + 1) % columnCount === 0;
       if (isCurrentItemLastInRow) return false;
 
@@ -150,8 +150,8 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function shouldDisplayConnector(
-    direction: SkillGridConnectorDirection,
-    item: ISkillGridItem,
+    direction: ZoneMapConnectorDirection,
+    item: IZoneMapItem,
     index: number
   ) {
     const isPositionValid = getIsPositionValid(direction, item, index);
@@ -168,9 +168,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function handleConnectorClick(
-    item: ISkillGridItem,
+    item: IZoneMapItem,
     index: number,
-    connectorDirection: SkillGridConnectorDirection
+    connectorDirection: ZoneMapConnectorDirection
   ) {
     const bottomConnectorIndex = item.connectors.findIndex(
       (connector) => connector === connectorDirection
@@ -301,7 +301,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               checked: false,
               name: "name",
               description: "description",
-              connectors: new Array<SkillGridConnectorDirection>(),
+              connectors: new Array<ZoneMapConnectorDirection>(),
             };
 
             props.onMetaChange({
@@ -318,9 +318,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderRightConnector(item: ISkillGridItem, index: number) {
+  function renderRightConnector(item: IZoneMapItem, index: number) {
     const { isPositionValid, isConnectorVisible } = shouldDisplayConnector(
-      SkillGridConnectorDirection.RIGHT,
+      ZoneMapConnectorDirection.RIGHT,
       item,
       index
     );
@@ -352,7 +352,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               handleConnectorClick(
                 item,
                 index,
-                SkillGridConnectorDirection.RIGHT
+                ZoneMapConnectorDirection.RIGHT
               );
             }}
           />
@@ -362,7 +362,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function renderActions(
-    item: ISkillGridItem,
+    item: IZoneMapItem,
     index: number,
     dragSource: ConnectDragSource
   ) {
@@ -441,9 +441,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
       </Box>
     );
   }
-  function renderBottomConnector(item: ISkillGridItem, index: number) {
+  function renderBottomConnector(item: IZoneMapItem, index: number) {
     const { isPositionValid, isConnectorVisible } = shouldDisplayConnector(
-      SkillGridConnectorDirection.BOTTOM,
+      ZoneMapConnectorDirection.BOTTOM,
       item,
       index
     );
@@ -475,7 +475,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
               handleConnectorClick(
                 item,
                 index,
-                SkillGridConnectorDirection.BOTTOM
+                ZoneMapConnectorDirection.BOTTOM
               );
             }}
           />
@@ -514,7 +514,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderItem(item: ISkillGridItem, index: number) {
+  function renderItem(item: IZoneMapItem, index: number) {
     return (
       <>
         <Box>
@@ -526,7 +526,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
   }
 
   function renderGridItemDescription(
-    item: ISkillGridItem,
+    item: IZoneMapItem,
     index: number
   ): React.ReactNode {
     const isVisible =
@@ -564,7 +564,7 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 
-  function renderGridItemTitle(item: ISkillGridItem, index: number) {
+  function renderGridItemTitle(item: IZoneMapItem, index: number) {
     const isVisible =
       !!previewContentEditable({ value: item.name }) || props.advanced;
 
@@ -604,11 +604,9 @@ export function SkillGrid(props: IBlockComponentProps<ISkillGrid>) {
     );
   }
 }
-SkillGrid.displayName = "SkillGrid";
+ZoneMap.displayName = "ZoneMap";
 
-export function SkillGridActions(
-  props: IBlockActionComponentProps<ISkillGrid>
-) {
+export function ZoneMapActions(props: IBlockActionComponentProps<IZoneMap>) {
   return <></>;
 }
-SkillGridActions.displayName = "SkillGridActions";
+ZoneMapActions.displayName = "ZoneMapActions";

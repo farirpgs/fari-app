@@ -23,9 +23,9 @@ import {
   ISection,
   ISeparatorBlock,
   ISkillBlock,
-  ISkillGrid,
   ISlotTrackerBlock,
   ITextBlock,
+  IZoneMap,
 } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
@@ -38,10 +38,10 @@ import { BlockPointCounter } from "../../../../../routes/Character/components/Ch
 import { BlockSeparator } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSeparator";
 import { BlockSlotTracker } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockSlotTracker";
 import { BlockText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockText";
-import { SkillGrid } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/SkillGrid";
 import { BlockSelectors } from "../../../../../routes/Character/components/CharacterDialog/domains/BlockSelectors/BlockSelectors";
 import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
+import { ZoneMap } from "../../../../ZoneMap/ZoneMap";
 import { paperStyle } from "../../../Scene";
 
 export const CharacterCard: React.FC<{
@@ -94,7 +94,7 @@ export const CharacterCard: React.FC<{
     PointCounter: renderBlockPointCounter,
     SlotTracker: renderBlockSlotTracker,
     Link: renderBlockLink,
-    SkillGrid: renderSkillGrid,
+    ZoneMap: renderZoneMap,
     Separator: renderSeparatorBlock,
   };
 
@@ -378,10 +378,10 @@ export const CharacterCard: React.FC<{
       </Grid>
     );
   }
-  function renderSkillGrid(section: ISection, block: IBlock & ISkillGrid) {
+  function renderZoneMap(section: ISection, block: IBlock & IZoneMap) {
     return (
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
-        <SkillGrid
+        <ZoneMap
           advanced={false}
           readonly={true}
           dataCy={`character-card.${section.label}.${block.label}`}

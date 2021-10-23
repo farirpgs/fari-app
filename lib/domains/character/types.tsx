@@ -1,4 +1,4 @@
-import { ISkillGridItem } from "../../routes/Character/components/CharacterDialog/components/blocks/SkillGrid";
+import { IZoneMapItem } from "../../components/ZoneMap/ZoneMap";
 import { IDiceCommandSetId } from "../dice/Dice";
 import { CharacterTemplates } from "./CharacterType";
 
@@ -11,7 +11,7 @@ export enum BlockType {
   SlotTracker = "SlotTracker",
   Image = "Image",
   Link = "Link",
-  SkillGrid = "SkillGrid",
+  ZoneMap = "ZoneMap",
   Separator = "Separator",
 }
 
@@ -196,11 +196,11 @@ export type ILinkBlock = {
   value: string;
 };
 
-export type ISkillGrid = {
-  type: BlockType.SkillGrid;
+export type IZoneMap = {
+  type: BlockType.ZoneMap;
   value: unknown;
   meta: IDefaultBlockMeta & {
-    items: Array<ISkillGridItem>;
+    items: Array<IZoneMapItem>;
     columnCount: number;
   };
 };
@@ -222,7 +222,7 @@ export type IBlockTypes =
   | IPointCounterBlock
   | IImageBlock
   | ILinkBlock
-  | ISkillGrid
+  | IZoneMap
   | ISeparatorBlock;
 
 export type IBlock = {

@@ -176,7 +176,7 @@ export const AddBlock: React.FC<
         </MenuItem>
         <MenuItem
           onClick={() => {
-            props.onAddBlock(BlockType.SkillGrid);
+            props.onAddBlock(BlockType.ZoneMap);
             setAnchorEl(undefined);
           }}
         >
