@@ -10,7 +10,6 @@ import {
   IBlock,
   ICharacter,
   IPage,
-  IPageSectionPosition as IPageSectionLocation,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -96,10 +95,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const newPage: IPage = {
           id: Id.generate(),
-          sections: {
-            left: [],
-            right: [],
-          },
+          sections: [],
           label: "Page",
         };
         draft.pages.push(newPage);
@@ -129,33 +125,25 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addSection(
-    pageIndex: number,
-    sectionIndex: number,
-    sectionLocation: IPageSectionLocation
-  ) {
+  function addSection(pageIndex: number, sectionIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
 
-        draft.pages[pageIndex].sections[sectionLocation].splice(
-          sectionIndex + 1,
-          0,
-          {
-            id: Id.generate(),
-            label: "Section",
-            blocks: [],
-          }
-        );
+        draft.pages[pageIndex].sections.splice(sectionIndex + 1, 0, {
+          id: Id.generate(),
+          label: "Section",
+          blocks: [],
+        });
       })
     );
   }
 
   function renameSection(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     label: string
   ) {
@@ -164,15 +152,14 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation][sectionIndex].label =
-          label;
+        draft.pages[pageIndex].sections[sectionIndex].label = label;
       })
     );
   }
 
   function toggleSectionVisibleOnCard(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number
   ) {
     setCharacter(
@@ -181,11 +168,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         const oldValue =
-          draft.pages[pageIndex].sections[sectionLocation][sectionIndex]
-            .visibleOnCard;
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].visibleOnCard = !oldValue;
+          draft.pages[pageIndex].sections[sectionIndex].visibleOnCard;
+        draft.pages[pageIndex].sections[sectionIndex].visibleOnCard = !oldValue;
       })
     );
   }
@@ -201,35 +185,31 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function repositionSection(
-    pageIndex: number,
-    sectionLocation: IPageSectionLocation,
-    sectionIndex: number
-  ) {
+  function repositionSection(pageIndex: number, sectionIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        if (sectionLocation === "left") {
-          const [sectionToMove] = draft.pages[pageIndex].sections.left.splice(
-            sectionIndex,
-            1
-          );
-          draft.pages[pageIndex].sections.right.push(sectionToMove);
-        } else {
-          const [sectionToMove] = draft.pages[pageIndex].sections.right.splice(
-            sectionIndex,
-            1
-          );
-          draft.pages[pageIndex].sections.left.push(sectionToMove);
-        }
+        // if (sectionLocation === "left") {
+        //   const [sectionToMove] = draft.pages[pageIndex].sections.left.splice(
+        //     sectionIndex,
+        //     1
+        //   );
+        //   draft.pages[pageIndex].sections.right.push(sectionToMove);
+        // } else {
+        //   const [sectionToMove] = draft.pages[pageIndex].sections.right.splice(
+        //     sectionIndex,
+        //     1
+        //   );
+        //   draft.pages[pageIndex].sections.left.push(sectionToMove);
+        // }
       })
     );
   }
   function moveSectionInPage(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     newPageIndex: number
   ) {
@@ -238,17 +218,18 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        const [section] = draft.pages[pageIndex].sections[
-          sectionLocation
-        ].splice(sectionIndex, 1);
-        draft.pages[newPageIndex].sections[sectionLocation].push(section);
+        const [section] = draft.pages[pageIndex].sections.splice(
+          sectionIndex,
+          1
+        );
+        draft.pages[newPageIndex].sections.push(section);
       })
     );
   }
 
   function moveSection(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     direction: "up" | "down"
   ) {
@@ -257,8 +238,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation] = moveValueInList(
-          draft.pages[pageIndex].sections[sectionLocation],
+        draft.pages[pageIndex].sections = moveValueInList(
+          draft.pages[pageIndex].sections,
           sectionIndex,
           direction
         );
@@ -268,7 +249,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
   function removeSection(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number
   ) {
     setCharacter(
@@ -276,9 +257,9 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation] = draft.pages[
+        draft.pages[pageIndex].sections = draft.pages[
           pageIndex
-        ].sections[sectionLocation].filter((a, index) => {
+        ].sections.filter((a, index) => {
           return index !== sectionIndex;
         });
       })
@@ -287,7 +268,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
   function addBlock(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     type: BlockType
   ) {
@@ -296,9 +277,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].blocks.push(
+        draft.pages[pageIndex].sections[sectionIndex].blocks.push(
           CharacterFactory.makeBlock(type, {
             defaultCommands: settingsManager.state.diceCommandIds,
           })
@@ -325,7 +304,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
   function duplicateSection(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number
   ) {
     setCharacter(
@@ -334,9 +313,9 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         const sectionToDuplicate =
-          draft.pages[pageIndex].sections[sectionLocation][sectionIndex];
+          draft.pages[pageIndex].sections[sectionIndex];
 
-        draft.pages[pageIndex].sections[sectionLocation].splice(
+        draft.pages[pageIndex].sections.splice(
           sectionIndex + 1,
           0,
           CharacterFactory.duplicateSection(sectionToDuplicate)
@@ -347,7 +326,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
   function duplicateBlock(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     blockIndex: number
   ) {
@@ -357,13 +336,9 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
         const blockToDuplicate =
-          draft.pages[pageIndex].sections[sectionLocation][sectionIndex].blocks[
-            blockIndex
-          ];
+          draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex];
 
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].blocks.splice(
+        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
           blockIndex + 1,
           0,
           CharacterFactory.duplicateBlock(blockToDuplicate)
@@ -374,7 +349,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
   function moveDnDSection(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     dragIndex: number,
     hoverIndex: number
   ) {
@@ -388,22 +363,17 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
 
-        const dragItem =
-          draft.pages[pageIndex].sections[sectionLocation][dragIndex];
+        const dragItem = draft.pages[pageIndex].sections[dragIndex];
 
-        draft.pages[pageIndex].sections[sectionLocation].splice(dragIndex, 1);
-        draft.pages[pageIndex].sections[sectionLocation].splice(
-          hoverIndex,
-          0,
-          dragItem
-        );
+        draft.pages[pageIndex].sections.splice(dragIndex, 1);
+        draft.pages[pageIndex].sections.splice(hoverIndex, 0, dragItem);
       })
     );
   }
 
   function moveDnDBlock(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     dragIndex: number,
     hoverIndex: number
@@ -419,23 +389,24 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
 
         const dragItem =
-          draft.pages[pageIndex].sections[sectionLocation][sectionIndex].blocks[
-            dragIndex
-          ];
+          draft.pages[pageIndex].sections[sectionIndex].blocks[dragIndex];
 
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].blocks.splice(dragIndex, 1);
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].blocks.splice(hoverIndex, 0, dragItem);
+        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
+          dragIndex,
+          1
+        );
+        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
+          hoverIndex,
+          0,
+          dragItem
+        );
       })
     );
   }
 
   function setBlock(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     blockIndex: number,
     block: IBlock
@@ -445,16 +416,15 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation][sectionIndex].blocks[
-          blockIndex
-        ] = block;
+        draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex] =
+          block;
       })
     );
   }
 
   function setBlockMeta(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     blockIndex: number,
     meta: any
@@ -465,9 +435,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
 
-        draft.pages[pageIndex].sections[sectionLocation][sectionIndex].blocks[
-          blockIndex
-        ].meta = meta;
+        draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex].meta =
+          meta;
       })
     );
   }
@@ -480,8 +449,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
 
         for (const page of draft.pages) {
-          const allSections = [...page.sections.left, ...page.sections.right];
-          for (const section of allSections) {
+          for (const section of page.sections) {
             for (const block of section.blocks) {
               const match = block.id === blockId;
 
@@ -500,9 +468,24 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function toggleSectionWidth(pageIndex: number, sectionIndex: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const section = draft.pages[pageIndex].sections[sectionIndex];
+        const shouldUseHalfWidth = section.width == null || section.width === 1;
+        const newWidth = shouldUseHalfWidth ? 0.5 : 1;
+
+        section.width = newWidth;
+      })
+    );
+  }
+
   function removeBlock(
     pageIndex: number,
-    sectionLocation: IPageSectionLocation,
+
     sectionIndex: number,
     blockIndex: number
   ) {
@@ -511,12 +494,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation][sectionIndex].blocks =
-          draft.pages[pageIndex].sections[sectionLocation][
-            sectionIndex
-          ].blocks.filter((field, index) => {
-            return index !== blockIndex;
-          });
+        draft.pages[pageIndex].sections[sectionIndex].blocks = draft.pages[
+          pageIndex
+        ].sections[sectionIndex].blocks.filter((field, index) => {
+          return index !== blockIndex;
+        });
       })
     );
   }
@@ -573,6 +555,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       removeBlock,
       getCharacterWithNewTimestamp,
       toggleWideMode,
+      toggleSectionWidth,
     },
   };
 }

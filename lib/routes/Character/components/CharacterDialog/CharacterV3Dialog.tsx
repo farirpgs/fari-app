@@ -40,7 +40,6 @@ import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
-import { SlideUpTransition } from "../../../../components/SlideUpTransition/SlideUpTransition";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
@@ -50,7 +49,6 @@ import {
 import {
   ICharacter,
   IPage,
-  IPageSectionPosition,
   ISection,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
@@ -235,7 +233,6 @@ export const CharacterV3Dialog: React.FC<{
           classes={{
             paper: css({ height: "100%" }),
           }}
-          TransitionComponent={SlideUpTransition}
         >
           <DialogTitle
             className={css({
@@ -352,10 +349,9 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
-    const numberOfSections = pages.flatMap((p) => [
-      ...p.sections.left,
-      ...p.sections.right,
-    ]).length;
+    const numberOfSections = pages.flatMap((p) => {
+      return p.sections;
+    }).length;
     const doesntHaveSections = numberOfSections === 0;
     const shouldRenderLoadTemplate = doesntHaveSections || advanced;
 
@@ -516,10 +512,6 @@ export const CharacterV3Dialog: React.FC<{
 
         <TabContext value={tab}>
           {pages?.map((page, pageIndex) => {
-            const sectionStyle = css({
-              label: "CharacterDialog-grid-section",
-            });
-
             return (
               <TabPanel
                 key={page.id}
@@ -530,9 +522,7 @@ export const CharacterV3Dialog: React.FC<{
                 })}
               >
                 <Box position="relative" mb="2rem">
-                  <Grid container spacing={1}>
-                    {renderSections(page, pageIndex, page.sections)}
-                  </Grid>
+                  {renderSections(page, pageIndex, page.sections)}
                 </Box>
               </TabPanel>
             );
@@ -581,152 +571,147 @@ export const CharacterV3Dialog: React.FC<{
     return (
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
-          {sections?.map((section, sectionIndex) => {
-            const width: GridSize = !!block.meta.width
-              ? (Math.round(block.meta.width * 12) as GridSize)
-              : 12;
+          <Grid container spacing={1}>
+            {sections?.map((section, sectionIndex) => {
+              const width: GridSize = !!section.width
+                ? (Math.round(section.width * 12) as GridSize)
+                : 12;
 
-            <Grid item xs={12} md={6} className={sectionStyle} />;
-            return (
-              <Box key={section.id}>
-                <SheetHeader
-                  label={section.label}
-                  currentPageIndex={currentPageIndex}
-                  pages={characterManager.state.character?.pages}
-                  sectionLocation={sectionLocation}
-                  advanced={advanced}
-                  visibleOnCard={section.visibleOnCard}
-                  canMoveUp={sectionIndex !== 0}
-                  canMoveDown={sectionIndex !== sections.length - 1}
-                  onReposition={() => {
-                    characterManager.actions.repositionSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex
-                    );
-                  }}
-                  onMoveToPage={(newPageIndex) => {
-                    characterManager.actions.moveSectionInPage(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      newPageIndex
-                    );
-                  }}
-                  onToggleVisibleOnCard={() => {
-                    characterManager.actions.toggleSectionVisibleOnCard(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex
-                    );
-                  }}
-                  onDuplicateSection={() => {
-                    characterManager.actions.duplicateSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex
-                    );
-                  }}
-                  onLabelChange={(newLabel) => {
-                    characterManager.actions.renameSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      newLabel
-                    );
-                  }}
-                  onMoveDown={() => {
-                    characterManager.actions.moveSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      "down"
-                    );
-                  }}
-                  onMoveUp={() => {
-                    characterManager.actions.moveSection(
-                      pageIndex,
-                      sectionLocation,
-                      sectionIndex,
-                      "up"
-                    );
-                  }}
-                  onRemove={() => {
-                    const confirmed = confirm(
-                      t("character-dialog.remove-section-confirmation")
-                    );
-                    if (confirmed) {
-                      characterManager.actions.removeSection(
+              return (
+                <Grid
+                  key={section.id}
+                  item
+                  xs={12}
+                  md={width}
+                  className={css({
+                    label: "CharacterDialog-grid-section",
+                  })}
+                >
+                  <SheetHeader
+                    label={section.label}
+                    pageIndex={pageIndex}
+                    pages={characterManager.state.character?.pages}
+                    section={section}
+                    advanced={advanced}
+                    visibleOnCard={section.visibleOnCard}
+                    canMoveUp={sectionIndex !== 0}
+                    canMoveDown={sectionIndex !== sections.length - 1}
+                    onReposition={() => {
+                      characterManager.actions.repositionSection(
                         pageIndex,
-                        sectionLocation,
                         sectionIndex
                       );
-                    }
-                  }}
-                />
-                {renderSectionBlocks(
-                  page,
-                  pageIndex,
-                  section,
-                  sectionLocation,
-                  sectionIndex
-                )}
+                    }}
+                    onToggleSectionWidth={() => {
+                      characterManager.actions.toggleSectionWidth(
+                        pageIndex,
+                        sectionIndex
+                      );
+                    }}
+                    onMoveToPage={(newPageIndex) => {
+                      characterManager.actions.moveSectionInPage(
+                        pageIndex,
+                        sectionIndex,
+                        newPageIndex
+                      );
+                    }}
+                    onToggleVisibleOnCard={() => {
+                      characterManager.actions.toggleSectionVisibleOnCard(
+                        pageIndex,
+                        sectionIndex
+                      );
+                    }}
+                    onDuplicateSection={() => {
+                      characterManager.actions.duplicateSection(
+                        pageIndex,
+                        sectionIndex
+                      );
+                    }}
+                    onLabelChange={(newLabel) => {
+                      characterManager.actions.renameSection(
+                        pageIndex,
+                        sectionIndex,
+                        newLabel
+                      );
+                    }}
+                    onMoveDown={() => {
+                      characterManager.actions.moveSection(
+                        pageIndex,
+                        sectionIndex,
+                        "down"
+                      );
+                    }}
+                    onMoveUp={() => {
+                      characterManager.actions.moveSection(
+                        pageIndex,
+                        sectionIndex,
+                        "up"
+                      );
+                    }}
+                    onRemove={() => {
+                      const confirmed = confirm(
+                        t("character-dialog.remove-section-confirmation")
+                      );
+                      if (confirmed) {
+                        characterManager.actions.removeSection(
+                          pageIndex,
+                          sectionIndex
+                        );
+                      }
+                    }}
+                  />
+                  {renderSectionBlocks(page, pageIndex, section, sectionIndex)}
 
-                {advanced && (
-                  <Box p=".5rem" mb=".5rem">
-                    <ThemeProvider theme={blackButtonTheme}>
-                      <Grid
-                        container
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <Grid item>
-                          <AddBlock
-                            variant="button"
-                            onAddBlock={(blockType) => {
-                              characterManager.actions.addBlock(
-                                pageIndex,
-                                sectionLocation,
-                                sectionIndex,
-                                blockType
-                              );
-                            }}
-                          />
+                  {advanced && (
+                    <Box p=".5rem" mb=".5rem">
+                      <ThemeProvider theme={blackButtonTheme}>
+                        <Grid
+                          container
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Grid item>
+                            <AddBlock
+                              variant="button"
+                              onAddBlock={(blockType) => {
+                                characterManager.actions.addBlock(
+                                  pageIndex,
+                                  sectionIndex,
+                                  blockType
+                                );
+                              }}
+                            />
+                          </Grid>
+                          <Grid item>
+                            <AddSection
+                              onAddSection={() => {
+                                characterManager.actions.addSection(
+                                  pageIndex,
+                                  sectionIndex
+                                );
+                              }}
+                            />
+                          </Grid>
                         </Grid>
-                        <Grid item>
-                          <AddSection
-                            onAddSection={() => {
-                              characterManager.actions.addSection(
-                                pageIndex,
-                                sectionIndex,
-                                sectionLocation
-                              );
-                            }}
-                          />
-                        </Grid>
-                      </Grid>
-                    </ThemeProvider>
-                  </Box>
-                )}
+                      </ThemeProvider>
+                    </Box>
+                  )}
+                </Grid>
+              );
+            })}
+
+            {shouldRenderAddSectionButton && (
+              <Box>
+                <ThemeProvider theme={blackButtonTheme}>
+                  <AddSection
+                    onAddSection={() => {
+                      characterManager.actions.addSection(pageIndex, 0);
+                    }}
+                  />
+                </ThemeProvider>
               </Box>
-            );
-          })}
-
-          {shouldRenderAddSectionButton && (
-            <Box>
-              <ThemeProvider theme={blackButtonTheme}>
-                <AddSection
-                  onAddSection={() => {
-                    characterManager.actions.addSection(
-                      pageIndex,
-                      0,
-                      sectionLocation
-                    );
-                  }}
-                />
-              </ThemeProvider>
-            </Box>
-          )}
+            )}
+          </Grid>
         </Box>
       </>
     );
@@ -1006,7 +991,6 @@ export const CharacterV3Dialog: React.FC<{
     page: IPage,
     pageIndex: number,
     section: ISection,
-    sectionLocation: IPageSectionPosition,
     sectionIndex: number
   ) {
     const dragAndDropKey = `${page.label}.${pageIndex}.${section.label}.${sectionIndex}`;
@@ -1037,7 +1021,6 @@ export const CharacterV3Dialog: React.FC<{
                     onMove={(dragIndex, hoverIndex) => {
                       characterManager.actions.moveDnDBlock(
                         pageIndex,
-                        sectionLocation,
                         sectionIndex,
                         dragIndex,
                         hoverIndex
@@ -1084,7 +1067,7 @@ export const CharacterV3Dialog: React.FC<{
                                       onClick={() => {
                                         characterManager.actions.duplicateBlock(
                                           pageIndex,
-                                          sectionLocation,
+
                                           sectionIndex,
                                           blockIndex
                                         );
@@ -1120,7 +1103,6 @@ export const CharacterV3Dialog: React.FC<{
                                       onClick={() => {
                                         characterManager.actions.removeBlock(
                                           pageIndex,
-                                          sectionLocation,
                                           sectionIndex,
                                           blockIndex
                                         );
@@ -1178,7 +1160,7 @@ export const CharacterV3Dialog: React.FC<{
                                   onChange={(newBlock) => {
                                     characterManager.actions.setBlock(
                                       pageIndex,
-                                      sectionLocation,
+
                                       sectionIndex,
                                       blockIndex,
                                       newBlock
@@ -1194,7 +1176,6 @@ export const CharacterV3Dialog: React.FC<{
 
                                     characterManager.actions.setBlockMeta(
                                       pageIndex,
-                                      sectionLocation,
                                       sectionIndex,
                                       blockIndex,
                                       {

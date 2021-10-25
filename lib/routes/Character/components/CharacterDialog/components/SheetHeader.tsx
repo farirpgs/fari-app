@@ -1,11 +1,11 @@
 import { css } from "@emotion/css";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ControlCameraIcon from "@mui/icons-material/ControlCamera";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import FlipToBackIcon from "@mui/icons-material/FlipToBack";
+import HeightIcon from "@mui/icons-material/Height";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Box from "@mui/material/Box";
@@ -24,7 +24,7 @@ import {
 import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
 import {
   IPage,
-  IPageSectionPosition,
+  ISection,
   V3Position,
 } from "../../../../../domains/character/types";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
@@ -33,8 +33,8 @@ import { smallIconButtonStyle } from "../CharacterV3Dialog";
 
 export const SheetHeader: React.FC<{
   label: string;
-  currentPageIndex: number;
-  sectionLocation: IPageSectionPosition;
+  pageIndex: number;
+  section: ISection;
   pages: Array<IPage> | undefined;
   advanced: boolean;
   canMoveUp: boolean;
@@ -45,6 +45,7 @@ export const SheetHeader: React.FC<{
   onMoveDown(): void;
   onReposition(position: V3Position): void;
   onDuplicateSection(): void;
+  onToggleSectionWidth(): void;
   onMoveToPage: (pageIndex: number) => void;
   visibleOnCard?: boolean;
   onToggleVisibleOnCard?: () => void;
@@ -140,6 +141,25 @@ export const SheetHeader: React.FC<{
         )}
         {props.advanced && (
           <Grid item>
+            <Tooltip title={`Width: ${(props.section.width || 1) * 100} %`}>
+              <IconButton
+                data-cy={`character-dialog.${props.label}.toggle-width`}
+                size="small"
+                className={smallIconButtonStyle}
+                onClick={props.onToggleSectionWidth}
+              >
+                <HeightIcon
+                  htmlColor={headerColor}
+                  className={css({
+                    transform: "rotate(90deg)",
+                  })}
+                />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        )}
+        {props.advanced && (
+          <Grid item>
             <Tooltip title={t("character-dialog.control.duplicate")}>
               <IconButton
                 data-cy={`character-dialog.${props.label}.duplicate`}
@@ -201,12 +221,12 @@ export const SheetHeader: React.FC<{
           </ListItemIcon>
           {t("character-dialog.control.move-down")}
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           data-cy={`character-dialog.${props.label}.switch-side`}
           onClick={() => {
             handleClose();
             const newPosition =
-              props.sectionLocation === "left"
+              props.sectionIndex === "left"
                 ? V3Position.Right
                 : V3Position.Left;
             props.onReposition(newPosition);
@@ -216,18 +236,18 @@ export const SheetHeader: React.FC<{
             <ArrowForwardIcon
               className={css({
                 transform:
-                  props.sectionLocation === "left"
+                  props.sectionIndex === "left"
                     ? undefined
                     : "rotate(180deg)",
               })}
             />
           </ListItemIcon>
-          {props.sectionLocation === "left"
+          {props.sectionIndex === "left"
             ? t("character-dialog.control.move-right")
             : t("character-dialog.control.move-left")}
-        </MenuItem>
+        </MenuItem> */}
         {props.pages?.map((page, pageIndex) => {
-          if (pageIndex === props.currentPageIndex) {
+          if (pageIndex === props.pageIndex) {
             return null;
           }
           return (

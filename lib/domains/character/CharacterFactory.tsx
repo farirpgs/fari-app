@@ -310,27 +310,26 @@ export const CharacterFactory = {
     };
   },
   makeFromJson(jsonData: any): ICharacter {
-    const newSheet = { ...jsonData };
-    const migratedSheet = this.migrate(newSheet);
+    const migratedSheet = this.migrate(jsonData);
     return migratedSheet;
   },
   migrate(character: any): ICharacter {
     try {
       const migrate = Migrator.makeMigrationFunction<ICharacter>([
         {
-          version: 1,
+          from: 1,
           migrate: migrateV1CharacterToV2,
         },
         {
-          version: 2,
+          from: 2,
           migrate: migrateV2CharacterToV3,
         },
         {
-          version: 3,
+          from: 3,
           migrate: migrateV3CharacterToV4,
         },
         {
-          version: 4,
+          from: 4,
           migrate: migrateV4CharacterToV5,
         },
       ]);

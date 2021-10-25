@@ -56,10 +56,7 @@ export const CharacterCard: React.FC<{
 
   const width = props.width ?? "100%";
   const diceManager = useContext(DiceContext);
-  const sections = props.characterSheet?.pages.flatMap((p) => [
-    ...p.sections.left,
-    ...p.sections.right,
-  ]);
+  const sections = props.characterSheet?.pages.flatMap((p) => p.sections);
   const visibleSections = sections?.filter((s) => s.visibleOnCard);
 
   const headerColor = theme.palette.background.paper;
