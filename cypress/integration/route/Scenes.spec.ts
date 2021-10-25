@@ -58,7 +58,6 @@ describe("/scenes", () => {
       Fari.get("my-binder.folders.scenes").click();
       Fari.get("my-binder.element.Ba Sing Se.delete").first().click();
 
-      cy.contains("Avatar").should("not.exist");
       cy.contains("Ba Sing Se").should("not.exist");
 
       // should be back to home page
@@ -66,7 +65,6 @@ describe("/scenes", () => {
 
       // undo
       cy.contains("Undo").click();
-      cy.contains("Avatar");
       cy.contains("Ba Sing Se").click();
 
       // new scene
@@ -95,7 +93,6 @@ describe("/scenes", () => {
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.scenes").click();
 
-      cy.contains("Avatar");
       cy.contains("Ba Sing Se");
       cy.contains("Lower Ring");
 
