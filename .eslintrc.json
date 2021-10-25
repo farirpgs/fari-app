@@ -28,12 +28,12 @@
     "no-restricted-imports": [
       "error",
       {
-        "name": "@material-ui/core",
-        "message": "Use @material-ui/core/MyComponent instead"
+        "name": "@mui/material",
+        "message": "Use @mui/material/MyComponent instead"
       },
       {
-        "name": "@material-ui/lab",
-        "message": "Use @material-ui/lab/MyComponent instead"
+        "name": "@mui/lab",
+        "message": "Use @mui/lab/MyComponent instead"
       },
       { "name": "lodash", "message": "Use lodash/myFunction instead" }
     ],

@@ -1,11 +1,11 @@
 import { css, cx } from "@emotion/css";
-import Box, { BoxProps } from "@material-ui/core/Box";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
-import { darken, lighten, useTheme } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
+import Box, { BoxProps } from "@mui/material/Box";
+import ButtonBase from "@mui/material/ButtonBase";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import { darken, lighten, useTheme } from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
 import { default as React, useContext } from "react";
 import {
   ContentEditable,

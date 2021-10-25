@@ -1,6 +1,6 @@
 import { css } from "@emotion/css";
-import { Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { Theme, useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import marked from "marked";
 import React from "react";
 import { Doc } from "../../components/Doc/Doc";
@@ -15,7 +15,7 @@ export const SeelieSquireRoute: React.FC<{
   page: string | undefined;
 }> = (props) => {
   const theme = useTheme();
-  const isExtraSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const isExtraSmall = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Doc
       page={props.page}

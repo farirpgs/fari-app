@@ -1,10 +1,10 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import { useTheme } from "@material-ui/core/styles";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import TabContext from "@material-ui/lab/TabContext";
-import TabPanel from "@material-ui/lab/TabPanel";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import React, { useState } from "react";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { FateLabel } from "../FateLabel/FateLabel";

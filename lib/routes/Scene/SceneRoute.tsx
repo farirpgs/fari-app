@@ -1,4 +1,4 @@
-import Container from "@material-ui/core/Container";
+import Container from "@mui/material/Container";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";

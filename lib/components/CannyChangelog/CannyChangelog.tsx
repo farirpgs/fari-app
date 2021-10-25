@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import NewReleasesIcon from "@material-ui/icons/NewReleases";
+import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import React from "react";
 import { useCannyChangelog } from "../../hooks/useCanny/useCanny";
 

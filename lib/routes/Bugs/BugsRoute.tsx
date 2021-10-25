@@ -1,7 +1,7 @@
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import { useTheme } from "@material-ui/core/styles";
-import BugReportIcon from "@material-ui/icons/BugReport";
+import BugReportIcon from "@mui/icons-material/BugReport";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";

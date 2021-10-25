@@ -1,5 +1,5 @@
-import { darken, lighten, Theme } from "@material-ui/core/styles";
-import makeStyles from '@material-ui/styles/makeStyles';
+import { darken, lighten, Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
 import React from "react";
 import { FontFamily } from "../../constants/FontFamily";

@@ -1,9 +1,9 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
-import { useTheme } from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import { useTheme } from "@mui/material/styles";
 import produce from "immer";
 import React from "react";
 import {
@@ -276,7 +276,8 @@ export function BlockByType(
               onClick={() => {
                 props.onToggleSplit?.();
               }}
-              underline="hover">
+              underline="hover"
+            >
               {t("character-dialog.control.width")}
               {": "}
               {(block.meta.width || 1) * 100}

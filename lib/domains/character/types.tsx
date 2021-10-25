@@ -118,6 +118,12 @@ export interface IV3Character {
  * V4
  */
 
+export interface IV4Page {
+  id: string;
+  label: string;
+  sections: { left: Array<ISection>; right: Array<ISection> };
+}
+
 export type IDefaultBlockMeta = {
   helperText?: string;
   /**
@@ -220,20 +226,47 @@ export type IBlock = {
   value: unknown;
 } & IBlockTypes;
 
-export type ISection = {
-  id: string;
-  label: string;
-  blocks: Array<IBlock>;
-  visibleOnCard?: boolean;
-};
-
-export interface IPage {
+export interface IV4Page {
   id: string;
   label: string;
   sections: { left: Array<ISection>; right: Array<ISection> };
 }
 
-export type IPageSectionPosition = keyof IPage["sections"];
+export type IPageSectionPosition = keyof IV4Page["sections"];
+
+/**
+ * @deprecated
+ */
+export interface IV4Character {
+  id: string;
+  name: string;
+  group: string | undefined;
+  wide: boolean;
+  pages: Array<IV4Page>;
+
+  // hidden
+  version: number;
+  lastUpdated: number;
+  template?: CharacterTemplates;
+  playedDuringTurn?: boolean;
+}
+
+export type ISection = {
+  id: string;
+  label: string;
+  blocks: Array<IBlock>;
+  visibleOnCard?: boolean;
+  /**
+   * Column width from 0 to 1
+   */
+  width?: number;
+};
+
+export interface IPage {
+  id: string;
+  label: string;
+  sections: Array<ISection>;
+}
 
 export interface ICharacter {
   id: string;

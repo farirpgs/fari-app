@@ -1,9 +1,9 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Fade from "@material-ui/core/Fade";
-import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { Heading } from "../../components/Heading/Heading";

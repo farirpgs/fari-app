@@ -1,5 +1,5 @@
 import { css, cx } from "@emotion/css";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@mui/material/styles";
 import React, { useRef, useState } from "react";
 import {
   ConnectDragSource,

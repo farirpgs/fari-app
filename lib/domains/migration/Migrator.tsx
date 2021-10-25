@@ -5,7 +5,7 @@ export const Migrator = {
   makeMigrationFunction<T extends IMigratableEntity>(
     migrationFunctions: Array<{
       version: number;
-      migrate: (entity: IMigratableEntity) => IMigratableEntity;
+      migrate: (entity: any) => any;
     }>
   ) {
     return (entity: IMigratableEntity): T => {

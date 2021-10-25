@@ -1,8 +1,8 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import React from "react";
 import patreonImage from "../../../images/services/patreon.png";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
