@@ -815,7 +815,7 @@ export const CharacterV3Dialog: React.FC<{
             container
             alignItems="center"
             justifyContent="flex-end"
-            spacing={2}
+            spacing={1}
           >
             {!props.dialog && (
               <Grid item>
@@ -833,24 +833,24 @@ export const CharacterV3Dialog: React.FC<{
                 </Tooltip>
               </Grid>
             )}
+            <Grid item>
+              <Tooltip title={t("character-dialog.export")}>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.print"
+                  size="small"
+                  onClick={() => {
+                    charactersManager.actions.exportEntity(
+                      characterManager.state.character as ICharacter
+                    );
+                  }}
+                >
+                  <ExportIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
             {!props.dialog && (
               <>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.export")}>
-                    <IconButton
-                      color="default"
-                      data-cy="character-dialog.print"
-                      size="small"
-                      onClick={() => {
-                        charactersManager.actions.exportEntity(
-                          characterManager.state.character as ICharacter
-                        );
-                      }}
-                    >
-                      <ExportIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
                 <Grid item>
                   <Tooltip title={t("character-dialog.export-as-template")}>
                     <IconButton
@@ -869,6 +869,7 @@ export const CharacterV3Dialog: React.FC<{
                 </Grid>
               </>
             )}
+
             <Grid item>
               <Button
                 color="primary"
