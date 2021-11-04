@@ -1170,8 +1170,12 @@ export const CharacterV3Dialog: React.FC<{
                                     const shouldUseHalfWidth =
                                       block.meta.width == null ||
                                       block.meta.width === 1;
+                                    const shouldUseThirdWidth =
+                                      block.meta.width === 0.5;
                                     const newWidth = shouldUseHalfWidth
                                       ? 0.5
+                                      : shouldUseThirdWidth
+                                      ? 0.33
                                       : 1;
 
                                     characterManager.actions.setBlockMeta(

@@ -82,6 +82,7 @@ export function useLatestDiceRoll(
       return () => {
         if (timeout) {
           clearTimeout(timeout);
+          setRolling(false);
         }
       };
     },

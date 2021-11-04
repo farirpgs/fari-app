@@ -42,7 +42,7 @@ describe("CharacterFactory.migrate", () => {
         // THEN
         expect(
           result.pages
-            .flatMap((p) => [...p.sections.left, ...p.sections.right])
+            .flatMap((p) => p.sections)
             .find((s) => s.label === "Stress")?.blocks
         ).toEqual([
           {

@@ -7,7 +7,7 @@ export const CharacterSelector = {
     character: ICharacter | undefined
   ): IMainPointerBlock {
     const match = character?.pages
-      .flatMap((p) => [...p.sections.left, ...p.sections.right])
+      .flatMap((p) => [...p.sections])
       .flatMap((s) => s.blocks)
       .find((block) => {
         return (

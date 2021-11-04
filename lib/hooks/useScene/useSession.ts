@@ -140,7 +140,9 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        draft.players[player.id] = player;
+        if (!draft.players[player.id]) {
+          draft.players[player.id] = player;
+        }
       })
     );
   }
@@ -402,11 +404,7 @@ export function useSession(props: IProps) {
             p.points = points;
             if (p.character) {
               for (const page of p.character.pages) {
-                const allSections = [
-                  ...page.sections.left,
-                  ...page.sections.right,
-                ];
-                for (const section of allSections) {
+                for (const section of page.sections) {
                   for (const block of section.blocks) {
                     const shouldUpdateBlock =
                       block.type === BlockType.PointCounter &&
