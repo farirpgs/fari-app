@@ -22,10 +22,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid, { GridSize } from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
+import NativeSelect from "@mui/material/NativeSelect";
 import Snackbar from "@mui/material/Snackbar";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
@@ -70,6 +72,29 @@ export const smallIconButtonStyle = css({
   label: "CharacterDialog-small-icon-button",
   padding: "0",
 });
+
+const ZoomOptions = [
+  {
+    label: "Full",
+    value: 1,
+  },
+  {
+    label: "Large",
+    value: 0.9,
+  },
+  {
+    label: "Medium",
+    value: 0.8,
+  },
+  {
+    label: "Small",
+    value: 0.7,
+  },
+  {
+    label: "Extra Small",
+    value: 0.6,
+  },
+];
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
@@ -354,9 +379,16 @@ export const CharacterV3Dialog: React.FC<{
     }).length;
     const doesntHaveSections = numberOfSections === 0;
     const shouldRenderLoadTemplate = doesntHaveSections || advanced;
+    const zoom = characterManager.state.character?.zoom ?? 1;
 
     return (
-      <Box>
+      <Box
+        className={css({
+          transform: `scale(${zoom})`,
+          transformOrigin: `0 0`,
+          width: `calc(100% / ${zoom})`,
+        })}
+      >
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="1rem">
             <Grid container justifyContent="center">
@@ -378,11 +410,10 @@ export const CharacterV3Dialog: React.FC<{
                 scrollButtons="auto"
                 classes={{
                   flexContainer: css({
-                    borderBottom: `3px solid ${headerBackgroundColor}`,
+                    borderBottom: `4px solid ${headerBackgroundColor}`,
                   }),
                   indicator: css({
-                    height: ".4rem",
-                    backgroundColor: theme.palette.secondary.main,
+                    display: "none",
                   }),
                 }}
                 onChange={(e, newValue) => {
@@ -390,6 +421,7 @@ export const CharacterV3Dialog: React.FC<{
                 }}
               >
                 {pages?.map((page, pageIndex) => {
+                  const isCurrentTab = pageIndex.toString() === tab;
                   return (
                     <Tab
                       disableRipple
@@ -402,6 +434,13 @@ export const CharacterV3Dialog: React.FC<{
                         // https://bennettfeely.com/clippy/
                         clipPath:
                           "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+                        borderBottom: `4px solid ${
+                          isCurrentTab
+                            ? theme.palette.secondary.main
+                            : theme.palette.text.primary
+                        }`,
+                        transition: "border linear 200ms",
+                        marginBottom: "-4px",
                       })}
                       value={pageIndex.toString()}
                       label={
@@ -530,6 +569,32 @@ export const CharacterV3Dialog: React.FC<{
         </TabContext>
 
         <Grid container justifyContent="space-between" alignItems="center">
+          {advanced && (
+            <Grid item>
+              <Box pt=".5rem">
+                <FormControl fullWidth>
+                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    {t("character-dialog.control.zoom")}
+                  </InputLabel>
+                  <NativeSelect
+                    data-cy="character-dialog.zoom"
+                    size="small"
+                    value={characterManager.state.character?.zoom ?? 1}
+                    onChange={(event) => {
+                      const zoom = parseFloat(event.target.value as string);
+                      characterManager.actions.setZoom(zoom);
+                    }}
+                  >
+                    {ZoomOptions.map((zoom) => (
+                      <option key={zoom.value} value={zoom.value}>
+                        {zoom.label}
+                      </option>
+                    ))}
+                  </NativeSelect>
+                </FormControl>
+              </Box>
+            </Grid>
+          )}
           <Grid item>
             <Box pt=".5rem">
               <Typography>
@@ -761,6 +826,7 @@ export const CharacterV3Dialog: React.FC<{
                   }
                 />
               </Grid>
+
               <Grid item>
                 {props.onToggleSync && (
                   <Grid item>

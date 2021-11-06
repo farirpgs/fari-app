@@ -526,6 +526,18 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function setZoom(zoom: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.zoom = zoom;
+      })
+    );
+  }
+
   return {
     state: { character, dirty },
     actions: {
@@ -555,6 +567,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       removeBlock,
       getCharacterWithNewTimestamp,
       toggleWideMode,
+      setZoom,
       toggleSectionWidth,
     },
   };

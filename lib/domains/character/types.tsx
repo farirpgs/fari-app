@@ -273,6 +273,7 @@ export interface ICharacter {
   name: string;
   group: string | undefined;
   wide: boolean;
+  zoom?: number;
   pages: Array<IPage>;
 
   // hidden
